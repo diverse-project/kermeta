@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableImpl.java,v 1.10 2008-01-22 14:24:28 cfaucher Exp $
+ * $Id: TypeVariableImpl.java,v 1.11 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -204,17 +204,6 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 		supertype = newSupertype;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.TYPE_VARIABLE__SUPERTYPE, oldSupertype, supertype));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isInstance(fr.irisa.triskell.kermeta.language.structure.Object element) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**

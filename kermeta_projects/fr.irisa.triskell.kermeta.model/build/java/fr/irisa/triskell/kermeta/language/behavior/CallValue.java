@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallValue.java,v 1.4 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: CallValue.java,v 1.5 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -14,7 +14,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  *
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallValue()
- * @model
+ * @model annotation="GenModel documentation='/**\n * CallValue refers to the use of the <code>value</code> reserved keyword. This keyword is\n * only used in the body of the <code>setter</code> part of derived properties.\n \052/'"
  * @generated
  */
 public interface CallValue extends CallExpression {

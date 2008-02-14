@@ -1,4 +1,4 @@
-/* $Id: ParameterizedTypeChecker.java,v 1.9 2007-09-19 12:15:03 ftanguy Exp $
+/* $Id: ParameterizedTypeChecker.java,v 1.10 2008-02-14 07:13:16 uid21732 Exp $
  * Project : Kermeta io
  * File : ParametrizedTypeChecker.java
  * License : EPL
@@ -14,7 +14,6 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
@@ -28,7 +27,6 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
-import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.ModelTypeVariableHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 /**
@@ -46,27 +44,25 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 	 * @param unit
 	 * @param context
 	 * @param codeContext
-	 * @deprecated
 	 */
 	public static void checkType(fr.irisa.triskell.kermeta.language.structure.Type t, KermetaUnit unit, TypeCheckerContext context, fr.irisa.triskell.kermeta.language.structure.Object codeContext) {
 		ParameterizedTypeChecker checker = new ParameterizedTypeChecker(unit, context, codeContext);
 		checker.accept(t);
 	}
 	
-	public static void checkType(fr.irisa.triskell.kermeta.language.structure.Type t, KermetaUnit unit, TypeCheckerContext context, fr.irisa.triskell.kermeta.language.structure.Object codeContext, IProgressMonitor monitor) {
+	/*public static void checkType(fr.irisa.triskell.kermeta.language.structure.Type t, KermetaUnit unit, TypeCheckerContext context, fr.irisa.triskell.kermeta.language.structure.Object codeContext, IProgressMonitor monitor) {
 		if ( monitor.isCanceled() )
 			return;
 		ParameterizedTypeChecker checker = new ParameterizedTypeChecker(unit, context, codeContext);
 		checker.accept(t);
-	}
+	}*/
 	
 	private KermetaUnit unit;
-	private StructureFactory struct_factory;
+
 	private fr.irisa.triskell.kermeta.language.structure.Object codeContext; // this one is usefull in order to retreive the expression that use this type. allows to report the error at the right place
 	
 	public ParameterizedTypeChecker(KermetaUnit unit, TypeCheckerContext context, fr.irisa.triskell.kermeta.language.structure.Object codeContext) {
 		super();
-		this.struct_factory = StructurePackageImpl.init().getStructureFactory();
 		this.unit = unit;
 		this.codeContext = codeContext;
 	}
@@ -108,7 +104,7 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 								//Find (or more probably create) the virtual type corresponding to the class
 								VirtualType vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) var, (ClassDefinition) e.getTypeDefinition());
 								//Now create a binding
-								TypeVariableBinding new_tvb = struct_factory.createTypeVariableBinding();
+								TypeVariableBinding new_tvb = StructureFactory.eINSTANCE.createTypeVariableBinding();
 								new_tvb.setVariable(vt);
 								new_tvb.setType(matcher.getResultMatch().get(e));
 								arg0.getVirtualTypeBinding().add(new_tvb);
@@ -132,7 +128,7 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 								//The provided is also an MTV, so we need to convert its classes back to Virtual Types, too
 								VirtualType target_vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) provided, (ClassDefinition) matcher.getResultMatch().get(e).getTypeDefinition());
 								//Now create a binding
-								TypeVariableBinding new_tvb = struct_factory.createTypeVariableBinding();
+								TypeVariableBinding new_tvb = StructureFactory.eINSTANCE.createTypeVariableBinding();
 								new_tvb.setVariable(vt);
 								new_tvb.setType(target_vt);
 								arg0.getVirtualTypeBinding().add(new_tvb);

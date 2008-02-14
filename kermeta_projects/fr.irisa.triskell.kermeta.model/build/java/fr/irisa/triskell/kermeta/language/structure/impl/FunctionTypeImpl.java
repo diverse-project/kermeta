@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionTypeImpl.java,v 1.9 2008-01-22 14:24:28 cfaucher Exp $
+ * $Id: FunctionTypeImpl.java,v 1.10 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -210,17 +210,6 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 		right = newRight;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.FUNCTION_TYPE__RIGHT, oldRight, right));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isInstance(fr.irisa.triskell.kermeta.language.structure.Object element) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**

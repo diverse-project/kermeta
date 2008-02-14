@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Assignment.java,v 1.5 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: Assignment.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -22,7 +22,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getAssignment()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Assignment is the model-element representation of the assignment statement <code>x := y</code>\n * <img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png\"/>\n \052/'"
  * @generated
  */
 public interface Assignment extends Expression {
@@ -45,6 +45,7 @@ public interface Assignment extends Expression {
 	 * @see #setTarget(CallExpression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getAssignment_Target()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * Target of the assignment, as a CallExpression\n \052/'"
 	 * @generated
 	 */
 	CallExpression getTarget();
@@ -71,6 +72,7 @@ public interface Assignment extends Expression {
 	 * @see #setValue(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getAssignment_Value()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * Value to be assigned, as a KerMeta expression\n \052/'"
 	 * @generated
 	 */
 	Expression getValue();
@@ -97,6 +99,7 @@ public interface Assignment extends Expression {
 	 * @see #setIsCast(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getAssignment_IsCast()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Boolean stating whether current assignment corresponds to a cast operation \n \052/'"
 	 * @generated
 	 */
 	boolean isIsCast();

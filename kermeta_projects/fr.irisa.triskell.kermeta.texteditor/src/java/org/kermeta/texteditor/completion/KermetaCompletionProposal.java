@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaCompletionProposal.java,v 1.3 2007-12-20 16:14:54 ftanguy Exp $
+/*$Id: KermetaCompletionProposal.java,v 1.4 2008-02-14 07:13:42 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaCompletionProposal.java
 * License : EPL
@@ -23,11 +23,7 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Object;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 
 public class KermetaCompletionProposal implements ICompletionProposal, ICompletionProposalExtension2 {
 
@@ -148,10 +144,6 @@ public class KermetaCompletionProposal implements ICompletionProposal, ICompleti
 	}
 
 	public void selected(ITextViewer viewer, boolean smartToggle) {
-		if ( kermetaObject != null ) {
-			for ( KermetaEditorEventListener listener : TexteditorPlugin.getDefault().kermetaEditorEventListeners )
-				listener.contentAssistSelectionChanged(kermetaObject);
-        }
 	}
 
 	public void unselected(ITextViewer viewer) {

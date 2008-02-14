@@ -1,0 +1,12 @@
+/* $Id: $
+ * Creation date: February 4, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package kermeta::language;
+
+
+require "kermetaStructureVisitor.kmt"
+require "kermetaBehaviorVisitor.kmt"

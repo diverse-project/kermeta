@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionTypeItemProvider.java,v 1.9 2008-01-22 16:13:25 cfaucher Exp $
+ * $Id: FunctionTypeItemProvider.java,v 1.10 2008-02-14 07:13:52 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 

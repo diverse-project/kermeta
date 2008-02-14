@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataTypeImpl.java,v 1.8 2008-01-22 14:24:29 cfaucher Exp $
+ * $Id: DataTypeImpl.java,v 1.9 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -32,7 +32,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl#isIsAspect <em>Is Aspect</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl#getBaseAspects <em>Base Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,16 +81,6 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * @ordered
 	 */
 	protected boolean isAspect = IS_ASPECT_EDEFAULT;
-	/**
-	 * The cached value of the '{@link #getBaseAspects() <em>Base Aspects</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBaseAspects()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeDefinition> baseAspects;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -158,18 +147,6 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeDefinition> getBaseAspects() {
-		if (baseAspects == null) {
-			baseAspects = new EObjectResolvingEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.DATA_TYPE__BASE_ASPECTS);
-		}
-		return baseAspects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -177,8 +154,6 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 				return getName();
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				return isIsAspect() ? Boolean.TRUE : Boolean.FALSE;
-			case StructurePackage.DATA_TYPE__BASE_ASPECTS:
-				return getBaseAspects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -198,10 +173,6 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				setIsAspect(((Boolean)newValue).booleanValue());
 				return;
-			case StructurePackage.DATA_TYPE__BASE_ASPECTS:
-				getBaseAspects().clear();
-				getBaseAspects().addAll((Collection<? extends TypeDefinition>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -220,9 +191,6 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				setIsAspect(IS_ASPECT_EDEFAULT);
 				return;
-			case StructurePackage.DATA_TYPE__BASE_ASPECTS:
-				getBaseAspects().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -239,8 +207,6 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				return isAspect != IS_ASPECT_EDEFAULT;
-			case StructurePackage.DATA_TYPE__BASE_ASPECTS:
-				return baseAspects != null && !baseAspects.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -261,7 +227,6 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		if (baseClass == TypeDefinition.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.DATA_TYPE__IS_ASPECT: return StructurePackage.TYPE_DEFINITION__IS_ASPECT;
-				case StructurePackage.DATA_TYPE__BASE_ASPECTS: return StructurePackage.TYPE_DEFINITION__BASE_ASPECTS;
 				default: return -1;
 			}
 		}
@@ -284,7 +249,6 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		if (baseClass == TypeDefinition.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.TYPE_DEFINITION__IS_ASPECT: return StructurePackage.DATA_TYPE__IS_ASPECT;
-				case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS: return StructurePackage.DATA_TYPE__BASE_ASPECTS;
 				default: return -1;
 			}
 		}

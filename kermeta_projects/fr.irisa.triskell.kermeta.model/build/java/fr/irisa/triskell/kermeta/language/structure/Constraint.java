@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Constraint.java,v 1.5 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Constraint.java,v 1.6 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -26,7 +26,7 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Constraint is part of a contract implementation in a Class definition or an operation.\n * Three kinds of constraints are available : pre, post, and inv (invariant constraint)\n \052/'"
  * @generated
  */
 public interface Constraint extends NamedElement {
@@ -49,6 +49,7 @@ public interface Constraint extends NamedElement {
 	 * @see #setBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_Body()
 	 * @model containment="true" resolveProxies="true" required="true" ordered="false"
+	 *        annotation="GenModel documentation='/**\n * Body of the constraint, expressed as a KerMeta expression\n \052/'"
 	 * @generated
 	 */
 	Expression getBody();
@@ -76,7 +77,7 @@ public interface Constraint extends NamedElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.ConstraintType
 	 * @see #setStereotype(ConstraintType)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_Stereotype()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Type of the Constraint (precond/postcond/inv)\n \052/'"
 	 * @generated
 	 */
 	ConstraintType getStereotype();
@@ -105,7 +106,7 @@ public interface Constraint extends NamedElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.ConstraintLanguage
 	 * @see #setLanguage(ConstraintLanguage)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_Language()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Language in which the constraint is expressed\n \052/'"
 	 * @generated
 	 */
 	ConstraintLanguage getLanguage();
@@ -135,6 +136,7 @@ public interface Constraint extends NamedElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_InvOwner()
 	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getInv
 	 * @model opposite="inv" transient="false"
+	 *        annotation="GenModel documentation='/**\n * Owning ClassDefinition if Constraint corresponds to invariant\n \052/'"
 	 * @generated
 	 */
 	ClassDefinition getInvOwner();
@@ -163,6 +165,7 @@ public interface Constraint extends NamedElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_PreOwner()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getPre
 	 * @model opposite="pre" transient="false"
+	 *        annotation="GenModel documentation='/**\n * Owning Operation if Constraint corresponds to pre-condition\n \052/'"
 	 * @generated
 	 */
 	Operation getPreOwner();
@@ -191,6 +194,7 @@ public interface Constraint extends NamedElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_PostOwner()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getPost
 	 * @model opposite="post" transient="false"
+	 *        annotation="GenModel documentation='/**\n * Owning Operation if Constraint corresponds to post-condition\n \052/'"
 	 * @generated
 	 */
 	Operation getPostOwner();

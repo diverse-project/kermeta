@@ -1,4 +1,4 @@
-/*$Id: WorkspaceDeltaVisitor.java,v 1.15 2008-02-04 10:54:36 ftanguy Exp $
+/*$Id: WorkspaceDeltaVisitor.java,v 1.16 2008-02-14 07:13:24 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -22,14 +22,15 @@ import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.kermeta.interest.InterestedObject;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
-import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.resources.KermetaNature;
@@ -44,7 +45,7 @@ import fr.irisa.triskell.kermeta.resources.KermetaNature;
  *
  */
 
-public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, InterestedObject {
+public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor {
 	
 	
 	private KermetaProject currentProject;
@@ -94,7 +95,7 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, InterestedO
 			break;
 			
 		case IResourceDelta.CHANGED :
-			mustContinue = processChanging( delta.getResource() );
+			mustContinue = processChanging( delta.getResource(), delta );
 			break;
 
 		case IResourceDelta.REMOVED :
@@ -118,21 +119,11 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, InterestedO
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE:
-			//if ( (resource.getFileExtension() != null) && resource.getFileExtension().equals("kmt") ) {
-				final Unit unit = KPMHelper.getOrCreateUnit(currentProject.getKpm(), resource.getFullPath().toString());
-				currentProject.save();
-				/*KPMHelper.addCloseDependencyOnKMTFile(currentProject.getKpm(), unit);
-				KPMHelper.addOpenDependencyOnKMTFile(currentProject.getKpm(), unit);
-				KPMHelper.addUpdateDependencyOnKMTFile(currentProject.getKpm(), unit);*/
-				KPMHelper.addRules(currentProject.getKpm(), unit);
-				if ( ! projectsToOpen.contains(currentProject) && ! unit.getValue().matches(".+/\\.bin/.+") )
-					events.add( new EventToDispatch( (IFile)resource, unit, "update") );
-				//sendEvent("update", unit);
-	    		/*KermetaUnitHost.getInstance().declareInterest(this, unit);
-	    		unit.receiveSynchroneEvent("update", null, new NullProgressMonitor() );
-	    		KermetaUnitHost.getInstance().undeclareInterest(this, unit);*/
-				
-			//}
+			Unit unit = KPMHelper.getOrCreateUnit(currentProject.getKpm(), resource.getFullPath().toString());
+			currentProject.save();
+			KPMHelper.addRules(currentProject.getKpm(), unit);
+			if ( ! projectsToOpen.contains(currentProject) && ! unit.getValue().matches(".+/\\.bin/.+") )
+				events.add( new EventToDispatch( (IFile)resource, unit, "update") );
 			break;
 			
 		case IResource.FOLDER :
@@ -154,7 +145,7 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, InterestedO
 		return mustContinue;
 	}
 	
-	private boolean processChanging(IResource resource) throws CoreException {
+	private boolean processChanging(IResource resource, IResourceDelta delta) throws CoreException {
 		
 		boolean mustContinue = true;
 		
@@ -167,6 +158,7 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, InterestedO
 			break;
 			
 		case IResource.FILE :
+			
 			IFile file = (IFile) resource;
 			
 			/*
@@ -197,7 +189,7 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, InterestedO
 					 * 
 					 */
 					boolean mustBeUpdated = false;
-					if ( file.getLocalTimeStamp() != unit.getLastTimeModified().getTime() )
+					if ( unit != null && file.getLocalTimeStamp() != unit.getLastTimeModified().getTime() )
 						mustBeUpdated = true;
 					
 					if ( mustBeUpdated )
@@ -257,75 +249,36 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, InterestedO
 		return mustContinue;
 	}
 
-
-	public void updateValue(Object newValue) {}
-	
 	public void dispatchEvents() {
-		
-		final InterestedObject interest = this;
-		
-		Runnable runnable = new Runnable() {
 
-			public void run() {
+		Job job = new Job("Dispatching Events") {
+			@Override
+			public IStatus run(IProgressMonitor monitor) {
 
 			    IWorkspaceRunnable runnable= new IWorkspaceRunnable() {
 			    	public void run(IProgressMonitor monitor) throws CoreException {
-			    	
+					    	
 			    		Iterator <EventToDispatch> iterator = events.iterator();
 			    		while ( iterator.hasNext() ) {
 			    			EventToDispatch event = iterator.next();
-			    			KermetaUnitHost.getInstance().declareInterest(interest, event.getFile());
-			    			event.getUnit().receiveSynchroneEvent(event.getEvent(), null, new NullProgressMonitor() );			    			
-			    			KermetaUnitHost.getInstance().undeclareInterest(interest, event.getFile());
+			    			event.getUnit().receiveSynchroneEvent(event.getEvent(), null, monitor );			    			
 			    		}
-			    		
+					    		
 			    	}
 			    };
+				  
 			    try {
-					ResourcesPlugin.getWorkspace().run(runnable, null);
+					ResourcesPlugin.getWorkspace().run(runnable, monitor);
 				} catch (CoreException e) {
 					e.printStackTrace();
 				}
+
+				return Status.OK_STATUS;
 			}
-			
 		};
 		
-		Thread t = new Thread(runnable);
-		t.start();
+		job.schedule();
 		
 	}
-	
-/*	private void sendEvent(final String event, final Unit unit) {
-		final Interest interest = this;
-		Runnable runnable = new Runnable() {
-
-			public void run() {
-
-			    IWorkspaceRunnable runnable= new IWorkspaceRunnable() {
-			    	public void run(IProgressMonitor monitor) throws CoreException {
-			    		KermetaUnitHost.getInstance().declareInterest(interest, unit);
-			    		unit.receiveSynchroneEvent(event, null, new NullProgressMonitor() );
-			    		KermetaUnitHost.getInstance().undeclareInterest(interest, unit);
-			    	}
-			    };
-			    try {
-					ResourcesPlugin.getWorkspace().run(runnable, null);
-				} catch (CoreException e) {
-					e.printStackTrace();
-				}
-			}
-			
-		};
-
-		Thread t = new Thread(runnable);
-		t.start();
-		
-		try {
-			t.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-	}*/
 	
 }

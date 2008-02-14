@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionImpl.java,v 1.9 2008-01-22 14:24:29 cfaucher Exp $
+ * $Id: ClassDefinitionImpl.java,v 1.10 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 

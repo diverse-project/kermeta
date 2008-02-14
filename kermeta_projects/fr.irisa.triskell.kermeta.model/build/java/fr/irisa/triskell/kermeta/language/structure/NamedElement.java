@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElement.java,v 1.5 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: NamedElement.java,v 1.6 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -21,6 +21,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getNamedElement()
  * @model abstract="true"
+ *        annotation="GenModel documentation='/**\n * Any element that contain a  name (example : Operation, Property) inherit this\n * class.\n \052/'"
  * @generated
  */
 public interface NamedElement extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -43,6 +44,7 @@ public interface NamedElement extends fr.irisa.triskell.kermeta.language.structu
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getNamedElement_Name()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String" required="true"
+	 *        annotation="GenModel documentation='/**\n * Name of this named element\n \052/'"
 	 * @generated
 	 */
 	String getName();

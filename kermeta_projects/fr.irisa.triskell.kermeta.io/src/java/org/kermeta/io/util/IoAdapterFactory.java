@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoAdapterFactory.java,v 1.8 2008-02-06 09:38:25 dvojtise Exp $
+ * $Id: IoAdapterFactory.java,v 1.9 2008-02-14 07:13:17 uid21732 Exp $
  */
 package org.kermeta.io.util;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Expression.java,v 1.5 2008-01-22 14:24:31 cfaucher Exp $
+ * $Id: Expression.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -25,7 +25,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
  * @model abstract="true"
  * @generated
  */
-public interface Expression extends fr.irisa.triskell.kermeta.language.structure.Object, TypeContainer {
+public interface Expression extends TypeContainer, fr.irisa.triskell.kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -44,7 +44,7 @@ public interface Expression extends fr.irisa.triskell.kermeta.language.structure
 	 * @return the value of the '<em>Static Type</em>' reference.
 	 * @see #setStaticType(Type)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getExpression_StaticType()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Type of the Expression (set by type checking)\n \052/'"
 	 * @generated
 	 */
 	Type getStaticType();

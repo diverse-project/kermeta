@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingContext.java,v 1.4 2007-08-02 16:55:32 dvojtise Exp $
+/*$Id: LoadingContext.java,v 1.5 2008-02-14 07:13:18 uid21732 Exp $
 * Project : io
 * File : 	KMTLoadingContext.java
 * License : EPL
@@ -13,15 +13,24 @@
 package org.kermeta.loader;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Stack;
+
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 public class LoadingContext {
 	//////////////////////////////////
@@ -58,6 +67,40 @@ public class LoadingContext {
 	 */
 	protected Hashtable<String, KMSymbol> interpreterSymbols = new Hashtable<String, KMSymbol>();
 
+	public void pushContext(ClassDefinition cd) {
+		/*
+		 * 
+		 * Pushing Context
+		 * 
+		 */
+		pushContext();
+		// add type variable
+		for ( TypeVariable tv : cd.getTypeParameter() )
+			addTypeVar( tv );
+		// add attributes and operations
+		for ( fr.irisa.triskell.kermeta.language.structure.Operation op : KermetaModelHelper.ClassDefinition.getAllOperations(cd) )
+			addSymbol( new KMSymbolOperation(op) );
+		
+		for ( fr.irisa.triskell.kermeta.language.structure.Property prop : KermetaModelHelper.ClassDefinition.getAllProperties(cd) )
+			addSymbol( new KMSymbolProperty(prop) );
+	}
+	
+	public void pushContext(Operation operation) {
+		/*
+		 * 
+		 * Pushing Context
+		 * 
+		 */
+		pushContext();
+		// add type variable
+		Iterator<TypeVariable> tvs = operation.getTypeParameter().iterator();
+		while( tvs.hasNext() ) 
+			addTypeVar( tvs.next() );
+		// add parameters
+		Iterator<Parameter> params = operation.getOwnedParameter().iterator();
+		while( params.hasNext() ) 
+			addSymbol(new KMSymbolParameter( params.next() ) );
+	}
 	
 	public void pushContext() {
 		symbols.push(new Hashtable<String, KMSymbol>());

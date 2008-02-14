@@ -45,7 +45,7 @@ class Main inherits TestCase
 	 	do
 		 	resource_save.save()
 		 	stdio.writeln("save OK")
-		 	rescue (e2 : ResourceLoadException)
+		 	rescue (e2 : ResourceSaveException)
 		 	do
 				stdio.writeln(e2.toString)
         		stdio.writeln(e2.message)

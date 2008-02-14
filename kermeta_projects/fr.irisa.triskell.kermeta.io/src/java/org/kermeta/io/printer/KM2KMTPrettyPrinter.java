@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.12 2008-01-17 10:38:44 ftanguy Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.13 2008-02-14 07:13:19 uid21732 Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -19,8 +19,8 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.model.internal.TagHelper;
 
-import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
@@ -70,8 +70,8 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -87,9 +87,15 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	static final private String MODEL_TYPE_KW = "modeltype";
 	
+	static final protected int TYPE_MODE = 0;
 	
+	static final protected int DEFINITION_MODE = 1;
 	
+	static protected int MODE = DEFINITION_MODE;
 	
+	static protected boolean DOC_VIEW = true;
+	
+	static protected boolean printBody = true;
 	
 	protected ArrayList usings = new ArrayList();
 	protected ArrayList imports = new ArrayList();
@@ -261,7 +267,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 
 		result += node.getName()!=null ? " "+node.getName():"";
 		result += " is\n";
-		if (node.getBody() != null) {
+		if (node.getBody() != null && DOC_VIEW) {
 			pushPrefix();
 			result += getPrefix() + this.accept(node.getBody());
 			popPrefix();
@@ -330,7 +336,6 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		popPrefix();
 		return result;
 	}
-	
 
 	public String ppCRSeparatedNode(EList expressions) {
 		String result = "";
@@ -349,7 +354,11 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			}
 			else {
 				alreadyPrefixed = true;
-				result += getPrefix() + this.accept((EObject)expressions.get(i)) + "\n";
+				EObject o = (EObject)expressions.get(i);
+				String temp = (String) this.accept(o);
+				if ( o instanceof ModelType )
+					temp = MODEL_TYPE_KW + " " + temp;
+				result += getPrefix() + temp + "\n";
 			}
 		}
 
@@ -410,19 +419,22 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 //		if (node.getTypeParamBinding().size() > 0) {
 //			result += "<" + ppComaSeparatedNodes(node.getTypeParamBinding()) + ">";
 //		}
-		result += "\n" + getPrefix() + "{\n";
-		pushPrefix();
 
-		Iterator included = node.getIncludedTypeDefinition().iterator();
-		while (included.hasNext()) {
-			TypeDefinition tdef = (TypeDefinition) included.next();
-			result += NamedElementHelper.getMangledQualifiedName(tdef);
-			if (included.hasNext()) {
-				result += ", ";
+		if ( MODE == DEFINITION_MODE ) {
+			result += "\n" + getPrefix() + "{\n";
+			pushPrefix();
+	
+			Iterator included = node.getIncludedTypeDefinition().iterator();
+			while (included.hasNext()) {
+				TypeDefinition tdef = (TypeDefinition) included.next();
+				result += NamedElementHelper.getMangledQualifiedName(tdef);
+				if (included.hasNext()) {
+					result += ", ";
+				}
 			}
+			popPrefix();
+			result += getPrefix() + "}\n";
 		}
-		popPrefix();
-		result += getPrefix() + "}\n";
 		return result;
 	}
 	
@@ -458,7 +470,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.TypeVariableBinding)
 	 */
 	public Object visitTypeVariableBinding(TypeVariableBinding node) {
-		return this.accept(node.getType());
+		MODE = TYPE_MODE;
+		Object result =  this.accept(node.getType());
+		MODE = DEFINITION_MODE;
+		return result;
 	}
 	
 	/** 
@@ -478,9 +493,11 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		if (node.isIsAbstract()) result += "abstract ";
 		result += "class " + KMTHelper.getMangledIdentifier(node.getName());
 		if (node.getTypeParameter().size() > 0) {
+			MODE = TYPE_MODE;
 			result += "<";
 			result += ppTypeVariableDeclaration(node.getTypeParameter());
 			result += ">";
+			MODE = DEFINITION_MODE;
 		}
 		// We do not want to print inherits Object
 		if ( node.getSuperType().size() == 1 ) {
@@ -736,7 +753,9 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitOperation(Operation node) {
 		setParent(node);
-		String result = ppTags(node);
+		String result = "";
+		if ( DOC_VIEW )
+			result = ppTags(node);
 		
 		if(!alreadyPrefixed) 
 			result += getPrefix();
@@ -786,13 +805,13 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		pushPrefix();
 		alreadyPrefixed = false;
 		
-		if (node.getBody() != null) {
+		if (node.getBody() != null && printBody) {
 			result += getPrefix() + this.accept(node.getBody()) + "\n";
 		}
 		else if (node.isIsAbstract()) {
 			result += getPrefix() + "abstract\n";
 		}
-		else {
+		else if ( DOC_VIEW ) {
 			result += getPrefix() + "do\n";
 			pushPrefix();
 			result += getPrefix() + "//TODO: implement operation " + node.getName() + "\n"; 
@@ -810,7 +829,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitParameter(Parameter node) {
 		setParent(node);
-		return KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
+		MODE = TYPE_MODE;
+		String result = KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
+		MODE = DEFINITION_MODE;
+		return result;
 	}
 	
 	public String ppTypeFromMultiplicityElement(MultiplicityElement elem) {
@@ -868,7 +890,9 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitProperty(Property node) {
 		setParent(node);
-	    String result = ppTags(node);
+		String result = "";
+		if ( DOC_VIEW )
+			result = ppTags(node);
 	    
 	    if(!alreadyPrefixed) result += getPrefix();
 		
@@ -882,14 +906,18 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		// in framework.km, not in kermeta.ecore which would not be conform to MOF if we
 		// changed there the multiplicity?
 		if(node.getType() != null) {
+			MODE = TYPE_MODE;
 			result += " : " + ppTypeFromMultiplicityElement(node);
+			MODE = DEFINITION_MODE;
 		}
 		else {
 			result += " : kermeta::standard::~Void" ;
 		}
 		
-		if (node.getOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName());
-		if (node.isIsDerived()) {
+		if (node.getOpposite() != null) 
+			result += "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName());
+		
+		if (node.isIsDerived() && printBody) {
 			pushPrefix();
 			result += "\n" + getPrefix() + "getter is " ;
 			if (node.getGetterBody() != null) result += this.accept(node.getGetterBody());
@@ -982,7 +1010,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeReference)
 	 */
 	public Object visitTypeReference(TypeReference node) {
-	    return ppTypeFromMultiplicityElement(node);
+		MODE = TYPE_MODE;
+	    Object result = ppTypeFromMultiplicityElement(node);
+	    MODE = DEFINITION_MODE;
+	    return result;
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ObjectTypeVariable)
@@ -1057,12 +1088,12 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		Expression tgt = node.getTarget();
 		if(tgt != null) {
 			
-			if(fName == "not" && isBooleanTypeDef(tgt.getStaticType())) {
+			if(fName.equals("not") && isBooleanTypeDef(tgt.getStaticType())) {
 					result += "not (";
 					result += this.accept(tgt);
 					result += ")";
 				}
-			else if(fName == "and" && isBooleanTypeDef(tgt.getStaticType())) {
+			else if(fName.equals("and") && isBooleanTypeDef(tgt.getStaticType())) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1070,8 +1101,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
+				if ( ! (node.eContainer() instanceof Block) )
+					result = "(" + result + ")";
 			}
-			else if(fName == "or" && isBooleanTypeDef(tgt.getStaticType())) {
+			else if(fName.equals("or") && isBooleanTypeDef(tgt.getStaticType())) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1079,8 +1112,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
+				if ( ! (node.eContainer() instanceof Block) )
+					result = "(" + result + ")";
 			}
-			else if(fName == "plus" && isNumericalTypeDef(tgt.getStaticType())) {
+			else if(fName.equals("plus") && (isNumericalTypeDef(tgt.getStaticType()) || isStringTypeDef(tgt.getStaticType()))) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1088,8 +1123,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
+				if ( ! (node.eContainer() instanceof Block) )
+					result = "(" + result + ")";
 			}
-			else if(fName == "minus" && isNumericalTypeDef(tgt.getStaticType())) {
+			else if(fName.equals("minus") && isNumericalTypeDef(tgt.getStaticType())) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1097,8 +1134,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
+				if ( ! (node.eContainer() instanceof Block) )
+					result = "(" + result + ")";
 			}
-			else if(fName == "mult" && isNumericalTypeDef(tgt.getStaticType())) {
+			else if(fName.equals("mult") && isNumericalTypeDef(tgt.getStaticType())) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1106,8 +1145,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
+				if ( ! (node.eContainer() instanceof Block) )
+					result = "(" + result + ")";
 			}
-			else if(fName == "div" && isNumericalTypeDef(tgt.getStaticType())) {
+			else if(fName.equals("div") && isNumericalTypeDef(tgt.getStaticType())) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1115,8 +1156,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
+				if ( ! (node.eContainer() instanceof Block) )
+					result = "(" + result + ")";
 			}
-			else if(fName == "isGreater" && isNumericalTypeDef(tgt.getStaticType())) {
+			else if(fName.equals("isGreater") && isNumericalTypeDef(tgt.getStaticType())) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1124,8 +1167,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
+				if ( ! (node.eContainer() instanceof Block) )
+					result = "(" + result + ")";
 			}
-			else if(fName == "isLower" && isNumericalTypeDef(tgt.getStaticType())) {
+			else if(fName.equals("isLower") && isNumericalTypeDef(tgt.getStaticType())) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1133,8 +1178,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
+				if ( ! (node.eContainer() instanceof Block) )
+					result = "(" + result + ")";
 			}
-			else if(fName == "isGreaterOrEqual" && isNumericalTypeDef(tgt.getStaticType())) {
+			else if(fName.equals("isGreaterOrEqual") && isNumericalTypeDef(tgt.getStaticType())) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1142,8 +1189,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
+				if ( ! (node.eContainer() instanceof Block) )
+					result = "(" + result + ")";
 			}
-			else if(fName == "isLowerOrEqual" && isNumericalTypeDef(tgt.getStaticType())) {
+			else if(fName.equals("isLowerOrEqual") && isNumericalTypeDef(tgt.getStaticType())) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1151,8 +1200,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
+				if ( ! (node.eContainer() instanceof Block) )
+					result = "(" + result + ")";
 			}
-			else if(fName == "equals" && (isBooleanTypeDef(tgt.getStaticType()) || isNumericalTypeDef(tgt.getStaticType()))) {
+			/*else if(fName.equals("equals") && (isBooleanTypeDef(tgt.getStaticType()) || isNumericalTypeDef(tgt.getStaticType()))) {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
@@ -1161,15 +1212,15 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
 			}
-			else if(fName == "isNotEqual" && (isBooleanTypeDef(tgt.getStaticType()) || isNumericalTypeDef(tgt.getStaticType()))) {
-				result += "(";
+			else if(fName.equals("isNotEqual") && (isBooleanTypeDef(tgt.getStaticType()) || isNumericalTypeDef(tgt.getStaticType()))) {
+				result += "((";
 				result += this.accept(tgt);
 				result += ")";
 				result += " != ";
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
-				result += ")";
-			}
+				result += "))";
+			}*/
 			else {
 				// Other feature calls...
 				result += this.accept(tgt);
@@ -1259,7 +1310,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
         	result = node.getValue();
         } else {
         	
-        	if ( node.getName().equals(KMT2KMPass7.KERMETA_DOCUMENTATION) )
+        	if ( node.getName().equals(TagHelper.KERMETA_DOCUMENTATION) )
         		if ( ! node.getValue().startsWith("/**") )
         			result = "/**" + node.getValue() + "*/";
         		else
@@ -1446,6 +1497,23 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		else if(t instanceof PrimitiveType) {
 			return ((PrimitiveType) t).getName().equals("Boolean");
+		}
+		else
+			return false;
+	}
+	
+	/**
+	 * Tests whether the Type t corresponds to the Kermeta String type, which can be encoded
+	 * either as the String PrimitiveType or the String class.
+	 * @param t
+	 * @return
+	 */
+	protected boolean isStringTypeDef(Type t) {
+		if(t instanceof Class) {
+			return ((Class) t).getTypeDefinition().getName().equals("String");
+		}
+		else if(t instanceof PrimitiveType) {
+			return ((PrimitiveType) t).getName().equals("String");
 		}
 		else
 			return false;

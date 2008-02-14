@@ -1,4 +1,4 @@
-/* $Id: Type.java,v 1.8 2007-10-12 09:20:40 ftanguy Exp $
+/* $Id: Type.java,v 1.9 2008-02-14 07:13:16 uid21732 Exp $
 * Project : Kermeta io
 * File : Type.java
 * License : EPL
@@ -12,12 +12,11 @@
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
+import java.util.List;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-
-//import fr.irisa.triskell.kermeta.language.structure.FType;
 
 /**
  * @author Franck Fleurey
@@ -73,14 +72,14 @@ public abstract class Type {
 	 * called on this type
 	 * @return
 	 */
-	public abstract ArrayList<CallableProperty> callableProperties();
+	public abstract List<CallableProperty> callableProperties();
 	
 	/**
 	 * returns a list of CallableOperation that corresponds to the operations that can be
 	 * called on this type
 	 * @return
 	 */
-	public abstract ArrayList<CallableOperation> callableOperations();
+	public abstract List<CallableOperation> callableOperations();
 	
 	/**
 	 * inferTypeVariableBinding
@@ -105,14 +104,12 @@ public abstract class Type {
 	 * @return
 	 */
 	public CallableOperation getOperationByName(String name) {
-		ArrayList<CallableOperation> ops = callableOperations();
-		if (ops == null) return null;
-		java.util.Iterator<CallableOperation> it = ops.iterator();
-		while(it.hasNext()) {
-		    CallableOperation op = (CallableOperation)it.next();
+		Collection<CallableOperation> ops = callableOperations();
+		if (ops == null) 
+			return null;
+		for ( CallableOperation op : ops )
 			if (op.operation.getName().equals(name)) 
 				return op;
-		}
 		return null;
 	}
 	
@@ -124,14 +121,12 @@ public abstract class Type {
 	 * @return
 	 */
 	public CallableProperty getPropertyByName(String name) {
-		ArrayList<CallableProperty> props = callableProperties();
-		if (props == null) return null;
-		java.util.Iterator<CallableProperty> it = props.iterator();
-		while(it.hasNext()) {
-		    CallableProperty prop = (CallableProperty)it.next();
+		Collection<CallableProperty> props = callableProperties();
+		if (props == null) 
+			return null;
+		for ( CallableProperty prop : props )
 			if (prop.property.getName().equals(name)) 
 				return prop;
-		}
 		return null;
 	}
 	

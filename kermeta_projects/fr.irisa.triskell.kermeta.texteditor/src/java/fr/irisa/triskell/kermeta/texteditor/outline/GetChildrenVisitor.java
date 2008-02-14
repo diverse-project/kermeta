@@ -1,4 +1,4 @@
-/* $Id: GetChildrenVisitor.java,v 1.12 2008-01-28 14:01:46 dvojtise Exp $
+/* $Id: GetChildrenVisitor.java,v 1.13 2008-02-14 07:13:43 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetChildrenVisitor.java
 * License : EPL
@@ -11,12 +11,14 @@
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -73,115 +75,45 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		ArrayList<ModelElementOutlineItem> propertiesMEOIs = new ArrayList<ModelElementOutlineItem>();
 		ArrayList<ModelElementOutlineItem> operationsMEOIs = new ArrayList<ModelElementOutlineItem>();
 		
-		Set <TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses( arg0 );
+		Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext( arg0 );
 		
 		Set <String> propertiesName = new HashSet <String> ();
 		Set <String> operationsName = new HashSet <String> ();
 				
-		/*
-		 * 
-		 * Invariants
-		 * 
-		 */
-		for (Object ci : arg0.getInv())
-			invariantsMEOIs.add(new ModelElementOutlineItem((Constraint)ci, item, outline));
+		String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(arg0);
+		
+		for (TypeDefinition t : context ) {
+			
+			if ( t instanceof ClassDefinition ) {
+				
+				ClassDefinition currentClassDefinition = (ClassDefinition) t;
+				if ( outline.prefInheritanceFlattening() || KermetaModelHelper.NamedElement.qualifiedName(currentClassDefinition).equals(qualifiedName)) {
+					// Invariants
+					for ( Constraint c : currentClassDefinition.getInv() )
+		    			invariantsMEOIs.add( new ModelElementOutlineItem( c, item, outline ) );
 
-	    for ( TypeDefinition typeDefinition : baseClasses ) {
-	    	
-	    	if ( typeDefinition instanceof ClassDefinition ) {
-	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
-	    		for ( Constraint c : (List<Constraint>) cl.getInv() ) {
-	    			invariantsMEOIs.add( new ModelElementOutlineItem( c, item, outline ) );
-	    		}
-	    	}
-	    	
-	    }
-		
-		/*
-		 * 
-		 * Attributes
-		 * 
-		 */
-	    for (Property p : (List<Property>) arg0.getOwnedAttribute()) {
-	    	propertiesMEOIs.add(new ModelElementOutlineItem((Property)p, item, outline));
-	        propertiesName.add( p.getName() );
-	    }
-	        
-	    for ( TypeDefinition typeDefinition : baseClasses ) {
-	    	
-	    	if ( typeDefinition instanceof ClassDefinition ) {
-	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
-	    		for ( Property p : (List<Property>) cl.getOwnedAttribute() ) {
-	    			if ( ! propertiesName.contains(p.getName()) ) {
-	    				propertiesMEOIs.add( new ModelElementOutlineItem( p, item, outline ) );
-	    				propertiesName.add( p.getName() );
-	    			}
-	    		}
-	    	}
-	    	
-	    }
-	    
-	    /*
-	     * 
-	     * Operations
-	     * 
-	     */
-	    for (Operation op : (List<Operation>) arg0.getOwnedOperation()) {
-	    	operationsMEOIs.add(new ModelElementOutlineItem((Operation)op, item, outline));
-	        operationsName.add( op.getName() );
-	    }
-	    
-	    for ( TypeDefinition typeDefinition : baseClasses ) {
-	    	
-	    	if ( typeDefinition instanceof ClassDefinition ) {
-	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
-	    		for ( Operation o : (List<Operation>) cl.getOwnedOperation() )
-	    			if ( ! operationsName.contains(o.getName()) ) {
-	    				operationsMEOIs.add( new ModelElementOutlineItem( o, item, outline ) );
-	    				operationsName.add( o.getName() );
-	    			}
-	    	}
-	    	
-	    }
-	    
-	    // add inherited properties and operations if necessary
-	    if (outline.prefInheritanceFlattening()) {
-			fr.irisa.triskell.kermeta.language.structure.Class fclass = InheritanceSearch.getFClassForClassDefinition(arg0);
-		    for (Object next : InheritanceSearch.callableProperties(fclass))
-		    {
-		        CallableProperty cp = (CallableProperty)next;
-		        if (cp.getFclass().getTypeDefinition() != arg0){
-		        	Property p = cp.getTypeBoundedProperty();
-		        	if ( ! propertiesName.contains(p.getName()) ) {
-		        		propertiesMEOIs.add( new ModelElementOutlineItem( p, item, outline ) );
-	    				propertiesName.add( p.getName() );
-	    			}
-		        }
-		    }
-		    
-		    for (Object next : InheritanceSearch.callableOperations(fclass))
-		    {
-		        CallableOperation cop = (CallableOperation)next;
-		        if (cop.getFclass().getTypeDefinition() != arg0){
-		        	Operation o = cop.getTypeBoundedOperation();		        
-		        	if ( ! operationsName.contains(o.getName()) ) {
-		        		operationsMEOIs.add( new ModelElementOutlineItem( o, item, outline ) );
-	    				operationsName.add( o.getName() );
-	    			}
-		        }
-		    }
-		    
-		    for (Object next : arg0.getSuperType()) {
-		    	 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)next;
-			     ClassDefinition parent = (ClassDefinition)metaClass.getTypeDefinition();
-			     for (Object inv : parent.getInv()) {
-			    	 invariantsMEOIs.add(new ModelElementOutlineItem((Constraint)inv, item, outline));
-		    	 }
-		    }
-		
+					// Properties
+					for ( Property p : (List<Property>) currentClassDefinition.getOwnedAttribute() ) {
+		    			if ( ! propertiesName.contains(p.getName()) ) {
+		    				propertiesMEOIs.add( new ModelElementOutlineItem( p, item, outline ) );
+		    				propertiesName.add( p.getName() );
+		    			}
+		    		}
+					
+					// Operations
+					for ( Operation o : (List<Operation>) currentClassDefinition.getOwnedOperation() ) {
+		    			if ( ! operationsName.contains(o.getName()) ) {
+		    				operationsMEOIs.add( new ModelElementOutlineItem( o, item, outline ) );
+		    				operationsName.add( o.getName() );
+		    			}
+		    		}
+				}
+				
+			}
+			
 		}
-	    
-	    // sort result if necessary
+
+		// sort result if necessary
 		if (outline.prefSortedOutline()){
 		    Collections.sort(invariantsMEOIs);
 		    Collections.sort(propertiesMEOIs);

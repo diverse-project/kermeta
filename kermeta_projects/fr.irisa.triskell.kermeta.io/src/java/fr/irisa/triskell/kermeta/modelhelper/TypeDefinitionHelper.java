@@ -19,4 +19,14 @@ public class TypeDefinitionHelper {
 		return result;
 	}
 	
+	static public List<TypeDefinition> getBaseAspects(TypeDefinition td) {
+		KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject(td);
+		List<TypeDefinition> result = null;
+		if ( kermetaUnit != null )
+			result = kermetaUnit.getBaseAspects().get(td);
+		if ( result == null )
+			result = new ArrayList<TypeDefinition> ();
+		return result;
+	}
+	
 }

@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass3.java,v 1.2 2008-01-04 15:08:47 dvojtise Exp $
+/*$Id: Pass3.java,v 1.3 2008-02-14 07:12:56 uid21732 Exp $
 * Project : org.kermeta.merger
 * File : 	Pass3.java
 * License : EPL
@@ -13,12 +13,12 @@
 package org.kermeta.merger.internal;
 
 import java.io.StringReader;
-import java.util.List;
-import java.util.Set;
+import java.util.Collection;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.KermetaModelHelper;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
@@ -37,7 +37,6 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMTypeBuilder;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaParser;
 
@@ -58,7 +57,7 @@ public class Pass3 extends MergePass {
 
 	@Override
 	public void process() {
-		for (TypeDefinition td : TypeDefinitionSearcher.getTypesDefinition(kermetaUnit) ) {
+		for (TypeDefinition td : KermetaUnitHelper.getTypeDefinitions(kermetaUnit) ) {
 			try {
 				if ( td instanceof ClassDefinition )
 					setTypes( (ClassDefinition) td );
@@ -82,31 +81,30 @@ public class Pass3 extends MergePass {
 	}
 
 	private void setTypes(ClassDefinition newDefinition) throws RecognitionException, TokenStreamException {
-
+		ClassDefinition definition = (ClassDefinition) context.getBaseTypeDefinition(newDefinition);
+		
 		context.pushContext();			
 		for ( TypeVariable tv : newDefinition.getTypeParameter() )
 			context.addTypeVar( tv );
-		
+
 		/*
 		 * 
 		 * Setting the super types for the class definitions.
 		 * 
 		 */
-		ClassDefinition definition = (ClassDefinition) context.getBaseTypeDefinition(newDefinition);
-		KermetaUnit owner = KermetaUnitHelper.getKermetaUnitFromObject( definition );
-		Set<TypeDefinition> group = ClassDefinitionHelper.getAllBaseClasses(definition);
-		group.add( definition );
-		List<TypeDefinition> aspects = owner.getAspects().get(definition);
-		if ( aspects != null )
-			group.addAll( aspects );
-		for ( TypeDefinition td : group ) {
-			ClassDefinition cdef = (ClassDefinition) td;
-			for ( Type supertype : cdef.getSuperType() ) {
-				Type type = createType(supertype);
-				if ( type != null ) {
-					newDefinition.getContainedType().add( type );
-					newDefinition.getSuperType().add(type);
-				}
+		Collection<ClassDefinition> group = context.getAspects(newDefinition);
+		group.add(definition);
+		
+		for ( TypeDefinition t : group ) {
+			if ( t instanceof ClassDefinition ) {
+				ClassDefinition cdef = (ClassDefinition) t;
+				for ( Type supertype : cdef.getSuperType() ) {
+					Type type = createType(supertype);
+					if ( type != null ) {
+						newDefinition.getContainedType().add( type );
+						newDefinition.getSuperType().add(type);
+					}
+				}		
 			}
 		}
 		
@@ -123,12 +121,14 @@ public class Pass3 extends MergePass {
 			}
 		}
 		
+
+		
 		setPropertiesType(newDefinition);
 		setOperationsType(newDefinition);
 
 		context.popContext();
 	}
-	
+	 
 	
 	private Type createType(Type t) throws RecognitionException, TokenStreamException {
 		KM2KMTPrettyPrinter printer = new KM2KMTPrettyPrinter(true);
@@ -163,7 +163,7 @@ public class Pass3 extends MergePass {
 			if ( p.getOpposite() != null ) {
 				String qualifiedName = NamedElementHelper.getQualifiedName( (NamedElement) p.getOpposite().eContainer() );
 				ClassDefinition cd = (ClassDefinition) kermetaUnit.getTypeDefinitionByQualifiedName(qualifiedName, new NullProgressMonitor());
-				newProperty.setOpposite( ClassDefinitionHelper.getPropertyByName(cd, p.getOpposite().getName()) );
+				newProperty.setOpposite( KermetaModelHelper.ClassDefinition.getPropertyByName(cd, p.getOpposite().getName()) );
 			}
 		}
 	}
@@ -194,7 +194,7 @@ public class Pass3 extends MergePass {
 					newOperation.setType(type);
 				}
 			}
-			
+			 
 			/*
 			 * 
 			 * Setting the super operation if there is one.
@@ -203,7 +203,7 @@ public class Pass3 extends MergePass {
 			if ( baseOperation.getSuperOperation() != null ) {
 				String qualifiedName = NamedElementHelper.getQualifiedName( (ClassDefinition) baseOperation.getSuperOperation().eContainer() ); 
 				ClassDefinition cd = (ClassDefinition) kermetaUnit.getTypeDefinitionByQualifiedName(qualifiedName);
-				Operation superOperation = ClassDefinitionHelper.getOperationByName(cd, baseOperation.getSuperOperation().getName());
+				Operation superOperation = KermetaModelHelper.ClassDefinition.getOperationByName(cd, baseOperation.getSuperOperation().getName());
 				newOperation.setSuperOperation( superOperation );
 			}
 			

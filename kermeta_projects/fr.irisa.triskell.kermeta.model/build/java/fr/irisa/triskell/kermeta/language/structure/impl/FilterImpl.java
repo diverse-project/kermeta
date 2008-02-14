@@ -1,7 +1,7 @@
 /**
  * IRISA / INRIA / Universite de Rennes 1
  *
- * $Id: FilterImpl.java,v 1.3 2008-01-22 14:24:29 cfaucher Exp $
+ * $Id: FilterImpl.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.21 2008-01-22 16:13:25 cfaucher Exp $
+ * $Id: PropertyItemProvider.java,v 1.22 2008-02-14 07:13:52 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -460,16 +460,6 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createBlock()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -491,6 +481,16 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -560,16 +560,6 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createBlock()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -591,6 +581,16 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

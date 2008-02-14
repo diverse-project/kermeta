@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElement.java,v 1.3 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: MultiplicityElement.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -47,6 +47,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setIsOrdered(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getMultiplicityElement_IsOrdered()
 	 * @model default="false" dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Boolean stating whether the element is ordered\n \052/'"
 	 * @generated
 	 */
 	boolean isIsOrdered();
@@ -74,6 +75,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setIsUnique(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getMultiplicityElement_IsUnique()
 	 * @model default="true" dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Boolean stating whether duplicated elements are allowed\n \052/'"
 	 * @generated
 	 */
 	boolean isIsUnique();
@@ -100,6 +102,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setLower(int)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getMultiplicityElement_Lower()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Integer"
+	 *        annotation="GenModel documentation='/**\n * Min cardinality of the element\n \052/'"
 	 * @generated
 	 */
 	int getLower();
@@ -126,6 +129,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setUpper(int)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getMultiplicityElement_Upper()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.UnlimitedNatural"
+	 *        annotation="GenModel documentation='/**\n * Max cardinality of the element, \'-1\' for \'*\'\n \052/'"
 	 * @generated
 	 */
 	int getUpper();

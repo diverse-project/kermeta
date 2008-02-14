@@ -1,6 +1,6 @@
 
 
-/*$Id: KmExporter.java,v 1.6 2007-11-28 13:59:57 ftanguy Exp $
+/*$Id: KmExporter.java,v 1.7 2008-02-14 07:13:20 uid21732 Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.kermeta.core.helper.StringHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
 
@@ -30,7 +31,6 @@ import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
-import fr.irisa.triskell.kermeta.modelhelper.StringHelper;
 
 public class KmExporter {
 
@@ -133,23 +133,38 @@ public class KmExporter {
 			uris.put(kermetaUnit, kermetaUnit.getUri());
 			return;
 		}
-		
+
 		String uri = kermetaUnit.getUri();
-				
+
+		/*
+		 * 
+		 * Checking the pathToRemove existency
+		 * 
+		 */
 		if ( pathToRemove.equals("") ) {
 			int index = uri.lastIndexOf("/");
-			if ( index != -1 ) {
+			if ( index != -1 )
 				pathToRemove = uri.substring(0, index);
-				uri = rep + uri.substring(index+1);
+		}
+		
+		/*
+		 * 
+		 * Remove part of path if not a registered file
+		 * 
+		 */
+		if ( ! kermetaUnit.getUri().startsWith("http://") ) {
+			String regex = pathToRemove + ".+";
+			if ( uri.matches(regex) ) {
+				uri = uri.replace(pathToRemove + "/", "");
+				uri = rep + uri;
+			} else {
+				int index = uri.lastIndexOf("/");
+				if ( index != -1 )
+					uri = rep + uri.substring(index+1);
 			}
-		} else if (kermetaUnit.getUri().startsWith("http://")) {
+		} else {
 			int index = kermetaUnit.getUri().lastIndexOf("/");
 			uri = rep + kermetaUnit.getUri().substring(index+1) + ".km";
-		} else if ( kermetaUnit.getUri().startsWith("platform:/resource") ) {
-			uri = kermetaUnit.getUri();			
-		} else {
-			uri = uri.replace(pathToRemove + "/", "");
-			uri = rep + uri;
 		}
 
 		if ( fileName != null )

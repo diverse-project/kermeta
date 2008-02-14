@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductType.java,v 1.4 2008-01-22 14:24:31 cfaucher Exp $
+ * $Id: ProductType.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -43,7 +43,7 @@ public interface ProductType extends TypeContainer, Type {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProductType_Type()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Types \n \052/'"
 	 * @generated
 	 */
 	EList<Type> getType();

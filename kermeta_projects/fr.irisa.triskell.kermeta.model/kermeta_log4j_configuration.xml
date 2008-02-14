@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<!-- $Id: kermeta_log4j_configuration.xml,v 1.7 2007-09-11 12:43:45 dvojtise Exp $ -->
+<!-- $Id: kermeta_log4j_configuration.xml,v 1.8 2008-02-14 07:13:03 uid21732 Exp $ -->
 <!-- Description: This is the configuration file for log4j it allows to tune the level of log you will receive 
 	it also allows to tune where you will receive them. -->
 
@@ -91,6 +91,12 @@
   <!-- if you want to decrease the level please DO NOT REMOVE THE LOGGER but change the level value ! -->
 	<logger name="KermetaUnit">
 		<level value="WARN"/> 
+	</logger>
+	<logger name="LoaderPlugin">
+		<level value="INFO"/> 
+	</logger>
+	<logger name="KPMPlugin">
+		<level value="DEBUG"/> 
 	</logger>
 	<logger name="KermetaRunner">
 		<level value="DEBUG"/>

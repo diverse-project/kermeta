@@ -1,6 +1,6 @@
 
 
-/*$Id: FoldingStrategyHelper.java,v 1.2 2008-01-04 14:34:26 dvojtise Exp $
+/*$Id: FoldingStrategyHelper.java,v 1.3 2008-02-14 07:13:44 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategyHelper.java
 * License : EPL
@@ -20,9 +20,8 @@ import org.kermeta.texteditor.KermetaTextEditor;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
-
-import fr.irisa.triskell.kermeta.parser.gen.ast.CompUnit;
 import fr.irisa.triskell.kermeta.modelhelper.ASTHelper;
+import fr.irisa.triskell.kermeta.parser.gen.ast.CompUnit;
 
 public class FoldingStrategyHelper {
 

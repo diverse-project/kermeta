@@ -40,8 +40,7 @@ Export-Package: fr.irisa.triskell.kermeta,
  org.apache.log4j.or.sax,
  org.apache.log4j.spi,
  org.apache.log4j.varia,
- org.apache.log4j.xml,
- org.kermeta.model
+ org.apache.log4j.xml
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi

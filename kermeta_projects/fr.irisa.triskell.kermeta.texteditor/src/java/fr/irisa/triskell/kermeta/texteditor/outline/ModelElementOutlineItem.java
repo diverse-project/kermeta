@@ -1,4 +1,4 @@
-/* $Id: ModelElementOutlineItem.java,v 1.5 2008-01-28 14:01:46 dvojtise Exp $
+/* $Id: ModelElementOutlineItem.java,v 1.6 2008-02-14 07:13:43 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineItem.java
 * License : EPL
@@ -10,16 +10,18 @@
 
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
+import java.util.List;
+
 import org.eclipse.swt.graphics.Image;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
@@ -28,7 +30,7 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
  */
 public class ModelElementOutlineItem extends OutlineItem implements Comparable<ModelElementOutlineItem> {
 
-    protected fr.irisa.triskell.kermeta.language.structure.Object modelElement;
+    protected NamedElement modelElement;
     protected Object parent;
         
     protected KermetaOutline outline;
@@ -37,13 +39,13 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
     /**
      * Constructor
      */
-    public ModelElementOutlineItem(fr.irisa.triskell.kermeta.language.structure.Object modelElement, Object parent, KermetaOutline outline) {
+    public ModelElementOutlineItem(NamedElement modelElement, Object parent, KermetaOutline outline) {
         super();
         if (modelElement == null) 
         	throw new Error("Assertion failed : instanciate OutlineItem with null model element");
         this.modelElement = modelElement;
         this.parent = parent;
-        this.outline = outline;
+        this.outline = outline;        
     }
     
     public int compareTo(ModelElementOutlineItem other) {
@@ -96,13 +98,17 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
     			isDefinedOnClass = ((ClassDefinition)parentItem.modelElement).getOwnedAttribute().contains(modelElement);
     			if(!isDefinedOnClass){
     				// let's try on aspects
-    				for(TypeDefinition td  : ((ClassDefinition)parentItem.modelElement).getBaseAspects()) {
-    					if(td instanceof ClassDefinition){
-    						ClassDefinition cd = (ClassDefinition)td;
-    						if(cd.getOwnedAttribute().contains(modelElement)) {
-    							isDefinedOnClass = true;
-    							break;
-    						}
+    				KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject(parentItem.modelElement);
+    				List<TypeDefinition> l = kermetaUnit.getBaseAspects().get(((ClassDefinition)parentItem.modelElement));
+    				if ( l != null ) {
+    					for(TypeDefinition td  : l) {
+	    					if(td instanceof ClassDefinition){
+	    						ClassDefinition cd = (ClassDefinition)td;
+	    						if(cd.getOwnedAttribute().contains(modelElement)) {
+	    							isDefinedOnClass = true;
+	    							break;
+	    						}
+	    					}
     					}
     				}
     			}
@@ -140,12 +146,16 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
     			isDefinedOnClass = ((ClassDefinition)parentItem.modelElement).getOwnedAttribute().contains(modelElement);
     			if(!isDefinedOnClass){
     				// let's try on aspects
-    				for(TypeDefinition td  : ((ClassDefinition)parentItem.modelElement).getBaseAspects()) {
-    					if(td instanceof ClassDefinition){
-    						ClassDefinition cd = (ClassDefinition)td;
-    						if(cd.getOwnedOperation().contains(modelElement)) {
-    							isDefinedOnClass = true;
-    							break;
+    				KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject(parentItem.modelElement);
+    				List<TypeDefinition> l = kermetaUnit.getBaseAspects().get(((ClassDefinition)parentItem.modelElement));
+    				if ( l != null ) {
+    					for(TypeDefinition td  : l) {
+    						if(td instanceof ClassDefinition){
+    							ClassDefinition cd = (ClassDefinition)td;
+    							if(cd.getOwnedOperation().contains(modelElement)) {
+    								isDefinedOnClass = true;
+    								break;
+    							}
     						}
     					}
     				}

@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass1.java,v 1.4 2007-11-21 13:15:03 ftanguy Exp $
+/*$Id: Pass1.java,v 1.5 2008-02-14 07:12:56 uid21732 Exp $
 * Project : org.kermeta.merger
 * File : 	Pass1.java
 * License : EPL
@@ -48,6 +48,8 @@ public class Pass1 extends MergePass {
 			/*
 			 * 
 			 * Creating the tags for modeling units.
+			 * Here we are not using the createTags method from MergePass class
+			 * because a modeling unit does not inherit from Object.
 			 * 
 			 */
 			for ( Tag tag : unit.getModelingUnit().getOwnedTags() ) {
@@ -86,6 +88,12 @@ public class Pass1 extends MergePass {
 						}
 					}
 				}
+				/*
+				 * 
+				 * Creating the tags for the package.
+				 * 
+				 */
+				createTags(newPackage, p);
 			}
 		}
 		
@@ -104,6 +112,12 @@ public class Pass1 extends MergePass {
 		ClassDefinition newDefinition = StructureFactory.eINSTANCE.createClassDefinition();
 		newDefinition.setName( definition.getName() );
 		kermetaUnit.addTypeDefinition(newDefinition, p);
+		/*
+		 * 
+		 * Creating the tags.
+		 * 
+		 */
+		createTags(newDefinition, definition);
 		
 		/*
 		 * 
@@ -141,6 +155,12 @@ public class Pass1 extends MergePass {
 		PrimitiveType newDefinition = KermetaModelHelper.PrimitiveType.create( definition.getName() );
 		kermetaUnit.addTypeDefinition(newDefinition, p);
 		context.putBaseTypeDefinition(newDefinition, definition);
+		/*
+		 * 
+		 * Creating the tags.
+		 * 
+		 */
+		createTags(newDefinition, definition);
 	} 
 	
 	private void createEnumeration(TypeDefinition t, Package p) {
@@ -153,6 +173,12 @@ public class Pass1 extends MergePass {
 			newLiteral.setName( literal.getName() );
 			newDefinition.getOwnedLiteral().add( newLiteral );
 		}
+		/*
+		 * 
+		 * Creating the tags.
+		 * 
+		 */
+		createTags(newDefinition, definition);
 	}
 	
 	private void createModelType(TypeDefinition t, Package p) {
@@ -161,6 +187,12 @@ public class Pass1 extends MergePass {
 		newDefinition.setName( definition.getName() );
 		kermetaUnit.addTypeDefinition(newDefinition, p);
 		context.putBaseTypeDefinition(newDefinition, definition);
+		/*
+		 * 
+		 * Creating the tags.
+		 * 
+		 */
+		createTags(newDefinition, definition);
 	}
 
 	private void createConstraints(ClassDefinition newDefinition, ClassDefinition baseDefinition) {
@@ -169,6 +201,12 @@ public class Pass1 extends MergePass {
 			newConstraint.setName( constraint.getName() );
 			newDefinition.getInv().add( newConstraint );
 			context.putBaseConstraint(newConstraint, constraint);
+			/*
+			 * 
+			 * Creating the tags.
+			 * 
+			 */
+			createTags(newConstraint, constraint);
 		}
 	}
 	

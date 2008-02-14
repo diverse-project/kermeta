@@ -1,4 +1,4 @@
-/* $Id: UnionType.java,v 1.7 2007-08-02 15:53:30 dvojtise Exp $
+/* $Id: UnionType.java,v 1.8 2008-02-14 07:13:16 uid21732 Exp $
 * Project : Kermeta (First iteration)
 * File : UnionType.java
 * License : EPL
@@ -17,6 +17,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
@@ -92,12 +93,13 @@ public class UnionType extends Type {
 	/**
 	 * @see fr.irisa.triskell.kermeta.typechecker.Type#callableProperties()
 	 */
-	public ArrayList<CallableProperty> callableProperties() {
-		ArrayList<CallableProperty> result = null;
-		for(int i=0; i<types.size();i++) {
-			Type t = (Type)types.get(i);
-			if (result == null) result = t.callableProperties();
-			else result = inter(result, t.callableProperties());
+	public List<CallableProperty> callableProperties() {
+		List<CallableProperty> result = null;
+		for ( Type t : types ) {
+			if (result == null) 
+				result = t.callableProperties();
+			else 
+				result = inter(result, t.callableProperties());
 		}
 		return result;
 	}
@@ -105,13 +107,15 @@ public class UnionType extends Type {
 	/**
 	 * @see fr.irisa.triskell.kermeta.typechecker.Type#callableOperations()
 	 */
-	public ArrayList<CallableOperation> callableOperations() {
-		ArrayList<CallableOperation> result = null;
+	public List<CallableOperation> callableOperations() {
+		List<CallableOperation> result = null;
 		// Get intersection of valid operation
 		for(int i=0; i<types.size();i++) {
 			Type t = (Type)types.get(i);
-			if (result == null) result = t.callableOperations();
-			else result = inter(result, t.callableOperations());
+			if (result == null) 
+				result = t.callableOperations();
+			else 
+				result = inter(result, t.callableOperations());
 		}
 		return result;
 	}
@@ -123,7 +127,7 @@ public class UnionType extends Type {
 	 * @param l2
 	 * @return
 	 */
-	protected <T> ArrayList<T> inter(ArrayList<T> l1, ArrayList<T> l2) {
+	protected <T> List<T> inter(List<T> l1, List<T> l2) {
 		ArrayList<T> result = new ArrayList<T>();
 		for(int i=0; i<l1.size(); i++) {
 			if (l2.contains(l1.get(i))) {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Package.java,v 1.5 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: Package.java,v 1.6 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPackage()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Package in kermeta. Each kermeta model must have a root package. \n \052/'"
  * @generated
  */
 public interface Package extends NamedElement, TypeDefinitionContainer {
@@ -48,6 +48,7 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPackage_NestedPackage()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Package#getNestingPackage
 	 * @model opposite="nestingPackage" containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Nested Packages contained by the Package\n \052/'"
 	 * @generated
 	 */
 	EList<Package> getNestedPackage();
@@ -66,6 +67,7 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPackage_NestingPackage()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Package#getNestedPackage
 	 * @model opposite="nestedPackage"
+	 *        annotation="GenModel documentation='/**\n * Owning Package, if any\n \052/'"
 	 * @generated
 	 */
 	Package getNestingPackage();
@@ -92,6 +94,7 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * @see #setUri(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPackage_Uri()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * Uri of the Package\n \052/'"
 	 * @generated
 	 */
 	String getUri();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Tag.java,v 1.3 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Tag.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTag()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Tag is intended to be used to add documentation on a  model element,\n * or add some textual information that cannot be expressed with any\n * model element definition.\n \052/'"
  * @generated
  */
 public interface Tag extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -46,6 +46,7 @@ public interface Tag extends fr.irisa.triskell.kermeta.language.structure.Object
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTag_Name()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * Name of the Tag\n \052/'"
 	 * @generated
 	 */
 	String getName();
@@ -72,6 +73,7 @@ public interface Tag extends fr.irisa.triskell.kermeta.language.structure.Object
 	 * @see #setValue(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTag_Value()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * String value of the Tag\n \052/'"
 	 * @generated
 	 */
 	String getValue();
@@ -100,6 +102,7 @@ public interface Tag extends fr.irisa.triskell.kermeta.language.structure.Object
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTag_Object()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Object#getTag
 	 * @model opposite="tag" required="true"
+	 *        annotation="GenModel documentation='/**\n * Objects to which the Tag is attached to\n \052/'"
 	 * @generated
 	 */
 	EList<fr.irisa.triskell.kermeta.language.structure.Object> getObject();

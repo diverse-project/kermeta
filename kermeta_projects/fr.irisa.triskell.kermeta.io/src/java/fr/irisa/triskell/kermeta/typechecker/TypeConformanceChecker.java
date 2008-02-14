@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.23 2008-02-06 09:38:24 dvojtise Exp $
+/* $Id: TypeConformanceChecker.java,v 1.24 2008-02-14 07:13:16 uid21732 Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -16,8 +16,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.Iterator;
 
-import org.kermeta.io.plugin.IOPlugin;
-
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -44,30 +43,15 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 	    required = TypeCheckerContext.getCanonicalType(required);
 	    
 		// The type void is a sub-type of everything		
-	    try {
-	    	if (provided instanceof VoidType || 
-	    			provided == ((SimpleType)TypeCheckerContext.VoidType).type) 
+    	if (provided instanceof VoidType || 
+   			( (provided instanceof Class) && ((Class) provided).getTypeDefinition() == ((Class) ((SimpleType)TypeCheckerContext.VoidType).type).getTypeDefinition()) ) 
 			return true;
-	    } catch (Exception e) {
-	    	IOPlugin.internalLog.warn("Exception received", e);
-	    }
 		
-		// RETURN TRUE IF THE REQUIRED TYPE IS OBJECT OR ANY OF IT SUPERTYPE
-		try {
-			fr.irisa.triskell.kermeta.language.structure.Class cobject = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).getType();
-			if (TypeEqualityChecker.equals(cobject, required)) return true;
-
-		/*
-		 * 
-		 * Supertype checking.
-		 * 
-		 */
-		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = ((ClassDefinition) cobject.getTypeDefinition()).getSuperType().iterator();
-		while (it.hasNext()) {
-			fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
-		    if (TypeEqualityChecker.equals(c, required)) return true;
-		}
-		
+    	// RETURN TRUE IF THE REQUIRED TYPE IS OBJECT OR ANY OF IT SUPERTYPE
+		Class cobject = (Class)((SimpleType)TypeCheckerContext.ObjectType).getType();
+		if ( TypeEqualityChecker.equals(cobject, required) ) 
+			return true;
+    	
 		//Return true if the required type is Model and the provided type is a modeltype
 		if (provided instanceof ModelType) {
 			fr.irisa.triskell.kermeta.language.structure.Class mobject = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ModelType).getType();
@@ -76,19 +60,12 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 				return true;
 			}
 			//Or any of its supertypes
-			it = ((ClassDefinition) mobject.getTypeDefinition()).getSuperType().iterator();
+			Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = ((ClassDefinition) mobject.getTypeDefinition()).getSuperType().iterator();
 			while(it.hasNext()) {
 				fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
 			    if (TypeEqualityChecker.equals(c, required)) return true;
 			}
 		}
-		} catch (Exception e) {
-	    	IOPlugin.internalLog.warn("Exception received", e);
-		}
-		// Transformation if provided is a type variable to the least derived type admissible
-		// for the variable.
-		
-		 //provided = TypeVariableUtility.getLeastDerivedAdmissibleType(provided);
 		
 		TypeConformanceChecker visitor = new TypeConformanceChecker(provided);
 		return ((Boolean)visitor.accept(required)).booleanValue();
@@ -114,55 +91,31 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 	 */
 	public Object visitFunctionType(FunctionType arg0) {
 		// Covariant for return type and contra-variant for parameters
-		Boolean result = new Boolean(false);
+		Boolean result = false;
 		if (provided instanceof FunctionType) {
 			FunctionType p = (FunctionType)provided;
 			if (TypeConformanceChecker.conforms(p.getLeft(), arg0.getLeft()) &&
 					TypeConformanceChecker.conforms(arg0.getRight(), p.getRight()) ) {
-				result = new Boolean(true);
+				result = true;
 			}
 		}
 		return result;
 		
 	}
 	
-	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class arg0) {
-		Boolean result = new Boolean(false);
-		if (TypeEqualityChecker.equals(arg0, provided)) {
-			result = new Boolean(true);
-		}
-		else {
-			
-			if (provided instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-				//ClassDefinition requiredDefinition = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)  provided).getTypeDefinition();
-				ClassConformanceChecker checker = new ClassConformanceChecker( (fr.irisa.triskell.kermeta.language.structure.Class)  provided );
-				result = checker.conforms( arg0 );
-			}
-			/*if (provided instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-				fr.irisa.triskell.kermeta.language.structure.Class p = (fr.irisa.triskell.kermeta.language.structure.Class)provided;
-				Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = ((ClassDefinition) p.getTypeDefinition()).getSuperType().iterator();
-				while(it.hasNext()) {
-					// get the super type
-					fr.irisa.triskell.kermeta.language.structure.Class t_provided = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
-					// propagate type variables
-					t_provided = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(t_provided, TypeVariableEnforcer.getTypeVariableBinding(p));
-					// check conformance of super type
-					if (TypeConformanceChecker.conforms(arg0, t_provided)) {
-						result = new Boolean(true);
-						break;
-					}
-				}
-				
-			}*/
-		}
+	public Object visitClass(Class arg0) {
+		boolean result = false;
 		if ((arg0 == TypeCheckerContext.ObjectType) && (provided instanceof VirtualType)) {
-			result = new Boolean(true);
+			result = true;
+		} else if (provided instanceof Class) {
+			ClassConformanceChecker checker = new ClassConformanceChecker( (Class)  provided );
+			result = checker.conforms( arg0 );
 		}
 		return result;
 	}
 	
 	public Object visitEnumeration(Enumeration arg0) {
-		return new Boolean(provided == arg0);
+		return provided == arg0;
 	}
 	
 	public Object visitPrimitiveType(PrimitiveType arg0) {
@@ -171,15 +124,15 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 	
 	public Object visitProductType(ProductType arg0) {
 		// all types must be sub-types
-		Boolean result = new Boolean(true);
+		Boolean result = true;
 		if (provided instanceof ProductType) {
 			ProductType p = (ProductType)provided;
 			if(arg0.getType().size() == p.getType().size()) {
 				for(int i=0; i< p.getType().size(); i++) {
-					fr.irisa.triskell.kermeta.language.structure.Type t_provided = (fr.irisa.triskell.kermeta.language.structure.Type)p.getType().get(0);
-					fr.irisa.triskell.kermeta.language.structure.Type t_required = (fr.irisa.triskell.kermeta.language.structure.Type)arg0.getType().get(0);
-					if (!TypeConformanceChecker.conforms(t_required, t_provided)) {
-						result = new Boolean(false);
+					fr.irisa.triskell.kermeta.language.structure.Type t_provided = (fr.irisa.triskell.kermeta.language.structure.Type)p.getType().get(i);
+					fr.irisa.triskell.kermeta.language.structure.Type t_required = (fr.irisa.triskell.kermeta.language.structure.Type)arg0.getType().get(i);
+					if ( ! TypeConformanceChecker.conforms(t_required, t_provided) ) {
+						result = false;
 						break;
 					}
 				}
@@ -193,50 +146,26 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 	    fr.irisa.triskell.kermeta.language.structure.Type r = TypeVariableUtility.getLeastDerivedAdmissibleType(arg0);
 	    if (provided instanceof ObjectTypeVariable) {
 	        fr.irisa.triskell.kermeta.language.structure.Type p = TypeVariableUtility.getLeastDerivedAdmissibleType(provided);
-	        return new Boolean(TypeConformanceChecker.conforms(r, p));
-	    }
-	    /*
-	    else if (provided instanceof FClass) {
-	        return new Boolean(TypeConformanceChecker.conforms(r, provided));
-	    }
-	    */
-	    else {
-	        return new Boolean(false);
+	        return TypeConformanceChecker.conforms(r, p);
+	    } else {
+	        return false;
 	    }
 	}
 
 	public Object visitVirtualType(VirtualType arg0) {
-		Boolean result = new Boolean(false);
-		if (TypeEqualityChecker.equals(arg0, provided)) {
-			result = new Boolean(true);
-		}
-		//TODO Expand. Presumably MTV::X conforms to MTV::Y if X conforms to Y? Is that true? Does matching preserve pairwise subtyping?
-		return result;
+		return TypeEqualityChecker.equals(arg0, provided);
 	}
 	
 	public Object visitModelTypeVariable(ModelTypeVariable arg0) {
-		Boolean result = new Boolean(false);
-		if (TypeEqualityChecker.equals(arg0, provided)) {
-			result = new Boolean(true);
-		}
-		//TODO Think about this
-		return result;
+		return TypeEqualityChecker.equals(arg0, provided);
 	}
 	
 	public Object visitVoidType(VoidType arg0) {
-		return new Boolean(provided instanceof VoidType);
+		return provided instanceof VoidType;
 	}
 	
 	public Object visitModelType(ModelType arg0) {
-		Boolean result = new Boolean(false);
-		if (TypeEqualityChecker.equals(arg0, provided)) {
-			//x conforms to x
-			result = new Boolean(true);
-		} else {
-			// Can't match here. Model types are monomorphic.
-		}
-		//throw new Error("Type checker error: Model type conformance is not yet implemented! (incidentally " + result + ")");
-		return result;
+		return TypeEqualityChecker.equals(arg0, provided);
 	}
 	
 	public Object visitDataType(DataType arg0){

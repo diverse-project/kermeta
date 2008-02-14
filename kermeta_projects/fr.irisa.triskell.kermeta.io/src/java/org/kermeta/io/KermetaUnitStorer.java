@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorer.java,v 1.7 2007-12-06 14:10:53 ftanguy Exp $
+ * $Id: KermetaUnitStorer.java,v 1.8 2008-02-14 07:13:18 uid21732 Exp $
  */
 package org.kermeta.io;
 
@@ -12,6 +12,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOException;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 
 /**
@@ -90,7 +91,7 @@ public interface KermetaUnitStorer extends EObject {
 	 * @model
 	 * @generated NOT
 	 */
-	KermetaUnit get(String uri) throws URIMalformedException;
+	KermetaUnit get(String uri) throws URIMalformedException, NotRegisteredURIException;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,9 +105,9 @@ public interface KermetaUnitStorer extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model monitorDataType="org.kermeta.io.IProgressMonitor"
-	 * @generated NOT
+	 * @generated
 	 */
-	void load(String uri, Map<Object, Object> options, IProgressMonitor monitor) throws URIMalformedException;
+	void load(String uri, Map<Object, Object> options, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->

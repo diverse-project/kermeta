@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Raise.java,v 1.5 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: Raise.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRaise()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Refers to raise exception block\n \052/'"
  * @generated
  */
 public interface Raise extends Expression {
@@ -43,6 +43,7 @@ public interface Raise extends Expression {
 	 * @see #setExpression(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRaise_Expression()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * To be written #######################\n \052/'"
 	 * @generated
 	 */
 	Expression getExpression();

@@ -1,4 +1,4 @@
-/*$Id: KermetaProject.java,v 1.12 2007-12-20 09:13:08 ftanguy Exp $
+/*$Id: KermetaProject.java,v 1.13 2008-02-14 07:13:24 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -204,34 +204,23 @@ public class KermetaProject {
 	 * Create the file if it does not exist.
 	 */
 	public void save() {
-		Runnable runnable = new Runnable() {
-
-			public void run() {
-
-			    IWorkspaceRunnable runnable= new IWorkspaceRunnable() {
-			    	public void run(IProgressMonitor monitor) throws CoreException {
-			    		try {
-			    			XMIHelper.save( getKpmFilePathString(), kpm);
-			    			IFile kpmFile = getKpmIFile();
-			    			if ( kpmFile != null )
-			    				kpmFile.refreshLocal(0, monitor);
-			    		} catch (IOException exception) {
-			    			exception.printStackTrace();
-			    		} 
-			    	}
-			    };
-			    try {
-					ResourcesPlugin.getWorkspace().run(runnable, null);
-				} catch (CoreException e) {
-					e.printStackTrace();
-				}
-			}
-				
-		};
-
-		Thread t = new Thread(runnable);
-		t.start();
-			
+	    IWorkspaceRunnable runnable= new IWorkspaceRunnable() {
+	    	public void run(IProgressMonitor monitor) throws CoreException {
+	    		try {
+	    			XMIHelper.save( getKpmFilePathString(), kpm);
+	    			IFile kpmFile = getKpmIFile();
+	    			if ( kpmFile != null )
+	    				kpmFile.refreshLocal(0, monitor);
+	    		} catch (IOException exception) {
+	    			exception.printStackTrace();
+	    		} 
+	    	}
+	    };
+	    try {
+			ResourcesPlugin.getWorkspace().run(runnable, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void reinitialize() throws CoreException {

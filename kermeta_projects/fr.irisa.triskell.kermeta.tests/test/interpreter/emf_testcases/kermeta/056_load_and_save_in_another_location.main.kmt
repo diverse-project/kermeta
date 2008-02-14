@@ -1,4 +1,4 @@
-/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.2 2008-02-14 07:13:29 uid21732 Exp $
  * Creation date: November 14, 2006
  * License: EPL
  * Authors: dvojtise
@@ -10,7 +10,7 @@
 package load_and_save_in_another_location;
 
 require kermeta
-require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/056_test_MdlSave.ecore"
 
 using kermeta::kunit

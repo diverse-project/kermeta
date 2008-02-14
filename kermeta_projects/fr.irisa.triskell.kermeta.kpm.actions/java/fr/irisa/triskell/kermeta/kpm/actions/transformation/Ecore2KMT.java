@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMT.java,v 1.5 2008-02-04 10:54:45 ftanguy Exp $
+/*$Id: Ecore2KMT.java,v 1.6 2008-02-14 07:13:47 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	Ecore2KMT.java
 * License : EPL

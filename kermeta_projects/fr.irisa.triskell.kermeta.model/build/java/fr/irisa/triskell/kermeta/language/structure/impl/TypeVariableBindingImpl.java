@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableBindingImpl.java,v 1.5 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: TypeVariableBindingImpl.java,v 1.6 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 

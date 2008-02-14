@@ -6,7 +6,7 @@ package testLoadEcoreFile;
 
 
 require kermeta
-require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 using kermeta::persistence
 using kermeta::standard
 using ecore

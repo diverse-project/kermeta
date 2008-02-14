@@ -1,24 +1,21 @@
+@uri "http://aPackage"
 package aPackage;
 
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "kermeta"
 class A
 {
 	operation op0() : Void is
 		do
 		end
 
-	@overloadable "true"
 	operation op1(param1 : B) : Void is
-		raise kermeta::exceptions::NotImplementedException.new
+		abstract
 
-	@overloadable "true"
 	operation op2(param1 : B, param2 : C) : Void is
-		raise kermeta::exceptions::NotImplementedException.new
+		abstract
 
-	@overloadable "true"
 	operation op3() : ClassReturn is
-		raise kermeta::exceptions::NotImplementedException.new
+		abstract
 
 }
 class B

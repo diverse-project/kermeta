@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.9 2008-01-09 14:22:38 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.10 2008-02-14 07:13:32 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -17,11 +17,16 @@
 
 package kermeta_io.constraintchecker_test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaCycleConstraintChecker;
@@ -316,37 +321,47 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 		
 		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 		
-		KermetaUnit kermetaUnit = ioPlugin.loadKermetaUnit(path, new NullProgressMonitor());
+		Map<Object, Object> options = new HashMap<Object, Object>();
+		options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
+		
+		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(path, options);
 		
 		if ( kermetaUnit.isIndirectlyErroneous() )
 			assertTrue("kermeta unit has errors during loading", false);
 		
-		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
+		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
 		typeChecker.checkUnit();
 		
 		if ( kermetaUnit.isIndirectlyErroneous() )
 			assertTrue("Kermeta Unit has errors when type checking.", false);
 		
-		KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit, new NullProgressMonitor() );
+		KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit );
 		constraintChecker.checkUnit();
 		
-		if ( kermetaUnit.isIndirectlyErroneous() )
+		if ( kermetaUnit.isIndirectlyErroneous() ) {
+			System.err.println( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit) );
 			assertTrue("Kermeta Unit has errors when constraint checking.", false);
+		}
 		
 		KermetaCycleConstraintChecker cycleConstraintChecker = new KermetaCycleConstraintChecker( kermetaUnit );
 		cycleConstraintChecker.check();
 		
-		if ( kermetaUnit.isIndirectlyErroneous() )
+		if ( kermetaUnit.isIndirectlyErroneous() ) {
+			System.err.println( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit) );
 			assertTrue("Kermeta Unit has errors when cycle constraint checking.", false);
-
-		ioPlugin.unload( kermetaUnit.getUri() );
+		}
+		
+		LoaderPlugin.getDefault().unload( kermetaUnit.getUri() );
 	}
 	
 	public void testinvalidFile(String dir, String file) throws Exception {
 	    
 		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 		
-		KermetaUnit kermetaUnit = ioPlugin.loadKermetaUnit(path, new NullProgressMonitor());
+		Map<Object, Object> options = new HashMap<Object, Object>();
+		options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
+		
+		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(path, options);
 
 		boolean inheritanceCycleDetected = false;
 		if ( kermetaUnit.isIndirectlyErroneous() ) {
@@ -366,12 +381,12 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 			cycleConstraintChecker.check();
 			
 			if ( ! kermetaUnit.isIndirectlyErroneous() ) {
-				KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
+				KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
 				typeChecker.checkUnit();
 			}
 			
 			if ( ! kermetaUnit.isIndirectlyErroneous() ) {
-				KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit, new NullProgressMonitor() );
+				KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit );
 				constraintChecker.checkUnit();
 			}
 			
@@ -385,7 +400,7 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 			}
 		}
 		
-		ioPlugin.unload( kermetaUnit.getUri() );
+		LoaderPlugin.getDefault().unload( kermetaUnit.getUri() );
 
 	}
 }

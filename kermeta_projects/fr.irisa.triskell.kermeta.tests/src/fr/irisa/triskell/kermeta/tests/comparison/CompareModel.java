@@ -1,4 +1,4 @@
-/*$Id: CompareModel.java,v 1.4 2008-01-31 08:26:57 cfaucher Exp $
+/*$Id: CompareModel.java,v 1.5 2008-02-14 07:13:29 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.tests
 * File : 	CompareModel.java
 * License : EPL

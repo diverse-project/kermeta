@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.11 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.12 2008-02-14 07:13:06 uid21732 Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -51,7 +51,6 @@ import org.osgi.framework.Bundle;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugModelPresentation;
-import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 
 /**
  * Action that is executed when user added a breakpoint
@@ -270,9 +269,9 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 	 * @return
 	 */
 	private String getFunctionAboveLine(IDocument document, int lineNumber) {
-		if (!(textEditor instanceof KMTEditor))
-			return null;
-		KermetaUnit mcunit = ((KMTEditor) textEditor).getMcunit();
+		//if (!(textEditor instanceof KMTEditor))
+		//	return null;
+		//KermetaUnit mcunit = ((KMTEditor) textEditor).getMcunit();
 		//KMTUnit mcunit = (KMTUnit)((KMTEditor)textEditor).getMcunit();
 		// Copied from EditorTextHover class
 		/*if (mcunit != null && mcunit.getMctAST() != null) {

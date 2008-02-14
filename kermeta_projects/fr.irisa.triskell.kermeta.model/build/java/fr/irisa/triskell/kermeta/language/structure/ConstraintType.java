@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintType.java,v 1.4 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: ConstraintType.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraintType()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Enumeration liting the different kinds of constraints\n \052/'"
  * @generated
  */
 public enum ConstraintType implements Enumerator

@@ -1,11 +1,11 @@
-/* $Id: 025_weaving_in_kermeta_aspect7.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $ */
+/* $Id: 025_weaving_in_kermeta_aspect7.kmt,v 1.2 2008-02-14 07:13:30 uid21732 Exp $ */
 
 // Type checking of kermeta weavinf
 
 package weavinginvalidtest7;
 
 require kermeta
-require "025_weaving_in_kermeta_aspect7/025_weaving_in_kermeta_aspect7_baseClass.kmt"
+require "025_weaving_in_kermeta_aspect7/025_weaving_in_kermeta_aspect7.kmt"
 
 using kermeta::standard
 

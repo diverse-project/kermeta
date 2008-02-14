@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinition.java,v 1.6 2007-08-07 13:35:03 ftanguy Exp $
+ * $Id: TypeDefinition.java,v 1.7 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -18,12 +18,11 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition#isIsAspect <em>Is Aspect</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition#getBaseAspects <em>Base Aspects</em>}</li>
  * </ul>
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeDefinition()
- * @model
+ * @model annotation="GenModel documentation='/**\n * This boolean allows to tell if this Type definition is an aspect or not\n * If it is an aspect, then at runtime, its definition will be merged with the definition of another\n * TypeDefinition that has exactly the same qualified name\n \052/'"
  * @generated
  */
 public interface TypeDefinition extends NamedElement {
@@ -59,21 +58,5 @@ public interface TypeDefinition extends NamedElement {
 	 * @generated
 	 */
 	void setIsAspect(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Base Aspects</b></em>' reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Base Aspects</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Base Aspects</em>' reference list.
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeDefinition_BaseAspects()
-	 * @model
-	 * @generated
-	 */
-	EList<TypeDefinition> getBaseAspects();
 
 } // TypeDefinition

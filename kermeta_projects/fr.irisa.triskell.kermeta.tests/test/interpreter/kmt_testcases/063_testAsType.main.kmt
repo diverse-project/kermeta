@@ -75,6 +75,7 @@ class TestAsType inherits kermeta::kunit::TestCase {
 	
 	operation testAsType5() : Boolean is do
 		var o : Object init "toto"
+		stdio.write("")
 		o.asType(String) + "titi"
 		result := void
 	end

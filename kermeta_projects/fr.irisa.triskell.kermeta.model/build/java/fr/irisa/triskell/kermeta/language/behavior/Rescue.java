@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Rescue.java,v 1.5 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: Rescue.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRescue()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Refers to rescue exception block\n \052/'"
  * @generated
  */
 public interface Rescue extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -46,6 +46,7 @@ public interface Rescue extends fr.irisa.triskell.kermeta.language.structure.Obj
 	 * @return the value of the '<em>Body</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRescue_Body()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * Body of the rescue block, specified as a KerMeta expression\n \052/'"
 	 * @generated
 	 */
 	EList<Expression> getBody();
@@ -62,6 +63,7 @@ public interface Rescue extends fr.irisa.triskell.kermeta.language.structure.Obj
 	 * @see #setExceptionType(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRescue_ExceptionType()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * Type of the cathed exception\n \052/'"
 	 * @generated
 	 */
 	TypeReference getExceptionType();
@@ -88,6 +90,7 @@ public interface Rescue extends fr.irisa.triskell.kermeta.language.structure.Obj
 	 * @see #setExceptionName(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRescue_ExceptionName()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * Name of the catched exception\n \052/'"
 	 * @generated
 	 */
 	String getExceptionName();

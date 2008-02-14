@@ -1,4 +1,4 @@
-/* $Id: CallableOperation.java,v 1.9 2007-10-01 15:14:43 ftanguy Exp $
+/* $Id: CallableOperation.java,v 1.10 2008-02-14 07:13:16 uid21732 Exp $
  * Project : Kermeta (First iteration)
  * File : CallableOperation.java
  * License : EPL
@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -34,7 +35,7 @@ public class CallableOperation extends CallableElement {
     /**
      * The type on wich the operation can be called
      */
-    protected fr.irisa.triskell.kermeta.language.structure.Class fclass;
+    protected Class fclass;
 
     /**
      * The operation
@@ -44,7 +45,7 @@ public class CallableOperation extends CallableElement {
     /**
      * Constructor
      */
-    public CallableOperation(Operation op, fr.irisa.triskell.kermeta.language.structure.Class type) {
+    public CallableOperation(Operation op, Class type) {
         super();
         operation = op;
         fclass = type;
@@ -159,11 +160,11 @@ public class CallableOperation extends CallableElement {
         return operation.getName();
     }
 
-    public fr.irisa.triskell.kermeta.language.structure.Class getFclass() {
+    public Class getFclass() {
         return fclass;
     }
 
-    public void setFclass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
+    public void setFclass(Class fclass) {
         this.fclass = fclass;
     }
 

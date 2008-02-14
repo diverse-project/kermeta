@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.18 2008-01-28 09:57:55 dvojtise Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.19 2008-02-14 07:13:17 uid21732 Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.KermetaUnit;
 
@@ -29,8 +30,8 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -62,17 +63,14 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	
 	protected List messages; 
 
-	private IProgressMonitor monitor;
-	
 	/*public KermetaConstraintChecker()
 	{
 		messages = new ArrayList();
 	}*/
 	
-	public KermetaConstraintChecker(KermetaUnit kunit, IProgressMonitor monitor)
+	public KermetaConstraintChecker(KermetaUnit kunit)
 	{
 		builder = kunit;
-		this.monitor = monitor;
 	}
 	
 
@@ -85,29 +83,22 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
     	if ( ! builder.isConstraintChecked() ) {
     		builder.lock();
     		new RequireConstraint(builder).check();
-    		Iterator<TypeDefinition> it = TypeDefinitionSearcher.getInternalTypesDefinition(builder).iterator();
-    		// Call the check constraint visitor on it!
-    		while(it.hasNext()) {
-	    			
-    			if ( monitor.isCanceled() )
-    				return;
-    			
-    			TypeDefinition td = it.next();
+    		
+    		for ( TypeDefinition td : KermetaUnitHelper.getInternalTypeDefinitions(builder) )
     			this.accept(td);
-    		}
+
     		builder.setConstraintChecked(true);
+
+        	for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(builder) ) {
+        		if ( ! importedUnit.isConstraintChecked() && ! importedUnit.isErroneous() ) {
+        			KermetaConstraintChecker t = new KermetaConstraintChecker(importedUnit);
+        			t.checkUnit();
+        		}
+        	}
+        	builder.unlock();
+    	
     	}
 
-    	if ( monitor.isCanceled() )
-    		return;
-    	
-    	for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(builder) ) {
-    		if ( ! importedUnit.isConstraintChecked() ) {
-    			KermetaConstraintChecker t = new KermetaConstraintChecker(importedUnit, monitor);
-    			t.checkUnit();
-    		}
-    	}
-    	builder.unlock();
     }
 	
 	/**
@@ -121,6 +112,11 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	public Object visitClassDefinition(ClassDefinition class_definition) {
 		//current_class = class_definition;
 		current_class = class_definition;
+		// check for inheritance cycles
+		if ( ClassDefinitionHelper.isSuperClassOf( current_class, current_class)) {
+			builder.error("Cycle in the inheritance tree - The type hierachy of class '" + current_class.getName()+"' is inconsistant.", builder.getNodeByModelElement(current_class));
+			return false;
+		}
 		return super.visitClassDefinition(class_definition);
 	}
 		/**
@@ -131,15 +127,17 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	 */
 	public Object visitConstraint(Constraint node) {
 		current_constraint = node;
+		//Boolean result = false;
 		// stereotype = Constraint implies container is a ClassDefinition
 		if ((node.getStereotype() == ConstraintType.INV_LITERAL && node.eContainer() instanceof ClassDefinition) ||
 				(node.getStereotype()== ConstraintType.PRE_LITERAL && isPre(node)) ||
 				(node.getStereotype()== ConstraintType.POST_LITERAL && isPost(node)))
 		{
-			// nothing to do
+			//result = true;
 		}else{
 			addProblem(CONSTRAINT_ERROR, node);
 		}
+		//return result;
 		return super.visitConstraint(node);
 	}
 /**

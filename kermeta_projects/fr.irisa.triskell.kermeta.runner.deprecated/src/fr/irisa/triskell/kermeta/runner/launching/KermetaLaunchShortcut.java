@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.25 2007-10-12 09:11:19 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.26 2008-02-14 07:13:07 uid21732 Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -31,11 +31,12 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
-import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.checker.KermetaUnitChecker;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
@@ -274,7 +275,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 		
 		try {
 			unit = KermetaUnitChecker.check(ifile);
-		} catch (KermetaIOFileNotFoundException e1) {
+		} catch (NotRegisteredURIException e1) {
 			e1.printStackTrace();
 		} catch (URIMalformedException e1) {
 			e1.printStackTrace();

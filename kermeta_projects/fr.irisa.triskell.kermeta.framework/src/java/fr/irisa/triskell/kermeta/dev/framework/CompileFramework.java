@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.16 2007-11-29 14:05:13 dvojtise Exp $
+/* $Id: CompileFramework.java,v 1.17 2008-02-14 07:13:37 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.framework
 * File : CompileFramework.java
 * License : EPL
@@ -9,16 +9,16 @@
 */ 
 package fr.irisa.triskell.kermeta.dev.framework;
 
-import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 
 /**
@@ -31,20 +31,18 @@ public class CompileFramework {
 
     	IOPlugin.LOCAL_USE = true;
     	IOPlugin.FRAMEWORK_GENERATION = true;
+    	LoaderPlugin.setFrameworkGeneration(true);
     	@SuppressWarnings("unused")
 		IOPlugin ioPlugin = IOPlugin.getDefault();
     	
     	KermetaUnit kermetaUnit = null;
-    	try {
-			kermetaUnit = KermetaUnitChecker.check("platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt");
-		} catch (KermetaIOFileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (URIMalformedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        
+//    	kermetaUnit = LoaderPlugin.getDefault().load("platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt", null);
+    	kermetaUnit = LoaderPlugin.getDefault().getFramework();
+    	
+    	kermetaUnit.setFramework(false);
+    	for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) )
+    		unit.setFramework(false);
+    	
         if ( kermetaUnit.isIndirectlyErroneous() ) {
         	System.err.println("Standard library contains type errors:");
         	System.err.println( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit) );

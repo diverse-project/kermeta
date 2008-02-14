@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.13 2008-02-04 10:54:41 ftanguy Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.14 2008-02-14 07:13:42 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -49,6 +49,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -60,6 +61,7 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -169,7 +171,11 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 					String input = "";
 					int index = offset -1;
 					c = viewer.getDocument().getChar(index);
-					while ( ! Character.isWhitespace(c) && (c != '|') ) {
+					/*if ( c == '.' ) {
+						index--;
+						c = viewer.getDocument().getChar(index);
+					}*/
+					while ( ! Character.isWhitespace(c) && (c != '|') && (c != '(') ) {
 						input = c + input;
 						index--;
 						c = viewer.getDocument().getChar(index);
@@ -532,7 +538,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		getAbstractOperationProposal(proposals, offset, stringToMatch);
 		
 		List<KermetaCompletionProposal> methodsProposals = new ArrayList<KermetaCompletionProposal> ();		
-		for ( Operation op : ClassDefinitionHelper.getAllOperations(cd) ) {
+		for ( Operation op : KermetaModelHelper.ClassDefinition.getAllOperations(cd) ) {
 			if ( ! cd.getOwnedOperation().contains(op) && ! NamedElementHelper.getQualifiedName( (NamedElement) op.eContainer() ).matches("kermeta::reflection.+") ) {
 				String regex = stringToMatch + ".+";
 				if ( op.getName().matches(regex) ) {
@@ -740,7 +746,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		 * 
 		 */
 		List<KermetaCompletionProposal> temp = new ArrayList<KermetaCompletionProposal>();
-		for ( Property property : ClassDefinitionHelper.getAllProperties(cdef) ) {
+		for ( Property property : KermetaModelHelper.ClassDefinition.getAllProperties(cdef) ) {
 			String regex = stringToMatch.toLowerCase() + ".+";
 			if ( property.getName().toLowerCase().matches(regex) ) {
 				KM2KMTPrettyPrinter prettyprinter = new KM2KMTPrettyPrinter();
@@ -770,7 +776,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		 */
 		temp = new ArrayList<KermetaCompletionProposal>();
 		Map<String, Operation> processedOperations = new HashMap<String, Operation>();
-		for ( Operation operation : ClassDefinitionHelper.getAllOperations(cdef) ) {
+		for ( Operation operation : KermetaModelHelper.ClassDefinition.getAllOperations(cdef) ) {
 			if ( ! processedOperations.containsKey(operation.getName()) ) {
 				processedOperations.put(operation.getName(), operation);
 				String regex = stringToMatch.toLowerCase() + ".+";
@@ -951,7 +957,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			 * 
 			 */
 			if ( ! found ) {
-				Iterator<Property> iterator = ClassDefinitionHelper.getAllProperties(cdef).iterator();
+				Iterator<Property> iterator = KermetaModelHelper.ClassDefinition.getAllProperties(cdef).iterator();
 				while ( ! found && iterator.hasNext() ) {
 					Property currentProperty = iterator.next();
 					if ( currentProperty.getName().equals(s) ) {
@@ -973,7 +979,15 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 									cd = (ClassDefinition) kermetaUnit.getTypeDefinitionByName("kermeta::standard::Bag");
 								}
 							}
+							Class bindingType = StructureFactory.eINSTANCE.createClass();
+							bindingType.setTypeDefinition( ((Class) currentProperty.getType()).getTypeDefinition() );
 							c.setTypeDefinition(cd);
+							
+							TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
+							binding.setType(bindingType);
+							binding.setVariable(cd.getTypeParameter().get(0));
+							c.getTypeParamBinding().add(binding);
+							
 							currentType = c;
 						} else
 							currentType = currentProperty.getType();
@@ -988,7 +1002,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			 * 
 			 */
 			if ( ! found ) {
-				Iterator<Operation> iterator = ClassDefinitionHelper.getAllOperations(cdef).iterator();
+				Iterator<Operation> iterator = KermetaModelHelper.ClassDefinition.getAllOperations(cdef).iterator();
 				while ( ! found && iterator.hasNext() ) {
 					Operation currentOperation = iterator.next();
 					if ( currentOperation.getName().equals(s) ) {
@@ -1070,10 +1084,12 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			Conditional conditional = (Conditional) e;
 			TextReference thenReference = editor.getKermetaUnit().getTracer().getFirstTextReference( conditional.getThenBody() );
 			TextReference elseReference = editor.getKermetaUnit().getTracer().getFirstTextReference( conditional.getElseBody() );
-			if ( (thenReference.getCharBeginAt() < offset-lengthBlank) && (thenReference.getCharEndAt() > offset-lengthBlank) )
+			if ( thenReference != null && elseReference == null )
+				e = conditional.getThenBody();
+			/*if ( (thenReference.getCharBeginAt() < offset-lengthBlank) && (thenReference.getCharEndAt() > offset-lengthBlank) )
 				e = conditional.getThenBody();
 			else if ( (elseReference != null) && (elseReference.getCharBeginAt() < offset-lengthBlank) && (elseReference.getCharEndAt() > offset-lengthBlank) )
-				e = conditional.getElseBody();
+				e = conditional.getElseBody();*/
 		} else if ( e instanceof Loop ) {
 			e = ((Loop) e).getBody();
 		} else

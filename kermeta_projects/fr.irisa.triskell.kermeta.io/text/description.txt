@@ -27,13 +27,14 @@ Package io <http://io>
     Reference typeDefinitionCache : TypeDefinitionCache<<1..1>>
     Reference kermetaUnitRequires : KermetaUnitRequire<<0..*>>
     Attribute locked : EBoolean
+    Attribute baseAspects : EMap
     Operation load() : void
     Operation addInternalPackage(EString) : Package
     Operation addInternalPackage(EString, EString) : Package
     Operation findInternalpackage(EString) : Package
     Operation addRequire(EString, KermetaUnit) : Require
     Operation addUsing(EString) : Using
-    Operation getRequires() : String<<0..*>>
+    Operation getRequires() : EString<<0..*>>
     Operation importKermetaUnit(KermetaUnit, EBoolean, EBoolean<<1..1>>) : void
     Operation addExternalPackage(Package) : void
     Operation getPackages() : Package<<0..*>>
@@ -41,7 +42,7 @@ Package io <http://io>
     Operation getExternalPackages() : Package<<0..*>>
     Operation getTypeDefinitionByName(EString) : TypeDefinition
     Operation getTypeDefinitionByQualifiedName(EString) : TypeDefinition
-    Operation getInternalTypeDefinitionByName(EString) : TypeDefinition
+    Operation getInternalTypeDefinitionByName(String) : TypeDefinition
     Operation getPackages(EString) : Package<<0..*>>
     Operation getInternalPackage(EString) : Package
     Operation getExternalPackage(EString) : Package<<0..*>>
@@ -53,19 +54,21 @@ Package io <http://io>
     Operation storeTrace(Object, EJavaObject) : void
     Operation getModelElementByNode(EJavaObject) : Object
     Operation getNodeByModelElement(Object) : EJavaObject
-    Operation getUsings() : String<<0..*>>
+    Operation getUsings() : EString<<0..*>>
     Operation error(EString, EJavaObject) : void
     Operation isWarned() : EBoolean
     Operation parsingError(ANTLRException) : void
     Operation warning(EString, EJavaObject) : void
     Operation finalize() : void
-    Operation getUniquePackageQualifiedNames() : String<<0..*>>
+    Operation getUniquePackageQualifiedNames() : EString<<0..*>>
     Operation addTypeDefinition(TypeDefinition, TypeDefinitionContainer) : void
     Operation getTypeDefinitionByName(EString, IProgressMonitor) : TypeDefinition
     Operation getTypeDefinitionByQualifiedName(EString, IProgressMonitor) : TypeDefinition
     Operation isIndirectlyErroneous() : EBoolean
     Operation lock() : void
     Operation unlock() : void
+    Operation fillTypeDefinitionCache() : void
+    Operation copy() : KermetaUnit
 
   Class IBuildingState
 
@@ -107,7 +110,6 @@ Package io <http://io>
     Attribute externalSearchAuthorized : EBoolean<<1..1>>
     Operation getTypeDefinitionByName(EString) : TypeDefinition
     Operation getTypeDefinitionByQualifiedName(EString) : TypeDefinition
-    Operation getInternalTypeDefinitionByQualifiedName(EString) : TypeDefinition
     Operation addTypeDefinition(EString, TypeDefinition) : void
     Operation getTypeDefinitionByName(EString, IProgressMonitor) : TypeDefinition
     Operation getTypeDefinitionByQualifiedName(EString, IProgressMonitor) : TypeDefinition

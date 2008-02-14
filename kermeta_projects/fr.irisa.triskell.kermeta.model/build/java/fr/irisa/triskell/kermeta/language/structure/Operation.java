@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Operation.java,v 1.6 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: Operation.java,v 1.7 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -54,6 +54,7 @@ public interface Operation extends MultiplicityElement {
 	 * @see #setBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Body()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Body of the Operation, expressed as a KerMeta expression\n \052/'"
 	 * @generated
 	 */
 	Expression getBody();
@@ -79,7 +80,7 @@ public interface Operation extends MultiplicityElement {
 	 * @return the value of the '<em>Super Operation</em>' reference.
 	 * @see #setSuperOperation(Operation)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_SuperOperation()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Super-operation of the Operation, if any\n \052/\t'"
 	 * @generated
 	 */
 	Operation getSuperOperation();
@@ -108,6 +109,7 @@ public interface Operation extends MultiplicityElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_OwningClass()
 	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedOperation
 	 * @model opposite="ownedOperation" transient="false"
+	 *        annotation="GenModel documentation='/**\n * ClassDefinition owning the Operation\n \052/'"
 	 * @generated
 	 */
 	ClassDefinition getOwningClass();
@@ -133,7 +135,7 @@ public interface Operation extends MultiplicityElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Parameter</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_TypeParameter()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * TypeParameters of the Operation\n \052/'"
 	 * @generated
 	 */
 	EList<TypeVariable> getTypeParameter();
@@ -149,7 +151,7 @@ public interface Operation extends MultiplicityElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Raised Exception</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_RaisedException()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Exceptions raised by the Operation\n \052/'"
 	 * @generated
 	 */
 	EList<Type> getRaisedException();
@@ -168,6 +170,7 @@ public interface Operation extends MultiplicityElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_OwnedParameter()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Parameter#getOperation
 	 * @model opposite="operation" containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Parameters of the Operation\n \052/\n'"
 	 * @generated
 	 */
 	EList<Parameter> getOwnedParameter();
@@ -186,6 +189,7 @@ public interface Operation extends MultiplicityElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Pre()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner
 	 * @model opposite="preOwner" containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Pre-conditions of the Operation\n \052/'"
 	 * @generated
 	 */
 	EList<Constraint> getPre();
@@ -204,6 +208,7 @@ public interface Operation extends MultiplicityElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Post()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner
 	 * @model opposite="postOwner" containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Post-conditions of the Operation\n \052/'"
 	 * @generated
 	 */
 	EList<Constraint> getPost();
@@ -220,6 +225,7 @@ public interface Operation extends MultiplicityElement {
 	 * @see #setIsAbstract(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_IsAbstract()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Boolean stating whether the Operation is abstract\n \052/'"
 	 * @generated
 	 */
 	boolean isIsAbstract();

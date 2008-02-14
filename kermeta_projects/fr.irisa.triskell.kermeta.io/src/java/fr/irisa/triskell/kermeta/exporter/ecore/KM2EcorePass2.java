@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.51 2008-01-23 14:12:50 cfaucher Exp $
+/* $Id: KM2EcorePass2.java,v 1.52 2008-02-14 07:13:20 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass2.java
  * License    : EPL
@@ -16,7 +16,6 @@ package fr.irisa.triskell.kermeta.exporter.ecore;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
-
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAttribute;
@@ -61,9 +60,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.loader.ecore.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TextTabs;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
@@ -82,7 +79,6 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 public class KM2EcorePass2 extends KM2Ecore {
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass2");
-	protected TextTabs loggerTabs =  new TextTabs("   ","");
 	
 	protected Package currentPackage;
 	
@@ -145,8 +141,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 	public Object visitClassDefinition(ClassDefinition node) {
 		
 		EClass newEClass = null;
-		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ node.getName());
-		loggerTabs.increment();
+		internalLog.debug("Visiting ClassDefinition: "+ node.getName());
 		
 		// Search the Eclass from the pass 1
 		newEClass = (EClass) km2ecoremapping.get(node);
@@ -208,7 +203,6 @@ public class KM2EcorePass2 extends KM2Ecore {
 			setTypeParameterSuperType(next);
 		}
 		
-		loggerTabs.decrement();
 		return newEClass;
 	}
 	
@@ -217,8 +211,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 	 * @see KermetaOptimizedVisitor#visitOperation(Operation)
 	 */
 	public Object visitOperation(Operation node) {
-		internalLog.debug(loggerTabs + "Visiting Operation: "+ node.getName());
-		loggerTabs.increment();
+		internalLog.debug("Visiting Operation: "+ node.getName());
 		// Search the EOperation from pass 1
 		EOperation newEOperation = getEObjectForOperation(node);
 		
@@ -325,7 +318,6 @@ public class KM2EcorePass2 extends KM2Ecore {
 			setTypeParameterSuperType(next);
 		}
 		
-		loggerTabs.decrement();
 		return newEOperation;
 	}
 	
@@ -360,7 +352,67 @@ public class KM2EcorePass2 extends KM2Ecore {
 			}
 		}
 		else {
-			type = (EClassifier)accept(paramType);
+			if(node.getType() != null) {
+				
+				EGenericType genericType = EcoreFactory.eINSTANCE.createEGenericType();
+				EClassifier c = (EClassifier) this.accept( node.getType() );
+				if ( c == null )
+					newEParameter.setEType( null );
+				else {
+					genericType.setEClassifier( c );
+					newEParameter.setEGenericType( genericType );
+				}
+					
+				if ( node.getType() instanceof Class ) {
+				
+					for ( TypeVariableBinding tvb : ((Class) node.getType()).getTypeParamBinding() ) {
+					
+						TypeVariable tv = null;
+						TypeDefinition tdef = null;
+						if ( tvb.getType() instanceof Class ) {
+							tdef = ((Class) tvb.getType()).getTypeDefinition();
+						} else if ( tvb.getType() instanceof PrimitiveType ) {
+							tdef = (PrimitiveType) tvb.getType();
+						} else {
+							
+							Iterator<TypeVariable> it = ((Operation) node.eContainer()).getTypeParameter().iterator();
+							while ( (tv == null) && it.hasNext() ) {
+								TypeVariable temp = it.next();
+								if ( temp.getName().equals( ((ObjectTypeVariable) tvb.getType()).getName() ) )
+									tv = temp;
+							}
+							
+							if ( tv == null ) {
+								it = ((ClassDefinition) node.eContainer().eContainer()).getTypeParameter().iterator();
+								while ( (tv == null) && it.hasNext() ) {
+									TypeVariable temp = it.next();
+									if ( temp.getName().equals( ((ObjectTypeVariable) tvb.getType()).getName() ) )
+										tv = temp;
+								}	
+							}
+
+						}
+
+						EGenericType gtype = EcoreFactory.eINSTANCE.createEGenericType();
+
+						if ( tv != null ) {
+							gtype.setETypeParameter( (ETypeParameter) km2ecoremapping.get(tv) );
+						} else if ( tdef != null ) {
+							gtype.setEClassifier( (EClassifier) km2ecoremapping.get(tdef) );
+						}
+						
+						genericType.getETypeArguments().add( gtype );
+						
+					}
+					
+				}
+				
+/*				if(opType instanceof ParameterizedType) {
+					setTypeVariableBindingsAnnotation((ParameterizedType) opType, newEOperation);
+				}*/
+			}
+			
+			/*type = (EClassifier)accept(paramType);
 			
 			if (type == null ) { 
 				// null type forbidden for parameter type
@@ -373,7 +425,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 					setTypeVariableBindingsAnnotation((ParameterizedType) paramType, newEParameter);
 				}
 			}
-			newEParameter.setEType(type);
+			newEParameter.setEType(type);*/
 		}
 
 		return newEParameter;
@@ -426,8 +478,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 	 */
 	public Object visitProperty(Property node) {
 	
-		internalLog.debug(loggerTabs + "Visiting Property: "+ node.getName());
-		loggerTabs.increment();
+		internalLog.debug("Visiting Property: "+ node.getName());
 				
 		EStructuralFeature newEStructuralFeature = null;
 		EReference newEReference = null;
@@ -548,7 +599,6 @@ public class KM2EcorePass2 extends KM2Ecore {
 			}
 		}
 		
-		loggerTabs.decrement();		
 		return newEStructuralFeature;
 	}
 
@@ -653,7 +703,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 			EClassifier newEClassifier = primitiveTypesMappingForIndependency.get(node);
 			if (newEClassifier ==  null) {
 				if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
-					internalLog.debug(loggerTabs + "Creating DataType: "+ node.getName());
+					internalLog.debug("Creating DataType: "+ node.getName());
 					type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
 					// we need to create a new datatype for it and connect it to the root package
 					newEClassifier = EcoreModelHelper.EDataType.create(node.getName(), type_name);
@@ -674,7 +724,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 					type_name = KM2Ecore.types_mapping.get(type_name);
 				}
 				if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
-					internalLog.debug(loggerTabs + "Creating DataType: "+ node.getName());
+					internalLog.debug("Creating DataType: "+ node.getName());
 					type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
 					// we need to create a new datatype for it and connect it to the root package
 					newEClassifier = EcoreModelHelper.EDataType.create(node.getName(), type_name);
@@ -843,45 +893,6 @@ public class KM2EcorePass2 extends KM2Ecore {
 		return result;
 	}
 	
-	
-	/**
-	 * Write ecore : launches the KM2Ecore exporter and save it in "file"
-	 * TODO Since this method is called in JunitTestSuite, in Kermeta2EcoreWizard, and many other
-	 * files, it should be shared elsewhere... 
-	 * @param builder
-	 * @param file
-	 * @param overwrite overxrite file if already exists
-	 * @return the resource that hosts the wanted ecore file
-	 */
-	// FIXME (Fran�ois) I am not sure that this method should be here. I copied this method in KM2Ecore class as a
-	// a static class.
-	/*public Resource writeEcore(KermetaUnit builder, String file, boolean overwrite)
-	{   
-	    // Create Ecore structure
-	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
-	    URI u = URI.createURI(file);
-    	URIConverter c = new URIConverterImpl();
-    	u = c.normalize(u);
-    	Resource resource = ecoreResourceSet.createResource(u);
-	    // KMT2ECORE
-	    KM2Ecore exporter;
-	    exporter = new KM2Ecore(resource, builder);
-		exporter.exportPackage(builder.rootPackage);
-	    // Save Ecore structure	
-		try {
-			// TODO : test if file exists!! -> u.toFileString() reutrns null :(
-			if (overwrite==true)
-				resource.save(null);
-			savedFiles.put(file, resource); // add the file so that we avoid re-save of resources
-		} catch (IOException e) {
-			KermetaUnit.internalLog.error("cannot save ecore ressource, due to Exception: "+ e.getMessage(), e);
-			throw new Error("Cannot save ecore ressource (" + file + "), due to Exception: ", e);
-		}
-
-		return resource;
-	}*/
-	
-
 	/** 
 	 * @param name the name of the derived property
 	 * @param acc_type the type  of the accessor ("getter"/"setter") 

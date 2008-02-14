@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.29 2008-01-23 10:49:47 cfaucher Exp $
+/* $Id: Ecore2KMPass2.java,v 1.30 2008-02-14 07:13:16 uid21732 Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -31,8 +31,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
+import fr.irisa.triskell.kermeta.exporter.ecore.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -49,7 +51,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
+
 /**
  * 
  * Setting the types of parameters, properties, operations, supertypes.
@@ -89,8 +91,7 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		 * 
 		 */
 		String ecoreQualifiedName = EcoreHelper.getQualifiedName(node);
-		if ( ! ecoreQualifiedName.matches("kermeta::reflection.+") 
-				&& ! ecoreQualifiedName.equals("kermeta::language::structure::Object")
+		if ( ! ecoreQualifiedName.equals("kermeta::language::structure::Object")
 				&& ! ecoreQualifiedName.equals("kermeta::language::structure::KMStructureVisitable")
 				&& ! ecoreQualifiedName.equals("kermeta::language::behavior::KMExpressionVisitable")) {
 		
@@ -108,6 +109,7 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 			context.addTypeVar(tv);
 		
 		acceptList( node.getETypeParameters() );
+		System.out.println( node.getName());
 		acceptList( node.getEAttributes() );
 		acceptList( node.getEOperations() );
 		acceptList( node.getEReferences() );
@@ -179,7 +181,7 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 	
 	@Override
 	public Object visit(EParameter node) {
-		Parameter param = OperationHelper.getParameter(currentOperation, node.getName() );
+		Parameter param = KermetaModelHelper.Operation.getParameter(currentOperation, node.getName() );
 		// Set its type
 		//Type t = createTypeForEClassifier(node.getEType(), node);
 		Type t = createType(node.getEType(), node.getEGenericType(), node);
@@ -263,7 +265,7 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		}
 		
 		if ( type == null ) {
-			kermetaUnit.warning("The type " + type_name + "is not handled by Kermeta. It has been mapped to Object");
+			kermetaUnit.warning("The type " + type_name + " is not handled by Kermeta. It has been mapped to Object");
 			type = kermetaUnit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object", monitor);
 			Type t = createInstanceTypeForTypeDefinition(type);
 			result.setInstanceType(t);			
@@ -349,6 +351,7 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 			}*/
 			//t = createTypeForEClassifier(node.getEType(), node);
 			currentProperty.setType(t);
+			t = createType(node.getEType(), node.getEGenericType(), node);
 		}
 		
 		EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS);
@@ -416,7 +419,7 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 			}
 			else
 			{
-				superop = (Operation)ClassDefinitionHelper.getOperationByName(cdef, currentOperation.getName()); 
+				superop = (Operation)KermetaModelHelper.ClassDefinition.getOperationByName(cdef, currentOperation.getName()); 
 				currentOperation.setSuperOperation(superop);
 			}
 		}
@@ -527,7 +530,7 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 				 * Let's see the type variables of the current operation.
 				 * 
 				 */
-				type = OperationHelper.getTypeVariable(currentOperation, genericType.getETypeParameter().getName());
+				type = KermetaModelHelper.Operation.getTypeVariable(currentOperation, genericType.getETypeParameter().getName());
 				/*
 				 * 
 				 * If no type variable found, Let's have a look into the class definition.

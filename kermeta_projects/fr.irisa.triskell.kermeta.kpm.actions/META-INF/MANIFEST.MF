@@ -10,5 +10,6 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.eclipse.util,
  org.eclipse.ui.views.properties.tabbed,
  fr.irisa.triskell.kermeta,
- org.apache.ant
+ org.apache.ant,
+ org.kermeta.io.loader
 Bundle-Vendor: IRISA/INRIA

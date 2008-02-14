@@ -1,14 +1,13 @@
+@uri "http://puzzle"
 package puzzle;
 
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "kermeta"
 abstract class Service
 {
 	attribute name : ecore::EString[1..1]
 
-	@overloadable "true"
 	operation call() : Void is
-		raise kermeta::exceptions::NotImplementedException.new
+		abstract
 
 }
 class RequiredService inherits Service
@@ -33,9 +32,8 @@ class Connector
 
 	attribute name : ecore::EString[1..1]
 
-	@overloadable "true"
 	operation deleguate() : Void is
-		raise kermeta::exceptions::NotImplementedException.new
+		abstract
 
 }
 abstract class Component
@@ -48,9 +46,8 @@ abstract class Component
 
 	reference owner : CompositeComponent#subComponent
 
-	@overloadable "true"
 	operation execute(service : ecore::EString) : Void is
-		raise kermeta::exceptions::NotImplementedException.new
+		abstract
 
 }
 class PrimtiveComponent inherits Component

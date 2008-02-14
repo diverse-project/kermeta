@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.39 2007-11-22 08:53:55 ftanguy Exp $
+ * $Id: collections.kmt,v 1.40 2008-02-14 07:13:38 uid21732 Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -399,7 +399,7 @@ class Set<G> inherits Collection<G>
 	 * Returns a Boolean stating whether the provided element is equal to
 	 * current Set
 	 */
-	method equals(element : kermeta::reflection::Object) : Boolean is do
+	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
 		if(not element.isVoid) then
 			if(Collection<G>.isInstance(element)) then
@@ -611,7 +611,7 @@ class Bag<G> inherits Collection<G>
 	 * Returns a Boolean stating whether the provided element is equal to
 	 * current Bag
 	 */
-	method equals(element : kermeta::reflection::Object) : Boolean is do
+	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
 		if(not element.isVoid) then
 			if(Collection<G>.isInstance(element)) then
@@ -906,7 +906,7 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 	 * Returns a Boolean stating whether the provided element is equal to
 	 * current OrderedCollection
 	 */
-	method equals(element : kermeta::reflection::Object) : Boolean is do
+	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
 		if (not element.isVoid) then
 			if(OrderedCollection<G>.isInstance(element)) then
@@ -1004,7 +1004,7 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 	/**
 	 * See OrderedCollection<G>.equals(Object) 
 	 */
-	method equals(element : kermeta::reflection::Object) : Boolean from OrderedCollection is do
+	method equals(element : Object) : Boolean from OrderedCollection is do
 		result := super(element)
 	end
 	
@@ -1119,7 +1119,7 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 	 * Returns a Boolean stating whether the provided element is equal to
 	 * current Sequence	
 	 */
-	method equals(element : kermeta::reflection::Object) : Boolean from OrderedCollection is do
+	method equals(element : Object) : Boolean from OrderedCollection is do
 		result := super(element)
 	end
 	

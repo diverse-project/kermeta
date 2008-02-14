@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.18 2007-12-03 15:57:19 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.19 2008-02-14 07:13:24 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -335,34 +336,21 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated NOT
 	 */
 	public void receiveEvent(String event, boolean synchrone, Map<String, Object> args, IProgressMonitor monitor) {
-		
-		if ( monitor == null )
-			monitor = new NullProgressMonitor();
-		
-		try {
-			monitor.beginTask("Processing Rules", getRules().size());
-		
-			IFile file = ResourceHelper.getIFile( getValue() );
-			KermetaUnit kermetaUnit = null;
-			if ( file != null )
-				kermetaUnit = IOPlugin.getDefault().findKermetaUnit(file);
-				if ( kermetaUnit != null )
-					kermetaUnit.setLocked(true);
-			
-			for ( Rule currentRule : (List <Rule>) getRules() ) {
-				Event currentEvent = currentRule.getEvent();
-				if ( currentEvent.equals(event) ) {
-					EventMonitor.monitor(this, currentEvent, monitor);
-					currentRule.process(this, synchrone, args, new SubProgressMonitor(monitor, 1) );
-					EventMonitor.stopMonitor(this, currentEvent);
-				}
-			}
-			
+		IFile file = ResourceHelper.getIFile( getValue() );
+		KermetaUnit kermetaUnit = null;
+		if ( file != null )
+			kermetaUnit = IOPlugin.getDefault().findKermetaUnit(file);
 			if ( kermetaUnit != null )
-				kermetaUnit.setLocked(false);
-		} finally {
-			monitor.done();
+				kermetaUnit.setLocked(true);
+			
+		for ( Rule currentRule : (List <Rule>) getRules() ) {
+			Event currentEvent = currentRule.getEvent();
+			if ( currentEvent.equals(event) )
+				currentRule.process(this, synchrone, args, monitor);
 		}
+			
+		if ( kermetaUnit != null )
+			kermetaUnit.setLocked(false);
 	}
 
 	/**
@@ -455,6 +443,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated NOT
 	 */
 	public void receiveSynchroneEvent(String event, Map<String, Object> args, IProgressMonitor monitor) {
+		if ( args == null )
+			args = new HashMap<String, Object>();
 		receiveEvent(event, true, args, monitor);
 	}
 

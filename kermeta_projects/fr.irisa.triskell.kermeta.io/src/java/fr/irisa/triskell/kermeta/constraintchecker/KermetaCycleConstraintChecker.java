@@ -1,4 +1,4 @@
-/* $Id: KermetaCycleConstraintChecker.java,v 1.6 2007-10-23 12:19:39 dvojtise Exp $
+/* $Id: KermetaCycleConstraintChecker.java,v 1.7 2008-02-14 07:13:17 uid21732 Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -13,7 +13,6 @@ package fr.irisa.triskell.kermeta.constraintchecker;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.kermeta.io.KermetaUnit;
@@ -24,7 +23,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
@@ -93,17 +92,9 @@ public class KermetaCycleConstraintChecker {
      * cycle detection need a clean list of all nodes
      */
     public void buildNode(KermetaUnit u) {
-        
-        
-        Iterator<TypeDefinition> it = TypeDefinitionSearcher.getTypesDefinition(unit).iterator();
-        while(it.hasNext()) {
-            TypeDefinition td = it.next();
-            if (td instanceof ClassDefinition) {
-            	addNode(td);
-            	
-                //visitClassDefinition((ClassDefinition)td);               
-            }
-        }
+        for ( TypeDefinition td : KermetaUnitHelper.getTypeDefinitions(unit) )
+            if (td instanceof ClassDefinition)
+            	addNode(td);            	           
     }
     
     

@@ -3,6 +3,7 @@
 
 package Signature;
 
+require kermeta
 require "013_kermetaSignature/Signature.kmt"
 using kermeta::standard
 using kermeta::io

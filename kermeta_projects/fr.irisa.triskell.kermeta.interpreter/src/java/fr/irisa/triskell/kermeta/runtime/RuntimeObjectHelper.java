@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectHelper.java,v 1.7 2007-10-15 07:13:59 barais Exp $
+/* $Id: RuntimeObjectHelper.java,v 1.8 2008-02-14 07:13:57 uid21732 Exp $
  * Project   : Kermeta 
  * File      : RuntimeObjectHelper.java
  * License   : EPL
@@ -10,6 +10,7 @@
 package fr.irisa.triskell.kermeta.runtime;
 
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 
 import java.util.ArrayList;
 
@@ -100,7 +101,7 @@ public class RuntimeObjectHelper {
 	 * @return
 	 */
 	public static RuntimeObject getPropertyByName(RuntimeObject robject, String propertyName){
-		Property property = ClassDefinitionHelper.findPropertyByName((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) robject.getMetaclass().getKCoreObject()).getTypeDefinition(), propertyName);
+		Property property = KermetaModelHelper.ClassDefinition.getPropertyByName((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) robject.getMetaclass().getKCoreObject()).getTypeDefinition(), propertyName);
 		RuntimeObject roProperty = robject.getFactory().getMemory().getRuntimeObjectForFObject(property);
 		return roProperty;
 	}

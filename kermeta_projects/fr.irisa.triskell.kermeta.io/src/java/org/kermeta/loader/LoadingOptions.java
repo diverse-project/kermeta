@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingOptions.java,v 1.1 2007-10-12 09:14:48 ftanguy Exp $
+/*$Id: LoadingOptions.java,v 1.2 2008-02-14 07:13:18 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	LoadingOptions.java
 * License : EPL
@@ -36,6 +36,7 @@ public class LoadingOptions {
 	 * Constants for Km loading.
 	 * 
 	 */
+	static final public String INCLUDE_FRAMEWORK = "_INCLUDE_FRAMEWORK_";
 	
 	
 }

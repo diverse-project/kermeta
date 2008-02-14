@@ -1,4 +1,4 @@
-/* $Id: KMT2KMAdditiveExpressionBuilder.java,v 1.8 2008-01-04 14:17:24 dvojtise Exp $
+/* $Id: KMT2KMAdditiveExpressionBuilder.java,v 1.9 2008-02-14 07:13:16 uid21732 Exp $
  * Created on 6 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -8,17 +8,16 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.util.Hashtable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import org.eclipse.gymnast.runtime.core.ast.ASTNode;
-
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.parser.gen.ast.AdditiveExpression;
 import fr.irisa.triskell.kermeta.parser.gen.ast.AdditiveOp;
 import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.parser.gen.ast.MultiplicativeExpression;
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
-import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 
 
 /**

@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.7 2007-12-14 09:34:04 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.8 2008-02-14 07:13:32 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -13,26 +13,29 @@
 package fr.irisa.triskell.kermeta.launcher;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.kermeta.checker.KermetaUnitChecker;
-import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.merger.Merger;
+import java.util.Map;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
+
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.checker.KermetaUnitChecker;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.loader.LoadingOptions;
+import org.kermeta.merger.Merger;
+
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
@@ -63,6 +66,13 @@ public class RunJunitFactory implements Test {
 
     private KermetaUnit executable = null;
     
+    /**
+     * 
+     * Lazy initializer to get the kermeta unit to be given to the interpreter.
+     * This kermeta unit is constructed thanks to the merger.
+     * 
+     * @return
+     */
     public KermetaUnit getExecutable() {
     	if ( executable == null )
 			try {
@@ -71,11 +81,21 @@ public class RunJunitFactory implements Test {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
+			} catch (NotRegisteredURIException e) {
+				e.printStackTrace();
 			}
     	return executable;
     }
     
-    private void setExecutable() throws URIMalformedException, IOException {
+    /**
+     * 
+     * Constructing the kermeta unit to be executed. Done with the merger.
+     * 
+     * @throws URIMalformedException
+     * @throws IOException
+     * @throws NotRegisteredURIException
+     */
+    private void setExecutable() throws URIMalformedException, IOException, NotRegisteredURIException {
     	if ( executable == null ) {
     		KermetaUnit source = getUnit();
     		source.setLocked(true);
@@ -85,7 +105,7 @@ public class RunJunitFactory implements Test {
    			
    			Merger merger = new Merger();
    			String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
-	    	executable = KermetaUnitChecker.basicCheck( fileToExecute, this, new NullProgressMonitor() );
+	    	executable = KermetaUnitChecker.check( fileToExecute );
    		
 	    	source.setLocked(false);
    			
@@ -132,13 +152,21 @@ public class RunJunitFactory implements Test {
     	// precalculate the name of the test in the eventuality it fails before having loaded it
     	int index  = unit_uri.lastIndexOf("/");
     	String failedTestName = unit_uri.substring(index+1);
-        try {
-			unit = IOPlugin.getDefault().loadKermetaUnit( unit_uri, new NullProgressMonitor() );
-		} catch (KermetaIOFileNotFoundException e1) {
-			e1.printStackTrace();
-			theTestCase = new FailedTestCase(failedTestName, e1);
-            return theTestCase;
+        
+    	try {
+    		/*
+    		 * 
+    		 * Trying to load the file. If the load fails we catch the exceptions to add a fail test case.
+    		 * 
+    		 */
+    		Map<Object, Object> options = new HashMap<Object, Object>();
+    		options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
+    		unit = LoaderPlugin.getDefault().load( unit_uri, options );
 		} catch (URIMalformedException e) {
+			e.printStackTrace();
+			theTestCase = new FailedTestCase(failedTestName, e);
+            return theTestCase;
+		} catch (NotRegisteredURIException e) {
 			e.printStackTrace();
 			theTestCase = new FailedTestCase(failedTestName, e);
             return theTestCase;
@@ -146,7 +174,12 @@ public class RunJunitFactory implements Test {
     	
         try {
             
-        	KermetaTypeChecker typechecker = new KermetaTypeChecker( unit, new NullProgressMonitor() );
+        	/*
+        	 * 
+        	 * Typechecking the kermeta unit. If errors occurs create a fail test case.
+        	 * 
+        	 */
+        	KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
         	typechecker.checkUnit();
 
             if ( unit.isIndirectlyErroneous() ) {
@@ -161,7 +194,12 @@ public class RunJunitFactory implements Test {
                 return theTestCase;
             }
             
-        	KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit, new NullProgressMonitor() );
+            /*
+             * 
+             * Constraint checking the kermeta unit. If errors occurs create a fail test case.
+             * 
+             */
+        	KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit );
         	constraintchecker.checkUnit();
         
             if ( unit.isIndirectlyErroneous()) {
@@ -176,24 +214,19 @@ public class RunJunitFactory implements Test {
             	return theTestCase;
             }
             
-            // get the main class to see if it inherits from class kermeta::kunit::Test
-            isTestCase = false;
-            String main_class = null;
-            String main_operation = null;
-            Iterator<Tag> it = unit.getModelingUnit().getOwnedTags().iterator();
-            while(it.hasNext()) {
-                Tag tag = it.next();
-                if ( tag.getName() != null ) {
-                	if (tag.getName().equals("mainClass")) 
-                		main_class = tag.getValue(); 
-                	if (tag.getName().equals("mainOperation"))
-                		main_operation = tag.getValue(); //remove the " to memorize value
-                }
-            }
+
+            /*
+             * 
+             * Getting the entry point of the program.
+             * 
+             */
+            String main_class = ModelingUnitHelper.getMainClassValue(unit);
+            String main_operation = ModelingUnitHelper.getMainOperationValue(unit);
+            
             if (main_class != null) {
             	
                 ClassDefinition cd = (ClassDefinition)unit.getTypeDefinitionByName(main_class);                
-                if(cd != null){
+                if ( cd != null ) {
                 	ClassDefinition class_test = (ClassDefinition)unit.getTypeDefinitionByQualifiedName("kermeta::kunit::TestCase");
             
 	                SimpleType kunit_test_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(class_test));
@@ -359,13 +392,22 @@ public class RunJunitFactory implements Test {
     
     
     public void resetUnit(){
-     	
-    	IOPlugin.getDefault().unload(unit_uri);
+     	/*
+     	 * 
+     	 * Unloading the source.
+     	 * 
+     	 */
+    	LoaderPlugin.getDefault().unload(unit_uri);
     	
+    	/*
+    	 * 
+    	 * Unloading the executable if it exists.
+    	 * 
+    	 */
     	if ( executable != null ) {
         	String s = executable.getUri();
     		executable = null;
-    		IOPlugin.getDefault().unload( s );
+    		LoaderPlugin.getDefault().unload( s );
     	}
     	unit = null;
     }
@@ -377,13 +419,13 @@ public class RunJunitFactory implements Test {
 	public KermetaUnit getUnit() {
 		if(unit == null){
 			try {
-				unit = IOPlugin.getDefault().loadKermetaUnit( unit_uri, new NullProgressMonitor() );
-			} catch (KermetaIOFileNotFoundException e1) {
-				e1.printStackTrace();
+				unit = LoaderPlugin.getDefault().load( unit_uri, null );
 			} catch (URIMalformedException e) {
 				e.printStackTrace();
+			} catch (NotRegisteredURIException e) {
+				e.printStackTrace();
 			}
-			KermetaTypeChecker typechecker = new KermetaTypeChecker( unit, new NullProgressMonitor() );
+			KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
         	typechecker.checkUnit(); // make sure the types are correctly set
         	// we don't care about constraint checking since it has already be done before
 		}

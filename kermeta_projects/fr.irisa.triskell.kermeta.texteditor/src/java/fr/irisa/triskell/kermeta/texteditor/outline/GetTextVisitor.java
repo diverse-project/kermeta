@@ -1,4 +1,4 @@
-/* $Id: GetTextVisitor.java,v 1.13 2008-01-25 08:30:52 dvojtise Exp $
+/* $Id: GetTextVisitor.java,v 1.14 2008-02-14 07:13:43 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetTextVisitor.java
 * License : EPL
@@ -13,12 +13,15 @@
 
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -72,7 +75,7 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 		}
 		
 		// build the list of inherited classes using all aspects
-		Set <TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses( node );
+		Collection<TypeDefinition> baseClasses = KermetaModelHelper.ClassDefinition.getContext( node );
 		EList<Type> allSuperTypes = new BasicEList<Type>(node.getSuperType());
 		for ( TypeDefinition typeDefinition : baseClasses ) {	    	
 	    	if ( typeDefinition instanceof ClassDefinition ) {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanLiteral.java,v 1.4 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: BooleanLiteral.java,v 1.5 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBooleanLiteral()
- * @model
+ * @model annotation="GenModel documentation='/**\n * This expression is a literal representing a Boolean value, typically : true or false keyword\n \052/'"
  * @generated
  */
 public interface BooleanLiteral extends Literal {
@@ -43,6 +43,7 @@ public interface BooleanLiteral extends Literal {
 	 * @see #setValue(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBooleanLiteral_Value()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * The concrete value represented by this literal\n \052/'"
 	 * @generated
 	 */
 	boolean isValue();

@@ -1,4 +1,4 @@
-/* $Id: KermetaScanner.java,v 1.1 2007-12-17 14:05:07 ftanguy Exp $
+/* $Id: KermetaScanner.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KMTCommentScanner.java
 * License : EPL
@@ -16,9 +16,6 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.PatternRule;
 import org.eclipse.jface.text.rules.Token;
 
-import fr.irisa.triskell.kermeta.texteditor.scanners.KMTTextAttributeProvider;
-import fr.irisa.triskell.kermeta.texteditor.scanners.KeywordRule;
-
 /**
  * @author ftanguy
  */
@@ -29,10 +26,10 @@ public class KermetaScanner extends BufferedRuleBasedScanner {
 		IToken stringToken = new Token( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.STRING_ATTRIBUTE ) );
 		IRule stringRule = new PatternRule("\"", "\"", stringToken, '\\', false, false, true);
 		
+		IRule rule = new KeywordRule();
+		
 		IToken token = new Token ( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.UNDEFINED_ATTRIBUTE ) );
 		setDefaultReturnToken(token);
-		
-		IRule rule = new KeywordRule();
 		
 		setRules( new IRule[] {stringRule, rule} );
 		

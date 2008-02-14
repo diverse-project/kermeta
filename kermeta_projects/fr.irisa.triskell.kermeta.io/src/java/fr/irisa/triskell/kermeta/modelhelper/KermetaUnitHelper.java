@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.11 2008-02-06 09:38:24 dvojtise Exp $
+/*$Id: KermetaUnitHelper.java,v 1.12 2008-02-14 07:13:18 uid21732 Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -20,13 +20,16 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.ErrorMessage;
+import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.Message;
+import org.kermeta.io.TypeDefinitionCache;
+import org.kermeta.io.TypeDefinitionCacheEntry;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
@@ -218,41 +221,6 @@ public class KermetaUnitHelper {
 		return result;
 	}
 	
-	public static EList<TypeDefinition> getAspects(KermetaUnit kermetaUnit, TypeDefinition typeDefinition) {
-		EList<TypeDefinition> result = new UniqueEList<TypeDefinition> ();
-		if ( kermetaUnit != null ) {
-			List<KermetaUnit> processedUnits = new ArrayList<KermetaUnit> ();
-			getAspects(kermetaUnit, typeDefinition, processedUnits, result);
-		}
-		return result;
-	}
-	
-	private static void getAspects(KermetaUnit kermetaUnit, TypeDefinition typeDefinition, List<KermetaUnit> processedUnits, List<TypeDefinition> result) {
-		
-		if ( processedUnits.contains(kermetaUnit) )
-			return;
-		processedUnits.add( kermetaUnit );
-		Set<TypeDefinition> typeDefinitions = getTypeDefinitions(kermetaUnit);
-		for ( TypeDefinition t : typeDefinitions ) {
-			if ( (t != typeDefinition) && (t.getBaseAspects().contains(typeDefinition)) )
-				result.add(t);
-			else if ( typeDefinition.getBaseAspects().contains(t) ) {
-				KermetaUnit u = KermetaUnitHelper.getKermetaUnitFromObject(t);
-				EList<TypeDefinition> l = u.getAspects().get(t);
-				if ( l == null )
-					l = new UniqueEList<TypeDefinition> ();
-				l.add(typeDefinition);
-				u.getAspects().put(t, l);
-			}
-				
-		}
-			
-		//for ( KermetaUnit importedUnit : kermetaUnit.getImporters() )
-		//	getAspects(importedUnit, typeDefinition, processedUnits, result);
-	}
-	
-
-	
 	static public KermetaUnit getKermetaUnitFromObject(EObject o) {
 		EList<KermetaUnit> s = IOPlugin.getDefault().getKermetaUnits();
 		ModelingUnit cu = getModelingUnit(o);
@@ -263,7 +231,7 @@ public class KermetaUnitHelper {
 		return null;
 	}
 	
-	static private ModelingUnit getModelingUnit(EObject o) {		
+	static private ModelingUnit getModelingUnit(EObject o) {
 		if ( o instanceof ModelingUnit )
 			return (ModelingUnit) o;
 		else if ( o.eContainer() != null )
@@ -271,6 +239,21 @@ public class KermetaUnitHelper {
 		else return null;
 	}
 	
+	static public void reconstructCache(KermetaUnit kermetaUnit) {
+		TypeDefinitionCache cache = IoFactory.eINSTANCE.createTypeDefinitionCache();
+		kermetaUnit.setTypeDefinitionCache( cache );
+		for ( TypeDefinition t : getInternalTypeDefinitions(kermetaUnit) ) {
+			String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(t);
+			TypeDefinitionCacheEntry entry = cache.getEntries().get(qualifiedName);
+			if ( entry == null ) {
+				entry = IoFactory.eINSTANCE.createTypeDefinitionCacheEntry();
+				entry.setQualifiedName(qualifiedName);
+				cache.getEntries().put(qualifiedName, entry);
+			}
+			entry.setTypeDefinition(t);
+		}
+		cache.setExternalSearchAuthorized(true);
+	}
 }
 
 

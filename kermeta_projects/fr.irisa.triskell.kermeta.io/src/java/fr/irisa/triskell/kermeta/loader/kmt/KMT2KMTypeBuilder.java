@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.26 2008-02-06 09:38:25 dvojtise Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.27 2008-02-14 07:13:16 uid21732 Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -32,7 +32,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelTypeHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Basictype;
@@ -95,8 +94,6 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 		if ( context.current_class != null ) {
 			String qualifiedName = NamedElementHelper.getQualifiedName( (NamedElement) context.current_class.eContainer() ) + "::" + qname;
 			def = builder.getTypeDefinitionByQualifiedName(qualifiedName, monitor);
-			if ( def != null )
-				KermetaUnitHelper.getKermetaUnitFromObject( def );
 		}
 		
 		if ( def == null )

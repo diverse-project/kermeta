@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCall.java,v 1.5 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: JavaStaticCall.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getJavaStaticCall()
- * @model
+ * @model annotation="GenModel documentation='/**\n * This class represent a call to an extern Java operation. \n * This Java operation must be static and have at least one RuntimeO\n \052/'"
  * @generated
  */
 public interface JavaStaticCall extends Expression {
@@ -46,6 +46,7 @@ public interface JavaStaticCall extends Expression {
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Parameters()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Parameters of the Java static call provided as KerMeta expressions\n \052/'"
 	 * @generated
 	 */
 	EList<Expression> getParameters();
@@ -62,6 +63,7 @@ public interface JavaStaticCall extends Expression {
 	 * @see #setJclass(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Jclass()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * Qualified name of the targeted Java class\n \052/'"
 	 * @generated
 	 */
 	String getJclass();
@@ -88,6 +90,7 @@ public interface JavaStaticCall extends Expression {
 	 * @see #setJmethod(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Jmethod()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * Name of the Java method to be launched in the identified Java class\n \052/'"
 	 * @generated
 	 */
 	String getJmethod();

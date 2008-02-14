@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.32 2007-12-03 10:56:37 cfaucher Exp $
+/* $Id: UnitExporterWizard.java,v 1.33 2008-02-14 07:13:10 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -39,6 +39,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
@@ -243,11 +244,11 @@ public class UnitExporterWizard extends Wizard {
 						tracePage.getFileName()));
 		unit = createUnit();
 		
-		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit, new NullProgressMonitor());
+		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit);
 		typechecker.checkUnit();
 
 		if ( ! unit.isErroneous() ) {
-			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(unit, new NullProgressMonitor());
+			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(unit);
 			constraintchecker.checkUnit();
 		}
 		
@@ -314,11 +315,11 @@ public class UnitExporterWizard extends Wizard {
 		//KermetaUnitFactory.getDefaultLoader().unloadAll();
 
 		try {
-			unit = IOPlugin.getDefault().getKermetaUnit( inputFile_uri );
+			unit = LoaderPlugin.getDefault().load( inputFile_uri, options );
 			// init the tracer (needed in order to get error messages and for an eventual save of the trace file)
-			initTraces();
-			unit.setTracer(tracer);
-			IOPlugin.getDefault().loadKermetaUnit( inputFile_uri, options, new NullProgressMonitor() );
+			//initTraces();
+			//unit.setTracer(tracer);
+			//LoaderPlugin.getDefault().load( inputFile_uri, options );
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

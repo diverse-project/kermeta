@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelingUnitImpl.java,v 1.5 2008-01-23 10:50:20 cfaucher Exp $
+ * $Id: ModelingUnitImpl.java,v 1.6 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 

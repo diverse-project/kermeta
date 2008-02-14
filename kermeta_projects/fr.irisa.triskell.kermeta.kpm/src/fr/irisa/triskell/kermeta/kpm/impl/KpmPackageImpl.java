@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.16 2008-02-04 10:54:36 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.17 2008-02-14 07:13:24 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 

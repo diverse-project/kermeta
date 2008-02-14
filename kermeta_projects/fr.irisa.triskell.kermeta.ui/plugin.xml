@@ -100,6 +100,9 @@
           <newWizardShortcut id="fr.irisa.triskell.kermeta.presentation.KmModelWizardID"/>
           <newWizardShortcut id="org.eclipse.ui.wizards.new.folder"/>
           <newWizardShortcut id="org.eclipse.ui.wizards.new.file"/>
+          <actionSet
+                id="org.kermeta.ui.actionSet">
+          </actionSet>
        </perspectiveExtension>
     </extension>
     <extension
@@ -173,6 +176,46 @@
              wizardId="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams">
           <enablement></enablement>
        </commonWizard>
+    </extension>
+    <extension
+          point="org.eclipse.ui.actionSets">
+       <actionSet
+             id="org.kermeta.ui.actionSet"
+             label="Kermeta Global Actions"
+             visible="false">
+          <action
+                class="fr.irisa.triskell.kermeta.actions.DestroyKermetaUnitsFromMemory"
+                icon="images/kermeta-trash.png"
+                id="org.kermeta.ui.destroyKermetaUnitsAction"
+                label="Remove Kermeta Units from Memory"
+                toolbarPath="Normal/additions">
+          </action>
+       </actionSet>
+    </extension>
+    <extension
+          point="org.eclipse.ui.editorActions">
+       <editorContribution
+             id="fr.irisa.triskell.kermeta.ui.editorContribution2"
+             targetID="org.eclipse.ui.editors.text.texteditor">
+          <action
+                class="fr.irisa.triskell.kermeta.actions.CheckFileAction"
+                icon="images/refresh.png"
+                id="fr.irisa.triskell.kermeta.ui.checkFileAction"
+                label="Check this file"
+                toolbarPath="Normal/additions">
+          </action>
+       </editorContribution>
+       <editorContribution
+             id="fr.irisa.triskell.kermeta.ui.editorContribution3"
+             targetID="fr.irisa.triskell.kermeta.presentation.KmEditorID">
+          <action
+                class="fr.irisa.triskell.kermeta.actions.CheckFileAction"
+                icon="images/refresh.png"
+                id="fr.irisa.triskell.kermeta.ui.checkFileAction"
+                label="Check this file"
+                toolbarPath="Normal/additions">
+          </action>
+       </editorContribution>
     </extension>
 
 </plugin>

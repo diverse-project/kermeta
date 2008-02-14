@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.33 2008-01-25 16:01:41 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.34 2008-02-14 07:13:20 uid21732 Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -14,46 +14,36 @@ package org.kermeta.io.plugin;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.loader.FrameworkMapping;
-import org.kermeta.loader.LoadingOptions;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
-import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 public class IOPlugin extends AbstractUIPlugin {
 
 	final public static String FRAMEWORK_KM_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
 
+	final public static String FRAMEWORK_KMT_URI = "platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt";
+	
 	final public static String FRAMEWORK_KM_LOCAL_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
 	
 	final public static String ECORE_URI = "http://www.eclipse.org/emf/2002/Ecore";
@@ -61,6 +51,8 @@ public class IOPlugin extends AbstractUIPlugin {
 	final private static String FRAMEWORK_ECORE_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.ecore";
 	
 	final private static String FRAMEWORK_ECORE_LOCAL_URI = "platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.ecore";
+	
+	public static boolean FRAMEWORK_GENERATION = false;
 	
 	static public String getFrameWorkEcoreURI() {
 		if ( LOCAL_USE )
@@ -70,10 +62,14 @@ public class IOPlugin extends AbstractUIPlugin {
 	}
 	
 	static public String getFrameWorkURI() {
-		if ( LOCAL_USE )
-			return FRAMEWORK_KM_LOCAL_URI;
-		else
-			return FRAMEWORK_KM_URI;
+		if ( FRAMEWORK_GENERATION )
+			return FRAMEWORK_KMT_URI;
+		else {
+			if ( LOCAL_USE )
+				return FRAMEWORK_KM_LOCAL_URI;
+			else
+				return FRAMEWORK_KM_URI;
+		}
 	}
 	
 	
@@ -88,9 +84,9 @@ public class IOPlugin extends AbstractUIPlugin {
 	
 	private KermetaUnitStorer storer = IoFactory.eINSTANCE.createKermetaUnitStorer();
 	
-	private KermetaUnit framework;
+	public KermetaUnit framework;
 	
-	private KermetaUnit ecore;
+	public KermetaUnit ecore;
 	
 	static public String URI_MAP = "../fr.irisa.triskell.kermeta.io/uri.map";
 	
@@ -101,8 +97,6 @@ public class IOPlugin extends AbstractUIPlugin {
 	 * 
 	 */
 	static public boolean LOCAL_USE = false;
-	
-	static public boolean FRAMEWORK_GENERATION = false;
 	
 	private boolean INITIALIZED = false;
 	
@@ -145,14 +139,14 @@ public class IOPlugin extends AbstractUIPlugin {
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new EcoreResourceFactoryImpl());	
 			}
 			
-			if ( ! FRAMEWORK_GENERATION ) {
+	/*		if ( ! FRAMEWORK_GENERATION ) {
 			
 				try {
 					// Loading the framework
-					framework = loadFramework();
+					framework = loadFramework();*/
 					/*for ( KermetaUnit kermetaUnit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
 						kermetaUnit.setFramework( true );*/
-					
+/*					
 					KermetaTypeChecker typechecker = new KermetaTypeChecker( framework, new NullProgressMonitor() );
 					typechecker.checkUnit();
 
@@ -174,7 +168,7 @@ public class IOPlugin extends AbstractUIPlugin {
 					if ( ! ecore.isIndirectlyErroneous() ) {
 						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( ecore, new NullProgressMonitor() );
 						constraintchecker.checkUnit();
-					}
+					}*/
 
 					// Loading the framework as ecore
 					/*frameworkAsEcore = loadEcoreFramework();
@@ -187,13 +181,13 @@ public class IOPlugin extends AbstractUIPlugin {
 						constraintchecker.checkUnit();
 					}*/
 					
-				} catch (URIMalformedException e) {
+	/*			} catch (URIMalformedException e) {
 					e.printStackTrace();
 				} catch (Throwable e) {
 					e.printStackTrace();
 				}
 			
-			}
+			}*/
 		}
 	}
 	
@@ -244,7 +238,7 @@ public class IOPlugin extends AbstractUIPlugin {
 	 * @return
 	 * @throws URIMalformedException
 	 */
-	public KermetaUnit getKermetaUnit( String uri ) throws URIMalformedException {
+	public KermetaUnit getKermetaUnit( String uri ) throws URIMalformedException, NotRegisteredURIException {
 		return getKermetaUnit(uri, false);
 		/*KermetaUnit kermetaUnit = storer.find(uri);
 		if ( kermetaUnit == null ) {
@@ -262,54 +256,38 @@ public class IOPlugin extends AbstractUIPlugin {
 		return kermetaUnit;*/
 	}
 	
-	public KermetaUnit getKermetaUnit( String uri, boolean isFramework) throws URIMalformedException {
-		KermetaUnit kermetaUnit = storer.find( uri );
+	public KermetaUnit getKermetaUnit( String uri, boolean isFramework) throws URIMalformedException, NotRegisteredURIException {
+		KermetaUnit kermetaUnit = storer.get( uri );
+		if ( isFramework )
+			kermetaUnit.setFramework( true );
+		return kermetaUnit;
+		/*KermetaUnit kermetaUnit = storer.find( uri );
 		if ( kermetaUnit == null ) {
 			kermetaUnit = storer.get( uri );
 			if ( isFramework )
 				kermetaUnit.setFramework( true );
-			else if ( ! FRAMEWORK_GENERATION ) {
-				//kermetaUnit.getImportedKermetaUnits().add( framework );
-				if ( uri.matches(".+\\.ecore") ) {
-					System.out.println("See if framework is null ??? => " + framework);
-					System.out.println("See if is initialized ??? => " + INITIALIZED);
-					kermetaUnit.getImportedKermetaUnits().add( framework );
-					kermetaUnit.importKermetaUnit( ecore, false, true );
-					kermetaUnit.addRequire( ECORE_URI, ecore );	
-				} else if ( uri.equals( ECORE_URI ) )
-					kermetaUnit.getImportedKermetaUnits().add( framework );
-				else if ( uri.matches("http://.+") ) {
-					kermetaUnit.getImportedKermetaUnits().add( framework );
-					Object o = EPackage.Registry.INSTANCE.get( uri );
-					if ( ! (o instanceof Package) ) {
-						kermetaUnit.importKermetaUnit( ecore, false, true );
-						kermetaUnit.addRequire( ECORE_URI, ecore );	
-					}
-				}
-			} else
-				kermetaUnit.setLocked(true);
 		}
-		return kermetaUnit;
+		return kermetaUnit;*/
 	}
 	
-	public KermetaUnit basicGetKermetaUnit( String uri ) throws URIMalformedException {
+	public KermetaUnit basicGetKermetaUnit( String uri ) throws URIMalformedException, NotRegisteredURIException {
 		return storer.get( uri );
 	}
 	
-	public KermetaUnit basicLoadKermetaUnit( String uri, IProgressMonitor monitor ) throws URIMalformedException {
+	/*public KermetaUnit basicLoadKermetaUnit( String uri, IProgressMonitor monitor ) throws URIMalformedException, NotRegisteredURIException {
 		KermetaUnit kermetaUnit = basicGetKermetaUnit( uri );
 		storer.load( uri, null, monitor );
 		return kermetaUnit;
-	}
+	}*/
 	
-	public KermetaUnit loadKermetaUnit( String uri, IProgressMonitor monitor ) throws KermetaIOFileNotFoundException, URIMalformedException {
+	/*public KermetaUnit loadKermetaUnit( String uri, IProgressMonitor monitor ) throws KermetaIOFileNotFoundException, URIMalformedException {
 		return loadKermetaUnit(uri, new HashMap<Object, Object> (), monitor);
-	}
+	}*/
 	
-	public KermetaUnit loadKermetaUnit(IFile file, IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException {
+	/*public KermetaUnit loadKermetaUnit(IFile file, IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException {
 		String uri = "platform:/resource" + file.getFullPath().toString();
 		return loadKermetaUnit( uri, monitor );
-	}
+	}*/
 	
 	/**
 	 * 
@@ -322,7 +300,7 @@ public class IOPlugin extends AbstractUIPlugin {
 	 * @throws KermetaIOFileNotFoundException
 	 * @throws URIMalformedException
 	 */
-	public KermetaUnit loadKermetaUnit( String uri, String content, IProgressMonitor monitor ) throws KermetaIOFileNotFoundException, URIMalformedException {
+	/*public KermetaUnit loadKermetaUnit( String uri, String content, IProgressMonitor monitor ) throws KermetaIOFileNotFoundException, URIMalformedException {
 		KermetaUnit kermetaUnit = null;
 		synchronized ( IOPlugin.class ) {
 			if ( ! LOCAL_USE ) {
@@ -345,26 +323,26 @@ public class IOPlugin extends AbstractUIPlugin {
 		}
 		return kermetaUnit;
 
-	}
+	}*/
 	
-	public KermetaUnit loadKermetaUnit(IFile file, String content, IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException {
+	/*public KermetaUnit loadKermetaUnit(IFile file, String content, IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException {
 		String uri = "platform:/resource" + file.getFullPath().toString();
 		return loadKermetaUnit( uri, content, monitor );
-	}
+	}*/
 	
-	public KermetaUnit loadKermetaUnit(String uri, Map<Object, Object> options, IProgressMonitor monitor) throws URIMalformedException {
+/*	public KermetaUnit loadKermetaUnit(String uri, Map<Object, Object> options, IProgressMonitor monitor) throws URIMalformedException {
 		KermetaUnit kermetaUnit = getKermetaUnit(uri);
 		storer.load(uri, options, monitor);
 		return kermetaUnit;
-	}
+	}*/
 	
-	private KermetaUnit loadFramework() throws URIMalformedException {
+	/*private KermetaUnit loadFramework() throws URIMalformedException {
 		KermetaUnit kermetaUnit = getKermetaUnit( getFrameWorkURI(), true );
 		Map<Object, Object> options = new HashMap<Object, Object> ();
 		options.put( LoadingOptions.FRAMEWORK_LOADING, true );
 		storer.load( getFrameWorkURI(), options, new NullProgressMonitor() );
 		return kermetaUnit;
-	}
+	}*/
 	
 	/*private KermetaUnit loadEcoreFramework() throws URIMalformedException {
 		KermetaUnit kermetaUnit = getKermetaUnit(getFrameWorkEcoreURI(), true);
@@ -376,53 +354,29 @@ public class IOPlugin extends AbstractUIPlugin {
 		return kermetaUnit;
 	}*/
 	
-	private KermetaUnit loadEcore( String uri ) throws URIMalformedException {
+	/*private KermetaUnit loadEcore( String uri ) throws URIMalformedException {
 		KermetaUnit kermetaUnit = getKermetaUnit( uri );
 		Map<Object, Object> options = new HashMap<Object, Object>();
 		options.put( LoadingOptions.ECORE_QuickFixEnabled, true );
 		storer.load( uri, options, new NullProgressMonitor() );
 		return kermetaUnit;
-	}
+	}*/
 	
 	public void unload( String uri ) {
-		List <KermetaUnit> unitsToUnload = new ArrayList <KermetaUnit> ();		
-		KermetaUnit kermetaUnit;
-		Set<KermetaUnit> gcExcludedUnits = new HashSet<KermetaUnit>();
-		synchronized ( IOPlugin.class ) {
-			IOPlugin.internalLog.debug( "unloading " + uri);
-			
-			try {
-				kermetaUnit = getKermetaUnit(uri);
-				for ( KermetaUnit importedUnit : new ArrayList<KermetaUnit>(kermetaUnit.getImportedKermetaUnits()) )
-					if ( importedUnit.getImportedKermetaUnits().contains( kermetaUnit ) )
-						unitsToUnload.add( importedUnit );
-
-				// cleanup but only older unit not recently unloaded ones
-				gcExcludedUnits.addAll(unitsToUnload);
-				gcExcludedUnits.add(kermetaUnit);
-			} catch (URIMalformedException e) {
-				e.printStackTrace();
-			}
-			storer.unload(uri);
-			IOPlugin.internalLog.debug( "unloading " + uri + " done");
-			for ( KermetaUnit unit : unitsToUnload )
-				unload( unit.getUri() );
-			
-		}
-		garbageCollect(gcExcludedUnits);
+		storer.unload(uri);
 	}
 	
 	public void unload(IFile file) {
 		String uri = "platform:/resource" + file.getFullPath().toString();
 		unload( uri );
 	}
-	public void unloadAll() {
+	/*public void unloadAll() {
 		List <KermetaUnit> unitToUnload = new ArrayList <KermetaUnit> ();
 		unitToUnload.addAll(storer.getKermetaUnits());
 		for(KermetaUnit unit : unitToUnload){
 			storer.unload(unit.getUri());
 		}
-	}
+	}*/
 	
 	/**
 	 * cleanup some unused KermetaUnit

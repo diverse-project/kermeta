@@ -5,6 +5,10 @@
     nsURI="http://ftm" nsPrefix="ftm">
   <eSubpackages name="behavior" nsPrefix="">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="SelfExpression" eSuperTypes="#//behavior/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SelfExpression" eSuperTypes="#//behavior/Expression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="/**&#xA; * Refers to &lt;code>self&lt;/code> use&#xA; */"/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

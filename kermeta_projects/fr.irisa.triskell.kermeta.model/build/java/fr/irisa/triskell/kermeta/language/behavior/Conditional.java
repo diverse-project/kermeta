@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Conditional.java,v 1.6 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: Conditional.java,v 1.7 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -22,7 +22,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getConditional()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Condition is the model-element representation for the <code></code> \n \052/'"
  * @generated
  */
 public interface Conditional extends Expression {
@@ -45,6 +45,7 @@ public interface Conditional extends Expression {
 	 * @see #setThenBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getConditional_ThenBody()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * Then part of the conditional statement\n \052/'"
 	 * @generated
 	 */
 	Expression getThenBody();
@@ -71,6 +72,7 @@ public interface Conditional extends Expression {
 	 * @see #setElseBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getConditional_ElseBody()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Optional else part of the conditional statement\n \052/'"
 	 * @generated
 	 */
 	Expression getElseBody();
@@ -97,6 +99,7 @@ public interface Conditional extends Expression {
 	 * @see #setCondition(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getConditional_Condition()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * Condition expression of conditional statement\n \052/'"
 	 * @generated
 	 */
 	Expression getCondition();

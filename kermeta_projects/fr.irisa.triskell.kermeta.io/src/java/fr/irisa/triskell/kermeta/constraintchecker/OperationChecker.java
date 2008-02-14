@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.26 2008-01-09 15:36:31 dvojtise Exp $
+/* $Id: OperationChecker.java,v 1.27 2008-02-14 07:13:17 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -34,8 +35,6 @@ import fr.irisa.triskell.kermeta.loader.java.Jar2KMPass;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.modelhelper.PrimitiveTypeHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
@@ -89,28 +88,12 @@ public class OperationChecker extends AbstractChecker {
 	 * @return true if operation signature is conform to 
 	 * super operations if they exist.
 	 */
-	private boolean checkOperationSignature(Operation operation)
-	{
-				
-		boolean result = false;
-		Operation next = null;
-		// (Dev.note : kermeta::reflection::Object "became" kermeta::language::structure::Object)
-		// Get the kermeta::language::structure::Object *implicitly* inherited super operation
-		ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::language::structure::Object"));
-		if (object_classdef != null) // robustness useless test -> kermeta::language::structure::Object type should already have been parsed!
-		{ 
-			next = ClassDefinitionHelper.findOperationByName(object_classdef, operation.getName());
-		}
-		// If this operation was not found in implicitly inherited Object
-		// then get all operations, including the inherited ones
-		if (next == null) next = operation.getSuperOperation();
-		if (next!=null)
-		{
-			result = checkParameters(operation, next) &&
-			checkTypeParameters(operation, next) &&
-			checkReturnType(operation, next);
-		}
-		return result;
+	private boolean checkOperationSignature(Operation operation) {
+		if ( operation.getSuperOperation() != null )
+			return checkParameters(operation, operation.getSuperOperation()) &&
+				checkTypeParameters(operation, operation.getSuperOperation()) &&
+				checkReturnType(operation, operation.getSuperOperation());
+		return true;
 	}
 	
 	/**
@@ -144,7 +127,7 @@ public class OperationChecker extends AbstractChecker {
 	 */
 	private boolean checkOperationIsUnique(Operation operation)
 	{
-		List <Operation> ops = ClassDefinitionHelper.getAllOperations(classDefinition);
+		List <Operation> ops = KermetaModelHelper.ClassDefinition.getAllOperations(classDefinition);
 		for (Operation op : ops) {
 
 			if ( op != operation ) { 
@@ -170,14 +153,18 @@ public class OperationChecker extends AbstractChecker {
 						if ( ! isAbstract )
 							error = true;
 						
-						if ( ! error )
+						if ( ! error ) {
 							// Checking the returned type
 							error = ! TypeEqualityChecker.equals(operation.getType(), op.getType());
+							if ( ! error )
+								error = ! ( operation.getUpper() == op.getUpper() && operation.getLower() == op.getLower() );
+						}
 						// Checking the parameter's type
 						if ( ! error )
 							error = ! checkParameters(operation, op);
 						
 						if ( error ) {
+							TypeEqualityChecker.equals(operation.getType(), op.getType());
 							KermetaUnit distantUnit = KermetaUnitHelper.getKermetaUnitFromObject(op);
 							String message = "";
 							if ( distantUnit != null ) {
@@ -190,16 +177,16 @@ public class OperationChecker extends AbstractChecker {
 							addProblem(ERROR, message, operation);
 							return false;
 						}
-					} else 
+					} /*else 
 											
 					// if superOperation is null, perhaps it however exists in the implicit inherited Object?
 					// ex: Boolean does not inherit explicitely Object.
 					if ( ! ClassDefinitionHelper.getAllBaseClasses(possibleBaseClass).contains(classDefinition) 
-							&& !NamedElementHelper.getQualifiedName(op.getOwningClass()).equals("kermeta::reflection::Object")) {
+							&& !NamedElementHelper.getQualifiedName(op.getOwningClass()).equals("kermeta::language::structure::Object")) {
 						addProblem(ERROR, "Class '"+classDefinition.getName()+"' " +
 								"duplicate definition of operation '"+operation.getName()+"'.",operation);
 						return false;
-					}
+					}*/
 				} else if (op.getName().equals(operation.getName()) ) {
 					boolean error = ! checkParameters(operation, op);
 					if ( error ) {
@@ -263,11 +250,71 @@ public class OperationChecker extends AbstractChecker {
 	private boolean checkReturnType(Operation operation) {
 		boolean result = ReturnTypeChecker.typeCheckExpression(operation);
 		if ( ! result ){
-			if(TagHelper.findTagFromName(classDefinition,Jar2KMPass.JARUNIT_TAG_NAME) == null)
+			if(KermetaModelHelper.Tag.getTag(classDefinition,Jar2KMPass.JARUNIT_TAG_NAME) == null)
 				builder.error("In class definition " + NamedElementHelper.getQualifiedName(classDefinition) + ", the result variable has not been correctly set in operation " + operation.getName() + ".", operation);
 		}
 		return result; 
 	}
+	
+	/**
+	 * 
+	 * Check if one operation with the same name, same parameters, same returned type and abstract exist in base classes.
+	 * 
+	 * @param operation
+	 * @param classDefinition
+	 * @return
+	 */
+/*	private boolean checkAspectOperation(Operation operation) {
+		Set <Operation> ops = ClassDefinitionHelper.getAllOperations(classDefinition);
+		for (Operation op : ops) {
+			if ( operation != op ) {		
+				
+				if ( operation.getName().equals(op.getName()) )
+					return false;
+
+				ClassDefinition possibleBaseClass = (ClassDefinition) op.eContainer();
+				Set<TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses(classDefinition);
+				if ( baseClasses.contains(possibleBaseClass) ) {
+					boolean isAbstract = checkOperationIsAbstract(op);
+					
+					
+					
+					return checkOperationIsAbstract(op) && ! checkOperationSignature(operation);
+				}
+			}
+		}
+		return false;
+	}*/
+	
+/*	private boolean isOperationAspectOverloadingCorrect(Operation operation, Operation operationToCompare) {
+
+		ClassDefinition possibleBaseClass = (ClassDefinition) operationToCompare.eContainer();
+		Set<TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses(classDefinition);
+		if ( baseClasses.contains(possibleBaseClass) ) {
+	
+			///if ( checkOperationIsAbstract() )
+			
+			/*if ( 
+					// checking if abstract
+					operationToCompare.isIsAbstract() 
+					// check the name
+					&& operationToCompare.getName().equals(operation.getName()) 
+					// Check the returned type
+					&& TypeEqualityChecker.equals( operationToCompare.getType(), operation.getType() ) ) {
+					
+				for ( Parameter currentParameter : (List<Parameter>) operationToCompare.getOwnedParameter() ) {
+					Parameter parameter = OperationHelper.getParameter(operation, currentParameter.getName());
+					if ( ! TypeEqualityChecker.equals(parameter.getType(), currentParameter.getType()) )
+						return false;
+				}
+					
+				return true;
+					
+			}
+			
+		}
+		return false;
+	}*/
 	
 	/**
 	 * Compare the parameter types of op1 and op2, return true if they are identical,
@@ -306,13 +353,11 @@ public class OperationChecker extends AbstractChecker {
 					isConform = isConformType((ClassImpl)typeA, (ClassImpl)typeB);
 				}
 				else if (typeA instanceof PrimitiveType && typeB instanceof Class ) {
-					Type t = PrimitiveTypeHelper.resolvePrimitiveType(typeA);
+					Type t = KermetaModelHelper.PrimitiveType.resolvePrimitiveType( (PrimitiveType) typeA);
 					isConform = isConformType((ClassImpl)t, (ClassImpl)typeB);
-					System.out.println();
 				} else if ( typeA instanceof Class && typeB instanceof PrimitiveType) {
-					Type t = PrimitiveTypeHelper.resolvePrimitiveType(typeB);
+					Type t = KermetaModelHelper.PrimitiveType.resolvePrimitiveType( (PrimitiveType) typeB);
 					isConform = isConformType((ClassImpl)typeA, (ClassImpl)t);
-					System.out.println();
 				} else {
 					// Until we know the type politics, conformity will be true.
 					isConform = true;

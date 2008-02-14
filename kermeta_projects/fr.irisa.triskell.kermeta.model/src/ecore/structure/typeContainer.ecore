@@ -6,7 +6,11 @@
   <eSubpackages name="structure" nsPrefix="ftm/structure">
     <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true" eSuperTypes="#//structure/Object">
       <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" upperBound="-1"
-          eType="#//structure/Type" containment="true" eOpposite="#//structure/Type/typeContainer"/>
+          eType="#//structure/Type" containment="true" eOpposite="#//structure/Type/typeContainer">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="/**&#xA; * Contained types&#xA; */"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//structure/TypeContainer"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//structure/TypeContainer #//structure/NamedElement"/>
@@ -16,7 +20,11 @@
     <eClassifiers xsi:type="ecore:EClass" name="Object"/>
     <eClassifiers xsi:type="ecore:EClass" name="Type">
       <eStructuralFeatures xsi:type="ecore:EReference" name="typeContainer" eType="#//structure/TypeContainer"
-          eOpposite="#//structure/TypeContainer/containedType"/>
+          eOpposite="#//structure/TypeContainer/containedType">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="/**&#xA; * Owning TypeContainer, if any&#xA; */"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypeVariableBinding" eSuperTypes="#//structure/TypeContainer"/>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//structure/TypeContainer"/>

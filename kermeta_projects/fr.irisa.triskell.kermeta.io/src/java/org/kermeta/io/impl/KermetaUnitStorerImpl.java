@@ -2,19 +2,18 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.24 2008-02-06 09:38:25 dvojtise Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.25 2008-02-14 07:13:17 uid21732 Exp $
  */
 package org.kermeta.io.impl;
 
 
 import java.lang.ref.WeakReference;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
+import org.eclipse.core.runtime.IProgressMonitor;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -34,18 +33,15 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.FrameworkMapping;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KMLoader;
 import fr.irisa.triskell.kermeta.loader.ecore.EcoreBuildingState;
 import fr.irisa.triskell.kermeta.loader.java.JavaBuildingState;
-import fr.irisa.triskell.kermeta.loader.java.JavaKermetaUnitLoader;
-import fr.irisa.triskell.kermeta.loader.km.KMUnitLoader;
 import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoader;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
@@ -156,7 +152,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * @throws MalformedURIException 
 	 * @generated NOT
 	 */
-	public KermetaUnit get(String uri) throws URIMalformedException {
+	public KermetaUnit get(String uri) throws URIMalformedException, NotRegisteredURIException {
 			
 		assert( uri != null );
 		boolean framework = false;
@@ -207,17 +203,20 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			 */
 			int index = kermetaUnitURI.lastIndexOf(".");
 			String extension = kermetaUnitURI.substring(index+1);
-			if ( extension.equals("kmt") )
+			if ( extension.equals("kmt") ) {
 				kermetaUnit.setBuildingState( new KMTBuildingState() );
-			else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) )
+				kermetaUnit.setNeedASTTraces(true);
+			} else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) )
 				kermetaUnit.setBuildingState( new EcoreBuildingState() );
 			else if ( extension.equals("km") )
 				kermetaUnit.setBuildingState( new KmBuildingState() );
 			else if ( extension.equals("jar") )
 				kermetaUnit.setBuildingState( new JavaBuildingState() );
 			else if ( ! EMFRegistryHelper.isRegistered( kermetaUnitURI ) ) {
-				kermetaUnit.setBuildingState( new AbstractBuildingState() );
-				kermetaUnit.error("Unknown Format. It is impossible to load this file.\n You may have to register this URI.");
+//				kermetaUnit.setBuildingState( new AbstractBuildingState() );
+//				kermetaUnit.error("Unknown Format. It is impossible to load this file.\n You may have to register this URI.");
+				kermetaUnits.remove(kermetaUnit);
+				throw new NotRegisteredURIException(kermetaUnitURI);
 			} else {
 				Object o = Registry.INSTANCE.get( kermetaUnitURI );
 				if ( o instanceof Package )
@@ -253,6 +252,9 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		if ( realURI == null )
 			realURI = uri;
 		
+		if ( realURI.equals("kermeta") )
+			realURI = IOPlugin.getFrameWorkURI();
+		
 		Iterator <KermetaUnit> iterator = getKermetaUnits().iterator();
 		while ( iterator.hasNext() ) {
 			KermetaUnit current = iterator.next();
@@ -267,82 +269,12 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @throws URIMalformedException 
-	 * @generated NOT
+	 * @generated
 	 */
-	public void load(String uri, Map<Object, Object> options, IProgressMonitor monitor) throws URIMalformedException {
-		int index = uri.lastIndexOf(".");
-		String extension = uri.substring(index+1);
-		
-		KermetaUnit kermetaUnit = get(uri);
-		kermetaUnit.lock();
-/*		
- * synchronized( getKermetaUnitsBeingUnloaded() ) {
-			while ( getKermetaUnitsBeingUnloaded().contains(kermetaUnit) ) {
-				try {
-					wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			getKermetaUnitsBeingLoaded().add( kermetaUnit );
-		}*/
-
-		synchronized( getKermetaUnitsBeingLoaded() ) {
-			getKermetaUnitsBeingLoaded().add( kermetaUnit );
-		}
-
-		try {
-			
-			if ( extension.equals("kmt") ) {
-			
-				KMTUnitLoader loader = new KMTUnitLoader(options, monitor);
-				loader.load(uri);
-			
-			} else if ( extension.equals("km") ) {
-				
-				KMUnitLoader loader = new KMUnitLoader(options, monitor);
-				loader.load(uri);
-				
-			} else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) ) {
-				
-				Ecore2KMLoader loader = new Ecore2KMLoader(options, monitor);
-				loader.load(uri);
-				
-			} else if ( extension.equals("jar") ) {
-			
-				JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(options, monitor);
-				loader.load(uri);
-			
-			} else if ( uri.matches("http://.+") ) {
-				if ( EMFRegistryHelper.isDynamicallyRegistered(uri) ) {
-					// TODO
-					// Looking for the factory and see if the file can be translated into kermeta.
-				}
-			}
-
-		} finally {
-			synchronized( getKermetaUnitsBeingLoaded() ) {
-				getKermetaUnitsBeingLoaded().remove( kermetaUnit );
-				getKermetaUnitsBeingLoaded().notify();
-			}
-		}		
-		kermetaUnit.unlock();
-		
-		/*synchronized( getKermetaUnitsBeingLoaded() ) {
-			getKermetaUnitsBeingLoaded().remove( kermetaUnit );
-			notify();
-		}*/
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @throws URIMalformedException 
-	 * @generated NOT
-	 */
-	public void load(String uri, IProgressMonitor monitor) throws URIMalformedException {
-		load(uri, new HashMap<Object, Object>(), monitor);
+	public void load(String uri, Map<Object, Object> options, IProgressMonitor monitor) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -362,36 +294,38 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 					e.printStackTrace();
 				}
 			}
-			
-/*			synchronized ( getKermetaUnitsBeingLoaded() ) {
-				while ( getKermetaUnitsBeingLoaded().contains(kermetaUnit) ) {
-					try {
-						wait();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				getKermetaUnitsBeingUnloaded().add( kermetaUnit );
-			}*/
-			
+						
 			getKermetaUnits().remove( kermetaUnit );
 		
 			for ( TypeDefinition typeDefinition : KermetaUnitHelper.getInternalTypeDefinitions( kermetaUnit ) ) {
-				//typeDefinition.getAspects().clear();
-				typeDefinition.getBaseAspects().clear();
-				typeDefinition.getOwnedTags().clear();
-				typeDefinition.getTag().clear();
-
+				String qualifiedName1 = NamedElementHelper.getQualifiedName(typeDefinition);
 				for ( KermetaUnit importer : kermetaUnit.getImportedKermetaUnits() ) {
-					String qualifiedName1 = NamedElementHelper.getQualifiedName(typeDefinition);
-					for ( TypeDefinition baseClass : importer.getAspects().keySet() ) {
+					/*
+					 * 
+					 * Removing the base class from the aspect.
+					 * 
+					 */
+					for ( TypeDefinition aspect : importer.getAspects().keySet() ) {
+						String qualifiedName2 = NamedElementHelper.getQualifiedName(aspect);
+						if ( qualifiedName1.equals(qualifiedName2) )
+							importer.getAspects().get(aspect).remove( typeDefinition );
+					}
+					
+					/*
+					 * 
+					 * Removing the aspect from the base classes.
+					 * 
+					 */
+					for ( TypeDefinition baseClass : importer.getBaseAspects().keySet() ) {
 						String qualifiedName2 = NamedElementHelper.getQualifiedName(baseClass);
 						if ( qualifiedName1.equals(qualifiedName2) )
-							importer.getAspects().get(baseClass).remove( typeDefinition );
+							importer.getBaseAspects().get(baseClass).remove( typeDefinition );
 					}
-					AbstractBuildingState state = (AbstractBuildingState) importer.getBuildingState();
-					state.aspectsDone = false;
+
 				}
+								
+				typeDefinition.getOwnedTags().clear();
+				typeDefinition.getTag().clear();
 			
 			}
 			
@@ -404,9 +338,11 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				p.getOwnedTypeDefinition().clear();
 			}
 			
-			for ( List<TypeDefinition> l : kermetaUnit.getAspects().values() ) {
+			for ( List<TypeDefinition> l : kermetaUnit.getAspects().values() )
 				l.clear();
-			}
+			
+			for ( List<TypeDefinition> l : kermetaUnit.getBaseAspects().values() )
+				l.clear();
 			
 			kermetaUnit.getAspects().clear();
 			kermetaUnit.getInternalPackageEntries().clear();

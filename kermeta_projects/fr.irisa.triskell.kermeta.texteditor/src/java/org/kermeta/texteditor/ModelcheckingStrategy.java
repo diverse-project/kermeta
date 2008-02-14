@@ -1,6 +1,6 @@
 
 
-/*$Id: ModelcheckingStrategy.java,v 1.1 2007-12-17 14:05:08 ftanguy Exp $
+/*$Id: ModelcheckingStrategy.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	ModelcheckingStrategy.java
 * License : EPL
@@ -14,6 +14,10 @@ package org.kermeta.texteditor;
 
 public class ModelcheckingStrategy {
 
+	final static public String NEVER_KEY = "NEVER";
+	
+	final static public int NEVER = 3;
+	
 	final static public String SAVING_TIME_KEY = "SAVING_TIME";
 	
 	final static public int SAVING_TIME = 2;

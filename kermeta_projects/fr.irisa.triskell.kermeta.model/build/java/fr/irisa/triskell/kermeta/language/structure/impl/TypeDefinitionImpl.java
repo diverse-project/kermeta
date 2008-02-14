@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionImpl.java,v 1.8 2007-08-07 13:35:04 ftanguy Exp $
+ * $Id: TypeDefinitionImpl.java,v 1.9 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -29,7 +29,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl#isIsAspect <em>Is Aspect</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl#getBaseAspects <em>Base Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,16 +61,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @ordered
 	 */
 	protected boolean isAspect = IS_ASPECT_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getBaseAspects() <em>Base Aspects</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBaseAspects()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeDefinition> baseAspects;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -118,25 +107,11 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeDefinition> getBaseAspects() {
-		if (baseAspects == null) {
-			baseAspects = new EObjectResolvingEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION__BASE_ASPECTS);
-		}
-		return baseAspects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				return isIsAspect() ? Boolean.TRUE : Boolean.FALSE;
-			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
-				return getBaseAspects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -153,10 +128,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				setIsAspect(((Boolean)newValue).booleanValue());
 				return;
-			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
-				getBaseAspects().clear();
-				getBaseAspects().addAll((Collection<? extends TypeDefinition>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -172,9 +143,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				setIsAspect(IS_ASPECT_EDEFAULT);
 				return;
-			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
-				getBaseAspects().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -189,8 +157,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				return isAspect != IS_ASPECT_EDEFAULT;
-			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
-				return baseAspects != null && !baseAspects.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -1,4 +1,4 @@
-/* $Id: CacheTypeData.java,v 1.8 2008-02-06 09:37:19 dvojtise Exp $
+/* $Id: CacheTypeData.java,v 1.9 2008-02-14 07:13:56 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : CacheTypeData.java
  * License    : EPL
@@ -12,9 +12,9 @@
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
@@ -39,7 +39,7 @@ public class CacheTypeData {
 		
 		
 		// build callableOperations table
-		ArrayList<CallableOperation> ops = aType.callableOperations();
+		List<CallableOperation> ops = aType.callableOperations();
 		if (ops != null) 
 		{
 			Iterator<CallableOperation> it = ops.iterator();
@@ -67,7 +67,7 @@ public class CacheTypeData {
 			}
 		}
 		//		 build callableProperties table
-		ArrayList<CallableProperty> props = aType.callableProperties();
+		List<CallableProperty> props = aType.callableProperties();
 		if (props != null) 
 		{
 			Iterator<CallableProperty> it = props.iterator();

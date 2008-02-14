@@ -1,4 +1,4 @@
-/* $Id: KermetaCommentScanner.java,v 1.1 2007-12-17 14:05:08 ftanguy Exp $
+/* $Id: KermetaCommentScanner.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KMTCommentScanner.java
 * License : EPL
@@ -11,10 +11,11 @@
 package org.kermeta.texteditor.scanners;
 
 import org.eclipse.jface.text.rules.BufferedRuleBasedScanner;
+import org.eclipse.jface.text.rules.EndOfLineRule;
+import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
+import org.eclipse.jface.text.rules.MultiLineRule;
 import org.eclipse.jface.text.rules.Token;
-
-import fr.irisa.triskell.kermeta.texteditor.scanners.KMTTextAttributeProvider;
 
 /**
  * @author ftanguy
@@ -22,8 +23,16 @@ import fr.irisa.triskell.kermeta.texteditor.scanners.KMTTextAttributeProvider;
 public class KermetaCommentScanner extends BufferedRuleBasedScanner {
 
 	public KermetaCommentScanner() {
-		IToken token = new Token ( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.COMMENT_ATTRIBUTE ) );
+		IToken singleLineCommentToken = new Token( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.COMMENT_ATTRIBUTE ) );
+		IRule singleLineCommentRule = new EndOfLineRule("//", singleLineCommentToken);
+
+		IToken multiLineCommentToken = new Token( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.COMMENT_ATTRIBUTE ) );
+		IRule multiLineCommentRule = new MultiLineRule("/*", "*/", multiLineCommentToken);
+
+		IToken token = new Token ( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.UNDEFINED_ATTRIBUTE ) );
 		setDefaultReturnToken(token);
+		
+		setRules( new IRule[] {singleLineCommentRule, multiLineCommentRule} );
 	}
 	
 }

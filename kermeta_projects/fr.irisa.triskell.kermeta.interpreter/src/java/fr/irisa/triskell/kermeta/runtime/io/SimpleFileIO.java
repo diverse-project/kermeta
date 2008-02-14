@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIO.java,v 1.10 2008-01-24 14:01:59 dvojtise Exp $
+/* $Id: SimpleFileIO.java,v 1.11 2008-02-14 07:13:57 uid21732 Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL

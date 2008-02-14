@@ -1,7 +1,7 @@
 /**
  * IRISA / INRIA / Universite de Rennes 1
  *
- * $Id: Filter.java,v 1.3 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: Filter.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getFilter()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Filter is the class that represent a filter on a ModelingUnit.\n * the qualifiedName represent the beginning of the matched names\n \052/'"
  * @generated
  */
 public interface Filter extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -43,6 +43,7 @@ public interface Filter extends fr.irisa.triskell.kermeta.language.structure.Obj
 	 * @see #setQualifiedName(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getFilter_QualifiedName()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * To be written\n \052/'"
 	 * @generated
 	 */
 	String getQualifiedName();

@@ -1,4 +1,4 @@
-/* $Id: TypeVariableUtility.java,v 1.6 2008-01-02 10:28:31 vmahe Exp $
+/* $Id: TypeVariableUtility.java,v 1.7 2008-02-14 07:13:16 uid21732 Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableUtility.java
 * License : EPL
@@ -12,8 +12,11 @@
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
+import org.kermeta.model.KermetaModelHelper;
+
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 
 /**
@@ -31,13 +34,19 @@ public class TypeVariableUtility {
 		}
 		while(result instanceof ObjectTypeVariable) {
 			ObjectTypeVariable tv = (ObjectTypeVariable)result;
-			if (tv.getSupertype() != null) result = PrimitiveTypeResolver.getResolvedType(tv.getSupertype());
-			else result = ((SimpleType)TypeCheckerContext.ObjectType).getType();
+			if (tv.getSupertype() != null) {
+				result = tv.getSupertype();
+				if ( result instanceof PrimitiveType )
+					result = KermetaModelHelper.PrimitiveType.resolvePrimitiveType( (PrimitiveType) result );
+			} else 
+				result = ((SimpleType)TypeCheckerContext.ObjectType).getType();
 		}
 		while (result instanceof ModelTypeVariable) {
 			ModelTypeVariable mtv = (ModelTypeVariable) result;
 			//This line is probably useless - can't imagine a modeltypevariable using an alias as its supertype...
-			result = PrimitiveTypeResolver.getResolvedType(mtv.getSupertype());
+			result = mtv.getSupertype();
+			if ( result instanceof PrimitiveType )
+				result = KermetaModelHelper.PrimitiveType.resolvePrimitiveType( (PrimitiveType) result );
 		}
 		return result;
 	}

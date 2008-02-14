@@ -1,4 +1,4 @@
-/* $Id: KermetaVisitorError.java,v 1.4 2008-01-28 09:58:51 dvojtise Exp $
+/* $Id: KermetaVisitorError.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : KermetaVisitorError.java
  * License    : EPL

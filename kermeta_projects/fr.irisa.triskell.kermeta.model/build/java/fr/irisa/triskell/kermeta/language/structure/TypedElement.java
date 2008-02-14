@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypedElement.java,v 1.5 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: TypedElement.java,v 1.6 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -21,6 +21,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypedElement()
  * @model abstract="true"
+ *        annotation="GenModel documentation='/**\n * Abstraction of the notion of typed element : each element \n * that is typed inherits this class.\n \052/'"
  * @generated
  */
 public interface TypedElement extends TypeContainer, NamedElement {
@@ -42,7 +43,7 @@ public interface TypedElement extends TypeContainer, NamedElement {
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Type)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypedElement_Type()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Type of the model element\n \052/'"
 	 * @generated
 	 */
 	Type getType();

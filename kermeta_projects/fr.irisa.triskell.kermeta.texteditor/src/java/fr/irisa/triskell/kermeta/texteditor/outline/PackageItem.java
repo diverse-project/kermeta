@@ -1,6 +1,6 @@
 
 
-/*$Id: PackageItem.java,v 1.7 2008-01-28 10:49:18 dvojtise Exp $
+/*$Id: PackageItem.java,v 1.8 2008-02-14 07:13:43 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	PackageItem.java
 * License : EPL
@@ -106,7 +106,7 @@ public class PackageItem  implements Comparable<PackageItem> {
 		//	isMerged = true;
 		for ( TypeDefinition typeDefinition : value ) {
 			ModelElementOutlineItem item = new ModelElementOutlineItem(typeDefinition, this, outline);
-			typeDefinitions.put( typeDefinition.getName(), item );
+			typeDefinitions.put( typeDefinition.getName(), item );		
 		}
 	}
 	

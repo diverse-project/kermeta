@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.20 2007-12-14 13:11:54 cfaucher Exp $
+/* $Id: Resource.java,v 1.21 2008-02-14 07:13:57 uid21732 Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : EPL
@@ -91,7 +91,7 @@ public class Resource {
 	    fr.irisa.triskell.kermeta.language.structure.Class stringClass = StructureFactory.eINSTANCE.createClass();
 	    stringClass.setTypeDefinition(stringClassDef);
 
-    	GenericTypeDefinition objClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::reflection::Object");
+    	GenericTypeDefinition objClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::language::structure::Object");
 	    fr.irisa.triskell.kermeta.language.structure.Class objClass = StructureFactory.eINSTANCE.createClass();
 	    objClass.setTypeDefinition(objClassDef);
 	    

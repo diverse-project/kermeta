@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDecl.java,v 1.6 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: VariableDecl.java,v 1.7 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -22,7 +22,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl()
- * @model
+ * @model annotation="GenModel documentation='/**\n * refers to variable declaration <code>var x : X init a</code>\n * <img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png\"/>\n \052/'"
  * @generated
  */
 public interface VariableDecl extends Expression {
@@ -45,6 +45,7 @@ public interface VariableDecl extends Expression {
 	 * @see #setInitialization(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl_Initialization()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * Initialization expression for the variable\n * Default value is <code>void</code> ????\n \052/'"
 	 * @generated
 	 */
 	Expression getInitialization();
@@ -71,6 +72,7 @@ public interface VariableDecl extends Expression {
 	 * @see #setIdentifier(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl_Identifier()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * Initialization expression for the variable\n * Default value is <code>void</code> ????\n \052/'"
 	 * @generated
 	 */
 	String getIdentifier();
@@ -97,6 +99,7 @@ public interface VariableDecl extends Expression {
 	 * @see #setType(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl_Type()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * Type of the declared variable\n \052/'"
 	 * @generated
 	 */
 	TypeReference getType();

@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass2.java,v 1.11 2008-01-23 10:49:49 cfaucher Exp $
+/* $Id: Jar2KMPass2.java,v 1.12 2008-02-14 07:13:19 uid21732 Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass2.java
  * License : EPL

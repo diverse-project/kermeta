@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.28 2007-11-30 13:53:46 dvojtise Exp $
+/* $Id: KermetaLauncher.java,v 1.29 2008-02-14 07:13:07 uid21732 Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : EPL
@@ -9,12 +9,17 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,12 +28,22 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.checker.KermetaUnitChecker;
+import org.kermeta.merger.Merger;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
+import fr.irisa.triskell.kermeta.kpm.helpers.RunnerHelper;
+import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
+import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.process.KermetaProcess;
 import fr.irisa.triskell.traceability.helper.Tracer;
@@ -59,15 +74,38 @@ public class KermetaLauncher
     	return interpreter;
     }
     
-    public void initInterpreter(String fileNameString) {
+    public void initInterpreter(String fileNameString) throws NotRegisteredURIException, URIMalformedException, IOException, CoreException {
         IResource iresource = ResourcesPlugin.getWorkspace().getRoot().findMember(fileNameString);
 	    if (iresource instanceof IFile)
 	        selectedFile = (IFile) iresource;
 	    else
 	      throw (new Error("File not found! - "+ fileNameString));
 	    
-	    String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
-        interpreter = new KermetaInterpreter(uri, null, false);
+	    String uri = "platform:/resource" + selectedFile.getFullPath().toString();
+	    
+	    KermetaUnit source = KermetaUnitChecker.check(uri);
+	    
+	    LinkedHashSet<KermetaUnit> kermetaUnitsToMerge = new LinkedHashSet<KermetaUnit> ();
+   		kermetaUnitsToMerge.add(source);
+   		kermetaUnitsToMerge.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
+
+		IFile sourceFile = ResourceHelper.getIFile( source.getUri() );
+	   	IProject project = sourceFile.getProject();
+	   	
+    	String binDirectory = "platform:/resource" + project.getFullPath().toString() + "/.bin";
+	   	KermetaUnit unitToExecute = null;
+    	
+    	KermetaProject kermetaProject = KermetaWorkspace.getInstance().getKermetaProject(project);
+	   	
+	   	if ( kermetaProject != null ) {
+	   		unitToExecute = RunnerHelper.getKermetaUnitToExecute(binDirectory, kermetaUnitsToMerge, sourceFile, kermetaProject);
+	   	} else {
+   			Merger merger = new Merger();
+   			String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
+   			unitToExecute = KermetaUnitChecker.check( fileToExecute );
+	   	}
+		    
+	    interpreter = new KermetaInterpreter(unitToExecute, null);
     }
         
     public static KermetaLauncher getDefault() {

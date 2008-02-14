@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Object.java,v 1.5 2008-01-23 10:50:20 cfaucher Exp $
+ * $Id: Object.java,v 1.6 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -49,6 +49,7 @@ public interface Object extends EObject {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getObject_Tag()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Tag#getObject
 	 * @model opposite="object"
+	 *        annotation="GenModel documentation='/**\n * An Object can be tagged by a Tag. \n * They are typically used to put comments/documentation on the object\n \052/'"
 	 * @generated
 	 */
 	EList<Tag> getTag();
@@ -65,80 +66,9 @@ public interface Object extends EObject {
 	 * @return the value of the '<em>Owned Tags</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getObject_OwnedTags()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * An object can contains a Tag.  \n * Be careful, owning a tag doesn\'t means that the tag applies to the Object\n * To know which Tags apply to the object use the \"tag\" reference\n \052/'"
 	 * @generated
 	 */
 	EList<Tag> getOwnedTags();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	fr.irisa.triskell.kermeta.language.structure.Class getMetaClass();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Object container();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 * @generated
-	 */
-	boolean _equals(Object element);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Object get(Property property);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void set(Property property, Object element);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 * @generated
-	 */
-	boolean isSet(Property property);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void unset(Property property);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void checkInvariants();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void checkAllInvariants();
 
 } // Object

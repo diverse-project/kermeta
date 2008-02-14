@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.15 2008-01-23 13:11:46 cfaucher Exp $
+/*$Id: EcoreExporter.java,v 1.16 2008-02-14 07:13:20 uid21732 Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -35,10 +35,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.kermeta.core.helper.StringHelper;
 import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
@@ -49,8 +50,6 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
-import fr.irisa.triskell.kermeta.modelhelper.StringHelper;
 
 public class EcoreExporter {
 
@@ -179,7 +178,7 @@ public class EcoreExporter {
 					
 					if ( o instanceof EAttribute ) {
 						if ( currentClassDefinition != null ) {
-							Property p = ClassDefinitionHelper.findPropertyByName(currentClassDefinition, ((EAttribute) o ).getName() );
+							Property p = KermetaModelHelper.ClassDefinition.getPropertyByName(currentClassDefinition, ((EAttribute) o ).getName() );
 							if ( p != null )
 								km2ecoremapping.put(p, (EObject) o);
 						}
@@ -187,7 +186,7 @@ public class EcoreExporter {
 					
 					if ( o instanceof EOperation ) {
 						if ( currentClassDefinition != null ) {
-							currentOperation = ClassDefinitionHelper.findOperationByName(currentClassDefinition, ((EOperation) o ).getName() );
+							currentOperation = KermetaModelHelper.ClassDefinition.getOperationByName(currentClassDefinition, ((EOperation) o ).getName() );
 							if ( currentOperation != null )
 								km2ecoremapping.put(currentOperation, (EObject) o);
 						}
@@ -195,7 +194,7 @@ public class EcoreExporter {
 					
 					if ( o instanceof EParameter ) {
 						if ( currentOperation != null ) {
-							Parameter p = OperationHelper.getParameter(currentOperation, ((EParameter) o ).getName() );
+							Parameter p = KermetaModelHelper.Operation.getParameter(currentOperation, ((EParameter) o ).getName() );
 							if ( p != null )
 								km2ecoremapping.put(p, (EObject) o);
 						}
@@ -285,8 +284,6 @@ public class EcoreExporter {
 		
 		this.exporterOptions = exporterOptions;
 
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
-		
 		fillResourceSet(kermetaUnit);
 		
 		applyPass1ToAll(kermetaUnit);
@@ -505,16 +502,35 @@ public class EcoreExporter {
 						
 		String uri = kermetaUnit.getUri();
 		
+		/*
+		 * 
+		 * Checking the pathToRemove existency
+		 * 
+		 */
 		if ( pathToRemove.equals("") ) {
 			int index = uri.lastIndexOf("/");
-			if ( index != -1 ) {
+			if ( index != -1 )
 				pathToRemove = uri.substring(0, index);
-				uri = rep + uri.substring(index+1);
+		}
+		
+		/*
+		 * 
+		 * Remove part of path if not a registered file
+		 * 
+		 */
+		if ( ! kermetaUnit.getUri().startsWith("http://") ) {
+			String regex = pathToRemove + ".+";
+			if ( uri.matches(regex) ) {
+				uri = uri.replace(pathToRemove + "/", "");
+				uri = rep + uri;
+			} else {
+				int index = uri.lastIndexOf("/");
+				if ( index != -1 )
+					uri = rep + uri.substring(index+1);
 			}
 		} else {
-			String temp = uri.replace(pathToRemove + "/", "");
-			if ( ! uri.equals(temp) )
-				uri = rep + temp;
+			int index = kermetaUnit.getUri().lastIndexOf("/");
+			uri = rep + kermetaUnit.getUri().substring(index+1) + ".km";
 		}
 
 		if ( fileName != null )

@@ -1,4 +1,4 @@
-/* $Id: ClassConformanceChecker.java,v 1.4 2007-12-06 14:46:13 ftanguy Exp $
+/* $Id: ClassConformanceChecker.java,v 1.5 2008-02-14 07:13:16 uid21732 Exp $
 * Project : Kermeta (First iteration)
 * File : ClassConformanceChecker.java
 * License : EPL
@@ -10,40 +10,81 @@
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 import java.util.Stack;
+
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
-import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 public class ClassConformanceChecker {
 
 	private Class provided;
 	
-	private Set <TypeDefinition> context = new HashSet <TypeDefinition> ();
-	
 	private Stack<TypeDefinition> stack = new Stack<TypeDefinition> ();
-	
-	private Set <TypeDefinition> processed = new HashSet <TypeDefinition> ();
 	
 	public ClassConformanceChecker(Class provided) {
 		this.provided = provided;
 		stack.add( provided.getTypeDefinition() );
-		calculateContext();
 	}
 	
 	public boolean conforms(Class required) {
 		boolean result = false;
-		result = context.contains( required.getTypeDefinition() );
+
+		/*
+		 * 
+		 * Calculating the context for the required type.
+		 * 
+		 */
+		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(required.getTypeDefinition());
+		List<TypeDefinition> requiredTypeDefinitions = new ArrayList<TypeDefinition>();
+		requiredTypeDefinitions.add( required.getTypeDefinition() );
+		List<TypeDefinition> l = unit.getBaseAspects().get(required.getTypeDefinition());
+		if ( l != null )
+			requiredTypeDefinitions.addAll( l );
+		
+		/*
+		 * 
+		 * The provided type is maybe aspectized. So we first try to get the possible aspect
+		 * in the kermeta unit that would provide us the full context.
+		 * 
+		 * If this is not an aspect, just try to get the context on the provided type.
+		 * 
+		 */
+		String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(provided.getTypeDefinition());
+		ClassDefinition cd = (ClassDefinition) unit.getTypeDefinitionByQualifiedName(qualifiedName);
+		Collection<TypeDefinition> context = null;
+		if ( cd != null )
+			context = KermetaModelHelper.ClassDefinition.getContext( cd );
+		else
+			context = KermetaModelHelper.ClassDefinition.getContext( (ClassDefinition) provided.getTypeDefinition() );
+
+		/*
+		 * 
+		 * Checking if the context matches.
+		 * 
+		 */
+		for ( TypeDefinition rt : requiredTypeDefinitions ) {
+			for ( TypeDefinition pt : context )
+				if ( rt == pt ) {
+					result = true;
+					break;
+				}
+			if ( result )
+				break;
+		}
+				
 		if ( ! provided.getTypeParamBinding().isEmpty() ) {
 			if ( ! required.getTypeParamBinding().isEmpty() ) {
 				if ( provided.getTypeParamBinding().size() != required.getTypeParamBinding().size() )
@@ -63,25 +104,11 @@ public class ClassConformanceChecker {
 						} else if ( t_provided instanceof Enumeration && t_required instanceof Enumeration ) {
 							result = t_provided == t_required;
 						} else {
-							/*
-							 * 
-							 * We do not use voluntarily the isSubType because of the genericity.
-							 * So we use the basic comparison and the aspects.
-							 * 
-							 */
-							Set<TypeDefinition> tdProvided = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) providedType.getTypeDefinition() );
-							tdProvided.add( providedType.getTypeDefinition() );
 							
-							Set<TypeDefinition> tdRequired = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) requiredType.getTypeDefinition() );
-							tdRequired.add( requiredType.getTypeDefinition() );
+							String requiredQualifiedName = KermetaModelHelper.NamedElement.qualifiedName( requiredType.getTypeDefinition() );
+							String providedQualifiedName = KermetaModelHelper.NamedElement.qualifiedName( providedType.getTypeDefinition() );
 							
-							Iterator<TypeDefinition> iterator = tdProvided.iterator();
-							boolean found = false;
-							while ( iterator.hasNext() && ! found )
-								if ( tdRequired.contains(iterator.next()) )
-									found = true;
-							
-							result = found;
+							result = requiredQualifiedName.equals(providedQualifiedName);
 						}
 					}
 				}
@@ -90,34 +117,6 @@ public class ClassConformanceChecker {
 				result = false;
 		}
 		return result;
-	}
-	
-	private void calculateContext() {
-		
-		while ( ! stack.isEmpty() ) {
-			TypeDefinition tdef = stack.pop();
-			if ( ! processed.contains(tdef) ) {
-				Set<TypeDefinition> localContext = getLocalContext( (ClassDefinition) tdef);
-				context.add( tdef );
-				stack.addAll( localContext );
-				processed.add( tdef );
-
-				for ( fr.irisa.triskell.kermeta.language.structure.Type c : ((ClassDefinition) tdef).getSuperType() ) {
-					stack.push( ((ClassDefinition) ((Class) c).getTypeDefinition()) );
-				}
-				
-			}
-		}
-		
-	}
-	
-	private Set<TypeDefinition> getLocalContext(ClassDefinition c) {
-		
-		Set <TypeDefinition> result = ClassDefinitionHelper.getAllBaseClasses(c);
-		result.addAll( TypeDefinitionHelper.getAspects(c) );
-		return result;
-		
-	}
-	
+	}	
 	
 }

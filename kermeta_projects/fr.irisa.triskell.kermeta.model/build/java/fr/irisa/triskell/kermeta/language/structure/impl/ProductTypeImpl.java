@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductTypeImpl.java,v 1.12 2008-01-22 14:24:29 cfaucher Exp $
+ * $Id: ProductTypeImpl.java,v 1.13 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -136,17 +136,6 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 			type = new NonUniqueEObjectResolvingEList(Type.class, this, StructurePackage.PRODUCT_TYPE__TYPE);
 		}
 		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isInstance(fr.irisa.triskell.kermeta.language.structure.Object element) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**

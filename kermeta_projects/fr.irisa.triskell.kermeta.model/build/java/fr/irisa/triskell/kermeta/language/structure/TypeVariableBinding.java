@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableBinding.java,v 1.4 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: TypeVariableBinding.java,v 1.5 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -44,6 +44,7 @@ public interface TypeVariableBinding extends TypeContainer, fr.irisa.triskell.ke
 	 * @see #setVariable(TypeVariable)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeVariableBinding_Variable()
 	 * @model required="true"
+	 *        annotation="GenModel documentation='/**\n * TypeVariable\n \052/'"
 	 * @generated
 	 */
 	TypeVariable getVariable();
@@ -70,6 +71,7 @@ public interface TypeVariableBinding extends TypeContainer, fr.irisa.triskell.ke
 	 * @see #setType(Type)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeVariableBinding_Type()
 	 * @model required="true"
+	 *        annotation="GenModel documentation='/**\n * Assigned Type\n \052/'"
 	 * @generated
 	 */
 	Type getType();

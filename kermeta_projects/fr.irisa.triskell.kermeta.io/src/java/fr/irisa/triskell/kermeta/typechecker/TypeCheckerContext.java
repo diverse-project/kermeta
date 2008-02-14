@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.24 2007-10-03 12:40:46 ftanguy Exp $
+/* $Id: TypeCheckerContext.java,v 1.25 2008-02-14 07:13:16 uid21732 Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -13,28 +13,30 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
 
-
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
-import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
@@ -51,11 +53,8 @@ public class TypeCheckerContext {
 
 	final static private Logger internalLog = LogConfigurationHelper.getLogger("TypeCheckerContext");
 	
-	public static void initializeTypeChecker(KermetaUnit std_lib, IProgressMonitor monitor) {
+	public static void initializeTypeChecker(KermetaUnit std_lib) {
 	
-		if ( monitor.isCanceled() )
-			return;
-		
 	    objectAsType = null;
 	    robjectAsType = null;
 		classNew = null;
@@ -71,26 +70,26 @@ public class TypeCheckerContext {
 		// TODO : Assign Basic types and classdefinition here
 	    internalLog.info("Initializing type checker with standard lib...");
 	    ObjectType = createTypeForClassDefinition("kermeta::language::structure::Object", std_lib);
-	    RObjectType = createTypeForClassDefinition("kermeta::reflection::Object", std_lib);
+	    //RObjectType = createTypeForClassDefinition("kermeta::reflection::Object", std_lib);
 	    ModelType = createTypeForClassDefinition("kermeta::language::structure::Model", std_lib);
 	    
 	    ClassType = createTypeForClassDefinition("kermeta::language::structure::Class", std_lib);
-	    EnumType = createTypeForClassDefinition("kermeta::reflection::Enumeration", std_lib);
+	    EnumType = createTypeForClassDefinition("kermeta::language::structure::Enumeration", std_lib);
 	    ModelTypeType = createTypeForClassDefinition("kermeta::language::structure::ModelType", std_lib);
 	    ObjectTypeVariableType = createTypeForClassDefinition("kermeta::language::structure::ObjectTypeVariable", std_lib);
 	    ModelTypeVariableType = createTypeForClassDefinition("kermeta::language::structure::ModelTypeVariable", std_lib);
 	    VirtualTypeType = createTypeForClassDefinition("kermeta::language::structure::VirtualType", std_lib);
-	    EnumLitType = createTypeForClassDefinition("kermeta::reflection::EnumerationLiteral", std_lib);
+	    EnumLitType = createTypeForClassDefinition("kermeta::language::structure::EnumerationLiteral", std_lib);
 	    VoidType = createTypeForClassDefinition("kermeta::standard::Void", std_lib);
 	    IntegerType = createTypeForClassDefinition("kermeta::standard::Integer", std_lib);
 	    StringType = createTypeForClassDefinition("kermeta::standard::String", std_lib);
 	    BooleanType = createTypeForClassDefinition("kermeta::standard::Boolean", std_lib);
 	    StdIOType = createTypeForClassDefinition("kermeta::io::StdIO", std_lib);
 	    
-	    SetClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Set", monitor);
-	    OSetClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet", monitor);
-	    SeqClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence", monitor);
-	    BagClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Bag", monitor);
+	    SetClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Set");
+	    OSetClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet");
+	    SeqClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence");
+	    BagClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Bag");
 	    
 		bag_type_cache = new Hashtable();
 		set_type_cache = new Hashtable();
@@ -107,30 +106,23 @@ public class TypeCheckerContext {
 	
 	protected static Operation getObjectAsTypeOperation() {
 	    if (objectAsType == null) {
-	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ObjectType).type).getTypeDefinition()).getOwnedOperation().iterator();
-	       while(it.hasNext()) {
-	           Operation op = (Operation)it.next();
-	           if (op.getName().equals("asType")) {
-	        	   objectAsType = op;
-	               break;
-	           }
-	       }
+	    	Class c = (Class) ((SimpleType) ObjectType).type;
+	    	ClassDefinition classDefinition = (ClassDefinition) c.getTypeDefinition();
+	    	Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext(classDefinition);
+	    	for ( TypeDefinition td : context ) {
+	    		if ( td instanceof ClassDefinition ) {
+	    			
+	    			for ( Operation operation : ((ClassDefinition) td).getOwnedOperation() ) {
+	    				if ( operation.getName().equals("asType") ) {
+	    					objectAsType = operation;
+	    					return objectAsType;
+	    				}
+	    			}
+	    			
+	    		}
+	    	}
 	    }
 	    return objectAsType;
-	}
-	
-	protected static Operation getRObjectAsTypeOperation() {
-	    if (robjectAsType == null) {
-	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)RObjectType).type).getTypeDefinition()).getOwnedOperation().iterator();
-	       while(it.hasNext()) {
-	           Operation op = (Operation)it.next();
-	           if (op.getName().equals("asType")) {
-	        	   robjectAsType = op;
-	               break;
-	           }
-	       }
-	    }
-	    return robjectAsType;
 	}
 	
 	protected static Operation getClassNewOperation() {
@@ -235,11 +227,14 @@ public class TypeCheckerContext {
 		
 		if (classClone == null) {
 			boolean found = false;
-			Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType) ClassType).type).getTypeDefinition()).getOwnedOperation().iterator();
+			
+			Iterator<CallableOperation> it = ClassType.callableOperations().iterator();
+			
+//			Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType) ClassType).type).getTypeDefinition()).getOwnedOperation().iterator();
 			   while(it.hasNext() && !found) {
-			       Operation op = (Operation) it.next();
-			       if (op.getName().equals("clone")) {
-			           classClone = op;
+			       CallableOperation op = it.next();
+			       if (op.operation.getName().equals("clone")) {
+			           classClone = op.operation;
 			           found = true;
 			       }
 			   }
@@ -278,13 +273,15 @@ public class TypeCheckerContext {
                 result = (fr.irisa.triskell.kermeta.language.structure.Type)r.getType().get(0);
             }
         }
-        result = PrimitiveTypeResolver.getResolvedType(result);
+        
+        if ( result instanceof PrimitiveType )
+        	result = KermetaModelHelper.PrimitiveType.resolvePrimitiveType( (PrimitiveType) result);
         return result;
     }
 	
 	// The base types
 	protected static Type ObjectType;
-	protected static Type RObjectType;
+	//protected static Type RObjectType;
 	protected static Type ModelType;
 	//protected static Type ReflectionObject;
 	protected static Type ClassType;
@@ -409,8 +406,9 @@ public class TypeCheckerContext {
 	
 	public CallableOperation getSuperOperation() {
 	    Operation superOp = currentOperation.getSuperOperation();
-	    if (superOp == null) return null;
-	    ArrayList stypes = InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)getSelfType()).type);
+	    if (superOp == null) 
+	    	return null;	    
+	    List<fr.irisa.triskell.kermeta.language.structure.Type> stypes = InheritanceSearch.allSuperTypes((Class)((SimpleType)getSelfType()).type);
 	    for(int i=0; i<stypes.size(); i++) {
 	    	fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)stypes.get(i);
 	        ArrayList ops = InheritanceSearch.callableOperations(c);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureSwitch.java,v 1.11 2008-01-22 14:24:31 cfaucher Exp $
+ * $Id: StructureSwitch.java,v 1.12 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -127,38 +127,6 @@ public class StructureSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case StructurePackage.CLASS: {
-				fr.irisa.triskell.kermeta.language.structure.Class class_ = (fr.irisa.triskell.kermeta.language.structure.Class)theEObject;
-				T result = caseClass(class_);
-				if (result == null) result = caseParameterizedType(class_);
-				if (result == null) result = caseType(class_);
-				if (result == null) result = caseObject(class_);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.OBJECT: {
-				fr.irisa.triskell.kermeta.language.structure.Object object = (fr.irisa.triskell.kermeta.language.structure.Object)theEObject;
-				T result = caseObject(object);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.MODEL: {
-				Model model = (Model)theEObject;
-				T result = caseModel(model);
-				if (result == null) result = caseObject(model);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.MODEL_TYPE: {
-				ModelType modelType = (ModelType)theEObject;
-				T result = caseModelType(modelType);
-				if (result == null) result = caseType(modelType);
-				if (result == null) result = caseTypeDefinition(modelType);
-				if (result == null) result = caseObject(modelType);
-				if (result == null) result = caseNamedElement(modelType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StructurePackage.OPERATION: {
 				Operation operation = (Operation)theEObject;
 				T result = caseOperation(operation);
@@ -208,6 +176,38 @@ public class StructureSwitch<T> {
 				T result = caseTypeVariableBinding(typeVariableBinding);
 				if (result == null) result = caseTypeContainer(typeVariableBinding);
 				if (result == null) result = caseObject(typeVariableBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.CLASS: {
+				fr.irisa.triskell.kermeta.language.structure.Class class_ = (fr.irisa.triskell.kermeta.language.structure.Class)theEObject;
+				T result = caseClass(class_);
+				if (result == null) result = caseParameterizedType(class_);
+				if (result == null) result = caseType(class_);
+				if (result == null) result = caseObject(class_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.OBJECT: {
+				fr.irisa.triskell.kermeta.language.structure.Object object = (fr.irisa.triskell.kermeta.language.structure.Object)theEObject;
+				T result = caseObject(object);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.MODEL: {
+				Model model = (Model)theEObject;
+				T result = caseModel(model);
+				if (result == null) result = caseObject(model);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.MODEL_TYPE: {
+				ModelType modelType = (ModelType)theEObject;
+				T result = caseModelType(modelType);
+				if (result == null) result = caseType(modelType);
+				if (result == null) result = caseTypeDefinition(modelType);
+				if (result == null) result = caseObject(modelType);
+				if (result == null) result = caseNamedElement(modelType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -324,34 +324,6 @@ public class StructureSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.MODELING_UNIT: {
-				ModelingUnit modelingUnit = (ModelingUnit)theEObject;
-				T result = caseModelingUnit(modelingUnit);
-				if (result == null) result = caseObject(modelingUnit);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.REQUIRE: {
-				Require require = (Require)theEObject;
-				T result = caseRequire(require);
-				if (result == null) result = caseObject(require);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.USING: {
-				Using using = (Using)theEObject;
-				T result = caseUsing(using);
-				if (result == null) result = caseObject(using);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.FILTER: {
-				Filter filter = (Filter)theEObject;
-				T result = caseFilter(filter);
-				if (result == null) result = caseObject(filter);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StructurePackage.GENERIC_TYPE_DEFINITION: {
 				GenericTypeDefinition genericTypeDefinition = (GenericTypeDefinition)theEObject;
 				T result = caseGenericTypeDefinition(genericTypeDefinition);
@@ -417,6 +389,34 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseType(virtualType);
 				if (result == null) result = caseNamedElement(virtualType);
 				if (result == null) result = caseObject(virtualType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.MODELING_UNIT: {
+				ModelingUnit modelingUnit = (ModelingUnit)theEObject;
+				T result = caseModelingUnit(modelingUnit);
+				if (result == null) result = caseObject(modelingUnit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.REQUIRE: {
+				Require require = (Require)theEObject;
+				T result = caseRequire(require);
+				if (result == null) result = caseObject(require);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.USING: {
+				Using using = (Using)theEObject;
+				T result = caseUsing(using);
+				if (result == null) result = caseObject(using);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.FILTER: {
+				Filter filter = (Filter)theEObject;
+				T result = caseFilter(filter);
+				if (result == null) result = caseObject(filter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

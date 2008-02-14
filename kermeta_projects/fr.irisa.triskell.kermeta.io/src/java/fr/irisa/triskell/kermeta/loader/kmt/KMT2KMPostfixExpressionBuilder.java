@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.19 2008-02-06 09:38:25 dvojtise Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.20 2008-02-14 07:13:16 uid21732 Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL

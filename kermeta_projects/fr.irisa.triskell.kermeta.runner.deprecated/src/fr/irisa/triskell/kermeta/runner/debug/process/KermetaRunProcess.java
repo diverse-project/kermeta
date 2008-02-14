@@ -1,4 +1,4 @@
-/** $Id: KermetaRunProcess.java,v 1.5 2007-11-27 16:41:06 ftanguy Exp $
+/** $Id: KermetaRunProcess.java,v 1.6 2008-02-14 07:13:07 uid21732 Exp $
  * Project   : Kermeta Runner
  * File      : KermetaRunProcess.java
  * License   : EPL
@@ -9,9 +9,11 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.process;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -29,6 +31,8 @@ import org.eclipse.ui.progress.UIJob;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.RunnerConsole;
@@ -69,7 +73,17 @@ public class KermetaRunProcess extends KermetaProcess {
 		this.args = a;
 		this.isConstraintMode = isConstraintMode;
 		this.target = target;
-		KermetaLauncher.getDefault().initInterpreter(f);
+		try {
+			KermetaLauncher.getDefault().initInterpreter(f);
+		} catch (NotRegisteredURIException e) {
+			e.printStackTrace();
+		} catch (URIMalformedException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public KermetaRunProcess(String f, String c, String o, String a, String threadName, boolean isConstraintMode, IOConsole console, AbstractKermetaTarget target) {

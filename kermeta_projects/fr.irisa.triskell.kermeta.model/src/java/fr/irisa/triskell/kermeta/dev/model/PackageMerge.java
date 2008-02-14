@@ -8,6 +8,7 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
@@ -123,6 +124,11 @@ public class PackageMerge {
 		EList<EClassifier> classes = p2.getEClassifiers();
 		EClassifier other, mine;
 		
+		/*
+		 * 
+		 * Copying classifiers.
+		 * 
+		 */
 		for (int i=0; i<classes.size(); i++) {
 			other = classes.get(i);
 			mine = (EClassifier)findbyName(result.getEClassifiers(), other.getName());
@@ -134,6 +140,11 @@ public class PackageMerge {
 			}
 		}
 		
+		/*
+		 * 
+		 * Copying subpackages.
+		 * 
+		 */
 		EList<EPackage> packs = p2.getESubpackages();
 		EPackage mps, ops;
 		for (int i=0; i<packs.size(); i++) {
@@ -146,6 +157,14 @@ public class PackageMerge {
 				merge(mps, ops, false);
 			}	
 		}
+		
+		/*
+		 * 
+		 * Copying annotations.
+		 * 
+		 */
+		for ( EAnnotation annotation : p2.getEAnnotations() )
+			result.getEAnnotations().add( (EAnnotation) EcoreUtil.copy(annotation) );
 		
 		return result;
 	}
@@ -185,6 +204,8 @@ public class PackageMerge {
 				result.getEStructuralFeatures().add((EStructuralFeature) EcoreUtil.copy(oas));
 			}
 			else {
+				for ( EAnnotation annotation : oas.getEAnnotations() )
+					mas.getEAnnotations().add( (EAnnotation) EcoreUtil.copy(annotation) );
 				// attribute is in both model
 				// TODO: throw an error? / check type and multiplicities ?
 			}	
@@ -200,10 +221,20 @@ public class PackageMerge {
 				result.getEOperations().add((EOperation) EcoreUtil.copy(oop));
 			}
 			else {
+				for ( EAnnotation annotation : oop.getEAnnotations() )
+					mop.getEAnnotations().add( (EAnnotation) EcoreUtil.copy(annotation) );
 				System.err.println("MERGE WARNING : found two operation named'" + oop.getName() + "' in class '" + result.getName() +"', kept only one.");
 				// TODO: allow overloading ?
 			}	
 		}
+		
+		/*
+		 * 
+		 * Copying annotations.
+		 * 
+		 */
+		for ( EAnnotation annotation : other.getEAnnotations() )
+			result.getEAnnotations().add( (EAnnotation) EcoreUtil.copy(annotation) );	
 		
 	}
 	
@@ -222,6 +253,15 @@ public class PackageMerge {
 				// TODO: throw an error? / check type and multiplicities ?
 			}	
 		}
+		
+		/*
+		 * 
+		 * Copying annotations.
+		 * 
+		 */
+		for ( EAnnotation annotation : other.getEAnnotations() )
+			result.getEAnnotations().add( (EAnnotation) EcoreUtil.copy(annotation) );
+		
 	}
 	
 	

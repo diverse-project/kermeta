@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Property.java,v 1.6 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: Property.java,v 1.7 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -54,6 +54,7 @@ public interface Property extends MultiplicityElement {
 	 * @see #setGetterBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_GetterBody()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * To be written ################################\n \052/'"
 	 * @generated
 	 */
 	Expression getGetterBody();
@@ -80,6 +81,7 @@ public interface Property extends MultiplicityElement {
 	 * @see #setSetterBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_SetterBody()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * To be written ####################################\n \052/\n'"
 	 * @generated
 	 */
 	Expression getSetterBody();
@@ -106,6 +108,7 @@ public interface Property extends MultiplicityElement {
 	 * @see #setIsGetterAbstract(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_IsGetterAbstract()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Boolean stating wether the getter is abstract.\n \052/'"
 	 * @generated
 	 */
 	boolean isIsGetterAbstract();
@@ -132,6 +135,7 @@ public interface Property extends MultiplicityElement {
 	 * @see #setIsSetterAbstract(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_IsSetterAbstract()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Boolean stating wether the setter is abstract.\n \052/'"
 	 * @generated
 	 */
 	boolean isIsSetterAbstract();
@@ -160,6 +164,7 @@ public interface Property extends MultiplicityElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_OwningClass()
 	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedAttribute
 	 * @model opposite="ownedAttribute" transient="false"
+	 *        annotation="GenModel documentation='/**\n * ClassDefinition that owns the Property\n \052/'"
 	 * @generated
 	 */
 	ClassDefinition getOwningClass();
@@ -185,7 +190,7 @@ public interface Property extends MultiplicityElement {
 	 * @return the value of the '<em>Opposite</em>' reference.
 	 * @see #setOpposite(Property)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_Opposite()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Opposite Property of the Property, void if the Property has no opposite\n \052/'"
 	 * @generated
 	 */
 	Property getOpposite();
@@ -213,6 +218,7 @@ public interface Property extends MultiplicityElement {
 	 * @see #setIsReadOnly(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_IsReadOnly()
 	 * @model default="false" dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Boolean stating whether the Property is read-only\n \052/'"
 	 * @generated
 	 */
 	boolean isIsReadOnly();
@@ -239,6 +245,7 @@ public interface Property extends MultiplicityElement {
 	 * @see #setDefault(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_Default()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * To be written #######################################\n \052/'"
 	 * @generated
 	 */
 	String getDefault();
@@ -266,6 +273,7 @@ public interface Property extends MultiplicityElement {
 	 * @see #setIsComposite(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_IsComposite()
 	 * @model default="false" dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Boolean stating whether the Property has a containment role\n \052/'"
 	 * @generated
 	 */
 	boolean isIsComposite();
@@ -293,6 +301,7 @@ public interface Property extends MultiplicityElement {
 	 * @see #setIsDerived(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_IsDerived()
 	 * @model default="false" dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * If True, the value of the property is not stored but computed from other properties\n \052/'"
 	 * @generated
 	 */
 	boolean isIsDerived();
@@ -319,6 +328,7 @@ public interface Property extends MultiplicityElement {
 	 * @see #setIsID(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_IsID()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Boolean stating whether the property allows to identify its containing Object\n \052/'"
 	 * @generated
 	 */
 	boolean isIsID();

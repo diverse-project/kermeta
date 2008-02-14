@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.12 2007-10-15 07:13:58 barais Exp $
+/* $Id: String.java,v 1.13 2008-02-14 07:13:57 uid21732 Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -105,6 +105,18 @@ public class String {
 	public static RuntimeObject replace(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		setValue(result, getValue(self).replace(getValue(param0), getValue(param1)));
+		return result;
+	}
+	
+	public static RuntimeObject toUpperCase(RuntimeObject self) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
+		setValue(result, getValue(self).toUpperCase());
+		return result;
+	}
+	
+	public static RuntimeObject toLowerCase(RuntimeObject self) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
+		setValue(result, getValue(self).toLowerCase());
 		return result;
 	}
 	

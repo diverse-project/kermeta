@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.19 2008-01-28 09:43:47 dvojtise Exp $
+ * $Id: IoPackageImpl.java,v 1.20 2008-02-14 07:13:17 uid21732 Exp $
  */
 package org.kermeta.io.impl;
 
@@ -452,6 +452,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getKermetaUnit_BaseAspects() {
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(19);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getIBuildingState() {
 		return iBuildingStateEClass;
 	}
@@ -828,6 +837,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__TYPE_DEFINITION_CACHE);
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__KERMETA_UNIT_REQUIRES);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__LOCKED);
+		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__BASE_ASPECTS);
 
 		iBuildingStateEClass = createEClass(IBUILDING_STATE);
 
@@ -945,6 +955,14 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEReference(getKermetaUnit_TypeDefinitionCache(), this.getTypeDefinitionCache(), this.getTypeDefinitionCache_KermetaUnit(), "typeDefinitionCache", null, 1, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKermetaUnit_KermetaUnitRequires(), this.getKermetaUnitRequire(), null, "kermetaUnitRequires", null, 0, -1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKermetaUnit_Locked(), ecorePackage.getEBoolean(), "locked", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(theStructurePackage.getTypeDefinition());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEEList());
+		g1.getETypeArguments().add(g2);
+		g3 = createEGenericType(theStructurePackage.getTypeDefinition());
+		g2.getETypeArguments().add(g3);
+		initEAttribute(getKermetaUnit_BaseAspects(), g1, "baseAspects", null, 0, 1, KermetaUnit.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(kermetaUnitEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -965,7 +983,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getUsing(), "addUsing", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, theStructurePackage.getString(), "getRequires", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(kermetaUnitEClass, ecorePackage.getEString(), "getRequires", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitEClass, null, "importKermetaUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getKermetaUnit(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -988,7 +1006,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getInternalTypeDefinitionByName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "getPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1021,7 +1039,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		op = addEOperation(kermetaUnitEClass, ecorePackage.getEJavaObject(), "getNodeByModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theStructurePackage.getObject(), "modelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, theStructurePackage.getString(), "getUsings", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(kermetaUnitEClass, ecorePackage.getEString(), "getUsings", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitEClass, null, "error", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "message", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1038,7 +1056,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		addEOperation(kermetaUnitEClass, null, "finalize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, theStructurePackage.getString(), "getUniquePackageQualifiedNames", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(kermetaUnitEClass, ecorePackage.getEString(), "getUniquePackageQualifiedNames", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitEClass, null, "addTypeDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theStructurePackage.getTypeDefinition(), "typeDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1058,12 +1076,9 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		addEOperation(kermetaUnitEClass, null, "unlock", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, this.getKermetaUnit(), "copy", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(kermetaUnitEClass, null, "fillTypeDefinitionCache", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStructurePackage.getPackage(), "aPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		addEOperation(kermetaUnitEClass, null, "fillTypeDefinitionCache", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(kermetaUnitEClass, this.getKermetaUnit(), "copy", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(iBuildingStateEClass, IBuildingState.class, "IBuildingState", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1131,9 +1146,6 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		op = addEOperation(typeDefinitionCacheEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(typeDefinitionCacheEClass, theStructurePackage.getTypeDefinition(), "getInternalTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(typeDefinitionCacheEClass, null, "addTypeDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);

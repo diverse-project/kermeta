@@ -1,4 +1,4 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.17 2008-01-02 10:28:17 vmahe Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.18 2008-02-14 07:13:37 uid21732 Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
  * License : EPL
@@ -29,6 +29,7 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -59,11 +60,11 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 		super();
 	}
 	
-	public void loadmodel() throws KermetaIOFileNotFoundException, URIMalformedException {
+	public void loadmodel() throws KermetaIOFileNotFoundException, URIMalformedException, NotRegisteredURIException {
 		loadmodelfromfile( IOPlugin.FRAMEWORK_KM_URI );
 	}
 	
-	public void loadmodelfromfile(String fileName) throws KermetaIOFileNotFoundException, URIMalformedException {
+	public void loadmodelfromfile(String fileName) throws KermetaIOFileNotFoundException, URIMalformedException, NotRegisteredURIException {
 		unit = IOPlugin.getDefault().getKermetaUnit(fileName);
 //	    unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(kmt_filename);
 		unit.load();
@@ -211,6 +212,8 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 		    System.err.println("'"+args[0]+"' is not a valid file name");
 		    //e.printStackTrace();
 		} catch (URIMalformedException e) {
+			e.printStackTrace();
+		} catch (NotRegisteredURIException e) {
 			e.printStackTrace();
 		}
 		

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VirtualType.java,v 1.4 2007-07-20 15:09:02 ftanguy Exp $
+ * $Id: VirtualType.java,v 1.5 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualType()
- * @model
+ * @model annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
  * @generated
  */
 public interface VirtualType extends ObjectTypeVariable {
@@ -46,6 +46,7 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * @see #setClassDefinition(ClassDefinition)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualType_ClassDefinition()
 	 * @model required="true"
+	 *        annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
 	 * @generated
 	 */
 	ClassDefinition getClassDefinition();
@@ -74,6 +75,7 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualType_ModelType()
 	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer#getVirtualType
 	 * @model opposite="virtualType" required="true" transient="false"
+	 *        annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
 	 * @generated
 	 */
 	VirtualTypeContainer getModelType();
@@ -100,6 +102,7 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * @return the value of the '<em>Type Param Binding</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualType_TypeParamBinding()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
 	 * @generated
 	 */
 	EList<TypeVariableBinding> getTypeParamBinding();

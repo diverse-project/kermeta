@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringLiteral.java,v 1.4 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: StringLiteral.java,v 1.5 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getStringLiteral()
- * @model
+ * @model annotation="GenModel documentation='/**\n * This expression is a literal representing a String value, typically : \"my string\"\n \052/'"
  * @generated
  */
 public interface StringLiteral extends Literal {
@@ -43,6 +43,7 @@ public interface StringLiteral extends Literal {
 	 * @see #setValue(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getStringLiteral_Value()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * The concrete value represented by this literal\n \052/'"
 	 * @generated
 	 */
 	String getValue();

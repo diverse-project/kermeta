@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeVariable.java,v 1.4 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: ModelTypeVariable.java,v 1.5 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -14,7 +14,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  *
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelTypeVariable()
- * @model
+ * @model annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
  * @generated
  */
 public interface ModelTypeVariable extends VirtualTypeContainer, TypeVariable {

@@ -1,4 +1,4 @@
-/*$Id: KermetadocView.java,v 1.2 2007-12-17 14:09:01 ftanguy Exp $
+/*$Id: KermetadocView.java,v 1.3 2008-02-14 07:12:53 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -33,11 +33,10 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
-import org.kermeta.io.KermetaUnit;
+import org.kermeta.texteditor.KermetaEditorEventListener;
+import org.kermeta.texteditor.KermetaTextEditor;
 
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
-import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.ui.textPresentation.KMTDocHTMLPrettyPrinter;
 
 /**
@@ -282,7 +281,7 @@ public class KermetadocView extends ViewPart implements KermetaEditorEventListen
 	}
 	/** 
 	 * Action when a kermetaEditor selection was changed
-	 * @see fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener#selectionChanged()
+	 * @see org.kermeta.texteditor.KermetaEditorEventListener#selectionChanged()
 	 */
 	public void selectionChanged() {
 		
@@ -292,8 +291,7 @@ public class KermetadocView extends ViewPart implements KermetaEditorEventListen
 	 * Action when a kermetaEditor unit was changed
 	 * @see fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener#unitChanged()
 	 */
-	public void unitGotFocus(KMTEditor editor) {
-		KermetaUnit currentUnit = editor.getMcunit();
+	public void unitGotFocus(KermetaTextEditor editor) {
 	}
 	
 	/**

@@ -1,7 +1,7 @@
 package testExternPackage;
 
-require "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km" 
- 
+//require "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km" 
+require kermeta
  
 // operation called in another package
 // This test fails because : 

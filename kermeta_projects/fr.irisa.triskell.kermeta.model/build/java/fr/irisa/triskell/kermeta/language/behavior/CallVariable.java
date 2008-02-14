@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallVariable.java,v 1.5 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: CallVariable.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallVariable()
- * @model
+ * @model annotation="GenModel documentation='/**\n * We call \"CallVariable\" the use of a variable in a statement.\n * in <code>i := j + 1</code>, i and j are 2 CallVariables.\n \052/'"
  * @generated
  */
 public interface CallVariable extends CallExpression {
@@ -43,6 +43,7 @@ public interface CallVariable extends CallExpression {
 	 * @see #setIsAtpre(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallVariable_IsAtpre()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Tells whether this CallVariable represents a call to @pre in a postcondition\n \052/'"
 	 * @generated
 	 */
 	boolean isIsAtpre();

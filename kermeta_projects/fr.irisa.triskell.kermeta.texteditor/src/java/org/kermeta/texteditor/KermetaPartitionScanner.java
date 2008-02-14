@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaPartitionScanner.java,v 1.1 2007-12-17 14:05:08 ftanguy Exp $
+/*$Id: KermetaPartitionScanner.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaDocumentPartioner.java
 * License : EPL
@@ -56,7 +56,8 @@ public class KermetaPartitionScanner extends RuleBasedPartitionScanner {
          * Require
          * 
          */
-        listOfRules.add( new EndOfLineRule("require", require) );
+        listOfRules.add( new EndOfLineRule("require ", require) );
+        listOfRules.add( new EndOfLineRule("require\t", require) );
         
         /*
          * 

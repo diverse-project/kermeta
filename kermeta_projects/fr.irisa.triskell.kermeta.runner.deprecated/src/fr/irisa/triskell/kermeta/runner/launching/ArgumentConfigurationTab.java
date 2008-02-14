@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.31 2007-12-20 10:31:02 dvojtise Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.32 2008-02-14 07:13:07 uid21732 Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -55,12 +55,13 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
-import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.checker.KermetaUnitChecker;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.KermetaMessages;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -275,7 +276,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	{
     		try {
 				kunit = KermetaUnitChecker.check(selectedFile);
-			} catch (KermetaIOFileNotFoundException e) {
+			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			} catch (URIMalformedException e) {
 				e.printStackTrace();
@@ -301,7 +302,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	{
     		try {
 				kunit = KermetaUnitChecker.check(selectedFile);
-			} catch (KermetaIOFileNotFoundException e) {
+			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			} catch (URIMalformedException e) {
 				e.printStackTrace();
@@ -573,7 +574,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		{   // update the className and the operationName
 		    try {
 				parseFileAndUpdateFields(selectedPath);
-			} catch (KermetaIOFileNotFoundException e) {
+			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			} catch (URIMalformedException e) {
 				e.printStackTrace();
@@ -602,7 +603,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	 * @throws URIMalformedException 
 	 * @throws KermetaIOFileNotFoundException 
      */
-    protected void parseFileAndUpdateFields(String currentPath) throws KermetaIOFileNotFoundException, URIMalformedException
+    protected void parseFileAndUpdateFields(String currentPath) throws NotRegisteredURIException, URIMalformedException
     {
         IFile file = ResourceHelper.getIFile(currentPath);
         KermetaUnit selectedUnit = KermetaUnitChecker.check(file);

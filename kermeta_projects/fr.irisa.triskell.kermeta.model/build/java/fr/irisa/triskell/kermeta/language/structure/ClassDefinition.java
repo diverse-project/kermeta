@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinition.java,v 1.9 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: ClassDefinition.java,v 1.10 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -48,6 +48,7 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * @see #setIsAbstract(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_IsAbstract()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 *        annotation="GenModel documentation='/**\n * Boolean stating whether the ClassDefinition is abstract (which means that\n * no instance can be allocated)\n \052/'"
 	 * @generated
 	 */
 	boolean isIsAbstract();
@@ -76,6 +77,7 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_OwnedAttribute()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass
 	 * @model opposite="owningClass" containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Attributes, References, and derived Properties owned by this ClassDefinition.\n \052/'"
 	 * @generated
 	 */
 	EList<Property> getOwnedAttribute();
@@ -94,6 +96,7 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_OwnedOperation()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getOwningClass
 	 * @model opposite="owningClass" containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Operations owned by this ClassDefinition.\n \052/\n'"
 	 * @generated
 	 */
 	EList<Operation> getOwnedOperation();
@@ -109,7 +112,7 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Type</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_SuperType()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Classes from which this ClassDefinition inherits.\n \052/'"
 	 * @generated
 	 */
 	EList<Type> getSuperType();
@@ -128,6 +131,7 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_Inv()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner
 	 * @model opposite="invOwner" containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Invariants defined for this ClassDefinition\n \052/'"
 	 * @generated
 	 */
 	EList<Constraint> getInv();

@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionCacheEntryValidator.java,v 1.1 2007-09-19 12:14:58 ftanguy Exp $
+ * $Id: TypeDefinitionCacheEntryValidator.java,v 1.2 2008-02-14 07:13:17 uid21732 Exp $
  */
 package org.kermeta.io.validation;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * A sample validator interface for {@link org.kermeta.io.TypeDefinitionCacheEntry}.
@@ -18,5 +19,7 @@ public interface TypeDefinitionCacheEntryValidator {
 	boolean validate();
 
 	boolean validateQualifiedName(String value);
+	boolean validateTypeDefinition(EList<TypeDefinition> value);
+
 	boolean validateTypeDefinition(TypeDefinition value);
 }

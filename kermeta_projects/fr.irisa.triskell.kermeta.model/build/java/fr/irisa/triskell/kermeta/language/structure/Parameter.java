@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Parameter.java,v 1.3 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Parameter.java,v 1.4 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getParameter()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Definition for operation parameter\n \052/'"
  * @generated
  */
 public interface Parameter extends MultiplicityElement {
@@ -45,6 +45,7 @@ public interface Parameter extends MultiplicityElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getParameter_Operation()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getOwnedParameter
 	 * @model opposite="ownedParameter"
+	 *        annotation="GenModel documentation='/**\n * Owning operation\n \052/'"
 	 * @generated
 	 */
 	Operation getOperation();

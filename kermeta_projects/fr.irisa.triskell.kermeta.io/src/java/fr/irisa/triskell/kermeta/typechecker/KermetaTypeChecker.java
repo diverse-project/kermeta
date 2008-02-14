@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.29 2008-02-06 09:38:24 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.30 2008-02-14 07:13:16 uid21732 Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -14,13 +14,11 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -44,9 +42,8 @@ public class KermetaTypeChecker {
 	final static private Logger internalLog = LogConfigurationHelper.getLogger("TypeChecker");	
 	
     protected KermetaUnit unit;
+   
     protected TypeCheckerContext context;
-    /** Attribute that is set to semantically abstract class definitions */
-   // public static final String IS_SEMANTICALLY_ABSTRACT = "isSemanticallyAbstract";
         
     private boolean internalOperation = false;
     
@@ -59,80 +56,60 @@ public class KermetaTypeChecker {
     public ArrayList<String> correctOperation = new ArrayList<String>();
     public ArrayList<String> wrongOperations = new ArrayList<String>();
     
-    private IProgressMonitor monitor;
-    
     /**
      * @param unit
      */
-    public KermetaTypeChecker(KermetaUnit unit, IProgressMonitor monitor) {
+    public KermetaTypeChecker(KermetaUnit unit) {
         super();
-        this.monitor = monitor;
         this.unit = unit;
-        if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object", monitor) != null)
-        	TypeCheckerContext.initializeTypeChecker(unit, monitor);
+        if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object") != null)
+        	TypeCheckerContext.initializeTypeChecker(unit);
         context = new TypeCheckerContext(unit);
     }
        
     
     private void checkPackages(List<Package> packages) {
-    	Iterator <Package> iterator = packages.iterator();
-    	while ( iterator.hasNext() ) {
+    	for ( Package current : packages ) {
     		
-    		if ( monitor.isCanceled() )
-    			return;
-    		
-    		Package current = iterator.next();
-        	
-        	Iterator <TypeDefinition> it = current.getOwnedTypeDefinition().iterator();
-            // First, annotate semantically abstract class definitions
         	// Lets call this the structural-only pass, and check type parameterizations, too
-        	while ( it.hasNext() ) {
-        		
-        		TypeDefinition td = it.next();
-        		
+        	for ( TypeDefinition td : current.getOwnedTypeDefinition() ) {      		
         		if (td instanceof ClassDefinition) {
         			ClassDefinition cdef = (ClassDefinition) td;
-        			annotateSemanticallyAbstractClassDefinition(cdef);
            			// Check any parameterized supertypes
-        			for (Object sup : cdef.getSuperType()) {
-        				ParameterizedTypeChecker.checkType((fr.irisa.triskell.kermeta.language.structure.Type) sup, unit, context, cdef, monitor);
-        			}
+        			for (fr.irisa.triskell.kermeta.language.structure.Type sup : cdef.getSuperType())
+        				ParameterizedTypeChecker.checkType(sup, unit, context, cdef);
+
         			// Check property types
-        			for (Object prop : cdef.getOwnedAttribute()) {
-        				if(((Property) prop).getType() != null)
-        					ParameterizedTypeChecker.checkType(((Property) prop).getType(), unit, context, (Property)prop, monitor);
+        			for (Property prop : cdef.getOwnedAttribute()) {
+        				if ( prop.getType() != null )
+        					ParameterizedTypeChecker.checkType( prop.getType(), unit, context, prop );
         				else
-        					unit.error("TYPE-CHECKER : property " + td.getName() + "." + ((Property)prop).getName() + " has no type", prop);
+        					unit.error("TYPE-CHECKER : property " + td.getName() + "." + prop.getName() + " has no type", prop);
         			}
+
         			// Check operation signatures
-        			for (Object opObj : cdef.getOwnedOperation()) {
-        				
-        				Operation op = (Operation) opObj;
-        				if (null != op.getType()) {
-        					ParameterizedTypeChecker.checkType(op.getType(), unit, context, op, monitor);
-        				}
+        			for ( Operation op : cdef.getOwnedOperation() ) {
+        				if ( op.getType() != null )
+        					ParameterizedTypeChecker.checkType(op.getType(), unit, context, op);
+
         				//Check parameter types
-        				for (Object param : op.getOwnedParameter()) {
-        					ParameterizedTypeChecker.checkType(((Parameter)param).getType(), unit, context, (Parameter)param, monitor);
-        				}
+        				for ( Parameter param : op.getOwnedParameter() )
+        					ParameterizedTypeChecker.checkType( param.getType(), unit, context, param );
         			}
+ 
         		} else if (td instanceof PrimitiveType) {
         			// Check aliased types
-        			ParameterizedTypeChecker.checkType(((PrimitiveType)td).getInstanceType(), unit, context, (PrimitiveType)td, monitor);
+        			ParameterizedTypeChecker.checkType(((PrimitiveType)td).getInstanceType(), unit, context, (PrimitiveType)td);
         		}
         	}
-            // Second, check for each class def, its operation (inc. bodies) and properties
+        	
+        	// Second, check for each class def, its operation (inc. bodies) and properties
         	// (Uses annotations set above to check operation call "new".)
-        	it = current.getOwnedTypeDefinition().iterator();
-        	while ( it.hasNext() )
-        	{
-        		TypeDefinition td = it.next();
-                if (td instanceof ClassDefinition) {
+        	for ( TypeDefinition td : current.getOwnedTypeDefinition() ) {      		
+            	if (td instanceof ClassDefinition)
                     checkClassDefinition((ClassDefinition)td);
-                }
             }
 
-        	
     	}
     }
     
@@ -142,133 +119,52 @@ public class KermetaTypeChecker {
      * of a kermeta unit
      */
     public void checkUnit() {		
-    	synchronized ( KermetaTypeChecker.class ) {
-    		
-    		unit.lock();
-    		    		
+   		if ( ! unit.isTypeChecked() ) {
     		internalLog.info("Typechecking " + unit.getUri());
-    		if ( ! unit.isTypeChecked() && ! unit.isErroneous() ) {
+    		if ( ! unit.isErroneous() ) {
     			internalOperation = true;
 	    		checkPackages( unit.getInternalPackages() );
 	    		unit.setTypeChecked( true );
 	    	}
-	    	
+		    	
     		if ( ! unit.isErroneous() ) {
-    			
-				if ( monitor.isCanceled() )
-					return;
-    			
+	    			
     			for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
-    				if ( ! importedUnit.isTypeChecked() ) {
-		    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit, monitor);
-		    			IOPlugin.internalLog.debug( importedUnit.getUri() );
+    				if ( ! importedUnit.isTypeChecked() && ! importedUnit.isErroneous() ) {
+		    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit);
 		    			t.checkUnit();
 		    		}
 		    	}
     		}
-    		
-    		unit.unlock();
     	}
     }
-    
-	/** 
-	 * A semantically abstract class definition contains at least one abstract 
-	 * operation, or does not provide a concrete implementation of an inherited
-	 * operation.
-	 * This method adds a transient tag to any type definition that is "semantically abstract".
-	 * The tag name is "isSemanticallyAbstract"
-	 * If this tag exists, its value represent a message explaining why it is abstract
-	 * <pre>
-	 * class A {
-	 * 		operation x() is abstract
-	 * 		operation y() is do end
-	 * }
-	 * 
-	 * class B inherits A {
-	 * 	 	method x() is do end
-	 * }
-	 * </pre>
-	 * 
-	 * FIXME : This method is not efficient.
-	 */
-	public boolean annotateSemanticallyAbstractClassDefinition(ClassDefinition typedef)
-	{
-		boolean foundSAbstractTag = false;
-		if (typedef.isIsAbstract()) return true;
-		Iterator<CallableOperation> it = InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition((ClassDefinition)typedef)).iterator();
-		while (it.hasNext() && !foundSAbstractTag /*&& !ClassDefinitionHelper.isSemanticallyAbstract(typedef)*/)
-		{
-			Operation op = ((CallableOperation)it.next()).getOperation();
-			if (op.isIsAbstract()) {
-				/*
-				 * 
-				 * Maybe the class is an aspect and the operation is defined in on of its base classes.
-				 * 
-				 */
-				/*for ( TypeDefinition typeDefinition : (List<TypeDefinition>) typedef.getBaseAspects() ) {
-					if ( typeDefinition instanceof ClassDefinition ) {
-						ClassDefinition classDefinition = (ClassDefinition) typeDefinition;
-						
-					}
-				}*/
-				
-				foundSAbstractTag = true;
-				/*Tag tag = StructureFactory.eINSTANCE.createTag(); 
-				tag.setName(IS_SEMANTICALLY_ABSTRACT); tag.setValue(op.getName());
-				//typedef.getTag().add(tag);
-				typedef.getOwnedTag().add(tag); // tag is owned by the typedef
-				typedef.getTag().add(tag); // typedef is tagged*/
-			}
-		}
-		return foundSAbstractTag;
-	}
-	
-
     
     /**
      * Type check all the operations and derived properties
      * of a class definition
-     * @param clsdef
+     * @param classDefinition
      */
-    public void checkClassDefinition(ClassDefinition clsdef) {
-		
-		if ( monitor.isCanceled() )
-			return;
-    	
-        Iterator<Operation> itOp = clsdef.getOwnedOperation().iterator();
-        while(itOp.hasNext()) {
-            Operation op = (Operation)itOp.next();
+    public void checkClassDefinition(ClassDefinition classDefinition) {
+       	for ( Operation op : classDefinition.getOwnedOperation() )
             checkOperation(op);
-        }
-        
-        Iterator<Property> itProp = clsdef.getOwnedAttribute().iterator();
-        while(itProp.hasNext()) {
-            Property prop = (Property)itProp.next();
+       	
+    	for ( Property prop : classDefinition.getOwnedAttribute() )
             checkDerivedProperty(prop);
-        }
-        
-        Iterator<Constraint> itConstraint = clsdef.getInv().iterator();
-        while(itConstraint.hasNext()) {
-            Constraint c = (Constraint)itConstraint.next();
+    	
+    	for ( Constraint c : classDefinition.getInv() )
             checkConstraint(c);
-        }
     }
     
-    public void checkConstraint(Constraint c)
-    { 
-		if ( monitor.isCanceled() )
-			return;
-    	
+    public void checkConstraint(Constraint c) {     	
     	if (c.eContainer() instanceof ClassDefinition)
-           context.init((ClassDefinition)c.eContainer());
+    		context.init((ClassDefinition)c.eContainer());
     	else
     		context.init(((Operation)c.eContainer()).getOwningClass(),(Operation) c.eContainer());
     	
-           ExpressionChecker.typeCheckExpression(c.getBody(), unit, context);
-           if(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.VoidType) || !(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.BooleanType))) {
-   				unit.error("TYPE-CHECKER : The type of a constraint should be Boolean", c.getBody());
-   		    }
-           
+    	ExpressionChecker.typeCheckExpression(c.getBody(), unit, context);
+        if(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.VoidType) || !(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.BooleanType))) {
+        	unit.error("TYPE-CHECKER : The type of a constraint should be Boolean", c.getBody());
+   		}
     }
     
     /**
@@ -277,9 +173,6 @@ public class KermetaTypeChecker {
      */
     public void checkOperation(Operation op) {
         
-		if ( monitor.isCanceled() )
-			return;
-    	
         // THIS IS JUST FOR TESTING PURPOSES
         int error_count = unit.getMessages().size();
         
@@ -289,17 +182,11 @@ public class KermetaTypeChecker {
         if (op.getBody() != null)
             ExpressionChecker.typeCheckExpression(op.getBody(), unit, context);
         
-        Iterator<Constraint> it = op.getPre().iterator();
-        while(it.hasNext()) {
-            Constraint c = (Constraint)it.next();
+        for ( Constraint c : op.getPre() )
             checkConstraint(c);
-        }
-        
-        it = op.getPost().iterator();
-        while(it.hasNext()) {
-            Constraint c = (Constraint)it.next();
+
+        for ( Constraint c : op.getPost() )
             checkConstraint(c);
-        }
         
         // THIS IS JUST FOR TESTING PURPOSES
         if ( internalOperation ) {
@@ -318,10 +205,8 @@ public class KermetaTypeChecker {
      * Type checks the getter and setter of the derived property
      * @param op
      */
-    public void checkDerivedProperty(Property op)
-    { 
-        if (op.isIsDerived())
-        {
+    public void checkDerivedProperty(Property op) { 
+        if ( op.isIsDerived() ) {
             // initialize context (add "value")
             context.init(op.getOwningClass(), op);
             if (op.getSetterBody() != null)
@@ -329,7 +214,6 @@ public class KermetaTypeChecker {
             if (op.getGetterBody() != null)
                 ExpressionChecker.typeCheckExpression(op.getGetterBody(), unit, context);
         }
-        
     }
 
     public TypeCheckerContext getContext() {

@@ -7,7 +7,7 @@ require kermeta
 
 using kermeta::standard
 using kermeta::utils
-using kermeta::reflection
+using kermeta::language::structure
 using kermeta::kunit
 
 

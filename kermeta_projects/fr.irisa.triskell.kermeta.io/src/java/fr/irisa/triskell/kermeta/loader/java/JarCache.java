@@ -1,4 +1,4 @@
-/*$Id: JarCache.java,v 1.2 2007-07-20 15:08:08 ftanguy Exp $
+/*$Id: JarCache.java,v 1.3 2008-02-14 07:13:19 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaLoaderCache.java
 * License : EPL
@@ -17,14 +17,15 @@ import java.lang.reflect.Method;
 import java.util.Hashtable;
 
 import org.apache.log4j.Logger;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
+import org.kermeta.model.internal.TagHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-import org.kermeta.io.KermetaUnit;
 
 /**
  * This class implements a cache for various request on the java jar
@@ -79,9 +80,9 @@ public class JarCache {
 			// retreive the class definition
 			String typeQualifiedName = NamedElementHelper.getQualifiedName(op.getOwningClass());			 
     		String javaQualifiedName = typeQualifiedName.replaceAll("::",".");
-    		Tag isjavaoperationtag = TagHelper.findTagFromName(op, Jar2KMPass.JAVAOPERATION_TAG_NAME);
+    		Tag isjavaoperationtag = KermetaModelHelper.Tag.getTag(op, Jar2KMPass.JAVAOPERATION_TAG_NAME);
     		if(isjavaoperationtag == null) return null; // this is not a a java operation don't need to search for it
-    		Tag indextag = TagHelper.findTagFromName(op, Jar2KMPass.JAVAMETHODINDEX_TAG_NAME);
+    		Tag indextag = KermetaModelHelper.Tag.getTag(op, Jar2KMPass.JAVAMETHODINDEX_TAG_NAME);
     		Integer index = new Integer(indextag.getValue());
 			try{			    		
 				Class currentClass = classLoader.loadClass(javaQualifiedName);
@@ -103,7 +104,7 @@ public class JarCache {
 			//	retreive the class definition
 			String typeQualifiedName = NamedElementHelper.getQualifiedName(op.getOwningClass());			 
     		String javaQualifiedName = typeQualifiedName.replaceAll("::",".");
-    		Tag indextag = TagHelper.findTagFromName(op, Jar2KMPass.JAVACONSTRUCTORINDEX_TAG_NAME);
+    		Tag indextag = KermetaModelHelper.Tag.getTag(op, Jar2KMPass.JAVACONSTRUCTORINDEX_TAG_NAME);
     		Integer index = new Integer(indextag.getValue());
 			try{			    		
 				Class currentClass = classLoader.loadClass(javaQualifiedName);
@@ -166,9 +167,9 @@ public class JarCache {
 		if(plannedNbClasses > plannedNbClassesThresold){
 			// store additional data for retreiving the correct Method
 			// put the index of the method 
-			TagHelper.createNonExistingTagFromNameAndValue(operation, 
-					Jar2KMPass.JAVAMETHODINDEX_TAG_NAME, 
+			Tag t = KermetaModelHelper.Tag.create(Jar2KMPass.JAVAMETHODINDEX_TAG_NAME, 
 					new Integer(methodIndex).toString());
+			operation.getOwnedTags().add(t);
 					 
 		}
 		else cachedJavaMethods.put(operation, method);
@@ -177,9 +178,9 @@ public class JarCache {
 		if(plannedNbClasses > plannedNbClassesThresold){
 			// store additional data for retreiving the correct Contructor
 			// put the index of the method 
-			TagHelper.createNonExistingTagFromNameAndValue(operation, 
-					Jar2KMPass.JAVACONSTRUCTORINDEX_TAG_NAME, 
+			Tag t = KermetaModelHelper.Tag.create(Jar2KMPass.JAVACONSTRUCTORINDEX_TAG_NAME, 
 					new Integer(contructorIndex).toString()); 
+			operation.getOwnedTags().add(t);
 		}
 		else cachedJavaConstructors.put(operation, constructor);
 	}

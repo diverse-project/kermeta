@@ -1,6 +1,6 @@
 
 
-/*$Id: FrameworkMapping.java,v 1.3 2007-12-11 13:58:59 cfaucher Exp $
+/*$Id: FrameworkMapping.java,v 1.4 2008-02-14 07:13:18 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	FrameworkMapping.java
 * License : EPL
@@ -37,6 +37,10 @@ public class FrameworkMapping {
 			, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km");
 		
 		mapping.put(
+				"platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore"
+				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km");
+		
+		mapping.put(
 				"platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.ecore"
 				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km");
 				
@@ -60,9 +64,9 @@ public class FrameworkMapping {
 				"platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.ecore"
 				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km");
 				
-		mapping.put(
+		/*mapping.put(
 				"platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.ecore"
-				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km");
+				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km");*/
 				
 		mapping.put(
 				"platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore"
@@ -76,9 +80,9 @@ public class FrameworkMapping {
 				"platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.ecore"
 				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km");
 				
-		mapping.put(
+		/*mapping.put(
 				"platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.ecore"
-				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km");
+				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km");*/
 				
 		mapping.put(
 				"platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.ecore"
@@ -118,6 +122,10 @@ public class FrameworkMapping {
 			, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km");
 		
 		mapping.put(
+				"platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore"
+				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km");
+		
+		mapping.put(
 				"platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.ecore"
 				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km");
 				
@@ -141,9 +149,9 @@ public class FrameworkMapping {
 				"platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.ecore"
 				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km");
 				
-		mapping.put(
+		/*mapping.put(
 				"platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.ecore"
-				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km");
+				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km");*/
 				
 		mapping.put(
 				"platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore"
@@ -157,9 +165,9 @@ public class FrameworkMapping {
 				"platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.ecore"
 				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km");
 				
-		mapping.put(
+	/*	mapping.put(
 				"platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.ecore"
-				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km");
+				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km");*/
 				
 		mapping.put(
 				"platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.ecore"

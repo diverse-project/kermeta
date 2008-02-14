@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariable.java,v 1.5 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: TypeVariable.java,v 1.6 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -42,7 +42,7 @@ public interface TypeVariable extends TypeContainer, Type, NamedElement {
 	 * @return the value of the '<em>Supertype</em>' reference.
 	 * @see #setSupertype(Type)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeVariable_Supertype()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Reference to the supertype, if any\n \052/'"
 	 * @generated
 	 */
 	Type getSupertype();

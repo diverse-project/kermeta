@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.18 2008-02-06 09:38:25 dvojtise Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.19 2008-02-14 07:13:17 uid21732 Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -22,6 +22,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.TypeDefinitionCacheEntry;
 import org.kermeta.io.impl.KermetaUnitImpl;
 import org.kermeta.loader.LoadingContext;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
@@ -36,7 +37,6 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaParser;
@@ -130,7 +130,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
          * Attributes
          * 
          */
-        for ( Property property : ClassDefinitionHelper.getAllProperties(context) )
+        for ( Property property : KermetaModelHelper.ClassDefinition.getAllProperties(context) )
         	loadingContext.addSymbol( new KMSymbolProperty(property) );
         
         /*
@@ -138,7 +138,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
          * Operations
          * 
          */
-        for ( Operation operation : ClassDefinitionHelper.getAllOperations(context) )
+        for ( Operation operation : KermetaModelHelper.ClassDefinition.getAllOperations(context) )
         	loadingContext.addSymbol( new KMSymbolOperation(operation) );
         
 		if (ast_exp != null)
@@ -153,7 +153,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
        if ( expression == null || isErroneous() )
            throw new Error("Internal error : cannot type check the expression to eval");
        if (checker == null) {
-           checker = new KermetaTypeChecker(this, new NullProgressMonitor() );
+           checker = new KermetaTypeChecker(this );
        }
        checker.getContext().init(this);
        
@@ -171,62 +171,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
 	   checker.checkExpression(expression);
        return checker;
     }
-    /*
-     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#preLoad()
-     */
-    public void preLoad() {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadAnnotations()
-     */
-    public void loadAnnotations() {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadImportedUnits()
-     */
-    public void loadImportedUnits() {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadTypeDefinitions()
-     */
-    public void loadTypeDefinitions() {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadStructuralFeatures()
-     */
-    public void loadStructuralFeatures() {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadOppositeProperties()
-     */
-    public void loadOppositeProperties() {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadBodies()
-     */
-    public void loadBodies() {
-        // TODO Auto-generated method stub
-
-    }
-
+    
     public ClassDefinition getContext() {
         return context;
     }

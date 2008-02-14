@@ -6,12 +6,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.kermeta.io.KermetaUnit;
-//import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 public class DirectedGraphClass implements DirectedGraphInterface {
@@ -50,27 +49,15 @@ public class DirectedGraphClass implements DirectedGraphInterface {
     /**
      * cycle detection need a clean list of all nodes
      */
-    public void buildNode() {        
-        Iterator<TypeDefinition> it = TypeDefinitionSearcher.getInternalTypesDefinition(unit).iterator();
-        while(it.hasNext()) {
-            TypeDefinition td = it.next();
-            if (td instanceof ClassDefinition) {
+    public void buildNode() {
+    	for ( TypeDefinition td : KermetaUnitHelper.getInternalTypeDefinitions(unit) )
+            if (td instanceof ClassDefinition)
             	nodes.add(td);
-            }
-        }
     }
     public void buildNode(KermetaUnit u) {
-        
-        
-        Iterator<TypeDefinition> it = TypeDefinitionSearcher.getInternalTypesDefinition(unit).iterator();
-        while(it.hasNext()) {
-            TypeDefinition td = it.next();
-            if (td instanceof ClassDefinition) {
+        for ( TypeDefinition td : KermetaUnitHelper.getInternalTypeDefinitions(unit) )
+            if (td instanceof ClassDefinition)
             	nodes.add(td);
-            	
-                //visitClassDefinition((ClassDefinition)td);               
-            }
-        }
     }
     /**
      * Type check all the operations and derived properties

@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.11 2008-02-06 09:38:25 dvojtise Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.12 2008-02-14 07:13:18 uid21732 Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL
@@ -19,8 +19,10 @@ import java.util.Map;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -28,6 +30,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitLoader;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
@@ -77,9 +80,35 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 	
 	public void constructAspectsLists(KermetaUnit kermetaUnit) {	
 		for ( TypeDefinition t : KermetaUnitHelper.getInternalTypeDefinitions(kermetaUnit) ) {
-			EList<TypeDefinition> l = KermetaUnitHelper.getAspects(kermetaUnit, t);
+			if ( t.isIsAspect() ) {
+				String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(t);
+				for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) ) {
+					for ( TypeDefinition tdef : KermetaUnitHelper.getInternalTypeDefinitions(importedUnit) ) {
+						if ( ! tdef.isIsAspect() ) {
+							String s = KermetaModelHelper.NamedElement.qualifiedName(tdef);
+							if ( qualifiedName.equals(s) ) {
+								EList<TypeDefinition> l = importedUnit.getAspects().get(tdef);
+								if ( l == null ) {
+									l = new UniqueEList<TypeDefinition>();
+									importedUnit.getAspects().put(tdef, l);
+								}
+								l.add( t );
+								l = kermetaUnit.getBaseAspects().get(t);
+								if ( l == null ) {
+									l = new UniqueEList<TypeDefinition>();
+									kermetaUnit.getBaseAspects().put(t, l);
+								}
+								l.add( tdef );
+							}
+						}
+					}
+				}
+			}
+			
+			
+		/*	EList<TypeDefinition> l = KermetaUnitHelper.getAspects(kermetaUnit, t);
 			if ( ! l.isEmpty() )
-				kermetaUnit.getAspects().put( t, l);
+				kermetaUnit.getAspects().put( t, l);*/
 		}
 	}
 	

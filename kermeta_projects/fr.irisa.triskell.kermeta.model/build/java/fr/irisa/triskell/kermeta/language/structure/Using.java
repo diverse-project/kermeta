@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Using.java,v 1.2 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Using.java,v 1.3 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getUsing()
- * @model
+ * @model annotation="GenModel documentation='/**\n * To be written\n \052/'"
  * @generated
  */
 public interface Using extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -43,6 +43,7 @@ public interface Using extends fr.irisa.triskell.kermeta.language.structure.Obje
 	 * @see #setQualifiedName(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getUsing_QualifiedName()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * To be written\n \052/'"
 	 * @generated
 	 */
 	String getQualifiedName();

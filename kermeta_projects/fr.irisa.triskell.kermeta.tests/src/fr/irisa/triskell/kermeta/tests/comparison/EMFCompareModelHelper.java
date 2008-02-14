@@ -1,4 +1,4 @@
-/* $Id: EMFCompareModelHelper.java,v 1.4 2008-02-06 09:36:00 dvojtise Exp $
+/* $Id: EMFCompareModelHelper.java,v 1.5 2008-02-14 07:13:29 uid21732 Exp $
  * Project   : fr.irisa.triskell.kermeta.tests.comparison
  * File      : EMFCompareModelHelper.java
  * License   : EPL

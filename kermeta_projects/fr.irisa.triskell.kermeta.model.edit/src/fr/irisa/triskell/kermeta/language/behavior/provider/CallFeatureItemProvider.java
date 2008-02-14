@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureItemProvider.java,v 1.9 2008-01-22 16:13:25 cfaucher Exp $
+ * $Id: CallFeatureItemProvider.java,v 1.10 2008-02-14 07:13:53 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -261,16 +261,6 @@ public class CallFeatureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createBlock()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -292,6 +282,16 @@ public class CallFeatureItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
+				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

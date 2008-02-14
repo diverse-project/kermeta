@@ -1,4 +1,4 @@
-/* $Id: KMT2KMRelationalExpressionBuilder.java,v 1.9 2008-01-04 14:17:24 dvojtise Exp $
+/* $Id: KMT2KMRelationalExpressionBuilder.java,v 1.10 2008-02-14 07:13:16 uid21732 Exp $
  * Licence : EPL
  * Copyright : IRISA / INRIA / University of rennes 1
  * Created on 6 f�vr. 2005
@@ -10,18 +10,17 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.util.Hashtable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import org.eclipse.gymnast.runtime.core.ast.ASTNode;
-
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.parser.gen.ast.AdditiveExpression;
 import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.parser.gen.ast.RelationalExpression;
 import fr.irisa.triskell.kermeta.parser.gen.ast.RelationalOp;
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
-import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
 
 
 /**

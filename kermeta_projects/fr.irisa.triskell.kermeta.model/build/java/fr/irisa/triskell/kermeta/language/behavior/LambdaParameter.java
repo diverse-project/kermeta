@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaParameter.java,v 1.6 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: LambdaParameter.java,v 1.7 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -21,7 +21,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaParameter()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Refers to parameter definition in lambda expression\n \052/'"
  * @generated
  */
 public interface LambdaParameter extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -44,6 +44,7 @@ public interface LambdaParameter extends fr.irisa.triskell.kermeta.language.stru
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaParameter_Name()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * Name of the lambda parameter\n \052/'"
 	 * @generated
 	 */
 	String getName();
@@ -70,6 +71,7 @@ public interface LambdaParameter extends fr.irisa.triskell.kermeta.language.stru
 	 * @see #setType(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaParameter_Type()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * To be written ################################\n \052/'"
 	 * @generated
 	 */
 	TypeReference getType();

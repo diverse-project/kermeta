@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.60 2008-01-23 10:49:48 cfaucher Exp $
+/* $Id: ExpressionChecker.java,v 1.61 2008-02-14 07:13:16 uid21732 Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -10,18 +10,22 @@
 * 		Francois Tanguy
 * 		Didier Vojtisek
 * 		Jim Steel
-* 		Zoé Drey
+* 		Zoï¿½ Drey
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
@@ -55,6 +59,8 @@ import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -66,6 +72,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FSuperCall;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
@@ -93,6 +100,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	protected TypeCheckerContext context;
 	
+	private List<Operation> specialOperations = new ArrayList<Operation>();
 	
 	/**
 	 * Used for type inference on lambda expression parameters
@@ -103,6 +111,17 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		this.unit = unit;
 		expressionTypes = new Hashtable<Expression, Type>();
 		this.context = context;
+		initializeSpecialOperations();
+	}
+
+	private void initializeSpecialOperations() {
+		specialOperations.add( TypeCheckerContext.getObjectAsTypeOperation() );
+		specialOperations.add( TypeCheckerContext.getClassNewOperation() );
+		specialOperations.add( TypeCheckerContext.getModelTypeNewOperation() );
+		specialOperations.add( TypeCheckerContext.getClassCloneOperation() );
+		specialOperations.add( TypeCheckerContext.getModelFilterOperation() );
+		specialOperations.add( TypeCheckerContext.getModelAddOperation() );
+		specialOperations.add( TypeCheckerContext.getModelRemoveOperation() );		
 	}
 	
 	/**********************************
@@ -178,6 +197,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	 * @return
 	 */
 	protected Type checkOperationCall(CallableOperation op, CallExpression exp) {
+		
 		// Get the type of the operation as a function type
 	    Type operation_type = op.getType();
 		
@@ -207,36 +227,28 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		    result = operation_type;
 		
 	    } else {
-	    
+
 		    boolean error = false;
-	
+
 		    // It can be a generic operation : Type parameters
 		    // actual values have to be inferred from parameter types
 		    Type[] required_params = operation_type.getFunctionTypeLeft().getProductType();
 		    
 		    // Try to infer actual types of type variables
-		    Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> binding = 
-		    	new Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type>();
-	    	if(required_params.length != exp.getParameters().size()){
+		    Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> binding = new Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type>();
+	    	if ( required_params.length != exp.getParameters().size() ) {
 	    		unit.error("TYPE-CHECKER : problem with the number of parameters passed to the operation; passed " + exp.getParameters().size() + "; expecting "+required_params.length + "; maybe due to bug #108 ");
-	    		//unit.messages.addError("TYPE-CHECKER : problem with the number of parameters passed to the operation; passed " + exp.getParameters().size() + "; expecting "+required_params.length + "; maybe due to bug #108 ", exp);
-			    error = true;
+	    		 error = true;
 	    	}
+	    		    	
 		    if (!error) {
 			    // get Type of actual parameters
 			    for(int i=0; i<exp.getParameters().size(); i++) {
-			        //expected_type = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)required_params[i]).type));
 			        expected_type = (SimpleType)required_params[i];
-			        
-			        
 			        Type provided = (Type)this.accept((Expression)exp.getParameters().get(i));
-			        
-			        try
-			        {
-					    //provided = PrimitiveTypeResolver.getResolvedType(provided);
+			        try {
 					    provided.inferTypeVariableBinding(((SimpleType)required_params[i]).type, binding);
-					}
-					catch(TypeDoesNotMatchError e) {
+					} catch(TypeDoesNotMatchError e) {
 					    unit.error("TYPE-CHECKER : Type of argument " + i + " mismatch, expecting "+required_params[i]+", found "+provided+" (TypeDoesNotMatch).", (Expression)exp.getParameters().get(i));
 					    error = true;
 					} catch (Exception e) {
@@ -244,26 +256,21 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 					}
 			    }
 		    }
-		    
+
 		    // Check that the type of the actual parameter matches the types of the formal parameters
 		    if (!error) {
 			    // REPLACE AND CHECK
 			    for(int i=0; i<exp.getParameters().size(); i++) {
 					Type provided = getTypeOfExpression((Expression)exp.getParameters().get(i));
 					Type expected = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)required_params[i]).type, binding));
-					
 					if (!provided.isSubTypeOf(expected)) {
-						provided.isSubTypeOf(expected);
-						//new ClassConformanceChecker( (ClassDefinition) ((Class) provided.getFType()).getTypeDefinition() );
-						//KermetaUnitHelper.getKermetaUnitFromObject( ((Class)((Class) expected.getFType()).getTypeParamBinding().get(0).getType()).getTypeDefinition() );
-						//KermetaUnitHelper.getKermetaUnitFromObject( ((Class)((Class) provided.getFType()).getTypeParamBinding().get(0).getType()).getTypeDefinition() );
 						unit.error("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+expected+", found "+provided+".",(Expression)exp.getParameters().get(i));
 					    error = true;
 					}
 			    }
 		    }
 		    
-		    if (!error) {
+		    if ( ! error ) {
 			    exp.getStaticTypeVariableBindings().clear();
 			    // store values of type variables in the call expression
 			    for(int i=0; i<op.getOperation().getTypeParameter().size(); i++) {
@@ -288,19 +295,24 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		    }
 		    
 		    // Replace type variables in the return type of the operation
-		    if (!error)
+		    if ( ! error )
 		        result = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)result).type, binding));
 		    else
 		        result = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)result).type));
-		   
+		
 	    }
 	    
-	    /* ********************************************************* */
-	    /* HERE STARTS THE IMPLEMENTATION FOR TYPING SPECIAL METHODS */
-	    /* ********************************************************* */
-	   
+	    if ( specialOperations.contains( op.getOperation() ) )
+	    	result = processSpecialOperations(result, op, exp);
+	    
+	    // Return result
+	    return result;
+	}
+	
+	private Type processSpecialOperations(Type t, CallableOperation op, CallExpression exp) {
+		Type result = t;
 	    // THE METHOD ISTYPE ON OBJECT (The OCL like cast)
-	    if (op.getOperation() == TypeCheckerContext.getObjectAsTypeOperation() || op.getOperation() == TypeCheckerContext.getRObjectAsTypeOperation()) {
+	    if (op.getOperation() == TypeCheckerContext.getObjectAsTypeOperation() ) {
 	    	// the operation has one Class parameter; 
 	    	// if this parameter is a TypeLitteral then the return type of the operation corresponds to that type litteral
 	    	Expression asType_param = (Expression)exp.getParameters().get(0);
@@ -313,12 +325,11 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        if (((CallFeature)exp).getTarget() instanceof TypeLiteral) {
 	            result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
 	            // check that it is a concrete class (if the literal is in fact a class. If its a type variable, we're ok)
-	            if (((SimpleType)result).getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
-	            	if ((((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)result).getType()).getTypeDefinition()).isIsAbstract()))
+	            if (((SimpleType)result).getType() instanceof Class) {
+	            	Class c = (Class) ( (SimpleType)result ).getType();
+	            	if ( ((ClassDefinition)c.getTypeDefinition()).isIsAbstract() )
 	            		unit.error("TYPE-CHECKER : abstract class "+ result +" should not be instanciated.", (Expression)exp);
 	            }
-	           // if ((result instanceof fr.irisa.triskell.kermeta.language.structure.Class) && ((SimpleType)result).isSemanticallyAbstract())
-	             //   unit.error("TYPE-CHECKER : [Semantically] abstract class "+ result +" should not be instanciated.", (Expression)exp);
 	        }
 	    }
 	    
@@ -458,8 +469,6 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    	    unit.error("TYPE-CHECKER : Add operation takes only one parameter", (Expression)exp);
 	    	}
 	    }
-	    
-	    // Return result
 	    return result;
 	}
 	
@@ -485,11 +494,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	 */
 	protected Type visitExpressionList(EList<Expression> expressions) {
 		Type result = TypeCheckerContext.VoidType;
-		Iterator<Expression> it = expressions.iterator();
-		while(it.hasNext()) {
-			Expression exp = (Expression)it.next();
-			result = (Type) this.accept(exp);
-		}
+		for ( Expression expression : expressions )
+			result = (Type) this.accept(expression);
 		return result;
 	}
 	
@@ -502,7 +508,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		preVisit();
 
 	    // Visit contained expressions
-	    this.accept(expression.getTarget());    
+	    this.accept(expression.getTarget());
 	    this.accept(expression.getValue());
 	    
 	    
@@ -659,7 +665,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	}
 	
 	public Object visitCallFeature(CallFeature expression) {		
-		
+			
 		// visit target expression	
 		if (expression.getTarget() != null) 
 			this.accept(expression.getTarget());
@@ -729,6 +735,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			    else {
 			    	unit.error("TYPE-CHECKER : cannot resolve feature " + expression.getName() + " in type " + target.toString() + ".",expression);
 			        op = target.getOperationByName(expression.getName());
+			        CallableProperty prop = target.getPropertyByName(expression.getName());
 					if (op != null) {
 						result = checkOperationCall(op, expression);
 						expression.setStaticOperation(op.getOperation());
@@ -740,6 +747,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		
 		expressionTypes.put(expression, result);
 		expression.setStaticType(result.getFType());
+		
 		return result;
 	}
 	
@@ -813,8 +821,16 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		context.popContext();
 		// Check constraints
 		SimpleType conditionType = (SimpleType) getTypeOfExpression(expression.getCondition());
-		if( ! NamedElementHelper.getQualifiedName(conditionType.getTypeDefinition()).equals(
-			NamedElementHelper.getQualifiedName(TypeCheckerContext.BooleanType.getTypeDefinition())) ) {
+		String conditionTypeQualifiedName = "";
+		
+		if ( conditionType.type instanceof PrimitiveType ) {
+			fr.irisa.triskell.kermeta.language.structure.Type t = KermetaModelHelper.PrimitiveType.resolvePrimitiveType( (PrimitiveType) conditionType.type);
+			if ( t instanceof Class )
+				conditionTypeQualifiedName = KermetaModelHelper.NamedElement.qualifiedName( ((Class) t).getTypeDefinition() );
+		} else
+			conditionTypeQualifiedName = KermetaModelHelper.NamedElement.qualifiedName( conditionType.getTypeDefinition() );
+		
+		if( ! conditionTypeQualifiedName.equals(NamedElementHelper.getQualifiedName(TypeCheckerContext.BooleanType.getTypeDefinition())) ) {
 			unit.error("TYPE-CHECKER : The condition expression of a conditional statement should be a Boolean expression", expression.getCondition());
 		}
 		// compute the return type
@@ -1029,7 +1045,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitVariableDecl(VariableDecl expression) {
 	    preVisit();
-	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(expression.getType());
+	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(expression.getType());  
 	    ParameterizedTypeChecker.checkType(result.getFType(), unit, context, expression);
 		// process contained expressions
 		if (expression.getInitialization() != null) 
@@ -1038,6 +1054,9 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		// Check constraints
 		if (expression.getInitialization() != null) {
 			if (!getTypeOfExpression(expression.getInitialization()).isSubTypeOf(result)) {
+				KermetaUnitHelper.getKermetaUnitFromObject( ((SimpleType) getTypeOfExpression(expression.getInitialization())).getTypeDefinition() );
+				KermetaUnitHelper.getKermetaUnitFromObject( ((SimpleType) result).getTypeDefinition() );
+				getTypeOfExpression(expression.getInitialization()).isSubTypeOf(result);
 				unit.error("TYPE-CHECKER : The initialization expression should be compatible with the type of the variable : expected "+result+", found "+getTypeOfExpression(expression.getInitialization())+".", expression.getInitialization());
 			}
 		}

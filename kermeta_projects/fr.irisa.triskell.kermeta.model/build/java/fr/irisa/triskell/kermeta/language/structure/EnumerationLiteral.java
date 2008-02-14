@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationLiteral.java,v 1.3 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: EnumerationLiteral.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -45,6 +45,7 @@ public interface EnumerationLiteral extends NamedElement {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getEnumerationLiteral_Enumeration()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Enumeration#getOwnedLiteral
 	 * @model opposite="ownedLiteral"
+	 *        annotation="GenModel documentation='/**\n * Owning Enumeration\n \052/'"
 	 * @generated
 	 */
 	Enumeration getEnumeration();

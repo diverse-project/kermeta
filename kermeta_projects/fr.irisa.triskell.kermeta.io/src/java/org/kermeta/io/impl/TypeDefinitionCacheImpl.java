@@ -2,29 +2,39 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionCacheImpl.java,v 1.3 2008-02-06 09:38:25 dvojtise Exp $
+ * $Id: TypeDefinitionCacheImpl.java,v 1.4 2008-02-14 07:13:17 uid21732 Exp $
  */
 package org.kermeta.io.impl;
 
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+
 import java.util.HashMap;
 import java.util.Map;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.TypeDefinitionCache;
 import org.kermeta.io.TypeDefinitionCacheEntry;
-
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -242,10 +252,13 @@ public class TypeDefinitionCacheImpl extends EObjectImpl implements TypeDefiniti
 	 * @generated NOT
 	 */
 	public void addTypeDefinition(String qualifiedName, TypeDefinition typeDefinition) {
-		TypeDefinitionCacheEntry entry = IoFactory.eINSTANCE.createTypeDefinitionCacheEntry();
-		entry.setQualifiedName( qualifiedName );
+		TypeDefinitionCacheEntry entry = getEntries().get(qualifiedName);
+		if ( entry == null ) {
+			entry = IoFactory.eINSTANCE.createTypeDefinitionCacheEntry();
+			entry.setQualifiedName( qualifiedName );
+			getEntries().put(qualifiedName, entry);
+		}
 		entry.setTypeDefinition( typeDefinition );
-		entries.put(qualifiedName, entry);
 	}
 
 	/**
@@ -281,7 +294,7 @@ public class TypeDefinitionCacheImpl extends EObjectImpl implements TypeDefiniti
 			 * So even if the imported kermeta units are there, we do not search through them.
 			 * 
 			 */
-			if ( externalSearchAuthorized && ! monitor.isCanceled() ) {
+			if ( externalSearchAuthorized ) {
 				for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit ) ) {
 					entry = importedUnit.getTypeDefinitionCache().getEntries().get(qualifiedName);
 						if ( entry != null )

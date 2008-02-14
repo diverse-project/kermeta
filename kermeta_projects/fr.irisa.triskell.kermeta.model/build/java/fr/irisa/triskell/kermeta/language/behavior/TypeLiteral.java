@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeLiteral.java,v 1.5 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: TypeLiteral.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getTypeLiteral()
- * @model
+ * @model annotation="GenModel documentation='/**\n * This expression is a literal representing a Type.\n * for example, in \n *    Integer.new\n * Integer is a type literal representing the type kermeta::standard::Integer\n \052/'"
  * @generated
  */
 public interface TypeLiteral extends Literal {
@@ -43,6 +43,7 @@ public interface TypeLiteral extends Literal {
 	 * @see #setTyperef(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getTypeLiteral_Typeref()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * The type refered by this literal\n \052/'"
 	 * @generated
 	 */
 	TypeReference getTyperef();

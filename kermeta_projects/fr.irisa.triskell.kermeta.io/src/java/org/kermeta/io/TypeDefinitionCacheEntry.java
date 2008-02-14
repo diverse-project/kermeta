@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionCacheEntry.java,v 1.1 2007-09-19 12:15:04 ftanguy Exp $
+ * $Id: TypeDefinitionCacheEntry.java,v 1.2 2008-02-14 07:13:18 uid21732 Exp $
  */
 package org.kermeta.io;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**

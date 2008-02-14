@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.28 2008-02-06 09:37:19 dvojtise Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.29 2008-02-14 07:13:57 uid21732 Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
@@ -32,6 +33,7 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -338,13 +340,13 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 	    String fname = qname.substring(qname.lastIndexOf(":")+1, qname.length());
     
 	    fname = "kermeta::language::structure::"+fname;
-	    if (qname.startsWith("kermeta::reflection") && unit.getTypeDefinitionByName(fname)!=null)
+	    /*if (qname.startsWith("kermeta::reflection") && unit.getTypeDefinitionByName(fname)!=null)
 	    {
 		    // Try to get the type definition of the concrete representation
 		    TypeDefinition concrete_typedef = unit.getTypeDefinitionByName(fname);
 		    // Get the RuntimeObject of this concrete repr
 		    result = memory.getROFactory().getTypeDefinitionByName(fname);
-	    }
+	    }*/
 	    
 	    return result;
 	}
@@ -376,10 +378,10 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 	        result = result.substring(1,2).toLowerCase() + result.substring(2);*/
 	    if (obj instanceof EStructuralFeature) 
 	        result = result.substring(0,1).toLowerCase() + result.substring(1);
-	    if (obj instanceof EPackage) {
+	    /*if (obj instanceof EPackage) {
 	        if (result.equals("structure")) return "kermeta::reflection";
 	        if (result.equals("behavior")) return "kermeta::language::behavior";
-	    }
+	    }*/
 	    EObject cont = obj.eContainer();
 	    if (cont != null &&cont instanceof ENamedElement) {
 	        result = getEQualifiedName((ENamedElement)cont) + "::" + result;

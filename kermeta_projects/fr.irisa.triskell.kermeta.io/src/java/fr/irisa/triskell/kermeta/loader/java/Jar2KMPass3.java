@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.16 2008-01-08 16:23:42 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.17 2008-02-14 07:13:19 uid21732 Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -26,6 +26,7 @@ import java.util.Vector;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -39,8 +40,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.modelhelper.PrimitiveTypeHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
@@ -284,7 +283,7 @@ public class Jar2KMPass3 extends Jar2KMPass {
 		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> superClassesIt = cd.getSuperType().iterator();
 		while(superClassesIt.hasNext()){
 			Type superType = (Type)(superClassesIt.next());
-			superType = PrimitiveTypeHelper.resolvePrimitiveType(superType);
+			superType = KermetaModelHelper.PrimitiveType.resolvePrimitiveType( (PrimitiveType) superType);
 
 			if(superType instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 				TypeDefinition superTypeDef = ((fr.irisa.triskell.kermeta.language.structure.Class)superType).getTypeDefinition();
@@ -569,12 +568,11 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					context.current_operation.getOwnedParameter().add(res);
 				}
 				//	this is a constructor add a tag so the interpreter can recognize it and work with it
-				TagHelper.createNonExistingTagFromNameAndValue(context.current_operation, 
-						INITOPERATION_TAG_NAME, 
-						c.getName()); 
-				TagHelper.createNonExistingTagFromNameAndValue(context.current_operation, 
-						JAVAOPERATION_TAG_NAME, 
-						c.getName());
+				Tag t = KermetaModelHelper.Tag.create(INITOPERATION_TAG_NAME, c.getName());
+				context.current_operation.getOwnedTags().add(t);
+				
+				t = KermetaModelHelper.Tag.create(JAVAOPERATION_TAG_NAME, c.getName());
+				context.current_operation.getOwnedTags().add(t);
 			}
 		}
 	}
@@ -751,9 +749,8 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					
 				}
 				// tag the operation with the java name
-				TagHelper.createNonExistingTagFromNameAndValue(context.current_operation, 
-						JAVAOPERATION_TAG_NAME, 
-						methods[i].getName());
+				Tag tag = KermetaModelHelper.Tag.create(JAVAOPERATION_TAG_NAME, methods[i].getName());
+				context.current_operation.getOwnedTags().add(tag);
 			}
 		}
 	}

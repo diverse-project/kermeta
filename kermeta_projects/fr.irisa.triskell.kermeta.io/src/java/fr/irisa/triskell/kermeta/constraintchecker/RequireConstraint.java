@@ -1,6 +1,6 @@
 
 
-/*$Id: RequireConstraint.java,v 1.4 2008-02-08 16:57:15 dvojtise Exp $
+/*$Id: RequireConstraint.java,v 1.5 2008-02-14 07:13:17 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	RequireConstraint.java
 * License : EPL

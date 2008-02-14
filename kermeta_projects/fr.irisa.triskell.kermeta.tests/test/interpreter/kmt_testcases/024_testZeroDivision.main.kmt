@@ -27,9 +27,9 @@ class Main inherits kermeta::kunit::TestCase
     end
     
     operation testUndeclared() : Void is do
-       	stdio.writeln("Integer undeclared test")
      	var i : Integer
         var divid : Integer
+       	stdio.writeln("Integer undeclared test")
         5/divid
         assert(false)
        	rescue (c : kermeta::exceptions::VoidOperandError)
@@ -37,8 +37,8 @@ class Main inherits kermeta::kunit::TestCase
     end
     
     operation testBoolUndeclared() : Void is do
-    	stdio.writeln("Bool undeclared test")
     	var bool : Boolean
+    	stdio.writeln("Bool undeclared test")
         bool and true
         assert(false)
         rescue (c : kermeta::exceptions::CallOnVoidTarget)

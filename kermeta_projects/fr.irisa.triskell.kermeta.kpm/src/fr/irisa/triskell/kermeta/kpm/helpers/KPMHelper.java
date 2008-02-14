@@ -1,4 +1,4 @@
-/*$Id: KPMHelper.java,v 1.17 2007-07-24 13:47:13 ftanguy Exp $
+/*$Id: KPMHelper.java,v 1.18 2008-02-14 07:13:24 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -24,19 +24,24 @@ import fr.irisa.triskell.kermeta.kpm.NameFilter;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.properties.KPMConstants;
 
 public class KPMHelper {
 
 	
 	static public KPM getDefaultKPM(IProject project) {
 		KPM kpm = KpmFactory.eINSTANCE.createKPM();
-		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.openProject");
-		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
+		
+		// Updating file actions
+		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.unloadContext");
+		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.loadContext");
 		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.typecheck");
-		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.constraintCheck");
-		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
+		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.constraintcheck");
+		//kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
 		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies");
+		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
+		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.finalizeUpdate");
+		// Other actions
+		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.openProject");
 		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.kmt2km");
 		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.ecore2kmt");
 		
@@ -58,19 +63,12 @@ public class KPMHelper {
 		Out out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.openProject");
 		Rule rule = RuleHelper.createRule(kpm, "Open Project", "normal", "open", in, out);
 		
-		/*in = InOutHelper.createIn();
-		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.closeProject");
-		Dependency closeDependency = DependencyHelper.createDependency(kpm, "Close Project", "normal", "close", in, out);*/
-			
 		Unit unit = KpmFactory.eINSTANCE.createUnit();
 		unit.setValue( project.getFullPath().toString() );
 		unit.getRules().add(rule);
 		//unit.getDependencies().add(closeDependency);
 		
 		kpm.getUnits().add(unit);
-		
-		
-		
 		
 		/* km and kmt */
 		FilterExpression inExpression = KpmFactory.eINSTANCE.createFilterExpression();
@@ -79,53 +77,46 @@ public class KPMHelper {
 		in = KpmFactory.eINSTANCE.createIn();
 		in.setExpression(inExpression);
 
-		/*NullExpression nullExpression1 = KpmFactory.eINSTANCE.createNullExpression();
-		Out out1 = KpmFactory.eINSTANCE.createOut();
-		out1.setExpression(nullExpression1);
-		out1.setAction( kpm.findAction("fr.irisa.triskell.kermeta.kpm.actions.openKMTFile") );*/
-		
-		/*NullExpression nullExpression2 = KpmFactory.eINSTANCE.createNullExpression();
-		Out out2 = KpmFactory.eINSTANCE.createOut();
-		out2.setExpression(nullExpression2);
-		out2.setAction( kpm.findAction("fr.irisa.triskell.kermeta.kpm.actions.addMarkers") );*/
-		
-		
-		/*Dependency dependency = KpmFactory.eINSTANCE.createDependency();
-		kpm.getDependencies().add(dependency);
-		in.setDependency(dependency);
-		out1.setDependency(dependency);
-		out2.setDependency(dependency);
-		dependency.setName("Open KMT File");
-		dependency.setEvent( kpm.findEvent("open") );
-		dependency.setType("normal");
-		dependency.setIn(in);
-		dependency.getOuts().add(out1);
-		dependency.getOuts().add(out2);*/
-		
 		addUpdateDependencyForKMTFile(kpm);
 		addUpdateDependencyForKMFile(kpm);
 		addUpdateDependencyForEcoreFile(kpm);
-		addCloseKMTFileDependency(kpm);
+		//addCloseKMTFileDependency(kpm);
 		
 		return kpm;
 	}
-	
-	/*static private void addOpenDependencyOnProject(KPM kpm, Unit unit) {
-		In in = InOutHelper.createIn();
-		Out out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.openProject");
-		
-		Rule rule = RuleHelper.createRule(kpm, "Open Project", "normal", "open", in, out);
-		
-		unit.getRules().add(rule);
-		
-		kpm.getUnits().add(unit);
-	}*/
 	
 	static public void addUpdateDependencyForKMTFile(KPM kpm) {
 		
 		ArrayList<Out> outs = new ArrayList<Out> ();
 		
 		In in = InOutHelper.createInWithNameFilter(kpm, "*.kmt");
+
+		Out out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.unloadContext");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.loadContext");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintcheck");
+		outs.add(out);
+		
+		//out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
+		//outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.finalizeUpdate");
+		outs.add(out);
+		
+		
+	/*	In in = InOutHelper.createInWithNameFilter(kpm, "*.kmt");
 		Out out1 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
 		outs.add(out1);
 
@@ -147,7 +138,7 @@ public class KPMHelper {
 		if(KPMConstants.GENERATEKM_DEFAULTVALUE){ // depending on default configuration
 			Out out7 = InOutHelper.createOutWithNameFilter(kpm, "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
 			outs.add(out7);
-		}
+		}*/
 		
 		RuleHelper.createRule(kpm, "Update KMT File", "normal", "update", in, outs);
 	}
@@ -157,14 +148,40 @@ public class KPMHelper {
 		ArrayList<Out> outs = new ArrayList<Out> ();
 		
 		In in = InOutHelper.createInWithNameFilter(kpm, "*.km");
-		Out out1 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+	
+		Out out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.unloadContext");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.loadContext");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintcheck");
+		outs.add(out);
+		
+		//out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
+		//outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.finalizeUpdate");
+		outs.add(out);
+		
+		
+		/*Out out1 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
 		outs.add(out1);
 
 		Out out2 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintCheck");
 		outs.add(out2);
 		
 		Out out6 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
-		outs.add(out6);
+		outs.add(out6);*/
 		
 		RuleHelper.createRule(kpm, "Update KM File", "normal", "update", in, outs);
 	}
@@ -174,33 +191,48 @@ public class KPMHelper {
 		ArrayList<Out> outs = new ArrayList<Out> ();
 		
 		In in = InOutHelper.createInWithNameFilter(kpm, "*.ecore");
-		Out out1 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+		
+		Out out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.unloadContext");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.loadContext");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintcheck");
+		outs.add(out);
+		
+		//out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
+		//outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.finalizeUpdate");
+		outs.add(out);
+		
+		/*Out out1 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
 		outs.add(out1);
 
 		Out out2 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintCheck");
 		outs.add(out2);
 		
 		Out out6 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
-		outs.add(out6);
+		outs.add(out6);*/
 		
 		RuleHelper.createRule(kpm, "Update Ecore File", "normal", "update", in, outs);
 	}
 	
-	static public void addCloseKMTFileDependency(KPM kpm) {
+	/*static public void addCloseKMTFileDependency(KPM kpm) {
 		In in = InOutHelper.createInWithNameFilter(kpm, "*.kmt");
 		Out out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
 		RuleHelper.createRule(kpm, "Close KMT File", "normal", "close", in, out);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}*/	
 	
 	static public Unit getOrCreateUnit(KPM kpm, String value) {
 		Unit unit = getUnit(kpm, value);
@@ -243,11 +275,6 @@ public class KPMHelper {
 		}
 	}
 
-
-
-
-
-
 	static public void addRules(KPM kpm, Unit unit) {
 		
 		Iterator <Rule> iterator = kpm.getRules().iterator();
@@ -269,42 +296,5 @@ public class KPMHelper {
 			addRules(kpm, iterator.next() );
 		}
 	}
-	
-	/*static public void addRulesToProject(KermetaProject project) {
-		
-		project.getValue();
-		
-	}
-
-
-	class RulesAdder implements IResourceDeltaVisitor {
-
-		private KPM kpm = null;
-		
-		public RulesAdder(KPM kpm) {
-			this.kpm = kpm;
-		}
-		
-		public boolean visit(IResourceDelta delta) throws CoreException {
-			
-			IResource resource = delta.getResource();
-			
-			Iterator <Rule> iterator = kpm.getRules().iterator();
-			
-			while ( iterator.hasNext() ) {
-				
-				Rule currentRule = iterator.next();
-				if ( currentRule.getIn().getExpression().evaluateIn( ) )
-					unit.getRules().add( currentRule );
-				
-			}
-			
-			return true;
-		}
-		
-	};*/
-
-
-
 
 }

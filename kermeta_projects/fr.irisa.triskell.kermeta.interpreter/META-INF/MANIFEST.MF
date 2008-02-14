@@ -8,19 +8,20 @@ Bundle-ClassPath: .,
  lib/thirdparty/ldt-core.jar,
  lib/thirdparty/junit.jar
 Bundle-Localization: plugin
-Require-Bundle: fr.irisa.triskell.traceability;visibility:=reexport,
- fr.irisa.triskell.kermeta.model,
- fr.irisa.triskell.kermeta.io;visibility:=reexport,
+Require-Bundle: fr.irisa.triskell.kermeta.model,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.emf,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.emf.validation,
  fr.irisa.triskell.eclipse.util;visibility:=reexport,
+ fr.irisa.triskell.traceability;visibility:=reexport,
  org.eclipse.ui,
  org.eclipse.ui.ide,
  org.kermeta.merger,
- org.eclipse.gymnast.runtime.core
+ org.eclipse.gymnast.runtime.core,
+ org.kermeta.io.loader,
+ fr.irisa.triskell.kermeta.io;visibility:=reexport
 Export-Package: fr.irisa.triskell.kermeta.builder,
  fr.irisa.triskell.kermeta.dev.interpreter,
  fr.irisa.triskell.kermeta.error,
@@ -37,5 +38,6 @@ Export-Package: fr.irisa.triskell.kermeta.builder,
  fr.irisa.triskell.kermeta.runtime.loader.emf,
  fr.irisa.triskell.kermeta.runtime.rohelper,
  fr.irisa.triskell.kermeta.runtime.testing,
- fr.irisa.triskell.utils.argumentsreader
+ fr.irisa.triskell.utils.argumentsreader,
+ org.kermeta.interpreter.helper
 Bundle-Vendor: IRISA/INRIA

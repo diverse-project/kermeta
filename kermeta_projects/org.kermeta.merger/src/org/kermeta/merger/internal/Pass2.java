@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass2.java,v 1.4 2008-01-23 12:09:45 cfaucher Exp $
+/*$Id: Pass2.java,v 1.5 2008-02-14 07:12:56 uid21732 Exp $
 * Project : org.kermeta.merger
 * File : 	Pass2.java
 * License : EPL
@@ -23,13 +23,11 @@ import org.kermeta.io.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -46,16 +44,12 @@ public class Pass2 extends MergePass {
 	@Override
 	public void process() {
 		for ( TypeDefinition t : KermetaUnitHelper.getTypeDefinitions(kermetaUnit) ) {
-			if ( t instanceof ClassDefinition )
+			if ( t instanceof ClassDefinition ) {
 				setProperties((ClassDefinition) t);
-			else if ( t instanceof ModelType )
+				setOperations( (ClassDefinition) t);
+			} else if ( t instanceof ModelType )
 				modelTypes.add( (ModelType) t );
 		}
-		
-		for ( TypeDefinition t : KermetaUnitHelper.getTypeDefinitions(kermetaUnit) ) {
-			if ( t instanceof ClassDefinition )
-				setOperations((ClassDefinition) t);
-		}	
 		
 		for ( ModelType newDefinition : modelTypes ) {
 			ModelType definition = (ModelType) context.getBaseTypeDefinition( newDefinition );
@@ -263,15 +257,6 @@ public class Pass2 extends MergePass {
 			newParameter.setUpper(p.getUpper());
 			newOperation.getOwnedParameter().add(newParameter);
 			context.putBaseParameter(newParameter, p);
-		}
-	}
-	
-	private void createTags(Object newObject, Object o) {
-		for ( Tag t : o.getOwnedTags() ) {
-			Tag newTag = StructureFactory.eINSTANCE.createTag();
-			newTag.setName( t.getName() );
-			newTag.setValue( t.getValue() );
-			newObject.getOwnedTags().add( newTag );
 		}
 	}
 	

@@ -1,7 +1,7 @@
+@uri "http://SimpleClass"
 package SimpleClass;
 
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "kermeta"
 class Classifier
 {
 	attribute name : PrimitiveTypes::String[1..1]
@@ -37,9 +37,9 @@ class Attribute
 	reference type : Classifier[1..1]
 
 }
+@uri "http://PrimitiveTypes"
 package PrimitiveTypes;
 
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "kermeta"
 alias String : kermeta::standard::String;
 alias Boolean : kermeta::language::structure::Object;

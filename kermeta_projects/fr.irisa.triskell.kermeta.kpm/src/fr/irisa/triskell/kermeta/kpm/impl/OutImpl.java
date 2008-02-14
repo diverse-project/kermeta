@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutImpl.java,v 1.10 2007-12-20 09:13:06 ftanguy Exp $
+ * $Id: OutImpl.java,v 1.11 2008-02-14 07:13:24 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 
+import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
@@ -24,8 +25,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.kermeta.interpreter.helper.KermetaLauncher;
+
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.FilterExpression;
@@ -34,10 +36,8 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import java.util.Collection;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
-import fr.irisa.triskell.kermeta.launcher.KermetaLauncher;
 
 /**
  * <!-- begin-user-doc -->
@@ -245,11 +245,11 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 				try {
 				
 					if ( extensionPointName.equals("fr.irisa.triskell.kermeta.kpm.javaAction") ) {
-								
+
 						IConfigurationElement[] elements = extension.getConfigurationElements();
 						IAction action = (IAction) elements[0].createExecutableExtension("class");
 						action.execute(this, unit, monitor, args, getParameters());
-									
+					
 					} else if ( extensionPointName.equals("fr.irisa.triskell.kermeta.kpm.kermetaAction") ) {
 					 
 						IConfigurationElement[] elements = extension.getConfigurationElements();

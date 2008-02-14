@@ -1,8 +1,10 @@
 @mainClass "testOpposites::TestOpposites"
-@mainOperation "test1_1Opposites"
+@mainOperation "main"
 package testOpposites;
 
 require kermeta
+
+using kermeta::kunit
 
 // Test that the kermeta runtime handles opposites of properties
 
@@ -19,6 +21,12 @@ class B {
 }
 
 class TestOpposites inherits kermeta::kunit::TestCase {
+
+    operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(TestOpposites)
+		tr.printTestResult
+    end
 
 	operation test1_1Opposites1() is do
 		var a : A init A.new
@@ -69,6 +77,7 @@ class TestOpposites inherits kermeta::kunit::TestCase {
 		assert(b1.a11 == void)
 		assert(b2.a11 == a)
 	end
+	
 	
 	operation test1_starOpposites1() is do
 		var a : A init A.new
@@ -239,8 +248,6 @@ class TestOpposites inherits kermeta::kunit::TestCase {
 		assert(b2.ass.size == 2)
 		assert(b2.ass.contains(a2))
 		
-	end
-	
-	
+	end	
 	
 }

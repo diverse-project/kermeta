@@ -1,6 +1,6 @@
 
 
-/*$Id: MergePass.java,v 1.1 2007-10-01 15:07:49 ftanguy Exp $
+/*$Id: MergePass.java,v 1.2 2008-02-14 07:12:56 uid21732 Exp $
 * Project : org.kermeta.merger
 * File : 	MergePass.java
 * License : EPL
@@ -14,6 +14,10 @@ package org.kermeta.merger.internal;
 
 import org.kermeta.io.KermetaUnit;
 
+import fr.irisa.triskell.kermeta.language.structure.Object;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+
 abstract public class MergePass {
 
 	protected KermetaUnit kermetaUnit;
@@ -26,6 +30,16 @@ abstract public class MergePass {
 	}
 	
 	abstract public void process();
+	
+	protected void createTags(Object newObject, Object o) {
+		for ( Tag t : o.getOwnedTags() ) {
+			Tag newTag = StructureFactory.eINSTANCE.createTag();
+			newTag.setName( t.getName() );
+			newTag.setValue( t.getValue() );
+			newObject.getOwnedTags().add( newTag );
+			newObject.getTag().add( newTag );
+		}
+	}
 	
 }
 

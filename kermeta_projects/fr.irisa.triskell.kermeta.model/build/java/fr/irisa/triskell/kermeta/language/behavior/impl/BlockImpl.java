@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BlockImpl.java,v 1.6 2008-01-22 14:24:28 cfaucher Exp $
+ * $Id: BlockImpl.java,v 1.7 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 

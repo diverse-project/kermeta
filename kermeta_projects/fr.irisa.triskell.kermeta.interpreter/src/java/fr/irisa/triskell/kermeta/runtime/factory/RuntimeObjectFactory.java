@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.31 2008-02-06 09:37:19 dvojtise Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.32 2008-02-14 07:13:58 uid21732 Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -18,6 +18,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
@@ -38,8 +39,11 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
+import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
+import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
+//import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
  * @author Franck Fleurey
@@ -341,7 +345,7 @@ public class RuntimeObjectFactory {
 	 * If not found, look in the supertypes
 	 */
 	private Property getProperty(ClassDefinition metaclass,String propertyName) {
-		Iterator<Property> it = ClassDefinitionHelper.getAllProperties(metaclass).iterator();
+		Iterator<Property> it = KermetaModelHelper.ClassDefinition.getAllProperties(metaclass).iterator();
 		while(it.hasNext()) {
 			Property property = (Property)it.next();
 			if(property.getName().equals(propertyName))

@@ -1,4 +1,6 @@
-/*$Id: KMUnitLoader.java,v 1.14 2008-01-28 09:43:48 dvojtise Exp $
+
+
+/*$Id: KMUnitLoader.java,v 1.15 2008-02-14 07:13:18 uid21732 Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -33,11 +35,13 @@ import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -58,6 +62,13 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 		}
 	}
 	
+	private void addResource(ResourceSet resourceSet, KermetaUnit kermetaUnit) {
+		resourceSet.getResources().add( kermetaUnit.getModelingUnit().eResource() );
+/*		URI uri = URI.createURI( kermetaUnit.getUri() );kermetaUnit.getModelingUnit().eResource()
+		Resource resource = resourceSet.createResource(uri);
+		resource.getContents().add( kermetaUnit.getModelingUnit() );*/
+	}
+	
 	@Override
 	public KermetaUnit load(String uri) {
 
@@ -75,10 +86,33 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 			
 			ResourceSet resourceSet = new ResourceSetImpl();
 			
+			/*
+			 * 
+			 * If this is not the framework's loading, put the framework resources into the resource set if the kermeta unit is not intended to be executed.
+			 * 
+			 */
+			boolean includeFramework = true;
+			if ( options.containsKey(LoadingOptions.INCLUDE_FRAMEWORK) )
+				includeFramework = (Boolean) options.get(LoadingOptions.INCLUDE_FRAMEWORK);
+			if ( includeFramework ) {
+				KermetaUnit framework = IOPlugin.getDefault().framework;
+				if ( ! frameworkLoading ) {
+					addResource(resourceSet, framework);
+					for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) ) {
+						addResource(resourceSet, unit);
+					}
+				}
+			}
+			
 			URI u = EcoreHelper.createURI( uri );
 			
 			internalLog.info("Creating and loading the resource for " + kermetaUnit.getUri());
 			
+			/*
+			 * 
+			 * Getting the resource.
+			 * 
+			 */
 			Resource resource = null;
 			try {
 				resource = resourceSet.getResource(u, true);
@@ -86,6 +120,7 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 				kermetaUnit.error( e.getLocalizedMessage() );
 				return kermetaUnit;
 			}
+			
 			/*
 			 * 
 			 * Keeping compatibility with old km files
@@ -97,12 +132,13 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 				kermetaUnit.setModelingUnit( modelingUnit );
 			} else
 				kermetaUnit.setModelingUnit( (ModelingUnit) resource.getContents().get(0) );
+			
 			buildingState.loaded = true;
 		
 			kermetaUnits.put(kermetaUnit.getUri(), kermetaUnit);
 			
 			EcoreUtil.resolveAll(resourceSet);
-			
+
 			for ( Resource r : (List<Resource>) resourceSet.getResources() ) {
 				
 				String fileURI = r.getURI().toString();
@@ -144,10 +180,12 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 					}
 				}
 			}
-						
+							
 			createInternalPackageEntries();
 			
 			createTypeDefinitionCache();
+			
+			processRequire();
 			
 			importAllKermetaUnits();
 			
@@ -155,6 +193,8 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 						
 		} catch ( URIMalformedException exception ) {
 			exception.printStackTrace();
+		} catch (NotRegisteredURIException e) {
+			e.printStackTrace();
 		}
 			
 		return kermetaUnit;
@@ -191,6 +231,24 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 		}
 	}
 	
+	
+	private void processRequire() {
+		for ( KermetaUnit kermetaUnit : kermetaUnits.values() ) {
+			
+			/*
+			 * 
+			 * There are maybe extra units to import. It must be an exceptional case. Anyway we need it to properly load the framework.
+			 * kermeta_java.km needs to import the others kermeta unit even if it has no physical dependencies to the others files.
+			 * 
+			 */
+			for ( String s : kermetaUnit.getRequires() ) {
+				KermetaUnit unit = IOPlugin.getDefault().findKermetaUnit(s);
+				if ( unit != null )
+					kermetaUnit.getImportedKermetaUnits().add(unit);
+			}
+			
+		}		
+	}
 	
 	private void importAllKermetaUnits() {
 		

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelType.java,v 1.5 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: ModelType.java,v 1.6 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -43,7 +43,7 @@ public interface ModelType extends Type, TypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Included Type Definition</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelType_IncludedTypeDefinition()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * To be written #######################################\n \052/\n'"
 	 * @generated
 	 */
 	EList<TypeDefinition> getIncludedTypeDefinition();
@@ -55,13 +55,5 @@ public interface ModelType extends Type, TypeDefinition {
 	 * @generated
 	 */
 	Model _new();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 * @generated
-	 */
-	boolean isModelTypeOf(Model model);
 
 } // ModelType

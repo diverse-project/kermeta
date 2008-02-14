@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.14 2008-01-07 16:38:36 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.15 2008-02-14 07:13:33 uid21732 Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL

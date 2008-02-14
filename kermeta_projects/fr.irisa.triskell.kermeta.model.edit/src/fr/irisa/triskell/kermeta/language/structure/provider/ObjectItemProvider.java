@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectItemProvider.java,v 1.9 2008-01-23 10:49:55 cfaucher Exp $
+ * $Id: ObjectItemProvider.java,v 1.10 2008-02-14 07:13:52 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureImpl.java,v 1.7 2008-01-22 14:24:28 cfaucher Exp $
+ * $Id: CallFeatureImpl.java,v 1.8 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 

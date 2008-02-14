@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.18 2008-01-25 16:06:10 dvojtise Exp $
+/* $Id: KermetaOutline.java,v 1.19 2008-02-14 07:13:43 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -12,26 +12,30 @@
 
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.preference.BooleanPropertyAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.TreePath;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 import org.kermeta.texteditor.KermetaTextEditor;
 
-import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
-import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.icons.ButtonIcons;
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
@@ -45,8 +49,6 @@ public class KermetaOutline extends ContentOutlinePage {
 	protected OutlineContentProvider contentProvider;
 	protected OutlineLabelProvider labelProvider;
 
-	protected KMTEditor editor;
-	
 	private KermetaTextEditor textEditor;
 	
 	protected boolean _isDisposed = false;
@@ -60,18 +62,9 @@ public class KermetaOutline extends ContentOutlinePage {
 	public static final String INHERITANCEFLATTENING_OUTLINE_PREF_KEY     = PREFIX + "inheritance_flattening";
 	public static final String SHOWIMPORTED_OUTLINE_PREF_KEY     = PREFIX + "show_imported";
 	
+	/**		A string used to recalculate the selection when updating the outline.		*/
+	private String qualifedNameSelected = null;
 	
-	/**
-	 * 
-	 */
-	public KermetaOutline(KMTEditor editor) {
-		super();
-		this.editor = editor;
-		contentProvider = new OutlineContentProvider(this);
-		labelProvider = new OutlineLabelProvider();
-		preferences = new PreferenceStore();
-		initializeDefaultsPreference();
-	}
 	
 	public KermetaOutline(KermetaTextEditor editor) {
 		textEditor = editor;
@@ -91,8 +84,6 @@ public class KermetaOutline extends ContentOutlinePage {
 	public KermetaUnit getKermetaUnit() {
 		if ( textEditor != null )
 			return textEditor.getKermetaUnit();
-		else if ( editor != null )
-			return editor.getMcunit();
 		return null;
 	}
 	
@@ -172,77 +163,34 @@ public class KermetaOutline extends ContentOutlinePage {
 	
     public void selectionChanged(SelectionChangedEvent event)
     {
-    	if ( editor != null )
-    		selectionChnaged_1(event);
-    	else {
-    		IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-    		fr.irisa.triskell.kermeta.language.structure.Object modelElement = null;
-            if ( selection.getFirstElement() instanceof ModelElementOutlineItem )
-            	modelElement =((ModelElementOutlineItem)selection.getFirstElement()).modelElement;
-            else if (selection.getFirstElement() instanceof PackageItem){
-            	// get first package part 
-            	modelElement = ((PackageItem)selection.getFirstElement()).initialPackage;
-            }
-            ModelReference mr = textEditor.getKermetaUnit().getTracer().getModelReference(modelElement);
+    	/*
+    	 * 
+    	 * Getting the selection.
+    	 * 
+    	 */
+    	IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+    	NamedElement modelElement = null;
+        if ( selection.getFirstElement() instanceof ModelElementOutlineItem )
+        	modelElement = (NamedElement) ((ModelElementOutlineItem)selection.getFirstElement()).modelElement;
+        else if (selection.getFirstElement() instanceof PackageItem)
+        	// get first package part 
+        	modelElement = ((PackageItem)selection.getFirstElement()).initialPackage;
+    	
+        /*
+         * 
+         * Getting the qualified name of the selected element.
+         * 
+         */
+        if ( modelElement != null )
+        	qualifedNameSelected = KermetaModelHelper.NamedElement.qualifiedName(modelElement);        	
+    	
+        ModelReference mr = textEditor.getKermetaUnit().getTracer().getModelReference(modelElement);
             
-            // Now notify other plugins
-            if(modelElement != null){
-                Iterator<KermetaEditorEventListener> it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
-    			while(it.hasNext())
-    			{
-    				KermetaEditorEventListener listener = it.next();
-    				listener.outlineSelectionChanged(modelElement);
-    			}
-            }
-            
-            TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
-            if(tr != null)
-            	textEditor.setHighlightRange(tr.getCharBeginAt()-1,0 ,true);
-    	}
+        TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
+        if(tr != null)
+         	textEditor.setHighlightRange(tr.getCharBeginAt()-1,0 ,true);
     }
-    
-    private void selectionChnaged_1(SelectionChangedEvent event) {
-        super.selectionChanged(event);
-        if (editor.getMcunit()==null || (! editor.getMcunit().getInternalPackages().isEmpty() && editor.getMcunit().getInternalPackages().get(0) == null)) return;
-        ISelection selection = event.getSelection();
-        if(selection.isEmpty())
-        	editor.resetHighlightRange();
-        else {
-            try
-            {
-                IStructuredSelection ssel = (IStructuredSelection)selection;
-                // try to get one kermeta model element  (DVK with aspect this may be not precise ...)
-                fr.irisa.triskell.kermeta.language.structure.Object modelElement = null;
-                if(ssel.getFirstElement() instanceof ModelElementOutlineItem)
-                	modelElement =((ModelElementOutlineItem)ssel.getFirstElement()).modelElement;
-                else if (ssel.getFirstElement() instanceof PackageItem){
-                	// get first package part 
-                	modelElement = ((PackageItem)ssel.getFirstElement()).initialPackage;
-                }
-                ModelReference mr = editor.getMcunit().getTracer().getModelReference(modelElement);
-                
-                TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
-                if(tr != null)
-                	editor.setHighlightRange(tr.getCharBeginAt()-1,0 ,true);
-                
-                //              Now notify other plugins
-                if(modelElement != null){
-	                Iterator<KermetaEditorEventListener> it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
-	    			while(it.hasNext())
-	    			{
-	    				KermetaEditorEventListener listener = it.next();
-	    				listener.outlineSelectionChanged(modelElement);
-	    			}
-                }
-            }
-            catch(Exception _ex)
-            {
-            	editor.resetHighlightRange();
-            }
-            
-        }
-    }
-	
+ 	
 	public void updateHelper() {
         if (_isDisposed)
             return;
@@ -250,63 +198,88 @@ public class KermetaOutline extends ContentOutlinePage {
         TreeViewer treeViewer = getTreeViewer();
 
         if (treeViewer != null) {
-            //if (getKermetaUnit() == null) {
-        	if ( editor != null ) {
-            	if ( editor.isTypechecking )
-            		treeViewer.setInput("The file is being typeched.");
-        	} else {
-            	//} else {
-                
-                // save expanded elements
-	                Object[] expended = treeViewer.getExpandedElements();
-	
-	                Control control = treeViewer.getControl();
-	                if (control != null && !control.isDisposed()) {
-	                    control.setRedraw(false);
-	                    treeViewer.setInput(getKermetaUnit());
-	                    treeViewer.expandToLevel(1);
+    
+       		Control control = treeViewer.getControl();
+            if (control != null && !control.isDisposed()) {
+            	control.setRedraw(false);
+                treeViewer.setInput(getKermetaUnit());
 	                    
-	                    // Restore expanded elements
-	                   // treeViewer.setComparer(fNamedElementComparer);
-	                    treeViewer.setExpandedElements(expended);
-	                    
-	                    control.setRedraw(true);
-	            }
+                if ( qualifedNameSelected != null ) {
+                	TreeItem[] items = treeViewer.getTree().getItems();
+	                List<PackageItem> pitems = new ArrayList<PackageItem>();
+	                for ( int i = 0; i < items.length; i++ )
+	                	pitems.add( (PackageItem) items[i].getData() );
+	                TreePath treePath = getTreePath(pitems);
+		                    
+                   	getTreeViewer().setSelection( new TreeSelection(treePath), true );
+                }
+                control.setRedraw(true);
             }
         }
     }
-	/*
-    protected static Comparator fNamedElementComparator = new Comparator() {
-	    public int compare(Object o1, Object o2) {
-	        FNamedElement e1 = (FNamedElement)o1;
-	        FNamedElement e2 = (FNamedElement)o2;
-	        return e1.getFName().compareTo(e2.getFName());
-	    }
-	};
+
 	
-	protected static IElementComparer fNamedElementComparer = new IElementComparer() {
-        public boolean equals(Object o1, Object o2) {
-            if (o1 instanceof FNamedElement && o2 instanceof FNamedElement) {
-                FNamedElement e1 = (FNamedElement)o1;
-                FNamedElement e2 = (FNamedElement)o2;
-                return getQualifiedName(e1).equals(getQualifiedName(e2)); 
-            }
-            else return o1.equals(o2);
-        }
-        
-        public int hashCode(Object o1) {
-            if (o1 instanceof FNamedElement) 
-                return getQualifiedName((FNamedElement)o1).hashCode();
-            else return o1.hashCode();
-        }
-        
-        public String getQualifiedName(FNamedElement element) {
-    		if (element.eContainer() != null && element.eContainer() instanceof FNamedElement)
-    			return getQualifiedName( (FNamedElement)element.eContainer() ) + "::" + element.getFName();
-    		else return element.getFName();
-    	}
-     };
-     */
+	private TreePath getTreePath(List<PackageItem> items) {
+
+		PackageItem packageItem = getPackageItem(qualifedNameSelected, items);
+		String left = qualifedNameSelected.replace(packageItem.getName(), "");
+		left = left.replaceFirst("::", "");
+		String[] splits = left.split("::");
+		System.out.println();
+		List<java.lang.Object> l = new ArrayList<java.lang.Object>();
+		
+		if ( packageItem != null ) {
+			l.add(packageItem);
+			java.lang.Object currentObject = packageItem;
+			for (int i=0; i<splits.length; i++) {
+				String s = splits[i];
+				if ( currentObject instanceof PackageItem ) {
+					for ( ModelElementOutlineItem element : ((PackageItem) currentObject).getTypeDefinitions() )
+						if ( ((TypeDefinition) element.modelElement).getName().equals(s) ) {
+							l.add(element);
+							currentObject = element;
+							break;
+						}
+				} else if ( currentObject instanceof ModelElementOutlineItem ) {
+					ModelElementOutlineItem item = (ModelElementOutlineItem) currentObject;
+					if ( item.modelElement instanceof ClassDefinition ) {
+						for ( java.lang.Object child : item.getChildren() ) {
+							ModelElementOutlineItem propOrOp = (ModelElementOutlineItem) child;
+							if ( propOrOp.modelElement.getName().equals(s) ) {
+								l.add(propOrOp);
+								currentObject = propOrOp;
+								break;
+							}
+						}								
+					}
+				}
+			}
+		}
+		
+		return new TreePath(l.toArray());
+	}
+	
+	private PackageItem getPackageItem(String s, List<PackageItem> items) {
+		String[] splits = s.split("::");
+		int index = splits.length;
+		String packageName = null;
+		
+		while (index > 0) {
+			for ( int i=0; i<index; i++ )
+				if ( packageName == null )
+					packageName = splits[i];
+				else
+					packageName += "::" + splits[i];
+			
+			for ( PackageItem item : items )
+				if ( item.getName().equals(packageName) )
+					return item;
+			
+			index--;
+			packageName = null;
+		}
+		return null;
+	}
 
 
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionType.java,v 1.4 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: FunctionType.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -43,7 +43,7 @@ public interface FunctionType extends TypeContainer, Type {
 	 * @return the value of the '<em>Left</em>' reference.
 	 * @see #setLeft(Type)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getFunctionType_Left()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Parameters of the function (a ProductType for multiple parameters)\n \052/'"
 	 * @generated
 	 */
 	Type getLeft();
@@ -69,7 +69,7 @@ public interface FunctionType extends TypeContainer, Type {
 	 * @return the value of the '<em>Right</em>' reference.
 	 * @see #setRight(Type)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getFunctionType_Right()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * Result type of the function\n \052/'"
 	 * @generated
 	 */
 	Type getRight();

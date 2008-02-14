@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Type.java,v 1.7 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Type.java,v 1.8 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -45,6 +45,7 @@ public interface Type extends fr.irisa.triskell.kermeta.language.structure.Objec
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getType_TypeContainer()
 	 * @see fr.irisa.triskell.kermeta.language.structure.TypeContainer#getContainedType
 	 * @model opposite="containedType" transient="false"
+	 *        annotation="GenModel documentation='/**\n * Owning TypeContainer, if any\n \052/'"
 	 * @generated
 	 */
 	TypeContainer getTypeContainer();
@@ -58,13 +59,5 @@ public interface Type extends fr.irisa.triskell.kermeta.language.structure.Objec
 	 * @generated
 	 */
 	void setTypeContainer(TypeContainer value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 * @generated
-	 */
-	boolean isInstance(fr.irisa.triskell.kermeta.language.structure.Object element);
 
 } // Type

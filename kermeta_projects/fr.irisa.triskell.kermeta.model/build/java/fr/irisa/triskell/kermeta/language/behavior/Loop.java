@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Loop.java,v 1.6 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: Loop.java,v 1.7 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -22,7 +22,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLoop()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Loop refers to <code>from var x : X init a until booleanCondition loop ... end</code>\n \052/'"
  * @generated
  */
 public interface Loop extends Expression {
@@ -45,6 +45,7 @@ public interface Loop extends Expression {
 	 * @see #setInitialization(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLoop_Initialization()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Initialization expression for the loop\n \052/'"
 	 * @generated
 	 */
 	Expression getInitialization();
@@ -71,6 +72,7 @@ public interface Loop extends Expression {
 	 * @see #setBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLoop_Body()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Body of the loop\n \052/'"
 	 * @generated
 	 */
 	Expression getBody();
@@ -97,6 +99,7 @@ public interface Loop extends Expression {
 	 * @see #setStopCondition(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLoop_StopCondition()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="GenModel documentation='/**\n * Stop condition of the loop, is interpreted as a Bollean value\n \052/'"
 	 * @generated
 	 */
 	Expression getStopCondition();

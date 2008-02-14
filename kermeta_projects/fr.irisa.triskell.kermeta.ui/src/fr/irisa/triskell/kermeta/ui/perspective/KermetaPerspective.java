@@ -1,4 +1,4 @@
-/* $Id: KermetaPerspective.java,v 1.3 2008-01-02 10:28:20 vmahe Exp $
+/* $Id: KermetaPerspective.java,v 1.4 2008-02-14 07:12:54 uid21732 Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaPerspective.java
  * License: EPL
@@ -14,6 +14,8 @@ import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.console.IConsoleConstants;
+
+import fr.irisa.triskell.kermeta.ui.views.KermetadocView;
 
 /**
  * Implements the Kermeta perspective.
@@ -47,6 +49,7 @@ public class KermetaPerspective implements IPerspectiveFactory {
         layout.addShowViewShortcut(IPageLayout.ID_OUTLINE);
         layout.addShowViewShortcut(IPageLayout.ID_PROP_SHEET);
         layout.addShowViewShortcut(IPageLayout.ID_EDITOR_AREA);
+        layout.addShowViewShortcut( KermetadocView.ID );
 	}
 	
 	/**
@@ -68,6 +71,7 @@ public class KermetaPerspective implements IPerspectiveFactory {
         bottom.addView(IConsoleConstants.ID_CONSOLE_VIEW);
         bottom.addView(IPageLayout.ID_PROP_SHEET);
         bottom.addView(IPageLayout.ID_PROBLEM_VIEW);
+        bottom.addView( KermetadocView.ID );
         
         // outline view to right (of editor area)
         IFolderLayout right = layout.createFolder("right", IPageLayout.RIGHT, (float) 0.75, editorArea);

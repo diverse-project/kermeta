@@ -1,6 +1,6 @@
+ 
 
-
-/*$Id: Pass4.java,v 1.3 2008-01-04 15:08:47 dvojtise Exp $
+/*$Id: Pass4.java,v 1.4 2008-02-14 07:12:56 uid21732 Exp $
 * Project : org.kermeta.merger
 * File : 	Pass4.java
 * License : EPL
@@ -18,12 +18,10 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.KermetaModelHelper;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
-
-import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
-import fr.irisa.triskell.kermeta.parser.gen.ast.OperationExpressionBody;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -38,10 +36,20 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.OperationExpressionBody;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaParser;
 
+/**
+ * 
+ * 
+ * Adding the behavior for operations and derived properties.
+ * 
+ * 
+ * @author paco
+ *
+ */
 public class Pass4 extends MergePass {
 
 	public Pass4(KermetaUnit kermetaUnit, MergeContext context) {
@@ -50,7 +58,7 @@ public class Pass4 extends MergePass {
 
 	@Override
 	public void process() {
-		for ( TypeDefinition td : TypeDefinitionSearcher.getTypesDefinition(kermetaUnit) ) {
+		for ( TypeDefinition td : KermetaUnitHelper.getTypeDefinitions(kermetaUnit) ) {
 			
 			if ( td instanceof ClassDefinition ) {
 				ClassDefinition cd = (ClassDefinition) td;
@@ -85,11 +93,11 @@ public class Pass4 extends MergePass {
 			context.addTypeVar( tv );
 		
 		context.pushContext();
-		for ( Property p : ClassDefinitionHelper.getAllProperties(newDefinition) )
+		for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(newDefinition) )
 			context.addSymbol( new KMSymbolProperty(p) );
 		
 		context.pushContext();
-		for ( Operation o : ClassDefinitionHelper.getAllOperations(newDefinition) )
+		for ( Operation o : KermetaModelHelper.ClassDefinition.getAllOperations(newDefinition) )
 			context.addSymbol( new KMSymbolOperation(o) );
 		
 		/*

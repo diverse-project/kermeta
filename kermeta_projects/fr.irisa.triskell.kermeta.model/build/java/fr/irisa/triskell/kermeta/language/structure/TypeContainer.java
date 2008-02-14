@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeContainer.java,v 1.5 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: TypeContainer.java,v 1.6 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -46,6 +46,7 @@ public interface TypeContainer extends fr.irisa.triskell.kermeta.language.struct
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeContainer_ContainedType()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Type#getTypeContainer
 	 * @model opposite="typeContainer" containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Contained types\n \052/'"
 	 * @generated
 	 */
 	EList<Type> getContainedType();

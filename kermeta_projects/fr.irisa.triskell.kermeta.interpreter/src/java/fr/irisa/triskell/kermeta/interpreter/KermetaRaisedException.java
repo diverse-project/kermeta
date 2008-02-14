@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.20 2007-12-12 16:34:08 ffleurey Exp $
+/* $Id: KermetaRaisedException.java,v 1.21 2008-02-14 07:13:56 uid21732 Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -11,6 +11,8 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
+
+import org.kermeta.model.KermetaModelHelper;
 
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
@@ -150,7 +152,7 @@ public class KermetaRaisedException extends Error {
         // Is the raised_object an kermeta::exceptions::RuntimeError?
         if (cause_object!=null && ClassDefinitionHelper.isSuperClassOf(exception_cd, (ClassDefinition) fc.getTypeDefinition()))
         {
-            Property fexp_prop = ClassDefinitionHelper.findPropertyByName((ClassDefinition) fc.getTypeDefinition(), "expression");
+            Property fexp_prop = KermetaModelHelper.ClassDefinition.getPropertyByName((ClassDefinition) fc.getTypeDefinition(), "expression");
             RuntimeObject expression_property = memory.getRuntimeObjectForFObject(fexp_prop);
             RuntimeObject expression_value = cause_object;
             // Set the "expression" property of the RuntimeError

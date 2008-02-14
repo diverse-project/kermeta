@@ -1,7 +1,7 @@
 /**
  * IRISA / INRIA / Universite de Rennes 1
  *
- * $Id: ModelingUnit.java,v 1.4 2008-01-23 10:50:20 cfaucher Exp $
+ * $Id: ModelingUnit.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelingUnit()
- * @model
+ * @model annotation="GenModel documentation='/**\n * The modeling unit is the root of any kermeta model. It contains packages, requires and usings.\n * It also reference others modeling unit.\n \052/'"
  * @generated
  */
 public interface ModelingUnit extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -50,6 +50,7 @@ public interface ModelingUnit extends fr.irisa.triskell.kermeta.language.structu
 	 * @return the value of the '<em>Packages</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelingUnit_Packages()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * root packages contained by this ModelingUnit\n \052/'"
 	 * @generated
 	 */
 	EList<fr.irisa.triskell.kermeta.language.structure.Package> getPackages();
@@ -66,6 +67,7 @@ public interface ModelingUnit extends fr.irisa.triskell.kermeta.language.structu
 	 * @return the value of the '<em>Requires</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelingUnit_Requires()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Set of \"require\" statements associated with this ModelingUnit. Ie. list of the other\n * files required to run this unit\n \052/'"
 	 * @generated
 	 */
 	EList<Require> getRequires();
@@ -82,6 +84,7 @@ public interface ModelingUnit extends fr.irisa.triskell.kermeta.language.structu
 	 * @return the value of the '<em>Usings</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelingUnit_Usings()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Set of \"using\" statement associated with this ModelingUnit. Ie. list of \"syntatic shortcut\"\n * that can be used within this unit.\n \052/'"
 	 * @generated
 	 */
 	EList<Using> getUsings();
@@ -97,7 +100,7 @@ public interface ModelingUnit extends fr.irisa.triskell.kermeta.language.structu
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referenced Modeling Units</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelingUnit_ReferencedModelingUnits()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * To be written\n \052/'"
 	 * @generated
 	 */
 	EList<ModelingUnit> getReferencedModelingUnits();
@@ -114,6 +117,7 @@ public interface ModelingUnit extends fr.irisa.triskell.kermeta.language.structu
 	 * @return the value of the '<em>Include Filters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelingUnit_IncludeFilters()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * list of filters that apply to this modeling unit.\n * This means that if the same unit was loaded without this filters, it would have loaded more content\n * only element whose qualified name begins with one of these filter will be loaded in the unit\n \052/'"
 	 * @generated
 	 */
 	EList<Filter> getIncludeFilters();
@@ -130,6 +134,7 @@ public interface ModelingUnit extends fr.irisa.triskell.kermeta.language.structu
 	 * @return the value of the '<em>Exclude Filters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelingUnit_ExcludeFilters()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * list of filters that apply to this modeling unit.\n * This means that if the same unit was loaded without this filters, it would have loaded more content\n * element whose qualified name begins with one of these filter will NOT be loaded in the unit\n \052/'"
 	 * @generated
 	 */
 	EList<Filter> getExcludeFilters();

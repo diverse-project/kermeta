@@ -1,4 +1,4 @@
-/* $Id: 021_finalstates_fsm_type.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+/* $Id: 021_finalstates_fsm_type.kmt,v 1.2 2008-02-14 07:13:28 uid21732 Exp $
  * Creation date: November 10, 2006
  * License:
  * Copyright:
@@ -39,5 +39,5 @@ package finalstates_fsm {
 
 }
 
-modeltype final_fsmT { finalstates_fsm::FSM, finalstates_fsm::State,
+modeltype finalstates_fsmT { finalstates_fsm::FSM, finalstates_fsm::State,
                        finalstates_fsm::Transition, finalstates_fsm::FinalState }

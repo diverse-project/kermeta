@@ -2,18 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParseErrorMessageImpl.java,v 1.4 2008-01-04 14:20:07 dvojtise Exp $
+ * $Id: ParseErrorMessageImpl.java,v 1.5 2008-02-14 07:13:17 uid21732 Exp $
  */
 package org.kermeta.io.impl;
 
-import org.eclipse.gymnast.runtime.core.ast.ASTNode;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.ParseErrorMessage;
 

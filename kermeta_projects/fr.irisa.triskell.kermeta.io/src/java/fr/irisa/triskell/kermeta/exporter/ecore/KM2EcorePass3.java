@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass3.java,v 1.10 2008-02-06 09:38:26 dvojtise Exp $
+/* $Id: KM2EcorePass3.java,v 1.11 2008-02-14 07:13:20 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass3.java
  * License    : EPL

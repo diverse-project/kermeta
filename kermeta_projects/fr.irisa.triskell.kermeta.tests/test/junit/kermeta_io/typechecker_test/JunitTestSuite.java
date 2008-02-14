@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.8 2008-02-05 12:45:32 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.9 2008-02-14 07:13:31 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -21,6 +21,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -373,30 +374,31 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 				
 		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 		
-		KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit(path, new NullProgressMonitor());
+		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(path, null);
 		
 		if ( kermetaUnit.isIndirectlyErroneous() )
 			//assertTrue("kermeta unit has errors during loading", false);
 			assertTrue( KermetaUnitHelper.getErrorsAsString(kermetaUnit), false );
 			
-		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
+		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
 		typeChecker.checkUnit();
 	
-		if ( kermetaUnit.isIndirectlyErroneous() )
-			//assertTrue("kermeta unit has errors during type checking", false);
+		if ( kermetaUnit.isIndirectlyErroneous() ) {
+			System.err.println( KermetaUnitHelper.getErrorsAsString(kermetaUnit) );
 			assertTrue( KermetaUnitHelper.getErrorsAsString(kermetaUnit), false );
+		}
 			
-		IOPlugin.getDefault().unload( path );
+		LoaderPlugin.getDefault().unload( path );
 		
 	}
 	
 	/** Testing invalid file means that we are looking for one error per operation of the given file */
 	public void testinvalidFile(String dir, String file) throws Exception {
 
-		KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file, new NullProgressMonitor());
+		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load( TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file, null);
 		
 		if ( ! kermetaUnit.isIndirectlyErroneous() ) {
-			KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
+			KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
 			typeChecker.checkUnit();
 
 			/*if ( ! kermetaUnit.isErrored() )
@@ -422,6 +424,6 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 		
 		}
 		
-		IOPlugin.getDefault().unload( kermetaUnit.getUri() );
+		LoaderPlugin.getDefault().unload( kermetaUnit.getUri() );
 	}
 }

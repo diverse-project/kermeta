@@ -1,6 +1,6 @@
 
 
-/*$Id: Merger.java,v 1.3 2007-10-18 16:13:33 khpts Exp $
+/*$Id: Merger.java,v 1.4 2008-02-14 07:12:56 uid21732 Exp $
 * Project : org.kermeta.merger
 * File : 	Merger.java
 * License : EPL
@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
 import org.kermeta.merger.internal.MergeContext;
@@ -30,6 +31,7 @@ import org.kermeta.merger.internal.Pass2;
 import org.kermeta.merger.internal.Pass3;
 import org.kermeta.merger.internal.Pass4;
 
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
@@ -41,13 +43,13 @@ public class Merger {
 
 	private KermetaUnit kermetaUnit = null;
 	
-	public String process(Set<KermetaUnit> kermetaUnitsToMerge) throws IOException, URIMalformedException {
+	public String process(Set<KermetaUnit> kermetaUnitsToMerge) throws IOException, URIMalformedException, NotRegisteredURIException {
 		String s = getDefaultPath(kermetaUnitsToMerge, true);
 		process(kermetaUnitsToMerge, s);		
 		return s;
 	}
 	
-	private String getDefaultPath(Set<KermetaUnit> kermetaUnitsToMerge, boolean setPath) {
+	static public String getDefaultPath(Set<KermetaUnit> kermetaUnitsToMerge, boolean setPath) {
 		String s = "";
 		String path = "";
 		for ( KermetaUnit unit : kermetaUnitsToMerge ) {
@@ -73,7 +75,7 @@ public class Merger {
 			return s + ".km";
 	}
 	
-	public String process(Set<KermetaUnit> kermetaUnitsToMerge, String path, String fileName) throws URIMalformedException, IOException {
+	public String process(Set<KermetaUnit> kermetaUnitsToMerge, String path, String fileName) throws URIMalformedException, IOException, NotRegisteredURIException {
 		String s = "";
 		if ( fileName == null )
 			s = path + "/" + getDefaultPath(kermetaUnitsToMerge, false);
@@ -83,7 +85,7 @@ public class Merger {
 		return s;
 	}
 	
-	public void process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile) throws URIMalformedException, IOException {
+	public void process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile) throws URIMalformedException, IOException, NotRegisteredURIException {
 		
 		processInMemory(kermetaUnitsToMerge, outputFile);
 		
@@ -95,8 +97,8 @@ public class Merger {
 		resource.save(null);
 	}
 	
-	public KermetaUnit processInMemory(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile) throws URIMalformedException, IOException {
-		IOPlugin.getDefault().unload(outputFile);
+	public KermetaUnit processInMemory(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile) throws NotRegisteredURIException, URIMalformedException, IOException {
+		LoaderPlugin.getDefault().unload(outputFile);
 		kermetaUnit = IOPlugin.getDefault().basicGetKermetaUnit(outputFile);
 		
 		MergeContext context = new MergeContext(kermetaUnitsToMerge);

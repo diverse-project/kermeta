@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.24 2008-01-04 14:17:25 dvojtise Exp $
+/*$Id: Ecore2KMPass1.java,v 1.25 2008-02-14 07:13:16 uid21732 Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -31,7 +31,7 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -41,6 +41,8 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 
 /**
  * 
@@ -69,6 +71,15 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		
 		/*
 		 * 
+		 * Special case for kermeta_java.ecore because it needs the framework but it has no requires info.
+		 * So we have to add it manually.
+		 * 
+		 */
+		if ( kermetaUnit.getUri().equals("platform:/resource/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"))
+			kermetaUnit.addRequire("kermeta", null);
+		
+		/*
+		 * 
 		 * The annotation is the compilation unit.
 		 * 
 		 */
@@ -79,34 +90,6 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 				String splits[] = s.split("\\|");
 				for ( int i = 0; i < splits.length; i++ ) {
 					kermetaUnit.addRequire( splits[i], null );
-					/*String fileURI = "";
-					if ( splits[i].equals("kermeta") ) {
-						if ( kermetaUnit.isFramework() )
-							fileURI = IOPlugin.getFrameWorkEcoreURI();
-						else
-							fileURI = IOPlugin.FRAMEWORK_KM_URI;
-					} else if ( splits[i].matches("http://.+") )
-						fileURI = splits[i];
-					else if ( splits[i].matches("platform:/plugin.+") || splits[i].matches("platform:/resource.+") )
-						fileURI = splits[i];
-					else {
-						int index = kermetaUnit.getUri().lastIndexOf("/");
-						String path = kermetaUnit.getUri().substring(0, index);
-						String relativeURI = path + "/" + splits[i];
-						relativeURI = StringHelper.replaceExtension(relativeURI, "ecore");
-						URI uri = URI.createURI( relativeURI );
-						URIConverter converter = new URIConverterImpl();
-						uri = converter.normalize(uri);
-						uri = EcoreHelper.getCanonicalURI(uri);
-						fileURI = uri.toString();
-					}
-					
-					try {
-						KermetaUnit importedUnit = IOPlugin.getDefault().getKermetaUnit( fileURI );
-						kermetaUnit.getImportedKermetaUnits().add( importedUnit );
-					} catch ( URIMalformedException exception ) {
-						kermetaUnit.error( exception.getMessage() );
-					}*/
 				}
 			}
 			
@@ -117,7 +100,14 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 					kermetaUnit.addUsing( splits[i] );
 			}
 						
+		} else if ( node.getDetails().containsKey("mainClass") ) {
+			Tag tag = KermetaModelHelper.Tag.create("mainClass", node.getDetails().get("mainClass") );
+			kermetaUnit.getModelingUnit().getOwnedTags().add( tag );
+		} else if ( node.getDetails().containsKey("mainOperation") ) {
+			Tag tag = KermetaModelHelper.Tag.create("mainOperation", node.getDetails().get("mainOperation") );
+			kermetaUnit.getModelingUnit().getOwnedTags().add( tag );
 		}
+			
 		
 		return result;
 		
@@ -152,8 +142,10 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			KermetaUnit unitToImport;
 			try {
 				unitToImport = IOPlugin.getDefault().getKermetaUnit( node.getEClassifier().eResource().getURI().toString() );
-				kermetaUnit.importKermetaUnit(unitToImport, false, false);
+				kermetaUnit.addRequire( unitToImport.getUri(), unitToImport );
 			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			}
 		}
@@ -336,6 +328,8 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			try {
 				kermetaUnit.getImportedKermetaUnits().add( IOPlugin.getDefault().getKermetaUnit(node.getEType().eResource().getURI().toString()) );
 			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			}
 		}

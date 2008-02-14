@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallExpression.java,v 1.6 2008-01-22 14:24:31 cfaucher Exp $
+ * $Id: CallExpression.java,v 1.7 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression()
  * @model abstract="true"
+ *        annotation="GenModel documentation='/**\n * Any callable expression inherits this class, e.g : \n *   - variable call\n *   - feature call ( <code>a.b</code> : b is a feature call)\n *\n * <img alt=\"\"  height=\"90%\" width=\"90%\"  src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png\" />\n *\n \052/'"
  * @generated
  */
 public interface CallExpression extends Expression {
@@ -46,7 +47,7 @@ public interface CallExpression extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static Type Variable Bindings</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_StaticTypeVariableBindings()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * to be written #########################################\n \052/'"
 	 * @generated
 	 */
 	EList<Type> getStaticTypeVariableBindings();
@@ -63,6 +64,7 @@ public interface CallExpression extends Expression {
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_Parameters()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Kermeta calls can embedd expressions as parameters\n \052/'"
 	 * @generated
 	 */
 	EList<Expression> getParameters();
@@ -79,6 +81,7 @@ public interface CallExpression extends Expression {
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_Name()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * A call must be named\n \052/'"
 	 * @generated
 	 */
 	String getName();

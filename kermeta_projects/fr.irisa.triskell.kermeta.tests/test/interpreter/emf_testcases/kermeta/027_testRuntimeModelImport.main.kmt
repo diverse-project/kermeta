@@ -1,4 +1,4 @@
-/* $Id: 027_testRuntimeModelImport.main.kmt,v 1.1 2007-09-10 08:35:05 cfaucher Exp $
+/* $Id: 027_testRuntimeModelImport.main.kmt,v 1.2 2008-02-14 07:13:29 uid21732 Exp $
  *
  */
 @mainClass "RuntimeModelImportTests::Main"
@@ -72,17 +72,10 @@ class Main inherits kermeta::kunit::TestCase
    		"platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")     
    		
  	   resource2.load() 
- 	   result :=  Set<Package>.new
-       from var it : Iterator<kermeta::standard::Object> init resource2.instances.iterator
-       until it.isOff
-       loop
-           var next : kermeta::standard::Object init it.next
-           if (Package.isInstance(next)) then 
-           		var aPackage : Package 
-           		aPackage ?= next
-           		result.add(aPackage)
-           end
-       end
+ 	   var mu : ModelingUnit
+ 	   mu ?= resource2.instances.one
+ 	   
+ 	   result := mu.packages
        
    end
     

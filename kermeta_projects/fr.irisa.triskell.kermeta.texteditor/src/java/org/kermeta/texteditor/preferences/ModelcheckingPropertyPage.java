@@ -1,6 +1,6 @@
 
 
-/*$Id: ModelcheckingPropertyPage.java,v 1.1 2007-12-17 14:05:12 ftanguy Exp $
+/*$Id: ModelcheckingPropertyPage.java,v 1.2 2008-02-14 07:13:43 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	ModelcheckingPropertyPage.java
 * License : EPL
@@ -38,9 +38,7 @@ public class ModelcheckingPropertyPage extends PropertyPage implements
 	protected Control createContents(Composite parent) {
 		
 		selection = TexteditorPlugin.getDefault().getModelCheckingStrategy();
-		
-//		selection = ModelcheckingStrategy.MODE;
-		
+				
 		Group group = new Group(parent, SWT.NONE);
 		group.setText("Modelchecking Strategy");
 		GridLayout layout = new GridLayout();
@@ -71,6 +69,19 @@ public class ModelcheckingPropertyPage extends PropertyPage implements
 		);		
 		if ( selection == ModelcheckingStrategy.INPUT_CHANGED )
 			editorChangedTime.setSelection(true);
+
+		Button editorNever = new Button(group, SWT.RADIO);
+		editorNever.setText("Never checks files. I prefer to use the dedicated button manually.");
+		editorNever.addSelectionListener( 
+			new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent e) {
+					selection = ModelcheckingStrategy.NEVER;
+				}
+			} 
+		);		
+		if ( selection == ModelcheckingStrategy.NEVER )
+			editorNever.setSelection(true);
+
 		
 		return parent;
 	}
@@ -85,6 +96,10 @@ public class ModelcheckingPropertyPage extends PropertyPage implements
 			
 		case ModelcheckingStrategy.INPUT_CHANGED :
 			TexteditorPlugin.getDefault().setModelCheckingStrategy( ModelcheckingStrategy.INPUT_CHANGED );
+			break;
+			
+		case ModelcheckingStrategy.NEVER :
+			TexteditorPlugin.getDefault().setModelCheckingStrategy( ModelcheckingStrategy.NEVER );
 			break;
 			
 		default:

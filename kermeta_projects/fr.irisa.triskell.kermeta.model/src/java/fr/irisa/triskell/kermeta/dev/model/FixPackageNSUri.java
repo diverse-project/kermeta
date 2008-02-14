@@ -1,4 +1,4 @@
-/* $Id: FixPackageNSUri.java,v 1.10 2008-01-28 16:44:48 dvojtise Exp $
+/* $Id: FixPackageNSUri.java,v 1.11 2008-02-14 07:13:03 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : FixPackageNSUri.java
  * License    : EPL

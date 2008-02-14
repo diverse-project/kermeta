@@ -2,16 +2,17 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionCache.java,v 1.3 2008-02-06 09:38:25 dvojtise Exp $
+ * $Id: TypeDefinitionCache.java,v 1.4 2008-02-14 07:13:18 uid21732 Exp $
  */
 package org.kermeta.io;
 
-import java.util.Map;
-
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.EObject;
-
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+
+import java.util.Map;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -127,14 +128,6 @@ public interface TypeDefinitionCache extends EObject {
 	 * @generated
 	 */
 	TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	TypeDefinition getInternalTypeDefinitionByQualifiedName(String name);
 
 	/**
 	 * <!-- begin-user-doc -->

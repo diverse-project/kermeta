@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.34 2008-01-04 15:11:09 dvojtise Exp $
+/* $Id: kunit.kmt,v 1.35 2008-02-14 07:13:37 uid21732 Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -23,7 +23,7 @@ require "assert.kmt"
 using kermeta::standard
 using kermeta::utils
 using kermeta
-using kermeta::reflection
+using kermeta::language::structure
 using kermeta::kunit
 
 
@@ -441,7 +441,7 @@ class TestSuite inherits Test
 			}*/
 			 
 			
-			var classDefinition : ClassDefinition
+			/*var classDefinition : ClassDefinition
 			classDefinition ?= testCaseClass.typeDefinition
 			classDefinition.baseAspects.each { anAspect |
 				if ( anAspect.isInstanceOf( ClassDefinition ) ) then
@@ -449,7 +449,7 @@ class TestSuite inherits Test
 					castAspect ?= anAspect
 					addAllTestCasesFromAspects( testCaseClass, castAspect )
 				end
-			}
+			}*/
 
 			testCaseClass.ownedOperation.select { o |  
 				o.name.size>=4 and o.name.substring(0, 4)== "test"
@@ -483,13 +483,13 @@ class TestSuite inherits Test
 				self.tests.add(testCase)
 			}
 			
-			anAspect.baseAspects.each { a |
+			/*anAspect.baseAspects.each { a |
 				if ( a.isInstanceOf( ClassDefinition ) ) then
 					var castAspect : ClassDefinition
 					castAspect ?= a
 					addAllTestCasesFromAspects( testCaseClass, castAspect )
 				end
-			}
+			}*/
 			
 	   end
 }

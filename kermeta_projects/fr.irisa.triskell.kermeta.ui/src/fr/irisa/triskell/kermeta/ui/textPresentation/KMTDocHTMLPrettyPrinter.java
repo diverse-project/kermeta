@@ -1,4 +1,4 @@
-/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.3 2008-01-04 15:07:05 dvojtise Exp $
+/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.4 2008-02-14 07:12:54 uid21732 Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -14,7 +14,9 @@
 package fr.irisa.triskell.kermeta.ui.textPresentation;
 
 import java.net.URL;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,12 +26,17 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 
@@ -59,6 +66,7 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 
 	public String getHTMLDoc(EObject node)
 	{
+		MODE = DEFINITION_MODE;
 		String result = "<pre>";
 		currentClassShortLevel = 0;
 		mainClass =  true;
@@ -72,6 +80,10 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 
 		if(node instanceof Property)
 			result += htmlSummary((Property)node);
+		
+		if ( node instanceof Constraint )
+			result += htmlConstraint( (Constraint) node );
+		
 		mainClass =  false;
 		result+="</pre>";
 		return  fixPlatformURL(result);
@@ -86,89 +98,117 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 		if(tags.compareTo("")!=0) result.append("\n") ;
 		return result.toString();
 	}
+		
+	/**
+	 * Pretty print a summary for an operation.
+	 * 
+	 * @param o
+	 * @return
+	 */
+	private String ppOperationSummary(Operation o) {
+		String result = (String) accept(o);
+		result += "\n\n";
+		return result;
+	}
 	
+	/**
+	 * Pretty print the summary for a list of operations.
+	 * 
+	 * @param l
+	 * @return
+	 */
+	private String ppOperationSummaries(List<Operation> l) {
+		String result = "";
+		for ( Operation o : l )
+			result += ppOperationSummary(o);
+		return result;
+	}
+	
+	/**
+	 * Pretty print a summary for a property.
+	 * 
+	 * @param o
+	 * @return
+	 */
+	private String ppPropertySummary(Property p) {
+		//String result = ppTags(p.getTag());
+		String result = (String) accept(p);
+		result += "\n\n";
+		return result;
+	}
+	
+	/**
+	 * Pretty print the summary for a list of properties.
+	 * 
+	 * @param l
+	 * @return
+	 */
+	private String ppPropertySummaries(List<Property> l) {
+		String result = "";
+		for ( Property p : l )
+			result += ppPropertySummary(p);
+		return result;
+	}
+		
 	public String htmlSummary(ClassDefinition node) {
-
-		StringBuffer result= new StringBuffer("");
-		if(mainClass){
-			String tags = ppTags(node.getTag());
-			result.append(getPrefix() + tags);
-			if(tags.compareTo("")!=0) result.append("\n"); 
-		}
-		if(!classFlat && classShortLevel < 1) return result.toString();
-		result.append(getPrefix());
-		if (node.isIsAbstract()) result.append("<b>abstract</b> ");
-		result.append("<b>class</b> " + KMTHelper.getMangledIdentifier(node.getName()));
-		if (node.getTypeParameter().size() > 0) {
-			result.append("&lt;");
-			result.append(ppTypeVariableDeclaration(node.getTypeParameter()));
-			result.append("&gt;");
-		}
-		result.append("\n") ;
-		if (node.getSuperType().size() > 0) {
-			Vector<String> knowOperationNames = new Vector<String>();
-
-			// fill the knownOperationName list with those of the current node we don't care of the resulting list 
-			// EList e = getOperationsNotIn(node, knowOperationNames);
-			if(!classFlat)
-			{ // shows only the the directly inherited classes
-
-				result.append(" <b>inherits from</b>");
-				Iterator<Type> itSuperType = node.getSuperType().iterator();
-				while(itSuperType.hasNext()){
-					result.append( CR );
-					EObject o = (EObject)itSuperType.next();
-					result.append(getPrefix() + "<b>class</b> " + accept(o));
+		DOC_VIEW = false;
+		printBody = false;
+		Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext(node);
+		String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(node);
+		
+		String tags = "";
+		String operations = "";
+		String properties = "";
+		String supertypes = "";
+		
+		for ( TypeDefinition td : context ) {
+			if ( td instanceof ClassDefinition ) {
+				ClassDefinition cd = (ClassDefinition) td;
+				if ( KermetaModelHelper.NamedElement.qualifiedName(cd).equals(qualifiedName) ) {
+					for ( Type t : cd.getSuperType() )
+						supertypes += "\n\t<b>class</b> " + accept(t);
+					pushPrefix();
+					tags +=	ppTags(cd.getOwnedTags());
+					operations += ppOperationSummaries(cd.getOwnedOperation());
+					properties += ppPropertySummaries(cd.getOwnedAttribute());
+					popPrefix();
 				}
 			}
-			else{
-
-				pushPrefix();
-				// retreive direct super classes
-				// if short level > 1
-					// show attributes 
-					// show operations not redefined in the current class
-				result.append(" <b>inherits from</b>");
-				Iterator itSuperType = node.getSuperType().iterator();
-				while(itSuperType.hasNext()){
-					result.append( CR );
-					EObject o = (EObject)itSuperType.next();
-					result.append( getPrefix() + "<b>class</b> " + accept(o));
-					if(classShortLevel > 1 && o instanceof ClassDefinition){
-						ClassDefinition superNode = (ClassDefinition)o;
-						pushPrefix();
-						result.append( ppCRSeparatedNode(superNode.getOwnedAttribute()));
-						EList<Operation> el =  getOperationsNotIn(superNode, knowOperationNames);
-						result.append( ppCRSeparatedNode(el));
-						//result += ppCRSeparatedNode(superNode.getFOwnedOperation());
-						popPrefix();
-						result.append( getPrefix() + "}");
-					}
-				}
-				// retreive all indirect super classes
-				// if short level > 1
-					// show attributes 
-					// show operations not redefined in the current class or in the previously processed class
-
-				popPrefix();
-			}
-		}	
-		// if short level > 0 
-		if(classShortLevel > 0){
-			result.append( CR + getPrefix() + "{" + CR);
-			pushPrefix();
-			// show attributes with tags
-			result.append( ppCRSeparatedNode(node.getOwnedAttribute()));
-			// show operations with tags
-			result.append( ppCRSeparatedNode(node.getOwnedOperation()));
-			popPrefix();
-			result.append( getPrefix() + "}");		
 		}
 		
-		return result.toString();
+		String result = tags;
+		
+		if ( node.isIsAbstract() ) 
+			result += "<b>abstract</b> ";
+		
+		result += "<b>class</b> " + KMTHelper.getMangledIdentifier(node.getName());
+		
+		if (node.getTypeParameter().size() > 0) {
+			result += "&lt;";
+			result += ppTypeVariableDeclaration(node.getTypeParameter());
+			result += "&gt;";
+		}
+		
+		if ( ! supertypes.equals("") )
+			result += " inherits from " + supertypes;
+		
+		result += " {\n\n\n";
+		
+		result += properties;
+		result += operations;
+		
+		result += "}";
+		
+		return result;
+	}
+	
+	public String htmlConstraint(Constraint constraint) {
+		return (String) accept(constraint);
 	}
 	
 	public String htmlSummary(Operation node) {
+		DOC_VIEW = true;
+		printBody = false;
 		StringBuffer result= new StringBuffer("");
 		result.append("<b>operation</b> " + KMTHelper.getMangledIdentifier(node.getName()));
 		result.append("\n") ;
@@ -179,6 +219,8 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 	}
 	
 	public String htmlSummary(Property node) {
+		DOC_VIEW = true;
+		printBody = false;
 		StringBuffer result= new StringBuffer("");
 		result.append(ppSimplifiedProperty(node));
 		/*result.append("<b>Property </b> " + KMTHelper.getMangledIdentifier(node.getName()));

@@ -1,4 +1,4 @@
-/* $Id: KermetaSpecialIcons.java,v 1.6 2007-12-17 14:05:10 ftanguy Exp $
+/* $Id: KermetaSpecialIcons.java,v 1.7 2008-02-14 07:13:43 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaSpecialIcons.java
 * License : EPL
@@ -17,7 +17,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 
 
 /**
@@ -26,6 +25,10 @@ import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 public class KermetaSpecialIcons {
 
 	final static private URL KermetaEditPluginURL = KermetaEditPlugin.getPlugin().getBaseURL();
+
+    public static Image FOLDER = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/folder.png").createImage();
+
+    public static Image FILE = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/generic_file.png").createImage();
 	
     public static Image PACKAGE_GRAY = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_gray.gif").createImage();
   

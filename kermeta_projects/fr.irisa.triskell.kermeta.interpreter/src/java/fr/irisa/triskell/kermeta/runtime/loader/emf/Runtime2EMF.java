@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.69 2008-02-06 09:37:19 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.70 2008-02-14 07:13:56 uid21732 Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL

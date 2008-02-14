@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.57 2008-01-23 14:12:50 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.58 2008-02-14 07:13:20 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass1.java
  * License    : EPL
@@ -38,8 +38,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.internal.TagHelper;
 
-import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -56,11 +56,9 @@ import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Using;
-import fr.irisa.triskell.kermeta.loader.ecore.KM2ECoreConversionException;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TextTabs;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 
@@ -71,7 +69,6 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 public class KM2EcorePass1 extends KM2Ecore {
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass1");
-	protected TextTabs loggerTabs =  new TextTabs("   ","");
 	
 	/** The name of the currently visited element */
 	protected String current_name;
@@ -102,6 +99,11 @@ public class KM2EcorePass1 extends KM2Ecore {
 		EAnnotation annotation = createAnnotationForModelingUnit(node);
 		ecoreResource.getContents().add( annotation );
 		
+		for ( Tag tag : node.getOwnedTags() ) {
+			annotation = (EAnnotation) accept(tag);
+			ecoreResource.getContents().add( annotation );
+		}
+		
 		Iterator<Package> iterator = node.getPackages().iterator();
 		while ( iterator.hasNext() )
 			accept( iterator.next() );	
@@ -131,7 +133,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 		 * Creating the annotation for requires and usings.
 		 * 
 		 */
-		EAnnotation annotation = EcoreModelHelper.EAnnotation.create( "ModellingUnit" );
+		EAnnotation annotation = EcoreModelHelper.EAnnotation.create( "ModelingUnit" );
 		
 		if ( ! requiresSource.equals("") )
 			EcoreModelHelper.EAnnotation.addDetails(annotation, "require", requiresSource);
@@ -152,8 +154,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 		String nsPrefix = node.getName();
 		String nsURI = null;
 		
-		internalLog.debug(loggerTabs + "Visiting Package: "+ name);
-		loggerTabs.increment();
+		internalLog.debug("Visiting Package: "+ name);
 		
 		// if the uri is given, also we use it to set the package's uri.
 		// else a default uri is generated and set
@@ -207,7 +208,6 @@ public class KM2EcorePass1 extends KM2Ecore {
 		// Add the created EPackage to km2ecoremapping
 		//km2ecoremapping.put(node,newEPackage);
 		
-		loggerTabs.decrement();
 		return newEPackage;
 	}
 
@@ -262,8 +262,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 	public Object visitClassDefinition(ClassDefinition node) {
 		EClass newEClass=null;
 		current_name = node.getName();
-		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ current_name);
-		loggerTabs.increment();
+		internalLog.debug("Visiting ClassDefinition: "+ current_name);
 		try{
 			newEClass = EcoreFactory.eINSTANCE.createEClass();
 			
@@ -342,7 +341,6 @@ public class KM2EcorePass1 extends KM2Ecore {
 			internalLog.error("Visiting ClassDefinition: "+ current_name + ", Exception: " + e.getMessage() ,e);
 			e.printStackTrace();
 		}
-		loggerTabs.decrement();
 		return newEClass;
 	}
 	
@@ -424,8 +422,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 	 */
 	public Object visitOperation(Operation node) {
 		current_name = node.getName();
-		internalLog.debug(loggerTabs + "Visiting Operation: "+ current_name);
-		loggerTabs.increment();
+		internalLog.debug("Visiting Operation: "+ current_name);
 		
 		EOperation newEOperation = EcoreFactory.eINSTANCE.createEOperation();
 		
@@ -551,7 +548,6 @@ public class KM2EcorePass1 extends KM2Ecore {
 		if( km2ecoremapping.get(node) == null ) {
 			km2ecoremapping.put(node,newEOperation);
 		}
-		loggerTabs.decrement();
 		return newEOperation;
 	}
 
@@ -560,8 +556,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 	 * Convert Parameter into EParameter
 	 */
 	public Object visitParameter(Parameter node) {
-		internalLog.debug(loggerTabs + "Visiting Parameter: "+ node.getName());
-		loggerTabs.increment();
+		internalLog.debug("Visiting Parameter: "+ node.getName());
 		
 		EParameter newEParameter = EcoreFactory.eINSTANCE.createEParameter();
 		
@@ -584,7 +579,6 @@ public class KM2EcorePass1 extends KM2Ecore {
 		}*/
 		
 		km2ecoremapping.put(node,newEParameter);
-		loggerTabs.decrement();
 		return newEParameter;
 	}
 	
@@ -595,8 +589,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 	 * be an EAttribute, otherwise it will be an EReference.
 	 */
 	public Object visitProperty(Property node) {
-		internalLog.debug(loggerTabs + "Visiting Property: "+ node.getName());
-		loggerTabs.increment();
+		internalLog.debug("Visiting Property: "+ node.getName());
 		
 		EStructuralFeature newEStructuralFeature = null;
 		EReference newEReference = null;
@@ -671,7 +664,6 @@ public class KM2EcorePass1 extends KM2Ecore {
 		}*/
 		
 		km2ecoremapping.put(node,newEStructuralFeature);
-		loggerTabs.decrement();		
 		return newEStructuralFeature;
 	}
 
@@ -684,7 +676,7 @@ public class KM2EcorePass1 extends KM2Ecore {
     	EAnnotation annotation=null;
 		current_name = node.getName();
 				
-		if( KMT2KMPass7.KERMETA_DOCUMENTATION.equals(current_name) ) {
+		if( TagHelper.KERMETA_DOCUMENTATION.equals(current_name) ) {
 			//	deal with special case of documentation
 			annotation = EcoreModelHelper.EAnnotation.create(KM2Ecore.ANNOTATION_GENMODEL);
 			EcoreModelHelper.EAnnotation.addDetails(annotation, KM2Ecore.ANNOTATION_DOCUMENTATION_DETAILS, KMTHelper.formatTagValue(node.getValue()));

@@ -1,4 +1,4 @@
-/* $Id: Model.java,v 1.7 2007-10-15 07:13:58 barais Exp $
+/* $Id: Model.java,v 1.8 2008-02-14 07:13:57 uid21732 Exp $
  * Project : Kermeta interpreter
  * File : ModelType.java
  * License : EPL
@@ -50,7 +50,7 @@ public class Model {
 		// will contain a list of the objects that have been added
 		
 	    
-	    GenericTypeDefinition typeVarClassDef  = (GenericTypeDefinition)factory.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::reflection::Object");
+	    GenericTypeDefinition typeVarClassDef  = (GenericTypeDefinition)factory.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::language::structure::Object");
 	    fr.irisa.triskell.kermeta.language.structure.Class typeParam = StructureFactory.eINSTANCE.createClass();
 	    typeParam.setTypeDefinition(typeVarClassDef);
 		

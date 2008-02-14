@@ -24,7 +24,6 @@ Export-Package: .,
  com.ibm.eclipse.ldt.core.templates.ext,
  com.ibm.eclipse.ldt.core.util,
  fr.irisa.triskell.kermeta,
- fr.irisa.triskell.kermeta.launcher,
  fr.irisa.triskell.kermeta.plugin,
  fr.irisa.triskell.kermeta.popup.actions,
  fr.irisa.triskell.kermeta.resources,
@@ -41,6 +40,6 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.io,
  fr.irisa.triskell.eclipse.util,
  fr.irisa.triskell.traceability,
- fr.irisa.triskell.kermeta.interpreter,
- org.eclipse.gymnast.runtime.core
+ org.eclipse.gymnast.runtime.core,
+ org.kermeta.io.loader
 Eclipse-LazyStart: true

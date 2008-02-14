@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.6 2007-11-29 14:02:37 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.7 2008-02-14 07:13:31 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -24,6 +24,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KMTOutputBuilder;
 import org.kermeta.io.util2.UserDirURI;
@@ -385,12 +386,14 @@ public void testWithFile(String dir, String file) throws Exception {
 	// phase 1 : test that it load correctly
 	Map<Object, Object> options = new HashMap<Object, Object> ();
 	options.put( LoadingOptions.ECORE_QuickFixEnabled, true );
-	KermetaUnit builder = ioPlugin.loadKermetaUnit( fileURI, options, new NullProgressMonitor() );
-	
+
+	KermetaUnit builder = LoaderPlugin.getDefault().load(fileURI, options);
+		
 	if ( builder.isIndirectlyErroneous() )
-		assertTrue( KermetaUnitHelper.getErrorsAsString(builder), false);
+		assertTrue( KermetaUnitHelper.getAllErrorsAsString(builder), false);
 	
 	else {	
+	
 		
 		// phase 2 : verify that it can be save as an xmi (km file)
 		try {				
@@ -418,16 +421,18 @@ public void testWithFile(String dir, String file) throws Exception {
 		// test for require cycles
 		if( ! hasDependencyCycle(builder) ){
 			
-			ioPlugin.unload(TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file);
+			LoaderPlugin.getDefault().unload(fileURI);
 			// phase 3 bis, check that the prettyprinted version can be parsed 
 			// try to re-parse the pretty-printed version
-			KermetaUnit builder2 = ioPlugin.loadKermetaUnit(ppfile, options, new NullProgressMonitor());
+			KermetaUnit builder2 = LoaderPlugin.getDefault().load(ppfile, options);
 			if ( builder2.isIndirectlyErroneous() )
 				assertTrue("RE-PARSE : " + KermetaUnitHelper.getErrorsAsString(builder2), false);
-
+			LoaderPlugin.getDefault().unload( builder2.getUri() );
 		} else
 			System.out.println("Ignoring phase 3bis of " + builder.getUri() + ", due to a cycle in its require statements. \n (in this case a per file basis test cannot be applied)");
 	}
+	
+	//LoaderPlugin.getDefault().unload(fileURI);
 }
 
 	protected boolean hasDependencyCycle(KermetaUnit ku){

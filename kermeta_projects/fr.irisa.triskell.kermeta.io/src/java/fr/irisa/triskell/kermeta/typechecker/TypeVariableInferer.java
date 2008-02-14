@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.19 2008-01-02 10:28:31 vmahe Exp $
+/* $Id: TypeVariableInferer.java,v 1.20 2008-02-14 07:13:16 uid21732 Exp $
 * Project : Kermeta io
 * File : TypeVariableInferer.java
 * License : EPL
@@ -12,6 +12,7 @@
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -111,9 +112,8 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	    
 	    if (provided instanceof VoidType) return null;
 	    
-	    if (TypeConformanceChecker.conforms(TypeCheckerContext.ObjectType.getFType(), arg0)) {
-	    	if (provided instanceof Enumeration) return null;
-	    }
+	    if ( (provided instanceof Enumeration) && TypeConformanceChecker.conforms(TypeCheckerContext.ObjectType.getFType(), arg0))
+	    	return null;
 	    
 	    if (provided instanceof ModelType) {
 	    	if (TypeConformanceChecker.conforms(TypeCheckerContext.ModelType.getFType(), arg0)) {
@@ -129,11 +129,8 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	    	}
 	    }
 	    
-		if (! (provided instanceof fr.irisa.triskell.kermeta.language.structure.Class) ) throw new TypeDoesNotMatchError();
-		// the provided type is suposed to be a conformant class  
-		
-		//if (arg0.getFTypeParamBinding().size() != ((FClass)provided).getFTypeParamBinding().size())
-		    //throw new TypeDoesNotMatchError();
+		if (! (provided instanceof fr.irisa.triskell.kermeta.language.structure.Class) ) 
+			throw new TypeDoesNotMatchError();
 		
 		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class)provided).iterator();		
 		while(it.hasNext()) {

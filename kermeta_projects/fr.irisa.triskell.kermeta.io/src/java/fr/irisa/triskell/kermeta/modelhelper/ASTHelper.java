@@ -1,6 +1,6 @@
 
 
-/*$Id: ASTHelper.java,v 1.4 2008-01-04 14:17:38 dvojtise Exp $
+/*$Id: ASTHelper.java,v 1.5 2008-02-14 07:13:18 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.io2
 * File : 	ASTHelper.java
 * License : EPL
@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
-
 import fr.irisa.triskell.kermeta.parser.gen.ast.CompUnit;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaParser;

@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.47 2008-01-09 16:28:31 dvojtise Exp $
+ * $Id: resource.kmt,v 1.48 2008-02-14 07:13:37 uid21732 Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -199,13 +199,13 @@ class EMFResource inherits Resource
 	 * Ensures that the instance does not appear more than once in the Resource
 	 */
 	method add(instance : Object) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, self)
-		super(instance)
 		// search the instance in the other Resources of the containing Repository		
 		repository.resources.select{r | r != self and r.contains(instance)}.each{r |
 			stdio.writeln("DVK ! another resource of the same repository was containing this element")
 			r.remove(instance)
 		}
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, self)
+		super(instance)
 	end
 	
 	/**
@@ -340,7 +340,7 @@ abstract class Repository
 	     					//stdio.writeln("   trying property " + prop.name)
 							if( prop.upper > 1 or prop.upper == -1) then
 								// this is a collection
-								var referencedObjs : Collection<kermeta::reflection::Object> 
+								var referencedObjs : Collection<Object> 
 								referencedObjs ?= containedObj.get(prop)
 								if(not referencedObjs.isVoid) then
 									// check if this referenced objects are part of one of the resource of this repository

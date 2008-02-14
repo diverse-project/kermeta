@@ -14,7 +14,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.io,
- org.kermeta.interest;visibility:=reexport
+ org.kermeta.interest;visibility:=reexport,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.kermeta.io.loader,
+ org.kermeta.merger
 Eclipse-LazyStart: true
 Export-Package: fr.irisa.triskell.kermeta.extension,
  fr.irisa.triskell.kermeta.kpm,

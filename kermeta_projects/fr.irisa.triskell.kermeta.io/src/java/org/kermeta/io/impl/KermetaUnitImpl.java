@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.29 2008-01-28 10:06:11 dvojtise Exp $
+ * $Id: KermetaUnitImpl.java,v 1.30 2008-02-14 07:13:17 uid21732 Exp $
  */
 package org.kermeta.io.impl;
 
@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.IBuildingState;
 import org.kermeta.io.IoFactory;
@@ -37,6 +38,7 @@ import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParsingError;
 import org.kermeta.io.TypeDefinitionCache;
+import org.kermeta.io.TypeDefinitionCacheEntry;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
@@ -46,9 +48,6 @@ import antlr.ANTLRException;
 import antlr.MismatchedTokenException;
 import antlr.NoViableAltException;
 import antlr.TokenStreamRecognitionException;
-
-import org.eclipse.gymnast.runtime.core.ast.ASTNode;
-
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Require;
@@ -86,6 +85,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTypeDefinitionCache <em>Type Definition Cache</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isLocked <em>Locked</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getBaseAspects <em>Base Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -355,6 +355,16 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	protected boolean locked = LOCKED_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getBaseAspects() <em>Base Aspects</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBaseAspects()
+	 * @generated
+	 * @ordered
+	 */
+	protected Map<TypeDefinition, EList<TypeDefinition>> baseAspects;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
@@ -363,6 +373,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		super();
 		setModelingUnit( StructureFactory.eINSTANCE.createModelingUnit() );
 		aspects = new HashMap <TypeDefinition, EList<TypeDefinition> > ();
+		baseAspects = new HashMap <TypeDefinition, EList<TypeDefinition> > ();
 		setTypeDefinitionCache( IoFactory.eINSTANCE.createTypeDefinitionCache() );
 		// if there is no tracer defined create a memory tracer
 		// useful because at the end of the build the AST will be discarded to free the memory
@@ -590,13 +601,17 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setNeedASTTraces(boolean newNeedASTTraces) {
 		boolean oldNeedASTTraces = needASTTraces;
 		needASTTraces = newNeedASTTraces;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__NEED_AST_TRACES, oldNeedASTTraces, needASTTraces));
+		if ( ! newNeedASTTraces ) {
+			traceM2T.clear();
+			traceT2M.clear();
+		}
 	}
 
 	/**
@@ -809,13 +824,36 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setLocked(boolean newLocked) {
+		if ( isFramework() && ! newLocked )
+			return;
 		boolean oldLocked = locked;
 		locked = newLocked;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__LOCKED, oldLocked, locked));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map<TypeDefinition, EList<TypeDefinition>> getBaseAspects() {
+		return baseAspects;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBaseAspects(Map<TypeDefinition, EList<TypeDefinition>> newBaseAspects) {
+		Map<TypeDefinition, EList<TypeDefinition>> oldBaseAspects = baseAspects;
+		baseAspects = newBaseAspects;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__BASE_ASPECTS, oldBaseAspects, baseAspects));
 	}
 
 	/**
@@ -1020,8 +1058,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	public TypeDefinition getTypeDefinitionByName(String name) {
 		if ( typeDefinitionCache == null )
 			return null;
-		TypeDefinition result =  typeDefinitionCache.getTypeDefinitionByName(name);
-		return result;
+		return typeDefinitionCache.getTypeDefinitionByName(name);
 	}
 
 	/**
@@ -1032,8 +1069,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	public TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName) {
 		if ( typeDefinitionCache == null )
 			return null;
-		TypeDefinition result =  typeDefinitionCache.getTypeDefinitionByQualifiedName(qualifiedName);		
-		return result;
+		return typeDefinitionCache.getTypeDefinitionByQualifiedName(qualifiedName);
 	}
 
 	/**
@@ -1042,10 +1078,10 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public TypeDefinition getInternalTypeDefinitionByName(String name) {
-		if ( typeDefinitionCache == null )
-			return null;
-		TypeDefinition result = getTypeDefinitionCache().getInternalTypeDefinitionByQualifiedName(name);
-		return result;
+		TypeDefinitionCacheEntry entry = getTypeDefinitionCache().getEntries().get(name);
+		if ( entry != null )
+			return entry.getTypeDefinition();
+		return null;
 	}
 
 	/**
@@ -1645,6 +1681,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return getKermetaUnitRequires();
 			case IoPackage.KERMETA_UNIT__LOCKED:
 				return isLocked() ? Boolean.TRUE : Boolean.FALSE;
+			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
+				return getBaseAspects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1721,6 +1759,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__LOCKED:
 				setLocked(((Boolean)newValue).booleanValue());
 				return;
+			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
+				setBaseAspects((Map<TypeDefinition, EList<TypeDefinition>>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1790,6 +1831,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__LOCKED:
 				setLocked(LOCKED_EDEFAULT);
 				return;
+			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
+				setBaseAspects((Map<TypeDefinition, EList<TypeDefinition>>)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1840,6 +1884,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return kermetaUnitRequires != null && !kermetaUnitRequires.isEmpty();
 			case IoPackage.KERMETA_UNIT__LOCKED:
 				return locked != LOCKED_EDEFAULT;
+			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
+				return baseAspects != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1872,6 +1918,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		result.append(isBeingTypechecked);
 		result.append(", locked: ");
 		result.append(locked);
+		result.append(", baseAspects: ");
+		result.append(baseAspects);
 		result.append(')');
 		return result.toString();
 	}

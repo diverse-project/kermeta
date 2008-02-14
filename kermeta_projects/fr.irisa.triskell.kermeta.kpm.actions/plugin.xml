@@ -2,39 +2,50 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
+         id="unloadContext"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action
+            class="org.kermeta.kpm.updating.UnloadContext">
+      </Action>
+   </extension>
+   <extension
+         id="loadContext"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action
+            class="org.kermeta.kpm.updating.LoadingContext">
+      </Action>
+   </extension>
+   <extension
+         id="typecheck"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action class="org.kermeta.kpm.updating.TypecheckContext"/>
+   </extension>
+   <extension
+         id="constraintcheck"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action
+            class="org.kermeta.kpm.updating.ConstraintcheckContext">
+      </Action>
+   </extension>
+   <extension
+         id="addMarkers"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action class="org.kermeta.kpm.updating.AddMarkers"/>
+   </extension>
+   <extension
+         id="removeDependentDependencies"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action class="org.kermeta.kpm.updating.RemoveDependentDependencies"/>
+   </extension>
+   <extension
          id="openProject"
          point="fr.irisa.triskell.kermeta.kpm.javaAction">
       <Action class="fr.irisa.triskell.kermeta.kpm.actions.open.OpenProject"/>
    </extension>
    <extension
-         id="addMarkers"
-         point="fr.irisa.triskell.kermeta.kpm.javaAction">
-      <Action class="fr.irisa.triskell.kermeta.kpm.actions.marker.AddMarkers"/>
-   </extension>
-   <extension
-         id="typecheck"
-         point="fr.irisa.triskell.kermeta.kpm.javaAction">
-      <Action class="fr.irisa.triskell.kermeta.kpm.actions.typecheck.Typecheck"/>
-   </extension>
-   <extension
-         id="createDependentDependencies"
-         point="fr.irisa.triskell.kermeta.kpm.javaAction">
-      <Action class="fr.irisa.triskell.kermeta.kpm.actions.dependents.CreateDependentDependencies"/>
-   </extension>
-   <extension
-         id="removeDependentDependencies"
-         point="fr.irisa.triskell.kermeta.kpm.javaAction">
-      <Action class="fr.irisa.triskell.kermeta.kpm.actions.dependents.RemoveDependentDependencies"/>
-   </extension>
-   <extension
          id="kmt2km"
          point="fr.irisa.triskell.kermeta.kpm.javaAction">
       <Action class="fr.irisa.triskell.kermeta.kpm.actions.transformation.KMT2KM"/>
-   </extension>
-   <extension
-         id="constraintCheck"
-         point="fr.irisa.triskell.kermeta.kpm.javaAction">
-      <Action class="fr.irisa.triskell.kermeta.kpm.actions.typecheck.ConstraintCheck"/>
    </extension>
    <extension
          id="ecore2kmt"
@@ -53,6 +64,18 @@
          point="fr.irisa.triskell.kermeta.kpm.javaAction">
       <Action
             class="fr.irisa.triskell.kermeta.kpm.actions.ant.ExecuteAntAction">
+      </Action>
+   </extension>
+   <extension
+         id="createDependentDependencies"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action class="org.kermeta.kpm.updating.CreateDependentDependencies"/>
+   </extension>
+   <extension
+         id="finalizeUpdate"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action
+            class="org.kermeta.kpm.updating.FinalizeUpdate">
       </Action>
    </extension>
 

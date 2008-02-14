@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCallItemProvider.java,v 1.9 2008-01-22 16:13:25 cfaucher Exp $
+ * $Id: JavaStaticCallItemProvider.java,v 1.10 2008-02-14 07:13:53 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -216,16 +216,6 @@ public class JavaStaticCallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
-				 BehaviorFactory.eINSTANCE.createBlock()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -247,6 +237,16 @@ public class JavaStaticCallItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
+				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

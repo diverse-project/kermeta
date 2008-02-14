@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.25 2007-10-15 07:13:58 barais Exp $
+/* $Id: Object.java,v 1.26 2008-02-14 07:13:57 uid21732 Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -16,9 +16,11 @@ package fr.irisa.triskell.kermeta.runtime.language;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
@@ -105,7 +107,7 @@ public class Object {
 	     ClassDefinition classDef = (ClassDefinition)metaClass.getTypeDefinition();
 	     
 	     java.lang.String message = "";
-	     Set <Constraint> invariants = ClassDefinitionHelper.getAllInvariants( classDef );
+	     List<Constraint> invariants = KermetaModelHelper.ClassDefinition.getAllInvariants( classDef );
 	     for (Constraint c : invariants ) {
 	    	 if ( ! checkConstraint(c.getBody(), classDef, self) ) {
 	   			 message += "Inv " + c.getName() + " of class " + classDef.getName() + " violated";
@@ -574,7 +576,7 @@ public class Object {
 	    RuntimeObject mcRO = selfRO.getMetaclass();
 	    fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) mcRO.getKCoreObject();
 	    ClassDefinition cDef = (ClassDefinition) cl.getTypeDefinition();
-	    ArrayList<Property> props = ClassDefinitionHelper.getAllProperties(cDef);
+	    List<Property> props = KermetaModelHelper.ClassDefinition.getAllProperties(cDef);
 	    
 	    // !!!!!! Begin Pure hack dans ta face !!!!!!
 	    // Required for handling the specific case of "ecore::EEnumLiteral" type which recursively

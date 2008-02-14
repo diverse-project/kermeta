@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.48 2008-02-06 09:38:26 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.49 2008-02-14 07:13:20 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -14,7 +14,6 @@ package fr.irisa.triskell.kermeta.exporter.ecore;
 
 
 import java.util.Hashtable;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EDataType;
@@ -23,13 +22,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.internal.TagHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.traceability.helper.Tracer;
@@ -167,112 +166,7 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 		//ecoreFileList = new ArrayList<String>();
 		internalLog.info("Directory for ecore generation : " + ecoreGenDirectory);
 	}
-	
-	/**
-	 * Never not used for the moment
-	 * @param resource
-	 * @param traceresource
-	 * @param kunit
-	 * @param kermetaTypesAlias
-	 */
-	private KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
-		this(resource, kunit, kermetaTypesAlias, exporterOptions);
-		traceResource = traceresource;
-		tracer = new Tracer(traceResource);
-	}
-	
-	/**
-	 * Never not used for the moment
-	 * @param resource
-	 * @param traceresource
-	 * @param kunit
-	 * @param edir
-	 * @param elist
-	 * @param kermetaTypesAlias
-	 */
-	private KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit, String edir, List<String> elist, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
-		this(resource, kunit, edir, elist, kermetaTypesAlias, exporterOptions);
-		traceResource = traceresource;
-		tracer = new Tracer(traceResource);
-	}
-	
-	/**
-	 * @param ecoregendir The directory where to generate ecore dependencies
-	 */
-	private KM2Ecore(Resource resource, KermetaUnit kunit, String edir, List<String> elist, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
-		this(resource, kunit, kermetaTypesAlias, exporterOptions);
-		ecoreGenDirectory = (edir==null)?null:edir+"/";
-		//ecoreFileList = (elist==null)?new ArrayList<String>():elist;
-		//if (ecoreFileList.size() == 0 && edir == null)
-		//	ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/"));
-		internalLog.info("Directory for ecore generation : " + ecoreGenDirectory);
-	}
-	
-	/**
-	 * Never not used for the moment
-	 * @param unit
-	 * @param kermetaTypesAlias
-	 */
-	private KM2Ecore(KermetaUnit unit, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
-		this(null, unit, kermetaTypesAlias, exporterOptions);
-	}
-	
-	/**
-	 * Write ecore : launches the KM2Ecore exporter and save it in "file"
-	 * TODO Since this method is called in JunitTestSuite, in Kermeta2EcoreWizard, and many other
-	 * files, it should be shared elsewhere... 
-	 * @param builder
-	 * @param file
-	 * @param overwrite overxrite file if already exists
-	 * @return the resource that hosts the wanted ecore file
-	 */
-	/*static public Resource writeEcore(KermetaUnit unit, String file, boolean overwrite)
-	{   
-	    // Create Ecore structure
-	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
-	    URI u = URI.createURI(file);
-    	URIConverter c = new URIConverterImpl();
-    	u = c.normalize(u);
-	    ResourceSet resource_set = new ResourceSetImpl();
-	    Resource resource = resource_set.createResource(  URI.createFileURI(file)  );
-    	//    	Resource resource = ecoreResourceSet.createResource(u);
-	    // KMT2ECORE
-	    KM2Ecore exporter;
-	    exporter = new KM2Ecore(resource, unit);
-		exporter.exportCompilationUnit( unit.getCompilationUnit() );
-	    // Save Ecore structure	
-		try {
-			// TODO : test if file exists!! -> u.toFileString() reutrns null :(
-			if (overwrite==true)
-				resource.save(null);
-			//savedFiles.put(file, resource); // add the file so that we avoid re-save of resources
-		} catch (IOException e) {
-			//KermetaUnit.internalLog.error("cannot save ecore ressource, due to Exception: "+ e.getMessage(), e);
-			throw new Error("Cannot save ecore ressource (" + file + "), due to Exception: ", e);
-		}
 
-		return resource;
-	}*/
-	
-	
-	/**
-	 * Exports the given package into an ecore ressource
-	 * @param root_package
-	 * @return the equivalent root_package in the Ecore ressource
-	 */
-	/*public void exportCompilationUnit(CompilationUnit node) {
-		KM2EcorePass1 pass1 =  new KM2EcorePass1(ecoreResource, km2ecoremapping, this);
-		KM2EcorePass2 pass2 =  new KM2EcorePass2(ecoreResource, km2ecoremapping, this);
-		pass1.exportCompilationUnit( node );
-		pass2.exportCompilationUnit( node );
-		//Object result =  pass1.exportPackage(root_package);
-		//pass2.exportPackage(root_package);
-	}*/
-	
-	/*public void exportCompilationUnit() {
-		exportCompilationUnit( kermetaUnit.getCompilationUnit() );
-	}*/
-	
 	/**
 	 * add the given info in the annotation, eventually create it
 	 * @param modelElement
@@ -290,7 +184,7 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 		if ( key != null )
 			EcoreModelHelper.EAnnotation.addDetails(annotation, key, value);
 		else
-			EcoreModelHelper.EAnnotation.addDetails(annotation, KMT2KMPass7.KERMETA_DOCUMENTATION, value);
+			EcoreModelHelper.EAnnotation.addDetails(annotation, TagHelper.KERMETA_DOCUMENTATION, value);
 
 		// try a direct link additionnaly to the detail map. 
 		if (referedEObject != null) 
@@ -371,14 +265,6 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 	public KermetaUnit getKermetaUnit() {
 		return kermetaUnit;
 	}
-
-	/**
-	 * @return Returns the ecoreFileList.
-	 * FIXME NOT USED
-	 */
-	/*public List<String> getEcoreFileList() {
-		return ecoreFileList;
-	}*/
 
 	/**
 	 * @return Returns the ecoreGenDirectory.

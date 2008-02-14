@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Model.java,v 1.4 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Model.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -44,32 +44,9 @@ public interface Model extends fr.irisa.triskell.kermeta.language.structure.Obje
 	 * @return the value of the '<em>Contents</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModel_Contents()
 	 * @model changeable="false"
+	 *        annotation="GenModel documentation='/**\n * Contents of this model ...\n \052/\n'"
 	 * @generated
 	 */
 	EList<fr.irisa.triskell.kermeta.language.structure.Object> getContents();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	EList<fr.irisa.triskell.kermeta.language.structure.Object> filter(Type typeName);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void add(fr.irisa.triskell.kermeta.language.structure.Object obj);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void remove(fr.irisa.triskell.kermeta.language.structure.Object obj);
 
 } // Model

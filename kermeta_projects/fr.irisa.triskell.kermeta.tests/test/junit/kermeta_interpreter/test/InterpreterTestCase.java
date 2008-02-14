@@ -1,4 +1,4 @@
-/* $Id: InterpreterTestCase.java,v 1.4 2008-01-02 10:28:13 vmahe Exp $
+/* $Id: InterpreterTestCase.java,v 1.5 2008-02-14 07:13:33 uid21732 Exp $
 * Project : Kermeta (First iteration)
 * File : LoadTest.java
 * License : EPL
@@ -39,7 +39,7 @@ public class InterpreterTestCase extends TestCase {
     public void test25Hello() {
     	long mem = 0;
         for (int i=0; i<25; i++) {
-        	mem = Runtime.getRuntime().totalMemory();
+        	/*mem = Runtime.getRuntime().totalMemory();
             KermetaInterpreter inter = new KermetaInterpreter("test/interpreter/kmt_testcases/013_testString.main.kmt", null, true);
             inter.launch();
             inter.freeJavaMemory();
@@ -47,7 +47,7 @@ public class InterpreterTestCase extends TestCase {
             // We noticed that, after 4 launches, used memory become stable...
             if (i > 4)
             	assertTrue(mem == Runtime.getRuntime().totalMemory());
-            
+            */
         }
         
     }

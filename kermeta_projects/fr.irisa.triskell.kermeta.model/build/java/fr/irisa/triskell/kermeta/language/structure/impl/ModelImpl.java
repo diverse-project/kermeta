@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.4 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: ModelImpl.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -75,39 +75,6 @@ public class ModelImpl extends ObjectImpl implements Model {
 			contents = new EObjectResolvingEList<fr.irisa.triskell.kermeta.language.structure.Object>(fr.irisa.triskell.kermeta.language.structure.Object.class, this, StructurePackage.MODEL__CONTENTS);
 		}
 		return contents;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<fr.irisa.triskell.kermeta.language.structure.Object> filter(Type typeName) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void add(fr.irisa.triskell.kermeta.language.structure.Object obj) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void remove(fr.irisa.triskell.kermeta.language.structure.Object obj) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**

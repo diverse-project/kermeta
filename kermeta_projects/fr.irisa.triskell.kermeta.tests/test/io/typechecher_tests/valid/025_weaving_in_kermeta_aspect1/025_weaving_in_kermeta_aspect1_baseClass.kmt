@@ -2,6 +2,7 @@
 @mainOperation "main"
 package weavingtest;
 
+require kermeta
 
 class A {
 

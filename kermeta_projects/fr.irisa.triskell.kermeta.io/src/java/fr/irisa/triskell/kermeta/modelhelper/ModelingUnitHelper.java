@@ -1,6 +1,6 @@
 
 
-/*$Id: ModelingUnitHelper.java,v 1.3 2008-01-17 16:24:53 cfaucher Exp $
+/*$Id: ModelingUnitHelper.java,v 1.4 2008-02-14 07:13:18 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	ModelingHelper.java
 * License : EPL
@@ -19,13 +19,33 @@ import org.kermeta.io.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 
+/**
+ * 
+ * 
+ * TODO move these operations to the ModelingUnitHelper class in the kermeta.model package
+ * 
+ * @author paco
+ *
+ */
 public class ModelingUnitHelper {
 
-	/**
-	 * 
-	 * @param kermetaUnit
-	 * @return
-	 */
+	//////////////////////////////
+	//////////////////////////////
+	//		Main Operation		//
+	//////////////////////////////
+	//////////////////////////////
+	
+	static public String getMainOperationValue(KermetaUnit kermetaUnit) {
+		return getMainOperationValue( kermetaUnit.getModelingUnit() );
+	}
+	
+	static public String getMainOperationValue(ModelingUnit modelingUnit) {
+		Tag t = getMainOperation(modelingUnit);
+		if ( t != null )
+			return t.getValue();
+		return null;
+	}
+	
 	static public Tag getMainOperation(KermetaUnit kermetaUnit) {
 		return getMainOperation( kermetaUnit.getModelingUnit() );
 	}
@@ -67,20 +87,27 @@ public class ModelingUnitHelper {
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @param kermetaUnit
-	 * @return
-	 */
+	//////////////////////////
+	//////////////////////////
+	//		Main Class		//
+	//////////////////////////
+	//////////////////////////
+	
+	static public String getMainClassValue(KermetaUnit kermetaUnit) {
+		return getMainClassValue( kermetaUnit.getModelingUnit() );
+	}
+	
+	static public String getMainClassValue(ModelingUnit modelingUnit) {
+		Tag t = getMainClass(modelingUnit);
+		if ( t != null )
+			return t.getValue();
+		return null;
+	}
+	
 	static public Tag getMainClass(KermetaUnit kermetaUnit) {
 		return getMainClass( kermetaUnit.getModelingUnit() );
 	}
 	
-	/**
-	 * 
-	 * @param modelingUnit
-	 * @return
-	 */
 	static public Tag getMainClass(ModelingUnit modelingUnit) {
 		for ( Tag tag : (List<Tag>) modelingUnit.getOwnedTags() ) {
 			if ( (tag.getName() != null) && tag.getName().equals("mainClass") )

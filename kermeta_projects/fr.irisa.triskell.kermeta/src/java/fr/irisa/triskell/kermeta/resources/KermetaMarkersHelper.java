@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.10 2008-01-04 14:24:44 dvojtise Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.11 2008-02-14 07:13:10 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -23,8 +23,8 @@ import org.kermeta.io.ParsingError;
 import org.kermeta.io.WarningMessage;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;

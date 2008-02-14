@@ -9,8 +9,8 @@ package kermeta::interpreter;
 require "../Standard.kmt"
 
 using kermeta::standard
-using kermeta::reflection
 using kermeta::utils
+using kermeta::language::structure
 
 /**
  * DynamicExpression is a class used to make dynamic calls, i.e dynamic evaluation
@@ -43,12 +43,12 @@ class DynamicExpression
 	 * or void if the expression is not to be executed
 	 * in the context of an object
 	 */
-	reference selfClass : kermeta::reflection::ClassDefinition
+	reference selfClass : ClassDefinition
 
 	/**
 	 * Formal parameters of the expression (bindings between parameters' names and types)
 	 */
-	reference formalParameters : Hashtable<String, kermeta::reflection::Type>
+	reference formalParameters : Hashtable<String, Type>
 
 	/**
 	 * Initializes the formalParameters with an empty set of parameters
@@ -56,7 +56,7 @@ class DynamicExpression
 	 */
 	operation initializeDefaults() is do
 		formalParameters := Hashtable<String, kermeta::language::structure::Type>.new
-		selfClass ?= kermeta::reflection::Object.typeDefinition
+		selfClass ?= Object.typeDefinition
 	end
 
 	/**

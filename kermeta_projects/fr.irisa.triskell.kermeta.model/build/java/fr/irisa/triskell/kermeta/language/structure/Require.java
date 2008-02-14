@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Require.java,v 1.3 2007-07-24 13:47:33 ftanguy Exp $
+ * $Id: Require.java,v 1.4 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -21,7 +21,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getRequire()
- * @model
+ * @model annotation="GenModel documentation='/**\n * To be written\n \052/'"
  * @generated
  */
 public interface Require extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -44,6 +44,7 @@ public interface Require extends fr.irisa.triskell.kermeta.language.structure.Ob
 	 * @see #setUri(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getRequire_Uri()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 *        annotation="GenModel documentation='/**\n * To be written\n \052/'"
 	 * @generated
 	 */
 	String getUri();

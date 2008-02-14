@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.76 2008-01-09 16:55:09 gperroui Exp $
+/* $Id: EMF2Runtime.java,v 1.77 2008-02-14 07:13:56 uid21732 Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.BasicFeatureMapEntry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -649,10 +650,6 @@ public class EMF2Runtime {
 	    	} 
 	    }
 	} 
-
-	protected void populateRuntimeObjectForEnumeration(RuntimeObject rObject)
-	{
-	}
 	
 	/**
 	 * retreives the property from its names.
@@ -685,13 +682,13 @@ public class EMF2Runtime {
 		if (propertyExists == true)
 		{
 			//System.out.println("feature name : " + eclass.getName()+ "."+ feature.getName());
-			result = ClassDefinitionHelper.findPropertyByName(classDef, propName);
+			result = KermetaModelHelper.ClassDefinition.getPropertyByName(classDef, propName);
 			// If result is still null, send an exception
 			if (result == null)
 			{
 				String errmsg = "EMF loading error : property set failed.\n  Not able to find '"+ propName+"' property on class " + classDef.getName() +
 				" ; known properties are : ";
-				for ( Object prop : ClassDefinitionHelper.getAllProperties(classDef)) 
+				for ( Object prop : KermetaModelHelper.ClassDefinition.getAllProperties(classDef)) 
 				{ errmsg += ((Property)prop).getName() + ", "; }
 				errmsg += "\n in class \"" + classDef.getName() +"\"";
 				errmsg += "\nwith feature == " + feature;

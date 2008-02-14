@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Enumeration.java,v 1.4 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Enumeration.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getEnumeration()
- * @model
+ * @model annotation="GenModel documentation='/**\n * Definition for Enumeration\n \052/'"
  * @generated
  */
 public interface Enumeration extends DataType {
@@ -46,6 +46,7 @@ public interface Enumeration extends DataType {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getEnumeration_OwnedLiteral()
 	 * @see fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral#getEnumeration
 	 * @model opposite="enumeration" containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * Owned items in an Enumeration\n \052/'"
 	 * @generated
 	 */
 	EList<EnumerationLiteral> getOwnedLiteral();

@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.43 2008-01-02 10:28:18 vmahe Exp $
+// $Id: primitive_types.kmt,v 1.44 2008-02-14 07:13:38 uid21732 Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -43,7 +43,7 @@ class ~Void {
 	/**
 	 * Returns true
 	 */
-	method isInstanceOf(type : kermeta::reflection::Type) : Boolean is do
+	method isInstanceOf(type : Type) : Boolean is do
 		result := true
 	end
 }
@@ -146,7 +146,7 @@ class Boolean inherits PrimitiveType
 	 * Returns true if <code>other</code> type is Boolean
 	 * and has the same boolean value than current object.
 	 */
-	method equals(other : kermeta::reflection::Object) : Boolean is do
+	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Boolean then  
 			result := false 
 		else
@@ -251,7 +251,7 @@ class Integer inherits Numeric, Summable<Integer>
 	 * Returns true if <code>other</code> type is Integer or Real
 	 * and has the same numeric value than current object.
 	 */	
-	method equals(other : kermeta::reflection::Object) : Boolean is do
+	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Integer then
 			// allow comparing with reals
 			if other.getMetaClass == Real then
@@ -467,7 +467,7 @@ class Real inherits Numeric, Summable<Real>
 	 * Returns true if <code>other</code> type is Integer or Real
 	 * and has the same numeric value than current object.
 	 */	
-	method equals(other : kermeta::reflection::Object) : Boolean is do
+	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Real then
 			// allow comparing with integers
 			if other.getMetaClass == Integer then
@@ -514,7 +514,7 @@ class Character inherits ValueType, Comparable
 	 * Returns true if <code>other</code> type is Character
 	 * and has the same letter value than current object.
 	 */	
-	method equals(other : kermeta::reflection::Object) : Boolean is do
+	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Character then
 			result := false
 		else
@@ -549,7 +549,7 @@ class String inherits ValueType, Comparable, Summable<String>
 	 * Returns true if <code>other</code> type is String
 	 * and has the same string value than current object.
 	 */	
-	method equals(other : kermeta::reflection::Object) : Boolean is do
+	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != String then
 			result := false
 		else
@@ -624,10 +624,24 @@ class String inherits ValueType, Comparable, Summable<String>
 	end
 	
 	/**
-	 * Replaces all occurances of str1 in the current string by the string str2
+	 * Replaces all occurences of str1 in the current string by the string str2
 	 */
 	operation replace(str1 : String, str2 : String) : String is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.replace(self, str1, str2)
+	end
+	
+	/**
+	 * Return the current string in lower case
+	 */
+	operation toLowerCase() : String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toLowerCase(self)
+	end
+	
+	/**
+	 * Return the current string in upper case
+	 */
+	operation toUpperCase() : String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toUpperCase(self)
 	end
 	
 	/**

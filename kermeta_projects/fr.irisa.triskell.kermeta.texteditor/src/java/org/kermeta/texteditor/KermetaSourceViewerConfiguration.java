@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaSourceViewerConfiguration.java,v 1.2 2007-12-19 15:03:53 ftanguy Exp $
+/*$Id: KermetaSourceViewerConfiguration.java,v 1.3 2008-02-14 07:13:42 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaSourceViewerConfiguration.java
 * License : EPL
@@ -12,24 +12,11 @@
 
 package org.kermeta.texteditor;
 
-import java.util.Iterator;
-
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
-import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextHover;
-import org.eclipse.jface.text.contentassist.ContentAssistEvent;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
-import org.eclipse.jface.text.contentassist.ICompletionListener;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
-import org.eclipse.jface.text.formatter.IContentFormatter;
-import org.eclipse.jface.text.formatter.MultiPassContentFormatter;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.reconciler.IReconciler;
@@ -37,25 +24,13 @@ import org.eclipse.jface.text.reconciler.MonoReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.progress.UIJob;
 import org.kermeta.texteditor.completion.KermetaContentAssistProcessor;
 import org.kermeta.texteditor.completion.RequireContentAssistProcessor;
 import org.kermeta.texteditor.completion.TagContentAssistProcessor;
 import org.kermeta.texteditor.completion.UsingContentAssistProcessor;
-import org.kermeta.texteditor.formatting.KermetaFormattingStrategy;
-import org.kermeta.texteditor.formatting.RequireFormattingStrategy;
 import org.kermeta.texteditor.scanners.KermetaCommentScanner;
 import org.kermeta.texteditor.scanners.KermetaScanner;
 import org.kermeta.texteditor.scanners.KermetaTagScanner;
-
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Object;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.EditorTextHover;
-import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 
 
 public class KermetaSourceViewerConfiguration extends SourceViewerConfiguration {
@@ -153,7 +128,7 @@ public class KermetaSourceViewerConfiguration extends SourceViewerConfiguration 
 	    IContentAssistProcessor usingContentAssistProcessor = new UsingContentAssistProcessor(editor);
 	    assistant.setContentAssistProcessor(usingContentAssistProcessor, KermetaPartitionScanner.USING);
 
-	    IContentAssistProcessor requireContentAssistProcessor = new RequireContentAssistProcessor();
+	    IContentAssistProcessor requireContentAssistProcessor = new RequireContentAssistProcessor(editor.getFile());
 	    assistant.setContentAssistProcessor(requireContentAssistProcessor, KermetaPartitionScanner.REQUIRE);
 
 	 //   IContentAssistProcessor blockContentAssistProcessor = new BlockContentAssistProcessor();

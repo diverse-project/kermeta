@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PrimitiveType.java,v 1.3 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: PrimitiveType.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPrimitiveType()
- * @model
+ * @model annotation="GenModel documentation='/**\n * The class definition for kermeta aliases. Above statement defines a primitive\n * type called MyString, which instanceType is <code>kermeta::standard::String</code>\n * <pre>alias MyString : kermeta::standard::String</pre>\n \052/'"
  * @generated
  */
 public interface PrimitiveType extends DataType, TypeContainer {
@@ -42,7 +42,7 @@ public interface PrimitiveType extends DataType, TypeContainer {
 	 * @return the value of the '<em>Instance Type</em>' reference.
 	 * @see #setInstanceType(Type)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPrimitiveType_InstanceType()
-	 * @model
+	 * @model annotation="GenModel documentation='/**\n * The type the primitive type is linked with\n \052/'"
 	 * @generated
 	 */
 	Type getInstanceType();

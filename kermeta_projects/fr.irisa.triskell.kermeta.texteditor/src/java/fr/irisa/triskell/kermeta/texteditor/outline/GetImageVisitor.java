@@ -1,4 +1,4 @@
-/* $Id: GetImageVisitor.java,v 1.13 2008-01-28 14:01:46 dvojtise Exp $
+/* $Id: GetImageVisitor.java,v 1.14 2008-02-14 07:13:43 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetImageVisitor.java
 * License : EPL

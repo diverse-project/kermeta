@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.11 2008-02-06 09:38:25 dvojtise Exp $
+ * $Id: IoFactoryImpl.java,v 1.12 2008-02-14 07:13:17 uid21732 Exp $
  */
 package org.kermeta.io.impl;
 
@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.kermeta.io.*;
 import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.IoFactory;

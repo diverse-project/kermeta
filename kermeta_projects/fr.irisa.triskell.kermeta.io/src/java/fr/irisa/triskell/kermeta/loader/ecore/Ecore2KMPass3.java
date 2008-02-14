@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.33 2008-01-23 10:49:47 cfaucher Exp $
+/* $Id: Ecore2KMPass3.java,v 1.34 2008-02-14 07:13:16 uid21732 Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
@@ -78,10 +79,10 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 		for ( TypeVariable tv : currentClassDefinition.getTypeParameter() )
 			context.addTypeVar(tv);
 		
-		for ( Property p : ClassDefinitionHelper.getAllProperties(currentClassDefinition) )
+		for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(currentClassDefinition) )
 			context.addSymbol( new KMSymbolProperty(p) );
 		
-		for ( Operation op : ClassDefinitionHelper.getAllOperations(currentClassDefinition) )
+		for ( Operation op : KermetaModelHelper.ClassDefinition.getAllOperations(currentClassDefinition) )
 			context.addSymbol( new KMSymbolOperation(op) );
 		
 		// Set the super types of the type parameters

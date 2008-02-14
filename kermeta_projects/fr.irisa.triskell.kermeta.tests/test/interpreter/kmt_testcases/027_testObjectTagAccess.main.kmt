@@ -1,4 +1,4 @@
-/* $Id: 027_testObjectTagAccess.main.kmt,v 1.4 2008-01-23 12:29:17 cfaucher Exp $
+/* $Id: 027_testObjectTagAccess.main.kmt,v 1.5 2008-02-14 07:13:28 uid21732 Exp $
  * Creation date: August 23, 2007
  * License:	EPL
  * Copyright:
@@ -14,7 +14,6 @@ require kermeta
 
 using kermeta::standard
 using kermeta::utils
-using kermeta::reflection
 using kermeta::kunit
 
 
@@ -33,14 +32,14 @@ class TestTagReflexiveAccess inherits kermeta::kunit::TestCase {
 	operation testTag() : Void is do
 		
 		var anObjectWithTag : Object
-		anObjectWithTag := self.getMetaClass 
+		anObjectWithTag := self.getMetaClass.typeDefinition
 		stdio.writeln(anObjectWithTag.tag.size.toString)
 		stdio.writeln(anObjectWithTag.ownedTags.size.toString)
 		assert(anObjectWithTag.ownedTags.size == 2)  // one tag from @bla, one from the documentation
 		assert(anObjectWithTag.tag.size == 2)  // one tag from @bla, one from the documentation
 		
 		// try using another way to access the metaclass
-		anObjectWithTag := TestTagReflexiveAccess 
+		anObjectWithTag := TestTagReflexiveAccess.typeDefinition
 		stdio.writeln(anObjectWithTag.tag.size.toString)
 		stdio.writeln(anObjectWithTag.ownedTags.size.toString)
 		assert(anObjectWithTag.ownedTags.size == 2)  // one tag from @bla, one from the documentation

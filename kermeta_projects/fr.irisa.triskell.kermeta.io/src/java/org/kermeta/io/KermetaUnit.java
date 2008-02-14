@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.18 2008-01-28 09:44:23 dvojtise Exp $
+ * $Id: KermetaUnit.java,v 1.19 2008-02-14 07:13:18 uid21732 Exp $
  */
 package org.kermeta.io;
 
@@ -57,6 +57,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.KermetaUnit#getTypeDefinitionCache <em>Type Definition Cache</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#isLocked <em>Locked</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnit#getBaseAspects <em>Base Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -514,6 +515,32 @@ public interface KermetaUnit extends EObject {
 	void setLocked(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Base Aspects</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Base Aspects</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Base Aspects</em>' attribute.
+	 * @see #setBaseAspects(Map)
+	 * @see org.kermeta.io.IoPackage#getKermetaUnit_BaseAspects()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Map<TypeDefinition, EList<TypeDefinition>> getBaseAspects();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.io.KermetaUnit#getBaseAspects <em>Base Aspects</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Base Aspects</em>' attribute.
+	 * @see #getBaseAspects()
+	 * @generated
+	 */
+	void setBaseAspects(Map<TypeDefinition, EList<TypeDefinition>> value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model
@@ -566,7 +593,7 @@ public interface KermetaUnit extends EObject {
 	 * Returns a list of the "Requires" object as a list of String. 
 	 * If you need the real "Requires" object, please navigate the model.
 	 * <!-- end-model-doc -->
-	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 * @model kind="operation"
 	 * @generated
 	 */
 	EList<String> getRequires();
@@ -614,9 +641,6 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Retreives a TypeDefinition , it will also look for this TypeDefinition into the required units
-	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -633,10 +657,7 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Retreives a TypeDefinition but only if it is contained by this KermetaUnit
-	 * <!-- end-model-doc -->
-	 * @model
+	 * @model nameDataType="fr.irisa.triskell.kermeta.language.structure.String"
 	 * @generated
 	 */
 	TypeDefinition getInternalTypeDefinitionByName(String name);
@@ -728,7 +749,7 @@ public interface KermetaUnit extends EObject {
 	 * Returns a list of the "Usings" object as a list of String. 
 	 * If you need the real "Usings" object, please navigate the model.
 	 * <!-- end-model-doc -->
-	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 * @model kind="operation"
 	 * @generated
 	 */
 	EList<String> getUsings();
@@ -798,7 +819,7 @@ public interface KermetaUnit extends EObject {
 	 * <!-- begin-model-doc -->
 	 * Return a list of all the Packages qualified names (internal and external), usefull in order to use getPackage(String)
 	 * <!-- end-model-doc -->
-	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 * @model kind="operation"
 	 * @generated
 	 */
 	EList<String> getUniquePackageQualifiedNames();
@@ -861,14 +882,6 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	KermetaUnit copy();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void fillTypeDefinitionCache(fr.irisa.triskell.kermeta.language.structure.Package aPackage);
 
 	/**
 	 * <!-- begin-user-doc -->

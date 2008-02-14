@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.65 2008-01-04 14:23:54 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.66 2008-02-14 07:13:56 uid21732 Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -286,7 +286,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		    binding.setVariable((TypeVariable)coll_class.getTypeDefinition().getTypeParameter().get(0));
 		    
 		    fr.irisa.triskell.kermeta.language.structure.Class object_class = StructureFactory.eINSTANCE.createClass();   
-		    object_class.setTypeDefinition((ClassDefinition)memory.getUnit().getTypeDefinitionByQualifiedName("kermeta::reflection::Object"));
+		    object_class.setTypeDefinition((ClassDefinition)memory.getUnit().getTypeDefinitionByQualifiedName("kermeta::language::structure::Object"));
 
 		    
 		    // Set the param binding type

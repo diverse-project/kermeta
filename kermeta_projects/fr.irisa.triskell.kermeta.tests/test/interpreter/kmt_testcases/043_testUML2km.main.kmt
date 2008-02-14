@@ -28,8 +28,8 @@ class Main inherits kermeta::kunit::TestCase {
 		
 		stdio.write("getting UML2 package...")
 		
-		var p : kermeta::reflection::Package
-		p ?= Class.typeDefinition.container
+		var p : kermeta::language::structure::Package
+		p ?= kermeta::language::structure::Class.typeDefinition.container
 		
 		stdio.writeln("got "+ p.name + " package")
 		

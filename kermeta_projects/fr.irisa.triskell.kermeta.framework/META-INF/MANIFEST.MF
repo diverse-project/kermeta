@@ -35,4 +35,5 @@ Require-Bundle: fr.irisa.triskell.kermeta.interpreter,
  org.eclipse.core.runtime,
  org.antlr,
  org.eclipse.gymnast.runtime.core,
- org.antlr.eclipse.core
+ org.antlr.eclipse.core,
+ org.kermeta.io.loader

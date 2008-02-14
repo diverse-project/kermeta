@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.55 2007-12-07 01:57:53 fmunoz Exp $
+/* $Id: structure.kmt,v 1.56 2008-02-14 07:13:37 uid21732 Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -19,59 +19,44 @@
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png">
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png">
  */
-   @uri "http://www.kermeta.org/kermeta/language/structure"
+@uri "http://www.kermeta.org/kermeta/language/structure"
 package kermeta::language::structure; 
 
 
 require "../Standard.kmt"
-require "behavior.kmt" 
+require "platform:/resource/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
 
-/** Alias to kermeta::standard::String */
-alias String : kermeta::standard::String;
+using kermeta::standard
 
-/** Alias to kermeta::standard::Boolean */
-alias Boolean : kermeta::standard::Boolean;
-
-/** Alias to kermeta::standard::Integer */
-alias Integer : kermeta::standard::Integer;
-
-/** Alias to kermeta::standard::Real */
-alias Real 	: kermeta::standard::Real;
-
-/** Alias to kermeta::standard::UnlimitedNatural */
-alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
-
-
-/**
- * Implements kermeta::reflection::Object
- */
-class Object inherits kermeta::reflection::Object, KMStructureVisitable
+aspect class Object
 {
 	/**
- 	 * Implements kermeta::reflection::Object.getMetaClass()
- 	 */
-	method getMetaClass() : kermeta::reflection::Class from kermeta::reflection::Object is do
+	 * Returns the Class object that is the metaclass of current Object
+	 */
+	operation getMetaClass() : Class from Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass(self)
 	end
 
 	/**
- 	 * Implements kermeta::reflection::Object.container()
- 	 */
-	method container() : kermeta::reflection::Object from kermeta::reflection::Object is do
+	 * Returns the Object that contains current Object, void if the Object has
+	 * no container
+	 */
+	operation container() : Object from Object is do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
 	end
-	
+
 	/**
- 	 * Implements kermeta::reflection::Object.checkInvariants()
- 	 */
-	method checkInvariants() : Void from kermeta::reflection::Object is do
+	 * Runs checking of invariants defined for the metaclass of the Object
+	 */	
+	operation checkInvariants() : Void from Object is do
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)
 	end
 	
 	/**
- 	 * Implements kermeta::reflection::Object.checkAllInvariants()
- 	 */
-	method checkAllInvariants() : Void from kermeta::reflection::Object is do
+	 * Recursively runs checking of invariants defined for the metaclass of the Object
+	 * and its supertypes
+	 */	
+	operation checkAllInvariants() : Void from Object is do
 		if(self!=void) then
 			// Call the invariant verification
 			self.checkInvariants
@@ -81,7 +66,7 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 					if ( self.get(subObj).getMetaClass.typeDefinition.name.equals("ReflectiveSequence") 
 						or self.get(subObj).getMetaClass.typeDefinition.name.equals("ReflectiveCollection") ) then
 
-						var subObjInstances : kermeta::standard::Collection<kermeta::reflection::Object>
+						var subObjInstances : kermeta::standard::Collection<Object>
 						subObjInstances ?= self.get(subObj)
 						subObjInstances.each { aSubObjInstances | aSubObjInstances.checkAllInvariants }
 					else
@@ -91,39 +76,67 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 			}
 		end
 	end
-	
+
 	/**
- 	 * Implements kermeta::reflection::Object.equals()
- 	 */
-	method equals(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
+	 * semantic equality,
+	 * if you wish to test for object identity you need to use the method oid
+	 * ex: x.oid == y.oid
+	 * by default, (ie. if not overloaded), the equals method for class Object implements 
+	 * the most discriminating possible equivalence relation on objects; that is, for any non-null 
+	 * reference values x and y, this method returns true if and only if x and y refer to the same 
+	 * object (x.oid == y.oid has the value true). 
+	 *
+	 * note1: the operator == is mapped to this 
+	 * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it
+	 */	
+	operation equals(element : Object) : Boolean from Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)
 	end
 	
 	/**
- 	 * Implements kermeta::reflection::Object.isNotEqual()
- 	 */
-	method isNotEqual(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
+	 * See kermeta::language::structure::Object.equals(Object)
+	 */	
+	operation isNotEqual(element : Object) : Boolean from Object is do
 		result := not equals(element)
 	end		
 	
 	/**
- 	 * Implements kermeta::reflection::Object.isKindOf(Class)
- 	 */
-	method isKindOf(cl : kermeta::reflection::Class) : Boolean is do
+	 * Returns a Boolean stating whether the current Object is an instance of the given Class
+	 */	
+	operation isKindOf(cl : Class) : Boolean is do
 		result := (self.getMetaClass.equals(cl))
 	end
 	
-	/**
- 	 * Implements kermeta::reflection::Object.get(Property)
- 	 */
-	method get(~property : kermeta::reflection::Property) : kermeta::reflection::Object from kermeta::reflection::Object is do
+	/** 
+	 * Returns the instances of the given property for this Object.
+	 *
+	 * Example : 
+	 * <pre>
+	 * class A { reference attr : String }
+	 * </pre>
+	 * Using A :
+	 * <pre>
+	 * operation getAProp() is do
+	 *    var a : A
+	 *    var s : String
+	 *    var the_attr : Property init self.getMetaClass.ownedAttribute.one
+	 *    s ?= a.get(the_attr)
+	 * end
+	 * </pre>
+	 * The user has to cast
+	 * the result of this method according to the type and the upper multiplicity
+	 * of this property. If upper multiplicity > 1, than the effective type of the 
+	 * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to 
+	 * the name of the given Property (i.e the type of the property instance).
+	 */
+	operation get(~property : Property) : Object from Object is do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
 	end
 	
 	/**
- 	 * Implements kermeta::reflection::Object.set(Property)
- 	 */
-	method ~set(~property : kermeta::reflection::Property, element : kermeta::reflection::Object) : Void from kermeta::reflection::Object is do
+	 * Sets the <code>element</code> to the <code>~property</code> of the object 
+	 */	
+	operation ~set(~property : Property, element : Object) : Void from Object is do
 		if element.isInstanceOf(~property.type) then
 			extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
 		else
@@ -134,451 +147,260 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	end
 	
 	/**
- 	 * Implements kermeta::reflection::Object.isSet(Property)
- 	 */
-	method isSet(~property : kermeta::reflection::Property) : Boolean from kermeta::reflection::Object is do
+	 * True if the <code>~property</code> of the object has been set
+	 */	
+	operation isSet(~property : Property) : Boolean from Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)
 	end
 	
 	/**
- 	 * Implements kermeta::reflection::Object.unset(Property)
- 	 */
-	method unset(~property : kermeta::reflection::Property) : Void from kermeta::reflection::Object is do
+	 * Remove the element set as the <code>~property</code> of the object.
+	 * The <code>isSet(~property)</code> method will then return False
+	 */	
+	operation unset(~property : Property) : Void from Object is do
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)
 	end
 	
 	/**
- 	 * Implements kermeta::reflection::Object.oid()
- 	 */
-	method oid() : Integer is do
+	 * Returns the unique Oid of the Object
+	 */	
+	operation oid() : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)
 	end
 	
 	/**
- 	 * Implements kermeta::reflection::Object.toString()
+ 	 * Implements Object.toString()
  	 * Returns a String of form [qn:oid] where 'qn' is the qualified name of
  	 * the object type, and oid the unique ID of the object
  	 */
-	method toString() : String is do
+	operation toString() : String is do
 		result := "[" + self.getMetaClass.typeDefinition.qualifiedName + ":" + oid.toString + "]"
 	end
 
 	/**
- 	 * Implements kermeta::reflection::Object.isFrozen()
- 	 */	
-	method isFrozen() : Boolean is do
+	 * Returns a Boolean stating whether the Object is currently in a
+	 * frozen state
+	 */
+	operation isFrozen() : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isFrozen(self)
 	end
-	
+
 	/**
- 	 * Implements kermeta::reflection::Object.isVoid()
- 	 */
-	method isVoid() : Boolean is do
+	 * Returns a Boolean stating whether the Object is Void
+	 */
+	operation isVoid() : Boolean is do
 		result := false
 	end
 
 	/**
- 	 * Implements kermeta::reflection::Object.hashcode()
- 	 */	
-	method hashcode() : Integer is do		
+	 * code used in hashtable in order to identify an object in the hashtable keys
+	 * This system is similar to the hashcode used in java. Please refer to java documentation
+	 * for more information about hashcode
+	 */
+	operation hashcode() : Integer is do		
 		// usually this method is not called when using hashtable because it directly tries the method hashcode in the RuntimeObject.java
 		// which fall back here only if the method is not redefined
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)
 	end
 
 	/**
- 	 * Implements kermeta::reflection::Object.freeze()
- 	 */	
-	method freeze() : Void is do
+	 * Freeze the Object
+	 */
+	operation freeze() : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze(self)
 	end
-	
+
 	/**
- 	 * Implements kermeta::reflection::Object.asType(Class)
- 	 */
-	method asType(type : kermeta::reflection::Class) : kermeta::reflection::Object is do
+	 * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.
+	 */
+	operation asType(type : Class) : Object is do
 		if isInstanceOf(type) then result := self
 		else raise kermeta::exceptions::TypeCastError.new
 		end
 	end
-	
+
 	/**
- 	 * Implements kermeta::reflection::Object.isInstanceOf(Type)
- 	 */
-	method isInstanceOf(type : kermeta::reflection::Type) : Boolean is do
+	 * Returns a Boolean stating whether the current Object conforms to given Type
+	 * This means: is this object an instance of this type, or is it an instance of its subtype 
+	 */
+	operation isInstanceOf(type : Type) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)
 	end
 	
 	/**
-	 * Implements kermeta::reflection::Object.containingResource()
+	 * Returns the Resource currently containing (directly or indirectly) the Object 
+	 * or void if the object belongs to no Resource
 	 */
-	method containingResource() : kermeta::persistence::Resource is do
+	operation containingResource() : kermeta::persistence::Resource is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getContainingResource(self)
 	end
 }
 
-
-/**
- * Implements kermeta::reflection::ParametrizedType
- */
-abstract class ParameterizedType inherits Type, kermeta::reflection::ParameterizedType, KMStructureVisitable
+aspect class ModelType
 {
+
 	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
+	 * To be written ##########################################
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
-		do
-			result := visitor.visitParameterizedType(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::ModelType
- */
-class ModelType inherits Type, TypeDefinition, kermeta::reflection::ModelType, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
-		do
-			result := visitor.visitModelType(self, context)
-		end
-
-	/**
- 	 * Implements kermeta::reflection::ModelType.new()
- 	 */
-	method new() : kermeta::reflection::Model is
+	operation new() : Model is
 		do
 			result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.newObject(self)
 		end
 
 	/**
- 	 * Implements kermeta::reflection::ModelType.isModelTypeOf(Model)
- 	 */
-	method isModelTypeOf(m : kermeta::reflection::Model) : Boolean is
+	 * To be written ##########################################
+	 */
+	operation isModelTypeOf(m : Model) : Boolean is
 		do
 			result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.isModelTypeOf(self, m)
 		end
 		
 }
 
-
-/**
- * Implements kermeta::reflection::Class
- */
-class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureVisitable
+aspect class Class
 {
+
+	property readonly ownedAttribute : set Property[0..*]
+		getter is do
+			var cDef : ClassDefinition
+			cDef ?= typeDefinition
+			result := cDef.ownedAttribute
+		end
+		
+	property readonly ownedOperation : set Operation[0..*]
+		getter is do
+			var cDef : ClassDefinition
+			cDef ?= typeDefinition
+			result := cDef.ownedOperation
+		end
+		
+	property readonly superClass : set Class[0..*]
+		getter is do
+			var cDef : ClassDefinition
+			cDef ?= typeDefinition
+			var supertypes : OrderedSet<Class> init OrderedSet<Class>.new
+			cDef.superType.each{ elem | 
+				if ( Class.isInstance(elem) ) then
+					var c : Class
+					c ?= elem
+					supertypes.add(c)
+				end
+			}
+			result := supertypes
+		end
+		
+	property readonly isAbstract : Boolean
+		getter is do
+			var cDef : ClassDefinition
+			cDef ?= typeDefinition
+			result := cDef.isAbstract
+		end
+		
 	/**
- 	 * Implements kermeta::reflection::Class.new()
- 	 */
-	method new() : kermeta::reflection::Object from kermeta::reflection::Class is 
+	 * Returns the ClassDefinition for this class
+	 */
+	property readonly classDefinition : ClassDefinition
+		getter is do
+			result ?= typeDefinition
+		end
+	
+	property readonly name : String
+		getter is do
+			result := typeDefinition.name
+		end
+
+	/**
+	 * Instantiates a new occurence for this Class
+	 */
+	operation new() : Object from Class is 
 	do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)
 	end
 
-	/**
- 	 * Implements kermeta::language::structure::Type.clone(Object)
- 	 */
 	method clone(objectToClone : Object) : Object is
 	do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.cloneObject(self, objectToClone)
 	end
 
-	/**
- 	 * Implements kermeta::language::structure::Type.deepClone(Object)
- 	 */	
 	method deepClone(objectToClone : Object) : Object is
 	do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.deepCloneObject(self, objectToClone)
 	end
-	/*
-	method isInstance(object : kermeta::reflection::Object) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isInstance(self, object)
-	end 
-	*/
 
-	/**
- 	 * Implements kermeta::language::structure::Object.equals(Object)
- 	 */	
-	method equals(other : kermeta::reflection::Object) : Boolean from kermeta::language::structure::Object is do
+	method equals(other : Object) : Boolean from kermeta::language::structure::Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)
 	end
-
+	
 	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
+	 * Returns the String representation of this class. 
+	 *  Note : throws an exception if this class has no classDefinition
+	 *  or if the classDefinition is not well constructed.
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::ParameterizedType is
-	do
-		result := visitor.visitClass(self, context)
+	method toString() : String is do
+		result := self.typeDefinition.name
 	end
 }
 
-
-/**
- * Implements kermeta::reflection::MultiplicityElement
- */
-class MultiplicityElement inherits TypedElement, kermeta::reflection::MultiplicityElement, KMStructureVisitable
+aspect class ClassDefinition
 {
+		
 	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
+	 * Returns all the Attributes, References, derived Properties of this 
+	 * ClassDefinition including the inherited ones
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::TypedElement is
-		do
-			result := visitor.visitMultiplicityElement(self, context)
+	property readonly allAttribute : set Property[0..*]
+		getter is do
+ 		    result := kermeta::standard::Set<Property>.new
+ 		    result.addAll(self.ownedAttribute)
+		    self.superType.each{ t | 
+		    	if Class.isInstance(t) then
+		    		var c : Class
+		    		c ?= t
+		    		var cDef : ClassDefinition
+			    	cDef ?= c.typeDefinition
+		    		cDef.allAttribute.each{ p | 
+						result.add(p)
+					}
+		    	end
+			}
 		end
+		
+	/**
+	 * Returns all the Operations of this ClassDefinition
+	 * including the inherited ones
+	 */
+	property readonly allOperation : set Operation[0..*]
+		getter is do
+ 		    result := kermeta::standard::Set<Operation>.new
+ 		    result.addAll(self.ownedOperation)
+		    self.superType.each{ t | 
+		    	if Class.isInstance(t) then
+		    		var c : Class
+		    		c ?= t
+		    		var cDef : ClassDefinition
+			    	cDef ?= c.typeDefinition
+		    		cDef.allOperation.each{ p | 
+						result.add(p)
+					}
+		    	end
+			}
+	end
 }
 
+aspect class Model {
 
-/**
- * Implements kermeta::reflection::Constraint
- */
-class Constraint inherits kermeta::reflection::Constraint,NamedElement,kermeta::reflection::Operation, KMStructureVisitable
-{
-	/**
- 	 * Language in which the constraint is expressed
+ 	/**
+ 	 * Returns a set of all the elements of the model that are instance of the given Type
  	 */
-	attribute language : ConstraintLanguage
-
-	/**
- 	 * Type of the Constraint (precond/postcond/inv)
- 	 */
-	attribute stereotype : ConstraintType
-	
-	/**
- 	 * Body of the constraint, expressed as a KerMeta expression
- 	 */
-	attribute body : kermeta::language::behavior::Expression
-
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::NamedElement is
-		do
-			result := visitor.visitConstraint(self, context)
-		end
-}
-
-
-/**
- * Enumeration listing supported constraint languages
- */
-enumeration ConstraintLanguage {
-	kermeta;
-	ocl;
-}
-
-
-/**
- * Enumeration liting the different kinds of constraints
- */
-enumeration ConstraintType {
-	~pre;
-    ~post;
-    ~inv;
-}
-
-
-/**
- * Implements kermeta::reflection::Operation
- */
-class Operation inherits MultiplicityElement, kermeta::reflection::Operation, KMStructureVisitable
-{
-	/**
- 	 * Body of the Operation, expressed as a KerMeta expression
- 	 */
-	attribute body : kermeta::language::behavior::Expression
-
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::MultiplicityElement is
-		do
-			result := visitor.visitOperation(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::Tag
- */
-class Tag inherits Object, kermeta::reflection::Tag, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitTag(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::Property
- */
-class Property inherits MultiplicityElement, kermeta::reflection::Property, KMStructureVisitable
-{
-	/**
- 	 * To be written ################################
- 	 */
-	attribute getterBody : kermeta::language::behavior::Expression
-
-	/**
- 	 * To be written ####################################
- 	 */
-	attribute setterBody : kermeta::language::behavior::Expression
-	
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::MultiplicityElement is
-		do
-			result := visitor.visitProperty(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::TypeContainer
- */
-abstract class TypeContainer inherits Object, kermeta::reflection::TypeContainer
-{
-}
-
-
-/**
- * Implements kermeta::reflection::VirtualTypeContainer
- */
-abstract class VirtualTypeContainer inherits Object, kermeta::reflection::VirtualTypeContainer
-{
-}
-
-
-/**
- * Implements kermeta::reflection::GenericTypeDefinition
- */
-class GenericTypeDefinition inherits TypeDefinition, kermeta::reflection::GenericTypeDefinition, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::TypeDefinition is
-		do
-			result := visitor.visitGenericTypeDefinition(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::ClassDefinition
- */
-class ClassDefinition inherits TypeContainer, GenericTypeDefinition, kermeta::reflection::ClassDefinition, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::GenericTypeDefinition is
-		do
-			result := visitor.visitClassDefinition(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::TypedElement
- */
-class TypedElement inherits TypeContainer, NamedElement, kermeta::reflection::TypedElement, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::NamedElement is
-		do
-			result := visitor.visitTypedElement(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::TypeVariable
- */
-abstract class TypeVariable inherits Type, NamedElement, kermeta::reflection::TypeVariable, KMStructureVisitable
-{
-}
-
-
-/**
- * Implements kermeta::reflection::ObjectTypeVariable
- */
-class ObjectTypeVariable inherits TypeContainer, TypeVariable, kermeta::reflection::ObjectTypeVariable, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
-		do
-			result := visitor.visitObjectTypeVariable(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::VirtualType
- */
-class VirtualType inherits ObjectTypeVariable, kermeta::reflection::VirtualType, KMStructureVisitable {
-
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::ObjectTypeVariable is
-		do
-			result := visitor.visitVirtualType(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::ModelTypeVariable
- */
-class ModelTypeVariable inherits TypeVariable, TypeContainer, VirtualTypeContainer, kermeta::reflection::ModelTypeVariable {
-
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
-		do
-			result := visitor.visitModelTypeVariable(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::Model
- */
-class Model inherits Object, kermeta::reflection::Model {
-
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitModel(self, context)
-		end
-
-	/**
-	 * Implements kermeta::reflection::Model.filter(Type)
-	 */
-	method filter(typeName : kermeta::reflection::Type) : set kermeta::reflection::Object[0..*] is
+	operation filter(typeName : Type) : set Object[0..*] is
 		do
 			result := contents.select { o | typeName.isInstance(o) }.asSet
 		end
 
-	/**
-	 * Implements kermeta::reflection::Model.add(Object)
-	 */
-	method add(obj : kermeta::reflection::Object) : Void is
+ 	/**
+ 	 * Add an object to the model. According to the ModelType, the typechecker will statically verify if the object can be added or not
+ 	 */ 
+	operation add(obj : Object) : Void is
 		do
 			// This is only implemented as an extern so that at some point in the future, a runtime
 			// typecheck might be added in the event that un-modeltype-safe adds start occurring
@@ -588,21 +410,20 @@ class Model inherits Object, kermeta::reflection::Model {
 			extern fr::irisa::triskell::kermeta::runtime::language::Model.add(self, obj)
 		end
 
-
-	/**
-	 * Implements kermeta::reflection::Model.remove(Object)
-	 */
-	method remove(obj : kermeta::reflection::Object) : Void is
+ 	/**
+ 	 * Remove an object from the model
+ 	 */
+	operation remove(obj : Object) : Void is
 		do
 			// This is not really a hack.
 			extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(contents, obj)
 		end
 
-
-	/**
-	 * Implements kermeta::reflection::Model.addAllCompatible(Collection<Object>)
-	 */
-	method addAllCompatible(objectsToAdd : kermeta::standard::Collection<Object>) : kermeta::standard::Collection<Object> is do
+ 	/**
+ 	 * Add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.
+ 	 * Returns the list of Object that have been added (One can check that some element have been ignored or not)
+ 	 */
+	operation addAllCompatible(objectsToAdd : kermeta::standard::Collection<Object>) : kermeta::standard::Collection<Object> is do
 		// version writen in java: don't know if this is faster enough to worth it ...
 		// Cute hack. The java code for add is hard if contents hasn't already been accessed. So...
 		//contents
@@ -611,58 +432,26 @@ class Model inherits Object, kermeta::reflection::Model {
 		// Let's do it in kermeta
 		result := kermeta::standard::Set<Object>.new
 		objectsToAdd.each { obj | 
-			var addedObject : kermeta::reflection::Object init addCompatible(obj) 
+			var addedObject : Object init addCompatible(obj) 
 			if(not addedObject.isVoid) then
 				result.add(obj)
 			end
 		} 
 	end
 
-	/**
-	 * Implements kermeta::reflection::Model.addCompatible(Object)
-	 */	
-	method addCompatible(objectToAdd : kermeta::reflection::Object) : kermeta::reflection::Object is do
+ 	/**
+ 	 * Add the Object if it is copmpatible with the ModelDefinition. Other objects are ignored.
+ 	 * Returns the object if it has been added (One can check that some element have been ignored or not)
+ 	 * return Void if not added
+ 	 */
+	operation addCompatible(objectToAdd : Object) : Object is do
 		// Cute hack. The java code for addCompatible is hard if contents hasn't already been accessed. So...
 		contents
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Model.addCompatible(self, objectToAdd)
 	end
 }
 
-
-/**
- * Implements kermeta::reflection::ProductType
- */
-class ProductType inherits TypeContainer, Type, kermeta::reflection::ProductType, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
-		do
-			result := visitor.visitProductType(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::FunctionType
- */
-class FunctionType inherits TypeContainer, Type, kermeta::reflection::FunctionType, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
-		do
-			result := visitor.visitFunctionType(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::Type
- */
-class Type inherits Object, kermeta::reflection::Type, KMStructureVisitable
+aspect class Type
 {
 	/**
 	 * Returns a copy of passed Object built by recursively copying attribute
@@ -677,252 +466,54 @@ class Type inherits Object, kermeta::reflection::Type, KMStructureVisitable
 	operation deepClone (objectToClone : Object) : Object is abstract
 
 	/**
-	 * Implements kermeta::reflection::Type.isInstance(Object)
+	 * Implements Type.isInstance(Object)
 	 */
-	method isInstance(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Type is do
+	operation isInstance(element : Object) : Boolean from Type is do
 		result := element.isInstanceOf(self)
 	end
-
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitType(self, context)
-		end
 	
 	/**
- 	 * Implements kermeta::reflection::Type.isSuperTypeOf(Type)
+ 	 * Implements Type.isSuperTypeOf(Type)
  	 * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)
  	 * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers
  	 * to extend it.
  	 */	
-	method isSuperTypeOf(object : kermeta::reflection::Type) : Boolean is do
+	operation isSuperTypeOf(object : Type) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Type.hasSubType(self, object)
 	end
 	
 	/**
- 	 * Implements kermeta::reflection::Type.isSubTypeOf(Type)
+ 	 * Implements Type.isSubTypeOf(Type)
  	 * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)
  	 * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers
  	 * to extend it.
  	 */	
-	method isSubTypeOf(object : kermeta::reflection::Type) : Boolean is do
+	operation isSubTypeOf(object : Type) : Boolean is do
 		result := object.isSuperTypeOf(self)
 	end
 }
 
-
-/**
- * Implements kermeta::reflection::TypeVariableBinding
- */
-class TypeVariableBinding inherits TypeContainer, Object, kermeta::reflection::TypeVariableBinding, KMStructureVisitable
+aspect class NamedElement
 {
 	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
+	 * Returns the qualified name of this named element. Qualified name is 
+	 * the list of the names of the packages hierarchically ordered, delimited by
+	 * a "::", followed by the name of this named element.
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitTypeVariableBinding(self, context)
+	operation qualifiedName() : String is do
+		var elem : NamedElement init self
+		result := self.name
+		from elem ?= elem.container
+		until elem == void 
+		loop
+			result := elem.name + "::" + result
+			elem ?= elem.container
 		end
+	end	
 }
 
-
-/**
- * Implements kermeta::reflection::PrimitiveType
- */
-class PrimitiveType inherits TypeContainer, DataType, kermeta::reflection::PrimitiveType, KMStructureVisitable
+aspect class Enumeration
 {
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::DataType is
-	do
-		result := visitor.visitPrimitiveType(self, context)
-	end
-
-	/**
-	 * Implements kermeta::language::structure::Type.clone(Object)
-	 */	
-	method clone(objectToClone : Object) : Object is abstract		
-}
-
-
-/**
- * Implements kermeta::reflection::NamedElement
- */
-class NamedElement inherits Object, kermeta::reflection::NamedElement, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitNamedElement(self, context)
-		end
-}
-
-/*
-class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable
-{
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitSelfType(self, context)
-		end
-} */
-
-
-/**
- * Implements kermeta::reflection::TypeDefinitionContainer
- */
-class TypeDefinitionContainer inherits NamedElement, kermeta::reflection::TypeDefinitionContainer, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::NamedElement is
-		do
-			result := visitor.visitTypeDefinitionContainer(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::Package
- */
-class Package inherits TypeDefinitionContainer, kermeta::reflection::Package, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::TypeDefinitionContainer is
-		do
-			result := visitor.visitPackage(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::ModelingUnit
- */
-class ModelingUnit inherits Object, kermeta::reflection::ModelingUnit, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitModelingUnit(self, context)
-		end
-}
-
-/**
- * Implements kermeta::reflection::Filter
- */
-class Filter inherits Object, kermeta::reflection::Filter, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitFilter(self, context)
-		end
-}
-
-
-/**
- * Extends kermeta::reflection::Require with visitor pattern
- */
-abstract class Require inherits Object, kermeta::reflection::Require, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitRequire(self, context)
-		end
-}
-
-
-/**
- * Extends kermeta::reflection::Using with visitor pattern
- */
-abstract class Using inherits Object, kermeta::reflection::Using, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitUsing(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::TypeDefinition
- */
-class TypeDefinition inherits NamedElement, kermeta::reflection::TypeDefinition, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::NamedElement is
-		do
-			result := visitor.visitTypeDefinition(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::VoidType
- */
-class VoidType inherits Type, kermeta::reflection::VoidType, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
-		do
-			result := visitor.visitVoidType(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::DataType
- */
-class DataType inherits TypeDefinition, Type, kermeta::reflection::DataType, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
-		do
-			result := visitor.visitDataType(self, context)
-		end
-
-	/**
-	 * Implements kermeta::language::structure::Type.clone(Object)
-	 */	
-	method clone(objectToClone : Object) : Object is abstract
-}
-
-
-/**
- * Implements kermeta::reflection::Enumeration
- */
-class Enumeration inherits DataType, kermeta::reflection::Enumeration, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::DataType is
-		do
-			result := visitor.visitEnumeration(self, context)
-		end
 
 	/**
 	 * Implements kermeta::language::structure::Type.clone(Object)
@@ -933,222 +524,6 @@ class Enumeration inherits DataType, kermeta::reflection::Enumeration, KMStructu
 	end
 }
 
-
-/**
- * Implements kermeta::reflection::EnumerationLiteral
- */
-class EnumerationLiteral inherits NamedElement, kermeta::reflection::EnumerationLiteral, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::NamedElement is
-		do
-			result := visitor.visitEnumerationLiteral(self, context)
-		end
-}
-
-
-/**
- * Implements kermeta::reflection::Parameter
- */
-class Parameter inherits MultiplicityElement, kermeta::reflection::Parameter, KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::MultiplicityElement is
-		do
-			result := visitor.visitParameter(self, context)
-		end
-}
-
-
-/**
- * Implementation of the Visitor pattern for the model elements contained in structure package
- */
-abstract class KMStructureVisitor<ContextType, ResultType>
-{
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitClass(node : Class, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitMultiplicityElement(node : MultiplicityElement, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitOperation(node : Operation, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTag(node : Tag, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitProperty(node : Property, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitClassDefinition(node : ClassDefinition, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypedElement(node : TypedElement, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitObjectTypeVariable(node : ObjectTypeVariable, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitVirtualType(node : VirtualType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModelTypeVariable(node : ModelTypeVariable, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModel(node : Model, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitProductType(node : ProductType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitFunctionType(node : FunctionType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitType(node : Type, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypeVariableBinding(node : TypeVariableBinding, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitPrimitiveType(node : PrimitiveType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitNamedElement(node : NamedElement, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/*operation visitSelfType(node : SelfType, context : ContextType) : ResultType is do 
-		result := void
-	end*/
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitPackage(node : Package, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypeDefinition(node : TypeDefinition, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitVoidType(node : VoidType, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitDataType(node : DataType, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitEnumeration(node : Enumeration, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitParameter(node : Parameter, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitGenericTypeDefinition(node : GenericTypeDefinition, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModelType(node : ModelType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModelingUnit(node : ModelingUnit, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitRequire(node : Require, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitUsing(node : Using, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitFilter(node : Filter, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-}
-
-
-/**
- * All the classes defined in this <code>kermeta::language::structure</code> package 
- * inherit this class. Part of Visitor pattern implementation.
- */
-abstract class KMStructureVisitable
-{
-	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
-	 */
-	operation acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType is abstract
+aspect class FunctionType {
+	inv resultType is not right.isKindOf(ProductType)
 }

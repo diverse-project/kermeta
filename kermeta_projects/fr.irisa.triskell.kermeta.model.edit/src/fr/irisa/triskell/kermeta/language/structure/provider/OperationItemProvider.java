@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationItemProvider.java,v 1.10 2008-01-22 16:13:25 cfaucher Exp $
+ * $Id: OperationItemProvider.java,v 1.11 2008-02-14 07:13:52 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -284,16 +284,6 @@ public class OperationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createBlock()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -315,6 +305,16 @@ public class OperationItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.OPERATION__BODY,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.OPERATION__BODY,
+				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

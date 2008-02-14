@@ -6,9 +6,9 @@ package loadEcoreFileWithEChar;
 
 
 require kermeta
-require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/001_fsm.ecore"
+require "../metamodels/001_fsm.ecore"
 using kermeta::persistence
-using fsm
+using fsm 
 using kermeta::kunit
 
 class Main inherits TestCase

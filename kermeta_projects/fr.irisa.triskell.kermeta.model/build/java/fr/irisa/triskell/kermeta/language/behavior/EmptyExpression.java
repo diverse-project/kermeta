@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EmptyExpression.java,v 1.4 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: EmptyExpression.java,v 1.5 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -14,7 +14,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  *
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getEmptyExpression()
- * @model
+ * @model annotation="GenModel documentation='/**\n * As suggested by its name, this class represents an expression that do nothing. Like a \"nop\"\n \052/'"
  * @generated
  */
 public interface EmptyExpression extends Expression {

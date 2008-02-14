@@ -17,9 +17,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.debug.ui,
  org.eclipse.jface.text,
  fr.irisa.triskell.kermeta.model,
- fr.irisa.triskell.kermeta.texteditor,
  fr.irisa.triskell.kermeta.io,
- org.eclipse.ui.navigator
+ org.eclipse.ui.navigator,
+ fr.irisa.triskell.kermeta.texteditor,
+ org.kermeta.io.loader
 Eclipse-LazyStart: true
 Bundle-Vendor: %providerName
 Export-Package: fr.irisa.triskell.kermeta.actions,

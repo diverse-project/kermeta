@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureAdapterFactory.java,v 1.10 2008-01-22 14:24:31 cfaucher Exp $
+ * $Id: StructureAdapterFactory.java,v 1.11 2008-02-14 07:13:03 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -112,22 +112,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	protected StructureSwitch<Adapter> modelSwitch =
 		new StructureSwitch<Adapter>() {
 			@Override
-			public Adapter caseClass(fr.irisa.triskell.kermeta.language.structure.Class object) {
-				return createClassAdapter();
-			}
-			@Override
-			public Adapter caseObject(fr.irisa.triskell.kermeta.language.structure.Object object) {
-				return createObjectAdapter();
-			}
-			@Override
-			public Adapter caseModel(Model object) {
-				return createModelAdapter();
-			}
-			@Override
-			public Adapter caseModelType(ModelType object) {
-				return createModelTypeAdapter();
-			}
-			@Override
 			public Adapter caseOperation(Operation object) {
 				return createOperationAdapter();
 			}
@@ -150,6 +134,22 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypeVariableBinding(TypeVariableBinding object) {
 				return createTypeVariableBindingAdapter();
+			}
+			@Override
+			public Adapter caseClass(fr.irisa.triskell.kermeta.language.structure.Class object) {
+				return createClassAdapter();
+			}
+			@Override
+			public Adapter caseObject(fr.irisa.triskell.kermeta.language.structure.Object object) {
+				return createObjectAdapter();
+			}
+			@Override
+			public Adapter caseModel(Model object) {
+				return createModelAdapter();
+			}
+			@Override
+			public Adapter caseModelType(ModelType object) {
+				return createModelTypeAdapter();
 			}
 			@Override
 			public Adapter caseMultiplicityElement(MultiplicityElement object) {
@@ -200,22 +200,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createClassDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseModelingUnit(ModelingUnit object) {
-				return createModelingUnitAdapter();
-			}
-			@Override
-			public Adapter caseRequire(Require object) {
-				return createRequireAdapter();
-			}
-			@Override
-			public Adapter caseUsing(Using object) {
-				return createUsingAdapter();
-			}
-			@Override
-			public Adapter caseFilter(Filter object) {
-				return createFilterAdapter();
-			}
-			@Override
 			public Adapter caseGenericTypeDefinition(GenericTypeDefinition object) {
 				return createGenericTypeDefinitionAdapter();
 			}
@@ -242,6 +226,22 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVirtualType(VirtualType object) {
 				return createVirtualTypeAdapter();
+			}
+			@Override
+			public Adapter caseModelingUnit(ModelingUnit object) {
+				return createModelingUnitAdapter();
+			}
+			@Override
+			public Adapter caseRequire(Require object) {
+				return createRequireAdapter();
+			}
+			@Override
+			public Adapter caseUsing(Using object) {
+				return createUsingAdapter();
+			}
+			@Override
+			public Adapter caseFilter(Filter object) {
+				return createFilterAdapter();
 			}
 			@Override
 			public Adapter caseProductType(ProductType object) {

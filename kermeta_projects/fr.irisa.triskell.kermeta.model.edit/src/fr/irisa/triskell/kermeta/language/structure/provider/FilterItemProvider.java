@@ -1,7 +1,7 @@
 /**
  * IRISA / INRIA / Universite de Rennes 1
  *
- * $Id: FilterItemProvider.java,v 1.3 2008-01-22 16:13:25 cfaucher Exp $
+ * $Id: FilterItemProvider.java,v 1.4 2008-02-14 07:13:52 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 

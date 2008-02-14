@@ -1,6 +1,6 @@
 
 
-/*$Id: ReconcilingStrategy.java,v 1.3 2008-02-04 10:54:41 ftanguy Exp $
+/*$Id: ReconcilingStrategy.java,v 1.4 2008-02-14 07:13:42 uid21732 Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategy.java
 * License : EPL
@@ -23,16 +23,16 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
-import org.kermeta.checker.KermetaUnitChecker;
-import org.kermeta.interest.InterestedObject;
 import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.checker.KermetaUnitChecker;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.texteditor.folding.FoldingStrategyHelper;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
@@ -40,7 +40,7 @@ import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
-public class ReconcilingStrategy implements IReconcilingStrategy, InterestedObject {
+public class ReconcilingStrategy implements IReconcilingStrategy {
 
 	private KermetaTextEditor editor = null;
 	
@@ -96,14 +96,10 @@ public class ReconcilingStrategy implements IReconcilingStrategy, InterestedObje
 		this.document = document;
 	}
 
-	public void updateValue(Object newValue) {}
-	
 	private void setJobForKermetaProject() {
-		final InterestedObject interest = this;
 		modelCheckingJob = new Job("Model Checking " + kpmUnit.getValue()) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				KermetaUnitHost.getInstance().declareInterest(interest, editor.getFile());
 
 				int value = TexteditorPlugin.getDefault().getModelCheckingStrategy();
 				
@@ -111,7 +107,7 @@ public class ReconcilingStrategy implements IReconcilingStrategy, InterestedObje
 				case ModelcheckingStrategy.INPUT_CHANGED:
 					HashMap<String, Object> args = new HashMap<String, Object>();
 					args.put("forceTypechecking", true);
-					args.put("content", editor.getDocumentProvider().getDocument(editor.getEditorInput()).get());
+					args.put("content", getFileContent());
 					kpmUnit.receiveSynchroneEvent("update", args, monitor);					
 					break;
 
@@ -119,15 +115,12 @@ public class ReconcilingStrategy implements IReconcilingStrategy, InterestedObje
 					break;
 				}
 				
-				KermetaUnitHost.getInstance().undeclareInterest(interest, editor.getFile());
-				
 				return Status.OK_STATUS;
 			}
 		};
 	}
 	
 	private void setJobForNonKermetaProject() {
-		final InterestedObject interest = this;
 		modelCheckingJob = new Job("Model Checking " + editor.getFile().getFullPath().toString()) {
 			
 			public IStatus run(IProgressMonitor monitor) {
@@ -136,22 +129,17 @@ public class ReconcilingStrategy implements IReconcilingStrategy, InterestedObje
 				
 				switch (value) {
 				case ModelcheckingStrategy.INPUT_CHANGED:
-					KermetaUnit kermetaUnit;
 					try {
-						KermetaUnitHost.getInstance().declareInterest(interest, editor.getFile());
-						IOPlugin.getDefault().unload( editor.getFile() );
-						kermetaUnit = KermetaUnitChecker.check( editor.getFile(), editor.getDocumentProvider().getDocument(editor.getEditorInput()).get() );
+						LoaderPlugin.getDefault().unload( "platform:/resource" + editor.getFile().getFullPath().toString() );
+						KermetaUnit kermetaUnit = KermetaUnitChecker.check( editor.getFile(), getFileContent() );
 						KermetaUnitHost.getInstance().updateValue(editor.getFile(), kermetaUnit);
-					} catch (KermetaIOFileNotFoundException e) {
+					} catch (NotRegisteredURIException e) {
 						e.printStackTrace();
 					} catch (URIMalformedException e) {
 						e.printStackTrace();
 					} catch (IdNotFoundException e) {
 						e.printStackTrace();
-					}  finally {
-						KermetaUnitHost.getInstance().undeclareInterest(interest, editor.getFile());
 					}
-
 					break;
 					
 				default:
@@ -162,6 +150,10 @@ public class ReconcilingStrategy implements IReconcilingStrategy, InterestedObje
 			}
 			
 		};
+	}
+	
+	public String getFileContent() {
+		return document.get();
 	}
 }
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VirtualTypeContainer.java,v 1.4 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: VirtualTypeContainer.java,v 1.5 2008-02-14 07:13:01 uid21732 Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualTypeContainer()
  * @model abstract="true"
+ *        annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
  * @generated
  */
 public interface VirtualTypeContainer extends EObject {
@@ -48,6 +49,7 @@ public interface VirtualTypeContainer extends EObject {
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualTypeContainer_VirtualType()
 	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualType#getModelType
 	 * @model opposite="modelType" containment="true" resolveProxies="true"
+	 *        annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
 	 * @generated
 	 */
 	EList<VirtualType> getVirtualType();
