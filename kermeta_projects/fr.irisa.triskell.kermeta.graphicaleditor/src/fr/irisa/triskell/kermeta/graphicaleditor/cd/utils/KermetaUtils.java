@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.9 2007-08-02 16:34:33 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.10 2008-02-14 16:24:13 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
 
@@ -95,7 +95,7 @@ public class KermetaUtils {
 	 * dynamically change, so we did not consider this eventuality.
 	 */
 	public KermetaUnit loadStdLib() {
-		return IOPlugin.getDefault().getFramework();
+		return LoaderPlugin.getDefault().getFramework();
 	}
 
 	/**

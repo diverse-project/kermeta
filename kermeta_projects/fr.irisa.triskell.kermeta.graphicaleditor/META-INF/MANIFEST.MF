@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta class diagram
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.graphicaleditor; singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.99.qualifier
 Bundle-Activator: fr.irisa.triskell.kermeta.graphicaleditor.KmPlugin
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
@@ -16,10 +16,26 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.topcased.modeler,
  org.eclipse.ui.editors,
- fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.model.editor,
  org.eclipse.ui,
  fr.irisa.triskell.kermeta.io,
- fr.irisa.triskell.kermeta.ui,
- org.kermeta.io.loader
+ org.kermeta.io.loader,
+ fr.irisa.triskell.kermeta
 Eclipse-LazyStart: true
+Export-Package: fr.irisa.triskell.kermeta.graphicaleditor,
+ fr.irisa.triskell.kermeta.graphicaleditor.actions,
+ fr.irisa.triskell.kermeta.graphicaleditor.actions.utils,
+ fr.irisa.triskell.kermeta.graphicaleditor.cd,
+ fr.irisa.triskell.kermeta.graphicaleditor.cd.actions,
+ fr.irisa.triskell.kermeta.graphicaleditor.cd.commands,
+ fr.irisa.triskell.kermeta.graphicaleditor.cd.dialogs,
+ fr.irisa.triskell.kermeta.graphicaleditor.cd.edit,
+ fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.utils,
+ fr.irisa.triskell.kermeta.graphicaleditor.cd.figures,
+ fr.irisa.triskell.kermeta.graphicaleditor.cd.policies,
+ fr.irisa.triskell.kermeta.graphicaleditor.cd.utils,
+ fr.irisa.triskell.kermeta.graphicaleditor.editor,
+ fr.irisa.triskell.kermeta.graphicaleditor.editor.properties.sections,
+ fr.irisa.triskell.kermeta.graphicaleditor.preferences,
+ fr.irisa.triskell.kermeta.graphicaleditor.providers,
+ fr.irisa.triskell.kermeta.graphicaleditor.wizards
