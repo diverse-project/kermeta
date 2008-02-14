@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.14 2007-09-19 12:19:38 ftanguy Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.15 2008-02-14 13:33:30 ftanguy Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -18,11 +18,13 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
@@ -52,12 +54,10 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         EditorReconcilingStrategy.clearMarkers(file);
        
         try {
-			result = IOPlugin.getDefault().loadKermetaUnit( uri, new NullProgressMonitor() );
-		} catch (KermetaIOFileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			result = LoaderPlugin.getDefault().load( uri, null );
 		} catch (URIMalformedException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotRegisteredURIException e) {
 			e.printStackTrace();
 		}
         
@@ -72,11 +72,11 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     {
     	KermetaUnit result = parse(resource);
         // Set type_check boolean to false so that we can check again 
-		KermetaTypeChecker typechecker = new KermetaTypeChecker( result, new NullProgressMonitor() );
+		KermetaTypeChecker typechecker = new KermetaTypeChecker(result);
 		typechecker.checkUnit();
 		
 		if ( ! result.isIndirectlyErroneous() ) {
-			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( result, new NullProgressMonitor() );
+			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(result);
 			constraintchecker.checkUnit();
 		}
         return result;

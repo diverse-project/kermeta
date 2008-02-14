@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: OperationEditPart.java,v 1.6 2007-08-02 16:35:51 cfaucher Exp $
+ * $Id: OperationEditPart.java,v 1.7 2008-02-14 13:33:30 ftanguy Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -31,7 +31,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.dialogs.OperationEditDialog;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.utils.EditPartUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.figures.OperationFigure;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
+import fr.irisa.triskell.kermeta.modelhelper.LabelHelper;
 
 /**
  * The Operation object controller
@@ -124,7 +124,7 @@ public class OperationEditPart extends EMFGraphNodeEditPart {
 	 * @generated NOT
 	 */
 	protected void updateLabel(EditableLabel label) {
-		label.setText(OperationHelper.getExtendedLabel(getModelOperation()));
+		label.setText(LabelHelper.getExtendedLabel(getModelOperation()));
 	}
 
 	/**
