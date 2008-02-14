@@ -1,4 +1,4 @@
-/* $Id: TypeSystemMixin.kmt,v 1.4 2008-01-24 14:10:13 dvojtise Exp $
+/* $Id: TypeSystemMixin.kmt,v 1.5 2008-02-14 07:15:11 uid21732 Exp $
  * Creation date: July 25, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -14,7 +14,7 @@ require kermeta
 require "EcoreHelper.kmt" 
 require "oclcstvisitor.kmt" 
 require "../helpers/QualifiedName.kmt"
- 
+
 
 using kermeta::standard 
 using ocl::cst
@@ -27,7 +27,7 @@ using kermeta::exceptions
  ** Note that the stack frames do not contain the "self" variable so
  ** the whole frame can be popped when the variables go out of
  ** context.
- **/
+ **/ 
 @aspect "true"
 class StackFrame {
 
