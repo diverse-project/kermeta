@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.25 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: TypeCheckerContext.java,v 1.26 2008-02-14 13:10:01 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -405,21 +405,7 @@ public class TypeCheckerContext {
 	}
 	
 	public CallableOperation getSuperOperation() {
-	    Operation superOp = currentOperation.getSuperOperation();
-	    if (superOp == null) 
-	    	return null;	    
-	    List<fr.irisa.triskell.kermeta.language.structure.Type> stypes = InheritanceSearch.allSuperTypes((Class)((SimpleType)getSelfType()).type);
-	    for(int i=0; i<stypes.size(); i++) {
-	    	fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)stypes.get(i);
-	        ArrayList ops = InheritanceSearch.callableOperations(c);
-	        Iterator it = ops.iterator();
-	        while(it.hasNext()) {
-	            CallableOperation op = (CallableOperation)it.next();
-	            if (op.getOperation() == superOp) 
-	            	return op;
-	        }
-	    }
-	    return null;
+	    return InheritanceSearch.getSuperOperation((Class)((SimpleType)getSelfType()).type, currentOperation);    
 	}
 	
 	/**

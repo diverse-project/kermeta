@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaModelHelper.java,v 1.2 2008-02-14 07:13:21 uid21732 Exp $
+/*$Id: KermetaModelHelper.java,v 1.3 2008-02-14 13:10:02 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	KermetaModelHelper.java
 * License : EPL
@@ -14,7 +14,6 @@ package org.kermeta.model;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.kermeta.model.internal.ClassDefinitionHelper;
 import org.kermeta.model.internal.ConstraintHelper;
