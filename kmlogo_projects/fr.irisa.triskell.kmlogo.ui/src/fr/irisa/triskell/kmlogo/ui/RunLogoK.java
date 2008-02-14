@@ -1,4 +1,4 @@
-/* $Id: RunLogoK.java,v 1.6 2007-12-06 14:47:35 dvojtise Exp $
+/* $Id: RunLogoK.java,v 1.7 2008-02-14 07:15:51 uid21732 Exp $
  * Project   : kmLogo
  * File      : RunLogoK.java
  * License   : EPL
@@ -12,17 +12,17 @@
 package fr.irisa.triskell.kmlogo.ui;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Platform;
+import org.kermeta.interpreter.helper.RunnerHelper;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
@@ -44,44 +44,39 @@ public class RunLogoK {
 	    KermetaInterpreter inter = new KermetaInterpreter(LOGO_SIMULATOR_KERMETA_CODE, binDirectory , null);
 		*/
 		// merge in memory
-		KermetaInterpreter inter = new KermetaInterpreter(LOGO_SIMULATOR_KERMETA_CODE, null, true);
-	    inter.setKStream(console);
-		// This is the operation to call
+		KermetaUnit unitToExecute;
 		try {
-			inter.setEntryPoint("kmLogo::Interpreter", "execute");
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		// These are the parameters
-		ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
-		params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(fileURI, inter.getMemory().getROFactory()));
-		inter.setEntryParameters(params);
-		// And we launch the interpreter
-		
-		String jar = "platform:/plugin/fr.irisa.triskell.kmlogo.model.jar";
-		
-		//ResourcesPlugin.getPlugin().getDescriptor().getInstallURL()
-		
-		
-		URL[] urls = new URL[2];
-		try {
+			unitToExecute = RunnerHelper.getKermetaUnitToExecute(LOGO_SIMULATOR_KERMETA_CODE);
+			KermetaInterpreter inter = new KermetaInterpreter(unitToExecute, null);
+		    inter.setKStream(console);		
+		    inter.setEntryPoint("kmLogo::Interpreter", "execute");
+			// These are the parameters
+			ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
+			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(fileURI, inter.getMemory().getROFactory()));
+			inter.setEntryParameters(params);
+			// And we launch the interpreter
+			String jar = "file://home/paco/Desktop/fr.irisa.triskell.kmlogo.model_1.1.0.jar";
+			
+			//ResourcesPlugin.getPlugin().getDescriptor().getInstallURL()
+			
+			
+			URL[] urls = new URL[1];
+			//urls[0] = new URL("file://home/paco/workspace/fr.irisa.triskell.kmlogo.model/bin/");
 			urls[0] = new URL("file://" + Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "bin/");
 			//urls[0] = new URL("file:///home/franck/turtle.jar");
-			urls[1] = new URL(jar);
+			//urls[0] = new URL("file://home/paco/workspace/fr.irisa.triskell.kmlogo.model/bin/");
+			//urls[0] = new URL(jar);
 			//urls[0] = new URL("file:///C:/eclipse3.3_dist051/workspace/fr.irisa.triskell.kmlogo.model/bin/");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			URLClassLoader cl = new URLClassLoader(urls, inter.getClass().getClassLoader());
+			Thread.currentThread().setContextClassLoader(cl);
+			inter.launch();
+		} catch (NotRegisteredURIException e2) {
+			e2.printStackTrace();
+		} catch (URIMalformedException e2) {
+			e2.printStackTrace();
+		} catch (IOException e2) {
+			e2.printStackTrace();
 		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		URLClassLoader cl = new URLClassLoader(urls, inter.getClass().getClassLoader());
-		Thread.currentThread().setContextClassLoader(cl);
-		inter.launch();
 
 	}
 
