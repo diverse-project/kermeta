@@ -1,4 +1,4 @@
-/* $Id: Flora2XSBEngine.java,v 1.9 2008-02-12 14:32:35 bmorin Exp $
+/* $Id: Flora2XSBEngine.java,v 1.10 2008-02-14 12:30:04 bmorin Exp $
  * Project : Kermeta (First iteration)
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
@@ -11,6 +11,8 @@
  *  - ...
  */
 package fr.irisa.triskell.kermeta.flora2;
+
+import java.util.HashMap;
 
 import net.sourceforge.flora.javaAPI.src.FloraObject;
 import net.sourceforge.flora.javaAPI.src.FloraSession;
@@ -32,6 +34,7 @@ public class Flora2XSBEngine {
     }
     
 
+   
     public static RuntimeObject executeCommand (RuntimeObject self, RuntimeObject command) {
             java.lang.String strCommand = java.lang.String.valueOf( command.getJavaNativeObject());
             	   getSession().ExecuteCommand(strCommand);
@@ -40,8 +43,9 @@ public class Flora2XSBEngine {
 
     public static RuntimeObject executeQueryCommand(RuntimeObject self, RuntimeObject command) {
         java.lang.String strQuery = java.lang.String.valueOf( command.getJavaNativeObject());
-        java.util.Iterator ite = getSession().ExecuteQuery(strQuery);
+        java.util.Iterator<FloraObject> ite = getSession().ExecuteQuery(strQuery);
         java.util.List<RuntimeObject> list = new java.util.ArrayList<RuntimeObject>(); 
+        
         while (ite.hasNext()) {
             FloraObject obj = (FloraObject) ite.next();
             RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
@@ -61,13 +65,13 @@ public class Flora2XSBEngine {
         fr.irisa.triskell.kermeta.language.structure.Class clsHashOfStrings =          
           createParametrizedClass(self, "kermeta::utils::Hashtable", hashVariables);
       
-        java.util.List list = new java.util.ArrayList();
+        java.util.List<RuntimeObject> list = new java.util.ArrayList<RuntimeObject>();
 
         java.lang.String strQuery = java.lang.String.valueOf( command.getJavaNativeObject());
         java.util.Vector<java.lang.String> vectorParams = new java.util.Vector<java.lang.String>();
         
-        java.util.ArrayList varlist = Collection.getArrayList(vars);
-        java.util.Iterator iteVars = varlist.iterator();
+        java.util.ArrayList<RuntimeObject> varlist = Collection.getArrayList(vars);
+        java.util.Iterator<RuntimeObject> iteVars = varlist.iterator();
         while ( iteVars.hasNext()){
             String str = java.lang.String.valueOf( ((RuntimeObject) iteVars.next()).getJavaNativeObject());
             vectorParams.add( str);
@@ -76,14 +80,14 @@ public class Flora2XSBEngine {
 
         //System.out.println("######################################");               
         //System.out.println("query = "+ strQuery);        
-        java.util.Iterator ite = getSession().ExecuteQuery(strQuery, vectorParams); 
+        java.util.Iterator<HashMap<String,FloraObject>> ite = getSession().ExecuteQuery(strQuery, vectorParams); 
         while (ite.hasNext()) {
             //System.out.println("######################################");               
             //System.out.println("The query has responses ");            
-            java.util.HashMap hash = (java.util.HashMap) ite.next();
+            java.util.HashMap<String,FloraObject> hash = ite.next();
             RuntimeObject hashKermeta = createRuntimeObject(self, clsHashOfStrings);
             
-            java.util.Iterator iteKeys = hash.keySet().iterator();
+            java.util.Iterator<String> iteKeys = hash.keySet().iterator();
             while (iteKeys.hasNext()) {
                java.lang.String varName = (java.lang.String) iteKeys.next();
                FloraObject value = (FloraObject) hash.get(varName);
