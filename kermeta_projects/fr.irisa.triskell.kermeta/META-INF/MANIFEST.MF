@@ -11,18 +11,6 @@ Bundle-Activator: fr.irisa.triskell.kermeta.plugin.KermetaPlugin
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
 Export-Package: .,
- com.ibm.eclipse.emfatic.core,
- com.ibm.eclipse.emfatic.core.ast,
- com.ibm.eclipse.emfatic.core.generator.ecore,
- com.ibm.eclipse.emfatic.core.generator.emfatic,
- com.ibm.eclipse.emfatic.core.parser,
- com.ibm.eclipse.emfatic.core.parser.util,
- com.ibm.eclipse.ldt.core,
- com.ibm.eclipse.ldt.core.ast,
- com.ibm.eclipse.ldt.core.outline,
- com.ibm.eclipse.ldt.core.parser,
- com.ibm.eclipse.ldt.core.templates.ext,
- com.ibm.eclipse.ldt.core.util,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.plugin,
  fr.irisa.triskell.kermeta.popup.actions,
