@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.20 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: KMT2KMPass.java,v 1.21 2008-02-14 14:13:02 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : EPL
@@ -147,6 +147,10 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		Multiplicity mul = ref.getMultiplicity();
 		if (mul == null) return 1;
 		MultiplicityExpr mexp = mul.getMultiplicityExpr();
+		if ( mexp == null ) {
+			builder.error("Incorrect multiplicity for upper.", ref);
+			return 1;
+		}
 		if (mexp.getLowerBound() == null) return -1;
 		if (mexp.getUpperBound() == null) {
 			if (mexp.getLowerBound().getText().equals("?")) return 1;
@@ -175,6 +179,10 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		Multiplicity mul = ref.getMultiplicity();
 		if (mul == null) return 0;
 		MultiplicityExpr mexp = mul.getMultiplicityExpr();
+		if ( mexp == null ) {
+			builder.error("Incorrect multiplicity for lower.", ref);
+			return 0;
+		}
 		if (mexp.getLowerBound() == null) return 0;
 		if (mexp.getLowerBound().getText().equals("?")) return 0;
 		if (mexp.getLowerBound().getText().equals("*")) return 0;
