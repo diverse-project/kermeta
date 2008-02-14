@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmCreationUtils.java,v 1.7 2008-02-14 14:04:26 cfaucher Exp $
+ * $Id: KmCreationUtils.java,v 1.8 2008-02-14 15:53:44 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -217,34 +217,35 @@ public class KmCreationUtils extends AbstractCreationUtils {
 	public GraphElement createGraphElement(EObject obj, String presentation) {
 		Object graphElt = null;
 
-		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta".equals(obj.eClass().getEPackage()
-				.getNsURI())) {
+		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta".equals(obj.eClass()
+				.getEPackage().getNsURI())) {
 			graphElt = new GraphicKmSwitch(presentation).doSwitch(obj);
 		}
-		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language".equals(obj.eClass()
-				.getEPackage().getNsURI())) {
+		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language".equals(obj
+				.eClass().getEPackage().getNsURI())) {
 			graphElt = new GraphicLanguageSwitch(presentation).doSwitch(obj);
 		}
-		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior".equals(obj
-				.eClass().getEPackage().getNsURI())) {
+		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior"
+				.equals(obj.eClass().getEPackage().getNsURI())) {
 			graphElt = new GraphicBehaviorSwitch(presentation).doSwitch(obj);
 		}
-		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure".equals(obj
-				.eClass().getEPackage().getNsURI())) {
+		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure"
+				.equals(obj.eClass().getEPackage().getNsURI())) {
 
 			// Switch according to the property type
-			if(obj instanceof Property) {
+			if (obj instanceof Property) {
 				Property prop = (Property) obj;
-				if(prop.eContainer()!=null) {
-					if (prop.getType() == null || (TypeHelper.isStandardType(prop.getType()) || TypeHelper.isPrimitiveType(prop.getType()))) {
-						presentation="propertyNode";				
-					}
-					else {
-						presentation="default";
+				if (prop.eContainer() != null) {
+					if (prop.getType() == null
+							|| (TypeHelper.isStandardType(prop.getType()) || TypeHelper
+									.isPrimitiveType(prop.getType()))) {
+						presentation = "propertyNode";
+					} else {
+						presentation = "default";
 					}
 				}
 			}
-				
+
 			graphElt = new GraphicStructureSwitch(presentation).doSwitch(obj);
 		}
 

@@ -1,6 +1,6 @@
 
 /*******************************************************************************
- * $Id: DeleteInheritanceEdgeAction.java,v 1.7 2007-07-23 09:21:26 cfaucher Exp $
+ * $Id: DeleteInheritanceEdgeAction.java,v 1.8 2008-02-14 15:53:49 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

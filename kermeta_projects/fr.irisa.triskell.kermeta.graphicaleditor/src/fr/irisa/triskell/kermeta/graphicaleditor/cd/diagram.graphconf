@@ -100,14 +100,5 @@
             <type href="http://www.kermeta.org/kermeta/1_0_0//kermeta#//language/structure/Property"/>
         </bridge>
     </edge>
-    <edge
-        presentation="default"
-        defaultForegroundColor="0,128,255"
-        defaultFont="Tahoma-regular-8"
-        defaultRouter="RectilinearRouter"
-        lineWidth="1"
-        lineStyle="SOLID">
-        <bridge xsi:type="graphconf:StringBridge" type="PropertyBiDirec"/>
-    </edge>
 </graphconf:DiagramGraphConf>
 

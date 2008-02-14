@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: OperationEditPart.java,v 1.7 2008-02-14 13:33:30 ftanguy Exp $
+ * $Id: OperationEditPart.java,v 1.8 2008-02-14 15:53:42 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

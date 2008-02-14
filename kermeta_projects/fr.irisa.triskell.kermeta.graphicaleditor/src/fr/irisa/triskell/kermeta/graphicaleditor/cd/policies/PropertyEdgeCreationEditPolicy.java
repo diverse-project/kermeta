@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PropertyEdgeCreationEditPolicy.java,v 1.3 2007-07-23 09:21:24 cfaucher Exp $
+ * $Id: PropertyEdgeCreationEditPolicy.java,v 1.4 2008-02-14 15:53:49 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

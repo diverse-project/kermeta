@@ -1,4 +1,4 @@
-/* $Id: PropertyEditDialog.java,v 1.2 2007-08-02 15:22:11 cfaucher Exp $
+/* $Id: PropertyEditDialog.java,v 1.3 2008-02-14 15:53:48 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -33,7 +33,6 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
-import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;

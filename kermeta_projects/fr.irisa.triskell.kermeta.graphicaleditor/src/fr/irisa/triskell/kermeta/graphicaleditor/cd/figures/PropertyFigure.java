@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PropertyFigure.java,v 1.3 2007-07-23 09:21:25 cfaucher Exp $
+ * $Id: PropertyFigure.java,v 1.4 2008-02-14 15:53:40 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -10,6 +10,7 @@ import org.eclipse.draw2d.Locator;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.handles.HandleBounds;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.swt.SWT;
 import org.topcased.modeler.figures.EdgeObjectEditableLabel;
 import org.topcased.modeler.figures.IEdgeObjectFigure;
 import org.topcased.modeler.figures.IGraphEdgeFigure;
@@ -55,6 +56,7 @@ public class PropertyFigure extends PolylineConnectionEx implements
 		multiplicityEdgeObject = new EdgeObjectEditableLabel(this);
 		multiplicityLocator = new ConnectionEndpointLocator(this, true);
 		add(multiplicityEdgeObject, multiplicityLocator);
+		setLineStyle(SWT.LINE_SOLID);
 	}
 
 	/**

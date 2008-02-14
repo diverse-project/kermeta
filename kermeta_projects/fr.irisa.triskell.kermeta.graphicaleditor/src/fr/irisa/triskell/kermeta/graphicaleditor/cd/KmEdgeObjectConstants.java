@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEdgeObjectConstants.java,v 1.3 2007-07-23 09:21:23 cfaucher Exp $
+ * $Id: KmEdgeObjectConstants.java,v 1.4 2008-02-14 15:53:44 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -24,16 +24,4 @@ public interface KmEdgeObjectConstants {
 	 * @generated
 	 */
 	String MULTIPLICITY_EDGE_OBJECT_ID = "multiplicityEdgeObject";
-	/**
-	 * Public constant defining the source_name EdgeObject id.
-	 * 
-	 * @generated
-	 */
-	String SOURCE_NAME_EDGE_OBJECT_ID = "source_nameEdgeObject";
-	/**
-	 * Public constant defining the target_name EdgeObject id.
-	 * 
-	 * @generated
-	 */
-	String TARGET_NAME_EDGE_OBJECT_ID = "target_nameEdgeObject";
 }

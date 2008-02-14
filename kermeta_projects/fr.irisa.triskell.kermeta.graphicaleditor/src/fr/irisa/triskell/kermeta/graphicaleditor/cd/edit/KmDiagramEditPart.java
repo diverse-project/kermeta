@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmDiagramEditPart.java,v 1.4 2007-08-02 16:39:28 cfaucher Exp $
+ * $Id: KmDiagramEditPart.java,v 1.5 2008-02-14 15:53:43 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

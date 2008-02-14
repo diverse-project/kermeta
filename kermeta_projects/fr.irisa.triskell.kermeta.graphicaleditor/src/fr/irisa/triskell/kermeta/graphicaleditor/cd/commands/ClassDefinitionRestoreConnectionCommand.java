@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ClassDefinitionRestoreConnectionCommand.java,v 1.4 2007-07-23 09:21:25 cfaucher Exp $
+ * $Id: ClassDefinitionRestoreConnectionCommand.java,v 1.5 2008-02-14 15:53:47 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -92,19 +92,6 @@ public class ClassDefinitionRestoreConnectionCommand extends
 						}
 					}
 
-					if (eltObject2 instanceof ClassDefinition) {
-						if (autoRef) {
-							createPropertyBiDirecFromClassDefinitionToClassDefinition(
-									elt, elt);
-						} else {
-							// if the elt is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-							createPropertyBiDirecFromClassDefinitionToClassDefinition(
-									elt, elt2);
-							// if elt is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-							createPropertyBiDirecFromClassDefinitionToClassDefinition(
-									elt2, elt);
-						}
-					}
 				}
 			}
 		}
@@ -195,33 +182,6 @@ public class ClassDefinitionRestoreConnectionCommand extends
 						}
 					}
 				}
-			}
-		}
-	}
-
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createPropertyBiDirecFromClassDefinitionToClassDefinition(
-			GraphElement srcElt, GraphElement targetElt) {
-		ClassDefinition sourceObject = (ClassDefinition) Utils
-				.getElement(srcElt);
-		ClassDefinition targetObject = (ClassDefinition) Utils
-				.getElement(targetElt);
-
-		if (false) {
-			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt,
-					KmSimpleObjectConstants.SIMPLE_OBJECT_PROPERTYBIDIREC)
-					.size() == 0) {
-				GraphEdge edge = Utils
-						.createGraphEdge(KmSimpleObjectConstants.SIMPLE_OBJECT_PROPERTYBIDIREC);
-				PropertyBiDirecEdgeCreationCommand cmd = new PropertyBiDirecEdgeCreationCommand(
-						null, edge, srcElt, false);
-				cmd.setTarget(targetElt);
-				add(cmd);
 			}
 		}
 	}

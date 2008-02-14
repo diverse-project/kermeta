@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.15 2008-02-14 13:33:30 ftanguy Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.16 2008-02-14 15:53:50 cfaucher Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -11,7 +11,6 @@ package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -23,7 +22,6 @@ import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;

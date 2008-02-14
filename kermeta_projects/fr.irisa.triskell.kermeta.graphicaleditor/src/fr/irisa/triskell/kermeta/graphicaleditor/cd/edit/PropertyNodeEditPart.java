@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PropertyNodeEditPart.java,v 1.4 2007-08-02 15:22:11 cfaucher Exp $
+ * $Id: PropertyNodeEditPart.java,v 1.5 2008-02-14 15:53:43 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -178,9 +178,7 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 
 		// The property type
 		if (getProperty().getType() != null) {
-			text += " : "
-					+ TypeHelper.getLabelForType(
-							getProperty().getType());
+			text += " : " + TypeHelper.getLabelForType(getProperty().getType());
 		}
 
 		// The multiplicity

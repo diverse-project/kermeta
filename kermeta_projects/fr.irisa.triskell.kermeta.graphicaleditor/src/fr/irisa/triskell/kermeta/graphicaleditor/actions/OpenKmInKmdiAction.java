@@ -1,4 +1,4 @@
-/*$Id: OpenKmInKmdiAction.java,v 1.3 2007-08-23 07:56:33 cfaucher Exp $
+/*$Id: OpenKmInKmdiAction.java,v 1.4 2008-02-14 15:53:48 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.graphicaleditor
 * File : 	OpenKmInKmdiAction.java
 * License : EPL
@@ -10,8 +10,6 @@
 
 
 package fr.irisa.triskell.kermeta.graphicaleditor.actions;
-
-import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
@@ -29,7 +27,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams;;
+import fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams;
 
 public class OpenKmInKmdiAction implements IObjectActionDelegate {
 

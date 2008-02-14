@@ -10,7 +10,6 @@
     <paletteCategories xmi:id="_piiX2Bp7Edyx1YiRXapfag" name="Edge">
       <items xmi:id="_piiX2Rp7Edyx1YiRXapfag" name="Inheritance link" part="_pisI1Bp7Edyx1YiRXapfag"/>
       <items xmi:id="_piiX2hp7Edyx1YiRXapfag" name="Property" part="_pi_DwBp7Edyx1YiRXapfag"/>
-      <items xmi:id="_tQCQIB2jEdyTW6OLABb5fA" name="Bi-directional property" part="_6LjWQB2hEdyYPoyw7qeztQ"/>
     </paletteCategories>
   </palette>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_pisI0Bp7Edyx1YiRXapfag" object="_pi_DxBp7Edyx1YiRXapfag" defaultFont="Tahoma-regular-8" type="Package" childElements="_pisI0Bp7Edyx1YiRXapfag _pisI0Rp7Edyx1YiRXapfag" defaultBackgroundColor="241,241,241" container="true" defaultWidth="20" maximumWidth="0" maximumHeight="0"/>
@@ -36,13 +35,6 @@
     <edgeObjects xmi:id="_pi_Dwxp7Edyx1YiRXapfag" id="multiplicity" type="Target">
       <eStructuralFeature xsi:type="ecore:EAttribute" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/MultiplicityElement/lower"/>
     </edgeObjects>
-  </parts>
-  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_6LjWQB2hEdyYPoyw7qeztQ" object="_xJVu4B2hEdyYPoyw7qeztQ" defaultForegroundColor="0,128,255" defaultRouter="RectilinearRouter">
-    <sourceTargetCouple xmi:id="_DFa58B2iEdyYPoyw7qeztQ" autoRef="true" sourceNode="_pisI0Rp7Edyx1YiRXapfag" targetNode="_pisI0Rp7Edyx1YiRXapfag">
-      <containerObject href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/ClassDefinition"/>
-    </sourceTargetCouple>
-    <edgeObjects xmi:id="_sIyhYSSMEdyHtqGHjujSEg" id="source_name"/>
-    <edgeObjects xmi:id="_yio_YCSMEdyHtqGHjujSEg" id="target_name" type="Target"/>
   </parts>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_pi_DxBp7Edyx1YiRXapfag">
     <genClass href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/Package"/>

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ClassDefinitionEditPart.java,v 1.6 2007-08-02 15:22:11 cfaucher Exp $
+ * $Id: ClassDefinitionEditPart.java,v 1.7 2008-02-14 15:53:44 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -33,9 +33,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.utils.EditPartUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.figures.ClassDefinitionFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.ClassDefinitionLayoutEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.InheritanceEdgeCreationEditPolicy;
-import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.PropertyBiDirecEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.PropertyEdgeCreationEditPolicy;
-import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Type;
@@ -71,9 +69,6 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 
 		installEditPolicy(KmEditPolicyConstants.PROPERTY_EDITPOLICY,
 				new PropertyEdgeCreationEditPolicy());
-
-		installEditPolicy(KmEditPolicyConstants.PROPERTYBIDIREC_EDITPOLICY,
-				new PropertyBiDirecEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
@@ -141,7 +136,8 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 				typeParameterString = "<";
 				Iterator it = cd.getTypeParameter().iterator();
 				while (it.hasNext()) {
-					typeParameterString += TypeHelper.getLabelForType((Type) it.next());
+					typeParameterString += TypeHelper.getLabelForType((Type) it
+							.next());
 					if (it.hasNext())
 						typeParameterString += ", ";
 				}

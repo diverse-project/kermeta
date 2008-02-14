@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditPartFactory.java,v 1.5 2008-02-14 14:04:26 cfaucher Exp $
+ * $Id: KmEditPartFactory.java,v 1.6 2008-02-14 15:53:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -26,7 +26,6 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.InheritanceEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.KmDiagramEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.OperationEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.PackageEditPart;
-import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.PropertyBiDirecEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.PropertyEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.PropertyNodeEditPart;
 import fr.irisa.triskell.kermeta.language.behavior.util.BehaviorSwitch;
@@ -51,12 +50,12 @@ public class KmEditPartFactory implements EditPartFactory {
 			final GraphNode node = (GraphNode) model;
 			EObject element = Utils.getElement(node);
 			if (element != null) {
-				if ("http://www.kermeta.org/kermeta/1_0_0//kermeta".equals(element.eClass()
-						.getEPackage().getNsURI())) {
+				if ("http://www.kermeta.org/kermeta/1_0_0//kermeta"
+						.equals(element.eClass().getEPackage().getNsURI())) {
 					return (EditPart) new NodeKmSwitch(node).doSwitch(element);
 				}
-				if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language".equals(element
-						.eClass().getEPackage().getNsURI())) {
+				if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language"
+						.equals(element.eClass().getEPackage().getNsURI())) {
 					return (EditPart) new NodeLanguageSwitch(node)
 							.doSwitch(element);
 				}
@@ -82,12 +81,12 @@ public class KmEditPartFactory implements EditPartFactory {
 			final GraphEdge edge = (GraphEdge) model;
 			EObject element = Utils.getElement(edge);
 			if (element != null) {
-				if ("http://www.kermeta.org/kermeta/1_0_0//kermeta".equals(element.eClass()
-						.getEPackage().getNsURI())) {
+				if ("http://www.kermeta.org/kermeta/1_0_0//kermeta"
+						.equals(element.eClass().getEPackage().getNsURI())) {
 					return (EditPart) new EdgeKmSwitch(edge).doSwitch(element);
 				}
-				if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language".equals(element
-						.eClass().getEPackage().getNsURI())) {
+				if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language"
+						.equals(element.eClass().getEPackage().getNsURI())) {
 					return (EditPart) new EdgeLanguageSwitch(edge)
 							.doSwitch(element);
 				}
@@ -111,11 +110,6 @@ public class KmEditPartFactory implements EditPartFactory {
 						.equals(((SimpleSemanticModelElement) edge
 								.getSemanticModel()).getTypeInfo())) {
 					return new InheritanceEditPart(edge);
-				}
-				if (KmSimpleObjectConstants.SIMPLE_OBJECT_PROPERTYBIDIREC
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
-					return new PropertyBiDirecEditPart(edge);
 				}
 			}
 
