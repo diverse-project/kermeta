@@ -1,4 +1,4 @@
-/* $Id: KeywordRule.java,v 1.3 2008-02-14 14:05:28 ftanguy Exp $
+/* $Id: KeywordRule.java,v 1.4 2008-02-14 14:45:29 bmorin Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KeywordRule.java
 * License : EPL
@@ -19,9 +19,6 @@ import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
-import org.kermeta.texteditor.scanners.KermetaScanner;
-
-import com.ibm.eclipse.emfatic.core.ast.CharExpr;
 
 /**
  * @author ftanguy
