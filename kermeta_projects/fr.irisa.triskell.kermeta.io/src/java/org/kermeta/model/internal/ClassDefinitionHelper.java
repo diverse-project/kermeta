@@ -1,6 +1,6 @@
 
 
-/*$Id: ClassDefinitionHelper.java,v 1.2 2008-02-14 07:13:17 uid21732 Exp $
+/*$Id: ClassDefinitionHelper.java,v 1.3 2008-02-14 10:27:14 fmunoz Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -96,9 +96,9 @@ public class ClassDefinitionHelper {
 			}
 		}
 		
-		if ( result.firstEntry() == null )
+		if ( result.get(result.firstKey()) == null )
 			return new ArrayList<Operation>();
-		return result.firstEntry().getValue();
+		return result.get(result.firstKey());
 	}
 	
 	static public Map<TypeDefinition, Integer> getContext(ClassDefinition c) {
