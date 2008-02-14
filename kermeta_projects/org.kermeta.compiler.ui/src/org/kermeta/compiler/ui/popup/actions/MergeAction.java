@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeAction.java,v 1.2 2008-02-06 15:40:08 cfaucher Exp $
+/*$Id: MergeAction.java,v 1.3 2008-02-14 16:38:42 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	MergeAction.java
 * License : EPL
@@ -17,6 +17,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -38,14 +42,22 @@ public class MergeAction implements IObjectActionDelegate {
 	private ArrayList<KermetaUnit> excludedKmUnit = new ArrayList<KermetaUnit>();
 	
 	public MergeAction() {
-		initExcludedKmUnit();
+		//initExcludedKmUnit();
 	}
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 	}
 	
 	private void initExcludedKmUnit() {
-		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit("platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km"));
+		String kermetaMainPath = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/";
+		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "standard/java.km"));
+		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "ecore/ecore_compatibility.km"));
+		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "language/dynamic_expression.km"));
+		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "io/file_io.km"));
+		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "kunit/kunit.km"));
+		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "kunit/assert.km"));
+		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "utils/StringBuffer.km"));
+		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "utils/stack.km"));
 	}
 
 	private String getOutputFilePath() {
@@ -53,27 +65,40 @@ public class MergeAction implements IObjectActionDelegate {
 	}
 	
 	public void run(IAction action) {
-		try {
-			String uri = "platform:/resource" + file.getFullPath().toString();
-			KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
-			LinkedHashSet<KermetaUnit> context = new LinkedHashSet<KermetaUnit>();
-			context.add(kermetaUnit);
-			for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit)) {
-				if( ! excludedKmUnit.contains(IOPlugin.getDefault().findKermetaUnit(unit.getUri())) ) {
-					context.add(unit);
+		
+		IWorkspaceRunnable r = new IWorkspaceRunnable() {
+			@Override
+			public void run(IProgressMonitor monitor) throws CoreException {
+				try {
+					String uri = "platform:/resource" + file.getFullPath().toString();
+					KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
+					LinkedHashSet<KermetaUnit> context = new LinkedHashSet<KermetaUnit>();
+					context.add(kermetaUnit);
+					for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit)) {
+						if( ! excludedKmUnit.contains(IOPlugin.getDefault().findKermetaUnit(unit.getUri())) ) {
+							context.add(unit);
+							System.out.println(unit.getUri());
+						}
+					}
+					
+					Merger merger = new Merger();
+					merger.process(context, getOutputFilePath());
+				} catch (URIMalformedException e) {
+					e.printStackTrace();
+				} catch (NotRegisteredURIException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
+				file = null;
 			}
-			
-			Merger merger = new Merger();
-			merger.process(context, getOutputFilePath());
-		} catch (URIMalformedException e) {
-			e.printStackTrace();
-		} catch (NotRegisteredURIException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		};
+
+		try {
+			ResourcesPlugin.getWorkspace().run(r, null);
+		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		file = null;
 	}
 
 	public void selectionChanged(IAction action, ISelection selection) {
