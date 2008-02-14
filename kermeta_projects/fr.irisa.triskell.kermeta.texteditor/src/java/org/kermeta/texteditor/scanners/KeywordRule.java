@@ -1,4 +1,4 @@
-/* $Id: KeywordRule.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
+/* $Id: KeywordRule.java,v 1.3 2008-02-14 14:05:28 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KeywordRule.java
 * License : EPL
@@ -20,6 +20,8 @@ import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.kermeta.texteditor.scanners.KermetaScanner;
+
+import com.ibm.eclipse.emfatic.core.ast.CharExpr;
 
 /**
  * @author ftanguy
@@ -173,8 +175,8 @@ public class KeywordRule implements IRule {
 			c = scanner.read();			
 		} else
 			go = true;
-		
-		if ( go || Character.isWhitespace(c) || c == ':' || c == '{' || c == '=' ) {
+		//Character.toChars(c)
+		if ( go || Character.isWhitespace(c) || c == ':' || c == '{' || c == '=' || c == '(' ) {
 
 			while ( (c = scanner.read()) != ICharacterScanner.EOF ) {
 				size ++;
@@ -185,7 +187,7 @@ public class KeywordRule implements IRule {
 					IToken token = getToken(word);
 					if ( token != null ) {
 						c = scanner.read();
-						if ( (c == ICharacterScanner.EOF) || Character.isWhitespace(c) || (c == '.')) {
+						if ( (c == ICharacterScanner.EOF) || Character.isWhitespace(c) || (c == '.')  || c == ':' || c == '{' || c == '=' || c == '(' || c ==')' ) {
 							scanner.unread();
 							return token;
 						} else
