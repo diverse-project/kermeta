@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.32 2008-02-14 07:13:58 uid21732 Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.33 2008-02-15 14:25:11 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -33,17 +33,13 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
-import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
-//import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
  * @author Franck Fleurey
@@ -66,7 +62,7 @@ public class RuntimeObjectFactory {
 	private Hashtable<GenericTypeDefinition,RuntimeObject> non_parametric_metaclass_cache = new Hashtable<GenericTypeDefinition,RuntimeObject>();
 	private Hashtable<TypeDefinition, RuntimeObject> modeltype_cache = new Hashtable<TypeDefinition, RuntimeObject>();
 
-	
+	public static final String EMFRESOURCE_QUALIFIED_NAME = "kermeta::persistence::EMFResource";
 	
 	
 	StructureFactory struct_factory;
@@ -654,11 +650,12 @@ public class RuntimeObjectFactory {
      * @param emfRes  - EMF Resource
      * @param repRO   - RO for the Repository that contains the resource to be created
      * @param mmUriRO - RO for the metamodel URI of the resource to be allocated
+     * @param resourceTypeQualifiedName - qualified name of the type of resource to be created (typically "kermeta::persistence::EMFResource" or one of its subtype)
      * @return        - RO for the created resource
      */
-    public RuntimeObject createRuntimeObjectFromResource(Resource emfRes, RuntimeObject repRO, RuntimeObject mmUriRO) {
+    public RuntimeObject createRuntimeObjectFromResource(Resource emfRes, RuntimeObject repRO, RuntimeObject mmUriRO, String resourceTypeQualifiedName) {
     	// Allocate RO for the resource to be created
-    	GenericTypeDefinition resClassDef  = (GenericTypeDefinition) this.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::persistence::EMFResource");
+    	GenericTypeDefinition resClassDef  = (GenericTypeDefinition) this.getMemory().getUnit().getTypeDefinitionByQualifiedName(resourceTypeQualifiedName);
 	    fr.irisa.triskell.kermeta.language.structure.Class resClass = StructureFactory.eINSTANCE.createClass();
 	    resClass.setTypeDefinition(resClassDef);
 	    RuntimeObject metaclassRO = repRO.getFactory().getMemory().getRuntimeObjectForFObject(resClass);
