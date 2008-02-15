@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.58 2008-02-14 07:13:56 uid21732 Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.59 2008-02-15 14:29:56 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -11,8 +11,8 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -43,13 +43,11 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.io.util2.ResourceSetManager;
 
-import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
-
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
+import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
@@ -86,8 +84,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
      * mandatory */
     public String metamodel_uri;
     protected fr.irisa.triskell.kermeta.language.structure.Object kermeta_mm;
-    /** { EObject : RuntimeObject } */
-    private Hashtable<EObject, RuntimeObject> runtime_objects_map;
     
     
     
@@ -279,9 +275,13 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     			"Not able to create a resource for URI: "+ u + "\n  failing on resource = 	(XMLResource)resourceset.createResource(u);  \n" + logEMFRegistryContent(), null);
 
 			// Now, process the conversion of EMF model into Runtime representation so that kermeta can interprete it.
-	    	EMF2Runtime emf2Runtime = new EMF2Runtime(unit, resource);
+	    	EMF2Runtime emf2Runtime = getEMF2Runtime(unit, resource);
 	    	//emf2Runtime.loadunit();
 	    	emf2Runtime.loadunit(resRO);
+		}
+		catch (FileNotFoundException e){
+			emf_msg = "File not found " + this.uri + ";" + (e.getMessage()!=null?(" :\n " + e.getMessage()):"");
+			throwKermetaRaisedExceptionOnLoad(emf_msg + getResourceErrors(resource), e);
 		}
 		catch (IOException e){
 			emf_msg = "I/O error loading EMF model " + unit.getUriAsString() + ";" + (e.getMessage()!=null?(" :\n " + e.getMessage()):"");
@@ -303,6 +303,18 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 					internalLog.error("EMF reports unknown feature: "+o + "; " + extensionmap.get(o));
 			}
 		}
+    }
+    
+    /**
+     * default way to get the EMF2RuntimeUnit
+     * subclasses may overwrite this in order to provide a dedicated EMF2Runtime
+     * @param unit
+     * @param resource
+     * @return
+     */
+    protected EMF2Runtime getEMF2Runtime(EMFRuntimeUnit unit, Resource resource)
+    {
+    	return new EMF2Runtime(unit, resource);
     }
     
     /** Return the errors registered in the given resource. If resource is null, return empty string */
@@ -752,7 +764,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    		result = primitive_types_mapping.get(icn);
 	    	else // Throw an error? --> For Ecore metamodel, we need to accept types...
 	    	{
-	    		String msg = "Sorry, your model probably won't be saved properly: it contains types that have no equivalence in kermeta : '" + obj.getName() + "';";
+	    		//String msg = "Sorry, your model probably won't be saved properly: it contains types that have no equivalence in kermeta : '" + obj.getName() + "';";
 	    		//msg += "\n - Please mail kermeta-users list with your metamodel and instance :) )";
 	    		result = primitive_types_mapping.get("java.lang.Object");
 	        	// throwKermetaRaisedExceptionOnSave(msg, null);
@@ -765,10 +777,23 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	if(this.qualifiedNamePatcher == null) qualifiedNamePatcher = new QualifiedNamePatcher(this);
 	    	result = qualifiedNamePatcher.getPackageQualifiedNameFromMetamodel(obj);
 	    }
+	    else {
+	    	result = specialObjectQualifiedName(cont, result);
+	    }
 	    return result;
 	}
     
-	
+	/**
+	 * Defautl implementation of support for special object
+	 * this operation should be overwritten in order to add some special computation  on dedicated objects
+	 * @param obj object for which we want a qualified name 
+	 * @param result base qualified name that we want to complement if needed (will not be changed if the object cannot be recognized)
+	 * @return
+	 */	
+	protected String specialObjectQualifiedName(EObject obj, String result) {
+		return result;
+	}
+
 	/**
 	 * Get the contentMapEntry which key is the RuntimeObject representing the given string.
 	 * contentMap is the RuntimeObject that is passed to Kermeta side, and that contains a hashtable
