@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeAction.java,v 1.3 2008-02-14 16:38:42 cfaucher Exp $
+/*$Id: MergeAction.java,v 1.4 2008-02-15 14:33:50 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	MergeAction.java
 * License : EPL
@@ -67,7 +67,6 @@ public class MergeAction implements IObjectActionDelegate {
 	public void run(IAction action) {
 		
 		IWorkspaceRunnable r = new IWorkspaceRunnable() {
-			@Override
 			public void run(IProgressMonitor monitor) throws CoreException {
 				try {
 					String uri = "platform:/resource" + file.getFullPath().toString();
