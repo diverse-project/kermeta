@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.66 2008-02-14 07:13:56 uid21732 Exp $
+/* $Id: ExpressionInterpreter.java,v 1.67 2008-02-15 14:22:59 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -1276,20 +1276,20 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	            jmethod = jclass.getMethod(jmethodName, paramtypes);
 	        } catch (SecurityException e1) {
 	            internalLog.error("SecurityException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
-				throw	new KermetaVisitorError("SecurityException invoking "+ jmethodName + " on Class " +jclassName  ,e1);
+				throw	new KermetaVisitorError("SecurityException invoking "+ jmethodName + " on Class " +jclassName  , this.computeCurrentContextString(), e1);
 	        } catch (NoSuchMethodException e1) {
 	            internalLog.error("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!", e1);
-				throw	new KermetaVisitorError("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName  ,e1);
+				throw	new KermetaVisitorError("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName  , this.computeCurrentContextString(),e1);
 	        }
 	        
 	        try {
 	            result = jmethod.invoke(null, (Object[])paramsArray);
 	        } catch (IllegalArgumentException e2) {        
 				internalLog.error("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
-				throw	new KermetaVisitorError("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName  ,e2); 		
+				throw	new KermetaVisitorError("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName, this.computeCurrentContextString()  ,e2); 		
 	        } catch (IllegalAccessException e2) {
 	            internalLog.error("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
-				throw	new KermetaVisitorError("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
+				throw	new KermetaVisitorError("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName, this.computeCurrentContextString()  ,e2);
 	        } catch (InvocationTargetException e2) {
 	            Throwable cause = e2.getCause();
 			    if (cause != null)				       
@@ -1297,7 +1297,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 				    {
 			            internalLog.error(e2.getClass().getName() + " invoking "+ jmethodName + " on Class " +jclassName + " was due to AssertionFailedError: Shrinking the Exception Stack ");					       
 			            // this Exception was due to a KermetaVisitorError create a new one with the precedent content
-			            throw new KermetaVisitorError("InvocationTargetException caused by AssertionError: "+cause.getMessage(), cause);
+			            throw new KermetaVisitorError("InvocationTargetException caused by AssertionError: "+cause.getMessage(), this.computeCurrentContextString(), cause);
 			        }
 			        else if (cause instanceof KermetaRaisedException)
 			        {
@@ -1308,12 +1308,12 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName , e2);
 			            internalLog.error("The cause : "  + cause.getClass());
 			            throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName 
-			            		+ "\n The cause: " + cause.getClass(),e2);
+			            		+ "\n The cause: " + cause.getClass(), this.computeCurrentContextString(),e2);
 			        }
 	            
 	        } catch (Throwable e2) {
 	            internalLog.error("InstantiationException invoking "+ jmethodName + " on Class " +jclassName, e2);
-				throw	new KermetaVisitorError("InstantiationException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
+				throw	new KermetaVisitorError("InstantiationException invoking "+ jmethodName + " on Class " +jclassName, this.computeCurrentContextString()  ,e2);
 	        }
 
         return result;
@@ -1458,6 +1458,23 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			return getQualifiedName( (NamedElement)element.eContainer() ) + "::" + ppIdentifier(element.getName());
 		else return element.getName();
 	}
+	
+	
+	/**
+     * Return a human-readable representation of the stack trace of the program until the
+     * exception occurrence.
+     */
+    public String computeCurrentContextString()
+    {
+        String context;
+        if(this.getParent() != null) {
+	        context = new Traceback(this, this.getParent()).getStackTrace();	        
+        }
+        else {
+        	context = "Context not available : current state is null";
+        }
+        return context;
+    }
 	
 	/**
 	 * Protect the id if it is a keyword name
