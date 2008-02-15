@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.77 2008-02-14 07:13:56 uid21732 Exp $
+/* $Id: EMF2Runtime.java,v 1.78 2008-02-15 14:28:55 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -41,7 +41,6 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
@@ -250,7 +249,8 @@ public class EMF2Runtime {
 					crtResRO = mainResRO.getFactory().createRuntimeObjectFromResource(
 									res,
 									repRO,
-									fr.irisa.triskell.kermeta.runtime.basetypes.String.create(metamodel_uri, repRO.getFactory())
+									fr.irisa.triskell.kermeta.runtime.basetypes.String.create(metamodel_uri, repRO.getFactory()),
+									RuntimeObjectFactory.EMFRESOURCE_QUALIFIED_NAME
 								);
 					
 					// Link the repository RO to the newly allocated resource RO 
@@ -335,6 +335,7 @@ public class EMF2Runtime {
 			for (Object next : newlycreated_runtime_objects_map.keySet()) {
 			    RuntimeObject rObject = (RuntimeObject)newlycreated_runtime_objects_map.get((EObject)next);
 			    this.populateRuntimeObject(rObject);
+			    unit.getRuntimeMemory().getCurrentInterpreter().shouldTerminate(); // maybe we must stop ...
 			    processedElements++;
 			}
 
@@ -557,7 +558,7 @@ public class EMF2Runtime {
 	    for (EStructuralFeature feature : allStructuralFeature)
 	    {	
 	    	EClassifier feature_type = feature.getEType();
-	    	Type ftype = getTypeFromEClassifier(feature_type);
+	    	//Type ftype = getTypeFromEClassifier(feature_type);
 	    	// Find the property corresponding to the given feature
 	    	// Note : if it is not found, this method throws a KermetaRaisedException.
 	    	Property prop = getPropertyForEStructuralFeature((ClassDefinition) kclass.getTypeDefinition(), feature, eclass);
@@ -573,6 +574,7 @@ public class EMF2Runtime {
 	    			// A feature with multiplicity
 	    			if (fvalue instanceof EList)
 	    			{
+	    		    	Type ftype = getTypeFromEClassifier(feature_type);
 	    				if(fvalue instanceof BasicFeatureMap){
 	    					// special case for FeatureMap
 	    					rovalue = createRuntimeObjectForFeatureMap((EList)fvalue, ftype, feature_type, rObject, roprop);
