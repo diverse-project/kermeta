@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.23 2007-11-29 14:13:47 ftanguy Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.24 2008-02-15 14:34:39 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -35,6 +35,7 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStepFilters;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
@@ -69,7 +70,7 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
     protected String className;
     protected String opName;
     protected String args;
-    protected List   javaClassPathAttribute;
+    protected List<String>   javaClassPathAttribute;
     
     /** The Thread that run the Kermeta interpreter */
     protected KermetaProcess kermeta_process;
@@ -87,7 +88,7 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
     public final String HOST = "localhost";
     protected int requestPort;
     
-    protected ArrayList breakpoints;
+    protected ArrayList<IBreakpoint> breakpoints;
     
     public AbstractKermetaTarget(ILaunch launch) {
 		this.launch = launch;
@@ -121,7 +122,7 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 			
 			// retrieve java classPath
 			javaClassPathAttribute = launch.getLaunchConfiguration().getAttribute(IJavaLaunchConfigurationConstants.ATTR_CLASSPATH, //"org.eclipse.jdt.launching.CLASSPATH"
-					new java.util.ArrayList());
+					new java.util.ArrayList<String>());
 
 		} catch (Exception ce) {
 			ce.printStackTrace();
@@ -161,6 +162,28 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 				}
     		}
 		return currentProjectPath;
+	}
+	
+	/** retreives the requires pathes used by the current project */
+	protected IClasspathEntry[] getCurrentProjectRequiredEntries() {
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+    	IProject theProject = myWorkspaceRoot.getProject(this.getProjectName());
+    	
+    	if(theProject != null)
+    		if (theProject.exists() && theProject.isOpen())
+    		{
+    			try {
+					if(theProject.getNature(org.eclipse.jdt.core.JavaCore.NATURE_ID) != null){
+						
+						IJavaProject javaProj = JavaCore.create(theProject);
+						return javaProj.getResolvedClasspath(true);
+						
+					}
+				} catch (CoreException e) {
+					// we don't care, just ignore this project for the class path
+				}
+    		}
+		return null;
 	}
 	
 	/**
@@ -281,7 +304,7 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
     }
 
     /** Return the added breakpoints */
-    public ArrayList getBreakpoints() {
+    public ArrayList<IBreakpoint> getBreakpoints() {
     	return breakpoints;
     }
    

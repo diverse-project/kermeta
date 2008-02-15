@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.26 2008-01-02 10:28:07 vmahe Exp $
+/* $Id: KermetaDebugTarget.java,v 1.27 2008-02-15 14:34:39 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : EPL
@@ -50,7 +50,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
      */
     public KermetaDebugTarget(ILaunch launch) { 
     	super(launch);
-        breakpoints = new ArrayList();
+        breakpoints = new ArrayList<IBreakpoint>();
         stepHandler = new KermetaStepHandler(this);
         this.name = "Kermeta Debug Target";
         // Create a default thread
@@ -93,7 +93,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	{
 		// initialize the process for interpretation (in fact, this process is a thread)
 		kermeta_process = new KermetaDebugProcess(getStartFile(), getClassName(), getOpName(), getArgs(), remotePlatform);
-		kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectOutputPath());    	
+		kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectOutputPath(), getCurrentProjectRequiredEntries());    	
 		kermeta_process.start();
 	}
 	

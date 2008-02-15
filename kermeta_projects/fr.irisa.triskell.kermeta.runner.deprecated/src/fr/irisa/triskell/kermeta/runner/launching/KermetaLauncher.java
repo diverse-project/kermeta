@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.29 2008-02-14 07:13:07 uid21732 Exp $
+/* $Id: KermetaLauncher.java,v 1.30 2008-02-15 14:35:44 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : EPL
@@ -10,6 +10,8 @@
 package fr.irisa.triskell.kermeta.runner.launching;
 
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
@@ -19,7 +21,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -36,6 +37,7 @@ import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
+import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
@@ -46,6 +48,7 @@ import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.process.KermetaProcess;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 
@@ -94,7 +97,7 @@ public class KermetaLauncher
 	   	
     	String binDirectory = "platform:/resource" + project.getFullPath().toString() + "/.bin";
 	   	KermetaUnit unitToExecute = null;
-    	
+	   
     	KermetaProject kermetaProject = KermetaWorkspace.getInstance().getKermetaProject(project);
 	   	
 	   	if ( kermetaProject != null ) {
@@ -161,7 +164,7 @@ public class KermetaLauncher
 	    try
         {                
             interpreter.setEntryPoint(classQualifiedNameString, operationString);
-            ArrayList interpreter_params =  new ArrayList();
+            ArrayList<RuntimeObject> interpreter_params =  new ArrayList<RuntimeObject>();
             
             String[] params_table = argsString.split(" ");
             
@@ -247,7 +250,7 @@ public class KermetaLauncher
         {
 
             interpreter.setEntryPoint(classQualifiedNameString, operationString);
-            ArrayList interpreter_params =  new ArrayList();
+            ArrayList<RuntimeObject> interpreter_params =  new ArrayList<RuntimeObject>();
             
             if(!argsString.equals("")){
             	// add only params if they are defined in the runconfiguratio
@@ -299,11 +302,42 @@ public class KermetaLauncher
             console.print(ierror.getMessage());
             console.dispose();
         }
+        catch (KermetaVisitorError e){
+        	console.print("\nKermetaInterpreter internal error \n" +
+    		"-------------------------------------------\n");
+		    console.print("Reported java error : "+e);
+		    console.print(e.getMessage());
+		    console.print("\n--------- Interpreter stack trace ---------\n");
+		    console.print(e.kermetaStackContextString);
+		    console.dispose();
+		    e.printStackTrace();
+		    RunnerPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RunnerPlugin.PLUGIN_ID, 0,"Interpreter internal error", e));
+        }
+        catch (java.lang.NoClassDefFoundError e){
+        	console.print("\nKermetaInterpreter internal error \n" +
+    		"-------------------------------------------\n");
+		    console.print("Reported java error : "+e+"\n");
+		    console.print(e.getMessage()+"\n");
+		    String additionalInfo = "";
+		    ClassLoader cl = Thread.currentThread().getContextClassLoader();
+        	if(cl instanceof URLClassLoader){
+        		URLClassLoader ucl=(URLClassLoader)cl;
+        		URL[] urls = ucl.getURLs();
+        		additionalInfo += "Current URLs in the URLClassLoader : \n";
+				for (int index = 0; index < urls.length; index++) {
+					additionalInfo += "\t" + urls[index].toExternalForm() + "\n";
+				}
+        	}
+        	console.print(additionalInfo+"\n");
+		    console.dispose();
+		    e.printStackTrace();
+		    RunnerPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RunnerPlugin.PLUGIN_ID, 0,"Interpreter internal error", e));
+        }
         catch (Throwable e)
         {
             console.print("\nKermetaInterpreter internal error \n" +
             		"-------------------------------------------\n");
-            console.print("Reported java error : "+e);
+            console.print("Reported java error : "+e+"\n");
             console.print(e.getMessage());
             console.dispose();
             e.printStackTrace();

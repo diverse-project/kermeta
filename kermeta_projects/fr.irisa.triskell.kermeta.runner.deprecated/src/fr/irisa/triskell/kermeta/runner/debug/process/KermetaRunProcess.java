@@ -1,4 +1,4 @@
-/** $Id: KermetaRunProcess.java,v 1.7 2008-02-15 13:46:52 dvojtise Exp $
+/** $Id: KermetaRunProcess.java,v 1.8 2008-02-15 14:35:44 dvojtise Exp $
  * Project   : Kermeta Runner
  * File      : KermetaRunProcess.java
  * License   : EPL
@@ -16,6 +16,8 @@ import org.eclipse.debug.core.DebugException;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
@@ -60,6 +62,12 @@ public class KermetaRunProcess extends KermetaProcess {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (CoreException e) {
+			e.printStackTrace();
+		} catch (NotRegisteredURIException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

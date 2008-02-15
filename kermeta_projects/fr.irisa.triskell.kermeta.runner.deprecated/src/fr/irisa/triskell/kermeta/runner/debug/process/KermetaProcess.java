@@ -1,4 +1,4 @@
-/* $Id: KermetaProcess.java,v 1.9 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: KermetaProcess.java,v 1.10 2008-02-15 14:35:44 dvojtise Exp $
  * Project   : Kermeta runner
  * File      : KermetaProcess.java
  * License   : EPL
@@ -10,19 +10,30 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.process;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Vector;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.IRuntimeClasspathEntry;
 import org.eclipse.jdt.launching.JavaRuntime;
+import org.osgi.framework.Bundle;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -68,8 +79,9 @@ public class KermetaProcess //extends Process
 	}
 
 	/** Update the classLoader for this thread */
-	public void updateThreadClassLoader(List pathAttribute, String currentProjectPath) {
-		Vector<URL> urlsV = new Vector<URL>();
+	public void updateThreadClassLoader(List<String> pathAttribute, String currentProjectPath, IClasspathEntry[] currentProjectEntries) {
+		Set<URL> urlsV = new LinkedHashSet<URL>();
+		//Vector<URL> urlsV = new Vector<URL>();
 
 		for (int i = 0; i < pathAttribute.size(); i++) {
 			String memento1 = (String) pathAttribute.get(i);
@@ -81,11 +93,14 @@ public class KermetaProcess //extends Process
 				try {
 					// entry1.toString();
 					if (entry1.getLocation() != null) {
-						if (entry1.getType() == IRuntimeClasspathEntry.ARCHIVE) {
+						if (entry1.getType() == IRuntimeClasspathEntry.ARCHIVE && entry1.getLocation().endsWith(".jar")) {
+							// second part of the test is because IRuntimeClasspathEntry.ARCHIVE may also be a folder in the system
 							// deal with jar url
 							urlsV.add(new URL("file:///" + entry1.getLocation()));
 							RunnerPlugin.pluginLog.debug("added " + "file:///" + entry1.getLocation()
 									+ " in Thread Class Loader " + this.thread.getName());
+							
+							
 						} else {
 							// deal with project url
 							urlsV.add(new URL("file:///" +entry1.getLocation() + "/"));
@@ -118,9 +133,106 @@ public class KermetaProcess //extends Process
 				RunnerPlugin.log(e);
 			}
 		}
+		
+		if(currentProjectEntries != null){
+			for(IClasspathEntry projectEntry : currentProjectEntries){
+				try {
+					
+					if (projectEntry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
+						
+						urlsV.add(new URL("file:///" +projectEntry.getPath().toPortableString()));
+					}
+					else if (projectEntry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
+						RunnerPlugin.pluginLog.warn(
+								"(not implemented) problem with an entry CPE_CONTAINER of the classpath, "
+										+ projectEntry.getPath().toOSString()
+										+ " cannot be added in classloader", null);
+						//urlsV.add(new URL(projectEntry.getPath().toOSString()));
+					}
+					else if (projectEntry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
+						String outputLocation = null;
+						if(projectEntry.getOutputLocation() != null)
+						{
+							outputLocation = "file:///" +projectEntry.getOutputLocation().toOSString()+ "/";
+						}
+						else{
+							// must use project default output location
+							// project name is the first segment of the path
+							String projectName = projectEntry.getPath().segments()[0];
+							IProject theProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+							if (theProject.exists() && theProject.isOpen())
+				    		{
+								outputLocation = "file:///" +ResourceHelper.root.getLocation().toString();
+								IJavaProject javaProj = JavaCore.create(theProject);
+								outputLocation += javaProj.getOutputLocation().toString()+ "/";
+				    		}
+							else{
+								// try a plugin in the workbench that launched this eclipse
+								Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(projectName);
+								if(bundle != null){
+									// ok a plugin exists with the same name as the required project
+									try {
+										outputLocation = FileLocator.resolve(FileLocator.find(bundle, new org.eclipse.core.runtime.Path("/"), null)).toString();
+										outputLocation += "bin/";
+									} catch (IOException e) {
+										RunnerPlugin.pluginLog.warn(
+												"problem with an entry of the classpath, "
+														+ projectEntry.getPath().toOSString()
+														+ " cannot be added in classloader", e);
+									}
+								}
+								else {
+									RunnerPlugin.pluginLog.warn(
+											"problem with an entry of the classpath, "
+													+ projectEntry.getPath().toOSString()
+													+ " cannot be added in classloader", null);
+								}
+
+							}
+						}
+						urlsV.add(new URL(outputLocation));
+						//urlsV.add(new URL(projectEntry.getPath().toOSString()));
+					}
+					else if (projectEntry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+						// this correspond to the source of a project
+						// need to retrieve the output dir of the corresponding project
+
+						String outputLocation = null;
+						if(projectEntry.getOutputLocation() != null)
+						{
+							outputLocation = "file:///" +projectEntry.getOutputLocation().toOSString()+ "/";
+						}
+						else{
+							// must use project default output location
+							// project name is the first segment of the path
+							String projectName = projectEntry.getPath().segments()[0];
+							IProject theProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+							outputLocation = "file:///" +ResourceHelper.root.getLocation().toString();
+							IJavaProject javaProj = JavaCore.create(theProject);
+							outputLocation += javaProj.getOutputLocation().toString()+ "/";
+						}
+						urlsV.add(new URL(outputLocation));
+					}
+				} catch (MalformedURLException e) {
+					RunnerPlugin.pluginLog.warn(
+							"problem with an entry of the classpath, "
+									+ projectEntry.getPath().toOSString()
+									+ " cannot be added in classloader", e);
+				}	
+				catch (JavaModelException e) {
+					RunnerPlugin.pluginLog.warn(
+							"problem with an entry of the classpath, "
+									+ projectEntry.getPath().toOSString()
+									+ " cannot be added in classloader", e);
+				}
+			}
+		}
+		
 		URL[] urls = new URL[urlsV.size()];
-		for (int i = 0; i < urlsV.size(); i++) {
-			urls[i] = urlsV.elementAt(i);
+		int i = 0;
+		for (URL url : urlsV) {
+			urls[i] = url;
+			i++;
 		}
 		// URLClassLoader cl = new URLClassLoader(urls,
 		// this.getContextClassLoader());
