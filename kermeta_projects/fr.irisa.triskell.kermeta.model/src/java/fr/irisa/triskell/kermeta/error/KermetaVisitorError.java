@@ -1,4 +1,4 @@
-/* $Id: KermetaVisitorError.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
+/* $Id: KermetaVisitorError.java,v 1.6 2008-02-15 16:09:49 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : KermetaVisitorError.java
  * License    : EPL
@@ -22,6 +22,11 @@ public class KermetaVisitorError extends KermetaError {
 	 * 
 	 */
 	private static final long serialVersionUID = 8708765533529295325L;
+	
+	/**
+	 * human readable string representing the stack of the interpreter when the Error was thrown
+	 */
+	public String kermetaStackContextString =  "";
 
 	/**
      * Constructs a new Kermeta error with the specified cause.
@@ -41,6 +46,17 @@ public class KermetaVisitorError extends KermetaError {
             Throwable cause) {
         
         super(message, cause);
+    }
+    
+    /**
+     * Constructs a new Kermeta error with the specified detail message and cause.
+     * @param message
+     * @param cause
+     */
+    public KermetaVisitorError(String message, String contextStackString,
+            Throwable cause) {
+        super(message, cause);
+        kermetaStackContextString = contextStackString;
     }
     
     /**
