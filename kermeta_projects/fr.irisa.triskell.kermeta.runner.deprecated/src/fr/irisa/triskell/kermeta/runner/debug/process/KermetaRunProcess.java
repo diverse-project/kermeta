@@ -1,4 +1,4 @@
-/** $Id: KermetaRunProcess.java,v 1.6 2008-02-14 07:13:07 uid21732 Exp $
+/** $Id: KermetaRunProcess.java,v 1.7 2008-02-15 13:46:52 dvojtise Exp $
  * Project   : Kermeta Runner
  * File      : KermetaRunProcess.java
  * License   : EPL
@@ -10,32 +10,14 @@
 package fr.irisa.triskell.kermeta.runner.debug.process;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.console.ConsolePlugin;
-import org.eclipse.ui.console.IConsoleConstants;
-import org.eclipse.ui.console.IConsoleView;
-import org.eclipse.ui.part.IPageBookViewPage;
-import org.eclipse.ui.progress.UIJob;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
-import fr.irisa.triskell.kermeta.runner.console.RunnerConsole;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 
@@ -75,10 +57,6 @@ public class KermetaRunProcess extends KermetaProcess {
 		this.target = target;
 		try {
 			KermetaLauncher.getDefault().initInterpreter(f);
-		} catch (NotRegisteredURIException e) {
-			e.printStackTrace();
-		} catch (URIMalformedException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (CoreException e) {
