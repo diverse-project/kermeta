@@ -9,13 +9,6 @@
             id="fr.irisa.triskell.kermeta.view">
       </category>
       <view
-            name="Kermeta TouchNavigator View"
-            icon="icons/touchgraph.gif"
-            category="fr.irisa.triskell.kermeta.view"
-            class="fr.irisa.triskell.kermeta.touchnavigator.views.TouchClassView"
-            id="fr.irisa.triskell.kermeta.touchnavigator.views.KermetaTouchView">
-      </view>
-      <view
             name="EMF Model TouchNavigator View"
             icon="icons/touchgraph.gif"
             category="fr.irisa.triskell.kermeta.view"
