@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.26 2008-02-14 07:13:57 uid21732 Exp $
+/* $Id: Object.java,v 1.27 2008-02-15 13:34:45 dvojtise Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -17,7 +17,6 @@ package fr.irisa.triskell.kermeta.runtime.language;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
@@ -39,7 +38,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
@@ -186,6 +184,14 @@ public class Object {
 	/** Implementation of method get called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property) */
 	public static RuntimeObject get(RuntimeObject self, RuntimeObject param0) {
+		if(param0 == self.getFactory().getMemory().voidINSTANCE){
+			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
+					"Cannot get \"Void\" property",
+					self.getFactory().getMemory().getCurrentInterpreter(),
+					self.getFactory().getMemory(),
+					null);
+			
+		}
 		Property property = (Property)param0.getKCoreObject();
 		RuntimeObject result;
 		
