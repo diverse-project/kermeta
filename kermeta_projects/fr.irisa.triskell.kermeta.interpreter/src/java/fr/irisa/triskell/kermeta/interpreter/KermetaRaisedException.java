@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.21 2008-02-14 07:13:56 uid21732 Exp $
+/* $Id: KermetaRaisedException.java,v 1.22 2008-02-15 14:07:17 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -11,6 +11,7 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
+
 
 import org.kermeta.model.KermetaModelHelper;
 
@@ -101,7 +102,7 @@ public class KermetaRaisedException extends Error {
 	    else // by default, we will print the toString representation of the raised object
 	    {
 		    CallableOperation coperation = target.getOperationByName("toString");
-	    	RuntimeObject rovalue = (RuntimeObject) interpreter.invoke(raised_object, coperation.getOperation(), new ArrayList());
+	    	RuntimeObject rovalue = (RuntimeObject) interpreter.invoke(raised_object, coperation.getOperation(), new ArrayList<RuntimeObject>());
 	    	result += fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(rovalue);
 	    }
     	if(issetContextString())
@@ -188,9 +189,14 @@ public class KermetaRaisedException extends Error {
         // kcoreObject can be null!
         return context;
     }
+    
+  
 
     /**
      * Helper method that create an exception for Kermeta 
+     * The other operation with a context is better than this one, please consider using the version that give context informations
+     * Howver thanks to this constructor which doesn't set the context string, the JavaStaticCall in ExpressionInterpreter is able to detect
+     * that no contextString is set and then intercept the exception and fill the data
      * @param kermetaExceptionName name of the created exception
      * @param exceptionMessage message associated to the exception
      * @param interpreter
@@ -221,7 +227,7 @@ public class KermetaRaisedException extends Error {
 	    String context = "";	    
 	    RuntimeObject cause_object= memory.getRuntimeObjectForFObject(contextException);	    
         fr.irisa.triskell.kermeta.language.structure.Object fobject = null;
-        if(cause_object != null) {
+        if(cause_object != null && contextException != null) {
 	        if (cause_object.getKCoreObject() != null)
 	        {
 	        	fobject = (fr.irisa.triskell.kermeta.language.structure.Object)cause_object.getKCoreObject();
@@ -230,12 +236,15 @@ public class KermetaRaisedException extends Error {
 	        else
 	        {
 	            System.err.println("RuntimeObject with no kcore object : " + cause_object);
-	            context += "Context not available : (internal RuntimeObject with no kcore object : " + cause_object +")";
+	            context += "Context not directly available : (internal RuntimeObject with no kcore object : " + cause_object +")\n";
+	        	// context has not been set explicitly use the interpreter context
+	        	context += new Traceback(interpreter, interpreter.getParent()).getStackTrace();
 	        }
 	        
         }
         else {
-        	context += "Context not available : cause_object is null";
+        	// context has not been set explicitly use the interpreter context
+        	context += new Traceback(interpreter, interpreter.getParent()).getStackTrace();
         }
 	    
 	    CallableProperty cproperty2 = target.getPropertyByName("stackTrace");
