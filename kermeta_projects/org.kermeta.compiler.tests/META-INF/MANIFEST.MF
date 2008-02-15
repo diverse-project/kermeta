@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.io.loader,
  fr.irisa.triskell.kermeta.kpm,
  org.junit4,
- org.eclipse.emf.compare.diff
+ org.eclipse.emf.compare.diff,
+ fr.irisa.triskell.kermeta.ket
 Export-Package: org.kermeta.compiler.tests,
  org.kermeta.compiler.tests.helper,
  org.kermeta.compiler.tests.structure
