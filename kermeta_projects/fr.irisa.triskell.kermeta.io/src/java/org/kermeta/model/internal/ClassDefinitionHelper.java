@@ -1,6 +1,6 @@
 
 
-/*$Id: ClassDefinitionHelper.java,v 1.5 2008-02-14 14:08:56 ftanguy Exp $
+/*$Id: ClassDefinitionHelper.java,v 1.6 2008-02-18 08:20:26 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -57,31 +57,51 @@ public class ClassDefinitionHelper {
 	 * @return
 	 */
 	static public List<Operation> getSuperOperations(ClassDefinition base, String operationName) {
-		Map<TypeDefinition, Integer> l = getContext(base);
+		TreeMap<Integer, List<TypeDefinition>> l = _getContext(base);
 		/*
 		 * 
 		 * Getting the class definition to remove. We do not want the base class and its aspects.
 		 * 
 		 */
-		String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(base);
+	/*	String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(base);
 		List<ClassDefinition> classDefinitionToRemove = new ArrayList<ClassDefinition>();
-		for ( TypeDefinition td : l.keySet() ) {
+		for ( TypeDefinition td : l.() ) {
 			if ( td instanceof ClassDefinition) {
 				ClassDefinition cd = (ClassDefinition) td;
 				if ( KermetaModelHelper.NamedElement.qualifiedName(cd).equals(qualifiedName) )
 					classDefinitionToRemove.add(cd);
 			}
-		}
+		}*/
 		/*
 		 * 
 		 * Removing the extra class definitions.
 		 * 
 		 */
-		for ( ClassDefinition cd : classDefinitionToRemove )
-			l.remove(cd);
+/*		for ( ClassDefinition cd : classDefinitionToRemove )
+			l.remove(cd);*/
 		
+		l.remove(0);
+				
 		TreeMap<Integer, List<Operation>> result = new TreeMap<Integer, List<Operation>>();
-		for ( Entry<TypeDefinition, Integer> entry : l.entrySet() ) {
+		for (Entry<Integer, List<TypeDefinition>> entry : l.entrySet()) {
+			for (TypeDefinition td : entry.getValue() ) {
+				if ( td instanceof ClassDefinition ) {
+					ClassDefinition cd = (ClassDefinition) td;
+					for ( Operation operation : cd.getOwnedOperation() )
+						if ( operation.getName().equals(operationName) ) {
+							List<Operation> operations = result.get( entry.getKey() );
+							if ( operations == null ) {
+								operations = new ArrayList<Operation>();
+								result.put( entry.getKey(), operations );
+							}
+							operations.add( operation );
+						}
+				}
+			}
+		}
+		
+		
+		/*for ( Entry<TypeDefinition, Integer> entry : l.entrySet() ) {
 			if ( entry.getKey() instanceof ClassDefinition ) {
 				ClassDefinition cd = (ClassDefinition) entry.getKey();
 				for ( Operation operation : cd.getOwnedOperation() )
@@ -94,15 +114,15 @@ public class ClassDefinitionHelper {
 						operations.add( operation );
 					}
 			}
-		}
+		}*/
 		
 		if ( result.size() == 0 || result.get(result.firstKey()) == null )
 			return new ArrayList<Operation>();
 		return result.get(result.firstKey());
 	}
 	
-	static public Map<TypeDefinition, Integer> getContext(ClassDefinition c) {
-		Map<TypeDefinition, Integer> result = new HashMap<TypeDefinition, Integer>();
+	static private TreeMap<Integer, List<TypeDefinition>> _getContext(ClassDefinition c) {
+		TreeMap<Integer, List<TypeDefinition>> result = new TreeMap<Integer, List<TypeDefinition>>();
 		List<KermetaUnit> units = new ArrayList<KermetaUnit>();
 		KermetaUnit initialUnit = KermetaUnitHelper.getKermetaUnitFromObject(c);
 		units.add(initialUnit);
@@ -111,13 +131,26 @@ public class ClassDefinitionHelper {
 		return result;
 	}
 	
-	static private void getContext(List<KermetaUnit> units, ClassDefinition current, Map<TypeDefinition, Integer> l, int deep) {
-		if ( l.containsKey(current) )
+	static public List<TypeDefinition> getContext(ClassDefinition c) {
+		List<TypeDefinition> result = new ArrayList<TypeDefinition>();
+		TreeMap<Integer, List<TypeDefinition>> context = _getContext(c);
+		for (Entry<Integer, List<TypeDefinition>> e : context.entrySet())
+			result.addAll(e.getValue());
+		return result;
+	}
+	
+	static private void getContext(List<KermetaUnit> units, ClassDefinition current, TreeMap<Integer, List<TypeDefinition>> map, int deep) {
+		if ( map.get(deep) != null && map.get(deep).contains(current) )
 			return;
 		
 		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(current);
 		if ( units.contains(unit) ) {
-			l.put(current, deep);
+			List<TypeDefinition> l = map.get(deep);
+			if ( l == null ) {
+				l = new ArrayList<TypeDefinition>();
+				map.put(deep, l);
+			}
+			l.add(current);
 		
 			/*
 			 * 
@@ -127,7 +160,7 @@ public class ClassDefinitionHelper {
 			for ( Type supertype : current.getSuperType() ) {
 				if ( supertype instanceof Class ) {
 					Class superclass = (Class) supertype;
-					getContext(units, (ClassDefinition) superclass.getTypeDefinition(), l, deep+1);
+					getContext(units, (ClassDefinition) superclass.getTypeDefinition(), map, deep+1);
 				}
 			}
 			
@@ -139,7 +172,7 @@ public class ClassDefinitionHelper {
 			if ( unit.getAspects() != null && unit.getAspects().get(current) != null ) {
 				for ( TypeDefinition aspect : unit.getAspects().get(current) )  {
 					if ( aspect instanceof ClassDefinition )
-						getContext( units, (ClassDefinition) aspect, l, deep+1 );
+						getContext( units, (ClassDefinition) aspect, map, deep );
 				}
 			}
 			
@@ -151,7 +184,7 @@ public class ClassDefinitionHelper {
 			if ( unit.getBaseAspects() != null && unit.getBaseAspects().get(current) != null ) {
 				for ( TypeDefinition base : unit.getBaseAspects().get(current) )  {
 					if ( base instanceof ClassDefinition )
-						getContext( units, (ClassDefinition) base, l, deep+1 );
+						getContext( units, (ClassDefinition) base, map, deep );
 				}
 			}
 		}	
@@ -165,9 +198,9 @@ public class ClassDefinitionHelper {
 	 * @return
 	 */
 	static public Operation getSuperOperation(ClassDefinition base, String superClassQualifiedName, String operationName) {
-		Map<TypeDefinition, Integer> l = getContext(base);
+		List<TypeDefinition> l = getContext(base);
 		l.remove(base);
-		for ( TypeDefinition td : l.keySet() ) {
+		for ( TypeDefinition td : l ) {
 			if ( td instanceof ClassDefinition ) {
 				ClassDefinition cd = (ClassDefinition) td;
 				if ( KermetaModelHelper.NamedElement.qualifiedName(cd).equals(superClassQualifiedName) )
@@ -195,7 +228,7 @@ public class ClassDefinitionHelper {
 	 */
 	public static List<Property> getAllProperties(ClassDefinition cls) {
 		List<Property> properties = new ArrayList<Property>();
-		for ( TypeDefinition typeDefinition : getContext(cls).keySet() )
+		for ( TypeDefinition typeDefinition : getContext(cls) )
 			if ( typeDefinition instanceof ClassDefinition )
 				properties.addAll( ((ClassDefinition) typeDefinition).getOwnedAttribute() );
 		return properties;
@@ -224,7 +257,7 @@ public class ClassDefinitionHelper {
 	 */
 	public static List<Operation> getAllOperations(ClassDefinition cls) {
 		List<Operation> operations = new ArrayList<Operation>();
-		for ( TypeDefinition typeDefinition : getContext(cls).keySet() )
+		for ( TypeDefinition typeDefinition : getContext(cls) )
 			if ( typeDefinition instanceof ClassDefinition )
 				operations.addAll( ((ClassDefinition) typeDefinition).getOwnedOperation() );
 		return operations;
@@ -232,7 +265,7 @@ public class ClassDefinitionHelper {
 	
 	public static List<Constraint> getAllInvariants(ClassDefinition cls) {
 		List<Constraint> result = new ArrayList<Constraint>();	
-		for ( TypeDefinition typeDefinition : getContext(cls).keySet() )
+		for ( TypeDefinition typeDefinition : getContext(cls) )
 			if ( typeDefinition instanceof ClassDefinition )
 				result.addAll( ((ClassDefinition) typeDefinition).getInv() );
 		return result;

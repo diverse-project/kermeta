@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaModelHelper.java,v 1.3 2008-02-14 13:10:02 ftanguy Exp $
+/*$Id: KermetaModelHelper.java,v 1.4 2008-02-18 08:20:26 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	KermetaModelHelper.java
 * License : EPL
@@ -208,7 +208,7 @@ public class KermetaModelHelper {
 		}
 		
 		public Collection<TypeDefinition> getContext(ClassDefinition c) {
-			return ClassDefinitionHelper.getContext(c).keySet();
+			return ClassDefinitionHelper.getContext(c);
 		}
 				
 		public Property getPropertyByName(ClassDefinition c, String name) {
