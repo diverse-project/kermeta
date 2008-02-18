@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.30 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: Ecore2KMPass2.java,v 1.31 2008-02-18 08:19:21 ftanguy Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -109,7 +109,6 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 			context.addTypeVar(tv);
 		
 		acceptList( node.getETypeParameters() );
-		System.out.println( node.getName());
 		acceptList( node.getEAttributes() );
 		acceptList( node.getEOperations() );
 		acceptList( node.getEReferences() );
