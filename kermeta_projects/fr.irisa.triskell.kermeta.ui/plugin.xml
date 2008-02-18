@@ -182,7 +182,7 @@
        <actionSet
              id="org.kermeta.ui.actionSet"
              label="Kermeta Global Actions"
-             visible="false">
+             visible="true">
           <action
                 class="fr.irisa.triskell.kermeta.actions.DestroyKermetaUnitsFromMemory"
                 icon="images/kermeta-trash.png"
