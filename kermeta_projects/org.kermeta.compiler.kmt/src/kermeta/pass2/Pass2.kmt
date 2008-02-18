@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.5 2008-02-07 18:20:20 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.6 2008-02-18 16:04:40 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -40,9 +40,6 @@ package structure {
 		operation applyPass2BehaviorKmt() is do
 			// TODO
 		end
-	}
-	
-	class Pass2 {
 	}
 	
 	aspect class ClassDefinition {
