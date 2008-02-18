@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadAST.java,v 1.2 2008-02-14 07:12:48 uid21732 Exp $
+/*$Id: LoadAST.java,v 1.3 2008-02-18 08:49:00 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	LoadAST.java
 * License : EPL
@@ -29,8 +29,11 @@ public class LoadAST extends KMTLoadingAction {
 		try {
 			CompUnit ast;
 			String content = null;
-			if ( options != null && options.containsKey("content") )
+			if ( options != null && options.containsKey("content") ) {
 				content = (String) options.get("content");
+				// This option can only be used once because it is only for the first file.
+				options.remove("content");
+			}
 			if ( content != null )
 				ast = ASTHelper.parseString( content );
 			else
