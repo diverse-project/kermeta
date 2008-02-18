@@ -220,7 +220,8 @@ public class LoaderPlugin extends Plugin {
 		Loader[] loaders = new Loader[loadingContext.getLoaders().size()];
 		loadingContext.getLoaders().toArray(loaders);
 		for ( Loader l : loaders ) {
-			if ( ! l.getDatas().getKermetaUnit().isFramework() && l.getDatas().getKermetaUnit() != ecore)
+			// The Kermeta Unit can be null
+			if ( (l.getDatas().getKermetaUnit() != null) && ! l.getDatas().getKermetaUnit().isFramework() && l.getDatas().getKermetaUnit() != ecore)
 				unload(l.getDatas().getKermetaUnit().getUri());
 		}
 	}
