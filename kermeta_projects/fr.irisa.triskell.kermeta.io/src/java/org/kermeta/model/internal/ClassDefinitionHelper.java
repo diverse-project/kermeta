@@ -1,6 +1,6 @@
 
 
-/*$Id: ClassDefinitionHelper.java,v 1.6 2008-02-18 08:20:26 ftanguy Exp $
+/*$Id: ClassDefinitionHelper.java,v 1.7 2008-02-18 13:54:34 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -140,8 +140,11 @@ public class ClassDefinitionHelper {
 	}
 	
 	static private void getContext(List<KermetaUnit> units, ClassDefinition current, TreeMap<Integer, List<TypeDefinition>> map, int deep) {
-		if ( map.get(deep) != null && map.get(deep).contains(current) )
-			return;
+		for ( List<TypeDefinition> l : map.values() )
+			if ( l.contains(current) )
+				return;
+//		if ( map.get(deep) != null && map.get(deep).contains(current) )
+	//		return;
 		
 		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(current);
 		if ( units.contains(unit) ) {
