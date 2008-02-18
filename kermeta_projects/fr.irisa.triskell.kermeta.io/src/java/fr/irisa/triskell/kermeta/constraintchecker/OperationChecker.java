@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.27 2008-02-14 07:13:17 uid21732 Exp $
+/* $Id: OperationChecker.java,v 1.28 2008-02-18 13:55:02 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -431,11 +431,13 @@ public class OperationChecker extends AbstractChecker {
 		String message = op1.getOwningClass().getName()+"." + op1.getName() + ": ReturnType ";
 		Type t1 = op1.getType(); Type t2 = op2.getType();
 		if (isVoidType(t1) && isVoidType(t2)) isConform = true;
-		else if ((isVoidType(t1) && !isVoidType(t2)) || (!isVoidType(t1) && isVoidType(t2))){
+		// See version 1.21, this piece of code has been added for overloading operations.
+		// There is no overloading anymore, we just disable this code for the moment.
+		/*else if ((isVoidType(t1) && !isVoidType(t2)) || (!isVoidType(t1) && isVoidType(t2))){
 			// as kermeta is invariant, the return type mus be the same even if one of them is Void (which is usually conform to everything)
 			message += " uses incompatible return types ";
 			isConform = false;
-		}
+		}*/
 		// else if (op1.getType()==null && op2.getType()==null)  isConform = true; 
 		else if (op1.getType()==null || op2==null || op2.getType()==null) 
 		{
