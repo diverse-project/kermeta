@@ -1,0 +1,18 @@
+/* $Id: $
+ * Creation date: February 18, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package ~Void;
+
+require kermeta
+require "generic.kmt"
+using kermeta::standard
+
+class BoundClass inherits GenericClass<Void, String>
+{
+	//operation test(p : String) is 
+	//	abstract
+}
