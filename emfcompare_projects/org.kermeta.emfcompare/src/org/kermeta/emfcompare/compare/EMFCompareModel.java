@@ -1,4 +1,4 @@
-/* $Id: EMFCompareModel.java,v 1.1 2007-12-17 13:34:06 cfaucher Exp $
+/* $Id: EMFCompareModel.java,v 1.2 2008-02-18 09:25:51 cfaucher Exp $
  * Project   : org.kermeta.emfcompare
  * File      : EMFCompareModel.java
  * License   : EPL
@@ -12,13 +12,12 @@ package org.kermeta.emfcompare.compare;
 
 import java.io.IOException;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.diff.generic.DiffMaker;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
+import org.eclipse.emf.compare.diff.service.DiffService;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.statistic.DifferencesServices;
+import org.eclipse.emf.compare.match.service.MatchService;
 import org.eclipse.emf.compare.util.ModelUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,7 +45,7 @@ public class EMFCompareModel {
 		java.lang.String diffModelPath = (java.lang.String) fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(param1);
 		
 		try {
-			ModelUtils.save(getDiffModel(leftModelPath, rightModelPath), ResourceHelper.cleanIfNecessaryPath(diffModelPath));
+			ModelUtils.save(getDiffModel(leftModelPath, rightModelPath), ResourceHelper.getIFile(diffModelPath).getLocation().toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +62,7 @@ public class EMFCompareModel {
 		java.lang.String matchModelPath = (java.lang.String) fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(param1);
 		
 		try {
-			ModelUtils.save(getMatchModel(leftModelPath, rightModelPath), ResourceHelper.cleanIfNecessaryPath(matchModelPath));
+			ModelUtils.save(getMatchModel(leftModelPath, rightModelPath), ResourceHelper.getIFile(matchModelPath).getLocation().toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,7 +72,7 @@ public class EMFCompareModel {
 	}
 	
 	private static DiffModel getDiffModel(java.lang.String leftModelPath, java.lang.String rightModelPath) {
-		final DiffModel diff = new DiffMaker().doDiff(getMatchModel(leftModelPath, rightModelPath));
+		final DiffModel diff = DiffService.doDiff(getMatchModel(leftModelPath, rightModelPath));
 		return diff;
 	}
 	
@@ -100,7 +99,7 @@ public class EMFCompareModel {
 	        final EObject model2 = right_resource.getContents().get(0);
 			
 			// Creates the match then the diff model for those two models
-			final MatchModel match = new DifferencesServices().modelMatch(model1, model2, new NullProgressMonitor(), null);
+			final MatchModel match = MatchService.doMatch(model1, model2, null);
 			
 			return match;
 			
