@@ -11,13 +11,15 @@ class Main
 {
 	operation main() : Void is
 	do
-		var aPrinter : Printer init Printer.new
+		var aPrinter : ClassWithBehavior init ClassWithBehavior.new
 		aPrinter.print
 	end
 }
 
-class Printer
+class ClassWithBehavior
 {
+	attribute attr1 : String[0..1]
+	
 	operation print() : Void is
 	do
 		var text1 : String init "Hello "
@@ -29,21 +31,23 @@ class Printer
 
 }
 
-class Printer2 inherits Printer, Main {
+class InheritedClassWithBehavior inherits ClassWithBehavior, EmptyClass {
 
-	attribute attr1 : String[0..1]
-	
 	operation test() : String is do
 		attr1 := "test_attr1"
 		result := attr1
 	end
 }
 
-class Printer3<A>
+class EmptyClass
 {
 }
 
-class Printer4<B,String>
+class ParameterizedEmptyClass<A>
+{
+}
+
+class ParameterizedClass<B,String>
 {
 	attribute attr1 : B [0..1]
 	
