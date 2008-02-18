@@ -17,7 +17,8 @@ Require-Bundle: org.eclipse.text,
  fr.irisa.triskell.kermeta.io,
  fr.irisa.triskell.eclipse.util,
  fr.irisa.triskell.kermeta.kpm,
- fr.irisa.triskell.kermeta.ui
+ fr.irisa.triskell.kermeta.ui,
+ org.eclipse.ui.ide
 Export-Package: fr.irisa.triskell.kermeta.ket,
  fr.irisa.triskell.kermeta.ket.builder,
  fr.irisa.triskell.kermeta.ket.kpm.actions,

@@ -28,5 +28,30 @@
          point="fr.irisa.triskell.kermeta.kpm.javaAction">
       <Action class="fr.irisa.triskell.kermeta.ket.kpm.actions.Ket2Kmt"/>
    </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="fr.irisa.triskell.kermeta.KermetaWizard"
+            class="fr.irisa.triskell.kermeta.ket.wizard.NewKETFileWizard"
+            finalPerspective="kermetaPerspective"
+            icon="icons/ket.png"
+            id="org.kermeta.wizard.newKETFile"
+            name="New KET File"
+            preferredPerspectives="kermetaPerspective"
+            project="false">
+         <description>
+            Create a new KET File with a default content.
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IFolder">
+         </selection>
+         <selection
+               class="org.eclipse.core.resources.IProject">
+         </selection>
+         <selection
+               class="org.eclipse.core.resources.IFile">
+         </selection>
+      </wizard>
+   </extension>
    
 </plugin>
