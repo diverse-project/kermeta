@@ -1,5 +1,7 @@
 package flora2;
 
+require kermeta
+
 class Program inherits visitors::Visitable
 {
 	attribute clauses : Clause[0..*]
