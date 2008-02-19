@@ -1,4 +1,4 @@
-/* $Id: ClassConformanceChecker.java,v 1.5 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: ClassConformanceChecker.java,v 1.6 2008-02-19 10:11:41 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ClassConformanceChecker.java
 * License : EPL
@@ -62,13 +62,13 @@ public class ClassConformanceChecker {
 		 * If this is not an aspect, just try to get the context on the provided type.
 		 * 
 		 */
-		String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(provided.getTypeDefinition());
-		ClassDefinition cd = (ClassDefinition) unit.getTypeDefinitionByQualifiedName(qualifiedName);
+//		String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(provided.getTypeDefinition());
+//		ClassDefinition cd = (ClassDefinition) unit.getTypeDefinitionByQualifiedName(qualifiedName);
 		Collection<TypeDefinition> context = null;
-		if ( cd != null )
-			context = KermetaModelHelper.ClassDefinition.getContext( cd );
-		else
-			context = KermetaModelHelper.ClassDefinition.getContext( (ClassDefinition) provided.getTypeDefinition() );
+//		if ( cd != null )
+			context = KermetaModelHelper.ClassDefinition.getFullContext( (ClassDefinition) provided.getTypeDefinition() );
+//		else
+//			context = KermetaModelHelper.ClassDefinition.getContext( (ClassDefinition) provided.getTypeDefinition() );
 
 		/*
 		 * 

@@ -1,6 +1,6 @@
 
 
-/*$Id: ClassDefinitionHelper.java,v 1.7 2008-02-18 13:54:34 ftanguy Exp $
+/*$Id: ClassDefinitionHelper.java,v 1.8 2008-02-19 10:11:40 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -13,9 +13,7 @@
 package org.kermeta.model.internal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
@@ -138,6 +136,70 @@ public class ClassDefinitionHelper {
 			result.addAll(e.getValue());
 		return result;
 	}
+	
+	static public List<TypeDefinition> getFullContext(ClassDefinition c) {
+		List<TypeDefinition> result = new ArrayList<TypeDefinition>();
+		TreeMap<Integer, List<TypeDefinition>> context = _getFullContext(c);
+		for (Entry<Integer, List<TypeDefinition>> e : context.entrySet())
+			result.addAll(e.getValue());
+		return result;
+	}
+	
+	static private TreeMap<Integer, List<TypeDefinition>> _getFullContext(ClassDefinition c) {
+		TreeMap<Integer, List<TypeDefinition>> result = new TreeMap<Integer, List<TypeDefinition>>();
+		getFullContext(c, result, 0);
+		return result;
+	}
+	
+	static private void getFullContext(ClassDefinition current, TreeMap<Integer, List<TypeDefinition>> map, int deep) {
+		for ( List<TypeDefinition> l : map.values() )
+			if ( l.contains(current) )
+				return;
+		
+		List<TypeDefinition> l = map.get(deep);
+		if ( l == null ) {
+			l = new ArrayList<TypeDefinition>();
+			map.put(deep, l);
+		}
+		l.add(current);
+		
+		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(current);
+		/*
+		 * 
+		 * Supertypes
+		 * 
+		 */
+		for ( Type supertype : current.getSuperType() ) {
+			if ( supertype instanceof Class ) {
+				Class superclass = (Class) supertype;
+				getFullContext( (ClassDefinition) superclass.getTypeDefinition(), map, deep+1);
+			}
+		}
+			
+		/*
+		 * 
+		 * Aspects
+		 * 
+		 */
+		if ( unit.getAspects() != null && unit.getAspects().get(current) != null ) {
+			for ( TypeDefinition aspect : unit.getAspects().get(current) )  {
+				if ( aspect instanceof ClassDefinition )
+					getFullContext( (ClassDefinition) aspect, map, deep );
+			}
+		}
+		
+		/*
+		 * 
+		 * Base Classes
+		 *  
+		 */
+		if ( unit.getBaseAspects() != null && unit.getBaseAspects().get(current) != null ) {
+			for ( TypeDefinition base : unit.getBaseAspects().get(current) )  {
+				if ( base instanceof ClassDefinition )
+					getFullContext( (ClassDefinition) base, map, deep );
+			}
+		}
+	}	
 	
 	static private void getContext(List<KermetaUnit> units, ClassDefinition current, TreeMap<Integer, List<TypeDefinition>> map, int deep) {
 		for ( List<TypeDefinition> l : map.values() )
