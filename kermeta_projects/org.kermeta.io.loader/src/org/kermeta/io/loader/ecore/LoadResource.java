@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadResource.java,v 1.2 2008-02-14 07:12:50 uid21732 Exp $
+/*$Id: LoadResource.java,v 1.3 2008-02-19 17:10:20 dvojtise Exp $
 * Project : org.kermeta.io.loader
 * File : 	LoadResource.java
 * License : EPL
@@ -45,6 +45,9 @@ public class LoadResource extends EcoreLoadingAction {
 			ResourceSet resourceSet = new ResourceSetImpl();
 			URI uri = URI.createURI( datas.getKermetaUnit().getUri() );
 			Resource resource = resourceSet.createResource(uri);
+			if(resource == null){
+				throw new Error("Kermeta error resource is null ! was not able to create a resource from " + uri.toString());
+			}
 			try {
 				resource.load(null);
 				EcoreUtil.resolveAll(resourceSet);
