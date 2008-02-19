@@ -1,4 +1,4 @@
-/* $Id: ConstraintInterpreter.java,v 1.13 2008-02-14 07:13:56 uid21732 Exp $
+/* $Id: ConstraintInterpreter.java,v 1.14 2008-02-19 15:20:59 ftanguy Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -63,8 +63,16 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 				// TODO : check that parentPre implies Pre
 				
 				// Check the parents' pre conditions
-				for (Object next : superOp.getPre())
+				for (Object next : superOp.getPre()) {
+					interpreterContext.peekCallFrame().pushExpressionContext();
+					int size = superOp.getOwnedParameter().size();
+					for ( int i=0; i < size; i++ ) {
+						RuntimeObject ro = interpreterContext.peekCallFrame().getVariableByName(node.getOwnedParameter().get(i).getName()).getRuntimeObject();
+						interpreterContext.peekCallFrame().peekExpressionContext().defineVariable(superOp.getOwnedParameter().get(i).getName(), ro);
+					}
 					this.accept((Constraint)next);
+					interpreterContext.peekCallFrame().popExpressionContext();
+				}
 				
 			}
 
@@ -80,10 +88,18 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 				this.accept((Constraint)next);
 
 			//TODO : check that post implies parentPost
-			for (Operation superOp : superOps){
+			for (Operation superOp : superOps) {
 				// Check the parents' post conditions
-				for (Object next : superOp.getPost())
+				for (Object next : superOp.getPost()) {
+					interpreterContext.peekCallFrame().pushExpressionContext();
+					int size = superOp.getOwnedParameter().size();
+					for ( int i=0; i < size; i++ ) {
+						RuntimeObject ro = interpreterContext.peekCallFrame().getVariableByName(node.getOwnedParameter().get(i).getName()).getRuntimeObject();
+						interpreterContext.peekCallFrame().peekExpressionContext().defineVariable(superOp.getOwnedParameter().get(i).getName(), ro);
+					}
 					this.accept((Constraint)next);
+					interpreterContext.peekCallFrame().popExpressionContext();
+				}
 			}
 			// Set the result
 			result = interpreterContext.peekCallFrame().getOperationResult();
