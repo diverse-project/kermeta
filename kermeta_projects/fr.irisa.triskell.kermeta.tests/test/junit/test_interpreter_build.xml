@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.16 2008-01-07 10:41:20 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.17 2008-02-19 10:46:41 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -26,6 +26,8 @@
 	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\@dot" />
 	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\@dot" />
 	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\@dot" />
+	<property name="kermeta.io.loader.jar" location="..\..\..\org.kermeta.io.loader\@dot" />
+	<property name="kermeta.interest.jar" location="..\..\..\org.kermeta.interest\@dot" />
 	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\@dot" />
 	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\@dot" />
 	<property name="kermeta.merger.jar" location="..\..\..\org.kermeta.merger\@dot" />
@@ -62,7 +64,9 @@
 		<pathelement location="${kermeta.model.jar}" />
 		<pathelement location="${kermeta.interpreter.jar}" />
 		<pathelement location="${kermeta.io.jar}" />
+		<pathelement location="${kermeta.io.loader.jar}" />
 		<pathelement location="${kermeta.merger.jar}" />
+		<pathelement location="${kermeta.interest.jar}" />
 		<pathelement location="${kermeta.model.jar}" />
 		<pathelement location="${kermeta.tests.jar}" />
 		<pathelement location="${triskell.eclipse.util.jar}" />
