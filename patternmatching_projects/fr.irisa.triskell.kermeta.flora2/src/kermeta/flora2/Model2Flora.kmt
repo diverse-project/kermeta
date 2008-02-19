@@ -1,4 +1,4 @@
-/* $Id: Model2Flora.kmt,v 1.5 2007-07-26 12:40:07 bmorin Exp $
+/* $Id: Model2Flora.kmt,v 1.6 2008-02-19 14:27:19 bmorin Exp $
  * Creation date: November 9, 2006
  * License:
  * Copyright:
@@ -14,8 +14,8 @@ require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ec
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/reflection/ReflectionHandler.kmt"
 require kermeta  
       
-using kermeta::standard 
-using kermeta::reflection 
+using kermeta::language::structure
+using kermeta::standard
 using kermeta::persistence 
 using kermeta::utils 
 
@@ -67,20 +67,20 @@ class Model2Flora inherits Ecore2FloraBasicElements {
         //var propertyInstances : Sequence<Object> init handler.getSequenceProperties(obj, pro)
         
         //modif brice
-		var propertyInstances : Collection<kermeta::reflection::Object>
-        propertyInstances:=Set<kermeta::reflection::Object>.new
+		var propertyInstances : Collection<Object>
+        propertyInstances:=Set<Object>.new
         
         //modif brice
         if(not(pro.isDerived)) then
         if(pro.upper==1) then
-        	var temp:kermeta::reflection::Object
+        	var temp:Object
         	temp?=obj.get(pro)
         	//stdio.writeln("adding: "+pro.name+"("+pro.type.toString+")")
         	if (temp!=void) then
 		        propertyInstances.add(temp)
 		    end
 	    else
-	    	var tempColl:Collection<kermeta::reflection::Object>
+	    	var tempColl:Collection<Object>
 	    	tempColl?=obj.get(pro)
 	    	propertyInstances.addAll(tempColl)
 	    end
@@ -94,9 +94,9 @@ class Model2Flora inherits Ecore2FloraBasicElements {
         
         // Each instance of a property has it own expression
         //for example Obj[name -> "toto"], ..., Obj[address -> "Rennes"]
-        from var it3 : Iterator<kermeta::reflection::Object/*Object*/> init propertyInstances.iterator      
+        from var it3 : Iterator<Object/*Object*/> init propertyInstances.iterator      
         until it3.isOff loop        
-          var inst : kermeta::reflection::Object init it3.next
+          var inst : Object init it3.next
           var proType : Type init  pro.type
 		  /*stdio.writeln("   ***")          
           stdio.writeln("   inst:"+inst.toString+" pro.upper="+pro.upper.toString+" "+pro.name+"("+pro.type.toString+")")

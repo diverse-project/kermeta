@@ -1,4 +1,4 @@
-/* $Id: ReflectionHandler.kmt,v 1.4 2007-12-21 15:16:31 bmorin Exp $
+/* $Id: ReflectionHandler.kmt,v 1.5 2008-02-19 14:26:29 bmorin Exp $
  * Creation date: October 17, 2006
  * License:
  * Copyright:
@@ -10,8 +10,8 @@ package kermeta::pattern::reflection;
 
 require kermeta
  
+using kermeta::language::structure
 using kermeta::standard
-using kermeta::reflection
 using kermeta::interpreter
 using kermeta::utils
  

@@ -1,4 +1,4 @@
-/* $Id: Flora2SerializerVisitor.kmt,v 1.4 2007-12-21 15:16:31 bmorin Exp $
+/* $Id: Flora2SerializerVisitor.kmt,v 1.5 2008-02-19 14:27:19 bmorin Exp $
  * Creation date: October 5, 2006
  * License:
  * Copyright:
@@ -13,8 +13,8 @@ package flora2::visitors;
 require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"  
   
+using kermeta::language::structure
 using kermeta::standard
-using kermeta::reflection
 using flora2::visitors
 
 class Flora2SerializerVisitor inherits Visitor
@@ -72,7 +72,7 @@ class Flora2SerializerVisitor inherits Visitor
 	end
 	
 	method visitRule(visitable : flora2::Rule) : flora2::DTString is do 
-	   result := visitable.head.accept(self)+ ":-"+ result visitable.body.accept(self)+"."	
+	   result := visitable.head.accept(self) + ":-"+ visitable.body.accept(self)+"."	
 	end
 	method visitQuery(visitable : flora2::Query) : flora2::DTString is do 
 	   result := "?- "+visitable.body.accept(self)+ "."	
