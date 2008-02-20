@@ -1,4 +1,4 @@
-/* $Id: ModelPattern2Flora.kmt,v 1.4 2007-12-21 16:25:42 bmorin Exp $
+/* $Id: ModelPattern2Flora.kmt,v 1.5 2008-02-20 09:09:35 bmorin Exp $
  * Creation date: October 4, 2006
  * License:
  * Copyright:
@@ -19,7 +19,7 @@ require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Mo
 
     
 using kermeta::standard  
-using kermeta::reflection 
+using kermeta::language::structure 
 using kermeta::persistence 
 using kermeta::interpreter
 using kermeta::utils

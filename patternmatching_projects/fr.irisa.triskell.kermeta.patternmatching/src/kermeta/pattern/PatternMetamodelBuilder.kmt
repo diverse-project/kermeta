@@ -1,4 +1,4 @@
-/* $Id: PatternMetamodelBuilder.kmt,v 1.3 2008-02-13 16:30:26 bmorin Exp $
+/* $Id: PatternMetamodelBuilder.kmt,v 1.4 2008-02-20 09:09:34 bmorin Exp $
  * Creation date: October 12, 2006
  * Authors: Rodrigo Ramos, Olivier Barais, Brice Morin
  */
@@ -8,7 +8,7 @@
 package kermeta::pattern;
 
 require kermeta
-require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/ecoreClone.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/ecoreClone2.kmt"
   
 using kermeta::standard
 using kermeta::persistence
@@ -27,12 +27,16 @@ class PatternMetamodelBuilder {
       pattern.nsURI:=sequencePack.first.nsURI+"/pattern" 
       
       
-      var cache : CloneRoot init CloneRoot.new
-      cache.initialize
+      /*var cache : CloneRoot init CloneRoot.new
+      cache.initialize*/
       
-	  var ewp : EPackage
-	  ewp := sequencePack.first.clone(cache)      
-	  ewp.setType(cache)      
+      
+	  var ewp : EPackage init sequencePack.first
+	  ewp.clone
+	  ewp.setType  
+	  ewp ?= ewp.cloned
+	  //ewp := sequencePack.first.clone(cache)      
+	  //ewp.setType(cache)      
 	 
 	  var frameworkPack : EPackage init patternFramework.first     
       var basicObject : EClass init findClassByName(frameworkPack, "PObject")

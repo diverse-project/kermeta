@@ -1,4 +1,4 @@
-/* $Id: PatternMatchingFlora2.kmt,v 1.10 2008-02-13 08:37:41 bmorin Exp $
+/* $Id: PatternMatchingFlora2.kmt,v 1.11 2008-02-20 09:09:35 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -19,6 +19,7 @@ require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Mo
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/visitor/Flora2SerializerVisitor.kmt"
  
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/ModelPattern2Flora.kmt"
+
 
 
  

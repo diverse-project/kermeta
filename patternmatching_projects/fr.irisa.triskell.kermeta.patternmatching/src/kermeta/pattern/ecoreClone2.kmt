@@ -1,0 +1,355 @@
+/* $Id: ecoreClone2.kmt,v 1.1 2008-02-20 09:09:34 bmorin Exp $
+ * Creation date: May 2, 2006
+ * License: E.P.L.
+ * Copyright: IRISA / INRIA
+ * 	Cloning aspect for the ECore metamodel
+ * Authors:	
+ *	Brice Morin bmorin@irisa.fr
+ */
+package ecore;
+
+require kermeta
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+using kermeta::standard
+using kermeta::utils
+
+aspect class EModelElement
+{
+  	reference cloned : EModelElement
+  
+  	operation clone() is do
+		self.eAnnotations.each{ a | 
+			a.clone
+			var annot : EAnnotation
+			annot ?= a.cloned
+			cloned.eAnnotations.add(annot)
+		}
+	end
+}
+
+
+aspect class ENamedElement
+{
+	method clone() from EModelElement is do
+		super
+		var p : ENamedElement
+		p ?= cloned	
+		p.name := self.name
+	end
+}
+
+aspect class ETypedElement
+{
+
+	method clone() from ENamedElement is do
+		super
+		var p : ETypedElement
+		p ?= cloned
+		p.ordered  := self.ordered
+		p.unique := self.unique
+		//p.lowerBound := self.lowerBound
+		p.lowerBound := 0
+		p.upperBound := self.upperBound
+		p.eType:= self.eType		
+	end
+	
+	operation setType() : Void is do
+		var typedElt : ETypedElement
+		typedElt ?= self.cloned
+		if self.eType != void then		
+			typedElt.eType ?= self.eType.cloned
+		end
+		
+		if self.eGenericType != void then
+			if self.eGenericType.eClassifier != void then
+				var g : EGenericType init EGenericType.new
+				g.eClassifier ?= self.eGenericType.eClassifier.cloned
+				typedElt.eGenericType := g
+			end
+		end
+	end
+}
+
+aspect abstract class EClassifier
+{
+	method clone() is do
+		super
+		var p : EClassifier
+		p ?= cloned		
+		p.instanceClassName := self.instanceClassName		
+	end
+}
+
+aspect class EPackage
+{
+	method clone() is do
+		cloned := EPackage.new
+		super
+		var p : EPackage
+		p ?= cloned
+		
+		p.nsURI := self.nsURI
+		p.nsPrefix := self.nsPrefix
+		
+		self.eClassifiers.each{ a |
+			a.clone 
+			var c : EClassifier
+			c ?= a.cloned
+			p.eClassifiers.add(c)
+			c.ePackage := p
+		}
+		self.eSubpackages.each{ a |
+			a.clone
+			var c : EPackage
+			c ?= a.cloned 
+			p.eSubpackages.add(c)
+			c.eSuperPackage := p
+		}
+	end
+	
+	operation setType() : Void is do
+		self.eSubpackages.each{ a | a.setType}
+		self.eClassifiers.each{ a | 
+			var c : EClass 
+			c ?= a 
+			if (c != void) then 
+				c.setType
+			end
+		}
+	end
+	
+	operation setPObject(pobject : EClass):Void is do
+		self.eSubpackages.each{ a | a.setPObject(pobject)}
+		self.eClassifiers.each{ a | 
+			var c : EClass 
+			c?= a 
+			if (c != void) then 
+				c.setPObject(pobject)
+			end
+		}
+	end		
+}
+
+aspect class EClass 
+{
+	method clone() from EClassifier is do
+		cloned := EClass.new
+	 	super
+		var p : EClass
+		p ?= cloned 
+		 
+		//p.~abstract := self.~abstract
+		p.~abstract := false
+		p.interface := self.interface
+			
+		self.eOperations.each{ a | 
+			a.clone
+			var c : EOperation
+			c ?= a.cloned
+			p.eOperations.add(c)
+			c.eContainingClass := p
+		}
+		self.eStructuralFeatures.each{ a |
+			a.clone 
+			var c : EStructuralFeature
+			c ?= a.cloned
+			p.eStructuralFeatures.add(c)
+			c.eContainingClass := p	
+			if(p.name != void and c.name != void) then	
+				stdio.writeln(p.name+".eStructuralFeatures: "+c.name+" "+c.toString)
+			else
+				stdio.writeln(p.toString+".eStructuralFeatures: "+c.toString)
+			end
+
+		}
+		//stdio.writeln(self.name+" "+self.toString+" -> "+p.name+" "+p.toString)	
+	end
+	
+	operation setType():Void is do	
+		//stdio.writeln("EClass.setType "+name+" "+self.toString)
+		//stdio.writeln("cloned = "+cloned.toString)
+		var cl : EClass
+		cl ?= cloned
+		//stdio.writeln("cloned = "+cl.name)
+		self.eSuperTypes.each{a |
+			var clonedSuper : EClass
+			clonedSuper ?= a.cloned
+			if (clonedSuper != void) then
+				cl.eSuperTypes.add(clonedSuper)	
+			else
+				cl.eSuperTypes.add(a)	
+			end
+		}
+		
+		self.eGenericSuperTypes.each{a | 
+			var clonedSuper : EClass
+			clonedSuper ?= a.eClassifier.cloned
+			var gen : EGenericType init EGenericType.new
+			if (clonedSuper != void) then
+				gen.eClassifier := clonedSuper
+				cl.eGenericSuperTypes.add(gen)	
+			else
+				gen.eClassifier := a.eClassifier
+				cl.eGenericSuperTypes.add(gen)	
+			end
+		}
+		
+		self.eStructuralFeatures.each{a | a.setType}
+		self.eOperations.each{a | a.setType}		
+	end
+	
+	operation setPObject(pobject : EClass):Void is do
+		if (self.eSuperTypes.size == 0) then
+			self.eSuperTypes.add(pobject)
+		end
+	end
+}
+
+
+/** This class refers to any EDataType feature*/
+aspect class EAttribute 
+{			
+	method clone() is do
+	    cloned := EAttribute.new
+	    super
+		var p : EAttribute
+		p ?= cloned
+		p.iD := self.iD
+	end
+		
+}
+
+aspect class EReference 
+{	
+	method clone() is do
+		cloned := EReference.new
+		super
+		var p : EReference
+		p ?= cloned
+
+		p.containment := self.containment
+		p.resolveProxies := self.resolveProxies		
+	end
+	
+	method setType():Void is do
+		super 
+		var p : EReference
+		p ?= cloned
+		if (self.eOpposite != void) then
+			var op : EReference
+			op ?= self.eOpposite.cloned
+			p.eOpposite := op
+		end
+
+	 end
+}
+
+aspect abstract class EStructuralFeature 
+{
+	method clone() from ETypedElement is do	
+	    super	
+		var p : EStructuralFeature
+		p ?= cloned
+		
+		p.changeable := self.changeable
+		p.volatile := self.volatile
+		p.transient := self.transient
+		p.defaultValueLiteral := self.defaultValueLiteral
+		p.unsettable := self.unsettable
+		p.derived := self.derived
+	end	
+}
+
+aspect class EOperation
+{
+	method clone() from ETypedElement is do
+		cloned := EOperation.new
+		super
+		var p : EOperation
+		p ?= cloned
+		p.eParameters.each{a |
+			a.clone
+			var c : EParameter
+			c ?= a.cloned
+			p.eParameters.add(c)
+			c.eOperation := p	
+		}
+	end
+	
+	method setType():Void is do
+		super
+		self.eParameters.each{a | a.setType}	
+	 end	 
+}
+	
+aspect class EParameter
+{
+	method clone() from ETypedElement is do
+		cloned := EParameter.new
+		super
+		var p : EParameter
+		p ?= cloned
+	end
+}
+	
+aspect class EDataType
+{
+	method clone() from EClassifier is do
+		//test if cloned is an EDataType or a concrete sub-class of EDataType (EEnum)
+		
+		var e : EEnum
+		e ?= self
+		if e == void then
+			//stdio.writeln("cloning a real datatype")
+			cloned := EDataType.new
+		end
+		super
+		var p : EDataType
+		p ?= cloned
+		p.serializable := self.serializable
+		p.instanceTypeName := self.instanceTypeName
+	end
+}
+
+aspect class EAnnotation
+{
+	method clone() is do
+		cloned := EAnnotation.new
+		super
+		var p : EAnnotation
+		p ?= cloned		
+		p.source := self.source
+	end
+}
+
+aspect class EEnum 
+{
+	method clone() is do
+		cloned := EEnum.new
+		super
+		var p : EEnum
+		p ?= cloned
+		self.eLiterals.each{a |
+			a.clone
+			var c : EEnumLiteral
+			c ?= a.cloned
+			p.eLiterals.add(c)
+			c.eEnum := p
+		}
+	end
+}
+	
+aspect class EEnumLiteral
+{
+	method clone() is do
+		cloned := EEnumLiteral.new
+		super
+		var p : EEnumLiteral
+		p ?= cloned
+		p.name := self.name
+		p.~value := self.~value
+//		p.instance := self.instance
+		p.literal := self.literal
+	end
+}
+	

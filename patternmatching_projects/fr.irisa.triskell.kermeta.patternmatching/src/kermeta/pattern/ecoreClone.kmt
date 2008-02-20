@@ -1,4 +1,4 @@
-/* $Id: ecoreClone.kmt,v 1.1 2008-02-13 16:30:26 bmorin Exp $
+/* $Id: ecoreClone.kmt,v 1.2 2008-02-20 09:09:34 bmorin Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -90,9 +90,7 @@ aspect class EClass
 		end
 		
 		self.eStructuralFeatures.each{a|a.setType(r)}
-		self.eOperations.each{a|a.setType(r)}
-		
-		
+		self.eOperations.each{a|a.setType(r)}		
 	end
 	
 	operation setPObject(pobject : EClass):Void is do
@@ -100,7 +98,6 @@ aspect class EClass
 			self.eSuperTypes.add(pobject)
 		end
 	end
-	
 	
 		
 	method clone (r : CloneRoot) : EClassifier is do
