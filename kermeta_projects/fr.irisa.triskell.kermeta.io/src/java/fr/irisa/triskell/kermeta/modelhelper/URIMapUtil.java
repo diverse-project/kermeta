@@ -1,4 +1,4 @@
-/* $Id: URIMapUtil.java,v 1.4 2007-10-23 11:26:25 dvojtise Exp $
+/* $Id: URIMapUtil.java,v 1.5 2008-02-20 10:23:05 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : XMLMap.java
  * License    : EPL
@@ -64,8 +64,10 @@ public class URIMapUtil {
 	           		//System.out.println("TT_EOF");
 	           		break;
 		        case StreamTokenizer.TT_EOL:
-				   	if (key != null && value != null) 
+				   	if (key != null && value != null) {
 				   		addMapEntry(resultMap,key, value);
+				   		IOPlugin.internalLog.info("added map : " + key + " -> " + value);
+				   	}
 	           		key = null;
 	           		value = null;
 					break; 	
