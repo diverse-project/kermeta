@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.11 2008-02-20 12:52:06 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.12 2008-02-20 17:52:57 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -45,16 +45,20 @@ package smartadapters
 			In other words, it executes all the adaptations of the composition protocol  
 			*/
 			operation apply(b:Hashtable<Object, Object>) is do
-				binding := b		
-				reverse.clear
+				var i : Integer init 0
+				binding := b
 				adapt.each{a |
-					if not reverse.contains(a) then 
-					stdio.writeln("#>weaving: "+a.getMetaClass.name+"...")
-					a.getMetaClass().ownedAttribute.each{p |
-						stdio.writeln("#>  "+p.name+": "+a.get(p).toString)
-					}
-					a.execute(true)
-					stdio.writeln("#>weaving: done!")
+					if not reverse.contains(a) then
+						stdio.writeln("Adaptation "+i.toString)
+						stdio.writeln("------------")
+						stdio.writeln("#>weaving: "+a.getMetaClass.name+"...")
+						a.getMetaClass().ownedAttribute.each{p |
+							stdio.writeln("#>  "+p.name+": "+a.get(p).toString)
+						}
+						a.execute(true)
+						stdio.writeln("#>weaving: done!")
+						stdio.writeln("")
+						i := i+1
 					end
 				}
 				//updateClones
@@ -65,16 +69,21 @@ package smartadapters
 			In other words, it performs a roll back.
 			*/
 			operation unweave() is do	
-				adapt.each{a |
-					if reverse.contains(a) then
+				var i : Integer init 0
+				reverse.each{a | 
+					stdio.writeln("Adaptation "+i.toString)
+					stdio.writeln("------------")
 					stdio.writeln("#>unweaving: "+a.getMetaClass.name+"...")
 					a.getMetaClass().ownedAttribute.each{p |
 						stdio.writeln("#>  "+p.name+": "+a.get(p).toString)
 					} 
 					a.execute(false)
 					stdio.writeln("#>unweaving: done!")
-					end
+					stdio.writeln("")
+					i := i+1
+					adapt.remove(a)
 				}
+				reverse.clear
 			end
 			
 			operation initAdapter() : Void is 
@@ -246,24 +255,25 @@ package smartadapters
 	{
 		aspect class DerivableAdapter inherits Adapter
 		{
-			operation resolve(derivation:Derivation):Adapter is do
-				var adapter:DerivableAdapter init DerivableAdapter.new
-				var isChecked:Boolean init true
+			operation resolve(derivation:Derivation) : Adapter is do
+				var adapter : DerivableAdapter init DerivableAdapter.new
+				var isChecked : Boolean init true
 				constraints.each{c | isChecked:=isChecked and c.check(derivation)}
 				if(isChecked) then
 					adapt.each{a | adapter.addAdaptation(derivation,a)}
 					alternatives.each{a | adapter.addAlternative(derivation,a)}
 					if(adapter.isConcretizable) then
 						var concreteAdapter:Adapter init Adapter.new
+						if converter == void then
+							converter := Converter.new
+							converter.initConverter(Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new)
+						end
 						converter.addEntry(adapter.getMetaClass,concreteAdapter.getMetaClass)
 						adapter.adapt.each{a | converter.addEntry(a.getMetaClass, a.getMetaClass)}
-						if(converter==void) then
-							converter:=Converter.new
-						end
-						concreteAdapter?=converter.getConverted(adapter)
-						result:=concreteAdapter
+						concreteAdapter ?= converter.getConverted(adapter)
+						result := concreteAdapter
 					else
-						result:=adapter
+						result := adapter
 					end					
 				else
 					var e:NonApplicableDerivation init NonApplicableDerivation.new
