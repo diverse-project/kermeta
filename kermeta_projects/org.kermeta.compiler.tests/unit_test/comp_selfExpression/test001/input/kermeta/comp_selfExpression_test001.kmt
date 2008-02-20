@@ -1,0 +1,12 @@
+@mainClass "comp_selfExpression_test001::Main"
+@mainOperation "main"
+
+package comp_selfExpression_test001;
+
+require kermeta
+
+class Main {
+	operation main() : Void is do
+		stdio.writeln(self.toString)
+	end
+}

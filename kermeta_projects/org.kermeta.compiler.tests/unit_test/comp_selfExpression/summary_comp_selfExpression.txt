@@ -1,0 +1,1 @@
+<para>A "self" expression is compiled into "this" in Java</para>
