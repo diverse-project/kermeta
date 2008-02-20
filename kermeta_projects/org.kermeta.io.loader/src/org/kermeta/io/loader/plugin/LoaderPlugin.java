@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -44,7 +46,7 @@ public class LoaderPlugin extends Plugin {
 	// The shared instance
 	private static LoaderPlugin plugin;
 	
-	// The logger for this plugin
+	// Log4j logger for this plugin
 	final static public Logger log = LogConfigurationHelper.getLogger("LoaderPlugin");
 
 	/**		A boolean that tells wether the plugin has been initialized or not.		*/
@@ -159,13 +161,13 @@ public class LoaderPlugin extends Plugin {
 				constraintchecker.checkUnit();
 			}
 		} catch (URIMalformedException e) {
-			e.printStackTrace();
+			logErrorMessage("not able to initialize LoaderPlugin", e);
 			return;
 		} catch (NotRegisteredURIException e) {
-			e.printStackTrace();
+			logErrorMessage("not able to initialize LoaderPlugin", e);
 			return;
 		} catch (Throwable e) {
-			e.printStackTrace();
+			logErrorMessage("not able to initialize LoaderPlugin", e);
 			return;
 		}
 	}
@@ -244,7 +246,9 @@ public class LoaderPlugin extends Plugin {
 			Resource resource = resourceSet.createResource(uri);
 			resource.load(null);
 			getDefault().ecoreLoader = (EcoreLoader) resource.getContents().get(0);
-			
+			if(getDefault().ecoreLoader == null){
+				logErrorMessage("not able to load ecoreLoader file from " +uri.toString(),null);
+			}
 			/*
 			 * 
 			 * KMTLoader
@@ -255,6 +259,9 @@ public class LoaderPlugin extends Plugin {
 			resource = resourceSet.createResource(uri);
 			resource.load(null);
 			getDefault().kmtLoader = (KMTLoader) resource.getContents().get(0);
+			if(getDefault().kmtLoader == null){
+				logErrorMessage("not able to load kmtLoader file from " +uri.toString(),null);
+			}
 			
 			/*
 			 * 
@@ -266,9 +273,12 @@ public class LoaderPlugin extends Plugin {
 			resource = resourceSet.createResource(uri);
 			resource.load(null);
 			getDefault().kmLoader = (KMLoader) resource.getContents().get(0);
+			if(getDefault().kmLoader == null){
+				logErrorMessage("not able to load kmLoader file from " +uri.toString(),null);
+			}
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			logErrorMessage("Error while loading \"loader\" files",e);
 		}
 
 	}
@@ -287,5 +297,33 @@ public class LoaderPlugin extends Plugin {
 	
 	public void load(String uri, String stepName, Map<?,?> options) throws URIMalformedException, NotRegisteredURIException {
 		getDefault().loadingContext.load(uri, stepName, options);
+	}
+	
+	/**
+	 * This method logs an error message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logErrorMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, message, e));
+		// log4j message
+		log.error(message, e);
+	}
+	
+	/**
+	 * This method logs a warning message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logWarningMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.WARNING, PLUGIN_ID, IStatus.WARNING, message, e));
+		// log4j message
+		log.error(message, e);
 	}
 }
