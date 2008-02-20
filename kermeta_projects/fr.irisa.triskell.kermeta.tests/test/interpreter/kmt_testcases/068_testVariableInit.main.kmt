@@ -1,4 +1,4 @@
-/* $Id: 068_testVariableInit.main.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $
+/* $Id: 068_testVariableInit.main.kmt,v 1.3 2008-02-20 17:29:48 dvojtise Exp $
  * Creation date: August 23, 2007
  * License:	EPL
  * Copyright:
@@ -14,7 +14,6 @@ require kermeta
 
 using kermeta::standard
 using kermeta::utils
-using kermeta::reflection
 using kermeta::kunit
 
 
