@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.28 2008-02-18 13:55:02 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.29 2008-02-20 13:44:05 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -177,11 +177,15 @@ public class OperationChecker extends AbstractChecker {
 							addProblem(ERROR, message, operation);
 							return false;
 						}
-					} /*else 
+					} else {
+						KermetaUnit distantUnit = KermetaUnitHelper.getKermetaUnitFromObject(op);
+						String message = "Operation " + operation.getName() + " is already implemented in the superclass " + op.getOwningClass().getName() + " in the file " + distantUnit.getUri() + ".";
+						addProblem(ERROR, message, operation);
+					}
 											
 					// if superOperation is null, perhaps it however exists in the implicit inherited Object?
 					// ex: Boolean does not inherit explicitely Object.
-					if ( ! ClassDefinitionHelper.getAllBaseClasses(possibleBaseClass).contains(classDefinition) 
+					/*if ( ! ClassDefinitionHelper.getAllBaseClasses(possibleBaseClass).contains(classDefinition) 
 							&& !NamedElementHelper.getQualifiedName(op.getOwningClass()).equals("kermeta::language::structure::Object")) {
 						addProblem(ERROR, "Class '"+classDefinition.getName()+"' " +
 								"duplicate definition of operation '"+operation.getName()+"'.",operation);
