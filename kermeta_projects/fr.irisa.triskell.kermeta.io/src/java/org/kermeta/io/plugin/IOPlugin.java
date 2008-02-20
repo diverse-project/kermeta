@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.34 2008-02-14 07:13:20 uid21732 Exp $
+/*$Id: IOPlugin.java,v 1.35 2008-02-20 13:36:09 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -13,9 +13,6 @@
 package org.kermeta.io.plugin;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -113,6 +110,16 @@ public class IOPlugin extends AbstractUIPlugin {
 		}
 	}
 	
+	/**
+	 * Initialize the plugin
+	 * Make sure that if it is in local use it will use the URIMap file in the plugin in order to retrieve the platform:/plugin or platform:/resource URI 
+	 * @param localUse
+	 */
+	public static IOPlugin initialize(Boolean localUse){
+		LOCAL_USE = localUse;
+		return getDefault();
+	}
+	
 	private void initialize() {
 		
 		if ( ! INITIALIZED ) {
@@ -125,11 +132,11 @@ public class IOPlugin extends AbstractUIPlugin {
 			if ( LOCAL_USE ) {				
 				File file = new File(URI_MAP);
 				if (file.exists()){
+					internalLog.info("Reading URIMap from " + file.toString());
 					URIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
-					System.out.println("URIMap read from " + file.toString());
 				}
 				else {
-					System.out.println("not able to read URIMap from " + file.toString());
+					internalLog.warn("not able to read URIMap from " + file.toString());
 				}
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());	
@@ -382,7 +389,7 @@ public class IOPlugin extends AbstractUIPlugin {
 	 * cleanup some unused KermetaUnit
 	 * @param gcExcludedUnits some unit that are excluded for the gc
 	 */
-	private void garbageCollect(Set<KermetaUnit> gcExcludedUnits) {
+/*	private void garbageCollect(Set<KermetaUnit> gcExcludedUnits) {
 		List <KermetaUnit> unitsToGarbageCollect = new ArrayList <KermetaUnit> ();
 		for ( KermetaUnit unit : storer.getKermetaUnits() ) {
 			if ( unit.getImporters().isEmpty() && ! unit.isLocked() && ! gcExcludedUnits.contains(unit))
@@ -394,7 +401,7 @@ public class IOPlugin extends AbstractUIPlugin {
 		internalLog.info("Available Memory before running garbage collection : " + Runtime.getRuntime().freeMemory());
 		Runtime.getRuntime().gc();
 		internalLog.info("Available Memory after running garbage collection : " + Runtime.getRuntime().freeMemory());
-	}
+	}*/
 	
 	public KermetaUnit getFramework() {
 		return framework;

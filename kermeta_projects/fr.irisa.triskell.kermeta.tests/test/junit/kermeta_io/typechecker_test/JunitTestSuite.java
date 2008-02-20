@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.11 2008-02-20 10:52:04 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.12 2008-02-20 13:33:34 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -35,7 +35,6 @@ import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 public class JunitTestSuite extends TestCase {
 
 	static private IOPlugin ioPlugin;
-	static private LoaderPlugin loaderPlugin;
 	
 	public JunitTestSuite(String arg0) {
 		super(arg0);	
@@ -44,10 +43,7 @@ public class JunitTestSuite extends TestCase {
 	
 	private void initialize() {
 
-		// enforce LoaderPlugin to be initialized before IOPlugin
-		if ( loaderPlugin == null ) {
-			loaderPlugin = LoaderPlugin.getDefault();
-		}
+		
 		if ( ioPlugin == null ) {
 		
 			IOPlugin.LOCAL_USE = true;
