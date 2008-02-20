@@ -1,8 +1,9 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.2 2008-02-01 15:23:26 ftanguy Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.3 2008-02-20 14:24:10 cfaucher Exp $
  * Creation date: February 1, 2008
- * License:
- * Copyright:
- * Authors:
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Francois Tanguy <ftanguy@irisa.fr>
+ *			Cyril Faucher <cfaucher@irisa.fr>
  */
 
 package kermeta::language::structure;
