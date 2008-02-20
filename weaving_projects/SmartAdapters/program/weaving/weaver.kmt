@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.10 2008-02-20 12:52:07 bmorin Exp $
+/* $Id: weaver.kmt,v 1.11 2008-02-20 17:53:48 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -83,18 +83,21 @@ class Weaver
 					 stdio.writeln("")
 					 stdio.writeln("")
 					 //display current binding
-				     stdio.writeln("  -Binding"+i.toString+":")
+				     stdio.writeln("Binding"+i.toString+":")
+				     stdio.writeln("*******************************************")
 					 keys := binding.keys
-					 keys.each{k | stdio.writeln(k.toString+" -> "+binding.getValue(k).toString)}				 
+					 keys.each{k | stdio.writeln(k.toString+" -> "+binding.getValue(k).toString)}
+					 stdio.writeln("*******************************************")
+					 stdio.writeln("")				 
 					 //interaction with user
 					 input := stdio.read("$>weave the aspect for this binding ? (true/false): ")
 					 apply := input.toBoolean
 					 //apply composition protocol for the current binding
 					 if apply then
 					 	stdio.writeln("----------------------------")
-					 	stdio.writeln("weaving the aspect for binding"+i.toString+"...")
+					 	stdio.writeln("#>weaving the aspect for binding"+i.toString+"...")
 						adapter.apply(binding) //aspect weaving: do not require domain concepts
-					 	stdio.writeln("weaving the aspect for binding"+i.toString+"... done")
+					 	stdio.writeln("#>weaving the aspect for binding"+i.toString+" done!")
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("")
 					 	//interaction with user
@@ -102,9 +105,9 @@ class Weaver
 					 	unweave := input.toBoolean
 					 	if unweave then
 					 		stdio.writeln("----------------------------")
-					 		stdio.writeln("unweaving the aspect for binding"+i.toString+"...")
+					 		stdio.writeln("#>unweaving the aspect for binding"+i.toString+"...")
 					 		adapter.unweave
-					 		stdio.writeln("unweaving the aspect for binding"+i.toString+"... done")
+					 		stdio.writeln("#>unweaving the aspect for binding"+i.toString+" done!")
 					 		stdio.writeln("----------------------------")
 					 		stdio.writeln("")
 					 	end
@@ -146,10 +149,22 @@ class Weaver
     end	
 	
     operation saveModel(obj : Set<Object>, uri : String, domainMM : String) is do
-    	obj.each{o | stdio.writeln(o.toString)}
+    	//obj.each{o | stdio.writeln(o.toString)}
     	var repository:EMFRepository init EMFRepository.new
 	    var resource : Resource init repository.createResource(uri , domainMM)
 	    obj.each{o | resource.instances.add(o)}
+	    
+	    //removing dangling objects
+	    var dangling : Set<DanglingDiagnostic> init repository.findDanglingModelElements		
+		from var cond : Boolean init true
+		until dangling.isEmpty()
+		loop
+			dangling.each{ o | 
+				resource.instances.remove(o)
+			}
+			dangling := repository.findDanglingModelElements
+		end
+
 	    resource.save
     end
 }

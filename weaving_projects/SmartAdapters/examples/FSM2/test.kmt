@@ -1,4 +1,4 @@
-/* $Id: test.kmt,v 1.5 2007-12-21 15:46:33 bmorin Exp $
+/* $Id: test.kmt,v 1.6 2008-02-20 17:52:12 bmorin Exp $
  * Creation date: April 24, 2007
  * License:
  * Copyright:
@@ -15,7 +15,7 @@ require "platform:/resource/SmartAdapters/program/weaving/weaver4FSMs.kmt"
 
 using kermeta::standard
 using weaver
-class FSMTest2 
+class FSMTest2
 {
 	operation main() : Void is do 
 		var weaver:Weaver init Weaver.new

@@ -204,7 +204,7 @@ package smartadapters
 					if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
 						<%if(not(f.upperBound==1))then%>
 					~set.ref<%=f.name%>.clear
-					 ~set.ref<%=f.name%>.addAll(self.ref<%=f.name%>)
+					~set.ref<%=f.name%>.addAll(self.ref<%=f.name%>)
 						<%else%>
 					~set.ref<%=f.name%> := self.ref<%=f.name%>
 						<%end%>

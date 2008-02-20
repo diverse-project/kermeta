@@ -1,4 +1,4 @@
-/* $Id: InstanciateTemplate.kmt,v 1.3 2007-12-21 15:47:03 bmorin Exp $
+/* $Id: InstanciateTemplate.kmt,v 1.4 2008-02-20 17:53:16 bmorin Exp $
  * Creation date: August 27, 2007
  * License:
  * Copyright:
@@ -22,14 +22,14 @@ using ecore
 class Main
 {
 	operation main() : Void is do
-		var domainMM:String init "platform:/resource/SmartAdapters/metamodel/domain/runtime2/metamodel@runtime.ecore"
-		var domainMMPattern:String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
+		var domainMM:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
+		var domainMMPattern:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
 		
 		/*var domainMM2:String init "platform:/resource/SmartAdapters/metamodel/domain/runtime/type.ecore"
 		var domainMMPattern2:String init "platform:/resource/SmartAdapters/metamodel/domain/runtime/typePattern.ecore"*/
 		
 		var shortName:String init "FSM"
-		var file:String init "C:/temp/Fractal_AOM_Framework.kmt"
+		var file:String init "C:/temp/FSM_AOM_Framework2.kmt"
 	 
 	 	var ecore:String init "http://www.eclipse.org/emf/2002/Ecore"
 	 	var generator:AdaptationTemplate init AdaptationTemplate.new 

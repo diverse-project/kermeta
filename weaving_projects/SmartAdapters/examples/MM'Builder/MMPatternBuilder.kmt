@@ -1,4 +1,4 @@
-/* $Id: MMPatternBuilder.kmt,v 1.5 2008-02-14 12:14:51 bmorin Exp $
+/* $Id: MMPatternBuilder.kmt,v 1.6 2008-02-20 17:52:39 bmorin Exp $
  * Creation date: October 18, 2006
  * License:
  * Copyright:
@@ -40,7 +40,7 @@ class EcorePatternMetamodelBuilder {
       
       prettyPrintPackage(patternPack)
       
-      saveEcoreModel(setPack, targetMetamodelUri, EMFRepository.new)
+      saveEcoreModel(setPack, targetMetamodelUri)
       stdio.writeln("OK!") 
   end
   
@@ -76,10 +76,10 @@ class EcorePatternMetamodelBuilder {
     	result := instances.select { e | EPackage.isInstance(e) }.collect{p | pack ?= p}	
     end
 
-	operation saveEcoreModel(obj : Set<Object>, uri : String, repository : EMFRepository) is 
+	operation saveEcoreModel(obj : Set<Object>, uri : String) is 
 	do
     	obj.each{o | stdio.writeln(o.toString)}
-    	//var repository:EMFRepository init EMFRepository.new
+    	var repository:EMFRepository init EMFRepository.new
 	    var resource : Resource init repository.createResource(uri , "http://www.eclipse.org/emf/2002/Ecore")
 	    obj.each{o | resource.instances.add(o)}
 	    resource.save

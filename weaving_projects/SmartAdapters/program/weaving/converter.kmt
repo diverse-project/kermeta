@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.7 2008-02-20 12:52:07 bmorin Exp $
+/* $Id: converter.kmt,v 1.8 2008-02-20 17:53:48 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
@@ -17,7 +17,7 @@ using kermeta::utils
 
 /**
 Converts a model that conforms to MM' into a model that conforms to MM
-It can be improved...
+It can be significantly improved...
 */
 class Converter
 {
