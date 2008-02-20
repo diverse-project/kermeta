@@ -1,5 +1,5 @@
 
-/*$Id: BasicClockProfile2Ecore_001.java,v 1.2 2008-02-13 16:22:44 vmahe Exp $
+/*$Id: BasicClockProfile2Ecore_001.java,v 1.3 2008-02-20 09:39:10 dvojtise Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -21,6 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.kermeta.uml2.profiles.tests.helper.Constants;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 //import org.kermeta.kpm.helper.RunnerHelper;
 import org.kermeta.loader.LoadingOptions;
@@ -30,6 +31,7 @@ import org.openembedd.tests.utils.UiTools;
 
 //import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -69,13 +71,12 @@ public class BasicClockProfile2Ecore_001 {
 		try {
 			IOPlugin.LOCAL_USE = true;
 			IOPlugin.getDefault();
-			executable = IOPlugin.getDefault().loadKermetaUnit( Constants.TEST_COMP_PROFILE2ECORE_LAUNCHER, new NullProgressMonitor());
-			KermetaTypeChecker typechecker = new KermetaTypeChecker( executable, new NullProgressMonitor() );
-        	typechecker.checkUnit();
-		} catch (KermetaIOFileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();			
+			executable = LoaderPlugin.getDefault().load( Constants.TEST_COMP_PROFILE2ECORE_LAUNCHER, null);
+			KermetaTypeChecker typechecker = new KermetaTypeChecker( executable );
+        	typechecker.checkUnit();			
 		} catch (URIMalformedException e) {
+			e.printStackTrace();
+		} catch (NotRegisteredURIException e) {
 			e.printStackTrace();
 		}
     }
@@ -132,15 +133,13 @@ public class BasicClockProfile2Ecore_001 {
 			 */
 			KermetaUnit unitToExecute = executable;
 			try {
-				unitToExecute = IOPlugin.getDefault().loadKermetaUnit( Constants.TEST_COMP_PROFILE2ECORE_LAUNCHER, new NullProgressMonitor());
-			} catch (KermetaIOFileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				unitToExecute = LoaderPlugin.getDefault().load( Constants.TEST_COMP_PROFILE2ECORE_LAUNCHER, null);
 			} catch (URIMalformedException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			}
-			KermetaTypeChecker typechecker = new KermetaTypeChecker( unitToExecute, new NullProgressMonitor() );
+			KermetaTypeChecker typechecker = new KermetaTypeChecker( unitToExecute );
         	typechecker.checkUnit();
 			/*
 			 * Creating the interpreter.
