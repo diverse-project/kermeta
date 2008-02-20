@@ -1,9 +1,10 @@
-<%@ ket package="specialize" require="platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt" using="ecore EcoreHelpers" class="AdaptationTemplate"  parameters="classif:Set<EClassifier>, domainMM:String, domainMMPattern:String, shortName:String" %>
-/* Authors: Brice Morin
- * Creation date: 
- * License: 
- * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
- */
+<%@ ket 
+	package="specialize" 
+	require="platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt" 
+	using="ecore EcoreHelpers" 
+	class="AdaptationTemplate"  
+	parameters="classif:Set<EClassifier>, domainMM:String, domainMMPattern:String, shortName:String" %>
+
 
 <%var helper:EcoreHelper init EcoreHelper.new%>
 

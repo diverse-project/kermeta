@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.6 2008-01-09 13:15:44 bmorin Exp $
+/* $Id: converter.kmt,v 1.7 2008-02-20 12:52:07 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
@@ -11,8 +11,8 @@
 package org::smartadapters::utils;
 
 require kermeta
-using kermeta::reflection
-using kermeta::standard
+using kermeta::language::structure
+using kermeta::standard 
 using kermeta::utils
 
 /**
@@ -22,35 +22,35 @@ It can be improved...
 class Converter
 {
 	//Mapping MM'->MM
-	attribute convertTable : Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>
-	attribute enumTable : Hashtable<kermeta::reflection::Enumeration,kermeta::reflection::Enumeration>
+	attribute convertTable : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
+	attribute enumTable : Hashtable<kermeta::language::structure::Enumeration,kermeta::language::structure::Enumeration>
 	
-	reference converted : Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>
-	reference converting : Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>	
+	reference converted : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>
+	reference converting : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>	
 	
 	/**
 	initializes the converter (~constructor)
 	must be called before any other operation
 	*/
-	operation initConverter(convert:Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>
-			/*,	enum : Hashtable<kermeta::reflection::Enumeration,kermeta::reflection::Enumeration>*/) is do	
+	operation initConverter(convert:Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
+			/*,	enum : Hashtable<kermeta::language::structure::Enumeration,kermeta::language::structure::Enumeration>*/) is do	
 		convertTable := convert
 		//enumTable := enum
-		converted := Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>.new
-		converting := Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>.new
+		converted := Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>.new
+		converting := Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>.new
 	end
 	
-	operation deleteConverted(obj:kermeta::reflection::Object) : Void is do
+	operation deleteConverted(obj:kermeta::language::structure::Object) : Void is do
 		converting.remove(obj)
 		converted.remove(obj)
 	end	
 
-	operation addEntry(key : kermeta::reflection::Class, val : kermeta::reflection::Class) is do
+	operation addEntry(key : kermeta::language::structure::Class, val : kermeta::language::structure::Class) is do
 		convertTable.put(key,val)
 	end
 	
-	operation getConverted(obj : kermeta::reflection::Object) : kermeta::reflection::Object is do
-		var e : kermeta::reflection::EnumerationLiteral
+	operation getConverted(obj : kermeta::language::structure::Object) : kermeta::language::structure::Object is do
+		var e : kermeta::language::structure::EnumerationLiteral
 		e ?= obj
 		if(e!=void) then
 			result := obj
@@ -63,12 +63,12 @@ class Converter
 	/**
 	returns a converted object (MM), equivalent to obj (MM')
 	*/
-	operation getConvertedObject(obj : kermeta::reflection::Object) : kermeta::reflection::Object is do
+	operation getConvertedObject(obj : kermeta::language::structure::Object) : kermeta::language::structure::Object is do
 		//stdio.writeln("getConverted "+obj.toString+" ...")
-		var newMeta : kermeta::reflection::Class 
+		var newMeta : kermeta::language::structure::Class 
 		newMeta := convertTable.getValue(obj.getMetaClass)
 		if(newMeta!=void) then
-			var o : kermeta::reflection::Object init newMeta.new
+			var o : kermeta::language::structure::Object init newMeta.new
 			if(converted.getValue(obj)==void) then
 				//stdio.writeln(obj.toString+" is NOT converted")
 				if(converting.getValue(obj)==void) then
@@ -94,14 +94,14 @@ class Converter
 	/**
 	TODO: à revoir...
 	*/
-	operation getConvertedEnum(enumLit : kermeta::reflection::EnumerationLiteral) : kermeta::reflection::EnumerationLiteral is do	
+	operation getConvertedEnum(enumLit : kermeta::language::structure::EnumerationLiteral) : kermeta::language::structure::EnumerationLiteral is do	
 		stdio.writeln("?>enumLit: "+enumLit.name)
 		stdio.writeln("?>enumLit.getMetaClass: "+enumLit.getMetaClass.name)
 		stdio.writeln("?>enumLit.enumeration.getMetaClass: "+enumLit.~enumeration.getMetaClass.name)
-		/*var enum : kermeta::reflection::Enumeration init enumLit.~enumeration
-		var e : kermeta::reflection::Enumeration init enumTable.getValue(enum)
+		/*var enum : kermeta::language::structure::Enumeration init enumLit.~enumeration
+		var e : kermeta::language::structure::Enumeration init enumTable.getValue(enum)
 		if(e != void) then
-			var lit : kermeta::reflection::EnumerationLiteral
+			var lit : kermeta::language::structure::EnumerationLiteral
 			lit := e.ownedLiteral.select{l | l.name.equals(enumLit.name)}.one
 			if(lit != void) then
 				stdio.writeln("?>lit: "+lit.name)
@@ -117,9 +117,9 @@ class Converter
 	/**
 	copies obj (MM') into conv (MM) thanks to the convert Hashtable
 	*/	
-	operation convert(obj : kermeta::reflection::Object, conv : kermeta::reflection::Object) : Void is do		
+	operation convert(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object) : Void is do		
 		//stdio.writeln("converting "+obj.toString+" into "+conv.toString)
-		var classDef:kermeta::reflection::ClassDefinition
+		var classDef:kermeta::language::structure::ClassDefinition
 		classDef?=conv.getMetaClass.typeDefinition
 		if(classDef!=void) then
 			//getting all the properties of the converted object
@@ -127,7 +127,7 @@ class Converter
 			att.each{a |
 			//stdio.writeln("?>"+a.getMetaClass.typeDefinition.name)
 			if(obj.get(a)!=void and not(a.name.equals("tag") or a.name.equals("ownedTag"))) then
-				var  cl : kermeta::reflection::Class init a.getMetaClass.typeDefinition.getMetaClass
+				var  cl : kermeta::language::structure::Class init a.getMetaClass.typeDefinition.getMetaClass
 				var ob : Object init obj.get(a)
 				//single property (upper bound==1)
 				if(a.upper==1 and ob!=void) then
@@ -140,8 +140,8 @@ class Converter
 				//collection property -> iteration
 				else
 					//stdio.writeln("Collection property")
-					var list:Collection<kermeta::reflection::Object>
-					var convertedList:Collection<kermeta::reflection::Object>
+					var list:Collection<kermeta::language::structure::Object>
+					var convertedList:Collection<kermeta::language::structure::Object>
 					list?=ob
 					if(list!=void and list.size>0) then
 						convertedList ?= conv.get(a)

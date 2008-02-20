@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.9 2008-02-13 13:28:48 bmorin Exp $
+/* $Id: weaver.kmt,v 1.10 2008-02-20 12:52:07 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -12,7 +12,7 @@ require kermeta
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
-
+ 
 using ecore
 using kermeta::standard 
 using kermeta::utils
@@ -68,12 +68,13 @@ class Weaver
 		        stdio.writeln("")                
 		                         	
 				/*---Applying the adapter to the base model---*/       
-				var i:Integer init 0
+				var i : Integer init 0
 				var binding : Hashtable<Object, Object>
-				var keys:Set<Object>
-				var input:String				
-				var apply:Boolean
-				var executePM:Boolean
+				var keys : Set<Object>
+				var input : String				
+				var apply : Boolean
+				var unweave : Boolean
+				var executePM : Boolean
 			 	var inputPM:String
 			 	//iterating on bindings
 				from iteBindings until iteBindings.isOff loop 
@@ -83,11 +84,11 @@ class Weaver
 					 stdio.writeln("")
 					 //display current binding
 				     stdio.writeln("  -Binding"+i.toString+":")
-					 keys:=binding.keys
+					 keys := binding.keys
 					 keys.each{k | stdio.writeln(k.toString+" -> "+binding.getValue(k).toString)}				 
 					 //interaction with user
-					 input:=stdio.read("$>apply this binding ? (true/false): ")
-					 apply:=input.toBoolean
+					 input := stdio.read("$>weave the aspect for this binding ? (true/false): ")
+					 apply := input.toBoolean
 					 //apply composition protocol for the current binding
 					 if apply then
 					 	stdio.writeln("----------------------------")
@@ -95,7 +96,19 @@ class Weaver
 						adapter.apply(binding) //aspect weaving: do not require domain concepts
 					 	stdio.writeln("weaving the aspect for binding"+i.toString+"... done")
 					 	stdio.writeln("----------------------------")
-					 	stdio.writeln("")		 	
+					 	stdio.writeln("")
+					 	//interaction with user
+					 	input := stdio.read("$>unweave the aspect for this binding ? (true/false): ")
+					 	unweave := input.toBoolean
+					 	if unweave then
+					 		stdio.writeln("----------------------------")
+					 		stdio.writeln("unweaving the aspect for binding"+i.toString+"...")
+					 		adapter.unweave
+					 		stdio.writeln("unweaving the aspect for binding"+i.toString+"... done")
+					 		stdio.writeln("----------------------------")
+					 		stdio.writeln("")
+					 	end
+					 	adapter.updateClones
 					 	if (iteBindings.hasNext) then
 					 		//interaction with user
 						 	inputPM:=stdio.read("$>execute pattern matching ? (true/false): ")

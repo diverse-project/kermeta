@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.7 2008-02-14 12:14:51 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.8 2008-02-20 12:52:06 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -27,6 +27,8 @@ package smartadapters
 			attribute ~aspect : Aspect[1..1]
 			
 			attribute adapt : Adaptation[0..*]#adapter
+			
+			reference reverse : Adaptation[0..*]
 						
 			attribute name : ecore::EString		
 		}
@@ -57,7 +59,7 @@ package smartadapters
 			Execute the adaptation for a given binding
 			Sub-classes must implement this method
 			*/		         
-			operation execute() : Void
+			operation execute(reverse : Boolean) : Void
 				pre checking is check 
 				is abstract
 
@@ -97,7 +99,7 @@ package smartadapters
 				result := res
 			end
 			
-			method execute() : Void is do
+			method execute(reverse : Boolean) : Void is do
 				adapter.~aspect.persistent.add(element)
 			end
 		}

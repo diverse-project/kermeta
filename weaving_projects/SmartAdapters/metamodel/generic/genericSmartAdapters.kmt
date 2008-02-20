@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.10 2008-02-14 12:14:51 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.11 2008-02-20 12:52:06 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -10,6 +10,7 @@ package org;
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"
 require "platform:/resource/SmartAdapters/program/weaving/converter.kmt"
  
+
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
@@ -39,14 +40,41 @@ package smartadapters
 			
 			operation initConvert() : Void is abstract
 			
+			/*
+			This operation weaves the the aspect for the binding b
+			In other words, it executes all the adaptations of the composition protocol  
+			*/
 			operation apply(b:Hashtable<Object, Object>) is do
 				binding := b		
+				reverse.clear
 				adapt.each{a |
-					stdio.writeln("#>"+a.getMetaClass.name+"...") 
-					a.execute()
-					stdio.writeln("#>done!")
+					if not reverse.contains(a) then 
+					stdio.writeln("#>weaving: "+a.getMetaClass.name+"...")
+					a.getMetaClass().ownedAttribute.each{p |
+						stdio.writeln("#>  "+p.name+": "+a.get(p).toString)
+					}
+					a.execute(true)
+					stdio.writeln("#>weaving: done!")
+					end
 				}
-				updateClones
+				//updateClones
+			end
+			
+			/*
+			This operation unweaves the previously woven aspect, for the current binding
+			In other words, it performs a roll back.
+			*/
+			operation unweave() is do	
+				adapt.each{a |
+					if reverse.contains(a) then
+					stdio.writeln("#>unweaving: "+a.getMetaClass.name+"...")
+					a.getMetaClass().ownedAttribute.each{p |
+						stdio.writeln("#>  "+p.name+": "+a.get(p).toString)
+					} 
+					a.execute(false)
+					stdio.writeln("#>unweaving: done!")
+					end
+				}
 			end
 			
 			operation initAdapter() : Void is 

@@ -36,7 +36,7 @@ package smartadapters
 			operation initConvert(): Void is do
 				stdio.write("Mapping MM' to MM...")
 				converter := Converter.new
-				convert := Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
+				convert := Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new
 				<%
 				var name:String 
 				classif.each{cl |
@@ -72,7 +72,7 @@ package smartadapters
 				result := new<%=c.name%> != void
 			end
 					
-			method execute(): Void is do
+			method execute(reverse : Boolean): Void is do
 				adapter.cloneAgain(new<%=c.name%>, void, isUnique)					
 			end
 		}
@@ -86,7 +86,7 @@ package smartadapters
 				result := <%=c.name%>ToClone != void
 			end
 			
-			method execute(): Void is do
+			method execute(reverse : Boolean): Void is do
 				adapter.cloneAgain(cloned<%=c.name%>, <%=c.name%>ToClone, isUnique)
 			end					
 		}
@@ -98,7 +98,7 @@ package smartadapters
 			<%
 			var card:String
 			var fQualName:String
-			var newObj:kermeta::reflection::Object
+			var newObj:kermeta::language::structure::Object
 			var primitive:kermeta::language::structure::PrimitiveType
 			c.eAllStructuralFeatures.each{f | 
 				if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then
@@ -122,7 +122,7 @@ package smartadapters
 				result := <%=c.name%>ToSet != void
 			end
 			
-			method execute(): Void is do
+			method execute(reverse : Boolean): Void is do
 				var temp<%=c.name%> : <%=qualifiedName%>
 				temp<%=c.name%> ?= adapter.getRealObject(<%=c.name%>ToSet,false)
 				
@@ -135,6 +135,24 @@ package smartadapters
 				<%end%>
 				<%end
 				}%>
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then
+					var unset : Unset<%=c.name%> init Unset<%=c.name%>.new
+					unset.<%=c.name%>ToUnset := self.<%=c.name%>ToSet
+					<%c.eAllStructuralFeatures.each{f | 
+					if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
+						<%if(not(f.upperBound==1))then%>
+					unset.ref<%=f.name%>.clear
+					unset.ref<%=f.name%>.addAll(self.ref<%=f.name%>)
+						<%else%>
+					unset.ref<%=f.name%> := self.ref<%=f.name%>
+						<%end%>
+					<%end%>
+					<%}%>
+					adapter.adapt.add(unset)
+					adapter.reverse.add(unset)
+				end	
 			end			
 		}
 		
@@ -164,7 +182,7 @@ package smartadapters
 				result := <%=c.name%>ToUnset != void
 			end
 			
-			method execute(): Void is do
+			method execute(reverse : Boolean): Void is do
 				var temp<%=c.name%> : <%=qualifiedName%>
 				temp<%=c.name%> ?= adapter.getRealObject(<%=c.name%>ToUnset,false)
 				
@@ -177,6 +195,24 @@ package smartadapters
 				<%end%>
 				<%end
 				}%>
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : Set<%=c.name%> init Set<%=c.name%>.new
+					~set.<%=c.name%>ToSet := self.<%=c.name%>ToUnset
+					<%c.eAllStructuralFeatures.each{f | 
+					if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
+						<%if(not(f.upperBound==1))then%>
+					~set.ref<%=f.name%>.clear
+					 ~set.ref<%=f.name%>.addAll(self.ref<%=f.name%>)
+						<%else%>
+					~set.ref<%=f.name%> := self.ref<%=f.name%>
+						<%end%>
+					<%end%>
+					<%}%>
+					adapter.adapt.add(~set)
+					adapter.reverse.add(~set)
+				end
 			end
 		}
 		<%end
