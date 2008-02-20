@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.11 2008-02-07 18:20:20 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.12 2008-02-20 14:25:29 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -23,6 +23,10 @@ using kermeta::language::structure
 
 class Main
 {
+	attribute repository : EMFRepository
+	
+	/** current modeling unit */
+	attribute mu : ModelingUnit
 
     operation main_inner() : Void is do
 		var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km"
@@ -38,7 +42,10 @@ class Main
     end
     	
 	operation main_mode(input : String, output : String, mode : String) : Void is do
-		var mu : ModelingUnit init loadKmModel(input)
+		
+		repository := EMFRepository.new
+		
+		mu := loadKmModel(repository, input)
 		
 		mu.applyPass1()
 		if mode == "onlyEcore" then
@@ -52,23 +59,39 @@ class Main
 			mu.applyPass2BehaviorJava
 		end
 		
-   		var repository : EMFRepository init EMFRepository.new             
-   		var resource : Resource init repository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
-		resource.instances.add(mu.ecoreModelElement)
-		//resource.instances.addAll(mu.entryPoints)
+		// Save the generated ecore
+   		var ecore_resource : Resource init repository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
+		ecore_resource.instances.add(mu.ecoreModelElement)
+		//ecore_resource.instances.addAll(mu.entryPoints)
 		mu.entryPoints.each{ e |
-			resource.instances.add(e)
-		}//resource.instances.addAll(mu.ecorePackages)
+			ecore_resource.instances.add(e)
+		}//ecore_resource.instances.addAll(mu.ecorePackages)
 		mu.ecorePackages.each{ p |
-			resource.instances.add(p)
+			ecore_resource.instances.add(p)
 		}
 		stdio.writeln("Save the Ecore Model")
-		resource.save		
+		ecore_resource.save
+		stdio.writeln("The Ecore Model has been saved")
+		
+		// Save the trace
+		/*var trace_resource : Resource init repository.createResource(output + ".traceability", "http://www.kermeta.org/Traceability")
+		trace_resource.instances.add(mu.ecoreModelElement)
+		
+		mu.entryPoints.each{ e |
+			trace_resource.instances.add(e)
+		}
+		mu.ecorePackages.each{ p |
+			trace_resource.instances.add(p)
+		}
+		stdio.writeln("Save the Trace Model")
+		trace_resource.save
+		stdio.writeln("The Trace Model has been saved")*/
+				
 		stdio.writeln("Finish")
+		
     end
 
-	operation loadKmModel(input: String) : kermeta::language::structure::ModelingUnit is do             
-	   		var repository : EMFRepository init EMFRepository.new             
+	operation loadKmModel(repository : EMFRepository, input: String) : kermeta::language::structure::ModelingUnit is do           
 	   		var resource : Resource init repository.getResource(input)
 	       	resource.load()
 	      	

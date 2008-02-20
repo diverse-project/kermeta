@@ -1,0 +1,33 @@
+/* $Id: PrintWithAspect.kmt,v 1.1 2008-02-20 14:25:29 cfaucher Exp $
+ * Creation date: January 24, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+@mainClass "kermeta::compiler::Printer"
+@mainOperation "main_inner"
+
+package kermeta::compiler;
+
+require kermeta
+require "StructureCompiler.kmt"
+require "printJava.kmt"
+
+using kermeta::language::structure
+
+class Printer inherits Main
+{
+
+    method main_mode(input : String, output : String, mode : String) : Void is do		
+		super(input, output, mode)
+		
+		// Print in the console the Java
+		stdio.writeln("\n - Start Java printing -")
+		mu.packages.each{ p |
+			p.print(0)
+		}
+		stdio.writeln(" - Finish Java printing -")
+    end
+    
+}

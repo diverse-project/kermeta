@@ -1,0 +1,116 @@
+/* $Id: printJava.kmt,v 1.1 2008-02-20 14:25:29 cfaucher Exp $
+ * Creation date: January 24, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "pass1/Pass1.kmt"
+require "pass2/Pass2.kmt"
+require "pass2/CreateBehavior.kmt"
+require "common/containment_traversable.kmt"
+require "common/trace_structure.kmt"
+require "helper/KM2EcoreHelper.kmt"
+
+using kermeta::language::structure
+using kermeta::language::behavior
+using kermeta::standard
+using kermeta::utils
+using ecore
+using km2ecore::helper::ecore
+
+package structure {
+
+	aspect class Object {
+		operation print(context : Integer) : Void is abstract
+	}
+	
+	aspect class Package {
+		method print(context : Integer) : Void is do
+			stdio.writeln("package " + self.name + ";\n")
+			// Compile the owned elements
+			self.eachOwnedElement{ cd | cd.print(context) }
+		end
+	}
+	
+	aspect class TypeDefinition {
+		method print(context : Integer) : Void is do
+			
+		end
+	}
+	
+	aspect class ClassDefinition {
+		method print(context : Integer) : Void from TypeDefinition is do
+			stdio.writeln("class " + self.name + " {")
+			// Set the traceability
+			self.ecoreModelElement := EcoreModelElementHelper.new.findEClassProxy(self)
+			// Compile the owned elements
+			self.eachOwnedElement{ o | o.print(context) }
+			stdio.writeln("}\n")
+		end
+		
+	}
+	
+	aspect class Type {
+		method print(context : Integer) : Void is do
+			//do nothing
+		end
+	}
+	
+	aspect class PrimitiveType {
+		method print(context : Integer) : Void from TypeDefinition is do
+			stdio.writeln("\tprimitiveType " + self.name + "\n")
+			//stdio.writeln("F2-2: " + self.name)
+		end
+	}
+	
+	aspect class MultiplicityElement {
+		method print(context : Integer) : Void is do
+			//stdio.writeln("F2-311111: " + self.name)
+		end
+	}
+	
+	aspect class Property {
+		method print(context : Integer) : Void from MultiplicityElement is do
+			//stdio.writeln("\tproperty " + self.name)
+			// Set the traceability
+		end
+	}
+	
+	aspect class Operation {
+		method print(context : Integer) : Void from MultiplicityElement is do
+			stdio.writeln("\toperation " + self.name)
+			// Set the traceability
+			
+			var javaCode : StringBuffer init StringBuffer.new
+			
+			// The Java source code is provided by: self.body.print(context)
+			javaCode.append( self.createBehaviorJava(context) )
+			
+			// Finally add the EAnnotation containing the Java code in the Ecore model
+	        stdio.writeln(javaCode.toString)
+		end
+	}
+	
+	
+	/* deprecated code
+	aspect class ParameterizedType {
+		method print(context : Integer) : Void is do
+			//empty
+		end
+	}
+	
+	aspect class ObjectTypeVariable {
+		method print(context : Integer) : Void is do
+			//do nothing
+		end
+	}*/
+
+}
+
+package behavior {
+}
