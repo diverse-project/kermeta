@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.interpreter,
  org.openembedd.tests,
  fr.irisa.triskell.kermeta,
- fr.irisa.triskell.kermeta.tests
+ fr.irisa.triskell.kermeta.tests,
+ fr.irisa.triskell.kermeta.ecore
 Eclipse-LazyStart: true
 Export-Package: fr.irisa.triskell.kermeta.ecore.tests,
  fr.irisa.triskell.kermeta.ecore.tests.kmttestsuite,
