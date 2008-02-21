@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.11 2008-02-20 17:53:48 bmorin Exp $
+/* $Id: weaver.kmt,v 1.12 2008-02-21 10:11:27 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -9,9 +9,11 @@ package weaver;
  
 require kermeta
 
+require "platform:/resource/SmartAdapters/program/weaving/print.kmt"
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
+
  
 using ecore
 using kermeta::standard 
@@ -66,7 +68,8 @@ class Weaver
 		        stdio.writeln("") 
 		        stdio.writeln("")
 		        stdio.writeln("")                
-		                         	
+		
+	                         	
 				/*---Applying the adapter to the base model---*/       
 				var i : Integer init 0
 				var binding : Hashtable<Object, Object>
@@ -86,7 +89,7 @@ class Weaver
 				     stdio.writeln("Binding"+i.toString+":")
 				     stdio.writeln("*******************************************")
 					 keys := binding.keys
-					 keys.each{k | stdio.writeln(k.toString+" -> "+binding.getValue(k).toString)}
+					 keys.each{k | stdio.write("-------\n"+k.printObject+"bound to\n"+binding.getValue(k).printObject)}
 					 stdio.writeln("*******************************************")
 					 stdio.writeln("")				 
 					 //interaction with user

@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.12 2008-02-20 17:52:57 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.13 2008-02-21 10:11:26 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -25,6 +25,45 @@ package smartadapters
 {
 	package core
 	{
+	
+		aspect class Adaptation
+		{
+			operation print() : String is
+			do
+				var o : Object
+				var print : String
+				var coll : Collection<kermeta::language::structure::Object>
+				print := String.new
+				getMetaClass().ownedAttribute.each{p |
+					print := print + "\t" + p.name + ": "
+					if p.upper == 1 then
+						o := get(p)
+						o := adapter.getRealObject(o,false)
+						print := print + o.toString + "\n"
+					else
+						coll ?= get(p)
+						coll.each{b | 
+							print := print + adapter.getRealObject(b,false).toString
+						}
+						print := print + "\n"
+					end
+					get(p).getMetaClass().ownedAttribute.each{pr | 
+						print := print + "\t\t - "+pr.name+" = "
+						if pr.upper == 1 then
+							print := print + adapter.getRealObject(o.get(pr),false).toString + "\n"
+						else
+							coll ?= o.get(pr)
+							coll.each{b | 
+								print := print + adapter.getRealObject(b, false).toString
+							}
+							print := print + "\n"
+						end
+					}
+				}
+				result := print
+			end
+		}
+		
 		aspect class Adapter
 		{	
 			/**
@@ -52,9 +91,7 @@ package smartadapters
 						stdio.writeln("Adaptation "+i.toString)
 						stdio.writeln("------------")
 						stdio.writeln("#>weaving: "+a.getMetaClass.name+"...")
-						a.getMetaClass().ownedAttribute.each{p |
-							stdio.writeln("#>  "+p.name+": "+a.get(p).toString)
-						}
+						stdio.write(a.print)
 						a.execute(true)
 						stdio.writeln("#>weaving: done!")
 						stdio.writeln("")
@@ -74,9 +111,7 @@ package smartadapters
 					stdio.writeln("Adaptation "+i.toString)
 					stdio.writeln("------------")
 					stdio.writeln("#>unweaving: "+a.getMetaClass.name+"...")
-					a.getMetaClass().ownedAttribute.each{p |
-						stdio.writeln("#>  "+p.name+": "+a.get(p).toString)
-					} 
+					stdio.write(a.print)
 					a.execute(false)
 					stdio.writeln("#>unweaving: done!")
 					stdio.writeln("")

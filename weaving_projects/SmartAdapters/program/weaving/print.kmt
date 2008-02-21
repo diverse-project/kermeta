@@ -1,0 +1,34 @@
+/* $Id: print.kmt,v 1.1 2008-02-21 10:11:27 bmorin Exp $
+ * Creation date: February 21, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package kermeta::language::structure;
+
+
+require kermeta
+using kermeta::standard
+
+aspect class Object
+{
+	operation printObject() : String is
+	do
+		var coll : Collection<kermeta::language::structure::Object>
+		var print : String init self.toString + "\n"
+		self.getMetaClass().ownedAttribute.each{p |
+			print := print + "\t"
+			if p.upper == 1 then
+				print := print + p.name + ": " + self.get(p).toString + "\n"
+			else
+				coll ?= self.get(p)
+				coll.each{b | 
+					print := print + b.toString
+				}
+				print := print + "\n"
+			end
+		}
+		result := print
+	end	
+}
