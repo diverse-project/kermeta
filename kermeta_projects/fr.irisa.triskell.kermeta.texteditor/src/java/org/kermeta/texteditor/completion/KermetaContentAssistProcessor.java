@@ -1,4 +1,4 @@
-/* $Id: KermetaContentAssistProcessor.java,v 1.15 2008-02-21 09:02:04 dvojtise Exp $
+/* $Id: KermetaContentAssistProcessor.java,v 1.16 2008-02-21 10:16:53 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.PatternSyntaxException;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
@@ -36,6 +37,7 @@ import org.kermeta.model.KermetaModelHelper;
 import org.kermeta.texteditor.KermetaTextEditor;
 
 import fr.irisa.triskell.kermeta.language.behavior.Block;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Conditional;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
@@ -98,6 +100,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		List<KermetaCompletionProposal> proposals = new ArrayList<KermetaCompletionProposal>();
+		String input = "";
 		try {
 			KermetaUnit kermetaUnit = editor.getKermetaUnit();
 			if (kermetaUnit != null) {
@@ -165,14 +168,14 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 					 * Getting the user's input.
 					 * 
 					 */
-					String input = "";
+					input = "";
 					int index = offset -1;
 					c = viewer.getDocument().getChar(index);
 					/*if ( c == '.' ) {
 						index--;
 						c = viewer.getDocument().getChar(index);
 					}*/
-					while ( ! Character.isWhitespace(c) && (c != '|') && (c != '(') ) {
+					while ( ! Character.isWhitespace(c) && (c != '|') /*&& (c != '(')*/ ) {
 						input = c + input;
 						index--;
 						c = viewer.getDocument().getChar(index);
@@ -264,7 +267,9 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 							proposals = getKermetaCompletionProposalsForClassDefinition(viewer, offset, cdef, input);
 						} else if ( previousReference.getRefObject() instanceof ClassDefinition && nextReference.getRefObject() instanceof Operation ) {
 							proposals = getKermetaCompletionProposalsForClassDefinition(viewer, offset, (ClassDefinition) previousReference.getRefObject(), input);
-						} else if ( previousReference.getRefObject() instanceof Expression ) {
+						} else if ( previousReference.getRefObject() instanceof CallFeature ) {							
+							addProposalsForExpression(viewer, proposals, offset, offset-trueOffset, input, (Expression) previousReference.getRefObject());						
+						} else if ( previousReference.getRefObject() instanceof Expression ) {							
 							addProposalsForExpression(viewer, proposals, offset, offset-trueOffset, input, (Expression) previousReference.getRefObject());
 						} else {
 							TexteditorPlugin.internalLog.debug("");
@@ -306,8 +311,11 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				}
 			}
 		} catch (BadLocationException e) {
-			TexteditorPlugin.logWarningMessage("cannot compute completion proposal",e);
+			TexteditorPlugin.logWarningMessage("cannot compute completion proposal for " + input,e);
+		}catch (PatternSyntaxException e) {
+			TexteditorPlugin.logWarningMessage("cannot compute completion proposal for " + input ,e);
 		}
+		
 
 		KermetaCompletionProposal[] proposalsArray = new KermetaCompletionProposal[proposals.size()];
 		proposals.toArray(proposalsArray);
