@@ -1,4 +1,4 @@
-/* $Id: ecore2dot.kmt,v 1.2 2006-04-19 14:15:46 vmahe Exp $
+/* $Id: ecore2dot.kmt,v 1.3 2008-02-21 15:21:04 dvojtise Exp $
  * File : Ecore2dot.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -46,7 +46,7 @@ package ecore2dot;
 
 require kermeta
 
-require "../ecore.kmt"
+require "../ecore_behavior.kmt"
 
 using kermeta::standard
 
@@ -56,8 +56,8 @@ class Main
 
     operation main() : Void is do 
 		
-		var model : String init "examples/kermeta_java_structure.ecore"
-		var metamodel : String init "../../ecore/Ecore.ecore"
+		var model : String init "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore2dot/examples/kermeta_java_structure.ecore"
+		var metamodel : String init "http://www.eclipse.org/emf/2002/Ecore"
 		
 		exclude_patterns := Sequence<String>.new
 		exclude_patterns.add("Boolean")
