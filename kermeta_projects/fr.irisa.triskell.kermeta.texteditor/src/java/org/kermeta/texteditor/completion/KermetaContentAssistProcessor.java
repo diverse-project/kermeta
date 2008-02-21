@@ -1,6 +1,4 @@
-
-
-/*$Id: KermetaContentAssistProcessor.java,v 1.14 2008-02-14 07:13:42 uid21732 Exp $
+/* $Id: KermetaContentAssistProcessor.java,v 1.15 2008-02-21 09:02:04 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -49,7 +47,6 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
-import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -63,8 +60,8 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.Using;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
 import fr.irisa.triskell.kermeta.texteditor.icons.green.KermetaIconsGreen;
@@ -120,7 +117,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 							else
 								goOn = false;
 						} catch (BadLocationException exception) {
-							exception.printStackTrace(); 
+							TexteditorPlugin.internalLog.debug("",exception);
 							goOn = false;
 						}
 					}
@@ -199,9 +196,9 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 										if ( instanceType instanceof Class ) {
 											addCallableFeatures(proposals, offset, (Class) type, "");
 										} else
-											System.out.println();
+											TexteditorPlugin.internalLog.debug("");
 									} else
-										System.out.println();
+										TexteditorPlugin.internalLog.debug("");
 								} else
 									proposals = getKermetaCompletionProposalsForBlock(viewer, offset, (Block) previousReference.getRefObject(), input);
 							} else if ( previousReference.getRefObject() instanceof Package ) {
@@ -226,12 +223,12 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 										if ( instanceType instanceof Class ) {
 											addCallableFeatures(proposals, offset, (Class) type, "");
 										} else
-											System.err.println("erreur1");
+											TexteditorPlugin.internalLog.error("erreur1");
 									} else
-										System.err.println("erreur2");
+										TexteditorPlugin.internalLog.error("erreur2");
 								}
 							} else
-								System.err.println("erreur3");
+								TexteditorPlugin.internalLog.error("erreur3");
 						} else if ( previousReference.getRefObject() instanceof Require && nextReference.getRefObject() instanceof ClassDefinition ) {
 							proposals.add( new KermetaCompletionProposal(REQUIRE, offset, 0, REQUIRE.length()) );
 							proposals.add( new KermetaCompletionProposal(USING, offset, 0, USING.length()) );
@@ -270,7 +267,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 						} else if ( previousReference.getRefObject() instanceof Expression ) {
 							addProposalsForExpression(viewer, proposals, offset, offset-trueOffset, input, (Expression) previousReference.getRefObject());
 						} else {
-							System.out.println();
+							TexteditorPlugin.internalLog.debug("");
 						}
 					} else if ( (previousReferences.size() > 0) ){
 						ModelReference previousReference = previousReferences.iterator().next();
@@ -288,7 +285,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 						} else if ( previousReference.getRefObject() instanceof Type ) {
 							
 						} else {
-							System.out.println();
+							TexteditorPlugin.internalLog.debug("");
 						}
 					} else if ( nextReferences.size() > 0 ) {
 						ModelReference nextReference = nextReferences.iterator().next();
@@ -299,7 +296,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 							getInheritingClassDefinitionProposal(proposals, offset, input);
 							getPackageDefinitionProposal(proposals, offset, input);
 						} else
-							System.out.println();
+							TexteditorPlugin.internalLog.debug("");
 					} else if ( previousReferences.size() == 0 && nextReferences.size() == 0 ) {
 						getClassDefinitionProposal(proposals, offset, input);
 						getInheritingClassDefinitionProposal(proposals, offset, input);
@@ -309,7 +306,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				}
 			}
 		} catch (BadLocationException e) {
-			e.printStackTrace();
+			TexteditorPlugin.logWarningMessage("cannot compute completion proposal",e);
 		}
 
 		KermetaCompletionProposal[] proposalsArray = new KermetaCompletionProposal[proposals.size()];
@@ -894,7 +891,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				if ( currentType instanceof Class )
 					cdef = (ClassDefinition) ((Class) currentType).getTypeDefinition();
 				else
-					System.out.println();
+					TexteditorPlugin.internalLog.debug("");
 			}
 
 			boolean found = false;
@@ -1115,7 +1112,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				else
 					addCallableFeatures(result, offset, c, "");
 			} else
-				System.out.println();
+				TexteditorPlugin.internalLog.debug("");
 		} else if ( type == null ) {
 			Block b = getBlock(e);
 			result.addAll( getKermetaCompletionProposalsForBlock(viewer, offset, b, stringToMatch) );
