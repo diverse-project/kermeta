@@ -1,0 +1,91 @@
+/* $Id: keyword_list.kmt,v 1.1 2008-02-21 14:10:39 cfaucher Exp $
+ * Creation date: May 2, 2006
+ * License: E.P.L.
+ * Copyright:
+ * Authors:	Vincent MAHÉ <vmahe@irisa.fr>
+ *			Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language;
+
+require kermeta
+
+using kermeta::language::structure
+using kermeta::utils
+
+class JavaKeyWordList
+{
+	attribute keywords : Hashtable<String,String>
+	
+	/** This list has been created from the content of the web page: http://java.sun.com/docs/books/tutorial/java/nutsandbolts/_keywords.html */	
+    operation initialize() : Void is do 
+
+        // creates the keyword list
+        keywords := kermeta::utils::Hashtable<String,String>.new
+        
+		addKeyword("abstract")
+		addKeyword("continue")
+		addKeyword("for")
+		addKeyword("new")
+		addKeyword("switch")
+		addKeyword("assert")
+		addKeyword("default")
+		addKeyword("goto")
+		addKeyword("package")
+		addKeyword("synchronized")
+		addKeyword("boolean")
+		addKeyword("do")
+		addKeyword("if")
+		addKeyword("private")
+		addKeyword("this")
+		addKeyword("break")
+		addKeyword("double")
+		addKeyword("implements")
+		addKeyword("protected")
+		addKeyword("throw")
+		addKeyword("byte")
+		addKeyword("else")
+		addKeyword("import")
+		addKeyword("public")
+		addKeyword("throws")
+		addKeyword("case")
+		addKeyword("enum")
+		addKeyword("instanceof")
+		addKeyword("return")
+		addKeyword("transient")
+		addKeyword("catch")
+		addKeyword("extends")
+		addKeyword("int")
+		addKeyword("short")
+		addKeyword("try")
+		addKeyword("char")
+		addKeyword("final")
+		addKeyword("interface")
+		addKeyword("static")
+		addKeyword("void")
+		addKeyword("class")
+		addKeyword("finally")
+		addKeyword("long")
+		addKeyword("strictfp")
+		addKeyword("volatile")
+		addKeyword("const")
+		addKeyword("float")
+		addKeyword("native")
+		addKeyword("super")
+		addKeyword("while")
+		
+		// To see
+		addKeyword("true")
+		addKeyword("false")
+		addKeyword("null")
+        
+	end
+
+	operation addKeyword(kw : String) : Void is do
+		keywords.put(kw, kw)
+	end
+    
+    operation isKeyword(str : String) : Boolean is do
+    	result := (not keywords.getValue(str).isVoid)
+    end
+}
