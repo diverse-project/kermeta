@@ -1,0 +1,25 @@
+/* $Id: KM2EcoreContext.kmt,v 1.1 2008-02-21 09:03:09 ftanguy Exp $
+ * Creation date: February 14, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "km2ecore::KMEcoreContext"
+@mainOperation "main"
+
+
+package km2ecore;
+
+
+require kermeta
+
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+
+class KMEcoreContext
+{
+	operation main() : Void is do 
+	
+	end
+	
+	
+}
