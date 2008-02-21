@@ -121,7 +121,8 @@ class TestABTypes inherits kermeta::kunit::TestCase
      */
     operation testop_getEStructuralFeature() is do
         //self.doesNotWorkInsideSetup
-    	assert(bclaz.op_getEStructuralFeature(1).name=="c")
+    	var id : Integer init bclaz.getFeatureID(bclaz.getEStructuralFeature("c"))
+    	assert(bclaz.op_getEStructuralFeature(id).name=="c")
     end
     
     operation testgetEStructuralFeature() is do
