@@ -1,4 +1,4 @@
-/* $Id: Builders.kmt,v 1.3 2007-05-03 14:28:21 barais Exp $
+/* $Id: Builders.kmt,v 1.4 2008-02-21 15:35:36 dvojtise Exp $
  * File : Builders.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -36,6 +36,7 @@ class BuilderPattern
     operation initialize() is do
 		helper := EcoreHelpers::EcoreHelper.new
     	helper.initialize
+    	helper.loadEcoreAsModel
     	generateJavaCode := true
     	generateKermetaCode := true
     	
