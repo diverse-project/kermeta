@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.9 2007-09-28 09:57:33 jmottu Exp $
+/* $Id: EcoreHelper.kmt,v 1.10 2008-02-21 15:23:39 dvojtise Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -17,7 +17,8 @@ package EcoreHelpers;
 
 require kermeta
 
-require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+require "../ecore_behavior.kmt"
+//require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 //require "http://www.eclipse.org/emf/2002/Ecore"
  
 using kermeta::standard
@@ -27,19 +28,21 @@ using kermeta::persistence
 using ecore
 
 /** This class provides some helper methods to load/save Ecore models
-    Plus some other useful navigation methods
+ *   Plus some other useful navigation methods
  */
 class EcoreHelper
 {
 	attribute ecoreMetamodel : String
 
 	operation initialize() is do
-//		ecoreMetamodel := "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/ecore/Ecore.ecore"
+		// Ecore.ecore official file
 		ecoreMetamodel := "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
 
 	end
 
-	/** load an ECore model */
+	/** load an ECore model 
+	 * Does not store its content. (Ie. getEcoreClassifierByQualifiedName will not work
+	 */
     operation loadEcoreModel(repository : EMFRepository, modelUri : String) : Sequence<EPackage> is do
     	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
     	resource.load
@@ -50,10 +53,13 @@ class EcoreHelper
     	
     end
 
-	attribute packages : Sequence<EPackage>
+	/**
+	 * storage of all the loaded EPackage (used by some operations like getEcoreClassifierByQualifiedName()
+	 */
+	reference packages : Sequence<EPackage>
 
-	/** load an ECore model */
-    operation loadMetamodel(modelUri : String) : Void is do
+	/** loads an ECore model and stores its content in the packages reference of this helper */
+    operation loadModel(modelUri : String) : Void is do
     	var repository : EMFRepository init EMFRepository.new 
     	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
     	resource.load
@@ -65,7 +71,7 @@ class EcoreHelper
 
 
 
-	/** load an ECore model */
+	/** loads ECore as a model and stores its content in the packages reference of this helper*/
     operation loadEcoreAsModel() : Void is do
 		var repository : EMFRepository init EMFRepository.new 
     	var resource : Resource init repository.createResource(ecoreMetamodel , ecoreMetamodel)
@@ -73,7 +79,7 @@ class EcoreHelper
     	var instances : Set<Object> init resource.instances
     	// retreives only the packages
     	packages := instances.select { e | EPackage.isInstance(e) }.collect{p | var pack : EPackage
-    	pack ?= p}
+    		pack ?= p}
     end
 
 	
@@ -86,45 +92,8 @@ class EcoreHelper
 		end
 	end
 	
-	/*operation isMultiple(contextQualifiedName : String, path : String, token : String) : Boolean raises InvalidPathName,MetaModelNotLoaded is do
-		
-		 var context : EClass 
-		 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
-		 if (context != void) then
-		 
-			 var splitpath: OrderedSet<String> init self.splitString(path,token)
-			 var feature : ETypedElement
-		 
-			 from var it : Iterator<String> init splitpath.iterator
-		 		until (it.isOff) loop
-		 		var s : String init it.next
-		 
-			 	feature := context.eAllStructuralFeatures.detect{e|e.name == s}
-			 	
-			if (feature == void) then
-				feature := context.eAllOperations.detect{e|e.name == s}
-				if (feature == void) then
-			 		raise InvalidPathName.new
-				end
-		 	end
-			 	
-			 	context ?= feature.eType
-		 	end
-		 	if (feature != void) then
-		 		if (feature.upperBound >1 or feature.upperBound == -1 ) then
-		 			result := true
-		 		else
-		 			result:= false
-			 	end	
-			else
-		 		raise InvalidPathName.new
-		 	end
-		 else
-		 	raise InvalidContextName.new
-		 end
-	end*/
 	
-		operation getETypedElementFromPath(contextQualifiedName : String, path : String, token : String) : ETypedElement raises InvalidPathName,MetaModelNotLoaded is do
+	operation getETypedElementFromPath(contextQualifiedName : String, path : String, token : String) : ETypedElement raises InvalidPathName,MetaModelNotLoaded is do
 		
 		 var context : EClass 
 		 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
@@ -187,12 +156,19 @@ class EcoreHelper
 		
 	end
 
-	operation getEcoreClassifierByQualifiedName(classifierName : String) : EClassifier is do
+	/**
+	 * Retreives a Classifier in the loaded (and stored) packages
+	 */
+	operation getEcoreClassifierByQualifiedName(classifierName : String) : EClassifier
+	pre isPackagesInitialized is not packages.isVoid 
+	is do
+	
 		var splitpath: OrderedSet<String> init self.splitString(classifierName,"::")
 		var ClassifierName :String init splitpath.last
 		splitpath.remove(splitpath.last)
-
-		var pack : EPackage init packages.detect{e|e.name==(splitpath.first)}
+		
+		
+		var pack : EPackage init packages.detect{e|e.name==(splitpath.first)}		
 		splitpath.remove(splitpath.first)
 			
 		 from var it : Iterator<String> init splitpath.iterator
