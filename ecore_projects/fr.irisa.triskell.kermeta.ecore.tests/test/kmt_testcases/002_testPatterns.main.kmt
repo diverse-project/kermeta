@@ -1,0 +1,371 @@
+/* $Id: 002_testPatterns.main.kmt,v 1.1 2008-02-21 12:27:27 dvojtise Exp $ */
+@mainClass "testEcorePatterns::TestPatterns"
+@mainOperation "mainTester"
+package testEcorePatterns;
+
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
+require kermeta
+
+using kermeta::standard
+using kermeta::persistence
+using EcoreTransformations
+
+/** 
+ * This test suite tests checks the application of some design patterns
+ * an improvement would probably be to change it into a input => expectedOutput testsuite
+*/
+class TestPatterns inherits kermeta::kunit::TestCase
+{
+	reference packUml : ecore::EPackage
+	reference tool : Patterns4Ecore
+	reference aclaz : ecore::EClass
+	reference bclaz : ecore::EClass
+	reference cclaz : ecore::EClass
+	reference repository : EMFRepository
+	reference helper : EcoreHelpers::EcoreHelper
+	attribute str : String
+ 	
+ 	
+ 	/**
+ 	 * entry operation for running in standalone 
+ 	 */
+ 	operation mainTester() is do
+ 		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(TestPatterns)
+		tr.printTestResult
+ 	end
+ 	
+ 	/* We need to load the input model and initialize the Patterns tools */
+	method setUp() is do
+ 		repository := EMFRepository.new
+		helper := EcoreHelpers::EcoreHelper.new
+		helper.initialize()
+		
+		stdio.writeln(" loading prePatterns model ...")
+		var model : Sequence <ecore::EPackage> init helper.loadEcoreModel(repository, "platform:/resource/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/002_prePatterns.ecore")
+		packUml := model.detect{ e | e.name.equals("TopPackage") }
+		
+        tool := Patterns4Ecore.new
+        tool.initialize
+	end
+	
+	method tearDown() is do
+	end
+	
+    /** Test how is applied the simple Visitor Pattern */
+    operation testVisitor() is do
+		stdio.writeln("  applying Visitor Pattern ...")
+		
+    	var visitorsPack : ecore::EPackage
+    	// run the Visitor Pattern on the input model
+    	visitorsPack := tool.addVisitor(packUml, void)
+        
+        // Check that we have the visitor and the visitable classes
+        assertTrueWithMsg(visitorsPack.name == "visitors", 
+    		"The Visitor package must be called 'visitors'")
+    		
+        assertTrueWithMsg(visitorsPack.eClassifiers.size == 2, 
+    		"The Visitor package must have 2 classes")
+		aclaz ?= visitorsPack.eClassifiers.one
+		bclaz ?= visitorsPack.eClassifiers.last
+		
+		// Check that the Visitable exists and has the "accept" operation
+		assertTrueWithMsg(aclaz.name == "Visitable", 
+    		"The Visitable class must be called 'Visitable'")
+    		
+		assertTrueWithMsg(aclaz.~abstract == true, 
+    		"The Visitable class must be abstract")
+    		
+    	assertFalseWithMsg( aclaz.eOperations.detect{ e | e.name.equals("accept") } == void, 
+    		"The Visitable class must have 'accept' operation")
+		
+		// Check that the Visitor exists and has the "visit" operations
+		assertTrueWithMsg(bclaz.name == "Visitor", 
+    		"The Visitor class must be called 'Visitor'")
+    		
+		assertTrueWithMsg(bclaz.~abstract == true, 
+    		"The Visitor class must be abstract")
+    		
+		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitAClass") } == void,
+			"The Visitor must have a 'visitAclass() operation !")
+			
+		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitBClass") } == void,
+			"The Visitor must have a 'visitBclass() operation !")
+			
+		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitCClass") } == void,
+			"The Visitor must have a 'visitCclass() operation !")
+			
+		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitDClass") } == void,
+			"The Visitor must have a 'visitDclass() operation !")
+			
+		assertTrueWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitEClass") } == void,
+			"The Visitor must not have a 'visitEClass() operation (EClass in sub-package) !")
+			
+		assertTrueWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitFClass") } == void,
+			"The Visitor must not have a 'visitFClass() operation (EClass in sub-package) !")
+		
+		// Check that the main package classes inherit from "Visitable"
+		var xclaz : ecore::EClass
+		xclaz ?= packUml.eClassifiers.detect{ e | e.name.equals("AClass") }
+		assertFalseWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The AClass must have a 'accept() operation !")
+			
+		xclaz ?= packUml.eClassifiers.detect{ e | e.name.equals("BClass") }
+		assertFalseWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The BClass must have a 'accept() operation !")
+			
+		xclaz ?= packUml.eClassifiers.detect{ e | e.name.equals("CClass") }
+		assertFalseWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The CClass must have a 'accept() operation !")
+			
+		xclaz ?= packUml.eClassifiers.detect{ e | e.name.equals("DClass") }
+		assertFalseWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The DClass must have a 'accept() operation !")
+		
+		// Check that the subpackage classes don't inherit from "Visitable"
+		var subPack : ecore::EPackage init packUml.eSubpackages.detect{ p|p.name.equals("SubPackage")}
+		xclaz ?= subPack.eClassifiers.detect{ e | e.name.equals("EClass") }
+		assertTrueWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The EClass must not have a 'accept() operation (EClass in sub-package) !")
+			
+		xclaz ?= subPack.eClassifiers.detect{ e | e.name.equals("FClass") }
+		assertTrueWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The FClass must not have a 'accept() operation (FClass in sub-package) !")
+    end
+    
+    /**
+     * Test how is applied the more sophisticated 'top-down' Visitor Pattern
+     */
+    operation testTopDownVisitor() is do
+		stdio.writeln("  applying Top-Down Visitor Pattern ...")
+		
+		// All the commented asserts concern not yet developped functiunalities
+		
+    	var visitorsPack : ecore::EPackage
+    	// run the Visitor Pattern on the input model
+    	visitorsPack := tool.addTopDownVisitor(packUml, void)
+		
+        // Check that we have the visitor and the visitable classes
+        assertTrueWithMsg(visitorsPack.name == "visitors", 
+    		"The Visitor package must be called 'visitors'")
+    	
+        assertTrueWithMsg(visitorsPack.eClassifiers.size == 3, 
+    		"The Visitor package must have 3 classes")
+		aclaz ?= visitorsPack.eClassifiers.detect{ e | e.name.equals("Visitable") }
+		bclaz ?= visitorsPack.eClassifiers.detect{ e | e.name.equals("Visitor") }
+		cclaz ?= visitorsPack.eClassifiers.detect{ e | e.name.equals("TopDownVisitor") }
+		
+		// Check that the Visitable exists and has the "accept" operation
+		assertFalseWithMsg(aclaz == void, 
+    		"The 'visitors' package must have a class called 'Visitable'")
+    		
+		assertTrueWithMsg(aclaz.~abstract == true, 
+    		"The Visitable class must be abstract")
+    		
+    	assertFalseWithMsg( aclaz.eOperations.detect{ e | e.name.equals("accept") } == void, 
+    		"The Visitable class must have 'accept' operation")
+		
+		// Check that the Visitor exists and has the "visit" operations
+		assertFalseWithMsg(bclaz == void, 
+    		"The 'visitors' package must have a class called 'Visitor'")
+    		
+		assertTrueWithMsg(bclaz.~abstract == true, 
+    		"The Visitor class must be abstract")
+    		
+		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitAClass") } == void,
+			"The Visitor must have a 'visitAclass() operation !")
+			
+		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitBClass") } == void,
+			"The Visitor must have a 'visitBclass() operation !")
+			
+		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitCClass") } == void,
+			"The Visitor must have a 'visitCclass() operation !")
+			
+		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitDClass") } == void,
+			"The Visitor must have a 'visitDclass() operation !")
+		
+/*		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitEClass") } == void,
+			"The Visitor must have a 'visitEClass() operation (EClass in sub-package) !")
+			
+		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitFClass") } == void,
+			"The Visitor must have a 'visitFClass() operation (EClass in sub-package) !")
+		
+		// the Visitor should have a sub-package generic visit, for deep visit
+		assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("visitPackage") } == void,
+			"The Visitor must have a 'visitPackage() operation !")
+*/		
+		// Check that the main package classes inherit from "Visitable"
+		var xclaz : ecore::EClass
+		xclaz ?= packUml.eClassifiers.detect{ e | e.name.equals("AClass") }
+		assertFalseWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The AClass must have a 'accept() operation !")
+			
+		xclaz ?= packUml.eClassifiers.detect{ e | e.name.equals("BClass") }
+		assertFalseWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The BClass must have a 'accept() operation !")
+			
+		xclaz ?= packUml.eClassifiers.detect{ e | e.name.equals("CClass") }
+		assertFalseWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The CClass must have a 'accept() operation !")
+			
+		xclaz ?= packUml.eClassifiers.detect{ e | e.name.equals("DClass") }
+		assertFalseWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The DClass must have a 'accept() operation !")
+		
+/*		// Check that the subpackage classes inherit from "Visitable"
+		var subPack : ecore::EPackage init packUml.eSubpackages.detect{ p|p.name.equals("SubPackage")}
+		xclaz ?= subPack.eClassifiers.detect{ e | e.name.equals("EClass") }
+		assertFalseWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The EClass must have a 'accept() operation (EClass in sub-package) !")
+			
+		xclaz ?= subPack.eClassifiers.detect{ e | e.name.equals("FClass") }
+		assertFalseWithMsg(xclaz.eOperations.detect{ e | e.name.equals("accept") } == void,
+			"The FClass must have a 'accept() operation (FClass in sub-package) !")
+*/		
+		// Check that the TopDownVisitor exists and has correct code in the visit operations
+		assertFalseWithMsg(cclaz == void, 
+    		"The 'visitors' package must have a class called 'TopDownVisitor'")
+    		
+		assertTrueWithMsg(cclaz.~abstract == true, 
+    		"The TopDownVisitor class must be abstract")
+    	
+    	// the AClass visit operation must exist
+    	var opVisitA : ecore::EOperation init cclaz.eOperations.detect{ e | e.name.equals("visitAClass") }
+		assertFalseWithMsg(opVisitA == void,
+			"The TopDownVisitor must have a 'visitAclass() operation !")
+    	
+    	// the BClass visit operation must recursively launch the visit of DClass composition
+    	var opVisitB : ecore::EOperation init cclaz.eOperations.detect{ e | e.name.equals("visitBClass") }
+		assertFalseWithMsg(opVisitB == void,
+			"The TopDownVisitor must have a 'visitBClass() operation !")
+		var annot : ecore::EAnnotation init opVisitB.getEAnnotation("kermeta")
+		assertFalseWithMsg(annot == void,
+			"The 'visitBClass' operation must have a body !")
+		assertFalseWithMsg(annot.details.first.~value.indexOf("DClass") == 0,
+			"The 'visitBClass' operation must address the DClass !")
+    	
+    	// the CClass visit operation must exist
+    	var opVisitC : ecore::EOperation init cclaz.eOperations.detect{ e | e.name.equals("visitCClass") }
+		assertFalseWithMsg(opVisitC == void,
+			"The TopDownVisitor must have a 'visitCClass() operation !")
+    	
+    	// the DClass visit operation must exist
+    	var opVisitD : ecore::EOperation init cclaz.eOperations.detect{ e | e.name.equals("visitDClass") }
+		assertFalseWithMsg(opVisitD == void,
+			"The TopDownVisitor must have a 'visitDClass() operation !")
+    	
+/*    	// the EClass visit operation must recursively launch the visit of FClass composition
+    	var opVisitE : ecore::EOperation init cclaz.eOperations.detect{ e | e.name.equals("visitEClass") }
+		assertFalseWithMsg(opVisitE == void,
+			"The TopDownVisitor must have a 'visitEClass() operation !")
+		assertFalseWithMsg(opVisitE.getEAnnotation("body").details.select{ e | e.toString.indexOf("FClass") != 0 } == void ,
+			"The 'visitEClass' operation must undervisit its composition links !")
+    	
+    	// the FClass visit operation must exist
+    	var opVisitF : ecore::EOperation init cclaz.eOperations.detect{ e | e.name.equals("visitFClass") }
+		assertFalseWithMsg(opVisitF == void,
+			"The TopDownVisitor must have a 'visitFClass() operation !")
+    	
+    	// the sub-packages visit operation must recursively launch the visit of its classes
+    	var opVisitSP : ecore::EOperation init cclaz.eOperations.detect{ e | e.name.equals("visitPackage") }
+		assertFalseWithMsg(opVisitSP == void,
+			"The TopDownVisitor must have a 'visitPackage() operation !")
+		assertFalseWithMsg(opVisitSP.getEAnnotation("body").details.select{ e | e.toString.indexOf("eClassifiers") != 0 } == void ,
+			"The 'visitPackage' operation must undervisit its eClassifiers collection !")
+		assertFalseWithMsg(opVisitSP.getEAnnotation("body").details.select{ e | e.toString.indexOf("EClass") != 0 } == void ,
+			"The 'visitPackage' operation must undervisit its classes !")
+*/			
+    end
+    
+    /** Test how is applied the Builder Pattern */
+    operation testBuilder() is do
+		stdio.writeln("  applying Builder Pattern ...")
+		
+    	var buildersPack : ecore::EPackage
+    	// run the Builder Pattern on the input model
+    	buildersPack := tool.addBuilder(packUml)
+    	
+        // Check that we have the visitor and the visitable classes
+        assertTrueWithMsg(buildersPack.name == "builders", 
+    		"The Builder package must be called 'builders'")
+    		
+        assertTrueWithMsg(buildersPack.eClassifiers.size == 1, 
+    		"The Builder package must have 1 classe")
+		aclaz ?= buildersPack.eClassifiers.one
+		
+		// Check that the AbstractFactory exists and is abstract
+		assertTrueWithMsg(aclaz.name == "AbstractFactory", 
+    		"The AbstractFactory class must be called 'AbstractFactory'")
+    		
+		assertTrueWithMsg(aclaz.~abstract == true, 
+    		"The AbstractFactory class must be abstract")
+		
+		// Check that the AbstractFactory exists and has the "build" operations
+		assertTrueWithMsg(aclaz.eOperations.detect{ e | e.name.equals("createAClass") } == void,
+			"The AbstractFactory must not have a 'createAclass() operation (abstract class) !")
+			
+		assertFalseWithMsg(aclaz.eOperations.detect{ e | e.name.equals("createBClass") } == void,
+			"The AbstractFactory must have a 'createBclass() operation !")
+			
+		assertFalseWithMsg(aclaz.eOperations.detect{ e | e.name.equals("createCClass") } == void,
+			"The AbstractFactory must have a 'createCclass() operation !")
+			
+		assertFalseWithMsg(aclaz.eOperations.detect{ e | e.name.equals("createDClass") } == void,
+			"The AbstractFactory must have a 'createDclass() operation !")
+			
+		assertTrueWithMsg(aclaz.eOperations.detect{ e | e.name.equals("createEClass") } == void,
+			"The AbstractFactory must not have a 'createtEClass() operation (EClass in sub-package) !")
+			
+		assertTrueWithMsg(aclaz.eOperations.detect{ e | e.name.equals("createFClass") } == void,
+			"The AbstractFactory must not have a 'createFClass() operation (EClass in sub-package) !")
+    end
+
+    /** Test how is applied the Observer Pattern */
+    operation testObserver() is do
+		stdio.writeln("  applying Observer Pattern ...")
+		
+    	var observersPack : ecore::EPackage
+    	var concreteSubject : ecore::EClass init ecore::EClass.new
+    	var concreteObserver : ecore::EClass init ecore::EClass.new
+
+    	// run the Observer Pattern on the input model
+    	tool.addObserver(packUml, concreteSubject, concreteObserver)
+        
+		aclaz ?= packUml.eClassifiers.detect{ e | e.name.equals("Subject") }
+		bclaz ?= packUml.eClassifiers.detect{ e | e.name.equals("Observer") }
+		
+		// Check that the Subject exists and has the "attach", "detach" and "notifyall" operations
+		assertTrueWithMsg(aclaz.name == "Subject", 
+    		"The Subject class must be called 'Subject'")
+    		
+		assertTrueWithMsg(aclaz.~abstract == true, 
+    		"The Subject class must be abstract")
+    		
+    	assertFalseWithMsg(aclaz.eOperations.detect{ e | e.name.equals("attach") } == void, 
+    		"The Subject class must have 'attach' operation")
+    	assertFalseWithMsg(aclaz.eOperations.detect{ e | e.name.equals("attach") }.eParameters.detect{ par|par.name.equals("o")} == void, 
+    		"The Subject class 'attach' operation must have a 'o' parameter")
+		
+    	assertFalseWithMsg(aclaz.eOperations.detect{ e | e.name.equals("detach") } == void, 
+    		"The Subject class must have 'detach' operation")
+    	assertFalseWithMsg(aclaz.eOperations.detect{ e | e.name.equals("detach") }.eParameters.detect{ par|par.name.equals("o")} == void, 
+    		"The Subject class 'detach' operation must have a 'o' parameter")
+		
+    	assertFalseWithMsg(aclaz.eOperations.detect{ e | e.name.equals("notifyall") } == void, 
+    		"The Subject class must have 'notifyall' operation")
+		
+		// Check that the Observer exists and has the "update" operation
+		assertTrueWithMsg(bclaz.name == "Observer", 
+    		"The Observer class must be called 'Observer'")
+    		
+		assertTrueWithMsg(bclaz.interface == true, 
+    		"The Observer class must be an interface")
+    		
+    	assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("update") } == void, 
+    		"The Observer class must have 'update' operation")
+    	assertFalseWithMsg(bclaz.eOperations.detect{ e | e.name.equals("update") }.eParameters.detect{ par|par.name.equals("s")} == void, 
+    		"The Observer class 'update' operation must have a 's' parameter")
+    end
+}

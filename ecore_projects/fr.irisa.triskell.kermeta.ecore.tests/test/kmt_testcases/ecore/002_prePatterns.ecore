@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="TopPackage" nsURI="http://prePatterns" nsPrefix="prePatterns">
+  <eAnnotations source="http://www.topcased.org/uuid">
+    <details key="uuid" value="11437899611380"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="AClass" abstract="true">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="11437899611411"/>
+    </eAnnotations>
+    <eOperations name="aOperation">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11437899611422"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aAttribute">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11437899611423"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uses" eType="//CClass">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11437899611434"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CClass">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="11437899611445"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BClass" eSuperTypes="//AClass">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="11437899611446"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="composition" lowerBound="1" eType="//DClass" containment="true">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11437899611457"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DClass">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="11437899611468"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eSubpackages name="SubPackage">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="11437899611479"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="EClass" eSuperTypes="//DClass">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114379038882030"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="has" eType="//SubPackage/FClass" defaultValueLiteral="" containment="true">
+        <eAnnotations source="http://www.topcased.org/uuid">
+          <details key="uuid" value="114379038882131"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FClass">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114379038882232"/>
+      </eAnnotations>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
