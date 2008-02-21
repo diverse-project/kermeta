@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!-- $Id: toc.xml,v 1.15 2008-01-02 13:29:53 dvojtise Exp $ -->
+<!-- $Id: toc.xml,v 1.16 2008-02-21 16:15:55 dvojtise Exp $ -->
 <toc label="KerMeta documentation">
 	<topic label="User documentation">		
 		<topic label="Kermeta manual" href="build/eclipse.help/KerMeta-Manual/index.html"> 
@@ -33,13 +33,26 @@
 			</topic>
 			<anchor id="tutorials" />					
 		</topic>
-		<topic label="KerMeta history and known limitations (online)"
-			href="http://www.irisa.fr/triskell/softwares/kermeta/update/history.html">
+		<topic label="MDKs (Model development Kit)">		
+			<anchor id="MDKs" />					
+		</topic>
+		<topic label="FAQ (online)"
+			href="http://www.kermeta.org/documents/faq/">
+		</topic>
+		<topic label="Known scientific papers (online)"
+			href="http://www.kermeta.org/documents/articles/">
+		</topic>
+		<topic label="Kermeta history and known limitations (online)"
+			href="http://www.kermeta.org/update/history.html">
 		</topic>
 					
 		
 	</topic>
-	<topic label="Developer documentation">					
+	<topic label="Developer documentation"
+		href="src/eclipse.help/developer_doc.html">			
+		<topic label="Contributing to kermeta (online)"
+			href="http://www.kermeta.org/community/dev/">
+		</topic>				
 		<topic label="KerMeta references">
 			<topic label="KerMeta Interpreter and Java Framework reference" href="build/javadoc/KerMetaInterpreter/index.html"> 		
 			</topic>	
