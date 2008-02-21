@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.17 2008-02-14 07:13:43 uid21732 Exp $
+/* $Id: TexteditorPlugin.java,v 1.18 2008-02-21 08:27:07 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TexteditorPlugin.java
  * License : EPL
@@ -17,6 +17,8 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.texteditor.KermetaEditorEventListener;
 import org.kermeta.texteditor.ModelcheckingStrategy;
@@ -28,10 +30,18 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  * The main plugin class to be used in the desktop.
  */
 public class TexteditorPlugin extends AbstractUIPlugin {
+	
+
+	// The plug-in ID
+	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.texteditor";
+	
 	//The shared instance.
 	private static TexteditorPlugin plugin;
 	
 	final static public String KMT_PARTITIONING = "_KMT_PARTITIONING_";
+
+	// Log4j logger for this plugin
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("TexteditorPlugin");
 	
 	// Resource bundle.
 	private ResourceBundle resourceBundle;
@@ -118,5 +128,33 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	}
 	public void unregisterListener(KermetaEditorEventListener listener) {
 		kermetaEditorEventListeners.remove(listener);
+	}
+	
+	/**
+	 * This method logs an error message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logErrorMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, message, e));
+		// log4j message
+		internalLog.error(message, e);
+	}
+	
+	/**
+	 * This method logs a warning message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logWarningMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.WARNING, PLUGIN_ID, IStatus.WARNING, message, e));
+		// log4j message
+		internalLog.error(message, e);
 	}
 }
