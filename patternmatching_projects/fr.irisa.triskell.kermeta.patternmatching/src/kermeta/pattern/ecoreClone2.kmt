@@ -1,4 +1,4 @@
-/* $Id: ecoreClone2.kmt,v 1.1 2008-02-20 09:09:34 bmorin Exp $
+/* $Id: ecoreClone2.kmt,v 1.2 2008-02-21 12:20:00 bmorin Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright: IRISA / INRIA
@@ -59,7 +59,6 @@ aspect class ETypedElement
 		if self.eType != void then		
 			typedElt.eType ?= self.eType.cloned
 		end
-		
 		if self.eGenericType != void then
 			if self.eGenericType.eClassifier != void then
 				var g : EGenericType init EGenericType.new
@@ -155,22 +154,13 @@ aspect class EClass
 			c ?= a.cloned
 			p.eStructuralFeatures.add(c)
 			c.eContainingClass := p	
-			if(p.name != void and c.name != void) then	
-				stdio.writeln(p.name+".eStructuralFeatures: "+c.name+" "+c.toString)
-			else
-				stdio.writeln(p.toString+".eStructuralFeatures: "+c.toString)
-			end
-
 		}
 		//stdio.writeln(self.name+" "+self.toString+" -> "+p.name+" "+p.toString)	
 	end
 	
 	operation setType():Void is do	
-		//stdio.writeln("EClass.setType "+name+" "+self.toString)
-		//stdio.writeln("cloned = "+cloned.toString)
 		var cl : EClass
 		cl ?= cloned
-		//stdio.writeln("cloned = "+cl.name)
 		self.eSuperTypes.each{a |
 			var clonedSuper : EClass
 			clonedSuper ?= a.cloned
@@ -205,8 +195,6 @@ aspect class EClass
 	end
 }
 
-
-/** This class refers to any EDataType feature*/
 aspect class EAttribute 
 {			
 	method clone() is do
@@ -267,7 +255,7 @@ aspect class EOperation
 		super
 		var p : EOperation
 		p ?= cloned
-		p.eParameters.each{a |
+		self.eParameters.each{a |
 			a.clone
 			var c : EParameter
 			c ?= a.cloned
@@ -287,8 +275,6 @@ aspect class EParameter
 	method clone() from ETypedElement is do
 		cloned := EParameter.new
 		super
-		var p : EParameter
-		p ?= cloned
 	end
 }
 	
@@ -300,7 +286,6 @@ aspect class EDataType
 		var e : EEnum
 		e ?= self
 		if e == void then
-			//stdio.writeln("cloning a real datatype")
 			cloned := EDataType.new
 		end
 		super
