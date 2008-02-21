@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.4 2008-02-21 10:37:36 dvojtise Exp $
+/* $Id: ecore_behavior.kmt,v 1.5 2008-02-21 10:38:13 dvojtise Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -144,7 +144,7 @@ aspect class EClass
 	end
 	
 	/** Return the Id of the feature
-	 * This Id is NOT the same as the one used by EMF because it ensure that the Id doesn't change
+	 * This Id is NOT the same as the one used by EMF because it ensures that the Id doesn't change
 	 * even if the model is modified. In order to achieve that, this Id is based on Kermeta oid 
      */
 	operation getFeatureID(feature : EStructuralFeature) : EInt is do
