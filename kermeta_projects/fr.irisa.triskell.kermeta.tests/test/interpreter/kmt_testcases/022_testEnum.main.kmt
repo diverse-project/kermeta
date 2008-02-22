@@ -1,4 +1,4 @@
-/* $Id: 022_testEnum.main.kmt,v 1.3 2008-02-14 07:13:28 uid21732 Exp $ */
+/* $Id: 022_testEnum.main.kmt,v 1.4 2008-02-22 14:24:01 bmorin Exp $ */
 
 @mainClass "testEnum::TestEnum"
 @mainOperation "main"
@@ -27,11 +27,15 @@ enumeration Jour {
 
 class TestEnum inherits kermeta::kunit::TestCase {
 	
+	attribute c : Couleur
+	
 	operation main() : Void is do
 		var tr : TestRunner init TestRunner.new
 		tr.run(TestEnum)
 		tr.printTestResult
 	end	
+	
+	
 	
 	operation testCompareLiteral() : Couleur is
 	do
@@ -136,6 +140,16 @@ class TestEnum inherits kermeta::kunit::TestCase {
 		
 		assert(j == void)
 		
+	end
+	
+	operation testReflect2() is do
+		var a : Property init getMetaClass.ownedAttribute.one
+		do 
+			self.getMetaClass.~set(a, Couleur.rouge)
+			self.assert(true)
+		catch e : Exception
+		self.assert(false)
+		end
 	end
 	
 	operation testOpCall() is do
