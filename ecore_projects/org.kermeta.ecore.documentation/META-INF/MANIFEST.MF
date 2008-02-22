@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Documentation Plug-in
+Bundle-SymbolicName: org.kermeta.ecore.documentation;singleton:=true
+Bundle-Version: 1.1.0
+Bundle-Activator: org.kermeta.ecore.documentation.Activator
+Bundle-Vendor: IRISA/INRIA
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Eclipse-LazyStart: true

@@ -1,0 +1,15 @@
+<!-- $Id: toc.xml,v 1.1 2008-02-22 10:25:18 dvojtise Exp $ -->
+<toc link_to="../fr.irisa.triskell.kermeta.documentation/toc.xml#MDKs" label="Kermeta MDKs ">
+	<topic label="Kermeta Ecore MDK">	
+		<topic href="help/intro.html" label="Introduction to Ecore MDK">
+		</topic>
+		<topic href="help/ecore_behavior_aspect.html" label="Using Ecore behavior aspect">
+		</topic>
+		<!--  <topic href="help/ecore_helpers.html" label="Using Ecore helpers">
+		</topic>
+		<topic href="help/ecore_transformations.html" label="Using Ecore transformations">
+		</topic>
+		<topic href="help/pattern_transformation.html" label="Using Ecore pattern transformation">
+		</topic> -->
+	</topic>
+</toc>

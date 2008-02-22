@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>Ecore MDK</TITLE>
+    <link href="htmlhelp.css" rel="stylesheet" type="text/css">
+</HEAD>
+<BODY LANG="en-US" BGCOLOR="#ffffff" DIR="LTR">
+<H1 >Introduction to Ecore MDK</H1>
+<P>Kermeta Ecore Model development Kit contains various kind of code: the implemetation of Ecore behavior, some helper classes and some transformations.</P>
+<P>To use them you simply have to add the corresponding require statement to your kermeta code. 
+Then, the outline and the KermetaDoc views should help you to use its content.</P>
+<P>Please note that all of them have a dependency to :
+	<pre class="programlisting">
+	require "http://www.eclipse.org/emf/2002/Ecore"
+	</pre>
+</P>
+<H2>Short descrition of the available <em>require</em></H2>
+<dl><dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"</dt>
+	<dd>This file adds the behavior on all metaclasses of Ecore metamodel.</dd>
+    <dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"</dt>
+    <dd>This file contains some helper classes for loading Ecore models, retreiving elements in the Ecore model (by name for example), adding EAnnotation to the model, ...</dd>
+	<dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"
+</dt>
+    <dd>This file contains a transformation class that allows to transform your Ecore model and apply Design Patterns to it. Provided Design Pattern (and variants) are : Visitor, Command, Builder and Observer.</dd>
+	<dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/CleanEcoreKMAnnotations.kmt"
+</dt>
+    <dd>This file contains a transformation class that allows to remove all EAnnotation in the ecore model that may have been introduced by kermeta2ecore transformation.</dd>
+	<dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore2dot/ecore2dot.kmt"
+</dt>
+    <dd>This file contains an <em>experimental</em> transformation class that allows to produce the text of a dot file for producing a graphical representation of the ecore model.</dd>
+</dl>
+
+</BODY>
+</HTML>
