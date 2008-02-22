@@ -1,4 +1,4 @@
-/* $Id: 022_testEnum.main.kmt,v 1.4 2008-02-22 14:24:01 bmorin Exp $ */
+/* $Id: 022_testEnum.main.kmt,v 1.5 2008-02-22 14:41:53 bmorin Exp $ */
 
 @mainClass "testEnum::TestEnum"
 @mainOperation "main"
@@ -146,10 +146,10 @@ class TestEnum inherits kermeta::kunit::TestCase {
 		var a : Property init getMetaClass.ownedAttribute.one
 		do 
 			self.getMetaClass.~set(a, Couleur.rouge)
-			self.assert(true)
-		catch e : Exception
-		self.assert(false)
+		rescue (e : Exception) 
+			assert(false)
 		end
+		self.assert(true)
 	end
 	
 	operation testOpCall() is do
