@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.8 2008-02-22 12:27:53 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.9 2008-02-22 15:05:46 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -32,7 +32,6 @@ package structure {
 	aspect class Property {
 		method createBehaviorJava(context : Integer) : String is do
 			result := void
-			// Set the traceability
 			
 			// The current property is derived
 			if self.isDerived then
@@ -49,11 +48,10 @@ package structure {
 	aspect class Operation {
 		method createBehaviorJava(context : Integer) : String is do
 			result := void
-			// Set the traceability
-			self.ecoreModelElement := EcoreModelElementHelper.new.findEOperationProxy( self )
 			
 			var javaCode : StringBuffer init StringBuffer.new
-			stdio.writeln(self.name + " --- " + self.type.toString)
+			
+			//stdio.writeln("\tCurrent operation: " + self.name + " has for type: " + self.type.toString)
 			
 			// the body of the operation must be filled for being compiled
 			if ( not self.body.isVoid() ) then
@@ -109,30 +107,81 @@ package structure {
 			result := "//TODO\n" + self.toString
 		end
 	}*/
-	
+
 }
 
 package behavior {
-
+	
 	aspect class Expression {
 		method createBehaviorJava(context : Integer) : String is do
+			//self.
 			result := "//TODO content of the current expression\n" + self.toString + "\n\n"
 		end
 	}
 	
 	aspect class Block {
 		method createBehaviorJava(context : Integer) : String from Expression is do
-			result := "{"
+			var javaCode : StringBuffer init StringBuffer.new
+			javaCode.append("{")
 			self.statement.each{ stm |
-				result.append(stm.createBehaviorJava(context))
+				javaCode.append("\n\t")
+				javaCode.append(stm.createBehaviorJava(context))
+				javaCode.append("\n")
 			}
-			result.append("}")
+			result := javaCode.append("}").toString()
+		end
+	}
+	
+	//**** Begin **** Managing of the CallExpression branch ****//
+	aspect class CallExpression {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			result := "//TODO content of the current CallExpression\n" + self.toString + "\n\n"
+		end
+	}
+	
+	aspect class CallFeature {
+		method createBehaviorJava(context : Integer) : String from CallExpression is do
+			result := "//IP content of the current CallFeature\n"
+						+ self.target.createBehaviorJava(context) + "." + self.name
+						
+			if self.name == "writeln" then
+				result := "println"
+			end
+		end
+	}
+	
+	aspect class CallVariable {
+		method createBehaviorJava(context : Integer) : String from CallExpression is do
+			result := "//TODO content of the current CallVariable\n" + self.toString + "\n\n"
+			if self.name == "stdio" then
+				result := "System.out"
+			end
 		end
 	}
 	
 	aspect class CallResult {
-		method createBehaviorJava(context : Integer) : String is do
+		method createBehaviorJava(context : Integer) : String from CallVariable is do
 			result := "result"
+		end
+	}
+	
+	aspect class CallValue {
+		method createBehaviorJava(context : Integer) : String from CallExpression is do
+			result := "//TODO content of the current CallValue\n" + self.toString + "\n\n"
+		end
+	}
+	
+	aspect class CallSuperOperation {
+		method createBehaviorJava(context : Integer) : String from CallExpression is do
+			result := "//TODO content of the current CallSuperOperation\n" + "super" + "\n\n"
+		end
+	}
+	//**** End **** Managing of the CallExpression branch ****//
+	
+	//**** Begin **** Managing of the exception ****//
+	aspect class Raise {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			result := "throw " + self.expression.createBehaviorJava(context)
 		end
 	}
 	
@@ -148,6 +197,7 @@ package behavior {
 			//popPrefix();
 		end
 	}
+	//**** End **** Managing of the exception ****//
 	
 	aspect class SelfExpression {
 		method createBehaviorJava(context : Integer) : String from Expression is do
@@ -176,6 +226,13 @@ package behavior {
 		end
 	}
 	
+	/** TODO */
+	aspect class Loop {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			result := ""
+		end
+	}
+	
 	aspect class JavaStaticCall {
 		method createBehaviorJava(context : Integer) : String from Expression is do
 			//result := self.jclass.replace("::", ".") + "." + KMTHelper.getMangledIdentifier(node.getJmethod()) + "("
@@ -183,6 +240,44 @@ package behavior {
 			result := result + ")"
 		end
 	}
+	
+	//**** Begin **** Managing of the literal ****//
+	aspect class Literal {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			result := "//TODO Literal" + self.toString
+		end
+	}
+	
+	aspect class StringLiteral {
+		method createBehaviorJava(context : Integer) : String from Literal is do
+			result := "//TODO StringLiteral" + self.toString
+		end
+	}
+	
+	aspect class IntegerLiteral {
+		method createBehaviorJava(context : Integer) : String from Literal is do
+			result := "//TODO IntegerLiteral" + self.toString
+		end
+	}
+	
+	aspect class BooleanLiteral {
+		method createBehaviorJava(context : Integer) : String from Literal is do
+			result := "//TODO BooleanLiteral" + self.toString
+		end
+	}
+	
+	aspect class TypeLiteral {
+		method createBehaviorJava(context : Integer) : String from Literal is do
+			result := "//TODO TypeLiteral" + self.toString
+		end
+	}
+	
+	aspect class VoidLiteral {
+		method createBehaviorJava(context : Integer) : String from Literal is do
+			result := "void" // the VoidLiteral is "normally" mapped to the void singleton
+		end
+	}
+	//**** End **** Managing of the literal ****//
 	
 }
 
