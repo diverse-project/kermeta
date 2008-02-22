@@ -27,6 +27,9 @@
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="fr.irisa.triskell.kermeta.io"/>
       <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
+      <import feature="fr.irisa.triskell.kermeta" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="fr.irisa.triskell.kermeta.kpm"/>
+      <import plugin="org.kermeta.ecore.documentation"/>
    </requires>
 
    <plugin
