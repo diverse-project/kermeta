@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.7 2008-02-22 10:59:33 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.8 2008-02-22 12:27:53 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -54,8 +54,12 @@ package structure {
 			
 			var javaCode : StringBuffer init StringBuffer.new
 			stdio.writeln(self.name + " --- " + self.type.toString)
+			
+			// the body of the operation must be filled for being compiled
 			if ( not self.body.isVoid() ) then
 				var type_label : String init self.type.createBehaviorJava(context)
+				
+				// result is initialized only if the "return type" is not Void
 				if ( type_label!="Void" and type_label!="VoidType" ) then
 					javaCode.append("\n" + type_label + " result = null;\n")
 				end
@@ -63,6 +67,7 @@ package structure {
 				// The Java source code is provided by: self.body.createBehaviorJava(context)
 				javaCode.append(self.body.createBehaviorJava(context))
 				
+				// result is returned only if the "return type" is not Void
 				if ( type_label!="Void" and type_label!="VoidType" ) then
 					javaCode.append("\nreturn result;\n")
 				end
@@ -83,7 +88,7 @@ package structure {
 	
 	aspect class VoidType {
 		method createBehaviorJava(context : Integer) : String from Type is do
-			result := "Void"
+			result := "Void" // the VoidType is "normally" mapped to the Void class
 		end
 	}
 	
