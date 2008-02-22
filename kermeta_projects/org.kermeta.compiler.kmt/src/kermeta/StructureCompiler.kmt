@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.12 2008-02-20 14:25:29 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.13 2008-02-22 11:00:16 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -15,78 +15,85 @@ require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "pass1/Pass1.kmt"
 require "pass2/Pass2.kmt"
+require "KM2EcoreContext.kmt"
  
 using ecore
 using kermeta::persistence
 using kermeta::language::structure
-
+using kermeta::km2ecore
+using kermeta::standard
 
 class Main
 {
-	attribute repository : EMFRepository
+	attribute repository : EMFRepository [1..1]
 	
-	/** current modeling unit */
-	attribute mu : ModelingUnit
+	reference context : KM2EcoreContext [1..1]
 
     operation main_inner() : Void is do
 		var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_.ecore"
-		var mode : String init "behaviorJava"
-		
-		main_mode(input, output, mode)
+
+		main_mode(input, output, CompilingMode.behaviorJava)
 	end
 	
     operation main(input : String, output : String) : Void is do
-    	var mode : String init "behaviorJava"
-    	main_mode(input, output, mode)
+    	main_mode(input, output, CompilingMode.behaviorJava)
     end
     	
-	operation main_mode(input : String, output : String, mode : String) : Void is do
-		
+	operation main_mode(input : String, output : String, mode : CompilingMode) : Void is do
+
+		context := KM2EcoreContext.new
+		context.initialize()
+
 		repository := EMFRepository.new
 		
-		mu := loadKmModel(repository, input)
+		context.mus.add(loadKmModel(repository, input))
+
+		context.mode := mode
 		
-		mu.applyPass1()
-		if mode == "onlyEcore" then
-			mu.applyPass2
-		end
-		if mode == "behaviorKmt" then
-			mu.applyPass2BehaviorKmt
-		end
-		
-		if mode == "behaviorJava" then
-			mu.applyPass2BehaviorJava
-		end
-		
-		// Save the generated ecore
-   		var ecore_resource : Resource init repository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
-		ecore_resource.instances.add(mu.ecoreModelElement)
-		//ecore_resource.instances.addAll(mu.entryPoints)
-		mu.entryPoints.each{ e |
-			ecore_resource.instances.add(e)
-		}//ecore_resource.instances.addAll(mu.ecorePackages)
-		mu.ecorePackages.each{ p |
-			ecore_resource.instances.add(p)
+		context.mus.each{ mu |
+			mu.applyPass1()
+			if context.mode == CompilingMode.onlyEcore then
+				mu.applyPass2
+			end
+			if context.mode == CompilingMode.behaviorKmt then
+				mu.applyPass2BehaviorKmt
+			end
+			
+			if context.mode == CompilingMode.behaviorJava then
+				mu.applyPass2BehaviorJava
+			end
+			
+			// Save the generated ecore
+	   		var ecore_resource : Resource init repository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
+			ecore_resource.instances.add(mu.ecoreModelElement)
+			//ecore_resource.instances.addAll(mu.entryPoints)
+			mu.entryPoints.each{ e |
+				ecore_resource.instances.add(e)
+			}//ecore_resource.instances.addAll(mu.ecorePackages)
+			mu.ecorePackages.each{ p |
+				ecore_resource.instances.add(p)
+			}
+			
+			stdio.writeln("Save the Ecore Model")
+			ecore_resource.save
+			stdio.writeln("The Ecore Model has been saved")
+			
+			// Save the trace
+			/*var trace_resource : Resource init repository.createResource(output + ".traceability", "http://www.kermeta.org/Traceability")
+			trace_resource.instances.add(mu.ecoreModelElement)
+			
+			mu.entryPoints.each{ e |
+				trace_resource.instances.add(e)
+			}
+			mu.ecorePackages.each{ p |
+				trace_resource.instances.add(p)
+			}
+			stdio.writeln("Save the Trace Model")
+			trace_resource.save
+			stdio.writeln("The Trace Model has been saved")*/
 		}
-		stdio.writeln("Save the Ecore Model")
-		ecore_resource.save
-		stdio.writeln("The Ecore Model has been saved")
-		
-		// Save the trace
-		/*var trace_resource : Resource init repository.createResource(output + ".traceability", "http://www.kermeta.org/Traceability")
-		trace_resource.instances.add(mu.ecoreModelElement)
-		
-		mu.entryPoints.each{ e |
-			trace_resource.instances.add(e)
-		}
-		mu.ecorePackages.each{ p |
-			trace_resource.instances.add(p)
-		}
-		stdio.writeln("Save the Trace Model")
-		trace_resource.save
-		stdio.writeln("The Trace Model has been saved")*/
-				
+	
 		stdio.writeln("Finish")
 		
     end

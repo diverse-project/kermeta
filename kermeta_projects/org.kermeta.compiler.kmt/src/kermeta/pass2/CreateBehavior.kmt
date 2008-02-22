@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.6 2008-02-14 16:42:31 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.7 2008-02-22 10:59:33 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -6,9 +6,7 @@
  *			Francois Tanguy <ftanguy@irisa.fr>
  */
 
-
 package kermeta::language;
-
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
@@ -20,6 +18,7 @@ using kermeta::standard
 using kermeta::utils
 using ecore
 using km2ecore::helper::ecore
+using kermeta::language::compilerhelper
 
 package structure {
 
@@ -29,6 +28,7 @@ package structure {
 		end
 	}
 	
+	/** We have to visit property in order to print the behavior of the getter and setter */
 	aspect class Property {
 		method createBehaviorJava(context : Integer) : String is do
 			result := void
@@ -45,7 +45,7 @@ package structure {
 		end
 	}
 	
-	// We have to visit operation in order to print the result initialization and the return statement
+	/** We have to visit operation in order to print the result initialization and the return statement */
 	aspect class Operation {
 		method createBehaviorJava(context : Integer) : String is do
 			result := void
@@ -53,17 +53,17 @@ package structure {
 			self.ecoreModelElement := EcoreModelElementHelper.new.findEOperationProxy( self )
 			
 			var javaCode : StringBuffer init StringBuffer.new
-			
-			if ( self.body != void ) then
-				var type : String init self.type.asType(Type).createBehaviorJava(context)
-				if ( type!="Void" ) then
-					javaCode.append("\n" + type + " result = null;\n")
+			stdio.writeln(self.name + " --- " + self.type.toString)
+			if ( not self.body.isVoid() ) then
+				var type_label : String init self.type.createBehaviorJava(context)
+				if ( type_label!="Void" and type_label!="VoidType" ) then
+					javaCode.append("\n" + type_label + " result = null;\n")
 				end
 		
 				// The Java source code is provided by: self.body.createBehaviorJava(context)
 				javaCode.append(self.body.createBehaviorJava(context))
 				
-				if ( type!="Void" ) then
+				if ( type_label!="Void" and type_label!="VoidType" ) then
 					javaCode.append("\nreturn result;\n")
 				end
 			end
@@ -77,23 +77,33 @@ package structure {
 	
 	aspect class Type {
 		method createBehaviorJava(context : Integer) : String is do
-			result := "Void"
-			stdio.writeln("type self: " + self.toString)
-			if self.isInstanceOf(PrimitiveType) then
-				stdio.writeln("\ncoucou2\n")
-				var pt : kermeta::language::structure::PrimitiveType
-				pt ?= self
-				result := pt.instanceType.asType(Type).createBehaviorJava(context)
-			end
-	
-			if self.isInstanceOf(ParameterizedType) then
-				//stdio.writeln("\ncoucou2\n")
-				var c : Class
-				c ?= self
-				result := c.typeDefinition.name
-			end
+			result := ""
 		end
 	}
+	
+	aspect class VoidType {
+		method createBehaviorJava(context : Integer) : String from Type is do
+			result := "Void"
+		end
+	}
+	
+	aspect class PrimitiveType {
+		method createBehaviorJava(context : Integer) : String is do
+			result := self.instanceType.createBehaviorJava(context) // self.instanceType should be a ParameterizedType
+		end
+	}
+	
+	aspect class ParameterizedType {
+		method createBehaviorJava(context : Integer) : String from Type is do
+			result := self.typeDefinition.name
+		end
+	}
+	
+	/*aspect class ObjectTypeVariable {
+		method createBehaviorJava(context : Integer) : String is do
+			result := "//TODO\n" + self.toString
+		end
+	}*/
 	
 }
 
@@ -101,20 +111,18 @@ package behavior {
 
 	aspect class Expression {
 		method createBehaviorJava(context : Integer) : String is do
-			result := super(context)
+			result := "//TODO content of the current expression\n" + self.toString + "\n\n"
 		end
 	}
 	
-	aspect class Block { 
-
-		method createBehaviorJava(context : Integer) : String is do
+	aspect class Block {
+		method createBehaviorJava(context : Integer) : String from Expression is do
 			result := "{"
 			self.statement.each{ stm |
 				result.append(stm.createBehaviorJava(context))
 			}
 			result.append("}")
 		end
-	
 	}
 	
 	aspect class CallResult {
@@ -122,5 +130,65 @@ package behavior {
 			result := "result"
 		end
 	}
+	
+	aspect class Rescue {
+		method createBehaviorJava(context : Integer) : String is do
+			result := "catch"
+			if not self.exceptionName.isVoid() then
+				result := result + "(" + self.exceptionName + " : " + self.exceptionType.createBehaviorJava(context) + ")"
+			end
+			result := result + "\n{"
+			//pushPrefix();
+			result := result + self.body.createBehaviorJava(context) + "}"
+			//popPrefix();
+		end
+	}
+	
+	aspect class SelfExpression {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			result := "this"
+		end
+	}
+	
+	aspect class Conditional {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			result := "if( " + self.condition.createBehaviorJava(context) + ") {\n"
+			//pushPrefix(); 
+			// Both type of ThenBody and ElseBody are "Block" (see also KMT2KMPrimitiveExpressionBuilder)
+			// And block textual syntax is already represented by "then..else..end"
+			//alreadyPrefixed = false;
+			if not self.thenBody.isVoid() then 
+				result := result + self.thenBody.createBehaviorJava(context) + "\n"
+			//popPrefix();
+			end
+			if not self.elseBody.isVoid() then
+				result := result + /*getPrefix() +*/ "} else {\n"
+				//pushPrefix();
+				result := result + self.elseBody.createBehaviorJava(context) + "\n"
+				//popPrefix();
+			end
+			result := result + /*getPrefix() +*/ "}"
+		end
+	}
+	
+	aspect class JavaStaticCall {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			//result := self.jclass.replace("::", ".") + "." + KMTHelper.getMangledIdentifier(node.getJmethod()) + "("
+			//result := result + ppComaSeparatedNodes(node.getParameters());
+			result := result + ")"
+		end
+	}
+	
+}
 
+package compilerhelper {
+	/** unused for the moment */
+	class CompilerHelper {
+		operation ppCRSeparatedNode(expressions : OrderedSet<Expression>, context : Integer) : String is do
+			result := ""
+			expressions.each{e |
+				result := result + e.createBehaviorJava(context)
+			}
+		end
+	}
 }

@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreHelper.kmt,v 1.1 2008-02-01 09:40:44 ftanguy Exp $
+/* $Id: KM2EcoreHelper.kmt,v 1.2 2008-02-22 11:00:16 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -7,5 +7,27 @@
 
 package km2ecore::helper;
 
+// The 2 following require statement are here to simplify the call of these files
 require "kermeta/KermetaHelper.kmt" 
 require "ecore/EcoreHelper.kmt"
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/keyword_list.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+
+using kermeta::language::structure
+using kermeta::language
+using kermeta::km2ecore
+
+class KM2EcoreHelper {
+	operation getMangledIdentifier(id : String, context : KM2EcoreContext) : String is do
+		if id == void then
+			result := id
+		end
+		if context.javaKeyWordList.isKeyword(id) then
+			result := "_" + id
+		else
+			result := id
+		end
+	end
+}

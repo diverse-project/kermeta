@@ -1,25 +1,39 @@
-/* $Id: KM2EcoreContext.kmt,v 1.1 2008-02-21 09:03:09 ftanguy Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.2 2008-02-22 11:00:16 cfaucher Exp $
  * Creation date: February 14, 2008
- * License:
- * Copyright:
- * Authors:
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Francois Tanguy <ftanguy@irisa.fr>
+ *			Cyril Faucher <cfaucher@irisa.fr>
  */
-@mainClass "km2ecore::KMEcoreContext"
+
+@mainClass "kermeta::km2ecore::KMEcoreContext"
 @mainOperation "main"
 
-
-package km2ecore;
+package kermeta::km2ecore;
 
 
 require kermeta
-
 require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+require "common/keyword_list.kmt"
 
-class KMEcoreContext
+using kermeta::language
+using kermeta::language::structure
+
+class KM2EcoreContext
 {
-	operation main() : Void is do 
+	/** modeling units source */
+	reference mus : oset ModelingUnit [1..*]
 	
+	/** thee choosen compiling mode */
+	attribute mode : CompilingMode [1..1]
+	
+	/** Unique instance of the JavaKeyWordList */
+	reference javaKeyWordList : JavaKeyWordList [0..1]
+	
+	operation initialize() : Void is do
+		javaKeyWordList := JavaKeyWordList.new.initialize()
 	end
-	
-	
 }
+
+/** Enumeration representing the different compiling modes */
+enumeration CompilingMode { onlyEcore; behaviorKmt; behaviorJava; }
