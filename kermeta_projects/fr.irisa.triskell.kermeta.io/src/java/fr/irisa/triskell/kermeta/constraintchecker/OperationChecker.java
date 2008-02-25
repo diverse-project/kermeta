@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.29 2008-02-20 13:44:05 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.30 2008-02-25 12:51:00 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -157,7 +157,7 @@ public class OperationChecker extends AbstractChecker {
 							// Checking the returned type
 							error = ! TypeEqualityChecker.equals(operation.getType(), op.getType());
 							if ( ! error )
-								error = ! ( operation.getUpper() == op.getUpper() && operation.getLower() == op.getLower() );
+								error = ! ( operation.getUpper() == op.getUpper() );//&& operation.getLower() == op.getLower() );
 						}
 						// Checking the parameter's type
 						if ( ! error )
