@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.30 2008-02-25 12:51:00 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.31 2008-02-25 14:03:28 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -121,6 +121,10 @@ public class OperationChecker extends AbstractChecker {
 		return result;
 	}
 	
+	enum ErrorType {
+		LOWER_ERROR, UPPER_ERROR, RETURNED_TYPE, NONE
+	}
+		
 	/** 
 	 * 
 	 * @return
@@ -144,6 +148,7 @@ public class OperationChecker extends AbstractChecker {
 					if ( classDefinition.isIsAspect() && (classDefinition != possibleBaseClass) ) {
 					
 						boolean error = false;
+						ErrorType type = ErrorType.NONE;
 						// Checking abstract
 						boolean isAbstract = (op.isIsAbstract() && operation.isIsAbstract()) ||
 									(op.isIsAbstract() && ! operation.isIsAbstract())
@@ -156,15 +161,24 @@ public class OperationChecker extends AbstractChecker {
 						if ( ! error ) {
 							// Checking the returned type
 							error = ! TypeEqualityChecker.equals(operation.getType(), op.getType());
-							if ( ! error )
-								error = ! ( operation.getUpper() == op.getUpper() );//&& operation.getLower() == op.getLower() );
+							if ( error )
+								type = ErrorType.RETURNED_TYPE;
+							else {
+								if ( ! (operation.getUpper() == op.getUpper()) ) {
+									error = true;
+									type = ErrorType.UPPER_ERROR;
+								}
+								if ( ! error && operation.getLower() != op.getLower() ) {
+									error = true;
+									type = ErrorType.LOWER_ERROR;
+								}
+							}
 						}
 						// Checking the parameter's type
 						if ( ! error )
 							error = ! checkParameters(operation, op);
 						
 						if ( error ) {
-							TypeEqualityChecker.equals(operation.getType(), op.getType());
 							KermetaUnit distantUnit = KermetaUnitHelper.getKermetaUnitFromObject(op);
 							String message = "";
 							if ( distantUnit != null ) {
@@ -173,6 +187,13 @@ public class OperationChecker extends AbstractChecker {
 								message += printer.ppSimplifiedFOperation(operation) + " does not matched with " + printer.ppSimplifiedFOperation(op);
 							} else
 								message = "Operation " + operation.getName() + " is already implemented elsewhere.";
+							
+							if ( type == ErrorType.LOWER_ERROR )
+								message += "\nThe lower bound differs.";
+							else if ( type == ErrorType.UPPER_ERROR )
+								message += "\nThe upper bound differs.";
+							else if ( type == ErrorType.RETURNED_TYPE )
+								message += "\nThe returned type differs.";
 							
 							addProblem(ERROR, message, operation);
 							return false;
