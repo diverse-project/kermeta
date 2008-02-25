@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Uml2
 Bundle-SymbolicName: org.kermeta.uml2;singleton:=true
 Bundle-Version: 0.5.0
-Require-Bundle: fr.irisa.triskell.kermeta.model,
- org.eclipse.uml2,
+Require-Bundle: org.eclipse.uml2,
  org.eclipse.uml2.common,
  org.eclipse.uml2.uml
