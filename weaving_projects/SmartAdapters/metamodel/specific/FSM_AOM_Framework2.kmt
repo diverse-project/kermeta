@@ -1,10 +1,14 @@
 
-/* Authors: Brice Morin
+/* 
+ * Author: Brice Morin
  * Creation date: 
  * License: 
  * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
  */
 
+/*
+ * This file was automatically generated
+ */
 
 package org;
 require kermeta
@@ -40,6 +44,12 @@ package smartadapters
 		
 	package adaptations
 	{
+		
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of FSM::State
+		 */
+		 
 		
 		class CreateState inherits createAdaptation
 		{
@@ -78,18 +88,19 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void is do
+				var ad : Adapter init getAdapter
 				var tempState : FSM::State
-				tempState ?= adapter.getRealObject(StateToSet,false)
+				tempState ?= ad.getRealObject(StateToSet,false)
 				
-				tempState.name ?= adapter.setSingleProperty(refname, tempState.name)
+				tempState.name ?= ad.setSingleProperty(refname, tempState.name)
 				
 				//Instantiating the reverse adaptation
 				if(reverse) then
 					var unset : UnsetState init UnsetState.new
 					unset.StateToUnset := self.StateToSet
 					unset.refname := self.refname
-					adapter.adapt.add(unset)
-					adapter.reverse.add(unset)
+					unset.reverse := self
+					self.reverse := unset
 				end	
 			end			
 		}
@@ -104,21 +115,28 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void is do
+				var ad : Adapter init getAdapter
 				var tempState : FSM::State
-				tempState ?= adapter.getRealObject(StateToUnset,false)
+				tempState ?= ad.getRealObject(StateToUnset,false)
 				
-				tempState.name ?= adapter.unsetSingleProperty(refname, tempState.name)
+				tempState.name ?= ad.unsetSingleProperty(refname, tempState.name)
 				
 				//Instantiating the reverse adaptation
 				if reverse then
 					var ~set : SetState init SetState.new
 					~set.StateToSet := self.StateToUnset
 					~set.refname := self.refname
-					adapter.adapt.add(~set)
-					adapter.reverse.add(~set)
+					~set.reverse := self
+					self.reverse := ~set
 				end
 			end
 		}
+		
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of FSM::Transition
+		 */
+		 
 		
 		class CreateTransition inherits createAdaptation
 		{
@@ -158,11 +176,12 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void is do
+				var ad : Adapter init getAdapter
 				var tempTransition : FSM::Transition
-				tempTransition ?= adapter.getRealObject(TransitionToSet,false)
+				tempTransition ?= ad.getRealObject(TransitionToSet,false)
 				
-				tempTransition.source ?= adapter.setSingleProperty(refsource, tempTransition.source)
-				tempTransition.target ?= adapter.setSingleProperty(reftarget, tempTransition.target)
+				tempTransition.source ?= ad.setSingleProperty(refsource, tempTransition.source)
+				tempTransition.target ?= ad.setSingleProperty(reftarget, tempTransition.target)
 				
 				//Instantiating the reverse adaptation
 				if(reverse) then
@@ -170,8 +189,8 @@ package smartadapters
 					unset.TransitionToUnset := self.TransitionToSet
 					unset.refsource := self.refsource
 					unset.reftarget := self.reftarget
-					adapter.adapt.add(unset)
-					adapter.reverse.add(unset)
+					unset.reverse := self
+					self.reverse := unset
 				end	
 			end			
 		}
@@ -187,11 +206,12 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void is do
+				var ad : Adapter init getAdapter
 				var tempTransition : FSM::Transition
-				tempTransition ?= adapter.getRealObject(TransitionToUnset,false)
+				tempTransition ?= ad.getRealObject(TransitionToUnset,false)
 				
-				tempTransition.source ?= adapter.unsetSingleProperty(refsource, tempTransition.source)
-				tempTransition.target ?= adapter.unsetSingleProperty(reftarget, tempTransition.target)
+				tempTransition.source ?= ad.unsetSingleProperty(refsource, tempTransition.source)
+				tempTransition.target ?= ad.unsetSingleProperty(reftarget, tempTransition.target)
 				
 				//Instantiating the reverse adaptation
 				if reverse then
@@ -199,11 +219,17 @@ package smartadapters
 					~set.TransitionToSet := self.TransitionToUnset
 					~set.refsource := self.refsource
 					~set.reftarget := self.reftarget
-					adapter.adapt.add(~set)
-					adapter.reverse.add(~set)
+					~set.reverse := self
+					self.reverse := ~set
 				end
 			end
 		}
+		
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of FSM::Fsm
+		 */
+		 
 		
 		class CreateFsm inherits createAdaptation
 		{
@@ -243,11 +269,30 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void is do
+				var ad : Adapter init getAdapter
 				var tempFsm : FSM::Fsm
-				tempFsm ?= adapter.getRealObject(FsmToSet,false)
+				tempFsm ?= ad.getRealObject(FsmToSet,false)
 				
-				adapter.setMultipleProperty(tempFsm.states,refstates)
-				adapter.setMultipleProperty(tempFsm.transitions,reftransitions)
+				stdio.writeln("FSM before")
+				tempFsm.states.each{s |
+					stdio.writeln("\t - "+s.name+" "+s.toString)
+				}
+				
+				stdio.writeln("------------")
+				refstates.each{s | 
+					var realState : FSM::State 
+					realState ?= ad.getRealObject(s,false)
+					stdio.writeln("\t * "+s.name+" : "+realState.name+" "+realState.toString)
+				}
+				stdio.writeln("------------")
+				
+				ad.setMultipleProperty(tempFsm.states,refstates)
+				ad.setMultipleProperty(tempFsm.transitions,reftransitions)
+				
+				stdio.writeln("FSM after")
+				tempFsm.states.each{s |
+					stdio.writeln("\t - "+s.name+" "+s.toString)
+				}
 				
 				//Instantiating the reverse adaptation
 				if(reverse) then
@@ -257,8 +302,8 @@ package smartadapters
 					unset.refstates.addAll(self.refstates)
 					unset.reftransitions.clear
 					unset.reftransitions.addAll(self.reftransitions)
-					adapter.adapt.add(unset)
-					adapter.reverse.add(unset)
+					unset.reverse := self
+					self.reverse := unset
 				end	
 			end			
 		}
@@ -274,24 +319,51 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void is do
+				var ad : Adapter init getAdapter
 				var tempFsm : FSM::Fsm
-				tempFsm ?= adapter.getRealObject(FsmToUnset,false)
+				tempFsm ?= ad.getRealObject(FsmToUnset,false)
+
+				stdio.writeln("FSM before")
+				tempFsm.states.each{s |
+					stdio.writeln("\t - "+s.name+" "+s.toString)
+				}
 				
-				adapter.unsetMultipleProperty(tempFsm.states,refstates)
-				adapter.unsetMultipleProperty(tempFsm.transitions,reftransitions)
+				stdio.writeln("------------")
+				refstates.each{s | 
+					var realState : FSM::State 
+					realState ?= ad.getRealObject(s,false)
+					stdio.writeln("\t * "+s.name+" : "+realState.name+" "+realState.toString)
+				}
+				stdio.writeln("------------")
+				
+				ad.unsetMultipleProperty(tempFsm.states,refstates)
+				ad.unsetMultipleProperty(tempFsm.transitions,reftransitions)
+				
+				
+				stdio.writeln("FSM after")
+				tempFsm.states.each{s |
+					stdio.writeln("\t - "+s.name+" "+s.toString)
+				}
+				
 				
 				//Instantiating the reverse adaptation
 				if reverse then
 					var ~set : SetFsm init SetFsm.new
 					~set.FsmToSet := self.FsmToUnset
 					~set.refstates.clear
-					 ~set.refstates.addAll(self.refstates)
+					~set.refstates.addAll(self.refstates)
 					~set.reftransitions.clear
-					 ~set.reftransitions.addAll(self.reftransitions)
-					adapter.adapt.add(~set)
-					adapter.reverse.add(~set)
+					~set.reftransitions.addAll(self.reftransitions)
+					~set.reverse := self
+					self.reverse := ~set
 				end
 			end
 		}
+		
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of FSM::label
+		 */
+		 
 	}
 }}

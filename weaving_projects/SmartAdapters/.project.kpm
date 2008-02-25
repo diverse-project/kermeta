@@ -83,7 +83,6 @@
   <events name="close"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/program/weaving/weaver4simpleClassDiag.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/program/weaving/weaver4UML.kmt"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/program/weaving/weaver4FSMs.kmt"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/program/weaving/weaver.kmt"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/program/weaving/semanticWeaver.kmt"/>
@@ -99,41 +98,12 @@
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"/>
   <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/generic/genericSmartAdapters.km"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/UMLPattern.ecore"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/UML.ecore"/>
   <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/FSMMM.xmi"/>
   <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/FSMMM.ecore"/>
   <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/EcorePattern.ecore"/>
   <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/Ecore.ecore"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/ClassMMPattern.ecore"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/ClassMM.ecore"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/ClassDiagUMLPattern.ecore"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/ClassDiagUML.ecore"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/generateFramework/test.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/test.kmt"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/templatePackage.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/structurePackage.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/basePackage3.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/basePackage2.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/basePackage.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/aspectTemplate.umldi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/aspectStructure.umldi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/Copy of aspectTemplate.uml"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/Copy of aspectStructure.uml"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/Copy of Base.uml"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/Base.umldi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/UML1/Adapter.xmi"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/SimpleClassDiag1/test.kmt"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/SimpleClassDiag1/templateClassModel.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/SimpleClassDiag1/result.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/SimpleClassDiag1/false.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/SimpleClassDiag1/baseClassModel.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/SimpleClassDiag1/aspectClass.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/SimpleClassDiag1/Adapter.xmi"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/Semantic1/test.kmt"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/Semantic1/ModelPattern.xmi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/Semantic1/EPackage.xmi"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/MM'Builder/MMPatternBuilder.kmt"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/FSM2/test.kmt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/FSM2/templateFsm.xmi"/>

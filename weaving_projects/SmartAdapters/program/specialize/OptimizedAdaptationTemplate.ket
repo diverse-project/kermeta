@@ -5,12 +5,16 @@
 	parameters="classif:Set<EClassifier>, domainMM:String, domainMMPattern:String, shortName:String"
 %>
 
-/* Authors: Brice Morin
+/* 
+ * Author: Brice Morin
  * Creation date: 
  * License: 
  * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
  */
 
+/*
+ * This file was automatically generated
+ */
 <%var helper:EcoreHelper init EcoreHelper.new%>
 
 package org;
@@ -60,11 +64,18 @@ package smartadapters
 		var c:EClass
 		var qualifiedName:String
 		qualifiedName:=helper.getClassifierQualifiedName(cl)
-		c?=cl
+		c?=cl %>
+		
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of <%=qualifiedName%>
+		 */
+		 
+		<%
 		if(c!=void) then
 			if(not(c.~abstract) and not(c.interface)) then%>
 		
-		class Create<%=c.name%> inherits createAdaptation
+		class Create<%=qualifiedName.replace("::","")%> inherits createAdaptation
 		{
 			attribute new<%=c.name%> : pattern::<%=qualifiedName%>
 					
@@ -77,7 +88,7 @@ package smartadapters
 			end
 		}
 
-		class Clone<%=c.name%> inherits cloneAdaptation
+		class Clone<%=qualifiedName.replace("::","")%> inherits cloneAdaptation
 		{
 			reference <%=c.name%>ToClone : pattern::<%=qualifiedName%>
 			attribute cloned<%=c.name%> : pattern::<%=qualifiedName%>
@@ -92,7 +103,7 @@ package smartadapters
 		}
 		<%end%>
 
-		class Set<%=c.name%> inherits setAdaptation
+		class Set<%=qualifiedName.replace("::","")%> inherits setAdaptation
 		{
 			reference <%=c.name%>ToSet : pattern::<%=qualifiedName%>
 			<%
@@ -123,22 +134,23 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void is do
+				var ad : Adapter init getAdapter
 				var temp<%=c.name%> : <%=qualifiedName%>
-				temp<%=c.name%> ?= adapter.getRealObject(<%=c.name%>ToSet,false)
+				temp<%=c.name%> ?= ad.getRealObject(<%=c.name%>ToSet,false)
 				
 				<%c.eAllStructuralFeatures.each{f | 
 				if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
 				<%if f.upperBound==1 then%>
-				temp<%=c.name%>.<%=f.name%> ?= adapter.setSingleProperty(ref<%=f.name%>, temp<%=c.name%>.<%=f.name%>)
+				temp<%=c.name%>.<%=f.name%> ?= ad.setSingleProperty(ref<%=f.name%>, temp<%=c.name%>.<%=f.name%>)
 				<%else%>
-				adapter.setMultipleProperty(temp<%=c.name%>.<%=f.name%>,ref<%=f.name%>)
+				ad.setMultipleProperty(temp<%=c.name%>.<%=f.name%>,ref<%=f.name%>)
 				<%end%>
 				<%end
 				}%>
 				
 				//Instantiating the reverse adaptation
 				if(reverse) then
-					var unset : Unset<%=c.name%> init Unset<%=c.name%>.new
+					var unset : Unset<%=qualifiedName.replace("::","")%> init Unset<%=qualifiedName.replace("::","")%>.new
 					unset.<%=c.name%>ToUnset := self.<%=c.name%>ToSet
 					<%c.eAllStructuralFeatures.each{f | 
 					if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
@@ -150,13 +162,13 @@ package smartadapters
 						<%end%>
 					<%end%>
 					<%}%>
-					adapter.adapt.add(unset)
-					adapter.reverse.add(unset)
+					unset.reverse := self
+					self.reverse := unset
 				end	
 			end			
 		}
 		
-		class Unset<%=c.name%> inherits unsetAdaptation
+		class Unset<%=qualifiedName.replace("::","")%> inherits unsetAdaptation
 		{
 			reference <%=c.name%>ToUnset : pattern::<%=qualifiedName%>
 			<%
@@ -183,22 +195,23 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void is do
+				var ad : Adapter init getAdapter
 				var temp<%=c.name%> : <%=qualifiedName%>
-				temp<%=c.name%> ?= adapter.getRealObject(<%=c.name%>ToUnset,false)
+				temp<%=c.name%> ?= ad.getRealObject(<%=c.name%>ToUnset,false)
 				
 				<%c.eAllStructuralFeatures.each{f | 
 				if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
 				<%if f.upperBound==1 then%>
-				temp<%=c.name%>.<%=f.name%> ?= adapter.unsetSingleProperty(ref<%=f.name%>, temp<%=c.name%>.<%=f.name%>)
+				temp<%=c.name%>.<%=f.name%> ?= ad.unsetSingleProperty(ref<%=f.name%>, temp<%=c.name%>.<%=f.name%>)
 				<%else%>
-				adapter.unsetMultipleProperty(temp<%=c.name%>.<%=f.name%>,ref<%=f.name%>)
+				ad.unsetMultipleProperty(temp<%=c.name%>.<%=f.name%>,ref<%=f.name%>)
 				<%end%>
 				<%end
 				}%>
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : Set<%=c.name%> init Set<%=c.name%>.new
+					var ~set : Set<%=qualifiedName.replace("::","")%> init Set<%=qualifiedName.replace("::","")%>.new
 					~set.<%=c.name%>ToSet := self.<%=c.name%>ToUnset
 					<%c.eAllStructuralFeatures.each{f | 
 					if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
@@ -210,8 +223,8 @@ package smartadapters
 						<%end%>
 					<%end%>
 					<%}%>
-					adapter.adapt.add(~set)
-					adapter.reverse.add(~set)
+					~set.reverse := self
+					self.reverse := ~set
 				end
 			end
 		}

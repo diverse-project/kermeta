@@ -1,4 +1,4 @@
-/* $Id: AdaptationBuilder.kmt,v 1.5 2007-10-19 09:06:03 bmorin Exp $
+/* $Id: AdaptationBuilder.kmt,v 1.6 2008-02-25 13:38:30 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -20,7 +20,7 @@ using EcoreHelpers
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
-using kermeta::reflection 
+using kermeta::language::structure 
 using kermeta::io
 
 class AdaptationBuilder
@@ -62,7 +62,7 @@ class AdaptationBuilder
 	end
 
 	operation generateConvert(classif:Set<EClassifier>) : String is do
-		var bodyConvert:String init "stdio.write(\"Mapping MM' to MM...\")\nconvert:=Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new\n"
+		var bodyConvert:String init "stdio.write(\"Mapping MM' to MM...\")\nconvert:=Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new\n"
 		classif.each{cl |
 			var name:String init getQualifiedName(cl,cl.ePackage,"")
 			bodyConvert:=bodyConvert+"\tconvert.put(pattern::"+name+","+name+")\n"		
@@ -150,7 +150,7 @@ class AdaptationBuilder
 							c.eAllStructuralFeatures.each{f | 
 								if(not(f.derived) and not(f.unsettable) and f.changeable) then
 									var primitive:kermeta::language::structure::PrimitiveType
-									var newObj:kermeta::reflection::Object init f.eType.getMetaClass.new
+									var newObj:kermeta::language::structure::Object init f.eType.getMetaClass.new
 									primitive?=newObj
 									if(primitive==void) then
 										param:=param+"\treference a"+f.name+":pattern::"+getQualifiedName(f.eType,f.eType.ePackage,"")
@@ -162,7 +162,7 @@ class AdaptationBuilder
 										body:=body+"\t\tvar "+temp+":"+getQualifiedName(f.eType,f.eType.ePackage,"")+"\n"
 									else
 										param:=param+"[0..*]"
-										body:=body+"\t\tvar "+temp+":Collection<kermeta::reflection::Object>\n"
+										body:=body+"\t\tvar "+temp+":Collection<kermeta::language::structure::Object>\n"
 									end
 									param:=param+"\n"
 									if(primitive==void)then

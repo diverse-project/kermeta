@@ -14,7 +14,7 @@ _res.append("\npackage org;\nrequire kermeta\nrequire \"platform:/resource/Smart
 _res.append(domainMM)
 _res.append("\"\nrequire \"")
 _res.append(domainMMPattern)
-_res.append("\"\n\nusing kermeta::standard\nusing kermeta::utils\nusing patternframework\nusing org::smartadapters::core\nusing org::smartadapters::extension\nusing ecore\nusing org::smartadapters::utils\n\npackage smartadapters\n{\n\tpackage core\n\t{\n\t\t@aspect \"true\"\n\t\tclass Adapter \n\t\t{\n\t\t\toperation initConvert(): Void is do\n\t\t\t\tstdio.write(\"Mapping MM\\' to MM...\")\n\t\t\t\tconverter := Converter.new\n\t\t\t\tconvert := Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new\n")
+_res.append("\"\n\nusing kermeta::standard\nusing kermeta::utils\nusing patternframework\nusing org::smartadapters::core\nusing org::smartadapters::extension\nusing ecore\nusing org::smartadapters::utils\n\npackage smartadapters\n{\n\tpackage core\n\t{\n\t\t@aspect \"true\"\n\t\tclass Adapter \n\t\t{\n\t\t\toperation initConvert(): Void is do\n\t\t\t\tstdio.write(\"Mapping MM\\' to MM...\")\n\t\t\t\tconverter := Converter.new\n\t\t\t\tconvert := Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new\n")
 
 				var name:String 
 				classif.each{cl |
@@ -117,7 +117,7 @@ _res.append("\n")
 
 			var card:String
 			var fQualName:String
-			var newObj:kermeta::reflection::Object
+			var newObj:kermeta::language::structure::Object
 			var primitive:kermeta::language::structure::PrimitiveType
 			c.eAllStructuralFeatures.each{f | 
 				if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then
@@ -168,7 +168,7 @@ c.eAllStructuralFeatures.each{f |
 					if(not(f.upperBound==1))then
 _res.append("\t\t\t\t\tvar temp")
 _res.append(f.name)
-_res.append(" : Collection<kermeta::reflection::Object>\n")
+_res.append(" : Collection<kermeta::language::structure::Object>\n")
 else
 _res.append("\t\t\t\t\tvar temp")
 _res.append(f.name)
@@ -296,7 +296,7 @@ fQualName:=helper.getClassifierQualifiedName(f.eType)
 						if(not(f.upperBound==1))then
 _res.append("\t\t\t\t\t\tvar temp")
 _res.append(f.name)
-_res.append(" : Collection<kermeta::reflection::Object>\n\t\t\t\t\t\ttemp")
+_res.append(" : Collection<kermeta::language::structure::Object>\n\t\t\t\t\t\ttemp")
 _res.append(f.name)
 _res.append("?=adapter.getRealObject(ref")
 _res.append(f.name)

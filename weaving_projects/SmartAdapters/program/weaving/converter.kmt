@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.8 2008-02-20 17:53:48 bmorin Exp $
+/* $Id: converter.kmt,v 1.9 2008-02-25 13:38:54 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
@@ -23,8 +23,6 @@ class Converter
 {
 	//Mapping MM'->MM
 	attribute convertTable : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
-	attribute enumTable : Hashtable<kermeta::language::structure::Enumeration,kermeta::language::structure::Enumeration>
-	
 	reference converted : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>
 	reference converting : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>	
 	
@@ -32,10 +30,8 @@ class Converter
 	initializes the converter (~constructor)
 	must be called before any other operation
 	*/
-	operation initConverter(convert:Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
-			/*,	enum : Hashtable<kermeta::language::structure::Enumeration,kermeta::language::structure::Enumeration>*/) is do	
+	operation initConverter(convert:Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>) is do	
 		convertTable := convert
-		//enumTable := enum
 		converted := Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>.new
 		converting := Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>.new
 	end
@@ -50,40 +46,29 @@ class Converter
 	end
 	
 	operation getConverted(obj : kermeta::language::structure::Object) : kermeta::language::structure::Object is do
-		var e : kermeta::language::structure::EnumerationLiteral
-		e ?= obj
-		if(e!=void) then
-			result := obj
-			//result := getConvertedEnum(e)
-		else
-			result := getConvertedObject(obj)
-		end
+		result := getConvertedObject(obj)
 	end
 	
 	/**
 	returns a converted object (MM), equivalent to obj (MM')
 	*/
 	operation getConvertedObject(obj : kermeta::language::structure::Object) : kermeta::language::structure::Object is do
-		//stdio.writeln("getConverted "+obj.toString+" ...")
+		//stdio.writeln("?>getConvertedObject: "+obj.toString)
 		var newMeta : kermeta::language::structure::Class 
 		newMeta := convertTable.getValue(obj.getMetaClass)
 		if(newMeta!=void) then
 			var o : kermeta::language::structure::Object init newMeta.new
 			if(converted.getValue(obj)==void) then
-				//stdio.writeln(obj.toString+" is NOT converted")
 				if(converting.getValue(obj)==void) then
-					//stdio.writeln(obj.toString+" is NOT being converting")
 					converting.put(obj,o)
 					convert(obj,o)
 				    converted.put(obj,o)
 				    converting.remove(obj)
 				    result:=o
 				else
-					//stdio.writeln(obj.toString+" is being converting")
 					result := converting.getValue(obj)	
 				end
 			else
-				//stdio.writeln(obj.toString+" is converted")
 				result := converted.getValue(obj) 
 			end
 		else
@@ -91,28 +76,6 @@ class Converter
 		end
 	end
 	
-	/**
-	TODO: à revoir...
-	*/
-	operation getConvertedEnum(enumLit : kermeta::language::structure::EnumerationLiteral) : kermeta::language::structure::EnumerationLiteral is do	
-		stdio.writeln("?>enumLit: "+enumLit.name)
-		stdio.writeln("?>enumLit.getMetaClass: "+enumLit.getMetaClass.name)
-		stdio.writeln("?>enumLit.enumeration.getMetaClass: "+enumLit.~enumeration.getMetaClass.name)
-		/*var enum : kermeta::language::structure::Enumeration init enumLit.~enumeration
-		var e : kermeta::language::structure::Enumeration init enumTable.getValue(enum)
-		if(e != void) then
-			var lit : kermeta::language::structure::EnumerationLiteral
-			lit := e.ownedLiteral.select{l | l.name.equals(enumLit.name)}.one
-			if(lit != void) then
-				stdio.writeln("?>lit: "+lit.name)
-				stdio.writeln("?>lit.getMetaClass: "+lit.getMetaClass.name)
-				stdio.writeln("?>lit.enumeration.getMetaClass: "+lit.~enumeration.getMetaClass.name)
-				result := lit
-			end
-		else*/
-			result := enumLit
-		//end
-	end
 		
 	/**
 	copies obj (MM') into conv (MM) thanks to the convert Hashtable
@@ -121,20 +84,18 @@ class Converter
 		//stdio.writeln("converting "+obj.toString+" into "+conv.toString)
 		var classDef:kermeta::language::structure::ClassDefinition
 		classDef?=conv.getMetaClass.typeDefinition
-		if(classDef!=void) then
-			//getting all the properties of the converted object
-			var att:Set<Property> init classDef.allAttribute
-			att.each{a |
-			//stdio.writeln("?>"+a.getMetaClass.typeDefinition.name)
+		
+		conv.getMetaClass.ownedAttribute.each{a |		
 			if(obj.get(a)!=void and not(a.name.equals("tag") or a.name.equals("ownedTag"))) then
 				var  cl : kermeta::language::structure::Class init a.getMetaClass.typeDefinition.getMetaClass
 				var ob : Object init obj.get(a)
+				//stdio.writeln("?>ob: "+ob.toString)
 				//single property (upper bound==1)
 				if(a.upper==1 and ob!=void) then
 					//stdio.writeln("Single property")
 					var temp:Object
 					temp:= getConverted(ob)
-					if(temp!=void) then
+					if(temp!=void) then					
 						conv.~set(a,temp)
 					end
 				//collection property -> iteration
@@ -155,5 +116,5 @@ class Converter
 			end
 			}
 		end
-	end
+	//end
 }

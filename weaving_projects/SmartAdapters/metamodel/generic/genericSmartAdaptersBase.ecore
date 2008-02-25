@@ -21,16 +21,16 @@
         <eClassifiers xsi:type="ecore:EClass" name="Aspect">
           <eSuperTypes href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="template" containment="true">
-            <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/ModelPattern"/>
+            <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//ModelPattern"/>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="structure" lowerBound="1" containment="true">
-            <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PModel"/>
+            <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PModel"/>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="persistent" upperBound="-1">
             <eAnnotations source="kermeta">
               <details key="documentation" value="/**&#xD;&#xA;   persistent refers to aspectual PObject that must not be&#xD;&#xA;   cloned between two bindings&#xD;&#xA;   TODO : contraints...&#xD;&#xA;   */"/>
             </eAnnotations>
-            <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PObject"/>
+            <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Adaptation" abstract="true" eSuperTypes="/1/smartadapters/extension/AdapterElement">
@@ -82,7 +82,7 @@
             </eAnnotations>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1">
-            <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PObject"/>
+            <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EEnum" name="uniqueType">

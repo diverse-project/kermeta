@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.13 2008-02-21 10:11:26 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.14 2008-02-25 13:36:15 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -24,10 +24,11 @@ using org::smartadapters::utils
 package smartadapters
 {
 	package core
-	{
-	
+	{	
 		aspect class Adaptation
 		{
+			reference reverse : Adaptation
+		
 			operation print() : String is
 			do
 				var o : Object
@@ -62,6 +63,16 @@ package smartadapters
 				}
 				result := print
 			end
+			
+			operation getAdapter() : Adapter is
+			do
+				var ad : Adapter
+				ad := adapter
+				if ad == void then
+					ad := self.reverse.adapter
+				end
+				result := ad
+			end
 		}
 		
 		aspect class Adapter
@@ -74,7 +85,7 @@ package smartadapters
 			attribute binding : Hashtable<Object, Object>
 			attribute cloned : Set<Object>
 			attribute convert : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
-			attribute enum : Hashtable<kermeta::language::structure::Enumeration,kermeta::language::structure::Enumeration>
+			//attribute enum : Hashtable<kermeta::language::structure::Enumeration,kermeta::language::structure::Enumeration>
 			attribute converter : Converter
 			
 			operation initConvert() : Void is abstract
@@ -84,21 +95,18 @@ package smartadapters
 			In other words, it executes all the adaptations of the composition protocol  
 			*/
 			operation apply(b:Hashtable<Object, Object>) is do
-				var i : Integer init 0
+				var i : Integer init 1
 				binding := b
 				adapt.each{a |
-					if not reverse.contains(a) then
-						stdio.writeln("Adaptation "+i.toString)
-						stdio.writeln("------------")
-						stdio.writeln("#>weaving: "+a.getMetaClass.name+"...")
-						stdio.write(a.print)
-						a.execute(true)
-						stdio.writeln("#>weaving: done!")
-						stdio.writeln("")
-						i := i+1
-					end
+					stdio.writeln("Adaptation "+i.toString)
+					stdio.writeln("------------")
+					stdio.writeln("#>weaving: "+a.getMetaClass.name+"...")
+					a.execute(true)
+					stdio.write(a.print)
+					stdio.writeln("#>weaving: done!")
+					stdio.writeln("")
+					i := i+1
 				}
-				//updateClones
 			end
 			
 			/*
@@ -106,21 +114,22 @@ package smartadapters
 			In other words, it performs a roll back.
 			*/
 			operation unweave() is do	
-				var i : Integer init 0
-				reverse.each{a | 
-					stdio.writeln("Adaptation "+i.toString)
-					stdio.writeln("------------")
-					stdio.writeln("#>unweaving: "+a.getMetaClass.name+"...")
-					stdio.write(a.print)
-					a.execute(false)
-					stdio.writeln("#>unweaving: done!")
-					stdio.writeln("")
-					i := i+1
-					adapt.remove(a)
+				var i : Integer init 1
+				adapt.each{a | 
+					if(a.reverse != void) then
+						stdio.writeln("Reverse adaptation "+i.toString)
+						stdio.writeln("------------")
+						stdio.writeln("#>unweaving: "+a.getMetaClass.name+" ("+a.reverse.getMetaClass.name+")"+"...")
+						a.reverse.execute(false)
+						stdio.write(a.print)
+						stdio.writeln("#>unweaving: done!")
+						stdio.writeln("")
+						i := i+1
+						a.reverse := void
+					end
 				}
-				reverse.clear
 			end
-			
+
 			operation initAdapter() : Void is 
 			do
 				if (clone == void) then
@@ -190,8 +199,10 @@ package smartadapters
 				if (not(toClone) and type == uniqueType.unique) then
 					if (template != void) then
 						toClone := not(cloned.contains(getRealObject(template,false)))
-						clone.remove(handler)
-						clone.put(handler, getRealObject(template,false))
+						if toClone then
+							clone.remove(handler)
+							clone.put(handler, getRealObject(template,false))
+						end
 					else
 						toClone := not(clone.containsKey(handler)) 
 					end
@@ -240,6 +251,7 @@ package smartadapters
 			end
 
 			operation unsetMultipleProperty(prty : Object, o : Object) : Void is do
+				//stdio.writeln("unsetMultipleProperty "+prty.toString+", "+o.toString)
 				if(prty != void and o != void) then
 					var coll : Collection<kermeta::language::structure::Object>
 					var collToSet : Collection<kermeta::language::structure::Object>
@@ -249,6 +261,7 @@ package smartadapters
 						var realColl : Collection<kermeta::language::structure::Object>
 						realColl ?= getRealObject(o,true)
 						realColl.each{o |
+							//stdio.writeln("removing "+o.toString)
 							collToSet.remove(o)
 						}
 					end

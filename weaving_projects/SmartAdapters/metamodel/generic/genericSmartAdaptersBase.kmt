@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.8 2008-02-20 12:52:06 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.9 2008-02-25 13:36:15 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -27,8 +27,6 @@ package smartadapters
 			attribute ~aspect : Aspect[1..1]
 			
 			attribute adapt : Adaptation[0..*]#adapter
-			
-			reference reverse : Adaptation[0..*]
 						
 			attribute name : ecore::EString		
 		}
@@ -37,7 +35,7 @@ package smartadapters
 		{ 
 			attribute template : ModelPattern[0..1]
 			
-			attribute structure : PModel[1..1]
+			attribute structure : PModel[0..1]
 			
 			/**
 			persistent refers to aspectual PObject that must not be

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pattern"
+    nsURI="platform:/resource/SmartAdapters/metamodel/domain/FractalPattern.ecore/pattern"
+    nsPrefix="pattern">
+  <eSubpackages name="Fractal" nsURI="platform:/resource/SmartAdapters/metamodel/domain/FractalPattern.ecore/pattern/Fractal"
+      nsPrefix="Fractal">
+    <eAnnotations source="kermeta"/>
+    <eAnnotations source="kermeta.req"/>
+    <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" upperBound="-1"
+          eType="#//Fractal/Component" containment="true">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" upperBound="-1"
+          eType="#//Fractal/Type" containment="true">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+      <eAnnotations source="kermeta"/>
+      <eOperations name="isSubTypeOf" eType="#//Fractal/Boolean">
+        <eAnnotations source="kermeta"/>
+        <eParameters name="type" eType="#//Fractal/Type"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Fractal/Type">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="membrane" eType="#//Fractal/Membrane"
+          containment="true" eOpposite="#//Fractal/Membrane/owner">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="content" eType="#//Fractal/Content"
+          containment="true" eOpposite="#//Fractal/Content/owner">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="superComponent" upperBound="-1"
+          eType="#//Fractal/Component">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Membrane" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//Fractal/Component"
+          eOpposite="#//Fractal/Component/membrane">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="externalInterface" upperBound="-1"
+          eType="#//Fractal/Interface" containment="true">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="internalInterface" upperBound="-1"
+          eType="#//Fractal/Interface" containment="true">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="controller" upperBound="-1"
+          eType="#//Fractal/Controller" containment="true" eOpposite="#//Fractal/Controller/owner">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Content" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//Fractal/Component"
+          eOpposite="#//Fractal/Component/content">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subComponent" upperBound="-1"
+          eType="#//Fractal/Component">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1"
+          eType="#//Fractal/Binding" containment="true">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Name" instanceClassName="java.lang.String">
+      <eAnnotations source="kermeta"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Visibility">
+      <eLiterals name="EXTERNAL" literal="EXTERNAL"/>
+      <eLiterals name="INTERNAL" value="1" literal="INTERNAL"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Interface" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//Fractal/Component">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Fractal/Type">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//Fractal/Name">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//Fractal/Visibility">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Binding" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="client" eType="#//Fractal/Interface">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="server" eType="#//Fractal/Interface">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Role">
+      <eLiterals name="SERVER" literal="SERVER"/>
+      <eLiterals name="CLIENT" value="1" literal="CLIENT"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Cardinality">
+      <eLiterals name="SINGLETON" literal="SINGLETON"/>
+      <eLiterals name="COLLECTION" value="1" literal="COLLECTION"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Contingency">
+      <eLiterals name="MANDATORY" literal="MANDATORY"/>
+      <eLiterals name="OPTIONAL" value="1" literal="OPTIONAL"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//Fractal/Type">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interfaceType" upperBound="-1"
+          eType="#//Fractal/InterfaceType">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InterfaceType" eSuperTypes="#//Fractal/Type">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//Fractal/Name">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//Fractal/Role">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinality" eType="#//Fractal/Cardinality">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="contingency" eType="#//Fractal/Contingency">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="signature" eType="#//Fractal/LanguageInterfaceType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LanguageInterfaceType" eSuperTypes="#//Fractal/Type">
+      <eAnnotations source="kermeta"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Controller" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//Fractal/Membrane"
+          eOpposite="#//Fractal/Membrane/controller">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AttributeController" eSuperTypes="#//Fractal/Controller">
+      <eAnnotations source="kermeta"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingController" eSuperTypes="#//Fractal/Controller">
+      <eAnnotations source="kermeta"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ContentController" eSuperTypes="#//Fractal/Controller">
+      <eAnnotations source="kermeta"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LifeCycleController" eSuperTypes="#//Fractal/Controller">
+      <eAnnotations source="kermeta"/>
+      <eOperations name="getStatus" eType="#//Fractal/LifeCycleStatus">
+        <eAnnotations source="kermeta"/>
+      </eOperations>
+      <eOperations name="start" ordered="false">
+        <eAnnotations source="kermeta"/>
+      </eOperations>
+      <eOperations name="stop" ordered="false">
+        <eAnnotations source="kermeta"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="LifeCycleStatus">
+      <eLiterals name="STOPPED" literal="STOPPED"/>
+      <eLiterals name="STARTED" value="1" literal="STARTED"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NameController" eSuperTypes="#//Fractal/Controller">
+      <eAnnotations source="kermeta"/>
+      <eOperations name="getName" eType="#//Fractal/String">
+        <eAnnotations source="kermeta"/>
+      </eOperations>
+      <eOperations name="setName" ordered="false">
+        <eAnnotations source="kermeta"/>
+        <eParameters name="name" eType="#//Fractal/String"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SuperController" eSuperTypes="#//Fractal/Controller">
+      <eAnnotations source="kermeta"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BasicNameController" eSuperTypes="#//Fractal/NameController">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//Fractal/String">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BasicLifeCycleController" eSuperTypes="#//Fractal/LifeCycleController">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//Fractal/LifeCycleStatus">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GenericAttributeController" eSuperTypes="#//Fractal/AttributeController">
+      <eAnnotations source="kermeta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//Fractal/Attribute" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//Fractal/String">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//Fractal/String">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eSubpackages name="Java" nsURI="platform:/resource/SmartAdapters/metamodel/domain/FractalPattern.ecore/pattern/Fractal/Java"
+        nsPrefix="Java">
+      <eAnnotations source="kermeta"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Interface" eSuperTypes="#//Fractal/LanguageInterfaceType">
+        <eAnnotations source="kermeta"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//Fractal/String">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="extend" upperBound="-1"
+            eType="#//Fractal/Java/Interface">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//Fractal/Type">
+        <eAnnotations source="kermeta"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//Fractal/String">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="extend" eType="#//Fractal/Java/Class">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="implement" upperBound="-1"
+            eType="#//Fractal/Java/Interface">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Julia" nsURI="platform:/resource/SmartAdapters/metamodel/domain/FractalPattern.ecore/pattern/Fractal/Julia"
+        nsPrefix="Julia">
+      <eAnnotations source="kermeta"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Membrane" eSuperTypes="#//Fractal/Membrane">
+        <eAnnotations source="kermeta"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" eType="#//Fractal/String">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="interceptor" upperBound="-1"
+            eType="#//Fractal/Julia/Interceptor" containment="true">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="content" eType="#//Fractal/Java/Class">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Interceptor" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+        <eAnnotations source="kermeta"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

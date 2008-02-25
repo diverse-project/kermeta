@@ -1,0 +1,11 @@
+/* $Id: weaver4Fractal.kmt,v 1.1 2008-02-25 13:38:54 bmorin Exp $
+ * Creation date: June 13, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package weaver;
+
+require "./weaver.kmt"
+require "platform:/resource/SmartAdapters/metamodel/specific/Fractal_AOM_Framework.kmt" 

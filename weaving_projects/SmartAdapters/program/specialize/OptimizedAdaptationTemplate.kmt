@@ -8,13 +8,13 @@ using EcoreHelpers
 class AdaptationTemplate{
 operation generate(classif:Set<EClassifier>, domainMM:String, domainMMPattern:String, shortName:String):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("/* Authors: Brice Morin\n * Creation date: \n * License: \n * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell\n */\n\n")
+_res.append("\n/* \n * Author: Brice Morin\n * Creation date: \n * License: \n * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell\n */\n\n/*\n * This file was automatically generated\n */\n")
 var helper:EcoreHelper init EcoreHelper.new
 _res.append("\npackage org;\nrequire kermeta\nrequire \"platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt\"\nrequire \"")
 _res.append(domainMM)
 _res.append("\"\nrequire \"")
 _res.append(domainMMPattern)
-_res.append("\"\n\nusing kermeta::standard\nusing kermeta::utils\nusing patternframework\nusing org::smartadapters::core\nusing org::smartadapters::extension\nusing ecore\nusing org::smartadapters::utils\n\npackage smartadapters\n{\n\tpackage core\n\t{\n\t\t@aspect \"true\"\n\t\tclass Adapter \n\t\t{\n\t\t\toperation initConvert(): Void is do\n\t\t\t\tstdio.write(\"Mapping MM\' to MM...\")\n\t\t\t\tconverter := Converter.new\n\t\t\t\tconvert := Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new\n")
+_res.append("\"\n\nusing kermeta::standard\nusing kermeta::utils\nusing patternframework\nusing org::smartadapters::core\nusing org::smartadapters::extension\nusing ecore\nusing org::smartadapters::utils\n\npackage smartadapters\n{\n\tpackage core\n\t{\n\t\taspect class Adapter \n\t\t{\n\t\t\toperation initConvert(): Void is do\n\t\t\t\tstdio.write(\"Mapping MM\' to MM...\")\n\t\t\t\tconverter := Converter.new\n\t\t\t\tconvert := Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new\n")
 
 				var name:String 
 				classif.each{cl |
@@ -36,21 +36,25 @@ classif.each{cl |
 		var c:EClass
 		var qualifiedName:String
 		qualifiedName:=helper.getClassifierQualifiedName(cl)
-		c?=cl
+		c?=cl 
+_res.append("\t\t\n\t\t/*\n\t\t * Adaptations dedicated to the manipulation\n\t\t * of ")
+_res.append(qualifiedName)
+_res.append("\n\t\t */\n\t\t \n")
+
 		if(c!=void) then
 			if(not(c.~abstract) and not(c.interface)) then
 _res.append("\t\t\n\t\tclass Create")
-_res.append(c.name)
+_res.append(qualifiedName.replace("::",""))
 _res.append(" inherits createAdaptation\n\t\t{\n\t\t\tattribute new")
 _res.append(c.name)
 _res.append(" : pattern::")
 _res.append(qualifiedName)
 _res.append("\n\t\t\t\t\t\n\t\t\tmethod check(): Boolean is do\n\t\t\t\tresult := new")
 _res.append(c.name)
-_res.append("!=void\n\t\t\tend\n\t\t\t\t\t\n\t\t\tmethod execute(): Void is do\n\t\t\t\tadapter.cloneAgain(new")
+_res.append(" != void\n\t\t\tend\n\t\t\t\t\t\n\t\t\tmethod execute(reverse : Boolean): Void is do\n\t\t\t\tadapter.cloneAgain(new")
 _res.append(c.name)
 _res.append(", void, isUnique)\t\t\t\t\t\n\t\t\tend\n\t\t}\n\n\t\tclass Clone")
-_res.append(c.name)
+_res.append(qualifiedName.replace("::",""))
 _res.append(" inherits cloneAdaptation\n\t\t{\n\t\t\treference ")
 _res.append(c.name)
 _res.append("ToClone : pattern::")
@@ -61,14 +65,14 @@ _res.append(" : pattern::")
 _res.append(qualifiedName)
 _res.append("\n\t\t\t\n\t\t\tmethod check(): Boolean is do\n\t\t\t\tresult := ")
 _res.append(c.name)
-_res.append("ToClone!=void\n\t\t\tend\n\t\t\t\n\t\t\tmethod execute(): Void is do\n\t\t\t\tadapter.cloneAgain(cloned")
+_res.append("ToClone != void\n\t\t\tend\n\t\t\t\n\t\t\tmethod execute(reverse : Boolean): Void is do\n\t\t\t\tadapter.cloneAgain(cloned")
 _res.append(c.name)
 _res.append(", ")
 _res.append(c.name)
 _res.append("ToClone, isUnique)\n\t\t\tend\t\t\t\t\t\n\t\t}\n")
 end
 _res.append("\n\t\tclass Set")
-_res.append(c.name)
+_res.append(qualifiedName.replace("::",""))
 _res.append(" inherits setAdaptation\n\t\t{\n\t\t\treference ")
 _res.append(c.name)
 _res.append("ToSet : pattern::")
@@ -77,7 +81,7 @@ _res.append("\n")
 
 			var card:String
 			var fQualName:String
-			var newObj:kermeta::reflection::Object
+			var newObj:kermeta::language::structure::Object
 			var primitive:kermeta::language::structure::PrimitiveType
 			c.eAllStructuralFeatures.each{f | 
 				if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then
@@ -111,13 +115,13 @@ end
 				}
 _res.append("\t\t\t\n\t\t\tmethod check(): Boolean is do\n\t\t\t\tresult := ")
 _res.append(c.name)
-_res.append("ToSet!=void\n\t\t\tend\n\t\t\t\n\t\t\tmethod execute(): Void is do\n\t\t\t\tvar temp")
+_res.append("ToSet != void\n\t\t\tend\n\t\t\t\n\t\t\tmethod execute(reverse : Boolean): Void is do\n\t\t\t\tvar ad : Adapter init getAdapter\n\t\t\t\tvar temp")
 _res.append(c.name)
 _res.append(" : ")
 _res.append(qualifiedName)
 _res.append("\n\t\t\t\ttemp")
 _res.append(c.name)
-_res.append(" ?= adapter.getRealObject(")
+_res.append(" ?= ad.getRealObject(")
 _res.append(c.name)
 _res.append("ToSet,false)\n\t\t\t\t\n")
 c.eAllStructuralFeatures.each{f | 
@@ -128,7 +132,7 @@ _res.append("\t\t\t\ttemp")
 _res.append(c.name)
 _res.append(".")
 _res.append(f.name)
-_res.append(" ?= adapter.setSingleProperty(ref")
+_res.append(" ?= ad.setSingleProperty(ref")
 _res.append(f.name)
 _res.append(", temp")
 _res.append(c.name)
@@ -136,7 +140,7 @@ _res.append(".")
 _res.append(f.name)
 _res.append(")\n")
 else
-_res.append("\t\t\t\tadapter.setMultipleProperty(temp")
+_res.append("\t\t\t\tad.setMultipleProperty(temp")
 _res.append(c.name)
 _res.append(".")
 _res.append(f.name)
@@ -147,8 +151,39 @@ end
 _res.append("")
 end
 				}
-_res.append("\t\t\tend\t\t\t\n\t\t}\n\t\t\n\t\tclass Unset")
+_res.append("\t\t\t\t\n\t\t\t\t//Instantiating the reverse adaptation\n\t\t\t\tif(reverse) then\n\t\t\t\t\tvar unset : Unset")
+_res.append(qualifiedName.replace("::",""))
+_res.append(" init Unset")
+_res.append(qualifiedName.replace("::",""))
+_res.append(".new\n\t\t\t\t\tunset.")
 _res.append(c.name)
+_res.append("ToUnset := self.")
+_res.append(c.name)
+_res.append("ToSet\n")
+c.eAllStructuralFeatures.each{f | 
+					if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then
+_res.append("")
+if(not(f.upperBound==1))then
+_res.append("\t\t\t\t\tunset.ref")
+_res.append(f.name)
+_res.append(".clear\n\t\t\t\t\tunset.ref")
+_res.append(f.name)
+_res.append(".addAll(self.ref")
+_res.append(f.name)
+_res.append(")\n")
+else
+_res.append("\t\t\t\t\tunset.ref")
+_res.append(f.name)
+_res.append(" := self.ref")
+_res.append(f.name)
+_res.append("\n")
+end
+_res.append("")
+end
+_res.append("")
+}
+_res.append("\t\t\t\t\tunset.reverse := self\n\t\t\t\t\tself.reverse := unset\n\t\t\t\tend\t\n\t\t\tend\t\t\t\n\t\t}\n\t\t\n\t\tclass Unset")
+_res.append(qualifiedName.replace("::",""))
 _res.append(" inherits unsetAdaptation\n\t\t{\n\t\t\treference ")
 _res.append(c.name)
 _res.append("ToUnset : pattern::")
@@ -193,13 +228,13 @@ _res.append("")
 }
 _res.append("\t\t\t\n\t\t\tmethod check(): Boolean is do\n\t\t\t\tresult := ")
 _res.append(c.name)
-_res.append("ToUnset!=void\n\t\t\tend\n\t\t\t\n\t\t\tmethod execute(): Void is do\n\t\t\t\tvar temp")
+_res.append("ToUnset != void\n\t\t\tend\n\t\t\t\n\t\t\tmethod execute(reverse : Boolean): Void is do\n\t\t\t\tvar ad : Adapter init getAdapter\n\t\t\t\tvar temp")
 _res.append(c.name)
 _res.append(" : ")
 _res.append(qualifiedName)
 _res.append("\n\t\t\t\ttemp")
 _res.append(c.name)
-_res.append(" ?= adapter.getRealObject(")
+_res.append(" ?= ad.getRealObject(")
 _res.append(c.name)
 _res.append("ToUnset,false)\n\t\t\t\t\n")
 c.eAllStructuralFeatures.each{f | 
@@ -210,7 +245,7 @@ _res.append("\t\t\t\ttemp")
 _res.append(c.name)
 _res.append(".")
 _res.append(f.name)
-_res.append(" ?= adapter.unsetSingleProperty(ref")
+_res.append(" ?= ad.unsetSingleProperty(ref")
 _res.append(f.name)
 _res.append(", temp")
 _res.append(c.name)
@@ -218,7 +253,7 @@ _res.append(".")
 _res.append(f.name)
 _res.append(")\n")
 else
-_res.append("\t\t\t\tadapter.unsetMultipleProperty(temp")
+_res.append("\t\t\t\tad.unsetMultipleProperty(temp")
 _res.append(c.name)
 _res.append(".")
 _res.append(f.name)
@@ -229,7 +264,38 @@ end
 _res.append("")
 end
 				}
-_res.append("\t\t\tend\n\t\t}\n")
+_res.append("\t\t\t\t\n\t\t\t\t//Instantiating the reverse adaptation\n\t\t\t\tif reverse then\n\t\t\t\t\tvar ~set : Set")
+_res.append(qualifiedName.replace("::",""))
+_res.append(" init Set")
+_res.append(qualifiedName.replace("::",""))
+_res.append(".new\n\t\t\t\t\t~set.")
+_res.append(c.name)
+_res.append("ToSet := self.")
+_res.append(c.name)
+_res.append("ToUnset\n")
+c.eAllStructuralFeatures.each{f | 
+					if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then
+_res.append("")
+if(not(f.upperBound==1))then
+_res.append("\t\t\t\t\t~set.ref")
+_res.append(f.name)
+_res.append(".clear\n\t\t\t\t\t~set.ref")
+_res.append(f.name)
+_res.append(".addAll(self.ref")
+_res.append(f.name)
+_res.append(")\n")
+else
+_res.append("\t\t\t\t\t~set.ref")
+_res.append(f.name)
+_res.append(" := self.ref")
+_res.append(f.name)
+_res.append("\n")
+end
+_res.append("")
+end
+_res.append("")
+}
+_res.append("\t\t\t\t\t~set.reverse := self\n\t\t\t\t\tself.reverse := ~set\n\t\t\t\tend\n\t\t\tend\n\t\t}\n")
 end
 		}
 _res.append("\t}\n}}")
