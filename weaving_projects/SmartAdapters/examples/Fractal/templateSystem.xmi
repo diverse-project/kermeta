@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Fractal:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Fractal="platform:/resource/SmartAdapters/metamodel/domain/FractalPattern.ecore/pattern/Fractal" xmlns:Julia="platform:/resource/SmartAdapters/metamodel/domain/FractalPattern.ecore/pattern/Fractal/Julia" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/domain/FractalPattern.ecore/pattern/Fractal ../../metamodel/domain/FractalPattern.ecore#//Fractal platform:/resource/SmartAdapters/metamodel/domain/FractalPattern.ecore/pattern/Fractal/Julia ../../metamodel/domain/FractalPattern.ecore#//Fractal/Julia">
+  <component>
+    <membrane xsi:type="Julia:Membrane"/>
+  </component>
+</Fractal:System>

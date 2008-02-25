@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Fractal:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:Fractal="platform:/resource/SmartAdapters/metamodel/domain/Fractal.ecore" 
+xmlns:Java="platform:/resource/SmartAdapters/metamodel/domain/Fractal.ecore#//Java" 
+xmlns:Julia="platform:/resource/SmartAdapters/metamodel/domain/Fractal.ecore#//Julia">
+  <component type="//@type.0" superComponent="//@component.3">
+    <membrane xsi:type="Julia:Membrane" controllerDesc="composite">
+      <externalInterface owner="//@component.0" type="//@type.2" name="r"/>
+      <internalInterface owner="//@component.0" type="//@type.3" name="r" visibility="INTERNAL"/>
+      <controller xsi:type="Fractal:BasicNameController" name="HelloWorld"/>
+      <controller xsi:type="Fractal:GenericAttributeController"/>
+    </membrane>
+    <content subComponent="//@component.1 //@component.2">
+      <binding client="//@component.0/@membrane/@internalInterface.0" server="//@component.1/@membrane/@externalInterface.0"/>
+      <binding client="//@component.1/@membrane/@externalInterface.1" server="//@component.2/@membrane/@externalInterface.0"/>
+    </content>
+  </component>
+  <component type="//@type.4" superComponent="//@component.0 //@component.3">
+    <membrane xsi:type="Julia:Membrane" controllerDesc="primitive" content="//@type.11">
+      <externalInterface owner="//@component.1" type="//@type.6" name="r"/>
+      <externalInterface owner="//@component.1" type="//@type.8" name="s"/>
+      <externalInterface owner="//@component.1" type="//@type.10" name="attribute-controller"/>
+      <internalInterface owner="//@component.1" type="//@type.12" name="r" visibility="INTERNAL"/>
+      <internalInterface owner="//@component.1" type="//@type.13" name="s" visibility="INTERNAL"/>
+      <internalInterface owner="//@component.1" type="//@type.14" name="attribute-controller" visibility="INTERNAL"/>
+      <controller xsi:type="Fractal:GenericAttributeController">
+        <attributes name="message" value="Hello"/>
+      </controller>
+      <controller xsi:type="Fractal:BasicNameController" name="client"/>
+    </membrane>
+    <content/>
+  </component>
+  <component type="//@type.15" superComponent="//@component.0 //@component.3">
+    <membrane xsi:type="Julia:Membrane" controllerDesc="primitive" content="//@type.20">
+      <externalInterface owner="//@component.2" type="//@type.17" name="s"/>
+      <externalInterface owner="//@component.2" type="//@type.19" name="attribute-controller"/>
+      <internalInterface owner="//@component.2" type="//@type.21" name="s" visibility="INTERNAL"/>
+      <internalInterface owner="//@component.2" type="//@type.22" name="attribute-controller" visibility="INTERNAL"/>
+      <controller xsi:type="Fractal:GenericAttributeController">
+        <attributes name="header" value="-> "/>
+        <attributes name="count" value="1"/>
+      </controller>
+      <controller xsi:type="Fractal:BasicNameController" name="server"/>
+    </membrane>
+    <content/>
+  </component>
+  <component type="//@type.23">
+    <membrane xsi:type="Julia:Membrane" controllerDesc="composite">
+      <controller xsi:type="Fractal:GenericAttributeController"/>
+      <controller xsi:type="Fractal:BasicNameController" name="Application"/>
+    </membrane>
+    <content subComponent="//@component.0 //@component.1 //@component.2"/>
+  </component>
+  <type xsi:type="Fractal:ComponentType" interfaceType="//@type.2"/>
+  <type xsi:type="Java:Interface" name="java.lang.Runnable"/>
+  <type xsi:type="Fractal:InterfaceType" name="r" signature="//@type.1"/>
+  <type xsi:type="Fractal:InterfaceType" name="r" role="CLIENT" signature="//@type.1"/>
+  <type xsi:type="Fractal:ComponentType" interfaceType="//@type.6 //@type.8 //@type.10"/>
+  <type xsi:type="Java:Interface" name="java.lang.Runnable"/>
+  <type xsi:type="Fractal:InterfaceType" name="r" signature="//@type.5"/>
+  <type xsi:type="Java:Interface" name="helloworld.Service"/>
+  <type xsi:type="Fractal:InterfaceType" name="s" role="CLIENT" signature="//@type.7"/>
+  <type xsi:type="Java:Interface" name="helloworld.ClientAttributes"/>
+  <type xsi:type="Fractal:InterfaceType" name="attribute-controller" signature="//@type.9"/>
+  <type xsi:type="Java:Class" name="helloworld.ClientImpl"/>
+  <type xsi:type="Fractal:InterfaceType" name="r" role="CLIENT" signature="//@type.5"/>
+  <type xsi:type="Fractal:InterfaceType" name="s" signature="//@type.7"/>
+  <type xsi:type="Fractal:InterfaceType" name="attribute-controller" role="CLIENT" signature="//@type.9"/>
+  <type xsi:type="Fractal:ComponentType" interfaceType="//@type.17 //@type.19"/>
+  <type xsi:type="Java:Interface" name="helloworld.Service"/>
+  <type xsi:type="Fractal:InterfaceType" name="s" signature="//@type.16"/>
+  <type xsi:type="Java:Interface" name="helloworld.ServerAttributes"/>
+  <type xsi:type="Fractal:InterfaceType" name="attribute-controller" signature="//@type.18"/>
+  <type xsi:type="Java:Class" name="helloworld.ServerImpl"/>
+  <type xsi:type="Fractal:InterfaceType" name="s" role="CLIENT" signature="//@type.16"/>
+  <type xsi:type="Fractal:InterfaceType" name="attribute-controller" role="CLIENT" signature="//@type.18"/>
+  <type xsi:type="Fractal:ComponentType"/>
+</Fractal:System>
