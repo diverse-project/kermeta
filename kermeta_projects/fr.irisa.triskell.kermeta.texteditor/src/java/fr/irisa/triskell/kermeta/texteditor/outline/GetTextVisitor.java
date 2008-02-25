@@ -1,4 +1,4 @@
-/* $Id: GetTextVisitor.java,v 1.14 2008-02-14 07:13:43 uid21732 Exp $
+/* $Id: GetTextVisitor.java,v 1.15 2008-02-25 15:58:10 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetTextVisitor.java
 * License : EPL
@@ -21,6 +21,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -43,6 +44,8 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -75,9 +78,11 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 		}
 		
 		// build the list of inherited classes using all aspects
-		Collection<TypeDefinition> baseClasses = KermetaModelHelper.ClassDefinition.getContext( node );
+		List<TypeDefinition> context = TypeDefinitionHelper.getAspects( node );
+		context.addAll( TypeDefinitionHelper.getBaseAspects(node) );
+				
 		EList<Type> allSuperTypes = new BasicEList<Type>(node.getSuperType());
-		for ( TypeDefinition typeDefinition : baseClasses ) {	    	
+		for ( TypeDefinition typeDefinition : context ) {	    	
 	    	if ( typeDefinition instanceof ClassDefinition ) {
 	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
 	    		for ( Type t : cl.getSuperType()) {
