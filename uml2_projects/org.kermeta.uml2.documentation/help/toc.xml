@@ -1,0 +1,19 @@
+<!-- $Id: toc.xml,v 1.1 2008-02-25 14:19:04 dvojtise Exp $ -->
+<toc link_to="../fr.irisa.triskell.kermeta.documentation/toc.xml#MDKs" label="Kermeta MDKs ">
+	<topic label="Kermeta UML2 MDK">
+		<topic href="help/intro.html" label="UML2 MDK presentation">	
+		</topic>
+		<topic href="help/uml_profiles.html" label="UML2 Profiles support">	
+		</topic>
+		<topic href="help/Uml2-Demos.html" label="UML2 Transformations">	
+			<topic href="help/Uml2-Demos1.html" label="Introduction to UML2 MDK">
+			</topic>
+			<topic href="help/Uml2-Demos2.html" label="UML transformations">
+			</topic>
+			<topic href="help/Uml2-Demos3.html" label="Prototyping with UML">
+			</topic>
+			<topic href="help/Uml2-Demos4.html" label="Legal">
+			</topic>
+		</topic>
+	</topic>
+</toc>

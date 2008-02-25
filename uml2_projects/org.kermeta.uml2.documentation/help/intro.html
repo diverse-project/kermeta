@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>UML2 MDK</TITLE>
+    <link href="htmlhelp.css" rel="stylesheet" type="text/css">
+</HEAD>
+<BODY LANG="en-US" BGCOLOR="#ffffff" DIR="LTR">
+<H1 >Introduction to UML2 MDK</H1>
+<P>Kermeta UML2 Model development Kit contains various kind of code: some helper classes and some transformations that apply to UML2 metamodel.</P>
+<P>If you don't use UML Profiles, to use these functionalities you simply have to add the corresponding require statement to your kermeta code. 
+Then, the outline and the KermetaDoc views should help you to use its content.</P>
+<P>If you use UML Profiles, due to the special implementation that have been done in Eclipse EMF, there are some special tricks that you should look at in the corresponding section.</P>
+
+<H2>Short description of the main available <em>require</em> for Profiles</H2>
+<dl><dt class="term">require "platform:/plugin/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"</dt>
+	  <dd>This helper class provides some search functions useful to manipulate profiles (especially retrieving stereotypes etc, ...)</dd>
+    <dt class="term">require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"</dt>
+      <dd>ecore version of Ecore.profile.uml. This is (indirectly) needed by most of the profile manipulation.</dd>
+	<dt class="term">require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"</dt>
+      <dd>This file contains a transformation class that allows to transform your Ecore model and apply Design Patterns to it. Provided Design Pattern (and variants) are : Visitor, Command, Builder and Observer.</dd>
+	<dt class="term">require "platform:/plugin/org.kermeta.uml2.profiles.model/src/kmt/persistence/UMLResource.kmt"</dt>
+      <dd>Aspect for Kermeta persistence in order to support complex profiles (for example using nested profiles, ...). Simple profiles doen't need it.</dd>
+	<dt class="term">require "platform:/plugin/org.kermeta.uml2.profiles.model/src/kmt/UMLProfile2Ecore/UMLProfile2Ecore.kmt"</dt>
+      <dd>This file contains an <em>experimental</em> transformation class that allows to create an Ecore model from an UML model.</dd>
+</dl>
+
+<H2>Short description of the main available <em>require</em> for UML2 transformation</H2>
+<dl><dt class="term">require "platform:/plugin/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"</dt>
+		<dd>This helper class provides some search functions useful to manipulate profiles (especially retrieving stereotypes etc, ...)</dd>
+    <dt class="term">require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"</dt>
+    	<dd>ecore version of Ecore.profile.uml. This is (indirectly) needed by most of the profile manipulation.</dd>
+</dl>
+
+</BODY>
+</HTML>
