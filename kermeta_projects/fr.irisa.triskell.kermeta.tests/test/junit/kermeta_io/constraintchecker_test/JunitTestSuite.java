@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.10 2008-02-14 07:13:32 uid21732 Exp $
+/* $Id: JunitTestSuite.java,v 1.11 2008-02-25 10:46:24 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -222,6 +222,26 @@ public void testinvalid_008_testRequiresColliding() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","008_testRequiresColliding.kmt" );
 }
 
+public void testinvalid_009_requiringFiles1() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","009_requiringFiles1.kmt" );
+}
+
+public void testinvalid_010_requiringFiles2() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","010_requiringFiles2.kmt" );
+}
+
+public void testinvalid_011_requiringFiles3() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","011_requiringFiles3.kmt" );
+}
+
+public void testinvalid_012_multipleDeclaration() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","012_multipleDeclaration.kmt" );
+}
+
+public void testinvalid_012_multipleDeclarationFromRequire() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","012_multipleDeclarationFromRequire.kmt" );
+}
+
 public void testinvalid_025_weaving_in_kermeta_aspect1() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","025_weaving_in_kermeta_aspect1.kmt" );
 }
@@ -252,6 +272,10 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","025_weaving_in_kermet
 
 public void testinvalid_025_weaving_in_kermeta_aspect8() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","025_weaving_in_kermeta_aspect8.kmt" );
+}
+
+public void testinvalid_025_weaving_in_kermeta_aspect8b() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","025_weaving_in_kermeta_aspect8b.kmt" );
 }
 
 public void testinvalid_026_atpre_feature_complex_test_invalid1() throws Exception {

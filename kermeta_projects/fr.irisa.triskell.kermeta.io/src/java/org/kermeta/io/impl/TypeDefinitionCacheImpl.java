@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionCacheImpl.java,v 1.4 2008-02-14 07:13:17 uid21732 Exp $
+ * $Id: TypeDefinitionCacheImpl.java,v 1.5 2008-02-25 10:46:21 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -257,6 +257,13 @@ public class TypeDefinitionCacheImpl extends EObjectImpl implements TypeDefiniti
 			entry = IoFactory.eINSTANCE.createTypeDefinitionCacheEntry();
 			entry.setQualifiedName( qualifiedName );
 			getEntries().put(qualifiedName, entry);
+		} else {
+			// Here we got a problem if the definition is not an aspect.
+			// That means that several type definitions with the same qualified name exist.
+			if ( ! typeDefinition.isIsAspect() && ! entry.getTypeDefinition().isIsAspect() ) { 
+				String message = "Type Definition " + qualifiedName + " already exists.";
+				getKermetaUnit().error(message, typeDefinition);
+			}
 		}
 		entry.setTypeDefinition( typeDefinition );
 	}

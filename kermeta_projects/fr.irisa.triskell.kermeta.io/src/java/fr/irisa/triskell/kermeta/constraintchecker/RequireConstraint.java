@@ -1,6 +1,6 @@
 
 
-/*$Id: RequireConstraint.java,v 1.5 2008-02-14 07:13:17 uid21732 Exp $
+/*$Id: RequireConstraint.java,v 1.6 2008-02-25 10:46:21 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	RequireConstraint.java
 * License : EPL
@@ -54,9 +54,29 @@ public class RequireConstraint {
 		requires = getAllRequires();
 	}
 
+	private boolean isInternal(TypeDefinition td, List<Package> l) {
+		return l.contains(td.eContainer());
+	}
+	
 	public void check() {
 		
 		Map<String, Set<Package>> mappings = new HashMap<String, Set<Package>> ();
+		/*
+		 * 
+		 * Adding the internal packages because, some internal definitions may redefine some from required files.
+		 * 
+		 */
+		List<Package> internalPackages = kermetaUnit.getInternalPackages();
+		for ( Package p : internalPackages ) {
+			String qualifiedName = NamedElementHelper.getQualifiedName(p);
+			Set<Package> l = mappings.get(qualifiedName);
+			if ( l == null ) {
+				l = new HashSet<Package>();
+				mappings.put(qualifiedName, l);
+			}
+			l.add( p );
+		}	
+		
 		for ( KermetaUnitRequire kuRequire : requires ) {
 			for ( Package p : kuRequire.getKermetaUnit().getInternalPackages() ) {
 				String qualifiedName = NamedElementHelper.getQualifiedName(p);
@@ -97,14 +117,27 @@ public class RequireConstraint {
 					List<TypeDefinition> typeDefinitions = typeDefinitionMappings.get(typeDefinitionQualifiedName);
 					boolean good = true;
 					boolean baseFound = false;
+					TypeDefinition internalTypeDefinition = null;
 					for ( TypeDefinition t : typeDefinitions ) {
+						// Is it an internal definition ?
+						if ( internalTypeDefinition == null && isInternal(t, internalPackages) )
+							internalTypeDefinition = t;
 						if ( ! t.isIsAspect() && ! baseFound ) {
 							baseFound = true;
-						} else
+						} else {
 							good = good && t.isIsAspect();
+						}
 					}
 					if ( ! good ) {
-						String message = "Type Definition " + typeDefinitionQualifiedName + " with the same qualified name are imported from several files : ";
+						// The message depends on the status of the internalTypeDefinition variable.
+						// If it is not null, it means that we tried to define a type definition that already exists somewhere in the required files.
+						// If it is null, it means that we are importing at least two type definitions coming from required files.
+						String message = "Type Definition " + typeDefinitionQualifiedName;
+						if ( internalTypeDefinition != null ) {
+							message += " already exists in ";
+						} else {
+							message += " with the same qualified name are imported from several files : ";
+						}
 						String units = "";
 						Set<KermetaUnit> unitsProcessed = new HashSet<KermetaUnit>(); 
 						Set<Require> requiresErroneous = new HashSet<Require>();
@@ -112,7 +145,7 @@ public class RequireConstraint {
 						int nbComingFromAFile = 0;
 						for ( TypeDefinition tdef : typeDefinitions ) {
 							KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(tdef);
-							if ( ! unitsProcessed.contains(unit) ) {
+							if ( ! unitsProcessed.contains(unit) && (unit != kermetaUnit) ) {
 								units += unit.getUri() + "\n";
 								requiresErroneous.addAll( getIndirectRequire(kermetaUnit, unit) );
 								//requiresErroneous.add( getRequire( unit) );
@@ -121,21 +154,24 @@ public class RequireConstraint {
 							}
 						}
 						message += units;
-						for ( Require r : requiresErroneous ) {
+						
+						if ( internalTypeDefinition == null ) {
+							for ( Require r : requiresErroneous ) {
 							
-							if(nbComingFromAFile>1){
-								if(!errorsForRequireStatement.containsKey(r)){
-									errorsForRequireStatement.put(r, new ArrayList<String>());
+								if(nbComingFromAFile>1){
+									if(!errorsForRequireStatement.containsKey(r)){
+										errorsForRequireStatement.put(r, new ArrayList<String>());
+									}
+									errorsForRequireStatement.get(r).add(message);
 								}
-								errorsForRequireStatement.get(r).add(message);
+								else{
+									if(!warningsForRequireStatement.containsKey(r))
+										warningsForRequireStatement.put(r, new ArrayList<String>());
+									warningsForRequireStatement.get(r).add(message);
+								}
 							}
-							else{
-								if(!warningsForRequireStatement.containsKey(r))
-									warningsForRequireStatement.put(r, new ArrayList<String>());
-								warningsForRequireStatement.get(r).add(message);
-							}
-							
-						}
+						} else
+							kermetaUnit.error(message, internalTypeDefinition);
 					}
 				}
 				
