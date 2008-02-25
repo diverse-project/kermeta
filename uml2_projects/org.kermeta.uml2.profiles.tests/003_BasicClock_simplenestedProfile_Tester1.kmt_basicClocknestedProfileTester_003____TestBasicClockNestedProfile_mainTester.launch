@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launchConfiguration type="KermetaLaunchConfiguration">
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value=""/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME" value="basicClocknestedProfileTester_003::TestBasicClockNestedProfile"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="\org.kermeta.uml2.profiles.tests\test\kmt_testcases\003_BasicClock_simplenestedProfile_Tester1.kmt"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME" value="mainTester"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_PROJECTNAME" value="org.kermeta.uml2.profiles.tests"/>
+<listAttribute key="org.eclipse.jdt.launching.CLASSPATH">
+<listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry containerPath=&quot;org.eclipse.jdt.launching.JRE_CONTAINER&quot; path=&quot;1&quot; type=&quot;4&quot;/&gt;&#13;&#10;"/>
+<listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry externalArchive=&quot;C:/eclipse3.3/eclipse/workspace/org.kermeta.uml2.profiles.model/bin&quot; path=&quot;3&quot; type=&quot;2&quot;/&gt;&#13;&#10;"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
+</launchConfiguration>
