@@ -4,9 +4,9 @@
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 	<TITLE>UML transformations</TITLE>
 	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.2  (Linux)">
-	<META NAME="CREATED" CONTENT="20071213;15275100">
+	<META NAME="CREATED" CONTENT="20080225;17421200">
 	<META NAME="CHANGEDBY" CONTENT="Vincent Mahe">
-	<META NAME="CHANGED" CONTENT="20071213;15275100">
+	<META NAME="CHANGED" CONTENT="20080225;17421200">
 </HEAD>
 <BODY LANG="fr-FR" BGCOLOR="#ffffff" DIR="LTR">
 <H1 LANG="en-US" ALIGN=LEFT><FONT COLOR="#000000"><FONT FACE="Bitstream Vera Sans"><FONT SIZE=4>UML
@@ -58,21 +58,24 @@ attribute, a composition link between the “Car” and the
 		Class in the example).</B></FONT></FONT></FONT></P>
 	</DL>
 </DL>
-<PRE LANG="zxx"><FONT FACE="Courier New"><FONT SIZE=2><B>package</B> vehicules;</FONT></FONT>
+<PRE LANG="zxx"><FONT FACE="Courier New"><FONT SIZE=2><FONT COLOR="#3f5fbe"><B>@</B></FONT><FONT COLOR="#960000"><B>mainClass</B></FONT><FONT COLOR="#3f5fbe"><B> &quot;vehicules::Main&quot;</B></FONT></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#3f5fbe">@</FONT><FONT COLOR="#960000"><B>mainOperation</B></FONT><FONT COLOR="#3f5fbe"> &quot;main&quot;</FONT></SPAN></FONT></FONT>
 
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#dc2300"><B>require</B></FONT> kermeta</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#dc2300"><B>require</B></FONT> &quot;../../../fr.irisa.triskell.uml2/src/kermeta/transformations/StaticTools.kmt&quot;</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#dc2300"><B>require</B></FONT> &quot;../../../fr.irisa.triskell.uml2/src/kermeta/transformations/UmlCloneFactory.kmt&quot;</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000064"><B>package</B></FONT><FONT COLOR="#000000"> vehicules;</FONT></SPAN></FONT></FONT>
 
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><B>class</B> Main</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#960000"><B>require</B></FONT><FONT COLOR="#000000"> kermeta</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#960000"><B>require</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#3f5fbe">&quot;platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/StaticTools.kmt&quot;</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#960000"><B>require</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#3f5fbe">&quot;platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/UmlCloneFactory.kmt&quot;</FONT></SPAN></FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000064"><B>class</B></FONT><FONT COLOR="#000000"> Main</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">{</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>reference</B> origModelName : kermeta::standard::String</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>reference</B> origModel : uml2::Model</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>reference</B> cloneModelName : kermeta::standard::String</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>reference</B> cloneModel : uml2::Model</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>reference</B> root_package : uml2::Package</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>reference</B></FONT><FONT COLOR="#000000"> origModelName : kermeta::standard::String</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>reference</B></FONT><FONT COLOR="#000000"> origModel : uml::Model</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>reference</B></FONT><FONT COLOR="#000000"> cloneModelName : kermeta::standard::String</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>reference</B></FONT><FONT COLOR="#000000"> cloneModel : uml::Model</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>reference</B></FONT><FONT COLOR="#000000"> root_package : uml::Package</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	/**</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#3f5fbe">/**</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	 * This sample program will preserve the given sample model</SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	 * in order to be reused as many times as you want.</SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	 * So the program loads the model, clones it,</SPAN></FONT></FONT>
@@ -80,120 +83,132 @@ attribute, a composition link between the “Car” and the
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	 * You can then open the resulting model in the Ecore editor</SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	 * or use a graphical editor (like TopCased) to draw it.</SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	 */</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><B>operation</B> main() : <B>Void is do</B></SPAN></FONT></FONT>
+<FONT COLOR="#000000">    </FONT><FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000"> main() : </FONT><FONT COLOR="#000000"><B>Void</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#000064"><B>do</B></FONT></SPAN></FONT></FONT>
     <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	 </SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		//creating needed instances</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		origModelName := &quot;<FONT COLOR="#0000ff">../models/vehicules.uml2</FONT>&quot;</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		stdio.writeln(</FONT><FONT COLOR="#3f5fbe">&quot; &gt;&gt;&gt;------&gt; loading the original model&quot;</FONT><FONT COLOR="#000000">)</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// load the given UML2 resource</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> inputRepository : kermeta::persistence::EMFRepository <B>init</B> kermeta::persistence::EMFRepository.new</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> inputResource : kermeta::persistence::EMFResource</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		inputResource ?= inputRepository.createResource(origModelName, &quot;<FONT COLOR="#0000ff">../ecore/UML2.ecore</FONT>&quot;)</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		inputResource.load()</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">//creating needed instances</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		origModelName := </FONT><FONT COLOR="#3f5fbe">&quot;platform:/resource/org.kermeta.uml2.samples/vehicules/models/vehicules.uml&quot;</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
+<FONT COLOR="#000000">    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</FONT><FONT COLOR="#41825a">// load the given UML2 resource</FONT></SPAN></FONT></FONT>
+<FONT COLOR="#000000">    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> inputRepository : kermeta::persistence::EMFRepository </FONT><FONT COLOR="#000064"><B>init</B></FONT><FONT COLOR="#000000"> kermeta::persistence::EMFRepository.new</FONT></SPAN></FONT></FONT>
+<FONT COLOR="#000000">    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> inputResource : kermeta::persistence::EMFResource</FONT></SPAN></FONT></FONT>
+    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	inputResource ?= inputRepository.getResource(origModelName)</SPAN></FONT></FONT>
     <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// &quot;instances&quot; only gives the main diagramm package for the targeted code tree</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		origModel ?= inputResource.instances.one</SPAN></FONT></FONT>
+<FONT COLOR="#000000">    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</FONT><FONT COLOR="#41825a">// &quot;instances&quot; only gives the main diagramm package for the targeted code tree</FONT></SPAN></FONT></FONT>
+    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	origModel ?= inputResource.instances.one</SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> factory : uml2::transformations::UmlCloneFactory <B>init</B> uml2::transformations::UmlCloneFactory.new</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		factory.initialize</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		cloneModel := factory.cloneStaticDiagram(origModel)</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		stdio.writeln(</FONT><FONT COLOR="#3f5fbe">&quot; &gt;&gt;&gt;------&gt; cloning the original model (kept virgin) into a new one&quot;</FONT><FONT COLOR="#000000">)</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we need the package containing the classes</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		root_package ?= cloneModel.ownedMember.select{ e | e.name == &quot;vehicules&quot; }.one</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> factory : uml::transformations::UmlCloneFactory </FONT><FONT COLOR="#000064"><B>init</B></FONT><FONT COLOR="#000000"> uml::transformations::UmlCloneFactory.new</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		factory.initialize</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		cloneModel := factory.cloneStaticDiagram(origModel)</SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		addGetterOnWattsPower</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		addEngineInterface</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		addCarEngineComposition</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		addEngineGeneralisation</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		cloneModelName := &quot;<FONT COLOR="#0000ff">../models/improved_vehicules.uml2</FONT>&quot;</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> outputRepository : kermeta::persistence::EMFRepository <B>init</B> kermeta::persistence::EMFRepository.new</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> outputResource : kermeta::persistence::EMFResource</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		outputResource ?= outputRepository.createResource(cloneModelName, &quot;<FONT COLOR="#0000ff">../ecore/UML2.ecore</FONT>&quot;)</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		outputResource.instances.add(cloneModel)</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		outputResource.save()</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><B>end</B></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		stdio.writeln(</FONT><FONT COLOR="#3f5fbe">&quot; &gt;&gt;&gt;------&gt; transforming the cloned model&quot;</FONT><FONT COLOR="#000000">)</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we need the package containing the classes</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		root_package ?= cloneModel.packagedElement.select{ e | e.name == </FONT><FONT COLOR="#3f5fbe">&quot;vehicules&quot;</FONT><FONT COLOR="#000000"> }.one</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		addGetterOnWattsPower</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		addEngineInterface</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		addCarEngineComposition</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		addEngineGeneralisation</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		stdio.writeln(</FONT><FONT COLOR="#3f5fbe">&quot; &gt;&gt;&gt;------&gt; saving the transformed model&quot;</FONT><FONT COLOR="#000000">)</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		cloneModelName := </FONT><FONT COLOR="#3f5fbe">&quot;platform:/resource/org.kermeta.uml2.samples/vehicules/models/improved_vehicules.uml&quot;</FONT></SPAN></FONT></FONT>
+<FONT COLOR="#000000">    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> outputRepository : kermeta::persistence::EMFRepository </FONT><FONT COLOR="#000064"><B>init</B></FONT><FONT COLOR="#000000"> kermeta::persistence::EMFRepository.new</FONT></SPAN></FONT></FONT>
+<FONT COLOR="#000000">    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> outputResource : kermeta::persistence::EMFResource</FONT></SPAN></FONT></FONT>
+<FONT COLOR="#000000">    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	outputResource ?= outputRepository.createResource(cloneModelName, </FONT><FONT COLOR="#3f5fbe">&quot;platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore&quot;</FONT><FONT COLOR="#000000">)</FONT></SPAN></FONT></FONT>
+    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	outputResource.instances.add(cloneModel)</SPAN></FONT></FONT>
+    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	outputResource.save()</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		stdio.writeln(</FONT><FONT COLOR="#3f5fbe">&quot; &lt;------&lt;&lt;&lt; model saved&quot;</FONT><FONT COLOR="#000000">)</FONT></SPAN></FONT></FONT>
+<FONT COLOR="#000000">    </FONT><FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000064"><B>end</B></FONT></SPAN></FONT></FONT>
     
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#00ae00">/////////////  code for transformations //////////////////</FONT></SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>operation</B> addGetterOnWattsPower()<B> is do</B></SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we get the &quot;GasEngine&quot; class (before this class will loose its attributes, passed to the interface)</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> cl : uml2::Class</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		cl ?= root_package.ownedMember.select{ e | e.name == &quot;<FONT COLOR="#0000ff">GasEngine</FONT>&quot; }.one</SPAN></FONT></FONT>
+<FONT COLOR="#000000">    </FONT><FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#41825a">/////////////  code for transformations //////////////////</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000"> addGetterOnWattsPower() </FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#000064"><B>do</B></FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we get the &quot;GasEngine&quot; class (before this class will loose its attributes, passed to the interface)</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> cl : uml::Class</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		cl ?= root_package.packagedElement.select{ e | e.name == </FONT><FONT COLOR="#3f5fbe">&quot;GasEngine&quot;</FONT><FONT COLOR="#000000"> }.one</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we need the accessors tool for transformation</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> accTool : uml2::transformations::Accessor_Tool <B>init</B> uml2::transformations::Accessor_Tool.new</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we need the accessors tool for transformation</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> accTool : uml::transformations::Accessor_Tool </FONT><FONT COLOR="#000064"><B>init</B></FONT><FONT COLOR="#000000"> uml::transformations::Accessor_Tool.new</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we make the getter corresponding to each property of the class</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we make the getter corresponding to each property of the class</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		cl.ownedAttribute.each{ prop |</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">			// we add the getter operation corresponding to the property</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">			</FONT><FONT COLOR="#41825a">// we add the getter operation corresponding to the property</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">			accTool.addGetter(cl, prop)</SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		}</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>end</B></SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>operation</B> addEngineInterface()<B> is do</B></SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we get the &quot;GasEngine&quot; class to generalize it in a &quot;IEngine&quot; interface</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> cl : uml2::Class</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		cl ?= root_package.ownedMember.select{ e | e.name == &quot;<FONT COLOR="#0000ff">GasEngine</FONT>&quot; }.one</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>end</B></FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000"> addEngineInterface() </FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#000064"><B>do</B></FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we get the &quot;GasEngine&quot; class to generalize it in a &quot;IEngine&quot; interface</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> cl : uml::Class</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		cl ?= root_package.packagedElement.select{ e | e.name == </FONT><FONT COLOR="#3f5fbe">&quot;GasEngine&quot;</FONT><FONT COLOR="#000000"> }.one</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we need the interface tool for extraction</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> ifTool : SpecializedEngineInterface_Tool <B>init</B> SpecializedEngineInterface_Tool.new</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we need the interface tool for extraction</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> ifTool : SpecializedEngineInterface_Tool </FONT><FONT COLOR="#000064"><B>init</B></FONT><FONT COLOR="#000000"> SpecializedEngineInterface_Tool.new</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we get then the interface</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> ifc : uml2::Interface</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we get then the interface</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> ifc : uml::Interface</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		ifc := ifTool.extractInterface(cl)</SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we add the new interface to the resulting model</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		root_package.ownedMember.add(ifc)</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// Rem: the generalization between the interface and the (original)</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// concrete class doesn't need to be added to the model</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// (it is owned by the concrete class)</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>end</B></SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>operation</B> addCarEngineComposition()<B> is do</B></SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we get the &quot;GasEngine&quot; class as the component</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> clEngine : uml2::Class</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		clEngine ?= root_package.ownedMember.select{ e | e.name == &quot;<FONT COLOR="#0000ff">GasEngine</FONT>&quot; }.one</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we add the new interface to the resulting model</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		root_package.packagedElement.add(ifc)</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// Rem: the interfaceRealization between the interface and the (original)</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// concrete class doesn't need to be added to the model</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// (it is owned by the concrete class)</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>end</B></FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000"> addCarEngineComposition() </FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#000064"><B>do</B></FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we get the &quot;IEngine&quot; interface to link it with &quot;Car&quot; class</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> iEngine : uml::Interface</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		iEngine ?= root_package.packagedElement.select{ e | e.name == </FONT><FONT COLOR="#3f5fbe">&quot;IEngine&quot;</FONT><FONT COLOR="#000000"> }.one</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we get the &quot;Car&quot; class as the container</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> clCar : uml2::Class</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		clCar ?= root_package.ownedMember.select{ e | e.name == &quot;<FONT COLOR="#0000ff">Car</FONT>&quot; }.one</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we get the &quot;Car&quot; class to associate it with an &quot;IEngine&quot; interface</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> clCar : uml::Class</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		clCar ?= root_package.packagedElement.select{ e | e.name == </FONT><FONT COLOR="#3f5fbe">&quot;Car&quot;</FONT><FONT COLOR="#000000"> }.one</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we need the association tool for transformation</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> assocTool : uml2::transformations::Association_Tool <B>init</B> uml2::transformations::Association_Tool.new</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we need the association tool for transformation</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> assocTool : uml::transformations::Association_Tool </FONT><FONT COLOR="#000064"><B>init</B></FONT><FONT COLOR="#000000"> uml::transformations::Association_Tool.new</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we then get the new composition</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> assoc : uml2::Association <B>init</B> uml2::Association.new</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		assoc := assocTool.addNavigableComposition(clCar, clEngine, &quot;<FONT COLOR="#0000ff">poweredBy</FONT>&quot;, &quot;<FONT COLOR="#0000ff">engine</FONT>&quot;)</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we then get the new composition</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> assoc : uml::Association </FONT><FONT COLOR="#000064"><B>init</B></FONT><FONT COLOR="#000000"> uml::Association.new</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		assoc := assocTool.addNavigableComposition(clCar, iEngine, </FONT><FONT COLOR="#3f5fbe">&quot;poweredBy&quot;</FONT><FONT COLOR="#000000">, </FONT><FONT COLOR="#3f5fbe">&quot;engine&quot;</FONT><FONT COLOR="#000000">)</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we add the new association to the resulting model</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		root_package.ownedMember.add(assoc)</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>end</B></SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>operation</B> addEngineGeneralisation()<B> is do</B></SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we get the &quot;ElectricEngine&quot; class</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> cl : uml2::Class</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		cl ?= root_package.ownedMember.select{ e | e.name == &quot;<FONT COLOR="#0000ff">ElectricEngine</FONT>&quot; }.one</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we add the new association to the resulting model</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		root_package.packagedElement.add(assoc)</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>end</B></FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000"> addEngineGeneralisation() </FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#000064"><B>do</B></FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we need the interface tool to link interface and engine</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> ifTool : SpecializedEngineInterface_Tool </FONT><FONT COLOR="#000064"><B>init</B></FONT><FONT COLOR="#000000"> SpecializedEngineInterface_Tool.new</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we get then the &quot;IEngine&quot; interface</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> ifc : uml2::Interface</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		ifc ?= root_package.ownedMember.select{ e | e.name == &quot;<FONT COLOR="#0000ff">IEngine</FONT>&quot; }.one</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we get then the &quot;IEngine&quot; interface</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> ifc : uml::Interface</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		ifc ?= root_package.packagedElement.select{ e | e.name == </FONT><FONT COLOR="#3f5fbe">&quot;IEngine&quot;</FONT><FONT COLOR="#000000"> }.one</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we need the generalization tool for transformation</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>var</B> geneTool : uml2::transformations::Generalization_Tool <B>init</B> uml2::transformations::Generalization_Tool.new</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// we make the inheritance</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		geneTool.addGeneralization(ifc, cl)</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// Rem: the generalization between the interface and a</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// concrete class doesn't need to be added to the model</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		// (it is owned by the concrete class)</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>end</B></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">		</FONT><FONT COLOR="#41825a">// we select and process the classes with a WattsPower attribute</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		root_package.packagedElement.select{ e |</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> c : uml::Class</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">			c ?= e</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064"><B>if</B></FONT><FONT COLOR="#000000"> c != </FONT><FONT COLOR="#7f0055"><I><B>void</B></I></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#000064"><B>then</B></FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">				</FONT><FONT COLOR="#000000"><B>not</B></FONT><FONT COLOR="#000000"> c.ownedAttribute.select{a | a.name == </FONT><FONT COLOR="#3f5fbe">&quot;wattsPower&quot;</FONT><FONT COLOR="#000000">}.isEmpty</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064"><B>else</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#7f0055"><I><B>false</B></I></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#000064"><B>end</B></FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		}.each{ cl |</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000"> c : uml::Class</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">			c ?= cl</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064"><B>if</B></FONT><FONT COLOR="#000000"> c != </FONT><FONT COLOR="#7f0055"><I><B>void</B></I></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#000064"><B>then</B></FONT><FONT COLOR="#000000"> ifTool.addInterfaceRealization(ifc, c) </FONT><FONT COLOR="#000064"><B>end</B></FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		}</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>end</B></FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">}</SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">////////////// class for overwrite interface method for name</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><B>class</B> SpecializedEngineInterface_Tool <B>inherits</B> uml2::transformations::Interface_Tool</SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000064"><B>class</B></FONT><FONT COLOR="#000000"> SpecializedEngineInterface_Tool </FONT><FONT COLOR="#000064"><B>inherits</B></FONT><FONT COLOR="#000000"> uml::transformations::Interface_Tool</FONT></SPAN></FONT></FONT>
 <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">{</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	/** overwrite the original method */</SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	<B>method</B> nameForInterface(name : kermeta::standard::String) : kermeta::standard::String<B> is do</B></SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">		<B>result</B> := &quot;<FONT COLOR="#0000ff">IEngine</FONT>&quot;</SPAN></FONT></FONT>
-    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><B>end</B></SPAN></FONT></FONT>
-<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">}</SPAN></FONT></FONT></PRE><P LANG="en-US" ALIGN=JUSTIFY>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#3f5fbe">/** overwrite the original method */</FONT></SPAN></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>method</B></FONT><FONT COLOR="#000000"> nameForInterface(name : kermeta::standard::String) : kermeta::standard::String </FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#000064"><B>do</B></FONT></SPAN></FONT></FONT>
+<FONT COLOR="#000000">    <FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx">	</FONT><FONT COLOR="#7f0055"><I><B>result</B></I></FONT><FONT COLOR="#000000"> := </FONT><FONT COLOR="#3f5fbe">&quot;IEngine&quot;</FONT></SPAN></FONT></FONT>
+<FONT COLOR="#000000">    </FONT><FONT FACE="Courier New"><FONT SIZE=2><SPAN LANG="zxx"><FONT COLOR="#000064"><B>end</B></FONT></SPAN></FONT></FONT>
+<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2><SPAN LANG="zxx">}</SPAN></FONT></FONT></FONT></PRE><P LANG="en-US" ALIGN=JUSTIFY>
 <FONT FACE="Bitstream Vera Serif"><FONT SIZE=2>The cloned and
 transformed model has been saved under <FONT COLOR="#000000"><FONT FACE="Century Schoolbook L"><FONT SIZE=2><I>improved_vehicules.uml2</I></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Bitstream Vera Serif"><FONT SIZE=2><I>
 and can be used</I></FONT></FONT></FONT><FONT FACE="Bitstream Vera Serif"><FONT SIZE=2>
