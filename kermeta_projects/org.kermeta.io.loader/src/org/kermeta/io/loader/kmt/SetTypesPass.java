@@ -1,6 +1,6 @@
 
 
-/*$Id: SetTypesPass.java,v 1.2 2008-02-14 07:12:48 uid21732 Exp $
+/*$Id: SetTypesPass.java,v 1.3 2008-02-25 16:01:05 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	SetTypesPass.java
 * License : EPL
@@ -129,6 +129,7 @@ public class SetTypesPass extends KermetaASTNodeVisitor implements ILoadingActio
 		} 
 		// If we want aspect that are asymetric, just reactivate the next condition.
 		//else if ( ! classDefinition.isIsAspect() ) {
+		else {
 			/*
 			 * 
 			 * By default, add Object as supertype.
@@ -148,7 +149,7 @@ public class SetTypesPass extends KermetaASTNodeVisitor implements ILoadingActio
 					classDefinition.getSuperType().add( superclass );
 				}
 			}
-		//}
+		}
 		// Continue the visit
 		return true;
 	}
