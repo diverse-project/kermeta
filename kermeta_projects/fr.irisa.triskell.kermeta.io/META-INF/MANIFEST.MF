@@ -18,7 +18,7 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  fr.irisa.triskell.eclipse.util,
  fr.irisa.triskell.traceability,
  org.eclipse.ui,
- org.eclipse.gymnast.runtime.core,
+ org.eclipse.gymnast.runtime.core;visibility:=reexport,
  org.eclipse.emf.ecoretools.registration
 Eclipse-LazyStart: true
 Bundle-Activator: org.kermeta.io.plugin.IOPlugin
