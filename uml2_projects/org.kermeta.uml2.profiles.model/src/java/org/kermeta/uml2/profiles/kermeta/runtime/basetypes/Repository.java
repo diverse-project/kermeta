@@ -1,4 +1,4 @@
-/*$Id: Repository.java,v 1.2 2008-02-11 16:48:35 dvojtise Exp $
+/*$Id: Repository.java,v 1.3 2008-02-25 16:53:36 dvojtise Exp $
 * Project : org.kermeta.uml2.profiles.model
 * File : 	Repository.java
 * License : EPL
@@ -12,26 +12,25 @@
 package org.kermeta.uml2.profiles.kermeta.runtime.basetypes;
 
 
-import org.eclipse.emf.ecore.resource.Resource;
-
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**
  * This class is intended to "wrap" the repository management from kermeta.
+ * by default it reuse operations defined in fr.irisa.triskell.kermeta.runtime.basetypes.Repository
  */
 public class Repository extends fr.irisa.triskell.kermeta.runtime.basetypes.Repository {
 
-	/** tells to the createResource that it must create a UMLResource instead of the standard EMFResource
-	 * 
-	 * @param emfRes
-	 * @param repRO
-	 * @param mmUriRO
-	 * @return
-	 */
-	protected static RuntimeObject createRuntimeObjectFromResource(Resource emfRes, RuntimeObject repRO, RuntimeObject mmUriRO)
-    {
-    	return repRO.getFactory().createRuntimeObjectFromResource(emfRes, repRO, mmUriRO, "kermeta::persistence::UMLResource");
+    /**
+     * @param selfRO  - RO for repository
+     * @param uriRO   - RO for the uri of the resource to be created
+     * @param mmUriRO - RO for the uri of the metamodel of the resource to be created
+     * @return        - RO for the created resource, or void RO if creation failed
+     */
+    public static RuntimeObject createResource(RuntimeObject selfRO, RuntimeObject uriRO, RuntimeObject mmUriRO) {
     	
+    	// default implemetation use EMF and the default singleton        
+    	return UMLRepositorySingleton.getSingleton().createResource(selfRO, uriRO, mmUriRO);
     }
+    
 
 }
