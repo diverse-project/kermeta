@@ -4,7 +4,9 @@ Bundle-Name: Kermeta IO Plugin
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.io;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .,
- lib/thirdparty/junit.jar
+ lib/thirdparty/antlr.jar,
+ lib/thirdparty/emfatic-core.jar,
+ lib/thirdparty/ldt-core.jar
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
@@ -17,11 +19,21 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  fr.irisa.triskell.traceability,
  org.eclipse.ui,
  org.eclipse.gymnast.runtime.core,
- org.antlr,
  org.eclipse.emf.ecoretools.registration
 Eclipse-LazyStart: true
 Bundle-Activator: org.kermeta.io.plugin.IOPlugin
-Export-Package: fr.irisa.triskell.kermeta.ast.helper,
+Export-Package: antlr,
+ antlr.actions,
+ antlr.actions.cpp,
+ antlr.actions.csharp,
+ antlr.actions.java,
+ antlr.build,
+ antlr.collections,
+ antlr.collections.impl,
+ antlr.debug,
+ antlr.debug.misc,
+ antlr.preprocessor,
+ fr.irisa.triskell.kermeta.ast.helper,
  fr.irisa.triskell.kermeta.constraintchecker,
  fr.irisa.triskell.kermeta.directedgraph,
  fr.irisa.triskell.kermeta.exceptions,
