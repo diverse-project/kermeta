@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Kermeta class diagram
+Bundle-Name: Kermeta class diagram graphical editor
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.graphicaleditor; singleton:=true
 Bundle-Version: 1.0.99.qualifier
 Bundle-Activator: fr.irisa.triskell.kermeta.graphicaleditor.KmPlugin

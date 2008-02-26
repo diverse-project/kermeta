@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Framework
+Bundle-Name: Kermeta Framework Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.framework
-Bundle-Version: 0.99.0.qualifier
+Bundle-Version: 1.0.99.qualifier
 Bundle-ClassPath: framework.jar,
  lib/thirdparty/antlr.jar,
  lib/thirdparty/emfatic-core.jar,
@@ -37,3 +37,4 @@ Require-Bundle: fr.irisa.triskell.kermeta.interpreter,
  org.eclipse.gymnast.runtime.core,
  org.antlr.eclipse.core,
  org.kermeta.io.loader
+Bundle-Vendor: IRISA/INRIA

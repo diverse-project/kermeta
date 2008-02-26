@@ -2,8 +2,8 @@
 <feature
       id="fr.irisa.triskell.kermeta.ket.feature"
       label="Kermeta Emitter Template"
-      version="0.2.0"
-      provider-name="IRISA / INRIA">
+      version="1.0.99.qualifier"
+      provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">
       KET is distributed under the terms of the EPL licence.
