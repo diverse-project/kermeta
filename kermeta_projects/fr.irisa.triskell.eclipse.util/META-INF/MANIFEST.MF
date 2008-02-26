@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Eclipse Util Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.eclipse.util;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.99.qualifier
 Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.ui.console;visibility:=reexport,
