@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.13 2008-02-22 11:00:16 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.14 2008-02-26 14:09:59 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -31,7 +31,7 @@ class Main
 
     operation main_inner() : Void is do
 		var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km"
-		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_.ecore"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.ecore"
 
 		main_mode(input, output, CompilingMode.behaviorJava)
 	end

@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.9 2008-02-22 15:05:46 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.10 2008-02-26 14:09:41 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -178,6 +178,56 @@ package behavior {
 	}
 	//**** End **** Managing of the CallExpression branch ****//
 	
+	aspect class VariableDecl {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			result := "//IP VariableDecl" + self.toString
+			var localType : String init self.type.createBehaviorJava(context)
+			result := result + localType + " " + self.identifier
+			if not self.initialization.isVoid() then
+				
+				if self.initialization.createBehaviorJava(context).contains(".new()") then
+					result := result + CompilerHelper.new.getCreateFactory(localType)
+				else
+					result := result + " = " + self.initialization.createBehaviorJava(context)
+				end
+		
+			else
+				//result := result + CompilerHelper.new.getCreateFactory(localType)
+			end
+		result := result + ";"
+		end
+	}
+	
+	aspect class Assignment {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			result := "//TODO Assignment" + self.toString
+		end
+	}
+	
+	aspect class LambdaExpression {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			result := "//TODO LambdaExpression" + self.toString
+		end
+	}
+	
+	aspect class LambdaParameter {
+		method createBehaviorJava(context : Integer) : String is do
+			result := "//TODO LambdaParameter" + self.toString
+		end
+	}
+	
+	aspect class TypeReference {
+		method createBehaviorJava(context : Integer) : String is do
+			result := "//TODO TypeReference" + self.toString
+		end
+	}
+	
+	aspect class EmptyExpression {
+		method createBehaviorJava(context : Integer) : String from Expression is do
+			result := "//TODO EmptyExpression" + self.toString
+		end
+	}
+	
 	//**** Begin **** Managing of the exception ****//
 	aspect class Raise {
 		method createBehaviorJava(context : Integer) : String from Expression is do
@@ -289,6 +339,30 @@ package compilerhelper {
 			expressions.each{e |
 				result := result + e.createBehaviorJava(context)
 			}
+		end
+		
+		/**
+		 * Give the String corresponding to the CreateFactory  of a type
+		 * @param localType
+		 * @return
+		 */
+		operation getCreateFactory(localType : String) : String is do
+			result := ""
+			
+			if localType == "String" then
+				result := " = \"\""
+				
+			else
+				//var localType2 : String init localType.replace(".", "%")
+	
+				//var name_set : OrderedSet<String> init localType2.split("%")
+				
+				//var allPackages_label : String init localType.substring(0, localType.size()-name_set.elementAt(name_set.size()-1).size())
+				
+				//if name_set.size()>=2 then
+					//result := " = " + allPackages_label + /*CodeGenUtil.capName(*/name_set.elementAt(name_set.size-2)/*)*/ +"Factory.eINSTANCE.create" + name_set.elementAt(name_set.size()-1) + "()"
+				//end
+			end
 		end
 	}
 }
