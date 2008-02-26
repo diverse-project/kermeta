@@ -1,4 +1,4 @@
-/* $Id: UMLRuntimeUnit.java,v 1.3 2008-02-26 16:55:57 dvojtise Exp $
+/* $Id: UMLRuntimeUnit.java,v 1.4 2008-02-26 16:56:35 dvojtise Exp $
  * Project   : org.kermeta.uml2.profiles
  * File      : UMLRuntimeUnit.java
  * License   : EPL
@@ -14,18 +14,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.emf.EMF2Runtime;
 import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnitFactory;
-import fr.irisa.triskell.kermeta.runtime.loader.emf.QualifiedNamePatcher;
 
 /**
  * Runtime unit that knows how to load UML resources
