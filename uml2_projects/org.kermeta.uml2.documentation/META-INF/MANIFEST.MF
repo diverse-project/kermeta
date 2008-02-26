@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UML2 MDK Documentation Plug-in
 Bundle-SymbolicName: org.kermeta.uml2.documentation;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.99.qualifier
 Bundle-Activator: org.kermeta.uml2.documentation.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
