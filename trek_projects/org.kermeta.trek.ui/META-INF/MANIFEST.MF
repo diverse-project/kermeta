@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Editor Plug-in
 Bundle-SymbolicName: org.kermeta.trek.ui;singleton:=true
-Bundle-Version: 0.1.0
+Bundle-Version: 1.0.99.qualifier
 Bundle-Activator: org.kermeta.trek.ui.views.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -14,3 +14,4 @@ Export-Package: org.kermeta.trek.ui.views,
  org.kermeta.trek.ui.views.nav.operations,
  org.kermeta.trek.ui.wizards,
  org.kermeta.trek.ui.wizards.kusecase
+Bundle-Vendor: IRISA/INRIA

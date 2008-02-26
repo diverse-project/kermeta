@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tests
+Bundle-Name: FSM Tests
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.samples.fsm.tests;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.99.qualifier
 Require-Bundle: org.eclipse.ui.editors,
  org.eclipse.debug.core,
  org.eclipse.core.filesystem,
@@ -17,3 +17,4 @@ Require-Bundle: org.eclipse.ui.editors,
  fr.irisa.triskell.traceability,
  org.junit4
 Export-Package: fr.irisa.triskell.kermeta.samples.fsm.tests
+Bundle-Vendor: IRISA/INRIA

@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta tutorial on Aspect Programming
 Bundle-SymbolicName: org.kermeta.tutorial.aspects.documentation;singleton:=true
-Bundle-Version: 1.0.0
-Bundle-Vendor: INRIA
+Bundle-Version: 1.0.99.qualifier
+Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.help,
  org.eclipse.uml2.uml,

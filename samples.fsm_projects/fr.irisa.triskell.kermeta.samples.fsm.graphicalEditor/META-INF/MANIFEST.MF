@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Fsm Graphical Editor
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.99.qualifier
 Bundle-Activator: fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmPlugin
-Bundle-Vendor: Topcased / IRISA-INRIA
+Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.edit,

@@ -1,10 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tests Plug-in
+Bundle-Name: UML2 MDK Tests Plug-in
 Bundle-SymbolicName: org.kermeta.uml2.tests;singleton:=true
-Bundle-Version: 0.0.1
+Bundle-Version: 1.0.99.qualifier
 Require-Bundle: org.eclipse.core.runtime,
  org.openembedd.tests,
  fr.irisa.triskell.kermeta.tests,
  org.junit4,
  org.eclipse.core.resources
+Bundle-Vendor: IRISA/INRIA

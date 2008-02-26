@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.kermeta.alltests"
-      label="All tests Feature"
-      version="0.99.0.qualifier"
+      label="All Kermeta tests Feature"
+      version="1.0.99.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">

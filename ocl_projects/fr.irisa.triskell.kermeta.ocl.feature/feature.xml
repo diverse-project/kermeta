@@ -2,8 +2,8 @@
 <feature
       id="fr.irisa.triskell.kermeta.ocl"
       label="Kermeta MDK for OCL"
-      version="1.1.0"
-      provider-name="INRIA/IRISA">
+      version="1.1.0.qualifier"
+      provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]

@@ -2,7 +2,8 @@
 <feature
       id="org.kermeta.uml2"
       label="UML2 MDK Feature"
-      version="0.1.0">
+      version="1.0.99.qualifier"
+      provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Runner Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.runner; singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.99.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: fr.irisa.triskell.kermeta.runner.RunnerPlugin
 Bundle-Vendor: IRISA/INRIA

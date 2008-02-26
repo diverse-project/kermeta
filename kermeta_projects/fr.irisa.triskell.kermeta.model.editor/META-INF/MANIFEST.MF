@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Kermeta Emf-Editor
+Bundle-Name: Kermeta Tree Editor
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.model.editor; singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.99.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: fr.irisa.triskell.kermeta.presentation.KermetaEditorPlugin$Implementation
 Bundle-Vendor: IRISA/INRIA

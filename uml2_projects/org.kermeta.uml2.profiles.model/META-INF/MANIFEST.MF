@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: UML2 Profiles
+Bundle-Name: UML2 MDK Profiles support Plug-in
 Bundle-SymbolicName: org.kermeta.uml2.profiles.model;singleton:=true
-Bundle-Version: 0.0.1
+Bundle-Version: 1.0.99.qualifier
 Bundle-Activator: org.kermeta.uml2.profiles.model.plugin.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,

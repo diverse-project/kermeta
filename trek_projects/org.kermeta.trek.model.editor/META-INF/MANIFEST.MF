@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.kermeta.trek.model.editor; singleton:=true
-Bundle-Version: 0.1.0
+Bundle-Version: 1.0.99.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.kermeta.trek.presentation.UsekaseEditorPlugin$Implementation
 Bundle-Vendor: %providerName

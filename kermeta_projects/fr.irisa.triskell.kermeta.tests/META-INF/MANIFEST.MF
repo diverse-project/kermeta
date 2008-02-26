@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Tests Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.tests
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.99.qualifier
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.osgi,
@@ -35,3 +35,4 @@ Export-Package: fr.irisa.triskell.kermeta.interpreter.test,
  kermeta_io.typechecker_test
 Bundle-ClassPath: lib/thirdparty/junit.jar,
  .
+Bundle-Vendor: IRISA/INRIA
