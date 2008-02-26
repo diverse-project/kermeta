@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.28 2008-01-29 10:15:11 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.29 2008-02-26 16:34:38 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2008-01-29 10:15:11 $</pubdate>
+    <pubdate>$Date: 2008-02-26 16:34:38 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -4144,9 +4144,9 @@ aspect abstract class A {
       (used for load and save) is just a set. This approach is not type safe
       enough.</para>
 
-      <para>So, Kermeta implement a clear notion of model type, in order to be
+      <para>So, Kermeta implements a clear notion of model type, in order to be
       able to typecheck this kind of model. A model type is simply the set of
-      the type of all allowed model element.</para>
+      the type of all allowed model elements.</para>
 
       <para>In addition, it introduce a mecanism of conformance between
       modeltype that helps to reuse code from one metamodel to another.</para>
