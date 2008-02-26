@@ -1,4 +1,4 @@
-/* $Id: UMLRuntimeUnit.java,v 1.2 2008-02-25 16:53:36 dvojtise Exp $
+/* $Id: UMLRuntimeUnit.java,v 1.3 2008-02-26 16:55:57 dvojtise Exp $
  * Project   : org.kermeta.uml2.profiles
  * File      : UMLRuntimeUnit.java
  * License   : EPL
@@ -127,6 +127,7 @@ public class UMLRuntimeUnit extends EMFRuntimeUnit {
 		String result = safeGetName(umlElement);
 		if(umlElement.eContainer() != null){
 			String containerqname = safeUMLQualifiedName( umlElement.eContainer());
+			containerqname = containerqname.replaceAll(" ", "");
 			if(!containerqname.equals(""))
 				result = containerqname + "::" + result;
 		}
