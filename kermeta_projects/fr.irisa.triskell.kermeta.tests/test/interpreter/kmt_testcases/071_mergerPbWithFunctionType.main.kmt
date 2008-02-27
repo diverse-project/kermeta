@@ -1,0 +1,103 @@
+/* $Id: 071_mergerPbWithFunctionType.main.kmt,v 1.1 2008-02-27 16:02:30 dvojtise Exp $
+ * Creation date: July 9, 2007
+ * License:
+ * Copyright:
+ * Authors: Franck Fleurey
+ *		Didier Vojtisek
+ *  this test is for bug #5152 
+ *	http://gforge.inria.fr/tracker/?func=detail&atid=205&aid=5152&group_id=32
+ *		the typechecker is ok (and should be ok)
+ *		but when running the sample the resulting km file after the merge has lost the body of the allPrecedingNodes operation
+ */
+@mainClass "mergerPbWithfunctionType::Main"
+@mainOperation "main"
+
+package mergerPbWithfunctionType;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+
+
+abstract class Node {
+
+	// Operations that have to be redefined in sub-classes
+	operation outgoingEdges() : Edge[*] is abstract
+	operation incomingEdges() : Edge[*] is abstract
+	
+	// When compile to km both allFollowingNodes and allPrecedingNodes are compiled correctly but
+	// when executed allPrecedingNodes is compiled with no code, body seems to be lost by the merger
+	operation allFollowingNodes() : Map<Node> is do
+		result := void
+		if allFollowingNodes_result.isVoid then
+			var ctx : Map<Node> init Map<Node>.new
+			var f : <Node -> Sequence<Node>>
+			f := function { n : Node | n.outgoingEdges.collect{ e | e.targetNode } }
+			__addAllFollowingNodes(ctx, f)
+			result := ctx
+			allFollowingNodes_result := result
+		else
+			result := allFollowingNodes_result
+		end
+	end
+	reference allFollowingNodes_result : Map<Node> // Cache
+	
+	/**
+	 * Return all the nodes that precede self (backward transitive closure)
+	 */
+	operation allPrecedingNodes() : Map<Node> is do
+		result := void
+		if allPrecedingNodes_result.isVoid then
+			var ctx : Map<Node> init Map<Node>.new
+			__addAllFollowingNodes(ctx, 
+				function { n : Node | n.incomingEdges.collect{ e | e.sourceNode } }
+			)
+			result := ctx
+			allPrecedingNodes_result := result
+		else
+			result := allPrecedingNodes_result
+		end
+	end
+	reference allPrecedingNodes_result : Map<Node> // Cache
+	
+	 // Utility function for allFollowingNodes and allPrecedingNodes
+	operation __addAllFollowingNodes(ctx : Map<Node>, follow : <Node -> Sequence<Node>>) : Void is do
+		follow(self).each{ succ |
+			if not ctx.contains(succ) then
+				ctx.add(succ)
+				succ.__addAllFollowingNodes(ctx, follow)
+			end
+		}
+	end
+	
+	
+
+}
+
+abstract class Edge {
+	/* Operations that have to be redefined in sub-classes */
+	operation sourceNode() : Node is abstract
+	operation targetNode() : Node is abstract
+}
+
+
+class Map<G> inherits Hashtable<G, Boolean> 
+{
+	operation add(o : G) is do
+		self.put(o, true)
+	end
+	
+	operation contains(o : G) : Boolean is do
+		result := self.containsKey(o)
+	end
+}
+
+
+
+class Main
+{
+	operation main() : Void is do 
+		stdio.writeln("toto")
+	end
+}
