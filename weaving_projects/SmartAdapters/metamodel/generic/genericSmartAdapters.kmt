@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.14 2008-02-25 13:36:15 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.15 2008-02-27 13:06:37 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -85,8 +85,14 @@ package smartadapters
 			attribute binding : Hashtable<Object, Object>
 			attribute cloned : Set<Object>
 			attribute convert : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
-			//attribute enum : Hashtable<kermeta::language::structure::Enumeration,kermeta::language::structure::Enumeration>
 			attribute converter : Converter
+			
+			/*
+			 * attributes for managing roll-back (may be improved)
+			 */
+			attribute notRemovable : Set<Object>
+			attribute removable : Set<Object>
+			attribute removed : Set<Object>
 			
 			operation initConvert() : Void is abstract
 			
@@ -97,6 +103,10 @@ package smartadapters
 			operation apply(b:Hashtable<Object, Object>) is do
 				var i : Integer init 1
 				binding := b
+				
+				removable.clear
+				removed.clear
+				
 				adapt.each{a |
 					stdio.writeln("Adaptation "+i.toString)
 					stdio.writeln("------------")
@@ -113,7 +123,7 @@ package smartadapters
 			This operation unweaves the previously woven aspect, for the current binding
 			In other words, it performs a roll back.
 			*/
-			operation unweave() is do	
+			operation unweave() is do
 				var i : Integer init 1
 				adapt.each{a | 
 					if(a.reverse != void) then
@@ -141,6 +151,15 @@ package smartadapters
 				if (cloned == void) then
 					cloned := Set<Object>.new
 				end
+				if (notRemovable == void) then
+					notRemovable := Set<Object>.new
+				end
+				if (removable == void) then
+					removable := Set<Object>.new
+				end
+				if (removed == void) then
+					removed := Set<Object>.new
+				end			
 			end		
 				
 			/**
@@ -170,6 +189,13 @@ package smartadapters
 						end
 					}
 				end
+				
+				removable.each{o |
+					var real : Object init getRealObject(o,false)
+					if not removed.contains(real) then
+						notRemovable.add(real)
+					end
+				}	
 			end
 			
 			operation updateClone(handler : Object, template : Object) is do
@@ -181,7 +207,7 @@ package smartadapters
 			
 				if (template != void) then
 					realTemplate := getRealObject(template,false)
-					realHandler:=Object.clone(realTemplate)
+					realHandler := Object.clone(realTemplate)
 					cloned.remove(realTemplate)
 				else
 					realHandler:=converter.getConverted(handler)
@@ -194,29 +220,30 @@ package smartadapters
 				end
 			end
 
-			operation cloneAgain(handler : Object, template : Object, type : uniqueType)	: Void is do
-				var toClone : Boolean init type == uniqueType.non_unique
-				if (not(toClone) and type == uniqueType.unique) then
-					if (template != void) then
-						toClone := not(cloned.contains(getRealObject(template,false)))
-						if toClone then
-							clone.remove(handler)
-							clone.put(handler, getRealObject(template,false))
+			operation cloneAgain(handler : Object, template : Object, type : uniqueType) : Void is do
+				if type == uniqueType.non_unique then
+					updateClone(handler,template)
+					removable.add(getRealObject(handler,false))
+				else 
+					if type == uniqueType.unique then
+						if (template != void) then
+							if not(cloned.contains(getRealObject(template,false))) then
+								updateClone(handler,template)
+								removable.add(getRealObject(handler,false))
+							end
+						else
+							if not(clone.containsKey(handler)) then
+								updateClone(handler,template)
+								removable.add(getRealObject(handler,false))
+							end 
 						end
 					else
-						toClone := not(clone.containsKey(handler)) 
-					end
-				end
-				if (not(toClone) and type == uniqueType.onDemand) then
-					var input : String init stdio.read("$>clone "+handler.toString+" (true/false) :")
-			        toClone := input.toBoolean
-				end
-				if (toClone) then
-					if(template != void) then
-						updateClone(handler,template)
-					else
-						updateClone(handler,void)
-					end
+						var input : String init stdio.read("$>clone "+handler.toString+" (true/false) :")
+				        if input.toBoolean then
+				        	updateClone(handler,template)
+				        	removable.add(getRealObject(handler,false))
+				        end
+					end 
 				end
 			end
 			
@@ -235,7 +262,7 @@ package smartadapters
 			end
 			
 			operation setSingleProperty(o : Object, old : Object) : Object is do
-				if(o != void) then
+				if(o != void) then					
 					result := getRealObject(o,false)
 				else
 					result := old
@@ -244,7 +271,14 @@ package smartadapters
 
 			operation unsetSingleProperty(o : Object, old : Object) : Object is do
 				if(o != void) then
-					result := void
+					var e : Object init getRealObject(o,false)
+					if not notRemovable.contains(e) then
+						//notRemovable.remove(e)
+						removed.add(e)
+						result := void
+					else
+						result := old
+					end
 				else
 					result := old
 				end
@@ -260,9 +294,12 @@ package smartadapters
 					if(coll != void and collToSet != void) then
 						var realColl : Collection<kermeta::language::structure::Object>
 						realColl ?= getRealObject(o,true)
-						realColl.each{o |
-							//stdio.writeln("removing "+o.toString)
-							collToSet.remove(o)
+						realColl.each{e |
+							if not notRemovable.contains(e) then
+								//notRemovable.remove(e)
+								collToSet.remove(e)
+								removed.add(e)
+							end
 						}
 					end
 				end
