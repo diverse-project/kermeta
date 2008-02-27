@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<runtime:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:runtime="platform:/resource/SmartAdapters/metamodel/domain/runtime/runtimePattern.ecore#/pattern/runtime" xmlns:type="platform:/resource/SmartAdapters/metamodel/domain/runtime/typePattern.ecore#/pattern/type" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/domain/runtime/runtimePattern.ecore#/pattern/runtime ../../metamodel/domain/runtime/runtimePattern.ecore#/1/runtime platform:/resource/SmartAdapters/metamodel/domain/runtime/typePattern.ecore#/pattern/type ../../metamodel/domain/runtime/typePattern.ecore#/1/type">
-  <components xsi:type="runtime:PrimitiveComponentInstance" name="logComp" type="//@types.0" state="ON"/>
-  <types name="LogType">
-    <ports name="logPort" provided="//@serviceDeclarations.0"/>
-  </types>
-  <serviceDeclarations xsi:type="type:FunctionalService" name="Log"/>
-</runtime:System>
