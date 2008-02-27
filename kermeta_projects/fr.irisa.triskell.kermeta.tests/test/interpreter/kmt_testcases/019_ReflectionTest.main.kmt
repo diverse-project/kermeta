@@ -54,7 +54,7 @@ class TestReflection inherits kermeta::kunit::TestCase
 		stdio.writeln(void.getMetaClass.toString)
 	end
 
-	/*operation testMetaClass() is do
+	operation testMetaClass() is do
 		assert(String.getMetaClass == Integer.getMetaClass)
 	end
 	
@@ -80,7 +80,7 @@ class TestReflection inherits kermeta::kunit::TestCase
 		var p1 : Property init AClass.typeDefinition.asType(ClassDefinition).ownedAttribute.select{ p | p.name == "derived_b"  }.one
 		assert(a.get(p1) == a.b.one)
 		
-	end*/
+	end
 	
 	/** check that we can get a value from all property (including those inherited from Object) 
 	 */
