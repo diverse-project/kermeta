@@ -1,4 +1,4 @@
-/* $Id: 002_testPatterns.main.kmt,v 1.2 2008-02-21 15:37:13 dvojtise Exp $ */
+/* $Id: 002_testPatterns.main.kmt,v 1.3 2008-02-27 12:23:06 dvojtise Exp $ */
 @mainClass "testEcorePatterns::TestPatterns"
 @mainOperation "mainTester"
 package testEcorePatterns;
@@ -45,7 +45,7 @@ class TestPatterns inherits kermeta::kunit::TestCase
 		helper.loadEcoreAsModel()
 		
 		stdio.writeln(" loading prePatterns model ...")
-		var model : Sequence <ecore::EPackage> init helper.loadEcoreModel(repository, "platform:/resource/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/002_prePatterns.ecore")
+		var model : Sequence <ecore::EPackage> init helper.loadEcoreModel(repository, "platform:/plugin/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/002_prePatterns.ecore")
 		packUml := model.detect{ e | e.name.equals("TopPackage") }
 		
         tool := Patterns4Ecore.new
