@@ -1,0 +1,20 @@
+/* $Id: StringHelper.kmt,v 1.1 2008-02-27 15:29:49 cfaucher Exp $
+ * Creation date: February 27, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::standard;
+
+require kermeta
+
+using kermeta::standard
+
+aspect class String
+{
+	// Set to upper the first letter of a string
+	operation capName() : String is do
+		result := self.substring(0,1).toUpperCase + self.substring(1, self.size())
+	end
+}

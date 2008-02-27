@@ -1,4 +1,4 @@
-/* $Id: PrintWithAspect.kmt,v 1.2 2008-02-21 15:50:33 cfaucher Exp $
+/* $Id: PrintWithAspect.kmt,v 1.3 2008-02-27 15:29:50 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -15,7 +15,7 @@ require "StructureCompiler.kmt"
 require "printJava.kmt"
 
 using kermeta::language::structure
-using kermeta::km2ecore
+using km2ecore
 
 class Printer inherits Main
 {
@@ -27,7 +27,7 @@ class Printer inherits Main
 		stdio.writeln("\n - Start Java printing -")
 		context.mus.each{ mu |
 			mu.packages.each{ p |
-				p.print(0)
+				p.print(context)
 			}
 		}
 		stdio.writeln(" - Finish Java printing -")

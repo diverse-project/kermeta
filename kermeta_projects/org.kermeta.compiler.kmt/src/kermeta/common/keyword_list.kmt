@@ -1,4 +1,4 @@
-/* $Id: keyword_list.kmt,v 1.1 2008-02-21 14:10:39 cfaucher Exp $
+/* $Id: keyword_list.kmt,v 1.2 2008-02-27 15:29:50 cfaucher Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -78,6 +78,8 @@ class JavaKeyWordList
 		addKeyword("true")
 		addKeyword("false")
 		addKeyword("null")
+		
+		//stdio.writeln("The construction of the HashTable of Java keywords has been finished")
         
 	end
 

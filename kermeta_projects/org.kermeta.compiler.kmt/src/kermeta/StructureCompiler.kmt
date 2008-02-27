@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.14 2008-02-26 14:09:59 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.15 2008-02-27 15:29:50 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -20,7 +20,7 @@ require "KM2EcoreContext.kmt"
 using ecore
 using kermeta::persistence
 using kermeta::language::structure
-using kermeta::km2ecore
+using km2ecore
 using kermeta::standard
 
 class Main
@@ -54,14 +54,14 @@ class Main
 		context.mus.each{ mu |
 			mu.applyPass1()
 			if context.mode == CompilingMode.onlyEcore then
-				mu.applyPass2
+				mu.applyPass2(context)
 			end
 			if context.mode == CompilingMode.behaviorKmt then
-				mu.applyPass2BehaviorKmt
+				mu.applyPass2BehaviorKmt(context)
 			end
 			
 			if context.mode == CompilingMode.behaviorJava then
-				mu.applyPass2BehaviorJava
+				mu.applyPass2BehaviorJava(context)
 			end
 			
 			// Save the generated ecore

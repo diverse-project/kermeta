@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.10 2008-02-26 14:09:41 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.11 2008-02-27 15:29:50 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -10,27 +10,31 @@ package kermeta::language;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "../helper/KM2EcoreHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/KM2EcoreHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/StringHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 using kermeta::utils
 using ecore
+using km2ecore
+using km2ecore::helper
 using km2ecore::helper::ecore
 using kermeta::language::compilerhelper
 
 package structure {
 
 	aspect class Object {
-		operation createBehaviorJava(context : Integer) : String is do
+		operation createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := ""
 		end
 	}
 	
 	/** We have to visit property in order to print the behavior of the getter and setter */
 	aspect class Property {
-		method createBehaviorJava(context : Integer) : String is do
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := void
 			
 			// The current property is derived
@@ -46,7 +50,7 @@ package structure {
 	
 	/** We have to visit operation in order to print the result initialization and the return statement */
 	aspect class Operation {
-		method createBehaviorJava(context : Integer) : String is do
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := void
 			
 			var javaCode : StringBuffer init StringBuffer.new
@@ -79,31 +83,31 @@ package structure {
 	}
 	
 	aspect class Type {
-		method createBehaviorJava(context : Integer) : String is do
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := ""
 		end
 	}
 	
 	aspect class VoidType {
-		method createBehaviorJava(context : Integer) : String from Type is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Type is do
 			result := "Void" // the VoidType is "normally" mapped to the Void class
 		end
 	}
 	
 	aspect class PrimitiveType {
-		method createBehaviorJava(context : Integer) : String is do
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := self.instanceType.createBehaviorJava(context) // self.instanceType should be a ParameterizedType
 		end
 	}
 	
 	aspect class ParameterizedType {
-		method createBehaviorJava(context : Integer) : String from Type is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Type is do
 			result := self.typeDefinition.name
 		end
 	}
 	
 	/*aspect class ObjectTypeVariable {
-		method createBehaviorJava(context : Integer) : String is do
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := "//TODO\n" + self.toString
 		end
 	}*/
@@ -113,14 +117,14 @@ package structure {
 package behavior {
 	
 	aspect class Expression {
-		method createBehaviorJava(context : Integer) : String is do
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			//self.
 			result := "//TODO content of the current expression\n" + self.toString + "\n\n"
 		end
 	}
 	
 	aspect class Block {
-		method createBehaviorJava(context : Integer) : String from Expression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			var javaCode : StringBuffer init StringBuffer.new
 			javaCode.append("{")
 			self.statement.each{ stm |
@@ -134,15 +138,19 @@ package behavior {
 	
 	//**** Begin **** Managing of the CallExpression branch ****//
 	aspect class CallExpression {
-		method createBehaviorJava(context : Integer) : String from Expression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := "//TODO content of the current CallExpression\n" + self.toString + "\n\n"
 		end
 	}
 	
 	aspect class CallFeature {
-		method createBehaviorJava(context : Integer) : String from CallExpression is do
-			result := "//IP content of the current CallFeature\n"
-						+ self.target.createBehaviorJava(context) + "." + self.name
+		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
+			result := "/*IP content of the current CallFeature*/"
+
+			if not self.target.isVoid() then
+				result := result + self.target.createBehaviorJava(context) + "."
+			end
+			result := result + self.name
 						
 			if self.name == "writeln" then
 				result := "println"
@@ -151,36 +159,40 @@ package behavior {
 	}
 	
 	aspect class CallVariable {
-		method createBehaviorJava(context : Integer) : String from CallExpression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 			result := "//TODO content of the current CallVariable\n" + self.toString + "\n\n"
+			//result := result + "\n CallVariable.name = " + self.name
 			if self.name == "stdio" then
-				result := "System.out"
+				result := result + "System.out"
+			else
+				result := result + self.name
 			end
 		end
 	}
 	
 	aspect class CallResult {
-		method createBehaviorJava(context : Integer) : String from CallVariable is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from CallVariable is do
 			result := "result"
 		end
 	}
 	
 	aspect class CallValue {
-		method createBehaviorJava(context : Integer) : String from CallExpression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 			result := "//TODO content of the current CallValue\n" + self.toString + "\n\n"
 		end
 	}
 	
 	aspect class CallSuperOperation {
-		method createBehaviorJava(context : Integer) : String from CallExpression is do
-			result := "//TODO content of the current CallSuperOperation\n" + "super" + "\n\n"
+		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
+			result := "//IP content of the current CallSuperOperation\n"
+			result := result + "super"
 		end
 	}
 	//**** End **** Managing of the CallExpression branch ****//
 	
 	aspect class VariableDecl {
-		method createBehaviorJava(context : Integer) : String from Expression is do
-			result := "//IP VariableDecl" + self.toString
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			result := "//IP VariableDecl" + self.toString + "\n"
 			var localType : String init self.type.createBehaviorJava(context)
 			result := result + localType + " " + self.identifier
 			if not self.initialization.isVoid() then
@@ -192,51 +204,93 @@ package behavior {
 				end
 		
 			else
-				//result := result + CompilerHelper.new.getCreateFactory(localType)
+				result := result + CompilerHelper.new.getCreateFactory(localType)
 			end
 		result := result + ";"
 		end
 	}
 	
 	aspect class Assignment {
-		method createBehaviorJava(context : Integer) : String from Expression is do
-			result := "//TODO Assignment" + self.toString
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			result := "//TODO Assignment" + self.toString + "\n"
+			var left : String init self.target.createBehaviorJava(context)
+			var right : String init self.~value.createBehaviorJava(context)
+		
+			// Patch that adds the 'function' keyword in case the assigned value is a function
+			if self.~value.isInstanceOf(LambdaExpression) then
+				right := "function " + right
+			end
+			
+			var op : String init ""//(node.isIsCast())?"?":":";
+			
+			if self.target.isInstanceOf(CallFeature) then
+				//stdio.writeln(self.target.name)
+				result := result + "get" + KM2EcoreHelper.new.getMangledIdentifier(self.target.name, context).capName()
+			else
+			
+				if self.target.isInstanceOf(CallFeature) then
+					//left = left.substring(0,left.length()-2);
+					
+					left.replace(".", "%")
+					
+					var tabLeft : OrderedSet<String> init left.split("%")
+					
+					result := ""
+					from var i : Integer init 0
+					until i < tabLeft.size()
+					loop
+						if i < (tabLeft.size()-1) then
+							result := result + tabLeft.elementAt(i) + "."
+						end
+						if i == (tabLeft.size()-1) then
+							result := result + "set" + tabLeft.elementAt(i).capName()
+						end
+						i := i+1
+					end
+				
+					result := result + "(" + right + ");"
+				else
+					result := left + " " + op + "= " + right + ";"
+				end
+			end
+			
 		end
 	}
 	
 	aspect class LambdaExpression {
-		method createBehaviorJava(context : Integer) : String from Expression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := "//TODO LambdaExpression" + self.toString
 		end
 	}
 	
 	aspect class LambdaParameter {
-		method createBehaviorJava(context : Integer) : String is do
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := "//TODO LambdaParameter" + self.toString
 		end
 	}
 	
 	aspect class TypeReference {
-		method createBehaviorJava(context : Integer) : String is do
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := "//TODO TypeReference" + self.toString
+			result := CompilerHelper.new.ppTypeFromMultiplicityElement(self, context)
 		end
 	}
 	
 	aspect class EmptyExpression {
-		method createBehaviorJava(context : Integer) : String from Expression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := "//TODO EmptyExpression" + self.toString
 		end
 	}
 	
 	//**** Begin **** Managing of the exception ****//
 	aspect class Raise {
-		method createBehaviorJava(context : Integer) : String from Expression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := "throw " + self.expression.createBehaviorJava(context)
 		end
 	}
 	
 	aspect class Rescue {
-		method createBehaviorJava(context : Integer) : String is do
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := "catch"
 			if not self.exceptionName.isVoid() then
 				result := result + "(" + self.exceptionName + " : " + self.exceptionType.createBehaviorJava(context) + ")"
@@ -250,13 +304,13 @@ package behavior {
 	//**** End **** Managing of the exception ****//
 	
 	aspect class SelfExpression {
-		method createBehaviorJava(context : Integer) : String from Expression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := "this"
 		end
 	}
 	
 	aspect class Conditional {
-		method createBehaviorJava(context : Integer) : String from Expression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := "if( " + self.condition.createBehaviorJava(context) + ") {\n"
 			//pushPrefix(); 
 			// Both type of ThenBody and ElseBody are "Block" (see also KMT2KMPrimitiveExpressionBuilder)
@@ -278,52 +332,55 @@ package behavior {
 	
 	/** TODO */
 	aspect class Loop {
-		method createBehaviorJava(context : Integer) : String from Expression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := ""
 		end
 	}
 	
 	aspect class JavaStaticCall {
-		method createBehaviorJava(context : Integer) : String from Expression is do
-			//result := self.jclass.replace("::", ".") + "." + KMTHelper.getMangledIdentifier(node.getJmethod()) + "("
-			//result := result + ppComaSeparatedNodes(node.getParameters());
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			//stdio.writeln(self.jmethod)
+			result := self.jclass.replace("::", ".") + "." + KM2EcoreHelper.new.getMangledIdentifier(self.jmethod, context) + "("
+			result := result + CompilerHelper.new.ppComaSeparatedNodes(self.parameters, context)
 			result := result + ")"
 		end
 	}
 	
+	
 	//**** Begin **** Managing of the literal ****//
 	aspect class Literal {
-		method createBehaviorJava(context : Integer) : String from Expression is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := "//TODO Literal" + self.toString
 		end
 	}
 	
 	aspect class StringLiteral {
-		method createBehaviorJava(context : Integer) : String from Literal is do
-			result := "//TODO StringLiteral" + self.toString
+		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
+			result := "\"" + self.~value.replace("\"", "\\\"") + "\""
 		end
 	}
 	
 	aspect class IntegerLiteral {
-		method createBehaviorJava(context : Integer) : String from Literal is do
-			result := "//TODO IntegerLiteral" + self.toString
+		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
+			result := self.~value.toString
 		end
 	}
 	
 	aspect class BooleanLiteral {
-		method createBehaviorJava(context : Integer) : String from Literal is do
-			result := "//TODO BooleanLiteral" + self.toString
+		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
+			result := self.~value.toString
 		end
 	}
 	
 	aspect class TypeLiteral {
-		method createBehaviorJava(context : Integer) : String from Literal is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			result := "//TODO TypeLiteral" + self.toString
+			result := result + self.typeref.createBehaviorJava(context)
 		end
 	}
 	
 	aspect class VoidLiteral {
-		method createBehaviorJava(context : Integer) : String from Literal is do
+		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			result := "void" // the VoidLiteral is "normally" mapped to the void singleton
 		end
 	}
@@ -334,7 +391,7 @@ package behavior {
 package compilerhelper {
 	/** unused for the moment */
 	class CompilerHelper {
-		operation ppCRSeparatedNode(expressions : OrderedSet<Expression>, context : Integer) : String is do
+		operation ppCRSeparatedNode(expressions : OrderedSet<Expression>, context : KM2EcoreContext) : String is do
 			result := ""
 			expressions.each{e |
 				result := result + e.createBehaviorJava(context)
@@ -350,19 +407,55 @@ package compilerhelper {
 			result := ""
 			
 			if localType == "String" then
-				result := " = \"\""
+				result := " = null"
 				
 			else
-				//var localType2 : String init localType.replace(".", "%")
+				var localType2 : String init localType.replace(".", "%")
 	
-				//var name_set : OrderedSet<String> init localType2.split("%")
+				var name_set : OrderedSet<String> init localType2.split("%")
 				
-				//var allPackages_label : String init localType.substring(0, localType.size()-name_set.elementAt(name_set.size()-1).size())
+				var allPackages_label : String init localType.substring(0, localType.size()-name_set.elementAt(name_set.size()-1).size())
 				
-				//if name_set.size()>=2 then
-					//result := " = " + allPackages_label + /*CodeGenUtil.capName(*/name_set.elementAt(name_set.size-2)/*)*/ +"Factory.eINSTANCE.create" + name_set.elementAt(name_set.size()-1) + "()"
-				//end
+				if name_set.size()>=2 then
+					result := " = " + allPackages_label + name_set.elementAt(name_set.size-2).capName() +"Factory.eINSTANCE.create" + name_set.elementAt(name_set.size()-1) + "()"
+				end
 			end
 		end
+		
+		operation ppTypeFromMultiplicityElement(elem : MultiplicityElement, context : KM2EcoreContext) : String is do
+			result := ""
+			if elem.upper != 1 then
+				if elem.isOrdered then
+					if not elem.isUnique then
+					result := result + "seq "
+					end
+				else
+					if elem.isUnique then
+						result := result + "set "
+					else
+						result := result + "bag "
+					end
+				end
+			end
+			result := result + elem.type.createBehaviorJava(context)
+			/*if ( elem.lower != 0 or elem.upper != 1) then
+				result := result + "[" + elem.lower() + ".."
+				result := result + (elem.upper()<0)?"*":""+elem.upper()
+				result := result + "]"
+			end*/
+		end
+		
+		operation ppComaSeparatedNodes(expressions : Set<Expression>, context : KM2EcoreContext) : String is do
+			result := ""
+			var i : Integer init 0
+			expressions.each{ e |		
+				result := result + e.createBehaviorJava(context)
+				if i<(expressions.size()-1) then
+					result := result + ", "
+				end
+				i := i+1
+			}
+		end
 	}
+	
 }

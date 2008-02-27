@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.6 2008-02-18 16:04:40 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.7 2008-02-27 15:29:50 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -18,77 +18,79 @@
 
 package kermeta::language;
 
-
 require kermeta
 require "SetLinks.kmt"
 require "CreateBehavior.kmt"
-require "../common/containment_traversable.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/containment_traversable.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+
+using km2ecore
 
 package structure {
 	
 	aspect class Object {
-		operation applyPass2() is do
+		operation applyPass2(context : KM2EcoreContext) is do
 			// Compile the owned elements
-			self.eachOwnedElement{ p | p.applyPass2() }
+			self.eachOwnedElement{ p | p.applyPass2(context) }
 		end
 		
-		operation applyPass2BehaviorJava() is do
+		operation applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			// Compile the owned elements
-			self.eachOwnedElement{ p | p.applyPass2BehaviorJava() }
+			self.eachOwnedElement{ p | p.applyPass2BehaviorJava(context) }
 		end
 		
-		operation applyPass2BehaviorKmt() is do
+		operation applyPass2BehaviorKmt(context : KM2EcoreContext) is do
 			// TODO
 		end
 	}
 	
 	aspect class ClassDefinition {
-		method applyPass2() is do
+		method applyPass2(context : KM2EcoreContext) is do
 			self.setLinks() 
-			super()
+			super(context)
 		end
 		
-		method applyPass2BehaviorJava() is do
+		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			self.setLinks() 
-			super()
+			super(context)
 		end
 	}
 	
 	aspect class Property {
-		method applyPass2() is do
+		method applyPass2(context : KM2EcoreContext) is do
 			self.setLinks()
-			super()
+			super(context)
 		end
 		
-		method applyPass2BehaviorJava() is do
+		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			self.setLinks()
-			super()
-			self.createBehaviorJava(0)
+			super(context)
+			self.createBehaviorJava(context)
 		end
 	}
 	
 	aspect class Operation {
-		method applyPass2() is do
+		method applyPass2(context : KM2EcoreContext) is do
 			self.setLinks()
-			super()
+			super(context)
 		end
 		
-		method applyPass2BehaviorJava() is do
+		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			self.setLinks()
-			super()
-			self.createBehaviorJava(0)
+			super(context)
+			self.createBehaviorJava(context)
 		end
 	}
 	
 	aspect class Parameter {
-		method applyPass2() is do
+		method applyPass2(context : KM2EcoreContext) is do
 			self.setLinks()
-			super()
+			super(context)
 		end
 		
-		method applyPass2BehaviorJava() is do
+		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			self.setLinks()
-			super()
+			super(context)
 		end
 	}
 	
@@ -97,9 +99,9 @@ package structure {
 package behavior {
 
 	aspect class Expression {
-		method applyPass2BehaviorJava() is do
-			self.createBehaviorJava(0)
-			super()
+		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
+			self.createBehaviorJava(context)
+			super(context)
 		end
 	}
 
