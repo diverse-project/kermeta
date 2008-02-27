@@ -1,4 +1,4 @@
-/* $Id: 067_testHasSubTypeLoadingModel.main.kmt,v 1.5 2008-02-20 22:55:07 dvojtise Exp $
+/* $Id: 067_testHasSubTypeLoadingModel.main.kmt,v 1.6 2008-02-27 15:52:54 dvojtise Exp $
  * Creation date: June 5, 2007
  * License:
  * Copyright:
@@ -16,6 +16,7 @@ using kermeta::standard
 using kermeta::utils
 using kermeta::kunit
 
+using kermeta::language::structure
 
 class TestHasSubtypeLoadingModel inherits kermeta::kunit::TestCase {
 
@@ -65,6 +66,6 @@ class TestHasSubtypeLoadingModel inherits kermeta::kunit::TestCase {
 		
         stdio.writeln(result.toString)
 		assert( not result.isVoid)
-   	end
+   	end  
 }
 
