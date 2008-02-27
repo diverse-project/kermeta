@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.6 2008-02-14 07:13:29 uid21732 Exp $
+/* $Id: JunitTestSuite.java,v 1.7 2008-02-27 12:14:42 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -14,14 +14,16 @@
  */
 package kermeta_io.roundtrip_test; 
 
+import java.util.HashMap;
+
 import junit.framework.TestCase;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import org.kermeta.io.printer.KMTOutputBuilder;
+import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
@@ -190,8 +192,10 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		String kmtFile = outputDir + "/" + fileName + ".kmt";
 		String ecoreFile = outputDir + "/" + fileName + ".ecore";
 				
+		HashMap<String, Object> loaderOptions = new HashMap<String, Object>();
+		loaderOptions.put( LoadingOptions.ECORE_QuickFixEnabled, true );
 		
-		KermetaUnit baseEcoreUnit = LoaderPlugin.getDefault().load( ecoreBaseFile, null );		
+		KermetaUnit baseEcoreUnit = LoaderPlugin.getDefault().load( ecoreBaseFile, loaderOptions );		
 		if ( ! baseEcoreUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( baseEcoreUnit );
 			typechecker.checkUnit();
