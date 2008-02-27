@@ -1,0 +1,93 @@
+/* $Id: PrettyPrinterHelper.kmt,v 1.1 2008-02-27 15:53:10 cfaucher Exp $
+ * Creation date: February 27, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package km2ecore::helper::kermeta;
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+
+using kermeta::language::structure
+using kermeta::language::behavior
+using kermeta::standard
+using km2ecore
+
+/**
+ * Class containing some helpers dedicated to the Kermeta compiler
+ */
+class CompilerHelperJava {
+	operation ppCRSeparatedNode(expressions : OrderedSet<Expression>, context : KM2EcoreContext) : String is do
+		result := ""
+		expressions.each{e |
+			result := result + e.createBehaviorJava(context)
+		}
+	end
+	
+	/**
+	 * Give the pp string corresponding to the CreateFactory in EMF-like of a type
+	 * @param localType
+	 * @return String
+	 */
+	operation ppEmfLikeCreateFactory(localType : String) : String is do
+		result := ""
+		
+		if localType == "String" then
+			result := " = null"
+			
+		else
+			var localType2 : String init localType.replace(".", "%")
+
+			var name_set : OrderedSet<String> init localType2.split("%")
+			
+			var allPackages_label : String init localType.substring(0, localType.size()-name_set.elementAt(name_set.size()-1).size())
+			
+			if name_set.size()>=2 then
+				result := " = " + allPackages_label + name_set.elementAt(name_set.size-2).capName() +"Factory.eINSTANCE.create" + name_set.elementAt(name_set.size()-1) + "()"
+			end
+		end
+	end
+	
+	/**
+	 *
+	 */
+	operation ppTypeFromMultiplicityElement(elem : MultiplicityElement, context : KM2EcoreContext) : String is do
+		result := ""
+		if elem.upper != 1 then
+			if elem.isOrdered then
+				if not elem.isUnique then
+				result := result + "seq "
+				end
+			else
+				if elem.isUnique then
+					result := result + "set "
+				else
+					result := result + "bag "
+				end
+			end
+		end
+		result := result + elem.type.createBehaviorJava(context)
+		/*if ( elem.lower != 0 or elem.upper != 1) then
+			result := result + "[" + elem.lower() + ".."
+			result := result + (elem.upper()<0)?"*":""+elem.upper()
+			result := result + "]"
+		end*/
+	end
+	
+	/**
+	 *
+	 */
+	operation ppComaSeparatedNodes(expressions : Set<Expression>, context : KM2EcoreContext) : String is do
+		result := ""
+		var i : Integer init 0
+		expressions.each{ e |		
+			result := result + e.createBehaviorJava(context)
+			if i<(expressions.size()-1) then
+				result := result + ", "
+			end
+			i := i+1
+		}
+	end
+}

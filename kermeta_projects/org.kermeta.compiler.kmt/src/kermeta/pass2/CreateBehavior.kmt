@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.11 2008-02-27 15:29:50 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.12 2008-02-27 15:53:10 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -10,9 +10,10 @@ package kermeta::language;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/KM2EcoreHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/StringHelper.kmt"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/PrettyPrinterHelper.kmt"
 
 using kermeta::language::structure
 using kermeta::language::behavior
@@ -22,7 +23,7 @@ using ecore
 using km2ecore
 using km2ecore::helper
 using km2ecore::helper::ecore
-using kermeta::language::compilerhelper
+using km2ecore::helper::kermeta
 
 package structure {
 
@@ -198,13 +199,13 @@ package behavior {
 			if not self.initialization.isVoid() then
 				
 				if self.initialization.createBehaviorJava(context).contains(".new()") then
-					result := result + CompilerHelper.new.getCreateFactory(localType)
+					result := result + CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
 				else
 					result := result + " = " + self.initialization.createBehaviorJava(context)
 				end
 		
 			else
-				result := result + CompilerHelper.new.getCreateFactory(localType)
+				result := result + CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
 			end
 		result := result + ";"
 		end
@@ -272,7 +273,7 @@ package behavior {
 	aspect class TypeReference {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := "//TODO TypeReference" + self.toString
-			result := CompilerHelper.new.ppTypeFromMultiplicityElement(self, context)
+			result := CompilerHelperJava.new.ppTypeFromMultiplicityElement(self, context)
 		end
 	}
 	
@@ -341,7 +342,7 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			//stdio.writeln(self.jmethod)
 			result := self.jclass.replace("::", ".") + "." + KM2EcoreHelper.new.getMangledIdentifier(self.jmethod, context) + "("
-			result := result + CompilerHelper.new.ppComaSeparatedNodes(self.parameters, context)
+			result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
 			result := result + ")"
 		end
 	}
@@ -385,77 +386,5 @@ package behavior {
 		end
 	}
 	//**** End **** Managing of the literal ****//
-	
-}
-
-package compilerhelper {
-	/** unused for the moment */
-	class CompilerHelper {
-		operation ppCRSeparatedNode(expressions : OrderedSet<Expression>, context : KM2EcoreContext) : String is do
-			result := ""
-			expressions.each{e |
-				result := result + e.createBehaviorJava(context)
-			}
-		end
-		
-		/**
-		 * Give the String corresponding to the CreateFactory  of a type
-		 * @param localType
-		 * @return
-		 */
-		operation getCreateFactory(localType : String) : String is do
-			result := ""
-			
-			if localType == "String" then
-				result := " = null"
-				
-			else
-				var localType2 : String init localType.replace(".", "%")
-	
-				var name_set : OrderedSet<String> init localType2.split("%")
-				
-				var allPackages_label : String init localType.substring(0, localType.size()-name_set.elementAt(name_set.size()-1).size())
-				
-				if name_set.size()>=2 then
-					result := " = " + allPackages_label + name_set.elementAt(name_set.size-2).capName() +"Factory.eINSTANCE.create" + name_set.elementAt(name_set.size()-1) + "()"
-				end
-			end
-		end
-		
-		operation ppTypeFromMultiplicityElement(elem : MultiplicityElement, context : KM2EcoreContext) : String is do
-			result := ""
-			if elem.upper != 1 then
-				if elem.isOrdered then
-					if not elem.isUnique then
-					result := result + "seq "
-					end
-				else
-					if elem.isUnique then
-						result := result + "set "
-					else
-						result := result + "bag "
-					end
-				end
-			end
-			result := result + elem.type.createBehaviorJava(context)
-			/*if ( elem.lower != 0 or elem.upper != 1) then
-				result := result + "[" + elem.lower() + ".."
-				result := result + (elem.upper()<0)?"*":""+elem.upper()
-				result := result + "]"
-			end*/
-		end
-		
-		operation ppComaSeparatedNodes(expressions : Set<Expression>, context : KM2EcoreContext) : String is do
-			result := ""
-			var i : Integer init 0
-			expressions.each{ e |		
-				result := result + e.createBehaviorJava(context)
-				if i<(expressions.size()-1) then
-					result := result + ", "
-				end
-				i := i+1
-			}
-		end
-	}
 	
 }
