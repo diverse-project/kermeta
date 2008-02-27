@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.7 2008-02-14 07:13:31 uid21732 Exp $
+/* $Id: JunitTestSuite.java,v 1.8 2008-02-27 12:20:01 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -22,7 +22,6 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
