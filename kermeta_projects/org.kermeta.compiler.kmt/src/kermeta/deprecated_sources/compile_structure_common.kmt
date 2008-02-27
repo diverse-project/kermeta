@@ -1,4 +1,4 @@
-/* $Id: compile_structure_common.kmt,v 1.1 2008-02-01 09:40:43 ftanguy Exp $
+/* $Id: compile_structure_common.kmt,v 1.1 2008-02-27 15:41:53 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -13,9 +13,9 @@ require kermeta
 using kermeta::language::structure
 
 aspect class Object {
-	operation compile(context : Integer) : String is do
+	operation compile(context : KM2EcoreContext) : String is do
 		result := ""
 	end
 	
-	operation print(context : Integer) : Void is abstract
+	operation print(context : KM2EcoreContext) : Void is abstract
 }

@@ -1,4 +1,4 @@
-/* $Id: compile_structure_pass2.kmt,v 1.4 2008-02-22 15:05:46 cfaucher Exp $
+/* $Id: compile_structure_pass2.kmt,v 1.1 2008-02-27 15:41:53 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -29,7 +29,7 @@ using km2ecore::helper::ecore
  * unused for the moment
  */
 aspect class ModelingUnit {
-	method compile(context : Integer) : String is do
+	method compile(context : KM2EcoreContext) : String is do
 		result := ""
 		// Compile the owned elements: Package or Tag
 		self.eachOwnedElement{ o | o.compile(context) }
@@ -40,13 +40,13 @@ aspect class ModelingUnit {
  * unused for the moment
  */
 aspect class Tag {
-	method compile(context : Integer) : String is do
+	method compile(context : KM2EcoreContext) : String is do
 		result := void
 	end
 }
 
 aspect class Package {
-	method compile(context : Integer) : String is do
+	method compile(context : KM2EcoreContext) : String is do
 		result := void
 		// Compile the owned elements
 		self.eachOwnedElement{ cd | cd.compile(context) }
@@ -54,14 +54,14 @@ aspect class Package {
 }
 
 aspect class TypeDefinition {
-	method compile(context : Integer) : String is do
+	method compile(context : KM2EcoreContext) : String is do
 		result := void
 		//stdio.writeln("F7-1: " + self.name)
 	end
 }
 
 aspect class ClassDefinition {
-	method compile(context : Integer) : String from TypeDefinition is do
+	method compile(context : KM2EcoreContext) : String from TypeDefinition is do
 		result := void
 		// Set the traceability
 		self.ecoreModelElement := EcoreModelElementHelper.new.findEClassProxy(self)
@@ -71,14 +71,14 @@ aspect class ClassDefinition {
 }
 
 aspect class MultiplicityElement {
-	method compile(context : Integer) : String is do
+	method compile(context : KM2EcoreContext) : String is do
 		result := void
 		//stdio.writeln("F2-311111: " + self.name)
 	end
 }
 
 aspect class Property {
-	method compile(context : Integer) : String from MultiplicityElement is do
+	method compile(context : KM2EcoreContext) : String from MultiplicityElement is do
 		result := void
 		// Set the traceability
 		
@@ -94,7 +94,7 @@ aspect class Property {
 }
 
 aspect class Operation {
-	method compile(context : Integer) : String from MultiplicityElement is do
+	method compile(context : KM2EcoreContext) : String from MultiplicityElement is do
 		result := void
 		
 		var javaCode : StringBuffer init StringBuffer.new
@@ -121,7 +121,7 @@ aspect class Operation {
 }
 
 aspect class Type {
-	method compile(context : Integer) : String is do
+	method compile(context : KM2EcoreContext) : String is do
 		result := "Void"
 		stdio.writeln("type self: " + self.toString)
 		if self.isInstanceOf(PrimitiveType) then
