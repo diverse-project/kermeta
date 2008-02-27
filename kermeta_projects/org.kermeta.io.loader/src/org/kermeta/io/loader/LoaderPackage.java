@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoaderPackage.java,v 1.2 2008-02-14 07:12:49 uid21732 Exp $
+ * $Id: LoaderPackage.java,v 1.3 2008-02-27 15:21:09 dvojtise Exp $
  */
 package org.kermeta.io.loader;
 
@@ -162,13 +162,22 @@ public interface LoaderPackage extends EPackage {
 	int LOADING_STEP__PROPAGATE = ABSTRACT_STEP_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Perform Action If Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_STEP__PERFORM_ACTION_IF_ERROR = ABSTRACT_STEP_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Loading Step</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOADING_STEP_FEATURE_COUNT = ABSTRACT_STEP_FEATURE_COUNT + 4;
+	int LOADING_STEP_FEATURE_COUNT = ABSTRACT_STEP_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.io.loader.impl.LoaderImpl <em>Loader</em>}' class.
@@ -543,6 +552,17 @@ public interface LoaderPackage extends EPackage {
 	EAttribute getLoadingStep_Propagate();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.loader.LoadingStep#isPerformActionIfError <em>Perform Action If Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Perform Action If Error</em>'.
+	 * @see org.kermeta.io.loader.LoadingStep#isPerformActionIfError()
+	 * @see #getLoadingStep()
+	 * @generated
+	 */
+	EAttribute getLoadingStep_PerformActionIfError();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.io.loader.Loader <em>Loader</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -773,6 +793,14 @@ public interface LoaderPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LOADING_STEP__PROPAGATE = eINSTANCE.getLoadingStep_Propagate();
+
+		/**
+		 * The meta object literal for the '<em><b>Perform Action If Error</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOADING_STEP__PERFORM_ACTION_IF_ERROR = eINSTANCE.getLoadingStep_PerformActionIfError();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.io.loader.impl.LoaderImpl <em>Loader</em>}' class.

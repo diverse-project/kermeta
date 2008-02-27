@@ -2,14 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoadingStep.java,v 1.2 2008-02-14 07:12:49 uid21732 Exp $
+ * $Id: LoadingStep.java,v 1.3 2008-02-27 15:21:09 dvojtise Exp $
  */
 package org.kermeta.io.loader;
 
 import java.util.Map;
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.kermeta.io.loader.LoadingStep#isDone <em>Done</em>}</li>
  *   <li>{@link org.kermeta.io.loader.LoadingStep#getAction <em>Action</em>}</li>
  *   <li>{@link org.kermeta.io.loader.LoadingStep#isPropagate <em>Propagate</em>}</li>
+ *   <li>{@link org.kermeta.io.loader.LoadingStep#isPerformActionIfError <em>Perform Action If Error</em>}</li>
  * </ul>
  * </p>
  *
@@ -134,6 +132,32 @@ public interface LoadingStep extends AbstractStep {
 	 * @generated
 	 */
 	void setPropagate(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Perform Action If Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Perform Action If Error</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Perform Action If Error</em>' attribute.
+	 * @see #setPerformActionIfError(boolean)
+	 * @see org.kermeta.io.loader.LoaderPackage#getLoadingStep_PerformActionIfError()
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean isPerformActionIfError();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.io.loader.LoadingStep#isPerformActionIfError <em>Perform Action If Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Perform Action If Error</em>' attribute.
+	 * @see #isPerformActionIfError()
+	 * @generated
+	 */
+	void setPerformActionIfError(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

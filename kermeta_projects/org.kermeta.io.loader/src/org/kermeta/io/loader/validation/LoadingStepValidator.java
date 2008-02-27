@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoadingStepValidator.java,v 1.2 2008-02-14 07:12:49 uid21732 Exp $
+ * $Id: LoadingStepValidator.java,v 1.3 2008-02-27 15:21:09 dvojtise Exp $
  */
 package org.kermeta.io.loader.validation;
 
@@ -28,4 +28,8 @@ public interface LoadingStepValidator {
 	boolean validateAction(Action value);
 
 	boolean validatePropagate(boolean value);
+
+	boolean validatePerformActionIfError(boolean value);
+
+	boolean validateProcessIfError(boolean value);
 }

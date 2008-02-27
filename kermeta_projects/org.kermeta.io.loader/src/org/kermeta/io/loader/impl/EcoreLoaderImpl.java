@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreLoaderImpl.java,v 1.2 2008-02-14 07:12:47 uid21732 Exp $
+ * $Id: EcoreLoaderImpl.java,v 1.3 2008-02-27 15:21:09 dvojtise Exp $
  */
 package org.kermeta.io.loader.impl;
 
@@ -16,7 +16,6 @@ import org.kermeta.io.loader.datas.EcoreLoadingDatas;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 /**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoadingStepImpl.java,v 1.2 2008-02-14 07:12:47 uid21732 Exp $
+ * $Id: LoadingStepImpl.java,v 1.3 2008-02-27 15:21:09 dvojtise Exp $
  */
 package org.kermeta.io.loader.impl;
 
@@ -35,6 +35,7 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
  *   <li>{@link org.kermeta.io.loader.impl.LoadingStepImpl#isDone <em>Done</em>}</li>
  *   <li>{@link org.kermeta.io.loader.impl.LoadingStepImpl#getAction <em>Action</em>}</li>
  *   <li>{@link org.kermeta.io.loader.impl.LoadingStepImpl#isPropagate <em>Propagate</em>}</li>
+ *   <li>{@link org.kermeta.io.loader.impl.LoadingStepImpl#isPerformActionIfError <em>Perform Action If Error</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,6 +111,26 @@ public class LoadingStepImpl extends AbstractStepImpl implements LoadingStep {
 	 * @ordered
 	 */
 	protected boolean propagate = PROPAGATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isPerformActionIfError() <em>Perform Action If Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isPerformActionIfError()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean PERFORM_ACTION_IF_ERROR_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isPerformActionIfError() <em>Perform Action If Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isPerformActionIfError()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean performActionIfError = PERFORM_ACTION_IF_ERROR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -239,37 +260,52 @@ public class LoadingStepImpl extends AbstractStepImpl implements LoadingStep {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isPerformActionIfError() {
+		return performActionIfError;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPerformActionIfError(boolean newPerformActionIfError) {
+		boolean oldPerformActionIfError = performActionIfError;
+		performActionIfError = newPerformActionIfError;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LoaderPackage.LOADING_STEP__PERFORM_ACTION_IF_ERROR, oldPerformActionIfError, performActionIfError));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void process(ILoadingDatas datas, Map<?, ?> options) {
 		
 		if ( ! isDone() ) {
+						
 			
-			/*
-			 * 
-			 * Processing if the kermeta unit is not erroneous.
-			 * 
-			 */
-			if ( datas.getKermetaUnit().isErroneous() ) {
-				System.err.println("Not stepping" + getName() + " on " + datas.getKermetaUnit().getUri());
-				System.err.println(KermetaUnitHelper.getAllErrorsAsString(datas.getKermetaUnit()));
-				return;
+			if ( !performActionIfError && datas.getKermetaUnit().isErroneous() ) {
+				/*
+				 * 
+				 * Doesn't perform the action due to previous error
+				 * 
+				 */
+				LoaderPlugin.log.info("NOT doing " + getName() + " on " + datas.getKermetaUnit().getUri()+ " due to previous error");
+				
 			}
-			
-			/*
-			 * 
-			 * Logging
-			 * 
-			 */
-			LoaderPlugin.log.debug("Stepping " + getName() + " on " + datas.getKermetaUnit().getUri());
-			
-			/*
-			 * 
-			 * Perform the action
-			 * 
-			 */
-			performAction(datas, options);
-			
+			else {
+				/*
+				 * 
+				 * Perform the action
+				 * 
+				 */
+				LoaderPlugin.log.debug("Stepping " + getName() + " on " + datas.getKermetaUnit().getUri());
+				performAction(datas, options);
+			}
 			/*
 			 * 
 			 * Process the sub steps.
@@ -354,6 +390,8 @@ public class LoadingStepImpl extends AbstractStepImpl implements LoadingStep {
 				return getAction();
 			case LoaderPackage.LOADING_STEP__PROPAGATE:
 				return isPropagate() ? Boolean.TRUE : Boolean.FALSE;
+			case LoaderPackage.LOADING_STEP__PERFORM_ACTION_IF_ERROR:
+				return isPerformActionIfError() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -379,6 +417,9 @@ public class LoadingStepImpl extends AbstractStepImpl implements LoadingStep {
 			case LoaderPackage.LOADING_STEP__PROPAGATE:
 				setPropagate(((Boolean)newValue).booleanValue());
 				return;
+			case LoaderPackage.LOADING_STEP__PERFORM_ACTION_IF_ERROR:
+				setPerformActionIfError(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -403,6 +444,9 @@ public class LoadingStepImpl extends AbstractStepImpl implements LoadingStep {
 			case LoaderPackage.LOADING_STEP__PROPAGATE:
 				setPropagate(PROPAGATE_EDEFAULT);
 				return;
+			case LoaderPackage.LOADING_STEP__PERFORM_ACTION_IF_ERROR:
+				setPerformActionIfError(PERFORM_ACTION_IF_ERROR_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -423,6 +467,8 @@ public class LoadingStepImpl extends AbstractStepImpl implements LoadingStep {
 				return action != null;
 			case LoaderPackage.LOADING_STEP__PROPAGATE:
 				return propagate != PROPAGATE_EDEFAULT;
+			case LoaderPackage.LOADING_STEP__PERFORM_ACTION_IF_ERROR:
+				return performActionIfError != PERFORM_ACTION_IF_ERROR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -443,6 +489,8 @@ public class LoadingStepImpl extends AbstractStepImpl implements LoadingStep {
 		result.append(done);
 		result.append(", propagate: ");
 		result.append(propagate);
+		result.append(", performActionIfError: ");
+		result.append(performActionIfError);
 		result.append(')');
 		return result.toString();
 	}

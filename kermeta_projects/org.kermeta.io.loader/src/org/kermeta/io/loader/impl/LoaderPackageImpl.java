@@ -2,12 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoaderPackageImpl.java,v 1.2 2008-02-14 07:12:47 uid21732 Exp $
+ * $Id: LoaderPackageImpl.java,v 1.3 2008-02-27 15:21:09 dvojtise Exp $
  */
 package org.kermeta.io.loader.impl;
 
-import fr.irisa.triskell.kermeta.KmPackage;
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -15,9 +13,7 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.loader.AbstractStep;
 import org.kermeta.io.loader.Action;
@@ -30,6 +26,8 @@ import org.kermeta.io.loader.LoaderFactory;
 import org.kermeta.io.loader.LoaderPackage;
 import org.kermeta.io.loader.LoadingContext;
 import org.kermeta.io.loader.LoadingStep;
+
+import fr.irisa.triskell.kermeta.KmPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -167,7 +165,6 @@ public class LoaderPackageImpl extends EPackageImpl implements LoaderPackage {
 		// Initialize simple dependencies
 		IoPackage.eINSTANCE.eClass();
 		KmPackage.eINSTANCE.eClass();
-		StructurePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theLoaderPackage.createPackageContents();
@@ -224,6 +221,15 @@ public class LoaderPackageImpl extends EPackageImpl implements LoaderPackage {
 	 */
 	public EAttribute getLoadingStep_Propagate() {
 		return (EAttribute)loadingStepEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLoadingStep_PerformActionIfError() {
+		return (EAttribute)loadingStepEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -403,6 +409,7 @@ public class LoaderPackageImpl extends EPackageImpl implements LoaderPackage {
 		createEAttribute(loadingStepEClass, LOADING_STEP__DONE);
 		createEReference(loadingStepEClass, LOADING_STEP__ACTION);
 		createEAttribute(loadingStepEClass, LOADING_STEP__PROPAGATE);
+		createEAttribute(loadingStepEClass, LOADING_STEP__PERFORM_ACTION_IF_ERROR);
 
 		loaderEClass = createEClass(LOADER);
 		createEReference(loaderEClass, LOADER__DATAS);
@@ -474,6 +481,7 @@ public class LoaderPackageImpl extends EPackageImpl implements LoaderPackage {
 		initEAttribute(getLoadingStep_Done(), ecorePackage.getEBoolean(), "done", null, 1, 1, LoadingStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLoadingStep_Action(), this.getAction(), null, "action", null, 0, 1, LoadingStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLoadingStep_Propagate(), ecorePackage.getEBoolean(), "propagate", null, 1, 1, LoadingStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLoadingStep_PerformActionIfError(), ecorePackage.getEBoolean(), "performActionIfError", null, 1, 1, LoadingStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(loadingStepEClass, null, "process", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getILoadingDatas(), "datas", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -505,7 +513,13 @@ public class LoaderPackageImpl extends EPackageImpl implements LoaderPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "options", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(loaderEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(loaderEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "options", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(loaderEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "stepName", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -551,6 +565,12 @@ public class LoaderPackageImpl extends EPackageImpl implements LoaderPackage {
 
 		op = addEOperation(loadingContextEClass, this.getLoader(), "getLoaderToUse", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getURI(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "options", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(iLoadingDatasEClass, ILoadingDatas.class, "ILoadingDatas", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getILoadingDatas_KermetaUnit(), theIoPackage.getKermetaUnit(), null, "kermetaUnit", null, 0, 1, ILoadingDatas.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

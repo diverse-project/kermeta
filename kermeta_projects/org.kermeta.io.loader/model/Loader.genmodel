@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.io.loader/src"
     modelPluginID="org.kermeta.io.loader" modelName="Loader" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../fr.irisa.triskell.kermeta.io/model/io.genmodel#//io ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure">
+    complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../fr.irisa.triskell.kermeta.io/model/io.genmodel#//io ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta">
   <foreignModel>Loader.ecore</foreignModel>
   <genPackages prefix="Loader" basePackage="org.kermeta.io" disposableProviderFactory="true"
       ecorePackage="Loader.ecore#/">
@@ -13,6 +13,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Loader.ecore#//LoadingStep/done"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Loader.ecore#//LoadingStep/action"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Loader.ecore#//LoadingStep/propagate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Loader.ecore#//LoadingStep/performActionIfError"/>
       <genOperations ecoreOperation="Loader.ecore#//LoadingStep/process">
         <genParameters ecoreParameter="Loader.ecore#//LoadingStep/process/datas"/>
         <genParameters ecoreParameter="Loader.ecore#//LoadingStep/process/options"/>
@@ -28,11 +29,14 @@
       <genOperations ecoreOperation="Loader.ecore#//Loader/load">
         <genParameters ecoreParameter="Loader.ecore#//Loader/load/options"/>
       </genOperations>
-      <genOperations ecoreOperation="Loader.ecore#//Loader/initialize"/>
+      <genOperations ecoreOperation="Loader.ecore#//Loader/initialize">
+        <genParameters ecoreParameter="Loader.ecore#//Loader/initialize/options"/>
+      </genOperations>
       <genOperations ecoreOperation="Loader.ecore#//Loader/load.1">
         <genParameters ecoreParameter="Loader.ecore#//Loader/load.1/stepName"/>
         <genParameters ecoreParameter="Loader.ecore#//Loader/load.1/options"/>
       </genOperations>
+      <genOperations ecoreOperation="Loader.ecore#//Loader/initializeDatas"/>
     </genClasses>
     <genClasses ecoreClass="Loader.ecore#//KMTLoader"/>
     <genClasses ecoreClass="Loader.ecore#//EcoreLoader"/>
@@ -53,6 +57,7 @@
       </genOperations>
       <genOperations ecoreOperation="Loader.ecore#//LoadingContext/getLoaderToUse">
         <genParameters ecoreParameter="Loader.ecore#//LoadingContext/getLoaderToUse/uri"/>
+        <genParameters ecoreParameter="Loader.ecore#//LoadingContext/getLoaderToUse/options"/>
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="Loader.ecore#//ILoadingDatas">
