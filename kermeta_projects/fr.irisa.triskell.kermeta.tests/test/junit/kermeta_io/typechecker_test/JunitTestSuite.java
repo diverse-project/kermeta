@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.12 2008-02-20 13:33:34 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.13 2008-02-27 12:41:28 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -17,11 +17,14 @@
 
 package kermeta_io.typechecker_test;
 
+import java.util.HashMap;
+
 import junit.framework.TestCase;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
@@ -378,7 +381,9 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 				
 		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 		
-		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(path, null);
+		HashMap<String, Object> loaderOptions = new HashMap<String, Object>();
+		loaderOptions.put( LoadingOptions.ECORE_QuickFixEnabled, true );
+		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(path, loaderOptions);
 		
 		if ( kermetaUnit.isIndirectlyErroneous() )
 			//assertTrue("kermeta unit has errors during loading", false);
