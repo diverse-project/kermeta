@@ -172,6 +172,19 @@ public class LoaderPlugin extends Plugin {
 		}
 	}
 	
+	/**
+	 * Load the given uri
+	 * option is typically :
+	 * <code>
+	 *    HashMap<String, Object> loaderOptions = new HashMap<String, Object>();
+	 *    loaderOptions.put( LoadingOptions.ECORE_QuickFixEnabled, true );
+	 * </code>
+	 * @param uri
+	 * @param options
+	 * @return
+	 * @throws URIMalformedException
+	 * @throws NotRegisteredURIException
+	 */
 	public KermetaUnit load(String uri, Map<?, ?> options) throws URIMalformedException, NotRegisteredURIException {
 		getDefault().loadingContext.load(uri, options);
 		return IOPlugin.getDefault().getKermetaUnit(uri);
