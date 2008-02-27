@@ -1,4 +1,4 @@
-/* $Id: ToEcore.kmt,v 1.1 2008-02-04 15:45:39 dvojtise Exp $
+/* $Id: ToEcore.kmt,v 1.2 2008-02-27 14:23:59 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -12,7 +12,7 @@ package uml;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "UMLProfile2EcoreTrace.kmt"
-using kermeta::reflection
+
 using UMLProfileUtils
 using ecore 
 

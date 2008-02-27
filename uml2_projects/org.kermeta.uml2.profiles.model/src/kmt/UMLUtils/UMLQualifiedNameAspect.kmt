@@ -1,4 +1,4 @@
-/* $Id: UMLQualifiedNameAspect.kmt,v 1.2 2008-02-05 09:20:33 dvojtise Exp $
+/* $Id: UMLQualifiedNameAspect.kmt,v 1.3 2008-02-27 14:23:59 gperroui Exp $
  * Creation date: December 13, 2007
  * License: EPL
  * Copyright:
@@ -13,16 +13,16 @@ require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
-
+//require "http://www.eclipse.org/uml2/2.1.0/UML"
 using kermeta::standard
 
 /** The role of this file is to extend the UML 2 metamodel  with several behaviors useful to implement the transformation */ 
 
-@aspect "true"
-class NamedElement {
+//@aspect "true"
+aspect class NamedElement {
 
 
-operation getQualifiedName(): String is do
+operation getQualifiedName(): String[1..1] is do
 
 var elem : uml::NamedElement init self
 		result := self.name
@@ -33,8 +33,8 @@ var elem : uml::NamedElement init self
 			elem ?= elem.container
 		end
 	end
-}
 
+}
 /* @aspect "true"
 class ValueSpecification {
 }*/

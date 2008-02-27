@@ -1,4 +1,4 @@
-/* $Id: Profile.kmt,v 1.2 2008-02-05 09:20:33 dvojtise Exp $
+/* $Id: Profile.kmt,v 1.3 2008-02-27 14:23:59 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -21,7 +21,7 @@ require "ToEcore.kmt"
 require "../UMLUtils/UMLProfilesUtils.kmt"
 require "UMLProfile2EcoreTrace.kmt"   
 require "../UMLUtils/UMLQualifiedNameAspect.kmt"
-   
+
 
 using ecore
 using kermeta::standard
@@ -30,7 +30,7 @@ using kermeta::persistence
 using UMLProfileUtils
  
 @aspect "true"
-class Profile inherits ToEcore  
+class Profile
 {
 	reference prof : EObject
 	/** This method deals with creation of new Ecore objects */
@@ -41,22 +41,21 @@ class Profile inherits ToEcore
 	var qName: String init self.getQualifiedName
 	trace.setQualNameObj(qName,prof)
 	
-	prof.asType(EPackage).name := self.name
+	prof.asType(EPackage).name := self.name.replace(" ","")
 	 
 	// special profiles have EPackage nature also... 
 	if (isInstanceOf(EPackage)) then
-		prof.asType(EPackage).nsPrefix := self.asType(EPackage).nsPrefix
-		prof.asType(EPackage).nsURI := self.asType(EPackage).nsURI
+		prof.asType(EPackage).nsPrefix := self.asType(EPackage).nsPrefix.replace(" ","")
 	 else 
 		// There is no way to derive nsURI and nsPrefix information from UML in the general case...
 		// nsPrefix = package name and NsURI is where the resource is located (set in pass2)
-		prof.asType(EPackage).nsPrefix := name
+		prof.asType(EPackage).nsPrefix := name.replace(" ","")
 	end
 	
  
 	result:= prof
 	
-	trace.traceLog("Elements in a (sub)-profile: "+ self.containingResource.contents.size.toString)
+	//trace.traceLog("Elements in a (sub)-profile: "+ self.containingResource.contents.size.toString)
 	trace.traceLog("Quitting Profile : Pass1")
 	end
 	
@@ -70,22 +69,78 @@ class Profile inherits ToEcore
 		//var res : Resource init prof.eResource.asType(Resource)
 		//res.contents.select{p | p.isInstanceOf(ecore::EPackage) and p.asType(ecore::EPackage).name == self.nestingPackage.name}
 		e.asType(ecore::EPackage).eSubpackages.add(prof.asType(EPackage))
-		trace.traceLog(prof.containingResource.uri)
+		trace.traceLog("profile qual name: " + self.container.asType(uml::Package).getQualifiedName)
 		prof.containingResource.instances.remove(prof)
-		// setting the good NsURI based on the resource location
-		// another option is to put "http:// " + name of the package, don't get the difference.... :(
-		prof.asType(EPackage).nsURI :=  prof.containingResource.uri
+		// setting the good NsURI based on profile name
+		prof.asType(EPackage).nsURI :=  "http://" +  self.container.asType(uml::Package).getQualifiedName.replace(" ","").replace("::","/") 
+		+ "/" + prof.asType(EPackage).name
 	else
 		// setting the good NsURI
-		// another option is to put "http:// " + name of the package, don't get the difference.... :(
-		prof.asType(EPackage).nsURI :=  prof.containingResource.uri
+		prof.asType(EPackage).nsURI :=  "http://" +  prof.asType(EPackage).name
 	end
 	trace.traceLog("Quitting Profile : Pass2")
 end
 } 
 
 @aspect "true"
-class Stereotype inherits ToEcore {
+class Package inherits ToEcore  
+{
+	reference pack : EObject
+	/** This method deals with creation of new Ecore objects */
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	trace.traceLog("Entering Package : Pass1")
+	pack := EPackage.new
+	// registering elements in the trace to keep track of them...
+	var qName: String init self.getQualifiedName
+	trace.setQualNameObj(qName,pack)
+	
+	pack.asType(EPackage).name := self.name.replace(" ","")
+	
+	// special profiles have EPackage nature also... 
+	if (isInstanceOf(EPackage)) then
+		pack.asType(EPackage).nsPrefix := self.asType(EPackage).nsPrefix.replace(" ","")
+		//pack.asType(EPackage).nsURI := self.asType(EPackage).nsURI.replace(" ","")
+		//pack.asType(EPackage).nsURI :=   "http://" + pack.asType(EPackage).name
+	 else 
+		// There is no way to derive nsURI and nsPrefix information from UML in the general case...
+		// nsPrefix = package name and NsURI is where the resource is located (set in pass2)
+		pack.asType(EPackage).nsPrefix := name
+	end
+	
+	result:= pack
+	
+	//trace.traceLog("Elements in a (sub)-profile: "+ self.containingResource.contents.size.toString)
+	trace.traceLog("Quitting Profile : Pass1")
+	end
+	
+	 
+	/** This method deals with relationship establishment*/
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+	trace.traceLog("Entering Profile : Pass2")
+	if self.container != void then
+	trace.traceLog("Container is not void, trying to retreive it....")
+	var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
+		//var res : Resource init prof.eResource.asType(Resource)
+		//res.contents.select{p | p.isInstanceOf(ecore::EPackage) and p.asType(ecore::EPackage).name == self.nestingPackage.name}
+		e.asType(ecore::EPackage).eSubpackages.add(pack.asType(EPackage))
+		pack.containingResource.instances.remove(pack)
+		// setting the good NsURI based on the package name
+		pack.asType(EPackage).nsURI :=   "http://" +  self.container.asType(uml::Package).getQualifiedName.replace(" ","").replace("::","/") 
+		+ "/"+  pack.asType(EPackage).name
+	else
+		// setting the good NsURI
+		pack.asType(EPackage).nsURI :=  "http://" +  pack.asType(EPackage).name
+	end
+	trace.traceLog("Quitting Profile : Pass2")
+end
+} 
+
+
+
+
+
+@aspect "true"
+class Stereotype {
 
 reference st : EClass
 
@@ -157,7 +212,7 @@ end
 }
 
 @aspect "true"
-class Enumeration inherits ToEcore {
+class Enumeration {
 reference enum : EEnum
 
 /** This method deals with creation of new Ecore objects*/
@@ -554,7 +609,7 @@ end
 }
 
 @aspect "true"
-class ExtensionEnd inherits ToEcore {
+class ExtensionEnd {
 
 reference eend: EObject
 /** This method deals with creation of new Ecore objects*/
@@ -596,6 +651,8 @@ var spe :  ecore::EClass init trace.getEcoreFromUMLQualName(self.specific.getQua
 var general :  ecore::EClass init trace.getEcoreFromUMLQualName(self.general.getQualifiedName).asType(ecore::EClass)
 if spe != void and general != void then
 	spe.eSuperTypes.add(general)
+	var collatt : Sequence<ecore::EStructuralFeature> init  spe.eStructuralFeatures.select{att| general.eStructuralFeatures.exists{gatt|gatt.name == att.name}}
+	collatt.each{att|spe.eStructuralFeatures.remove(att)}
 else
 	trace.traceLog("ERROR Dangling Generalization !!!")
 end

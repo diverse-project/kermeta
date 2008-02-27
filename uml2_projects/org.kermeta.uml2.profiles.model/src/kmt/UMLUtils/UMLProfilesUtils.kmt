@@ -1,4 +1,4 @@
-/* $Id: UMLProfilesUtils.kmt,v 1.1 2008-02-04 15:45:39 dvojtise Exp $
+/* $Id: UMLProfilesUtils.kmt,v 1.2 2008-02-27 14:23:59 gperroui Exp $
  * Creation date: November 9, 2007
  * License: EPL
  * Copyright:
@@ -12,9 +12,12 @@ package UMLProfileUtils;
 
 
 require kermeta
+require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/persistence/UMLResource.kmt"
+
+
 using kermeta::persistence
 using kermeta::standard
-using kermeta::reflection
+using kermeta::language::structure
 using kermeta::utils
 
 class LoadStoreMM
@@ -26,6 +29,16 @@ emf_res ?= emf_store.createResource(modelURI,metamodelURI)
 emf_res.load
 result := emf_res
 end
+
+operation loadUML(modelURI: String, metamodelURI: String): UMLResource is do 
+ var emf_store : EMFRepository init EMFRepository.new
+ var emf_res : UMLResource
+emf_res ?= emf_store.createUMLResource(modelURI,metamodelURI)
+emf_res.load
+result := emf_res
+end
+
+
 
 operation store(newModelURI: String,resource:EMFResource): Void is do
 resource.saveWithNewURI(newModelURI)

@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2Ecore.kmt,v 1.3 2008-02-11 15:05:09 dvojtise Exp $
+/* $Id: UMLProfile2Ecore.kmt,v 1.4 2008-02-27 14:23:59 gperroui Exp $
  * Creation date: November 29, 2007
  * License: EPL
  * Copyright:
@@ -14,11 +14,12 @@ package UMLProfileUtils;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "../UMLUtils/UMLProfilesUtils.kmt"
+require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/UMLUtils/UMLProfilesUtils.kmt"
 require "Profile.kmt"
 require "ToEcore.kmt"
 require "UMLProfile2EcoreTrace.kmt"
 require "../utils/KLog.kmt"
+require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/persistence/UMLResource.kmt"
 
 // generated Ecore form the UML model via EMF to bootstrap MARTE.profile.uml loading for kermeta
 //require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE_Library.ecore" 
@@ -33,15 +34,16 @@ using kermeta::standard
 using kermeta::exceptions
 using UMLProfileUtils
  
-class Main
+class Main 
 {
  
  	operation standaloneTestMain() : Void is do
- 		main("platform:/resource/org.kermeta.uml2.profiles.model/model/uml/bootstrapMARTE/MARTE.profile.uml",
- 			"platform:/resource/org.kermeta.uml2.profiles.model/test/instances/MARTE_test.profile.ecore")
+ 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/UML_Standard_Profile.MagicDraw_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/magic.profile.ecore")
+ 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/UML_Standard_Profile.UML_Standard_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/UML_Standard_Profile.UML_Standard_Profile.profile.ecore",true)
+ 		main("platform:/resource/org.kermeta.uml2.profiles.model/model/uml/BasicClock_nested.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/bnestedclock.profile.ecore",false)
  	end
  	
-	operation main(input : String, output : String) : Void is do 
+	operation main(input : String, output : String, isProfiled: Boolean) : Void is do 
 	
 	// source model and metamodel
 	var srcModelURI: String init  input
@@ -52,8 +54,9 @@ class Main
 	var tgtMetamodelURI: String init "http://www.eclipse.org/emf/2002/Ecore"
 	
 	var srcEmf_res : EMFResource
+	var srcUML_res : UMLResource
 	var tgtEmf_res: EMFResource
-	  
+	 
 	var util : UMLProfileUtils::LoadStoreMM
 	util := UMLProfileUtils::LoadStoreMM.new
 	
@@ -62,9 +65,14 @@ class Main
 	log.enableLog(true) 
 	
 	// Load the UML profile
-	log.print("UML Profile loading...") 
+	log.print("UML Profile loading...")
+	if isProfiled == true then
+	srcUML_res := util.loadUML(srcModelURI,srcMetamodelURI)
+	else 
    	srcEmf_res := util.load(srcModelURI,srcMetamodelURI)
-	log.print("UML profile loaded")	
+	end
+	log.print("UML profile loaded")
+		
 	log.print("============================================")
 	// Prepare the Ecore representation
 	var tgtEmf_store : EMFRepository init EMFRepository.new
@@ -85,11 +93,21 @@ class Main
 	// Converting UML elements...  
 	log.print("////////////////// First pass ////////////////// ")
 	//log.print("size of MARTE : " + srcEmf_res.contents.select{e|e.isInstanceOf(uml::ToEcore)}.size.toString)
-	srcEmf_res.contents.select{e|e.isInstanceOf(uml::ToEcore)}.each {e| 
+	if isProfiled == true then
+	var ecol : Sequence<Object> init srcUML_res.contents.select{e|e.isInstanceOf(uml::ToEcore)} 
+	ecol.each {e| 
 		tgtEmf_res.add(e.asType(uml::ToEcore).toEcorePass1(trace))}
 	log.print("////////////////// Second pass ////////////////// ")
-	srcEmf_res.contents.select{e|e.isInstanceOf(uml::ToEcore)}.each {e| 
+	ecol.each {e| 
 		e.asType(uml::ToEcore).toEcorePass2(trace)}
+	else
+	var ecol : Sequence<Object> init srcEmf_res.contents.select{e|e.isInstanceOf(uml::ToEcore)} 
+	ecol.each {e| 
+		tgtEmf_res.add(e.asType(uml::ToEcore).toEcorePass1(trace))}
+	log.print("////////////////// Second pass ////////////////// ")
+	ecol.each {e| 
+		e.asType(uml::ToEcore).toEcorePass2(trace)}
+	end
 	//rescue (e: Exception )
 	//stdio.writeln("Sorry Transformation for "+ e.stackTrace + " not supported yet...")
 	end

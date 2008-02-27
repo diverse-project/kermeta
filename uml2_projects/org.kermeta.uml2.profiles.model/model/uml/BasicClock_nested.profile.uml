@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_TfHs0J0FEdyQn82cfiZ14g" name="Basic Clock" metaclassReference="_YXVp4J0OEdyQn82cfiZ14g">
+  <elementImport xmi:id="_0jID0Z0GEdyQn82cfiZ14g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_0jID0p0GEdyQn82cfiZ14g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_YXVp4J0OEdyQn82cfiZ14g">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+  </elementImport>
+  <elementImport xmi:id="_QAW7wLqlEdyWX_EdUcIrBg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packageImport xmi:id="_KZxs0NTHEdymXdS0ZjZQLg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_vI490J0IEdyQn82cfiZ14g" name="Brand">
+    <ownedLiteral xmi:id="_TkOnkJ0LEdyQn82cfiZ14g" name="Casio"/>
+    <ownedLiteral xmi:id="_Wu0UQJ0LEdyQn82cfiZ14g" name="Citizen"/>
+    <ownedLiteral xmi:id="_hllpgJ0LEdyQn82cfiZ14g" name="Rolex"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_9mhIMJ0MEdyQn82cfiZ14g" name="AbstractWatch">
+    <ownedAttribute xmi:id="_IlUYEJ0NEdyQn82cfiZ14g" name="brand" type="_vI490J0IEdyQn82cfiZ14g">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_RqnIoJ0NEdyQn82cfiZ14g" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_d1DPwp0OEdyQn82cfiZ14g" name="base_Class" association="_d1DPwJ0OEdyQn82cfiZ14g">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_EGOaMLnjEdyacb-Miwf1Lw" name="int">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_d1DPwJ0OEdyQn82cfiZ14g" name="Class_AbstractWatch" memberEnd="_d1DPwZ0OEdyQn82cfiZ14g _d1DPwp0OEdyQn82cfiZ14g">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_d1DPwZ0OEdyQn82cfiZ14g" name="extension_AbstractWatch" type="_9mhIMJ0MEdyQn82cfiZ14g" aggregation="composite" association="_d1DPwJ0OEdyQn82cfiZ14g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_32eWYLq_EdyKwbC4XusSPw" name="ConcreteWatch">
+    <ownedAttribute xmi:id="_NU9RMbrAEdyKwbC4XusSPw" name="base_Class" association="_NUv10LrAEdyKwbC4XusSPw">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_Qt7YILrAEdyKwbC4XusSPw" name="userManual">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_d8ttoLrAEdyKwbC4XusSPw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_F7nR0LrQEdyKwbC4XusSPw"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_NUv10LrAEdyKwbC4XusSPw" name="Class_ConcreteWatch" memberEnd="_NU9RMLrAEdyKwbC4XusSPw _NU9RMbrAEdyKwbC4XusSPw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_NU9RMLrAEdyKwbC4XusSPw" name="extension_ConcreteWatch" type="_32eWYLq_EdyKwbC4XusSPw" aggregation="composite" association="_NUv10LrAEdyKwbC4XusSPw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_e4OvANS8EdymXdS0ZjZQLg" name="DidierClock">
+    <packagedElement xmi:type="uml:Profile" xmi:id="_B6btgNS9EdymXdS0ZjZQLg" name="DidierProfile" metamodelReference="_plhXINTHEdymXdS0ZjZQLg">
+      <elementImport xmi:id="_2fPi8NTEEdymXdS0ZjZQLg" alias="Class">
+        <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+      </elementImport>
+      <packageImport xmi:id="_cdiYwNS9EdymXdS0ZjZQLg" importedPackage="_TfHs0J0FEdyQn82cfiZ14g"/>
+      <packageImport xmi:id="_plhXINTHEdymXdS0ZjZQLg">
+        <importedPackage xmi:type="uml:Model" href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
+      </packageImport>
+      <packagedElement xmi:type="uml:Stereotype" xmi:id="_24trgNTHEdymXdS0ZjZQLg" name="DidierWatch">
+        <generalization xmi:id="__CbvMNTIEdymXdS0ZjZQLg" general="_9mhIMJ0MEdyQn82cfiZ14g"/>
+        <ownedAttribute xmi:id="_Ix7IwtTIEdymXdS0ZjZQLg" name="base_Class" association="_Ix7IwNTIEdymXdS0ZjZQLg">
+          <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Extension" xmi:id="_Ix7IwNTIEdymXdS0ZjZQLg" name="Class_DidierWatch" memberEnd="_Ix7IwdTIEdymXdS0ZjZQLg _Ix7IwtTIEdymXdS0ZjZQLg">
+        <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_Ix7IwdTIEdymXdS0ZjZQLg" name="extension_DidierWatch" type="_24trgNTHEdymXdS0ZjZQLg" aggregation="composite" association="_Ix7IwNTIEdymXdS0ZjZQLg"/>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Profile>
