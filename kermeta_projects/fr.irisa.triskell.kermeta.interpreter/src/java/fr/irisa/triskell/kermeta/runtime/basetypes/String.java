@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.13 2008-02-14 07:13:57 uid21732 Exp $
+/* $Id: String.java,v 1.14 2008-02-27 10:07:29 cfaucher Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -11,6 +11,8 @@
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
@@ -108,15 +110,50 @@ public class String {
 		return result;
 	}
 	
+	/** Implementation of method replace called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::contains(str1)
+	 */
+	public static RuntimeObject contains(RuntimeObject self, RuntimeObject param0) {
+		if(getValue(self).contains(getValue(param0))) return self.getFactory().getMemory().falseINSTANCE;
+		else return self.getFactory().getMemory().trueINSTANCE;
+	}
+	
+	/** Implementation of method replace called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::toUpperCase()
+	 */
 	public static RuntimeObject toUpperCase(RuntimeObject self) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		setValue(result, getValue(self).toUpperCase());
 		return result;
 	}
 	
+	/** Implementation of method replace called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::toLowerCase()
+	 */
 	public static RuntimeObject toLowerCase(RuntimeObject self) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		setValue(result, getValue(self).toLowerCase());
+		return result;
+	}
+	
+	/** Implementation of method replace called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::split(delimiter)
+	 */
+	public static RuntimeObject split(RuntimeObject self, RuntimeObject param0) {
+	
+		RuntimeObjectFactory factory = self.getFactory();
+	    GenericTypeDefinition typeVarClassDef  = (GenericTypeDefinition)factory.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::String");
+	    fr.irisa.triskell.kermeta.language.structure.Class typeParam = StructureFactory.eINSTANCE.createClass();
+	    typeParam.setTypeDefinition(typeVarClassDef);
+		
+	    RuntimeObject result = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.create("kermeta::standard::OrderedSet", factory, typeParam);
+		
+		for(java.lang.String string_item : getValue(self).split(getValue(param0))) {
+			RuntimeObject addedString = self.getFactory().createObjectFromClassName("kermeta::standard::String");
+			setValue(addedString, string_item);
+			Collection.add(result, addedString);
+		}
+
 		return result;
 	}
 	

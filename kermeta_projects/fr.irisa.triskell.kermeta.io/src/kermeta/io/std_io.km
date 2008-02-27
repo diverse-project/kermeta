@@ -2,14 +2,14 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/io/@ownedTags.0" name="io" uri="http://www.kermeta.org/kermeta/io">
-      <ownedTags value="/**&#xA; * Contains standard input/output related classes. &#xA; */" object="//@packages.0/io"/>
+      <ownedTags value="/**&#xD;&#xA; * Contains standard input/output related classes. &#xD;&#xA; */" object="//@packages.0/io"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/io/StdIO/@ownedTags.0" name="StdIO" superType="//@packages.0/io/StdIO/@containedType.0">
-        <ownedTags value="/**&#xA; * An implementation of StdIO : standard input/output&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;>&#xA; */" object="//@packages.0/io/StdIO"/>
+        <ownedTags value="/**&#xD;&#xA; * An implementation of StdIO : standard input/output&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/io/StdIO"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/io/StdIO/write/@ownedTags.0" name="write" type="//@packages.0/io/StdIO/write/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xA;  * Writes the object to standard output&#xA;  */" object="//@packages.0/io/StdIO/write"/>
+          <ownedTags value="/**&#xD;&#xA;  * Writes the object to standard output&#xD;&#xA;  */" object="//@packages.0/io/StdIO/write"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="object" type="//@packages.0/io/StdIO/write/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -47,7 +47,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/io/StdIO/writeln/@ownedTags.0" name="writeln" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xA;  * Writeln the object to standard output&#xA;  */" object="//@packages.0/io/StdIO/writeln"/>
+          <ownedTags value="/**&#xD;&#xA;  * Writeln the object to standard output&#xD;&#xA;  */" object="//@packages.0/io/StdIO/writeln"/>
           <type href="../kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"/>
           <ownedParameter name="object" type="//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -75,7 +75,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/io/StdIO/read/@ownedTags.0" name="read" type="//@packages.0/io/StdIO/read/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xA;  * Reads a String from standard input&#xA;  */" object="//@packages.0/io/StdIO/read"/>
+          <ownedTags value="/**&#xD;&#xA;  * Reads a String from standard input&#xD;&#xA;  */" object="//@packages.0/io/StdIO/read"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>

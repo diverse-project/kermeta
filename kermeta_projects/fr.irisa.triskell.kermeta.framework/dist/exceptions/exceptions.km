@@ -2,9 +2,9 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/exceptions/@ownedTags.0" name="exceptions" uri="http://www.kermeta.org/kermeta/exceptions">
-      <ownedTags value="/** &#xA; * Contains the definition of a Kermeta exception and a few basic exceptions.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png&quot;>&#xA; */" object="//@packages.0/exceptions"/>
+      <ownedTags value="/** &#xD;&#xA; * Contains the definition of a Kermeta exception and a few basic exceptions.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/exceptions"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/Exception/@ownedTags.0" name="Exception" superType="//@packages.0/exceptions/Exception/@containedType.0">
-        <ownedTags value="/**&#xA; * Generic exceptions&#xA; * The main class from which all the exception inherit&#xA; */" object="//@packages.0/exceptions/Exception"/>
+        <ownedTags value="/**&#xD;&#xA; * Generic exceptions&#xD;&#xA; * The main class from which all the exception inherit&#xD;&#xA; */" object="//@packages.0/exceptions/Exception"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
@@ -17,7 +17,7 @@
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/Exception"/>
         </ownedAttribute>
         <ownedAttribute tag="//@packages.0/exceptions/Exception/stackTrace/@ownedTags.0" name="stackTrace" isOrdered="true" upper="1" isComposite="true">
-          <ownedTags value="/**&#xA;     * The stack trace as a String&#xA;     * Filled by the interpreted when the exception is raised&#xA;     */" object="//@packages.0/exceptions/Exception/stackTrace"/>
+          <ownedTags value="/**&#xD;&#xA;     * The stack trace as a String&#xD;&#xA;     * Filled by the interpreted when the exception is raised&#xD;&#xA;     */" object="//@packages.0/exceptions/Exception/stackTrace"/>
           <type href="../kunit/kunit.km#//@packages.0/kunit/Error/toString/@body/@statement.3/@thenBody/@statement.0/@value/@parameters.0/@containedType.0"/>
         </ownedAttribute>
       </ownedTypeDefinition>
@@ -42,35 +42,35 @@
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/TypeCastError/@ownedTags.0" name="TypeCastError" superType="//@packages.0/exceptions/TypeCastError/@containedType.0 //@packages.0/exceptions/TypeCastError/@containedType.1">
-        <ownedTags value="/**&#xA; * Occurs when a cast (Object::asType operation) fails&#xA; */" object="//@packages.0/exceptions/TypeCastError"/>
+        <ownedTags value="/**&#xD;&#xA; * Occurs when a cast (Object::asType operation) fails&#xD;&#xA; */" object="//@packages.0/exceptions/TypeCastError"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/RuntimeError"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/NotImplementedException/@ownedTags.0" name="NotImplementedException" superType="//@packages.0/exceptions/NotImplementedException/@containedType.0 //@packages.0/exceptions/NotImplementedException/@containedType.1">
-        <ownedTags value="/**&#xA; * Use this exception whenyou want to forbid the access to an unimplemented operation &#xA; * and invite to implement it&#xA; */" object="//@packages.0/exceptions/NotImplementedException"/>
+        <ownedTags value="/**&#xD;&#xA; * Use this exception whenyou want to forbid the access to an unimplemented operation &#xD;&#xA; * and invite to implement it&#xD;&#xA; */" object="//@packages.0/exceptions/NotImplementedException"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/RuntimeError"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/UpperBoundReachedError/@ownedTags.0" name="UpperBoundReachedError" superType="//@packages.0/exceptions/UpperBoundReachedError/@containedType.0 //@packages.0/exceptions/UpperBoundReachedError/@containedType.1">
-        <ownedTags value="/** &#xA; * Use this exception when user tries to add an element to a property which type is collection&#xA; * which has an upper bound != -1 ( ie *)&#xA; */" object="//@packages.0/exceptions/UpperBoundReachedError"/>
+        <ownedTags value="/** &#xD;&#xA; * Use this exception when user tries to add an element to a property which type is collection&#xD;&#xA; * which has an upper bound != -1 ( ie *)&#xD;&#xA; */" object="//@packages.0/exceptions/UpperBoundReachedError"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/RuntimeError"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/AbstractClassInstantiationError/@ownedTags.0" name="AbstractClassInstantiationError" superType="//@packages.0/exceptions/AbstractClassInstantiationError/@containedType.0 //@packages.0/exceptions/AbstractClassInstantiationError/@containedType.1">
-        <ownedTags value="/**&#xA; * Creation on an abstract class. Usually this is detected by the type-checker. The only&#xA; * case where this happens is when instantiating a type variable, whose bound type turns&#xA; * out to be abstract.&#xA; */" object="//@packages.0/exceptions/AbstractClassInstantiationError"/>
+        <ownedTags value="/**&#xD;&#xA; * Creation on an abstract class. Usually this is detected by the type-checker. The only&#xD;&#xA; * case where this happens is when instantiating a type variable, whose bound type turns&#xD;&#xA; * out to be abstract.&#xD;&#xA; */" object="//@packages.0/exceptions/AbstractClassInstantiationError"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/RuntimeError"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/IncompatibleTypeError/@ownedTags.0" name="IncompatibleTypeError" superType="//@packages.0/exceptions/IncompatibleTypeError/@containedType.0 //@packages.0/exceptions/IncompatibleTypeError/@containedType.1">
-        <ownedTags value="/**&#xA; * Raised by the Object::set operation if the type of the &#xA; * Object to set has an incompatible type.&#xA; */" object="//@packages.0/exceptions/IncompatibleTypeError"/>
+        <ownedTags value="/**&#xD;&#xA; * Raised by the Object::set operation if the type of the &#xD;&#xA; * Object to set has an incompatible type.&#xD;&#xA; */" object="//@packages.0/exceptions/IncompatibleTypeError"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/RuntimeError"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
@@ -105,7 +105,7 @@
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/StringFormatException/@ownedTags.0" name="StringFormatException" superType="//@packages.0/exceptions/StringFormatException/@containedType.0 //@packages.0/exceptions/StringFormatException/@containedType.1">
-        <ownedTags value="/**&#xA; * to be written #########################################&#xA; */" object="//@packages.0/exceptions/StringFormatException"/>
+        <ownedTags value="/**&#xD;&#xA; * to be written #########################################&#xD;&#xA; */" object="//@packages.0/exceptions/StringFormatException"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/Exception"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
@@ -126,7 +126,7 @@
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/IteratorIsOff/@ownedTags.0" name="IteratorIsOff" superType="//@packages.0/exceptions/IteratorIsOff/@containedType.0 //@packages.0/exceptions/IteratorIsOff/@containedType.1">
-        <ownedTags value="/**&#xA; * Occurs when calling next() operation while iterator is already&#xA; * positioned on the last element of a collection&#xA; */" object="//@packages.0/exceptions/IteratorIsOff"/>
+        <ownedTags value="/**&#xD;&#xA; * Occurs when calling next() operation while iterator is already&#xD;&#xA; * positioned on the last element of a collection&#xD;&#xA; */" object="//@packages.0/exceptions/IteratorIsOff"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/Exception"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
@@ -196,7 +196,7 @@
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/DynamicExpressionException/@ownedTags.0" name="DynamicExpressionException" superType="//@packages.0/exceptions/DynamicExpressionException/@containedType.0 //@packages.0/exceptions/DynamicExpressionException/@containedType.1">
-        <ownedTags value="/**&#xA; * to be written #########################################&#xA; */" object="//@packages.0/exceptions/DynamicExpressionException"/>
+        <ownedTags value="/**&#xD;&#xA; * to be written #########################################&#xD;&#xA; */" object="//@packages.0/exceptions/DynamicExpressionException"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/Exception"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>

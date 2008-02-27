@@ -4,14 +4,14 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::utils|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="utils" nsURI="http://www.kermeta.org/kermeta/utils" nsPrefix="utils">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/** &#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; * metamodel&#xA; * &#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xA; */"/>
+        <details key="documentation" value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; * &#xD;&#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xD;&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="Hashtable">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * An implementation of hashtable&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;>&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * An implementation of hashtable&#xD;&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xD;&#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;>&#xD;&#xA; */"/>
         </eAnnotations>
         <eTypeParameters name="K"/>
         <eTypeParameters name="V"/>
@@ -19,25 +19,25 @@
         <eOperations name="size">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.size(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Returns the size of this Hashtable&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Returns the size of this Hashtable&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="keyIterator">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keysIterator(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Returns an iterator over the Keys of this Hashtable&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Returns an iterator over the Keys of this Hashtable&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="valueIterator">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.valueIterator(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Returns an iterator over the values of this Hashtable&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Returns an iterator over the values of this Hashtable&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="getValue">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self, key)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Returns the value for key 'key' if it exists, otherwise returns Void&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Returns the value for key 'key' if it exists, otherwise returns Void&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="key">
             <eGenericType eTypeParameter="/1/utils/Hashtable/K"/>
@@ -46,7 +46,7 @@
         <eOperations name="put">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.put(self, key, ~value)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Adds a entry into the Hashtable&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Adds a entry into the Hashtable&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="key">
             <eGenericType eTypeParameter="/1/utils/Hashtable/K"/>
@@ -58,7 +58,7 @@
         <eOperations name="remove">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.remove(self, key)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Removes the entry with key equals to 'key'&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Removes the entry with key equals to 'key'&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="key">
             <eGenericType eTypeParameter="/1/utils/Hashtable/K"/>
@@ -67,25 +67,25 @@
         <eOperations name="clear">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.clear(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Removes all elements from the Hashtable&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Removes all elements from the Hashtable&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="keys">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;K>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;K> init keyIterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;result.add(it.next)&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Returns a set containing the hash keys of this Hashtable&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Returns a set containing the hash keys of this Hashtable&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="values">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Bag&lt;V>.new&#xA;&#x9;keys.each{k | do&#xA;&#x9;&#x9;&#x9;result.add(self.getValue(k))&#xA;&#x9;&#x9;end}&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Returns a collection containing the elements of this Hashtable&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Returns a collection containing the elements of this Hashtable&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="containsKey">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := getValue(key).isNotEqual(void)&#xA;end"/>
-            <details key="documentation" value="/** &#xA;  * Returns a Boolean stating whether a key is present or not in this Hashtable&#xA;  */"/>
+            <details key="documentation" value="/** &#xD;&#xA;  * Returns a Boolean stating whether a key is present or not in this Hashtable&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="key">
             <eGenericType eTypeParameter="/1/utils/Hashtable/K"/>
@@ -105,16 +105,16 @@
     <references href="../language/structure.ecore#/1"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
-    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="utils.ecore#/0"/>
     <references href="utils.ecore#/1"/>
+    <references href="utils.ecore#/2"/>
     <references href="StringBuffer.ecore#/0"/>
     <references href="StringBuffer.ecore#/1"/>
     <references href="stack.ecore#/0"/>
@@ -122,20 +122,19 @@
     <references href="stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>
