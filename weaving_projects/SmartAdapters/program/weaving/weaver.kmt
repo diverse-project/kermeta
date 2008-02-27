@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.13 2008-02-25 13:38:54 bmorin Exp $
+/* $Id: weaver.kmt,v 1.14 2008-02-27 13:07:12 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -94,8 +94,12 @@ class Weaver
 					 stdio.writeln("*******************************************")
 					 stdio.writeln("")				 
 					 //interaction with user
-					 input := stdio.read("$>weave the aspect for this binding ? (true/false): ")
-					 apply := input.toBoolean
+					 input := stdio.read("$>weave the aspect for this binding ? (true/FALSE): ")
+					 do
+					 	apply := input.toBoolean
+					 rescue
+					 	apply := false
+					 end
 					 //apply composition protocol for the current binding
 					 if apply then
 					 	stdio.writeln("----------------------------")
@@ -105,8 +109,12 @@ class Weaver
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("")
 					 	//interaction with user
-					 	input := stdio.read("$>unweave the aspect for this binding ? (true/false): ")
-					 	unweave := input.toBoolean
+					 	input := stdio.read("$>unweave the aspect for this binding ? (TRUE/false): ")
+					 	do
+					 		unweave := input.toBoolean
+					 	rescue
+					 		unweave := true
+					 	end
 					 	if unweave then
 					 		stdio.writeln("----------------------------")
 					 		stdio.writeln("#>unweaving the aspect for binding"+i.toString+"...")
@@ -116,10 +124,14 @@ class Weaver
 					 		stdio.writeln("")
 					 	end
 					 	adapter.updateClones
-					 	if (iteBindings.hasNext) then
+					 	if (iteBindings.hasNext and not unweave) then //weaving + unweaving = no change
 					 		//interaction with user
-						 	inputPM:=stdio.read("$>execute pattern matching ? (true/false): ")
-						 	executePM:=inputPM.toBoolean
+						 	inputPM:=stdio.read("$>execute pattern matching ? (TRUE/false): ")
+						 	do
+						 		executePM := inputPM.toBoolean
+						 	rescue
+						 		executePM := true
+						 	end
 						 	//executing pattern matching again 
 						 	//(the composition might have change the base model)
 						 	if executePM then
