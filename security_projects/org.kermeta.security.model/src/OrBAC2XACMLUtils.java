@@ -63,7 +63,7 @@ public class OrBAC2XACMLUtils {
      * @throws URISyntaxException if there is a problem with any of the URIs
      * @param role the subject Role
      * @param activity the given activity
-     * @param view the give nview
+     * @param view the given view
      */
     private static Target createRuleTarget(String role, String activity, String view) throws URISyntaxException {
 
@@ -221,7 +221,7 @@ public class OrBAC2XACMLUtils {
         // define the effect for the Rule
         int effect = Result.DECISION_PERMIT;
 
-        if (status.equals("prohibition"))
+        if (status.equalsIgnoreCase("prohibition"))
             effect = Result.DECISION_DENY;
 
         // get the Target for the rule
