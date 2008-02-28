@@ -1,4 +1,4 @@
-/* $Id: ecoreClone.kmt,v 1.2 2008-02-20 09:09:34 bmorin Exp $
+/* $Id: ecoreClone.kmt,v 1.3 2008-02-28 09:11:27 bmorin Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -12,7 +12,6 @@ require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 using kermeta::standard
 using kermeta::utils
-  
 
 
 /** This class is responsible for the link between
