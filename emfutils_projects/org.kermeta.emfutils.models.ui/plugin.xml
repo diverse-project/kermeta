@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="org.kermeta.emfutils.models.ui.contribution1"
+            objectClass="org.eclipse.emf.ecore.EObject">
+         <action
+               class="org.kermeta.emfutils.models.ui.popup.actions.GetContainingRefAction"
+               enablesFor="1"
+               id="org.kermeta.emfutils.models.ui.GetContainingRefAction"
+               label="Get containing reference (Kermeta extra for EMF models)"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
