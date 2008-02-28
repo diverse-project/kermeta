@@ -1,4 +1,4 @@
-/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.5 2008-02-28 17:54:42 dvojtise Exp $
+/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.6 2008-02-28 17:56:46 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -402,6 +402,7 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 				Pattern subPattern = Pattern.compile("src=\"(.*)\"");
 				Matcher subMatcher = subPattern.matcher(orig);
 				subMatcher.find();
+				// use some javascript to make sure IE can resize the image, see http://www.svendtofte.com/code/max_width_in_ie/ 
 				String  replacement = "<a href=\"" + subMatcher.group(1) + "\" target=\"display_images\">" + orig.replaceFirst("img ", "img style=\"width:expression(document.body.clientWidth - 50); \" ") + "</a>";
 			    myMatcher.appendReplacement(myStringBuffer, replacement);
 			} catch (Exception e) {
