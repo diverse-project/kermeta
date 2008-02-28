@@ -1,6 +1,6 @@
 
 
-/*$Id: CheckFileAction.java,v 1.2 2008-02-14 07:12:53 uid21732 Exp $
+/*$Id: CheckFileAction.java,v 1.3 2008-02-28 09:35:47 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.ui
 * File : 	CheckFileAction.java
 * License : EPL
@@ -39,6 +39,7 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
+import fr.irisa.triskell.kermeta.ui.KermetaUIPlugin;
 
 public class CheckFileAction implements IEditorActionDelegate {
 
@@ -82,11 +83,11 @@ public class CheckFileAction implements IEditorActionDelegate {
 							KermetaUnit kermetaUnit = KermetaUnitChecker.check(file, document.get());
 							KermetaUnitHost.getInstance().updateValue(file, kermetaUnit);
 						} catch (NotRegisteredURIException e) {
-							e.printStackTrace();
+							KermetaUIPlugin.logErrorMessage("Error checking " + file.getFullPath().toString(),e);
 						} catch (URIMalformedException e) {
-							e.printStackTrace();
+							KermetaUIPlugin.logErrorMessage("Error checking " + file.getFullPath().toString(),e);
 						} catch (IdNotFoundException e) {
-							e.printStackTrace();
+							KermetaUIPlugin.logErrorMessage("Error checking " + file.getFullPath().toString(),e);
 						}
 					}
 				}
@@ -95,7 +96,7 @@ public class CheckFileAction implements IEditorActionDelegate {
 		try {
 			ResourcesPlugin.getWorkspace().run(r, new NullProgressMonitor());
 		} catch (CoreException e) {
-			e.printStackTrace();
+			KermetaUIPlugin.logErrorMessage("Error checking " + file.getFullPath().toString(),e);
 		}
 
 	}

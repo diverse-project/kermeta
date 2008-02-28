@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Hashtable;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -12,6 +13,7 @@ import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.ui.provider.TreeContentProvider;
 import fr.irisa.triskell.kermeta.ui.provider.TreeViewerLabelProvider;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -22,6 +24,10 @@ public class KermetaUIPlugin extends AbstractUIPlugin {
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.ui";
 
 	public static String NEWP_ROJECT_WIZARD_ID = "fr.irisa.triskell.kermeta.ui.wizards.newProject";
+	
+
+	// Log4j logger for this plugin
+	final static public Logger log4jLogger = LogConfigurationHelper.getLogger("KermetaUIPlugin");
 	
 	// The shared instance
 	private static KermetaUIPlugin plugin;
@@ -93,5 +99,33 @@ public class KermetaUIPlugin extends AbstractUIPlugin {
 	}
 	public static void log(Throwable e) {
 		log(new Status(IStatus.ERROR, PLUGIN_ID, 0, "kermeta ui internal error", e)); 
+	}
+	
+	/**
+	 * This method logs an error message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logErrorMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, message, e));
+		// log4j message
+		log4jLogger.error(message, e);
+	}
+	
+	/**
+	 * This method logs a warning message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logWarningMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.WARNING, PLUGIN_ID, IStatus.WARNING, message, e));
+		// log4j message
+		log4jLogger.error(message, e);
 	}
 }
