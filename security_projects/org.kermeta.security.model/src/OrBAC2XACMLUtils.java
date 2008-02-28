@@ -391,6 +391,7 @@ public class OrBAC2XACMLUtils {
         StringBuffer content = new StringBuffer(baos.toString());
         content.insert(content.indexOf("<PolicySet ") + 11, "xmlns=\"urn:oasis:names:tc:xacml:1.0:policy\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
 
+        // for debugging
         System.out.println("Generated XACML file : ");
         System.out.println(content);
 
