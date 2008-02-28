@@ -1,4 +1,4 @@
-/* $Id: 071_mergerPbWithFunctionType.main.kmt,v 1.1 2008-02-27 16:02:30 dvojtise Exp $
+/* $Id: 071_mergerPbWithFunctionType.main.kmt,v 1.2 2008-02-28 09:45:35 dvojtise Exp $
  * Creation date: July 9, 2007
  * License:
  * Copyright:
@@ -9,10 +9,10 @@
  *		the typechecker is ok (and should be ok)
  *		but when running the sample the resulting km file after the merge has lost the body of the allPrecedingNodes operation
  */
-@mainClass "mergerPbWithfunctionType::Main"
+@mainClass "mergerPbWithFunctionType::Main"
 @mainOperation "main"
 
-package mergerPbWithfunctionType;
+package mergerPbWithFunctionType;
 
 require kermeta
 
@@ -32,7 +32,7 @@ abstract class Node {
 		result := void
 		if allFollowingNodes_result.isVoid then
 			var ctx : Map<Node> init Map<Node>.new
-			var f : <Node -> Sequence<Node>>
+			var f : <Node -> Sequence<Node>> 
 			f := function { n : Node | n.outgoingEdges.collect{ e | e.targetNode } }
 			__addAllFollowingNodes(ctx, f)
 			result := ctx
@@ -41,17 +41,18 @@ abstract class Node {
 			result := allFollowingNodes_result
 		end
 	end
+		
 	reference allFollowingNodes_result : Map<Node> // Cache
 	
-	/**
-	 * Return all the nodes that precede self (backward transitive closure)
-	 */
-	operation allPrecedingNodes() : Map<Node> is do
+	
+	operation allPrecedingNodes() : Map<Node> is 
+	do
 		result := void
 		if allPrecedingNodes_result.isVoid then
 			var ctx : Map<Node> init Map<Node>.new
-			__addAllFollowingNodes(ctx, 
-				function { n : Node | n.incomingEdges.collect{ e | e.sourceNode } }
+			__addAllFollowingNodes(ctx,
+				// pb occurs here when run (bug #5152) 
+				function{n : Node | n.incomingEdges.collect{e | e.sourceNode }}
 			)
 			result := ctx
 			allPrecedingNodes_result := result
@@ -59,6 +60,22 @@ abstract class Node {
 			result := allPrecedingNodes_result
 		end
 	end
+	
+	operation allPrecedingNodes2() : Map<Node> is 
+	do
+		result := void
+		if allPrecedingNodes_result.isVoid then
+			var ctx : Map<Node> init Map<Node>.new
+			// pb occurs here when run (bug #5152)
+			var f : <Node -> Sequence<Node>> init function{n : Node | n.incomingEdges.collect{e | e.sourceNode }}
+			__addAllFollowingNodes(ctx, f)
+			result := ctx
+			allPrecedingNodes_result := result
+		else
+			result := allPrecedingNodes_result
+		end
+	end
+	
 	reference allPrecedingNodes_result : Map<Node> // Cache
 	
 	 // Utility function for allFollowingNodes and allPrecedingNodes
