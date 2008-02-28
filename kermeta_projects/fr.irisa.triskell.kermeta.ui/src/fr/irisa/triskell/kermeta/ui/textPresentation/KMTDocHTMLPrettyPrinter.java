@@ -1,4 +1,4 @@
-/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.4 2008-02-14 07:12:54 uid21732 Exp $
+/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.5 2008-02-28 17:54:42 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -32,9 +32,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -86,8 +84,9 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 		
 		mainClass =  false;
 		result+="</pre>";
-		return  fixPlatformURL(result);
+		return  fixPlatformURL(fixImages(result));
 	}
+	
 	
 	public String htmlSummary(Package node) {
 		StringBuffer result= new StringBuffer("");
@@ -389,6 +388,32 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 		result = myStringBuffer.toString();
 		
 		return result;
+	}
+	
+	public String fixImages(String text){
+		String result;
+		
+		StringBuffer myStringBuffer = new StringBuffer();
+		Pattern myPattern = Pattern.compile("<img.*>");
+		Matcher myMatcher = myPattern.matcher(text);
+		while (myMatcher.find()) {
+			try {
+				String orig =myMatcher.group();
+				Pattern subPattern = Pattern.compile("src=\"(.*)\"");
+				Matcher subMatcher = subPattern.matcher(orig);
+				subMatcher.find();
+				String  replacement = "<a href=\"" + subMatcher.group(1) + "\" target=\"display_images\">" + orig.replaceFirst("img ", "img style=\"width:expression(document.body.clientWidth - 50); \" ") + "</a>";
+			    myMatcher.appendReplacement(myStringBuffer, replacement);
+			} catch (Exception e) {
+			    myMatcher.appendReplacement(myStringBuffer, myMatcher.group());					
+			}
+		}
+		myMatcher.appendTail(myStringBuffer);
+	
+		result = myStringBuffer.toString();
+		
+		return result;
+		
 	}
 	
 	/**
