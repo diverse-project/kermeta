@@ -1,6 +1,4 @@
- 
-
-/*$Id: Pass4.java,v 1.4 2008-02-14 07:12:56 uid21732 Exp $
+/*$Id: Pass4.java,v 1.5 2008-02-28 08:01:19 dvojtise Exp $
 * Project : org.kermeta.merger
 * File : 	Pass4.java
 * License : EPL
@@ -18,6 +16,7 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.merger.MergerPlugin;
 import org.kermeta.model.KermetaModelHelper;
 
 import antlr.RecognitionException;
@@ -34,7 +33,6 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
 import fr.irisa.triskell.kermeta.parser.gen.ast.OperationExpressionBody;
@@ -78,11 +76,9 @@ public class Pass4 extends MergePass {
 		try {
 			node = parser.fExpression();
 		} catch (RecognitionException e) {
-			System.out.println(operationAsString);
-			e.printStackTrace();
+			MergerPlugin.logErrorMessage("Pb parsing expression " + operationAsString, e);
 		} catch (TokenStreamException e) {
-			System.out.println(operationAsString);
-			e.printStackTrace();
+			MergerPlugin.logErrorMessage("Pb parsing expression " + operationAsString, e);
 		}	
 		return node;
 	}
