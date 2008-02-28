@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.13 2008-02-14 07:13:19 uid21732 Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.14 2008-02-28 10:11:18 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -97,8 +97,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	static protected boolean printBody = true;
 	
-	protected ArrayList usings = new ArrayList();
-	protected ArrayList imports = new ArrayList();
+	protected ArrayList<String> usings = new ArrayList<String>();
 	protected String root_pname;
 	protected String current_pname;
 	
@@ -114,15 +113,15 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KM2KMT");
 	
-	private String content = "";
+	private StringBuffer content = new StringBuffer("");
 	private boolean operationPrinting = false;
 	
 	private void print(String text) {
-		content += text;
+		content.append(text);
 	}
 	
 	public String getContent() {
-		return content;
+		return content.toString();
 	}
 	
 	/**
@@ -141,7 +140,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	public void ppCompilationUnit(ModelingUnit compilationUnit) {
 		this.modelingUnit = compilationUnit;
 		
-		content += ppTags( modelingUnit.getOwnedTags() );
+		content.append(ppTags( modelingUnit.getOwnedTags() ));
 		
 		Iterator <Package> iterator = compilationUnit.getPackages().iterator();
 		while ( iterator.hasNext() ) {
@@ -169,7 +168,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 					print = false;
 			if ( print ) {
 				String tags = ppTags( using );
-				print( "using " + using.getQualifiedName() + "\n" );		
+				print( tags + "using " + using.getQualifiedName() + "\n" );		
 			}
 		}
 	}
@@ -308,18 +307,20 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Block)
 	 */
 	public Object visitBlock(Block node) {
-		String result = "do\n";
+		StringBuilder result = new StringBuilder("do\n");
 		alreadyPrefixed = false;
 		pushPrefix();
-		result += ppCRSeparatedNode(node.getStatement());
+		result.append(ppCRSeparatedNode(node.getStatement()));
 		
 		popPrefix();
-		Iterator it = node.getRescueBlock().iterator();
-		while(it.hasNext()) {
-			result += getPrefix() + this.accept((Rescue)it.next()) + "\n";
+		for(Rescue r : node.getRescueBlock()){
+			result.append(getPrefix());
+			result.append(this.accept(r));
+			result.append("\n");
 		}
-		result += getPrefix() + "end";
-		return result;
+		result.append(getPrefix());
+		result.append("end");
+		return result.toString();
 	}
 	
 	/**
@@ -424,9 +425,9 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			result += "\n" + getPrefix() + "{\n";
 			pushPrefix();
 	
-			Iterator included = node.getIncludedTypeDefinition().iterator();
+			Iterator<TypeDefinition> included = node.getIncludedTypeDefinition().iterator();
 			while (included.hasNext()) {
-				TypeDefinition tdef = (TypeDefinition) included.next();
+				TypeDefinition tdef = included.next();
 				result += NamedElementHelper.getMangledQualifiedName(tdef);
 				if (included.hasNext()) {
 					result += ", ";
@@ -556,11 +557,11 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 	}
 	
-	public String ppTypeVariableDeclaration(EList tparams) {
+	public String ppTypeVariableDeclaration(EList<TypeVariable> tparams) {
 		String result = "";
-		Iterator it = tparams.iterator();
+		Iterator<TypeVariable> it = tparams.iterator();
 		while (it.hasNext()) {
-			TypeVariable node = (TypeVariable)it.next();
+			TypeVariable node = it.next();
 			result += KMTHelper.getMangledIdentifier(node.getName());
 			if (node.getSupertype() != null) result += " : " + this.accept(node.getSupertype());
 			if (it.hasNext()) result +=  ", ";
@@ -587,20 +588,20 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	
 	/** Prettyprint the annotations */
-	public String ppTags(EList tagList) {
+	public String ppTags(EList<Tag> tagList) {
 		String result = "";
 	    
 		int tagNb = tagList.size();
 		for(int i=0; i<tagNb; i++) {
 			if((i==0) && (alreadyPrefixed)) {
-				result += this.accept((EObject)tagList.get(i)) + "\n";
+				result += this.accept(tagList.get(i)) + "\n";
 			}
 			else if((i==0) && (!alreadyPrefixed)) {
 				alreadyPrefixed = true;
-				result += getPrefix() + this.accept((EObject)tagList.get(i)) + "\n";
+				result += getPrefix() + this.accept(tagList.get(i)) + "\n";
 			}
 			else {
-				result += getPrefix() + this.accept((EObject)tagList.get(i)) + "\n";
+				result += getPrefix() + this.accept(tagList.get(i)) + "\n";
 			}
 		}
 		if(tagNb > 0) alreadyPrefixed = false;
@@ -690,14 +691,27 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.LambdaExpression)
 	 */
 	public Object visitLambdaExpression(LambdaExpression node) {
-		String result = "{";
-		result += ppComaSeparatedNodes(node.getParameters());
-		result += " | ";
+		StringBuilder result = new StringBuilder("");
+		if(node.eContainer() instanceof CallFeature){
+			CallFeature cf = (CallFeature) node.eContainer();
+			if(cf.getParameters().size()>1){
+				// if the lambda expresion is in a call with multiple parameter then we must use the complete syntax (using the "function" keyword)
+				result.append("function");
+			}
+		}
+		if(node.eContainer() instanceof VariableDecl){
+			// if the lambda expresion is in a variable declaration then we must use the complete syntax (using the "function" keyword)
+			result.append("function");
+			
+		}
+		result.append("{");
+		result.append(ppComaSeparatedNodes(node.getParameters()));
+		result.append(" | ");
 		pushPrefix();
-		result += this.accept(node.getBody());
+		result.append(this.accept(node.getBody()));
 		popPrefix();
-		result += "}";
-		return result;
+		result.append("}");
+		return result.toString();
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.LambdaParameter)
@@ -1337,15 +1351,9 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	/**
-	 * @return Returns the imports.
-	 */
-	public ArrayList getImports() {
-		return imports;
-	}
-	/**
 	 * @return Returns the usings.
 	 */
-	public ArrayList getUsings() {
+	public ArrayList<String> getUsings() {
 		return usings;
 	}
 
@@ -1355,14 +1363,14 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * Later, we will think about the relevance of having not unique tags (depends on how we handle
 	 * code documentation => extern system, or integrated?)
 	 */
-	public Tag[] getFTagsByName(EList ftagList, String name)
+	public Tag[] getFTagsByName(EList<Tag> ftagList, String name)
 	{
-	    Iterator it = ftagList.iterator();
+	    Iterator<Tag> it = ftagList.iterator();
 	    Tag[] result_tagArray = new Tag[10];
 	    int i = 0;
 	    while (it.hasNext())
 	    {
-	        Tag tag = (Tag)it.next();
+	        Tag tag = it.next();
 	        if (tag.getName().equals(name))
 	        {
 	            result_tagArray[i] = tag;
