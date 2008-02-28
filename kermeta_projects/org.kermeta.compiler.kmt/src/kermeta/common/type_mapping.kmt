@@ -1,0 +1,44 @@
+/* $Id: type_mapping.kmt,v 1.1 2008-02-28 12:40:52 cfaucher Exp $
+ * Creation date: February 28, 2006
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors:	Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language;
+
+require kermeta
+
+using kermeta::language::structure
+using kermeta::utils
+
+class JavaTypeMapping
+{
+	attribute types_mapping : Hashtable<String,String>
+	
+	operation initialize() : Void is do 
+
+        // creates the keyword list
+        types_mapping := kermeta::utils::Hashtable<String,String>.new
+        
+		types_mapping.put("kermeta::standard::Character", "char")
+    	types_mapping.put("kermeta::language::structure::Integer",	"java.lang.Integer")
+    	types_mapping.put("kermeta::language::structure::Boolean",	"boolean")
+    	types_mapping.put("kermeta::standard::Boolean",	"java.lang.Boolean")
+    	types_mapping.put("kermeta::standard::String",	"java.lang.String")
+    	types_mapping.put("kermeta::language::structure::String",	"java.lang.String")
+    	types_mapping.put("kermeta::standard::Object",	"java.lang.Object")
+    	types_mapping.put("kermeta::language::structure::UnlimitedNatural",	"java.lang.Integer")
+    	types_mapping.put("kermeta::standard::Real",	"java.lang.Double")
+        
+	end
+	
+	operation getTypeMapping(str : String) : String is do
+		var java_type : String init types_mapping.getValue(str)
+		if java_type.isVoid() then
+			result := str
+		else
+			result := java_type
+		end
+	end
+}
