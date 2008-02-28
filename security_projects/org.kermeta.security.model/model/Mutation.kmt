@@ -1,4 +1,4 @@
-/* $Id: Mutation.kmt,v 1.1 2008-01-18 10:19:37 ffleurey Exp $
+/* $Id: Mutation.kmt,v 1.2 2008-02-28 12:28:40 tej Exp $
  * Creation date: January 9, 2008
  * License:
  * Copyright:
@@ -21,9 +21,11 @@ using kermeta::io
 /* IMPLEMENTATION OF OPERATIONS IN THE METAMODEL
 /**********************************************/
 
-aspect class PolicyType {
+@aspect "true"
+class PolicyType {
 	
 	method toString() : String is do
+	
 		result := name + " {\n"
 		result := result + "  Element Types:\n    "
 		elementTypes.each{ e |
@@ -38,7 +40,8 @@ aspect class PolicyType {
 
 }
 
-aspect class RuleType {
+@aspect "true"
+class RuleType {
 	
 	/**
 	 * Two RuleType are compatible if they have the same parameters
@@ -65,8 +68,8 @@ aspect class RuleType {
 	
 }
 
-
-aspect class Policy {
+@aspect "true"
+class Policy {
 
 	method toString() : String is do
 		result := "POLICY " + name + " (" + type.name + ")\n"
@@ -111,9 +114,28 @@ aspect class Policy {
 			result.rules.add(rule)
 		}
 	end
+	
+	/**
+	 * Checks if the current policy contains the rule given in parameter 
+	 */
+	operation containsRule(rule : Rule) : Boolean is do
+	
+	result := false
+	
+	from var i : Integer init 0 
+	until i >= rules.size or result 
+	loop
+	
+	result := rule.toStringWithoutName == rules.at(i).toStringWithoutName
+	
+	i := i + 1
+	end
+	
+	end
 }
 
-aspect class Rule {
+@aspect "true"
+class Rule {
 
 	operation replaceParameter(old : Element, new : Element) : Void is do
 		var i : Integer
@@ -122,6 +144,15 @@ aspect class Rule {
 		loop i := i + 1 end
 		parameters.removeAt(i)
 		parameters.addAt(i, new)
+	end
+	
+	operation toStringWithoutName() : String is do
+		result := type.name + "( "
+		
+		parameters.each{ p |
+			result := result + p.name + " "
+		}
+		result := result + ")"
 	end
 
 	method toString() : String is do
@@ -133,7 +164,8 @@ aspect class Rule {
 	end
 }
 
-aspect class Element { 
+@aspect "true"
+class Element { 
 	
 	operation allChildren() : Set<Element> is do
 		result := Set<Element>.new
@@ -175,6 +207,9 @@ abstract class SPMutator {
 	operation mute(p : Policy) : set Policy[*] is abstract
 }
 
+/**
+ * Removes an existing rule
+ */
 class RER inherits SPMutator {
 
 
@@ -191,6 +226,10 @@ class RER inherits SPMutator {
 	end
 }
 
+
+/**
+ * Replaces a rule type with another one if the two rule types are compatible
+ */
 class RTT inherits SPMutator {
 
 	method mute(p : Policy) : set Policy[*] is do
@@ -200,7 +239,7 @@ class RTT inherits SPMutator {
 			p.type.ruleTypes.select{ rt | rt.isCompatible(r.type) and rt != r.type}.each{ rt |
 				// create mutated policy
 				mutant := p.copy
-				mutant.name := p.name + "-RTS-" + r.name + "-" + rt.name
+				mutant.name := p.name + "-RTT-" + r.name + "-" + rt.name
 				mutant.rules.detect{ x | x.name == r.name }.type := rt
 				result.add(mutant)
 			}
@@ -208,6 +247,10 @@ class RTT inherits SPMutator {
 	end
 }
 
+
+/**
+ * Replaces one parameter with another one
+ */
 class PPR inherits SPMutator {
 
 	method mute(p : Policy) : set Policy[*] is do
@@ -217,7 +260,7 @@ class PPR inherits SPMutator {
 			rule.parameters.each{ param | 
 				p.elements.select{ e | e != param and e.type == param.type}.each { e |
 					mutant := p.copy
-					mutant.name := p.name + "-RDD-" + rule.name + "-" + param.name + "-" + e.name
+					mutant.name := p.name + "-PPR-" + rule.name + "-" + param.name + "-" + e.name
 					var r : Rule init mutant.rules.detect{ x | x.name == rule.name } 
 					r.replaceParameter(r.parameters.detect{ u | u.name == param.name}, e)
 					result.add(mutant)				
@@ -225,9 +268,163 @@ class PPR inherits SPMutator {
 			}
 		}
 	end
-
 }
 
+/**
+ * Adds a new rule
+ */
+class ANR inherits SPMutator {
+
+	method mute(p : Policy) : set Policy[*] is do
+		var mutant : Policy
+		var typeName : String
+		var colAllParams : oset OrderedSet<Element>[*] init kermeta::standard::OrderedSet<OrderedSet<Element>>.new
+		var colParams : oset Element[*]
+		var ruleType : RuleType
+		var colRules :  oset Rule[*] init OrderedSet<Rule>.new
+		var index : Integer
+		
+		from var j : Integer init 0
+		until j == p.type.ruleTypes.size
+		loop
+		
+			ruleType := p.type.ruleTypes.at(j)
+			colAllParams := OrderedSet<OrderedSet<Element>>.new
+		
+			// groups parameters by type and add them all in colAllParams
+			from var i : Integer init 0
+			until i == ruleType.parameters.size
+			loop
+			typeName := ruleType.parameters.at(i).name
+		
+		
+			colParams := OrderedSet<Element>.new
+			p.allElements.select{ para | para.type.name == typeName}.each { x |
+		
+			colParams.add(x)
+			}
+		
+			colAllParams.add(colParams)
+
+			i := i + 1
+			end
+		
+		index := colRules.size() + 1	
+		colRules.addAll(generateAllCombs(colAllParams, ruleType, index))
+		j := j + 1
+		end
+		
+		// produce mutants
+		result := Set<Policy>.new
+		from var j : Integer init 0
+		until j == colRules.size
+		loop
+		
+		if not p.containsRule(colRules.at(j)) then
+		
+		mutant := p.copy
+		mutant.name := p.name + "-ANR-" + colRules.at(j).name
+		mutant.rules.add(colRules.at(j))
+		result.add(mutant)
+		
+		end
+		
+		j := j + 1
+		
+		end // loop
+			
+	end
+	
+	/**
+	 * Produce all possible combinaison of elements in colAllParams 
+	 * The produced rule have the given ruleType and the number starts with the given indexRule
+	 *
+	 */
+	operation generateAllCombs(colAllParams : oset OrderedSet<Element>[*], ruleType : RuleType, indexRule : Integer) : set Rule[*] is do
+	
+	var colRules : oset Rule[*]
+	var nbRules : Integer init 1
+	var nbRepeat : Integer init 1
+	var rule : Rule
+	var params : set Element[*]
+	 
+	var colParams : oset Element[*]
+	
+	colRules := OrderedSet<Rule>.new
+	
+	// compute the number of all rules
+	from var i : Integer init 0
+	until i == colAllParams.size
+	loop
+		nbRules := nbRules *  colAllParams.at(i).size
+		i := i + 1
+	end
+	
+	// init rules
+	colRules := OrderedSet<Rule>.new
+	from var i : Integer init 0
+	until i == nbRules
+	loop
+	
+		rule := Rule.new
+		rule.type := ruleType
+		rule.name := "RA" + (indexRule + i).toString
+		colRules.add(rule)
+		i := i + 1
+		
+	end
+	
+	// main loop for cretating rules
+	// compute the number of all rules
+	from var index : Integer init 0
+	until index == colAllParams.size
+	loop
+	colParams := colAllParams.at(index)
+	
+	nbRepeat := nbTimesToRepeat(colAllParams, index+1)
+		// generate by columns
+		from var j : Integer init 0
+		until j == nbRules
+		loop
+			// loop on param for row number index 
+			from var k : Integer init 0
+			until k == colParams.size
+			loop
+					from var l : Integer init 0
+					until l == nbRepeat
+					loop
+					colRules.at(j).parameters.add(colParams.at(k))
+										
+					l := l + 1
+					j := j + 1
+					end
+			k := k + 1
+			end
+		end
+	index := index + 1
+	
+	end
+	
+	result := colRules
+	
+	end
+	
+	/**
+	 * Produces the result of mutliplying the number of element in colAllParams starting from the index 
+	 *
+	 */
+	operation nbTimesToRepeat(colAllParams : oset OrderedSet<Element>[*], index : Integer) : Integer is do
+	
+	// result is multiply all other column after the index
+	from result := 1  
+	until index >= colAllParams.size
+	loop
+	result := colAllParams.at(index).size * result
+	index := index + 1
+	end	
+	end
+
+}
 
 class Main
 {
@@ -238,10 +435,25 @@ class Main
         resource.load()
         result ?= resource.instances.one  
 	end
+	
+	
+	
+	operation mutateAndDisplay(mutator: SPMutator , policy : Policy , opName : String) is do
+	
+	stdio.writeln("MUTANTS "  + opName +  " : ")
+	stdio.writeln("*************\n")
+	
+	// mutation and show mutants
+	mutator.mute(policy).each{ p |
+			stdio.writeln(p.toString)
+		    stdio.writeln("")
+		}
+		
+	end
 
 	operation main() : Void is do 
-		var policy : Policy init loadSecurityModel("platform:/resource/SecurityMutation/model/LibraryOrBAC.xmi")
-		//var policy : Policy init loadSecurityModel("platform:/resource/SecurityMutation/model/LibraryRBAC.xmi")
+		// var policy : Policy init loadSecurityModel("platform:/resource/acm/model/LibraryOrBAC.xmi")
+		var policy : Policy init loadSecurityModel("platform:/resource/acm/model/LibraryRBAC.xmi")
 		
 		stdio.writeln(policy.type.toString)
 		
@@ -249,31 +461,14 @@ class Main
 		stdio.writeln("**********\n")
 		stdio.writeln(policy.toString)
 		stdio.writeln("")
+						
+		// generate all mutants and show them
 		
-		stdio.writeln("MUTANTS RER : ")
-		stdio.writeln("*************\n")
-		var rer : SPMutator init RER.new
-		rer.mute(policy).each{ p |
-			stdio.writeln(p.toString)
-		    stdio.writeln("")
-		}
+		mutateAndDisplay(RER.new , policy , "RER")
+		mutateAndDisplay(RTT.new , policy , "RTT")
+		mutateAndDisplay(PPR.new , policy , "PPR")
+		mutateAndDisplay(ANR.new , policy , "ANR")
 		
-		stdio.writeln("MUTANTS RTT : ")
-		stdio.writeln("*************\n")
-		var rtt : SPMutator init RTT.new
-		rtt.mute(policy).each{ p |
-			stdio.writeln(p.toString)
-		    stdio.writeln("")
-		}
-		
-		stdio.writeln("MUTANTS PPR : ")
-		stdio.writeln("*************\n")
-		var ppr : SPMutator init PPR.new
-		ppr.mute(policy).each{ p |
-			stdio.writeln(p.toString)
-		    stdio.writeln("")
-		}
-		
-		
+			
 	end
 }
