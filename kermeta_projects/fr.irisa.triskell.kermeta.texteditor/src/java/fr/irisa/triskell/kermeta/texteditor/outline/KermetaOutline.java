@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.19 2008-02-14 07:13:43 uid21732 Exp $
+/* $Id: KermetaOutline.java,v 1.20 2008-02-28 16:41:24 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -13,6 +13,7 @@
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.jface.preference.BooleanPropertyAction;
@@ -31,11 +32,13 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
+import org.kermeta.texteditor.KermetaEditorEventListener;
 import org.kermeta.texteditor.KermetaTextEditor;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.icons.ButtonIcons;
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
@@ -152,8 +155,12 @@ public class KermetaOutline extends ContentOutlinePage {
 			Display.getDefault().asyncExec(new Runnable() {
 
 				public void run() {
-					updateHelper();
-					//getTreeViewer().expandToLevel(2);
+					try{
+						updateHelper();
+					}
+					catch(Exception e){
+						TexteditorPlugin.logErrorMessage("Error while updating outline", e);
+					}
 				}
 
 			});
@@ -189,6 +196,16 @@ public class KermetaOutline extends ContentOutlinePage {
         TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
         if(tr != null)
          	textEditor.setHighlightRange(tr.getCharBeginAt()-1,0 ,true);
+        
+        // Now notify other plugins or views that the outline selection has changed
+        if(modelElement != null){
+            Iterator<KermetaEditorEventListener> it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
+			while(it.hasNext())
+			{
+				KermetaEditorEventListener listener = it.next();
+				listener.outlineSelectionChanged(modelElement);
+			}
+        }
     }
  	
 	public void updateHelper() {
@@ -209,9 +226,14 @@ public class KermetaOutline extends ContentOutlinePage {
 	                List<PackageItem> pitems = new ArrayList<PackageItem>();
 	                for ( int i = 0; i < items.length; i++ )
 	                	pitems.add( (PackageItem) items[i].getData() );
-	                TreePath treePath = getTreePath(pitems);
-		                    
-                   	getTreeViewer().setSelection( new TreeSelection(treePath), true );
+	                try{
+	                	TreePath treePath = getTreePath(pitems);
+	                		                    
+	                	getTreeViewer().setSelection( new TreeSelection(treePath), true );
+	                }
+	                catch(Exception e){
+	                	TexteditorPlugin.logWarningMessage("cannot set outline selection to "+qualifedNameSelected, e);
+	                }
                 }
                 control.setRedraw(true);
             }
@@ -224,8 +246,7 @@ public class KermetaOutline extends ContentOutlinePage {
 		PackageItem packageItem = getPackageItem(qualifedNameSelected, items);
 		String left = qualifedNameSelected.replace(packageItem.getName(), "");
 		left = left.replaceFirst("::", "");
-		String[] splits = left.split("::");
-		System.out.println();
+		String[] splits = left.split("::");		
 		List<java.lang.Object> l = new ArrayList<java.lang.Object>();
 		
 		if ( packageItem != null ) {
