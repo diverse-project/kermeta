@@ -96,11 +96,17 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if(reverse) then
-					var unset : UnsetState init UnsetState.new
+					
+					var unset : UnsetState 
+					if self.reverse == void then
+						unset := UnsetState.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.StateToUnset := self.StateToSet
 					unset.refname := self.refname
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
@@ -123,11 +129,16 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetState init SetState.new
+					var ~set : SetState 
+					if self.reverse == void then
+						~set := SetState.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.StateToSet := self.StateToUnset
 					~set.refname := self.refname
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
@@ -185,12 +196,18 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if(reverse) then
-					var unset : UnsetTransition init UnsetTransition.new
+					
+					var unset : UnsetTransition 
+					if self.reverse == void then
+						unset := UnsetTransition.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.TransitionToUnset := self.TransitionToSet
 					unset.refsource := self.refsource
 					unset.reftarget := self.reftarget
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
@@ -215,12 +232,17 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetTransition init SetTransition.new
+					var ~set : SetTransition 
+					if self.reverse == void then
+						~set := SetTransition.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.TransitionToSet := self.TransitionToUnset
 					~set.refsource := self.refsource
 					~set.reftarget := self.reftarget
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
@@ -273,37 +295,25 @@ package smartadapters
 				var tempFsm : FSM::Fsm
 				tempFsm ?= ad.getRealObject(FsmToSet,false)
 				
-				stdio.writeln("FSM before")
-				tempFsm.states.each{s |
-					stdio.writeln("\t - "+s.name+" "+s.toString)
-				}
-				
-				stdio.writeln("------------")
-				refstates.each{s | 
-					var realState : FSM::State 
-					realState ?= ad.getRealObject(s,false)
-					stdio.writeln("\t * "+s.name+" : "+realState.name+" "+realState.toString)
-				}
-				stdio.writeln("------------")
-				
 				ad.setMultipleProperty(tempFsm.states,refstates)
 				ad.setMultipleProperty(tempFsm.transitions,reftransitions)
 				
-				stdio.writeln("FSM after")
-				tempFsm.states.each{s |
-					stdio.writeln("\t - "+s.name+" "+s.toString)
-				}
-				
 				//Instantiating the reverse adaptation
 				if(reverse) then
-					var unset : UnsetFsm init UnsetFsm.new
+					
+					var unset : UnsetFsm 
+					if self.reverse == void then
+						unset := UnsetFsm.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.FsmToUnset := self.FsmToSet
 					unset.refstates.clear
 					unset.refstates.addAll(self.refstates)
 					unset.reftransitions.clear
 					unset.reftransitions.addAll(self.reftransitions)
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
@@ -322,40 +332,25 @@ package smartadapters
 				var ad : Adapter init getAdapter
 				var tempFsm : FSM::Fsm
 				tempFsm ?= ad.getRealObject(FsmToUnset,false)
-
-				stdio.writeln("FSM before")
-				tempFsm.states.each{s |
-					stdio.writeln("\t - "+s.name+" "+s.toString)
-				}
-				
-				stdio.writeln("------------")
-				refstates.each{s | 
-					var realState : FSM::State 
-					realState ?= ad.getRealObject(s,false)
-					stdio.writeln("\t * "+s.name+" : "+realState.name+" "+realState.toString)
-				}
-				stdio.writeln("------------")
 				
 				ad.unsetMultipleProperty(tempFsm.states,refstates)
 				ad.unsetMultipleProperty(tempFsm.transitions,reftransitions)
 				
-				
-				stdio.writeln("FSM after")
-				tempFsm.states.each{s |
-					stdio.writeln("\t - "+s.name+" "+s.toString)
-				}
-				
-				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFsm init SetFsm.new
+					var ~set : SetFsm 
+					if self.reverse == void then
+						~set := SetFsm.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.FsmToSet := self.FsmToUnset
 					~set.refstates.clear
 					~set.refstates.addAll(self.refstates)
 					~set.reftransitions.clear
 					~set.reftransitions.addAll(self.reftransitions)
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}

@@ -149,8 +149,15 @@ package smartadapters
 				}%>
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : Unset<%=qualifiedName.replace("::","")%> init Unset<%=qualifiedName.replace("::","")%>.new
+				if(reverse) then		
+					var unset : Unset<%=qualifiedName.replace("::","")%> 
+					if self.reverse == void then
+						unset := Unset<%=qualifiedName.replace("::","")%>.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.<%=c.name%>ToUnset := self.<%=c.name%>ToSet
 					<%c.eAllStructuralFeatures.each{f | 
 					if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
@@ -162,8 +169,6 @@ package smartadapters
 						<%end%>
 					<%end%>
 					<%}%>
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
@@ -211,7 +216,14 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : Set<%=qualifiedName.replace("::","")%> init Set<%=qualifiedName.replace("::","")%>.new
+					var ~set : Set<%=qualifiedName.replace("::","")%> 
+					if self.reverse == void then
+						~set := Set<%=qualifiedName.replace("::","")%>.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.<%=c.name%>ToSet := self.<%=c.name%>ToUnset
 					<%c.eAllStructuralFeatures.each{f | 
 					if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
@@ -223,8 +235,6 @@ package smartadapters
 						<%end%>
 					<%end%>
 					<%}%>
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}

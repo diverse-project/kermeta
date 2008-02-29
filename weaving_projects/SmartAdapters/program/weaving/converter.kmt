@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.9 2008-02-25 13:38:54 bmorin Exp $
+/* $Id: converter.kmt,v 1.10 2008-02-29 10:58:11 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
@@ -52,7 +52,11 @@ class Converter
 	/**
 	returns a converted object (MM), equivalent to obj (MM')
 	*/
-	operation getConvertedObject(obj : kermeta::language::structure::Object) : kermeta::language::structure::Object is do
+	operation getConvertedObject(obj : kermeta::language::structure::Object) : kermeta::language::structure::Object 
+	pre notVoid is obj != void
+	post notVoid is result != void
+	post conformance is result.getMetaClass == convertTable.getValue(obj.getMetaClass)
+	is do
 		//stdio.writeln("?>getConvertedObject: "+obj.toString)
 		var newMeta : kermeta::language::structure::Class 
 		newMeta := convertTable.getValue(obj.getMetaClass)
@@ -75,7 +79,6 @@ class Converter
 			result := obj
 		end
 	end
-	
 		
 	/**
 	copies obj (MM') into conv (MM) thanks to the convert Hashtable

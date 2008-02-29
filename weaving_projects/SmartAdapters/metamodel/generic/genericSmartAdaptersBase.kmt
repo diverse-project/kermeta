@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.9 2008-02-25 13:36:15 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.10 2008-02-29 10:57:54 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -18,6 +18,12 @@ using org::smartadapters::core
 using org::smartadapters::extension
 using ecore
 
+/**
+* This is the generic version of SmartAdapters
+* see <a href="http://www.kircher-schwanninger.de/workshops/MDD&AOSD/old/ECOOP2007/papers/TowardsGenericAOMFramework.pdf" target="_blank">Towards a Generic AOM Framework</a>
+* see <a href="http://www.springerlink.com/content/6045275650757000/" target="_blank">Introducing Variability into Aspect-Oriented Modeling Approaches</a>
+* see <a href="http://www.sse.uni-due.de/vamos/2008/papers/VAMOS08_06.pdf" target="_blank">Weaving Aspect Configurations for Managing System Variability</a>
+*/
 package smartadapters
 {
 	package core
@@ -28,9 +34,12 @@ package smartadapters
 			
 			attribute adapt : Adaptation[0..*]#adapter
 						
-			attribute name : ecore::EString		
+			attribute name : ecore::EString
 		}
 
+		/**
+		 * Aspect encapsulate the structure of a concern (<b><i>what ?</i></b>) and the template (<i><b>where ?</i></b>)
+		 */
 		class Aspect
 		{ 
 			attribute template : ModelPattern[0..1]
@@ -40,12 +49,17 @@ package smartadapters
 			/**
 			persistent refers to aspectual PObject that must not be
 			cloned between two bindings
-			TODO : contraints...
 			*/
 			reference persistent : PObject[0..*]
 			
 		}
 
+		/**
+		 *	Adaptation are basic weaving operations
+		 *  A sequence of adaptations describes a composition protocol (<i><b>how ?</i></b>)
+		 *  A pre-defined set of adaptations is automatically generated when specializing
+		 *  specializing the framework for a given domain
+		 */
 		abstract class Adaptation inherits smartadapters::extension::AdapterElement
 		{
 			reference adapter : Adapter[1..1]#adapt			
@@ -63,26 +77,43 @@ package smartadapters
 
 		}
 		
+		/**
+		 * Create a new element from an existing one
+		 */
 		abstract class cloneAdaptation inherits Adaptation
 		{
 			attribute isUnique : uniqueType
 		}
-		
+
+		/**
+		 * Create a new element from scratch
+		 */		
 		abstract class createAdaptation inherits Adaptation
 		{
 			attribute isUnique : uniqueType
 		}
 		
+		/**
+		 * Set any feature of a given model element
+		 */
 		abstract class setAdaptation inherits Adaptation
 		{
 		
 		}
-		
+
+		/**
+		 * Unset any feature of a given model element
+		 */			
 		abstract class unsetAdaptation inherits Adaptation
 		{
 		
 		}
 
+		/**
+		 * Adaptation for making any element from the structure unique
+		 * i.e., unique elements are cloned only once when applying the 
+		 * protocol for several bindings
+		 */		
 		class makeUnique inherits Adaptation
 		{
 			reference element : PObject[1..1]
@@ -105,7 +136,10 @@ package smartadapters
 		enumeration uniqueType{unique; non_unique; onDemand;}		
 	}
 	
-
+	/**
+	* This package contains the features related to variability
+	* see <a href="http://www.springerlink.com/content/6045275650757000/" target="_blank">Introducing Variability into Aspect-Oriented Modeling Approaches</a>
+	*/
 	package extension
 	{
 		class AdapterElement

@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.15 2008-02-27 13:06:37 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.16 2008-02-29 10:57:54 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -20,6 +20,7 @@ using org::smartadapters::core
 using org::smartadapters::extension
 using ecore
 using org::smartadapters::utils
+
 
 package smartadapters
 {
@@ -64,8 +65,12 @@ package smartadapters
 				result := print
 			end
 			
-			operation getAdapter() : Adapter is
-			do
+			/**
+			 * Return the adapter associated to the adaptation or to the reverse adaptation
+			 */
+			operation getAdapter() : Adapter 
+				post notVoid is result != void
+			is do
 				var ad : Adapter
 				ad := adapter
 				if ad == void then
@@ -77,6 +82,8 @@ package smartadapters
 		
 		aspect class Adapter
 		{	
+			inv checkedAdapt is adapt.detect{a | not a.check} == void
+		
 			/**
 			key : aspect element
 			value : associated clone
@@ -88,25 +95,49 @@ package smartadapters
 			attribute converter : Converter
 			
 			/*
-			 * attributes for managing roll-back (may be improved)
+			 * attributes for managing roll-back
 			 */
-			attribute notRemovable : Set<Object>
-			attribute removable : Set<Object>
-			attribute removed : Set<Object>
+			attribute notRemovable : Set<Object> //objects that cannot be removed
+			attribute removable : Set<Object> //objects that may be removed after weaving the aspect for a given binding
+			attribute removed : Set<Object> //objects that have been removed when unweaving the aspect fof a given binding
 			
-			operation initConvert() : Void is abstract
+			/**
+			 * This operation maps the concepts of MM' to the concepts of MM
+			 * The body of the operation will be generated when specializing the AOM framework
+			 * for a given domain 
+			 */
+			operation initConvert() : Void 
+				post converterNotVoid is converter != void
+				is abstract
 			
-			/*
-			This operation weaves the the aspect for the binding b
-			In other words, it executes all the adaptations of the composition protocol  
-			*/
-			operation apply(b:Hashtable<Object, Object>) is do
+			/**
+			 * This operation weaves the the aspect for the binding b
+			 * In other words, it executes all the adaptations of the composition protocol  
+			 */
+			operation apply(b : Hashtable<Object, Object>, model : Object) 
+				pre modelCheckedBefore is do
+					var isChecked : Boolean init true
+					do
+						model.checkAllInvariants
+					rescue
+						isChecked := false
+					end
+					isChecked
+				end
+				post modelCheckedAfter is do
+					var isChecked : Boolean init true
+					do
+						model.checkAllInvariants
+					rescue
+						isChecked := false
+					end
+					isChecked
+				end
+			is do
 				var i : Integer init 1
 				binding := b
-				
 				removable.clear
 				removed.clear
-				
 				adapt.each{a |
 					stdio.writeln("Adaptation "+i.toString)
 					stdio.writeln("------------")
@@ -119,11 +150,30 @@ package smartadapters
 				}
 			end
 			
-			/*
-			This operation unweaves the previously woven aspect, for the current binding
-			In other words, it performs a roll back.
-			*/
-			operation unweave() is do
+			/**
+			 * This operation unweaves the previously woven aspect, for the current binding
+			 * In other words, it performs a roll back.
+			 */
+			operation unweave(model : Object) 
+				pre modelCheckedBefore is do
+					var isChecked : Boolean init true
+					do
+						model.checkAllInvariants
+					rescue
+						isChecked := false
+					end
+					isChecked
+				end
+				post modelCheckedAfter is do
+					var isChecked : Boolean init true
+					do
+						model.checkAllInvariants
+					rescue
+						isChecked := false
+					end
+					isChecked
+				end
+			is do
 				var i : Integer init 1
 				adapt.each{a | 
 					if(a.reverse != void) then
@@ -140,6 +190,9 @@ package smartadapters
 				}
 			end
 
+			/**
+			 * This operation should be called before any other operation
+			 */
 			operation initAdapter() : Void is 
 			do
 				if (clone == void) then
@@ -163,8 +216,8 @@ package smartadapters
 			end		
 				
 			/**
-			initClone must be called before the first binding
-			*/
+			 *initClone must be called before the first binding
+			 */
 			operation initClone() is do
 				initAdapter
 				if (~aspect.structure!=void) then
@@ -190,6 +243,9 @@ package smartadapters
 					}
 				end
 				
+				/*
+				 * non removed removable objects become non removable
+				 */
 				removable.each{o |
 					var real : Object init getRealObject(o,false)
 					if not removed.contains(real) then
@@ -273,7 +329,6 @@ package smartadapters
 				if(o != void) then
 					var e : Object init getRealObject(o,false)
 					if not notRemovable.contains(e) then
-						//notRemovable.remove(e)
 						removed.add(e)
 						result := void
 					else
@@ -296,7 +351,6 @@ package smartadapters
 						realColl ?= getRealObject(o,true)
 						realColl.each{e |
 							if not notRemovable.contains(e) then
-								//notRemovable.remove(e)
 								collToSet.remove(e)
 								removed.add(e)
 							end
@@ -304,7 +358,12 @@ package smartadapters
 					end
 				end
 			end			
-						
+			
+			/*
+			 * Return the real object (instance of MM) associated to obj
+			 * e.g., it returns the base model element associated to an element from the pointcut
+			 * or returns a converted clone associated to a created element
+			 */		
 			operation getRealObject(obj : Object, isCollect:Boolean) : Object is do
 				if (isCollect) then
 					var col : Collection<kermeta::language::structure::Object>
@@ -336,6 +395,9 @@ package smartadapters
 		}
 	}
 	
+	/**
+	 * This package contains all the concepts for variability
+	 */
 	package extension
 	{
 		aspect class DerivableAdapter inherits Adapter

@@ -1,8 +1,13 @@
-/* $Id: PatternMatching.kmt,v 1.8 2008-02-13 08:37:41 bmorin Exp $
+/* $Id: PatternMatching.kmt,v 1.9 2008-02-29 10:58:22 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
  * Authors:
+ */
+
+/**
+ * This is the implementation of the framework presented 
+ * in <a href="http://www.springerlink.com/index/9nl30583327246n1.pdf" target="_blank">Matching Model Snippets</a>
  */
 package kermeta::pattern;
 
@@ -10,7 +15,6 @@ package kermeta::pattern;
 require kermeta
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
 require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
-//comment
 
 using ecore
 using kermeta::standard

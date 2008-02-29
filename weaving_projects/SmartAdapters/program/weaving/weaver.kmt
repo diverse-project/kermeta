@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.14 2008-02-27 13:07:12 bmorin Exp $
+/* $Id: weaver.kmt,v 1.15 2008-02-29 10:58:11 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -52,10 +52,11 @@ class Weaver
 		stdio.writeln(" OK!")
 
 		stdio.write("Checking adaptations...")
-		var isChecked:EBoolean init true
-		adapter.adapt.each{a | isChecked:=(isChecked and a.check)}
+		adapter.checkAllInvariants
+		/*var isChecked:EBoolean init true
+		adapter.adapt.each{a | isChecked:=(isChecked and a.check)}*/
 		
-		if (adapter.adapt.size>0 and isChecked) then
+		if (adapter.adapt.size>0/* and isChecked*/) then
 			stdio.writeln(" OK!")
 			adapter.initClone
 			
@@ -104,7 +105,7 @@ class Weaver
 					 if apply then
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("#>weaving the aspect for binding"+i.toString+"...")
-						adapter.apply(binding) //aspect weaving: do not require domain concepts
+						adapter.apply(binding, rootElement) //aspect weaving: do not require domain concepts
 					 	stdio.writeln("#>weaving the aspect for binding"+i.toString+" done!")
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("")
@@ -118,7 +119,7 @@ class Weaver
 					 	if unweave then
 					 		stdio.writeln("----------------------------")
 					 		stdio.writeln("#>unweaving the aspect for binding"+i.toString+"...")
-					 		adapter.unweave
+					 		adapter.unweave(rootElement)
 					 		stdio.writeln("#>unweaving the aspect for binding"+i.toString+" done!")
 					 		stdio.writeln("----------------------------")
 					 		stdio.writeln("")
