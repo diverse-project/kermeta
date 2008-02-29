@@ -1,4 +1,4 @@
-/*$Id: Pass4.java,v 1.5 2008-02-28 08:01:19 dvojtise Exp $
+/*$Id: Pass4.java,v 1.6 2008-02-29 16:23:38 dvojtise Exp $
 * Project : org.kermeta.merger
 * File : 	Pass4.java
 * License : EPL
@@ -77,8 +77,10 @@ public class Pass4 extends MergePass {
 			node = parser.fExpression();
 		} catch (RecognitionException e) {
 			MergerPlugin.logErrorMessage("Pb parsing expression " + operationAsString, e);
+			String operationAsString2  = (String) printer.accept( expression );
 		} catch (TokenStreamException e) {
 			MergerPlugin.logErrorMessage("Pb parsing expression " + operationAsString, e);
+			String operationAsString2  = (String) printer.accept( expression );
 		}	
 		return node;
 	}
