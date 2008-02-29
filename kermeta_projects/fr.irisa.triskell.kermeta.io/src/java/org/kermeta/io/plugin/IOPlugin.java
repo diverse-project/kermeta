@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.35 2008-02-20 13:36:09 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.36 2008-02-29 15:47:26 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -16,6 +16,8 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
@@ -71,7 +73,7 @@ public class IOPlugin extends AbstractUIPlugin {
 	
 	
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.kermeta.io";
+	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.io";
 	
 	// The logger for this plugin
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("IO");
@@ -420,7 +422,33 @@ public class IOPlugin extends AbstractUIPlugin {
 		return storer.getKermetaUnits();
 	}
 	
-	//private org.kermeta.io.util2.KermetaUnitHelper kermetaUnitHelper;
+	/**
+	 * This method logs an error message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logErrorMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, message, e));
+		// log4j message
+		internalLog.error(message, e);
+	}
+	
+	/**
+	 * This method logs a warning message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logWarningMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.WARNING, PLUGIN_ID, IStatus.WARNING, message, e));
+		// log4j message
+		internalLog.error(message, e);
+	}
 	
 }
 
