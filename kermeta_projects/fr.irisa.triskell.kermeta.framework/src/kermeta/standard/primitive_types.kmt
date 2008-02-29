@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.46 2008-02-28 12:13:15 dvojtise Exp $
+// $Id: primitive_types.kmt,v 1.47 2008-02-29 16:10:55 dvojtise Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -196,6 +196,24 @@ class Boolean inherits PrimitiveType
 	operation ~nand(other : Boolean) : Boolean is do
 		result := not ( self and other)
 	end
+	
+	/**
+	 * Short-circuit version of AND. This means that the function passed in parameter will be evaluated only if self is true
+	 * Note: we don't have a dedicated operator in the syntax for it yet so here is an example of use :
+	 *   self.andThen{v | functionThatReturnABoolean() }
+	 */
+	operation andThen(right : <Void->Boolean>) : Boolean is do
+		if self then result := right(void) else result := false end	
+	end	
+	
+	/**
+	 * Short-circuit version of OR. This means that the function passed in parameter will be evaluated only if self is false
+	 * Note: we don't have a dedicated operator in the syntax for it yet so here is an example of use :
+	 *   self.orElse{v | functionThatReturnABoolean() }
+	 */
+	operation orElse(right : <Void->Boolean>) : Boolean is do
+		if self then result := true else result := right(void) end	
+	end	
 	
 	/**
 	 * Returns 'true' or 'false', depending on self  value
