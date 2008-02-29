@@ -1,4 +1,4 @@
-/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.6 2008-02-28 17:56:46 dvojtise Exp $
+/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.7 2008-02-29 09:56:34 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -65,26 +65,53 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 	public String getHTMLDoc(EObject node)
 	{
 		MODE = DEFINITION_MODE;
-		String result = "<pre>";
+		StringBuilder result = new StringBuilder();
+		// add support for popups
+		result.append("<SCRIPT TYPE=\"text/javascript\">\n");
+		result.append("<!--\n");
+		result.append("function popup(mylink, windowname){\n");
+		result.append("	var w = 640/2, h = 480, cw = w/2, ch = h/2;\n");
+
+		result.append("	if (window.screen) {\n");
+		result.append("		w = Math.floor(screen.availWidth/2);\n");
+		result.append("		h = screen.availHeight - 50;\n");
+		//result.append("		h = Math.floor(screen.availHeight/3);\n");
+		//result.append("		cw = Math.floor((screen.availWidth-w)/2);\n");
+		//result.append("		ch = Math.floor((screen.availHeight-h)/2);\n");
+		result.append("	}\n");
+		result.append("	if (! window.focus)return true;\n");
+		result.append("		var href;\n");
+		result.append("		if (typeof(mylink) == 'string')\n");
+		result.append("			href=mylink;\n");
+		result.append("		else\n");
+		result.append("			href=mylink.href;\n");
+		result.append("		window.open(href, windowname, 'width='+w+',height='+h+',top=0,resizable=yes,scrollbars=yes');\n"); //height=600,
+		result.append("	return false;\n");
+		result.append("}\n");
+		
+		result.append("//-->\n");
+		result.append("</SCRIPT>\n");
+		
+		result.append("<pre>");
 		currentClassShortLevel = 0;
 		mainClass =  true;
 		if(node instanceof ClassDefinition)
-			result += htmlSummary((ClassDefinition)node);
+			result.append(htmlSummary((ClassDefinition)node));
 		if(node instanceof Package)
-			result += htmlSummary((Package)node);
+			result.append(htmlSummary((Package)node));
 
 		if(node instanceof Operation)
-			result += htmlSummary((Operation)node);
+			result.append(htmlSummary((Operation)node));
 
 		if(node instanceof Property)
-			result += htmlSummary((Property)node);
+			result.append(htmlSummary((Property)node));
 		
 		if ( node instanceof Constraint )
-			result += htmlConstraint( (Constraint) node );
+			result.append(htmlConstraint( (Constraint) node ));
 		
 		mainClass =  false;
-		result+="</pre>";
-		return  fixPlatformURL(fixImages(result));
+		result.append("</pre>");
+		return  fixPlatformURL(fixImages(result.toString()));
 	}
 	
 	
@@ -248,62 +275,62 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 	 */
 	public Object visit(ClassDefinition node) {
 		typedef = false;
-		String result="";
+		StringBuilder result= new StringBuilder();
 		if(mainClass){
 			String tags = ppTags(node.getTag());
-			result = getPrefix() + tags;
-			if(tags.length() != 0) result += CR ;
+			result.append(getPrefix() + tags);
+			if(tags.length() != 0) result.append(CR) ;
 		}
 		if(!classFlat && currentClassShortLevel < classShortLevel) return result;
-		result += getPrefix();
-		if (node.isIsAbstract()) result += "<b>abstract</b> ";
-		result += "<b>class</b> " + KMTHelper.getMangledIdentifier(node.getName());
+		result.append(getPrefix());
+		if (node.isIsAbstract()) result.append("<b>abstract</b> ");
+		result.append("<b>class</b> " + KMTHelper.getMangledIdentifier(node.getName()));
 		if (node.getTypeParameter().size() > 0) {
-			result += "&lt;";
-			result += ppTypeVariableDeclaration(node.getTypeParameter());
-			result += "&gt;";
+			result.append("&lt;");
+			result.append(ppTypeVariableDeclaration(node.getTypeParameter()));
+			result.append("&gt;");
 		}
 		if (node.getSuperType().size() > 0) {
-			result += CR + getPrefix() + "<b>inherits from</b> ";
-			Iterator itSuperType = node.getSuperType().iterator();
+			result.append(CR + getPrefix() + "<b>inherits from</b> ");
+			Iterator<Type> itSuperType = node.getSuperType().iterator();
 			while(itSuperType.hasNext()){
 				if(!classFlat){
-					result += CR + getPrefix() + prefixTab + "<b>class</b> ";
-					EObject o = (EObject)itSuperType.next();
-					result += this.accept(o);
+					result.append(CR + getPrefix() + prefixTab + "<b>class</b> ");
+					EObject o = itSuperType.next();
+					result.append(this.accept(o));
 				}
 				else{
-					result += CR;
-					EObject o = (EObject)itSuperType.next();
+					result.append(CR);
+					EObject o = itSuperType.next();
 					if(o instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 						fr.irisa.triskell.kermeta.language.structure.Class aFClass = (fr.irisa.triskell.kermeta.language.structure.Class)o;
 						currentClassShortLevel++;
 						pushPrefix();
 						boolean previousMainClass = mainClass;
 						mainClass =  false;
-						result += this.accept(aFClass.getTypeDefinition());
+						result.append(this.accept(aFClass.getTypeDefinition()));
 						mainClass = previousMainClass;
 						popPrefix();
 						currentClassShortLevel--;
 					}
 					else {
 						// not a class  => do not flatten inheritance
-						result += getPrefix() + "<b>class</b> " + this.accept(o);
+						result.append(getPrefix() + "<b>class</b> " + this.accept(o));
 					}
 				}
 			}
 		}
 		if(currentClassShortLevel < classShortLevel){
-			result += CR + getPrefix() + "{" + CR;
+			result.append(CR + getPrefix() + "{" + CR);
 			pushPrefix();
-			result += ppCRSeparatedNode(node.getOwnedAttribute());
-			result += ppCRSeparatedNode(node.getOwnedOperation());
+			result.append(ppCRSeparatedNode(node.getOwnedAttribute()));
+			result.append(ppCRSeparatedNode(node.getOwnedOperation()));
 			popPrefix();
-			result += getPrefix() + "}";		
+			result.append(getPrefix() + "}");		
 		}
 		
 		typedef = true;
-		return result;
+		return result.toString();
 	}
 
 	/* (non-Javadoc)
@@ -365,8 +392,8 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 	}
 
 	/**
-	 * replace the platfrom plugin url by the local file url 
-	 * 
+	 * replaces all occurences to the platfrom plugin url by the local file url 
+	 * Note: maybe this can be more precise and do that only in images src ?
 	 */
 	public String fixPlatformURL(String text){
 		String result;
@@ -390,6 +417,13 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 		return result;
 	}
 	
+	/**
+	 * do a little bit of magic in the image tags in order to :
+	 * - shrink the image into the user screen
+	 * - add a link to the full image as a popup
+	 * @param text : html text to be fixed
+	 * @return the fixed html
+	 */
 	public String fixImages(String text){
 		String result;
 		
@@ -402,8 +436,11 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 				Pattern subPattern = Pattern.compile("src=\"(.*)\"");
 				Matcher subMatcher = subPattern.matcher(orig);
 				subMatcher.find();
-				// use some javascript to make sure IE can resize the image, see http://www.svendtofte.com/code/max_width_in_ie/ 
-				String  replacement = "<a href=\"" + subMatcher.group(1) + "\" target=\"display_images\">" + orig.replaceFirst("img ", "img style=\"width:expression(document.body.clientWidth - 50); \" ") + "</a>";
+				// use some javascript to make sure IE can resize the image, 
+				// about resizing even in IE : see http://www.svendtofte.com/code/max_width_in_ie/
+				// about popup (better than target=_blank : see. http://www.htmlcodetutorial.com/linking/linking_famsupp_72.html
+				// target=\"_blank\"
+				String  replacement = "<a href=\"" + subMatcher.group(1) + "\" onClick=\"return popup(this, 'popup')\" >" + orig.replaceFirst("img ", "img style=\"width:expression(document.body.clientWidth - 50); \" ") + "</a>";
 			    myMatcher.appendReplacement(myStringBuffer, replacement);
 			} catch (Exception e) {
 			    myMatcher.appendReplacement(myStringBuffer, myMatcher.group());					
