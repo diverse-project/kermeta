@@ -1,6 +1,6 @@
 
 
-/*$Id: KmExporter.java,v 1.7 2008-02-14 07:13:20 uid21732 Exp $
+/*$Id: KmExporter.java,v 1.8 2008-02-29 15:47:57 dvojtise Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.core.helper.StringHelper;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
@@ -55,7 +56,7 @@ public class KmExporter {
 					resource.save( null );
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			IOPlugin.logErrorMessage("Error while saving " + fileName,e);
 		}
 		
 	}	
