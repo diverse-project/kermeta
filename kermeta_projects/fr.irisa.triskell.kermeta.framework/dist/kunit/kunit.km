@@ -3,31 +3,22 @@
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/kunit/@ownedTags.0" name="kunit" uri="http://www.kermeta.org/kermeta/kunit">
       <ownedTags value="/**&#xD;&#xA; * Contains the implementation of a unit test tool. This is a clone of&#xD;&#xA; * JUnit architecture.&#xD;&#xA; * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm&#xD;&#xA; *&#xD;&#xA; * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.&#xD;&#xA; *&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/kunit"/>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/InvalidTestCaseNameException/@ownedTags.0" name="InvalidTestCaseNameException" superType="//@packages.0/kunit/InvalidTestCaseNameException/@containedType.0 //@packages.0/kunit/InvalidTestCaseNameException/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/InvalidTestCaseNameException/@ownedTags.0" name="InvalidTestCaseNameException" superType="//@packages.0/kunit/InvalidTestCaseNameException/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * This exception is rose if there is a problem on the name of the test method&#xD;&#xA; */" object="//@packages.0/kunit/InvalidTestCaseNameException"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
         </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
-        </containedType>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/InvalidParameterException/@ownedTags.0" name="InvalidParameterException" superType="//@packages.0/kunit/InvalidParameterException/@containedType.0 //@packages.0/kunit/InvalidParameterException/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/InvalidParameterException/@ownedTags.0" name="InvalidParameterException" superType="//@packages.0/kunit/InvalidParameterException/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * This is for when we try to build a suite from a class that isn't a TestCase&#xD;&#xA; */" object="//@packages.0/kunit/InvalidParameterException"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
         </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
-        </containedType>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/Fallible/@ownedTags.0" name="Fallible" isAbstract="true" superType="//@packages.0/kunit/Fallible/@containedType.0 //@packages.0/kunit/Fallible/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/Fallible/@ownedTags.0" name="Fallible" isAbstract="true" superType="//@packages.0/kunit/Fallible/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * This is represents the aspect of tests that they may go wrong.&#xD;&#xA; * it defines the ability to define the conditions for success&#xD;&#xA; * (assertions) and the mechanism for recording that those &#xD;&#xA; * conditions have not been met.&#xD;&#xA; */" object="//@packages.0/kunit/Fallible"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="assert.km#//@packages.0/kunit/AbstractFallible"/>
-        </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedAttribute tag="//@packages.0/kunit/Fallible/rank/@ownedTags.0" name="rank" type="//@packages.0/kunit/Fallible/rank/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <ownedTags value="/**&#xD;&#xA;   * counter of assertions in the test method&#xD;&#xA;   */" object="//@packages.0/kunit/Fallible/rank"/>
@@ -1049,12 +1040,9 @@
           </pre>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/TestSuite/@ownedTags.0" name="TestSuite" superType="//@packages.0/kunit/TestSuite/@containedType.0 //@packages.0/kunit/TestSuite/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/TestSuite/@ownedTags.0" name="TestSuite" superType="//@packages.0/kunit/TestSuite/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * A TestSuite is a structured collection of tests, using the&#xD;&#xA; * composite pattern, all tests are runnable and have a log&#xD;&#xA; * In addition a suite can be populated automatically from a&#xD;&#xA; * test case class with one test case object for each test&#xD;&#xA; * method in the class.&#xD;&#xA; *  You can make a suite and populate it manually like this:&#xD;&#xA; *&#xD;&#xA; *  var suite : TestSuite init TestSuite.new.&#xD;&#xA; *  suite.tests.add(t1)&#xD;&#xA; *&#xD;&#xA; *  Alternatively you can populate a suite automatically from&#xD;&#xA; *  a class that inherits TestCase and which has several methods&#xD;&#xA; *  called test:&#xD;&#xA; *&#xD;&#xA; *  var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)&#xD;&#xA; */" object="//@packages.0/kunit/TestSuite"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Test"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
-        </containedType>
         <ownedAttribute tag="//@packages.0/kunit/TestSuite/tests/@ownedTags.0" name="tests" type="//@packages.0/kunit/TestSuite/tests/@containedType.0" isOrdered="true" upper="-1">
           <ownedTags value="/**&#xD;&#xA;  * The collection of tests which will be ran as the suite&#xD;&#xA;  */" object="//@packages.0/kunit/TestSuite/tests"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Test"/>
@@ -1272,32 +1260,41 @@
                     <containedType xsi:type="kermeta_language_structure:ProductType">
                       <type href="../language/structure.km#//@packages.0/language/structure/Class/ownedOperation/@containedType.0"/>
                     </containedType>
-                    <right href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+                    <right href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
                   </containedType>
                   <parameters name="o"/>
                   <body xsi:type="kermeta_language_behavior:Block">
-                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-                    <statement xsi:type="kermeta_language_behavior:CallFeature" name="and">
-                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-                      <parameters xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                    <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                    <statement xsi:type="kermeta_language_behavior:Conditional">
+                      <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                      <thenBody xsi:type="kermeta_language_behavior:Block">
                         <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
-                        <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/kunit/Fallible/assert/@body/@statement.1/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0" value="test"/>
-                        <target xsi:type="kermeta_language_behavior:CallFeature" name="substring">
-                          <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/substring/@containedType.0"/>
-                          <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/Fallible/number/@body/@statement.0/@containedType.0"/>
-                          <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/Fallible/number/@body/@statement.0/@containedType.0" value="4"/>
-                          <target xsi:type="kermeta_language_behavior:CallFeature" name="name">
-                            <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
-                            <target xsi:type="kermeta_language_behavior:CallVariable" name="o">
-                              <staticType href="../language/structure.km#//@packages.0/language/structure/Class/ownedOperation/@containedType.0"/>
+                        <statement xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                          <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                          <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/kunit/Fallible/assert/@body/@statement.1/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0" value="test"/>
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="substring">
+                            <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/substring/@containedType.0"/>
+                            <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/Fallible/number/@body/@statement.0/@containedType.0"/>
+                            <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/Fallible/number/@body/@statement.0/@containedType.0" value="4"/>
+                            <target xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                              <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="o">
+                                <staticType href="../language/structure.km#//@packages.0/language/structure/Class/ownedOperation/@containedType.0"/>
+                              </target>
+                              <staticProperty href="../kermeta_java.km#//@packages.0/language/structure/NamedElement/name"/>
                             </target>
-                            <staticProperty href="../kermeta_java.km#//@packages.0/language/structure/NamedElement/name"/>
+                            <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/substring"/>
                           </target>
-                          <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/substring"/>
-                        </target>
-                        <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
-                      </parameters>
-                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isGreaterOrEqual">
+                          <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
+                        </statement>
+                      </thenBody>
+                      <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/TestSuite/addAllTestCasesFrom/@body/@statement.1/@target/@parameters.0/@body/@statement.0/@elseBody/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:Class">
+                          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+                        </containedType>
+                        <statement xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/kunit/TestSuite/addAllTestCasesFrom/@body/@statement.1/@target/@parameters.0/@body/@statement.0/@elseBody/@containedType.0"/>
+                      </elseBody>
+                      <condition xsi:type="kermeta_language_behavior:CallFeature" name="isGreaterOrEqual">
                         <staticType href="../standard/collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
                         <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/Fallible/number/@body/@statement.0/@containedType.0" value="4"/>
                         <target xsi:type="kermeta_language_behavior:CallFeature" name="size">
@@ -1312,8 +1309,7 @@
                           <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/size"/>
                         </target>
                         <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Integer/isGreaterOrEqual"/>
-                      </target>
-                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/and"/>
+                      </condition>
                     </statement>
                   </body>
                 </parameters>
@@ -1418,32 +1414,38 @@
                     <containedType xsi:type="kermeta_language_structure:ProductType">
                       <type href="../language/structure.km#//@packages.0/language/structure/Class/ownedOperation/@getterBody/@containedType.0/@typeParamBinding.0/@containedType.0"/>
                     </containedType>
-                    <right href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+                    <right href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
                   </containedType>
                   <parameters name="o"/>
                   <body xsi:type="kermeta_language_behavior:Block">
-                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-                    <statement xsi:type="kermeta_language_behavior:CallFeature" name="and">
-                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-                      <parameters xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                    <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                    <statement xsi:type="kermeta_language_behavior:Conditional">
+                      <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                      <thenBody xsi:type="kermeta_language_behavior:Block">
                         <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
-                        <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/kunit/Fallible/assert/@body/@statement.1/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0" value="test"/>
-                        <target xsi:type="kermeta_language_behavior:CallFeature" name="substring">
-                          <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/substring/@containedType.0"/>
-                          <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/Fallible/number/@body/@statement.0/@containedType.0"/>
-                          <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/Fallible/number/@body/@statement.0/@containedType.0" value="4"/>
-                          <target xsi:type="kermeta_language_behavior:CallFeature" name="name">
-                            <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
-                            <target xsi:type="kermeta_language_behavior:CallVariable" name="o">
-                              <staticType href="../language/structure.km#//@packages.0/language/structure/Class/ownedOperation/@getterBody/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+                        <statement xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                          <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                          <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/kunit/Fallible/assert/@body/@statement.1/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0" value="test"/>
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="substring">
+                            <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/substring/@containedType.0"/>
+                            <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/Fallible/number/@body/@statement.0/@containedType.0"/>
+                            <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/Fallible/number/@body/@statement.0/@containedType.0" value="4"/>
+                            <target xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                              <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="o">
+                                <staticType href="../language/structure.km#//@packages.0/language/structure/Class/ownedOperation/@getterBody/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+                              </target>
+                              <staticProperty href="../kermeta_java.km#//@packages.0/language/structure/NamedElement/name"/>
                             </target>
-                            <staticProperty href="../kermeta_java.km#//@packages.0/language/structure/NamedElement/name"/>
+                            <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/substring"/>
                           </target>
-                          <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/substring"/>
-                        </target>
-                        <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
-                      </parameters>
-                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isGreaterOrEqual">
+                          <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
+                        </statement>
+                      </thenBody>
+                      <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/TestSuite/addAllTestCasesFrom/@body/@statement.1/@target/@parameters.0/@body/@statement.0/@elseBody/@containedType.0">
+                        <statement xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/kunit/TestSuite/addAllTestCasesFrom/@body/@statement.1/@target/@parameters.0/@body/@statement.0/@elseBody/@containedType.0"/>
+                      </elseBody>
+                      <condition xsi:type="kermeta_language_behavior:CallFeature" name="isGreaterOrEqual">
                         <staticType href="../standard/collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
                         <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/Fallible/number/@body/@statement.0/@containedType.0" value="4"/>
                         <target xsi:type="kermeta_language_behavior:CallFeature" name="size">
@@ -1458,8 +1460,7 @@
                           <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/size"/>
                         </target>
                         <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Integer/isGreaterOrEqual"/>
-                      </target>
-                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/and"/>
+                      </condition>
                     </statement>
                   </body>
                 </parameters>
@@ -1481,13 +1482,10 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/TestCase/@ownedTags.0" name="TestCase" isAbstract="true" superType="//@packages.0/kunit/TestCase/@containedType.0 //@packages.0/kunit/TestCase/@containedType.1 //@packages.0/kunit/TestCase/@containedType.2">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/TestCase/@ownedTags.0" name="TestCase" isAbstract="true" superType="//@packages.0/kunit/TestCase/@containedType.0 //@packages.0/kunit/TestCase/@containedType.1">
         <ownedTags value="/**&#xD;&#xA; * A test case comprises one or more test methods plus&#xD;&#xA; * setUp and tearDown that build and destroy their test harness.&#xD;&#xA; * An instance of a subclass of TestCase should have its&#xD;&#xA; * testMethodName set to the name of one of its operations&#xD;&#xA; * which should be called whe the test is run. You can do this&#xD;&#xA; * yourself:&#xD;&#xA; *&#xD;&#xA; * var testCase : TestCase init MyTestCaseClass.new.setTestMethodName(&quot;testSomething&quot;)&#xD;&#xA; *&#xD;&#xA; * Alternatively if your TestCase Class has many methods whose&#xD;&#xA; * name begins with 'test' you can create a set of instaces already&#xD;&#xA; * set up with their testMethodName using the addAllTestCasesFrom&#xD;&#xA; * operation on TestSuite&#xD;&#xA; */" object="//@packages.0/kunit/TestCase"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Test"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Fallible"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
-        </containedType>
         <ownedAttribute tag="//@packages.0/kunit/TestCase/__testMethodName/@ownedTags.0" name="__testMethodName" type="//@packages.0/kunit/TestCase/__testMethodName/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <ownedTags value="/**&#xD;&#xA;  * the name of the method which corresponds to the test case in the test class&#xD;&#xA;  */" object="//@packages.0/kunit/TestCase/__testMethodName"/>
           <containedType xsi:type="kermeta_language_structure:Class">

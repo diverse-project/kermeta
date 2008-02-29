@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::interpreter|kermeta::standard|kermeta::utils|kermeta::language::structure|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="interpreter" nsURI="http://www.kermeta.org/kermeta/interpreter" nsPrefix="interpreter">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Contains a set of classes whose function is to evaluate a kermeta &#xD;&#xA; * expression written as a string.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png&quot;>&#xD;&#xA; */"/>
@@ -117,19 +117,15 @@
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ParseError">
+      <eClassifiers xsi:type="ecore:EClass" name="ParseError" eSuperTypes="/1/interpreter/KermetaError">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Kermeta error for parsing problems&#xD;&#xA; */"/>
         </eAnnotations>
-        <eSuperTypes href="#/1/interpreter/KermetaError"/>
-        <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TypeError">
+      <eClassifiers xsi:type="ecore:EClass" name="TypeError" eSuperTypes="/1/interpreter/KermetaError">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Type errors in a code written in Kermeta&#xD;&#xA; */"/>
         </eAnnotations>
-        <eSuperTypes href="#/1/interpreter/KermetaError"/>
-        <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
       </eClassifiers>
     </eSubpackages>
   </ecore:EPackage>
@@ -148,34 +144,27 @@
     <references href="reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::persistence|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="persistence" nsURI="http://www.kermeta.org/kermeta/persistence" nsPrefix="persistence">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Contains the classes that handle the serialization of models, in particular&#xD;&#xA; * EMF models.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/persistence_package.png&quot;>&#xD;&#xA; */"/>
@@ -14,7 +14,6 @@
           <details key="documentation" value="/**&#xD;&#xA; * The main class that handle a loaded/saved model.&#xD;&#xA; * There are a few important things to note for the developer :&#xD;&#xA; * &#xD;&#xA; * - load a Resource : this loads a Collection of instances corresponding to the&#xD;&#xA; *   objects in the loaded model. If the Collection of instances is empty, than &#xD;&#xA; *  a ResourceLoadException is raised&#xD;&#xA; *&#xD;&#xA; * - save a Resource : this saves the collection of instances in a new file. This can&#xD;&#xA; *   be correctly done if and only if the instances saved are conform to the metamodel&#xD;&#xA; *   linked to this resource (this link does not need to be explicit. It is normally retrieved&#xD;&#xA; *   through the EMF model -- see Java wrapping &quot;Resource.java&quot;).&#xD;&#xA; * &#xD;&#xA; * - add/remove an instance to the Resource : this adds an element in the resource. It cannot&#xD;&#xA; *   be &quot;simply&quot; added because of the following potential errors :&#xD;&#xA; *&#xD;&#xA; *   - The object added is not conform to the metamodel -> Error&#xD;&#xA; *   - The object was already added in the resource -> Not a real error : we do nothing&#xD;&#xA; *   - The object to remove does not exist -> redirect to a collection-specific error&#xD;&#xA; *   - The object to remove is attached to an object in the collection -> &quot;dependency-violation&quot; exception?&#xD;&#xA;&#xD;&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../standard/collections.ecore#/1/standard/Set"/>
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="instances">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self&#xA;end"/>
@@ -95,12 +94,10 @@
           <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="EMFResource">
+      <eClassifiers xsi:type="ecore:EClass" name="EMFResource" eSuperTypes="/1/persistence/Resource">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Extension of the Resource class definition that is specific to EMF Repository.&#xD;&#xA; * User is not supposed to directly create it. Otherwise it will not be correctly initialized&#xD;&#xA; * You must To create one &#xD;&#xA; */"/>
         </eAnnotations>
-        <eSuperTypes href="#/1/persistence/Resource"/>
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="saveWithNewURI">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, new_uri, metaModelURI, &quot;EMF&quot;, self, false)&#xA;end"/>
@@ -147,12 +144,10 @@
           </eParameters>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="KMResource">
+      <eClassifiers xsi:type="ecore:EClass" name="KMResource" eSuperTypes="/1/persistence/Resource">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * NOT IMPLEMENTED&#xD;&#xA; */"/>
         </eAnnotations>
-        <eSuperTypes href="#/1/persistence/Resource"/>
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="save">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;end"/>
@@ -254,12 +249,10 @@
           <eType xsi:type="ecore:EClass" href="../kermeta_java.ecore#/1/language/structure/Property"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="EMFRepository">
+      <eClassifiers xsi:type="ecore:EClass" name="EMFRepository" eSuperTypes="/1/persistence/Repository">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Repository that stores and manages resources that come from EMF&#xD;&#xA; */"/>
         </eAnnotations>
-        <eSuperTypes href="#/1/persistence/Repository"/>
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="createResource">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var nUri : kermeta::standard::String&#xA;&#x9;nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)&#xA;&#x9;if not (resources.collect{r | do&#xA;&#x9;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)&#xA;&#x9;&#x9;end}.contains(nUri)) then&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceCreateException init kermeta::exceptions::ResourceCreateException.new&#xA;&#x9;&#x9;e.message := ((((((&quot;Trying to create a resource already existing at &quot;) + (uri))) + (&quot;.\n&quot;))) + (&quot;Remove existing resource from repository first, or use \&quot;getResource\&quot; operation.&quot;))&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
@@ -287,12 +280,10 @@
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="KMRepository">
+      <eClassifiers xsi:type="ecore:EClass" name="KMRepository" eSuperTypes="/1/persistence/Repository">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Repository that stores and manages XMI files representing Kermeta models&#xD;&#xA; */"/>
         </eAnnotations>
-        <eSuperTypes href="#/1/persistence/Repository"/>
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="createResource">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := void&#xA;end"/>
@@ -311,8 +302,10 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
@@ -323,7 +316,6 @@
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/utils.ecore#/0"/>
@@ -339,15 +331,16 @@
     <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/2"/>

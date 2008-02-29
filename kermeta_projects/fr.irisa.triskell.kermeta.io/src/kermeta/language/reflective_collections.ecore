@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|structure.kmt|"/>
     <details key="using" value="kermeta::language|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="language" nsURI="http://www.kermeta.org/kermeta/language" nsPrefix="language">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Contains the implementation of Kermeta reflective collections.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png&quot;>&#xD;&#xA; */"/>
@@ -15,7 +15,6 @@
         </eAnnotations>
         <eTypeParameters name="G"/>
         <eSuperTypes href="../standard/collections.ecore#/1/standard/Set"/>
-        <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
         <eOperations name="add">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(self, element)&#xA;end"/>
@@ -48,7 +47,6 @@
         <eTypeParameters name="G"/>
         <eSuperTypes href="../standard/collections.ecore#/1/standard/OrderedSet"/>
         <eSuperTypes href="#/1/language/ReflectiveCollection"/>
-        <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
         <eOperations name="add">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;super(element)&#xA;end"/>
@@ -109,6 +107,7 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
     <references href="../standard/collections.ecore#/2"/>
@@ -117,7 +116,6 @@
     <references href="../standard/primitive_types.ecore#/2"/>
     <references href="structure.ecore#/0"/>
     <references href="structure.ecore#/1"/>
-    <references href="structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
@@ -125,13 +123,11 @@
     <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
     <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/2"/>
@@ -140,13 +136,10 @@
     <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
     <references href="dynamic_expression.ecore#/2"/>

@@ -26,10 +26,9 @@
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           </ownedAttribute>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/Expression/@ownedTags.0" name="Expression" isAbstract="true" superType="//@packages.0/language/behavior/Expression/@containedType.0 //@packages.0/language/behavior/Expression/@containedType.1">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/Expression/@ownedTags.0" name="Expression" isAbstract="true" superType="//@packages.0/language/behavior/Expression/@containedType.0">
           <ownedTags name="documentation" value="/**&#xA; * The base class for every entity used to define a behavior in operation body.&#xA; */" object="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <ownedAttribute tag="//@packages.0/language/behavior/Expression/staticType/@ownedTags.0" name="staticType" type="//@packages.0/language/behavior/Expression/staticType/@containedType.0" isOrdered="true" upper="1">
             <ownedTags name="documentation" value="/**&#xA; * Type of the Expression (set by type checking)&#xA; */" object="//@packages.0/language/behavior/Expression/staticType"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
@@ -373,10 +372,9 @@
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Enumeration"/>
           </ownedAttribute>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/TypeVariableBinding/@ownedTags.0" name="TypeVariableBinding" superType="//@packages.0/language/structure/TypeVariableBinding/@containedType.0 //@packages.0/language/structure/TypeVariableBinding/@containedType.1">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/TypeVariableBinding/@ownedTags.0" name="TypeVariableBinding" superType="//@packages.0/language/structure/TypeVariableBinding/@containedType.0">
           <ownedTags name="documentation" value="/**&#xA; * Definition of a binding between a TypeVariable and a Type&#xA; */" object="//@packages.0/language/structure/TypeVariableBinding"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <ownedAttribute tag="//@packages.0/language/structure/TypeVariableBinding/variable/@ownedTags.0" name="variable" type="//@packages.0/language/structure/TypeVariableBinding/variable/@containedType.0" isOrdered="true" lower="1" upper="1">
             <ownedTags name="documentation" value="/**&#xA; * TypeVariable&#xA; */" object="//@packages.0/language/structure/TypeVariableBinding/variable"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeVariable"/>
@@ -487,9 +485,8 @@
             <ownedTags name="documentation" value="/**&#xA; * Name of this named element&#xA; */" object="//@packages.0/language/structure/NamedElement/name"/>
           </ownedAttribute>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Package/@ownedTags.0" name="Package" superType="//@packages.0/language/structure/Package/@containedType.0 //@packages.0/language/structure/Package/@containedType.1">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Package/@ownedTags.0" name="Package" superType="//@packages.0/language/structure/Package/@containedType.0">
           <ownedTags name="documentation" value="/**&#xA; * Package in kermeta. Each kermeta model must have a root package. &#xA; */" object="//@packages.0/language/structure/Package"/>
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/NamedElement"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeDefinitionContainer"/>
           <ownedAttribute tag="//@packages.0/language/structure/Package/nestedPackage/@ownedTags.0" name="nestedPackage" type="//@packages.0/language/structure/Package/nestedPackage/@containedType.0" isOrdered="true" upper="-1" opposite="//@packages.0/language/structure/Package/nestingPackage" isComposite="true">
             <ownedTags name="documentation" value="/**&#xA; * Nested Packages contained by the Package&#xA; */" object="//@packages.0/language/structure/Package/nestedPackage"/>

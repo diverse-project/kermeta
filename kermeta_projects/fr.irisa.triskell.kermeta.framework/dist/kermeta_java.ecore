@@ -37,7 +37,7 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="/1/language/structure/TypeContainer /1/language/structure/Object">
+        <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="/1/language/structure/TypeContainer">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * The base class for every entity used to define a behavior in operation body.&#xA; */"/>
           </eAnnotations>
@@ -505,7 +505,7 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="TypeVariableBinding" eSuperTypes="/1/language/structure/TypeContainer /1/language/structure/Object">
+        <eClassifiers xsi:type="ecore:EClass" name="TypeVariableBinding" eSuperTypes="/1/language/structure/TypeContainer">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Definition of a binding between a TypeVariable and a Type&#xA; */"/>
           </eAnnotations>
@@ -698,7 +698,7 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="/1/language/structure/NamedElement /1/language/structure/TypeDefinitionContainer">
+        <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="/1/language/structure/TypeDefinitionContainer">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Package in kermeta. Each kermeta model must have a root package. &#xA; */"/>
           </eAnnotations>

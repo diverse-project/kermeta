@@ -4,7 +4,7 @@
     <details key="require" value="primitive_types.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::exceptions|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="standard" nsURI="http://www.kermeta.org/kermeta/standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Defines Collection types &#xD;&#xA; * &lt;img src=&quot;./figures/collections_view.png&quot;>&#xD;&#xA; */"/>
@@ -330,13 +330,11 @@
           </eAnnotations>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Set">
+      <eClassifiers xsi:type="ecore:EClass" name="Set" eSuperTypes="/1/standard/Collection">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * A Set is a non-ordered collection that contains distinct elements&#xD;&#xA; * (with regards to the G.equals(Object) operation)&#xD;&#xA; */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
-        <eSuperTypes href="#/1/standard/Collection"/>
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="add">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if not (self.contains(element)) then&#xA;&#x9;&#x9;super(element)&#xA;&#xA;&#x9;end&#xA;end"/>
@@ -502,13 +500,11 @@
           </eParameters>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Bag">
+      <eClassifiers xsi:type="ecore:EClass" name="Bag" eSuperTypes="/1/standard/Collection">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Bag is a concrete non-ordered Collection allowing duplicates&#xD;&#xA; */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
-        <eSuperTypes href="#/1/standard/Collection"/>
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="equals">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Bag&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;var selfAsSet : kermeta::standard::Set&lt;G> init self.asSet&#xA;&#x9;&#x9;&#x9;isEqual := selfAsSet.equals(collection.asSet)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
@@ -673,13 +669,11 @@
           </eParameters>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="OrderedCollection" abstract="true">
+      <eClassifiers xsi:type="ecore:EClass" name="OrderedCollection" abstract="true" eSuperTypes="/1/standard/Collection">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * An OrderedCollection is the root abstract class for all ordered Collections.&#xD;&#xA; */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
-        <eSuperTypes href="#/1/standard/Collection"/>
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="addAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if ((((index) &lt; (0))) or (((index) > (size)))) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.addAt(self, index, element)&#xA;end"/>
@@ -739,14 +733,11 @@
           </eParameters>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="OrderedSet">
+      <eClassifiers xsi:type="ecore:EClass" name="OrderedSet" eSuperTypes="/1/standard/Set /1/standard/OrderedCollection">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * An OrderedSet is a Set that contained ordered distinct elements&#xD;&#xA; */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
-        <eSuperTypes href="#/1/standard/Set"/>
-        <eSuperTypes href="#/1/standard/OrderedCollection"/>
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="add" ordered="false">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;super(element)&#xA;end"/>
@@ -827,14 +818,11 @@
           </eParameters>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Sequence">
+      <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="/1/standard/Bag /1/standard/OrderedCollection">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * A Sequence is an OrderedCollection of elements allowing duplicates&#xD;&#xA; */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
-        <eSuperTypes href="#/1/standard/Bag"/>
-        <eSuperTypes href="#/1/standard/OrderedCollection"/>
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="equals">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
@@ -924,54 +912,42 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="primitive_types.ecore#/0"/>
     <references href="primitive_types.ecore#/1"/>
-    <references href="primitive_types.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
-    <references href="java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

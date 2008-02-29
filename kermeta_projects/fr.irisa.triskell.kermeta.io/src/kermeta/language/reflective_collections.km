@@ -3,7 +3,7 @@
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/language/@ownedTags.0" name="language" uri="http://www.kermeta.org/kermeta/language">
       <ownedTags value="/**&#xD;&#xA; * Contains the implementation of Kermeta reflective collections.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/language"/>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/ReflectiveCollection/@ownedTags.0" name="ReflectiveCollection" superType="//@packages.0/language/ReflectiveCollection/@containedType.0 //@packages.0/language/ReflectiveCollection/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/ReflectiveCollection/@ownedTags.0" name="ReflectiveCollection" superType="//@packages.0/language/ReflectiveCollection/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * ReflectiveCollection is a special collection that is used to define the type &#xD;&#xA; * of attributes that have an upper multiplicity > 1 in a class. It indeed handles&#xD;&#xA; * the update of opposite property if such an attribute has got one.&#xD;&#xA; */" object="//@packages.0/language/ReflectiveCollection"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class">
@@ -11,9 +11,6 @@
             <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
           </typeParamBinding>
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
-        </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/language/ReflectiveCollection/add/@ownedTags.0" name="add" type="//@packages.0/language/ReflectiveCollection/add/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * Overrides kermeta::standard::Set&lt;G>.add(G)&#xD;&#xA;  * Add an element to this collection and update its opposite property if it exists.&#xD;&#xA;  */" object="//@packages.0/language/ReflectiveCollection/add"/>
@@ -65,7 +62,7 @@
           <superOperation href="../standard/collections.km#//@packages.0/standard/Collection/clear"/>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/ReflectiveSequence/@ownedTags.0" name="ReflectiveSequence" superType="//@packages.0/language/ReflectiveSequence/@containedType.0 //@packages.0/language/ReflectiveSequence/@containedType.1 //@packages.0/language/ReflectiveSequence/@containedType.2">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/ReflectiveSequence/@ownedTags.0" name="ReflectiveSequence" superType="//@packages.0/language/ReflectiveSequence/@containedType.0 //@packages.0/language/ReflectiveSequence/@containedType.1">
         <ownedTags value="/**&#xD;&#xA; * ReflectiveSequence is an ordered ReflectiveCollection.&#xD;&#xA; */" object="//@packages.0/language/ReflectiveSequence"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class">
@@ -76,9 +73,6 @@
         </containedType>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/ReflectiveCollection">
           <typeParamBinding variable="//@packages.0/language/ReflectiveCollection/G" type="//@packages.0/language/ReflectiveSequence/G"/>
-        </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/language/ReflectiveSequence/add/@ownedTags.0" name="add" type="//@packages.0/language/ReflectiveSequence/add/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/ReflectiveCollection/add">
           <ownedTags value="/**&#xD;&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.add(G)&#xD;&#xA;  */" object="//@packages.0/language/ReflectiveSequence/add"/>

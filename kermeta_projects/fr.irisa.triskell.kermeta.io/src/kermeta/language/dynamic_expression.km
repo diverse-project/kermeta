@@ -506,19 +506,13 @@
           <ownedTags value="/**&#xD;&#xA;  * Error message&#xD;&#xA;  */" object="//@packages.0/interpreter/KermetaError/message"/>
         </ownedAttribute>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/interpreter/ParseError/@ownedTags.0" name="ParseError" superType="//@packages.0/interpreter/ParseError/@containedType.0 //@packages.0/interpreter/ParseError/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/interpreter/ParseError/@ownedTags.0" name="ParseError" superType="//@packages.0/interpreter/ParseError/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * Kermeta error for parsing problems&#xD;&#xA; */" object="//@packages.0/interpreter/ParseError"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/interpreter/KermetaError"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
-        </containedType>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/interpreter/TypeError/@ownedTags.0" name="TypeError" superType="//@packages.0/interpreter/TypeError/@containedType.0 //@packages.0/interpreter/TypeError/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/interpreter/TypeError/@ownedTags.0" name="TypeError" superType="//@packages.0/interpreter/TypeError/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * Type errors in a code written in Kermeta&#xD;&#xA; */" object="//@packages.0/interpreter/TypeError"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/interpreter/KermetaError"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
-        </containedType>
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>

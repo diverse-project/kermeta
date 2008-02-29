@@ -310,20 +310,14 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/AssertionFailedError/@ownedTags.0" name="AssertionFailedError" superType="//@packages.0/kunit/AssertionFailedError/@containedType.0 //@packages.0/kunit/AssertionFailedError/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/AssertionFailedError/@ownedTags.0" name="AssertionFailedError" superType="//@packages.0/kunit/AssertionFailedError/@containedType.0">
         <ownedTags value="/** AssertionViolatedException are raised when assertions are violated */" object="//@packages.0/kunit/AssertionFailedError"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
         </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
-        </containedType>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Assert" superType="//@packages.0/kunit/Assert/@containedType.0 //@packages.0/kunit/Assert/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Assert" superType="//@packages.0/kunit/Assert/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/AbstractFallible"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
-        </containedType>
         <ownedOperation tag="//@packages.0/kunit/Assert/assert/@ownedTags.0" name="assert" type="//@packages.0/kunit/Assert/assert/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assert">
           <ownedTags value="/** Fails if condition is false */" object="//@packages.0/kunit/Assert/assert"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>

@@ -1287,14 +1287,11 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Set/@ownedTags.0" name="Set" superType="//@packages.0/standard/Set/@containedType.0 //@packages.0/standard/Set/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Set/@ownedTags.0" name="Set" superType="//@packages.0/standard/Set/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * A Set is a non-ordered collection that contains distinct elements&#xD;&#xA; * (with regards to the G.equals(Object) operation)&#xD;&#xA; */" object="//@packages.0/standard/Set"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Collection">
           <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/Set/G"/>
-        </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/standard/Set/add/@ownedTags.0" name="add" type="//@packages.0/standard/Set/add/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Collection/add">
           <ownedTags value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.add(G)&#xD;&#xA;  * Adds elt to the Set if it is not already contained by the&#xD;&#xA;  * Set, does nothing otherwise&#xD;&#xA;  */" object="//@packages.0/standard/Set/add"/>
@@ -2250,14 +2247,11 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Bag/@ownedTags.0" name="Bag" superType="//@packages.0/standard/Bag/@containedType.0 //@packages.0/standard/Bag/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Bag/@ownedTags.0" name="Bag" superType="//@packages.0/standard/Bag/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * Bag is a concrete non-ordered Collection allowing duplicates&#xD;&#xA; */" object="//@packages.0/standard/Bag"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Collection">
           <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/Bag/G"/>
-        </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/standard/Bag/equals/@ownedTags.0" name="equals" type="//@packages.0/standard/Bag/equals/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * Overrides Object.equals(elt : Object)&#xD;&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;  * current Bag&#xD;&#xA;  */" object="//@packages.0/standard/Bag/equals"/>
@@ -3273,14 +3267,11 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/OrderedCollection/@ownedTags.0" name="OrderedCollection" isAbstract="true" superType="//@packages.0/standard/OrderedCollection/@containedType.0 //@packages.0/standard/OrderedCollection/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/OrderedCollection/@ownedTags.0" name="OrderedCollection" isAbstract="true" superType="//@packages.0/standard/OrderedCollection/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * An OrderedCollection is the root abstract class for all ordered Collections.&#xD;&#xA; */" object="//@packages.0/standard/OrderedCollection"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Collection">
           <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/OrderedCollection/G"/>
-        </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/standard/OrderedCollection/addAt/@ownedTags.0" name="addAt" type="//@packages.0/standard/OrderedCollection/addAt/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * Adds element in the OrderedCollection at rank index&#xD;&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;  * larger than the size of the OrderedCollection&#xD;&#xA;  */" object="//@packages.0/standard/OrderedCollection/addAt"/>
@@ -3771,7 +3762,7 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/OrderedSet/@ownedTags.0" name="OrderedSet" superType="//@packages.0/standard/OrderedSet/@containedType.0 //@packages.0/standard/OrderedSet/@containedType.1 //@packages.0/standard/OrderedSet/@containedType.2">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/OrderedSet/@ownedTags.0" name="OrderedSet" superType="//@packages.0/standard/OrderedSet/@containedType.0 //@packages.0/standard/OrderedSet/@containedType.1">
         <ownedTags value="/**&#xD;&#xA; * An OrderedSet is a Set that contained ordered distinct elements&#xD;&#xA; */" object="//@packages.0/standard/OrderedSet"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Set">
@@ -3779,9 +3770,6 @@
         </containedType>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/OrderedCollection">
           <typeParamBinding variable="//@packages.0/standard/OrderedCollection/G" type="//@packages.0/standard/OrderedSet/G"/>
-        </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/standard/OrderedSet/add/@ownedTags.0" name="add" type="//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1" upper="1" superOperation="//@packages.0/standard/Set/add">
           <ownedTags value="/**&#xD;&#xA;  * See Set&lt;G>.add(G)&#xD;&#xA;  */" object="//@packages.0/standard/OrderedSet/add"/>
@@ -4178,7 +4166,7 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Sequence/@ownedTags.0" name="Sequence" superType="//@packages.0/standard/Sequence/@containedType.0 //@packages.0/standard/Sequence/@containedType.1 //@packages.0/standard/Sequence/@containedType.2">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Sequence/@ownedTags.0" name="Sequence" superType="//@packages.0/standard/Sequence/@containedType.0 //@packages.0/standard/Sequence/@containedType.1">
         <ownedTags value="/**&#xD;&#xA; * A Sequence is an OrderedCollection of elements allowing duplicates&#xD;&#xA; */" object="//@packages.0/standard/Sequence"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Bag">
@@ -4186,9 +4174,6 @@
         </containedType>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/OrderedCollection">
           <typeParamBinding variable="//@packages.0/standard/OrderedCollection/G" type="//@packages.0/standard/Sequence/G"/>
-        </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/standard/Sequence/equals/@ownedTags.0" name="equals" type="//@packages.0/standard/Sequence/equals/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/standard/OrderedCollection/equals">
           <ownedTags value="/**&#xD;&#xA;  * Overrides OrderedCollection&lt;G>.equals(Object)&#xD;&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;  * current Sequence &#xD;&#xA;  */" object="//@packages.0/standard/Sequence/equals"/>
