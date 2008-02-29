@@ -1,6 +1,6 @@
 @testOperation "yes"
 @mainClass "testBoolean::TestBoolean"
-@mainOperation "testoptat"
+@mainOperation "main"
 
 package testBoolean;
 require kermeta
@@ -12,6 +12,12 @@ using kermeta::standard
 // "and" is prioritary to "or"
 class TestBoolean inherits kermeta::kunit::TestCase 
 {
+	/** entry point when directly run (outside of daily test suites) */
+	operation main() : Void is do
+    	var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(TestBoolean)
+		tr.printTestResult
+    end
 
 	operation testAssertTrue() is do
 		
