@@ -1,6 +1,6 @@
 
 
-/*$Id: SetTypesPass.java,v 1.3 2008-02-25 16:01:05 ftanguy Exp $
+/*$Id: SetTypesPass.java,v 1.4 2008-02-29 16:23:03 dvojtise Exp $
 * Project : org.kermeta.io.loader
 * File : 	SetTypesPass.java
 * License : EPL
@@ -61,7 +61,7 @@ public class SetTypesPass extends KermetaASTNodeVisitor implements ILoadingActio
 	}
 
 	private void reportTypeSettingError(NamedElement element, ASTNode node) {
-		String message = "Unable to set the type of " + KermetaModelHelper.NamedElement.qualifiedName(element) + ".";
+		String message = "Unable to set the type of " + KermetaModelHelper.NamedElement.qualifiedName(element) + ". (Did you forgot a using statement ?)";
 		//message += "\nThe type " + node.getText()toString() + " could not be found.";
 		kermetaUnit.error(message, element);
 	}
