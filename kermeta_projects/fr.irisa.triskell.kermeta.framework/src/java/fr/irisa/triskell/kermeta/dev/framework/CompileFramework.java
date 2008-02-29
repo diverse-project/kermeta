@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.17 2008-02-14 07:13:37 uid21732 Exp $
+/* $Id: CompileFramework.java,v 1.18 2008-02-29 13:27:22 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.framework
 * File : CompileFramework.java
 * License : EPL
@@ -13,12 +13,10 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 
 /**
