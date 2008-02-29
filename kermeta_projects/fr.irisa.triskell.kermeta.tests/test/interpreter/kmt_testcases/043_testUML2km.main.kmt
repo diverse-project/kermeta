@@ -5,8 +5,8 @@ package testUML2km;
 
 require kermeta 
 require "input_test_models/Uml2.km"
-require "input_test_models/ecore.km"
-using uml2
+
+using uml
 using ecore
 using kermeta::kunit
 
@@ -29,7 +29,7 @@ class Main inherits kermeta::kunit::TestCase {
 		stdio.write("getting UML2 package...")
 		
 		var p : kermeta::language::structure::Package
-		p ?= kermeta::language::structure::Class.typeDefinition.container
+		p ?= uml::Class.typeDefinition.container
 		
 		stdio.writeln("got "+ p.name + " package")
 		
@@ -42,7 +42,7 @@ class Main inherits kermeta::kunit::TestCase {
 		stdio.writeln("done")
 		
 		stdio.writeln("There are " + i.toString + " types in UML2")
-		assertTrueWithMsg(i==243,"looking for 243 types in UML2 found " + i.toString)
+		assertTrueWithMsg(i==263,"looking for 263 types in UML2 found " + i.toString)
 	end
 	
 	operation printDoc() is do
