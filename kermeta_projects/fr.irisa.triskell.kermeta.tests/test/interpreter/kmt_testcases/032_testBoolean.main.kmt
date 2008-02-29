@@ -5,7 +5,10 @@
 package testBoolean;
 require kermeta
 
-// This class tests the logical operators on Booleans
+using kermeta::standard
+
+// This class tests the logical operators and operations on Booleans
+// also checks the priorities between operators
 // "and" is prioritary to "or"
 class TestBoolean inherits kermeta::kunit::TestCase 
 {
@@ -121,5 +124,59 @@ class TestBoolean inherits kermeta::kunit::TestCase
 	operation testfxorf() : Void is do
 		assert(false.xor(false) == false)
 	end
+	
+	// ---- tests of short circuit version of and and or
+	
+	/** operation that should not be run */	
+	operation mustNotRun(b : Boolean) : Boolean is do
+		assert(false)
+		result := b
+	end
+	
+	operation mustRun(b : Boolean) : Boolean is do
+		isMustRunCalled := true
+		result := b
+	end
+	
+	/** attribute used to check if the mustRun operation has been called */
+	attribute isMustRunCalled : Boolean
+	
+	operation testTrueAndThenTrue() : Void is do
+		isMustRunCalled := false
+		assert(true.andThen{v | mustRun(true)  }== true)
+		assert(isMustRunCalled)
+	end
+	operation testTrueAndThenFalse() : Void is do
+		isMustRunCalled := false
+		assert(true.andThen{v | mustRun(false) } == false)
+		assert(isMustRunCalled)
+	end
+	operation testFalseAndThenTrue() : Void is do		
+		assert(false.andThen{v | mustNotRun(true) } == false)		
+	end
+	operation testFalseAndThenFalse() : Void is do		
+		assert(false.andThen{v | mustNotRun(false) } == false)		
+	end
+	
+	operation testTrueOrElseTrue() : Void is do
+		isMustRunCalled := false
+		assert(true.orElse{v | mustNotRun(true)  }== true)
+	end
+	operation testTrueOrElseFalse() : Void is do
+		isMustRunCalled := false
+		assert(true.orElse{v | mustNotRun(false) } == true)
+	end
+	operation testFalseOrElseTrue() : Void is do	
+		isMustRunCalled := false	
+		assert(false.orElse{v | mustRun(true) } == true)	
+		assert(isMustRunCalled)	
+	end
+	operation testFalseOrElseFalse() : Void is do	
+		isMustRunCalled := false	
+		assert(false.orElse{v | mustRun(false) } == false)	
+		assert(isMustRunCalled)	
+	end
+	
+	
 	
 }
