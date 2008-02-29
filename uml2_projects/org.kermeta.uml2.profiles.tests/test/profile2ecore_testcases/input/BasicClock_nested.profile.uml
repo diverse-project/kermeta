@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_TfHs0J0FEdyQn82cfiZ14g" name="BasicClock_nesting" metaclassReference="_YXVp4J0OEdyQn82cfiZ14g">
   <eAnnotations xmi:id="_ffEEcdWLEdyHBbqElWVSZQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_S6QCkNWXEdyHBbqElWVSZQ" name="BasicClock_nesting" nsURI="http:///schemas/BasicClock_nesting/_S6GRkNWXEdyHBbqElWVSZQ/1" nsPrefix="BasicClock_nesting">
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_S6QCkdWXEdyHBbqElWVSZQ" name="Brand">
+        <eAnnotations xmi:id="_S6QCktWXEdyHBbqElWVSZQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_vI490J0IEdyQn82cfiZ14g"/>
+        <eLiterals xmi:id="_S6QCk9WXEdyHBbqElWVSZQ" name="Casio"/>
+        <eLiterals xmi:id="_S6QClNWXEdyHBbqElWVSZQ" name="Citizen" value="1"/>
+        <eLiterals xmi:id="_S6QCldWXEdyHBbqElWVSZQ" name="Rolex" value="2"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_S6QCltWXEdyHBbqElWVSZQ" name="AbstractWatch">
+        <eAnnotations xmi:id="_S6QCl9WXEdyHBbqElWVSZQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_9mhIMJ0MEdyQn82cfiZ14g"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_S6QCmNWXEdyHBbqElWVSZQ" name="brand" ordered="false" lowerBound="1" eType="_S6QCkdWXEdyHBbqElWVSZQ" defaultValueLiteral=""/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_S6QCmtWXEdyHBbqElWVSZQ" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_S6QCnNWXEdyHBbqElWVSZQ" name="int" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_S6QCntWXEdyHBbqElWVSZQ" name="ConcreteWatch">
+        <eAnnotations xmi:id="_S6QCn9WXEdyHBbqElWVSZQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_32eWYLq_EdyKwbC4XusSPw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_S6QCoNWXEdyHBbqElWVSZQ" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_S6QCotWXEdyHBbqElWVSZQ" name="userManual" ordered="false" upperBound="-1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_ffEEctWLEdyHBbqElWVSZQ" name="BasicClock_nesting" nsURI="http:///schemas/BasicClock_nesting/_ffEEcNWLEdyHBbqElWVSZQ/0" nsPrefix="BasicClock_nesting">
       <eClassifiers xmi:type="ecore:EEnum" xmi:id="_ffEEc9WLEdyHBbqElWVSZQ" name="Brand">
         <eAnnotations xmi:id="_ffEEdNWLEdyHBbqElWVSZQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_vI490J0IEdyQn82cfiZ14g"/>
@@ -79,6 +106,33 @@
   <packagedElement xmi:type="uml:Package" xmi:id="_e4OvANS8EdymXdS0ZjZQLg" name="DidierClock">
     <packagedElement xmi:type="uml:Profile" xmi:id="_B6btgNS9EdymXdS0ZjZQLg" name="DidierProfile_nested" metamodelReference="_plhXINTHEdymXdS0ZjZQLg">
       <eAnnotations xmi:id="_cbatQdWLEdyHBbqElWVSZQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <contents xmi:type="ecore:EPackage" xmi:id="_YbF08dWXEdyHBbqElWVSZQ" name="DidierProfile_nested" nsURI="http://BasicClock_nesting.DidierClock/schemas/DidierProfile_nested/_YbF08NWXEdyHBbqElWVSZQ/1" nsPrefix="DidierProfile_nested">
+          <eClassifiers xmi:type="ecore:EClass" xmi:id="_YbF08tWXEdyHBbqElWVSZQ" name="DidierWatch" eSuperTypes="_YbF0-dWXEdyHBbqElWVSZQ">
+            <eAnnotations xmi:id="_YbF089WXEdyHBbqElWVSZQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_24trgNTHEdymXdS0ZjZQLg"/>
+            <eAnnotations xmi:id="_YbF09NWXEdyHBbqElWVSZQ" source="duplicates">
+              <contents xmi:type="ecore:EReference" xmi:id="_YbF09dWXEdyHBbqElWVSZQ" name="base_Class" ordered="false" lowerBound="1">
+                <eAnnotations xmi:id="_YbF09tWXEdyHBbqElWVSZQ" source="redefines" references="_YbF0_dWXEdyHBbqElWVSZQ"/>
+                <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+              </contents>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xmi:type="ecore:EClass" xmi:id="_YbF0-dWXEdyHBbqElWVSZQ" name="BasicClock_nesting_AbstractWatch">
+            <eAnnotations xmi:id="_YbF0-tWXEdyHBbqElWVSZQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_9mhIMJ0MEdyQn82cfiZ14g"/>
+            <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_YbF0-9WXEdyHBbqElWVSZQ" name="brand" ordered="false" lowerBound="1" eType="_YbF1AdWXEdyHBbqElWVSZQ" defaultValueLiteral=""/>
+            <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_YbF0_dWXEdyHBbqElWVSZQ" name="base_Class" ordered="false" lowerBound="1">
+              <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+            </eStructuralFeatures>
+            <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_YbF0_9WXEdyHBbqElWVSZQ" name="int" ordered="false" lowerBound="1">
+              <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xmi:type="ecore:EEnum" xmi:id="_YbF1AdWXEdyHBbqElWVSZQ" name="BasicClock_nesting_Brand">
+            <eAnnotations xmi:id="_YbF1AtWXEdyHBbqElWVSZQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_vI490J0IEdyQn82cfiZ14g"/>
+            <eLiterals xmi:id="_YbF1A9WXEdyHBbqElWVSZQ" name="Casio"/>
+            <eLiterals xmi:id="_YbF1BNWXEdyHBbqElWVSZQ" name="Citizen" value="1"/>
+            <eLiterals xmi:id="_YbF1BdWXEdyHBbqElWVSZQ" name="Rolex" value="2"/>
+          </eClassifiers>
+        </contents>
         <contents xmi:type="ecore:EPackage" xmi:id="_cbkeQNWLEdyHBbqElWVSZQ" name="DidierProfile_nested" nsURI="http://BasicClock_nesting.DidierClock/schemas/DidierProfile_nested/_cbatQNWLEdyHBbqElWVSZQ/0" nsPrefix="DidierProfile_nested">
           <eClassifiers xmi:type="ecore:EClass" xmi:id="_cbkeQdWLEdyHBbqElWVSZQ" name="DidierWatch" eSuperTypes="_cbkeSNWLEdyHBbqElWVSZQ">
             <eAnnotations xmi:id="_cbkeQtWLEdyHBbqElWVSZQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_24trgNTHEdymXdS0ZjZQLg"/>
