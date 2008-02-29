@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.7 2008-02-14 07:13:42 uid21732 Exp $
+/*$Id: KermetaTextEditor.java,v 1.8 2008-02-29 16:13:57 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -83,9 +83,9 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
     	try {
 			FoldingStrategyHelper.updateFoldingPositions(this, getDocumentProvider().getDocument(getEditorInput()).get() );
 		} catch (RecognitionException e) {
-			e.printStackTrace();
+			TexteditorPlugin.logWarningMessage("Error while updateFoldingPositions of " + getFile().getFullPath().toString() , e);
 		} catch (TokenStreamException e) {
-			e.printStackTrace();
+			TexteditorPlugin.logWarningMessage("Error while updateFoldingPositions of " + getFile().getFullPath().toString() , e);
 		}
 		
     	/*
@@ -102,15 +102,15 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
     				else
     	    			initializeInterest();
     	    	} catch (KermetaIOFileNotFoundException e) {
-					e.printStackTrace();
+					TexteditorPlugin.logErrorMessage("Error while opening " + getFile().getFullPath().toString() , e);
 				} catch (URIMalformedException e) {
-					e.printStackTrace();
+					TexteditorPlugin.logErrorMessage("Error while opening " + getFile().getFullPath().toString() , e);
 				} catch (IdNotFoundException e) {
-					e.printStackTrace();
+					TexteditorPlugin.logErrorMessage("Error while opening " + getFile().getFullPath().toString() , e);
 				} catch (NotRegisteredURIException e) {
-					e.printStackTrace();
+					TexteditorPlugin.logErrorMessage("Error while opening " + getFile().getFullPath().toString() , e);
 				} catch (Throwable e) {
-					e.printStackTrace();
+					TexteditorPlugin.logErrorMessage("Error while opening " + getFile().getFullPath().toString() , e);
 				}
     	    	return Status.OK_STATUS;
     		}
@@ -300,11 +300,11 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 					KermetaUnit newKermetaUnit = KermetaUnitChecker.check( getFile() );
 					KermetaUnitHost.getInstance().updateValue(getFile(), newKermetaUnit);
 				} catch (NotRegisteredURIException e) {
-					e.printStackTrace();
+					TexteditorPlugin.logErrorMessage("Error while saving " + getFile().getFullPath().toString() , e);
 				} catch (URIMalformedException e) {
-					e.printStackTrace();
+					TexteditorPlugin.logErrorMessage("Error while saving " + getFile().getFullPath().toString() , e);
 				} catch (IdNotFoundException e) {
-					e.printStackTrace();
+					TexteditorPlugin.logErrorMessage("Error while saving " + getFile().getFullPath().toString() , e);
 				}
 				break;
 			default :
