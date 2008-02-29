@@ -6,15 +6,41 @@
 
 <body>
 <!--
-$Id: history.html,v 1.28 2008-02-26 17:02:02 dvojtise Exp $
+$Id: history.html,v 1.29 2008-02-29 16:14:45 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
+<h2 class="Heading">V1.1.0 </h2>
+<h3>New features</h3>
+<ul>
+	<li>Improvement of the speed of the typechecker (x2).</li>
+	<li>Addition of "Clean" and "Typecheck this file" button in the toolbar in order to help with some trouble of the typechecker.</li>
+	<li>Improvement of UML MDK for profiles support.</li>
+	<li>#4365; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=4365&group_id=32&atid=208">internal error should be reported into the error log</a></li>
+	<li>#139; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=139&group_id=32&atid=208">Implement "orElse" and "andThen"</a>. Partial support : the operations are available on boolean, but no dedicated surface syntax has been deployed yet.</li>
+</ul>
+
+<h3>Bug fixed</h3>
+<ul>
+	<li>#311; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=311&group_id=32&atid=205">Difference between kermeta::reflection and kermeta::language::structure</a></li>
+	<li>#907; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=907&group_id=32&atid=205">No line indication for a "no null" constraint violation</a></li>
+	<li>#3327; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=3327&group_id=32&atid=205">loading files with dependencies regression</a></li>
+	<li>#4574; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=4574&group_id=32&atid=205">Wrong icons in outline for aspect</a></li>
+	<li>#4768; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=4768&group_id=32&atid=205">Many parse error are not reported anymore</a></li>
+	<li>#5000; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=5000&group_id=32&atid=205">popup error from the editor when editing those files</a></li>
+	<li>#5047; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=5047&group_id=32&atid=205">	Import of the same class from different location error is sometime too strict</a></li>
+	<li>#5152; <a href="http://gforge.inria.fr/tracker/?func=detail&atid=205&aid=5152&group_id=32">The merger seem to drop the body of my operation</a></li>
+</ul>
+
 <h2 class="Heading">V1.0.0 (29/01/2008)</h2>
 <h3>New features</h3>
 <ul>
+	<li>Removal of the "kermeta::reflexion" package. This greatly simplifies the reflexivity without loss thanks to the use of aspect on Kermeta framework itself. 
+		If some of your code were using it, you simply have to replace all "kermeta::reflexion" by ""kermeta::language::structure". 
+	</li>
 	<li>Added dedicated keyword "aspect" in order to replace the old @aspect "true" syntax. The old syntax is still supported for backward compatibility.</li>
 	<li>Deployment of the first version of a UML MDK for basic support of UML and its profiles. (contributions are welcome)</li>
+	
 </ul>
 
 <h3>Bug fixed</h3>
@@ -28,6 +54,14 @@ AKA V1.0.0 Release candidate
 <ul>
 	<li>Support of OCL syntax (via a transformation to KMT).</li>
 	<li>Refactoring of Kermeta Metamodel in order to have a better support of aspects.</li>
+	<li>#957; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=957&group_id=32&atid=208">support of platform:// url in the require statement</a></li>
+	<li>#1578; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=1578&group_id=32&atid=208">add a open with kermeta graphical editor directly on km files</a></li>
+	<li>#3342; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=3342&group_id=32&atid=208">Km2Ecore roundtrip: support of Ecore generics</a></li>
+	<li>#3674; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=3674&group_id=32&atid=208">Choice of handling primitive types in Kermeta->Ecore wizard</a></li>
+	<li>#3872; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=3872&group_id=32&atid=208">	(Kmt/Km)2Ecore action dedicated to metamodel structural part</a></li>
+	<li>#3682; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=3682&group_id=32&atid=208">require statement completion</a></li>
+	<li>#4051; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=4051&group_id=32&atid=208">Avaibility of EMF Registering/Unregistering actions</a></li>
+	<li>#4063; <a href="http://gforge.inria.fr/tracker/?func=detail&aid=4063&group_id=32&atid=208">a copy nsuri from the "EMF registered view"</a></li>
 </ul>
 <h3>Bug fixed</h3>
 <ul>
@@ -256,7 +290,7 @@ by
    	<li>#1017; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1017&group_id=32&atid=205">KUnit fails to intercept some exceptions</a></li>
    	<li>#1069; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1069&group_id=32&atid=205">ecore2kmt quickfixe doesn't succeed to find a problem in case of multiple inheritance</a></li>
 
-</li>			
+			
 </ul>
 <h2 class="Heading">V0.2.2 (22/06/2006)</h2>
 <h3>New features</h3>
