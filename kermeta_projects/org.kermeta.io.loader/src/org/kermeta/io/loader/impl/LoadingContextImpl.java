@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoadingContextImpl.java,v 1.2 2008-02-14 07:12:47 uid21732 Exp $
+ * $Id: LoadingContextImpl.java,v 1.3 2008-03-03 09:29:57 cfaucher Exp $
  */
 package org.kermeta.io.loader.impl;
 
@@ -160,6 +160,10 @@ public class LoadingContextImpl extends EObjectImpl implements LoadingContext {
 				loaderToUse = LoaderPlugin.getDefault().getNewKMLoader();
 			else if ( extension.equals("ecore") )
 				loaderToUse = LoaderPlugin.getDefault().getNewEcoreLoader();
+			else {
+				// We are in the case with an unknown extension or an URI
+				loaderToUse = LoaderPlugin.getDefault().getNewEcoreLoader();
+			}
 		
 			if ( loaderToUse != null ) {
 				loaderToUse.setUri(uri);
