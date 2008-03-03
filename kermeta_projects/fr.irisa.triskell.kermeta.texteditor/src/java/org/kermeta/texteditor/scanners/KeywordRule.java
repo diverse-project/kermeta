@@ -1,4 +1,4 @@
-/* $Id: KeywordRule.java,v 1.4 2008-02-14 14:45:29 bmorin Exp $
+/* $Id: KeywordRule.java,v 1.5 2008-03-03 09:32:44 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KeywordRule.java
 * License : EPL
@@ -184,7 +184,7 @@ public class KeywordRule implements IRule {
 					IToken token = getToken(word);
 					if ( token != null ) {
 						c = scanner.read();
-						if ( (c == ICharacterScanner.EOF) || Character.isWhitespace(c) || (c == '.')  || c == ':' || c == '{' || c == '=' || c == '(' || c ==')' ) {
+						if ( (c == ICharacterScanner.EOF) || Character.isWhitespace(c) || (c == '.')  || c == ':' || c == '{' || c == '=' || c == '(' || c ==')' || c ==',' || c =='+' || c =='-' ) {
 							scanner.unread();
 							return token;
 						} else
