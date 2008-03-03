@@ -1,4 +1,4 @@
-/*$Id: CreateDependentDependencies.java,v 1.2 2008-02-14 07:13:46 uid21732 Exp $
+/*$Id: CreateDependentDependencies.java,v 1.3 2008-03-03 15:08:49 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	CreateDependentDependencies.java
 * License : EPL
@@ -25,10 +25,13 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
+import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 
 public class CreateDependentDependencies implements IAction {
 
+	@SuppressWarnings("unchecked")
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {			
+		List<Unit> l= null;
 		try {
 			monitor.setTaskName("Create Dependencies");
 			
@@ -44,8 +47,7 @@ public class CreateDependentDependencies implements IAction {
 			 * Getting the list of units to reload.
 			 * 
 			 */
-			@SuppressWarnings("unchecked")
-			List<Unit> l = (List<Unit>) args.get("context");
+			l = (List<Unit>) args.get("context");
 			
 			for ( Unit u : l ) {
 				String uri = "platform:/resource" + u.getValue();
@@ -83,7 +85,13 @@ public class CreateDependentDependencies implements IAction {
 				}
 			}
 						
-		} finally {
+		} catch(Exception e){
+			if(l == null)
+				KPMPlugin.logErrorMessage("Error getting 'context' in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);
+			else
+				KPMPlugin.logErrorMessage("Error in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);
+			
+		}  finally {
 			
 			monitor.worked(1);
 			

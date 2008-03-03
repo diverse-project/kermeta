@@ -1,6 +1,6 @@
 
 
-/*$Id: AddMarkers.java,v 1.2 2008-02-14 07:13:46 uid21732 Exp $
+/*$Id: AddMarkers.java,v 1.3 2008-03-03 15:08:49 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -25,12 +25,15 @@ import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 
 public class AddMarkers implements IAction {
 
+	@SuppressWarnings("unchecked")
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
-
+		
+		List<Unit> l = null;
 		try {
 			monitor.subTask("Adding Markers");
 			
@@ -39,9 +42,7 @@ public class AddMarkers implements IAction {
 			 * Getting the list of units to reload.
 			 * 
 			 */
-			@SuppressWarnings("unchecked")
-			List<Unit> l = (List<Unit>) args.get("context");
-			
+			l = (List<Unit>) args.get("context");
 			for ( Unit u : l ) {
 				String uri = "platform:/resource" + u.getValue();
 				KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(uri);
@@ -53,7 +54,14 @@ public class AddMarkers implements IAction {
 					// The kermeta unit has not been found.
 					// That is strange maybe should warn.
 				}
+				
 			}
+			
+		} catch(Exception e){
+			if(l == null)
+				KPMPlugin.logErrorMessage("Error getting 'context' in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);
+			else
+				KPMPlugin.logErrorMessage("Error in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);
 			
 		} finally {
 			monitor.worked(1);
