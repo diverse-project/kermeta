@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
+/* $Id: EditorTextHover.java,v 1.3 2008-03-03 09:43:59 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -144,7 +144,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 				String ftags = kdocPrettyPrint( p.getTag() );
 				return NamedElementHelper.getMangledQualifiedName( p )+ "\n" + ftags;	        	
 	        } else
-	        	System.out.println();
+	    		TexteditorPlugin.internalLog.debug("no recognized object : hover will ignore it");
 		}
 		
 		
@@ -235,7 +235,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	    }
 	    else // return the CallFeature itself
 	    {
-	        System.err.println("the definition : " + feature.getName() + feature);
+			TexteditorPlugin.internalLog.debug("the definition : " + feature.getName() + feature);
 	        return pp.accept(feature).toString();
 	    }
 	} 

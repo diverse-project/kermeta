@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaFastPartitioner.java,v 1.3 2008-02-14 07:13:42 uid21732 Exp $
+/*$Id: KermetaFastPartitioner.java,v 1.4 2008-03-03 09:46:10 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaFastPartioner.java
 * License : EPL
@@ -17,6 +17,8 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.rules.FastPartitioner;
 import org.eclipse.jface.text.rules.IPartitionTokenScanner;
+
+import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 public class KermetaFastPartitioner extends FastPartitioner {
 
@@ -55,7 +57,7 @@ public class KermetaFastPartitioner extends FastPartitioner {
 	            e.printStackTrace();
 	        }
 	    }
-	    System.out.print(buffer);
+		TexteditorPlugin.internalLog.debug(buffer);
 	}
 	
 }
