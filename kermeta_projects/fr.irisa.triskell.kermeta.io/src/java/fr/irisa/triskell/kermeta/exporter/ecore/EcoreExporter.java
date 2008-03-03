@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.16 2008-02-14 07:13:20 uid21732 Exp $
+/*$Id: EcoreExporter.java,v 1.17 2008-03-03 09:52:26 dvojtise Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -48,7 +48,6 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 public class EcoreExporter {
@@ -332,7 +331,7 @@ public class EcoreExporter {
 		
 		loadings.put( kermetaUnit, true );
 		
-		System.out.println( "pass 1 : " + kermetaUnit.getUri() );
+		IOPlugin.internalLog.debug("pass 1 : " + kermetaUnit.getUri() );
 		
 		Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
 		while ( iterator.hasNext() ) {
@@ -362,7 +361,7 @@ public class EcoreExporter {
 		
 		loadings.put( kermetaUnit, true );
 		
-		System.out.println( "pass 2 : " + kermetaUnit.getUri() );
+		IOPlugin.internalLog.debug("pass 2 : " + kermetaUnit.getUri() );
 		
 		Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
 		while ( iterator.hasNext() ) {
@@ -387,7 +386,7 @@ public class EcoreExporter {
 		
 		loadings.put( kermetaUnit, true );
 		
-		System.out.println( "pass 3 : " + kermetaUnit.getUri() );
+		IOPlugin.internalLog.debug("pass 3 : " + kermetaUnit.getUri() );
 		
 		Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
 		while ( iterator.hasNext() ) {
@@ -575,7 +574,7 @@ public class EcoreExporter {
 			EAnnotation eAnnotation = (EAnnotation) eObj;
 			//for(EAnnotation eAnnotation : eModelElement.getEAnnotations()) {
 				if(isKermetaEAnnotations(eAnnotation) ) {
-					System.out.println("eAnnotation " + eAnnotation.getSource() + " ______--------______");
+					IOPlugin.internalLog.debug("eAnnotation " + eAnnotation.getSource() + " ______--------______");
 					if(eAnnotation.eContainer() != null) {
 						((EModelElement) eAnnotation.eContainer()).getEAnnotations().remove(eAnnotation);
 					} else {
@@ -585,11 +584,11 @@ public class EcoreExporter {
 			//}
 		} else {
 			for(EObject eObj2 : eObj.eContents()) {
-				System.out.println("eAnnotation eAnnotation eAnnotation 3");
 				removeKermetaEAnnotations(eObj2);
 			}
 		}
 	}
+	
 	
 	public Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, EObject> getKm2ecoremapping() {
 		return km2ecoremapping;
