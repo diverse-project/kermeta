@@ -31,7 +31,7 @@ class Main
     
     operation loadClassModel() : ModelingUnit is do             
    		var repository : EMFRepository init EMFRepository.new             
-   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.km", "http://www.kermeta.org/kermeta" )
+   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.km", "http://www.kermeta.org/kermeta/1_0_0//kermeta" )
        
        stdio.writeln("Loading resource...")
        resource.load()      
