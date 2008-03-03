@@ -1,0 +1,16 @@
+@mainClass "comp_javaKeyword_test001::Main"
+@mainOperation "main"
+
+package comp_javaKeyword_test001;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main {
+
+	operation main() : String is do
+		var return : String init "comp_javaKeyword_test001"
+		result := return
+	end
+}

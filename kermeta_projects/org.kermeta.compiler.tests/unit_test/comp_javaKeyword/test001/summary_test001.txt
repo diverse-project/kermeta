@@ -1,0 +1,2 @@
+<para>All the identifier that refers a Java keyword should be prefixed by an underscore (_).</para>
+<para>The list of Java keyword is available at: http://java.sun.com/docs/books/tutorial/java/nutsandbolts/_keywords.html</para>
