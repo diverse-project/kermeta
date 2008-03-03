@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.1 2007-11-21 13:16:13 ftanguy Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.2 2008-03-03 09:57:54 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: EPL
@@ -45,6 +45,8 @@ import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.dialogs.DialogUtil;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
+
+import fr.irisa.triskell.kermeta.ui.KermetaUIPlugin;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -194,8 +196,7 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 		}
 		catch (IOException e)
 		{
-		    System.out.println("Warning : "+e.getMessage());
-		    //e.printStackTrace();
+			KermetaUIPlugin.logErrorMessage("Warning : "+e.getMessage(), e);
 		}
 		
 		monitor.worked(1);
