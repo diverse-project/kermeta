@@ -154,8 +154,7 @@ public class LoaderPlugin extends Plugin {
 			if ( ! framework.isIndirectlyErroneous() ) {
 				KermetaTypeChecker typechecker = new KermetaTypeChecker(framework);
 					typechecker.checkUnit();
-			}
-			System.err.println(KermetaUnitHelper.getAllErrors(framework));
+			}			
 			if ( ! framework.isIndirectlyErroneous() ) {
 				KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(framework);
 				constraintchecker.checkUnit();
