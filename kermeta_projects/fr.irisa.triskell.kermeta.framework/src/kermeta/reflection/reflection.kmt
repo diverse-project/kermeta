@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.63 2008-02-14 07:13:38 uid21732 Exp $
+/* $Id: reflection.kmt,v 1.64 2008-03-03 13:39:58 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -16,7 +16,7 @@
  * Contains all the abstract classes used in the reflection mechanism. Implements the <b>derived
  * properties</b> contained in the classes; declares the abstract operations.
  * Concrete implementation is in kermeta.language.structure.
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/reflection_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/reflection_package.png"/>
  */
   @uri "http://www.kermeta.org/kermeta/reflection"
 package kermeta::reflection;

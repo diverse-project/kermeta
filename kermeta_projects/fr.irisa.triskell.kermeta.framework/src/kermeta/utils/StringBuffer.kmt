@@ -17,7 +17,7 @@ using kermeta::standard
  * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long
  * string concatenation.<br>
  * <b>Only work on Strings</b>
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png"/>
  */
 class StringBuffer{
 	/**

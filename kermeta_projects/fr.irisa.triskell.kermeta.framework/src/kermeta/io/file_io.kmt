@@ -1,6 +1,6 @@
 /**
  * Contains file input/output related classes. 
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png"/>
  */
 @uri "http://www.kermeta.org/kermeta/io"
 package kermeta::io;
@@ -22,7 +22,7 @@ using kermeta::exceptions
  
 /**
  * Implementation of simple helpers to read ans write text files
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png"/>
  */
 class FileIO
 {

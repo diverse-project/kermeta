@@ -11,7 +11,7 @@
  * Contains special classes (Hashtable, Stack) that are not contained in Kermeta
  * metamodel
  * 
- * <img src="./figures/utils_package.png">
+ * <img src="./figures/utils_package.png"/>
  */
  @uri "http://www.kermeta.org/kermeta/utils"
 package kermeta::utils;
@@ -24,7 +24,7 @@ using kermeta::standard
  * An implementation of hashtable
  * This implementation is for speed optimisation it cannot be serialized. 
  * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png"/>
  */
 class Hashtable<K, V>
 {

@@ -1,7 +1,7 @@
 /**
  * Contains the classes that handle the serialization of models, in particular
  * EMF models.
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/persistence_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/persistence_package.png"/>
  */
   @uri "http://www.kermeta.org/kermeta/persistence"
 package kermeta::persistence;
@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.48 2008-02-14 07:13:37 uid21732 Exp $
+ * $Id: resource.kmt,v 1.49 2008-03-03 13:39:58 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt

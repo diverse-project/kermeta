@@ -1,7 +1,7 @@
 /**
  * Contains a set of classes whose function is to evaluate a kermeta 
  * expression written as a string.
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png"/>
  */
    @uri "http://www.kermeta.org/kermeta/interpreter"
 package kermeta::interpreter;
@@ -24,7 +24,7 @@ using kermeta::language::structure
  *   var params : Hashtable<String, Object> init Hashtable<String, Object>.new
  *   params.put("a", "hello world!")
  *   de.execute(void, params)
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/dynamic_expression_view.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/dynamic_expression_view.png"/>
  */
 class DynamicExpression
 {

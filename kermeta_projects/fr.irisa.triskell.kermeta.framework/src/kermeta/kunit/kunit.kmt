@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.36 2008-02-29 16:11:47 dvojtise Exp $
+/* $Id: kunit.kmt,v 1.37 2008-03-03 13:39:58 dvojtise Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -12,7 +12,7 @@
  *
  * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.
  *
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
  */
 @uri "http://www.kermeta.org/kermeta/kunit"
 package kermeta::kunit;

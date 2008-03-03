@@ -1,6 +1,6 @@
 /** 
  * Contains the definition of a Kermeta exception and a few basic exceptions.
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png"/>
  */
 @uri "http://www.kermeta.org/kermeta/exceptions"
 package kermeta::exceptions;
@@ -11,7 +11,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.19 2007-12-07 01:54:53 fmunoz Exp $
+ * $Id: exceptions.kmt,v 1.20 2008-03-03 13:39:58 dvojtise Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt

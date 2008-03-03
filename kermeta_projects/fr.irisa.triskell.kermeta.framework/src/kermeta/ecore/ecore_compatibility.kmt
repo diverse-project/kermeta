@@ -1,4 +1,4 @@
-/* $Id: ecore_compatibility.kmt,v 1.3 2007-12-07 01:54:53 fmunoz Exp $
+/* $Id: ecore_compatibility.kmt,v 1.4 2008-03-03 13:39:58 dvojtise Exp $
  * Creation date: Aug, 2007
  * License: EPL
  * Copyright: INRIA
@@ -8,7 +8,7 @@
 
 /** 
  * Contains the definition of a Kermeta classes used for compatibility with Ecore 
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png"/>
  */
 @uri "http://www.kermeta.org/kermeta/ecore"
 package kermeta::ecore;
@@ -17,7 +17,7 @@ require "../Standard.kmt"
 /**
  * Kermeta representation of EMF EFeatureMapEntry
  * it contains the name of the required feature and the actual value
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png"/>
  */
 class EFeatureMapEntry
 {
