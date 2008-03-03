@@ -1,4 +1,4 @@
-/* $Id: EMFCompareModel.java,v 1.2 2008-02-18 09:25:51 cfaucher Exp $
+/* $Id: EMFCompareModel.java,v 1.3 2008-03-03 10:58:08 cfaucher Exp $
  * Project   : org.kermeta.emfcompare
  * File      : EMFCompareModel.java
  * License   : EPL
@@ -159,4 +159,15 @@ public class EMFCompareModel {
         return instances.getFactory().getMemory().voidINSTANCE;
     }
 	
+    /**
+     * used only for testing
+     * @param args
+     */
+    public static void main(java.lang.String[] args) {
+    	System.out.println("hello");
+    	java.lang.String l = "kermeta/Attempt01.ecore";
+		java.lang.String r = "kermeta/Attempt02.ecore";
+		System.out.println(getDiffModel(l, r).toString());
+		System.out.println(getMatchModel(l, r).toString());
+    }
 }
