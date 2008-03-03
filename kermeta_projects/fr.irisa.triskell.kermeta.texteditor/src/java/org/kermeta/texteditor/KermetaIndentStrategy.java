@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaIndentStrategy.java,v 1.1 2007-12-17 14:05:08 ftanguy Exp $
+/*$Id: KermetaIndentStrategy.java,v 1.2 2008-03-03 09:46:53 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaIndentStrategy.java
 * License : EPL
@@ -18,8 +18,7 @@ import org.eclipse.jface.text.IDocument;
 
 public class KermetaIndentStrategy implements IAutoEditStrategy {
 
-	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
-		System.out.println();
+	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {		
 		if ( command.text.length() > 1 ) {
 			int index = command.text.length();
 		}
