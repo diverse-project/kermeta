@@ -1,4 +1,4 @@
-/* $Id: OptionalEMFValidator.java,v 1.2 2007-08-08 12:21:17 dtouzet Exp $
+/* $Id: OptionalEMFValidator.java,v 1.3 2008-03-04 18:42:29 cfaucher Exp $
  * Project   : Kermeta 
  * File      : OptionalEMFValidator.java
  * License   : EPL
@@ -11,6 +11,7 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.service.IBatchValidator;
@@ -19,10 +20,9 @@ import org.eclipse.emf.validation.service.ModelValidationService;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 
-/** this class is used to make suire we cannot have NoClassDefFoundError when trying to validate
+/**
+ * this class is used to make sure we cannot have NoClassDefFoundError when trying to validate
  * even if the validation plugin isn't installed or deployed
- * 
- *
  */
 public class OptionalEMFValidator {
 	
@@ -42,7 +42,8 @@ public class OptionalEMFValidator {
 				.newValidator(EvaluationMode.BATCH);
 			validator.setIncludeLiveConstraints(true);
 	
-			for(Object eobj : res.getContents()){
+			for(Object obj : res.getContents()){
+				EObject eobj = (EObject) obj;
 				try{
 					IStatus status = validator.validate(eobj);
 					internalLog.debug("Validating EObject with EMF validator");
