@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.17 2008-03-03 09:52:26 dvojtise Exp $
+/*$Id: EcoreExporter.java,v 1.18 2008-03-04 10:13:17 cfaucher Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -250,13 +249,6 @@ public class EcoreExporter {
 									resources.get(importedUnit).getContents());
 
 					resource.getContents().add(annotation);
-
-					// FIXME CF under development
-					/*if ( exporterOptions.isRemoveKermetaEAnnotations ) {
-						for(EObject eObj : resource.getContents()) {
-							EcoreExporter.removeKermetaEAnnotations(eObj);
-						}
-					}*/
 					
 					resource.save(null);
 				}
@@ -565,34 +557,6 @@ public class EcoreExporter {
 		return false;
 	}
 	
-	/**
-	 * Recursive method
-	 * @param eModelElement
-	 */
-	private static void removeKermetaEAnnotations(EObject eObj) {
-		if(eObj instanceof EAnnotation) {
-			EAnnotation eAnnotation = (EAnnotation) eObj;
-			//for(EAnnotation eAnnotation : eModelElement.getEAnnotations()) {
-				if(isKermetaEAnnotations(eAnnotation) ) {
-					IOPlugin.internalLog.debug("eAnnotation " + eAnnotation.getSource() + " ______--------______");
-					if(eAnnotation.eContainer() != null) {
-						((EModelElement) eAnnotation.eContainer()).getEAnnotations().remove(eAnnotation);
-					} else {
-						eAnnotation.eResource().getContents().remove(eAnnotation);
-					}
-				}
-			//}
-		} else {
-			for(EObject eObj2 : eObj.eContents()) {
-				removeKermetaEAnnotations(eObj2);
-			}
-		}
-	}
-	
-	
-	public Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, EObject> getKm2ecoremapping() {
-		return km2ecoremapping;
-	}
 }
 
 
