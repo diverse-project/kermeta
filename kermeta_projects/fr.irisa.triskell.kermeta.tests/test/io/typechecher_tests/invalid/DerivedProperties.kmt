@@ -1,0 +1,57 @@
+/* $Id: DerivedProperties.kmt,v 1.1 2008-03-04 13:32:55 vmahe Exp $
+ * Creation date: February 04, 2008
+ * License:	EPL
+ * Copyright:
+ * Authors:
+ *     Vincent Mahe
+ */
+
+package derived_properties;
+
+require kermeta
+using kermeta::standard
+
+class Example {
+	
+	// read only => no setter
+	property readonly p2 : Integer
+		setter is do
+			stdio.writeln("")
+		end
+	
+	// write only => no getter
+	property writeonly p3 : Integer
+		getter is do
+			stdio.writeln("")
+		end
+	
+	// * multiplicity => no setter
+	property p4 : Integer
+		setter is do
+			stdio.writeln("")
+		end
+	
+	// * multiplicity => no read/write right (must be read-only)
+	property p5 : Integer[1..*]
+	
+	// * multiplicity => no write right (must be read-only)
+	property writeonly p6 : Integer[1..*]
+	
+	// * multiplicity => no write right (must be read-only)
+	property writeonly p7 : Integer[1..*]
+		setter is do
+			stdio.writeln("")
+		end
+	
+	// * multiplicity => no read/write right (must be read-only)
+	property p8 : Set<Integer>
+	
+	// * multiplicity => no write right (must be read-only)
+	property writeonly p9 : Set<Integer>
+	
+	// * multiplicity => no write right (must be read-only)
+	property writeonly p10 : Set<Integer>
+		setter is do
+			stdio.writeln("")
+		end
+}

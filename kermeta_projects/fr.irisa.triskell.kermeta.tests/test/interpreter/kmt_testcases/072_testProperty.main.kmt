@@ -1,0 +1,100 @@
+/* $Id: 072_testProperty.main.kmt,v 1.1 2008-03-04 13:32:55 vmahe Exp $
+ * Creation date: February 04, 2008
+ * License:	EPL
+ * Copyright:
+ * Authors:
+ *     Vincent Mahe
+ */
+@mainClass "testProperty::TestDerivedProperties"
+@mainOperation "main"
+
+package testProperty;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::kunit
+
+
+/**
+ * checks the different cases about derived properties
+ */
+class TestDerivedProperties inherits kermeta::kunit::TestCase {
+
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestDerivedProperties)
+		tr.printTestResult
+	end
+	
+	/* checks the property with multiplicity [0..1] */
+	operation testSingleProperty() : void is do
+		var a : A init A.new
+		assert(a.i == void)
+		
+		// first getter test
+		assert(a.p == void)
+		
+		// second getter test
+		a.i := 3
+		assert(a.p == 3)
+		
+		// setter test
+		a.p := 5
+		assert(a.i != void)
+		assert(a.p != void)
+		assert(a.i == 5)
+		assert(a.p == 5)
+		
+		// setter reuse test
+		a.p := 8
+		assert(a.i != 5)
+		assert(a.p != 5)
+		assert(a.i == 8)
+		assert(a.p == 8)
+	end
+	
+	/* checks the property with multiplicity [0..*] */
+	operation testCollectionProperty() : void is do
+		var b : B init B.new
+		assert(b.row == void)
+		
+		// first getter test
+		assert(b.p.size == 0)
+		
+		// second getter test
+		b.row.add(3)
+		assert(A.p.size == 1)
+		assert(b.P.one == 3)
+		
+		/* 0..* multiplicity => read-only properties so there is no
+		   setter on derived collections */
+	end
+}
+
+class A {
+	reference i : kermeta::standard::Integer
+	
+	property p kermeta::standard::Integer
+		getter is do
+			result := i
+		end
+		setter is do
+			i := p
+		end
+}
+
+class B {
+	reference row : kermeta::standard::Integer[0..*]
+	
+	property p kermeta::standard::Integer[0..*]
+		getter is do
+			result := kermeta::standard::Integer[0..*].new
+			result.addall(row)
+		end
+		setter is do
+			row.clean
+			row.addall(p)
+		end
+}

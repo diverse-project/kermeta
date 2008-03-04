@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.16 2008-02-27 16:02:30 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.17 2008-03-04 13:32:55 vmahe Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -210,6 +210,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","070_testSameClassInDifferentPackages.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","071_mergerPbWithFunctionType.main.kmt" );
+
+		testWithFile("test/interpreter/kmt_testcases","072_testProperty.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment

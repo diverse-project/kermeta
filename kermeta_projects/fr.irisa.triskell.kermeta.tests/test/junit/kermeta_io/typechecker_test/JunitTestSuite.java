@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.13 2008-02-27 12:41:28 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.14 2008-03-04 13:32:55 vmahe Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -171,6 +171,10 @@ public void testvalid_Class_new() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","Class_new.kmt" );
 }
 
+public void testvalid_DerivedProperties() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","DerivedProperties.kmt" );
+}
+
 public void testvalid_Enum() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","Enum.kmt" );
 }
@@ -289,6 +293,10 @@ testinvalidFile("test/io/typechecher_tests/invalid","Class_new.kmt" );
 
 public void testinvalid_CollectionsAttributeReferenceAssignment() throws Exception {
 testinvalidFile("test/io/typechecher_tests/invalid","CollectionsAttributeReferenceAssignment.kmt" );
+}
+
+public void testinvalid_DerivedProperties() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","DerivedProperties.kmt" );
 }
 
 public void testinvalid_Enum() throws Exception {
