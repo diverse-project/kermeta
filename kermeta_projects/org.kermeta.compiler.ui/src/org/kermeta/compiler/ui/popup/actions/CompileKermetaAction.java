@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.2 2008-02-06 15:40:08 cfaucher Exp $
+/* $Id: CompileKermetaAction.java,v 1.3 2008-03-04 10:27:44 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -14,10 +14,8 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EModelElement;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
@@ -29,30 +27,12 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.KermetaCompiler;
-import org.kermeta.compiler.exporter.KM2JavaPrettyPrinter;
-import org.kermeta.compiler.generator.helper.model.SimkModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.model.KermetaModelHelper;
-import org.kermeta.simk.SIMKModel;
-import org.kermeta.simk.SMClass;
-import org.kermeta.simk.SMContext;
-import org.kermeta.simk.SMPackage;
-import org.kermeta.simk.SMParameter;
-import org.kermeta.simk.SMUsage;
-import org.kermeta.simk.SimkFactory;
-import org.kermeta.simk.StaticMethod;
 
-import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
-import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 public class CompileKermetaAction implements IObjectActionDelegate {

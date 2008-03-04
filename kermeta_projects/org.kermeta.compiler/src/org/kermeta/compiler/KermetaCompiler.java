@@ -1,4 +1,4 @@
-/* $Id: KermetaCompiler.java,v 1.2 2008-02-06 15:40:01 cfaucher Exp $
+/* $Id: KermetaCompiler.java,v 1.3 2008-03-04 10:25:59 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -15,47 +15,19 @@ import java.util.LinkedHashSet;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EParameter;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.kermeta.compiler.exporter.KM2JavaPrettyPrinter;
-import org.kermeta.compiler.generator.helper.model.SimkModelHelper;
 import org.kermeta.compiler.model.compiler.impl.AbstractCompilerImpl;
-import org.kermeta.compiler.util.CompilerUtil;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.merger.Merger;
-import org.kermeta.simk.SIMKModel;
-import org.kermeta.simk.SMClass;
-import org.kermeta.simk.SMContext;
-import org.kermeta.simk.SMPackage;
-import org.kermeta.simk.SMParameter;
-import org.kermeta.simk.SMUsage;
-import org.kermeta.simk.SimkFactory;
-import org.kermeta.simk.StaticMethod;
 
-import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.eclipse.resources.URIHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
-import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-import fr.irisa.triskell.traceability.TraceModel;
-import fr.irisa.triskell.traceability.helper.Tracer;
 
 public class KermetaCompiler extends AbstractCompilerImpl {
 
@@ -88,9 +60,10 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 			//saveKm2ecoremappingTracer(km2ecoreGen);
 			
 			
-			prettyPrintJavaCode(km2ecoreGen,unit);
+			// TODO CF The prettyprinting of Java Code should be now used the Km2Java written in Kermeta
+			//prettyPrintJavaCode(km2ecoreGen,unit);
 	
-			fixPrintJavaCode(km2ecoreGen,unit);
+			//fixPrintJavaCode(km2ecoreGen,unit);
 			internalLog.info("Java source code has been printed inside GenModel EAnnotations");
 			
 			km2ecoreGen.save();
@@ -202,14 +175,13 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 	 * @param km2ecore
 	 * @param unit
 	 */
-	private void prettyPrintJavaCode(EcoreExporter km2ecore, KermetaUnit unit) {
+	/*private void prettyPrintJavaCode(EcoreExporter km2ecore, KermetaUnit unit) {
 
 		IFile simk_file = ResourcesPlugin.getWorkspace().getRoot().getFile(
 				kermetafile.getFullPath().removeFileExtension()
 						.addFileExtension(SimkModelHelper.SIMK_EXT));
 		SIMKModel simkModel = SimkModelHelper.createSIMKModel(simk_file);
 		simkModel.setName(simk_file.getName());
-		// SimkModelHelper helperModel = new SimkModelHelper();
 
 		try {
 			KM2JavaPrettyPrinter prettyPrinter = new KM2JavaPrettyPrinter(
@@ -239,22 +211,6 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 							String bodyString = (String) prettyPrinter
 									.accept(op);
 
-							// if(!bodyString.equals("{}")) {
-
-							/*
-							 * String resultType = ""; if(op.getType()!=null) {
-							 * if(op.getType() instanceof VoidType) {
-							 *  } else { Object resultTypeObj =
-							 * prettyPrinter.accept(op.getType());
-							 * if(resultTypeObj!=null) { resultType = (String)
-							 * resultTypeObj; if(resultType.equals("void")) {
-							 * resultType = ""; } } } }
-							 * 
-							 * if(!resultType.equals("")) { bodyString =
-							 * resultType + " result=null;\n" + bodyString +
-							 * "\nreturn result;"; }
-							 */
-
 							EObject eObj = km2ecore.getKm2ecoremapping()
 									.get(op);
 							if (eObj != null && eObj instanceof EOperation) {
@@ -264,20 +220,6 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 										bodyString, null);
 
 								EOperation eOp = (EOperation) eObj;
-
-								/*
-								 * // Duplicate the EOperation to solve the
-								 * problem of multiple inheritance KM2EcorePass1
-								 * aKM2EcorePass1 = new
-								 * KM2EcorePass1(eOp.eResource(),
-								 * km2ecore.getKm2ecoremapping(), unit, null,
-								 * null); EOperation eOp_class = (EOperation)
-								 * aKM2EcorePass1.accept(op);
-								 * eOp_class.setName(eOp_class.getName() + "_" +
-								 * ((EClass) eOp.eContainer()).getName());
-								 * ((EClass)
-								 * eOp.eContainer()).getEOperations().add(eOp_class);
-								 */
 
 								if ( CompilerUtil.isRunnable(eOp)
 										&& !EcoreHelper.getQualifiedName(eOp)
@@ -330,7 +272,6 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 											.getSMContexts().add(newSMContext);
 								}
 							}
-							// }
 						}
 					}
 				}
@@ -340,7 +281,7 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 			prettyPrinter.getHelperModel().eResource().save(null);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	/**
@@ -349,13 +290,10 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 	 * @param km2ecore
 	 * @param unit
 	 */
-	private static void fixPrintJavaCode(EcoreExporter km2ecore,
+	/*private static void fixPrintJavaCode(EcoreExporter km2ecore,
 			KermetaUnit unit) {
 
 		try {
-
-			// KM2JavaPrettyPrinter2 prettyPrinter = new
-			// KM2JavaPrettyPrinter2();
 
 			for (TypeDefinition aTypeDef : fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper
 					.getTypeDefinitions(unit)) {
@@ -400,21 +338,10 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 						}
 					}
 				}
-				/*
-				 * if( aTypeDef instanceof
-				 * fr.irisa.triskell.kermeta.language.structure.Class) {
-				 * fr.irisa.triskell.kermeta.language.structure.Class aClass =
-				 * (fr.irisa.triskell.kermeta.language.structure.Class)
-				 * aTypeDef; if( aClass.getTypeDefinition() instanceof
-				 * fr.irisa.triskell.kermeta.standard.String) {
-				 *  } }
-				 */
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
-	
-
-}
+//}
