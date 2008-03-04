@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.5 2008-02-21 10:38:13 dvojtise Exp $
+/* $Id: ecore_behavior.kmt,v 1.6 2008-03-04 17:57:04 cfaucher Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -78,7 +78,7 @@ aspect class EClass
 	property eAllContainments : EReference[0..*]
 		getter is do
 	 		result := kermeta::standard::OrderedSet<EReference>.new 
-	 		stdio.writeln("contaimnet : " + self.eAllReferences.one.containment.toString)
+	 		stdio.writeln("containment : " + self.eAllReferences.one.containment.toString)
 	 		result.addAll(self.eAllReferences.select { r | r.containment == true } )
 		end
 		setter is do
