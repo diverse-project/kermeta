@@ -30,27 +30,31 @@ package smartadapters
 	{
 		aspect class Adapter 
 		{
+			/**
+			 * Associates concrete meta-classes from MM\' to concrete meta-classes from MM
+			 */
 			operation initConvert(): Void is do
-				stdio.write("Mapping MM\' to MM...")
 				converter := Converter.new
 				convert := Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new
 				convert.put(pattern::FSM::State,FSM::State)
 				convert.put(pattern::FSM::Transition,FSM::Transition)
 				convert.put(pattern::FSM::Fsm,FSM::Fsm)
 				converter.initConverter(convert)
-				stdio.writeln("OK!")
 			end
 		}
 		
 	package adaptations
 	{
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of FSM::State
 		 */
-		 
 		
+		/**
+		 * Creates a new FSM::State from scratch
+		 * This new element is handled by refering to newState
+		 */
 		class CreateState inherits createAdaptation
 		{
 			attribute newState : pattern::FSM::State
@@ -64,6 +68,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new FSM::State from an existing one
+		 * This cloned element is handled by refering to clonedState
+		 */
 		class CloneState inherits cloneAdaptation
 		{
 			reference StateToClone : pattern::FSM::State
@@ -78,6 +86,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of FSM::State
+		 * All the references expect StateToSet may be void
+		 */
 		class SetState inherits setAdaptation
 		{
 			reference StateToSet : pattern::FSM::State
@@ -87,7 +99,17 @@ package smartadapters
 				result := StateToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFSMState is do
+				var ad : Adapter init getAdapter
+				var tempStateToSet : FSM::State
+				tempStateToSet ?= ad.getRealObject(StateToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				isCorrectlySetted := isCorrectlySetted and tempStateToSet.name == ad.getRealObject(refname,false)
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempState : FSM::State
 				tempState ?= ad.getRealObject(StateToSet,false)
@@ -95,8 +117,7 @@ package smartadapters
 				tempState.name ?= ad.setSingleProperty(refname, tempState.name)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					
+				if(reverse) then		
 					var unset : UnsetState 
 					if self.reverse == void then
 						unset := UnsetState.new
@@ -111,6 +132,10 @@ package smartadapters
 			end			
 		}
 		
+		/**
+		 * Unsets any property of FSM::State
+		 * All the references expect StateToUnset may be void 
+		 */		
 		class UnsetState inherits unsetAdaptation
 		{
 			reference StateToUnset : pattern::FSM::State
@@ -120,7 +145,19 @@ package smartadapters
 				result := StateToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFSMState is do
+				var ad : Adapter init getAdapter
+				var tempStateToUnset : FSM::State
+				tempStateToUnset ?= ad.getRealObject(StateToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempStateToUnset.name == void
+				end 
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempState : FSM::State
 				tempState ?= ad.getRealObject(StateToUnset,false)
@@ -142,13 +179,16 @@ package smartadapters
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of FSM::Transition
 		 */
-		 
 		
+		/**
+		 * Creates a new FSM::Transition from scratch
+		 * This new element is handled by refering to newTransition
+		 */
 		class CreateTransition inherits createAdaptation
 		{
 			attribute newTransition : pattern::FSM::Transition
@@ -162,6 +202,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new FSM::Transition from an existing one
+		 * This cloned element is handled by refering to clonedTransition
+		 */
 		class CloneTransition inherits cloneAdaptation
 		{
 			reference TransitionToClone : pattern::FSM::Transition
@@ -176,6 +220,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of FSM::Transition
+		 * All the references expect TransitionToSet may be void
+		 */
 		class SetTransition inherits setAdaptation
 		{
 			reference TransitionToSet : pattern::FSM::Transition
@@ -186,7 +234,18 @@ package smartadapters
 				result := TransitionToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFSMTransition is do
+				var ad : Adapter init getAdapter
+				var tempTransitionToSet : FSM::Transition
+				tempTransitionToSet ?= ad.getRealObject(TransitionToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				isCorrectlySetted := isCorrectlySetted and tempTransitionToSet.source == ad.getRealObject(refsource,false)
+				isCorrectlySetted := isCorrectlySetted and tempTransitionToSet.target == ad.getRealObject(reftarget,false)
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempTransition : FSM::Transition
 				tempTransition ?= ad.getRealObject(TransitionToSet,false)
@@ -195,8 +254,7 @@ package smartadapters
 				tempTransition.target ?= ad.setSingleProperty(reftarget, tempTransition.target)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					
+				if(reverse) then		
 					var unset : UnsetTransition 
 					if self.reverse == void then
 						unset := UnsetTransition.new
@@ -212,6 +270,10 @@ package smartadapters
 			end			
 		}
 		
+		/**
+		 * Unsets any property of FSM::Transition
+		 * All the references expect TransitionToUnset may be void 
+		 */		
 		class UnsetTransition inherits unsetAdaptation
 		{
 			reference TransitionToUnset : pattern::FSM::Transition
@@ -222,7 +284,22 @@ package smartadapters
 				result := TransitionToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFSMTransition is do
+				var ad : Adapter init getAdapter
+				var tempTransitionToUnset : FSM::Transition
+				tempTransitionToUnset ?= ad.getRealObject(TransitionToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refsource != void then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempTransitionToUnset.source == void
+				end 
+				if reftarget != void then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempTransitionToUnset.target == void
+				end 
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempTransition : FSM::Transition
 				tempTransition ?= ad.getRealObject(TransitionToUnset,false)
@@ -246,13 +323,16 @@ package smartadapters
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of FSM::Fsm
 		 */
-		 
 		
+		/**
+		 * Creates a new FSM::Fsm from scratch
+		 * This new element is handled by refering to newFsm
+		 */
 		class CreateFsm inherits createAdaptation
 		{
 			attribute newFsm : pattern::FSM::Fsm
@@ -266,6 +346,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new FSM::Fsm from an existing one
+		 * This cloned element is handled by refering to clonedFsm
+		 */
 		class CloneFsm inherits cloneAdaptation
 		{
 			reference FsmToClone : pattern::FSM::Fsm
@@ -280,6 +364,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of FSM::Fsm
+		 * All the references expect FsmToSet may be void
+		 */
 		class SetFsm inherits setAdaptation
 		{
 			reference FsmToSet : pattern::FSM::Fsm
@@ -290,7 +378,20 @@ package smartadapters
 				result := FsmToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFSMFsm is do
+				var ad : Adapter init getAdapter
+				var tempFsmToSet : FSM::Fsm
+				tempFsmToSet ?= ad.getRealObject(FsmToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				c ?= ad.getRealObject(refstates,true)
+				c.each{o | var p : FSM::State p?=o isCorrectlySetted := isCorrectlySetted and tempFsmToSet.states.contains(p)}
+				c ?= ad.getRealObject(reftransitions,true)
+				c.each{o | var p : FSM::Transition p?=o isCorrectlySetted := isCorrectlySetted and tempFsmToSet.transitions.contains(p)}
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempFsm : FSM::Fsm
 				tempFsm ?= ad.getRealObject(FsmToSet,false)
@@ -299,8 +400,7 @@ package smartadapters
 				ad.setMultipleProperty(tempFsm.transitions,reftransitions)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					
+				if(reverse) then		
 					var unset : UnsetFsm 
 					if self.reverse == void then
 						unset := UnsetFsm.new
@@ -318,6 +418,10 @@ package smartadapters
 			end			
 		}
 		
+		/**
+		 * Unsets any property of FSM::Fsm
+		 * All the references expect FsmToUnset may be void 
+		 */		
 		class UnsetFsm inherits unsetAdaptation
 		{
 			reference FsmToUnset : pattern::FSM::Fsm
@@ -328,7 +432,20 @@ package smartadapters
 				result := FsmToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFSMFsm is do
+				var ad : Adapter init getAdapter
+				var tempFsmToUnset : FSM::Fsm
+				tempFsmToUnset ?= ad.getRealObject(FsmToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				c ?= ad.getRealObject(refstates,true)
+				c.each{o | var p : FSM::State p?=o isCorrectlyUnsetted := isCorrectlyUnsetted and not tempFsmToUnset.states.contains(p)}
+				c ?= ad.getRealObject(reftransitions,true)
+				c.each{o | var p : FSM::Transition p?=o isCorrectlyUnsetted := isCorrectlyUnsetted and not tempFsmToUnset.transitions.contains(p)}
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempFsm : FSM::Fsm
 				tempFsm ?= ad.getRealObject(FsmToUnset,false)
@@ -354,11 +471,6 @@ package smartadapters
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of FSM::label
-		 */
 		 
 	}
 }}
