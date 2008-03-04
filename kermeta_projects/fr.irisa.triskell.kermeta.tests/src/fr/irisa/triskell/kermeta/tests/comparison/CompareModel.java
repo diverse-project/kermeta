@@ -1,4 +1,4 @@
-/*$Id: CompareModel.java,v 1.5 2008-02-14 07:13:29 uid21732 Exp $
+/*$Id: CompareModel.java,v 1.6 2008-03-04 09:18:28 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.tests
 * File : 	CompareModel.java
 * License : EPL
@@ -98,8 +98,8 @@ public class CompareModel {
 	 * DVK : we should rewrite this as a junit test !?
 	 */
 	public static void main (String args[]) {
-		String l = "test/interpreter/emf_testcases/instances/kmLogo.km";
-		String r = "test/interpreter/emf_testcases/instances/ecore.km";
+		String l = "test/interpreter/emf_testcases/instances/060_loadSaveEcoreEnum.ecore";
+		String r = "test/interpreter/emf_testcases/instances/060_loadSaveEcoreEnum.ecore";
 		CompareModel modelComparison = new CompareModel(r, r);
 		System.out.println(modelComparison.compareWithEcoreUtil());
 		System.out.println(modelComparison.compareWithEMFCompare());
