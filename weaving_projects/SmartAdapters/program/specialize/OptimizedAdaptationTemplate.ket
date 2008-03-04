@@ -37,8 +37,10 @@ package smartadapters
 	{
 		aspect class Adapter 
 		{
+			/**
+			 * Associates concrete meta-classes from MM' to concrete meta-classes from MM
+			 */
 			operation initConvert(): Void is do
-				stdio.write("Mapping MM' to MM...")
 				converter := Converter.new
 				convert := Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new
 				<%
@@ -54,7 +56,6 @@ package smartadapters
 					end
 					}%>
 				converter.initConverter(convert)
-				stdio.writeln("OK!")
 			end
 		}
 		
@@ -65,16 +66,19 @@ package smartadapters
 		var qualifiedName:String
 		qualifiedName:=helper.getClassifierQualifiedName(cl)
 		c?=cl %>
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of <%=qualifiedName%>
-		 */
 		 
 		<%
 		if(c!=void) then
 			if(not(c.~abstract) and not(c.interface)) then%>
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of <%=qualifiedName%>
+		 */
 		
+		/**
+		 * Creates a new <%=qualifiedName%> from scratch
+		 * This new element is handled by refering to new<%=c.name%>
+		 */
 		class Create<%=qualifiedName.replace("::","")%> inherits createAdaptation
 		{
 			attribute new<%=c.name%> : pattern::<%=qualifiedName%>
@@ -88,6 +92,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new <%=qualifiedName%> from an existing one
+		 * This cloned element is handled by refering to cloned<%=c.name%>
+		 */
 		class Clone<%=qualifiedName.replace("::","")%> inherits cloneAdaptation
 		{
 			reference <%=c.name%>ToClone : pattern::<%=qualifiedName%>
@@ -103,6 +111,10 @@ package smartadapters
 		}
 		<%end%>
 
+		/**
+		 * Sets any property of <%=qualifiedName%>
+		 * All the references expect <%=c.name%>ToSet may be void
+		 */
 		class Set<%=qualifiedName.replace("::","")%> inherits setAdaptation
 		{
 			reference <%=c.name%>ToSet : pattern::<%=qualifiedName%>
@@ -133,7 +145,24 @@ package smartadapters
 				result := <%=c.name%>ToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySetted<%=qualifiedName.replace("::","")%> is do
+				var ad : Adapter init getAdapter
+				var temp<%=c.name%>ToSet : <%=qualifiedName%>
+				temp<%=c.name%>ToSet ?= ad.getRealObject(<%=c.name%>ToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				<%c.eAllStructuralFeatures.each{f | %>
+					<%if f.upperBound==1 then%>
+				isCorrectlySetted := isCorrectlySetted and temp<%=c.name%>ToSet.<%=f.name%> == ad.getRealObject(ref<%=f.name%>,false)
+					<%else%>
+				c ?= ad.getRealObject(ref<%=f.name%>,true)
+				c.each{o | var p : <%=helper.getClassifierQualifiedName(f.eType)%> p?=o isCorrectlySetted := isCorrectlySetted and temp<%=c.name%>ToSet.<%=f.name%>.contains(p)}
+					<%end%>
+				<%}%>
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var temp<%=c.name%> : <%=qualifiedName%>
 				temp<%=c.name%> ?= ad.getRealObject(<%=c.name%>ToSet,false)
@@ -173,6 +202,10 @@ package smartadapters
 			end			
 		}
 		
+		/**
+		 * Unsets any property of <%=qualifiedName%>
+		 * All the references expect <%=c.name%>ToUnset may be void 
+		 */		
 		class Unset<%=qualifiedName.replace("::","")%> inherits unsetAdaptation
 		{
 			reference <%=c.name%>ToUnset : pattern::<%=qualifiedName%>
@@ -199,7 +232,26 @@ package smartadapters
 				result := <%=c.name%>ToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsetted<%=qualifiedName.replace("::","")%> is do
+				var ad : Adapter init getAdapter
+				var temp<%=c.name%>ToUnset : <%=qualifiedName%>
+				temp<%=c.name%>ToUnset ?= ad.getRealObject(<%=c.name%>ToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				<%c.eAllStructuralFeatures.each{f | %>
+					<%if f.upperBound==1 then%>
+				if ref<%=f.name%> != void then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and temp<%=c.name%>ToUnset.<%=f.name%> == void
+				end 
+					<%else%>
+				c ?= ad.getRealObject(ref<%=f.name%>,true)
+				c.each{o | var p : <%=helper.getClassifierQualifiedName(f.eType)%> p?=o isCorrectlyUnsetted := isCorrectlyUnsetted and not temp<%=c.name%>ToUnset.<%=f.name%>.contains(p)}
+					<%end%>
+				<%}%>
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var temp<%=c.name%> : <%=qualifiedName%>
 				temp<%=c.name%> ?= ad.getRealObject(<%=c.name%>ToUnset,false)
