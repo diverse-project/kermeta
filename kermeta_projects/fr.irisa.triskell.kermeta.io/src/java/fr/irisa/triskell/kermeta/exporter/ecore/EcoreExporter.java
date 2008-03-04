@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.18 2008-03-04 10:13:17 cfaucher Exp $
+/*$Id: EcoreExporter.java,v 1.19 2008-03-04 10:15:37 cfaucher Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -537,24 +537,6 @@ public class EcoreExporter {
 			setUri(current, rep, null);
 		}
 		
-	}
-	
-	/**
-	 * Return true if the EAnnotations is a Kermeta EAnnotations
-	 * @param eAnnotation
-	 * @return
-	 */
-	private static boolean isKermetaEAnnotations(EAnnotation eAnnotation) {
-		if(eAnnotation.getSource().equals("CompilationUnit")) {
-			return true;
-		}
-		if(eAnnotation.getSource().equals("dependentResource")) {
-			return true;
-		}
-		if(eAnnotation.getSource().equals("kermeta")) {
-			return true;
-		}
-		return false;
 	}
 	
 }
