@@ -1,4 +1,4 @@
-/* $Id: CompileNXCLogoK.java,v 1.6 2008-02-14 07:15:51 uid21732 Exp $
+/* $Id: CompileNXCLogoK.java,v 1.7 2008-03-04 11:12:33 dvojtise Exp $
  * Project   : KmLogo
  * File      : CompileNXCLogoK.java
  * License   : EPL
@@ -29,7 +29,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 public class CompileNXCLogoK {
 
 	public static final String LOGO_COMPILER_KERMETA_CODE = "platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoNXCCompiler.kmt";
-	public static void run(String file, String out, IOConsole console) {
+	public static void run(String file, String out, IOConsole console) throws NotRegisteredURIException, URIMalformedException, IOException {
 		System.out.println("run FixModel");
 		
 		/*
@@ -42,45 +42,35 @@ public class CompileNXCLogoK {
 		*/
 		// merge in memory
 		KermetaUnit unitToExecute;
-		try {
-			unitToExecute = RunnerHelper.getKermetaUnitToExecute(LOGO_COMPILER_KERMETA_CODE);
-			KermetaInterpreter inter = new KermetaInterpreter(unitToExecute, null);
-			inter.setKStream(console);
-			// This is the operation to call
-			inter.setEntryPoint("kmLogo::NXCCompiler", "compile");
-			
-			String api = null;
-			api = Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "model/LogoNXC.nxc";
+		unitToExecute = RunnerHelper.getKermetaUnitToExecute(LOGO_COMPILER_KERMETA_CODE);
+		KermetaInterpreter inter = new KermetaInterpreter(unitToExecute, null);
+		inter.setKStream(console);
+		// This is the operation to call
+		inter.setEntryPoint("kmLogo::NXCCompiler", "compile");
+		
+		String api = null;
+		api = Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "model/LogoNXC.nxc";
 
-			// These are the parameters
-			ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(file, inter.getMemory().getROFactory()));
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(out, inter.getMemory().getROFactory()));
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(api, inter.getMemory().getROFactory()));
-			inter.setEntryParameters(params);
-			// And we launch the interpreter
-			
-			String jar = "platform:/plugin/fr.irisa.triskell.kmlogo.model.jar";
-			
-			//ResourcesPlugin.getPlugin().getDescriptor().getInstallURL()
-			
-			
-			URL[] urls = new URL[1];
-			urls[0] = new URL("file://" + Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "bin");
+		// These are the parameters
+		ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
+		params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(file, inter.getMemory().getROFactory()));
+		params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(out, inter.getMemory().getROFactory()));
+		params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(api, inter.getMemory().getROFactory()));
+		inter.setEntryParameters(params);
+		// And we launch the interpreter
+		
+		String jar = "platform:/plugin/fr.irisa.triskell.kmlogo.model.jar";
+		
+		//ResourcesPlugin.getPlugin().getDescriptor().getInstallURL()
+		
+		
+		URL[] urls = new URL[1];
+		urls[0] = new URL("file://" + Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "bin");
 
-			URLClassLoader cl = new URLClassLoader(urls, inter.getClass().getClassLoader());
-			Thread.currentThread().setContextClassLoader(cl);
-			inter.launch();
-		} catch (NotRegisteredURIException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (URIMalformedException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		URLClassLoader cl = new URLClassLoader(urls, inter.getClass().getClassLoader());
+		Thread.currentThread().setContextClassLoader(cl);
+		inter.launch();
+		
 
 	}
 
