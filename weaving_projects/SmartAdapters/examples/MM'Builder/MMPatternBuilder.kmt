@@ -1,4 +1,4 @@
-/* $Id: MMPatternBuilder.kmt,v 1.6 2008-02-20 17:52:39 bmorin Exp $
+/* $Id: MMPatternBuilder.kmt,v 1.7 2008-03-04 14:00:03 bmorin Exp $
  * Creation date: October 18, 2006
  * License:
  * Copyright:
@@ -13,10 +13,6 @@ package root_package;
 
 require kermeta
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/PatternMetamodelBuilder.kmt"
-
-// require statement to workaround a problem in kermeta
-//require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/persistence/EMFHandler.kmt"
-
 using ecore 
 using kermeta::standard
 using kermeta::persistence
@@ -25,8 +21,8 @@ using kermeta::pattern
 class EcorePatternMetamodelBuilder {
 
   operation main() is do 
-      var sourceMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/PDCA.ecore"
-      var targetMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/PDCAPattern.ecore"
+      var sourceMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/Fractal.ecore"
+      var targetMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/FractalPattern.ecore"
 
    	  var sourceMetamodel : Sequence<EPackage> init loadEcoreModel(EMFRepository.new, sourceMetamodelUri)
  
@@ -37,34 +33,9 @@ class EcorePatternMetamodelBuilder {
       stdio.write("Saving...")
       var setPack : Set<Object> init Set<Object>.new
       setPack.add(patternPack)
-      
-      prettyPrintPackage(patternPack)
-      
+       
       saveEcoreModel(setPack, targetMetamodelUri)
       stdio.writeln("OK!") 
-  end
-  
-  operation prettyPrintPackage(pack : EPackage) is
-  do
-        stdio.writeln(pack.nsURI)
-      	pack.eClassifiers.each{c | 
-      		var cl : EClass
-      		cl ?= c
-      		if (cl != void) then		
-     			stdio.write(c.name+"->")
-     			if cl.eSuperTypes != void and cl.eSuperTypes.size > 0 then
-     				stdio.writeln(cl.eSuperTypes.first.name)
-     			else
-     				stdio.writeln("EMPTY")
-     			end
-      		end
-      	var setPack : Set<Object> init Set<Object>.new
-      	setPack.add(pack)
-      	//saveEcoreModel(setPack, "platform:/resource/SmartAdapters/metamodel/domain/"+pack.name+".ecore", EMFRepository.new)
-      	pack.eSubpackages.each{p | prettyPrintPackage(p)}
-      	
-      }
-  
   end
   
 	operation loadEcoreModel(repository : EMFRepository, modelUri : String) : Sequence<EPackage> is 

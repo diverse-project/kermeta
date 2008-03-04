@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.15 2008-02-29 10:58:11 bmorin Exp $
+/* $Id: weaver.kmt,v 1.16 2008-03-04 14:08:34 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -74,15 +74,12 @@ class Weaver
 	                         	
 				/*---Applying the adapter to the base model---*/       
 				var i : Integer init 0
-				var binding : Hashtable<Object, Object>
-				var keys : Set<Object>
-				var input : String				
-				var apply : Boolean
-				var unweave : Boolean
-				var executePM : Boolean
-			 	var inputPM:String
+				var binding : Hashtable<Object, Object>			
+				var doAction : Boolean
+			 	adapter.setDisplayInfo(false)
 			 	//iterating on bindings
 				from iteBindings until iteBindings.isOff loop 
+					 doAction := false
 				     binding := iteBindings.next
 					 i:=i+1
 					 stdio.writeln("")
@@ -90,19 +87,17 @@ class Weaver
 					 //display current binding
 				     stdio.writeln("Binding"+i.toString+":")
 				     stdio.writeln("*******************************************")
-					 keys := binding.keys
-					 keys.each{k | stdio.write("-------\n"+k.printObject+"bound to\n"+binding.getValue(k).printObject)}
+					 binding.keys.each{k | stdio.write("-------\n"+k.printObject+"bound to\n"+binding.getValue(k).printObject)}
 					 stdio.writeln("*******************************************")
 					 stdio.writeln("")				 
 					 //interaction with user
-					 input := stdio.read("$>weave the aspect for this binding ? (true/FALSE): ")
 					 do
-					 	apply := input.toBoolean
+						 doAction := stdio.read("$>weave the aspect for this binding ? (true/FALSE): ").toBoolean
 					 rescue
-					 	apply := false
+					 	doAction := false
 					 end
 					 //apply composition protocol for the current binding
-					 if apply then
+					 if doAction then
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("#>weaving the aspect for binding"+i.toString+"...")
 						adapter.apply(binding, rootElement) //aspect weaving: do not require domain concepts
@@ -110,13 +105,12 @@ class Weaver
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("")
 					 	//interaction with user
-					 	input := stdio.read("$>unweave the aspect for this binding ? (TRUE/false): ")
 					 	do
-					 		unweave := input.toBoolean
+					 		doAction := stdio.read("$>unweave the aspect for this binding ? (TRUE/false): ").toBoolean
 					 	rescue
-					 		unweave := true
+					 		doAction := true
 					 	end
-					 	if unweave then
+					 	if doAction then
 					 		stdio.writeln("----------------------------")
 					 		stdio.writeln("#>unweaving the aspect for binding"+i.toString+"...")
 					 		adapter.unweave(rootElement)
@@ -125,17 +119,16 @@ class Weaver
 					 		stdio.writeln("")
 					 	end
 					 	adapter.updateClones
-					 	if (iteBindings.hasNext and not unweave) then //weaving + unweaving = no change
+					 	if (iteBindings.hasNext and not doAction) then //weaving + unweaving = no change
 					 		//interaction with user
-						 	inputPM:=stdio.read("$>execute pattern matching ? (TRUE/false): ")
 						 	do
-						 		executePM := inputPM.toBoolean
+						 		doAction := stdio.read("$>execute pattern matching ? (TRUE/false): ").toBoolean
 						 	rescue
-						 		executePM := true
+						 		doAction := true
 						 	end
 						 	//executing pattern matching again 
 						 	//(the composition might have change the base model)
-						 	if executePM then
+						 	if doAction then
 						 		iteBindings := Iterator<Hashtable<Object, Object>>.new
 						 		iteBindings := matcher.optimizedMatch(inputMetamodel, inputModel, adapter.~aspect.template, true, false, true)
 						 		i := 0
@@ -161,15 +154,15 @@ class Weaver
 	end
 
     operation loadModel(repository : EMFRepository, modelPath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   
-    	stdio.writeln("  loading: "+modelPath+"("+metamodelPath+")")
+    	stdio.writeln("  loading: "+modelPath+" ("+metamodelPath+")")
    		var resource : Resource init repository.createResource(modelPath, metamodelPath)
        	resource.load()
         result := resource.instances
     end	
 	
     operation saveModel(obj : Set<Object>, uri : String, domainMM : String) is do
-    	//obj.each{o | stdio.writeln(o.toString)}
-    	var repository:EMFRepository init EMFRepository.new
+ 		stdio.writeln("  saving: "+uri+" ("+domainMM+")")
+    	var repository : EMFRepository init EMFRepository.new
 	    var resource : Resource init repository.createResource(uri , domainMM)
 	    obj.each{o | resource.instances.add(o)}
 	    resource.save

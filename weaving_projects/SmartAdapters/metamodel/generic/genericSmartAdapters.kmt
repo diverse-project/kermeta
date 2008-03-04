@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.16 2008-02-29 10:57:54 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.17 2008-03-04 14:00:35 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -45,14 +45,14 @@ package smartadapters
 					else
 						coll ?= get(p)
 						coll.each{b | 
-							print := print + adapter.getRealObject(b,false).toString
+							print := print + adapter.getRealObject(b,false).toString + " ("+ b.toString + ") "
 						}
 						print := print + "\n"
 					end
 					get(p).getMetaClass().ownedAttribute.each{pr | 
 						print := print + "\t\t - "+pr.name+" = "
 						if pr.upper == 1 then
-							print := print + adapter.getRealObject(o.get(pr),false).toString + "\n"
+							print := print + adapter.getRealObject(o.get(pr),false).toString + " ("+ o.toString + ")" + "\n"
 						else
 							coll ?= o.get(pr)
 							coll.each{b | 
@@ -82,6 +82,8 @@ package smartadapters
 		
 		aspect class Adapter
 		{	
+			reference displayInfo : Boolean
+		
 			inv checkedAdapt is adapt.detect{a | not a.check} == void
 		
 			/**
@@ -139,14 +141,20 @@ package smartadapters
 				removable.clear
 				removed.clear
 				adapt.each{a |
-					stdio.writeln("Adaptation "+i.toString)
-					stdio.writeln("------------")
-					stdio.writeln("#>weaving: "+a.getMetaClass.name+"...")
+					if displayInfo then
+						stdio.writeln("Adaptation "+i.toString)
+						stdio.writeln("------------")
+						stdio.writeln("#>weaving: "+a.getMetaClass.name+"...")
+					end
+					
 					a.execute(true)
-					stdio.write(a.print)
-					stdio.writeln("#>weaving: done!")
-					stdio.writeln("")
-					i := i+1
+					
+					if displayInfo then
+						stdio.write(a.print)
+						stdio.writeln("#>weaving: done!")
+						stdio.writeln("")
+						i := i+1
+					end
 				}
 			end
 			
@@ -177,15 +185,20 @@ package smartadapters
 				var i : Integer init 1
 				adapt.each{a | 
 					if(a.reverse != void) then
-						stdio.writeln("Reverse adaptation "+i.toString)
-						stdio.writeln("------------")
-						stdio.writeln("#>unweaving: "+a.getMetaClass.name+" ("+a.reverse.getMetaClass.name+")"+"...")
+						if displayInfo then
+							stdio.writeln("Reverse adaptation "+i.toString)
+							stdio.writeln("------------")
+							stdio.writeln("#>unweaving: "+a.getMetaClass.name+" (i.e., executing "+a.reverse.getMetaClass.name+")"+"...")
+						end
+						
 						a.reverse.execute(false)
-						stdio.write(a.print)
-						stdio.writeln("#>unweaving: done!")
-						stdio.writeln("")
-						i := i+1
-						a.reverse := void
+						
+						if displayInfo then
+							stdio.write(a.print)
+							stdio.writeln("#>unweaving: done!")
+							stdio.writeln("")
+							i := i+1
+						end
 					end
 				}
 			end
@@ -214,6 +227,11 @@ package smartadapters
 					removed := Set<Object>.new
 				end			
 			end		
+				
+			operation setDisplayInfo(display : Boolean) is
+			do
+				displayInfo := display
+			end	
 				
 			/**
 			 *initClone must be called before the first binding
@@ -276,33 +294,36 @@ package smartadapters
 				end
 			end
 
+			/**
+			 * This operation is called by domain-specific clone* / create* adaptations
+			 */
 			operation cloneAgain(handler : Object, template : Object, type : uniqueType) : Void is do
+				var update : Boolean init false
 				if type == uniqueType.non_unique then
 					updateClone(handler,template)
 					removable.add(getRealObject(handler,false))
 				else 
 					if type == uniqueType.unique then
 						if (template != void) then
-							if not(cloned.contains(getRealObject(template,false))) then
-								updateClone(handler,template)
-								removable.add(getRealObject(handler,false))
-							end
+							update := not (cloned.contains(getRealObject(template,false)))
 						else
-							if not(clone.containsKey(handler)) then
-								updateClone(handler,template)
-								removable.add(getRealObject(handler,false))
-							end 
+							update :=  not(clone.containsKey(handler))
 						end
 					else
-						var input : String init stdio.read("$>clone "+handler.toString+" (true/false) :")
-				        if input.toBoolean then
-				        	updateClone(handler,template)
-				        	removable.add(getRealObject(handler,false))
-				        end
+						update := stdio.read("$>clone "+handler.toString+" (true/false) :").toBoolean
 					end 
+				end
+				if update then
+					updateClone(handler,template)
+					removable.add(getRealObject(handler,false))
 				end
 			end
 			
+			
+			/**
+			 * This operation is called by domain-specific set* adaptations,
+			 * for all the multiple properties (upper > 1) 
+			 */
 			operation setMultipleProperty(prty : Object, o : Object) : Void is do
 				if(o != void) then
 					var coll : Collection<kermeta::language::structure::Object>
@@ -316,7 +337,11 @@ package smartadapters
 					end
 				end
 			end
-			
+
+			/**
+			 * This operation is called by domain-specific set* adaptations,
+			 * for all the single properties (upper = 1) 
+			 */			
 			operation setSingleProperty(o : Object, old : Object) : Object is do
 				if(o != void) then					
 					result := getRealObject(o,false)
@@ -325,6 +350,10 @@ package smartadapters
 				end
 			end
 
+			/**
+			 * This operation is called by domain-specific unset* adaptations,
+			 * for all the single properties (upper = 1) 
+			 */
 			operation unsetSingleProperty(o : Object, old : Object) : Object is do
 				if(o != void) then
 					var e : Object init getRealObject(o,false)
@@ -339,8 +368,11 @@ package smartadapters
 				end
 			end
 
+			/**
+			 * This operation is called by domain-specific unset* adaptations,
+			 * for all the multiple properties (upper > 1) 
+			 */
 			operation unsetMultipleProperty(prty : Object, o : Object) : Void is do
-				//stdio.writeln("unsetMultipleProperty "+prty.toString+", "+o.toString)
 				if(prty != void and o != void) then
 					var coll : Collection<kermeta::language::structure::Object>
 					var collToSet : Collection<kermeta::language::structure::Object>
@@ -359,38 +391,42 @@ package smartadapters
 				end
 			end			
 			
-			/*
+			/**
 			 * Return the real object (instance of MM) associated to obj
 			 * e.g., it returns the base model element associated to an element from the pointcut
 			 * or returns a converted clone associated to a created element
 			 */		
 			operation getRealObject(obj : Object, isCollect:Boolean) : Object is do
-				if (isCollect) then
-					var col : Collection<kermeta::language::structure::Object>
-					col ?= obj
-					var res : Set<Object> init Set<Object>.new
-					col.each{o | res.add(getRealObject(o,false))}
-					result := res
+				if obj == void then
+					result := void
 				else
-					var realObj : Object
-					realObj := clone.getValue(obj)
-					if (realObj != void) then
-						result := realObj
+					if (isCollect) then
+						var col : Collection<kermeta::language::structure::Object>
+						col ?= obj
+						var res : Set<Object> init Set<Object>.new
+						col.each{o | res.add(getRealObject(o,false))}
+						result := res
 					else
+						var realObj : Object
 						realObj := binding.getValue(obj)
 						if (realObj != void) then
 							result := realObj
 						else
-							var pObj : PObject
-							pObj ?= obj
-							if (pObj != void) then
-								result := converter.getConverted(obj)
+							realObj := clone.getValue(obj)
+							if (realObj != void) then
+								result := realObj
 							else
-								result := obj
+								var pObj : PObject
+								pObj ?= obj
+								if (pObj != void) then
+									result := converter.getConverted(obj)
+								else
+									result := obj
+								end
 							end
 						end
 					end
-				end			
+				end	
 			end
 		}
 	}

@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.10 2008-02-29 10:57:54 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.11 2008-03-04 14:01:07 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -28,11 +28,15 @@ package smartadapters
 {
 	package core
 	{
+		/**
+		 * An adapter describes <b><i>how</i></b> to compose an aspect with a composition protocole
+		 * (an ordered set of adaptations)
+		 */
 		class Adapter
 		{
 			attribute ~aspect : Aspect[1..1]
 			
-			attribute adapt : Adaptation[0..*]#adapter
+			attribute adapt : oset Adaptation[0..*]#adapter
 						
 			attribute name : ecore::EString
 		}

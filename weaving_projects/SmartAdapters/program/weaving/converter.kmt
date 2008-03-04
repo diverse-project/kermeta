@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.10 2008-02-29 10:58:11 bmorin Exp $
+/* $Id: converter.kmt,v 1.11 2008-03-04 14:07:59 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
@@ -24,7 +24,7 @@ class Converter
 	//Mapping MM'->MM
 	attribute convertTable : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
 	reference converted : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>
-	reference converting : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>	
+	//reference converting : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>	
 	
 	/**
 	initializes the converter (~constructor)
@@ -33,11 +33,11 @@ class Converter
 	operation initConverter(convert:Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>) is do	
 		convertTable := convert
 		converted := Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>.new
-		converting := Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>.new
+		//converting := Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>.new
 	end
 	
 	operation deleteConverted(obj:kermeta::language::structure::Object) : Void is do
-		converting.remove(obj)
+		//converting.remove(obj)
 		converted.remove(obj)
 	end	
 
@@ -63,15 +63,16 @@ class Converter
 		if(newMeta!=void) then
 			var o : kermeta::language::structure::Object init newMeta.new
 			if(converted.getValue(obj)==void) then
-				if(converting.getValue(obj)==void) then
-					converting.put(obj,o)
+				//if(converting.getValue(obj)==void) then
+					//converting.put(obj,o)
+					converted.put(obj,o)
 					convert(obj,o)
-				    converted.put(obj,o)
-				    converting.remove(obj)
+				    //converted.put(obj,o)
+				    //converting.remove(obj)
 				    result:=o
-				else
+				/*else
 					result := converting.getValue(obj)	
-				end
+				end*/
 			else
 				result := converted.getValue(obj) 
 			end
