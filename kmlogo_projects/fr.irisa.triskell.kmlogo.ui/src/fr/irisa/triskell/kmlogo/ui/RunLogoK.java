@@ -1,4 +1,4 @@
-/* $Id: RunLogoK.java,v 1.7 2008-02-14 07:15:51 uid21732 Exp $
+/* $Id: RunLogoK.java,v 1.8 2008-03-04 10:59:26 dvojtise Exp $
  * Project   : kmLogo
  * File      : RunLogoK.java
  * License   : EPL
@@ -12,13 +12,18 @@
 package fr.irisa.triskell.kmlogo.ui;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.kermeta.interpreter.helper.RunnerHelper;
 import org.kermeta.io.KermetaUnit;
+import org.osgi.framework.Bundle;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
@@ -29,8 +34,8 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 public class RunLogoK {
 	public static final String LOGO_SIMULATOR_KERMETA_CODE = "platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoSimulator.kmt";
 	
-	public static void run(String fileURI, IOConsole console)  {
-		System.out.println("run FixModel");
+	public static void run(String fileURI, IOConsole console) throws NotRegisteredURIException, IOException, URIMalformedException  {
+		Activator.internalLog.info("run FixModel");
 		
 		//KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit("platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoSimulator.kmt", new NullProgressMonitor());
 		
@@ -45,40 +50,59 @@ public class RunLogoK {
 		*/
 		// merge in memory
 		KermetaUnit unitToExecute;
-		try {
-			unitToExecute = RunnerHelper.getKermetaUnitToExecute(LOGO_SIMULATOR_KERMETA_CODE);
-			KermetaInterpreter inter = new KermetaInterpreter(unitToExecute, null);
-		    inter.setKStream(console);		
-		    inter.setEntryPoint("kmLogo::Interpreter", "execute");
-			// These are the parameters
-			ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(fileURI, inter.getMemory().getROFactory()));
-			inter.setEntryParameters(params);
-			// And we launch the interpreter
-			String jar = "file://home/paco/Desktop/fr.irisa.triskell.kmlogo.model_1.1.0.jar";
-			
-			//ResourcesPlugin.getPlugin().getDescriptor().getInstallURL()
-			
-			
-			URL[] urls = new URL[1];
-			//urls[0] = new URL("file://home/paco/workspace/fr.irisa.triskell.kmlogo.model/bin/");
-			urls[0] = new URL("file://" + Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "bin/");
-			//urls[0] = new URL("file:///home/franck/turtle.jar");
-			//urls[0] = new URL("file://home/paco/workspace/fr.irisa.triskell.kmlogo.model/bin/");
-			//urls[0] = new URL(jar);
-			//urls[0] = new URL("file:///C:/eclipse3.3_dist051/workspace/fr.irisa.triskell.kmlogo.model/bin/");
-			URLClassLoader cl = new URLClassLoader(urls, inter.getClass().getClassLoader());
-			Thread.currentThread().setContextClassLoader(cl);
-			inter.launch();
-		} catch (NotRegisteredURIException e2) {
-			e2.printStackTrace();
-		} catch (URIMalformedException e2) {
-			e2.printStackTrace();
-		} catch (IOException e2) {
-			e2.printStackTrace();
+		
+		unitToExecute = RunnerHelper.getKermetaUnitToExecute(LOGO_SIMULATOR_KERMETA_CODE);
+		KermetaInterpreter inter = new KermetaInterpreter(unitToExecute, null);
+	    inter.setKStream(console);		
+	    inter.setEntryPoint("kmLogo::Interpreter", "execute");
+		// These are the parameters
+		ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
+		params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(fileURI, inter.getMemory().getROFactory()));
+		inter.setEntryParameters(params);
+		// And we launch the interpreter
+		
+		
+		// Add some URL to the classloader of the interpreter : needed if your code use some extra java classes (via extern for example)
+		// use a set for building the URL (in case some may fail due to malformed URL
+		// Note : URL must end with a / if this is a directory, if not, this is considered as a jar by the classloader
+		Set<URL> urlsSet = new LinkedHashSet<URL>();
+		// URL used when run in a runtimeworkbench, this allows to debug the plugin
+		safeAddURLAsString(urlsSet, "file://" + Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "bin/");
+		// add this plugin as a deployed plugin
+		Bundle bundle = org.eclipse.core.runtime.Platform.getBundle("fr.irisa.triskell.kmlogo.model");
+		if(bundle != null){
+			urlsSet.add(FileLocator.resolve(bundle.getEntry("/")));
+			/*safeAddURLAsString(urlsSet,bundle.getLocation());*/
+			Activator.internalLog.debug("classloader updated with " +FileLocator.resolve(bundle.getEntry("/")));
+		}		
+		
+		
+		// convert the set into an array
+		URL[] urls = new URL[urlsSet.size()];
+		int i = 0;
+		for (URL url : urlsSet) {
+			urls[i] = url;
+			i++;
 		}
+		URLClassLoader cl = new URLClassLoader(urls, inter.getClass().getClassLoader());
+		Thread.currentThread().setContextClassLoader(cl);
+		inter.launch();
 
 	}
-
+	/**
+	 * add a new URL to the set
+	 * Doesn't fail if the URL is malformed, in that case, only a warning is raised, 
+	 * @param urlsSet : set that will contain the URL built
+	 * @param url : String of the URL to build
+	 */
+	private static void safeAddURLAsString(Set<URL> urlsSet, String url){
+		try{
+			urlsSet.add(new URL(url));
+		} catch (MalformedURLException e) {
+			Activator.logWarningMessage(
+					"problem adding an entry of the classpath, "
+					+ url + " cannot be added in classloader", e);
+		}
+	}
 
 }
