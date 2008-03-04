@@ -2,17 +2,17 @@ TODO :
 ------
 
 
-* The tests contained in this dir should be splitted in two set of test cases:
+* The tests contained in this directory should be split in two set of test cases:
   - one containing the interpreter tests
-  - on with the tests for the framework
+  - one with the tests for the framework
   
 * Some more tests should be written both for the framework and the language
 
  - framework
  
- 	* test toString on all basic types + collections
+ 	* test toString() on all basic types + collections
 
  - the language
  
- 	* Ennumeration
+ 	* Enumeration
  	* Primitive types
