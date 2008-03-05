@@ -1,4 +1,4 @@
-/*$Id: KPMResourceVisitor.java,v 1.3 2007-07-23 13:59:45 ftanguy Exp $
+/*$Id: KPMResourceVisitor.java,v 1.4 2008-03-05 08:09:54 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -28,8 +28,13 @@ import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
  */
 public class KPMResourceVisitor implements IResourceVisitor {
 
+	/**		The project to be processed.	*/
 	private KermetaProject project;
 
+	/**
+	 * 
+	 * @param project The project to be processed.
+	 */
 	public KPMResourceVisitor(KermetaProject project) {
 		this.project = project;
 	}
@@ -41,35 +46,35 @@ public class KPMResourceVisitor implements IResourceVisitor {
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE:
+			/*
+			 * 
+			 * One file has been found, let's create a unit for it and add rules if the files matches
+			 * certain conditions.
+			 * 
+			 */
 			Unit unit = KPMHelper.getOrCreateUnit(project.getKpm(), resource.getFullPath().toString());
 			unit.setLastTimeModified( project.getProjectUnit().getLastTimeModified() );
 			project.getKpm().getUnits().add(unit);
 			KPMHelper.addRules(project.getKpm(), unit);
+			// Unit with no rules are useless and then can be safely removed from the model.
 			if ( unit.getRules().isEmpty() )
 				project.getKpm().removeUnit( resource.getFullPath().toString() );
-			/*if ( resource.getFileExtension() != null ) {
-				if ( resource.getFileExtension().equals("kmt") ) {
-
-					KPMHelper.addCloseDependencyOnKMTFile(project.getKpm(), unit);
-					KPMHelper.addOpenDependencyOnKMTFile(project.getKpm(), unit);
-					KPMHelper.addUpdateDependencyOnKMTFile(project.getKpm(), unit);
-				} else if ( resource.getFileExtension().equals("km") ) {
-					Unit unit = KPMHelper.getOrCreateUnit(project.getKpm(), resource.getFullPath().toString());
-					unit.setLastTimeModified( project.getProjectUnit().getLastTimeModified() );
-					project.getKpm().getUnits().add(unit);
-					KPMHelper.ad
-				} else if ( resource.getFileExtension().equals("ecore") ) {
-					Unit unit = KPMHelper.getOrCreateUnit(project.getKpm(), resource.getFullPath().toString());
-					unit.setLastTimeModified( project.getProjectUnit().getLastTimeModified() );
-					project.getKpm().getUnits().add(unit);
-				}
-			}*/
 			break;
 			
 		case IResource.FOLDER :
+			/*
+			 * 
+			 * Do nothing for the moment. We do not have any actions on folders.
+			 * 
+			 */
 			break;
 			
 		case IResource.PROJECT :
+			/*
+			 * 
+			 * Just do nothing and continue the visit.
+			 * 
+			 */
 			break;
 			
 		default :

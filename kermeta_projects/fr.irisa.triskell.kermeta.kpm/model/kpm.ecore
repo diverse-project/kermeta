@@ -40,6 +40,9 @@
         eOpposite="#//Rule/in"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An action is the place where model and Eclipse implementation are connected.&#xA;Given an extension point (fr.irisa.triskell.kermeta.kpm.javaAction or fr.irisa.triskell.kermeta.kpm.kermetaAction), it will use the concrete implementation of the action.&#xA;If the exetension point is javaAction, it will :&#xA;&#x9;1 - create an instance of the java class defined in the extension point,&#xA;&#x9;2 - call the execute method on that newly created object.&#xA;&#xA;If the extension point is a kermetaAction, it will :&#xA;&#x9;1 - load the file with the loader plugin,&#xA;&#x9;2 - check this file (typechecking and constraintchecking),&#xA;&#x9;3 - launch the method defined via the mainClass and mainOperation tags found in the file."/>
+    </eAnnotations>
     <eOperations name="execute">
       <eParameters name="unit" eType="#//Unit"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
@@ -53,6 +56,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="extensionPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Out" eSuperTypes="#//AbstractEntity">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An out corresponds to &quot;something&quot; to produce when a rule has been activated (ie the In conditions are true).&#xA;An out usually have an action to perform to produce the &quot;something&quot; which can be the result of a java action or a kermeta action. An out can be processed synchronously or not depending on the value of the independent field."/>
+    </eAnnotations>
     <eOperations name="process">
       <eParameters name="unit" eType="#//Unit"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_wuebIKJkEdy6da5vFV3DGw" activeDiagram="_wurPcKJkEdy6da5vFV3DGw">
   <model href="kpm.ecore#/"/>
-  <diagrams xmi:id="_wurPcKJkEdy6da5vFV3DGw" position="0,0" size="100,100" name="No name" viewport="0,0">
+  <diagrams xmi:id="_wurPcKJkEdy6da5vFV3DGw" position="0,0" size="100,100" name="No name" viewport="7,60">
     <property xmi:id="_xMhpEKJkEdy6da5vFV3DGw" key="pageFormatName" value="A3"/>
     <property xmi:id="_xMhpEaJkEdy6da5vFV3DGw" key="diagramWidth" value="1188"/>
     <property xmi:id="_xMhpEqJkEdy6da5vFV3DGw" key="diagramHeight" value="1680"/>
@@ -223,7 +223,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_yxJdgKJkEdy6da5vFV3DGw" position="139,222" size="131,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_yxJdgKJkEdy6da5vFV3DGw" position="132,220" size="131,-1">
       <anchorage xmi:id="_yzj4UqJkEdy6da5vFV3DGw" graphEdge="_yzlGcKJkEdy6da5vFV3DGw"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_yxJdgaJkEdy6da5vFV3DGw" presentation="default">
         <element href="kpm.ecore#//ANDExpression"/>
