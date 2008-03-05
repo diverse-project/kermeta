@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.20 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.21 2008-03-05 08:16:53 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL
@@ -9,11 +9,14 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+import java.util.ArrayList;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
+import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
@@ -137,13 +140,28 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		return false;
 	}
 	
-	protected fr.irisa.triskell.kermeta.language.behavior.Block createBlock(LambdaPostfix lambda) {
-		fr.irisa.triskell.kermeta.language.behavior.Block block =  BehaviorFactory.eINSTANCE.createBlock();
-		if (lambda.getExpression() != null) {
-			builder.storeTrace(block,lambda);
-			block.getStatement().addAll(KMT2KMExperessionListBuilder.process(context, lambda.getExpression(), builder, monitor));
+	/**
+	 * Given the body of a lambda expression, creates if necessary the block container.
+	 * @param lambda
+	 * @return
+	 */
+	protected Block createBlock(LambdaPostfix lambda) {
+		// Creating the behavior
+		ArrayList<Expression> expressions = KMT2KMExperessionListBuilder.process(context, lambda.getExpression(), builder, monitor);
+		// The behavior can simply be one block expression.
+		// If it is the case just return it.
+		// Otherwise create a block containing all the statements
+		if ( expressions.size() == 1 && expressions.get(0) instanceof Block ) {
+			builder.storeTrace(expressions.get(0),lambda);
+			return (Block) expressions.get(0);
+		} else {
+			Block block =  BehaviorFactory.eINSTANCE.createBlock();
+			if (lambda.getExpression() != null) {
+				builder.storeTrace(block,lambda);
+				block.getStatement().addAll(expressions);
+			}
+			return block;
 		}
-		return block;
 	}
 	
 	/**
