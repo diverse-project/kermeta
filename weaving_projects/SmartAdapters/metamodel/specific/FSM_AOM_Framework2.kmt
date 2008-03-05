@@ -100,13 +100,15 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void 
-			post correctlySettedFSMState is do
+			post correctlySettedState is do
 				var ad : Adapter init getAdapter
 				var tempStateToSet : FSM::State
 				tempStateToSet ?= ad.getRealObject(StateToSet,false)
 				var isCorrectlySetted : Boolean init true
 				var c : Collection<kermeta::language::structure::Object>
-				isCorrectlySetted := isCorrectlySetted and tempStateToSet.name == ad.getRealObject(refname,false)
+				if refname != void then
+					isCorrectlySetted := isCorrectlySetted and tempStateToSet.name == ad.getRealObject(refname,false)
+				end
 				isCorrectlySetted
 			end
 			is do
@@ -146,15 +148,16 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void 
-			post correctlyUnsettedFSMState is do
+			post correctlyUnsettedState is do
 				var ad : Adapter init getAdapter
 				var tempStateToUnset : FSM::State
 				tempStateToUnset ?= ad.getRealObject(StateToUnset,false)
 				var isCorrectlyUnsetted : Boolean init true
 				var c : Collection<kermeta::language::structure::Object>
-				if refname != void then
+				if refname != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refname,false)) then
 					isCorrectlyUnsetted := isCorrectlyUnsetted and tempStateToUnset.name == void
-				end 
+				end end
 				isCorrectlyUnsetted
 			end
 			is do
@@ -235,14 +238,18 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void 
-			post correctlySettedFSMTransition is do
+			post correctlySettedTransition is do
 				var ad : Adapter init getAdapter
 				var tempTransitionToSet : FSM::Transition
 				tempTransitionToSet ?= ad.getRealObject(TransitionToSet,false)
 				var isCorrectlySetted : Boolean init true
 				var c : Collection<kermeta::language::structure::Object>
-				isCorrectlySetted := isCorrectlySetted and tempTransitionToSet.source == ad.getRealObject(refsource,false)
-				isCorrectlySetted := isCorrectlySetted and tempTransitionToSet.target == ad.getRealObject(reftarget,false)
+				if refsource != void then
+					isCorrectlySetted := isCorrectlySetted and tempTransitionToSet.source == ad.getRealObject(refsource,false)
+				end
+				if reftarget != void then
+					isCorrectlySetted := isCorrectlySetted and tempTransitionToSet.target == ad.getRealObject(reftarget,false)
+				end
 				isCorrectlySetted
 			end
 			is do
@@ -285,18 +292,20 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void 
-			post correctlyUnsettedFSMTransition is do
+			post correctlyUnsettedTransition is do
 				var ad : Adapter init getAdapter
 				var tempTransitionToUnset : FSM::Transition
 				tempTransitionToUnset ?= ad.getRealObject(TransitionToUnset,false)
 				var isCorrectlyUnsetted : Boolean init true
 				var c : Collection<kermeta::language::structure::Object>
-				if refsource != void then
+				if refsource != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refsource,false)) then
 					isCorrectlyUnsetted := isCorrectlyUnsetted and tempTransitionToUnset.source == void
-				end 
-				if reftarget != void then
+				end end
+				if reftarget != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(reftarget,false)) then
 					isCorrectlyUnsetted := isCorrectlyUnsetted and tempTransitionToUnset.target == void
-				end 
+				end end
 				isCorrectlyUnsetted
 			end
 			is do
@@ -379,7 +388,7 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void 
-			post correctlySettedFSMFsm is do
+			post correctlySettedFsm is do
 				var ad : Adapter init getAdapter
 				var tempFsmToSet : FSM::Fsm
 				tempFsmToSet ?= ad.getRealObject(FsmToSet,false)
@@ -433,16 +442,24 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void 
-			post correctlyUnsettedFSMFsm is do
+			post correctlyUnsettedFsm is do
 				var ad : Adapter init getAdapter
 				var tempFsmToUnset : FSM::Fsm
 				tempFsmToUnset ?= ad.getRealObject(FsmToUnset,false)
 				var isCorrectlyUnsetted : Boolean init true
 				var c : Collection<kermeta::language::structure::Object>
 				c ?= ad.getRealObject(refstates,true)
-				c.each{o | var p : FSM::State p?=o isCorrectlyUnsetted := isCorrectlyUnsetted and not tempFsmToUnset.states.contains(p)}
+				c.each{o | var p : FSM::State p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempFsmToUnset.states.contains(p)
+					end
+				}
 				c ?= ad.getRealObject(reftransitions,true)
-				c.each{o | var p : FSM::Transition p?=o isCorrectlyUnsetted := isCorrectlyUnsetted and not tempFsmToUnset.transitions.contains(p)}
+				c.each{o | var p : FSM::Transition p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempFsmToUnset.transitions.contains(p)
+					end
+				}
 				isCorrectlyUnsetted
 			end
 			is do
