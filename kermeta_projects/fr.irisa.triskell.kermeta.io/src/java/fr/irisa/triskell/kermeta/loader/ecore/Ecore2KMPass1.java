@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.25 2008-02-14 07:13:16 uid21732 Exp $
+/*$Id: Ecore2KMPass1.java,v 1.26 2008-03-05 08:14:38 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -83,7 +83,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		 * The annotation is the compilation unit.
 		 * 
 		 */
-		if ( node.getSource().equals("CompilationUnit") ) {
+		if ( node.getSource().equals("ModelingUnit") ) {
 			
 			if ( node.getDetails().containsKey( "require" ) ) {
 				String s = (String) node.getDetails().get("require");
@@ -142,7 +142,8 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			KermetaUnit unitToImport;
 			try {
 				unitToImport = IOPlugin.getDefault().getKermetaUnit( node.getEClassifier().eResource().getURI().toString() );
-				kermetaUnit.addRequire( unitToImport.getUri(), unitToImport );
+				kermetaUnit.getImportedKermetaUnits().add( unitToImport );
+//				kermetaUnit.addRequire( unitToImport.getUri(), unitToImport );
 			} catch (URIMalformedException e) {
 				e.printStackTrace();
 			} catch (NotRegisteredURIException e) {
@@ -155,30 +156,21 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	
 	/** Create a primitive type for given datatype */
     public Object visit(EDataType node) {
-    	// Special case of datatype used to represent type for TypeVariable/FunctionType:
-    	// no corresponding datatype in the KM representation
-    	if(node.getName().equals(KM2Ecore.KERMETA_TYPES)) 
-    		return null;
-    	
-    	/*
-    	 * 
-    	 * We do NOT create a new datatype if this one corresponds to one kermeta datatype.
-    	 * 
-    	 */
-    	/*String qualifiedName = "kermeta::language::structure::" + node.getName();
-    	currentPrimitiveType = (PrimitiveType) kermetaUnit.getTypeDefinitionByQualifiedName(qualifiedName);
-    	if ( currentPrimitiveType == null ) {
-    		// Create a primitive type
-    		currentPrimitiveType = StructureFactory.eINSTANCE.createPrimitiveType();
-    		currentPrimitiveType.setName( node.getName() );
-    		
-       		kermetaUnit.addTypeDefinition(currentPrimitiveType, getCurrentPackage());
-    	}*/
-    	
-    	currentPrimitiveType = KermetaModelHelper.PrimitiveType.create( node.getName() );
-    	kermetaUnit.addTypeDefinition(currentPrimitiveType, getCurrentPackage());
-    	
-    	datas.store(currentPrimitiveType, node);
+    	if ( ! isExternal(node) ) {
+	    	// Special case of datatype used to represent type for TypeVariable/FunctionType:
+	    	// no corresponding datatype in the KM representation
+	    	if(node.getName().equals(KM2Ecore.KERMETA_TYPES)) 
+	    		return null;
+	    	
+	    	// A datatype can be visited several times :
+	    	// - when visited like a type definition
+	    	// - when visited like a type
+	    	if ( datas.getPrimitiveType(node) == null ) {
+	    		currentPrimitiveType = KermetaModelHelper.PrimitiveType.create( node.getName() );
+	    		kermetaUnit.addTypeDefinition(currentPrimitiveType, getCurrentPackage());
+	    		datas.store(currentPrimitiveType, node);
+	    	}
+    	}
     	return null;
     }
 	
@@ -313,6 +305,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		}
 		
 		currentProperty.setIsComposite(isc);
+		accept(node.getEAttributeType());
 		return currentProperty;
 	}
 
@@ -367,18 +360,32 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	}
 	
 	public Object visit(EEnum node) {
-		currentEnumeration = (Enumeration) datas.getTypeDefinition(node);
-		if ( currentEnumeration == null ) {
-			currentEnumeration = StructureFactory.eINSTANCE.createEnumeration();
-			datas.store(currentEnumeration, node);
+		if ( ! isExternal(node) ) {
+			currentEnumeration = (Enumeration) datas.getTypeDefinition(node);
+			if ( currentEnumeration == null ) {
+				currentEnumeration = KermetaModelHelper.Enumeration.create(KMTHelper.getUnescapedIdentifier(node.getName()));
+				datas.store(currentEnumeration, node);
+				kermetaUnit.addTypeDefinition(currentEnumeration, getCurrentPackage());
+				acceptList(node.getELiterals());
+			}		
+			return currentEnumeration;
 		}
-		
-		currentEnumeration.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
-		
-		kermetaUnit.addTypeDefinition(currentEnumeration, getCurrentPackage());
-		//getTopPackage().getOwnedTypeDefinition().add(currentEnumeration);
-		acceptList(node.getELiterals());
-		return currentEnumeration;
+		return null;
+	}
+	
+	private boolean isExternal(EDataType datatype) {
+		boolean external = datatype.eResource() != resource;
+		if ( external ) {
+			try {
+				KermetaUnit unitToImport = IOPlugin.getDefault().getKermetaUnit( datatype.eResource().getURI().toString() );
+				kermetaUnit.getImportedKermetaUnits().add( unitToImport );
+			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			} catch (NotRegisteredURIException e) {
+				e.printStackTrace();
+			}
+		}
+		return external;
 	}
 	
 	public Object visit(EEnumLiteral node) {
