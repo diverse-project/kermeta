@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadBodiesAndSetOpposites.java,v 1.2 2008-02-14 07:12:48 uid21732 Exp $
+/*$Id: LoadBodiesAndSetOpposites.java,v 1.3 2008-03-05 07:54:52 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	LoadBodiesAndSetOpposites.java
 * License : EPL
@@ -29,10 +29,8 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
-import fr.irisa.triskell.kermeta.parser.gen.ast.GetterBody;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Invariant;
 import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNodeVisitor;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Operation;
@@ -40,7 +38,6 @@ import fr.irisa.triskell.kermeta.parser.gen.ast.OperationExpressionBody;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Postcondition;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Precondition;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Property;
-import fr.irisa.triskell.kermeta.parser.gen.ast.SetterBody;
 
 public class LoadBodiesAndSetOpposites extends KermetaASTNodeVisitor implements ILoadingAction, IKMTLoadingAction {
 

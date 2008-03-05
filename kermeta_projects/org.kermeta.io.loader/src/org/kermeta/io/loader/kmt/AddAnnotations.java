@@ -1,4 +1,4 @@
-/* $Id: AddAnnotations.java,v 1.2 2008-02-14 07:12:48 uid21732 Exp $
+/* $Id: AddAnnotations.java,v 1.3 2008-03-05 07:54:52 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : EPL
@@ -40,7 +40,6 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.ContextMultiLineComment;
 import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
