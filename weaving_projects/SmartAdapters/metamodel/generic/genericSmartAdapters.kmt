@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.17 2008-03-04 14:00:35 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.18 2008-03-05 09:49:39 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -273,39 +273,31 @@ package smartadapters
 			end
 			
 			operation updateClone(handler : Object, template : Object) is do
-				clone.remove(handler)
-				converter.deleteConverted(handler)
-			
-				var realHandler : Object
-				var realTemplate : Object
-			
+				var real : Object
 				if (template != void) then
-					realTemplate := getRealObject(template,false)
-					realHandler := Object.clone(realTemplate)
-					cloned.remove(realTemplate)
+					real := getRealObject(template,false)
+					cloned.add(real)
+					real := Object.clone(real)
 				else
-					realHandler:=converter.getConverted(handler)
+					converter.deleteConverted(handler)
+					real := converter.getConverted(handler)
 				end
-				if (realHandler != void) then
-					clone.put(handler, realHandler)
-					if (template != void) then
-						cloned.add(realTemplate)
-					end
-				end
+				clone.put(handler, real)
 			end
 
 			/**
 			 * This operation is called by domain-specific clone* / create* adaptations
 			 */
 			operation cloneAgain(handler : Object, template : Object, type : uniqueType) : Void is do
-				var update : Boolean init false
-				if type == uniqueType.non_unique then
-					updateClone(handler,template)
-					removable.add(getRealObject(handler,false))
-				else 
-					if type == uniqueType.unique then
-						if (template != void) then
-							update := not (cloned.contains(getRealObject(template,false)))
+				var update : Boolean init (type == uniqueType.non_unique)
+				if not update then 
+					if not update and type == uniqueType.unique then
+						if template != void then
+							var o : Object init getRealObject(template,false)
+							update := not (cloned.contains(o))
+							if not update then
+								clone.put(handler,o)
+							end
 						else
 							update :=  not(clone.containsKey(handler))
 						end
@@ -397,9 +389,9 @@ package smartadapters
 			 * or returns a converted clone associated to a created element
 			 */		
 			operation getRealObject(obj : Object, isCollect:Boolean) : Object is do
-				if obj == void then
+				/*if obj == void then
 					result := void
-				else
+				else*/
 					if (isCollect) then
 						var col : Collection<kermeta::language::structure::Object>
 						col ?= obj
@@ -426,7 +418,7 @@ package smartadapters
 							end
 						end
 					end
-				end	
+				//end
 			end
 		}
 	}
