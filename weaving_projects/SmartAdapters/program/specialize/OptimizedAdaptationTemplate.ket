@@ -154,7 +154,9 @@ package smartadapters
 				var c : Collection<kermeta::language::structure::Object>
 				<%c.eAllStructuralFeatures.each{f | %>
 					<%if f.upperBound==1 then%>
-				isCorrectlySetted := isCorrectlySetted and temp<%=c.name%>ToSet.<%=f.name%> == ad.getRealObject(ref<%=f.name%>,false)
+				if ref<%=f.name%> != void then
+					isCorrectlySetted := isCorrectlySetted and temp<%=c.name%>ToSet.<%=f.name%> == ad.getRealObject(ref<%=f.name%>,false)
+				end
 					<%else%>
 				c ?= ad.getRealObject(ref<%=f.name%>,true)
 				c.each{o | var p : <%=helper.getClassifierQualifiedName(f.eType)%> p?=o isCorrectlySetted := isCorrectlySetted and temp<%=c.name%>ToSet.<%=f.name%>.contains(p)}
@@ -241,12 +243,17 @@ package smartadapters
 				var c : Collection<kermeta::language::structure::Object>
 				<%c.eAllStructuralFeatures.each{f | %>
 					<%if f.upperBound==1 then%>
-				if ref<%=f.name%> != void then
+				if ref<%=f.name%> != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(ref<%=f.name%>,false)) then
 					isCorrectlyUnsetted := isCorrectlyUnsetted and temp<%=c.name%>ToUnset.<%=f.name%> == void
-				end 
+				end end
 					<%else%>
 				c ?= ad.getRealObject(ref<%=f.name%>,true)
-				c.each{o | var p : <%=helper.getClassifierQualifiedName(f.eType)%> p?=o isCorrectlyUnsetted := isCorrectlyUnsetted and not temp<%=c.name%>ToUnset.<%=f.name%>.contains(p)}
+				c.each{o | var p : <%=helper.getClassifierQualifiedName(f.eType)%> p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not temp<%=c.name%>ToUnset.<%=f.name%>.contains(p)
+					end
+				}
 					<%end%>
 				<%}%>
 				isCorrectlyUnsetted
