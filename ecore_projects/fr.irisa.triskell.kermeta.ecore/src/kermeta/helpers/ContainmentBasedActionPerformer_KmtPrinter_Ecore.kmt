@@ -1,4 +1,4 @@
-/* $Id: ContainmentBasedActionPerformer_KmtPrinter_Ecore.kmt,v 1.1 2008-03-05 10:13:51 cfaucher Exp $
+/* $Id: ContainmentBasedActionPerformer_KmtPrinter_Ecore.kmt,v 1.2 2008-03-05 10:52:12 cfaucher Exp $
  * Creation date: March 04, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -46,7 +46,7 @@ aspect class EPackage {
 aspect class EClass {
 	method kmtPrinter() : String is do
 		var content : StringBuffer init StringBuffer.new
-		content.append("aspect class " + self.name + "{\n")
+		content.append("aspect class " + self.name + " {\n")
 		
 		if self.eSuperTypes.size()>0 then
 			content.append("\tmethod")
@@ -61,6 +61,10 @@ aspect class EClass {
 		end
 		
 		content.append(" is do\n")
+		
+		if self.eSuperTypes.size()>0 then
+			content.append("\t\tsuper(func)\n")
+		end
 		
 		self.eachOwnedElement{ e |
 			content.append(e.kmtPrinter() + "\n")
