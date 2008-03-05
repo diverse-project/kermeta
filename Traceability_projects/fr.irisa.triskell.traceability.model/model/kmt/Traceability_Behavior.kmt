@@ -19,8 +19,7 @@ using kermeta::standard
  * This class represents a trace model.
  * This is a set of traces, references and messages.
  */
-@aspect "true"
-class TraceModel {
+aspect class TraceModel {
 	/** Boolean stating whether contained references are optimized */
 	property readonly optimizedReferences : Boolean getter is do
 		result := true
@@ -193,8 +192,7 @@ class TraceModel {
 /**
  * This abstract class represents a reference to a concrete object
  */
-@aspect "true"
-abstract class Reference {
+aspect abstract class Reference {
 	/**
 	 * This abstract operation allows testing reference equivalence
 	 */
@@ -205,8 +203,7 @@ abstract class Reference {
 /**
  * This class represents a reference to a concrete object contained by a file
  */
-@aspect "true"
-abstract class FileReference inherits Reference {
+aspect abstract class FileReference inherits Reference {
 	/**
 	 * This operation defines equivalency between FileReference elements
 	 */
@@ -224,8 +221,7 @@ abstract class FileReference inherits Reference {
 /**
  * This class represents a reference to a textual file concrete object
  */
-@aspect "true"
-class TextReference inherits FileReference {
+aspect class TextReference inherits FileReference {
 	/**
 	 * This operation defines equivalency between TextReference elements
 	 */
@@ -255,8 +251,7 @@ class TextReference inherits FileReference {
 /**
  * This class represents a reference to a XML concrete object
  */
-@aspect "true"
-class XMLReference inherits FileReference {
+aspect class XMLReference inherits FileReference {
 	/**
 	 * This operation defines equivalency between XMLReference elements
 	 */
@@ -279,8 +274,7 @@ class XMLReference inherits FileReference {
 /**
  * This class represents a reference to a model element
  */
-@aspect "true"
-class ModelReference inherits Reference {
+aspect class ModelReference inherits Reference {
 	/**
 	 * This operation defines equivalency between ModelReference elements
 	 */
