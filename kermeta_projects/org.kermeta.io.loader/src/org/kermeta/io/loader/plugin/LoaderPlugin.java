@@ -56,6 +56,9 @@ public class LoaderPlugin extends Plugin {
 		IOPlugin.FRAMEWORK_GENERATION = value;
 	}
 	
+	/**		A flag to allow or not the loading of the framework. Only used for test purposes.		*/
+	static public boolean LOAD_FRAMEWORK = true;
+	
 	private KermetaUnit framework;
 	
 	public KermetaUnit getFramework() {
@@ -131,33 +134,38 @@ public class LoaderPlugin extends Plugin {
 		 * 
 		 */
 		try {
-			framework = IOPlugin.getDefault().getKermetaUnit( frameworkURI );
-			ecore = IOPlugin.getDefault().getKermetaUnit( IOPlugin.ECORE_URI );
-			// TODO : refactor IOPlugin
-			IOPlugin.getDefault().framework = framework;
+			if ( LOAD_FRAMEWORK ) {
+				framework = IOPlugin.getDefault().getKermetaUnit( frameworkURI );
+				ecore = IOPlugin.getDefault().getKermetaUnit( IOPlugin.ECORE_URI );
+				// TODO : refactor IOPlugin
+				IOPlugin.getDefault().framework = framework;
 				
-			//ecore = load( IOPlugin.ECORE_URI, options );
-			// TODO : refactor IOPlugin
-			IOPlugin.getDefault().ecore = ecore;
+				//ecore = load( IOPlugin.ECORE_URI, options );
+				// TODO : refactor IOPlugin
+				IOPlugin.getDefault().ecore = ecore;
 				
-			/*
-			 * 
-			 * Loading the framework.
-			 * 
-			 */
-			load( frameworkURI, options );
-			framework.setFramework(true);
-				
-			for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
-				importedUnit.setFramework(true);	
-				
-			if ( ! framework.isIndirectlyErroneous() ) {
-				KermetaTypeChecker typechecker = new KermetaTypeChecker(framework);
-					typechecker.checkUnit();
-			}			
-			if ( ! framework.isIndirectlyErroneous() ) {
-				KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(framework);
-				constraintchecker.checkUnit();
+				/*
+				 * 
+				 * Loading the framework.
+				 * 
+				 */
+				load( frameworkURI, options );
+				framework.setFramework(true);
+					
+				for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
+					importedUnit.setFramework(true);	
+					
+				if ( ! framework.isErroneous() ) {
+					KermetaTypeChecker typechecker = new KermetaTypeChecker(framework);
+						typechecker.checkUnit();
+				}
+
+				if ( ! framework.isErroneous() ) {
+					KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(framework);
+					constraintchecker.checkUnit();
+				} else
+					System.err.println(KermetaUnitHelper.getAllErrors(framework));
+
 			}
 		} catch (URIMalformedException e) {
 			logErrorMessage("not able to initialize LoaderPlugin", e);
@@ -185,6 +193,8 @@ public class LoaderPlugin extends Plugin {
 	 * @throws NotRegisteredURIException
 	 */
 	public KermetaUnit load(String uri, Map<?, ?> options) throws URIMalformedException, NotRegisteredURIException {
+		if ( options == null )
+			options = new HashMap<Object, Object>();
 		getDefault().loadingContext.load(uri, options);
 		return IOPlugin.getDefault().getKermetaUnit(uri);
 	}
@@ -208,22 +218,27 @@ public class LoaderPlugin extends Plugin {
 					unitToUnload.add( importedUnit );*/
 		
 			for ( KermetaUnit unit : unitToUnload ) {
-				URI emfURI = URI.createURI( unit.getUri() );
-				Loader l = loadingContext.getLoader(emfURI);
-				if ( l != null ) {
-					/*
-					 * 
-					 * Removing the loader.
-					 * 
-					 */
-					l.getDatas().setKermetaUnit(null);
-					loadingContext.getLoaders().remove(l);
-					/*
-					 * 
-					 * Removing the kermeta unit.
-					 * 
-					 */
-					IOPlugin.getDefault().unload(emfURI.toString());
+				// It can be a dynamic expression unit (They do not have uris).
+				if ( unit.getUri() == null )
+					unit.getImportedKermetaUnits().clear();
+				else {
+					URI emfURI = URI.createURI( unit.getUri() );
+					Loader l = loadingContext.getLoader(emfURI);
+					if ( l != null ) {
+						/*
+						 * 
+						 * Removing the loader.
+						 * 
+						 */
+						l.getDatas().setKermetaUnit(null);
+						loadingContext.getLoaders().remove(l);
+						/*
+						 * 
+						 * Removing the kermeta unit.
+						 * 
+						 */
+						IOPlugin.getDefault().unload(emfURI.toString());
+					}
 				}
 			}
 		}
