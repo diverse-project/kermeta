@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta.ecore"
    name="Ecore MDK Plug-in"
-   version="1.0.99.qualifier"
+   version="1.1.0"
    provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.ecore.KermetaEcorePlugin">
 
