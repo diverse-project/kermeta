@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.31 2008-02-25 14:03:28 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.32 2008-03-05 08:11:16 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -24,6 +24,7 @@ import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -32,7 +33,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.java.Jar2KMPass;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
@@ -55,8 +55,8 @@ public class OperationChecker extends AbstractChecker {
  
 	
 	public OperationChecker(KermetaUnit unit, 
-			fr.irisa.triskell.kermeta.language.structure.Object operation, 
-			fr.irisa.triskell.kermeta.language.structure.Object context)
+			Object operation, 
+			Object context)
 	{
 		super(unit, operation, context);
 		this.classDefinition = (ClassDefinition)context;
@@ -365,8 +365,8 @@ public class OperationChecker extends AbstractChecker {
 			while (it1.hasNext() && isConform==true)
 			{
 				Parameter next = it1.next();
-				fr.irisa.triskell.kermeta.language.structure.Type typeA = next.getType(); 
-				fr.irisa.triskell.kermeta.language.structure.Type typeB = params2.get(ind2).getType();
+				Type typeA = next.getType(); 
+				Type typeB = params2.get(ind2).getType();
 				if (typeA instanceof TypeVariable && typeB instanceof TypeVariable) // TypeVariable?
 				{
 					isConform = checkTypeVariables((TypeVariable)typeA, (TypeVariable)typeB);
@@ -429,8 +429,8 @@ public class OperationChecker extends AbstractChecker {
 	 */
 	protected boolean checkTypeVariables(TypeVariable tv1, TypeVariable tv2) {
 		boolean isConform = false;
-		fr.irisa.triskell.kermeta.language.structure.Type t1 = tv1.getSupertype();
-		fr.irisa.triskell.kermeta.language.structure.Type t2 = tv2.getSupertype();
+		Type t1 = tv1.getSupertype();
+		Type t2 = tv2.getSupertype();
 		// (null value is not included in equals() operation cases.)
 		if (t1!=null && t2!=null)
 			isConform = isConformType(t1, t2);
@@ -453,7 +453,7 @@ public class OperationChecker extends AbstractChecker {
 	protected boolean checkReturnType(Operation op1, Operation op2)
 	{
 		boolean isConform = true;
-		String message = op1.getOwningClass().getName()+"." + op1.getName() + ": ReturnType ";
+		String message = op1.getOwningClass().getName()+"." + op1.getName() + ": The return type ";
 		Type t1 = op1.getType(); Type t2 = op2.getType();
 		if (isVoidType(t1) && isVoidType(t2)) isConform = true;
 		// See version 1.21, this piece of code has been added for overloading operations.
@@ -474,44 +474,25 @@ public class OperationChecker extends AbstractChecker {
 		else if (t1 instanceof TypeVariable && t2 instanceof TypeVariable) {// TypeVariable?
 			isConform = checkTypeVariables((TypeVariable)op1.getType(), (TypeVariable)op2.getType());
 			if(!isConform) message += " uses incompatible typeVariables ";
-		}
-		else if (t1 instanceof ClassImpl && t2 instanceof ClassImpl)
-		{
-			isConform = isConformType(t1, t2);
-			if(!isConform) message += " uses incompatible classImpls ";
-		} else if ( t1 instanceof PrimitiveType && t2 instanceof PrimitiveType ) {
-			PrimitiveType pt1 = (PrimitiveType) t1;
-			PrimitiveType pt2 = (PrimitiveType) t2;
+		} else if ( ! (t1 instanceof TypeVariable) && ! (t2 instanceof TypeVariable) ){
 			
-			fr.irisa.triskell.kermeta.language.structure.Class c1 = getClass(pt1);
-			fr.irisa.triskell.kermeta.language.structure.Class c2 = getClass(pt2);
-			isConform = c1.getTypeDefinition() == c2.getTypeDefinition();
-
-			message = "operation " + op1.getName() + " from class definition " + ((ClassDefinition) op1.eContainer()).getName() + " does not return the correct type as defined in the operation " + op2.getName() + " from class definition " + ((ClassDefinition) op2.eContainer()).getName();
-		} else if (op1.getType()!=null && op2.getType()!=null) {
-			message += "<"+pprinter.accept(op1.getType()) + "> != <" + pprinter.accept(op2.getType())+">"
-			+ op1.getType() + " != " + op2.getType() + "op1:" + op1.getName();
-			//isConform = false;
+			if ( op1.getType() instanceof PrimitiveType )
+				t1 = (Class) KermetaModelHelper.PrimitiveType.resolvePrimitiveType( (PrimitiveType) op1.getType() );
+			
+			if ( op2.getType() instanceof PrimitiveType )
+				t2 = (Class) KermetaModelHelper.PrimitiveType.resolvePrimitiveType( (PrimitiveType) op2.getType() );
+			
+			isConform = isConformType(t1, t2);
+			if ( ! isConform )
+				message += " is not the same than in " + op2.getOwningClass().getName() + "." + op2.getName() + ".";
+			
 		}
+			
 		if (!isConform) 
 			builder.error(message, op1);
-			//addProblem(ERROR, message, op1);
 		return isConform;
 	}
-	
-	private Class getClass(PrimitiveType pt) {
-		PrimitiveType current = pt;
-		Class result = null;
-		while ( result == null ) {
-			Object o = current.getInstanceType();
-			if ( o instanceof Class )
-				result = (Class) o;
-			else if ( o instanceof PrimitiveType )
-				current = (PrimitiveType) o;
-		}
-		return result;
-	}
-	
+		
 	/**
 	 * This is a dirty patch because "null"/unexisting type is VoidType by default
 	 */
