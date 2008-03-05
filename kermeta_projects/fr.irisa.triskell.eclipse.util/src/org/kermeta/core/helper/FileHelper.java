@@ -1,6 +1,6 @@
 
 
-/*$Id: StringHelper.java,v 1.2 2008-02-14 07:13:49 uid21732 Exp $
+/*$Id: FileHelper.java,v 1.1 2008-03-05 08:28:44 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	StringHelper.java
 * License : EPL
@@ -12,9 +12,13 @@
 
 package org.kermeta.core.helper;
 
-import org.eclipse.emf.common.util.URI;
+import java.io.File;
 
-public class StringHelper {
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+
+public class FileHelper {
 
 	/**
 	 * 
@@ -31,6 +35,20 @@ public class StringHelper {
 			return uri.toString();
 		}		
 		return path;
+	}
+	
+	/**
+	 * 
+	 * @param filePath a file path matching platform:/resource/* or platform:/plugin/* or an absolute path like file:/*
+	 * @return True if the file exists, false otherwise.
+	 */
+	static public boolean exists(String filePath) {
+		URI uri = URI.createURI(filePath);
+		// Resolving the filePath
+		URIConverter converter = new URIConverterImpl();
+		uri = converter.normalize(uri);
+		File f = new File(uri.toString().replace("file:", ""));
+		return f.exists();
 	}
 	
 }
