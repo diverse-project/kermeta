@@ -1,0 +1,21 @@
+/* $Id: containment_traversable_Generator_Launcher.kmt,v 1.1 2008-03-05 15:54:25 cfaucher Exp $
+ * Creation date: March 5, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+package root_package;
+
+require kermeta
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/ContainmentBasedActionPerformerGenerator.kmt"
+
+using ecore::helpers::containment_based_action_performer
+
+class Main {
+	operation main() : Void is do 
+		ContainmentBasedActionPerformerGenerator.new.generateContainmentBasedActionPerformer("platform:/resource/org.kermeta.compiler.kmt/models/kermeta_java.ecore")
+	end
+}

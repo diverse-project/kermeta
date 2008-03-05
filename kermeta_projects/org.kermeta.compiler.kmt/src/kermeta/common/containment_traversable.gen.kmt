@@ -1,0 +1,566 @@
+package kermeta;
+
+require kermeta
+
+using kermeta::language::structure
+using kermeta::standard
+
+package language {
+
+package behavior {
+
+aspect class CallExpression {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+		self.parameters.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class Expression {
+	method eachOwnedElement(func : <Object -> Object>) : Void from TypeContainer is do
+		super(func)
+
+	end
+}
+
+aspect class CallVariable {
+	method eachOwnedElement(func : <Object -> Object>) : Void from CallExpression is do
+		super(func)
+
+	end
+}
+
+aspect class CallFeature {
+	method eachOwnedElement(func : <Object -> Object>) : Void from CallExpression is do
+		super(func)
+		func(self.target)
+
+	end
+}
+
+aspect class CallSuperOperation {
+	method eachOwnedElement(func : <Object -> Object>) : Void from CallExpression is do
+		super(func)
+
+	end
+}
+
+aspect class CallResult {
+	method eachOwnedElement(func : <Object -> Object>) : Void from CallVariable is do
+		super(func)
+
+	end
+}
+
+aspect class CallValue {
+	method eachOwnedElement(func : <Object -> Object>) : Void from CallExpression is do
+		super(func)
+
+	end
+}
+
+aspect class Assignment {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+		func(self.target)
+		func(self.~value)
+
+	end
+}
+
+aspect class Block {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+		self.statement.each{ e |
+			func(e)
+		}
+		self.rescueBlock.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class Conditional {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+		func(self.thenBody)
+		func(self.elseBody)
+		func(self.condition)
+
+	end
+}
+
+aspect class Raise {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+		func(self.expression)
+
+	end
+}
+
+aspect class Rescue {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+		self.body.each{ e |
+			func(e)
+		}
+		func(self.exceptionType)
+
+	end
+}
+
+aspect class TypeReference {
+	method eachOwnedElement(func : <Object -> Object>) : Void from MultiplicityElement is do
+		super(func)
+
+	end
+}
+
+aspect class Literal {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+
+	end
+}
+
+aspect class EmptyExpression {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+
+	end
+}
+
+aspect class JavaStaticCall {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+		self.parameters.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class LambdaExpression {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+		self.parameters.each{ e |
+			func(e)
+		}
+		func(self.body)
+
+	end
+}
+
+aspect class LambdaParameter {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+		func(self.type)
+
+	end
+}
+
+aspect class IntegerLiteral {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Literal is do
+		super(func)
+
+	end
+}
+
+aspect class StringLiteral {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Literal is do
+		super(func)
+
+	end
+}
+
+aspect class BooleanLiteral {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Literal is do
+		super(func)
+
+	end
+}
+
+aspect class TypeLiteral {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Literal is do
+		super(func)
+		func(self.typeref)
+
+	end
+}
+
+aspect class VoidLiteral {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Literal is do
+		super(func)
+
+	end
+}
+
+aspect class Loop {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+		func(self.initialization)
+		func(self.body)
+		func(self.stopCondition)
+
+	end
+}
+
+aspect class SelfExpression {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+
+	end
+}
+
+aspect class VariableDecl {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Expression is do
+		super(func)
+		func(self.initialization)
+		func(self.type)
+
+	end
+}
+
+}
+
+package structure {
+
+
+
+aspect class Operation {
+	method eachOwnedElement(func : <Object -> Object>) : Void from MultiplicityElement is do
+		super(func)
+		self.ownedParameter.each{ e |
+			func(e)
+		}
+		self.~pre.each{ e |
+			func(e)
+		}
+		self.~post.each{ e |
+			func(e)
+		}
+		func(self.body)
+
+	end
+}
+
+aspect class Property {
+	method eachOwnedElement(func : <Object -> Object>) : Void from MultiplicityElement is do
+		super(func)
+		func(self.getterBody)
+		func(self.setterBody)
+
+	end
+}
+
+aspect class Type {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+
+	end
+}
+
+aspect class TypeContainer {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class EnumerationLiteral {
+	method eachOwnedElement(func : <Object -> Object>) : Void from NamedElement is do
+		super(func)
+
+	end
+}
+
+aspect class TypeVariableBinding {
+	method eachOwnedElement(func : <Object -> Object>) : Void from TypeContainer is do
+		super(func)
+
+	end
+}
+
+aspect class Class {
+	method eachOwnedElement(func : <Object -> Object>) : Void from ParameterizedType is do
+		super(func)
+
+	end
+}
+
+aspect class Object {
+	operation eachOwnedElement(func : <Object -> Object>) : Void is do
+		self.ownedTags.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class Model {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+
+	end
+}
+
+aspect class ModelType {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Type is do
+		super(func)
+
+	end
+}
+
+
+aspect class MultiplicityElement {
+	method eachOwnedElement(func : <Object -> Object>) : Void from TypedElement is do
+		super(func)
+
+	end
+}
+
+aspect class TypeDefinition {
+	method eachOwnedElement(func : <Object -> Object>) : Void from NamedElement is do
+		super(func)
+
+	end
+}
+
+aspect class DataType {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Type is do
+		super(func)
+
+	end
+}
+
+aspect class Enumeration {
+	method eachOwnedElement(func : <Object -> Object>) : Void from DataType is do
+		super(func)
+		self.ownedLiteral.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class NamedElement {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+
+	end
+}
+
+aspect class Package {
+	method eachOwnedElement(func : <Object -> Object>) : Void from TypeDefinitionContainer is do
+		super(func)
+		self.nestedPackage.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class Parameter {
+	method eachOwnedElement(func : <Object -> Object>) : Void from MultiplicityElement is do
+		super(func)
+
+	end
+}
+
+aspect class PrimitiveType {
+	method eachOwnedElement(func : <Object -> Object>) : Void from DataType is do
+		super(func)
+
+	end
+}
+
+aspect class TypedElement {
+	method eachOwnedElement(func : <Object -> Object>) : Void from TypeContainer is do
+		super(func)
+
+	end
+}
+
+
+aspect class Tag {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+
+	end
+}
+
+aspect class Constraint {
+	method eachOwnedElement(func : <Object -> Object>) : Void from NamedElement is do
+		super(func)
+		func(self.body)
+
+	end
+}
+
+
+aspect class ClassDefinition {
+	method eachOwnedElement(func : <Object -> Object>) : Void from GenericTypeDefinition is do
+		super(func)
+		self.~inv.each{ e |
+			func(e)
+		}
+		self.ownedAttribute.each{ e |
+			func(e)
+		}
+		self.ownedOperation.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+
+aspect class GenericTypeDefinition {
+	method eachOwnedElement(func : <Object -> Object>) : Void from TypeDefinition is do
+		super(func)
+		self.typeParameter.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class ParameterizedType {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Type is do
+		super(func)
+		self.virtualTypeBinding.each{ e |
+			func(e)
+		}
+		self.typeParamBinding.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class TypeVariable {
+	method eachOwnedElement(func : <Object -> Object>) : Void from TypeContainer is do
+		super(func)
+
+	end
+}
+
+aspect class ObjectTypeVariable {
+	method eachOwnedElement(func : <Object -> Object>) : Void from TypeVariable is do
+		super(func)
+
+	end
+}
+
+aspect class VirtualTypeContainer {
+	method eachOwnedElement(func : <Object -> Object>) : Void is do
+		self.virtualType.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class ModelTypeVariable {
+	method eachOwnedElement(func : <Object -> Object>) : Void from VirtualTypeContainer is do
+		super(func)
+
+	end
+}
+
+aspect class VirtualType {
+	method eachOwnedElement(func : <Object -> Object>) : Void from ObjectTypeVariable is do
+		super(func)
+		self.typeParamBinding.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class ModelingUnit {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+		self.packages.each{ e |
+			func(e)
+		}		
+		self.requires.each{ e |
+			func(e)
+		}
+		self.usings.each{ e |
+			func(e)
+		}
+		self.includeFilters.each{ e |
+			func(e)
+		}
+		self.excludeFilters.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class Require {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+
+	end
+}
+
+aspect class Using {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+
+	end
+}
+
+aspect class Filter {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Object is do
+		super(func)
+
+	end
+}
+
+aspect class ProductType {
+	method eachOwnedElement(func : <Object -> Object>) : Void from TypeContainer is do
+		super(func)
+
+	end
+}
+
+aspect class FunctionType {
+	method eachOwnedElement(func : <Object -> Object>) : Void from TypeContainer is do
+		super(func)
+
+	end
+}
+
+aspect class VoidType {
+	method eachOwnedElement(func : <Object -> Object>) : Void from Type is do
+		super(func)
+
+	end
+}
+
+aspect class TypeDefinitionContainer {
+	method eachOwnedElement(func : <Object -> Object>) : Void from NamedElement is do
+		super(func)
+		stdio.writeln("TypeDefinitionContainer")
+		self.ownedTypeDefinition.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+}
+
+}
+
