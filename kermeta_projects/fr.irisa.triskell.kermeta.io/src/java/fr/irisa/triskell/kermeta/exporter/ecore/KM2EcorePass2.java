@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.52 2008-02-14 07:13:20 uid21732 Exp $
+/* $Id: KM2EcorePass2.java,v 1.53 2008-03-05 08:13:40 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass2.java
  * License    : EPL
@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.behavior.StringLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
@@ -699,7 +700,8 @@ public class KM2EcorePass2 extends KM2Ecore {
 	{
 		String type_name = TypeHelper.getMangledQualifiedName(node.getInstanceType());
 		
- 		if ( exporterOptions.isIndependent ) {
+		// Data Type must come from external kermeta units.
+ 		if ( kermetaUnit.getInternalTypeDefinitionByName( KermetaModelHelper.NamedElement.qualifiedName(node) ) == null && exporterOptions.isIndependent ) {
 			EClassifier newEClassifier = primitiveTypesMappingForIndependency.get(node);
 			if (newEClassifier ==  null) {
 				if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
