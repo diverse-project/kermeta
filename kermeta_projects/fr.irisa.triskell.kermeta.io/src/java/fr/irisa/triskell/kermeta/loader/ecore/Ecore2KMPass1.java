@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.27 2008-03-05 09:01:43 ftanguy Exp $
+/*$Id: Ecore2KMPass1.java,v 1.28 2008-03-05 10:51:15 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
@@ -57,6 +58,9 @@ import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 public class Ecore2KMPass1 extends Ecore2KMPass {
 
 	private Resource resource = null; 
+	
+	/**		A node can be visited as definition or as type. This boolean set to true means that the action top perform is a creation.		*/
+	private boolean creation = true;
 	
 	public Ecore2KMPass1(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, Resource resource, IProgressMonitor monitor) {
 		super(kermetaUnit, datas, isQuickFixEnabled, monitor);
@@ -129,7 +133,11 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		packagesStack.push(p);
 		
 		acceptList(node.getEAnnotations());
-		acceptList(node.getEClassifiers());
+		for ( EClassifier c : node.getEClassifiers() ) {
+			creation = true;
+			accept(c);
+		}
+		//acceptList(node.getEClassifiers());
 		acceptList(node.getESubpackages());
 		
 		packagesStack.pop();
@@ -139,7 +147,11 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	
 	@Override
 	public Object visit(EGenericType node) {
-		if ( (node.getEClassifier() != null) && node.getEClassifier().eResource() != resource ) {
+		if ( node.getEClassifier() != null ) {
+			creation = false;
+			accept(node.getEClassifier());
+		}
+/*		if ( (node.getEClassifier() != null) && node.getEClassifier().eResource() != resource ) {
 			KermetaUnit unitToImport;
 			try {
 				unitToImport = IOPlugin.getDefault().getKermetaUnit( node.getEClassifier().eResource().getURI().toString() );
@@ -151,7 +163,8 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 				e.printStackTrace();
 			}
 		}
-		return super.visit(node);
+		return super.visit(node);*/
+		return null;
 	}
 
 	
@@ -177,7 +190,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	
 	/** Visit an EClass and convert it in a ClassDefinition*/
 	public Object visit(EClass node) {
-		if ( ! isExternal(node) && datas.getTypeDefinition(node) == null ) {
+		if ( ! isExternal(node) && creation && datas.getTypeDefinition(node) == null ) {
 			/*
 			 * 
 			 * Creating the class definition.
@@ -322,7 +335,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		 * IMPORTANT : check if the type is a cross reference. If it is, add a dependency to its kermeta unit.
 		 * 
 		 */
-		if ( node.getEType().eResource() != node.eResource() ) {
+		/*if ( node.getEType().eResource() != node.eResource() ) {
 			try {
 				kermetaUnit.getImportedKermetaUnits().add( IOPlugin.getDefault().getKermetaUnit(node.getEType().eResource().getURI().toString()) );
 			} catch (URIMalformedException e) {
@@ -330,7 +343,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 		
 		currentProperty = StructureFactory.eINSTANCE.createProperty();
 		datas.store(EcoreHelper.getQualifiedName(node), currentProperty);
@@ -385,7 +398,10 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		if ( external ) {
 			try {
 				KermetaUnit unitToImport = IOPlugin.getDefault().getKermetaUnit( o.eResource().getURI().toString() );
-				kermetaUnit.getImportedKermetaUnits().add( unitToImport );
+				if ( ! unitToImport.isFramework() ) {
+					kermetaUnit.getImportedKermetaUnits().add( unitToImport );
+					kermetaUnit.addRequire(unitToImport.getUri(), unitToImport);
+				}
 			} catch (URIMalformedException e) {
 				e.printStackTrace();
 			} catch (NotRegisteredURIException e) {
