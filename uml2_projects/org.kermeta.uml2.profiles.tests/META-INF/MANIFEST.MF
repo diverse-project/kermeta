@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests on UML2 MDK profiles tools
 Bundle-SymbolicName: org.kermeta.uml2.profiles.tests;singleton:=true
-Bundle-Version: 1.0.99.qualifier
+Bundle-Version: 1.1.0
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

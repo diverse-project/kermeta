@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta tutorial on Aspect Programming
 Bundle-SymbolicName: org.kermeta.tutorial.aspects
-Bundle-Version: 1.0.99.qualifier
+Bundle-Version: 1.1.0
 Require-Bundle: fr.irisa.triskell.kermeta.samples.fsm.model,
  org.eclipse.uml2.uml,
  fr.irisa.triskell.kermeta.samples.fsm,
