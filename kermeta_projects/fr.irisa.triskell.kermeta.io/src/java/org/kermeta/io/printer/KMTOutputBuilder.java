@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTOutputBuilder.java,v 1.5 2008-02-14 07:13:19 uid21732 Exp $
+/*$Id: KMTOutputBuilder.java,v 1.6 2008-03-05 08:22:34 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io2
 * File : 	KMTOutputBuilder.java
 * License : EPL
@@ -22,7 +22,7 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.kermeta.core.helper.StringHelper;
+import org.kermeta.core.helper.FileHelper;
 import org.kermeta.io.KermetaUnit;
 
 public class KMTOutputBuilder {
@@ -116,7 +116,7 @@ public class KMTOutputBuilder {
 		if ( fileName != null )
 			uris.put(kermetaUnit, fileName);
 		else {
-			uri = StringHelper.replaceExtension(uri, "kmt");
+			uri = FileHelper.replaceExtension(uri, "kmt");
 			uris.put(kermetaUnit, uri);
 		}
 		
