@@ -1,4 +1,4 @@
-/* $Id: ContainmentBasedActionPerformerGenerator.kmt,v 1.1 2008-03-05 10:13:51 cfaucher Exp $
+/* $Id: ContainmentBasedActionPerformerGenerator.kmt,v 1.2 2008-03-05 10:52:38 cfaucher Exp $
  * Creation date: March 4, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -27,20 +27,19 @@ using EcoreHelpers
 
 class ContainmentBasedActionPerformerGenerator
 {
-	operation generateContainmentBasedActionPerformer() : Void is do 
-		var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/kermeta_java.ecore"
-		var root : EPackage init loadEcoreModel(input)
+	operation generateContainmentBasedActionPerformer(inputEcoreMetamodel : String) : Void is do 
+		var root : EPackage init loadEcoreModel(inputEcoreMetamodel)
 		
 		var content : StringBuffer init StringBuffer.new
 		
 		content.append("package " + EcoreHelper.new.getPackageQualifiedName(root) + ";\n\n")
-		content.append("require kermeta\nrequire \"" + input + "\"\n\n")
+		content.append("require kermeta\nrequire \"" + inputEcoreMetamodel + "\"\n\n")
 		content.append("using kermeta::language::structure\n\n")
 		
 		content.append(root.kmtPrinter())
 		
 		var ioHelper : FileIO init FileIO.new
-		var filename : String init "platform:/resource/org.kermeta.compiler.kmt/models/kermeta_java_path.kmt"
+		var filename : String init inputEcoreMetamodel + "_ContainmentBasedActionPerformer.kmt"
 				          	
 		ioHelper.writeTextFile(filename,content.toString())
 		
