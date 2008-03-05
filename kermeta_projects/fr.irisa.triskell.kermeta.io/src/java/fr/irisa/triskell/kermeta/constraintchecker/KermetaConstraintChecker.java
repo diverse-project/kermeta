@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.19 2008-02-14 07:13:17 uid21732 Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.20 2008-03-05 08:10:20 ftanguy Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -30,6 +30,7 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -117,6 +118,20 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 			builder.error("Cycle in the inheritance tree - The type hierachy of class '" + current_class.getName()+"' is inconsistant.", builder.getNodeByModelElement(current_class));
 			return false;
 		}
+		
+		/*
+		 * 
+		 * Checking the name of type variables.
+		 * Type Definitions' name CANNOT be used for type variables.
+		 * 
+		 */
+		for ( TypeVariable tv : class_definition.getTypeParameter() ) {
+			if ( builder.getTypeDefinitionByName( tv.getName() ) != null ) {
+				String message = "The name of a type variable cannot be a name of type definition.";
+				builder.error(message, tv);
+			}
+		}
+		
 		return super.visitClassDefinition(class_definition);
 	}
 		/**
