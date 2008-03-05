@@ -1,6 +1,6 @@
 <%@ ket package="specialize" 
-	require="platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt" 
-	using="ecore EcoreHelpers" 
+	require="platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/keyword_list.kmt" 
+	using="ecore EcoreHelpers kermeta::language::key" 
 	class="AdaptationTemplate"  
 	parameters="classif:Set<EClassifier>, domainMM:String, domainMMPattern:String, shortName:String"
 %>
@@ -15,7 +15,12 @@
 /*
  * This file was automatically generated
  */
-<%var helper:EcoreHelper init EcoreHelper.new%>
+<%
+var helper:EcoreHelper init EcoreHelper.new
+var keyWord : KeyWordList init KeyWordList.new
+keyWord.initialize
+var fName : String
+%>
 
 package org;
 require kermeta
@@ -155,11 +160,11 @@ package smartadapters
 				<%c.eAllStructuralFeatures.each{f | %>
 					<%if f.upperBound==1 then%>
 				if ref<%=f.name%> != void then
-					isCorrectlySetted := isCorrectlySetted and temp<%=c.name%>ToSet.<%=f.name%> == ad.getRealObject(ref<%=f.name%>,false)
+					isCorrectlySetted := isCorrectlySetted and temp<%=c.name%>ToSet.<%if keyWord.isKeyword(f.name) then%>~<%end%><%=f.name%> == ad.getRealObject(ref<%=f.name%>,false)
 				end
 					<%else%>
 				c ?= ad.getRealObject(ref<%=f.name%>,true)
-				c.each{o | var p : <%=helper.getClassifierQualifiedName(f.eType)%> p?=o isCorrectlySetted := isCorrectlySetted and temp<%=c.name%>ToSet.<%=f.name%>.contains(p)}
+				c.each{o | var p : <%=helper.getClassifierQualifiedName(f.eType)%> p?=o isCorrectlySetted := isCorrectlySetted and temp<%=c.name%>ToSet.<%if keyWord.isKeyword(f.name) then%>~<%end%><%=f.name%>.contains(p)}
 					<%end%>
 				<%}%>
 				isCorrectlySetted
@@ -172,9 +177,9 @@ package smartadapters
 				<%c.eAllStructuralFeatures.each{f | 
 				if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
 				<%if f.upperBound==1 then%>
-				temp<%=c.name%>.<%=f.name%> ?= ad.setSingleProperty(ref<%=f.name%>, temp<%=c.name%>.<%=f.name%>)
+				temp<%=c.name%>.<%if keyWord.isKeyword(f.name) then%>~<%end%><%=f.name%> ?= ad.setSingleProperty(ref<%=f.name%>, temp<%=c.name%>.<%if keyWord.isKeyword(f.name) then%>~<%end%><%=f.name%>)
 				<%else%>
-				ad.setMultipleProperty(temp<%=c.name%>.<%=f.name%>,ref<%=f.name%>)
+				ad.setMultipleProperty(temp<%=c.name%>.<%if keyWord.isKeyword(f.name) then%>~<%end%><%=f.name%>,ref<%=f.name%>)
 				<%end%>
 				<%end
 				}%>
@@ -245,13 +250,13 @@ package smartadapters
 					<%if f.upperBound==1 then%>
 				if ref<%=f.name%> != void then 
 				if not ad.notRemovable.contains(ad.getRealObject(ref<%=f.name%>,false)) then
-					isCorrectlyUnsetted := isCorrectlyUnsetted and temp<%=c.name%>ToUnset.<%=f.name%> == void
+					isCorrectlyUnsetted := isCorrectlyUnsetted and temp<%=c.name%>ToUnset.<%if keyWord.isKeyword(f.name) then%>~<%end%><%=f.name%> == void
 				end end
 					<%else%>
 				c ?= ad.getRealObject(ref<%=f.name%>,true)
 				c.each{o | var p : <%=helper.getClassifierQualifiedName(f.eType)%> p?=o 
 					if not ad.notRemovable.contains(p) then
-						isCorrectlyUnsetted := isCorrectlyUnsetted and not temp<%=c.name%>ToUnset.<%=f.name%>.contains(p)
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not temp<%=c.name%>ToUnset.<%if keyWord.isKeyword(f.name) then%>~<%end%><%=f.name%>.contains(p)
 					end
 				}
 					<%end%>
@@ -266,9 +271,9 @@ package smartadapters
 				<%c.eAllStructuralFeatures.each{f | 
 				if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
 				<%if f.upperBound==1 then%>
-				temp<%=c.name%>.<%=f.name%> ?= ad.unsetSingleProperty(ref<%=f.name%>, temp<%=c.name%>.<%=f.name%>)
+				temp<%=c.name%>.<%if keyWord.isKeyword(f.name) then%>~<%end%><%=f.name%> ?= ad.unsetSingleProperty(ref<%=f.name%>, temp<%=c.name%>.<%if keyWord.isKeyword(f.name) then%>~<%end%><%=f.name%>)
 				<%else%>
-				ad.unsetMultipleProperty(temp<%=c.name%>.<%=f.name%>,ref<%=f.name%>)
+				ad.unsetMultipleProperty(temp<%=c.name%>.<%if keyWord.isKeyword(f.name) then%>~<%end%><%=f.name%>,ref<%=f.name%>)
 				<%end%>
 				<%end
 				}%>
