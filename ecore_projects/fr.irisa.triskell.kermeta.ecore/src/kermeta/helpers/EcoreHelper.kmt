@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.10 2008-02-21 15:23:39 dvojtise Exp $
+/* $Id: EcoreHelper.kmt,v 1.11 2008-03-05 10:14:12 cfaucher Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -20,12 +20,14 @@ require kermeta
 require "../ecore_behavior.kmt"
 //require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 //require "http://www.eclipse.org/emf/2002/Ecore"
+require "../keyword_list.kmt"
  
 using kermeta::standard
 using kermeta::exceptions
 
 using kermeta::persistence
 using ecore
+using kermeta::language::key
 
 /** This class provides some helper methods to load/save Ecore models
  *   Plus some other useful navigation methods
@@ -249,6 +251,21 @@ class EcoreHelper
 		result := void
     end
 	
+	operation getMangledIdentifier(id : String) : String is do
+		
+		if id.isVoid() then
+			result := id
+		else
+			var kermetaKeyWordList : KeyWordList init KeyWordList.new
+			kermetaKeyWordList.initialize()
+			if kermetaKeyWordList.isKeyword(id) then
+				result := "~" + id
+			else
+				result := id
+			end
+		end
+		
+	end
         
 }
 
