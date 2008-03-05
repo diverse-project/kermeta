@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadResource.java,v 1.3 2008-02-19 17:10:20 dvojtise Exp $
+/*$Id: LoadResource.java,v 1.4 2008-03-05 07:53:28 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	LoadResource.java
 * License : EPL
@@ -51,10 +51,10 @@ public class LoadResource extends EcoreLoadingAction {
 			try {
 				resource.load(null);
 				EcoreUtil.resolveAll(resourceSet);
-				for ( Resource r : resourceSet.getResources() ) {
+				/*for ( Resource r : resourceSet.getResources() ) {
 					if ( r != resource )
 						datas.getKermetaUnit().addRequire(r.getURI().toString(), null);
-				}
+				}*/
 				datas.contents.addAll( resource.getContents() );
 			} catch (IOException e) {
 				e.printStackTrace();
