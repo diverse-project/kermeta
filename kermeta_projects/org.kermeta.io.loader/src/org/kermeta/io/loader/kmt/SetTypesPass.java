@@ -1,6 +1,6 @@
 
 
-/*$Id: SetTypesPass.java,v 1.4 2008-02-29 16:23:03 dvojtise Exp $
+/*$Id: SetTypesPass.java,v 1.5 2008-03-05 07:56:06 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	SetTypesPass.java
 * License : EPL
@@ -26,12 +26,15 @@ import org.kermeta.model.KermetaModelHelper;
 import fr.irisa.triskell.kermeta.ast.helper.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypedElement;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMTypeBuilder;
 import fr.irisa.triskell.kermeta.parser.gen.ast.ClassDecl;
@@ -81,6 +84,9 @@ public class SetTypesPass extends KermetaASTNodeVisitor implements ILoadingActio
 			element.setUpper( KermetaASTHelper.getUpper(typeRef) );
 			element.setLower( KermetaASTHelper.getLower(typeRef) );
 		}
+		// The element only contains type that are not Type Definition
+		if ( type != null && ! (type instanceof TypeDefinition) && ! (type instanceof ModelTypeVariable) && ! (type instanceof ObjectTypeVariable) )
+			element.getContainedType().add( type );
 		setType(element, type, typeRef);
 	}
 	
