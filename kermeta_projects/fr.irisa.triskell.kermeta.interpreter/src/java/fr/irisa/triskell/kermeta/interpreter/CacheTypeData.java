@@ -1,4 +1,4 @@
-/* $Id: CacheTypeData.java,v 1.9 2008-02-14 07:13:56 uid21732 Exp $
+/* $Id: CacheTypeData.java,v 1.10 2008-03-05 08:27:17 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : CacheTypeData.java
  * License    : EPL
@@ -39,7 +39,7 @@ public class CacheTypeData {
 		
 		
 		// build callableOperations table
-		List<CallableOperation> ops = aType.callableOperations();
+		List<CallableOperation> ops = aType.callableOperations(null);
 		if (ops != null) 
 		{
 			Iterator<CallableOperation> it = ops.iterator();

@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.44 2008-02-14 07:13:56 uid21732 Exp $
+/* $Id: KermetaInterpreter.java,v 1.45 2008-03-05 08:27:47 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -17,29 +17,15 @@
  */
 package fr.irisa.triskell.kermeta.launcher;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.checker.KermetaUnitChecker;
-import org.kermeta.merger.Merger;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
-import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
@@ -83,12 +69,22 @@ public class KermetaInterpreter {
 	/** If true, the launch will be preceded by a call to setUp, and followed by tearDown operationnif they exist */
 	public boolean isTestCase = false;
 		
-	public KermetaInterpreter(KermetaUnit source, Tracer tracer) {
+	/**
+	 * Interpretes the given kermeta unit.
+	 * 
+	 * @param source
+	 */
+	public KermetaInterpreter(KermetaUnit source) {
 		unit = source;
 		if ( unit.isIndirectlyErroneous() )
 	        throw new KermetaInterpreterError( KermetaUnitHelper.getAllErrorsAsString(unit) );
 	    initializeMemory();
 	    initializeEntryPoint();
+	}
+	
+	public KermetaInterpreter(KermetaUnit source, Tracer tracer) {
+		this(source);
+		unit.setTracer(tracer);
 	}
 
 	protected void finalize() throws Throwable {
@@ -176,7 +172,7 @@ public class KermetaInterpreter {
 	    {	// set entryClass
 	        entryClass = InheritanceSearch.getFClassForClassDefinition((ClassDefinition)td);
 	        // Search the operation
-	        co = new SimpleType(entryClass).getOperationByName(operation_name);
+	        co = new SimpleType(entryClass).getOperationByName(operation_name, getUnit());
 	    
 	    
 	        if (co == null) 
@@ -243,7 +239,7 @@ public class KermetaInterpreter {
 	/** call the given operation 
 	 * do nothing if the operation doesn't exist*/
 	private void callOperation(ExpressionInterpreter exp_interpreter, RuntimeObject entryObject, String opName) {
-		CallableOperation co = new SimpleType(entryClass).getOperationByName(opName); 
+		CallableOperation co = new SimpleType(entryClass).getOperationByName(opName, getUnit()); 
 		if (co != null) {
 			Operation setUpOp = co.getOperation();
 			exp_interpreter.invoke(entryObject, setUpOp, null);

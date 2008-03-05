@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.22 2008-02-15 14:07:17 dvojtise Exp $
+/* $Id: KermetaRaisedException.java,v 1.23 2008-03-05 08:27:17 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -101,7 +101,7 @@ public class KermetaRaisedException extends Error {
 	    }
 	    else // by default, we will print the toString representation of the raised object
 	    {
-		    CallableOperation coperation = target.getOperationByName("toString");
+		    CallableOperation coperation = target.getOperationByName("toString", null);
 	    	RuntimeObject rovalue = (RuntimeObject) interpreter.invoke(raised_object, coperation.getOperation(), new ArrayList<RuntimeObject>());
 	    	result += fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(rovalue);
 	    }
