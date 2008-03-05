@@ -1,0 +1,56 @@
+/* $Id: ContainmentBasedActionPerformerGenerator.kmt,v 1.1 2008-03-05 10:13:51 cfaucher Exp $
+ * Creation date: March 4, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *
+ */
+
+@mainClass "ecore::helpers::containment_based_action_performer::ContainmentBasedActionPerformerGenerator"
+@mainOperation "generateContainmentBasedActionPerformer"
+
+
+package ecore::helpers::containment_based_action_performer;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "../ecore_behavior.kmt"
+require "../helpers/ContainmentBasedActionPerformer_KmtPrinter_Ecore.kmt"
+require "../helpers/EcoreHelper.kmt"
+
+using ecore
+using kermeta::language::structure
+using kermeta::persistence
+using kermeta::utils
+using kermeta::io
+using EcoreHelpers
+
+class ContainmentBasedActionPerformerGenerator
+{
+	operation generateContainmentBasedActionPerformer() : Void is do 
+		var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/kermeta_java.ecore"
+		var root : EPackage init loadEcoreModel(input)
+		
+		var content : StringBuffer init StringBuffer.new
+		
+		content.append("package " + EcoreHelper.new.getPackageQualifiedName(root) + ";\n\n")
+		content.append("require kermeta\nrequire \"" + input + "\"\n\n")
+		content.append("using kermeta::language::structure\n\n")
+		
+		content.append(root.kmtPrinter())
+		
+		var ioHelper : FileIO init FileIO.new
+		var filename : String init "platform:/resource/org.kermeta.compiler.kmt/models/kermeta_java_path.kmt"
+				          	
+		ioHelper.writeTextFile(filename,content.toString())
+		
+	end
+	
+	operation loadEcoreModel(input: String) : ecore::EPackage is do           
+	   		var resource : Resource init EMFRepository.new.getResource(input)
+	       	resource.load()
+	      	
+	      	// result is a EPackage
+	        result ?= resource.instances.one
+   	end
+}

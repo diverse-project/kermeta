@@ -1,0 +1,39 @@
+/* $Id: ContainmentBasedActionPerformer_Ecore.kmt,v 1.1 2008-03-05 10:13:51 cfaucher Exp $
+ * Creation date: March 04, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *
+ */
+
+package ecore;
+ 
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "../ecore_behavior.kmt"
+require "EcoreHelper.kmt"
+
+using ecore
+using kermeta::language::structure
+
+aspect class EPackage {
+	operation eachOwnedElement(func : <EObject -> Object>) : Void is do
+        self.eSubpackages.each{ p |
+			func(p)
+		}
+		
+        self.eClassifiers.each{ o |
+			func(o)
+		}
+	end
+}
+
+aspect class EClass {
+	operation eachOwnedElement(func : <EObject -> Object>) : Void is do
+		self.eReferences.each{ ref |
+			if ref.containment then
+				func(ref)
+			end
+		}
+	end
+}
