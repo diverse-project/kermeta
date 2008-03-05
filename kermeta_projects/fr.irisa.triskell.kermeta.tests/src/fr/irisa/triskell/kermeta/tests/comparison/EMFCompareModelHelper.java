@@ -1,4 +1,4 @@
-/* $Id: EMFCompareModelHelper.java,v 1.7 2008-03-05 08:00:13 ftanguy Exp $
+/* $Id: EMFCompareModelHelper.java,v 1.8 2008-03-05 17:04:02 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.tests.comparison
  * File      : EMFCompareModelHelper.java
  * License   : EPL
@@ -12,14 +12,12 @@ package fr.irisa.triskell.kermeta.tests.comparison;
 
 import java.io.IOException;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.diff.generic.DiffMaker;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
 import org.eclipse.emf.compare.diff.service.DiffService;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.statistic.DifferencesServices;
+import org.eclipse.emf.compare.match.service.MatchService;
 import org.eclipse.emf.compare.util.ModelUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -49,7 +47,7 @@ public class EMFCompareModelHelper {
 	 * @return
 	 */
 	private static DiffModel getDiffModel(EObject model1, EObject model2) {
-		return new DiffMaker().doDiff(getMatchModel(model1, model2));		
+		return DiffService.doDiff(getMatchModel(model1, model2));		
 	}
 	
 	/**
@@ -97,7 +95,7 @@ public class EMFCompareModelHelper {
 	private static MatchModel getMatchModel(EObject model1, EObject model2) {
 		try {
 			// Creates the match then the diff model for those two models
-			return new DifferencesServices().modelMatch(model1, model2, new NullProgressMonitor());
+			return MatchService.doMatch(model1, model2, null);
 		} catch (InterruptedException e) {
 			return null;
 		}
