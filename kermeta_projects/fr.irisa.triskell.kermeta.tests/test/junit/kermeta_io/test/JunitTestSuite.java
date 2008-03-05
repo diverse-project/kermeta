@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.8 2008-02-27 12:20:01 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.9 2008-03-05 08:01:42 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -15,22 +15,20 @@
 
 package kermeta_io.test;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import junit.framework.TestCase;
 
+import org.kermeta.core.helper.FileHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KMTOutputBuilder;
 import org.kermeta.io.util2.UserDirURI;
-import org.kermeta.loader.LoadingOptions;
 
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.tests.comparison.EMFCompareModelHelper;
 import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
 
 
@@ -40,6 +38,13 @@ import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
  */
 public class JunitTestSuite extends TestCase {
 
+	static private String EXPECTED_KM_FOLDER = "/expected_output/km";
+	
+	static private String OUTPUT_KM_FOLDER = "/output";
+
+	static private String OUTPUT_KMT_FOLDER = "/output";
+
+	
 	static private IOPlugin ioPlugin;
 	
 	public JunitTestSuite(String arg0) {
@@ -55,6 +60,7 @@ public class JunitTestSuite extends TestCase {
 
 			IOPlugin.LOCAL_USE = true;
 			ioPlugin = IOPlugin.getDefault();
+			//LoaderPlugin.LOAD_FRAMEWORK = false;
 		
 		}
 
@@ -78,17 +84,27 @@ public class JunitTestSuite extends TestCase {
 
 
 
-/*** BEGIN GENERATED TESTS ***/
-public void testpuzzle() throws Exception {
-testWithFile("test/io/ecore_testcases","puzzle.ecore" );
-}
 
+
+/*** BEGIN GENERATED TESTS ***/
 public void testSimple() throws Exception {
 testWithFile("test/io/ecore_testcases","Simple.ecore" );
 }
 
 public void testUML2() throws Exception {
 testWithFile("test/io/ecore_testcases","UML2.ecore" );
+}
+
+public void testpuzzle() throws Exception {
+testWithFile("test/io/ecore_testcases","puzzle.ecore" );
+}
+
+public void test001_testPackageDeclaration() throws Exception {
+testWithFile("test/io/kmt_testcases","001_testPackageDeclaration.kmt" );
+}
+
+public void test001_testPackageDeclarationWithURI() throws Exception {
+testWithFile("test/io/kmt_testcases","001_testPackageDeclarationWithURI.kmt" );
 }
 
 public void test10_testEnum() throws Exception {
@@ -378,9 +394,70 @@ testWithFile("test/io/kmt_testcases","testVariable.kmt" );
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 	
-public void testWithFile(String dir, String file) throws Exception {
+public void testWithFile(String dir, String file) {
 	UserDirURI.createDirFromName(dir+"/output");
 	
+	String kmFile = FileHelper.replaceExtension(file, "km");
+	String outputKMFolder = TestPlugin.PLUGIN_TESTS_PATH + dir + OUTPUT_KM_FOLDER;
+	String outputKMTFolder = TestPlugin.PLUGIN_TESTS_PATH + dir + OUTPUT_KMT_FOLDER;
+	
+	String kmtSourceFileURI = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
+	String kmtOutputFileURI = outputKMTFolder + "/" + file;
+	String expectedKMFileURI = TestPlugin.PLUGIN_TESTS_PATH + dir + EXPECTED_KM_FOLDER + "/" + kmFile;
+	String outputKMFileURI =  outputKMFolder + "/" + kmFile;
+	
+	try {
+		// Loading the source file
+		KermetaUnit kmtSource = LoaderPlugin.getDefault().load(kmtSourceFileURI, null);
+
+		// Is the load correct ?
+		assertTrue("Errors when loading the source kmt : " + KermetaUnitHelper.getAllErrorsAsString(kmtSource), KermetaUnitHelper.getAllErrors(kmtSource).isEmpty() );
+		
+		// Pretty print the file
+		KMTOutputBuilder builder = new KMTOutputBuilder();
+		builder.print(kmtSource, null, kmtOutputFileURI);
+		builder.flush();
+		
+		// Loading the generated kmt file
+		KermetaUnit kmtOutput = LoaderPlugin.getDefault().load(kmtOutputFileURI, null);
+
+		// Is the load correct ?
+		assertTrue("Errors when loading the output kmt : " + KermetaUnitHelper.getAllErrorsAsString(kmtOutput), KermetaUnitHelper.getAllErrors(kmtOutput).isEmpty() );
+		
+		// Exporting the source file into km
+		KmExporter exporter = new KmExporter();
+		exporter.export(kmtSource, null, outputKMFileURI);
+		
+		// Loading the generated km file
+		KermetaUnit kmOutput = LoaderPlugin.getDefault().load(outputKMFileURI, null);
+
+		// Is the load correct ?
+		assertTrue("Errors when loading the output km : " + KermetaUnitHelper.getAllErrorsAsString(kmOutput), KermetaUnitHelper.getAllErrors(kmOutput).isEmpty() );
+		
+		// Loading the expected file
+		if ( FileHelper.exists(expectedKMFileURI) ) {
+			KermetaUnit expected = LoaderPlugin.getDefault().load(expectedKMFileURI, null);			
+			// Is the load correct ?
+			assertTrue("Errors when loading the expected km : " + KermetaUnitHelper.getAllErrorsAsString(expected), KermetaUnitHelper.getAllErrors(expected).isEmpty() );		
+			// Comparing
+			assertTrue( "Comparison between source and expected", compare(kmOutput, expected) );
+		}	
+	} catch (URIMalformedException e) {
+		assertTrue(e.getLocalizedMessage(), false);
+	} catch (NotRegisteredURIException e) {
+		assertTrue(e.getLocalizedMessage(), false);
+	} finally {
+	
+		LoaderPlugin.getDefault().unload( kmtSourceFileURI );
+		LoaderPlugin.getDefault().unload( expectedKMFileURI );
+		LoaderPlugin.getDefault().unload( outputKMFileURI );
+		LoaderPlugin.getDefault().unload( kmtOutputFileURI );
+	
+	}
+	
+	
+	
+	/*
 	String fileURI = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 	// phase 1 : test that it load correctly
 	Map<Object, Object> options = new HashMap<Object, Object> ();
@@ -430,10 +507,10 @@ public void testWithFile(String dir, String file) throws Exception {
 		} else
 			System.out.println("Ignoring phase 3bis of " + builder.getUri() + ", due to a cycle in its require statements. \n (in this case a per file basis test cannot be applied)");
 	}
-	
+	*/
 	//LoaderPlugin.getDefault().unload(fileURI);
 }
-
+/*
 	protected boolean hasDependencyCycle(KermetaUnit ku){
 		List<KermetaUnit> kuList = ku.getImportedKermetaUnits();
 		boolean hasDependencyCycle = false;
@@ -449,36 +526,10 @@ public void testWithFile(String dir, String file) throws Exception {
 		}
 			
 		return hasDependencyCycle;	
+	}*/
+
+	private boolean compare(KermetaUnit source, KermetaUnit expected) {
+		return ! EMFCompareModelHelper.isDifferent(source.getModelingUnit(), expected.getModelingUnit());
 	}
-	/*
-	public void ppUnit(KermetaUnit builder, String file, String dir) throws Exception  {
-		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-		
-		BufferedWriter w = new BufferedWriter(new FileWriter(new File(file)));
-		String pkg_name = "package " + NamedElementHelper.getQualifiedName(builder.rootPackage) + ";\n\n";
-		
-		w.write("package " + NamedElementHelper.getQualifiedName(builder.rootPackage) + ";\n\n");
-	
-		Iterator it = builder.importedUnits.iterator();
-		while(it.hasNext()) {
-			KermetaUnit iu = (KermetaUnit)it.next();
-			if (iu.rootPackage != builder.rootPackage) {
-				//URI baseURI = UserDirURI.createURI(dir + "/output/", null, true);
-				if (iu instanceof KMTUnit || iu instanceof KMUnit)
-					w.write("require \"" + iu.getUri() + "\"\n");
-				else {
-					String f = dir + "/" + "output/" + iu.getRootPackage().getName()+ ".kmt";
-					ppUnit(iu, f, dir);
-					w.write("require \"" + iu.getRootPackage().getName()+ ".kmt" + "\"\n");
-				}
-			}
-		}
-		
-		String str_kmt = pp.ppPackage(builder.rootPackage);
-		// Do not write again the package declaration..
-		w.write(str_kmt.substring(pkg_name.length()));
-		w.close();
-	}
-	*/
 
 }
