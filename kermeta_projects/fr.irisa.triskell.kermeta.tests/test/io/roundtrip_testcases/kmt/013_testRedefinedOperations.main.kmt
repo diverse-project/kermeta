@@ -1,7 +1,6 @@
 @uri "http://testRedifinedOperations"
 package testRedefinedOperations;
 
-require "http://www.eclipse.org/emf/2002/Ecore"
 require kermeta
 
 class A

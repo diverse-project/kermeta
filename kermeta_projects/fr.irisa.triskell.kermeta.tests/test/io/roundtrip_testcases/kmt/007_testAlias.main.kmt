@@ -1,7 +1,6 @@
 @uri "http://TestAlias"
 package testAlias;
 
-require "http://www.eclipse.org/emf/2002/Ecore"
 require kermeta
 
 alias Alias : kermeta::language::structure::Object;

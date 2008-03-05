@@ -4,7 +4,6 @@
 @uri "http://TestString"
 package testString;
 
-require "http://www.eclipse.org/emf/2002/Ecore"
 require kermeta
 
 /** This class is used to test the conversion of KMT 2 Ecore 

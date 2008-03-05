@@ -1,7 +1,6 @@
 @uri "DerivedProperty"
 package derivedPropertyBody;
 
-require "http://www.eclipse.org/emf/2002/Ecore"
 require kermeta
 
 class Main

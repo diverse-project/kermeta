@@ -4,7 +4,6 @@
 @uri "http://MDK"
 package MDK;
 
-require "http://www.eclipse.org/emf/2002/Ecore"
 require kermeta
 
 enumeration AccesVariableEnumeration

@@ -1,7 +1,6 @@
 @uri "http://TestProperty"
 package testPropertyConversion;
 
-require "http://www.eclipse.org/emf/2002/Ecore"
 require kermeta
 require "011b_testStringConversionInEcore.kmt"
 

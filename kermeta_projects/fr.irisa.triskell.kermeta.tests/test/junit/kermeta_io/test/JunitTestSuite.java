@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.9 2008-03-05 08:01:42 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.10 2008-03-05 10:52:50 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -86,7 +86,20 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
+public void test001_externalSuperType() throws Exception {
+testWithFile("test/io/ecore_testcases","001_externalSuperType.ecore" );
+}
+
+public void test002_externalDataType() throws Exception {
+	testWithFile("test/io/ecore_testcases","002_externalDataType.ecore" );
+}
+
+public void test003_externalType() throws Exception {
+	testWithFile("test/io/ecore_testcases","003_externalType.ecore" );
+}
+
 public void testSimple() throws Exception {
 testWithFile("test/io/ecore_testcases","Simple.ecore" );
 }
@@ -398,35 +411,38 @@ public void testWithFile(String dir, String file) {
 	UserDirURI.createDirFromName(dir+"/output");
 	
 	String kmFile = FileHelper.replaceExtension(file, "km");
+	// The file can either be an ecore or a kmt
+	String kmtFile = FileHelper.replaceExtension(file, "kmt");
+	
 	String outputKMFolder = TestPlugin.PLUGIN_TESTS_PATH + dir + OUTPUT_KM_FOLDER;
 	String outputKMTFolder = TestPlugin.PLUGIN_TESTS_PATH + dir + OUTPUT_KMT_FOLDER;
 	
-	String kmtSourceFileURI = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
-	String kmtOutputFileURI = outputKMTFolder + "/" + file;
+	String sourceFileURI = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
+	String outputFileURI = outputKMTFolder + "/" + kmtFile;
 	String expectedKMFileURI = TestPlugin.PLUGIN_TESTS_PATH + dir + EXPECTED_KM_FOLDER + "/" + kmFile;
 	String outputKMFileURI =  outputKMFolder + "/" + kmFile;
 	
 	try {
 		// Loading the source file
-		KermetaUnit kmtSource = LoaderPlugin.getDefault().load(kmtSourceFileURI, null);
+		KermetaUnit source = LoaderPlugin.getDefault().load(sourceFileURI, null);
 
 		// Is the load correct ?
-		assertTrue("Errors when loading the source kmt : " + KermetaUnitHelper.getAllErrorsAsString(kmtSource), KermetaUnitHelper.getAllErrors(kmtSource).isEmpty() );
+		assertTrue("Errors when loading the source kmt : " + KermetaUnitHelper.getAllErrorsAsString(source), KermetaUnitHelper.getAllErrors(source).isEmpty() );
 		
 		// Pretty print the file
 		KMTOutputBuilder builder = new KMTOutputBuilder();
-		builder.print(kmtSource, null, kmtOutputFileURI);
+		builder.print(source, null, outputFileURI);
 		builder.flush();
 		
 		// Loading the generated kmt file
-		KermetaUnit kmtOutput = LoaderPlugin.getDefault().load(kmtOutputFileURI, null);
+		KermetaUnit kmtOutput = LoaderPlugin.getDefault().load(outputFileURI, null);
 
 		// Is the load correct ?
 		assertTrue("Errors when loading the output kmt : " + KermetaUnitHelper.getAllErrorsAsString(kmtOutput), KermetaUnitHelper.getAllErrors(kmtOutput).isEmpty() );
 		
 		// Exporting the source file into km
 		KmExporter exporter = new KmExporter();
-		exporter.export(kmtSource, null, outputKMFileURI);
+		exporter.export(source, null, outputKMFileURI);
 		
 		// Loading the generated km file
 		KermetaUnit kmOutput = LoaderPlugin.getDefault().load(outputKMFileURI, null);
@@ -448,10 +464,10 @@ public void testWithFile(String dir, String file) {
 		assertTrue(e.getLocalizedMessage(), false);
 	} finally {
 	
-		LoaderPlugin.getDefault().unload( kmtSourceFileURI );
+		LoaderPlugin.getDefault().unload( sourceFileURI );
 		LoaderPlugin.getDefault().unload( expectedKMFileURI );
 		LoaderPlugin.getDefault().unload( outputKMFileURI );
-		LoaderPlugin.getDefault().unload( kmtOutputFileURI );
+		LoaderPlugin.getDefault().unload( outputFileURI );
 	
 	}
 	

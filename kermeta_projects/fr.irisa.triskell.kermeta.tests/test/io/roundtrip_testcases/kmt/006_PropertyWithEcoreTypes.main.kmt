@@ -1,7 +1,6 @@
 @uri "PropertyWithEcoreTypes"
 package aPackage;
 
-require "http://www.eclipse.org/emf/2002/Ecore"
 require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 
