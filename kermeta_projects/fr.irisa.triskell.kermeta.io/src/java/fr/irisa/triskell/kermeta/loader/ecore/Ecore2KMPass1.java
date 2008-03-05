@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.26 2008-03-05 08:14:38 ftanguy Exp $
+/*$Id: Ecore2KMPass1.java,v 1.27 2008-03-05 09:01:43 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
@@ -176,45 +177,49 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	
 	/** Visit an EClass and convert it in a ClassDefinition*/
 	public Object visit(EClass node) {
-		/*
-		 * 
-		 * Creating the class definition.
-		 * 
-		 */
-		isClassTypeOwner = true;
-		currentClassDefinition = StructureFactory.eINSTANCE.createClassDefinition();
-		currentClassDefinition.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
-		currentClassDefinition.setIsAbstract(node.isAbstract() || node.isInterface());
-		datas.store(currentClassDefinition, node);
-		kermetaUnit.addTypeDefinition(currentClassDefinition, getCurrentPackage());
-
-		/*
-		 * 
-		 * Creating the type parameters.
-		 * 
-		 */
-		for ( ETypeParameter tp : node.getETypeParameters() ) {
-			ObjectTypeVariable tv = StructureFactory.eINSTANCE.createObjectTypeVariable();
-			tv.setName( tp.getName() );
-			datas.store(tp, tv);
-			currentClassDefinition.getTypeParameter().add( tv );
+		if ( ! isExternal(node) && datas.getTypeDefinition(node) == null ) {
+			/*
+			 * 
+			 * Creating the class definition.
+			 * 
+			 */
+			isClassTypeOwner = true;
+			currentClassDefinition = StructureFactory.eINSTANCE.createClassDefinition();
+			currentClassDefinition.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
+			currentClassDefinition.setIsAbstract(node.isAbstract() || node.isInterface());
+			datas.store(currentClassDefinition, node);
+			kermetaUnit.addTypeDefinition(currentClassDefinition, getCurrentPackage());
+	
+			/*
+			 * 
+			 * Creating the type parameters.
+			 * 
+			 */
+			for ( ETypeParameter tp : node.getETypeParameters() ) {
+				ObjectTypeVariable tv = StructureFactory.eINSTANCE.createObjectTypeVariable();
+				tv.setName( tp.getName() );
+				datas.store(tp, tv);
+				currentClassDefinition.getTypeParameter().add( tv );
+			}
+			
+			/*
+			 * 
+			 * Creating the attributes.
+			 * 
+			 */
+			acceptList(((EClass)node).getEStructuralFeatures());
+			/*
+			 * 
+			 * Creating the operations.
+			 * 
+			 */
+			acceptList(((EClass)node).getEOperations());
+			acceptList(node.getEAnnotations());
+			acceptList( node.getESuperTypes() );
+	
+			return currentClassDefinition;
 		}
-		
-		/*
-		 * 
-		 * Creating the attributes.
-		 * 
-		 */
-		acceptList(((EClass)node).getEStructuralFeatures());
-		/*
-		 * 
-		 * Creating the operations.
-		 * 
-		 */
-		acceptList(((EClass)node).getEOperations());
-		acceptList(node.getEAnnotations());
-
-		return currentClassDefinition;
+		return null;
 	}
     
 	/** Converts an EOperation into kermeta type Operation. This method constructs the Operation
@@ -356,6 +361,8 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			currentProperty.setIsSetterAbstract(true);
 		}
 		
+		accept( node.getEGenericType() );
+		
 		return currentProperty;
 	}
 	
@@ -373,11 +380,11 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		return null;
 	}
 	
-	private boolean isExternal(EDataType datatype) {
-		boolean external = datatype.eResource() != resource;
+	private boolean isExternal(EObject o) {
+		boolean external = o.eResource() != resource;
 		if ( external ) {
 			try {
-				KermetaUnit unitToImport = IOPlugin.getDefault().getKermetaUnit( datatype.eResource().getURI().toString() );
+				KermetaUnit unitToImport = IOPlugin.getDefault().getKermetaUnit( o.eResource().getURI().toString() );
 				kermetaUnit.getImportedKermetaUnits().add( unitToImport );
 			} catch (URIMalformedException e) {
 				e.printStackTrace();
