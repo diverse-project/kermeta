@@ -1,6 +1,6 @@
 
 
-/*$Id: KmExporter.java,v 1.8 2008-02-29 15:47:57 dvojtise Exp $
+/*$Id: KmExporter.java,v 1.9 2008-03-05 08:13:58 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.kermeta.core.helper.StringHelper;
+import org.kermeta.core.helper.FileHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
@@ -171,7 +171,7 @@ public class KmExporter {
 		if ( fileName != null )
 			uris.put(kermetaUnit, fileName);
 		else {
-			uri = StringHelper.replaceExtension(uri, "km");
+			uri = FileHelper.replaceExtension(uri, "km");
 			uris.put(kermetaUnit, uri);
 		}
 			
