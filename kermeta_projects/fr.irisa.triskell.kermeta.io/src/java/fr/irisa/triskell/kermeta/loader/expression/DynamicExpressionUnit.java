@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.19 2008-02-14 07:13:17 uid21732 Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.20 2008-03-05 08:15:29 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -60,7 +60,9 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
     }
     
     public DynamicExpressionUnit(KermetaUnit kermetaUnit) {
-    	setModelingUnit( kermetaUnit.getModelingUnit() );
+    	getImportedKermetaUnits().add(kermetaUnit);
+    	importKermetaUnit(kermetaUnit);
+    	/*setModelingUnit( kermetaUnit.getModelingUnit() );
     	getInternalPackageEntries().addAll( kermetaUnit.getInternalPackageEntries() );
     	getExternalPackageEntries().addAll( kermetaUnit.getExternalPackageEntries() );
     	setTypeDefinitionCache( IoFactory.eINSTANCE.createTypeDefinitionCache() );
@@ -70,7 +72,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
     		newEntry.setQualifiedName( entry.getQualifiedName() );
     		newEntry.setTypeDefinition( entry.getTypeDefinition() );
     		getTypeDefinitionCache().getEntries().put(entry.getQualifiedName(), newEntry);
-    	}
+    	}*/
     }
     
     public void resetMessages() {
