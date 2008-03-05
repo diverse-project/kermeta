@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTLoadingStructurePass.java,v 1.2 2008-02-14 07:12:48 uid21732 Exp $
+/*$Id: KMTLoadingStructurePass.java,v 1.3 2008-03-05 07:54:10 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	KMTLoadingStructurePass.java
 * License : EPL
@@ -186,10 +186,10 @@ public class KMTLoadingStructurePass extends KermetaASTNodeVisitor implements IL
 	
 	@Override
 	public boolean beginVisit(TopLevelDecls decls) {
-		if ( decls.getChildCount() == 0 && ! existRequires )
-			kermetaUnit.error(
-			"PASS 1 : Either 'using' declaration is misplaced (should be put after 'require'), " +
-			"or there is a 'using' declaration, but no element defined in your file.");
+		//if ( decls.getChildCount() == 0 && ! existRequires )
+		//	kermetaUnit.error(
+		//	"PASS 1 : Either 'using' declaration is misplaced (should be put after 'require'), " +
+		//	"or there is a 'using' declaration, but no element defined in your file.");
 		return true;
 	}
 	
@@ -332,7 +332,8 @@ public class KMTLoadingStructurePass extends KermetaASTNodeVisitor implements IL
 		if ( kind.equals(KermetaModelHelper.Property.PROPERTY_KIND) ) {
 			boolean isGetterAbstract = property.getGetterBody() != null ? false : true;
 			boolean isSetterAbstract = property.getSetterBody() != null ? false : true;
-			p = KermetaModelHelper.Property.createDerived(name, isGetterAbstract, isSetterAbstract);
+			boolean isReadOnly = property.getReadOnlyModifier() == null ? false: true;
+			p = KermetaModelHelper.Property.createDerived(name, isReadOnly, isGetterAbstract, isSetterAbstract);
 		} else
 			p = KermetaModelHelper.Property.create(name);
 				
