@@ -1,6 +1,6 @@
 
 
-/*$Id: PropertyHelper.java,v 1.2 2008-02-14 07:13:17 uid21732 Exp $
+/*$Id: PropertyHelper.java,v 1.3 2008-03-05 08:23:13 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	PropertyHelper.java
 * License : EPL
@@ -23,11 +23,12 @@ public class PropertyHelper {
 		return p;
 	}
 	
-	static public Property createDerived(String name, boolean isGetterAbstract, boolean isSetterAbstract) {
+	static public Property createDerived(String name, boolean isReadOnly, boolean isGetterAbstract, boolean isSetterAbstract) {
 		Property p = create(name);
 		p.setIsGetterAbstract(isGetterAbstract);
 		p.setIsSetterAbstract(isSetterAbstract);
 		p.setIsDerived(true);
+		p.setIsReadOnly(isReadOnly);
 		return p;
 	}
 	

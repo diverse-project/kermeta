@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaModelHelper.java,v 1.5 2008-02-19 10:11:40 ftanguy Exp $
+/*$Id: KermetaModelHelper.java,v 1.6 2008-03-05 08:23:13 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	KermetaModelHelper.java
 * License : EPL
@@ -327,8 +327,8 @@ public class KermetaModelHelper {
 			return PropertyHelper.create(name);
 		}
 		
-		public Property createDerived(String name, boolean isGetterAbstract, boolean isSetterAbstract) {
-			return PropertyHelper.createDerived(name, isGetterAbstract, isSetterAbstract);
+		public Property createDerived(String name, boolean isReadOnly, boolean isGetterAbstract, boolean isSetterAbstract) {
+			return PropertyHelper.createDerived(name, isReadOnly, isGetterAbstract, isSetterAbstract);
 		}
 		
 	}
