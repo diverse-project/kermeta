@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.11 2008-02-25 10:46:24 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.12 2008-03-05 08:01:02 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -240,6 +240,10 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","012_multipleDeclarati
 
 public void testinvalid_012_multipleDeclarationFromRequire() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","012_multipleDeclarationFromRequire.kmt" );
+}
+
+public void testinvalid_013_typeVariablesBadlyNamed() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","013_typeVariablesBadlyNamed.kmt" );
 }
 
 public void testinvalid_025_weaving_in_kermeta_aspect1() throws Exception {
