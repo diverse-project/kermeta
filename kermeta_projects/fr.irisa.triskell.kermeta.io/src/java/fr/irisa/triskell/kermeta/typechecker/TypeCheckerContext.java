@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.26 2008-02-14 13:10:01 ftanguy Exp $
+/* $Id: TypeCheckerContext.java,v 1.27 2008-03-05 08:18:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -228,7 +228,7 @@ public class TypeCheckerContext {
 		if (classClone == null) {
 			boolean found = false;
 			
-			Iterator<CallableOperation> it = ClassType.callableOperations().iterator();
+			Iterator<CallableOperation> it = ClassType.callableOperations(null).iterator();
 			
 //			Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType) ClassType).type).getTypeDefinition()).getOwnedOperation().iterator();
 			   while(it.hasNext() && !found) {

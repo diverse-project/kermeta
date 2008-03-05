@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.61 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: ExpressionChecker.java,v 1.62 2008-03-05 08:18:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -533,7 +533,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			if (fc.getTarget() != null) target = getTypeOfExpression(fc.getTarget());
 			else target = context.getSelfType();
 			// Check if it is an operation
-			CallableOperation op = target.getOperationByName(fc.getName());
+			CallableOperation op = target.getOperationByName(fc.getName(), unit);
 			if (op != null) {
 			    unit.error("TYPE-CHECKER : Only variables and properties can be assigned", expression);
 			    return TypeCheckerContext.VoidType;
@@ -712,7 +712,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		    }
 		    
 			// Is it an operation call
-			CallableOperation op = target.getOperationByName(expression.getName());
+			CallableOperation op = target.getOperationByName(expression.getName(), unit);
 			if (op != null) {
 				result = checkOperationCall(op, expression);
 				expression.setStaticOperation(op.getOperation());
@@ -734,7 +734,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			        unit.error("TYPE-CHECKER : cannot resolve enumeration literal " + expression.getName() + " in enumetation " + e.getName() + ".",expression);
 			    else {
 			    	unit.error("TYPE-CHECKER : cannot resolve feature " + expression.getName() + " in type " + target.toString() + ".",expression);
-			        op = target.getOperationByName(expression.getName());
+			        op = target.getOperationByName(expression.getName(), unit);
 			        CallableProperty prop = target.getPropertyByName(expression.getName());
 					if (op != null) {
 						result = checkOperationCall(op, expression);

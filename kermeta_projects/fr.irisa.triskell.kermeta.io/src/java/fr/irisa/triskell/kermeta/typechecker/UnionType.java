@@ -1,4 +1,4 @@
-/* $Id: UnionType.java,v 1.8 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: UnionType.java,v 1.9 2008-03-05 08:18:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : UnionType.java
 * License : EPL
@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
@@ -107,15 +109,15 @@ public class UnionType extends Type {
 	/**
 	 * @see fr.irisa.triskell.kermeta.typechecker.Type#callableOperations()
 	 */
-	public List<CallableOperation> callableOperations() {
+	public List<CallableOperation> callableOperations(KermetaUnit source) {
 		List<CallableOperation> result = null;
 		// Get intersection of valid operation
 		for(int i=0; i<types.size();i++) {
 			Type t = (Type)types.get(i);
 			if (result == null) 
-				result = t.callableOperations();
+				result = t.callableOperations(source);
 			else 
-				result = inter(result, t.callableOperations());
+				result = inter(result, t.callableOperations(source));
 		}
 		return result;
 	}

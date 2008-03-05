@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.8 2008-01-08 11:07:39 dvojtise Exp $
+/* $Id: TypeMatchChecker.java,v 1.9 2008-03-05 08:18:10 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL
@@ -230,8 +230,8 @@ public class TypeMatchChecker {
 				}
 				// If its already failed on the properties, don't bother torturing ourselves on the operations
 				if (!fail) {
-					for (CallableOperation r_op : (ArrayList<CallableOperation>) r_type.callableOperations()) {
-						CallableOperation p_op = p_type.getOperationByName(r_op.getName());
+					for (CallableOperation r_op : (ArrayList<CallableOperation>) r_type.callableOperations(null)) {
+						CallableOperation p_op = p_type.getOperationByName(r_op.getName(), null);
 						// must calculate the isRequired separatlety because the type may be not a class (ex: funtiontype ...)
 						boolean isClassRequired = false;
 						if(r_op.getType().getFType() instanceof Class)

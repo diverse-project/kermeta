@@ -1,4 +1,4 @@
-/* $Id: Type.java,v 1.9 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: Type.java,v 1.10 2008-03-05 08:18:10 ftanguy Exp $
 * Project : Kermeta io
 * File : Type.java
 * License : EPL
@@ -15,6 +15,8 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
+
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
@@ -79,7 +81,7 @@ public abstract class Type {
 	 * called on this type
 	 * @return
 	 */
-	public abstract List<CallableOperation> callableOperations();
+	public abstract List<CallableOperation> callableOperations(KermetaUnit source);
 	
 	/**
 	 * inferTypeVariableBinding
@@ -103,8 +105,8 @@ public abstract class Type {
 	 * @param unit
 	 * @return
 	 */
-	public CallableOperation getOperationByName(String name) {
-		Collection<CallableOperation> ops = callableOperations();
+	public CallableOperation getOperationByName(String name, KermetaUnit source) {
+		Collection<CallableOperation> ops = callableOperations(source);
 		if (ops == null) 
 			return null;
 		for ( CallableOperation op : ops )

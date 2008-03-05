@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.31 2008-02-14 13:10:01 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.32 2008-03-05 08:18:10 ftanguy Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -14,6 +14,8 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -110,7 +112,12 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */	
-	public static ArrayList<CallableOperation> callableOperations(Class c) {
+	public static ArrayList<CallableOperation> callableOperations(Class c, KermetaUnit source) {
+		List<KermetaUnit> units = new ArrayList<KermetaUnit>();
+		if ( source != null ) {
+			units.add(source);
+			units.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
+		}
 		ArrayList<CallableOperation> result = new ArrayList<CallableOperation>();
 		Hashtable<String, CallableOperation> found_ops = new Hashtable<String, CallableOperation>();
 		ArrayList<Class> toVisit = new ArrayList<Class>();
@@ -121,61 +128,63 @@ public class InheritanceSearch {
 
 			Class current = toVisit.get(0);
 			toVisit.remove(0);
-			KermetaUnitHelper.getKermetaUnitFromObject( current.getTypeDefinition() );
-			
-			if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
-				classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
-			 				
-				// Add all operations of current parsed class
-				for (Object next_op : ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation()) {
-					Operation op = (Operation)next_op;
-			    	
-					if ( ! found_ops.containsKey(op.getName()) ) {
-						CallableOperation callableOperation = new CallableOperation(op, current);
-						found_ops.put(op.getName(), callableOperation);
-						result.add( callableOperation );
-					} else if (found_ops.get(op.getName()).getOperation() == op.getSuperOperation() ) {
-						CallableOperation callableOperation = new CallableOperation(op, current);
-						found_ops.put(op.getName(), callableOperation);
-						CallableOperation currentCallableOperation = found_ops.get( op.getName() );
-						result.remove( currentCallableOperation );
-						result.add( callableOperation );
-					} else {
-						CallableOperation currentCallableOperation = found_ops.get( op.getName() );
-			    		if ( currentCallableOperation.getOperation().isIsAbstract() /*|| OperationHelper.isOverloadable(currentCallableOperation.operation)*/ ) {
-			    			CallableOperation callableOperation = new CallableOperation(op, current);
-			    			found_ops.put(op.getName(), callableOperation);
-			    			result.remove( currentCallableOperation );
-				    		result.add( callableOperation );
-				    	}	    	
+			KermetaUnit u = KermetaUnitHelper.getKermetaUnitFromObject( current.getTypeDefinition() );
+			if ( units.size() == 0 || units.contains(u) ) {
+				
+				if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
+					classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
+				 				
+					// Add all operations of current parsed class
+					for (Object next_op : ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation()) {
+						Operation op = (Operation)next_op;
+				    	
+						if ( ! found_ops.containsKey(op.getName()) ) {
+							CallableOperation callableOperation = new CallableOperation(op, current);
+							found_ops.put(op.getName(), callableOperation);
+							result.add( callableOperation );
+						} else if (found_ops.get(op.getName()).getOperation() == op.getSuperOperation() ) {
+							CallableOperation callableOperation = new CallableOperation(op, current);
+							found_ops.put(op.getName(), callableOperation);
+							CallableOperation currentCallableOperation = found_ops.get( op.getName() );
+							result.remove( currentCallableOperation );
+							result.add( callableOperation );
+						} else {
+							CallableOperation currentCallableOperation = found_ops.get( op.getName() );
+				    		if ( currentCallableOperation.getOperation().isIsAbstract() /*|| OperationHelper.isOverloadable(currentCallableOperation.operation)*/ ) {
+				    			CallableOperation callableOperation = new CallableOperation(op, current);
+				    			found_ops.put(op.getName(), callableOperation);
+				    			result.remove( currentCallableOperation );
+					    		result.add( callableOperation );
+					    	}	    	
+						}
 					}
-				}
-	
-				    
-			    // Get the direct super type of the current parsed class
-			    for (Object next_t : getDirectSuperTypes(current)) {
-			    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)next_t;
-			        if ( ! toVisit.contains(stype) ) 
-			        	toVisit.add(stype);
-			    }
 		
-			    for ( TypeDefinition baseClass : TypeDefinitionHelper.getBaseAspects(current.getTypeDefinition()) ) {
-			    	if ( baseClass instanceof ClassDefinition ) {
-			    		Class baseClassType = StructureFactory.eINSTANCE.createClass();
-			    		baseClassType.setTypeDefinition( (ClassDefinition) baseClass );
-			    		toVisit.add(baseClassType);
-			    	}
-			    }
 					    
-				for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAspects( (ClassDefinition) current.getTypeDefinition()) ) {
-					if ( aspectClass instanceof ClassDefinition ) {
-						Class aspectClassType = StructureFactory.eINSTANCE.createClass();
-						aspectClassType.setTypeDefinition( (ClassDefinition) aspectClass );
-						toVisit.add(aspectClassType);
+				    // Get the direct super type of the current parsed class
+				    for (Object next_t : getDirectSuperTypes(current)) {
+				    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)next_t;
+				        if ( ! toVisit.contains(stype) ) 
+				        	toVisit.add(stype);
+				    }
+			
+				    for ( TypeDefinition baseClass : TypeDefinitionHelper.getBaseAspects(current.getTypeDefinition()) ) {
+				    	if ( baseClass instanceof ClassDefinition ) {
+				    		Class baseClassType = StructureFactory.eINSTANCE.createClass();
+				    		baseClassType.setTypeDefinition( (ClassDefinition) baseClass );
+				    		toVisit.add(baseClassType);
+				    	}
+				    }
+						    
+					for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAspects( (ClassDefinition) current.getTypeDefinition()) ) {
+						if ( aspectClass instanceof ClassDefinition ) {
+							Class aspectClassType = StructureFactory.eINSTANCE.createClass();
+							aspectClassType.setTypeDefinition( (ClassDefinition) aspectClass );
+							toVisit.add(aspectClassType);
+						}
 					}
 				}
 			}
-		}		    
+		}
 
 		return result;
 	}

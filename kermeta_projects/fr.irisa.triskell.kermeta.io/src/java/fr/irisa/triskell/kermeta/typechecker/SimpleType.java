@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.21 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: SimpleType.java,v 1.22 2008-03-05 08:18:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : EPL
@@ -19,6 +19,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
@@ -92,7 +93,7 @@ public class SimpleType extends Type {
 		}
 	}
 	
-	public List<CallableOperation> callableOperations() {
+	public List<CallableOperation> callableOperations(KermetaUnit source) {
 		List<CallableOperation> operations = CallableFeaturesCache.getInstance().getCallableOperations(type);
 		if ( operations == null ) {
 			
@@ -121,10 +122,10 @@ public class SimpleType extends Type {
 			
 			if (resolved instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 				Class c = (Class) resolved;
-				operations = InheritanceSearch.callableOperations(c);
+				operations = InheritanceSearch.callableOperations(c, source);
 			} else if (resolved instanceof ModelType) {
 				fr.irisa.triskell.kermeta.language.structure.Class model = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ModelType).type;
-				operations = InheritanceSearch.callableOperations(model);
+				operations = InheritanceSearch.callableOperations(model, source);
 			}
 			else if(resolved instanceof FunctionType) {
 				operations = InheritanceSearch.callableOperations((fr.irisa.triskell.kermeta.language.structure.FunctionType)resolved);
