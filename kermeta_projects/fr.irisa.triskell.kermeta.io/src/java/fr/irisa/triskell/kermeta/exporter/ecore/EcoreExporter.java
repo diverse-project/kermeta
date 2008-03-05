@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.19 2008-03-04 10:15:37 cfaucher Exp $
+/*$Id: EcoreExporter.java,v 1.20 2008-03-05 08:11:45 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.kermeta.core.helper.StringHelper;
+import org.kermeta.core.helper.FileHelper;
 import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
@@ -325,9 +325,7 @@ public class EcoreExporter {
 		
 		IOPlugin.internalLog.debug("pass 1 : " + kermetaUnit.getUri() );
 		
-		Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
-		while ( iterator.hasNext() ) {
-			KermetaUnit currentUnit = iterator.next();
+		for ( KermetaUnit currentUnit : kermetaUnit.getImportedKermetaUnits() ) {
 			if ( ! loadings.get( currentUnit ) )
 				applyPass1ToAll( currentUnit );
 		}
@@ -527,7 +525,7 @@ public class EcoreExporter {
 		if ( fileName != null )
 			uris.put(kermetaUnit, fileName);
 		else {
-			uri = StringHelper.replaceExtension(uri, "ecore");
+			uri = FileHelper.replaceExtension(uri, "ecore");
 			uris.put(kermetaUnit, uri);
 		}
 			
