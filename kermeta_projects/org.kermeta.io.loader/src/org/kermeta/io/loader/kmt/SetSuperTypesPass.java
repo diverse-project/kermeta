@@ -1,6 +1,6 @@
 
 
-/*$Id: SetSuperTypesPass.java,v 1.2 2008-02-14 07:12:48 uid21732 Exp $
+/*$Id: SetSuperTypesPass.java,v 1.3 2008-03-05 07:55:16 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	SetTypesPass.java
 * License : EPL
@@ -106,14 +106,12 @@ public class SetSuperTypesPass extends KermetaASTNodeVisitor implements ILoading
 				List<fr.irisa.triskell.kermeta.language.structure.Operation> superOperations = KermetaModelHelper.ClassDefinition.getSuperOperations(owner, o.getName());
 				switch (superOperations.size()) {
 				case 0:
-					 KermetaModelHelper.ClassDefinition.getSuperOperations(owner, o.getName());
 					kermetaUnit.error("No super operation found for method " + o.getName() + " in class definition " + KermetaModelHelper.NamedElement.qualifiedName((NamedElement)o.eContainer()), o);
 					break;
 				case 1:
 					o.setSuperOperation( superOperations.get(0) );
 					break;
 				default:
-					 KermetaModelHelper.ClassDefinition.getSuperOperations(owner, o.getName());
 					String message = "Several super operations found for method " + o.getName() + " in class definition " + KermetaModelHelper.NamedElement.qualifiedName((NamedElement)o.eContainer());
 					message += "\nDefinitions coming from ";
 					Iterator<fr.irisa.triskell.kermeta.language.structure.Operation> it = superOperations.iterator();
