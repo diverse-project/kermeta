@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestHost.java,v 1.1 2008-02-04 10:40:25 ftanguy Exp $
+ * $Id: InterestHost.java,v 1.2 2008-03-05 07:58:39 ftanguy Exp $
  */
 package org.kermeta.model.interest;
 
@@ -15,6 +15,10 @@ import org.kermeta.interest.exception.IdNotFoundException;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Host</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * The interest host is an holder for concerns. So some specific hosts can be created for specifics resources. 
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:

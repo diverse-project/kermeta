@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestSwitch.java,v 1.1 2008-02-04 10:40:24 ftanguy Exp $
+ * $Id: InterestSwitch.java,v 1.2 2008-03-05 07:58:38 ftanguy Exp $
  */
 package org.kermeta.model.interest.util;
 
@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.model.interest.*;
 import org.kermeta.model.interest.Concern;
 import org.kermeta.model.interest.InterestHost;
 import org.kermeta.model.interest.InterestPackage;

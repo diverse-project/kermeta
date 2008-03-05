@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Concern.java,v 1.1 2008-02-04 10:40:25 ftanguy Exp $
+ * $Id: Concern.java,v 1.2 2008-03-05 07:58:39 ftanguy Exp $
  */
 package org.kermeta.model.interest;
 
@@ -14,6 +14,12 @@ import org.kermeta.interest.InterestedObject;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Concern</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * A concern object holds two things :
+ * - the id of a resource
+ * - a list of worried objects that must be warned as soon as the resource has changed
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:

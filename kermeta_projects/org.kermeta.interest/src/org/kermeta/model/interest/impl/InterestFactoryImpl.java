@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestFactoryImpl.java,v 1.1 2008-02-04 10:40:24 ftanguy Exp $
+ * $Id: InterestFactoryImpl.java,v 1.2 2008-03-05 07:58:39 ftanguy Exp $
  */
 package org.kermeta.model.interest.impl;
 
@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.kermeta.interest.InterestedObject;
 import org.kermeta.interest.exception.IdNotFoundException;
+import org.kermeta.model.interest.*;
 import org.kermeta.model.interest.Concern;
 import org.kermeta.model.interest.InterestFactory;
 import org.kermeta.model.interest.InterestHost;

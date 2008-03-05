@@ -3,7 +3,13 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="interest"
     nsURI="http://interest" nsPrefix="interest">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="This metamodel describes in a simple manner the interest that objects can have for specific resources.&#xA;Objects can subscribe or unsubscribe to a resource. When the resource changes, those objects are told to update with the new value of that resource.&#xA;A resource can be anything (files, objects in memory) for the moment they have an id."/>
+  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="InterestHost">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The interest host is an holder for concerns. So some specific hosts can be created for specifics resources. "/>
+    </eAnnotations>
     <eOperations name="updateValue" eExceptions="#//IdNotFoundException">
       <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -23,6 +29,9 @@
         eType="#//Concern" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Concern">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A concern object holds two things :&#xA;- the id of a resource&#xA;- a list of worried objects that must be warned as soon as the resource has changed"/>
+    </eAnnotations>
     <eOperations name="updateValue">
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
@@ -40,6 +49,9 @@
         eType="#//WorriedObject" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WorriedObject">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A worried object holds an object that is concerned for a resource.&#xA;When the resource changes, the worried object is asked to update the value of the targeted object.&#xA;The targeted object must implement an interface so that any kind of classes can be used through the interest mechanism. &#xA;"/>
+    </eAnnotations>
     <eOperations name="updateValue">
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>

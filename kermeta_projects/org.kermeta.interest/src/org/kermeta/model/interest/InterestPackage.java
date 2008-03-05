@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestPackage.java,v 1.1 2008-02-04 10:40:25 ftanguy Exp $
+ * $Id: InterestPackage.java,v 1.2 2008-03-05 07:58:39 ftanguy Exp $
  */
 package org.kermeta.model.interest;
 
@@ -23,6 +23,10 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * This metamodel describes in a simple manner the interest that objects can have for specific resources.
+ * A resource can be anything (files, objects in memory) for the moment they have an id.
+ * <!-- end-model-doc -->
  * @see org.kermeta.model.interest.InterestFactory
  * @model kind="package"
  * @generated

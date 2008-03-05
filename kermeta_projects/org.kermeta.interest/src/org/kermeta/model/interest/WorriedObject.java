@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: WorriedObject.java,v 1.1 2008-02-04 10:40:25 ftanguy Exp $
+ * $Id: WorriedObject.java,v 1.2 2008-03-05 07:58:39 ftanguy Exp $
  */
 package org.kermeta.model.interest;
 
@@ -13,6 +13,13 @@ import org.kermeta.interest.InterestedObject;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Worried Object</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * A worried object holds an object that is concerned for a resource.
+ * When the resource changes, the worried object is asked to update the value of the targeted object.
+ * The targeted object must implement an interface so that any kind of classes can be used through the interest mechanism. 
+ * 
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
