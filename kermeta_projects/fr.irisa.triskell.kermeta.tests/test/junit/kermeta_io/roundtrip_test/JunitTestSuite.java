@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.7 2008-02-27 12:14:42 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.8 2008-03-05 08:08:04 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -15,6 +15,7 @@
 package kermeta_io.roundtrip_test; 
 
 import java.util.HashMap;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -114,10 +115,6 @@ public void testkmt_002_RequireEcore() throws Exception {
 testkmtFile("test/io/roundtrip_testcases/kmt","002_RequireEcore.main.kmt" );
 }
 
-public void testkmt_003_ComplexTest_rdl() throws Exception {
-testkmtFile("test/io/roundtrip_testcases/kmt","003_ComplexTest_rdl.main.kmt" );
-}
-
 public void testkmt_004_OperationBody() throws Exception {
 testkmtFile("test/io/roundtrip_testcases/kmt","004_OperationBody.main.kmt" );
 }
@@ -192,10 +189,10 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		String kmtFile = outputDir + "/" + fileName + ".kmt";
 		String ecoreFile = outputDir + "/" + fileName + ".ecore";
 				
-		HashMap<String, Object> loaderOptions = new HashMap<String, Object>();
-		loaderOptions.put( LoadingOptions.ECORE_QuickFixEnabled, true );
+		Map<Object, Object> args = new HashMap<Object, Object>();
+		args.put(LoadingOptions.ECORE_QuickFixEnabled, true);
 		
-		KermetaUnit baseEcoreUnit = LoaderPlugin.getDefault().load( ecoreBaseFile, loaderOptions );		
+		KermetaUnit baseEcoreUnit = LoaderPlugin.getDefault().load( ecoreBaseFile, args );		
 		if ( ! baseEcoreUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( baseEcoreUnit );
 			typechecker.checkUnit();
@@ -214,7 +211,7 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		printer.flush();
 		
 		// Regenerate the ecore from the kmt
-		KermetaUnit kmtUnit = LoaderPlugin.getDefault().load( kmtFile, null );
+		KermetaUnit kmtUnit = LoaderPlugin.getDefault().load( kmtFile, args );
 		if ( ! kmtUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( kmtUnit );
 			typechecker.checkUnit();
@@ -228,10 +225,10 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		
 		
 		EcoreExporter exporter = new EcoreExporter();
-		ExporterOptions options = new ExporterOptions(true, false);
+		ExporterOptions options = new ExporterOptions(false, false);
 		exporter.export(kmtUnit, outputDir, options );
 		
-		KermetaUnit ecoreUnit = LoaderPlugin.getDefault().load( ecoreFile, null );
+		KermetaUnit ecoreUnit = LoaderPlugin.getDefault().load( ecoreFile, args );
 		
 		assertFilesEquality(baseEcoreUnit, ecoreUnit);
 		//MatchService.getInstance().doMatch(kmtUnit.getCompilationUnit(), ecoreUnit.getCompilationUnit(), new NullProgressMonitor() );
@@ -250,7 +247,10 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		String ecoreFile = outputDir + "/" + fileName + ".ecore";
 		String kmtFile = outputDir + "/" + fileName + ".kmt";
 		
-		KermetaUnit baseKMTUnit = LoaderPlugin.getDefault().load( kmtBaseFile, null );		
+		Map<Object, Object> args = new HashMap<Object, Object>();
+		args.put(LoadingOptions.ECORE_QuickFixEnabled, true);
+		
+		KermetaUnit baseKMTUnit = LoaderPlugin.getDefault().load( kmtBaseFile, args );		
 		if ( ! baseKMTUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( baseKMTUnit );
 			typechecker.checkUnit();
@@ -264,11 +264,11 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		
 		// Export to ecore
 		EcoreExporter exporter = new EcoreExporter();
-		ExporterOptions options = new ExporterOptions(true, false);
+		ExporterOptions options = new ExporterOptions(false, false);
 		exporter.export(baseKMTUnit, outputDir, options);
 	
 		// Regenerate the kmt from the previous ecore
-		KermetaUnit ecoreUnit = LoaderPlugin.getDefault().load( ecoreFile, null );
+		KermetaUnit ecoreUnit = LoaderPlugin.getDefault().load( ecoreFile, args );
 		if ( ! ecoreUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( ecoreUnit );
 			typechecker.checkUnit();
@@ -286,7 +286,7 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		printer.print( ecoreUnit, outputDir );
 		printer.flush();
 		
-		KermetaUnit kmtUnit = LoaderPlugin.getDefault().load( kmtFile, null );
+		KermetaUnit kmtUnit = LoaderPlugin.getDefault().load( kmtFile, args );
 		
 		assertFilesEquality(baseKMTUnit, kmtUnit);
 	}
