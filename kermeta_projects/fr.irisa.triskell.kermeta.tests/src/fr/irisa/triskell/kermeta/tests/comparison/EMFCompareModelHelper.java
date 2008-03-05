@@ -1,4 +1,4 @@
-/* $Id: EMFCompareModelHelper.java,v 1.6 2008-03-04 09:18:28 cfaucher Exp $
+/* $Id: EMFCompareModelHelper.java,v 1.7 2008-03-05 08:00:13 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.tests.comparison
  * File      : EMFCompareModelHelper.java
  * License   : EPL
@@ -12,12 +12,14 @@ package fr.irisa.triskell.kermeta.tests.comparison;
 
 import java.io.IOException;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.compare.diff.generic.DiffMaker;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
 import org.eclipse.emf.compare.diff.service.DiffService;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.service.MatchService;
+import org.eclipse.emf.compare.match.statistic.DifferencesServices;
 import org.eclipse.emf.compare.util.ModelUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -38,6 +40,16 @@ public class EMFCompareModelHelper {
 		MatchModel matchModel = getMatchModel(leftModelPath, rightModelPath);
 		final DiffModel diff = DiffService.doDiff(matchModel);
 		return diff;
+	}
+	
+	/**
+	 * 
+	 * @param model1
+	 * @param model2
+	 * @return
+	 */
+	private static DiffModel getDiffModel(EObject model1, EObject model2) {
+		return new DiffMaker().doDiff(getMatchModel(model1, model2));		
 	}
 	
 	/**
@@ -67,16 +79,28 @@ public class EMFCompareModelHelper {
 	        org.eclipse.emf.ecore.resource.Resource right_resource = resourceSet.getResource(right_u, true);
 	        final EObject model2 = right_resource.getContents().get(0);
 			
-			// Creates the match then the diff model for those two models
-			final MatchModel match = MatchService.doMatch(model1, model2, null);
-			
-			return match;
+			return getMatchModel(model1, model2);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * 
+	 * @param model1
+	 * @param model2
+	 * @return
+	 */
+	private static MatchModel getMatchModel(EObject model1, EObject model2) {
+		try {
+			// Creates the match then the diff model for those two models
+			return new DifferencesServices().modelMatch(model1, model2, new NullProgressMonitor());
+		} catch (InterruptedException e) {
+			return null;
+		}
 	}
 	
 	
@@ -115,5 +139,16 @@ public class EMFCompareModelHelper {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * 
+	 * @param model1
+	 * @param model2
+	 * @return
+	 */
+	public static boolean isDifferent(EObject model1, EObject model2) {
+		DiffModel diffModel = getDiffModel(model1, model2);
+		return (((DiffGroup) diffModel.getOwnedElements().get(0)).getSubchanges() > 0) ? true : false;
 	}
 }
