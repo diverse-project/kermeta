@@ -23,7 +23,7 @@ class Main<G> {
 		result := void
 	end
 	
-	operation test_op5<F : G>(elt: AClass) is do
+	operation test_op5<F : Main>(elt: AClass) is do
 	end
 }
 

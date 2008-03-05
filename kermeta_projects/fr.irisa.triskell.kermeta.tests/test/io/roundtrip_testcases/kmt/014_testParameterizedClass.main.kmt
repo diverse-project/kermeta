@@ -1,7 +1,7 @@
 @uri "http://testParameterizedClass"
 package testParameterizedClass;
 
-require "http://www.eclipse.org/emf/2002/Ecore
+require "http://www.eclipse.org/emf/2002/Ecore"
 require kermeta
 
 class A<P1>
@@ -16,7 +16,7 @@ class C<P1 : B>
 {
 }
 
-class D<P0, P1 : P0>
+class D<P0, P1 : B>
 {
 }
 
