@@ -1,4 +1,4 @@
-/*$Id: Ecore2KMPass.java,v 1.11 2008-02-14 07:13:16 uid21732 Exp $
+/*$Id: Ecore2KMPass.java,v 1.12 2008-03-05 08:15:04 ftanguy Exp $
 * Project : io
 * File : 	Ecore2KMPass.java
 * License : EPL
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EOperation;
@@ -528,13 +529,14 @@ public class Ecore2KMPass extends EcoreVisitor {
 		}
 
 		if (def == null) {
-			if ( etype instanceof EDataType ) {
+			if ( etype instanceof EEnum ) {
+				EEnum enumeration = (EEnum) etype;
+				def = kermetaUnit.getTypeDefinitionByQualifiedName(EcoreHelper.getQualifiedName(enumeration), monitor);
+			} else if ( etype instanceof EDataType ) {
 				EDataType datatype = (EDataType) etype;
-				for ( String key : KM2Ecore.primitive_types_mapping.keySet() ) {
-					String kermetaQualifiedName = KM2Ecore.primitive_types_mapping.get(key);
-					if ( kermetaQualifiedName.equals(datatype.getInstanceTypeName()) )
-						def = kermetaUnit.getTypeDefinitionByQualifiedName( kermetaQualifiedName, monitor );
-				}
+				String kermetaQualifiedName = Ecore2KM.primitive_types_mapping.get( datatype.getInstanceClassName() );
+				if ( kermetaQualifiedName != null )
+					def = kermetaUnit.getTypeDefinitionByQualifiedName( kermetaQualifiedName, monitor );
 			}
 			if ( def == null )
 				kermetaUnit.error("Internal error of Ecore2KM conversion: type '" + EcoreHelper.getQualifiedName(etype) + "' not found.");

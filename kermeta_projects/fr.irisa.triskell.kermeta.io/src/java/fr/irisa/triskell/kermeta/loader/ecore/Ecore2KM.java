@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.14 2007-08-31 13:07:52 dvojtise Exp $
+/* $Id: Ecore2KM.java,v 1.15 2008-03-05 08:15:04 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -48,5 +48,19 @@ public class Ecore2KM {
 	 */
 	public Hashtable<EAnnotation,fr.irisa.triskell.kermeta.language.structure.Object> nestedAnnotMap = new Hashtable<EAnnotation,fr.irisa.triskell.kermeta.language.structure.Object>();
 
+	/** this map is used to determine the java object corresponding to a kermeta primitive type */ 
+    public static Hashtable<String,String> primitive_types_mapping;
+    static {
+    	primitive_types_mapping = new Hashtable<String,String>();
+    	primitive_types_mapping.put("char", "kermeta::standard::Character");
+    	//primitive_types_mapping.put("kermeta::standard::Character",	"java.lang.Character");
+    	primitive_types_mapping.put("java.lang.Integer", "kermeta::language::structure::Integer");
+    	primitive_types_mapping.put("boolean", "kermeta::language::structure::Boolean");
+    	primitive_types_mapping.put("java.lang.Boolean", "kermeta::standard::Boolean");
+    	primitive_types_mapping.put("java.lang.String", "kermeta::language::structure::String");
+    	primitive_types_mapping.put("java.lang.Object", "kermeta::standard::Object");
+    	primitive_types_mapping.put("java.lang.Integer", "kermeta::language::structure::UnlimitedNatural");
+    	primitive_types_mapping.put("java.lang.Double", "kermeta::standard::Real");
+    }
 	
 }
