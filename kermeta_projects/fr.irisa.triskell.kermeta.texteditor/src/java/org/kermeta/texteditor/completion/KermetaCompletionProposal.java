@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaCompletionProposal.java,v 1.4 2008-02-14 07:13:42 uid21732 Exp $
+/*$Id: KermetaCompletionProposal.java,v 1.5 2008-03-05 13:45:58 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaCompletionProposal.java
 * License : EPL
@@ -24,6 +24,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 
 import fr.irisa.triskell.kermeta.language.structure.Object;
+import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 public class KermetaCompletionProposal implements ICompletionProposal, ICompletionProposalExtension2 {
 
@@ -166,7 +167,7 @@ public class KermetaCompletionProposal implements ICompletionProposal, ICompleti
 			}
 		}
 		String regex = s.toLowerCase() + ".+";
-		System.out.println( regex );
+		TexteditorPlugin.internalLog.debug(regex);
 		boolean result = fReplacementString.replace("\n", "").toLowerCase().matches(regex);
 		if ( result )
 			fReplacementLength++;

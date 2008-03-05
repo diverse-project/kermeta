@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Fsm sample for kermeta Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.samples.fsm;singleton:=true
-Bundle-Version: 1.0.99.qualifier
+Bundle-Version: 1.1.0
 Bundle-Activator: fr.irisa.triskell.kermeta.samples.fsm.FsmPlugin
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,

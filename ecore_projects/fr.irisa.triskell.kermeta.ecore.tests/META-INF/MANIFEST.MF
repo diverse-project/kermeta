@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ecore MDK Tests Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.ecore.tests;singleton:=true
-Bundle-Version: 1.0.99.qualifier
+Bundle-Version: 1.1.0
 Bundle-Activator: fr.irisa.triskell.kermeta.ecore.tests.Activator
 Bundle-Vendor: IRISA / INRIA
 Require-Bundle: org.eclipse.ui,

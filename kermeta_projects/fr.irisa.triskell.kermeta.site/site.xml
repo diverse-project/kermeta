@@ -9,35 +9,38 @@
    <feature url="features/org.antlr.ui_4.1.1.jar" id="org.antlr.ui" version="4.1.1">
       <category name="OtherTools"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta_1.0.99.200802271125.jar" id="fr.irisa.triskell.kermeta" version="1.0.99.200802271125">
+   <feature url="features/fr.irisa.triskell.kermeta_1.1.0.jar" id="fr.irisa.triskell.kermeta" version="1.1.0">
       <category name="Kermeta IDE"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.ket.feature_1.0.99.200802271125.jar" id="fr.irisa.triskell.kermeta.ket.feature" version="1.0.99.200802271125">
+   <feature url="features/fr.irisa.triskell.kermeta.ket.feature_1.1.0.jar" id="fr.irisa.triskell.kermeta.ket.feature" version="1.1.0">
       <category name="Kermeta IDE"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.graphical_1.0.99.200802271125.jar" id="fr.irisa.triskell.kermeta.graphical" version="1.0.99.200802271125">
+   <feature url="features/fr.irisa.triskell.kermeta.graphical_1.1.0.jar" id="fr.irisa.triskell.kermeta.graphical" version="1.1.0">
       <category name="Kermeta IDE"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.ecore_1.0.99.200802271125.jar" id="fr.irisa.triskell.kermeta.ecore" version="1.0.99.200802271125">
+   <feature url="features/fr.irisa.triskell.kermeta.ecore_1.1.0.jar" id="fr.irisa.triskell.kermeta.ecore" version="1.1.0">
       <category name="MDKs"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.traceability_1.0.99.200802271125.jar" id="fr.irisa.triskell.traceability" version="1.0.99.200802271125">
+   <feature url="features/fr.irisa.triskell.traceability_1.1.0.jar" id="fr.irisa.triskell.traceability" version="1.1.0">
       <category name="MDKs"/>
    </feature>
-   <feature url="features/org.kermeta.uml2_1.0.99.200802271125.jar" id="org.kermeta.uml2" version="1.0.99.200802271125">
+   <feature url="features/org.kermeta.uml2_1.1.0.jar" id="org.kermeta.uml2" version="1.1.0">
       <category name="MDKs"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.samples.fsm_1.0.99.200802271125.jar" id="fr.irisa.triskell.kermeta.samples.fsm" version="1.0.99.200802271125">
+   <feature url="features/fr.irisa.triskell.kermeta.samples.fsm_1.1.0.jar" id="fr.irisa.triskell.kermeta.samples.fsm" version="1.1.0">
       <category name="Samples"/>
    </feature>
-   <feature url="features/org.kermeta.tutorial.aspects_1.0.99.200802271125.jar" id="org.kermeta.tutorial.aspects" version="1.0.99.200802271125">
+   <feature url="features/org.kermeta.tutorial.aspects_1.1.0.jar" id="org.kermeta.tutorial.aspects" version="1.1.0">
       <category name="Samples"/>
    </feature>
-   <feature url="features/org.kermeta.kmlogo.feature_1.1.0.200802271125.jar" id="org.kermeta.kmlogo.feature" version="1.1.0.200802271125">
+   <feature url="features/org.kermeta.kmlogo.feature_1.1.1.jar" id="org.kermeta.kmlogo.feature" version="1.1.1">
       <category name="Samples"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.ocl_1.1.0.200802271125.jar" id="fr.irisa.triskell.kermeta.ocl" version="1.1.0.200802271125">
+   <feature url="features/fr.irisa.triskell.kermeta.ocl_1.1..1jar" id="fr.irisa.triskell.kermeta.ocl" version="1.1.1">
       <category name="MDKs"/>
+   </feature>
+   <feature url="features/org.kermeta.emfutils.feature_1.0.0.jar" id="org.kermeta.emfutils.feature" version="1.0.0">
+      <category name="OtherTools"/>
    </feature>
    <category-def name="Kermeta IDE" label="Kermeta workbench">
       <description>
