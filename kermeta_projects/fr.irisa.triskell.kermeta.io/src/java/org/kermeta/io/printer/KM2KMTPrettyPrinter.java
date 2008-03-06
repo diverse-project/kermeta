@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.14 2008-02-28 10:11:18 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.15 2008-03-06 07:59:09 ftanguy Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -1103,9 +1103,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		if(tgt != null) {
 			
 			if(fName.equals("not") && isBooleanTypeDef(tgt.getStaticType())) {
-					result += "not (";
+					//result += "(not (";
 					result += this.accept(tgt);
-					result += ")";
+					result += ".~not";
+					//result += ")";
 				}
 			else if(fName.equals("and") && isBooleanTypeDef(tgt.getStaticType())) {
 				result += "(";
