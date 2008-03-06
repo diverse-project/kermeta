@@ -30,8 +30,10 @@ package smartadapters
 	{
 		aspect class Adapter 
 		{
+			/**
+			 * Associates concrete meta-classes from MM\' to concrete meta-classes from MM
+			 */
 			operation initConvert(): Void is do
-				stdio.write("Mapping MM\' to MM...")
 				converter := Converter.new
 				convert := Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new
 				convert.put(pattern::Fractal::System,Fractal::System)
@@ -51,19 +53,21 @@ package smartadapters
 				convert.put(pattern::Fractal::Julia::Membrane,Fractal::Julia::Membrane)
 				convert.put(pattern::Fractal::Julia::Interceptor,Fractal::Julia::Interceptor)
 				converter.initConverter(convert)
-				stdio.writeln("OK!")
 			end
 		}
 		
 	package adaptations
 	{
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::System
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::System from scratch
+		 * This new element is handled by refering to newSystem
+		 */
 		class CreateFractalSystem inherits createAdaptation
 		{
 			attribute newSystem : pattern::Fractal::System
@@ -77,6 +81,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::System from an existing one
+		 * This cloned element is handled by refering to clonedSystem
+		 */
 		class CloneFractalSystem inherits cloneAdaptation
 		{
 			reference SystemToClone : pattern::Fractal::System
@@ -91,6 +99,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::System
+		 * All the references expect SystemToSet may be void
+		 */
 		class SetFractalSystem inherits setAdaptation
 		{
 			reference SystemToSet : pattern::Fractal::System
@@ -101,7 +113,20 @@ package smartadapters
 				result := SystemToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalSystem is do
+				var ad : Adapter init getAdapter
+				var tempSystemToSet : Fractal::System
+				tempSystemToSet ?= ad.getRealObject(SystemToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				c ?= ad.getRealObject(refcomponent,true)
+				c.each{o | var p : Fractal::Component p?=o isCorrectlySetted := isCorrectlySetted and tempSystemToSet.component.contains(p)}
+				c ?= ad.getRealObject(reftype,true)
+				c.each{o | var p : Fractal::Type p?=o isCorrectlySetted := isCorrectlySetted and tempSystemToSet.type.contains(p)}
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempSystem : Fractal::System
 				tempSystem ?= ad.getRealObject(SystemToSet,false)
@@ -110,19 +135,28 @@ package smartadapters
 				ad.setMultipleProperty(tempSystem.type,reftype)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalSystem init UnsetFractalSystem.new
+				if(reverse) then		
+					var unset : UnsetFractalSystem 
+					if self.reverse == void then
+						unset := UnsetFractalSystem.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.SystemToUnset := self.SystemToSet
 					unset.refcomponent.clear
 					unset.refcomponent.addAll(self.refcomponent)
 					unset.reftype.clear
 					unset.reftype.addAll(self.reftype)
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::System
+		 * All the references expect SystemToUnset may be void 
+		 */		
 		class UnsetFractalSystem inherits unsetAdaptation
 		{
 			reference SystemToUnset : pattern::Fractal::System
@@ -133,7 +167,28 @@ package smartadapters
 				result := SystemToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalSystem is do
+				var ad : Adapter init getAdapter
+				var tempSystemToUnset : Fractal::System
+				tempSystemToUnset ?= ad.getRealObject(SystemToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				c ?= ad.getRealObject(refcomponent,true)
+				c.each{o | var p : Fractal::Component p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempSystemToUnset.component.contains(p)
+					end
+				}
+				c ?= ad.getRealObject(reftype,true)
+				c.each{o | var p : Fractal::Type p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempSystemToUnset.type.contains(p)
+					end
+				}
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempSystem : Fractal::System
 				tempSystem ?= ad.getRealObject(SystemToUnset,false)
@@ -143,24 +198,28 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalSystem init SetFractalSystem.new
+					var ~set : SetFractalSystem 
+					if self.reverse == void then
+						~set := SetFractalSystem.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.SystemToSet := self.SystemToUnset
 					~set.refcomponent.clear
 					~set.refcomponent.addAll(self.refcomponent)
 					~set.reftype.clear
 					~set.reftype.addAll(self.reftype)
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::Type
-		 */
 		 
 
+		/**
+		 * Sets any property of Fractal::Type
+		 * All the references expect TypeToSet may be void
+		 */
 		class SetFractalType inherits setAdaptation
 		{
 			reference TypeToSet : pattern::Fractal::Type
@@ -169,22 +228,40 @@ package smartadapters
 				result := TypeToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalType is do
+				var ad : Adapter init getAdapter
+				var tempTypeToSet : Fractal::Type
+				tempTypeToSet ?= ad.getRealObject(TypeToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempType : Fractal::Type
 				tempType ?= ad.getRealObject(TypeToSet,false)
 				
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalType init UnsetFractalType.new
+				if(reverse) then		
+					var unset : UnsetFractalType 
+					if self.reverse == void then
+						unset := UnsetFractalType.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.TypeToUnset := self.TypeToSet
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Type
+		 * All the references expect TypeToUnset may be void 
+		 */		
 		class UnsetFractalType inherits unsetAdaptation
 		{
 			reference TypeToUnset : pattern::Fractal::Type
@@ -193,7 +270,16 @@ package smartadapters
 				result := TypeToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalType is do
+				var ad : Adapter init getAdapter
+				var tempTypeToUnset : Fractal::Type
+				tempTypeToUnset ?= ad.getRealObject(TypeToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempType : Fractal::Type
 				tempType ?= ad.getRealObject(TypeToUnset,false)
@@ -201,20 +287,28 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalType init SetFractalType.new
+					var ~set : SetFractalType 
+					if self.reverse == void then
+						~set := SetFractalType.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.TypeToSet := self.TypeToUnset
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::Component
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::Component from scratch
+		 * This new element is handled by refering to newComponent
+		 */
 		class CreateFractalComponent inherits createAdaptation
 		{
 			attribute newComponent : pattern::Fractal::Component
@@ -228,6 +322,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::Component from an existing one
+		 * This cloned element is handled by refering to clonedComponent
+		 */
 		class CloneFractalComponent inherits cloneAdaptation
 		{
 			reference ComponentToClone : pattern::Fractal::Component
@@ -242,6 +340,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::Component
+		 * All the references expect ComponentToSet may be void
+		 */
 		class SetFractalComponent inherits setAdaptation
 		{
 			reference ComponentToSet : pattern::Fractal::Component
@@ -254,7 +356,27 @@ package smartadapters
 				result := ComponentToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalComponent is do
+				var ad : Adapter init getAdapter
+				var tempComponentToSet : Fractal::Component
+				tempComponentToSet ?= ad.getRealObject(ComponentToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if reftype != void then
+					isCorrectlySetted := isCorrectlySetted and tempComponentToSet.type == ad.getRealObject(reftype,false)
+				end
+				if refmembrane != void then
+					isCorrectlySetted := isCorrectlySetted and tempComponentToSet.membrane == ad.getRealObject(refmembrane,false)
+				end
+				if refcontent != void then
+					isCorrectlySetted := isCorrectlySetted and tempComponentToSet.content == ad.getRealObject(refcontent,false)
+				end
+				c ?= ad.getRealObject(refsuperComponent,true)
+				c.each{o | var p : Fractal::Component p?=o isCorrectlySetted := isCorrectlySetted and tempComponentToSet.superComponent.contains(p)}
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempComponent : Fractal::Component
 				tempComponent ?= ad.getRealObject(ComponentToSet,false)
@@ -265,20 +387,29 @@ package smartadapters
 				ad.setMultipleProperty(tempComponent.superComponent,refsuperComponent)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalComponent init UnsetFractalComponent.new
+				if(reverse) then		
+					var unset : UnsetFractalComponent 
+					if self.reverse == void then
+						unset := UnsetFractalComponent.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.ComponentToUnset := self.ComponentToSet
 					unset.reftype := self.reftype
 					unset.refmembrane := self.refmembrane
 					unset.refcontent := self.refcontent
 					unset.refsuperComponent.clear
 					unset.refsuperComponent.addAll(self.refsuperComponent)
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Component
+		 * All the references expect ComponentToUnset may be void 
+		 */		
 		class UnsetFractalComponent inherits unsetAdaptation
 		{
 			reference ComponentToUnset : pattern::Fractal::Component
@@ -291,7 +422,34 @@ package smartadapters
 				result := ComponentToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalComponent is do
+				var ad : Adapter init getAdapter
+				var tempComponentToUnset : Fractal::Component
+				tempComponentToUnset ?= ad.getRealObject(ComponentToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if reftype != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(reftype,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempComponentToUnset.type == void
+				end end
+				if refmembrane != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refmembrane,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempComponentToUnset.membrane == void
+				end end
+				if refcontent != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refcontent,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempComponentToUnset.content == void
+				end end
+				c ?= ad.getRealObject(refsuperComponent,true)
+				c.each{o | var p : Fractal::Component p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempComponentToUnset.superComponent.contains(p)
+					end
+				}
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempComponent : Fractal::Component
 				tempComponent ?= ad.getRealObject(ComponentToUnset,false)
@@ -303,25 +461,33 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalComponent init SetFractalComponent.new
+					var ~set : SetFractalComponent 
+					if self.reverse == void then
+						~set := SetFractalComponent.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.ComponentToSet := self.ComponentToUnset
 					~set.reftype := self.reftype
 					~set.refmembrane := self.refmembrane
 					~set.refcontent := self.refcontent
 					~set.refsuperComponent.clear
 					~set.refsuperComponent.addAll(self.refsuperComponent)
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::Membrane
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::Membrane from scratch
+		 * This new element is handled by refering to newMembrane
+		 */
 		class CreateFractalMembrane inherits createAdaptation
 		{
 			attribute newMembrane : pattern::Fractal::Membrane
@@ -335,6 +501,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::Membrane from an existing one
+		 * This cloned element is handled by refering to clonedMembrane
+		 */
 		class CloneFractalMembrane inherits cloneAdaptation
 		{
 			reference MembraneToClone : pattern::Fractal::Membrane
@@ -349,6 +519,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::Membrane
+		 * All the references expect MembraneToSet may be void
+		 */
 		class SetFractalMembrane inherits setAdaptation
 		{
 			reference MembraneToSet : pattern::Fractal::Membrane
@@ -361,7 +535,25 @@ package smartadapters
 				result := MembraneToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalMembrane is do
+				var ad : Adapter init getAdapter
+				var tempMembraneToSet : Fractal::Membrane
+				tempMembraneToSet ?= ad.getRealObject(MembraneToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.owner == ad.getRealObject(refowner,false)
+				end
+				c ?= ad.getRealObject(refexternalInterface,true)
+				c.each{o | var p : Fractal::Interface p?=o isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.externalInterface.contains(p)}
+				c ?= ad.getRealObject(refinternalInterface,true)
+				c.each{o | var p : Fractal::Interface p?=o isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.internalInterface.contains(p)}
+				c ?= ad.getRealObject(refcontroller,true)
+				c.each{o | var p : Fractal::Controller p?=o isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.controller.contains(p)}
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempMembrane : Fractal::Membrane
 				tempMembrane ?= ad.getRealObject(MembraneToSet,false)
@@ -372,8 +564,15 @@ package smartadapters
 				ad.setMultipleProperty(tempMembrane.controller,refcontroller)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalMembrane init UnsetFractalMembrane.new
+				if(reverse) then		
+					var unset : UnsetFractalMembrane 
+					if self.reverse == void then
+						unset := UnsetFractalMembrane.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.MembraneToUnset := self.MembraneToSet
 					unset.refowner := self.refowner
 					unset.refexternalInterface.clear
@@ -382,12 +581,14 @@ package smartadapters
 					unset.refinternalInterface.addAll(self.refinternalInterface)
 					unset.refcontroller.clear
 					unset.refcontroller.addAll(self.refcontroller)
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Membrane
+		 * All the references expect MembraneToUnset may be void 
+		 */		
 		class UnsetFractalMembrane inherits unsetAdaptation
 		{
 			reference MembraneToUnset : pattern::Fractal::Membrane
@@ -400,7 +601,38 @@ package smartadapters
 				result := MembraneToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalMembrane is do
+				var ad : Adapter init getAdapter
+				var tempMembraneToUnset : Fractal::Membrane
+				tempMembraneToUnset ?= ad.getRealObject(MembraneToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempMembraneToUnset.owner == void
+				end end
+				c ?= ad.getRealObject(refexternalInterface,true)
+				c.each{o | var p : Fractal::Interface p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempMembraneToUnset.externalInterface.contains(p)
+					end
+				}
+				c ?= ad.getRealObject(refinternalInterface,true)
+				c.each{o | var p : Fractal::Interface p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempMembraneToUnset.internalInterface.contains(p)
+					end
+				}
+				c ?= ad.getRealObject(refcontroller,true)
+				c.each{o | var p : Fractal::Controller p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempMembraneToUnset.controller.contains(p)
+					end
+				}
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempMembrane : Fractal::Membrane
 				tempMembrane ?= ad.getRealObject(MembraneToUnset,false)
@@ -412,7 +644,14 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalMembrane init SetFractalMembrane.new
+					var ~set : SetFractalMembrane 
+					if self.reverse == void then
+						~set := SetFractalMembrane.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.MembraneToSet := self.MembraneToUnset
 					~set.refowner := self.refowner
 					~set.refexternalInterface.clear
@@ -421,18 +660,19 @@ package smartadapters
 					~set.refinternalInterface.addAll(self.refinternalInterface)
 					~set.refcontroller.clear
 					~set.refcontroller.addAll(self.refcontroller)
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::Content
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::Content from scratch
+		 * This new element is handled by refering to newContent
+		 */
 		class CreateFractalContent inherits createAdaptation
 		{
 			attribute newContent : pattern::Fractal::Content
@@ -446,6 +686,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::Content from an existing one
+		 * This cloned element is handled by refering to clonedContent
+		 */
 		class CloneFractalContent inherits cloneAdaptation
 		{
 			reference ContentToClone : pattern::Fractal::Content
@@ -460,6 +704,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::Content
+		 * All the references expect ContentToSet may be void
+		 */
 		class SetFractalContent inherits setAdaptation
 		{
 			reference ContentToSet : pattern::Fractal::Content
@@ -471,7 +719,23 @@ package smartadapters
 				result := ContentToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalContent is do
+				var ad : Adapter init getAdapter
+				var tempContentToSet : Fractal::Content
+				tempContentToSet ?= ad.getRealObject(ContentToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempContentToSet.owner == ad.getRealObject(refowner,false)
+				end
+				c ?= ad.getRealObject(refsubComponent,true)
+				c.each{o | var p : Fractal::Component p?=o isCorrectlySetted := isCorrectlySetted and tempContentToSet.subComponent.contains(p)}
+				c ?= ad.getRealObject(refbinding,true)
+				c.each{o | var p : Fractal::Binding p?=o isCorrectlySetted := isCorrectlySetted and tempContentToSet.binding.contains(p)}
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempContent : Fractal::Content
 				tempContent ?= ad.getRealObject(ContentToSet,false)
@@ -481,20 +745,29 @@ package smartadapters
 				ad.setMultipleProperty(tempContent.binding,refbinding)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalContent init UnsetFractalContent.new
+				if(reverse) then		
+					var unset : UnsetFractalContent 
+					if self.reverse == void then
+						unset := UnsetFractalContent.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.ContentToUnset := self.ContentToSet
 					unset.refowner := self.refowner
 					unset.refsubComponent.clear
 					unset.refsubComponent.addAll(self.refsubComponent)
 					unset.refbinding.clear
 					unset.refbinding.addAll(self.refbinding)
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Content
+		 * All the references expect ContentToUnset may be void 
+		 */		
 		class UnsetFractalContent inherits unsetAdaptation
 		{
 			reference ContentToUnset : pattern::Fractal::Content
@@ -506,7 +779,32 @@ package smartadapters
 				result := ContentToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalContent is do
+				var ad : Adapter init getAdapter
+				var tempContentToUnset : Fractal::Content
+				tempContentToUnset ?= ad.getRealObject(ContentToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempContentToUnset.owner == void
+				end end
+				c ?= ad.getRealObject(refsubComponent,true)
+				c.each{o | var p : Fractal::Component p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempContentToUnset.subComponent.contains(p)
+					end
+				}
+				c ?= ad.getRealObject(refbinding,true)
+				c.each{o | var p : Fractal::Binding p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempContentToUnset.binding.contains(p)
+					end
+				}
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempContent : Fractal::Content
 				tempContent ?= ad.getRealObject(ContentToUnset,false)
@@ -517,37 +815,35 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalContent init SetFractalContent.new
+					var ~set : SetFractalContent 
+					if self.reverse == void then
+						~set := SetFractalContent.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.ContentToSet := self.ContentToUnset
 					~set.refowner := self.refowner
 					~set.refsubComponent.clear
 					~set.refsubComponent.addAll(self.refsubComponent)
 					~set.refbinding.clear
 					~set.refbinding.addAll(self.refbinding)
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::Name
-		 */
 		 
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::Visibility
-		 */
 		 
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::Interface
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::Interface from scratch
+		 * This new element is handled by refering to newInterface
+		 */
 		class CreateFractalInterface inherits createAdaptation
 		{
 			attribute newInterface : pattern::Fractal::Interface
@@ -561,6 +857,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::Interface from an existing one
+		 * This cloned element is handled by refering to clonedInterface
+		 */
 		class CloneFractalInterface inherits cloneAdaptation
 		{
 			reference InterfaceToClone : pattern::Fractal::Interface
@@ -575,6 +875,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::Interface
+		 * All the references expect InterfaceToSet may be void
+		 */
 		class SetFractalInterface inherits setAdaptation
 		{
 			reference InterfaceToSet : pattern::Fractal::Interface
@@ -587,7 +891,28 @@ package smartadapters
 				result := InterfaceToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalInterface is do
+				var ad : Adapter init getAdapter
+				var tempInterfaceToSet : Fractal::Interface
+				tempInterfaceToSet ?= ad.getRealObject(InterfaceToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempInterfaceToSet.owner == ad.getRealObject(refowner,false)
+				end
+				if reftype != void then
+					isCorrectlySetted := isCorrectlySetted and tempInterfaceToSet.type == ad.getRealObject(reftype,false)
+				end
+				if refname != void then
+					isCorrectlySetted := isCorrectlySetted and tempInterfaceToSet.name == ad.getRealObject(refname,false)
+				end
+				if refvisibility != void then
+					isCorrectlySetted := isCorrectlySetted and tempInterfaceToSet.visibility == ad.getRealObject(refvisibility,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempInterface : Fractal::Interface
 				tempInterface ?= ad.getRealObject(InterfaceToSet,false)
@@ -598,19 +923,28 @@ package smartadapters
 				tempInterface.visibility ?= ad.setSingleProperty(refvisibility, tempInterface.visibility)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalInterface init UnsetFractalInterface.new
+				if(reverse) then		
+					var unset : UnsetFractalInterface 
+					if self.reverse == void then
+						unset := UnsetFractalInterface.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.InterfaceToUnset := self.InterfaceToSet
 					unset.refowner := self.refowner
 					unset.reftype := self.reftype
 					unset.refname := self.refname
 					unset.refvisibility := self.refvisibility
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Interface
+		 * All the references expect InterfaceToUnset may be void 
+		 */		
 		class UnsetFractalInterface inherits unsetAdaptation
 		{
 			reference InterfaceToUnset : pattern::Fractal::Interface
@@ -623,7 +957,32 @@ package smartadapters
 				result := InterfaceToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalInterface is do
+				var ad : Adapter init getAdapter
+				var tempInterfaceToUnset : Fractal::Interface
+				tempInterfaceToUnset ?= ad.getRealObject(InterfaceToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempInterfaceToUnset.owner == void
+				end end
+				if reftype != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(reftype,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempInterfaceToUnset.type == void
+				end end
+				if refname != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refname,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempInterfaceToUnset.name == void
+				end end
+				if refvisibility != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refvisibility,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempInterfaceToUnset.visibility == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempInterface : Fractal::Interface
 				tempInterface ?= ad.getRealObject(InterfaceToUnset,false)
@@ -635,24 +994,32 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalInterface init SetFractalInterface.new
+					var ~set : SetFractalInterface 
+					if self.reverse == void then
+						~set := SetFractalInterface.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.InterfaceToSet := self.InterfaceToUnset
 					~set.refowner := self.refowner
 					~set.reftype := self.reftype
 					~set.refname := self.refname
 					~set.refvisibility := self.refvisibility
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::Binding
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::Binding from scratch
+		 * This new element is handled by refering to newBinding
+		 */
 		class CreateFractalBinding inherits createAdaptation
 		{
 			attribute newBinding : pattern::Fractal::Binding
@@ -666,6 +1033,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::Binding from an existing one
+		 * This cloned element is handled by refering to clonedBinding
+		 */
 		class CloneFractalBinding inherits cloneAdaptation
 		{
 			reference BindingToClone : pattern::Fractal::Binding
@@ -680,6 +1051,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::Binding
+		 * All the references expect BindingToSet may be void
+		 */
 		class SetFractalBinding inherits setAdaptation
 		{
 			reference BindingToSet : pattern::Fractal::Binding
@@ -690,7 +1065,22 @@ package smartadapters
 				result := BindingToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalBinding is do
+				var ad : Adapter init getAdapter
+				var tempBindingToSet : Fractal::Binding
+				tempBindingToSet ?= ad.getRealObject(BindingToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refclient != void then
+					isCorrectlySetted := isCorrectlySetted and tempBindingToSet.client == ad.getRealObject(refclient,false)
+				end
+				if refserver != void then
+					isCorrectlySetted := isCorrectlySetted and tempBindingToSet.server == ad.getRealObject(refserver,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempBinding : Fractal::Binding
 				tempBinding ?= ad.getRealObject(BindingToSet,false)
@@ -699,17 +1089,26 @@ package smartadapters
 				tempBinding.server ?= ad.setSingleProperty(refserver, tempBinding.server)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalBinding init UnsetFractalBinding.new
+				if(reverse) then		
+					var unset : UnsetFractalBinding 
+					if self.reverse == void then
+						unset := UnsetFractalBinding.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.BindingToUnset := self.BindingToSet
 					unset.refclient := self.refclient
 					unset.refserver := self.refserver
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Binding
+		 * All the references expect BindingToUnset may be void 
+		 */		
 		class UnsetFractalBinding inherits unsetAdaptation
 		{
 			reference BindingToUnset : pattern::Fractal::Binding
@@ -720,7 +1119,24 @@ package smartadapters
 				result := BindingToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalBinding is do
+				var ad : Adapter init getAdapter
+				var tempBindingToUnset : Fractal::Binding
+				tempBindingToUnset ?= ad.getRealObject(BindingToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refclient != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refclient,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempBindingToUnset.client == void
+				end end
+				if refserver != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refserver,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempBindingToUnset.server == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempBinding : Fractal::Binding
 				tempBinding ?= ad.getRealObject(BindingToUnset,false)
@@ -730,40 +1146,33 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalBinding init SetFractalBinding.new
+					var ~set : SetFractalBinding 
+					if self.reverse == void then
+						~set := SetFractalBinding.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.BindingToSet := self.BindingToUnset
 					~set.refclient := self.refclient
 					~set.refserver := self.refserver
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::Role
-		 */
 		 
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::Cardinality
-		 */
 		 
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::Contingency
-		 */
 		 
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::ComponentType
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::ComponentType from scratch
+		 * This new element is handled by refering to newComponentType
+		 */
 		class CreateFractalComponentType inherits createAdaptation
 		{
 			attribute newComponentType : pattern::Fractal::ComponentType
@@ -777,6 +1186,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::ComponentType from an existing one
+		 * This cloned element is handled by refering to clonedComponentType
+		 */
 		class CloneFractalComponentType inherits cloneAdaptation
 		{
 			reference ComponentTypeToClone : pattern::Fractal::ComponentType
@@ -791,6 +1204,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::ComponentType
+		 * All the references expect ComponentTypeToSet may be void
+		 */
 		class SetFractalComponentType inherits setAdaptation
 		{
 			reference ComponentTypeToSet : pattern::Fractal::ComponentType
@@ -800,7 +1217,18 @@ package smartadapters
 				result := ComponentTypeToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalComponentType is do
+				var ad : Adapter init getAdapter
+				var tempComponentTypeToSet : Fractal::ComponentType
+				tempComponentTypeToSet ?= ad.getRealObject(ComponentTypeToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				c ?= ad.getRealObject(refinterfaceType,true)
+				c.each{o | var p : Fractal::InterfaceType p?=o isCorrectlySetted := isCorrectlySetted and tempComponentTypeToSet.interfaceType.contains(p)}
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempComponentType : Fractal::ComponentType
 				tempComponentType ?= ad.getRealObject(ComponentTypeToSet,false)
@@ -808,17 +1236,26 @@ package smartadapters
 				ad.setMultipleProperty(tempComponentType.interfaceType,refinterfaceType)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalComponentType init UnsetFractalComponentType.new
+				if(reverse) then		
+					var unset : UnsetFractalComponentType 
+					if self.reverse == void then
+						unset := UnsetFractalComponentType.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.ComponentTypeToUnset := self.ComponentTypeToSet
 					unset.refinterfaceType.clear
 					unset.refinterfaceType.addAll(self.refinterfaceType)
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::ComponentType
+		 * All the references expect ComponentTypeToUnset may be void 
+		 */		
 		class UnsetFractalComponentType inherits unsetAdaptation
 		{
 			reference ComponentTypeToUnset : pattern::Fractal::ComponentType
@@ -828,7 +1265,22 @@ package smartadapters
 				result := ComponentTypeToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalComponentType is do
+				var ad : Adapter init getAdapter
+				var tempComponentTypeToUnset : Fractal::ComponentType
+				tempComponentTypeToUnset ?= ad.getRealObject(ComponentTypeToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				c ?= ad.getRealObject(refinterfaceType,true)
+				c.each{o | var p : Fractal::InterfaceType p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempComponentTypeToUnset.interfaceType.contains(p)
+					end
+				}
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempComponentType : Fractal::ComponentType
 				tempComponentType ?= ad.getRealObject(ComponentTypeToUnset,false)
@@ -837,22 +1289,30 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalComponentType init SetFractalComponentType.new
+					var ~set : SetFractalComponentType 
+					if self.reverse == void then
+						~set := SetFractalComponentType.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.ComponentTypeToSet := self.ComponentTypeToUnset
 					~set.refinterfaceType.clear
 					~set.refinterfaceType.addAll(self.refinterfaceType)
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::InterfaceType
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::InterfaceType from scratch
+		 * This new element is handled by refering to newInterfaceType
+		 */
 		class CreateFractalInterfaceType inherits createAdaptation
 		{
 			attribute newInterfaceType : pattern::Fractal::InterfaceType
@@ -866,6 +1326,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::InterfaceType from an existing one
+		 * This cloned element is handled by refering to clonedInterfaceType
+		 */
 		class CloneFractalInterfaceType inherits cloneAdaptation
 		{
 			reference InterfaceTypeToClone : pattern::Fractal::InterfaceType
@@ -880,6 +1344,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::InterfaceType
+		 * All the references expect InterfaceTypeToSet may be void
+		 */
 		class SetFractalInterfaceType inherits setAdaptation
 		{
 			reference InterfaceTypeToSet : pattern::Fractal::InterfaceType
@@ -893,7 +1361,31 @@ package smartadapters
 				result := InterfaceTypeToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalInterfaceType is do
+				var ad : Adapter init getAdapter
+				var tempInterfaceTypeToSet : Fractal::InterfaceType
+				tempInterfaceTypeToSet ?= ad.getRealObject(InterfaceTypeToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then
+					isCorrectlySetted := isCorrectlySetted and tempInterfaceTypeToSet.name == ad.getRealObject(refname,false)
+				end
+				if refrole != void then
+					isCorrectlySetted := isCorrectlySetted and tempInterfaceTypeToSet.role == ad.getRealObject(refrole,false)
+				end
+				if refcardinality != void then
+					isCorrectlySetted := isCorrectlySetted and tempInterfaceTypeToSet.cardinality == ad.getRealObject(refcardinality,false)
+				end
+				if refcontingency != void then
+					isCorrectlySetted := isCorrectlySetted and tempInterfaceTypeToSet.contingency == ad.getRealObject(refcontingency,false)
+				end
+				if refsignature != void then
+					isCorrectlySetted := isCorrectlySetted and tempInterfaceTypeToSet.signature == ad.getRealObject(refsignature,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempInterfaceType : Fractal::InterfaceType
 				tempInterfaceType ?= ad.getRealObject(InterfaceTypeToSet,false)
@@ -905,20 +1397,29 @@ package smartadapters
 				tempInterfaceType.signature ?= ad.setSingleProperty(refsignature, tempInterfaceType.signature)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalInterfaceType init UnsetFractalInterfaceType.new
+				if(reverse) then		
+					var unset : UnsetFractalInterfaceType 
+					if self.reverse == void then
+						unset := UnsetFractalInterfaceType.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.InterfaceTypeToUnset := self.InterfaceTypeToSet
 					unset.refname := self.refname
 					unset.refrole := self.refrole
 					unset.refcardinality := self.refcardinality
 					unset.refcontingency := self.refcontingency
 					unset.refsignature := self.refsignature
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::InterfaceType
+		 * All the references expect InterfaceTypeToUnset may be void 
+		 */		
 		class UnsetFractalInterfaceType inherits unsetAdaptation
 		{
 			reference InterfaceTypeToUnset : pattern::Fractal::InterfaceType
@@ -932,7 +1433,36 @@ package smartadapters
 				result := InterfaceTypeToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalInterfaceType is do
+				var ad : Adapter init getAdapter
+				var tempInterfaceTypeToUnset : Fractal::InterfaceType
+				tempInterfaceTypeToUnset ?= ad.getRealObject(InterfaceTypeToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refname,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempInterfaceTypeToUnset.name == void
+				end end
+				if refrole != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refrole,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempInterfaceTypeToUnset.role == void
+				end end
+				if refcardinality != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refcardinality,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempInterfaceTypeToUnset.cardinality == void
+				end end
+				if refcontingency != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refcontingency,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempInterfaceTypeToUnset.contingency == void
+				end end
+				if refsignature != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refsignature,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempInterfaceTypeToUnset.signature == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempInterfaceType : Fractal::InterfaceType
 				tempInterfaceType ?= ad.getRealObject(InterfaceTypeToUnset,false)
@@ -945,25 +1475,29 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalInterfaceType init SetFractalInterfaceType.new
+					var ~set : SetFractalInterfaceType 
+					if self.reverse == void then
+						~set := SetFractalInterfaceType.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.InterfaceTypeToSet := self.InterfaceTypeToUnset
 					~set.refname := self.refname
 					~set.refrole := self.refrole
 					~set.refcardinality := self.refcardinality
 					~set.refcontingency := self.refcontingency
 					~set.refsignature := self.refsignature
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::LanguageInterfaceType
-		 */
 		 
 
+		/**
+		 * Sets any property of Fractal::LanguageInterfaceType
+		 * All the references expect LanguageInterfaceTypeToSet may be void
+		 */
 		class SetFractalLanguageInterfaceType inherits setAdaptation
 		{
 			reference LanguageInterfaceTypeToSet : pattern::Fractal::LanguageInterfaceType
@@ -972,22 +1506,40 @@ package smartadapters
 				result := LanguageInterfaceTypeToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalLanguageInterfaceType is do
+				var ad : Adapter init getAdapter
+				var tempLanguageInterfaceTypeToSet : Fractal::LanguageInterfaceType
+				tempLanguageInterfaceTypeToSet ?= ad.getRealObject(LanguageInterfaceTypeToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempLanguageInterfaceType : Fractal::LanguageInterfaceType
 				tempLanguageInterfaceType ?= ad.getRealObject(LanguageInterfaceTypeToSet,false)
 				
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalLanguageInterfaceType init UnsetFractalLanguageInterfaceType.new
+				if(reverse) then		
+					var unset : UnsetFractalLanguageInterfaceType 
+					if self.reverse == void then
+						unset := UnsetFractalLanguageInterfaceType.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.LanguageInterfaceTypeToUnset := self.LanguageInterfaceTypeToSet
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::LanguageInterfaceType
+		 * All the references expect LanguageInterfaceTypeToUnset may be void 
+		 */		
 		class UnsetFractalLanguageInterfaceType inherits unsetAdaptation
 		{
 			reference LanguageInterfaceTypeToUnset : pattern::Fractal::LanguageInterfaceType
@@ -996,7 +1548,16 @@ package smartadapters
 				result := LanguageInterfaceTypeToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalLanguageInterfaceType is do
+				var ad : Adapter init getAdapter
+				var tempLanguageInterfaceTypeToUnset : Fractal::LanguageInterfaceType
+				tempLanguageInterfaceTypeToUnset ?= ad.getRealObject(LanguageInterfaceTypeToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempLanguageInterfaceType : Fractal::LanguageInterfaceType
 				tempLanguageInterfaceType ?= ad.getRealObject(LanguageInterfaceTypeToUnset,false)
@@ -1004,20 +1565,24 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalLanguageInterfaceType init SetFractalLanguageInterfaceType.new
+					var ~set : SetFractalLanguageInterfaceType 
+					if self.reverse == void then
+						~set := SetFractalLanguageInterfaceType.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.LanguageInterfaceTypeToSet := self.LanguageInterfaceTypeToUnset
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::Controller
-		 */
 		 
 
+		/**
+		 * Sets any property of Fractal::Controller
+		 * All the references expect ControllerToSet may be void
+		 */
 		class SetFractalController inherits setAdaptation
 		{
 			reference ControllerToSet : pattern::Fractal::Controller
@@ -1027,7 +1592,19 @@ package smartadapters
 				result := ControllerToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalController is do
+				var ad : Adapter init getAdapter
+				var tempControllerToSet : Fractal::Controller
+				tempControllerToSet ?= ad.getRealObject(ControllerToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempControllerToSet.owner == ad.getRealObject(refowner,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempController : Fractal::Controller
 				tempController ?= ad.getRealObject(ControllerToSet,false)
@@ -1035,16 +1612,25 @@ package smartadapters
 				tempController.owner ?= ad.setSingleProperty(refowner, tempController.owner)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalController init UnsetFractalController.new
+				if(reverse) then		
+					var unset : UnsetFractalController 
+					if self.reverse == void then
+						unset := UnsetFractalController.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.ControllerToUnset := self.ControllerToSet
 					unset.refowner := self.refowner
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Controller
+		 * All the references expect ControllerToUnset may be void 
+		 */		
 		class UnsetFractalController inherits unsetAdaptation
 		{
 			reference ControllerToUnset : pattern::Fractal::Controller
@@ -1054,7 +1640,20 @@ package smartadapters
 				result := ControllerToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalController is do
+				var ad : Adapter init getAdapter
+				var tempControllerToUnset : Fractal::Controller
+				tempControllerToUnset ?= ad.getRealObject(ControllerToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempControllerToUnset.owner == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempController : Fractal::Controller
 				tempController ?= ad.getRealObject(ControllerToUnset,false)
@@ -1063,21 +1662,25 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalController init SetFractalController.new
+					var ~set : SetFractalController 
+					if self.reverse == void then
+						~set := SetFractalController.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.ControllerToSet := self.ControllerToUnset
 					~set.refowner := self.refowner
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::AttributeController
-		 */
 		 
 
+		/**
+		 * Sets any property of Fractal::AttributeController
+		 * All the references expect AttributeControllerToSet may be void
+		 */
 		class SetFractalAttributeController inherits setAdaptation
 		{
 			reference AttributeControllerToSet : pattern::Fractal::AttributeController
@@ -1087,7 +1690,19 @@ package smartadapters
 				result := AttributeControllerToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalAttributeController is do
+				var ad : Adapter init getAdapter
+				var tempAttributeControllerToSet : Fractal::AttributeController
+				tempAttributeControllerToSet ?= ad.getRealObject(AttributeControllerToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempAttributeControllerToSet.owner == ad.getRealObject(refowner,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempAttributeController : Fractal::AttributeController
 				tempAttributeController ?= ad.getRealObject(AttributeControllerToSet,false)
@@ -1095,16 +1710,25 @@ package smartadapters
 				tempAttributeController.owner ?= ad.setSingleProperty(refowner, tempAttributeController.owner)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalAttributeController init UnsetFractalAttributeController.new
+				if(reverse) then		
+					var unset : UnsetFractalAttributeController 
+					if self.reverse == void then
+						unset := UnsetFractalAttributeController.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.AttributeControllerToUnset := self.AttributeControllerToSet
 					unset.refowner := self.refowner
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::AttributeController
+		 * All the references expect AttributeControllerToUnset may be void 
+		 */		
 		class UnsetFractalAttributeController inherits unsetAdaptation
 		{
 			reference AttributeControllerToUnset : pattern::Fractal::AttributeController
@@ -1114,7 +1738,20 @@ package smartadapters
 				result := AttributeControllerToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalAttributeController is do
+				var ad : Adapter init getAdapter
+				var tempAttributeControllerToUnset : Fractal::AttributeController
+				tempAttributeControllerToUnset ?= ad.getRealObject(AttributeControllerToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempAttributeControllerToUnset.owner == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempAttributeController : Fractal::AttributeController
 				tempAttributeController ?= ad.getRealObject(AttributeControllerToUnset,false)
@@ -1123,21 +1760,25 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalAttributeController init SetFractalAttributeController.new
+					var ~set : SetFractalAttributeController 
+					if self.reverse == void then
+						~set := SetFractalAttributeController.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.AttributeControllerToSet := self.AttributeControllerToUnset
 					~set.refowner := self.refowner
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::BindingController
-		 */
 		 
 
+		/**
+		 * Sets any property of Fractal::BindingController
+		 * All the references expect BindingControllerToSet may be void
+		 */
 		class SetFractalBindingController inherits setAdaptation
 		{
 			reference BindingControllerToSet : pattern::Fractal::BindingController
@@ -1147,7 +1788,19 @@ package smartadapters
 				result := BindingControllerToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalBindingController is do
+				var ad : Adapter init getAdapter
+				var tempBindingControllerToSet : Fractal::BindingController
+				tempBindingControllerToSet ?= ad.getRealObject(BindingControllerToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempBindingControllerToSet.owner == ad.getRealObject(refowner,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempBindingController : Fractal::BindingController
 				tempBindingController ?= ad.getRealObject(BindingControllerToSet,false)
@@ -1155,16 +1808,25 @@ package smartadapters
 				tempBindingController.owner ?= ad.setSingleProperty(refowner, tempBindingController.owner)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalBindingController init UnsetFractalBindingController.new
+				if(reverse) then		
+					var unset : UnsetFractalBindingController 
+					if self.reverse == void then
+						unset := UnsetFractalBindingController.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.BindingControllerToUnset := self.BindingControllerToSet
 					unset.refowner := self.refowner
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::BindingController
+		 * All the references expect BindingControllerToUnset may be void 
+		 */		
 		class UnsetFractalBindingController inherits unsetAdaptation
 		{
 			reference BindingControllerToUnset : pattern::Fractal::BindingController
@@ -1174,7 +1836,20 @@ package smartadapters
 				result := BindingControllerToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalBindingController is do
+				var ad : Adapter init getAdapter
+				var tempBindingControllerToUnset : Fractal::BindingController
+				tempBindingControllerToUnset ?= ad.getRealObject(BindingControllerToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempBindingControllerToUnset.owner == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempBindingController : Fractal::BindingController
 				tempBindingController ?= ad.getRealObject(BindingControllerToUnset,false)
@@ -1183,21 +1858,25 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalBindingController init SetFractalBindingController.new
+					var ~set : SetFractalBindingController 
+					if self.reverse == void then
+						~set := SetFractalBindingController.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.BindingControllerToSet := self.BindingControllerToUnset
 					~set.refowner := self.refowner
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::ContentController
-		 */
 		 
 
+		/**
+		 * Sets any property of Fractal::ContentController
+		 * All the references expect ContentControllerToSet may be void
+		 */
 		class SetFractalContentController inherits setAdaptation
 		{
 			reference ContentControllerToSet : pattern::Fractal::ContentController
@@ -1207,7 +1886,19 @@ package smartadapters
 				result := ContentControllerToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalContentController is do
+				var ad : Adapter init getAdapter
+				var tempContentControllerToSet : Fractal::ContentController
+				tempContentControllerToSet ?= ad.getRealObject(ContentControllerToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempContentControllerToSet.owner == ad.getRealObject(refowner,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempContentController : Fractal::ContentController
 				tempContentController ?= ad.getRealObject(ContentControllerToSet,false)
@@ -1215,16 +1906,25 @@ package smartadapters
 				tempContentController.owner ?= ad.setSingleProperty(refowner, tempContentController.owner)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalContentController init UnsetFractalContentController.new
+				if(reverse) then		
+					var unset : UnsetFractalContentController 
+					if self.reverse == void then
+						unset := UnsetFractalContentController.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.ContentControllerToUnset := self.ContentControllerToSet
 					unset.refowner := self.refowner
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::ContentController
+		 * All the references expect ContentControllerToUnset may be void 
+		 */		
 		class UnsetFractalContentController inherits unsetAdaptation
 		{
 			reference ContentControllerToUnset : pattern::Fractal::ContentController
@@ -1234,7 +1934,20 @@ package smartadapters
 				result := ContentControllerToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalContentController is do
+				var ad : Adapter init getAdapter
+				var tempContentControllerToUnset : Fractal::ContentController
+				tempContentControllerToUnset ?= ad.getRealObject(ContentControllerToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempContentControllerToUnset.owner == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempContentController : Fractal::ContentController
 				tempContentController ?= ad.getRealObject(ContentControllerToUnset,false)
@@ -1243,21 +1956,25 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalContentController init SetFractalContentController.new
+					var ~set : SetFractalContentController 
+					if self.reverse == void then
+						~set := SetFractalContentController.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.ContentControllerToSet := self.ContentControllerToUnset
 					~set.refowner := self.refowner
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::LifeCycleController
-		 */
 		 
 
+		/**
+		 * Sets any property of Fractal::LifeCycleController
+		 * All the references expect LifeCycleControllerToSet may be void
+		 */
 		class SetFractalLifeCycleController inherits setAdaptation
 		{
 			reference LifeCycleControllerToSet : pattern::Fractal::LifeCycleController
@@ -1267,7 +1984,19 @@ package smartadapters
 				result := LifeCycleControllerToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalLifeCycleController is do
+				var ad : Adapter init getAdapter
+				var tempLifeCycleControllerToSet : Fractal::LifeCycleController
+				tempLifeCycleControllerToSet ?= ad.getRealObject(LifeCycleControllerToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempLifeCycleControllerToSet.owner == ad.getRealObject(refowner,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempLifeCycleController : Fractal::LifeCycleController
 				tempLifeCycleController ?= ad.getRealObject(LifeCycleControllerToSet,false)
@@ -1275,16 +2004,25 @@ package smartadapters
 				tempLifeCycleController.owner ?= ad.setSingleProperty(refowner, tempLifeCycleController.owner)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalLifeCycleController init UnsetFractalLifeCycleController.new
+				if(reverse) then		
+					var unset : UnsetFractalLifeCycleController 
+					if self.reverse == void then
+						unset := UnsetFractalLifeCycleController.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.LifeCycleControllerToUnset := self.LifeCycleControllerToSet
 					unset.refowner := self.refowner
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::LifeCycleController
+		 * All the references expect LifeCycleControllerToUnset may be void 
+		 */		
 		class UnsetFractalLifeCycleController inherits unsetAdaptation
 		{
 			reference LifeCycleControllerToUnset : pattern::Fractal::LifeCycleController
@@ -1294,7 +2032,20 @@ package smartadapters
 				result := LifeCycleControllerToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalLifeCycleController is do
+				var ad : Adapter init getAdapter
+				var tempLifeCycleControllerToUnset : Fractal::LifeCycleController
+				tempLifeCycleControllerToUnset ?= ad.getRealObject(LifeCycleControllerToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempLifeCycleControllerToUnset.owner == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempLifeCycleController : Fractal::LifeCycleController
 				tempLifeCycleController ?= ad.getRealObject(LifeCycleControllerToUnset,false)
@@ -1303,27 +2054,26 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalLifeCycleController init SetFractalLifeCycleController.new
+					var ~set : SetFractalLifeCycleController 
+					if self.reverse == void then
+						~set := SetFractalLifeCycleController.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.LifeCycleControllerToSet := self.LifeCycleControllerToUnset
 					~set.refowner := self.refowner
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::LifeCycleStatus
-		 */
 		 
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::NameController
-		 */
 		 
 
+		/**
+		 * Sets any property of Fractal::NameController
+		 * All the references expect NameControllerToSet may be void
+		 */
 		class SetFractalNameController inherits setAdaptation
 		{
 			reference NameControllerToSet : pattern::Fractal::NameController
@@ -1333,7 +2083,19 @@ package smartadapters
 				result := NameControllerToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalNameController is do
+				var ad : Adapter init getAdapter
+				var tempNameControllerToSet : Fractal::NameController
+				tempNameControllerToSet ?= ad.getRealObject(NameControllerToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempNameControllerToSet.owner == ad.getRealObject(refowner,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempNameController : Fractal::NameController
 				tempNameController ?= ad.getRealObject(NameControllerToSet,false)
@@ -1341,16 +2103,25 @@ package smartadapters
 				tempNameController.owner ?= ad.setSingleProperty(refowner, tempNameController.owner)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalNameController init UnsetFractalNameController.new
+				if(reverse) then		
+					var unset : UnsetFractalNameController 
+					if self.reverse == void then
+						unset := UnsetFractalNameController.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.NameControllerToUnset := self.NameControllerToSet
 					unset.refowner := self.refowner
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::NameController
+		 * All the references expect NameControllerToUnset may be void 
+		 */		
 		class UnsetFractalNameController inherits unsetAdaptation
 		{
 			reference NameControllerToUnset : pattern::Fractal::NameController
@@ -1360,7 +2131,20 @@ package smartadapters
 				result := NameControllerToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalNameController is do
+				var ad : Adapter init getAdapter
+				var tempNameControllerToUnset : Fractal::NameController
+				tempNameControllerToUnset ?= ad.getRealObject(NameControllerToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempNameControllerToUnset.owner == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempNameController : Fractal::NameController
 				tempNameController ?= ad.getRealObject(NameControllerToUnset,false)
@@ -1369,21 +2153,25 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalNameController init SetFractalNameController.new
+					var ~set : SetFractalNameController 
+					if self.reverse == void then
+						~set := SetFractalNameController.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.NameControllerToSet := self.NameControllerToUnset
 					~set.refowner := self.refowner
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::SuperController
-		 */
 		 
 
+		/**
+		 * Sets any property of Fractal::SuperController
+		 * All the references expect SuperControllerToSet may be void
+		 */
 		class SetFractalSuperController inherits setAdaptation
 		{
 			reference SuperControllerToSet : pattern::Fractal::SuperController
@@ -1393,7 +2181,19 @@ package smartadapters
 				result := SuperControllerToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalSuperController is do
+				var ad : Adapter init getAdapter
+				var tempSuperControllerToSet : Fractal::SuperController
+				tempSuperControllerToSet ?= ad.getRealObject(SuperControllerToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempSuperControllerToSet.owner == ad.getRealObject(refowner,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempSuperController : Fractal::SuperController
 				tempSuperController ?= ad.getRealObject(SuperControllerToSet,false)
@@ -1401,16 +2201,25 @@ package smartadapters
 				tempSuperController.owner ?= ad.setSingleProperty(refowner, tempSuperController.owner)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalSuperController init UnsetFractalSuperController.new
+				if(reverse) then		
+					var unset : UnsetFractalSuperController 
+					if self.reverse == void then
+						unset := UnsetFractalSuperController.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.SuperControllerToUnset := self.SuperControllerToSet
 					unset.refowner := self.refowner
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::SuperController
+		 * All the references expect SuperControllerToUnset may be void 
+		 */		
 		class UnsetFractalSuperController inherits unsetAdaptation
 		{
 			reference SuperControllerToUnset : pattern::Fractal::SuperController
@@ -1420,7 +2229,20 @@ package smartadapters
 				result := SuperControllerToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalSuperController is do
+				var ad : Adapter init getAdapter
+				var tempSuperControllerToUnset : Fractal::SuperController
+				tempSuperControllerToUnset ?= ad.getRealObject(SuperControllerToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempSuperControllerToUnset.owner == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempSuperController : Fractal::SuperController
 				tempSuperController ?= ad.getRealObject(SuperControllerToUnset,false)
@@ -1429,21 +2251,29 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalSuperController init SetFractalSuperController.new
+					var ~set : SetFractalSuperController 
+					if self.reverse == void then
+						~set := SetFractalSuperController.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.SuperControllerToSet := self.SuperControllerToUnset
 					~set.refowner := self.refowner
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::BasicNameController
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::BasicNameController from scratch
+		 * This new element is handled by refering to newBasicNameController
+		 */
 		class CreateFractalBasicNameController inherits createAdaptation
 		{
 			attribute newBasicNameController : pattern::Fractal::BasicNameController
@@ -1457,6 +2287,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::BasicNameController from an existing one
+		 * This cloned element is handled by refering to clonedBasicNameController
+		 */
 		class CloneFractalBasicNameController inherits cloneAdaptation
 		{
 			reference BasicNameControllerToClone : pattern::Fractal::BasicNameController
@@ -1471,6 +2305,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::BasicNameController
+		 * All the references expect BasicNameControllerToSet may be void
+		 */
 		class SetFractalBasicNameController inherits setAdaptation
 		{
 			reference BasicNameControllerToSet : pattern::Fractal::BasicNameController
@@ -1481,7 +2319,22 @@ package smartadapters
 				result := BasicNameControllerToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalBasicNameController is do
+				var ad : Adapter init getAdapter
+				var tempBasicNameControllerToSet : Fractal::BasicNameController
+				tempBasicNameControllerToSet ?= ad.getRealObject(BasicNameControllerToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then
+					isCorrectlySetted := isCorrectlySetted and tempBasicNameControllerToSet.name == ad.getRealObject(refname,false)
+				end
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempBasicNameControllerToSet.owner == ad.getRealObject(refowner,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempBasicNameController : Fractal::BasicNameController
 				tempBasicNameController ?= ad.getRealObject(BasicNameControllerToSet,false)
@@ -1490,17 +2343,26 @@ package smartadapters
 				tempBasicNameController.owner ?= ad.setSingleProperty(refowner, tempBasicNameController.owner)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalBasicNameController init UnsetFractalBasicNameController.new
+				if(reverse) then		
+					var unset : UnsetFractalBasicNameController 
+					if self.reverse == void then
+						unset := UnsetFractalBasicNameController.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.BasicNameControllerToUnset := self.BasicNameControllerToSet
 					unset.refname := self.refname
 					unset.refowner := self.refowner
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::BasicNameController
+		 * All the references expect BasicNameControllerToUnset may be void 
+		 */		
 		class UnsetFractalBasicNameController inherits unsetAdaptation
 		{
 			reference BasicNameControllerToUnset : pattern::Fractal::BasicNameController
@@ -1511,7 +2373,24 @@ package smartadapters
 				result := BasicNameControllerToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalBasicNameController is do
+				var ad : Adapter init getAdapter
+				var tempBasicNameControllerToUnset : Fractal::BasicNameController
+				tempBasicNameControllerToUnset ?= ad.getRealObject(BasicNameControllerToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refname,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempBasicNameControllerToUnset.name == void
+				end end
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempBasicNameControllerToUnset.owner == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempBasicNameController : Fractal::BasicNameController
 				tempBasicNameController ?= ad.getRealObject(BasicNameControllerToUnset,false)
@@ -1521,22 +2400,30 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalBasicNameController init SetFractalBasicNameController.new
+					var ~set : SetFractalBasicNameController 
+					if self.reverse == void then
+						~set := SetFractalBasicNameController.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.BasicNameControllerToSet := self.BasicNameControllerToUnset
 					~set.refname := self.refname
 					~set.refowner := self.refowner
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::BasicLifeCycleController
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::BasicLifeCycleController from scratch
+		 * This new element is handled by refering to newBasicLifeCycleController
+		 */
 		class CreateFractalBasicLifeCycleController inherits createAdaptation
 		{
 			attribute newBasicLifeCycleController : pattern::Fractal::BasicLifeCycleController
@@ -1550,6 +2437,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::BasicLifeCycleController from an existing one
+		 * This cloned element is handled by refering to clonedBasicLifeCycleController
+		 */
 		class CloneFractalBasicLifeCycleController inherits cloneAdaptation
 		{
 			reference BasicLifeCycleControllerToClone : pattern::Fractal::BasicLifeCycleController
@@ -1564,6 +2455,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::BasicLifeCycleController
+		 * All the references expect BasicLifeCycleControllerToSet may be void
+		 */
 		class SetFractalBasicLifeCycleController inherits setAdaptation
 		{
 			reference BasicLifeCycleControllerToSet : pattern::Fractal::BasicLifeCycleController
@@ -1574,7 +2469,22 @@ package smartadapters
 				result := BasicLifeCycleControllerToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalBasicLifeCycleController is do
+				var ad : Adapter init getAdapter
+				var tempBasicLifeCycleControllerToSet : Fractal::BasicLifeCycleController
+				tempBasicLifeCycleControllerToSet ?= ad.getRealObject(BasicLifeCycleControllerToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refstatus != void then
+					isCorrectlySetted := isCorrectlySetted and tempBasicLifeCycleControllerToSet.status == ad.getRealObject(refstatus,false)
+				end
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempBasicLifeCycleControllerToSet.owner == ad.getRealObject(refowner,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempBasicLifeCycleController : Fractal::BasicLifeCycleController
 				tempBasicLifeCycleController ?= ad.getRealObject(BasicLifeCycleControllerToSet,false)
@@ -1583,17 +2493,26 @@ package smartadapters
 				tempBasicLifeCycleController.owner ?= ad.setSingleProperty(refowner, tempBasicLifeCycleController.owner)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalBasicLifeCycleController init UnsetFractalBasicLifeCycleController.new
+				if(reverse) then		
+					var unset : UnsetFractalBasicLifeCycleController 
+					if self.reverse == void then
+						unset := UnsetFractalBasicLifeCycleController.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.BasicLifeCycleControllerToUnset := self.BasicLifeCycleControllerToSet
 					unset.refstatus := self.refstatus
 					unset.refowner := self.refowner
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::BasicLifeCycleController
+		 * All the references expect BasicLifeCycleControllerToUnset may be void 
+		 */		
 		class UnsetFractalBasicLifeCycleController inherits unsetAdaptation
 		{
 			reference BasicLifeCycleControllerToUnset : pattern::Fractal::BasicLifeCycleController
@@ -1604,7 +2523,24 @@ package smartadapters
 				result := BasicLifeCycleControllerToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalBasicLifeCycleController is do
+				var ad : Adapter init getAdapter
+				var tempBasicLifeCycleControllerToUnset : Fractal::BasicLifeCycleController
+				tempBasicLifeCycleControllerToUnset ?= ad.getRealObject(BasicLifeCycleControllerToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refstatus != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refstatus,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempBasicLifeCycleControllerToUnset.status == void
+				end end
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempBasicLifeCycleControllerToUnset.owner == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempBasicLifeCycleController : Fractal::BasicLifeCycleController
 				tempBasicLifeCycleController ?= ad.getRealObject(BasicLifeCycleControllerToUnset,false)
@@ -1614,22 +2550,30 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalBasicLifeCycleController init SetFractalBasicLifeCycleController.new
+					var ~set : SetFractalBasicLifeCycleController 
+					if self.reverse == void then
+						~set := SetFractalBasicLifeCycleController.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.BasicLifeCycleControllerToSet := self.BasicLifeCycleControllerToUnset
 					~set.refstatus := self.refstatus
 					~set.refowner := self.refowner
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::GenericAttributeController
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::GenericAttributeController from scratch
+		 * This new element is handled by refering to newGenericAttributeController
+		 */
 		class CreateFractalGenericAttributeController inherits createAdaptation
 		{
 			attribute newGenericAttributeController : pattern::Fractal::GenericAttributeController
@@ -1643,6 +2587,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::GenericAttributeController from an existing one
+		 * This cloned element is handled by refering to clonedGenericAttributeController
+		 */
 		class CloneFractalGenericAttributeController inherits cloneAdaptation
 		{
 			reference GenericAttributeControllerToClone : pattern::Fractal::GenericAttributeController
@@ -1657,6 +2605,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::GenericAttributeController
+		 * All the references expect GenericAttributeControllerToSet may be void
+		 */
 		class SetFractalGenericAttributeController inherits setAdaptation
 		{
 			reference GenericAttributeControllerToSet : pattern::Fractal::GenericAttributeController
@@ -1667,7 +2619,21 @@ package smartadapters
 				result := GenericAttributeControllerToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalGenericAttributeController is do
+				var ad : Adapter init getAdapter
+				var tempGenericAttributeControllerToSet : Fractal::GenericAttributeController
+				tempGenericAttributeControllerToSet ?= ad.getRealObject(GenericAttributeControllerToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				c ?= ad.getRealObject(refattributes,true)
+				c.each{o | var p : Fractal::Attribute p?=o isCorrectlySetted := isCorrectlySetted and tempGenericAttributeControllerToSet.attributes.contains(p)}
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempGenericAttributeControllerToSet.owner == ad.getRealObject(refowner,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempGenericAttributeController : Fractal::GenericAttributeController
 				tempGenericAttributeController ?= ad.getRealObject(GenericAttributeControllerToSet,false)
@@ -1676,18 +2642,27 @@ package smartadapters
 				tempGenericAttributeController.owner ?= ad.setSingleProperty(refowner, tempGenericAttributeController.owner)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalGenericAttributeController init UnsetFractalGenericAttributeController.new
+				if(reverse) then		
+					var unset : UnsetFractalGenericAttributeController 
+					if self.reverse == void then
+						unset := UnsetFractalGenericAttributeController.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.GenericAttributeControllerToUnset := self.GenericAttributeControllerToSet
 					unset.refattributes.clear
 					unset.refattributes.addAll(self.refattributes)
 					unset.refowner := self.refowner
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::GenericAttributeController
+		 * All the references expect GenericAttributeControllerToUnset may be void 
+		 */		
 		class UnsetFractalGenericAttributeController inherits unsetAdaptation
 		{
 			reference GenericAttributeControllerToUnset : pattern::Fractal::GenericAttributeController
@@ -1698,7 +2673,26 @@ package smartadapters
 				result := GenericAttributeControllerToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalGenericAttributeController is do
+				var ad : Adapter init getAdapter
+				var tempGenericAttributeControllerToUnset : Fractal::GenericAttributeController
+				tempGenericAttributeControllerToUnset ?= ad.getRealObject(GenericAttributeControllerToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				c ?= ad.getRealObject(refattributes,true)
+				c.each{o | var p : Fractal::Attribute p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempGenericAttributeControllerToUnset.attributes.contains(p)
+					end
+				}
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempGenericAttributeControllerToUnset.owner == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempGenericAttributeController : Fractal::GenericAttributeController
 				tempGenericAttributeController ?= ad.getRealObject(GenericAttributeControllerToUnset,false)
@@ -1708,23 +2702,31 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalGenericAttributeController init SetFractalGenericAttributeController.new
+					var ~set : SetFractalGenericAttributeController 
+					if self.reverse == void then
+						~set := SetFractalGenericAttributeController.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.GenericAttributeControllerToSet := self.GenericAttributeControllerToUnset
 					~set.refattributes.clear
 					~set.refattributes.addAll(self.refattributes)
 					~set.refowner := self.refowner
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::Attribute
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::Attribute from scratch
+		 * This new element is handled by refering to newAttribute
+		 */
 		class CreateFractalAttribute inherits createAdaptation
 		{
 			attribute newAttribute : pattern::Fractal::Attribute
@@ -1738,6 +2740,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::Attribute from an existing one
+		 * This cloned element is handled by refering to clonedAttribute
+		 */
 		class CloneFractalAttribute inherits cloneAdaptation
 		{
 			reference AttributeToClone : pattern::Fractal::Attribute
@@ -1752,6 +2758,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::Attribute
+		 * All the references expect AttributeToSet may be void
+		 */
 		class SetFractalAttribute inherits setAdaptation
 		{
 			reference AttributeToSet : pattern::Fractal::Attribute
@@ -1762,7 +2772,22 @@ package smartadapters
 				result := AttributeToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalAttribute is do
+				var ad : Adapter init getAdapter
+				var tempAttributeToSet : Fractal::Attribute
+				tempAttributeToSet ?= ad.getRealObject(AttributeToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then
+					isCorrectlySetted := isCorrectlySetted and tempAttributeToSet.name == ad.getRealObject(refname,false)
+				end
+				if refvalue != void then
+					isCorrectlySetted := isCorrectlySetted and tempAttributeToSet.~value == ad.getRealObject(refvalue,false)
+				end
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempAttribute : Fractal::Attribute
 				tempAttribute ?= ad.getRealObject(AttributeToSet,false)
@@ -1771,17 +2796,26 @@ package smartadapters
 				tempAttribute.~value ?= ad.setSingleProperty(refvalue, tempAttribute.~value)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalAttribute init UnsetFractalAttribute.new
+				if(reverse) then		
+					var unset : UnsetFractalAttribute 
+					if self.reverse == void then
+						unset := UnsetFractalAttribute.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.AttributeToUnset := self.AttributeToSet
 					unset.refname := self.refname
 					unset.refvalue := self.refvalue
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Attribute
+		 * All the references expect AttributeToUnset may be void 
+		 */		
 		class UnsetFractalAttribute inherits unsetAdaptation
 		{
 			reference AttributeToUnset : pattern::Fractal::Attribute
@@ -1792,7 +2826,24 @@ package smartadapters
 				result := AttributeToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalAttribute is do
+				var ad : Adapter init getAdapter
+				var tempAttributeToUnset : Fractal::Attribute
+				tempAttributeToUnset ?= ad.getRealObject(AttributeToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refname,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempAttributeToUnset.name == void
+				end end
+				if refvalue != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refvalue,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempAttributeToUnset.~value == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempAttribute : Fractal::Attribute
 				tempAttribute ?= ad.getRealObject(AttributeToUnset,false)
@@ -1802,34 +2853,32 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalAttribute init SetFractalAttribute.new
+					var ~set : SetFractalAttribute 
+					if self.reverse == void then
+						~set := SetFractalAttribute.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.AttributeToSet := self.AttributeToUnset
 					~set.refname := self.refname
 					~set.refvalue := self.refvalue
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::Boolean
-		 */
 		 
-		
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of Fractal::String
-		 */
 		 
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::Java::Interface
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::Java::Interface from scratch
+		 * This new element is handled by refering to newInterface
+		 */
 		class CreateFractalJavaInterface inherits createAdaptation
 		{
 			attribute newInterface : pattern::Fractal::Java::Interface
@@ -1843,6 +2892,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::Java::Interface from an existing one
+		 * This cloned element is handled by refering to clonedInterface
+		 */
 		class CloneFractalJavaInterface inherits cloneAdaptation
 		{
 			reference InterfaceToClone : pattern::Fractal::Java::Interface
@@ -1857,6 +2910,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::Java::Interface
+		 * All the references expect InterfaceToSet may be void
+		 */
 		class SetFractalJavaInterface inherits setAdaptation
 		{
 			reference InterfaceToSet : pattern::Fractal::Java::Interface
@@ -1867,7 +2924,21 @@ package smartadapters
 				result := InterfaceToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalJavaInterface is do
+				var ad : Adapter init getAdapter
+				var tempInterfaceToSet : Fractal::Java::Interface
+				tempInterfaceToSet ?= ad.getRealObject(InterfaceToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then
+					isCorrectlySetted := isCorrectlySetted and tempInterfaceToSet.name == ad.getRealObject(refname,false)
+				end
+				c ?= ad.getRealObject(refextend,true)
+				c.each{o | var p : Fractal::Java::Interface p?=o isCorrectlySetted := isCorrectlySetted and tempInterfaceToSet.extend.contains(p)}
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempInterface : Fractal::Java::Interface
 				tempInterface ?= ad.getRealObject(InterfaceToSet,false)
@@ -1876,18 +2947,27 @@ package smartadapters
 				ad.setMultipleProperty(tempInterface.extend,refextend)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalJavaInterface init UnsetFractalJavaInterface.new
+				if(reverse) then		
+					var unset : UnsetFractalJavaInterface 
+					if self.reverse == void then
+						unset := UnsetFractalJavaInterface.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.InterfaceToUnset := self.InterfaceToSet
 					unset.refname := self.refname
 					unset.refextend.clear
 					unset.refextend.addAll(self.refextend)
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Java::Interface
+		 * All the references expect InterfaceToUnset may be void 
+		 */		
 		class UnsetFractalJavaInterface inherits unsetAdaptation
 		{
 			reference InterfaceToUnset : pattern::Fractal::Java::Interface
@@ -1898,7 +2978,26 @@ package smartadapters
 				result := InterfaceToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalJavaInterface is do
+				var ad : Adapter init getAdapter
+				var tempInterfaceToUnset : Fractal::Java::Interface
+				tempInterfaceToUnset ?= ad.getRealObject(InterfaceToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refname,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempInterfaceToUnset.name == void
+				end end
+				c ?= ad.getRealObject(refextend,true)
+				c.each{o | var p : Fractal::Java::Interface p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempInterfaceToUnset.extend.contains(p)
+					end
+				}
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempInterface : Fractal::Java::Interface
 				tempInterface ?= ad.getRealObject(InterfaceToUnset,false)
@@ -1908,23 +3007,31 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalJavaInterface init SetFractalJavaInterface.new
+					var ~set : SetFractalJavaInterface 
+					if self.reverse == void then
+						~set := SetFractalJavaInterface.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.InterfaceToSet := self.InterfaceToUnset
 					~set.refname := self.refname
 					~set.refextend.clear
 					~set.refextend.addAll(self.refextend)
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::Java::Class
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::Java::Class from scratch
+		 * This new element is handled by refering to newClass
+		 */
 		class CreateFractalJavaClass inherits createAdaptation
 		{
 			attribute newClass : pattern::Fractal::Java::Class
@@ -1938,6 +3045,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::Java::Class from an existing one
+		 * This cloned element is handled by refering to clonedClass
+		 */
 		class CloneFractalJavaClass inherits cloneAdaptation
 		{
 			reference ClassToClone : pattern::Fractal::Java::Class
@@ -1952,6 +3063,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::Java::Class
+		 * All the references expect ClassToSet may be void
+		 */
 		class SetFractalJavaClass inherits setAdaptation
 		{
 			reference ClassToSet : pattern::Fractal::Java::Class
@@ -1963,7 +3078,24 @@ package smartadapters
 				result := ClassToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalJavaClass is do
+				var ad : Adapter init getAdapter
+				var tempClassToSet : Fractal::Java::Class
+				tempClassToSet ?= ad.getRealObject(ClassToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then
+					isCorrectlySetted := isCorrectlySetted and tempClassToSet.name == ad.getRealObject(refname,false)
+				end
+				if refextend != void then
+					isCorrectlySetted := isCorrectlySetted and tempClassToSet.extend == ad.getRealObject(refextend,false)
+				end
+				c ?= ad.getRealObject(refimplement,true)
+				c.each{o | var p : Fractal::Java::Interface p?=o isCorrectlySetted := isCorrectlySetted and tempClassToSet.implement.contains(p)}
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempClass : Fractal::Java::Class
 				tempClass ?= ad.getRealObject(ClassToSet,false)
@@ -1973,19 +3105,28 @@ package smartadapters
 				ad.setMultipleProperty(tempClass.implement,refimplement)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalJavaClass init UnsetFractalJavaClass.new
+				if(reverse) then		
+					var unset : UnsetFractalJavaClass 
+					if self.reverse == void then
+						unset := UnsetFractalJavaClass.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.ClassToUnset := self.ClassToSet
 					unset.refname := self.refname
 					unset.refextend := self.refextend
 					unset.refimplement.clear
 					unset.refimplement.addAll(self.refimplement)
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Java::Class
+		 * All the references expect ClassToUnset may be void 
+		 */		
 		class UnsetFractalJavaClass inherits unsetAdaptation
 		{
 			reference ClassToUnset : pattern::Fractal::Java::Class
@@ -1997,7 +3138,30 @@ package smartadapters
 				result := ClassToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalJavaClass is do
+				var ad : Adapter init getAdapter
+				var tempClassToUnset : Fractal::Java::Class
+				tempClassToUnset ?= ad.getRealObject(ClassToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refname,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempClassToUnset.name == void
+				end end
+				if refextend != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refextend,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempClassToUnset.extend == void
+				end end
+				c ?= ad.getRealObject(refimplement,true)
+				c.each{o | var p : Fractal::Java::Interface p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempClassToUnset.implement.contains(p)
+					end
+				}
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempClass : Fractal::Java::Class
 				tempClass ?= ad.getRealObject(ClassToUnset,false)
@@ -2008,24 +3172,32 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalJavaClass init SetFractalJavaClass.new
+					var ~set : SetFractalJavaClass 
+					if self.reverse == void then
+						~set := SetFractalJavaClass.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.ClassToSet := self.ClassToUnset
 					~set.refname := self.refname
 					~set.refextend := self.refextend
 					~set.refimplement.clear
 					~set.refimplement.addAll(self.refimplement)
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::Julia::Membrane
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::Julia::Membrane from scratch
+		 * This new element is handled by refering to newMembrane
+		 */
 		class CreateFractalJuliaMembrane inherits createAdaptation
 		{
 			attribute newMembrane : pattern::Fractal::Julia::Membrane
@@ -2039,6 +3211,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::Julia::Membrane from an existing one
+		 * This cloned element is handled by refering to clonedMembrane
+		 */
 		class CloneFractalJuliaMembrane inherits cloneAdaptation
 		{
 			reference MembraneToClone : pattern::Fractal::Julia::Membrane
@@ -2053,6 +3229,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::Julia::Membrane
+		 * All the references expect MembraneToSet may be void
+		 */
 		class SetFractalJuliaMembrane inherits setAdaptation
 		{
 			reference MembraneToSet : pattern::Fractal::Julia::Membrane
@@ -2068,7 +3248,33 @@ package smartadapters
 				result := MembraneToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalJuliaMembrane is do
+				var ad : Adapter init getAdapter
+				var tempMembraneToSet : Fractal::Julia::Membrane
+				tempMembraneToSet ?= ad.getRealObject(MembraneToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refcontrollerDesc != void then
+					isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.controllerDesc == ad.getRealObject(refcontrollerDesc,false)
+				end
+				c ?= ad.getRealObject(refinterceptor,true)
+				c.each{o | var p : Fractal::Julia::Interceptor p?=o isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.interceptor.contains(p)}
+				if refcontent != void then
+					isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.content == ad.getRealObject(refcontent,false)
+				end
+				if refowner != void then
+					isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.owner == ad.getRealObject(refowner,false)
+				end
+				c ?= ad.getRealObject(refexternalInterface,true)
+				c.each{o | var p : Fractal::Interface p?=o isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.externalInterface.contains(p)}
+				c ?= ad.getRealObject(refinternalInterface,true)
+				c.each{o | var p : Fractal::Interface p?=o isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.internalInterface.contains(p)}
+				c ?= ad.getRealObject(refcontroller,true)
+				c.each{o | var p : Fractal::Controller p?=o isCorrectlySetted := isCorrectlySetted and tempMembraneToSet.controller.contains(p)}
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempMembrane : Fractal::Julia::Membrane
 				tempMembrane ?= ad.getRealObject(MembraneToSet,false)
@@ -2082,8 +3288,15 @@ package smartadapters
 				ad.setMultipleProperty(tempMembrane.controller,refcontroller)
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalJuliaMembrane init UnsetFractalJuliaMembrane.new
+				if(reverse) then		
+					var unset : UnsetFractalJuliaMembrane 
+					if self.reverse == void then
+						unset := UnsetFractalJuliaMembrane.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.MembraneToUnset := self.MembraneToSet
 					unset.refcontrollerDesc := self.refcontrollerDesc
 					unset.refinterceptor.clear
@@ -2096,12 +3309,14 @@ package smartadapters
 					unset.refinternalInterface.addAll(self.refinternalInterface)
 					unset.refcontroller.clear
 					unset.refcontroller.addAll(self.refcontroller)
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Julia::Membrane
+		 * All the references expect MembraneToUnset may be void 
+		 */		
 		class UnsetFractalJuliaMembrane inherits unsetAdaptation
 		{
 			reference MembraneToUnset : pattern::Fractal::Julia::Membrane
@@ -2117,7 +3332,52 @@ package smartadapters
 				result := MembraneToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalJuliaMembrane is do
+				var ad : Adapter init getAdapter
+				var tempMembraneToUnset : Fractal::Julia::Membrane
+				tempMembraneToUnset ?= ad.getRealObject(MembraneToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refcontrollerDesc != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refcontrollerDesc,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempMembraneToUnset.controllerDesc == void
+				end end
+				c ?= ad.getRealObject(refinterceptor,true)
+				c.each{o | var p : Fractal::Julia::Interceptor p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempMembraneToUnset.interceptor.contains(p)
+					end
+				}
+				if refcontent != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refcontent,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempMembraneToUnset.content == void
+				end end
+				if refowner != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refowner,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempMembraneToUnset.owner == void
+				end end
+				c ?= ad.getRealObject(refexternalInterface,true)
+				c.each{o | var p : Fractal::Interface p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempMembraneToUnset.externalInterface.contains(p)
+					end
+				}
+				c ?= ad.getRealObject(refinternalInterface,true)
+				c.each{o | var p : Fractal::Interface p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempMembraneToUnset.internalInterface.contains(p)
+					end
+				}
+				c ?= ad.getRealObject(refcontroller,true)
+				c.each{o | var p : Fractal::Controller p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempMembraneToUnset.controller.contains(p)
+					end
+				}
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempMembrane : Fractal::Julia::Membrane
 				tempMembrane ?= ad.getRealObject(MembraneToUnset,false)
@@ -2132,7 +3392,14 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalJuliaMembrane init SetFractalJuliaMembrane.new
+					var ~set : SetFractalJuliaMembrane 
+					if self.reverse == void then
+						~set := SetFractalJuliaMembrane.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.MembraneToSet := self.MembraneToUnset
 					~set.refcontrollerDesc := self.refcontrollerDesc
 					~set.refinterceptor.clear
@@ -2145,18 +3412,19 @@ package smartadapters
 					~set.refinternalInterface.addAll(self.refinternalInterface)
 					~set.refcontroller.clear
 					~set.refcontroller.addAll(self.refcontroller)
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}
-		
+		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of Fractal::Julia::Interceptor
 		 */
-		 
 		
+		/**
+		 * Creates a new Fractal::Julia::Interceptor from scratch
+		 * This new element is handled by refering to newInterceptor
+		 */
 		class CreateFractalJuliaInterceptor inherits createAdaptation
 		{
 			attribute newInterceptor : pattern::Fractal::Julia::Interceptor
@@ -2170,6 +3438,10 @@ package smartadapters
 			end
 		}
 
+		/**
+		 * Creates a new Fractal::Julia::Interceptor from an existing one
+		 * This cloned element is handled by refering to clonedInterceptor
+		 */
 		class CloneFractalJuliaInterceptor inherits cloneAdaptation
 		{
 			reference InterceptorToClone : pattern::Fractal::Julia::Interceptor
@@ -2184,6 +3456,10 @@ package smartadapters
 			end					
 		}
 
+		/**
+		 * Sets any property of Fractal::Julia::Interceptor
+		 * All the references expect InterceptorToSet may be void
+		 */
 		class SetFractalJuliaInterceptor inherits setAdaptation
 		{
 			reference InterceptorToSet : pattern::Fractal::Julia::Interceptor
@@ -2192,22 +3468,40 @@ package smartadapters
 				result := InterceptorToSet != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFractalJuliaInterceptor is do
+				var ad : Adapter init getAdapter
+				var tempInterceptorToSet : Fractal::Julia::Interceptor
+				tempInterceptorToSet ?= ad.getRealObject(InterceptorToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				isCorrectlySetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempInterceptor : Fractal::Julia::Interceptor
 				tempInterceptor ?= ad.getRealObject(InterceptorToSet,false)
 				
 				
 				//Instantiating the reverse adaptation
-				if(reverse) then
-					var unset : UnsetFractalJuliaInterceptor init UnsetFractalJuliaInterceptor.new
+				if(reverse) then		
+					var unset : UnsetFractalJuliaInterceptor 
+					if self.reverse == void then
+						unset := UnsetFractalJuliaInterceptor.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
 					unset.InterceptorToUnset := self.InterceptorToSet
-					unset.reverse := self
-					self.reverse := unset
 				end	
 			end			
 		}
 		
+		/**
+		 * Unsets any property of Fractal::Julia::Interceptor
+		 * All the references expect InterceptorToUnset may be void 
+		 */		
 		class UnsetFractalJuliaInterceptor inherits unsetAdaptation
 		{
 			reference InterceptorToUnset : pattern::Fractal::Julia::Interceptor
@@ -2216,7 +3510,16 @@ package smartadapters
 				result := InterceptorToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void is do
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFractalJuliaInterceptor is do
+				var ad : Adapter init getAdapter
+				var tempInterceptorToUnset : Fractal::Julia::Interceptor
+				tempInterceptorToUnset ?= ad.getRealObject(InterceptorToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				isCorrectlyUnsetted
+			end
+			is do
 				var ad : Adapter init getAdapter
 				var tempInterceptor : Fractal::Julia::Interceptor
 				tempInterceptor ?= ad.getRealObject(InterceptorToUnset,false)
@@ -2224,10 +3527,15 @@ package smartadapters
 				
 				//Instantiating the reverse adaptation
 				if reverse then
-					var ~set : SetFractalJuliaInterceptor init SetFractalJuliaInterceptor.new
+					var ~set : SetFractalJuliaInterceptor 
+					if self.reverse == void then
+						~set := SetFractalJuliaInterceptor.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
 					~set.InterceptorToSet := self.InterceptorToUnset
-					~set.reverse := self
-					self.reverse := ~set
 				end
 			end
 		}

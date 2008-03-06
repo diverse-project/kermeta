@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.18 2008-03-05 09:49:39 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.19 2008-03-06 08:13:27 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -92,7 +92,7 @@ package smartadapters
 			*/
 			attribute clone : Hashtable<Object, Object>
 			attribute binding : Hashtable<Object, Object>
-			attribute cloned : Set<Object>
+			attribute cloned : Hashtable<Object, Object>
 			attribute convert : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
 			attribute converter : Converter
 			
@@ -101,7 +101,7 @@ package smartadapters
 			 */
 			attribute notRemovable : Set<Object> //objects that cannot be removed
 			attribute removable : Set<Object> //objects that may be removed after weaving the aspect for a given binding
-			attribute removed : Set<Object> //objects that have been removed when unweaving the aspect fof a given binding
+			attribute removed : Set<Object> //objects that have been removed when unweaving the aspect for a given binding
 			
 			/**
 			 * This operation maps the concepts of MM' to the concepts of MM
@@ -215,7 +215,7 @@ package smartadapters
 					initConvert
 				end
 				if (cloned == void) then
-					cloned := Set<Object>.new
+					cloned := Hashtable<Object, Object>.new
 				end
 				if (notRemovable == void) then
 					notRemovable := Set<Object>.new
@@ -253,10 +253,13 @@ package smartadapters
 			updateClone must be called after every binding
 			*/
 			operation updateClones() is do
-				if (~aspect.structure!=void) then
+				if(~aspect.structure != void) then
 					~aspect.structure.content.each{o | 
 						if (not(~aspect.persistent.contains(o))) then
-							updateClone(o,void)
+							converter.deleteConverted(o)
+							var temp : Object init converter.getConverted(o)
+							clone.put(o, temp)
+							removable.add(temp)
 						end
 					}
 				end
@@ -272,42 +275,69 @@ package smartadapters
 				}	
 			end
 			
-			operation updateClone(handler : Object, template : Object) is do
-				var real : Object
-				if (template != void) then
-					real := getRealObject(template,false)
-					cloned.add(real)
-					real := Object.clone(real)
-				else
-					converter.deleteConverted(handler)
-					real := converter.getConverted(handler)
-				end
-				clone.put(handler, real)
-			end
-
 			/**
-			 * This operation is called by domain-specific clone* / create* adaptations
+			 * This operation determines whether the handler should be cloned, 
+			 * from scratch or from an existing element (template != void),
+			 * according to its unicity type
 			 */
 			operation cloneAgain(handler : Object, template : Object, type : uniqueType) : Void is do
-				var update : Boolean init (type == uniqueType.non_unique)
-				if not update then 
-					if not update and type == uniqueType.unique then
-						if template != void then
-							var o : Object init getRealObject(template,false)
-							update := not (cloned.contains(o))
-							if not update then
-								clone.put(handler,o)
+				var o : Object
+				if template != void then
+					o := getRealObject(template,false)
+				end
+			
+				if (type == uniqueType.non_unique) then
+					if o != void then //non unique from template
+						var temp : Object init Object.clone(o)
+						cloned.put(o,temp)
+						clone.put(handler, temp)
+						removable.add(temp)
+					else
+						converter.deleteConverted(handler)
+						var temp : Object init converter.getConverted(handler)
+						clone.put(handler, temp)
+						removable.add(temp)
+					end
+				else
+					if type == uniqueType.unique then
+						if o != void then //unique from template
+							if cloned.containsKey(o) then //real element already cloned
+								clone.put(handler,cloned.getValue(o))
+							else
+								var temp : Object init Object.clone(o)
+								cloned.put(o,temp)
+								clone.put(handler, temp)
+								removable.add(temp)
 							end
-						else
-							update :=  not(clone.containsKey(handler))
+						else 
+							if not clone.containsKey(handler) then //unique from scratch
+								converter.deleteConverted(handler)
+								var temp : Object init converter.getConverted(handler)
+								clone.put(handler, temp)
+								removable.add(temp)
+							end
 						end
 					else
+						var update : Boolean
 						update := stdio.read("$>clone "+handler.toString+" (true/false) :").toBoolean
+						if update then
+							if o != void then //on demand from template
+								var temp : Object init Object.clone(o)
+								cloned.put(o,temp)
+								clone.put(handler, temp)
+								removable.add(temp)
+							else //on demand from scratch
+								converter.deleteConverted(handler)
+								var temp : Object init converter.getConverted(handler)
+								clone.put(handler, temp)
+								removable.add(temp)
+							end	
+						else
+							if o != void then
+								clone.put(handler,cloned.getValue(o))
+							end
+						end
 					end 
-				end
-				if update then
-					updateClone(handler,template)
-					removable.add(getRealObject(handler,false))
 				end
 			end
 			
@@ -389,36 +419,36 @@ package smartadapters
 			 * or returns a converted clone associated to a created element
 			 */		
 			operation getRealObject(obj : Object, isCollect:Boolean) : Object is do
-				/*if obj == void then
-					result := void
-				else*/
-					if (isCollect) then
-						var col : Collection<kermeta::language::structure::Object>
-						col ?= obj
-						var res : Set<Object> init Set<Object>.new
-						col.each{o | res.add(getRealObject(o,false))}
-						result := res
-					else
-						var realObj : Object
-						realObj := binding.getValue(obj)
-						if (realObj != void) then
+				if (isCollect) then
+					var col : Collection<kermeta::language::structure::Object>
+					col ?= obj
+					var res : Set<Object> init Set<Object>.new
+					col.each{o | res.add(getRealObject(o,false))}
+					result := res
+				else
+					var realObj : Object
+					realObj := binding.getValue(obj)
+					if (realObj != void) then
 							result := realObj
-						else
-							realObj := clone.getValue(obj)
-							if (realObj != void) then
-								result := realObj
+					else
+						realObj := clone.getValue(obj)
+						if (realObj != void) then
+							if cloned.getValue(realObj) != void then
+								result != cloned.getValue(realObj)
 							else
-								var pObj : PObject
-								pObj ?= obj
-								if (pObj != void) then
-									result := converter.getConverted(obj)
-								else
-									result := obj
-								end
+								result := realObj
+							end
+						else
+							var pObj : PObject
+							pObj ?= obj
+							if (pObj != void) then
+								result := converter.getConverted(obj)
+							else
+								result := obj
 							end
 						end
 					end
-				//end
+				end
 			end
 		}
 	}
