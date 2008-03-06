@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreLoaderImpl.java,v 1.3 2008-02-27 15:21:09 dvojtise Exp $
+ * $Id: EcoreLoaderImpl.java,v 1.4 2008-03-06 07:23:35 ftanguy Exp $
  */
 package org.kermeta.io.loader.impl;
 
@@ -71,11 +71,11 @@ public class EcoreLoaderImpl extends LoaderImpl implements EcoreLoader {
 		 * Adding Ecore.ecore
 		 * 
 		 */
-		if ( ! datas.getKermetaUnit().getUri().equals(IOPlugin.ECORE_URI) && ! datas.getKermetaUnit().isFramework() ) {
+		/*if ( ! datas.getKermetaUnit().getUri().equals(IOPlugin.ECORE_URI) && ! datas.getKermetaUnit().isFramework() ) {
 			KermetaUnit ecore = LoaderPlugin.getDefault().getEcore();
 			datas.getKermetaUnit().getImportedKermetaUnits().add( ecore );			
 			datas.getKermetaUnit().addRequire(IOPlugin.ECORE_URI, ecore);
-		}
+		}*/
 	}
 	
 	/**
