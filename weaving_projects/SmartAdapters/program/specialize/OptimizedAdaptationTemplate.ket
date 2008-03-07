@@ -2,7 +2,7 @@
 	require="platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/keyword_list.kmt" 
 	using="ecore EcoreHelpers kermeta::language::key" 
 	class="AdaptationTemplate"  
-	parameters="classif:Set<EClassifier>, domainMM:String, domainMMPattern:String, shortName:String"
+	parameters="classif:Set<EClassifier>, domainMM:String, domainMMPattern:String, shortName:String, generatePost:Boolean"
 %>
 
 /* 
@@ -120,6 +120,7 @@ package smartadapters
 		 * Sets any property of <%=qualifiedName%>
 		 * All the references expect <%=c.name%>ToSet may be void
 		 */
+<% if c.eAllStructuralFeatures.size > 0 then%>		 
 		class Set<%=qualifiedName.replace("::","")%> inherits setAdaptation
 		{
 			reference <%=c.name%>ToSet : pattern::<%=qualifiedName%>
@@ -151,6 +152,7 @@ package smartadapters
 			end
 			
 			method execute(reverse : Boolean): Void 
+			<%if generatePost then%>
 			post correctlySetted<%=qualifiedName.replace("::","")%> is do
 				var ad : Adapter init getAdapter
 				var temp<%=c.name%>ToSet : <%=qualifiedName%>
@@ -169,6 +171,7 @@ package smartadapters
 				<%}%>
 				isCorrectlySetted
 			end
+			<%end%>
 			is do
 				var ad : Adapter init getAdapter
 				var temp<%=c.name%> : <%=qualifiedName%>
@@ -239,7 +242,8 @@ package smartadapters
 				result := <%=c.name%>ToUnset != void
 			end
 			
-			method execute(reverse : Boolean): Void 
+			method execute(reverse : Boolean): Void
+			<%if generatePost then%>
 			post correctlyUnsetted<%=qualifiedName.replace("::","")%> is do
 				var ad : Adapter init getAdapter
 				var temp<%=c.name%>ToUnset : <%=qualifiedName%>
@@ -263,6 +267,7 @@ package smartadapters
 				<%}%>
 				isCorrectlyUnsetted
 			end
+			<%end%>
 			is do
 				var ad : Adapter init getAdapter
 				var temp<%=c.name%> : <%=qualifiedName%>
@@ -302,6 +307,7 @@ package smartadapters
 				end
 			end
 		}
+<%end%>		
 		<%end
 		}%>
 	}
