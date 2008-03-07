@@ -1,6 +1,6 @@
 
 
-/*$Id: EclipseConsole.java,v 1.4 2007-12-20 09:12:12 ftanguy Exp $
+/*$Id: EclipseConsole.java,v 1.5 2008-03-07 13:03:59 dvojtise Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	EclipseConsole.java
 * License : EPL
@@ -33,6 +33,12 @@ public class EclipseConsole extends IOConsole {
 	
 	/**		Number maximum of consoles that can be displayed in the console view.	*/
 	private static final int CONSOLE_MAX = 3;
+	
+	/** 	max width of the lines in the console, if overflow, start a new line */
+	public static final int CONSOLE_MAX_WIDTH = 5000;
+	
+	/** 	size for which we need to split the message before passing to the stream */
+	public static final int LARGE_MESSAGE_SIZE = 10000;
 	
 	/**
 	 * The IOConsole instance.
@@ -106,25 +112,47 @@ public class EclipseConsole extends IOConsole {
 	//		Writing Methods		//
 	///////////////////////////////////////////////////////////////////////////////////////
 	// The writing protocol provides some methods to print out some String or messages . //
-	// Any object can be printed for the moment it declares a toString method.			 //
+	// Any object can be printed as far as it declares a toString method.			 //
 	///////////////////////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * print the message eventually justify the message according to the maxwidth constant 
+	 */
 	public void print(final ConsoleMessage message) {
 		Runnable r = new Runnable() {
 			public void run() {
 				changeColor(message.getColor());
 				IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
-				try {
-					if ( ! stream.isClosed() )
-						stream.write(message.getMessage());
-				} catch (IOException exception) {
-					exception.printStackTrace();
-				}
+				if ( ! stream.isClosed() )
+					safePrint(stream, message.getMessage());
+				
 			}
 		};
 		ConsolePlugin.getStandardDisplay().syncExec(r);
 	}
-	
+	/** deal with not justified and large string
+	 * this is because large string may block Eclipse UI
+	 */
+	protected void safePrint(IOConsoleOutputStream stream, String message){
+		try {
+			String justifiedMsg = justifyMessage(message);
+			if(justifiedMsg.length() > LARGE_MESSAGE_SIZE){
+				// deal with large messages ... chunk the message
+				int nbChunk = justifiedMsg.length()/LARGE_MESSAGE_SIZE;
+				int start, end= 0;
+				for(int i = 0; i< nbChunk; i++){
+					start = LARGE_MESSAGE_SIZE*i;
+					end = LARGE_MESSAGE_SIZE*i + LARGE_MESSAGE_SIZE;
+					stream.write(justifiedMsg.substring(start, end));
+				}
+				stream.write(justifiedMsg.substring(end, justifiedMsg.length()));
+			}
+			else
+				stream.write(justifiedMsg);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * this methods allow to change the color of futur message
 	 * (this is because a simple change of current stream color, change the color for all messages, even previous ones ...) 
@@ -143,11 +171,9 @@ public class EclipseConsole extends IOConsole {
 			public void run() {
 				changeColor(message.getColor());
 				IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
-				try {
-					stream.write(message.getMessage() + '\n');
-				} catch (IOException exception) {
-					exception.printStackTrace();
-				}
+				if ( ! stream.isClosed() )
+					safePrint(stream, message.getMessage()+ '\n');
+				
 			}
 		};
 		ConsolePlugin.getStandardDisplay().syncExec(r);
@@ -159,6 +185,27 @@ public class EclipseConsole extends IOConsole {
 	//		End of Writing Methods		//
 	//////////////////////////////////////
 	//////////////////////////////////////
+	
+	public static String justifyMessage(String message){
+		StringBuffer justifiedMessage = new StringBuffer(message);
+		int lastNLIndex = 0;
+		int index = 0;
+		while(index < justifiedMessage.length()){
+			if(justifiedMessage.charAt(index) == '\n' || index == justifiedMessage.length()-1){
+				if(index - lastNLIndex > CONSOLE_MAX_WIDTH){
+					// need to insert a newline
+					justifiedMessage.insert(lastNLIndex+CONSOLE_MAX_WIDTH, '\n');
+					lastNLIndex=lastNLIndex+CONSOLE_MAX_WIDTH;
+					// normally , since we have inserted a char we should fall on the same newline char again
+				}
+				else
+					lastNLIndex=index;
+			}
+			index++;
+		}
+		
+		return justifiedMessage.toString();
+	}
 }
 
 
