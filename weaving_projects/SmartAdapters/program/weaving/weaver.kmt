@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.16 2008-03-04 14:08:34 bmorin Exp $
+/* $Id: weaver.kmt,v 1.17 2008-03-07 13:49:42 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -76,7 +76,7 @@ class Weaver
 				var i : Integer init 0
 				var binding : Hashtable<Object, Object>			
 				var doAction : Boolean
-			 	adapter.setDisplayInfo(false)
+			 	adapter.setDisplayInfo(true)
 			 	//iterating on bindings
 				from iteBindings until iteBindings.isOff loop 
 					 doAction := false
@@ -93,7 +93,7 @@ class Weaver
 					 //interaction with user
 					 do
 						 doAction := stdio.read("$>weave the aspect for this binding ? (true/FALSE): ").toBoolean
-					 rescue
+					 rescue (e : kermeta::exceptions::Exception)
 					 	doAction := false
 					 end
 					 //apply composition protocol for the current binding
@@ -107,7 +107,7 @@ class Weaver
 					 	//interaction with user
 					 	do
 					 		doAction := stdio.read("$>unweave the aspect for this binding ? (TRUE/false): ").toBoolean
-					 	rescue
+					 	rescue (e : kermeta::exceptions::Exception)
 					 		doAction := true
 					 	end
 					 	if doAction then
@@ -123,7 +123,7 @@ class Weaver
 					 		//interaction with user
 						 	do
 						 		doAction := stdio.read("$>execute pattern matching ? (TRUE/false): ").toBoolean
-						 	rescue
+						 	rescue (e : kermeta::exceptions::Exception)
 						 		doAction := true
 						 	end
 						 	//executing pattern matching again 
