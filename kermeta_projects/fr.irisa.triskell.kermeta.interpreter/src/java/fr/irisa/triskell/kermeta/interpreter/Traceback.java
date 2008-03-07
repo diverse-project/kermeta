@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.20 2008-02-14 07:13:56 uid21732 Exp $
+/* $Id: Traceback.java,v 1.21 2008-03-07 13:05:50 dvojtise Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -61,28 +61,27 @@ public class Traceback {
      */
     public String getStackTrace()
     {   
-        String stack_trace = "------------END OF STACK TRACE------------\n";
+        StringBuffer stack_trace = new StringBuffer("Trace: \n" + getContextForFObject(null, cause_object)+"\n");
         for (CallFrame frame : interpreter.interpreterContext.frame_stack)
         {
             fr.irisa.triskell.kermeta.language.structure.Object expr = frame.getExpression();
             if (expr!=null) // The only case where this cond is false is on first invokation
-                stack_trace = getContextForFObject(frame, expr) + stack_trace;
+                stack_trace.append(getContextForFObject(frame, expr));
             else
             	if (frame instanceof OperationCallFrame){
             		OperationCallFrame opCallFrame = (OperationCallFrame)frame; 
             		if(opCallFrame.isOperation())
-            			stack_trace = getContextForFObject(opCallFrame, opCallFrame.getOperation()) + stack_trace;
+            			stack_trace.append(getContextForFObject(opCallFrame, opCallFrame.getOperation()));
             		else
-            			stack_trace = getContextForFObject(opCallFrame, opCallFrame.getProperty()) + stack_trace;
+            			stack_trace.append(getContextForFObject(opCallFrame, opCallFrame.getProperty()));
             	}
             	else {
             		// TODO : some callframes don't accept getOperation  / getExpression!! think about it                    
-            		stack_trace = getContextForFObject(frame, frame.getOperation()) + stack_trace;    		        
+            		stack_trace.append(getContextForFObject(frame, frame.getOperation()));    		        
             	}
         }
-        // And the first info :
-        stack_trace = "Trace: \n" + getContextForFObject(null, cause_object) + stack_trace;
-        return stack_trace;
+        stack_trace.append("------------END OF STACK TRACE------------\n");
+        return stack_trace.toString();
     }
     
     
@@ -155,28 +154,28 @@ public class Traceback {
      */
     public String getContextForFObject(CallFrame frame, fr.irisa.triskell.kermeta.language.structure.Object fobject)
     {
-        String info = " ";
+        StringBuilder info = new StringBuilder(" ");
         KermetaUnit kunit = interpreter.getMemory().getUnit();
         
         KermetaUnit u = findUnitForModelElement(kunit, fobject);
         if (u!=null && fobject!=null) // I have not figured out why fobject given in parameters could be null
         {
             Object fo_source = u.getNodeByModelElement(fobject);
-            info += getTextInfoForNode(fobject, fo_source, u, frame);
+            info.append(getTextInfoForNode(fobject, fo_source, u, frame));
         }
         else {
-        	 // use the Tracer tools in order to get directly the URI of an elemeent
+        	 // use the Tracer tools in order to get directly the URI of an element
         	ModelReference mr = findModelReferenceToModelElement(kunit, fobject);
         	if(mr != null){
         		TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
-        		info += getTextInfoForNode(fobject, tr, u, frame);
+        		info.append(getTextInfoForNode(fobject, tr, u, frame));
         	}
 	        else if (frame != null) // it's in a KMUnit (which does not store a trace)
 	        {
-	            info += "    " + frame.toString() + "\n";
+	        	info.append("    " + frame.toString() + "\n");
 	        }
         }
-        return info;
+        return info.toString();
     }
     
     /**
@@ -254,14 +253,14 @@ public class Traceback {
      */
     public String getTextInfoForNode(fr.irisa.triskell.kermeta.language.structure.Object fobject, Object source_object, KermetaUnit unit, CallFrame frame)
     {
-    	String info = "";
+    	StringBuilder info = new StringBuilder("");
     	if (source_object instanceof KermetaASTNode)
-    		info += "-> " + getTextInfoForKMTASTNode(fobject, (KermetaASTNode)source_object, unit, frame) + "\n";
+    		info.append("-> " + getTextInfoForKMTASTNode(fobject, (KermetaASTNode)source_object, unit, frame) + "\n");
     	else if (source_object instanceof fr.irisa.triskell.kermeta.language.structure.Object) // does the code come from a "compiled" repr.? // and does a trace exist for the compiled representation?
-    		info += "   " + getTextInfoForKMNode(unit, (fr.irisa.triskell.kermeta.language.structure.Object)source_object, frame);
+    		info.append("   " + getTextInfoForKMNode(unit, (fr.irisa.triskell.kermeta.language.structure.Object)source_object, frame));
     	else if (source_object instanceof TextReference)
-    		info += "   " + getTextInfoForTextReference(fobject, (TextReference)source_object, frame)+ "\n";
-    	return info;
+    		info.append("   " + getTextInfoForTextReference(fobject, (TextReference)source_object, frame)+ "\n");
+    	return info.toString();
     }
     
     public String[] getInfoForNode(fr.irisa.triskell.kermeta.language.structure.Object fobject, Object source_object, KermetaUnit unit, CallFrame frame)
