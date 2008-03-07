@@ -9,6 +9,7 @@
       <import plugin="fr.irisa.triskell.kermeta.io"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ui"/>
+      <import plugin="org.kermeta.io.loader"/>
    </requires>
   <extension point="org.eclipse.help.toc">
 	<toc file="toc.xml" primary="true"/>

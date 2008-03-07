@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.20 2008-02-15 13:44:54 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.21 2008-03-07 13:00:43 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -39,10 +39,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -136,7 +138,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	{
 		// init
 		IOPlugin.LOCAL_USE = true;
-    	IOPlugin.FRAMEWORK_GENERATION = true;
+    	//IOPlugin.FRAMEWORK_GENERATION = true;
     	@SuppressWarnings("unused")
 		IOPlugin ioPlugin = IOPlugin.getDefault();
     	
@@ -145,7 +147,13 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		inputFile = inputfile;
 		// Load the KermetaUnit for the given file (only needed to get the rootPackage :} of the km(t) file and
 		// the list of its nested packages) 
-		kmunit = IOPlugin.getDefault().findKermetaUnit(inputFile);
+		try {
+			kmunit = LoaderPlugin.getDefault().load(inputFile, null);
+			//kmunit = LoaderPlugin.getDefault().getFramework();
+		} catch (NotRegisteredURIException e) {
+			e.printStackTrace();
+		}
+		//kmunit = LoaderPlugin.getDefault().getFramework();
 	}
 	
 	/** Pretty prints the file given as input in KM2HTMLPrettyPrinter constructor and
@@ -648,7 +656,9 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		String result = (String) super.visitTag(node);
 		int begin_i = 0; int end_i = 0;
 		if (result.startsWith("/**")) begin_i = 2;
+		
 		if (result.endsWith("*/")) end_i = result.length()-2;
+		else end_i = result.lastIndexOf("*/") +2;
 		ArrayList<StringBuffer> lresult = new ArrayList<StringBuffer>();
 		String[] lines = result.substring(begin_i, end_i).split("\\n");
 		for (int i = 0; i<lines.length; i++)
