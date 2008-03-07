@@ -1,6 +1,6 @@
 
 
-/*$Id: EclipseConsole.java,v 1.5 2008-03-07 13:03:59 dvojtise Exp $
+/*$Id: EclipseConsole.java,v 1.6 2008-03-07 15:15:29 dvojtise Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	EclipseConsole.java
 * License : EPL
@@ -19,12 +19,17 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IOConsoleOutputStream;
 
 import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
+import fr.irisa.triskell.eclipse.console.messages.WarningMessage;
 
 public class EclipseConsole extends IOConsole {
 
@@ -117,38 +122,71 @@ public class EclipseConsole extends IOConsole {
 	
 	/**
 	 * print the message eventually justify the message according to the maxwidth constant 
+	 * deal with large string : they are printed using a separated thread instead of the UI thread
 	 */
 	public void print(final ConsoleMessage message) {
+		// support for reasonnable sized string
 		Runnable r = new Runnable() {
 			public void run() {
 				changeColor(message.getColor());
-				IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
-				if ( ! stream.isClosed() )
-					safePrint(stream, message.getMessage());
+				String justifiedMsg = justifyMessage(message.getMessage());
+				if(!((IOConsoleOutputStream)getOutputStream()).isClosed())
+					try {
+						((IOConsoleOutputStream)getOutputStream()).write(justifiedMsg);
+					} catch (IOException e) {
+					}
 				
 			}
 		};
-		ConsolePlugin.getStandardDisplay().syncExec(r);
+		// support for large string !
+		Job myJob = new Job("Kermeta is writing a large string to the console") {
+		      public IStatus run(IProgressMonitor monitor) {
+		    	  safePrint( message.getMessage(), message.getColor(), monitor);
+		         return new Status(IStatus.OK, "fr.irisa.triskell.eclipse.utils", "large message printed to the console");
+		      }
+		   };
+		if(message.getMessage().length() > LARGE_MESSAGE_SIZE){
+			// large message
+			myJob.schedule();
+			// must wait before continuing
+			try {
+				myJob.join();
+			} catch (InterruptedException e) {
+				print(new WarningMessage("writing of large message to the console interrupted"));
+			}
+		}
+		else{
+			// normal messages are run in the UI thread
+			ConsolePlugin.getStandardDisplay().syncExec(r);
+		}
 	}
 	/** deal with not justified and large string
 	 * this is because large string may block Eclipse UI
 	 */
-	protected void safePrint(IOConsoleOutputStream stream, String message){
+	protected void safePrint(String message, Color c, IProgressMonitor monitor){
 		try {
 			String justifiedMsg = justifyMessage(message);
 			if(justifiedMsg.length() > LARGE_MESSAGE_SIZE){
 				// deal with large messages ... chunk the message
 				int nbChunk = justifiedMsg.length()/LARGE_MESSAGE_SIZE;
+				monitor.beginTask("writing large string to the console", nbChunk+1);
 				int start, end= 0;
 				for(int i = 0; i< nbChunk; i++){
 					start = LARGE_MESSAGE_SIZE*i;
 					end = LARGE_MESSAGE_SIZE*i + LARGE_MESSAGE_SIZE;
-					stream.write(justifiedMsg.substring(start, end));
+					changeStream();
+					changeColor(c);
+					((IOConsoleOutputStream)getOutputStream()).write(justifiedMsg.substring(start, end));
+					monitor.worked(1);
 				}
-				stream.write(justifiedMsg.substring(end, justifiedMsg.length()));
+				changeStream();
+				changeColor(c);
+				((IOConsoleOutputStream)getOutputStream()).write(justifiedMsg.substring(end, justifiedMsg.length()));
+				monitor.done();
 			}
 			else
-				stream.write(justifiedMsg);
+				changeColor(c);
+				((IOConsoleOutputStream)getOutputStream()).write(justifiedMsg);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -162,18 +200,33 @@ public class EclipseConsole extends IOConsole {
 		Color previousColor = ((IOConsoleOutputStream) getOutputStream()).getColor();
 		if(!c.equals(previousColor)){
 			// need to change to another stream for the new color
-			outputStream = null; // reset the stream
+			changeStream(); // reset the stream
 			((IOConsoleOutputStream) getOutputStream()).setColor(c);
 		}
 	}
+	/**
+	 * allows to change stream, sometime needed if a stream is too full or when changing color
+	 */
+	public void changeStream(){
+		try {
+			if(outputStream != null)
+				outputStream.close();
+		} catch (IOException e) {
+		}
+		outputStream = null;
+	}
 	public void println(final ConsoleMessage message) {
+		// use normal print for the message itself
+		print(message);
+		// add the cariage return
 		Runnable r = new Runnable() {
 			public void run() {
 				changeColor(message.getColor());
-				IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
-				if ( ! stream.isClosed() )
-					safePrint(stream, message.getMessage()+ '\n');
-				
+				if(!((IOConsoleOutputStream)getOutputStream()).isClosed())
+					try {
+						((IOConsoleOutputStream)getOutputStream()).write("\n");
+					} catch (IOException e) {
+					}
 			}
 		};
 		ConsolePlugin.getStandardDisplay().syncExec(r);
