@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.14 2008-02-27 10:07:29 cfaucher Exp $
+/* $Id: String.java,v 1.15 2008-03-10 12:46:38 bmorin Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -162,8 +162,10 @@ public class String {
 	 */
 	public static RuntimeObject toBoolean(RuntimeObject self) {
 		java.lang.String val = getValue(self).trim().toLowerCase();
-		if (val.equals("true")) return self.getFactory().getMemory().trueINSTANCE;
-		else if (val.equals("false")) return self.getFactory().getMemory().falseINSTANCE;
+		if (val.equals("true") || val.equals("t") || val.equals("yes") || val.equals("y") || val.equals("1")) 
+			return self.getFactory().getMemory().trueINSTANCE;
+		else if (val.equals("false") || val.equals("f") || val.equals("no") || val.equals("n") || val.equals("0")) 
+			return self.getFactory().getMemory().falseINSTANCE;
 		else return self.getFactory().getMemory().voidINSTANCE;
 	}
 	
