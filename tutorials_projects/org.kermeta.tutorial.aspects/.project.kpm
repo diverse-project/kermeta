@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="http://kpm">
-  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.openProject"/>
-  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.addMarkers"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.unloadContext"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.loadContext"/>
   <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.typecheck"/>
-  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.constraintCheck"/>
-  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.constraintcheck"/>
   <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.finalizeUpdate"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.openProject"/>
   <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
   <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.ecore2kmt"/>
   <filters xsi:type="kpm:NameFilter" regex="*.kmt"/>
@@ -15,7 +17,7 @@
     <in>
       <expression xsi:type="kpm:NullExpression"/>
     </in>
-    <outs action="//@actions.0">
+    <outs action="//@actions.7">
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
   </rules>
@@ -23,14 +25,17 @@
     <in>
       <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
     </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
     <outs action="//@actions.2">
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
     <outs action="//@actions.3">
       <expression xsi:type="kpm:NullExpression"/>
-    </outs>
-    <outs action="//@actions.6">
-      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
     </outs>
     <outs action="//@actions.4">
       <expression xsi:type="kpm:NullExpression"/>
@@ -38,56 +43,111 @@
     <outs action="//@actions.5">
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
-    <outs action="//@actions.1">
+    <outs action="//@actions.6">
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
   </rules>
-  <rules event="//@events.2" name="Close KMT File" type="//@ruleTypes.1">
+  <rules event="//@events.1" name="Update KM File" type="//@ruleTypes.1">
     <in>
-      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
     </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
     <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update Ecore File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.2"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
   </rules>
   <events name="open"/>
   <events name="update"/>
   <events name="close"/>
-  <units rules="//@rules.0" value="/org.kermeta.formation.basics"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/.project"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/.project.kpm"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-12-06T22:53:48.453+0100" value="/org.kermeta.formation.basics/src/kermeta/translator.kmt"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/.bin/translatorUMLEcore.km"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/.bin/translatorvisitableUML.km"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/.bin/translatorUMLEcorefsm.km"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-12-06T23:34:20.265+0100" value="/org.kermeta.formation.basics/src/kermeta/uml2fsm.kmt" dependents="//@units.9/@dependencies.0"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/.bin/AspectTranslatorUMLEcoreuml2fsmfsm.km"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-12-05T15:20:11.000+0100" value="/org.kermeta.formation.basics/src/kermeta/aspect_translator.kmt">
-    <dependencies type="//@ruleTypes.0" from="//@units.9" to="//@units.7"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/zip_build.xml"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-03-10T17:45:04.000+0100" value="/org.kermeta.tutorial.aspects/src/performer/uml2fsm.kmt" dependents="//@units.4/@dependencies.0">
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.3"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.3"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.3"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.3"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.3"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.3"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.3"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.2"/>
   </units>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/.bin/aspect_translatorUMLEcoreuml2fsmfsm.km"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/model/MyStateMachine.uml"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/model/MyStateMachine.umldi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/model/MyStateMachine.fsm"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.formation.basics/model/MyStateMachine.fsmdi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.bin/AspectTranslatorUMLEcoreuml2fsmfsm.km"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.bin/aspect_translatorUMLEcoreuml2fsmfsm.km"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.bin/translatorUMLEcore.km"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.bin/translatorUMLEcorefsm.km"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.bin/translatorvisitableUML.km"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.project"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.project.kpm"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.uml"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-03-10T17:45:04.000+0100" value="/org.kermeta.tutorial.aspects/src/performer/uml2_performer.kmt" dependents="//@units.4/@dependencies.1 //@units.2/@dependencies.15">
+    <dependencies type="//@ruleTypes.0" from="//@units.3" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.3" to="//@units.3"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.3" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.3" to="//@units.3"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.3" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.3" to="//@units.3"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.3" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.3" to="//@units.3"/>
+  </units>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-03-10T17:45:04.000+0100" value="/org.kermeta.tutorial.aspects/src/performer/aspect_translator.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.4" to="//@units.2"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.4" to="//@units.3"/>
+  </units>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/src/kermeta/translator.kmt"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-03-10T17:43:59.000+0100" value="/org.kermeta.tutorial.aspects/src/answer/uml2fsm.kmt"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/src/answer/aspect_translator.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/readme.txt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.umldi"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-12-07T13:59:03.000+0100" value="/org.kermeta.tutorial.aspects/src/kermeta/translator.kmt"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/META-INF/MANIFEST.MF"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/build.properties"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.cvsignore"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-12-07T10:50:21.000+0100" value="/org.kermeta.tutorial.aspects/src/answer/aspect_translator.kmt">
-    <dependencies type="//@ruleTypes.0" from="//@units.28" to="//@units.29"/>
-  </units>
-  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/src/answer/uml2fsm.kmt" dependents="//@units.28/@dependencies.0"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.uml"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/.cvsignore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/META-INF/MANIFEST.MF"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.project"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.cvsignore"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.bin/aspect_translatoruml2fsmuml2_performerfsm.km"/>
   <ruleTypes name="require"/>
   <ruleTypes name="normal"/>
 </kpm:KPM>
