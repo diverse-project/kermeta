@@ -1,0 +1,112 @@
+/* $Id: uml2fsm.kmt,v 1.1 2008-03-10 16:45:04 vmahe Exp $
+ * Creation date: December 5, 2007
+ * License:	EPL
+ * Copyright: Inria 2007
+ * Authors:	Didier Vojtisek <Didier.Vojtisek@irisa.fr>
+ 			Vincent Mahe <vmahe@irisa.fr>
+ */
+
+package uml;
+
+require kermeta 
+require "uml2_performer.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore"
+
+aspect class Element
+{
+	operation uml2fsmPass1() is do
+		
+	end
+	operation uml2fsmPass2() is do
+		
+	end
+}
+
+aspect class Package
+{
+	method uml2fsmPass1() is do
+		self.eachOwnedElement{ p | p.uml2fsmPass1() }
+	end
+	method uml2fsmPass2() is do
+		self.eachOwnedElement{ p | p.uml2fsmPass2() }
+	end
+	
+	// example of a derived property in Kermeta
+	operation output() : fsm::FSM is do
+		// we consider only one state machine in our UML models/packages
+		var sm : uml::StateMachine
+		sm ?= self.packagedElement.one
+		result := sm.output
+	end
+}
+
+aspect class StateMachine
+{
+	reference output : fsm::FSM
+	method uml2fsmPass1() is do
+		output := fsm::FSM.new
+		self.eachOwnedElement{ p | p.uml2fsmPass1() }
+	end
+	method uml2fsmPass2() is do
+		/* the region does not know directly its state machine
+		   so we must pass it to the Pass2 method */
+		self.region.each{ r | r.outModel := self.output }
+		self.eachOwnedElement{ p | p.uml2fsmPass2() }
+	end
+}
+
+aspect class Region
+{
+	reference outModel : fsm::FSM
+	method uml2fsmPass1() is do
+	 	// nothing to create
+		self.eachOwnedElement{ p | p.uml2fsmPass1() }
+	end
+	method uml2fsmPass2() is do
+		self.subvertex.each{ sv |
+			sv.outModel := outModel
+			outModel.ownedState.add(sv.output)
+		}
+		self.eachOwnedElement{ p | p.uml2fsmPass2() }
+	end
+}
+
+aspect class Vertex {
+	reference output : fsm::State
+	reference outModel : fsm::FSM
+	method uml2fsmPass1() is do
+		output := fsm::State.new
+		output.name := self.name
+	end
+	method uml2fsmPass2() is do
+		outModel.ownedState.add(output)
+		var pseudoState : uml::Pseudostate
+		pseudoState ?= self
+		if pseudoState != void then
+			if pseudoState.kind == uml::PseudostateKind.initial then
+				outModel.initialState := output
+			end
+		end
+		var finalState : uml::FinalState
+		finalState ?= self
+		if finalState != void then
+			outModel.finalState.add(output)
+		end
+	end
+}
+
+aspect class Transition {
+	reference output : fsm::Transition
+	method uml2fsmPass1() is do
+		output := fsm::Transition.new
+	end
+	method uml2fsmPass2() is do
+		output.source := self.source.output
+		// we update the targeted state
+		output.source.outgoingTransition.add(output)
+
+		output.target := self.target.output
+		// we update the targeted state
+		output.target.incomingTransition.add(output)
+	end
+}

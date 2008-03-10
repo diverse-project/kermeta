@@ -1,0 +1,55 @@
+/* $Id: uml2_performer.kmt,v 1.1 2008-03-10 16:45:04 vmahe Exp $
+ * Creation date: December 5, 2007
+ * License:	EPL
+ * Copyright: Inria 2007
+ * Authors:	Didier Vojtisek <Didier.Vojtisek@irisa.fr>
+ 			Vincent Mahe <vmahe@irisa.fr>
+ */
+
+package uml;  
+ 
+require kermeta 
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+
+aspect class Package
+{
+	operation eachOwnedElement(func : <Element -> Element>) : Void is do
+		self.packagedElement.each { o |
+				func(o)
+			}
+	end
+}
+
+aspect class StateMachine
+{
+	operation eachOwnedElement(func : <Element -> Element>) : Void is do
+		self.region.each{ o |
+				func(o)
+			}
+	end
+}
+
+aspect class Region
+{
+	operation eachOwnedElement(func : <Element -> Element>) : Void is do
+	 	self.subvertex.each{ o |
+				func(o)
+			}
+		self.transition.each{ o |
+				func(o)
+			}
+	end
+}
+
+aspect class Vertex {
+	operation eachOwnedElement(func : <Element -> Element>) : Void is do
+		
+	end
+}
+
+aspect class Transition {
+	operation eachOwnedElement(func : <Element -> Element>) : Void is do
+		
+	end
+}

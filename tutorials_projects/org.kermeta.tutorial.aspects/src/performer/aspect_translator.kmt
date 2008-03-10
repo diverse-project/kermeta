@@ -1,0 +1,49 @@
+/* $Id: aspect_translator.kmt,v 1.1 2008-03-10 16:45:04 vmahe Exp $
+ * Creation date: December 5, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+@mainClass "root_package::AspectTranslator"
+@mainOperation "main"
+
+package root_package;
+
+
+require kermeta
+//require "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+require "uml2fsm.kmt" 
+ 
+
+using kermeta::persistence
+using uml
+
+class AspectTranslator
+{
+	operation main() : Void is do 
+	
+		var inRep : EMFRepository init EMFRepository.new
+		var inRes :  Resource   
+		var umlModel : uml::Model
+	 
+		inRes := inRep.getResource("platform:/resource/org.kermeta.tutorial.aspects/model/MyStateMachine.uml")
+		umlModel ?= inRes.one
+	
+		var outRep : EMFRepository init EMFRepository.new
+		var outRes :  Resource   
+		  
+		outRes := outRep.createResource("platform:/resource/org.kermeta.tutorial.aspects/model/MyStateMachine.fsm",
+				"platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore")
+		
+		umlModel.packagedElement.each {e | 
+			var p: uml::Package
+			p ?= e
+			p.uml2fsmPass1()
+			p.uml2fsmPass2()
+			outRes.add(p.output)
+		}
+		outRes.save
+	end
+}
