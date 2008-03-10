@@ -1,4 +1,4 @@
-/* $Id: uml2fsm.kmt,v 1.2 2007-12-17 16:47:06 dvojtise Exp $
+/* $Id: uml2fsm.kmt,v 1.3 2008-03-10 16:43:59 vmahe Exp $
  * Creation date: December 5, 2007
  * License:	EPL
  * Copyright: Inria 2007
@@ -13,8 +13,7 @@ require kermeta
 require "http://www.eclipse.org/uml2/2.1.0/UML"
 require "platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore"
 
-@aspect "true"
-class Package
+aspect class Package
 {
 	operation uml2fsmPass1() is do
 		self.packagedElement.each {e | 
@@ -40,8 +39,7 @@ class Package
 	end
 }
 
-@aspect "true"
-class StateMachine
+aspect class StateMachine
 {
 	reference output : fsm::FSM
 	operation uml2fsmPass1() is do
@@ -55,8 +53,7 @@ class StateMachine
 	end
 }
 
-@aspect "true"
-class Region
+aspect class Region
 {
 	operation uml2fsmPass1() is do
 	 	// nothing to create
@@ -72,8 +69,7 @@ class Region
 	end
 }
 
-@aspect "true"
-class Vertex {
+aspect class Vertex {
 	reference output : fsm::State
 	operation uml2fsmPass1() is do
 		output := fsm::State.new
@@ -96,8 +92,7 @@ class Vertex {
 	end
 }
 
-@aspect "true"
-class Transition {
+aspect class Transition {
 	reference output : fsm::Transition
 	operation uml2fsmPass1() is do
 		output := fsm::Transition.new
