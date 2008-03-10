@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_YbGSYOnXEdydfOZyZPiexQ" activeDiagram="_YbG5cOnXEdydfOZyZPiexQ">
+  <model href="BProfile.uml#_YbHggOnXEdydfOZyZPiexQ"/>
+  <diagrams xmi:id="_YbG5cOnXEdydfOZyZPiexQ" position="0,0" size="100,100" name="BProfile" viewport="0,0">
+    <property xmi:id="_YbZNUOnXEdydfOZyZPiexQ" key="pageFormatName" value="A4"/>
+    <property xmi:id="_YbZNUenXEdydfOZyZPiexQ" key="diagramWidth" value="840"/>
+    <property xmi:id="_YbZNUunXEdydfOZyZPiexQ" key="diagramHeight" value="1188"/>
+    <property xmi:id="_YbZNU-nXEdydfOZyZPiexQ" key="pageMarginName" value="Small Margin"/>
+    <property xmi:id="_YbZNVOnXEdydfOZyZPiexQ" key="diagramTopMargin" value="20"/>
+    <property xmi:id="_YbZNVenXEdydfOZyZPiexQ" key="diagramBottomMargin" value="20"/>
+    <property xmi:id="_YbZNVunXEdydfOZyZPiexQ" key="diagramLeftMargin" value="20"/>
+    <property xmi:id="_YbZNV-nXEdydfOZyZPiexQ" key="diagramRightMargin" value="20"/>
+    <property xmi:id="_YbZNWOnXEdydfOZyZPiexQ" key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_YbG5cenXEdydfOZyZPiexQ" presentation="org.topcased.modeler.uml.profilediagram">
+      <element href="BProfile.uml#_YbHggOnXEdydfOZyZPiexQ"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" xmi:id="_aVlCEOnXEdydfOZyZPiexQ" position="143,132" size="120,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_aVlCEenXEdydfOZyZPiexQ" presentation="default">
+        <element href="BProfile.uml#_aW87EOnXEdydfOZyZPiexQ"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_aVlCEunXEdydfOZyZPiexQ">
+        <property xmi:id="_aVlCE-nXEdydfOZyZPiexQ" key="eStructuralFeatureID" value="37"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_aVlCFOnXEdydfOZyZPiexQ" presentation="default">
+          <element href="BProfile.uml#_aW87EOnXEdydfOZyZPiexQ"/>
+        </semanticModel>
+      </contained>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

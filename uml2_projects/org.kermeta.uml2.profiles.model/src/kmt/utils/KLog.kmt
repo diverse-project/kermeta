@@ -1,4 +1,4 @@
-/* $Id: KLog.kmt,v 1.1 2008-02-04 15:45:39 dvojtise Exp $
+/* $Id: KLog.kmt,v 1.2 2008-03-10 15:22:08 gperroui Exp $
  * Creation date: December 23, 2007
  * License: EPL
  * Copyright:
@@ -9,7 +9,6 @@
 
 
 package UMLProfileUtils; 
-
  
 require kermeta
 using kermeta::standard

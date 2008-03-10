@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2EcoreTrace.kmt,v 1.4 2008-02-27 14:23:59 gperroui Exp $
+/* $Id: UMLProfile2EcoreTrace.kmt,v 1.5 2008-03-10 15:22:08 gperroui Exp $
  * Creation date: December 13, 2007
  * License: EPL
  * Copyright:
@@ -13,17 +13,21 @@ require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+//require "platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.profile.ecore"
 require "../utils/KLog.kmt"
+require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
 using kermeta::utils
 using kermeta::persistence
 using uml
 using ecore
+
 /** This class keeps track of some objects useful for ecore creation...  */
 
 class UMLProfile2EcoreTrace {
 
 reference log : KLogger
 reference tgt_store: EMFRepository
+reference profileHelper : profiledResourceHelper::ProfilesHelper
 
 // store Ecore Metaclasses extended by stereotypes
 attribute typesTable : Hashtable<String,ecore::EClassifier>
@@ -45,11 +49,17 @@ end
 operation initRep(rep: EMFRepository): Void is do
 tgt_store := rep
 uml_resource := EMFResource.new 
-ecore_resource := EMFResource.new 
-uml_resource ?= tgt_store.createResource("platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore","http://www.eclipse.org/emf/2002/Ecore") 
-ecore_resource ?=  tgt_store.createResource("platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/ecore.ecore","http://www.eclipse.org/emf/2002/Ecore")
+ecore_resource := EMFResource.new
+// We need to refer to the actual UML and Ecore element in the plugins (impossible to laod the necessary element via their their uri :( )  
+uml_resource ?= tgt_store.getResource("platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore") 
+ecore_resource ?=  tgt_store.getResource("platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore")
 uml_resource.load
 ecore_resource.load
+end
+
+operation initProfHelper(modelResource : Resource, profileResource : Resource ) is do
+profileHelper := profiledResourceHelper::ProfilesHelper.new
+profileHelper.initialize(modelResource, profileResource)
 end
 
 operation setQualNameObj(qualName:String,ecoreObj:ecore::EObject): Void is do

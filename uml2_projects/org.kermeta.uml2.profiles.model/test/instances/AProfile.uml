@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BProfile="http:///schemas/BProfile/_P6EyAOrTEdyb15TlkHhn_A/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/BProfile/_P6EyAOrTEdyb15TlkHhn_A/1 BProfile.uml#_P6HOQOrTEdyb15TlkHhn_A">
+  <uml:Profile xmi:id="_JMZm0OrYEdyb15TlkHhn_A" name="AProfile" metamodelReference="_VyJmYOrYEdyb15TlkHhn_A">
+    <packageImport xmi:id="_VyJmYOrYEdyb15TlkHhn_A">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Stereotype" xmi:id="_XMp1gOrYEdyb15TlkHhn_A" name="AS1"/>
+    <profileApplication xmi:id="_fq7pYOrYEdyb15TlkHhn_A">
+      <eAnnotations xmi:id="_fq7pYerYEdyb15TlkHhn_A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="BProfile.uml#_P6HOQOrTEdyb15TlkHhn_A"/>
+      </eAnnotations>
+      <appliedProfile href="BProfile.uml#_YbHggOnXEdydfOZyZPiexQ"/>
+    </profileApplication>
+  </uml:Profile>
+  <BProfile:BS1 xmi:id="_hdE8cOrYEdyb15TlkHhn_A" base_Class="_XMp1gOrYEdyb15TlkHhn_A"/>
+</xmi:XMI>

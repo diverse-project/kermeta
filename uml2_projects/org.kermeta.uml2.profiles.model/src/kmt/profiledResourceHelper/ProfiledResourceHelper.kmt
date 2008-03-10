@@ -1,4 +1,4 @@
-/* $Id: ProfiledResourceHelper.kmt,v 1.6 2008-02-27 14:23:59 gperroui Exp $
+/* $Id: ProfiledResourceHelper.kmt,v 1.7 2008-03-10 15:22:08 gperroui Exp $
  * Creation date: June 19, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -133,8 +133,12 @@ class ProfilesHelper {
 	
 	operation getStereotypeInstances() is do
 	
-		stereotypeInstances.addAll( modelResource.instances.select{ instance | not instance.isInstanceOf(uml::Model) } ) 
-	
+		stereotypeInstances.addAll( modelResource.instances.select{ instance | not instance.isInstanceOf(uml::Element) 
+		and getProperty( "base_Class", instance ) != void} ) 
+		//stdio.writeln("stereotypes to add : " + modelResource.instances.size.toString)
+		/*stereotypeInstances.addAll(modelResource.contents.select{ instance | instance.isInstanceOf(uml::Stereotype) })
+		stereotypeInstances.each{i| stdio.writeln(i.asType(uml::Stereotype).name)}
+		stdio.writeln("stereotypes instances " + stereotypeInstances.size.toString)*/
 	end
 	
 	/**

@@ -1,4 +1,4 @@
-/* $Id: Profile.kmt,v 1.3 2008-02-27 14:23:59 gperroui Exp $
+/* $Id: Profile.kmt,v 1.4 2008-03-10 15:22:08 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -147,6 +147,7 @@ reference st : EClass
 /** This method deals with creation of new Ecore objects */
 method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
 trace.traceLog("Entering Stereotype : Pass1")
+trace.traceLog("Stereotype name "+ self.name)
 	st := EClass.new
 	
 	// registering elements in the trace to keep track of them...
@@ -164,7 +165,8 @@ trace.traceLog("Entering Stereotype : Pass1")
  /** This method deals with relationship establishment*/
 	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
 	trace.traceLog("Entering Stereotype : Pass2")
-		
+	trace.traceLog("Stereotype name "+ self.name)
+	
 	// if there is a container for this element we retreive it and add the element to it...
 	if self.container != void then
 		trace.traceLog("Container is not void, trying to retreive it....")
@@ -529,7 +531,7 @@ end
 }
 
 aspect class PackageImport inherits ToEcore {
-
+// TODO
 reference obj: EObject
 /** This method deals with creation of new Ecore objects*/
 method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
@@ -661,3 +663,25 @@ gen.containingResource.instances.remove(gen)
 trace.traceLog("Quitting Generalization : Pass2")
 end
 }
+
+
+aspect class ProfileApplication inherits ToEcore {
+reference pa : EObject
+reference stereo : Bag<uml::PackageableElement>
+
+method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+trace.traceLog("Entering ProfileApplication : Pass1")
+pa := EObject.new
+stereo := self.appliedProfile.packagedElement.select{c|c.isInstanceOf(uml::Stereotype)} 
+stereo.each{e | trace.traceLog("Applicable external stereotype " + e.asType(uml::Stereotype).name)}
+trace.traceLog("Quitting ProfileApplication : Pass1")
+result := pa
+end
+
+method toEcorePass2(trace: UMLProfile2EcoreTrace): Void is do
+trace.traceLog("Entering ProfileApplication : Pass2")
+trace.traceLog("Entering ProfileApplication : Pass2")
+end 
+
+
+} 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_YbHggOnXEdydfOZyZPiexQ" name="BProfile" metamodelReference="_3NC8oOnXEdydfOZyZPiexQ">
+  <eAnnotations xmi:id="_jXQzEOnZEdydfOZyZPiexQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_P6HOQOrTEdyb15TlkHhn_A" name="BProfile" nsURI="http:///schemas/BProfile/_P6EyAOrTEdyb15TlkHhn_A/1" nsPrefix="BProfile">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_P6HOQerTEdyb15TlkHhn_A" name="BS1">
+        <eAnnotations xmi:id="_P6HOQurTEdyb15TlkHhn_A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_aW87EOnXEdydfOZyZPiexQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_P6HOQ-rTEdyb15TlkHhn_A" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_P6HORerTEdyb15TlkHhn_A" name="BS1bool" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <elementImport xmi:id="_dNUWEOqZEdysrcMtg084SQ" alias="">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <packageImport xmi:id="_3NC8oOnXEdydfOZyZPiexQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_aW87EOnXEdydfOZyZPiexQ" name="BS1">
+    <ownedAttribute xmi:id="_JNU1wunZEdydfOZyZPiexQ" name="base_Class" association="_JNU1wOnZEdydfOZyZPiexQ">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_VQDr8OqWEdysrcMtg084SQ" name="BS1bool">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_JNU1wOnZEdydfOZyZPiexQ" name="Class_BS1" memberEnd="_JNU1wenZEdydfOZyZPiexQ _JNU1wunZEdydfOZyZPiexQ">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_JNU1wenZEdydfOZyZPiexQ" name="extension_BS1" type="_aW87EOnXEdydfOZyZPiexQ" aggregation="composite" association="_JNU1wOnZEdydfOZyZPiexQ"/>
+  </packagedElement>
+</uml:Profile>
