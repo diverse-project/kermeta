@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.1 2008-02-27 15:53:10 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.2 2008-03-11 09:35:30 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -34,10 +34,11 @@ class CompilerHelperJava {
 	operation ppEmfLikeCreateFactory(localType : String) : String is do
 		result := ""
 		
-		if localType == "String" then
+		if localType == "String" or localType == "java.lang.String" then
 			result := " = null"
 			
 		else
+			
 			var localType2 : String init localType.replace(".", "%")
 
 			var name_set : OrderedSet<String> init localType2.split("%")
@@ -81,6 +82,7 @@ class CompilerHelperJava {
 	 */
 	operation ppComaSeparatedNodes(expressions : Set<Expression>, context : KM2EcoreContext) : String is do
 		result := ""
+		//expressions.each{ e | stdio.writeln("ppComaSeparatedNodes " + e.toString()) }
 		var i : Integer init 0
 		expressions.each{ e |		
 			result := result + e.createBehaviorJava(context)

@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.5 2008-02-07 18:20:20 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.6 2008-03-11 09:35:35 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -11,27 +11,29 @@ package kermeta::language::structure;
 
 
 require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
 require "CreateEcoreModelElement.kmt"
 require "../common/trace_structure.kmt"
-require "http://www.eclipse.org/emf/2002/Ecore"
 require "../helper/KM2EcoreHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using ecore
+using km2ecore
 using km2ecore::helper::kermeta
 
 aspect class Object {
-	operation applyPass1() is do
+	operation applyPass1(context : KM2EcoreContext) is do
 	end
 }
 
 aspect class ModelingUnit {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore package
-		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement()
+		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement(context)
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreAnnotation
 		// Compile the owned elements
-		self.eachOwnedElement{ p | p.applyPass1() }
+		self.eachOwnedElement{ p | p.applyPass1(context) }
 		// Getting the ecore packages
 		self.packages.each{p|
 			self.ecorePackages.add( p.ecoreModelElement )
@@ -40,9 +42,9 @@ aspect class ModelingUnit {
 }
 
 aspect class Package {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore package
-		var ecorePackage : EPackage init self.createEcoreModelElement()
+		var ecorePackage : EPackage init self.createEcoreModelElement(context)
 		// Setting the container
 		var p : Package init self.nestingPackage
 		//p ?= self.container()
@@ -52,43 +54,43 @@ aspect class Package {
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecorePackage
 		// Compile the owned elements
-		self.eachOwnedElement{ cd | cd.applyPass1() }
+		self.eachOwnedElement{ cd | cd.applyPass1(context) }
 	end
 } 
 
 aspect class PrimitiveType {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		var ecoreDataType : EDataType init self.createEcoreModelElement()
+		var ecoreDataType : EDataType init self.createEcoreModelElement(context)
 		// Setting the container
 		var p : Package init self.container().asType(Package)
 		p.ecoreModelElement.eClassifiers.add(ecoreDataType)
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreDataType
 		// Compile the owned elements
-		self.eachOwnedElement{ cd | cd.applyPass1() }
+		self.eachOwnedElement{ cd | cd.applyPass1(context) }
 	end 
 }
 
 aspect class Enumeration { 
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		var ecoreEnumeration : EEnum init self.createEcoreModelElement()
+		var ecoreEnumeration : EEnum init self.createEcoreModelElement(context)
 		// Setting the container
 		var p : Package init self.container().asType(Package)
 		p.ecoreModelElement.eClassifiers.add(ecoreEnumeration)
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreEnumeration
 		// Compile the owned elements
-		self.eachOwnedElement{ l | l.applyPass1() }
+		self.eachOwnedElement{ l | l.applyPass1(context) }
 		
 	end
 } 
   
 aspect class EnumerationLiteral {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		var ecoreEnumLiteral : EEnumLiteral init self.createEcoreModelElement()
+		var ecoreEnumLiteral : EEnumLiteral init self.createEcoreModelElement(context)
 		// Setting the container
 		var e : Enumeration init self.~enumeration.asType(Enumeration)
 		e.ecoreModelElement.eLiterals.add(ecoreEnumLiteral)
@@ -98,24 +100,24 @@ aspect class EnumerationLiteral {
 }  
   
 aspect class ClassDefinition {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		var ecoreClass : EClass init self.createEcoreModelElement()		
+		var ecoreClass : EClass init self.createEcoreModelElement(context)		
 		// Setting the container
 		var p : Package init self.container().asType(Package)
 		p.ecoreModelElement.eClassifiers.add(ecoreClass)
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreClass
 		// Compile the owned elements
-		self.eachOwnedElement{ o | o.applyPass1() }
+		self.eachOwnedElement{ o | o.applyPass1(context) }
 	end
 	
 } 
   
 aspect class Property {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		var ecoreStructuralFeature : EStructuralFeature init self.createEcoreModelElement()
+		var ecoreStructuralFeature : EStructuralFeature init self.createEcoreModelElement(context)
 		// Setting the container
 		var c : ClassDefinition
 		c ?= self.container()
@@ -123,14 +125,14 @@ aspect class Property {
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreStructuralFeature
 		// Compile the owned elements
-		self.eachOwnedElement{ o | o.applyPass1() }
+		self.eachOwnedElement{ o | o.applyPass1(context) }
 	end 
 }
 
 aspect class Operation {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		var ecoreOperation : EOperation init self.createEcoreModelElement()
+		var ecoreOperation : EOperation init self.createEcoreModelElement(context)
 		// Setting the container
 		var c : ClassDefinition
 		c ?= self.container()
@@ -138,14 +140,14 @@ aspect class Operation {
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreOperation
 		// Compile the owned elements
-		self.eachOwnedElement{ o | o.applyPass1() }
+		self.eachOwnedElement{ o | o.applyPass1(context) }
 	end
 }
 
 aspect class Parameter {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		var ecoreParameter : EParameter init self.createEcoreModelElement()
+		var ecoreParameter : EParameter init self.createEcoreModelElement(context)
 		// Setting the container
 		var o : Operation init self.container().asType(Operation)
 		o.ecoreModelElement.eParameters.add( ecoreParameter )
@@ -155,9 +157,9 @@ aspect class Parameter {
 }
 
 aspect class Constraint {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement()
+		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement(context)
 		// Setting the container
 		var c : Object init self.container
 		var p : Property init ObjectHelper.new.getPropertyValue(c, "ecoreModelElement")
@@ -171,9 +173,9 @@ aspect class Constraint {
 }
 
 aspect class ObjectTypeVariable {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		var ecoreTypeParameter : ETypeParameter init self.createEcoreModelElement()
+		var ecoreTypeParameter : ETypeParameter init self.createEcoreModelElement(context)
 		// Setting the container
 		var container : Object init self.container
 		if ( container.isInstanceOf(ClassDefinition) ) then		
@@ -187,9 +189,9 @@ aspect class ObjectTypeVariable {
 }
 
 aspect class Tag {
-	method applyPass1() is do
+	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement()
+		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement(context)
 		// Setting the container
 		var c : Object init self.container
 		if ( c.isInstanceOf(ModelingUnit) ) then

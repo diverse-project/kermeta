@@ -1,4 +1,4 @@
-/* $Id: printJava.kmt,v 1.2 2008-02-27 15:29:50 cfaucher Exp $
+/* $Id: printJava.kmt,v 1.3 2008-03-11 09:35:32 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -19,7 +19,6 @@ require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext
 
 using kermeta::language::structure
 using kermeta::language::behavior
-using kermeta::standard
 using kermeta::utils
 using ecore
 using km2ecore
@@ -28,7 +27,8 @@ using km2ecore::helper::ecore
 package structure {
 
 	aspect class Object {
-		operation print(context : KM2EcoreContext) : Void is abstract
+		operation print(context : KM2EcoreContext) : Void is
+			abstract
 	}
 	
 	aspect class Package {
@@ -40,9 +40,8 @@ package structure {
 	}
 	
 	aspect class TypeDefinition {
-		method print(context : KM2EcoreContext) : Void is do
-			
-		end
+		method print(context : KM2EcoreContext) : Void is
+			abstract
 	}
 	
 	aspect class ClassDefinition {
@@ -52,15 +51,14 @@ package structure {
 			self.ecoreModelElement := EcoreModelElementHelper.new.findEClassProxy(self)
 			// Compile the owned elements
 			self.eachOwnedElement{ o | o.print(context) }
-			stdio.writeln("}\n")
+			stdio.writeln("}\n---------------------------------------\n")
 		end
 		
 	}
 	
 	aspect class Type {
-		method print(context : KM2EcoreContext) : Void is do
-			//do nothing
-		end
+		method print(context : KM2EcoreContext) : Void is
+			abstract
 	}
 	
 	aspect class PrimitiveType {

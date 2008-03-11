@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.7 2008-02-27 15:29:50 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.8 2008-03-11 09:35:34 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -12,7 +12,6 @@
  *	Because the type setting and the behavior's creation (kmt or java style) can be done at the same time, we can only visit once the model.
  *	So dependending on the visited object, we apply some specific actions and still visiting the contained elements.
  *
- *
  */
 
 
@@ -22,6 +21,7 @@ require kermeta
 require "SetLinks.kmt"
 require "CreateBehavior.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/containment_traversable.kmt"
+//require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentBasedActionPerformer_Kermeta.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using km2ecore
@@ -51,6 +51,7 @@ package structure {
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
+			//stdio.writeln("Pass2 ClassDefinition : " + self.name)
 			self.setLinks() 
 			super(context)
 		end
@@ -76,6 +77,7 @@ package structure {
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
+			//stdio.writeln("Pass2 ClassDefinition")
 			self.setLinks()
 			super(context)
 			self.createBehaviorJava(context)
@@ -89,6 +91,7 @@ package structure {
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
+			//stdio.writeln("Pass2 ClassDefinition")
 			self.setLinks()
 			super(context)
 		end

@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.12 2008-02-27 15:53:10 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.13 2008-03-11 09:35:34 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -66,7 +66,7 @@ package structure {
 				if ( type_label!="Void" and type_label!="VoidType" ) then
 					javaCode.append("\n" + type_label + " result = null;\n")
 				end
-		
+
 				// The Java source code is provided by: self.body.createBehaviorJava(context)
 				javaCode.append(self.body.createBehaviorJava(context))
 				
@@ -74,6 +74,7 @@ package structure {
 				if ( type_label!="Void" and type_label!="VoidType" ) then
 					javaCode.append("\nreturn result;\n")
 				end
+				
 			end
 			
 			// Finally add the EAnnotation containing the Java code in the Ecore model
@@ -103,7 +104,11 @@ package structure {
 	
 	aspect class ParameterizedType {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Type is do
-			result := self.typeDefinition.name
+			result := context.javaTypeMapping.getTypeMapping(self.typeDefinition.qualifiedName)
+			/*if result == "kermeta::standard::String" or result == "kermeta::language::structure::String" then
+				result := "String"
+			end*/
+			result := result.replace("::",".")
 		end
 	}
 	
@@ -128,7 +133,8 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			var javaCode : StringBuffer init StringBuffer.new
 			javaCode.append("{")
-			self.statement.each{ stm |
+			
+			self.eachOwnedElement{ stm |
 				javaCode.append("\n\t")
 				javaCode.append(stm.createBehaviorJava(context))
 				javaCode.append("\n")
@@ -146,27 +152,156 @@ package behavior {
 	
 	aspect class CallFeature {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
-			result := "/*IP content of the current CallFeature*/"
+			result := ""//*IP content of the current CallFeature*/"
 
-			if not self.target.isVoid() then
-				result := result + self.target.createBehaviorJava(context) + "."
+			var tgt : Expression init self.target
+			var fName : String  init self.name
+			
+			if not tgt.isVoid() then
+				result := result + getPP(tgt, fName, context)
 			end
-			result := result + self.name
-						
+
 			if self.name == "writeln" then
-				result := "println"
+				result := result + " Block1 " + "println"
+			else
+				//stdio.writeln("self-self-self: " + self.name + " " + self.toString)
+				result := result + " /*Block1*/ " + /*getPP(self, self.name, context) +*/ self.name
 			end
+
+			if self.container.isInstanceOf(Block) then
+				result := result + " /*Block2*/ " + "(" +CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ");"
+			end
+		end
+		
+		/** Definition in progress */
+		operation getPP(tgt : Expression, fName : String, context : KM2EcoreContext) : String is do
+			result := ""
+			
+			var isBoolean : Boolean init KM2EcoreHelper.new.isBooleanTypeDef(tgt.staticType, context)
+			var isNumeric : Boolean init KM2EcoreHelper.new.isNumericalTypeDef(tgt.staticType, context)
+			
+			if(fName == "not" and isBoolean) then
+					result := result + "! ("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ")"
+				
+				else if (fName == "and" and isBoolean) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") && ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if (fName == "or" and isBoolean) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") || ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if (fName == "plus" and isNumeric) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") + ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if(fName == "minus" and isNumeric) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") - ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if(fName == "mult" and isNumeric) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") * ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if(fName == "div" and isNumeric) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") / ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if(fName == "isGreater" and isNumeric) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") > ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if(fName == "isLower" and isNumeric) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") < ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if(fName == "isGreaterOrEqual" and isNumeric) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") >= ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if(fName == "isLowerOrEqual" and isNumeric) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") <= ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if(fName == "equals" and (isBoolean or isNumeric)) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") == ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+				else if(fName == "isNotEqual" and (isBoolean or isNumeric)) then
+					result := result + "("
+					result := result + tgt.createBehaviorJava(context)
+					result := result + ") != ("
+					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+					result := result + ")"
+				
+			
+				else
+					var ppParam : String init ""
+					if tgt.isInstanceOf(CallFeature) then
+						ppParam := "(" + CompilerHelperJava.new.ppComaSeparatedNodes(tgt.asType(CallExpression).parameters, context) + ")"
+					end
+					result := result + "/*Block3*/ " + tgt.createBehaviorJava(context) + ppParam + "."
+				
+				end
+				end
+				end
+				end
+				end
+				end
+				end
+				end
+				end
+				end
+				end
+				end
+				end
 		end
 	}
 	
 	aspect class CallVariable {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
-			result := "//TODO content of the current CallVariable\n" + self.toString + "\n\n"
+			result := "/*CallVariable*/ "//*TODO content of the current CallVariable\n" + self.toString + "*/"
 			//result := result + "\n CallVariable.name = " + self.name
+
 			if self.name == "stdio" then
 				result := result + "System.out"
 			else
-				result := result + self.name
+				result := result + KM2EcoreHelper.new.getMangledIdentifier(self.name, context)
 			end
 		end
 	}
@@ -193,19 +328,19 @@ package behavior {
 	
 	aspect class VariableDecl {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
-			result := "//IP VariableDecl" + self.toString + "\n"
+			result := ""//*IP VariableDecl" + self.toString + "\n*/"
 			var localType : String init self.type.createBehaviorJava(context)
-			result := result + localType + " " + self.identifier
+			result := result + localType + " " + KM2EcoreHelper.new.getMangledIdentifier(self.identifier, context)
 			if not self.initialization.isVoid() then
 				
-				if self.initialization.createBehaviorJava(context).contains(".new()") then
-					result := result + CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
+				if self.initialization.createBehaviorJava(context).contains(".new()") or self.initialization.createBehaviorJava(context).contains(".new") then
+					result := result + " /*VariableDecl with new*/ " + CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
 				else
-					result := result + " = " + self.initialization.createBehaviorJava(context)
+					result := result + " /*VariableDecl without new*/ " + self.initialization.createBehaviorJava(context)
 				end
 		
 			else
-				result := result + CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
+				result := result + " = null"//CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
 			end
 		result := result + ";"
 		end
@@ -222,11 +357,14 @@ package behavior {
 				right := "function " + right
 			end
 			
-			var op : String init ""//(node.isIsCast())?"?":":";
+			var ppCast : String
+			if self.isCast() then
+				ppCast := "(" + self.staticType.createBehaviorJava(context) + ")"
+			end
 			
 			if self.target.isInstanceOf(CallFeature) then
 				//stdio.writeln(self.target.name)
-				result := result + "get" + KM2EcoreHelper.new.getMangledIdentifier(self.target.name, context).capName()
+				result := result + "get" + self.target.name.capName()
 			else
 			
 				if self.target.isInstanceOf(CallFeature) then
@@ -251,7 +389,7 @@ package behavior {
 				
 					result := result + "(" + right + ");"
 				else
-					result := left + " " + op + "= " + right + ";"
+					result := left + " = " + right + ";"
 				end
 			end
 			
@@ -294,11 +432,15 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := "catch"
 			if not self.exceptionName.isVoid() then
-				result := result + "(" + self.exceptionName + " : " + self.exceptionType.createBehaviorJava(context) + ")"
+				result := result + "(" + self.exceptionType.createBehaviorJava(context) + " " + self.exceptionName + ")"
 			end
-			result := result + "\n{"
+			result := result + " {\n"
 			//pushPrefix();
-			result := result + self.body.createBehaviorJava(context) + "}"
+			
+			if not self.body.isVoid() then
+				//result := result + "self.body: " + self.body.statement{stm | result := result + "stm: " + stm.toString/*createBehaviorJava(context)*/}
+			end
+			result := result + self.body.createBehaviorJava(context) + "\n}"
 			//popPrefix();
 		end
 	}

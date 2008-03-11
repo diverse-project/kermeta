@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.15 2008-02-27 15:29:50 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.16 2008-03-11 09:35:33 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -25,7 +25,7 @@ using kermeta::standard
 
 class Main
 {
-	attribute repository : EMFRepository [1..1]
+	//attribute repository : EMFRepository [1..1]
 	
 	reference context : KM2EcoreContext [1..1]
 
@@ -45,14 +45,14 @@ class Main
 		context := KM2EcoreContext.new
 		context.initialize()
 
-		repository := EMFRepository.new
-		
-		context.mus.add(loadKmModel(repository, input))
+		//repository := EMFRepository.new
+
+		context.mus.add(loadKmModel(EMFRepository.new, input))
 
 		context.mode := mode
 		
 		context.mus.each{ mu |
-			mu.applyPass1()
+			mu.applyPass1(context)
 			if context.mode == CompilingMode.onlyEcore then
 				mu.applyPass2(context)
 			end
@@ -65,13 +65,15 @@ class Main
 			end
 			
 			// Save the generated ecore
-	   		var ecore_resource : Resource init repository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
+	   		var ecore_resource : Resource init EMFRepository.new.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
 			ecore_resource.instances.add(mu.ecoreModelElement)
-			//ecore_resource.instances.addAll(mu.entryPoints)
+			//stdio.writeln("mu.ecoreModelElement: " + mu.ecoreModelElement.toString)
+			
 			mu.entryPoints.each{ e |
 				ecore_resource.instances.add(e)
-			}//ecore_resource.instances.addAll(mu.ecorePackages)
+			}
 			mu.ecorePackages.each{ p |
+				//stdio.writeln("I have found a package: " + p.toString)
 				ecore_resource.instances.add(p)
 			}
 			

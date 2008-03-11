@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.4 2008-02-08 08:00:49 ftanguy Exp $
+/* $Id: SetLinks.kmt,v 1.5 2008-03-11 09:35:34 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -23,6 +23,9 @@ aspect class ClassDefinition {
 		self.superType.each{ t |
 			if ( t.isInstanceOf(Class) ) then
 				var classDefinition : ClassDefinition init TypeHelper.new.getClassDefinition(t.asType(Class))
+				if classDefinition.ecoreModelElement == void then
+					//stdio.writeln("Class Def is nil" + classDefinition.name)
+				end
 				self.ecoreModelElement.eSuperTypes.add( classDefinition.ecoreModelElement )
 			end
 		}

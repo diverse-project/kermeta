@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.4 2008-02-22 10:58:36 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.5 2008-03-11 09:35:35 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -12,16 +12,19 @@ package kermeta::language::structure;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "../common/containment_traversable.kmt"
+//require "../common/ContainmentBasedActionPerformer_Kermeta.kmt"
 require "../helper/KM2EcoreHelper.kmt"
 require "../common/exception.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using ecore
+using km2ecore
 using km2ecore::helper::ecore
 using km2ecore::helper::kermeta
 using km2ecore::common::exception
 
 aspect class ModelingUnit {
-	operation createEcoreModelElement() : EAnnotation is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EAnnotation is do
 		var ecoreAnnotation : EAnnotation init EAnnotation.new
 		ecoreAnnotation.source := "ModelingUnit"
 		// Creation of the require entry
@@ -47,8 +50,14 @@ aspect class ModelingUnit {
 	end
 }
 
+aspect class Require {
+}
+
+aspect class Using {
+}
+
 aspect class Package {
-	operation createEcoreModelElement() : EPackage is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EPackage is do
 		var ecorePackage : EPackage init EPackage.new
 		ecorePackage.name := self.name
 		
@@ -65,7 +74,7 @@ aspect class Package {
 }
 
 aspect class PrimitiveType {
-	operation createEcoreModelElement() : EDataType is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EDataType is do
 		var ecoreDataType : EDataType init EDataType.new
 		ecoreDataType.name := self.name
 		//ecoreDataType.serializable
@@ -82,7 +91,7 @@ aspect class PrimitiveType {
 }
 
 aspect class Enumeration {
-	operation createEcoreModelElement() : EEnum is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EEnum is do
 		var ecoreEnumeration : EEnum init EEnum.new
 		ecoreEnumeration.name := self.name
 		//ecoreEnumeration.serializable
@@ -95,7 +104,7 @@ aspect class Enumeration {
 }
 
 aspect class EnumerationLiteral {
-	operation createEcoreModelElement() : EEnumLiteral is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EEnumLiteral is do
 		var ecoreEnumerationLiteral : EEnumLiteral init EEnumLiteral.new
 		ecoreEnumerationLiteral.name := self.name
 		ecoreEnumerationLiteral.literal := self.name
@@ -106,7 +115,7 @@ aspect class EnumerationLiteral {
 }
 
 aspect class ClassDefinition {
-	operation createEcoreModelElement() : EClass is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EClass is do
 		var ecoreClass : EClass init EClass.new
 		ecoreClass.interface := false
 		ecoreClass.name := self.name
@@ -116,7 +125,7 @@ aspect class ClassDefinition {
 }
 
 aspect class Operation {
-	operation createEcoreModelElement() : EOperation is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EOperation is do
 		var ecoreOperation : EOperation init EOperation.new
 		ecoreOperation.name := self.name
 		ecoreOperation.ordered := self.isOrdered
@@ -134,7 +143,7 @@ aspect class Operation {
 }
 
 aspect class Parameter {
-	operation createEcoreModelElement() : EParameter is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EParameter is do
 		var ecoreParameter : EParameter init EParameter.new
 		ecoreParameter.name := self.name
 		//ecoreParameter.ordered
@@ -148,7 +157,7 @@ aspect class Parameter {
 }
 
 aspect class Constraint {
-	operation createEcoreModelElement() : EAnnotation is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EAnnotation is do
 		// TODO : Fill the body using the java pretty printer
 		var body : String init ""
 				
@@ -168,9 +177,9 @@ aspect class Constraint {
  *
  */
 aspect class Property {
-	operation createEcoreModelElement() : EStructuralFeature is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EStructuralFeature is do
 		var ecoreStructuralFeature : EStructuralFeature
-		if ( self.isComposite and TypeHelper.new.isPrimitiveType(self.type.asType(Type)) ) then
+		if ( self.isComposite and TypeHelper.new.isPrimitiveType(self.type.asType(Type), context) ) then
 			ecoreStructuralFeature := EAttribute.new
 			//ecoreStructuralFeature.iD := 
 		else
@@ -202,7 +211,7 @@ aspect class Property {
 }
 
 aspect class ObjectTypeVariable {
-	operation createEcoreModelElement() : ETypeParameter is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : ETypeParameter is do
 		var ecoreTypeParameter : ETypeParameter init ETypeParameter.new
 		ecoreTypeParameter.name := self.name
 		result := ecoreTypeParameter
@@ -210,7 +219,7 @@ aspect class ObjectTypeVariable {
 }
 
 aspect class Tag {
-	operation createEcoreModelElement() : EAnnotation is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EAnnotation is do
 		var ecoreAnnotation : EAnnotation
 		if ( self.name == void ) then
 			ecoreAnnotation := EAnnotationHelper.new.create("kermeta", "documentation", self.~value)

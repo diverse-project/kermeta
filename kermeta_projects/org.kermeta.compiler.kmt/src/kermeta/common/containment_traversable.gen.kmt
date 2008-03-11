@@ -3,7 +3,6 @@ package kermeta;
 require kermeta
 
 using kermeta::language::structure
-using kermeta::standard
 
 package language {
 
@@ -552,7 +551,7 @@ aspect class VoidType {
 aspect class TypeDefinitionContainer {
 	method eachOwnedElement(func : <Object -> Object>) : Void from NamedElement is do
 		super(func)
-		stdio.writeln("TypeDefinitionContainer")
+		//stdio.writeln("TypeDefinitionContainer")
 		self.ownedTypeDefinition.each{ e |
 			func(e)
 		}

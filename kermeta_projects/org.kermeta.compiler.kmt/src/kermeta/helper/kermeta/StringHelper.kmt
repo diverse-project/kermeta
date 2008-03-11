@@ -1,4 +1,4 @@
-/* $Id: StringHelper.kmt,v 1.1 2008-02-27 15:29:49 cfaucher Exp $
+/* $Id: StringHelper.kmt,v 1.2 2008-03-11 09:35:30 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -13,7 +13,7 @@ using kermeta::standard
 
 aspect class String
 {
-	// Set to upper the first letter of a string
+	// Return a new string with the first letter in upper case of the given string
 	operation capName() : String is do
 		result := self.substring(0,1).toUpperCase + self.substring(1, self.size())
 	end
