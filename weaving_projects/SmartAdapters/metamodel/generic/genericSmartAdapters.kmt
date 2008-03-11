@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.19 2008-03-06 08:13:27 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.20 2008-03-11 14:33:42 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -250,7 +250,7 @@ package smartadapters
 			end
 			
 			/**
-			updateClone must be called after every binding
+			updateClone must be called after every binding 
 			*/
 			operation updateClones() is do
 				if(~aspect.structure != void) then
@@ -275,10 +275,30 @@ package smartadapters
 				}	
 			end
 			
+			operation cloneFromTemplate(handler : Object, realTemplate : Object) : Void is
+			do
+				var temp : Object init Object.clone(realTemplate)
+				cloned.put(realTemplate,temp)
+				clone.put(handler, temp)
+				removable.add(temp)
+			end
+			
+			operation cloneFromScratch(handler : Object) : Void is
+			do
+				converter.deleteConverted(handler)
+				var temp : Object init converter.getConverted(handler)
+				clone.put(handler, temp)
+				removable.add(temp)
+			end
+			
 			/**
 			 * This operation determines whether the handler should be cloned, 
 			 * from scratch or from an existing element (template != void),
-			 * according to its unicity type
+			 * according to its unicity type:
+			 * 		- non_unique: the handler is systematically cloned
+			 *		- unique: the handler is cloned iff the real object associated 
+			 *		to the handler or to the template (!=void) has not been already cloned
+			 * 		- on_Demand: cloned on demand
 			 */
 			operation cloneAgain(handler : Object, template : Object, type : uniqueType) : Void is do
 				var o : Object
@@ -288,15 +308,9 @@ package smartadapters
 			
 				if (type == uniqueType.non_unique) then
 					if o != void then //non unique from template
-						var temp : Object init Object.clone(o)
-						cloned.put(o,temp)
-						clone.put(handler, temp)
-						removable.add(temp)
+						cloneFromTemplate(handler, o)
 					else
-						converter.deleteConverted(handler)
-						var temp : Object init converter.getConverted(handler)
-						clone.put(handler, temp)
-						removable.add(temp)
+						cloneFromScratch(handler)
 					end
 				else
 					if type == uniqueType.unique then
@@ -304,17 +318,11 @@ package smartadapters
 							if cloned.containsKey(o) then //real element already cloned
 								clone.put(handler,cloned.getValue(o))
 							else
-								var temp : Object init Object.clone(o)
-								cloned.put(o,temp)
-								clone.put(handler, temp)
-								removable.add(temp)
+								cloneFromTemplate(handler,o)
 							end
 						else 
 							if not clone.containsKey(handler) then //unique from scratch
-								converter.deleteConverted(handler)
-								var temp : Object init converter.getConverted(handler)
-								clone.put(handler, temp)
-								removable.add(temp)
+								cloneFromScratch(handler)
 							end
 						end
 					else
@@ -322,15 +330,9 @@ package smartadapters
 						update := stdio.read("$>clone "+handler.toString+" (true/false) :").toBoolean
 						if update then
 							if o != void then //on demand from template
-								var temp : Object init Object.clone(o)
-								cloned.put(o,temp)
-								clone.put(handler, temp)
-								removable.add(temp)
+								cloneFromTemplate(handler,o)
 							else //on demand from scratch
-								converter.deleteConverted(handler)
-								var temp : Object init converter.getConverted(handler)
-								clone.put(handler, temp)
-								removable.add(temp)
+								cloneFromScratch(handler)
 							end	
 						else
 							if o != void then
@@ -343,7 +345,7 @@ package smartadapters
 			
 			
 			/**
-			 * This operation is called by domain-specific set* adaptations,
+			 * This reflective operation is called by domain-specific set* adaptations,
 			 * for all the multiple properties (upper > 1) 
 			 */
 			operation setMultipleProperty(prty : Object, o : Object) : Void is do
@@ -361,7 +363,7 @@ package smartadapters
 			end
 
 			/**
-			 * This operation is called by domain-specific set* adaptations,
+			 * This reflective operation is called by domain-specific set* adaptations,
 			 * for all the single properties (upper = 1) 
 			 */			
 			operation setSingleProperty(o : Object, old : Object) : Object is do
@@ -373,7 +375,7 @@ package smartadapters
 			end
 
 			/**
-			 * This operation is called by domain-specific unset* adaptations,
+			 * This reflective operation is called by domain-specific unset* adaptations,
 			 * for all the single properties (upper = 1) 
 			 */
 			operation unsetSingleProperty(o : Object, old : Object) : Object is do
@@ -391,7 +393,7 @@ package smartadapters
 			end
 
 			/**
-			 * This operation is called by domain-specific unset* adaptations,
+			 * This reflective operation is called by domain-specific unset* adaptations,
 			 * for all the multiple properties (upper > 1) 
 			 */
 			operation unsetMultipleProperty(prty : Object, o : Object) : Void is do
