@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.17 2008-03-07 13:49:42 bmorin Exp $
+/* $Id: weaver.kmt,v 1.18 2008-03-11 14:34:29 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -51,12 +51,21 @@ class Weaver
 						}
 		stdio.writeln(" OK!")
 
-		stdio.write("Checking adaptations...")
 		adapter.checkAllInvariants
-		/*var isChecked:EBoolean init true
-		adapter.adapt.each{a | isChecked:=(isChecked and a.check)}*/
 		
-		if (adapter.adapt.size>0/* and isChecked*/) then
+		var doWeave : Boolean
+		var doUnweave : Boolean
+		var doMatch : Boolean
+		var displayInfo : Boolean
+		
+		stdio.writeln("Initializing default actions")
+		doWeave := stdio.read("$>default value for doWeave ? (true/false): ").toBoolean
+		doUnweave := stdio.read("$>default value for doUnweave ? (true/false): ").toBoolean
+		doMatch := stdio.read("$>default value for doMatch ? (true/false): ").toBoolean
+		displayInfo := stdio.read("$>display weaving info ? (y/n): ").toBoolean
+		stdio.writeln("")
+		
+		if (adapter.adapt.size>0) then
 			stdio.writeln(" OK!")
 			adapter.initClone
 			
@@ -76,7 +85,7 @@ class Weaver
 				var i : Integer init 0
 				var binding : Hashtable<Object, Object>			
 				var doAction : Boolean
-			 	adapter.setDisplayInfo(true)
+			 	adapter.setDisplayInfo(displayInfo)
 			 	//iterating on bindings
 				from iteBindings until iteBindings.isOff loop 
 					 doAction := false
@@ -92,9 +101,9 @@ class Weaver
 					 stdio.writeln("")				 
 					 //interaction with user
 					 do
-						 doAction := stdio.read("$>weave the aspect for this binding ? (true/FALSE): ").toBoolean
+						 doAction := stdio.read("$>weave the aspect for this binding ? (y/n/default=any): ").toBoolean
 					 rescue (e : kermeta::exceptions::Exception)
-					 	doAction := false
+					 	doAction := doWeave
 					 end
 					 //apply composition protocol for the current binding
 					 if doAction then
@@ -106,9 +115,9 @@ class Weaver
 					 	stdio.writeln("")
 					 	//interaction with user
 					 	do
-					 		doAction := stdio.read("$>unweave the aspect for this binding ? (TRUE/false): ").toBoolean
+					 		doAction := stdio.read("$>unweave the aspect for this binding ? (y/n/default=any): ").toBoolean
 					 	rescue (e : kermeta::exceptions::Exception)
-					 		doAction := true
+					 		doAction := doUnweave
 					 	end
 					 	if doAction then
 					 		stdio.writeln("----------------------------")
@@ -122,9 +131,9 @@ class Weaver
 					 	if (iteBindings.hasNext and not doAction) then //weaving + unweaving = no change
 					 		//interaction with user
 						 	do
-						 		doAction := stdio.read("$>execute pattern matching ? (TRUE/false): ").toBoolean
+						 		doAction := stdio.read("$>execute pattern matching ? (y/n/default=any): ").toBoolean
 						 	rescue (e : kermeta::exceptions::Exception)
-						 		doAction := true
+						 		doAction := doMatch
 						 	end
 						 	//executing pattern matching again 
 						 	//(the composition might have change the base model)
