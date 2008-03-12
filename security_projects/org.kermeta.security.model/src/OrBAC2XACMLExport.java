@@ -279,7 +279,6 @@ public class OrBAC2XACMLExport {
 
         }
 
-
         return rulesTmp;
 
     }
