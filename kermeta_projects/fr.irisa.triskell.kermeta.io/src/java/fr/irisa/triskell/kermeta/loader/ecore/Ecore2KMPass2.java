@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.31 2008-02-18 08:19:21 ftanguy Exp $
+/* $Id: Ecore2KMPass2.java,v 1.32 2008-03-12 15:53:25 cfaucher Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -234,7 +234,12 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		String type_name = ((EDataType)node).getInstanceClassName();
 		
 		if (node.getEAnnotation(KM2Ecore.ANNOTATION)!=null) {// IMPORTANT!
-			type_name = (String)node.getEAnnotation(KM2Ecore.ANNOTATION).getDetails().get(KM2Ecore.ANNOTATION_ALIAS_DETAILS);
+			String s = (String)node.getEAnnotation(KM2Ecore.ANNOTATION).getDetails().get(KM2Ecore.ANNOTATION_ALIAS_DETAILS);
+			if ( s != null )
+				type_name = s;
+			else if (datas.isAType(type_name)) {
+				type_name = datas.getTypeName(type_name);
+			}
 		}//			 primitive_types_mapping : { javatype : kermetatype }
 		else if (datas.isAType(type_name)) {
 			type_name = datas.getTypeName(type_name);

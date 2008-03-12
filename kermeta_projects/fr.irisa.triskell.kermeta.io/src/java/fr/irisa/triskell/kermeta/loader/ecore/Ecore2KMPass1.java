@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.28 2008-03-05 10:51:15 ftanguy Exp $
+/*$Id: Ecore2KMPass1.java,v 1.29 2008-03-12 15:53:25 cfaucher Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -313,7 +314,8 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			if (eAnnot.getDetails().containsKey(KM2Ecore.ANNOTATION_ISCOMPOSITE_DETAILS)) {
 				String res = (String)eAnnot.getDetails().get(KM2Ecore.ANNOTATION_ISCOMPOSITE_DETAILS);
 				isc = Boolean.valueOf(res);
-			}
+			} else if ( node.isDerived() )
+				isc = false;
 		} else if ( node.isDerived() )
 			isc = false;
 		
@@ -407,6 +409,8 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			}
+		} else {
+			external = ! KermetaModelHelper.NamedElement.qualifiedName(getCurrentPackage()).equals( EcoreHelper.getQualifiedName( (ENamedElement) o.eContainer()) );
 		}
 		return external;
 	}
