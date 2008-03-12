@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config defaultPDP="pdp" defaultAttributeFactory="attr"
+          defaultCombiningAlgFactory="comb" defaultFunctionFactory="func">
+    <pdp name="pdp">
+      <attributeFinderModule class="com.sun.xacml.finder.impl.CurrentEnvModule"/>
+      <attributeFinderModule class="com.sun.xacml.finder.impl.SelectorModule"/>
+      <policyFinderModule class="com.sun.xacml.finder.impl.FilePolicyModule">
+        <list>
+          <string>lms.xml</string>
+        </list>
+      </policyFinderModule>
+    </pdp>
+    <attributeFactory name="attr" useStandardDatatypes="true"/>
+    <combiningAlgFactory name="comb" useStandardAlgorithms="true"/>
+    <functionFactory name="func" useStandardFunctions="true"/>
+</config>

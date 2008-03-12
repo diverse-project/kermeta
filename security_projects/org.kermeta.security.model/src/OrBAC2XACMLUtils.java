@@ -234,7 +234,7 @@ public class OrBAC2XACMLUtils {
     }
 
 
-    private static PolicySet createPolicySet(List rules) throws URISyntaxException, UnknownIdentifierException {
+    private static PolicySet createPolicySet(List rules , String description) throws URISyntaxException, UnknownIdentifierException {
 
         PolicySet policySet;
 
@@ -247,9 +247,7 @@ public class OrBAC2XACMLUtils {
         RuleCombiningAlgorithm combiningAlg =
                 (RuleCombiningAlgorithm) (factory.createAlgorithm(combiningAlgId));
 
-        // add a description for the policy
-        String description =
-                "This policy applies to the LMS system ";
+        
 
         // create the target for the policy (applies to all subject, resources and actions
         Target policyTarget = new Target(null, null, null);
@@ -267,7 +265,6 @@ public class OrBAC2XACMLUtils {
         PolicyCombiningAlgorithm combiningAlgP =
                 (PolicyCombiningAlgorithm) (factory.createAlgorithm(combiningAlgIdPol));
         policySet = new PolicySet(new URI("LMSPolicySet"), combiningAlgP, policyTarget, pols);
-
 
         return policySet;
     }
@@ -361,7 +358,7 @@ public class OrBAC2XACMLUtils {
      * @param rules hte list of rules in ruleName, status, rule, act, view, context
      * @param fileName  the name of the file
      */
-    public static void builtXACMLFile(String[][] rules, String fileName) {
+    public static void builtXACMLFile(String[][] rules, String fileName, String description) {
 
 //------ generate the policy file
         List rulesXACML = new ArrayList();
@@ -370,7 +367,9 @@ public class OrBAC2XACMLUtils {
 
         for (int i = 0; i < rules.length; i++) {
 
-        rulesXACML.add(createRule(rules[i][0], rules[i][1], rules[i][2], rules[i][3], rules[i][4], rules[i][5]));
+       
+        rulesXACML.add(createRule(rules[i][0].toUpperCase(), rules[i][1].toUpperCase(), rules[i][2].toUpperCase(),
+        		rules[i][3].toUpperCase(), rules[i][4].toUpperCase(), rules[i][5].toUpperCase()));
         }
 
         // default prohibition rule Is added at the end
@@ -381,7 +380,7 @@ public class OrBAC2XACMLUtils {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         // create the policyset
-        PolicySet policySet = createPolicySet(rulesXACML);
+        PolicySet policySet = createPolicySet(rulesXACML, description);
 
         // encodes it
         policySet.encode(baos, new Indenter());
@@ -392,8 +391,8 @@ public class OrBAC2XACMLUtils {
         content.insert(content.indexOf("<PolicySet ") + 11, "xmlns=\"urn:oasis:names:tc:xacml:1.0:policy\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
 
         // for debugging
-        System.out.println("Generated XACML file : ");
-        System.out.println(content);
+        // System.out.println("Generated XACML file : ");
+        // System.out.println(content);
 
         // writing to xml file
         FileOutputStream fos = new FileOutputStream(fileName);
@@ -422,7 +421,7 @@ public class OrBAC2XACMLUtils {
         rules[3] = new String[]{"R4", "permission", "director", "modify", "account", "default"};
         rules[4] = new String[]{"R5", "permission", "director", "create", "account", "working-days"};
 
-        builtXACMLFile(rules,"lms.xml");
+        builtXACMLFile(rules,"lms.xml", "LMS Policy");
 
         //------ load the policy file using the configuraition file
 
