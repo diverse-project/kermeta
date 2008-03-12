@@ -1,4 +1,4 @@
-/* $Id: Profile.kmt,v 1.4 2008-03-10 15:22:08 gperroui Exp $
+/* $Id: Profile.kmt,v 1.5 2008-03-12 13:24:59 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -202,6 +202,7 @@ end
 /** This method deals with relationship establishment*/
 	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
 	trace.traceLog("Entering Class : Pass2")
+	trace.traceLog("class name " + self.name)
 	if self.container != void then
 		trace.traceLog("Container is not void, trying to retreive it....")
 		var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
@@ -308,14 +309,28 @@ if self.type.isVoid
 			trace.traceLog("UML primitive property or enumeration... " + self.type.name)
 			att := EAttribute.new
 			att.name := self.name
+			// registering the primitive type even if it has not been imported (more robust...)
+			//if self.type.isInstanceOf(uml::PrimitiveType)  then
+				//trace.registerEcoreDataType(self.type.name)
+			//end
 			// managing multiplicities
 			if self.lowerValue != void then
-				trace.traceLog("lower bound : " + self.lowerValue.asType(uml::LiteralInteger).~value.toString)
-				att.lowerBound := self.lowerValue.asType(uml::LiteralInteger).~value
+				if self.lowerValue.isInstanceOf(uml::LiteralInteger)  then
+					trace.traceLog("lower bound : " + self.lowerValue.asType(uml::LiteralInteger).~value.toString)
+					att.lowerBound := self.lowerValue.asType(uml::LiteralInteger).~value
+				else
+					trace.traceLog("Cannot retrveive lower bound correctly assumes '0' instead... ")
+					att.lowerBound := 0
+				end
 			end
 			if self.upperValue != void then
-				trace.traceLog("upper bound :" + self.upperValue.asType(uml::LiteralUnlimitedNatural).~value.toString) 
-				att.upperBound := self.upperValue.asType(uml::LiteralUnlimitedNatural).~value 
+				if self.upperValue.isInstanceOf(uml::LiteralUnlimitedNatural) then
+					trace.traceLog("upper bound :" + self.upperValue.asType(uml::LiteralUnlimitedNatural).~value.toString) 
+					att.upperBound := self.upperValue.asType(uml::LiteralUnlimitedNatural).~value
+				else
+					trace.traceLog("Cannot retrveive upper bound correctly assumes '*' instead... ")
+					att.upperBound := -1
+				end 
 			end
 			trace.traceLog("type qualified name "+self.type.getQualifiedName)
 			result := att
@@ -329,12 +344,22 @@ if self.type.isVoid
 				ref:= EReference.new
 				ref.name := self.name
 				if self.lowerValue != void then
-					trace.traceLog("lower bound " + self.lowerValue.asType(uml::LiteralInteger).~value.toString)
-					ref.lowerBound := self.lowerValue.asType(uml::LiteralInteger).~value
+					if self.lowerValue.isInstanceOf(uml::LiteralInteger)  then
+						trace.traceLog("lower bound : " + self.lowerValue.asType(uml::LiteralInteger).~value.toString)
+						ref.lowerBound := self.lowerValue.asType(uml::LiteralInteger).~value
+					else
+						trace.traceLog("Cannot retrveive lower bound correctly assumes '0' instead... ")
+						ref.lowerBound := 0
+					end
 				end
 				if self.upperValue != void then
-					trace.traceLog("upper bound :" + self.upperValue.asType(uml::LiteralUnlimitedNatural).~value.toString)	
-					ref.upperBound := self.upperValue.asType(uml::LiteralUnlimitedNatural).~value 	
+					if self.upperValue.isInstanceOf(uml::LiteralUnlimitedNatural) then
+						trace.traceLog("upper bound :" + self.upperValue.asType(uml::LiteralUnlimitedNatural).~value.toString) 
+						ref.upperBound := self.upperValue.asType(uml::LiteralUnlimitedNatural).~value
+					else
+						trace.traceLog("Cannot retrveive upper bound correctly assumes '*' instead... ")
+						ref.upperBound := -1
+					end  	
 				end
 				result := ref
 			end
@@ -536,11 +561,11 @@ reference obj: EObject
 /** This method deals with creation of new Ecore objects*/
 method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
 trace.traceLog("Entering PackageImport : Pass1")
+trace.traceLog("imported package name: " + self.importedPackage.name)
 obj := EObject.new
-if self.importedPackage.name.indexOf("uml") != -1 then
-	trace.traceLog("Registering elements via PackageImport: " + self.importedPackage.name) 
+if self.importedPackage.name.indexOf("UMLPrimitiveTypes") != -1 then
 	//trace.traceLog("Imported Package size: " + self.importedPackage.packagedElement.select{c|c.isInstanceOf(uml::Classifier)}.size.toString())
-	//.each{c|trace.registerBaseType(c.asType(uml::Classifier).name)}
+	 self.importedPackage.packagedElement.each{c|trace.registerEcoreDataType(c.asType(uml::PrimitiveType).name)}
 end
 // registering elements in the trace to keep track of them...
 	//var qName: String init self.getQualifiedName
@@ -680,6 +705,7 @@ end
 
 method toEcorePass2(trace: UMLProfile2EcoreTrace): Void is do
 trace.traceLog("Entering ProfileApplication : Pass2")
+pa.containingResource.instances.remove(pa)
 trace.traceLog("Entering ProfileApplication : Pass2")
 end 
 

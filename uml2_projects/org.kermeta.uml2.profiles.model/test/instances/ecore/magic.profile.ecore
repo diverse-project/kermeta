@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EPackage name="MagicDrawProfile" nsURI="http://MagicDrawProfile" nsPrefix="MagicDrawProfile">
+    <eClassifiers xsi:type="ecore:EEnum" name="typeModifierEnumeration">
+      <eLiterals name="&amp;"/>
+      <eLiterals name="*" value="1"/>
+      <eLiterals name="[]" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="tagGroup">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Property"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DiagramInfo" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="Creationdate" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="Author" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="Modificationdate" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Diagram" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Element" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TODO_Owner" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="TODO" upperBound="0"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="useCaseView" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="useCaseViewID" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Diagram" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="setter">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="gettersetterforattribute"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Operation" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Operation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HyperlinkOwner" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="hyperlinkModel" upperBound="-1"
+          eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="hyperlinkTextActive"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="hyperlinkModelActive"
+          eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="hyperlinkText" upperBound="-1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="deploymentView" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="deploymentViewID" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Diagram" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="constructor">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Operation" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Operation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="designModel" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="designModelID" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Diagram" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="typeModifier" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeModifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="destructor">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Operation" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Operation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="fileView">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="getter">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="gettersetterforattribute"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Operation" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Operation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="implementationModel" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementationModelID"
+          lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Diagram" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="conceptualView" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="conceptualViewID" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Diagram" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="processView" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="processViewID" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Diagram" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="useCaseModel">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Model" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Model"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SDDSubsystem" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="subsystemResources" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="subsystemInteractions"
+          lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Package"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Component"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="autoGeneratedName" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//NamedElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="iconHolder">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Enumeration" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Enumeration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="hasGroupName">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Property"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupName"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="virtual">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Dependency" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Dependency"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="details" upperBound="-1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="n"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="auxiliaryResource" eSuperTypes="#/0/InvisibleStereotype">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Package"/>
+    </eClassifiers>
+    <eSubpackages name="datatypes" nsURI="http://MagicDrawProfile/datatypes" nsPrefix="datatypes"/>
+  </ecore:EPackage>
+  <ecore:EObject/>
+  <ecore:EClass/>
+</xmi:XMI>

@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2Ecore.kmt,v 1.5 2008-03-10 15:22:08 gperroui Exp $
+/* $Id: UMLProfile2Ecore.kmt,v 1.6 2008-03-12 13:24:59 gperroui Exp $
  * Creation date: November 29, 2007
  * License: EPL
  * Copyright:
@@ -20,7 +20,7 @@ require "ToEcore.kmt"
 require "UMLProfile2EcoreTrace.kmt"
 require "../utils/KLog.kmt"
 require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/persistence/UMLResource.kmt"
-require "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BProfile.ecore"
+//require "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BProfile.ecore"
 
 // generated Ecore form the UML model via EMF to bootstrap MARTE.profile.uml loading for kermeta
 //require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE_Library.ecore" 
@@ -39,14 +39,14 @@ class Main
 {
  
  	operation standaloneTestMain() : Void is do
- 		main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/UML_Standard_Profile.MagicDraw_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/magic.profile.ecore",true)
- 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/UML_Standard_Profile.UML_Standard_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/UML_Standard_Profile.UML_Standard_Profile.profile.ecore",true)
+ 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/UML_Standard_Profile.MagicDraw_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/UML_Standard_Profile.MagicDraw_Profile.profile.ecore",true)
+ 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/UML_Standard_Profile.UML_Standard_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/UML_Standard_Profile.UML_Standard_Profile.profile.ecore",true)
  		//main("platform:/resource/org.kermeta.uml2.profiles.model/model/uml/BasicClock_nested.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/bnestedclock.profile.ecore",false)
- 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.ecore",true)
- 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/UML_Standard_Profile.Validation_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/UML_Standard_Profile.Validation_Profile.profile.ecore",true)
+ 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.ecore",true)
+ 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/UML_Standard_Profile.Validation_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/UML_Standard_Profile.Validation_Profile.profile.ecore",true)
  		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/AProfile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/AProfile.ecore",true)
  		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BProfile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BProfile.ecore",true)
- 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/MARTE.profile.uml","platform:/resource/org.kermeta.uml2.profiles.model/test/instances/MARTE.profile.ecore",true)
+ 		main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/MARTE.profile.uml","platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/MARTE.profile.ecore",true)
  	end
  	
 	operation main(input : String, output : String, isProfiled: Boolean) : Void is do 

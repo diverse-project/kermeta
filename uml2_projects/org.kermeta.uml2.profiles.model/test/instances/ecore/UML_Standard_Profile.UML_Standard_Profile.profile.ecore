@@ -5,148 +5,148 @@
     nsURI="http://UMLStandardProfile" nsPrefix="UMLStandardProfile">
   <eClassifiers xsi:type="ecore:EClass" name="metamodel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Model" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Model"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Model"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="responsibility">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Usage" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Usage"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Usage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="create">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
-        ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//BehavioralFeature"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Usage" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Usage"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Usage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="implement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Component"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Component"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="source" eSuperTypes="#//file">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Artifact"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Artifact"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="instantiate">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Usage" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Usage"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Usage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="derive">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Abstraction"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Abstraction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="executable" eSuperTypes="#//file">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Artifact"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Artifact"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="modelLibrary">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Package"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Package"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="call">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Usage" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Usage"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Usage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="specification">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Classifier" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Classifier"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Classifier"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="realization">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Classifier" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Classifier"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Classifier"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="process">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Component"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Component"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="service">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Component"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Component"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="utility">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Class"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="framework">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Package"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Package"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="library" eSuperTypes="#//file">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Artifact"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Artifact"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="boundary">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Class"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="document" eSuperTypes="#//file">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Artifact"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Artifact"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="send">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Usage" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Usage"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Usage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="implementationClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Class"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="script" eSuperTypes="#//file">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Artifact"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Artifact"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="buildComponent">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Component"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Component"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="auxiliary">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Class"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="systemModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Model" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Model"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Model"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Class"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="assembly">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Dependency" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Dependency"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Dependency"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="destroy">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
-        ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//BehavioralFeature"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="subsystem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Component"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Component"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="control">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Class"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="focus">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Class"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="delegate">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Dependency" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Dependency"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Dependency"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="refine">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Abstraction"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Abstraction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="type">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Class"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="file">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Artifact"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Artifact"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="trace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction" ordered="false"
-        lowerBound="1" eType="ecore:EClass platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Abstraction"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Abstraction"/>
   </eClassifiers>
 </ecore:EPackage>
