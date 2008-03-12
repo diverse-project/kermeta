@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="ASCII"?>
 <acm:Policy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:acm="http://www.kermeta.org/acm" xsi:schemaLocation="http://www.kermeta.org/acm acm.ecore" name="LibraryOrBAC">
-  <elements name="Student">
-    <type href="OrBAC.xmi#//@elementTypes.1"/>
-  </elements>
   <elements name="Library">
     <type href="OrBAC.xmi#//@elementTypes.0"/>
-  </elements>
-  <elements name="Borrow">
-    <type href="OrBAC.xmi#//@elementTypes.2"/>
-  </elements>
-  <elements name="ModifyAccount">
-    <type href="OrBAC.xmi#//@elementTypes.2"/>
   </elements>
   <elements name="Book">
     <type href="OrBAC.xmi#//@elementTypes.3"/>
   </elements>
-  <elements name="UserAccount">
+  <elements name="BorrowerAccount">
     <type href="OrBAC.xmi#//@elementTypes.3"/>
   </elements>
   <elements name="WorkingDays">
     <type href="OrBAC.xmi#//@elementTypes.4"/>
   </elements>
-  <elements name="Hollydays">
+  <elements name="Holidays">
     <type href="OrBAC.xmi#//@elementTypes.4"/>
   </elements>
   <elements name="Default">
@@ -35,23 +26,185 @@
     <children name="Secretary">
       <type href="OrBAC.xmi#//@elementTypes.1"/>
     </children>
+    <children name="Administrator">
+      <type href="OrBAC.xmi#//@elementTypes.1"/>
+    </children>
   </elements>
-  <elements name="CreateAccount">
+  <elements name="Borrower">
+    <type href="OrBAC.xmi#//@elementTypes.1"/>
+    <children name="Student">
+      <type href="OrBAC.xmi#//@elementTypes.1"/>
+    </children>
+    <children name="Teacher">
+      <type href="OrBAC.xmi#//@elementTypes.1"/>
+    </children>
+  </elements>
+  <elements name="MaintenanceDay">
+    <type href="OrBAC.xmi#//@elementTypes.4"/>
+  </elements>
+  <elements name="PersonnelAccount">
+    <type href="OrBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="BorrowerActivity">
+    <type href="OrBAC.xmi#//@elementTypes.2"/>
+    <children name="BorrowBook">
+      <type href="OrBAC.xmi#//@elementTypes.2"/>
+    </children>
+  </elements>
+  <elements name="GiveBackBook">
     <type href="OrBAC.xmi#//@elementTypes.2"/>
   </elements>
-  <rules name="R1" parameters="//@elements.1 //@elements.0 //@elements.2 //@elements.4 //@elements.6">
+  <elements name="ReserveBook">
+    <type href="OrBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="AdminActivity">
+    <type href="OrBAC.xmi#//@elementTypes.2"/>
+    <children name="PersonnelActivity">
+      <type href="OrBAC.xmi#//@elementTypes.2"/>
+      <children name="DeliverBook">
+        <type href="OrBAC.xmi#//@elementTypes.2"/>
+      </children>
+      <children name="FixBook">
+        <type href="OrBAC.xmi#//@elementTypes.2"/>
+      </children>
+      <children name="ConsultBorrowerAccount">
+        <type href="OrBAC.xmi#//@elementTypes.2"/>
+      </children>
+    </children>
+    <children name="ManageAccess">
+      <type href="OrBAC.xmi#//@elementTypes.2"/>
+    </children>
+    <children name="CreateAccount">
+      <type href="OrBAC.xmi#//@elementTypes.2"/>
+    </children>
+    <children name="ModifyAccount">
+      <type href="OrBAC.xmi#//@elementTypes.2"/>
+    </children>
+  </elements>
+  <rules name="R1" parameters="//@elements.7 //@elements.10 //@elements.1 //@elements.3">
     <type href="OrBAC.xmi#//@ruleTypes.0"/>
   </rules>
-  <rules name="R2" parameters="//@elements.1 //@elements.0 //@elements.2 //@elements.4 //@elements.7">
-    <type href="OrBAC.xmi#//@ruleTypes.1"/>
-  </rules>
-  <rules name="R3" parameters="//@elements.1 //@elements.9/@children.1 //@elements.2 //@elements.4 //@elements.8">
-    <type href="OrBAC.xmi#//@ruleTypes.1"/>
-  </rules>
-  <rules name="R4" parameters="//@elements.1 //@elements.9 //@elements.3 //@elements.5 //@elements.6">
+  <rules name="R2" parameters="//@elements.7/@children.0 //@elements.10 //@elements.1 //@elements.3">
     <type href="OrBAC.xmi#//@ruleTypes.0"/>
   </rules>
-  <rules name="R5" parameters="//@elements.1 //@elements.9/@children.0 //@elements.10 //@elements.5 //@elements.6">
+  <rules name="R3" parameters="//@elements.7/@children.1 //@elements.10 //@elements.1 //@elements.3">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R4" parameters="//@elements.7 //@elements.10/@children.0 //@elements.1 //@elements.3">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R5" parameters="//@elements.7 //@elements.12 //@elements.1 //@elements.3">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R6" parameters="//@elements.7 //@elements.11 //@elements.1 //@elements.3">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R7" parameters="//@elements.7/@children.0 //@elements.10/@children.0 //@elements.1 //@elements.3">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R8" parameters="//@elements.7/@children.0 //@elements.12 //@elements.1 //@elements.3">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R9" parameters="//@elements.7/@children.0 //@elements.11 //@elements.1 //@elements.3">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R10" parameters="//@elements.7/@children.1 //@elements.10/@children.0 //@elements.1 //@elements.3">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R11" parameters="//@elements.7/@children.1 //@elements.12 //@elements.1 //@elements.3">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R12" parameters="//@elements.7/@children.1 //@elements.11 //@elements.1 //@elements.3">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R13" parameters="//@elements.7 //@elements.10 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R14" parameters="//@elements.7/@children.0 //@elements.10 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R15" parameters="//@elements.7/@children.1 //@elements.10 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R16" parameters="//@elements.7 //@elements.10/@children.0 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R17" parameters="//@elements.7 //@elements.12 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R18" parameters="//@elements.7 //@elements.11 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R19" parameters="//@elements.7/@children.0 //@elements.10/@children.0 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R20" parameters="//@elements.7/@children.0 //@elements.12 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R21" parameters="//@elements.7/@children.0 //@elements.11 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R22" parameters="//@elements.7/@children.1 //@elements.10/@children.0 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R23" parameters="//@elements.7/@children.1 //@elements.12 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R24" parameters="//@elements.7/@children.1 //@elements.11 //@elements.1 //@elements.4">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R25" parameters="//@elements.6/@children.2 //@elements.13/@children.1 //@elements.9 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R26" parameters="//@elements.6/@children.2 //@elements.13/@children.2 //@elements.2 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R27" parameters="//@elements.6/@children.2 //@elements.13/@children.3 //@elements.2 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R28" parameters="//@elements.6/@children.2 //@elements.13/@children.0/@children.2 //@elements.2 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R29" parameters="//@elements.6/@children.2 //@elements.13/@children.0/@children.1 //@elements.1 //@elements.8">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R30" parameters="//@elements.6/@children.2 //@elements.13/@children.0/@children.0 //@elements.1 //@elements.8">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R31" parameters="//@elements.6/@children.1 //@elements.13/@children.1 //@elements.9 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R32" parameters="//@elements.6/@children.1 //@elements.13/@children.2 //@elements.2 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R33" parameters="//@elements.6/@children.1 //@elements.13/@children.3 //@elements.2 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R34" parameters="//@elements.6/@children.1 //@elements.13/@children.0/@children.2 //@elements.2 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R35" parameters="//@elements.6/@children.1 //@elements.13/@children.0/@children.1 //@elements.1 //@elements.8">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R36" parameters="//@elements.6/@children.1 //@elements.13/@children.0/@children.0 //@elements.1 //@elements.8">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R37" parameters="//@elements.6/@children.0 //@elements.13/@children.0/@children.2 //@elements.2 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R38" parameters="//@elements.6/@children.0 //@elements.13/@children.1 //@elements.9 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R39" parameters="//@elements.6/@children.0 //@elements.13/@children.2 //@elements.2 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R40" parameters="//@elements.6/@children.0 //@elements.13/@children.3 //@elements.2 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R41" parameters="//@elements.6/@children.0 //@elements.13/@children.0/@children.1 //@elements.1 //@elements.5">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R42" parameters="//@elements.6/@children.0 //@elements.13/@children.0/@children.0 //@elements.1 //@elements.5">
     <type href="OrBAC.xmi#//@ruleTypes.0"/>
   </rules>
   <type href="OrBAC.xmi#/"/>
