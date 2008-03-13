@@ -1,4 +1,4 @@
-/* $Id: EAnnotationHelper.kmt,v 1.2 2008-02-01 09:40:46 ftanguy Exp $
+/* $Id: EAnnotationHelper.kmt,v 1.3 2008-03-13 17:25:34 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,11 +14,14 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 using kermeta::language::structure
 using ecore
 
-class EAnnotationHelper
-{
+class EAnnotationHelper {
+	
+	operation createKermetaEAnnotation(key : String, ~value : String) : EAnnotation is do
+		result := create("kermeta", key, ~value)
+	end
 
 	operation createAbstract() : EAnnotation is do
-		result := create("kermeta", "isAbstract", "true")
+		result := createKermetaEAnnotation(KermetaEAnnotationKey.isAbstract, "true")
 	end
 
 	operation create(source : String, key : String, ~value : String) : EAnnotation is do 
@@ -34,4 +37,9 @@ class EAnnotationHelper
 	operation addAnnotationGenModelImpl( eModelElement : EModelElement , body : String) : Void is do
 		eModelElement.eAnnotations.add(create("http://www.eclipse.org/emf/2002/GenModel", "body", body))
 	end
+}
+
+/** Enumeration that lists the different keys among the Kermeta annotation in the Ecore side */
+enumeration KermetaEAnnotationKey {
+	isAbstract;
 }
