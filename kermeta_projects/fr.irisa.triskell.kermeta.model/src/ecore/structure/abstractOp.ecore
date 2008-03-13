@@ -6,7 +6,7 @@
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
     <eClassifiers xsi:type="ecore:EClass" name="Operation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//structure/Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Boolean stating whether the Operation is abstract&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>

@@ -7,53 +7,53 @@
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//behavior/Expression"/>
     <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//behavior/Literal">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * This expression is a literal representing an Integer value&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//structure/Integer">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * The concrete value represented by this literal&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//behavior/Literal">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * This expression is a literal representing a String value, typically : &quot;my string&quot;&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//structure/String">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * The concrete value represented by this literal&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//behavior/Literal">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * This expression is a literal representing a Boolean value, typically : true or false keyword&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//structure/Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * The concrete value represented by this literal&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypeLiteral" eSuperTypes="#//behavior/Literal">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * This expression is a literal representing a Type.&#xA; * for example, in &#xA; *    Integer.new&#xA; * Integer is a type literal representing the type kermeta::standard::Integer&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="typeref" lowerBound="1"
           eType="#//behavior/TypeReference" containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * The type refered by this literal&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypeReference">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * TypeReference refers to the type used in a variable declaration&#xA; */"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="VoidLiteral" eSuperTypes="#//behavior/Literal">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * This class is used to represent the special expression void&#xA; */"/>
       </eAnnotations>
     </eClassifiers>

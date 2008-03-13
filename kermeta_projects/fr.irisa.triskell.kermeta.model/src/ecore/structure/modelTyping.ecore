@@ -10,7 +10,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTypeBinding" upperBound="-1"
           eType="#//structure/TypeVariableBinding" containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * To be written #################################&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
@@ -19,62 +19,57 @@
     <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable" eSuperTypes="#//structure/TypeVariable"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypeVariableBinding"/>
     <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#//structure/Type #//structure/TypeDefinition">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Type of a model, consisting of a set of included type definitions&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="includedTypeDefinition"
           upperBound="-1" eType="#//structure/TypeDefinition">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * To be written #######################################&#xA; */&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="VirtualTypeContainer" abstract="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable" eSuperTypes="#//structure/TypeVariable">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * To be written #################################&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="virtualType" upperBound="-1"
           eType="#//structure/VirtualType" containment="true" eOpposite="#//structure/VirtualType/modelType">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * To be written #################################&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable" eSuperTypes="#//structure/VirtualTypeContainer #//structure/TypeVariable">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="/**&#xA; * To be written #################################&#xA; */"/>
-      </eAnnotations>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="VirtualType" eSuperTypes="#//structure/ObjectTypeVariable">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * To be written #################################&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="classDefinition" lowerBound="1"
           eType="#//structure/ClassDefinition">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * To be written #################################&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="modelType" lowerBound="1"
-          eType="#//structure/VirtualTypeContainer" eOpposite="#//structure/VirtualTypeContainer/virtualType">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          eType="#//structure/ModelTypeVariable" eOpposite="#//structure/ModelTypeVariable/virtualType">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * To be written #################################&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" upperBound="-1"
           eType="#//structure/TypeVariableBinding" containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * To be written #################################&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//structure/Object">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Is the holder of a set of model elements (Object) that are compatible with the ModelType that has &#xA; * instantiated this Model.&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
           eType="#//structure/Object" changeable="false">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Contents of this model ...&#xA; */&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>

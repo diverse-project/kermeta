@@ -6,12 +6,12 @@
   <eSubpackages name="behavior" nsPrefix="">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//behavior/Expression">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Block is the model-element representation for the &lt;code>do...end&lt;/code> block.&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="statement" upperBound="-1"
           eType="#//behavior/Expression" containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * List of statements composing the block&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>

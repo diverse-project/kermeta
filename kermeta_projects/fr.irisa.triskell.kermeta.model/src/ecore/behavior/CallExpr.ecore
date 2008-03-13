@@ -5,60 +5,60 @@
     nsURI="http://ftm" nsPrefix="ftm">
   <eSubpackages name="behavior" nsPrefix="">
     <eClassifiers xsi:type="ecore:EClass" name="CallExpression" abstract="true" eSuperTypes="#//behavior/Expression">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Any callable expression inherits this class, e.g : &#xA; *   - variable call&#xA; *   - feature call ( &lt;code>a.b&lt;/code> : b is a feature call)&#xA; *&#xA; * &lt;img alt=&quot;&quot;  height=&quot;90%&quot; width=&quot;90%&quot;  src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png&quot; />&#xA; *&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//behavior/Expression" containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Kermeta calls can embedd expressions as parameters&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//structure/String">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * A call must be named&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="#//behavior/CallExpression">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * We call &quot;CallVariable&quot; the use of a variable in a statement.&#xA; * in &lt;code>i := j + 1&lt;/code>, i and j are 2 CallVariables.&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="#//structure/Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Tells whether this CallVariable represents a call to @pre in a postcondition&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CallFeature" eSuperTypes="#//behavior/CallExpression">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * CallFeature is the model element that refers to the use of a feature, i.e either &#xA; * a property or an operation in a statement. In &lt;code>stdio.writeln(&quot;hello&quot;)&lt;/code>, &#xA; * &lt;code>writeln&lt;/code> is a CallFeature.&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//behavior/Expression"
           containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Target Expression (the owner of the feature)&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="#//structure/Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Tells whether this CallFeature represents a call to @pre in a postcondition&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CallSuperOperation" eSuperTypes="#//behavior/CallExpression">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * This class represents a call to the operataion in the parent class&#xA; *&#x9;In the following example, the type of super(element) is CallSuperOperation:&#xA; *&#xA; * class ParentClass {&#xA; *   operation op(element : Integer) : Integer is do&#xA; *       result := element + 1&#xA; *   end&#xA; * }&#xA; *&#xA; * class ChildClass {&#xA; *   method op(element : Integer) : Integer is do&#xA; *       result := super(element)&#xA; *   end&#xA; * }&#xA; */"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CallResult" eSuperTypes="#//behavior/CallVariable">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * This class represents a call to the special internal variable &quot;result&quot; that is used to store the return value of any operation &#xA; */"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CallValue" eSuperTypes="#//behavior/CallExpression">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * CallValue refers to the use of the &lt;code>value&lt;/code> reserved keyword. This keyword is&#xA; * only used in the body of the &lt;code>setter&lt;/code> part of derived properties.&#xA; */"/>
       </eAnnotations>
     </eClassifiers>

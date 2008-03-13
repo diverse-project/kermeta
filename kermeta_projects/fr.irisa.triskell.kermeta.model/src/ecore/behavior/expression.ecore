@@ -3,21 +3,21 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm">
   <eSubpackages name="behavior">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <eAnnotations source="kermeta">
       <details key="documentation" value="/**&#xA; * Contains all the classes that define the behavior of Kermeta (i.e the model representation&#xA; * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta &#xA; * metamodel, viewed as a model.&#xA; * You can also find some information about the behavior package here : &lt;a href=&quot;http://www.kermeta.org/documents/manual/html.single&quot;>KermetaManual&lt;/a>&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_package.png&quot;>&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_visitable_package.png&quot;>&#xA; */"/>
     </eAnnotations>
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//structure/Object">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * The base class for every entity used to define a behavior in operation body.&#xA; */"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//behavior/Expression">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Literal refers to String values, Integer values, etc.&#xA; */"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EmptyExpression" eSuperTypes="#//behavior/Expression">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * As suggested by its name, this class represents an expression that do nothing. Like a &quot;nop&quot;&#xA; */"/>
       </eAnnotations>
     </eClassifiers>

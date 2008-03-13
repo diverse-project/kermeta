@@ -5,18 +5,18 @@
     nsURI="http://ftm/" nsPrefix="/ftm">
   <eSubpackages name="behavior" nsPrefix="">
     <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//behavior/Expression">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Assignment is the model-element representation of the assignment statement &lt;code>x := y&lt;/code>&#xA; * &lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png&quot;/>&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
           eType="#//behavior/CallExpression" containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Target of the assignment, as a CallExpression&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
           eType="#//behavior/Expression" containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Value to be assigned, as a KerMeta expression&#xA; */"/>
         </eAnnotations>
       </eStructuralFeatures>
