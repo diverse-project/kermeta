@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="BLP">
+  <eClassifiers xsi:type="ecore:EClass" name="User">
+    <eOperations name="CreateSubject" eType="#//Subject">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
+    </eOperations>
+    <eOperations name="DeleteSubject" eType="#//Boolean">
+      <eParameters name="sb" eType="#//Subject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subject" lowerBound="1"
+        eType="#//Subject" eOpposite="#//Subject/user"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/user"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityLevel">
+    <eOperations name="GetAllDominatiees" upperBound="-1" eType="#//SecurityLevel"/>
+    <eOperations name="AddDominatee" eType="#//Boolean">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
+    </eOperations>
+    <eOperations name="AddDominator" eType="#//Boolean">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subject" upperBound="-1"
+        eType="#//Subject" eOpposite="#//Subject/securityLevel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dominatee" upperBound="-1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/dominator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dominator" upperBound="-1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/dominatee"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="#//User"
+        eOpposite="#//User/securityLevel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+        eType="#//Target" eOpposite="#//Target/securityLevel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Target">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationType" upperBound="-1"
+        eType="#//OperationType" eOpposite="#//OperationType/Target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//OperationTypeEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Target" upperBound="-1"
+        eType="#//Target" eOpposite="#//Target/operationType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Subject">
+    <eOperations name="CheckAccess">
+      <eParameters name="t" eType="#//Target"/>
+      <eParameters name="op" eType="#//OperationType"/>
+    </eOperations>
+    <eOperations name="operation" eType="#//Type">
+      <eParameters name="target" upperBound="-1" eType="#//Target"/>
+      <eParameters name="operationType" eType="#//OperationType"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="#//User"
+        eOpposite="#//User/subject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/subject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationTypeEnum" instanceClassName="">
+    <eLiterals name="READ" value="1"/>
+    <eLiterals name="WRITE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationEnum">
+    <eLiterals name="TRANSFER" value="1"/>
+    <eLiterals name="WITHDRAW" value="2"/>
+    <eLiterals name="DEPOSIT" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName=""/>
+  <eClassifiers xsi:type="ecore:EClass" name="Type"/>
+</ecore:EPackage>
