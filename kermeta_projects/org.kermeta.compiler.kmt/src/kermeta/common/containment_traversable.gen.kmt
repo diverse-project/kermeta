@@ -1,7 +1,6 @@
 package kermeta;
 
 require kermeta
-require "platform:/resource/org.kermeta.compiler.kmt/models/kermeta_java.ecore"
 
 using kermeta::language::structure
 
