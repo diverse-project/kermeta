@@ -1,4 +1,4 @@
-/* $Id: ContainmentBasedActionPerformerGenerator.kmt,v 1.1 2008-03-06 09:47:10 cfaucher Exp $
+/* $Id: ContainmentBasedActionPerformerGenerator.kmt,v 1.2 2008-03-14 10:57:56 cfaucher Exp $
  * Creation date: March 4, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -7,7 +7,7 @@
  */
 
 @mainClass "ecore::helpers::containment_based_action_performer::ContainmentBasedActionPerformerGenerator"
-@mainOperation "generateContainmentBasedActionPerformer"
+@mainOperation "generateContainmentBasedActionPerformerGeneric"
 
 
 package ecore::helpers::containment_based_action_performer;
@@ -15,20 +15,33 @@ package ecore::helpers::containment_based_action_performer;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "../ecore_behavior.kmt"
-require "../helpers/ContainmentBasedActionPerformer_KmtPrinter_Ecore.kmt"
+require "../helpers/ActionToPerformOnEcoreModel.kmt"
 require "../helpers/EcoreHelper.kmt"
 
 using ecore
 using kermeta::language::structure
 using kermeta::persistence
+using kermeta::standard
 using kermeta::utils
 using kermeta::io
 using EcoreHelpers
 
 class ContainmentBasedActionPerformerGenerator
 {
-	operation generateContainmentBasedActionPerformer(inputEcoreMetamodel : String) : Void is do 
+	operation generateContainmentBasedActionPerformerGeneric(inputEcoreMetamodel : String) : Void is do
 		var root : EPackage init loadEcoreModel(inputEcoreMetamodel)
+		
+		stdio.writeln("The High Level Model Element guessed is: " + getHLModelElement(root))
+		
+		genContainmentBasedActionPerformer(inputEcoreMetamodel, getHLModelElement(root), root)
+	end
+	
+	operation generateContainmentBasedActionPerformer(inputEcoreMetamodel : String, highLevelModelElement : String) : Void is do 
+		var root : EPackage init loadEcoreModel(inputEcoreMetamodel)
+		genContainmentBasedActionPerformer(inputEcoreMetamodel, highLevelModelElement, root)
+	end
+	
+	operation genContainmentBasedActionPerformer(inputEcoreMetamodel : String, highLevelModelElement : String, root : EPackage) : Void is do 
 		
 		var content : StringBuffer init StringBuffer.new
 		
@@ -36,13 +49,29 @@ class ContainmentBasedActionPerformerGenerator
 		content.append("require kermeta\nrequire \"" + inputEcoreMetamodel + "\"\n\n")
 		content.append("using kermeta::language::structure\n\n")
 		
-		content.append(root.kmtPrinter())
+		content.append(root.kmtPrinter(highLevelModelElement))
 		
 		var ioHelper : FileIO init FileIO.new
 		var filename : String init inputEcoreMetamodel + "_ContainmentBasedActionPerformer.kmt"
 				          	
 		ioHelper.writeTextFile(filename,content.toString())
 		
+		stdio.writeln("\nThe generation is finished, you can retrieve the generated file at:\n" + filename)
+	end
+
+	operation getHLModelElement(root : EPackage) : String is do
+		
+		var highLevelModelElement : Bag<String> init Bag<String>.new
+		
+		root.eachOwnedElement{ e |
+			e.getHighLevelModelElement(highLevelModelElement)
+		}
+		
+		if highLevelModelElement.size() == 0 or highLevelModelElement.size() > 1 then
+			result := "Object"
+		else
+			result := highLevelModelElement.one()
+		end
 	end
 	
 	operation loadEcoreModel(input: String) : ecore::EPackage is do           

@@ -1,4 +1,4 @@
-/* $Id: ContainmentBasedActionPerformer_KmtPrinter_Ecore.kmt,v 1.2 2008-03-05 10:52:12 cfaucher Exp $
+/* $Id: ActionToPerformOnEcoreModel.kmt,v 1.1 2008-03-14 10:57:56 cfaucher Exp $
  * Creation date: March 04, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -16,24 +16,29 @@ require "ContainmentBasedActionPerformer_Ecore.kmt"
 
 using ecore
 using kermeta::language::structure
+using kermeta::standard
 using kermeta::utils
 using EcoreHelpers
 
 aspect class EObject {
-	operation kmtPrinter() : String is do
+	operation kmtPrinter(highLevelModelElement : String) : String is do
 		result := ""
+	end
+	
+	operation getHighLevelModelElement(highLevelModelElement : Bag<String>) : Bag<String> is do
+		result := highLevelModelElement
 	end
 }
 
 aspect class EPackage {
-	method kmtPrinter() : String is do
+	method kmtPrinter(highLevelModelElement : String) : String is do
 		var content : StringBuffer init StringBuffer.new
 		if not self.container.isVoid() then 
 			content.append("package " + self.name + " {\n\n")
 		end
 		
 		self.eachOwnedElement{ e |
-			content.append(e.kmtPrinter() + "\n")
+			content.append(e.kmtPrinter(highLevelModelElement) + "\n")
 		}
 		
 		if not self.container.isVoid() then
@@ -41,10 +46,17 @@ aspect class EPackage {
 		end
 		result := content.toString()
 	end
+	
+	method getHighLevelModelElement(highLevelModelElement : Bag<String>) : Bag<String> is do
+		self.eachOwnedElement{ e |
+			e.getHighLevelModelElement(highLevelModelElement)
+		}
+		result := highLevelModelElement
+	end
 }
 
 aspect class EClass {
-	method kmtPrinter() : String is do
+	method kmtPrinter(highLevelModelElement : String) : String is do
 		var content : StringBuffer init StringBuffer.new
 		content.append("aspect class " + self.name + " {\n")
 		
@@ -54,7 +66,7 @@ aspect class EClass {
 			content.append("\toperation")
 		end
 		
-		content.append(" eachOwnedElement(func : <Object -> Object>) : Void")
+		content.append(" eachOwnedElement(func : <" + highLevelModelElement + " -> " + highLevelModelElement + ">) : Void")
 		
 		if self.eSuperTypes.size()>0 then
 			 content.append(" from " + self.eSuperTypes.one.name)
@@ -67,14 +79,21 @@ aspect class EClass {
 		end
 		
 		self.eachOwnedElement{ e |
-			content.append(e.kmtPrinter() + "\n")
+			content.append(e.kmtPrinter(highLevelModelElement) + "\n")
 		}
 		result := content.append("\n\tend\n}\n").toString()
+	end
+	
+	method getHighLevelModelElement(highLevelModelElement : Bag<String>) : Bag<String> is do
+		if self.eSuperTypes.size == 0 then
+			highLevelModelElement.add(self.name)
+		end
+		result := highLevelModelElement
 	end
 }
 
 aspect class EReference {
-	method kmtPrinter() : String is do
+	method kmtPrinter(highLevelModelElement : String) : String is do
 		var content : StringBuffer init StringBuffer.new
 
 		content.append("\t\t")
