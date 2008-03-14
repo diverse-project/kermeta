@@ -23,10 +23,10 @@ Then, the outline and the KermetaDoc views should help you to use its content.</
 	<dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"
 </dt>
     <dd>This file contains a transformation class that allows to transform your Ecore model and apply Design Patterns to it. Provided Design Pattern (and variants) are : Visitor, Command, Builder and Observer.</dd>
-	<dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/CleanEcoreKMAnnotations.kmt"
+	<dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/ContainmentBasedActionPerformerGenerator.kmt"
 </dt>
     <dd>This file contains a transformation class that allows to generate a visitor to traverse the EReferences that are isComposite by using the Aspect way. The result is a kmt file containing the architecture to perform actions (function type passed in parameter) during the traverse of a model.</dd>
-	<dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/ContainmentBasedActionPerformerGenerator.kmt"
+	<dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/CleanEcoreKMAnnotations.kmt"
 </dt>
     <dd>This file contains a transformation class that allows to remove all EAnnotation in the ecore model that may have been introduced by kermeta2ecore transformation.</dd>
 	<dt class="term">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore2dot/ecore2dot.kmt"
