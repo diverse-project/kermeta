@@ -23,6 +23,8 @@ import java.util.Iterator;
 public class OrBAC2XACMLExport {
 	
 	
+	public static final String initialPolicyInfo = "initial policy";
+	
 	
 	public static Policy loadPolicyFromXMIFile(String file) {
 		
@@ -60,10 +62,10 @@ public class OrBAC2XACMLExport {
 		
 		 rules[i] = new String[]{orRules.get(i).getName(),
 				 rStatus,
-				 orRules.get(i).getParameters().get(0).getName(),
-				 orRules.get(i).getParameters().get(0).getName(),
-				 orRules.get(i).getParameters().get(0).getName(),
-				 orRules.get(i).getParameters().get(0).getName()};
+				 orRules.get(i).getParameters().get(1).getName(),
+				 orRules.get(i).getParameters().get(2).getName(),
+				 orRules.get(i).getParameters().get(3).getName(),
+				 orRules.get(i).getParameters().get(4).getName()};
 			 
 		// for debug -- print the added rules
 		//System.out.println(orRules.get(i).getName() + " " +
@@ -150,8 +152,14 @@ public class OrBAC2XACMLExport {
 
         String policyDescription;
         String[][] rules;
-        int i = 0;
+        int i = 1;
 
+        // firstly create the initial policy
+        OrBAC2XACMLUtils.builtXACMLFile(policies.get(initialPolicyInfo),"xacml/lms-" + 0 + ".xml", initialPolicyInfo);
+        
+        // remove the initial policy and write the other mutants
+        policies.remove(initialPolicyInfo);
+        
 
         for (Iterator iterator = policies.keySet().iterator(); iterator.hasNext();i++) {
 
@@ -163,7 +171,6 @@ public class OrBAC2XACMLExport {
         }
 
     }
-
 	
 	 /**
      * Return a collections of policies with a name (a mall description and  
@@ -179,6 +186,7 @@ public class OrBAC2XACMLExport {
         BufferedReader br;
         ArrayList<String> rulesText;
         String line,policyInfo;
+        boolean firstPolicy;
 
 
         // init
@@ -190,14 +198,24 @@ public class OrBAC2XACMLExport {
             // read the file and store the policies
             br = new BufferedReader(new FileReader(fileName));
             line = br.readLine();
+            firstPolicy = true;
 
             while(line != null) {
 
 
                 if(line.startsWith("POLICY")) {
 
+                	// the first policy is the initial policy
+                	if(firstPolicy) {
+                		
+                		policyInfo = initialPolicyInfo;
+                		firstPolicy = false;
+                	}
+                	else {
                     // get the block of policy and extracts rules
                    policyInfo = line;
+                   
+                	}
                   
                    rulesText = new ArrayList<String>();
 
@@ -246,6 +264,7 @@ public class OrBAC2XACMLExport {
         i = 0;
         for (Iterator<String> iterator = rulesText.iterator(); iterator.hasNext();i++) {
             rule = iterator.next();
+            // System.out.println("i => " + i + " " + rule);
 
             // get the name
             rulesTmp[i][0] = rule.substring(2, rule.indexOf(" -> "));
@@ -261,19 +280,19 @@ public class OrBAC2XACMLExport {
             bIndex = rule.indexOf(" ",rule.indexOf(org)) + 1;
             eIndex = rule.indexOf(" ", bIndex);
             rulesTmp[i][2] = rule.substring(bIndex, eIndex);
-
+            
             // activity
-            bIndex = rule.indexOf(" ",rule.indexOf(rulesTmp[i][2])) + 1;
+            bIndex = rule.indexOf(" ",rule.indexOf(" " + rulesTmp[i][2]) + 1) + 1;
             eIndex = rule.indexOf(" ", bIndex);
             rulesTmp[i][3] = rule.substring(bIndex, eIndex);
 
             // view
-            bIndex = rule.indexOf(" ",rule.indexOf(rulesTmp[i][3])) + 1;
+            bIndex = rule.indexOf(" ",rule.indexOf(" " + rulesTmp[i][3]) + 1) + 1;
             eIndex = rule.indexOf(" ", bIndex);
             rulesTmp[i][4] = rule.substring(bIndex, eIndex);
 
             // context
-             bIndex = rule.indexOf(" ",rule.indexOf(rulesTmp[i][4])) + 1;
+             bIndex = rule.indexOf(" ",rule.indexOf(" " + rulesTmp[i][4]) + 1 ) + 1;
             eIndex = rule.indexOf(" ", bIndex);
             rulesTmp[i][5] = rule.substring(bIndex, eIndex);
 
@@ -286,9 +305,10 @@ public class OrBAC2XACMLExport {
 
     public static void main(String[] args) {
 		
-		
+		System.out.println("Generating policies files...");
     	Map<String,String[][]> policies = readPoliciesFromFile("Mutants.txt");
 		createPolicies(policies);
+		System.out.println("Done");
 		
 		/*
 		// load the policy
