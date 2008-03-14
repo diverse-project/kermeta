@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreHelper.kmt,v 1.5 2008-03-11 09:35:35 cfaucher Exp $
+/* $Id: KM2EcoreHelper.kmt,v 1.6 2008-03-14 14:21:08 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,6 +14,7 @@ require "ecore/EcoreHelper.kmt"
 require kermeta
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/keyword_list.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
 
 //using kermeta::standard
 using kermeta::language::structure

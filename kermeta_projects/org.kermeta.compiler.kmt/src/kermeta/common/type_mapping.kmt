@@ -1,4 +1,4 @@
-/* $Id: type_mapping.kmt,v 1.1 2008-02-28 12:40:52 cfaucher Exp $
+/* $Id: type_mapping.kmt,v 1.2 2008-03-14 14:21:08 cfaucher Exp $
  * Creation date: February 28, 2006
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -27,10 +27,9 @@ class JavaTypeMapping
     	types_mapping.put("kermeta::standard::Boolean",	"java.lang.Boolean")
     	types_mapping.put("kermeta::standard::String",	"java.lang.String")
     	types_mapping.put("kermeta::language::structure::String",	"java.lang.String")
-    	types_mapping.put("kermeta::standard::Object",	"java.lang.Object")
+    	//types_mapping.put("kermeta::standard::Object",	"java.lang.Object")
     	types_mapping.put("kermeta::language::structure::UnlimitedNatural",	"java.lang.Integer")
     	types_mapping.put("kermeta::standard::Real",	"java.lang.Double")
-        
 	end
 	
 	operation getTypeMapping(str : String) : String is do

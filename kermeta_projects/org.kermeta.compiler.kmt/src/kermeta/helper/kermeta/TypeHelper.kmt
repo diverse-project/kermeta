@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.4 2008-03-11 09:35:30 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.5 2008-03-14 14:21:08 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -15,8 +15,7 @@ using kermeta::standard
 using kermeta::utils
 using km2ecore
 
-class TypeHelper
-{
+class TypeHelper {
 	/*
 	Moved to the type_mapping.kmt file
 	operation primitiveTypes() : Collection<String> is do

@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.6 2008-03-11 09:35:35 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.7 2008-03-14 14:21:08 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -16,6 +16,8 @@ require "CreateEcoreModelElement.kmt"
 require "../common/trace_structure.kmt"
 require "../helper/KM2EcoreHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass1/Pass1.kmt"
+
 
 using ecore
 using km2ecore

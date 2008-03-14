@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.5 2008-03-11 09:35:34 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.6 2008-03-14 14:21:08 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -38,7 +38,7 @@ aspect class Operation {
 		s.setLinks(self, self.ecoreModelElement)
 		if ( self.superOperation != void ) then
 			var qualifiedName : String init self.superOperation.owningClass.qualifiedName
-			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.create("kermeta", "superOperation", qualifiedName)
+			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.superOperation.toString(), qualifiedName)
 			self.ecoreModelElement.eAnnotations.add(ecoreAnnotation)
 		end
 	end

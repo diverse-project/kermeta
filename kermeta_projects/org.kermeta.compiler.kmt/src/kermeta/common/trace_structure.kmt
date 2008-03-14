@@ -1,4 +1,4 @@
-/* $Id: trace_structure.kmt,v 1.4 2008-02-08 07:44:59 ftanguy Exp $
+/* $Id: trace_structure.kmt,v 1.5 2008-03-14 14:21:08 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -9,6 +9,8 @@
 /**
  * This Modeling Unit is used to define and store the traceability during the Km to Ecore process
  */
+@usage "traceability"
+
 package kermeta::language::structure;
 
 require kermeta
@@ -25,14 +27,6 @@ class Traceability<X> {
 
 aspect class ModelingUnit inherits Traceability<EAnnotation> {
 	
-	/*operation getEcoreModelElement() : EAnnotation is do
-		result := ecoreModelElement
-	end
-	
-	operation setEcoreModelElement(element : EAnnotation) is do
-		ecoreModelElement := element
-	end*/
-	
 	reference ecorePackages : EPackage[0..*]
 	
 	reference entryPoints : EAnnotation[0..*]
@@ -40,124 +34,38 @@ aspect class ModelingUnit inherits Traceability<EAnnotation> {
 
 
 aspect class Package inherits Traceability<EPackage> {
-
-	/*operation getEcoreModelElement() : EPackage is do
-		result := ecoreModelElement
-	end
-
-	operation setEcoreModelElement(element : EPackage) is do
-		ecoreModelElement := element
-	end*/
 }
 
 
 aspect class PrimitiveType inherits Traceability<EDataType> {
-
-	/*operation getEcoreModelElement() : EDataType is do
-		result := ecoreModelElement
-	end
-
-	operation setEcoreModelElement(element : EDataType) is do
-		ecoreModelElement := element
-	end*/
 }
 
 aspect class Enumeration inherits Traceability<EEnum> {
-	
-	/*operation getEcoreModelElement() : EEnum is do
-		result := ecoreModelElement
-	end
-
-	operation setEcoreModelElement(element : EEnum) is do
-		ecoreModelElement := element
-	end*/
 }
 
 aspect class EnumerationLiteral inherits Traceability<EEnumLiteral> {
-	
-	/*operation getEcoreModelElement() : EEnumLiteral is do
-		result := ecoreModelElement
-	end
-
-	operation setEcoreModelElement(element : EEnumLiteral) is do
-		ecoreModelElement := element
-	end*/
 }
 
 aspect class ClassDefinition inherits Traceability<EClass> {
-	
-	/*operation getEcoreModelElement() : EClass is do
-		result := ecoreModelElement
-	end
-
-	operation setEcoreModelElement(element : EClass) is do
-		ecoreModelElement := element
-	end*/
 }
 
-/*aspect class TypedElement inherits Traceability<ETypedElement> {
-
-}*/
-
 aspect class Operation inherits Traceability<EOperation> {
-	/*operation getEcoreModelElement() : EOperation is do
-		result ?= ecoreModelElement
-	end
-	
-	operation setEcoreModelElement(element : EOperation) is do
-		ecoreModelElement := element
-	end*/
 }
 
 aspect class Parameter inherits Traceability<EParameter> {
-/*	operation getEcoreModelElement() : EParameter is do
-		result ?= ecoreModelElement
-	end*/
-
-/*	operation setEcoreModelElement(element : EParameter) is do
-		ecoreModelElement := element
-	end*/
 }
 
 aspect class Property inherits Traceability<EStructuralFeature> {
 	operation getEcoreModelElement() : EReference is do
 		result ?= ecoreModelElement
 	end
-
-/*	operation setEcoreModelElement(element : EStructuralFeature) is do
-		ecoreModelElement := element
-	end*/
 }
 
 aspect class Constraint inherits Traceability<EAnnotation> {
-	
-	/*operation getEcoreModelElement() : EAnnotation is do
-		result := ecoreModelElement
-	end
-
-	operation setEcoreModelElement(element : EAnnotation) is do
-		ecoreModelElement := element
-	end*/
 }
 
 aspect class ObjectTypeVariable inherits Traceability<ETypeParameter> {
-	
-	/*operation getEcoreModelElement() : ETypeParameter is do
-		result := ecoreModelElement
-	end
-
-	operation setEcoreModelElement(element : ETypeParameter) is do
-		ecoreModelElement := element
-	end*/
 }
 
 aspect class Tag inherits Traceability<EAnnotation> {
-	
-	/*operation getEcoreModelElement() : EAnnotation is do
-		result := ecoreModelElement
-	end
-
-	operation setEcoreModelElement(element : EAnnotation) is do
-		ecoreModelElement := element
-	end*/
 }

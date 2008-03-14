@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.8 2008-03-11 09:35:34 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.9 2008-03-14 14:21:08 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -23,6 +23,8 @@ require "CreateBehavior.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/containment_traversable.kmt"
 //require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentBasedActionPerformer_Kermeta.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/Pass2.kmt"
+
 
 using km2ecore
 

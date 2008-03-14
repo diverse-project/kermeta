@@ -1,4 +1,4 @@
-/* $Id: containment_traversable.kmt,v 1.4 2008-03-11 09:35:33 cfaucher Exp $
+/* $Id: containment_traversable.kmt,v 1.5 2008-03-14 14:21:08 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -11,6 +11,7 @@
  * func : <Object -> Object> because we need to visit the tags.
  *
  */
+@usage "containment_traversable"
 
 package kermeta::language;
  
