@@ -1,4 +1,4 @@
-/* $Id: Mutation.kmt,v 1.2 2008-02-28 12:28:40 tej Exp $
+/* $Id: Mutation.kmt,v 1.3 2008-03-17 14:41:47 tej Exp $
  * Creation date: January 9, 2008
  * License:
  * Copyright:
@@ -25,6 +25,7 @@ using kermeta::io
 class PolicyType {
 	
 	method toString() : String is do
+	
 	
 		result := name + " {\n"
 		result := result + "  Element Types:\n    "
@@ -142,8 +143,9 @@ class Rule {
 		from i := 0
 		until parameters.at(i) == old
 		loop i := i + 1 end
-		parameters.removeAt(i)
+		parameters.remove(parameters.at(i))
 		parameters.addAt(i, new)
+		
 	end
 	
 	operation toStringWithoutName() : String is do
@@ -154,7 +156,7 @@ class Rule {
 		}
 		result := result + ")"
 	end
-
+	
 	method toString() : String is do
 		result := "  " + name + " -> " + type.name + "( "
 		parameters.each{ p |
@@ -297,7 +299,6 @@ class ANR inherits SPMutator {
 			loop
 			typeName := ruleType.parameters.at(i).name
 		
-		
 			colParams := OrderedSet<Element>.new
 			p.allElements.select{ para | para.type.name == typeName}.each { x |
 		
@@ -325,10 +326,11 @@ class ANR inherits SPMutator {
 		mutant := p.copy
 		mutant.name := p.name + "-ANR-" + colRules.at(j).name
 		mutant.rules.add(colRules.at(j))
+		
 		result.add(mutant)
 		
 		end
-		
+				
 		j := j + 1
 		
 		end // loop
@@ -357,6 +359,7 @@ class ANR inherits SPMutator {
 	until i == colAllParams.size
 	loop
 		nbRules := nbRules *  colAllParams.at(i).size
+		
 		i := i + 1
 	end
 	
@@ -374,7 +377,8 @@ class ANR inherits SPMutator {
 		
 	end
 	
-	// main loop for cretating rules
+	
+	// main loop for creating rules
 	// compute the number of all rules
 	from var index : Integer init 0
 	until index == colAllParams.size
@@ -390,11 +394,12 @@ class ANR inherits SPMutator {
 			from var k : Integer init 0
 			until k == colParams.size
 			loop
+					// loops on number of time to repeat the param k
 					from var l : Integer init 0
 					until l == nbRepeat
 					loop
 					colRules.at(j).parameters.add(colParams.at(k))
-										
+					
 					l := l + 1
 					j := j + 1
 					end
@@ -434,41 +439,50 @@ class Main
         var resource : Resource init res.createResource(uri, "http://www.kermeta.org/acm")
         resource.load()
         result ?= resource.instances.one  
+        
+        
 	end
-	
 	
 	
 	operation mutateAndDisplay(mutator: SPMutator , policy : Policy , opName : String) is do
 	
 	stdio.writeln("MUTANTS "  + opName +  " : ")
 	stdio.writeln("*************\n")
+
+	// mutation and show mutants and save them in the file
+	var policies : set Policy[*]
+
 	
-	// mutation and show mutants
-	mutator.mute(policy).each{ p |
+	policies := mutator.mute(policy)
+	
+	// display
+	policies.each{ p |
 			stdio.writeln(p.toString)
 		    stdio.writeln("")
-		}
-		
+		    }		 
+	 
 	end
-
+	
+	
 	operation main() : Void is do 
-		// var policy : Policy init loadSecurityModel("platform:/resource/acm/model/LibraryOrBAC.xmi")
-		var policy : Policy init loadSecurityModel("platform:/resource/acm/model/LibraryRBAC.xmi")
+		var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/LibraryOrBAC.xmi")
+		//var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/LibraryRBAC.xmi")
+		
 		
 		stdio.writeln(policy.type.toString)
-		
+			 
 		stdio.writeln("ORIGINAL : ")
 		stdio.writeln("**********\n")
 		stdio.writeln(policy.toString)
 		stdio.writeln("")
-						
+		
+		 	
 		// generate all mutants and show them
 		
 		mutateAndDisplay(RER.new , policy , "RER")
 		mutateAndDisplay(RTT.new , policy , "RTT")
 		mutateAndDisplay(PPR.new , policy , "PPR")
 		mutateAndDisplay(ANR.new , policy , "ANR")
-		
 			
 	end
 }
