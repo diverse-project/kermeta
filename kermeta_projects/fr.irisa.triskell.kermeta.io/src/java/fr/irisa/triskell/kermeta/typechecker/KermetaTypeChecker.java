@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.30 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: KermetaTypeChecker.java,v 1.31 2008-03-17 10:03:40 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -131,6 +131,7 @@ public class KermetaTypeChecker {
 	    			
     			for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
     				if ( ! importedUnit.isTypeChecked() && ! importedUnit.isErroneous() ) {
+    					CallableFeaturesCache.destroyInstance();
 		    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit);
 		    			t.checkUnit();
 		    		}
