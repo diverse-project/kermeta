@@ -1,17 +1,26 @@
 <para>Design:</para>
 <para/>
 
+<para>Raise:</para>
+<programlisting>//In kmt:
+raise MyException.new
+
+//In Java:
+throw new comp_exception_test001.MyException()</programlisting>
+
+<para/>
+
 <para>Rescue:</para>
 <programlisting>//In kmt:
 rescue (e : MyException) do
-	e.getText()
+	e.setMessage()
 	stdio.writeln(e.text)
 end
 
 //In Java:
 catch(comp_exception_test001.MyException e) {
 	{
-		e.getText();
-		System.out.println(e.text);
+		e.setMessage();
+		System.out.println(e.getText());
 	}
 }</programlisting>

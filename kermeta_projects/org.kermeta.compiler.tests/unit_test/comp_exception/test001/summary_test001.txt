@@ -1,0 +1,1 @@
+<para>A complete of the usage of the exception in Kermeta: raisse and rescue</para>
