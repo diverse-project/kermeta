@@ -1,4 +1,4 @@
-/*$Id: InitializeUseCasesModel.java,v 1.8 2008-02-01 13:27:00 cfaucher Exp $
+/*$Id: InitializeUseCasesModel.java,v 1.9 2008-03-18 16:43:09 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeUseCasesModel.java
 * License : EPL
@@ -128,9 +128,11 @@ public class InitializeUseCasesModel implements IObjectActionDelegate {
 		
 		// Create the status and add it to the given use case
 		// Status are created from the Map that is extracted from the "progress" file
-		for(String key : map.keySet()) {
-			if( map.get(key) != null ) {
-				aUseCase.getStatus().add(TrekModelHelper.newStatus(key, Integer.parseInt(map.get(key))));
+		if(map != null) {
+			for(String key : map.keySet()) {
+				if( map.get(key) != null ) {
+					aUseCase.getStatus().add(TrekModelHelper.newStatus(key, Integer.parseInt(map.get(key))));
+				}
 			}
 		}
 		
