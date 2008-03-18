@@ -19,7 +19,7 @@
     <status progress="80" key="Impl_Kermeta"/>
     <status progress="80" key="Design"/>
   </kuseCases>
-  <kuseCases name="Behavior" summary="&lt;para>Use case dedicated to the compilation of the Kermeta behavior.&lt;/para>" id="comp_behavior" refinedBy="comp_assignment comp_body comp_callResult comp_callSuperOperation comp_conditional comp_exception comp_functionType comp_initialization comp_instanceOf comp_invariantBehavior comp_javaStaticCall comp_lambdaExpression comp_loop comp_new comp_propertyBehavior">
+  <kuseCases name="Behavior" summary="&lt;para>Use case dedicated to the compilation of the Kermeta behavior.&lt;/para>" id="comp_behavior" refinedBy="comp_assignment comp_body comp_callResult comp_callSuperOperation comp_conditional comp_exception comp_functionType comp_initialization comp_instanceOf comp_invariantBehavior comp_javaStaticCall comp_lambdaExpression comp_loop comp_new comp_propertyBehavior comp_selfExpression">
     <status progress="50" key="Impl_Java"/>
     <status progress="10" key="Impl_Kermeta"/>
     <status progress="50" key="Design"/>
@@ -46,6 +46,8 @@
   </kuseCases>
   <kuseCases name="ClassDefinition" summary="&lt;para>&lt;/para>" id="comp_classDefinition" refines="comp_structure" refinedBy="comp_attribute">
     <verifiedBy href="comp_classDefinition/comp_classDefinition.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_opposite/comp_opposite.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_opposite/comp_opposite.trek#//@ktestCases.1"/>
     <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.2"/>
     <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.3"/>
     <verifiedBy href="comp_reference/comp_reference.trek#//@ktestCases.2"/>
@@ -81,10 +83,11 @@
     <status progress="100" key="Impl_Kermeta"/>
     <status progress="100" key="Design"/>
   </kuseCases>
-  <kuseCases name="Exception" summary="&lt;para>&lt;/para>" id="comp_exception" refines="comp_behavior">
+  <kuseCases name="Exception" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&lt;para/>&#xD;&#xA;&#xD;&#xA;&lt;para>Raise:&lt;/para>&#xD;&#xA;&lt;programlisting>//In kmt:&#xD;&#xA;raise MyException.new&#xD;&#xA;&#xD;&#xA;//In Java:&#xD;&#xA;throw new comp_exception_test001.MyException()&lt;/programlisting>&#xD;&#xA;&#xD;&#xA;&lt;para/>&#xD;&#xA;&#xD;&#xA;&lt;para>Rescue:&lt;/para>&#xD;&#xA;&lt;programlisting>//In kmt:&#xD;&#xA;rescue (e : MyException) do&#xD;&#xA;&#x9;e.setMessage()&#xD;&#xA;&#x9;stdio.writeln(e.text)&#xD;&#xA;end&#xD;&#xA;&#xD;&#xA;//In Java:&#xD;&#xA;catch(comp_exception_test001.MyException e) {&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;e.setMessage();&#xD;&#xA;&#x9;&#x9;System.out.println(e.getText());&#xD;&#xA;&#x9;}&#xD;&#xA;}&lt;/programlisting>" id="comp_exception" refines="comp_behavior">
+    <verifiedBy href="comp_exception/comp_exception.trek#//@ktestCases.0"/>
     <status progress="80" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status progress="80" key="Design"/>
+    <status progress="80" key="Impl_Kermeta"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="FunctionType" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&lt;para>A Function Type is called inside another method.&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>The function type is prettyprinted in a specific static method and called by the method that uses it.&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>In the context of a lambda expression:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>The two methods are generated in a same new Java Class in a &quot;helper&quot; package.&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;programlisting>&#xD;&#xA;/** Kermeta source code **/&#xD;&#xA;a.ref.each{ r |&#xD;&#xA;&#x9;stdio.writeln(r.toString)&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;/** Java source code **/&#xD;&#xA;// Method that uses the function type&#xD;&#xA;  public static void each(EList String list) {&#xD;&#xA;    for(String it : list) {&#xD;&#xA;      func(it);&#xD;&#xA;    }&#xD;&#xA;  }&#xD;&#xA;  &#xD;&#xA;// The FunctionType prettyprinted in the same Java class&#xD;&#xA;  private static void func(String r) {&#xD;&#xA;    System.out.println(r.toString());&#xD;&#xA;  }&#xD;&#xA;&lt;/programlisting>&#xD;&#xA;&#xD;&#xA;&lt;para>The call of the method from the original method:&lt;/para>&#xD;&#xA;&lt;programlisting>Main_3_Helper.each(a.getRef());&lt;/programlisting>" id="comp_functionType" refines="comp_behavior">
     <status progress="80" key="Impl_Java"/>
@@ -107,6 +110,7 @@
     <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.2"/>
     <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.3"/>
     <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.4"/>
+    <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.5"/>
     <status progress="100" key="Impl_Java"/>
     <status progress="100" key="Impl_Kermeta"/>
     <status progress="100" key="Design"/>
@@ -140,6 +144,9 @@
     <status key="Impl_Kermeta"/>
     <status key="Design"/>
   </kuseCases>
+  <kuseCases name="JavaKeyword" id="comp_javaKeyword">
+    <verifiedBy href="comp_javaKeyword/comp_javaKeyword.trek#//@ktestCases.0"/>
+  </kuseCases>
   <kuseCases name="JavaStaticCall" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;programlisting>//In kmt:&#xD;&#xA;extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)&#xD;&#xA;&#xD;&#xA;//In Java:&#xD;&#xA;fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.writeTextFile(filename, text);&lt;/programlisting>" id="comp_javaStaticCall" refines="comp_behavior">
     <verifiedBy href="comp_javaStaticCall/comp_javaStaticCall.trek#//@ktestCases.0"/>
     <status progress="100" key="Impl_Java"/>
@@ -168,7 +175,7 @@
   <kuseCases name="ModelingUnit" summary="&lt;para>&lt;/para>" id="comp_modelingUnit">
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.9"/>
     <status progress="100" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
+    <status progress="100" key="Impl_Kermeta"/>
     <status key="Design"/>
   </kuseCases>
   <kuseCases name="MultiplePackagesRoot" summary="&lt;para>Test wether it is possible to generate several root packages. &#xD;&#xA;At the moment it is possible when editing a km file but not with kmt file&#xD;&#xA;because the syntax grammar does not allow multiple root package definitions&lt;/para>" id="comp_multiplePackagesRoot" refines="comp_package">
@@ -180,7 +187,7 @@
   <kuseCases name="Multiplicity" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>Implemented by the structural part (&#x93;model&#x94; plugin) of the EMF generated source code.&lt;/para>&#xD;&#xA;&lt;para>Some issues for multiplicity have taken into account during the assignment translation.&lt;/para>" id="comp_multiplicity" refines="comp_structure">
     <verifiedBy href="comp_multiplicity/comp_multiplicity.trek#//@ktestCases.0"/>
     <status progress="100" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
+    <status progress="100" key="Impl_Kermeta"/>
     <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="New" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>The creation of Object is performed by the new method, in EMF-Java: a factory is used and it can be called like:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>For MyClassDefinition owns by the package: comp_new_test001&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;programlisting>&#xD;&#xA;// In Kermeta:&#xD;&#xA;A.new&#xD;&#xA;&#xD;&#xA;// In EMF-Java:&#xD;&#xA;Comp_new_test001Factory.eINSTANCE.createA();&#xD;&#xA;&lt;/programlisting>&#xD;&#xA;" id="comp_new" refines="comp_behavior">
@@ -194,6 +201,8 @@
     <verifiedBy href="comp_operationStructure/comp_operationStructure.trek#//@ktestCases.1"/>
     <verifiedBy href="comp_operationStructure/comp_operationStructure.trek#//@ktestCases.2"/>
     <verifiedBy href="comp_operationStructure/comp_operationStructure.trek#//@ktestCases.3"/>
+    <verifiedBy href="comp_operationStructure/comp_operationStructure.trek#//@ktestCases.4"/>
+    <verifiedBy href="comp_operationStructure/comp_operationStructure.trek#//@ktestCases.5"/>
     <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.2"/>
     <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.3"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.3"/>
@@ -203,6 +212,8 @@
     <status progress="90" key="Design"/>
   </kuseCases>
   <kuseCases name="Opposite" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>Implemented by the structural part (&#x93;model&#x94; plugin) of the EMF generated source code.&lt;/para>" id="comp_opposite" refines="comp_structure">
+    <verifiedBy href="comp_opposite/comp_opposite.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_opposite/comp_opposite.trek#//@ktestCases.1"/>
     <status progress="100" key="Impl_Java"/>
     <status key="Impl_Kermeta"/>
     <status progress="100" key="Design"/>
@@ -271,6 +282,8 @@
     <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="Reference" summary="&lt;para>&lt;/para>" id="comp_reference" refines="comp_structure">
+    <verifiedBy href="comp_opposite/comp_opposite.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_opposite/comp_opposite.trek#//@ktestCases.1"/>
     <verifiedBy href="comp_reference/comp_reference.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_reference/comp_reference.trek#//@ktestCases.1"/>
     <verifiedBy href="comp_reference/comp_reference.trek#//@ktestCases.2"/>
@@ -286,6 +299,12 @@
     <status key="Impl_Kermeta"/>
     <status progress="100" key="Impl_Simk"/>
     <status progress="100" key="Impl_Jet"/>
+    <status progress="100" key="Design"/>
+  </kuseCases>
+  <kuseCases name="SelfExpression" summary="&lt;para>A &quot;self&quot; expression is compiled into &quot;this&quot; in Java&lt;/para>" id="comp_selfExpression" refines="comp_behavior">
+    <verifiedBy href="comp_selfExpression/comp_selfExpression.trek#//@ktestCases.0"/>
+    <status progress="100" key="Impl_Java"/>
+    <status progress="100" key="Impl_Kermeta"/>
     <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="Structure" summary="&lt;para>Use case dedicated to the compilation of a Kermeta structure.&lt;/para>" id="comp_structure" refinedBy="comp_classDefinition comp_containment comp_enumeration comp_generics comp_inheritance comp_invariant comp_multiplicity comp_operationStructure comp_opposite comp_package comp_parameter comp_postcondition comp_precondition comp_primitiveType comp_propertyStructure comp_reference comp_tag">
