@@ -1,4 +1,4 @@
-/* $Id: containment_traversable.kmt,v 1.5 2008-03-14 14:21:08 cfaucher Exp $
+/* $Id: containment_traversable.kmt,v 1.6 2008-03-18 13:18:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -120,6 +120,16 @@ package behavior {
 			
 			self.rescueBlock.each{ rb |
 				func(rb)
+			}
+		end	
+	}
+	
+	aspect class Rescue {
+		method eachOwnedElement(func : <Object -> Object>) : Void is do
+	        super(func)
+	        
+	        self.body.each{ s |
+				func(s)
 			}
 		end	
 	}
