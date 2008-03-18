@@ -1,1 +1,17 @@
-<para></para>
+<para>Design:</para>
+<para/>
+
+<para>Rescue:</para>
+<programlisting>//In kmt:
+rescue (e : MyException) do
+	e.getText()
+	stdio.writeln(e.text)
+end
+
+//In Java:
+catch(comp_exception_test001.MyException e) {
+	{
+		e.getText();
+		System.out.println(e.text);
+	}
+}</programlisting>
