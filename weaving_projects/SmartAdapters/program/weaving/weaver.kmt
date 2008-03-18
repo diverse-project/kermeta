@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.18 2008-03-11 14:34:29 bmorin Exp $
+/* $Id: weaver.kmt,v 1.19 2008-03-18 17:20:01 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -21,6 +21,7 @@ using kermeta::utils
 using kermeta::persistence
 using patternframework
 using org::smartadapters::core
+using org::smartadapters::extension
 using kermeta::pattern
 using kermeta::pattern::flora2
 
@@ -51,6 +52,29 @@ class Weaver
 						}
 		stdio.writeln(" OK!")
 
+		/**
+		 * Derive the adapter, if needed
+		 */
+		var derivable : DerivableAdapter
+		derivable ?= adapter
+		if derivable != void then
+			var derivation : Derivation
+			var derivationPath : String init stdio.read("$>The adapter is derivable, please provide a derivation: ")
+			var inputDerivation:Set<Object> init loadModel(repository, derivationPath, domainMMUri)
+			inputDerivation.each{o | 
+							var temp:Derivation
+							temp?=o
+							if(temp!=void) then
+								derivation:=temp
+							end
+						}
+			adapter := derivable.resolve(derivation)
+			inputAdapter.clear
+			inputAdapter.add(adapter)
+			saveModel(inputAdapter, "./derivedAdapter.xmi", adaptMMUri)
+			adapter.adapt.each{a | stdio.writeln(a.toString)}
+		end
+
 		adapter.checkAllInvariants
 		
 		var doWeave : Boolean
@@ -65,10 +89,8 @@ class Weaver
 		displayInfo := stdio.read("$>display weaving info ? (y/n): ").toBoolean
 		stdio.writeln("")
 		
-		if (adapter.adapt.size>0) then
-			stdio.writeln(" OK!")
+		if (adapter.adapt.size > 0) then
 			adapter.initClone
-			
 			if (adapter.~aspect.template != void) then
 				/*---Pattern matching---*/
 				stdio.writeln("Searching base model elements matching template...")
@@ -157,7 +179,7 @@ class Weaver
 			saveModel(inputModel, resultUri, domainMMUri)		
 		else
 			var e:kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
-			e.message:="WeaverException: Adapter contains no adaptation or at least one adaptation is not well typed"
+			e.message:="WeavingException: Adapter contains no adaptation or at least one adaptation is not well typed"
 			raise e
 		end		
 	end

@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.11 2008-03-04 14:01:07 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.12 2008-03-18 17:18:09 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -206,7 +206,7 @@ package smartadapters
 		
 		class Derivation
 		{
-			reference elements : DerivationElement[0..*]
+			attribute elements : DerivationElement[0..*]
 			
 			reference selectedOptions : AdapterElement[0..*]
 		}

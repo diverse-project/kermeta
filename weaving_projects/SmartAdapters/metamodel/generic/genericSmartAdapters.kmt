@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.20 2008-03-11 14:33:42 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.21 2008-03-18 17:19:37 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -238,11 +238,11 @@ package smartadapters
 			 */
 			operation initClone() is do
 				initAdapter
-				if (~aspect.structure!=void) then
+				if (~aspect.structure != void) then
 					~aspect.structure.content.each{elt |
-							var newCloned:Object
-							newCloned:=converter.getConverted(elt)
-							if (newCloned!=void) then
+							var newCloned : Object
+							newCloned := converter.getConverted(elt)
+							if (newCloned != void) then
 								clone.put(elt, newCloned)
 							end
 					}
@@ -298,9 +298,10 @@ package smartadapters
 			 * 		- non_unique: the handler is systematically cloned
 			 *		- unique: the handler is cloned iff the real object associated 
 			 *		to the handler or to the template (!=void) has not been already cloned
-			 * 		- on_Demand: cloned on demand
+			 * 		- onDemand: cloned on demand
 			 */
 			operation cloneAgain(handler : Object, template : Object, type : uniqueType) : Void is do
+				stdio.writeln(type.toString)
 				var o : Object
 				if template != void then
 					o := getRealObject(template,false)
@@ -326,18 +327,22 @@ package smartadapters
 							end
 						end
 					else
-						var update : Boolean
-						update := stdio.read("$>clone "+handler.toString+" (true/false) :").toBoolean
-						if update then
-							if o != void then //on demand from template
-								cloneFromTemplate(handler,o)
-							else //on demand from scratch
-								cloneFromScratch(handler)
-							end	
-						else
-							if o != void then
-								clone.put(handler,cloned.getValue(o))
+						if type == uniqueType.onDemand then
+							var update : Boolean
+							update := stdio.read("$>clone "+handler.toString+" (true/false) :").toBoolean
+							if update then
+								if o != void then //on demand from template
+									cloneFromTemplate(handler,o)
+								else //on demand from scratch
+									cloneFromScratch(handler)
+								end	
+							else
+								if o != void then
+									clone.put(handler,cloned.getValue(o))
+								end
 							end
+						else
+							
 						end
 					end 
 				end
@@ -457,27 +462,29 @@ package smartadapters
 	
 	/**
 	 * This package contains all the concepts for variability
+	 * Note: the resolve operation does not work well because of a bug
+	 * in Kermeta involving reflection and enumerations...
 	 */
 	package extension
 	{
 		aspect class DerivableAdapter inherits Adapter
 		{
 			operation resolve(derivation:Derivation) : Adapter is do
+				stdio.writeln("Deriving the adapter according to "+derivation.toString)
 				var adapter : DerivableAdapter init DerivableAdapter.new
-				var isChecked : Boolean init true
-				constraints.each{c | isChecked:=isChecked and c.check(derivation)}
-				if(isChecked) then
+				if(not constraints.exists{c | not c.check(derivation)}) then
+					adapter.~aspect := self.~aspect
 					adapt.each{a | adapter.addAdaptation(derivation,a)}
 					alternatives.each{a | adapter.addAlternative(derivation,a)}
 					if(adapter.isConcretizable) then
-						var concreteAdapter:Adapter init Adapter.new
+						var concreteAdapter : Adapter init Adapter.new
 						if converter == void then
 							converter := Converter.new
 							converter.initConverter(Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new)
 						end
 						converter.addEntry(adapter.getMetaClass,concreteAdapter.getMetaClass)
 						adapter.adapt.each{a | converter.addEntry(a.getMetaClass, a.getMetaClass)}
-						concreteAdapter ?= converter.getConverted(adapter)
+						concreteAdapter ?= converter.getConverted(adapter) //Pb bug kermeta reflection enumeration...
 						result := concreteAdapter
 					else
 						result := adapter
@@ -491,13 +498,15 @@ package smartadapters
 				end
 			end
 			
-			operation addAdaptation(d:Derivation, a:Adaptation) is do
+			operation addAdaptation(d : Derivation, a : Adaptation) is do
+				stdio.writeln("addAdaptation "+a.toString)
 				if(not(a.isOptional) or d.selectedOptions.contains(a)) then
 					adapt.add(a)
 				end
 			end
 			
-			operation addConjunction(d:Derivation, c:EntityConjunction) is do
+			operation addConjunction(d : Derivation, c : EntityConjunction) is do
+				stdio.writeln("addConjunction "+c.toString)
 				if(not(c.isOptional) or d.selectedOptions.contains(c)) then
 					c.~and.each{e |
 						var a:Adaptation
@@ -521,30 +530,30 @@ package smartadapters
 				end
 			end
 			
-			operation addAlternative(d:Derivation, alt:EntityAlternative) is do
+			operation addAlternative(d : Derivation, alt : EntityAlternative) is do
+				stdio.writeln("addAlternative "+alt.toString)
 				if(d.elements.exists{e | e.alternative==alt}) then
-					var v:AdapterElement 
-					var elt:DerivationElement
-					elt:=d.elements.select{e | e.alternative==alt}.one
-					v:=elt.selectedVariant
-					var a:Adaptation
-					a?=v
-					if(a!=void) then
+					var v : AdapterElement 
+					var elt : DerivationElement
+					elt := d.elements.select{e | e.alternative==alt}.one
+					v := elt.selectedVariant
+					var a : Adaptation
+					a ?= v
+					if(a != void) then
 						addAdaptation(d,a)
 					else
-					   var altern:EntityAlternative
-					   altern?=v
-					   if(altern!=void) then
+					   var altern : EntityAlternative
+					   altern ?= v
+					   if(altern != void) then
 					   		addAlternative(d,altern)
 					   else
 					   		var c:EntityConjunction
-					   		c?=v
-					   		if(c!=void) then
+					   		c ?= v
+					   		if(c != void) then
 					   			addConjunction(d,c)
 					   		end
 					   end
 					end
-
 				else
 					if(not(alt.isOptional) or d.selectedOptions.contains(alt)) then
 						self.alternatives.add(alt)
@@ -553,7 +562,7 @@ package smartadapters
 			end
 
 			
-			operation isConcretizable() : ecore::EBoolean is do
+			operation isConcretizable() : Boolean is do
 				result:=(alternatives.size==0)
 			end			
 		}
