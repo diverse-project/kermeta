@@ -1,0 +1,17 @@
+/* $Id: uml2_behavior.kmt,v 1.1 2008-03-19 14:57:37 gperroui Exp $
+ * Creation date: March 19, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+package root_package;
+
+/* This class enable all the kermeta aspects realizing UML 2 Behavior. 
+* NB: Be sure to populate this class with require of your newly defined aspects !
+*/
+require kermeta
+require "platform:/resource/org.kermeta.uml2/src/kermeta/behavior/NamedElement.kmt"
+
+class UML2Behavior {
+}

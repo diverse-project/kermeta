@@ -1,0 +1,26 @@
+/* $Id: NamedElement.kmt,v 1.1 2008-03-19 14:57:37 gperroui Exp $
+ * Creation date: March 19, 2008
+ * License: EPL
+ * Copyright:
+ * Authors:  Gilles Perrouin
+ */
+
+package uml;
+
+
+require kermeta
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+aspect class NamedElement {
+ operation getQualifiedName(): String[1..1] is do
+
+var elem : uml::NamedElement init self
+		result := self.name
+		from elem ?= elem.container
+		until elem == void 
+		loop
+			result := elem.name + "::" + result 
+			elem ?= elem.container
+		end
+	end	
+}
