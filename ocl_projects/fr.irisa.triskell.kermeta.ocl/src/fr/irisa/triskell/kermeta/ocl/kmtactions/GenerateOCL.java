@@ -1,4 +1,4 @@
-/* $Id: GenerateOCL.java,v 1.12 2008-02-14 07:15:11 uid21732 Exp $
+/* $Id: GenerateOCL.java,v 1.13 2008-03-19 13:32:01 jdeanton Exp $
  * Project    : fr.irisa.triskell.kermeta.ocl
  * File       : GenerateOCL.java
  * License    : EPL
@@ -20,10 +20,12 @@ import org.kermeta.interpreter.helper.RunnerHelper;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class GenerateOCL {
@@ -56,19 +58,24 @@ public class GenerateOCL {
 		KermetaUnit unit;
 		try {
 			unit = RunnerHelper.getKermetaUnitToExecute(oclKmtPrinterKmtPath);
-			KermetaInterpreter inter = new KermetaInterpreter(unit, null);
-			inter.setKStream(console);
-			// This is the operation to call
-			inter.setEntryPoint("OCLKMTPrinter::OCLKMTPrinter", "generateOCL");
-			// These are the parameters
-			ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(inCstXmiPath, inter.getMemory().getROFactory()));
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(modelEcorePath, inter.getMemory().getROFactory()));
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(outKmtPath, inter.getMemory().getROFactory()));
-			inter.setEntryParameters(params);
-			// And we launch the interpreter
-			inter.launch();
-			console.println(new InfoMessage("file generated " + outKmtPath));
+			if ( unit.isErroneous() ) {
+				// ouvrir une popup ou errorlog
+				console.println(new ErrorMessage( KermetaUnitHelper.getAllErrorsAsString(unit)));
+			} else {
+				KermetaInterpreter inter = new KermetaInterpreter(unit, null);
+				inter.setKStream(console);
+				// This is the operation to call
+				inter.setEntryPoint("OCLKMTPrinter::OCLKMTPrinter", "generateOCL");
+				// These are the parameters
+				ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
+				params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(inCstXmiPath, inter.getMemory().getROFactory()));
+				params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(modelEcorePath, inter.getMemory().getROFactory()));
+				params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(outKmtPath, inter.getMemory().getROFactory()));
+				inter.setEntryParameters(params);
+				// And we launch the interpreter
+				inter.launch();
+				console.println(new InfoMessage("file generated " + outKmtPath));
+			}
 		} catch (NotRegisteredURIException e) {
 			e.printStackTrace();
 		} catch (URIMalformedException e) {
