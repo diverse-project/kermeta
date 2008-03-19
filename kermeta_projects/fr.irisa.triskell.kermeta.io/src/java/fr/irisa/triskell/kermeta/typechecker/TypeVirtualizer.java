@@ -1,4 +1,4 @@
-/* $Id: TypeVirtualizer.java,v 1.6 2007-08-08 12:54:38 dvojtise Exp $
+/* $Id: TypeVirtualizer.java,v 1.7 2008-03-19 16:20:59 cfaucher Exp $
 * Project : Kermeta io
 * File : TypeVirtualizer.java
 * License : EPL
@@ -23,11 +23,9 @@ import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-//import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
-import fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -38,13 +36,13 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
  */
 public class TypeVirtualizer extends KermetaOptimizedVisitor {
 
-	private VirtualTypeContainer modeltype_context;
+	private ModelTypeVariable modeltype_context;
 	protected StructureFactory struct_factory;
 	
 	/**
 	 * Default constructor
 	 */
-	public TypeVirtualizer(VirtualTypeContainer mtc) {
+	public TypeVirtualizer(ModelTypeVariable mtc) {
 		super();
 		modeltype_context = mtc;
 		struct_factory = StructurePackageImpl.init().getStructureFactory();
