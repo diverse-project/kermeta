@@ -4,11 +4,11 @@
     <details key="require" value="../Standard.kmt|platform:/resource/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore|"/>
     <details key="using" value="kermeta::language::structure|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="language" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/kermeta/language" nsPrefix="language">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="language" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/kermeta/language" nsPrefix="language">
       <eSubpackages name="structure" nsURI="http://www.kermeta.org/kermeta/language/structure" nsPrefix="structure">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * Contains the concrete implementation (including the operation bodies) &#xD;&#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package.&#xD;&#xA; * If you need more documentation, please take a look at the&#xD;&#xA; * &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png&quot;>&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png&quot;>&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * Contains the concrete implementation (including the operation bodies) &#xD;&#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package.&#xD;&#xA; * If you need more documentation, please take a look at the&#xD;&#xA; * &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png&quot;/>&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png&quot;/>&#xD;&#xA; */"/>
         </eAnnotations>
         <eClassifiers xsi:type="ecore:EClass" name="Object">
           <eOperations name="getMetaClass">
@@ -44,7 +44,7 @@
           </eOperations>
           <eOperations name="isNotEqual">
             <eAnnotations source="kermeta">
-              <details key="body" value="do&#xA;&#x9;result := not (equals(element))&#xA;end"/>
+              <details key="body" value="do&#xA;&#x9;result := equals(element).~not&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;  * See kermeta::language::structure::Object.equals(Object)&#xD;&#xA;  */"/>
             </eAnnotations>
             <eParameters name="element" eType="/1/language/structure/Object"/>
@@ -196,73 +196,55 @@
               <details key="documentation" value="/**&#xD;&#xA;  * Returns the String representation of this class. &#xD;&#xA;  *  Note : throws an exception if this class has no classDefinition&#xD;&#xA;  *  or if the classDefinition is not well constructed.&#xD;&#xA;  */"/>
             </eAnnotations>
           </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" ordered="false" upperBound="-1" volatile="true" transient="true" derived="true">
-            <eAnnotations source="kermetaderivedProp.setter">
-              <details key="body" value="do&#xA;   //TODO: implement setterfor derived property ownedAttribute&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
-            </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" ordered="false" upperBound="-1" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermetaderivedProp.getter">
               <details key="body" value="do&#xA;&#x9;var cDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;result := cDef.ownedAttribute&#xA;end"/>
             </eAnnotations>
             <eAnnotations source="kermeta">
-              <details key="isReadOnly" value="false"/>
+              <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../kermeta_java.ecore#/1/language/structure/Property"/>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false" upperBound="-1" volatile="true" transient="true" derived="true">
-            <eAnnotations source="kermetaderivedProp.setter">
-              <details key="body" value="do&#xA;   //TODO: implement setterfor derived property ownedOperation&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
-            </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false" upperBound="-1" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermetaderivedProp.getter">
               <details key="body" value="do&#xA;&#x9;var cDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;result := cDef.ownedOperation&#xA;end"/>
             </eAnnotations>
             <eAnnotations source="kermeta">
-              <details key="isReadOnly" value="false"/>
+              <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../kermeta_java.ecore#/1/language/structure/Operation"/>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" ordered="false" upperBound="-1" eType="/1/language/structure/Class" volatile="true" transient="true" derived="true">
-            <eAnnotations source="kermetaderivedProp.setter">
-              <details key="body" value="do&#xA;   //TODO: implement setterfor derived property superClass&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
-            </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" ordered="false" upperBound="-1" eType="/1/language/structure/Class" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermetaderivedProp.getter">
               <details key="body" value="do&#xA;&#x9;var cDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;var supertypes : kermeta::standard::OrderedSet&lt;kermeta::language::structure::Class> init kermeta::standard::OrderedSet&lt;kermeta::language::structure::Class>.new&#xA;&#x9;cDef.superType.each{elem | do&#xA;&#x9;&#x9;&#x9;if kermeta::language::structure::Class.isInstance(elem) then&#xA;&#x9;&#x9;&#x9;&#x9;var c : kermeta::language::structure::Class&#xA;&#x9;&#x9;&#x9;&#x9;c ?= elem&#xA;&#x9;&#x9;&#x9;&#x9;supertypes.add(c)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;&#x9;result := supertypes&#xA;end"/>
             </eAnnotations>
             <eAnnotations source="kermeta">
-              <details key="isReadOnly" value="false"/>
+              <details key="isReadOnly" value="true"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" volatile="true" transient="true" derived="true">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
-              <details key="isReadOnly" value="false"/>
-            </eAnnotations>
-            <eAnnotations source="kermetaderivedProp.setter">
-              <details key="body" value="do&#xA;   //TODO: implement setterfor derived property isAbstract&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+              <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eAnnotations source="kermetaderivedProp.getter">
               <details key="body" value="do&#xA;&#x9;var cDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;result := cDef.isAbstract&#xA;end"/>
             </eAnnotations>
             <eType xsi:type="ecore:EDataType" href="../kermeta_java.ecore#/1/language/structure/Boolean"/>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="classDefinition" eType="/1/language/structure/ClassDefinition" volatile="true" transient="true" derived="true">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="classDefinition" eType="/1/language/structure/ClassDefinition" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermeta">
               <details key="documentation" value="/**&#xD;&#xA;  * Returns the ClassDefinition for this class&#xD;&#xA;  */"/>
-              <details key="isReadOnly" value="false"/>
-            </eAnnotations>
-            <eAnnotations source="kermetaderivedProp.setter">
-              <details key="body" value="do&#xA;   //TODO: implement setterfor derived property classDefinition&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+              <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eAnnotations source="kermetaderivedProp.getter">
               <details key="body" value="do&#xA;&#x9;result ?= typeDefinition&#xA;end"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" volatile="true" transient="true" derived="true">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
-              <details key="isReadOnly" value="false"/>
-            </eAnnotations>
-            <eAnnotations source="kermetaderivedProp.setter">
-              <details key="body" value="do&#xA;   //TODO: implement setterfor derived property name&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+              <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eAnnotations source="kermetaderivedProp.getter">
               <details key="body" value="do&#xA;&#x9;result := typeDefinition.name&#xA;end"/>
@@ -271,26 +253,20 @@
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="/1/language/structure/Object">
-          <eStructuralFeatures xsi:type="ecore:EReference" name="allAttribute" ordered="false" upperBound="-1" volatile="true" transient="true" derived="true">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="allAttribute" ordered="false" upperBound="-1" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermeta">
               <details key="documentation" value="/**&#xD;&#xA;  * Returns all the Attributes, References, derived Properties of this &#xD;&#xA;  * ClassDefinition including the inherited ones&#xD;&#xA;  */"/>
-              <details key="isReadOnly" value="false"/>
-            </eAnnotations>
-            <eAnnotations source="kermetaderivedProp.setter">
-              <details key="body" value="do&#xA;   //TODO: implement setterfor derived property allAttribute&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+              <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eAnnotations source="kermetaderivedProp.getter">
               <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::language::structure::Property>.new&#xA;&#x9;result.addAll(self.ownedAttribute)&#xA;&#x9;self.superType.each{t | do&#xA;&#x9;&#x9;&#x9;if kermeta::language::structure::Class.isInstance(t) then&#xA;&#x9;&#x9;&#x9;&#x9;var c : kermeta::language::structure::Class&#xA;&#x9;&#x9;&#x9;&#x9;c ?= t&#xA;&#x9;&#x9;&#x9;&#x9;var cDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;&#x9;&#x9;&#x9;cDef ?= c.typeDefinition&#xA;&#x9;&#x9;&#x9;&#x9;cDef.allAttribute.each{p | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(p)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../kermeta_java.ecore#/1/language/structure/Property"/>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="allOperation" ordered="false" upperBound="-1" volatile="true" transient="true" derived="true">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="allOperation" ordered="false" upperBound="-1" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermeta">
               <details key="documentation" value="/**&#xD;&#xA;  * Returns all the Operations of this ClassDefinition&#xD;&#xA;  * including the inherited ones&#xD;&#xA;  */"/>
-              <details key="isReadOnly" value="false"/>
-            </eAnnotations>
-            <eAnnotations source="kermetaderivedProp.setter">
-              <details key="body" value="do&#xA;   //TODO: implement setterfor derived property allOperation&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+              <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eAnnotations source="kermetaderivedProp.getter">
               <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::language::structure::Operation>.new&#xA;&#x9;result.addAll(self.ownedOperation)&#xA;&#x9;self.superType.each{t | do&#xA;&#x9;&#x9;&#x9;if kermeta::language::structure::Class.isInstance(t) then&#xA;&#x9;&#x9;&#x9;&#x9;var c : kermeta::language::structure::Class&#xA;&#x9;&#x9;&#x9;&#x9;c ?= t&#xA;&#x9;&#x9;&#x9;&#x9;var cDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;&#x9;&#x9;&#x9;cDef ?= c.typeDefinition&#xA;&#x9;&#x9;&#x9;&#x9;cDef.allOperation.each{p | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(p)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
@@ -322,7 +298,7 @@
           </eOperations>
           <eOperations name="addAllCompatible">
             <eAnnotations source="kermeta">
-              <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::language::structure::Object>.new&#xA;&#x9;objectsToAdd.each{obj | do&#xA;&#x9;&#x9;&#x9;var addedObject : kermeta::language::structure::Object init addCompatible(obj)&#xA;&#x9;&#x9;&#x9;if not (addedObject.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;result.add(obj)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
+              <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::language::structure::Object>.new&#xA;&#x9;objectsToAdd.each{obj | do&#xA;&#x9;&#x9;&#x9;var addedObject : kermeta::language::structure::Object init addCompatible(obj)&#xA;&#x9;&#x9;&#x9;if addedObject.isVoid.~not then&#xA;&#x9;&#x9;&#x9;&#x9;result.add(obj)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.&#xD;&#xA;   * Returns the list of Object that have been added (One can check that some element have been ignored or not)&#xD;&#xA;   */"/>
             </eAnnotations>
             <eParameters name="objectsToAdd">
@@ -396,7 +372,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="FunctionType" eSuperTypes="/1/language/structure/Object">
           <eAnnotations source="kermeta.inv">
-            <details key="resultType" value="not (right.isKindOf(kermeta::language::structure::ProductType))"/>
+            <details key="resultType" value="right.isKindOf(kermeta::language::structure::ProductType).~not"/>
           </eAnnotations>
         </eClassifiers>
       </eSubpackages>
@@ -408,52 +384,38 @@
     <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
-    <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
-    <references href="dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

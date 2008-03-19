@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Object.java,v 1.6 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: Object.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -14,6 +14,10 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Object</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Object definition: all entities of Kermeta metamodel explicitly inherit from Object
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -45,11 +49,14 @@ public interface Object extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An Object can be tagged by a Tag. 
+	 * They are typically used to put comments/documentation on the object
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Tag</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getObject_Tag()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Tag#getObject
 	 * @model opposite="object"
-	 *        annotation="GenModel documentation='/**\n * An Object can be tagged by a Tag. \n * They are typically used to put comments/documentation on the object\n \052/'"
 	 * @generated
 	 */
 	EList<Tag> getTag();
@@ -63,10 +70,14 @@ public interface Object extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An object can contains a Tag.  
+	 * Be careful, owning a tag doesn't means that the tag applies to the Object
+	 * To know which Tags apply to the object use the "tag" reference
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Tags</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getObject_OwnedTags()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * An object can contains a Tag.  \n * Be careful, owning a tag doesn\'t means that the tag applies to the Object\n * To know which Tags apply to the object use the \"tag\" reference\n \052/'"
 	 * @generated
 	 */
 	EList<Tag> getOwnedTags();

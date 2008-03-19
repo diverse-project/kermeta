@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Using.java,v 1.3 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: Using.java,v 1.4 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,10 @@ package fr.irisa.triskell.kermeta.language.structure;
  * A representation of the model object '<em><b>Using</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * To be written
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -20,7 +24,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getUsing()
- * @model annotation="GenModel documentation='/**\n * To be written\n \052/'"
+ * @model
  * @generated
  */
 public interface Using extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -39,11 +43,13 @@ public interface Using extends fr.irisa.triskell.kermeta.language.structure.Obje
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Qualified Name</em>' attribute.
 	 * @see #setQualifiedName(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getUsing_QualifiedName()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
-	 *        annotation="GenModel documentation='/**\n * To be written\n \052/'"
 	 * @generated
 	 */
 	String getQualifiedName();

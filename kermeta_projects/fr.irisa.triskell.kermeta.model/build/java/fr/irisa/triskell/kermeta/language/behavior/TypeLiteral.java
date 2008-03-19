@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeLiteral.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: TypeLiteral.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -12,6 +12,13 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * A representation of the model object '<em><b>Type Literal</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This expression is a literal representing a Type.
+ * for example, in 
+ *    Integer.new
+ * Integer is a type literal representing the type kermeta::standard::Integer
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -20,7 +27,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getTypeLiteral()
- * @model annotation="GenModel documentation='/**\n * This expression is a literal representing a Type.\n * for example, in \n *    Integer.new\n * Integer is a type literal representing the type kermeta::standard::Integer\n \052/'"
+ * @model
  * @generated
  */
 public interface TypeLiteral extends Literal {
@@ -39,11 +46,13 @@ public interface TypeLiteral extends Literal {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The type refered by this literal
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Typeref</em>' containment reference.
 	 * @see #setTyperef(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getTypeLiteral_Typeref()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * The type refered by this literal\n \052/'"
 	 * @generated
 	 */
 	TypeReference getTyperef();

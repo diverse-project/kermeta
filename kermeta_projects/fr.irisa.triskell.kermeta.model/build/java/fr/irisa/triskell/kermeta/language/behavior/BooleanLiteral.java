@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanLiteral.java,v 1.5 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: BooleanLiteral.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -12,6 +12,10 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * A representation of the model object '<em><b>Boolean Literal</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This expression is a literal representing a Boolean value, typically : true or false keyword
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -20,7 +24,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBooleanLiteral()
- * @model annotation="GenModel documentation='/**\n * This expression is a literal representing a Boolean value, typically : true or false keyword\n \052/'"
+ * @model
  * @generated
  */
 public interface BooleanLiteral extends Literal {
@@ -39,11 +43,13 @@ public interface BooleanLiteral extends Literal {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The concrete value represented by this literal
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBooleanLiteral_Value()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 *        annotation="GenModel documentation='/**\n * The concrete value represented by this literal\n \052/'"
 	 * @generated
 	 */
 	boolean isValue();

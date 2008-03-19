@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariable.java,v 1.6 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: TypeVariable.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -11,6 +11,11 @@ package fr.irisa.triskell.kermeta.language.structure;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Type Variable</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Definition of a type variable for generic types :  
+ * in class definition <pre>class AClass<X,Y> {}</pre>, X and Y are type variables.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -39,10 +44,13 @@ public interface TypeVariable extends TypeContainer, Type, NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Reference to the supertype, if any
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Supertype</em>' reference.
 	 * @see #setSupertype(Type)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeVariable_Supertype()
-	 * @model annotation="GenModel documentation='/**\n * Reference to the supertype, if any\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	Type getSupertype();

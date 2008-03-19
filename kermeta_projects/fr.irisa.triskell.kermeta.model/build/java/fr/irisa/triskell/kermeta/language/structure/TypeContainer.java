@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeContainer.java,v 1.6 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: TypeContainer.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,12 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Type Container</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Phantom class : EMF reflexive editors need that any element of a metamodel 
+ * has a direct or indirect containment relationship with the root model element of
+ * the metamodel. This class resolves this technical requirement.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -42,11 +48,13 @@ public interface TypeContainer extends fr.irisa.triskell.kermeta.language.struct
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Contained types
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Contained Type</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeContainer_ContainedType()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Type#getTypeContainer
 	 * @model opposite="typeContainer" containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Contained types\n \052/'"
 	 * @generated
 	 */
 	EList<Type> getContainedType();

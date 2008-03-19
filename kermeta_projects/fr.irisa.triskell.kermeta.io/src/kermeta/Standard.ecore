@@ -6,7 +6,7 @@
   </ecore:EAnnotation>
   <ecore:EPackage name="kermeta" nsURI="http://www.kermeta.org/kermeta" nsPrefix="kermeta">
     <eAnnotations source="kermeta">
-      <details key="documentation" value="/**&#xD;&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png&quot;>&#xD;&#xA; */"/>
+      <details key="documentation" value="/**&#xD;&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png&quot;/>&#xD;&#xA; */"/>
     </eAnnotations>
     <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
   </ecore:EPackage>
@@ -33,7 +33,6 @@
     <references href="utils/hashtable.ecore#/1"/>
     <references href="utils/stack.ecore#/0"/>
     <references href="utils/stack.ecore#/1"/>
-    <references href="utils/stack.ecore#/2"/>
     <references href="io/std_io.ecore#/0"/>
     <references href="io/std_io.ecore#/1"/>
     <references href="io/file_io.ecore#/0"/>
@@ -42,7 +41,6 @@
     <references href="exceptions/exceptions.ecore#/1"/>
     <references href="language/dynamic_expression.ecore#/0"/>
     <references href="language/dynamic_expression.ecore#/1"/>
-    <references href="language/dynamic_expression.ecore#/2"/>
     <references href="persistence/resource.ecore#/0"/>
     <references href="persistence/resource.ecore#/1"/>
     <references href="standard/java.ecore#/0"/>

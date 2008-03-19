@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallExpression.java,v 1.7 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: CallExpression.java,v 1.8 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -13,6 +13,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Call Expression</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Any callable expression inherits this class, e.g : 
+ *   - variable call
+ *   - feature call ( <code>a.b</code> : b is a feature call)
+ * 
+ * <img alt=""  height="90%" width="90%"  src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png" />
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -25,7 +33,6 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression()
  * @model abstract="true"
- *        annotation="GenModel documentation='/**\n * Any callable expression inherits this class, e.g : \n *   - variable call\n *   - feature call ( <code>a.b</code> : b is a feature call)\n *\n * <img alt=\"\"  height=\"90%\" width=\"90%\"  src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png\" />\n *\n \052/'"
  * @generated
  */
 public interface CallExpression extends Expression {
@@ -45,9 +52,12 @@ public interface CallExpression extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Static Type Variable Bindings</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_StaticTypeVariableBindings()
-	 * @model annotation="GenModel documentation='/**\n * to be written #########################################\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	EList<Type> getStaticTypeVariableBindings();
@@ -61,10 +71,12 @@ public interface CallExpression extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Kermeta calls can embedd expressions as parameters
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_Parameters()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Kermeta calls can embedd expressions as parameters\n \052/'"
 	 * @generated
 	 */
 	EList<Expression> getParameters();
@@ -77,11 +89,13 @@ public interface CallExpression extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A call must be named
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_Name()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
-	 *        annotation="GenModel documentation='/**\n * A call must be named\n \052/'"
 	 * @generated
 	 */
 	String getName();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationLiteral.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: EnumerationLiteral.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -11,6 +11,10 @@ package fr.irisa.triskell.kermeta.language.structure;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Enumeration Literal</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Item definition for enumeration
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -40,12 +44,14 @@ public interface EnumerationLiteral extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Owning Enumeration
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Enumeration</em>' container reference.
 	 * @see #setEnumeration(Enumeration)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getEnumerationLiteral_Enumeration()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Enumeration#getOwnedLiteral
 	 * @model opposite="ownedLiteral"
-	 *        annotation="GenModel documentation='/**\n * Owning Enumeration\n \052/'"
 	 * @generated
 	 */
 	Enumeration getEnumeration();

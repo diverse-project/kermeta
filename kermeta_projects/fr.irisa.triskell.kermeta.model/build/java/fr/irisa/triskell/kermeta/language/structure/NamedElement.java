@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElement.java,v 1.6 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: NamedElement.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -11,6 +11,11 @@ package fr.irisa.triskell.kermeta.language.structure;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Named Element</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Any element that contain a  name (example : Operation, Property) inherit this
+ * class.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -21,7 +26,6 @@ package fr.irisa.triskell.kermeta.language.structure;
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getNamedElement()
  * @model abstract="true"
- *        annotation="GenModel documentation='/**\n * Any element that contain a  name (example : Operation, Property) inherit this\n * class.\n \052/'"
  * @generated
  */
 public interface NamedElement extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -40,11 +44,13 @@ public interface NamedElement extends fr.irisa.triskell.kermeta.language.structu
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Name of this named element
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getNamedElement_Name()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String" required="true"
-	 *        annotation="GenModel documentation='/**\n * Name of this named element\n \052/'"
 	 * @generated
 	 */
 	String getName();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackageImpl.java,v 1.12 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: BehaviorPackageImpl.java,v 1.13 2008-03-19 16:34:14 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -942,13 +942,22 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		isCreated = true;
 
 		// Create classes and their features
+		assignmentEClass = createEClass(ASSIGNMENT);
+		createEReference(assignmentEClass, ASSIGNMENT__TARGET);
+		createEReference(assignmentEClass, ASSIGNMENT__VALUE);
+		createEAttribute(assignmentEClass, ASSIGNMENT__IS_CAST);
+
+		expressionEClass = createEClass(EXPRESSION);
+		createEReference(expressionEClass, EXPRESSION__STATIC_TYPE);
+
 		callExpressionEClass = createEClass(CALL_EXPRESSION);
 		createEReference(callExpressionEClass, CALL_EXPRESSION__PARAMETERS);
 		createEAttribute(callExpressionEClass, CALL_EXPRESSION__NAME);
 		createEReference(callExpressionEClass, CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS);
 
-		expressionEClass = createEClass(EXPRESSION);
-		createEReference(expressionEClass, EXPRESSION__STATIC_TYPE);
+		blockEClass = createEClass(BLOCK);
+		createEReference(blockEClass, BLOCK__STATEMENT);
+		createEReference(blockEClass, BLOCK__RESCUE_BLOCK);
 
 		callVariableEClass = createEClass(CALL_VARIABLE);
 		createEAttribute(callVariableEClass, CALL_VARIABLE__IS_ATPRE);
@@ -965,15 +974,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		callResultEClass = createEClass(CALL_RESULT);
 
 		callValueEClass = createEClass(CALL_VALUE);
-
-		assignmentEClass = createEClass(ASSIGNMENT);
-		createEReference(assignmentEClass, ASSIGNMENT__TARGET);
-		createEReference(assignmentEClass, ASSIGNMENT__VALUE);
-		createEAttribute(assignmentEClass, ASSIGNMENT__IS_CAST);
-
-		blockEClass = createEClass(BLOCK);
-		createEReference(blockEClass, BLOCK__STATEMENT);
-		createEReference(blockEClass, BLOCK__RESCUE_BLOCK);
 
 		conditionalEClass = createEClass(CONDITIONAL);
 		createEReference(conditionalEClass, CONDITIONAL__THEN_BODY);
@@ -1065,16 +1065,16 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		callExpressionEClass.getESuperTypes().add(this.getExpression());
-		expressionEClass.getESuperTypes().add(theStructurePackage.getTypeContainer());
+		assignmentEClass.getESuperTypes().add(this.getExpression());
 		expressionEClass.getESuperTypes().add(theStructurePackage.getObject());
+		expressionEClass.getESuperTypes().add(theStructurePackage.getTypeContainer());
+		callExpressionEClass.getESuperTypes().add(this.getExpression());
+		blockEClass.getESuperTypes().add(this.getExpression());
 		callVariableEClass.getESuperTypes().add(this.getCallExpression());
 		callFeatureEClass.getESuperTypes().add(this.getCallExpression());
 		callSuperOperationEClass.getESuperTypes().add(this.getCallExpression());
 		callResultEClass.getESuperTypes().add(this.getCallVariable());
 		callValueEClass.getESuperTypes().add(this.getCallExpression());
-		assignmentEClass.getESuperTypes().add(this.getExpression());
-		blockEClass.getESuperTypes().add(this.getExpression());
 		conditionalEClass.getESuperTypes().add(this.getExpression());
 		raiseEClass.getESuperTypes().add(this.getExpression());
 		rescueEClass.getESuperTypes().add(theStructurePackage.getObject());
@@ -1094,13 +1094,22 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		variableDeclEClass.getESuperTypes().add(this.getExpression());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAssignment_Target(), this.getCallExpression(), null, "target", null, 1, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssignment_Value(), this.getExpression(), null, "value", null, 1, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssignment_IsCast(), theStructurePackage.getBoolean(), "isCast", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExpression_StaticType(), theStructurePackage.getType(), null, "staticType", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(callExpressionEClass, CallExpression.class, "CallExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallExpression_Parameters(), this.getExpression(), null, "parameters", null, 0, -1, CallExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCallExpression_Name(), theStructurePackage.getString(), "name", null, 0, 1, CallExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCallExpression_StaticTypeVariableBindings(), theStructurePackage.getType(), null, "staticTypeVariableBindings", null, 0, -1, CallExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExpression_StaticType(), theStructurePackage.getType(), null, "staticType", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(blockEClass, Block.class, "Block", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBlock_Statement(), this.getExpression(), null, "statement", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBlock_RescueBlock(), this.getRescue(), null, "rescueBlock", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(callVariableEClass, CallVariable.class, "CallVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCallVariable_IsAtpre(), theStructurePackage.getBoolean(), "isAtpre", null, 0, 1, CallVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1117,15 +1126,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		initEClass(callResultEClass, CallResult.class, "CallResult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(callValueEClass, CallValue.class, "CallValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAssignment_Target(), this.getCallExpression(), null, "target", null, 1, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAssignment_Value(), this.getExpression(), null, "value", null, 1, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssignment_IsCast(), theStructurePackage.getBoolean(), "isCast", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(blockEClass, Block.class, "Block", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBlock_Statement(), this.getExpression(), null, "statement", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBlock_RescueBlock(), this.getRescue(), null, "rescueBlock", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionalEClass, Conditional.class, "Conditional", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConditional_ThenBody(), this.getExpression(), null, "thenBody", null, 1, 1, Conditional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1184,404 +1184,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		initEReference(getVariableDecl_Initialization(), this.getExpression(), null, "initialization", null, 1, 1, VariableDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableDecl_Identifier(), theStructurePackage.getString(), "identifier", null, 0, 1, VariableDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVariableDecl_Type(), this.getTypeReference(), null, "type", null, 1, 1, VariableDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		// Create annotations
-		// GenModel
-		createGenModelAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>GenModel</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createGenModelAnnotations() {
-		String source = "GenModel";		
-		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Contains all the classes that define the behavior of Kermeta (i.e the model representation\n * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta \n * metamodel, viewed as a model.\n * You can also find some information about the behavior package here : <a href=\"http://www.kermeta.org/documents/manual/html.single\">KermetaManual</a>\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_package.png\">\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_visitable_package.png\">\n */"
-		   });		
-		addAnnotation
-		  (callExpressionEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Any callable expression inherits this class, e.g : \n *   - variable call\n *   - feature call ( <code>a.b</code> : b is a feature call)\n *\n * <img alt=\"\"  height=\"90%\" width=\"90%\"  src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png\" />\n *\n */"
-		   });		
-		addAnnotation
-		  (getCallExpression_Parameters(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Kermeta calls can embedd expressions as parameters\n */"
-		   });		
-		addAnnotation
-		  (getCallExpression_Name(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * A call must be named\n */"
-		   });		
-		addAnnotation
-		  (getCallExpression_StaticTypeVariableBindings(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * to be written #########################################\n */"
-		   });		
-		addAnnotation
-		  (getExpression_StaticType(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Type of the Expression (set by type checking)\n */"
-		   });		
-		addAnnotation
-		  (callVariableEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * We call \"CallVariable\" the use of a variable in a statement.\n * in <code>i := j + 1</code>, i and j are 2 CallVariables.\n */"
-		   });		
-		addAnnotation
-		  (getCallVariable_IsAtpre(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Tells whether this CallVariable represents a call to @pre in a postcondition\n */"
-		   });		
-		addAnnotation
-		  (callFeatureEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * CallFeature is the model element that refers to the use of a feature, i.e either \n * a property or an operation in a statement. In <code>stdio.writeln(\"hello\")</code>, \n * <code>writeln</code> is a CallFeature.\n */"
-		   });		
-		addAnnotation
-		  (getCallFeature_Target(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Target Expression (the owner of the feature)\n */"
-		   });		
-		addAnnotation
-		  (getCallFeature_IsAtpre(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Tells whether this CallFeature represents a call to @pre in a postcondition\n */"
-		   });		
-		addAnnotation
-		  (getCallFeature_StaticProperty(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * The object which will be returned (property case)\n */"
-		   });		
-		addAnnotation
-		  (getCallFeature_StaticOperation(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * The method which will be executed (operation case)\n * and the result value passed to the caller\n */"
-		   });		
-		addAnnotation
-		  (getCallFeature_StaticEnumLiteral(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * To be written #################################\n */"
-		   });		
-		addAnnotation
-		  (callSuperOperationEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * This class represents a call to the operataion in the parent class\n *\tIn the following example, the type of super(element) is CallSuperOperation:\n *\n * class ParentClass {\n *   operation op(element : Integer) : Integer is do\n *       result := element + 1\n *   end\n * }\n *\n * class ChildClass {\n *   method op(element : Integer) : Integer is do\n *       result := super(element)\n *   end\n * }\n */"
-		   });		
-		addAnnotation
-		  (callResultEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * This class represents a call to the special internal variable \"result\" that is used to store the return value of any operation \n */"
-		   });		
-		addAnnotation
-		  (callValueEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * CallValue refers to the use of the <code>value</code> reserved keyword. This keyword is\n * only used in the body of the <code>setter</code> part of derived properties.\n */"
-		   });		
-		addAnnotation
-		  (assignmentEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Assignment is the model-element representation of the assignment statement <code>x := y</code>\n * <img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png\"/>\n */"
-		   });		
-		addAnnotation
-		  (getAssignment_Target(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Target of the assignment, as a CallExpression\n */"
-		   });		
-		addAnnotation
-		  (getAssignment_Value(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Value to be assigned, as a KerMeta expression\n */"
-		   });		
-		addAnnotation
-		  (getAssignment_IsCast(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Boolean stating whether current assignment corresponds to a cast operation \n */"
-		   });		
-		addAnnotation
-		  (blockEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Block is the model-element representation for the <code>do...end</code> block.\n */"
-		   });		
-		addAnnotation
-		  (getBlock_Statement(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * List of statements composing the block\n */"
-		   });		
-		addAnnotation
-		  (getBlock_RescueBlock(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * List of rescues defined for the block\n */"
-		   });		
-		addAnnotation
-		  (conditionalEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Condition is the model-element representation for the <code></code> \n */"
-		   });		
-		addAnnotation
-		  (getConditional_ThenBody(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Then part of the conditional statement\n */"
-		   });		
-		addAnnotation
-		  (getConditional_ElseBody(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Optional else part of the conditional statement\n */"
-		   });		
-		addAnnotation
-		  (getConditional_Condition(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Condition expression of conditional statement\n */"
-		   });		
-		addAnnotation
-		  (raiseEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Refers to raise exception block\n */"
-		   });		
-		addAnnotation
-		  (getRaise_Expression(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * To be written #######################\n */"
-		   });		
-		addAnnotation
-		  (rescueEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Refers to rescue exception block\n */"
-		   });		
-		addAnnotation
-		  (getRescue_Body(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Body of the rescue block, specified as a KerMeta expression\n */"
-		   });		
-		addAnnotation
-		  (getRescue_ExceptionType(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Type of the cathed exception\n */"
-		   });		
-		addAnnotation
-		  (getRescue_ExceptionName(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Name of the catched exception\n */"
-		   });		
-		addAnnotation
-		  (literalEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Literal refers to String values, Integer values, etc.\n */"
-		   });		
-		addAnnotation
-		  (emptyExpressionEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * As suggested by its name, this class represents an expression that do nothing. Like a \"nop\"\n */"
-		   });		
-		addAnnotation
-		  (javaStaticCallEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * This class represent a call to an extern Java operation. \n * This Java operation must be static and have at least one RuntimeO\n */"
-		   });		
-		addAnnotation
-		  (getJavaStaticCall_Parameters(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Parameters of the Java static call provided as KerMeta expressions\n */"
-		   });		
-		addAnnotation
-		  (getJavaStaticCall_Jclass(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Qualified name of the targeted Java class\n */"
-		   });		
-		addAnnotation
-		  (getJavaStaticCall_Jmethod(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Name of the Java method to be launched in the identified Java class\n */"
-		   });		
-		addAnnotation
-		  (lambdaExpressionEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Refers to lambda expression definition (<code>function { e | stdio.writeln(e.toString) }</code>)\n * <img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png\"/>\n */"
-		   });		
-		addAnnotation
-		  (getLambdaExpression_Parameters(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Parameters of the lambda expression\n */"
-		   });		
-		addAnnotation
-		  (getLambdaExpression_Body(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Body of the lambda expression providede as a KerMeta expression\n */"
-		   });		
-		addAnnotation
-		  (lambdaParameterEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Refers to parameter definition in lambda expression\n */"
-		   });		
-		addAnnotation
-		  (getLambdaParameter_Name(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Name of the lambda parameter\n */"
-		   });		
-		addAnnotation
-		  (getLambdaParameter_Type(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * To be written ################################\n */"
-		   });		
-		addAnnotation
-		  (integerLiteralEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * This expression is a literal representing an Integer value\n */"
-		   });		
-		addAnnotation
-		  (getIntegerLiteral_Value(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * The concrete value represented by this literal\n */"
-		   });		
-		addAnnotation
-		  (stringLiteralEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * This expression is a literal representing a String value, typically : \"my string\"\n */"
-		   });		
-		addAnnotation
-		  (getStringLiteral_Value(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * The concrete value represented by this literal\n */"
-		   });		
-		addAnnotation
-		  (booleanLiteralEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * This expression is a literal representing a Boolean value, typically : true or false keyword\n */"
-		   });		
-		addAnnotation
-		  (getBooleanLiteral_Value(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * The concrete value represented by this literal\n */"
-		   });		
-		addAnnotation
-		  (typeLiteralEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * This expression is a literal representing a Type.\n * for example, in \n *    Integer.new\n * Integer is a type literal representing the type kermeta::standard::Integer\n */"
-		   });		
-		addAnnotation
-		  (getTypeLiteral_Typeref(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * The type refered by this literal\n */"
-		   });		
-		addAnnotation
-		  (voidLiteralEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * This class is used to represent the special expression void\n */"
-		   });		
-		addAnnotation
-		  (loopEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Loop refers to <code>from var x : X init a until booleanCondition loop ... end</code>\n */"
-		   });		
-		addAnnotation
-		  (getLoop_Initialization(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Initialization expression for the loop\n */"
-		   });		
-		addAnnotation
-		  (getLoop_Body(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Body of the loop\n */"
-		   });		
-		addAnnotation
-		  (getLoop_StopCondition(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Stop condition of the loop, is interpreted as a Bollean value\n */"
-		   });		
-		addAnnotation
-		  (selfExpressionEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Refers to <code>self</code> use\n */"
-		   });		
-		addAnnotation
-		  (variableDeclEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * refers to variable declaration <code>var x : X init a</code>\n * <img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png\"/>\n */"
-		   });		
-		addAnnotation
-		  (getVariableDecl_Initialization(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Initialization expression for the variable\n * Default value is <code>void</code> ????\n */"
-		   });		
-		addAnnotation
-		  (getVariableDecl_Identifier(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Initialization expression for the variable\n * Default value is <code>void</code> ????\n */"
-		   });		
-		addAnnotation
-		  (getVariableDecl_Type(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\n * Type of the declared variable\n */"
-		   });
 	}
 
 } //BehaviorPackageImpl

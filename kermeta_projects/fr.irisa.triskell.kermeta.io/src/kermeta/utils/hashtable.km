@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure">
+<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/utils/@ownedTags.0" name="utils" uri="http://www.kermeta.org/kermeta/utils">
-      <ownedTags value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; * &#xD;&#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/utils"/>
+      <ownedTags value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; * &#xD;&#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;/>&#xD;&#xA; */" object="//@packages.0/utils"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/Hashtable/@ownedTags.0" name="Hashtable" superType="//@packages.0/utils/Hashtable/@containedType.0">
-        <ownedTags value="/**&#xD;&#xA; * An implementation of hashtable&#xD;&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xD;&#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/utils/Hashtable"/>
+        <ownedTags value="/**&#xD;&#xA; * An implementation of hashtable&#xD;&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xD;&#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;/>&#xD;&#xA; */" object="//@packages.0/utils/Hashtable"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="K"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="V"/>
         <containedType xsi:type="kermeta_language_structure:Class">
@@ -203,7 +203,7 @@
                 </statement>
               </body>
               <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="isOff">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@target/@containedType.0"/>
+                <staticType href="../standard/collections.km#//@packages.0/standard/Iterator/isOff/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@initialization/@containedType.0" name="it"/>
                 <staticOperation href="../standard/collections.km#//@packages.0/standard/Iterator/isOff"/>
               </stopCondition>
@@ -219,7 +219,7 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Collection"/>
           </containedType>
           <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0"/>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class">
                 <typeParamBinding type="//@packages.0/utils/Hashtable/V">
@@ -236,7 +236,7 @@
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
-              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0"/>
               <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.1/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/utils/Hashtable/values/@body/@statement.1/@parameters.0/@containedType.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/utils/Hashtable/K"/>

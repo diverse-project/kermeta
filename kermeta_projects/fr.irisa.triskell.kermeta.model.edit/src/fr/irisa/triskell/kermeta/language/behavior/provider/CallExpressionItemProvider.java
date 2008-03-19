@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallExpressionItemProvider.java,v 1.10 2008-02-14 07:13:52 uid21732 Exp $
+ * $Id: CallExpressionItemProvider.java,v 1.11 2008-03-19 16:34:00 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -204,6 +204,16 @@ public class CallExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS,
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -225,16 +235,6 @@ public class CallExpressionItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS,
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

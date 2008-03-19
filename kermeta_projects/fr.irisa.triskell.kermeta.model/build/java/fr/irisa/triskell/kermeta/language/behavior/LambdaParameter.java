@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaParameter.java,v 1.7 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: LambdaParameter.java,v 1.8 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -11,6 +11,10 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Lambda Parameter</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Refers to parameter definition in lambda expression
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -21,7 +25,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaParameter()
- * @model annotation="GenModel documentation='/**\n * Refers to parameter definition in lambda expression\n \052/'"
+ * @model
  * @generated
  */
 public interface LambdaParameter extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -40,11 +44,13 @@ public interface LambdaParameter extends fr.irisa.triskell.kermeta.language.stru
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Name of the lambda parameter
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaParameter_Name()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
-	 *        annotation="GenModel documentation='/**\n * Name of the lambda parameter\n \052/'"
 	 * @generated
 	 */
 	String getName();
@@ -67,11 +73,13 @@ public interface LambdaParameter extends fr.irisa.triskell.kermeta.language.stru
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written ################################
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
 	 * @see #setType(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaParameter_Type()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * To be written ################################\n \052/'"
 	 * @generated
 	 */
 	TypeReference getType();

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure">
+<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage name="utils" uri="http://www.kermeta.org/kermeta/utils">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/StringBuffer/@ownedTags.0" name="StringBuffer" superType="//@packages.0/utils/StringBuffer/@containedType.0">
-        <ownedTags value="/**&#xA; * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long&#xA; * string concatenation.&lt;br>&#xA; * &lt;b>Only work on Strings&lt;/b>&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;>&#xA; */" object="//@packages.0/utils/StringBuffer"/>
+        <ownedTags value="/**&#xA; * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long&#xA; * string concatenation.&lt;br>&#xA; * &lt;b>Only work on Strings&lt;/b>&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;/>&#xA; */" object="//@packages.0/utils/StringBuffer"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>

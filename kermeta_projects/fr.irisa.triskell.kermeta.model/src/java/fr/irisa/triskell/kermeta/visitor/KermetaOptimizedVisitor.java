@@ -1,7 +1,7 @@
-//$Id: KermetaOptimizedVisitor.java,v 1.13 2008-02-14 07:13:02 uid21732 Exp $
+//$Id: KermetaOptimizedVisitor.java,v 1.14 2008-03-19 16:34:13 cfaucher Exp $
 /*
  * This code has been generated to visit a kermeta model
- * Creation date: Mon Feb 11 15:32:02 GMT 2008
+ * Creation date: Wed Mar 19 15:50:43 CET 2008
  * Template Created on feb. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * IRISA / INRIA / University of rennes 1
@@ -30,6 +30,10 @@ public class KermetaOptimizedVisitor {
 	private static AcceptCommand getAcceptCmd(EObject node) {
 		if (acceptCmds == null) {
 			acceptCmds = new Hashtable<String,AcceptCommand>();
+			acceptCmds.put("Assignment",
+					new AssignmentAcceptCommand());
+			acceptCmds.put("Block",
+					new BlockAcceptCommand());
 			acceptCmds.put("CallVariable",
 					new CallVariableAcceptCommand());
 			acceptCmds.put("CallFeature",
@@ -40,10 +44,6 @@ public class KermetaOptimizedVisitor {
 					new CallResultAcceptCommand());
 			acceptCmds.put("CallValue",
 					new CallValueAcceptCommand());
-			acceptCmds.put("Assignment",
-					new AssignmentAcceptCommand());
-			acceptCmds.put("Block",
-					new BlockAcceptCommand());
 			acceptCmds.put("Conditional",
 					new ConditionalAcceptCommand());
 			acceptCmds.put("Raise",
@@ -76,6 +76,14 @@ public class KermetaOptimizedVisitor {
 					new SelfExpressionAcceptCommand());
 			acceptCmds.put("VariableDecl",
 					new VariableDeclAcceptCommand());
+			acceptCmds.put("Class",
+					new ClassAcceptCommand());
+			acceptCmds.put("Object",
+					new ObjectAcceptCommand());
+			acceptCmds.put("Model",
+					new ModelAcceptCommand());
+			acceptCmds.put("ModelType",
+					new ModelTypeAcceptCommand());
 			acceptCmds.put("Operation",
 					new OperationAcceptCommand());
 			acceptCmds.put("Property",
@@ -86,14 +94,6 @@ public class KermetaOptimizedVisitor {
 					new EnumerationLiteralAcceptCommand());
 			acceptCmds.put("TypeVariableBinding",
 					new TypeVariableBindingAcceptCommand());
-			acceptCmds.put("Class",
-					new ClassAcceptCommand());
-			acceptCmds.put("Object",
-					new ObjectAcceptCommand());
-			acceptCmds.put("Model",
-					new ModelAcceptCommand());
-			acceptCmds.put("ModelType",
-					new ModelTypeAcceptCommand());
 			acceptCmds.put("MultiplicityElement",
 					new MultiplicityElementAcceptCommand());
 			acceptCmds.put("TypeDefinition",
@@ -112,12 +112,6 @@ public class KermetaOptimizedVisitor {
 					new ConstraintAcceptCommand());
 			acceptCmds.put("ClassDefinition",
 					new ClassDefinitionAcceptCommand());
-			acceptCmds.put("ObjectTypeVariable",
-					new ObjectTypeVariableAcceptCommand());
-			acceptCmds.put("ModelTypeVariable",
-					new ModelTypeVariableAcceptCommand());
-			acceptCmds.put("VirtualType",
-					new VirtualTypeAcceptCommand());
 			acceptCmds.put("ModelingUnit",
 					new ModelingUnitAcceptCommand());
 			acceptCmds.put("Require",
@@ -126,6 +120,12 @@ public class KermetaOptimizedVisitor {
 					new UsingAcceptCommand());
 			acceptCmds.put("Filter",
 					new FilterAcceptCommand());
+			acceptCmds.put("ObjectTypeVariable",
+					new ObjectTypeVariableAcceptCommand());
+			acceptCmds.put("ModelTypeVariable",
+					new ModelTypeVariableAcceptCommand());
+			acceptCmds.put("VirtualType",
+					new VirtualTypeAcceptCommand());
 			acceptCmds.put("ProductType",
 					new ProductTypeAcceptCommand());
 			acceptCmds.put("FunctionType",
@@ -175,7 +175,15 @@ public class KermetaOptimizedVisitor {
 		// accept the node
 		return cmd.accept(node, this);
 	}
-		public Object visitCallVariable(fr.irisa.triskell.kermeta.language.behavior.CallVariable node) {
+		public Object visitAssignment(fr.irisa.triskell.kermeta.language.behavior.Assignment node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visitBlock(fr.irisa.triskell.kermeta.language.behavior.Block node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visitCallVariable(fr.irisa.triskell.kermeta.language.behavior.CallVariable node) {
 	return genericVisitChildren(node);
 	}
 
@@ -192,14 +200,6 @@ public class KermetaOptimizedVisitor {
 	}
 
 	public Object visitCallValue(fr.irisa.triskell.kermeta.language.behavior.CallValue node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visitAssignment(fr.irisa.triskell.kermeta.language.behavior.Assignment node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visitBlock(fr.irisa.triskell.kermeta.language.behavior.Block node) {
 	return genericVisitChildren(node);
 	}
 
@@ -267,6 +267,22 @@ public class KermetaOptimizedVisitor {
 	return genericVisitChildren(node);
 	}
 
+	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visitObject(fr.irisa.triskell.kermeta.language.structure.Object node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visitModel(fr.irisa.triskell.kermeta.language.structure.Model node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visitModelType(fr.irisa.triskell.kermeta.language.structure.ModelType node) {
+	return genericVisitChildren(node);
+	}
+
 	public Object visitOperation(fr.irisa.triskell.kermeta.language.structure.Operation node) {
 	return genericVisitChildren(node);
 	}
@@ -284,22 +300,6 @@ public class KermetaOptimizedVisitor {
 	}
 
 	public Object visitTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visitObject(fr.irisa.triskell.kermeta.language.structure.Object node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visitModel(fr.irisa.triskell.kermeta.language.structure.Model node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visitModelType(fr.irisa.triskell.kermeta.language.structure.ModelType node) {
 	return genericVisitChildren(node);
 	}
 
@@ -339,18 +339,6 @@ public class KermetaOptimizedVisitor {
 	return genericVisitChildren(node);
 	}
 
-	public Object visitObjectTypeVariable(fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visitModelTypeVariable(fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visitVirtualType(fr.irisa.triskell.kermeta.language.structure.VirtualType node) {
-	return genericVisitChildren(node);
-	}
-
 	public Object visitModelingUnit(fr.irisa.triskell.kermeta.language.structure.ModelingUnit node) {
 	return genericVisitChildren(node);
 	}
@@ -364,6 +352,18 @@ public class KermetaOptimizedVisitor {
 	}
 
 	public Object visitFilter(fr.irisa.triskell.kermeta.language.structure.Filter node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visitObjectTypeVariable(fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visitModelTypeVariable(fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visitVirtualType(fr.irisa.triskell.kermeta.language.structure.VirtualType node) {
 	return genericVisitChildren(node);
 	}
 
@@ -383,6 +383,18 @@ public class KermetaOptimizedVisitor {
 }
 abstract class AcceptCommand {
 	public abstract Object accept(EObject node, KermetaOptimizedVisitor visitor);
+}
+class AssignmentAcceptCommand extends AcceptCommand {
+	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
+		return visitor
+				.visitAssignment((fr.irisa.triskell.kermeta.language.behavior.Assignment) node);
+	}
+}
+class BlockAcceptCommand extends AcceptCommand {
+	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
+		return visitor
+				.visitBlock((fr.irisa.triskell.kermeta.language.behavior.Block) node);
+	}
 }
 class CallVariableAcceptCommand extends AcceptCommand {
 	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
@@ -412,18 +424,6 @@ class CallValueAcceptCommand extends AcceptCommand {
 	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
 		return visitor
 				.visitCallValue((fr.irisa.triskell.kermeta.language.behavior.CallValue) node);
-	}
-}
-class AssignmentAcceptCommand extends AcceptCommand {
-	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
-		return visitor
-				.visitAssignment((fr.irisa.triskell.kermeta.language.behavior.Assignment) node);
-	}
-}
-class BlockAcceptCommand extends AcceptCommand {
-	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
-		return visitor
-				.visitBlock((fr.irisa.triskell.kermeta.language.behavior.Block) node);
 	}
 }
 class ConditionalAcceptCommand extends AcceptCommand {
@@ -522,6 +522,30 @@ class VariableDeclAcceptCommand extends AcceptCommand {
 				.visitVariableDecl((fr.irisa.triskell.kermeta.language.behavior.VariableDecl) node);
 	}
 }
+class ClassAcceptCommand extends AcceptCommand {
+	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
+		return visitor
+				.visitClass((fr.irisa.triskell.kermeta.language.structure.Class) node);
+	}
+}
+class ObjectAcceptCommand extends AcceptCommand {
+	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
+		return visitor
+				.visitObject((fr.irisa.triskell.kermeta.language.structure.Object) node);
+	}
+}
+class ModelAcceptCommand extends AcceptCommand {
+	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
+		return visitor
+				.visitModel((fr.irisa.triskell.kermeta.language.structure.Model) node);
+	}
+}
+class ModelTypeAcceptCommand extends AcceptCommand {
+	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
+		return visitor
+				.visitModelType((fr.irisa.triskell.kermeta.language.structure.ModelType) node);
+	}
+}
 class OperationAcceptCommand extends AcceptCommand {
 	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
 		return visitor
@@ -550,30 +574,6 @@ class TypeVariableBindingAcceptCommand extends AcceptCommand {
 	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
 		return visitor
 				.visitTypeVariableBinding((fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding) node);
-	}
-}
-class ClassAcceptCommand extends AcceptCommand {
-	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
-		return visitor
-				.visitClass((fr.irisa.triskell.kermeta.language.structure.Class) node);
-	}
-}
-class ObjectAcceptCommand extends AcceptCommand {
-	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
-		return visitor
-				.visitObject((fr.irisa.triskell.kermeta.language.structure.Object) node);
-	}
-}
-class ModelAcceptCommand extends AcceptCommand {
-	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
-		return visitor
-				.visitModel((fr.irisa.triskell.kermeta.language.structure.Model) node);
-	}
-}
-class ModelTypeAcceptCommand extends AcceptCommand {
-	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
-		return visitor
-				.visitModelType((fr.irisa.triskell.kermeta.language.structure.ModelType) node);
 	}
 }
 class MultiplicityElementAcceptCommand extends AcceptCommand {
@@ -630,24 +630,6 @@ class ClassDefinitionAcceptCommand extends AcceptCommand {
 				.visitClassDefinition((fr.irisa.triskell.kermeta.language.structure.ClassDefinition) node);
 	}
 }
-class ObjectTypeVariableAcceptCommand extends AcceptCommand {
-	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
-		return visitor
-				.visitObjectTypeVariable((fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable) node);
-	}
-}
-class ModelTypeVariableAcceptCommand extends AcceptCommand {
-	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
-		return visitor
-				.visitModelTypeVariable((fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable) node);
-	}
-}
-class VirtualTypeAcceptCommand extends AcceptCommand {
-	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
-		return visitor
-				.visitVirtualType((fr.irisa.triskell.kermeta.language.structure.VirtualType) node);
-	}
-}
 class ModelingUnitAcceptCommand extends AcceptCommand {
 	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
 		return visitor
@@ -670,6 +652,24 @@ class FilterAcceptCommand extends AcceptCommand {
 	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
 		return visitor
 				.visitFilter((fr.irisa.triskell.kermeta.language.structure.Filter) node);
+	}
+}
+class ObjectTypeVariableAcceptCommand extends AcceptCommand {
+	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
+		return visitor
+				.visitObjectTypeVariable((fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable) node);
+	}
+}
+class ModelTypeVariableAcceptCommand extends AcceptCommand {
+	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
+		return visitor
+				.visitModelTypeVariable((fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable) node);
+	}
+}
+class VirtualTypeAcceptCommand extends AcceptCommand {
+	public Object accept(EObject node, KermetaOptimizedVisitor visitor) {
+		return visitor
+				.visitVirtualType((fr.irisa.triskell.kermeta.language.structure.VirtualType) node);
 	}
 }
 class ProductTypeAcceptCommand extends AcceptCommand {

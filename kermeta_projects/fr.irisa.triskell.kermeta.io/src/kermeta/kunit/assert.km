@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure">
+<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/kunit/@ownedTags.0" name="kunit" uri="http://www.kermeta.org/kermeta/kunit">
-      <ownedTags value="/**&#xD;&#xA; * main features of the famous Unit test tool for Kermeta language&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/kunit"/>
+      <ownedTags value="/**&#xD;&#xA; * main features of the famous Unit test tool for Kermeta language&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;/>&#xD;&#xA; */" object="//@packages.0/kunit"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/AbstractFallible/@ownedTags.0" name="AbstractFallible" isAbstract="true" superType="//@packages.0/kunit/AbstractFallible/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * to be written ############################&#xD;&#xA; */" object="//@packages.0/kunit/AbstractFallible"/>
         <containedType xsi:type="kermeta_language_structure:Class">
@@ -114,18 +114,15 @@
             </containedType>
           </ownedParameter>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/AbstractFallible/assertWithMsg/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0">
-              <containedType xsi:type="kermeta_language_structure:Class">
-                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
-              </containedType>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/kunit/AbstractFallible/distil/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@ownedParameter.0/@containedType.0" name="expected"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0" name="distil" staticOperation="//@packages.0/kunit/AbstractFallible/distil">
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/AbstractFallible/distil/@containedType.0" name="distil" staticOperation="//@packages.0/kunit/AbstractFallible/distil">
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@ownedParameter.0/@containedType.0" name="expected"/>
               </value>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/kunit/AbstractFallible/distil/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@ownedParameter.1/@containedType.0" name="actual"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0" name="distil" staticOperation="//@packages.0/kunit/AbstractFallible/distil">
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/AbstractFallible/distil/@containedType.0" name="distil" staticOperation="//@packages.0/kunit/AbstractFallible/distil">
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@ownedParameter.1/@containedType.0" name="actual"/>
               </value>
             </statement>
@@ -164,8 +161,11 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/distil/@ownedTags.0" name="distil" type="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/distil/@ownedTags.0" name="distil" type="//@packages.0/kunit/AbstractFallible/distil/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/** &#xD;&#xA;  ** reduces all runs of white-space to a single space character&#xD;&#xA;  **/" object="//@packages.0/kunit/AbstractFallible/distil"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+          </containedType>
           <ownedParameter name="s" type="//@packages.0/kunit/AbstractFallible/distil/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
@@ -176,7 +176,7 @@
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Void"/>
             </containedType>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.2/@parameters.1/@parameters.0/@containedType.0">
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0" name="result"/>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/kunit/AbstractFallible/distil/@containedType.0" name="result"/>
               <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.2/@parameters.1/@parameters.0/@containedType.0" value=""/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/kunit/AbstractFallible/distil/@body/@statement.1/@containedType.0" identifier="white">
@@ -203,7 +203,7 @@
                 <type type="//@packages.0/kunit/AbstractFallible/distil/@body/@statement.2/@initialization/@containedType.0" isOrdered="true" upper="1"/>
               </initialization>
               <body xsi:type="kermeta_language_behavior:Block">
-                <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0"/>
                 <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/kunit/AbstractFallible/distil/@body/@statement.2/@body/@statement.0/@containedType.0" identifier="c">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
@@ -236,17 +236,17 @@
                         </statement>
                         <statement xsi:type="kermeta_language_behavior:Assignment">
                           <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
-                          <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0" name="result"/>
+                          <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/kunit/AbstractFallible/distil/@containedType.0" name="result"/>
                           <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                             <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                             <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.2/@parameters.1/@parameters.0/@containedType.0" value=" "/>
-                            <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0" name="result"/>
+                            <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/kunit/AbstractFallible/distil/@containedType.0" name="result"/>
                             <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
                           </value>
                         </statement>
                       </thenBody>
                       <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
-                        <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                        <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/AbstractFallible/distil/@body/@statement.1/@containedType.0" name="white"/>
                         <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
                       </condition>
@@ -255,11 +255,11 @@
                   <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/AbstractFallible/distil/@body/@statement.1/@initialization/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment">
                       <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
-                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0" name="result"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/kunit/AbstractFallible/distil/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                         <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                         <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/AbstractFallible/distil/@body/@statement.2/@body/@statement.0/@containedType.0" name="c"/>
-                        <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0" name="result"/>
+                        <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/kunit/AbstractFallible/distil/@containedType.0" name="result"/>
                         <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
                       </value>
                     </statement>
@@ -274,7 +274,7 @@
                     </statement>
                   </elseBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="isGreaterOrEqual">
-                    <staticType href="../standard/collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
+                    <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/AbstractFallible/distil/@body/@statement.2/@initialization/@initialization/@containedType.0"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" name="indexOf">
                       <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/indexOf/@containedType.0"/>
@@ -286,10 +286,10 @@
                   </condition>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:Assignment">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
+                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/AbstractFallible/distil/@body/@statement.2/@initialization/@containedType.0" name="i"/>
                   <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
-                    <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
+                    <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/kunit/AbstractFallible/distil/@body/@statement.2/@initialization/@initialization/@containedType.0" value="1"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/AbstractFallible/distil/@body/@statement.2/@initialization/@containedType.0" name="i"/>
                     <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Integer/plus"/>
@@ -297,9 +297,9 @@
                 </statement>
               </body>
               <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" name="size">
-                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/elementAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/size/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/AbstractFallible/distil/@ownedParameter.0/@containedType.0" name="s"/>
                   <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/size"/>
                 </parameters>
@@ -326,16 +326,15 @@
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
             </containedType>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:VoidType"/>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/fail/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.2/@parameters.1/@parameters.0/@containedType.0" value="assert failed"/>
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/Assert/assert/@ownedParameter.0/@containedType.0" name="condition"/>
                 <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
               </condition>
@@ -350,15 +349,15 @@
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
             </containedType>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/fail/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.2/@parameters.1/@parameters.0/@containedType.0" value="assertTrue failed"/>
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/Assert/assertTrue/@ownedParameter.0/@containedType.0" name="condition"/>
                 <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
               </condition>
@@ -378,10 +377,10 @@
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/fail/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                     <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/Assert/assertTrueWithMsg/@ownedParameter.1/@containedType.0" name="msg"/>
@@ -391,7 +390,7 @@
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/Assert/assertTrueWithMsg/@ownedParameter.0/@containedType.0" name="condition"/>
                 <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
               </condition>
@@ -406,10 +405,10 @@
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
             </containedType>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/fail/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.2/@parameters.1/@parameters.0/@containedType.0" value="assertTrue number failed"/>
                 </statement>
               </thenBody>
@@ -430,10 +429,10 @@
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/fail/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                     <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/Assert/assertFalseWithMsg/@ownedParameter.1/@containedType.0" name="msg"/>
@@ -459,10 +458,10 @@
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/fail/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                     <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/Assert/assertWithMsg/@ownedParameter.1/@containedType.0" name="msg"/>
@@ -472,15 +471,16 @@
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/Assert/assertWithMsg/@ownedParameter.0/@containedType.0" name="condition"/>
                 <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
               </condition>
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/Assert/fail/@ownedTags.0" name="fail" type="//@packages.0/kunit/Assert/assert/@body/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/fail">
+        <ownedOperation tag="//@packages.0/kunit/Assert/fail/@ownedTags.0" name="fail" type="//@packages.0/kunit/Assert/fail/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/fail">
           <ownedTags value="/** raise a AssertionViolatedException with the provided message */" object="//@packages.0/kunit/Assert/fail"/>
+          <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="msg" type="//@packages.0/kunit/Assert/fail/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
@@ -503,7 +503,7 @@
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/kunit/Assert/fail/@ownedParameter.0/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0"/>
+                <staticType href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/Assert/fail/@body/@statement.0/@containedType.0" name="exception"/>
                 <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
               </target>
@@ -527,10 +527,10 @@
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/assert/@body/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/kunit/Assert/fail/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/Assert/fail/@containedType.0" name="fail" staticOperation="//@packages.0/kunit/Assert/fail">
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                     <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.2/@parameters.1/@parameters.0/@containedType.0" value="]"/>
@@ -555,7 +555,7 @@
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                   <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/Assert/assertEqual/@ownedParameter.1/@containedType.0" name="actual"/>

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VirtualType.java,v 1.5 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: VirtualType.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,10 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Virtual Type</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * To be written
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -23,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualType()
- * @model annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
+ * @model
  * @generated
  */
 public interface VirtualType extends ObjectTypeVariable {
@@ -42,11 +46,13 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Class Definition</em>' reference.
 	 * @see #setClassDefinition(ClassDefinition)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualType_ClassDefinition()
 	 * @model required="true"
-	 *        annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
 	 * @generated
 	 */
 	ClassDefinition getClassDefinition();
@@ -63,22 +69,24 @@ public interface VirtualType extends ObjectTypeVariable {
 
 	/**
 	 * Returns the value of the '<em><b>Model Type</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer#getVirtualType <em>Virtual Type</em>}'.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable#getVirtualType <em>Virtual Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Model Type</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Model Type</em>' container reference.
-	 * @see #setModelType(VirtualTypeContainer)
+	 * @see #setModelType(ModelTypeVariable)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualType_ModelType()
-	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer#getVirtualType
+	 * @see fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable#getVirtualType
 	 * @model opposite="virtualType" required="true" transient="false"
-	 *        annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
 	 * @generated
 	 */
-	VirtualTypeContainer getModelType();
+	ModelTypeVariable getModelType();
 
 	/**
 	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.VirtualType#getModelType <em>Model Type</em>}' container reference.
@@ -88,7 +96,7 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * @see #getModelType()
 	 * @generated
 	 */
-	void setModelType(VirtualTypeContainer value);
+	void setModelType(ModelTypeVariable value);
 
 	/**
 	 * Returns the value of the '<em><b>Type Param Binding</b></em>' containment reference list.
@@ -99,10 +107,12 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type Param Binding</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualType_TypeParamBinding()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
 	 * @generated
 	 */
 	EList<TypeVariableBinding> getTypeParamBinding();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataType.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: DataType.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,10 +12,13 @@ package fr.irisa.triskell.kermeta.language.structure;
  * A representation of the model object '<em><b>Data Type</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Special type definition for Enumeration, PrimitiveType
+ * <!-- end-model-doc -->
+ *
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getDataType()
  * @model abstract="true"
- *        annotation="GenModel documentation='/**\n * Special type definition for Enumeration, PrimitiveType\n \052/'"
  * @generated
  */
 public interface DataType extends Type, TypeDefinition {

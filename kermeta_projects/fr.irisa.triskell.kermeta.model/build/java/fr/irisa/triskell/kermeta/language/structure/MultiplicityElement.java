@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElement.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: MultiplicityElement.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -11,6 +11,10 @@ package fr.irisa.triskell.kermeta.language.structure;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Multiplicity Element</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ *  Model elements with a multiplicity [lower..upper] inherit this class
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -43,11 +47,13 @@ public interface MultiplicityElement extends TypedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Boolean stating whether the element is ordered
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Ordered</em>' attribute.
 	 * @see #setIsOrdered(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getMultiplicityElement_IsOrdered()
 	 * @model default="false" dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 *        annotation="GenModel documentation='/**\n * Boolean stating whether the element is ordered\n \052/'"
 	 * @generated
 	 */
 	boolean isIsOrdered();
@@ -71,11 +77,13 @@ public interface MultiplicityElement extends TypedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Boolean stating whether duplicated elements are allowed
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Unique</em>' attribute.
 	 * @see #setIsUnique(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getMultiplicityElement_IsUnique()
 	 * @model default="true" dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 *        annotation="GenModel documentation='/**\n * Boolean stating whether duplicated elements are allowed\n \052/'"
 	 * @generated
 	 */
 	boolean isIsUnique();
@@ -98,11 +106,13 @@ public interface MultiplicityElement extends TypedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Min cardinality of the element
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Lower</em>' attribute.
 	 * @see #setLower(int)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getMultiplicityElement_Lower()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Integer"
-	 *        annotation="GenModel documentation='/**\n * Min cardinality of the element\n \052/'"
 	 * @generated
 	 */
 	int getLower();
@@ -125,11 +135,13 @@ public interface MultiplicityElement extends TypedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Max cardinality of the element, '-1' for '*'
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Upper</em>' attribute.
 	 * @see #setUpper(int)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getMultiplicityElement_Upper()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.UnlimitedNatural"
-	 *        annotation="GenModel documentation='/**\n * Max cardinality of the element, \'-1\' for \'*\'\n \052/'"
 	 * @generated
 	 */
 	int getUpper();

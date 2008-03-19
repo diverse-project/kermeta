@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure">
+<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/exceptions/@ownedTags.0" name="exceptions" uri="http://www.kermeta.org/kermeta/exceptions">
-      <ownedTags value="/** &#xD;&#xA; * Contains the definition of a Kermeta exception and a few basic exceptions.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/exceptions"/>
+      <ownedTags value="/** &#xD;&#xA; * Contains the definition of a Kermeta exception and a few basic exceptions.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png&quot;/>&#xD;&#xA; */" object="//@packages.0/exceptions"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/Exception/@ownedTags.0" name="Exception" superType="//@packages.0/exceptions/Exception/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * Generic exceptions&#xD;&#xA; * The main class from which all the exception inherit&#xD;&#xA; */" object="//@packages.0/exceptions/Exception"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/exceptions/Exception/message/@ownedTags.0" name="message" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/exceptions/Exception/message/@ownedTags.0" name="message" type="//@packages.0/exceptions/Exception/message/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <ownedTags value="/** The message attached to the exception     */" object="//@packages.0/exceptions/Exception/message"/>
-          <type href="../language/structure.km#//@packages.0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+          </containedType>
         </ownedAttribute>
         <ownedAttribute tag="//@packages.0/exceptions/Exception/nestedException/@ownedTags.0" name="nestedException" type="//@packages.0/exceptions/Exception/nestedException/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <ownedTags value="/** Any nested exception     */" object="//@packages.0/exceptions/Exception/nestedException"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/Exception"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/exceptions/Exception/stackTrace/@ownedTags.0" name="stackTrace" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/exceptions/Exception/stackTrace/@ownedTags.0" name="stackTrace" type="//@packages.0/exceptions/Exception/stackTrace/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <ownedTags value="/**&#xD;&#xA;     * The stack trace as a String&#xD;&#xA;     * Filled by the interpreted when the exception is raised&#xD;&#xA;     */" object="//@packages.0/exceptions/Exception/stackTrace"/>
-          <type href="../kunit/kunit.km#//@packages.0/kunit/Error/toString/@body/@statement.3/@thenBody/@statement.0/@value/@parameters.0/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+          </containedType>
         </ownedAttribute>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/RuntimeError/@ownedTags.0" name="RuntimeError" superType="//@packages.0/exceptions/RuntimeError/@containedType.0">

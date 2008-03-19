@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpression.java,v 1.7 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: LambdaExpression.java,v 1.8 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -13,6 +13,11 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Lambda Expression</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Refers to lambda expression definition (<code>function { e | stdio.writeln(e.toString) }</code>)
+ * <img alt="" src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png"/>
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -22,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaExpression()
- * @model annotation="GenModel documentation='/**\n * Refers to lambda expression definition (<code>function { e | stdio.writeln(e.toString) }</code>)\n * <img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png\"/>\n \052/'"
+ * @model
  * @generated
  */
 public interface LambdaExpression extends Expression {
@@ -42,10 +47,12 @@ public interface LambdaExpression extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Parameters of the lambda expression
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaExpression_Parameters()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Parameters of the lambda expression\n \052/'"
 	 * @generated
 	 */
 	EList<LambdaParameter> getParameters();
@@ -58,11 +65,13 @@ public interface LambdaExpression extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Body of the lambda expression providede as a KerMeta expression
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaExpression_Body()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * Body of the lambda expression providede as a KerMeta expression\n \052/'"
 	 * @generated
 	 */
 	Expression getBody();

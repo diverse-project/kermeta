@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Parameter.java,v 1.4 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: Parameter.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,10 @@ package fr.irisa.triskell.kermeta.language.structure;
  * A representation of the model object '<em><b>Parameter</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition for operation parameter
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -20,7 +24,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getParameter()
- * @model annotation="GenModel documentation='/**\n * Definition for operation parameter\n \052/'"
+ * @model
  * @generated
  */
 public interface Parameter extends MultiplicityElement {
@@ -40,12 +44,14 @@ public interface Parameter extends MultiplicityElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Owning operation
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Operation</em>' container reference.
 	 * @see #setOperation(Operation)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getParameter_Operation()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getOwnedParameter
 	 * @model opposite="ownedParameter"
-	 *        annotation="GenModel documentation='/**\n * Owning operation\n \052/'"
 	 * @generated
 	 */
 	Operation getOperation();

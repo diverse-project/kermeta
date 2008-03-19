@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinition.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: GenericTypeDefinition.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,11 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Generic Type Definition</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Abstracts the definition of generic type definitions (i.e. type definitions that
+ * can be parameterized), namely, for ClassDefinition and ModelTypeDefinition.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -41,10 +46,12 @@ public interface GenericTypeDefinition extends TypeDefinition {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Type variables defined for the GenericTypeDefinition
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type Parameter</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getGenericTypeDefinition_TypeParameter()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Type variables defined for the GenericTypeDefinition\n \052/'"
 	 * @generated
 	 */
 	EList<TypeVariable> getTypeParameter();

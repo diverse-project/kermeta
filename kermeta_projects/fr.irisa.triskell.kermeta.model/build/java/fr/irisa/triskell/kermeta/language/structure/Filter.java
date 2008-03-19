@@ -1,7 +1,7 @@
 /**
  * IRISA / INRIA / Universite de Rennes 1
  *
- * $Id: Filter.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: Filter.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,11 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Filter</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Filter is the class that represent a filter on a ModelingUnit.
+ * the qualifiedName represent the beginning of the matched names
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -20,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getFilter()
- * @model annotation="GenModel documentation='/**\n * Filter is the class that represent a filter on a ModelingUnit.\n * the qualifiedName represent the beginning of the matched names\n \052/'"
+ * @model
  * @generated
  */
 public interface Filter extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -39,11 +44,13 @@ public interface Filter extends fr.irisa.triskell.kermeta.language.structure.Obj
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Qualified Name</em>' attribute.
 	 * @see #setQualifiedName(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getFilter_QualifiedName()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
-	 *        annotation="GenModel documentation='/**\n * To be written\n \052/'"
 	 * @generated
 	 */
 	String getQualifiedName();

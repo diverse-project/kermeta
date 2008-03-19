@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinition.java,v 1.10 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: ClassDefinition.java,v 1.11 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,19 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Class Definition</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * The definition of a class definition :)
+ *  <pre>class A
+ * { 
+ *   attribute s : String
+ * }
+ *   </pre> is a class definition; in :
+ * <pre>
+ * main() : A is do end
+ * </pre>
+ * A is a <b>Class</b> : it corresponds to the <b>use</b> of the class definition of A
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -44,11 +57,14 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Boolean stating whether the ClassDefinition is abstract (which means that
+	 * no instance can be allocated)
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Abstract</em>' attribute.
 	 * @see #setIsAbstract(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_IsAbstract()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 *        annotation="GenModel documentation='/**\n * Boolean stating whether the ClassDefinition is abstract (which means that\n * no instance can be allocated)\n \052/'"
 	 * @generated
 	 */
 	boolean isIsAbstract();
@@ -73,11 +89,13 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Attributes, References, and derived Properties owned by this ClassDefinition.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Attribute</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_OwnedAttribute()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass
 	 * @model opposite="owningClass" containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Attributes, References, and derived Properties owned by this ClassDefinition.\n \052/'"
 	 * @generated
 	 */
 	EList<Property> getOwnedAttribute();
@@ -92,11 +110,13 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Operations owned by this ClassDefinition.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Operation</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_OwnedOperation()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getOwningClass
 	 * @model opposite="owningClass" containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Operations owned by this ClassDefinition.\n \052/\n'"
 	 * @generated
 	 */
 	EList<Operation> getOwnedOperation();
@@ -110,9 +130,12 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Classes from which this ClassDefinition inherits.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Super Type</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_SuperType()
-	 * @model annotation="GenModel documentation='/**\n * Classes from which this ClassDefinition inherits.\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	EList<Type> getSuperType();
@@ -127,11 +150,13 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Invariants defined for this ClassDefinition
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Inv</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_Inv()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner
 	 * @model opposite="invOwner" containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Invariants defined for this ClassDefinition\n \052/'"
 	 * @generated
 	 */
 	EList<Constraint> getInv();

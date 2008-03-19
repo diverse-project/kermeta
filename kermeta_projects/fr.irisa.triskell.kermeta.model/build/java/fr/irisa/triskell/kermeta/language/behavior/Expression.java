@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Expression.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: Expression.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -13,6 +13,10 @@ import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * The base class for every entity used to define a behavior in operation body.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -25,7 +29,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
  * @model abstract="true"
  * @generated
  */
-public interface Expression extends TypeContainer, fr.irisa.triskell.kermeta.language.structure.Object {
+public interface Expression extends fr.irisa.triskell.kermeta.language.structure.Object, TypeContainer {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -41,10 +45,13 @@ public interface Expression extends TypeContainer, fr.irisa.triskell.kermeta.lan
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Type of the Expression (set by type checking)
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Static Type</em>' reference.
 	 * @see #setStaticType(Type)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getExpression_StaticType()
-	 * @model annotation="GenModel documentation='/**\n * Type of the Expression (set by type checking)\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	Type getStaticType();

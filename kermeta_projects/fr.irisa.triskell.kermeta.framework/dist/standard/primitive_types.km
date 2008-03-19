@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure">
+<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/standard/@ownedTags.0" name="standard" uri="http://www.kermeta.org/kermeta/standard">
-      <ownedTags value="/**&#xD;&#xA; * Defines primitive types &#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/primitive_types_view.png&quot;>&#xD;&#xA; */" object="//@packages.0/standard"/>
+      <ownedTags value="/**&#xD;&#xA; * Defines primitive types &#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/primitive_types_view.png&quot;/>&#xD;&#xA; */" object="//@packages.0/standard"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Void/@ownedTags.0" name="Void" superType="//@packages.0/standard/Void/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * The class Void &#xD;&#xA; * By convention it is a sub-type of everything&#xD;&#xA; */" object="//@packages.0/standard/Void"/>
         <containedType xsi:type="kermeta_language_structure:Class">
@@ -49,15 +49,11 @@
           <superOperation href="../language/structure.km#//@packages.0/language/structure/Object/isInstanceOf"/>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/PrimitiveType/@ownedTags.0" name="PrimitiveType" isAbstract="true" superType="//@packages.0/standard/PrimitiveType/@containedType.0">
-        <ownedTags value="/**&#xD;&#xA; * Used for PrimitiveTypes like Integer,String, boolean&#xD;&#xA; */" object="//@packages.0/standard/PrimitiveType"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
-        </containedType>
-      </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/ValueType/@ownedTags.0" name="ValueType" isAbstract="true" superType="//@packages.0/standard/ValueType/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * The abstract class ValueType does not contain any feature.&#xD;&#xA; * However, any instance of a sub-class of ValueType will be passed by value &#xD;&#xA; * instead of by reference for any other objects.&#xD;&#xA; * that means that each time you := such object it will call the clone function associated to it (Not implemented yet except for Integer, String and boolean!!!)&#xD;&#xA; * &#xD;&#xA; */" object="//@packages.0/standard/ValueType"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/PrimitiveType"/>
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../kermeta_java.km#//@packages.0/language/structure/PrimitiveType"/>
+        </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Comparable/@ownedTags.0" name="Comparable" isAbstract="true" superType="//@packages.0/standard/Comparable/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * The abstract class Comparable defines a set of operation&#xD;&#xA; * to compare instances of a class.&#xD;&#xA; * Sub-classes only has to implement abstract operation compareTo.&#xD;&#xA; * All other methods are defined w.r.t. the compareTo operation&#xD;&#xA; */" object="//@packages.0/standard/Comparable"/>
@@ -77,13 +73,10 @@
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/isGreater/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/isGreater/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Comparable/isGreater/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" name="isGreater" staticOperation="//@packages.0/standard/Integer/isGreater">
-                <staticType href="collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isGreater/@containedType.0" name="isGreater" staticOperation="//@packages.0/standard/Integer/isGreater">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                 </parameters>
@@ -105,13 +98,10 @@
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/isLower/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/isLower/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Comparable/isLower/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" name="isLower" staticOperation="//@packages.0/standard/Integer/isLower">
-                <staticType href="collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isLower/@containedType.0" name="isLower" staticOperation="//@packages.0/standard/Integer/isLower">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Comparable/compareTo/@containedType.0" name="compareTo" staticOperation="//@packages.0/standard/Comparable/compareTo">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -131,13 +121,10 @@
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Comparable/isLowerOrEqual/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" name="isLowerOrEqual" staticOperation="//@packages.0/standard/Integer/isLowerOrEqual">
-                <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0" name="isLowerOrEqual" staticOperation="//@packages.0/standard/Integer/isLowerOrEqual">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Comparable/compareTo/@containedType.0" name="compareTo" staticOperation="//@packages.0/standard/Comparable/compareTo">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -157,13 +144,10 @@
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Comparable/isGreaterOrEqual/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" name="isGreaterOrEqual" staticOperation="//@packages.0/standard/Integer/isGreaterOrEqual">
-                <staticType href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0" name="isGreaterOrEqual" staticOperation="//@packages.0/standard/Integer/isGreaterOrEqual">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Comparable/compareTo/@containedType.0" name="compareTo" staticOperation="//@packages.0/standard/Comparable/compareTo">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -197,7 +181,9 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Boolean/@ownedTags.0" name="Boolean" superType="//@packages.0/standard/Boolean/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * The Boolean type&#xD;&#xA; */" object="//@packages.0/standard/Boolean"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/PrimitiveType"/>
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../kermeta_java.km#//@packages.0/language/structure/PrimitiveType"/>
+        </containedType>
         <ownedOperation tag="//@packages.0/standard/Boolean/equals/@ownedTags.0" name="equals" type="//@packages.0/standard/Boolean/equals/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * Returns true if &lt;code>other&lt;/code> type is Boolean&#xD;&#xA;  * and has the same boolean value than current object.&#xD;&#xA;  */" object="//@packages.0/standard/Boolean/equals"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
@@ -238,10 +224,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Class"/>
-                  </containedType>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -253,19 +237,15 @@
           </body>
           <superOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Boolean/and/@ownedTags.0" name="and" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/standard/Boolean/and/@ownedTags.0" name="and" type="//@packages.0/standard/Boolean/and/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * return self and other&#xD;&#xA;  */" object="//@packages.0/standard/Boolean/and"/>
-          <type href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="other" type="//@packages.0/standard/Boolean/and/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
-              <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-              <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-              </target>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Boolean/and/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Boolean/and/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Boolean/and/@containedType.0" name="result"/>
               <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Boolean" jmethod="and">
                 <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Boolean/and/@body/@statement.0/@value/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
@@ -275,16 +255,12 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Boolean/not/@ownedTags.0" name="not" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/standard/Boolean/not/@ownedTags.0" name="not" type="//@packages.0/standard/Boolean/not/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * return not self&#xD;&#xA;  */" object="//@packages.0/standard/Boolean/not"/>
-          <type href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
-              <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
-              <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
-              </target>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Boolean/not/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Boolean/not/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Boolean/not/@containedType.0" name="result"/>
               <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Boolean" jmethod="not">
                 <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Boolean/not/@body/@statement.0/@value/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
@@ -293,19 +269,15 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Boolean/or/@ownedTags.0" name="or" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/standard/Boolean/or/@ownedTags.0" name="or" type="//@packages.0/standard/Boolean/or/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * return self or other&#xD;&#xA;  */" object="//@packages.0/standard/Boolean/or"/>
-          <type href="collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="other" type="//@packages.0/standard/Boolean/or/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
-              <staticType href="collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
-              <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
-              </target>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Boolean/or/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Boolean/or/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Boolean/or/@containedType.0" name="result"/>
               <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Boolean" jmethod="or">
                 <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Boolean/or/@body/@statement.0/@value/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
@@ -321,22 +293,16 @@
           <ownedParameter name="other" type="//@packages.0/standard/Boolean/implies/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Boolean/not/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Boolean/not/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Boolean/implies/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" name="not" staticOperation="//@packages.0/standard/Boolean/not">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
-                <target xsi:type="kermeta_language_behavior:CallFeature" name="and" staticOperation="//@packages.0/standard/Boolean/and">
-                  <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/not/@containedType.0" name="not" staticOperation="//@packages.0/standard/Boolean/not">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/and/@containedType.0" name="and" staticOperation="//@packages.0/standard/Boolean/and">
                   <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Boolean/implies/@body/@statement.0/@value/@target/@parameters.0/@containedType.0">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
                   </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="not" staticOperation="//@packages.0/standard/Boolean/not">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" name="and" staticOperation="//@packages.0/standard/Boolean/and">
-                      <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/not/@containedType.0" name="not" staticOperation="//@packages.0/standard/Boolean/not">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/and/@containedType.0" name="and" staticOperation="//@packages.0/standard/Boolean/and">
                       <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Boolean/implies/@ownedParameter.0/@containedType.0" name="other"/>
                       <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Boolean/implies/@body/@statement.0/@value/@target/@parameters.0/@containedType.0"/>
                     </target>
@@ -352,27 +318,20 @@
           <ownedParameter name="other" type="//@packages.0/standard/Boolean/xor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Boolean/or/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Boolean/or/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Boolean/xor/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" name="or" staticOperation="//@packages.0/standard/Boolean/or">
-                <staticType href="collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
-                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="and" staticOperation="//@packages.0/standard/Boolean/and">
-                  <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/or/@containedType.0" name="or" staticOperation="//@packages.0/standard/Boolean/or">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/and/@containedType.0" name="and" staticOperation="//@packages.0/standard/Boolean/and">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Boolean/xor/@ownedParameter.0/@containedType.0" name="other"/>
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="not" staticOperation="//@packages.0/standard/Boolean/not">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/not/@containedType.0" name="not" staticOperation="//@packages.0/standard/Boolean/not">
                     <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Boolean/xor/@body/@statement.0/@value/@parameters.0/@target/@target/@containedType.0">
                       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
                     </target>
                   </target>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" name="and" staticOperation="//@packages.0/standard/Boolean/and">
-                  <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="not" staticOperation="//@packages.0/standard/Boolean/not">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/and/@containedType.0" name="and" staticOperation="//@packages.0/standard/Boolean/and">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/not/@containedType.0" name="not" staticOperation="//@packages.0/standard/Boolean/not">
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Boolean/xor/@ownedParameter.0/@containedType.0" name="other"/>
                   </parameters>
                   <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Boolean/xor/@body/@statement.0/@value/@parameters.0/@target/@target/@containedType.0"/>
@@ -387,15 +346,11 @@
           <ownedParameter name="other" type="//@packages.0/standard/Boolean/nand/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Boolean/not/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Boolean/not/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Boolean/nand/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" name="not" staticOperation="//@packages.0/standard/Boolean/not">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
-                <target xsi:type="kermeta_language_behavior:CallFeature" name="and" staticOperation="//@packages.0/standard/Boolean/and">
-                  <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/not/@containedType.0" name="not" staticOperation="//@packages.0/standard/Boolean/not">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/and/@containedType.0" name="and" staticOperation="//@packages.0/standard/Boolean/and">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Boolean/nand/@ownedParameter.0/@containedType.0" name="other"/>
                   <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Boolean/nand/@body/@statement.0/@value/@target/@target/@containedType.0">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
@@ -520,24 +475,20 @@
                 <initialization xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
                 <type type="//@packages.0/standard/Integer/times/@body/@statement.0/@initialization/@containedType.0" isOrdered="true" upper="1"/>
               </initialization>
-              <body xsi:type="kermeta_language_behavior:Block">
-                <staticType href="collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/plus/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:CallVariable" name="body">
                   <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Integer/times/@body/@statement.0/@initialization/@containedType.0" name="i"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment">
-                  <staticType href="collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/plus/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Integer/times/@body/@statement.0/@initialization/@containedType.0" name="i"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" name="plus" staticOperation="//@packages.0/standard/Integer/plus">
-                    <staticType href="collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/plus/@containedType.0" name="plus" staticOperation="//@packages.0/standard/Integer/plus">
                     <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0" value="1"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Integer/times/@body/@statement.0/@initialization/@containedType.0" name="i"/>
                   </value>
                 </statement>
               </body>
-              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="equals" staticOperation="//@packages.0/standard/Integer/equals">
-                <staticType href="collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
+              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/equals/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Integer/equals">
                 <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/times/@body/@statement.0/@stopCondition/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                 </parameters>
@@ -552,20 +503,18 @@
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
                       <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/compareTo/@containedType.0" name="result"/>
-                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0" name="compareTo" staticOperation="//@packages.0/standard/Real/compareTo">
+                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Real/compareTo/@containedType.0" name="compareTo" staticOperation="//@packages.0/standard/Real/compareTo">
                         <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
                           <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                         </parameters>
-                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
-                          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
                           <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0">
                             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                           </target>
@@ -591,7 +540,8 @@
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                         <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                       </target>
@@ -619,7 +569,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -630,27 +581,24 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Integer/equals/@ownedTags.0" name="equals" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/standard/Integer/equals/@ownedTags.0" name="equals" type="//@packages.0/standard/Integer/equals/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * Returns true if &lt;code>other&lt;/code> type is Integer or Real&#xD;&#xA;  * and has the same numeric value than current object.&#xD;&#xA;  */" object="//@packages.0/standard/Integer/equals"/>
-          <type href="collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                        <staticType href="collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
-                      </target>
-                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Real/equals">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/equals/@containedType.0" name="result"/>
+                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Real/equals/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Real/equals">
                         <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
                           <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                         </parameters>
-                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
                           <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/equals/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0">
                             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                           </target>
@@ -660,9 +608,7 @@
                   </thenBody>
                   <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                        <staticType href="collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
-                      </target>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/equals/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0"/>
                     </statement>
                   </elseBody>
@@ -673,7 +619,8 @@
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                         <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                       </target>
@@ -683,13 +630,9 @@
                   </condition>
                 </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block">
-                <staticType href="collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
-                <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
-                  <staticType href="collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
-                  </target>
+              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/equals/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/equals/@containedType.0" isCast="true">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/equals/@containedType.0" name="result"/>
                   <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Integer" jmethod="equals">
                     <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/equals/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -705,7 +648,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -717,16 +661,14 @@
           </body>
           <superOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Integer/plus/@ownedTags.0" name="plus" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Summable/plus">
+        <ownedOperation tag="//@packages.0/standard/Integer/plus/@ownedTags.0" name="plus" type="//@packages.0/standard/Integer/plus/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Summable/plus">
           <ownedTags value="/**&#xD;&#xA;  * returns self + other&#xD;&#xA;  */" object="//@packages.0/standard/Integer/plus"/>
-          <type href="collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
           <ownedParameter name="other" type="//@packages.0/standard/Integer/plus/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Conditional">
-              <staticType href="collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/plus/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Integer/plus/@containedType.0">
               <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Boolean/andThen/@body/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/standard/Boolean/andThen/@body/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@containedType.0">
                   <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/plus/@body/@statement.0/@thenBody/@statement.0/@expression/@containedType.0" name="new">
@@ -740,13 +682,9 @@
                   </expression>
                 </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block">
-                <staticType href="collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
-                <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
-                  <staticType href="collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                    <staticType href="collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"/>
-                  </target>
+              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/plus/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/plus/@containedType.0" isCast="true">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/plus/@containedType.0" name="result"/>
                   <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Integer" jmethod="plus">
                     <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/plus/@body/@statement.0/@elseBody/@statement.0/@value/@parameters.0/@containedType.0">
                       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
@@ -763,16 +701,14 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Integer/minus/@ownedTags.0" name="minus" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/standard/Integer/minus/@ownedTags.0" name="minus" type="//@packages.0/standard/Integer/minus/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * returns self - other&#xD;&#xA;  */" object="//@packages.0/standard/Integer/minus"/>
-          <type href="collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
           <ownedParameter name="other" type="//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Conditional">
-              <staticType href="collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/minus/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Integer/minus/@containedType.0">
               <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Boolean/andThen/@body/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/standard/Boolean/andThen/@body/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@containedType.0">
                   <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/minus/@body/@statement.0/@thenBody/@statement.0/@expression/@containedType.0" name="new">
@@ -786,13 +722,9 @@
                   </expression>
                 </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block">
-                <staticType href="collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"/>
-                <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
-                  <staticType href="collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                    <staticType href="collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"/>
-                  </target>
+              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/minus/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/minus/@containedType.0" isCast="true">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/minus/@containedType.0" name="result"/>
                   <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Integer" jmethod="minus">
                     <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/minus/@body/@statement.0/@elseBody/@statement.0/@value/@parameters.0/@containedType.0">
                       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
@@ -870,8 +802,7 @@
                   </expression>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals" staticOperation="//@packages.0/standard/Integer/equals">
-                <staticType href="collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/equals/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Integer/equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Integer/div/@ownedParameter.0/@containedType.0" name="other"/>
               </condition>
@@ -930,8 +861,7 @@
                   </expression>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals" staticOperation="//@packages.0/standard/Integer/equals">
-                <staticType href="collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/equals/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Integer/equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Integer/mod/@ownedParameter.0/@containedType.0" name="other"/>
               </condition>
@@ -969,18 +899,13 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Integer/uminus/@ownedTags.0" name="uminus" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/standard/Integer/uminus/@ownedTags.0" name="uminus" type="//@packages.0/standard/Integer/uminus/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * returns -self&#xD;&#xA;  */" object="//@packages.0/standard/Integer/uminus"/>
-          <type href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"/>
-              <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
-              </target>
-              <value xsi:type="kermeta_language_behavior:CallFeature" name="minus" staticOperation="//@packages.0/standard/Integer/minus">
-                <staticType href="collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/minus/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/minus/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/uminus/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/minus/@containedType.0" name="minus" staticOperation="//@packages.0/standard/Integer/minus">
                 <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/uminus/@body/@statement.0/@value/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                 </parameters>
@@ -989,11 +914,12 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Integer/toReal/@ownedTags.0" name="toReal" type="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/standard/Integer/toReal/@ownedTags.0" name="toReal" type="//@packages.0/standard/Integer/toReal/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * Convert self as a Real&#xD;&#xA;  */" object="//@packages.0/standard/Integer/toReal"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" isCast="true">
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" name="result"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/toReal/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" name="result"/>
               <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Integer" jmethod="toReal">
                 <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/toReal/@body/@statement.0/@value/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
@@ -1002,9 +928,9 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Integer/isGreater/@ownedTags.0" name="isGreater" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Comparable/isGreater">
+        <ownedOperation tag="//@packages.0/standard/Integer/isGreater/@ownedTags.0" name="isGreater" type="//@packages.0/standard/Integer/isGreater/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Comparable/isGreater">
           <ownedTags value="/**&#xD;&#xA;  * return true if self > other&#xD;&#xA;  */" object="//@packages.0/standard/Integer/isGreater"/>
-          <type href="collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
@@ -1014,14 +940,12 @@
                 <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Comparable/isGreater/@containedType.0">
                   <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Comparable/isGreater/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Comparable/isGreater/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                        <staticType href="collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
-                      </target>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isGreater/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Comparable/isGreater/@containedType.0" name="isGreater" staticOperation="//@packages.0/standard/Comparable/isGreater">
                         <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
                           <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                         </parameters>
-                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
                           <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/isGreater/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0">
                             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                           </target>
@@ -1031,9 +955,7 @@
                   </thenBody>
                   <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                        <staticType href="collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
-                      </target>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isGreater/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0"/>
                     </statement>
                   </elseBody>
@@ -1044,7 +966,8 @@
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                         <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                       </target>
@@ -1054,13 +977,9 @@
                   </condition>
                 </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block">
-                <staticType href="collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
-                <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
-                  <staticType href="collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                    <staticType href="collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
-                  </target>
+              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/isGreater/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/isGreater/@containedType.0" isCast="true">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isGreater/@containedType.0" name="result"/>
                   <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Integer" jmethod="isGreater">
                     <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/isGreater/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1076,7 +995,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -1087,9 +1007,9 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Integer/isLower/@ownedTags.0" name="isLower" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Comparable/isLower">
+        <ownedOperation tag="//@packages.0/standard/Integer/isLower/@ownedTags.0" name="isLower" type="//@packages.0/standard/Integer/isLower/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Comparable/isLower">
           <ownedTags value="/**&#xD;&#xA;  * return true if self &lt; other&#xD;&#xA;  */" object="//@packages.0/standard/Integer/isLower"/>
-          <type href="collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
@@ -1099,14 +1019,12 @@
                 <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Comparable/isLower/@containedType.0">
                   <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Comparable/isLower/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Comparable/isLower/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                        <staticType href="collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"/>
-                      </target>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isLower/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Comparable/isLower/@containedType.0" name="isLower" staticOperation="//@packages.0/standard/Comparable/isLower">
                         <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
                           <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                         </parameters>
-                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
                           <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/isLower/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0">
                             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                           </target>
@@ -1116,9 +1034,7 @@
                   </thenBody>
                   <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                        <staticType href="collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"/>
-                      </target>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isLower/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0"/>
                     </statement>
                   </elseBody>
@@ -1129,7 +1045,8 @@
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                         <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                       </target>
@@ -1139,13 +1056,9 @@
                   </condition>
                 </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block">
-                <staticType href="collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"/>
-                <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
-                  <staticType href="collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                    <staticType href="collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"/>
-                  </target>
+              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/isLower/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/isLower/@containedType.0" isCast="true">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isLower/@containedType.0" name="result"/>
                   <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Integer" jmethod="isLower">
                     <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/isLower/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1161,7 +1074,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -1172,9 +1086,9 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Integer/isLowerOrEqual/@ownedTags.0" name="isLowerOrEqual" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Comparable/isLowerOrEqual">
+        <ownedOperation tag="//@packages.0/standard/Integer/isLowerOrEqual/@ownedTags.0" name="isLowerOrEqual" type="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Comparable/isLowerOrEqual">
           <ownedTags value="/**&#xD;&#xA;  * return true if self &lt;= other&#xD;&#xA;  */" object="//@packages.0/standard/Integer/isLowerOrEqual"/>
-          <type href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
@@ -1184,14 +1098,12 @@
                 <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Comparable/isLowerOrEqual/@containedType.0">
                   <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Comparable/isLowerOrEqual/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Comparable/isLowerOrEqual/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                        <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
-                      </target>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Comparable/isLowerOrEqual/@containedType.0" name="isLowerOrEqual" staticOperation="//@packages.0/standard/Comparable/isLowerOrEqual">
                         <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
                           <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                         </parameters>
-                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
                           <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0">
                             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                           </target>
@@ -1201,9 +1113,7 @@
                   </thenBody>
                   <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                        <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
-                      </target>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0"/>
                     </statement>
                   </elseBody>
@@ -1214,7 +1124,8 @@
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                         <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                       </target>
@@ -1224,13 +1135,9 @@
                   </condition>
                 </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block">
-                <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
-                <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
-                  <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                    <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
-                  </target>
+              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0" isCast="true">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0" name="result"/>
                   <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Integer" jmethod="isLowerOrEqual">
                     <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1246,7 +1153,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -1257,9 +1165,9 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Integer/isGreaterOrEqual/@ownedTags.0" name="isGreaterOrEqual" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Comparable/isGreaterOrEqual">
+        <ownedOperation tag="//@packages.0/standard/Integer/isGreaterOrEqual/@ownedTags.0" name="isGreaterOrEqual" type="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Comparable/isGreaterOrEqual">
           <ownedTags value="/**&#xD;&#xA;  * return true if self >= other&#xD;&#xA;  */" object="//@packages.0/standard/Integer/isGreaterOrEqual"/>
-          <type href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
@@ -1269,14 +1177,12 @@
                 <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Comparable/isGreaterOrEqual/@containedType.0">
                   <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Comparable/isGreaterOrEqual/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Comparable/isGreaterOrEqual/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                        <staticType href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
-                      </target>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Comparable/isGreaterOrEqual/@containedType.0" name="isGreaterOrEqual" staticOperation="//@packages.0/standard/Comparable/isGreaterOrEqual">
                         <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
                           <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                         </parameters>
-                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
                           <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0">
                             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                           </target>
@@ -1286,9 +1192,7 @@
                   </thenBody>
                   <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                        <staticType href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
-                      </target>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0"/>
                     </statement>
                   </elseBody>
@@ -1299,7 +1203,8 @@
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                         <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                       </target>
@@ -1309,13 +1214,9 @@
                   </condition>
                 </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block">
-                <staticType href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
-                <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
-                  <staticType href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                    <staticType href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
-                  </target>
+              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0" isCast="true">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0" name="result"/>
                   <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Integer" jmethod="isGreaterOrEqual">
                     <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1331,7 +1232,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -1507,7 +1409,7 @@
                   </expression>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Real/equals">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Real/equals/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Real/equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Real/div/@ownedParameter.0/@containedType.0" name="other"/>
               </condition>
@@ -1559,20 +1461,21 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Real/compareTo/@ownedTags.0" name="compareTo" type="//@packages.0/standard/Integer/compareTo/@body/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Comparable/compareTo">
+        <ownedOperation tag="//@packages.0/standard/Real/compareTo/@ownedTags.0" name="compareTo" type="//@packages.0/standard/Real/compareTo/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/standard/Comparable/compareTo">
           <ownedTags value="/**&#xD;&#xA;  * Comparison&#xD;&#xA;  */" object="//@packages.0/standard/Real/compareTo"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0" name="result"/>
-                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0" name="compareTo" staticOperation="//@packages.0/standard/Real/compareTo">
-                        <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Real/compareTo/@containedType.0" name="result"/>
+                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Real/compareTo/@containedType.0" name="compareTo" staticOperation="//@packages.0/standard/Real/compareTo">
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
                           <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Real/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@target/@containedType.0" name="asType">
                             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                             <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
@@ -1608,7 +1511,8 @@
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                       </typeref>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                         <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                       </target>
@@ -1618,9 +1522,9 @@
                   </condition>
                 </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0" isCast="true">
-                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/compareTo/@body/@containedType.0" name="result"/>
+              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/compareTo/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Real/compareTo/@containedType.0" isCast="true">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Real/compareTo/@containedType.0" name="result"/>
                   <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Real" jmethod="compareTo">
                     <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Real/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1636,7 +1540,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -1647,20 +1552,21 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/Real/equals/@ownedTags.0" name="equals" type="//@packages.0/standard/Integer/equals/@body/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/standard/Real/equals/@ownedTags.0" name="equals" type="//@packages.0/standard/Real/equals/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * Returns true if &lt;code>other&lt;/code> type is Integer or Real&#xD;&#xA;  * and has the same numeric value than current object.&#xD;&#xA;  */" object="//@packages.0/standard/Real/equals"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="other" isOrdered="true" upper="1">
             <type href="collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0" name="result"/>
-                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Real/equals">
-                        <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Real/equals/@containedType.0" name="result"/>
+                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Real/equals/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Real/equals">
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
                           <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Real/equals/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@target/@containedType.0" name="asType">
                             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                             <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
@@ -1680,7 +1586,7 @@
                   </thenBody>
                   <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0" name="result"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Real/equals/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/standard/Void/isVoid/@body/@containedType.0"/>
                     </statement>
                   </elseBody>
@@ -1691,7 +1597,8 @@
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                       </typeref>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                         <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                       </target>
@@ -1701,9 +1608,9 @@
                   </condition>
                 </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0" isCast="true">
-                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Integer/equals/@body/@containedType.0" name="result"/>
+              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Real/equals/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Real/equals/@containedType.0" isCast="true">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Real/equals/@containedType.0" name="result"/>
                   <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Real" jmethod="equals">
                     <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Real/equals/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1719,7 +1626,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -1741,7 +1649,7 @@
                 <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Real/uminus/@body/@statement.0/@value/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@target/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/toReal/@containedType.0" name="toReal" staticOperation="//@packages.0/standard/Integer/toReal">
                   <target xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
                 </target>
               </value>
@@ -1846,7 +1754,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Character"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -1961,7 +1870,8 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/String"/>
                   </typeref>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
                     <staticType href="collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </target>
@@ -1988,8 +1898,7 @@
                     <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/String/plus/@body/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@containedType.0">
                       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/String"/>
                     </parameters>
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/String/plus/@body/@statement.0/@thenBody/@statement.0/@value/@parameters.1/@containedType.0" name="toString" staticOperation="//@packages.0/standard/String/toString">
-                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/String"/>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/String/toString/@containedType.0" name="toString" staticOperation="//@packages.0/standard/String/toString">
                       <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0" name="other"/>
                     </parameters>
                   </value>
@@ -2081,21 +1990,15 @@
                   </value>
                 </statement>
               </elseBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="or" staticOperation="//@packages.0/standard/Boolean/or">
-                <staticType href="collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
-                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isGreater" staticOperation="//@packages.0/standard/Integer/isGreater">
-                  <staticType href="collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="minus" staticOperation="//@packages.0/standard/Integer/minus">
-                    <staticType href="collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"/>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/or/@containedType.0" name="or" staticOperation="//@packages.0/standard/Boolean/or">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isGreater/@containedType.0" name="isGreater" staticOperation="//@packages.0/standard/Integer/isGreater">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/minus/@containedType.0" name="minus" staticOperation="//@packages.0/standard/Integer/minus">
                     <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0" value="1"/>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/String/elementAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@target/@containedType.0" name="size" staticOperation="//@packages.0/standard/String/size">
-                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
-                    </target>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/String/size/@containedType.0" name="size" staticOperation="//@packages.0/standard/String/size"/>
                   </parameters>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/String/elementAt/@ownedParameter.0/@containedType.0" name="index"/>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" name="isLower" staticOperation="//@packages.0/standard/Integer/isLower">
-                  <staticType href="collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isLower/@containedType.0" name="isLower" staticOperation="//@packages.0/standard/Integer/isLower">
                   <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/String/elementAt/@ownedParameter.0/@containedType.0" name="index"/>
                 </target>
@@ -2157,29 +2060,22 @@
                   </expression>
                 </statement>
               </elseBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="and" staticOperation="//@packages.0/standard/Boolean/and">
-                <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isGreaterOrEqual" staticOperation="//@packages.0/standard/Integer/isGreaterOrEqual">
-                  <staticType href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/and/@containedType.0" name="and" staticOperation="//@packages.0/standard/Boolean/and">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0" name="isGreaterOrEqual" staticOperation="//@packages.0/standard/Integer/isGreaterOrEqual">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/String/substring/@ownedParameter.0/@containedType.0" name="startIndex"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/String/substring/@ownedParameter.1/@containedType.0" name="subStringSize"/>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:CallFeature" name="and" staticOperation="//@packages.0/standard/Boolean/and">
-                  <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isLowerOrEqual" staticOperation="//@packages.0/standard/Integer/isLowerOrEqual">
-                    <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/String/elementAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@target/@containedType.0" name="size" staticOperation="//@packages.0/standard/String/size"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/and/@containedType.0" name="and" staticOperation="//@packages.0/standard/Boolean/and">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0" name="isLowerOrEqual" staticOperation="//@packages.0/standard/Integer/isLowerOrEqual">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/String/size/@containedType.0" name="size" staticOperation="//@packages.0/standard/String/size"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/String/substring/@ownedParameter.1/@containedType.0" name="subStringSize"/>
                   </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="and" staticOperation="//@packages.0/standard/Boolean/and">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isLowerOrEqual" staticOperation="//@packages.0/standard/Integer/isLowerOrEqual">
-                      <staticType href="collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@condition/@containedType.0"/>
-                      <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/String/elementAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@target/@containedType.0" name="size" staticOperation="//@packages.0/standard/String/size"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/and/@containedType.0" name="and" staticOperation="//@packages.0/standard/Boolean/and">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isLowerOrEqual/@containedType.0" name="isLowerOrEqual" staticOperation="//@packages.0/standard/Integer/isLowerOrEqual">
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/String/size/@containedType.0" name="size" staticOperation="//@packages.0/standard/String/size"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/String/substring/@ownedParameter.0/@containedType.0" name="startIndex"/>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" name="isGreaterOrEqual" staticOperation="//@packages.0/standard/Integer/isGreaterOrEqual">
-                      <staticType href="collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0" name="isGreaterOrEqual" staticOperation="//@packages.0/standard/Integer/isGreaterOrEqual">
                       <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/standard/Comparable/isGreater/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/String/substring/@ownedParameter.0/@containedType.0" name="startIndex"/>
                     </target>
@@ -2189,11 +2085,12 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/String/size/@ownedTags.0" name="size" type="//@packages.0/standard/String/elementAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@target/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/standard/String/size/@ownedTags.0" name="size" type="//@packages.0/standard/String/size/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * returns the number of characters in the current String&#xD;&#xA;  */" object="//@packages.0/standard/String/size"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/String/elementAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@target/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/String/elementAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@target/@containedType.0" isCast="true">
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/String/elementAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@target/@containedType.0" name="result"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/String/size/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/String/size/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/String/size/@containedType.0" name="result"/>
               <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::String" jmethod="size">
                 <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/String/size/@body/@statement.0/@value/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/String"/>
@@ -2202,12 +2099,13 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/standard/String/toString/@ownedTags.0" name="toString" type="//@packages.0/standard/String/plus/@body/@statement.0/@thenBody/@statement.0/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/standard/String/toString/@ownedTags.0" name="toString" type="//@packages.0/standard/String/toString/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;  * returns the string itself&#xD;&#xA;  */" object="//@packages.0/standard/String/toString"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/String"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/String/toString/@body/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/String"/>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/String/toString/@body/@containedType.0">
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/String/plus/@body/@statement.0/@thenBody/@statement.0/@value/@parameters.1/@containedType.0" name="result"/>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/String/toString/@containedType.0" name="result"/>
               <value xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/String/toString/@body/@containedType.0"/>
             </statement>
           </body>

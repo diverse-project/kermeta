@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Operation.java,v 1.7 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: Operation.java,v 1.8 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -14,6 +14,10 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Operation</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Every one knows what an operation is.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -50,11 +54,13 @@ public interface Operation extends MultiplicityElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Body of the Operation, expressed as a KerMeta expression
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Body()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Body of the Operation, expressed as a KerMeta expression\n \052/'"
 	 * @generated
 	 */
 	Expression getBody();
@@ -77,10 +83,13 @@ public interface Operation extends MultiplicityElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Super-operation of the Operation, if any
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Super Operation</em>' reference.
 	 * @see #setSuperOperation(Operation)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_SuperOperation()
-	 * @model annotation="GenModel documentation='/**\n * Super-operation of the Operation, if any\n \052/\t'"
+	 * @model
 	 * @generated
 	 */
 	Operation getSuperOperation();
@@ -104,12 +113,14 @@ public interface Operation extends MultiplicityElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * ClassDefinition owning the Operation
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Class</em>' container reference.
 	 * @see #setOwningClass(ClassDefinition)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_OwningClass()
 	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedOperation
 	 * @model opposite="ownedOperation" transient="false"
-	 *        annotation="GenModel documentation='/**\n * ClassDefinition owning the Operation\n \052/'"
 	 * @generated
 	 */
 	ClassDefinition getOwningClass();
@@ -133,9 +144,12 @@ public interface Operation extends MultiplicityElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * TypeParameters of the Operation
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type Parameter</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_TypeParameter()
-	 * @model annotation="GenModel documentation='/**\n * TypeParameters of the Operation\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	EList<TypeVariable> getTypeParameter();
@@ -149,9 +163,12 @@ public interface Operation extends MultiplicityElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Exceptions raised by the Operation
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Raised Exception</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_RaisedException()
-	 * @model annotation="GenModel documentation='/**\n * Exceptions raised by the Operation\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	EList<Type> getRaisedException();
@@ -166,11 +183,13 @@ public interface Operation extends MultiplicityElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Parameters of the Operation
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Parameter</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_OwnedParameter()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Parameter#getOperation
 	 * @model opposite="operation" containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Parameters of the Operation\n \052/\n'"
 	 * @generated
 	 */
 	EList<Parameter> getOwnedParameter();
@@ -185,11 +204,13 @@ public interface Operation extends MultiplicityElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Pre-conditions of the Operation
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Pre</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Pre()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner
 	 * @model opposite="preOwner" containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Pre-conditions of the Operation\n \052/'"
 	 * @generated
 	 */
 	EList<Constraint> getPre();
@@ -204,11 +225,13 @@ public interface Operation extends MultiplicityElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Post-conditions of the Operation
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Post</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Post()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner
 	 * @model opposite="postOwner" containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Post-conditions of the Operation\n \052/'"
 	 * @generated
 	 */
 	EList<Constraint> getPost();
@@ -221,11 +244,13 @@ public interface Operation extends MultiplicityElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Boolean stating whether the Operation is abstract
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Abstract</em>' attribute.
 	 * @see #setIsAbstract(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_IsAbstract()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 *        annotation="GenModel documentation='/**\n * Boolean stating whether the Operation is abstract\n \052/'"
 	 * @generated
 	 */
 	boolean isIsAbstract();

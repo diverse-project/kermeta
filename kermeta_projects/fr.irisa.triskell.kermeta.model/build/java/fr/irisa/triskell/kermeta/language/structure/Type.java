@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Type.java,v 1.8 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: Type.java,v 1.9 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -11,6 +11,10 @@ package fr.irisa.triskell.kermeta.language.structure;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Type</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Alias to kermeta::standard::Integer
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -40,12 +44,14 @@ public interface Type extends fr.irisa.triskell.kermeta.language.structure.Objec
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Owning TypeContainer, if any
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type Container</em>' container reference.
 	 * @see #setTypeContainer(TypeContainer)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getType_TypeContainer()
 	 * @see fr.irisa.triskell.kermeta.language.structure.TypeContainer#getContainedType
 	 * @model opposite="containedType" transient="false"
-	 *        annotation="GenModel documentation='/**\n * Owning TypeContainer, if any\n \052/'"
 	 * @generated
 	 */
 	TypeContainer getTypeContainer();

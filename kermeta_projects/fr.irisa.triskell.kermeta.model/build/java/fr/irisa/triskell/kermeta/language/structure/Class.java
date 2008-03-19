@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Class.java,v 1.4 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: Class.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,11 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Returns the Attributes, References, and derived Properties owned by
+ * the ClassDefinition of this Class.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -45,10 +50,13 @@ public interface Class extends ParameterizedType {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns the Attributes, References, and derived Properties owned by
+	 * the ClassDefinition of this Class.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Attribute</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClass_OwnedAttribute()
 	 * @model changeable="false" derived="true"
-	 *        annotation="GenModel documentation='/**\n * Returns the Attributes, References, and derived Properties owned by\n * the ClassDefinition of this Class.\n \052/'"
 	 * @generated
 	 */
 	EList<Property> getOwnedAttribute();
@@ -62,10 +70,12 @@ public interface Class extends ParameterizedType {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns the Operations owned by the ClassDefinition of this Class.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Operation</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClass_OwnedOperation()
 	 * @model changeable="false" derived="true"
-	 *        annotation="GenModel documentation='/**\n * Returns the Operations owned by the ClassDefinition of this Class.\n \052/'"
 	 * @generated
 	 */
 	EList<Operation> getOwnedOperation();
@@ -79,10 +89,12 @@ public interface Class extends ParameterizedType {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns the Classes of which the ClassDefinition of this Class inherits.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Super Class</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClass_SuperClass()
 	 * @model changeable="false" derived="true"
-	 *        annotation="GenModel documentation='/**\n * Returns the Classes of which the ClassDefinition of this Class inherits.\n \052/'"
 	 * @generated
 	 */
 	EList<Class> getSuperClass();
@@ -96,10 +108,12 @@ public interface Class extends ParameterizedType {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns a Boolean stating whether ClassDefinition of this Class is abstract.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Abstract</em>' attribute.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClass_IsAbstract()
 	 * @model default="false" dataType="fr.irisa.triskell.kermeta.language.structure.Boolean" changeable="false" derived="true"
-	 *        annotation="GenModel documentation='/**\n * Returns a Boolean stating whether ClassDefinition of this Class is abstract.\n \052/ \n'"
 	 * @generated
 	 */
 	boolean isIsAbstract();
@@ -112,10 +126,12 @@ public interface Class extends ParameterizedType {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns the name of the ClassDefinition of this Class
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClass_Name()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String" changeable="false" derived="true"
-	 *        annotation="GenModel documentation='/**\n * Returns the name of the ClassDefinition of this Class\n \052/'"
 	 * @generated
 	 */
 	String getName();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedType.java,v 1.7 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: ParameterizedType.java,v 1.8 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,10 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Parameterized Type</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Abstraction for Parameterized types, namely, Class and ModelType
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -43,10 +47,12 @@ public interface ParameterizedType extends Type {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Bindings between type variables and provided types 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type Param Binding</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getParameterizedType_TypeParamBinding()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Bindings between type variables and provided types \n \052/'"
 	 * @generated
 	 */
 	EList<TypeVariableBinding> getTypeParamBinding();
@@ -59,11 +65,13 @@ public interface ParameterizedType extends Type {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition of the Type
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type Definition</em>' reference.
 	 * @see #setTypeDefinition(GenericTypeDefinition)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getParameterizedType_TypeDefinition()
 	 * @model required="true"
-	 *        annotation="GenModel documentation='/**\n * Definition of the Type\n \052/'"
 	 * @generated
 	 */
 	GenericTypeDefinition getTypeDefinition();
@@ -87,10 +95,12 @@ public interface ParameterizedType extends Type {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Virtual Type Binding</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getParameterizedType_VirtualTypeBinding()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
 	 * @generated
 	 */
 	EList<TypeVariableBinding> getVirtualTypeBinding();

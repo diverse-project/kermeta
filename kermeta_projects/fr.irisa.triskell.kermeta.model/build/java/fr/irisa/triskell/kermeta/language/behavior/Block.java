@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Block.java,v 1.8 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: Block.java,v 1.9 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -13,6 +13,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Block</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Block is the model-element representation for the <code>do...end</code> block.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -22,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBlock()
- * @model annotation="GenModel documentation='/**\n * Block is the model-element representation for the <code>do...end</code> block.\n \052/'"
+ * @model
  * @generated
  */
 public interface Block extends Expression {
@@ -42,10 +46,12 @@ public interface Block extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * List of rescues defined for the block
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Rescue Block</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBlock_RescueBlock()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * List of rescues defined for the block\n \052/'"
 	 * @generated
 	 */
 	EList<Rescue> getRescueBlock();
@@ -59,10 +65,12 @@ public interface Block extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * List of statements composing the block
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Statement</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBlock_Statement()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * List of statements composing the block\n \052/'"
 	 * @generated
 	 */
 	EList<Expression> getStatement();

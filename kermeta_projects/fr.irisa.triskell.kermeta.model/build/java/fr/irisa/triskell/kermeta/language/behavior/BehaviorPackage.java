@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.14 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: BehaviorPackage.java,v 1.15 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -24,9 +24,16 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * Contains all the classes that define the behavior of Kermeta (i.e the model representation
+ * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta 
+ * metamodel, viewed as a model.
+ * You can also find some information about the behavior package here : <a href="http://www.kermeta.org/documents/manual/html.single">KermetaManual</a>
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_visitable_package.png">
+ * <!-- end-model-doc -->
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory
  * @model kind="package"
- *        annotation="GenModel documentation='/**\n * Contains all the classes that define the behavior of Kermeta (i.e the model representation\n * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta \n * metamodel, viewed as a model.\n * You can also find some information about the behavior package here : <a href=\"http://www.kermeta.org/documents/manual/html.single\">KermetaManual</a>\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_package.png\">\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_visitable_package.png\">\n \052/'"
  * @generated
  */
 public interface BehaviorPackage extends EPackage {
@@ -51,7 +58,7 @@ public interface BehaviorPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior";
+	String eNS_URI = "http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior";
 
 	/**
 	 * The package namespace name.
@@ -86,7 +93,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__TAG = StructurePackage.TYPE_CONTAINER__TAG;
+	int EXPRESSION__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
@@ -95,7 +102,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__OWNED_TAGS = StructurePackage.TYPE_CONTAINER__OWNED_TAGS;
+	int EXPRESSION__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -104,7 +111,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__CONTAINED_TYPE = StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
+	int EXPRESSION__CONTAINED_TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -113,7 +120,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__STATIC_TYPE = StructurePackage.TYPE_CONTAINER_FEATURE_COUNT + 0;
+	int EXPRESSION__STATIC_TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Expression</em>' class.
@@ -122,7 +129,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_FEATURE_COUNT = StructurePackage.TYPE_CONTAINER_FEATURE_COUNT + 1;
+	int EXPRESSION_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.ConditionalImpl <em>Conditional</em>}' class.
@@ -172,7 +179,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallExpression()
 	 * @generated
 	 */
-	int CALL_EXPRESSION = 0;
+	int CALL_EXPRESSION = 2;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
@@ -182,7 +189,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
 	 * @generated
 	 */
-	int CALL_FEATURE = 3;
+	int CALL_FEATURE = 5;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.LiteralImpl <em>Literal</em>}' class.
@@ -232,7 +239,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getBlock()
 	 * @generated
 	 */
-	int BLOCK = 8;
+	int BLOCK = 3;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
@@ -242,7 +249,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
 	 * @generated
 	 */
-	int CALL_VARIABLE = 2;
+	int CALL_VARIABLE = 4;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallSuperOperationImpl <em>Call Super Operation</em>}' class.
@@ -252,7 +259,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallSuperOperation()
 	 * @generated
 	 */
-	int CALL_SUPER_OPERATION = 4;
+	int CALL_SUPER_OPERATION = 6;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.
@@ -262,7 +269,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallResult()
 	 * @generated
 	 */
-	int CALL_RESULT = 5;
+	int CALL_RESULT = 7;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallValueImpl <em>Call Value</em>}' class.
@@ -272,7 +279,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallValue()
 	 * @generated
 	 */
-	int CALL_VALUE = 6;
+	int CALL_VALUE = 8;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
@@ -332,7 +339,79 @@ public interface BehaviorPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getAssignment()
 	 * @generated
 	 */
-	int ASSIGNMENT = 7;
+	int ASSIGNMENT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__TAG = EXPRESSION__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__CONTAINED_TYPE = EXPRESSION__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Static Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__STATIC_TYPE = EXPRESSION__STATIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__TARGET = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__VALUE = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Is Cast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__IS_CAST = EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -405,6 +484,69 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK__TAG = EXPRESSION__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK__CONTAINED_TYPE = EXPRESSION__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Static Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK__STATIC_TYPE = EXPRESSION__STATIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Statement</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK__STATEMENT = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Rescue Block</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK__RESCUE_BLOCK = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Block</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -828,141 +970,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_VALUE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__TAG = EXPRESSION__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__CONTAINED_TYPE = EXPRESSION__CONTAINED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Static Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__STATIC_TYPE = EXPRESSION__STATIC_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__TARGET = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__VALUE = EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Is Cast</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__IS_CAST = EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Assignment</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK__TAG = EXPRESSION__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK__CONTAINED_TYPE = EXPRESSION__CONTAINED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Static Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK__STATIC_TYPE = EXPRESSION__STATIC_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Statement</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK__STATEMENT = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Rescue Block</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK__RESCUE_BLOCK = EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Block</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorSwitch.java,v 1.9 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: BehaviorSwitch.java,v 1.10 2008-03-19 16:34:14 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.util;
 
@@ -124,20 +124,38 @@ public class BehaviorSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case BehaviorPackage.CALL_EXPRESSION: {
-				CallExpression callExpression = (CallExpression)theEObject;
-				T result = caseCallExpression(callExpression);
-				if (result == null) result = caseExpression(callExpression);
-				if (result == null) result = caseTypeContainer(callExpression);
-				if (result == null) result = caseObject(callExpression);
+			case BehaviorPackage.ASSIGNMENT: {
+				Assignment assignment = (Assignment)theEObject;
+				T result = caseAssignment(assignment);
+				if (result == null) result = caseExpression(assignment);
+				if (result == null) result = caseObject(assignment);
+				if (result == null) result = caseTypeContainer(assignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case BehaviorPackage.EXPRESSION: {
 				Expression expression = (Expression)theEObject;
 				T result = caseExpression(expression);
-				if (result == null) result = caseTypeContainer(expression);
 				if (result == null) result = caseObject(expression);
+				if (result == null) result = caseTypeContainer(expression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BehaviorPackage.CALL_EXPRESSION: {
+				CallExpression callExpression = (CallExpression)theEObject;
+				T result = caseCallExpression(callExpression);
+				if (result == null) result = caseExpression(callExpression);
+				if (result == null) result = caseObject(callExpression);
+				if (result == null) result = caseTypeContainer(callExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BehaviorPackage.BLOCK: {
+				Block block = (Block)theEObject;
+				T result = caseBlock(block);
+				if (result == null) result = caseExpression(block);
+				if (result == null) result = caseObject(block);
+				if (result == null) result = caseTypeContainer(block);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -146,8 +164,8 @@ public class BehaviorSwitch<T> {
 				T result = caseCallVariable(callVariable);
 				if (result == null) result = caseCallExpression(callVariable);
 				if (result == null) result = caseExpression(callVariable);
-				if (result == null) result = caseTypeContainer(callVariable);
 				if (result == null) result = caseObject(callVariable);
+				if (result == null) result = caseTypeContainer(callVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -156,8 +174,8 @@ public class BehaviorSwitch<T> {
 				T result = caseCallFeature(callFeature);
 				if (result == null) result = caseCallExpression(callFeature);
 				if (result == null) result = caseExpression(callFeature);
-				if (result == null) result = caseTypeContainer(callFeature);
 				if (result == null) result = caseObject(callFeature);
+				if (result == null) result = caseTypeContainer(callFeature);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -166,8 +184,8 @@ public class BehaviorSwitch<T> {
 				T result = caseCallSuperOperation(callSuperOperation);
 				if (result == null) result = caseCallExpression(callSuperOperation);
 				if (result == null) result = caseExpression(callSuperOperation);
-				if (result == null) result = caseTypeContainer(callSuperOperation);
 				if (result == null) result = caseObject(callSuperOperation);
+				if (result == null) result = caseTypeContainer(callSuperOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -177,8 +195,8 @@ public class BehaviorSwitch<T> {
 				if (result == null) result = caseCallVariable(callResult);
 				if (result == null) result = caseCallExpression(callResult);
 				if (result == null) result = caseExpression(callResult);
-				if (result == null) result = caseTypeContainer(callResult);
 				if (result == null) result = caseObject(callResult);
+				if (result == null) result = caseTypeContainer(callResult);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -187,26 +205,8 @@ public class BehaviorSwitch<T> {
 				T result = caseCallValue(callValue);
 				if (result == null) result = caseCallExpression(callValue);
 				if (result == null) result = caseExpression(callValue);
-				if (result == null) result = caseTypeContainer(callValue);
 				if (result == null) result = caseObject(callValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case BehaviorPackage.ASSIGNMENT: {
-				Assignment assignment = (Assignment)theEObject;
-				T result = caseAssignment(assignment);
-				if (result == null) result = caseExpression(assignment);
-				if (result == null) result = caseTypeContainer(assignment);
-				if (result == null) result = caseObject(assignment);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case BehaviorPackage.BLOCK: {
-				Block block = (Block)theEObject;
-				T result = caseBlock(block);
-				if (result == null) result = caseExpression(block);
-				if (result == null) result = caseTypeContainer(block);
-				if (result == null) result = caseObject(block);
+				if (result == null) result = caseTypeContainer(callValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -214,8 +214,8 @@ public class BehaviorSwitch<T> {
 				Conditional conditional = (Conditional)theEObject;
 				T result = caseConditional(conditional);
 				if (result == null) result = caseExpression(conditional);
-				if (result == null) result = caseTypeContainer(conditional);
 				if (result == null) result = caseObject(conditional);
+				if (result == null) result = caseTypeContainer(conditional);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -223,8 +223,8 @@ public class BehaviorSwitch<T> {
 				Raise raise = (Raise)theEObject;
 				T result = caseRaise(raise);
 				if (result == null) result = caseExpression(raise);
-				if (result == null) result = caseTypeContainer(raise);
 				if (result == null) result = caseObject(raise);
+				if (result == null) result = caseTypeContainer(raise);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -250,8 +250,8 @@ public class BehaviorSwitch<T> {
 				Literal literal = (Literal)theEObject;
 				T result = caseLiteral(literal);
 				if (result == null) result = caseExpression(literal);
-				if (result == null) result = caseTypeContainer(literal);
 				if (result == null) result = caseObject(literal);
+				if (result == null) result = caseTypeContainer(literal);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -259,8 +259,8 @@ public class BehaviorSwitch<T> {
 				EmptyExpression emptyExpression = (EmptyExpression)theEObject;
 				T result = caseEmptyExpression(emptyExpression);
 				if (result == null) result = caseExpression(emptyExpression);
-				if (result == null) result = caseTypeContainer(emptyExpression);
 				if (result == null) result = caseObject(emptyExpression);
+				if (result == null) result = caseTypeContainer(emptyExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -268,8 +268,8 @@ public class BehaviorSwitch<T> {
 				JavaStaticCall javaStaticCall = (JavaStaticCall)theEObject;
 				T result = caseJavaStaticCall(javaStaticCall);
 				if (result == null) result = caseExpression(javaStaticCall);
-				if (result == null) result = caseTypeContainer(javaStaticCall);
 				if (result == null) result = caseObject(javaStaticCall);
+				if (result == null) result = caseTypeContainer(javaStaticCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -277,8 +277,8 @@ public class BehaviorSwitch<T> {
 				LambdaExpression lambdaExpression = (LambdaExpression)theEObject;
 				T result = caseLambdaExpression(lambdaExpression);
 				if (result == null) result = caseExpression(lambdaExpression);
-				if (result == null) result = caseTypeContainer(lambdaExpression);
 				if (result == null) result = caseObject(lambdaExpression);
+				if (result == null) result = caseTypeContainer(lambdaExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -294,8 +294,8 @@ public class BehaviorSwitch<T> {
 				T result = caseIntegerLiteral(integerLiteral);
 				if (result == null) result = caseLiteral(integerLiteral);
 				if (result == null) result = caseExpression(integerLiteral);
-				if (result == null) result = caseTypeContainer(integerLiteral);
 				if (result == null) result = caseObject(integerLiteral);
+				if (result == null) result = caseTypeContainer(integerLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -304,8 +304,8 @@ public class BehaviorSwitch<T> {
 				T result = caseStringLiteral(stringLiteral);
 				if (result == null) result = caseLiteral(stringLiteral);
 				if (result == null) result = caseExpression(stringLiteral);
-				if (result == null) result = caseTypeContainer(stringLiteral);
 				if (result == null) result = caseObject(stringLiteral);
+				if (result == null) result = caseTypeContainer(stringLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -314,8 +314,8 @@ public class BehaviorSwitch<T> {
 				T result = caseBooleanLiteral(booleanLiteral);
 				if (result == null) result = caseLiteral(booleanLiteral);
 				if (result == null) result = caseExpression(booleanLiteral);
-				if (result == null) result = caseTypeContainer(booleanLiteral);
 				if (result == null) result = caseObject(booleanLiteral);
+				if (result == null) result = caseTypeContainer(booleanLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -324,8 +324,8 @@ public class BehaviorSwitch<T> {
 				T result = caseTypeLiteral(typeLiteral);
 				if (result == null) result = caseLiteral(typeLiteral);
 				if (result == null) result = caseExpression(typeLiteral);
-				if (result == null) result = caseTypeContainer(typeLiteral);
 				if (result == null) result = caseObject(typeLiteral);
+				if (result == null) result = caseTypeContainer(typeLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -334,8 +334,8 @@ public class BehaviorSwitch<T> {
 				T result = caseVoidLiteral(voidLiteral);
 				if (result == null) result = caseLiteral(voidLiteral);
 				if (result == null) result = caseExpression(voidLiteral);
-				if (result == null) result = caseTypeContainer(voidLiteral);
 				if (result == null) result = caseObject(voidLiteral);
+				if (result == null) result = caseTypeContainer(voidLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -343,8 +343,8 @@ public class BehaviorSwitch<T> {
 				Loop loop = (Loop)theEObject;
 				T result = caseLoop(loop);
 				if (result == null) result = caseExpression(loop);
-				if (result == null) result = caseTypeContainer(loop);
 				if (result == null) result = caseObject(loop);
+				if (result == null) result = caseTypeContainer(loop);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -352,8 +352,8 @@ public class BehaviorSwitch<T> {
 				SelfExpression selfExpression = (SelfExpression)theEObject;
 				T result = caseSelfExpression(selfExpression);
 				if (result == null) result = caseExpression(selfExpression);
-				if (result == null) result = caseTypeContainer(selfExpression);
 				if (result == null) result = caseObject(selfExpression);
+				if (result == null) result = caseTypeContainer(selfExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -361,8 +361,8 @@ public class BehaviorSwitch<T> {
 				VariableDecl variableDecl = (VariableDecl)theEObject;
 				T result = caseVariableDecl(variableDecl);
 				if (result == null) result = caseExpression(variableDecl);
-				if (result == null) result = caseTypeContainer(variableDecl);
 				if (result == null) result = caseObject(variableDecl);
+				if (result == null) result = caseTypeContainer(variableDecl);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

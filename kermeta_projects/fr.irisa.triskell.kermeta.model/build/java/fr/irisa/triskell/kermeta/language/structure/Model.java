@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Model.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: Model.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,11 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Is the holder of a set of model elements (Object) that are compatible with the ModelType that has 
+ * instantiated this Model.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -41,10 +46,12 @@ public interface Model extends fr.irisa.triskell.kermeta.language.structure.Obje
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Contents of this model...
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Contents</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModel_Contents()
 	 * @model changeable="false"
-	 *        annotation="GenModel documentation='/**\n * Contents of this model ...\n \052/\n'"
 	 * @generated
 	 */
 	EList<fr.irisa.triskell.kermeta.language.structure.Object> getContents();

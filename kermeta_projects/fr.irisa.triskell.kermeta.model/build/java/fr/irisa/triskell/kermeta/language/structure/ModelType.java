@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelType.java,v 1.6 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: ModelType.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,10 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Model Type</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Type of a model, consisting of a set of included type definitions
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -41,9 +45,12 @@ public interface ModelType extends Type, TypeDefinition {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Included Type Definition</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelType_IncludedTypeDefinition()
-	 * @model annotation="GenModel documentation='/**\n * To be written #######################################\n \052/\n'"
+	 * @model
 	 * @generated
 	 */
 	EList<TypeDefinition> getIncludedTypeDefinition();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Package.java,v 1.6 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: Package.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,10 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Package</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Package in kermeta. Each kermeta model must have a root package. 
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -23,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPackage()
- * @model annotation="GenModel documentation='/**\n * Package in kermeta. Each kermeta model must have a root package. \n \052/'"
+ * @model
  * @generated
  */
 public interface Package extends NamedElement, TypeDefinitionContainer {
@@ -44,11 +48,13 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Nested Packages contained by the Package
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Nested Package</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPackage_NestedPackage()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Package#getNestingPackage
 	 * @model opposite="nestingPackage" containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Nested Packages contained by the Package\n \052/'"
 	 * @generated
 	 */
 	EList<Package> getNestedPackage();
@@ -62,12 +68,14 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Owning Package, if any
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Nesting Package</em>' container reference.
 	 * @see #setNestingPackage(Package)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPackage_NestingPackage()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Package#getNestedPackage
 	 * @model opposite="nestedPackage"
-	 *        annotation="GenModel documentation='/**\n * Owning Package, if any\n \052/'"
 	 * @generated
 	 */
 	Package getNestingPackage();
@@ -90,11 +98,13 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Uri of the Package
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Uri</em>' attribute.
 	 * @see #setUri(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPackage_Uri()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
-	 *        annotation="GenModel documentation='/**\n * Uri of the Package\n \052/'"
 	 * @generated
 	 */
 	String getUri();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureItemProviderAdapterFactory.java,v 1.13 2008-02-14 07:13:52 uid21732 Exp $
+ * $Id: StructureItemProviderAdapterFactory.java,v 1.14 2008-03-19 16:34:00 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -825,15 +825,15 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * @generated
 	 */
 	public void dispose() {
+		if (classItemProvider != null) classItemProvider.dispose();
+		if (objectItemProvider != null) objectItemProvider.dispose();
+		if (modelItemProvider != null) modelItemProvider.dispose();
+		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
 		if (operationItemProvider != null) operationItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (typeItemProvider != null) typeItemProvider.dispose();
 		if (enumerationLiteralItemProvider != null) enumerationLiteralItemProvider.dispose();
 		if (typeVariableBindingItemProvider != null) typeVariableBindingItemProvider.dispose();
-		if (classItemProvider != null) classItemProvider.dispose();
-		if (objectItemProvider != null) objectItemProvider.dispose();
-		if (modelItemProvider != null) modelItemProvider.dispose();
-		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
 		if (multiplicityElementItemProvider != null) multiplicityElementItemProvider.dispose();
 		if (typeDefinitionItemProvider != null) typeDefinitionItemProvider.dispose();
 		if (enumerationItemProvider != null) enumerationItemProvider.dispose();
@@ -843,13 +843,13 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (tagItemProvider != null) tagItemProvider.dispose();
 		if (constraintItemProvider != null) constraintItemProvider.dispose();
 		if (classDefinitionItemProvider != null) classDefinitionItemProvider.dispose();
-		if (objectTypeVariableItemProvider != null) objectTypeVariableItemProvider.dispose();
-		if (modelTypeVariableItemProvider != null) modelTypeVariableItemProvider.dispose();
-		if (virtualTypeItemProvider != null) virtualTypeItemProvider.dispose();
 		if (modelingUnitItemProvider != null) modelingUnitItemProvider.dispose();
 		if (requireItemProvider != null) requireItemProvider.dispose();
 		if (usingItemProvider != null) usingItemProvider.dispose();
 		if (filterItemProvider != null) filterItemProvider.dispose();
+		if (objectTypeVariableItemProvider != null) objectTypeVariableItemProvider.dispose();
+		if (modelTypeVariableItemProvider != null) modelTypeVariableItemProvider.dispose();
+		if (virtualTypeItemProvider != null) virtualTypeItemProvider.dispose();
 		if (productTypeItemProvider != null) productTypeItemProvider.dispose();
 		if (functionTypeItemProvider != null) functionTypeItemProvider.dispose();
 		if (voidTypeItemProvider != null) voidTypeItemProvider.dispose();

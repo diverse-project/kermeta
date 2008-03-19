@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Raise.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: Raise.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -12,6 +12,10 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * A representation of the model object '<em><b>Raise</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Refers to raise exception block
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -20,7 +24,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRaise()
- * @model annotation="GenModel documentation='/**\n * Refers to raise exception block\n \052/'"
+ * @model
  * @generated
  */
 public interface Raise extends Expression {
@@ -39,11 +43,13 @@ public interface Raise extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written #######################
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
 	 * @see #setExpression(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRaise_Expression()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * To be written #######################\n \052/'"
 	 * @generated
 	 */
 	Expression getExpression();

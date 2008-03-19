@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Constraint.java,v 1.6 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: Constraint.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,11 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Constraint</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Constraint is part of a contract implementation in a Class definition or an operation.
+ * Three kinds of constraints are available : pre, post, and inv (invariant constraint)
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -26,7 +31,7 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint()
- * @model annotation="GenModel documentation='/**\n * Constraint is part of a contract implementation in a Class definition or an operation.\n * Three kinds of constraints are available : pre, post, and inv (invariant constraint)\n \052/'"
+ * @model
  * @generated
  */
 public interface Constraint extends NamedElement {
@@ -45,11 +50,13 @@ public interface Constraint extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Body of the constraint, expressed as a KerMeta expression
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_Body()
 	 * @model containment="true" resolveProxies="true" required="true" ordered="false"
-	 *        annotation="GenModel documentation='/**\n * Body of the constraint, expressed as a KerMeta expression\n \052/'"
 	 * @generated
 	 */
 	Expression getBody();
@@ -73,11 +80,14 @@ public interface Constraint extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Type of the Constraint (precond/postcond/inv)
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Stereotype</em>' attribute.
 	 * @see fr.irisa.triskell.kermeta.language.structure.ConstraintType
 	 * @see #setStereotype(ConstraintType)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_Stereotype()
-	 * @model annotation="GenModel documentation='/**\n * Type of the Constraint (precond/postcond/inv)\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	ConstraintType getStereotype();
@@ -102,11 +112,14 @@ public interface Constraint extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Language in which the constraint is expressed
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Language</em>' attribute.
 	 * @see fr.irisa.triskell.kermeta.language.structure.ConstraintLanguage
 	 * @see #setLanguage(ConstraintLanguage)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_Language()
-	 * @model annotation="GenModel documentation='/**\n * Language in which the constraint is expressed\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	ConstraintLanguage getLanguage();
@@ -131,12 +144,14 @@ public interface Constraint extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Owning ClassDefinition if Constraint corresponds to invariant
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Inv Owner</em>' container reference.
 	 * @see #setInvOwner(ClassDefinition)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_InvOwner()
 	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getInv
 	 * @model opposite="inv" transient="false"
-	 *        annotation="GenModel documentation='/**\n * Owning ClassDefinition if Constraint corresponds to invariant\n \052/'"
 	 * @generated
 	 */
 	ClassDefinition getInvOwner();
@@ -160,12 +175,14 @@ public interface Constraint extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Owning Operation if Constraint corresponds to pre-condition
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Pre Owner</em>' container reference.
 	 * @see #setPreOwner(Operation)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_PreOwner()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getPre
 	 * @model opposite="pre" transient="false"
-	 *        annotation="GenModel documentation='/**\n * Owning Operation if Constraint corresponds to pre-condition\n \052/'"
 	 * @generated
 	 */
 	Operation getPreOwner();
@@ -189,12 +206,14 @@ public interface Constraint extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Owning Operation if Constraint corresponds to post-condition
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Post Owner</em>' container reference.
 	 * @see #setPostOwner(Operation)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_PostOwner()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getPost
 	 * @model opposite="post" transient="false"
-	 *        annotation="GenModel documentation='/**\n * Owning Operation if Constraint corresponds to post-condition\n \052/'"
 	 * @generated
 	 */
 	Operation getPostOwner();

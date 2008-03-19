@@ -5,6 +5,6 @@ org.eclipse.emf.examples.generator.validator plug-in to illustrate how EMF's
 code generator can be extended.
 This can be disabled with -vmargs -Dorg.eclipse.emf.examples.generator.validator=false.
 
-Package kermeta <http://www.kermeta.org/kermeta/1_0_0//kermeta>
+Package kermeta <http://www.kermeta.org/kermeta/1_2_0//kermeta>
 
   Class DummyClass

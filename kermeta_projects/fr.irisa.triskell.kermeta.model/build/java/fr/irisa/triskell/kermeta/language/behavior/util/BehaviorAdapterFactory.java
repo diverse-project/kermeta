@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorAdapterFactory.java,v 1.8 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: BehaviorAdapterFactory.java,v 1.9 2008-03-19 16:34:14 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.util;
 
@@ -107,12 +107,20 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	protected BehaviorSwitch<Adapter> modelSwitch =
 		new BehaviorSwitch<Adapter>() {
 			@Override
-			public Adapter caseCallExpression(CallExpression object) {
-				return createCallExpressionAdapter();
+			public Adapter caseAssignment(Assignment object) {
+				return createAssignmentAdapter();
 			}
 			@Override
 			public Adapter caseExpression(Expression object) {
 				return createExpressionAdapter();
+			}
+			@Override
+			public Adapter caseCallExpression(CallExpression object) {
+				return createCallExpressionAdapter();
+			}
+			@Override
+			public Adapter caseBlock(Block object) {
+				return createBlockAdapter();
 			}
 			@Override
 			public Adapter caseCallVariable(CallVariable object) {
@@ -133,14 +141,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCallValue(CallValue object) {
 				return createCallValueAdapter();
-			}
-			@Override
-			public Adapter caseAssignment(Assignment object) {
-				return createAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseBlock(Block object) {
-				return createBlockAdapter();
 			}
 			@Override
 			public Adapter caseConditional(Conditional object) {

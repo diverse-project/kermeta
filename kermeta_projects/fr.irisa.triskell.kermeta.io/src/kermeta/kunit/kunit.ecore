@@ -4,10 +4,10 @@
     <details key="require" value="../Standard.kmt|assert.kmt|"/>
     <details key="using" value="kermeta::kunit|kermeta::standard|kermeta::utils|kermeta|kermeta::language::structure|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="kunit" nsURI="http://www.kermeta.org/kermeta/kunit" nsPrefix="kunit">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * Contains the implementation of a unit test tool. This is a clone of&#xD;&#xA; * JUnit architecture.&#xD;&#xA; * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm&#xD;&#xA; *&#xD;&#xA; * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.&#xD;&#xA; *&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;>&#xD;&#xA; */"/>
+        <details key="documentation" value="/**&#xD;&#xA; * Contains the implementation of a unit test tool. This is a clone of&#xD;&#xA; * JUnit architecture.&#xD;&#xA; * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm&#xD;&#xA; *&#xD;&#xA; * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.&#xD;&#xA; *&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;/>&#xD;&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="InvalidTestCaseNameException">
         <eAnnotations source="kermeta">
@@ -43,7 +43,7 @@
         </eOperations>
         <eOperations name="assert">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.number&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;getLog.addFailure(self, ((((&quot;assertion number &quot;) + (number.toString))) + (&quot; failed&quot;)))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.number&#xA;&#x9;if condition.~not then&#xA;&#x9;&#x9;getLog.addFailure(self, ((((&quot;assertion number &quot;) + (number.toString))) + (&quot; failed&quot;)))&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;   * Log a failure if condition is false&#xD;&#xA;   */"/>
           </eAnnotations>
           <eParameters name="condition">
@@ -52,7 +52,7 @@
         </eOperations>
         <eOperations name="assertWithMsg">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.number&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;getLog.addFailure(self, ((((((&quot;assertion number &quot;) + (number.toString))) + (&quot; failed: &quot;))) + (msg)))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.number&#xA;&#x9;if condition.~not then&#xA;&#x9;&#x9;getLog.addFailure(self, ((((((&quot;assertion number &quot;) + (number.toString))) + (&quot; failed: &quot;))) + (msg)))&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;   * Log a failure if condition is false&#xD;&#xA;   */"/>
           </eAnnotations>
           <eParameters name="condition">
@@ -94,7 +94,7 @@
         </eOperations>
         <eOperations name="assertFalse">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;assert(not (condition))&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;assert(condition.~not)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;   * Log a failure if condition is true&#xD;&#xA;   */"/>
           </eAnnotations>
           <eParameters name="condition">
@@ -103,7 +103,7 @@
         </eOperations>
         <eOperations name="assertFalseWithMsg">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;assertWithMsg(not (condition), message)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;assertWithMsg(condition.~not, message)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;   * Log a failure if condition is true&#xD;&#xA;   */"/>
           </eAnnotations>
           <eParameters name="condition">
@@ -349,7 +349,7 @@
         </eOperations>
         <eOperations name="addAllTestCasesFrom">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if not (testCaseClass.superClass.exists{sc | do&#xA;&#x9;&#x9;&#x9;sc.equals(kermeta::kunit::TestCase)&#xA;&#x9;&#x9;end}) then&#xA;&#x9;&#x9;var e : kermeta::exceptions::Exception init kermeta::kunit::InvalidParameterException.new&#xA;&#x9;&#x9;e.message := ((&quot;Cannot build a suite from class: &quot;) + (testCaseClass.name))&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;testCaseClass.ownedOperation.~select{o | do&#xA;&#x9;&#x9;&#x9;if ((o.name.size) >= (4)) then&#xA;&#x9;&#x9;&#x9;&#x9;o.name.substring(0, 4).equals(&quot;test&quot;)&#xA;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;false&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}.each{o | do&#xA;&#x9;&#x9;&#x9;var testCase : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;testCase ?= testCaseClass.new&#xA;&#x9;&#x9;&#x9;testCase.setTestMethodName(o.name)&#xA;&#x9;&#x9;&#x9;self.tests.add(testCase)&#xA;&#x9;&#x9;end}&#xA;&#x9;result := self&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if testCaseClass.superClass.exists{sc | do&#xA;&#x9;&#x9;&#x9;sc.equals(kermeta::kunit::TestCase)&#xA;&#x9;&#x9;end}.~not then&#xA;&#x9;&#x9;var e : kermeta::exceptions::Exception init kermeta::kunit::InvalidParameterException.new&#xA;&#x9;&#x9;e.message := ((&quot;Cannot build a suite from class: &quot;) + (testCaseClass.name))&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;testCaseClass.ownedOperation.~select{o | do&#xA;&#x9;&#x9;&#x9;if ((o.name.size) >= (4)) then&#xA;&#x9;&#x9;&#x9;&#x9;o.name.substring(0, 4).equals(&quot;test&quot;)&#xA;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;false&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}.each{o | do&#xA;&#x9;&#x9;&#x9;var testCase : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;testCase ?= testCaseClass.new&#xA;&#x9;&#x9;&#x9;testCase.setTestMethodName(o.name)&#xA;&#x9;&#x9;&#x9;self.tests.add(testCase)&#xA;&#x9;&#x9;end}&#xA;&#x9;result := self&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;   * Add to this suite, a set of test cases of type c, one for each&#xD;&#xA;   * test method in class c. C must be a descendent of TestCase&#xD;&#xA;   */"/>
           </eAnnotations>
           <eAnnotations source="kermeta.pre">
@@ -416,7 +416,7 @@
         </eOperations>
         <eOperations name="raiseIfHasFailures">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var msg : kermeta::standard::String init &quot;&quot;&#xA;&#x9;if not (log.failures.empty) then&#xA;&#x9;&#x9;msg := &quot;Failures: &quot;&#xA;&#x9;&#x9;log.failures.each{f | do&#xA;&#x9;&#x9;&#x9;&#x9;msg := ((((msg) + (&quot;\n   &quot;))) + (f.toString))&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;var exception : kermeta::kunit::AssertionFailedError init kermeta::kunit::AssertionFailedError.new&#xA;&#x9;&#x9;exception.message := msg&#xA;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;end&#xA;&#x9;if not (log.errors.empty) then&#xA;&#x9;&#x9;log.errors.each{f | do&#xA;&#x9;&#x9;&#x9;&#x9;msg := &quot;Errors: &quot;&#xA;&#x9;&#x9;&#x9;&#x9;msg := ((((msg) + (&quot;\n   &quot;))) + (f.toString))&#xA;&#x9;&#x9;&#x9;&#x9;var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new&#xA;&#x9;&#x9;&#x9;&#x9;exception.message := msg&#xA;&#x9;&#x9;&#x9;&#x9;raise exception&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var msg : kermeta::standard::String init &quot;&quot;&#xA;&#x9;if log.failures.empty.~not then&#xA;&#x9;&#x9;msg := &quot;Failures: &quot;&#xA;&#x9;&#x9;log.failures.each{f | do&#xA;&#x9;&#x9;&#x9;&#x9;msg := ((((msg) + (&quot;\n   &quot;))) + (f.toString))&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;var exception : kermeta::kunit::AssertionFailedError init kermeta::kunit::AssertionFailedError.new&#xA;&#x9;&#x9;exception.message := msg&#xA;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;end&#xA;&#x9;if log.errors.empty.~not then&#xA;&#x9;&#x9;log.errors.each{f | do&#xA;&#x9;&#x9;&#x9;&#x9;msg := &quot;Errors: &quot;&#xA;&#x9;&#x9;&#x9;&#x9;msg := ((((msg) + (&quot;\n   &quot;))) + (f.toString))&#xA;&#x9;&#x9;&#x9;&#x9;var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new&#xA;&#x9;&#x9;&#x9;&#x9;exception.message := msg&#xA;&#x9;&#x9;&#x9;&#x9;raise exception&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * operation used when the TestCase is run from a java test runner, encapsulates the failures results&#xD;&#xA;  * into an AssertionFailedError so the TestRunner can detect it&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
@@ -472,7 +472,7 @@
         </eOperations>
         <eOperations name="printTestResult" ordered="false">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n&quot;)&#xA;&#x9;if not (log.failures.empty) then&#xA;&#x9;&#x9;stdio.writeln(&quot;\nFailures: &quot;)&#xA;&#x9;&#x9;log.failures.each{f | do&#xA;&#x9;&#x9;&#x9;&#x9;stdio.writeln(((&quot;\n   &quot;) + (f.toString)))&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;if not (log.errors.empty) then&#xA;&#x9;&#x9;stdio.writeln(&quot;\nErrors: &quot;)&#xA;&#x9;&#x9;log.errors.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;stdio.writeln(((&quot;\n   &quot;) + (e.toString)))&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;if not (log.harnessErrors.empty) then&#xA;&#x9;&#x9;stdio.writeln(&quot;\nErrors from setUp or tearDown : &quot;)&#xA;&#x9;&#x9;log.harnessErrors.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;stdio.writeln(((&quot;\n   &quot;) + (e.toString)))&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;stdio.writeln(&quot;\n Summary: &quot;)&#xA;&#x9;stdio.writeln(((&quot;   Number of launched tests : &quot;) + (log.runtests.toString)))&#xA;&#x9;stdio.writeln(((&quot;   Number of failures : &quot;) + (log.failures.size.toString)))&#xA;&#x9;stdio.writeln(((&quot;   Number of errors : &quot;) + (log.errors.size.toString)))&#xA;&#x9;stdio.writeln(((&quot;   Number of errors in setUp or tearDown: &quot;) + (log.harnessErrors.size.toString)))&#xA;&#x9;stdio.writeln(&quot;\n-------------------------------------------------------------------------------------------------------------------------------\n&quot;)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n&quot;)&#xA;&#x9;if log.failures.empty.~not then&#xA;&#x9;&#x9;stdio.writeln(&quot;\nFailures: &quot;)&#xA;&#x9;&#x9;log.failures.each{f | do&#xA;&#x9;&#x9;&#x9;&#x9;stdio.writeln(((&quot;\n   &quot;) + (f.toString)))&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;if log.errors.empty.~not then&#xA;&#x9;&#x9;stdio.writeln(&quot;\nErrors: &quot;)&#xA;&#x9;&#x9;log.errors.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;stdio.writeln(((&quot;\n   &quot;) + (e.toString)))&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;if log.harnessErrors.empty.~not then&#xA;&#x9;&#x9;stdio.writeln(&quot;\nErrors from setUp or tearDown : &quot;)&#xA;&#x9;&#x9;log.harnessErrors.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;stdio.writeln(((&quot;\n   &quot;) + (e.toString)))&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;stdio.writeln(&quot;\n Summary: &quot;)&#xA;&#x9;stdio.writeln(((&quot;   Number of launched tests : &quot;) + (log.runtests.toString)))&#xA;&#x9;stdio.writeln(((&quot;   Number of failures : &quot;) + (log.failures.size.toString)))&#xA;&#x9;stdio.writeln(((&quot;   Number of errors : &quot;) + (log.errors.size.toString)))&#xA;&#x9;stdio.writeln(((&quot;   Number of errors in setUp or tearDown: &quot;) + (log.harnessErrors.size.toString)))&#xA;&#x9;stdio.writeln(&quot;\n-------------------------------------------------------------------------------------------------------------------------------\n&quot;)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Prints the log or errors and failures from a test run.&#xD;&#xA;  * Run some tests first.&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
@@ -490,18 +490,19 @@
     <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
+    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="assert.ecore#/0"/>
     <references href="assert.ecore#/1"/>
+    <references href="assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
     <references href="../utils/utils.ecore#/2"/>
@@ -509,27 +510,25 @@
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

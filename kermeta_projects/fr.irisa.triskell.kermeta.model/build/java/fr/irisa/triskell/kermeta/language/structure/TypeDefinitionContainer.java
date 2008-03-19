@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionContainer.java,v 1.5 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: TypeDefinitionContainer.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -13,6 +13,12 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Type Definition Container</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Abstraction of the notion of containment for type definitions. Now, kermeta metamodel contains one container
+ * element, that is Package. In a later release, ModelTypeDefinition will be the main container for type and
+ * package definition.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -22,7 +28,6 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeDefinitionContainer()
  * @model abstract="true"
- *        annotation="GenModel documentation='/** \n * Abstraction of the notion of containment for type definitions. Now, kermeta metamodel contains one container\n * element, that is Package. In a later release, ModelTypeDefinition will be the main container for type and\n * package definition.\n \052/'"
  * @generated
  */
 public interface TypeDefinitionContainer extends NamedElement {
@@ -42,10 +47,12 @@ public interface TypeDefinitionContainer extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Contained TypeDefinitions
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Type Definition</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeDefinitionContainer_OwnedTypeDefinition()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Contained TypeDefinitions\n \052/'"
 	 * @generated
 	 */
 	EList<TypeDefinition> getOwnedTypeDefinition();

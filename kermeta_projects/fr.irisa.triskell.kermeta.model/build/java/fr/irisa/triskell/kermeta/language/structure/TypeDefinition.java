@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinition.java,v 1.7 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: TypeDefinition.java,v 1.8 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -14,6 +14,12 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Type Definition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This boolean allows to tell if this Type definition is an aspect or not
+ * If it is an aspect, then at runtime, its definition will be merged with the definition of another
+ * TypeDefinition that has exactly the same qualified name
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -22,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeDefinition()
- * @model annotation="GenModel documentation='/**\n * This boolean allows to tell if this Type definition is an aspect or not\n * If it is an aspect, then at runtime, its definition will be merged with the definition of another\n * TypeDefinition that has exactly the same qualified name\n \052/'"
+ * @model
  * @generated
  */
 public interface TypeDefinition extends NamedElement {

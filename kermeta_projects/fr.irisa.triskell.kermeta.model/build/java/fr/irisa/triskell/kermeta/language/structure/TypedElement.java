@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypedElement.java,v 1.6 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: TypedElement.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -11,6 +11,11 @@ package fr.irisa.triskell.kermeta.language.structure;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Typed Element</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Abstraction of the notion of typed element : each element 
+ * that is typed inherits this class.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -21,7 +26,6 @@ package fr.irisa.triskell.kermeta.language.structure;
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypedElement()
  * @model abstract="true"
- *        annotation="GenModel documentation='/**\n * Abstraction of the notion of typed element : each element \n * that is typed inherits this class.\n \052/'"
  * @generated
  */
 public interface TypedElement extends TypeContainer, NamedElement {
@@ -40,10 +44,13 @@ public interface TypedElement extends TypeContainer, NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Type of the model element
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Type)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypedElement_Type()
-	 * @model annotation="GenModel documentation='/**\n * Type of the model element\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	Type getType();

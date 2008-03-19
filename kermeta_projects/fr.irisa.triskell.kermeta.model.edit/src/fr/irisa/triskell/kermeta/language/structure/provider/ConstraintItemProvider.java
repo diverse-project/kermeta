@@ -217,6 +217,16 @@ public class ConstraintItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -238,16 +248,6 @@ public class ConstraintItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -46,7 +46,7 @@ public interface KmPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.kermeta.org/kermeta/1_0_0//kermeta";
+	String eNS_URI = "http://www.kermeta.org/kermeta/1_2_0//kermeta";
 
 	/**
 	 * The package namespace name.

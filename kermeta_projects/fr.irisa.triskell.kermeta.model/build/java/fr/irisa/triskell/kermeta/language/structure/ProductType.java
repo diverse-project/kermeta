@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductType.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: ProductType.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,11 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Product Type</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Type corresponding to a set of Types
+ * Only used in the context of FunctionType
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -41,9 +46,12 @@ public interface ProductType extends TypeContainer, Type {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Types 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProductType_Type()
-	 * @model annotation="GenModel documentation='/**\n * Types \n \052/'"
+	 * @model
 	 * @generated
 	 */
 	EList<Type> getType();

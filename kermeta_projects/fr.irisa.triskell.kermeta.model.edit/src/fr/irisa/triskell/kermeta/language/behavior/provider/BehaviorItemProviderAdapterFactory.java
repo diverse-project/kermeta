@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorItemProviderAdapterFactory.java,v 1.8 2008-02-14 07:13:53 uid21732 Exp $
+ * $Id: BehaviorItemProviderAdapterFactory.java,v 1.9 2008-03-19 16:34:00 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -710,13 +710,13 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * @generated
 	 */
 	public void dispose() {
+		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
+		if (blockItemProvider != null) blockItemProvider.dispose();
 		if (callVariableItemProvider != null) callVariableItemProvider.dispose();
 		if (callFeatureItemProvider != null) callFeatureItemProvider.dispose();
 		if (callSuperOperationItemProvider != null) callSuperOperationItemProvider.dispose();
 		if (callResultItemProvider != null) callResultItemProvider.dispose();
 		if (callValueItemProvider != null) callValueItemProvider.dispose();
-		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
-		if (blockItemProvider != null) blockItemProvider.dispose();
 		if (conditionalItemProvider != null) conditionalItemProvider.dispose();
 		if (raiseItemProvider != null) raiseItemProvider.dispose();
 		if (rescueItemProvider != null) rescueItemProvider.dispose();

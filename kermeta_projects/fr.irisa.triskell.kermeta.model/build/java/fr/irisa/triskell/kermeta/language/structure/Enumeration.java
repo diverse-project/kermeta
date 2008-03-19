@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Enumeration.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: Enumeration.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -13,6 +13,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Enumeration</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition for Enumeration
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -21,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getEnumeration()
- * @model annotation="GenModel documentation='/**\n * Definition for Enumeration\n \052/'"
+ * @model
  * @generated
  */
 public interface Enumeration extends DataType {
@@ -42,11 +46,13 @@ public interface Enumeration extends DataType {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Owned items in an Enumeration
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Literal</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getEnumeration_OwnedLiteral()
 	 * @see fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral#getEnumeration
 	 * @model opposite="enumeration" containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Owned items in an Enumeration\n \052/'"
 	 * @generated
 	 */
 	EList<EnumerationLiteral> getOwnedLiteral();

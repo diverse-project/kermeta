@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.48 2008-03-03 13:39:57 dvojtise Exp $
+// $Id: primitive_types.kmt,v 1.49 2008-03-19 16:34:05 cfaucher Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -46,13 +46,6 @@ class ~Void {
 	method isInstanceOf(type : Type) : Boolean is do
 		result := true
 	end
-}
-
-
-/**
- * Used for PrimitiveTypes like Integer,String, boolean
- */
-abstract class PrimitiveType {
 }
 
 

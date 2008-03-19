@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintLanguage.java,v 1.5 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: ConstraintLanguage.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -17,8 +17,11 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Constraint Language</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * Enumeration listing supported constraint languages
+ * <!-- end-model-doc -->
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraintLanguage()
- * @model annotation="GenModel documentation='/**\n * Enumeration listing supported constraint languages\n \052/'"
+ * @model
  * @generated
  */
 public enum ConstraintLanguage implements Enumerator

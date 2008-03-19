@@ -38,7 +38,7 @@ public class LanguageFactoryImpl extends EFactoryImpl implements LanguageFactory
 	 */
 	public static LanguageFactory init() {
 		try {
-			LanguageFactory theLanguageFactory = (LanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/1_0_0//kermeta/language"); 
+			LanguageFactory theLanguageFactory = (LanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/1_2_0//kermeta/language"); 
 			if (theLanguageFactory != null) {
 				return theLanguageFactory;
 			}

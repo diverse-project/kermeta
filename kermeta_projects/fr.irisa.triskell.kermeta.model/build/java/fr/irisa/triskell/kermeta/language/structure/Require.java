@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Require.java,v 1.4 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: Require.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -13,6 +13,10 @@ package fr.irisa.triskell.kermeta.language.structure;
  * A representation of the model object '<em><b>Require</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * To be written
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -21,7 +25,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getRequire()
- * @model annotation="GenModel documentation='/**\n * To be written\n \052/'"
+ * @model
  * @generated
  */
 public interface Require extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -40,11 +44,13 @@ public interface Require extends fr.irisa.triskell.kermeta.language.structure.Ob
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Uri</em>' attribute.
 	 * @see #setUri(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getRequire_Uri()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
-	 *        annotation="GenModel documentation='/**\n * To be written\n \052/'"
 	 * @generated
 	 */
 	String getUri();

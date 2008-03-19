@@ -38,7 +38,7 @@ public class KmFactoryImpl extends EFactoryImpl implements KmFactory {
 	 */
 	public static KmFactory init() {
 		try {
-			KmFactory theKmFactory = (KmFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/1_0_0//kermeta"); 
+			KmFactory theKmFactory = (KmFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/1_2_0//kermeta"); 
 			if (theKmFactory != null) {
 				return theKmFactory;
 			}

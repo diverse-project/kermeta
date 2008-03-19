@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeature.java,v 1.8 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: CallFeature.java,v 1.9 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -14,6 +14,12 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Call Feature</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * CallFeature is the model element that refers to the use of a feature, i.e either 
+ * a property or an operation in a statement. In <code>stdio.writeln("hello")</code>, 
+ * <code>writeln</code> is a CallFeature.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -27,7 +33,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallFeature()
- * @model annotation="GenModel documentation='/**\n * CallFeature is the model element that refers to the use of a feature, i.e either \n * a property or an operation in a statement. In <code>stdio.writeln(\"hello\")</code>, \n * <code>writeln</code> is a CallFeature.\n \052/'"
+ * @model
  * @generated
  */
 public interface CallFeature extends CallExpression {
@@ -46,10 +52,13 @@ public interface CallFeature extends CallExpression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The object which will be returned (property case)
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Static Property</em>' reference.
 	 * @see #setStaticProperty(Property)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallFeature_StaticProperty()
-	 * @model annotation="GenModel documentation='/**\n * The object which will be returned (property case)\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	Property getStaticProperty();
@@ -72,10 +81,14 @@ public interface CallFeature extends CallExpression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The method which will be executed (operation case)
+	 * and the result value passed to the caller
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Static Operation</em>' reference.
 	 * @see #setStaticOperation(Operation)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallFeature_StaticOperation()
-	 * @model annotation="GenModel documentation='/**\n * The method which will be executed (operation case)\n * and the result value passed to the caller\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	Operation getStaticOperation();
@@ -98,10 +111,13 @@ public interface CallFeature extends CallExpression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * To be written
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Static Enum Literal</em>' reference.
 	 * @see #setStaticEnumLiteral(EnumerationLiteral)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallFeature_StaticEnumLiteral()
-	 * @model annotation="GenModel documentation='/**\n * To be written #################################\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	EnumerationLiteral getStaticEnumLiteral();
@@ -124,11 +140,13 @@ public interface CallFeature extends CallExpression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Target Expression (the owner of the feature)
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallFeature_Target()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Target Expression (the owner of the feature)\n \052/'"
 	 * @generated
 	 */
 	Expression getTarget();
@@ -151,11 +169,13 @@ public interface CallFeature extends CallExpression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Tells whether this CallFeature represents a call to @pre in a postcondition
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Atpre</em>' attribute.
 	 * @see #setIsAtpre(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallFeature_IsAtpre()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 *        annotation="GenModel documentation='/**\n * Tells whether this CallFeature represents a call to @pre in a postcondition\n \052/'"
 	 * @generated
 	 */
 	boolean isIsAtpre();

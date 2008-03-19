@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Assignment.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: Assignment.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -11,6 +11,11 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Assignment</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Assignment is the model-element representation of the assignment statement <code>x := y</code>
+ * <img alt="" src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png"/>
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -22,7 +27,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getAssignment()
- * @model annotation="GenModel documentation='/**\n * Assignment is the model-element representation of the assignment statement <code>x := y</code>\n * <img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png\"/>\n \052/'"
+ * @model
  * @generated
  */
 public interface Assignment extends Expression {
@@ -41,11 +46,13 @@ public interface Assignment extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Target of the assignment, as a CallExpression
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(CallExpression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getAssignment_Target()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * Target of the assignment, as a CallExpression\n \052/'"
 	 * @generated
 	 */
 	CallExpression getTarget();
@@ -68,11 +75,13 @@ public interface Assignment extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Value to be assigned, as a KerMeta expression
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
 	 * @see #setValue(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getAssignment_Value()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * Value to be assigned, as a KerMeta expression\n \052/'"
 	 * @generated
 	 */
 	Expression getValue();
@@ -95,11 +104,13 @@ public interface Assignment extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Boolean stating whether current assignment corresponds to a cast operation 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Cast</em>' attribute.
 	 * @see #setIsCast(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getAssignment_IsCast()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 *        annotation="GenModel documentation='/**\n * Boolean stating whether current assignment corresponds to a cast operation \n \052/'"
 	 * @generated
 	 */
 	boolean isIsCast();

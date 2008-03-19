@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Rescue.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: Rescue.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -12,6 +12,10 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Rescue</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Refers to rescue exception block
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -23,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRescue()
- * @model annotation="GenModel documentation='/**\n * Refers to rescue exception block\n \052/'"
+ * @model
  * @generated
  */
 public interface Rescue extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -43,10 +47,12 @@ public interface Rescue extends fr.irisa.triskell.kermeta.language.structure.Obj
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Body of the rescue block, specified as a KerMeta expression
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Body</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRescue_Body()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * Body of the rescue block, specified as a KerMeta expression\n \052/'"
 	 * @generated
 	 */
 	EList<Expression> getBody();
@@ -59,11 +65,13 @@ public interface Rescue extends fr.irisa.triskell.kermeta.language.structure.Obj
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Type of the cathed exception
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Exception Type</em>' containment reference.
 	 * @see #setExceptionType(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRescue_ExceptionType()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * Type of the cathed exception\n \052/'"
 	 * @generated
 	 */
 	TypeReference getExceptionType();
@@ -86,11 +94,13 @@ public interface Rescue extends fr.irisa.triskell.kermeta.language.structure.Obj
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Name of the catched exception
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Exception Name</em>' attribute.
 	 * @see #setExceptionName(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRescue_ExceptionName()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
-	 *        annotation="GenModel documentation='/**\n * Name of the catched exception\n \052/'"
 	 * @generated
 	 */
 	String getExceptionName();

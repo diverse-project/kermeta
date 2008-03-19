@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.10 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.11 2008-03-19 16:34:14 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -62,7 +62,7 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	 */
 	public static BehaviorFactory init() {
 		try {
-			BehaviorFactory theBehaviorFactory = (BehaviorFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior"); 
+			BehaviorFactory theBehaviorFactory = (BehaviorFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"); 
 			if (theBehaviorFactory != null) {
 				return theBehaviorFactory;
 			}
@@ -91,13 +91,13 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case BehaviorPackage.ASSIGNMENT: return createAssignment();
+			case BehaviorPackage.BLOCK: return createBlock();
 			case BehaviorPackage.CALL_VARIABLE: return createCallVariable();
 			case BehaviorPackage.CALL_FEATURE: return createCallFeature();
 			case BehaviorPackage.CALL_SUPER_OPERATION: return createCallSuperOperation();
 			case BehaviorPackage.CALL_RESULT: return createCallResult();
 			case BehaviorPackage.CALL_VALUE: return createCallValue();
-			case BehaviorPackage.ASSIGNMENT: return createAssignment();
-			case BehaviorPackage.BLOCK: return createBlock();
 			case BehaviorPackage.CONDITIONAL: return createConditional();
 			case BehaviorPackage.RAISE: return createRaise();
 			case BehaviorPackage.RESCUE: return createRescue();

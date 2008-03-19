@@ -4,10 +4,10 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::kunit|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="kunit" nsURI="http://www.kermeta.org/kermeta/kunit" nsPrefix="kunit">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * main features of the famous Unit test tool for Kermeta language&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;>&#xD;&#xA; */"/>
+        <details key="documentation" value="/**&#xD;&#xA; * main features of the famous Unit test tool for Kermeta language&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;/>&#xD;&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="AbstractFallible" abstract="true">
         <eAnnotations source="kermeta">
@@ -112,7 +112,7 @@
         </eOperations>
         <eOperations name="distil">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := &quot;&quot;&#xA;&#x9;var white : kermeta::standard::Boolean init false&#xA;&#x9;from var i : kermeta::standard::Integer init 0&#xA;&#x9;until i.equals(s.size)&#xA;&#x9;loop&#xA;&#x9;&#x9;var c : kermeta::standard::String init s.elementAt(i).toString&#xA;&#x9;&#x9;if ((&quot; \n\t&quot;.indexOf(c)) >= (0)) then&#xA;&#x9;&#x9;&#x9;if not (white) then&#xA;&#x9;&#x9;&#x9;&#x9;white := true&#xA;&#x9;&#x9;&#x9;&#x9;result := ((result) + (&quot; &quot;))&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := ((result) + (c))&#xA;&#x9;&#x9;&#x9;if white then&#xA;&#x9;&#x9;&#x9;&#x9;white := false&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;i := ((i) + (1))&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := &quot;&quot;&#xA;&#x9;var white : kermeta::standard::Boolean init false&#xA;&#x9;from var i : kermeta::standard::Integer init 0&#xA;&#x9;until i.equals(s.size)&#xA;&#x9;loop&#xA;&#x9;&#x9;var c : kermeta::standard::String init s.elementAt(i).toString&#xA;&#x9;&#x9;if ((&quot; \n\t&quot;.indexOf(c)) >= (0)) then&#xA;&#x9;&#x9;&#x9;if white.~not then&#xA;&#x9;&#x9;&#x9;&#x9;white := true&#xA;&#x9;&#x9;&#x9;&#x9;result := ((result) + (&quot; &quot;))&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := ((result) + (c))&#xA;&#x9;&#x9;&#x9;if white then&#xA;&#x9;&#x9;&#x9;&#x9;white := false&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;i := ((i) + (1))&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/** &#xD;&#xA;  ** reduces all runs of white-space to a single space character&#xD;&#xA;  **/"/>
           </eAnnotations>
           <eParameters name="s">
@@ -129,7 +129,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="Assert" eSuperTypes="/1/kunit/AbstractFallible">
         <eOperations name="assert">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;fail(&quot;assert failed&quot;)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if condition.~not then&#xA;&#x9;&#x9;fail(&quot;assert failed&quot;)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/** Fails if condition is false */"/>
           </eAnnotations>
           <eParameters name="condition">
@@ -138,7 +138,7 @@
         </eOperations>
         <eOperations name="assertTrue">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;fail(&quot;assertTrue failed&quot;)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if condition.~not then&#xA;&#x9;&#x9;fail(&quot;assertTrue failed&quot;)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/** will fail if condition is false */"/>
           </eAnnotations>
           <eParameters name="condition">
@@ -147,7 +147,7 @@
         </eOperations>
         <eOperations name="assertTrueWithMsg">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;fail(((&quot;assertTrueWithMsg failed : &quot;) + (msg)))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if condition.~not then&#xA;&#x9;&#x9;fail(((&quot;assertTrueWithMsg failed : &quot;) + (msg)))&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/** will fail if condition is false */"/>
           </eAnnotations>
           <eParameters name="condition">
@@ -180,7 +180,7 @@
         </eOperations>
         <eOperations name="assertWithMsg">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;fail(((&quot;assertTrueWithMsg failed : &quot;) + (msg)))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if condition.~not then&#xA;&#x9;&#x9;fail(((&quot;assertTrueWithMsg failed : &quot;) + (msg)))&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/** will fail if condition is false */"/>
           </eAnnotations>
           <eParameters name="condition">
@@ -201,7 +201,7 @@
         </eOperations>
         <eOperations name="assertEqual">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if not (expected.equals(actual)) then&#xA;&#x9;&#x9;fail(((((((((&quot;assertEqual failed\nexpected\t:[&quot;) + (expected))) + (&quot;] != \nactual\t:[&quot;))) + (actual))) + (&quot;]&quot;)))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if expected.equals(actual).~not then&#xA;&#x9;&#x9;fail(((((((((&quot;assertEqual failed\nexpected\t:[&quot;) + (expected))) + (&quot;] != \nactual\t:[&quot;))) + (actual))) + (&quot;]&quot;)))&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/** Will fail if the two strings are not identical */"/>
           </eAnnotations>
           <eParameters name="expected">
@@ -220,49 +220,42 @@
     <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
+    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="kunit.ecore#/0"/>
     <references href="kunit.ecore#/1"/>
-    <references href="kunit.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

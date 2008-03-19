@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VoidType.java,v 1.4 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: VoidType.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,9 +12,13 @@ package fr.irisa.triskell.kermeta.language.structure;
  * A representation of the model object '<em><b>Void Type</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Class definition for the <pre>Void</pre> type
+ * <!-- end-model-doc -->
+ *
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVoidType()
- * @model annotation="GenModel documentation='/**\n * Class definition for the <pre>Void</pre> type\n \052/'"
+ * @model
  * @generated
  */
 public interface VoidType extends Type {

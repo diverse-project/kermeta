@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallSuperOperation.java,v 1.5 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: CallSuperOperation.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -12,9 +12,26 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * A representation of the model object '<em><b>Call Super Operation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This class represents a call to the operataion in the parent class
+ * 	In the following example, the type of super(element) is CallSuperOperation:
+ * 
+ * class ParentClass {
+ *   operation op(element : Integer) : Integer is do
+ *       result := element + 1
+ *   end
+ * }
+ *  *
+ * class ChildClass {
+ *   method op(element : Integer) : Integer is do
+ *       result := super(element)
+ *   end
+ * }
+ * <!-- end-model-doc -->
+ *
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallSuperOperation()
- * @model annotation="GenModel documentation='/**\n * This class represents a call to the operataion in the parent class\n *\tIn the following example, the type of super(element) is CallSuperOperation:\n *\n * class ParentClass {\n *   operation op(element : Integer) : Integer is do\n *       result := element + 1\n *   end\n * }\n *\n * class ChildClass {\n *   method op(element : Integer) : Integer is do\n *       result := super(element)\n *   end\n * }\n \052/'"
+ * @model
  * @generated
  */
 public interface CallSuperOperation extends CallExpression {

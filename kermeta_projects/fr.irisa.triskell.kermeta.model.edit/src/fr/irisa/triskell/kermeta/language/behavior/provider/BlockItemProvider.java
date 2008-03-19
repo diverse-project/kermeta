@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BlockItemProvider.java,v 1.10 2008-02-14 07:13:53 uid21732 Exp $
+ * $Id: BlockItemProvider.java,v 1.11 2008-03-19 16:34:00 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -164,6 +164,16 @@ public class BlockItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.BLOCK__STATEMENT,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -185,16 +195,6 @@ public class BlockItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

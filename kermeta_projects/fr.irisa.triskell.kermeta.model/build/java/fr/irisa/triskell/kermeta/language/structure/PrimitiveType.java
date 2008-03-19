@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PrimitiveType.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: PrimitiveType.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,12 @@ package fr.irisa.triskell.kermeta.language.structure;
  * A representation of the model object '<em><b>Primitive Type</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The class definition for kermeta aliases. Above statement defines a primitive
+ * type called MyString, which instanceType is <code>kermeta::standard::String</code>
+ * <pre>alias MyString : kermeta::standard::String</pre>
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -20,7 +26,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPrimitiveType()
- * @model annotation="GenModel documentation='/**\n * The class definition for kermeta aliases. Above statement defines a primitive\n * type called MyString, which instanceType is <code>kermeta::standard::String</code>\n * <pre>alias MyString : kermeta::standard::String</pre>\n \052/'"
+ * @model
  * @generated
  */
 public interface PrimitiveType extends DataType, TypeContainer {
@@ -39,10 +45,13 @@ public interface PrimitiveType extends DataType, TypeContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The type the primitive type is linked with
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Instance Type</em>' reference.
 	 * @see #setInstanceType(Type)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPrimitiveType_InstanceType()
-	 * @model annotation="GenModel documentation='/**\n * The type the primitive type is linked with\n \052/'"
+	 * @model
 	 * @generated
 	 */
 	Type getInstanceType();

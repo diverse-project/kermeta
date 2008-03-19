@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactoryImpl.java,v 1.14 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: StructureFactoryImpl.java,v 1.15 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -70,7 +70,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 */
 	public static StructureFactory init() {
 		try {
-			StructureFactory theStructureFactory = (StructureFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure"); 
+			StructureFactory theStructureFactory = (StructureFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure"); 
 			if (theStructureFactory != null) {
 				return theStructureFactory;
 			}
@@ -99,15 +99,15 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case StructurePackage.CLASS: return createClass();
+			case StructurePackage.OBJECT: return createObject();
+			case StructurePackage.MODEL: return createModel();
+			case StructurePackage.MODEL_TYPE: return createModelType();
 			case StructurePackage.OPERATION: return createOperation();
 			case StructurePackage.PROPERTY: return createProperty();
 			case StructurePackage.TYPE: return createType();
 			case StructurePackage.ENUMERATION_LITERAL: return createEnumerationLiteral();
 			case StructurePackage.TYPE_VARIABLE_BINDING: return createTypeVariableBinding();
-			case StructurePackage.CLASS: return createClass();
-			case StructurePackage.OBJECT: return createObject();
-			case StructurePackage.MODEL: return createModel();
-			case StructurePackage.MODEL_TYPE: return createModelType();
 			case StructurePackage.MULTIPLICITY_ELEMENT: return createMultiplicityElement();
 			case StructurePackage.TYPE_DEFINITION: return createTypeDefinition();
 			case StructurePackage.ENUMERATION: return createEnumeration();
@@ -117,13 +117,13 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.TAG: return createTag();
 			case StructurePackage.CONSTRAINT: return createConstraint();
 			case StructurePackage.CLASS_DEFINITION: return createClassDefinition();
-			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
-			case StructurePackage.MODEL_TYPE_VARIABLE: return createModelTypeVariable();
-			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
 			case StructurePackage.MODELING_UNIT: return createModelingUnit();
 			case StructurePackage.REQUIRE: return createRequire();
 			case StructurePackage.USING: return createUsing();
 			case StructurePackage.FILTER: return createFilter();
+			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
+			case StructurePackage.MODEL_TYPE_VARIABLE: return createModelTypeVariable();
+			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
 			case StructurePackage.PRODUCT_TYPE: return createProductType();
 			case StructurePackage.FUNCTION_TYPE: return createFunctionType();
 			case StructurePackage.VOID_TYPE: return createVoidType();

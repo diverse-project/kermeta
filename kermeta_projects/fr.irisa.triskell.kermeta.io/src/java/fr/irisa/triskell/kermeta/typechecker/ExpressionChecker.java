@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.62 2008-03-05 08:18:10 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.63 2008-03-19 16:33:56 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
@@ -590,7 +591,19 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        		ClassDefinition pCDef = (ClassDefinition) ((Class) provided_type.getFType()).getTypeDefinition();
 	        		ClassDefinition tCDef = (ClassDefinition) ((Class) targetType.getFType()).getTypeDefinition();
 	        		if ( ! ClassDefinitionHelper.isSuperClassOf(pCDef, tCDef) ) {
-	        			unit.error("TYPE-CHECKER : Invalid cast, "+provided_type+" is not a supertype of required type : "+targetType+".", expression);
+	        			Operation op = null;
+	        			ClassDefinition cd = null;
+	        			EObject current = expression;
+	        			while ( ! (current instanceof Package) && current != null ) {
+	        				if ( current instanceof Operation && op == null )
+	        					op = (Operation) current;
+	        				if ( current instanceof ClassDefinition && cd == null )
+	        					cd = (ClassDefinition) current;
+	        				current = current.eContainer();
+	        			}
+	        			String message = "TYPE-CHECKER : " + KermetaModelHelper.NamedElement.qualifiedName(cd) + "." + op.getName();
+	        			message += " TYPE-CHECKER : Invalid cast, "+provided_type+" is not a supertype of required type : "+targetType+".";
+	        			unit.error(message, expression);
 	        			return targetType;
 	        		}
 	        	}

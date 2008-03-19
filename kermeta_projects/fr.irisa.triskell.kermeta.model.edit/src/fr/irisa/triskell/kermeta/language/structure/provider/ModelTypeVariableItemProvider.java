@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeVariableItemProvider.java,v 1.9 2008-02-14 07:13:52 uid21732 Exp $
+ * $Id: ModelTypeVariableItemProvider.java,v 1.10 2008-03-19 16:34:00 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -40,7 +40,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ModelTypeVariableItemProvider
-	extends VirtualTypeContainerItemProvider
+	extends TypeVariableItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -75,77 +75,8 @@ public class ModelTypeVariableItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTagPropertyDescriptor(object);
-			addNamePropertyDescriptor(object);
-			addSupertypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Tag feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTagPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Object_tag_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Object_tag_feature", "_UI_Object_type"),
-				 StructurePackage.Literals.OBJECT__TAG,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_NamedElement_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
-				 StructurePackage.Literals.NAMED_ELEMENT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Supertype feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSupertypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypeVariable_supertype_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeVariable_supertype_feature", "_UI_TypeVariable_type"),
-				 StructurePackage.Literals.TYPE_VARIABLE__SUPERTYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -160,8 +91,7 @@ public class ModelTypeVariableItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.OBJECT__OWNED_TAGS);
-			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
+			childrenFeatures.add(StructurePackage.Literals.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -216,11 +146,7 @@ public class ModelTypeVariableItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ModelTypeVariable.class)) {
-			case StructurePackage.MODEL_TYPE_VARIABLE__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAGS:
-			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
+			case StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -240,63 +166,8 @@ public class ModelTypeVariableItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.OBJECT__OWNED_TAGS,
-				 StructureFactory.eINSTANCE.createTag()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createClass()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createEnumeration()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createPrimitiveType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createObjectTypeVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelTypeVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				(StructurePackage.Literals.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE,
 				 StructureFactory.eINSTANCE.createVirtualType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createProductType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createFunctionType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createVoidType()));
 	}
 
 	/**
@@ -311,8 +182,8 @@ public class ModelTypeVariableItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == StructurePackage.Literals.VIRTUAL_TYPE_CONTAINER__VIRTUAL_TYPE ||
-			childFeature == StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE;
+			childFeature == StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE ||
+			childFeature == StructurePackage.Literals.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE;
 
 		if (qualify) {
 			return getString

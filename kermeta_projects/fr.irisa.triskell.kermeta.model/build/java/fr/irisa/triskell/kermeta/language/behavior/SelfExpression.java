@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SelfExpression.java,v 1.5 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: SelfExpression.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -12,9 +12,13 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * A representation of the model object '<em><b>Self Expression</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Refers to <code>self</code> use
+ * <!-- end-model-doc -->
+ *
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getSelfExpression()
- * @model annotation="GenModel documentation='/**\n * Refers to <code>self</code> use\n \052/'"
+ * @model
  * @generated
  */
 public interface SelfExpression extends Expression {

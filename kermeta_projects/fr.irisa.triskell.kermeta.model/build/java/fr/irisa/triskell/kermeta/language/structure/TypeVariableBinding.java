@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableBinding.java,v 1.5 2008-02-14 07:13:01 uid21732 Exp $
+ * $Id: TypeVariableBinding.java,v 1.6 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -11,6 +11,10 @@ package fr.irisa.triskell.kermeta.language.structure;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Type Variable Binding</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Definition of a binding between a TypeVariable and a Type
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -40,11 +44,13 @@ public interface TypeVariableBinding extends TypeContainer, fr.irisa.triskell.ke
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * TypeVariable
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Variable</em>' reference.
 	 * @see #setVariable(TypeVariable)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeVariableBinding_Variable()
 	 * @model required="true"
-	 *        annotation="GenModel documentation='/**\n * TypeVariable\n \052/'"
 	 * @generated
 	 */
 	TypeVariable getVariable();
@@ -67,11 +73,13 @@ public interface TypeVariableBinding extends TypeContainer, fr.irisa.triskell.ke
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Assigned Type
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Type)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeVariableBinding_Type()
 	 * @model required="true"
-	 *        annotation="GenModel documentation='/**\n * Assigned Type\n \052/'"
 	 * @generated
 	 */
 	Type getType();

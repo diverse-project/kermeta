@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Conditional.java,v 1.7 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: Conditional.java,v 1.8 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -11,6 +11,10 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Conditional</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Condition is the model-element representation for the <code></code> 
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -22,7 +26,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getConditional()
- * @model annotation="GenModel documentation='/**\n * Condition is the model-element representation for the <code></code> \n \052/'"
+ * @model
  * @generated
  */
 public interface Conditional extends Expression {
@@ -41,11 +45,13 @@ public interface Conditional extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Then part of the conditional statement
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Then Body</em>' containment reference.
 	 * @see #setThenBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getConditional_ThenBody()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * Then part of the conditional statement\n \052/'"
 	 * @generated
 	 */
 	Expression getThenBody();
@@ -68,11 +74,13 @@ public interface Conditional extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Optional else part of the conditional statement
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Else Body</em>' containment reference.
 	 * @see #setElseBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getConditional_ElseBody()
 	 * @model containment="true" resolveProxies="true"
-	 *        annotation="GenModel documentation='/**\n * Optional else part of the conditional statement\n \052/'"
 	 * @generated
 	 */
 	Expression getElseBody();
@@ -95,11 +103,13 @@ public interface Conditional extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Condition expression of conditional statement
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Condition</em>' containment reference.
 	 * @see #setCondition(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getConditional_Condition()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * Condition expression of conditional statement\n \052/'"
 	 * @generated
 	 */
 	Expression getCondition();

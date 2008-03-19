@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDecl.java,v 1.7 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: VariableDecl.java,v 1.8 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -11,6 +11,11 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Variable Decl</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * refers to variable declaration <code>var x : X init a</code>
+ * <img alt="" src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png"/>
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -22,7 +27,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl()
- * @model annotation="GenModel documentation='/**\n * refers to variable declaration <code>var x : X init a</code>\n * <img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png\"/>\n \052/'"
+ * @model
  * @generated
  */
 public interface VariableDecl extends Expression {
@@ -41,11 +46,14 @@ public interface VariableDecl extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Initialization expression for the variable
+	 * Default value is <code>void</code> ????
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Initialization</em>' containment reference.
 	 * @see #setInitialization(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl_Initialization()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * Initialization expression for the variable\n * Default value is <code>void</code> ????\n \052/'"
 	 * @generated
 	 */
 	Expression getInitialization();
@@ -68,11 +76,14 @@ public interface VariableDecl extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Initialization expression for the variable
+	 * Default value is <code>void</code> ????
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Identifier</em>' attribute.
 	 * @see #setIdentifier(String)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl_Identifier()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
-	 *        annotation="GenModel documentation='/**\n * Initialization expression for the variable\n * Default value is <code>void</code> ????\n \052/'"
 	 * @generated
 	 */
 	String getIdentifier();
@@ -95,11 +106,13 @@ public interface VariableDecl extends Expression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Type of the declared variable
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
 	 * @see #setType(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl_Type()
 	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="GenModel documentation='/**\n * Type of the declared variable\n \052/'"
 	 * @generated
 	 */
 	TypeReference getType();

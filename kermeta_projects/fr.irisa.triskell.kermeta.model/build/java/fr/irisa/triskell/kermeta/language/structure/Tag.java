@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Tag.java,v 1.4 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: Tag.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,6 +12,12 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Tag</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Tag is intended to be used to add documentation on a  model element,
+ * or add some textual information that cannot be expressed with any
+ * model element definition.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -23,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTag()
- * @model annotation="GenModel documentation='/**\n * Tag is intended to be used to add documentation on a  model element,\n * or add some textual information that cannot be expressed with any\n * model element definition.\n \052/'"
+ * @model
  * @generated
  */
 public interface Tag extends fr.irisa.triskell.kermeta.language.structure.Object {
@@ -42,11 +48,13 @@ public interface Tag extends fr.irisa.triskell.kermeta.language.structure.Object
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Name of the Tag
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTag_Name()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
-	 *        annotation="GenModel documentation='/**\n * Name of the Tag\n \052/'"
 	 * @generated
 	 */
 	String getName();
@@ -69,11 +77,13 @@ public interface Tag extends fr.irisa.triskell.kermeta.language.structure.Object
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * String value of the Tag
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTag_Value()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
-	 *        annotation="GenModel documentation='/**\n * String value of the Tag\n \052/'"
 	 * @generated
 	 */
 	String getValue();
@@ -98,11 +108,13 @@ public interface Tag extends fr.irisa.triskell.kermeta.language.structure.Object
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Objects to which the Tag is attached to
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Object</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTag_Object()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Object#getTag
 	 * @model opposite="tag" required="true"
-	 *        annotation="GenModel documentation='/**\n * Objects to which the Tag is attached to\n \052/'"
 	 * @generated
 	 */
 	EList<fr.irisa.triskell.kermeta.language.structure.Object> getObject();

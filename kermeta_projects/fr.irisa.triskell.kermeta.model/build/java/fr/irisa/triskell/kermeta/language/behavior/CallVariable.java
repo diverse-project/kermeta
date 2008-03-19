@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallVariable.java,v 1.6 2008-02-14 07:13:03 uid21732 Exp $
+ * $Id: CallVariable.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -12,6 +12,11 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * A representation of the model object '<em><b>Call Variable</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * We call "CallVariable" the use of a variable in a statement.
+ * in <code>i := j + 1</code>, i and j are 2 CallVariables.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -20,7 +25,7 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallVariable()
- * @model annotation="GenModel documentation='/**\n * We call \"CallVariable\" the use of a variable in a statement.\n * in <code>i := j + 1</code>, i and j are 2 CallVariables.\n \052/'"
+ * @model
  * @generated
  */
 public interface CallVariable extends CallExpression {
@@ -39,11 +44,13 @@ public interface CallVariable extends CallExpression {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Tells whether this CallVariable represents a call to @pre in a postcondition
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Atpre</em>' attribute.
 	 * @see #setIsAtpre(boolean)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallVariable_IsAtpre()
 	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 *        annotation="GenModel documentation='/**\n * Tells whether this CallVariable represents a call to @pre in a postcondition\n \052/'"
 	 * @generated
 	 */
 	boolean isIsAtpre();

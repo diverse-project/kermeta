@@ -4,10 +4,10 @@
     <details key="require" value="primitive_types.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::exceptions|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="standard" nsURI="http://www.kermeta.org/kermeta/standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * Defines Collection types &#xD;&#xA; * &lt;img src=&quot;./figures/collections_view.png&quot;>&#xD;&#xA; */"/>
+        <details key="documentation" value="/**&#xD;&#xA; * Defines Collection types &#xD;&#xA; * &lt;img src=&quot;./figures/collections_view.png&quot;/>&#xD;&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
       <eClassifiers xsi:type="ecore:EClass" name="Collection" abstract="true">
@@ -83,7 +83,7 @@
             <details key="documentation" value="/**&#xD;&#xA;  * Removes all instances of element from the Collection, based on&#xD;&#xA;  * G.equals(Object) definition&#xD;&#xA;  */"/>
           </eAnnotations>
           <eAnnotations source="kermeta.post">
-            <details key="doesntContainsElementAnymore" value="not (contains(element))"/>
+            <details key="doesntContainsElementAnymore" value="contains(element).~not"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/standard/Collection/G"/>
@@ -126,7 +126,7 @@
         </eOperations>
         <eOperations name="containsAll">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until ((it.isOff) or (not (result)))&#xA;&#x9;loop&#xA;&#x9;&#x9;result := self.contains(it.next)&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until ((it.isOff) or (result.~not))&#xA;&#x9;loop&#xA;&#x9;&#x9;result := self.contains(it.next)&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns true if current Collection contains all elements of Collection elements&#xD;&#xA;  * See Collection&lt;G>.contains(Object)&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="elements">
@@ -148,7 +148,7 @@
         </eOperations>
         <eOperations name="excludes">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := not (self.contains(element))&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := self.contains(element).~not&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns true if the Collection does not contain element&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="element">
@@ -157,7 +157,7 @@
         </eOperations>
         <eOperations name="excludesAll">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until ((it.isOff) or (not (result)))&#xA;&#x9;loop&#xA;&#x9;&#x9;result := not (self.contains(it.next))&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until ((it.isOff) or (result.~not))&#xA;&#x9;loop&#xA;&#x9;&#x9;result := self.contains(it.next).~not&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns true if the Collection contains no element of Collection elements&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="elements">
@@ -186,7 +186,7 @@
         </eOperations>
         <eOperations name="isNotEmpty">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := not (self.empty)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := self.empty.~not&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * OCL alignement API&#xD;&#xA;  * Returns a Boolean stating whether the Collection contains at least&#xD;&#xA;  * one element &#xD;&#xA;  * See also Collection&lt;G>.contains(Object)&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
@@ -263,7 +263,7 @@
         </eOperations>
         <eOperations name="isUnique">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;var s : kermeta::standard::Sequence&lt;T> init kermeta::standard::Sequence&lt;T>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until ((it.isOff) or (not (result)))&#xA;&#x9;loop&#xA;&#x9;&#x9;var t : T init collector(it.next)&#xA;&#x9;&#x9;if s.contains(t) then&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;s.add(t)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;var s : kermeta::standard::Sequence&lt;T> init kermeta::standard::Sequence&lt;T>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until ((it.isOff) or (result.~not))&#xA;&#x9;loop&#xA;&#x9;&#x9;var t : T init collector(it.next)&#xA;&#x9;&#x9;if s.contains(t) then&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;s.add(t)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the the collector function evaluates to a&#xD;&#xA;  * different value for each element of the Collection&#xD;&#xA;  */"/>
           </eAnnotations>
           <eTypeParameters name="T"/>
@@ -303,7 +303,7 @@
         </eOperations>
         <eOperations name="reject">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := self.~select{elem | do&#xA;&#x9;&#x9;&#x9;not (rejector(elem))&#xA;&#x9;&#x9;end}&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := self.~select{elem | do&#xA;&#x9;&#x9;&#x9;rejector(elem).~not&#xA;&#x9;&#x9;end}&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Sequence composed of elements of the Collection that&#xD;&#xA;  * do not validate the rejector function&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="rejector">
@@ -337,7 +337,7 @@
         <eTypeParameters name="G"/>
         <eOperations name="add">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if not (self.contains(element)) then&#xA;&#x9;&#x9;super(element)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if self.contains(element).~not then&#xA;&#x9;&#x9;super(element)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.add(G)&#xD;&#xA;  * Adds elt to the Set if it is not already contained by the&#xD;&#xA;  * Set, does nothing otherwise&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="element">
@@ -355,7 +355,7 @@
         </eOperations>
         <eOperations name="equals">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Collection&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;if self.size.equals(collection.size) then&#xA;&#x9;&#x9;&#x9;&#x9;var elem : G&#xA;&#x9;&#x9;&#x9;&#x9;var ok : kermeta::standard::Boolean init true&#xA;&#x9;&#x9;&#x9;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;&#x9;&#x9;&#x9;until ((it.isOff) or (not (ok)))&#xA;&#x9;&#x9;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not (collection.contains(elem)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ok := false&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;isEqual := ok&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if element.isVoid.~not then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Collection&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;if self.size.equals(collection.size) then&#xA;&#x9;&#x9;&#x9;&#x9;var elem : G&#xA;&#x9;&#x9;&#x9;&#x9;var ok : kermeta::standard::Boolean init true&#xA;&#x9;&#x9;&#x9;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;&#x9;&#x9;&#x9;until ((it.isOff) or (ok.~not))&#xA;&#x9;&#x9;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if collection.contains(elem).~not then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ok := false&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;isEqual := ok&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Overrides Object.equals(Object)&#xD;&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;  * current Set&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="element" eType="/1/standard/Object"/>
@@ -395,7 +395,7 @@
         </eOperations>
         <eOperations name="minus">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if not (elements.contains(elem)) then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if elements.contains(elem).~not then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Set corresponding to the difference between the&#xD;&#xA;  * current Set and the Set elements, ie all elements contained by &#xD;&#xA;  * the current Set that do not appear in the elements Set &#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="elements">
@@ -507,7 +507,7 @@
         <eTypeParameters name="G"/>
         <eOperations name="equals">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Bag&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;var selfAsSet : kermeta::standard::Set&lt;G> init self.asSet&#xA;&#x9;&#x9;&#x9;isEqual := selfAsSet.equals(collection.asSet)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if element.isVoid.~not then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Bag&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;var selfAsSet : kermeta::standard::Set&lt;G> init self.asSet&#xA;&#x9;&#x9;&#x9;isEqual := selfAsSet.equals(collection.asSet)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Overrides Object.equals(elt : Object)&#xD;&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;  * current Bag&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="element" eType="/1/standard/Object"/>
@@ -551,7 +551,7 @@
             <details key="documentation" value="/**&#xD;&#xA;  * Removes the element identified by the provided Oid from the Bag&#xD;&#xA;  */"/>
           </eAnnotations>
           <eAnnotations source="kermeta.post">
-            <details key="doesntContainsElementAnymore" value="not (exists{e | do&#xA;&#x9;&#x9;e.oid.equals(elementOid)&#xA;&#x9;end})"/>
+            <details key="doesntContainsElementAnymore" value="exists{e | do&#xA;&#x9;&#x9;e.oid.equals(elementOid)&#xA;&#x9;end}.~not"/>
           </eAnnotations>
           <eParameters name="elementOid">
             <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
@@ -718,7 +718,7 @@
         </eOperations>
         <eOperations name="equals">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::OrderedCollection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Collection&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;if self.size.equals(collection.size) then&#xA;&#x9;&#x9;&#x9;&#x9;var selfIterator : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;&#x9;&#x9;&#x9;var collectionIterator : kermeta::standard::Iterator&lt;G> init collection.iterator&#xA;&#x9;&#x9;&#x9;&#x9;var difference : kermeta::standard::Boolean init false&#xA;&#x9;&#x9;&#x9;&#x9;from void&#xA;&#x9;&#x9;&#x9;&#x9;until ((((selfIterator.isOff) or (collectionIterator.isOff))) or (difference))&#xA;&#x9;&#x9;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not (selfIterator.next.equals(collectionIterator.next)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;difference := true&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;isEqual := not (difference)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if element.isVoid.~not then&#xA;&#x9;&#x9;if kermeta::standard::OrderedCollection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Collection&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;if self.size.equals(collection.size) then&#xA;&#x9;&#x9;&#x9;&#x9;var selfIterator : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;&#x9;&#x9;&#x9;var collectionIterator : kermeta::standard::Iterator&lt;G> init collection.iterator&#xA;&#x9;&#x9;&#x9;&#x9;var difference : kermeta::standard::Boolean init false&#xA;&#x9;&#x9;&#x9;&#x9;from void&#xA;&#x9;&#x9;&#x9;&#x9;until ((((selfIterator.isOff) or (collectionIterator.isOff))) or (difference))&#xA;&#x9;&#x9;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if selfIterator.next.equals(collectionIterator.next).~not then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;difference := true&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;isEqual := difference.~not&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Overrides Object.equals(Object)&#xD;&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;  * current OrderedCollection&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="element" eType="/1/standard/Object"/>
@@ -749,7 +749,7 @@
         </eOperations>
         <eOperations name="addAt">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if not (self.contains(element)) then&#xA;&#x9;&#x9;super(index, element)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if self.contains(element).~not then&#xA;&#x9;&#x9;super(index, element)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Overrides OrderedCollection&lt;G>.addAt(Integer, G)&#xD;&#xA;  * Adds element in the OrderedSet at rank index if the ordered set does&#xD;&#xA;  * not already contain the element, does nothing otherwise&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="index">
@@ -890,7 +890,7 @@
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="isOff">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := not (hasNext)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := hasNext.~not&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns true if the iterator is on the last element&#xD;&#xA;  * i.e. returns not self.hasNext()&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
@@ -902,7 +902,7 @@
         </eOperations>
         <eOperations name="next">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if not (hasNext) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IteratorIsOff.new&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next(self)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if hasNext.~not then&#xA;&#x9;&#x9;raise kermeta::exceptions::IteratorIsOff.new&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next(self)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns the next element of the iterator&#xD;&#xA;  * Raises IteratorIsOff exception in case the iterator is on the last element &#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
@@ -917,37 +917,45 @@
     <references href="../Standard.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
+    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
+    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>
