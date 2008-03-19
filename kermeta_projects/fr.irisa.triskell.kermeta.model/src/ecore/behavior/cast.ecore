@@ -5,8 +5,8 @@
   <eSubpackages name="behavior">
     <eClassifiers xsi:type="ecore:EClass" name="Assignment">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCast" eType="#//structure/Boolean">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Boolean stating whether current assignment corresponds to a cast operation &#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Boolean stating whether current assignment corresponds to a cast operation "/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

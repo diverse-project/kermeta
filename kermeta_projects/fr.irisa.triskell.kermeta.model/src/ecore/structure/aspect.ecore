@@ -4,8 +4,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm">
   <eSubpackages name="structure">
     <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * This boolean allows to tell if this Type definition is an aspect or not&#xA; * If it is an aspect, then at runtime, its definition will be merged with the definition of another&#xA; * TypeDefinition that has exactly the same qualified name&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This boolean allows to tell if this Type definition is an aspect or not&#xA;If it is an aspect, then at runtime, its definition will be merged with the definition of another&#xA;TypeDefinition that has exactly the same qualified name"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="#//structure/Boolean"/>
     </eClassifiers>

@@ -5,25 +5,25 @@
     nsURI="http://ftm" nsPrefix="ftm">
   <eSubpackages name="behavior" nsURI="" nsPrefix="">
     <eClassifiers xsi:type="ecore:EClass" name="Conditional" eSuperTypes="#//behavior/Expression">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Condition is the model-element representation for the &lt;code>&lt;/code> &#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Condition is the model-element representation for the &lt;code>&lt;/code> "/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="thenBody" lowerBound="1"
           eType="#//behavior/Expression" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Then part of the conditional statement&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Then part of the conditional statement"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="elseBody" eType="#//behavior/Expression"
           containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Optional else part of the conditional statement&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Optional else part of the conditional statement"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
           eType="#//behavior/Expression" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Condition expression of conditional statement&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Condition expression of conditional statement"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

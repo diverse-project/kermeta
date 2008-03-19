@@ -6,8 +6,8 @@
   <eSubpackages name="behavior" nsPrefix="">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="SelfExpression" eSuperTypes="#//behavior/Expression">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Refers to &lt;code>self&lt;/code> use&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Refers to &lt;code>self&lt;/code> use"/>
       </eAnnotations>
     </eClassifiers>
   </eSubpackages>

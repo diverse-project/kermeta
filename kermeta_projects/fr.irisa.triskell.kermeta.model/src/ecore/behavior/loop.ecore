@@ -5,25 +5,25 @@
   <eSubpackages name="behavior">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="#//behavior/Expression">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Loop refers to &lt;code>from var x : X init a until booleanCondition loop ... end&lt;/code>&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Loop refers to &lt;code>from var x : X init a until booleanCondition loop ... end&lt;/code>"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" eType="#//behavior/Expression"
           containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Initialization expression for the loop&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Initialization expression for the loop"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//behavior/Expression"
           containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Body of the loop&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Body of the loop"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="stopCondition" lowerBound="1"
           eType="#//behavior/Expression" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Stop condition of the loop, is interpreted as a Bollean value&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Stop condition of the loop, is interpreted as a Bollean value"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

@@ -6,33 +6,33 @@
   <eSubpackages name="behavior" nsPrefix="">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//structure/TypeContainer">
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticType" eType="#//structure/Type">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Type of the Expression (set by type checking)&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Type of the Expression (set by type checking)"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CallFeature">
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty" eType="#//structure/Property">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The object which will be returned (property case)&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The object which will be returned (property case)"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation" eType="#//structure/Operation">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The method which will be executed (operation case)&#xA; * and the result value passed to the caller&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The method which will be executed (operation case)&#xA;and the result value passed to the caller"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticEnumLiteral" eType="#//structure/EnumerationLiteral">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * To be written #################################&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CallExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticTypeVariableBindings"
           upperBound="-1" eType="#//structure/Type">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * to be written #########################################&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

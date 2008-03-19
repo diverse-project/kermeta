@@ -4,36 +4,36 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm">
   <eSubpackages name="behavior">
     <eClassifiers xsi:type="ecore:EClass" name="LambdaExpression" eSuperTypes="#//behavior/Expression">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Refers to lambda expression definition (&lt;code>function { e | stdio.writeln(e.toString) }&lt;/code>)&#xA; * &lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png&quot;/>&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Refers to lambda expression definition (&lt;code>function { e | stdio.writeln(e.toString) }&lt;/code>)&#xA;&lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png&quot;/>"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//behavior/LambdaParameter" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Parameters of the lambda expression&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Parameters of the lambda expression"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1"
           eType="#//behavior/Expression" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Body of the lambda expression providede as a KerMeta expression&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Body of the lambda expression providede as a KerMeta expression"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="LambdaParameter" eSuperTypes="#//structure/Object">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Refers to parameter definition in lambda expression&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Refers to parameter definition in lambda expression"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//structure/String">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Name of the lambda parameter&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Name of the lambda parameter"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//behavior/TypeReference" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * To be written ################################&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written ################################"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

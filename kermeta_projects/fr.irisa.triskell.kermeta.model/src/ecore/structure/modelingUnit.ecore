@@ -5,76 +5,76 @@
     nsURI="http://ftm" nsPrefix="ftm">
   <eSubpackages name="structure" nsPrefix="structure">
     <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit" eSuperTypes="#//structure/Object">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * The modeling unit is the root of any kermeta model. It contains packages, requires and usings.&#xA; * It also reference others modeling unit.&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The modeling unit is the root of any kermeta model. It contains packages, requires and usings.&#xA;It also reference others modeling unit."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
           eType="#//structure/Package" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * root packages contained by this ModelingUnit&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="root packages contained by this ModelingUnit"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="requires" upperBound="-1"
           eType="#//structure/Require" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Set of &quot;require&quot; statements associated with this ModelingUnit. Ie. list of the other&#xA; * files required to run this unit&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Set of &quot;require&quot; statements associated with this ModelingUnit. Ie. list of the other&#xA;files required to run this unit"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="usings" upperBound="-1"
           eType="#//structure/Using" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Set of &quot;using&quot; statement associated with this ModelingUnit. Ie. list of &quot;syntatic shortcut&quot;&#xA; * that can be used within this unit.&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Set of &quot;using&quot; statement associated with this ModelingUnit. Ie. list of &quot;syntatic shortcut&quot;&#xA;that can be used within this unit."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="referencedModelingUnits"
           upperBound="-1" eType="#//structure/ModelingUnit">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * To be written&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="includeFilters" upperBound="-1"
           eType="#//structure/Filter" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * list of filters that apply to this modeling unit.&#xA; * This means that if the same unit was loaded without this filters, it would have loaded more content&#xA; * only element whose qualified name begins with one of these filter will be loaded in the unit&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="list of filters that apply to this modeling unit.&#xA;This means that if the same unit was loaded without this filters, it would have loaded more content&#xA;only element whose qualified name begins with one of these filter will be loaded in the unit"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="excludeFilters" upperBound="-1"
           eType="#//structure/Filter" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * list of filters that apply to this modeling unit.&#xA; * This means that if the same unit was loaded without this filters, it would have loaded more content&#xA; * element whose qualified name begins with one of these filter will NOT be loaded in the unit&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="list of filters that apply to this modeling unit.&#xA;This means that if the same unit was loaded without this filters, it would have loaded more content&#xA;element whose qualified name begins with one of these filter will NOT be loaded in the unit"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Package"/>
     <eClassifiers xsi:type="ecore:EClass" name="Require" eSuperTypes="#//structure/Object">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * To be written&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="To be written"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//structure/String">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * To be written&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Using" eSuperTypes="#//structure/Object">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * To be written&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="To be written"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="#//structure/String">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * To be written&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Object"/>
     <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
     <eClassifiers xsi:type="ecore:EClass" name="Filter" eSuperTypes="#//structure/Object">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Filter is the class that represent a filter on a ModelingUnit.&#xA; * the qualifiedName represent the beginning of the matched names&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Filter is the class that represent a filter on a ModelingUnit.&#xA;the qualifiedName represent the beginning of the matched names"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="#//structure/String">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * To be written&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

@@ -5,41 +5,41 @@
     nsURI="http://ftm" nsPrefix="ftm">
   <eSubpackages name="structure">
     <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//structure/NamedElement">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Constraint is part of a contract implementation in a Class definition or an operation.&#xA; * Three kinds of constraints are available : pre, post, and inv (invariant constraint)&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Constraint is part of a contract implementation in a Class definition or an operation.&#xA;Three kinds of constraints are available : pre, post, and inv (invariant constraint)"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" ordered="false"
           lowerBound="1" eType="#//behavior/Expression" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Body of the constraint, expressed as a KerMeta expression&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Body of the constraint, expressed as a KerMeta expression"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="stereotype" eType="#//structure/ConstraintType">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Type of the Constraint (precond/postcond/inv)&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Type of the Constraint (precond/postcond/inv)"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//structure/ConstraintLanguage">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Language in which the constraint is expressed&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Language in which the constraint is expressed"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="invOwner" eType="#//structure/ClassDefinition"
           eOpposite="#//structure/ClassDefinition/inv">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Owning ClassDefinition if Constraint corresponds to invariant&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Owning ClassDefinition if Constraint corresponds to invariant"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="preOwner" eType="#//structure/Operation"
           eOpposite="#//structure/Operation/pre">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Owning Operation if Constraint corresponds to pre-condition&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Owning Operation if Constraint corresponds to pre-condition"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="postOwner" eType="#//structure/Operation"
           eOpposite="#//structure/Operation/post">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Owning Operation if Constraint corresponds to post-condition&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Owning Operation if Constraint corresponds to post-condition"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -47,8 +47,8 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ConstraintLanguage">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Enumeration listing supported constraint languages&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Enumeration listing supported constraint languages"/>
       </eAnnotations>
       <eLiterals name="kermeta"/>
       <eLiterals name="ocl" value="1"/>
@@ -56,28 +56,28 @@
     <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition">
       <eStructuralFeatures xsi:type="ecore:EReference" name="inv" upperBound="-1"
           eType="#//structure/Constraint" containment="true" eOpposite="#//structure/Constraint/invOwner">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Invariants defined for this ClassDefinition&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Invariants defined for this ClassDefinition"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Operation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="pre" upperBound="-1"
           eType="#//structure/Constraint" containment="true" eOpposite="#//structure/Constraint/preOwner">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Pre-conditions of the Operation&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Pre-conditions of the Operation"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="post" upperBound="-1"
           eType="#//structure/Constraint" containment="true" eOpposite="#//structure/Constraint/postOwner">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Post-conditions of the Operation&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Post-conditions of the Operation"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ConstraintType">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Enumeration liting the different kinds of constraints&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Enumeration liting the different kinds of constraints"/>
       </eAnnotations>
       <eLiterals name="inv"/>
       <eLiterals name="pre" value="1"/>

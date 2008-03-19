@@ -4,266 +4,266 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
     nsURI="http://ftm" nsPrefix="ftm">
   <eSubpackages name="structure">
-    <eAnnotations source="kermeta">
-      <details key="documentation" value="/**&#xA; * Contains all the abstract classes used in the reflection mechanism. Implements the &lt;b>derived&#xA; * properties&lt;/b> contained in the classes; declares the abstract operations.&#xA; * Concrete implementation is in kermeta.language.structure.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/reflection_package.png&quot;>&#xA; */"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Contains all the abstract classes used in the reflection mechanism. Implements the &lt;b>derived&#xA;properties&lt;/b> contained in the classes; declares the abstract operations.&#xA;Concrete implementation is in kermeta.language.structure.&#xA;&lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/reflection_package.png&quot;>"/>
     </eAnnotations>
     <eClassifiers xsi:type="ecore:EClass" name="Class">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Returns the Attributes, References, and derived Properties owned by&#xA; * the ClassDefinition of this Class.&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
           eType="#//structure/Property" changeable="false" derived="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Returns the Attributes, References, and derived Properties owned by&#xA; * the ClassDefinition of this Class.&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
           eType="#//structure/Operation" changeable="false" derived="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Returns the Operations owned by the ClassDefinition of this Class.&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Returns the Operations owned by the ClassDefinition of this Class."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1"
           eType="#//structure/Class" changeable="false" derived="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Returns the Classes of which the ClassDefinition of this Class inherits.&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Returns the Classes of which the ClassDefinition of this Class inherits."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//structure/Boolean"
           changeable="false" defaultValueLiteral="false" derived="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Returns a Boolean stating whether ClassDefinition of this Class is abstract.&#xA; */ &#xA;"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Returns a Boolean stating whether ClassDefinition of this Class is abstract."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//structure/String"
           changeable="false" derived="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Returns the name of the ClassDefinition of this Class&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Returns the name of the ClassDefinition of this Class"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="#//structure/Type">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Special type definition for Enumeration, PrimitiveType&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Special type definition for Enumeration, PrimitiveType"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//structure/DataType">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Definition for Enumeration&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition for Enumeration"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLiteral" upperBound="-1"
           eType="#//structure/EnumerationLiteral" containment="true" eOpposite="#//structure/EnumerationLiteral/enumeration">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Owned items in an Enumeration&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Owned items in an Enumeration"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" eSuperTypes="#//structure/NamedElement">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Item definition for enumeration&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Item definition for enumeration"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" eType="#//structure/Enumeration"
           transient="true" eOpposite="#//structure/Enumeration/ownedLiteral">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Owning Enumeration&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Owning Enumeration"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="#//structure/Object">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Any element that contain a  name (example : Operation, Property) inherit this&#xA; * class.&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Any element that contain a  name (example : Operation, Property) inherit this&#xA;class."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="#//structure/String">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Name of this named element&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Name of this named element"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//structure/MultiplicityElement">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Every one knows what an operation is.&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Every one knows what an operation is."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="raisedException" upperBound="-1"
           eType="#//structure/Type">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Exceptions raised by the Operation&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Exceptions raised by the Operation"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
           eType="#//structure/Parameter" containment="true" eOpposite="#//structure/Parameter/operation">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Parameters of the Operation&#xA; */&#xA;"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Parameters of the Operation"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//structure/NamedElement">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Package in kermeta. Each kermeta model must have a root package. &#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Package in kermeta. Each kermeta model must have a root package. "/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPackage" upperBound="-1"
           eType="#//structure/Package" containment="true" eOpposite="#//structure/Package/nestingPackage">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Nested Packages contained by the Package&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Nested Packages contained by the Package"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="nestingPackage" eType="#//structure/Package"
           transient="true" eOpposite="#//structure/Package/nestedPackage">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Owning Package, if any&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Owning Package, if any"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//structure/String">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Uri of the Package&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Uri of the Package"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//structure/MultiplicityElement">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Definition for operation parameter&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition for operation parameter"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//structure/Operation"
           transient="true" eOpposite="#//structure/Operation/ownedParameter">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Owning operation&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Owning operation"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//structure/DataType">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * The class definition for kermeta aliases. Above statement defines a primitive&#xA; * type called MyString, which instanceType is &lt;code>kermeta::standard::String&lt;/code>&#xA; * &lt;pre>alias MyString : kermeta::standard::String&lt;/pre>&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The class definition for kermeta aliases. Above statement defines a primitive&#xA;type called MyString, which instanceType is &lt;code>kermeta::standard::String&lt;/code>&#xA;&lt;pre>alias MyString : kermeta::standard::String&lt;/pre>"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="instanceType" eType="#//structure/Type">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The type the primitive type is linked with&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The type the primitive type is linked with"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="#//structure/TypeContainer #//structure/NamedElement">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Abstraction of the notion of typed element : each element &#xA; * that is typed inherits this class.&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Abstraction of the notion of typed element : each element &#xA;that is typed inherits this class."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//structure/Type">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Type of the model element&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Type of the model element"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//structure/MultiplicityElement">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Class representing the property definition. Kermeta&lt;->Ecore equivalence:&#xA; *  - Property with isComposite == true or with type is a base type (String, Integer, Boolean)  : EAttribute&#xA; *  - Property with isComposite == false : EReference&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Class representing the property definition. Kermeta&lt;->Ecore equivalence:&#xA; - Property with isComposite == true or with type is a base type (String, Integer, Boolean)  : EAttribute&#xA; - Property with isComposite == false : EReference"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//structure/Property">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Opposite Property of the Property, void if the Property has no opposite&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Opposite Property of the Property, void if the Property has no opposite"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" eType="#//structure/Boolean"
           defaultValueLiteral="false">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Boolean stating whether the Property is read-only&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Boolean stating whether the Property is read-only"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="#//structure/String">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * To be written #######################################&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isComposite" eType="#//structure/Boolean"
           defaultValueLiteral="false">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Boolean stating whether the Property has a containment role&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Boolean stating whether the Property has a containment role"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDerived" eType="#//structure/Boolean"
           defaultValueLiteral="false">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * If True, the value of the property is not stored but computed from other properties&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="If True, the value of the property is not stored but computed from other properties"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" eType="#//structure/Boolean">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Boolean stating whether the property allows to identify its containing Object&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Boolean stating whether the property allows to identify its containing Object"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" abstract="true"
         eSuperTypes="#//structure/TypedElement">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; *  Model elements with a multiplicity [lower..upper] inherit this class&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value=" Model elements with a multiplicity [lower..upper] inherit this class"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOrdered" eType="#//structure/Boolean"
           defaultValueLiteral="false">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Boolean stating whether the element is ordered&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Boolean stating whether the element is ordered"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="#//structure/Boolean"
           defaultValueLiteral="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Boolean stating whether duplicated elements are allowed&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Boolean stating whether duplicated elements are allowed"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="#//structure/Integer">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Min cardinality of the element&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Min cardinality of the element"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="#//structure/UnlimitedNatural">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Max cardinality of the element, '-1' for '*'&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Max cardinality of the element, '-1' for '*'"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Object">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/** &#xA; * Object definition: all entities of Kermeta metamodel explicitly inherit from Object&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Object definition: all entities of Kermeta metamodel explicitly inherit from Object"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="int">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/** Alias to kermeta::standard::Integer */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Alias to kermeta::standard::Integer"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/** Alias to kermeta::standard::Boolean */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Alias to kermeta::standard::Boolean"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/** Alias to kermeta::standard::String */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Alias to kermeta::standard::String"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="int">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/** Alias to kermeta::standard::UnlimitedNatural */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Alias to kermeta::standard::UnlimitedNatural"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//structure/Object">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/** Alias to kermeta::standard::Integer */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Alias to kermeta::standard::Integer"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Tag" eSuperTypes="#//structure/Object">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Tag is intended to be used to add documentation on a  model element,&#xA; * or add some textual information that cannot be expressed with any&#xA; * model element definition.&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Tag is intended to be used to add documentation on a  model element,&#xA;or add some textual information that cannot be expressed with any&#xA;model element definition."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//structure/String">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Name of the Tag&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Name of the Tag"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//structure/String">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * String value of the Tag&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="String value of the Tag"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Phantom class : EMF reflexive editors need that any element of a metamodel &#xA; * has a direct or indirect containment relationship with the root model element of&#xA; * the metamodel. This class resolves this technical requirement.&#xA; */"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Phantom class : EMF reflexive editors need that any element of a metamodel &#xA;has a direct or indirect containment relationship with the root model element of&#xA;the metamodel. This class resolves this technical requirement."/>
       </eAnnotations>
     </eClassifiers>
   </eSubpackages>

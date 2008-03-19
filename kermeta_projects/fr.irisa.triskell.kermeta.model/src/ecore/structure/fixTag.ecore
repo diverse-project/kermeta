@@ -6,22 +6,22 @@
     <eClassifiers xsi:type="ecore:EClass" name="Object">
       <eStructuralFeatures xsi:type="ecore:EReference" name="tag" upperBound="-1"
           eType="#//structure/Tag" eOpposite="#//structure/Tag/object">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * An Object can be tagged by a Tag. &#xA; * They are typically used to put comments/documentation on the object&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="An Object can be tagged by a Tag. &#xA;They are typically used to put comments/documentation on the object"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTags" upperBound="-1"
           eType="#//structure/Tag" containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * An object can contains a Tag.  &#xA; * Be careful, owning a tag doesn't means that the tag applies to the Object&#xA; * To know which Tags apply to the object use the &quot;tag&quot; reference&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="An object can contains a Tag.  &#xA;Be careful, owning a tag doesn't means that the tag applies to the Object&#xA;To know which Tags apply to the object use the &quot;tag&quot; reference"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Tag">
       <eStructuralFeatures xsi:type="ecore:EReference" name="object" lowerBound="1"
           upperBound="-1" eType="#//structure/Object" eOpposite="#//structure/Object/tag">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Objects to which the Tag is attached to&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Objects to which the Tag is attached to"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

@@ -6,37 +6,37 @@
     <eClassifiers xsi:type="ecore:EClass" name="Operation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//behavior/Expression"
           containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Body of the Operation, expressed as a KerMeta expression&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Body of the Operation, expressed as a KerMeta expression"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="superOperation" eType="#//structure/Operation">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Super-operation of the Operation, if any&#xA; */&#x9;"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Super-operation of the Operation, if any"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Property">
       <eStructuralFeatures xsi:type="ecore:EReference" name="getterBody" eType="#//behavior/Expression"
           containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * To be written ################################&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="setterBody" eType="#//behavior/Expression"
           containment="true">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * To be written ####################################&#xA; */&#xA;"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isGetterAbstract" eType="#//structure/Boolean">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Boolean stating wether the getter is abstract.&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Boolean stating wether the getter is abstract."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSetterAbstract" eType="#//structure/Boolean">
-        <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Boolean stating wether the setter is abstract.&#xA; */"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Boolean stating wether the setter is abstract."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
