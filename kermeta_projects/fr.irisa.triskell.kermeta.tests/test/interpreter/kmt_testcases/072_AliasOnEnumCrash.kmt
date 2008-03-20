@@ -1,0 +1,47 @@
+/* $Id: 072_AliasOnEnumCrash.kmt,v 1.1 2008-03-20 16:12:40 dvojtise Exp $
+ * Creation date: March 20, 2008
+ * License:
+ * Copyright:
+ * Authors: dvojtise
+ * this test is there to detect bug #5278 about a definition of an alias to an enumeration that make the interpreter crash if it 
+ * tries to use the original enumeration
+ */
+@mainClass "AliasOnEnumCrash::Main"
+@mainOperation "main"
+
+
+package AliasOnEnumCrash;
+
+
+require kermeta
+
+using kermeta::kunit
+
+// ******* BUG HERE ********** // 
+alias AnEnumeration : AliasOnEnumCrash::MyEnumeration;
+// ******* BUG HERE ********** // 
+
+enumeration MyEnumeration
+{
+	enumA; enumB; enumC;
+}
+ 
+class Main inherits TestCase
+{
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	operation testAliasOnEnumProblem() : Void is do
+		crashKermeta(MyEnumeration.enumA)
+	end
+	
+	operation crashKermeta( anEnum : MyEnumeration ) is 
+	do
+		stdio.writeln(" entering Main.crashKermeta")
+		stdio.writeln(anEnum.toString)  // this line crashes if the alias AnEnumeration is defined
+		stdio.writeln(" leaving Main.crashKermeta")
+	end
+}
