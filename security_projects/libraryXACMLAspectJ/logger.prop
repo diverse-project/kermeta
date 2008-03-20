@@ -1,0 +1,20 @@
+log4j.rootLogger= debug, R
+
+# Initialise la sortie du logger stdout vers le ficher  ---------  debug, stdout,
+# log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+# log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+
+# change le format de sortie du logger stdout
+# log4j.appender.stdout.layout.ConversionPattern=%5p [%t] (%F:%L) - %m%n
+
+# Effectue une rotation du fichier de log et initialise la sortie du logger R vers un fichier
+log4j.appender.R=org.apache.log4j.RollingFileAppender
+log4j.appender.R.File=AppDebug.log
+
+# Rotate le fichier des que celui ci a atteint 100ko et garde un seul fichier de backup
+log4j.appender.R.MaxFileSize=100MB
+log4j.appender.R.MaxBackupIndex=1
+
+# change le format de sortie du logger R
+log4j.appender.R.layout=org.apache.log4j.PatternLayout
+log4j.appender.R.layout.ConversionPattern=%p %t %c - %m%n
