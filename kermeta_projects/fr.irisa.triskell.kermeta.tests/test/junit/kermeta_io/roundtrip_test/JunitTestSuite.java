@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.8 2008-03-05 08:08:04 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.9 2008-03-20 16:33:09 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -189,10 +189,10 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		String kmtFile = outputDir + "/" + fileName + ".kmt";
 		String ecoreFile = outputDir + "/" + fileName + ".ecore";
 				
-		Map<Object, Object> args = new HashMap<Object, Object>();
-		args.put(LoadingOptions.ECORE_QuickFixEnabled, true);
+		HashMap<String, Object> loaderOptions = new HashMap<String, Object>();
+		loaderOptions.put(LoadingOptions.ECORE_QuickFixEnabled, true);
 		
-		KermetaUnit baseEcoreUnit = LoaderPlugin.getDefault().load( ecoreBaseFile, args );		
+		KermetaUnit baseEcoreUnit = LoaderPlugin.getDefault().load( ecoreBaseFile, loaderOptions );		
 		if ( ! baseEcoreUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( baseEcoreUnit );
 			typechecker.checkUnit();
@@ -211,7 +211,7 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		printer.flush();
 		
 		// Regenerate the ecore from the kmt
-		KermetaUnit kmtUnit = LoaderPlugin.getDefault().load( kmtFile, args );
+		KermetaUnit kmtUnit = LoaderPlugin.getDefault().load( kmtFile, loaderOptions );
 		if ( ! kmtUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( kmtUnit );
 			typechecker.checkUnit();
@@ -228,7 +228,7 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		ExporterOptions options = new ExporterOptions(false, false);
 		exporter.export(kmtUnit, outputDir, options );
 		
-		KermetaUnit ecoreUnit = LoaderPlugin.getDefault().load( ecoreFile, args );
+		KermetaUnit ecoreUnit = LoaderPlugin.getDefault().load( ecoreFile, loaderOptions );
 		
 		assertFilesEquality(baseEcoreUnit, ecoreUnit);
 		//MatchService.getInstance().doMatch(kmtUnit.getCompilationUnit(), ecoreUnit.getCompilationUnit(), new NullProgressMonitor() );
