@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_bESHYPdaEdywSMGjofhCrw" activeDiagram="_bESHYfdaEdywSMGjofhCrw">
+  <model href="RBAC.ecore#/"/>
+  <diagrams xmi:id="_bESHYfdaEdywSMGjofhCrw" position="0,0" size="100,100" name="No name" zoom="1.03" viewport="0,136">
+    <property xmi:id="_bEdGgPdaEdywSMGjofhCrw" key="pageFormatName" value="A3"/>
+    <property xmi:id="_bEdGgfdaEdywSMGjofhCrw" key="diagramWidth" value="1188"/>
+    <property xmi:id="_bEdGgvdaEdywSMGjofhCrw" key="diagramHeight" value="1680"/>
+    <property xmi:id="_bEdGg_daEdywSMGjofhCrw" key="pageMarginName" value="Small Margin"/>
+    <property xmi:id="_bEdGhPdaEdywSMGjofhCrw" key="diagramTopMargin" value="20"/>
+    <property xmi:id="_bEdGhfdaEdywSMGjofhCrw" key="diagramBottomMargin" value="20"/>
+    <property xmi:id="_bEdGhvdaEdywSMGjofhCrw" key="diagramLeftMargin" value="20"/>
+    <property xmi:id="_bEdGh_daEdywSMGjofhCrw" key="diagramRightMargin" value="20"/>
+    <property xmi:id="_bEdGiPdaEdywSMGjofhCrw" key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bESHYvdaEdywSMGjofhCrw" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="RBAC.ecore#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" xmi:id="_bG1FEPdaEdywSMGjofhCrw" position="26,658" size="210,-1">
+      <anchorage xmi:id="_bH7RQPdaEdywSMGjofhCrw" graphEdge="_bH74UPdaEdywSMGjofhCrw _bH8fYPdaEdywSMGjofhCrw _bH8fZfdaEdywSMGjofhCrw _bH9GcPdaEdywSMGjofhCrw"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG1FEfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//User"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG1FEvdaEdywSMGjofhCrw">
+        <property xmi:id="_bG1FE_daEdywSMGjofhCrw" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG1FFPdaEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//User"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG1FFfdaEdywSMGjofhCrw">
+        <property xmi:id="_bG1FFvdaEdywSMGjofhCrw" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG1FF_daEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//User"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG1sIPdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG1sIfdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//User/CreateSession"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG1sIvdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG1sI_daEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//User/DeleteSessions"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG1sJPdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG1sJfdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//User/AssignRole"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG1sJvdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG1sJ_daEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//User/DeassignRole"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG1sKPdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG1sKfdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//User/GetAssignedRoles"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG1sKvdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG1sK_daEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//User/GetAuthorizedRoles"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_bG2TMPdaEdywSMGjofhCrw" position="545,317" size="251,-1">
+      <anchorage xmi:id="_bH7RQfdaEdywSMGjofhCrw" graphEdge="_bH74UPdaEdywSMGjofhCrw _bH8fYPdaEdywSMGjofhCrw _bH9tgPdaEdywSMGjofhCrw _bH-UkPdaEdywSMGjofhCrw _bH-UlfdaEdywSMGjofhCrw _bH-7ofdaEdywSMGjofhCrw"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG2TMfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Session"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG2TMvdaEdywSMGjofhCrw">
+        <property xmi:id="_bG2TM_daEdywSMGjofhCrw" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG2TNPdaEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//Session"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG2TNfdaEdywSMGjofhCrw">
+        <property xmi:id="_bG2TNvdaEdywSMGjofhCrw" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG2TN_daEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//Session"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG26QPdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG26QfdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Session/AddActiveRole"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG26QvdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG26Q_daEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Session/DropActiveRole"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG26RPdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG26RfdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Session/CheckAccess"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG26RvdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG26R_daEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Session/GetAllActiveRole"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_bG4IYPdaEdywSMGjofhCrw" position="11,264" size="251,-1">
+      <anchorage xmi:id="_bH8fZPdaEdywSMGjofhCrw" graphEdge="_bH8fZfdaEdywSMGjofhCrw _bH9GcPdaEdywSMGjofhCrw _bH9tgPdaEdywSMGjofhCrw _bH-UkPdaEdywSMGjofhCrw _bH_isfdaEdywSMGjofhCrw _bIAJwPdaEdywSMGjofhCrw _bIAw0PdaEdywSMGjofhCrw _bIAw1PdaEdywSMGjofhCrw _bIBX4PdaEdywSMGjofhCrw _bIB-8PdaEdywSMGjofhCrw"/>
+      <anchorage xmi:id="_bH_isPdaEdywSMGjofhCrw" graphEdge="_bH_isfdaEdywSMGjofhCrw _bIAJwPdaEdywSMGjofhCrw _bIAw0PdaEdywSMGjofhCrw _bIAw1PdaEdywSMGjofhCrw"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4IYfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Role"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG4IYvdaEdywSMGjofhCrw">
+        <property xmi:id="_bG4IY_daEdywSMGjofhCrw" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4IZPdaEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//Role"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG4IZfdaEdywSMGjofhCrw">
+        <property xmi:id="_bG4IZvdaEdywSMGjofhCrw" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4IZ_daEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//Role"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG4IaPdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4IafdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Role/GrantPermission"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG4IavdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4Ia_daEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Role/RevokePermission"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG4IbPdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4IbfdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Role/CheckAccess"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG4IbvdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4Ib_daEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Role/AddInheritance"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG4IcPdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4IcfdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Role/DeleteInheritance"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG4IcvdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4Ic_daEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Role/AddSSDRole"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG4IdPdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4IdfdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Role/DeleteSSDRole"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG4IdvdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4Id_daEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Role/GetAllJuniors"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG4IePdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4IefdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Role/GetAllSeniors"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG4IevdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG4Ie_daEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Role/GetAuthorizedUsers"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_bG59kPdaEdywSMGjofhCrw" position="224,111" size="86,-1">
+      <anchorage xmi:id="_bIAw2PdaEdywSMGjofhCrw" graphEdge="_bIBX4PdaEdywSMGjofhCrw _bIB-8PdaEdywSMGjofhCrw _bICmAPdaEdywSMGjofhCrw _bIDNEPdaEdywSMGjofhCrw _bID0IPdaEdywSMGjofhCrw _bID0JPdaEdywSMGjofhCrw"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG59kfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Permission"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG59kvdaEdywSMGjofhCrw">
+        <property xmi:id="_bG59k_daEdywSMGjofhCrw" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG59lPdaEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//Permission"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG59lfdaEdywSMGjofhCrw">
+        <property xmi:id="_bG59lvdaEdywSMGjofhCrw" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG59l_daEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//Permission"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_bG59mPdaEdywSMGjofhCrw" position="31,112" size="65,-1">
+      <anchorage xmi:id="_bIB-9PdaEdywSMGjofhCrw" graphEdge="_bICmAPdaEdywSMGjofhCrw _bIDNEPdaEdywSMGjofhCrw"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG59mfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Target"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG59mvdaEdywSMGjofhCrw">
+        <property xmi:id="_bG59m_daEdywSMGjofhCrw" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG59nPdaEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//Target"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG59nfdaEdywSMGjofhCrw">
+        <property xmi:id="_bG59nvdaEdywSMGjofhCrw" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG59n_daEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//Target"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_bG6koPdaEdywSMGjofhCrw" position="578,107" size="183,-1">
+      <anchorage xmi:id="_bH-UlPdaEdywSMGjofhCrw" graphEdge="_bH-UlfdaEdywSMGjofhCrw _bH-7ofdaEdywSMGjofhCrw _bID0IPdaEdywSMGjofhCrw _bID0JPdaEdywSMGjofhCrw"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG6kofdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Operation"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG6kovdaEdywSMGjofhCrw">
+        <property xmi:id="_bG6ko_daEdywSMGjofhCrw" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG6kpPdaEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//Operation"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_bG6kpfdaEdywSMGjofhCrw">
+        <property xmi:id="_bG6kpvdaEdywSMGjofhCrw" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG6kp_daEdywSMGjofhCrw" presentation="default">
+          <element href="RBAC.ecore#//Operation"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_bG6kqPdaEdywSMGjofhCrw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG6kqfdaEdywSMGjofhCrw" presentation="default">
+            <element href="RBAC.ecore#//Operation/execute"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_bG7LsPdaEdywSMGjofhCrw" position="926,197" size="197,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG7LsfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Boolean"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_bG7LsvdaEdywSMGjofhCrw" position="923,276" size="190,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bG7Ls_daEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Type"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bH74UPdaEdywSMGjofhCrw" anchor="_bH7RQPdaEdywSMGjofhCrw _bH7RQfdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bH74UfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//User/UserSession"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH74UvdaEdywSMGjofhCrw" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH74U_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[539, 0, 0, 359]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bH8fYPdaEdywSMGjofhCrw" anchor="_bH7RQfdaEdywSMGjofhCrw _bH7RQPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bH8fYfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Session/UserSession"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH8fYvdaEdywSMGjofhCrw" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH8fY_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[0, 359, 539, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bH8fZfdaEdywSMGjofhCrw" anchor="_bH7RQPdaEdywSMGjofhCrw _bH8fZPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bH8fZvdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//User/UserAssignment"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH8fZ_daEdywSMGjofhCrw" id="nameLabel" uDistance="38" vDistance="-11"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH8faPdaEdywSMGjofhCrw" id="cardinalityLabel" uDistance="12" vDistance="-11"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bH9GcPdaEdywSMGjofhCrw" anchor="_bH8fZPdaEdywSMGjofhCrw _bH7RQPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bH9GcfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Role/UserAssignment"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH9GcvdaEdywSMGjofhCrw" id="nameLabel" uDistance="18" vDistance="11"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH9Gc_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="17" vDistance="-9"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bH9tgPdaEdywSMGjofhCrw" anchor="_bH7RQfdaEdywSMGjofhCrw _bH8fZPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bH9tgfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Session/SessionRole"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH9tgvdaEdywSMGjofhCrw" id="nameLabel" uDistance="9" vDistance="7"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH9tg_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="22" vDistance="-6"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bH-UkPdaEdywSMGjofhCrw" anchor="_bH8fZPdaEdywSMGjofhCrw _bH7RQfdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bH-UkfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Role/SessionRole"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH-UkvdaEdywSMGjofhCrw" id="nameLabel" uDistance="9" vDistance="9"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH-Uk_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="19" vDistance="-8"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bH-UlfdaEdywSMGjofhCrw" anchor="_bH7RQfdaEdywSMGjofhCrw _bH-UlPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bH-UlvdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Session/SessionOperation"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH-Ul_daEdywSMGjofhCrw" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH-7oPdaEdywSMGjofhCrw" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bH-7ofdaEdywSMGjofhCrw" anchor="_bH-UlPdaEdywSMGjofhCrw _bH7RQfdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bH-7ovdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Operation/SessionOperation"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH-7o_daEdywSMGjofhCrw" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH-7pPdaEdywSMGjofhCrw" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bH_isfdaEdywSMGjofhCrw" anchor="_bH8fZPdaEdywSMGjofhCrw _bH_isPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bH_isvdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Role/junior"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH_is_daEdywSMGjofhCrw" id="nameLabel" uDistance="15" vDistance="8"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bH_itPdaEdywSMGjofhCrw" id="cardinalityLabel" uDistance="15" vDistance="-5"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bIAJwPdaEdywSMGjofhCrw" anchor="_bH8fZPdaEdywSMGjofhCrw _bH_isPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bIAJwfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Role/senior"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIAJwvdaEdywSMGjofhCrw" id="nameLabel" uDistance="-70" vDistance="78"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIAJw_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="-45" vDistance="79"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bIAw0PdaEdywSMGjofhCrw" anchor="_bH8fZPdaEdywSMGjofhCrw _bH_isPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bIAw0fdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Role/SSDA"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIAw0vdaEdywSMGjofhCrw" id="nameLabel" uDistance="65" vDistance="58"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIAw0_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="45" vDistance="59"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bIAw1PdaEdywSMGjofhCrw" anchor="_bH8fZPdaEdywSMGjofhCrw _bH_isPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bIAw1fdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Role/SSDB"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIAw1vdaEdywSMGjofhCrw" id="nameLabel" uDistance="-10" vDistance="130"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIAw1_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="-8" vDistance="97"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bIBX4PdaEdywSMGjofhCrw" anchor="_bH8fZPdaEdywSMGjofhCrw _bIAw2PdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bIBX4fdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Role/PermAssignment"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIBX4vdaEdywSMGjofhCrw" id="nameLabel" uDistance="15" vDistance="6"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIBX4_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="8" vDistance="-10"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bIB-8PdaEdywSMGjofhCrw" anchor="_bIAw2PdaEdywSMGjofhCrw _bH8fZPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bIB-8fdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Permission/PermAssignment"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIB-8vdaEdywSMGjofhCrw" id="nameLabel" uDistance="8" vDistance="11"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIB-8_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="9" vDistance="-3"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bICmAPdaEdywSMGjofhCrw" anchor="_bIAw2PdaEdywSMGjofhCrw _bIB-9PdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bICmAfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Permission/target"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bICmAvdaEdywSMGjofhCrw" id="nameLabel" uDistance="7" vDistance="7"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bICmA_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="10" vDistance="-7"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bIDNEPdaEdywSMGjofhCrw" anchor="_bIB-9PdaEdywSMGjofhCrw _bIAw2PdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bIDNEfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Target/pemission"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIDNEvdaEdywSMGjofhCrw" id="nameLabel" uDistance="3" vDistance="8"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bIDNE_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="20" vDistance="-8"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bID0IPdaEdywSMGjofhCrw" anchor="_bIAw2PdaEdywSMGjofhCrw _bH-UlPdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bID0IfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Permission/operationType"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bID0IvdaEdywSMGjofhCrw" id="nameLabel" uDistance="4" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bID0I_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="19" vDistance="-9"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_bID0JPdaEdywSMGjofhCrw" anchor="_bH-UlPdaEdywSMGjofhCrw _bIAw2PdaEdywSMGjofhCrw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bID0JfdaEdywSMGjofhCrw" presentation="default">
+        <element href="RBAC.ecore#//Operation/pemission"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bID0JvdaEdywSMGjofhCrw" id="nameLabel" uDistance="18" vDistance="6"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_bID0J_daEdywSMGjofhCrw" id="cardinalityLabel" uDistance="19" vDistance="-6"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

@@ -1,0 +1,20 @@
+PM "platform:/resource/RbacAcl/model/RBAC.ecore"
+
+AM "platform:/resource/RbacAcl/model/BLP.ecore"
+
+CM "platform:/resource/RbacAcl/composition/result.ecore"
+
+// predirectives for primary model
+PMPre { 
+	RBAC.name = "HAC"
+}
+
+// predirectives for aspect model
+AMPre { 
+	BLP.name = "HAC"
+}
+
+// postdirectives 
+Post { 
+
+}

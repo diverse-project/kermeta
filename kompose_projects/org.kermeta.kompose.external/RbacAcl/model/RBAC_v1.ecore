@@ -32,15 +32,17 @@
     </eOperations>
     <eOperations name="CheckAccess" lowerBound="1" eType="#//Boolean">
       <eParameters name="target" lowerBound="1" eType="#//Target"/>
-      <eParameters name="operationType" lowerBound="1" eType="#//Operation"/>
+      <eParameters name="operationType" lowerBound="1" eType="#//OperationType"/>
+    </eOperations>
+    <eOperations name="Operation" eType="#//Type">
+      <eParameters name="target" lowerBound="1" upperBound="-1" eType="#//Target"/>
+      <eParameters name="params" upperBound="-1" eType="#//Type"/>
     </eOperations>
     <eOperations name="GetAllActiveRole" upperBound="-1" eType="#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="SessionRole" upperBound="-1"
         eType="#//Role" eOpposite="#//Role/SessionRole"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="UserSession" eType="#//User"
         eOpposite="#//User/UserSession"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="SessionOperation" lowerBound="1"
-        upperBound="-1" eType="#//Operation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Role">
     <eOperations name="GrantPermission" lowerBound="1" eType="#//Boolean">
@@ -51,7 +53,7 @@
     </eOperations>
     <eOperations name="CheckAccess" lowerBound="1" eType="#//Boolean">
       <eParameters name="target" lowerBound="1" eType="#//Target"/>
-      <eParameters name="operationType" lowerBound="1" eType="#//Operation"/>
+      <eParameters name="operationType" lowerBound="1" eType="#//OperationType"/>
     </eOperations>
     <eOperations name="AddInheritance" lowerBound="1" eType="#//Boolean">
       <eParameters name="seniorRole" lowerBound="1" eType="#//Role"/>
@@ -89,21 +91,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
         eType="#//Target" eOpposite="#//Target/pemission"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationType" upperBound="-1"
-        eType="#//Operation" eOpposite="#//Operation/pemission"/>
+        eType="#//OperationType" eOpposite="#//OperationType/pemission"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Target">
     <eStructuralFeatures xsi:type="ecore:EReference" name="pemission" upperBound="-1"
         eType="#//Permission" eOpposite="#//Permission/target"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation">
-    <eOperations name="execute" eType="#//Type">
-      <eParameters name="target" lowerBound="1" upperBound="-1" eType="#//Target"/>
-      <eParameters name="params" upperBound="-1" eType="#//Type"/>
-    </eOperations>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="pemission" upperBound="-1"
         eType="#//Permission" eOpposite="#//Permission/operationType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="SessionOperation" lowerBound="1"
-        upperBound="-1" eType="#//Session"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Type" instanceClassName="java.lang.Object"/>

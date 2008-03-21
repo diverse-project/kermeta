@@ -38,30 +38,26 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ObjectClassification" eType="#//SecurityLevel"
         eOpposite="#//SecurityLevel/ObjectClassification"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ObjectOperation" upperBound="-1"
-        eType="#//Operation" eOpposite="#//Operation/ObjectOperation"/>
+        eType="#//OperationType" eOpposite="#//OperationType/ObjectOperation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation">
-    <eOperations name="execute">
-      <eParameters name="target" upperBound="-1" eType="#//Target"/>
-      <eParameters name="operationType" eType="#//Operation"/>
-    </eOperations>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//OperationTypeEnum"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ObjectOperation" upperBound="-1"
         eType="#//Target" eOpposite="#//Target/ObjectOperation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subjetOperation" lowerBound="1"
-        upperBound="-1" eType="#//Subject" eOpposite="#//Subject/subjetOperation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Subject">
     <eOperations name="CheckAccess">
       <eParameters name="t" eType="#//Target"/>
-      <eParameters name="op" eType="#//Operation"/>
+      <eParameters name="op" eType="#//OperationType"/>
+    </eOperations>
+    <eOperations name="operation" eType="#//Type">
+      <eParameters name="target" upperBound="-1" eType="#//Target"/>
+      <eParameters name="operationType" eType="#//OperationType"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="UserSubject" eType="#//User"
         eOpposite="#//User/UserSubject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subjectSecurityLevel" eType="#//SecurityLevel"
         eOpposite="#//SecurityLevel/SubjectSecurityLevel"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subjetOperation" lowerBound="1"
-        upperBound="-1" eType="#//Operation" eOpposite="#//Operation/subjetOperation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OperationTypeEnum">
     <eLiterals name="READ" value="1"/>
@@ -73,5 +69,5 @@
     <eLiterals name="DEPOSIT" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Type" instanceClassName="java.lang.Object"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Type"/>
 </ecore:EPackage>
