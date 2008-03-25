@@ -56,7 +56,7 @@ class UMLHelper {
 	 
 		stereotypeInstances.each { instance |
 		 		 
-		 	var prop : kermeta::reflection::Property init getProperty( "base_Class", instance )	 
+		 	var prop : kermeta::language::structure::Property init getProperty( "base_Class", instance )	 
 		 
 		 	var base_Class : uml::Class
 			base_Class ?= instance.get( prop )
@@ -77,7 +77,7 @@ class UMLHelper {
 	/**
 	 * Getting the property with the given name for the given object.
 	 */	
-	operation getProperty( name : String, object : Object ) : kermeta::reflection::Property is do
+	operation getProperty( name : String, object : Object ) : kermeta::language::structure::Property is do
 	
 		var classDefinition : kermeta::language::structure::ClassDefinition 
 		classDefinition ?= object.getMetaClass.typeDefinition
