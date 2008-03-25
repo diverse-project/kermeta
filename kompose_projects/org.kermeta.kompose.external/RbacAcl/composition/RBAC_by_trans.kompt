@@ -1,0 +1,44 @@
+PM "platform:/resource/RbacAcl/model/RBAC_initial.ecore"
+
+AM "platform:/resource/RbacAcl/model/dummy.ecore"
+
+CM "platform:/resource/RbacAcl/comp_result/RBAC_command_by_comp.ecore"
+
+// predirectives for primary model
+PMPre { 
+	
+	RBAC::OperationType.name="Operation"
+	
+	create Reference as $sessionOperation
+	$sessionOperation.name = "SessionOperation"
+	$sessionOperation.eType = RBAC::Session
+	$sessionOperation.upperBound = 9
+	$sessionOperation.lowerBound = 1
+	
+	RBAC::Operation.eStructuralFeatures + $sessionOperation
+	
+	create Reference as $operationSession
+	$operationSession.name = "SessionOperation"
+	$operationSession.eType = RBAC::Operation
+	$operationSession.upperBound = 9
+	$operationSession.lowerBound = 1
+	$operationSession.eOpposite= RBAC::Operation::SessionOperation
+	
+	RBAC::Session.eStructuralFeatures + $operationSession
+	
+	RBAC::Operation.eOperations + RBAC::Session::Operation
+	
+	RBAC::Operation::Operation.name="execute"
+	
+	
+}
+
+// predirectives for aspect model
+AMPre { 
+	dummy.name="RBAC"
+}
+
+// postdirectives 
+Post { 
+
+}

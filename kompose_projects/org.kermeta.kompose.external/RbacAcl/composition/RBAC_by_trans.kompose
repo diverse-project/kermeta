@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/RbacAcl/model/RBAC_initial.ecore" aspectModelURI="platform:/resource/RbacAcl/model/dummy.ecore" composedModelURI="platform:/resource/RbacAcl/comp_result/RBAC_command_by_comp.ecore">
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="RBAC::OperationType"/>
+    <value xsi:type="kompose:StringLiteral" value="Operation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Create" className="Reference" identifier="sessionOperation"/>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="sessionOperation"/>
+    <value xsi:type="kompose:StringLiteral" value="SessionOperation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="eType">
+    <target xsi:type="kompose:IDRef" identifier="sessionOperation"/>
+    <value xsi:type="kompose:NameRef" qname="RBAC::Session"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="upperBound">
+    <target xsi:type="kompose:IDRef" identifier="sessionOperation"/>
+    <value xsi:type="kompose:IntegerLiteral" value="9"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="lowerBound">
+    <target xsi:type="kompose:IDRef" identifier="sessionOperation"/>
+    <value xsi:type="kompose:IntegerLiteral" value="1"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eStructuralFeatures">
+    <target xsi:type="kompose:NameRef" qname="RBAC::Operation"/>
+    <value xsi:type="kompose:IDRef" identifier="sessionOperation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Create" className="Reference" identifier="operationSession"/>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="operationSession"/>
+    <value xsi:type="kompose:StringLiteral" value="SessionOperation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="eType">
+    <target xsi:type="kompose:IDRef" identifier="operationSession"/>
+    <value xsi:type="kompose:NameRef" qname="RBAC::Operation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="upperBound">
+    <target xsi:type="kompose:IDRef" identifier="operationSession"/>
+    <value xsi:type="kompose:IntegerLiteral" value="9"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="lowerBound">
+    <target xsi:type="kompose:IDRef" identifier="operationSession"/>
+    <value xsi:type="kompose:IntegerLiteral" value="1"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="eOpposite">
+    <target xsi:type="kompose:IDRef" identifier="operationSession"/>
+    <value xsi:type="kompose:NameRef" qname="RBAC::Operation::SessionOperation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eStructuralFeatures">
+    <target xsi:type="kompose:NameRef" qname="RBAC::Session"/>
+    <value xsi:type="kompose:IDRef" identifier="operationSession"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eOperations">
+    <target xsi:type="kompose:NameRef" qname="RBAC::Operation"/>
+    <value xsi:type="kompose:NameRef" qname="RBAC::Session::Operation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="RBAC::Operation::Operation"/>
+    <value xsi:type="kompose:StringLiteral" value="execute"/>
+  </predirectivesPM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="dummy"/>
+    <value xsi:type="kompose:StringLiteral" value="RBAC"/>
+  </predirectivesAM>
+</kompose:Composer>

@@ -1,0 +1,43 @@
+PM "platform:/resource/RbacAcl/model/BLP_initial.ecore"
+
+AM "platform:/resource/RbacAcl/model/dummy.ecore"
+
+CM "platform:/resource/RbacAcl/comp_result/BLP_command_by_comp.ecore"
+
+// predirectives for primary model
+PMPre { 
+	
+	BLP::OperationType.name="Operation"
+	
+	create Reference as $subjectOperation
+	$subjectOperation.name = "SubjectOperation"
+	$subjectOperation.eType = BLP::Subject
+	$subjectOperation.upperBound = 9
+	$subjectOperation.lowerBound = 1
+	
+	BLP::Operation.eStructuralFeatures + $subjectOperation
+	
+	create Reference as $operationSubject
+	$operationSubject.name = "SubjectOperation"
+	$operationSubject.eType = BLP::Operation
+	$operationSubject.upperBound = 9
+	$operationSubject.lowerBound = 1
+	$operationSubject.eOpposite= BLP::Operation::SubjectOperation
+	
+	BLP::Subject.eStructuralFeatures + $operationSubject
+	
+	BLP::Operation.eOperations + BLP::Subject::Operation
+	
+	BLP::Operation::Operation.name="execute"
+	
+}
+
+// predirectives for aspect model
+AMPre { 
+	dummy.name="BLP"
+}
+
+// postdirectives 
+Post { 
+
+}
