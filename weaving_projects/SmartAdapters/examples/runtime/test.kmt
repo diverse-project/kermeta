@@ -1,0 +1,103 @@
+/* $Id: test.kmt,v 1.3 2008-03-27 16:33:10 bmorin Exp $
+ * Creation date: March 19, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "test::TestRuntime"
+@mainOperation "main"
+
+
+package test;
+require kermeta
+require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/plugin/SmartAdapters@Runtime/kermeta/SmartAdaptersToFractal.kmt"
+
+using ecore
+using kermeta::standard 
+using kermeta::utils
+using kermeta::persistence
+using runtime
+using runtime::instance
+using weaver
+
+
+class TestRuntime
+{
+	operation main() : Void is do 
+		stdio.writeln("K> ###START###")
+		var modelUri : String init "platform:/resource/SmartAdapters/examples/runtime/model.xmi"
+		var wovenModelUri : String init "platform:/resource/SmartAdapters/examples/runtime/woven.xmi"
+		var finalModelUri : String init "platform:/resource/SmartAdapters/examples/runtime/result.xmi"
+		var metamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore"
+		
+		
+		var adapterUri : String init "platform:/resource/SmartAdapters/examples/runtime/Adapter.xmi"
+		var adaptMMUri : String init "platform:/resource/SmartAdapters/metamodel/specific/runtime_AOM_Framework1.ecore"
+		var MMPatternUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
+		
+		stdio.writeln("K> Starting the system...")
+		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.run(self)
+		stdio.writeln("K> OK!")
+		
+		stdio.writeln("K> Generating and saving the model...")
+		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.generateAndSaveEMFModel(self, modelUri)
+		stdio.writeln("K> OK!")
+		
+		stdio.writeln("K> Loading the model...")
+		var rootElement : System 
+		var inputModel:Set<Object> init loadModel(EMFRepository.new, modelUri, metamodelUri)
+		rootElement ?= inputModel.one
+		stdio.writeln("K> OK!")
+		
+		//Model transformation
+		/*var cComp : ComponentInstance init rootElement.root.subComponent.select{c | c.name == "cComp"}.one
+		rootElement.root.subComponent.remove(cComp)
+		rootElement.root.subComponent.each{c | 
+			c.binding.each{b | 
+				if b.serverInstance == cComp then
+					c.binding.remove(b)
+				end
+			}
+		}
+		
+		stdio.writeln("K> Saving the model...")
+		inputModel.clear
+		inputModel.add(rootElement)
+		saveModel(inputModel, modelUri, metamodelUri)
+		stdio.writeln("K> OK!")*/
+		
+		//Aspect weaving with SmartAdapters
+		var weaver:Weaver init Weaver.new
+		weaver.weaving(modelUri, adapterUri, adaptMMUri, metamodelUri, MMPatternUri, wovenModelUri)
+		
+
+		
+		stdio.writeln("K> Loading the model...")
+		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.loadUpdateModel(self, wovenModelUri)
+		stdio.writeln("K> OK!")
+		
+		stdio.writeln("K> Generating and saving the model...")
+		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.generateAndSaveEMFModel(self, finalModelUri)
+		stdio.writeln("K> OK!")
+		
+		stdio.writeln("K> ###END###")
+	end
+	
+
+    operation loadModel(repository : EMFRepository, modelPath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   
+    	stdio.writeln("K>  loading: "+modelPath+" ("+metamodelPath+")")
+   		var resource : Resource init repository.createResource(modelPath, metamodelPath)
+       	resource.load()
+        result := resource.instances
+    end	
+	
+    operation saveModel(obj : Set<Object>, uri : String, domainMM : String) is do
+ 		stdio.writeln("K>  saving: "+uri+" ("+domainMM+")")
+    	var repository : EMFRepository init EMFRepository.new
+	    var resource : Resource init repository.createResource(uri , domainMM)
+	    obj.each{o | resource.instances.add(o)}
+	    resource.save
+    end	
+}
