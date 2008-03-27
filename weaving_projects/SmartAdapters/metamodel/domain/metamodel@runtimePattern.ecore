@@ -6,7 +6,7 @@
   <eSubpackages name="runtime" nsURI="http://www.objectweb.org/models@runtime/pattern/runtime"
       nsPrefix="runtime">
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//runtime/Name"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//runtime/String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ModelElement" eSuperTypes="#//runtime/NamedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//runtime/ModelElement">
@@ -23,9 +23,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//runtime/ModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//runtime/DataType"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EDataType" name="Name" instanceClassName="java.lang.String"/>
-    <eClassifiers xsi:type="ecore:EDataType" name="Text" instanceClassName="java.lang.String"/>
-    <eClassifiers xsi:type="ecore:EDataType" name="Value" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
     <eSubpackages name="instance" nsURI="http://www.objectweb.org/models@runtime/pattern/runtime/instance"
         nsPrefix="instance">
@@ -38,8 +36,8 @@
             eType="#//runtime/instance/ValuedAttribute" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1"
             eType="#//runtime/instance/TransmissionBinding" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" eType="#//runtime/Text"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentDesc" eType="#//runtime/Text"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" eType="#//runtime/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentDesc" eType="#//runtime/String"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="PrimitiveInstance" eSuperTypes="#//runtime/instance/ComponentInstance"/>
       <eClassifiers xsi:type="ecore:EClass" name="CompositeInstance" eSuperTypes="#//runtime/instance/ComponentInstance">
@@ -54,7 +52,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
         <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//runtime/type/Attribute"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//runtime/Value"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//runtime/String"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Binding" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
         <eStructuralFeatures xsi:type="ecore:EReference" name="serverInstance" eType="#//runtime/instance/ComponentInstance"/>

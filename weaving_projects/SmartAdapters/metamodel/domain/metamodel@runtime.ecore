@@ -3,10 +3,10 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="runtime"
     nsURI="http://www.objectweb.org/models@runtime" nsPrefix="runtime">
-  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//Name"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ModelElement" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelElement" abstract="true" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//ModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//instance/CompositeInstance"
         containment="true"/>
@@ -18,12 +18,11 @@
         eType="#//DataType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//ModelElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//ModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="#//ModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//DataType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Name" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Text" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Value" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
   <eSubpackages name="instance" nsURI="http://www.objectweb.org/models@runtime/instance"
       nsPrefix="instance">
     <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" abstract="true"
@@ -38,8 +37,8 @@
           eType="#//instance/ValuedAttribute" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1"
           eType="#//instance/TransmissionBinding" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" eType="#//Text"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentDesc" eType="#//Text"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentDesc" eType="#//String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveInstance" eSuperTypes="#//instance/ComponentInstance"/>
     <eClassifiers xsi:type="ecore:EClass" name="CompositeInstance" eSuperTypes="#//instance/ComponentInstance">
@@ -55,7 +54,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute">
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
           eType="#//type/Attribute"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//Value"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="serverInstance" lowerBound="1"
@@ -105,7 +104,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//ModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sub" lowerBound="1" upperBound="-1"
           eType="#//type/PrimitivePort" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//Boolean"
           defaultValueLiteral="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//TypedElement"/>

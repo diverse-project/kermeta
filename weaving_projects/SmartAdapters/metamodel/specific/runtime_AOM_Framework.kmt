@@ -1,0 +1,2808 @@
+
+/* 
+ * Author: Brice Morin
+ * Creation date: 
+ * License: 
+ * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
+ */
+
+/*
+ * This file was automatically generated
+ */
+
+package org;
+require kermeta
+require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
+require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore"
+require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
+
+using kermeta::standard
+using kermeta::utils
+using patternframework
+using org::smartadapters::core
+using org::smartadapters::extension
+using ecore
+using org::smartadapters::utils
+
+package smartadapters
+{
+	package core
+	{
+		aspect class Adapter 
+		{
+			/**
+			 * Associates concrete meta-classes from MM\' to concrete meta-classes from MM
+			 */
+			operation initConvert(): Void is do
+				converter := Converter.new
+				convert := Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new
+				convert.put(pattern::runtime::System,runtime::System)
+				convert.put(pattern::runtime::DataType,runtime::DataType)
+				convert.put(pattern::runtime::instance::PrimitiveInstance,runtime::instance::PrimitiveInstance)
+				convert.put(pattern::runtime::instance::CompositeInstance,runtime::instance::CompositeInstance)
+				convert.put(pattern::runtime::instance::ValuedAttribute,runtime::instance::ValuedAttribute)
+				convert.put(pattern::runtime::instance::TransmissionBinding,runtime::instance::TransmissionBinding)
+				convert.put(pattern::runtime::instance::DelegationBinding,runtime::instance::DelegationBinding)
+				convert.put(pattern::runtime::type::PrimitiveType,runtime::type::PrimitiveType)
+				convert.put(pattern::runtime::type::CompositeType,runtime::type::CompositeType)
+				convert.put(pattern::runtime::type::Operation,runtime::type::Operation)
+				convert.put(pattern::runtime::type::Parameter,runtime::type::Parameter)
+				convert.put(pattern::runtime::type::FunctionalService,runtime::type::FunctionalService)
+				convert.put(pattern::runtime::type::ControlService,runtime::type::ControlService)
+				convert.put(pattern::runtime::type::Port,runtime::type::Port)
+				convert.put(pattern::runtime::type::Attribute,runtime::type::Attribute)
+				convert.put(pattern::runtime::type::PrimitivePort,runtime::type::PrimitivePort)
+				converter.initConverter(convert)
+			end
+		}
+		
+	package adaptations
+	{
+		 
+
+		/**
+		 * Sets any property of runtime::NamedElement
+		 * All the references expect NamedElementToSet may be void
+		 */
+			 
+		class SetruntimeNamedElement inherits setAdaptation
+		{
+			reference NamedElementToSet : pattern::runtime::NamedElement
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := NamedElementToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempNamedElement : runtime::NamedElement
+				tempNamedElement ?= ad.getRealObject(NamedElementToSet,false)
+				
+				tempNamedElement.name ?= ad.setSingleProperty(refname, tempNamedElement.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeNamedElement 
+					if self.reverse == void then
+						unset := UnsetruntimeNamedElement.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.NamedElementToUnset := self.NamedElementToSet
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::NamedElement
+		 * All the references expect NamedElementToUnset may be void 
+		 */		
+		class UnsetruntimeNamedElement inherits unsetAdaptation
+		{
+			reference NamedElementToUnset : pattern::runtime::NamedElement
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := NamedElementToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempNamedElement : runtime::NamedElement
+				tempNamedElement ?= ad.getRealObject(NamedElementToUnset,false)
+				
+				tempNamedElement.name ?= ad.unsetSingleProperty(refname, tempNamedElement.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeNamedElement 
+					if self.reverse == void then
+						~set := SetruntimeNamedElement.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.NamedElementToSet := self.NamedElementToUnset
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+
+		/**
+		 * Sets any property of runtime::ModelElement
+		 * All the references expect ModelElementToSet may be void
+		 */
+			 
+		class SetruntimeModelElement inherits setAdaptation
+		{
+			reference ModelElementToSet : pattern::runtime::ModelElement
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ModelElementToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempModelElement : runtime::ModelElement
+				tempModelElement ?= ad.getRealObject(ModelElementToSet,false)
+				
+				tempModelElement.name ?= ad.setSingleProperty(refname, tempModelElement.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeModelElement 
+					if self.reverse == void then
+						unset := UnsetruntimeModelElement.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.ModelElementToUnset := self.ModelElementToSet
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::ModelElement
+		 * All the references expect ModelElementToUnset may be void 
+		 */		
+		class UnsetruntimeModelElement inherits unsetAdaptation
+		{
+			reference ModelElementToUnset : pattern::runtime::ModelElement
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ModelElementToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempModelElement : runtime::ModelElement
+				tempModelElement ?= ad.getRealObject(ModelElementToUnset,false)
+				
+				tempModelElement.name ?= ad.unsetSingleProperty(refname, tempModelElement.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeModelElement 
+					if self.reverse == void then
+						~set := SetruntimeModelElement.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.ModelElementToSet := self.ModelElementToUnset
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::System
+		 */
+		
+		/**
+		 * Creates a new runtime::System from scratch
+		 * This new element is handled by refering to newSystem
+		 */
+		class CreateruntimeSystem inherits createAdaptation
+		{
+			attribute newSystem : pattern::runtime::System
+					
+			method check(): Boolean is do
+				result := newSystem != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newSystem, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::System from an existing one
+		 * This cloned element is handled by refering to clonedSystem
+		 */
+		class CloneruntimeSystem inherits cloneAdaptation
+		{
+			reference SystemToClone : pattern::runtime::System
+			attribute clonedSystem : pattern::runtime::System
+			
+			method check(): Boolean is do
+				result := SystemToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedSystem, SystemToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::System
+		 * All the references expect SystemToSet may be void
+		 */
+			 
+		class SetruntimeSystem inherits setAdaptation
+		{
+			reference SystemToSet : pattern::runtime::System
+			reference refroot : pattern::runtime::instance::CompositeInstance
+			reference refservices : pattern::runtime::type::Service[0..*]
+			reference reftypes : pattern::runtime::type::ComponentType[0..*]
+			reference refdataTypes : pattern::runtime::DataType[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := SystemToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempSystem : runtime::System
+				tempSystem ?= ad.getRealObject(SystemToSet,false)
+				
+				tempSystem.root ?= ad.setSingleProperty(refroot, tempSystem.root)
+				ad.setMultipleProperty(tempSystem.services,refservices)
+				ad.setMultipleProperty(tempSystem.types,reftypes)
+				ad.setMultipleProperty(tempSystem.dataTypes,refdataTypes)
+				tempSystem.name ?= ad.setSingleProperty(refname, tempSystem.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeSystem 
+					if self.reverse == void then
+						unset := UnsetruntimeSystem.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.SystemToUnset := self.SystemToSet
+					unset.refroot := self.refroot
+					unset.refservices.clear
+					unset.refservices.addAll(self.refservices)
+					unset.reftypes.clear
+					unset.reftypes.addAll(self.reftypes)
+					unset.refdataTypes.clear
+					unset.refdataTypes.addAll(self.refdataTypes)
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::System
+		 * All the references expect SystemToUnset may be void 
+		 */		
+		class UnsetruntimeSystem inherits unsetAdaptation
+		{
+			reference SystemToUnset : pattern::runtime::System
+			reference refroot : pattern::runtime::instance::CompositeInstance
+			reference refservices : pattern::runtime::type::Service[0..*]
+			reference reftypes : pattern::runtime::type::ComponentType[0..*]
+			reference refdataTypes : pattern::runtime::DataType[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := SystemToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempSystem : runtime::System
+				tempSystem ?= ad.getRealObject(SystemToUnset,false)
+				
+				tempSystem.root ?= ad.unsetSingleProperty(refroot, tempSystem.root)
+				ad.unsetMultipleProperty(tempSystem.services,refservices)
+				ad.unsetMultipleProperty(tempSystem.types,reftypes)
+				ad.unsetMultipleProperty(tempSystem.dataTypes,refdataTypes)
+				tempSystem.name ?= ad.unsetSingleProperty(refname, tempSystem.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeSystem 
+					if self.reverse == void then
+						~set := SetruntimeSystem.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.SystemToSet := self.SystemToUnset
+					~set.refroot := self.refroot
+					~set.refservices.clear
+					~set.refservices.addAll(self.refservices)
+					~set.reftypes.clear
+					~set.reftypes.addAll(self.reftypes)
+					~set.refdataTypes.clear
+					~set.refdataTypes.addAll(self.refdataTypes)
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::DataType
+		 */
+		
+		/**
+		 * Creates a new runtime::DataType from scratch
+		 * This new element is handled by refering to newDataType
+		 */
+		class CreateruntimeDataType inherits createAdaptation
+		{
+			attribute newDataType : pattern::runtime::DataType
+					
+			method check(): Boolean is do
+				result := newDataType != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newDataType, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::DataType from an existing one
+		 * This cloned element is handled by refering to clonedDataType
+		 */
+		class CloneruntimeDataType inherits cloneAdaptation
+		{
+			reference DataTypeToClone : pattern::runtime::DataType
+			attribute clonedDataType : pattern::runtime::DataType
+			
+			method check(): Boolean is do
+				result := DataTypeToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedDataType, DataTypeToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::DataType
+		 * All the references expect DataTypeToSet may be void
+		 */
+			 
+		class SetruntimeDataType inherits setAdaptation
+		{
+			reference DataTypeToSet : pattern::runtime::DataType
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := DataTypeToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempDataType : runtime::DataType
+				tempDataType ?= ad.getRealObject(DataTypeToSet,false)
+				
+				tempDataType.name ?= ad.setSingleProperty(refname, tempDataType.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeDataType 
+					if self.reverse == void then
+						unset := UnsetruntimeDataType.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.DataTypeToUnset := self.DataTypeToSet
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::DataType
+		 * All the references expect DataTypeToUnset may be void 
+		 */		
+		class UnsetruntimeDataType inherits unsetAdaptation
+		{
+			reference DataTypeToUnset : pattern::runtime::DataType
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := DataTypeToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempDataType : runtime::DataType
+				tempDataType ?= ad.getRealObject(DataTypeToUnset,false)
+				
+				tempDataType.name ?= ad.unsetSingleProperty(refname, tempDataType.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeDataType 
+					if self.reverse == void then
+						~set := SetruntimeDataType.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.DataTypeToSet := self.DataTypeToUnset
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+
+		/**
+		 * Sets any property of runtime::TypedElement
+		 * All the references expect TypedElementToSet may be void
+		 */
+			 
+		class SetruntimeTypedElement inherits setAdaptation
+		{
+			reference TypedElementToSet : pattern::runtime::TypedElement
+			reference reftype : pattern::runtime::DataType
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := TypedElementToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempTypedElement : runtime::TypedElement
+				tempTypedElement ?= ad.getRealObject(TypedElementToSet,false)
+				
+				tempTypedElement.type ?= ad.setSingleProperty(reftype, tempTypedElement.type)
+				tempTypedElement.name ?= ad.setSingleProperty(refname, tempTypedElement.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeTypedElement 
+					if self.reverse == void then
+						unset := UnsetruntimeTypedElement.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.TypedElementToUnset := self.TypedElementToSet
+					unset.reftype := self.reftype
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::TypedElement
+		 * All the references expect TypedElementToUnset may be void 
+		 */		
+		class UnsetruntimeTypedElement inherits unsetAdaptation
+		{
+			reference TypedElementToUnset : pattern::runtime::TypedElement
+			reference reftype : pattern::runtime::DataType
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := TypedElementToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempTypedElement : runtime::TypedElement
+				tempTypedElement ?= ad.getRealObject(TypedElementToUnset,false)
+				
+				tempTypedElement.type ?= ad.unsetSingleProperty(reftype, tempTypedElement.type)
+				tempTypedElement.name ?= ad.unsetSingleProperty(refname, tempTypedElement.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeTypedElement 
+					if self.reverse == void then
+						~set := SetruntimeTypedElement.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.TypedElementToSet := self.TypedElementToUnset
+					~set.reftype := self.reftype
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		 
+		 
+
+		/**
+		 * Sets any property of runtime::instance::ComponentInstance
+		 * All the references expect ComponentInstanceToSet may be void
+		 */
+			 
+		class SetruntimeinstanceComponentInstance inherits setAdaptation
+		{
+			reference ComponentInstanceToSet : pattern::runtime::instance::ComponentInstance
+			reference reftype : pattern::runtime::type::ComponentType
+			reference refstate : pattern::runtime::instance::InstanceState
+			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
+			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::runtime::String
+			reference refcontentDesc : pattern::runtime::String
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ComponentInstanceToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempComponentInstance : runtime::instance::ComponentInstance
+				tempComponentInstance ?= ad.getRealObject(ComponentInstanceToSet,false)
+				
+				tempComponentInstance.type ?= ad.setSingleProperty(reftype, tempComponentInstance.type)
+				tempComponentInstance.state ?= ad.setSingleProperty(refstate, tempComponentInstance.state)
+				tempComponentInstance.superComponent ?= ad.setSingleProperty(refsuperComponent, tempComponentInstance.superComponent)
+				ad.setMultipleProperty(tempComponentInstance.~attribute,refattribute)
+				ad.setMultipleProperty(tempComponentInstance.binding,refbinding)
+				tempComponentInstance.controllerDesc ?= ad.setSingleProperty(refcontrollerDesc, tempComponentInstance.controllerDesc)
+				tempComponentInstance.contentDesc ?= ad.setSingleProperty(refcontentDesc, tempComponentInstance.contentDesc)
+				tempComponentInstance.name ?= ad.setSingleProperty(refname, tempComponentInstance.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeinstanceComponentInstance 
+					if self.reverse == void then
+						unset := UnsetruntimeinstanceComponentInstance.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.ComponentInstanceToUnset := self.ComponentInstanceToSet
+					unset.reftype := self.reftype
+					unset.refstate := self.refstate
+					unset.refsuperComponent := self.refsuperComponent
+					unset.refattribute.clear
+					unset.refattribute.addAll(self.refattribute)
+					unset.refbinding.clear
+					unset.refbinding.addAll(self.refbinding)
+					unset.refcontrollerDesc := self.refcontrollerDesc
+					unset.refcontentDesc := self.refcontentDesc
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::instance::ComponentInstance
+		 * All the references expect ComponentInstanceToUnset may be void 
+		 */		
+		class UnsetruntimeinstanceComponentInstance inherits unsetAdaptation
+		{
+			reference ComponentInstanceToUnset : pattern::runtime::instance::ComponentInstance
+			reference reftype : pattern::runtime::type::ComponentType
+			reference refstate : pattern::runtime::instance::InstanceState
+			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
+			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::runtime::String
+			reference refcontentDesc : pattern::runtime::String
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ComponentInstanceToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempComponentInstance : runtime::instance::ComponentInstance
+				tempComponentInstance ?= ad.getRealObject(ComponentInstanceToUnset,false)
+				
+				tempComponentInstance.type ?= ad.unsetSingleProperty(reftype, tempComponentInstance.type)
+				tempComponentInstance.state ?= ad.unsetSingleProperty(refstate, tempComponentInstance.state)
+				tempComponentInstance.superComponent ?= ad.unsetSingleProperty(refsuperComponent, tempComponentInstance.superComponent)
+				ad.unsetMultipleProperty(tempComponentInstance.~attribute,refattribute)
+				ad.unsetMultipleProperty(tempComponentInstance.binding,refbinding)
+				tempComponentInstance.controllerDesc ?= ad.unsetSingleProperty(refcontrollerDesc, tempComponentInstance.controllerDesc)
+				tempComponentInstance.contentDesc ?= ad.unsetSingleProperty(refcontentDesc, tempComponentInstance.contentDesc)
+				tempComponentInstance.name ?= ad.unsetSingleProperty(refname, tempComponentInstance.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeinstanceComponentInstance 
+					if self.reverse == void then
+						~set := SetruntimeinstanceComponentInstance.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.ComponentInstanceToSet := self.ComponentInstanceToUnset
+					~set.reftype := self.reftype
+					~set.refstate := self.refstate
+					~set.refsuperComponent := self.refsuperComponent
+					~set.refattribute.clear
+					~set.refattribute.addAll(self.refattribute)
+					~set.refbinding.clear
+					~set.refbinding.addAll(self.refbinding)
+					~set.refcontrollerDesc := self.refcontrollerDesc
+					~set.refcontentDesc := self.refcontentDesc
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::instance::PrimitiveInstance
+		 */
+		
+		/**
+		 * Creates a new runtime::instance::PrimitiveInstance from scratch
+		 * This new element is handled by refering to newPrimitiveInstance
+		 */
+		class CreateruntimeinstancePrimitiveInstance inherits createAdaptation
+		{
+			attribute newPrimitiveInstance : pattern::runtime::instance::PrimitiveInstance
+					
+			method check(): Boolean is do
+				result := newPrimitiveInstance != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newPrimitiveInstance, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::instance::PrimitiveInstance from an existing one
+		 * This cloned element is handled by refering to clonedPrimitiveInstance
+		 */
+		class CloneruntimeinstancePrimitiveInstance inherits cloneAdaptation
+		{
+			reference PrimitiveInstanceToClone : pattern::runtime::instance::PrimitiveInstance
+			attribute clonedPrimitiveInstance : pattern::runtime::instance::PrimitiveInstance
+			
+			method check(): Boolean is do
+				result := PrimitiveInstanceToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedPrimitiveInstance, PrimitiveInstanceToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::instance::PrimitiveInstance
+		 * All the references expect PrimitiveInstanceToSet may be void
+		 */
+			 
+		class SetruntimeinstancePrimitiveInstance inherits setAdaptation
+		{
+			reference PrimitiveInstanceToSet : pattern::runtime::instance::PrimitiveInstance
+			reference reftype : pattern::runtime::type::ComponentType
+			reference refstate : pattern::runtime::instance::InstanceState
+			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
+			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::runtime::String
+			reference refcontentDesc : pattern::runtime::String
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := PrimitiveInstanceToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempPrimitiveInstance : runtime::instance::PrimitiveInstance
+				tempPrimitiveInstance ?= ad.getRealObject(PrimitiveInstanceToSet,false)
+				
+				tempPrimitiveInstance.type ?= ad.setSingleProperty(reftype, tempPrimitiveInstance.type)
+				tempPrimitiveInstance.state ?= ad.setSingleProperty(refstate, tempPrimitiveInstance.state)
+				tempPrimitiveInstance.superComponent ?= ad.setSingleProperty(refsuperComponent, tempPrimitiveInstance.superComponent)
+				ad.setMultipleProperty(tempPrimitiveInstance.~attribute,refattribute)
+				ad.setMultipleProperty(tempPrimitiveInstance.binding,refbinding)
+				tempPrimitiveInstance.controllerDesc ?= ad.setSingleProperty(refcontrollerDesc, tempPrimitiveInstance.controllerDesc)
+				tempPrimitiveInstance.contentDesc ?= ad.setSingleProperty(refcontentDesc, tempPrimitiveInstance.contentDesc)
+				tempPrimitiveInstance.name ?= ad.setSingleProperty(refname, tempPrimitiveInstance.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeinstancePrimitiveInstance 
+					if self.reverse == void then
+						unset := UnsetruntimeinstancePrimitiveInstance.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.PrimitiveInstanceToUnset := self.PrimitiveInstanceToSet
+					unset.reftype := self.reftype
+					unset.refstate := self.refstate
+					unset.refsuperComponent := self.refsuperComponent
+					unset.refattribute.clear
+					unset.refattribute.addAll(self.refattribute)
+					unset.refbinding.clear
+					unset.refbinding.addAll(self.refbinding)
+					unset.refcontrollerDesc := self.refcontrollerDesc
+					unset.refcontentDesc := self.refcontentDesc
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::instance::PrimitiveInstance
+		 * All the references expect PrimitiveInstanceToUnset may be void 
+		 */		
+		class UnsetruntimeinstancePrimitiveInstance inherits unsetAdaptation
+		{
+			reference PrimitiveInstanceToUnset : pattern::runtime::instance::PrimitiveInstance
+			reference reftype : pattern::runtime::type::ComponentType
+			reference refstate : pattern::runtime::instance::InstanceState
+			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
+			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::runtime::String
+			reference refcontentDesc : pattern::runtime::String
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := PrimitiveInstanceToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempPrimitiveInstance : runtime::instance::PrimitiveInstance
+				tempPrimitiveInstance ?= ad.getRealObject(PrimitiveInstanceToUnset,false)
+				
+				tempPrimitiveInstance.type ?= ad.unsetSingleProperty(reftype, tempPrimitiveInstance.type)
+				tempPrimitiveInstance.state ?= ad.unsetSingleProperty(refstate, tempPrimitiveInstance.state)
+				tempPrimitiveInstance.superComponent ?= ad.unsetSingleProperty(refsuperComponent, tempPrimitiveInstance.superComponent)
+				ad.unsetMultipleProperty(tempPrimitiveInstance.~attribute,refattribute)
+				ad.unsetMultipleProperty(tempPrimitiveInstance.binding,refbinding)
+				tempPrimitiveInstance.controllerDesc ?= ad.unsetSingleProperty(refcontrollerDesc, tempPrimitiveInstance.controllerDesc)
+				tempPrimitiveInstance.contentDesc ?= ad.unsetSingleProperty(refcontentDesc, tempPrimitiveInstance.contentDesc)
+				tempPrimitiveInstance.name ?= ad.unsetSingleProperty(refname, tempPrimitiveInstance.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeinstancePrimitiveInstance 
+					if self.reverse == void then
+						~set := SetruntimeinstancePrimitiveInstance.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.PrimitiveInstanceToSet := self.PrimitiveInstanceToUnset
+					~set.reftype := self.reftype
+					~set.refstate := self.refstate
+					~set.refsuperComponent := self.refsuperComponent
+					~set.refattribute.clear
+					~set.refattribute.addAll(self.refattribute)
+					~set.refbinding.clear
+					~set.refbinding.addAll(self.refbinding)
+					~set.refcontrollerDesc := self.refcontrollerDesc
+					~set.refcontentDesc := self.refcontentDesc
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::instance::CompositeInstance
+		 */
+		
+		/**
+		 * Creates a new runtime::instance::CompositeInstance from scratch
+		 * This new element is handled by refering to newCompositeInstance
+		 */
+		class CreateruntimeinstanceCompositeInstance inherits createAdaptation
+		{
+			attribute newCompositeInstance : pattern::runtime::instance::CompositeInstance
+					
+			method check(): Boolean is do
+				result := newCompositeInstance != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newCompositeInstance, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::instance::CompositeInstance from an existing one
+		 * This cloned element is handled by refering to clonedCompositeInstance
+		 */
+		class CloneruntimeinstanceCompositeInstance inherits cloneAdaptation
+		{
+			reference CompositeInstanceToClone : pattern::runtime::instance::CompositeInstance
+			attribute clonedCompositeInstance : pattern::runtime::instance::CompositeInstance
+			
+			method check(): Boolean is do
+				result := CompositeInstanceToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedCompositeInstance, CompositeInstanceToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::instance::CompositeInstance
+		 * All the references expect CompositeInstanceToSet may be void
+		 */
+			 
+		class SetruntimeinstanceCompositeInstance inherits setAdaptation
+		{
+			reference CompositeInstanceToSet : pattern::runtime::instance::CompositeInstance
+			reference refsubComponent : pattern::runtime::instance::ComponentInstance[0..*]
+			reference refdelegation : pattern::runtime::instance::DelegationBinding[0..*]
+			reference reftype : pattern::runtime::type::ComponentType
+			reference refstate : pattern::runtime::instance::InstanceState
+			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
+			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::runtime::String
+			reference refcontentDesc : pattern::runtime::String
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := CompositeInstanceToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempCompositeInstance : runtime::instance::CompositeInstance
+				tempCompositeInstance ?= ad.getRealObject(CompositeInstanceToSet,false)
+				
+				ad.setMultipleProperty(tempCompositeInstance.subComponent,refsubComponent)
+				ad.setMultipleProperty(tempCompositeInstance.delegation,refdelegation)
+				tempCompositeInstance.type ?= ad.setSingleProperty(reftype, tempCompositeInstance.type)
+				tempCompositeInstance.state ?= ad.setSingleProperty(refstate, tempCompositeInstance.state)
+				tempCompositeInstance.superComponent ?= ad.setSingleProperty(refsuperComponent, tempCompositeInstance.superComponent)
+				ad.setMultipleProperty(tempCompositeInstance.~attribute,refattribute)
+				ad.setMultipleProperty(tempCompositeInstance.binding,refbinding)
+				tempCompositeInstance.controllerDesc ?= ad.setSingleProperty(refcontrollerDesc, tempCompositeInstance.controllerDesc)
+				tempCompositeInstance.contentDesc ?= ad.setSingleProperty(refcontentDesc, tempCompositeInstance.contentDesc)
+				tempCompositeInstance.name ?= ad.setSingleProperty(refname, tempCompositeInstance.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeinstanceCompositeInstance 
+					if self.reverse == void then
+						unset := UnsetruntimeinstanceCompositeInstance.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.CompositeInstanceToUnset := self.CompositeInstanceToSet
+					unset.refsubComponent.clear
+					unset.refsubComponent.addAll(self.refsubComponent)
+					unset.refdelegation.clear
+					unset.refdelegation.addAll(self.refdelegation)
+					unset.reftype := self.reftype
+					unset.refstate := self.refstate
+					unset.refsuperComponent := self.refsuperComponent
+					unset.refattribute.clear
+					unset.refattribute.addAll(self.refattribute)
+					unset.refbinding.clear
+					unset.refbinding.addAll(self.refbinding)
+					unset.refcontrollerDesc := self.refcontrollerDesc
+					unset.refcontentDesc := self.refcontentDesc
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::instance::CompositeInstance
+		 * All the references expect CompositeInstanceToUnset may be void 
+		 */		
+		class UnsetruntimeinstanceCompositeInstance inherits unsetAdaptation
+		{
+			reference CompositeInstanceToUnset : pattern::runtime::instance::CompositeInstance
+			reference refsubComponent : pattern::runtime::instance::ComponentInstance[0..*]
+			reference refdelegation : pattern::runtime::instance::DelegationBinding[0..*]
+			reference reftype : pattern::runtime::type::ComponentType
+			reference refstate : pattern::runtime::instance::InstanceState
+			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
+			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::runtime::String
+			reference refcontentDesc : pattern::runtime::String
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := CompositeInstanceToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempCompositeInstance : runtime::instance::CompositeInstance
+				tempCompositeInstance ?= ad.getRealObject(CompositeInstanceToUnset,false)
+				
+				ad.unsetMultipleProperty(tempCompositeInstance.subComponent,refsubComponent)
+				ad.unsetMultipleProperty(tempCompositeInstance.delegation,refdelegation)
+				tempCompositeInstance.type ?= ad.unsetSingleProperty(reftype, tempCompositeInstance.type)
+				tempCompositeInstance.state ?= ad.unsetSingleProperty(refstate, tempCompositeInstance.state)
+				tempCompositeInstance.superComponent ?= ad.unsetSingleProperty(refsuperComponent, tempCompositeInstance.superComponent)
+				ad.unsetMultipleProperty(tempCompositeInstance.~attribute,refattribute)
+				ad.unsetMultipleProperty(tempCompositeInstance.binding,refbinding)
+				tempCompositeInstance.controllerDesc ?= ad.unsetSingleProperty(refcontrollerDesc, tempCompositeInstance.controllerDesc)
+				tempCompositeInstance.contentDesc ?= ad.unsetSingleProperty(refcontentDesc, tempCompositeInstance.contentDesc)
+				tempCompositeInstance.name ?= ad.unsetSingleProperty(refname, tempCompositeInstance.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeinstanceCompositeInstance 
+					if self.reverse == void then
+						~set := SetruntimeinstanceCompositeInstance.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.CompositeInstanceToSet := self.CompositeInstanceToUnset
+					~set.refsubComponent.clear
+					~set.refsubComponent.addAll(self.refsubComponent)
+					~set.refdelegation.clear
+					~set.refdelegation.addAll(self.refdelegation)
+					~set.reftype := self.reftype
+					~set.refstate := self.refstate
+					~set.refsuperComponent := self.refsuperComponent
+					~set.refattribute.clear
+					~set.refattribute.addAll(self.refattribute)
+					~set.refbinding.clear
+					~set.refbinding.addAll(self.refbinding)
+					~set.refcontrollerDesc := self.refcontrollerDesc
+					~set.refcontentDesc := self.refcontentDesc
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::instance::ValuedAttribute
+		 */
+		
+		/**
+		 * Creates a new runtime::instance::ValuedAttribute from scratch
+		 * This new element is handled by refering to newValuedAttribute
+		 */
+		class CreateruntimeinstanceValuedAttribute inherits createAdaptation
+		{
+			attribute newValuedAttribute : pattern::runtime::instance::ValuedAttribute
+					
+			method check(): Boolean is do
+				result := newValuedAttribute != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newValuedAttribute, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::instance::ValuedAttribute from an existing one
+		 * This cloned element is handled by refering to clonedValuedAttribute
+		 */
+		class CloneruntimeinstanceValuedAttribute inherits cloneAdaptation
+		{
+			reference ValuedAttributeToClone : pattern::runtime::instance::ValuedAttribute
+			attribute clonedValuedAttribute : pattern::runtime::instance::ValuedAttribute
+			
+			method check(): Boolean is do
+				result := ValuedAttributeToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedValuedAttribute, ValuedAttributeToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::instance::ValuedAttribute
+		 * All the references expect ValuedAttributeToSet may be void
+		 */
+			 
+		class SetruntimeinstanceValuedAttribute inherits setAdaptation
+		{
+			reference ValuedAttributeToSet : pattern::runtime::instance::ValuedAttribute
+			reference refattribute : pattern::runtime::type::Attribute
+			reference refvalue : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ValuedAttributeToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempValuedAttribute : runtime::instance::ValuedAttribute
+				tempValuedAttribute ?= ad.getRealObject(ValuedAttributeToSet,false)
+				
+				tempValuedAttribute.~attribute ?= ad.setSingleProperty(refattribute, tempValuedAttribute.~attribute)
+				tempValuedAttribute.~value ?= ad.setSingleProperty(refvalue, tempValuedAttribute.~value)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeinstanceValuedAttribute 
+					if self.reverse == void then
+						unset := UnsetruntimeinstanceValuedAttribute.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.ValuedAttributeToUnset := self.ValuedAttributeToSet
+					unset.refattribute := self.refattribute
+					unset.refvalue := self.refvalue
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::instance::ValuedAttribute
+		 * All the references expect ValuedAttributeToUnset may be void 
+		 */		
+		class UnsetruntimeinstanceValuedAttribute inherits unsetAdaptation
+		{
+			reference ValuedAttributeToUnset : pattern::runtime::instance::ValuedAttribute
+			reference refattribute : pattern::runtime::type::Attribute
+			reference refvalue : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ValuedAttributeToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempValuedAttribute : runtime::instance::ValuedAttribute
+				tempValuedAttribute ?= ad.getRealObject(ValuedAttributeToUnset,false)
+				
+				tempValuedAttribute.~attribute ?= ad.unsetSingleProperty(refattribute, tempValuedAttribute.~attribute)
+				tempValuedAttribute.~value ?= ad.unsetSingleProperty(refvalue, tempValuedAttribute.~value)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeinstanceValuedAttribute 
+					if self.reverse == void then
+						~set := SetruntimeinstanceValuedAttribute.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.ValuedAttributeToSet := self.ValuedAttributeToUnset
+					~set.refattribute := self.refattribute
+					~set.refvalue := self.refvalue
+				end
+			end
+		}
+		 
+
+		/**
+		 * Sets any property of runtime::instance::Binding
+		 * All the references expect BindingToSet may be void
+		 */
+			 
+		class SetruntimeinstanceBinding inherits setAdaptation
+		{
+			reference BindingToSet : pattern::runtime::instance::Binding
+			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			
+			method check(): Boolean is do
+				result := BindingToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempBinding : runtime::instance::Binding
+				tempBinding ?= ad.getRealObject(BindingToSet,false)
+				
+				tempBinding.serverInstance ?= ad.setSingleProperty(refserverInstance, tempBinding.serverInstance)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeinstanceBinding 
+					if self.reverse == void then
+						unset := UnsetruntimeinstanceBinding.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.BindingToUnset := self.BindingToSet
+					unset.refserverInstance := self.refserverInstance
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::instance::Binding
+		 * All the references expect BindingToUnset may be void 
+		 */		
+		class UnsetruntimeinstanceBinding inherits unsetAdaptation
+		{
+			reference BindingToUnset : pattern::runtime::instance::Binding
+			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			
+			method check(): Boolean is do
+				result := BindingToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempBinding : runtime::instance::Binding
+				tempBinding ?= ad.getRealObject(BindingToUnset,false)
+				
+				tempBinding.serverInstance ?= ad.unsetSingleProperty(refserverInstance, tempBinding.serverInstance)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeinstanceBinding 
+					if self.reverse == void then
+						~set := SetruntimeinstanceBinding.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.BindingToSet := self.BindingToUnset
+					~set.refserverInstance := self.refserverInstance
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::instance::TransmissionBinding
+		 */
+		
+		/**
+		 * Creates a new runtime::instance::TransmissionBinding from scratch
+		 * This new element is handled by refering to newTransmissionBinding
+		 */
+		class CreateruntimeinstanceTransmissionBinding inherits createAdaptation
+		{
+			attribute newTransmissionBinding : pattern::runtime::instance::TransmissionBinding
+					
+			method check(): Boolean is do
+				result := newTransmissionBinding != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newTransmissionBinding, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::instance::TransmissionBinding from an existing one
+		 * This cloned element is handled by refering to clonedTransmissionBinding
+		 */
+		class CloneruntimeinstanceTransmissionBinding inherits cloneAdaptation
+		{
+			reference TransmissionBindingToClone : pattern::runtime::instance::TransmissionBinding
+			attribute clonedTransmissionBinding : pattern::runtime::instance::TransmissionBinding
+			
+			method check(): Boolean is do
+				result := TransmissionBindingToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedTransmissionBinding, TransmissionBindingToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::instance::TransmissionBinding
+		 * All the references expect TransmissionBindingToSet may be void
+		 */
+			 
+		class SetruntimeinstanceTransmissionBinding inherits setAdaptation
+		{
+			reference TransmissionBindingToSet : pattern::runtime::instance::TransmissionBinding
+			reference refclient : pattern::runtime::type::PrimitivePort
+			reference refserver : pattern::runtime::type::PrimitivePort
+			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			
+			method check(): Boolean is do
+				result := TransmissionBindingToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempTransmissionBinding : runtime::instance::TransmissionBinding
+				tempTransmissionBinding ?= ad.getRealObject(TransmissionBindingToSet,false)
+				
+				tempTransmissionBinding.client ?= ad.setSingleProperty(refclient, tempTransmissionBinding.client)
+				tempTransmissionBinding.server ?= ad.setSingleProperty(refserver, tempTransmissionBinding.server)
+				tempTransmissionBinding.serverInstance ?= ad.setSingleProperty(refserverInstance, tempTransmissionBinding.serverInstance)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeinstanceTransmissionBinding 
+					if self.reverse == void then
+						unset := UnsetruntimeinstanceTransmissionBinding.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.TransmissionBindingToUnset := self.TransmissionBindingToSet
+					unset.refclient := self.refclient
+					unset.refserver := self.refserver
+					unset.refserverInstance := self.refserverInstance
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::instance::TransmissionBinding
+		 * All the references expect TransmissionBindingToUnset may be void 
+		 */		
+		class UnsetruntimeinstanceTransmissionBinding inherits unsetAdaptation
+		{
+			reference TransmissionBindingToUnset : pattern::runtime::instance::TransmissionBinding
+			reference refclient : pattern::runtime::type::PrimitivePort
+			reference refserver : pattern::runtime::type::PrimitivePort
+			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			
+			method check(): Boolean is do
+				result := TransmissionBindingToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempTransmissionBinding : runtime::instance::TransmissionBinding
+				tempTransmissionBinding ?= ad.getRealObject(TransmissionBindingToUnset,false)
+				
+				tempTransmissionBinding.client ?= ad.unsetSingleProperty(refclient, tempTransmissionBinding.client)
+				tempTransmissionBinding.server ?= ad.unsetSingleProperty(refserver, tempTransmissionBinding.server)
+				tempTransmissionBinding.serverInstance ?= ad.unsetSingleProperty(refserverInstance, tempTransmissionBinding.serverInstance)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeinstanceTransmissionBinding 
+					if self.reverse == void then
+						~set := SetruntimeinstanceTransmissionBinding.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.TransmissionBindingToSet := self.TransmissionBindingToUnset
+					~set.refclient := self.refclient
+					~set.refserver := self.refserver
+					~set.refserverInstance := self.refserverInstance
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::instance::DelegationBinding
+		 */
+		
+		/**
+		 * Creates a new runtime::instance::DelegationBinding from scratch
+		 * This new element is handled by refering to newDelegationBinding
+		 */
+		class CreateruntimeinstanceDelegationBinding inherits createAdaptation
+		{
+			attribute newDelegationBinding : pattern::runtime::instance::DelegationBinding
+					
+			method check(): Boolean is do
+				result := newDelegationBinding != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newDelegationBinding, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::instance::DelegationBinding from an existing one
+		 * This cloned element is handled by refering to clonedDelegationBinding
+		 */
+		class CloneruntimeinstanceDelegationBinding inherits cloneAdaptation
+		{
+			reference DelegationBindingToClone : pattern::runtime::instance::DelegationBinding
+			attribute clonedDelegationBinding : pattern::runtime::instance::DelegationBinding
+			
+			method check(): Boolean is do
+				result := DelegationBindingToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedDelegationBinding, DelegationBindingToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::instance::DelegationBinding
+		 * All the references expect DelegationBindingToSet may be void
+		 */
+			 
+		class SetruntimeinstanceDelegationBinding inherits setAdaptation
+		{
+			reference DelegationBindingToSet : pattern::runtime::instance::DelegationBinding
+			reference refsource : pattern::runtime::type::PrimitivePort
+			reference refexported : pattern::runtime::type::PrimitivePort
+			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			
+			method check(): Boolean is do
+				result := DelegationBindingToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempDelegationBinding : runtime::instance::DelegationBinding
+				tempDelegationBinding ?= ad.getRealObject(DelegationBindingToSet,false)
+				
+				tempDelegationBinding.source ?= ad.setSingleProperty(refsource, tempDelegationBinding.source)
+				tempDelegationBinding.exported ?= ad.setSingleProperty(refexported, tempDelegationBinding.exported)
+				tempDelegationBinding.serverInstance ?= ad.setSingleProperty(refserverInstance, tempDelegationBinding.serverInstance)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimeinstanceDelegationBinding 
+					if self.reverse == void then
+						unset := UnsetruntimeinstanceDelegationBinding.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.DelegationBindingToUnset := self.DelegationBindingToSet
+					unset.refsource := self.refsource
+					unset.refexported := self.refexported
+					unset.refserverInstance := self.refserverInstance
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::instance::DelegationBinding
+		 * All the references expect DelegationBindingToUnset may be void 
+		 */		
+		class UnsetruntimeinstanceDelegationBinding inherits unsetAdaptation
+		{
+			reference DelegationBindingToUnset : pattern::runtime::instance::DelegationBinding
+			reference refsource : pattern::runtime::type::PrimitivePort
+			reference refexported : pattern::runtime::type::PrimitivePort
+			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			
+			method check(): Boolean is do
+				result := DelegationBindingToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempDelegationBinding : runtime::instance::DelegationBinding
+				tempDelegationBinding ?= ad.getRealObject(DelegationBindingToUnset,false)
+				
+				tempDelegationBinding.source ?= ad.unsetSingleProperty(refsource, tempDelegationBinding.source)
+				tempDelegationBinding.exported ?= ad.unsetSingleProperty(refexported, tempDelegationBinding.exported)
+				tempDelegationBinding.serverInstance ?= ad.unsetSingleProperty(refserverInstance, tempDelegationBinding.serverInstance)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimeinstanceDelegationBinding 
+					if self.reverse == void then
+						~set := SetruntimeinstanceDelegationBinding.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.DelegationBindingToSet := self.DelegationBindingToUnset
+					~set.refsource := self.refsource
+					~set.refexported := self.refexported
+					~set.refserverInstance := self.refserverInstance
+				end
+			end
+		}
+		 
+
+		/**
+		 * Sets any property of runtime::type::ComponentType
+		 * All the references expect ComponentTypeToSet may be void
+		 */
+			 
+		class SetruntimetypeComponentType inherits setAdaptation
+		{
+			reference ComponentTypeToSet : pattern::runtime::type::ComponentType
+			reference refport : pattern::runtime::type::Port[0..*]
+			reference refattribute : pattern::runtime::type::Attribute[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ComponentTypeToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempComponentType : runtime::type::ComponentType
+				tempComponentType ?= ad.getRealObject(ComponentTypeToSet,false)
+				
+				ad.setMultipleProperty(tempComponentType.port,refport)
+				ad.setMultipleProperty(tempComponentType.~attribute,refattribute)
+				tempComponentType.name ?= ad.setSingleProperty(refname, tempComponentType.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypeComponentType 
+					if self.reverse == void then
+						unset := UnsetruntimetypeComponentType.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.ComponentTypeToUnset := self.ComponentTypeToSet
+					unset.refport.clear
+					unset.refport.addAll(self.refport)
+					unset.refattribute.clear
+					unset.refattribute.addAll(self.refattribute)
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::ComponentType
+		 * All the references expect ComponentTypeToUnset may be void 
+		 */		
+		class UnsetruntimetypeComponentType inherits unsetAdaptation
+		{
+			reference ComponentTypeToUnset : pattern::runtime::type::ComponentType
+			reference refport : pattern::runtime::type::Port[0..*]
+			reference refattribute : pattern::runtime::type::Attribute[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ComponentTypeToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempComponentType : runtime::type::ComponentType
+				tempComponentType ?= ad.getRealObject(ComponentTypeToUnset,false)
+				
+				ad.unsetMultipleProperty(tempComponentType.port,refport)
+				ad.unsetMultipleProperty(tempComponentType.~attribute,refattribute)
+				tempComponentType.name ?= ad.unsetSingleProperty(refname, tempComponentType.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypeComponentType 
+					if self.reverse == void then
+						~set := SetruntimetypeComponentType.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.ComponentTypeToSet := self.ComponentTypeToUnset
+					~set.refport.clear
+					~set.refport.addAll(self.refport)
+					~set.refattribute.clear
+					~set.refattribute.addAll(self.refattribute)
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::type::PrimitiveType
+		 */
+		
+		/**
+		 * Creates a new runtime::type::PrimitiveType from scratch
+		 * This new element is handled by refering to newPrimitiveType
+		 */
+		class CreateruntimetypePrimitiveType inherits createAdaptation
+		{
+			attribute newPrimitiveType : pattern::runtime::type::PrimitiveType
+					
+			method check(): Boolean is do
+				result := newPrimitiveType != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newPrimitiveType, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::type::PrimitiveType from an existing one
+		 * This cloned element is handled by refering to clonedPrimitiveType
+		 */
+		class CloneruntimetypePrimitiveType inherits cloneAdaptation
+		{
+			reference PrimitiveTypeToClone : pattern::runtime::type::PrimitiveType
+			attribute clonedPrimitiveType : pattern::runtime::type::PrimitiveType
+			
+			method check(): Boolean is do
+				result := PrimitiveTypeToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedPrimitiveType, PrimitiveTypeToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::type::PrimitiveType
+		 * All the references expect PrimitiveTypeToSet may be void
+		 */
+			 
+		class SetruntimetypePrimitiveType inherits setAdaptation
+		{
+			reference PrimitiveTypeToSet : pattern::runtime::type::PrimitiveType
+			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
+			reference refport : pattern::runtime::type::Port[0..*]
+			reference refattribute : pattern::runtime::type::Attribute[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := PrimitiveTypeToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempPrimitiveType : runtime::type::PrimitiveType
+				tempPrimitiveType ?= ad.getRealObject(PrimitiveTypeToSet,false)
+				
+				ad.setMultipleProperty(tempPrimitiveType.binding,refbinding)
+				ad.setMultipleProperty(tempPrimitiveType.port,refport)
+				ad.setMultipleProperty(tempPrimitiveType.~attribute,refattribute)
+				tempPrimitiveType.name ?= ad.setSingleProperty(refname, tempPrimitiveType.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypePrimitiveType 
+					if self.reverse == void then
+						unset := UnsetruntimetypePrimitiveType.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.PrimitiveTypeToUnset := self.PrimitiveTypeToSet
+					unset.refbinding.clear
+					unset.refbinding.addAll(self.refbinding)
+					unset.refport.clear
+					unset.refport.addAll(self.refport)
+					unset.refattribute.clear
+					unset.refattribute.addAll(self.refattribute)
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::PrimitiveType
+		 * All the references expect PrimitiveTypeToUnset may be void 
+		 */		
+		class UnsetruntimetypePrimitiveType inherits unsetAdaptation
+		{
+			reference PrimitiveTypeToUnset : pattern::runtime::type::PrimitiveType
+			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
+			reference refport : pattern::runtime::type::Port[0..*]
+			reference refattribute : pattern::runtime::type::Attribute[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := PrimitiveTypeToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempPrimitiveType : runtime::type::PrimitiveType
+				tempPrimitiveType ?= ad.getRealObject(PrimitiveTypeToUnset,false)
+				
+				ad.unsetMultipleProperty(tempPrimitiveType.binding,refbinding)
+				ad.unsetMultipleProperty(tempPrimitiveType.port,refport)
+				ad.unsetMultipleProperty(tempPrimitiveType.~attribute,refattribute)
+				tempPrimitiveType.name ?= ad.unsetSingleProperty(refname, tempPrimitiveType.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypePrimitiveType 
+					if self.reverse == void then
+						~set := SetruntimetypePrimitiveType.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.PrimitiveTypeToSet := self.PrimitiveTypeToUnset
+					~set.refbinding.clear
+					~set.refbinding.addAll(self.refbinding)
+					~set.refport.clear
+					~set.refport.addAll(self.refport)
+					~set.refattribute.clear
+					~set.refattribute.addAll(self.refattribute)
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::type::CompositeType
+		 */
+		
+		/**
+		 * Creates a new runtime::type::CompositeType from scratch
+		 * This new element is handled by refering to newCompositeType
+		 */
+		class CreateruntimetypeCompositeType inherits createAdaptation
+		{
+			attribute newCompositeType : pattern::runtime::type::CompositeType
+					
+			method check(): Boolean is do
+				result := newCompositeType != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newCompositeType, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::type::CompositeType from an existing one
+		 * This cloned element is handled by refering to clonedCompositeType
+		 */
+		class CloneruntimetypeCompositeType inherits cloneAdaptation
+		{
+			reference CompositeTypeToClone : pattern::runtime::type::CompositeType
+			attribute clonedCompositeType : pattern::runtime::type::CompositeType
+			
+			method check(): Boolean is do
+				result := CompositeTypeToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedCompositeType, CompositeTypeToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::type::CompositeType
+		 * All the references expect CompositeTypeToSet may be void
+		 */
+			 
+		class SetruntimetypeCompositeType inherits setAdaptation
+		{
+			reference CompositeTypeToSet : pattern::runtime::type::CompositeType
+			reference refsubTypes : pattern::runtime::type::CompositeType[0..*]
+			reference refdelegation : pattern::runtime::instance::DelegationBinding[0..*]
+			reference refport : pattern::runtime::type::Port[0..*]
+			reference refattribute : pattern::runtime::type::Attribute[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := CompositeTypeToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempCompositeType : runtime::type::CompositeType
+				tempCompositeType ?= ad.getRealObject(CompositeTypeToSet,false)
+				
+				ad.setMultipleProperty(tempCompositeType.subTypes,refsubTypes)
+				ad.setMultipleProperty(tempCompositeType.delegation,refdelegation)
+				ad.setMultipleProperty(tempCompositeType.port,refport)
+				ad.setMultipleProperty(tempCompositeType.~attribute,refattribute)
+				tempCompositeType.name ?= ad.setSingleProperty(refname, tempCompositeType.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypeCompositeType 
+					if self.reverse == void then
+						unset := UnsetruntimetypeCompositeType.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.CompositeTypeToUnset := self.CompositeTypeToSet
+					unset.refsubTypes.clear
+					unset.refsubTypes.addAll(self.refsubTypes)
+					unset.refdelegation.clear
+					unset.refdelegation.addAll(self.refdelegation)
+					unset.refport.clear
+					unset.refport.addAll(self.refport)
+					unset.refattribute.clear
+					unset.refattribute.addAll(self.refattribute)
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::CompositeType
+		 * All the references expect CompositeTypeToUnset may be void 
+		 */		
+		class UnsetruntimetypeCompositeType inherits unsetAdaptation
+		{
+			reference CompositeTypeToUnset : pattern::runtime::type::CompositeType
+			reference refsubTypes : pattern::runtime::type::CompositeType[0..*]
+			reference refdelegation : pattern::runtime::instance::DelegationBinding[0..*]
+			reference refport : pattern::runtime::type::Port[0..*]
+			reference refattribute : pattern::runtime::type::Attribute[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := CompositeTypeToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempCompositeType : runtime::type::CompositeType
+				tempCompositeType ?= ad.getRealObject(CompositeTypeToUnset,false)
+				
+				ad.unsetMultipleProperty(tempCompositeType.subTypes,refsubTypes)
+				ad.unsetMultipleProperty(tempCompositeType.delegation,refdelegation)
+				ad.unsetMultipleProperty(tempCompositeType.port,refport)
+				ad.unsetMultipleProperty(tempCompositeType.~attribute,refattribute)
+				tempCompositeType.name ?= ad.unsetSingleProperty(refname, tempCompositeType.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypeCompositeType 
+					if self.reverse == void then
+						~set := SetruntimetypeCompositeType.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.CompositeTypeToSet := self.CompositeTypeToUnset
+					~set.refsubTypes.clear
+					~set.refsubTypes.addAll(self.refsubTypes)
+					~set.refdelegation.clear
+					~set.refdelegation.addAll(self.refdelegation)
+					~set.refport.clear
+					~set.refport.addAll(self.refport)
+					~set.refattribute.clear
+					~set.refattribute.addAll(self.refattribute)
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+
+		/**
+		 * Sets any property of runtime::type::Service
+		 * All the references expect ServiceToSet may be void
+		 */
+			 
+		class SetruntimetypeService inherits setAdaptation
+		{
+			reference ServiceToSet : pattern::runtime::type::Service
+			reference refoperation : pattern::runtime::type::Operation[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ServiceToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempService : runtime::type::Service
+				tempService ?= ad.getRealObject(ServiceToSet,false)
+				
+				ad.setMultipleProperty(tempService.~operation,refoperation)
+				tempService.name ?= ad.setSingleProperty(refname, tempService.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypeService 
+					if self.reverse == void then
+						unset := UnsetruntimetypeService.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.ServiceToUnset := self.ServiceToSet
+					unset.refoperation.clear
+					unset.refoperation.addAll(self.refoperation)
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::Service
+		 * All the references expect ServiceToUnset may be void 
+		 */		
+		class UnsetruntimetypeService inherits unsetAdaptation
+		{
+			reference ServiceToUnset : pattern::runtime::type::Service
+			reference refoperation : pattern::runtime::type::Operation[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ServiceToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempService : runtime::type::Service
+				tempService ?= ad.getRealObject(ServiceToUnset,false)
+				
+				ad.unsetMultipleProperty(tempService.~operation,refoperation)
+				tempService.name ?= ad.unsetSingleProperty(refname, tempService.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypeService 
+					if self.reverse == void then
+						~set := SetruntimetypeService.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.ServiceToSet := self.ServiceToUnset
+					~set.refoperation.clear
+					~set.refoperation.addAll(self.refoperation)
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::type::Operation
+		 */
+		
+		/**
+		 * Creates a new runtime::type::Operation from scratch
+		 * This new element is handled by refering to newOperation
+		 */
+		class CreateruntimetypeOperation inherits createAdaptation
+		{
+			attribute newOperation : pattern::runtime::type::Operation
+					
+			method check(): Boolean is do
+				result := newOperation != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newOperation, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::type::Operation from an existing one
+		 * This cloned element is handled by refering to clonedOperation
+		 */
+		class CloneruntimetypeOperation inherits cloneAdaptation
+		{
+			reference OperationToClone : pattern::runtime::type::Operation
+			attribute clonedOperation : pattern::runtime::type::Operation
+			
+			method check(): Boolean is do
+				result := OperationToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedOperation, OperationToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::type::Operation
+		 * All the references expect OperationToSet may be void
+		 */
+			 
+		class SetruntimetypeOperation inherits setAdaptation
+		{
+			reference OperationToSet : pattern::runtime::type::Operation
+			reference refinput : pattern::runtime::type::Parameter[0..*]
+			reference refoutput : pattern::runtime::type::Parameter[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := OperationToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempOperation : runtime::type::Operation
+				tempOperation ?= ad.getRealObject(OperationToSet,false)
+				
+				ad.setMultipleProperty(tempOperation.input,refinput)
+				ad.setMultipleProperty(tempOperation.output,refoutput)
+				tempOperation.name ?= ad.setSingleProperty(refname, tempOperation.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypeOperation 
+					if self.reverse == void then
+						unset := UnsetruntimetypeOperation.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.OperationToUnset := self.OperationToSet
+					unset.refinput.clear
+					unset.refinput.addAll(self.refinput)
+					unset.refoutput.clear
+					unset.refoutput.addAll(self.refoutput)
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::Operation
+		 * All the references expect OperationToUnset may be void 
+		 */		
+		class UnsetruntimetypeOperation inherits unsetAdaptation
+		{
+			reference OperationToUnset : pattern::runtime::type::Operation
+			reference refinput : pattern::runtime::type::Parameter[0..*]
+			reference refoutput : pattern::runtime::type::Parameter[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := OperationToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempOperation : runtime::type::Operation
+				tempOperation ?= ad.getRealObject(OperationToUnset,false)
+				
+				ad.unsetMultipleProperty(tempOperation.input,refinput)
+				ad.unsetMultipleProperty(tempOperation.output,refoutput)
+				tempOperation.name ?= ad.unsetSingleProperty(refname, tempOperation.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypeOperation 
+					if self.reverse == void then
+						~set := SetruntimetypeOperation.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.OperationToSet := self.OperationToUnset
+					~set.refinput.clear
+					~set.refinput.addAll(self.refinput)
+					~set.refoutput.clear
+					~set.refoutput.addAll(self.refoutput)
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::type::Parameter
+		 */
+		
+		/**
+		 * Creates a new runtime::type::Parameter from scratch
+		 * This new element is handled by refering to newParameter
+		 */
+		class CreateruntimetypeParameter inherits createAdaptation
+		{
+			attribute newParameter : pattern::runtime::type::Parameter
+					
+			method check(): Boolean is do
+				result := newParameter != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newParameter, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::type::Parameter from an existing one
+		 * This cloned element is handled by refering to clonedParameter
+		 */
+		class CloneruntimetypeParameter inherits cloneAdaptation
+		{
+			reference ParameterToClone : pattern::runtime::type::Parameter
+			attribute clonedParameter : pattern::runtime::type::Parameter
+			
+			method check(): Boolean is do
+				result := ParameterToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedParameter, ParameterToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::type::Parameter
+		 * All the references expect ParameterToSet may be void
+		 */
+			 
+		class SetruntimetypeParameter inherits setAdaptation
+		{
+			reference ParameterToSet : pattern::runtime::type::Parameter
+			reference reftype : pattern::runtime::DataType
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ParameterToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempParameter : runtime::type::Parameter
+				tempParameter ?= ad.getRealObject(ParameterToSet,false)
+				
+				tempParameter.type ?= ad.setSingleProperty(reftype, tempParameter.type)
+				tempParameter.name ?= ad.setSingleProperty(refname, tempParameter.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypeParameter 
+					if self.reverse == void then
+						unset := UnsetruntimetypeParameter.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.ParameterToUnset := self.ParameterToSet
+					unset.reftype := self.reftype
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::Parameter
+		 * All the references expect ParameterToUnset may be void 
+		 */		
+		class UnsetruntimetypeParameter inherits unsetAdaptation
+		{
+			reference ParameterToUnset : pattern::runtime::type::Parameter
+			reference reftype : pattern::runtime::DataType
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ParameterToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempParameter : runtime::type::Parameter
+				tempParameter ?= ad.getRealObject(ParameterToUnset,false)
+				
+				tempParameter.type ?= ad.unsetSingleProperty(reftype, tempParameter.type)
+				tempParameter.name ?= ad.unsetSingleProperty(refname, tempParameter.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypeParameter 
+					if self.reverse == void then
+						~set := SetruntimetypeParameter.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.ParameterToSet := self.ParameterToUnset
+					~set.reftype := self.reftype
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::type::FunctionalService
+		 */
+		
+		/**
+		 * Creates a new runtime::type::FunctionalService from scratch
+		 * This new element is handled by refering to newFunctionalService
+		 */
+		class CreateruntimetypeFunctionalService inherits createAdaptation
+		{
+			attribute newFunctionalService : pattern::runtime::type::FunctionalService
+					
+			method check(): Boolean is do
+				result := newFunctionalService != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newFunctionalService, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::type::FunctionalService from an existing one
+		 * This cloned element is handled by refering to clonedFunctionalService
+		 */
+		class CloneruntimetypeFunctionalService inherits cloneAdaptation
+		{
+			reference FunctionalServiceToClone : pattern::runtime::type::FunctionalService
+			attribute clonedFunctionalService : pattern::runtime::type::FunctionalService
+			
+			method check(): Boolean is do
+				result := FunctionalServiceToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedFunctionalService, FunctionalServiceToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::type::FunctionalService
+		 * All the references expect FunctionalServiceToSet may be void
+		 */
+			 
+		class SetruntimetypeFunctionalService inherits setAdaptation
+		{
+			reference FunctionalServiceToSet : pattern::runtime::type::FunctionalService
+			reference refoperation : pattern::runtime::type::Operation[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := FunctionalServiceToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempFunctionalService : runtime::type::FunctionalService
+				tempFunctionalService ?= ad.getRealObject(FunctionalServiceToSet,false)
+				
+				ad.setMultipleProperty(tempFunctionalService.~operation,refoperation)
+				tempFunctionalService.name ?= ad.setSingleProperty(refname, tempFunctionalService.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypeFunctionalService 
+					if self.reverse == void then
+						unset := UnsetruntimetypeFunctionalService.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.FunctionalServiceToUnset := self.FunctionalServiceToSet
+					unset.refoperation.clear
+					unset.refoperation.addAll(self.refoperation)
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::FunctionalService
+		 * All the references expect FunctionalServiceToUnset may be void 
+		 */		
+		class UnsetruntimetypeFunctionalService inherits unsetAdaptation
+		{
+			reference FunctionalServiceToUnset : pattern::runtime::type::FunctionalService
+			reference refoperation : pattern::runtime::type::Operation[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := FunctionalServiceToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempFunctionalService : runtime::type::FunctionalService
+				tempFunctionalService ?= ad.getRealObject(FunctionalServiceToUnset,false)
+				
+				ad.unsetMultipleProperty(tempFunctionalService.~operation,refoperation)
+				tempFunctionalService.name ?= ad.unsetSingleProperty(refname, tempFunctionalService.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypeFunctionalService 
+					if self.reverse == void then
+						~set := SetruntimetypeFunctionalService.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.FunctionalServiceToSet := self.FunctionalServiceToUnset
+					~set.refoperation.clear
+					~set.refoperation.addAll(self.refoperation)
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::type::ControlService
+		 */
+		
+		/**
+		 * Creates a new runtime::type::ControlService from scratch
+		 * This new element is handled by refering to newControlService
+		 */
+		class CreateruntimetypeControlService inherits createAdaptation
+		{
+			attribute newControlService : pattern::runtime::type::ControlService
+					
+			method check(): Boolean is do
+				result := newControlService != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newControlService, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::type::ControlService from an existing one
+		 * This cloned element is handled by refering to clonedControlService
+		 */
+		class CloneruntimetypeControlService inherits cloneAdaptation
+		{
+			reference ControlServiceToClone : pattern::runtime::type::ControlService
+			attribute clonedControlService : pattern::runtime::type::ControlService
+			
+			method check(): Boolean is do
+				result := ControlServiceToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedControlService, ControlServiceToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::type::ControlService
+		 * All the references expect ControlServiceToSet may be void
+		 */
+			 
+		class SetruntimetypeControlService inherits setAdaptation
+		{
+			reference ControlServiceToSet : pattern::runtime::type::ControlService
+			reference refoperation : pattern::runtime::type::Operation[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ControlServiceToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempControlService : runtime::type::ControlService
+				tempControlService ?= ad.getRealObject(ControlServiceToSet,false)
+				
+				ad.setMultipleProperty(tempControlService.~operation,refoperation)
+				tempControlService.name ?= ad.setSingleProperty(refname, tempControlService.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypeControlService 
+					if self.reverse == void then
+						unset := UnsetruntimetypeControlService.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.ControlServiceToUnset := self.ControlServiceToSet
+					unset.refoperation.clear
+					unset.refoperation.addAll(self.refoperation)
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::ControlService
+		 * All the references expect ControlServiceToUnset may be void 
+		 */		
+		class UnsetruntimetypeControlService inherits unsetAdaptation
+		{
+			reference ControlServiceToUnset : pattern::runtime::type::ControlService
+			reference refoperation : pattern::runtime::type::Operation[0..*]
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := ControlServiceToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempControlService : runtime::type::ControlService
+				tempControlService ?= ad.getRealObject(ControlServiceToUnset,false)
+				
+				ad.unsetMultipleProperty(tempControlService.~operation,refoperation)
+				tempControlService.name ?= ad.unsetSingleProperty(refname, tempControlService.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypeControlService 
+					if self.reverse == void then
+						~set := SetruntimetypeControlService.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.ControlServiceToSet := self.ControlServiceToUnset
+					~set.refoperation.clear
+					~set.refoperation.addAll(self.refoperation)
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::type::Port
+		 */
+		
+		/**
+		 * Creates a new runtime::type::Port from scratch
+		 * This new element is handled by refering to newPort
+		 */
+		class CreateruntimetypePort inherits createAdaptation
+		{
+			attribute newPort : pattern::runtime::type::Port
+					
+			method check(): Boolean is do
+				result := newPort != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newPort, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::type::Port from an existing one
+		 * This cloned element is handled by refering to clonedPort
+		 */
+		class CloneruntimetypePort inherits cloneAdaptation
+		{
+			reference PortToClone : pattern::runtime::type::Port
+			attribute clonedPort : pattern::runtime::type::Port
+			
+			method check(): Boolean is do
+				result := PortToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedPort, PortToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::type::Port
+		 * All the references expect PortToSet may be void
+		 */
+			 
+		class SetruntimetypePort inherits setAdaptation
+		{
+			reference PortToSet : pattern::runtime::type::Port
+			reference refsub : pattern::runtime::type::PrimitivePort[0..*]
+			reference refisOptional : pattern::runtime::Boolean
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := PortToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempPort : runtime::type::Port
+				tempPort ?= ad.getRealObject(PortToSet,false)
+				
+				ad.setMultipleProperty(tempPort.sub,refsub)
+				tempPort.isOptional ?= ad.setSingleProperty(refisOptional, tempPort.isOptional)
+				tempPort.name ?= ad.setSingleProperty(refname, tempPort.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypePort 
+					if self.reverse == void then
+						unset := UnsetruntimetypePort.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.PortToUnset := self.PortToSet
+					unset.refsub.clear
+					unset.refsub.addAll(self.refsub)
+					unset.refisOptional := self.refisOptional
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::Port
+		 * All the references expect PortToUnset may be void 
+		 */		
+		class UnsetruntimetypePort inherits unsetAdaptation
+		{
+			reference PortToUnset : pattern::runtime::type::Port
+			reference refsub : pattern::runtime::type::PrimitivePort[0..*]
+			reference refisOptional : pattern::runtime::Boolean
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := PortToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempPort : runtime::type::Port
+				tempPort ?= ad.getRealObject(PortToUnset,false)
+				
+				ad.unsetMultipleProperty(tempPort.sub,refsub)
+				tempPort.isOptional ?= ad.unsetSingleProperty(refisOptional, tempPort.isOptional)
+				tempPort.name ?= ad.unsetSingleProperty(refname, tempPort.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypePort 
+					if self.reverse == void then
+						~set := SetruntimetypePort.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.PortToSet := self.PortToUnset
+					~set.refsub.clear
+					~set.refsub.addAll(self.refsub)
+					~set.refisOptional := self.refisOptional
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::type::Attribute
+		 */
+		
+		/**
+		 * Creates a new runtime::type::Attribute from scratch
+		 * This new element is handled by refering to newAttribute
+		 */
+		class CreateruntimetypeAttribute inherits createAdaptation
+		{
+			attribute newAttribute : pattern::runtime::type::Attribute
+					
+			method check(): Boolean is do
+				result := newAttribute != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newAttribute, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::type::Attribute from an existing one
+		 * This cloned element is handled by refering to clonedAttribute
+		 */
+		class CloneruntimetypeAttribute inherits cloneAdaptation
+		{
+			reference AttributeToClone : pattern::runtime::type::Attribute
+			attribute clonedAttribute : pattern::runtime::type::Attribute
+			
+			method check(): Boolean is do
+				result := AttributeToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedAttribute, AttributeToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::type::Attribute
+		 * All the references expect AttributeToSet may be void
+		 */
+			 
+		class SetruntimetypeAttribute inherits setAdaptation
+		{
+			reference AttributeToSet : pattern::runtime::type::Attribute
+			reference reftype : pattern::runtime::DataType
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := AttributeToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempAttribute : runtime::type::Attribute
+				tempAttribute ?= ad.getRealObject(AttributeToSet,false)
+				
+				tempAttribute.type ?= ad.setSingleProperty(reftype, tempAttribute.type)
+				tempAttribute.name ?= ad.setSingleProperty(refname, tempAttribute.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypeAttribute 
+					if self.reverse == void then
+						unset := UnsetruntimetypeAttribute.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.AttributeToUnset := self.AttributeToSet
+					unset.reftype := self.reftype
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::Attribute
+		 * All the references expect AttributeToUnset may be void 
+		 */		
+		class UnsetruntimetypeAttribute inherits unsetAdaptation
+		{
+			reference AttributeToUnset : pattern::runtime::type::Attribute
+			reference reftype : pattern::runtime::DataType
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := AttributeToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempAttribute : runtime::type::Attribute
+				tempAttribute ?= ad.getRealObject(AttributeToUnset,false)
+				
+				tempAttribute.type ?= ad.unsetSingleProperty(reftype, tempAttribute.type)
+				tempAttribute.name ?= ad.unsetSingleProperty(refname, tempAttribute.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypeAttribute 
+					if self.reverse == void then
+						~set := SetruntimetypeAttribute.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.AttributeToSet := self.AttributeToUnset
+					~set.reftype := self.reftype
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of runtime::type::PrimitivePort
+		 */
+		
+		/**
+		 * Creates a new runtime::type::PrimitivePort from scratch
+		 * This new element is handled by refering to newPrimitivePort
+		 */
+		class CreateruntimetypePrimitivePort inherits createAdaptation
+		{
+			attribute newPrimitivePort : pattern::runtime::type::PrimitivePort
+					
+			method check(): Boolean is do
+				result := newPrimitivePort != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newPrimitivePort, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new runtime::type::PrimitivePort from an existing one
+		 * This cloned element is handled by refering to clonedPrimitivePort
+		 */
+		class CloneruntimetypePrimitivePort inherits cloneAdaptation
+		{
+			reference PrimitivePortToClone : pattern::runtime::type::PrimitivePort
+			attribute clonedPrimitivePort : pattern::runtime::type::PrimitivePort
+			
+			method check(): Boolean is do
+				result := PrimitivePortToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedPrimitivePort, PrimitivePortToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of runtime::type::PrimitivePort
+		 * All the references expect PrimitivePortToSet may be void
+		 */
+			 
+		class SetruntimetypePrimitivePort inherits setAdaptation
+		{
+			reference PrimitivePortToSet : pattern::runtime::type::PrimitivePort
+			reference refservice : pattern::runtime::type::Service
+			reference refrole : pattern::runtime::type::PortRole
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := PrimitivePortToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			is do
+				var ad : Adapter init getAdapter
+				var tempPrimitivePort : runtime::type::PrimitivePort
+				tempPrimitivePort ?= ad.getRealObject(PrimitivePortToSet,false)
+				
+				tempPrimitivePort.service ?= ad.setSingleProperty(refservice, tempPrimitivePort.service)
+				tempPrimitivePort.role ?= ad.setSingleProperty(refrole, tempPrimitivePort.role)
+				tempPrimitivePort.name ?= ad.setSingleProperty(refname, tempPrimitivePort.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetruntimetypePrimitivePort 
+					if self.reverse == void then
+						unset := UnsetruntimetypePrimitivePort.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.PrimitivePortToUnset := self.PrimitivePortToSet
+					unset.refservice := self.refservice
+					unset.refrole := self.refrole
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of runtime::type::PrimitivePort
+		 * All the references expect PrimitivePortToUnset may be void 
+		 */		
+		class UnsetruntimetypePrimitivePort inherits unsetAdaptation
+		{
+			reference PrimitivePortToUnset : pattern::runtime::type::PrimitivePort
+			reference refservice : pattern::runtime::type::Service
+			reference refrole : pattern::runtime::type::PortRole
+			reference refname : pattern::runtime::String
+			
+			method check(): Boolean is do
+				result := PrimitivePortToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void
+			is do
+				var ad : Adapter init getAdapter
+				var tempPrimitivePort : runtime::type::PrimitivePort
+				tempPrimitivePort ?= ad.getRealObject(PrimitivePortToUnset,false)
+				
+				tempPrimitivePort.service ?= ad.unsetSingleProperty(refservice, tempPrimitivePort.service)
+				tempPrimitivePort.role ?= ad.unsetSingleProperty(refrole, tempPrimitivePort.role)
+				tempPrimitivePort.name ?= ad.unsetSingleProperty(refname, tempPrimitivePort.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetruntimetypePrimitivePort 
+					if self.reverse == void then
+						~set := SetruntimetypePrimitivePort.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.PrimitivePortToSet := self.PrimitivePortToUnset
+					~set.refservice := self.refservice
+					~set.refrole := self.refrole
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+	}
+}}

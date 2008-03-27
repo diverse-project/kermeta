@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.21 2008-03-18 17:19:37 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.22 2008-03-27 16:33:50 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -359,7 +359,7 @@ package smartadapters
 					var collToSet : Collection<kermeta::language::structure::Object>
 					coll ?= o
 					collToSet ?= prty
-					if(coll != void and collToSet != void and coll.size > 0) then
+					if ((coll != void).andThen{v | (coll.size > 0)}.andThen{v | collToSet != void}) /*(coll != void and collToSet != void and coll.size > 0)*/ then
 						var realColl : Collection<kermeta::language::structure::Object>
 						realColl ?= getRealObject(o,true)
 						collToSet.addAll(realColl)
@@ -402,7 +402,7 @@ package smartadapters
 			 * for all the multiple properties (upper > 1) 
 			 */
 			operation unsetMultipleProperty(prty : Object, o : Object) : Void is do
-				if(prty != void and o != void) then
+				if((prty != void).andThen{v | o != void}) then
 					var coll : Collection<kermeta::language::structure::Object>
 					var collToSet : Collection<kermeta::language::structure::Object>
 					coll ?= o
@@ -500,14 +500,14 @@ package smartadapters
 			
 			operation addAdaptation(d : Derivation, a : Adaptation) is do
 				stdio.writeln("addAdaptation "+a.toString)
-				if(not(a.isOptional) or d.selectedOptions.contains(a)) then
+				if(not(a.isOptional).orElse{v | d.selectedOptions.contains(a)}) then
 					adapt.add(a)
 				end
 			end
 			
 			operation addConjunction(d : Derivation, c : EntityConjunction) is do
 				stdio.writeln("addConjunction "+c.toString)
-				if(not(c.isOptional) or d.selectedOptions.contains(c)) then
+				if(not(c.isOptional).orElse{v | d.selectedOptions.contains(c)}) then
 					c.~and.each{e |
 						var a:Adaptation
 						a?=e
@@ -555,7 +555,7 @@ package smartadapters
 					   end
 					end
 				else
-					if(not(alt.isOptional) or d.selectedOptions.contains(alt)) then
+					if(not(alt.isOptional).orElse{v | d.selectedOptions.contains(alt)}) then
 						self.alternatives.add(alt)
 					end
 				end
