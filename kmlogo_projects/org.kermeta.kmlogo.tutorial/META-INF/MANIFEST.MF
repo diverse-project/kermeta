@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KMLogo Tutorial Plug-in
+Bundle-SymbolicName: org.kermeta.kmlogo.tutorial; singleton:=true
+Bundle-Version: 1.1.1.qualifier
+Bundle-Activator: org.kermeta.kmlogo.tutorial.Activator
+Bundle-Vendor: IRISA/INRIA
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.ui.cheatsheets
+Eclipse-LazyStart: true

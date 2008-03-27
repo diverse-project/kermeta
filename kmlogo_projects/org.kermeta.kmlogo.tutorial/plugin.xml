@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="toc.xml">
+      </toc>
+      <toc
+            file="testToc.xml"
+            primary="true">
+      </toc>
+   </extension>
+   <extension
+         id="org.kermeta.kmlogo.tutorial.wizard"
+         point="org.eclipse.ui.newWizards">
+         <category
+            id="fr.irisa.triskell.kermeta.samples.category"
+            name="Kermeta samples"
+            parentCategory="org.eclipse.ui.Examples"/>
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/fr.irisa.triskell.kermeta.samples.category"
+            class="org.kermeta.kmlogo.tutorial.wizards.KmLogoTutorialWizard"
+            finalPerspective="kermetaPerspective"
+            hasPages="false"
+            icon="icons/newkermetafile.png"
+            id="org.kermeta.kmlogo.tutorial.wizard"
+            name="Km Logo tutorial"
+            preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+      <cheatsheet
+            category="org.kermeta.cheatsheet.category"
+            contentFile="cheatsheets/logo_tutorial.xml"
+            id="org.kermeta.kmlogo.tutorial.cheatsheet1"
+            name="Building kmlogo DSL tools with kermeta">
+            <description>This cheatsheet will guide you with the code of kmLogo sample.
+This sample demonstrates how to build integrated tools with kermeta.</description>
+      </cheatsheet>
+      <category
+            id="org.kermeta.cheatsheet.category"
+            name="Kermeta">
+      </category>
+   </extension>
+
+</plugin>

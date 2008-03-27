@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.kermeta.kmlogo.tutorial" default="build_all_zips" basedir=".">
+	<target name="build_all_zips" depends="build_fr_irisa_triskell_kmlogo_model, 
+		build_fr_irisa_triskell_kmlogo_model_edit,  
+		build_fr_irisa_triskell_kmlogo_model_editor, 
+		build_fr_irisa_triskell_kmlogo_ui, 
+		build_org_kermeta_kmlogo_texteditor">
+	</target>
+	<target name="build_fr_irisa_triskell_kmlogo_model" >
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+		<mkdir dir="mytemp"/>
+		<copy todir="mytemp" failonerror="true" overwrite="true">
+			<fileset dir="../fr.irisa.triskell.kmlogo.model" includes="**" excludes="*mytemp"/>
+		</copy>
+		<zip destfile="zips/fr.irisa.triskell.kmlogo.model.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+		<delete dir="mytemp"/>
+	</target>
+
+	<target name="build_fr_irisa_triskell_kmlogo_model_edit" >
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+		<mkdir dir="mytemp"/>
+		<copy todir="mytemp" failonerror="true" overwrite="true">
+			<fileset dir="../fr.irisa.triskell.kmlogo.model.edit" includes="**" excludes="*mytemp"/>
+		</copy>
+		<zip destfile="zips/fr.irisa.triskell.kmlogo.model.edit.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+		<delete dir="mytemp"/>
+	</target>
+	<target name="build_fr_irisa_triskell_kmlogo_model_editor" >
+			<tstamp>
+				<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+			</tstamp>
+			<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+			<mkdir dir="mytemp"/>
+			<copy todir="mytemp" failonerror="true" overwrite="true">
+				<fileset dir="../fr.irisa.triskell.kmlogo.model.editor" includes="**" excludes="*mytemp"/>
+			</copy>
+			<zip destfile="zips/fr.irisa.triskell.kmlogo.model.editor.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+			<delete dir="mytemp"/>
+	</target>
+
+	<target name="build_fr_irisa_triskell_kmlogo_ui" >
+			<tstamp>
+				<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+			</tstamp>
+			<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+			<mkdir dir="mytemp"/>
+			<copy todir="mytemp" failonerror="true" overwrite="true">
+				<fileset dir="../fr.irisa.triskell.kmlogo.ui" includes="**" excludes="*mytemp"/>
+			</copy>
+			<zip destfile="zips/fr.irisa.triskell.kmlogo.ui.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+			<delete dir="mytemp"/>
+	</target>
+
+	<target name="build_org_kermeta_kmlogo_texteditor" >
+			<tstamp>
+				<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+			</tstamp>
+			<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+			<mkdir dir="mytemp"/>
+			<copy todir="mytemp" failonerror="true" overwrite="true">
+				<fileset dir="../org.kermeta.kmlogo.texteditor" includes="**" excludes="*mytemp"/>
+			</copy>
+			<zip destfile="zips/org.kermeta.kmlogo.texteditor.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+			<delete dir="mytemp"/>
+	</target>
+
+</project>
