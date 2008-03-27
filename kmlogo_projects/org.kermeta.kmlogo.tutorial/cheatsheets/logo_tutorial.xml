@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Building kmLogo DSL using Kermeta">
+   <intro>
+      <description>
+         A cheat sheet which demonstrates the use of perform-when and conditional subitems
+      </description>
+   </intro>
+   <item title="Tutorial projects retrieval" dialog="true" skip="true">
+      <description>
+         Get the tutorial projects.
+File-&gt;New-&gt;Examples...-&gt;Kermeta-&gt;Building kmlogo DSL tools with kermeta
+      </description>
+      <command serialization="org.eclipse.ui.newWizard(newWizardId=org.kermeta.kmlogo.tutorial.wizard)" confirm="false">
+      </command>
+   </item>
+   <item title="ASM structure analysis" dialog="true" skip="false">
+      <description>
+         The base of Logo language is its Abstract Syntax Model. 
+It is represented as a Metamodel in ecore format.
+      </description>
+      <subitem label="Look at ASMLogo.ecore ASMLogo.ecore is the ecore version of the Abstract Syntax Model of logo. It contains only the structure. (Ecore files can contains only structure)" skip="true">
+      </subitem>
+      <subitem label="Look at ASMLogo.ecoredi  Since ASMLogo.ecore is a classical ecore file, we can use thirdparty tool to visualize it. Here we use Topcased Ecore editor to have a class diagram view on the ASM." skip="true">
+      </subitem>
+   </item>
+   <item title="Virtual Machine analysis" dialog="true" skip="false">
+      <description>
+         in order to be simulable the behavior need to have actions on a virtual machine.<br/> 
+Here again, the virtual machine is expressed using an ecore file.
+      </description>
+   </item>
+   <item title="VM weaved semantics" dialog="true" skip="false">
+      <description>
+         The ecore doesn&apos;t define again behavior.<br/>
+Kermeta weaves the necessary operations, attributes into 
+ Kermeta is used to define
+      </description>
+   </item>
+   <item title="Dynamic semantics analysis" dialog="true" skip="false">
+      <description>
+         The dynamic semantics is expressed using Kermeta.
+      </description>
+      <subitem label="It weaves the various part it needs : the ASMLogo.ecore, the" skip="false">
+      </subitem>
+   </item>
+</cheatsheet>
