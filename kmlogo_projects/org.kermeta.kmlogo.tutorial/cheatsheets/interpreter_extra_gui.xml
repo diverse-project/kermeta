@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Implementing a graphical output for the turtle">
+   <intro>
+      <description>
+         This cheatsheet will guide you through the code of the implementation of a graphical interface for the logo turtle.
+      </description>
+   </intro>
+   <item title="Kermeta wrapper TurtleGUI.kmt" dialog="true" skip="false">
+      <description>
+         Open TurtleGUI.kmt<br/>
+It defines the classes as seen by kermeta programs. For this application, it provides operations like drawLine, drawTurtle or clearDrawing.<br/>
+Note that it need an &quot;initialize&quot; operation in order to correctly create the object.
+      </description>
+   </item>
+   <item title="Java wrapper TurtleGUIWrapper.java" dialog="true" skip="false">
+      <description>
+         Open fr.irisa.triskell.kmLogo.wrapper.TurtleGUIWrapper.java<br/>
+It defines the static operations that the interpreter can call.<br/>
+All parameters must be of type RuntimeObject. <br/> 
+This class is in charge of :<br/>
+- translating the RuntimeObject to and from classical java object<br/>
+- calling the appropriate java code<br/>
+The associated java object (here a ITurtleGUI) is stored into the UserData of the RuntimeObject.
+      </description>
+   </item>
+   <item title="Java GUI  implementation" dialog="true" skip="false">
+      <description>
+         This is the classes that implement in java the graphical user interface. <br/>
+In order to allow some extensibility, it has been splitted in 2, an interface ITurtleGUI and a simple concrete AWT implementation TurtleSimpleAWTGUI.
+      </description>
+      <subitem label="Open fr.irisa.triskell.kmLogo.gui.ITurtleGUI.java" skip="true">
+      </subitem>
+      <subitem label="Open fr.irisa.triskell.kmLogo.gui.TurtleSimpleAWTGUI.java" skip="true">
+      </subitem>
+   </item>
+   <item title="GUI controler" dialog="true" skip="false">
+      <description>
+         Open TurtleControler.kmt<br/>
+This class is a simple controler that ask to the GUI to update the graphical view of a given Turtle.
+      </description>
+   </item>
+</cheatsheet>

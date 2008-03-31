@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Abstract Syntax Model definition">
+   <intro>
+      <description>
+         The Abstract Syntax Model is written in ecore and can used all the standard EMF tools based on ecore definition.<br/>
+This cheatsheet will show you where and how this model is defined and used by EMF tools.
+      </description>
+   </intro>
+   <item title="Open fr.irisa.triskell.kmlogo.model project" dialog="true" skip="false">
+      <description>
+         This project contains the basis
+      </description>
+   </item>
+   <item title="Open ASMLogo.ecore (using EMF tree editor)" dialog="true" skip="false">
+      <description>
+         in the &quot;model&quot; folder, there is ASMLogo.ecore. <br/>
+This is a standard ecore file.
+      </description>
+   </item>
+   <item title="Open ASMLogo.ecoredi" dialog="true" skip="false">
+      <description>
+         As a standard ecore file, any ecore aware tools can be used to visualize it.<br/>
+Here we used Topcased ecore modeler to display a class diagram of our metamodel.
+      </description>
+   </item>
+   <item title="Overview of Logo language instructions" dialog="true" skip="false">
+      <description>
+         In this ecore file you&apos;ll notice the various instructions supported by the DSL we are building. <br/>
+Some are primitives, for example : Back, Forward, Left, PenUp, ... <br/>
+Some are expressions, for example : Plus, Minus, ...<br/>
+And some are control structures, for example : If, while, Repeat, ...<br/>
+      </description>
+   </item>
+</cheatsheet>

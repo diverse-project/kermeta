@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Installation of the tutorial files">
+   <intro>
+      <description>
+         In this task you&apos;ll learn how to install the predefined logo environment, create and run a runtime workbench, intall the predefined logo samples.
+      </description>
+   </intro>
+   <item title="Get the tutorial projects" dialog="true" skip="true">
+      <description>
+         The projects of the tutorialmus tbe installed using : <br/>
+File-&gt;New-&gt;Examples...-&gt;Kermeta-&gt;Building kmlogo DSL tools with kermeta
+      </description>
+      <command serialization="org.eclipse.ui.newWizard(newWizardId=org.kermeta.kmlogo.tutorial.wizard)" confirm="false">
+      </command>
+   </item>
+   <item title="Create a runtime configuration" dialog="true" skip="false">
+      <description>
+         Ibn order to run the samples, you&apos;ll need a &quot;RuntimeWorkbench&quot;. If you don&apos;t already have one :<br/>
+- Run-&gt;Open Run Dialog...<br/>
+- Right click on &quot;Eclipse application&quot;, new<br/>
+- rename the configuration from &quot;New_configuration&quot; to &quot;RuntimeWorkbench&quot;<br/>
+      </description>
+   </item>
+   <item title="Start the runtime workbench" dialog="true" skip="false">
+      <description>
+         There are several ways in eclipse to start a configuration. The simpliest is to use the &quot;Run&quot; menu, Open Run Dialog... and select the configuration you wish.<br/>
+Later you&apos;ll be able to use the Run history to quickly re-run a given configuration.
+      </description>
+   </item>
+   <item title="Get the tutorial sample files" dialog="true" skip="false">
+      <description>
+         In the new workbench, you can retreive the predefined samples files for Logo in <br/>
+File-&gt;New-&gt;Examples...-&gt;Kermeta-&gt;Km Logo samples
+      </description>
+   </item>
+</cheatsheet>

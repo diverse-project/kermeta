@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Translational semantics =&gt; a compiler for logo">
+   <intro>
+      <description>
+         This sheet will show you how an translational sematics has been added to the Logo DSL.<br/>
+A translational semantics is the translation of a logo model into another executable language. In this case, this is a compilation to the NXC language (Not Exactly C) supported by the Lego Mindstorm robot.
+      </description>
+   </intro>
+   <item title="Weaving a compiler to the ASM" dialog="true" skip="false">
+      <description>
+         Thanks to the weaving (obtained through the require statement at the beginning of the LogoNXCCompiler.kmt), it adds some operations and properties to the ASMLogo.ecore.<br/>
+In order to provide a compiler to Logo, it weaves &quot;compileToNXC&quot; operations to the ASM metaclasses.<br/>
+The compiled code uses a predefined API specific to the target platform (here a Lego Mindstorm robot).
+      </description>
+      <subitem label="Open LogoNXCCompiler.kmt" skip="false">
+      </subitem>
+      <subitem label="Find operation &quot;compileToNXC&quot; of class &quot;If&quot; and observe how the code is compiled" skip="false">
+      </subitem>
+      <subitem label="Find operation &quot;getAPI&quot; of class &quot;NXCCompiler&quot;, it defines the base API of the target platform." skip="false">
+      </subitem>
+   </item>
+</cheatsheet>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Operational semantics =&gt; an interpreter for logo">
+   <intro>
+      <description>
+         This sheet will show you how an operational sematics has been added to the Logo DSL.<br/>
+      </description>
+   </intro>
+   <item title="Dynamic semantics analysis" dialog="true" skip="false">
+      <description>
+         Thanks to the weaving (obtained through the require statement at the beginning of the LogoDynSemantics.kmt), it adds some operations and properties to the ASMLogo.ecore.<br/>
+In order to provide an operational semantics to Logo, it weaves an interpreter to the ASM. this is done by adding &quot;eval&quot; operations to the ASM metaclasses.<br/>
+This eval operation passes a context.
+      </description>
+      <subitem label="Open LogoDynSemantics.kmt" skip="false">
+      </subitem>
+      <subitem label="In the top right corner of the outline, use the red/blue package icon to see what comes from the opened kmt file (ine red) and what comes from the imported files (in blue)." skip="false">
+      </subitem>
+      <subitem label="Find the class &quot;Repeat&quot; and observe how to simply add operational behavior in the eval operation." skip="false">
+      </subitem>
+      <subitem label="Find the class &quot;Context&quot;, and observe what is passed between eval() calls." skip="false">
+      </subitem>
+   </item>
+   <item title="Virtual Machine structure analysis" dialog="true" skip="false">
+      <description>
+         In order to provide the behavior, the interpreter needs an application domain. In this sample we call it Virtual Machine.<br/>
+In this ecore file you&apos;ll notice the various notions needed for this VM : turtle, segment and points.
+      </description>
+      <subitem label="Open VMLogo.ecore" skip="false">
+      </subitem>
+      <subitem label="Open VMLogo.ecoredi" skip="false">
+      </subitem>
+   </item>
+   <item title="Virtual Machine behavior analysis" dialog="true" skip="false">
+      <description>
+         Thanks to the weaving (obtained through the require statement at the beginning of the LogoVMSemantics.kmt), it adds some operations and properties to the VMLogo.ecore.<br/>
+Those operations have some impacts on the GUI through command like stdio.writeln.
+      </description>
+      <subitem label="Open LogoVMSemantics.kmt" skip="false">
+      </subitem>
+      <subitem label="Use the outline to see what has been added (in red) to the structure (in bue)." skip="false">
+      </subitem>
+      <subitem label="Find the operation &quot;move&quot; in the class &quot;Turtle&quot; and observe some interactions with the UI (stdio.out)" skip="false">
+      </subitem>
+   </item>
+   <item title="Main entry and load of a logo model" dialog="true" skip="false">
+      <description>
+         Open LogoSimulator.kmt<br/>
+This class provides an execute operation. This operation allows to load a  model that conforms to the ASMLogo.ecore and start the evaluation of the logo instructions.<br/>
+Finally, it asks to the controler to update the graphical view.
+      </description>
+   </item>
+</cheatsheet>
