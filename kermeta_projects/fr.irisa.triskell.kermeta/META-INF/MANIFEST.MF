@@ -3,10 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Workbench
 Bundle-SymbolicName: fr.irisa.triskell.kermeta; singleton:=true
 Bundle-Version: 1.1.0
-Bundle-ClassPath: .,
- lib/thirdparty/emfatic-core.jar,
- lib/thirdparty/ldt-core.jar,
- lib/thirdparty/junit.jar
+Bundle-ClassPath: .
 Bundle-Activator: fr.irisa.triskell.kermeta.plugin.KermetaPlugin
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
