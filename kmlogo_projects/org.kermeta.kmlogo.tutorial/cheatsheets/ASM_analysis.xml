@@ -8,7 +8,7 @@ This cheatsheet will show you where and how this model is defined and used by EM
    </intro>
    <item title="Open fr.irisa.triskell.kmlogo.model project" dialog="true" skip="false">
       <description>
-         This project contains the basis
+         This project contains the basis of the Logo DSL.
       </description>
    </item>
    <item title="Open ASMLogo.ecore (using EMF tree editor)" dialog="true" skip="false">
@@ -16,12 +16,16 @@ This cheatsheet will show you where and how this model is defined and used by EM
          in the &quot;model&quot; folder, there is ASMLogo.ecore. <br/>
 This is a standard ecore file.
       </description>
+      <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/ASMLogo.ecore)" confirm="false">
+      </command>
    </item>
    <item title="Open ASMLogo.ecoredi" dialog="true" skip="false">
       <description>
          As a standard ecore file, any ecore aware tools can be used to visualize it.<br/>
 Here we used Topcased ecore modeler to display a class diagram of our metamodel.
       </description>
+      <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/ASMLogo.ecoredi)" confirm="false">
+      </command>
    </item>
    <item title="Overview of Logo language instructions" dialog="true" skip="false">
       <description>

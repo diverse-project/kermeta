@@ -12,6 +12,8 @@ In order to provide an operational semantics to Logo, it weaves an interpreter t
 This eval operation passes a context.
       </description>
       <subitem label="Open LogoDynSemantics.kmt" skip="false">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/LogoDynSemantics.kmt)" confirm="false">
+         </command>
       </subitem>
       <subitem label="In the top right corner of the outline, use the red/blue package icon to see what comes from the opened kmt file (ine red) and what comes from the imported files (in blue)." skip="false">
       </subitem>
@@ -26,8 +28,12 @@ This eval operation passes a context.
 In this ecore file you&apos;ll notice the various notions needed for this VM : turtle, segment and points.
       </description>
       <subitem label="Open VMLogo.ecore" skip="false">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/VMLogo.ecore)" confirm="false">
+         </command>
       </subitem>
       <subitem label="Open VMLogo.ecoredi" skip="false">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/VMLogo.ecoredi)" confirm="false">
+         </command>
       </subitem>
    </item>
    <item title="Virtual Machine behavior analysis" dialog="true" skip="false">
@@ -36,6 +42,8 @@ In this ecore file you&apos;ll notice the various notions needed for this VM : t
 Those operations have some impacts on the GUI through command like stdio.writeln.
       </description>
       <subitem label="Open LogoVMSemantics.kmt" skip="false">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/LogoVMSemantics.kmt)" confirm="false">
+         </command>
       </subitem>
       <subitem label="Use the outline to see what has been added (in red) to the structure (in bue)." skip="false">
       </subitem>

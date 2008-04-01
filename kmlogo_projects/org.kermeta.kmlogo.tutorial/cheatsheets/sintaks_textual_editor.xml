@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Building a textual editor with Sintaks">
+   <intro>
+      <description>
+         This cheatsheet will guide you through the sources of a texteditor for Logo generated with Sintaks. It creates a textual concrete syntax for Logo<br/>
+Once deployed, you get : <br/>
+- a textual editor with syntax highlighting<br/>
+- conversions model 2 text and text 2 model<br/>
+- support for filename extension in eclipse
+      </description>
+   </intro>
+   <item title="texteditor project" dialog="true" skip="false">
+      <description>
+         The project org.kermeta.kmlogo.texteditor contains all the sources of a texteditor for Logo
+      </description>
+   </item>
+   <item title="STS file" dialog="true" skip="false">
+      <description>
+         ASMLogo.sts file defines the mapping rules between the concepts in the Abstract Syntax Model and a concrete textual syntax. It is bidirectional and thus provides both model2text (prettyprinting) and text to model (parsing) transformations.
+      </description>
+      <subitem label="Open ASMLogo.sts" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/org.kermeta.kmlogo.texteditor/sts/ASMLogo.sts)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at its content" skip="false">
+      </subitem>
+   </item>
+   <item title="plugin extension" dialog="true" skip="false">
+      <description>
+         In order to integrate the editor in Eclipse, some extensions specific to Sintaks are needed.
+      </description>
+      <subitem label="Open plugin.xml" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/org.kermeta.kmlogo.texteditor/plugin.xml)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at the extensions" skip="false">
+      </subitem>
+   </item>
+</cheatsheet>

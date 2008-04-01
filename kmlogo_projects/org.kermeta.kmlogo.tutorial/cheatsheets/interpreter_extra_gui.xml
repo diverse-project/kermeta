@@ -7,21 +7,31 @@
    </intro>
    <item title="Kermeta wrapper TurtleGUI.kmt" dialog="true" skip="false">
       <description>
-         Open TurtleGUI.kmt<br/>
-It defines the classes as seen by kermeta programs. For this application, it provides operations like drawLine, drawTurtle or clearDrawing.<br/>
+         TurtleGUI.kmt defines the classes as seen by kermeta programs. For this application, it provides operations like drawLine, drawTurtle or clearDrawing.<br/>
 Note that it need an &quot;initialize&quot; operation in order to correctly create the object.
       </description>
+      <subitem label="Open TurtleGUI.kmt" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/TurtleGUI.kmt)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at its content" skip="false">
+      </subitem>
    </item>
    <item title="Java wrapper TurtleGUIWrapper.java" dialog="true" skip="false">
       <description>
-         Open fr.irisa.triskell.kmLogo.wrapper.TurtleGUIWrapper.java<br/>
-It defines the static operations that the interpreter can call.<br/>
+         TurtleGUIWrapper.java defines the static operations that the interpreter can call.<br/>
 All parameters must be of type RuntimeObject. <br/> 
 This class is in charge of :<br/>
 - translating the RuntimeObject to and from classical java object<br/>
 - calling the appropriate java code<br/>
 The associated java object (here a ITurtleGUI) is stored into the UserData of the RuntimeObject.
       </description>
+      <subitem label="Open fr.irisa.triskell.kmLogo.wrapper.TurtleGUIWrapper.java" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/src/fr/irisa/triskell/kmLogo/wrapper/TurtleGUIWrapper.java)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at its content" skip="false">
+      </subitem>
    </item>
    <item title="Java GUI  implementation" dialog="true" skip="false">
       <description>
@@ -29,14 +39,25 @@ The associated java object (here a ITurtleGUI) is stored into the UserData of th
 In order to allow some extensibility, it has been splitted in 2, an interface ITurtleGUI and a simple concrete AWT implementation TurtleSimpleAWTGUI.
       </description>
       <subitem label="Open fr.irisa.triskell.kmLogo.gui.ITurtleGUI.java" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/src/fr/irisa/triskell/kmLogo/gui/ITurtleGUI.java)" confirm="false">
+         </command>
       </subitem>
       <subitem label="Open fr.irisa.triskell.kmLogo.gui.TurtleSimpleAWTGUI.java" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/src/fr/irisa/triskell/kmLogo/gui/TurtleSimpleAWTGUI.java)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at those files" skip="false">
       </subitem>
    </item>
    <item title="GUI controler" dialog="true" skip="false">
       <description>
-         Open TurtleControler.kmt<br/>
-This class is a simple controler that ask to the GUI to update the graphical view of a given Turtle.
+         TurtleControler  is a simple controler that ask to the GUI to update the graphical view of a given Turtle.
       </description>
+      <subitem label="Open TurtleControler.kmt" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/TurtleControler.kmt)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at its content" skip="false">
+      </subitem>
    </item>
 </cheatsheet>

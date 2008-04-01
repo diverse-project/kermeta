@@ -2,34 +2,49 @@
 <cheatsheet title="Call to java.Math">
    <intro>
       <description>
-         This sheet will show you how a call to java may workaround some missing feature in Kermeta<br/>
-It will explain how how to call java.Math from Kermeta<br/>
+         This sheet will show you how a call to java may workaround some missing feature in Kermeta.<br/>
+It will explain how how to call java.lang.Math from Kermeta.<br/>
 This is useful since the Kermeta doesn&apos;t provides sin, cos, tan operator by default.<br/>
 This may also be useful in case of major performance issue for a specific task.
       </description>
    </intro>
    <item title="Kermeta wrapper Math.kmt" dialog="true" skip="false">
       <description>
-         Open Math.kmt<br/>
-It defines the operations as seen by a kermeta code.<br/>
+         Math.kmt defines the operations as seen by a kermeta code.<br/>
 The calls to java are done using the extern keyword. It will call the static java operation with the given qualified name.
       </description>
+      <subitem label="Open Math.kmt" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/Math.kmt)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at its content" skip="false">
+      </subitem>
    </item>
    <item title="Java wrapper Math.java" dialog="true" skip="false">
       <description>
-         Open fr.irisa.triskell.kmlogo.wrapper.Math.java<br/>
-It defines the static operations that the interpreter can call.<br/>
+         It defines the static operations that the interpreter can call.<br/>
 All parameters must be of type RuntimeObject. <br/> 
 This class is in charge of :<br/>
 - translating the RuntimeObject to and from classical java object (here java.lang.Real)<br/>
 - calling the appropriate java code
       </description>
+      <subitem label="Open fr.irisa.triskell.kmlogo.wrapper.Math.java" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/src/fr/irisa/triskell/kmLogo/wrapper/Math.java)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at its content" skip="false">
+      </subitem>
    </item>
    <item title="Calling the new kermeta code" dialog="true" skip="false">
       <description>
-         Open LogoVMSemantics.kmt<br/>
-Simply import the Math.kmt file where you need it. And use it as a normal kermeta class.<br/>
+         Simply import the Math.kmt file where you need it (here in  LogoVMSemantics.kmt). And use it as a normal kermeta class.<br/>
 Since both java code is contained by the same plugin, there is no need of classpath declaration. If you need to use java code from another plugin, make sure that your plugin has a dependency to it.
       </description>
+      <subitem label="Open LogoVMSemantics.kmt" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/LogoVMSemantics.kmt)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at its content" skip="false">
+      </subitem>
    </item>
 </cheatsheet>

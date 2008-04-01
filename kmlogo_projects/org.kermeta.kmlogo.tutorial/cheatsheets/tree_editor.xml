@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Building a tree model editor using EMF">
+   <intro>
+      <description>
+         <b>Body</b>
+TODO !!!
+      </description>
+   </intro>
+   <item title="genmodel" dialog="true" skip="false">
+      <description>
+         <b>Body</b>
+      </description>
+   </item>
+   <item title="edit plugin" dialog="true" skip="false">
+      <description>
+         <b>Body</b>
+      </description>
+   </item>
+   <item title="editor plugin" dialog="true" skip="false">
+      <description>
+         <b>Body</b>
+      </description>
+   </item>
+</cheatsheet>

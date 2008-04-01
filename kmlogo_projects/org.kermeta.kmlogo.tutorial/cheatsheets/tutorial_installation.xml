@@ -20,6 +20,8 @@ File-&gt;New-&gt;Examples...-&gt;Kermeta-&gt;Building kmlogo DSL tools with kerm
 - Right click on &quot;Eclipse application&quot;, new<br/>
 - rename the configuration from &quot;New_configuration&quot; to &quot;RuntimeWorkbench&quot;<br/>
       </description>
+      <command serialization="org.eclipse.debug.ui.commands.OpenRunConfigurations" confirm="false">
+      </command>
    </item>
    <item title="Start the runtime workbench" dialog="true" skip="false">
       <description>

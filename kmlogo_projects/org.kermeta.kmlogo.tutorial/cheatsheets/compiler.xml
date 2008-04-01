@@ -13,6 +13,8 @@ In order to provide a compiler to Logo, it weaves &quot;compileToNXC&quot; opera
 The compiled code uses a predefined API specific to the target platform (here a Lego Mindstorm robot).
       </description>
       <subitem label="Open LogoNXCCompiler.kmt" skip="false">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.model/model/LogoNXCCompiler.kmt)" confirm="false">
+         </command>
       </subitem>
       <subitem label="Find operation &quot;compileToNXC&quot; of class &quot;If&quot; and observe how the code is compiled" skip="false">
       </subitem>

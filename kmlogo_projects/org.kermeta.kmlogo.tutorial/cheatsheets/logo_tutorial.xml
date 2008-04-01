@@ -91,6 +91,8 @@ This comes to the task of weaving a compiler to the ASM.
          <onCompletion>
             <b>Conclusion</b>
          </onCompletion>
+         <param name="path" value="compiler.xml">
+         </param>
       </task>
       <taskGroup kind="set" name="Building editors for Logo" skip="false">
          <intro>
@@ -107,6 +109,8 @@ This task briefly introduces the code of the EMF Tree editor for the ASM.
             <onCompletion>
                <b>Conclusion</b>
             </onCompletion>
+            <param name="path" value="tree_editor.xml">
+            </param>
          </task>
          <task kind="cheatsheet" name="Building a textual editor with Sintaks" skip="false">
             <intro>
@@ -117,6 +121,8 @@ This is done using Sintaks.
             <onCompletion>
                <b>Conclusion</b>
             </onCompletion>
+            <param name="path" value="sintaks_textual_editor.xml">
+            </param>
          </task>
       </taskGroup>
       <task kind="cheatsheet" name="Deployment of Kermeta code in Eclipse GUI" skip="false">
