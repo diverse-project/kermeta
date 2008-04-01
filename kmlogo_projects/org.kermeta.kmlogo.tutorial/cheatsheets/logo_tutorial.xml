@@ -137,5 +137,15 @@ It will use the interpreter as sample.
          <param name="path" value="interpreter_eclipse_UI.xml">
          </param>
       </task>
+      <task kind="cheatsheet" name="Using the deployed DSL environment" skip="false">
+         <intro>
+            <b>Introduction</b><br/>
+This task will guide you through the actions in the deployed workbench.<br/>
+For example, using the text2model, using the Logo interpreter and the Logo compiler.
+         </intro>
+         <onCompletion>
+            <b>Conclusion</b>
+         </onCompletion>
+      </task>
    </taskGroup>
 </compositeCheatsheet>
