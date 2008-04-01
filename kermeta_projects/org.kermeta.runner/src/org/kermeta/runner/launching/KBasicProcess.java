@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.1 2008-04-01 15:10:14 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.2 2008-04-01 15:44:09 cfaucher Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -185,7 +185,7 @@ public class KBasicProcess extends Process {
 	private void makeDelegateWaiting() {
 		if ( _delegate != null ) {
 			Runnable r = new Runnable() {
-				@Override
+				
 				public void run() {
 					synchronized(_delegate) {
 						_delegate.notify();

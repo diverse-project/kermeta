@@ -43,7 +43,6 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 	}
 	
 	
-	@Override
 	public void launch(ISelection selection, String mode) {
 		IFile selectedFile = null;
 		boolean launchable = false;
@@ -94,7 +93,6 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
         }
 	}
 
-	@Override
 	public void launch(IEditorPart editor, String mode) {
         IFile ifile = null;
         IEditorInput input = editor.getEditorInput();

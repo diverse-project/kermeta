@@ -21,7 +21,6 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 
 abstract public class AbstractLaunchConfiguration implements ILaunchConfigurationDelegate {
 
-	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 
 		int requestPort = findFreePort();

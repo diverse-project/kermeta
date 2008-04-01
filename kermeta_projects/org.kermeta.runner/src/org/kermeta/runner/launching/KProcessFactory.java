@@ -9,7 +9,6 @@ import org.kermeta.runner.model.KProcess;
 
 public class KProcessFactory implements IProcessFactory {
 
-	@Override
 	public IProcess newProcess(ILaunch launch, Process process, String label, Map attributes) {
 		return new KProcess(launch, process, label, attributes);
 	}
