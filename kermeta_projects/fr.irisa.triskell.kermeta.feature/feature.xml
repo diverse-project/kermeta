@@ -96,23 +96,9 @@ GPL license.
          unpack="false"/>
 
    <plugin
-         id="fr.irisa.triskell.kermeta.touchnavigator"
-         download-size="200"
-         install-size="200"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="fr.irisa.triskell.kermeta.model.edit"
          download-size="430"
          install-size="430"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.irisa.triskell.kermeta.documentation"
-         download-size="2837"
-         install-size="2837"
          version="0.0.0"
          unpack="false"/>
 
@@ -180,13 +166,6 @@ GPL license.
          unpack="false"/>
 
    <plugin
-         id="fr.irisa.triskell.kermeta.editorhelper"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="fr.irisa.triskell.kermeta.ui"
          download-size="0"
          install-size="0"
@@ -202,13 +181,6 @@ GPL license.
 
    <plugin
          id="org.eclipse.emf.ecoretools.registration"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.kermeta.registration"
          download-size="0"
          install-size="0"
          version="0.0.0"
