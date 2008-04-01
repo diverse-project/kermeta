@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.12 2008-02-14 07:13:18 uid21732 Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.13 2008-04-01 12:23:35 bmorin Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL
@@ -19,7 +19,6 @@ import java.util.Map;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.UniqueEList;

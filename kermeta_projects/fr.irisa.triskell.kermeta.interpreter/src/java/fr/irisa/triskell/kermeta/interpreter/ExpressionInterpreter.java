@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.67 2008-02-15 14:22:59 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.68 2008-04-01 12:23:28 bmorin Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -74,7 +74,6 @@ import fr.irisa.triskell.kermeta.runtime.FrameworkExternCommand;
 import fr.irisa.triskell.kermeta.runtime.RuntimeHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
@@ -129,7 +128,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	public Object invoke(RuntimeObject ro_target,Operation foperation, ArrayList<RuntimeObject> arguments) {
 		RuntimeObject result=null;
 		setCurrentState(DEBUG_RESUME);
-		RuntimeObjectFactory roFactory = memory.getROFactory(); 
+		//RuntimeObjectFactory roFactory = memory.getROFactory(); 
 		
 		fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getKCoreObject();
 		
@@ -574,7 +573,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        }
 	    }
 	    catch(KermetaRaisedException ex) {
-	        Iterator it = node.getRescueBlock().iterator();
+	        Iterator<Rescue> it = node.getRescueBlock().iterator();
 	        Rescue resc_block = null;
 	        while (it.hasNext() && resc_block == null) {
 	            Rescue r = (Rescue)it.next();
@@ -626,7 +625,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	}
 	
 	/**
-	 * Interprete the IF instruction
+	 * Interpret the IF instruction
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Conditional)
 	 */
 	public Object visitConditional(Conditional node) {
@@ -683,7 +682,6 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	public Object visitLoop(Loop node)
 	{
 		if (node!=null) setParent(node);
-		RuntimeObject result = memory.voidINSTANCE;
         // Push a new expressionContext in the current CallFrame. 
         interpreterContext.peekCallFrame().pushExpressionContext();
         // Stops the interpretation.
@@ -908,7 +906,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 //			 Get the runtime object corresponding to the property
 		    RuntimeObject ro_property = getRuntimeObjectForProperty(t_target, property.getProperty().getName());
 		    
-		    // This is just a debbuging check. It should never occur
+		    // This is just a debugging check. It should never occur
 		    if (ro_property == null) {
 			    String err = "INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property '" + property.getName() + "'";
 			    err += "\n( May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developers )";
@@ -921,7 +919,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 					// invoke the java operation
 					result = getPropertyOnProxy(ro_target, ro_property, property.getProperty());
 				}
-				else{ // normal interpeter call
+				else{ // normal interpreter call
 					//					 Get the value of the property
 			        result = fr.irisa.triskell.kermeta.runtime.language.Object.get(ro_target, ro_property);
 				}

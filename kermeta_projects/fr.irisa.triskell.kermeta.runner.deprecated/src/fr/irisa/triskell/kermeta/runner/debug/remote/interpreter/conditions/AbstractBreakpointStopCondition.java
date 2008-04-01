@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.15 2008-02-14 07:13:07 uid21732 Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.16 2008-04-01 12:23:32 bmorin Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -129,7 +129,7 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 		}
 		else
 		{
-			Iterator it = KermetaUnitHelper.getAllImportedKermetaUnits(unit).iterator();
+			Iterator<KermetaUnit> it = KermetaUnitHelper.getAllImportedKermetaUnits(unit).iterator();
 			while (it.hasNext()) {
 				KermetaUnit u = (KermetaUnit)it.next();
 				String unit_uri = u.getUri().replaceAll("/+", "/");

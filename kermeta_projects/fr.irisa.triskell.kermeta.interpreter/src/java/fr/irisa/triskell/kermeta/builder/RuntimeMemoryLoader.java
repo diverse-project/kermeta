@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.29 2008-02-14 07:13:57 uid21732 Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.30 2008-04-01 12:23:28 bmorin Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -10,17 +10,15 @@
 
 package fr.irisa.triskell.kermeta.builder;
 
-import java.util.ArrayList;
+
 import java.util.Hashtable;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.kermeta.io.KermetaUnit;
@@ -33,7 +31,6 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -273,7 +270,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 				    }
 				    // System.out.println(ref.getName() + " : " + eo.eGet(ref).getClass().getName());
 					EList values = (EList)kcoreObject.eGet(ref);
-					ArrayList ftm_values = new ArrayList();
+					//ArrayList ftm_values = new ArrayList();
 					for (int i=0; i<values.size(); i++) {
 					    Collection.add(list, getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)values.get(i)));
 					}
