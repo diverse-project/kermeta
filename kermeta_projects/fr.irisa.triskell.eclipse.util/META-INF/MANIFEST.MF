@@ -9,15 +9,21 @@ Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.ui;visibility:=reexport,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.eclipse.jface.text
+ org.eclipse.jface.text,
+ org.eclipse.ui.cheatsheets,
+ org.eclipse.ui.ide
 Export-Package: fr.irisa.triskell.eclipse.console,
  fr.irisa.triskell.eclipse.console.messages,
  fr.irisa.triskell.eclipse.ecore,
  fr.irisa.triskell.eclipse.emf,
+ fr.irisa.triskell.eclipse.plugin,
  fr.irisa.triskell.eclipse.resources,
+ fr.irisa.triskell.eclipse.util.handlers,
  fr.irisa.triskell.eclipse.wizard,
  org.kermeta.core.helper,
  org.kermeta.ecore.internal.model.helper;x-internal:=true,
  org.kermeta.ecore.model.helper
 Bundle-Vendor: IRISA/INRIA
 Bundle-ClassPath: .
+Bundle-Activator: fr.irisa.triskell.eclipse.plugin.Activator
+Eclipse-LazyStart: true

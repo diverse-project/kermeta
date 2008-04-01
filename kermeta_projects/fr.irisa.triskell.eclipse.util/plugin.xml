@@ -2,5 +2,35 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension-point id="fr.irisa.triskell.kermeta.console" name="KermetaConsole" schema="schema/fr.irisa.triskell.kermeta.console.exsd"/>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="fr.irisa.triskell.eclipse.util.commands.category"
+            name="Triskell Category">
+      </category>
+      <command
+            categoryId="fr.irisa.triskell.eclipse.util.commands.category"
+            description="Open a file in the default editor"
+            id="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand"
+            name="Open Editor Command">
+         <commandParameter
+               id="fr.irisa.triskell.eclipse.util.openFileCommandParameter1"
+               name="FileURI"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="fr.irisa.triskell.eclipse.util.openFileCommandParameter2"
+               name="StringToFindInFile"
+               optional="true">
+         </commandParameter>
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="fr.irisa.triskell.eclipse.util.handlers.OpenEditorHandler"
+            commandId="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand">
+      </handler>
+   </extension>
 
 </plugin>
