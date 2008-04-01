@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.kermeta.runner.launching.KLaunchConfiguration"
+            id="org.kermeta.debug.runConfiguration"
+            modes="run, debug"
+            name="Kermeta Application"
+            sourceLocatorId="org.kermeta.debug.sourceLookupDirector"
+            sourcePathComputerId="org.kermeta.debug.sourcePathComputer">
+      </launchConfigurationType>
+      <launchConfigurationType
+            delegate="org.kermeta.runner.launching.KConstraintLaunchConfiguration"
+            id="org.kermeta.debug.constraintConfiguration"
+            modes="run, debug"
+            name="Kermeta Constraint Application"
+            sourceLocatorId="org.kermeta.debug.sourceLookupDirector"
+            sourcePathComputerId="org.kermeta.debug.sourcePathComputer">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.processFactories">
+      <processFactory
+            class="org.kermeta.runner.launching.KProcessFactory"
+            id="org.kermeta.debug.processFactory">
+      </processFactory>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.sourcePathComputers">
+      <sourcePathComputer
+            class="org.kermeta.runner.launching.KSourcePathComputerDelegate"
+            id="org.kermeta.debug.sourcePathComputer">
+      </sourcePathComputer>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.sourceLocators">
+      <sourceLocator
+            class="org.kermeta.runner.launching.KSourceLookupDirector"
+            id="org.kermeta.debug.sourceLookupDirector"
+            name="Kermeta Source Lookup Director">
+      </sourceLocator>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.breakpoints">
+      <breakpoint
+            class="org.kermeta.runner.model.KLineBreakpoint"
+            id="org.kermeta.debug.lineBreakpoint"
+            markerType="org.kermeta.debug.lineBreakpointMarker"
+            name="Kermeta Breakpoint">
+      </breakpoint>
+   </extension>
+   <extension
+         id="lineBreakpointMarker"
+         point="org.eclipse.core.resources.markers">
+      <persistent
+            value="true">
+      </persistent>
+      <super
+            type="org.eclipse.debug.core.lineBreakpointMarker">
+      </super>
+   </extension>
+
+</plugin>

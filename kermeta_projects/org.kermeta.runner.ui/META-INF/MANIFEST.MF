@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ui Plug-in
+Bundle-SymbolicName: org.kermeta.runner.ui;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: org.kermeta.runner.ui.DebugUIPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.debug.ui,
+ fr.irisa.triskell.kermeta.interpreter,
+ fr.irisa.triskell.kermeta,
+ org.kermeta.runner,
+ org.kermeta.io.loader,
+ org.eclipse.ui.ide,
+ org.eclipse.jdt.ui,
+ org.eclipse.jdt.debug.ui,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.jface.text,
+ fr.irisa.triskell.kermeta.model.edit,
+ fr.irisa.triskell.kermeta.texteditor
+Eclipse-LazyStart: true

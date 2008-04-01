@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Debug Plug-in
+Bundle-SymbolicName: org.kermeta.runner;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: org.kermeta.runner.KDebugPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.debug.core,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.kermeta.io.loader,
+ org.kermeta.merger
+Eclipse-LazyStart: true
+Export-Package: org.kermeta.runner,
+ org.kermeta.runner.launching,
+ org.kermeta.runner.model,
+ org.kermeta.runner.model.variable

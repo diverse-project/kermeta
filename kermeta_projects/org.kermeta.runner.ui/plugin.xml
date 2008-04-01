@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.kermeta.runner.launching.KermetaLaunchConfigTabGroup"
+            description="Launch a Kermeta program"
+            id="launchConfigurationTabGroup"
+            type="org.kermeta.debug.runConfiguration">
+      </launchConfigurationTabGroup>
+      <launchConfigurationTabGroup
+            class="org.kermeta.runner.launching.KermetaLaunchConfigTabGroup"
+            description="Launch a Kermeta program in constraint mode"
+            id="org.kermeta.debug.ui.launchConfigurationTabGroup2"
+            type="org.kermeta.debug.constraintConfiguration">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.kermeta.debug.runConfiguration"
+            icon="icons/kermeta_logo.gif"
+            id="org.kermeta.debug.ui.launchConfigurationTypeImage1">
+      </launchConfigurationTypeImage>
+      <launchConfigurationTypeImage
+            configTypeID="org.kermeta.debug.constraintConfiguration"
+            icon="icons/kermeta_logo.gif"
+            id="org.kermeta.debug.ui.launchConfigurationTypeImage2">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.kermeta.runner.launching.RunLaunchShortcut"
+            icon="icons/kermeta_logo.gif"
+            id="org.kermeta.debug.ui.kermetaApplication"
+            label="Kermeta Application"
+            modes="run, debug">
+         <configurationType
+               id="org.kermeta.debug.runConfiguration">
+         </configurationType>
+         <contextualLaunch>
+            <enablement>
+               <count
+                     value="1">
+               </count>
+               <iterate
+                     operator="or">
+                  <or>
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.kmt">
+                     </test>
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.km">
+                     </test>
+                  </or>
+               </iterate>
+            </enablement>
+            <contextLabel
+                  label="Run Kermeta Application"
+                  mode="run">
+            </contextLabel>
+            <contextLabel
+                  label="Debug Kermeta Application"
+                  mode="debug">
+            </contextLabel>
+         </contextualLaunch>
+      </shortcut>
+      <shortcut
+            class="org.kermeta.runner.launching.ConstraintLaunchShortcut"
+            icon="icons/kermeta_logo.gif"
+            id="org.kermeta.debug.ui.kermetaConstraintApplication"
+            label="Kermeta Constraint Application"
+            modes="run, debug">
+         <configurationType
+               id="org.kermeta.debug.constraintConfiguration"></configurationType>
+         <contextualLaunch>
+            <contextLabel
+                  label="Run a Kermeta Constraint Application"
+                  mode="run">
+            </contextLabel>
+            <contextLabel
+                  label="Debug a Kermeta Constraint Application"
+                  mode="debug">
+            </contextLabel>
+                       <enablement>
+               <count
+                     value="1">
+               </count>
+               <iterate
+                     operator="or">
+                  <or>
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.kmt">
+                     </test>
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.km">
+                     </test>
+                  </or>
+               </iterate>
+            </enablement>
+         </contextualLaunch>
+      </shortcut>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.debugModelPresentations">
+      <debugModelPresentation
+            class="org.kermeta.runner.ui.model.KModelPresentation"
+            id="org.kermeta.debug">
+      </debugModelPresentation>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.ui.texteditor.ITextEditor"
+            class="org.kermeta.runner.ui.model.KBreakpointAdapterFactory">
+         <adapter
+               type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+         </adapter>
+      </factory>
+   </extension>
+<extension point="org.eclipse.ui.editorActions">
+   <editorContribution
+         id="org.kermeta.debug.ui.addBreakpoint"
+         targetID="org.kermeta.ui.editors.kmt.editor">
+      <action
+            actionID="RulerDoubleClick"
+            class="org.kermeta.runner.ui.actions.AddBreakpointActionDelegate"
+            icon="icons/breakpoint.png"
+            id="org.kermeta.debugger.addBreakpointAction"
+            label="Add Breakpoint"
+            state="true"
+            style="push"
+            tooltip="Kermeta Breakpoint">
+      </action>
+   </editorContribution>
+</extension>
+</plugin>
