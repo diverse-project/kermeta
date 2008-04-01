@@ -128,12 +128,14 @@ This is done using Sintaks.
       <task kind="cheatsheet" name="Deployment of Kermeta code in Eclipse GUI" skip="false">
          <intro>
             <b>Introduction</b><br/>
-This task briefly introduces the code needed to deploy a Kermeta code for a end user.
+This task briefly introduces the code needed to deploy a Kermeta code for a end user.<br/>
 It will use the interpreter as sample.
          </intro>
          <onCompletion>
             <b>Conclusion</b>
          </onCompletion>
+         <param name="path" value="interpreter_eclipse_UI.xml">
+         </param>
       </task>
    </taskGroup>
 </compositeCheatsheet>

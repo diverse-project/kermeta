@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Deployment of Kermeta code in Eclipse GUI">
+   <intro>
+      <description>
+         This cheatsheet introduces the code needed to deploy a Kermeta code for a end user.<br/>
+It will use the interpreter as sample.
+      </description>
+   </intro>
+   <item title="fr.irisa.triskell.kmlogo.ui project" dialog="true" skip="false">
+      <description>
+         This plugin project contains the eclipse extension and the code that allows to launch a kermeta program from Eclipse GUI. This allows to hide to the end user in which language the transformation is written.
+      </description>
+      <subitem label="Open plugin.xml" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.ui/plugin.xml)" confirm="false">
+         </command>
+      </subitem>
+   </item>
+   <item title="plugin extension" dialog="true" skip="false">
+      <description>
+         Have a look to the popupMenus extension. <br/>
+They declares the actions for the end user.
+      </description>
+   </item>
+   <item title="fr.irisa.triskell.kmlogo.ui.popup.actions.RunLogo.java" dialog="true" skip="false">
+      <description>
+         This is the code to call the Logo interpreter (the operational behavior we&apos;ve defined for it)
+      </description>
+      <subitem label="Open fr.irisa.triskell.kmlogo.ui.popup.actions.RunLogo.java" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.ui/src/fr/irisa/triskell/kmlogo/ui/popup/actions/RunLogo.java)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at its content" skip="false">
+      </subitem>
+   </item>
+   <item title="fr.irisa.triskell.kmlogo.ui.RunLogoK.java" dialog="true" skip="false">
+      <description>
+         This code calls Kermeta interpreter with a given kermeta program and parameters.<br/>
+<b>be careful</b> in addition to initializing the interpreter, this code also sets the correct java classpath. Otherwise, Kermeta interpreter will not correctly find the java code called via the &quot;extern&quot;.
+      </description>
+      <subitem label="Open fr.irisa.triskell.kmlogo.ui.RunLogoK.java" skip="true">
+         <command serialization="fr.irisa.triskell.eclipse.util.commands.OpenEditorCommand(fr.irisa.triskell.eclipse.util.openFileCommandParameter1=platform:/resource/fr.irisa.triskell.kmlogo.ui/src/fr/irisa/triskell/kmlogo/ui/RunLogoK.java)" confirm="false">
+         </command>
+      </subitem>
+      <subitem label="Have a look at its content" skip="false">
+      </subitem>
+   </item>
+</cheatsheet>
