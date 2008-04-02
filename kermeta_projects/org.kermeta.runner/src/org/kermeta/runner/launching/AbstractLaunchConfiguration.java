@@ -16,6 +16,7 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.kermeta.runner.model.KDebugTarget;
 import org.kermeta.runner.model.KProcess;
 
+import fr.irisa.triskell.eclipse.resources.URIHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 
@@ -30,7 +31,7 @@ abstract public class AbstractLaunchConfiguration implements ILaunchConfiguratio
 			abort("Unable to find free port", null);
 		}
 		
-		String fileName = "platform:/resource" + configuration.getAttribute( KConstants.KM_FILENAME, (String) null);
+		String fileName = "platform:/resource" + configuration.getAttribute( KConstants.KM_FILENAME, (String) null).replace("\\", "/");
 		String mainClass = configuration.getAttribute( KConstants.KM_CLASSQNAME, (String) null);
 		String mainOperation = configuration.getAttribute( KConstants.KM_OPERATIONNAME, (String) null);
 		
