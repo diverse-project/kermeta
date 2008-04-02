@@ -16,7 +16,6 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.kermeta.runner.model.KDebugTarget;
 import org.kermeta.runner.model.KProcess;
 
-import fr.irisa.triskell.eclipse.resources.URIHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 
@@ -34,13 +33,17 @@ abstract public class AbstractLaunchConfiguration implements ILaunchConfiguratio
 		String fileName = "platform:/resource" + configuration.getAttribute( KConstants.KM_FILENAME, (String) null).replace("\\", "/");
 		String mainClass = configuration.getAttribute( KConstants.KM_CLASSQNAME, (String) null);
 		String mainOperation = configuration.getAttribute( KConstants.KM_OPERATIONNAME, (String) null);
+		String argumentsInline = configuration.getAttribute( KConstants.KM_ARGUMENTS, (String) null);
+		String[] arguments = null;
+		if ( argumentsInline != null )
+			arguments = argumentsInline.split(" ");
 		
 		try {
 			if ( mode.equals(ILaunchManager.RUN_MODE) ) {
-				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), mainClass, mainOperation);
+				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), mainClass, mainOperation, arguments);
 				DebugPlugin.newProcess(launch, basicProcess, fileName + " " + mode);
 			} else if ( mode.equals(ILaunchManager.DEBUG_MODE) ) {
-				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), requestPort, eventPort, mainClass, mainOperation, this);
+				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), requestPort, eventPort, mainClass, mainOperation, arguments, this);
 				String label =  fileName + " " + mode;
 				KProcess process = (KProcess) DebugPlugin.newProcess(launch, basicProcess, label);
 				

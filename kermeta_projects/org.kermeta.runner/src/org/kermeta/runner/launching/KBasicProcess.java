@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.2 2008-04-01 15:44:09 cfaucher Exp $
+/*$Id: KBasicProcess.java,v 1.3 2008-04-02 09:35:24 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -57,7 +57,7 @@ public class KBasicProcess extends Process {
 		return _interpreter;
 	}
 	
-	public KBasicProcess(String file, boolean isConstraint, String mainClass, String mainOperation) throws NotRegisteredURIException, URIMalformedException {
+	public KBasicProcess(String file, boolean isConstraint, String mainClass, String mainOperation, String[] parameters) throws NotRegisteredURIException, URIMalformedException {
 		initializeStreams();
 		BufferedReader inputReader = new BufferedReader( new InputStreamReader( _interpreterInputStream ) );
 		PrintStream os = new PrintStream(_interpreterOutputStream);
@@ -70,10 +70,10 @@ public class KBasicProcess extends Process {
 		_interpreter.setOutputStream( os );
 		_interpreter.setErrorStream( es );
 		_interpreter.setEntryPoint(mainClass, mainOperation);
-		
+		_interpreter.setParameters(parameters);
 	}
 	
-	public KBasicProcess(String file, boolean isConstraint, int requestPort, int eventPort, String mainClass, String mainOperation,ILaunchConfigurationDelegate delegate) throws IOException, NotRegisteredURIException, URIMalformedException {
+	public KBasicProcess(String file, boolean isConstraint, int requestPort, int eventPort, String mainClass, String mainOperation, String[] parameters, ILaunchConfigurationDelegate delegate) throws IOException, NotRegisteredURIException, URIMalformedException {
 		initializeStreams();
 		BufferedReader inputReader = new BufferedReader( new InputStreamReader( _interpreterInputStream ) );
 		PrintStream os = new PrintStream(_interpreterOutputStream);
@@ -90,10 +90,11 @@ public class KBasicProcess extends Process {
 		_interpreter.setOutputStream( os );
 		_interpreter.setErrorStream( es );
 		_interpreter.setEntryPoint(mainClass, mainOperation);
+		_interpreter.setParameters(parameters);
 		
 		_delegate = delegate;
 	}
-
+	
 	private void initializeStreams() {
 		/*
 		 * 
