@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreHelper.kmt,v 1.6 2008-03-14 14:21:08 cfaucher Exp $
+/* $Id: KM2EcoreHelper.kmt,v 1.7 2008-04-02 08:39:30 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -45,25 +45,33 @@ class KM2EcoreHelper {
 	 * @return true or false
 	 */
 	operation isNumericalTypeDef(t : Type, context : KM2EcoreContext) : Boolean is do
-		var tName : String init void
-		if t.isInstanceOf(Class) then
-			tName := t.asType(ParameterizedType).typeDefinition.name
-			if tName.equals("Integer") or tName.equals("Real") then
-				result := true
-			else
-				result := false
-			end
-		else if t.isInstanceOf(PrimitiveType) then
-				tName := t.asType(PrimitiveType).createBehaviorJava(context)
+		
+		if not t.isVoid() then
+		
+			var tName : String init void
+			if t.isInstanceOf(Class) then
+				tName := t.asType(ParameterizedType).typeDefinition.name
 				if tName.equals("Integer") or tName.equals("Real") then
 					result := true
 				else
 					result := false
 				end
-			else
-				result := false
+			else if t.isInstanceOf(PrimitiveType) then
+					tName := t.asType(PrimitiveType).createBehaviorJava(context)
+					if tName.equals("Integer") or tName.equals("Real") then
+						result := true
+					else
+						result := false
+					end
+				else
+					result := false
+				end
 			end
+		
+		else
+			result := false
 		end
+		
 	end
 	
 	/**
@@ -73,13 +81,21 @@ class KM2EcoreHelper {
 	 * @return true or false
 	 */
 	operation isBooleanTypeDef(t : Type, context : KM2EcoreContext) : Boolean is do
-		if t.isInstanceOf(Class) then
-			result := t.asType(Class).typeDefinition.name.equals("Boolean")
-		else if t.isInstanceOf(PrimitiveType) then
-				result := t.asType(PrimitiveType).createBehaviorJava(context).equals("Boolean")
-			else
-				result := false
+		
+		if not t.isVoid() then
+		
+			if t.isInstanceOf(Class) then
+				result := t.asType(Class).typeDefinition.name.equals("Boolean")
+			else if t.isInstanceOf(PrimitiveType) then
+					result := t.asType(PrimitiveType).createBehaviorJava(context).equals("Boolean")
+				else
+					result := false
+				end
 			end
+			
+		else
+			result := false
 		end
+		
 	end
 }

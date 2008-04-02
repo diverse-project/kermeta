@@ -1,56 +1,16 @@
-@mainClass "comptest2::Main"
-@mainOperation "main"
 
-package comptest2;
+@uri "http://comp_exception_test001"
+package comp_exception_test001;
 
 require kermeta
 
 using kermeta::language::structure
+using kermeta::exceptions
 
-class Main
-{
-	operation main() : Void is
-	do
-		var aPrinter : ClassWithBehavior init ClassWithBehavior.new
-		aPrinter.print
-	end
+@selfType "int"
+class Integer inherits kermeta::standard::ValueType {
 }
 
-class ClassWithBehavior
-{
-	attribute attr1 : String[0..1]
-	
-	operation print() : Void is
-	do
-		var text1 : String init "Hello "
-		var text2 : String // mettre à null au lieu de ""
-		text2 := "World"
-		stdio.writeln(text1 + text2)
-		text2 := void
-	end
-
-}
-
-class InheritedClassWithBehavior inherits ClassWithBehavior, EmptyClass {
-
-	operation test() : String is do
-		attr1 := "test_attr1"
-		result := attr1
-	end
-}
-
-class EmptyClass
-{
-}
-
-class ParameterizedEmptyClass<A>
-{
-}
-
-class ParameterizedClass<B,String>
-{
-	attribute attr1 : B [0..1]
-	
-	operation test<B>() : Void is do
-	end
+@selfType "java.lang.String"
+class String inherits kermeta::standard::ValueType {
 }

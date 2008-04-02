@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.17 2008-03-14 14:21:08 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.18 2008-04-02 08:39:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -17,7 +17,7 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 require "pass1/Pass1.kmt"
 require "pass2/Pass2.kmt"
 require "KM2EcoreContext.kmt"
- 
+
 using ecore
 using kermeta::persistence
 using kermeta::language::structure
@@ -31,8 +31,8 @@ class Main
 	reference context : KM2EcoreContext [1..1]
 
     operation main_inner() : Void is do
-		var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km"
-		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.ecore"
+		var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.ecore"
 
 		main_mode(input, output, CompilingMode.behaviorJava)
 	end
@@ -57,6 +57,8 @@ class Main
 			if context.mode == CompilingMode.onlyEcore then
 				mu.applyPass2(context)
 			end
+			stdio.writeln("KermetaCompiler - Pass 1 is finished")
+			
 			if context.mode == CompilingMode.behaviorKmt then
 				mu.applyPass2BehaviorKmt(context)
 			end
@@ -64,6 +66,8 @@ class Main
 			if context.mode == CompilingMode.behaviorJava then
 				mu.applyPass2BehaviorJava(context)
 			end
+			
+			stdio.writeln("KermetaCompiler - Pass 2 is finished")
 			
 			// Save the generated ecore
 	   		var ecore_resource : Resource init EMFRepository.new.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")

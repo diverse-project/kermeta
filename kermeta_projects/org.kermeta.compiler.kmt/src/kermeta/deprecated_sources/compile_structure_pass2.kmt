@@ -1,4 +1,4 @@
-/* $Id: compile_structure_pass2.kmt,v 1.1 2008-02-27 15:41:53 cfaucher Exp $
+/* $Id: compile_structure_pass2.kmt,v 1.2 2008-04-02 08:39:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,7 +14,8 @@ require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "compile_structure_common.kmt"
 require "compile_behavior.kmt"
-require "../common/containment_traversable.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/containment_traversable.kmt"
+//require "../common/ContainmentBasedActionPerformer_Kermeta.kmt"
 require "../common/trace_structure.kmt"
 require "../helper/KM2EcoreHelper.kmt"
 

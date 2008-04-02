@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.6 2008-03-14 14:21:08 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.7 2008-04-02 08:39:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -38,7 +38,7 @@ aspect class Operation {
 		s.setLinks(self, self.ecoreModelElement)
 		if ( self.superOperation != void ) then
 			var qualifiedName : String init self.superOperation.owningClass.qualifiedName
-			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.superOperation.toString(), qualifiedName)
+			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.superOperation.name.toString(), qualifiedName)
 			self.ecoreModelElement.eAnnotations.add(ecoreAnnotation)
 		end
 	end
@@ -64,7 +64,7 @@ aspect class Property {
 
 class LinkSetterForTypedElement {
 	operation setLinks(element : TypedElement, ecoreModelElement : ETypedElement) is do
-		if ( element.type.isInstanceOf(Class) ) then
+		if element.type.isInstanceOf(Class) then
 			var c : Class init element.type.asType(Class)
 			var classDefinition : ClassDefinition init TypeHelper.new.getClassDefinition(c)
 			var genericType : EGenericType init EGenericType.new
@@ -72,13 +72,27 @@ class LinkSetterForTypedElement {
 			ecoreModelElement.eGenericType := genericType
 			c.typeParamBinding.each{ tpb |
 				var typeArgument : EGenericType init EGenericType.new
-				var cd : ClassDefinition init TypeHelper.new.getClassDefinition( tpb.type.asType(Class) )
-				typeArgument.eClassifier := cd.ecoreModelElement
-				ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
+				
+				if tpb.type.isInstanceOf(Class) then
+					var cd : ClassDefinition init TypeHelper.new.getClassDefinition( tpb.type.asType(Class) )
+					typeArgument.eClassifier := cd.ecoreModelElement
+					ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
+				end
+				if tpb.type.isInstanceOf(ObjectTypeVariable) then
+					var otv : ObjectTypeVariable init tpb.type.asType(ObjectTypeVariable)
+					typeArgument.eTypeParameter := otv.ecoreModelElement
+					ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
+				end
 			}
 		else
-			if ( element.type.isInstanceOf(PrimitiveType) ) then
+			if element.type.isInstanceOf(PrimitiveType) then
 				ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement			
+			else
+				if element.type.isInstanceOf(ObjectTypeVariable) then
+					var genericType : EGenericType init EGenericType.new
+					genericType.eTypeParameter  := element.type.asType(ObjectTypeVariable).ecoreModelElement
+					ecoreModelElement.eGenericType := genericType
+				end
 			end
 		end
 	end

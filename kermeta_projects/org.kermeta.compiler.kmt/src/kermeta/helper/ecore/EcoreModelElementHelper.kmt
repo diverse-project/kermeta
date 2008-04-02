@@ -1,4 +1,4 @@
-/* $Id: EcoreModelElementHelper.kmt,v 1.3 2008-02-07 13:04:55 ftanguy Exp $
+/* $Id: EcoreModelElementHelper.kmt,v 1.4 2008-04-02 08:39:30 cfaucher Exp $
  * Creation date: January 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -36,5 +36,22 @@ class EcoreModelElementHelper {
 			end
 		}
 		result := eop.asType(EOperation)
+	end
+	
+	operation setEStructuralFeatureProperties(self_ : Property, ecoreStructuralFeature : EStructuralFeature) : Void is do
+		ecoreStructuralFeature.name := self_.name
+		ecoreStructuralFeature.ordered := self_.isOrdered
+		ecoreStructuralFeature.unique := self_.isUnique
+		ecoreStructuralFeature.lowerBound := self_.lower
+		ecoreStructuralFeature.upperBound := self_.upper
+		//ecoreStructuralFeature.many := 
+		//ecoreStructuralFeature.required := 
+		//ecoreStructuralFeature.changeable := 
+		//ecoreStructuralFeature.volatile := 
+		//ecoreStructuralFeature.transient :=
+		//ecoreStructuralFeature.defaultValueLiteral := 
+		//ecoreStructuralFeature.defaultValue := 
+		//ecoreStructuralFeature.unsettable := 
+		ecoreStructuralFeature.derived := self_.isDerived
 	end
 }

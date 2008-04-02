@@ -1,4 +1,4 @@
-/* $Id: printJava.kmt,v 1.3 2008-03-11 09:35:32 cfaucher Exp $
+/* $Id: printJava.kmt,v 1.4 2008-04-02 08:39:30 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -27,8 +27,9 @@ using km2ecore::helper::ecore
 package structure {
 
 	aspect class Object {
-		operation print(context : KM2EcoreContext) : Void is
-			abstract
+		operation print(context : KM2EcoreContext) : Void is do
+			stdio.writeln("")
+		end
 	}
 	
 	aspect class Package {
@@ -40,8 +41,9 @@ package structure {
 	}
 	
 	aspect class TypeDefinition {
-		method print(context : KM2EcoreContext) : Void is
-			abstract
+		method print(context : KM2EcoreContext) : Void is do
+			stdio.writeln("")
+		end
 	}
 	
 	aspect class ClassDefinition {
@@ -57,8 +59,9 @@ package structure {
 	}
 	
 	aspect class Type {
-		method print(context : KM2EcoreContext) : Void is
-			abstract
+		method print(context : KM2EcoreContext) : Void is do
+			stdio.writeln("")
+		end
 	}
 	
 	aspect class PrimitiveType {
@@ -69,15 +72,14 @@ package structure {
 	}
 	
 	aspect class MultiplicityElement {
-		method print(context : KM2EcoreContext) : Void is do
-			//stdio.writeln("F2-311111: " + self.name)
+		method print(context : KM2EcoreContext) :Void is do
+			stdio.writeln("")
 		end
 	}
 	
 	aspect class Property {
 		method print(context : KM2EcoreContext) : Void from MultiplicityElement is do
-			//stdio.writeln("\tproperty " + self.name)
-			// Set the traceability
+			stdio.writeln("")
 		end
 	}
 	
@@ -92,23 +94,12 @@ package structure {
 			javaCode.append( self.createBehaviorJava(context) )
 			
 			// Finally add the EAnnotation containing the Java code in the Ecore model
-	        stdio.writeln(javaCode.toString)
+	        
+	        var stringToPrint : String init javaCode.toString
+	        //stringToPrint := stringToPrint.replace("/*CallVariable*/ ","").replace("/*Block3*/ ","").replace(" /*Block1*/ ","").replace(" /*Block1_*/ ","").replace(" /*Block2*/ ","")
+	        stdio.writeln(stringToPrint)
 		end
 	}
-	
-	
-	/* deprecated code
-	aspect class ParameterizedType {
-		method print(context : KM2EcoreContext) : Void is do
-			//empty
-		end
-	}
-	
-	aspect class ObjectTypeVariable {
-		method print(context : KM2EcoreContext) : Void is do
-			//do nothing
-		end
-	}*/
 
 }
 

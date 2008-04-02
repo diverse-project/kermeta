@@ -1,4 +1,4 @@
-/* $Id: EAnnotationHelper.kmt,v 1.4 2008-03-14 14:21:08 cfaucher Exp $
+/* $Id: EAnnotationHelper.kmt,v 1.5 2008-04-02 08:39:30 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -17,11 +17,11 @@ using ecore
 class EAnnotationHelper {
 	
 	operation createKermetaEAnnotation(key : String, ~value : String) : EAnnotation is do
-		result := create(KermetaEAnnotationSource.kermeta.toString(), key, ~value)
+		result := create(KermetaEAnnotationSource.kermeta.name.toString(), key, ~value)
 	end
 
 	operation createAbstract() : EAnnotation is do
-		result := createKermetaEAnnotation(KermetaEAnnotationKey.isAbstract.toString(), "true")
+		result := createKermetaEAnnotation(KermetaEAnnotationKey.isAbstract.name.toString(), "true")
 	end
 
 	operation create(source : String, key : String, ~value : String) : EAnnotation is do 

@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.14 2008-03-14 14:21:08 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.15 2008-04-02 08:39:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -44,7 +44,7 @@ package structure {
 				// The current property could have a setter
 				if not self.isReadOnly then
 					// todo compile the setter in an EAnnotation
-				end
+				end 
 				// todo compile the getter in an EAnnotation
 			end
 		end
@@ -54,7 +54,7 @@ package structure {
 	aspect class Operation {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := void
-			
+			 
 			var javaCode : StringBuffer init StringBuffer.new
 			
 			//stdio.writeln("\tCurrent operation: " + self.name + " has for type: " + self.type.toString)
@@ -163,10 +163,17 @@ package behavior {
 			end
 
 			if self.name == "writeln" then
-				result := result + " Block1 " + "println"
+				result := result + " /*Block1_*/ " + "println"
 			else
 				//stdio.writeln("self-self-self: " + self.name + " " + self.toString)
-				result := result + " /*Block1*/ " + /*getPP(self, self.name, context) +*/ self.name
+				
+				/*if tgt.createBehaviorJava(context).contains(".new()") or tgt.createBehaviorJava(context).contains(".new") then
+					result := result + CompilerHelperJava.new.ppEmfLikeCreateFactory(self.containedType.createBehaviorJava(context))
+				else*/
+					result := result + " /*Block1*/
+					 " + /*getPP(self, self.name, context) +*/
+					  self.name
+				//end
 			end
 
 			if self.container.isInstanceOf(Block) then
@@ -429,6 +436,7 @@ package behavior {
 		end
 	}
 	
+	/** Complete */
 	aspect class Rescue {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := "catch"
@@ -438,15 +446,15 @@ package behavior {
 			result := result + " {\n"
 			//pushPrefix();
 			
-			if not self.body.isVoid() then
-				//result := result + "self.body: " + self.body.statement{stm | result := result + "stm: " + stm.toString/*createBehaviorJava(context)*/}
-			end
-			result := result + self.body.createBehaviorJava(context) + "\n}"
+			self.eachOwnedElement{e | 
+				result := result + e.createBehaviorJava(context)
+			}
 			//popPrefix();
 		end
 	}
 	//**** End **** Managing of the exception ****//
 	
+	/** Complete */
 	aspect class SelfExpression {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := "this"
@@ -465,12 +473,14 @@ package behavior {
 			//popPrefix();
 			end
 			if not self.elseBody.isVoid() then
-				result := result + /*getPrefix() +*/ "} else {\n"
+				result := result + /*getPrefix() +*/
+				 "} else {\n"
 				//pushPrefix();
 				result := result + self.elseBody.createBehaviorJava(context) + "\n"
 				//popPrefix();
 			end
-			result := result + /*getPrefix() +*/ "}"
+			result := result + /*getPrefix() +*/
+			 "}"
 		end
 	}
 	
@@ -518,7 +528,7 @@ package behavior {
 	
 	aspect class TypeLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
-			result := "//TODO TypeLiteral" + self.toString
+			result := ""//TODO TypeLiteral" + self.toString
 			result := result + self.typeref.createBehaviorJava(context)
 		end
 	}

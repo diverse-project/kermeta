@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.7 2008-03-14 14:21:08 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.8 2008-04-02 08:39:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -58,7 +58,7 @@ aspect class Package {
 		// Compile the owned elements
 		self.eachOwnedElement{ cd | cd.applyPass1(context) }
 	end
-} 
+}
 
 aspect class PrimitiveType {
 	method applyPass1(context : KM2EcoreContext) is do
@@ -85,7 +85,6 @@ aspect class Enumeration {
 		self.ecoreModelElement := ecoreEnumeration
 		// Compile the owned elements
 		self.eachOwnedElement{ l | l.applyPass1(context) }
-		
 	end
 } 
   
@@ -111,7 +110,34 @@ aspect class ClassDefinition {
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreClass
 		// Compile the owned elements
-		self.eachOwnedElement{ o | o.applyPass1(context) }
+		self.eachOwnedElement{ o |
+			o.applyPass1(context)
+		}
+		
+		// If this ClassDefinition is a subType of kermeta::standard::ValueType then
+		// an EAttribute value is added to allow the use of the value of a ValueType
+		/*if not self.superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
+			var type_tag : Tag init self.ownedTags.detect{ t |
+				t.name == "selfType"
+			}
+			if not type_tag.isVoid() then
+				var ecoreDataType : EDataType init EDataType.new
+				ecoreDataType.name := "K" + self.name + "DataType"
+				ecoreDataType.instanceClassName := type_tag.~value
+				p.ecoreModelElement.eClassifiers.add(ecoreDataType)
+			
+				var myEAttribute : EAttribute init EAttribute.new
+				myEAttribute.name := "value"
+				myEAttribute.ordered := true
+				myEAttribute.unique := true
+				myEAttribute.lowerBound := 0
+				myEAttribute.upperBound := 1
+				myEAttribute.derived := false
+				myEAttribute.eType := ecoreDataType
+				
+				self.ecoreModelElement.eStructuralFeatures.add(myEAttribute)
+			end
+		end*/
 	end
 	
 } 
@@ -196,13 +222,14 @@ aspect class Tag {
 		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement(context)
 		// Setting the container
 		var c : Object init self.container
+		
 		if ( c.isInstanceOf(ModelingUnit) ) then
 			c.asType(ModelingUnit).entryPoints.add(ecoreAnnotation)
 		else
 			var p : Property init ObjectHelper.new.getPropertyValue(c, "ecoreModelElement")
-			if ( p!= void ) then
-				var ecoreModelElement : EModelElement init c.get(p).asType(EModelElement)
-				self.ecoreModelElement.eAnnotations.add(ecoreAnnotation)
+			if ( not p.isVoid() ) then
+				var ecoreModelElement_retrieved : EModelElement init c.get(p).asType(EModelElement)
+				ecoreModelElement_retrieved.eAnnotations.add(ecoreAnnotation)
 			end
 		end
 		// Setting the ecore proxy
