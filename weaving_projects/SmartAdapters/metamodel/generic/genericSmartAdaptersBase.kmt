@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.13 2008-03-27 16:33:50 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.14 2008-04-03 07:18:02 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -38,7 +38,7 @@ package smartadapters
 			
 			attribute adapt : oset Adaptation[0..*]#adapter
 						
-			attribute name : ecore::EString
+			attribute name : String
 		}
 
 		/**
@@ -146,9 +146,9 @@ package smartadapters
 	{
 		class AdapterElement
 		{
-			attribute name : ecore::EString
+			attribute name : String
 
-			attribute isOptional : ecore::EBoolean
+			attribute isOptional : Boolean
 
 		}
 		class DerivableAdapter inherits smartadapters::core::Adapter

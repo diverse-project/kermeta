@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.19 2008-03-18 17:20:01 bmorin Exp $
+/* $Id: weaver.kmt,v 1.20 2008-04-03 07:18:49 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -14,8 +14,6 @@ require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
 
- 
-using ecore
 using kermeta::standard 
 using kermeta::utils
 using kermeta::persistence
@@ -27,14 +25,20 @@ using kermeta::pattern::flora2
 
 class Weaver
 {
-	operation weaving(baseModelUri:String, adapterUri:String, adaptMMUri:String, domainMMUri:String, domainMMPatternUri:String, resultUri:String) : Void is do 
+	attribute doWeave : Boolean
+	attribute doUnweave : Boolean
+	attribute doMatch : Boolean
+	attribute displayInfo : Boolean
+
+	operation weaving(baseModelUri : String, adapterUri : String, adaptMMUri : String, 
+			domainMMUri : String, domainMMPatternUri : String, resultUri : String) : Void is do 
 		var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
 	    handler.initialize()
 		var repository:EMFRepository init EMFRepository.new
 
-		var inputMetamodel:Sequence<EPackage> init Sequence<EPackage>.new 
+		var inputMetamodel:Sequence<ecore::EPackage> init Sequence<ecore::EPackage>.new 
 		handler.loadEcoreModel(EMFRepository.new, domainMMUri).each{p | inputMetamodel.add(p)}
-		var inputPatternMetamodel:Sequence<EPackage> init Sequence<EPackage>.new 
+		var inputPatternMetamodel:Sequence<ecore::EPackage> init Sequence<ecore::EPackage>.new 
 		handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri).each{p | inputPatternMetamodel.add(p)}
 
 		stdio.writeln("Loading models...")
@@ -77,20 +81,9 @@ class Weaver
 
 		adapter.checkAllInvariants
 		
-		var doWeave : Boolean
-		var doUnweave : Boolean
-		var doMatch : Boolean
-		var displayInfo : Boolean
-		
-		stdio.writeln("Initializing default actions")
-		doWeave := stdio.read("$>default value for doWeave ? (true/false): ").toBoolean
-		doUnweave := stdio.read("$>default value for doUnweave ? (true/false): ").toBoolean
-		doMatch := stdio.read("$>default value for doMatch ? (true/false): ").toBoolean
-		displayInfo := stdio.read("$>display weaving info ? (y/n): ").toBoolean
-		stdio.writeln("")
-		
 		if (adapter.adapt.size > 0) then
 			adapter.initClone
+			initDefaultValues
 			if (adapter.~aspect.template != void) then
 				/*---Pattern matching---*/
 				stdio.writeln("Searching base model elements matching template...")
@@ -121,13 +114,12 @@ class Weaver
 					 binding.keys.each{k | stdio.write("-------\n"+k.printObject+"bound to\n"+binding.getValue(k).printObject)}
 					 stdio.writeln("*******************************************")
 					 stdio.writeln("")				 
-					 //interaction with user
 					 do
 						 doAction := stdio.read("$>weave the aspect for this binding ? (y/n/default=any): ").toBoolean
 					 rescue (e : kermeta::exceptions::Exception)
 					 	doAction := doWeave
 					 end
-					 //apply composition protocol for the current binding
+					 //weave the aspect for the current binding
 					 if doAction then
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("#>weaving the aspect for binding"+i.toString+"...")
@@ -135,12 +127,12 @@ class Weaver
 					 	stdio.writeln("#>weaving the aspect for binding"+i.toString+" done!")
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("")
-					 	//interaction with user
 					 	do
 					 		doAction := stdio.read("$>unweave the aspect for this binding ? (y/n/default=any): ").toBoolean
 					 	rescue (e : kermeta::exceptions::Exception)
 					 		doAction := doUnweave
 					 	end
+					 	//unweave the aspect for the current binding
 					 	if doAction then
 					 		stdio.writeln("----------------------------")
 					 		stdio.writeln("#>unweaving the aspect for binding"+i.toString+"...")
@@ -151,14 +143,12 @@ class Weaver
 					 	end
 					 	adapter.updateClones
 					 	if (iteBindings.hasNext and not doAction) then //weaving + unweaving = no change
-					 		//interaction with user
 						 	do
 						 		doAction := stdio.read("$>execute pattern matching ? (y/n/default=any): ").toBoolean
 						 	rescue (e : kermeta::exceptions::Exception)
 						 		doAction := doMatch
 						 	end
-						 	//executing pattern matching again 
-						 	//(the composition might have change the base model)
+						 	//executing pattern matching again (the composition might have change the base model)
 						 	if doAction then
 						 		iteBindings := Iterator<Hashtable<Object, Object>>.new
 						 		iteBindings := matcher.optimizedMatch(inputMetamodel, inputModel, adapter.~aspect.template, true, false, true)
@@ -182,6 +172,23 @@ class Weaver
 			e.message:="WeavingException: Adapter contains no adaptation or at least one adaptation is not well typed"
 			raise e
 		end		
+	end
+	
+	operation initDefaultValues() : Void is
+	do
+		stdio.writeln("Initializing default actions")
+		do
+			doWeave := stdio.read("$>default value for doWeave ? (true/false): ").toBoolean
+			doUnweave := stdio.read("$>default value for doUnweave ? (true/false): ").toBoolean
+			doMatch := stdio.read("$>default value for doMatch ? (true/false): ").toBoolean
+			displayInfo := stdio.read("$>display weaving info ? (y/n): ").toBoolean
+		rescue (e : kermeta::exceptions::Exception)
+			stdio.writeln("Cannot read the value")
+			stdio.writeln("Please try again (use yes/y/1/true and no/n/0/false)")
+			stdio.writeln("")
+			initDefaultValues
+		end
+		stdio.writeln("")
 	end
 
     operation loadModel(repository : EMFRepository, modelPath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   
