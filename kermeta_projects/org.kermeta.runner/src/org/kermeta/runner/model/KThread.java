@@ -1,6 +1,6 @@
 
 
-/*$Id: KThread.java,v 1.1 2008-04-01 15:10:15 ftanguy Exp $
+/*$Id: KThread.java,v 1.2 2008-04-03 12:54:49 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KThread.java
 * License : EPL
@@ -141,7 +141,7 @@ public class KThread extends KDebugElement implements IThread {
 	 * @see org.eclipse.debug.core.model.IStep#canStepInto()
 	 */
 	public boolean canStepInto() {
-		return false;
+		return isSuspended();
 	}
 	
 	/* (non-Javadoc)
@@ -169,6 +169,7 @@ public class KThread extends KDebugElement implements IThread {
 	 * @see org.eclipse.debug.core.model.IStep#stepInto()
 	 */
 	public void stepInto() throws DebugException {
+		((KDebugTarget)getDebugTarget()).stepInto();
 	}
 	
 	/* (non-Javadoc)

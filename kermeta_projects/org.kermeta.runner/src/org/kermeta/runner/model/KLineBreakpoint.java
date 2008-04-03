@@ -1,6 +1,6 @@
 
 
-/*$Id: KLineBreakpoint.java,v 1.1 2008-04-01 15:10:15 ftanguy Exp $
+/*$Id: KLineBreakpoint.java,v 1.2 2008-04-03 12:54:49 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBreakPoint.java
 * License : EPL
@@ -46,7 +46,7 @@ public class KLineBreakpoint extends LineBreakpoint {
 			throws CoreException {
 		IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
 			public void run(IProgressMonitor monitor) throws CoreException {
-				IMarker marker = resource.createMarker("org.kermeta.debug.lineBreakpointMarker");
+				IMarker marker = resource.createMarker("org.kermeta.runner.lineBreakpointMarker");
 				setMarker(marker);
 				marker.setAttribute(IBreakpoint.ENABLED, Boolean.TRUE);
 				marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);

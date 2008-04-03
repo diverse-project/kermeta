@@ -1,6 +1,6 @@
 
 
-/*$Id: KDebugElement.java,v 1.1 2008-04-01 15:10:15 ftanguy Exp $
+/*$Id: KDebugElement.java,v 1.2 2008-04-03 12:54:49 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KDebugElement.java
 * License : EPL
@@ -21,7 +21,7 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IDebugElement;
 import org.eclipse.debug.core.model.IDebugTarget;
-import org.kermeta.runner.KDebugPlugin;
+import org.kermeta.runner.RunnerPlugin;
 import org.kermeta.runner.launching.KConstants;
 
 public class KDebugElement extends PlatformObject implements IDebugElement {
@@ -72,7 +72,7 @@ public class KDebugElement extends PlatformObject implements IDebugElement {
 	}
 	
 	protected void abort(String message, Throwable e) throws DebugException {
-		throw new DebugException(new Status(IStatus.ERROR, KDebugPlugin.getDefault().getDescriptor().getUniqueIdentifier(), 
+		throw new DebugException(new Status(IStatus.ERROR, RunnerPlugin.getDefault().getDescriptor().getUniqueIdentifier(), 
 				DebugPlugin.INTERNAL_ERROR, message, e));
 	}
 	

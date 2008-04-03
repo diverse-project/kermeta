@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<!-- $Id: kermeta_log4j_configuration.xml,v 1.9 2008-03-05 13:40:06 dvojtise Exp $ -->
+<!-- $Id: kermeta_log4j_configuration.xml,v 1.10 2008-04-03 12:54:53 ftanguy Exp $ -->
 <!-- Description: This is the configuration file for log4j it allows to tune the level of log you will receive 
 	it also allows to tune where you will receive them. -->
 
@@ -136,7 +136,13 @@
 	</logger>  
     <logger name="MergerPlugin">
 		<level value="INFO"/>
-	</logger>  
+	</logger>
+	<logger name="kermeta.runner">
+		<level value="DEBUG"/> 
+	</logger>
+	<logger name="kermeta.interpreter">
+		<level value="DEBUG"/> 
+	</logger>
   
   <!-- define here which appender you want to use -->
   <root>

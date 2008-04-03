@@ -35,7 +35,7 @@ abstract public class AbstractLaunchConfiguration implements ILaunchConfiguratio
 		String mainOperation = configuration.getAttribute( KConstants.KM_OPERATIONNAME, (String) null);
 		String argumentsInline = configuration.getAttribute( KConstants.KM_ARGUMENTS, (String) null);
 		String[] arguments = null;
-		if ( argumentsInline != null )
+		if ( argumentsInline != null && ! argumentsInline.equals("") )
 			arguments = argumentsInline.split(" ");
 		
 		try {
@@ -45,14 +45,7 @@ abstract public class AbstractLaunchConfiguration implements ILaunchConfiguratio
 			} else if ( mode.equals(ILaunchManager.DEBUG_MODE) ) {
 				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), requestPort, eventPort, mainClass, mainOperation, arguments, this);
 				String label =  fileName + " " + mode;
-				KProcess process = (KProcess) DebugPlugin.newProcess(launch, basicProcess, label);
-				
-				while ( ! process.getInterpreter().hasStarted() ) {
-					synchronized(this) {
-						wait();
-					}
-				}
-				
+				KProcess process = (KProcess) DebugPlugin.newProcess(launch, basicProcess, label);			
 				IDebugTarget target = new KDebugTarget(launch, process, requestPort, eventPort);
 				launch.addDebugTarget(target);
 			}
@@ -62,9 +55,7 @@ abstract public class AbstractLaunchConfiguration implements ILaunchConfiguratio
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		} 
 	}
 	
 	abstract protected boolean isContraint();

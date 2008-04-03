@@ -1,23 +1,29 @@
 package org.kermeta.runner;
 
+import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class KDebugPlugin extends AbstractUIPlugin {
+public class RunnerPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.kermeta.debug";
+	public static final String PLUGIN_ID = "org.kermeta.runner";
 
 	// The shared instance
-	private static KDebugPlugin plugin;
+	private static RunnerPlugin plugin;
+	
+	/** Logger to get the error of this interpreter */
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("kermeta.runner");
 	
 	/**
 	 * The constructor
 	 */
-	public KDebugPlugin() {
+	public RunnerPlugin() {
 	}
 
 	/*
@@ -43,7 +49,7 @@ public class KDebugPlugin extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static KDebugPlugin getDefault() {
+	public static RunnerPlugin getDefault() {
 		return plugin;
 	}
 

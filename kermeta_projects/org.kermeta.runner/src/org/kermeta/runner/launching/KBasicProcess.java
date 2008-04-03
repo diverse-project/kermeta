@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.3 2008-04-02 09:35:24 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.4 2008-04-03 12:54:50 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -91,6 +91,8 @@ public class KBasicProcess extends Process {
 		_interpreter.setErrorStream( es );
 		_interpreter.setEntryPoint(mainClass, mainOperation);
 		_interpreter.setParameters(parameters);
+		// Forces the interpreter to creates the delegates and especially the server so that the debug client can connect.
+		_interpreter.ready();
 		
 		_delegate = delegate;
 	}
@@ -161,8 +163,6 @@ public class KBasicProcess extends Process {
 
 	@Override
 	public int waitFor() throws InterruptedException {
-		// Deblocking the delegate so that it can launch the debug view.
-		makeDelegateWaiting();
 		// Starting the interpreter.
 		_interpreter.launch();
 		return 0;
@@ -183,20 +183,24 @@ public class KBasicProcess extends Process {
 		return _outputStream;
 	}
 
-	private void makeDelegateWaiting() {
+	/*public void makeDelegateWaiting() {
 		if ( _delegate != null ) {
 			Runnable r = new Runnable() {
 				
 				public void run() {
 					synchronized(_delegate) {
-						_delegate.notify();
+						try {
+							_delegate.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			};
 			Thread t = new Thread(r);
 			t.start();
 		}
-	}
+	}*/
 }
 
 

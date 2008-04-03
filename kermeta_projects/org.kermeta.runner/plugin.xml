@@ -47,7 +47,7 @@
       <breakpoint
             class="org.kermeta.runner.model.KLineBreakpoint"
             id="org.kermeta.debug.lineBreakpoint"
-            markerType="org.kermeta.debug.lineBreakpointMarker"
+            markerType="org.kermeta.runner.lineBreakpointMarker"
             name="Kermeta Breakpoint">
       </breakpoint>
    </extension>

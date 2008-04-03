@@ -1,6 +1,6 @@
 
 
-/*$Id: KDebugTarget.java,v 1.1 2008-04-01 15:10:15 ftanguy Exp $
+/*$Id: KDebugTarget.java,v 1.2 2008-04-03 12:54:49 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KDebugTarget.java
 * License : EPL
@@ -41,6 +41,7 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IValue;
+import org.kermeta.runner.RunnerPlugin;
 import org.kermeta.runner.launching.KConstants;
 import org.kermeta.runner.model.variable.KAbstractVariable;
 
@@ -97,6 +98,7 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 			while (!isTerminated() && event != null) {
 				try {
 					event = fEventReader.readLine();
+					RunnerPlugin.internalLog.debug("Debug Event : " + event);
 					if (event != null) {
 						fThread.setBreakpoints(null);
 						fThread.setStepping(false);
@@ -104,7 +106,7 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 							started();
 						} else if (event.equals("terminated")) {
 							terminated();
-							sendRequest("finish");
+							//sendRequest("finish");
 						} else if (event.startsWith("resumed")) {
 							if (event.endsWith("step")) {
 								fThread.setStepping(true);
@@ -124,9 +126,7 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 					}
 				} catch (IOException e) {
 					terminated();
-				} catch (DebugException e) {
-					e.printStackTrace();
-				} 
+				}
 			}
 			return Status.OK_STATUS;
 		}
@@ -202,7 +202,8 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 	 */
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
 		if (breakpoint.getModelIdentifier().equals(KConstants.K_DEBUG_MODEL)) {
-			try {
+			return true;
+			/*try {
 				String program = getLaunch().getLaunchConfiguration().getAttribute(KConstants.ATTR_K_PROGRAM, (String)null);
 				if (program != null) {
 					IMarker marker = breakpoint.getMarker();
@@ -212,7 +213,7 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 					}
 				}
 			} catch (CoreException e) {
-			}			
+			}*/			
 		}
 		return false;
 	}
@@ -452,6 +453,15 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 	}
 	
 	/**
+	 * Single step the interpreter.
+	 * 
+	 * @throws DebugException if the request fails
+	 */
+	protected void stepInto() throws DebugException {
+		sendRequest("stepInto");
+	}
+	
+	/**
 	 * Returns the current value of the given variable.
 	 * 
 	 * @param variable
@@ -499,23 +509,22 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 	 */
 	private void breakpointHit(String event) {
 		// determine which breakpoint was hit, and set the thread's breakpoint
-		int lastSpace = event.lastIndexOf(' ');
-		if (lastSpace > 0) {
-			String line = event.substring(lastSpace + 1);
-			int lineNumber = Integer.parseInt(line);
-			IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(KConstants.K_DEBUG_MODEL);
-			for (int i = 0; i < breakpoints.length; i++) {
-				IBreakpoint breakpoint = breakpoints[i];
-				if (supportsBreakpoint(breakpoint)) {
-					if (breakpoint instanceof ILineBreakpoint) {
-						ILineBreakpoint lineBreakpoint = (ILineBreakpoint) breakpoint;
-						try {
-							if (lineBreakpoint.getLineNumber() == lineNumber) {
-								fThread.setBreakpoints(new IBreakpoint[]{breakpoint});
-								break;
-							}
-						} catch (CoreException e) {
+		String[] strings = event.split(" ");
+		System.out.println();
+		String file = strings[2].replace("platform:/resource", "");
+		int lineNumber = Integer.parseInt(strings[3]);
+		IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(KConstants.K_DEBUG_MODEL);
+		for (int i = 0; i < breakpoints.length; i++) {
+			IBreakpoint breakpoint = breakpoints[i];
+			if (supportsBreakpoint(breakpoint)) {
+				if (breakpoint instanceof ILineBreakpoint) {
+					ILineBreakpoint lineBreakpoint = (ILineBreakpoint) breakpoint;
+					try {
+						if (lineBreakpoint.getLineNumber() == lineNumber && lineBreakpoint.getMarker().getResource().getFullPath().toString().equals(file)) {
+							fThread.setBreakpoints(new IBreakpoint[]{breakpoint});
+							break;
 						}
+					} catch (CoreException e) {
 					}
 				}
 			}

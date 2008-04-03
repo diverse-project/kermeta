@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Debug Plug-in
 Bundle-SymbolicName: org.kermeta.runner;singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Activator: org.kermeta.runner.KDebugPlugin
+Bundle-Activator: org.kermeta.runner.RunnerPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.debug.core,
