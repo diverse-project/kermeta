@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.4 2008-04-03 12:54:50 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.5 2008-04-03 15:09:37 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -51,7 +51,6 @@ public class KBasicProcess extends Process {
 	private PipedOutputStream _interpreterErrorStream;
 	private PipedInputStream _interpreterInputStream;
 	
-	private ILaunchConfigurationDelegate _delegate;
 	
 	public Interpreter getInterpreter() {
 		return _interpreter;
@@ -73,7 +72,7 @@ public class KBasicProcess extends Process {
 		_interpreter.setParameters(parameters);
 	}
 	
-	public KBasicProcess(String file, boolean isConstraint, int requestPort, int eventPort, String mainClass, String mainOperation, String[] parameters, ILaunchConfigurationDelegate delegate) throws IOException, NotRegisteredURIException, URIMalformedException {
+	public KBasicProcess(String file, boolean isConstraint, int requestPort, int eventPort, String mainClass, String mainOperation, String[] parameters) throws IOException, NotRegisteredURIException, URIMalformedException {
 		initializeStreams();
 		BufferedReader inputReader = new BufferedReader( new InputStreamReader( _interpreterInputStream ) );
 		PrintStream os = new PrintStream(_interpreterOutputStream);
@@ -94,7 +93,6 @@ public class KBasicProcess extends Process {
 		// Forces the interpreter to creates the delegates and especially the server so that the debug client can connect.
 		_interpreter.ready();
 		
-		_delegate = delegate;
 	}
 	
 	private void initializeStreams() {

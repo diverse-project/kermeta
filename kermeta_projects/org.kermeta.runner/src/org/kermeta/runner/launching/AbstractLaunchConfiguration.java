@@ -43,7 +43,7 @@ abstract public class AbstractLaunchConfiguration implements ILaunchConfiguratio
 				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), mainClass, mainOperation, arguments);
 				DebugPlugin.newProcess(launch, basicProcess, fileName + " " + mode);
 			} else if ( mode.equals(ILaunchManager.DEBUG_MODE) ) {
-				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), requestPort, eventPort, mainClass, mainOperation, arguments, this);
+				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), requestPort, eventPort, mainClass, mainOperation, arguments);
 				String label =  fileName + " " + mode;
 				KProcess process = (KProcess) DebugPlugin.newProcess(launch, basicProcess, label);			
 				IDebugTarget target = new KDebugTarget(launch, process, requestPort, eventPort);

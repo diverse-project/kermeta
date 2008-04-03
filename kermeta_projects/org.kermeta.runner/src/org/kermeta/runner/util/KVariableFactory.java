@@ -1,6 +1,6 @@
 
 
-/*$Id: KVariableFactory.java,v 1.1 2008-04-01 15:10:13 ftanguy Exp $
+/*$Id: KVariableFactory.java,v 1.2 2008-04-03 15:09:37 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KVariableFactory.java
 * License : EPL
@@ -15,6 +15,7 @@ package org.kermeta.runner.util;
 import org.kermeta.runner.model.KStackFrame;
 import org.kermeta.runner.model.variable.KAbstractVariable;
 import org.kermeta.runner.model.variable.KAttribute;
+import org.kermeta.runner.model.variable.KCollectionElement;
 import org.kermeta.runner.model.variable.KParameter;
 import org.kermeta.runner.model.variable.KProperty;
 import org.kermeta.runner.model.variable.KReference;
@@ -34,6 +35,8 @@ public class KVariableFactory {
 			return new KProperty(frame, strings[1]);
 		} else if ( strings[0].equals("attribute") ) {
 			return new KAttribute(frame, strings[1]);	
+		} else if ( strings[0].equals("index") ) {
+			return new KCollectionElement(frame, strings[1]);
 		}
 		return null;
 	}
@@ -50,6 +53,8 @@ public class KVariableFactory {
 			return new KProperty(parent, strings[1]);
 		} else if ( strings[0].equals("attribute") ) {
 			return new KAttribute(parent, strings[1]);	
+		} else if ( strings[0].equals("index") ) {
+			return new KCollectionElement(parent, strings[1]);
 		}
 		return null;
 	}

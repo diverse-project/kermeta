@@ -1,6 +1,6 @@
 
 
-/*$Id: KValue.java,v 1.1 2008-04-01 15:10:15 ftanguy Exp $
+/*$Id: KValue.java,v 1.2 2008-04-03 15:09:37 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KValue.java
 * License : EPL
@@ -36,12 +36,14 @@ public class KValue extends KDebugElement implements IValue {
 	}
 	
 	private void initializeFromData(String data) {
-		String[] strings = data.split("\\|");
-		fValue = strings[0];
-		_members = new ArrayList<IVariable>();
-		for ( int i = 1; i < strings.length; i++ ) {
-			IVariable variable = KVariableFactory.createVariable(_variable, strings[i]);
-			_members.add(variable);
+		if ( data != null ) {
+			String[] strings = data.split("\\|");
+			fValue = strings[0];
+			_members = new ArrayList<IVariable>();
+			for ( int i = 1; i < strings.length; i++ ) {
+				IVariable variable = KVariableFactory.createVariable(_variable, strings[i]);
+				_members.add(variable);
+			}
 		}
 	}
 	
