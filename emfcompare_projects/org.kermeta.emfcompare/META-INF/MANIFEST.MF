@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Emf Compare Wrapper for Kermeta Plug-in
-Bundle-SymbolicName: org.kermeta.emfcompare
+Bundle-Name: Emf Compare Wrapper for Kermeta
+Bundle-SymbolicName: org.kermeta.emfcompare;singleton:=true
 Bundle-Version: 0.0.99.qualifier
 Bundle-Activator: org.kermeta.emfcompare.Activator
 Require-Bundle: org.eclipse.ui,
