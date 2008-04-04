@@ -5,7 +5,6 @@ Bundle-SymbolicName: org.kermeta.ket.texteditor;singleton:=true
 Bundle-Version: 1.1.0
 Require-Bundle: org.eclipse.ui.ide,
  org.eclipse.core.runtime,
- fr.irisa.triskell.kermeta.runner,
  fr.irisa.triskell.kermeta.model,
  fr.irisa.triskell.kermeta.texteditor,
  org.eclipse.ui.editors,
