@@ -8,7 +8,7 @@ using kermeta::standard
 using kermeta::persistence
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.2 2007-12-17 13:34:06 cfaucher Exp $
+ * $Id: resource.kmt,v 1.3 2008-04-04 09:29:28 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -24,8 +24,7 @@ using kermeta::persistence
 /**
  * 
  */
-@aspect "true"
-abstract class Resource inherits kermeta::standard::Set<Object>
+aspect abstract class Resource inherits kermeta::standard::Set<Object>
 {
 	/**
 	 * TODO
@@ -45,8 +44,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 /**
  *  
  */
-@aspect "true"
-class EMFResource inherits Resource
+aspect class EMFResource inherits Resource
 {
 	
 	/**
