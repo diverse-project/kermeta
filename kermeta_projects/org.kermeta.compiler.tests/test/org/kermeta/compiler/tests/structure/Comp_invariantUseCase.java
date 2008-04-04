@@ -1,5 +1,5 @@
 
-/*$Id: Comp_invariantUseCase.java,v 1.3 2008-02-13 10:40:52 cfaucher Exp $
+/*$Id: Comp_invariantUseCase.java,v 1.4 2008-04-04 09:51:35 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
