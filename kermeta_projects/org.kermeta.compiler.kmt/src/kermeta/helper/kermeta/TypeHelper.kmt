@@ -1,8 +1,7 @@
-/* $Id: TypeHelper.kmt,v 1.5 2008-03-14 14:21:08 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.6 2008-04-04 09:51:09 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
- * Authors: Francois Tanguy <ftanguy@irisa.fr>
  */
 
 package km2ecore::helper::kermeta;
@@ -27,11 +26,13 @@ class TypeHelper {
 
 	operation isPrimitiveType(type : Type, context : KM2EcoreContext) : Boolean is do 
 		result := type.isInstanceOf(PrimitiveType)
-		if ( not result and type.isInstanceOf(Class) ) then
+		
+		// Check if the type is in the types map 
+		/*if not result and type.isInstanceOf(Class) then
 			var c : Class init type.asType(Class)
 			var qualifiedName : String init c.typeDefinition.qualifiedName()
 			result := context.javaTypeMapping.types_mapping.containsKey(qualifiedName)
-		end
+		end*/
 	end
 	
 	operation getClassDefinition(c : Class) : ClassDefinition is do
@@ -39,7 +40,7 @@ class TypeHelper {
 	end
 	
 	operation getClassFromPrimitiveType( p : Type ) : Class is do
-		if ( p.isInstanceOf(PrimitiveType) ) then
+		if p.isInstanceOf(PrimitiveType) then
 			if ( p.asType(PrimitiveType).instanceType.isInstanceOf(Class) ) then
 				result := p.asType(PrimitiveType).instanceType.asType(Class)
 			else
@@ -48,5 +49,25 @@ class TypeHelper {
 		else
 			result := void
 		end
+	end
+	
+	// Check if the type is a subType of ValueType => we have to consider as a PrimitiveType, i.e.: an EAttribute
+	operation isValueType(type : Type, context : KM2EcoreContext) : Boolean is do
+		result := false
+		if type.isInstanceOf(ParameterizedType) then
+			var pt : ParameterizedType init type.asType(ParameterizedType)
+			
+			if pt.typeDefinition.isInstanceOf(ClassDefinition) then
+				var cd : ClassDefinition init pt.typeDefinition.asType(ClassDefinition)
+				if not cd.superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
+					result := true
+				end
+			end
+		end
+		/*if type.isInstanceOf(ParameterizedType) and (not type.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid()) then
+			result := true
+		else
+			result := false
+		end*/
 	end
 }

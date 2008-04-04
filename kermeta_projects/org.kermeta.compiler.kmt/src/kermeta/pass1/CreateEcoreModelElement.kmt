@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.7 2008-04-02 08:39:30 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.8 2008-04-04 09:51:09 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -18,6 +18,7 @@ require "../common/exception.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using ecore
+using kermeta::utils
 using km2ecore
 using km2ecore::helper::ecore
 using km2ecore::helper::kermeta
@@ -33,19 +34,19 @@ aspect class ModelingUnit {
 		// Creation of the require entry
 		var requireEntry : EStringToStringMapEntry init EStringToStringMapEntry.new
 		requireEntry.key := "require"
-		var v : String init String.new
+		var v : StringBuffer init StringBuffer.new
 		self.requires.each{r|
 			v.append( r.uri + "|" )
 		}
-		requireEntry.~value := v
+		requireEntry.~value := v.toString()
 		// Creation of the using entry
 		var usingEntry : EStringToStringMapEntry init EStringToStringMapEntry.new
 		usingEntry.key := "using"
-		v := String.new
+		v := StringBuffer.new
 		self.usings.each{u|
 			v.append( u.qualifiedName + "|" )
 		}
-		usingEntry.~value := v
+		usingEntry.~value := v.toString()
 		// Setting the details
 		ecoreAnnotation.details.add(requireEntry)
 		ecoreAnnotation.details.add(usingEntry)
@@ -215,7 +216,7 @@ aspect class Constraint {
 aspect class Property {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EStructuralFeature is do
 		var ecoreStructuralFeature : EStructuralFeature
-		if ( self.isComposite and TypeHelper.new.isPrimitiveType(self.type.asType(Type), context) ) then
+		if ( self.isComposite and (TypeHelper.new.isPrimitiveType(self.type.asType(Type), context) or TypeHelper.new.isValueType(self.type.asType(Type), context) ) ) then
 			ecoreStructuralFeature := EAttribute.new
 			//ecoreStructuralFeature.iD := 
 		else

@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.10 2008-04-02 08:39:30 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.11 2008-04-04 09:51:09 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -48,25 +48,25 @@ package structure {
 	
 	aspect class ClassDefinition {
 		method applyPass2(context : KM2EcoreContext) is do
-			self.setLinks() 
+			self.setLinks(context) 
 			super(context)
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			//stdio.writeln("Pass2 ClassDefinition : " + self.name)
-			self.setLinks() 
+			self.setLinks(context) 
 			super(context)
 		end
 	}
 	
 	aspect class Property {
 		method applyPass2(context : KM2EcoreContext) is do
-			self.setLinks()
+			self.setLinks(context)
 			super(context)
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
-			self.setLinks()
+			self.setLinks(context)
 			super(context)
 			self.createBehaviorJava(context)
 		end
@@ -74,13 +74,13 @@ package structure {
 	
 	aspect class Operation {
 		method applyPass2(context : KM2EcoreContext) is do
-			self.setLinks()
+			self.setLinks(context)
 			super(context)
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			//stdio.writeln("Pass2 ClassDefinition")
-			self.setLinks()
+			self.setLinks(context)
 			super(context)
 			self.createBehaviorJava(context)
 		end
@@ -88,13 +88,13 @@ package structure {
 	
 	aspect class Parameter {
 		method applyPass2(context : KM2EcoreContext) is do
-			self.setLinks()
+			self.setLinks(context)
 			super(context)
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			//stdio.writeln("Pass2 ClassDefinition")
-			self.setLinks()
+			self.setLinks(context)
 			super(context)
 		end
 	}

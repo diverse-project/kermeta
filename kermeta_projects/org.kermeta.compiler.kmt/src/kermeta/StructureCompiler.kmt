@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.18 2008-04-02 08:39:30 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.19 2008-04-04 09:51:09 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -31,6 +31,8 @@ class Main
 	reference context : KM2EcoreContext [1..1]
 
     operation main_inner() : Void is do
+    	//var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km"
+		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.ecore"
 		var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.ecore"
 

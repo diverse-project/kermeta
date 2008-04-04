@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.8 2008-04-02 08:39:30 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.9 2008-04-04 09:51:09 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -102,42 +102,49 @@ aspect class EnumerationLiteral {
   
 aspect class ClassDefinition {
 	method applyPass1(context : KM2EcoreContext) is do
-		// Creating the associated ecore class
-		var ecoreClass : EClass init self.createEcoreModelElement(context)		
-		// Setting the container
+		
+		// Getting the container
 		var p : Package init self.container().asType(Package)
-		p.ecoreModelElement.eClassifiers.add(ecoreClass)
-		// Setting the ecore proxy
-		self.ecoreModelElement := ecoreClass
-		// Compile the owned elements
-		self.eachOwnedElement{ o |
-			o.applyPass1(context)
-		}
 		
 		// If this ClassDefinition is a subType of kermeta::standard::ValueType then
 		// an EAttribute value is added to allow the use of the value of a ValueType
-		/*if not self.superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
+		if not self.superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
 			var type_tag : Tag init self.ownedTags.detect{ t |
-				t.name == "selfType"
+				t.name == "EMF_instanceClassName"
 			}
 			if not type_tag.isVoid() then
 				var ecoreDataType : EDataType init EDataType.new
-				ecoreDataType.name := "K" + self.name + "DataType"
+				ecoreDataType.name := self.name
 				ecoreDataType.instanceClassName := type_tag.~value
+				// Setting the container
 				p.ecoreModelElement.eClassifiers.add(ecoreDataType)
-			
-				var myEAttribute : EAttribute init EAttribute.new
-				myEAttribute.name := "value"
-				myEAttribute.ordered := true
-				myEAttribute.unique := true
-				myEAttribute.lowerBound := 0
-				myEAttribute.upperBound := 1
-				myEAttribute.derived := false
-				myEAttribute.eType := ecoreDataType
+				// Setting the ecore proxy
+				self.ecoreDataType := ecoreDataType
 				
-				self.ecoreModelElement.eStructuralFeatures.add(myEAttribute)
+				// Compile only the methods that are not taking directly
+				// into account by the target language like times() for an Integer
+				self.ownedOperation.each{ o |
+					var static_tag : Tag init o.ownedTags.detect{ t |
+						t.name == "EMF_static"
+					}
+					if not static_tag.isVoid() then
+						stdio.writeln("An EMF_static method has been detected: " + o.name)
+						//o.applyPass1(context)
+					end
+				}
 			end
-		end*/
+		else
+			// Creating the associated ecore class
+			var ecoreClass : EClass init self.createEcoreModelElement(context)		
+			// Setting the container
+			p.ecoreModelElement.eClassifiers.add(ecoreClass)
+			// Setting the ecore proxy
+			self.ecoreModelElement := ecoreClass
+			// Compile the owned elements
+			self.eachOwnedElement{ o |
+				o.applyPass1(context)
+			}
+		end
 	end
 	
 } 
