@@ -37,6 +37,7 @@ abstract public class AbstractLaunchConfiguration implements ILaunchConfiguratio
 		String[] arguments = null;
 		if ( argumentsInline != null && ! argumentsInline.equals("") )
 			arguments = argumentsInline.split(" ");
+		boolean constraint = configuration.getAttribute( KConstants.KM_CONSTRAINT, false);
 		
 		try {
 			if ( mode.equals(ILaunchManager.RUN_MODE) ) {

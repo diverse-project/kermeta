@@ -7,5 +7,5 @@ public class RunLaunchShortcut extends KLaunchShortcut {
 	public RunLaunchShortcut() {
 		super( KConstants.RUN_CONFIGURATION );
 	}
-
+	
 }

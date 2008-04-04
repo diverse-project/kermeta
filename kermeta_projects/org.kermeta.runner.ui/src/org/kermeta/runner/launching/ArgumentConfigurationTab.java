@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.1 2008-04-01 15:10:54 ftanguy Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.2 2008-04-04 09:29:32 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -41,6 +41,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
@@ -59,7 +60,6 @@ import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.checker.KermetaUnitChecker;
 import org.kermeta.runner.dialogs.SelectionListDialog;
-import org.kermeta.runner.launching.KConstants;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.KermetaMessages;
@@ -132,6 +132,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     /** The text widget for the selection of a Kermeta class from a given file */
     private Text classNameText;
     private Text projectLocationText;
+    private Button _constraintExecutionButton;
 
     /** The class qualified name chosen by the user */
     private String selectedClassString = null;
@@ -181,6 +182,12 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		
 		createArgumentsLayout(paramArea, null);
 
+		Composite checkconstraintArea = new Composite(area, SWT.SINGLE);
+		GridLayout layout = new GridLayout();
+		layout.numColumns = 2;
+		checkconstraintArea.setLayout( layout );
+		// Create the area for the constraint check button
+		createCheckConstraintButtonLayout(checkconstraintArea, null);
 
     }
 
@@ -329,6 +336,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		configuration.setAttribute(KConstants.KM_OPERATIONNAME, operationNameText.getText());
 		configuration.setAttribute(KConstants.KM_ARGUMENTS, argumentsText.getText());
 		configuration.setAttribute(KConstants.KM_PROJECTNAME, projectLocationText.getText());
+		configuration.setAttribute(KConstants.KM_CONSTRAINT, _constraintExecutionButton.getSelection() );
 		configuration.setAttribute( DebugPlugin.ATTR_PROCESS_FACTORY_ID, "org.kermeta.debug.processFactory" );
    }
     
@@ -387,6 +395,29 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
                 	    handleProjectLocationButtonSelected();
                 	}
                 });
+        return parent;
+    }
+    
+    /***
+     * Create the Field where user enters file to execute
+     * @param parent
+     * @param font
+     * @return
+     */
+    public Composite createCheckConstraintButtonLayout(Composite parent, Font font) {
+        Label inputLabel = new Label(parent, SWT.NONE);
+        inputLabel.setText(KermetaMessages.getString("ArgTab.CHECK_CONSTRAINT_BUTTON")); //$NON-NLS-1$
+       
+        _constraintExecutionButton = new Button(parent, SWT.CHECK);
+        _constraintExecutionButton.addSelectionListener( 
+        		new SelectionListener() {
+        			public void widgetDefaultSelected(SelectionEvent e) {
+        			}
+        			public void widgetSelected(SelectionEvent e) {
+        				updateLaunchConfigurationDialog();
+        			}
+        		}
+        );
         return parent;
     }
     

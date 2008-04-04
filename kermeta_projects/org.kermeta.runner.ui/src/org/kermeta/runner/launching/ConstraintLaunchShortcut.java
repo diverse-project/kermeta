@@ -8,4 +8,8 @@ public class ConstraintLaunchShortcut extends KLaunchShortcut {
 		super( KConstants.CONSTRAINT_CONFIGURATION );
 	}
 
+	@Override
+	protected boolean isConstraint() {
+		return true;
+	}
 }

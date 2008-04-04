@@ -21,6 +21,7 @@ public interface KConstants {
     // list of value separated by a comma
     public final static String KM_ARGUMENTS = "fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS";
     public final static String KM_PROJECTNAME = "fr.irisa.triskell.kermeta.launching.KM_PROJECTNAME";
+    public final static String KM_CONSTRAINT = "org.kermeta.launching.CONSTRAINT";
 
     public final static String RUN_CONFIGURATION = "org.kermeta.debug.runConfiguration";
     public final static String CONSTRAINT_CONFIGURATION = "org.kermeta.debug.constraintConfiguration";

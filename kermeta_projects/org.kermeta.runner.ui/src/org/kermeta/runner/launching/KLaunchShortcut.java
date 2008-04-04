@@ -42,6 +42,9 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 		_configurationType = _launchManager.getLaunchConfigurationType(configurationTypeId);
 	}
 	
+	protected boolean isConstraint() {
+		return false;
+	}
 	
 	public void launch(ISelection selection, String mode) {
 		IFile selectedFile = null;
@@ -302,6 +305,7 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 			wc.setAttribute(KConstants.KM_CLASSQNAME, className);
 			wc.setAttribute(KConstants.KM_OPERATIONNAME, opName);
 			wc.setAttribute(KConstants.KM_PROJECTNAME, projectName);
+			wc.setAttribute(KConstants.KM_CONSTRAINT, isConstraint() );
 			wc.setAttribute( DebugPlugin.ATTR_PROCESS_FACTORY_ID, "org.kermeta.debug.processFactory" );
 			
 			config= wc.doSave();
