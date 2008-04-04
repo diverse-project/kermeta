@@ -79,10 +79,4 @@ class ParameterizedClass<B>
 	
 	operation test2<B>() : Void is do
 	end
-	
-	attribute testString : TestString
-}
-
-@EMF_instanceClassName "java.lang.String"
-class TestString inherits ValueType {
 }

@@ -6,8 +6,7 @@ package comptest2;
 
 require kermeta
 
-//using kermeta::language::structure
-using kermeta::standard
+using kermeta::language::structure
 
 class Main
 {
@@ -15,8 +14,6 @@ class Main
 	do
 		var aPrinter : ClassWithBehavior init ClassWithBehavior.new
 		aPrinter.print
-		aPrinter.attr1.toString
-		
 		var aPrinter2 : ClassWithBehavior
 		var aPrinter3 : ClassWithBehavior init aPrinter
 	end
@@ -44,24 +41,10 @@ class ClassWithBehavior
 class InheritedClassWithBehavior inherits ClassWithBehavior, EmptyClass {
 
 	operation test() : String is do
-	
-		// Assignment from a StringLiteral
 		attr1 := "test_attr1"
-		
-		// VariableDecl
 		var return : String
-		
-		// Assignment from a CallFeature
 		return := attr1
-		
-		// Assignment from a CallVariable
 		result := return
-	end
-	
-	method print() : Void is
-	do
-		// Call of a super operation
-		super()
 	end
 }
 
@@ -73,16 +56,10 @@ class ParameterizedEmptyClass<A>
 {
 }
 
-class ParameterizedClass<B>
+class ParameterizedClass<B,String>
 {
-	reference attr1 : ParameterizedClass<String> [0..1]
+	attribute attr1 : B [0..1]
 	
 	operation test2<B>() : Void is do
 	end
-	
-	attribute testString : TestString
-}
-
-@EMF_instanceClassName "java.lang.String"
-class TestString inherits ValueType {
 }
