@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.10 2008-03-05 10:52:50 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.11 2008-04-07 15:33:48 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -88,6 +88,7 @@ public class JunitTestSuite extends TestCase {
 
 
 /*** BEGIN GENERATED TESTS ***/
+	
 public void test001_externalSuperType() throws Exception {
 testWithFile("test/io/ecore_testcases","001_externalSuperType.ecore" );
 }
@@ -433,6 +434,17 @@ public void testWithFile(String dir, String file) {
 		KMTOutputBuilder builder = new KMTOutputBuilder();
 		builder.print(source, null, outputFileURI);
 		builder.flush();
+		
+		for (KermetaUnit importedUnit : source.getImportedKermetaUnits()){
+			if(importedUnit.getUri().startsWith(TestPlugin.PLUGIN_TESTS_PATH + dir)){
+				// then the imported units also need to be printed for a comparison against expected_output
+				builder = new KMTOutputBuilder();
+				String importedUnitOutputFileURI = importedUnit.getUri().replaceFirst(TestPlugin.PLUGIN_TESTS_PATH + dir, outputKMTFolder);
+				builder.print(importedUnit, null, importedUnitOutputFileURI);
+				builder.flush();
+			}
+		}
+			
 		
 		// Loading the generated kmt file
 		KermetaUnit kmtOutput = LoaderPlugin.getDefault().load(outputFileURI, null);
