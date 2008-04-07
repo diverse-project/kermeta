@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.9 2008-04-04 09:51:09 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.10 2008-04-07 13:30:09 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -109,13 +109,12 @@ aspect class ClassDefinition {
 		// If this ClassDefinition is a subType of kermeta::standard::ValueType then
 		// an EAttribute value is added to allow the use of the value of a ValueType
 		if not self.superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
-			var type_tag : Tag init self.ownedTags.detect{ t |
-				t.name == "EMF_instanceClassName"
-			}
-			if not type_tag.isVoid() then
+			var instanceClassName : String init self.getEMFInstanceClassName()
+			
+			if instanceClassName != "" then
 				var ecoreDataType : EDataType init EDataType.new
 				ecoreDataType.name := self.name
-				ecoreDataType.instanceClassName := type_tag.~value
+				ecoreDataType.instanceClassName := instanceClassName
 				// Setting the container
 				p.ecoreModelElement.eClassifiers.add(ecoreDataType)
 				// Setting the ecore proxy

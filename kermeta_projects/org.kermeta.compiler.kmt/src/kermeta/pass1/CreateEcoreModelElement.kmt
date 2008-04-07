@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.8 2008-04-04 09:51:09 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.9 2008-04-07 13:30:09 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -100,8 +100,15 @@ aspect class PrimitiveType {
 		//ecoreDataType.instanceClass
 		//ecoreDataType.instanceTypeName
 		//ecoreDataType.defaultValue
-		ecoreDataType.instanceClassName := "java.lang.Object"
+
+		if TypeHelper.new.isValueType(self.instanceType) then
+			ecoreDataType.instanceClassName := self.getEMFInstanceClassName()
+		else	
+			ecoreDataType.instanceClassName := "java.lang.Object"
+		end
+
 		if ( self.instanceType.isInstanceOf(Class) ) then
+			ecoreDataType.instanceClassName := "java.lang.Object"
 			var qualifiedName : String init self.instanceType.asType(Class).typeDefinition.qualifiedName
 			ecoreDataType.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), qualifiedName))
 		end

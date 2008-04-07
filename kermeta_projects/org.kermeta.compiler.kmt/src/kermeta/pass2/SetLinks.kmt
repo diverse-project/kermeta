@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.9 2008-04-07 09:57:39 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.10 2008-04-07 13:30:09 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -42,7 +42,6 @@ aspect class ClassDefinition {
 aspect class Operation {
 	operation setLinks(context : KM2EcoreContext) is do
 		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
-		stdio.writeln("LinkSetterForTypedElement - Operation " + self.qualifiedName)
 		s.setLinks(self, self.ecoreModelElement, context)
 		if ( self.superOperation != void ) then
 			var qualifiedName : String init self.superOperation.owningClass.qualifiedName
@@ -55,7 +54,6 @@ aspect class Operation {
 aspect class Parameter {
 	operation setLinks(context : KM2EcoreContext) is do
 		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
-		stdio.writeln("LinkSetterForTypedElement - Parameter " + self.qualifiedName)
 		s.setLinks(self, self.ecoreModelElement, context)
 	end
 }
@@ -63,7 +61,6 @@ aspect class Parameter {
 aspect class Property {
 	operation setLinks(context : KM2EcoreContext) is do
 		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
-		stdio.writeln("LinkSetterForTypedElement - Property " + self.qualifiedName)
 		s.setLinks(self, self.ecoreModelElement, context)
 		if ( self.opposite != void ) then
 			self.getEcoreModelElement().eOpposite := self.opposite.getEcoreModelElement()
@@ -88,7 +85,6 @@ class LinkSetterForTypedElement {
 				else
 					genericType.eClassifier  := classDefinition.ecoreDataType
 				end
-				stdio.writeln("ecoreModelElement: " + ecoreModelElement.toString())
 				ecoreModelElement.eGenericType := genericType
 				c.typeParamBinding.each{ tpb |
 					var typeArgument : EGenericType init EGenericType.new
@@ -107,7 +103,7 @@ class LinkSetterForTypedElement {
 			else
 				// Case of the type is an ObjectTypeVariable
 				if element.type.isInstanceOf(PrimitiveType) then
-					ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement			
+					ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement
 				else
 					if element.type.isInstanceOf(ObjectTypeVariable) then
 						var genericType : EGenericType init EGenericType.new

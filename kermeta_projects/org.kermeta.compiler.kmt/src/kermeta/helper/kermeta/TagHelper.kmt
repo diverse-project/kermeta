@@ -1,0 +1,51 @@
+/* $Id: TagHelper.kmt,v 1.1 2008-04-07 13:30:09 cfaucher Exp $
+ * Creation date: April 07, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+
+package kermeta::language::structure;
+
+
+require kermeta
+
+using kermeta::standard
+
+aspect class Object {
+	/**
+	 * Get the values for the tags having as key: <key : String>
+	 */
+	operation getTagValues( key : String ) : OrderedSet<String> is do
+		
+		var value_list : OrderedSet<String> init OrderedSet<String>.new
+		
+		self.ownedTags.each{ t |
+			if t.name == "EMF_instanceClassName" then
+				value_list.add(t.~value)
+			end
+		}
+		result := value_list
+	end
+}
+
+aspect class ValueType {
+
+	operation getEMFInstanceClassName() : String is do
+		result := ""
+		var value_list : OrderedSet<String> init self.getTagValues("EMF_instanceClassName")
+		if (not value_list.isVoid()) and (value_list.size()>=1) then
+			result := value_list.one()
+		end
+	end
+	/*operation getEMFInstanceClassName() : String is do
+		result := ""
+		var type_tag : Tag init self.ownedTags.detect{ t |
+				t.name == "EMF_instanceClassName"
+		}
+		if not type_tag.isVoid() then
+			result := type_tag.~value
+		end
+	end*/
+}

@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.12 2008-04-07 09:57:39 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.13 2008-04-07 13:30:09 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -54,19 +54,8 @@ package structure {
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			//stdio.writeln("Pass2 ClassDefinition : " + self.name)
-			
-			var type_tag : Tag init Tag.new
-			
-			if not self.container.asType(ClassDefinition).superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
-			type_tag := self.container.asType(ClassDefinition).ownedTags.detect{ t |
-				t.name == "EMF_instanceClassName"
-			}
-			end
-			
-			if not type_tag.isVoid() then
-				self.setLinks(context) 
-				super(context)
-			end
+			self.setLinks(context) 
+			super(context)
 		end
 	}
 	
@@ -91,9 +80,21 @@ package structure {
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			//stdio.writeln("Pass2 ClassDefinition")
-			self.setLinks(context)
-			super(context)
-			self.createBehaviorJava(context)
+			
+			var doCompile : Boolean init true
+			
+			// This test is there, because some methods may be compiled as Static methods via Simk like the method: times on Integer
+			if not self.container.asType(ClassDefinition).superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
+				if self.container.asType(ClassDefinition).getEMFInstanceClassName() != "" then
+					doCompile := false
+				end
+			end
+			
+			if doCompile then
+				self.setLinks(context)
+				super(context)
+				self.createBehaviorJava(context)
+			end
 		end
 	}
 	
