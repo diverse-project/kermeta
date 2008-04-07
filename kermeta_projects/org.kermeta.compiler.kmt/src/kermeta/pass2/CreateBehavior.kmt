@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.15 2008-04-02 08:39:30 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.16 2008-04-07 15:13:06 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -185,8 +185,8 @@ package behavior {
 		operation getPP(tgt : Expression, fName : String, context : KM2EcoreContext) : String is do
 			result := ""
 			
-			var isBoolean : Boolean init KM2EcoreHelper.new.isBooleanTypeDef(tgt.staticType, context)
-			var isNumeric : Boolean init KM2EcoreHelper.new.isNumericalTypeDef(tgt.staticType, context)
+			var isBoolean : Boolean init GenericTypeDefinitionHelper.new.isBooleanTypeDef(tgt.staticType, context)
+			var isNumeric : Boolean init GenericTypeDefinitionHelper.new.isNumericalTypeDef(tgt.staticType, context)
 			
 			if(fName == "not" and isBoolean) then
 					result := result + "! ("

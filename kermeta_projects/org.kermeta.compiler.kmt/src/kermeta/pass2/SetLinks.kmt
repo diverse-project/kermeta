@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.10 2008-04-07 13:30:09 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.11 2008-04-07 15:13:06 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -108,8 +108,6 @@ class LinkSetterForTypedElement {
 					if element.type.isInstanceOf(ObjectTypeVariable) then
 						var genericType : EGenericType init EGenericType.new
 						genericType.eTypeParameter  := element.type.asType(ObjectTypeVariable).ecoreModelElement
-						
-						stdio.writeln("genericType: " + genericType.toString())
 						ecoreModelElement.eGenericType := genericType
 					end
 				end

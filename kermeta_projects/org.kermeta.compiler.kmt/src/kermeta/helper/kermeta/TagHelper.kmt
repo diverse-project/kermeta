@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.1 2008-04-07 13:30:09 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.2 2008-04-07 15:13:06 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -30,7 +30,7 @@ aspect class Object {
 	end
 }
 
-aspect class ValueType {
+aspect class GenericTypeDefinition {
 
 	operation getEMFInstanceClassName() : String is do
 		result := ""
@@ -39,13 +39,5 @@ aspect class ValueType {
 			result := value_list.one()
 		end
 	end
-	/*operation getEMFInstanceClassName() : String is do
-		result := ""
-		var type_tag : Tag init self.ownedTags.detect{ t |
-				t.name == "EMF_instanceClassName"
-		}
-		if not type_tag.isVoid() then
-			result := type_tag.~value
-		end
-	end*/
+
 }
