@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.49 2008-03-19 16:34:05 cfaucher Exp $
+// $Id: primitive_types.kmt,v 1.50 2008-04-07 15:51:34 dvojtise Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -56,7 +56,7 @@ class ~Void {
  * that means that each time you := such object it will call the clone function associated to it (Not implemented yet except for Integer, String and boolean!!!)
  * 
  */
-abstract class  ValueType inherits PrimitiveType {
+abstract class  ValueType {
 }
 
 

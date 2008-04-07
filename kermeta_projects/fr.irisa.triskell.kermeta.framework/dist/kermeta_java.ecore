@@ -1045,7 +1045,6 @@
     <references href="standard/primitive_types.ecore#/1"/>
     <references href="language/structure.ecore#/0"/>
     <references href="language/structure.ecore#/1"/>
-    <references href="language/structure.ecore#/2"/>
     <references href="language/reflective_collections.ecore#/0"/>
     <references href="language/reflective_collections.ecore#/1"/>
     <references href="kunit/kunit.ecore#/0"/>
@@ -1054,6 +1053,7 @@
     <references href="kunit/assert.ecore#/1"/>
     <references href="utils/utils.ecore#/0"/>
     <references href="utils/utils.ecore#/1"/>
+    <references href="utils/utils.ecore#/2"/>
     <references href="utils/StringBuffer.ecore#/0"/>
     <references href="utils/StringBuffer.ecore#/1"/>
     <references href="utils/hashtable.ecore#/0"/>
@@ -1062,9 +1062,9 @@
     <references href="utils/stack.ecore#/1"/>
     <references href="io/std_io.ecore#/0"/>
     <references href="io/std_io.ecore#/1"/>
-    <references href="io/std_io.ecore#/2"/>
     <references href="io/file_io.ecore#/0"/>
     <references href="io/file_io.ecore#/1"/>
+    <references href="io/file_io.ecore#/2"/>
     <references href="exceptions/exceptions.ecore#/0"/>
     <references href="exceptions/exceptions.ecore#/1"/>
     <references href="language/dynamic_expression.ecore#/0"/>

@@ -52,7 +52,7 @@
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/ValueType/@ownedTags.0" name="ValueType" isAbstract="true" superType="//@packages.0/standard/ValueType/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * The abstract class ValueType does not contain any feature.&#xD;&#xA; * However, any instance of a sub-class of ValueType will be passed by value &#xD;&#xA; * instead of by reference for any other objects.&#xD;&#xA; * that means that each time you := such object it will call the clone function associated to it (Not implemented yet except for Integer, String and boolean!!!)&#xD;&#xA; * &#xD;&#xA; */" object="//@packages.0/standard/ValueType"/>
         <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../kermeta_java.km#//@packages.0/language/structure/PrimitiveType"/>
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Comparable/@ownedTags.0" name="Comparable" isAbstract="true" superType="//@packages.0/standard/Comparable/@containedType.0">

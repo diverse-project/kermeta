@@ -37,6 +37,7 @@
     <references href="io/std_io.ecore#/1"/>
     <references href="io/file_io.ecore#/0"/>
     <references href="io/file_io.ecore#/1"/>
+    <references href="io/file_io.ecore#/2"/>
     <references href="exceptions/exceptions.ecore#/0"/>
     <references href="exceptions/exceptions.ecore#/1"/>
     <references href="language/dynamic_expression.ecore#/0"/>
