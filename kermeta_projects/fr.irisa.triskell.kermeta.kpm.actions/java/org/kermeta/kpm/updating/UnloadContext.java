@@ -1,6 +1,6 @@
 
 
-/*$Id: UnloadContext.java,v 1.2 2008-02-14 07:13:46 uid21732 Exp $
+/*$Id: UnloadContext.java,v 1.3 2008-04-07 14:54:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	UnloadContext.java
 * License : EPL
@@ -65,7 +65,8 @@ public class UnloadContext implements IAction {
 			 */
 			List<Unit> l = getUnitsToUnload(unit, type);
 			// Storing the list of units in order to reuse it in the next actions.
-			args.put("context", l);
+			List<Unit> c = new ArrayList<Unit>();
+			args.put("context", c);
 	 		for ( Unit u : l ) {
 	 			/*
 	 			 * 
@@ -81,6 +82,9 @@ public class UnloadContext implements IAction {
 	 			 */
 	 			IFile file = ResourceHelper.getIFile(uri);
 	 			KermetaMarkersHelper.clearMarkers(file);
+	 			
+	 			if ( u.equals(unit) )
+	 				c.add(u);
 	 		}
 	 		
 		} finally {

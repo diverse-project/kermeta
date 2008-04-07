@@ -1,6 +1,6 @@
 
 
-/*$Id: TypecheckContext.java,v 1.3 2008-03-03 15:08:49 dvojtise Exp $
+/*$Id: TypecheckContext.java,v 1.4 2008-04-07 14:54:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	TypecheckContext.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -27,6 +28,7 @@ import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
+import fr.irisa.triskell.kermeta.resources.KermetaResourceHelper;
 import fr.irisa.triskell.kermeta.typechecker.CallableFeaturesCache;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
@@ -85,6 +87,15 @@ public class TypecheckContext implements IAction {
 						if (kermetaUnit.isErroneous() ) {
 							IFile file = ResourceHelper.getIFile(uri);
 							KermetaMarkersHelper.createMarkers(file, kermetaUnit);
+							for ( KermetaUnit importer : kermetaUnit.getImporters() ) {
+								for ( KermetaUnitRequire require : importer.getKermetaUnitRequires() ) {
+									if ( require.getKermetaUnit().equals( kermetaUnit ) ) {
+										importer.error("The file " + kermetaUnit.getUri() + " contains errors.", require.getRequire() );
+										IFile f = ResourceHelper.getIFile( importer.getUri() );
+										KermetaMarkersHelper.createMarkers(f, kermetaUnit);
+									}
+								}
+							}
 						}
 					} else {
 						// The kermeta unit has not been found.
