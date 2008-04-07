@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.11 2008-04-04 09:51:09 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.12 2008-04-07 09:57:39 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -47,15 +47,26 @@ package structure {
 	}
 	
 	aspect class ClassDefinition {
-		method applyPass2(context : KM2EcoreContext) is do
+		method applyPass2(context : KM2EcoreContext) is do			
 			self.setLinks(context) 
 			super(context)
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			//stdio.writeln("Pass2 ClassDefinition : " + self.name)
-			self.setLinks(context) 
-			super(context)
+			
+			var type_tag : Tag init Tag.new
+			
+			if not self.container.asType(ClassDefinition).superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
+			type_tag := self.container.asType(ClassDefinition).ownedTags.detect{ t |
+				t.name == "EMF_instanceClassName"
+			}
+			end
+			
+			if not type_tag.isVoid() then
+				self.setLinks(context) 
+				super(context)
+			end
 		end
 	}
 	
