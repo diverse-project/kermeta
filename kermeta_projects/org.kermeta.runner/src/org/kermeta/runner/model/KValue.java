@@ -1,6 +1,6 @@
 
 
-/*$Id: KValue.java,v 1.2 2008-04-03 15:09:37 ftanguy Exp $
+/*$Id: KValue.java,v 1.3 2008-04-07 14:54:21 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KValue.java
 * License : EPL
@@ -27,7 +27,7 @@ public class KValue extends KDebugElement implements IValue {
 		
 	private KAbstractVariable _variable;
 	
-	private List<IVariable> _members;
+	private List<IVariable> _members = new ArrayList<IVariable>();
 	
 	public KValue(KDebugTarget target, KAbstractVariable variable, String data) {
 		super(target);
@@ -39,7 +39,6 @@ public class KValue extends KDebugElement implements IValue {
 		if ( data != null ) {
 			String[] strings = data.split("\\|");
 			fValue = strings[0];
-			_members = new ArrayList<IVariable>();
 			for ( int i = 1; i < strings.length; i++ ) {
 				IVariable variable = KVariableFactory.createVariable(_variable, strings[i]);
 				_members.add(variable);
