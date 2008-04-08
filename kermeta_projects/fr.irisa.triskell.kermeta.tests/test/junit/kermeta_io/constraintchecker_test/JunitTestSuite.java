@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.12 2008-03-05 08:01:02 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.13 2008-04-08 09:59:53 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -22,7 +22,6 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
@@ -366,9 +365,14 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 		KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit );
 		constraintChecker.checkUnit();
 		
+		
 		if ( kermetaUnit.isIndirectlyErroneous() ) {
 			System.err.println( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit) );
 			assertTrue("Kermeta Unit has errors when constraint checking.", false);
+		}
+		if ( KermetaUnitHelper.hasWarning(kermetaUnit )) {
+			System.err.println( KermetaUnitHelper.getAllWarningsAsString(kermetaUnit) );
+			assertTrue("Kermeta Unit has warnings when constraint checking.", false);
 		}
 		
 		KermetaCycleConstraintChecker cycleConstraintChecker = new KermetaCycleConstraintChecker( kermetaUnit );
