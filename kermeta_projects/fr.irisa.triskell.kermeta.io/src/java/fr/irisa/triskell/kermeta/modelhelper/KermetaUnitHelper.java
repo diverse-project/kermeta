@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.12 2008-02-14 07:13:18 uid21732 Exp $
+/*$Id: KermetaUnitHelper.java,v 1.13 2008-04-08 09:56:26 dvojtise Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -193,15 +193,15 @@ public class KermetaUnitHelper {
 		return result;
 	}
 	
-	static public boolean isErrored(KermetaUnit kermetaUnit) {
+	static public boolean hasError(KermetaUnit kermetaUnit) {
 		return ! getErrors(kermetaUnit).isEmpty();
 	}
 	
-	static public boolean isIndirectlyErrored(KermetaUnit kermetaUnit) {
+	static public boolean hasIndirectError(KermetaUnit kermetaUnit) {
 		return ! getAllErrors(kermetaUnit).isEmpty();
 	}
 	
-	static public boolean isWarned(KermetaUnit kermetaUnit) {
+	static public boolean hasWarning(KermetaUnit kermetaUnit) {
 		return ! getWarnings(kermetaUnit).isEmpty();
 	}
 	

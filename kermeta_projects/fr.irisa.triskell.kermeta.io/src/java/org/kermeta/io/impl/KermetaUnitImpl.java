@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.30 2008-02-14 07:13:17 uid21732 Exp $
+ * $Id: KermetaUnitImpl.java,v 1.31 2008-04-08 09:58:31 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1288,7 +1288,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public boolean isWarned() {
-		return KermetaUnitHelper.isWarned(this);
+		return KermetaUnitHelper.hasWarning(this);
 	}
 
 	/**
@@ -1407,7 +1407,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public boolean isErroneous() {
-		return KermetaUnitHelper.isErrored(this);
+		return KermetaUnitHelper.hasError(this);
 	}
 
 	/**
@@ -1466,7 +1466,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public boolean isIndirectlyErroneous() {
-		return KermetaUnitHelper.isIndirectlyErrored(this);
+		return KermetaUnitHelper.hasIndirectError(this);
 	}
 
 	/**
