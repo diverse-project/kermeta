@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.18 2008-02-14 07:13:17 uid21732 Exp $
+/* $Id: PropertyChecker.java,v 1.19 2008-04-08 10:08:11 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -28,7 +28,6 @@ import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
@@ -317,10 +316,9 @@ public class PropertyChecker extends AbstractChecker {
 				 ClassDefinition cd = (ClassDefinition)ctype.getTypeDefinition();
 				 for(Property p : KermetaModelHelper.ClassDefinition.getAllPropertiesWithOpposite(cd)){
 					 if(p.getLower() == 1 && p.getUpper() == 1){
-						 if(p.getOpposite() != property) {
-							 builder.warning("Property " + property.getName() + " cannot be used because its target " + cd.getName() +
-							 		" is already contained in a mandatory composition " + new KM2KMTPrettyPrinter().ppSimplifiedPropertyInContext(p) +
-							 		"\nyour model will be incorrect by construction !", 
+						 if((p.getOpposite() != property) && p.getOpposite().isIsComposite()) {
+							 builder.warning("Property " + property.getName() + " cannot be used because the target class " + cd.getName() +
+							 		" is already contained in a mandatory composition : " + new KM2KMTPrettyPrinter().ppSimplifiedPropertyInContext(p) , 
 							 	property );
 							 
 							 result = false;
