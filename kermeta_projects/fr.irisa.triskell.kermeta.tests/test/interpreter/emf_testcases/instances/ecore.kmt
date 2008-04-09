@@ -1,6 +1,6 @@
 package ecore;
  
-//require kermeta
+require kermeta
 
 /** This class refers to any EDataType feature*/
 class EAttribute inherits EStructuralFeature
@@ -61,10 +61,6 @@ class EClass inherits EClassifier
 	 		
 	 		result.addAll(self.eAllReferences.select { r | r.containment == true } )
 		end
-		setter is do		
-			//TODO: implement setter for derived property eAllContainments
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
 		
 	property readonly eAllOperations : EOperation[0..*]
 		getter is do
@@ -85,10 +81,6 @@ class EClass inherits EClassifier
 			result := kermeta::standard::OrderedSet<EClass>.new 
 			result.addAll(self.eSuperTypes)
 			self.eSuperTypes.each { t | result.addAll(t.eAllSuperTypes) }
-		end
-		setter is do
-			//TODO: implement setter for derived property eAllSuperTypes
-			raise kermeta::exceptions::NotImplementedException.new 
 		end
 
 	property eIDAttribute : EAttribute
@@ -293,12 +285,12 @@ class EReference inherits EStructuralFeature
     // due to inner reflction problems with Object.container(), the
     // 'container' property can only be accessed through a getter
 	operation getContainerValue() : EBoolean is do
-		var cls : kermeta::reflection::ClassDefinition
+		var cls : kermeta::language::structure::ClassDefinition
 		cls ?= self.getMetaClass.typeDefinition
 		result ?= self.get(cls.ownedAttribute.detect{p | p.name == "container"})
 	end
 	operation setContainerValue(booleanValue  : EBoolean) is do
-		var cls : kermeta::reflection::ClassDefinition
+		var cls : kermeta::language::structure::ClassDefinition
 		cls ?= self.getMetaClass.typeDefinition
 		self.~set(cls.ownedAttribute.detect{p | p.name == "container"}, booleanValue)
 	end

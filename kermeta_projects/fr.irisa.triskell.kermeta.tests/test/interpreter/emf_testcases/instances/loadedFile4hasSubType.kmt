@@ -1,5 +1,7 @@
 package Test;
 
+require kermeta
+
 class Class2
 {
 	reference c1 : Class1
@@ -12,11 +14,11 @@ class Class1
 {
 	reference prop1 : set kermeta::standard::Boolean[0..*]
 
-	reference prop2 : set kermeta::reflection::Integer[0..*]
+	reference prop2 : set kermeta::standard::Integer[0..*]
 
-	reference att1 : kermeta::reflection::String
+	reference att1 : kermeta::standard::String
 
-	reference att3 : set kermeta::standard::Bag<kermeta::reflection::String>[0..*]
+	reference att3 : set kermeta::standard::Bag<kermeta::standard::String>[0..*]
 
 	operation op1() : set kermeta::standard::Real[0..0] is
 		do
@@ -24,13 +26,13 @@ class Class1
 			raise kermeta::exceptions::NotImplementedException.new
 		end
 
-	operation op2(param : set kermeta::standard::Real[0..0]) : set kermeta::reflection::String[0..0] is
+	operation op2(param : set kermeta::standard::Real[0..0]) : set kermeta::standard::String[0..0] is
 		do
 			//TODO: implement operation op2
 			raise kermeta::exceptions::NotImplementedException.new
 		end
 
-	operation op3() : set kermeta::reflection::String[0..0] is
+	operation op3() : set kermeta::standard::String[0..0] is
 		do
 			//TODO: implement operation op3
 			raise kermeta::exceptions::NotImplementedException.new
