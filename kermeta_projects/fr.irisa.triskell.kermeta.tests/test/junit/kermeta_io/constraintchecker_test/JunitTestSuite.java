@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.13 2008-04-08 09:59:53 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.14 2008-04-09 14:38:23 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -335,6 +335,18 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 
 public void testinvalid_027_constraint_type_boolean9() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_boolean9.kmt" );
+}
+
+public void testinvalid_029_DerivedProperties_invalid01() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","029_DerivedProperties_invalid01.kmt" );
+}
+
+public void testinvalid_029_DerivedProperties_invalid02() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","029_DerivedProperties_invalid02.kmt" );
+}
+
+public void testinvalid_029_DerivedProperties_invalid03() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","029_DerivedProperties_invalid03.kmt" );
 }
 
 /*** END GENERATED TESTS ***/
