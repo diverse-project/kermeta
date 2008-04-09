@@ -1,4 +1,4 @@
-/* $Id: 072_testProperty.main.kmt,v 1.3 2008-04-09 09:18:05 dvojtise Exp $
+/* $Id: 072_testProperty.main.kmt,v 1.4 2008-04-09 12:59:08 dvojtise Exp $
  * Creation date: February 04, 2008
  * License:	EPL
  * Copyright:
@@ -67,8 +67,45 @@ class TestDerivedProperties inherits kermeta::kunit::TestCase {
 		assert(b.p.size == 1)
 		assert(b.p.one == 3)
 		
+		// "add on getter" test
+		b.p.add(777) // do nothing because it adds 777 to a new collection each time !
+		assert(b.row.size == 1)
+		assert(b.p.size == 1)
+		assertTrueWithMsg(not b.row.contains(777), "b.row contains 777")
+		assertTrueWithMsg(not b.p.contains(777), "b.p contains 777")
+		
 		/* 0..* multiplicity => read-only properties so there is no
 		   setter on derived collections */
+		 // it is impossible to do b.p := OrderedSet<Integer>.new
+	end
+	
+	/* checks the property with multiplicity [0..*]
+	 * in this implementation dependant of the getter, it is possible to have some effect
+	 * however, this seem to be a useless construct 
+	 */
+	operation testCollectionPropertyWithSideEffect() : Void is do
+		var c : C init C.new
+		
+		// first getter test
+		assert(c.p.size == 0)
+		
+		// second getter test
+		c.row.add(3)
+		assert(c.p.size == 1)
+		assert(c.p.one == 3)
+		
+		// "add on getter" test
+		c.p.add(777) // in this implementation dependant
+		assert(c.row.size == 2)
+		assert(c.p.size == 2)
+		c.row.contains(777)
+		assertTrueWithMsg(c.row.contains(777), "b.row doesn't contain 777")
+		assertTrueWithMsg(c.p.contains(777), "b.p doesn't contain 777")
+		
+		/* 0..* multiplicity => read-only properties so there is no
+		   setter on derived collections */
+		 // it is impossible to do b.p := OrderedSet<Integer>.new
+		 // so impossible to call the setter ...
 	end
 }
 
@@ -95,6 +132,20 @@ class B {
 		end
 		setter is do
 			row.clear
-			row.addAll(p)
+			row.addAll(value)
+		end
+}
+
+
+class C {
+	reference row : kermeta::standard::Integer[0..*]
+	
+	property p : kermeta::standard::Integer[0..*]
+		getter is do
+			result := row // useless / not recommanded
+		end
+		setter is do
+			row.clear
+			row.addAll(value)
 		end
 }
