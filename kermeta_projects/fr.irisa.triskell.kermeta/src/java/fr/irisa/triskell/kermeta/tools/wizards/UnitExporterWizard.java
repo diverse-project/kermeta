@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.33 2008-02-14 07:13:10 uid21732 Exp $
+/* $Id: UnitExporterWizard.java,v 1.34 2008-04-09 06:47:54 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -24,7 +24,6 @@ import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -40,7 +39,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
-import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
@@ -261,7 +259,7 @@ public class UnitExporterWizard extends Wizard {
 		}
 		
 		// display eventual warnings
-		if ( KermetaUnitHelper.isWarned(unit) ) {
+		if ( KermetaUnitHelper.hasWarning(unit) ) {
 			WarningMessage message = new WarningMessage( KermetaUnitHelper.getWarningsAsString(unit) );
 			KermetaPlugin.getDefault().getConsole().println(message);
 		}
