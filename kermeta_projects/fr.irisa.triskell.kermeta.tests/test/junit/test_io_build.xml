@@ -1,4 +1,4 @@
-<!-- $Id: test_io_build.xml,v 1.12 2008-02-27 12:37:23 dvojtise Exp $ -->
+<!-- $Id: test_io_build.xml,v 1.13 2008-04-09 16:00:20 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -27,7 +27,8 @@
 	<property name="kermeta.merger.jar" location="..\..\..\org.kermeta.merger\@dot" />
 	<property name="kermeta.interest.jar" location="..\..\..\org.kermeta.interest\@dot" />
 	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\@dot"/>	
-	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\@dot"/>
+	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\@dot"/>	
+	<property name="ecoretools.registration.jar" location="..\..\..\org.eclipse.emf.ecoretools.registration\@dot"/>
 	
 	<property name="log4j.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\log4j.jar"/>
 	<!--<property name="antlr.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\lib\thirdparty\antlr.jar"/>-->
@@ -60,6 +61,7 @@
 		<pathelement location="${kermeta.interest.jar}" />
 		<pathelement location="${triskell.eclipse.util.jar}"/>
 	    <pathelement location="${traceability.jar}"/>
+	    <pathelement location="${ecoretools.registration.jar}"/>
 	    <!-- <pathelement location="${cu_kermeta.jar}"/> -->
 	    <pathelement location="${emf.common.jar}"/>
 	    <pathelement location="${emf.ecore.jar}"/>

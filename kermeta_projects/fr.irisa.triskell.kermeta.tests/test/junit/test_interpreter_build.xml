@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.17 2008-02-19 10:46:41 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.18 2008-04-09 16:00:20 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -8,6 +8,10 @@
 	<property name="report.dir" location="../../reports" />
 	<property name="eclipse.home" location="c:/eclipse3.3/eclipse" />
 	<property name="cobertura.dir" location="\\nas1a\triskell\bin\multiplatform\cobertura-1.7" />
+	<property name="dot.or.bin" value="bin"/>
+	<!-- <property name="dot.or.bin" value="@dot"/> -->
+	<property name="dot.or.buildclass" value="build/class"/>
+	<!-- <property name="dot.or.buildclass" value="@dot"/> -->
 		
 
 
@@ -23,21 +27,21 @@
 
 
 	<property name="kermeta.t.class" location="..\..\build\class" />
-	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\@dot" />
-	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\@dot" />
-	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\@dot" />
-	<property name="kermeta.io.loader.jar" location="..\..\..\org.kermeta.io.loader\@dot" />
-	<property name="kermeta.interest.jar" location="..\..\..\org.kermeta.interest\@dot" />
-	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\@dot" />
-	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\@dot" />
-	<property name="kermeta.merger.jar" location="..\..\..\org.kermeta.merger\@dot" />
-	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\@dot" />
-	<property name="kermeta.tests.jar" location="..\..\..\fr.irisa.triskell.kermeta.tests\@dot" />
+	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\${dot.or.buildclass}" />
+	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\${dot.or.buildclass}" />
+	<property name="kermeta.io.loader.jar" location="..\..\..\org.kermeta.io.loader\${dot.or.bin}" />
+	<property name="kermeta.interest.jar" location="..\..\..\org.kermeta.interest\${dot.or.bin}" />
+	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\${dot.or.buildclass}" />
+	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\${dot.or.bin}" />
+	<property name="kermeta.merger.jar" location="..\..\..\org.kermeta.merger\${dot.or.bin}" />
+	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\${dot.or.bin}" />
+	<property name="kermeta.tests.jar" location="..\..\..\fr.irisa.triskell.kermeta.tests\${dot.or.bin}" />
+	<property name="ecoretools.registration.jar" location="..\..\..\org.eclipse.emf.ecoretools.registration\${dot.or.bin}"/>
 
 	<property name="log4j.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\lib\thirdparty\log4j.jar" />
 	<property name="antlr.jar" location="${eclipse.home}/plugins/org.antlr_2.7.6/antlr.jar"/>
 	<!--<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar" />-->
-	<property name="emfatic-core.jar" location="..\..\..\org.eclipse.gymnast.runtime.core\@dot"/>
+	<property name="emfatic-core.jar" location="..\..\..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>
 
 	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.3.0.v200706262000.jar" />
 	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.3.0.v200706262000.jar" />
@@ -71,6 +75,7 @@
 		<pathelement location="${kermeta.tests.jar}" />
 		<pathelement location="${triskell.eclipse.util.jar}" />
 		<pathelement location="${traceability.jar}" />
+	    <pathelement location="${ecoretools.registration.jar}"/>
 		<pathelement location="${emf.common.jar}" />
 		<pathelement location="${emf.ecore.jar}" />
 		<pathelement location="${emf.ecore.xmi.jar}" />
