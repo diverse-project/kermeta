@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.78 2008-02-15 14:28:55 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.79 2008-04-09 07:28:36 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
@@ -72,6 +74,10 @@ public class EMF2Runtime {
     
     protected Hashtable<String, RuntimeObject> special_primitive_types;
     
+    /** monitor that may be used to monitor the progress of this task
+     * must not use beginTask and done on it, only create subtasks
+     */
+    public IProgressMonitor monitor = null;
     /**
      * if true, try to ignore faulty objects while loading the resources
      */
@@ -303,6 +309,10 @@ public class EMF2Runtime {
 		int processedElements = 0;
 		int nbPreExistingObjects = 0;
 		try {
+			String fileName = unit.getUriAsString().substring(unit.getUriAsString().lastIndexOf('/')+1);
+			SubMonitor progress = SubMonitor.convert(monitor, "Loading " + fileName, 4 );
+			
+			if(monitor!= null) monitor.subTask("Looking for dependent resources");
 			// Compute list of inter-dependent resources
 			dependentResources = unit.findDependentResources(resource);
 			
@@ -313,10 +323,12 @@ public class EMF2Runtime {
 			RuntimeObject roIgnoreLoadErrors = (RuntimeObject) roRepository.getProperties().get("ignoreLoadErrors");
 			ignoreLoadErrors = roIgnoreLoadErrors != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roIgnoreLoadErrors) : false;		
 			
-			
+
+			if(monitor!= null) monitor.subTask("Looking for pre-existing objects");
 			fillRuntimeObjectsMapWithPreExistingObjects(roRepository); 
 			nbPreExistingObjects = runtime_objects_map.keySet().size();
 			// Pass 1 : pre-create the runtime objects
+			if(monitor!= null) 	monitor.subTask("Creating new objects");
 			createEmptyRuntimeObjects();
 			
 			internalLog.debug("Loading " + runtime_objects_map.keySet().size() + " objects (new : " +
@@ -330,6 +342,10 @@ public class EMF2Runtime {
 			    String mmUri = ((EObject)resource.getContents().get(0)).eClass().getEPackage().getNsURI();
 			    unit.setMetaModelUri(mmUri);
 			}
+
+			if(monitor!= null) monitor.subTask("Updating objects links");	
+			// convert the monitor for a finer precision of the monitor on this time consuming task
+			progress = SubMonitor.convert(monitor, "Loading " + fileName, newlycreated_runtime_objects_map.keySet().size() );
 			
 			// Fill in the properties of the new runtime objects that we created
 			for (Object next : newlycreated_runtime_objects_map.keySet()) {
@@ -337,6 +353,10 @@ public class EMF2Runtime {
 			    this.populateRuntimeObject(rObject);
 			    unit.getRuntimeMemory().getCurrentInterpreter().shouldTerminate(); // maybe we must stop ...
 			    processedElements++;
+			    //if(monitor!= null) monitor.worked(1);
+			    progress.worked(1);
+			    
+				
 			}
 
 			// Set the container RO property for populated ROs

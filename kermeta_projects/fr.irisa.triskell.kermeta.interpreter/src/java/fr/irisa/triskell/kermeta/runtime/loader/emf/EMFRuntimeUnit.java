@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.59 2008-02-15 14:29:56 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.60 2008-04-09 07:28:36 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -193,18 +195,12 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	return msg;
 	}
     
-    /**
-     * Load this RuntimeUnit
-     * @see fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit#load()
-     */
-    //public void load()
-    public void load(RuntimeObject resRO)
-    {	
-    	String emf_msg = "";
+	public void monitoredLoad(RuntimeObject resRO, IProgressMonitor monitor){
+		String emf_msg = "";
     	EMFRuntimeUnit unit = this;
     	XMLResource resource=null;
+		monitor.beginTask("Loading " + unit.getUriAsString(), monitor.UNKNOWN);
 		try {
-			
 			// Get URI of the unit correpsonding to the model to be loaded
 			URI u = createURI(unit.getUriAsString());
 			
@@ -276,6 +272,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 
 			// Now, process the conversion of EMF model into Runtime representation so that kermeta can interprete it.
 	    	EMF2Runtime emf2Runtime = getEMF2Runtime(unit, resource);
+	    	emf2Runtime.monitor = monitor;
 	    	//emf2Runtime.loadunit();
 	    	emf2Runtime.loadunit(resRO);
 		}
@@ -302,6 +299,25 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 				for (Object o : extensionmap.entrySet())			
 					internalLog.error("EMF reports unknown feature: "+o + "; " + extensionmap.get(o));
 			}
+		}
+		monitor.done();
+	}
+	
+    /**
+     * Load this RuntimeUnit
+     * @see fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit#load()
+     */
+    //public void load()
+    public void load(RuntimeObject resRO)
+    {	
+    	// run in a job
+    	Job myJob = new LoaderJob("Kermeta is loading model " + getUriAsString(), resRO, this);
+		myJob.schedule();
+		// must wait before continuing
+		try {
+			myJob.join();
+		} catch (InterruptedException e) {
+			throwKermetaRaisedExceptionOnLoad("Loading model interrupted", e);
 		}
     }
     
