@@ -11,14 +11,6 @@ class Main
 	do
 		result := "main0"
 	end
-	
-	operation main1() : Boolean is
-	do
-		result := true
-	end
-	
-	operation main2() : Integer is
-	do
-		result := 1
-	end
 }
+
+alias String : kermeta::standard::String;
