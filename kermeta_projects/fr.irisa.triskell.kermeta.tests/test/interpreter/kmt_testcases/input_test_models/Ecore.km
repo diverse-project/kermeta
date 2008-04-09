@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/">
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/">
   <packages name="ecore" uri="http://www.eclipse.org/emf/2002/Ecore">
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EAttribute"
         superType="#//@packages.0/EAttribute/@containedType.0">
@@ -13,6 +13,10 @@
           isSetterAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EDataType"/>
       </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EBoolean"
+        instanceType="#//@packages.0/EBoolean/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EAnnotation"
         superType="#//@packages.0/EAnnotation/@containedType.0">
@@ -35,6 +39,10 @@
           isOrdered="true" upper="-1">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EObject"/>
       </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EString"
+        instanceType="#//@packages.0/EString/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EClass"
         superType="#//@packages.0/EClass/@containedType.0">
@@ -157,6 +165,12 @@
       <ownedOperation name="getClassifierID" type="#//@packages.0/EInt" isOrdered="true"
           upper="1" isAbstract="true"/>
     </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EJavaClass"
+        instanceType="#//@packages.0/EJavaClass/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EJavaObject"
+        instanceType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Object"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EDataType"
         superType="#//@packages.0/EDataType/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EClassifier"/>
@@ -203,6 +217,12 @@
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EEnum"/>
       </ownedAttribute>
     </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EInt"
+        instanceType="#//@packages.0/EInt/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EEnumerator"
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EFactory"
         superType="#//@packages.0/EFactory/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EModelElement"/>
@@ -513,79 +533,59 @@
       </ownedAttribute>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EBigDecimal"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
-    </ownedTypeDefinition>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EBigInteger"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
-    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EBoolean"
-        instanceType="#//@packages.0/EBoolean/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean"/>
-    </ownedTypeDefinition>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EBooleanObject"
         instanceType="#//@packages.0/EBoolean/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EByte"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EByteArray"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EByteObject"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EChar"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="ECharacterObject"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EDate"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EDiagnosticChain"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EDouble"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EDoubleObject"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EEList"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
-    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EEnumerator"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EFeatureMap"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EFeatureMapEntry"
         instanceType="#//@packages.0/EFeatureMapEntry/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#//@packages.0/ecore/EFeatureMapEntry"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EFloat"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EFloatObject"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
-    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EInt"
-        instanceType="#//@packages.0/EInt/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
-    </ownedTypeDefinition>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EIntegerObject"
         instanceType="#//@packages.0/EInt/@containedType.0"/>
-    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EJavaClass"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
-    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EJavaObject"
-        instanceType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Object"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="ELong"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="ELongObject"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EMap"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EResource"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EResourceSet"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EShort"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EShortObject"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
-    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EString"
-        instanceType="#//@packages.0/EString/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
-    </ownedTypeDefinition>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="ETreeIterator"
-        instanceType="#//@packages.0/EBigDecimal/@containedType.0"/>
+        instanceType="#//@packages.0/EJavaClass/@containedType.0"/>
   </packages>
   <requires uri="kermeta"/>
 </kermeta_language_structure:ModelingUnit>
