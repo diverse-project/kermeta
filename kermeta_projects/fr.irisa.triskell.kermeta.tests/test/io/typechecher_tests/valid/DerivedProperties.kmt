@@ -1,4 +1,4 @@
-/* $Id: DerivedProperties.kmt,v 1.1 2008-03-04 13:32:55 vmahe Exp $
+/* $Id: DerivedProperties.kmt,v 1.2 2008-04-09 13:25:22 dvojtise Exp $
  * Creation date: February 04, 2008
  * License:	EPL
  * Copyright:
@@ -23,9 +23,6 @@ class Example {
 	// read only & 1..1 multiplicity & no getter (may be aspectized)
 	property readonly p2 : Integer
 	
-	// write only & 1..1 multiplicity & no setter (may be aspectized)
-	property writeonly p3 : Integer
-	
 	// 1..1 multiplicity & getter/setter
 	property p4 : Integer
 		getter is do
@@ -39,12 +36,6 @@ class Example {
 	property readonly p5 : Integer
 		getter is do
 			result := int1
-		end
-	
-	// write only & 1..1 multiplicity & setter
-	property writeonly p6 : Integer
-		setter is do
-			int1 := p6
 		end
 	
 	// read only & * multiplicity & no getter (may be aspectized)
