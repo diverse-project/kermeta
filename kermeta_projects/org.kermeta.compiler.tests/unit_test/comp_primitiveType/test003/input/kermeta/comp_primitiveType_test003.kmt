@@ -1,0 +1,15 @@
+@mainClass "comp_primitiveType_test003::Main"
+@mainOperation "main"
+
+package comp_primitiveType_test003;
+
+require kermeta
+
+class Main {
+	operation main0() : MyString is
+	do
+		result := "main0"
+	end
+}
+
+alias MyString : kermeta::language::structure::String;

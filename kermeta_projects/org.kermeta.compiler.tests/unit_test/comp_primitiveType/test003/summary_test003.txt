@@ -1,0 +1,1 @@
+<para>Alias to another one: MyString to kermeta::language::structure::String;</para>
