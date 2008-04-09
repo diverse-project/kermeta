@@ -276,7 +276,7 @@
     </xmlcatalog>
 
 	<echo> preprocess catalog.location= ${catalog.location}</echo>
-    <style
+    <xslt
         in      = "${build.dir}/${index.name}.xml"
         style   = "${ant.docbook.styler.dir}/preprocess/preprocess.xsl"
         out     = "${temp:docbook.ready.file}"
@@ -288,7 +288,7 @@
         <param name="xsltproc.option.debug"  expression="" /> 
         <param name="xsltproc.catalog" expression="${catalog.location}" />
         <param name="xsltproc.option.--nonet"  expression="" />
-    </style>
+    </xslt>
   </target>
   <!-- }}} -->
 
@@ -313,14 +313,14 @@
         <filterset refid="filterset.fileuris" />
     </copy>
 
-    <style
+    <xslt
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.pdf-fop.xsl.tmp"
         out     = "${build.dir}/fop-ready.fo"
         processor = "${xslt.processor}"
         >
         <classpath refid="ant-extensions" />
-    </style>
+    </xslt>
 
     <taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
              <classpath>
@@ -411,14 +411,14 @@ set up XEP's installation directory in the module's configuration property file.
         <filterset refid="filterset.fileuris" />
     </copy>
 
-    <style
+    <xslt
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.single.xsl.tmp"
         out     = "${distribution.dir}/${manual.name}.html"
         processor = "${xslt.processor}"
         >
         <classpath refid="ant-extensions" />
-    </style>
+    </xslt>
     
     <delete file="${build.dir}/customized.single.xsl.tmp" />
 
@@ -447,7 +447,7 @@ set up XEP's installation directory in the module's configuration property file.
         </filterset>
     </copy>
 
-    <style
+    <xslt
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.chunked.xsl.tmp"
         out     = "${distribution.dir}/docbook-ref-file.tmp"
@@ -456,7 +456,7 @@ set up XEP's installation directory in the module's configuration property file.
 
         <classpath refid="ant-extensions" />
         <!-- <param name="chunker.output.encoding" expression="'UTF-8'" /> -->
-    </style>
+    </xslt>
     
     <delete file="${build.dir}/customized.chunked.xsl.tmp" />
 
@@ -472,14 +472,14 @@ set up XEP's installation directory in the module's configuration property file.
         <filterset refid="filterset.fileuris" />
     </copy>
 
-    <style
+    <xslt
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.htmlhelp.xsl.tmp"
         out     = "${distribution.dir}/${manual.name}.html"
         processor = "${xslt.processor}"
         >
         <classpath refid="ant-extensions" />
-    </style>
+    </xslt>
     
     <delete file="${build.dir}/customized.htmlhelp.xsl.tmp" />
 
@@ -495,7 +495,7 @@ set up XEP's installation directory in the module's configuration property file.
     </copy>
 
 	<mkdir dir="${distribution.dir}/${eclipse.html.base.dir}" />
-    <style
+    <xslt
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.eclipse-help.xsl.tmp"
         out     = "${distribution.dir}/${manual.name}.html"
@@ -506,7 +506,7 @@ set up XEP's installation directory in the module's configuration property file.
         <param name="eclipse.plugin.id"  expression="${docbook.eclipse.plugin.id}" />
         <param name="eclipse.plugin.provider"  expression="${docbook.eclipse.plugin.provider}" />
 		<param name="base.dir" expression="${eclipse.html.base.dir}"/>
-    </style>
+    </xslt>
   	<move todir="${distribution.dir}/${eclipse.html.base.dir}/css">
   	    <fileset dir="${build.dir}/css"/>
   	</move>
@@ -644,7 +644,7 @@ set up XEP's installation directory in the module's configuration property file.
     </copy>
     <delete file="${build.dir}/autolayout.xml" />
 
-    <style
+    <xslt
         in      = "${build.dir}/layout.xml"
         style   = "website/xsl/autolayout.xsl"
         out     = "${build.dir}/autolayout.xml"
@@ -654,7 +654,7 @@ set up XEP's installation directory in the module's configuration property file.
         <classpath refid="ant-extensions" />
         <param name="xsltproc.catalog" expression="${website.catalog.location}" />        
         <param name="xsltproc.option.--nonet"  expression="" />
-    </style>
+    </xslt>
 
     <!-- (MM 20040315) Make sure that XSLT was successful
               It doesn't fail, if the DTDs cannot be found, though ... -->
@@ -676,7 +676,7 @@ set up XEP's installation directory in the module's configuration property file.
 
     <!-- (MM 20040303) <style...> uses now the temporary style-driver.xsl having the real path
          for the import file -->
-    <style
+    <xslt
         in      = "${build.dir}/autolayout.xml"
         style   = "${build.dir}/style-driver.xsl.tmp"
         out     = "${build.dir}/tmp.ref"
@@ -687,7 +687,7 @@ set up XEP's installation directory in the module's configuration property file.
         <param name="xsltproc.catalog" expression="${website.catalog.location}" />
         <param name="xsltproc.option.--nonet"  expression="" />
         <param name="output-root" expression="${abs.build.dir}" />        
-    </style>
+    </xslt>
     <!-- (MM 20040315) Make sure that XSLT was successful
           It doesn't fail, if the DTDs cannot be found, though ... -->
     <condition property="tmp:website.tmp.ref.ok" value="true">
