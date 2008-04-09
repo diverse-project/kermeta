@@ -1,4 +1,4 @@
-/* $Id: 072_testProperty.main.kmt,v 1.1 2008-03-04 13:32:55 vmahe Exp $
+/* $Id: 072_testProperty.main.kmt,v 1.2 2008-04-09 08:57:59 dvojtise Exp $
  * Creation date: February 04, 2008
  * License:	EPL
  * Copyright:
@@ -29,7 +29,7 @@ class TestDerivedProperties inherits kermeta::kunit::TestCase {
 	end
 	
 	/* checks the property with multiplicity [0..1] */
-	operation testSingleProperty() : void is do
+	operation testSingleProperty() : Void is do
 		var a : A init A.new
 		assert(a.i == void)
 		
@@ -56,17 +56,16 @@ class TestDerivedProperties inherits kermeta::kunit::TestCase {
 	end
 	
 	/* checks the property with multiplicity [0..*] */
-	operation testCollectionProperty() : void is do
+	operation testCollectionProperty() : Void is do
 		var b : B init B.new
-		assert(b.row == void)
 		
 		// first getter test
 		assert(b.p.size == 0)
 		
 		// second getter test
 		b.row.add(3)
-		assert(A.p.size == 1)
-		assert(b.P.one == 3)
+		assert(b.p.size == 1)
+		assert(b.p.one == 3)
 		
 		/* 0..* multiplicity => read-only properties so there is no
 		   setter on derived collections */
@@ -76,7 +75,7 @@ class TestDerivedProperties inherits kermeta::kunit::TestCase {
 class A {
 	reference i : kermeta::standard::Integer
 	
-	property p kermeta::standard::Integer
+	property p : kermeta::standard::Integer
 		getter is do
 			result := i
 		end
@@ -88,13 +87,13 @@ class A {
 class B {
 	reference row : kermeta::standard::Integer[0..*]
 	
-	property p kermeta::standard::Integer[0..*]
+	property p : kermeta::standard::Integer[0..*]
 		getter is do
-			result := kermeta::standard::Integer[0..*].new
-			result.addall(row)
+			result := OrderedSet<Integer>.new
+			result.addAll(row)
 		end
 		setter is do
-			row.clean
-			row.addall(p)
+			row.clear
+			row.addAll(p)
 		end
 }
