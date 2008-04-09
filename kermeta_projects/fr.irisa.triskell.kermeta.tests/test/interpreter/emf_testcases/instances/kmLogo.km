@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior"
-    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/">
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/">
   <ownedTags name="mainClass" value="kmLogo::actions::Main"/>
   <ownedTags name="mainOperation" value="main"/>
   <packages name="kmLogo">
@@ -45,18 +45,16 @@
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/x/@containedType.0"
                   name="x" staticProperty="#//@packages.0/semanticDomain/Point/x">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/position/@containedType.0"
                     name="position" staticProperty="#//@packages.0/semanticDomain/Turtle/position"/>
               </target>
               <value xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0">
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.2/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/y/@containedType.0"
                   name="y" staticProperty="#//@packages.0/semanticDomain/Point/y">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/position/@containedType.0"
                     name="position" staticProperty="#//@packages.0/semanticDomain/Turtle/position"/>
               </target>
@@ -102,11 +100,11 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/heading/@containedType.0"
                   name="heading" staticProperty="#//@packages.0/semanticDomain/Turtle/heading"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0"
                   name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus">
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/rotate/@ownedParameter.0/@containedType.0"
                     name="angle"/>
@@ -114,12 +112,12 @@
                     name="heading" staticProperty="#//@packages.0/semanticDomain/Turtle/heading"/>
               </value>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/heading/@containedType.0"
                       name="heading" staticProperty="#//@packages.0/semanticDomain/Turtle/heading"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0"
                       name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus">
                     <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
                         staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"
@@ -129,19 +127,19 @@
                   </value>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isLower/@containedType.0"
                   name="isLower" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isLower">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/heading/@containedType.0"
                     name="heading" staticProperty="#//@packages.0/semanticDomain/Turtle/heading"/>
               </condition>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/heading/@containedType.0"
                       name="heading" staticProperty="#//@packages.0/semanticDomain/Turtle/heading"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0"
                       name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus">
                     <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
                         staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"
@@ -151,7 +149,7 @@
                   </value>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isGreater/@containedType.0"
                   name="isGreater" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isGreater">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"
                     value="360"/>
@@ -179,11 +177,10 @@
               <type type="#//@packages.0/semanticDomain/Turtle/move/@body/@containedType.0"
                   isOrdered="true" upper="1"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.1/@containedType.0">
-              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/semanticDomain/Point"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/semanticDomain/Point/getDelta/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@containedType.0"
                   name="newPos"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.1/@containedType.0"
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/getDelta/@containedType.0"
                   name="getDelta" staticOperation="#//@packages.0/semanticDomain/Point/getDelta">
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@ownedParameter.0/@containedType.0"
                     name="dx"/>
@@ -193,15 +190,14 @@
                     name="position" staticProperty="#//@packages.0/semanticDomain/Turtle/position"/>
               </value>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                     name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"
                       name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@parameters.0/@containedType.0"
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/toString/@containedType.0"
                         name="toString" staticOperation="#//@packages.0/semanticDomain/Point/toString">
-                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@containedType.0"
                           name="newPos"/>
                     </parameters>
@@ -216,12 +212,12 @@
                   </target>
                 </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                     name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"
                       name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@parameters.0/@containedType.0"
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/toString/@containedType.0"
                         name="toString" staticOperation="#//@packages.0/semanticDomain/Point/toString">
                       <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@containedType.0"
                           name="newPos"/>
@@ -247,9 +243,8 @@
                   <type type="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@statement.1/@containedType.0"
                       isOrdered="true" upper="1"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@statement.2/@containedType.0"
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Segment/make/@containedType.0"
                     name="make" staticOperation="#//@packages.0/semanticDomain/Segment/make">
-                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/position/@containedType.0"
                       name="position" staticProperty="#//@packages.0/semanticDomain/Turtle/position"/>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@containedType.0"
@@ -257,7 +252,7 @@
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@statement.1/@containedType.0"
                       name="trace"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                     name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@statement.1/@containedType.0"
                       name="trace"/>
@@ -299,7 +294,7 @@
                       name="steps"/>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.0"
                   name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/heading/@containedType.0"
@@ -316,7 +311,7 @@
                       staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"/>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.0"
                   name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"
                     value="90"/>
@@ -330,14 +325,14 @@
                     name="move" staticOperation="#//@packages.0/semanticDomain/Turtle/move">
                   <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
                       staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"/>
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@body/@statement.2/@condition/@parameters.0/@containedType.0"
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/uminus/@containedType.0"
                       name="uminus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/uminus">
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/forward/@ownedParameter.0/@containedType.0"
                         name="steps"/>
                   </parameters>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.0"
                   name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"
                     value="180"/>
@@ -349,7 +344,7 @@
               <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/semanticDomain/Turtle/move/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@containedType.0"
                     name="move" staticOperation="#//@packages.0/semanticDomain/Turtle/move">
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@body/@statement.2/@condition/@parameters.0/@containedType.0"
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/uminus/@containedType.0"
                       name="uminus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/uminus">
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/forward/@ownedParameter.0/@containedType.0"
                         name="steps"/>
@@ -358,7 +353,7 @@
                       staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"/>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.0"
                   name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"
                     value="270"/>
@@ -372,12 +367,17 @@
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Point"
           superType="#//@packages.0/semanticDomain/Point/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
-        <ownedAttribute name="x" type="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@target/@containedType.0"
-            isOrdered="true" upper="1" isComposite="true"/>
-        <ownedAttribute name="y" type="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.2/@target/@containedType.0"
-            isOrdered="true" upper="1" isComposite="true"/>
-        <ownedOperation name="getDelta" type="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.1/@containedType.0"
+        <ownedAttribute name="x" type="#//@packages.0/semanticDomain/Point/x/@containedType.0"
+            isOrdered="true" upper="1" isComposite="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
+        </ownedAttribute>
+        <ownedAttribute name="y" type="#//@packages.0/semanticDomain/Point/y/@containedType.0"
+            isOrdered="true" upper="1" isComposite="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
+        </ownedAttribute>
+        <ownedOperation name="getDelta" type="#//@packages.0/semanticDomain/Point/getDelta/@containedType.0"
             isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/semanticDomain/Point"/>
           <ownedParameter name="dx" type="#//@packages.0/semanticDomain/Point/getDelta/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
@@ -386,10 +386,10 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/semanticDomain/Point/getDelta/@body/@statement.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/semanticDomain/Point"/>
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.1/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/semanticDomain/Point/getDelta/@containedType.0"
                   name="result"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/getDelta/@body/@statement.0/@containedType.0"
                   name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class/new">
@@ -399,41 +399,42 @@
                 </target>
               </value>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@target/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/x/@containedType.0"
                   name="x" staticProperty="#//@packages.0/semanticDomain/Point/x">
-                <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.1/@containedType.0"
+                <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/semanticDomain/Point/getDelta/@containedType.0"
                     name="result"/>
               </target>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0"
                   name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus">
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Point/getDelta/@ownedParameter.0/@containedType.0"
                     name="dx"/>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@target/@containedType.0"
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/x/@containedType.0"
                     name="x" staticProperty="#//@packages.0/semanticDomain/Point/x"/>
               </value>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.2/@target/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/y/@containedType.0"
                   name="y" staticProperty="#//@packages.0/semanticDomain/Point/y">
-                <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.1/@containedType.0"
+                <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/semanticDomain/Point/getDelta/@containedType.0"
                     name="result"/>
               </target>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0"
                   name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus">
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Point/getDelta/@ownedParameter.1/@containedType.0"
                     name="dy"/>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.2/@target/@containedType.0"
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/y/@containedType.0"
                     name="y" staticProperty="#//@packages.0/semanticDomain/Point/y"/>
               </value>
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation name="toString" type="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@parameters.0/@containedType.0"
+        <ownedOperation name="toString" type="#//@packages.0/semanticDomain/Point/toString/@containedType.0"
             isOrdered="true" upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object/toString">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0">
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@parameters.0/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/semanticDomain/Point/toString/@containedType.0"
                   name="result"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"
                   name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus">
@@ -443,7 +444,7 @@
                     name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus">
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/toString/@containedType.0"
                       name="toString" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/toString">
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.2/@target/@containedType.0"
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/y/@containedType.0"
                         name="y" staticProperty="#//@packages.0/semanticDomain/Point/y"/>
                   </parameters>
                   <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"
@@ -456,7 +457,7 @@
                       <parameters xsi:type="kermeta_language_behavior:CallFeature"
                           staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/toString/@containedType.0"
                           name="toString" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/toString">
-                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@target/@containedType.0"
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Point/x/@containedType.0"
                             name="x" staticProperty="#//@packages.0/semanticDomain/Point/x"/>
                       </parameters>
                       <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
@@ -480,8 +481,9 @@
             isOrdered="true" lower="1" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/semanticDomain/Point"/>
         </ownedAttribute>
-        <ownedOperation name="make" type="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@statement.2/@containedType.0"
+        <ownedOperation name="make" type="#//@packages.0/semanticDomain/Segment/make/@containedType.0"
             upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="orig" type="#//@packages.0/semanticDomain/Segment/make/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/semanticDomain/Point"/>
@@ -525,14 +527,12 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Primitive"
-          isAbstract="true" superType="#//@packages.0/abstractSyntax/Primitive/@containedType.0 #//@packages.0/abstractSyntax/Primitive/@containedType.1">
+          isAbstract="true" superType="#//@packages.0/abstractSyntax/Primitive/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Instruction"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Back"
-          superType="#//@packages.0/abstractSyntax/Back/@containedType.0 #//@packages.0/abstractSyntax/Back/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/Back/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Primitive"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="steps" type="#//@packages.0/abstractSyntax/Back/steps/@containedType.0"
             isOrdered="true" lower="1" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Expression"/>
@@ -544,9 +544,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/Back/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Back/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitBack/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitBack/@containedType.0"
                 name="visitBack" staticOperation="#//@packages.0/actions/AbstractVisitor/visitBack">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/Back/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Back"/>
@@ -558,9 +557,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Forward"
-          superType="#//@packages.0/abstractSyntax/Forward/@containedType.0 #//@packages.0/abstractSyntax/Forward/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/Forward/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Primitive"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="steps" type="#//@packages.0/abstractSyntax/Forward/steps/@containedType.0"
             isOrdered="true" lower="1" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Expression"/>
@@ -572,9 +570,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/Forward/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Forward/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitForward/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitForward/@containedType.0"
                 name="visitForward" staticOperation="#//@packages.0/actions/AbstractVisitor/visitForward">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/Forward/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Forward"/>
@@ -586,9 +583,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Left"
-          superType="#//@packages.0/abstractSyntax/Left/@containedType.0 #//@packages.0/abstractSyntax/Left/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/Left/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Primitive"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedOperation name="traverse" type="#//@packages.0/abstractSyntax/Left/traverse/@containedType.0"
             upper="1" superOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
@@ -596,9 +592,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/Left/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Left/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitLeft/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitLeft/@containedType.0"
                 name="visitLeft" staticOperation="#//@packages.0/actions/AbstractVisitor/visitLeft">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/Left/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Left"/>
@@ -610,9 +605,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Right"
-          superType="#//@packages.0/abstractSyntax/Right/@containedType.0 #//@packages.0/abstractSyntax/Right/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/Right/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Primitive"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedOperation name="traverse" type="#//@packages.0/abstractSyntax/Right/traverse/@containedType.0"
             upper="1" superOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
@@ -620,9 +614,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/Right/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Right/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitRight/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitRight/@containedType.0"
                 name="visitRight" staticOperation="#//@packages.0/actions/AbstractVisitor/visitRight">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/Right/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Right"/>
@@ -634,9 +627,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="PenDown"
-          superType="#//@packages.0/abstractSyntax/PenDown/@containedType.0 #//@packages.0/abstractSyntax/PenDown/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/PenDown/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Primitive"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedOperation name="traverse" type="#//@packages.0/abstractSyntax/PenDown/traverse/@containedType.0"
             upper="1" superOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
@@ -644,9 +636,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/PenDown/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/PenDown/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitPenDown/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitPenDown/@containedType.0"
                 name="visitPenDown" staticOperation="#//@packages.0/actions/AbstractVisitor/visitPenDown">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/PenDown/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/PenDown"/>
@@ -658,9 +649,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="PenUp"
-          superType="#//@packages.0/abstractSyntax/PenUp/@containedType.0 #//@packages.0/abstractSyntax/PenUp/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/PenUp/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Primitive"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedOperation name="traverse" type="#//@packages.0/abstractSyntax/PenUp/traverse/@containedType.0"
             upper="1" superOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
@@ -668,9 +658,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/PenUp/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/PenUp/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitPenUp/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitPenUp/@containedType.0"
                 name="visitPenUp" staticOperation="#//@packages.0/actions/AbstractVisitor/visitPenUp">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/PenUp/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/PenUp"/>
@@ -682,9 +671,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Clear"
-          superType="#//@packages.0/abstractSyntax/Clear/@containedType.0 #//@packages.0/abstractSyntax/Clear/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/Clear/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Primitive"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedOperation name="traverse" type="#//@packages.0/abstractSyntax/Clear/traverse/@containedType.0"
             upper="1" superOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
@@ -692,9 +680,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/Clear/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Clear/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitClear/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitClear/@containedType.0"
                 name="visitClear" staticOperation="#//@packages.0/actions/AbstractVisitor/visitClear">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/Clear/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Clear"/>
@@ -706,14 +693,12 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Expression"
-          isAbstract="true" superType="#//@packages.0/abstractSyntax/Expression/@containedType.0 #//@packages.0/abstractSyntax/Expression/@containedType.1">
+          isAbstract="true" superType="#//@packages.0/abstractSyntax/Expression/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Instruction"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="BinaryExp"
-          superType="#//@packages.0/abstractSyntax/BinaryExp/@containedType.0 #//@packages.0/abstractSyntax/BinaryExp/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/BinaryExp/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Expression"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="operator" type="#//@packages.0/abstractSyntax/BinaryExp/operator/@containedType.0"
             isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
@@ -733,9 +718,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/BinaryExp/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/BinaryExp/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitBinaryExp/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitBinaryExp/@containedType.0"
                 name="visitBinaryExp" staticOperation="#//@packages.0/actions/AbstractVisitor/visitBinaryExp">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/BinaryExp/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/BinaryExp"/>
@@ -747,9 +731,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Constant"
-          superType="#//@packages.0/abstractSyntax/Constant/@containedType.0 #//@packages.0/abstractSyntax/Constant/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/Constant/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Expression"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="myValue" type="#//@packages.0/abstractSyntax/Constant/myValue/@containedType.0"
             isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer"/>
@@ -761,9 +744,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/Constant/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Constant/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitConstant/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitConstant/@containedType.0"
                 name="visitConstant" staticOperation="#//@packages.0/actions/AbstractVisitor/visitConstant">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/Constant/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Constant"/>
@@ -775,9 +757,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ProcCall"
-          superType="#//@packages.0/abstractSyntax/ProcCall/@containedType.0 #//@packages.0/abstractSyntax/ProcCall/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/ProcCall/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Instruction"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="actualArgs" type="#//@packages.0/abstractSyntax/ProcCall/actualArgs/@containedType.0"
             isOrdered="true" upper="-1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Expression"/>
@@ -793,9 +774,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/ProcCall/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/ProcCall/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitProcCall/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitProcCall/@containedType.0"
                 name="visitProcCall" staticOperation="#//@packages.0/actions/AbstractVisitor/visitProcCall">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/ProcCall/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/ProcCall"/>
@@ -807,9 +787,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ProcDeclaration"
-          superType="#//@packages.0/abstractSyntax/ProcDeclaration/@containedType.0 #//@packages.0/abstractSyntax/ProcDeclaration/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/ProcDeclaration/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Instruction"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="name" type="#//@packages.0/abstractSyntax/ProcDeclaration/name/@containedType.0"
             isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
@@ -834,9 +813,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/ProcDeclaration/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/ProcDeclaration/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitProcDeclaration/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitProcDeclaration/@containedType.0"
                 name="visitProcDeclaration" staticOperation="#//@packages.0/actions/AbstractVisitor/visitProcDeclaration">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/ProcDeclaration/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/ProcDeclaration"/>
@@ -848,9 +826,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Block"
-          superType="#//@packages.0/abstractSyntax/Block/@containedType.0 #//@packages.0/abstractSyntax/Block/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/Block/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Instruction"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="instructions" type="#//@packages.0/abstractSyntax/Block/instructions/@containedType.0"
             isOrdered="true" upper="-1" opposite="#//@packages.0/abstractSyntax/Instruction/enclosingBlock"
             isComposite="true">
@@ -867,9 +844,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/Block/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Block/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitBlock/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitBlock/@containedType.0"
                 name="visitBlock" staticOperation="#//@packages.0/actions/AbstractVisitor/visitBlock">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/Block/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Block"/>
@@ -881,9 +857,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="If"
-          superType="#//@packages.0/abstractSyntax/If/@containedType.0 #//@packages.0/abstractSyntax/If/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/If/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/ControlStructure"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="thenPart" type="#//@packages.0/abstractSyntax/If/thenPart/@containedType.0"
             isOrdered="true" lower="1" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Block"/>
@@ -899,9 +874,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/If/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/If/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitIf/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitIf/@containedType.0"
                 name="visitIf" staticOperation="#//@packages.0/actions/AbstractVisitor/visitIf">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/If/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/If"/>
@@ -913,18 +887,16 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ControlStructure"
-          isAbstract="true" superType="#//@packages.0/abstractSyntax/ControlStructure/@containedType.0 #//@packages.0/abstractSyntax/ControlStructure/@containedType.1">
+          isAbstract="true" superType="#//@packages.0/abstractSyntax/ControlStructure/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Instruction"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="condition" type="#//@packages.0/abstractSyntax/ControlStructure/condition/@containedType.0"
             isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Expression"/>
         </ownedAttribute>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Repeat"
-          superType="#//@packages.0/abstractSyntax/Repeat/@containedType.0 #//@packages.0/abstractSyntax/Repeat/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/Repeat/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/ControlStructure"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="block" type="#//@packages.0/abstractSyntax/Repeat/block/@containedType.0"
             isOrdered="true" lower="1" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Block"/>
@@ -936,9 +908,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/Repeat/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Repeat/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitRepeat/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitRepeat/@containedType.0"
                 name="visitRepeat" staticOperation="#//@packages.0/actions/AbstractVisitor/visitRepeat">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/Repeat/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Repeat"/>
@@ -950,9 +921,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="While"
-          superType="#//@packages.0/abstractSyntax/While/@containedType.0 #//@packages.0/abstractSyntax/While/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/While/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/ControlStructure"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="block" type="#//@packages.0/abstractSyntax/While/block/@containedType.0"
             isOrdered="true" lower="1" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Block"/>
@@ -964,9 +934,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/While/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/While/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitWhile/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitWhile/@containedType.0"
                 name="visitWhile" staticOperation="#//@packages.0/actions/AbstractVisitor/visitWhile">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/While/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/While"/>
@@ -978,9 +947,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Variable"
-          superType="#//@packages.0/abstractSyntax/Variable/@containedType.0 #//@packages.0/abstractSyntax/Variable/@containedType.1">
+          superType="#//@packages.0/abstractSyntax/Variable/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Expression"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="name" type="#//@packages.0/abstractSyntax/Variable/name/@containedType.0"
             isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
@@ -992,9 +960,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/abstractSyntax/Variable/traverse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Variable/traverse/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/AbstractVisitor/visitVariable/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/AbstractVisitor/visitVariable/@containedType.0"
                 name="visitVariable" staticOperation="#//@packages.0/actions/AbstractVisitor/visitVariable">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/abstractSyntax/Variable/traverse/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Variable"/>
@@ -1010,113 +977,129 @@
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="AbstractVisitor"
           isAbstract="true" superType="#//@packages.0/actions/AbstractVisitor/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
-        <ownedOperation name="visitBack" type="#//@packages.0/abstractSyntax/Back/traverse/@body/@containedType.0"
+        <ownedOperation name="visitBack" type="#//@packages.0/actions/AbstractVisitor/visitBack/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitBack/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Back"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitForward" type="#//@packages.0/abstractSyntax/Forward/traverse/@body/@containedType.0"
+        <ownedOperation name="visitForward" type="#//@packages.0/actions/AbstractVisitor/visitForward/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitForward/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Forward"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitLeft" type="#//@packages.0/abstractSyntax/Left/traverse/@body/@containedType.0"
+        <ownedOperation name="visitLeft" type="#//@packages.0/actions/AbstractVisitor/visitLeft/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitLeft/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Left"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitRight" type="#//@packages.0/abstractSyntax/Right/traverse/@body/@containedType.0"
+        <ownedOperation name="visitRight" type="#//@packages.0/actions/AbstractVisitor/visitRight/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitRight/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Right"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitPenDown" type="#//@packages.0/abstractSyntax/PenDown/traverse/@body/@containedType.0"
+        <ownedOperation name="visitPenDown" type="#//@packages.0/actions/AbstractVisitor/visitPenDown/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitPenDown/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/PenDown"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitPenUp" type="#//@packages.0/abstractSyntax/PenUp/traverse/@body/@containedType.0"
+        <ownedOperation name="visitPenUp" type="#//@packages.0/actions/AbstractVisitor/visitPenUp/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitPenUp/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/PenUp"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitClear" type="#//@packages.0/abstractSyntax/Clear/traverse/@body/@containedType.0"
+        <ownedOperation name="visitClear" type="#//@packages.0/actions/AbstractVisitor/visitClear/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitClear/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Clear"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitBinaryExp" type="#//@packages.0/abstractSyntax/BinaryExp/traverse/@body/@containedType.0"
+        <ownedOperation name="visitBinaryExp" type="#//@packages.0/actions/AbstractVisitor/visitBinaryExp/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitBinaryExp/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/BinaryExp"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitConstant" type="#//@packages.0/abstractSyntax/Constant/traverse/@body/@containedType.0"
+        <ownedOperation name="visitConstant" type="#//@packages.0/actions/AbstractVisitor/visitConstant/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitConstant/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Constant"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitProcCall" type="#//@packages.0/abstractSyntax/ProcCall/traverse/@body/@containedType.0"
+        <ownedOperation name="visitProcCall" type="#//@packages.0/actions/AbstractVisitor/visitProcCall/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitProcCall/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/ProcCall"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitProcDeclaration" type="#//@packages.0/abstractSyntax/ProcDeclaration/traverse/@body/@containedType.0"
+        <ownedOperation name="visitProcDeclaration" type="#//@packages.0/actions/AbstractVisitor/visitProcDeclaration/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitProcDeclaration/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/ProcDeclaration"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitBlock" type="#//@packages.0/abstractSyntax/Block/traverse/@body/@containedType.0"
+        <ownedOperation name="visitBlock" type="#//@packages.0/actions/AbstractVisitor/visitBlock/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitBlock/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Block"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitIf" type="#//@packages.0/abstractSyntax/If/traverse/@body/@containedType.0"
+        <ownedOperation name="visitIf" type="#//@packages.0/actions/AbstractVisitor/visitIf/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitIf/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/If"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitRepeat" type="#//@packages.0/abstractSyntax/Repeat/traverse/@body/@containedType.0"
+        <ownedOperation name="visitRepeat" type="#//@packages.0/actions/AbstractVisitor/visitRepeat/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitRepeat/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Repeat"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitWhile" type="#//@packages.0/abstractSyntax/While/traverse/@body/@containedType.0"
+        <ownedOperation name="visitWhile" type="#//@packages.0/actions/AbstractVisitor/visitWhile/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitWhile/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/While"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="visitVariable" type="#//@packages.0/abstractSyntax/Variable/traverse/@body/@containedType.0"
+        <ownedOperation name="visitVariable" type="#//@packages.0/actions/AbstractVisitor/visitVariable/@containedType.0"
             upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
           <ownedParameter name="node" type="#//@packages.0/actions/AbstractVisitor/visitVariable/@ownedParameter.0/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Variable"/>
@@ -1124,9 +1107,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Interpreter"
-          superType="#//@packages.0/actions/Interpreter/@containedType.0 #//@packages.0/actions/Interpreter/@containedType.1">
+          superType="#//@packages.0/actions/Interpreter/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedAttribute name="turtle" type="#//@packages.0/actions/Interpreter/turtle/@containedType.0"
             isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/semanticDomain/Turtle"/>
@@ -1203,7 +1185,7 @@
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/forward/@containedType.0"
                 name="forward" staticOperation="#//@packages.0/semanticDomain/Turtle/forward">
-              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@body/@statement.2/@condition/@parameters.0/@containedType.0"
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/uminus/@containedType.0"
                   name="uminus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/uminus">
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/accumulator/@containedType.0"
                     name="accumulator" staticProperty="#//@packages.0/actions/Interpreter/accumulator"/>
@@ -1251,7 +1233,7 @@
           <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/semanticDomain/Turtle/rotate/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/rotate/@containedType.0"
                 name="rotate" staticOperation="#//@packages.0/semanticDomain/Turtle/rotate">
-              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@body/@statement.2/@condition/@parameters.0/@containedType.0"
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/uminus/@containedType.0"
                   name="uminus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/uminus">
                 <target xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"
                     value="90"/>
@@ -1286,7 +1268,7 @@
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/PenDown"/>
           </ownedParameter>
           <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/semanticDomain/Turtle/setPenUp/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value="pendown"/>
@@ -1343,7 +1325,7 @@
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/BinaryExp"/>
           </ownedParameter>
           <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"
                   name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus">
@@ -1390,12 +1372,12 @@
                     name="node"/>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/accumulator/@containedType.0"
                       name="accumulator" staticProperty="#//@packages.0/actions/Interpreter/accumulator"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0"
                       name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus">
                     <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/accumulator/@containedType.0"
                         name="accumulator" staticProperty="#//@packages.0/actions/Interpreter/accumulator"/>
@@ -1415,12 +1397,12 @@
                 </target>
               </condition>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/accumulator/@containedType.0"
                       name="accumulator" staticProperty="#//@packages.0/actions/Interpreter/accumulator"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0"
                       name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus">
                     <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/accumulator/@containedType.0"
                         name="accumulator" staticProperty="#//@packages.0/actions/Interpreter/accumulator"/>
@@ -1508,7 +1490,7 @@
                       <value xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"/>
                     </statement>
                   </elseBody>
-                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.0"
                       name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals">
                     <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/accumulator/@containedType.0"
                         name="accumulator" staticProperty="#//@packages.0/actions/Interpreter/accumulator"/>
@@ -1546,7 +1528,7 @@
                       <value xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"/>
                     </statement>
                   </elseBody>
-                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isLower/@containedType.0"
                       name="isLower" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isLower">
                     <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/accumulator/@containedType.0"
                         name="accumulator" staticProperty="#//@packages.0/actions/Interpreter/accumulator"/>
@@ -1584,7 +1566,7 @@
                       <value xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"/>
                     </statement>
                   </elseBody>
-                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isGreater/@containedType.0"
                       name="isGreater" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isGreater">
                     <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/accumulator/@containedType.0"
                         name="accumulator" staticProperty="#//@packages.0/actions/Interpreter/accumulator"/>
@@ -1659,7 +1641,7 @@
                 </containedType>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"
                   name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus">
@@ -1694,7 +1676,7 @@
                 <type type="#//@packages.0/actions/Interpreter/visitProcCall/@body/@statement.3/@initialization/@containedType.0"
                     isOrdered="true" upper="1"/>
               </initialization>
-              <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
+              <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Instruction/traverse/@containedType.0"
                     name="traverse" staticOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
                   <parameters xsi:type="kermeta_language_behavior:SelfExpression"
@@ -1747,7 +1729,7 @@
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Interpreter/visitProcCall/@body/@statement.0/@containedType.0"
                       name="frame"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                     name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"
                       name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus">
@@ -1762,10 +1744,10 @@
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@target/@containedType.0"
                       name="stdio"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Interpreter/visitProcCall/@body/@statement.3/@initialization/@containedType.0"
                       name="i"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/indexOf/@body/@statement.4/@body/@statement.0/@elseBody/@containedType.0"
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus/@containedType.0"
                       name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/plus">
                     <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
                         staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"
@@ -1775,7 +1757,7 @@
                   </value>
                 </statement>
               </body>
-              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/subSet/@body/@statement.1/@condition/@target/@target/@containedType.0"
+              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0"
                   name="isGreaterOrEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isGreaterOrEqual">
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/size/@containedType.0"
                     name="size" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/size">
@@ -1833,8 +1815,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Block"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0"
                 name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each">
               <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/actions/Interpreter/visitBlock/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:FunctionType"
@@ -1949,7 +1931,7 @@
                 <type type="#//@packages.0/actions/Interpreter/visitRepeat/@body/@statement.1/@initialization/@containedType.0"
                     isOrdered="true" upper="1"/>
               </initialization>
-              <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0">
+              <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/Block/traverse/@containedType.0"
                     name="traverse" staticOperation="#//@packages.0/abstractSyntax/Block/traverse">
                   <parameters xsi:type="kermeta_language_behavior:SelfExpression"
@@ -1960,10 +1942,10 @@
                         name="node"/>
                   </target>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Interpreter/visitRepeat/@body/@statement.1/@initialization/@containedType.0"
                       name="i"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@body/@statement.0/@condition/@parameters.0/@parameters.0/@containedType.0"
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus/@containedType.0"
                       name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/minus">
                     <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
                         staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"
@@ -1973,7 +1955,7 @@
                   </value>
                 </statement>
               </body>
-              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Bag/intersection/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@condition/@containedType.0"
+              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isLower/@containedType.0"
                   name="isLower" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/isLower">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"
                     value="1"/>
@@ -2025,7 +2007,7 @@
                   </target>
                 </statement>
               </body>
-              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"
+              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.0"
                   name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Integer/equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/semanticDomain/Turtle/reset/@body/@statement.1/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/accumulator/@containedType.0"
@@ -2069,9 +2051,8 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="PrettyPrinter"
-          superType="#//@packages.0/actions/PrettyPrinter/@containedType.0 #//@packages.0/actions/PrettyPrinter/@containedType.1">
+          superType="#//@packages.0/actions/PrettyPrinter/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/AbstractVisitor"/>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         <ownedOperation name="visitBack" type="#//@packages.0/actions/PrettyPrinter/visitBack/@containedType.0"
             upper="1" superOperation="#//@packages.0/actions/AbstractVisitor/visitBack">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
@@ -2203,8 +2184,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Clear"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value="clear "/>
@@ -2295,7 +2276,7 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/ProcCall"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write/@containedType.0"
                 name="write" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write">
               <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"
@@ -2314,7 +2295,7 @@
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0"
                 name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each">
               <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/actions/PrettyPrinter/visitProcCall/@body/@statement.1/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:FunctionType"
@@ -2355,8 +2336,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/ProcDeclaration"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value=" "/>
@@ -2383,7 +2364,7 @@
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0"
                 name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each">
               <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/actions/PrettyPrinter/visitProcDeclaration/@body/@statement.2/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:FunctionType"
@@ -2415,7 +2396,7 @@
                     name="node"/>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value=" "/>
@@ -2431,7 +2412,7 @@
                     name="node"/>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value="end"/>
@@ -2447,8 +2428,8 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Block"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0"
                 name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/each">
               <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/actions/PrettyPrinter/visitBlock/@body/@statement.0/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:FunctionType"
@@ -2498,7 +2479,7 @@
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Repeat"/>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write/@containedType.0"
                 name="write" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
@@ -2533,7 +2514,7 @@
                     name="node"/>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value=" ]"/>
@@ -2583,7 +2564,7 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Bindings"
-          superType="#//@packages.0/actions/Bindings/@containedType.0 #//@packages.0/actions/Bindings/@containedType.1">
+          superType="#//@packages.0/actions/Bindings/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#//@packages.0/utils/Hashtable">
           <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#//@packages.0/utils/Hashtable/K"
               type="#//@packages.0/actions/Bindings/@containedType.0/@typeParamBinding.0/@containedType.0">
@@ -2592,7 +2573,6 @@
           <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#//@packages.0/utils/Hashtable/V"
               type="#//@packages.0/actions/Interpreter/visitVariable/@body/@containedType.0"/>
         </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Main"
           superType="#//@packages.0/actions/Main/@containedType.0">
@@ -2749,7 +2729,7 @@
               <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/pointille/@body/@statement.1/@containedType.0"
                   name="cst4"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/pointille/@body/@statement.5/@containedType.0"
                   name="pendown"/>
@@ -2763,7 +2743,7 @@
                     name="block"/>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/pointille/@body/@statement.2/@containedType.0"
                   name="fo1"/>
@@ -2777,7 +2757,7 @@
                     name="block"/>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/pointille/@body/@statement.4/@containedType.0"
                   name="penup"/>
@@ -2791,7 +2771,7 @@
                     name="block"/>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/pointille/@body/@statement.3/@containedType.0"
                   name="fo2"/>
@@ -2910,7 +2890,7 @@
               <type type="#//@packages.0/actions/Main/square/@body/@statement.5/@containedType.0"
                   isOrdered="true" upper="1"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/square/@body/@statement.2/@containedType.0"
                   name="forward"/>
@@ -2924,7 +2904,7 @@
                     name="block"/>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/square/@body/@statement.4/@containedType.0"
                   name="right"/>
@@ -3007,7 +2987,7 @@
               <type type="#//@packages.0/actions/Main/square/@body/@statement.13/@containedType.0"
                   isOrdered="true" upper="1"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/square/@body/@statement.10/@containedType.0"
                   name="repeat"/>
@@ -3053,7 +3033,7 @@
               <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/square/@body/@statement.13/@containedType.0"
                   name="squareblock"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/square/@body/@statement.0/@containedType.0"
                   name="varwidth"/>
@@ -3191,7 +3171,7 @@
               <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/square/@body/@statement.15/@containedType.0"
                   name="squaredecl"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/square/@body/@statement.25/@containedType.0"
                   name="binexp"/>
@@ -3218,7 +3198,7 @@
               <type type="#//@packages.0/actions/Main/square/@body/@containedType.0"
                   isOrdered="true" upper="1"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/square/@body/@statement.15/@containedType.0"
                   name="squaredecl"/>
@@ -3232,7 +3212,7 @@
                     name="fullprog"/>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/square/@body/@statement.19/@containedType.0"
                   name="pendown"/>
@@ -3246,7 +3226,7 @@
                     name="fullprog"/>
               </target>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@containedType.0/@containedType.1"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
                 name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedSet/add">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/square/@body/@statement.20/@containedType.0"
                   name="squarecall"/>
@@ -3345,7 +3325,7 @@
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/main/@body/@statement.3/@containedType.0"
                   name="root"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value=" --- "/>
@@ -3364,8 +3344,8 @@
         <ownedOperation name="loadSquareProg" type="#//@packages.0/actions/Main/loadSquareProg/@containedType.0"
             isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Instruction"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value="Loading square prog..."/>
@@ -3468,13 +3448,13 @@
                   </condition>
                 </statement>
               </body>
-              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@target/@containedType.0"
+              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Iterator/isOff/@containedType.0"
                   name="isOff" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Iterator/isOff">
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/loadSquareProg/@body/@statement.5/@initialization/@containedType.0"
                     name="it"/>
               </stopCondition>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value="Square prog loaded"/>
@@ -3489,7 +3469,7 @@
           <ownedTags value="/** used to create the same square prog but in xmi format */"
               object="#//@packages.0/actions/Main/saveSquareProg"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/actions/Main/saveSquareProg/@body/@statement.0/@containedType.0"
                 identifier="root">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Instruction"/>
@@ -3551,7 +3531,7 @@
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/saveSquareProg/@body/@statement.3/@containedType.0"
                   name="resource"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value="Square prog saved"/>
@@ -3566,7 +3546,7 @@
           <ownedTags value="/** used to create the same square prog but in xmi format */"
               object="#//@packages.0/actions/Main/savePointille"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/actions/Main/savePointille/@body/@statement.0/@containedType.0"
                 identifier="root">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/abstractSyntax/Instruction"/>
@@ -3628,7 +3608,7 @@
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Main/savePointille/@body/@statement.3/@containedType.0"
                   name="resource"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
                 name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
                   value="Pointille prog saved"/>
