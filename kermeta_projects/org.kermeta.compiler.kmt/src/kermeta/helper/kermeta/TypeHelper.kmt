@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.6 2008-04-04 09:51:09 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.7 2008-04-10 15:03:04 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -15,24 +15,13 @@ using kermeta::utils
 using km2ecore
 
 class TypeHelper {
-	/*
-	Moved to the type_mapping.kmt file
-	operation primitiveTypes() : Collection<String> is do
-		result := Sequence<String>.new
-		result.add("kermeta::standard::String")
-		result.add("kermeta::standard::Integer")
-		result.add("kermeta::standard::Boolean")	
-	end*/
 
-	operation isPrimitiveType(type : Type, context : KM2EcoreContext) : Boolean is do 
+	operation isPrimitiveType(type : Type) : Boolean is do 
 		result := type.isInstanceOf(PrimitiveType)
-		
-		// Check if the type is in the types map 
-		/*if not result and type.isInstanceOf(Class) then
-			var c : Class init type.asType(Class)
-			var qualifiedName : String init c.typeDefinition.qualifiedName()
-			result := context.javaTypeMapping.types_mapping.containsKey(qualifiedName)
-		end*/
+	end
+	
+	operation isEnumeration(type : Type) : Boolean is do
+		result := type.isInstanceOf(Enumeration)
 	end
 	
 	operation getClassDefinition(c : Class) : ClassDefinition is do
@@ -41,10 +30,12 @@ class TypeHelper {
 	
 	operation getClassFromPrimitiveType( p : Type ) : Class is do
 		if p.isInstanceOf(PrimitiveType) then
-			if ( p.asType(PrimitiveType).instanceType.isInstanceOf(Class) ) then
-				result := p.asType(PrimitiveType).instanceType.asType(Class)
+			var pt : PrimitiveType init p.asType(PrimitiveType)
+			if ( pt.instanceType.isInstanceOf(Class) ) then
+				result := pt.instanceType.asType(Class)
 			else
-				result := getClassFromPrimitiveType(p.asType(PrimitiveType).instanceType)
+				//deal the case where the alias refers another alias
+				result := getClassFromPrimitiveType(pt.instanceType)
 			end
 		else
 			result := void
@@ -52,7 +43,7 @@ class TypeHelper {
 	end
 	
 	// Check if the type is a subType of ValueType => we have to consider as a PrimitiveType, i.e.: an EAttribute
-	operation isValueType(type : Type, context : KM2EcoreContext) : Boolean is do
+	operation isValueType(type : Type) : Boolean is do
 		result := false
 		if type.isInstanceOf(ParameterizedType) then
 			var pt : ParameterizedType init type.asType(ParameterizedType)
@@ -69,5 +60,17 @@ class TypeHelper {
 		else
 			result := false
 		end*/
+		
+		// old code: Check if the type is in the types map
+		/*if not result and type.isInstanceOf(Class) then
+			var c : Class init type.asType(Class)
+			var qualifiedName : String init c.typeDefinition.qualifiedName()
+			result := context.javaTypeMapping.types_mapping.containsKey(qualifiedName)
+		end*/
 	end
+}
+
+enumeration PrimitiveType_Type {
+	edatatype;
+	eclass;
 }

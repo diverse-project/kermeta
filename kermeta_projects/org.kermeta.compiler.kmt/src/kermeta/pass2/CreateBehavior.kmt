@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.16 2008-04-07 15:13:06 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.17 2008-04-10 15:03:05 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -18,13 +18,12 @@ require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/containm
 
 using kermeta::language::structure
 using kermeta::language::behavior
-//using kermeta::standard
 using kermeta::utils
 using ecore
 using km2ecore
-using km2ecore::helper
 using km2ecore::helper::ecore
 using km2ecore::helper::kermeta
+using km2ecore::helper::java
 
 package structure {
 
@@ -309,7 +308,7 @@ package behavior {
 			if self.name == "stdio" then
 				result := result + "System.out"
 			else
-				result := result + KM2EcoreHelper.new.getMangledIdentifier(self.name, context)
+				result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context)
 			end
 		end
 	}
@@ -338,7 +337,7 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := ""//*IP VariableDecl" + self.toString + "\n*/"
 			var localType : String init self.type.createBehaviorJava(context)
-			result := result + localType + " " + KM2EcoreHelper.new.getMangledIdentifier(self.identifier, context)
+			result := result + localType + " " + IdentifierHelper.new.getMangledIdentifier(self.identifier, context)
 			if not self.initialization.isVoid() then
 				
 				if self.initialization.createBehaviorJava(context).contains(".new()") or self.initialization.createBehaviorJava(context).contains(".new") then
@@ -494,7 +493,7 @@ package behavior {
 	aspect class JavaStaticCall {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			//stdio.writeln(self.jmethod)
-			result := self.jclass.replace("::", ".") + "." + KM2EcoreHelper.new.getMangledIdentifier(self.jmethod, context) + "("
+			result := self.jclass.replace("::", ".") + "." + IdentifierHelper.new.getMangledIdentifier(self.jmethod, context) + "("
 			result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
 			result := result + ")"
 		end
