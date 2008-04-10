@@ -1,4 +1,4 @@
-/* $Id: 505test_Tool_Association.main.kmt,v 1.4 2007-12-14 12:29:22 vmahe Exp $
+/* $Id: 505test_Tool_Association.main.kmt,v 1.5 2008-04-10 13:03:26 dvojtise Exp $
  * Creation date: Summer 2006
  * License:		Eclipse Public License
  * Copyright:	INRIA
@@ -46,10 +46,19 @@ class ToolAssociationTestCase inherits kermeta::kunit::TestCase
 	end
     
     operation testAssociationTool_SimpleAssociation() is do
-//    	model.packagedElement.add(assocTool.addSimpleAssociation(Aclass, Bclass, "association", "source", "target"))
+    	model.packagedElement.add(assocTool.addSimpleAssociation(Aclass, Bclass, "association", "source", "target"))
     	
-    	assertTrueWithMsg(false,
-    		"TODO : feature not implemented")
+    	var assoc : Association
+    	assoc ?= model.packagedElement.select{ u | u.name == "association"}.one
+    	assertTrueWithMsg(assoc != void,
+    		"the model must have a non void 'association'")
+    		
+		assertTrueWithMsg(assoc.ownedEnd.size == 0,
+    		"the association must not own its ends, the classes must own them")
+    	assertTrueWithMsg(Aclass.ownedAttribute.select{ u | u.name == "source" }.size == 1,
+    		"the navigable source property must be owned by A")
+		assertTrueWithMsg(Bclass.ownedAttribute.select{ u | u.name == "target" }.size == 1,
+    		"the navigable target property must be owned by B")    		    		
     end
     
     operation testAssociationTool_OneSideNavigableAssociation() is do
@@ -72,20 +81,7 @@ class ToolAssociationTestCase inherits kermeta::kunit::TestCase
     	assertTrueWithMsg(Aclass.ownedAttribute.select{ u | u.name == "target" }.size == 1,
     		"the navigable property must be in the opposite class")
     end
-    
-    operation testAssociationTool_SimpleComposition() is do
-//    	model.packagedElement.add(assocTool.addSimpleComposition(Aclass, Bclass, "association", "target"))
-    	
-    	assertTrueWithMsg(false,
-    		"TODO : feature not implemented")
-    end
-    
-    operation testAssociationTool_SimpleAggregation() is do
-//    	model.packagedElement.add(assocTool.addSimpleAggregation(Aclass, Bclass, "association", "target"))
-    	
-    	assertTrueWithMsg(false,
-    		"TODO : feature not implemented")
-    end
+
     
     operation testAssociationTool_NavigableComposition() is do
     	model.packagedElement.add(assocTool.addNavigableComposition(Aclass, Bclass, "association", "target"))
