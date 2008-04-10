@@ -664,7 +664,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="//language/structure/DataType //language/structure/TypeContainer">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The class definition for kermeta aliases. Above statement defines a primitive&#xA;type called MyString, which instanceType is &lt;code>kermeta::standard::String&lt;/code>&#xA;&lt;pre>alias MyString : kermeta::standard::String&lt;/pre>"/>
+          <details key="documentation" value="The class definition for kermeta aliases. Above statement defines a primitive&#xD;&#xA;type called MyString, which instanceType is &lt;code>kermeta::standard::String&lt;/code>&#xD;&#xA;&lt;pre>alias MyString : kermeta::standard::String&lt;/pre>. Another example could be: &lt;code>root::apackage::AClass&lt;/code>&#xD;&#xA;&lt;pre>alias MyClass : root::apackage::AClass&lt;/pre>, thus a primitive type may be not a subtype of ValueType (ValueType is a concept from the Kermeta framework)."/>
         </eAnnotations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="instanceType" eType="//language/structure/Type">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
