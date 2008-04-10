@@ -15,7 +15,6 @@ package kermeta::helpers;
 require kermeta
 
 using kermeta::standard
-using kermeta::reflection
 using kermeta::language::structure
 
 
@@ -149,7 +148,7 @@ class KermetaHelper {
 			if(Class.isInstance(t)) then
 				var cls : Class
 				var cDef : ClassDefinition
-				cls := t
+				cls ?= t
 				cDef ?= cls.typeDefinition
 				superCDefs.add(cDef)
 			end
@@ -182,7 +181,7 @@ class KermetaHelper {
 		cDef.superType.each{t |
 			if(Class.isInstance(t)) then
 				var cls : Class
-				cls := t
+				cls ?= t
 
 				var sCDef : ClassDefinition
 				sCDef ?= cls.typeDefinition

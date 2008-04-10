@@ -15,7 +15,7 @@ package ktr;
 require kermeta
 
 using kermeta::standard
-using kermeta::reflection
+using kermeta::language::structure
 
 
 /**

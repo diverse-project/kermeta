@@ -18,7 +18,7 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 require "../util/EcoreHelpers.kmt"
 
 using kermeta::standard
-using kermeta::reflection
+using kermeta::language::structure
 using kermeta::interpreter
 using kermeta::utils
 

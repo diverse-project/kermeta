@@ -25,7 +25,7 @@ require "CoreObject.kmt"
 require "platform:/plugin/fr.irisa.triskell.traceability/model/kmt/Traceability_Behavior.kmt"
 
 using kermeta::standard
-using kermeta::reflection
+using kermeta::language::structure
 using kermeta::interpreter
 using kermeta::utils
 using kermeta::exceptions
@@ -375,7 +375,7 @@ class InterpretationPatternModel {
 	 * This operation computes the list of instances of the provided Kermeta class within
 	 * the set of input model elements.
 	 */
-	operation allInstancesOf(cls: kermeta::reflection::Class) : set Object[0..*] is do
+	operation allInstancesOf(cls: Class) : set Object[0..*] is do
 		result := inputElts.select{e | cls.isInstance(e)}.asSet
 	end
 
