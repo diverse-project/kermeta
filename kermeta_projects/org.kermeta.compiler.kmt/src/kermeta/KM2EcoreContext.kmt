@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.4 2008-02-28 12:42:31 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.5 2008-04-10 15:03:06 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -33,6 +33,9 @@ class KM2EcoreContext
 	
 	/** Unique instance of the JavaTypeMapping */
 	reference javaTypeMapping : JavaTypeMapping [0..1]
+	
+	/**  */
+	attribute primitiveType_Type : String
 	
 	operation initialize() : Void is do
 		javaKeyWordList := JavaKeyWordList.new

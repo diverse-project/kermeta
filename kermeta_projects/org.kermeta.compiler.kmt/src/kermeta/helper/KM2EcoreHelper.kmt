@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreHelper.kmt,v 1.8 2008-04-07 15:13:07 cfaucher Exp $
+/* $Id: KM2EcoreHelper.kmt,v 1.9 2008-04-10 15:03:06 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -10,31 +10,4 @@ package km2ecore::helper;
 // The 2 following require statement are here to simplify the call of these files
 require "kermeta/KermetaHelper.kmt" 
 require "ecore/EcoreHelper.kmt"
-
-require kermeta
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/keyword_list.kmt"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
-
-//using kermeta::standard
-using kermeta::language::structure
-using kermeta::language
-using km2ecore
-
-class KM2EcoreHelper {
-
-	/** An underscore is added if the identifier is used as keyword */
-	operation getMangledIdentifier(id : String, context : KM2EcoreContext) : String is do
-		
-		if id.isVoid() then
-			result := id
-		end
-
-		if context.javaKeyWordList.isKeyword(id) then
-			result := "_" + id
-		else
-			result := id
-		end
-		
-	end
-}
+require "java/JavaHelper.kmt"

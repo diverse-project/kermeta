@@ -1,4 +1,4 @@
-/* $Id: trace_structure.kmt,v 1.6 2008-04-04 09:51:09 cfaucher Exp $
+/* $Id: trace_structure.kmt,v 1.7 2008-04-10 15:03:06 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -23,7 +23,7 @@ class Traceability<X> {
 	
 	reference ecoreModelElement : X
 	
-} 
+}
 
 aspect class ModelingUnit inherits Traceability<EAnnotation> {
 	
@@ -32,12 +32,11 @@ aspect class ModelingUnit inherits Traceability<EAnnotation> {
 	reference entryPoints : EAnnotation[0..*]
 }
 
-
 aspect class Package inherits Traceability<EPackage> {
 }
 
-
 aspect class PrimitiveType inherits Traceability<EDataType> {
+	reference ecoreDataType : EDataType[0..1]
 }
 
 aspect class Enumeration inherits Traceability<EEnum> {
@@ -48,9 +47,16 @@ aspect class EnumerationLiteral inherits Traceability<EEnumLiteral> {
 
 aspect class ClassDefinition inherits Traceability<EClass> {
 	reference ecoreDataType : EDataType[0..1]
+	
+	/*operation getEcoreModelElement() : EClass is do
+		result ?= ecoreModelElement
+	end*/
 }
 
 aspect class Operation inherits Traceability<EOperation> {
+	/*operation getEcoreModelElement() : EOperation is do
+		result ?= ecoreModelElement
+	end*/
 }
 
 aspect class Parameter inherits Traceability<EParameter> {

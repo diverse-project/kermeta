@@ -104,7 +104,27 @@
   <events name="close"/>
   <units rules="//@rules.0 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.kmt"/>
   <units rules="//@rules.0 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.kmt/src/kermeta/printJava.kmt"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T14:40:46.328+0200" value="/org.kermeta.compiler.kmt/src/kermeta/pass2/SetLinks.kmt" dependents="//@units.3/@dependencies.0 //@units.45/@dependencies.137">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:30.078+0200" value="/org.kermeta.compiler.kmt/src/kermeta/pass2/SetLinks.kmt" dependents="//@units.3/@dependencies.0 //@units.45/@dependencies.137">
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.26"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.19"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.33"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.13"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.8"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.27"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.25"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.15"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.12"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.9"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.14"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.5"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.17"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.18"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.16"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.49"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.48"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.10"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.11"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.30"/>
     <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.26"/>
     <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.19"/>
     <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.33"/>
@@ -310,7 +330,7 @@
     <dependencies type="//@ruleTypes.0" from="//@units.3" to="//@units.48"/>
   </units>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.kmt/src/kermeta/pass2/KM2JavaPrettyPrinter.java"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-08T13:56:40.640+0200" value="/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt" dependents="//@units.19/@dependencies.22 //@units.14/@dependencies.23 //@units.11/@dependencies.1 //@units.13/@dependencies.8 //@units.43/@dependencies.14 //@units.44/@dependencies.14 //@units.45/@dependencies.106 //@units.5/@dependencies.125 //@units.3/@dependencies.1 //@units.2/@dependencies.171 //@units.7/@dependencies.640 //@units.6/@dependencies.451">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:30.125+0200" value="/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt" dependents="//@units.19/@dependencies.22 //@units.14/@dependencies.23 //@units.11/@dependencies.1 //@units.13/@dependencies.8 //@units.43/@dependencies.14 //@units.44/@dependencies.14 //@units.45/@dependencies.106 //@units.3/@dependencies.1 //@units.7/@dependencies.661 //@units.5/@dependencies.145 //@units.2/@dependencies.191 //@units.6/@dependencies.473">
     <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.33"/>
     <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.19"/>
     <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.10"/>
@@ -441,10 +461,30 @@
     <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.18"/>
     <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.16"/>
     <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.26"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.49"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.48"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.33"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.19"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.10"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.11"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.30"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.27"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.25"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.13"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.8"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.15"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.12"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.9"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.14"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.5"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.17"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.18"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.26"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.16"/>
     <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.49"/>
     <dependencies type="//@ruleTypes.0" from="//@units.5" to="//@units.48"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T15:08:47.156+0200" value="/org.kermeta.compiler.kmt/src/kermeta/pass1/Pass1.kmt" dependents="//@units.45/@dependencies.135">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:30.359+0200" value="/org.kermeta.compiler.kmt/src/kermeta/pass1/Pass1.kmt" dependents="//@units.45/@dependencies.135">
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.7"/>
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.26"/>
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.19"/>
@@ -861,6 +901,28 @@
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.10"/>
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.11"/>
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.30"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.7"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.26"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.19"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.33"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.30"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.13"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.8"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.27"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.25"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.15"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.12"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.9"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.14"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.5"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.10"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.11"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.17"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.18"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.16"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.49"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.48"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.28"/>
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.7"/>
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.26"/>
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.19"/>
@@ -906,7 +968,7 @@
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.48"/>
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.28"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T15:06:27.812+0200" value="/org.kermeta.compiler.kmt/src/kermeta/pass1/CreateEcoreModelElement.kmt" dependents="//@units.45/@dependencies.95 //@units.6/@dependencies.438">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:30.343+0200" value="/org.kermeta.compiler.kmt/src/kermeta/pass1/CreateEcoreModelElement.kmt" dependents="//@units.45/@dependencies.95 //@units.6/@dependencies.460">
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.30"/>
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.19"/>
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.28"/>
@@ -1006,6 +1068,27 @@
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.18"/>
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.16"/>
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.26"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.49"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.48"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.10"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.11"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.30"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.19"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.28"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.33"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.13"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.8"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.27"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.25"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.15"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.12"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.9"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.14"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.5"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.17"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.18"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.26"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.16"/>
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.49"/>
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.48"/>
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.10"/>
@@ -1557,7 +1640,7 @@
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.10"/>
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.11"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T15:04:37.562+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/TypeHelper.kmt" dependents="//@units.19/@dependencies.23 //@units.14/@dependencies.27 //@units.11/@dependencies.6 //@units.13/@dependencies.0 //@units.43/@dependencies.20 //@units.44/@dependencies.20 //@units.45/@dependencies.99 //@units.5/@dependencies.120 //@units.3/@dependencies.7 //@units.2/@dependencies.164 //@units.7/@dependencies.633 //@units.6/@dependencies.444">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:04.000+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/TypeHelper.kmt" dependents="//@units.19/@dependencies.23 //@units.14/@dependencies.27 //@units.11/@dependencies.6 //@units.13/@dependencies.0 //@units.43/@dependencies.20 //@units.44/@dependencies.20 //@units.45/@dependencies.99 //@units.3/@dependencies.7 //@units.7/@dependencies.654 //@units.5/@dependencies.140 //@units.2/@dependencies.184 //@units.6/@dependencies.466">
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.33"/>
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.27"/>
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.25"/>
@@ -1569,6 +1652,9 @@
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.33"/>
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.33"/>
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.33"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.33"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.27"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.25"/>
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.33"/>
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.27"/>
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.25"/>
@@ -1606,9 +1692,9 @@
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.27"/>
     <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.25"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:31.546+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/TagHelper.kmt" dependents="//@units.19/@dependencies.27 //@units.14/@dependencies.30 //@units.11/@dependencies.9 //@units.13/@dependencies.3 //@units.43/@dependencies.23 //@units.44/@dependencies.23 //@units.45/@dependencies.104 //@units.5/@dependencies.123 //@units.3/@dependencies.12 //@units.2/@dependencies.169 //@units.7/@dependencies.638 //@units.6/@dependencies.449"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:34.203+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/StringHelper.kmt" dependents="//@units.19/@dependencies.33 //@units.14/@dependencies.32 //@units.11/@dependencies.11 //@units.13/@dependencies.15 //@units.43/@dependencies.16 //@units.44/@dependencies.16 //@units.45/@dependencies.107 //@units.5/@dependencies.116 //@units.3/@dependencies.14 //@units.2/@dependencies.177 //@units.7/@dependencies.647 //@units.6/@dependencies.452"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-07T17:45:56.921+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/PrettyPrinterHelper.kmt" dependents="//@units.19/@dependencies.34 //@units.14/@dependencies.33 //@units.11/@dependencies.12 //@units.13/@dependencies.16 //@units.43/@dependencies.17 //@units.44/@dependencies.17 //@units.45/@dependencies.108 //@units.5/@dependencies.117 //@units.3/@dependencies.15 //@units.2/@dependencies.178 //@units.7/@dependencies.648 //@units.6/@dependencies.453">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:31.546+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/TagHelper.kmt" dependents="//@units.19/@dependencies.27 //@units.14/@dependencies.30 //@units.11/@dependencies.9 //@units.13/@dependencies.3 //@units.43/@dependencies.23 //@units.44/@dependencies.23 //@units.45/@dependencies.104 //@units.3/@dependencies.12 //@units.7/@dependencies.659 //@units.5/@dependencies.143 //@units.2/@dependencies.189 //@units.6/@dependencies.471"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:34.203+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/StringHelper.kmt" dependents="//@units.19/@dependencies.33 //@units.14/@dependencies.32 //@units.11/@dependencies.11 //@units.13/@dependencies.15 //@units.43/@dependencies.16 //@units.44/@dependencies.16 //@units.45/@dependencies.107 //@units.3/@dependencies.14 //@units.7/@dependencies.668 //@units.5/@dependencies.134 //@units.2/@dependencies.197 //@units.6/@dependencies.474"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-07T17:45:56.921+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/PrettyPrinterHelper.kmt" dependents="//@units.19/@dependencies.34 //@units.14/@dependencies.33 //@units.11/@dependencies.12 //@units.13/@dependencies.16 //@units.43/@dependencies.17 //@units.44/@dependencies.17 //@units.45/@dependencies.108 //@units.3/@dependencies.15 //@units.7/@dependencies.669 //@units.5/@dependencies.135 //@units.2/@dependencies.198 //@units.6/@dependencies.475">
     <dependencies type="//@ruleTypes.0" from="//@units.11" to="//@units.33"/>
     <dependencies type="//@ruleTypes.0" from="//@units.11" to="//@units.5"/>
     <dependencies type="//@ruleTypes.0" from="//@units.11" to="//@units.27"/>
@@ -1628,8 +1714,8 @@
     <dependencies type="//@ruleTypes.0" from="//@units.11" to="//@units.16"/>
     <dependencies type="//@ruleTypes.0" from="//@units.11" to="//@units.26"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:37.000+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/ObjectHelper.kmt" dependents="//@units.19/@dependencies.26 //@units.14/@dependencies.29 //@units.11/@dependencies.8 //@units.13/@dependencies.2 //@units.43/@dependencies.22 //@units.44/@dependencies.22 //@units.45/@dependencies.103 //@units.5/@dependencies.122 //@units.3/@dependencies.11 //@units.2/@dependencies.168 //@units.7/@dependencies.637 //@units.6/@dependencies.448"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-07T17:46:04.953+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/KermetaHelper.kmt" dependents="//@units.19/@dependencies.18 //@units.14/@dependencies.26 //@units.11/@dependencies.5 //@units.13/@dependencies.10 //@units.43/@dependencies.19 //@units.44/@dependencies.19 //@units.45/@dependencies.98 //@units.5/@dependencies.119 //@units.3/@dependencies.6 //@units.2/@dependencies.163 //@units.7/@dependencies.632 //@units.6/@dependencies.443">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:37.000+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/ObjectHelper.kmt" dependents="//@units.19/@dependencies.26 //@units.14/@dependencies.29 //@units.11/@dependencies.8 //@units.13/@dependencies.2 //@units.43/@dependencies.22 //@units.44/@dependencies.22 //@units.45/@dependencies.103 //@units.3/@dependencies.11 //@units.7/@dependencies.658 //@units.5/@dependencies.142 //@units.2/@dependencies.188 //@units.6/@dependencies.470"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-07T17:46:04.953+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/KermetaHelper.kmt" dependents="//@units.19/@dependencies.18 //@units.14/@dependencies.26 //@units.11/@dependencies.5 //@units.13/@dependencies.10 //@units.43/@dependencies.19 //@units.44/@dependencies.19 //@units.45/@dependencies.98 //@units.3/@dependencies.6 //@units.7/@dependencies.653 //@units.5/@dependencies.139 //@units.2/@dependencies.183 //@units.6/@dependencies.465">
     <dependencies type="//@ruleTypes.0" from="//@units.13" to="//@units.8"/>
     <dependencies type="//@ruleTypes.0" from="//@units.13" to="//@units.15"/>
     <dependencies type="//@ruleTypes.0" from="//@units.13" to="//@units.12"/>
@@ -1649,7 +1735,7 @@
     <dependencies type="//@ruleTypes.0" from="//@units.13" to="//@units.11"/>
     <dependencies type="//@ruleTypes.0" from="//@units.13" to="//@units.30"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-07T17:43:22.953+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/GenericTypeDefinitionHelper.kmt" dependents="//@units.19/@dependencies.28 //@units.14/@dependencies.31 //@units.11/@dependencies.10 //@units.13/@dependencies.4 //@units.43/@dependencies.24 //@units.44/@dependencies.24 //@units.45/@dependencies.105 //@units.5/@dependencies.124 //@units.3/@dependencies.13 //@units.2/@dependencies.170 //@units.7/@dependencies.639 //@units.6/@dependencies.450">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-07T17:43:22.953+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/GenericTypeDefinitionHelper.kmt" dependents="//@units.19/@dependencies.28 //@units.14/@dependencies.31 //@units.11/@dependencies.10 //@units.13/@dependencies.4 //@units.43/@dependencies.24 //@units.44/@dependencies.24 //@units.45/@dependencies.105 //@units.3/@dependencies.13 //@units.7/@dependencies.660 //@units.5/@dependencies.144 //@units.2/@dependencies.190 //@units.6/@dependencies.472">
     <dependencies type="//@ruleTypes.0" from="//@units.14" to="//@units.27"/>
     <dependencies type="//@ruleTypes.0" from="//@units.14" to="//@units.33"/>
     <dependencies type="//@ruleTypes.0" from="//@units.14" to="//@units.25"/>
@@ -1690,19 +1776,19 @@
     <dependencies type="//@ruleTypes.0" from="//@units.14" to="//@units.16"/>
     <dependencies type="//@ruleTypes.0" from="//@units.14" to="//@units.26"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:39.703+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/ConstraintHelper.kmt" dependents="//@units.19/@dependencies.25 //@units.14/@dependencies.28 //@units.11/@dependencies.7 //@units.13/@dependencies.1 //@units.43/@dependencies.21 //@units.44/@dependencies.21 //@units.45/@dependencies.102 //@units.5/@dependencies.121 //@units.3/@dependencies.10 //@units.2/@dependencies.167 //@units.7/@dependencies.636 //@units.6/@dependencies.447"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:42.359+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/ecore/EcoreModelElementHelper.kmt" dependents="//@units.19/@dependencies.31 //@units.14/@dependencies.37 //@units.11/@dependencies.16 //@units.13/@dependencies.13 //@units.43/@dependencies.27 //@units.44/@dependencies.27 //@units.17/@dependencies.1 //@units.45/@dependencies.111 //@units.5/@dependencies.128 //@units.3/@dependencies.18 //@units.2/@dependencies.174 //@units.7/@dependencies.644 //@units.6/@dependencies.456">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:39.703+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/ConstraintHelper.kmt" dependents="//@units.19/@dependencies.25 //@units.14/@dependencies.28 //@units.11/@dependencies.7 //@units.13/@dependencies.1 //@units.43/@dependencies.21 //@units.44/@dependencies.21 //@units.45/@dependencies.102 //@units.3/@dependencies.10 //@units.7/@dependencies.657 //@units.5/@dependencies.141 //@units.2/@dependencies.187 //@units.6/@dependencies.469"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:42.359+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/ecore/EcoreModelElementHelper.kmt" dependents="//@units.19/@dependencies.31 //@units.14/@dependencies.37 //@units.11/@dependencies.16 //@units.13/@dependencies.13 //@units.43/@dependencies.27 //@units.44/@dependencies.27 //@units.17/@dependencies.1 //@units.45/@dependencies.111 //@units.3/@dependencies.18 //@units.7/@dependencies.665 //@units.5/@dependencies.149 //@units.2/@dependencies.194 //@units.6/@dependencies.478">
     <dependencies type="//@ruleTypes.0" from="//@units.16" to="//@units.26"/>
     <dependencies type="//@ruleTypes.0" from="//@units.16" to="//@units.26"/>
     <dependencies type="//@ruleTypes.0" from="//@units.16" to="//@units.26"/>
     <dependencies type="//@ruleTypes.0" from="//@units.16" to="//@units.26"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-08T10:30:39.171+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/ecore/EcoreHelper.kmt" dependents="//@units.19/@dependencies.19 //@units.14/@dependencies.35 //@units.11/@dependencies.14 //@units.13/@dependencies.11 //@units.43/@dependencies.25 //@units.44/@dependencies.25 //@units.45/@dependencies.109 //@units.5/@dependencies.126 //@units.3/@dependencies.16 //@units.2/@dependencies.172 //@units.7/@dependencies.641 //@units.6/@dependencies.454">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-08T10:30:39.171+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/ecore/EcoreHelper.kmt" dependents="//@units.19/@dependencies.19 //@units.14/@dependencies.35 //@units.11/@dependencies.14 //@units.13/@dependencies.11 //@units.43/@dependencies.25 //@units.44/@dependencies.25 //@units.45/@dependencies.109 //@units.3/@dependencies.16 //@units.7/@dependencies.662 //@units.5/@dependencies.146 //@units.2/@dependencies.192 //@units.6/@dependencies.476">
     <dependencies type="//@ruleTypes.0" from="//@units.17" to="//@units.18"/>
     <dependencies type="//@ruleTypes.0" from="//@units.17" to="//@units.16"/>
     <dependencies type="//@ruleTypes.0" from="//@units.17" to="//@units.26"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T15:06:36.296+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/ecore/EAnnotationHelper.kmt" dependents="//@units.19/@dependencies.30 //@units.14/@dependencies.36 //@units.11/@dependencies.15 //@units.13/@dependencies.12 //@units.43/@dependencies.26 //@units.44/@dependencies.26 //@units.17/@dependencies.0 //@units.45/@dependencies.110 //@units.5/@dependencies.127 //@units.3/@dependencies.17 //@units.2/@dependencies.173 //@units.7/@dependencies.642 //@units.6/@dependencies.455">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:06.000+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/ecore/EAnnotationHelper.kmt" dependents="//@units.19/@dependencies.30 //@units.14/@dependencies.36 //@units.11/@dependencies.15 //@units.13/@dependencies.12 //@units.43/@dependencies.26 //@units.44/@dependencies.26 //@units.17/@dependencies.0 //@units.45/@dependencies.110 //@units.3/@dependencies.17 //@units.7/@dependencies.663 //@units.5/@dependencies.147 //@units.2/@dependencies.193 //@units.6/@dependencies.477">
     <dependencies type="//@ruleTypes.0" from="//@units.18" to="//@units.26"/>
     <dependencies type="//@ruleTypes.0" from="//@units.18" to="//@units.26"/>
     <dependencies type="//@ruleTypes.0" from="//@units.18" to="//@units.26"/>
@@ -1752,7 +1838,7 @@
     <dependencies type="//@ruleTypes.0" from="//@units.18" to="//@units.26"/>
     <dependencies type="//@ruleTypes.0" from="//@units.18" to="//@units.26"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-08T13:51:36.453+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/KM2EcoreHelper.kmt" dependents="//@units.19/@dependencies.29 //@units.14/@dependencies.25 //@units.11/@dependencies.4 //@units.13/@dependencies.9 //@units.43/@dependencies.15 //@units.44/@dependencies.15 //@units.45/@dependencies.97 //@units.5/@dependencies.115 //@units.3/@dependencies.5 //@units.2/@dependencies.161 //@units.7/@dependencies.629 //@units.6/@dependencies.440">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:30.843+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/KM2EcoreHelper.kmt" dependents="//@units.19/@dependencies.29 //@units.14/@dependencies.25 //@units.11/@dependencies.4 //@units.13/@dependencies.9 //@units.43/@dependencies.15 //@units.44/@dependencies.15 //@units.45/@dependencies.97 //@units.3/@dependencies.5 //@units.7/@dependencies.650 //@units.5/@dependencies.133 //@units.2/@dependencies.181 //@units.6/@dependencies.462">
     <dependencies type="//@ruleTypes.0" from="//@units.19" to="//@units.13"/>
     <dependencies type="//@ruleTypes.0" from="//@units.19" to="//@units.17"/>
     <dependencies type="//@ruleTypes.0" from="//@units.19" to="//@units.27"/>
@@ -1797,15 +1883,15 @@
   <units rules="//@rules.0 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.kmt/src/kermeta/deprecated_sources/compile_structure_common.kmt"/>
   <units rules="//@rules.0 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.kmt/src/kermeta/deprecated_sources/compile_behavior.kmt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.kmt/src/kermeta/compilerWithAspect.launch"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:49:02.750+0200" value="/org.kermeta.compiler.kmt/src/kermeta/common/type_mapping.kmt" dependents="//@units.19/@dependencies.24 //@units.14/@dependencies.24 //@units.11/@dependencies.3 //@units.13/@dependencies.7 //@units.43/@dependencies.13 //@units.44/@dependencies.13 //@units.45/@dependencies.101 //@units.49/@dependencies.11 //@units.5/@dependencies.82 //@units.3/@dependencies.9 //@units.48/@dependencies.20 //@units.2/@dependencies.166 //@units.33/@dependencies.9 //@units.8/@dependencies.46 //@units.7/@dependencies.635 //@units.6/@dependencies.446"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T15:08:22.203+0200" value="/org.kermeta.compiler.kmt/src/kermeta/common/trace_structure.kmt" dependents="//@units.19/@dependencies.32 //@units.14/@dependencies.38 //@units.11/@dependencies.17 //@units.13/@dependencies.14 //@units.43/@dependencies.28 //@units.44/@dependencies.28 //@units.17/@dependencies.2 //@units.45/@dependencies.112 //@units.5/@dependencies.129 //@units.3/@dependencies.4 //@units.16/@dependencies.3 //@units.2/@dependencies.160 //@units.7/@dependencies.643 //@units.18/@dependencies.47 //@units.6/@dependencies.439"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:57.250+0200" value="/org.kermeta.compiler.kmt/src/kermeta/common/keyword_list.kmt" dependents="//@units.19/@dependencies.20 //@units.14/@dependencies.21 //@units.11/@dependencies.2 //@units.13/@dependencies.6 //@units.43/@dependencies.12 //@units.44/@dependencies.12 //@units.45/@dependencies.100 //@units.49/@dependencies.9 //@units.5/@dependencies.81 //@units.3/@dependencies.8 //@units.48/@dependencies.18 //@units.2/@dependencies.165 //@units.33/@dependencies.8 //@units.8/@dependencies.45 //@units.7/@dependencies.634 //@units.6/@dependencies.445"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:53.890+0200" value="/org.kermeta.compiler.kmt/src/kermeta/common/exception.kmt" dependents="//@units.45/@dependencies.113 //@units.7/@dependencies.630 //@units.6/@dependencies.459"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:49:02.750+0200" value="/org.kermeta.compiler.kmt/src/kermeta/common/type_mapping.kmt" dependents="//@units.19/@dependencies.24 //@units.14/@dependencies.24 //@units.11/@dependencies.3 //@units.13/@dependencies.7 //@units.43/@dependencies.13 //@units.44/@dependencies.13 //@units.45/@dependencies.101 //@units.49/@dependencies.11 //@units.3/@dependencies.9 //@units.33/@dependencies.9 //@units.48/@dependencies.23 //@units.8/@dependencies.49 //@units.7/@dependencies.656 //@units.5/@dependencies.138 //@units.2/@dependencies.186 //@units.6/@dependencies.468"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:06.000+0200" value="/org.kermeta.compiler.kmt/src/kermeta/common/trace_structure.kmt" dependents="//@units.19/@dependencies.32 //@units.14/@dependencies.38 //@units.11/@dependencies.17 //@units.13/@dependencies.14 //@units.43/@dependencies.28 //@units.44/@dependencies.28 //@units.17/@dependencies.2 //@units.45/@dependencies.112 //@units.3/@dependencies.4 //@units.16/@dependencies.3 //@units.18/@dependencies.47 //@units.7/@dependencies.664 //@units.5/@dependencies.148 //@units.2/@dependencies.180 //@units.6/@dependencies.461"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:57.250+0200" value="/org.kermeta.compiler.kmt/src/kermeta/common/keyword_list.kmt" dependents="//@units.19/@dependencies.20 //@units.14/@dependencies.21 //@units.11/@dependencies.2 //@units.13/@dependencies.6 //@units.43/@dependencies.12 //@units.44/@dependencies.12 //@units.45/@dependencies.100 //@units.49/@dependencies.9 //@units.3/@dependencies.8 //@units.33/@dependencies.8 //@units.48/@dependencies.21 //@units.8/@dependencies.48 //@units.7/@dependencies.655 //@units.5/@dependencies.137 //@units.2/@dependencies.185 //@units.6/@dependencies.467"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:53.890+0200" value="/org.kermeta.compiler.kmt/src/kermeta/common/exception.kmt" dependents="//@units.45/@dependencies.113 //@units.7/@dependencies.651 //@units.6/@dependencies.481"/>
   <units rules="//@rules.0 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.kmt/src/kermeta/common/containment_traversable_Generator_Launcher.kmt"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:50.484+0200" value="/org.kermeta.compiler.kmt/src/kermeta/common/containment_traversable.kmt" dependents="//@units.19/@dependencies.35 //@units.14/@dependencies.34 //@units.11/@dependencies.13 //@units.13/@dependencies.17 //@units.43/@dependencies.18 //@units.44/@dependencies.18 //@units.45/@dependencies.96 //@units.5/@dependencies.118 //@units.3/@dependencies.2 //@units.2/@dependencies.179 //@units.7/@dependencies.628 //@units.6/@dependencies.442"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T11:48:50.484+0200" value="/org.kermeta.compiler.kmt/src/kermeta/common/containment_traversable.kmt" dependents="//@units.19/@dependencies.35 //@units.14/@dependencies.34 //@units.11/@dependencies.13 //@units.13/@dependencies.17 //@units.43/@dependencies.18 //@units.44/@dependencies.18 //@units.45/@dependencies.96 //@units.3/@dependencies.2 //@units.7/@dependencies.649 //@units.5/@dependencies.136 //@units.2/@dependencies.199 //@units.6/@dependencies.464"/>
   <units rules="//@rules.0 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.kmt/src/kermeta/common/containment_traversable.gen.kmt"/>
   <units rules="//@rules.0 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.kmt/src/kermeta/PrintWithAspect.kmt"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T14:57:35.515+0200" value="/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt" dependents="//@units.19/@dependencies.21 //@units.14/@dependencies.22 //@units.11/@dependencies.0 //@units.13/@dependencies.5 //@units.43/@dependencies.11 //@units.44/@dependencies.11 //@units.45/@dependencies.94 //@units.49/@dependencies.10 //@units.5/@dependencies.114 //@units.3/@dependencies.3 //@units.48/@dependencies.19 //@units.2/@dependencies.162 //@units.8/@dependencies.44 //@units.7/@dependencies.631 //@units.6/@dependencies.441">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:06.000+0200" value="/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt" dependents="//@units.19/@dependencies.21 //@units.14/@dependencies.22 //@units.11/@dependencies.0 //@units.13/@dependencies.5 //@units.43/@dependencies.11 //@units.44/@dependencies.11 //@units.45/@dependencies.94 //@units.49/@dependencies.10 //@units.3/@dependencies.3 //@units.48/@dependencies.22 //@units.8/@dependencies.47 //@units.7/@dependencies.652 //@units.5/@dependencies.132 //@units.2/@dependencies.182 //@units.6/@dependencies.463">
     <dependencies type="//@ruleTypes.0" from="//@units.33" to="//@units.27"/>
     <dependencies type="//@ruleTypes.0" from="//@units.33" to="//@units.25"/>
     <dependencies type="//@ruleTypes.0" from="//@units.33" to="//@units.27"/>
@@ -2031,7 +2117,10 @@
   </units>
   <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-04-08T11:16:59.890+0200" value="/org.kermeta.compiler.kmt/models/Attempt01.km"/>
   <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-04-08T11:38:31.562+0200" value="/org.kermeta.compiler.kmt/models/Attempt01_merged.km"/>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T10:46:30.171+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/java/IdentifierHelper.kmt" dependents="//@units.49/@dependencies.8 //@units.19/@dependencies.37 //@units.45/@dependencies.121 //@units.5/@dependencies.131 //@units.3/@dependencies.20 //@units.2/@dependencies.176 //@units.7/@dependencies.646 //@units.6/@dependencies.458">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:05.000+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/java/IdentifierHelper.kmt" dependents="//@units.19/@dependencies.37 //@units.45/@dependencies.121 //@units.3/@dependencies.20 //@units.49/@dependencies.12 //@units.7/@dependencies.667 //@units.5/@dependencies.151 //@units.2/@dependencies.196 //@units.6/@dependencies.480">
+    <dependencies type="//@ruleTypes.0" from="//@units.48" to="//@units.27"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.48" to="//@units.33"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.48" to="//@units.25"/>
     <dependencies type="//@ruleTypes.0" from="//@units.48" to="//@units.27"/>
     <dependencies type="//@ruleTypes.0" from="//@units.48" to="//@units.33"/>
     <dependencies type="//@ruleTypes.0" from="//@units.48" to="//@units.25"/>
@@ -2054,7 +2143,7 @@
     <dependencies type="//@ruleTypes.0" from="//@units.48" to="//@units.33"/>
     <dependencies type="//@ruleTypes.0" from="//@units.48" to="//@units.25"/>
   </units>
-  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-08T13:50:03.968+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/java/JavaHelper.kmt" dependents="//@units.19/@dependencies.36 //@units.45/@dependencies.120 //@units.5/@dependencies.130 //@units.3/@dependencies.19 //@units.2/@dependencies.175 //@units.7/@dependencies.645 //@units.6/@dependencies.457">
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-04-10T17:03:05.000+0200" value="/org.kermeta.compiler.kmt/src/kermeta/helper/java/JavaHelper.kmt" dependents="//@units.19/@dependencies.36 //@units.45/@dependencies.120 //@units.3/@dependencies.19 //@units.7/@dependencies.666 //@units.5/@dependencies.150 //@units.2/@dependencies.195 //@units.6/@dependencies.479">
     <dependencies type="//@ruleTypes.0" from="//@units.49" to="//@units.48"/>
     <dependencies type="//@ruleTypes.0" from="//@units.49" to="//@units.27"/>
     <dependencies type="//@ruleTypes.0" from="//@units.49" to="//@units.33"/>
@@ -2067,6 +2156,7 @@
     <dependencies type="//@ruleTypes.0" from="//@units.49" to="//@units.27"/>
     <dependencies type="//@ruleTypes.0" from="//@units.49" to="//@units.33"/>
     <dependencies type="//@ruleTypes.0" from="//@units.49" to="//@units.25"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.49" to="//@units.48"/>
   </units>
   <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-04-10T11:55:56.734+0200" value="/org.kermeta.compiler.kmt/models/Attempt01_merged.ecore"/>
   <ruleTypes name="require"/>
