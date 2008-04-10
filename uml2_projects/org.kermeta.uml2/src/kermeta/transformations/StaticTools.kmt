@@ -1,8 +1,10 @@
-/* $Id: StaticTools.kmt,v 1.1 2007-12-13 10:34:40 vmahe Exp $
+/* $Id: StaticTools.kmt,v 1.2 2008-04-10 13:00:27 dvojtise Exp $
  * Creation date: July 3, 2006
- * License:
- * Copyright:
- * Authors:
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors: 
+ *		Vincent Mahe
+ *		Didier Vojtisek
  */
 
 package uml::transformations;
@@ -403,41 +405,9 @@ class Accessor_Tool
 class Association_Tool
 {
 	////////////////// non navigable links ///////////////////
-	
-    operation addSimpleAssociation(firstClass : Classifier,
-		                           secondClass : Classifier,
-		                           associationName : kermeta::standard::String,
-		                           firstEndName : kermeta::standard::String,
-		                           secondEndName : kermeta::standard::String) : Association is do 
-        var assoc : Association init Association.new
-        
-        /// TODO
-        raise kermeta::exceptions::NotImplementedException
-        
-        result := assoc
-    end
-    operation addSimpleComposition(container : Classifier,
-		                           component : Classifier,
-		                           associationName : kermeta::standard::String,
-		                           componentEndName : kermeta::standard::String) : Association is do 
-        var assoc : Association init addSimpleAssociation(container, component, associationName, "", componentEndName)
-        
-        /// TODO
-        raise kermeta::exceptions::NotImplementedException
-        
-        result := assoc
-    end
-    operation addSimpleAggregation(container : Class,
-		                           component : Classifier,
-		                           associationName : kermeta::standard::String,
-		                           componentEndName : kermeta::standard::String) : Association is do 
-        var assoc : Association init addSimpleAssociation(container, component, associationName, "", componentEndName)
-        
-        /// TODO
-        raise kermeta::exceptions::NotImplementedException
-        
-        result := assoc
-    end
+			
+    
+    // As creating model without navigable link is usually useless, NOT IMPLEMENTED
     
 	////////////////// one side navigable links ///////////////////
 	
@@ -491,7 +461,32 @@ class Association_Tool
     end
     
 	////////////////// two side navigable links ///////////////////
-	// TODO
+	
+    operation addSimpleAssociation(firstClass : Class,
+		                           secondClass : Class,
+		                           associationName : kermeta::standard::String,
+		                           firstEndName : kermeta::standard::String,
+		                           secondEndName : kermeta::standard::String) : Association is do 
+        var assoc : Association init Association.new
+        assoc.name := associationName
+        
+        // both of the end are navigable so they are owned by the classes
+        // the navigable side of the association is given to the owning class
+        var firstEnd : Property init Property.new
+        firstEnd.name := firstEndName
+        firstEnd.type := firstClass
+        assoc.memberEnd.add(firstEnd)
+        firstClass.ownedAttribute.add(firstEnd)
+        
+        // the non navigable side of the association is for the association
+        var secondEnd : Property init Property.new
+        secondEnd.name := secondEndName
+        secondEnd.type := secondClass
+        assoc.memberEnd.add(secondEnd)
+        secondClass.ownedAttribute.add(secondEnd)        
+        
+        result := assoc
+    end
 }
 
 class Compare_Tool
