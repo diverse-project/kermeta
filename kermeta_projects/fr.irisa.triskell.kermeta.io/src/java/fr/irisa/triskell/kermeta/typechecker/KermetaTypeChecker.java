@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.31 2008-03-17 10:03:40 cfaucher Exp $
+/* $Id: KermetaTypeChecker.java,v 1.32 2008-04-10 16:25:54 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -14,7 +14,6 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -28,6 +27,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -189,6 +189,9 @@ public class KermetaTypeChecker {
         for ( Constraint c : op.getPost() )
             checkConstraint(c);
         
+        for (TypeVariable tv : op.getTypeParameter()){
+        	checkOperationTypeParameter(op, tv);
+        }
         // THIS IS JUST FOR TESTING PURPOSES
         if ( internalOperation ) {
         	if (error_count != unit.getMessages().size())
@@ -196,6 +199,40 @@ public class KermetaTypeChecker {
         	else 
         		correctOperation.add(op.getName());
        }
+        
+    }
+    
+    /**
+     *  Check that the TypeParameters of the operation can be bound
+     *  	if the TypeParameters can be bound to : 
+     *  		- a parameter of the operation, 
+     *  		- the return type of the operation, 
+     *  		- another type parameter of the class 
+     *  Check that the binding is useful. Ie. if the typeparameter is the same as another one defined in the class 
+     */
+    protected void checkOperationTypeParameter(Operation op, TypeVariable tv){
+    	boolean canBeBound = false; 
+    	if(op.getType() == tv){
+    		canBeBound = true;
+    	}
+    	for(Parameter param : op.getOwnedParameter()){
+    		if(param.getType() == tv){
+        		canBeBound = true;
+        	}
+    	}
+    	ClassDefinition cd = (ClassDefinition)op.eContainer();
+    	for(TypeVariable classTV :cd.getTypeParameter()){
+    		if(classTV.getName().equals(tv.getName())){
+    			// can be bound but seem redundant
+    			canBeBound = true;
+    			unit.warning("TYPE-CHECKER : The TypeVariable "+ tv.getName()+" is already defined at the class level", tv);
+    		}
+    	}
+    	if(! canBeBound) {
+    		unit.error("TYPE-CHECKER : The TypeVariable "+ tv.getName()+" cannot be bound, you must either use it in a parameter or as return type of the operation", tv);
+    	}
+    	
+    	
     }
     
     public void checkExpression(fr.irisa.triskell.kermeta.language.behavior.Expression expression) {
