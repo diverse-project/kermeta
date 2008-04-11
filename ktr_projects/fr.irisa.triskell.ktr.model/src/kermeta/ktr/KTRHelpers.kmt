@@ -16,6 +16,16 @@ package ktr::helpers;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "../util/EcoreHelpers.kmt"
+require "http://rdm"
+require "http://rm"
+
+using rdm
+using mdre
+using mdre::analysis
+using mdre::instances
+using mdre::expression
+using mdre::functional
+
 
 using kermeta::standard
 using kermeta::language::structure
@@ -40,7 +50,10 @@ class KTRHelper {
 		var dynExpr : DynamicExpression init DynamicExpression.new
 		dynExpr.initializeDefaults
 		
-		dynExpr.parse( ecoreTools.getQualifiedNameFromEClass(eCl) )
-		result ?= dynExpr.execute(void, Hashtable<String, Object>.new)
+		var toParse : String init ecoreTools.getQualifiedNameFromEClass(eCl) 
+		stdio.writeln("DE to parse: "+toParse)
+		
+		dynExpr.parse(toParse)
+		result ?= dynExpr.execute(void, Hashtable<String, kermeta::language::structure::Object>.new)
 	end
 }

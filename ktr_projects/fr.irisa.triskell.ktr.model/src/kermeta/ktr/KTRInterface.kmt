@@ -123,12 +123,12 @@ class KTRLauncher {
 		end
 
 		// Run interpretation
-		var outColls : seq Set<Object>[1..*] init engine.execute
+		var outColls : seq Set<kermeta::language::structure::Object>[1..*] init engine.execute
 
 		// Assign output models to output resources
 		stdio.writeln("Assign output models to output resources")
-		var it : Iterator<Set<Object>> init outColls.iterator
-		var crtColl : set Object[0..*]
+		var it : Iterator<Set<kermeta::language::structure::Object>> init outColls.iterator
+		var crtColl : set kermeta::language::structure::Object[0..*]
 		i := 0
 		outMdls.each{mi |
 			do

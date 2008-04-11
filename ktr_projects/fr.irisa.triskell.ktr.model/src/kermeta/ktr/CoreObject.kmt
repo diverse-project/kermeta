@@ -21,5 +21,5 @@ class CoreObject {
 	/** Name of the input model the element comes from */
 	attribute modelName : String[1..1]
 	/** Link to the input model element */
-	reference object : Object[1..1]
+	reference object : kermeta::language::structure::Object[1..1]
 }

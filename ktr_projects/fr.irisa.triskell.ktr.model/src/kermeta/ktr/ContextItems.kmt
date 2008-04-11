@@ -44,5 +44,5 @@ class FormalContextItem inherits ContextItem {
  */
 class ConcreteContextItem inherits ContextItem {
 	/** Value of the contextual item */
-	reference object : Object[1..1]
+	reference object : kermeta::language::structure::Object[1..1]
 }

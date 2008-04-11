@@ -26,7 +26,7 @@ class BindingKey {
 	/** A RuleProduction (also provides access to its containing InterpretationRule) */
 	reference prod : RuleProduction[1..1]
 	/** An input model element matched by the rule */
-	reference object : Object[1..1]
+	reference object : kermeta::language::structure::Object[1..1]
 
 	/**
 	 * This operation returns a string representation of the BindingKey
@@ -42,7 +42,7 @@ class BindingKey {
  */
 class BindingValue {
 	/** An output model element */
-	reference object : Object[1..1]
+	reference object : kermeta::language::structure::Object[1..1]
 	/** Name of the output model object should be assigned to */
 	attribute modelName : String[0..1]
 	/** Flag telling whether the output model element has been initialized */

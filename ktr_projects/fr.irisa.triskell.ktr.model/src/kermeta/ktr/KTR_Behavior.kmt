@@ -67,7 +67,7 @@ class InterpretationPatternModel {
 	/** List of output model names */
 	attribute outputModels : seq String[1..*]
 	/** Set containing all input model elements (from the different input models) */
-	reference inputElts : set Object[0..*]
+	reference inputElts : set kermeta::language::structure::Object[0..*]
 	/** Set containing the core model elements built from the corresponding input model elements */
 	reference inputCoreElts : set CoreObject[0..*]
 
@@ -75,7 +75,7 @@ class InterpretationPatternModel {
 	 * This operation declares an input model, with its set of model elements, to
 	 * the interpreter
 	 */
-	operation addInput(mdlName: String, inElts: set Object[0..*]) is do
+	operation addInput(mdlName: String, inElts: set kermeta::language::structure::Object[0..*]) is do
 		inputModels.add(mdlName)
 		inputElts.addAll(inElts)
 
@@ -99,7 +99,7 @@ class InterpretationPatternModel {
 	 * This operation performs the interpretation of input model elements into a set of
 	 * output model elements based on the patterns defined by the model
 	 */
-	operation execute() : seq Set<Object> [1..*] is do
+	operation execute() : seq Set<kermeta::language::structure::Object> [1..*] is do
 		stdio.writeln("INTERPRETER: pre processing")
 		preProcessing
 
@@ -142,16 +142,16 @@ class InterpretationPatternModel {
 		stdio.writeln("INTERPRETER: result building")
 
 		// Building result of the interpretation
-		result := Sequence<Set<Object>>.new
-		var objs : set Object[0..*]
+		result := Sequence<Set<kermeta::language::structure::Object>>.new
+		var objs : set kermeta::language::structure::Object[0..*]
 
 		if(outputModels.size == 1) then
-			objs := Set<Object>.new
+			objs := Set<kermeta::language::structure::Object>.new
 			objs.addAll( bValues.values.collect{v | v.object} )
 			result.add(objs)
 		else
 			outputModels.each{m |
-				objs := Set<Object>.new
+				objs := Set<kermeta::language::structure::Object>.new
 				objs.addAll( bValues.values.select{v | v.modelName == m}.collect{v | v.object} )
 				result.add(objs)
 			}
@@ -375,7 +375,7 @@ class InterpretationPatternModel {
 	 * This operation computes the list of instances of the provided Kermeta class within
 	 * the set of input model elements.
 	 */
-	operation allInstancesOf(cls: Class) : set Object[0..*] is do
+	operation allInstancesOf(cls: Class) : set kermeta::language::structure::Object[0..*] is do
 		result := inputElts.select{e | cls.isInstance(e)}.asSet
 	end
 
@@ -386,7 +386,7 @@ class InterpretationPatternModel {
 	 * to this product, or raise an exception in case the product cannot be found in the
 	 * bValues hashtable.
 	 */
-	operation resolve(inElt: Object, ruleName: String, prodName: String) : Object is do
+	operation resolve(inElt: kermeta::language::structure::Object, ruleName: String, prodName: String) : kermeta::language::structure::Object is do
 		var bValue : BindingValue init bValues.getValue(ruleName + "#" + prodName + "#" + inElt.toString)
 		if(bValue == void) then
 			var e : UnresolvedRefException init UnresolvedRefException.new
@@ -446,7 +446,7 @@ class InterpretationRule {
 
 		// First step: allocation of the target model elements corresponding to the
 		// different productions of the InterpretationRule.
-		var tgtElements : set Object[0..*] init Set<Object>.new
+		var tgtElements : set kermeta::language::structure::Object[0..*] init Set<kermeta::language::structure::Object>.new
 		productions.each{p |
 			if(SingletonRuleProduction.isInstance(p)) then
 				var sProd : SingletonRuleProduction
@@ -469,7 +469,7 @@ class InterpretationRule {
 			newTrace.sourceReferences.add(mRef)
 
 			// Target references
-			var it : Iterator<Object> init tgtElements.iterator
+			var it : Iterator<kermeta::language::structure::Object> init tgtElements.iterator
 			tgtElements.each{e |
 				mRef := ModelReference.new
 				mRef.refObject := it.next
@@ -548,7 +548,7 @@ class InterpretationRule {
 	 * This operation computes the set of variable concrete context items for the current
 	 * interpretation rule and the provided input model element.
 	 */
-	operation getProductionConcreteContext(inElt: Object) : set ConcreteContextItem[0..*] is do
+	operation getProductionConcreteContext(inElt: kermeta::language::structure::Object) : set ConcreteContextItem[0..*] is do
 		// Result set initialization
 		result := Set<ConcreteContextItem>.new
 		var contextElt : ConcreteContextItem
@@ -572,7 +572,7 @@ class InterpretationRule {
 	 * This operation computes the set of production concrete context items for the current
 	 * interpretation rule and the provided input model element.
 	 */
-	operation getVariableConcreteContext(inElt: Object) : set ConcreteContextItem[0..*] is do
+	operation getVariableConcreteContext(inElt: kermeta::language::structure::Object) : set ConcreteContextItem[0..*] is do
 		// Result set initialization
 		result := Set<ConcreteContextItem>.new
 		var contextElt : ConcreteContextItem
@@ -600,16 +600,16 @@ class RuleVariable {
 	/** Dynamic expression for variable initialization */
 	attribute varDynExpr : DynamicExpression[0..1]
 	/** Current value of the rule variable */
-	reference varValue : Object[0..1]
+	reference varValue : kermeta::language::structure::Object[0..1]
 	/** Kermeta type of the variable */
 	reference varKType : Class[0..1]
 
 	/**
 	 * This operation performs variable initialization for the given input model element.
 	 */
-	operation initialize(inElt: Object) is do
+	operation initialize(inElt: kermeta::language::structure::Object) is do
 		// Initializing concrete parameters of the dynamic expression			
-		var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+		var params : Hashtable<String, kermeta::language::structure::Object> init Hashtable<String, kermeta::language::structure::Object>.new
 
 		// Add input model element into dynamic expression context
 		params.put(owningRule.source.name, inElt)
@@ -671,7 +671,7 @@ class RulePattern {
 				result := true
 			else
 				// Defining concrete parameters of dynamic expression
-				var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+				var params : Hashtable<String, kermeta::language::structure::Object> init Hashtable<String, kermeta::language::structure::Object>.new
 				params.put(name, inElt.object)
 				params.put("module", owningRule.owningModel)
 
@@ -709,7 +709,7 @@ class RulePattern {
 	 * This operation checks if the input element matches the type constraint
 	 * of the pattern
 	 */
-	operation matchType(inElt: Object) : Boolean is do
+	operation matchType(inElt: kermeta::language::structure::Object) : Boolean is do
 		if(sourceKElement.equals(inElt.getMetaClass)) then
 			result := true
 		else
@@ -758,7 +758,7 @@ class RuleProduction {
 	 * instance of the RuleProduction targetElement, and adds a new entry for this
 	 * allocated element to the "bValues" hastable.
 	 */
-	operation allocate(inElt: Object) : Object is do
+	operation allocate(inElt: kermeta::language::structure::Object) : kermeta::language::structure::Object is do
 		// Allocate a new class instance
 		result := targetKElement.new
 
@@ -784,14 +784,14 @@ class RuleProduction {
 	 * If the initialization does not succeed, the BindingKey is inserted into the
 	 * "unresolvedBKeys" collection to be handled during the second pass.
 	 */
-	operation initialize(inElt: Object, context: set ConcreteContextItem[0..*]) is do
+	operation initialize(inElt: kermeta::language::structure::Object, context: set ConcreteContextItem[0..*]) is do
 		var key : BindingKey init BindingKey.new
 		var init_Ok : Boolean init true
 
 		if(initExpr != void) then
 			if(initExpr.size > 0) then
 				// Initializing concrete parameters of the dynamic expression			
-				var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+				var params : Hashtable<String, kermeta::language::structure::Object> init Hashtable<String, kermeta::language::structure::Object>.new
 
 				// Add input model element into dynamic expression context
 				params.put(owningRule.source.name, inElt)
@@ -848,7 +848,7 @@ class SingletonRuleProduction inherits RuleProduction {
 	 * The context parameter provides the concrete context for ID evaluation of the current
 	 * singleton rule.
 	 */
-	operation getOrAllocate(inElt: Object, context: set ConcreteContextItem[0..*]) : Object is do
+	operation getOrAllocate(inElt: kermeta::language::structure::Object, context: set ConcreteContextItem[0..*]) : kermeta::language::structure::Object is do
 		// Search bindings for equivalent element (ie produced by a SingletonRuleProd,
 		// with an idExpr that resolves to the same value)
 		var bv : BindingValue init findSingleton(inElt, targetKElement, context)
@@ -889,7 +889,7 @@ class SingletonRuleProduction inherits RuleProduction {
 	 * The context parameter provides the concrete context for ID evaluation of the current
 	 * singleton rule.
 	 */
-	operation findSingleton(inElt: Object, kClass: Class, context: set ConcreteContextItem[0..*]) : BindingValue is do
+	operation findSingleton(inElt: kermeta::language::structure::Object, kClass: Class, context: set ConcreteContextItem[0..*]) : BindingValue is do
 		var strKey : String
 		var bKey : BindingKey
 		var bVal : BindingValue
@@ -926,10 +926,10 @@ class SingletonRuleProduction inherits RuleProduction {
 					// Get respective Ids for:
 					//  - [selfProd, inElt] => id1
 					//  - [iteratedProd, iterated_inElt] => id2
-					var id1 : Object init self.evalIdExpression(inElt, context)
+					var id1 : kermeta::language::structure::Object init self.evalIdExpression(inElt, context)
 					var context2 : set ConcreteContextItem[0..*] init
 						owningRule.owningModel.varContexts.getValue(bKey.prod.owningRule.name + "#" + bKey.object.toString)
-					var id2 : Object init sProd.evalIdExpression(bKey.object, context2)
+					var id2 : kermeta::language::structure::Object init sProd.evalIdExpression(bKey.object, context2)
 
 					// If computed ids are equal, return currently iterated BindingValue
 					if(id1.equals(id2)) then
@@ -946,10 +946,10 @@ class SingletonRuleProduction inherits RuleProduction {
 	 * provided input model element.
 	 * The context parameter provides the concrete context for ID evaluation.
 	 */
-	operation evalIdExpression(inElt: Object, context: set ConcreteContextItem[0..*]) : Object is do
+	operation evalIdExpression(inElt: kermeta::language::structure::Object, context: set ConcreteContextItem[0..*]) : kermeta::language::structure::Object is do
 		// Running ID dynamic expression
 		// Initializing concrete parameters of the dynamic expression			
-		var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+		var params : Hashtable<String, kermeta::language::structure::Object> init Hashtable<String, kermeta::language::structure::Object>.new
 
 		// Add input model element of the pattern corresponding to the production
 		// rule into dynamic expression context
