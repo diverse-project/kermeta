@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.32 2008-04-10 16:25:54 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.33 2008-04-11 07:27:02 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -21,6 +21,7 @@ import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -189,9 +190,10 @@ public class KermetaTypeChecker {
         for ( Constraint c : op.getPost() )
             checkConstraint(c);
         
-        for (TypeVariable tv : op.getTypeParameter()){
+   /*  DVK  desactivate unfinished checker for (TypeVariable tv : op.getTypeParameter()){
         	checkOperationTypeParameter(op, tv);
         }
+        */
         // THIS IS JUST FOR TESTING PURPOSES
         if ( internalOperation ) {
         	if (error_count != unit.getMessages().size())
@@ -213,12 +215,20 @@ public class KermetaTypeChecker {
     protected void checkOperationTypeParameter(Operation op, TypeVariable tv){
     	boolean canBeBound = false; 
     	if(op.getType() == tv){
-    		canBeBound = true;
+    		canBeBound = true; 
+    		// maybe we should check for functiontype or producttype ?
     	}
     	for(Parameter param : op.getOwnedParameter()){
     		if(param.getType() == tv){
         		canBeBound = true;
         	}
+    		else if(param.getType() instanceof FunctionType){
+    			FunctionType ft = (FunctionType)param.getType();
+    			if(ft.getLeft() == tv || ft.getRight() == tv) {
+    				canBeBound = true;
+    			}
+    			// else maybe if we have another case like prodcuttype or embedded another functiontype ?
+    		}
     	}
     	ClassDefinition cd = (ClassDefinition)op.eContainer();
     	for(TypeVariable classTV :cd.getTypeParameter()){
@@ -229,7 +239,7 @@ public class KermetaTypeChecker {
     		}
     	}
     	if(! canBeBound) {
-    		unit.error("TYPE-CHECKER : The TypeVariable "+ tv.getName()+" cannot be bound, you must either use it in a parameter or as return type of the operation", tv);
+    		unit.error("TYPE-CHECKER : The TypeVariable "+ tv.getName()+" cannot be bound, you must either use it in a parameter or as return type of the operation " + op.getName(), tv);
     	}
     	
     	
