@@ -1,4 +1,4 @@
-/* $Id: 750test_CloneTool_StaticDiagram.main.kmt,v 1.9 2008-01-09 12:54:34 dvojtise Exp $
+/* $Id: 750test_CloneTool_StaticDiagram.main.kmt,v 1.10 2008-04-14 15:08:57 vmahe Exp $
  * Creation date: Summer 2006
  * License:		Eclipse Public License
  * Copyright:	INRIA
@@ -31,6 +31,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
 	reference cloneModelName : kermeta::standard::String
 	reference cloneModel : Model
 	reference testModel : Model
+	reference testPackage : Package
 	
 	method setUp() is do
 		//creating needed instances
@@ -65,7 +66,8 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     	stdio.writeln("DEBUG - getResource : PASSED")
     	
     	// "instances" only gives the main diagramm package for the targeted code tree
-    	testModel ?= inputResource.instances.one
+    	testModel ?= testResource.instances.one
+    	testPackage ?= testModel.packagedElement.detect{ u | u.name == "ClassDiagram" }
 	end
 	
 	method tearDown() is do
@@ -81,20 +83,20 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     		"the clone object must be different than the original")
     end
     operation test_CloneTool_StaticDiagramClasses() is do
-    	assertTrueWithMsg(testModel.packagedElement.select{ u | u.name == "AClass" }.size == 1,
+    	assertTrueWithMsg(testPackage.packagedElement.select{ u | u.name == "AClass" }.size == 1,
     		"the clone must be have the same class AClass than the original")
-    	assertTrueWithMsg(testModel.packagedElement.select{ u | u.name == "BClass" }.size == 1,
+    	assertTrueWithMsg(testPackage.packagedElement.select{ u | u.name == "BClass" }.size == 1,
     		"the clone must be have the same class BClass than the original")
-    	assertTrueWithMsg(testModel.packagedElement.select{ u | u.name == "CClass" }.size == 1,
+    	assertTrueWithMsg(testPackage.packagedElement.select{ u | u.name == "CClass" }.size == 1,
     		"the clone must be have the same class CClass than the original")
-    	assertTrueWithMsg(testModel.packagedElement.select{ u | u.name == "DClass" }.size == 1,
+    	assertTrueWithMsg(testPackage.packagedElement.select{ u | u.name == "DClass" }.size == 1,
     		"the clone must be have the same class DClass than the original")
-    	assertTrueWithMsg(testModel.packagedElement.select{ u | u.name == "HClass" }.size == 1,
+    	assertTrueWithMsg(testPackage.packagedElement.select{ u | u.name == "HClass" }.size == 1,
     		"the clone must be have the same class HClass than the original")
     end
     operation test_CloneTool_StaticDiagramClassesProperties() is do
     	var AClass : Class
-    	AClass ?= testModel.packagedElement.select{ u | u.name == "AClass" }.one
+    	AClass ?= testPackage.packagedElement.select{ u | u.name == "AClass" }.one
     	assertTrueWithMsg(AClass.ownedAttribute.select{ u | u.name == "aProperty" }.size == 1,
     		"the clone class AClass must be have the same 'aProperty' attribute than the original")
     	assertTrueWithMsg(AClass.ownedAttribute.select{ u | u.name == "aProperty" }.one.type.name == "String",
@@ -113,7 +115,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     		"the clone class AClass 'target' attribute must be have the same lower value 0 than the original")
     		
     	var BClass : Class
-    	BClass ?= testModel.packagedElement.select{ u | u.name == "BClass" }.one
+    	BClass ?= testPackage.packagedElement.select{ u | u.name == "BClass" }.one
     	assertTrueWithMsg(BClass.ownedAttribute.select{ u | u.name == "target" }.size == 1,
     		"the clone class BClass must be have the same 'target' attribute than the original")
     	assertTrueWithMsg(BClass.ownedAttribute.select{ u | u.name == "target" }.one.type.name == "DClass",
@@ -128,7 +130,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     		"the clone class BClass 'target' attribute must be have the same lower value 1 than the original")
     		
     	var DClass : Class
-    	DClass ?= testModel.packagedElement.select{ u | u.name == "DClass" }.one
+    	DClass ?= testPackage.packagedElement.select{ u | u.name == "DClass" }.one
     	assertTrueWithMsg(DClass.ownedAttribute.select{ u | u.name == "dProperty" }.size == 1,
     		"the clone class DClass must be have the same 'dProperty' attribute than the original")
     	assertTrueWithMsg(DClass.ownedAttribute.select{ u | u.name == "dProperty" }.one.type.name == "String",
@@ -136,17 +138,17 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     end
     operation test_CloneTool_StaticDiagramClassesOperations() is do
     	var AClass : Class
-    	AClass ?= testModel.packagedElement.select{ u | u.name == "AClass" }.one
+    	AClass ?= testPackage.packagedElement.select{ u | u.name == "AClass" }.one
     	assertTrueWithMsg(AClass.ownedOperation.select{ u | u.name == "aOperation" }.size == 1,
     		"the clone class AClass must be have the same 'aOperation' operation than the original")
     		
     	var BClass : Class
-    	BClass ?= testModel.packagedElement.select{ u | u.name == "BClass" }.one
+    	BClass ?= testPackage.packagedElement.select{ u | u.name == "BClass" }.one
     	assertTrueWithMsg(BClass.ownedOperation.select{ u | u.name == "bOperation" }.size == 1,
     		"the clone class BClass must be have the same 'bOperation' Operation than the original")
     		
     	var CClass : Class
-    	CClass ?= testModel.packagedElement.select{ u | u.name == "CClass" }.one
+    	CClass ?= testPackage.packagedElement.select{ u | u.name == "CClass" }.one
     	assertTrueWithMsg(CClass.ownedOperation.select{ u | u.name == "cOperation" }.size == 1,
     		"the clone class CClass must be have the same 'cOperation' Operation than the original")
     	assertTrueWithMsg(CClass.ownedOperation.select{ u | u.name == "cOperation" }.one.ownedParameter.one.name == "in",
@@ -155,13 +157,13 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     		"the clone 'cOperation' Operation of class CClass must be have the same parameter type than the original")
     end
     operation test_CloneTool_StaticDiagramComments() is do
-    	assertTrueWithMsg(testModel.ownedComment.size == 1,
+    	assertTrueWithMsg(testPackage.ownedComment.size == 1,
     		"the clone model must be have the same comment than the original")
-    	assertTrueWithMsg(testModel.ownedComment.one.body.substring(0,11) == "This diagram",
+    	assertTrueWithMsg(testPackage.ownedComment.one.body.substring(0,11) == "This diagram",
     		"the clone model must be have the same comment body than the original")
     		
     	var BClass : Class
-    	BClass ?= testModel.packagedElement.select{ u | u.name == "BClass" }.one
+    	BClass ?= testPackage.packagedElement.select{ u | u.name == "BClass" }.one
     	assertTrueWithMsg(BClass.ownedOperation.one.ownedComment.size == 2,
     		"the clone bOperation class BClass must be have the same comments than the original")
     	assertTrueWithMsg(BClass.ownedOperation.one.ownedComment.select{ u | u.body.substring(0,10) == "An ordinary" }.size == 1,
@@ -170,7 +172,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     		"the clone bOperation must be have the same kermeta code comment than the original")
     		
     	var DClass : Class
-    	DClass ?= testModel.packagedElement.select{ u | u.name == "DClass" }.one
+    	DClass ?= testPackage.packagedElement.select{ u | u.name == "DClass" }.one
     	assertTrueWithMsg(DClass.ownedComment.size == 1,
     		"the clone class DClass must be have the same comment than the original")
     	assertTrueWithMsg(DClass.ownedComment.one.body.substring(0,8) == "Example of",
@@ -178,7 +180,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     end
     operation test_CloneTool_StaticDiagramAssociations() is do
     	var bNh : Association
-    	bNh ?= testModel.packagedElement.select{ u | u.name == "bNh" }.one
+    	bNh ?= testPackage.packagedElement.select{ u | u.name == "bNh" }.one
     	assertTrueWithMsg(bNh != void,
     		"the clone model must have the same 'bNh' association than the original")
     	assertTrueWithMsg(bNh.ownedEnd.size == 2,
@@ -193,7 +195,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     		"the clone 'bNh' association must have the same 'h' end type than the original")
     		
     	var cCollection : Association
-    	cCollection ?= testModel.packagedElement.select{ u | u.name == "cCollection" }.one
+    	cCollection ?= testPackage.packagedElement.select{ u | u.name == "cCollection" }.one
     	assertTrueWithMsg(cCollection != void,
     		"the clone model must have the same 'cCollection' association than the original")
     	assertTrueWithMsg(cCollection.ownedEnd.size == 1,
@@ -204,7 +206,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     		"the clone 'cCollection' association must have the same 'source' end type than the original")
     		
     	var composition : Association
-    	composition ?= testModel.packagedElement.select{ u | u.name == "composition" }.one
+    	composition ?= testPackage.packagedElement.select{ u | u.name == "composition" }.one
     	assertTrueWithMsg(composition != void,
     		"the clone model must have the same 'composition' association than the original")
     	assertTrueWithMsg(composition.ownedEnd.size == 1,
@@ -216,7 +218,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     end
     operation test_CloneTool_StaticDiagramGeneralizations() is do
     	var BClass : Class
-    	BClass ?= testModel.packagedElement.select{ u | u.name == "BClass" }.one
+    	BClass ?= testPackage.packagedElement.select{ u | u.name == "BClass" }.one
     	assertTrueWithMsg(BClass.generalization.size == 1,
     		"the clone class BClass must be have the same generalization than the original")
     	assertTrueWithMsg(BClass.generalization.one.general.name == "AClass",
@@ -224,7 +226,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     end
     operation test_CloneTool_StaticDiagramExternReferences() is do
     	var BnG : Association
-    	BnG ?= testModel.packagedElement.select{ u | u.name == "BnG" }.one
+    	BnG ?= testPackage.packagedElement.select{ u | u.name == "BnG" }.one
     	assertTrueWithMsg(BnG != void,
     		"the clone model must have the same 'BnG' association than the original")
     	assertTrueWithMsg(BnG.ownedEnd.size == 2,
