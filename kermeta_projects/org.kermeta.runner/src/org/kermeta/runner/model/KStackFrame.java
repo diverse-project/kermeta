@@ -1,6 +1,6 @@
 
 
-/*$Id: KStackFrame.java,v 1.1 2008-04-01 15:10:15 ftanguy Exp $
+/*$Id: KStackFrame.java,v 1.2 2008-04-14 06:48:57 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KStackFrame.java
 * License : EPL
@@ -27,9 +27,11 @@ public class KStackFrame extends KDebugElement implements IStackFrame {
 	private String className;
 	private int lineNumber;
 	private String fFileName;
-	private String operationName;
+	private String elementName;
 	private int fId;
 	private IVariable[] fVariables;
+	
+	private boolean isOperation;
 	
 	/**
 	 * Constructs a stack frame in the given thread with the given
@@ -58,7 +60,12 @@ public class KStackFrame extends KDebugElement implements IStackFrame {
 		String pc = strings[1];
 		lineNumber = Integer.parseInt(pc);
 		className = strings[2];
-		operationName = strings[3];
+		String[] elements = strings[3].split("\\*");
+		elementName = elements[1];
+		if ( elements[0].equals("operation") )
+			isOperation = true;
+		else
+			isOperation = false;
 		int numVars = strings.length - 4;
 		fVariables = new IVariable[numVars];
 		for (int i = 0; i < numVars; i++) {
@@ -278,16 +285,19 @@ public class KStackFrame extends KDebugElement implements IStackFrame {
 	}
 	
 	public String getDisplayString() {
-		String result = className + "." + operationName + "(";
-		try {
-			for ( IVariable var : getVariables() )
-				if ( var instanceof KParameter )
-					result += var.getName() + ", ";
-		} catch (DebugException e) {
+		String result = className + "." + elementName;
+		if ( isOperation ) {
+			result += "(";
+			try {
+				for ( IVariable var : getVariables() )
+					if ( var instanceof KParameter )
+						result += var.getName() + ", ";
+			} catch (DebugException e) {
+			}
+			if ( result.charAt(result.length()-1) == ' ')
+				result = result.substring(0, result.length()-2);
+			result += ")";
 		}
-		if ( result.charAt(result.length()-1) == ' ')
-			result = result.substring(0, result.length()-2);
-		result += ")";
 		return result;
 	}
 }

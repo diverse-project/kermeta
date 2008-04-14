@@ -60,11 +60,11 @@
                </iterate>
             </enablement>
             <contextLabel
-                  label="Run Kermeta Application"
+                  label="Run as Kermeta Application"
                   mode="run">
             </contextLabel>
             <contextLabel
-                  label="Debug Kermeta Application"
+                  label="Debug as Kermeta Application"
                   mode="debug">
             </contextLabel>
          </contextualLaunch>
@@ -79,11 +79,11 @@
                id="org.kermeta.debug.constraintConfiguration"></configurationType>
          <contextualLaunch>
             <contextLabel
-                  label="Run a Kermeta Constraint Application"
+                  label="Run as Kermeta Constrained Application"
                   mode="run">
             </contextLabel>
             <contextLabel
-                  label="Debug a Kermeta Constraint Application"
+                  label="Debug as Kermeta Constrained Application"
                   mode="debug">
             </contextLabel>
                        <enablement>

@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.kermeta.runner.launching;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -22,13 +21,12 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.sourcelookup.ISourceContainer;
 import org.eclipse.debug.core.sourcelookup.ISourcePathComputerDelegate;
 import org.eclipse.debug.core.sourcelookup.containers.FolderSourceContainer;
-import org.eclipse.debug.core.sourcelookup.containers.ProjectSourceContainer;
 import org.eclipse.debug.core.sourcelookup.containers.WorkspaceSourceContainer;
 
 /**
- * Computes the default source lookup path for a PDA launch configuration.
+ * Computes the default source lookup path for a Kermeta launch configuration.
  * The default source lookup path is the folder or project containing 
- * the PDA program being launched. If the program is not specified, the workspace
+ * the Kermeta program being launched. If the program is not specified, the workspace
  * is searched by default.
  */
 public class KSourcePathComputerDelegate implements ISourcePathComputerDelegate {
@@ -38,17 +36,19 @@ public class KSourcePathComputerDelegate implements ISourcePathComputerDelegate 
 	 * @see org.eclipse.debug.internal.core.sourcelookup.ISourcePathComputerDelegate#computeSourceContainers(org.eclipse.debug.core.ILaunchConfiguration, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public ISourceContainer[] computeSourceContainers(ILaunchConfiguration configuration, IProgressMonitor monitor) throws CoreException {
-		String path = configuration.getAttribute(KConstants.ATTR_K_PROGRAM, (String)null);
+		String path = configuration.getAttribute(KConstants.KM_FILENAME, (String)null);
 		ISourceContainer sourceContainer = null;
 		if (path != null) {
 			IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(path));
 			if (resource != null) {
-				IContainer container = resource.getParent();
+				IProject container = resource.getProject();
+				sourceContainer = new FolderSourceContainer(container, true);
+				/*IContainer container = resource.getParent();
 				if (container.getType() == IResource.PROJECT) {
 					sourceContainer = new ProjectSourceContainer((IProject)container, false);
 				} else if (container.getType() == IResource.FOLDER) {
 					sourceContainer = new FolderSourceContainer(container, false);
-				}
+				}*/
 			}
 		}
 		if (sourceContainer == null) {

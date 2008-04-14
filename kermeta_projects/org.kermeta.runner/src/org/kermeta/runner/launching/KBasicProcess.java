@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.5 2008-04-03 15:09:37 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.6 2008-04-14 06:48:57 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -23,7 +23,6 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.interpreter.api.InterpreterMode;
 import org.kermeta.interpreter.api.InterpreterOptions;
@@ -56,7 +55,7 @@ public class KBasicProcess extends Process {
 		return _interpreter;
 	}
 	
-	public KBasicProcess(String file, boolean isConstraint, String mainClass, String mainOperation, String[] parameters) throws NotRegisteredURIException, URIMalformedException {
+	public KBasicProcess(String file, boolean isConstraint, String mainClass, String mainOperation, String[] parameters, String defaultPath) throws NotRegisteredURIException, URIMalformedException {
 		initializeStreams();
 		BufferedReader inputReader = new BufferedReader( new InputStreamReader( _interpreterInputStream ) );
 		PrintStream os = new PrintStream(_interpreterOutputStream);
@@ -65,6 +64,7 @@ public class KBasicProcess extends Process {
 			_interpreter = new Interpreter(file, InterpreterMode.CONSTRAINT_RUN, null);
 		else
 			_interpreter = new Interpreter(file, InterpreterMode.RUN, null);
+		_interpreter.setDefaultPath( defaultPath );
 		_interpreter.setInputStream( inputReader );
 		_interpreter.setOutputStream( os );
 		_interpreter.setErrorStream( es );
@@ -72,7 +72,7 @@ public class KBasicProcess extends Process {
 		_interpreter.setParameters(parameters);
 	}
 	
-	public KBasicProcess(String file, boolean isConstraint, int requestPort, int eventPort, String mainClass, String mainOperation, String[] parameters) throws IOException, NotRegisteredURIException, URIMalformedException {
+	public KBasicProcess(String file, boolean isConstraint, int requestPort, int eventPort, String mainClass, String mainOperation, String[] parameters, String defaultPath) throws IOException, NotRegisteredURIException, URIMalformedException {
 		initializeStreams();
 		BufferedReader inputReader = new BufferedReader( new InputStreamReader( _interpreterInputStream ) );
 		PrintStream os = new PrintStream(_interpreterOutputStream);
@@ -85,6 +85,7 @@ public class KBasicProcess extends Process {
 			options.put( InterpreterOptions.REQUEST_PORT, requestPort );
 			_interpreter = new Interpreter(file, InterpreterMode.DEBUG, options);
 		}
+		_interpreter.setDefaultPath( defaultPath );
 		_interpreter.setInputStream( inputReader );
 		_interpreter.setOutputStream( os );
 		_interpreter.setErrorStream( es );
@@ -161,6 +162,11 @@ public class KBasicProcess extends Process {
 
 	@Override
 	public int waitFor() throws InterruptedException {
+		if ( ! _interpreter.hasProcessAttached() ) {
+			synchronized( this ) {
+				wait();
+			}
+		}
 		// Starting the interpreter.
 		_interpreter.launch();
 		return 0;
@@ -181,24 +187,6 @@ public class KBasicProcess extends Process {
 		return _outputStream;
 	}
 
-	/*public void makeDelegateWaiting() {
-		if ( _delegate != null ) {
-			Runnable r = new Runnable() {
-				
-				public void run() {
-					synchronized(_delegate) {
-						try {
-							_delegate.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			};
-			Thread t = new Thread(r);
-			t.start();
-		}
-	}*/
 }
 
 

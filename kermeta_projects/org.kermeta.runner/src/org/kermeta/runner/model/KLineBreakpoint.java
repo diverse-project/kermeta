@@ -1,6 +1,6 @@
 
 
-/*$Id: KLineBreakpoint.java,v 1.2 2008-04-03 12:54:49 ftanguy Exp $
+/*$Id: KLineBreakpoint.java,v 1.3 2008-04-14 06:48:57 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBreakPoint.java
 * License : EPL
@@ -35,7 +35,7 @@ public class KLineBreakpoint extends LineBreakpoint {
 	/**
 	 * Constructs a line breakpoint on the given resource at the given
 	 * line number. The line number is 1-based (i.e. the first line of a
-	 * file is line number 1). The PDA VM uses 0-based line numbers,
+	 * file is line number 1). The Kermeta Interpreter uses 0-based line numbers,
 	 * so this line number translation is done at breakpoint install time.
 	 * 
 	 * @param resource file on which to set the breakpoint

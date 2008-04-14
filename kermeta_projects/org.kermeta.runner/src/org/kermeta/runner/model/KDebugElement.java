@@ -1,6 +1,6 @@
 
 
-/*$Id: KDebugElement.java,v 1.2 2008-04-03 12:54:49 ftanguy Exp $
+/*$Id: KDebugElement.java,v 1.3 2008-04-14 06:48:57 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KDebugElement.java
 * License : EPL
@@ -34,7 +34,7 @@ public class KDebugElement extends PlatformObject implements IDebugElement {
 	 * Constructs a new debug element contained in the given
 	 * debug target.
 	 * 
-	 * @param target debug target (PDA VM)
+	 * @param target debug target (Kermeta Interpreter)
 	 */
 	public KDebugElement(KDebugTarget target) {
 		fTarget = target;

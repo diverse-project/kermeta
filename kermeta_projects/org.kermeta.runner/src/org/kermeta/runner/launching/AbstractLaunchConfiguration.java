@@ -31,20 +31,20 @@ abstract public class AbstractLaunchConfiguration implements ILaunchConfiguratio
 		}
 		
 		String fileName = "platform:/resource" + configuration.getAttribute( KConstants.KM_FILENAME, (String) null).replace("\\", "/");
-		String mainClass = configuration.getAttribute( KConstants.KM_CLASSQNAME, (String) null);
-		String mainOperation = configuration.getAttribute( KConstants.KM_OPERATIONNAME, (String) null);
-		String argumentsInline = configuration.getAttribute( KConstants.KM_ARGUMENTS, (String) null);
+		String mainClass = configuration.getAttribute( KConstants.KM_CLASSQNAME, (String) null );
+		String mainOperation = configuration.getAttribute( KConstants.KM_OPERATIONNAME, (String) null );
+		String defaultPath = configuration.getAttribute( KConstants.DEFAULT_PATH, (String) null );
+		String argumentsInline = configuration.getAttribute( KConstants.KM_ARGUMENTS, (String) null );
 		String[] arguments = null;
 		if ( argumentsInline != null && ! argumentsInline.equals("") )
 			arguments = argumentsInline.split(" ");
-		boolean constraint = configuration.getAttribute( KConstants.KM_CONSTRAINT, false);
 		
 		try {
 			if ( mode.equals(ILaunchManager.RUN_MODE) ) {
-				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), mainClass, mainOperation, arguments);
+				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), mainClass, mainOperation, arguments, defaultPath);
 				DebugPlugin.newProcess(launch, basicProcess, fileName + " " + mode);
 			} else if ( mode.equals(ILaunchManager.DEBUG_MODE) ) {
-				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), requestPort, eventPort, mainClass, mainOperation, arguments);
+				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), requestPort, eventPort, mainClass, mainOperation, arguments, defaultPath);
 				String label =  fileName + " " + mode;
 				KProcess process = (KProcess) DebugPlugin.newProcess(launch, basicProcess, label);			
 				IDebugTarget target = new KDebugTarget(launch, process, requestPort, eventPort);

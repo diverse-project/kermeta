@@ -1,6 +1,6 @@
 
 
-/*$Id: KProcess.java,v 1.2 2008-04-03 12:54:49 ftanguy Exp $
+/*$Id: KProcess.java,v 1.3 2008-04-14 06:48:57 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KProcess.java
 * License : EPL
@@ -29,7 +29,11 @@ public class KProcess extends RuntimeProcess {
 
 	public KProcess(ILaunch launch, KBasicProcess process, String name, Map attributes) {
 		super(launch, process, name, attributes);
+		// Notifying the basic process that it can start
 		getInterpreter().setProcess(this);
+		synchronized( process ) {
+			process.notify();
+		}
 	}
 
 	public Interpreter getInterpreter() {

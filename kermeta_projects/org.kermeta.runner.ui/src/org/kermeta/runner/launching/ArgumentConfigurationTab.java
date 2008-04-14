@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.2 2008-04-04 09:29:32 ftanguy Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.3 2008-04-14 06:48:50 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -336,7 +336,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		configuration.setAttribute(KConstants.KM_OPERATIONNAME, operationNameText.getText());
 		configuration.setAttribute(KConstants.KM_ARGUMENTS, argumentsText.getText());
 		configuration.setAttribute(KConstants.KM_PROJECTNAME, projectLocationText.getText());
-		configuration.setAttribute(KConstants.KM_CONSTRAINT, _constraintExecutionButton.getSelection() );
 		configuration.setAttribute( DebugPlugin.ATTR_PROCESS_FACTORY_ID, "org.kermeta.debug.processFactory" );
    }
     

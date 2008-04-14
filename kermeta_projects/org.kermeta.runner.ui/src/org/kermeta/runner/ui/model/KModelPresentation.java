@@ -28,7 +28,6 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.kermeta.runner.model.KStackFrame;
 import org.kermeta.runner.model.variable.KAttribute;
 import org.kermeta.runner.model.variable.KParameter;
-import org.kermeta.runner.model.variable.KProperty;
 import org.kermeta.runner.model.variable.KReference;
 import org.kermeta.runner.model.variable.KVariable;
 
@@ -36,7 +35,7 @@ import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 /**
- * Renders PDA debug elements
+ * Renders Kermeta debug elements
  */
 public class KModelPresentation extends LabelProvider implements IDebugModelPresentation {
 	
@@ -93,15 +92,6 @@ public class KModelPresentation extends LabelProvider implements IDebugModelPres
 				_referenceImage = descriptor.createImage();
 			}
 			return _referenceImage;
-		}
-		
-		if ( element instanceof KProperty ) {
-			if ( _propertyImage == null ) {
-				URL url = TexteditorPlugin.getDefault().getBundle().getEntry("src/java/fr/irisa/triskell/kermeta/texteditor/icons/red/property_derived.png");				
-				ImageDescriptor descriptor = ImageDescriptor.createFromURL(url);
-				_propertyImage = descriptor.createImage();
-			}
-			return _propertyImage;
 		}
 		return null;
 	}

@@ -15,7 +15,7 @@ import org.eclipse.debug.core.sourcelookup.AbstractSourceLookupDirector;
 import org.eclipse.debug.core.sourcelookup.ISourceLookupParticipant;
 
 /**
- * PDA source lookup director. For PDA source lookup there is one source
+ * Kermeta source lookup director. For Kermeta source lookup there is one source
  * lookup participant. 
  */
 public class KSourceLookupDirector extends AbstractSourceLookupDirector {

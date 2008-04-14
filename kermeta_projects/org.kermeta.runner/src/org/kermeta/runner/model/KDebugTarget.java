@@ -1,6 +1,6 @@
 
 
-/*$Id: KDebugTarget.java,v 1.2 2008-04-03 12:54:49 ftanguy Exp $
+/*$Id: KDebugTarget.java,v 1.3 2008-04-14 06:48:57 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KDebugTarget.java
 * License : EPL
@@ -20,13 +20,10 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.text.MessageFormat;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugEvent;
@@ -46,7 +43,7 @@ import org.kermeta.runner.launching.KConstants;
 import org.kermeta.runner.model.variable.KAbstractVariable;
 
 /**
- * PDA Debug Target
+ * Kermeta Debug Target
  */
 public class KDebugTarget extends KDebugElement implements IDebugTarget {
 	
@@ -80,7 +77,7 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 	private EventDispatchJob fEventDispatch;
 	
 	/**
-	 * Listens to events from the PDA VM and fires corresponding 
+	 * Listens to events from the Kermeta Interpreter and fires corresponding 
 	 * debug events.
 	 */
 	class EventDispatchJob extends Job {
@@ -135,10 +132,10 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 	
 	/**
 	 * Constructs a new debug target in the given launch for the 
-	 * associated PDA VM process.
+	 * associated Kermeta Interpreter process.
 	 * 
 	 * @param launch containing launch
-	 * @param process PDA VM
+	 * @param process Kermeta Interpreter
 	 * @param requestPort port to send requests to the VM
 	 * @param eventPort port to read events from
 	 * @exception CoreException if unable to connect to host
@@ -156,9 +153,9 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 			fEventReader = new BufferedReader(new InputStreamReader(fEventSocket.getInputStream()));
 			
 		} catch (UnknownHostException e) {
-			abort("Unable to connect to PDA VM", e);
+			abort("Unable to connect to Kermeta Interpreter", e);
 		} catch (IOException e) {
-			abort("Unable to connect to PDA VM", e);
+			abort("Unable to connect to Kermeta Interpreter", e);
 		}
 		fThread = new KThread(this);
 		fThreads = new IThread[] {fThread};
@@ -191,7 +188,7 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 		if (fName == null) {
 			fName = "Kermeta Program";
 			try {
-				fName = getLaunch().getLaunchConfiguration().getAttribute(KConstants.ATTR_K_PROGRAM, "PDA VM");
+				fName = getLaunch().getLaunchConfiguration().getAttribute(KConstants.KM_FILENAME, "Kermeta Execution");
 			} catch (CoreException e) {
 			}
 		}
@@ -510,7 +507,6 @@ public class KDebugTarget extends KDebugElement implements IDebugTarget {
 	private void breakpointHit(String event) {
 		// determine which breakpoint was hit, and set the thread's breakpoint
 		String[] strings = event.split(" ");
-		System.out.println();
 		String file = strings[2].replace("platform:/resource", "");
 		int lineNumber = Integer.parseInt(strings[3]);
 		IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(KConstants.K_DEBUG_MODEL);

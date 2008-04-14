@@ -301,11 +301,14 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 			ILaunchConfigurationWorkingCopy wc = _configurationType.newInstance(
 			        null, _launchManager.generateUniqueLaunchConfigurationNameFrom(configIdentifier)); 
 			
+			int index = fileName.lastIndexOf("/");
+			String defaultPath = fileName.substring(0, index);
+			
 			wc.setAttribute(KConstants.KM_FILENAME, fileName);
 			wc.setAttribute(KConstants.KM_CLASSQNAME, className);
 			wc.setAttribute(KConstants.KM_OPERATIONNAME, opName);
 			wc.setAttribute(KConstants.KM_PROJECTNAME, projectName);
-			wc.setAttribute(KConstants.KM_CONSTRAINT, isConstraint() );
+			wc.setAttribute(KConstants.DEFAULT_PATH, defaultPath);
 			wc.setAttribute( DebugPlugin.ATTR_PROCESS_FACTORY_ID, "org.kermeta.debug.processFactory" );
 			
 			config= wc.doSave();

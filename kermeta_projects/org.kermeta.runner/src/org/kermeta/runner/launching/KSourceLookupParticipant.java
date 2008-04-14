@@ -16,8 +16,8 @@ import org.eclipse.debug.core.sourcelookup.AbstractSourceLookupParticipant;
 import org.kermeta.runner.model.KStackFrame;
 
 /**
- * The PDA source lookup participant knows how to translate a 
- * PDA stack frame into a source file name 
+ * The Kermeta source lookup participant knows how to translate a 
+ * Kermeta stack frame into a source file name 
  */
 public class KSourceLookupParticipant extends AbstractSourceLookupParticipant {
 	/* (non-Javadoc)
