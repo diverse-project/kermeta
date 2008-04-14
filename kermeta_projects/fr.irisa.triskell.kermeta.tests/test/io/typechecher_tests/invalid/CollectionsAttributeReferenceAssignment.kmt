@@ -9,27 +9,22 @@ class Test {
 	operation test1() : Void is
 	do
 		var aA : A init A.new
-		aA.aNames := OrderedSet<String>
+		aA.aNames := OrderedSet<String> // invalid because trying to overwrite the underlying collection
 	end
 
 	operation test2() : Void is
 	do
 		var aB : B init B.new
-		aB.bNames := OrderedSet<String>
+		aB.bNames := OrderedSet<String> // invalid because trying to overwrite the underlying collection
 	end
 	
 	operation test3() : Void is
 	do
 		var aC : C init C.new
 		var aD : D init D.new
-		aC.cNames := aD.dNames
+		aC.cNames := aD.dNames // invalid because trying to overwrite the underlying collection
 	end
-	
-	operation test4() : Void is
-	do
-		var aE : E init E.new
-		aE.eNames := aE.eNames
-	end
+		
 }
 
 class A {
@@ -37,17 +32,14 @@ class A {
 }
 
 class B {
-	reference bNames : String[0..*]
+	reference bNames : String[0..5]
 }
 
 class C {
-	reference cNames : String[0..*]#dNames
+	reference cNames : String[0..*]
 }
 
 class D {
-	reference dNames : String[0..*]#cNames
+	reference dNames : String[0..5]
 }
 
-class E {
-	attribute eNames : String[1..1]
-}
