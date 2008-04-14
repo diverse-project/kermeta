@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.11 2008-04-07 15:33:48 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.12 2008-04-14 13:33:10 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -76,29 +76,21 @@ public class JunitTestSuite extends TestCase {
 	}
 	
 	// do not modify this comment
-
-
-
-
-
-
-
-
-
-
-
 /*** BEGIN GENERATED TESTS ***/
-	
 public void test001_externalSuperType() throws Exception {
 testWithFile("test/io/ecore_testcases","001_externalSuperType.ecore" );
 }
 
 public void test002_externalDataType() throws Exception {
-	testWithFile("test/io/ecore_testcases","002_externalDataType.ecore" );
+testWithFile("test/io/ecore_testcases","002_externalDataType.ecore" );
 }
 
 public void test003_externalType() throws Exception {
-	testWithFile("test/io/ecore_testcases","003_externalType.ecore" );
+testWithFile("test/io/ecore_testcases","003_externalType.ecore" );
+}
+
+public void testpuzzle() throws Exception {
+testWithFile("test/io/ecore_testcases","puzzle.ecore" );
 }
 
 public void testSimple() throws Exception {
@@ -107,10 +99,6 @@ testWithFile("test/io/ecore_testcases","Simple.ecore" );
 
 public void testUML2() throws Exception {
 testWithFile("test/io/ecore_testcases","UML2.ecore" );
-}
-
-public void testpuzzle() throws Exception {
-testWithFile("test/io/ecore_testcases","puzzle.ecore" );
 }
 
 public void test001_testPackageDeclaration() throws Exception {
@@ -409,6 +397,8 @@ testWithFile("test/io/kmt_testcases","testVariable.kmt" );
 	// do not modify this comment
 	
 public void testWithFile(String dir, String file) {
+	IOPlugin.internalLog.debug(" *** testWithFile " + file);
+	
 	UserDirURI.createDirFromName(dir+"/output");
 	
 	String kmFile = FileHelper.replaceExtension(file, "km");
@@ -474,12 +464,17 @@ public void testWithFile(String dir, String file) {
 		assertTrue(e.getLocalizedMessage(), false);
 	} catch (NotRegisteredURIException e) {
 		assertTrue(e.getLocalizedMessage(), false);
-	} finally {
-	
-		LoaderPlugin.getDefault().unload( sourceFileURI );
+	} catch (Exception e){
+		assertTrue(e.getLocalizedMessage(), false);
+	}	
+	finally {
+		
+		/* LoaderPlugin.getDefault().unload( sourceFileURI );
 		LoaderPlugin.getDefault().unload( expectedKMFileURI );
 		LoaderPlugin.getDefault().unload( outputKMFileURI );
-		LoaderPlugin.getDefault().unload( outputFileURI );
+		LoaderPlugin.getDefault().unload( outputFileURI );*/
+		IOPlugin.internalLog.debug(" Clearing LoaderPlugin between tests "); // note, this means that tests cannot be run in parallel
+		LoaderPlugin.getDefault().unloadAll();
 	
 	}
 	
