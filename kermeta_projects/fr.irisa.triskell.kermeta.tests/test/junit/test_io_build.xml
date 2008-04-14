@@ -1,4 +1,4 @@
-<!-- $Id: test_io_build.xml,v 1.13 2008-04-09 16:00:20 dvojtise Exp $ -->
+<!-- $Id: test_io_build.xml,v 1.14 2008-04-14 14:08:42 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -48,9 +48,9 @@
 	<property name="ui.workbench.jar" location="${eclipse.home}/plugins/org.eclipse.ui.workbench_3.3.0.I20070608-1100.jar"/>
 	<property name="jface.jar" location="${eclipse.home}/plugins/org.eclipse.jface_3.3.0.I20070606-0010.jar"/>
 	<property name="swt.jar" location="${eclipse.home}/plugins/org.eclipse.swt.gtk.linux.x86_3.3.0.v3346.jar"/>
-	<property name="emf.compare.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare_0.8.0.v200710050855.jar" />
-	<property name="emf.compare.diff.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.diff_0.8.0.v200710050855.jar" />
-	<property name="emf.compare.match.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.match_0.8.0.v200710050855.jar" />
+	<property name="emf.compare.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare_0.8.0.v200804040851.jar" />
+	<property name="emf.compare.diff.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.diff_0.8.0.v200804040851.jar" />
+	<property name="emf.compare.match.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.match_0.8.0.v200804040851.jar" />
 	<property name="junit4.jar" location="${eclipse.home}/plugins/org.junit4_4.3.1/junit.jar" />
 					
 	<path id="io.class.path">
