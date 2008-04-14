@@ -26,6 +26,11 @@
           <details key="documentation" value="/**&#xD;&#xA; * This is represents the aspect of tests that they may go wrong.&#xD;&#xA; * it defines the ability to define the conditions for success&#xD;&#xA; * (assertions) and the mechanism for recording that those &#xD;&#xA; * conditions have not been met.&#xD;&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="assert.ecore#/1/kunit/AbstractFallible"/>
+        <eOperations name="mustStop">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if stopOnFailure.isVoid then&#xA;&#x9;&#x9;stopOnFailure := true&#xA;&#xA;&#x9;end&#xA;&#x9;result := stopOnFailure&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
         <eOperations name="getLog">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
@@ -43,7 +48,7 @@
         </eOperations>
         <eOperations name="assert">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.number&#xA;&#x9;if condition.~not then&#xA;&#x9;&#x9;getLog.addFailure(self, ((((&quot;assertion number &quot;) + (number.toString))) + (&quot; failed&quot;)))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.number&#xA;&#x9;if condition.~not then&#xA;&#x9;&#x9;var msg : kermeta::standard::String init ((((&quot;assertion number &quot;) + (number.toString))) + (&quot; failed&quot;))&#xA;&#x9;&#x9;if mustStop then&#xA;&#x9;&#x9;&#x9;var exception : kermeta::kunit::AssertionFailedError init kermeta::kunit::AssertionFailedError.new&#xA;&#x9;&#x9;&#x9;exception.message := msg&#xA;&#x9;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;getLog.addFailure(self, msg)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;   * Log a failure if condition is false&#xD;&#xA;   */"/>
           </eAnnotations>
           <eParameters name="condition">
@@ -52,7 +57,7 @@
         </eOperations>
         <eOperations name="assertWithMsg">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.number&#xA;&#x9;if condition.~not then&#xA;&#x9;&#x9;getLog.addFailure(self, ((((((&quot;assertion number &quot;) + (number.toString))) + (&quot; failed: &quot;))) + (msg)))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.number&#xA;&#x9;if condition.~not then&#xA;&#x9;&#x9;var realMsg : kermeta::standard::String init ((((((&quot;assertion number &quot;) + (number.toString))) + (&quot; failed: &quot;))) + (msg))&#xA;&#x9;&#x9;if mustStop then&#xA;&#x9;&#x9;&#x9;var exception : kermeta::kunit::AssertionFailedError init kermeta::kunit::AssertionFailedError.new&#xA;&#x9;&#x9;&#x9;exception.message := realMsg&#xA;&#x9;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;getLog.addFailure(self, realMsg)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;   * Log a failure if condition is false&#xD;&#xA;   */"/>
           </eAnnotations>
           <eParameters name="condition">
@@ -130,6 +135,13 @@
             <details key="documentation" value="/**&#xD;&#xA;   * counter of assertions in the test method&#xD;&#xA;   */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="stopOnFailure">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+            <details key="documentation" value="/**&#xD;&#xA;   * Set this attribute to false if you whish your test to not stop if the assert fails.&#xD;&#xA;   */"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Log">
@@ -487,28 +499,21 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
-    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="assert.ecore#/0"/>
     <references href="assert.ecore#/1"/>
     <references href="assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
@@ -524,18 +529,13 @@
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

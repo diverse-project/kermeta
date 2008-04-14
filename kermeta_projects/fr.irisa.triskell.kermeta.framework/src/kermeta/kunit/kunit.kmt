@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.37 2008-03-03 13:39:58 dvojtise Exp $
+/* $Id: kunit.kmt,v 1.38 2008-04-14 16:19:01 dvojtise Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -52,12 +52,26 @@ abstract class Fallible inherits AbstractFallible
   attribute rank : Integer
   
   /**
+   * Set this attribute to false if you wish your test to not stop if the assert fails.
+   * note : if set to false, the count of failures/errors may be bigger that the number of executed test operations
+   */
+  attribute stopOnFailure : Boolean
+  operation mustStop() : Boolean is do
+  	if stopOnFailure.isVoid then  
+  		stopOnFailure := true	
+  	end
+  	result := stopOnFailure
+  end 
+   
+  
+  /**
    * where failures will be put 
    */
   operation  getLog(): Log  
   	post logDefined is result != void 
   	is abstract
   
+   
   /**
    * current order position of counter of assertions
    */
@@ -77,8 +91,15 @@ abstract class Fallible inherits AbstractFallible
 	  	do
 		  	var number : Integer init self.number()
 	  		if not condition then
-	  			getLog.addFailure(self, "assertion number " + number.toString + " failed")	  				  				
-	  		end
+	  			var msg : String init "assertion number " + number.toString + " failed"
+	  			if mustStop then	
+		  			var exception : AssertionFailedError init AssertionFailedError.new
+	            	exception.message := msg
+	            	raise exception	
+	  			else
+	  				getLog.addFailure(self, msg)
+            	end	  				  				
+	  		end	  			  		
 	  	end
   	
   /**
@@ -88,7 +109,14 @@ abstract class Fallible inherits AbstractFallible
 	  	do
 		  	var number : Integer init self.number()
 	  		if not condition then
-	  			getLog.addFailure(self, "assertion number " + number.toString + " failed: " + msg)			
+	  			var realMsg : String init "assertion number " + number.toString + " failed: " + msg	  			
+	  			if mustStop then	
+		  			var exception : AssertionFailedError init AssertionFailedError.new
+	            	exception.message := realMsg
+	            	raise exception	
+	  			else
+	  				getLog.addFailure(self, realMsg)
+            	end	
 	  		end
 	  	end
 
