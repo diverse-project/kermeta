@@ -1,4 +1,4 @@
-/* $Id: parserError08.kmt,v 1.1 2008-01-14 10:50:14 dvojtise Exp $
+/* $Id: parserError08.kmt,v 1.2 2008-04-14 08:50:09 dvojtise Exp $
  * Creation date: January 10, 2008
  * License:
  * Copyright:
@@ -7,8 +7,6 @@
  * see bug #4768
  * introduce a parser error  between using and class
  */
-@mainClass "root_package::Main"
-@mainOperation "main"
 
 
 
