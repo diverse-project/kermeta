@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingContext.java,v 1.3 2008-04-07 14:54:00 ftanguy Exp $
+/*$Id: LoadingContext.java,v 1.4 2008-04-14 06:50:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	LoadingContext.java
 * License : EPL
@@ -102,8 +102,10 @@ public class LoadingContext implements IAction {
 						 * Update the interested object about the new kermeta unit.
 						 * 
 						 */
-						IFile file = ResourceHelper.getIFile( currentUnit.getUri() );
-						KermetaUnitHost.getInstance().updateValue(file, kermetaUnit);
+						try {
+							IFile file = ResourceHelper.getIFile( currentUnit.getUri() );
+							KermetaUnitHost.getInstance().updateValue(file, kermetaUnit);
+						} catch (IdNotFoundException e) {}
 					}
 				}
 			}
@@ -112,8 +114,6 @@ public class LoadingContext implements IAction {
 			e.printStackTrace();
 		} catch (NotRegisteredURIException e) {
 			e.printStackTrace();
-		} catch (IdNotFoundException e) {
-			// We do not care about. Nobody is interested in the unit.
 		} finally {
 			monitor.worked(1);
 		}
