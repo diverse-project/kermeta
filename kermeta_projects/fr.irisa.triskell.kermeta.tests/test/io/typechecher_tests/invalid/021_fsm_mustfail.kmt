@@ -1,4 +1,4 @@
-/* $Id: 021_fsm_mustfail.kmt,v 1.1 2007-09-10 08:35:08 cfaucher Exp $
+/* $Id: 021_fsm_mustfail.kmt,v 1.2 2008-04-14 08:58:14 dvojtise Exp $
  * Creation date: November 10, 2006
  * License: EPL
  * Authors:
@@ -6,7 +6,7 @@
  *	   Didier Vojtisek
  */
 @mainClass "fsm::Main"
-@mainOperation "main"
+@mainOperation "testmain"
 
 
 package fsm;
