@@ -1,6 +1,6 @@
 
 
-/*$Id: ClassDefinitionHelper.java,v 1.8 2008-02-19 10:11:40 ftanguy Exp $
+/*$Id: ClassDefinitionHelper.java,v 1.9 2008-04-14 11:55:26 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -209,6 +209,10 @@ public class ClassDefinitionHelper {
 	//		return;
 		
 		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(current);
+		if(unit == null){
+			// error cannot retrieve the KermetaUnit of the classDefinition
+			throw new Error("Internal error : cannot retrieve the KermetaUnit of the classDefinition " +KermetaModelHelper.NamedElement.qualifiedName(current));
+		}
 		if ( units.contains(unit) ) {
 			List<TypeDefinition> l = map.get(deep);
 			if ( l == null ) {
