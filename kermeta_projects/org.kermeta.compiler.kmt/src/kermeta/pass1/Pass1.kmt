@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.12 2008-04-10 15:03:05 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.13 2008-04-14 07:50:36 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -61,17 +61,16 @@ aspect class Package {
 aspect class PrimitiveType {
 	method applyPass1(context : KM2EcoreContext) is do
 		// Creating the associated ecore class
-		context.primitiveType_Type := PrimitiveType_Type.edatatype.name.toString()
-		var ecoreDataType : EDataType init self.createEcoreModelElement(context)
-		
-		context.primitiveType_Type := PrimitiveType_Type.eclass.name.toString()
-		var ecoreModelElement : EClass init self.createEcoreModelElement(context)
+		//context.primitiveType_Type := PrimitiveType_Type.edatatype
+		//var ecoreDataType : EDataType init self.createEcoreModelElement(context).asType(EDataType)		
+		//context.primitiveType_Type := PrimitiveType_Type.eclass
+		var eModelElement : EClass init self.createEcoreModelElement(context)
 		// Setting the container
 		var p : Package init self.container().asType(Package)
-		p.ecoreModelElement.eClassifiers.add(ecoreDataType)
+		p.ecoreModelElement.eClassifiers.add(eModelElement)
 		// Setting the ecore proxy
-		self.ecoreDataType := ecoreDataType
-		self.ecoreModelElement := ecoreModelElement
+		//self.ecoreDataType := ecoreDataType
+		self.ecoreModelElement := eModelElement
 		// Compile the owned elements
 		self.eachOwnedElement{ cd | cd.applyPass1(context) }
 	end 
@@ -115,13 +114,13 @@ aspect class ClassDefinition {
 			var instanceClassName : String init self.getEMFInstanceClassName()
 			
 			if instanceClassName != "" then
-				var ecoreDataType : EDataType init EDataType.new
-				ecoreDataType.name := self.name
-				ecoreDataType.instanceClassName := instanceClassName
+				var eDataType : EDataType init EDataType.new
+				eDataType.name := self.name
+				eDataType.instanceClassName := instanceClassName
 				// Setting the container
-				p.ecoreModelElement.eClassifiers.add(ecoreDataType)
+				p.ecoreModelElement.eClassifiers.add(eDataType)
 				// Setting the ecore proxy
-				self.ecoreDataType := ecoreDataType
+				self.ecoreDataType := eDataType
 				
 				// Compile only the methods that are not taking directly
 				// into account by the target language like times() for an Integer
@@ -228,10 +227,12 @@ aspect class ObjectTypeVariable {
 		var ecoreTypeParameter : ETypeParameter init self.createEcoreModelElement(context)
 		// Setting the container
 		var container : Object init self.container
-		if ( container.isInstanceOf(ClassDefinition) ) then		
+		if container.isInstanceOf(ClassDefinition) then
 			container.asType(ClassDefinition).ecoreModelElement.eTypeParameters.add(ecoreTypeParameter)
 		else
-			container.asType(Operation).ecoreModelElement.eTypeParameters.add(ecoreTypeParameter)
+			if container.isInstanceOf(Operation) then
+				container.asType(Operation).ecoreModelElement.eTypeParameters.add(ecoreTypeParameter)
+			end
 		end
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreTypeParameter

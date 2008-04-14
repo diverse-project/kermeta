@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.11 2008-04-10 15:03:05 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.12 2008-04-14 07:50:36 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -93,41 +93,41 @@ aspect class Package {
  *
  */
 aspect class PrimitiveType {
-	operation createEcoreModelElement(context : KM2EcoreContext) : EClassifier is do
+	operation createEcoreModelElement(context : KM2EcoreContext) : EClass is do
 		
-		var ecoreModelElement : EClassifier
+		var eModelElement : EClass init EClass.new
 		
-		if context.primitiveType_type == PrimitiveType_Type.edatatype.name.toString() then
-			ecoreModelElement := EDataType.new
+		/*if context.primitiveType_Type == PrimitiveType_Type.edatatype then
+			eModelElement := EDataType.new
 		else
-			if context.primitiveType_type == PrimitiveType_Type.eclass.name.toString()  then
-				ecoreModelElement := EClass.new
+			if context.primitiveType_Type == PrimitiveType_Type.eclass  then
+				eModelElement := EClass.new
 			end
-		end
+		end*/
 		
-		ecoreModelElement.name := self.name
-		//ecoreModelElement.serializable
-		//ecoreModelElement.instanceTypeName
-		//ecoreModelElement.defaultValue
+		eModelElement.name := self.name
+		//eModelElement.serializable
+		//eModelElement.instanceTypeName
+		//eModelElement.defaultValue
 		
 		
 		// by default
-		ecoreModelElement.instanceClassName := "java.lang.Object"
+		eModelElement.instanceClassName := "java.lang.Object"
 		if ( self.instanceType.isInstanceOf(Class) ) then
 
 			if TypeHelper.new.isValueType(self.instanceType) then
 				var instanceClassName : String init self.instanceType.asType(Class).typeDefinition.getEMFInstanceClassName()
 				if instanceClassName != "" then
-					ecoreModelElement.instanceClassName := instanceClassName
+					eModelElement.instanceClassName := instanceClassName
 				end				
 			end	
 
 			var qualifiedName : String init self.instanceType.asType(Class).typeDefinition.qualifiedName
-			ecoreDataType.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), qualifiedName))
-			ecoreDataType.instanceClassName := self.instanceType.asType(Class).typeDefinition.qualifiedName.replace("::", ".")
+			eModelElement.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), qualifiedName))
+			eModelElement.instanceClassName := qualifiedName.replace("::", ".")
 		end
 		
-		result := ecoreModelElement
+		result := eModelElement
 	end
 }
 
@@ -239,7 +239,7 @@ aspect class Property {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EStructuralFeature is do
 		var ecoreStructuralFeature : EStructuralFeature
 		var current_type : Type init self.type.asType(Type)
-		if self.isComposite or TypeHelper.new.isValueType(current_type) or TypeHelper.new.isEnumeration(current_type) then
+		if TypeHelper.new.isValueType(current_type) or TypeHelper.new.isEnumeration(current_type) then
 			ecoreStructuralFeature := EAttribute.new
 			//ecoreStructuralFeature.iD := 
 		else

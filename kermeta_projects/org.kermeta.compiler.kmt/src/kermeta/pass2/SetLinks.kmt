@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.12 2008-04-10 15:03:05 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.13 2008-04-14 07:50:36 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -23,7 +23,7 @@ using km2ecore::helper::ecore
 aspect class ClassDefinition {
 	operation setLinks(context : KM2EcoreContext) is do
 		self.superType.each{ t |
-			if ( t.isInstanceOf(Class) ) then
+			if t.isInstanceOf(Class) then
 				var classDefinition : ClassDefinition init TypeHelper.new.getClassDefinition(t.asType(Class))
 				//stdio.writeln("ClassDefinition.setLinks self.ecoreModelElement: " + self.ecoreModelElement.toString)
 				if not (self.ecoreModelElement.isVoid() and (not self.ecoreDataType.isVoid()) ) then
@@ -37,6 +37,13 @@ aspect class ClassDefinition {
 			end
 		}
 	end
+}
+
+aspect class Class2 {
+/*	operation setLinks(context : KM2EcoreContext) is do
+		//var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
+		//s.setLinks(self, void, context)
+	end*/
 }
 
 aspect class Operation {
@@ -107,12 +114,13 @@ class LinkSetterForTypedElement {
 					else
 						if tpb.type.isInstanceOf(ObjectTypeVariable) then
 							var otv : ObjectTypeVariable init tpb.type.asType(ObjectTypeVariable)
+							stdio.writeln("ObjectTypeVariable: " + otv.name.toString() + " - otv.ecoreModelElement: " + otv.ecoreModelElement.name + " - ecoreModelElement: " + ecoreModelElement.name + " ecoreModelElement.eGenericType: " + ecoreModelElement.eGenericType.toString())
 							typeArgument.eTypeParameter := otv.ecoreModelElement
 							ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 						else
 							if tpb.type.isInstanceOf(PrimitiveType) then
 								var cd : ClassDefinition init TypeHelper.new.getClassDefinition(TypeHelper.new.getClassFromPrimitiveType( tpb.type ))
-								typeArgument.eClassifier := cd.ecoreDataType
+								typeArgument.eClassifier := cd.ecoreModelElement
 								ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 							end
 						end

@@ -1,4 +1,4 @@
-/* $Id: containment_traversable.kmt,v 1.7 2008-04-02 08:39:30 cfaucher Exp $
+/* $Id: containment_traversable.kmt,v 1.8 2008-04-14 07:50:36 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -104,6 +104,14 @@ package structure {
 				func(t)
 			}
 		end	
+	}
+	
+	aspect class Class {
+		method eachOwnedElement(func : <Object -> Object>) : Void is do
+			self.typeParamBinding.each{ t | 
+				func(t)
+			}
+		end
 	}
 	
 } // end of the package kermeta::language::structure

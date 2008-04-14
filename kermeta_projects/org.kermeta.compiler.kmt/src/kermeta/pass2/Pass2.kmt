@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.14 2008-04-07 15:13:06 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.15 2008-04-14 07:50:36 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -53,6 +53,18 @@ package structure {
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			//stdio.writeln("Pass2 ClassDefinition : " + self.name)
 			self.setLinks(context) 
+			super(context)
+		end
+	}
+	
+	aspect class Class {
+		method applyPass2(context : KM2EcoreContext) is do			
+			//self.setLinks(context) 
+			super(context)
+		end
+		
+		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
+			//self.setLinks(context) 
 			super(context)
 		end
 	}
