@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure">
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
   <packages name="package_declaration"/>
   <usings qualifiedName="package_declaration"/>
 </kermeta_language_structure:ModelingUnit>
