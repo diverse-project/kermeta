@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.15 2008-04-09 14:43:03 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.16 2008-04-14 09:54:25 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -303,6 +303,14 @@ public void testinvalid_GenericOperationCall() throws Exception {
 testinvalidFile("test/io/typechecher_tests/invalid","GenericOperationCall.kmt" );
 }
 
+public void testinvalid_genericOperationDefinition_001() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","genericOperationDefinition_001.kmt" );
+}
+
+public void testinvalid_genericOperationDefinition_002() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","genericOperationDefinition_002.kmt" );
+}
+
 public void testinvalid_GenericsAndFunctions() throws Exception {
 testinvalidFile("test/io/typechecher_tests/invalid","GenericsAndFunctions.kmt" );
 }
@@ -393,10 +401,11 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 		loaderOptions.put( LoadingOptions.ECORE_QuickFixEnabled, true );
 		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(path, loaderOptions);
 		
-		if ( kermetaUnit.isIndirectlyErroneous() )
+		if ( kermetaUnit.isIndirectlyErroneous() ){
 			//assertTrue("kermeta unit has errors during loading", false);
-			assertTrue( KermetaUnitHelper.getErrorsAsString(kermetaUnit), false );
 			
+			assertTrue( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit), false );
+		}
 		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
 		typeChecker.checkUnit();
 	
@@ -434,9 +443,9 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 				assertTrue(message, res);
 			}
 			else {
-				// if there is no operation, check that there is at least an error in the unit 
-				if ( ! kermetaUnit.isErroneous() )
-					assertTrue("kermeta unit has no errors during type checking", false);
+				// if there is no operation, check that there is at least an error or warning in the unit 
+				if ( (! kermetaUnit.isErroneous()) && (! KermetaUnitHelper.hasWarning(kermetaUnit))  )
+					assertTrue("kermeta unit has no error or warning during type checking", false);
 			}
 		
 		}
