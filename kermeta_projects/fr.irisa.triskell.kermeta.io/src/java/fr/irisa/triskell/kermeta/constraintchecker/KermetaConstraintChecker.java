@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.20 2008-03-05 08:10:20 ftanguy Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.21 2008-04-14 09:51:59 dvojtise Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -15,8 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.KermetaUnit;
 
