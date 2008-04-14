@@ -1,4 +1,4 @@
-/* $Id: 025_testParametricOperations.main.kmt,v 1.3 2007-11-05 08:51:16 ftanguy Exp $*/
+/* $Id: 025_testParametricOperations.main.kmt,v 1.4 2008-04-14 09:41:28 dvojtise Exp $*/
 @mainClass "root_package::TestParametricOperations"
 @mainOperation "main"
 
@@ -65,7 +65,7 @@ class TestParametricOperations inherits kermeta::kunit::TestCase
     	
     	var exceptionRaised : Boolean init false
 		do
-	    	//tester.callParametred2Param2(s1, s2)
+	    //	tester.callParametred2Param2(s1, s2)
     	rescue ( e : kermeta::exceptions::RuntimeError)
     		exceptionRaised := true
     	end
@@ -73,24 +73,10 @@ class TestParametricOperations inherits kermeta::kunit::TestCase
     end
     
    
-	/** A parametric operation with unbound type variable : should raise an exception	 
-     * Note: this test should probably be done directly during 
-     * the typechecking and then we should move that test
-	 */
-	@forbidden "yes"
-	operation testfail_callParametred1UnboundParam() is do	
-		var exceptionRaised : Boolean init false
-		do
-	    	tester.callParametred1UnboundParam()
-    	rescue ( e : kermeta::exceptions::RuntimeError)
-    		exceptionRaised := true
-    	end
-    	assert(exceptionRaised)
-	end
 	
 	/** A parametric operation with unbound type variable, but used in result type
 	 : should fail -- meaningless */
-	/*@forbidden "yes"
+	/*@forbidden "yes" 
 	operation testfail_callParametredBoundWithReturnType<P>() is do
 		aString := tester.callParametredBoundWithReturnType()
 	end*/
@@ -159,10 +145,6 @@ class ParametricOperationTester
 	end
 	
 	
-	/** This test should fail : the typeVariable is unused in the parameters of op.*/
-	operation callParametred1UnboundParam<P>() is do
-		stdio.write("unbound parameter")
-	end
 	
 	operation callParametredBoundWithReturnType<P>() : P is do
 		stdio.write("bound param with return type")
