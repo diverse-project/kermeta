@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.13 2008-04-14 07:50:36 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.14 2008-04-15 13:11:57 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -34,17 +34,22 @@ aspect class ClassDefinition {
 						self.ecoreModelElement.eSuperTypes.add( classDefinition.ecoreModelElement )
 					end
 				end
+				
+				//t.asType(Class).setLinks(context)
+				var typeArgument : EGenericType init EGenericType.new
+				var cd : ClassDefinition init TypeHelper.new.getClassDefinition( t.asType(Class) )
+				typeArgument.eClassifier := cd.ecoreModelElement
+				//t.asType(Class).ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 			end
 		}
 	end
 }
-
-aspect class Class2 {
-/*	operation setLinks(context : KM2EcoreContext) is do
-		//var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
-		//s.setLinks(self, void, context)
-	end*/
-}
+/*
+aspect class Class {
+	operation setLinks(context : KM2EcoreContext) is do
+		super(context)
+	end
+}*/
 
 aspect class Operation {
 	operation setLinks(context : KM2EcoreContext) is do
@@ -79,8 +84,8 @@ aspect class Property {
 	operation setLinks(context : KM2EcoreContext) is do
 		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
 		s.setLinks(self, self.ecoreModelElement, context)
-		if ( self.opposite != void ) then
-			self.getEcoreModelElement().eOpposite := self.opposite.getEcoreModelElement()
+		if not self.opposite.isVoid() then //if self.opposite != void then self is an EReference
+			self.ecoreModelElement.asType(EReference).eOpposite := self.opposite.ecoreModelElement.asType(EReference)
 		end
 	end
 }

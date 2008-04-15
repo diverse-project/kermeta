@@ -73,7 +73,7 @@ class ParameterizedEmptyClass<A>
 {
 }
 
-class ParameterizedClass<B>
+class ParameterizedClass<B> inherits ParameterizedEmptyClass<B>
 {
 	reference attr1 : ParameterizedClass<String> [0..1]
 	
