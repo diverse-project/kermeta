@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.38 2008-04-14 16:19:01 dvojtise Exp $
+/* $Id: kunit.kmt,v 1.39 2008-04-15 09:00:47 dvojtise Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -125,7 +125,13 @@ abstract class Fallible inherits AbstractFallible
    */
 	method fail(msg: String): Void is
 		 do
-			getLog.addFailure(self, "explicit failure: " + msg)
+		 	if mustStop then
+		 		var exception : AssertionFailedError init AssertionFailedError.new
+	            exception.message := "explicit failure: " + msg
+	            raise exception
+		 	else
+				getLog.addFailure(self, "explicit failure: " + msg)
+			end
 		 end
 		 
   /**
