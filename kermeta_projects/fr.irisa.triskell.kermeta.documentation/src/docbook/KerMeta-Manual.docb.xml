@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.29 2008-02-26 16:34:38 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.30 2008-04-15 08:58:30 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2008-02-26 16:34:38 $</pubdate>
+    <pubdate>$Date: 2008-04-15 08:58:30 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -2775,7 +2775,7 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
 } 
 </programlisting>
 
-        <programlisting>anObject := aCollection.<emphasis role="strong">detect</emphasis> { e | <emphasis>/* a condition */</emphasis>} // returns the first element that fullfil the condition.</programlisting>
+        <programlisting>anObject := aCollection.<emphasis role="strong">detect</emphasis> { e | <emphasis>/* a condition */</emphasis>} // returns an element (usually the first) that fulfill the condition.</programlisting>
 
         <programlisting>aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | <emphasis>/* a condition */</emphasis>} // returns true if at least one element fulfill the condition.</programlisting>
       </section>
@@ -2999,6 +2999,8 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
         <para>In other words it does not reference to a concrete entity: it is
         calculated, through the accessor operations getter and setter.</para>
 
+		<para>The special parameter <literal>value</literal> is used in the setter 
+		to get the value passed when calling the setter.</para>
         <para>Let's take the following class definitions :</para>
 
         <programlisting><emphasis>// readonly property : it has no setter</emphasis>
@@ -3021,10 +3023,28 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
         <emphasis role="strong">end</emphasis>
         <emphasis role="strong">setter</emphasis> <emphasis role="strong">is</emphasis> <emphasis
             role="strong">do</emphasis>
-            period := 1/frequency
+            period := 1/<emphasis role="strong">value</emphasis>
         <emphasis role="strong">end</emphasis>
-}</programlisting>
+}
 
+// a typical use would be (with aB an instance of class B) 
+<emphasis role="strong">var</emphasis> freq : Real
+fred := aB.frequency // to use the getter
+aB.frequency := freq + 1 // to use the setter, the period is also updated in the process 
+</programlisting>
+
+		<note><para>To understand to role of the <literal>value</literal> keyword, you can imagine 
+			that in this sample the setter syntax is a shortcut syntax of :   
+			
+			<literal>
+			setter( value : Real) is do ...
+			</literal> (even if actually this syntax isn't supported). 
+			</para>
+		</note>
+		<warning><para>
+         Since derived properties aims to behave like attributes or references, if the multiplicity is greater than 1,
+         it doesn't make sense to define a setter. This is because it means reassigning the internal collection which is in fact calculated. 
+      </para></warning>
         <para>Properties are accessed or modified as classical properties. See
         next subsection for examples.</para>
       </section>
@@ -4134,7 +4154,7 @@ aspect abstract class A {
       <title id="section_modeltype.title.link">Model type</title>
 
       <warning><para>
-         In current version of Kermeta(v1.0.0), ModelType is still a prototype. Any help, feedback, contribution is welcome to help us to finalize it. 
+         In current version of Kermeta(v1.1.0), ModelType is still a prototype. Any help, feedback, contribution is welcome to help us to finalize it. 
       </para></warning>
 
       <para>Kermeta is clearly a model oriented language, one of its first
