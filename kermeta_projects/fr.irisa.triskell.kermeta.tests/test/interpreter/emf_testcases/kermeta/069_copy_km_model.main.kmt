@@ -1,7 +1,7 @@
-@mainClass "ptpr::Main" 
+@mainClass "copy_and_reload_km_model::Main" 
 @mainOperation "main"
 
-package ptpr;
+package copy_and_reload_km_model;
 
 require kermeta
 
@@ -26,12 +26,13 @@ class Main inherits TestCase
  
   		do
 			resource_load.load()
+			//repository_load.resources.each{r | stdio.writeln(r.uri)}
 			stdio.writeln("load OK")
 			rescue (e1 : ResourceLoadException)
 			do
 				stdio.writeln(e1.toString)
         		stdio.writeln(e1.message)
-        		assertTrueWithMsg(false, "Not able to load original from platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/069_km_model_to_copy.km")
+        		fail( "Not able to load original from platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/069_km_model_to_copy.km " + e1.message)
         	end
 		end
 		
@@ -42,19 +43,28 @@ class Main inherits TestCase
 		var repository_save : EMFRepository init EMFRepository.new    
         var resource_save : Resource init repository_save.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/069_km_model_to_copy_copied.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
 	 	resource_save.instances.add(mymodelunit)
+	 	// must add the dependent resources to the repository
+	 	repository_load.resources.select{r| r != resource_load}.each{r2 | repository_save.resources.add(r2)}
 	 	do
+	 		
+	 		// var report : kermeta::standard::Set<DanglingDiagnostic>
+     		// report := resource_save.findDanglingModelElements()
+     		// report.each{ diag | stdio.writeln(diag.toString ) }
 		 	resource_save.save()
 		 	stdio.writeln("save OK")
 		 	rescue (e2 : ResourceSaveException)
 		 	do
 				stdio.writeln(e2.toString)
         		stdio.writeln(e2.message)
-        		assertTrueWithMsg(false,"Not able to save a copy to platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/069_km_model_to_copy_copied.km")
+        		fail( "Not able to save a copy to platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/069_km_model_to_copy_copied.km " + e2.message)
         	end
 	 	end
 	 	
+	 	
+	 	
 	 	var repository_load2 : EMFRepository init EMFRepository.new     
-    	var resource_load2 : Resource init repository_load2.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/069_km_model_to_copy_copied.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+    	// var resource_load2 : Resource init repository_load2.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/069_km_model_to_copy_copied.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+    	var resource_load2 : Resource init repository_load2.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/069_km_model_to_copy_copied.km", "")
     	do
 			resource_load2.load()
 			stdio.writeln("load2 OK")
@@ -62,7 +72,7 @@ class Main inherits TestCase
 			do
 				stdio.writeln(e3.toString)
         		stdio.writeln(e3.message)
-        		assertTrueWithMsg(false, "not able to reload copy from platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/069_km_model_to_copy_copied.km")
+        		fail( "not able to reload copy from platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/069_km_model_to_copy_copied.km " + e3.message)
         	end
 		end
     end   
