@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
-  <packagedElement xsi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="ExternalClassDiagram">
-    <ownedComment body="This diagram intends to test the link between models, and the respect of it through generation of code.&#xA;The obtained code for the main classes should refer to this diagram classes."/>
-    <packagedElement xsi:type="uml:Class" xmi:id="_35A0QKi8EdyWnLZVQEdwgw" name="FClass"/>
-    <packagedElement xsi:type="uml:Class" xmi:id="_5W9Y8Ki8EdyWnLZVQEdwgw" name="EClass">
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="ExternalClassDiagram">
+    <ownedComment xmi:id="_U-wv4Aq8Ed2cxe8qA0Wn9Q">
+      <body>This diagram intends to test the link between models, and the respect of it through generation of code.
+The obtained code for the main classes should refer to this diagram classes.</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Class" xmi:id="_35A0QKi8EdyWnLZVQEdwgw" name="FClass"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_5W9Y8Ki8EdyWnLZVQEdwgw" name="EClass">
       <ownedAttribute xmi:id="_RVP-EKi9EdyWnLZVQEdwgw" name="target" type="_35A0QKi8EdyWnLZVQEdwgw">
-        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_WChwEKi-EdyWnLZVQEdwgw" value="*"/>
-        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_Vx1BoKi-EdyWnLZVQEdwgw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WChwEKi-EdyWnLZVQEdwgw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Vx1BoKi-EdyWnLZVQEdwgw"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_CYDwkKi-EdyWnLZVQEdwgw" name="eProperty"/>
       <ownedOperation xmi:id="_ZrOVEKi-EdyWnLZVQEdwgw" name="eOperation"/>
     </packagedElement>
-    <packagedElement xsi:type="uml:Class" xmi:id="_7yIa4Ki8EdyWnLZVQEdwgw" name="GClass">
+    <packagedElement xmi:type="uml:Class" xmi:id="_7yIa4Ki8EdyWnLZVQEdwgw" name="GClass">
       <ownedAttribute xmi:id="_aCSmsai9EdyWnLZVQEdwgw" name="gProperty"/>
       <ownedOperation xmi:id="_-DxtYKi8EdyWnLZVQEdwgw" name="gOperation"/>
     </packagedElement>
-    <packagedElement xsi:type="uml:Association" xmi:id="_Lk1eqKi9EdyWnLZVQEdwgw" name="Association1" memberEnd="_Lk1eqai9EdyWnLZVQEdwgw _Lk1erKi9EdyWnLZVQEdwgw">
+    <packagedElement xmi:type="uml:Association" xmi:id="_Lk1eqKi9EdyWnLZVQEdwgw" name="Association1" memberEnd="_Lk1eqai9EdyWnLZVQEdwgw _Lk1erKi9EdyWnLZVQEdwgw">
       <ownedEnd xmi:id="_Lk1eqai9EdyWnLZVQEdwgw" name="source" type="_5W9Y8Ki8EdyWnLZVQEdwgw" aggregation="composite" association="_Lk1eqKi9EdyWnLZVQEdwgw">
-        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_Lk1eqqi9EdyWnLZVQEdwgw" value="1"/>
-        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_Lk1eq6i9EdyWnLZVQEdwgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Lk1eqqi9EdyWnLZVQEdwgw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Lk1eq6i9EdyWnLZVQEdwgw" value="1"/>
       </ownedEnd>
       <ownedEnd xmi:id="_Lk1erKi9EdyWnLZVQEdwgw" name="target" type="_35A0QKi8EdyWnLZVQEdwgw" association="_Lk1eqKi9EdyWnLZVQEdwgw">
-        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_Lk1erai9EdyWnLZVQEdwgw" value="1"/>
-        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_Lk1erqi9EdyWnLZVQEdwgw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Lk1erai9EdyWnLZVQEdwgw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Lk1erqi9EdyWnLZVQEdwgw"/>
       </ownedEnd>
     </packagedElement>
-    <packagedElement xsi:type="uml:DataType" xmi:id="_UjATgKi9EdyWnLZVQEdwgw" name="String"/>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_UjATgKi9EdyWnLZVQEdwgw" name="String"/>
   </packagedElement>
 </uml:Model>

@@ -1,61 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
-  <packagedElement xsi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="ClassDiagram">
-    <ownedComment xmi:id="_fgsdoehfocomment0" body="This diagram intends to represent a general classes sample.&#xA;It must cover a large part of UML2 class diagram possibilities, in order to test the UML2 transformation tools provided in the org.kermeta.uml2 MDK."/>
-    <ownedComment xmi:id="_fgsdoehfocomment1" body="Example of a class comment" annotatedElement="_eoBw0Ki_EdyWnLZVQEdwgw"/>
-    <ownedComment xmi:id="_fgsdoehfocomment2" body="do&#xA;&#x9;/* Operation code in Kermeta language!&#xA;&#x9; * Block of code starts with &quot;do&quot; and finishes with &quot;end&quot;&#xA;&#x9;var g : ExternalClassDiagram::GClass&#xA;&#x9;g := ExternalClassDiagram::GClass.new&#xA;&#x9;result := g&#xA;end" annotatedElement="_CsJ70Ki_EdyWnLZVQEdwgw"/>
-    <ownedComment xmi:id="_fgsdoehfocomment3" body="An usual operation comment" annotatedElement="_CsJ70Ki_EdyWnLZVQEdwgw"/>
-    <packagedElement xsi:type="uml:Class" xmi:id="_2CUGcKi-EdyWnLZVQEdwgw" name="AClass">
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="ClassDiagram">
+    <ownedComment xmi:id="_fgsdoehfocomment0">
+      <body>This diagram intends to represent a general classes sample.
+It must cover a large part of UML2 class diagram possibilities, in order to test the UML2 transformation tools provided in the org.kermeta.uml2 MDK.</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Class" xmi:id="_2CUGcKi-EdyWnLZVQEdwgw" name="AClass">
       <ownedAttribute xmi:id="_4SHl4Ki-EdyWnLZVQEdwgw" name="aProperty">
-        <type xsi:type="uml:DataType" href="ExternalClassDiagram.uml#_UjATgKi9EdyWnLZVQEdwgw"/>
+        <type xmi:type="uml:DataType" href="ExternalClassDiagram.uml#_UjATgKi9EdyWnLZVQEdwgw"/>
       </ownedAttribute>
       <ownedOperation xmi:id="_-4juYKi-EdyWnLZVQEdwgw" name="aOperation"/>
     </packagedElement>
-    <packagedElement xsi:type="uml:Class" xmi:id="_Bsw7YKi_EdyWnLZVQEdwgw" name="BClass">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Bsw7YKi_EdyWnLZVQEdwgw" name="BClass">
       <generalization xmi:id="_FKe_cKi_EdyWnLZVQEdwgw" general="_2CUGcKi-EdyWnLZVQEdwgw"/>
-      <ownedOperation xmi:id="_CsJ70Ki_EdyWnLZVQEdwgw" name="bOperation"/>
-    </packagedElement>
-    <packagedElement xsi:type="uml:Class" xmi:id="_JuYBYKi_EdyWnLZVQEdwgw" name="HClass"/>
-    <packagedElement xsi:type="uml:Association" xmi:id="_LuqeIKi_EdyWnLZVQEdwgw" name="Association1" memberEnd="_LuqeIai_EdyWnLZVQEdwgw _LuqeJKi_EdyWnLZVQEdwgw">
-      <ownedEnd xmi:id="_LuqeIai_EdyWnLZVQEdwgw" name="b" type="_Bsw7YKi_EdyWnLZVQEdwgw" isUnique="false" association="_LuqeIKi_EdyWnLZVQEdwgw">
-        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_LuqeIqi_EdyWnLZVQEdwgw" value="*"/>
-        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_LuqeI6i_EdyWnLZVQEdwgw"/>
-      </ownedEnd>
-      <ownedEnd xmi:id="_LuqeJKi_EdyWnLZVQEdwgw" name="h" type="_JuYBYKi_EdyWnLZVQEdwgw" isUnique="false" association="_LuqeIKi_EdyWnLZVQEdwgw">
-        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_LuqeJai_EdyWnLZVQEdwgw" value="*"/>
-        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_LuqeJqi_EdyWnLZVQEdwgw"/>
-      </ownedEnd>
-    </packagedElement>
-    <packagedElement xsi:type="uml:Class" xmi:id="_VbzR0Ki_EdyWnLZVQEdwgw" name="CClass">
-      <ownedOperation xmi:id="_WpUN0Ki_EdyWnLZVQEdwgw" name="cOperation">
-        <ownedParameter xmi:id="_YFyL0Ki_EdyWnLZVQEdwgw" name="in">
-          <type xsi:type="uml:DataType" href="ExternalClassDiagram.uml#_UjATgKi9EdyWnLZVQEdwgw"/>
+      <ownedOperation xmi:id="_CsJ70Ki_EdyWnLZVQEdwgw" name="bOperation">
+        <ownedComment xmi:id="_cXFy4Aq9Ed2cxe8qA0Wn9Q" annotatedElement="_Bsw7YKi_EdyWnLZVQEdwgw">
+          <body>An usual operation comment</body>
+        </ownedComment>
+        <ownedComment xmi:id="_kJhNYAq9Ed2cxe8qA0Wn9Q" annotatedElement="_Bsw7YKi_EdyWnLZVQEdwgw">
+          <body>do
+	/* Operation code in Kermeta language!
+	 * Block of code starts with &quot;do&quot; and finishes with &quot;end&quot;
+	var g : ExternalClassDiagram::GClass
+	g := ExternalClassDiagram::GClass.new
+	result := g
+end</body>
+        </ownedComment>
+        <ownedParameter xmi:id="_VN4UgAq9Ed2cxe8qA0Wn9Q" name="return" direction="return">
+          <type xmi:type="uml:Class" href="ExternalClassDiagram.uml#_7yIa4Ki8EdyWnLZVQEdwgw"/>
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xsi:type="uml:Class" xmi:id="_eoBw0Ki_EdyWnLZVQEdwgw" name="DClass">
+    <packagedElement xmi:type="uml:Class" xmi:id="_JuYBYKi_EdyWnLZVQEdwgw" name="HClass"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_LuqeIKi_EdyWnLZVQEdwgw" name="bNh" memberEnd="_LuqeIai_EdyWnLZVQEdwgw _LuqeJKi_EdyWnLZVQEdwgw">
+      <ownedEnd xmi:id="_LuqeIai_EdyWnLZVQEdwgw" name="b" type="_Bsw7YKi_EdyWnLZVQEdwgw" isUnique="false" association="_LuqeIKi_EdyWnLZVQEdwgw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LuqeIqi_EdyWnLZVQEdwgw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LuqeI6i_EdyWnLZVQEdwgw"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_LuqeJKi_EdyWnLZVQEdwgw" name="h" type="_JuYBYKi_EdyWnLZVQEdwgw" isUnique="false" association="_LuqeIKi_EdyWnLZVQEdwgw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LuqeJai_EdyWnLZVQEdwgw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LuqeJqi_EdyWnLZVQEdwgw"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_VbzR0Ki_EdyWnLZVQEdwgw" name="CClass">
+      <ownedOperation xmi:id="_WpUN0Ki_EdyWnLZVQEdwgw" name="cOperation">
+        <ownedParameter xmi:id="_YFyL0Ki_EdyWnLZVQEdwgw" name="in">
+          <type xmi:type="uml:DataType" href="ExternalClassDiagram.uml#_UjATgKi9EdyWnLZVQEdwgw"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_eoBw0Ki_EdyWnLZVQEdwgw" name="DClass">
+      <ownedComment xmi:id="_YAKrYAq8Ed2cxe8qA0Wn9Q" annotatedElement="_eoBw0Ki_EdyWnLZVQEdwgw">
+        <body>Exemple of a class comment</body>
+      </ownedComment>
       <ownedAttribute xmi:id="_f8GAwKi_EdyWnLZVQEdwgw" name="dProperty">
-        <type xsi:type="uml:DataType" href="ExternalClassDiagram.uml#_UjATgKi9EdyWnLZVQEdwgw"/>
+        <type xmi:type="uml:DataType" href="ExternalClassDiagram.uml#_UjATgKi9EdyWnLZVQEdwgw"/>
       </ownedAttribute>
     </packagedElement>
-    <packagedElement xsi:type="uml:Association" xmi:id="_jmz_CKi_EdyWnLZVQEdwgw" name="Association2" memberEnd="_jmz_Cai_EdyWnLZVQEdwgw _jmz_DKi_EdyWnLZVQEdwgw" navigableOwnedEnd="_jmz_DKi_EdyWnLZVQEdwgw">
+    <packagedElement xmi:type="uml:Association" xmi:id="_jmz_CKi_EdyWnLZVQEdwgw" name="cCollection" memberEnd="_jmz_Cai_EdyWnLZVQEdwgw _jmz_DKi_EdyWnLZVQEdwgw" navigableOwnedEnd="_jmz_DKi_EdyWnLZVQEdwgw">
       <ownedEnd xmi:id="_jmz_Cai_EdyWnLZVQEdwgw" name="source" type="_2CUGcKi-EdyWnLZVQEdwgw" association="_jmz_CKi_EdyWnLZVQEdwgw">
-        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_jmz_Cqi_EdyWnLZVQEdwgw" value="1"/>
-        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_jmz_C6i_EdyWnLZVQEdwgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jmz_Cqi_EdyWnLZVQEdwgw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jmz_C6i_EdyWnLZVQEdwgw" value="1"/>
       </ownedEnd>
       <ownedEnd xmi:id="_jmz_DKi_EdyWnLZVQEdwgw" name="target" type="_VbzR0Ki_EdyWnLZVQEdwgw" isUnique="false" association="_jmz_CKi_EdyWnLZVQEdwgw">
-        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_jmz_Dai_EdyWnLZVQEdwgw" value="*"/>
-        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_jmz_Dqi_EdyWnLZVQEdwgw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jmz_Dai_EdyWnLZVQEdwgw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jmz_Dqi_EdyWnLZVQEdwgw"/>
       </ownedEnd>
     </packagedElement>
-    <packagedElement xsi:type="uml:Association" xmi:id="_kWo5eKi_EdyWnLZVQEdwgw" name="Association3" memberEnd="_kWo5eai_EdyWnLZVQEdwgw _kWo5fKi_EdyWnLZVQEdwgw">
+    <packagedElement xmi:type="uml:Association" xmi:id="_kWo5eKi_EdyWnLZVQEdwgw" name="composition" memberEnd="_kWo5eai_EdyWnLZVQEdwgw _kWo5fKi_EdyWnLZVQEdwgw">
       <ownedEnd xmi:id="_kWo5eai_EdyWnLZVQEdwgw" name="source" type="_Bsw7YKi_EdyWnLZVQEdwgw" association="_kWo5eKi_EdyWnLZVQEdwgw">
-        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_kWo5eqi_EdyWnLZVQEdwgw" value="1"/>
-        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_kWo5e6i_EdyWnLZVQEdwgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kWo5eqi_EdyWnLZVQEdwgw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_kWo5e6i_EdyWnLZVQEdwgw" value="1"/>
       </ownedEnd>
       <ownedEnd xmi:id="_kWo5fKi_EdyWnLZVQEdwgw" name="target" type="_eoBw0Ki_EdyWnLZVQEdwgw" aggregation="composite" association="_kWo5eKi_EdyWnLZVQEdwgw">
-        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_kWo5fai_EdyWnLZVQEdwgw" value="1"/>
-        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_kWo5fqi_EdyWnLZVQEdwgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kWo5fai_EdyWnLZVQEdwgw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_kWo5fqi_EdyWnLZVQEdwgw" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_tCr3YwrGEd2cxe8qA0Wn9Q" name="BnG" memberEnd="_tCsecArGEd2cxe8qA0Wn9Q _tCsecwrGEd2cxe8qA0Wn9Q">
+      <ownedEnd xmi:id="_tCsecArGEd2cxe8qA0Wn9Q" name="source" type="_Bsw7YKi_EdyWnLZVQEdwgw" association="_tCr3YwrGEd2cxe8qA0Wn9Q">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tCsecQrGEd2cxe8qA0Wn9Q" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tCsecgrGEd2cxe8qA0Wn9Q" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_tCsecwrGEd2cxe8qA0Wn9Q" name="target" association="_tCr3YwrGEd2cxe8qA0Wn9Q">
+        <type xmi:type="uml:Class" href="ExternalClassDiagram.uml#_7yIa4Ki8EdyWnLZVQEdwgw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tCsedArGEd2cxe8qA0Wn9Q" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tCsedQrGEd2cxe8qA0Wn9Q" value="1"/>
       </ownedEnd>
     </packagedElement>
   </packagedElement>
