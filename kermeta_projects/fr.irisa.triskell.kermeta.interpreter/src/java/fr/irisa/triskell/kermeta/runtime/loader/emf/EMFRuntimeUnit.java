@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.60 2008-04-09 07:28:36 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.61 2008-04-15 10:11:42 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -311,7 +311,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     public void load(RuntimeObject resRO)
     {	
     	// run in a job
-    	Job myJob = new LoaderJob("Kermeta is loading model " + getUriAsString(), resRO, this);
+    	LoaderJob myJob = new LoaderJob("Kermeta is loading model " + getUriAsString(), resRO, this);
 		myJob.schedule();
 		// must wait before continuing
 		try {
@@ -319,6 +319,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		} catch (InterruptedException e) {
 			throwKermetaRaisedExceptionOnLoad("Loading model interrupted", e);
 		}
+		if (myJob.catchedException != null) // due to the change of Thred, re-throw the intercepted excpetion
+			throw myJob.catchedException;
     }
     
     /**
@@ -765,7 +767,10 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	// use the ns uri to retreive the package name
 	    	if(this.qualifiedNamePatcher == null) qualifiedNamePatcher = new QualifiedNamePatcher(this);
 	    	result = qualifiedNamePatcher.getPackageQualifiedNameFromMetamodel(obj);
-	    	
+	    	if(result == null) {
+	    		// still not able to retrieve the package qualified name from the nsURI
+	    		this.throwKermetaRaisedExceptionOnLoad("not able to retrieve the package qualified name from the nsURI of EPackage " + ((EPackage)obj).getNsURI(), null);
+	    	}
 	    }
 	    EObject cont = obj.eContainer();
 	    // Special case: if obj is a EDataType, refering to a java type (like String), 
@@ -792,6 +797,10 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    else if(!(obj.getClass().getName().compareTo("org.eclipse.emf.ecore.impl.EPackageImpl")==0)){
 	    	if(this.qualifiedNamePatcher == null) qualifiedNamePatcher = new QualifiedNamePatcher(this);
 	    	result = qualifiedNamePatcher.getPackageQualifiedNameFromMetamodel(obj);
+	    	if(result == null) {
+	    		// still not able to retrieve the package qualified name from the nsURI
+	    		this.throwKermetaRaisedExceptionOnLoad("not able to retrieve the package qualified name from the nsURI of EPackage " + ((EPackage)obj).getNsURI(), null);
+	    	}
 	    }
 	    else {
 	    	result = specialObjectQualifiedName(cont, result);

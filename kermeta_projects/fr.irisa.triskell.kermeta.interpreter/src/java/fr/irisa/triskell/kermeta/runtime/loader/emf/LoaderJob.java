@@ -1,4 +1,4 @@
-/*$Id: LoaderJob.java,v 1.1 2008-04-09 07:28:36 dvojtise Exp $
+/*$Id: LoaderJob.java,v 1.2 2008-04-15 10:11:42 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	LoaderJob.java
 * License : EPL
@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**
@@ -27,6 +28,8 @@ public class LoaderJob extends Job {
 	private RuntimeObject resourceRO;
 	private EMFRuntimeUnit runtimeUnit;
 	
+	public KermetaRaisedException catchedException;
+	
 	public LoaderJob(String name, RuntimeObject resRO, EMFRuntimeUnit ru) {
 		super(name);
 		resourceRO =resRO;
@@ -35,8 +38,16 @@ public class LoaderJob extends Job {
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		runtimeUnit.monitoredLoad(resourceRO, monitor);
-        return new Status(IStatus.OK, "fr.irisa.triskell.kermeta.interpreter", "model loaded");
+		try{
+			runtimeUnit.monitoredLoad(resourceRO, monitor);
+			return new Status(IStatus.OK, "fr.irisa.triskell.kermeta.interpreter", "model loaded");
+		}
+		catch (KermetaRaisedException e){
+			catchedException = e;
+			return new Status(IStatus.OK, "fr.irisa.triskell.kermeta.interpreter", "Problem : model not loaded", e);
+			//return new Status(IStatus.ERROR, "fr.irisa.triskell.kermeta.interpreter", "model not loaded", e);
+		}
+		
 	}
 
 }
