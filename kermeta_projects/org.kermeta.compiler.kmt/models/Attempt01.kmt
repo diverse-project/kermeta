@@ -65,15 +65,13 @@ class InheritedClassWithBehavior inherits ClassWithBehavior, EmptyClass {
 	end
 }
 
-class EmptyClass
-{
+class EmptyClass {
 }
 
-class ParameterizedEmptyClass<A>
-{
+class ParameterizedEmptyClass<A> {
 }
 
-class ParameterizedClass<B> inherits ParameterizedEmptyClass<B>
+class ParameterizedClass<B> inherits ParameterizedEmptyClass<B> , ParameterizedEmptyClass<EmptyClass>
 {
 	reference attr1 : ParameterizedClass<String> [0..1]
 	

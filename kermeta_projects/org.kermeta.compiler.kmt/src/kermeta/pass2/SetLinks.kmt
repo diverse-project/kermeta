@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.14 2008-04-15 13:11:57 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.15 2008-04-15 18:24:57 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -31,25 +31,53 @@ aspect class ClassDefinition {
 						//stdio.writeln("Class Def is nil" + classDefinition.name)
 					end
 					if (not self.ecoreModelElement.isVoid()) and (not classDefinition.ecoreModelElement.isVoid()) then
-						self.ecoreModelElement.eSuperTypes.add( classDefinition.ecoreModelElement )
+					
+						var new_eGenericType : EGenericType init EGenericType.new
+						new_eGenericType.eClassifier := classDefinition.ecoreModelElement
+						self.ecoreModelElement.eGenericSuperTypes.add( new_eGenericType )
+						
+						t.asType(Class).ecoreModelElement := new_eGenericType
+						t.asType(Class).setLinks(context)
 					end
 				end
-				
-				//t.asType(Class).setLinks(context)
-				var typeArgument : EGenericType init EGenericType.new
-				var cd : ClassDefinition init TypeHelper.new.getClassDefinition( t.asType(Class) )
-				typeArgument.eClassifier := cd.ecoreModelElement
-				//t.asType(Class).ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 			end
 		}
 	end
 }
-/*
+
 aspect class Class {
+	// Set the links to the EGenericType for the EGenericSuperTypes
 	operation setLinks(context : KM2EcoreContext) is do
-		super(context)
+		self.typeParamBinding.each{ tpb |
+				
+			var typeArgument : EGenericType init EGenericType.new
+			
+			if tpb.type.isInstanceOf(Class) then
+				var cd : ClassDefinition init TypeHelper.new.getClassDefinition( tpb.type.asType(Class) )
+								
+				if not cd.ecoreModelElement.isVoid() then
+					typeArgument.eClassifier := cd.ecoreModelElement
+				else //we assume this Class target a subtype of ValueType => EDataType
+					typeArgument.eClassifier := cd.ecoreDataType
+				end
+								
+				self.ecoreModelElement.eTypeArguments.add(typeArgument)
+			else
+				if tpb.type.isInstanceOf(ObjectTypeVariable) then
+					var otv : ObjectTypeVariable init tpb.type.asType(ObjectTypeVariable)
+					typeArgument.eTypeParameter := otv.ecoreModelElement
+					self.ecoreModelElement.eTypeArguments.add(typeArgument)
+				else
+					if tpb.type.isInstanceOf(PrimitiveType) then
+						var cd : ClassDefinition init TypeHelper.new.getClassDefinition(TypeHelper.new.getClassFromPrimitiveType( tpb.type ))
+						typeArgument.eClassifier := cd.ecoreModelElement
+						self.ecoreModelElement.eTypeArguments.add(typeArgument)
+					end
+				end
+			end
+		}
 	end
-}*/
+}
 
 aspect class Operation {
 	operation setLinks(context : KM2EcoreContext) is do
@@ -114,12 +142,16 @@ class LinkSetterForTypedElement {
 					
 					if tpb.type.isInstanceOf(Class) then
 						var cd : ClassDefinition init TypeHelper.new.getClassDefinition( tpb.type.asType(Class) )
-						typeArgument.eClassifier := cd.ecoreModelElement
+						if not cd.ecoreModelElement.isVoid() then
+							typeArgument.eClassifier := cd.ecoreModelElement
+						else //we assume this Class target a subtype of ValueType => EDataType
+							typeArgument.eClassifier := cd.ecoreDataType
+						end
 						ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 					else
 						if tpb.type.isInstanceOf(ObjectTypeVariable) then
 							var otv : ObjectTypeVariable init tpb.type.asType(ObjectTypeVariable)
-							stdio.writeln("ObjectTypeVariable: " + otv.name.toString() + " - otv.ecoreModelElement: " + otv.ecoreModelElement.name + " - ecoreModelElement: " + ecoreModelElement.name + " ecoreModelElement.eGenericType: " + ecoreModelElement.eGenericType.toString())
+							//stdio.writeln("ObjectTypeVariable: " + otv.name.toString() + " - otv.ecoreModelElement: " + otv.ecoreModelElement.name + " - ecoreModelElement: " + ecoreModelElement.name + " ecoreModelElement.eGenericType: " + ecoreModelElement.eGenericType.toString())
 							typeArgument.eTypeParameter := otv.ecoreModelElement
 							ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 						else
