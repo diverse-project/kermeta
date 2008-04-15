@@ -167,7 +167,7 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 				else {	
 					// If no launch configuration found, let us use a new one.
 					launchConfiguration = createConfiguration(projectName,
-						fileName, className, operationName);
+						fileName.replace("\\", "/"), className, operationName);
 					launchConfiguration(mode, launchConfiguration);
 				}
 				break;

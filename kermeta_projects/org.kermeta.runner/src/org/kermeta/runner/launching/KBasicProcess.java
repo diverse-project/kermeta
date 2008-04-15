@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.6 2008-04-14 06:48:57 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.7 2008-04-15 10:04:17 cfaucher Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -23,6 +23,7 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.kermeta.interpreter.api.InitializationError;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.interpreter.api.InterpreterMode;
 import org.kermeta.interpreter.api.InterpreterOptions;
@@ -167,8 +168,12 @@ public class KBasicProcess extends Process {
 				wait();
 			}
 		}
-		// Starting the interpreter.
-		_interpreter.launch();
+		try {
+			// Starting the interpreter.
+			_interpreter.launch();
+		} catch (InitializationError e) {
+			destroy();
+		}
 		return 0;
 	}
 
