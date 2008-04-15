@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::utils|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="utils" nsURI="http://www.kermeta.org/kermeta/utils" nsPrefix="utils">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; * &#xD;&#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;/>&#xD;&#xA; */"/>
@@ -115,6 +115,7 @@
     <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../kunit/assert.ecore#/2"/>
@@ -125,6 +126,7 @@
     <references href="StringBuffer.ecore#/1"/>
     <references href="stack.ecore#/0"/>
     <references href="stack.ecore#/1"/>
+    <references href="stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>

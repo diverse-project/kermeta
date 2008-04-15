@@ -39,7 +39,7 @@
           </containedType>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/forAllCpl/@ownedTags.0" name="forAllCpl" type="//@packages.0/standard/Collection/forAllCpl/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * To be written #####################################&#xD;&#xA;  */" object="//@packages.0/standard/Collection/forAllCpl"/>
+          <ownedTags value="/**&#xD;&#xA;  * To be written #####################################&#xD;&#xA;  * => result := self.forAll{x | self.forAll {y | f(x,y)}}&#xD;&#xA;  */" object="//@packages.0/standard/Collection/forAllCpl"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -89,7 +89,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/existsCpl/@ownedTags.0" name="existsCpl" type="//@packages.0/standard/Collection/existsCpl/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * To be written #####################################&#xD;&#xA;  */" object="//@packages.0/standard/Collection/existsCpl"/>
+          <ownedTags value="/**&#xD;&#xA;  * To be written #####################################&#xD;&#xA;  * => result := self.exists{x | self.exists {y | f(x,y)}}&#xD;&#xA;  */" object="//@packages.0/standard/Collection/existsCpl"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -277,7 +277,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/contains/@ownedTags.0" name="contains" type="//@packages.0/standard/Collection/contains/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Returns a Boolean stating whether the Collection contains at least one&#xD;&#xA;  * instance of element, based on G.equals(elt : Object) definition&#xD;&#xA;  * Note: for checking whethera physical element is contained by the collection,&#xD;&#xA;  * make use of G.oid()&#xD;&#xA;  */" object="//@packages.0/standard/Collection/contains"/>
+          <ownedTags value="/**&#xD;&#xA;  * Returns a Boolean stating whether the Collection contains at least one&#xD;&#xA;  * instance of element, based on G.equals(elt : Object) definition&#xD;&#xA;  * Note: for checking whether a physical element is contained by the collection,&#xD;&#xA;  * make use of G.oid()&#xD;&#xA;  */" object="//@packages.0/standard/Collection/contains"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -326,7 +326,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/includes/@ownedTags.0" name="includes" type="//@packages.0/standard/Collection/includes/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * OCL API alignement&#xD;&#xA;  * See Collection&lt;G>.contains(Object)&#xD;&#xA;  */" object="//@packages.0/standard/Collection/includes"/>
+          <ownedTags value="/**&#xD;&#xA;  * OCL API alignment, doeas the same as contains&#xD;&#xA;  * See Collection&lt;G>.contains(Object)&#xD;&#xA;  */" object="//@packages.0/standard/Collection/includes"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -404,7 +404,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/includesAll/@ownedTags.0" name="includesAll" type="//@packages.0/standard/Collection/includesAll/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * OCL API alignement&#xD;&#xA;  * See Collection&lt;G>.containsAll(Collection&lt;G>)&#xD;&#xA;  */" object="//@packages.0/standard/Collection/includesAll"/>
+          <ownedTags value="/**&#xD;&#xA;  * OCL API alignment, does the same as containsAll&#xD;&#xA;  * See Collection&lt;G>.containsAll(Collection&lt;G>)&#xD;&#xA;  */" object="//@packages.0/standard/Collection/includesAll"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -559,7 +559,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/isEmpty/@ownedTags.0" name="isEmpty" type="//@packages.0/standard/Collection/isEmpty/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * OCL alignement API&#xD;&#xA;  * See Collection&lt;G>.empty()&#xD;&#xA;  */" object="//@packages.0/standard/Collection/isEmpty"/>
+          <ownedTags value="/**&#xD;&#xA;  * OCL alignment API, does the same as empty&#xD;&#xA;  * See Collection&lt;G>.empty()&#xD;&#xA;  */" object="//@packages.0/standard/Collection/isEmpty"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -577,7 +577,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/isNotEmpty/@ownedTags.0" name="isNotEmpty" type="//@packages.0/standard/Collection/isNotEmpty/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * OCL alignement API&#xD;&#xA;  * Returns a Boolean stating whether the Collection contains at least&#xD;&#xA;  * one element &#xD;&#xA;  * See also Collection&lt;G>.contains(Object)&#xD;&#xA;  */" object="//@packages.0/standard/Collection/isNotEmpty"/>
+          <ownedTags value="/**&#xD;&#xA;  * OCL alignment API&#xD;&#xA;  * Returns a Boolean stating whether the Collection contains at least&#xD;&#xA;  * one element &#xD;&#xA;  * See also Collection&lt;G>.contains(Object)&#xD;&#xA;  */" object="//@packages.0/standard/Collection/isNotEmpty"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -713,7 +713,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/each/@ownedTags.0" name="each" type="//@packages.0/standard/Collection/each/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Runs function func on each element of the Collection&#xD;&#xA;  */" object="//@packages.0/standard/Collection/each"/>
+          <ownedTags value="/**&#xD;&#xA;  * Runs function func on each element of the Collection&#xD;&#xA;  * example : &#xD;&#xA;  * aCollection.each { e | \/* do something with each element e of this collection *\/ }&#xD;&#xA;  */" object="//@packages.0/standard/Collection/each"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="func" type="//@packages.0/standard/Collection/each/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/G" right="//@packages.0/standard/Object"/>
@@ -745,7 +745,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/forAll/@ownedTags.0" name="forAll" type="//@packages.0/standard/Collection/forAll/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Returns a Boolean stating whether no element of the Collection invalidates&#xD;&#xA;  * the condition specified by function func&#xD;&#xA;  */" object="//@packages.0/standard/Collection/forAll"/>
+          <ownedTags value="/**&#xD;&#xA;  * Returns a Boolean stating whether no element of the Collection invalidates&#xD;&#xA;  * the condition specified by function func&#xD;&#xA;  * example : &#xD;&#xA;  * aBoolean := aCollection.forAll { e | \/* put here a condition *\/ } // return true if the condition is true for all elements in the collection.&#xD;&#xA;  */" object="//@packages.0/standard/Collection/forAll"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -804,7 +804,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/exists/@ownedTags.0" name="exists" type="//@packages.0/standard/Collection/exists/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Returns a Boolean stating whether at least one element of the Collection&#xD;&#xA;  * validates the condition specified by function func&#xD;&#xA;  */" object="//@packages.0/standard/Collection/exists"/>
+          <ownedTags value="/**&#xD;&#xA;  * Returns a Boolean stating whether at least one element of the Collection&#xD;&#xA;  * validates the condition specified by function func&#xD;&#xA;  * example :&#xD;&#xA;  * aBoolean := aCollection.exists { e | \/* a condition *\/} // returns true if at least one element fulfill the condition.&#xD;&#xA;  */" object="//@packages.0/standard/Collection/exists"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -872,7 +872,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/collect/@ownedTags.0" name="collect" type="//@packages.0/standard/Collection/collect/@containedType.0" isOrdered="true" upper="1" typeParameter="//@packages.0/standard/Collection/collect/@containedType.1">
-          <ownedTags value="/**&#xD;&#xA;  * Returns a new Sequence which content corresponds to the result&#xD;&#xA;  * of running the collector function for each element of the Collection&#xD;&#xA;  */" object="//@packages.0/standard/Collection/collect"/>
+          <ownedTags value="/**&#xD;&#xA;  * Returns a new Sequence which content corresponds to the result&#xD;&#xA;  * of running the collector function for each element of the Collection&#xD;&#xA;  * The new collection size is the same as in the original collection, and which element types is the type of the result of the expression.&#xD;&#xA;  * example :&#xD;&#xA;  * aCollection2 := aCollection.collect { e | \/* put here an expression, for example e.name *\/ } &#xD;&#xA;  */" object="//@packages.0/standard/Collection/collect"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Sequence">
             <typeParamBinding variable="//@packages.0/standard/Sequence/G" type="//@packages.0/standard/Collection/collect/@containedType.1"/>
           </containedType>
@@ -922,7 +922,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/isUnique/@ownedTags.0" name="isUnique" type="//@packages.0/standard/Collection/isUnique/@containedType.0" isOrdered="true" upper="1" typeParameter="//@packages.0/standard/Collection/isUnique/@containedType.1">
-          <ownedTags value="/**&#xD;&#xA;  * Returns a Boolean stating whether the the collector function evaluates to a&#xD;&#xA;  * different value for each element of the Collection&#xD;&#xA;  */" object="//@packages.0/standard/Collection/isUnique"/>
+          <ownedTags value="/**&#xD;&#xA;  * Returns a Boolean stating whether the the collector function evaluates to a&#xD;&#xA;  * different value for each element of the Collection&#xD;&#xA;  * example :&#xD;&#xA;  * aCollection2 := aCollection.isUnique { e | \/* put here an expression that must be unique for all elements, for example e.name *\/ }&#xD;&#xA;  */" object="//@packages.0/standard/Collection/isUnique"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -1006,7 +1006,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/detect/@ownedTags.0" name="detect" type="//@packages.0/standard/Collection/G" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Returns the first element of the Collection for which the detector function&#xD;&#xA;  * is not false&#xD;&#xA;  * Returns void if no elements is validated by the detector function&#xD;&#xA;  */" object="//@packages.0/standard/Collection/detect"/>
+          <ownedTags value="/**&#xD;&#xA;  * Returns an element of the Collection (usually the first) for which the detector function&#xD;&#xA;  * is not false&#xD;&#xA;  * Returns void if no elements is validated by the detector function&#xD;&#xA;  * example : &#xD;&#xA;  * anObject := aCollection.detect { e | \/* a condition *\/} // returns an element that fulfill the condition.&#xD;&#xA;  */" object="//@packages.0/standard/Collection/detect"/>
           <ownedParameter name="detector" type="//@packages.0/standard/Collection/detect/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/G" right="//@packages.0/standard/Collection/detect/@ownedParameter.0/@containedType.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class">
@@ -1069,7 +1069,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/select/@ownedTags.0" name="select" type="//@packages.0/standard/Collection/select/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Returns a new Sequence composed of elements of the Collection that&#xD;&#xA;  * validate the selector function&#xD;&#xA;  */" object="//@packages.0/standard/Collection/select"/>
+          <ownedTags value="/**&#xD;&#xA;  * Returns a new Sequence composed of elements of the Collection that&#xD;&#xA;  * validate the selector function&#xD;&#xA;  * example :&#xD;&#xA;  * aCollection2 := aCollection.select { e | &#xD;&#xA;     *    \/* put here a condition that returns true for elements that must  be included in the resulting Collection *\/&#xD;&#xA;  * }&#xD;&#xA;  */" object="//@packages.0/standard/Collection/select"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Sequence">
             <typeParamBinding variable="//@packages.0/standard/Sequence/G" type="//@packages.0/standard/Collection/G"/>
           </containedType>
@@ -1134,7 +1134,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/reject/@ownedTags.0" name="reject" type="//@packages.0/standard/Collection/reject/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Returns a new Sequence composed of elements of the Collection that&#xD;&#xA;  * do not validate the rejector function&#xD;&#xA;  */" object="//@packages.0/standard/Collection/reject"/>
+          <ownedTags value="/**&#xD;&#xA;  * Returns a new Sequence composed of elements of the Collection that&#xD;&#xA;  * do not validate the rejector function&#xD;&#xA;  * example :&#xD;&#xA;  * aCollection2 := aCollection.reject { e | &#xD;&#xA;     *     \/* put here a condition that returns true for elements that must  be exclude in the resulting Collection *\/&#xD;&#xA;     * }&#xD;&#xA;  */" object="//@packages.0/standard/Collection/reject"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Sequence">
             <typeParamBinding variable="//@packages.0/standard/Sequence/G" type="//@packages.0/standard/Collection/G"/>
           </containedType>
@@ -1216,7 +1216,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/sum/@ownedTags.0" name="sum" type="//@packages.0/standard/Collection/G" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Sum the element if they are summable (ie implement '+' operator)&#xD;&#xA;  */" object="//@packages.0/standard/Collection/sum"/>
+          <ownedTags value="/**&#xD;&#xA;  * Sum the element if they are summable (ie implement '+' operator by inheriting of the class Summable)&#xD;&#xA;  */" object="//@packages.0/standard/Collection/sum"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/G">
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/standard/Collection/G" identifier="res">
               <type type="//@packages.0/standard/Collection/G" isOrdered="true" upper="1"/>

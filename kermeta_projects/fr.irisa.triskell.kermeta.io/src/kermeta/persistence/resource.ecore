@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::persistence|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="persistence" nsURI="http://www.kermeta.org/kermeta/persistence" nsPrefix="persistence">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Contains the classes that handle the serialization of models, in particular&#xD;&#xA; * EMF models.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/persistence_package.png&quot;/>&#xD;&#xA; */"/>
@@ -296,7 +296,6 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
     <references href="../standard/collections.ecore#/2"/>
@@ -310,7 +309,6 @@
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../kunit/assert.ecore#/2"/>
@@ -320,19 +318,14 @@
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>

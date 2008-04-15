@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.57 2008-03-03 13:39:57 dvojtise Exp $
+/* $Id: structure.kmt,v 1.58 2008-04-15 14:24:38 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -61,7 +61,9 @@ aspect class Object
 			// Call the invariant verification
 			self.checkInvariants
 			// Invariant checking on each value of self properties			
-			self.getMetaClass.ownedAttribute.each { subObj |
+			var cd : ClassDefinition
+			cd ?= self.getMetaClass.typeDefinition
+			cd.allAttribute.each { subObj |
 				if ( subObj.isComposite) then
 					if ( self.get(subObj).getMetaClass.typeDefinition.name.equals("ReflectiveSequence") 
 						or self.get(subObj).getMetaClass.typeDefinition.name.equals("ReflectiveCollection") ) then

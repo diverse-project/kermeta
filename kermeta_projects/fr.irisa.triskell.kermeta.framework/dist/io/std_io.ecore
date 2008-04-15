@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::io|kermeta::standard|kermeta::language::structure|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/io/std_io.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/io/std_io.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="io" nsURI="http://www.kermeta.org/kermeta/io" nsPrefix="io">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Contains standard input/output related classes. &#xD;&#xA; */"/>
@@ -47,9 +47,9 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/2"/>
@@ -63,12 +63,12 @@
     <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
@@ -89,8 +89,8 @@
     <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

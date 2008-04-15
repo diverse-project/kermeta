@@ -753,7 +753,7 @@
                         <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@body/@statement.0/@containedType.0" isCast="true">
                           <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@body/@statement.0/@containedType.0" name="classDef"/>
                           <value xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition">
-                            <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                            <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.2/@value/@containedType.0"/>
                             <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
                               <staticType href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass/@containedType.0"/>
                               <target xsi:type="kermeta_language_behavior:CallVariable" name="containedObj">
@@ -1331,7 +1331,7 @@
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                   <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
-                    <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                    <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.3/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/DanglingDiagnostic/referencingProperty/@containedType.0" name="referencingProperty" staticProperty="//@packages.0/persistence/DanglingDiagnostic/referencingProperty"/>
                     <staticProperty href="../kermeta_java.km#//@packages.0/language/structure/NamedElement/name"/>
                   </parameters>
@@ -1341,7 +1341,7 @@
                     <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                       <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                       <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.3/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallFeature" name="referencingElement" staticProperty="//@packages.0/persistence/DanglingDiagnostic/referencingElement">
                           <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
                         </target>
@@ -1351,7 +1351,7 @@
                         <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                         <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0" value=" referenced by "/>
                         <target xsi:type="kermeta_language_behavior:CallFeature" name="toString">
-                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.3/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
                           <target xsi:type="kermeta_language_behavior:CallFeature" name="danglingElement" staticProperty="//@packages.0/persistence/DanglingDiagnostic/danglingElement">
                             <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
                           </target>

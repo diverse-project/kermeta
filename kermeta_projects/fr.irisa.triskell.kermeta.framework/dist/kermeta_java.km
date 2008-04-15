@@ -262,7 +262,7 @@
       </nestedPackage>
       <nestedPackage name="structure" uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
         <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="String">
-          <instanceType href="language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+          <instanceType href="language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.3/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Boolean">
           <instanceType href="standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
@@ -521,7 +521,7 @@
           </ownedAttribute>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/PrimitiveType/@ownedTags.0" name="PrimitiveType" superType="//@packages.0/language/structure/PrimitiveType/@containedType.0 //@packages.0/language/structure/PrimitiveType/@containedType.1">
-          <ownedTags name="documentation" value="The class definition for kermeta aliases. Above statement defines a primitive&#xA;type called MyString, which instanceType is &lt;code>kermeta::standard::String&lt;/code>&#xA;&lt;pre>alias MyString : kermeta::standard::String&lt;/pre>" object="//@packages.0/language/structure/PrimitiveType"/>
+          <ownedTags name="documentation" value="The class definition for kermeta aliases. Above statement defines a primitive&#xD;&#xA;type called MyString, which instanceType is &lt;code>kermeta::standard::String&lt;/code>&#xD;&#xA;&lt;pre>alias MyString : kermeta::standard::String&lt;/pre>. Another example could be: &lt;code>root::apackage::AClass&lt;/code>&#xD;&#xA;&lt;pre>alias MyClass : root::apackage::AClass&lt;/pre>, thus a primitive type may be not a subtype of ValueType (ValueType is a concept from the Kermeta framework)." object="//@packages.0/language/structure/PrimitiveType"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/DataType"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <ownedAttribute tag="//@packages.0/language/structure/PrimitiveType/instanceType/@ownedTags.0" name="instanceType" type="//@packages.0/language/structure/PrimitiveType/instanceType/@containedType.0" isOrdered="true" upper="1">
@@ -672,7 +672,7 @@
           </ownedAttribute>
           <ownedAttribute tag="//@packages.0/language/structure/ParameterizedType/typeDefinition/@ownedTags.0" name="typeDefinition" isOrdered="true" lower="1" upper="1">
             <ownedTags name="documentation" value="Definition of the Type" object="//@packages.0/language/structure/ParameterizedType/typeDefinition"/>
-            <type href="language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+            <type href="language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.2/@value/@containedType.0"/>
           </ownedAttribute>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/TypeVariable/@ownedTags.0" name="TypeVariable" isAbstract="true" superType="//@packages.0/language/structure/TypeVariable/@containedType.0 //@packages.0/language/structure/TypeVariable/@containedType.1 //@packages.0/language/structure/TypeVariable/@containedType.2">

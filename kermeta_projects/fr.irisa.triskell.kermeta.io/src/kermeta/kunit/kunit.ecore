@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|assert.kmt|"/>
     <details key="using" value="kermeta::kunit|kermeta::standard|kermeta::utils|kermeta|kermeta::language::structure|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="kunit" nsURI="http://www.kermeta.org/kermeta/kunit" nsPrefix="kunit">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Contains the implementation of a unit test tool. This is a clone of&#xD;&#xA; * JUnit architecture.&#xD;&#xA; * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm&#xD;&#xA; *&#xD;&#xA; * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.&#xD;&#xA; *&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;/>&#xD;&#xA; */"/>
@@ -30,6 +30,7 @@
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if stopOnFailure.isVoid then&#xA;&#x9;&#x9;stopOnFailure := true&#xA;&#xA;&#x9;end&#xA;&#x9;result := stopOnFailure&#xA;end"/>
           </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
         </eOperations>
         <eOperations name="getLog">
           <eAnnotations source="kermeta">
@@ -69,7 +70,7 @@
         </eOperations>
         <eOperations name="fail">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;getLog.addFailure(self, ((&quot;explicit failure: &quot;) + (msg)))&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if mustStop then&#xA;&#x9;&#x9;var exception : kermeta::kunit::AssertionFailedError init kermeta::kunit::AssertionFailedError.new&#xA;&#x9;&#x9;exception.message := ((&quot;explicit failure: &quot;) + (msg))&#xA;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;getLog.addFailure(self, ((&quot;explicit failure: &quot;) + (msg)))&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;   * Log a failure &#xD;&#xA;   */"/>
           </eAnnotations>
           <eParameters name="msg">
@@ -139,7 +140,7 @@
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="stopOnFailure">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;   * Set this attribute to false if you whish your test to not stop if the assert fails.&#xD;&#xA;   */"/>
+            <details key="documentation" value="/**&#xD;&#xA;   * Set this attribute to false if you wish your test to not stop if the assert fails.&#xD;&#xA;   * note : if set to false, the count of failures/errors may be bigger that the number of executed test operations&#xD;&#xA;   */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
         </eStructuralFeatures>
@@ -501,14 +502,18 @@
     <references href="../Standard.ecore#/1"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
+    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="assert.ecore#/0"/>
     <references href="assert.ecore#/1"/>
     <references href="assert.ecore#/2"/>
@@ -518,24 +523,26 @@
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

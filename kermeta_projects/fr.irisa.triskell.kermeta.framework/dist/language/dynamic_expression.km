@@ -88,7 +88,7 @@
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/selfClass/@containedType.0" isCast="true">
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/selfClass/@containedType.0" name="selfClass" staticProperty="//@packages.0/interpreter/DynamicExpression/selfClass"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition">
-                <staticType href="structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                <staticType href="structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.2/@value/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@target/@containedType.0">
                   <typeref upper="1">
                     <type href="../standard/collections.km#//@packages.0/standard/Object"/>
