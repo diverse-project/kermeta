@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.41 2008-03-03 13:39:57 dvojtise Exp $
+ * $Id: collections.kmt,v 1.42 2008-04-15 08:58:51 dvojtise Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -49,6 +49,7 @@ abstract class Collection<G>
 	
 	/**
 	 * To be written #####################################
+	 * => result := self.forAll{x | self.forAll {y | f(x,y)}}
 	 */
 	operation forAllCpl(f : < [G, G] -> Boolean> ) : Boolean is do
    		result := self.forAll{x | self.forAll {y | f(x,y)}}
@@ -56,6 +57,7 @@ abstract class Collection<G>
 
 	/**
 	 * To be written #####################################
+	 * => result := self.exists{x | self.exists {y | f(x,y)}}
 	 */
 	operation existsCpl(f : < [G, G] -> Boolean> ) : Boolean is do
    		result := self.exists{x | self.exists {y | f(x,y)}}
@@ -101,7 +103,7 @@ abstract class Collection<G>
 	/**
 	 * Returns a Boolean stating whether the Collection contains at least one
 	 * instance of element, based on G.equals(elt : Object) definition
-	 * Note: for checking whethera physical element is contained by the collection,
+	 * Note: for checking whether a physical element is contained by the collection,
 	 * make use of G.oid()
 	 */
 	operation contains(element : G) : Boolean is do
@@ -114,7 +116,7 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * OCL API alignement
+	 * OCL API alignment, doeas the same as contains
 	 * See Collection<G>.contains(Object)
 	 */
 	operation includes(element :G): Boolean is do
@@ -135,7 +137,7 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * OCL API alignement
+	 * OCL API alignment, does the same as containsAll
 	 * See Collection<G>.containsAll(Collection<G>)
 	 */
 	operation includesAll(elements : Collection<G>) : Boolean is do
@@ -176,7 +178,7 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * OCL alignement API
+	 * OCL alignment API, does the same as empty
 	 * See Collection<G>.empty()
 	 */
 	operation isEmpty() : Boolean is do
@@ -184,7 +186,7 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * OCL alignement API
+	 * OCL alignment API
 	 * Returns a Boolean stating whether the Collection contains at least
 	 * one element 
 	 * See also Collection<G>.contains(Object)
@@ -227,6 +229,8 @@ abstract class Collection<G>
 	
 	/**
 	 * Runs function func on each element of the Collection
+	 * example : 
+	 * aCollection.each { e | \/* do something with each element e of this collection *\/ }
 	 */
 	operation each(func : <G -> Object>) : Void is do
 		from var it : Iterator<G> init iterator
@@ -239,6 +243,8 @@ abstract class Collection<G>
 	/**
 	 * Returns a Boolean stating whether no element of the Collection invalidates
 	 * the condition specified by function func
+	 * example : 
+	 * aBoolean := aCollection.forAll { e | \/* put here a condition *\/ } // return true if the condition is true for all elements in the collection.
 	 */
 	operation forAll(func : <G -> Boolean>) : Boolean is do
     	var test : Boolean init true
@@ -253,6 +259,8 @@ abstract class Collection<G>
     /**
 	 * Returns a Boolean stating whether at least one element of the Collection
 	 * validates the condition specified by function func
+	 * example :
+	 * aBoolean := aCollection.exists { e | \/* a condition *\/} // returns true if at least one element fulfill the condition.
 	 */
 	operation exists(func : <G -> Boolean>) : Boolean is do
     	var test : Boolean init false
@@ -267,6 +275,9 @@ abstract class Collection<G>
 	/**
 	 * Returns a new Sequence which content corresponds to the result
 	 * of running the collector function for each element of the Collection
+	 * The new collection size is the same as in the original collection, and which element types is the type of the result of the expression.
+	 * example :
+	 * aCollection2 := aCollection.collect { e | \/* put here an expression, for example e.name *\/ } 
 	 */
 	operation collect<T> (collector : <G -> T>) : Sequence<T> is do
 		result := Sequence<T>.new
@@ -280,6 +291,8 @@ abstract class Collection<G>
 	/**
 	 * Returns a Boolean stating whether the the collector function evaluates to a
 	 * different value for each element of the Collection
+	 * example :
+	 * aCollection2 := aCollection.isUnique { e | \/* put here an expression that must be unique for all elements, for example e.name *\/ }
 	 */
 	operation isUnique<T> (collector : <G -> T>) : Boolean is do
 		result := true
@@ -297,9 +310,11 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Returns the first element of the Collection for which the detector function
+	 * Returns an element of the Collection (usually the first) for which the detector function
 	 * is not false
 	 * Returns void if no elements is validated by the detector function
+	 * example : 
+	 * anObject := aCollection.detect { e | \/* a condition *\/} // returns an element that fulfill the condition.
 	 */
 	operation detect(detector : <G -> Boolean>) : G is do
 		var elem : G
@@ -315,6 +330,10 @@ abstract class Collection<G>
 	/**
 	 * Returns a new Sequence composed of elements of the Collection that
 	 * validate the selector function
+	 * example :
+	 * aCollection2 := aCollection.select { e | 
+     *    \/* put here a condition that returns true for elements that must  be included in the resulting Collection *\/
+	 * }
 	 */
 	operation select(selector : <G -> Boolean>) : Sequence<G>  is do
 		var elem : G
@@ -330,6 +349,10 @@ abstract class Collection<G>
 	/**
 	 * Returns a new Sequence composed of elements of the Collection that
 	 * do not validate the rejector function
+	 * example :
+	 * aCollection2 := aCollection.reject { e | 
+     *     \/* put here a condition that returns true for elements that must  be exclude in the resulting Collection *\/
+     * }
 	 */
 	operation reject(rejector : <G -> Boolean>) : Sequence<G>  is do
 		result := self.select { elem | not rejector(elem) } 
@@ -343,7 +366,7 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Sum the element if they are summable (ie implement '+' operator)
+	 * Sum the element if they are summable (ie implement '+' operator by inheriting of the class Summable)
 	 */
 	operation sum(): G is do
 		var res : G 
