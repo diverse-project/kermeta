@@ -36,22 +36,22 @@ package smartadapters
 			operation initConvert(): Void is do
 				converter := Converter.new
 				convert := Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new
-				convert.put(pattern::runtime::System,runtime::System)
-				convert.put(pattern::runtime::DataType,runtime::DataType)
-				convert.put(pattern::runtime::instance::PrimitiveInstance,runtime::instance::PrimitiveInstance)
-				convert.put(pattern::runtime::instance::CompositeInstance,runtime::instance::CompositeInstance)
-				convert.put(pattern::runtime::instance::ValuedAttribute,runtime::instance::ValuedAttribute)
-				convert.put(pattern::runtime::instance::TransmissionBinding,runtime::instance::TransmissionBinding)
-				convert.put(pattern::runtime::instance::DelegationBinding,runtime::instance::DelegationBinding)
-				convert.put(pattern::runtime::type::PrimitiveType,runtime::type::PrimitiveType)
-				convert.put(pattern::runtime::type::CompositeType,runtime::type::CompositeType)
-				convert.put(pattern::runtime::type::Operation,runtime::type::Operation)
-				convert.put(pattern::runtime::type::Parameter,runtime::type::Parameter)
-				convert.put(pattern::runtime::type::FunctionalService,runtime::type::FunctionalService)
-				convert.put(pattern::runtime::type::ControlService,runtime::type::ControlService)
-				convert.put(pattern::runtime::type::Port,runtime::type::Port)
-				convert.put(pattern::runtime::type::Attribute,runtime::type::Attribute)
-				convert.put(pattern::runtime::type::PrimitivePort,runtime::type::PrimitivePort)
+				convert.put(pattern::art::System,art::System)
+				convert.put(pattern::art::DataType,art::DataType)
+				convert.put(pattern::art::instance::PrimitiveInstance,art::instance::PrimitiveInstance)
+				convert.put(pattern::art::instance::CompositeInstance,art::instance::CompositeInstance)
+				convert.put(pattern::art::instance::ValuedAttribute,art::instance::ValuedAttribute)
+				convert.put(pattern::art::instance::TransmissionBinding,art::instance::TransmissionBinding)
+				convert.put(pattern::art::instance::DelegationBinding,art::instance::DelegationBinding)
+				convert.put(pattern::art::type::PrimitiveType,art::type::PrimitiveType)
+				convert.put(pattern::art::type::CompositeType,art::type::CompositeType)
+				convert.put(pattern::art::type::Operation,art::type::Operation)
+				convert.put(pattern::art::type::Parameter,art::type::Parameter)
+				convert.put(pattern::art::type::FunctionalService,art::type::FunctionalService)
+				convert.put(pattern::art::type::ControlService,art::type::ControlService)
+				convert.put(pattern::art::type::Port,art::type::Port)
+				convert.put(pattern::art::type::Attribute,art::type::Attribute)
+				convert.put(pattern::art::type::PrimitivePort,art::type::PrimitivePort)
 				converter.initConverter(convert)
 			end
 		}
@@ -61,14 +61,14 @@ package smartadapters
 		 
 
 		/**
-		 * Sets any property of runtime::NamedElement
+		 * Sets any property of art::NamedElement
 		 * All the references expect NamedElementToSet may be void
 		 */
 			 
 		class SetruntimeNamedElement inherits setAdaptation
 		{
-			reference NamedElementToSet : pattern::runtime::NamedElement
-			reference refname : pattern::runtime::String
+			reference NamedElementToSet : pattern::art::NamedElement
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := NamedElementToSet != void
@@ -77,7 +77,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempNamedElement : runtime::NamedElement
+				var tempNamedElement : art::NamedElement
 				tempNamedElement ?= ad.getRealObject(NamedElementToSet,false)
 				
 				tempNamedElement.name ?= ad.setSingleProperty(refname, tempNamedElement.name)
@@ -99,13 +99,13 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::NamedElement
+		 * Unsets any property of art::NamedElement
 		 * All the references expect NamedElementToUnset may be void 
 		 */		
 		class UnsetruntimeNamedElement inherits unsetAdaptation
 		{
-			reference NamedElementToUnset : pattern::runtime::NamedElement
-			reference refname : pattern::runtime::String
+			reference NamedElementToUnset : pattern::art::NamedElement
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := NamedElementToUnset != void
@@ -114,7 +114,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempNamedElement : runtime::NamedElement
+				var tempNamedElement : art::NamedElement
 				tempNamedElement ?= ad.getRealObject(NamedElementToUnset,false)
 				
 				tempNamedElement.name ?= ad.unsetSingleProperty(refname, tempNamedElement.name)
@@ -137,14 +137,14 @@ package smartadapters
 		 
 
 		/**
-		 * Sets any property of runtime::ModelElement
+		 * Sets any property of art::ModelElement
 		 * All the references expect ModelElementToSet may be void
 		 */
 			 
 		class SetruntimeModelElement inherits setAdaptation
 		{
-			reference ModelElementToSet : pattern::runtime::ModelElement
-			reference refname : pattern::runtime::String
+			reference ModelElementToSet : pattern::art::ModelElement
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ModelElementToSet != void
@@ -153,7 +153,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempModelElement : runtime::ModelElement
+				var tempModelElement : art::ModelElement
 				tempModelElement ?= ad.getRealObject(ModelElementToSet,false)
 				
 				tempModelElement.name ?= ad.setSingleProperty(refname, tempModelElement.name)
@@ -175,13 +175,13 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::ModelElement
+		 * Unsets any property of art::ModelElement
 		 * All the references expect ModelElementToUnset may be void 
 		 */		
 		class UnsetruntimeModelElement inherits unsetAdaptation
 		{
-			reference ModelElementToUnset : pattern::runtime::ModelElement
-			reference refname : pattern::runtime::String
+			reference ModelElementToUnset : pattern::art::ModelElement
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ModelElementToUnset != void
@@ -190,7 +190,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempModelElement : runtime::ModelElement
+				var tempModelElement : art::ModelElement
 				tempModelElement ?= ad.getRealObject(ModelElementToUnset,false)
 				
 				tempModelElement.name ?= ad.unsetSingleProperty(refname, tempModelElement.name)
@@ -213,16 +213,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::System
+		 * of art::System
 		 */
 		
 		/**
-		 * Creates a new runtime::System from scratch
+		 * Creates a new art::System from scratch
 		 * This new element is handled by refering to newSystem
 		 */
 		class CreateruntimeSystem inherits createAdaptation
 		{
-			attribute newSystem : pattern::runtime::System
+			attribute newSystem : pattern::art::System
 					
 			method check(): Boolean is do
 				result := newSystem != void
@@ -234,13 +234,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::System from an existing one
+		 * Creates a new art::System from an existing one
 		 * This cloned element is handled by refering to clonedSystem
 		 */
 		class CloneruntimeSystem inherits cloneAdaptation
 		{
-			reference SystemToClone : pattern::runtime::System
-			attribute clonedSystem : pattern::runtime::System
+			reference SystemToClone : pattern::art::System
+			attribute clonedSystem : pattern::art::System
 			
 			method check(): Boolean is do
 				result := SystemToClone != void
@@ -252,18 +252,18 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::System
+		 * Sets any property of art::System
 		 * All the references expect SystemToSet may be void
 		 */
 			 
 		class SetruntimeSystem inherits setAdaptation
 		{
-			reference SystemToSet : pattern::runtime::System
-			reference refroot : pattern::runtime::instance::CompositeInstance
-			reference refservices : pattern::runtime::type::Service[0..*]
-			reference reftypes : pattern::runtime::type::ComponentType[0..*]
-			reference refdataTypes : pattern::runtime::DataType[0..*]
-			reference refname : pattern::runtime::String
+			reference SystemToSet : pattern::art::System
+			reference refroot : pattern::art::instance::CompositeInstance
+			reference refservices : pattern::art::type::Service[0..*]
+			reference reftypes : pattern::art::type::ComponentType[0..*]
+			reference refdataTypes : pattern::art::DataType[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := SystemToSet != void
@@ -272,7 +272,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempSystem : runtime::System
+				var tempSystem : art::System
 				tempSystem ?= ad.getRealObject(SystemToSet,false)
 				
 				tempSystem.root ?= ad.setSingleProperty(refroot, tempSystem.root)
@@ -305,17 +305,17 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::System
+		 * Unsets any property of art::System
 		 * All the references expect SystemToUnset may be void 
 		 */		
 		class UnsetruntimeSystem inherits unsetAdaptation
 		{
-			reference SystemToUnset : pattern::runtime::System
-			reference refroot : pattern::runtime::instance::CompositeInstance
-			reference refservices : pattern::runtime::type::Service[0..*]
-			reference reftypes : pattern::runtime::type::ComponentType[0..*]
-			reference refdataTypes : pattern::runtime::DataType[0..*]
-			reference refname : pattern::runtime::String
+			reference SystemToUnset : pattern::art::System
+			reference refroot : pattern::art::instance::CompositeInstance
+			reference refservices : pattern::art::type::Service[0..*]
+			reference reftypes : pattern::art::type::ComponentType[0..*]
+			reference refdataTypes : pattern::art::DataType[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := SystemToUnset != void
@@ -324,7 +324,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempSystem : runtime::System
+				var tempSystem : art::System
 				tempSystem ?= ad.getRealObject(SystemToUnset,false)
 				
 				tempSystem.root ?= ad.unsetSingleProperty(refroot, tempSystem.root)
@@ -358,16 +358,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::DataType
+		 * of art::DataType
 		 */
 		
 		/**
-		 * Creates a new runtime::DataType from scratch
+		 * Creates a new art::DataType from scratch
 		 * This new element is handled by refering to newDataType
 		 */
 		class CreateruntimeDataType inherits createAdaptation
 		{
-			attribute newDataType : pattern::runtime::DataType
+			attribute newDataType : pattern::art::DataType
 					
 			method check(): Boolean is do
 				result := newDataType != void
@@ -379,13 +379,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::DataType from an existing one
+		 * Creates a new art::DataType from an existing one
 		 * This cloned element is handled by refering to clonedDataType
 		 */
 		class CloneruntimeDataType inherits cloneAdaptation
 		{
-			reference DataTypeToClone : pattern::runtime::DataType
-			attribute clonedDataType : pattern::runtime::DataType
+			reference DataTypeToClone : pattern::art::DataType
+			attribute clonedDataType : pattern::art::DataType
 			
 			method check(): Boolean is do
 				result := DataTypeToClone != void
@@ -397,14 +397,14 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::DataType
+		 * Sets any property of art::DataType
 		 * All the references expect DataTypeToSet may be void
 		 */
 			 
 		class SetruntimeDataType inherits setAdaptation
 		{
-			reference DataTypeToSet : pattern::runtime::DataType
-			reference refname : pattern::runtime::String
+			reference DataTypeToSet : pattern::art::DataType
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := DataTypeToSet != void
@@ -413,7 +413,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempDataType : runtime::DataType
+				var tempDataType : art::DataType
 				tempDataType ?= ad.getRealObject(DataTypeToSet,false)
 				
 				tempDataType.name ?= ad.setSingleProperty(refname, tempDataType.name)
@@ -435,13 +435,13 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::DataType
+		 * Unsets any property of art::DataType
 		 * All the references expect DataTypeToUnset may be void 
 		 */		
 		class UnsetruntimeDataType inherits unsetAdaptation
 		{
-			reference DataTypeToUnset : pattern::runtime::DataType
-			reference refname : pattern::runtime::String
+			reference DataTypeToUnset : pattern::art::DataType
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := DataTypeToUnset != void
@@ -450,7 +450,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempDataType : runtime::DataType
+				var tempDataType : art::DataType
 				tempDataType ?= ad.getRealObject(DataTypeToUnset,false)
 				
 				tempDataType.name ?= ad.unsetSingleProperty(refname, tempDataType.name)
@@ -473,15 +473,15 @@ package smartadapters
 		 
 
 		/**
-		 * Sets any property of runtime::TypedElement
+		 * Sets any property of art::TypedElement
 		 * All the references expect TypedElementToSet may be void
 		 */
 			 
 		class SetruntimeTypedElement inherits setAdaptation
 		{
-			reference TypedElementToSet : pattern::runtime::TypedElement
-			reference reftype : pattern::runtime::DataType
-			reference refname : pattern::runtime::String
+			reference TypedElementToSet : pattern::art::TypedElement
+			reference reftype : pattern::art::DataType
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := TypedElementToSet != void
@@ -490,7 +490,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempTypedElement : runtime::TypedElement
+				var tempTypedElement : art::TypedElement
 				tempTypedElement ?= ad.getRealObject(TypedElementToSet,false)
 				
 				tempTypedElement.type ?= ad.setSingleProperty(reftype, tempTypedElement.type)
@@ -514,14 +514,14 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::TypedElement
+		 * Unsets any property of art::TypedElement
 		 * All the references expect TypedElementToUnset may be void 
 		 */		
 		class UnsetruntimeTypedElement inherits unsetAdaptation
 		{
-			reference TypedElementToUnset : pattern::runtime::TypedElement
-			reference reftype : pattern::runtime::DataType
-			reference refname : pattern::runtime::String
+			reference TypedElementToUnset : pattern::art::TypedElement
+			reference reftype : pattern::art::DataType
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := TypedElementToUnset != void
@@ -530,7 +530,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempTypedElement : runtime::TypedElement
+				var tempTypedElement : art::TypedElement
 				tempTypedElement ?= ad.getRealObject(TypedElementToUnset,false)
 				
 				tempTypedElement.type ?= ad.unsetSingleProperty(reftype, tempTypedElement.type)
@@ -557,21 +557,21 @@ package smartadapters
 		 
 
 		/**
-		 * Sets any property of runtime::instance::ComponentInstance
+		 * Sets any property of art::instance::ComponentInstance
 		 * All the references expect ComponentInstanceToSet may be void
 		 */
 			 
 		class SetruntimeinstanceComponentInstance inherits setAdaptation
 		{
-			reference ComponentInstanceToSet : pattern::runtime::instance::ComponentInstance
-			reference reftype : pattern::runtime::type::ComponentType
-			reference refstate : pattern::runtime::instance::InstanceState
-			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
-			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
-			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::runtime::String
-			reference refcontentDesc : pattern::runtime::String
-			reference refname : pattern::runtime::String
+			reference ComponentInstanceToSet : pattern::art::instance::ComponentInstance
+			reference reftype : pattern::art::type::ComponentType
+			reference refstate : pattern::art::instance::InstanceState
+			reference refsuperComponent : pattern::art::instance::CompositeInstance
+			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::art::String
+			reference refcontentDesc : pattern::art::String
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ComponentInstanceToSet != void
@@ -580,7 +580,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempComponentInstance : runtime::instance::ComponentInstance
+				var tempComponentInstance : art::instance::ComponentInstance
 				tempComponentInstance ?= ad.getRealObject(ComponentInstanceToSet,false)
 				
 				tempComponentInstance.type ?= ad.setSingleProperty(reftype, tempComponentInstance.type)
@@ -618,20 +618,20 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::instance::ComponentInstance
+		 * Unsets any property of art::instance::ComponentInstance
 		 * All the references expect ComponentInstanceToUnset may be void 
 		 */		
 		class UnsetruntimeinstanceComponentInstance inherits unsetAdaptation
 		{
-			reference ComponentInstanceToUnset : pattern::runtime::instance::ComponentInstance
-			reference reftype : pattern::runtime::type::ComponentType
-			reference refstate : pattern::runtime::instance::InstanceState
-			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
-			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
-			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::runtime::String
-			reference refcontentDesc : pattern::runtime::String
-			reference refname : pattern::runtime::String
+			reference ComponentInstanceToUnset : pattern::art::instance::ComponentInstance
+			reference reftype : pattern::art::type::ComponentType
+			reference refstate : pattern::art::instance::InstanceState
+			reference refsuperComponent : pattern::art::instance::CompositeInstance
+			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::art::String
+			reference refcontentDesc : pattern::art::String
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ComponentInstanceToUnset != void
@@ -640,9 +640,8 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempComponentInstance : runtime::instance::ComponentInstance
+				var tempComponentInstance : art::instance::ComponentInstance
 				tempComponentInstance ?= ad.getRealObject(ComponentInstanceToUnset,false)
-				
 				tempComponentInstance.type ?= ad.unsetSingleProperty(reftype, tempComponentInstance.type)
 				tempComponentInstance.state ?= ad.unsetSingleProperty(refstate, tempComponentInstance.state)
 				tempComponentInstance.superComponent ?= ad.unsetSingleProperty(refsuperComponent, tempComponentInstance.superComponent)
@@ -679,16 +678,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::instance::PrimitiveInstance
+		 * of art::instance::PrimitiveInstance
 		 */
 		
 		/**
-		 * Creates a new runtime::instance::PrimitiveInstance from scratch
+		 * Creates a new art::instance::PrimitiveInstance from scratch
 		 * This new element is handled by refering to newPrimitiveInstance
 		 */
 		class CreateruntimeinstancePrimitiveInstance inherits createAdaptation
 		{
-			attribute newPrimitiveInstance : pattern::runtime::instance::PrimitiveInstance
+			attribute newPrimitiveInstance : pattern::art::instance::PrimitiveInstance
 					
 			method check(): Boolean is do
 				result := newPrimitiveInstance != void
@@ -700,13 +699,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::instance::PrimitiveInstance from an existing one
+		 * Creates a new art::instance::PrimitiveInstance from an existing one
 		 * This cloned element is handled by refering to clonedPrimitiveInstance
 		 */
 		class CloneruntimeinstancePrimitiveInstance inherits cloneAdaptation
 		{
-			reference PrimitiveInstanceToClone : pattern::runtime::instance::PrimitiveInstance
-			attribute clonedPrimitiveInstance : pattern::runtime::instance::PrimitiveInstance
+			reference PrimitiveInstanceToClone : pattern::art::instance::PrimitiveInstance
+			attribute clonedPrimitiveInstance : pattern::art::instance::PrimitiveInstance
 			
 			method check(): Boolean is do
 				result := PrimitiveInstanceToClone != void
@@ -718,21 +717,21 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::instance::PrimitiveInstance
+		 * Sets any property of art::instance::PrimitiveInstance
 		 * All the references expect PrimitiveInstanceToSet may be void
 		 */
 			 
 		class SetruntimeinstancePrimitiveInstance inherits setAdaptation
 		{
-			reference PrimitiveInstanceToSet : pattern::runtime::instance::PrimitiveInstance
-			reference reftype : pattern::runtime::type::ComponentType
-			reference refstate : pattern::runtime::instance::InstanceState
-			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
-			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
-			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::runtime::String
-			reference refcontentDesc : pattern::runtime::String
-			reference refname : pattern::runtime::String
+			reference PrimitiveInstanceToSet : pattern::art::instance::PrimitiveInstance
+			reference reftype : pattern::art::type::ComponentType
+			reference refstate : pattern::art::instance::InstanceState
+			reference refsuperComponent : pattern::art::instance::CompositeInstance
+			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::art::String
+			reference refcontentDesc : pattern::art::String
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := PrimitiveInstanceToSet != void
@@ -741,7 +740,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempPrimitiveInstance : runtime::instance::PrimitiveInstance
+				var tempPrimitiveInstance : art::instance::PrimitiveInstance
 				tempPrimitiveInstance ?= ad.getRealObject(PrimitiveInstanceToSet,false)
 				
 				tempPrimitiveInstance.type ?= ad.setSingleProperty(reftype, tempPrimitiveInstance.type)
@@ -779,20 +778,20 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::instance::PrimitiveInstance
+		 * Unsets any property of art::instance::PrimitiveInstance
 		 * All the references expect PrimitiveInstanceToUnset may be void 
 		 */		
 		class UnsetruntimeinstancePrimitiveInstance inherits unsetAdaptation
 		{
-			reference PrimitiveInstanceToUnset : pattern::runtime::instance::PrimitiveInstance
-			reference reftype : pattern::runtime::type::ComponentType
-			reference refstate : pattern::runtime::instance::InstanceState
-			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
-			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
-			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::runtime::String
-			reference refcontentDesc : pattern::runtime::String
-			reference refname : pattern::runtime::String
+			reference PrimitiveInstanceToUnset : pattern::art::instance::PrimitiveInstance
+			reference reftype : pattern::art::type::ComponentType
+			reference refstate : pattern::art::instance::InstanceState
+			reference refsuperComponent : pattern::art::instance::CompositeInstance
+			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::art::String
+			reference refcontentDesc : pattern::art::String
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := PrimitiveInstanceToUnset != void
@@ -801,7 +800,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempPrimitiveInstance : runtime::instance::PrimitiveInstance
+				var tempPrimitiveInstance : art::instance::PrimitiveInstance
 				tempPrimitiveInstance ?= ad.getRealObject(PrimitiveInstanceToUnset,false)
 				
 				tempPrimitiveInstance.type ?= ad.unsetSingleProperty(reftype, tempPrimitiveInstance.type)
@@ -840,16 +839,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::instance::CompositeInstance
+		 * of art::instance::CompositeInstance
 		 */
 		
 		/**
-		 * Creates a new runtime::instance::CompositeInstance from scratch
+		 * Creates a new art::instance::CompositeInstance from scratch
 		 * This new element is handled by refering to newCompositeInstance
 		 */
 		class CreateruntimeinstanceCompositeInstance inherits createAdaptation
 		{
-			attribute newCompositeInstance : pattern::runtime::instance::CompositeInstance
+			attribute newCompositeInstance : pattern::art::instance::CompositeInstance
 					
 			method check(): Boolean is do
 				result := newCompositeInstance != void
@@ -861,13 +860,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::instance::CompositeInstance from an existing one
+		 * Creates a new art::instance::CompositeInstance from an existing one
 		 * This cloned element is handled by refering to clonedCompositeInstance
 		 */
 		class CloneruntimeinstanceCompositeInstance inherits cloneAdaptation
 		{
-			reference CompositeInstanceToClone : pattern::runtime::instance::CompositeInstance
-			attribute clonedCompositeInstance : pattern::runtime::instance::CompositeInstance
+			reference CompositeInstanceToClone : pattern::art::instance::CompositeInstance
+			attribute clonedCompositeInstance : pattern::art::instance::CompositeInstance
 			
 			method check(): Boolean is do
 				result := CompositeInstanceToClone != void
@@ -879,23 +878,23 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::instance::CompositeInstance
+		 * Sets any property of art::instance::CompositeInstance
 		 * All the references expect CompositeInstanceToSet may be void
 		 */
 			 
 		class SetruntimeinstanceCompositeInstance inherits setAdaptation
 		{
-			reference CompositeInstanceToSet : pattern::runtime::instance::CompositeInstance
-			reference refsubComponent : pattern::runtime::instance::ComponentInstance[0..*]
-			reference refdelegation : pattern::runtime::instance::DelegationBinding[0..*]
-			reference reftype : pattern::runtime::type::ComponentType
-			reference refstate : pattern::runtime::instance::InstanceState
-			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
-			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
-			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::runtime::String
-			reference refcontentDesc : pattern::runtime::String
-			reference refname : pattern::runtime::String
+			reference CompositeInstanceToSet : pattern::art::instance::CompositeInstance
+			reference refsubComponent : pattern::art::instance::ComponentInstance[0..*]
+			reference refdelegation : pattern::art::instance::DelegationBinding[0..*]
+			reference reftype : pattern::art::type::ComponentType
+			reference refstate : pattern::art::instance::InstanceState
+			reference refsuperComponent : pattern::art::instance::CompositeInstance
+			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::art::String
+			reference refcontentDesc : pattern::art::String
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := CompositeInstanceToSet != void
@@ -904,7 +903,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempCompositeInstance : runtime::instance::CompositeInstance
+				var tempCompositeInstance : art::instance::CompositeInstance
 				tempCompositeInstance ?= ad.getRealObject(CompositeInstanceToSet,false)
 				
 				ad.setMultipleProperty(tempCompositeInstance.subComponent,refsubComponent)
@@ -948,22 +947,22 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::instance::CompositeInstance
+		 * Unsets any property of art::instance::CompositeInstance
 		 * All the references expect CompositeInstanceToUnset may be void 
 		 */		
 		class UnsetruntimeinstanceCompositeInstance inherits unsetAdaptation
 		{
-			reference CompositeInstanceToUnset : pattern::runtime::instance::CompositeInstance
-			reference refsubComponent : pattern::runtime::instance::ComponentInstance[0..*]
-			reference refdelegation : pattern::runtime::instance::DelegationBinding[0..*]
-			reference reftype : pattern::runtime::type::ComponentType
-			reference refstate : pattern::runtime::instance::InstanceState
-			reference refsuperComponent : pattern::runtime::instance::CompositeInstance
-			reference refattribute : pattern::runtime::instance::ValuedAttribute[0..*]
-			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::runtime::String
-			reference refcontentDesc : pattern::runtime::String
-			reference refname : pattern::runtime::String
+			reference CompositeInstanceToUnset : pattern::art::instance::CompositeInstance
+			reference refsubComponent : pattern::art::instance::ComponentInstance[0..*]
+			reference refdelegation : pattern::art::instance::DelegationBinding[0..*]
+			reference reftype : pattern::art::type::ComponentType
+			reference refstate : pattern::art::instance::InstanceState
+			reference refsuperComponent : pattern::art::instance::CompositeInstance
+			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
+			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
+			reference refcontrollerDesc : pattern::art::String
+			reference refcontentDesc : pattern::art::String
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := CompositeInstanceToUnset != void
@@ -972,7 +971,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempCompositeInstance : runtime::instance::CompositeInstance
+				var tempCompositeInstance : art::instance::CompositeInstance
 				tempCompositeInstance ?= ad.getRealObject(CompositeInstanceToUnset,false)
 				
 				ad.unsetMultipleProperty(tempCompositeInstance.subComponent,refsubComponent)
@@ -1018,16 +1017,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::instance::ValuedAttribute
+		 * of art::instance::ValuedAttribute
 		 */
 		
 		/**
-		 * Creates a new runtime::instance::ValuedAttribute from scratch
+		 * Creates a new art::instance::ValuedAttribute from scratch
 		 * This new element is handled by refering to newValuedAttribute
 		 */
 		class CreateruntimeinstanceValuedAttribute inherits createAdaptation
 		{
-			attribute newValuedAttribute : pattern::runtime::instance::ValuedAttribute
+			attribute newValuedAttribute : pattern::art::instance::ValuedAttribute
 					
 			method check(): Boolean is do
 				result := newValuedAttribute != void
@@ -1039,13 +1038,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::instance::ValuedAttribute from an existing one
+		 * Creates a new art::instance::ValuedAttribute from an existing one
 		 * This cloned element is handled by refering to clonedValuedAttribute
 		 */
 		class CloneruntimeinstanceValuedAttribute inherits cloneAdaptation
 		{
-			reference ValuedAttributeToClone : pattern::runtime::instance::ValuedAttribute
-			attribute clonedValuedAttribute : pattern::runtime::instance::ValuedAttribute
+			reference ValuedAttributeToClone : pattern::art::instance::ValuedAttribute
+			attribute clonedValuedAttribute : pattern::art::instance::ValuedAttribute
 			
 			method check(): Boolean is do
 				result := ValuedAttributeToClone != void
@@ -1057,15 +1056,15 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::instance::ValuedAttribute
+		 * Sets any property of art::instance::ValuedAttribute
 		 * All the references expect ValuedAttributeToSet may be void
 		 */
 			 
 		class SetruntimeinstanceValuedAttribute inherits setAdaptation
 		{
-			reference ValuedAttributeToSet : pattern::runtime::instance::ValuedAttribute
-			reference refattribute : pattern::runtime::type::Attribute
-			reference refvalue : pattern::runtime::String
+			reference ValuedAttributeToSet : pattern::art::instance::ValuedAttribute
+			reference refattribute : pattern::art::type::Attribute
+			reference refvalue : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ValuedAttributeToSet != void
@@ -1074,7 +1073,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempValuedAttribute : runtime::instance::ValuedAttribute
+				var tempValuedAttribute : art::instance::ValuedAttribute
 				tempValuedAttribute ?= ad.getRealObject(ValuedAttributeToSet,false)
 				
 				tempValuedAttribute.~attribute ?= ad.setSingleProperty(refattribute, tempValuedAttribute.~attribute)
@@ -1098,14 +1097,14 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::instance::ValuedAttribute
+		 * Unsets any property of art::instance::ValuedAttribute
 		 * All the references expect ValuedAttributeToUnset may be void 
 		 */		
 		class UnsetruntimeinstanceValuedAttribute inherits unsetAdaptation
 		{
-			reference ValuedAttributeToUnset : pattern::runtime::instance::ValuedAttribute
-			reference refattribute : pattern::runtime::type::Attribute
-			reference refvalue : pattern::runtime::String
+			reference ValuedAttributeToUnset : pattern::art::instance::ValuedAttribute
+			reference refattribute : pattern::art::type::Attribute
+			reference refvalue : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ValuedAttributeToUnset != void
@@ -1114,7 +1113,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempValuedAttribute : runtime::instance::ValuedAttribute
+				var tempValuedAttribute : art::instance::ValuedAttribute
 				tempValuedAttribute ?= ad.getRealObject(ValuedAttributeToUnset,false)
 				
 				tempValuedAttribute.~attribute ?= ad.unsetSingleProperty(refattribute, tempValuedAttribute.~attribute)
@@ -1139,14 +1138,14 @@ package smartadapters
 		 
 
 		/**
-		 * Sets any property of runtime::instance::Binding
+		 * Sets any property of art::instance::Binding
 		 * All the references expect BindingToSet may be void
 		 */
 			 
 		class SetruntimeinstanceBinding inherits setAdaptation
 		{
-			reference BindingToSet : pattern::runtime::instance::Binding
-			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			reference BindingToSet : pattern::art::instance::Binding
+			reference refserverInstance : pattern::art::instance::ComponentInstance
 			
 			method check(): Boolean is do
 				result := BindingToSet != void
@@ -1155,7 +1154,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempBinding : runtime::instance::Binding
+				var tempBinding : art::instance::Binding
 				tempBinding ?= ad.getRealObject(BindingToSet,false)
 				
 				tempBinding.serverInstance ?= ad.setSingleProperty(refserverInstance, tempBinding.serverInstance)
@@ -1177,13 +1176,13 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::instance::Binding
+		 * Unsets any property of art::instance::Binding
 		 * All the references expect BindingToUnset may be void 
 		 */		
 		class UnsetruntimeinstanceBinding inherits unsetAdaptation
 		{
-			reference BindingToUnset : pattern::runtime::instance::Binding
-			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			reference BindingToUnset : pattern::art::instance::Binding
+			reference refserverInstance : pattern::art::instance::ComponentInstance
 			
 			method check(): Boolean is do
 				result := BindingToUnset != void
@@ -1192,7 +1191,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempBinding : runtime::instance::Binding
+				var tempBinding : art::instance::Binding
 				tempBinding ?= ad.getRealObject(BindingToUnset,false)
 				
 				tempBinding.serverInstance ?= ad.unsetSingleProperty(refserverInstance, tempBinding.serverInstance)
@@ -1215,16 +1214,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::instance::TransmissionBinding
+		 * of art::instance::TransmissionBinding
 		 */
 		
 		/**
-		 * Creates a new runtime::instance::TransmissionBinding from scratch
+		 * Creates a new art::instance::TransmissionBinding from scratch
 		 * This new element is handled by refering to newTransmissionBinding
 		 */
 		class CreateruntimeinstanceTransmissionBinding inherits createAdaptation
 		{
-			attribute newTransmissionBinding : pattern::runtime::instance::TransmissionBinding
+			attribute newTransmissionBinding : pattern::art::instance::TransmissionBinding
 					
 			method check(): Boolean is do
 				result := newTransmissionBinding != void
@@ -1236,13 +1235,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::instance::TransmissionBinding from an existing one
+		 * Creates a new art::instance::TransmissionBinding from an existing one
 		 * This cloned element is handled by refering to clonedTransmissionBinding
 		 */
 		class CloneruntimeinstanceTransmissionBinding inherits cloneAdaptation
 		{
-			reference TransmissionBindingToClone : pattern::runtime::instance::TransmissionBinding
-			attribute clonedTransmissionBinding : pattern::runtime::instance::TransmissionBinding
+			reference TransmissionBindingToClone : pattern::art::instance::TransmissionBinding
+			attribute clonedTransmissionBinding : pattern::art::instance::TransmissionBinding
 			
 			method check(): Boolean is do
 				result := TransmissionBindingToClone != void
@@ -1254,16 +1253,16 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::instance::TransmissionBinding
+		 * Sets any property of art::instance::TransmissionBinding
 		 * All the references expect TransmissionBindingToSet may be void
 		 */
 			 
 		class SetruntimeinstanceTransmissionBinding inherits setAdaptation
 		{
-			reference TransmissionBindingToSet : pattern::runtime::instance::TransmissionBinding
-			reference refclient : pattern::runtime::type::PrimitivePort
-			reference refserver : pattern::runtime::type::PrimitivePort
-			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			reference TransmissionBindingToSet : pattern::art::instance::TransmissionBinding
+			reference refclient : pattern::art::type::PrimitivePort
+			reference refserver : pattern::art::type::PrimitivePort
+			reference refserverInstance : pattern::art::instance::ComponentInstance
 			
 			method check(): Boolean is do
 				result := TransmissionBindingToSet != void
@@ -1272,7 +1271,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempTransmissionBinding : runtime::instance::TransmissionBinding
+				var tempTransmissionBinding : art::instance::TransmissionBinding
 				tempTransmissionBinding ?= ad.getRealObject(TransmissionBindingToSet,false)
 				
 				tempTransmissionBinding.client ?= ad.setSingleProperty(refclient, tempTransmissionBinding.client)
@@ -1298,15 +1297,15 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::instance::TransmissionBinding
+		 * Unsets any property of art::instance::TransmissionBinding
 		 * All the references expect TransmissionBindingToUnset may be void 
 		 */		
 		class UnsetruntimeinstanceTransmissionBinding inherits unsetAdaptation
 		{
-			reference TransmissionBindingToUnset : pattern::runtime::instance::TransmissionBinding
-			reference refclient : pattern::runtime::type::PrimitivePort
-			reference refserver : pattern::runtime::type::PrimitivePort
-			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			reference TransmissionBindingToUnset : pattern::art::instance::TransmissionBinding
+			reference refclient : pattern::art::type::PrimitivePort
+			reference refserver : pattern::art::type::PrimitivePort
+			reference refserverInstance : pattern::art::instance::ComponentInstance
 			
 			method check(): Boolean is do
 				result := TransmissionBindingToUnset != void
@@ -1315,7 +1314,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempTransmissionBinding : runtime::instance::TransmissionBinding
+				var tempTransmissionBinding : art::instance::TransmissionBinding
 				tempTransmissionBinding ?= ad.getRealObject(TransmissionBindingToUnset,false)
 				
 				tempTransmissionBinding.client ?= ad.unsetSingleProperty(refclient, tempTransmissionBinding.client)
@@ -1342,16 +1341,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::instance::DelegationBinding
+		 * of art::instance::DelegationBinding
 		 */
 		
 		/**
-		 * Creates a new runtime::instance::DelegationBinding from scratch
+		 * Creates a new art::instance::DelegationBinding from scratch
 		 * This new element is handled by refering to newDelegationBinding
 		 */
 		class CreateruntimeinstanceDelegationBinding inherits createAdaptation
 		{
-			attribute newDelegationBinding : pattern::runtime::instance::DelegationBinding
+			attribute newDelegationBinding : pattern::art::instance::DelegationBinding
 					
 			method check(): Boolean is do
 				result := newDelegationBinding != void
@@ -1363,13 +1362,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::instance::DelegationBinding from an existing one
+		 * Creates a new art::instance::DelegationBinding from an existing one
 		 * This cloned element is handled by refering to clonedDelegationBinding
 		 */
 		class CloneruntimeinstanceDelegationBinding inherits cloneAdaptation
 		{
-			reference DelegationBindingToClone : pattern::runtime::instance::DelegationBinding
-			attribute clonedDelegationBinding : pattern::runtime::instance::DelegationBinding
+			reference DelegationBindingToClone : pattern::art::instance::DelegationBinding
+			attribute clonedDelegationBinding : pattern::art::instance::DelegationBinding
 			
 			method check(): Boolean is do
 				result := DelegationBindingToClone != void
@@ -1381,16 +1380,16 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::instance::DelegationBinding
+		 * Sets any property of art::instance::DelegationBinding
 		 * All the references expect DelegationBindingToSet may be void
 		 */
 			 
 		class SetruntimeinstanceDelegationBinding inherits setAdaptation
 		{
-			reference DelegationBindingToSet : pattern::runtime::instance::DelegationBinding
-			reference refsource : pattern::runtime::type::PrimitivePort
-			reference refexported : pattern::runtime::type::PrimitivePort
-			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			reference DelegationBindingToSet : pattern::art::instance::DelegationBinding
+			reference refsource : pattern::art::type::PrimitivePort
+			reference refexported : pattern::art::type::PrimitivePort
+			reference refserverInstance : pattern::art::instance::ComponentInstance
 			
 			method check(): Boolean is do
 				result := DelegationBindingToSet != void
@@ -1399,7 +1398,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempDelegationBinding : runtime::instance::DelegationBinding
+				var tempDelegationBinding : art::instance::DelegationBinding
 				tempDelegationBinding ?= ad.getRealObject(DelegationBindingToSet,false)
 				
 				tempDelegationBinding.source ?= ad.setSingleProperty(refsource, tempDelegationBinding.source)
@@ -1425,15 +1424,15 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::instance::DelegationBinding
+		 * Unsets any property of art::instance::DelegationBinding
 		 * All the references expect DelegationBindingToUnset may be void 
 		 */		
 		class UnsetruntimeinstanceDelegationBinding inherits unsetAdaptation
 		{
-			reference DelegationBindingToUnset : pattern::runtime::instance::DelegationBinding
-			reference refsource : pattern::runtime::type::PrimitivePort
-			reference refexported : pattern::runtime::type::PrimitivePort
-			reference refserverInstance : pattern::runtime::instance::ComponentInstance
+			reference DelegationBindingToUnset : pattern::art::instance::DelegationBinding
+			reference refsource : pattern::art::type::PrimitivePort
+			reference refexported : pattern::art::type::PrimitivePort
+			reference refserverInstance : pattern::art::instance::ComponentInstance
 			
 			method check(): Boolean is do
 				result := DelegationBindingToUnset != void
@@ -1442,7 +1441,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempDelegationBinding : runtime::instance::DelegationBinding
+				var tempDelegationBinding : art::instance::DelegationBinding
 				tempDelegationBinding ?= ad.getRealObject(DelegationBindingToUnset,false)
 				
 				tempDelegationBinding.source ?= ad.unsetSingleProperty(refsource, tempDelegationBinding.source)
@@ -1469,16 +1468,16 @@ package smartadapters
 		 
 
 		/**
-		 * Sets any property of runtime::type::ComponentType
+		 * Sets any property of art::type::ComponentType
 		 * All the references expect ComponentTypeToSet may be void
 		 */
 			 
 		class SetruntimetypeComponentType inherits setAdaptation
 		{
-			reference ComponentTypeToSet : pattern::runtime::type::ComponentType
-			reference refport : pattern::runtime::type::Port[0..*]
-			reference refattribute : pattern::runtime::type::Attribute[0..*]
-			reference refname : pattern::runtime::String
+			reference ComponentTypeToSet : pattern::art::type::ComponentType
+			reference refport : pattern::art::type::Port[0..*]
+			reference refattribute : pattern::art::type::Attribute[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ComponentTypeToSet != void
@@ -1487,7 +1486,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempComponentType : runtime::type::ComponentType
+				var tempComponentType : art::type::ComponentType
 				tempComponentType ?= ad.getRealObject(ComponentTypeToSet,false)
 				
 				ad.setMultipleProperty(tempComponentType.port,refport)
@@ -1515,15 +1514,15 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::ComponentType
+		 * Unsets any property of art::type::ComponentType
 		 * All the references expect ComponentTypeToUnset may be void 
 		 */		
 		class UnsetruntimetypeComponentType inherits unsetAdaptation
 		{
-			reference ComponentTypeToUnset : pattern::runtime::type::ComponentType
-			reference refport : pattern::runtime::type::Port[0..*]
-			reference refattribute : pattern::runtime::type::Attribute[0..*]
-			reference refname : pattern::runtime::String
+			reference ComponentTypeToUnset : pattern::art::type::ComponentType
+			reference refport : pattern::art::type::Port[0..*]
+			reference refattribute : pattern::art::type::Attribute[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ComponentTypeToUnset != void
@@ -1532,7 +1531,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempComponentType : runtime::type::ComponentType
+				var tempComponentType : art::type::ComponentType
 				tempComponentType ?= ad.getRealObject(ComponentTypeToUnset,false)
 				
 				ad.unsetMultipleProperty(tempComponentType.port,refport)
@@ -1561,16 +1560,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::type::PrimitiveType
+		 * of art::type::PrimitiveType
 		 */
 		
 		/**
-		 * Creates a new runtime::type::PrimitiveType from scratch
+		 * Creates a new art::type::PrimitiveType from scratch
 		 * This new element is handled by refering to newPrimitiveType
 		 */
 		class CreateruntimetypePrimitiveType inherits createAdaptation
 		{
-			attribute newPrimitiveType : pattern::runtime::type::PrimitiveType
+			attribute newPrimitiveType : pattern::art::type::PrimitiveType
 					
 			method check(): Boolean is do
 				result := newPrimitiveType != void
@@ -1582,13 +1581,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::type::PrimitiveType from an existing one
+		 * Creates a new art::type::PrimitiveType from an existing one
 		 * This cloned element is handled by refering to clonedPrimitiveType
 		 */
 		class CloneruntimetypePrimitiveType inherits cloneAdaptation
 		{
-			reference PrimitiveTypeToClone : pattern::runtime::type::PrimitiveType
-			attribute clonedPrimitiveType : pattern::runtime::type::PrimitiveType
+			reference PrimitiveTypeToClone : pattern::art::type::PrimitiveType
+			attribute clonedPrimitiveType : pattern::art::type::PrimitiveType
 			
 			method check(): Boolean is do
 				result := PrimitiveTypeToClone != void
@@ -1600,17 +1599,17 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::type::PrimitiveType
+		 * Sets any property of art::type::PrimitiveType
 		 * All the references expect PrimitiveTypeToSet may be void
 		 */
 			 
 		class SetruntimetypePrimitiveType inherits setAdaptation
 		{
-			reference PrimitiveTypeToSet : pattern::runtime::type::PrimitiveType
-			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
-			reference refport : pattern::runtime::type::Port[0..*]
-			reference refattribute : pattern::runtime::type::Attribute[0..*]
-			reference refname : pattern::runtime::String
+			reference PrimitiveTypeToSet : pattern::art::type::PrimitiveType
+			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
+			reference refport : pattern::art::type::Port[0..*]
+			reference refattribute : pattern::art::type::Attribute[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := PrimitiveTypeToSet != void
@@ -1619,7 +1618,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempPrimitiveType : runtime::type::PrimitiveType
+				var tempPrimitiveType : art::type::PrimitiveType
 				tempPrimitiveType ?= ad.getRealObject(PrimitiveTypeToSet,false)
 				
 				ad.setMultipleProperty(tempPrimitiveType.binding,refbinding)
@@ -1650,16 +1649,16 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::PrimitiveType
+		 * Unsets any property of art::type::PrimitiveType
 		 * All the references expect PrimitiveTypeToUnset may be void 
 		 */		
 		class UnsetruntimetypePrimitiveType inherits unsetAdaptation
 		{
-			reference PrimitiveTypeToUnset : pattern::runtime::type::PrimitiveType
-			reference refbinding : pattern::runtime::instance::TransmissionBinding[0..*]
-			reference refport : pattern::runtime::type::Port[0..*]
-			reference refattribute : pattern::runtime::type::Attribute[0..*]
-			reference refname : pattern::runtime::String
+			reference PrimitiveTypeToUnset : pattern::art::type::PrimitiveType
+			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
+			reference refport : pattern::art::type::Port[0..*]
+			reference refattribute : pattern::art::type::Attribute[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := PrimitiveTypeToUnset != void
@@ -1668,7 +1667,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempPrimitiveType : runtime::type::PrimitiveType
+				var tempPrimitiveType : art::type::PrimitiveType
 				tempPrimitiveType ?= ad.getRealObject(PrimitiveTypeToUnset,false)
 				
 				ad.unsetMultipleProperty(tempPrimitiveType.binding,refbinding)
@@ -1700,16 +1699,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::type::CompositeType
+		 * of art::type::CompositeType
 		 */
 		
 		/**
-		 * Creates a new runtime::type::CompositeType from scratch
+		 * Creates a new art::type::CompositeType from scratch
 		 * This new element is handled by refering to newCompositeType
 		 */
 		class CreateruntimetypeCompositeType inherits createAdaptation
 		{
-			attribute newCompositeType : pattern::runtime::type::CompositeType
+			attribute newCompositeType : pattern::art::type::CompositeType
 					
 			method check(): Boolean is do
 				result := newCompositeType != void
@@ -1721,13 +1720,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::type::CompositeType from an existing one
+		 * Creates a new art::type::CompositeType from an existing one
 		 * This cloned element is handled by refering to clonedCompositeType
 		 */
 		class CloneruntimetypeCompositeType inherits cloneAdaptation
 		{
-			reference CompositeTypeToClone : pattern::runtime::type::CompositeType
-			attribute clonedCompositeType : pattern::runtime::type::CompositeType
+			reference CompositeTypeToClone : pattern::art::type::CompositeType
+			attribute clonedCompositeType : pattern::art::type::CompositeType
 			
 			method check(): Boolean is do
 				result := CompositeTypeToClone != void
@@ -1739,18 +1738,18 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::type::CompositeType
+		 * Sets any property of art::type::CompositeType
 		 * All the references expect CompositeTypeToSet may be void
 		 */
 			 
 		class SetruntimetypeCompositeType inherits setAdaptation
 		{
-			reference CompositeTypeToSet : pattern::runtime::type::CompositeType
-			reference refsubTypes : pattern::runtime::type::CompositeType[0..*]
-			reference refdelegation : pattern::runtime::instance::DelegationBinding[0..*]
-			reference refport : pattern::runtime::type::Port[0..*]
-			reference refattribute : pattern::runtime::type::Attribute[0..*]
-			reference refname : pattern::runtime::String
+			reference CompositeTypeToSet : pattern::art::type::CompositeType
+			reference refsubTypes : pattern::art::type::CompositeType[0..*]
+			reference refdelegation : pattern::art::instance::DelegationBinding[0..*]
+			reference refport : pattern::art::type::Port[0..*]
+			reference refattribute : pattern::art::type::Attribute[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := CompositeTypeToSet != void
@@ -1759,7 +1758,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempCompositeType : runtime::type::CompositeType
+				var tempCompositeType : art::type::CompositeType
 				tempCompositeType ?= ad.getRealObject(CompositeTypeToSet,false)
 				
 				ad.setMultipleProperty(tempCompositeType.subTypes,refsubTypes)
@@ -1793,17 +1792,17 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::CompositeType
+		 * Unsets any property of art::type::CompositeType
 		 * All the references expect CompositeTypeToUnset may be void 
 		 */		
 		class UnsetruntimetypeCompositeType inherits unsetAdaptation
 		{
-			reference CompositeTypeToUnset : pattern::runtime::type::CompositeType
-			reference refsubTypes : pattern::runtime::type::CompositeType[0..*]
-			reference refdelegation : pattern::runtime::instance::DelegationBinding[0..*]
-			reference refport : pattern::runtime::type::Port[0..*]
-			reference refattribute : pattern::runtime::type::Attribute[0..*]
-			reference refname : pattern::runtime::String
+			reference CompositeTypeToUnset : pattern::art::type::CompositeType
+			reference refsubTypes : pattern::art::type::CompositeType[0..*]
+			reference refdelegation : pattern::art::instance::DelegationBinding[0..*]
+			reference refport : pattern::art::type::Port[0..*]
+			reference refattribute : pattern::art::type::Attribute[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := CompositeTypeToUnset != void
@@ -1812,7 +1811,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempCompositeType : runtime::type::CompositeType
+				var tempCompositeType : art::type::CompositeType
 				tempCompositeType ?= ad.getRealObject(CompositeTypeToUnset,false)
 				
 				ad.unsetMultipleProperty(tempCompositeType.subTypes,refsubTypes)
@@ -1847,15 +1846,15 @@ package smartadapters
 		 
 
 		/**
-		 * Sets any property of runtime::type::Service
+		 * Sets any property of art::type::Service
 		 * All the references expect ServiceToSet may be void
 		 */
 			 
 		class SetruntimetypeService inherits setAdaptation
 		{
-			reference ServiceToSet : pattern::runtime::type::Service
-			reference refoperation : pattern::runtime::type::Operation[0..*]
-			reference refname : pattern::runtime::String
+			reference ServiceToSet : pattern::art::type::Service
+			reference refoperation : pattern::art::type::Operation[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ServiceToSet != void
@@ -1864,7 +1863,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempService : runtime::type::Service
+				var tempService : art::type::Service
 				tempService ?= ad.getRealObject(ServiceToSet,false)
 				
 				ad.setMultipleProperty(tempService.~operation,refoperation)
@@ -1889,14 +1888,14 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::Service
+		 * Unsets any property of art::type::Service
 		 * All the references expect ServiceToUnset may be void 
 		 */		
 		class UnsetruntimetypeService inherits unsetAdaptation
 		{
-			reference ServiceToUnset : pattern::runtime::type::Service
-			reference refoperation : pattern::runtime::type::Operation[0..*]
-			reference refname : pattern::runtime::String
+			reference ServiceToUnset : pattern::art::type::Service
+			reference refoperation : pattern::art::type::Operation[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ServiceToUnset != void
@@ -1905,7 +1904,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempService : runtime::type::Service
+				var tempService : art::type::Service
 				tempService ?= ad.getRealObject(ServiceToUnset,false)
 				
 				ad.unsetMultipleProperty(tempService.~operation,refoperation)
@@ -1931,16 +1930,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::type::Operation
+		 * of art::type::Operation
 		 */
 		
 		/**
-		 * Creates a new runtime::type::Operation from scratch
+		 * Creates a new art::type::Operation from scratch
 		 * This new element is handled by refering to newOperation
 		 */
 		class CreateruntimetypeOperation inherits createAdaptation
 		{
-			attribute newOperation : pattern::runtime::type::Operation
+			attribute newOperation : pattern::art::type::Operation
 					
 			method check(): Boolean is do
 				result := newOperation != void
@@ -1952,13 +1951,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::type::Operation from an existing one
+		 * Creates a new art::type::Operation from an existing one
 		 * This cloned element is handled by refering to clonedOperation
 		 */
 		class CloneruntimetypeOperation inherits cloneAdaptation
 		{
-			reference OperationToClone : pattern::runtime::type::Operation
-			attribute clonedOperation : pattern::runtime::type::Operation
+			reference OperationToClone : pattern::art::type::Operation
+			attribute clonedOperation : pattern::art::type::Operation
 			
 			method check(): Boolean is do
 				result := OperationToClone != void
@@ -1970,16 +1969,16 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::type::Operation
+		 * Sets any property of art::type::Operation
 		 * All the references expect OperationToSet may be void
 		 */
 			 
 		class SetruntimetypeOperation inherits setAdaptation
 		{
-			reference OperationToSet : pattern::runtime::type::Operation
-			reference refinput : pattern::runtime::type::Parameter[0..*]
-			reference refoutput : pattern::runtime::type::Parameter[0..*]
-			reference refname : pattern::runtime::String
+			reference OperationToSet : pattern::art::type::Operation
+			reference refinput : pattern::art::type::Parameter[0..*]
+			reference refoutput : pattern::art::type::Parameter[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := OperationToSet != void
@@ -1988,7 +1987,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempOperation : runtime::type::Operation
+				var tempOperation : art::type::Operation
 				tempOperation ?= ad.getRealObject(OperationToSet,false)
 				
 				ad.setMultipleProperty(tempOperation.input,refinput)
@@ -2016,15 +2015,15 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::Operation
+		 * Unsets any property of art::type::Operation
 		 * All the references expect OperationToUnset may be void 
 		 */		
 		class UnsetruntimetypeOperation inherits unsetAdaptation
 		{
-			reference OperationToUnset : pattern::runtime::type::Operation
-			reference refinput : pattern::runtime::type::Parameter[0..*]
-			reference refoutput : pattern::runtime::type::Parameter[0..*]
-			reference refname : pattern::runtime::String
+			reference OperationToUnset : pattern::art::type::Operation
+			reference refinput : pattern::art::type::Parameter[0..*]
+			reference refoutput : pattern::art::type::Parameter[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := OperationToUnset != void
@@ -2033,7 +2032,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempOperation : runtime::type::Operation
+				var tempOperation : art::type::Operation
 				tempOperation ?= ad.getRealObject(OperationToUnset,false)
 				
 				ad.unsetMultipleProperty(tempOperation.input,refinput)
@@ -2062,16 +2061,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::type::Parameter
+		 * of art::type::Parameter
 		 */
 		
 		/**
-		 * Creates a new runtime::type::Parameter from scratch
+		 * Creates a new art::type::Parameter from scratch
 		 * This new element is handled by refering to newParameter
 		 */
 		class CreateruntimetypeParameter inherits createAdaptation
 		{
-			attribute newParameter : pattern::runtime::type::Parameter
+			attribute newParameter : pattern::art::type::Parameter
 					
 			method check(): Boolean is do
 				result := newParameter != void
@@ -2083,13 +2082,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::type::Parameter from an existing one
+		 * Creates a new art::type::Parameter from an existing one
 		 * This cloned element is handled by refering to clonedParameter
 		 */
 		class CloneruntimetypeParameter inherits cloneAdaptation
 		{
-			reference ParameterToClone : pattern::runtime::type::Parameter
-			attribute clonedParameter : pattern::runtime::type::Parameter
+			reference ParameterToClone : pattern::art::type::Parameter
+			attribute clonedParameter : pattern::art::type::Parameter
 			
 			method check(): Boolean is do
 				result := ParameterToClone != void
@@ -2101,15 +2100,15 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::type::Parameter
+		 * Sets any property of art::type::Parameter
 		 * All the references expect ParameterToSet may be void
 		 */
 			 
 		class SetruntimetypeParameter inherits setAdaptation
 		{
-			reference ParameterToSet : pattern::runtime::type::Parameter
-			reference reftype : pattern::runtime::DataType
-			reference refname : pattern::runtime::String
+			reference ParameterToSet : pattern::art::type::Parameter
+			reference reftype : pattern::art::DataType
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ParameterToSet != void
@@ -2118,7 +2117,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempParameter : runtime::type::Parameter
+				var tempParameter : art::type::Parameter
 				tempParameter ?= ad.getRealObject(ParameterToSet,false)
 				
 				tempParameter.type ?= ad.setSingleProperty(reftype, tempParameter.type)
@@ -2142,14 +2141,14 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::Parameter
+		 * Unsets any property of art::type::Parameter
 		 * All the references expect ParameterToUnset may be void 
 		 */		
 		class UnsetruntimetypeParameter inherits unsetAdaptation
 		{
-			reference ParameterToUnset : pattern::runtime::type::Parameter
-			reference reftype : pattern::runtime::DataType
-			reference refname : pattern::runtime::String
+			reference ParameterToUnset : pattern::art::type::Parameter
+			reference reftype : pattern::art::DataType
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ParameterToUnset != void
@@ -2158,7 +2157,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempParameter : runtime::type::Parameter
+				var tempParameter : art::type::Parameter
 				tempParameter ?= ad.getRealObject(ParameterToUnset,false)
 				
 				tempParameter.type ?= ad.unsetSingleProperty(reftype, tempParameter.type)
@@ -2183,16 +2182,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::type::FunctionalService
+		 * of art::type::FunctionalService
 		 */
 		
 		/**
-		 * Creates a new runtime::type::FunctionalService from scratch
+		 * Creates a new art::type::FunctionalService from scratch
 		 * This new element is handled by refering to newFunctionalService
 		 */
 		class CreateruntimetypeFunctionalService inherits createAdaptation
 		{
-			attribute newFunctionalService : pattern::runtime::type::FunctionalService
+			attribute newFunctionalService : pattern::art::type::FunctionalService
 					
 			method check(): Boolean is do
 				result := newFunctionalService != void
@@ -2204,13 +2203,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::type::FunctionalService from an existing one
+		 * Creates a new art::type::FunctionalService from an existing one
 		 * This cloned element is handled by refering to clonedFunctionalService
 		 */
 		class CloneruntimetypeFunctionalService inherits cloneAdaptation
 		{
-			reference FunctionalServiceToClone : pattern::runtime::type::FunctionalService
-			attribute clonedFunctionalService : pattern::runtime::type::FunctionalService
+			reference FunctionalServiceToClone : pattern::art::type::FunctionalService
+			attribute clonedFunctionalService : pattern::art::type::FunctionalService
 			
 			method check(): Boolean is do
 				result := FunctionalServiceToClone != void
@@ -2222,15 +2221,15 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::type::FunctionalService
+		 * Sets any property of art::type::FunctionalService
 		 * All the references expect FunctionalServiceToSet may be void
 		 */
 			 
 		class SetruntimetypeFunctionalService inherits setAdaptation
 		{
-			reference FunctionalServiceToSet : pattern::runtime::type::FunctionalService
-			reference refoperation : pattern::runtime::type::Operation[0..*]
-			reference refname : pattern::runtime::String
+			reference FunctionalServiceToSet : pattern::art::type::FunctionalService
+			reference refoperation : pattern::art::type::Operation[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := FunctionalServiceToSet != void
@@ -2239,7 +2238,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempFunctionalService : runtime::type::FunctionalService
+				var tempFunctionalService : art::type::FunctionalService
 				tempFunctionalService ?= ad.getRealObject(FunctionalServiceToSet,false)
 				
 				ad.setMultipleProperty(tempFunctionalService.~operation,refoperation)
@@ -2264,14 +2263,14 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::FunctionalService
+		 * Unsets any property of art::type::FunctionalService
 		 * All the references expect FunctionalServiceToUnset may be void 
 		 */		
 		class UnsetruntimetypeFunctionalService inherits unsetAdaptation
 		{
-			reference FunctionalServiceToUnset : pattern::runtime::type::FunctionalService
-			reference refoperation : pattern::runtime::type::Operation[0..*]
-			reference refname : pattern::runtime::String
+			reference FunctionalServiceToUnset : pattern::art::type::FunctionalService
+			reference refoperation : pattern::art::type::Operation[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := FunctionalServiceToUnset != void
@@ -2280,7 +2279,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempFunctionalService : runtime::type::FunctionalService
+				var tempFunctionalService : art::type::FunctionalService
 				tempFunctionalService ?= ad.getRealObject(FunctionalServiceToUnset,false)
 				
 				ad.unsetMultipleProperty(tempFunctionalService.~operation,refoperation)
@@ -2306,16 +2305,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::type::ControlService
+		 * of art::type::ControlService
 		 */
 		
 		/**
-		 * Creates a new runtime::type::ControlService from scratch
+		 * Creates a new art::type::ControlService from scratch
 		 * This new element is handled by refering to newControlService
 		 */
 		class CreateruntimetypeControlService inherits createAdaptation
 		{
-			attribute newControlService : pattern::runtime::type::ControlService
+			attribute newControlService : pattern::art::type::ControlService
 					
 			method check(): Boolean is do
 				result := newControlService != void
@@ -2327,13 +2326,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::type::ControlService from an existing one
+		 * Creates a new art::type::ControlService from an existing one
 		 * This cloned element is handled by refering to clonedControlService
 		 */
 		class CloneruntimetypeControlService inherits cloneAdaptation
 		{
-			reference ControlServiceToClone : pattern::runtime::type::ControlService
-			attribute clonedControlService : pattern::runtime::type::ControlService
+			reference ControlServiceToClone : pattern::art::type::ControlService
+			attribute clonedControlService : pattern::art::type::ControlService
 			
 			method check(): Boolean is do
 				result := ControlServiceToClone != void
@@ -2345,15 +2344,15 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::type::ControlService
+		 * Sets any property of art::type::ControlService
 		 * All the references expect ControlServiceToSet may be void
 		 */
 			 
 		class SetruntimetypeControlService inherits setAdaptation
 		{
-			reference ControlServiceToSet : pattern::runtime::type::ControlService
-			reference refoperation : pattern::runtime::type::Operation[0..*]
-			reference refname : pattern::runtime::String
+			reference ControlServiceToSet : pattern::art::type::ControlService
+			reference refoperation : pattern::art::type::Operation[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ControlServiceToSet != void
@@ -2362,7 +2361,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempControlService : runtime::type::ControlService
+				var tempControlService : art::type::ControlService
 				tempControlService ?= ad.getRealObject(ControlServiceToSet,false)
 				
 				ad.setMultipleProperty(tempControlService.~operation,refoperation)
@@ -2387,14 +2386,14 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::ControlService
+		 * Unsets any property of art::type::ControlService
 		 * All the references expect ControlServiceToUnset may be void 
 		 */		
 		class UnsetruntimetypeControlService inherits unsetAdaptation
 		{
-			reference ControlServiceToUnset : pattern::runtime::type::ControlService
-			reference refoperation : pattern::runtime::type::Operation[0..*]
-			reference refname : pattern::runtime::String
+			reference ControlServiceToUnset : pattern::art::type::ControlService
+			reference refoperation : pattern::art::type::Operation[0..*]
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := ControlServiceToUnset != void
@@ -2403,7 +2402,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempControlService : runtime::type::ControlService
+				var tempControlService : art::type::ControlService
 				tempControlService ?= ad.getRealObject(ControlServiceToUnset,false)
 				
 				ad.unsetMultipleProperty(tempControlService.~operation,refoperation)
@@ -2429,16 +2428,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::type::Port
+		 * of art::type::Port
 		 */
 		
 		/**
-		 * Creates a new runtime::type::Port from scratch
+		 * Creates a new art::type::Port from scratch
 		 * This new element is handled by refering to newPort
 		 */
 		class CreateruntimetypePort inherits createAdaptation
 		{
-			attribute newPort : pattern::runtime::type::Port
+			attribute newPort : pattern::art::type::Port
 					
 			method check(): Boolean is do
 				result := newPort != void
@@ -2450,13 +2449,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::type::Port from an existing one
+		 * Creates a new art::type::Port from an existing one
 		 * This cloned element is handled by refering to clonedPort
 		 */
 		class CloneruntimetypePort inherits cloneAdaptation
 		{
-			reference PortToClone : pattern::runtime::type::Port
-			attribute clonedPort : pattern::runtime::type::Port
+			reference PortToClone : pattern::art::type::Port
+			attribute clonedPort : pattern::art::type::Port
 			
 			method check(): Boolean is do
 				result := PortToClone != void
@@ -2468,16 +2467,16 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::type::Port
+		 * Sets any property of art::type::Port
 		 * All the references expect PortToSet may be void
 		 */
 			 
 		class SetruntimetypePort inherits setAdaptation
 		{
-			reference PortToSet : pattern::runtime::type::Port
-			reference refsub : pattern::runtime::type::PrimitivePort[0..*]
-			reference refisOptional : pattern::runtime::Boolean
-			reference refname : pattern::runtime::String
+			reference PortToSet : pattern::art::type::Port
+			reference refsub : pattern::art::type::PrimitivePort[0..*]
+			reference refisOptional : pattern::art::Boolean
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := PortToSet != void
@@ -2486,7 +2485,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempPort : runtime::type::Port
+				var tempPort : art::type::Port
 				tempPort ?= ad.getRealObject(PortToSet,false)
 				
 				ad.setMultipleProperty(tempPort.sub,refsub)
@@ -2513,15 +2512,15 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::Port
+		 * Unsets any property of art::type::Port
 		 * All the references expect PortToUnset may be void 
 		 */		
 		class UnsetruntimetypePort inherits unsetAdaptation
 		{
-			reference PortToUnset : pattern::runtime::type::Port
-			reference refsub : pattern::runtime::type::PrimitivePort[0..*]
-			reference refisOptional : pattern::runtime::Boolean
-			reference refname : pattern::runtime::String
+			reference PortToUnset : pattern::art::type::Port
+			reference refsub : pattern::art::type::PrimitivePort[0..*]
+			reference refisOptional : pattern::art::Boolean
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := PortToUnset != void
@@ -2530,7 +2529,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempPort : runtime::type::Port
+				var tempPort : art::type::Port
 				tempPort ?= ad.getRealObject(PortToUnset,false)
 				
 				ad.unsetMultipleProperty(tempPort.sub,refsub)
@@ -2558,16 +2557,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::type::Attribute
+		 * of art::type::Attribute
 		 */
 		
 		/**
-		 * Creates a new runtime::type::Attribute from scratch
+		 * Creates a new art::type::Attribute from scratch
 		 * This new element is handled by refering to newAttribute
 		 */
 		class CreateruntimetypeAttribute inherits createAdaptation
 		{
-			attribute newAttribute : pattern::runtime::type::Attribute
+			attribute newAttribute : pattern::art::type::Attribute
 					
 			method check(): Boolean is do
 				result := newAttribute != void
@@ -2579,13 +2578,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::type::Attribute from an existing one
+		 * Creates a new art::type::Attribute from an existing one
 		 * This cloned element is handled by refering to clonedAttribute
 		 */
 		class CloneruntimetypeAttribute inherits cloneAdaptation
 		{
-			reference AttributeToClone : pattern::runtime::type::Attribute
-			attribute clonedAttribute : pattern::runtime::type::Attribute
+			reference AttributeToClone : pattern::art::type::Attribute
+			attribute clonedAttribute : pattern::art::type::Attribute
 			
 			method check(): Boolean is do
 				result := AttributeToClone != void
@@ -2597,15 +2596,15 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::type::Attribute
+		 * Sets any property of art::type::Attribute
 		 * All the references expect AttributeToSet may be void
 		 */
 			 
 		class SetruntimetypeAttribute inherits setAdaptation
 		{
-			reference AttributeToSet : pattern::runtime::type::Attribute
-			reference reftype : pattern::runtime::DataType
-			reference refname : pattern::runtime::String
+			reference AttributeToSet : pattern::art::type::Attribute
+			reference reftype : pattern::art::DataType
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := AttributeToSet != void
@@ -2614,7 +2613,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempAttribute : runtime::type::Attribute
+				var tempAttribute : art::type::Attribute
 				tempAttribute ?= ad.getRealObject(AttributeToSet,false)
 				
 				tempAttribute.type ?= ad.setSingleProperty(reftype, tempAttribute.type)
@@ -2638,14 +2637,14 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::Attribute
+		 * Unsets any property of art::type::Attribute
 		 * All the references expect AttributeToUnset may be void 
 		 */		
 		class UnsetruntimetypeAttribute inherits unsetAdaptation
 		{
-			reference AttributeToUnset : pattern::runtime::type::Attribute
-			reference reftype : pattern::runtime::DataType
-			reference refname : pattern::runtime::String
+			reference AttributeToUnset : pattern::art::type::Attribute
+			reference reftype : pattern::art::DataType
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := AttributeToUnset != void
@@ -2654,7 +2653,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempAttribute : runtime::type::Attribute
+				var tempAttribute : art::type::Attribute
 				tempAttribute ?= ad.getRealObject(AttributeToUnset,false)
 				
 				tempAttribute.type ?= ad.unsetSingleProperty(reftype, tempAttribute.type)
@@ -2679,16 +2678,16 @@ package smartadapters
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
-		 * of runtime::type::PrimitivePort
+		 * of art::type::PrimitivePort
 		 */
 		
 		/**
-		 * Creates a new runtime::type::PrimitivePort from scratch
+		 * Creates a new art::type::PrimitivePort from scratch
 		 * This new element is handled by refering to newPrimitivePort
 		 */
 		class CreateruntimetypePrimitivePort inherits createAdaptation
 		{
-			attribute newPrimitivePort : pattern::runtime::type::PrimitivePort
+			attribute newPrimitivePort : pattern::art::type::PrimitivePort
 					
 			method check(): Boolean is do
 				result := newPrimitivePort != void
@@ -2700,13 +2699,13 @@ package smartadapters
 		}
 
 		/**
-		 * Creates a new runtime::type::PrimitivePort from an existing one
+		 * Creates a new art::type::PrimitivePort from an existing one
 		 * This cloned element is handled by refering to clonedPrimitivePort
 		 */
 		class CloneruntimetypePrimitivePort inherits cloneAdaptation
 		{
-			reference PrimitivePortToClone : pattern::runtime::type::PrimitivePort
-			attribute clonedPrimitivePort : pattern::runtime::type::PrimitivePort
+			reference PrimitivePortToClone : pattern::art::type::PrimitivePort
+			attribute clonedPrimitivePort : pattern::art::type::PrimitivePort
 			
 			method check(): Boolean is do
 				result := PrimitivePortToClone != void
@@ -2718,16 +2717,16 @@ package smartadapters
 		}
 
 		/**
-		 * Sets any property of runtime::type::PrimitivePort
+		 * Sets any property of art::type::PrimitivePort
 		 * All the references expect PrimitivePortToSet may be void
 		 */
 			 
 		class SetruntimetypePrimitivePort inherits setAdaptation
 		{
-			reference PrimitivePortToSet : pattern::runtime::type::PrimitivePort
-			reference refservice : pattern::runtime::type::Service
-			reference refrole : pattern::runtime::type::PortRole
-			reference refname : pattern::runtime::String
+			reference PrimitivePortToSet : pattern::art::type::PrimitivePort
+			reference refservice : pattern::art::type::Service
+			reference refrole : pattern::art::type::PortRole
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := PrimitivePortToSet != void
@@ -2736,7 +2735,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void 
 			is do
 				var ad : Adapter init getAdapter
-				var tempPrimitivePort : runtime::type::PrimitivePort
+				var tempPrimitivePort : art::type::PrimitivePort
 				tempPrimitivePort ?= ad.getRealObject(PrimitivePortToSet,false)
 				
 				tempPrimitivePort.service ?= ad.setSingleProperty(refservice, tempPrimitivePort.service)
@@ -2762,15 +2761,15 @@ package smartadapters
 		}
 		
 		/**
-		 * Unsets any property of runtime::type::PrimitivePort
+		 * Unsets any property of art::type::PrimitivePort
 		 * All the references expect PrimitivePortToUnset may be void 
 		 */		
 		class UnsetruntimetypePrimitivePort inherits unsetAdaptation
 		{
-			reference PrimitivePortToUnset : pattern::runtime::type::PrimitivePort
-			reference refservice : pattern::runtime::type::Service
-			reference refrole : pattern::runtime::type::PortRole
-			reference refname : pattern::runtime::String
+			reference PrimitivePortToUnset : pattern::art::type::PrimitivePort
+			reference refservice : pattern::art::type::Service
+			reference refrole : pattern::art::type::PortRole
+			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
 				result := PrimitivePortToUnset != void
@@ -2779,7 +2778,7 @@ package smartadapters
 			method execute(reverse : Boolean): Void
 			is do
 				var ad : Adapter init getAdapter
-				var tempPrimitivePort : runtime::type::PrimitivePort
+				var tempPrimitivePort : art::type::PrimitivePort
 				tempPrimitivePort ?= ad.getRealObject(PrimitivePortToUnset,false)
 				
 				tempPrimitivePort.service ?= ad.unsetSingleProperty(refservice, tempPrimitivePort.service)

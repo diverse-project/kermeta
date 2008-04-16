@@ -30,7 +30,7 @@
     <CompositeInstanceToUnset href="templateSystem.xmi#//@root"/>
     <refsubComponent href="templateSystem.xmi#//@root/@subComponent.0"/>
   </adapt>
-  <adapt xsi:type="adaptations:UnsetruntimeinstanceComponentInstance" name="" refstate="ON">
+  <adapt xsi:type="adaptations:UnsetruntimeinstanceComponentInstance" refstate="ON" refname="">
     <ComponentInstanceToUnset href="templateSystem.xmi#//@root/@subComponent.1"/>
     <refbinding href="templateSystem.xmi#//@root/@subComponent.1/@binding.0"/>
   </adapt>

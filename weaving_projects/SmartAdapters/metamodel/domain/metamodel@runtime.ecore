@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="runtime"
-    nsURI="http://www.objectweb.org/models@runtime" nsPrefix="runtime">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="art"
+    nsURI="http://art" nsPrefix="art">
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String"/>
   </eClassifiers>
@@ -23,8 +23,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
-  <eSubpackages name="instance" nsURI="http://www.objectweb.org/models@runtime/instance"
-      nsPrefix="instance">
+  <eSubpackages name="instance" nsURI="http://art/instance" nsPrefix="instance">
     <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" abstract="true"
         eSuperTypes="#//ModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
@@ -71,7 +70,7 @@
           eType="#//type/PrimitivePort"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="type" nsURI="http://www.objectweb.org/models@runtime/type" nsPrefix="type">
+  <eSubpackages name="type" nsURI="http://art/type" nsPrefix="type">
     <eClassifiers xsi:type="ecore:EClass" name="ComponentType" abstract="true" eSuperTypes="#//ModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="port" upperBound="-1"
           eType="#//type/Port" containment="true"/>
@@ -119,5 +118,4 @@
       <eLiterals name="server" value="1"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="impl" nsURI="http://www.objectweb.org/models@runtime/impl" nsPrefix="impl"/>
 </ecore:EPackage>

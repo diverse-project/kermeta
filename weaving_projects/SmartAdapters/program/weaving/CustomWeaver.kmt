@@ -1,0 +1,89 @@
+/* $Id: CustomWeaver.kmt,v 1.1 2008-04-16 13:41:58 bmorin Exp $
+ * Creation date: July 17, 2007
+ * License:
+ * Copyright:
+ * Authors: bmorin
+ */
+
+package weaver;
+ 
+require kermeta
+
+require "platform:/resource/SmartAdapters/program/weaving/print.kmt"
+require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
+
+using kermeta::standard 
+using kermeta::utils
+using kermeta::persistence
+using patternframework
+using org::smartadapters::core
+using org::smartadapters::extension
+using kermeta::pattern
+using kermeta::pattern::flora2
+
+class Weaver
+{
+	operation weaving(baseModelUri : String, adapterUri : String, adaptMMUri : String, 
+			domainMMUri : String, domainMMPatternUri : String, resultUri : String) : Void is do 
+		var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
+	    handler.initialize()
+		var repository:EMFRepository init EMFRepository.new
+
+		var inputMetamodel:Sequence<ecore::EPackage> init Sequence<ecore::EPackage>.new 
+		handler.loadEcoreModel(EMFRepository.new, domainMMUri).each{p | inputMetamodel.add(p)}
+		var inputPatternMetamodel:Sequence<ecore::EPackage> init Sequence<ecore::EPackage>.new 
+		handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri).each{p | inputPatternMetamodel.add(p)}
+
+		var inputModel:Set<Object> init loadModel(repository, baseModelUri, domainMMUri)
+		var rootElement : Object init inputModel.one
+		var inputAdapter:Set<Object> init loadModel(repository, adapterUri, adaptMMUri)
+
+		var adapter:Adapter
+		inputAdapter.select{o | 
+							adapter ?= o 
+							adapter != void
+		} 
+	
+		if (adapter.adapt.size > 0) then
+			adapter.initClone
+			if (adapter.~aspect.template != void) then
+				/*---Pattern matching---*/
+				stdio.writeln("PATTERN MATCHING")
+		        var matcher : PatternMatching init PatternMatchingFlora2.new
+		        var iteBindings : Iterator<Hashtable<Object, Object>> 
+		        	init Iterator<Hashtable<Object, Object>>.new
+		        iteBindings := matcher.optimizedMatch(inputMetamodel, inputModel, adapter.~aspect.template, true, false, true)		                         	       
+						
+			    stdio.writeln("ASPECT WEAVING")
+			 	adapter.setDisplayInfo(false)
+			    adapter.apply(iteBindings.next, rootElement)
+				matcher.finalize
+			end	
+			/*
+			Saving modified base model
+			*/
+			inputModel.clear
+			inputModel.add(rootElement)
+			saveModel(inputModel, resultUri, domainMMUri)		
+		else
+			var e:kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			e.message:="WeavingException: Adapter contains no adaptation or at least one adaptation is not well typed"
+			raise e
+		end		
+	end
+
+    operation loadModel(repository : EMFRepository, modelPath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   
+    	var resource : Resource init repository.createResource(modelPath, metamodelPath)
+       	resource.load()
+        result := resource.instances
+    end	
+	
+    operation saveModel(obj : Set<Object>, uri : String, domainMM : String) is do
+ 		var repository : EMFRepository init EMFRepository.new
+	    var resource : Resource init repository.createResource(uri , domainMM)
+	    obj.each{o | resource.instances.add(o)}
+	    resource.save
+    end
+}

@@ -1,4 +1,4 @@
-/* $Id: test.kmt,v 1.4 2008-04-03 07:17:14 bmorin Exp $
+/* $Id: test.kmt,v 1.5 2008-04-16 13:40:41 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright:
@@ -10,41 +10,44 @@
 
 package test;
 require kermeta
+
+//Loading the aspect weaver (optional, we can use directly Kermeta or another tool like Kompose)
 require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
+
+//Loading the platform adapter (here, the example 1 for the Fractal platform)
+require "platform:/resource/SmartAdapters/program/adapter/FractalAdapterExample1.kmt"
 
 using kermeta::standard 
 using kermeta::utils
 using kermeta::persistence
 using weaver
+using org::kermeta::runtime::adapter
 
 
-
-/**
- * This class provides an example on how to adapt a Fractal running system from Kermeta,
- * using for example SmartAdapters 
- */
 class TestRuntime
 {
 	operation main() : Void is do 
 		stdio.writeln("K> ###START###")
-		var modelUri : String init "platform:/resource/SmartAdapters/examples/runtime/model.xmi"
-		var wovenModelUri : String init "platform:/resource/SmartAdapters/examples/runtime/woven.xmi"
-		var finalModelUri : String init "platform:/resource/SmartAdapters/examples/runtime/result.xmi"
+		var modelUri : String init "platform:/resource/SmartAdapters/examples/runtime/model/model.art"
+		var wovenModelUri : String init "platform:/resource/SmartAdapters/examples/runtime/model/woven.art"
+		var finalModelUri : String init "platform:/resource/SmartAdapters/examples/runtime/model/result.art"
 		var metamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore"
 		
 		
 		var adapterUri : String init "platform:/resource/SmartAdapters/examples/runtime/Adapter.xmi"
 		var adaptMMUri : String init "platform:/resource/SmartAdapters/metamodel/specific/runtime_AOM_Framework1.ecore"
 		var MMPatternUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
+	
 		
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.~init(self)
+		var platformAdapter : PlatformAdapter init PlatformAdapter.new 
+/**->*/	platformAdapter.~init //initializing the connection between the execution platform and Kermeta
 		
 		stdio.writeln("K> Starting the system...")
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.run(self)
+/**->*/ platformAdapter.run //running the system on the execution platform
 		stdio.writeln("K> OK!")
 		
 		stdio.writeln("K> Generating and saving the model...")
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.generateAndSaveEMFModel(self, modelUri)
+/**->*/ platformAdapter.generateAndSaveEMFModel(modelUri) //generating a model from the running system
 		stdio.writeln("K> OK!")
 		
 		//Aspect weaving with SmartAdapters
@@ -52,39 +55,13 @@ class TestRuntime
 		weaver.weaving(modelUri, adapterUri, adaptMMUri, metamodelUri, MMPatternUri, wovenModelUri)
 		
 		stdio.writeln("K> Loading the model...")
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.loadUpdateModel(self, wovenModelUri)
+/**->*/	platformAdapter.loadUpdateModel(wovenModelUri) //loading a modified model into the running system
 		stdio.writeln("K> OK!")
 		
 		stdio.writeln("K> Generating and saving the model...")
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.generateAndSaveEMFModel(self, finalModelUri)
-		stdio.writeln("K> OK!")
-		
-		//Aspect weaving with SmartAdapters (bug Kermeta reflection/enumeration)
-		/*weaver.weaving(wovenModelUri, adapterUri.replace(".xmi","2.xmi"), adaptMMUri, metamodelUri, MMPatternUri, wovenModelUri)
-		stdio.writeln("K> Loading the model...")
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.loadUpdateModel(self, wovenModelUri)
-		stdio.writeln("K> OK!")
-		
-		stdio.writeln("K> Generating and saving the model...")
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.generateAndSaveEMFModel(self, finalModelUri)
-		stdio.writeln("K> OK!")*/
+/**->*/	platformAdapter.generateAndSaveEMFModel(finalModelUri) //generating a model (after adaptation) from the
+		stdio.writeln("K> OK!")									//running system
 		
 		stdio.writeln("K> ###END###")
 	end
-	
-
-    operation loadModel(repository : EMFRepository, modelPath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   
-    	stdio.writeln("K>  loading: "+modelPath+" ("+metamodelPath+")")
-   		var resource : Resource init repository.createResource(modelPath, metamodelPath)
-       	resource.load()
-        result := resource.instances
-    end	
-	
-    operation saveModel(obj : Set<Object>, uri : String, domainMM : String) is do
- 		stdio.writeln("K>  saving: "+uri+" ("+domainMM+")")
-    	var repository : EMFRepository init EMFRepository.new
-	    var resource : Resource init repository.createResource(uri , domainMM)
-	    obj.each{o | resource.instances.add(o)}
-	    resource.save
-    end	
 }

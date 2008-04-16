@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
-<runtime:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:runtime="http://www.objectweb.org/models@runtime/pattern/runtime" xsi:schemaLocation="http://www.objectweb.org/models@runtime/pattern/runtime ../../metamodel/domain/metamodel@runtimePattern.ecore#//runtime">
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xsi:schemaLocation="http://art/pattern/art ../../metamodel/domain/metamodel@runtimePattern.ecore#//art">
   <root state="ON">
     <subComponent state="ON"/>
     <subComponent state="ON">
       <binding serverInstance="//@root/@subComponent.0"/>
     </subComponent>
   </root>
-</runtime:System>
+</art:System>

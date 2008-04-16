@@ -1,0 +1,28 @@
+/* $Id: PlatformAdapter.kmt,v 1.1 2008-04-16 13:41:46 bmorin Exp $
+ * Creation date: March 19, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package org::kermeta::runtime::adapter;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::persistence
+
+abstract class PlatformAdapter
+{
+	operation ~init() : Void is
+		abstract
+		
+	operation run() : Void is
+		abstract
+		
+	operation generateAndSaveEMFModel(modelUri : String) : Void is
+		abstract
+		
+	operation loadUpdateModel(modelUri : String) : Void is 
+		abstract	
+}		

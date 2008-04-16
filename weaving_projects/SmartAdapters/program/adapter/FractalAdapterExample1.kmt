@@ -1,0 +1,23 @@
+/* $Id: FractalAdapterExample1.kmt,v 1.1 2008-04-16 13:41:46 bmorin Exp $
+ * Creation date: March 19, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package org::kermeta::runtime::adapter;
+
+require kermeta
+require "platform:/resource/SmartAdapters/program/adapter/FractalAdapter.kmt"
+
+
+using kermeta::standard
+using kermeta::persistence
+
+aspect class PlatformAdapter
+{
+	operation run() : Void is
+	do
+		extern org::kermeta::smartadapters::runtime::fractal::Example1.run(self)
+	end
+}

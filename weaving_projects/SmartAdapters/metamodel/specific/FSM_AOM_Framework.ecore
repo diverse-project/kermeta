@@ -385,7 +385,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Derivation" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
         <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-            eType="#//smartadapters/extension/DerivationElement"/>
+            eType="#//smartadapters/extension/DerivationElement" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="selectedOptions" upperBound="-1"
             eType="#//smartadapters/extension/AdapterElement"/>
       </eClassifiers>
