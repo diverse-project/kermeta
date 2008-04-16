@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.21 2008-04-15 18:24:57 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.22 2008-04-16 16:59:56 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -25,9 +25,7 @@ using km2ecore
 using kermeta::standard
 
 class Main
-{
-	//attribute repository : EMFRepository [1..1]
-	
+{	
 	reference context : KM2EcoreContext [1..1]
 
     operation main_inner() : Void is do
@@ -47,8 +45,6 @@ class Main
 
 		context := KM2EcoreContext.new
 		context.initialize()
-
-		//repository := EMFRepository.new
 
 		context.mus.add(loadKmModel(EMFRepository.new, input))
 
