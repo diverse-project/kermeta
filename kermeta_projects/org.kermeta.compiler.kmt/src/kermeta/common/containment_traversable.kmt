@@ -1,4 +1,4 @@
-/* $Id: containment_traversable.kmt,v 1.8 2008-04-14 07:50:36 cfaucher Exp $
+/* $Id: containment_traversable.kmt,v 1.9 2008-04-16 17:00:35 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -32,6 +32,14 @@ package structure {
 	aspect class ModelingUnit {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
 	   		super(func)
+			
+			self.requires.each{p|
+				func(p)
+			}
+			
+			self.usings.each{p|
+				func(p)
+			}
 			
 			self.packages.each{p|
 				func(p)

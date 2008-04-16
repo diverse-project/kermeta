@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.13 2008-04-14 07:50:36 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.14 2008-04-16 17:00:35 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -38,6 +38,18 @@ aspect class ModelingUnit {
 		self.packages.each{p|
 			self.ecorePackages.add( p.ecoreModelElement )
 		}
+	end
+}
+
+aspect class Require {
+	method applyPass1(context : KM2EcoreContext) is do
+		self.createEcoreModelElement(context)
+	end
+}
+
+aspect class Using {
+	method applyPass1(context : KM2EcoreContext) is do
+		self.createEcoreModelElement(context)
 	end
 }
 

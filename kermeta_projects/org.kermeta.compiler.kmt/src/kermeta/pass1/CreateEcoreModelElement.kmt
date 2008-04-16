@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.12 2008-04-14 07:50:36 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.13 2008-04-16 17:00:35 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -12,7 +12,6 @@ package kermeta::language::structure;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "../common/containment_traversable.kmt"
-//require "../common/ContainmentBasedActionPerformer_Kermeta.kmt"
 require "../helper/KM2EcoreHelper.kmt"
 require "../common/exception.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
@@ -24,6 +23,7 @@ using km2ecore::helper::ecore
 using km2ecore::helper::kermeta
 using km2ecore::common::exception
 
+
 /**
  *
  */
@@ -31,39 +31,60 @@ aspect class ModelingUnit {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EAnnotation is do
 		var ecoreAnnotation : EAnnotation init EAnnotation.new
 		ecoreAnnotation.source := "ModelingUnit"
-		// Creation of the require entry
+		
 		var requireEntry : EStringToStringMapEntry init EStringToStringMapEntry.new
 		requireEntry.key := "require"
-		var v : StringBuffer init StringBuffer.new
-		self.requires.each{r|
-			v.append( r.uri + "|" )
-		}
-		requireEntry.~value := v.toString()
-		// Creation of the using entry
-		var usingEntry : EStringToStringMapEntry init EStringToStringMapEntry.new
-		usingEntry.key := "using"
-		v := StringBuffer.new
-		self.usings.each{u|
-			v.append( u.qualifiedName + "|" )
-		}
-		usingEntry.~value := v.toString()
+		requireEntry.~value := ""
 		// Setting the details
 		ecoreAnnotation.details.add(requireEntry)
+		
+		var usingEntry : EStringToStringMapEntry init EStringToStringMapEntry.new
+		usingEntry.key := "using"
+		usingEntry.~value := ""
+		// Setting the details
 		ecoreAnnotation.details.add(usingEntry)
+		
+		//self.eachOwnedElement{ omu | omu.createEcoreModelElement(context) }
+
 		result := ecoreAnnotation
 	end
 }
 
 /**
- * FIXME: This should be used to thread the require tag
+ * 
  */
 aspect class Require {
+	operation createEcoreModelElement(context : KM2EcoreContext) : EAnnotation is do
+		
+		var ecoreAnnotation : EAnnotation init self.container.asType(ModelingUnit).ecoreModelElement
+		
+		// Get of the require entry
+		var requireEntry : EStringToStringMapEntry init ecoreAnnotation.details.detect{ d | d.key == "require" }
+		
+		requireEntry.~value := requireEntry.~value + self.uri + "|"
+		
+		result := ecoreAnnotation
+	end
 }
 
 /**
- * FIXME: This should be used to thread the require tag
+ * 
  */
 aspect class Using {
+	operation createEcoreModelElement(context : KM2EcoreContext) : EAnnotation is do
+		
+		var ecoreAnnotation : EAnnotation init self.container.asType(ModelingUnit).ecoreModelElement
+		
+		// Get of the using entry
+		var usingEntry : EStringToStringMapEntry init ecoreAnnotation.details.detect{ d | d.key == "using" }
+		
+		usingEntry.~value := usingEntry.~value + self.qualifiedName + "|"
+		
+		// Setting the details
+		ecoreAnnotation.details.add(usingEntry)
+		
+		result := ecoreAnnotation
+	end
 }
 
 /**
@@ -85,7 +106,12 @@ aspect class Package {
 		
 		// In order complete the EMF checking, we have to set the nsPrefix to "", void is not enough
 		ecorePackage.nsPrefix := ""
-		result := ecorePackage	
+		result := ecorePackage
+	
+		/*rescue (e : UndefinedUriEPackageException) do
+			e.message := self.qualifiedName
+			stdio.writeln(e.message)
+		end*/
 	end
 }
 
