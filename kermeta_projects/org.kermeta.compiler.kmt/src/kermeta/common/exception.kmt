@@ -1,4 +1,4 @@
-/* $Id: exception.kmt,v 1.1 2008-02-22 10:58:54 cfaucher Exp $
+/* $Id: exception.kmt,v 1.2 2008-04-16 17:12:34 cfaucher Exp $
  * Creation date: February 22, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -11,5 +11,7 @@ package km2ecore::common::exception;
 require kermeta
 
 using kermeta::exceptions
+using kermeta::standard
 
-class UndefinedUriEPackageException inherits Exception {}
+class UndefinedUriEPackageException inherits Exception {
+}

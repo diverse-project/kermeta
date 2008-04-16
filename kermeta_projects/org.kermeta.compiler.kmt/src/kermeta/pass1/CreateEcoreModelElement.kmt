@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.13 2008-04-16 17:00:35 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.14 2008-04-16 17:12:33 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -108,10 +108,9 @@ aspect class Package {
 		ecorePackage.nsPrefix := ""
 		result := ecorePackage
 	
-		/*rescue (e : UndefinedUriEPackageException) do
-			e.message := self.qualifiedName
-			stdio.writeln(e.message)
-		end*/
+		rescue (e : UndefinedUriEPackageException) do
+			stdio.errorln("The uri of the Package: " + self.qualifiedName + " is not correctly setted, please check this one in the *.km file that you try to load.")
+		end
 	end
 }
 
