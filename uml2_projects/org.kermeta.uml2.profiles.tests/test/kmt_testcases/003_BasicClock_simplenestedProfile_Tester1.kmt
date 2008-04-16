@@ -1,4 +1,4 @@
-/* $Id: 003_BasicClock_simplenestedProfile_Tester1.kmt,v 1.1 2008-02-11 15:08:18 dvojtise Exp $
+/* $Id: 003_BasicClock_simplenestedProfile_Tester1.kmt,v 1.2 2008-04-16 08:41:34 dvojtise Exp $
  * Creation date: June 29, 2007
  * License:
  * Copyright:
@@ -17,8 +17,10 @@ package basicClocknestedProfileTester_003;
 
  
 require kermeta
+require "platform:/plugin/org.kermeta.uml2.profiles.model/src/kmt/persistence/UMLResource.kmt"
 require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
 require "./ecore/BasicClock_simple_nested.profile.ecore"
+
 //require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
  
 using kermeta::persistence
@@ -40,11 +42,11 @@ class TestBasicClockNestedProfile inherits kermeta::kunit::TestCase
  	 * entry operation for running in standalone 
  	 */
  	operation mainTester() is do
- 		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+ 		/*var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
 		tr.run(TestBasicClockNestedProfile)
-		tr.printTestResult 
-		//setUp
-		//testLoadAndVisit
+		tr.printTestResult */ 
+		setUp
+		testLoadAndVisit
  	end
 	
 	method setUp() is do
@@ -59,9 +61,10 @@ class TestBasicClockNestedProfile inherits kermeta::kunit::TestCase
 	end
 	
 	operation testLoadAndVisit() : Void is do 
-		var rep : Repository  init EMFRepository.new
-		resource := rep.createResource(platformURI +"/org.kermeta.uml2.profiles.tests/test/kmt_testcases/uml/003_BasicClock_simplenested_test1.uml",
+		var rep : EMFRepository  init EMFRepository.new
+		resource := rep.createUMLResource(platformURI +"/org.kermeta.uml2.profiles.tests/test/kmt_testcases/uml/003_BasicClock_simplenested_test1.uml",
 		     "")
+		stdio.writeln(resource.toString)
 			//"../../model/ecore/Standard.profile.ecore")
 		resource.load
 		umlHelper := profiledResourceHelper::ProfilesHelper.new.initialize(resource,resource)
@@ -108,6 +111,7 @@ class TestBasicClockNestedProfile inherits kermeta::kunit::TestCase
 		stdio.write(indent + "class " + cl.name)
 		// all class of the test model must have some stereotype
 		assertTrueWithMsg(umlHelper.getStereotypesFor(cl).size > 0, "class " + cl.name + " has no stereotype")
+		stdio.write(indent + "got stereotype")
 		umlHelper.getStereotypesFor(cl).each{st | 		
 			stdio.write(" <" + st.getMetaClass.name +">")
 			if ( cl.name == "class1" ) then
