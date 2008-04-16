@@ -40,7 +40,7 @@
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
       </objectContribution>
       <objectContribution
-            id="org.kermeta.compiler.compilekmtcontribution"
+            id="org.kermeta.compiler.compilekmcontribution"
             nameFilter="*.km"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
