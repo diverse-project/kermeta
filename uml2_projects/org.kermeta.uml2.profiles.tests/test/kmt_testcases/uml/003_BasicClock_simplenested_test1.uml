@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BasicClock_simplenesting="http:///schemas/BasicClock_simplenesting/_QkxiENiOEdyxavmcihkAeA/1" xmlns:DidierProfile_simplenested="http://BasicClock_simplenesting/schemas/DidierProfile_simplenested/_R1PEYNiOEdyxavmcihkAeA/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/BasicClock_simplenesting/_QkxiENiOEdyxavmcihkAeA/1 ../uml.profiles/BasicClock_simple_nested.profile.uml#_Qk6sANiOEdyxavmcihkAeA http://BasicClock_simplenesting/schemas/DidierProfile_simplenested/_R1PEYNiOEdyxavmcihkAeA/1 ../uml.profiles/BasicClock_simple_nested.profile.uml#_R1Y1YNiOEdyxavmcihkAeA">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BasicClock_simplenesting="http:///schemas/BasicClock_simplenesting/_911_ANpUEdy2eZEpcry9cw/0" xmlns:DidierProfile_simplenested="http://BasicClock_simplenesting/schemas/DidierProfile_simplenested/_BK7rgNpVEdy2eZEpcry9cw/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/BasicClock_simplenesting/_911_ANpUEdy2eZEpcry9cw/0 ../uml.profiles/BasicClock_simple_nested.profile.uml#_92cb8dpUEdy2eZEpcry9cw http://BasicClock_simplenesting/schemas/DidierProfile_simplenested/_BK7rgNpVEdy2eZEpcry9cw/0 ../uml.profiles/BasicClock_simple_nested.profile.uml#_BK7rgtpVEdy2eZEpcry9cw">
   <uml:Model xmi:id="_qb8akM37EdqwVrslYOdUDA">
     <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="003_BasicClock_simplenested_test1">
       <packagedElement xmi:type="uml:Class" xmi:id="_vF4T8NiOEdyxavmcihkAeA" name="Class1"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_viVmcNiOEdyxavmcihkAeA" name="Class2"/>
     </packagedElement>
-    <profileApplication xmi:id="_1Wk18NiOEdyxavmcihkAeA">
-      <eAnnotations xmi:id="_1Wk18diOEdyxavmcihkAeA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../uml.profiles/BasicClock_simple_nested.profile.uml#_Qk6sANiOEdyxavmcihkAeA"/>
+    <profileApplication xmi:id="_XwgKMNpVEdy2eZEpcry9cw">
+      <eAnnotations xmi:id="_XwgKMdpVEdy2eZEpcry9cw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../uml.profiles/BasicClock_simple_nested.profile.uml#_92cb8dpUEdy2eZEpcry9cw"/>
       </eAnnotations>
       <appliedProfile href="../uml.profiles/BasicClock_simple_nested.profile.uml#_TfHs0J0FEdyQn82cfiZ14g"/>
     </profileApplication>
-    <profileApplication xmi:id="_1Wt_4NiOEdyxavmcihkAeA">
-      <eAnnotations xmi:id="_1Wt_4diOEdyxavmcihkAeA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../uml.profiles/BasicClock_simple_nested.profile.uml#_R1Y1YNiOEdyxavmcihkAeA"/>
+    <profileApplication xmi:id="_XwgKMtpVEdy2eZEpcry9cw">
+      <eAnnotations xmi:id="_XwgKM9pVEdy2eZEpcry9cw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../uml.profiles/BasicClock_simple_nested.profile.uml#_BK7rgtpVEdy2eZEpcry9cw"/>
       </eAnnotations>
       <appliedProfile href="../uml.profiles/BasicClock_simple_nested.profile.uml#_hupCgNiNEdyh-OqsYD_bqg"/>
     </profileApplication>
   </uml:Model>
-  <BasicClock_simplenesting:AbstractWatch xmi:id="_2qBa0NiOEdyxavmcihkAeA" base_Class="_vF4T8NiOEdyxavmcihkAeA"/>
-  <DidierProfile_simplenested:DidierWatch xmi:id="_3kuvkNiOEdyxavmcihkAeA" base_Class="_viVmcNiOEdyxavmcihkAeA"/>
+  <BasicClock_simplenesting:AbstractWatch xmi:id="_aGtzoNpVEdy2eZEpcry9cw" base_Class="_vF4T8NiOEdyxavmcihkAeA"/>
+  <DidierProfile_simplenested:DidierWatch xmi:id="_bP30ENpVEdy2eZEpcry9cw" base_Class="_viVmcNiOEdyxavmcihkAeA"/>
 </xmi:XMI>
