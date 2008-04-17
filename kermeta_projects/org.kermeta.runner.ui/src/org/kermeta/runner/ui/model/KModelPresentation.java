@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.ILineBreakpoint;
 import org.eclipse.debug.core.model.IValue;
+import org.eclipse.debug.core.sourcelookup.containers.LocalFileStorage;
 import org.eclipse.debug.ui.IDebugModelPresentation;
 import org.eclipse.debug.ui.IValueDetailListener;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -30,6 +31,7 @@ import org.kermeta.runner.model.variable.KAttribute;
 import org.kermeta.runner.model.variable.KParameter;
 import org.kermeta.runner.model.variable.KReference;
 import org.kermeta.runner.model.variable.KVariable;
+import org.kermeta.texteditor.KLocalFileEditorInput;
 
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
@@ -124,6 +126,10 @@ public class KModelPresentation extends LabelProvider implements IDebugModelPres
 		if (element instanceof ILineBreakpoint) {
 			return new FileEditorInput((IFile)((ILineBreakpoint)element).getMarker().getResource());
 		}
+		if ( element instanceof LocalFileStorage ) {
+			LocalFileStorage lfs = (LocalFileStorage) element;
+			return new KLocalFileEditorInput(lfs);
+		}
 		return null;
 	}
 	/* (non-Javadoc)
@@ -133,6 +139,10 @@ public class KModelPresentation extends LabelProvider implements IDebugModelPres
 		if ( element instanceof IFile ) {
 			IFile f = (IFile) element;
 			return getEditorId(f);
+		}
+		if ( element instanceof LocalFileStorage ) {
+			LocalFileStorage lfs = (LocalFileStorage) element;
+			return getEditorId(lfs);
 		}
 		if (element instanceof ILineBreakpoint) {
 			IResource r = ((ILineBreakpoint) element).getMarker().getResource();
@@ -144,6 +154,14 @@ public class KModelPresentation extends LabelProvider implements IDebugModelPres
 	
 	private String getEditorId(IFile f) {
 		if ( f.getFileExtension().equals("kmt") )
+			//return "org.eclipse.ui.DefaultTextEditor";
+			return "org.kermeta.ui.editors.kmt.editor";
+		else
+			return "org.eclipse.ui.DefaultTextEditor";
+	}
+	
+	private String getEditorId(LocalFileStorage f) {
+		if ( f.getFullPath().getFileExtension().equals("kmt") )
 			//return "org.eclipse.ui.DefaultTextEditor";
 			return "org.kermeta.ui.editors.kmt.editor";
 		else
