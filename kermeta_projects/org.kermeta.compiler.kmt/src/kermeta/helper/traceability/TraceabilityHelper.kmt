@@ -1,0 +1,32 @@
+/* $Id: TraceabilityHelper.kmt,v 1.1 2008-04-17 15:23:38 ftanguy Exp $
+ * Creation date: April 17, 2008
+ * License:
+ * Copyright:
+ * Authors: François Tanguy
+ 			Cyril Faucher
+ */
+
+package km2ecore::helper::traceability;
+
+require kermeta
+require "http://www.kermeta.org/Traceability"
+
+using traceability
+using kermeta::standard
+using kermeta::exceptions
+
+class TraceabilityHelper {
+
+	operation getFirstTextReference(mr : ModelReference) : TextReference is do
+		var c : Sequence<Reference> init mr.sourceTraces.collect{t|
+			t.sourceReferences.detect{ sr | sr.isInstanceOf(TextReference) }
+		}
+		do
+			var tr : TextReference init c.first.asType(TextReference)
+			result := tr
+		rescue (e : EmptyCollection)
+			result := void			
+		end
+	end
+
+}

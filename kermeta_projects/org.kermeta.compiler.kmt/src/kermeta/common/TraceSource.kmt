@@ -1,0 +1,29 @@
+/* $Id: TraceSource.kmt,v 1.1 2008-04-17 15:23:37 ftanguy Exp $
+ * Creation date: April 17, 2008
+ * License:
+ * Copyright:
+ * Authors: François Tanguy
+ *			Cyril Faucher
+ */
+
+package kermeta::language::structure;
+
+
+require kermeta
+
+using kermeta::standard
+
+/**
+ *
+ * TraceSource aspect keeps track of source information like the file name 
+ * and the line number where objects are declared. This is used for Java generation.
+ * At runtime this information can be used for debug purpose or stack printing. 
+ *
+ */
+aspect class Object {
+	/**		The kmt file that declares the object.		*/
+	attribute fileName : String
+
+	/**		The line number where the object is declared in the source file.	*/
+	attribute lineNumber : Integer
+}

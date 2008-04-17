@@ -1,0 +1,90 @@
+/* $Id: TestPass0.kmt,v 1.1 2008-04-17 15:23:37 ftanguy Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *			Francois Tanguy <ftanguy@irisa.fr>
+ */
+
+
+package kermeta::language::structure;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "../common/trace_structure.kmt"
+require "../helper/KM2EcoreHelper.kmt"
+require "../common/TraceSource.kmt"
+
+using ecore
+using km2ecore
+using km2ecore::helper::kermeta
+
+aspect class Object {
+	operation testSourceTrace(context : KM2EcoreContext) is do
+		if ( not self.fileName.isVoid() ) then
+			stdio.writeln( self.getMetaClass().name + " : " + self.fileName + " " + self.lineNumber.toString )
+		else
+			stdio.writeln( self.toString + " does not have source traces." )
+		end
+	end
+}
+
+aspect class ModelingUnit {
+	method testSourceTrace(context : KM2EcoreContext) is do
+		super(context)
+		// Compile the owned elements
+		self.eachOwnedElement{ p | p.testSourceTrace(context) }
+	end
+}
+
+aspect class Package {
+	method testSourceTrace(context : KM2EcoreContext) is do
+		super(context)
+		// Compile the owned elements
+		self.eachOwnedElement{ cd | cd.testSourceTrace(context) }
+	end
+}
+
+aspect class PrimitiveType {
+	method testSourceTrace(context : KM2EcoreContext) is do
+		super(context)
+		// Compile the owned elements
+		self.eachOwnedElement{ cd | cd.testSourceTrace(context) }
+	end 
+}
+
+aspect class Enumeration { 
+	method testSourceTrace(context : KM2EcoreContext) is do
+		super(context)
+		// Compile the owned elements
+		self.eachOwnedElement{ l | l.testSourceTrace(context) }
+	end
+} 
+  
+aspect class ClassDefinition {
+	method testSourceTrace(context : KM2EcoreContext) is do
+		super(context)
+		// Compile the owned elements
+		self.eachOwnedElement{ o |
+			o.testSourceTrace(context)
+		}
+	end
+	
+} 
+  
+aspect class Property {
+	method testSourceTrace(context : KM2EcoreContext) is do
+		super(context)
+		// Compile the owned elements
+		self.eachOwnedElement{ o | o.testSourceTrace(context) }
+	end 
+}
+
+aspect class Operation {
+	method testSourceTrace(context : KM2EcoreContext) is do
+		super(context)
+		// Compile the owned elements
+		self.eachOwnedElement{ o | o.testSourceTrace(context) }
+	end
+}

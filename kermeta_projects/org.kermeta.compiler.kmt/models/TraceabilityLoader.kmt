@@ -1,0 +1,48 @@
+/* $Id: TraceabilityLoader.kmt,v 1.1 2008-04-17 15:23:37 ftanguy Exp $
+ * Creation date: April 17, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "http://www.kermeta.org/Traceability"
+
+using kermeta::persistence
+using traceability
+using kermeta::standard
+using kermeta::exceptions
+
+class Main {
+	operation main() : Void is do
+		var rp : EMFRepository init EMFRepository.new
+		var resource : Resource init rp.getResource("Attempt01_merged.traceability")
+	
+		var tm : TraceModel
+		tm ?= resource.instances().one
+	
+		tm.references.each{ r | 
+			if ( r.isInstanceOf(ModelReference) ) then
+				var mr : ModelReference init r.asType(ModelReference)
+				var c : Sequence<Reference> init mr.sourceTraces.collect{t|
+					t.sourceReferences.detect{ sr | sr.isInstanceOf(TextReference) }
+				}
+				do
+					var tr : TextReference init c.first.asType(TextReference)
+					stdio.writeln( mr.refObject.toString )
+					stdio.writeln( tr.fileURI + " " + tr.lineBeginAt.toString )
+					stdio.writeln("****************************************************************")
+				rescue (e : EmptyCollection)
+					
+				end
+			end
+		}
+	
+	end
+}

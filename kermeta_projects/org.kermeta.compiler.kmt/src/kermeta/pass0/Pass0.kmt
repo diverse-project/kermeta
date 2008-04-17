@@ -1,0 +1,37 @@
+/* $Id: Pass0.kmt,v 1.1 2008-04-17 15:23:37 ftanguy Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *			Francois Tanguy <ftanguy@irisa.fr>
+ */
+
+
+package km2ecore;
+
+
+require kermeta
+require "../helper/KM2EcoreHelper.kmt"
+require "../common/TraceSource.kmt"
+
+using km2ecore::helper::traceability
+using traceability
+
+class SourceTracer {
+
+	operation addSourceInformation(model : TraceModel) is do
+		if ( not model.isVoid() ) then
+			model.references.each{ r |
+				if ( r.isInstanceOf(ModelReference) ) then
+					var mr : ModelReference init r.asType(ModelReference)
+					var tr : TextReference init TraceabilityHelper.new.getFirstTextReference(mr)
+					if ( not tr.isVoid() ) then
+						mr.refObject.fileName := tr.fileURI
+						mr.refObject.lineNumber := tr.lineBeginAt
+					end
+				end
+			}
+		end
+	end
+
+}

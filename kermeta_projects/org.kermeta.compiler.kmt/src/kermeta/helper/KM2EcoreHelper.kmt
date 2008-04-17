@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreHelper.kmt,v 1.9 2008-04-10 15:03:06 cfaucher Exp $
+/* $Id: KM2EcoreHelper.kmt,v 1.10 2008-04-17 15:23:38 ftanguy Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -11,3 +11,4 @@ package km2ecore::helper;
 require "kermeta/KermetaHelper.kmt" 
 require "ecore/EcoreHelper.kmt"
 require "java/JavaHelper.kmt"
+require "traceability/TraceabilityHelper.kmt"
