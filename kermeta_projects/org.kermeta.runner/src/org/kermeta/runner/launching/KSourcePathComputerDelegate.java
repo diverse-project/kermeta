@@ -11,15 +11,22 @@
  *******************************************************************************/
 package org.kermeta.runner.launching;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.sourcelookup.ISourceContainer;
 import org.eclipse.debug.core.sourcelookup.ISourcePathComputerDelegate;
+import org.eclipse.debug.core.sourcelookup.containers.DirectorySourceContainer;
 import org.eclipse.debug.core.sourcelookup.containers.FolderSourceContainer;
 import org.eclipse.debug.core.sourcelookup.containers.WorkspaceSourceContainer;
 
@@ -38,11 +45,23 @@ public class KSourcePathComputerDelegate implements ISourcePathComputerDelegate 
 	public ISourceContainer[] computeSourceContainers(ILaunchConfiguration configuration, IProgressMonitor monitor) throws CoreException {
 		String path = configuration.getAttribute(KConstants.KM_FILENAME, (String)null);
 		ISourceContainer sourceContainer = null;
+		DirectorySourceContainer frameworkContainer = null;
+		
 		if (path != null) {
 			IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(path));
 			if (resource != null) {
 				IProject container = resource.getProject();
 				sourceContainer = new FolderSourceContainer(container, true);
+
+				URL ioPluginURL = Platform.getBundle("fr.irisa.triskell.kermeta.framework").getEntry("/src/kermeta");
+				try {
+					URL resolvedURL = FileLocator.resolve(ioPluginURL);
+					String ioPluginLocation = resolvedURL.toString().replace("file:", "");
+					frameworkContainer = new DirectorySourceContainer( new Path(ioPluginLocation), true );
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				/*IContainer container = resource.getParent();
 				if (container.getType() == IResource.PROJECT) {
 					sourceContainer = new ProjectSourceContainer((IProject)container, false);
@@ -54,6 +73,6 @@ public class KSourcePathComputerDelegate implements ISourcePathComputerDelegate 
 		if (sourceContainer == null) {
 			sourceContainer = new WorkspaceSourceContainer();
 		}
-		return new ISourceContainer[]{sourceContainer};
+		return new ISourceContainer[]{sourceContainer, frameworkContainer};
 	}
 }
