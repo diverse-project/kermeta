@@ -1,4 +1,4 @@
-/* $Id: EAnnotationHelper.kmt,v 1.6 2008-04-10 15:03:06 cfaucher Exp $
+/* $Id: EAnnotationHelper.kmt,v 1.7 2008-04-17 13:15:37 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -11,9 +11,11 @@ package km2ecore::helper::ecore;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "../../common/trace_structure.kmt"
+require "../../helper/kermeta/KermetaHelper.kmt"
 
 using kermeta::language::structure
 using ecore
+using km2ecore::helper::kermeta
 
 class EAnnotationHelper {
 	
@@ -56,13 +58,9 @@ class EAnnotationHelper {
 		result := void
 		if not obj.container.isVoid() then
 			
-			var ecoreMEProp : Property init obj.container.getMetaClass().classDefinition.allAttribute().detect{ prop |
-				//stdio.writeln("prop.name: " + prop.name)
-				prop.name=="ecoreModelElement"
-			}
-			
+			var ecoreMEProp : Property init ObjectHelper.new.getPropertyValue(obj.container, "ecoreModelElement")
+						
 			if (not ecoreMEProp.isVoid()) and (not obj.container.get(ecoreMEProp).isVoid()) then
-				//stdio.writeln("obj.container.getMetaClass().classDefinition.name: " + ecoreMEProp.name.toString())
 				result := obj.container.get(ecoreMEProp).asType(EModelElement).eAnnotations.detect{ t |
 					t.source==KermetaEAnnotationSource.kermeta.name.toString()
 				}
