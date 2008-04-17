@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmCreationUtils.java,v 1.8 2008-02-14 15:53:44 cfaucher Exp $
+ * $Id: KmCreationUtils.java,v 1.9 2008-04-17 12:06:12 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -217,19 +217,19 @@ public class KmCreationUtils extends AbstractCreationUtils {
 	public GraphElement createGraphElement(EObject obj, String presentation) {
 		Object graphElt = null;
 
-		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta".equals(obj.eClass()
+		if ("http://www.kermeta.org/kermeta/1_2_0//kermeta".equals(obj.eClass()
 				.getEPackage().getNsURI())) {
 			graphElt = new GraphicKmSwitch(presentation).doSwitch(obj);
 		}
-		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language".equals(obj
+		if ("http://www.kermeta.org/kermeta/1_2_0//kermeta/language".equals(obj
 				.eClass().getEPackage().getNsURI())) {
 			graphElt = new GraphicLanguageSwitch(presentation).doSwitch(obj);
 		}
-		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language/behavior"
+		if ("http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
 				.equals(obj.eClass().getEPackage().getNsURI())) {
 			graphElt = new GraphicBehaviorSwitch(presentation).doSwitch(obj);
 		}
-		if ("http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure"
+		if ("http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure"
 				.equals(obj.eClass().getEPackage().getNsURI())) {
 
 			// Switch according to the property type

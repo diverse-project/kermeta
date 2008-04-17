@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmSimpleObjectConstants.java,v 1.4 2008-02-14 15:53:46 cfaucher Exp $
+ * $Id: KmSimpleObjectConstants.java,v 1.5 2008-04-17 12:06:12 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -18,9 +18,4 @@ public interface KmSimpleObjectConstants {
 	 * @generated
 	 */
 	String SIMPLE_OBJECT_INHERITANCE = "Inheritance";
-	/**
-	 * The name that identify the <i>PropertyBiDirec</i> SimpleObject.
-	 * @generated
-	 */
-	String SIMPLE_OBJECT_PROPERTYBIDIREC = "PropertyBiDirec";
 }

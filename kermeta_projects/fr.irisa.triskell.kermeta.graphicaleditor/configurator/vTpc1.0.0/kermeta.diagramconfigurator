@@ -50,7 +50,6 @@
     <genClass href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/Operation"/>
   </objects>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_pi_DyRp7Edyx1YiRXapfag" name="Inheritance"/>
-  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_xJVu4B2hEdyYPoyw7qeztQ" name="PropertyBiDirec"/>
   <genModel href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#/"/>
   <templateRootObject href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/ModelingUnit"/>
   <editorConfigurator href="kermeta.editorconfigurator#_zoDPQBp7Edyx1YiRXapfag"/>

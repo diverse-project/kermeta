@@ -20,7 +20,7 @@
         isWidthResizable="true"
         isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kermeta.org/kermeta/1_0_0//kermeta#//language/structure/Package"/>
+            <type href="http://www.kermeta.org/kermeta/1_2_0//kermeta#//language/structure/Package"/>
         </bridge>
     </node>
     <node
@@ -39,7 +39,7 @@
         isWidthResizable="true"
         isHeightResizable="false">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kermeta.org/kermeta/1_0_0//kermeta#//language/structure/ClassDefinition"/>
+            <type href="http://www.kermeta.org/kermeta/1_2_0//kermeta#//language/structure/ClassDefinition"/>
         </bridge>
     </node>
     <node
@@ -58,7 +58,7 @@
         isWidthResizable="true"
         isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kermeta.org/kermeta/1_0_0//kermeta#//language/structure/Property"/>
+            <type href="http://www.kermeta.org/kermeta/1_2_0//kermeta#//language/structure/Property"/>
         </bridge>
     </node>
     <node
@@ -77,7 +77,7 @@
         isWidthResizable="true"
         isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kermeta.org/kermeta/1_0_0//kermeta#//language/structure/Operation"/>
+            <type href="http://www.kermeta.org/kermeta/1_2_0//kermeta#//language/structure/Operation"/>
         </bridge>
     </node>
     <edge
@@ -97,7 +97,7 @@
         lineWidth="1"
         lineStyle="SOLID">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kermeta.org/kermeta/1_0_0//kermeta#//language/structure/Property"/>
+            <type href="http://www.kermeta.org/kermeta/1_2_0//kermeta#//language/structure/Property"/>
         </bridge>
     </edge>
 </graphconf:DiagramGraphConf>

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmPaletteManager.java,v 1.4 2008-02-14 15:53:45 cfaucher Exp $
+ * $Id: KmPaletteManager.java,v 1.5 2008-04-17 12:06:12 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -142,13 +142,6 @@ public class KmPaletteManager extends ModelerPaletteManager {
 		entries.add(new ModelerConnectionCreationToolEntry("Property",
 				"Property", factory, KmImageRegistry
 						.getImageDescriptor("PROPERTYEDGE"), null));
-
-		factory = new GraphElementCreationFactory(creationUtils,
-				KmSimpleObjectConstants.SIMPLE_OBJECT_PROPERTYBIDIREC,
-				"default", false);
-		entries.add(new ModelerConnectionCreationToolEntry(
-				"Bi-directional property", "Bi-directional property", factory,
-				KmImageRegistry.getImageDescriptor("PROPERTYBIDIREC"), null));
 
 		edgeDrawer.addAll(entries);
 		getRoot().add(edgeDrawer);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kermeta_language_structure:ModelingUnit xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure">
+<kermeta_language_structure:ModelingUnit xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
 	<packages name="%name%" uri="http://%name%"/>
 	<requires uri="kermeta"/>
 </kermeta_language_structure:ModelingUnit>
