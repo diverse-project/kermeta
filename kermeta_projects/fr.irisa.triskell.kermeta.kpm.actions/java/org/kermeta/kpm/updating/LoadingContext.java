@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingContext.java,v 1.4 2008-04-14 06:50:00 ftanguy Exp $
+/*$Id: LoadingContext.java,v 1.5 2008-04-17 14:11:16 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	LoadingContext.java
 * License : EPL
@@ -93,9 +93,9 @@ public class LoadingContext implements IAction {
 					 * Marking errors if there are some.
 					 * 
 					 */
-					if (kermetaUnit.isErroneous() ) {
+					if (currentUnit.isErroneous() ) {
 						IFile file = ResourceHelper.getIFile( currentUnit.getUri() );
-						KermetaMarkersHelper.createMarkers(file, kermetaUnit);
+						KermetaMarkersHelper.createMarkers(file, currentUnit);
 					} else {
 						/*
 						 * 
