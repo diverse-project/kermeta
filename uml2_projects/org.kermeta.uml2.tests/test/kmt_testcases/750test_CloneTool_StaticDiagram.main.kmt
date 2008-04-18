@@ -1,4 +1,4 @@
-/* $Id: 750test_CloneTool_StaticDiagram.main.kmt,v 1.11 2008-04-15 08:39:14 vmahe Exp $
+/* $Id: 750test_CloneTool_StaticDiagram.main.kmt,v 1.12 2008-04-18 15:55:33 vmahe Exp $
  * Creation date: Summer 2006
  * License:		Eclipse Public License
  * Copyright:	INRIA
@@ -63,7 +63,6 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     	var testRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var testResource : kermeta::persistence::EMFResource
     	testResource ?= testRepository.getResource(cloneModelName)
-    	stdio.writeln("DEBUG - getResource : PASSED")
     	
     	// "instances" only gives the main diagramm package for the targeted code tree
     	testModel ?= testResource.instances.one
@@ -81,6 +80,12 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     		"the object returned by cloneModel() method must be a Model")
     	assertTrueWithMsg(testModel != origModel,
     		"the clone object must be different than the original")
+	end
+    
+    operation test_CloneTool_StaticDiagramTree() is do
+    	// test the containment of model elements
+    	assertTrueWithMsg(testResource.instances.size == 1,
+    		"there are elements of the clone model that are not stored in the model tree")
     end
     operation test_CloneTool_StaticDiagramClasses() is do
     	assertTrueWithMsg(testPackage.packagedElement.select{ u | u.name == "AClass" }.size == 1,
