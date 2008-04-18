@@ -13,14 +13,23 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.io,
  fr.irisa.triskell.kermeta.interpreter
 Eclipse-LazyStart: true
-Export-Package: com.declarativa.interprolog,
- com.declarativa.interprolog.examples,
- com.declarativa.interprolog.gui,
- com.declarativa.interprolog.util,
- com.xsb.interprolog,
- fr.irisa.triskell.flora2,
- fr.irisa.triskell.kermeta.flora2,
- net.sourceforge.flora.javaAPI.src,
+Export-Package: com.declarativa.interprolog;
+  uses:="javax.swing.tree,
+   junit.framework,
+   com.declarativa.interprolog.util,
+   javax.swing.event",
+ com.declarativa.interprolog.examples;uses:="com.declarativa.interprolog,javax.swing,javax.swing.table",
+ com.declarativa.interprolog.gui;
+  uses:="javax.swing.text,
+   com.declarativa.interprolog,
+   javax.swing.tree,
+   javax.swing,
+   javax.swing.table,
+   javax.swing.event",
+ com.declarativa.interprolog.util;uses:="com.declarativa.interprolog",
+ com.xsb.interprolog;uses:="com.declarativa.interprolog,com.declarativa.interprolog.gui",
+ fr.irisa.triskell.flora2;uses:="net.sourceforge.flora.javaAPI.src",
+ fr.irisa.triskell.kermeta.flora2;uses:="fr.irisa.triskell.kermeta.runtime,org.eclipse.core.runtime,org.osgi.framework",
+ net.sourceforge.flora.javaAPI.src;uses:="com.declarativa.interprolog",
  net.sourceforge.flora.javaAPI.util
-Bundle-ClassPath: dist/kermeta_flora2.jar,
- .
+Bundle-ClassPath: .
