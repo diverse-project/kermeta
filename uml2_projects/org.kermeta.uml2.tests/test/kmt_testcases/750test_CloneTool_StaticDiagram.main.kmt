@@ -1,4 +1,4 @@
-/* $Id: 750test_CloneTool_StaticDiagram.main.kmt,v 1.12 2008-04-18 15:55:33 vmahe Exp $
+/* $Id: 750test_CloneTool_StaticDiagram.main.kmt,v 1.13 2008-04-21 07:32:06 vmahe Exp $
  * Creation date: Summer 2006
  * License:		Eclipse Public License
  * Copyright:	INRIA
@@ -32,6 +32,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
 	reference cloneModel : Model
 	reference testModel : Model
 	reference testPackage : Package
+    reference testResource : kermeta::persistence::EMFResource
 	
 	method setUp() is do
 		//creating needed instances
@@ -61,7 +62,6 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     	outputResource.save()
     	
     	var testRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
-    	var testResource : kermeta::persistence::EMFResource
     	testResource ?= testRepository.getResource(cloneModelName)
     	
     	// "instances" only gives the main diagramm package for the targeted code tree
