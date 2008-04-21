@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.14 2008-04-16 17:12:33 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.15 2008-04-21 15:26:25 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -11,9 +11,9 @@ package kermeta::language::structure;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "../common/containment_traversable.kmt"
+require "../common/ContainmentTraversable.kmt"
 require "../helper/KM2EcoreHelper.kmt"
-require "../common/exception.kmt"
+require "../common/Exception.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using ecore

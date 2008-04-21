@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.15 2008-04-14 07:50:36 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.16 2008-04-21 15:26:25 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -20,7 +20,7 @@ package kermeta::language;
 require kermeta
 require "SetLinks.kmt"
 require "CreateBehavior.kmt"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/containment_traversable.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentTraversable.kmt"
 //require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentBasedActionPerformer_Kermeta.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 

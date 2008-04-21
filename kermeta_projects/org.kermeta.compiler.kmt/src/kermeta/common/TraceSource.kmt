@@ -1,4 +1,4 @@
-/* $Id: TraceSource.kmt,v 1.1 2008-04-17 15:23:37 ftanguy Exp $
+/* $Id: TraceSource.kmt,v 1.2 2008-04-21 15:26:24 cfaucher Exp $
  * Creation date: April 17, 2008
  * License:
  * Copyright:
@@ -10,8 +10,10 @@ package kermeta::language::structure;
 
 
 require kermeta
+require "../helper/traceability/TraceabilityHelper.kmt"
 
 using kermeta::standard
+using traceability
 
 /**
  *
@@ -26,4 +28,7 @@ aspect class Object {
 
 	/**		The line number where the object is declared in the source file.	*/
 	attribute lineNumber : Integer
+	
+	/** The calculated kmt file */
+	reference file : File[0..1]
 }

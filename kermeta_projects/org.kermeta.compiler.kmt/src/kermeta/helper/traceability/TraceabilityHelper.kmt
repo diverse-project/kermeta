@@ -1,12 +1,12 @@
-/* $Id: TraceabilityHelper.kmt,v 1.1 2008-04-17 15:23:38 ftanguy Exp $
+/* $Id: TraceabilityHelper.kmt,v 1.2 2008-04-21 15:26:25 cfaucher Exp $
  * Creation date: April 17, 2008
  * License:
  * Copyright:
- * Authors: François Tanguy
- 			Cyril Faucher
+ * Authors: Francois Tanguy <ftanguy@irisa.fr>
+ 			Cyril Faucher <cfaucher@irisa.fr>
  */
 
-package km2ecore::helper::traceability;
+package traceability;
 
 require kermeta
 require "http://www.kermeta.org/Traceability"
@@ -25,8 +25,32 @@ class TraceabilityHelper {
 			var tr : TextReference init c.first.asType(TextReference)
 			result := tr
 		rescue (e : EmptyCollection)
-			result := void			
+			result := void		
 		end
 	end
 
+}
+
+aspect class TraceModel {
+	attribute files : File[0..*]
+}
+
+class File {
+	attribute uri : String[1..1]
+	attribute id : Integer[0..1]
+	
+	operation getFile(traceModel : TraceModel, uri_toFind : String) : File is do
+		var file : File init traceModel.files.detect{ f | f.uri==uri_toFind}
+		if file.isVoid() then
+			file := File.new
+			file.uri := uri_toFind
+			traceModel.files.add(file)
+			file.id := traceModel.files.size()
+		end
+		result := file
+	end
+	
+	method toString() : String is do
+		result := "self.uri: " + self.uri + " - self.id: " + self.id.toString()
+	end
 }

@@ -1,4 +1,4 @@
-/* $Id: Pass0.kmt,v 1.1 2008-04-17 15:23:37 ftanguy Exp $
+/* $Id: Pass0.kmt,v 1.2 2008-04-21 15:26:24 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -13,20 +13,25 @@ package km2ecore;
 require kermeta
 require "../helper/KM2EcoreHelper.kmt"
 require "../common/TraceSource.kmt"
+require "../KM2EcoreContext.kmt"
+require "../helper/traceability/TraceabilityHelper.kmt"
 
-using km2ecore::helper::traceability
 using traceability
+using km2ecore
+using kermeta::standard
 
 class SourceTracer {
 
-	operation addSourceInformation(model : TraceModel) is do
-		if ( not model.isVoid() ) then
+	operation addSourceInformation(context : KM2EcoreContext) is do
+		var model : TraceModel init context.traceModel
+		if not model.isVoid() then
 			model.references.each{ r |
-				if ( r.isInstanceOf(ModelReference) ) then
+				if r.isInstanceOf(ModelReference) then
 					var mr : ModelReference init r.asType(ModelReference)
 					var tr : TextReference init TraceabilityHelper.new.getFirstTextReference(mr)
-					if ( not tr.isVoid() ) then
+					if not tr.isVoid() then
 						mr.refObject.fileName := tr.fileURI
+						mr.refObject.file := File.new.getFile(model, tr.fileURI)
 						mr.refObject.lineNumber := tr.lineBeginAt
 					end
 				end

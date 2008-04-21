@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.23 2008-04-17 15:23:38 ftanguy Exp $
+/* $Id: StructureCompiler.kmt,v 1.24 2008-04-21 15:26:53 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -15,9 +15,8 @@ package kermeta::compiler;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "pass0/Pass0.kmt"
-require "pass0/TestPass0.kmt"
-//require "pass1/Pass1.kmt"
-//require "pass2/Pass2.kmt"
+require "pass1/Pass1.kmt"
+require "pass2/Pass2.kmt"
 require "KM2EcoreContext.kmt"
 
 using ecore
@@ -31,8 +30,10 @@ class Main
 	reference context : KM2EcoreContext [1..1]
 
     operation main_inner() : Void is do
-    	//var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km"
+    	//var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km"
 		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.ecore"
+		//var traceInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.traceability"
+		
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.ecore"
 		var traceInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.traceability"
@@ -52,15 +53,12 @@ class Main
 		context.mode := mode
 		
 		// Adding source information to km objects
-		SourceTracer.new.addSourceInformation( context.traceModel )
+		SourceTracer.new.addSourceInformation( context )
 		
 		context.mus.each{ mu |
-			mu.testSourceTrace(context)
-		}
 		
-		
-		/*context.mus.each{ mu |
 			mu.applyPass1(context)
+			
 			if context.mode == CompilingMode.onlyEcore then
 				mu.applyPass2(context)
 			end
@@ -106,7 +104,7 @@ class Main
 			stdio.writeln("Save the Trace Model")
 			trace_resource.save
 			stdio.writeln("The Trace Model has been saved")*/
-		//}
+		}
 	
 		stdio.writeln("Finish")
 		

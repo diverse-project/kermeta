@@ -1,4 +1,4 @@
-/* $Id: EAnnotationHelper.kmt,v 1.7 2008-04-17 13:15:37 cfaucher Exp $
+/* $Id: EAnnotationHelper.kmt,v 1.8 2008-04-21 15:26:25 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -10,7 +10,7 @@ package km2ecore::helper::ecore;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "../../common/trace_structure.kmt"
+require "../../common/TraceStructure.kmt"
 require "../../helper/kermeta/KermetaHelper.kmt"
 
 using kermeta::language::structure

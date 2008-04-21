@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.14 2008-04-16 17:00:35 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.15 2008-04-21 15:26:25 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -13,7 +13,7 @@ package kermeta::language::structure;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "CreateEcoreModelElement.kmt"
-require "../common/trace_structure.kmt"
+require "../common/TraceStructure.kmt"
 require "../helper/KM2EcoreHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
@@ -182,14 +182,6 @@ aspect class Property {
 aspect class Operation {
 	method applyPass1(context : KM2EcoreContext) is do
 	
-		// DETERMINE if the operation should be compiled
-		var paramFunctionType : Parameter init self.ownedParameter.detect{ p |
-			p.type.isInstanceOf(FunctionType)
-		}
-		if not paramFunctionType.isVoid() then
-			//TODO inline of the FunctionType
-		else
-			
 		// Creating the associated ecore class
 		var ecoreOperation : EOperation init self.createEcoreModelElement(context)
 		// Setting the container
@@ -201,19 +193,26 @@ aspect class Operation {
 		// Compile the owned elements
 		self.eachOwnedElement{ o | o.applyPass1(context) }
 		
-		end
 	end
 }
 
 aspect class Parameter {
 	method applyPass1(context : KM2EcoreContext) is do
-		// Creating the associated ecore class
-		var ecoreParameter : EParameter init self.createEcoreModelElement(context)
-		// Setting the container
-		var o : Operation init self.container().asType(Operation)
-		o.ecoreModelElement.eParameters.add( ecoreParameter )
-		// Setting the ecore proxy
-		self.ecoreModelElement := ecoreParameter
+	
+		// DETERMINE if the parameter should be compiled
+		if self.type.isInstanceOf(FunctionType) then
+			stdio.writeln("Pass1 - inline")
+			//TODO inline of the FunctionType
+		else
+			// Creating the associated ecore class
+			var ecoreParameter : EParameter init self.createEcoreModelElement(context)
+			// Setting the container
+			var o : Operation init self.container().asType(Operation)
+			o.ecoreModelElement.eParameters.add( ecoreParameter )
+			// Setting the ecore proxy
+			self.ecoreModelElement := ecoreParameter
+		end
+		
 	end
 }
 

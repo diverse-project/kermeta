@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.7 2008-04-17 15:23:38 ftanguy Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.8 2008-04-21 15:26:53 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,8 +14,8 @@ package km2ecore;
 
 require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
-require "common/keyword_list.kmt"
-require "common/type_mapping.kmt"
+require "common/KeywordList.kmt"
+require "common/TypeMapping.kmt"
 require "helper/kermeta/KermetaHelper.kmt"
 require "http://www.kermeta.org/Traceability"
 
@@ -39,7 +39,7 @@ class KM2EcoreContext
 	/** Unique instance of the JavaTypeMapping */
 	reference javaTypeMapping : JavaTypeMapping [0..1]
 	
-	/**		The trace model dedicated to the km model used for the transformation.		*/
+	/**	The trace model dedicated to the km model used for the transformation */
 	reference traceModel : TraceModel[1..1]
 	
 	//attribute primitiveType_Type : PrimitiveType_Type

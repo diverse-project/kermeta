@@ -1,8 +1,8 @@
-/* $Id: keyword_list.kmt,v 1.4 2008-04-17 15:23:37 ftanguy Exp $
+/* $Id: KeywordList.kmt,v 1.1 2008-04-21 15:26:24 cfaucher Exp $
  * Creation date: February 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
- * Authors:	Vincent MAH� <vmahe@irisa.fr>
+ * Authors:	Vincent MAHE <vmahe@irisa.fr>
  *			Cyril Faucher <cfaucher@irisa.fr>
  */
 

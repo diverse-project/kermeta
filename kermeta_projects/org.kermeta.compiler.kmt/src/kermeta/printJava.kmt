@@ -1,4 +1,4 @@
-/* $Id: printJava.kmt,v 1.4 2008-04-02 08:39:30 cfaucher Exp $
+/* $Id: printJava.kmt,v 1.5 2008-04-21 15:26:53 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -12,8 +12,8 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass1/Pass1.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/Pass2.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/containment_traversable.kmt"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/trace_structure.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentTraversable.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/KM2EcoreHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 

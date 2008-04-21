@@ -1,4 +1,4 @@
-/* $Id: TestPass0.kmt,v 1.1 2008-04-17 15:23:37 ftanguy Exp $
+/* $Id: TestPass0.kmt,v 1.2 2008-04-21 15:26:24 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -12,7 +12,7 @@ package kermeta::language::structure;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "../common/trace_structure.kmt"
+require "../common/TraceStructure.kmt"
 require "../helper/KM2EcoreHelper.kmt"
 require "../common/TraceSource.kmt"
 
