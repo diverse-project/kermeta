@@ -1,0 +1,76 @@
+/* $Id: 059_loadUseOfKMEnum.main.kmt,v 1.1 2008-04-24 19:22:13 cfaucher Exp $
+ * Creation date: April 24, 2008
+ * License: EPL
+ * Copyright: INRIA
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+@mainClass "loadUseOfKMEnum::Main"
+@mainOperation "main"
+
+/**
+ * Test that we can load a km file that are using a Kermeta Enumeration
+ */
+
+package loadUseOfKMEnum;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+using kermeta::language::structure
+
+class Main inherits TestCase
+{
+	attribute modelUriBase : String
+	
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	method setUp() is do
+		modelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/059_"
+	end
+	
+	/**
+	 * km model with constraints having some references to Kermeta enumerations
+	 */
+	operation testLoadUseOfKMEnum() is do
+		
+		var res : Resource init EMFRepository.new.getResource(modelUriBase+"kmModelWithUseOfKMEnum.km")
+		
+		res.load()
+		
+		var mu : ModelingUnit
+		// that's the first element ...
+		mu ?= res.instances.one
+		assert(not mu.isVoid)
+		
+		var pack : Package 
+		pack ?= mu.packages.one
+		var cl : ClassDefinition 
+		cl ?= pack.ownedTypeDefinition.one
+		assert(not cl.isVoid)
+		assert(not cl.~inv.one.isVoid)
+		assertTrueWithMsg(not cl.~inv.one.asType(kermeta::language::structure::Constraint).stereotype.isVoid,"loaded invariant stereotype is Void")
+		assertTrueWithMsg(cl.~inv.one.asType(kermeta::language::structure::Constraint).stereotype == kermeta::language::structure::ConstraintType.~inv,"loaded invariant stereotype doesn't match internal enumeration")
+		
+		var op : Operation
+		op ?= cl.ownedOperation.one
+		assert(not op.isVoid)
+		assert(not op.~pre.one.isVoid)
+		assertTrueWithMsg(not op.~pre.one.asType(kermeta::language::structure::Constraint).stereotype.isVoid,"loaded pre stereotype is Void")
+		assertTrueWithMsg(op.~pre.one.asType(kermeta::language::structure::Constraint).stereotype == kermeta::language::structure::ConstraintType.~pre,"loaded pre stereotype doesn't match internal enumeration")
+		
+		assert(not op.isVoid)
+		assert(not op.~post.one.isVoid)
+		assertTrueWithMsg(not op.~post.one.asType(kermeta::language::structure::Constraint).stereotype.isVoid,"loaded post stereotype is Void")
+		assertTrueWithMsg(op.~post.one.asType(kermeta::language::structure::Constraint).stereotype == kermeta::language::structure::ConstraintType.~post,"loaded post stereotype doesn't match internal enumeration")
+				
+	end
+	
+	
+}

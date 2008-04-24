@@ -1,11 +1,9 @@
-/* $Id: 058_kmModelWithEnum.kmt,v 1.1 2007-09-10 08:35:07 cfaucher Exp $
+/* $Id: 059_kmModelWithUseOfKMEnum.kmt,v 1.1 2008-04-24 19:22:11 cfaucher Exp $
  * Creation date: August 23, 2007
- * License:
- * Copyright:
- * Authors:
+ * License: EPL
+ * Copyright: INRIA
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
  */
-@mainClass "root_package::Main"
-@mainOperation "main"
 
 
 package root_package;

@@ -1,0 +1,95 @@
+/* $Id: 059_loadSaveKMEnum.main.kmt,v 1.1 2008-04-24 19:22:13 cfaucher Exp $
+ * Creation date: April 24, 2008
+ * License: EPL
+ * Copyright: INRIA
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+@mainClass "loadSaveKMEnum::Main"
+@mainOperation "main"
+
+/**
+ * Test that we can load a km file that declars an Enumeration and try save it in another km file
+ */
+
+package loadSaveKMEnum;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+using kermeta::language::structure
+using kermeta::exceptions
+
+class Main inherits TestCase
+{
+	attribute modelUriBase : String
+	attribute outputmodelUriBase : String
+	
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	method setUp() is do
+		modelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/059_"
+		outputmodelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/059_"
+	end
+	
+	/**
+	 * km model with an Enumeration
+	 */
+	operation testLoadKMModelWithEnum() is do
+		
+		// Try to load the test km model
+		var res1 : Resource init EMFRepository.new.getResource(modelUriBase+"kmModelWithKMEnum.km")
+		res1.load()
+		var mu1 : ModelingUnit
+		// That's the first element ...
+		mu1 ?= res1.instances.one
+		
+		// Try to save the test km model in a new km file in the output folder
+		var res2 : Resource init EMFRepository.new.getResource(outputmodelUriBase+"kmModelWithKMEnum.km")
+		res2.add(mu1)
+		res2.save()
+		
+		// CF Note: We know the saving fails, the goal of this TestCase is to check if the saving works
+		
+		// Try to load the test km model saved in the output folder
+		var res3 : Resource init EMFRepository.new.getResource(outputmodelUriBase+"kmModelWithEnum.km")
+		res3.load()
+		
+		var mu : ModelingUnit
+		// That's the first element ...
+		mu ?= res3.instances.one
+		
+		// Traverse the ModelingUnit to check the content: the Enumeration and its Literals
+		assert(not mu.isVoid)
+		
+		var pack : Package init mu.packages.one
+		var enum : Enumeration
+		enum ?= pack.ownedTypeDefinition.one
+		assert(not enum.isVoid())
+		
+		var eliteral : EnumerationLiteral
+		eliteral := enum.ownedLiteral.detect{ l |
+			l.name == "e0"
+		}
+		assert(not eliteral.isVoid())
+		
+		enum.ownedLiteral.detect{ l |
+			l.name == "e1"
+		}
+		assert(not eliteral.isVoid())
+		
+		enum.ownedLiteral.detect{ l |
+			l.name == "e2"
+		}
+		assert(not eliteral.isVoid())
+				
+	end
+	
+	
+}
