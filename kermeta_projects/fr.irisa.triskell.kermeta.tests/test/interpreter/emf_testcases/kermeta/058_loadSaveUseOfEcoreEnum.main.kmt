@@ -1,22 +1,22 @@
-/* $Id: 058_IndirectLoadSaveEnum.main.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+/* $Id: 058_loadSaveUseOfEcoreEnum.main.kmt,v 1.1 2008-04-24 17:23:38 cfaucher Exp $
  * Creation date: June 5, 2007
  * License:
  * Copyright:
  * Authors:
- * test that raise a problem when we require an enumeration from several ways, 
- * one directly, one indirectly
  */
-@mainClass "indirectLoadSaveEnum::Main"
+@mainClass "loadSaveUseOfEcoreEnum::Main"
 @mainOperation "main"
 
+/**
+ * Test that we can load a xmi file conforms to an Ecore file containing an EEnumeration
+ * the xmi file has an usage of this EEnumeration and after that we try to save it into a new xmi file
+ */
 
-package indirectLoadSaveEnum;
+package loadSaveUseOfEcoreEnum;
 
 
 require kermeta
-require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_indirectMMEnum.ecore"
 require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_MMEnum.ecore"
-
 require "http://www.eclipse.org/emf/2002/Ecore"
 // DVK note : I don't know why the metamodel generates this dependency to ecore : It seems that when opening the model, 
 // the findDependentResourse also open the metamodel ... (can be checked directly opening the model in the reflective editor ...)
@@ -24,8 +24,6 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 using kermeta::standard
 using kermeta::persistence
 using kermeta::kunit
-using kermeta::language::structure
-
 class Main inherits TestCase
 {
 	attribute metamodelUri : String
@@ -42,11 +40,9 @@ class Main inherits TestCase
 		metamodelUri := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_MMEnum.ecore"
 		modelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/058_"
 		outputmodelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/058_"
-		
-		
 	end
 	
-	operation testLoadModelWithEnum() is do
+	operation testLoadModelWithUseOfEcoreEnum() is do
 		var emfRep : EMFRepository init EMFRepository.new
 		var res : EMFResource
 		res ?= emfRep.createResource(modelUriBase+"modelWithEEnum1.xmi", metamodelUri)
@@ -64,7 +60,7 @@ class Main inherits TestCase
 		assert (modelelement.a == MDK::AccesVariableEnumeration.accPrivate)		
 	end
 	
-	operation testSaveModelWithEnum() is do
+	operation testSaveModelWithUseOfEcoreEnum() is do
 		var emfRep1 : EMFRepository init EMFRepository.new
 		var res1 : EMFResource
 		res1 ?= emfRep1.createResource(outputmodelUriBase+"modelWithEEnum2.xmi", metamodelUri)
@@ -94,44 +90,5 @@ class Main inherits TestCase
 		assert (modelelement2.a == MDK::AccesVariableEnumeration.accPrivate)
 		
 	end
-	
-	/**
-	 * km model with constraints have enums
-	 */
-	operation testLoadKMModelWithEnum() is do
-		var emfRep : EMFRepository init EMFRepository.new
-		var res : EMFResource
-		res ?= emfRep.getResource(modelUriBase+"kmModelWithEnum.km")
-		
-		//res.load
-		
-		var mu : ModelingUnit
-		// that's the first element ...
-		mu ?= res.instances.one
-		assert(not mu.isVoid)
-		
-		var pack : Package 
-		pack ?= mu.packages.one
-		var cl : ClassDefinition 
-		cl ?= pack.ownedTypeDefinition.one
-		assert(not cl.isVoid)
-		assert(not cl.~inv.one.isVoid)
-		assertTrueWithMsg(not cl.~inv.one.asType(kermeta::language::structure::Constraint).stereotype.isVoid,"loaded invariant stereotype is Void")
-		assertTrueWithMsg(cl.~inv.one.asType(kermeta::language::structure::Constraint).stereotype == kermeta::language::structure::ConstraintType.~inv,"loaded invariant stereotype doesn't match internal enumeration")
-		
-		var op : Operation
-		op ?= cl.ownedOperation.one
-		assert(not op.isVoid)
-		assert(not op.~pre.one.isVoid)
-		assertTrueWithMsg(not op.~pre.one.asType(kermeta::language::structure::Constraint).stereotype.isVoid,"loaded pre stereotype is Void")
-		assertTrueWithMsg(op.~pre.one.asType(kermeta::language::structure::Constraint).stereotype == kermeta::language::structure::ConstraintType.~pre,"loaded pre stereotype doesn't match internal enumeration")
-		
-		assert(not op.isVoid)
-		assert(not op.~post.one.isVoid)
-		assertTrueWithMsg(not op.~post.one.asType(kermeta::language::structure::Constraint).stereotype.isVoid,"loaded post stereotype is Void")
-		assertTrueWithMsg(op.~post.one.asType(kermeta::language::structure::Constraint).stereotype == kermeta::language::structure::ConstraintType.~post,"loaded post stereotype doesn't match internal enumeration")
-				
-	end
-	
 	
 }

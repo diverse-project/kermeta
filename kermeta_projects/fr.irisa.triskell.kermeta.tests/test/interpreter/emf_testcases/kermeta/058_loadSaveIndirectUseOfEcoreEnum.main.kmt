@@ -1,0 +1,102 @@
+/* $Id: 058_loadSaveIndirectUseOfEcoreEnum.main.kmt,v 1.1 2008-04-24 17:23:38 cfaucher Exp $
+ * Creation date: June 5, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ * test that raise a problem when we require an enumeration from several ways, 
+ * one directly, one indirectly
+ */
+@mainClass "loadSaveIndirectUseOfEcoreEnum::Main"
+@mainOperation "main"
+
+/**
+ * Test that we can load a xmi file conforms to an Ecore file containing an EAttribute that refers an EEnumeration in another Ecore file
+ * the xmi file has an usage of this EEnumeration and after that we try to save it into a new xmi file
+ */
+
+package loadSaveIndirectUseOfEcoreEnum;
+
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_indirectMMEnum.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_MMEnum.ecore"
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+// DVK note : I don't know why the metamodel generates this dependency to ecore : It seems that when opening the model, 
+// the findDependentResourse also open the metamodel ... (can be checked directly opening the model in the reflective editor ...)
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+using kermeta::language::structure
+
+class Main inherits TestCase
+{
+	attribute metamodelUri : String
+	attribute modelUriBase : String
+	attribute outputmodelUriBase : String
+	
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	method setUp() is do
+		metamodelUri := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_MMEnum.ecore"
+		modelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/058_"
+		outputmodelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/058_"
+		
+		
+	end
+	
+	operation testLoadModelWithUseOfEcoreEnum() is do
+		var emfRep : EMFRepository init EMFRepository.new
+		var res : EMFResource
+		res ?= emfRep.createResource(modelUriBase+"modelWithEEnum1.xmi", metamodelUri)
+		
+		res.load
+		
+		var modelelement : MDK::EnumTest
+		// that's the first element ...
+		modelelement ?= res.instances.one
+		assert(not modelelement.a.isVoid)
+		stdio.writeln(modelelement.a.toString + modelelement.a.name + modelelement.a.~enumeration.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.accPublic.toString + MDK::AccesVariableEnumeration.accPublic.name + MDK::AccesVariableEnumeration.accPublic.~enumeration.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.accPrivate.toString + MDK::AccesVariableEnumeration.accPrivate.name + MDK::AccesVariableEnumeration.accPrivate.~enumeration.toString)
+		// (different OId but same names !?
+		assert (modelelement.a == MDK::AccesVariableEnumeration.accPrivate)		
+	end
+	
+	operation testSaveModelWithUseOfEcoreEnum() is do
+		var emfRep1 : EMFRepository init EMFRepository.new
+		var res1 : EMFResource
+		res1 ?= emfRep1.createResource(outputmodelUriBase+"modelWithEEnum2.xmi", metamodelUri)
+		
+		// create the model
+		var modelelement1 : MDK::EnumTest init MDK::EnumTest.new
+		modelelement1.a := MDK::AccesVariableEnumeration.accPrivate
+		res1.add(modelelement1)
+		stdio.writeln("before save1")
+		res1.save()
+		stdio.writeln("after save1")
+		// reload it in a new repository and check it
+		
+		var emfRep2 : EMFRepository init EMFRepository.new
+		var res2 : EMFResource
+		res2 ?= emfRep2.createResource(outputmodelUriBase+"modelWithEEnum2.xmi", metamodelUri)
+		res2.load()
+		stdio.writeln("after load1")
+		var modelelement2 : MDK::EnumTest
+		// that's the first element ...
+		modelelement2 ?= res2.instances.one
+		assert(not modelelement2.isVoid)
+		assert(not modelelement2.a.isVoid)
+		stdio.writeln(modelelement2.a.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.accPublic.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.accPrivate.toString)
+		assert (modelelement2.a == MDK::AccesVariableEnumeration.accPrivate)
+		
+	end
+	
+}
