@@ -20,6 +20,7 @@ Export-Package: fr.irisa.triskell.eclipse.console,
  fr.irisa.triskell.eclipse.resources,
  fr.irisa.triskell.eclipse.util.handlers,
  fr.irisa.triskell.eclipse.wizard,
+ fr.irisa.triskell.string,
  org.kermeta.core.helper,
  org.kermeta.ecore.internal.model.helper;x-internal:=true,
  org.kermeta.ecore.model.helper
