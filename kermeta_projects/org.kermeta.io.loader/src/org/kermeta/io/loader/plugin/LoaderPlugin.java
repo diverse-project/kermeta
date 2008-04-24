@@ -268,7 +268,7 @@ public class LoaderPlugin extends Plugin {
 			 * EcoreLoader
 			 * 
 			 */
-			URI uri = URI.createURI("platform:/plugin/org.kermeta.io.loader/instances/Ecore.loader");
+			URI uri = URI.createURI("kconf:/loader/Ecore.loader");
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Resource resource = resourceSet.createResource(uri);
 			resource.load(null);
@@ -281,7 +281,7 @@ public class LoaderPlugin extends Plugin {
 			 * KMTLoader
 			 * 
 			 */
-			uri = URI.createURI("platform:/plugin/org.kermeta.io.loader/instances/KMT.loader");
+			uri = URI.createURI("kconf:/loader/KMT.loader");
 			resourceSet = new ResourceSetImpl();
 			resource = resourceSet.createResource(uri);
 			resource.load(null);
@@ -295,7 +295,7 @@ public class LoaderPlugin extends Plugin {
 			 * KMLoader
 			 * 
 			 */
-			uri = URI.createURI("platform:/plugin/org.kermeta.io.loader/instances/KM.loader");
+			uri = URI.createURI("kconf:/loader/KM.loader");
 			resourceSet = new ResourceSetImpl();
 			resource = resourceSet.createResource(uri);
 			resource.load(null);
