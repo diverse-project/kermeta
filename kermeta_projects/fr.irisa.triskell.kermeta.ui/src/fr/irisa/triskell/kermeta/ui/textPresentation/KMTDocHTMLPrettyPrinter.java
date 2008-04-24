@@ -1,4 +1,4 @@
-/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.7 2008-02-29 09:56:34 dvojtise Exp $
+/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.8 2008-04-24 09:48:01 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -14,7 +14,10 @@
 package fr.irisa.triskell.kermeta.ui.textPresentation;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -25,18 +28,26 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
+import fr.irisa.triskell.string.EscapeChars;
+
 
 /**
  * Create a HTML presentation of the given Kermeta object for use in a documentation
@@ -45,7 +56,9 @@ import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
  * own presentation depending on the context in which it is called. a simplier structure is probably better
  * in this situation  
  */
-public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
+public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
+	public final static String KERMETA_DOCUMENTATION = "documentation";
+	
 	/** if 0 do not show attributes and operations
 	 * if 1 show only attributes and operations of the current class
 	 * if >1 also shows attributes and operations of the inherited class (if classFlat == true)
@@ -55,17 +68,26 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 	public boolean classFlat = true;
 	
 	public String CR = "\n";
-	
-	public int currentClassShortLevel = 0;
-	
-	protected boolean mainClass = false;
+	public String GT = "&gt;";
+	public String LT = "&lt;";
 	
 	
-
+	protected KM2KMTPrettyPrinter kmtPP = new KM2KMTPrettyPrinter(); // sometimes we can reuse a full code pretty print
+		
 	public String getHTMLDoc(EObject node)
 	{
-		MODE = DEFINITION_MODE;
+		//MODE = DEFINITION_MODE;
 		StringBuilder result = new StringBuilder();
+		// add style support
+		// some help for colors ? => http://www.w3schools.com/css/css_colornames.asp
+		result.append("<style type=\"text/css\">");
+		result.append("h1 {color: black; font-size: medium;}"); // H1 is used for main title  (class and operation name 
+		result.append("h2 {color: black; font-size: small;}");	// H2 is used for subtitle like list of sub components like attribute and operation
+		result.append("h3 {color: black; font-size: x-small;}"); // H3 is used for subtitle (for ex: parameters, return type, inheritance ...)
+		result.append(".nodename {text-decoration: underline;}"); // special decoration for node name (ie. package, class, operation that is being displayed
+		result.append(".documentation { border: 1px solid grey; background-color: LightYellow ; }");
+		result.append(".reference {vertical-align: super; font-size: 75%;}");
+		result.append("</style>");
 		// add support for popups
 		result.append("<SCRIPT TYPE=\"text/javascript\">\n");
 		result.append("<!--\n");
@@ -93,167 +115,504 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 		result.append("</SCRIPT>\n");
 		
 		result.append("<pre>");
-		currentClassShortLevel = 0;
-		mainClass =  true;
 		if(node instanceof ClassDefinition)
-			result.append(htmlSummary((ClassDefinition)node));
-		if(node instanceof Package)
-			result.append(htmlSummary((Package)node));
+			result.append(htmlDocumentation((ClassDefinition)node));
+		else if(node instanceof Package)
+			result.append(htmlDocumentation((Package)node));
 
-		if(node instanceof Operation)
-			result.append(htmlSummary((Operation)node));
+		else if(node instanceof Operation)
+			result.append(htmlDocumentation((Operation)node));
 
-		if(node instanceof Property)
-			result.append(htmlSummary((Property)node));
+		else if(node instanceof Property)
+			result.append(htmlDocumentation((Property)node));
 		
-		if ( node instanceof Constraint )
-			result.append(htmlConstraint( (Constraint) node ));
+		else if ( node instanceof Constraint )
+			result.append(htmlDocumentation( (Constraint) node ));
 		
-		mainClass =  false;
+		else if ( node instanceof Enumeration)
+			result.append(htmlDocumentation( (Enumeration) node ));
+		
+		else if ( node instanceof PrimitiveType)
+			result.append(htmlDocumentation( (PrimitiveType) node ));
+		
 		result.append("</pre>");
 		return  fixPlatformURL(fixImages(result.toString()));
 	}
 	
 	
-	public String htmlSummary(Package node) {
+	public String htmlDocumentation(Package node) {
+		String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(node);
+			
 		StringBuffer result= new StringBuffer("");
-		result.append("<b>package</b> " + KMTHelper.getMangledIdentifier(node.getName()));
-		result.append("\n") ;
-		String tags = ppTags(node.getTag());
-		result.append(getPrefix() + tags);
-		if(tags.compareTo("")!=0) result.append("\n") ;
+		result.append("<H1>package <strong class=nodename>" + KMTHelper.getMangledIdentifier(node.getName()));
+		result.append("</strong></H1>") ;
+		if(node.eContainer() != null && node.eContainer() instanceof NamedElement){
+			result.append("<H3>Container</H3>");
+			result.append("\t"+KermetaModelHelper.NamedElement.qualifiedName((NamedElement)node.eContainer()));
+		}
+		// collect data from the various aspects that constitute this Package
+		List<Package> packages = new ArrayList<Package>(); // all packages that constitutes the definition of this qualified name
+		Hashtable<KermetaUnit,String> aspectUnitsReferences = new Hashtable<KermetaUnit,String>(); 
+		Hashtable<String, KermetaUnit> aspectReferencesUnits = new Hashtable<String, KermetaUnit>();
+		
+		packages.add(node);
+		aspectUnitsReferences.put(KermetaUnitHelper.getKermetaUnitFromObject(node), "[1]");
+		aspectReferencesUnits.put("[1]", KermetaUnitHelper.getKermetaUnitFromObject(node) );
+		KermetaUnitHelper.getKermetaUnitFromObject(node).getExternalPackages();
+		for ( Package externalPackage : KermetaUnitHelper.getKermetaUnitFromObject(node).getExternalPackages() ) {
+			if ( KermetaModelHelper.NamedElement.qualifiedName(externalPackage).equals(qualifiedName) ) {
+				if(!packages.contains(externalPackage)){
+					packages.add(externalPackage);
+					String refId = "["+(aspectUnitsReferences.size()+1)+"]";
+					aspectUnitsReferences.put(KermetaUnitHelper.getKermetaUnitFromObject(externalPackage), refId);
+					aspectReferencesUnits.put(refId, KermetaUnitHelper.getKermetaUnitFromObject(externalPackage) );
+				}
+			}
+		}
+		StringBuilder tags = new StringBuilder("");
+		StringBuilder subpackages = new StringBuilder("");
+		StringBuilder ownedclasses = new StringBuilder("");
+		for(Package pack :packages){
+			KermetaUnit currentUnit  = KermetaUnitHelper.getKermetaUnitFromObject(pack);
+			if(pack.getTag().size()>0){
+				tags.append("<div class=\"documentation\" title=\""+currentUnit.getUri()+"\">");
+				for(Tag tag : pack.getOwnedTags()){							
+					tags.append(ppTag(tag));
+				}
+				tags.append("</div>");
+			}
+			if(pack.getNestedPackage().size()>0){
+				for(Package p : pack.getNestedPackage()){
+					subpackages.append("\t" + htmlSummary(p)+ " " + createAspectReference(currentUnit,aspectUnitsReferences) + "\n");
+				}
+			}
+			if(pack.getOwnedTypeDefinition().size()>0){
+				for(TypeDefinition td : pack.getOwnedTypeDefinition()){
+					ownedclasses.append("\t" + htmlSummary(td)+ " " + createAspectReference(currentUnit,aspectUnitsReferences) +"\n");
+				}
+			}
+		}
+		
+		if(tags.toString().compareTo("")!=0){			
+			result.append( tags);
+		}
+		if(subpackages.toString().compareTo("")!=0){
+			result.append("<H2>List of subpackages</H2>");			
+			result.append( subpackages);
+		}
+
+		if(ownedclasses.toString().compareTo("")!=0){
+			result.append("<H2>List of Classes defined in the Package</H2>");			
+			result.append( ownedclasses);
+		}
+		
+		// add the origin of the aspects (ie. a legend for each of the operations/properties/invariants)
+		result.append("\n<H2><A name=\"aspectFiles\">The class is defined from the following files</A></H2>");
+		List<String> sorted = new ArrayList<String>(aspectUnitsReferences.values());
+		Collections.sort(sorted);
+		for( String ref : sorted){		
+			result.append("\t" + ref + " " + aspectReferencesUnits.get(ref).getUri()+"\n");
+		}
+		
+		return result.toString();
+	}
+	
+	protected String ppTags(EList<Tag> tagList) {
+		String result = "";
+	    
+		int tagNb = tagList.size();
+		for(int i=0; i<tagNb; i++) {
+			result +=  ppTag(tagList.get(i)) + "\n";			
+		}
+	    return result;
+	}
+    /**
+     * Tag is used to store comments in the source code.
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.language.structure.Tag)
+     */
+    public Object ppTag(Tag node) {
+        String result = "";
+        // User can choose to add a "@kdoc" tag
+        if ( node.getName() == null ) {
+        	result = node.getValue();
+        } else {
+        	
+        	if ( node.getName().equals(KERMETA_DOCUMENTATION) )
+        		if ( ! node.getValue().startsWith("/**") )
+        			result = node.getValue();
+        		else{
+        			result =  node.getValue() ;  // need to clean the comment
+        		}
+        	else
+        		result = "@"+node.getName()+" \""+node.getValue()+"\"";
+        }
+        return result;
+    }
+    /**
+	 * Main html doc for Enumeration
+	 * @param node
+	 * @return
+	 */
+	public String htmlDocumentation(PrimitiveType node){
+		StringBuilder result = new StringBuilder("<H1>");
+		result.append("alias <strong class=nodename>" + KMTHelper.getMangledIdentifier(node.getName()));
+		result.append("</strong></H1>");
+		if(node.eContainer() != null && node.eContainer() instanceof NamedElement){
+			result.append("<H2>Container</H2>\tpackage ");
+			result.append(KermetaModelHelper.NamedElement.qualifiedName((NamedElement)node.eContainer()));
+		}
+		result.append("<H2>Redirect to</H2>\t");
+		result.append(EscapeChars.forHTML((String)kmtPP.accept(node.getInstanceType())).toString()); //KermetaModelHelper.NamedElement.qualifiedName((NamedElement)node.getInstanceType().
+		if(node.getOwnedTags().size()>0){
+			result.append(" \n<div class=\"documentation\" >");
+			for(Tag tag : node.getOwnedTags()){							
+				result.append(ppTag(tag));
+			}
+			result.append("</div>");
+		}
+		result.append("\n<H2><A name=\"aspectFiles\">The feature is defined in the following file</A></H2>");		
+		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(node);
+		result.append("\t[1] " + unit.getUri()+"\n");
+		return result.toString();
+	}
+    /**
+	 * Main html doc for Enumeration
+	 * @param node
+	 * @return
+	 */
+	public String htmlDocumentation(Enumeration node){
+		StringBuilder result = new StringBuilder("<H1>");
+		result.append("enumeration <strong class=nodename>" + KMTHelper.getMangledIdentifier(node.getName()));
+		result.append("</strong></H1>");
+		if(node.eContainer() != null && node.eContainer() instanceof NamedElement){
+			result.append("<H2>Container</H2>");
+			result.append(KermetaModelHelper.NamedElement.qualifiedName((NamedElement)node.eContainer()));
+		}
+		result.append("<H2>Literal values</H2><UL>");
+		for(fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral elit :node.getOwnedLiteral()){
+			result.append("<LI>"+KMTHelper.getMangledIdentifier(elit.getName())+"</LI>");
+		}
+		result.append("</UL>");
+		
+		if(node.getOwnedTags().size()>0){
+			result.append(" \n<div class=\"documentation\" >");
+			for(Tag tag : node.getOwnedTags()){							
+				result.append(ppTag(tag));
+			}
+			result.append("</div>");
+		}
+		result.append("\n<H2><A name=\"aspectFiles\">The feature is defined in the following file</A></H2>");		
+		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(node);
+		result.append("\t[1] " + unit.getUri()+"\n");
 		return result.toString();
 	}
 		
 	/**
-	 * Pretty print a summary for an operation.
-	 * 
-	 * @param o
+	 * Main html doc for ClassDefinition
+	 * @param node
 	 * @return
 	 */
-	private String ppOperationSummary(Operation o) {
-		String result = (String) accept(o);
-		result += "\n\n";
-		return result;
-	}
-	
-	/**
-	 * Pretty print the summary for a list of operations.
-	 * 
-	 * @param l
-	 * @return
-	 */
-	private String ppOperationSummaries(List<Operation> l) {
-		String result = "";
-		for ( Operation o : l )
-			result += ppOperationSummary(o);
-		return result;
-	}
-	
-	/**
-	 * Pretty print a summary for a property.
-	 * 
-	 * @param o
-	 * @return
-	 */
-	private String ppPropertySummary(Property p) {
-		//String result = ppTags(p.getTag());
-		String result = (String) accept(p);
-		result += "\n\n";
-		return result;
-	}
-	
-	/**
-	 * Pretty print the summary for a list of properties.
-	 * 
-	 * @param l
-	 * @return
-	 */
-	private String ppPropertySummaries(List<Property> l) {
-		String result = "";
-		for ( Property p : l )
-			result += ppPropertySummary(p);
-		return result;
-	}
-		
-	public String htmlSummary(ClassDefinition node) {
-		DOC_VIEW = false;
-		printBody = false;
+	public String htmlDocumentation(ClassDefinition node) {
 		Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext(node);
 		String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(node);
-		
-		String tags = "";
-		String operations = "";
-		String properties = "";
+		//KermetaModelHelper.ClassDefinition.getAllOperations(cd)
+		StringBuilder tags = new StringBuilder("");
+		StringBuilder operations = new StringBuilder("");
+		StringBuilder properties = new StringBuilder("");
+		StringBuilder invariants = new StringBuilder("");
 		String supertypes = "";
+		Hashtable<KermetaUnit,String> aspectUnitsReferences = new Hashtable<KermetaUnit,String>(); 
+		Hashtable<String, KermetaUnit> aspectReferencesUnits = new Hashtable<String, KermetaUnit>();
+		//KermetaModelHelper.ClassDefinition.
 		
+		// collect data from the various aspects that constitute this classdefinition
 		for ( TypeDefinition td : context ) {
 			if ( td instanceof ClassDefinition ) {
 				ClassDefinition cd = (ClassDefinition) td;
 				if ( KermetaModelHelper.NamedElement.qualifiedName(cd).equals(qualifiedName) ) {
 					for ( Type t : cd.getSuperType() )
-						supertypes += "\n\t<b>class</b> " + accept(t);
-					pushPrefix();
-					tags +=	ppTags(cd.getOwnedTags());
-					operations += ppOperationSummaries(cd.getOwnedOperation());
-					properties += ppPropertySummaries(cd.getOwnedAttribute());
-					popPrefix();
+						supertypes += "\t " + EscapeChars.forHTML((String)kmtPP.accept(t)).toString() +"\n";
+					if(cd.getOwnedTags().size() > 0){
+						KermetaUnit tagUnit = KermetaUnitHelper.getKermetaUnitFromObject(cd.getOwnedTags().get(0));
+						if(!aspectUnitsReferences.containsKey(tagUnit)){
+							aspectUnitsReferences.put(tagUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
+							aspectReferencesUnits.put(aspectUnitsReferences.get(tagUnit), tagUnit);
+						}
+						tags.append(" \n<div class=\"documentation\" title=\""+tagUnit.getUri()+"\">");
+						for(Tag tag : cd.getOwnedTags()){							
+							tags.append(ppTag(tag));
+						}
+						tags.append("</div>");
+					}
+					for(Constraint inv : cd.getInv()){
+						KermetaUnit invUnit = KermetaUnitHelper.getKermetaUnitFromObject(inv);
+						if(!aspectUnitsReferences.containsKey(invUnit)){
+							aspectUnitsReferences.put(invUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
+							aspectReferencesUnits.put(aspectUnitsReferences.get(invUnit), invUnit);
+						}
+						properties.append("\t"+htmlSummary(inv) + " " + createAspectReference(invUnit,aspectUnitsReferences) +"\n");
+					}
+					for(Property prop :cd.getOwnedAttribute()){
+						KermetaUnit propertyUnit = KermetaUnitHelper.getKermetaUnitFromObject(prop);
+						if(!aspectUnitsReferences.containsKey(propertyUnit)){
+							aspectUnitsReferences.put(propertyUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
+							aspectReferencesUnits.put(aspectUnitsReferences.get(propertyUnit), propertyUnit);
+						}
+						properties.append("\t"+htmlSummary(prop) + " " + createAspectReference(propertyUnit,aspectUnitsReferences) +"\n");
+					}
+					for(Operation op :cd.getOwnedOperation()){
+						KermetaUnit operationUnit = KermetaUnitHelper.getKermetaUnitFromObject(op);
+						if(!aspectUnitsReferences.containsKey(operationUnit)){
+							aspectUnitsReferences.put(operationUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
+							aspectReferencesUnits.put(aspectUnitsReferences.get(operationUnit), operationUnit);
+						}
+						operations.append("\t"+htmlSummary(op) + " " + createAspectReference(operationUnit,aspectUnitsReferences)+"\n");
+					}
 				}
 			}
 		}
 		
-		String result = tags;
+		StringBuilder result = new StringBuilder("<H1>");
 		
 		if ( node.isIsAbstract() ) 
-			result += "<b>abstract</b> ";
+			result.append("abstract ");
 		
-		result += "<b>class</b> " + KMTHelper.getMangledIdentifier(node.getName());
+		result.append("class <strong class=nodename>" + KMTHelper.getMangledIdentifier(node.getName()));
 		
 		if (node.getTypeParameter().size() > 0) {
-			result += "&lt;";
-			result += ppTypeVariableDeclaration(node.getTypeParameter());
-			result += "&gt;";
+			result.append(LT);
+			result.append(EscapeChars.forHTML(kmtPP.ppTypeVariableDeclaration(node.getTypeParameter())));
+			result.append(GT);
+		}
+		result.append("</strong></H1>");
+		if(node.eContainer() != null && node.eContainer() instanceof NamedElement){
+			result.append("<H3>Container</H3>");
+			result.append("\tpackage "+KermetaModelHelper.NamedElement.qualifiedName((NamedElement)node.eContainer()));
+		}
+		if ( ! supertypes.equals("") )
+			result.append("<H3>inherits from </H3>" + supertypes);
+		
+		if (!tags.equals("")){ 
+			result.append(tags);
+		}
+		result.append(" \n");
+		if (!properties.toString().equals("")) {
+			result.append("<H2>List of properties of this class</H2>");
+			result.append(properties);
+		}
+		if (!operations.toString().equals("")){
+			result.append("<H2>List of operations of this class</H2>");
+			result.append(operations);
+		}
+		if (!invariants.toString().equals("")){
+			result.append("<H2>List of invariants</H2>");
+			result.append(invariants);
+		}
+		// TODO add a list of inherited properties and inherited operations
+		
+		// add the origin of the aspects (ie. a legend for each of the operations/properties/invariants)
+		result.append("\n<H2><A name=\"aspectFiles\">The class is defined from the following files</A></H2>");
+		List<String> sorted = new ArrayList<String>(aspectUnitsReferences.values());
+		Collections.sort(sorted);
+		for( String ref : sorted){		
+			result.append("\t" + ref + " " + aspectReferencesUnits.get(ref).getUri()+"\n");
 		}
 		
-		if ( ! supertypes.equals("") )
-			result += " inherits from " + supertypes;
-		
-		result += " {\n\n\n";
-		
-		result += properties;
-		result += operations;
-		
-		result += "}";
-		
-		return result;
-	}
-	
-	public String htmlConstraint(Constraint constraint) {
-		return (String) accept(constraint);
-	}
-	
-	public String htmlSummary(Operation node) {
-		DOC_VIEW = true;
-		printBody = false;
-		StringBuffer result= new StringBuffer("");
-		result.append("<b>operation</b> " + KMTHelper.getMangledIdentifier(node.getName()));
-		result.append("\n") ;
-		String tags = ppTags(node.getTag());
-		result.append(getPrefix() + tags);
-		if(tags.compareTo("")!=0) result.append("\n") ;
 		return result.toString();
 	}
 	
-	public String htmlSummary(Property node) {
-		DOC_VIEW = true;
-		printBody = false;
-		StringBuffer result= new StringBuffer("");
-		result.append(ppSimplifiedProperty(node));
-		/*result.append("<b>Property </b> " + KMTHelper.getMangledIdentifier(node.getName()));
+	protected String createAspectReference(KermetaUnit unit, Hashtable<KermetaUnit,String> aspectUnitsReferences){
+		return " <A title=\""+unit.getUri()+"\" class=reference>" +aspectUnitsReferences.get(unit) + "</A>";
+	}
+	
+	/**
+	 * HTML documentation for Constraint
+	 * @param constraint
+	 * @return
+	 */
+	public String htmlDocumentation(Constraint constraint) {
+		return  EscapeChars.forHTML((String)kmtPP.accept(constraint));
+	}
+	/**
+	 * HTML documentation for Operation
+	 * @param node
+	 * @return
+	 */
+	public String htmlDocumentation(Operation node) {
+		StringBuilder result= new StringBuilder("<H1>");
+		if (node.isIsAbstract()) result.append("abstract ");
+		if (node.getSuperOperation() != null) result.append("method ");
+		else result.append("operation ");
+		result.append("<strong class=nodename>" + KMTHelper.getMangledIdentifier(node.getName()) + "</strong>");
+		if (node.getTypeParameter().size() > 0) {
+			result.append(LT);
+			result.append(EscapeChars.forHTML(kmtPP.ppTypeVariableDeclaration(node.getTypeParameter())));
+			result.append(GT);
+		}
+		result.append("</H1>");
+		result.append("<H3>Parameters :</H3>");
+		if(node.getOwnedParameter().size()>0){
+			kmtPP.pushPrefix();
+			result.append(EscapeChars.forHTML(kmtPP.ppCRSeparatedNode(node.getOwnedParameter())));
+			kmtPP.popPrefix();
+		}
+		else result.append("\t<em>none</em>\n");
+			
+		result.append("<H3>Return type : </H3>\t");
+		if(node.getType() != null) {
+			result.append( EscapeChars.forHTML(kmtPP.ppTypeFromMultiplicityElement(node)));
+		}
+		else result.append("<em>Void</em>");
+	
+		if (node.getSuperOperation() != null) {
+			result.append("\n<H3>Redefines operation from :</H3>\n\t" + NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass()));
+		}
+		if (node.getRaisedException().size() > 0) {
+			result.append("\n<H3>Raises excetions :</H3>\n");
+			kmtPP.pushPrefix();
+			result.append(EscapeChars.forHTML(kmtPP.ppCRSeparatedNode(node.getRaisedException())));
+			kmtPP.popPrefix();
+		}
 		result.append("\n") ;
 		String tags = ppTags(node.getTag());
-		result.append(getPrefix() + tags);
-		if(tags.compareTo("")!=0) result.append("\n") ;*/
+		if(!tags.equals("")) result.append("<div class=\"documentation\">" +tags + "</div>\n") ;
+		return result.toString();
+	}
+	
+	/**
+	 * Summary version of the Operation
+	 * @param node
+	 * @return
+	 */
+	public String htmlSummary(Operation node) {
+		StringBuffer result= new StringBuffer("");
+		if (node.isIsAbstract()) result.append("<b>abstract</b> ");
+		if (node.getSuperOperation() != null) result.append("<b>method</b> ");
+		else result.append("<b>operation</b> ");
+		result.append("<strong class=nodename>" + KMTHelper.getMangledIdentifier(node.getName()) + "</strong>");
+		if (node.getTypeParameter().size() > 0) {
+			result.append(LT);
+			result.append(EscapeChars.forHTML(kmtPP.ppTypeVariableDeclaration(node.getTypeParameter())));
+			result.append(GT);
+		}
+		result.append("(");
+		result.append(EscapeChars.forHTML(kmtPP.ppComaSeparatedNodes(node.getOwnedParameter())));
+		result.append(")");
+		if(node.getType() != null) {
+			result.append(" : " + EscapeChars.forHTML(kmtPP.ppTypeFromMultiplicityElement(node)));
+		}
+	
+		if (node.getSuperOperation() != null) {
+			result.append(" <b>from</b> " + NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass()));
+		}
+		
+		return result.toString();
+	}
+
+	public String htmlDocumentation(Property node) {
+		StringBuffer result= new StringBuffer("<H1 title=\""+ kmtPP.ppSimplifiedProperty(node) +"\">");
+		if (node.isIsDerived()) result.append("property ");
+		else if (node.isIsComposite()) result.append("attribute ");
+		else result.append("reference ");
+		result.append("<strong class=nodename>" +KMTHelper.getMangledIdentifier(node.getName()) + "</strong>");
+		//result.append("<b>Property </b> " + KMTHelper.getMangledIdentifier(node.getName()));
+		result.append("</H1>") ;
+		if(node.eContainer() != null && node.eContainer() instanceof NamedElement){
+			result.append("<H3>Container</H3>");
+			result.append("\tclass "+KermetaModelHelper.NamedElement.qualifiedName((NamedElement)node.eContainer()));
+		}
+		result.append("<H2>Type</H2>");
+		//result.append(kmtPP.accept(node.getType()));
+		result.append("\t"+EscapeChars.forHTML(kmtPP.ppTypeFromMultiplicityElement(node)));
+		result.append("<H2>multiplicity </H2>\t[");
+		result.append(node.getLower());
+		result.append("..");
+		result.append(node.getUpper() == -1 ? "*": node.getUpper());
+		result.append("]");
+		if(node.isIsReadOnly()) result.append("This feature is <b>readonly</b>\n");
+		if (node.getOpposite() != null) result.append("<H2>Opposite</H2>\t"+ KMTHelper.getMangledIdentifier(node.getOpposite().getName()));
+		String tags = ppTags(node.getTag());
+		if(tags.compareTo("")!=0){
+			result.append("<div class=\"documentation\">" );
+			result.append( tags);
+			result.append("</div>\n") ;
+		}
+		result.append("\n<H2><A name=\"aspectFiles\">The feature is defined in the following file</A></H2>");		
+		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(node);
+		result.append("\t[1] " + unit.getUri()+"\n");
+		return result.toString();
+	}
+	
+	/**
+	 * Summary version of a Property
+	 * @param node
+	 * @return
+	 */
+	public String htmlSummary(Property node) {
+		StringBuffer result= new StringBuffer("");
+		result.append(ppSimplifiedProperty(node));
+		
+		return result.toString();
+	}
+
+	/**
+	 * Summary version of a Constraint
+	 * @param node
+	 * @return
+	 */
+	public String htmlSummary(Constraint node) {
+		StringBuffer result= new StringBuffer("");
+		result.append(node.getName());
+		
+		return result.toString();
+	}
+	
+	/**
+	 * Summary version of a Package
+	 * @param node
+	 * @return
+	 */
+	public String htmlSummary(Package node) {
+		StringBuffer result= new StringBuffer("");
+		result.append("package <strong class=nodename>" + KMTHelper.getMangledIdentifier(node.getName()));
+		result.append("</strong>");
+		
+		return result.toString();
+	}
+	
+	/**
+	 * Summary version of a ClassDefinition
+	 * @param node
+	 * @return
+	 */
+	public String htmlSummary(ClassDefinition node) {
+		StringBuffer result= new StringBuffer("");
+		if ( node.isIsAbstract() ) 
+			result.append("abstract ");
+		result.append("class <strong>" + KMTHelper.getMangledIdentifier(node.getName()));
+		if (node.getTypeParameter().size() > 0) {
+			result.append(LT);
+			result.append(EscapeChars.forHTML(kmtPP.ppTypeVariableDeclaration(node.getTypeParameter())));
+			result.append(GT);
+		}
+		result.append("</strong>");
+		
+		return result.toString();
+	}
+	/**
+	 * Summary version of a TypeDefinition
+	 * @param node
+	 * @return
+	 */
+	public String htmlSummary(TypeDefinition node) {
+		
+		StringBuffer result = new StringBuffer("");
+		if(node instanceof ClassDefinition) result.append(htmlSummary((ClassDefinition)node));
+		else{
+			// default if this is not a class
+			result.append("<strong >" + KMTHelper.getMangledIdentifier(node.getName()));
+			result.append("</strong>");
+		}
 		return result.toString();
 	}
 	
@@ -273,7 +632,7 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter#visit(fr.irisa.triskell.kermeta.language.structure.ClassDefinition)
 	 */
-	public Object visit(ClassDefinition node) {
+/*	public Object visit(ClassDefinition node) {
 		typedef = false;
 		StringBuilder result= new StringBuilder();
 		if(mainClass){
@@ -332,23 +691,17 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 		typedef = true;
 		return result.toString();
 	}
-
+*/
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter#ppSimplifiedProperty(fr.irisa.triskell.kermeta.language.structure.Property)
 	 */
 	public String ppSimplifiedProperty(Property node) {
-		//return super.ppSimplifiedProperty(node);
-		String result = "";
-		if(mainClass){
-			String tags = ppTags(node.getTag());
-			result = getPrefix() + tags;
-			if(tags.length() != 0) result += CR ;
-		}
+		String result = "";		
 		if (node.isIsDerived()) result += "<b>property</b> ";
 		else if (node.isIsComposite()) result += "<b>attribute</b> ";
 		else result += "<b>reference</b> ";
 		if (node.isIsReadOnly()) result += "<b>readonly</b> ";
-		result += KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
+		result += KMTHelper.getMangledIdentifier(node.getName()) + " : " + EscapeChars.forHTML(kmtPP.ppTypeFromMultiplicityElement(node));
 		if (node.getOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName());
 		return result;
 	}
@@ -356,13 +709,13 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter#visit(fr.irisa.triskell.kermeta.language.structure.Operation)
 	 */
-	public Object visit(Operation node) {
+/*	public Object visit(Operation node) {
 		//return super.visit(node);
 		String result = "";
 		if(mainClass){
 			//result = ppTags(node.getTag());
 			String tags = ppTags(node.getTag());
-			result = getPrefix() + tags;
+			result = tags;
 			if(tags.length() != 0) result += CR ;
 		}
 		if (node.isIsAbstract()) result += "<b>abstract</b> ";
@@ -382,15 +735,15 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 		}
 	
 		if (node.getSuperOperation() != null) {
-			result += " from " + NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass());
+			result += " <b>from</b> " + NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass());
 		}
 		if (node.getRaisedException().size() > 0) {
-			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());
+			result += " <b>raises</b> " + ppComaSeparatedNodes(node.getRaisedException());
 		}
 		
 		return result;
 	}
-
+*/
 	/**
 	 * replaces all occurences to the platfrom plugin url by the local file url 
 	 * Note: maybe this can be more precise and do that only in images src ?
@@ -459,7 +812,6 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 	 */
 	public KMTDocHTMLPrettyPrinter() {
 		super();
-		prefixTab = "   ";
 	}
 
 }
