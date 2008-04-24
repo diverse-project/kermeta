@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.15 2008-03-06 07:59:09 ftanguy Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.16 2008-04-24 09:48:55 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -1343,11 +1343,11 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	protected String prefixTab = "\t";
-	protected void pushPrefix() {
+	public void pushPrefix() {
 		prefix = prefix + prefixTab;
 	}
 	
-	protected void popPrefix() {
+	public void popPrefix() {
 		prefix = prefix.substring(prefixTab.length());
 	}
 	
