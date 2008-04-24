@@ -1,4 +1,4 @@
-/* $Id: 059_loadSaveKMEnum.main.kmt,v 1.1 2008-04-24 19:22:13 cfaucher Exp $
+/* $Id: 059_loadSaveKMEnum.main.kmt,v 1.2 2008-04-24 19:30:37 cfaucher Exp $
  * Creation date: April 24, 2008
  * License: EPL
  * Copyright: INRIA
@@ -20,7 +20,6 @@ using kermeta::standard
 using kermeta::persistence
 using kermeta::kunit
 using kermeta::language::structure
-using kermeta::exceptions
 
 class Main inherits TestCase
 {
