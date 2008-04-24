@@ -6,12 +6,11 @@ Bundle-Version: 1.0.0
 Bundle-Activator: org.eclipse.emf.ecoretools.registration.RegistrationPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.emf,
- org.eclipse.emf.ecore.edit,
+ org.eclipse.emf;visibility:=reexport,
+ org.eclipse.emf.ecore.edit;visibility:=reexport,
  org.eclipse.core.resources
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.emf.ecoretools.registration,
- org.eclipse.emf.ecoretools.registration.popup.actions,
- org.eclipse.emf.ecoretools.registration.view
+ org.eclipse.emf.ecoretools.registration.internal
 Bundle-Vendor: INRIA
 Bundle-ClassPath: .
