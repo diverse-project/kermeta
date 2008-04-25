@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.11 2008-02-14 07:13:10 uid21732 Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.12 2008-04-25 07:53:55 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -240,7 +240,8 @@ public class KermetaMarkersHelper {
     public static void clearMarkers(IFile file) {
         try {
             //file.deleteMarkers(getMarkerType(), true, 2);
-        	file.deleteMarkers(getMarkerType(), true, IResource.DEPTH_INFINITE);
+        	if(file != null)
+        		file.deleteMarkers(getMarkerType(), true, IResource.DEPTH_INFINITE);
         } catch(Exception ex) {
             //ex.printStackTrace();
         }
