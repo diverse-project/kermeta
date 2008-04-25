@@ -1,4 +1,4 @@
-/* $Id: 059_loadSaveKMEnum.main.kmt,v 1.2 2008-04-24 19:30:37 cfaucher Exp $
+/* $Id: 059_loadSaveKMEnum.main.kmt,v 1.3 2008-04-25 09:48:48 cfaucher Exp $
  * Creation date: April 24, 2008
  * License: EPL
  * Copyright: INRIA
@@ -44,7 +44,7 @@ class Main inherits TestCase
 		
 		// Try to load the test km model
 		var res1 : Resource init EMFRepository.new.getResource(modelUriBase+"kmModelWithKMEnum.km")
-		res1.load()
+
 		var mu1 : ModelingUnit
 		// That's the first element ...
 		mu1 ?= res1.instances.one
@@ -58,7 +58,6 @@ class Main inherits TestCase
 		
 		// Try to load the test km model saved in the output folder
 		var res3 : Resource init EMFRepository.new.getResource(outputmodelUriBase+"kmModelWithEnum.km")
-		res3.load()
 		
 		var mu : ModelingUnit
 		// That's the first element ...
