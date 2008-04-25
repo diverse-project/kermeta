@@ -1,4 +1,4 @@
-/*$Id: KermetadocView.java,v 1.3 2008-02-14 07:12:53 uid21732 Exp $
+/*$Id: KermetadocView.java,v 1.4 2008-04-25 10:08:52 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -38,6 +38,7 @@ import org.kermeta.texteditor.KermetaTextEditor;
 
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.ui.textPresentation.KMTDocHTMLPrettyPrinter;
+import fr.irisa.triskell.kermeta.ui.textPresentation.PrintableFinder;
 
 /**
  * View which shows Javadoc for a given Java element.
@@ -240,9 +241,15 @@ public class KermetadocView extends ViewPart implements KermetaEditorEventListen
 		Boolean isValidUpdate = false;
 		String newHTMLDocumentation = "";
 		if(n != null && n != lastValidUpdate)
-			if (n instanceof EObject){						
-				newHTMLDocumentation = (String)hintpp.getHTMLDoc((EObject) n);
-				isValidUpdate = true;
+			if (n instanceof EObject){	
+				PrintableFinder finder = new PrintableFinder();
+				EObject printableObject = (EObject)finder.accept((EObject)n);
+				if(printableObject != null){
+					newHTMLDocumentation = (String)hintpp.getHTMLDoc(printableObject);
+				
+					if(newHTMLDocumentation != null) // maybe the getHTMLDoc doesn't work for this kind of object
+						isValidUpdate = true;
+				}
 			}
 		if(isValidUpdate){
 			currentHTMLDocumentation = newHTMLDocumentation;
@@ -302,8 +309,13 @@ public class KermetadocView extends ViewPart implements KermetaEditorEventListen
 		
 		String docHtml= currentHTMLDocumentation;
 
-		if (fIsUsingBrowserWidget) {			
-			fBrowser.setText(docHtml);
+		if (fIsUsingBrowserWidget) {
+			// make sure to use the UI Thread
+			Display.getDefault().asyncExec(new Runnable() {
+			      public void run() {
+						fBrowser.setText(currentHTMLDocumentation);
+			      }
+			    });
 		} else {
 			fText.setText(docHtml);
 			
