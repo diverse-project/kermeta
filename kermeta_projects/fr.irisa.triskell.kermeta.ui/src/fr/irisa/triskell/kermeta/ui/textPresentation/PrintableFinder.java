@@ -1,4 +1,4 @@
-/*$Id: PrintableFinder.java,v 1.1 2008-04-25 10:09:59 dvojtise Exp $
+/*$Id: PrintableFinder.java,v 1.2 2008-04-25 15:05:09 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.ui
 * File : 	PrintableFinder.java
 * License : EPL
@@ -113,8 +113,7 @@ public class PrintableFinder extends KermetaOptimizedVisitor {
 	 */
 	@Override
 	public Object visitCallResult(CallResult node) {
-		// TODO Auto-generated method stub
-		return super.visitCallResult(node);
+		return accept(node.getStaticType());
 	}
 
 	/* (non-Javadoc)
