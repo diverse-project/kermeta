@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectImpl.java,v 1.4 2007-11-29 15:26:14 dvojtise Exp $
+/* $Id: RuntimeObjectImpl.java,v 1.5 2008-04-25 09:59:01 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -145,9 +145,9 @@ public class RuntimeObjectImpl implements RuntimeObject {
         
         super.finalize();
         // clear as much ref as possible
-        container = null;
-        metaclass = null;
-        properties = null;
+        if(container != null) container = null;
+        if(metaclass !=  null) metaclass = null;
+        if(properties != null) properties.clear();
        // data = null;
         factory = null;
     }

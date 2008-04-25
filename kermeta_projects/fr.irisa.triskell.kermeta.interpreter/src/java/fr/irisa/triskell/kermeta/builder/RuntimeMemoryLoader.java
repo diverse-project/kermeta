@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.30 2008-04-01 12:23:28 bmorin Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.31 2008-04-25 09:59:01 dvojtise Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -51,24 +51,21 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
     protected RuntimeMemory memory;
     
     /** Properties hashtable : { qualified_name : RuntimeObject } */
-    private Hashtable<String, RuntimeObject> properties;
+    private Hashtable<String, RuntimeObject> properties = new Hashtable<String, RuntimeObject>();
     
     // mapping kcoreObject -> RuntimeObject
-    private Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, RuntimeObject> objects;
+    private Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, RuntimeObject> objects = new Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, RuntimeObject>();
     // mapping qualified_name -> RuntimeObject (TypeDefinition)
     /** TypeDefinition hashtable : { qualified_name : RuntimeObject } */
-    private Hashtable<String, RuntimeObject> typeDefinitions;
+    private Hashtable<String, RuntimeObject> typeDefinitions = new Hashtable<String, RuntimeObject>();
     
     /**
      * Constructor
      */
     protected RuntimeMemoryLoader(KermetaUnit unit, RuntimeMemory memory) {
         super();
-        properties = new Hashtable<String, RuntimeObject>();
         this.unit = unit;
         this.memory = memory;
-        objects = new Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, RuntimeObject>();
-        typeDefinitions = new Hashtable<String, RuntimeObject>();
     }
     
     protected void init() {
@@ -393,21 +390,17 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
         unit = null;
         if(memory != null) {
         	memory.freeJavaMemory();
-        	memory = null;
         }        
         if(properties != null){
 	        properties.clear();
-	        properties = null;
         }
         if (objects != null)
         {
-        	objects.clear();        
-        	objects = null;
+        	objects.clear();  
         }
         if (typeDefinitions != null)
         {
-        	typeDefinitions.clear();        
-        	typeDefinitions = null;
+        	typeDefinitions.clear();  
         }
     }
 }
