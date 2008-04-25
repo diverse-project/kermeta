@@ -1,4 +1,4 @@
-/*$Id: RegisteredPackagesLabelProvider.java,v 1.1 2008-04-24 07:46:09 ftanguy Exp $ */
+/*$Id: RegisteredPackagesLabelProvider.java,v 1.2 2008-04-25 07:42:50 cfaucher Exp $ */
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -16,8 +16,8 @@ package org.eclipse.emf.ecoretools.registration.view;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
-import org.eclipse.emf.ecoretools.registration.internal.RegistrationConstants;
-import org.eclipse.emf.ecoretools.registration.internal.RegistrationIcons;
+import org.eclipse.emf.ecoretools.registration.ui.RegistrationConstants;
+import org.eclipse.emf.ecoretools.registration.ui.RegistrationIcons;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;

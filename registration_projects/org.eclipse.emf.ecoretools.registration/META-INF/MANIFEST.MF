@@ -11,6 +11,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.emf.ecoretools.registration,
- org.eclipse.emf.ecoretools.registration.internal
+ org.eclipse.emf.ecoretools.registration.internal;x-internal:=true
 Bundle-Vendor: INRIA
 Bundle-ClassPath: .

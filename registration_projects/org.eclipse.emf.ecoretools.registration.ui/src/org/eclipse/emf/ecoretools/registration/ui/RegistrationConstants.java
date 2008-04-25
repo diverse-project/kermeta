@@ -1,4 +1,4 @@
-/* $Id: RegistrationConstants.java,v 1.1 2008-01-28 15:44:46 dvojtise Exp $ */
+/* $Id: RegistrationConstants.java,v 1.1 2008-04-25 07:42:50 cfaucher Exp $ */
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -10,7 +10,7 @@
  * Contributors:
  *    INRIA - initial API and implementation
  **********************************************************************/
-package org.eclipse.emf.ecoretools.registration.internal;
+package org.eclipse.emf.ecoretools.registration.ui;
 
 /**
  * Constants used by the plugin

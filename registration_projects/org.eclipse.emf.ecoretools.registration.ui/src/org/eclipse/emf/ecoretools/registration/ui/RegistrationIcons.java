@@ -1,4 +1,4 @@
-/* $Id: RegistrationIcons.java,v 1.1 2008-01-28 15:44:46 dvojtise Exp $ */
+/* $Id: RegistrationIcons.java,v 1.1 2008-04-25 07:42:50 cfaucher Exp $ */
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -10,7 +10,7 @@
  * Contributors:
  *    INRIA - initial API and implementation
  **********************************************************************/
-package org.eclipse.emf.ecoretools.registration.internal;
+package org.eclipse.emf.ecoretools.registration.ui;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,8 +18,6 @@ import java.util.Hashtable;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
-
-import org.eclipse.emf.ecoretools.registration.RegistrationPlugin;
 
 /**
  * This class is used as an images registry.
@@ -37,7 +35,7 @@ public class RegistrationIcons {
 	/**
 	 * We need to access to images in the plugin hierarchy. This URL will help us.
 	 */
-	static final private URL pluginURL = RegistrationPlugin.getDefault().getBundle().getEntry("/");
+	static final private URL pluginURL = RegistrationUIPlugin.getDefault().getBundle().getEntry("/");
 	
 	/**
 	 * This is the icons registry : a name corresponds to an image.
