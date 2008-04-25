@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.3 2008-03-03 09:43:59 dvojtise Exp $
+/* $Id: EditorTextHover.java,v 1.4 2008-04-25 10:07:37 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -34,6 +34,7 @@ import org.kermeta.texteditor.KermetaTextEditor;
 
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
@@ -43,6 +44,8 @@ import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
 import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.TextReference;
+import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 
@@ -94,7 +97,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	 */
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
 		
-	    try {
+		try {
 			IMarker[] markers = getFile().findMarkers(KermetaMarkersHelper.getMarkerType(), true, 2);
 			for (int i=0; i<markers.length; i++) {
 				int start = MarkerUtilities.getCharStart(markers[i]);
@@ -111,41 +114,57 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 			tracer = getKermetaUnit().getTracer();
 		if(tracer == null) 
 			return null; // ignore hover if there is no tracer (this may occur if the load of the unit failed due to an internal error)
-		java.util.List<ModelReference> references = tracer.getModelReferences(hoverRegion.getOffset(), hoverRegion.getLength(), getKermetaUnit().getUri());
-		for ( ModelReference reference : references ) {
-			EObject o = reference.getRefObject();
-	        if (o instanceof Expression)
-	        {
-	            Expression fexp = (Expression)o;
-	            // Find the tag of the CallFeature definition!
-	            if (fexp instanceof CallFeature)
-	            {
-
-	                return ppDefinitionForCallFeature((CallFeature)fexp);
-	            }
-	            else if (fexp.getStaticType() != null) {
-	                Type t = new SimpleType(fexp.getStaticType());
-	                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
-	                // return the source code representation or the signature
-	                // of the element pointed by the cursor
-	                return pp.accept(o) + " : " + t + "\n";
-	            }
-	        }
-	        else if(o instanceof fr.irisa.triskell.kermeta.language.structure.Class){
-	        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)o;
-				String ftags = kdocPrettyPrint(aClass.getTypeDefinition().getTag());
-				return NamedElementHelper.getMangledQualifiedName(aClass.getTypeDefinition())+ "\n" + ftags;
-	        } else if ( o instanceof Property ) {
-	        	Property p = (Property) o;
-				String ftags = kdocPrettyPrint( p.getTag() );
-				return NamedElementHelper.getMangledQualifiedName( p )+ "\n" + ftags;
-	        } else if ( o instanceof Operation ) {
-	        	Operation p = (Operation) o;
-				String ftags = kdocPrettyPrint( p.getTag() );
-				return NamedElementHelper.getMangledQualifiedName( p )+ "\n" + ftags;	        	
-	        } else
-	    		TexteditorPlugin.internalLog.debug("no recognized object : hover will ignore it");
+		
+		// find the best Model Reference for the given region
+		TextReference textRef = tracer.getShortestContainingTextReference(hoverRegion.getOffset(), hoverRegion.getLength(), getKermetaUnit().getUri());
+		ModelReference modelRef =ModelReferenceHelper.getOneNextReference(textRef);
+		
+		// Notify other plugin of this event
+        
+		for(KermetaEditorEventListener listener :TexteditorPlugin.getDefault().kermetaEditorEventListeners)
+		{
+			try{
+			if(modelRef.getRefObject() instanceof Object)
+				listener.textHoverCalled((Object) modelRef.getRefObject());
+			}
+			catch(Exception e){
+				TexteditorPlugin.pluginLog.error("Not able to notify one of the kermetaEditorEventListeners", e);
+			}
 		}
+		
+		EObject o = modelRef.getRefObject();
+        if (o instanceof Expression)
+        {
+            Expression fexp = (Expression)o;
+            // Find the tag of the CallFeature definition!
+            if (fexp instanceof CallFeature)
+            {
+
+                return ppDefinitionForCallFeature((CallFeature)fexp);
+            }
+            else if (fexp.getStaticType() != null) {
+                Type t = new SimpleType(fexp.getStaticType());
+                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
+                // return the source code representation or the signature
+                // of the element pointed by the cursor
+                return pp.accept(o) + " : " + t + "\n";
+            }
+        }
+        else if(o instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)o;
+			String ftags = kdocPrettyPrint(aClass.getTypeDefinition().getTag());
+			return NamedElementHelper.getMangledQualifiedName(aClass.getTypeDefinition())+ "\n" + ftags;
+        } else if ( o instanceof Property ) {
+        	Property p = (Property) o;
+			String ftags = kdocPrettyPrint( p.getTag() );
+			return NamedElementHelper.getMangledQualifiedName( p )+ "\n" + ftags;
+        } else if ( o instanceof Operation ) {
+        	Operation p = (Operation) o;
+			String ftags = kdocPrettyPrint( p.getTag() );
+			return NamedElementHelper.getMangledQualifiedName( p )+ "\n" + ftags;	        	
+        } else
+    		TexteditorPlugin.internalLog.debug("no recognized object : hover will ignore it");
+		
 		
 		
 		/*if (editor.mcunit != null && ((KMTUnit)editor.mcunit).getMctAST() != null) {
