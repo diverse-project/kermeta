@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.61 2008-04-15 10:11:42 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.62 2008-04-25 10:00:19 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -319,7 +319,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		} catch (InterruptedException e) {
 			throwKermetaRaisedExceptionOnLoad("Loading model interrupted", e);
 		}
-		if (myJob.catchedException != null) // due to the change of Thred, re-throw the intercepted excpetion
+		if (myJob.catchedException != null) // due to the change of Thread, re-throw the intercepted excpetion
 			throw myJob.catchedException;
     }
     
