@@ -1,4 +1,4 @@
-/* $Id: EcoreWrapper.java,v 1.5 2007-10-15 11:02:31 barais Exp $
+/* $Id: EcoreWrapper.java,v 1.6 2008-04-25 06:20:24 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.ecore (First iteration)
  * File      : EcoreWrapper.java
  * License   : EPL
@@ -21,6 +21,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.launcher.AbstractKInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
@@ -60,10 +61,10 @@ public class EcoreWrapper {
 	    	kunit.error(errmsg, null );
 	    	ftype = null;
 	    	// stop after the first error: throw a Kermeta Exception ...
-	    	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();        	
+	    	AbstractKInterpreter interpreter = memory.getInterpreter();
 	    	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
 	    			errmsg,
-	    			interpreter,
+	    			interpreter.getBasicInterpreter(),
 	    			memory,
 	    			null);
 	    }
