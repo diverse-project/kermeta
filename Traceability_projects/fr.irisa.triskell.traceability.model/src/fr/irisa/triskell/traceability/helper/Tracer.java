@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.9 2008-01-17 16:01:05 cfaucher Exp $
+/* $Id: Tracer.java,v 1.10 2008-04-25 10:04:14 dvojtise Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -7,6 +7,7 @@
  * Creation date : 26 juil. 2005
  * Authors : 
  *        dvojtise <dvojtise@irisa.fr>
+ *        ftanguy <ftanguy@irisa.fr>
  * Description : 
  *         
  */
@@ -364,52 +365,80 @@ public class Tracer {
 		return textReferences;
 	}*/
 	
-	public List <ModelReference> getModelReferences(int offset, int length, String uri) {
-
+	/**
+	 * Retrieves the shortest TextReference that contains the string identified by a given uri, offset and length
+	 * If nothing is found with the given offset, tries to find a textreference wich start before (decrement the offset  
+	 * the length is used to select the shortest TextReference 
+	 * If several TextReference are equally small and match the criterion, one will be selected (but not guarantee about the order)
+	 * return null if none is found
+	 */
+	public TextReference getShortestContainingTextReference(int offset, int length, String uri) {
 		TextReference result = null;
-		List<TextReference> references = textReferencesCache.get(offset);
-		if ( references != null ) {	
-			for ( TextReference reference : references ) {
-
-				if ( result == null ) {
-					if ( reference.getCharEndAt() >= offset+length )
-						result = reference;
-				} else {
-					if ( reference.getCharEndAt() > result.getCharBeginAt() )
-						result = reference;
-				}
-						
-				/*if ( result == null ) {
-		
-					if ( reference.getFileURI().equals(uri) 
-					&& ( reference.getCharBeginAt() <= offset ) 
-					&& ( reference.getCharEndAt() >= offset+length ) )
-					
-					result = reference;
-						
-				} else {
-				
-					if ( reference.getFileURI().equals(uri) 
-						&& ( reference.getCharBeginAt() < offset ) && ( reference.getCharBeginAt() >= result.getCharBeginAt() ) 
-						&& ( reference.getCharEndAt() > offset+length ) && ( reference.getCharEndAt() <= result.getCharEndAt() ) )
-					
-					result = reference;
-				
-				}*/
+		int searchedOffset = offset;
+		int searchedLength = length;
+		boolean found = false;
+		while(! found && searchedOffset > -1){	
+			result = getStrictOffsetShortestTextReference(searchedOffset, searchedLength, uri);
+			if(result ==  null ){
+				searchedOffset--;
+				searchedLength++;
 			}
-
-			if ( result != null ) {
-				List <ModelReference> modelReferences = new ArrayList <ModelReference> ();
-				Iterator <Trace> iterator = result.getTargetTraces().iterator();
-				while ( iterator.hasNext() ) {
-					Trace currentTrace = iterator.next();
-					if ( currentTrace.getTargetReferences().get(0) instanceof ModelReference )
-						modelReferences.add( (ModelReference) currentTrace.getTargetReferences().get(0) );
+			else found = true;
+		}
+		return result;
+	}
+	
+	/**
+	 * Retrieves the shortest TextReference that contains the string identified by a given uri, offset and length
+	 * The offset is strict, ie. it doesn't tries to expand the region to find a TextReference 
+	 * the length is used to select the shortest TextReference 
+	 * If several TextReference are equally small and match the criterion, one will be selected (but not guarantee about the order)
+	 * return null if none is found
+	 */
+	public TextReference getStrictOffsetShortestTextReference(int offset, int length, String uri) {
+		TextReference result = null;			
+		List<TextReference> references = textReferencesCache.get(offset);
+		// look into the strict offset cache
+		if ( references != null ) {
+			for ( TextReference reference : references ) {
+				if ( reference.getFileURI().equals(uri)){ // only on the correct file
+					if ( reference.getCharEndAt() >= offset+length ){
+						// this TextReference can contain the reference we are looking for
+						if ( result == null ) {
+							result = reference;
+						}
+						else {
+							// maybe this other TextReference that start at this offset is smaller that the currently found
+							if ( reference.getCharEndAt() < result.getCharEndAt() )
+								result = reference;
+						}
+					}
 				}
-		
-				return modelReferences;
 			}
 		}
+		return result;
+	}
+	
+	/**
+	 * Retrieves the ModelReferences that comes from a given uri, offset and length
+	 * The offset is strict. Ie. return an empty list if nothing start with this offset
+	 * the length is used to select the shortest TextReference 
+	 */
+	public List <ModelReference> getModelReferences(int offset, int length, String uri) {
+
+		TextReference trResult = getStrictOffsetShortestTextReference(offset, length, uri);
+		if ( trResult != null ) {
+			List <ModelReference> modelReferences = new ArrayList <ModelReference> ();
+			Iterator <Trace> iterator = trResult.getTargetTraces().iterator();
+			while ( iterator.hasNext() ) {
+				Trace currentTrace = iterator.next();
+				if ( currentTrace.getTargetReferences().get(0) instanceof ModelReference )
+					modelReferences.add( (ModelReference) currentTrace.getTargetReferences().get(0) );
+			}
+	
+			return modelReferences;
+		}
+		
 		
 		return new ArrayList<ModelReference>();
 	}
