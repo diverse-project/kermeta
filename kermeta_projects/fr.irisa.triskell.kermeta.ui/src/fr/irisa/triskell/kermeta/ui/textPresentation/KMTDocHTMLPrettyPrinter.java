@@ -1,4 +1,4 @@
-/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.8 2008-04-24 09:48:01 dvojtise Exp $
+/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.9 2008-04-25 10:09:59 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -8,9 +8,6 @@
  * Authors : 
  *     	dvojtise <dvojtise@irisa.fr>
  */
-/**
- * 
- */
 package fr.irisa.triskell.kermeta.ui.textPresentation;
 
 import java.net.URL;
@@ -18,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -58,14 +54,7 @@ import fr.irisa.triskell.string.EscapeChars;
  */
 public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 	public final static String KERMETA_DOCUMENTATION = "documentation";
-	
-	/** if 0 do not show attributes and operations
-	 * if 1 show only attributes and operations of the current class
-	 * if >1 also shows attributes and operations of the inherited class (if classFlat == true)
-	 */
-	public int classShortLevel = 2;
-	/** shows or not the inherited classes */
-	public boolean classFlat = true;
+		
 	
 	public String CR = "\n";
 	public String GT = "&gt;";
@@ -135,9 +124,13 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 		else if ( node instanceof PrimitiveType)
 			result.append(htmlDocumentation( (PrimitiveType) node ));
 		
+		else 
+			return null;  // not supported type ...
+		
 		result.append("</pre>");
 		return  fixPlatformURL(fixImages(result.toString()));
 	}
+	
 	
 	
 	public String htmlDocumentation(Package node) {
