@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.io.KermetaUnit;
@@ -117,6 +118,14 @@ public class LoaderPlugin extends Plugin {
 		
 		INITIALIZED = true;
 		
+		// Initializing IOPlugin before.
+		IOPlugin.getDefault();
+		
+		// If no uri.map, let's set the default URI for loader.
+		URI u = URI.createURI("kconf:/loader/");
+		if ( URIConverterImpl.URI_MAP.get(u) == null )
+			URIConverterImpl.URI_MAP.put(u, URI.createURI("platform:/plugin/org.kermeta.io.loader/instances/"));
+				
 		LoaderPackageImpl.init();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("loader",new XMIResourceFactoryImpl());
 		initializeLoaders();
@@ -232,13 +241,13 @@ public class LoaderPlugin extends Plugin {
 						 */
 						l.getDatas().setKermetaUnit(null);
 						loadingContext.getLoaders().remove(l);
-						/*
-						 * 
-						 * Removing the kermeta unit.
-						 * 
-						 */
-						IOPlugin.getDefault().unload(emfURI.toString());
 					}
+					/*
+					 * 
+					 * Removing the kermeta unit.
+					 * 
+					 */
+					IOPlugin.getDefault().unload(emfURI.toString());
 				}
 			}
 		}
