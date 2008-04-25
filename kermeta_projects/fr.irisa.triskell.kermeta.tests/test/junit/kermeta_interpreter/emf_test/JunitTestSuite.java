@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.13 2008-02-14 07:13:30 uid21732 Exp $
+/* $Id: JunitTestSuite.java,v 1.14 2008-04-25 15:21:26 cfaucher Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -109,9 +109,13 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/interpreter/emf_testcases/kermeta","057_saveDependentModels.main.kmt" );
 
-		testWithFile("test/interpreter/emf_testcases/kermeta","058_IndirectLoadSaveEnum.main.kmt" );
+		testWithFile("test/interpreter/emf_testcases/kermeta","058_loadSaveIndirectUseOfEcoreEnum.main.kmt" );
 
-		testWithFile("test/interpreter/emf_testcases/kermeta","058_loadSaveEnum.main.kmt" );
+		testWithFile("test/interpreter/emf_testcases/kermeta","058_loadSaveUseOfEcoreEnum.main.kmt" );
+
+		testWithFile("test/interpreter/emf_testcases/kermeta","059_loadSaveKMEnum.main.kmt" );
+
+		testWithFile("test/interpreter/emf_testcases/kermeta","059_loadUseOfKMEnum.main.kmt" );
 
 		testWithFile("test/interpreter/emf_testcases/kermeta","060_createSaveEcoreEnum.main.kmt" );
 
