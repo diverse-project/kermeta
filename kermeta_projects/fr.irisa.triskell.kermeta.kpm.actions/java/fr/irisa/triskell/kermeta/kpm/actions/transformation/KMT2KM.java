@@ -1,4 +1,4 @@
-/*$Id: KMT2KM.java,v 1.9 2008-04-25 07:32:38 ftanguy Exp $
+/*$Id: KMT2KM.java,v 1.10 2008-04-25 10:25:14 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -109,7 +109,7 @@ public class KMT2KM implements IAction {
 				String rep = "platform:/resource" + outputString.substring(0, index);
 				String fileName = "platform:/resource" + outputString;
 				KmExporter exporter = new KmExporter();
-				exporter.export(kermetaUnit, rep, fileName, true);
+				exporter.export(kermetaUnit, rep, fileName);
 				/*
 				 * 
 				 * Refereshing the workspace to display the new file.
