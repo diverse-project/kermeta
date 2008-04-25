@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataTypes="http://MARTE.MARTE_Annexes.VSL/schemas/DataTypes/_lNF_sKSsEdy-NrxVBTpLyA/9" xmlns:NFPs="http://MARTE.MARTE_Foundations/schemas/NFPs/_ktAJ8KSsEdy-NrxVBTpLyA/10" xmlns:Standard="http://www.eclipse.org/uml2/schemas/Standard/1" xmlns:Time="http://MARTE.MARTE_Foundations/schemas/Time/_ktYkcKSsEdy-NrxVBTpLyA/10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http://MARTE.MARTE_Annexes.VSL/schemas/DataTypes/_lNF_sKSsEdy-NrxVBTpLyA/9 MARTE.profile.uml#_lNwtoKSsEdy-NrxVBTpLyA http://MARTE.MARTE_Foundations/schemas/NFPs/_ktAJ8KSsEdy-NrxVBTpLyA/10 MARTE.profile.uml#_ktMXMKSsEdy-NrxVBTpLyA http://www.eclipse.org/uml2/schemas/Standard/1 pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w http://MARTE.MARTE_Foundations/schemas/Time/_ktYkcKSsEdy-NrxVBTpLyA/10 MARTE.profile.uml#_kuJZcKSsEdy-NrxVBTpLyA">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataTypes="http://MARTE.MARTE_Annexes.VSL/schemas/DataTypes/_pNWTkBBjEd20zIwSLfjspA/10" xmlns:NFPs="http://MARTE.MARTE_Foundations/schemas/NFPs/_olhekBBjEd20zIwSLfjspA/11" xmlns:Standard="http://www.eclipse.org/uml2/schemas/Standard/1" xmlns:Time="http://MARTE.MARTE_Foundations/schemas/Time/_omGGUBBjEd20zIwSLfjspA/11" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http://MARTE.MARTE_Annexes.VSL/schemas/DataTypes/_pNWTkBBjEd20zIwSLfjspA/10 MARTE.profile.uml#_pOBB8BBjEd20zIwSLfjspA http://MARTE.MARTE_Foundations/schemas/NFPs/_olhekBBjEd20zIwSLfjspA/11 MARTE.profile.uml#_ol__sBBjEd20zIwSLfjspA http://www.eclipse.org/uml2/schemas/Standard/1 pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w http://MARTE.MARTE_Foundations/schemas/Time/_omGGUBBjEd20zIwSLfjspA/11 MARTE.profile.uml#_onJPMBBjEd20zIwSLfjspA">
   <uml:Package xmi:id="_uBlQkA73EdyML4mHwjNDrw" name="MARTE_Library">
     <packageImport xmi:id="_uBlQkQ73EdyML4mHwjNDrw">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -842,7 +842,7 @@
       </packagedElement>
       <profileApplication xmi:id="_-Fgb0F1GEdy5RcXm_JjfDg">
         <eAnnotations xmi:id="_-GG4wF1GEdy5RcXm_JjfDg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_ktMXMKSsEdy-NrxVBTpLyA"/>
+          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_ol__sBBjEd20zIwSLfjspA"/>
         </eAnnotations>
         <appliedProfile href="MARTE.profile.uml#_U_GAoAPMEdyuUt-4qHuVvQ"/>
       </profileApplication>
@@ -979,7 +979,7 @@
       </packagedElement>
       <profileApplication xmi:id="_15RS0F1JEdy5RcXm_JjfDg">
         <eAnnotations xmi:id="_15bD0F1JEdy5RcXm_JjfDg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_lNwtoKSsEdy-NrxVBTpLyA"/>
+          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_pOBB8BBjEd20zIwSLfjspA"/>
         </eAnnotations>
         <appliedProfile href="MARTE.profile.uml#_9FdqwA-MEdyLh7muGbCqMw"/>
       </profileApplication>
@@ -1151,7 +1151,7 @@
       </packagedElement>
       <profileApplication xmi:id="_TaGeAF1LEdy5RcXm_JjfDg">
         <eAnnotations xmi:id="_TajJ8F1LEdy5RcXm_JjfDg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_lNwtoKSsEdy-NrxVBTpLyA"/>
+          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_pOBB8BBjEd20zIwSLfjspA"/>
         </eAnnotations>
         <appliedProfile href="MARTE.profile.uml#_9FdqwA-MEdyLh7muGbCqMw"/>
       </profileApplication>
@@ -1620,13 +1620,13 @@
       </packagedElement>
       <profileApplication xmi:id="_xeZioF1MEdy5RcXm_JjfDg">
         <eAnnotations xmi:id="_xejToF1MEdy5RcXm_JjfDg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_ktMXMKSsEdy-NrxVBTpLyA"/>
+          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_ol__sBBjEd20zIwSLfjspA"/>
         </eAnnotations>
         <appliedProfile href="MARTE.profile.uml#_U_GAoAPMEdyuUt-4qHuVvQ"/>
       </profileApplication>
       <profileApplication xmi:id="_2BlvEF1OEdy5RcXm_JjfDg">
         <eAnnotations xmi:id="_2CCbAF1OEdy5RcXm_JjfDg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_lNwtoKSsEdy-NrxVBTpLyA"/>
+          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_pOBB8BBjEd20zIwSLfjspA"/>
         </eAnnotations>
         <appliedProfile href="MARTE.profile.uml#_9FdqwA-MEdyLh7muGbCqMw"/>
       </profileApplication>
@@ -1719,19 +1719,19 @@
       </packagedElement>
       <profileApplication xmi:id="_zQ7BcF1SEdy5RcXm_JjfDg">
         <eAnnotations xmi:id="_zREycF1SEdy5RcXm_JjfDg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_ktMXMKSsEdy-NrxVBTpLyA"/>
+          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_ol__sBBjEd20zIwSLfjspA"/>
         </eAnnotations>
         <appliedProfile href="MARTE.profile.uml#_U_GAoAPMEdyuUt-4qHuVvQ"/>
       </profileApplication>
       <profileApplication xmi:id="_SavZIF1TEdy5RcXm_JjfDg">
         <eAnnotations xmi:id="_SbMFEF1TEdy5RcXm_JjfDg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_lNwtoKSsEdy-NrxVBTpLyA"/>
+          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_pOBB8BBjEd20zIwSLfjspA"/>
         </eAnnotations>
         <appliedProfile href="MARTE.profile.uml#_9FdqwA-MEdyLh7muGbCqMw"/>
       </profileApplication>
       <profileApplication xmi:id="_YCdPkF1TEdy5RcXm_JjfDg">
         <eAnnotations xmi:id="_YC57gF1TEdy5RcXm_JjfDg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_kuJZcKSsEdy-NrxVBTpLyA"/>
+          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_onJPMBBjEd20zIwSLfjspA"/>
         </eAnnotations>
         <appliedProfile href="MARTE.profile.uml#_WStkoAPMEdyuUt-4qHuVvQ"/>
       </profileApplication>
@@ -1772,7 +1772,7 @@
       </packagedElement>
       <profileApplication xmi:id="_8F8r8F1TEdy5RcXm_JjfDg">
         <eAnnotations xmi:id="_8GGc8F1TEdy5RcXm_JjfDg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_lNwtoKSsEdy-NrxVBTpLyA"/>
+          <references xmi:type="ecore:EPackage" href="MARTE.profile.uml#_pOBB8BBjEd20zIwSLfjspA"/>
         </eAnnotations>
         <appliedProfile href="MARTE.profile.uml#_9FdqwA-MEdyLh7muGbCqMw"/>
       </profileApplication>
