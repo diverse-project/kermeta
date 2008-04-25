@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeAction.java,v 1.5 2008-04-17 15:15:24 ftanguy Exp $
+/*$Id: MergeAction.java,v 1.6 2008-04-25 13:16:43 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	MergeAction.java
 * License : EPL
@@ -14,7 +14,8 @@ package org.kermeta.compiler.ui.popup.actions;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -71,7 +72,7 @@ public class MergeAction implements IObjectActionDelegate {
 				try {
 					String uri = "platform:/resource" + file.getFullPath().toString();
 					KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
-					LinkedHashSet<KermetaUnit> context = new LinkedHashSet<KermetaUnit>();
+					Set<KermetaUnit> context = new HashSet<KermetaUnit>();
 					context.add(kermetaUnit);
 					for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit)) {
 						if( ! excludedKmUnit.contains(IOPlugin.getDefault().findKermetaUnit(unit.getUri())) ) {
@@ -80,7 +81,7 @@ public class MergeAction implements IObjectActionDelegate {
 					}
 					
 					Merger merger = new Merger();
-					merger.process(context, getOutputFilePath(), true);
+					merger.process(context, getOutputFilePath());
 				} catch (URIMalformedException e) {
 					e.printStackTrace();
 				} catch (NotRegisteredURIException e) {
