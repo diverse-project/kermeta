@@ -1,4 +1,4 @@
-/* $Id: EMFRegistryHelper.java,v 1.3 2008-01-28 15:44:46 dvojtise Exp $ */
+/* $Id: EMFRegistryHelper.java,v 1.4 2008-04-25 07:43:32 cfaucher Exp $ */
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -140,10 +140,11 @@ public class EMFRegistryHelper {
 	 * @param uri
 	 * @return
 	 */
-	static public Resource getResource(URI uri) {
+	public static Resource getResource(URI uri) {
 		EPackage p = EPackage.Registry.INSTANCE.getEPackage( uri.toString() );
 		if ( p != null )
 			return p.eResource();
 		return null;
 	}
+	
 }
