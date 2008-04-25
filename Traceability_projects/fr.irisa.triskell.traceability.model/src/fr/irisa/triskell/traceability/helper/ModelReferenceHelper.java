@@ -1,4 +1,4 @@
-/*$Id: ModelReferenceHelper.java,v 1.3 2007-07-31 12:34:32 dtouzet Exp $
+/*$Id: ModelReferenceHelper.java,v 1.4 2008-04-25 10:02:37 dvojtise Exp $
 * Project : fr.irisa.triskell.traceability.model
 * File : 	ModelReferenceHelper.java
 * License : EPL
@@ -57,6 +57,24 @@ public class ModelReferenceHelper {
 		}
 		return result;
 	}
+
+	/** 
+	 *  Get one of the next ModelReference linked to the given Reference
+	 *  (if the next reference is not a ModelReference it is ignored)
+	 *  (if several target ref matches, one will be selected, no order ) 
+	 *  
+	 */
+	static public ModelReference getOneNextReference(Reference eref)
+	{
+		ModelReference result = null;
+		for( Trace trace : eref.getTargetTraces()){
+			for(Reference targetRef : trace.getTargetReferences()){
+				if(targetRef instanceof ModelReference) result = (ModelReference) targetRef;
+			}
+		}		
+		return result;
+	}
+	
 }
 
 
