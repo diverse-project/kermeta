@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.16 2007-09-07 11:15:30 dvojtise Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.17 2008-04-25 10:01:19 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 
 
 /**
@@ -70,18 +72,19 @@ public class QualifiedNamePatcher {
     
 	public String getPackageQualifiedNameFromMetamodel(ENamedElement obj){
 		String result=obj.getName();
+		
 //		 optimization : use of an hashtable
     	String nsuri = ((EPackage)obj).getNsURI();
     	if(nsuri ==  null){
     		EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() +
 					" || "+ obj.toString() );
     		EMFRuntimeUnit.internalLog.warn("The package "+ obj.getName()+" has no nsuri");
-    	}
-    	if(nsuri.equals("")){
+    	} else if(nsuri.equals("")){
     		EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() +
 					" || "+ obj.toString() );
     		EMFRuntimeUnit.internalLog.warn("The package "+ obj.getName()+" has no nsuri");    		
     	}
+    	
     	String packageQualifiedName = this.nsUri_QualifiedName_map.get(nsuri);
     	if( packageQualifiedName == null)
     	{   // optimization failed, need to load the metamodel and retreive the qualified name
@@ -113,6 +116,9 @@ public class QualifiedNamePatcher {
 		    		}
 		    		else EMFRuntimeUnit.internalLog.warn("cannot be sure of package qualified name of "+ obj.getClass().getName() +
 	    					" || "+ obj.toString() + "are you sure to have provided the correct metamodel for loading your resource ?" );
+		    		if(result == null){
+		    			return null;
+		    		}
 		    		this.nsUri_QualifiedName_map.put(nsuri,result);	
 		    	}
     		}
