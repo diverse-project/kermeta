@@ -1,4 +1,4 @@
-/* $Id: EcoreWrapper.java,v 1.7 2008-04-25 14:10:23 dvojtise Exp $
+/* $Id: EcoreWrapper.java,v 1.8 2008-04-28 14:48:18 bmorin Exp $
  * Project   : fr.irisa.triskell.kermeta.ecore (First iteration)
  * File      : EcoreWrapper.java
  * License   : EPL
@@ -60,7 +60,7 @@ public class EcoreWrapper {
 	    	kunit.error(errmsg, null );
 	    	ftype = null;
 	    	// stop after the first error: throw a Kermeta Exception ...
-	    	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();        	
+	    	ExpressionInterpreter interpreter = memory.getInterpreter().getBasicInterpreter();
 	    	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
 	    			errmsg,
 	    			interpreter,
