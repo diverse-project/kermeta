@@ -4,7 +4,7 @@
     <details key="require" value="primitive_types.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::exceptions|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="standard" nsURI="http://www.kermeta.org/kermeta/standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Defines Collection types &#xA; * &lt;img src=&quot;./figures/collections_view.png&quot;/>&#xA; */"/>

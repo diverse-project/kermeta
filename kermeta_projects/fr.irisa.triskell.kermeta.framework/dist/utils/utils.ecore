@@ -4,7 +4,7 @@
     <details key="require" value="./StringBuffer.kmt|./hashtable.kmt|./stack.kmt|"/>
     <details key="using" value="kermeta::utils|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/utils/utils.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/utils/utils.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="utils" nsURI="http://www.kermeta.org/kermeta/utils" nsPrefix="utils"/>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">

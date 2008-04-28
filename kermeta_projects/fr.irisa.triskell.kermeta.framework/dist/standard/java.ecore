@@ -4,7 +4,7 @@
     <details key="require" value="primitive_types.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::exceptions|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="standard" nsURI="http://www.kermeta.org/kermeta/standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Contains types dedicated to dealing with java objects&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png&quot;/>&#xA; */"/>

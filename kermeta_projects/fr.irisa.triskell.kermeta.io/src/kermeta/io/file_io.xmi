@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <traces sourceReferences="//@references.20" targetReferences="//@references.21" description="//@messages.10"/>
+  <traces sourceReferences="//@references.22" targetReferences="//@references.23" description="//@messages.11"/>
+  <traces sourceReferences="//@references.24" targetReferences="//@references.25" description="//@messages.12"/>
+  <traces sourceReferences="//@references.26" targetReferences="//@references.27" description="//@messages.13"/>
+  <traces sourceReferences="//@references.28" targetReferences="//@references.29" description="//@messages.14"/>
+  <traces sourceReferences="//@references.30" targetReferences="//@references.31" description="//@messages.15"/>
+  <traces sourceReferences="//@references.32" targetReferences="//@references.33" description="//@messages.16"/>
+  <traces sourceReferences="//@references.34" targetReferences="//@references.35" description="//@messages.17"/>
+  <traces sourceReferences="//@references.36" targetReferences="//@references.37" description="//@messages.18"/>
+  <traces sourceReferences="//@references.38" targetReferences="//@references.39" description="//@messages.19"/>
+  <traces sourceReferences="//@references.40" targetReferences="//@references.41" description="//@messages.20"/>
+  <traces sourceReferences="//@references.42" targetReferences="//@references.43" description="//@messages.21"/>
+  <traces sourceReferences="//@references.44" targetReferences="//@references.45" description="//@messages.22"/>
+  <traces sourceReferences="//@references.46" targetReferences="//@references.47" description="//@messages.23"/>
+  <traces sourceReferences="//@references.48" targetReferences="//@references.49" description="//@messages.24"/>
+  <traces sourceReferences="//@references.50" targetReferences="//@references.51" description="//@messages.25"/>
+  <traces sourceReferences="//@references.52" targetReferences="//@references.53" description="//@messages.26"/>
+  <traces sourceReferences="//@references.54" targetReferences="//@references.55" description="//@messages.27"/>
+  <traces sourceReferences="//@references.56" targetReferences="//@references.57" description="//@messages.28"/>
+  <traces sourceReferences="//@references.58" targetReferences="//@references.59" description="//@messages.29"/>
+  <traces sourceReferences="//@references.60" targetReferences="//@references.61" description="//@messages.30"/>
+  <traces sourceReferences="//@references.62" targetReferences="//@references.63" description="//@messages.31"/>
+  <traces sourceReferences="//@references.64" targetReferences="//@references.65" description="//@messages.32"/>
+  <traces sourceReferences="//@references.66" targetReferences="//@references.67" description="//@messages.33"/>
+  <traces sourceReferences="//@references.68" targetReferences="//@references.69" description="//@messages.34"/>
+  <traces sourceReferences="//@references.70" targetReferences="//@references.71" description="//@messages.35"/>
+  <traces sourceReferences="//@references.72" targetReferences="//@references.73" description="//@messages.36"/>
+  <traces sourceReferences="//@references.74" targetReferences="//@references.75" description="//@messages.37"/>
+  <traces sourceReferences="//@references.76" targetReferences="//@references.77" description="//@messages.38"/>
+  <traces sourceReferences="//@references.78" targetReferences="//@references.79" description="//@messages.39"/>
+  <traces sourceReferences="//@references.80" targetReferences="//@references.81" description="//@messages.40"/>
+  <traces sourceReferences="//@references.82" targetReferences="//@references.83" description="//@messages.41"/>
+  <traces sourceReferences="//@references.84" targetReferences="//@references.85" description="//@messages.42"/>
+  <traces sourceReferences="//@references.86" targetReferences="//@references.87" description="//@messages.43"/>
+  <traces sourceReferences="//@references.88" targetReferences="//@references.89" description="//@messages.44"/>
+  <traces sourceReferences="//@references.90" targetReferences="//@references.91" description="//@messages.45"/>
+  <traces sourceReferences="//@references.92" targetReferences="//@references.93" description="//@messages.46"/>
+  <traces sourceReferences="//@references.94" targetReferences="//@references.95" description="//@messages.47"/>
+  <traces sourceReferences="//@references.96" targetReferences="//@references.97" description="//@messages.48"/>
+  <traces sourceReferences="//@references.98" targetReferences="//@references.99" description="//@messages.49"/>
+  <traces sourceReferences="//@references.100" targetReferences="//@references.101" description="//@messages.50"/>
+  <traces sourceReferences="//@references.102" targetReferences="//@references.103" description="//@messages.51"/>
+  <traces sourceReferences="//@references.104" targetReferences="//@references.105" description="//@messages.52"/>
+  <traces sourceReferences="//@references.106" targetReferences="//@references.107" description="//@messages.53"/>
+  <traces sourceReferences="//@references.108" targetReferences="//@references.109" description="//@messages.54"/>
+  <traces sourceReferences="//@references.110" targetReferences="//@references.111" description="//@messages.55"/>
+  <traces sourceReferences="//@references.112" targetReferences="//@references.113" description="//@messages.56"/>
+  <traces sourceReferences="//@references.114" targetReferences="//@references.115" description="//@messages.57"/>
+  <traces sourceReferences="//@references.116" targetReferences="//@references.117" description="//@messages.58"/>
+  <traces sourceReferences="//@references.118" targetReferences="//@references.119" description="//@messages.59"/>
+  <traces sourceReferences="//@references.120" targetReferences="//@references.121" description="//@messages.60"/>
+  <traces sourceReferences="//@references.122" targetReferences="//@references.123" description="//@messages.61"/>
+  <traces sourceReferences="//@references.124" targetReferences="//@references.125" description="//@messages.62"/>
+  <traces sourceReferences="//@references.126" targetReferences="//@references.127" description="//@messages.63"/>
+  <traces sourceReferences="//@references.128" targetReferences="//@references.129" description="//@messages.64"/>
+  <traces sourceReferences="//@references.130" targetReferences="//@references.131" description="//@messages.65"/>
+  <traces sourceReferences="//@references.132" targetReferences="//@references.133" description="//@messages.66"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="1" charBeginAt="0" lineEndAt="1" charEndAt="217"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="file_io.km#//@packages.0/io"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="8" charBeginAt="219" lineEndAt="8" charEndAt="244"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="file_io.km#//@requires.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="10" charBeginAt="246" lineEndAt="10" charEndAt="269"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="file_io.km#//@usings.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="11" charBeginAt="270" lineEndAt="11" charEndAt="304"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="file_io.km#//@usings.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="12" charBeginAt="305" lineEndAt="12" charEndAt="330"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="file_io.km#//@usings.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="27" charBeginAt="812" lineEndAt="27" charEndAt="1694"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="file_io.km#//@packages.0/io/FileIO"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="32" charBeginAt="874" lineEndAt="32" charEndAt="1107"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="32" charBeginAt="898" lineEndAt="32" charEndAt="915"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="32" charBeginAt="917" lineEndAt="32" charEndAt="930"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@ownedParameter.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="40" charBeginAt="1144" lineEndAt="40" charEndAt="1691"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="40" charBeginAt="1167" lineEndAt="40" charEndAt="1184"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="32" charBeginAt="934" lineEndAt="32" charEndAt="938"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="32" charBeginAt="909" lineEndAt="32" charEndAt="915"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@ownedParameter.0/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="32" charBeginAt="924" lineEndAt="32" charEndAt="930"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@ownedParameter.1/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="40" charBeginAt="1188" lineEndAt="40" charEndAt="1194"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="40" charBeginAt="1178" lineEndAt="40" charEndAt="1184"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@ownedParameter.0/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="32" charBeginAt="942" lineEndAt="32" charEndAt="1107"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="33" charBeginAt="947" lineEndAt="33" charEndAt="1007"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="33" charBeginAt="950" lineEndAt="33" charEndAt="958"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@condition/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="33" charBeginAt="959" lineEndAt="33" charEndAt="961"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="33" charBeginAt="962" lineEndAt="33" charEndAt="966"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@condition/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="33" charBeginAt="972" lineEndAt="33" charEndAt="1003"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="33" charBeginAt="972" lineEndAt="33" charEndAt="1003"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="33" charBeginAt="978" lineEndAt="33" charEndAt="999"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@thenBody/@statement.0/@expression/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="33" charBeginAt="978" lineEndAt="33" charEndAt="999"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@thenBody/@statement.0/@expression/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="33" charBeginAt="999" lineEndAt="33" charEndAt="1003"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@thenBody/@statement.0/@expression"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="34" charBeginAt="1010" lineEndAt="34" charEndAt="1102"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="34" charBeginAt="1087" lineEndAt="34" charEndAt="1095"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="34" charBeginAt="1097" lineEndAt="34" charEndAt="1101"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/writeTextFile/@body/@statement.1/@parameters.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="40" charBeginAt="1198" lineEndAt="40" charEndAt="1691"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="41" charBeginAt="1203" lineEndAt="41" charEndAt="1263"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="41" charBeginAt="1206" lineEndAt="41" charEndAt="1214"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@condition/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="41" charBeginAt="1215" lineEndAt="41" charEndAt="1217"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="41" charBeginAt="1218" lineEndAt="41" charEndAt="1222"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@condition/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="41" charBeginAt="1228" lineEndAt="41" charEndAt="1259"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="41" charBeginAt="1228" lineEndAt="41" charEndAt="1259"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="41" charBeginAt="1234" lineEndAt="41" charEndAt="1255"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@thenBody/@statement.0/@expression/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="41" charBeginAt="1234" lineEndAt="41" charEndAt="1255"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@thenBody/@statement.0/@expression/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="41" charBeginAt="1255" lineEndAt="41" charEndAt="1259"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@thenBody/@statement.0/@expression"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="42" charBeginAt="1266" lineEndAt="42" charEndAt="1286"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="42" charBeginAt="1279" lineEndAt="42" charEndAt="1286"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.1/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="42" charBeginAt="1279" lineEndAt="42" charEndAt="1286"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.1/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="43" charBeginAt="1289" lineEndAt="43" charEndAt="1314"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="43" charBeginAt="1307" lineEndAt="43" charEndAt="1314"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.2/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="43" charBeginAt="1307" lineEndAt="43" charEndAt="1314"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.2/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="44" charBeginAt="1317" lineEndAt="44" charEndAt="1323"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.3/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="44" charBeginAt="1327" lineEndAt="44" charEndAt="1410"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.3/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="44" charBeginAt="1401" lineEndAt="44" charEndAt="1409"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.3/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="44" charBeginAt="1317" lineEndAt="44" charEndAt="1410"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="45" charBeginAt="1413" lineEndAt="45" charEndAt="1424"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.4/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="45" charBeginAt="1428" lineEndAt="45" charEndAt="1516"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.4/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="45" charBeginAt="1507" lineEndAt="45" charEndAt="1515"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.4/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="45" charBeginAt="1413" lineEndAt="45" charEndAt="1516"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.4"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="46" charBeginAt="1519" lineEndAt="46" charEndAt="1588"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.5"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="46" charBeginAt="1526" lineEndAt="46" charEndAt="1532"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@condition/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="46" charBeginAt="1522" lineEndAt="46" charEndAt="1525"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@condition/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="46" charBeginAt="1533" lineEndAt="46" charEndAt="1535"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="46" charBeginAt="1536" lineEndAt="46" charEndAt="1547"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@condition/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="46" charBeginAt="1553" lineEndAt="46" charEndAt="1584"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="46" charBeginAt="1553" lineEndAt="46" charEndAt="1584"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="46" charBeginAt="1559" lineEndAt="46" charEndAt="1580"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@thenBody/@statement.0/@expression/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="46" charBeginAt="1559" lineEndAt="46" charEndAt="1580"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@thenBody/@statement.0/@expression/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="46" charBeginAt="1580" lineEndAt="46" charEndAt="1584"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@thenBody/@statement.0/@expression"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="47" charBeginAt="1591" lineEndAt="47" charEndAt="1597"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.63">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.6/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="47" charBeginAt="1601" lineEndAt="47" charEndAt="1686"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.64">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.6/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="47" charBeginAt="1677" lineEndAt="47" charEndAt="1685"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.65">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.6/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/io/file_io.kmt" lineBeginAt="47" charBeginAt="1591" lineEndAt="47" charEndAt="1686"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.66">
+    <refObject href="file_io.km#//@packages.0/io/FileIO/readTextFile/@body/@statement.6"/>
+  </references>
+  <messages language="english" type="Mapping" value="Parsing of PackageDecl" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="Parsing of UsingStmt" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="Parsing of UsingStmt" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="Parsing of UsingStmt" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" value="Parsing of ClassDecl" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" value="Parsing of Operation" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" value="Parsing of Param" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" value="Parsing of Param" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" value="Parsing of Operation" traces="//@traces.9"/>
+  <messages language="english" type="Mapping" value="Parsing of Param" traces="//@traces.10"/>
+  <messages language="english" type="Mapping" value="Parsing of VoidType" traces="//@traces.11"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.12"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.13"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.14"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.15"/>
+  <messages language="english" type="Mapping" value="Parsing of FBlock" traces="//@traces.16"/>
+  <messages language="english" type="Mapping" value="Parsing of FConditional" traces="//@traces.17"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.18"/>
+  <messages language="english" type="Mapping" value="Parsing of RelationalOp" traces="//@traces.19"/>
+  <messages language="english" type="Mapping" value="Parsing of FVoidLiteral" traces="//@traces.20"/>
+  <messages language="english" type="Mapping" value="Parsing of FExpressionLst" traces="//@traces.21"/>
+  <messages language="english" type="Mapping" value="Parsing of FRaiseException" traces="//@traces.22"/>
+  <messages language="english" type="Mapping" value="Parsing of FTypeOrVarLiteral" traces="//@traces.23"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.24"/>
+  <messages language="english" type="Mapping" value="Parsing of CallPostfix" traces="//@traces.25"/>
+  <messages language="english" type="Mapping" value="Parsing of FJavaStaticCall" traces="//@traces.26"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.27"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.28"/>
+  <messages language="english" type="Mapping" value="Parsing of FBlock" traces="//@traces.29"/>
+  <messages language="english" type="Mapping" value="Parsing of FConditional" traces="//@traces.30"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.31"/>
+  <messages language="english" type="Mapping" value="Parsing of RelationalOp" traces="//@traces.32"/>
+  <messages language="english" type="Mapping" value="Parsing of FVoidLiteral" traces="//@traces.33"/>
+  <messages language="english" type="Mapping" value="Parsing of FExpressionLst" traces="//@traces.34"/>
+  <messages language="english" type="Mapping" value="Parsing of FRaiseException" traces="//@traces.35"/>
+  <messages language="english" type="Mapping" value="Parsing of FTypeOrVarLiteral" traces="//@traces.36"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.37"/>
+  <messages language="english" type="Mapping" value="Parsing of CallPostfix" traces="//@traces.38"/>
+  <messages language="english" type="Mapping" value="Parsing of FVariableDecl" traces="//@traces.39"/>
+  <messages language="english" type="Mapping" value="Parsing of TypeRef" traces="//@traces.40"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.41"/>
+  <messages language="english" type="Mapping" value="Parsing of FVariableDecl" traces="//@traces.42"/>
+  <messages language="english" type="Mapping" value="Parsing of TypeRef" traces="//@traces.43"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.44"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.45"/>
+  <messages language="english" type="Mapping" value="Parsing of FJavaStaticCall" traces="//@traces.46"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.47"/>
+  <messages language="english" type="Mapping" value="Parsing of FAssignement" traces="//@traces.48"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.49"/>
+  <messages language="english" type="Mapping" value="Parsing of FJavaStaticCall" traces="//@traces.50"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.51"/>
+  <messages language="english" type="Mapping" value="Parsing of FAssignement" traces="//@traces.52"/>
+  <messages language="english" type="Mapping" value="Parsing of FConditional" traces="//@traces.53"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.54"/>
+  <messages language="english" type="Mapping" value="Parsing of UnaryOp" traces="//@traces.55"/>
+  <messages language="english" type="Mapping" value="Parsing of LogicalOp" traces="//@traces.56"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.57"/>
+  <messages language="english" type="Mapping" value="Parsing of FExpressionLst" traces="//@traces.58"/>
+  <messages language="english" type="Mapping" value="Parsing of FRaiseException" traces="//@traces.59"/>
+  <messages language="english" type="Mapping" value="Parsing of FTypeOrVarLiteral" traces="//@traces.60"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.61"/>
+  <messages language="english" type="Mapping" value="Parsing of CallPostfix" traces="//@traces.62"/>
+  <messages language="english" type="Mapping" value="Parsing of ResultCall" traces="//@traces.63"/>
+  <messages language="english" type="Mapping" value="Parsing of FJavaStaticCall" traces="//@traces.64"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.65"/>
+  <messages language="english" type="Mapping" value="Parsing of FAssignement" traces="//@traces.66"/>
+</traceability:TraceModel>

@@ -4,20 +4,38 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::io|kermeta::standard|kermeta::language::structure|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/io/std_io.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/io/std_io.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="io" nsURI="http://www.kermeta.org/kermeta/io" nsPrefix="io">
       <eAnnotations source="kermeta">
-        <details key="documentation" value=" */"/>
+        <details key="documentation" value="/**&#xA; * Contains standard input/output related classes. &#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="StdIO">
         <eAnnotations source="kermeta">
-          <details key="documentation" value=" */"/>
+          <details key="documentation" value="/**&#xA; * An implementation of StdIO : standard input/output&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;/>&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="write">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if object.equals(void) then&#xA;&#x9;&#x9;object := &quot;&lt;void>&quot;&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.write(object)&#xA;end"/>
-            <details key="documentation" value="&#x9; */"/>
+            <details key="documentation" value="/**&#xA;&#x9; * Writes the object to standard output&#xA;&#x9; */"/>
+          </eAnnotations>
+          <eParameters name="object">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="errorln">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if object.equals(void) then&#xA;&#x9;&#x9;object := &quot;&lt;void>&quot;&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.errorln(object)&#xA;end"/>
+            <details key="documentation" value="/**&#xA;&#x9; * Writeln the object to error output&#xA;&#x9; */"/>
+          </eAnnotations>
+          <eParameters name="object">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="error">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if object.equals(void) then&#xA;&#x9;&#x9;object := &quot;&lt;void>&quot;&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.error(object)&#xA;end"/>
+            <details key="documentation" value="/**&#xA;&#x9; * Writes the object to error output&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="object">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -26,7 +44,7 @@
         <eOperations name="writeln">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if object.equals(void) then&#xA;&#x9;&#x9;object := &quot;&lt;void>&quot;&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.writeln(object)&#xA;end"/>
-            <details key="documentation" value="&#x9; */"/>
+            <details key="documentation" value="/**&#xA;&#x9; * Writeln the object to standard output&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="object">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -35,7 +53,7 @@
         <eOperations name="read">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if prompt.equals(void) then&#xA;&#x9;&#x9;prompt := &quot;&quot;&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.read(prompt)&#xA;end"/>
-            <details key="documentation" value="&#x9; */"/>
+            <details key="documentation" value="/**&#xA;&#x9; * Reads a String from standard input&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="prompt">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -56,10 +74,8 @@
     <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
-    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/2"/>
@@ -71,6 +87,7 @@
     <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
+    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/2"/>
@@ -88,7 +105,6 @@
     <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../persistence/resource.ecore#/2"/>

@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::exceptions|kermeta::standard|kermeta::utils|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="exceptions" nsURI="http://www.kermeta.org/kermeta/exceptions" nsPrefix="exceptions">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/** &#xA; * Contains the definition of a Kermeta exception and a few basic exceptions.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png&quot;/>&#xA; */"/>

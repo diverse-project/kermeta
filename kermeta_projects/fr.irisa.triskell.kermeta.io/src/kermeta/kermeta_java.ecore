@@ -742,7 +742,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="/1/language/structure/DataType /1/language/structure/TypeContainer">
           <eAnnotations source="kermeta">
-            <details key="documentation" value="The class definition for kermeta aliases. Above statement defines a primitive&#xA;type called MyString, which instanceType is &lt;code>kermeta::standard::String&lt;/code>&#xA;&lt;pre>alias MyString : kermeta::standard::String&lt;/pre>"/>
+            <details key="documentation" value="The class definition for kermeta aliases. Above statement defines a primitive&#xD;&#xA;type called MyString, which instanceType is &lt;code>kermeta::standard::String&lt;/code>&#xD;&#xA;&lt;pre>alias MyString : kermeta::standard::String&lt;/pre>. Another example could be: &lt;code>root::apackage::AClass&lt;/code>&#xD;&#xA;&lt;pre>alias MyClass : root::apackage::AClass&lt;/pre>, thus a primitive type may be not a subtype of ValueType (ValueType is a concept from the Kermeta framework)."/>
           </eAnnotations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="instanceType" eType="/1/language/structure/Type">
             <eAnnotations source="kermeta">
@@ -1041,20 +1041,25 @@
     <references href="Standard.ecore#/2"/>
     <references href="standard/collections.ecore#/0"/>
     <references href="standard/collections.ecore#/1"/>
+    <references href="standard/collections.ecore#/2"/>
     <references href="standard/primitive_types.ecore#/0"/>
     <references href="standard/primitive_types.ecore#/1"/>
+    <references href="standard/primitive_types.ecore#/2"/>
     <references href="language/structure.ecore#/0"/>
     <references href="language/structure.ecore#/1"/>
+    <references href="language/structure.ecore#/2"/>
     <references href="language/reflective_collections.ecore#/0"/>
     <references href="language/reflective_collections.ecore#/1"/>
     <references href="language/reflective_collections.ecore#/2"/>
     <references href="kunit/kunit.ecore#/0"/>
     <references href="kunit/kunit.ecore#/1"/>
+    <references href="kunit/kunit.ecore#/2"/>
     <references href="kunit/assert.ecore#/0"/>
     <references href="kunit/assert.ecore#/1"/>
     <references href="kunit/assert.ecore#/2"/>
     <references href="utils/utils.ecore#/0"/>
     <references href="utils/utils.ecore#/1"/>
+    <references href="utils/utils.ecore#/2"/>
     <references href="utils/StringBuffer.ecore#/0"/>
     <references href="utils/StringBuffer.ecore#/1"/>
     <references href="utils/StringBuffer.ecore#/2"/>
@@ -1066,11 +1071,13 @@
     <references href="utils/stack.ecore#/2"/>
     <references href="io/std_io.ecore#/0"/>
     <references href="io/std_io.ecore#/1"/>
+    <references href="io/std_io.ecore#/2"/>
     <references href="io/file_io.ecore#/0"/>
     <references href="io/file_io.ecore#/1"/>
     <references href="io/file_io.ecore#/2"/>
     <references href="exceptions/exceptions.ecore#/0"/>
     <references href="exceptions/exceptions.ecore#/1"/>
+    <references href="exceptions/exceptions.ecore#/2"/>
     <references href="language/dynamic_expression.ecore#/0"/>
     <references href="language/dynamic_expression.ecore#/1"/>
     <references href="language/dynamic_expression.ecore#/2"/>

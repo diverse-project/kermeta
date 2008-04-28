@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|structure.kmt|"/>
     <details key="using" value="kermeta::language|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="language" nsURI="http://www.kermeta.org/kermeta/language" nsPrefix="language">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Contains the implementation of Kermeta reflective collections.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png&quot;/>&#xA; */"/>

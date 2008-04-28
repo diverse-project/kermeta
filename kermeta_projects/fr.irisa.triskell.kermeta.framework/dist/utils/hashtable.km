@@ -40,6 +40,12 @@
             </typeParamBinding>
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Iterator"/>
           </containedType>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeParamBinding type="//@packages.0/utils/Hashtable/K">
+              <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Iterator/G"/>
+            </typeParamBinding>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Iterator"/>
+          </containedType>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/Hashtable/keyIterator/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Hashtable/keyIterator/@containedType.0" isCast="true">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/keyIterator/@containedType.0" name="result"/>
@@ -78,6 +84,12 @@
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Hashtable/getValue/@ownedTags.0" name="getValue" type="//@packages.0/utils/Hashtable/V" isOrdered="true" upper="1">
           <ownedTags value="/**&#xA;&#x9; * Returns the value for key 'key' if it exists, otherwise returns Void&#xA;&#x9; */" object="//@packages.0/utils/Hashtable/getValue"/>
+          <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/utils/Hashtable/getValue/@containedType.0/@containedType.0" right="//@packages.0/utils/Hashtable/V">
+            <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/utils/Hashtable/K"/>
+          </containedType>
+          <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/utils/Hashtable/getValue/@containedType.1/@containedType.0" right="//@packages.0/utils/Hashtable/V">
+            <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/utils/Hashtable/K"/>
+          </containedType>
           <ownedParameter name="key" type="//@packages.0/utils/Hashtable/K" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/Hashtable/V">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Hashtable/V" isCast="true">
@@ -150,29 +162,35 @@
             </typeParamBinding>
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
           </containedType>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/Hashtable/keys/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Void"/>
-            </containedType>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@containedType.0">
-              <containedType xsi:type="kermeta_language_structure:Class">
-                <typeParamBinding type="//@packages.0/utils/Hashtable/K">
-                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
-                </typeParamBinding>
-                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
-              </containedType>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeParamBinding type="//@packages.0/utils/Hashtable/K">
+              <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+            </typeParamBinding>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+          </containedType>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@value/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/keys/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@containedType.0" name="new">
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@value/@containedType.0" name="new">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding type="//@packages.0/utils/Hashtable/K">
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                </containedType>
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@value/@target/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Class"/>
                   </containedType>
-                  <typeref type="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@containedType.0" upper="1"/>
+                  <typeref type="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@value/@containedType.0" upper="1"/>
                 </target>
                 <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
               </value>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Loop" staticType="//@packages.0/utils/Hashtable/keys/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Loop" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Void"/>
+              </containedType>
               <initialization xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@initialization/@containedType.0" identifier="it">
                 <containedType xsi:type="kermeta_language_structure:Class">
                   <typeParamBinding type="//@packages.0/utils/Hashtable/K">
@@ -180,14 +198,7 @@
                   </typeParamBinding>
                   <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Iterator"/>
                 </containedType>
-                <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@initialization/@initialization/@containedType.0" name="keyIterator" staticOperation="//@packages.0/utils/Hashtable/keyIterator">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeParamBinding type="//@packages.0/utils/Hashtable/K">
-                      <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Iterator/G"/>
-                    </typeParamBinding>
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Iterator"/>
-                  </containedType>
-                </initialization>
+                <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/keyIterator/@containedType.1" name="keyIterator" staticOperation="//@packages.0/utils/Hashtable/keyIterator"/>
                 <type type="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@initialization/@containedType.0" isOrdered="true" upper="1"/>
               </initialization>
               <body xsi:type="kermeta_language_behavior:Block">
@@ -220,17 +231,17 @@
           </containedType>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.0/@containedType.0">
-              <containedType xsi:type="kermeta_language_structure:Class">
-                <typeParamBinding type="//@packages.0/utils/Hashtable/V">
-                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Bag/G"/>
-                </typeParamBinding>
-                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Bag"/>
-              </containedType>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.0/@value/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/values/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.0/@containedType.0" name="new">
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.0/@value/@containedType.0" name="new">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding type="//@packages.0/utils/Hashtable/V">
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Bag/G"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Bag"/>
+                </containedType>
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@value/@target/@containedType.0">
-                  <typeref type="//@packages.0/utils/Hashtable/values/@body/@statement.0/@containedType.0" upper="1"/>
+                  <typeref type="//@packages.0/utils/Hashtable/values/@body/@statement.0/@value/@containedType.0" upper="1"/>
                 </target>
                 <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
               </value>
@@ -261,14 +272,7 @@
                   </statement>
                 </body>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.1/@target/@containedType.0" name="keys" staticOperation="//@packages.0/utils/Hashtable/keys">
-                <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeParamBinding type="//@packages.0/utils/Hashtable/K">
-                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
-                  </typeParamBinding>
-                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
-                </containedType>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/keys/@containedType.1" name="keys" staticOperation="//@packages.0/utils/Hashtable/keys"/>
               <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
             </statement>
           </body>
@@ -280,13 +284,13 @@
           </containedType>
           <ownedParameter name="key" type="//@packages.0/utils/Hashtable/K" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+            <staticType href="../language/structure.km#//@packages.0/language/structure/Object/equals/@containedType.0/@containedType.1"/>
             <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+              <staticType href="../language/structure.km#//@packages.0/language/structure/Object/equals/@containedType.0/@containedType.1"/>
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/containsKey/@containedType.0" name="result"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
-                <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/utils/Hashtable/keys/@body/@containedType.0"/>
+                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/equals/@containedType.0/@containedType.1"/>
+                <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/V" name="getValue" staticOperation="//@packages.0/utils/Hashtable/getValue">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/K" name="key"/>
                 </target>

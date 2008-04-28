@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::ecore|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/ecore/ecore_compatibility.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/ecore/ecore_compatibility.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="ecore" nsURI="http://www.kermeta.org/kermeta/ecore" nsPrefix="ecore">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/** &#xA; * Contains the definition of a Kermeta classes used for compatibility with Ecore &#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png&quot;/>&#xA; */"/>

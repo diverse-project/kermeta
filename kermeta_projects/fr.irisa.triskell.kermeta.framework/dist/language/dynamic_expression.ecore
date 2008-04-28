@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::interpreter|kermeta::standard|kermeta::utils|kermeta::language::structure|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="interpreter" nsURI="http://www.kermeta.org/kermeta/interpreter" nsPrefix="interpreter">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Contains a set of classes whose function is to evaluate a kermeta &#xA; * expression written as a string.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png&quot;/>&#xA; */"/>

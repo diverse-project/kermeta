@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::io|kermeta::standard|kermeta::language::structure|kermeta::exceptions|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/io/file_io.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/io/file_io.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="io" nsURI="http://www.kermeta.org/kermeta/io" nsPrefix="io">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Contains file input/output related classes. &#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;/>&#xA; */"/>

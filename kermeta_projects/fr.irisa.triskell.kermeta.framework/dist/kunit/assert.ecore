@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::kunit|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="kunit" nsURI="http://www.kermeta.org/kermeta/kunit" nsPrefix="kunit">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * main features of the famous Unit test tool for Kermeta language&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;/>&#xA; */"/>

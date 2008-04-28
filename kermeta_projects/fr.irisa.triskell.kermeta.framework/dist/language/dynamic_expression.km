@@ -48,22 +48,7 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Void"/>
           </containedType>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/selfClass/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@containedType.0">
-              <containedType xsi:type="kermeta_language_structure:Class">
-                <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
-                  </containedType>
-                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../utils/hashtable.km#//@packages.0/utils/Hashtable/K"/>
-                </typeParamBinding>
-                <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@containedType.0/@typeParamBinding.1/@containedType.0">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Type"/>
-                  </containedType>
-                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../utils/hashtable.km#//@packages.0/utils/Hashtable/V"/>
-                </typeParamBinding>
-                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../utils/hashtable.km#//@packages.0/utils/Hashtable"/>
-              </containedType>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@target/@containedType.0" name="formalParameters" staticProperty="//@packages.0/interpreter/DynamicExpression/formalParameters">
                 <containedType xsi:type="kermeta_language_structure:Class">
                   <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0/@typeParamBinding.0/@containedType.0">
@@ -75,12 +60,27 @@
                   <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../utils/hashtable.km#//@packages.0/utils/Hashtable"/>
                 </containedType>
               </target>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@containedType.0" name="new">
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0" name="new">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0/@typeParamBinding.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+                    </containedType>
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../utils/hashtable.km#//@packages.0/utils/Hashtable/K"/>
+                  </typeParamBinding>
+                  <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0/@typeParamBinding.1/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Type"/>
+                    </containedType>
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../utils/hashtable.km#//@packages.0/utils/Hashtable/V"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../utils/hashtable.km#//@packages.0/utils/Hashtable"/>
+                </containedType>
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@target/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Class"/>
                   </containedType>
-                  <typeref type="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@containedType.0" upper="1"/>
+                  <typeref type="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0" upper="1"/>
                 </target>
                 <staticOperation href="structure.km#//@packages.0/language/structure/Class/new"/>
               </value>
@@ -104,15 +104,18 @@
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
+          <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/interpreter/DynamicExpression/parse/@containedType.1/@containedType.0" right="//@packages.0/interpreter/DynamicExpression/parse/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/interpreter/DynamicExpression/parse/@ownedParameter.0/@containedType.0"/>
+          </containedType>
+          <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/interpreter/DynamicExpression/parse/@containedType.2/@containedType.0" right="//@packages.0/interpreter/DynamicExpression/parse/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/interpreter/DynamicExpression/parse/@ownedParameter.0/@containedType.0"/>
+          </containedType>
           <ownedParameter name="expression" type="//@packages.0/interpreter/DynamicExpression/parse/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedParameter>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Void"/>
-            </containedType>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="clear">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/clear/@containedType.0"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.0/@target/@containedType.0" name="errors" staticProperty="//@packages.0/interpreter/DynamicExpression/errors">
@@ -125,8 +128,8 @@
               </target>
               <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/clear"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@containedType.0" identifier="e">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/DynamicExpressionException"/>
@@ -142,32 +145,37 @@
                   </initialization>
                   <type type="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
-                  </containedType>
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
                     <staticType href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@containedType.0" name="e"/>
                     <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
                   </target>
-                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0" value="parse precondition - formalParameters or selfType is void"/>
+                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0" value="parse precondition - formalParameters or selfType is void">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+                    </containedType>
+                  </value>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
                   <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@containedType.0" name="e"/>
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="or">
                 <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
-                  <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0"/>
+                  <staticType href="structure.km#//@packages.0/language/structure/Object/equals/@containedType.0/@containedType.1"/>
+                  <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/selfClass/@containedType.0" name="selfClass" staticProperty="//@packages.0/interpreter/DynamicExpression/selfClass"/>
                   <staticOperation href="structure.km#//@packages.0/language/structure/Object/equals"/>
                 </parameters>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
-                  <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0"/>
+                  <staticType href="structure.km#//@packages.0/language/structure/Object/equals/@containedType.0/@containedType.1"/>
+                  <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Void"/>
+                    </containedType>
+                  </parameters>
                   <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@target/@containedType.0" name="formalParameters" staticProperty="//@packages.0/interpreter/DynamicExpression/formalParameters">
                     <containedType xsi:type="kermeta_language_structure:Class">
                       <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0/@typeParamBinding.0/@containedType.0">
@@ -196,8 +204,8 @@
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/parse/@ownedParameter.0/@containedType.0" name="expression"/>
               </value>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@containedType.0" identifier="e">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/DynamicExpressionException"/>
@@ -213,13 +221,13 @@
                   </initialization>
                   <type type="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
                     <staticType href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@containedType.0" name="e"/>
                     <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
                   </target>
-                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0" value="parse result - expression contains errors"/>
+                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0" value="parse result - expression contains errors"/>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
                   <staticType href="../standard/collections.km#//@packages.0/standard/Collection/each/@containedType.0"/>
@@ -238,7 +246,7 @@
                           <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/KermetaError/message/@containedType.0" name="message" staticProperty="//@packages.0/interpreter/KermetaError/message">
                             <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/errors/@containedType.0" name="error"/>
                           </parameters>
-                          <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0" value="&#xA;"/>
+                          <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0" value="&#xA;"/>
                           <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
                         </parameters>
                         <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
@@ -260,12 +268,12 @@
                   </target>
                   <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
                   <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@containedType.0" name="e"/>
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="structure.km#//@packages.0/language/structure/Object/equals/@containedType.0/@containedType.1"/>
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@condition/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Integer"/>
@@ -290,16 +298,50 @@
         </ownedOperation>
         <ownedOperation tag="//@packages.0/interpreter/DynamicExpression/execute/@ownedTags.0" name="execute" isOrdered="true" upper="1">
           <ownedTags value="/**&#xA;     * Execute the expression in the given context&#xA;     */" object="//@packages.0/interpreter/DynamicExpression/execute"/>
+          <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/interpreter/DynamicExpression/execute/@containedType.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:ProductType">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/execute/@containedType.0/@containedType.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+                  </containedType>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../utils/hashtable.km#//@packages.0/utils/Hashtable/K"/>
+                </typeParamBinding>
+                <typeParamBinding>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../utils/hashtable.km#//@packages.0/utils/Hashtable/V"/>
+                  <type href="../standard/collections.km#//@packages.0/standard/Object"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../utils/hashtable.km#//@packages.0/utils/Hashtable"/>
+              </containedType>
+              <type href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
+              <type href="#//@packages.0/interpreter/DynamicExpression/execute/@containedType.0/@containedType.0/@containedType.0"/>
+            </containedType>
+            <right href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
+          </containedType>
+          <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/interpreter/DynamicExpression/execute/@containedType.1/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:ProductType">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/execute/@containedType.0/@containedType.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../utils/hashtable.km#//@packages.0/utils/Hashtable/K"/>
+                </typeParamBinding>
+                <typeParamBinding>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../utils/hashtable.km#//@packages.0/utils/Hashtable/V"/>
+                  <type href="../standard/collections.km#//@packages.0/standard/Object"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../utils/hashtable.km#//@packages.0/utils/Hashtable"/>
+              </containedType>
+              <type href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
+              <type href="#//@packages.0/interpreter/DynamicExpression/execute/@containedType.1/@containedType.0/@containedType.0"/>
+            </containedType>
+            <right href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
+          </containedType>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           <ownedParameter name="selfObj" isOrdered="true" upper="1">
             <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
           <ownedParameter name="actualParams" type="//@packages.0/interpreter/DynamicExpression/execute/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/execute/@ownedParameter.1/@containedType.0/@typeParamBinding.0/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
-                </containedType>
+              <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/execute/@containedType.0/@containedType.0/@containedType.0/@typeParamBinding.0/@containedType.0">
                 <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../utils/hashtable.km#//@packages.0/utils/Hashtable/K"/>
               </typeParamBinding>
               <typeParamBinding>
@@ -310,8 +352,8 @@
             </containedType>
           </ownedParameter>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@containedType.0" identifier="e">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/DynamicExpressionException"/>
@@ -327,27 +369,27 @@
                   </initialization>
                   <type type="//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
                     <staticType href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@containedType.0" name="e"/>
                     <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
                   </target>
-                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0" value="execute precondition - expression is void"/>
+                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0" value="execute precondition - expression is void"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
                   <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@containedType.0" name="e"/>
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
-                <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0"/>
+                <staticType href="structure.km#//@packages.0/language/structure/Object/equals/@containedType.0/@containedType.1"/>
+                <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/expression/@containedType.0" name="expression" staticProperty="//@packages.0/interpreter/DynamicExpression/expression"/>
                 <staticOperation href="structure.km#//@packages.0/language/structure/Object/equals"/>
               </condition>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@containedType.0" identifier="e">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/DynamicExpressionException"/>
@@ -363,20 +405,20 @@
                   </initialization>
                   <type type="//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
                     <staticType href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@containedType.0" name="e"/>
                     <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
                   </target>
-                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0" value="execute precondition - expression contains errors"/>
+                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0" value="execute precondition - expression contains errors"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
                   <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@containedType.0" name="e"/>
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="structure.km#//@packages.0/language/structure/Object/equals/@containedType.0/@containedType.1"/>
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@condition/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="size">
                   <staticType href="../standard/collections.km#//@packages.0/standard/Collection/size/@containedType.0"/>
@@ -395,14 +437,14 @@
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
               </target>
               <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::DynamicExpression" jmethod="execute">
                 <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@value/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/interpreter/DynamicExpression"/>
                 </parameters>
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" name="selfObj">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
                 </parameters>
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/execute/@ownedParameter.1/@containedType.0" name="actualParams"/>
               </value>
@@ -436,9 +478,9 @@
             </containedType>
           </ownedParameter>
           <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
-              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
+            <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@containedType.0" identifier="e">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/DynamicExpressionException"/>
@@ -454,15 +496,15 @@
                   </initialization>
                   <type type="//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0">
                   <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
                     <staticType href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@containedType.0" name="e"/>
                     <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
                   </target>
-                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0" value="evalString - expression contains errors"/>
+                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value/@containedType.0" value="evalString - expression contains errors"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0/@containedType.0">
                   <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@containedType.0" name="e"/>
                 </statement>
               </thenBody>
@@ -475,14 +517,14 @@
               </condition>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+              <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
               <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
               </target>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="execute" staticOperation="//@packages.0/interpreter/DynamicExpression/execute">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" name="selfObj">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals/@containedType.1/@containedType.0/@containedType.0"/>
                 </parameters>
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.2/@containedType.0" name="actualParams"/>
               </value>

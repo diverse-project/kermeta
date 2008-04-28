@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::persistence|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="persistence" nsURI="http://www.kermeta.org/kermeta/persistence" nsPrefix="persistence">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Contains the classes that handle the serialization of models, in particular&#xA; * EMF models.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/persistence_package.png&quot;/>&#xA; */"/>

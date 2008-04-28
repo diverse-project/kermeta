@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|assert.kmt|"/>
     <details key="using" value="kermeta::kunit|kermeta::standard|kermeta::utils|kermeta|kermeta::language::structure|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="kunit" nsURI="http://www.kermeta.org/kermeta/kunit" nsPrefix="kunit">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Contains the implementation of a unit test tool. This is a clone of&#xA; * JUnit architecture.&#xA; * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm&#xA; *&#xA; * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.&#xA; *&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;/>&#xA; */"/>
@@ -30,6 +30,7 @@
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if stopOnFailure.isVoid then&#xA;&#x9;&#x9;stopOnFailure := true&#xA;&#xA;&#x9;end&#xA;&#x9;result := stopOnFailure&#xA;end"/>
           </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
         </eOperations>
         <eOperations name="getLog">
           <eAnnotations source="kermeta">

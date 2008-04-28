@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
   <packages tag="//@packages.0/@ownedTags.0" name="kermeta" uri="http://www.kermeta.org/kermeta">
-    <ownedTags value=" */" object="//@packages.0"/>
+    <ownedTags value="/**&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png&quot;/>&#xA; */" object="//@packages.0"/>
   </packages>
   <requires uri="standard/collections.kmt"/>
   <requires uri="language/structure.kmt"/>

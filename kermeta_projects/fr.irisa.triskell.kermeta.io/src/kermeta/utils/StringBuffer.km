@@ -3,12 +3,12 @@
   <packages name="kermeta">
     <nestedPackage name="utils" uri="http://www.kermeta.org/kermeta/utils">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/StringBuffer/@ownedTags.0" name="StringBuffer" superType="//@packages.0/utils/StringBuffer/@containedType.0">
-        <ownedTags value=" */" object="//@packages.0/utils/StringBuffer"/>
+        <ownedTags value="/**&#xA; * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long&#xA; * string concatenation.&lt;br>&#xA; * &lt;b>Only work on Strings&lt;/b>&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;/>&#xA; */" object="//@packages.0/utils/StringBuffer"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/utils/StringBuffer/append/@ownedTags.0" name="append" type="//@packages.0/utils/StringBuffer/append/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="&#x9; */" object="//@packages.0/utils/StringBuffer/append"/>
+          <ownedTags value="/**&#xA;&#x9; * Append a given string at the end of this StringBuffer&#xA;&#x9; * @param arg0 A string to append at the end of this StringBuffer&#xA;&#x9; * @return A reference to this object&#xA;&#x9; */" object="//@packages.0/utils/StringBuffer/append"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/StringBuffer"/>
           <ownedParameter name="arg0" type="//@packages.0/utils/StringBuffer/append/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -31,28 +31,28 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/StringBuffer/toString/@ownedTags.0" name="toString" type="//@packages.0/utils/StringBuffer/toString/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="&#x9; */" object="//@packages.0/utils/StringBuffer/toString"/>
+          <ownedTags value="/**&#xA;&#x9; *Convert this StringBuffer to String and return its value&#xA;&#x9; *@return The string value of this StringBuffer&#xA;&#x9; */" object="//@packages.0/utils/StringBuffer/toString"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/StringBuffer/toString/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
-            </containedType>
-            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/utils/StringBuffer/toString/@body/@containedType.0" identifier="stringValue">
-              <type type="//@packages.0/utils/StringBuffer/toString/@body/@containedType.0" isOrdered="true" upper="1"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@containedType.0" identifier="stringValue">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+              </containedType>
+              <type type="//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/StringBuffer/toString/@body/@containedType.0" isCast="true">
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/StringBuffer/toString/@body/@containedType.0" name="stringValue"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@containedType.0" name="stringValue"/>
               <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/utils/StringBuffer/append/@body/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer" jmethod="toString">
                 <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/StringBuffer/toString/@body/@statement.1/@value/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/StringBuffer"/>
                 </parameters>
               </value>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/StringBuffer/toString/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/StringBuffer/toString/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/StringBuffer/toString/@body/@containedType.0" name="stringValue"/>
+              <value xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@containedType.0" name="stringValue"/>
             </statement>
           </body>
           <superOperation href="../language/structure.km#//@packages.0/language/structure/Object/toString"/>

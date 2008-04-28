@@ -4,14 +4,14 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::exceptions|kermeta::standard|kermeta::utils|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="exceptions" nsURI="http://www.kermeta.org/kermeta/exceptions" nsPrefix="exceptions">
       <eAnnotations source="kermeta">
-        <details key="documentation" value=" */"/>
+        <details key="documentation" value="/** &#xA; * Contains the definition of a Kermeta exception and a few basic exceptions.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png&quot;/>&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="Exception">
         <eAnnotations source="kermeta">
-          <details key="documentation" value=" */"/>
+          <details key="documentation" value="/**&#xA; * Generic exceptions&#xA; * The main class from which all the exception inherit&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="message">
@@ -29,7 +29,7 @@
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="stackTrace">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
-            <details key="documentation" value="     */"/>
+            <details key="documentation" value="/**&#xA;     * The stack trace as a String&#xA;     * Filled by the interpreted when the exception is raised&#xA;     */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
         </eStructuralFeatures>
@@ -52,27 +52,27 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeCastError" eSuperTypes="/1/exceptions/RuntimeError">
         <eAnnotations source="kermeta">
-          <details key="documentation" value=" */"/>
+          <details key="documentation" value="/**&#xA; * Occurs when a cast (Object::asType operation) fails&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="NotImplementedException" eSuperTypes="/1/exceptions/RuntimeError">
         <eAnnotations source="kermeta">
-          <details key="documentation" value=" */"/>
+          <details key="documentation" value="/**&#xA; * Use this exception whenyou want to forbid the access to an unimplemented operation &#xA; * and invite to implement it&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="UpperBoundReachedError" eSuperTypes="/1/exceptions/RuntimeError">
         <eAnnotations source="kermeta">
-          <details key="documentation" value=" */"/>
+          <details key="documentation" value="/** &#xA; * Use this exception when user tries to add an element to a property which type is collection&#xA; * which has an upper bound != -1 ( ie *)&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="AbstractClassInstantiationError" eSuperTypes="/1/exceptions/RuntimeError">
         <eAnnotations source="kermeta">
-          <details key="documentation" value=" */"/>
+          <details key="documentation" value="/**&#xA; * Creation on an abstract class. Usually this is detected by the type-checker. The only&#xA; * case where this happens is when instantiating a type variable, whose bound type turns&#xA; * out to be abstract.&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="IncompatibleTypeError" eSuperTypes="/1/exceptions/RuntimeError">
         <eAnnotations source="kermeta">
-          <details key="documentation" value=" */"/>
+          <details key="documentation" value="/**&#xA; * Raised by the Object::set operation if the type of the &#xA; * Object to set has an incompatible type.&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="DivisionByZero" eSuperTypes="/1/exceptions/Exception">
@@ -97,7 +97,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="StringFormatException" eSuperTypes="/1/exceptions/Exception">
         <eAnnotations source="kermeta">
-          <details key="documentation" value=" */"/>
+          <details key="documentation" value="/**&#xA; * to be written #########################################&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="IndexOutOfBound" eSuperTypes="/1/exceptions/Exception">
@@ -112,7 +112,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="IteratorIsOff" eSuperTypes="/1/exceptions/Exception">
         <eAnnotations source="kermeta">
-          <details key="documentation" value=" */"/>
+          <details key="documentation" value="/**&#xA; * Occurs when calling next() operation while iterator is already&#xA; * positioned on the last element of a collection&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="IOException" eSuperTypes="/1/exceptions/Exception">
@@ -162,7 +162,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="DynamicExpressionException" eSuperTypes="/1/exceptions/Exception">
         <eAnnotations source="kermeta">
-          <details key="documentation" value=" */"/>
+          <details key="documentation" value="/**&#xA; * to be written #########################################&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
     </eSubpackages>
@@ -170,22 +170,20 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
-    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../kunit/assert.ecore#/2"/>
@@ -193,24 +191,18 @@
     <references href="../utils/utils.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
     <references href="../standard/java.ecore#/2"/>

@@ -4,8 +4,8 @@
     <details key="require" value="../Standard.kmt|platform:/resource/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore|"/>
     <details key="using" value="kermeta::language::structure|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="language" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/kermeta/language" nsPrefix="language">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="language" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/kermeta/language" nsPrefix="language">
       <eSubpackages name="structure" nsURI="http://www.kermeta.org/kermeta/language/structure" nsPrefix="structure">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Contains the concrete implementation (including the operation bodies) &#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package.&#xA; * If you need more documentation, please take a look at the&#xA; * &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png&quot;/>&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png&quot;/>&#xA; */"/>
