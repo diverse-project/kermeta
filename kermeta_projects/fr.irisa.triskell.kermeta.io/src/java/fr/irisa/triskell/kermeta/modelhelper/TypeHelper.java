@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.java,v 1.8 2008-02-14 13:33:33 ftanguy Exp $
+/* $Id: TypeHelper.java,v 1.9 2008-04-28 11:50:17 ftanguy Exp $
  * Project   : Kermeta 
  * File      : TypeHelper.java
  * License   : EPL

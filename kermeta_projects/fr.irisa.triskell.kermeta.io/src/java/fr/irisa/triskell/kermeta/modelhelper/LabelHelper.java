@@ -1,6 +1,6 @@
 
 
-/*$Id: LabelHelper.java,v 1.1 2008-02-14 13:33:33 ftanguy Exp $
+/*$Id: LabelHelper.java,v 1.2 2008-04-28 11:50:17 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	LabelHelper.java
 * License : EPL

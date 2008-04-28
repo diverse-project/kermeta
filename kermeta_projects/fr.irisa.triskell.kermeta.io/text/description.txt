@@ -67,8 +67,8 @@ Package io <http://io>
     Operation isIndirectlyErroneous() : EBoolean
     Operation lock() : void
     Operation unlock() : void
-    Operation fillTypeDefinitionCache() : void
     Operation copy() : KermetaUnit
+    Operation fillTypeDefinitionCache() : void
 
   Class IBuildingState
 
@@ -103,6 +103,7 @@ Package io <http://io>
   Class ParsingError -> ErrorMessage
     Attribute offset : EInt
     Attribute length : EInt
+    Attribute lineNumber : EInt
 
   Class TypeDefinitionCache
     Reference kermetaUnit : KermetaUnit<<1..1>>

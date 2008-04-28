@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.36 2008-02-29 15:47:26 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.37 2008-04-28 11:50:19 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -17,18 +17,17 @@ import java.io.File;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.loader.FrameworkMapping;
-import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
@@ -37,9 +36,9 @@ import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
-public class IOPlugin extends AbstractUIPlugin {
+public class IOPlugin extends Plugin {
 
-	final public static String FRAMEWORK_KM_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
+	public static String FRAMEWORK_KM_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
 
 	final public static String FRAMEWORK_KMT_URI = "platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt";
 	
@@ -141,11 +140,13 @@ public class IOPlugin extends AbstractUIPlugin {
 					internalLog.warn("not able to read URIMap from " + file.toString());
 				}
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("traceability",new XMIResourceFactoryImpl());
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());	
 							
 			} else {
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new EcoreResourceFactoryImpl());
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new EcoreResourceFactoryImpl());	
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("traceability",new XMIResourceFactoryImpl());
 			}
 			
 	/*		if ( ! FRAMEWORK_GENERATION ) {
@@ -198,24 +199,6 @@ public class IOPlugin extends AbstractUIPlugin {
 			
 			}*/
 		}
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
-	 */
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		initialize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		super.stop(context);
 	}
 
 	/**

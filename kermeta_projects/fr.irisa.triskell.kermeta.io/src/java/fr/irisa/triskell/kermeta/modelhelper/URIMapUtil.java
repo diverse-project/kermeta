@@ -1,4 +1,4 @@
-/* $Id: URIMapUtil.java,v 1.5 2008-02-20 10:23:05 dvojtise Exp $
+/* $Id: URIMapUtil.java,v 1.6 2008-04-28 11:50:17 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : XMLMap.java
  * License    : EPL

@@ -1,4 +1,4 @@
-/* $Id: KermetaIOStream.java,v 1.8 2007-03-08 14:16:36 cfaucher Exp $
+/* $Id: KermetaIOStream.java,v 1.9 2008-04-28 11:50:56 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaIOStream.java
  * License: EPL
@@ -9,7 +9,6 @@
  */
 package fr.irisa.triskell.kermeta.runtime.io;
 
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 
 /**
  * 
@@ -28,6 +27,6 @@ public interface KermetaIOStream {
      * interpretation process has been started */
     public abstract void initialize();
    
-    public abstract void setKermetaInterpreter(KermetaInterpreter ki);
+   // public abstract void setKermetaInterpreter(KermetaInterpreter ki);
 
 }

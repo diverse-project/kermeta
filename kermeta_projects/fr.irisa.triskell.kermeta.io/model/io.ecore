@@ -240,6 +240,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ParsingError" eSuperTypes="#//ErrorMessage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ANTLRException" instanceClassName="antlr.ANTLRException"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IOPlugin" instanceClassName="org.kermeta.io.plugin.IOPlugin"/>

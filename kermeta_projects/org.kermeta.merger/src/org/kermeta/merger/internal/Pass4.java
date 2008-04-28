@@ -1,4 +1,6 @@
-/*$Id: Pass4.java,v 1.6 2008-02-29 16:23:38 dvojtise Exp $
+ 
+
+/*$Id: Pass4.java,v 1.7 2008-04-28 11:51:07 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass4.java
 * License : EPL
@@ -10,34 +12,20 @@
 
 package org.kermeta.merger.internal;
 
-import java.io.StringReader;
 import java.util.List;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.printer.KM2KMTPrettyPrinter;
-import org.kermeta.merger.MergerPlugin;
-import org.kermeta.model.KermetaModelHelper;
+import org.kermeta.merger.internal.behavior.AbstractBehaviorCloner;
+import org.kermeta.merger.internal.behavior.BehaviorCloner;
+import org.kermeta.merger.internal.behavior.BehaviorClonerWithTraces;
 
-import antlr.RecognitionException;
-import antlr.TokenStreamException;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
-import fr.irisa.triskell.kermeta.parser.gen.ast.OperationExpressionBody;
-import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaLexer;
-import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaParser;
 
 /**
  * 
@@ -57,16 +45,23 @@ public class Pass4 extends MergePass {
 	@Override
 	public void process() {
 		for ( TypeDefinition td : KermetaUnitHelper.getTypeDefinitions(kermetaUnit) ) {
-			
 			if ( td instanceof ClassDefinition ) {
 				ClassDefinition cd = (ClassDefinition) td;
 				setOperationsBody( cd );
-			}
-			
-		}	
+			}			
+		}
 	}
 
-	private FExpression getNodeExpression(Expression expression) {
+	private Expression cloneBehavior(Expression expression) {
+		AbstractBehaviorCloner cloner = null;
+		if ( context.isTrace() )
+			cloner = new BehaviorClonerWithTraces(kermetaUnit);
+		else
+			cloner = new BehaviorCloner(kermetaUnit);
+		return (Expression) cloner.accept(expression);
+	}
+	
+	/*private FExpression getNodeExpression(Expression expression) {
 		KM2KMTPrettyPrinter printer = new KM2KMTPrettyPrinter(true);
 		String operationAsString  = (String) printer.accept( expression );
 		StringReader reader = new StringReader(operationAsString);
@@ -77,16 +72,21 @@ public class Pass4 extends MergePass {
 			node = parser.fExpression();
 		} catch (RecognitionException e) {
 			MergerPlugin.logErrorMessage("Pb parsing expression " + operationAsString, e);
-			String operationAsString2  = (String) printer.accept( expression );
 		} catch (TokenStreamException e) {
 			MergerPlugin.logErrorMessage("Pb parsing expression " + operationAsString, e);
-			String operationAsString2  = (String) printer.accept( expression );
 		}	
 		return node;
-	}
+	}*/
 	
 	private void setOperationsBody(ClassDefinition newDefinition) {
-		context.pushContext();			
+		
+		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject( context.getBaseTypeDefinition(newDefinition) );
+		if ( unit.getUri().endsWith(".kmt") )
+			// Need to activate the trace system
+			// We only do that when the source is a kmt file because tracing km object does not mean anything.
+			kermetaUnit.setNeedASTTraces(true);
+		
+		/*context.pushContext();			
 		for ( TypeVariable tv : newDefinition.getTypeParameter() )
 			context.addTypeVar( tv );
 		
@@ -96,7 +96,7 @@ public class Pass4 extends MergePass {
 		
 		context.pushContext();
 		for ( Operation o : KermetaModelHelper.ClassDefinition.getAllOperations(newDefinition) )
-			context.addSymbol( new KMSymbolOperation(o) );
+			context.addSymbol( new KMSymbolOperation(o) );*/
 		
 		/*
 		 * 
@@ -105,44 +105,35 @@ public class Pass4 extends MergePass {
 		 */
 		for ( Constraint newConstraint : newDefinition.getInv() ) {
 			Constraint baseConstraint = context.getBaseConstraint(newConstraint);
-			FExpression node = getNodeExpression( baseConstraint.getBody() );
-			setBody(newConstraint, node);
+			newConstraint.setBody( cloneBehavior(baseConstraint.getBody()) );
 		}
 		
 		for ( Operation newOperation : newDefinition.getOwnedOperation() ) {
-			Operation o = context.getBaseOperation(newOperation);
-			KermetaUnit owner = KermetaUnitHelper.getKermetaUnitFromObject(o);
-			fr.irisa.triskell.kermeta.parser.gen.ast.Operation nodeOperation = (fr.irisa.triskell.kermeta.parser.gen.ast.Operation) owner.getNodeByModelElement(o);
-			FExpression node = null;
-			if ( (nodeOperation == null) && (! o.isIsAbstract()) )
-				node = getNodeExpression( o.getBody() );
-			else if ( ! o.isIsAbstract() )
-				node = ((OperationExpressionBody) nodeOperation.getOperationBody()).getFExpression();
-			setBody(newOperation, node);
+			Operation baseOperation = context.getBaseOperation(newOperation);
+			setBody(newOperation, baseOperation);
 		}	
 		
 		for ( Property newProperty : newDefinition.getOwnedAttribute() ) {
-			if ( newProperty.isIsDerived() ) {
-				//Property p = context.getBaseProperty(newProperty);
-				setBodies(newProperty, newDefinition);
-			}
-				
+			if ( newProperty.isIsDerived() )
+				setBodies(newProperty, newDefinition);			
 		}
 		
-		context.popContext();
-		context.popContext();
-		context.popContext();
+		//context.popContext();
+		//context.popContext();
+		//context.popContext();
 		
+		// Desactivating the traces
+		kermetaUnit.setNeedASTTraces(false);
 	}
 	
 	
-	private void setBody(Operation newOperation, FExpression node) {
-		context.pushContext();
+	private void setBody(Operation newOperation, Operation baseOperation) {
+		/*context.pushContext();
 		for ( Parameter p : newOperation.getOwnedParameter() )
 			context.addSymbol( new KMSymbolParameter(p) );
 		
 		for ( TypeVariable tv : newOperation.getTypeParameter() )
-			context.addTypeVar( tv );
+			context.addTypeVar( tv );*/
 		
 		/*
 		 * 
@@ -151,8 +142,7 @@ public class Pass4 extends MergePass {
 		 */
 		for ( Constraint newConstraint : newOperation.getPre() ) {
 			Constraint baseConstraint = context.getBaseConstraint(newConstraint);
-			FExpression nodeConstraint = getNodeExpression( baseConstraint.getBody() );
-			setBody(newConstraint, nodeConstraint);
+			newConstraint.setBody( cloneBehavior(baseConstraint.getBody()) );
 		}
 		
 		/*
@@ -160,9 +150,9 @@ public class Pass4 extends MergePass {
 		 * Setting the body.
 		 * 
 		 */
-		Expression expression = KMT2KMExperessionBuilder.process(context, node, kermetaUnit, new NullProgressMonitor());
-		newOperation.setBody( expression );
-		
+		if ( baseOperation.getBody() != null )
+			newOperation.setBody( cloneBehavior(baseOperation.getBody()) );
+
 		/*
 		 * 
 		 * Setting the post conditions.
@@ -170,24 +160,19 @@ public class Pass4 extends MergePass {
 		 */
 		for ( Constraint newConstraint : newOperation.getPost() ) {
 			Constraint baseConstraint = context.getBaseConstraint(newConstraint);
-			FExpression nodeConstraint = getNodeExpression( baseConstraint.getBody() );
-			setBody(newConstraint, nodeConstraint);
+			newConstraint.setBody( cloneBehavior(baseConstraint.getBody()) );
 		}
 		
-		context.popContext();
+		//context.popContext();
 	}
 	
 	private void setBodies(Property newProperty, ClassDefinition definition) {
 		List<Property> properties = context.getProperties(definition, newProperty.getName());
 		for ( Property p : properties ) {
-			if ( p.getGetterBody() != null ) {
-				FExpression node = getNodeExpression( p.getGetterBody() );
-				setGetterBody(newProperty, node);
-			}
-			if ( p.getSetterBody() != null ) {
-				FExpression node = getNodeExpression( p.getSetterBody() );
-				setSetterBody(newProperty, node);
-			}
+			if ( p.getGetterBody() != null )
+				newProperty.setGetterBody( cloneBehavior(p.getGetterBody()) );
+			if ( p.getSetterBody() != null )
+				newProperty.setSetterBody( cloneBehavior(p.getSetterBody()) );
 		}
 	}
 	
@@ -202,7 +187,7 @@ public class Pass4 extends MergePass {
 		}
 	}*/
 	
-	private void setGetterBody(Property newProperty, FExpression node) {
+	/*private void setGetterBody(Property newProperty, FExpression node) {
 		Expression expression = KMT2KMExperessionBuilder.process(context, node, kermetaUnit, new NullProgressMonitor());
 		newProperty.setGetterBody( expression );
 	}
@@ -210,12 +195,12 @@ public class Pass4 extends MergePass {
 	private void setSetterBody(Property newProperty, FExpression node) {
 		Expression expression = KMT2KMExperessionBuilder.process(context, node, kermetaUnit, new NullProgressMonitor());
 		newProperty.setSetterBody( expression );
-	}
+	}*/
 	
-	private void setBody(Constraint newConstraint, FExpression node) {		
+	/*private void setBody(Constraint newConstraint, FExpression node) {		
 		Expression expression = KMT2KMExperessionBuilder.process(context, node, kermetaUnit, new NullProgressMonitor());
 		newConstraint.setBody( expression );
-	}
+	}*/
 	
 }
 

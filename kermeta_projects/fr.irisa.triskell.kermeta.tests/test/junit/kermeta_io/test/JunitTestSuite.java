@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.12 2008-04-14 13:33:10 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.13 2008-04-28 11:51:16 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -444,7 +444,7 @@ public void testWithFile(String dir, String file) {
 		
 		// Exporting the source file into km
 		KmExporter exporter = new KmExporter();
-		exporter.export(source, null, outputKMFileURI);
+		exporter.export(source, null, outputKMFileURI, false);
 		
 		// Loading the generated km file
 		KermetaUnit kmOutput = LoaderPlugin.getDefault().load(outputKMFileURI, null);

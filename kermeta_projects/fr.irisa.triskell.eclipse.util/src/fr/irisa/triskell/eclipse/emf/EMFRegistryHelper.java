@@ -1,4 +1,4 @@
-/* $Id: EMFRegistryHelper.java,v 1.9 2007-10-12 09:08:43 ftanguy Exp $
+/* $Id: EMFRegistryHelper.java,v 1.10 2008-04-28 11:51:03 ftanguy Exp $
  * Project   : Kermeta 
  * File      : EMFRegistryHelper.java
  * License   : EPL
@@ -13,10 +13,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
@@ -128,6 +131,20 @@ public class EMFRegistryHelper {
 					safeRegisterPackages(registry, it.next());
 				}
 			}
+		}
+	}
+	
+	/**
+	 * Load the file with the given uri, and register packages in the given registry.
+	 * @param registry
+	 * @param uri
+	 */
+	public static void safeRegister(Registry registry, URI uri) {
+		ResourceSet rs = new ResourceSetImpl();
+		Resource resource = rs.getResource(uri, true);
+		for ( EObject o : resource.getContents() ) {
+			if ( o instanceof EPackage )
+				safeRegisterPackages(registry, (EPackage) o);
 		}
 	}
 	

@@ -1,5 +1,5 @@
 
-/*$Id: KermetaLauncher.java,v 1.2 2008-02-14 07:13:57 uid21732 Exp $
+/*$Id: KermetaLauncher.java,v 1.3 2008-04-28 11:50:59 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : 	KermetaLauncher.java
  * License : EPL
@@ -12,7 +12,6 @@
 package org.kermeta.interpreter.helper;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -29,8 +28,7 @@ import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.launcher.KInterpreter;
 
 public class KermetaLauncher {
 
@@ -47,18 +45,7 @@ public class KermetaLauncher {
 			for (int i = 0; i < args.length; i++)
 				arguments += args[i] + " ";
 	
-			KermetaInterpreter interpreter;
-			interpreter = typeCheckTranfo(filePath);
-
-			if (interpreter == null)
-				return false;
-
-			ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(
-					arguments, interpreter.getMemory().getROFactory()));
-			interpreter.setEntryParameters(params);
-
-			interpreter.setKStream(console);
+			KInterpreter interpreter = typeCheckTranfo(filePath);
 			
 		// And we launch the interpreter
 			interpreter.launch();
@@ -100,9 +87,10 @@ public class KermetaLauncher {
 		return true;
 	}
 
-	private static KermetaInterpreter typeCheckTranfo(String file) throws KermetaIOFileNotFoundException, URIMalformedException, NotRegisteredURIException, IOException {
-		KermetaUnit unitToExecute = RunnerHelper.getKermetaUnitToExecute(file);
-		KermetaInterpreter interpreter = new KermetaInterpreter(unitToExecute, null);
-		return interpreter;
+	private static KInterpreter typeCheckTranfo(String file) throws KermetaIOFileNotFoundException, URIMalformedException, NotRegisteredURIException, IOException {
+		KermetaUnit unitToExecute = RunnerHelper.getKermetaUnitToExecute(file, "platform:/resource/interpreter_unit.km");
+		//KInterpreter interpreter = new KInterpreter(unitToExecute);
+		//return interpreter;
+		return null;
 	}
 }

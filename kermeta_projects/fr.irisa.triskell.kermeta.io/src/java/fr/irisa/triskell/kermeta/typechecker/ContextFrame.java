@@ -1,4 +1,4 @@
-/* $Id: ContextFrame.java,v 1.5 2008-01-02 10:28:31 vmahe Exp $
+/* $Id: ContextFrame.java,v 1.6 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ContextFrame.java
 * License : EPL

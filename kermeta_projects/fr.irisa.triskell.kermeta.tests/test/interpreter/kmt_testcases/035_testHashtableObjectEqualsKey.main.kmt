@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 035_testHashtableObjectEqualsKey.main.kmt,v 1.3 2008-02-14 07:13:28 uid21732 Exp $
+ * $Id: 035_testHashtableObjectEqualsKey.main.kmt,v 1.4 2008-04-28 11:51:16 ftanguy Exp $
  * Project : Kermeta interpreter
  * 		
  * License : EPL
@@ -26,20 +26,20 @@ alias String : kermeta::standard::String;
 
 class MyKeyType inherits kermeta::standard::ValueType
 {
-	attribute name : String
+	attribute name2 : String
 	method hashcode() : kermeta::standard::Integer is do
 		
-		result := name.hashcode
+		result := name2.hashcode
 		stdio.writeln("hashcode on MyKeytype = " + result.toString)
 	end
 	method equals(other : kermeta::language::structure::Object) : kermeta::standard::Boolean is do		
 		var otherKey : MyKeyType
 		otherKey ?= other
 		if(not otherKey.isVoid) then	
-			if(not otherKey.name.isVoid) then
-				result := otherKey.name.equals(name)
+			if(not otherKey.name2.isVoid) then
+				result := otherKey.name2.equals(name2)
 			else 
-				result := name.isVoid
+				result := name2.isVoid
 			end
 		else
 			result := false
@@ -71,13 +71,13 @@ class TestHashtable inherits kermeta::kunit::TestCase
 	    stdio.writeln("		----- setup ---")
 		if(testKeySet.empty) then
 			var aKey : MyKeyType  init MyKeyType.new
-			aKey.name := "un"
+			aKey.name2 := "un"
 			testKeySet.add(aKey)
 			aKey := MyKeyType.new
-			aKey.name := "deux"
+			aKey.name2 := "deux"
 			testKeySet.add(aKey)
 			aKey := MyKeyType.new
-			aKey.name := "trois"
+			aKey.name2 := "trois"
 			testKeySet.add(aKey)
 		end
 		hashtable := kermeta::utils::Hashtable<MyKeyType, String>.new
@@ -128,17 +128,17 @@ class TestHashtable inherits kermeta::kunit::TestCase
 	operation testGetFromEquals() : Void is do
   	    
   	    var aKey : MyKeyType  init MyKeyType.new
-		aKey.name := "un"
+		aKey.name2 := "un"
 		assert(aKey.equals(testKeySet.elementAt(0)))
 		assert(hashtable.getValue(aKey) == "one")
 		//---
 		aKey := MyKeyType.new
-		aKey.name := "deux"
+		aKey.name2 := "deux"
 		assert(aKey.equals(testKeySet.elementAt(1)))
 		assert(hashtable.getValue(aKey) == "two")
 		//---
 		aKey := MyKeyType.new
-		aKey.name := "trois"
+		aKey.name2 := "trois"
 		assert(aKey.equals(testKeySet.elementAt(2)))
 		assert(hashtable.getValue(aKey) == "three")
 	end
@@ -154,7 +154,7 @@ class TestHashtable inherits kermeta::kunit::TestCase
 		assert(hashtable.getValue(testKeySet.elementAt(1)) == "two")
 		assert(hashtable.size == 3)
 		var aKey : MyKeyType  init MyKeyType.new
-		aKey.name := "quatre"
+		aKey.name2 := "quatre"
 		hashtable.put(aKey, "four")
 		assert(hashtable.size == 4)
 	end
@@ -201,17 +201,17 @@ class TestHashtable inherits kermeta::kunit::TestCase
 		assert(hashtable.keys.size == hashtable.size)
 		
 		var aKey : MyKeyType  init MyKeyType.new
-		aKey.name := "un"
+		aKey.name2 := "un"
 		assert(aKey.equals(testKeySet.elementAt(0)))	
 		assert(hashtable.keys.contains(aKey))
 		//---
 		aKey := MyKeyType.new
-		aKey.name := "deux"
+		aKey.name2 := "deux"
 		assert(aKey.equals(testKeySet.elementAt(1)))
 		assert(hashtable.keys.contains(aKey))
 		//---
 		aKey := MyKeyType.new
-		aKey.name := "trois"
+		aKey.name2 := "trois"
 		assert(aKey.equals(testKeySet.elementAt(2)))
 		assert(hashtable.keys.contains(aKey))
 		

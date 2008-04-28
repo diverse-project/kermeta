@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.33 2008-02-15 14:25:11 dvojtise Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.34 2008-04-28 11:50:58 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -49,8 +49,6 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 public class RuntimeObjectFactory {
 
 	protected RuntimeMemory memory;
-	
-	protected IOConsole console = null;
 	
 	/**
 	 * These are caches of classes
@@ -628,18 +626,7 @@ public class RuntimeObjectFactory {
 	}
 	
 	protected  RuntimeObject class_typeParamBinding_property = null;
-	
 
-	public IOConsole getKermetaIOStream()
-	{
-	    return console;
-	}
-	
-	public void setKermetaIOStream(IOConsole console)
-	{
-	  this.console = console;
-	}
-	
     public RuntimeMemory getMemory() {
         return memory;
     }

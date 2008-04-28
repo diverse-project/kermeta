@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/ecore/ecore_compatibility.kmt" lineBeginAt="9" charBeginAt="175" lineEndAt="9" charEndAt="451"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="ecore_compatibility.km#//@packages.0/ecore"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/ecore/ecore_compatibility.kmt" lineBeginAt="15" charBeginAt="452" lineEndAt="15" charEndAt="477"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="ecore_compatibility.km#//@requires.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/ecore/ecore_compatibility.kmt" lineBeginAt="22" charBeginAt="723" lineEndAt="22" charEndAt="868"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="ecore_compatibility.km#//@packages.0/ecore/EFeatureMapEntry"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/ecore/ecore_compatibility.kmt" lineBeginAt="24" charBeginAt="749" lineEndAt="24" charEndAt="809"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="ecore_compatibility.km#//@packages.0/ecore/EFeatureMapEntry/eStructuralFeatureName"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/ecore/ecore_compatibility.kmt" lineBeginAt="25" charBeginAt="811" lineEndAt="25" charEndAt="866"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="ecore_compatibility.km#//@packages.0/ecore/EFeatureMapEntry/value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/ecore/ecore_compatibility.kmt" lineBeginAt="24" charBeginAt="784" lineEndAt="24" charEndAt="809"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="ecore_compatibility.km#//@packages.0/ecore/EFeatureMapEntry/eStructuralFeatureName/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/ecore/ecore_compatibility.kmt" lineBeginAt="25" charBeginAt="830" lineEndAt="25" charEndAt="866"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="ecore_compatibility.km#//@packages.0/ecore/EFeatureMapEntry/value/@containedType.0"/>
+  </references>
+  <messages language="english" type="Mapping" value="Parsing of PackageDecl" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="Parsing of ClassDecl" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="Parsing of Property" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="Parsing of Property" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.6"/>
+</traceability:TraceModel>

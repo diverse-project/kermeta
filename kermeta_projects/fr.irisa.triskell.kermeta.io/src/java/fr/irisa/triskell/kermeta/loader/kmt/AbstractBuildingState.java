@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractBuildingState.java,v 1.3 2007-08-07 13:35:22 ftanguy Exp $
+/*$Id: AbstractBuildingState.java,v 1.4 2008-04-28 11:50:13 ftanguy Exp $
 * Project : io
 * File : 	AbstractBuildingState.java
 * License : EPL

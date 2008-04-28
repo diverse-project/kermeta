@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/utils.kmt" lineBeginAt="2" charBeginAt="2" lineEndAt="2" charEndAt="69"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="utils.km#//@packages.0/utils"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/utils.kmt" lineBeginAt="5" charBeginAt="71" lineEndAt="5" charEndAt="99"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="utils.km#//@requires.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/utils.kmt" lineBeginAt="6" charBeginAt="100" lineEndAt="6" charEndAt="125"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="utils.km#//@requires.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/utils.kmt" lineBeginAt="7" charBeginAt="126" lineEndAt="7" charEndAt="147"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="utils.km#//@requires.2"/>
+  </references>
+  <messages language="english" type="Mapping" value="Parsing of PackageDecl" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.3"/>
+</traceability:TraceModel>

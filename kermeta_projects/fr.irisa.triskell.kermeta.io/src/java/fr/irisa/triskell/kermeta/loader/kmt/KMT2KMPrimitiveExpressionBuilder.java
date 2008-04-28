@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.24 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.25 2008-04-28 11:50:13 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL

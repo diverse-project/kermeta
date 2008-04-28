@@ -1,6 +1,6 @@
 
 
-/*$Id: JavaKermetaUnitLoader.java,v 1.9 2008-02-14 07:13:19 uid21732 Exp $
+/*$Id: JavaKermetaUnitLoader.java,v 1.10 2008-04-28 11:50:15 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaKermetaUnitLoader.java
 * License : EPL

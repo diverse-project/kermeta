@@ -1,4 +1,4 @@
-/*$Id: KermetaUnitChecker.java,v 1.2 2008-02-14 07:12:48 uid21732 Exp $
+/*$Id: KermetaUnitChecker.java,v 1.3 2008-04-28 11:50:48 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	KermetaUnitChecker.java
 * License : EPL
@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.typechecker.CallableFeaturesCache;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
+import fr.irisa.triskell.kermeta.typechecker.TypeDefinitionContextCache;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 public class KermetaUnitChecker {
@@ -123,6 +124,8 @@ public class KermetaUnitChecker {
 	 * @throws URIMalformedException
 	 */
 	static public KermetaUnit check(IFile file) throws NotRegisteredURIException, URIMalformedException {
+		if ( file == null )
+			return null;
 		return check(file, null);
 	}
 	
@@ -131,6 +134,8 @@ public class KermetaUnitChecker {
 			
 			unit.setIsBeingTypechecked( true );
 			CallableFeaturesCache.destroyInstance();
+			TypeDefinitionContextCache.destroyInstance();
+			
 			/*
 			 * 
 			 * Typechecking the unit if the loading has passed.
@@ -159,6 +164,7 @@ public class KermetaUnitChecker {
 			}
 			
 			CallableFeaturesCache.destroyInstance();
+			TypeDefinitionContextCache.destroyInstance();
 
 			unit.setIsBeingTypechecked( false );
 		}

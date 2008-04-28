@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsingErrorImpl.java,v 1.3 2007-08-02 13:09:01 dvojtise Exp $
+ * $Id: ParsingErrorImpl.java,v 1.4 2008-04-28 11:50:12 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -24,6 +24,7 @@ import org.kermeta.io.ParsingError;
  * <ul>
  *   <li>{@link org.kermeta.io.impl.ParsingErrorImpl#getOffset <em>Offset</em>}</li>
  *   <li>{@link org.kermeta.io.impl.ParsingErrorImpl#getLength <em>Length</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.ParsingErrorImpl#getLineNumber <em>Line Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,6 +70,26 @@ public class ParsingErrorImpl extends ErrorMessageImpl implements ParsingError {
 	 * @ordered
 	 */
 	protected int length = LENGTH_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLineNumber() <em>Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLineNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int LINE_NUMBER_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getLineNumber() <em>Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLineNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected int lineNumber = LINE_NUMBER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,6 +157,27 @@ public class ParsingErrorImpl extends ErrorMessageImpl implements ParsingError {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getLineNumber() {
+		return lineNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLineNumber(int newLineNumber) {
+		int oldLineNumber = lineNumber;
+		lineNumber = newLineNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.PARSING_ERROR__LINE_NUMBER, oldLineNumber, lineNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -143,6 +185,8 @@ public class ParsingErrorImpl extends ErrorMessageImpl implements ParsingError {
 				return new Integer(getOffset());
 			case IoPackage.PARSING_ERROR__LENGTH:
 				return new Integer(getLength());
+			case IoPackage.PARSING_ERROR__LINE_NUMBER:
+				return new Integer(getLineNumber());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -160,6 +204,9 @@ public class ParsingErrorImpl extends ErrorMessageImpl implements ParsingError {
 				return;
 			case IoPackage.PARSING_ERROR__LENGTH:
 				setLength(((Integer)newValue).intValue());
+				return;
+			case IoPackage.PARSING_ERROR__LINE_NUMBER:
+				setLineNumber(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -179,6 +226,9 @@ public class ParsingErrorImpl extends ErrorMessageImpl implements ParsingError {
 			case IoPackage.PARSING_ERROR__LENGTH:
 				setLength(LENGTH_EDEFAULT);
 				return;
+			case IoPackage.PARSING_ERROR__LINE_NUMBER:
+				setLineNumber(LINE_NUMBER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -195,6 +245,8 @@ public class ParsingErrorImpl extends ErrorMessageImpl implements ParsingError {
 				return offset != OFFSET_EDEFAULT;
 			case IoPackage.PARSING_ERROR__LENGTH:
 				return length != LENGTH_EDEFAULT;
+			case IoPackage.PARSING_ERROR__LINE_NUMBER:
+				return lineNumber != LINE_NUMBER_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -213,6 +265,8 @@ public class ParsingErrorImpl extends ErrorMessageImpl implements ParsingError {
 		result.append(offset);
 		result.append(", length: ");
 		result.append(length);
+		result.append(", lineNumber: ");
+		result.append(lineNumber);
 		result.append(')');
 		return result.toString();
 	}

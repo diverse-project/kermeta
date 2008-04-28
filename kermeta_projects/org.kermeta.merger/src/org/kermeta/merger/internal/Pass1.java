@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass1.java,v 1.5 2008-02-14 07:12:56 uid21732 Exp $
+/*$Id: Pass1.java,v 1.6 2008-04-28 11:51:07 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass1.java
 * License : EPL
@@ -33,6 +33,17 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
+/**
+ * 
+ * Creation all the type definitions:
+ * 		- Class Definitions
+ * 		- Primitive Types
+ * 		- Enumerations
+ * 		- Model Types
+ * 
+ * @author paco
+ *
+ */
 public class Pass1 extends MergePass {
 
 	public Pass1(KermetaUnit kermetaUnit, MergeContext context) {
@@ -59,28 +70,31 @@ public class Pass1 extends MergePass {
 				kermetaUnit.getModelingUnit().getOwnedTags().add( newTag );
 			}			
 			
-			for ( Package p : unit.getPackages() ) {			
+			for ( Package p : unit.getInternalPackages() ) {			
 				String qualifiedName = NamedElementHelper.getQualifiedName(p);
 				/*
 				 * 
 				 * Creating the package.
 				 * 
 				 */
-				Package newPackage = kermetaUnit.addInternalPackage( qualifiedName );
-				newPackage.setUri(p.getUri());
+				Package newPackage = kermetaUnit.addInternalPackage( qualifiedName, p.getUri() );
+				
 				for ( TypeDefinition t : p.getOwnedTypeDefinition() ) {
 					String s = NamedElementHelper.getQualifiedName(t);
 					TypeDefinition existingTypedefinition = kermetaUnit.getTypeDefinitionByQualifiedName(s);
 					if ( existingTypedefinition == null ) {
 						definitionProcessed.add( t );
+						TypeDefinition newTypeDefinition = null;
 						if ( t instanceof ClassDefinition )
-							createClassDefinition(t, newPackage);
+							newTypeDefinition = createClassDefinition(t, newPackage);
 						else if ( t instanceof PrimitiveType )
-							createPrimitiveType(t, newPackage);	
+							newTypeDefinition = createPrimitiveType(t, newPackage);	
 						else if ( t instanceof Enumeration )
-							createEnumeration(t, newPackage);
+							newTypeDefinition = createEnumeration(t, newPackage);
 						else if ( t instanceof ModelType )
-							createModelType(t, newPackage );
+							newTypeDefinition = createModelType(t, newPackage );
+						// Try to trace
+						context.tryToTrace(newTypeDefinition, t);
 					} else if ( ! definitionProcessed.contains(t) && t instanceof ClassDefinition && (existingTypedefinition != null) ) {
 						if ( ! context.getAspects((ClassDefinition) existingTypedefinition).contains(t) ) {
 							context.addAspect((ClassDefinition) existingTypedefinition, (ClassDefinition) t);
@@ -107,10 +121,12 @@ public class Pass1 extends MergePass {
 		
 	}
 	
-	private void createClassDefinition(TypeDefinition t, Package p) {
+	private ClassDefinition createClassDefinition(TypeDefinition t, Package p) {
 		ClassDefinition definition = (ClassDefinition) t;
 		ClassDefinition newDefinition = StructureFactory.eINSTANCE.createClassDefinition();
 		newDefinition.setName( definition.getName() );
+		newDefinition.setIsAbstract( definition.isIsAbstract() );
+		
 		kermetaUnit.addTypeDefinition(newDefinition, p);
 		/*
 		 * 
@@ -131,12 +147,16 @@ public class Pass1 extends MergePass {
 				newOTV.setName( otv.getName() );
 				newDefinition.getContainedType().add( newOTV );
 				newDefinition.getTypeParameter().add( newOTV );
+				// Try to trace
+				context.tryToTrace(newOTV, tv);
 			} else if ( tv instanceof ModelTypeVariable ) {
 				ModelTypeVariable mtv = (ModelTypeVariable) tv;
 				ModelTypeVariable newMTV = StructureFactory.eINSTANCE.createModelTypeVariable();
 				newMTV.setName( mtv.getName() );
 				newDefinition.getContainedType().add( newMTV );
 				newDefinition.getTypeParameter().add( newMTV );
+				// Try to trace
+				context.tryToTrace(newMTV, tv);
 			}
 		}
 		
@@ -148,9 +168,10 @@ public class Pass1 extends MergePass {
 		createConstraints(newDefinition, definition);
 		
 		context.putBaseTypeDefinition(newDefinition, definition);
+		return newDefinition;
 	}
 	
-	private void createPrimitiveType(TypeDefinition t, Package p) {
+	private PrimitiveType createPrimitiveType(TypeDefinition t, Package p) {
 		PrimitiveType definition = (PrimitiveType) t;
 		PrimitiveType newDefinition = KermetaModelHelper.PrimitiveType.create( definition.getName() );
 		kermetaUnit.addTypeDefinition(newDefinition, p);
@@ -161,9 +182,10 @@ public class Pass1 extends MergePass {
 		 * 
 		 */
 		createTags(newDefinition, definition);
+		return newDefinition;
 	} 
 	
-	private void createEnumeration(TypeDefinition t, Package p) {
+	private Enumeration createEnumeration(TypeDefinition t, Package p) {
 		Enumeration definition = (Enumeration) t;
 		Enumeration newDefinition = StructureFactory.eINSTANCE.createEnumeration();
 		newDefinition.setName(definition.getName());
@@ -172,6 +194,8 @@ public class Pass1 extends MergePass {
 			EnumerationLiteral newLiteral = StructureFactory.eINSTANCE.createEnumerationLiteral();
 			newLiteral.setName( literal.getName() );
 			newDefinition.getOwnedLiteral().add( newLiteral );
+			// Try to trace
+			context.tryToTrace(newLiteral, literal);
 		}
 		/*
 		 * 
@@ -179,9 +203,10 @@ public class Pass1 extends MergePass {
 		 * 
 		 */
 		createTags(newDefinition, definition);
+		return newDefinition;
 	}
 	
-	private void createModelType(TypeDefinition t, Package p) {
+	private ModelType createModelType(TypeDefinition t, Package p) {
 		ModelType definition = (ModelType) t;
 		ModelType newDefinition = StructureFactory.eINSTANCE.createModelType();
 		newDefinition.setName( definition.getName() );
@@ -193,6 +218,7 @@ public class Pass1 extends MergePass {
 		 * 
 		 */
 		createTags(newDefinition, definition);
+		return newDefinition;
 	}
 
 	private void createConstraints(ClassDefinition newDefinition, ClassDefinition baseDefinition) {
@@ -207,6 +233,8 @@ public class Pass1 extends MergePass {
 			 * 
 			 */
 			createTags(newConstraint, constraint);
+			// Try to trace
+			context.tryToTrace(newConstraint, constraint);
 		}
 	}
 	

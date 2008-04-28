@@ -1,10 +1,10 @@
-/* $Id: OptionalEMFValidator.java,v 1.3 2008-03-04 18:42:29 cfaucher Exp $
+/* $Id: OptionalEMFValidator.java,v 1.4 2008-04-28 11:50:56 ftanguy Exp $
  * Project   : Kermeta 
  * File      : OptionalEMFValidator.java
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
- * Creation date : 1 déc. 06
+ * Creation date : 1 dï¿½c. 06
  * Authors       : dvojtise <dvojtise.irisa.fr>
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
@@ -51,7 +51,7 @@ public class OptionalEMFValidator {
 					if(!status.isOK()){
 						throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ResourceSaveException",
 				    			"EMF validation failed : " + status.getMessage(),
-				    			runtimeMemory.getCurrentInterpreter(),
+				    			runtimeMemory.getInterpreter().getBasicInterpreter(),
 				    			runtimeMemory,
 				    			null);
 					}

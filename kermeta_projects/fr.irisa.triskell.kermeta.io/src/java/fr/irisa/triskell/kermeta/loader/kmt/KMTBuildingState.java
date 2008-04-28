@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTBuildingState.java,v 1.3 2007-09-04 08:29:33 ftanguy Exp $
+/*$Id: KMTBuildingState.java,v 1.4 2008-04-28 11:50:13 ftanguy Exp $
 * Project : io
 * File : 	KMTloader.java
 * License : EPL

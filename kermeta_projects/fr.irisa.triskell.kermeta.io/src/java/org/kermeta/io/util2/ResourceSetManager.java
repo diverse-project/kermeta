@@ -1,4 +1,4 @@
-/* $Id: ResourceSetManager.java,v 1.2 2007-07-20 15:08:14 ftanguy Exp $
+/* $Id: ResourceSetManager.java,v 1.3 2008-04-28 11:50:24 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ResourceSetManager.java
  * License   : EPL

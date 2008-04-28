@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeContext.java,v 1.2 2007-10-02 15:20:32 ftanguy Exp $
+/*$Id: MergeContext.java,v 1.3 2008-04-28 11:51:07 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	MergeContext.java
 * License : EPL
@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -28,9 +29,20 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.traceability.TextReference;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 public class MergeContext extends LoadingContext {
 
+	/**		Should we keep trace of elements ?		*/
+	private boolean trace = false;
+	
+	public boolean isTrace() {
+		return trace;
+	}
+	
+	
 	private Set<KermetaUnit> kermetaUnitsToMerge;
 	
 	private HashMap<Operation, Operation> operationsMapping = new HashMap<Operation, Operation> ();
@@ -49,9 +61,15 @@ public class MergeContext extends LoadingContext {
 	
 	private List<String> preUsingsToAdd = new ArrayList<String> ();
 	
-	public MergeContext(Set<KermetaUnit> kermetaUnitsToMerge) {
+	public MergeContext(Set<KermetaUnit> kermetaUnitsToMerge, Tracer tracer) {
 		super();
 		this.kermetaUnitsToMerge = kermetaUnitsToMerge;
+		if ( tracer == null )
+			this.trace = false;
+		else {
+			this.trace = true;
+			this.tracer = tracer;
+		}
 	}
 	
 	
@@ -169,6 +187,50 @@ public class MergeContext extends LoadingContext {
 		}
 		context.propertiesMapping = mapping;
 	}
+	
+	//////////////////////////////
+	//////////////////////////////
+	//		Traceability		//
+	//////////////////////////////
+	//////////////////////////////
+	private Tracer tracer;
+	
+	public Tracer getTracer() {
+		return tracer;
+	}
+	
+	public void tryToTrace(EObject newObject, EObject oldObject) {
+		if ( tracer != null ) {
+			// Try to trace
+			KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(oldObject);
+			if ( unit != null && unit.getTracer() != null ) {
+				TextReference reference = unit.getTracer().getFirstTextReference(oldObject);
+				addTrace(newObject, reference);
+			}
+		}
+	}
+	
+	public void addTracesFrom(Tracer anOtherTracer) {
+		tracer.getTraceModel().getReferences().addAll( anOtherTracer.getTraceModel().getReferences() );
+		tracer.getTraceModel().getTraces().addAll( anOtherTracer.getTraceModel().getTraces() );
+		tracer.getTraceModel().getMessages().addAll( anOtherTracer.getTraceModel().getMessages() );
+	}
+	
+	private void addTrace(EObject o, TextReference reference) {
+		if ( reference != null ) {
+			tracer.addTextInputTrace(reference.getFileURI(),
+									reference.getLineBeginAt(), 
+									reference.getCharBeginAt(), 
+									reference.getCharEndAt(), 
+									o, 
+									"");
+		}
+	}
+	//////////////////////////////////
+	//////////////////////////////////
+	//		End of Traceability		//
+	//////////////////////////////////
+	//////////////////////////////////	
 	
 }
 

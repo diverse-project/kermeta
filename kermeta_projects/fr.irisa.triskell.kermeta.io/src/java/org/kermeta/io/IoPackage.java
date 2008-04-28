@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackage.java,v 1.11 2008-02-14 07:13:18 uid21732 Exp $
+ * $Id: IoPackage.java,v 1.12 2008-04-28 11:50:15 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -593,13 +593,22 @@ public interface IoPackage extends EPackage {
 	int PARSING_ERROR__LENGTH = ERROR_MESSAGE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARSING_ERROR__LINE_NUMBER = ERROR_MESSAGE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Parsing Error</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARSING_ERROR_FEATURE_COUNT = ERROR_MESSAGE_FEATURE_COUNT + 2;
+	int PARSING_ERROR_FEATURE_COUNT = ERROR_MESSAGE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.io.impl.TypeDefinitionCacheImpl <em>Type Definition Cache</em>}' class.
@@ -1239,6 +1248,17 @@ public interface IoPackage extends EPackage {
 	EAttribute getParsingError_Length();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.ParsingError#getLineNumber <em>Line Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Line Number</em>'.
+	 * @see org.kermeta.io.ParsingError#getLineNumber()
+	 * @see #getParsingError()
+	 * @generated
+	 */
+	EAttribute getParsingError_LineNumber();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.io.TypeDefinitionCache <em>Type Definition Cache</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1791,6 +1811,14 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARSING_ERROR__LENGTH = eINSTANCE.getParsingError_Length();
+
+		/**
+		 * The meta object literal for the '<em><b>Line Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARSING_ERROR__LINE_NUMBER = eINSTANCE.getParsingError_LineNumber();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.io.impl.TypeDefinitionCacheImpl <em>Type Definition Cache</em>}' class.

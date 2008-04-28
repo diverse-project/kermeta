@@ -1,4 +1,4 @@
-/* $Id: CallableOperation.java,v 1.10 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: CallableOperation.java,v 1.11 2008-04-28 11:50:10 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : CallableOperation.java
  * License : EPL
@@ -86,8 +86,12 @@ public class CallableOperation extends CallableElement {
             }
             ft.setRight(rt);
             ft.setLeft(pt);
+          
             result = new SimpleType(TypeVariableEnforcer.getBoundType(ft, bindings));
         }
+        
+        if ( result.getFType().eContainer() == null )
+        	operation.getContainedType().add( result.getFType() );
 
         return result;
     }

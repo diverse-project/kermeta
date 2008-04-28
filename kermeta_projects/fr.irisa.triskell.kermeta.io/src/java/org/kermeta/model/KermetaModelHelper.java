@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaModelHelper.java,v 1.6 2008-03-05 08:23:13 ftanguy Exp $
+/*$Id: KermetaModelHelper.java,v 1.7 2008-04-28 11:50:25 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	KermetaModelHelper.java
 * License : EPL
@@ -238,6 +238,14 @@ public class KermetaModelHelper {
 		public List<Constraint> getAllInvariants(ClassDefinition cls) {
 			return ClassDefinitionHelper.getAllInvariants(cls);
 		}
+		
+		public TypeVariable getTypeParameter(ClassDefinition cls, String name) {
+			return ClassDefinitionHelper.getTypeParameter(cls, name);
+		}
+		
+		public boolean isCollection(ClassDefinition c) {
+			return ClassDefinitionHelper.isCollection(c);
+		}
 	}
 	
 	
@@ -252,6 +260,10 @@ public class KermetaModelHelper {
 		
 		public Enumeration create(String name) {
 			return EnumerationHelper.create(name);
+		}
+		
+		public EnumerationLiteral getLiteral(Enumeration enumeration, String name) {
+			return EnumerationHelper.getLiteral(enumeration, name);
 		}
 		
 	}
@@ -304,6 +316,10 @@ public class KermetaModelHelper {
 		
 		public TypeVariable getTypeVariable(Operation op, String name) {
 			return OperationHelper.getTypeVariable(op, name);
+		}
+		
+		public List<Operation> getSuperOperations(Operation op) {
+			return OperationHelper.getSuperOperations(op);
 		}
 	}
 	

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.20 2008-02-14 07:13:17 uid21732 Exp $
+ * $Id: IoPackageImpl.java,v 1.21 2008-04-28 11:50:12 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -641,6 +641,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getParsingError_LineNumber() {
+		return (EAttribute)parsingErrorEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTypeDefinitionCache() {
 		return typeDefinitionCacheEClass;
 	}
@@ -867,6 +876,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		parsingErrorEClass = createEClass(PARSING_ERROR);
 		createEAttribute(parsingErrorEClass, PARSING_ERROR__OFFSET);
 		createEAttribute(parsingErrorEClass, PARSING_ERROR__LENGTH);
+		createEAttribute(parsingErrorEClass, PARSING_ERROR__LINE_NUMBER);
 
 		typeDefinitionCacheEClass = createEClass(TYPE_DEFINITION_CACHE);
 		createEReference(typeDefinitionCacheEClass, TYPE_DEFINITION_CACHE__KERMETA_UNIT);
@@ -1076,9 +1086,9 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		addEOperation(kermetaUnitEClass, null, "unlock", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, null, "fillTypeDefinitionCache", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		addEOperation(kermetaUnitEClass, this.getKermetaUnit(), "copy", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(kermetaUnitEClass, null, "fillTypeDefinitionCache", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(iBuildingStateEClass, IBuildingState.class, "IBuildingState", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1130,6 +1140,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEClass(parsingErrorEClass, ParsingError.class, "ParsingError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParsingError_Offset(), ecorePackage.getEInt(), "offset", null, 0, 1, ParsingError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParsingError_Length(), ecorePackage.getEInt(), "length", null, 0, 1, ParsingError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParsingError_LineNumber(), ecorePackage.getEInt(), "lineNumber", null, 0, 1, ParsingError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeDefinitionCacheEClass, TypeDefinitionCache.class, "TypeDefinitionCache", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeDefinitionCache_KermetaUnit(), this.getKermetaUnit(), this.getKermetaUnit_TypeDefinitionCache(), "kermetaUnit", null, 1, 1, TypeDefinitionCache.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

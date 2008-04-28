@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.21 2008-02-14 14:13:02 ftanguy Exp $
+/* $Id: KMT2KMPass.java,v 1.22 2008-04-28 11:50:13 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : EPL

@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.9 2008-02-15 14:23:56 dvojtise Exp $
+/* $Id: Repository.java,v 1.10 2008-04-28 11:50:56 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -101,8 +101,15 @@ public class Repository {
     	java.lang.String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1);
     	URI u = URI.createURI(file);
     	if (u.isRelative()) {
-    		URIConverter c = new URIConverterImpl();
-    		u = u.resolve(c.normalize(URI.createURI(unit_uripath)));    			
+    		java.lang.String defaultPath = uriRO.getFactory().getMemory().getInterpreter().getDefaultPath();
+    		if ( defaultPath == null ) {
+    			defaultPath = unit_uripath;
+        		URIConverter c = new URIConverterImpl();
+        		u = u.resolve(c.normalize(URI.createURI(defaultPath)));    			
+    		} else {
+    			defaultPath = "platform:/resource" + defaultPath;
+    			u = URI.createURI( defaultPath + "/" + file);
+    		}
     	}
     	
     	// Assign normalized uri to nuri RO

@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.49 2008-02-14 07:13:20 uid21732 Exp $
+/* $Id: KM2Ecore.java,v 1.50 2008-04-28 11:50:22 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL

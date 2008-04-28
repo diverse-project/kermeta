@@ -4,6 +4,7 @@ package fr.irisa.triskell.kermeta.launcher;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
 import fr.irisa.triskell.kermeta.launcher.RunInterpretedTestCase;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 
 /**
  * Launcher for Kermeta interpreter. It can be run from the command line or as a
@@ -12,11 +13,9 @@ import fr.irisa.triskell.kermeta.launcher.RunInterpretedTestCase;
 public class RunCompiledTestCase extends RunInterpretedTestCase {
 
     public RunCompiledTestCase(String themainClassValue,
-			String themainOperationValue,
-			RunJunitFactory thecontainerTestSuite, boolean constraintExecution,
-			boolean isLastOfSerie, String binDirectory) {
+			String themainOperationValue, RunJunitFactory thecontainerTestSuite, boolean constraintExecution, boolean isLastOfSerie) {
 		super(themainClassValue, themainOperationValue, thecontainerTestSuite,
-				constraintExecution, isLastOfSerie, binDirectory);
+				constraintExecution, isLastOfSerie);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,19 +28,12 @@ public class RunCompiledTestCase extends RunInterpretedTestCase {
      * @throws Exception 
      */
     public void runTest() throws KermetaRaisedException {
-    	try{    		
-    			
+    	try {    		 			
     		interpreter.setEntryPoint(mainClassValue, mainOperationValue);
-    		interpreter.isTestCase = containerTestSuite.isTestCase;
-    		if ( constraintExecution )
-    			interpreter.launchConstraint();
-    		else
-    			interpreter.launch();
-    		    		
-    	}
-    	catch(KermetaRaisedException e){
+    		interpreter.launch();
+    	} catch(KermetaRaisedException e){
     		// If this is a kermeta assertion that failed, then the Test must fail
-    		fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)e.raised_object.getMetaclass().getKCoreObject();        	
+    		Class t_target=(Class)e.raised_object.getMetaclass().getKCoreObject();        	
     		String exceptionTypeName = t_target.getTypeDefinition().getName();
     		if(exceptionTypeName.compareTo("AssertionFailedError") == 0){
     			fail(e.toString());

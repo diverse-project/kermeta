@@ -1,6 +1,6 @@
 
 
-/*$Id: ReconcilingStrategy.java,v 1.4 2008-02-14 07:13:42 uid21732 Exp $
+/*$Id: ReconcilingStrategy.java,v 1.5 2008-04-28 11:51:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategy.java
 * License : EPL
@@ -51,9 +51,11 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 	public ReconcilingStrategy(KermetaTextEditor editor) {
 		this.editor = editor;
 		IFile file = editor.getFile();
-		KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( file.getProject() );
-		if ( project != null )
-			kpmUnit = project.getKpm().findUnit( file.getFullPath().toString() );
+		if ( file != null ) {
+			KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( file.getProject() );
+			if ( project != null )
+				kpmUnit = project.getKpm().findUnit( file.getFullPath().toString() );
+		}
 	}
 	
 	private IDocument document = null;

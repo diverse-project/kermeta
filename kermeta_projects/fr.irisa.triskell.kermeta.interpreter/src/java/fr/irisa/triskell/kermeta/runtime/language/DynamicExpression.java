@@ -1,4 +1,4 @@
-/* $Id: DynamicExpression.java,v 1.11 2007-10-15 07:13:58 barais Exp $
+/* $Id: DynamicExpression.java,v 1.12 2008-04-28 11:50:57 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpression.java
 * License : EPL
@@ -18,6 +18,7 @@ import org.kermeta.io.ErrorMessage;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -49,6 +50,11 @@ public class DynamicExpression {
 	        
 	        java.lang.String name = String.getValue(ro_name);
 	        Type type = (Type)ro_type.getKCoreObject();
+	        
+	        if ( type == null )
+	        	type = (Type) self.getFactory().getMemory().voidINSTANCE.getMetaclass().getKCoreObject();
+		        
+	        	//	        	type = StructureFactory.eINSTANCE.createVoidType();
 	        
 	        ftype_params.put(name , type);
 	    }
@@ -115,7 +121,7 @@ public class DynamicExpression {
 	public static RuntimeObject execute(RuntimeObject self, RuntimeObject selfObj, RuntimeObject actualParams) {
 	    DynamicExpressionUnit deu = (DynamicExpressionUnit)self.getDynamicExpressionUnit();
 	    
-	    ExpressionInterpreter interp = self.getFactory().getMemory().getCurrentInterpreter();
+	    ExpressionInterpreter interp = self.getFactory().getMemory().getInterpreter().getBasicInterpreter();
 	    
 	    ExpressionCallFrame ecf = new ExpressionCallFrame(interp.getInterpreterContext(), deu, selfObj);
 	    

@@ -1,6 +1,6 @@
 
 
-/*$Id: ReturnTypeChecker.java,v 1.2 2007-10-23 11:37:00 dvojtise Exp $
+/*$Id: ReturnTypeChecker.java,v 1.3 2008-04-28 11:50:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	ReturnTypeChecker.java
 * License : EPL

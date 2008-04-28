@@ -4,17 +4,17 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::utils|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="utils" nsURI="http://www.kermeta.org/kermeta/utils" nsPrefix="utils">
       <eClassifiers xsi:type="ecore:EClass" name="StringBuffer">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long&#xA; * string concatenation.&lt;br>&#xA; * &lt;b>Only work on Strings&lt;/b>&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;/>&#xA; */"/>
+          <details key="documentation" value=" */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="append">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.append(self, arg0)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Append a given string at the end of this StringBuffer&#xA;  * @param arg0 A string to append at the end of this StringBuffer&#xA;  * @return A reference to this object&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
           <eParameters name="arg0">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -23,7 +23,7 @@
         <eOperations name="toString">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var stringValue : kermeta::standard::String&#xA;&#x9;stringValue ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.toString(self)&#xA;&#x9;result := stringValue&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  *Convert this StringBuffer to String and return its value&#xA;  *@return The string value of this StringBuffer&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
@@ -35,28 +35,22 @@
     <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
-    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../kunit/assert.ecore#/2"/>
     <references href="utils.ecore#/0"/>
     <references href="utils.ecore#/1"/>
-    <references href="utils.ecore#/2"/>
     <references href="hashtable.ecore#/0"/>
     <references href="hashtable.ecore#/1"/>
     <references href="hashtable.ecore#/2"/>
@@ -65,13 +59,11 @@
     <references href="stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/2"/>

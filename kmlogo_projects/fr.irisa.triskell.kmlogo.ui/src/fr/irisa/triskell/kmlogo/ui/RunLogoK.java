@@ -1,4 +1,4 @@
-/* $Id: RunLogoK.java,v 1.8 2008-03-04 10:59:26 dvojtise Exp $
+/* $Id: RunLogoK.java,v 1.9 2008-04-28 11:54:47 ftanguy Exp $
  * Project   : kmLogo
  * File      : RunLogoK.java
  * License   : EPL
@@ -15,21 +15,18 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
-import org.kermeta.interpreter.helper.RunnerHelper;
-import org.kermeta.io.KermetaUnit;
+import org.kermeta.interpreter.api.Interpreter;
+import org.kermeta.interpreter.api.InterpreterMode;
 import org.osgi.framework.Bundle;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class RunLogoK {
 	public static final String LOGO_SIMULATOR_KERMETA_CODE = "platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoSimulator.kmt";
@@ -49,18 +46,13 @@ public class RunLogoK {
 	    KermetaInterpreter inter = new KermetaInterpreter(LOGO_SIMULATOR_KERMETA_CODE, binDirectory , null);
 		*/
 		// merge in memory
-		KermetaUnit unitToExecute;
-		
-		unitToExecute = RunnerHelper.getKermetaUnitToExecute(LOGO_SIMULATOR_KERMETA_CODE);
-		KermetaInterpreter inter = new KermetaInterpreter(unitToExecute, null);
-	    inter.setKStream(console);		
-	    inter.setEntryPoint("kmLogo::Interpreter", "execute");
-		// These are the parameters
-		ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
-		params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(fileURI, inter.getMemory().getROFactory()));
-		inter.setEntryParameters(params);
+		Interpreter interpreter = new Interpreter(LOGO_SIMULATOR_KERMETA_CODE, InterpreterMode.RUN, null);
+	    interpreter.setStreams(console);		
+	    interpreter.setEntryPoint("kmLogo::Interpreter", "execute");
+		String[] parameters = new String[1];
+		parameters[0] = fileURI;
+		interpreter.setParameters(parameters);
 		// And we launch the interpreter
-		
 		
 		// Add some URL to the classloader of the interpreter : needed if your code use some extra java classes (via extern for example)
 		// use a set for building the URL (in case some may fail due to malformed URL
@@ -84,9 +76,9 @@ public class RunLogoK {
 			urls[i] = url;
 			i++;
 		}
-		URLClassLoader cl = new URLClassLoader(urls, inter.getClass().getClassLoader());
+		URLClassLoader cl = new URLClassLoader(urls, interpreter.getClass().getClassLoader());
 		Thread.currentThread().setContextClassLoader(cl);
-		inter.launch();
+		interpreter.launch();
 
 	}
 	/**

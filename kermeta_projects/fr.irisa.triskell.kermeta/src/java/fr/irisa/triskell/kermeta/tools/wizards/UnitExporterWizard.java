@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.34 2008-04-09 06:47:54 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.35 2008-04-28 11:51:26 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -39,6 +40,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
@@ -181,7 +183,7 @@ public class UnitExporterWizard extends Wizard {
 
 		IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
 			public void run(IProgressMonitor monitor) throws CoreException {
-				exporter.export(builder, targetDir, fileURI);				
+				exporter.export(builder, targetDir, fileURI, false);				
 				ifile.refreshLocal(1, null);
 			}
 		};
@@ -210,7 +212,11 @@ public class UnitExporterWizard extends Wizard {
 		}
 		// Save trace
 		try {
-			trace_resource.save(null);
+			URI uri = URI.createURI( "platform:/resource" + traceFile.getFullPath().toString() );
+			ResourceSet resourceSet = unit.getModelingUnit().eResource().getResourceSet();
+			Resource resource = resourceSet.createResource(uri);
+			resource.getContents().add( unit.getTracer().getTraceModel() );
+			resource.save(null);
 		} catch (IOException e) {
 			KermetaUnit.internalLog
 					.error("cannot save trace ressource, due to: "

@@ -22,7 +22,7 @@ class Main inherits kermeta::kunit::TestCase
         i := 5/0
         assert(false)
         stdio.writeln(i.toString)
-        rescue kermeta::exceptions::DivisionByZero
+        rescue (c : kermeta::exceptions::DivisionByZero)
         	assert(true)
     end
     

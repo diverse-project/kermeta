@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.8 2008-02-14 07:13:32 uid21732 Exp $
+/* $Id: RunJunitFactory.java,v 1.9 2008-04-28 11:51:16 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -15,7 +15,6 @@ package fr.irisa.triskell.kermeta.launcher;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Map;
 
 import junit.framework.Test;
@@ -23,11 +22,11 @@ import junit.framework.TestCase;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
+import org.kermeta.interpreter.helper.RunnerHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.checker.KermetaUnitChecker;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.loader.LoadingOptions;
-import org.kermeta.merger.Merger;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
@@ -61,56 +60,8 @@ public class RunJunitFactory implements Test {
     private KermetaUnit unit = null;
     
     private boolean isCompiled = false;
-    
-    private String binDirectory;
 
     private KermetaUnit executable = null;
-    
-    /**
-     * 
-     * Lazy initializer to get the kermeta unit to be given to the interpreter.
-     * This kermeta unit is constructed thanks to the merger.
-     * 
-     * @return
-     */
-    public KermetaUnit getExecutable() {
-    	if ( executable == null )
-			try {
-				setExecutable();
-			} catch (URIMalformedException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (NotRegisteredURIException e) {
-				e.printStackTrace();
-			}
-    	return executable;
-    }
-    
-    /**
-     * 
-     * Constructing the kermeta unit to be executed. Done with the merger.
-     * 
-     * @throws URIMalformedException
-     * @throws IOException
-     * @throws NotRegisteredURIException
-     */
-    private void setExecutable() throws URIMalformedException, IOException, NotRegisteredURIException {
-    	if ( executable == null ) {
-    		KermetaUnit source = getUnit();
-    		source.setLocked(true);
-   			LinkedHashSet<KermetaUnit> kermetaUnitsToMerge = new LinkedHashSet<KermetaUnit> ();
-   			kermetaUnitsToMerge.add(source);
-   			kermetaUnitsToMerge.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
-   			
-   			Merger merger = new Merger();
-   			String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
-	    	executable = KermetaUnitChecker.check( fileToExecute );
-   		
-	    	source.setLocked(false);
-   			
-    	}
-    }
     
     /**
      * enabling this option will optimize the loading, so it will load it only once : one for the identification 
@@ -123,8 +74,7 @@ public class RunJunitFactory implements Test {
     /**
      * Default constructor
      */
-    public RunJunitFactory(String binDirectory) {
-        this.binDirectory = binDirectory;
+    public RunJunitFactory() {
         optimizeLoading = false;
     }
     /**
@@ -133,10 +83,24 @@ public class RunJunitFactory implements Test {
     public RunJunitFactory(boolean optimizeLoading) {
         this.optimizeLoading = optimizeLoading;
     }
-   // public KermetaInterpreter kminterpreter = null;
-    
+   
     public Test addTestsForUnit(String unit_uri) {
     	return addTestsForUnit(unit_uri, false);
+    }
+    
+    public String getURI() {
+        try {
+        	if ( executable == null )
+        		executable = RunnerHelper.getKermetaUnitToExecute(unit_uri, "platform:/resource/interpreter.km");
+			return executable.getUri();
+        } catch (NotRegisteredURIException e) {
+			e.printStackTrace();
+		} catch (URIMalformedException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
     }
     
     /**
@@ -213,8 +177,7 @@ public class RunJunitFactory implements Test {
             		resetUnit(); // reset the unit to free some memory
             	return theTestCase;
             }
-            
-
+                      
             /*
              * 
              * Getting the entry point of the program.
@@ -269,9 +232,9 @@ public class RunJunitFactory implements Test {
             else // it is not a test suite
             {
             	if(isCompiled) {
-            		theTestCase = new RunCompiledTestCase(main_class, main_operation, this, constraintExecution, true, binDirectory);
+            		theTestCase = new RunCompiledTestCase(main_class, main_operation, this, constraintExecution, true);
             	} else {
-            		theTestCase = new RunInterpretedTestCase(main_class, main_operation, this, constraintExecution, true, binDirectory);
+            		theTestCase = new RunInterpretedTestCase(main_class, main_operation, this, constraintExecution, true);
             	}
                 
             	if(!optimizeLoading)
@@ -345,9 +308,9 @@ public class RunJunitFactory implements Test {
             Operation mainOp = it.next();
             if (mainOp.getName().startsWith("test")) {
             	if(isCompiled) {
-            		theTestSuite.addTest(new RunCompiledTestCase(main_class, mainOp.getName(), this, constraintExecution, !it.hasNext(), binDirectory));
+            		theTestSuite.addTest(new RunCompiledTestCase(main_class, mainOp.getName(), this, constraintExecution, !it.hasNext()));
             	} else {
-            		theTestSuite.addTest(new RunInterpretedTestCase(main_class, mainOp.getName(), this, constraintExecution, !it.hasNext(), binDirectory));
+            		theTestSuite.addTest(new RunInterpretedTestCase(main_class, mainOp.getName(), this, constraintExecution, !it.hasNext()));
             	}
                 
             }
@@ -410,6 +373,7 @@ public class RunJunitFactory implements Test {
     		LoaderPlugin.getDefault().unload( s );
     	}
     	unit = null;
+    	Runtime.getRuntime().gc();
     }
     /**
      * return the unit, take care of optimization
@@ -417,17 +381,14 @@ public class RunJunitFactory implements Test {
      * @return
      */
 	public KermetaUnit getUnit() {
-		if(unit == null){
+		if ( unit == null ) {
 			try {
-				unit = LoaderPlugin.getDefault().load( unit_uri, null );
-			} catch (URIMalformedException e) {
-				e.printStackTrace();
-			} catch (NotRegisteredURIException e) {
-				e.printStackTrace();
+				unit = KermetaUnitChecker.check( unit_uri );
+			} catch (NotRegisteredURIException e1) {
+				e1.printStackTrace();
+			} catch (URIMalformedException e1) {
+				e1.printStackTrace();
 			}
-			KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
-        	typechecker.checkUnit(); // make sure the types are correctly set
-        	// we don't care about constraint checking since it has already be done before
 		}
 		return unit;
 	}

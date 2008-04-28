@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParseErrorMessageValidator.java,v 1.3 2008-01-04 14:20:07 dvojtise Exp $
+ * $Id: ParseErrorMessageValidator.java,v 1.4 2008-04-28 11:50:11 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 

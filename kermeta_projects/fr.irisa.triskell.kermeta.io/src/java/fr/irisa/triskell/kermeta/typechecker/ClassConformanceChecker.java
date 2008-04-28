@@ -1,4 +1,4 @@
-/* $Id: ClassConformanceChecker.java,v 1.6 2008-02-19 10:11:41 ftanguy Exp $
+/* $Id: ClassConformanceChecker.java,v 1.7 2008-04-28 11:50:11 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ClassConformanceChecker.java
 * License : EPL
@@ -66,7 +66,8 @@ public class ClassConformanceChecker {
 //		ClassDefinition cd = (ClassDefinition) unit.getTypeDefinitionByQualifiedName(qualifiedName);
 		Collection<TypeDefinition> context = null;
 //		if ( cd != null )
-			context = KermetaModelHelper.ClassDefinition.getFullContext( (ClassDefinition) provided.getTypeDefinition() );
+		context = TypeDefinitionContextCache.getInstance().getContext( (ClassDefinition) provided.getTypeDefinition() );
+		//context = KermetaModelHelper.ClassDefinition.getFullContext( (ClassDefinition) provided.getTypeDefinition() );
 //		else
 //			context = KermetaModelHelper.ClassDefinition.getContext( (ClassDefinition) provided.getTypeDefinition() );
 

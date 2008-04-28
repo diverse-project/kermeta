@@ -1,4 +1,4 @@
-/*$Id: KermetaUnitHost.java,v 1.5 2008-02-14 07:13:24 uid21732 Exp $
+/*$Id: KermetaUnitHost.java,v 1.6 2008-04-28 11:49:59 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -31,7 +31,8 @@ public class KermetaUnitHost {
 	}
 		
 	public void declareInterest(InterestedObject target, IFile file) {
-		declareInterest(target, "platform:/resource" + file.getFullPath().toString());
+		if ( file != null )
+			declareInterest(target, "platform:/resource" + file.getFullPath().toString());
 	}
 	
 	private void declareInterest(InterestedObject target, String id) {
@@ -39,7 +40,8 @@ public class KermetaUnitHost {
 	}
 
 	public void updateValue(IFile file, KermetaUnit newValue) throws IdNotFoundException {
-		updateValue("platform:/resource" + file.getFullPath().toString(), newValue);
+		if ( file != null )
+			updateValue("platform:/resource" + file.getFullPath().toString(), newValue);
 	}
 	
 	private void updateValue(String id, KermetaUnit newValue) throws IdNotFoundException {
@@ -47,7 +49,8 @@ public class KermetaUnitHost {
 	}
 
 	public void undeclareInterest(InterestedObject target, IFile file) {
-		undeclareInterest(target, "platform:/resource" + file.getFullPath().toString());
+		if ( file != null )
+			undeclareInterest(target, "platform:/resource" + file.getFullPath().toString());
 	}
 	
 	private void undeclareInterest(InterestedObject target, String id) {

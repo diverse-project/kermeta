@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.16 2008-03-05 08:15:55 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.17 2008-04-28 11:50:14 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL

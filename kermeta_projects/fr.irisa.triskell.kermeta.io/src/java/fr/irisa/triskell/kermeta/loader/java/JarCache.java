@@ -1,4 +1,4 @@
-/*$Id: JarCache.java,v 1.3 2008-02-14 07:13:19 uid21732 Exp $
+/*$Id: JarCache.java,v 1.4 2008-04-28 11:50:15 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaLoaderCache.java
 * License : EPL

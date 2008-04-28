@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.21 2008-03-07 13:05:50 dvojtise Exp $
+/* $Id: Traceback.java,v 1.22 2008-04-28 11:50:55 ftanguy Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -12,7 +12,9 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -62,8 +64,13 @@ public class Traceback {
     public String getStackTrace()
     {   
         StringBuffer stack_trace = new StringBuffer("Trace: \n" + getContextForFObject(null, cause_object)+"\n");
-        for (CallFrame frame : interpreter.interpreterContext.frame_stack)
-        {
+        Stack<CallFrame> s = (Stack<CallFrame>) interpreter.interpreterContext.frame_stack.clone();
+        
+        while ( ! s.isEmpty() ) {
+        	CallFrame frame = s.pop();
+        
+//        for (CallFrame frame : interpreter.interpreterContext.frame_stack)
+  //      {
             fr.irisa.triskell.kermeta.language.structure.Object expr = frame.getExpression();
             if (expr!=null) // The only case where this cond is false is on first invokation
                 stack_trace.append(getContextForFObject(frame, expr));

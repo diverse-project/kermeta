@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.12 2008-04-25 07:53:55 dvojtise Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.13 2008-04-28 11:51:26 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.KermetaUnit;
@@ -22,12 +23,11 @@ import org.kermeta.io.Message;
 import org.kermeta.io.ParsingError;
 import org.kermeta.io.WarningMessage;
 
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
+
 /**
  * This class provides helper functions to create and manage the Eclipse markers when used with Kermeta
  *
@@ -35,8 +35,7 @@ import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
 public class KermetaMarkersHelper {
 
 	private final static int LINE_MAX_SIZE = 80;
-	
-	
+		
     /**
      * The marker type : must correspond to the type that is
      * declared in the extension "org.eclipse.core.resources.markers"
@@ -44,7 +43,6 @@ public class KermetaMarkersHelper {
      *  (super type="org.eclipse.core.resources.problemmarker")
      */
     public static String getMarkerType() {
-       // return "fr.irisa.triskell.kermeta.kpm.kermetaMarker";
     	return IMarker.PROBLEM;
     }
 	
@@ -52,22 +50,91 @@ public class KermetaMarkersHelper {
      *  Create markers for showing to the user the elements that are erroneous, or
      *  that are subjects to warnings.
      */
-    public static void createMarkers(IFile file, KermetaUnit unit) {
-    	
-    	if ( unit.getUri().matches(".+\\.kmt") ) {
-	    	for (ErrorMessage next : KermetaUnitHelper.getErrors(unit) ) 
-	    		createMarkerForKMTFile(file, next, unit);
-	    	for (WarningMessage next : KermetaUnitHelper.getWarnings(unit)) 
-	    		createMarkerForKMTFile(file, next, unit);
-    	} else {
-    		for (ErrorMessage next : KermetaUnitHelper.getErrors(unit) ) 
-	    		createError(file, next.getValue());
-	    	for (WarningMessage next : KermetaUnitHelper.getWarnings(unit)) 
-	    		createWarning(file, next.getValue());
-    	}
-    	
+    public static void createMarkers(IFile file, KermetaUnit unit) {    	
+    	if ( unit.getUri().matches(".+\\.kmt") )
+    		for ( Message m : unit.getMessages() )
+    			createMarkerForKMTFile(file, m, unit);
+    	else
+    		for ( Message m : unit.getMessages() )
+	    		createMarker(file, m);
     }
 
+    public static void markError(IFile file, String message) throws CoreException {
+    	mark(file, message, IMarker.SEVERITY_ERROR, null, null );
+    }
+    
+    private static void markError(IFile file, String message, int charStart, int charStop) throws CoreException {
+    	mark(file, message, IMarker.SEVERITY_ERROR, charStart, charStop );
+    }
+    
+    private static void markWarning(IFile file, String message) throws CoreException {
+    	mark(file, message, IMarker.SEVERITY_WARNING, null, null );
+    }
+    
+    private static void markWarning(IFile file, String message, int charStart, int charStop) throws CoreException {
+    	mark(file, message, IMarker.SEVERITY_WARNING, charStart, charStop );
+    }
+    
+    private static void markInfo(IFile file, String message) throws CoreException {
+    	mark(file, message, IMarker.SEVERITY_INFO, null, null );
+    }
+    
+    private static void markInfo(IFile file, String message, int charStart, int charStop) throws CoreException {
+    	mark(file, message, IMarker.SEVERITY_INFO, charStart, charStop );
+    }
+    
+    private static void mark(IFile file, String message, int severity, Integer charStart, Integer charStop) throws CoreException {
+     	HashMap<String, java.lang.Object> datas = new HashMap<String, java.lang.Object>();
+        datas.put( IMarker.MESSAGE, message );
+        datas.put( IMarker.SEVERITY, severity );
+        
+        if ( charStart != null )
+        	datas.put( IMarker.CHAR_START, charStart );
+        else
+        	datas.put( IMarker.CHAR_START, 0 );
+ 
+        if ( charStop != null )
+           	datas.put( IMarker.CHAR_END, charStop );
+       	else
+       		datas.put( IMarker.CHAR_END, 0 );
+        
+        MarkerUtilities.createMarker( file, datas, getMarkerType() );
+    }
+    
+    private static void createParsingError(IFile file, String message, ParsingError error) throws CoreException {
+		int offset = error.getOffset();
+		int length = error.getLength();
+		if ( length == 0 ) {
+			length = 1;
+			offset--;
+        }
+		markError(file, message, offset, offset + length);
+    }
+    
+    private static void createMarker(IFile file, String message, Message m, KermetaUnit unit) throws CoreException {
+    	if ( m.getTarget() instanceof Object ) {
+	    	if ( unit.getTracer() != null ) {
+	    		ModelReference mr = unit.getTracer().getModelReference( (Object) m.getTarget() );
+	    		TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
+	    		if (tr != null) {
+	    			String filePath = "platform:/resource" + file.getFullPath().toString();
+	    			if ( tr.getFileURI().equals( filePath ) ) {
+	 				   if ( m instanceof ErrorMessage )
+	 					   markError(file, message, tr.getCharBeginAt(), tr.getCharEndAt());
+	 				   else if ( m instanceof WarningMessage )
+	 					   markWarning(file, message, tr.getCharBeginAt(), tr.getCharEndAt());
+	    			}
+	 		   }
+	    	}
+    	} else if ( m.getTarget() instanceof ASTNode ) {
+    	   	ASTNode node = (ASTNode) m.getTarget();
+        	if ( m instanceof ErrorMessage )
+        		markError(file, message, node.getRangeStart(), node.getRangeEnd());
+        	else if ( m instanceof WarningMessage )
+        		markWarning(file, message, node.getRangeStart(), node.getRangeEnd());
+    	}
+    }
+       
     /**
      *  Create a marker for showing to the user the elements that are erroneous, or
      *  that are subjects to warnings.
@@ -76,99 +143,25 @@ public class KermetaMarkersHelper {
      *  contains the given message/warning/error
      *  @param unit the kermeta unit for the given file
      */
-    public static void createMarkerForKMTFile(IFile file, Message message, KermetaUnit unit)
-    {
+    public static void createMarkerForKMTFile(IFile file, Message message, KermetaUnit unit) {
     	String realMessage = formatMessage(message.getValue());
-
-        try
-        {
-        //	if ( findMarker(file, realMessage) == null ) {
-                HashMap <String, Object> map = new HashMap <String, Object> ();
-                
-                int offset = 0;
-                int length = -1;
-                
-                if (message instanceof ParsingError) {
-                	ParsingError pe = (ParsingError)message;
-                	offset = pe.getOffset() -1;
-                	length = pe.getLength();
-                	if ( length == 0 ) {
-                		length = 1;
-                		offset--;
-                	}
-                }
-               /* else if (message instanceof KMTUnitLoadError) {
-                	offset = ((KMTUnitLoadError)message).getAstNode().getRangeStart();
-                	length = ((KMTUnitLoadError)message).getAstNode().getRangeLength();	
-                }*/
-               else if( message.getTarget() != null ) {
-            	   
-            	   if ( message.getTarget() instanceof KermetaASTNode ) {
-            		   KermetaASTNode node = (KermetaASTNode) message.getTarget(); 
-            		   offset = node.getRangeStart() - 1;
-                       length = node.getRangeLength();   
-            	   } else if ( message.getTarget() instanceof fr.irisa.triskell.kermeta.language.structure.Object ) {
-            	               	   
-            		   fr.irisa.triskell.kermeta.language.structure.Object o = (fr.irisa.triskell.kermeta.language.structure.Object) message.getTarget();
-            		   if ( unit.getTracer() != null ) {
-            			   ModelReference mr = unit.getTracer().getModelReference( o );
-            			   TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
-	            		   if (tr != null) {
-	            			   if(tr.getFileURI().equals( "platform:/resource" + file.getFullPath().toString())){
-	            				   offset = tr.getCharBeginAt() - 1;
-	            				   length = tr.getCharEndAt() - offset;	
-	            			   }
-	            		   }
-            		   }
-                    }
-                    
-                }
-/*                else if(message.getAstNode() != null) {
-                 */
-                
-                
-                //if (offset > 0) offset--;
-                
-                if ( length != -1 ) {  
-                
-                	//MarkerUtilities.setLineNumber(map, line);
-                	MarkerUtilities.setCharStart(map, offset);
-                	MarkerUtilities.setCharEnd(map, offset + length);
-                	
-                	map.put("message", realMessage);
-                	if(message instanceof ErrorMessage)
-                		map.put("severity", new Integer(2));
-                	else
-                		if(message instanceof WarningMessage)
-                			map.put("severity", new Integer(1));
-                		else
-                			map.put("severity", new Integer(0));
-                	//map.put("charStart", new Integer(offset));
-                	//map.put("charEnd", new Integer(offset + length)); 
-                	int lineNumber = new Integer(ResourceHelper.calculateLineNumber(offset,file));
-                	if(lineNumber != -1){
-                		map.put("lineNumber", new Integer(lineNumber));
-                	}
-                	MarkerUtilities.createMarker(file, map, getMarkerType());
-        		//MarkerUtilities.createMarker(file, null, getMarkerType());
-                } else {
-                	map.put("message", "Cannot locate error in file, maybe one of required file is erroneous.\n" + message.getValue());
-                	if(message instanceof ErrorMessage)
-                		map.put("severity", new Integer(2));
-                	else
-                		if(message instanceof WarningMessage)
-                			map.put("severity", new Integer(1));
-                		else
-                			map.put("severity", new Integer(0));
-                	map.put("charStart", 0);
-                	map.put("charEnd", 0);        		
-                	MarkerUtilities.createMarker(file, map, getMarkerType());
-                }
-        	
-            
-        }
-        catch(CoreException ex)
-        {
+        try {
+        	if (message instanceof ParsingError)
+        		createParsingError(file, realMessage, (ParsingError) message);
+        	else if ( message.getTarget() instanceof Object )
+        		createMarker(file, realMessage, message, unit);
+        	else if ( message.getTarget() instanceof ASTNode )
+        		createMarker(file, realMessage, message, unit);
+        	else {
+              	realMessage = "Cannot locate error in file, maybe one of required file is erroneous.\n" + message.getValue();
+               	if(message instanceof ErrorMessage)
+               		markError(file, realMessage);
+               	else if ( message instanceof WarningMessage )
+              			markWarning(file, realMessage);
+           		else
+           			markInfo(file, realMessage);
+        	}           
+        } catch(CoreException ex) {
             ex.printStackTrace();
         }
     }
@@ -182,28 +175,18 @@ public class KermetaMarkersHelper {
      *  contains the given message/warning/error
      *  @param unit the kermeta unit for the given file
      */
-    public static void createMarkerForKMFile(IFile file, Message message, KermetaUnit unit)
-    {
-        HashMap <String, Object> map = new HashMap <String, Object> ();
+    public static void createMarker(IFile file, Message message) {
         String realMessage = formatMessage(message.getValue());
-
-        try
-        {
+        try {
         	if ( findMarker(file, realMessage) == null ) {
-                map.put("message", realMessage);
-                if(message instanceof ErrorMessage)
-                    map.put("severity", new Integer(2));
+        		if(message instanceof ErrorMessage)
+                	markError(file, realMessage);
+                else if(message instanceof WarningMessage)
+                    markWarning(file, realMessage);
                 else
-                if(message instanceof WarningMessage)
-                    map.put("severity", new Integer(1));
-                else
-                    map.put("severity", new Integer(0));
-        		MarkerUtilities.createMarker(file, map, getMarkerType());
+                    markInfo(file, realMessage);
         	}
-            
-        }
-        catch(CoreException ex)
-        {
+        } catch(CoreException ex) {
             ex.printStackTrace();
         }
     }
@@ -240,49 +223,13 @@ public class KermetaMarkersHelper {
     public static void clearMarkers(IFile file) {
         try {
             //file.deleteMarkers(getMarkerType(), true, 2);
-        	if(file != null)
+        	if ( file != null )
         		file.deleteMarkers(getMarkerType(), true, IResource.DEPTH_INFINITE);
         } catch(Exception ex) {
             //ex.printStackTrace();
         }
     }
-    
-    /**
-     * @deprecated
-     * @param file
-     * @param message
-     */
-    public static void createMarker (IFile file, String message) {
-    	createMarker(file, message, 2);
-    }
-    
-    public static void createError (IFile file, String message) {
-    	createMarker(file, message, 2);
-    }
-    
-    public static void createMarker (IFile file, String message, int kind) {
-    	
-    	HashMap <String, Object> map = new HashMap <String, Object> ();
-    	map.put("message", formatMessage(message));
-    	
-    	map.put("severity", new Integer(kind));
-    	
-        map.put("charStart", 0);
-        map.put("charEnd", 0);
-    	
-        try
-        {	
-        	if ( (file != null) && findMarker(file, message) == null ) {
-        		MarkerUtilities.createMarker(file, map, getMarkerType());
-        	}
-        }
-        catch(CoreException ex) {}
-    }
-    
-    public static void createWarning(IFile file, String message) {
-    	createMarker(file, message, 1);
-    }
-    
+  
     static private IMarker findMarker( IResource resource, String message ) throws CoreException {
     	IMarker[] markers = resource.findMarkers(getMarkerType(), false, IResource.DEPTH_ZERO);
     	IMarker foundMarker = null;

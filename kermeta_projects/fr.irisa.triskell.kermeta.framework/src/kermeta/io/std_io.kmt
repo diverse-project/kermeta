@@ -33,6 +33,22 @@ class StdIO
 	end
 	
 	/**
+	 * Writeln the object to error output
+	 */ 
+	operation errorln(object : String) : Void is do
+		if object == void then object := "<void>" end
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.errorln(object)
+	end
+	
+	/**
+	 * Writes the object to error output
+	 */ 
+	operation error(object : String) : Void is do
+		if object == void then object := "<void>" end
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.error(object)
+	end
+	
+	/**
 	 * Writeln the object to standard output
 	 */ 
 	operation writeln(object : String) : Void is do

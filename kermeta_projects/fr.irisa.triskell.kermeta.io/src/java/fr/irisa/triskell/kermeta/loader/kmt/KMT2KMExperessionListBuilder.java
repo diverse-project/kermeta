@@ -1,4 +1,4 @@
-/* $Id: KMT2KMExperessionListBuilder.java,v 1.7 2008-01-04 14:17:24 dvojtise Exp $
+/* $Id: KMT2KMExperessionListBuilder.java,v 1.8 2008-04-28 11:50:13 ftanguy Exp $
  * Created on 6 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */

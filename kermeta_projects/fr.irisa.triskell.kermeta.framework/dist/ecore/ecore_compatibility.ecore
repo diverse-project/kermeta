@@ -4,14 +4,14 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::ecore|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/ecore/ecore_compatibility.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.framework/dist/ecore/ecore_compatibility.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="ecore" nsURI="http://www.kermeta.org/kermeta/ecore" nsPrefix="ecore">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/** &#xD;&#xA; * Contains the definition of a Kermeta classes used for compatibility with Ecore &#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png&quot;/>&#xD;&#xA; */"/>
+        <details key="documentation" value="/** &#xA; * Contains the definition of a Kermeta classes used for compatibility with Ecore &#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png&quot;/>&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="EFeatureMapEntry">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * Kermeta representation of EMF EFeatureMapEntry&#xD;&#xA; * it contains the name of the required feature and the actual value&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png&quot;/>&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * Kermeta representation of EMF EFeatureMapEntry&#xA; * it contains the name of the required feature and the actual value&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png&quot;/>&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="eStructuralFeatureName">
@@ -42,6 +42,7 @@
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../kunit/assert.ecore#/2"/>
@@ -63,8 +64,8 @@
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

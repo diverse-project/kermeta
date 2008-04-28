@@ -1,11 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.29 2008-02-29 13:26:39 dvojtise Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.30 2008-04-28 11:49:51 ftanguy Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse.home" location="C:/eclipse3.3/eclipse"/>
+	<property name="eclipse.home" location="/home/paco/Desktop/eclipse"/>
 
 	<path id="project.class.path">
 		
@@ -16,7 +16,7 @@
 		<pathelement location="../org.kermeta.io.loader/bin"/>
 		<pathelement location="../fr.irisa.triskell.kermeta.model/build/class"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.interpreter/build/class"/>
-  		<pathelement location="../fr.irisa.triskell.traceability.model/build/class"/>
+  		<pathelement location="../fr.irisa.triskell.traceability.model/bin"/>
 
 	  	<pathelement location="lib/thirdparty/log4j.jar"/>
 	  	<!-- <pathelement location="lib/thirdparty/antlr.jar"/>
@@ -54,6 +54,7 @@
 		<delete>
 			<fileset dir="../fr.irisa.triskell.kermeta.io/src/kermeta" includes="**/*.ecore"/>
 			<fileset dir="../fr.irisa.triskell.kermeta.io/src/kermeta" includes="**/*.km"/>
+			<fileset dir="../fr.irisa.triskell.kermeta.io/src/kermeta" includes="**/*.traceability"/>
 		</delete>
 		<copy todir="../fr.irisa.triskell.kermeta.io/src/kermeta">
 		  <fileset dir="dist"
@@ -66,6 +67,7 @@
 		<delete>
 			<fileset dir="dist" includes="**/*.ecore"/>
 			<fileset dir="dist" includes="**/*.km"/>
+			<fileset dir="dist" includes="**/*.traceability"/>
 		</delete>
 		<mkdir dir="dist"/>
 		<java classname="fr.irisa.triskell.kermeta.dev.framework.CompileFramework">

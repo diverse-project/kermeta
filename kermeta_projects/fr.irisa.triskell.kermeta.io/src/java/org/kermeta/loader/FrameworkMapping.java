@@ -1,6 +1,6 @@
 
 
-/*$Id: FrameworkMapping.java,v 1.4 2008-02-14 07:13:18 uid21732 Exp $
+/*$Id: FrameworkMapping.java,v 1.5 2008-04-28 11:50:17 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	FrameworkMapping.java
 * License : EPL

@@ -1,4 +1,4 @@
-/* $Id: InterpreterTestCase.java,v 1.5 2008-02-14 07:13:33 uid21732 Exp $
+/* $Id: InterpreterTestCase.java,v 1.6 2008-04-28 11:51:16 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : LoadTest.java
 * License : EPL
@@ -10,7 +10,6 @@
 
 package kermeta_interpreter.test;
 
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import junit.framework.TestCase;
 
 /**

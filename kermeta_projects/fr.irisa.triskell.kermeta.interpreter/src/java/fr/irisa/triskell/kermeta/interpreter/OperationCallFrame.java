@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.17 2007-12-06 14:44:50 ftanguy Exp $
+/* $Id: OperationCallFrame.java,v 1.18 2008-04-28 11:50:55 ftanguy Exp $
 * Project : Kermeta Interpreter
 * File : OperationCallFrame.java
 * License : EPL
@@ -17,6 +17,7 @@ package fr.irisa.triskell.kermeta.interpreter;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import org.kermeta.model.KermetaModelHelper;
@@ -69,7 +70,7 @@ public class OperationCallFrame extends CallFrame {
      * @param pOperation
      * @param pParameters
      */
-    public OperationCallFrame(InterpreterContext pContext, CallableElement pCallable, RuntimeObject pSelf,  ArrayList<RuntimeObject> pParameters, CallExpression expression) {
+    public OperationCallFrame(InterpreterContext pContext, CallableElement pCallable, RuntimeObject pSelf,  List<RuntimeObject> pParameters, CallExpression expression) {
         super(pContext);
         if (pCallable instanceof CallableOperation)
         {
@@ -105,7 +106,11 @@ public class OperationCallFrame extends CallFrame {
         
     }
     
-    protected void initialize(ArrayList<RuntimeObject> pParameters) {
+    protected void initialize(List<RuntimeObject> pParameters) {
+    	if ( pParameters == null && operation.getOwnedParameter().size() > 0 )
+        	throw new Error("INTERNAL ERROR : Wrong number of arguments for the operation " + operation.getName() + ".\n" 
+        					+ "Expecting " + operation.getOwnedParameter().size() + " parameters, found " + 0);
+    	
         if ( pParameters != null ) {
 	    	/*
 	    	 * 

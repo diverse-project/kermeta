@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.27 2008-02-15 13:34:45 dvojtise Exp $
+/* $Id: Object.java,v 1.28 2008-04-28 11:50:57 ftanguy Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -111,7 +111,7 @@ public class Object {
 	   			 message += "Inv " + c.getName() + " of class " + classDef.getName() + " violated";
 	   			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
 		        			message,
-							self.getFactory().getMemory().getCurrentInterpreter(),
+							self.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
 							self.getFactory().getMemory(),
 							c.getBody(),
 							null);
@@ -155,7 +155,7 @@ public class Object {
    			 message += "Inv " + c.getName() + " of class " + classDef.getName() + " violated";
    			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
 	        			message,
-						self.getFactory().getMemory().getCurrentInterpreter(),
+						self.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
 						self.getFactory().getMemory(),
 						c.getBody(),
 						null);
@@ -165,7 +165,7 @@ public class Object {
 	
 	protected static boolean checkConstraint(Expression exp, ClassDefinition classDef, RuntimeObject obj) {
 		DynamicExpressionUnit deu = new DynamicExpressionUnit(exp);
-		ExpressionInterpreter interp = obj.getFactory().getMemory().getCurrentInterpreter();
+		ExpressionInterpreter interp = obj.getFactory().getMemory().getInterpreter().getBasicInterpreter();
 		ExpressionCallFrame ecf = new ExpressionCallFrame(interp.getInterpreterContext(), deu, obj, true);
 		RuntimeObject result = ecf.eval(interp);
 		return result == obj.getFactory().getMemory().trueINSTANCE;
@@ -187,7 +187,7 @@ public class Object {
 		if(param0 == self.getFactory().getMemory().voidINSTANCE){
 			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
 					"Cannot get \"Void\" property",
-					self.getFactory().getMemory().getCurrentInterpreter(),
+					self.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
 					self.getFactory().getMemory(),
 					null);
 			
@@ -197,7 +197,7 @@ public class Object {
 		
 		if (property.isIsDerived()) {
 			fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
-			ExpressionInterpreter interp = self.getFactory().getMemory().getCurrentInterpreter();
+			ExpressionInterpreter interp = self.getFactory().getMemory().getInterpreter().getBasicInterpreter();
 			result = interp.getterDerivedProperty(new CallableProperty(property, cls), self, null);
 		}
 		else {
@@ -234,7 +234,7 @@ public class Object {
 		
 		if (property.isIsDerived()) {
 			fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
-			ExpressionInterpreter interp = self.getFactory().getMemory().getCurrentInterpreter();
+			ExpressionInterpreter interp = self.getFactory().getMemory().getInterpreter().getBasicInterpreter();
 			interp.setDerivedProperty(self, new CallableProperty(property, cls), param1, null);
 		}
 		else {
@@ -319,7 +319,7 @@ public class Object {
 		if(fr.irisa.triskell.kermeta.runtime.language.Class.equals(self.getMetaclass(), self.getFactory().getClassClass()) == self.getFactory().getMemory().trueINSTANCE) {
 			RuntimeObject tDef_ro = self.getProperties().get("typeDefinition");
 
-			InterpreterContext ic = self.getFactory().getMemory().getCurrentInterpreter().getInterpreterContext();
+			InterpreterContext ic = self.getFactory().getMemory().getInterpreter().getBasicInterpreter().getInterpreterContext();
 			CallFrame cf = (CallFrame) ic.getFrameStack().lastElement();
 			fr.irisa.triskell.kermeta.language.structure.Object contextObj = cf.getExpression();
 
@@ -369,7 +369,7 @@ public class Object {
 					else {
 						throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
 								"Effective parameters of an allocated Class must match formal parameters of its ClassDefinition",
-								self.getFactory().getMemory().getCurrentInterpreter(),
+								self.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
 								self.getFactory().getMemory(),
 								contextObj,
 								null);
@@ -378,7 +378,7 @@ public class Object {
 				else {
 					throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
 							"ClassDefinition of an allocated Class must be frozen",
-							self.getFactory().getMemory().getCurrentInterpreter(),
+							self.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
 							self.getFactory().getMemory(),
 							contextObj,
 							null);
@@ -387,7 +387,7 @@ public class Object {
 			else {
 				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
 						"Allocated Class must have a ClassDefinition before being frozen",
-						self.getFactory().getMemory().getCurrentInterpreter(),
+						self.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
 						self.getFactory().getMemory(),
 						contextObj,
 						null); // Throwable

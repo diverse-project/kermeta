@@ -35,5 +35,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.merger,
  org.antlr,
  org.eclipse.gymnast.runtime.core,
- org.kermeta.io.loader
+ org.kermeta.io.loader,
+ org.eclipse.debug.core
 Eclipse-LazyStart: true

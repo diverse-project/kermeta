@@ -1,4 +1,4 @@
-/*$Id: KPMHelper.java,v 1.19 2008-03-05 08:09:54 ftanguy Exp $
+/*$Id: KPMHelper.java,v 1.20 2008-04-28 11:49:59 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -94,18 +94,18 @@ public class KPMHelper {
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.loadContext");
 		outs.add(out);
 		
-		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
-		outs.add(out);
-		
-		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintcheck");
-		outs.add(out);
-				
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies");
 		outs.add(out);
 		
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
 		outs.add(out);
 		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintcheck");
+		outs.add(out);
+				
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.finalizeUpdate");
 		outs.add(out);
 				
@@ -124,16 +124,16 @@ public class KPMHelper {
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.loadContext");
 		outs.add(out);
 		
-		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
-		outs.add(out);
-		
-		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintcheck");
-		outs.add(out);
-				
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies");
 		outs.add(out);
 		
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintcheck");
 		outs.add(out);
 		
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.finalizeUpdate");
@@ -153,19 +153,19 @@ public class KPMHelper {
 		
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.loadContext");
 		outs.add(out);
-		
-		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
-		outs.add(out);
-		
-		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintcheck");
-		outs.add(out);
-		
+
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies");
 		outs.add(out);
 		
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
 		outs.add(out);
 		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+		outs.add(out);
+		
+		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintcheck");
+		outs.add(out);
+				
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.finalizeUpdate");
 		outs.add(out);
 		

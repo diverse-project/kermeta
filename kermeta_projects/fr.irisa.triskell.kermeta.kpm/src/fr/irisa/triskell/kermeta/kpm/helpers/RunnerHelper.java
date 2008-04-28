@@ -1,6 +1,6 @@
 
 
-/*$Id: RunnerHelper.java,v 1.2 2008-02-14 07:13:24 uid21732 Exp $
+/*$Id: RunnerHelper.java,v 1.3 2008-04-28 11:49:59 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.runner
 * File : 	Runnerhelper.java
 * License : EPL
@@ -34,7 +34,7 @@ import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 public class RunnerHelper {
 
 	static public KermetaUnit getKermetaUnitToExecute(String filePath) throws NotRegisteredURIException, URIMalformedException, IOException {
-		return org.kermeta.interpreter.helper.RunnerHelper.getKermetaUnitToExecute(filePath);
+		return org.kermeta.interpreter.helper.RunnerHelper.getKermetaUnitToExecute(filePath, "platform:/resource/unknown.km");
 	}
 	
 	static public KermetaUnit getKermetaUnitToExecute(Set<KermetaUnit> kermetaUnitsToMerge, IFile sourceFile) throws URIMalformedException, NotRegisteredURIException, IOException {
@@ -91,7 +91,7 @@ public class RunnerHelper {
    		 */
    		if ( recompile ) {
    			Merger merger = new Merger();
-   			fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
+   			fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null, true, false);
    			if ( unit != null )
    				executableFile.setLocalTimeStamp( unit.getLastTimeModified().getTime() );
 		}

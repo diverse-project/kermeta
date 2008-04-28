@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.16 2008-03-12 15:53:25 cfaucher Exp $
+/* $Id: Ecore2KM.java,v 1.17 2008-04-28 11:50:12 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL

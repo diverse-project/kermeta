@@ -1,4 +1,4 @@
-/* $Id: RunInterpretedTestCase.java,v 1.7 2007-11-21 14:13:48 ftanguy Exp $
+/* $Id: RunInterpretedTestCase.java,v 1.8 2008-04-28 11:51:16 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -17,12 +17,16 @@
  */
 package fr.irisa.triskell.kermeta.launcher;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
+import org.kermeta.interpreter.api.Interpreter;
+import org.kermeta.interpreter.api.InterpreterMode;
+import org.kermeta.interpreter.api.InterpreterOptions;
 
-import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -41,16 +45,12 @@ public class RunInterpretedTestCase extends TestCase {
 
     protected RunJunitFactory containerTestSuite;
     
-    protected KermetaInterpreter interpreter = null;
+    protected Interpreter interpreter = null;
 
     protected boolean constraintExecution = false;
     
     protected boolean isLastOfSerie =  false;
-
-	private String binDirectory;
     
-	private IOConsole console = new LocalIOConsole();
-	
     /**
      * 
      * @param themainClassValue
@@ -59,8 +59,7 @@ public class RunInterpretedTestCase extends TestCase {
      * @param constraintExecution true if the interpreter much run with pre/post checking
      * @param isLastOfSerie true if this is the last of the test suite
      */
-    public RunInterpretedTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite, boolean constraintExecution, boolean isLastOfSerie, String binDirectory)
-
+    public RunInterpretedTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite, boolean constraintExecution, boolean isLastOfSerie)
     {
         super(themainClassValue + "." + themainOperationValue);
         mainClassValue = themainClassValue;
@@ -68,7 +67,6 @@ public class RunInterpretedTestCase extends TestCase {
         containerTestSuite = thecontainerTestSuite;
         this.constraintExecution = constraintExecution;
         this.isLastOfSerie = isLastOfSerie;
-        this.binDirectory = binDirectory;
     }
 
     protected void setUp() throws java.lang.Exception {
@@ -79,8 +77,15 @@ public class RunInterpretedTestCase extends TestCase {
         
         if (interpreter == null) {
             System.err.println("Memory before interpreter : " + Runtime.getRuntime().totalMemory());
-           	interpreter = new KermetaInterpreter(containerTestSuite.getExecutable(), null);
-           	interpreter.setKStream(console);
+            Map<String, Object> options = new HashMap<String, Object>();
+            options.put( InterpreterOptions.MERGE, false);
+            if ( constraintExecution )
+            	interpreter = new Interpreter( containerTestSuite.getURI(), InterpreterMode.TEST_CONSTRAINT_RUN, options );
+            else
+            	interpreter = new Interpreter( containerTestSuite.getURI(), InterpreterMode.TEST_RUN, options );	
+            interpreter.setErrorStream( System.out );
+           	interpreter.setOutputStream( System.out );
+           	interpreter.setInputStream( System.in );
            	System.err.println("Memory after interpreter : " + Runtime.getRuntime().totalMemory());
         }
         
@@ -99,8 +104,6 @@ public class RunInterpretedTestCase extends TestCase {
         // not needed anymore now
         containerTestSuite = null;
        
-        //Runtime.getRuntime().gc();
-        
         long total = Runtime.getRuntime().totalMemory();
         long max = Runtime.getRuntime().maxMemory();
         
@@ -109,7 +112,7 @@ public class RunInterpretedTestCase extends TestCase {
         
         System.out.println("    ************************************************");
         System.out.println("    * Consumed memory : " + total + "/" + max);
-        System.out.println("    * #objects cached : " +  interpreter.memory.getNumberOfObjectCached());
+        //System.out.println("    * #objects cached : " +  interpreter.memory.getNumberOfObjectCached());
         System.out.println("    * #ro created     : " + nb_ro);
         System.out.println("    * #ro total       : " + RuntimeObjectImpl.getInstanceCounter());
         System.out.println("    * time (ms)       : " + time);
@@ -129,17 +132,10 @@ public class RunInterpretedTestCase extends TestCase {
      * @throws Exception 
      */
     public void runTest() throws KermetaRaisedException {
-    	try{    		
-    			
+    	try {    		
     		interpreter.setEntryPoint(mainClassValue, mainOperationValue);
-    		interpreter.isTestCase = containerTestSuite.isTestCase;
-    		if ( constraintExecution )
-    			interpreter.launchConstraint();
-    		else
-    			interpreter.launch();
-    		    		
-    	}
-    	catch(KermetaRaisedException e){
+    		interpreter.launch();   		
+    	} catch(KermetaRaisedException e){
     		// If this is a kermeta assertion that failed, then the Test must fail
     		fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)e.raised_object.getMetaclass().getKCoreObject();        	
     		String exceptionTypeName = t_target.getTypeDefinition().getName();

@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.19 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: InterpreterContext.java,v 1.20 2008-04-28 11:50:55 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : EPL
@@ -14,6 +14,7 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Hashtable;
 import java.util.Stack;
 
@@ -114,7 +115,7 @@ public class InterpreterContext {
 	 * @param self_object : the object on which an operation was applied. This operation is
 	 * the one that led to the creation of this new CallFrame
 	 */
-	public void pushOperationCallFrame(RuntimeObject self_object, CallableElement callable, ArrayList<RuntimeObject> parameters, CallExpression expression)
+	public void pushOperationCallFrame(RuntimeObject self_object, CallableElement callable, List<RuntimeObject> parameters, CallExpression expression)
 	{
 	    CallFrame new_frame = new OperationCallFrame(this, callable, self_object, parameters, expression);
 	    frame_stack.push(new_frame);
@@ -145,7 +146,7 @@ public class InterpreterContext {
     }
     
     /** Return the frame_stack. If there is no frame, the stack is empty (and not "null") */
-    public Stack getFrameStack() {
+    public Stack<CallFrame> getFrameStack() {
     	return frame_stack;
     }
     

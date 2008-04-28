@@ -8,6 +8,6 @@
 # This is the values that are correct for daily build
 # You probably have to change it to match your configuration
 # but, please do not commit them it into the CVS
-"platform:/plugin/"		"/Users/paco/Documents/Workspace/KermetaAdvanced/"
-"platform:/resource/"		"/Users/paco/Documents/Workspace/KermetaAdvanced/"
+"platform:/plugin/"		"file:/home/paco/workspace-cvs/"
+"platform:/resource/"		"file:/home/paco/workspace-cvs/"
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoadingStepImpl.java,v 1.3 2008-02-27 15:21:09 dvojtise Exp $
+ * $Id: LoadingStepImpl.java,v 1.4 2008-04-28 11:50:47 ftanguy Exp $
  */
 package org.kermeta.io.loader.impl;
 
@@ -294,7 +294,8 @@ public class LoadingStepImpl extends AbstractStepImpl implements LoadingStep {
 				 * Doesn't perform the action due to previous error
 				 * 
 				 */
-				LoaderPlugin.log.info("NOT doing " + getName() + " on " + datas.getKermetaUnit().getUri()+ " due to previous error");
+				LoaderPlugin.log.info("NOT doing " + getName() + " on " + datas.getKermetaUnit().getUri()+ " due to previous error.");
+				LoaderPlugin.log.info( KermetaUnitHelper.getAllErrorsAsString(datas.getKermetaUnit()));
 				
 			}
 			else {

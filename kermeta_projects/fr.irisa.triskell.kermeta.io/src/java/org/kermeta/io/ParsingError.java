@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsingError.java,v 1.2 2007-07-20 15:08:08 ftanguy Exp $
+ * $Id: ParsingError.java,v 1.3 2008-04-28 11:50:16 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -17,6 +17,7 @@ package org.kermeta.io;
  * <ul>
  *   <li>{@link org.kermeta.io.ParsingError#getOffset <em>Offset</em>}</li>
  *   <li>{@link org.kermeta.io.ParsingError#getLength <em>Length</em>}</li>
+ *   <li>{@link org.kermeta.io.ParsingError#getLineNumber <em>Line Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,5 +77,31 @@ public interface ParsingError extends ErrorMessage {
 	 * @generated
 	 */
 	void setLength(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Line Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Line Number</em>' attribute.
+	 * @see #setLineNumber(int)
+	 * @see org.kermeta.io.IoPackage#getParsingError_LineNumber()
+	 * @model
+	 * @generated
+	 */
+	int getLineNumber();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.io.ParsingError#getLineNumber <em>Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Line Number</em>' attribute.
+	 * @see #getLineNumber()
+	 * @generated
+	 */
+	void setLineNumber(int value);
 
 } // ParsingError

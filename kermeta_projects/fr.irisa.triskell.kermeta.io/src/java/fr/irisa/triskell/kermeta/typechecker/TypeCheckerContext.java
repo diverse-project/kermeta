@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.27 2008-03-05 08:18:10 ftanguy Exp $
+/* $Id: TypeCheckerContext.java,v 1.28 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -127,100 +127,58 @@ public class TypeCheckerContext {
 	
 	protected static Operation getClassNewOperation() {
 	    if (classNew == null) {
-	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ClassType).type).getTypeDefinition()).getOwnedOperation().iterator();
-	       while(it.hasNext()) {
-	           Operation op = (Operation)it.next();
-	           if (op.getName().equals("new")) {
-	               classNew = op;
-	               break;
-	           }
-	       }
+	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ClassType).type).getTypeDefinition();
+	    	classNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
 	    }
 	    return classNew;
 	}
 	
 	protected static Operation getModelTypeNewOperation() {
 	    if (modelTypeNew == null) {
-	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelTypeType).type).getTypeDefinition()).getOwnedOperation().iterator();
-	       while(it.hasNext()) {
-	           Operation op = (Operation)it.next();
-	           if (op.getName().equals("new")) {
-	               modelTypeNew = op;
-	               break;
-	           }
-	       }
+	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelTypeType).type).getTypeDefinition();
+	    	modelTypeNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
 	    }
 	    return modelTypeNew;
 	}
 
 	protected static Operation getModelTypeVariableNewOperation() {
 	    if (modelTypeVariableNew == null) {
-	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelTypeVariableType).type).getTypeDefinition()).getOwnedOperation().iterator();
-	       while(it.hasNext()) {
-	           Operation op = (Operation)it.next();
-	           if (op.getName().equals("new")) {
-	               modelTypeVariableNew = op;
-	               break;
-	           }
-	       }
+	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelTypeVariableType).type).getTypeDefinition();
+	    	modelTypeVariableNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
 	    }
 	    return modelTypeVariableNew;
 	}
 
 	protected static Operation getObjectTypeVariableNewOperation() {
 	    if (objectTypeVariableNew == null) {
-	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ObjectTypeVariableType).type).getTypeDefinition()).getOwnedOperation().iterator();
-	       while(it.hasNext()) {
-	           Operation op = (Operation)it.next();
-	           if (op.getName().equals("new")) {
-	               objectTypeVariableNew = op;
-	               break;
-	           }
-	       }
+	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ObjectTypeVariableType).type).getTypeDefinition();
+	    	objectTypeVariableNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
 	    }
 	    return objectTypeVariableNew;
 	}
 	
 	protected static Operation getModelFilterOperation() {
-		if (modelFilter == null) {
-		       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition()).getOwnedOperation().iterator();
-		       while(it.hasNext()) {
-		           Operation op = (Operation)it.next();
-		           if (op.getName().equals("filter")) {
-		               modelFilter = op;
-		               break;
-		           }
-		       }
-		    }
-		    return modelFilter;
+	    if (modelFilter == null) {
+	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition();
+	    	modelFilter = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "filter");
+	    }
+	    return modelFilter;
 	}
 	
 	protected static Operation getModelAddOperation() {
-		if (modelAdd == null) {
-		       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition()).getOwnedOperation().iterator();
-		       while(it.hasNext()) {
-		           Operation op = (Operation)it.next();
-		           if (op.getName().equals("add")) {
-		               modelAdd = op;
-		               break;
-		           }
-		       }
-		    }
-		    return modelAdd;
+	    if (modelAdd == null) {
+	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition();
+	    	modelAdd = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "add");
+	    }
+	    return modelAdd;
 	}
 	
 	protected static Operation getModelRemoveOperation() {
-		if (modelRemove == null) {
-		       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition()).getOwnedOperation().iterator();
-		       while(it.hasNext()) {
-		           Operation op = (Operation)it.next();
-		           if (op.getName().equals("remove")) {
-		               modelRemove = op;
-		               break;
-		           }
-		       }
-		    }
-		    return modelRemove;
+	    if (modelRemove == null) {
+	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition();
+	    	modelRemove = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "remove");
+	    }
+	    return modelRemove;
 	}
 	
 	protected static Operation getClassCloneOperation() {

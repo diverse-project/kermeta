@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.15 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: TypeEqualityChecker.java,v 1.16 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -14,17 +14,13 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
-import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
@@ -32,6 +28,7 @@ import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
@@ -120,8 +117,8 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 				result = true;
 				if (arg0.getTypeParamBinding().size()== p.getTypeParamBinding().size())
 					for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
-						Type t1 = ((TypeVariableBinding)arg0.getTypeParamBinding().get(0)).getType();
-						Type t2 = ((TypeVariableBinding)p.getTypeParamBinding().get(0)).getType();
+						Type t1 = ((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType();
+						Type t2 = ((TypeVariableBinding)p.getTypeParamBinding().get(i)).getType();
 						if (!TypeEqualityChecker.equals(t1, t2)) {
 							result = false;
 							break;

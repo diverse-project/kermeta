@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitLoaderValidator.java,v 1.5 2008-02-14 07:13:17 uid21732 Exp $
+ * $Id: KermetaUnitLoaderValidator.java,v 1.6 2008-04-28 11:50:11 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 

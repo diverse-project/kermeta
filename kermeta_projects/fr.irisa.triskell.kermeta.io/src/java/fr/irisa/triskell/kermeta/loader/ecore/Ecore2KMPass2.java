@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.32 2008-03-12 15:53:25 cfaucher Exp $
+/* $Id: Ecore2KMPass2.java,v 1.33 2008-04-28 11:50:12 ftanguy Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL

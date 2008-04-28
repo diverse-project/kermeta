@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIO.java,v 1.11 2008-02-14 07:13:57 uid21732 Exp $
+/* $Id: SimpleFileIO.java,v 1.12 2008-04-28 11:50:56 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -25,6 +25,9 @@ import java.io.IOException;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.eclipse.resources.URIHelper;
@@ -147,7 +150,11 @@ public class SimpleFileIO {
 		
 		java.lang.String cleanPath = unifiedSepratorResourcePath;
 		if ( unifiedSepratorResourcePath.matches("platform:/resource.*") ) {
-			cleanPath = ResourceHelper.root.getLocation().toString() + URIHelper.getPathFromPlatformURI(resourcePath);
+			URI uri = URI.createURI(unifiedSepratorResourcePath);
+			URIConverter converter = new URIConverterImpl();
+			uri = converter.normalize(uri);
+			cleanPath = uri.toString();
+			//cleanPath = ResourceHelper.root.getLocation().toString() + URIHelper.getPathFromPlatformURI(resourcePath);
 		}
 		return cleanPath;
 	}

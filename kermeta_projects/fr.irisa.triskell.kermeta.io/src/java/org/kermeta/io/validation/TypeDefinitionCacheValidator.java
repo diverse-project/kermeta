@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionCacheValidator.java,v 1.1 2007-09-19 12:14:58 ftanguy Exp $
+ * $Id: TypeDefinitionCacheValidator.java,v 1.2 2008-04-28 11:50:11 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 

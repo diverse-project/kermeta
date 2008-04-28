@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.13 2008-02-14 07:13:18 uid21732 Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.14 2008-04-28 11:50:17 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL

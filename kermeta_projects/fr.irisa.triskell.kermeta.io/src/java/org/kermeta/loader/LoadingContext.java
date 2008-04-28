@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingContext.java,v 1.5 2008-02-14 07:13:18 uid21732 Exp $
+/*$Id: LoadingContext.java,v 1.6 2008-04-28 11:50:17 ftanguy Exp $
 * Project : io
 * File : 	KMTLoadingContext.java
 * License : EPL

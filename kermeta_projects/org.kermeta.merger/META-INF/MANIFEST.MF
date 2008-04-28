@@ -11,6 +11,7 @@ Require-Bundle: fr.irisa.triskell.kermeta.io,
  org.eclipse.jdt.ui,
  org.antlr,
  org.eclipse.gymnast.runtime.core,
- org.kermeta.io.loader
+ org.kermeta.io.loader,
+ fr.irisa.triskell.traceability
 Export-Package: org.kermeta.merger
 Bundle-Vendor: IRISA/INRIA

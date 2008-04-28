@@ -1,4 +1,4 @@
-/* $Id: KM2ECoreConversionException.java,v 1.2 2008-02-14 07:13:20 uid21732 Exp $
+/* $Id: KM2ECoreConversionException.java,v 1.3 2008-04-28 11:50:22 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2ECoreConversionException.java
  * License    : EPL

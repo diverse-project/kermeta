@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMDatas.java,v 1.4 2007-08-31 13:08:24 dvojtise Exp $
+/*$Id: Ecore2KMDatas.java,v 1.5 2008-04-28 11:50:12 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMHelper.java
 * License : EPL

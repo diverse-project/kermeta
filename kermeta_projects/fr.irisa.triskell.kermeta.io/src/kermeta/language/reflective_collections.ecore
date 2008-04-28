@@ -4,21 +4,21 @@
     <details key="require" value="../Standard.kmt|structure.kmt|"/>
     <details key="using" value="kermeta::language|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="language" nsURI="http://www.kermeta.org/kermeta/language" nsPrefix="language">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * Contains the implementation of Kermeta reflective collections.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png&quot;/>&#xD;&#xA; */"/>
+        <details key="documentation" value=" */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="ReflectiveCollection">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * ReflectiveCollection is a special collection that is used to define the type &#xD;&#xA; * of attributes that have an upper multiplicity > 1 in a class. It indeed handles&#xD;&#xA; * the update of opposite property if such an attribute has got one.&#xD;&#xA; */"/>
+          <details key="documentation" value=" */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
         <eSuperTypes href="../standard/collections.ecore#/1/standard/Set"/>
         <eOperations name="add">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(self, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::Set&lt;G>.add(G)&#xD;&#xA;  * Add an element to this collection and update its opposite property if it exists.&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveCollection/G"/>
@@ -27,7 +27,7 @@
         <eOperations name="remove">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(self, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::Set&lt;G>.remove(G)&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveCollection/G"/>
@@ -36,13 +36,13 @@
         <eOperations name="clear">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::Collection&lt;G>.clear(G)&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReflectiveSequence">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * ReflectiveSequence is an ordered ReflectiveCollection.&#xD;&#xA; */"/>
+          <details key="documentation" value=" */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
         <eSuperTypes href="../standard/collections.ecore#/1/standard/OrderedSet"/>
@@ -50,7 +50,7 @@
         <eOperations name="add">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.add(G)&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveSequence/G"/>
@@ -59,7 +59,7 @@
         <eOperations name="remove">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.remove(G)&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveSequence/G"/>
@@ -68,13 +68,13 @@
         <eOperations name="clear">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;super()&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.clear()&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="addAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.addAt(self, index, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::OrderedSet.addAt(Integer)&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
           <eParameters name="index">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
@@ -86,7 +86,7 @@
         <eOperations name="removeAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(self, index)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::OrderedSet.removeAt(Integer)&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
           <eParameters name="index">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
@@ -95,7 +95,7 @@
         <eOperations name="equals">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::OrderedSet.equals(Object)&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
           <eParameters name="element">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
@@ -109,15 +109,12 @@
     <references href="../Standard.ecore#/1"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="structure.ecore#/0"/>
     <references href="structure.ecore#/1"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
-    <references href="../kermeta_java.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/assert.ecore#/0"/>
@@ -129,6 +126,7 @@
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
@@ -138,7 +136,6 @@
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
     <references href="dynamic_expression.ecore#/2"/>

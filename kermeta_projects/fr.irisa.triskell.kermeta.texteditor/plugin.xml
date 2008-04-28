@@ -10,7 +10,7 @@
       extensions="kmt"
       contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
       class="org.kermeta.texteditor.KermetaTextEditor"
-      id="org.eclipse.ui.editors.text.texteditor">
+      id="org.kermeta.ui.editors.kmt.editor">
    </editor>
    </extension>
    <extension

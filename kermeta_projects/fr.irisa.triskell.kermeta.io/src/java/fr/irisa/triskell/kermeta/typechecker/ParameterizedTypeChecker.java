@@ -1,4 +1,4 @@
-/* $Id: ParameterizedTypeChecker.java,v 1.10 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: ParameterizedTypeChecker.java,v 1.11 2008-04-28 11:50:10 ftanguy Exp $
  * Project : Kermeta io
  * File : ParametrizedTypeChecker.java
  * License : EPL

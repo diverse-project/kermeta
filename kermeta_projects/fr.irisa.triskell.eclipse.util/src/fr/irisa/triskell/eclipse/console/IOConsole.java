@@ -1,6 +1,6 @@
 
 
-/*$Id: IOConsole.java,v 1.8 2007-11-29 14:13:42 ftanguy Exp $
+/*$Id: IOConsole.java,v 1.9 2008-04-28 11:51:03 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	IOConsole.java
 * License : EPL
@@ -71,13 +71,13 @@ abstract public class IOConsole {
 	 * This is a lazy initialization.
 	 * @return
 	 */
-	abstract protected OutputStream getOutputStream();
+	abstract public OutputStream getOutputStream();
 	
 	/**
 	 * This is a lazy initialization.
 	 * @return
 	 */
-	abstract protected BufferedReader getReader();
+	abstract public BufferedReader getReader();
 	
 	//////////////////////////////////
 	//////////////////////////////////

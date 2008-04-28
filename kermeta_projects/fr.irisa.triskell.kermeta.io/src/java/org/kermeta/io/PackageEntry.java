@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageEntry.java,v 1.2 2007-07-20 15:08:08 ftanguy Exp $
+ * $Id: PackageEntry.java,v 1.3 2008-04-28 11:50:16 ftanguy Exp $
  */
 package org.kermeta.io;
 

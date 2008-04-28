@@ -1,4 +1,4 @@
-/* $Id: AtPreVisitor.java,v 1.11 2007-10-15 07:13:58 barais Exp $
+/* $Id: AtPreVisitor.java,v 1.12 2008-04-28 11:50:55 ftanguy Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -37,12 +37,11 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 
 	private ExpressionInterpreter expInterp;
 
-	public AtPreVisitor(RuntimeMemory pMemory, ExpressionInterpreter expInt , InterpreterContext itC) {
+	public AtPreVisitor(RuntimeMemory pMemory, ExpressionInterpreter expInt) {
 		expInterp = expInt;
 		listCallFeatureAtPre = new Vector();
 		listCallVariableAtPre = new Vector();
-		interpreterContext = itC;
-		pMemory.setCurrentInterpreter(expInt);
+		interpreterContext = expInt.getInterpreterContext();
 		memory = pMemory;
 	}
 
@@ -77,7 +76,7 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 					nodetargetatpre = ((CallVariable)node.getTarget()).isIsAtpre();
 				}
 				if(!nodetargetatpre){
-					memory.getROFactory().getKermetaIOStream().print("WARNING : before running the method '" +getContainerOperation(node).getName()+ "' it is not possible to know the future value of '"+((CallExpression)node.getTarget()).getName()+ "' in the post condition '"+getContainerPostCondition(node).getName()+"'\n");
+					memory.getROFactory().getMemory().getInterpreter().print("WARNING : before running the method '" +getContainerOperation(node).getName()+ "' it is not possible to know the future value of '"+((CallExpression)node.getTarget()).getName()+ "' in the post condition '"+getContainerPostCondition(node).getName()+"'\n");
 				}
 				ro_target = (RuntimeObject)expInterp.accept(node.getTarget());
 

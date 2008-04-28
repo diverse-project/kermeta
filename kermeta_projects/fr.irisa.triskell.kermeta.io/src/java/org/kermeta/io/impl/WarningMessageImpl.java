@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: WarningMessageImpl.java,v 1.3 2007-08-02 13:09:01 dvojtise Exp $
+ * $Id: WarningMessageImpl.java,v 1.4 2008-04-28 11:50:12 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 

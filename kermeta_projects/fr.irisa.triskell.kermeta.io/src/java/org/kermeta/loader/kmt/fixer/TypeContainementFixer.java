@@ -1,4 +1,4 @@
-/* $Id: TypeContainementFixer.java,v 1.2 2007-07-20 15:08:11 ftanguy Exp $
+/* $Id: TypeContainementFixer.java,v 1.3 2008-04-28 11:50:20 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL

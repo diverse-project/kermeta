@@ -1,4 +1,4 @@
-/* $Id: KermetaASTHelper.java,v 1.6 2008-02-14 07:13:21 uid21732 Exp $
+/* $Id: KermetaASTHelper.java,v 1.7 2008-04-28 11:50:25 ftanguy Exp $
  * Project   : Kermeta 
  * File      : KermetaASTHelper.java
  * License   : EPL

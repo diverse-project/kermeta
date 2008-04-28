@@ -3,11 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Framework Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.framework
 Bundle-Version: 1.1.0
-Bundle-ClassPath: framework.jar,
- lib/thirdparty/antlr.jar,
- lib/thirdparty/emfatic-core.jar,
- lib/thirdparty/ldt-core.jar,
- lib/thirdparty/log4j.jar
+Bundle-ClassPath: lib/thirdparty/log4j.jar
 Export-Package: .,
  org.apache.log4j,
  org.apache.log4j.chainsaw,

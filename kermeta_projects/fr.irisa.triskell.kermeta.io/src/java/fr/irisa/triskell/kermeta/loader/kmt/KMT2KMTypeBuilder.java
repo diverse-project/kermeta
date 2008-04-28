@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.27 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.28 2008-04-28 11:50:13 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL

@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaSourceViewerConfiguration.java,v 1.3 2008-02-14 07:13:42 uid21732 Exp $
+/*$Id: KermetaSourceViewerConfiguration.java,v 1.4 2008-04-28 11:51:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaSourceViewerConfiguration.java
 * License : EPL
@@ -117,7 +117,10 @@ public class KermetaSourceViewerConfiguration extends SourceViewerConfiguration 
 	
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
-	    ContentAssistant assistant = new ContentAssistant();
+	    if ( editor.getFile() == null )
+	    	return null;
+		
+		ContentAssistant assistant = new ContentAssistant();
 	    
 	    IContentAssistProcessor kermetaProcessor = new KermetaContentAssistProcessor(editor, sourceViewer);
 	    assistant.setContentAssistProcessor(kermetaProcessor, IDocument.DEFAULT_CONTENT_TYPE);
@@ -187,6 +190,8 @@ public class KermetaSourceViewerConfiguration extends SourceViewerConfiguration 
 	
 	@Override
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
+		if ( editor.getFile() == null )
+			return null;
         ReconcilingStrategy strategy = new ReconcilingStrategy(editor);
         MonoReconciler reconciler = new MonoReconciler(strategy,false);        
         return reconciler;
@@ -194,6 +199,8 @@ public class KermetaSourceViewerConfiguration extends SourceViewerConfiguration 
 		
 	@Override
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
+		if ( editor.getFile() == null )
+			return null;
 		return new EditorTextHover(editor);
 	}
 	/*@Override

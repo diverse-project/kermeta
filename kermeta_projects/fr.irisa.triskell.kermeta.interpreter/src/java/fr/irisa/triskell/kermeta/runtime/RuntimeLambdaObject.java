@@ -1,4 +1,4 @@
-/* $Id: RuntimeLambdaObject.java,v 1.9 2007-10-15 07:13:59 barais Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.10 2008-04-28 11:50:57 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
  * License: EPL
@@ -9,13 +9,13 @@
  */
 package fr.irisa.triskell.kermeta.runtime;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.interpreter.LambdaCallFrame;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
 /**
@@ -53,7 +53,7 @@ public class RuntimeLambdaObject extends RuntimeObjectImpl {
      * @param actual_params
      * @return
      */
-    public RuntimeObject call(ExpressionInterpreter interpreter, ArrayList<RuntimeObject> actual_params) {
+    public RuntimeObject call(ExpressionInterpreter interpreter, List<RuntimeObject> actual_params) {
         LambdaCallFrame frame = this.frame.cloneLambdaCallFrame();
         frame.bindActualParameter(actual_params);
         RuntimeObject result = interpreter.getMemory().voidINSTANCE;

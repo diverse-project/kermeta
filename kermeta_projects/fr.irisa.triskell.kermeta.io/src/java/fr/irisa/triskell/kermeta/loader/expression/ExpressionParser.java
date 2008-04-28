@@ -1,4 +1,4 @@
-/* $Id: ExpressionParser.java,v 1.14 2008-02-14 07:13:17 uid21732 Exp $
+/* $Id: ExpressionParser.java,v 1.15 2008-04-28 11:50:24 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL

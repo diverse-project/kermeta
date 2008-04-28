@@ -1,4 +1,4 @@
-/* $Id: Type.java,v 1.10 2008-03-05 08:18:10 ftanguy Exp $
+/* $Id: Type.java,v 1.11 2008-04-28 11:50:11 ftanguy Exp $
 * Project : Kermeta io
 * File : Type.java
 * License : EPL

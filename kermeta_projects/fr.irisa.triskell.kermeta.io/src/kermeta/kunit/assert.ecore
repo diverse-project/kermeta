@@ -4,14 +4,14 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::kunit|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="kunit" nsURI="http://www.kermeta.org/kermeta/kunit" nsPrefix="kunit">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * main features of the famous Unit test tool for Kermeta language&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;/>&#xD;&#xA; */"/>
+        <details key="documentation" value=" */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="AbstractFallible" abstract="true">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * to be written ############################&#xD;&#xA; */"/>
+          <details key="documentation" value=" */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="assert">
@@ -26,7 +26,7 @@
         <eOperations name="assertWithMsg">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is not satisfied&#xD;&#xA;     */"/>
+            <details key="documentation" value="     */"/>
           </eAnnotations>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -56,7 +56,7 @@
         <eOperations name="assertTrueWithMsg">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is not satisfied&#xD;&#xA;     */"/>
+            <details key="documentation" value="     */"/>
           </eAnnotations>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -77,7 +77,7 @@
         <eOperations name="assertFalseWithMsg">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is satisfied&#xD;&#xA;     */"/>
+            <details key="documentation" value="     */"/>
           </eAnnotations>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -101,7 +101,7 @@
         <eOperations name="assertSimilar">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;expected := distil(expected)&#xA;&#x9;actual := distil(actual)&#xA;&#x9;assertWithMsg(expected.equals(actual), ((((((((&quot;\nexpected\t:[&quot;) + (expected))) + (&quot;] != \nactual\t:[&quot;))) + (actual))) + (&quot;]&quot;)))&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;   * Log a failure if the two strings are not identical modulo-white-space&#xD;&#xA;   */"/>
+            <details key="documentation" value="   */"/>
           </eAnnotations>
           <eParameters name="expected">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -113,7 +113,7 @@
         <eOperations name="distil">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := &quot;&quot;&#xA;&#x9;var white : kermeta::standard::Boolean init false&#xA;&#x9;from var i : kermeta::standard::Integer init 0&#xA;&#x9;until i.equals(s.size)&#xA;&#x9;loop&#xA;&#x9;&#x9;var c : kermeta::standard::String init s.elementAt(i).toString&#xA;&#x9;&#x9;if ((&quot; \n\t&quot;.indexOf(c)) >= (0)) then&#xA;&#x9;&#x9;&#x9;if white.~not then&#xA;&#x9;&#x9;&#x9;&#x9;white := true&#xA;&#x9;&#x9;&#x9;&#x9;result := ((result) + (&quot; &quot;))&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := ((result) + (c))&#xA;&#x9;&#x9;&#x9;if white then&#xA;&#x9;&#x9;&#x9;&#x9;white := false&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;i := ((i) + (1))&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/** &#xD;&#xA;  ** reduces all runs of white-space to a single space character&#xD;&#xA;  **/"/>
+            <details key="documentation" value="&#x9; **/"/>
           </eAnnotations>
           <eParameters name="s">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>

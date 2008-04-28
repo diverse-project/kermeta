@@ -1,4 +1,4 @@
-/* $Id: CallableProperty.java,v 1.6 2008-01-02 10:28:31 vmahe Exp $
+/* $Id: CallableProperty.java,v 1.7 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : CallableProperty.java
 * License : EPL

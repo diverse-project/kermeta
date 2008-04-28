@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.18 2008-04-08 10:00:53 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.19 2008-04-28 11:51:17 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -232,7 +232,7 @@ public class JunitTestSuite extends TestSuite {
 	public void testWithFile(String dir, String file)  {
 	    //addTest(runfactory.addTestsForUnit(dir+"/"+file));
 		String uri = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
-		addTest( new RunJunitFactory("platform:/resource/fr.irisa.triskell.kermeta.tests/.bin").addTestsForUnit(uri) );
+		addTest( new RunJunitFactory().addTestsForUnit(uri) );
 	}
 
 	/**

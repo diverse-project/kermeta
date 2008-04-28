@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.20 2008-03-05 08:09:55 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.21 2008-04-28 11:49:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -440,9 +440,11 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated NOT
 	 */
 	public void receiveSynchroneEvent(String event, Map<String, Object> args, IProgressMonitor monitor) {
-		if ( args == null )
-			args = new HashMap<String, Object>();
-		receiveEvent(event, true, args, monitor);
+		synchronized( this ) {
+			if ( args == null )
+				args = new HashMap<String, Object>();
+			receiveEvent(event, true, args, monitor);
+		}
 	}
 
 	/**

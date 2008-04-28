@@ -1,6 +1,9 @@
 // $ANTLR : "Kermeta.g" -> "KermetaParser.java"$
 
 package fr.irisa.triskell.kermeta.parser.gen.parser;
+import fr.irisa.triskell.kermeta.parser.gen.ast.*;
+import org.eclipse.gymnast.runtime.core.parser.*;
+import org.eclipse.gymnast.runtime.core.ast.*;
 
 public interface KermetaParserTokenTypes {
 	int EOF = 1;
@@ -97,11 +100,13 @@ public interface KermetaParserTokenTypes {
 	int GT_LT = 93;
 	int LT_GT = 94;
 	int CHAR_LITERAL = 95;
-	int ESC = 96;
-	int REAL_LITERAL = 97;
-	int EXPONENT = 98;
-	int DIGIT = 99;
-	int WS = 100;
-	int SINGLE_LINE_COMMENT = 101;
-	int EMPTY_LINE_COMMENT = 102;
+	int END_COMMENT = 96;
+	int ESC = 97;
+	int REAL_LITERAL = 98;
+	int EXPONENT = 99;
+	int DIGIT = 100;
+	int WS = 101;
+	int SINGLE_LINE_COMMENT = 102;
+	int EMPTY_LINE_COMMENT = 103;
+	int MULTI_LINE_COMMENT = 104;
 }

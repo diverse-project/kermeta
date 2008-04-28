@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass3.java,v 1.3 2008-02-14 07:12:56 uid21732 Exp $
+/*$Id: Pass3.java,v 1.4 2008-04-28 11:51:07 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass3.java
 * License : EPL
@@ -12,16 +12,16 @@
 
 package org.kermeta.merger.internal;
 
-import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.merger.internal.util.TypeCloner;
 import org.kermeta.model.KermetaModelHelper;
 
-import antlr.RecognitionException;
-import antlr.TokenStreamException;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
@@ -33,12 +33,11 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMTypeBuilder;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaLexer;
-import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaParser;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
+import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 
 /**
@@ -58,29 +57,79 @@ public class Pass3 extends MergePass {
 	@Override
 	public void process() {
 		for (TypeDefinition td : KermetaUnitHelper.getTypeDefinitions(kermetaUnit) ) {
-			try {
-				if ( td instanceof ClassDefinition )
-					setTypes( (ClassDefinition) td );
-				else if ( td instanceof PrimitiveType )
-					setTypes( (PrimitiveType) td );
-			} catch (RecognitionException e) {
-				e.printStackTrace();
-			} catch (TokenStreamException e) {
-				e.printStackTrace();
-			} 	
+			if ( td instanceof ClassDefinition ) {
+				setTypes( (ClassDefinition) td );
+				removeDuplicateInheritance((ClassDefinition) td);
+			} else if ( td instanceof PrimitiveType ) {
+				setTypes( (PrimitiveType) td );
+			}
 		}
 	}
 	
-	private void setTypes(PrimitiveType newDefinition) throws RecognitionException, TokenStreamException {
+	private void setTypes(PrimitiveType newDefinition) {
 		PrimitiveType definition = (PrimitiveType) context.getBaseTypeDefinition(newDefinition);
-		Type type = createType(definition.getInstanceType());
+		Type type = TypeCloner.clone( definition.getInstanceType(), kermetaUnit );
 		if ( type != null ) {
 			newDefinition.getContainedType().add( type );
 			newDefinition.setInstanceType(type);
 		}
 	}
+	
+	private boolean isClassWithTypeVariableBinding(Class aClass) {
+		if( aClass.getTypeParamBinding()!=null && aClass.getTypeParamBinding().size()>0 )  {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Used to avoid the duplication of the same super types
+	 * @param newDefinition
+	 * @param type
+	 * @return
+	 */
+	private void removeDuplicateInheritance(ClassDefinition newDefinition) {
+		
+		List<Type> list_typeToRemove = new ArrayList<Type>();
+		list_typeToRemove.clear();
+		
+		int i=0;
+		for(Type type : newDefinition.getSuperType()) {
+			
+			int j=0;
+			for(Type tmp_type : newDefinition.getSuperType()) {
+				
+				// if i==j, that's me
+				if( i!=j && !list_typeToRemove.contains(tmp_type) && TypeHelper.getMangledQualifiedName(type).equals(TypeHelper.getMangledQualifiedName(tmp_type)) ) {
+					
+					if( type!=null && tmp_type!=null && type instanceof Class && tmp_type instanceof Class ) {
+						
+						if( isClassWithTypeVariableBinding((Class) type) ) {
+							if(TypeEqualityChecker.equals(type, tmp_type)) {
+								list_typeToRemove.add(tmp_type);
+							}
+						} else {
+							list_typeToRemove.add(tmp_type);
+						}
+					} else {
+						list_typeToRemove.add(tmp_type);
+					}
+				}
+				j++;
+			}
+			i++;
+		}
+		
+		for(Type typeToRemove : list_typeToRemove) {
+			newDefinition.getSuperType().remove(typeToRemove);
+			newDefinition.getContainedType().remove(typeToRemove);
+			typeToRemove=null;
+		}
+		
+	}
 
-	private void setTypes(ClassDefinition newDefinition) throws RecognitionException, TokenStreamException {
+	private void setTypes(ClassDefinition newDefinition) {
 		ClassDefinition definition = (ClassDefinition) context.getBaseTypeDefinition(newDefinition);
 		
 		context.pushContext();			
@@ -99,7 +148,7 @@ public class Pass3 extends MergePass {
 			if ( t instanceof ClassDefinition ) {
 				ClassDefinition cdef = (ClassDefinition) t;
 				for ( Type supertype : cdef.getSuperType() ) {
-					Type type = createType(supertype);
+					Type type = TypeCloner.clone( supertype, kermetaUnit );
 					if ( type != null ) {
 						newDefinition.getContainedType().add( type );
 						newDefinition.getSuperType().add(type);
@@ -116,12 +165,10 @@ public class Pass3 extends MergePass {
 		for ( TypeVariable tv : newDefinition.getTypeParameter() ) {
 			TypeVariable baseTypeVariable = ClassDefinitionHelper.getTypeVariable(definition, tv.getName());
 			if ( baseTypeVariable.getSupertype() != null ) {
-				Type supertype = createType(baseTypeVariable.getSupertype());
+				Type supertype = TypeCloner.clone( baseTypeVariable.getSupertype(), kermetaUnit );
 				tv.setSupertype( supertype );
 			}
 		}
-		
-
 		
 		setPropertiesType(newDefinition);
 		setOperationsType(newDefinition);
@@ -130,7 +177,7 @@ public class Pass3 extends MergePass {
 	}
 	 
 	
-	private Type createType(Type t) throws RecognitionException, TokenStreamException {
+	/*private Type createType(Type t) throws RecognitionException, TokenStreamException {
 		KM2KMTPrettyPrinter printer = new KM2KMTPrettyPrinter(true);
 		String typeAsString  = (String) printer.accept( t);
 		StringReader reader = new StringReader(typeAsString);
@@ -139,9 +186,9 @@ public class Pass3 extends MergePass {
 		fr.irisa.triskell.kermeta.parser.gen.ast.Type  node = parser.type();
 		Type type = KMT2KMTypeBuilder.process(context, node, kermetaUnit, new NullProgressMonitor());
 		return type;
-	}
+	}*/
 	
-	private void setPropertiesType(ClassDefinition newDefinition) throws RecognitionException, TokenStreamException {
+	private void setPropertiesType(ClassDefinition newDefinition) {
 		for ( Property newProperty : newDefinition.getOwnedAttribute() ) {
 			Property p = context.getBaseProperty(newProperty);
 			/*
@@ -149,12 +196,14 @@ public class Pass3 extends MergePass {
 			 * Setting the type.
 			 * 
 			 */
-			Type type = createType(p.getType());
+			Type type = TypeCloner.clone( p.getType(), kermetaUnit );
 			if ( type != null ) {
 				if ( type.eContainer() == null )
 					newProperty.getContainedType().add( type );
 				newProperty.setType(type);
 			}
+			// Try to trace
+			context.tryToTrace(type, p.getType());
 			/*
 			 * 
 			 * Setting the opposite if there is one.
@@ -168,7 +217,7 @@ public class Pass3 extends MergePass {
 		}
 	}
 	
-	private void setOperationsType(ClassDefinition newDefinition) throws RecognitionException, TokenStreamException {
+	private void setOperationsType(ClassDefinition newDefinition) {
 		for ( Operation newOperation : newDefinition.getOwnedOperation() ) {
 			
 			context.pushContext();
@@ -187,13 +236,15 @@ public class Pass3 extends MergePass {
 				fr.irisa.triskell.kermeta.language.structure.Class c = StructureFactory.eINSTANCE.createClass();
 				c.setTypeDefinition( (GenericTypeDefinition) kermetaUnit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object") );
 			} else {		
-				type = createType(baseOperation.getType());
+				type = TypeCloner.clone( baseOperation.getType(), kermetaUnit );
 				if ( type != null ) {
 					if ( type.eContainer() == null )
 						newOperation.getContainedType().add( type );
 					newOperation.setType(type);
 				}
 			}
+			// Try to trace
+			context.tryToTrace(type, baseOperation.getType());
 			 
 			/*
 			 * 
@@ -214,7 +265,7 @@ public class Pass3 extends MergePass {
 			 */
 			for ( Parameter newParameter : newOperation.getOwnedParameter() ) {
 				Parameter p = context.getBaseParameter(newParameter);
-				type = createType(p.getType());
+				type = TypeCloner.clone( p.getType(), kermetaUnit );	
 				if ( type != null ) {
 					if ( type.eContainer() == null )
 						newParameter.getContainedType().add( type );

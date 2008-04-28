@@ -1,6 +1,6 @@
 
 
-/*$Id: FoldingStrategyHelper.java,v 1.3 2008-02-14 07:13:44 uid21732 Exp $
+/*$Id: FoldingStrategyHelper.java,v 1.4 2008-04-28 11:51:23 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategyHelper.java
 * License : EPL
@@ -26,11 +26,11 @@ import fr.irisa.triskell.kermeta.parser.gen.ast.CompUnit;
 public class FoldingStrategyHelper {
 
 	static public void updateFoldingPositions(KermetaTextEditor editor, String document) throws RecognitionException, TokenStreamException {
-		CompUnit compUnit = ASTHelper.parseString( document );
+		/*CompUnit compUnit = ASTHelper.parseString( document );
 		List<Position> positions = new ArrayList<Position> ();
 		FoldingVisitor visitor = new FoldingVisitor(positions);
 		compUnit.accept(visitor);
-		editor.updateFoldingStructure(positions);
+		editor.updateFoldingStructure(positions);*/
 	}
 	
 }

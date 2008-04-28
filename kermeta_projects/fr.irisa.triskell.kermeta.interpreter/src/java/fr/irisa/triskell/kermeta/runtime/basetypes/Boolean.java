@@ -1,4 +1,4 @@
-/* $Id: Boolean.java,v 1.10 2007-10-15 07:13:58 barais Exp $ 
+/* $Id: Boolean.java,v 1.11 2008-04-28 11:50:56 ftanguy Exp $ 
  * Implementation of Kermeta base type Boolean 
  */
 
@@ -30,7 +30,8 @@ public class Boolean {
 	// Implementation of method and called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::and(other)
 	public static RuntimeObject and(RuntimeObject self, RuntimeObject param0) {
-	    
+	    if ( param0 == self.getFactory().getMemory().voidINSTANCE )
+	    	return self.getFactory().getMemory().voidINSTANCE;
 		if (getValue(self) && getValue(param0))
 		    return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
@@ -39,7 +40,8 @@ public class Boolean {
 	// Implementation of method or called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::or(other)
 	public static RuntimeObject or(RuntimeObject self, RuntimeObject param0) {
-	    
+	    if ( param0 == self.getFactory().getMemory().voidINSTANCE )
+	    	return self.getFactory().getMemory().voidINSTANCE;
 		if (getValue(self) || getValue(param0))
 		    return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;

@@ -1,4 +1,4 @@
-/* $Id: LambdaCallFrame.java,v 1.12 2007-08-02 17:03:01 dvojtise Exp $
+/* $Id: LambdaCallFrame.java,v 1.13 2008-04-28 11:50:55 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
 * License : EPL
@@ -13,6 +13,7 @@ package fr.irisa.triskell.kermeta.interpreter;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
@@ -56,7 +57,7 @@ public class LambdaCallFrame extends CallFrame {
         else if (nestingCallFrame instanceof ExpressionCallFrame) {
         	if (((ExpressionCallFrame)nestingCallFrame).cf != null // so it is an invariant
         			&& ((ExpressionCallFrame)nestingCallFrame).cf instanceof OperationCallFrame){
-        		nestingOperationCallFrame = (OperationCallFrame) ((ExpressionCallFrame)nestingCallFrame).cf; // récupéré le parent dans la pile
+        		nestingOperationCallFrame = (OperationCallFrame) ((ExpressionCallFrame)nestingCallFrame).cf; // rï¿½cupï¿½rï¿½ le parent dans la pile
         	}
         }
         // copy the context
@@ -84,7 +85,7 @@ public class LambdaCallFrame extends CallFrame {
      * formal parameters of the lambda expression
      * @param pParameters
      */
-    public void bindActualParameter(ArrayList<RuntimeObject> pParameters) {
+    public void bindActualParameter(List<RuntimeObject> pParameters) {
         block_stack.clear();
         block_stack.addAll(nestingExpressionContext);
         pushExpressionContext();
@@ -138,6 +139,10 @@ public class LambdaCallFrame extends CallFrame {
     
     public fr.irisa.triskell.kermeta.language.structure.Object getExpression() {
         return lambdaExp;
+    }
+    
+    public OperationCallFrame getNestingOperationCallFrame() {
+    	return nestingOperationCallFrame;
     }
 
 }

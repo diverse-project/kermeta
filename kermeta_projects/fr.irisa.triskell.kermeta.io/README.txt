@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.4 2006-08-04 09:36:25 cfaucher Exp $
+$Id: README.txt,v 1.5 2008-04-28 11:50:17 ftanguy Exp $
 
 
 Leaders :
@@ -97,6 +97,12 @@ The undescribed packages mainly contain some utility functions/facilities.
 History :
 ---------
 $Log: not supported by cvs2svn $
+Revision 1.4.10.1  2008/04/14 08:54:50  ftanguy
+windows compatibility for the lexer
+
+Revision 1.4  2006/08/04 09:36:25  cfaucher
+added doc
+
 Revision 1.3  2005/03/02 17:31:29  zdrey
 - handling of annotations
 

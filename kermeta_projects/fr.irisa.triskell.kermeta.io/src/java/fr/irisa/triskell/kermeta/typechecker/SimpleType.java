@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.22 2008-03-05 08:18:10 ftanguy Exp $
+/* $Id: SimpleType.java,v 1.23 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : EPL

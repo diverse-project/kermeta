@@ -1,6 +1,6 @@
 
 
-/*$Id: ClassDefinitionHelper.java,v 1.9 2008-04-14 11:55:26 dvojtise Exp $
+/*$Id: ClassDefinitionHelper.java,v 1.10 2008-04-28 11:50:14 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 public class ClassDefinitionHelper {
@@ -209,10 +210,6 @@ public class ClassDefinitionHelper {
 	//		return;
 		
 		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(current);
-		if(unit == null){
-			// error cannot retrieve the KermetaUnit of the classDefinition
-			throw new Error("Internal error : cannot retrieve the KermetaUnit of the classDefinition " +KermetaModelHelper.NamedElement.qualifiedName(current));
-		}
 		if ( units.contains(unit) ) {
 			List<TypeDefinition> l = map.get(deep);
 			if ( l == null ) {
@@ -338,6 +335,25 @@ public class ClassDefinitionHelper {
 			if ( typeDefinition instanceof ClassDefinition )
 				result.addAll( ((ClassDefinition) typeDefinition).getInv() );
 		return result;
+	}
+	
+	public static TypeVariable getTypeParameter(ClassDefinition cls, String name) {
+		for ( TypeVariable tv : cls.getTypeParameter() )
+			if ( tv.getName().equals(name) )
+				return tv;
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param c
+	 * @return true if the the class definition has kermeta::standard::Collection as super type.
+	 */
+	public static boolean isCollection(ClassDefinition c) {
+		for ( TypeDefinition cd : getContext(c) )
+			if ( KermetaModelHelper.NamedElement.qualifiedName(cd).equals("kermeta::standard::Collection") )
+				return true;
+		return false;
 	}
 }
 

@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.17 2007-10-15 07:13:58 barais Exp $
+/* $Id: RuntimeMemory.java,v 1.18 2008-04-28 11:50:58 ftanguy Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -12,10 +12,11 @@ package fr.irisa.triskell.kermeta.builder;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.kermeta.interpreter.InterpreterPlugin;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.kermeta.launcher.AbstractKInterpreter;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
@@ -47,26 +48,36 @@ public class RuntimeMemory {
 
 	private RuntimeMemoryLoader memoryLoader;
 	
-	private ExpressionInterpreter currentInterpreter;
+	private AbstractKInterpreter _interpreter;
 	
-    public RuntimeMemory(KermetaUnit unit) {
+	public AbstractKInterpreter getInterpreter() {
+		return _interpreter;
+	}
+	
+    public RuntimeMemory(KermetaUnit unit, AbstractKInterpreter interpreter) {
         roFactory = new RuntimeObjectFactory(this);
         this.unit = unit;
         memoryLoader = new RuntimeMemoryLoader(unit,this);
         memoryLoader.init();
+        _interpreter = interpreter;
     }
     
     protected void finalize() throws Throwable {
         super.finalize();
-        KermetaInterpreter.internalLog.debug("FINALIZE RuntimeMemory ...");
+        InterpreterPlugin.internalLog.debug("FINALIZE RuntimeMemory ...");
     }
     /**
      * remove as much ref as possible for helping garbage collector
      */
-    public void freeJavaMemory()
-    {
+    public void freeJavaMemory() {
     	roFactory = null;
     	unit = null;
+    	memoryLoader = null;
+    	trueINSTANCE = null;
+    	falseINSTANCE = null;
+    	voidINSTANCE = null;
+    	stdioINSTANCE = null;
+    	_interpreter = null;
     }
     
     public void loadKCoreRuntimeObject(KCoreRuntimeObject obj) {
@@ -157,10 +168,5 @@ public class RuntimeMemory {
     public KermetaUnit getUnit() {
         return unit;
     }
-    public ExpressionInterpreter getCurrentInterpreter() {
-        return currentInterpreter;
-    }
-    public void setCurrentInterpreter(ExpressionInterpreter currentInterpreter) {
-        this.currentInterpreter = currentInterpreter;
-    }
+
 }

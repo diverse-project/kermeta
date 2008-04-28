@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.20 2008-03-05 08:11:45 ftanguy Exp $
+/*$Id: EcoreExporter.java,v 1.21 2008-04-28 11:50:22 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL

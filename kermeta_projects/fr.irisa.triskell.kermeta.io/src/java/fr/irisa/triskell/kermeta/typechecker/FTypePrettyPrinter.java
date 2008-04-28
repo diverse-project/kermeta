@@ -1,4 +1,4 @@
-/* $Id: FTypePrettyPrinter.java,v 1.13 2007-09-04 15:12:27 dvojtise Exp $
+/* $Id: FTypePrettyPrinter.java,v 1.14 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta io
 * File : FTypePrettyPrinter.java
 * License : EPL

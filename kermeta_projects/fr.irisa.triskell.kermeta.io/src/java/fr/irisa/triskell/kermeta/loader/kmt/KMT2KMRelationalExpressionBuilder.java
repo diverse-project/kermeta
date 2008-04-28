@@ -1,4 +1,4 @@
-/* $Id: KMT2KMRelationalExpressionBuilder.java,v 1.10 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: KMT2KMRelationalExpressionBuilder.java,v 1.11 2008-04-28 11:50:13 ftanguy Exp $
  * Licence : EPL
  * Copyright : IRISA / INRIA / University of rennes 1
  * Created on 6 f�vr. 2005

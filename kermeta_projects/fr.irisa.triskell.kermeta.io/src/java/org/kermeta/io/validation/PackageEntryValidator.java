@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageEntryValidator.java,v 1.2 2007-07-20 15:08:05 ftanguy Exp $
+ * $Id: PackageEntryValidator.java,v 1.3 2008-04-28 11:50:11 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 

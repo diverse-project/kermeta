@@ -1,4 +1,4 @@
-/*$Id: Ecore2KMPass.java,v 1.12 2008-03-05 08:15:04 ftanguy Exp $
+/*$Id: Ecore2KMPass.java,v 1.13 2008-04-28 11:50:12 ftanguy Exp $
 * Project : io
 * File : 	Ecore2KMPass.java
 * License : EPL

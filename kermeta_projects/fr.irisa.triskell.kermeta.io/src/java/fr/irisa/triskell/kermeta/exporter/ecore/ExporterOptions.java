@@ -1,4 +1,4 @@
-/*$Id: ExporterOptions.java,v 1.3 2007-11-16 13:18:41 cfaucher Exp $
+/*$Id: ExporterOptions.java,v 1.4 2008-04-28 11:50:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	ExporterOptions.java
 * License : EPL

@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.50 2008-04-07 15:51:34 dvojtise Exp $
+// $Id: primitive_types.kmt,v 1.51 2008-04-28 11:49:48 ftanguy Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -133,6 +133,7 @@ class NotComparableException inherits kermeta::exceptions::Exception {
 /**
  * The Boolean type
  */
+ @EMF_instanceClassName "boolean"
 class Boolean inherits PrimitiveType
 {
 	/**
@@ -228,11 +229,13 @@ abstract class Numeric inherits Comparable, ValueType {
 /**
  * The class Integer
  */
+ @EMF_instanceClassName "int"
 class Integer inherits Numeric, Summable<Integer>
 {
 	/**
 	 * Iteration
 	 */ 
+	 @EMF_static "IntegerUtil.times" 
 	 operation times(body : <Integer->Object>) : Void is do
 	 	from var i : Integer init 0
 	 	until i == self
@@ -412,6 +415,7 @@ class Integer inherits Numeric, Summable<Integer>
 /**
  * class Real
  */
+ @EMF_instanceClassName "java.lang.Double"
 class Real inherits Numeric, Summable<Real>
 {
 	/**
@@ -510,6 +514,7 @@ class Real inherits Numeric, Summable<Real>
 /**
  * The class Character
  */
+ @EMF_instanceClassName "char"
 class Character inherits ValueType, Comparable
 {
 	/**
@@ -545,6 +550,7 @@ class Character inherits ValueType, Comparable
 /**
  * The class String
  */
+ @EMF_instanceClassName "java.lang.String"
 class String inherits ValueType, Comparable, Summable<String>
 {
 	/**

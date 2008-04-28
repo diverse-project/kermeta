@@ -1,6 +1,6 @@
 
 
-/*$Id: ModelTypeHelper.java,v 1.2 2008-02-14 07:13:17 uid21732 Exp $
+/*$Id: ModelTypeHelper.java,v 1.3 2008-04-28 11:50:14 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	PackageHelper.java
 * License : EPL

@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.32 2008-03-05 08:18:10 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.33 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL

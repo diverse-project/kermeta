@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.45 2008-03-05 08:27:47 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.46 2008-04-28 11:50:54 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.kermeta.interpreter.InterpreterPlugin;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
@@ -33,6 +34,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
@@ -49,12 +51,9 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  * This is the basis for more complex launcher like CommandLine Launcher or Junit Launcher.
  */
 public class KermetaInterpreter {
-	
-	/** Logger to get the error of this interpreter */
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
-	
+		
 	// The entry class
-	private fr.irisa.triskell.kermeta.language.structure.Class entryClass;
+	private Class entryClass;
 	// The entry Operation
 	private Operation entryOperation;
 	// The parameters as a list of RuntimeObjects
@@ -89,7 +88,7 @@ public class KermetaInterpreter {
 
 	protected void finalize() throws Throwable {
         super.finalize();
-        internalLog.debug("FINALIZE INTERPRETER ...");
+        InterpreterPlugin.internalLog.debug("FINALIZE INTERPRETER ...");
         // clear as much ref as possible
         entryClass = null;
         entryOperation = null;
@@ -106,7 +105,7 @@ public class KermetaInterpreter {
 	    TypeCheckerContext.initializeTypeChecker(unit);
 	    if ( unit.isIndirectlyErroneous() ) {
 	        String message = "INTERPRETER INITIALIZATION ERROR : The program contains errors:\n" + KermetaUnitHelper.getAllMessagesAsString(unit);
-	        internalLog.error(message);
+	        InterpreterPlugin.internalLog.error(message);
 	        
 	    }
 	    memory = new RuntimeMemory(unit);
@@ -160,12 +159,12 @@ public class KermetaInterpreter {
 	    // check that it exists and that it is a class
 	    if (td == null || !(td instanceof ClassDefinition)) {
 	        emessage = "Entry @mainClass '" + class_def_qname + "' not found or not valid";
-	        internalLog.error(emessage);	        
+	        InterpreterPlugin.internalLog.error(emessage);	        
 	    }
 	    // FIXME: to allow parametric types as entry types
 	    else if (((ClassDefinition)td).getTypeParameter().size() != 0) {
 	        emessage = "Invalid entry @mainClass '" + class_def_qname + "', it has type parameters.";
-	        internalLog.error(emessage);
+	        InterpreterPlugin.internalLog.error(emessage);
 	    }
 	    
 	    else if (emessage.equals(""))
@@ -179,7 +178,7 @@ public class KermetaInterpreter {
 	        {
 	            emessage = "Cannot find entry @mainOperation '" + 
 	        	operation_name + "' in @mainClass '" + class_def_qname+"'";
-	        internalLog.error(emessage);
+	            InterpreterPlugin.internalLog.error(emessage);
 	        }
 	    }
 	    
@@ -288,7 +287,7 @@ public class KermetaInterpreter {
 	}
     
 	
-	public fr.irisa.triskell.kermeta.language.structure.Class getEntryClass() {
+	public Class getEntryClass() {
         return entryClass;
     }
     public Operation getEntryOperation() {

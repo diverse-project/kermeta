@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreBuildingState.java,v 1.3 2007-08-07 13:35:22 ftanguy Exp $
+/*$Id: EcoreBuildingState.java,v 1.4 2008-04-28 11:50:12 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	EcoreBuildingState.java
 * License : EPL

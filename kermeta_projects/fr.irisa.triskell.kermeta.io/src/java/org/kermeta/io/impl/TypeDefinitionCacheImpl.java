@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionCacheImpl.java,v 1.5 2008-02-25 10:46:21 ftanguy Exp $
+ * $Id: TypeDefinitionCacheImpl.java,v 1.6 2008-04-28 11:50:12 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 

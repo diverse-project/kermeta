@@ -1,4 +1,4 @@
-/* $Id: Type.java,v 1.1 2007-11-13 14:28:11 dvojtise Exp $
+/* $Id: Type.java,v 1.2 2008-04-28 11:50:57 ftanguy Exp $
 * Project : Kermeta interpreter
 * File : Type.java
 * License : EPL
@@ -35,7 +35,7 @@ public class Type {
 			// not implemented the current version works only with declared Types, user created types are not handled yet
 			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::NotImplementedException",
 	        		"the current version of hasSubType works only with declared Types, user created types are not handled yet",
-					self.getFactory().getMemory().getCurrentInterpreter(),
+					self.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
 					self.getFactory().getMemory(),
 					null,
 					null);

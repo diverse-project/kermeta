@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.63 2008-03-19 16:33:56 cfaucher Exp $
+/* $Id: ExpressionChecker.java,v 1.64 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -65,9 +65,11 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
@@ -132,6 +134,17 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	// The result of type computation
 	// < Expression, fr.irisa.triskell.kermeta.language.structure.Type >
 	protected Hashtable<Expression, Type> expressionTypes;
+	
+	protected void setType(Expression expression, Type type) {
+		expression.setStaticType( type.getFType() );
+		expressionTypes.put(expression, type);
+		
+		if ( type instanceof SimpleType ) {
+			if ( type.getFType() != null )
+				if ( type.getFType().eContainer() == null )
+					expression.getContainedType().add( type.getFType() );
+		}
+	}
 	
 	/**
 	 * Get the type of an expression
@@ -201,7 +214,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		
 		// Get the type of the operation as a function type
 	    Type operation_type = op.getType();
-		
+	    
 	    // The result is the return type of the operation
 	    // It can contain type variables that needs to be bound
 		Type result = operation_type.getFunctionTypeRight();
@@ -610,8 +623,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        	return provided_type;
 	        }
 	        else {
-	        	expressionTypes.put(expression, targetType);
-	    		expression.setStaticType(targetType.getFType());
+	        	setType(expression, targetType);
 	            return targetType;
 	        }
 	    }
@@ -620,8 +632,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        	provided_type.isSubTypeOf(targetType);
 	            unit.error("TYPE-CHECKER : Type mismatch, "+provided_type+" does not conform to required type : "+targetType+".", expression);
 	        }
-	        expressionTypes.put(expression, provided_type);
-    		expression.setStaticType(provided_type.getFType());
+	        setType(expression, provided_type);
 	        return provided_type;
 	    }
 	}
@@ -650,15 +661,13 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			context.popContext();
 		}
 		// Return the type of the last expression
-		expressionTypes.put(expression, result);
-		expression.setStaticType(result.getFType());
+		setType(expression, result);
 		return result;
 	}
 	
 	public Object visitBooleanLiteral(BooleanLiteral expression) {
 	    preVisit();
-		expressionTypes.put(expression, TypeCheckerContext.BooleanType);
-		expression.setStaticType(TypeCheckerContext.BooleanType.getFType());
+	    setType(expression, TypeCheckerContext.BooleanType);
 		return TypeCheckerContext.BooleanType;
 	}
 	
@@ -672,8 +681,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        unit.error("TYPE-CHECKER : 'value' symbol is forbidden outside derived property", expression);
 	    }
         result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
-	    expressionTypes.put(expression, result);
-        expression.setStaticType(result.getFType());
+	    setType(expression, result);
 	    return result;
 	}
 	
@@ -758,9 +766,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			}
 		}
 		
-		expressionTypes.put(expression, result);
-		expression.setStaticType(result.getFType());
-		
+		setType(expression, result);	
 		return result;
 	}
 	
@@ -780,8 +786,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			result = getReturnTypeForParametrizedCallExpression(expression, result);
 		}
 		
-		expressionTypes.put(expression, result);
-		expression.setStaticType(result.getFType());
+		setType(expression, result);
 		return result;
 	}
 	
@@ -796,8 +801,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    else
 	    {
 	    	result =  checkOperationCall(context.getSuperOperation(), expression);
-	    	expressionTypes.put(expression, result);
-	    	expression.setStaticType(result.getFType());
+	    	setType(expression, result);
 	    }
 	    return result;
 	}
@@ -809,8 +813,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		// Error if symbol not found
 		if (result == null) {
 			unit.error("TYPE-CHECKER : cannot resolve symbol " + expression.getName(), expression);
-			 expressionTypes.put(expression, TypeCheckerContext.VoidType);
-			 expression.setStaticType(TypeCheckerContext.VoidType.getFType());
+			setType(expression, TypeCheckerContext.VoidType);
 			return TypeCheckerContext.VoidType;
 		}
 		// if there are parameters
@@ -818,8 +821,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			result = getReturnTypeForParametrizedCallExpression(expression, result);
 		}
 		// return result
-		expressionTypes.put(expression, result);
-		expression.setStaticType(result.getFType());
+		setType(expression, result);
 		return result;
 	}
 	
@@ -853,24 +855,20 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		else
 			result = getTypeOfExpression(expression.getThenBody());
 		// Return type
-		expressionTypes.put(expression, result);
-				
-		expression.setStaticType(result.getFType());
+		setType(expression, result);
 		return result;
 	}
 	
 	public Object visitEmptyExpression(EmptyExpression expression) {
 	    preVisit();
 		// Return type
-		expressionTypes.put(expression, TypeCheckerContext.VoidType);
-		expression.setStaticType(TypeCheckerContext.VoidType.getFType());
+	    setType(expression, TypeCheckerContext.VoidType);
 		return TypeCheckerContext.VoidType;
 	}
 	
 	public Object visitIntegerLiteral(IntegerLiteral expression) {
 	    preVisit();
-		expressionTypes.put(expression, TypeCheckerContext.IntegerType);
-		expression.setStaticType(TypeCheckerContext.IntegerType.getFType());
+	    setType(expression, TypeCheckerContext.IntegerType);
 		return TypeCheckerContext.IntegerType;
 	}
 	
@@ -879,8 +877,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		// visit contained expression
 		visitExpressionList(expression.getParameters());
 		// The returned type is Objects
-		expressionTypes.put(expression, TypeCheckerContext.ObjectType);
-		expression.setStaticType(TypeCheckerContext.ObjectType.getFType());
+		setType(expression, TypeCheckerContext.ObjectType);
 		return TypeCheckerContext.ObjectType;
 	}
 	
@@ -933,20 +930,28 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    if (result_return instanceof SimpleType) {
 	        
 	        result.setLeft(result_param);
+	        if ( result_param.eContainer() == null )
+	        	result.getContainedType().add( result_param );
 	        result.setRight(((SimpleType)result_return).type);
-	       
+	        if ( ((SimpleType)result_return).type.eContainer() == null ) 
+	        	result.getContainedType().add( ((SimpleType)result_return).type );
+	        
 	    }
 	    else {
 	        // TODO : Complete this method
 	        // FIXME : Compute the appropriate union type
 	        
 	        result.setLeft(result_param);
+	        if ( result_param.eContainer() == null )
+	        	result.getContainedType().add( result_param );
+	        result.getContainedType().add( result_param );
 	        result.setRight((((UnionType)result_return).transformAsSimpleType()).type);
+	        if ( (((UnionType)result_return).transformAsSimpleType()).type.eContainer() == null ) 
+		        result.getContainedType().add( (((UnionType)result_return).transformAsSimpleType()).type );
 	        
 	    }
 	    Type true_result = new SimpleType(result);
-	    expressionTypes.put(expression, true_result);
-	    expression.setStaticType(true_result.getFType());
+	    setType(expression, true_result);
         return true_result;
 	}
 	
@@ -964,8 +969,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		}
 		
 		// Return type
-		expressionTypes.put(expression, TypeCheckerContext.VoidType);
-		expression.setStaticType(TypeCheckerContext.VoidType.getFType());
+		setType(expression, TypeCheckerContext.VoidType);
 		return TypeCheckerContext.VoidType;
 	}
 	
@@ -974,8 +978,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		// process contained expression
 	    this.accept(expression.getExpression());
 	    // return void
-	    expressionTypes.put(expression, TypeCheckerContext.VoidType);
-	    expression.setStaticType(TypeCheckerContext.VoidType.getFType());
+	    setType(expression, TypeCheckerContext.VoidType);
 	    return TypeCheckerContext.VoidType;
 	}
 	
@@ -1002,15 +1005,13 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		result = new SimpleType(cl);
 		
 		// Return type
-		expressionTypes.put(expression, result);
-		expression.setStaticType(cl);
+		setType(expression, result);
 		return result;
 	}
 	
 	public Object visitStringLiteral(StringLiteral expression) {
 	    preVisit();
-		expressionTypes.put(expression, TypeCheckerContext.StringType);
-		expression.setStaticType(TypeCheckerContext.StringType.getFType());
+	    setType(expression, TypeCheckerContext.StringType);
 		return TypeCheckerContext.StringType;
 	}
 	
@@ -1051,8 +1052,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			    result = TypeCheckerContext.VoidType;
 		    }
 	    }
-		expressionTypes.put(expression, result);
-		expression.setStaticType(result.getFType());
+	    setType(expression, result);
 		return result;
 	}
 	
@@ -1086,15 +1086,13 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		}
 		
 		// Return type
-		expressionTypes.put(expression, result);
-		expression.setStaticType(result.getFType());
+		setType(expression, result);
 		return result;
 	}
 	
 	public Object visitVoidLiteral(VoidLiteral expression) {
 	    preVisit();
-		expressionTypes.put(expression, TypeCheckerContext.VoidType);
-		expression.setStaticType(TypeCheckerContext.VoidType.getFType());
+	    setType(expression, TypeCheckerContext.VoidType);
 		return TypeCheckerContext.VoidType;
 	}
 	

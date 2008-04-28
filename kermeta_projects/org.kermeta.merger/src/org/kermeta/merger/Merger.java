@@ -1,6 +1,6 @@
 
 
-/*$Id: Merger.java,v 1.4 2008-02-14 07:12:56 uid21732 Exp $
+/*$Id: Merger.java,v 1.5 2008-04-28 11:51:08 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Merger.java
 * License : EPL
@@ -20,8 +20,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.Resource.IOWrappedException;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.checker.KermetaUnitChecker;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
@@ -38,14 +40,15 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 public class Merger {
 
 	private KermetaUnit kermetaUnit = null;
 	
-	public String process(Set<KermetaUnit> kermetaUnitsToMerge) throws IOException, URIMalformedException, NotRegisteredURIException {
+	public String process(Set<KermetaUnit> kermetaUnitsToMerge, boolean trace, boolean executable) throws IOException, URIMalformedException, NotRegisteredURIException {
 		String s = getDefaultPath(kermetaUnitsToMerge, true);
-		process(kermetaUnitsToMerge, s);		
+		process(kermetaUnitsToMerge, s, trace, executable);		
 		return s;
 	}
 	
@@ -75,34 +78,72 @@ public class Merger {
 			return s + ".km";
 	}
 	
-	public String process(Set<KermetaUnit> kermetaUnitsToMerge, String path, String fileName) throws URIMalformedException, IOException, NotRegisteredURIException {
+	public String process(Set<KermetaUnit> kermetaUnitsToMerge, String path, String fileName, boolean trace, boolean executable) throws URIMalformedException, IOException, NotRegisteredURIException {
 		String s = "";
 		if ( fileName == null )
 			s = path + "/" + getDefaultPath(kermetaUnitsToMerge, false);
 		else
 			s = path + "/" + fileName;
-		process(kermetaUnitsToMerge, s);
+		process(kermetaUnitsToMerge, s, trace, executable);
 		return s;
 	}
 	
-	public void process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile) throws URIMalformedException, IOException, NotRegisteredURIException {
+	public void process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean executable) throws URIMalformedException, NotRegisteredURIException, IOException {
+		process(kermetaUnitsToMerge, outputFile, true, executable);
+	}
+	
+	public void process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean trace, boolean executable) throws URIMalformedException, IOException, NotRegisteredURIException {
 		
-		processInMemory(kermetaUnitsToMerge, outputFile);
+		processInMemory(kermetaUnitsToMerge, outputFile, trace);
 		
-		URI uri = URI.createURI( kermetaUnit.getUri() );
 		ResourceSet resourceSet = new ResourceSetImpl();
+		/*
+		 * 
+		 * Creating the resource the kermeta model.
+		 * 
+		 */
+		URI uri = URI.createURI( kermetaUnit.getUri() );
 		Resource resource = resourceSet.createResource(uri);
-		
 		resource.getContents().add( kermetaUnit.getModelingUnit() );
+		
+		/*
+		 * 
+		 * Creating the resource for the trace model.
+		 * 
+		 */
+		URI traceModelURI = URI.createURI( outputFile + ".traceability");
+		Resource traceResource = resourceSet.createResource(traceModelURI);
+		if ( kermetaUnit.getTracer().getTraceModel() != null ) {
+			traceResource.getContents().add( kermetaUnit.getTracer().getTraceModel() );
+			try {
+				traceResource.save(null);
+			} catch(IOWrappedException e) {
+				System.out.println();
+			}
+		}
+		
+		if ( executable ) {
+			KermetaUnitChecker.check( kermetaUnit.getUri() );
+		}
+		
 		resource.save(null);
 	}
 	
 	public KermetaUnit processInMemory(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile) throws NotRegisteredURIException, URIMalformedException, IOException {
+		return processInMemory(kermetaUnitsToMerge, outputFile, true);
+	}
+	
+	public KermetaUnit processInMemory(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean trace) throws NotRegisteredURIException, URIMalformedException, IOException {
 		LoaderPlugin.getDefault().unload(outputFile);
 		kermetaUnit = IOPlugin.getDefault().basicGetKermetaUnit(outputFile);
 		
-		MergeContext context = new MergeContext(kermetaUnitsToMerge);
-		
+		MergeContext context = null;
+		if ( trace ) {
+			kermetaUnit.setTracer( new Tracer() );
+			context = new MergeContext(kermetaUnitsToMerge, kermetaUnit.getTracer());
+		} else
+			context = new MergeContext(kermetaUnitsToMerge, null);
+			
 		/*
 		 * 
 		 * We need to be carefull about the usings.

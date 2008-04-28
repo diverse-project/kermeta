@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectImpl.java,v 1.5 2008-04-25 09:59:01 dvojtise Exp $
+/* $Id: RuntimeObjectImpl.java,v 1.6 2008-04-28 11:50:57 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -31,6 +31,8 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
+
+import fr.irisa.triskell.kermeta.language.structure.Class;
 
 /**
  * @author Franck Fleurey
@@ -165,7 +167,7 @@ public class RuntimeObjectImpl implements RuntimeObject {
         // if the object defines a hashcode method (other than the default one deined on object), use it
         fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getKCoreObject();
         SimpleType target_type = new SimpleType(t_target);
-        ExpressionInterpreter interpreter = getFactory().getMemory().getCurrentInterpreter();
+        ExpressionInterpreter interpreter = getFactory().getMemory().getInterpreter().getBasicInterpreter();
         InterpreterContext interpretercontext = interpreter.getInterpreterContext();
         CallableOperation  op = interpretercontext.typeCache.getOperationByName(target_type, "hashcode");
         String name = NamedElementHelper.getQualifiedName(op.getFclass().getTypeDefinition());
@@ -281,7 +283,7 @@ public class RuntimeObjectImpl implements RuntimeObject {
             // if the object defines a equals method (other than the default one defined on object), use it
 	        fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getKCoreObject();
 	        SimpleType target_type = new SimpleType(t_target);
-	        ExpressionInterpreter interpreter = getFactory().getMemory().getCurrentInterpreter();
+	        ExpressionInterpreter interpreter = getFactory().getMemory().getInterpreter().getBasicInterpreter();
 	        InterpreterContext interpretercontext = interpreter.getInterpreterContext();
 	        CallableOperation  op = interpretercontext.typeCache.getOperationByName(target_type, "equals");
 	        String name = NamedElementHelper.getQualifiedName(op.getFclass().getTypeDefinition());
@@ -471,7 +473,7 @@ public class RuntimeObjectImpl implements RuntimeObject {
 	public String toUserString() {
 	    String class_name = "< No Metaclass ! >";
 	    try {
-	        class_name = NamedElementHelper.getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getKCoreObject()).getTypeDefinition());
+	        class_name = NamedElementHelper.getQualifiedName(((Class)metaclass.getKCoreObject()).getTypeDefinition());
 		    if (STRING_VALUE.equals(primitiveType)){
 			    	return "\"" +((String)javaNativeObject)+"\"";
 		    	

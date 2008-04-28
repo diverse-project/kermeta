@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactory.java,v 1.4 2007-10-04 07:22:15 ftanguy Exp $
+ * $Id: IoFactory.java,v 1.5 2008-04-28 11:50:15 ftanguy Exp $
  */
 package org.kermeta.io;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsingErrorValidator.java,v 1.2 2007-07-20 15:08:05 ftanguy Exp $
+ * $Id: ParsingErrorValidator.java,v 1.3 2008-04-28 11:50:11 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 
@@ -18,4 +18,6 @@ public interface ParsingErrorValidator {
 
 	boolean validateOffset(int value);
 	boolean validateLength(int value);
+
+	boolean validateLineNumber(int value);
 }

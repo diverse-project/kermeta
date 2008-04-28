@@ -1,6 +1,6 @@
 
 
-/*$Id: URIMalformedException.java,v 1.3 2007-08-02 15:56:04 dvojtise Exp $
+/*$Id: URIMalformedException.java,v 1.4 2008-04-28 11:50:19 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	URIMalformedException.java
 * License : EPL

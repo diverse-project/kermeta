@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.25 2008-02-14 07:13:17 uid21732 Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.26 2008-04-28 11:50:12 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -255,9 +255,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		if ( realURI.equals("kermeta") )
 			realURI = IOPlugin.getFrameWorkURI();
 		
-		Iterator <KermetaUnit> iterator = getKermetaUnits().iterator();
-		while ( iterator.hasNext() ) {
-			KermetaUnit current = iterator.next();
+		for ( KermetaUnit current : getKermetaUnits() ) {
 			if ( current.getUri().equals(realURI) ) {
 				WeakReference reference = new WeakReference( current );
 		        return (KermetaUnit) reference.get();

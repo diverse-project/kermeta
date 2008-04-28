@@ -1,6 +1,6 @@
 
 
-/*$Id: NotRegisteredURIException.java,v 1.2 2008-02-14 07:13:17 uid21732 Exp $
+/*$Id: NotRegisteredURIException.java,v 1.3 2008-04-28 11:50:19 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	NotRegisteredURIException.java
 * License : EPL

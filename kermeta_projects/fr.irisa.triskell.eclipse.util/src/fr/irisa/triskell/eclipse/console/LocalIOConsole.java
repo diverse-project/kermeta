@@ -1,6 +1,6 @@
 
 
-/*$Id: LocalIOConsole.java,v 1.3 2007-11-29 16:28:04 dvojtise Exp $
+/*$Id: LocalIOConsole.java,v 1.4 2008-04-28 11:51:03 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	LocalIOConsole.java
 * License : EPL
@@ -24,7 +24,7 @@ import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 
 public class LocalIOConsole extends IOConsole {
 	
-	protected OutputStream getOutputStream() {
+	public OutputStream getOutputStream() {
 		if ( outputStream == null )
 			outputStream = System.out;
 		return outputStream;
@@ -52,7 +52,7 @@ public class LocalIOConsole extends IOConsole {
 		// nothing to do if the output is the stout console
 	}
 
-	protected BufferedReader getReader() {
+	public BufferedReader getReader() {
 		if ( reader == null )
 			reader = new BufferedReader( new InputStreamReader( System.in ) );
 		return reader;

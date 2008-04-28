@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParseErrorMessageImpl.java,v 1.5 2008-02-14 07:13:17 uid21732 Exp $
+ * $Id: ParseErrorMessageImpl.java,v 1.6 2008-04-28 11:50:12 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 

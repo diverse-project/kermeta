@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass2.java,v 1.5 2008-02-14 07:12:56 uid21732 Exp $
+/*$Id: Pass2.java,v 1.6 2008-04-28 11:51:07 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass2.java
 * License : EPL
@@ -33,6 +33,17 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
+/**
+ * 
+ * Creating the second part of the structure:
+ * 		- the Operations
+ * 		- the Parameters
+ * 		- the constraints
+ * 		- the Attributes/Properties
+ * 
+ * @author paco
+ *
+ */
 public class Pass2 extends MergePass {
 
 	private List<ModelType> modelTypes = new ArrayList<ModelType>();
@@ -77,6 +88,8 @@ public class Pass2 extends MergePass {
 			newProperty.setIsUnique( p.isIsUnique() );
 			t.getOwnedAttribute().add( newProperty );
 			context.putBaseProperty(newProperty, p);
+			// Try to trace
+			context.tryToTrace(newProperty, p);
 		}
 		
 	}
@@ -204,6 +217,9 @@ public class Pass2 extends MergePass {
 		newDefinition.getOwnedOperation().add( newOperation );
 		createTags(newOperation, o);
 		context.putBaseOperation(newOperation, o);
+		// Try to trace
+		context.tryToTrace(newOperation, o);
+		
 		/*
 		 * 
 		 * Creating the type variables.
@@ -216,6 +232,8 @@ public class Pass2 extends MergePass {
 				newOTV.setName( otv.getName() );
 				newOperation.getContainedType().add( newOTV );
 				newOperation.getTypeParameter().add( newOTV );
+				// Try to trace
+				context.tryToTrace(newOTV, tv);
 			}
 		}
 		
@@ -231,6 +249,8 @@ public class Pass2 extends MergePass {
 				newConstraint.setStereotype( constraint.getStereotype() );
 				newOperation.getPre().add( newConstraint );
 				context.putBaseConstraint(newConstraint, constraint);
+				// Try to trace
+				context.tryToTrace(newConstraint, constraint);
 			}
 			/*
 			 * 
@@ -243,6 +263,8 @@ public class Pass2 extends MergePass {
 				newConstraint.setStereotype( constraint.getStereotype() );
 				newOperation.getPost().add( newConstraint );
 				context.putBaseConstraint(newConstraint, constraint);
+				// Try to trace
+				context.tryToTrace(newConstraint, constraint);
 			}
 		}
 	}
@@ -257,6 +279,8 @@ public class Pass2 extends MergePass {
 			newParameter.setUpper(p.getUpper());
 			newOperation.getOwnedParameter().add(newParameter);
 			context.putBaseParameter(newParameter, p);
+			// Try to trace
+			context.tryToTrace(newParameter, p);
 		}
 	}
 	

@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.8 2008-02-29 16:13:57 dvojtise Exp $
+/*$Id: KermetaTextEditor.java,v 1.9 2008-04-28 11:51:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -19,9 +19,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -93,8 +95,8 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
     	 * If the current project has the kermeta nature, calculate the unit.
     	 * 
     	 */
-    	UIJob job = new UIJob("Opening File " + getFile().getFullPath().toString()) {
-    		public IStatus runInUIThread(IProgressMonitor monitor) {
+    	Job job = new Job("Opening File " + getFileName()) {
+    		public IStatus run(IProgressMonitor monitor) {
     			try {
     				initializeProject();
     				if ( project != null )
@@ -118,6 +120,21 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
     	job.schedule();		
 	}
 
+	private String getFileName() {
+    	if( getEditorInput() instanceof IFileEditorInput ) {
+            IFileEditorInput input = (IFileEditorInput)getEditorInput();
+            return input.getFile().getFullPath().toString();
+        } else if ( getEditorInput() instanceof KLocalFileEditorInput ) {
+        	KLocalFileEditorInput input = (KLocalFileEditorInput)getEditorInput();
+            try {
+				return input.getStorage().getFullPath().toString();
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+        }
+    	return "";
+	}
+	
 	@Override
 	protected ISourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler, int styles) {
 		ISourceViewer viewer = new KermetaSourceViewer(parent, ruler, getOverviewRuler(), isOverviewRulerVisible(), styles);
@@ -162,8 +179,8 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
     	if( getEditorInput() instanceof IFileEditorInput ) {
             IFileEditorInput input = (IFileEditorInput)getEditorInput();
             return input.getFile();
-        } else
-            return null;
+        }
+    	return null;
     }
 	
     /**
@@ -179,7 +196,8 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
      * 
      */
     private void initializeProject() {
-    	project = KermetaWorkspace.getInstance().getKermetaProject( getFile().getProject() );
+    	if ( getFile() != null )
+    		project = KermetaWorkspace.getInstance().getKermetaProject( getFile().getProject() );
     }
     
     private Unit unit = null;

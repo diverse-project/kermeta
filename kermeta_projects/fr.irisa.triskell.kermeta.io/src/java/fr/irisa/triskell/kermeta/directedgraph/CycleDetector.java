@@ -1,4 +1,4 @@
-/* $Id: CycleDetector.java,v 1.2 2007-07-20 15:08:11 ftanguy Exp $
+/* $Id: CycleDetector.java,v 1.3 2008-04-28 11:50:12 ftanguy Exp $
  * Project : Kermeta IO
  * File : KermetaConstraintChecker.java
  * License : EPL

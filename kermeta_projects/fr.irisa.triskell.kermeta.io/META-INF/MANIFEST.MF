@@ -4,9 +4,7 @@ Bundle-Name: Kermeta IO Plugin
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.io;singleton:=true
 Bundle-Version: 1.1.0.qualifier
 Bundle-ClassPath: .,
- lib/thirdparty/antlr.jar,
- lib/thirdparty/emfatic-core.jar,
- lib/thirdparty/ldt-core.jar
+ lib/thirdparty/antlr.jar
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
@@ -17,7 +15,6 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.core.resources,
  fr.irisa.triskell.eclipse.util,
  fr.irisa.triskell.traceability,
- org.eclipse.ui,
  org.eclipse.gymnast.runtime.core;visibility:=reexport,
  org.eclipse.emf.ecoretools.registration
 Eclipse-LazyStart: true

@@ -1,4 +1,4 @@
-/* $Id: Edge.java,v 1.3 2007-07-24 13:46:49 ftanguy Exp $
+/* $Id: Edge.java,v 1.4 2008-04-28 11:50:12 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Edge.java
  * License : EPL

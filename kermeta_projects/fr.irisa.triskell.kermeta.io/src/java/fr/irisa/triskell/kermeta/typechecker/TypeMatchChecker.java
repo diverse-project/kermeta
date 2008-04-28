@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.9 2008-03-05 08:18:10 ftanguy Exp $
+/* $Id: TypeMatchChecker.java,v 1.10 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL

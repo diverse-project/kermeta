@@ -1,6 +1,6 @@
 
 
-/*$Id: KmExporter.java,v 1.9 2008-03-05 08:13:58 ftanguy Exp $
+/*$Id: KmExporter.java,v 1.10 2008-04-28 11:50:25 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.exporter.km;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -35,25 +36,46 @@ import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 
 public class KmExporter {
 
+	
 	private ResourceSet resourceSet = new ResourceSetImpl();
 	
+	/**		The set of kermeta unit and resources used for the export.		*/
 	private Hashtable <KermetaUnit, Resource> resources = new Hashtable <KermetaUnit, Resource> ();
 	
+	/**		The set of uris used to save models.		*/
 	private Hashtable <KermetaUnit, String> uris = new Hashtable <KermetaUnit, String> ();
 	
+	/**		The set of special resources that must not be saved.		*/
 	private Hashtable <Resource, KermetaUnit> resourcesNotToSave = new Hashtable <Resource, KermetaUnit> ();
 	
 	private String pathToRemove = "";
 
-	public void export(KermetaUnit kermetaUnit, String rep, String fileName) {
+	/**
+	 * 
+	 * @param kermetaUnit
+	 * @param rep
+	 * @param fileName
+	 * @param trace
+	 */
+	public void export(KermetaUnit kermetaUnit, String rep, String fileName, boolean trace) {
 		
 		setUri(kermetaUnit, rep + "/", fileName);
 		fillResourceSet(kermetaUnit);
 		//addResourceReferences();
 		try {
-			for ( Resource resource : resources.values() ) {
-				if ( ! resourcesNotToSave.containsKey(resource) )
-					resource.save( null );
+			for ( Entry<KermetaUnit, Resource> entry : resources.entrySet() ) {
+				if ( ! resourcesNotToSave.containsKey(entry.getValue()) ) {
+					entry.getValue().save(null);
+					if ( trace ) {
+						if ( entry.getKey().getTracer() != null ) {
+							Resource traceResource = resourceSet.createResource( getTraceURI(entry.getValue()) );
+							if ( entry.getKey().getTracer().getTraceModel() != null ) {
+								traceResource.getContents().add( entry.getKey().getTracer().getTraceModel() );
+								traceResource.save(null);
+							}
+						}
+					}
+				}
 			}
 		} catch (IOException e) {
 			IOPlugin.logErrorMessage("Error while saving " + fileName,e);
@@ -61,8 +83,14 @@ public class KmExporter {
 		
 	}	
 	
-	public void export(KermetaUnit kermetaUnit, String rep) {
-		export(kermetaUnit, rep, null);
+	/**
+	 * 
+	 * @param kermetaUnit
+	 * @param rep
+	 * @param trace
+	 */
+	public void export(KermetaUnit kermetaUnit, String rep, boolean trace) {
+		export(kermetaUnit, rep, null, trace);
 	}
 	
 	private void fillResourceSet(KermetaUnit kermetaUnit) {
@@ -103,7 +131,7 @@ public class KmExporter {
 	/**
 	 * Define a container for each element of the root package.
 	 */
-	public void fixTypeContainement(Package p) {
+	private void fixTypeContainement(Package p) {
 		TreeIterator<EObject> it = p.eAllContents();
 		TypeContainementFixer fixer = new TypeContainementFixer();
 		while(it.hasNext()) {
@@ -181,6 +209,19 @@ public class KmExporter {
 			setUri(current, rep, null);
 		}
 		
+	}
+	
+	/**
+	 * Calculate the uri for the trace model.
+	 * @param resource
+	 * @return
+	 */
+	private URI getTraceURI(Resource resource) {
+		String s = "file:/";
+		for ( int i=0; i<resource.getURI().segmentCount()-1; i++ )
+			s += resource.getURI().segment(i) + "/";
+		s += resource.getURI().lastSegment().replaceAll("\\..+", ".traceability");
+		return URI.createURI(s);
 	}
 	
 }

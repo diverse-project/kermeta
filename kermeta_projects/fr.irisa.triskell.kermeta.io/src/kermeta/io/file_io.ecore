@@ -4,20 +4,20 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::io|kermeta::standard|kermeta::language::structure|kermeta::exceptions|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/io/file_io.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/io/file_io.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="io" nsURI="http://www.kermeta.org/kermeta/io" nsPrefix="io">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * Contains file input/output related classes. &#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;/>&#xD;&#xA; */"/>
+        <details key="documentation" value=" */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="FileIO">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * Implementation of simple helpers to read ans write text files&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;/>&#xD;&#xA; */"/>
+          <details key="documentation" value=" */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="writeTextFile">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if filename.equals(void) then&#xA;&#x9;&#x9;raise kermeta::exceptions::FileNotFoundException.new&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Writes a String in a text file&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
           <eParameters name="filename">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -29,7 +29,7 @@
         <eOperations name="readTextFile">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if filename.equals(void) then&#xA;&#x9;&#x9;raise kermeta::exceptions::FileNotFoundException.new&#xA;&#xA;&#x9;end&#xA;&#x9;var exists : kermeta::standard::Boolean&#xA;&#x9;var isdirectory : kermeta::standard::Boolean&#xA;&#x9;exists ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileExists(filename)&#xA;&#x9;isdirectory ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileIsDirectory(filename)&#xA;&#x9;if ((exists.~not) or (isdirectory)) then&#xA;&#x9;&#x9;raise kermeta::exceptions::FileNotFoundException.new&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.readTextFile(filename)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Reads a text file&#xD;&#xA;  */"/>
+            <details key="documentation" value="&#x9; */"/>
           </eAnnotations>
           <eParameters name="filename">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -43,7 +43,6 @@
     <references href="../Standard.ecore#/1"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
@@ -63,6 +62,7 @@
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="std_io.ecore#/0"/>
@@ -71,6 +71,7 @@
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../persistence/resource.ecore#/2"/>

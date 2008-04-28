@@ -1,14 +1,18 @@
-/* $Id: 005_several_superoperations.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
-
-// Test of constraints on operations
-// This test must make specific errors to appear. 
-
-package root_package;
-
+package r;
 require kermeta
-
 using kermeta::standard
-
+class C2bis inherits C1, C1bis {
+	/*
+	 * c
+	 *      
+	 */
+	 
+	method op2() is do
+	end
+	
+	
+	
+}
 
 class C1
 {
@@ -21,23 +25,8 @@ class C1
 }
 
 
-class C1bis 
+class C1bis
 {
 	operation op2() is do
 	end
-}
-
-
-
-class C2bis inherits C1, C1bis
-{
-	/*
-	 * This method is defined in C1 and C1bis. User must tell which one of the two he
-	 * wants to "inherit"
-	 * (op2 from C1 is do)
-	 * the load  fails on that error ...
-	 */ 
-	method op2() is do
-	end
-	
 }

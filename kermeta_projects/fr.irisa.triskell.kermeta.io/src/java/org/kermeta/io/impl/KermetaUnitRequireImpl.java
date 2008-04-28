@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitRequireImpl.java,v 1.2 2007-12-06 14:10:53 ftanguy Exp $
+ * $Id: KermetaUnitRequireImpl.java,v 1.3 2008-04-28 11:50:12 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 

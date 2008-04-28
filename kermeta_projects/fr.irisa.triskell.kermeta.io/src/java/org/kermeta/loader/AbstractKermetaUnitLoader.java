@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.13 2008-04-01 12:23:35 bmorin Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.14 2008-04-28 11:50:17 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL

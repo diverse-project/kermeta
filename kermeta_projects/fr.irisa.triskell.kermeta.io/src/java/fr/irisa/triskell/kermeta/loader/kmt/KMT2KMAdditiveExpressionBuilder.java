@@ -1,4 +1,4 @@
-/* $Id: KMT2KMAdditiveExpressionBuilder.java,v 1.9 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: KMT2KMAdditiveExpressionBuilder.java,v 1.10 2008-04-28 11:50:13 ftanguy Exp $
  * Created on 6 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */

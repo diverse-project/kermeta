@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTOutputBuilder.java,v 1.6 2008-03-05 08:22:34 ftanguy Exp $
+/*$Id: KMTOutputBuilder.java,v 1.7 2008-04-28 11:50:20 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io2
 * File : 	KMTOutputBuilder.java
 * License : EPL

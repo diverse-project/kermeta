@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.31 2008-04-25 09:59:01 dvojtise Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.32 2008-04-28 11:50:58 ftanguy Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.kermeta.interpreter.InterpreterPlugin;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -30,7 +31,6 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -257,8 +257,8 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 				    	String refQualifiedName = getEQualifiedName(ref);
 				    	RuntimeObject property_ro = (RuntimeObject)properties.get(refQualifiedName);
 				    	if(property_ro == null){
-				    		KermetaInterpreter.internalLog.error(refQualifiedName + " not found in properties !");
-				    		KermetaInterpreter.internalLog.error(properties.toString());
+				    		InterpreterPlugin.internalLog.error(refQualifiedName + " not found in properties !");
+				    		InterpreterPlugin.internalLog.error(properties.toString());
 				    	}
 				        list = ReflectiveSequence.createReflectiveSequence(run_obj, property_ro);
 				    }
@@ -294,7 +294,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 		
 		// This is an error
 		if (result == null) {
-			KermetaInterpreter.internalLog.error("Memory loader internal error : runtime object for " + kcoreObject + " not found");
+			InterpreterPlugin.internalLog.error("Memory loader internal error : runtime object for " + kcoreObject + " not found");
 			throw new Error("Memory loader internal error : runtime object for " + kcoreObject + " not found");
 		}
 		
@@ -384,7 +384,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 	}
 	protected void finalize() throws Throwable {
 		super.finalize();
-		KermetaInterpreter.internalLog.debug("FINALIZE RuntimeMemoryLoader ...");
+		InterpreterPlugin.internalLog.debug("FINALIZE RuntimeMemoryLoader ...");
         
         // clear as much ref as possible        
         unit = null;

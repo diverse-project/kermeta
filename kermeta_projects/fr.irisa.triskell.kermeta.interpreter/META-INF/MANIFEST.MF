@@ -3,10 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta interpreter Plugin
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.interpreter
 Bundle-Version: 1.1.0.qualifier
-Bundle-ClassPath: .,
- lib/thirdparty/emfatic-core.jar,
- lib/thirdparty/ldt-core.jar,
- lib/thirdparty/junit.jar
+Bundle-ClassPath: .
 Bundle-Localization: plugin
 Require-Bundle: fr.irisa.triskell.kermeta.model,
  org.eclipse.emf.ecore.xmi,
@@ -21,13 +18,14 @@ Require-Bundle: fr.irisa.triskell.kermeta.model,
  org.kermeta.merger,
  org.eclipse.gymnast.runtime.core,
  org.kermeta.io.loader,
- fr.irisa.triskell.kermeta.io;visibility:=reexport
+ fr.irisa.triskell.kermeta.io;visibility:=reexport,
+ org.eclipse.debug.core,
+ org.junit4
 Export-Package: fr.irisa.triskell.kermeta.builder,
  fr.irisa.triskell.kermeta.dev.interpreter,
  fr.irisa.triskell.kermeta.error,
  fr.irisa.triskell.kermeta.interpreter,
  fr.irisa.triskell.kermeta.interpreter.debug,
- fr.irisa.triskell.kermeta.launcher,
  fr.irisa.triskell.kermeta.launcher.CommandLineOptions,
  fr.irisa.triskell.kermeta.runtime,
  fr.irisa.triskell.kermeta.runtime.basetypes,
@@ -39,5 +37,6 @@ Export-Package: fr.irisa.triskell.kermeta.builder,
  fr.irisa.triskell.kermeta.runtime.rohelper,
  fr.irisa.triskell.kermeta.runtime.testing,
  fr.irisa.triskell.utils.argumentsreader,
+ org.kermeta.interpreter.api,
  org.kermeta.interpreter.helper
 Bundle-Vendor: IRISA/INRIA

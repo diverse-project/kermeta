@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTLoadingStructurePass.java,v 1.3 2008-03-05 07:54:10 ftanguy Exp $
+/*$Id: KMTLoadingStructurePass.java,v 1.4 2008-04-28 11:50:47 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	KMTLoadingStructurePass.java
 * License : EPL
@@ -425,6 +425,7 @@ public class KMTLoadingStructurePass extends KermetaASTNodeVisitor implements IL
 				 */
 				if ( currentOperation != null ) {
 					currentOperation.getTypeParameter().add( otv );
+					currentOperation.getContainedType().add( otv );
 				} else if ( currentClassDefinition != null ) {
 					currentClassDefinition.getTypeParameter().add( otv );
 				}

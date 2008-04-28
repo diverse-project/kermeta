@@ -6,7 +6,7 @@
   </ecore:EAnnotation>
   <ecore:EPackage name="kermeta" nsURI="http://www.kermeta.org/kermeta" nsPrefix="kermeta">
     <eAnnotations source="kermeta">
-      <details key="documentation" value="/**&#xD;&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png&quot;/>&#xD;&#xA; */"/>
+      <details key="documentation" value="/**&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png&quot;/>&#xA; */"/>
     </eAnnotations>
     <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
   </ecore:EPackage>
@@ -21,7 +21,6 @@
     <references href="language/structure.ecore#/1"/>
     <references href="kermeta_java.ecore#/0"/>
     <references href="kermeta_java.ecore#/1"/>
-    <references href="kermeta_java.ecore#/2"/>
     <references href="language/reflective_collections.ecore#/0"/>
     <references href="language/reflective_collections.ecore#/1"/>
     <references href="language/reflective_collections.ecore#/2"/>
@@ -36,13 +35,15 @@
     <references href="utils/utils.ecore#/2"/>
     <references href="utils/StringBuffer.ecore#/0"/>
     <references href="utils/StringBuffer.ecore#/1"/>
+    <references href="utils/StringBuffer.ecore#/2"/>
     <references href="utils/hashtable.ecore#/0"/>
     <references href="utils/hashtable.ecore#/1"/>
+    <references href="utils/hashtable.ecore#/2"/>
     <references href="utils/stack.ecore#/0"/>
     <references href="utils/stack.ecore#/1"/>
+    <references href="utils/stack.ecore#/2"/>
     <references href="io/std_io.ecore#/0"/>
     <references href="io/std_io.ecore#/1"/>
-    <references href="io/std_io.ecore#/2"/>
     <references href="io/file_io.ecore#/0"/>
     <references href="io/file_io.ecore#/1"/>
     <references href="io/file_io.ecore#/2"/>
@@ -51,12 +52,12 @@
     <references href="exceptions/exceptions.ecore#/2"/>
     <references href="language/dynamic_expression.ecore#/0"/>
     <references href="language/dynamic_expression.ecore#/1"/>
-    <references href="language/dynamic_expression.ecore#/2"/>
     <references href="persistence/resource.ecore#/0"/>
     <references href="persistence/resource.ecore#/1"/>
     <references href="persistence/resource.ecore#/2"/>
     <references href="standard/java.ecore#/0"/>
     <references href="standard/java.ecore#/1"/>
+    <references href="standard/java.ecore#/2"/>
     <references href="ecore/ecore_compatibility.ecore#/0"/>
     <references href="ecore/ecore_compatibility.ecore#/1"/>
     <references href="ecore/ecore_compatibility.ecore#/2"/>

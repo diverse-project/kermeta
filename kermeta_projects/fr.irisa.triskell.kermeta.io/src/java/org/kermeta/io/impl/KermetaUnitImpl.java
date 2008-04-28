@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.31 2008-04-08 09:58:31 dvojtise Exp $
+ * $Id: KermetaUnitImpl.java,v 1.32 2008-04-28 11:50:12 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -48,6 +48,7 @@ import antlr.ANTLRException;
 import antlr.MismatchedTokenException;
 import antlr.NoViableAltException;
 import antlr.TokenStreamRecognitionException;
+import antlr.TokenWithIndex;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Require;
@@ -1226,16 +1227,15 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				// only the tracer will remain (but it has a smaller memory footprint
 				tracer = new Tracer();
 			}*/
-		   
 			ASTNode astNode = (ASTNode)node;
+			int offset = astNode.getRangeStart();
 			tracer.addTextInputTrace(this.uri, 
-					-1,// this cost too much, this computation is done only on demand, ResourceHelper.calculateLineNumber(astNode.getRangeStart(),this.uri),//getLineNumber(astNode, this.uri), // todo : we MUST do a lazy count instead to avoid loosing performance!
-					astNode.getRangeStart(),
-					astNode.getRangeStart()+ astNode.getRangeLength(), 
+					astNode.getLineNumber(),//-1,// this cost too much, this computation is done only on demand, ResourceHelper.calculateLineNumber(astNode.getRangeStart(),this.uri),//getLineNumber(astNode, this.uri), // todo : we MUST do a lazy count instead to avoid loosing performance!
+					offset,
+					offset + astNode.getRangeLength(), 
 					model_element, 
 					traceDefaultShortDescription + astNode.getTypeName() );
-			
-		} 
+		}
 		
 	}	
 
@@ -1300,21 +1300,25 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		if ( exception instanceof MismatchedTokenException ) {
 			ParsingError error = IoFactory.eINSTANCE.createParsingError();
 			MismatchedTokenException e = (MismatchedTokenException) exception;
-			error.setOffset( e.column );
+			if ( e.token instanceof TokenWithIndex )
+				error.setOffset( ((TokenWithIndex) e.token).getIndex() );
 			if ( e.token.getText() == null )
 				error.setLength(0);
 			else
 				error.setLength( e.token.getText().length() );
+			error.setLineNumber( e.line );
 			error.setValue( e.getLocalizedMessage() );
 			getMessages().add( error );
 		} else if ( exception instanceof NoViableAltException ) {
 			ParsingError error = IoFactory.eINSTANCE.createParsingError();
 			NoViableAltException e = (NoViableAltException) exception;
-			error.setOffset( e.column );
+			if ( e.token instanceof TokenWithIndex )
+				error.setOffset( ((TokenWithIndex) e.token).getIndex() );
 			if ( e.token.getText() == null )
 				error.setLength(0);
 			else
 				error.setLength( e.token.getText().length() );
+			error.setLineNumber( e.line );
 			error.setValue( e.getLocalizedMessage() );
 			getMessages().add( error );
 		} else if ( exception instanceof TokenStreamRecognitionException ) {
@@ -1326,6 +1330,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			getMessages().add( error );
 		}
 	}
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1358,8 +1363,13 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	public fr.irisa.triskell.kermeta.language.structure.Package addInternalPackage(String qualifiedName, String uri) {
 		
 		Package result = findInternalpackage(qualifiedName);
-		if ( result != null )
+		if ( result != null ) {
+			// Fix the uri if necessary
+			if( ( result.getUri()==null || result.getUri().equals("") ) && uri!=null && !uri.equals("") ) {
+				result.setUri(uri);
+			}
 			return result;
+		}
 		
 		String[] parts = qualifiedName.split("::");
 		String currentQualifiedName = "";
@@ -1374,6 +1384,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			Package p = findInternalpackage( currentQualifiedName );
 			if ( p == null ) {
 				p = KermetaModelHelper.Package.create( currentName );
+				
 				getModelingUnit().getPackages().add( p );
 				if ( currentPackage != null )
 					currentPackage.getNestedPackage().add( p );
@@ -1395,7 +1406,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			
 		}
 		
-		if ( uri != null )
+		if ( uri != null && !uri.equals("") )
 			currentPackage.setUri( uri );
 		
 		return currentPackage;	

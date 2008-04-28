@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorer.java,v 1.8 2008-02-14 07:13:18 uid21732 Exp $
+ * $Id: KermetaUnitStorer.java,v 1.9 2008-04-28 11:50:16 ftanguy Exp $
  */
 package org.kermeta.io;
 

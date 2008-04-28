@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.32 2008-03-05 08:11:16 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.33 2008-04-28 11:50:11 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL

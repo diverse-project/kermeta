@@ -4,62 +4,62 @@
     <details key="require" value="../Standard.kmt|platform:/resource/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore|"/>
     <details key="using" value="kermeta::language::structure|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="language" nsURI="file:/C:/eclipse3.3.1.1/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/kermeta/language" nsPrefix="language">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="language" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/kermeta/language" nsPrefix="language">
       <eSubpackages name="structure" nsURI="http://www.kermeta.org/kermeta/language/structure" nsPrefix="structure">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * Contains the concrete implementation (including the operation bodies) &#xD;&#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package.&#xD;&#xA; * If you need more documentation, please take a look at the&#xD;&#xA; * &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png&quot;/>&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png&quot;/>&#xD;&#xA; */"/>
+          <details key="documentation" value=" */"/>
         </eAnnotations>
         <eClassifiers xsi:type="ecore:EClass" name="Object">
           <eOperations name="getMetaClass">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns the Class object that is the metaclass of current Object&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="container">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns the Object that contains current Object, void if the Object has&#xD;&#xA;  * no container&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="checkInvariants">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Runs checking of invariants defined for the metaclass of the Object&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="checkAllInvariants">
             <eAnnotations source="kermeta">
-              <details key="body" value="do&#xA;&#x9;if self.isNotEqual(void) then&#xA;&#x9;&#x9;self.checkInvariants&#xA;&#x9;&#x9;var cd : kermeta::language::structure::ClassDefinition&#xA;&#x9;&#x9;cd ?= self.getMetaClass.typeDefinition&#xA;&#x9;&#x9;cd.allAttribute.each{subObj | do&#xA;&#x9;&#x9;&#x9;&#x9;if subObj.isComposite then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if ((self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveSequence&quot;)) or (self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveCollection&quot;))) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var subObjInstances : kermeta::standard::Collection&lt;kermeta::language::structure::Object>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances ?= self.get(subObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances.each{aSubObjInstances | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aSubObjInstances.checkAllInvariants&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.get(subObj).checkAllInvariants&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Recursively runs checking of invariants defined for the metaclass of the Object&#xD;&#xA;  * and its supertypes&#xD;&#xA;  */"/>
+              <details key="body" value="do&#xA;&#x9;if self.isNotEqual(void) then&#xA;&#x9;&#x9;self.checkInvariants&#xA;&#x9;&#x9;self.getMetaClass.ownedAttribute.each{subObj | do&#xA;&#x9;&#x9;&#x9;&#x9;if subObj.isComposite then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if ((self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveSequence&quot;)) or (self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveCollection&quot;))) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var subObjInstances : kermeta::standard::Collection&lt;kermeta::language::structure::Object>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances ?= self.get(subObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances.each{aSubObjInstances | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aSubObjInstances.checkAllInvariants&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.get(subObj).checkAllInvariants&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="equals">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * semantic equality,&#xD;&#xA;  * if you wish to test for object identity you need to use the method oid&#xD;&#xA;  * ex: x.oid == y.oid&#xD;&#xA;  * by default, (ie. if not overloaded), the equals method for class Object implements &#xD;&#xA;  * the most discriminating possible equivalence relation on objects; that is, for any non-null &#xD;&#xA;  * reference values x and y, this method returns true if and only if x and y refer to the same &#xD;&#xA;  * object (x.oid == y.oid has the value true). &#xD;&#xA;  *&#xD;&#xA;  * note1: the operator == is mapped to this &#xD;&#xA;  * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="element" eType="/1/language/structure/Object"/>
           </eOperations>
           <eOperations name="isNotEqual">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := equals(element).~not&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * See kermeta::language::structure::Object.equals(Object)&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="element" eType="/1/language/structure/Object"/>
           </eOperations>
           <eOperations name="isKindOf">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := self.getMetaClass.equals(cl)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the current Object is an instance of the given Class&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="cl" eType="/1/language/structure/Class"/>
           </eOperations>
           <eOperations name="get">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)&#xA;end"/>
-              <details key="documentation" value="/** &#xD;&#xA;  * Returns the instances of the given property for this Object.&#xD;&#xA;  *&#xD;&#xA;  * Example : &#xD;&#xA;  * &lt;pre>&#xD;&#xA;  * class A { reference attr : String }&#xD;&#xA;  * &lt;/pre>&#xD;&#xA;  * Using A :&#xD;&#xA;  * &lt;pre>&#xD;&#xA;  * operation getAProp() is do&#xD;&#xA;  *    var a : A&#xD;&#xA;  *    var s : String&#xD;&#xA;  *    var the_attr : Property init self.getMetaClass.ownedAttribute.one&#xD;&#xA;  *    s ?= a.get(the_attr)&#xD;&#xA;  * end&#xD;&#xA;  * &lt;/pre>&#xD;&#xA;  * The user has to cast&#xD;&#xA;  * the result of this method according to the type and the upper multiplicity&#xD;&#xA;  * of this property. If upper multiplicity > 1, than the effective type of the &#xD;&#xA;  * result is a Sequence&lt;ThePropertyName>. Otherwise, the type corresponds to &#xD;&#xA;  * the name of the given Property (i.e the type of the property instance).&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="property">
               <eType xsi:type="ecore:EClass" href="../kermeta_java.ecore#/1/language/structure/Property"/>
@@ -68,7 +68,7 @@
           <eOperations name="set">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;if element.isInstanceOf(~property.type) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var e : kermeta::exceptions::IncompatibleTypeError init kermeta::exceptions::IncompatibleTypeError.new&#xA;&#x9;&#x9;e.message := ((((((((((((&quot;IncompatibleTypeError : Cannot set property &quot;) + (~property.name))) + (&quot; of object &quot;))) + (self.toString))) + (&quot; to &quot;))) + (element.toString))) + (&quot;.&quot;))&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Sets the &lt;code>element&lt;/code> to the &lt;code>~property&lt;/code> of the object &#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="property">
               <eType xsi:type="ecore:EClass" href="../kermeta_java.ecore#/1/language/structure/Property"/>
@@ -78,7 +78,7 @@
           <eOperations name="isSet">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * True if the &lt;code>~property&lt;/code> of the object has been set&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="property">
               <eType xsi:type="ecore:EClass" href="../kermeta_java.ecore#/1/language/structure/Property"/>
@@ -87,7 +87,7 @@
           <eOperations name="unset">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Remove the element set as the &lt;code>~property&lt;/code> of the object.&#xD;&#xA;  * The &lt;code>isSet(~property)&lt;/code> method will then return False&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="property">
               <eType xsi:type="ecore:EClass" href="../kermeta_java.ecore#/1/language/structure/Property"/>
@@ -96,57 +96,57 @@
           <eOperations name="oid">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns the unique Oid of the Object&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="toString">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := ((((((((&quot;[&quot;) + (self.getMetaClass.typeDefinition.qualifiedName))) + (&quot;:&quot;))) + (oid.toString))) + (&quot;]&quot;))&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;   * Implements Object.toString()&#xD;&#xA;   * Returns a String of form [qn:oid] where 'qn' is the qualified name of&#xD;&#xA;   * the object type, and oid the unique ID of the object&#xD;&#xA;   */"/>
+              <details key="documentation" value=" &#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="isFrozen">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isFrozen(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the Object is currently in a&#xD;&#xA;  * frozen state&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="isVoid">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := false&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the Object is Void&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="hashcode">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * code used in hashtable in order to identify an object in the hashtable keys&#xD;&#xA;  * This system is similar to the hashcode used in java. Please refer to java documentation&#xD;&#xA;  * for more information about hashcode&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="freeze">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Freeze the Object&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="asType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;if isInstanceOf(type) then&#xA;&#x9;&#x9;result := self&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise kermeta::exceptions::TypeCastError.new&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="type" eType="/1/language/structure/Class"/>
           </eOperations>
           <eOperations name="isInstanceOf">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the current Object conforms to given Type&#xD;&#xA;  * This means: is this object an instance of this type, or is it an instance of its subtype &#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="type" eType="/1/language/structure/Type"/>
           </eOperations>
           <eOperations name="containingResource">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getContainingResource(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns the Resource currently containing (directly or indirectly) the Object &#xD;&#xA;  * or void if the object belongs to no Resource&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
         </eClassifiers>
@@ -154,13 +154,13 @@
           <eOperations name="new">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.newObject(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * To be written ##########################################&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="isModelTypeOf">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.isModelTypeOf(self, m)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * To be written ##########################################&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="m" eType="/1/language/structure/Model"/>
           </eOperations>
@@ -169,7 +169,7 @@
           <eOperations name="new">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Instantiates a new occurence for this Class&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="clone">
@@ -193,7 +193,7 @@
           <eOperations name="toString">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := self.typeDefinition.name&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns the String representation of this class. &#xD;&#xA;  *  Note : throws an exception if this class has no classDefinition&#xD;&#xA;  *  or if the classDefinition is not well constructed.&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" ordered="false" upperBound="-1" changeable="false" volatile="true" transient="true" derived="true">
@@ -234,7 +234,7 @@
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="classDefinition" eType="/1/language/structure/ClassDefinition" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermeta">
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns the ClassDefinition for this class&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
               <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eAnnotations source="kermetaderivedProp.getter">
@@ -255,7 +255,7 @@
         <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="/1/language/structure/Object">
           <eStructuralFeatures xsi:type="ecore:EReference" name="allAttribute" ordered="false" upperBound="-1" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermeta">
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns all the Attributes, References, derived Properties of this &#xD;&#xA;  * ClassDefinition including the inherited ones&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
               <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eAnnotations source="kermetaderivedProp.getter">
@@ -265,7 +265,7 @@
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="allOperation" ordered="false" upperBound="-1" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermeta">
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns all the Operations of this ClassDefinition&#xD;&#xA;  * including the inherited ones&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
               <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eAnnotations source="kermetaderivedProp.getter">
@@ -278,28 +278,28 @@
           <eOperations name="filter" ordered="false" upperBound="-1">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := contents.~select{o | do&#xA;&#x9;&#x9;&#x9;typeName.isInstance(o)&#xA;&#x9;&#x9;end}.asSet&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;   * Returns a set of all the elements of the model that are instance of the given Type&#xD;&#xA;   */"/>
+              <details key="documentation" value=" &#x9; */"/>
             </eAnnotations>
             <eParameters name="typeName" eType="/1/language/structure/Type"/>
           </eOperations>
           <eOperations name="add">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;contents&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Model.add(self, obj)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;   * Add an object to the model. According to the ModelType, the typechecker will statically verify if the object can be added or not&#xD;&#xA;   */"/>
+              <details key="documentation" value=" &#x9; */"/>
             </eAnnotations>
             <eParameters name="obj" eType="/1/language/structure/Object"/>
           </eOperations>
           <eOperations name="remove">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(contents, obj)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;   * Remove an object from the model&#xD;&#xA;   */"/>
+              <details key="documentation" value=" &#x9; */"/>
             </eAnnotations>
             <eParameters name="obj" eType="/1/language/structure/Object"/>
           </eOperations>
           <eOperations name="addAllCompatible">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::language::structure::Object>.new&#xA;&#x9;objectsToAdd.each{obj | do&#xA;&#x9;&#x9;&#x9;var addedObject : kermeta::language::structure::Object init addCompatible(obj)&#xA;&#x9;&#x9;&#x9;if addedObject.isVoid.~not then&#xA;&#x9;&#x9;&#x9;&#x9;result.add(obj)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;   * Add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.&#xD;&#xA;   * Returns the list of Object that have been added (One can check that some element have been ignored or not)&#xD;&#xA;   */"/>
+              <details key="documentation" value=" &#x9; */"/>
             </eAnnotations>
             <eParameters name="objectsToAdd">
               <eGenericType>
@@ -311,7 +311,7 @@
           <eOperations name="addCompatible">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;contents&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Model.addCompatible(self, objectToAdd)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;   * Add the Object if it is copmpatible with the ModelDefinition. Other objects are ignored.&#xD;&#xA;   * Returns the object if it has been added (One can check that some element have been ignored or not)&#xD;&#xA;   * return Void if not added&#xD;&#xA;   */"/>
+              <details key="documentation" value=" &#x9; */"/>
             </eAnnotations>
             <eParameters name="objectToAdd" eType="/1/language/structure/Object"/>
           </eOperations>
@@ -320,35 +320,35 @@
           <eOperations name="clone">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns a copy of passed Object built by recursively copying attribute&#xD;&#xA;  * properties, and referencing original reference properties values&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
           </eOperations>
           <eOperations name="deepClone">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns a copy of passed Object built by recursively copying values of&#xD;&#xA;  * all properties, no matter the property kind&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
           </eOperations>
           <eOperations name="isInstance">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := element.isInstanceOf(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Implements Type.isInstance(Object)&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="element" eType="/1/language/structure/Object"/>
           </eOperations>
           <eOperations name="isSuperTypeOf">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Type.hasSubType(self, object)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;   * Implements Type.isSuperTypeOf(Type)&#xD;&#xA;   * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)&#xD;&#xA;   * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers&#xD;&#xA;   * to extend it.&#xD;&#xA;   */"/>
+              <details key="documentation" value=" &#x9; */"/>
             </eAnnotations>
             <eParameters name="object" eType="/1/language/structure/Type"/>
           </eOperations>
           <eOperations name="isSubTypeOf">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := object.isSuperTypeOf(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;   * Implements Type.isSubTypeOf(Type)&#xD;&#xA;   * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)&#xD;&#xA;   * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers&#xD;&#xA;   * to extend it.&#xD;&#xA;   */"/>
+              <details key="documentation" value=" &#x9; */"/>
             </eAnnotations>
             <eParameters name="object" eType="/1/language/structure/Type"/>
           </eOperations>
@@ -357,7 +357,7 @@
           <eOperations name="qualifiedName">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;var elem : kermeta::language::structure::NamedElement init self&#xA;&#x9;result := self.name&#xA;&#x9;from elem ?= elem.container&#xA;&#x9;until elem.equals(void)&#xA;&#x9;loop&#xA;&#x9;&#x9;result := ((((elem.name) + (&quot;::&quot;))) + (result))&#xA;&#x9;&#x9;elem ?= elem.container&#xA;&#x9;end&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Returns the qualified name of this named element. Qualified name is &#xD;&#xA;  * the list of the names of the packages hierarchically ordered, delimited by&#xD;&#xA;  * a &quot;::&quot;, followed by the name of this named element.&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
           </eOperations>
         </eClassifiers>
@@ -365,7 +365,7 @@
           <eOperations name="clone">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;raise &quot;NOT IMPLEMENTED&quot;&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::language::structure::Type.clone(Object)&#xD;&#xA;  */"/>
+              <details key="documentation" value="&#x9; */"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
           </eOperations>
@@ -384,7 +384,6 @@
     <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/2"/>
@@ -396,22 +395,22 @@
     <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
@@ -426,6 +425,7 @@
     <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/2"/>

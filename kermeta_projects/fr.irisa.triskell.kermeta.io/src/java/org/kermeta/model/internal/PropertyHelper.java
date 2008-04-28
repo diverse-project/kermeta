@@ -1,6 +1,6 @@
 
 
-/*$Id: PropertyHelper.java,v 1.3 2008-03-05 08:23:13 ftanguy Exp $
+/*$Id: PropertyHelper.java,v 1.4 2008-04-28 11:50:14 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	PropertyHelper.java
 * License : EPL

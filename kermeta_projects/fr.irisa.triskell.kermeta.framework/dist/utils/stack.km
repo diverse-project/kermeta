@@ -2,9 +2,9 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/utils/@ownedTags.0" name="utils" uri="http://www.kermeta.org/kermeta/utils">
-      <ownedTags value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; */" object="//@packages.0/utils"/>
+      <ownedTags value="/** &#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; * metamodel&#xA; */" object="//@packages.0/utils"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/Stack/@ownedTags.0" name="Stack" superType="//@packages.0/utils/Stack/@containedType.0">
-        <ownedTags value="/**&#xD;&#xA; * An implementation of stack&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;/>&#xD;&#xA; */" object="//@packages.0/utils/Stack"/>
+        <ownedTags value="/**&#xA; * An implementation of stack&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;/>&#xA; */" object="//@packages.0/utils/Stack"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeParamBinding type="//@packages.0/utils/Stack/G">
@@ -13,7 +13,7 @@
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Sequence"/>
         </containedType>
         <ownedOperation tag="//@packages.0/utils/Stack/push/@ownedTags.0" name="push" type="//@packages.0/utils/Stack/push/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Pushes an element into the stack&#xD;&#xA;  */" object="//@packages.0/utils/Stack/push"/>
+          <ownedTags value="/**&#xA;&#x9; * Pushes an element into the stack&#xA;&#x9; */" object="//@packages.0/utils/Stack/push"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="element" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block">
@@ -36,7 +36,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Stack/peek/@ownedTags.0" name="peek" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Gets the element at the top of the stack&#xD;&#xA;  */" object="//@packages.0/utils/Stack/peek"/>
+          <ownedTags value="/**&#xA;&#x9; * Gets the element at the top of the stack&#xA;&#x9; */" object="//@packages.0/utils/Stack/peek"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/Stack/G">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Stack/G">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Stack/G" name="result"/>
@@ -52,7 +52,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Stack/pop/@ownedTags.0" name="pop" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xD;&#xA;  * Get and remove the element at the top of the stack&#xD;&#xA;  */" object="//@packages.0/utils/Stack/pop"/>
+          <ownedTags value="/**&#xA;&#x9; * Get and remove the element at the top of the stack&#xA;&#x9; */" object="//@packages.0/utils/Stack/pop"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@containedType.0"/>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Stack/G">

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitLoader.java,v 1.4 2007-08-02 13:09:01 dvojtise Exp $
+ * $Id: KermetaUnitLoader.java,v 1.5 2008-04-28 11:50:15 ftanguy Exp $
  */
 package org.kermeta.io;
 

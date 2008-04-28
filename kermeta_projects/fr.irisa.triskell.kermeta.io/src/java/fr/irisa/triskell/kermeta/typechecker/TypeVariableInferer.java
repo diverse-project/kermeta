@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.20 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: TypeVariableInferer.java,v 1.21 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeVariableInferer.java
 * License : EPL
@@ -137,10 +137,14 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 			fr.irisa.triskell.kermeta.language.structure.Class sp = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
 		    if (arg0.getTypeDefinition() == sp.getTypeDefinition()) {
 		        for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
-					fr.irisa.triskell.kermeta.language.structure.Type g = ((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType();
-					fr.irisa.triskell.kermeta.language.structure.Type p = ((TypeVariableBinding)sp.getTypeParamBinding().get(i)).getType();
-					TypeVariableInferer.inferTypeVariableTypes(g, p, result);
-				}
+					try {
+						fr.irisa.triskell.kermeta.language.structure.Type g = ((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType();
+						fr.irisa.triskell.kermeta.language.structure.Type p = ((TypeVariableBinding)sp.getTypeParamBinding().get(i)).getType();
+						TypeVariableInferer.inferTypeVariableTypes(g, p, result);
+					} catch (Exception e) {
+						System.out.println();
+					}
+		        }
 		        return null;
 		    }
 		}

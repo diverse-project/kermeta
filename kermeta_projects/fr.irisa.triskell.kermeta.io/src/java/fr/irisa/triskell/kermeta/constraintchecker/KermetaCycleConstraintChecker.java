@@ -1,4 +1,4 @@
-/* $Id: KermetaCycleConstraintChecker.java,v 1.7 2008-02-14 07:13:17 uid21732 Exp $
+/* $Id: KermetaCycleConstraintChecker.java,v 1.8 2008-04-28 11:50:11 ftanguy Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL

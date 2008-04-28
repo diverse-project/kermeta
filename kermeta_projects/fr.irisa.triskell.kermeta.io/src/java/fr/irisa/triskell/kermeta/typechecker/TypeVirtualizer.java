@@ -1,4 +1,4 @@
-/* $Id: TypeVirtualizer.java,v 1.7 2008-03-19 16:20:59 cfaucher Exp $
+/* $Id: TypeVirtualizer.java,v 1.8 2008-04-28 11:50:11 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeVirtualizer.java
 * License : EPL

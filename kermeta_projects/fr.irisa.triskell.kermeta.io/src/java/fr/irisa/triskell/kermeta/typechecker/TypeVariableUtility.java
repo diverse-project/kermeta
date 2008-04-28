@@ -1,4 +1,4 @@
-/* $Id: TypeVariableUtility.java,v 1.7 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: TypeVariableUtility.java,v 1.8 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableUtility.java
 * License : EPL

@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.18 2008-02-29 13:27:22 dvojtise Exp $
+/* $Id: CompileFramework.java,v 1.19 2008-04-28 11:49:48 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.framework
 * File : CompileFramework.java
 * License : EPL
@@ -58,7 +58,7 @@ public class CompileFramework {
         	
         	System.out.println("SAVING IN KM...");
         	KmExporter exporter = new KmExporter();
-        	exporter.export(kermetaUnit, dist_folder);
+        	exporter.export(kermetaUnit, dist_folder, true);
         	System.out.println("DONE");
 
         	System.out.println("SAVING IN ECORE...");

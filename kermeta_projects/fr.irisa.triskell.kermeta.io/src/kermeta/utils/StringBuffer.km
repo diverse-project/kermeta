@@ -3,12 +3,12 @@
   <packages name="kermeta">
     <nestedPackage name="utils" uri="http://www.kermeta.org/kermeta/utils">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/StringBuffer/@ownedTags.0" name="StringBuffer" superType="//@packages.0/utils/StringBuffer/@containedType.0">
-        <ownedTags value="/**&#xA; * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long&#xA; * string concatenation.&lt;br>&#xA; * &lt;b>Only work on Strings&lt;/b>&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;/>&#xA; */" object="//@packages.0/utils/StringBuffer"/>
+        <ownedTags value=" */" object="//@packages.0/utils/StringBuffer"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/utils/StringBuffer/append/@ownedTags.0" name="append" type="//@packages.0/utils/StringBuffer/append/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xA;  * Append a given string at the end of this StringBuffer&#xA;  * @param arg0 A string to append at the end of this StringBuffer&#xA;  * @return A reference to this object&#xA;  */" object="//@packages.0/utils/StringBuffer/append"/>
+          <ownedTags value="&#x9; */" object="//@packages.0/utils/StringBuffer/append"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/StringBuffer"/>
           <ownedParameter name="arg0" type="//@packages.0/utils/StringBuffer/append/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -31,7 +31,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/StringBuffer/toString/@ownedTags.0" name="toString" type="//@packages.0/utils/StringBuffer/toString/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xA;  *Convert this StringBuffer to String and return its value&#xA;  *@return The string value of this StringBuffer&#xA;  */" object="//@packages.0/utils/StringBuffer/toString"/>
+          <ownedTags value="&#x9; */" object="//@packages.0/utils/StringBuffer/toString"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>

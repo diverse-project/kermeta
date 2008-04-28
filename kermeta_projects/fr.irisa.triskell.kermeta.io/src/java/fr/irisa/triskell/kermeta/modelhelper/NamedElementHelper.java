@@ -1,4 +1,4 @@
-/* $Id: NamedElementHelper.java,v 1.5 2008-01-04 14:17:38 dvojtise Exp $
+/* $Id: NamedElementHelper.java,v 1.6 2008-04-28 11:50:17 ftanguy Exp $
  * Project   : Kermeta 
  * File      : NamedElementHelper.java
  * License   : EPL

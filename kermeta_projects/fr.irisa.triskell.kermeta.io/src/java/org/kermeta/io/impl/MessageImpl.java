@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MessageImpl.java,v 1.4 2007-08-02 13:09:01 dvojtise Exp $
+ * $Id: MessageImpl.java,v 1.5 2008-04-28 11:50:12 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 

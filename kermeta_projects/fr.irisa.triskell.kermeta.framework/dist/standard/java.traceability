@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="3" charBeginAt="60" lineEndAt="3" charEndAt="302"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="java.km#//@packages.0/standard"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="10" charBeginAt="304" lineEndAt="10" charEndAt="333"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="java.km#//@requires.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="12" charBeginAt="335" lineEndAt="12" charEndAt="360"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="java.km#//@usings.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="20" charBeginAt="679" lineEndAt="20" charEndAt="845"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="25" charBeginAt="741" lineEndAt="25" charEndAt="843"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="25" charBeginAt="761" lineEndAt="25" charEndAt="767"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="25" charBeginAt="771" lineEndAt="25" charEndAt="843"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="26" charBeginAt="776" lineEndAt="26" charEndAt="782"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="26" charBeginAt="786" lineEndAt="26" charEndAt="838"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="26" charBeginAt="776" lineEndAt="26" charEndAt="838"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString/@body/@statement.0"/>
+  </references>
+  <messages language="english" type="Mapping" value="Parsing of PackageDecl" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="Parsing of UsingStmt" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="Parsing of ClassDecl" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="Parsing of Operation" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" value="Parsing of Basictype" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" value="Parsing of FBlock" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" value="Parsing of ResultCall" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" value="Parsing of FStringLiteral" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" value="Parsing of FAssignement" traces="//@traces.9"/>
+</traceability:TraceModel>

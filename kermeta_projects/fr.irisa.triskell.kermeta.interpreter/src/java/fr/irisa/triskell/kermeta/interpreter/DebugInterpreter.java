@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.22 2007-10-15 07:13:58 barais Exp $
+/* $Id: DebugInterpreter.java,v 1.23 2008-04-28 11:50:55 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -9,26 +9,49 @@
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.EmptyStackException;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Stack;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.debug.core.DebugException;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.IBreakpointManager;
+import org.eclipse.debug.core.model.IBreakpoint;
+import org.eclipse.debug.core.model.ILineBreakpoint;
+import org.eclipse.debug.core.model.RuntimeProcess;
+import org.kermeta.interpreter.InterpreterPlugin;
+import org.kermeta.interpreter.internal.debug.AssignmentDebugInterpreter;
+import org.kermeta.interpreter.internal.debug.CallFeatureDebugInterpreter;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
-import fr.irisa.triskell.kermeta.language.behavior.Block;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
-import fr.irisa.triskell.kermeta.language.behavior.Conditional;
-import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
-import fr.irisa.triskell.kermeta.language.behavior.Loop;
-import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
+import fr.irisa.triskell.traceability.TextReference;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
  * This is the ExpressionInterpreter improved to handle the debugging mode
@@ -39,448 +62,563 @@ import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
  */
 public class DebugInterpreter extends ExpressionInterpreter {
 
-    EObject current_eobject;
-    Block current_block;
-    
-    public static final String DEBUG_STEPEND = "stepEnd";
-    public static final String DEBUG_STEPINTO = "stepInto";
-    public static final String DEBUG_STEPOVER = "stepOver";
-    
-    public boolean interpreterSuspended = true;
-
-    public String oldCommand = "";
-    /** The stop condition for the stepOver command */ 
-    protected CallFrame stepOverCallFrame;
-    /** This frame is used when we switch from stepInto to stepOver*/
-    protected CallFrame current_frame;
-    /** A table of { oid : runtimeObject }*/
-    protected Hashtable currentVisibleRuntimeObjects;
-    
-    public fr.irisa.triskell.kermeta.language.structure.Class entryObject ;
-    public Operation entryOperation ;
-    public ArrayList entryArguments  ;
-    public AbstractKermetaDebugCondition debugCondition;
-    
-    /**
-     * @param pMemory
-     */
-    public DebugInterpreter(RuntimeMemory pMemory) {
-        super(pMemory);
-        currentState = DEBUG_RESUME;
-        currentVisibleRuntimeObjects = new Hashtable();
-    }
-    
-    /**
-	 * Initialize the foperation argument on the ro_target Runtime Object;
-	 *  arguments to this call are given as an ArrayList;
-	 *  no invocation of operation is done here.
-	 *  Note : invoke() method of ExpressionInterpreter is chunked into
-	 *  initialize and invoke_debug. 
-	 * @param ro_target
-	 * @param foperation
-	 * @param arguments
+	/**		
+	 * When stepping some nested expression, you want the pointer to go on the next line instead of staying on the same line for each nested expression.
+	 * ex: Let's take this piece of code
+	 * 		var s : String init a.initialize.toString
+	 * 		stdio.writeln(s)
+	 * Assume that there is a breakpoint on the variable declaration. When stepping you want to go on the writeln code.
 	 */
-	public void initialize(RuntimeObject ro_target,Operation foperation,ArrayList arguments) {
-		
-		fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getKCoreObject();
-		
-		entryObject = self_type;
-		entryOperation = foperation;
-		entryArguments = arguments;
-		
-		CallableOperation op = new CallableOperation(foperation, self_type);
-		// Create a context for this operation call, setting self object to ro_target
-		// We should have a CallFeature
-        interpreterContext.pushOperationCallFrame(ro_target, op, arguments, null);
-        current_frame = getInterpreterContext().peekCallFrame();
+	private FakeBreakpoint _lastHitBreakpoint;
+	
+	/**		
+	 * A stack of breakpoints calculated each time the debug client requests a resume, step or step into action.
+	 * A stack is used because when stepping into an expression you may need previous pointer to step in nested expressions or to calculate the next breakpoint.
+	 */
+	private Stack<FakeBreakpoint> _breakpoints = new Stack<FakeBreakpoint>();
+	
+	/**
+	 * Look for a line breakpoint that is situated in the same file and line number as the textual trace of the target expression.
+	 * If the target expression has no textual trace, the research is impossible and this methods returns null.
+	 * @param expression The target expression.
+	 * @return A FakeBreakpoint if a line breakpoint matches the textual reference associated to the target expression and null otherwise.
+	 * @throws CoreException
+	 */
+	private FakeBreakpoint hasReachedBreakpoint(Expression expression) throws CoreException {
+		// Getting the tracer
+    	Tracer tracer = getKermetaUnit().getTracer();
+    	if ( tracer != null ) {
+    		// Getting a text reference on the target if any
+    		TextReference reference = tracer.getFirstTextReference( expression );
+    		if ( reference != null ) {
+    			// Check wether a breakpoint is set on the line of the text reference
+    			IBreakpointManager manager = DebugPlugin.getDefault().getBreakpointManager();
+    			IBreakpoint[] breakpoints = manager.getBreakpoints( "org.kermeta.debug" );
+    			for ( IBreakpoint p : breakpoints ) {
+    				if ( p instanceof ILineBreakpoint ) {
+    					IResource resource = p.getMarker().getResource();
+    					int lineNumber = ((ILineBreakpoint) p).getLineNumber();
+    					IFile file = ResourceHelper.getIFile( reference.getFileURI() );
+    					if ( file != null && file.equals(resource) && lineNumber == reference.getLineBeginAt() )
+    						return lineBreakpointHit(lineNumber, reference.getFileURI());
+    				}
+    			}
+    		}
+    	}
+    	return null;
 	}
 	
 	/**
-	 * Run the execution of the program
-	 * The argument is probably not well placed!! 
-	 * But we need it -- think about how to make KermetaConsole available
-	 * FIXME : put the console handling somewhere
+	 * When a line breakpoint is hit, update some fields.
+	 * @param lineNumber The line where the line breakpoint is situated.
+	 * @param file The file where the line breakpoint is situated.
+	 * @return The FakeBreapoint created from the given line number and file.
 	 */
-	public Object invoke_debug()
-	{
-		Object result = memory.voidINSTANCE;
-		
-		// Resolve this operation call
-		result = (RuntimeObject)this.accept(entryOperation);
-		
-		// finally block removed
-		// {
-		
-		// After operation has been evaluated, pop its context
-		interpreterContext.popCallFrame();
-		// Remote side of the interpreter reads this attribute and act accordingly
-		currentState = DEBUG_TERMINATE;
-		// Run a last time the debug command that tests if we can interrupt.....laborious
-		shouldTerminate();
-		processDebugCommand(entryOperation);
-		// }
-		return result;
+	private FakeBreakpoint lineBreakpointHit(int lineNumber, String file) {
+		FakeBreakpoint b = new FakeBreakpoint(lineNumber, file);
+		if ( ! b.equals(_lastHitBreakpoint) ) {
+			_lastHitBreakpoint = b;
+			clearBreakpoints();
+			_breakpoints.add(b);
+		} else
+			b = null;
+		return b;
 	}
-    
+	
 	/**
-	 * Visit an operation definition. 
-	 * This visit usually follows the visit of a CallFeature that is an operation call 
-	 * This has the following steps :
-	 * 	- Create an expression context for the variables defined at "top level" in this operation
-	 *
-	 * "Here" begins the debugging/execution of a Kermeta program
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
+	 * Calculate if possible the next breakpoint to hit when stepping into an expression.
+	 * @param expression The target expression.
+	 * @return True if a breakpoint has been created and false otherwise.
 	 */
-	public Object visitOperation(Operation node) {
-		Object result = memory.voidINSTANCE;
-		result = super.visitOperation(node);
-		return result;
+	public boolean stepInto(Expression expression) {
+		FakeBreakpoint b = BreakpointHelper.getNextStepIntoBreakpoint(expression, this);
+		if ( b == null )
+			b = BreakpointHelper.getNextStepBreakpoint(expression, this);
+		if ( b != null )
+			_breakpoints.push( b );			
+		return b != null;
 	}
-
-    /**
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitAssignment(fr.irisa.triskell.kermeta.behavior.Assignment)
+	
+	/**
+	 * Calculate if possible the next breakpoint to hit when stepping an expression.
+	 * @param expression The target expression.
+	 * @return True if a breakpoint has been created and false otherwise.
+	 */
+	public boolean step(Expression expression) {
+		FakeBreakpoint b = BreakpointHelper.getNextStepBreakpoint(expression, this);
+		if ( b == null ) {
+			ListIterator<CallFrame> itCF = getInterpreterContext().frame_stack.listIterator();
+			while ( itCF.hasNext() )
+				itCF.next();
+			while ( itCF.hasPrevious() && b == null ) {
+				CallFrame frame = itCF.previous();
+				popBreakpoint();
+				if ( frame.getExpression() != null ) {
+					// The current expression is nested. That means that there is some expression on the right side to evaluate.
+					// Then we need to stop on the same line.
+					if ( frame.getExpression().eContainer() instanceof CallExpression )
+						b = BreakpointHelper.getBreakpoint( (Expression) frame.getExpression(), this );
+					else
+						b = BreakpointHelper.getNextStepBreakpoint( (Expression) frame.getExpression(), this);
+				}
+				if ( b == null ) {
+					// We need to look in the stack reversely until finding an expression.
+					// Go to the end
+					ListIterator<ExpressionContext> it = frame.block_stack.listIterator();
+					for ( int i=0; i<frame.block_stack.size(); i++ )
+						it.next();
+					// Looking for an expression.
+					while ( it.hasPrevious() && b == null ) {
+						ExpressionContext ec = it.previous();
+						if ( ec.statement != null )
+							// We find one, let's take the next statement.
+							b = BreakpointHelper.getNextStepBreakpoint( (Expression) ec.statement, this);
+					}		
+				}
+			}
+		}
+		if ( b != null )
+			_breakpoints.push( b );
+		return b != null;
+	}
+	
+	/**
+	 * Poping safely a breakpoint.
+	 * @return A breakpoint if the stack is not empty and null otherwise.
+	 */
+	private FakeBreakpoint popBreakpoint() {
+		if ( _breakpoints.isEmpty() )
+			return null;
+		else
+			return _breakpoints.pop();
+	}
+	
+	private void clearBreakpoints() {
+		_breakpoints.clear();
+	}
+		
+	/**
+	 * The target expression may have hit a breakpoint. To determine that, the textual reference of the target expression is retrieved and
+	 * compared to the list of breakpoints.
+	 * @param expression The target expression.
+	 * @return A breakpoint hit by the expression and null otherwise.
+	 * @throws CoreException 
+	 */
+	private FakeBreakpoint shouldStop(Expression expression) throws CoreException {
+		FakeBreakpoint b = hasReachedBreakpoint(expression);
+		if ( b == null ) {
+			Tracer tracer = getKermetaUnit().getTracer();
+			if ( tracer != null ) {
+				// Getting a text reference on the target if any
+				TextReference reference = tracer.getFirstTextReference( expression );
+				if ( reference != null ) {
+					try {
+						FakeBreakpoint temp = _breakpoints.peek();
+						if ( temp.getLineNumber() == reference.getLineBeginAt() && temp.getFile().equals(reference.getFileURI()) )
+							b = temp;
+					} catch (EmptyStackException e) {}
+				}
+			}
+		}
+		return b;
+	}
+	
+	/**		The eclipse process created for this interpreter.		*/
+	private RuntimeProcess _fakeProcess;
+	
+	/**		The eclipse process associated to this interpreter.		*/
+	public void setFakeProcess(RuntimeProcess process) {
+		_fakeProcess = process;
+	}
+		
+	/**
+	 * Answering an "ok" message for acknowledgement.
+	 */
+	private void ok() {
+		_requestWriter.println("ok");
+		_requestWriter.flush();
+	}
+	
+	/**
+	 * Listens to requests from the debug ui interface and fire actions.
+	 */
+	class RequestListenerJob extends Job {
+		
+		public RequestListenerJob() {
+			super("Kermeta Request Listener");
+			setSystem(true);
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.IProgressMonitor)
+		 */
+		protected IStatus run(IProgressMonitor monitor) {
+			String request = "";
+			while (! _terminated && request != null) {
+				try {
+					request = _requestReader.readLine();
+					InterpreterPlugin.internalLog.debug("Debug Request : " + request);
+					if (request != null) {
+						if ( request.equals("stack") ) {
+							String stackInfo = getStackInfo();
+							_requestWriter.println( stackInfo );
+							_requestWriter.flush();
+						} else if ( request.equals("step") ) {
+							ok();
+							_steppingStatus = SteppingStatus.STEPPING;
+							_eventWriter.println("resumed step");
+							_eventWriter.flush();
+							resume();
+						} else if ( request.equals("stepInto") ) {
+							ok();
+							_steppingStatus = SteppingStatus.STEPPING_INTO;
+							_eventWriter.println("resumed step");
+							_eventWriter.flush();
+							resume();
+						} else if ( request.equals("resume") ) {
+							_steppingStatus = SteppingStatus.RESUMING;
+							clearBreakpoints();
+							ok();
+							_eventWriter.println("resumed client");
+							_eventWriter.flush();
+							resume();
+						} else if ( request.equals("exit") ) {
+							_fakeProcess.terminate();
+							resume();
+							terminate();
+							return Status.OK_STATUS;
+						} else if ( request.startsWith("var ") ) {
+							String valueInfo = getValueInfo(request);
+							_requestWriter.println( valueInfo );
+							_requestWriter.flush();
+						}
+					}
+				} catch (IOException e) {
+					terminate();
+				} catch (Throwable e) {
+					e.printStackTrace();
+					memory.getInterpreter().print( e.getLocalizedMessage() );
+					terminate();
+				}
+			}
+			return Status.OK_STATUS;
+		}
+		
+	}
+	
+	private boolean _suspended = true;
+	    
+	/*
+	 * 
+	 * Server fields to communicate on requests.
+	 * 
+	 */
+    private ServerSocket _requestServerSocket;
+    private Socket _requestSocket;
+    private BufferedReader _requestReader;
+    private PrintWriter _requestWriter;
+    
+    /*
+     * 
+     * Server fields to communicate on events.
+     * 
      */
-    public Object visitAssignment(Assignment node) {
-    	Object result = memory.voidINSTANCE;
-    	shouldTerminate();
-    	processDebugCommand(node);
-    	result = super.visitAssignment(node);
-        processPostCommand(node);
-        return result;
+    private ServerSocket _eventServerSocket;
+    private Socket _eventSocket;
+    private PrintWriter _eventWriter;
+   // private BufferedReader _eventReader;
+    
+    
+    public enum SteppingStatus {
+    	STEPPING,
+    	STEPPING_INTO,
+    	RESUMING
     }
     
+    private SteppingStatus _steppingStatus = SteppingStatus.RESUMING;
+        
+    public SteppingStatus getSteppingStatus() {
+    	return _steppingStatus;
+    }
+    
+    private RequestListenerJob _requestListener;
+    
+    
+    public DebugInterpreter(RuntimeMemory memory, int requestPort, int eventPort) throws IOException {
+    	super( memory );
+    	/*
+    	 * 
+    	 * Creating the server.
+    	 * 
+    	 */
+    	_requestServerSocket = new ServerSocket( requestPort );
+    	_eventServerSocket = new ServerSocket( eventPort );
+    }
+    
+    /**
+     * When the interpreter is ready, it is waiting for a client for the use of this interpreter.
+     * @throws IOException
+     */
+    public void waitForClient() throws IOException {
+    	_requestSocket = _requestServerSocket.accept();
+    	/*		Now that a client just connected, streams can initialized.		*/
+    	_requestReader = new BufferedReader( new InputStreamReader(_requestSocket.getInputStream()) );
+    	_requestWriter = new PrintWriter( _requestSocket.getOutputStream() );
+ 
+       	_eventSocket = _eventServerSocket.accept();
+    	/*		Now that a client just connected, streams can initialized.		*/
+       	_eventWriter = new PrintWriter( _eventSocket.getOutputStream() );
+    	//_eventReader = new BufferedReader( new InputStreamReader(_eventSocket.getInputStream()) );
+
+    }
+    
+    /**
+     * Terminate the interpretation sending a "terminated" message.
+     */
+    public void terminate() {
+    	if ( ! _terminated ) {
+	    	// Sending a stop event
+			_eventWriter.println("terminated");
+			_eventWriter.flush();
+			_terminated = true;
+			try {
+				close();
+				_fakeProcess.terminate();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (DebugException e) {
+				e.printStackTrace();
+			}
+    	}
+    }
+    
+    /**
+     * Interpretation is finished, close the server and the associated sockets.
+     * @throws IOException
+     */
+    public void close() throws IOException {
+    	_requestSocket.close();
+    	_requestReader.close();
+    	_eventSocket.close();
+    	_eventWriter.close();
+    	
+    	_requestServerSocket.close();
+    	_eventServerSocket.close();
+    }
+    
+    
+    protected KermetaUnit getKermetaUnit() {
+    	return memory.getUnit();
+    }
+    
+    /**
+     * The interpreter may need to be suspended. If so, then wait for a resume request.
+     * @param node
+     */
+    public boolean stopIfNecessary(Expression node) {
+    	FakeBreakpoint breakpoint = null;
+    	try {
+    		breakpoint = shouldStop(node);
+    	} catch (CoreException e) {
+    		e.printStackTrace();
+    	}
+    	if ( breakpoint != null ) {
+    		switch ( _steppingStatus ) {
+    		case STEPPING :
+        		// A step action has been performed.
+    			_eventWriter.println("suspended step");
+    			_eventWriter.flush();
+    			waitForARequest();
+    			break;
+    			
+    		case STEPPING_INTO :
+        		// A step action has been performed.
+    			_eventWriter.println("suspended step");
+    			_eventWriter.flush();
+    			waitForARequest();
+    			break;
+    			
+    		default :
+        		// A breakpoint has been reached.
+    			_eventWriter.println("suspended breakpoint " + breakpoint.toString());
+    			_eventWriter.flush();
+    			waitForARequest();
+    			break;
+    		}
+    	}
+    	return breakpoint != null;
+    }
+    
+    /**
+     * Deblocking this interpreter.
+     */
+    synchronized private void resume() {
+    	notify();
+    	_suspended = false;
+    }
+    
+    /**
+     * Blocking this thread for a request.
+     */
+    synchronized private void waitForARequest() {
+    	try {
+    		if ( ! _terminated ) {
+    			_suspended = true;
+    			wait();
+    		}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    /**
+     * A stack trace info consists in the file name, the line number, the class, the operation name and the variables.
+     * A variable can be a simple variable, a parameter, a property.
+     * @return a String representing the stack trace.
+     */
+    private String getStackInfo() {
+    	String stackInfo = "";
+    	synchronized( interpreterContext.frame_stack ) {
+    		stackInfo = StackFactory.getFrom( interpreterContext.getFrameStack() );
+       	}
+    	return stackInfo;
+    }
+    
+    /**
+     * Gives the string representation of the value of a variable, or a parameter or a property.
+     * @param request The string encoded object for which the value is calculated.
+     * @return The string representation of the value of an object encoded in string format.
+     */
+    private String getValueInfo(String request) {
+    	String[] strings = request.split("\\|");
+    	// Getting the frame
+    	String[] firstInfo = strings[0].split(" ");
+		int stackId = Integer.parseInt( firstInfo[1] );
+		CallFrame frame = interpreterContext.frame_stack.get(stackId);
+		// Getting the first variable
+		RuntimeObject runtimeVariable = null;
+		if ( frame instanceof CallFrame ) {
+			Variable var = ((CallFrame) frame).getVariableByName(firstInfo[2]);
+			if ( var != null )
+				runtimeVariable = var.getRuntimeObject();
+			else if ( frame.getSelf().getProperties().get( firstInfo[2] ) != null )
+				runtimeVariable = frame.getSelf().getProperties().get( firstInfo[2] );
+		}
+		// Getting the real variable
+		for ( int i = 1; i < strings.length; i++ ) {
+			// Here, we are looking for a property or a collection element
+			try {
+				// looking for a possible collection element.
+				int index = Integer.parseInt( strings[i] );
+				List<Object> collection = (List<Object>) runtimeVariable.getJavaNativeObject();
+				runtimeVariable = (RuntimeObject) collection.get(index);
+			} catch (NumberFormatException e1) {
+				// This is a property.
+				// the properties getting can throw a null pointer exception.
+				// That means that this property has not been set.
+				try {
+					runtimeVariable = runtimeVariable.getProperties().get( strings[i] );
+				} catch (NullPointerException e2) {
+					runtimeVariable = null;
+				}
+			}
+		}
+		// If the property has not been set, use the void instance.
+		if ( runtimeVariable == null )
+			runtimeVariable = memory.voidINSTANCE;
+		
+		// Setting the value
+		String value = runtimeVariable.toUserString();
+		// We do not want to display properties for Void objects
+		
+		if ( runtimeVariable != memory.voidINSTANCE ) {
+			if ( runtimeVariable.getMetaclass() != null ) {
+				Class metaclass = (Class) runtimeVariable.getMetaclass().getKCoreObject();
+				if ( metaclass.getTypeDefinition() instanceof ClassDefinition ) {
+					ClassDefinition cd = (ClassDefinition) metaclass.getTypeDefinition();
+					if ( KermetaModelHelper.ClassDefinition.isCollection(cd) ) {
+						List<Object> collection = (List<Object>) runtimeVariable.getJavaNativeObject();
+						if ( collection != null )
+							for ( int i = 0; i < collection.size(); i++ )
+								value += "|index*" + i;
+					}			
+					for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(cd) ) {
+						if ( p.isIsDerived() )
+							value += "|property*" + p.getName();
+						else if ( p.isIsComposite() )	
+							value += "|attribute*" + p.getName();
+						else
+							value += "|reference*" + p.getName();
+					}
+				}
+			}
+		}
+		return value;
+    }
+    
+    public RuntimeObject invoke(RuntimeObject mainClass, Operation mainOperation, List<RuntimeObject> parameters) {
+    	RuntimeObject result = null;
+    	try {
+			waitForClient();
+			// At starting, debugger is suspended.
+			_suspended = true;
+			// Notify that the debugger started.
+			notifyEvent("started");
+			// Waiting for a resume request from the debug target.
+			waitForResumeRequest();
+			notifyEvent("resumed client");
+			_suspended = false;
+	    	/*		Launch a specific job to listen requests.		*/
+	    	_requestListener = new RequestListenerJob();
+	    	_requestListener.schedule();
+			result = (RuntimeObject) super.invoke(mainClass, mainOperation, parameters);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			terminate();
+		}
+		return result;
+    }
+
+    private void notifyEvent(String type) {
+    	synchronized (_eventSocket) {
+        	_eventWriter.println(type);
+        	_eventWriter.flush();			
+		}
+    }
+    
+    private void waitForResumeRequest() throws IOException {
+    	String s = "";
+    	while ( ! s.equals("resume") ) {
+    		s = _requestReader.readLine();
+    		if ( ! s.equals("resume") )
+    			sendRequestAnwser("");
+    	}
+    	ok();
+    }
+    
+    private void sendRequestAnwser(String content) {
+    	synchronized ( _requestSocket ) {
+			_requestWriter.println(content);
+			_requestWriter.flush();
+		}
+    }
+        
     /** 
      * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitCallFeature(fr.irisa.triskell.kermeta.behavior.CallFeature)
      */
     public Object visitCallFeature(CallFeature node) {
-    	Object result = memory.voidINSTANCE;
-    	// (Simple test to terminate)
-    	//shouldTerminate();
-    	processDebugCommand(node);
-    	result = super.visitCallFeature(node);
-    	processPostCommand(node);
-        return result;
+    	// Do not visit the call feature if the interpreter is terminated.
+    	if ( _terminated )
+    		return null;
+    	return CallFeatureDebugInterpreter.doIt(node, this);
+    }   
+
+    @Override
+    public Object visitAssignment(Assignment node) {
+    	if ( _terminated )
+    		return null;
+    	return AssignmentDebugInterpreter.doIt(node, this);
     }
     
-
-    /**
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitBlock(fr.irisa.triskell.kermeta.behavior.Block)
-     * @note : we don't need to control neither the execution of a Block, nor 
-     * the execution of a Loop, nor FConditional : they directly contains not executable
-     * statement : so, we control only the children of those elements ( FStopCondition, the list
-     * of statements inside the Block, etc.)
-     * (We don't have to stop in a block decl.)
-     * We just need to stop the execution
-     */
-    public Object visitBlock(Block node)  {
-    	shouldTerminate();
-    	return super.visitBlock(node);
-    }
-    /**
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitConditional(fr.irisa.triskell.kermeta.behavior.Conditional)
-	 */
-	public Object visitConditional(Conditional node) {
-		shouldTerminate();
-		return super.visitConditional(node);
-	}
-
-	/**
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitLoop(fr.irisa.triskell.kermeta.behavior.Loop)
-	 */
-	public Object visitLoop(Loop node) {
-		shouldTerminate();
-		return super.visitLoop(node);
-	}
-
-	/**
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitCallSuperOperation(fr.irisa.triskell.kermeta.behavior.CallSuperOperation)
-	 */
-	public Object visitCallSuperOperation(CallSuperOperation node) {
-		Object result = memory.voidINSTANCE;
-		shouldTerminate();
-		processDebugCommand(node);
-		result = super.visitCallSuperOperation(node);
-		processPostCommand(node);
-		return result;
-	}
-	
-	
-
-	/**
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitJavaStaticCall(fr.irisa.triskell.kermeta.behavior.JavaStaticCall)
-	 */
-	public Object visitJavaStaticCall(JavaStaticCall node) {
-		Object result = memory.voidINSTANCE;
-		shouldTerminate();
-		processDebugCommand(node);
-		result = super.visitJavaStaticCall(node);
-		processPostCommand(node);
-		return result;
-	}
-	
-
-	
-	/**
-	 * Visit a variable declaration also deserves a stop in the step mode. 
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitVariableDecl(fr.irisa.triskell.kermeta.behavior.VariableDecl)
-	 */
-	public Object visitVariableDecl(VariableDecl node) {
-		Object result = memory.voidINSTANCE;
-		shouldTerminate();
-		processDebugCommand(node);
-		result = super.visitVariableDecl(node);
-		processPostCommand(node);
-		return result;
-	}
-
-	
-
-	/** 
-	 * Called after a visit is done : this method updates the "currentState" attribute
-	 * of the debug interpreter according to the kind of command the user asked 
-	 * for (typically, stepInto, stepOver, or resume), so that the "KermetaRemoteInterpreter"  can block its thread
-	 * accordingly.
-	 * @param node the node of the visit that preceded the call of this postCommand */
-    public void processPostCommand(fr.irisa.triskell.kermeta.language.structure.Object node)
-    {
-    	current_frame = getInterpreterContext().peekCallFrame();
-    	
-    	// If it is step over and
-    	// if the stepOverCallframe that conditioned the stop of the stepOver was poped
-    	// (this case occurs for example when a step-over command follows a step-into),
-    	// then we set it to the last peeked frame.
-    	if (isSteppingOver() && !interpreterContext.getFrameStack().contains(stepOverCallFrame))
-    	{
-    		stepOverCallFrame = getInterpreterContext().peekCallFrame();
-    	}
-    	// If it is a step-over, and we are in the stepOverCallFrame, and the last
-    	// statement that had to be evaluated correspond to the node that we just visited,
-    	// then it means the visit of the statement is completed, so, we can stop.
-    	if (isSteppingOver() && current_frame.equals(stepOverCallFrame)
-    			 &&
-    			 node.equals(current_frame.peekExpressionContext().getStatement())
-    			 && 
-    			 !(node instanceof Block)) 
-    	{
-    		setSuspended(true, DEBUG_STEPEND);
-    	} 
-    	// If command is a step-into, then we stop systematically after a visit 
-    	else if (isSteppingInto() ) 
-    	{
-    		setSuspended(true, DEBUG_STEPEND);
-    	}
-    }
-
-    /**
-     * Decorating method called before the appropriate visitMethod executions.
-     * @param current_node
-     */
-    public Object processDebugCommand(EObject current_node)
-    {	
-    	if (getDebugCondition()!=null) 
-    	{	// Tell the debug condition where we are
-    		initVisibleRuntimeObjects();
-    		getDebugCondition().setCurrentNode(current_node);
-    		getDebugCondition().blockInterpreter();
-    	}
-    	return null;
-    }
-    
-	/*
-	 * Special accessors for interactive debug mode
-	 * 
-	 */
-	
-	/** Accessors for booleans */
-	public boolean isSteppingInto()
-	{	return (getDebugCondition().getConditionType().equals(DEBUG_STEPINTO));}
-
-	public boolean isSteppingOver()
-	{	return (getDebugCondition().getConditionType().equals(DEBUG_STEPOVER));}
-	
-	
-	/** 
-	 * Put the interpreter in pause mode
-	 * @param reason choices :
-	 * 	- stepEnd
-	 *  - stepOver
-	 *  - stepInto
-	 */
-	public void setSuspended(boolean suspended, String reason)
-	{
-		interpreterSuspended = suspended;
-		currentState = reason;
-	}
-	public boolean isSuspended() { return interpreterSuspended == true; }
-	    
-	/** Returns the call frame in which the step over command has begun */
-	public CallFrame getStepOverCallFrame() {	return stepOverCallFrame; }
-	/** Sets the call frame where the step over should "stop". Called by the
-	 *  "remote side" of the interpreter
-	 *  if "top" is set to true, then stepOverCallFrame will be the top call frame
-	 *  in the stack.
-	 *   */
-	public void setStepOverCallFrame(boolean top)
-	{
-		// peekCallFrame is null if this method is called before interpreter
-		// was initialized : still sync. problems?
-		if (!getInterpreterContext().getFrameStack().isEmpty() && 
-			stepOverCallFrame == null
-		)	
-			if (top == false)
-				stepOverCallFrame = getInterpreterContext().peekCallFrame();
-			else
-			{
-				stepOverCallFrame = (CallFrame)getInterpreterContext().getFrameStack().firstElement();
-			}
-	}
-
-	/** 
-	 * Unset the stepOverCallFrame marker frame when we are no more in a 
-	 * step over mode. */
-	public void unsetStepOverCallFrame()
-	{ stepOverCallFrame = null; }
-	
-	public void setDebugCondition(AbstractKermetaDebugCondition debug_cond)
-	{
-		currentState = debug_cond.getConditionType();
-		debugCondition = debug_cond;
-	}
-	
-	public AbstractKermetaDebugCondition getDebugCondition()
-	{ return debugCondition; }
-	
-	/** 
-	 * TODO : constrain the access to the current operation call frame?
-	 * Find and return the runtimeobject given by its OID in the context of the interpreter. return null 
-	 * if the RuntimeObject was not found.
-	 */
-    public RuntimeObject getRuntimeObjectByOID(long oid)
-    {
-    	RuntimeObject result = memory.voidINSTANCE;
-    	if (getInterpreterContext().getFrameStack().isEmpty()==false 
-    		&& getInterpreterContext().peekCallFrame().hasVariables())
-    	{
-    		// We need to parse the current context?
-    		Iterator it = getInterpreterContext().peekCallFrame().getVariables().iterator();
-    		while (it.hasNext() && result == null)
-    		{
-    			Variable variable = (Variable)it.next();
-    			RuntimeObject rvalue = variable.getRuntimeObject();
-    			if (rvalue.getOId() == oid) result = rvalue;
-    		}
-    	}
-    	return result;
-    }
-    
-    
-    /** Returns a hashtable of all the RuntimeObject available in the current frame*/
-    public Hashtable initVisibleRuntimeObjects()
-    {
-    	Hashtable<String, RuntimeObject> variables = new Hashtable<String, RuntimeObject>();
-    	if (getInterpreterContext().getFrameStack().isEmpty()==false)
-    	{	
-    		for (Object fnext : getInterpreterContext().getFrameStack())
-    		{
-    			CallFrame frame = (CallFrame)fnext;
-    			if (frame.hasVariables())
-    			{
-    				// We need to parse the current context?
-    				for (Object vnext : frame.getVariables()) {
-    					Variable v =  (Variable)vnext;
-        				RuntimeObject ro = v.getRuntimeObject();
-    					variables.put(v.getName(), ro);
-    					currentVisibleRuntimeObjects.put(ro.getOId(), ro);
-    				}
-    				// Also add "self" object?
-    				currentVisibleRuntimeObjects.put(frame.getSelf().getOId(), frame.getSelf());
-    			}
-    		}
-    	}
-    	//result.putAll(getInterpreterContext().getMemory().getRuntimeObjects().values());
-    	return variables;
-    }
-    
-    /** */
-    public Hashtable getVisibleRuntimeObjects(long oid)
-    {
-    	Hashtable result = new Hashtable();
-    	RuntimeObject ro = (RuntimeObject) currentVisibleRuntimeObjects.get(oid);
-    	
-    	// try to find the object in the properties?
-    	if (ro.getProperties()!=null || !ro.getProperties().isEmpty())
-    	{
-    		Hashtable properties = ro.getProperties();
-    		Hashtable pmap = getRuntimeObjectListForProperties(properties);
-    		for (Object pmnext : pmap.entrySet())
-    		{
-    			Map.Entry next = (Map.Entry)pmnext;
-    			Object[] next_value = (Object [])next.getValue();
-    			result.put(next_value[0], next_value[1]);
-    		}
-    	}
-    	if (RuntimeObject.COLLECTION_VALUE.equals(ro.getPrimitiveType()))
-    	{
-    		Collection collection = (Collection)ro.getJavaNativeObject();
-    		Hashtable cmap = getRuntimeObjectList(collection);
-    		for (Object cmnext : cmap.entrySet())  
-    		{
-    			Map.Entry next = (Map.Entry)cmnext;
-    			Object[] next_value = (Object [])next.getValue();
-    			result.put(next_value[0], next_value[1]);
-    		}
-    	}
-    	return result;
-    }
-    
-    
-    public synchronized void updateVisibleRuntimeObjects(Hashtable vro)
-    {
-    	for (Object vronext : vro.values())
-    	{
-    		RuntimeObject next = (RuntimeObject)vronext;
-    		currentVisibleRuntimeObjects.put(next.getOId(), next);
-    	}
-    }
-    
-    protected synchronized Hashtable getRuntimeObjectList(Collection rolist)
-    {
-    	Hashtable result = new Hashtable();
-    	int i = 0;
-    	for (Object ronext : rolist)
-    	{
-    		String name = "";
-    		RuntimeObject next = (RuntimeObject)ronext;
-    		name = "["+Integer.toString(i)+"]";
-    		result.put(next.getOId(), new Object[] {name, next});
-    		i+=1;
-    	}
-    	return result;
-    }
-    
-
-    protected synchronized Hashtable getRuntimeObjectListForProperties(Hashtable romap)
-    {
-    	Hashtable result = new Hashtable();
-    	Iterator it = romap.keySet().iterator();
-    	int i = 0;
-    	for (Object knext : romap.keySet())
-    	{
-    		String name = (String)knext;
-    		RuntimeObject ro = (RuntimeObject)romap.get(name);
-    		result.put(ro.getOId(), new Object[] {name, ro}); 
-    		i+=1;
-    	}
-    	return result;
-    }
-    
-
-    /**
-     * tool function
-     * @return the name property of the runtime object if available
-     */
-    public static String getRONameProp(RuntimeObject rObject){
-    	RuntimeObject roName = (RuntimeObject)rObject.getProperties().get("name");
-        return  roName == null ? "" : (String)roName.getJavaNativeObject().toString();
-    }
 }

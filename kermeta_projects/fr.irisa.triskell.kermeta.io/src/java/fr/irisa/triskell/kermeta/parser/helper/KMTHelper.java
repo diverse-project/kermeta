@@ -1,4 +1,4 @@
-/* $Id: KMTHelper.java,v 1.1 2008-01-04 14:16:06 dvojtise Exp $
+/* $Id: KMTHelper.java,v 1.2 2008-04-28 11:50:24 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMTHelper.java
  * License    : EPL

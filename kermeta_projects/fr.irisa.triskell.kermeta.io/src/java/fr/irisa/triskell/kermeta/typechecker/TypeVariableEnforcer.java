@@ -1,4 +1,4 @@
-/* $Id: TypeVariableEnforcer.java,v 1.11 2007-10-12 09:20:40 ftanguy Exp $
+/* $Id: TypeVariableEnforcer.java,v 1.12 2008-04-28 11:50:10 ftanguy Exp $
 * Project : Kermeta io
 * File : GenericTypeSubstitution.java
 * License : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
@@ -69,8 +70,14 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	 */
 	public Object visitFunctionType(FunctionType arg0) {
 		FunctionType result = struct_factory.createFunctionType();
-		result.setLeft(getBoundType(arg0.getLeft(), bindings));
-		result.setRight(getBoundType(arg0.getRight(), bindings));
+		Type boundType = getBoundType(arg0.getLeft(), bindings);
+		result.setLeft(boundType);
+		if ( boundType.eContainer() == null )
+			result.getContainedType().add( boundType );
+		boundType = getBoundType(arg0.getRight(), bindings);
+		result.setRight(boundType);
+		if ( boundType.eContainer() == null )
+			result.getContainedType().add( boundType );
 		return result;
 	}
 	
@@ -161,7 +168,10 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = arg0.getType().iterator();
 		while(it.hasNext()) {
 			fr.irisa.triskell.kermeta.language.structure.Type t = it.next();
-			result.getType().add(getBoundType(t, bindings));
+			Type boundType = getBoundType(t, bindings);
+			result.getType().add(boundType);
+			if ( boundType.eContainer() == null )
+				result.getContainedType().add(boundType);
 		}
 		return result;
 	}

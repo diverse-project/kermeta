@@ -1,4 +1,4 @@
-/* $Id: AbstractChecker.java,v 1.2 2007-07-20 15:08:18 ftanguy Exp $
+/* $Id: AbstractChecker.java,v 1.3 2008-04-28 11:50:11 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : AbstractChecker.java
  * License    : EPL

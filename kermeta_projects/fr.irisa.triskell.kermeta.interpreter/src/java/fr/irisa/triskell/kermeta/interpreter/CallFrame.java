@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.22 2007-08-08 13:00:01 dvojtise Exp $
+/* $Id: CallFrame.java,v 1.23 2008-04-28 11:50:55 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : EPL
@@ -67,9 +67,9 @@ public abstract class CallFrame {
      * pop an expression context
      *
      */
-    public void popExpressionContext()
-    {
-        block_stack.pop();
+    public void popExpressionContext() {
+    	if ( ! block_stack.isEmpty() )
+    		block_stack.pop();
     }
     
     public Variable getVariableByName(String name) {

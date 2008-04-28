@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass6.java,v 1.12 2008-02-14 07:13:16 uid21732 Exp $
+/* $Id: Ecore2KMPass6.java,v 1.13 2008-04-28 11:50:12 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -105,12 +105,14 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 				EAnnotation tgtAnnot = (EAnnotation) refs.get(0);
 				fr.irisa.triskell.kermeta.language.structure.Object tgtElt = nestedAnnotMap.get(tgtAnnot);
 
-				for ( Object annot_name : node.getDetails().keySet() ) {
-					Tag tag = StructureFactory.eINSTANCE.createTag();
-					tag.setName((String) annot_name);
-					tag.setValue((String) node.getDetails().get(annot_name));
-					tgtElt.getOwnedTags().add(tag); // owned by this element
-					tgtElt.getTag().add(tag); // this element is tagged
+				if ( tgtElt != null ) {
+					for ( Object annot_name : node.getDetails().keySet() ) {
+						Tag tag = StructureFactory.eINSTANCE.createTag();
+						tag.setName((String) annot_name);
+						tag.setValue((String) node.getDetails().get(annot_name));
+						tgtElt.getOwnedTags().add(tag); // owned by this element
+						tgtElt.getTag().add(tag); // this element is tagged
+					}
 				}
 			}
 		}

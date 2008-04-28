@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.79 2008-04-09 07:28:36 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.80 2008-04-28 11:50:56 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -351,7 +351,6 @@ public class EMF2Runtime {
 			for (Object next : newlycreated_runtime_objects_map.keySet()) {
 			    RuntimeObject rObject = (RuntimeObject)newlycreated_runtime_objects_map.get((EObject)next);
 			    this.populateRuntimeObject(rObject);
-			    unit.getRuntimeMemory().getCurrentInterpreter().shouldTerminate(); // maybe we must stop ...
 			    processedElements++;
 			    //if(monitor!= null) monitor.worked(1);
 			    progress.worked(1);
