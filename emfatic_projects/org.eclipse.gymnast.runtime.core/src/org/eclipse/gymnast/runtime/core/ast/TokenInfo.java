@@ -5,11 +5,15 @@ public class TokenInfo {
 	private final String _text;
 	private final int _offset;
 	private final int _type;
+	private final int _lineNumber;
+	private final int _column;
 	
-	public TokenInfo(String text, int offset, int type) {
+	public TokenInfo(String text, int lineNumber, int column, int offset, int type) {
 		_text = text;
 		_offset = offset;
 		_type = type;
+		_lineNumber = lineNumber;
+		_column = column;
 	}
 	
 	public String getText() {
@@ -23,4 +27,13 @@ public class TokenInfo {
 	public int getType() {
 		return _type;
 	}
+	
+	public int getLineNumber() {
+		return _lineNumber;
+	}
+	
+	public int getColumn() {
+		return _column;
+	}
+	
 }

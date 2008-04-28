@@ -42,6 +42,7 @@ public interface ASTNode {
      */
     public int getTextLength();
     
+    public int getLineNumber();
     
     
 	//

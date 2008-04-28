@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public abstract class ASTNodeImpl implements ASTNode {
 
-	private static final TokenInfo NO_TOKEN = new TokenInfo(null, -1, -1);
+	private static final TokenInfo NO_TOKEN = new TokenInfo(null, -1,  -1, -1, -1);
 	private final TokenInfo _tokenInfo;
 	
 	public ASTNodeImpl() {
@@ -30,8 +30,8 @@ public abstract class ASTNodeImpl implements ASTNode {
 		_tokenInfo = tokenInfo;
 	}
 	
-	public ASTNodeImpl(int offset, int type, String text) {
-		_tokenInfo = new TokenInfo(text, offset, type);
+	public ASTNodeImpl(int offset, int lineNumber, int column, int type, String text) {
+		_tokenInfo = new TokenInfo(text, lineNumber, column, offset, type);
 	}
 	
 	//
@@ -53,6 +53,16 @@ public abstract class ASTNodeImpl implements ASTNode {
 	public final int getTextLength() {
 		if (getText() == null) return 0;
 		else return getText().length();
+	}
+	
+	public int getLineNumber() {
+		int ln = _tokenInfo.getLineNumber();
+		if ( ln == -1 ) {
+			ASTNode firstToken = getFirstToken();
+			if ( firstToken != null ) 
+				ln = firstToken.getLineNumber();
+		}
+		return ln;
 	}
 	
 	//
