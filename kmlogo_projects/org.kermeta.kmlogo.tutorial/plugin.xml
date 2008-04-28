@@ -31,6 +31,7 @@
          point="org.eclipse.ui.cheatsheets.cheatSheetContent">
       <cheatsheet
             category="org.kermeta.cheatsheet.category"
+            composite="true"
             contentFile="cheatsheets/logo_tutorial.xml"
             id="org.kermeta.kmlogo.tutorial.cheatsheet1"
             name="Building kmlogo DSL tools with kermeta">
