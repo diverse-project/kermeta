@@ -1,4 +1,4 @@
-/* $Id: LoadingTestSuite.java,v 1.2 2007-12-14 13:25:20 vmahe Exp $
+/* $Id: LoadingTestSuite.java,v 1.3 2008-04-28 13:37:37 ftanguy Exp $
  * Project : Kermeta MDK UML2
  * File : LoadingTestSuite.java
  * License : EPL
@@ -51,7 +51,7 @@ public class LoadingTestSuite extends TestSuite {
 		String uri = null;
 		uri = "platform:/plugin/org.kermeta.uml2.umlaut.tests/" + dir + "/" + file;
 		
-		Test tests = new RunJunitFactory("platform:/resource/"+RUNTIMEPROJECTNAME+"/.bin").addTestsForUnit(uri);
+		Test tests = new RunJunitFactory().addTestsForUnit(uri);
 		addTest( tests );
 	}
 	

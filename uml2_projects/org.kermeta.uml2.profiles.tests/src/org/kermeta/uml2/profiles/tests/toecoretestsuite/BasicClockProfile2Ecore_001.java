@@ -1,5 +1,5 @@
 
-/*$Id: BasicClockProfile2Ecore_001.java,v 1.3 2008-02-20 09:39:10 dvojtise Exp $
+/*$Id: BasicClockProfile2Ecore_001.java,v 1.4 2008-04-28 13:37:45 ftanguy Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -9,32 +9,27 @@
 
 package org.kermeta.uml2.profiles.tests.toecoretestsuite;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kermeta.uml2.profiles.tests.helper.Constants;
+import org.kermeta.interpreter.api.Interpreter;
+import org.kermeta.interpreter.api.InterpreterMode;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
-//import org.kermeta.kpm.helper.RunnerHelper;
 import org.kermeta.loader.LoadingOptions;
-import fr.irisa.triskell.eclipse.console.LocalIOConsole;
+import org.kermeta.uml2.profiles.tests.helper.Constants;
 import org.kermeta.uml2.profiles.tests.helper.DiffHelper;
 import org.openembedd.tests.utils.UiTools;
 
-//import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.tests.comparison.EMFCompareModelHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
@@ -129,39 +124,32 @@ public class BasicClockProfile2Ecore_001 {
 	private void run(String input, String output, String expected_output) {
 		try {
 			/*
-			 * Getting the kermeta unit to execute.
-			 */
-			KermetaUnit unitToExecute = executable;
-			try {
-				unitToExecute = LoaderPlugin.getDefault().load( Constants.TEST_COMP_PROFILE2ECORE_LAUNCHER, null);
-			} catch (URIMalformedException e) {
-				e.printStackTrace();
-			} catch (NotRegisteredURIException e) {
-				e.printStackTrace();
-			}
-			KermetaTypeChecker typechecker = new KermetaTypeChecker( unitToExecute );
-        	typechecker.checkUnit();
-			/*
 			 * Creating the interpreter.
 			 */
-			KermetaInterpreter interpreter = new KermetaInterpreter(unitToExecute, null);
+			Interpreter interpreter = new Interpreter(Constants.TEST_COMP_PROFILE2ECORE_LAUNCHER, InterpreterMode.RUN, null);
 			/*
 			 * Setting the parameters.
 			 */
-			ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(input, interpreter.getMemory().getROFactory()));
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(output, interpreter.getMemory().getROFactory()));
-			interpreter.setEntryParameters(params);
+			String[] param = new String[2];
+			param[0] = input;
+			param[1] = output;
+			interpreter.setParameters(param);
 			interpreter.setEntryPoint("UMLProfileUtils::Main", "main");
 			/*
 			 * Start the interpreter.
 			 */
-     		interpreter.setKStream( new LocalIOConsole() );
+     		interpreter.setStreams( new LocalIOConsole() );
 			interpreter.launch();
 			/*
 			 * Assertion
 			 */
 			Assert.assertTrue( compare(output, expected_output) );
+		} catch (NotRegisteredURIException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		finally {
 		}

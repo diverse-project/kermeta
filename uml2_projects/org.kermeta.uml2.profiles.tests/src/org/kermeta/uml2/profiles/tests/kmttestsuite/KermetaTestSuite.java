@@ -1,4 +1,4 @@
-/* $Id: KermetaTestSuite.java,v 1.3 2008-02-13 16:23:20 vmahe Exp $
+/* $Id: KermetaTestSuite.java,v 1.4 2008-04-28 13:37:45 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : KermetaTestSuite.java
  * License : EPL
@@ -10,17 +10,16 @@
  */
 package org.kermeta.uml2.profiles.tests.kmttestsuite;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.kermeta.uml2.profiles.tests.Activator;
 
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
-import org.kermeta.uml2.profiles.tests.Activator;
-import org.openembedd.tests.utils.UiTools;
 
 /**
  * Test suite that calls some kermeta code
@@ -66,7 +65,7 @@ public class KermetaTestSuite extends TestSuite {
 	public void testWithFile(String dir, String file)  {
 		String uri = null;
 		uri = "platform:/plugin/" + Activator.PLUGIN_ID + "/" + dir + "/" + file;
-		Test tests = new RunJunitFactory("platform:/resource/"+RUNTIMEPROJECTNAME+"/.bin").addTestsForUnit(uri);
+		Test tests = new RunJunitFactory().addTestsForUnit(uri);
 		addTest( tests );
 	}
 	

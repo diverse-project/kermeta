@@ -1,4 +1,4 @@
-/* $Id: KermetaTestSuite.java,v 1.5 2008-02-21 15:39:10 dvojtise Exp $
+/* $Id: KermetaTestSuite.java,v 1.6 2008-04-28 13:39:51 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : KermetaTestSuite.java
  * License : EPL
@@ -69,7 +69,7 @@ public class KermetaTestSuite extends TestSuite {
 	public void testWithFile(String dir, String file)  {
 		String uri = null;
 		uri = "platform:/plugin/" + Activator.PLUGIN_ID + "/" + dir + "/" + file;
-		Test tests = new RunJunitFactory("platform:/resource/"+RUNTIMEPROJECTNAME+"/.bin").addTestsForUnit(uri);
+		Test tests = new RunJunitFactory().addTestsForUnit(uri);
 		addTest( tests );
 	}
 	

@@ -1,4 +1,4 @@
-/* $Id: KermetaTestSuite.java,v 1.2 2007-11-30 14:21:04 dvojtise Exp $
+/* $Id: KermetaTestSuite.java,v 1.3 2008-04-28 13:39:27 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -30,7 +30,7 @@ import fr.irisa.triskell.kermeta.samples.fsm.tests.Utils;
 public class KermetaTestSuite extends TestSuite {
 
 	static final String RUNTIMEPROJECTNAME = "kermeta_mdk.fsm.tests";
-    static RunJunitFactory runfactory = new RunJunitFactory("platform:/resource/"+RUNTIMEPROJECTNAME+"/.bin");
+    static RunJunitFactory runfactory = new RunJunitFactory();
     
 //    private static TestSuite _suite;
     
