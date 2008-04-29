@@ -9,7 +9,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.debug.core,
  fr.irisa.triskell.kermeta.interpreter,
  org.kermeta.io.loader,
- org.kermeta.merger
+ org.kermeta.merger,
+ org.eclipse.jdt.launching,
+ org.eclipse.jdt.core
 Eclipse-LazyStart: true
 Export-Package: org.kermeta.runner,
  org.kermeta.runner.launching,

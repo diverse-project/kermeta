@@ -24,6 +24,7 @@ Export-Package: fr.irisa.triskell.kermeta.builder,
  fr.irisa.triskell.kermeta.error,
  fr.irisa.triskell.kermeta.interpreter,
  fr.irisa.triskell.kermeta.interpreter.debug,
+ fr.irisa.triskell.kermeta.launcher,
  fr.irisa.triskell.kermeta.launcher.CommandLineOptions,
  fr.irisa.triskell.kermeta.runtime,
  fr.irisa.triskell.kermeta.runtime.basetypes,
@@ -38,3 +39,5 @@ Export-Package: fr.irisa.triskell.kermeta.builder,
  org.kermeta.interpreter.api,
  org.kermeta.interpreter.helper
 Bundle-Vendor: IRISA/INRIA
+Bundle-Activator: org.kermeta.interpreter.InterpreterPlugin
+Eclipse-LazyStart: true

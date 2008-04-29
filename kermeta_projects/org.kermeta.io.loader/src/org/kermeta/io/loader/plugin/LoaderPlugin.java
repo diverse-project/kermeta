@@ -184,6 +184,7 @@ public class LoaderPlugin extends Plugin {
 			return;
 		} catch (Throwable e) {
 			logErrorMessage("not able to initialize LoaderPlugin", e);
+			e.printStackTrace();
 			return;
 		}
 	}

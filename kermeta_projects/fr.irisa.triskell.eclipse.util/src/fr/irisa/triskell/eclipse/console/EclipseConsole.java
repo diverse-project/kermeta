@@ -1,6 +1,6 @@
 
 
-/*$Id: EclipseConsole.java,v 1.6 2008-03-07 15:15:29 dvojtise Exp $
+/*$Id: EclipseConsole.java,v 1.7 2008-04-29 10:01:30 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	EclipseConsole.java
 * License : EPL
@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
@@ -63,6 +64,10 @@ public class EclipseConsole extends IOConsole {
 	public EclipseConsole(KermetaConsole console) {
 		this.console = console;
 		initialize();
+	}
+	
+	public IDocument getDocument() {
+		return console.getDocument();
 	}
 	
 	/**

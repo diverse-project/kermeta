@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.69 2008-04-28 11:50:55 ftanguy Exp $
+/* $Id: ExpressionInterpreter.java,v 1.70 2008-04-29 10:01:22 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -132,6 +132,10 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     	memory.freeJavaMemory();
     	current_variable = null;
     }
+    
+	public void setContextClassLoader(ClassLoader cl) {
+		Thread.currentThread().setContextClassLoader(cl);
+	}
     
     /**
 	 * Invoke the foperation argument on the ro_target Runtime Object;

@@ -2,6 +2,7 @@ package org.kermeta.runner.launching;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -13,6 +14,8 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
+import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
+import org.eclipse.jdt.launching.IRuntimeClasspathEntry;
 import org.kermeta.runner.model.KDebugTarget;
 import org.kermeta.runner.model.KProcess;
 
@@ -38,13 +41,14 @@ abstract public class AbstractLaunchConfiguration implements ILaunchConfiguratio
 		String[] arguments = null;
 		if ( argumentsInline != null && ! argumentsInline.equals("") )
 			arguments = argumentsInline.split(" ");
+		List<String> classpath = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_CLASSPATH, (List<String>) null);
 		
 		try {
 			if ( mode.equals(ILaunchManager.RUN_MODE) ) {
-				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), mainClass, mainOperation, arguments, defaultPath);
+				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), mainClass, mainOperation, arguments, defaultPath, classpath);
 				DebugPlugin.newProcess(launch, basicProcess, fileName + " " + mode);
 			} else if ( mode.equals(ILaunchManager.DEBUG_MODE) ) {
-				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), requestPort, eventPort, mainClass, mainOperation, arguments, defaultPath);
+				KBasicProcess basicProcess = new KBasicProcess(fileName, isContraint(), requestPort, eventPort, mainClass, mainOperation, arguments, defaultPath, classpath);
 				String label =  fileName + " " + mode;
 				KProcess process = (KProcess) DebugPlugin.newProcess(launch, basicProcess, label);			
 				IDebugTarget target = new KDebugTarget(launch, process, requestPort, eventPort);

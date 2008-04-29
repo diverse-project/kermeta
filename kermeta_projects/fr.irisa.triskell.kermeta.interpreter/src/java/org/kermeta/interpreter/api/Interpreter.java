@@ -5,11 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.debug.core.model.RuntimeProcess;
+import org.kermeta.interpreter.InterpreterPlugin;
 import org.kermeta.interpreter.helper.RunnerHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.checker.KermetaUnitChecker;
@@ -87,6 +90,8 @@ public class Interpreter {
 	 */
 	private RuntimeProcess _process;
 	
+	/**		The class loader to use for using external java classes.		*/
+	private ClassLoader _classLoader;
 	
 	private Interpreter(InterpreterMode mode, Map<String, Object> options) {
 		_mode = mode;
@@ -250,6 +255,16 @@ public class Interpreter {
 			_realInterpreter.setFakeProcess(_process);
 	}
 	
+	/**
+	 * Sets the class loader to load external java classes needed during the execution.
+	 * @param cl
+	 */
+	public void setContextClassLoader(ClassLoader cl) {
+		URL url = InterpreterPlugin.getDefault().getBundle().getEntry("build/class");
+		URLClassLoader newCL = URLClassLoader.newInstance( new URL[] {url}, cl);
+		_classLoader = newCL;
+	}
+	
 	private boolean checkValidity() {
 		if ( _className == null )
 			_className = ModelingUnitHelper.getMainClassAsString( _kermetaUnit );
@@ -315,6 +330,7 @@ public class Interpreter {
 				_realInterpreter.setEntryPoint(_className, _operationName);
 				_realInterpreter.setParameters(_parameters);
 				_realInterpreter.setDefaultPath(_defaultPath);
+				_realInterpreter.setContextClassLoader(_classLoader);
 				return _realInterpreter.launch();
 			}
 		} catch (KermetaInterpreterError e) {

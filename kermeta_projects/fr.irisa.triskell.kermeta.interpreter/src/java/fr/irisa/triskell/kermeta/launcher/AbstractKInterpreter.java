@@ -112,6 +112,13 @@ abstract public class AbstractKInterpreter {
 		throw new KermetaInterpreterError(message);
 	}
 	
+	public void setContextClassLoader(ClassLoader cl) {
+		if ( cl != null ) {
+			Thread.currentThread().setContextClassLoader(cl);
+			_basicInterpreter.setContextClassLoader(cl);
+		}
+	}
+	
 	/**
 	 * Look for a class and an operation to use as the entry point of the program.
 	 * If the operation or the class cannot be found , throws a KermetaInterpreterError.
