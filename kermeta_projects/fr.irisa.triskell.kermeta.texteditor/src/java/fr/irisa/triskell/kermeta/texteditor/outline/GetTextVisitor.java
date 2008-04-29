@@ -1,4 +1,4 @@
-/* $Id: GetTextVisitor.java,v 1.15 2008-02-25 15:58:10 ftanguy Exp $
+/* $Id: GetTextVisitor.java,v 1.16 2008-04-29 16:09:43 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetTextVisitor.java
 * License : EPL
@@ -13,22 +13,19 @@
 
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.kermeta.io.KermetaUnit;
-import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -43,8 +40,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -55,6 +50,8 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 	
     //protected KermetaOutline outline;
 	
+	
+
 	public GetTextVisitor(/*KermetaOutline outline*/) {
 	    //this.outline = outline;
 		//pp = new KM2KMTPrettyPrinter();
@@ -233,6 +230,12 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 		return node.getName() + " : " + ppTypeFromMultiplicityElement(node);
 	}
 	
+	@Override
+	public Object visitModelType(ModelType node) {
+		
+		return node.getName();
+	}
+	
 	public String getQualifiedName(NamedElement element) {
 		if (element.eContainer() != null && element.eContainer() instanceof NamedElement)
 			return getQualifiedName( (NamedElement)element.eContainer() ) + "::" + element.getName();
@@ -271,5 +274,6 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 		}
 		return result;
 	}
+	
 }
 
