@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.16 2008-04-21 15:26:25 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.17 2008-04-29 14:52:27 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -21,7 +21,6 @@ require kermeta
 require "SetLinks.kmt"
 require "CreateBehavior.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentTraversable.kmt"
-//require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentBasedActionPerformer_Kermeta.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using km2ecore
@@ -93,12 +92,23 @@ package structure {
 			
 			var doCompile : Boolean init true
 			
+			/*
+			if not self.ecoreModelElement.isVoid() then
+				stdio.writeln("Operation.applyPass2() - self: " + self.toString() + " - self.ecoreModelElement: " + self.ecoreModelElement.toString())
+			*/
+			
 			// This test is there, because some methods may be compiled as Static methods via Simk like the method: times on Integer
 			if not self.container.asType(ClassDefinition).superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
 				if self.container.asType(ClassDefinition).getEMFInstanceClassName() != "" then
 					doCompile := false
 				end
 			end
+			if self.getEMFStatic() != "" then
+				doCompile := false
+				var doSimk : Boolean init true
+			end
+			
+			stdio.writeln("Operation.applyPass2() - self: " + self.name + " - self.ecoreModelElement: " + self.ecoreModelElement.toString() + " - doCompile: " + doCompile.toString())
 			
 			if doCompile then
 				self.setLinks(context)

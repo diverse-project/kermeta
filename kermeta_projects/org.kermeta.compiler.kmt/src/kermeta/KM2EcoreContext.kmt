@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.8 2008-04-21 15:26:53 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.9 2008-04-29 14:52:27 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -18,19 +18,34 @@ require "common/KeywordList.kmt"
 require "common/TypeMapping.kmt"
 require "helper/kermeta/KermetaHelper.kmt"
 require "http://www.kermeta.org/Traceability"
+require "http://www.kermeta.org/simk"
+require "pass0/Pass0.kmt"
 
 using kermeta::language
 using kermeta::language::structure
 using km2ecore::helper::kermeta
 using traceability
 using kermeta::persistence
+using simk
 
 class KM2EcoreContext
 {
-	/** modeling units source */
+	/** The input model (as input of the transformation) */
+	attribute kmInput : String [1..1]
+	
+	/** The input model (as input of the transformation) */
+	attribute traceabilityInput : String [1..1]
+	
+	/** The output Ecore models (as output of the transformation) */
+	attribute ecoreOutputs : String [1..*]
+	
+	/** The simk model (as output of the transformation) */
+	attribute simkOutput : String [1..1]
+	
+	/** The modeling units source */
 	reference mus : oset ModelingUnit [1..*]
 	
-	/** thee choosen compiling mode */
+	/** The choosen compiling mode */
 	attribute mode : CompilingMode [1..1]
 	
 	/** Unique instance of the JavaKeyWordList */
@@ -39,24 +54,61 @@ class KM2EcoreContext
 	/** Unique instance of the JavaTypeMapping */
 	reference javaTypeMapping : JavaTypeMapping [0..1]
 	
-	/**	The trace model dedicated to the km model used for the transformation */
-	reference traceModel : TraceModel[1..1]
+	/**  */
+	reference inputRepository : EMFRepository [1..1]
+	
+	/**  */
+	reference outputRepository : EMFRepository [1..1]
+	
+	/**	The trace model dedicated to the km model (kmt2km) used for the transformation */
+	reference traceModel : TraceModel [1..1]
+	
+	reference simkModel : SIMKModel [1..1]
 	
 	//attribute primitiveType_Type : PrimitiveType_Type
 	
 	operation initialize(modelInput : String, traceInput : String) : Void is do
+	
+		self.kmInput := modelInput
+		self.traceabilityInput := traceInput
+		
 		// Initializing the java keywords list.
 		javaKeyWordList := JavaKeyWordList.new
 		javaKeyWordList.initialize()
+		
 		// Initializing the java type mappings.
 		javaTypeMapping := JavaTypeMapping.new
 		javaTypeMapping.initialize()
+		
 		// Loading the km model and its possible trace model.
-		var repository : EMFRepository init EMFRepository.new
-		var modelResource : Resource init repository.getResource(modelInput)
+		self.inputRepository := EMFRepository.new
+		var modelResource : Resource init self.inputRepository.getResource(modelInput)		
 	    mus.add( modelResource.instances.one.asType(ModelingUnit) )
-	    var traceResource : Resource init repository.getResource(traceInput)
-	    traceModel := traceResource.instances.one.asType(TraceModel)
+	    
+	    if (not traceInput.isVoid()) and (traceInput != "")  then
+			var traceResource : Resource init self.inputRepository.getResource(traceInput)
+	    	traceModel := traceResource.instances.one.asType(TraceModel)
+	    	// Adding source information to km objects
+			SourceTracer.new.addSourceInformation( self )
+	    end
+	    
+	    
+	    // Create the outputRepository
+	    self.outputRepository := EMFRepository.new
+	    
+	    // Create a Simk model
+	    self.simkModel := SIMKModel.new
+	end
+	
+	operation save() : Void is do
+	
+		// Create a Simk resource
+		self.simkOutput := self.kmInput + ".simk"
+	    var simkResource : Resource init self.outputRepository.createResource(self.simkOutput,"http://www.kermeta.org/simk")
+	    simkResource.add(self.simkModel)
+	    // Save the Simk model
+	    simkResource.save()
+		
 	end
 }
 

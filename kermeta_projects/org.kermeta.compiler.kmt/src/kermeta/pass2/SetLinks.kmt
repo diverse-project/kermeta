@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.16 2008-04-21 15:26:25 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.17 2008-04-29 14:52:27 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -24,7 +24,7 @@ aspect class ClassDefinition {
 	operation setLinks(context : KM2EcoreContext) is do
 		self.superType.each{ t |
 			if t.isInstanceOf(Class) then
-				var classDefinition : ClassDefinition init TypeHelper.new.getClassDefinition(t.asType(Class))
+				var classDefinition : ClassDefinition init t.asType(Class).getClassDefinition()
 				//stdio.writeln("ClassDefinition.setLinks self.ecoreModelElement: " + self.ecoreModelElement.toString)
 				if not (self.ecoreModelElement.isVoid() and (not self.ecoreDataType.isVoid()) ) then
 					if classDefinition.ecoreModelElement == void then
@@ -53,7 +53,7 @@ aspect class Class {
 			var typeArgument : EGenericType init EGenericType.new
 			
 			if tpb.type.isInstanceOf(Class) then
-				var cd : ClassDefinition init TypeHelper.new.getClassDefinition( tpb.type.asType(Class) )
+				var cd : ClassDefinition init tpb.type.asType(Class).getClassDefinition()
 								
 				if not cd.ecoreModelElement.isVoid() then
 					typeArgument.eClassifier := cd.ecoreModelElement
@@ -69,7 +69,7 @@ aspect class Class {
 					self.ecoreModelElement.eTypeArguments.add(typeArgument)
 				else
 					if tpb.type.isInstanceOf(PrimitiveType) then
-						var cd : ClassDefinition init TypeHelper.new.getClassDefinition(TypeHelper.new.getClassFromPrimitiveType( tpb.type ))
+						var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 						typeArgument.eClassifier := cd.ecoreModelElement
 						self.ecoreModelElement.eTypeArguments.add(typeArgument)
 					end
@@ -88,8 +88,9 @@ aspect class Operation {
 			var qualifiedName : String init self.superOperation.owningClass.qualifiedName
 			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.superOperation.name.toString(), qualifiedName)
 			
+			stdio.writeln("op: " + self.name + " class: " + self.container.asType(NamedElement).name)
 			stdio.writeln(ecoreAnnotation.toString())
-			stdio.writeln(self.ecoreModelElement.toString)
+			stdio.writeln(self.ecoreModelElement.toString())
 			stdio.writeln(self.ecoreModelElement.eAnnotations.toString())
 			
 			self.ecoreModelElement.eAnnotations.add(ecoreAnnotation)
@@ -103,6 +104,16 @@ aspect class Parameter {
 	
 		// DETERMINE if the parameter should be compiled
 		if self.type.isInstanceOf(FunctionType) then
+		
+			var ft : FunctionType init self.type.asType(FunctionType)
+			self.ecoreModelElement.eType := GenericTypeDefinitionHelper.new.getKermetaSpecialType(self.container.container.container.asType(Package))
+			
+			var ft_annotation : EAnnotation init EAnnotationHelper.new.createEmpty("kermeta.functionType")
+			EAnnotationHelper.new.addEntry(ft_annotation, "0", ft.left.getTypeName())
+			EAnnotationHelper.new.addEntry(ft_annotation, "1", ft.right.getTypeName())
+			self.ecoreModelElement.eAnnotations.add(ft_annotation)
+			
+			ft.ecoreModelElement := ft_annotation
 			stdio.writeln("SetLinks - inline")
 			//TODO inline of the FunctionType
 		else		
@@ -133,7 +144,7 @@ class LinkSetterForTypedElement {
 		else*/
 			if element.type.isInstanceOf(Class) then
 				var c : Class init element.type.asType(Class)
-				var classDefinition : ClassDefinition init TypeHelper.new.getClassDefinition(c)
+				var classDefinition : ClassDefinition init c.getClassDefinition()
 				var genericType : EGenericType init EGenericType.new
 				
 				if not classDefinition.ecoreModelElement.isVoid() then
@@ -146,7 +157,7 @@ class LinkSetterForTypedElement {
 					var typeArgument : EGenericType init EGenericType.new
 					
 					if tpb.type.isInstanceOf(Class) then
-						var cd : ClassDefinition init TypeHelper.new.getClassDefinition( tpb.type.asType(Class) )
+						var cd : ClassDefinition init tpb.type.asType(Class).getClassDefinition()
 						if not cd.ecoreModelElement.isVoid() then
 							typeArgument.eClassifier := cd.ecoreModelElement
 						else //we assume this Class target a subtype of ValueType => EDataType
@@ -161,7 +172,7 @@ class LinkSetterForTypedElement {
 							ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 						else
 							if tpb.type.isInstanceOf(PrimitiveType) then
-								var cd : ClassDefinition init TypeHelper.new.getClassDefinition(TypeHelper.new.getClassFromPrimitiveType( tpb.type ))
+								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 								typeArgument.eClassifier := cd.ecoreModelElement
 								ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 							end

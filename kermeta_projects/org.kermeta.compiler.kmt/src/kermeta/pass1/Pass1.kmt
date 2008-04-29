@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.15 2008-04-21 15:26:25 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.16 2008-04-29 14:52:27 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -133,7 +133,7 @@ aspect class ClassDefinition {
 				p.ecoreModelElement.eClassifiers.add(eDataType)
 				// Setting the ecore proxy
 				self.ecoreDataType := eDataType
-				
+			
 				// Compile only the methods that are not taking directly
 				// into account by the target language like times() for an Integer
 				self.ownedOperation.each{ o |
@@ -182,16 +182,31 @@ aspect class Property {
 aspect class Operation {
 	method applyPass1(context : KM2EcoreContext) is do
 	
-		// Creating the associated ecore class
-		var ecoreOperation : EOperation init self.createEcoreModelElement(context)
-		// Setting the container
-		var c : ClassDefinition
-		c ?= self.container()
-		c.ecoreModelElement.eOperations.add(ecoreOperation)
-		// Setting the ecore proxy
-		self.ecoreModelElement := ecoreOperation
-		// Compile the owned elements
-		self.eachOwnedElement{ o | o.applyPass1(context) }
+		/*
+		// Compile only the method, if that are not taking directly
+		// into account by the target language like times() for an Integer
+		var static_tag : Tag init self.ownedTags.detect{ t |
+			t.name == "EMF_static"
+		}
+		if not static_tag.isVoid() then
+			stdio.writeln("An EMF_static method has been detected: " + self.name)
+			//TODO Compile with Simk
+			//o.applyPass1(context)
+		
+		else*/
+	
+			// Creating the associated ecore class
+			var ecoreOperation : EOperation init self.createEcoreModelElement(context)
+			// Setting the container
+			var c : ClassDefinition
+			c ?= self.container()
+			c.ecoreModelElement.eOperations.add(ecoreOperation)
+			// Setting the ecore proxy
+			self.ecoreModelElement := ecoreOperation
+			// Compile the owned elements
+			self.eachOwnedElement{ o | o.applyPass1(context) }
+		
+		//end
 		
 	end
 }
@@ -199,20 +214,26 @@ aspect class Operation {
 aspect class Parameter {
 	method applyPass1(context : KM2EcoreContext) is do
 	
-		// DETERMINE if the parameter should be compiled
+		var ecoreParameter : EParameter
+		
+		// DETERMINE if the parameter should be compiled or redirect to a KermetaSpecialType
+		// Case of the FunctionType
 		if self.type.isInstanceOf(FunctionType) then
+			ecoreParameter := EParameter.new
+			ecoreParameter.name := self.name
 			stdio.writeln("Pass1 - inline")
 			//TODO inline of the FunctionType
 		else
 			// Creating the associated ecore class
-			var ecoreParameter : EParameter init self.createEcoreModelElement(context)
-			// Setting the container
-			var o : Operation init self.container().asType(Operation)
-			o.ecoreModelElement.eParameters.add( ecoreParameter )
-			// Setting the ecore proxy
-			self.ecoreModelElement := ecoreParameter
+			ecoreParameter := self.createEcoreModelElement(context)
+			
 		end
 		
+		// Setting the container
+		var o : Operation init self.container().asType(Operation)
+		o.ecoreModelElement.eParameters.add( ecoreParameter )
+		// Setting the ecore proxy
+		self.ecoreModelElement := ecoreParameter
 	end
 }
 

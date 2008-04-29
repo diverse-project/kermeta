@@ -1,10 +1,10 @@
-/* $Id: TypeHelper.kmt,v 1.8 2008-04-14 07:50:35 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.9 2008-04-29 14:52:27 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  */
 
-package km2ecore::helper::kermeta;
+package kermeta::language::structure;
 
 require kermeta
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
@@ -14,28 +14,26 @@ using kermeta::standard
 using kermeta::utils
 using km2ecore
 
-class TypeHelper {
+aspect class Type {
 
-	operation isPrimitiveType(type : Type) : Boolean is do 
-		result := type.isInstanceOf(PrimitiveType)
+	operation isPrimitiveType() : Boolean is do 
+		result := self.isInstanceOf(PrimitiveType)
 	end
 	
-	operation isEnumeration(type : Type) : Boolean is do
-		result := type.isInstanceOf(Enumeration)
+	operation isEnumeration() : Boolean is do
+		result := self.isInstanceOf(Enumeration)
 	end
 	
-	operation getClassDefinition(c : Class) : ClassDefinition is do
-		result := c.typeDefinition.asType(ClassDefinition)
-	end
 	
-	operation getClassFromPrimitiveType( p : Type ) : Class is do
-		if p.isInstanceOf(PrimitiveType) then
-			var pt : PrimitiveType init p.asType(PrimitiveType)
+	
+	operation getClassFromPrimitiveType() : Class is do
+		if self.isInstanceOf(PrimitiveType) then
+			var pt : PrimitiveType init self.asType(PrimitiveType)
 			if ( pt.instanceType.isInstanceOf(Class) ) then
 				result := pt.instanceType.asType(Class)
 			else
 				//deal the case where the alias refers another alias
-				result := getClassFromPrimitiveType(pt.instanceType)
+				result := pt.instanceType.getClassFromPrimitiveType()
 			end
 		else
 			result := void
@@ -43,10 +41,10 @@ class TypeHelper {
 	end
 	
 	// Check if the type is a subType of ValueType => we have to consider as a PrimitiveType, i.e.: an EAttribute
-	operation isValueType(type : Type) : Boolean is do
+	operation isValueType() : Boolean is do
 		result := false
-		if type.isInstanceOf(ParameterizedType) then
-			var pt : ParameterizedType init type.asType(ParameterizedType)
+		if self.isInstanceOf(ParameterizedType) then
+			var pt : ParameterizedType init self.asType(ParameterizedType)
 			
 			if pt.typeDefinition.isInstanceOf(ClassDefinition) then
 				var cd : ClassDefinition init pt.typeDefinition.asType(ClassDefinition)
@@ -55,18 +53,48 @@ class TypeHelper {
 				end
 			end
 		end
-		/*if type.isInstanceOf(ParameterizedType) and (not type.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid()) then
+		/*if self.isInstanceOf(ParameterizedType) and (not self.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid()) then
 			result := true
 		else
 			result := false
 		end*/
 		
 		// old code: Check if the type is in the types map
-		/*if not result and type.isInstanceOf(Class) then
-			var c : Class init type.asType(Class)
+		/*if not result and self.isInstanceOf(Class) then
+			var c : Class init self.asType(Class)
 			var qualifiedName : String init c.typeDefinition.qualifiedName()
 			result := context.javaTypeMapping.types_mapping.containsKey(qualifiedName)
 		end*/
+	end
+	
+	
+	
+	
+	
+	/** To move to an aspect on the Class Definition Type */
+	operation getTypeName() : String is do
+		result := void
+		if self.isInstanceOf(Class) then
+			var cd : ClassDefinition init self.asType(Class).getClassDefinition()
+			result := cd.name
+			
+		else
+			if self.isInstanceOf(ObjectTypeVariable) then
+				var otv : ObjectTypeVariable init self.asType(ObjectTypeVariable)
+				result := otv.name
+			else
+				if self.isInstanceOf(PrimitiveType) then
+					var cd : ClassDefinition init self.getClassFromPrimitiveType().getClassDefinition()
+					result := cd.name
+				end
+			end
+		end
+	end
+}
+
+aspect class Class {
+	operation getClassDefinition() : ClassDefinition is do
+		result := self.typeDefinition.asType(ClassDefinition)
 	end
 }
 
@@ -74,3 +102,6 @@ class TypeHelper {
 	edatatype;
 	eclass;
 }*/
+
+
+
