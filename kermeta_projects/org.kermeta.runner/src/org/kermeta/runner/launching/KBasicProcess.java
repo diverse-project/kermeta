@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.8 2008-04-29 10:01:27 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.9 2008-04-29 12:00:29 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -262,44 +262,47 @@ public class KBasicProcess extends Process {
 		Set<URL> urlsV = new LinkedHashSet<URL>();
 		//Vector<URL> urlsV = new Vector<URL>();
 
-		for (int i = 0; i < pathAttribute.size(); i++) {
-			String memento1 = (String) pathAttribute.get(i);
-			try {
-				IRuntimeClasspathEntry entry1 = JavaRuntime
-						.newRuntimeClasspathEntry(memento1);
-				// resolve this classpath entry
-				// org.eclipse.jdt.launching.StandardClasspathProvider resolver;
+		if ( pathAttribute != null ) {
+		
+			for (int i = 0; i < pathAttribute.size(); i++) {
+				String memento1 = (String) pathAttribute.get(i);
 				try {
-					// entry1.toString();
-					if (entry1.getLocation() != null) {
-						if (entry1.getType() == IRuntimeClasspathEntry.ARCHIVE && entry1.getLocation().endsWith(".jar")) {
-							// second part of the test is because IRuntimeClasspathEntry.ARCHIVE may also be a folder in the system
-							// deal with jar url
-							urlsV.add(new URL("file:///" + entry1.getLocation()));
-							RunnerPlugin.internalLog.debug("added " + "file:///" + entry1.getLocation()
-									+ " in Thread Class Loader " );//+ this.thread.getName());
-							
-							
-						} else {
-							// deal with project url
-							urlsV.add(new URL("file:///" +entry1.getLocation() + "/"));
-							RunnerPlugin.internalLog.debug("added " + "file:///" + entry1.getLocation()+ "/"
-									+ " in Thread Class Loader " );//+ this.thread.getName());
+					IRuntimeClasspathEntry entry1 = JavaRuntime
+							.newRuntimeClasspathEntry(memento1);
+					// resolve this classpath entry
+					// org.eclipse.jdt.launching.StandardClasspathProvider resolver;
+					try {
+						// entry1.toString();
+						if (entry1.getLocation() != null) {
+							if (entry1.getType() == IRuntimeClasspathEntry.ARCHIVE && entry1.getLocation().endsWith(".jar")) {
+								// second part of the test is because IRuntimeClasspathEntry.ARCHIVE may also be a folder in the system
+								// deal with jar url
+								urlsV.add(new URL("file:///" + entry1.getLocation()));
+								RunnerPlugin.internalLog.debug("added " + "file:///" + entry1.getLocation()
+										+ " in Thread Class Loader " );//+ this.thread.getName());
+								
+								
+							} else {
+								// deal with project url
+								urlsV.add(new URL("file:///" +entry1.getLocation() + "/"));
+								RunnerPlugin.internalLog.debug("added " + "file:///" + entry1.getLocation()+ "/"
+										+ " in Thread Class Loader " );//+ this.thread.getName());
+							}
 						}
+					} catch (MalformedURLException e) {
+						RunnerPlugin.internalLog.warn(
+								"problem with an entry of the classpath, "
+										+ "file:///" + entry1.getLocation()
+										+ " cannot be added in classloader", e);
 					}
-				} catch (MalformedURLException e) {
-					RunnerPlugin.internalLog.warn(
-							"problem with an entry of the classpath, "
-									+ "file:///" + entry1.getLocation()
-									+ " cannot be added in classloader", e);
+					// IRuntimeClasspathEntryResolver
+					// this.getIPathFromString()
+				} catch (CoreException e) {
+					RunnerPlugin.internalLog.warn("Problem reading classpath entry",
+							e);
+					//RunnerPlugin.log(e);
+					return;
 				}
-				// IRuntimeClasspathEntryResolver
-				// this.getIPathFromString()
-			} catch (CoreException e) {
-				RunnerPlugin.internalLog.warn("Problem reading classpath entry",
-						e);
-				//RunnerPlugin.log(e);
-				return;
 			}
 		}
 		if(currentProjectPath != null){
