@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.23 2008-04-28 11:50:10 ftanguy Exp $
+/* $Id: SimpleType.java,v 1.24 2008-04-29 14:31:38 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : EPL
@@ -30,6 +30,7 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
@@ -71,9 +72,9 @@ public class SimpleType extends Type {
 			return TypeConformanceChecker.conforms(required, getType());
 		}
 		else {
-			Iterator it = ((UnionType)type).types.iterator();
+			Iterator<Type> it = ((UnionType)type).types.iterator();
 			while(it.hasNext()) {
-				if (!this.isSubTypeOf((Type)it.next())) {
+				if (!this.isSubTypeOf(it.next())) {
 					return false;
 				}
 			}
@@ -222,7 +223,7 @@ public class SimpleType extends Type {
 	 * @param generic 
 	 * @return null if this type does not match the generic type
 	 */
-	public Hashtable inferTypeVariableBinding(Type generic) {
+	public Hashtable<TypeVariable, fr.irisa.triskell.kermeta.language.structure.Type> inferTypeVariableBinding(Type generic) {
 	    if (generic instanceof SimpleType) {
 	        fr.irisa.triskell.kermeta.language.structure.Type g = ((SimpleType)generic).type;
 	        try {
@@ -236,12 +237,14 @@ public class SimpleType extends Type {
 	    }
 	}
 	
-    protected void inferTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Type generic, Hashtable binding) {
+    protected void inferTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Type generic, Hashtable<TypeVariable, fr.irisa.triskell.kermeta.language.structure.Type> binding) {
         TypeVariableInferer.inferTypeVariableTypes(generic, type, binding);
     }
     
 	public String toString() {
-		return (String)FTypePrettyPrinter.getInstance().accept(type);
+		if(type != null)
+			return (String)FTypePrettyPrinter.getInstance().accept(type);
+		else return super.toString();
 	}
 		
 	/**
