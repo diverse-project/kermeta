@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.17 2008-04-29 14:52:27 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.18 2008-04-29 16:44:54 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -92,11 +92,6 @@ package structure {
 			
 			var doCompile : Boolean init true
 			
-			/*
-			if not self.ecoreModelElement.isVoid() then
-				stdio.writeln("Operation.applyPass2() - self: " + self.toString() + " - self.ecoreModelElement: " + self.ecoreModelElement.toString())
-			*/
-			
 			// This test is there, because some methods may be compiled as Static methods via Simk like the method: times on Integer
 			if not self.container.asType(ClassDefinition).superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
 				if self.container.asType(ClassDefinition).getEMFInstanceClassName() != "" then
@@ -108,7 +103,7 @@ package structure {
 				var doSimk : Boolean init true
 			end
 			
-			stdio.writeln("Operation.applyPass2() - self: " + self.name + " - self.ecoreModelElement: " + self.ecoreModelElement.toString() + " - doCompile: " + doCompile.toString())
+			//stdio.writeln("Operation.applyPass2() - self: " + self.name + " - self.ecoreModelElement: " + self.ecoreModelElement.toString() + " - doCompile: " + doCompile.toString())
 			
 			if doCompile then
 				self.setLinks(context)

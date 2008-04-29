@@ -79,6 +79,13 @@ class ParameterizedClass<B> inherits ParameterizedEmptyClass<B> , ParameterizedE
 	end
 	
 	attribute testString : TestString
+	
+	operation eachOwnedElement(func0 : <Object -> Object> , func1 : <Boolean -> Object>) : Void is do
+		self.ownedTags.each{ o |
+			func0(o)
+		}
+		func1(true)
+	end
 }
 
 @EMF_instanceClassName "java.lang.String"

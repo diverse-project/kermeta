@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.9 2008-04-29 14:52:27 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.10 2008-04-29 16:44:53 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -23,8 +23,6 @@ aspect class Type {
 	operation isEnumeration() : Boolean is do
 		result := self.isInstanceOf(Enumeration)
 	end
-	
-	
 	
 	operation getClassFromPrimitiveType() : Class is do
 		if self.isInstanceOf(PrimitiveType) then
@@ -76,16 +74,16 @@ aspect class Type {
 		result := void
 		if self.isInstanceOf(Class) then
 			var cd : ClassDefinition init self.asType(Class).getClassDefinition()
-			result := cd.name
+			result := cd.qualifiedName
 			
 		else
 			if self.isInstanceOf(ObjectTypeVariable) then
 				var otv : ObjectTypeVariable init self.asType(ObjectTypeVariable)
-				result := otv.name
+				result := otv.qualifiedName
 			else
 				if self.isInstanceOf(PrimitiveType) then
 					var cd : ClassDefinition init self.getClassFromPrimitiveType().getClassDefinition()
-					result := cd.name
+					result := cd.qualifiedName
 				end
 			end
 		end
@@ -98,10 +96,6 @@ aspect class Class {
 	end
 }
 
-/*enumeration PrimitiveType_Type {
-	edatatype;
-	eclass;
-}*/
 
 
 
