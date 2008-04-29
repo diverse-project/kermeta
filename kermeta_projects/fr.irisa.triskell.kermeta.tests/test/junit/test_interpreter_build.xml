@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.19 2008-04-14 14:08:42 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.20 2008-04-29 10:06:50 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -47,6 +47,7 @@
 	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.3.0.v200706262000.jar" />
 	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar" />
 	<property name="emf.validation.jar" location="${eclipse.home}/plugins/org.eclipse.emf.validation_1.1.0.v200706071520.jar" />
+	<property name="debug.core.jar" location="${eclipse.home}/plugins/org.eclipse.debug.core_3.3.0.v20070607-1800.jar" />
 	<property name="equinox.common.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.common_3.3.0.v20070426.jar" />
 	<property name="equinox.registry.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.registry_3.3.0.v20070522.jar" />
 	<property name="equinox.preferences.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.preferences_3.2.100.v20070522.jar" />
@@ -76,6 +77,7 @@
 		<pathelement location="${triskell.eclipse.util.jar}" />
 		<pathelement location="${traceability.jar}" />
 	    <pathelement location="${ecoretools.registration.jar}"/>
+		<pathelement location="${debug.core.jar}" />
 		<pathelement location="${emf.common.jar}" />
 		<pathelement location="${emf.ecore.jar}" />
 		<pathelement location="${emf.ecore.xmi.jar}" />
