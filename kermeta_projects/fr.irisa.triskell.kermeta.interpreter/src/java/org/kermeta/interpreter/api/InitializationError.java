@@ -35,7 +35,7 @@ final public class InitializationError extends Error {
 	}
 	
 	static private String getMessage(KermetaUnit kermetaUnit) {
-		return "The program can be launched because of errors.";
+		return "The program cannot be launched because of errors.";
 	}
 	
 }
