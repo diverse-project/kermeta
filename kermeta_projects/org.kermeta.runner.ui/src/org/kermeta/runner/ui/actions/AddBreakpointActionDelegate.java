@@ -1,7 +1,7 @@
 
 
-/*$Id: AddBreakpointActionDelegate.java,v 1.2 2008-04-03 13:31:38 ftanguy Exp $
-* Project : org.kermeta.debugger
+/*$Id: AddBreakpointActionDelegate.java,v 1.3 2008-04-30 13:58:50 ftanguy Exp $
+* Project : org.kermeta.runner.ui
 * File : 	AddBreakpointActionDelegate.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1

@@ -1,3 +1,12 @@
+/*$Id: KLaunchShortcut.java,v 1.6 2008-04-30 13:58:49 ftanguy Exp $
+* Project : org.kermeta.runner.ui
+* File : 	KLaunchShortcut.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 30 avr. 08
+* Authors : ftanguy
+*/
 package org.kermeta.runner.launching;
 
 import java.util.ArrayList;

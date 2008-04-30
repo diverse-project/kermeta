@@ -1,5 +1,5 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.3 2008-04-14 06:48:50 ftanguy Exp $
- * Project: Kermeta (First iteration)
+/* $Id: ArgumentConfigurationTab.java,v 1.4 2008-04-30 13:58:49 ftanguy Exp $
+ * Project: org.kermeta.runner.ui
  * File: ArgumentConfigurationTab.java
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1

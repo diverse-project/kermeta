@@ -1,5 +1,5 @@
-/* $Id: InterpreterJavaClasspathTab.java,v 1.1 2008-04-01 15:10:54 ftanguy Exp $
- * Project: Kermeta.runner
+/* $Id: InterpreterJavaClasspathTab.java,v 1.2 2008-04-30 13:58:49 ftanguy Exp $
+ * Project: org.kermeta.runner.ui
  * File: InterpreterJavaClasspathTab.java
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1

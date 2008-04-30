@@ -1,18 +1,15 @@
-/*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Common Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/cpl-v10.html
- * 
- * Contributors:
- *     IBM Corporation - initial API and implementation
- *     Bjorn Freeman-Benson - initial API and implementation
- *******************************************************************************/
+/*$Id: KSourcePathComputerDelegate.java,v 1.4 2008-04-30 13:58:47 ftanguy Exp $
+* Project : org.kermeta.runner
+* File : 	KSourcePathComputerDelegate.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 30 avr. 08
+* Authors : ftanguy
+*/
 package org.kermeta.runner.launching;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.eclipse.core.resources.IProject;

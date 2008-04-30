@@ -1,3 +1,12 @@
+/*$Id: DebugUIPlugin.java,v 1.2 2008-04-30 13:58:50 ftanguy Exp $
+* Project : org.kermeta.runner.ui
+* File : 	DebugUIPlugin.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 30 avr. 08
+* Authors : ftanguy
+*/
 package org.kermeta.runner.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;

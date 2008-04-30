@@ -1,14 +1,12 @@
-/*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Common Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/cpl-v10.html
- * 
- * Contributors:
- *     IBM Corporation - initial API and implementation
- *     Bjorn Freeman-Benson - initial API and implementation
- *******************************************************************************/
+/*$Id: KSourceLookupParticipant.java,v 1.3 2008-04-30 13:58:47 ftanguy Exp $
+* Project : org.kermeta.runner
+* File : 	KSourceLookupParticipant.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 30 avr. 08
+* Authors : ftanguy
+*/
 package org.kermeta.runner.launching;
 
 import org.eclipse.core.runtime.CoreException;
