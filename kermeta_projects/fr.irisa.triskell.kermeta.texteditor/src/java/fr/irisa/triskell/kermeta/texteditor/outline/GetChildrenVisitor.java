@@ -1,4 +1,4 @@
-/* $Id: GetChildrenVisitor.java,v 1.13 2008-02-14 07:13:43 uid21732 Exp $
+/* $Id: GetChildrenVisitor.java,v 1.14 2008-04-30 13:05:08 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetChildrenVisitor.java
 * License : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -212,6 +213,12 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		    Collections.sort(result);
 		return result.toArray();
 	}
+	
+	@Override
+	public Object visitModelType(ModelType node) {		
+		return new Object[0];
+	}
+
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
