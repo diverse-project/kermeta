@@ -19,11 +19,11 @@ public class GenerateKMTFilesFromOCLFilesAction implements IObjectActionDelegate
 
 	private IFolder _folder;
 	
-	@Override
+	
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 	}
 
-	@Override
+	
 	public void run(IAction action) {
 		if ( _folder != null ) {
 			ResourceSelectionDialog d = new ResourceSelectionDialog(new Shell(), ResourceHelper.root, "Select the Ecore MetaModel");
@@ -47,7 +47,7 @@ public class GenerateKMTFilesFromOCLFilesAction implements IObjectActionDelegate
 		}
 	}
 
-	@Override
+	
 	public void selectionChanged(IAction action, ISelection selection) {
 		StructuredSelection ss = (StructuredSelection) selection;
 		_folder = (IFolder) ss.getFirstElement();

@@ -18,7 +18,7 @@ public class OCLResourceVisitor implements IResourceVisitor {
 		_modelEcorePath = modelEcorePath;
 	}
 	
-	@Override
+	
 	public boolean visit(IResource resource) throws CoreException {
 		if ( resource instanceof IFile ) {
 			IFile file = (IFile) resource;
