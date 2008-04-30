@@ -23,6 +23,23 @@
                id="fr.irisa.triskell.ocl.menu.action">
          </action>
       </objectContribution>
+      <objectContribution
+            id="fr.irisa.triskell.kermeta.ocl.objectContribution1"
+            objectClass="org.eclipse.core.resources.IFolder">
+                     <menu
+               label="Kermeta"
+               path="additions"
+               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu">
+            <separator name="additions"/>
+         </menu>
+               <action
+               class="fr.irisa.triskell.kermeta.ocl.ui.popup.actions.GenerateKMTFilesFromOCLFilesAction"
+               enablesFor="1"
+               id="fr.irisa.triskell.kermeta.ocl.action1"
+               label="Generate KMT Files from OCL Files"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta">
+         </action>
+      </objectContribution>
       
    </extension>
 

@@ -1,4 +1,4 @@
-/* $Id: RunStandaloneKM.java,v 1.6 2007-11-29 16:59:03 dvojtise Exp $
+/* $Id: RunStandaloneKM.java,v 1.7 2008-04-30 14:38:01 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.ocl
 * File : 	RunStandaloneKM.java
 * License : EPL
@@ -78,7 +78,7 @@ public class RunStandaloneKM {
 			registerPackages(ePack);
 			
 			//StdLibKermetaUnitHelper.STD_LIB_URI= "/udd/barais/workspace2/fr.irisa.triskell.kermeta/lib/framework.km";
-			GenerateOCL.run(xmiOutputFileName,ecoreFileNameFileName,  outputKMTFileName, new LocalIOConsole());
+			//GenerateOCL.run(xmiOutputFileName,ecoreFileNameFileName,  outputKMTFileName, new LocalIOConsole());
 
 			
 		

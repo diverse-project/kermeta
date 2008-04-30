@@ -1,4 +1,4 @@
-/* $Id: GenerateKMT.java,v 1.9 2008-01-24 14:15:17 dvojtise Exp $
+/* $Id: GenerateKMT.java,v 1.10 2008-04-30 14:38:01 ftanguy Exp $
  * Project: OCL
  * File: GenerateKMT.java
  * License: EPL
@@ -10,8 +10,8 @@
  */
 package fr.irisa.triskell.kermeta.ocl;
 
-import java.awt.List;
 import java.util.Iterator;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -23,9 +23,9 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.ParserException;
-//import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
@@ -39,13 +39,15 @@ public class GenerateKMT {
 	private static String ecore_ecore =  project_path + "Ecore.ecore";
 	private static String oclcst_ecore =  project_path + "OCLCST.ecore";
 	
-	private IOConsole defaultConsole = new LocalIOConsole();
+	//private IOConsole defaultConsole = new LocalIOConsole();
+	
+	private EclipseConsole defaultConsole = new EclipseConsole("OCL");
 	
 	public GenerateKMT(){
 		setUpURIMappings();
 	}
 	
-	public GenerateKMT(IOConsole console){
+	public GenerateKMT(EclipseConsole console){
 		setUpURIMappings();
 		defaultConsole = console;
 	}
