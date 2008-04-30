@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.63 2008-04-28 11:50:56 ftanguy Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.64 2008-04-30 08:26:45 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -318,9 +318,14 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			myJob.join();
 		} catch (InterruptedException e) {
 			throwKermetaRaisedExceptionOnLoad("Loading model interrupted", e);
+		} catch (java.lang.OutOfMemoryError ome){
+			throwKermetaRaisedExceptionOnLoad("OutOfMemory while loading the model", ome);
 		}
+		
 		if (myJob.catchedException != null) // due to the change of Thread, re-throw the intercepted excpetion
 			throw myJob.catchedException;
+		if (myJob.catchedError != null) // due to the change of Thread, re-throw the intercepted Error
+			throw myJob.catchedError;
     }
     
     /**
