@@ -1,3 +1,14 @@
+/* $Id: InitializationError.java,v 1.4 2008-04-30 08:07:22 dvojtise Exp $
+* Project : Kermeta interpreter
+* File : InitializationError.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 10 avr. 2008
+* Authors : 
+* 	François Tanguy
+* Description :
+*/
 package org.kermeta.interpreter.api;
 
 import java.util.ArrayList;
@@ -21,6 +32,7 @@ final public class InitializationError extends Error {
 		super( getMessage(kermetaUnit) );
 		for ( ErrorMessage e : KermetaUnitHelper.getAllErrors(kermetaUnit) )
 			_errors.add( e.getValue() );
+		
 	}
 	
 	public List<String> getErrors() {
@@ -35,7 +47,12 @@ final public class InitializationError extends Error {
 	}
 	
 	static private String getMessage(KermetaUnit kermetaUnit) {
-		return "The program cannot be launched because of errors.";
+		List<ErrorMessage> errors = KermetaUnitHelper.getAllErrors(kermetaUnit);
+		if(errors.size() > 0)
+			return "The program cannot be launched because of "+ KermetaUnitHelper.getAllErrors(kermetaUnit).size()+" errors. \nFirst error is : " + errors.get(0).getValue();
+		else
+			return "The program cannot be launched because of "+ KermetaUnitHelper.getAllErrors(kermetaUnit).size()+" error.";
 	}
+	
 	
 }
