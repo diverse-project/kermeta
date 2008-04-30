@@ -1,4 +1,4 @@
-/*$Id: LoaderJob.java,v 1.3 2008-04-30 08:26:45 dvojtise Exp $
+/*$Id: LoaderJob.java,v 1.4 2008-04-30 11:40:50 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	LoaderJob.java
 * License : EPL
@@ -49,7 +49,7 @@ public class LoaderJob extends Job {
 			return new Status(IStatus.OK, "fr.irisa.triskell.kermeta.interpreter", "Problem : model not loaded", e);
 			//return new Status(IStatus.ERROR, "fr.irisa.triskell.kermeta.interpreter", "model not loaded", e);
 		}
-		catch (java.lang.OutOfMemoryError ome){
+		catch (Error ome){
 			catchedError = ome;
 			return new Status(IStatus.OK, "fr.irisa.triskell.kermeta.interpreter", "Problem : model not loaded", ome);
 			//return new Status(IStatus.ERROR, "fr.irisa.triskell.kermeta.interpreter", "model not loaded", e);

@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.64 2008-04-30 08:26:45 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.65 2008-04-30 11:40:50 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -20,7 +20,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -199,7 +198,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		String emf_msg = "";
     	EMFRuntimeUnit unit = this;
     	XMLResource resource=null;
-		monitor.beginTask("Loading " + unit.getUriAsString(), monitor.UNKNOWN);
+		monitor.beginTask("Loading " + unit.getUriAsString(), IProgressMonitor.UNKNOWN);
 		try {
 			// Get URI of the unit correpsonding to the model to be loaded
 			URI u = createURI(unit.getUriAsString());
@@ -318,14 +317,12 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			myJob.join();
 		} catch (InterruptedException e) {
 			throwKermetaRaisedExceptionOnLoad("Loading model interrupted", e);
-		} catch (java.lang.OutOfMemoryError ome){
-			throwKermetaRaisedExceptionOnLoad("OutOfMemory while loading the model", ome);
-		}
+		} 
 		
 		if (myJob.catchedException != null) // due to the change of Thread, re-throw the intercepted excpetion
 			throw myJob.catchedException;
 		if (myJob.catchedError != null) // due to the change of Thread, re-throw the intercepted Error
-			throw myJob.catchedError;
+			throw new Error(myJob.catchedError.getMessage(),myJob.catchedError);
     }
     
     /**
