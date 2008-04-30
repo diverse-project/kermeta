@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.uml2"
       label="Kermeta MDK for UML2"
-      version="1.1.0"
+      version="1.1.99.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">

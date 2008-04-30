@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: InheritanceEdgeCreationEditPolicy.java,v 1.6 2008-02-14 15:53:49 cfaucher Exp $
+ * $Id: InheritanceEdgeCreationEditPolicy.java,v 1.7 2008-04-30 14:18:45 dvojtise Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -82,7 +82,7 @@ public class InheritanceEdgeCreationEditPolicy extends
 			// Prevent a cyclic inheritance
 			if (!sourceObject.equals(targetObject)
 					&& checkSuperTypeUnicity(sourceObject, targetObject)
-					&& !ClassDefinitionHelper.isSuperClassOf(
+					&& !ClassDefinitionHelper.isSuperClassOfByName(
 							(ClassDefinition) sourceObject,
 							(ClassDefinition) targetObject)) {
 				return true;

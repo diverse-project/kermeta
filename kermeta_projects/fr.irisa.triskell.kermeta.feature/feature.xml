@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="1.1.0"
+      version="1.1.99.qualifier"
       provider-name="IRISA/INRIA"
       image="images/kmt_32.gif">
    <install-handler/>
@@ -74,6 +74,13 @@ GPL license.
       <import feature="fr.irisa.triskell.traceability" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.apache.ant"/>
    </requires>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.runner"
+         download-size="360"
+         install-size="700"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta"
@@ -209,20 +216,6 @@ GPL license.
 
    <plugin
          id="fr.irisa.triskell.kermeta.touchnavigator"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.kermeta.runner"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.kermeta.runner.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
