@@ -1,4 +1,4 @@
-/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.9 2008-04-25 10:09:59 dvojtise Exp $
+/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.10 2008-04-30 14:16:44 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -200,7 +200,7 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 		}
 		
 		// add the origin of the aspects (ie. a legend for each of the operations/properties/invariants)
-		result.append("\n<H2><A name=\"aspectFiles\">The class is defined from the following files</A></H2>");
+		result.append("\n<H2><A name=\"aspectFiles\">The package is defined in the following files</A></H2>");
 		List<String> sorted = new ArrayList<String>(aspectUnitsReferences.values());
 		Collections.sort(sorted);
 		for( String ref : sorted){		
@@ -313,6 +313,9 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 		StringBuilder operations = new StringBuilder("");
 		StringBuilder properties = new StringBuilder("");
 		StringBuilder invariants = new StringBuilder("");
+		StringBuilder inheritedOperations = new StringBuilder("");
+		StringBuilder inheritedProperties = new StringBuilder("");
+		StringBuilder inheritedInvariants = new StringBuilder("");
 		String supertypes = "";
 		Hashtable<KermetaUnit,String> aspectUnitsReferences = new Hashtable<KermetaUnit,String>(); 
 		Hashtable<String, KermetaUnit> aspectReferencesUnits = new Hashtable<String, KermetaUnit>();
@@ -323,6 +326,7 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 			if ( td instanceof ClassDefinition ) {
 				ClassDefinition cd = (ClassDefinition) td;
 				if ( KermetaModelHelper.NamedElement.qualifiedName(cd).equals(qualifiedName) ) {
+					// this is either the class itself or an aspect
 					for ( Type t : cd.getSuperType() )
 						supertypes += "\t " + EscapeChars.forHTML((String)kmtPP.accept(t)).toString() +"\n";
 					if(cd.getOwnedTags().size() > 0){
@@ -343,7 +347,7 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 							aspectUnitsReferences.put(invUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
 							aspectReferencesUnits.put(aspectUnitsReferences.get(invUnit), invUnit);
 						}
-						properties.append("\t"+htmlSummary(inv) + " " + createAspectReference(invUnit,aspectUnitsReferences) +"\n");
+						invariants.append("\t"+htmlSummary(inv) + " " + createAspectReference(invUnit,aspectUnitsReferences) +"\n");
 					}
 					for(Property prop :cd.getOwnedAttribute()){
 						KermetaUnit propertyUnit = KermetaUnitHelper.getKermetaUnitFromObject(prop);
@@ -360,6 +364,32 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 							aspectReferencesUnits.put(aspectUnitsReferences.get(operationUnit), operationUnit);
 						}
 						operations.append("\t"+htmlSummary(op) + " " + createAspectReference(operationUnit,aspectUnitsReferences)+"\n");
+					}
+				}
+				else{ // this classdefinition is one of the inherited class
+					for(Constraint inv : cd.getInv()){
+						KermetaUnit invUnit = KermetaUnitHelper.getKermetaUnitFromObject(inv);
+						if(!aspectUnitsReferences.containsKey(invUnit)){
+							aspectUnitsReferences.put(invUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
+							aspectReferencesUnits.put(aspectUnitsReferences.get(invUnit), invUnit);
+						}
+						inheritedInvariants.append("\t"+htmlSummary(inv) + " " + createAspectReference(invUnit,aspectUnitsReferences) +"\n");
+					}
+					for(Property prop :cd.getOwnedAttribute()){
+						KermetaUnit propertyUnit = KermetaUnitHelper.getKermetaUnitFromObject(prop);
+						if(!aspectUnitsReferences.containsKey(propertyUnit)){
+							aspectUnitsReferences.put(propertyUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
+							aspectReferencesUnits.put(aspectUnitsReferences.get(propertyUnit), propertyUnit);
+						}
+						inheritedProperties.append("\t"+htmlSummary(prop) + " " + createAspectReference(propertyUnit,aspectUnitsReferences) +"\n");
+					}
+					for(Operation op :cd.getOwnedOperation()){
+						KermetaUnit operationUnit = KermetaUnitHelper.getKermetaUnitFromObject(op);
+						if(!aspectUnitsReferences.containsKey(operationUnit)){
+							aspectUnitsReferences.put(operationUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
+							aspectReferencesUnits.put(aspectUnitsReferences.get(operationUnit), operationUnit);
+						}
+						inheritedOperations.append("\t"+htmlSummary(op) + " " + createAspectReference(operationUnit,aspectUnitsReferences)+"\n");
 					}
 				}
 			}
@@ -401,10 +431,21 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 			result.append("<H2>List of invariants</H2>");
 			result.append(invariants);
 		}
-		// TODO add a list of inherited properties and inherited operations
+		if (!properties.toString().equals("")) {
+			result.append("<H2>List of inherited properties of this class</H2>");
+			result.append(inheritedProperties);
+		}
+		if (!operations.toString().equals("")){
+			result.append("<H2>List of inherited operations of this class</H2>");
+			result.append(inheritedOperations);
+		}
+		if (!invariants.toString().equals("")){
+			result.append("<H2>List of inherited invariants</H2>");
+			result.append(inheritedInvariants);
+		}
 		
 		// add the origin of the aspects (ie. a legend for each of the operations/properties/invariants)
-		result.append("\n<H2><A name=\"aspectFiles\">The class is defined from the following files</A></H2>");
+		result.append("\n<H2><A name=\"aspectFiles\">The class is defined in the following files</A></H2>");
 		List<String> sorted = new ArrayList<String>(aspectUnitsReferences.values());
 		Collections.sort(sorted);
 		for( String ref : sorted){		
@@ -432,6 +473,13 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 	 * @return
 	 */
 	public String htmlDocumentation(Operation node) {
+		Hashtable<KermetaUnit,String> aspectUnitsReferences = new Hashtable<KermetaUnit,String>(); 
+		Hashtable<String, KermetaUnit> aspectReferencesUnits = new Hashtable<String, KermetaUnit>();
+		KermetaUnit nodeUnit = KermetaUnitHelper.getKermetaUnitFromObject(node);
+		if(!aspectUnitsReferences.containsKey(nodeUnit)){
+			aspectUnitsReferences.put(nodeUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
+			aspectReferencesUnits.put(aspectUnitsReferences.get(nodeUnit), nodeUnit);
+		}
 		StringBuilder result= new StringBuilder("<H1>");
 		if (node.isIsAbstract()) result.append("abstract ");
 		if (node.getSuperOperation() != null) result.append("method ");
@@ -456,9 +504,12 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 			result.append( EscapeChars.forHTML(kmtPP.ppTypeFromMultiplicityElement(node)));
 		}
 		else result.append("<em>Void</em>");
-	
+		if(node.eContainer() != null && node.eContainer() instanceof NamedElement){
+			result.append("<H3>Container</H3>");
+			result.append("\tclass "+KermetaModelHelper.NamedElement.qualifiedName((NamedElement)node.eContainer()));
+		}
 		if (node.getSuperOperation() != null) {
-			result.append("\n<H3>Redefines operation from :</H3>\n\t" + NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass()));
+			result.append("\n<H3>Redefines operation from :</H3>\tclass " + NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass()));
 		}
 		if (node.getRaisedException().size() > 0) {
 			result.append("\n<H3>Raises excetions :</H3>\n");
@@ -466,9 +517,40 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 			result.append(EscapeChars.forHTML(kmtPP.ppCRSeparatedNode(node.getRaisedException())));
 			kmtPP.popPrefix();
 		}
-		result.append("\n") ;
+		result.append("\n") ;		
 		String tags = ppTags(node.getTag());
 		if(!tags.equals("")) result.append("<div class=\"documentation\">" +tags + "</div>\n") ;
+		List<Constraint> allPreconditions = KermetaModelHelper.Operation.getAllPreconditions(node);
+		if(!allPreconditions.isEmpty()){
+			result.append("<H3>Preconditions :</H3>");			
+			for(Constraint c : allPreconditions){
+				KermetaUnit preUnit = KermetaUnitHelper.getKermetaUnitFromObject(c);
+				if(!aspectUnitsReferences.containsKey(preUnit)){
+					aspectUnitsReferences.put(preUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
+					aspectReferencesUnits.put(aspectUnitsReferences.get(preUnit), preUnit);
+				}
+				result.append("\t"+htmlSummary(c) + " " + createAspectReference(preUnit,aspectUnitsReferences) +"\n");
+			}
+		}
+		List<Constraint> allPostconditions = KermetaModelHelper.Operation.getAllPostconditions(node); 
+		if(!allPostconditions.isEmpty()){
+			result.append("<H3>Postconditions :</H3>");			
+			for(Constraint c : allPostconditions){
+				KermetaUnit postUnit = KermetaUnitHelper.getKermetaUnitFromObject(c);
+				if(!aspectUnitsReferences.containsKey(postUnit)){
+					aspectUnitsReferences.put(postUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
+					aspectReferencesUnits.put(aspectUnitsReferences.get(postUnit), postUnit);
+				}
+				result.append("\t"+htmlSummary(c) + " " + createAspectReference(postUnit,aspectUnitsReferences) +"\n");
+			}
+		}
+		// add the origin of the aspects (ie. a legend for each of the operations/properties/invariants)
+		result.append("\n<H2><A name=\"aspectFiles\">The operation is defined from the following files</A></H2>");
+		List<String> sorted = new ArrayList<String>(aspectUnitsReferences.values());
+		Collections.sort(sorted);
+		for( String ref : sorted){		
+			result.append("\t" + ref + " " + aspectReferencesUnits.get(ref).getUri()+"\n");
+		}
 		return result.toString();
 	}
 	

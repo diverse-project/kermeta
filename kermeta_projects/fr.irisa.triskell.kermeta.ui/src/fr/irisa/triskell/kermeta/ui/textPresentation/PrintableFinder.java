@@ -1,4 +1,4 @@
-/*$Id: PrintableFinder.java,v 1.2 2008-04-25 15:05:09 dvojtise Exp $
+/*$Id: PrintableFinder.java,v 1.3 2008-04-30 14:16:44 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.ui
 * File : 	PrintableFinder.java
 * License : EPL
@@ -10,6 +10,8 @@
 */
 
 package fr.irisa.triskell.kermeta.ui.textPresentation;
+
+import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
@@ -121,8 +123,18 @@ public class PrintableFinder extends KermetaOptimizedVisitor {
 	 */
 	@Override
 	public Object visitCallSuperOperation(CallSuperOperation node) {
-		// TODO Auto-generated method stub
-		return super.visitCallSuperOperation(node);
+		// TODO Auto-generated method stub would be cool to return the doc of the super operation that will be called but seems complex to compute ... need to look into the interpreter
+		Operation container_op = null;
+		EObject nextContainer = node.eContainer();
+		while(container_op == null && nextContainer != null){
+			if(nextContainer instanceof Operation){
+				container_op = (Operation) nextContainer;
+			}
+			nextContainer = nextContainer.eContainer();
+		}
+		if(container_op != null)
+			return accept(container_op.getSuperOperation());
+		else return null; // no Operation contains this expression !?? should never occur
 	}
 
 	/* (non-Javadoc)
