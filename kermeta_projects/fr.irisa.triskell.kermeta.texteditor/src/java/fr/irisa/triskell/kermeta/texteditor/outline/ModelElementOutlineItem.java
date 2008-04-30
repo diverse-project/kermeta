@@ -1,4 +1,4 @@
-/* $Id: ModelElementOutlineItem.java,v 1.6 2008-02-14 07:13:43 uid21732 Exp $
+/* $Id: ModelElementOutlineItem.java,v 1.7 2008-04-30 12:34:42 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineItem.java
 * License : EPL
@@ -49,6 +49,10 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
     }
     
     public int compareTo(ModelElementOutlineItem other) {
+    	if(getLabel() == null) {
+    		if(other.getLabel() != null) return -other.getLabel().length();
+    		else return 0;
+    	}
         if (other instanceof ModelElementOutlineItem) {
             return getLabel().compareTo(((ModelElementOutlineItem)other).getLabel());
         }
