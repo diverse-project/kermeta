@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaModelHelper.java,v 1.8 2008-04-30 13:56:58 ftanguy Exp $
+/*$Id: KermetaModelHelper.java,v 1.9 2008-04-30 14:11:31 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	KermetaModelHelper.java
 * License : EPL
@@ -325,6 +325,13 @@ public class KermetaModelHelper {
 		
 		public List<Operation> getSuperOperations(Operation op) {
 			return OperationHelper.getSuperOperations(op);
+		}
+		public List<Constraint> getAllPreconditions(Operation op) {
+			return OperationHelper.getAllPreconditions(op);
+		}
+		
+		public List<Constraint> getAllPostconditions(Operation op) {
+			return OperationHelper.getAllPostconditions(op);
 		}
 	}
 	
