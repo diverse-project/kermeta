@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeAction.java,v 1.6 2008-04-25 13:16:43 cfaucher Exp $
+/*$Id: MergeAction.java,v 1.7 2008-04-30 14:25:01 ftanguy Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	MergeAction.java
 * License : EPL
@@ -81,7 +81,7 @@ public class MergeAction implements IObjectActionDelegate {
 					}
 					
 					Merger merger = new Merger();
-					merger.process(context, getOutputFilePath());
+					merger.process(context, getOutputFilePath(), true);
 				} catch (URIMalformedException e) {
 					e.printStackTrace();
 				} catch (NotRegisteredURIException e) {

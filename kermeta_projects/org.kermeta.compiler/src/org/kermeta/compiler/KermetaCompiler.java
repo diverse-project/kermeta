@@ -1,4 +1,4 @@
-/* $Id: KermetaCompiler.java,v 1.3 2008-03-04 10:25:59 cfaucher Exp $
+/* $Id: KermetaCompiler.java,v 1.4 2008-04-30 14:24:52 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -164,7 +164,7 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 		internalLog.info("Ecore structure has been generated");
 		
 		KmExporter kmExporter = new KmExporter();
-		kmExporter.export(unit, URIHelper.removeFileName(unit.getUri()));
+		kmExporter.export(unit, URIHelper.removeFileName(unit.getUri()), true);
 		
 		return km2ecoreGen;
 	}
