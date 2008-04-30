@@ -1,6 +1,6 @@
 
 
-/*$Id: TypeCloner.java,v 1.2 2008-04-28 11:51:08 ftanguy Exp $
+/*$Id: TypeCloner.java,v 1.3 2008-04-30 13:58:32 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	TypeCloner.java
 * License : EPL
@@ -52,12 +52,21 @@ public class TypeCloner {
 				ClassDefinition cd = (ClassDefinition) unit.getTypeDefinitionByQualifiedName( KermetaModelHelper.NamedElement.qualifiedName( (NamedElement)mtv.eContainer()) );
 				// Getting the model type variable
 				ModelTypeVariable newmtv = (ModelTypeVariable) KermetaModelHelper.ClassDefinition.getTypeParameter(cd, mtv.getName() );
+				// Check if it does already exist.
+				VirtualType newvt = null;
+				for ( VirtualType currentvt : newmtv.getVirtualType() )
+					if ( currentvt.getName().equals(vt.getName()) ) {
+						newvt = currentvt;
+						break;
+					}
 				// Creating the new virtual type and setting its properties
-				VirtualType newvt = StructureFactory.eINSTANCE.createVirtualType();
-				ClassDefinition cdReferenced = (ClassDefinition) unit.getTypeDefinitionByQualifiedName( KermetaModelHelper.NamedElement.qualifiedName(vt.getClassDefinition()) );
-				newvt.setClassDefinition( cdReferenced );
-				newvt.setName( vt.getName() );
-				newmtv.getVirtualType().add( newvt );
+				if ( newvt == null ) {
+					newvt = StructureFactory.eINSTANCE.createVirtualType();
+					ClassDefinition cdReferenced = (ClassDefinition) unit.getTypeDefinitionByQualifiedName( KermetaModelHelper.NamedElement.qualifiedName(vt.getClassDefinition()) );
+					newvt.setClassDefinition( cdReferenced );
+					newvt.setName( vt.getName() );
+					newmtv.getVirtualType().add( newvt );
+				}
 				return newvt;
 			/*
 			 * 
