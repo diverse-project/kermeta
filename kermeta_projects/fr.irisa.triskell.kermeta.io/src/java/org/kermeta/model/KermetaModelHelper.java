@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaModelHelper.java,v 1.7 2008-04-28 11:50:25 ftanguy Exp $
+/*$Id: KermetaModelHelper.java,v 1.8 2008-04-30 13:56:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	KermetaModelHelper.java
 * License : EPL
@@ -246,6 +246,11 @@ public class KermetaModelHelper {
 		public boolean isCollection(ClassDefinition c) {
 			return ClassDefinitionHelper.isCollection(c);
 		}
+		
+		public boolean isSuperTypeOf(ClassDefinition superclass, ClassDefinition clazz) {
+			return ClassDefinitionHelper.isSuperTypeOf(superclass, clazz);			
+		}
+
 	}
 	
 	

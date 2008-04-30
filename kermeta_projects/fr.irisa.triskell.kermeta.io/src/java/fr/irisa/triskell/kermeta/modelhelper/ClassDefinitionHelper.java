@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.14 2008-04-28 11:50:17 ftanguy Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.15 2008-04-30 13:56:58 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -42,28 +42,33 @@ public class ClassDefinitionHelper {
 	 * @param cls the class to compare to the super class
 	 * @return
 	 */
-	public static boolean isSuperClassOf(ClassDefinition supercls, ClassDefinition cls) {
-		for(Type stype : cls.getSuperType()) {
-			ClassDefinition scls = TypeHelper.getClassDefinition(stype);
-			if (supercls == scls) return true;
-			else if(isSuperClassOf(supercls, scls)) return true;
-		}
-		for ( TypeDefinition typeDefinition : TypeDefinitionHelper.getBaseAspects(cls) ) {
-			if ( typeDefinition instanceof ClassDefinition ) {
-				ClassDefinition c = (ClassDefinition) typeDefinition;
-				if ( isSuperClassOf(supercls, c) )
-					return true;
+/*	public static boolean isSuperClassOf(ClassDefinition supercls, ClassDefinition cls) {
+		try {
+			for(Type stype : cls.getSuperType()) {
+				ClassDefinition scls = TypeHelper.getClassDefinition(stype);
+				if (supercls == scls) return true;
+				else if(isSuperClassOf(supercls, scls)) return true;
 			}
-		}
-		for ( TypeDefinition typeDefinition : TypeDefinitionHelper.getBaseAspects(supercls) ) {
-			if ( typeDefinition instanceof ClassDefinition ) {
-				ClassDefinition c = (ClassDefinition) typeDefinition;
-				if ( isSuperClassOf(c, cls) )
-					return true;
+			for ( TypeDefinition typeDefinition : TypeDefinitionHelper.getBaseAspects(cls) ) {
+				if ( typeDefinition instanceof ClassDefinition ) {
+					ClassDefinition c = (ClassDefinition) typeDefinition;
+					if ( isSuperClassOf(supercls, c) )
+						return true;
+				}
 			}
+			for ( TypeDefinition typeDefinition : TypeDefinitionHelper.getBaseAspects(supercls) ) {
+				if ( typeDefinition instanceof ClassDefinition ) {
+					ClassDefinition c = (ClassDefinition) typeDefinition;
+					if ( isSuperClassOf(c, cls) )
+						return true;
+				}
+			}
+			return false;
+		} catch (StackOverflowError e) {
+			System.out.println();
 		}
 		return false;
-	}
+	}*/
 	
 	/**
 	 * Return true if supercls is a super class of cls, retrieval by name
@@ -76,7 +81,7 @@ public class ClassDefinitionHelper {
 		for(Object stype : cls.getSuperType()) {
 			ClassDefinition scls = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stype).getTypeDefinition();
 			if (supercls.getName().equals(scls.getName())) return true;
-			else if(isSuperClassOf(supercls, scls)) return true;
+			else if( KermetaModelHelper.ClassDefinition.isSuperTypeOf(supercls, scls)) return true;
 		}
 		return false;
 	}

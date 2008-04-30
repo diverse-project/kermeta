@@ -1,6 +1,6 @@
 
 
-/*$Id: ClassDefinitionHelper.java,v 1.10 2008-04-28 11:50:14 ftanguy Exp $
+/*$Id: ClassDefinitionHelper.java,v 1.11 2008-04-30 13:56:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -353,6 +353,27 @@ public class ClassDefinitionHelper {
 		for ( TypeDefinition cd : getContext(c) )
 			if ( KermetaModelHelper.NamedElement.qualifiedName(cd).equals("kermeta::standard::Collection") )
 				return true;
+		return false;
+	}
+
+	/**
+	 * Is superclass a super class of clazz ?
+	 * @param superclass
+	 * @param clazz
+	 * @return true if super class is a super class of clazz, false otherwise.
+	 */
+	public static boolean isSuperTypeOf(ClassDefinition superclass, ClassDefinition clazz) {
+		List<TypeDefinition> context = getContext(clazz);
+		// Because a list allows duplicates, look for multiple superclass element in the list.
+		boolean found = false;
+		for ( TypeDefinition td : context ) {
+			if ( superclass == td ) {
+				if ( found )
+					return true;
+				else
+					found = true;
+			}
+		}
 		return false;
 	}
 }

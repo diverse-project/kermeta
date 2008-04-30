@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.21 2008-04-14 09:51:59 dvojtise Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.22 2008-04-30 13:57:06 ftanguy Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -17,6 +17,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
@@ -29,7 +30,6 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
@@ -112,7 +112,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		//current_class = class_definition;
 		current_class = class_definition;
 		// check for inheritance cycles
-		if ( ClassDefinitionHelper.isSuperClassOf( current_class, current_class)) {
+		if ( KermetaModelHelper.ClassDefinition.isSuperTypeOf( current_class, current_class)) {
 			builder.error("Cycle in the inheritance tree - The type hierachy of class '" + current_class.getName()+"' is inconsistant.", builder.getNodeByModelElement(current_class));
 			return false;
 		}

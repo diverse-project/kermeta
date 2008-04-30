@@ -2,17 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.23 2008-03-19 16:34:00 cfaucher Exp $
+ * $Id: PropertyItemProvider.java,v 1.24 2008-04-30 13:58:11 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
-
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
-import fr.irisa.triskell.kermeta.language.structure.Class;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,13 +12,13 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
+import org.eclipse.emf.edit.command.SetCommand;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -36,10 +28,14 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.kermeta.model.KermetaModelHelper;
 
-import org.eclipse.emf.edit.command.SetCommand;
-import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.common.command.CompoundCommand;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
+import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 /**
  * This is the item provider adapter for a
@@ -182,11 +178,11 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 								ClassDefinition eOppositeReferenceType = (ClassDefinition) ((Class) eOpposite
 										.getType()).getTypeDefinition();
 								if (eOppositeContainingClass == null
-										|| ClassDefinitionHelper.isSuperClassOf(
+										|| KermetaModelHelper.ClassDefinition.isSuperTypeOf(
 												eOppositeContainingClass,
 												eReferenceType)
 										|| eOppositeContainingClass != eReferenceType
-										|| ClassDefinitionHelper.isSuperClassOf(
+										|| KermetaModelHelper.ClassDefinition.isSuperTypeOf(
 												eContainingClass,
 												eOppositeReferenceType)
 										|| eContainingClass != eOppositeReferenceType) {
