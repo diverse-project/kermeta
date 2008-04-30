@@ -1,6 +1,6 @@
 
 
-/*$Id: KmExporter.java,v 1.10 2008-04-28 11:50:25 ftanguy Exp $
+/*$Id: KmExporter.java,v 1.11 2008-04-30 13:57:53 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -99,7 +99,10 @@ public class KmExporter {
 		
 		URI uri;
 		if ( kermetaUnit.isFramework() ) {
-/*			Resource resource = resourceSet.createResource( URI.createURI( kermetaUnit.getUri() )  );
+			Resource resource = kermetaUnit.getModelingUnit().eResource();
+			resourceSet.getResources().add( resource );
+			resourcesNotToSave.put(resource, kermetaUnit);
+			/*Resource resource = resourceSet.createResource( URI.createURI( kermetaUnit.getUri() )  );
 			resource.getContents().add( kermetaUnit.getCompilationUnit() );
 			resourcesNotToSave.put(resource, kermetaUnit);
 			resources.put(kermetaUnit, resource);*/
