@@ -1,6 +1,6 @@
 
 
-/*$Id: ClassDefinitionHelper.java,v 1.11 2008-04-30 13:56:58 ftanguy Exp $
+/*$Id: ClassDefinitionHelper.java,v 1.12 2008-04-30 14:12:06 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -130,6 +130,12 @@ public class ClassDefinitionHelper {
 		return result;
 	}
 	
+	/**
+	 * Return all the classes related to this one :
+	 * This includes the aspects and the inherited class definition
+	 * @param c
+	 * @return
+	 */
 	static public List<TypeDefinition> getContext(ClassDefinition c) {
 		List<TypeDefinition> result = new ArrayList<TypeDefinition>();
 		TreeMap<Integer, List<TypeDefinition>> context = _getContext(c);

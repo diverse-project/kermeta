@@ -1,6 +1,6 @@
 
 
-/*$Id: OperationHelper.java,v 1.3 2008-04-28 11:50:14 ftanguy Exp $
+/*$Id: OperationHelper.java,v 1.4 2008-04-30 14:12:06 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -15,9 +15,14 @@ package org.kermeta.model.internal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.kermeta.model.KermetaModelHelper;
+
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 public class OperationHelper {
@@ -56,6 +61,49 @@ public class OperationHelper {
 			list_superOps.addAll( getSuperOperations(superOp) );
 		}
 		return list_superOps;
+	}
+	/** Returns a list of all Preconditions for this operation including inherited pre and
+	 * pre from an aspect
+	 * User may filter this unsig the qualified name in order to separate aspects and inherited pre
+	 */
+	public static List<Constraint> getAllPreconditions(Operation op) {
+				
+		// go up to the ClassDefinition
+		ClassDefinition cls =op.getOwningClass();
+		// in all of the operations of the class and its aspects and inherited class		
+		List<Constraint> preconditions = new ArrayList<Constraint>();
+		for ( TypeDefinition typeDefinition :KermetaModelHelper.ClassDefinition.getContext(cls) )
+			if ( typeDefinition instanceof ClassDefinition ){
+				for(Operation potentialOp : ((ClassDefinition) typeDefinition).getOwnedOperation()){
+					if(potentialOp.getName().equals(op.getName())){
+						// filter on operation name
+						preconditions.addAll(potentialOp.getPre());
+					}
+				}
+			}		
+		return preconditions;
+	}
+	
+	/** Returns a list of all Postconditions for this operation including inherited post and
+	 * post from an aspect
+	 * User may filter this unsig the qualified name in order to separate aspects and inherited pre
+	 */
+	public static List<Constraint> getAllPostconditions(Operation op) {
+				
+		// go up to the ClassDefinition
+		ClassDefinition cls =op.getOwningClass();
+		// in all of the operations of the class and its aspects and inherited class		
+		List<Constraint> postconditions = new ArrayList<Constraint>();
+		for ( TypeDefinition typeDefinition :KermetaModelHelper.ClassDefinition.getContext(cls) )
+			if ( typeDefinition instanceof ClassDefinition ){
+				for(Operation potentialOp : ((ClassDefinition) typeDefinition).getOwnedOperation()){
+					if(potentialOp.getName().equals(op.getName())){
+						// filter on operation name
+						postconditions.addAll(potentialOp.getPost());
+					}
+				}
+			}		
+		return postconditions;
 	}
 	
 }
