@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/">
+  <packages name="ocl2kmt">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="KermetaHelper"
+        superType="#//@packages.0/KermetaHelper/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
+      <ownedOperation name="isKermetaKeyword" type="#//@packages.0/KermetaHelper/isKermetaKeyword/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+        <ownedParameter name="word" type="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                  name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                    value="value">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                    name="word"/>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                  name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                    name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                      value="result"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                      name="word"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                    name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                      name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                        value="void"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                        name="word"/>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                      name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                        name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                      <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                          value="false"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                          name="word"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                        name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                          name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                            value="true"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                            name="word"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                          name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                            name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                          <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                              value="extern"/>
+                          <target xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                              name="word"/>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                            name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                              name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                            <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                value="init"/>
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                name="word"/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                              name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                            <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                              <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                  value="var"/>
+                              <target xsi:type="kermeta_language_behavior:CallVariable"
+                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                  name="word"/>
+                            </parameters>
+                            <target xsi:type="kermeta_language_behavior:CallFeature"
+                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                              <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                  name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                    value="raise"/>
+                                <target xsi:type="kermeta_language_behavior:CallVariable"
+                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                    name="word"/>
+                              </parameters>
+                              <target xsi:type="kermeta_language_behavior:CallFeature"
+                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                  name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                    name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                  <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                      value="else"/>
+                                  <target xsi:type="kermeta_language_behavior:CallVariable"
+                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                      name="word"/>
+                                </parameters>
+                                <target xsi:type="kermeta_language_behavior:CallFeature"
+                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                    name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                  <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                      name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                    <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                        value="then"/>
+                                    <target xsi:type="kermeta_language_behavior:CallVariable"
+                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                        name="word"/>
+                                  </parameters>
+                                  <target xsi:type="kermeta_language_behavior:CallFeature"
+                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                      name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                    <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                        name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                      <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                          value="if"/>
+                                      <target xsi:type="kermeta_language_behavior:CallVariable"
+                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                          name="word"/>
+                                    </parameters>
+                                    <target xsi:type="kermeta_language_behavior:CallFeature"
+                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                        name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                          name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                        <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                            value="loop"/>
+                                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                            name="word"/>
+                                      </parameters>
+                                      <target xsi:type="kermeta_language_behavior:CallFeature"
+                                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                          name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                        <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                            name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                          <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                              value="until"/>
+                                          <target xsi:type="kermeta_language_behavior:CallVariable"
+                                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                              name="word"/>
+                                        </parameters>
+                                        <target xsi:type="kermeta_language_behavior:CallFeature"
+                                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                            name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                          <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                              name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                            <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                value="from"/>
+                                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                name="word"/>
+                                          </parameters>
+                                          <target xsi:type="kermeta_language_behavior:CallFeature"
+                                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                              name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                            <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                              <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                  value="rescue"/>
+                                              <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                  name="word"/>
+                                            </parameters>
+                                            <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                              <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                  name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                    value="function"/>
+                                                <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                    name="word"/>
+                                              </parameters>
+                                              <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                  name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                    name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                  <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                      value="end"/>
+                                                  <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                      name="word"/>
+                                                </parameters>
+                                                <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                    name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                  <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                      name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                    <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                        value="do"/>
+                                                    <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                        name="word"/>
+                                                  </parameters>
+                                                  <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                      name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                    <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                        name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                      <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                          value="super"/>
+                                                      <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                          name="word"/>
+                                                    </parameters>
+                                                    <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                        name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                          name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                        <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                            value="not"/>
+                                                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                            name="word"/>
+                                                      </parameters>
+                                                      <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                          name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                        <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                            name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                          <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                              value="or"/>
+                                                          <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                              name="word"/>
+                                                        </parameters>
+                                                        <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                            name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                          <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                              name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                            <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                value="and"/>
+                                                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                name="word"/>
+                                                          </parameters>
+                                                          <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                              name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                            <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                              <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                  value="enumeration"/>
+                                                              <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                  name="word"/>
+                                                            </parameters>
+                                                            <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                              <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                  name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                    value="alias"/>
+                                                                <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                    name="word"/>
+                                                              </parameters>
+                                                              <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                  name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                    name="equals"
+                                                                    staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                  <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                      value="oset"/>
+                                                                  <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                      name="word"/>
+                                                                </parameters>
+                                                                <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                    name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                  <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                      name="equals"
+                                                                      staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                    <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                        value="seq"/>
+                                                                    <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                        name="word"/>
+                                                                  </parameters>
+                                                                  <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                      name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                    <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                        name="equals"
+                                                                        staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                      <parameters
+                                                                          xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                          value="set"/>
+                                                                      <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                          name="word"/>
+                                                                    </parameters>
+                                                                    <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                        name="or"
+                                                                        staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                      <parameters
+                                                                          xsi:type="kermeta_language_behavior:CallFeature"
+                                                                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                          name="equals"
+                                                                          staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                        <parameters
+                                                                            xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                            value="bag"/>
+                                                                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                            name="word"/>
+                                                                      </parameters>
+                                                                      <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                          name="or"
+                                                                          staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                        <parameters
+                                                                            xsi:type="kermeta_language_behavior:CallFeature"
+                                                                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                            name="equals"
+                                                                            staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                          <parameters
+                                                                              xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                              value="method"/>
+                                                                          <target
+                                                                              xsi:type="kermeta_language_behavior:CallVariable"
+                                                                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                              name="word"/>
+                                                                        </parameters>
+                                                                        <target xsi:type="kermeta_language_behavior:CallFeature"
+                                                                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                            name="or"
+                                                                            staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                          <parameters
+                                                                              xsi:type="kermeta_language_behavior:CallFeature"
+                                                                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                              name="equals"
+                                                                              staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                            <parameters
+                                                                                xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                value="operation"/>
+                                                                            <target
+                                                                                xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                name="word"/>
+                                                                          </parameters>
+                                                                          <target
+                                                                              xsi:type="kermeta_language_behavior:CallFeature"
+                                                                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                              name="or"
+                                                                              staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                            <parameters
+                                                                                xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                name="equals"
+                                                                                staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                              <parameters
+                                                                                  xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                  value="select"/>
+                                                                              <target
+                                                                                  xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                  name="word"/>
+                                                                            </parameters>
+                                                                            <target
+                                                                                xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                name="or"
+                                                                                staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                              <parameters
+                                                                                  xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                  name="equals"
+                                                                                  staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                <parameters
+                                                                                    xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                    value="raises"/>
+                                                                                <target
+                                                                                    xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                    name="word"/>
+                                                                              </parameters>
+                                                                              <target
+                                                                                  xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                  name="or"
+                                                                                  staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                <parameters
+                                                                                    xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                    name="equals"
+                                                                                    staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                  <parameters
+                                                                                      xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                      value="setter"/>
+                                                                                  <target
+                                                                                      xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                      name="word"/>
+                                                                                </parameters>
+                                                                                <target
+                                                                                    xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                    name="or"
+                                                                                    staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                  <parameters
+                                                                                      xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                      name="equals"
+                                                                                      staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                    <parameters
+                                                                                        xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                        value="is"/>
+                                                                                    <target
+                                                                                        xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                        name="word"/>
+                                                                                  </parameters>
+                                                                                  <target
+                                                                                      xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                      name="or"
+                                                                                      staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                    <parameters
+                                                                                        xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                        name="equals"
+                                                                                        staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                      <parameters
+                                                                                          xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                          value="getter"/>
+                                                                                      <target
+                                                                                          xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                          name="word"/>
+                                                                                    </parameters>
+                                                                                    <target
+                                                                                        xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                        name="or"
+                                                                                        staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                      <parameters
+                                                                                          xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                          name="equals"
+                                                                                          staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                        <parameters
+                                                                                            xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                            value="readonly"/>
+                                                                                        <target
+                                                                                            xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                            name="word"/>
+                                                                                      </parameters>
+                                                                                      <target
+                                                                                          xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                          name="or"
+                                                                                          staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                        <parameters
+                                                                                            xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                            name="equals"
+                                                                                            staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                          <parameters
+                                                                                              xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                              value="property"/>
+                                                                                          <target
+                                                                                              xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                              name="word"/>
+                                                                                        </parameters>
+                                                                                        <target
+                                                                                            xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                            name="or"
+                                                                                            staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                          <parameters
+                                                                                              xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                              name="equals"
+                                                                                              staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                            <parameters
+                                                                                                xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                value="reference"/>
+                                                                                            <target
+                                                                                                xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                name="word"/>
+                                                                                          </parameters>
+                                                                                          <target
+                                                                                              xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                              name="or"
+                                                                                              staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                            <parameters
+                                                                                                xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                name="equals"
+                                                                                                staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                              <parameters
+                                                                                                  xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                  value="attribute"/>
+                                                                                              <target
+                                                                                                  xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                  name="word"/>
+                                                                                            </parameters>
+                                                                                            <target
+                                                                                                xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                name="or"
+                                                                                                staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                              <parameters
+                                                                                                  xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                  name="equals"
+                                                                                                  staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                <parameters
+                                                                                                    xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                    value="Void"/>
+                                                                                                <target
+                                                                                                    xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                    name="word"/>
+                                                                                              </parameters>
+                                                                                              <target
+                                                                                                  xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                  name="or"
+                                                                                                  staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                <parameters
+                                                                                                    xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                    name="equals"
+                                                                                                    staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                  <parameters
+                                                                                                      xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                      value="Self"/>
+                                                                                                  <target
+                                                                                                      xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                      name="word"/>
+                                                                                                </parameters>
+                                                                                                <target
+                                                                                                    xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                    name="or"
+                                                                                                    staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                  <parameters
+                                                                                                      xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                      name="equals"
+                                                                                                      staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                    <parameters
+                                                                                                        xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                        value="abstract"/>
+                                                                                                    <target
+                                                                                                        xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                        name="word"/>
+                                                                                                  </parameters>
+                                                                                                  <target
+                                                                                                      xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                      name="or"
+                                                                                                      staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                    <parameters
+                                                                                                        xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                        name="equals"
+                                                                                                        staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                      <parameters
+                                                                                                          xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                          value="inv"/>
+                                                                                                      <target
+                                                                                                          xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                          name="word"/>
+                                                                                                    </parameters>
+                                                                                                    <target
+                                                                                                        xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                        name="or"
+                                                                                                        staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                      <parameters
+                                                                                                          xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                          name="equals"
+                                                                                                          staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                        <parameters
+                                                                                                            xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                            value="post"/>
+                                                                                                        <target
+                                                                                                            xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                            staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                            name="word"/>
+                                                                                                      </parameters>
+                                                                                                      <target
+                                                                                                          xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                          name="or"
+                                                                                                          staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                        <parameters
+                                                                                                            xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                            name="equals"
+                                                                                                            staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                          <parameters
+                                                                                                              xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                              value="pre"/>
+                                                                                                          <target
+                                                                                                              xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                              staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                              name="word"/>
+                                                                                                        </parameters>
+                                                                                                        <target
+                                                                                                            xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                            name="or"
+                                                                                                            staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                          <parameters
+                                                                                                              xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                              name="equals"
+                                                                                                              staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                            <parameters
+                                                                                                                xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                                value="class"/>
+                                                                                                            <target
+                                                                                                                xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                                staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                                name="word"/>
+                                                                                                          </parameters>
+                                                                                                          <target
+                                                                                                              xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                              name="or"
+                                                                                                              staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                            <parameters
+                                                                                                                xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                                name="equals"
+                                                                                                                staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                              <parameters
+                                                                                                                  xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                                  value="inherits"/>
+                                                                                                              <target
+                                                                                                                  xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                                  staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                                  name="word"/>
+                                                                                                            </parameters>
+                                                                                                            <target
+                                                                                                                xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                                name="or"
+                                                                                                                staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                              <parameters
+                                                                                                                  xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                                  name="equals"
+                                                                                                                  staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                                <parameters
+                                                                                                                    xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                                    value="using"/>
+                                                                                                                <target
+                                                                                                                    xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                                    staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                                    name="word"/>
+                                                                                                              </parameters>
+                                                                                                              <target
+                                                                                                                  xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                                  staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                                  name="or"
+                                                                                                                  staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                                <parameters
+                                                                                                                    xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                                    name="equals"
+                                                                                                                    staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                                  <parameters
+                                                                                                                      xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                                      value="excludeFilter"/>
+                                                                                                                  <target
+                                                                                                                      xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                                      staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                                      name="word"/>
+                                                                                                                </parameters>
+                                                                                                                <target
+                                                                                                                    xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                                    name="or"
+                                                                                                                    staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                                  <parameters
+                                                                                                                      xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                                      name="equals"
+                                                                                                                      staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                                    <parameters
+                                                                                                                        xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                                        value="includeFilter"/>
+                                                                                                                    <target
+                                                                                                                        xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                                        staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                                        name="word"/>
+                                                                                                                  </parameters>
+                                                                                                                  <target
+                                                                                                                      xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                                      staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                                                                                                                      name="or"
+                                                                                                                      staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean/or">
+                                                                                                                    <parameters
+                                                                                                                        xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                                        name="equals"
+                                                                                                                        staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                                      <parameters
+                                                                                                                          xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                                          value="require"/>
+                                                                                                                      <target
+                                                                                                                          xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                                          name="word"/>
+                                                                                                                    </parameters>
+                                                                                                                    <target
+                                                                                                                        xsi:type="kermeta_language_behavior:CallFeature"
+                                                                                                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                                                                                                                        name="equals"
+                                                                                                                        staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+                                                                                                                      <parameters
+                                                                                                                          xsi:type="kermeta_language_behavior:StringLiteral"
+                                                                                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                                                                                                                          value="package"/>
+                                                                                                                      <target
+                                                                                                                          xsi:type="kermeta_language_behavior:CallVariable"
+                                                                                                                          staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@ownedParameter.0/@containedType.0"
+                                                                                                                          name="word"/>
+                                                                                                                    </target>
+                                                                                                                  </target>
+                                                                                                                </target>
+                                                                                                              </target>
+                                                                                                            </target>
+                                                                                                          </target>
+                                                                                                        </target>
+                                                                                                      </target>
+                                                                                                    </target>
+                                                                                                  </target>
+                                                                                                </target>
+                                                                                              </target>
+                                                                                            </target>
+                                                                                          </target>
+                                                                                        </target>
+                                                                                      </target>
+                                                                                    </target>
+                                                                                  </target>
+                                                                                </target>
+                                                                              </target>
+                                                                            </target>
+                                                                          </target>
+                                                                        </target>
+                                                                      </target>
+                                                                    </target>
+                                                                  </target>
+                                                                </target>
+                                                              </target>
+                                                            </target>
+                                                          </target>
+                                                        </target>
+                                                      </target>
+                                                    </target>
+                                                  </target>
+                                                </target>
+                                              </target>
+                                            </target>
+                                          </target>
+                                        </target>
+                                      </target>
+                                    </target>
+                                  </target>
+                                </target>
+                              </target>
+                            </target>
+                          </target>
+                        </target>
+                      </target>
+                    </target>
+                  </target>
+                </target>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="escape" type="#//@packages.0/KermetaHelper/escape/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        <ownedParameter name="s" type="#//@packages.0/KermetaHelper/escape/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/KermetaHelper/escape/@containedType.0"
+                    name="result"/>
+                <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                    value="~"/>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/KermetaHelper/escape/@containedType.0"
+                    name="result"/>
+                <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@body/@statement.0/@value/@parameters.0/@parameters.0/@containedType.0"
+                    value=""/>
+              </statement>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/KermetaHelper/isKermetaKeyword/@containedType.0"
+                name="isKermetaKeyword" staticOperation="#//@packages.0/KermetaHelper/isKermetaKeyword">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/KermetaHelper/escape/@ownedParameter.0/@containedType.0"
+                  name="s"/>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/KermetaHelper/escape/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"
+                name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/KermetaHelper/escape/@ownedParameter.0/@containedType.0"
+                  name="s"/>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/KermetaHelper/escape/@containedType.0"
+                  name="result"/>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="ocl2kmt"/>
+  <usings qualifiedName="kermeta::standard"/>
+</kermeta_language_structure:ModelingUnit>

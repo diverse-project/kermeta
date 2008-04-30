@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/">
+  <packages name="ocl2kmt">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="StringWriter"
+        superType="#//@packages.0/StringWriter/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO"/>
+      <ownedAttribute name="s" type="#//@packages.0/StringWriter/s/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
+      <ownedOperation name="write" type="#//@packages.0/StringWriter/write/@containedType.0"
+          upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
+        <ownedParameter name="object" type="#//@packages.0/StringWriter/write/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/StringWriter/write/@ownedParameter.0/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/StringWriter/write/@ownedParameter.0/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/StringWriter/write/@ownedParameter.0/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/StringWriter/write/@ownedParameter.0/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/StringWriter/s/@containedType.0"
+                    name="s" staticProperty="#//@packages.0/StringWriter/s"/>
+                <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/StringWriter/write/@ownedParameter.0/@containedType.0"
+                    name="object"/>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/StringWriter/s/@containedType.0"
+                    name="s" staticProperty="#//@packages.0/StringWriter/s"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/plus">
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/StringWriter/write/@ownedParameter.0/@containedType.0"
+                      name="object"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/StringWriter/s/@containedType.0"
+                      name="s" staticProperty="#//@packages.0/StringWriter/s"/>
+                </value>
+              </statement>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String/equals">
+              <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/StringWriter/s/@containedType.0"
+                  name="s" staticProperty="#//@packages.0/StringWriter/s"/>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="writeln" type="#//@packages.0/StringWriter/writeln/@containedType.0"
+          upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
+        <ownedParameter name="object" type="#//@packages.0/StringWriter/writeln/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/StringWriter/write/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/StringWriter/write/@containedType.0"
+              name="write" staticOperation="#//@packages.0/StringWriter/write">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/StringWriter/writeln/@ownedParameter.0/@containedType.0"
+                name="object"/>
+            <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/StringWriter/writeln/@body/@statement.0/@target/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/StringWriter"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/StringWriter/write/@containedType.0"
+              name="write" staticOperation="#//@packages.0/StringWriter/write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/StringWriter/writeln/@body/@statement.1/@parameters.0/@containedType.0"
+                value="&#xA;">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/StringWriter/writeln/@body/@statement.0/@target/@containedType.0"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="read" type="#//@packages.0/StringWriter/read/@containedType.0"
+          isOrdered="true" upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/read">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        <ownedParameter name="prompt" type="#//@packages.0/StringWriter/read/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/StringWriter/read/@body/@statement.0/@containedType.0"
+              identifier="e">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/StringWriter/read/@body/@statement.0/@initialization/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/StringWriter/read/@body/@statement.0/@initialization/@target/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class"/>
+                <typeref type="#//@packages.0/StringWriter/read/@body/@statement.0/@initialization/@containedType.0"
+                    upper="1"/>
+              </target>
+            </initialization>
+            <type type="#//@packages.0/StringWriter/read/@body/@statement.0/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/StringWriter/writeln/@body/@statement.1/@parameters.0/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"
+                name="message" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception/message">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/StringWriter/read/@body/@statement.0/@containedType.0"
+                  name="e"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/StringWriter/writeln/@body/@statement.1/@parameters.0/@containedType.0"
+                value="Sorry, you can't read from a writer"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Raise" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+            <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/StringWriter/read/@body/@statement.0/@containedType.0"
+                name="e"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="FileWriter"
+        superType="#//@packages.0/FileWriter/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO"/>
+      <ownedAttribute name="f" type="#//@packages.0/FileWriter/f/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#//@packages.0/io/FileIO"/>
+      </ownedAttribute>
+      <ownedAttribute name="filename" type="#//@packages.0/FileWriter/filename/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
+      <ownedOperation name="write" type="#//@packages.0/FileWriter/write/@containedType.0"
+          upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
+        <ownedParameter name="object" type="#//@packages.0/FileWriter/write/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#//@packages.0/io/FileIO/writeTextFile/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/FileWriter/write/@body/@statement.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#//@packages.0/io/FileIO"/>
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/FileWriter/write/@body/@statement.0/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/FileWriter/write/@body/@statement.0/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/FileWriter/f/@containedType.0"
+                    name="f" staticProperty="#//@packages.0/FileWriter/f"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/FileWriter/write/@body/@statement.0/@containedType.0"
+                    name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class/new">
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/StringWriter/read/@body/@statement.0/@initialization/@target/@containedType.0">
+                    <typeref type="#//@packages.0/FileWriter/write/@body/@statement.0/@containedType.0"
+                        upper="1"/>
+                  </target>
+                </value>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object/equals">
+              <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/FileWriter/f/@containedType.0"
+                  name="f" staticProperty="#//@packages.0/FileWriter/f"/>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#//@packages.0/io/FileIO/writeTextFile/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#//@packages.0/io/FileIO/writeTextFile/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#//@packages.0/io/FileIO/writeTextFile/@containedType.0"
+                  name="writeTextFile" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#//@packages.0/io/FileIO/writeTextFile">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/FileWriter/filename/@containedType.0"
+                    name="filename" staticProperty="#//@packages.0/FileWriter/filename"/>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/FileWriter/write/@ownedParameter.0/@containedType.0"
+                    name="object"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/FileWriter/f/@containedType.0"
+                    name="f" staticProperty="#//@packages.0/FileWriter/f"/>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/FileWriter/write/@body/@statement.1/@elseBody/@statement.0/@containedType.0"
+                  identifier="e">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
+                <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/FileWriter/write/@body/@statement.1/@elseBody/@statement.0/@initialization/@containedType.0"
+                    name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class/new">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/StringWriter/read/@body/@statement.0/@initialization/@target/@containedType.0">
+                    <typeref type="#//@packages.0/FileWriter/write/@body/@statement.1/@elseBody/@statement.0/@initialization/@containedType.0"
+                        upper="1"/>
+                  </target>
+                </initialization>
+                <type type="#//@packages.0/FileWriter/write/@body/@statement.1/@elseBody/@statement.0/@containedType.0"
+                    isOrdered="true" upper="1"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/StringWriter/writeln/@body/@statement.1/@parameters.0/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"
+                    name="message" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception/message">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/FileWriter/write/@body/@statement.1/@elseBody/@statement.0/@containedType.0"
+                      name="e"/>
+                </target>
+                <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/StringWriter/writeln/@body/@statement.1/@parameters.0/@containedType.0"
+                    value="Sorry, filename is not set"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Raise" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+                <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/FileWriter/write/@body/@statement.1/@elseBody/@statement.0/@containedType.0"
+                    name="e"/>
+              </statement>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"
+                name="isNotEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object/isNotEqual">
+              <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/FileWriter/filename/@containedType.0"
+                  name="filename" staticProperty="#//@packages.0/FileWriter/filename"/>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="writeln" type="#//@packages.0/FileWriter/writeln/@containedType.0"
+          upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
+        <ownedParameter name="object" type="#//@packages.0/FileWriter/writeln/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/FileWriter/write/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/FileWriter/write/@containedType.0"
+              name="write" staticOperation="#//@packages.0/FileWriter/write">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/FileWriter/writeln/@ownedParameter.0/@containedType.0"
+                name="object"/>
+            <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/FileWriter/writeln/@body/@statement.0/@target/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/FileWriter"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/FileWriter/write/@containedType.0"
+              name="write" staticOperation="#//@packages.0/FileWriter/write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/StringWriter/writeln/@body/@statement.1/@parameters.0/@containedType.0"
+                value=" "/>
+            <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/FileWriter/writeln/@body/@statement.0/@target/@containedType.0"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="read" type="#//@packages.0/FileWriter/read/@containedType.0"
+          isOrdered="true" upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/read">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        <ownedParameter name="prompt" type="#//@packages.0/FileWriter/read/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/FileWriter/read/@body/@statement.0/@containedType.0"
+              identifier="e">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/FileWriter/read/@body/@statement.0/@initialization/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/StringWriter/read/@body/@statement.0/@initialization/@target/@containedType.0">
+                <typeref type="#//@packages.0/FileWriter/read/@body/@statement.0/@initialization/@containedType.0"
+                    upper="1"/>
+              </target>
+            </initialization>
+            <type type="#//@packages.0/FileWriter/read/@body/@statement.0/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/StringWriter/writeln/@body/@statement.1/@parameters.0/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"
+                name="message" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/Exception/message">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/FileWriter/read/@body/@statement.0/@containedType.0"
+                  name="e"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/StringWriter/writeln/@body/@statement.1/@parameters.0/@containedType.0"
+                value="Sorry, you can't read from a writer"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Raise" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+            <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/FileWriter/read/@body/@statement.0/@containedType.0"
+                name="e"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="IOMixin"
+        superType="#//@packages.0/IOMixin/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="__io" type="#//@packages.0/IOMixin/__io/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO"/>
+      </ownedAttribute>
+      <ownedAttribute name="__ierr" type="#//@packages.0/IOMixin/__ierr/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO"/>
+      </ownedAttribute>
+      <ownedOperation name="getIo" type="#//@packages.0/IOMixin/getIo/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/IOMixin/__io/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/IOMixin/getIo/@body/@statement.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/StringWriter"/>
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/IOMixin/getIo/@body/@statement.0/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/IOMixin/getIo/@body/@statement.0/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/__io/@containedType.0"
+                    name="__io" staticProperty="#//@packages.0/IOMixin/__io"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/getIo/@body/@statement.0/@containedType.0"
+                    name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class/new">
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/StringWriter/read/@body/@statement.0/@initialization/@target/@containedType.0">
+                    <typeref type="#//@packages.0/IOMixin/getIo/@body/@statement.0/@containedType.0"
+                        upper="1"/>
+                  </target>
+                </value>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object/equals">
+              <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/__io/@containedType.0"
+                  name="__io" staticProperty="#//@packages.0/IOMixin/__io"/>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/IOMixin/__io/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/IOMixin/getIo/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/__io/@containedType.0"
+                name="__io" staticProperty="#//@packages.0/IOMixin/__io"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="getIerr" type="#//@packages.0/IOMixin/getIerr/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/IOMixin/__io/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/IOMixin/getIerr/@body/@statement.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO"/>
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/IOMixin/getIerr/@body/@statement.0/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/IOMixin/getIerr/@body/@statement.0/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/__io/@containedType.0"
+                    name="__io" staticProperty="#//@packages.0/IOMixin/__io"/>
+                <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/IOMixin/getIerr/@body/@statement.0/@containedType.0"
+                    name="stdio"/>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object/equals">
+              <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/StringWriter/write/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/__io/@containedType.0"
+                  name="__io" staticProperty="#//@packages.0/IOMixin/__io"/>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/IOMixin/__io/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/IOMixin/getIerr/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/__io/@containedType.0"
+                name="__io" staticProperty="#//@packages.0/IOMixin/__io"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation tag="#//@packages.0/IOMixin/setIo/@ownedTags.0" name="setIo"
+          type="#//@packages.0/IOMixin/setIo/@containedType.0" upper="1">
+        <ownedTags value="/**&#xA;&#x9;&#x9; * Use this to set a string writer to get the generated source as a string&#xA;&#x9;&#x9; */"
+            object="#//@packages.0/IOMixin/setIo"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
+        <ownedParameter name="newio" type="#//@packages.0/IOMixin/setIo/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/IOMixin/setIo/@ownedParameter.0/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/IOMixin/setIo/@ownedParameter.0/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/__io/@containedType.0"
+                name="__io" staticProperty="#//@packages.0/IOMixin/__io">
+              <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/IOMixin/setIo/@body/@statement.0/@target/@target/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/IOMixin"/>
+              </target>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/IOMixin/setIo/@ownedParameter.0/@containedType.0"
+                name="newio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="write" type="#//@packages.0/IOMixin/write/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="s" type="#//@packages.0/IOMixin/write/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write/@containedType.0"
+              name="write" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/IOMixin/write/@ownedParameter.0/@containedType.0"
+                name="s"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/getIo/@containedType.0"
+                name="getIo" staticOperation="#//@packages.0/IOMixin/getIo"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="writeln" type="#//@packages.0/IOMixin/writeln/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="s" type="#//@packages.0/IOMixin/writeln/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+              name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/IOMixin/writeln/@ownedParameter.0/@containedType.0"
+                name="s"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/getIo/@containedType.0"
+                name="getIo" staticOperation="#//@packages.0/IOMixin/getIo"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="writeerr" type="#//@packages.0/IOMixin/writeerr/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="s" type="#//@packages.0/IOMixin/writeerr/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write/@containedType.0"
+              name="write" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/write">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/IOMixin/writeerr/@ownedParameter.0/@containedType.0"
+                name="s"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/getIo/@containedType.0"
+                name="getIo" staticOperation="#//@packages.0/IOMixin/getIo"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="writeerrln" type="#//@packages.0/IOMixin/writeerrln/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="s" type="#//@packages.0/IOMixin/writeerrln/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+              name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/IOMixin/writeerrln/@ownedParameter.0/@containedType.0"
+                name="s"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/IOMixin/getIo/@containedType.0"
+                name="getIo" staticOperation="#//@packages.0/IOMixin/getIo"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="ocl2kmt"/>
+  <usings qualifiedName="kermeta::standard"/>
+  <usings qualifiedName="kermeta::io"/>
+  <usings qualifiedName="kermeta::exceptions"/>
+</kermeta_language_structure:ModelingUnit>

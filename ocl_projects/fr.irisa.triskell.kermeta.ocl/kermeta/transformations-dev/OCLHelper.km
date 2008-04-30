@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/ oclcstvisitor.km#/ OCLCST.km#/ Ecore.km#/">
+  <packages name="OCLHelpers">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="#//@packages.0/OCLHelper/@ownedTags.0"
+        name="OCLHelper" superType="#//@packages.0/OCLHelper/@containedType.0">
+      <ownedTags value="/** This class provides some helper methods to load/save Ecore models&#xA;    Plus some other useful navigation methods&#xA; */"
+          object="#//@packages.0/OCLHelper"/>
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
+      <ownedOperation name="getPackageDeclaration" type="#//@packages.0/OCLHelper/getPackageDeclaration/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition oclcstvisitor.km#//@packages.0/cst/PackageDeclarationCS"/>
+        <ownedParameter name="model" type="#//@packages.0/OCLHelper/getPackageDeclaration/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#//@packages.0/persistence/Resource"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/OCLHelper/getPackageDeclaration/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/OCLHelper/getPackageDeclaration/@containedType.0"
+              isCast="true">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/OCLHelper/getPackageDeclaration/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Object/@containedType.0"
+                name="detect" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/detect">
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/OCLHelper/getPackageDeclaration/@body/@statement.0/@value/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/OCLHelper/getPackageDeclaration/@body/@statement.0/@value/@parameters.0/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                </containedType>
+                <parameters name="o"/>
+                <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1">
+                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/OCLHelper/getPackageDeclaration/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@containedType.0"
+                      identifier="packageDeclaration">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition oclcstvisitor.km#//@packages.0/cst/PackageDeclarationCS"/>
+                    <type type="#//@packages.0/OCLHelper/getPackageDeclaration/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@containedType.0"
+                        isOrdered="true" upper="1"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/OCLHelper/getPackageDeclaration/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@containedType.0"
+                      isCast="true">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/OCLHelper/getPackageDeclaration/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@containedType.0"
+                        name="packageDeclaration"/>
+                    <value xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Object/@containedType.0"
+                        name="o"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"
+                      name="isNotEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object/isNotEqual">
+                    <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/OCLHelper/getPackageDeclaration/@body/@statement.0/@value/@parameters.0/@body/@statement.2/@parameters.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/OCLHelper/getPackageDeclaration/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@containedType.0"
+                        name="packageDeclaration"/>
+                  </statement>
+                </body>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#//@packages.0/persistence/Resource/instances/@containedType.0"
+                  name="instances" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#//@packages.0/persistence/Resource/instances">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/OCLHelper/getPackageDeclaration/@ownedParameter.0/@containedType.0"
+                    name="model"/>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <requires uri="oclcstvisitor.kmt"/>
+  <usings qualifiedName="OCLHelpers"/>
+  <usings qualifiedName="ocl::cst"/>
+  <usings qualifiedName="kermeta::standard"/>
+  <usings qualifiedName="kermeta::persistence"/>
+  <usings qualifiedName="kermeta::exceptions"/>
+</kermeta_language_structure:ModelingUnit>

@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.15 2008-02-14 07:15:11 uid21732 Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.15 2008-02-14 07:15:11 uid21732 Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.16 2008-04-30 14:38:01 ftanguy Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.16 2008-04-30 14:38:01 ftanguy Exp $
  * Creation date: February 5, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -181,6 +181,7 @@ using qualifiedNames
 				pushNewStackFrame()
 				visitable.operationCS.accept(self)
 				//TODO: add 'result' to scope for post: conditions-- mark
+				
 				writeln("")
 				var body: PrePostOrBodyDeclCS
 				visitable.prePostOrBodyDecls.each{ ppbd |
@@ -232,6 +233,8 @@ using qualifiedNames
     			end
 				write(") :")
 				visitable.typeCS.accept(self)
+				// Adding result to the context
+				addLocalVariable("result", qualifiedTypeName, 0, 1, false)
 			end
 
 		method visitInitOrDerValueCS(visitable : InitOrDerValueCS) : Void is
