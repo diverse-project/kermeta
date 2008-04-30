@@ -1,4 +1,4 @@
-/* $Id: CallableElement.java,v 1.4 2008-04-28 11:50:10 ftanguy Exp $
+/* $Id: CallableElement.java,v 1.5 2008-04-30 13:57:40 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : CallableItem.java
 * License : EPL
@@ -12,6 +12,8 @@
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
@@ -23,7 +25,7 @@ public abstract class CallableElement {
 	 * Get the type of the callable element
 	 * @return
 	 */
-	public abstract Type getType();
+	public abstract Type getType(Expression expression);
 	
 	/**
 	 * Get the name of the callable element

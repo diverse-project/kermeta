@@ -1,4 +1,4 @@
-/* $Id: CallableProperty.java,v 1.7 2008-04-28 11:50:10 ftanguy Exp $
+/* $Id: CallableProperty.java,v 1.8 2008-04-30 13:57:40 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : CallableProperty.java
 * License : EPL
@@ -13,6 +13,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Hashtable;
 
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 //import fr.irisa.triskell.kermeta.language.structure.FType;
@@ -53,12 +54,15 @@ public class CallableProperty extends CallableElement {
     /**
      * @see fr.irisa.triskell.kermeta.typechecker.CallableElement#getType()
      */
-    public Type getType() {
+    public Type getType(Expression expression) {
         // The type of the property
     	fr.irisa.triskell.kermeta.language.structure.Type t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(property)).type;
         // subtitute varables :
         Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
-        return new SimpleType(TypeVariableEnforcer.getBoundType(t, bindings));
+        SimpleType st = new SimpleType(TypeVariableEnforcer.getBoundType(t, bindings));
+        if ( st.getFType().eContainer() == null && expression != null )
+        	expression.getContainedType().add(st.getType());
+        return st;
     }
     
     public Property getTypeBoundedProperty() {

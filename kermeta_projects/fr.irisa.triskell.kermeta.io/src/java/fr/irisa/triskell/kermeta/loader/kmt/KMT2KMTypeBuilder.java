@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.28 2008-04-28 11:50:13 ftanguy Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.29 2008-04-30 13:57:29 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -258,13 +258,13 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 						}
 					}
 					*/
-					
-					
-					
+										
 					TypeVariableBinding bind = StructureFactory.eINSTANCE.createTypeVariableBinding();
 					bind.setVariable((TypeVariable)gtdef.getTypeParameter().get(i));
-					
 					bind.setType(actual_params[i]);
+					if ( actual_params[i] instanceof fr.irisa.triskell.kermeta.language.structure.Class )
+						bind.getContainedType().add( actual_params[i] );
+					
 					res.getTypeParamBinding().add(bind);
 				}
 			}

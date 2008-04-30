@@ -1,4 +1,4 @@
-/* $Id: CallableOperation.java,v 1.11 2008-04-28 11:50:10 ftanguy Exp $
+/* $Id: CallableOperation.java,v 1.12 2008-04-30 13:57:40 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : CallableOperation.java
  * License : EPL
@@ -67,7 +67,7 @@ public class CallableOperation extends CallableElement {
 	 * @param name name of the operation
 	 * @return null if the operation was not found
 	 */
-    public Type getType() {
+    public Type getType(fr.irisa.triskell.kermeta.language.behavior.Expression expression) {
         Type result = null;
 
         Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
@@ -90,8 +90,8 @@ public class CallableOperation extends CallableElement {
             result = new SimpleType(TypeVariableEnforcer.getBoundType(ft, bindings));
         }
         
-        if ( result.getFType().eContainer() == null )
-        	operation.getContainedType().add( result.getFType() );
+        if ( result.getFType().eContainer() == null && expression != null )
+        	expression.getContainedType().add( result.getFType() );
 
         return result;
     }

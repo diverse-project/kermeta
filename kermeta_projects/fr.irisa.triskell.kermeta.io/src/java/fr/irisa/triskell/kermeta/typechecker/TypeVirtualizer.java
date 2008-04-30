@@ -1,4 +1,4 @@
-/* $Id: TypeVirtualizer.java,v 1.8 2008-04-28 11:50:11 ftanguy Exp $
+/* $Id: TypeVirtualizer.java,v 1.9 2008-04-30 13:57:40 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeVirtualizer.java
 * License : EPL
@@ -50,12 +50,12 @@ public class TypeVirtualizer extends KermetaOptimizedVisitor {
 
 	public static Type virtualizeOperationType(CallableOperation op, VirtualType vt) {
 		TypeVirtualizer visitor = new TypeVirtualizer(vt.getModelType());
-		return new SimpleType((fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(op.getType().getFType()));
+		return new SimpleType((fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(op.getType(null).getFType()));
 	}
 	
 	public static Type virtualizePropertyType(CallableProperty prop, VirtualType vt) {
 		TypeVirtualizer visitor = new TypeVirtualizer(vt.getModelType());
-		return new SimpleType((fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(prop.getType().getFType()));
+		return new SimpleType((fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(prop.getType(null).getFType()));
 	}
 	
 	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class cls) {

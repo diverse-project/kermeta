@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.64 2008-04-28 11:50:10 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.65 2008-04-30 13:57:40 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -16,7 +16,6 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -65,16 +64,13 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
-import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FSuperCall;
@@ -213,7 +209,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	protected Type checkOperationCall(CallableOperation op, CallExpression exp) {
 		
 		// Get the type of the operation as a function type
-	    Type operation_type = op.getType();
+	    Type operation_type = op.getType(exp);
 	    
 	    // The result is the return type of the operation
 	    // It can contain type variables that needs to be bound
@@ -278,6 +274,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 					Type provided = getTypeOfExpression((Expression)exp.getParameters().get(i));
 					Type expected = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)required_params[i]).type, binding));
 					if (!provided.isSubTypeOf(expected)) {
+						provided.isSubTypeOf(expected);
 						unit.error("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+expected+", found "+provided+".",(Expression)exp.getParameters().get(i));
 					    error = true;
 					}
@@ -491,10 +488,10 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			if ( (((CallFeature)exp).getTarget() != null) && (getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof VirtualType)) {
 				return TypeVirtualizer.virtualizePropertyType(prop, (VirtualType) getTypeOfExpression(((CallFeature)exp).getTarget()).getFType());
 			}
-		    return prop.getType();
+		    return prop.getType(exp);
 		}
 		else {
-		    return getReturnTypeForParametrizedCallExpression(exp, prop.getType());
+		    return getReturnTypeForParametrizedCallExpression(exp, prop.getType(exp));
 		}
 	}
 	
@@ -603,7 +600,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        	if ( targetType.getFType() instanceof Class && provided_type.getFType() instanceof Class ) {
 	        		ClassDefinition pCDef = (ClassDefinition) ((Class) provided_type.getFType()).getTypeDefinition();
 	        		ClassDefinition tCDef = (ClassDefinition) ((Class) targetType.getFType()).getTypeDefinition();
-	        		if ( ! ClassDefinitionHelper.isSuperClassOf(pCDef, tCDef) ) {
+	        		if ( ! KermetaModelHelper.ClassDefinition.isSuperTypeOf(pCDef, tCDef) ) {
 	        			Operation op = null;
 	        			ClassDefinition cd = null;
 	        			EObject current = expression;

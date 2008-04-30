@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.10 2008-04-28 11:50:10 ftanguy Exp $
+/* $Id: TypeMatchChecker.java,v 1.11 2008-04-30 13:57:40 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL
@@ -234,8 +234,8 @@ public class TypeMatchChecker {
 						CallableOperation p_op = p_type.getOperationByName(r_op.getName(), null);
 						// must calculate the isRequired separatlety because the type may be not a class (ex: funtiontype ...)
 						boolean isClassRequired = false;
-						if(r_op.getType().getFType() instanceof Class)
-							isClassRequired = isRequired((Class) r_op.getType().getFType());
+						if(r_op.getType(null).getFType() instanceof Class)
+							isClassRequired = isRequired((Class) r_op.getType(null).getFType());
 						if (r_op.equals(p_op)) {
 							// Hate to use continue, but the alternative is a nuisance
 							continue;
@@ -253,7 +253,7 @@ public class TypeMatchChecker {
 								fail = true;
 							}
 						} else if (!fail && isClassRequired){
-							Binding op_type_binding = new Binding((Class) p_op.getType().getFType(), (Class) r_op.getType().getFType());
+							Binding op_type_binding = new Binding((Class) p_op.getType(null).getFType(), (Class) r_op.getType(null).getFType());
 							if (!candidates.contains(op_type_binding)) {
 								fail = true;
 							} else {
@@ -261,7 +261,7 @@ public class TypeMatchChecker {
 							}
 						} else if (!fail) {
 							// Just a normal class - subtype check
-							if (!TypeConformanceChecker.conforms(r_op.getType().getFType(), p_op.getType().getFType())) {
+							if (!TypeConformanceChecker.conforms(r_op.getType(null).getFType(), p_op.getType(null).getFType())) {
 								fail = true;
 							}
 						}
