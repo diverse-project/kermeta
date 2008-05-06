@@ -1,4 +1,4 @@
-/* $Id: Mutation.kmt,v 1.3 2008-03-17 14:41:47 tej Exp $
+/* $Id: Mutation.kmt,v 1.4 2008-05-06 13:37:37 tej Exp $
  * Creation date: January 9, 2008
  * License:
  * Copyright:
@@ -187,7 +187,7 @@ class Element {
 		}
 	end
 	
-	method equals(other : kermeta::reflection::Object) : Boolean is do
+	method equals(other : Object) : Boolean is do
 		result := other.getMetaClass == self.getMetaClass
 		if result then 
 			result := other.asType(Element).name == self.name and 
@@ -206,7 +206,24 @@ class Element {
  */
  
 abstract class SPMutator {
-	operation mute(p : Policy) : set Policy[*] is abstract
+		
+    operation mute(p : Policy) : set Policy[*]
+	pre policy_is_conform_no_conflicts is policy_is_conform(p) and no_conflicts(p)
+	is
+	abstract
+		
+	// tests if the policy is conform to its policy_model
+	operation policy_is_conform(p : Policy) : Boolean is
+	do
+	result := true
+	end
+
+	
+	// tests if there are conflicts in the policy
+	operation no_conflicts(p : Policy) : Boolean is
+	do
+	result := true
+	end
 }
 
 /**
@@ -444,30 +461,43 @@ class Main
 	end
 	
 	
+	// mutate and show mutants and save them in the file
 	operation mutateAndDisplay(mutator: SPMutator , policy : Policy , opName : String) is do
+
 	
+	var policies : set Policy[*]
+	
+	// write in a file the mutants
+	var ioHelper : FileIO init FileIO.new
+	var fileName : String
+	var fileContent : String
+	
+	fileName := "platform:/resource/org.kermeta.security.model/model/Mutants.txt"
+	
+	fileContent := "ORIGINAL : \n**********\n" + policy.toString + "\n"
+		
 	stdio.writeln("MUTANTS "  + opName +  " : ")
 	stdio.writeln("*************\n")
-
-	// mutation and show mutants and save them in the file
-	var policies : set Policy[*]
-
 	
 	policies := mutator.mute(policy)
 	
-	// display
+	// display and save fileContent
 	policies.each{ p |
 			stdio.writeln(p.toString)
 		    stdio.writeln("")
-		    }		 
-	 
+		    fileContent := fileContent + p.toString + "\n"
+		    }
+		    
+		    
+	// write fiel content	    
+    ioHelper.writeTextFile(fileName , fileContent)    
+		    
 	end
 	
 	
-	operation main() : Void is do 
-		var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/LibraryOrBAC.xmi")
+	operation main() : Void is do
+		var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/VMSOrBACPerms.xmi")
 		//var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/LibraryRBAC.xmi")
-		
 		
 		stdio.writeln(policy.type.toString)
 			 
@@ -475,14 +505,17 @@ class Main
 		stdio.writeln("**********\n")
 		stdio.writeln(policy.toString)
 		stdio.writeln("")
-		
-		 	
+				 	
 		// generate all mutants and show them
-		
+	
+
+		/*
 		mutateAndDisplay(RER.new , policy , "RER")
+		
 		mutateAndDisplay(RTT.new , policy , "RTT")
 		mutateAndDisplay(PPR.new , policy , "PPR")
-		mutateAndDisplay(ANR.new , policy , "ANR")
+		// mutateAndDisplay(ANR.new , policy , "ANR")
+		*/
 			
 	end
 }
