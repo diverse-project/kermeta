@@ -2,7 +2,6 @@
 <acm:PolicyType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:acm="http://www.kermeta.org/acm" xsi:schemaLocation="http://www.kermeta.org/acm acm.ecore" name="OrBAC">
   <ruleTypes name="Permission" parameters="//@elementTypes.0 //@elementTypes.1 //@elementTypes.2 //@elementTypes.3 //@elementTypes.4"/>
   <ruleTypes name="Prohibition" parameters="//@elementTypes.0 //@elementTypes.1 //@elementTypes.2 //@elementTypes.3 //@elementTypes.4"/>
-  <ruleTypes name="Obligation" parameters="//@elementTypes.0 //@elementTypes.1 //@elementTypes.2 //@elementTypes.3 //@elementTypes.4"/>
   <elementTypes name="Organisation"/>
   <elementTypes name="Role"/>
   <elementTypes name="Activity"/>

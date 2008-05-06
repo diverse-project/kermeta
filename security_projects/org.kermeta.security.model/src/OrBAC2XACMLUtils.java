@@ -372,10 +372,12 @@ public class OrBAC2XACMLUtils {
         		rules[i][3].toUpperCase(), rules[i][4].toUpperCase(), rules[i][5].toUpperCase()));
         }
 
+        
+        // TODO check this: with or without any 
         // default prohibition rule Is added at the end
-        Rule defaultRule = new Rule(new URI("FinalRule"), Result.DECISION_DENY,
-                null, null, null);
-        rulesXACML.add(defaultRule);
+        // Rule defaultRule = new Rule(new URI("FinalRule"), Result.DECISION_DENY,
+        //        null, null, null);
+        //rulesXACML.add(defaultRule);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 

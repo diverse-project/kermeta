@@ -272,7 +272,7 @@ public class OrBAC2XACMLExport {
             // the status
             rulesTmp[i][1] = rule.substring(rule.indexOf(" -> ") + 4,rule.indexOf("( "));
 
-            // role if after the organisation
+            // role if after the organization
             org  = rule.substring(rule.indexOf(" ",rule.indexOf(" ",rule.indexOf("( "))) + 1,
                     rule.indexOf(" ",rule.indexOf("( ") + 2));
 
