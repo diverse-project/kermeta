@@ -1,4 +1,4 @@
-/* $Id: GetContainingRefAction.java,v 1.1 2008-02-28 17:18:52 cfaucher Exp $
+/* $Id: GetContainingRefAction.java,v 1.2 2008-05-13 12:01:16 cfaucher Exp $
  * Project    : org.kermeta.emfutils.models.ui
  * File       : GetContainingRefAction.java
  * License    : EPL
@@ -15,6 +15,7 @@ package org.kermeta.emfutils.models.ui.popup.actions;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -56,6 +57,9 @@ public class GetContainingRefAction implements IObjectActionDelegate {
 			" - " + eObj.eContainmentFeature().getName() + " (ContainmentFeature property)\n" + 
 			" - " + eObj.eContainingFeature().getName() + " (ContainingFeature property)";
 		}
+		
+		text += "\n\nIdentification of this node: \n" +
+		EcoreUtil.getIdentification(eObj);
 		
 		MessageDialog.openInformation(
 			shell,
