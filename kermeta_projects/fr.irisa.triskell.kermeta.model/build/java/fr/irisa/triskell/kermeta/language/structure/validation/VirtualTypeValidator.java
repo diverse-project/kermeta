@@ -2,13 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VirtualTypeValidator.java,v 1.5 2008-03-19 16:34:14 cfaucher Exp $
+ * $Id: VirtualTypeValidator.java,v 1.6 2008-05-13 11:42:07 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 
 import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 
 /**
  * A sample validator interface for {@link fr.irisa.triskell.kermeta.language.structure.VirtualType}.
@@ -20,5 +22,7 @@ public interface VirtualTypeValidator {
 	boolean validate();
 
 	boolean validateClassDefinition(ClassDefinition value);
+	boolean validateModelType(ModelTypeVariable value);
+
 	boolean validateTypeParamBinding(EList value);
 }

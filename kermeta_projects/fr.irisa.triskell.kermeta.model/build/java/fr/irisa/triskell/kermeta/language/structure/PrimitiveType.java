@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PrimitiveType.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
+ * $Id: PrimitiveType.java,v 1.6 2008-05-13 11:42:08 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -15,7 +15,8 @@ package fr.irisa.triskell.kermeta.language.structure;
  * <!-- begin-model-doc -->
  * The class definition for kermeta aliases. Above statement defines a primitive
  * type called MyString, which instanceType is <code>kermeta::standard::String</code>
- * <pre>alias MyString : kermeta::standard::String</pre>
+ * <pre>alias MyString : kermeta::standard::String</pre>. Another example could be: <code>root::apackage::AClass</code>
+ * <pre>alias MyClass : root::apackage::AClass</pre>, thus a primitive type may be not a subtype of ValueType (ValueType is a concept from the Kermeta framework).
  * <!-- end-model-doc -->
  *
  * <p>

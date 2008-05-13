@@ -9,8 +9,8 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="refers to variable declaration &lt;code>var x : X init a&lt;/code>&#xA;&lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png&quot;/>"/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" lowerBound="1"
-          eType="#//behavior/Expression.1" containment="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" eType="#//behavior/Expression.1"
+          containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Initialization expression for the variable&#xA;Default value is &lt;code>void&lt;/code> ????"/>
         </eAnnotations>

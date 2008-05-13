@@ -2,9 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeVariableValidator.java,v 1.2 2007-07-20 15:08:59 ftanguy Exp $
+ * $Id: ModelTypeVariableValidator.java,v 1.3 2008-05-13 11:42:07 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
+
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import org.eclipse.emf.common.util.EList;
 
 
 /**
@@ -15,5 +18,7 @@ package fr.irisa.triskell.kermeta.language.structure.validation;
  */
 public interface ModelTypeVariableValidator {
 	boolean validate();
+
+	boolean validateVirtualType(EList<VirtualType> value);
 
 }
