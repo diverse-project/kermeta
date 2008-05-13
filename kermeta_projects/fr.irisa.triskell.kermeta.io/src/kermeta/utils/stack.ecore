@@ -4,21 +4,21 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::utils|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/utils/stack.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="utils" nsURI="http://www.kermeta.org/kermeta/utils" nsPrefix="utils">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/** &#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; * metamodel&#xA; */"/>
+        <details key="documentation" value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="Stack">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * An implementation of stack&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;/>&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * An implementation of stack&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;/>&#xD;&#xA; */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
         <eSuperTypes href="../standard/collections.ecore#/1/standard/Sequence"/>
         <eOperations name="push">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;self.addAt(0, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Pushes an element into the stack&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Pushes an element into the stack&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/utils/Stack/G"/>
@@ -27,14 +27,16 @@
         <eOperations name="peek">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self.first&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Gets the element at the top of the stack&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Gets the element at the top of the stack&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
+          <eGenericType eTypeParameter="/1/utils/Stack/G"/>
         </eOperations>
         <eOperations name="pop">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := peek&#xA;&#x9;self.removeAt(0)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Get and remove the element at the top of the stack&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Get and remove the element at the top of the stack&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
+          <eGenericType eTypeParameter="/1/utils/Stack/G"/>
         </eOperations>
       </eClassifiers>
     </eSubpackages>
@@ -44,7 +46,6 @@
     <references href="../Standard.ecore#/1"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
@@ -55,13 +56,10 @@
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="utils.ecore#/0"/>
     <references href="utils.ecore#/1"/>
-    <references href="utils.ecore#/2"/>
     <references href="StringBuffer.ecore#/0"/>
     <references href="StringBuffer.ecore#/1"/>
     <references href="hashtable.ecore#/0"/>
@@ -73,17 +71,13 @@
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

@@ -247,7 +247,7 @@
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/VariableDecl/@ownedTags.0" name="VariableDecl" superType="//@packages.0/language/behavior/VariableDecl/@containedType.0">
           <ownedTags name="documentation" value="refers to variable declaration &lt;code>var x : X init a&lt;/code>&#xA;&lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png&quot;/>" object="//@packages.0/language/behavior/VariableDecl"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
-          <ownedAttribute tag="//@packages.0/language/behavior/VariableDecl/initialization/@ownedTags.0" name="initialization" type="//@packages.0/language/behavior/VariableDecl/initialization/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+          <ownedAttribute tag="//@packages.0/language/behavior/VariableDecl/initialization/@ownedTags.0" name="initialization" type="//@packages.0/language/behavior/VariableDecl/initialization/@containedType.0" isOrdered="true" upper="1" isComposite="true">
             <ownedTags name="documentation" value="Initialization expression for the variable&#xA;Default value is &lt;code>void&lt;/code> ????" object="//@packages.0/language/behavior/VariableDecl/initialization"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
@@ -265,7 +265,7 @@
           <instanceType href="language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.3/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@target/@containedType.0"/>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Boolean">
-          <instanceType href="language/structure.km#//@packages.0/language/structure/Object/equals/@containedType.0/@containedType.1"/>
+          <instanceType href="standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@body/@statement.0/@containedType.0/@containedType.1"/>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Class/@ownedTags.0" name="Class" superType="//@packages.0/language/structure/Class/@containedType.0">
           <ownedTags name="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class." object="//@packages.0/language/structure/Class"/>
@@ -308,7 +308,7 @@
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <ownedAttribute tag="//@packages.0/language/structure/Model/contents/@ownedTags.0" name="contents" isOrdered="true" upper="-1">
             <ownedTags name="documentation" value="Contents of this model..." object="//@packages.0/language/structure/Model/contents"/>
-            <type href="standard/collections.km#//@packages.0/standard/Collection/select/@containedType.3/@containedType.0/@containedType.0/@containedType.0"/>
+            <type href="language/structure.km#//@packages.0/language/structure/Model/filter/@body/@statement.0/@value/@target/@containedType.0/@containedType.0/@containedType.0/@containedType.0"/>
           </ownedAttribute>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ModelType/@ownedTags.0" name="ModelType" superType="//@packages.0/language/structure/ModelType/@containedType.0 //@packages.0/language/structure/ModelType/@containedType.1">
@@ -324,7 +324,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Integer">
-          <instanceType href="language/structure.km#//@packages.0/language/structure/Object/oid/@containedType.0"/>
+          <instanceType href="standard/collections.km#//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@statement.0/@target/@containedType.0"/>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Operation/@ownedTags.0" name="Operation" superType="//@packages.0/language/structure/Operation/@containedType.0">
           <ownedTags name="documentation" value="Every one knows what an operation is." object="//@packages.0/language/structure/Operation"/>
@@ -460,7 +460,7 @@
           </ownedAttribute>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="UnlimitedNatural">
-          <instanceType href="language/structure.km#//@packages.0/language/structure/Object/oid/@containedType.0"/>
+          <instanceType href="standard/collections.km#//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@statement.0/@target/@containedType.0"/>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/TypedElement/@ownedTags.0" name="TypedElement" isAbstract="true" superType="//@packages.0/language/structure/TypedElement/@containedType.0 //@packages.0/language/structure/TypedElement/@containedType.1">
           <ownedTags name="documentation" value="Abstraction of the notion of typed element : each element &#xA;that is typed inherits this class." object="//@packages.0/language/structure/TypedElement"/>
@@ -595,11 +595,11 @@
           </ownedAttribute>
           <ownedAttribute tag="//@packages.0/language/structure/ClassDefinition/ownedOperation/@ownedTags.0" name="ownedOperation" isOrdered="true" upper="-1" opposite="//@packages.0/language/structure/Operation/owningClass" isComposite="true">
             <ownedTags name="documentation" value="Operations owned by this ClassDefinition." object="//@packages.0/language/structure/ClassDefinition/ownedOperation"/>
-            <type href="standard/collections.km#//@packages.0/standard/Collection/select/@containedType.5/@containedType.0/@containedType.0/@containedType.0"/>
+            <type href="kunit/kunit.km#//@packages.0/kunit/TestSuite/addAllTestCasesFromAspects/@body/@statement.0/@target/@containedType.0/@containedType.0/@containedType.0/@containedType.0"/>
           </ownedAttribute>
           <ownedAttribute tag="//@packages.0/language/structure/ClassDefinition/superType/@ownedTags.0" name="superType" isOrdered="true" upper="-1">
             <ownedTags name="documentation" value="Classes from which this ClassDefinition inherits." object="//@packages.0/language/structure/ClassDefinition/superType"/>
-            <type href="standard/collections.km#//@packages.0/standard/Collection/each/@containedType.9/@containedType.0/@containedType.0/@containedType.0"/>
+            <type href="language/structure.km#//@packages.0/language/structure/Class/superClass/@getterBody/@statement.3/@containedType.0/@containedType.0/@containedType.0/@containedType.0"/>
           </ownedAttribute>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ModelingUnit/@ownedTags.0" name="ModelingUnit" superType="//@packages.0/language/structure/ModelingUnit/@containedType.0">

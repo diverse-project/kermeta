@@ -2,14 +2,14 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/standard/@ownedTags.0" name="standard" uri="http://www.kermeta.org/kermeta/standard">
-      <ownedTags value="/**&#xA; * Contains types dedicated to dealing with java objects&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png&quot;/>&#xA; */" object="//@packages.0/standard"/>
+      <ownedTags value="/**&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png&quot;/>&#xD;&#xA; */" object="//@packages.0/standard"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/UnknownJavaObject/@ownedTags.0" name="UnknownJavaObject" superType="//@packages.0/standard/UnknownJavaObject/@containedType.0">
-        <ownedTags value="/** &#xA;  * This special object is used to represent java objects that cannot be concretely used with kermeta&#xA;  * &lt;b>the only actions possible on these objects are : assignment and passing them as parameter&lt;/b>&#xA;  * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png&quot;/>&#xA;  */" object="//@packages.0/standard/UnknownJavaObject"/>
+        <ownedTags value="/** &#xD;&#xA;  * This special object is used to represent java objects that cannot be concretely used with kermeta&#xD;&#xA;  * &lt;b>the only actions possible on these objects are : assignment and passing them as parameter&lt;/b>&#xD;&#xA;  * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png&quot;/>&#xD;&#xA;  */" object="//@packages.0/standard/UnknownJavaObject"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/standard/UnknownJavaObject/toString/@ownedTags.0" name="toString" type="//@packages.0/standard/UnknownJavaObject/toString/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xA; &#x9; * NOT IMPLEMENTED&#xA; &#x9; */" object="//@packages.0/standard/UnknownJavaObject/toString"/>
+          <ownedTags value="/**&#xD;&#xA; &#x9; * NOT IMPLEMENTED&#xD;&#xA; &#x9; */" object="//@packages.0/standard/UnknownJavaObject/toString"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/String"/>
           </containedType>

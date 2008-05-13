@@ -63,257 +63,257 @@
   <traces sourceReferences="//@references.120" targetReferences="//@references.121" description="//@messages.60"/>
   <traces sourceReferences="//@references.122" targetReferences="//@references.123" description="//@messages.61"/>
   <traces sourceReferences="//@references.124" targetReferences="//@references.125" description="//@messages.62"/>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="1" charBeginAt="0" lineEndAt="1" charEndAt="272"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="1" charBeginAt="0" lineEndAt="1" charEndAt="277"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
-    <refObject href="exceptions.km#//@packages.0/exceptions"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="8" charBeginAt="274" lineEndAt="8" charEndAt="299"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="8" charBeginAt="281" lineEndAt="8" charEndAt="306"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
-    <refObject href="exceptions.km#//@requires.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@requires.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="10" charBeginAt="301" lineEndAt="10" charEndAt="324"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="10" charBeginAt="310" lineEndAt="10" charEndAt="333"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
-    <refObject href="exceptions.km#//@usings.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@usings.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="11" charBeginAt="325" lineEndAt="11" charEndAt="345"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="11" charBeginAt="335" lineEndAt="11" charEndAt="355"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
-    <refObject href="exceptions.km#//@usings.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@usings.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="35" charBeginAt="1131" lineEndAt="35" charEndAt="1470"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="35" charBeginAt="1165" lineEndAt="35" charEndAt="1518"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
-    <refObject href="exceptions.km#//@packages.0/exceptions/Exception"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="39" charBeginAt="1207" lineEndAt="39" charEndAt="1233"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="39" charBeginAt="1245" lineEndAt="39" charEndAt="1271"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
-    <refObject href="exceptions.km#//@packages.0/exceptions/Exception/message"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="42" charBeginAt="1279" lineEndAt="42" charEndAt="1316"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="42" charBeginAt="1320" lineEndAt="42" charEndAt="1357"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
-    <refObject href="exceptions.km#//@packages.0/exceptions/Exception/nestedException"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/Exception/nestedException"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="48" charBeginAt="1439" lineEndAt="48" charEndAt="1468"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="48" charBeginAt="1486" lineEndAt="48" charEndAt="1515"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
-    <refObject href="exceptions.km#//@packages.0/exceptions/Exception/stackTrace"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/Exception/stackTrace"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="56" charBeginAt="1699" lineEndAt="56" charEndAt="1849"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="56" charBeginAt="1754" lineEndAt="56" charEndAt="1908"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
-    <refObject href="exceptions.km#//@packages.0/exceptions/RuntimeError"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/RuntimeError"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="59" charBeginAt="1785" lineEndAt="59" charEndAt="1847"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="59" charBeginAt="1843" lineEndAt="59" charEndAt="1905"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
-    <refObject href="exceptions.km#//@packages.0/exceptions/RuntimeError/expression"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/RuntimeError/expression"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="63" charBeginAt="1898" lineEndAt="63" charEndAt="1945"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="63" charBeginAt="1960" lineEndAt="63" charEndAt="2007"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
-    <refObject href="exceptions.km#//@packages.0/exceptions/CallOnVoidTarget"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/CallOnVoidTarget"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="68" charBeginAt="2010" lineEndAt="68" charEndAt="2054"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="68" charBeginAt="2077" lineEndAt="68" charEndAt="2121"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
-    <refObject href="exceptions.km#//@packages.0/exceptions/TypeCastError"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/TypeCastError"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="74" charBeginAt="2181" lineEndAt="74" charEndAt="2235"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="74" charBeginAt="2254" lineEndAt="74" charEndAt="2308"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
-    <refObject href="exceptions.km#//@packages.0/exceptions/NotImplementedException"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/NotImplementedException"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="80" charBeginAt="2383" lineEndAt="80" charEndAt="2436"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="80" charBeginAt="2462" lineEndAt="80" charEndAt="2515"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
-    <refObject href="exceptions.km#//@packages.0/exceptions/UpperBoundReachedError"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/UpperBoundReachedError"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="87" charBeginAt="2647" lineEndAt="87" charEndAt="2709"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="87" charBeginAt="2733" lineEndAt="87" charEndAt="2795"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
-    <refObject href="exceptions.km#//@packages.0/exceptions/AbstractClassInstantiationError"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/AbstractClassInstantiationError"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="93" charBeginAt="2821" lineEndAt="93" charEndAt="2873"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="93" charBeginAt="2913" lineEndAt="93" charEndAt="2965"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
-    <refObject href="exceptions.km#//@packages.0/exceptions/IncompatibleTypeError"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/IncompatibleTypeError"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="103" charBeginAt="3166" lineEndAt="103" charEndAt="3208"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="104" charBeginAt="3268" lineEndAt="104" charEndAt="3310"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
-    <refObject href="exceptions.km#//@packages.0/exceptions/DivisionByZero"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/DivisionByZero"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="106" charBeginAt="3275" lineEndAt="106" charEndAt="3316"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="107" charBeginAt="3380" lineEndAt="107" charEndAt="3421"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
-    <refObject href="exceptions.km#//@packages.0/exceptions/OverflowError"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/OverflowError"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="109" charBeginAt="3362" lineEndAt="109" charEndAt="3406"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="110" charBeginAt="3470" lineEndAt="110" charEndAt="3514"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
-    <refObject href="exceptions.km#//@packages.0/exceptions/VoidOperandError"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/VoidOperandError"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="115" charBeginAt="3490" lineEndAt="115" charEndAt="3539"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="117" charBeginAt="3604" lineEndAt="117" charEndAt="3653"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
-    <refObject href="exceptions.km#//@packages.0/exceptions/StringIndexOutOfBound"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/StringIndexOutOfBound"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="120" charBeginAt="3608" lineEndAt="120" charEndAt="3657"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="122" charBeginAt="3727" lineEndAt="122" charEndAt="3776"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
-    <refObject href="exceptions.km#//@packages.0/exceptions/StringFormatException"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/StringFormatException"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="126" charBeginAt="3758" lineEndAt="126" charEndAt="3801"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="129" charBeginAt="3883" lineEndAt="129" charEndAt="3926"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
-    <refObject href="exceptions.km#//@packages.0/exceptions/IndexOutOfBound"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/IndexOutOfBound"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="129" charBeginAt="3870" lineEndAt="129" charEndAt="3913"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="132" charBeginAt="3998" lineEndAt="132" charEndAt="4041"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
-    <refObject href="exceptions.km#//@packages.0/exceptions/EmptyCollection"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/EmptyCollection"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="135" charBeginAt="4039" lineEndAt="135" charEndAt="4080"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="138" charBeginAt="4173" lineEndAt="138" charEndAt="4214"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
-    <refObject href="exceptions.km#//@packages.0/exceptions/IteratorIsOff"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/IteratorIsOff"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="141" charBeginAt="4168" lineEndAt="141" charEndAt="4207"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="145" charBeginAt="4308" lineEndAt="145" charEndAt="4347"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
-    <refObject href="exceptions.km#//@packages.0/exceptions/IOException"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/IOException"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="144" charBeginAt="4267" lineEndAt="144" charEndAt="4318"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="148" charBeginAt="4410" lineEndAt="148" charEndAt="4461"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
-    <refObject href="exceptions.km#//@packages.0/exceptions/FileNotFoundException"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/FileNotFoundException"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="150" charBeginAt="4557" lineEndAt="150" charEndAt="4606"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="154" charBeginAt="4706" lineEndAt="154" charEndAt="4755"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedPre"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ConstraintViolatedPre"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="153" charBeginAt="4651" lineEndAt="153" charEndAt="4701"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="157" charBeginAt="4803" lineEndAt="157" charEndAt="4853"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedPost"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ConstraintViolatedPost"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="156" charBeginAt="4774" lineEndAt="156" charEndAt="4823"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="160" charBeginAt="4929" lineEndAt="160" charEndAt="4978"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedInv"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ConstraintViolatedInv"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="164" charBeginAt="5077" lineEndAt="164" charEndAt="5127"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="168" charBeginAt="5240" lineEndAt="168" charEndAt="5290"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ResourceLoadException"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ResourceLoadException"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="167" charBeginAt="5187" lineEndAt="167" charEndAt="5237"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="171" charBeginAt="5353" lineEndAt="171" charEndAt="5403"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ResourceSaveException"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ResourceSaveException"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="170" charBeginAt="5320" lineEndAt="170" charEndAt="5372"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="174" charBeginAt="5489" lineEndAt="174" charEndAt="5541"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ResourceCreateException"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ResourceCreateException"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="173" charBeginAt="5458" lineEndAt="173" charEndAt="5516"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="177" charBeginAt="5630" lineEndAt="177" charEndAt="5688"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ResourceUnconformityException"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ResourceUnconformityException"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="183" charBeginAt="5789" lineEndAt="183" charEndAt="5844"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="187" charBeginAt="5971" lineEndAt="187" charEndAt="6026"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
-    <refObject href="exceptions.km#//@packages.0/exceptions/DynamicExpressionException"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/DynamicExpressionException"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="39" charBeginAt="1227" lineEndAt="39" charEndAt="1233"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="39" charBeginAt="1265" lineEndAt="39" charEndAt="1271"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
-    <refObject href="exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/Exception/message/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="42" charBeginAt="1307" lineEndAt="42" charEndAt="1316"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="42" charBeginAt="1348" lineEndAt="42" charEndAt="1357"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
-    <refObject href="exceptions.km#//@packages.0/exceptions/Exception/nestedException/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/Exception/nestedException/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="48" charBeginAt="1462" lineEndAt="48" charEndAt="1468"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="48" charBeginAt="1509" lineEndAt="48" charEndAt="1515"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
-    <refObject href="exceptions.km#//@packages.0/exceptions/Exception/stackTrace/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/Exception/stackTrace/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="56" charBeginAt="1727" lineEndAt="56" charEndAt="1736"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="56" charBeginAt="1782" lineEndAt="56" charEndAt="1791"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
-    <refObject href="exceptions.km#//@packages.0/exceptions/RuntimeError/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/RuntimeError/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="59" charBeginAt="1808" lineEndAt="59" charEndAt="1847"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="59" charBeginAt="1866" lineEndAt="59" charEndAt="1905"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
-    <refObject href="exceptions.km#//@packages.0/exceptions/RuntimeError/expression/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/RuntimeError/expression/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="63" charBeginAt="1930" lineEndAt="63" charEndAt="1942"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="63" charBeginAt="1992" lineEndAt="63" charEndAt="2004"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
-    <refObject href="exceptions.km#//@packages.0/exceptions/CallOnVoidTarget/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/CallOnVoidTarget/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="68" charBeginAt="2039" lineEndAt="68" charEndAt="2051"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="68" charBeginAt="2106" lineEndAt="68" charEndAt="2118"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
-    <refObject href="exceptions.km#//@packages.0/exceptions/TypeCastError/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/TypeCastError/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="74" charBeginAt="2220" lineEndAt="74" charEndAt="2232"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="74" charBeginAt="2293" lineEndAt="74" charEndAt="2305"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
-    <refObject href="exceptions.km#//@packages.0/exceptions/NotImplementedException/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/NotImplementedException/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="80" charBeginAt="2421" lineEndAt="80" charEndAt="2433"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="80" charBeginAt="2500" lineEndAt="80" charEndAt="2512"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
-    <refObject href="exceptions.km#//@packages.0/exceptions/UpperBoundReachedError/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/UpperBoundReachedError/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="87" charBeginAt="2694" lineEndAt="87" charEndAt="2706"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="87" charBeginAt="2780" lineEndAt="87" charEndAt="2792"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
-    <refObject href="exceptions.km#//@packages.0/exceptions/AbstractClassInstantiationError/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/AbstractClassInstantiationError/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="93" charBeginAt="2858" lineEndAt="93" charEndAt="2870"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="93" charBeginAt="2950" lineEndAt="93" charEndAt="2962"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
-    <refObject href="exceptions.km#//@packages.0/exceptions/IncompatibleTypeError/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/IncompatibleTypeError/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="103" charBeginAt="3196" lineEndAt="103" charEndAt="3205"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="104" charBeginAt="3298" lineEndAt="104" charEndAt="3307"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
-    <refObject href="exceptions.km#//@packages.0/exceptions/DivisionByZero/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/DivisionByZero/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="106" charBeginAt="3304" lineEndAt="106" charEndAt="3313"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="107" charBeginAt="3409" lineEndAt="107" charEndAt="3418"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
-    <refObject href="exceptions.km#//@packages.0/exceptions/OverflowError/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/OverflowError/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="109" charBeginAt="3394" lineEndAt="109" charEndAt="3403"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="110" charBeginAt="3502" lineEndAt="110" charEndAt="3511"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
-    <refObject href="exceptions.km#//@packages.0/exceptions/VoidOperandError/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/VoidOperandError/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="115" charBeginAt="3527" lineEndAt="115" charEndAt="3536"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="117" charBeginAt="3641" lineEndAt="117" charEndAt="3650"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
-    <refObject href="exceptions.km#//@packages.0/exceptions/StringIndexOutOfBound/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/StringIndexOutOfBound/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="120" charBeginAt="3645" lineEndAt="120" charEndAt="3654"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="122" charBeginAt="3764" lineEndAt="122" charEndAt="3773"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
-    <refObject href="exceptions.km#//@packages.0/exceptions/StringFormatException/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/StringFormatException/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="126" charBeginAt="3789" lineEndAt="126" charEndAt="3798"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="129" charBeginAt="3914" lineEndAt="129" charEndAt="3923"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
-    <refObject href="exceptions.km#//@packages.0/exceptions/IndexOutOfBound/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/IndexOutOfBound/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="129" charBeginAt="3901" lineEndAt="129" charEndAt="3910"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="132" charBeginAt="4029" lineEndAt="132" charEndAt="4038"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
-    <refObject href="exceptions.km#//@packages.0/exceptions/EmptyCollection/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/EmptyCollection/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="135" charBeginAt="4068" lineEndAt="135" charEndAt="4077"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="138" charBeginAt="4202" lineEndAt="138" charEndAt="4211"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
-    <refObject href="exceptions.km#//@packages.0/exceptions/IteratorIsOff/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/IteratorIsOff/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="141" charBeginAt="4195" lineEndAt="141" charEndAt="4204"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="145" charBeginAt="4335" lineEndAt="145" charEndAt="4344"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
-    <refObject href="exceptions.km#//@packages.0/exceptions/IOException/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/IOException/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="144" charBeginAt="4304" lineEndAt="144" charEndAt="4315"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="148" charBeginAt="4447" lineEndAt="148" charEndAt="4458"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
-    <refObject href="exceptions.km#//@packages.0/exceptions/FileNotFoundException/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/FileNotFoundException/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="150" charBeginAt="4594" lineEndAt="150" charEndAt="4603"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="154" charBeginAt="4743" lineEndAt="154" charEndAt="4752"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedPre/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ConstraintViolatedPre/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="153" charBeginAt="4689" lineEndAt="153" charEndAt="4698"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="157" charBeginAt="4841" lineEndAt="157" charEndAt="4850"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedPost/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ConstraintViolatedPost/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="156" charBeginAt="4811" lineEndAt="156" charEndAt="4820"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="160" charBeginAt="4966" lineEndAt="160" charEndAt="4975"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedInv/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ConstraintViolatedInv/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="164" charBeginAt="5114" lineEndAt="164" charEndAt="5123"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="168" charBeginAt="5277" lineEndAt="168" charEndAt="5286"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ResourceLoadException/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ResourceLoadException/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="167" charBeginAt="5224" lineEndAt="167" charEndAt="5233"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="171" charBeginAt="5390" lineEndAt="171" charEndAt="5399"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ResourceSaveException/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ResourceSaveException/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="170" charBeginAt="5359" lineEndAt="170" charEndAt="5368"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="174" charBeginAt="5528" lineEndAt="174" charEndAt="5537"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ResourceCreateException/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ResourceCreateException/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="173" charBeginAt="5503" lineEndAt="173" charEndAt="5512"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="177" charBeginAt="5675" lineEndAt="177" charEndAt="5684"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
-    <refObject href="exceptions.km#//@packages.0/exceptions/ResourceUnconformityException/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/ResourceUnconformityException/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="183" charBeginAt="5831" lineEndAt="183" charEndAt="5840"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/exceptions/exceptions.kmt" lineBeginAt="187" charBeginAt="6013" lineEndAt="187" charEndAt="6022"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
-    <refObject href="exceptions.km#//@packages.0/exceptions/DynamicExpressionException/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.km#//@packages.0/exceptions/DynamicExpressionException/@containedType.0"/>
   </references>
   <messages language="english" type="Mapping" value="Parsing of PackageDecl" traces="//@traces.0"/>
   <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.1"/>

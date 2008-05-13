@@ -2,14 +2,14 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/io/@ownedTags.0" name="io" uri="http://www.kermeta.org/kermeta/io">
-      <ownedTags value="/**&#xA; * Contains file input/output related classes. &#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;/>&#xA; */" object="//@packages.0/io"/>
+      <ownedTags value="/**&#xD;&#xA; * Contains file input/output related classes. &#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;/>&#xD;&#xA; */" object="//@packages.0/io"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/io/FileIO/@ownedTags.0" name="FileIO" superType="//@packages.0/io/FileIO/@containedType.0">
-        <ownedTags value="/**&#xA; * Implementation of simple helpers to read ans write text files&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;/>&#xA; */" object="//@packages.0/io/FileIO"/>
+        <ownedTags value="/**&#xD;&#xA; * Implementation of simple helpers to read ans write text files&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;/>&#xD;&#xA; */" object="//@packages.0/io/FileIO"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/io/FileIO/writeTextFile/@ownedTags.0" name="writeTextFile" type="//@packages.0/io/FileIO/writeTextFile/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xA;&#x9; * Writes a String in a text file&#xA;&#x9; */" object="//@packages.0/io/FileIO/writeTextFile"/>
+          <ownedTags value="/**&#xD;&#xA;&#x9; * Writes a String in a text file&#xD;&#xA;&#x9; */" object="//@packages.0/io/FileIO/writeTextFile"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="filename" type="//@packages.0/io/FileIO/writeTextFile/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -40,6 +40,12 @@
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@condition/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType">
+                    <type href="../standard/collections.km#//@packages.0/standard/Collection/empty/@body/@statement.0/@value/@containedType.0/@containedType.0/@containedType.0"/>
+                  </containedType>
+                  <right href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                </containedType>
                 <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class">
@@ -60,7 +66,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/io/FileIO/readTextFile/@ownedTags.0" name="readTextFile" type="//@packages.0/io/FileIO/readTextFile/@containedType.0" isOrdered="true" upper="1">
-          <ownedTags value="/**&#xA;&#x9; * Reads a text file&#xA;&#x9; */" object="//@packages.0/io/FileIO/readTextFile"/>
+          <ownedTags value="/**&#xD;&#xA;&#x9; * Reads a text file&#xD;&#xA;&#x9; */" object="//@packages.0/io/FileIO/readTextFile"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
@@ -85,6 +91,12 @@
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@condition/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType">
+                    <type href="../standard/collections.km#//@packages.0/standard/Collection/empty/@body/@statement.0/@value/@containedType.0/@containedType.0/@containedType.0"/>
+                  </containedType>
+                  <right href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                </containedType>
                 <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/readTextFile/@ownedParameter.0/@containedType.0" name="filename"/>
@@ -130,6 +142,12 @@
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="or">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@condition/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType">
+                    <type href="../standard/primitive_types.km#//@packages.0/standard/Boolean/or/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <right href="../standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"/>
+                </containedType>
                 <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/or/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.2/@containedType.0" name="isdirectory"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="not">

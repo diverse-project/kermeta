@@ -72,293 +72,293 @@
   <traces sourceReferences="//@references.138" targetReferences="//@references.139" description="//@messages.69"/>
   <traces sourceReferences="//@references.140" targetReferences="//@references.141" description="//@messages.70"/>
   <traces sourceReferences="//@references.142" targetReferences="//@references.143" description="//@messages.71"/>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="1" charBeginAt="0" lineEndAt="1" charEndAt="255"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="1" charBeginAt="0" lineEndAt="1" charEndAt="260"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
-    <refObject href="reflective_collections.km#//@packages.0/language"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="8" charBeginAt="257" lineEndAt="8" charEndAt="282"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="8" charBeginAt="264" lineEndAt="8" charEndAt="289"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
-    <refObject href="reflective_collections.km#//@requires.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@requires.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="9" charBeginAt="283" lineEndAt="9" charEndAt="306"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="9" charBeginAt="291" lineEndAt="9" charEndAt="314"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
-    <refObject href="reflective_collections.km#//@requires.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@requires.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="11" charBeginAt="308" lineEndAt="11" charEndAt="331"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="11" charBeginAt="318" lineEndAt="11" charEndAt="341"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
-    <refObject href="reflective_collections.km#//@usings.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@usings.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="26" charBeginAt="911" lineEndAt="26" charEndAt="1645"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="26" charBeginAt="936" lineEndAt="26" charEndAt="1693"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="26" charBeginAt="938" lineEndAt="26" charEndAt="939"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="26" charBeginAt="963" lineEndAt="26" charEndAt="964"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/G"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/G"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="32" charBeginAt="1102" lineEndAt="32" charEndAt="1241"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="32" charBeginAt="1133" lineEndAt="32" charEndAt="1274"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/add"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/add"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="32" charBeginAt="1113" lineEndAt="32" charEndAt="1124"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="32" charBeginAt="1144" lineEndAt="32" charEndAt="1155"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="39" charBeginAt="1305" lineEndAt="39" charEndAt="1450"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="39" charBeginAt="1343" lineEndAt="39" charEndAt="1490"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="39" charBeginAt="1319" lineEndAt="39" charEndAt="1330"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="39" charBeginAt="1357" lineEndAt="39" charEndAt="1368"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="46" charBeginAt="1520" lineEndAt="46" charEndAt="1643"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="46" charBeginAt="1565" lineEndAt="46" charEndAt="1690"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/clear"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/clear"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="55" charBeginAt="1714" lineEndAt="55" charEndAt="2917"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="55" charBeginAt="1768" lineEndAt="55" charEndAt="3014"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="55" charBeginAt="1739" lineEndAt="55" charEndAt="1740"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="55" charBeginAt="1793" lineEndAt="55" charEndAt="1794"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/G"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/G"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="60" charBeginAt="1868" lineEndAt="60" charEndAt="1952"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="60" charBeginAt="1927" lineEndAt="60" charEndAt="2013"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/add"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/add"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="60" charBeginAt="1879" lineEndAt="60" charEndAt="1890"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="60" charBeginAt="1938" lineEndAt="60" charEndAt="1949"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/add/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/add/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="67" charBeginAt="2033" lineEndAt="67" charEndAt="2120"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="67" charBeginAt="2099" lineEndAt="67" charEndAt="2188"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="67" charBeginAt="2047" lineEndAt="67" charEndAt="2058"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="67" charBeginAt="2113" lineEndAt="67" charEndAt="2124"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="74" charBeginAt="2199" lineEndAt="74" charEndAt="2267"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="74" charBeginAt="2272" lineEndAt="74" charEndAt="2342"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/clear"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/clear"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2340" lineEndAt="81" charEndAt="2505"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2420" lineEndAt="81" charEndAt="2587"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2353" lineEndAt="81" charEndAt="2368"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2433" lineEndAt="81" charEndAt="2448"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2370" lineEndAt="81" charEndAt="2381"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2450" lineEndAt="81" charEndAt="2461"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@ownedParameter.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@ownedParameter.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="88" charBeginAt="2581" lineEndAt="88" charEndAt="2730"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="88" charBeginAt="2668" lineEndAt="88" charEndAt="2819"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="88" charBeginAt="2597" lineEndAt="88" charEndAt="2612"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="88" charBeginAt="2684" lineEndAt="88" charEndAt="2699"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="95" charBeginAt="2802" lineEndAt="95" charEndAt="2915"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="95" charBeginAt="2896" lineEndAt="95" charEndAt="3011"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="95" charBeginAt="2816" lineEndAt="95" charEndAt="2831"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="95" charBeginAt="2910" lineEndAt="95" charEndAt="2925"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="26" charBeginAt="950" lineEndAt="26" charEndAt="956"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="26" charBeginAt="975" lineEndAt="26" charEndAt="981"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="32" charBeginAt="1128" lineEndAt="32" charEndAt="1132"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="32" charBeginAt="1159" lineEndAt="32" charEndAt="1163"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="39" charBeginAt="1334" lineEndAt="39" charEndAt="1338"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="39" charBeginAt="1372" lineEndAt="39" charEndAt="1376"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="46" charBeginAt="1537" lineEndAt="46" charEndAt="1541"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="46" charBeginAt="1582" lineEndAt="46" charEndAt="1586"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/clear/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/clear/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="55" charBeginAt="1751" lineEndAt="55" charEndAt="1764"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="55" charBeginAt="1805" lineEndAt="55" charEndAt="1818"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="55" charBeginAt="1766" lineEndAt="55" charEndAt="1789"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="55" charBeginAt="1820" lineEndAt="55" charEndAt="1843"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/@containedType.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/@containedType.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="60" charBeginAt="1894" lineEndAt="60" charEndAt="1898"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="60" charBeginAt="1953" lineEndAt="60" charEndAt="1957"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/add/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/add/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="67" charBeginAt="2062" lineEndAt="67" charEndAt="2066"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="67" charBeginAt="2128" lineEndAt="67" charEndAt="2132"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="74" charBeginAt="2216" lineEndAt="74" charEndAt="2220"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="74" charBeginAt="2289" lineEndAt="74" charEndAt="2293"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/clear/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/clear/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2385" lineEndAt="81" charEndAt="2389"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2465" lineEndAt="81" charEndAt="2469"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2361" lineEndAt="81" charEndAt="2368"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2441" lineEndAt="81" charEndAt="2448"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@ownedParameter.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@ownedParameter.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="88" charBeginAt="2616" lineEndAt="88" charEndAt="2620"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="88" charBeginAt="2703" lineEndAt="88" charEndAt="2707"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="88" charBeginAt="2605" lineEndAt="88" charEndAt="2612"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="88" charBeginAt="2692" lineEndAt="88" charEndAt="2699"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@ownedParameter.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@ownedParameter.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="95" charBeginAt="2835" lineEndAt="95" charEndAt="2842"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="95" charBeginAt="2929" lineEndAt="95" charEndAt="2936"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="32" charBeginAt="1136" lineEndAt="32" charEndAt="1241"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="32" charBeginAt="1167" lineEndAt="32" charEndAt="1274"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="33" charBeginAt="1141" lineEndAt="33" charEndAt="1236"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="33" charBeginAt="1173" lineEndAt="33" charEndAt="1268"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="33" charBeginAt="1222" lineEndAt="33" charEndAt="1226"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="33" charBeginAt="1254" lineEndAt="33" charEndAt="1258"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@body/@statement.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@body/@statement.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="33" charBeginAt="1228" lineEndAt="33" charEndAt="1235"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="33" charBeginAt="1260" lineEndAt="33" charEndAt="1267"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@body/@statement.0/@parameters.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/add/@body/@statement.0/@parameters.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="39" charBeginAt="1342" lineEndAt="39" charEndAt="1450"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="39" charBeginAt="1380" lineEndAt="39" charEndAt="1490"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="40" charBeginAt="1347" lineEndAt="40" charEndAt="1445"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="40" charBeginAt="1386" lineEndAt="40" charEndAt="1484"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="40" charBeginAt="1431" lineEndAt="40" charEndAt="1435"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="40" charBeginAt="1470" lineEndAt="40" charEndAt="1474"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@body/@statement.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@body/@statement.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="40" charBeginAt="1437" lineEndAt="40" charEndAt="1444"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="40" charBeginAt="1476" lineEndAt="40" charEndAt="1483"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@body/@statement.0/@parameters.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/remove/@body/@statement.0/@parameters.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="46" charBeginAt="1545" lineEndAt="46" charEndAt="1643"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="46" charBeginAt="1590" lineEndAt="46" charEndAt="1690"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/clear/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/clear/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="47" charBeginAt="1550" lineEndAt="47" charEndAt="1638"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="47" charBeginAt="1596" lineEndAt="47" charEndAt="1684"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/clear/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/clear/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="47" charBeginAt="1633" lineEndAt="47" charEndAt="1637"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="47" charBeginAt="1679" lineEndAt="47" charEndAt="1683"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveCollection/clear/@body/@statement.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveCollection/clear/@body/@statement.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="60" charBeginAt="1928" lineEndAt="60" charEndAt="1952"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="60" charBeginAt="1987" lineEndAt="60" charEndAt="2013"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/add/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/add/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="61" charBeginAt="1933" lineEndAt="61" charEndAt="1938"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="61" charBeginAt="1993" lineEndAt="61" charEndAt="1998"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/add/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/add/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="61" charBeginAt="1939" lineEndAt="61" charEndAt="1946"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="61" charBeginAt="1999" lineEndAt="61" charEndAt="2006"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/add/@body/@statement.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/add/@body/@statement.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="67" charBeginAt="2096" lineEndAt="67" charEndAt="2120"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="67" charBeginAt="2162" lineEndAt="67" charEndAt="2188"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="68" charBeginAt="2101" lineEndAt="68" charEndAt="2106"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="68" charBeginAt="2168" lineEndAt="68" charEndAt="2173"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="68" charBeginAt="2107" lineEndAt="68" charEndAt="2114"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="68" charBeginAt="2174" lineEndAt="68" charEndAt="2181"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove/@body/@statement.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/remove/@body/@statement.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="74" charBeginAt="2250" lineEndAt="74" charEndAt="2267"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="74" charBeginAt="2323" lineEndAt="74" charEndAt="2342"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/clear/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/clear/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="75" charBeginAt="2255" lineEndAt="75" charEndAt="2260"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="75" charBeginAt="2329" lineEndAt="75" charEndAt="2334"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/clear/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/clear/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2393" lineEndAt="81" charEndAt="2505"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="81" charBeginAt="2473" lineEndAt="81" charEndAt="2587"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="82" charBeginAt="2398" lineEndAt="82" charEndAt="2500"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="82" charBeginAt="2479" lineEndAt="82" charEndAt="2581"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="82" charBeginAt="2479" lineEndAt="82" charEndAt="2483"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="82" charBeginAt="2560" lineEndAt="82" charEndAt="2564"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="82" charBeginAt="2485" lineEndAt="82" charEndAt="2490"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="82" charBeginAt="2566" lineEndAt="82" charEndAt="2571"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="82" charBeginAt="2492" lineEndAt="82" charEndAt="2499"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="82" charBeginAt="2573" lineEndAt="82" charEndAt="2580"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="88" charBeginAt="2624" lineEndAt="88" charEndAt="2730"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="88" charBeginAt="2711" lineEndAt="88" charEndAt="2819"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.63">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="89" charBeginAt="2629" lineEndAt="89" charEndAt="2725"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="89" charBeginAt="2717" lineEndAt="89" charEndAt="2813"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.64">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="89" charBeginAt="2713" lineEndAt="89" charEndAt="2717"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="89" charBeginAt="2801" lineEndAt="89" charEndAt="2805"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.65">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="89" charBeginAt="2719" lineEndAt="89" charEndAt="2724"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="89" charBeginAt="2807" lineEndAt="89" charEndAt="2812"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.66">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0/@parameters.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0/@parameters.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="95" charBeginAt="2881" lineEndAt="95" charEndAt="2915"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="95" charBeginAt="2975" lineEndAt="95" charEndAt="3011"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.67">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="96" charBeginAt="2886" lineEndAt="96" charEndAt="2892"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="96" charBeginAt="2981" lineEndAt="96" charEndAt="2987"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.68">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="96" charBeginAt="2896" lineEndAt="96" charEndAt="2901"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="96" charBeginAt="2991" lineEndAt="96" charEndAt="2996"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.69">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="96" charBeginAt="2902" lineEndAt="96" charEndAt="2909"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="96" charBeginAt="2997" lineEndAt="96" charEndAt="3004"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.70">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0/@value/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0/@value/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="96" charBeginAt="2886" lineEndAt="96" charEndAt="2910"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/reflective_collections.kmt" lineBeginAt="96" charBeginAt="2981" lineEndAt="96" charEndAt="3005"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.71">
-    <refObject href="reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.km#//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0"/>
   </references>
   <messages language="english" type="Mapping" value="Parsing of PackageDecl" traces="//@traces.0"/>
   <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.1"/>

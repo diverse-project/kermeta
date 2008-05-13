@@ -10,45 +10,45 @@
   <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
   <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
   <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="3" charBeginAt="60" lineEndAt="3" charEndAt="302"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="3" charBeginAt="62" lineEndAt="3" charEndAt="309"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
-    <refObject href="java.km#//@packages.0/standard"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.km#//@packages.0/standard"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="10" charBeginAt="304" lineEndAt="10" charEndAt="333"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="10" charBeginAt="313" lineEndAt="10" charEndAt="342"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
-    <refObject href="java.km#//@requires.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.km#//@requires.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="12" charBeginAt="335" lineEndAt="12" charEndAt="360"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="12" charBeginAt="346" lineEndAt="12" charEndAt="371"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
-    <refObject href="java.km#//@usings.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.km#//@usings.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="20" charBeginAt="679" lineEndAt="20" charEndAt="845"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="20" charBeginAt="698" lineEndAt="20" charEndAt="872"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
-    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.km#//@packages.0/standard/UnknownJavaObject"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="25" charBeginAt="741" lineEndAt="25" charEndAt="843"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="25" charBeginAt="765" lineEndAt="25" charEndAt="869"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
-    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.km#//@packages.0/standard/UnknownJavaObject/toString"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="25" charBeginAt="761" lineEndAt="25" charEndAt="767"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="25" charBeginAt="785" lineEndAt="25" charEndAt="791"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
-    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.km#//@packages.0/standard/UnknownJavaObject/toString/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="25" charBeginAt="771" lineEndAt="25" charEndAt="843"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="25" charBeginAt="795" lineEndAt="25" charEndAt="869"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
-    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.km#//@packages.0/standard/UnknownJavaObject/toString/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="26" charBeginAt="776" lineEndAt="26" charEndAt="782"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="26" charBeginAt="801" lineEndAt="26" charEndAt="807"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
-    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString/@body/@statement.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.km#//@packages.0/standard/UnknownJavaObject/toString/@body/@statement.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="26" charBeginAt="786" lineEndAt="26" charEndAt="838"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="26" charBeginAt="811" lineEndAt="26" charEndAt="863"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
-    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString/@body/@statement.0/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.km#//@packages.0/standard/UnknownJavaObject/toString/@body/@statement.0/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="26" charBeginAt="776" lineEndAt="26" charEndAt="838"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/standard/java.kmt" lineBeginAt="26" charBeginAt="801" lineEndAt="26" charEndAt="863"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
-    <refObject href="java.km#//@packages.0/standard/UnknownJavaObject/toString/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.km#//@packages.0/standard/UnknownJavaObject/toString/@body/@statement.0"/>
   </references>
   <messages language="english" type="Mapping" value="Parsing of PackageDecl" traces="//@traces.0"/>
   <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.1"/>

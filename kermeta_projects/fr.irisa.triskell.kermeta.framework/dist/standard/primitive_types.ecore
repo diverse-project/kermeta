@@ -4,32 +4,38 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::language::structure|kermeta::exceptions|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/cvs/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="standard" nsURI="http://www.kermeta.org/kermeta/standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Defines primitive types &#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/primitive_types_view.png&quot;/>&#xA; */"/>
+        <details key="documentation" value="/**&#xD;&#xA; * Defines primitive types &#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/primitive_types_view.png&quot;/>&#xD;&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="Void">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The class Void &#xA; * By convention it is a sub-type of everything&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * The class Void &#xD;&#xA; * By convention it is a sub-type of everything&#xD;&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
-        <eOperations name="isVoid">
+        <eOperations name="isVoid" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := true&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Return true&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Return true&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/isVoid"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="toString">
+        <eOperations name="toString" eType="/1/standard/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := &quot;&lt;void>&quot;&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Returns the String identifier '&lt;void>'&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns the String identifier '&lt;void>'&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="isInstanceOf">
+        <eOperations name="isInstanceOf" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := true&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Returns true&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns true&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/isInstanceOf"/>
           </eAnnotations>
           <eParameters name="type">
             <eType xsi:type="ecore:EClass" href="../language/structure.ecore#/1/language/structure/Type"/>
@@ -38,55 +44,55 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ValueType" abstract="true">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The abstract class ValueType does not contain any feature.&#xA; * However, any instance of a sub-class of ValueType will be passed by value &#xA; * instead of by reference for any other objects.&#xA; * that means that each time you := such object it will call the clone function associated to it (Not implemented yet except for Integer, String and boolean!!!)&#xA; * &#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * The abstract class ValueType does not contain any feature.&#xD;&#xA; * However, any instance of a sub-class of ValueType will be passed by value &#xD;&#xA; * instead of by reference for any other objects.&#xD;&#xA; * that means that each time you := such object it will call the clone function associated to it (Not implemented yet except for Integer, String and boolean!!!)&#xD;&#xA; * &#xD;&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Comparable" abstract="true">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The abstract class Comparable defines a set of operation&#xA; * to compare instances of a class.&#xA; * Sub-classes only has to implement abstract operation compareTo.&#xA; * All other methods are defined w.r.t. the compareTo operation&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * The abstract class Comparable defines a set of operation&#xD;&#xA; * to compare instances of a class.&#xD;&#xA; * Sub-classes only has to implement abstract operation compareTo.&#xD;&#xA; * All other methods are defined w.r.t. the compareTo operation&#xD;&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
-        <eOperations name="compareTo">
+        <eOperations name="compareTo" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xA;&#x9; * This method should be implemented by any class that inherits&#xA;&#x9; * from Comparable.&#xA;&#x9; * returns 0 if self = other&#xA;&#x9; * returns > 0 if  self > other&#xA;&#x9; * returns &lt; 0 if  self &lt; other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * This method should be implemented by any class that inherits&#xD;&#xA;&#x9; * from Comparable.&#xD;&#xA;&#x9; * returns 0 if self = other&#xD;&#xA;&#x9; * returns > 0 if  self > other&#xD;&#xA;&#x9; * returns &lt; 0 if  self &lt; other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="isGreater">
+        <eOperations name="isGreater" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := ((self.compareTo(other)) > (0))&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return true if self > other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return true if self > other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="isLower">
+        <eOperations name="isLower" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := ((self.compareTo(other)) &lt; (0))&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return true if self &lt; other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return true if self &lt; other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="isLowerOrEqual">
+        <eOperations name="isLowerOrEqual" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := ((self.compareTo(other)) &lt;= (0))&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return true if self &lt;= other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return true if self &lt;= other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="isGreaterOrEqual">
+        <eOperations name="isGreaterOrEqual" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := ((self.compareTo(other)) >= (0))&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return true if self >= other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return true if self >= other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
@@ -95,15 +101,16 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Summable" abstract="true">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The abstract class Summable defines a set of operation&#xA; * to sum instances of a class.&#xA; * Sub-classes only has to implement abstract operation plus.&#xA;  */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * The abstract class Summable defines a set of operation&#xD;&#xA; * to sum instances of a class.&#xD;&#xA; * Sub-classes only has to implement abstract operation plus.&#xD;&#xA;  */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="plus">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Summarization method to be implemented by any summable class.&#xA;&#x9; * The parameter must have the same type (or one of its subtypes)&#xA;&#x9; *  than the current object .&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Summarization method to be implemented by any summable class.&#xD;&#xA;&#x9; * The parameter must have the same type (or one of its subtypes)&#xD;&#xA;&#x9; *  than the current object .&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
+          <eGenericType eTypeParameter="/1/standard/Summable/G"/>
           <eParameters name="other">
             <eGenericType eTypeParameter="/1/standard/Summable/G"/>
           </eParameters>
@@ -111,70 +118,72 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="NotComparableException">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * raised when two objects are not comparable&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * raised when two objects are not comparable&#xD;&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Boolean">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The Boolean type&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * The Boolean type&#xD;&#xA; */"/>
           <details key="EMF_instanceClassName" value="boolean"/>
         </eAnnotations>
         <eSuperTypes href="../kermeta_java.ecore#/1/language/structure/PrimitiveType"/>
-        <eOperations name="equals">
+        <eOperations name="equals" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Boolean) then&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.equals(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is Boolean&#xA;&#x9; * and has the same boolean value than current object.&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is Boolean&#xD;&#xA;&#x9; * and has the same boolean value than current object.&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="and">
+        <eOperations name="and" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~and(self, other)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return self and other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return self and other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Boolean"/>
         </eOperations>
-        <eOperations name="not">
+        <eOperations name="not" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~not(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return not self&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return not self&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="or">
+        <eOperations name="or" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~or(self, other)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return self or other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return self or other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Boolean"/>
         </eOperations>
-        <eOperations name="implies">
+        <eOperations name="implies" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := ((((self) and (other)).~not) and (self)).~not&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return self implies other&#xA;&#x9; * meaning : not( (not (self and other)) and self)&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return self implies other&#xD;&#xA;&#x9; * meaning : not( (not (self and other)) and self)&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Boolean"/>
         </eOperations>
-        <eOperations name="xor">
+        <eOperations name="xor" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := ((((self) and (other.~not))) or (((self.~not) and (other))))&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return self xor other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return self xor other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Boolean"/>
         </eOperations>
-        <eOperations name="nand">
+        <eOperations name="nand" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := ((self) and (other)).~not&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return self nand other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return self nand other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Boolean"/>
         </eOperations>
-        <eOperations name="andThen">
+        <eOperations name="andThen" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if self then&#xA;&#x9;&#x9;result := right(void)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Short-circuit version of AND. This means that the function passed in parameter will be evaluated only if self is true&#xA;&#x9; * Note: we don't have a dedicated operator in the syntax for it yet so here is an example of use :&#xA;&#x9; *   self.andThen{v | functionThatReturnABoolean() }&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Short-circuit version of AND. This means that the function passed in parameter will be evaluated only if self is true&#xD;&#xA;&#x9; * Note: we don't have a dedicated operator in the syntax for it yet so here is an example of use :&#xD;&#xA;&#x9; *   self.andThen{v | functionThatReturnABoolean() }&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="right">
             <eAnnotations source="kermeta.functionType">
@@ -184,10 +193,10 @@
             <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
           </eParameters>
         </eOperations>
-        <eOperations name="orElse">
+        <eOperations name="orElse" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if self then&#xA;&#x9;&#x9;result := true&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := right(void)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Short-circuit version of OR. This means that the function passed in parameter will be evaluated only if self is false&#xA;&#x9; * Note: we don't have a dedicated operator in the syntax for it yet so here is an example of use :&#xA;&#x9; *   self.orElse{v | functionThatReturnABoolean() }&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Short-circuit version of OR. This means that the function passed in parameter will be evaluated only if self is false&#xD;&#xA;&#x9; * Note: we don't have a dedicated operator in the syntax for it yet so here is an example of use :&#xD;&#xA;&#x9; *   self.orElse{v | functionThatReturnABoolean() }&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="right">
             <eAnnotations source="kermeta.functionType">
@@ -197,27 +206,29 @@
             <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
           </eParameters>
         </eOperations>
-        <eOperations name="toString">
+        <eOperations name="toString" eType="/1/standard/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := if self then&#xA;&#x9;&#x9;&quot;true&quot;&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;&quot;false&quot;&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Returns 'true' or 'false', depending on self  value&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns 'true' or 'false', depending on self  value&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Numeric" abstract="true" eSuperTypes="/1/standard/Comparable /1/standard/ValueType">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The abstract class Numeric is the root class for all&#xA; * numeric types&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * The abstract class Numeric is the root class for all&#xD;&#xA; * numeric types&#xD;&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Integer" eSuperTypes="/1/standard/Numeric /1/standard/Summable">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The class Integer&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * The class Integer&#xD;&#xA; */"/>
           <details key="EMF_instanceClassName" value="int"/>
         </eAnnotations>
         <eOperations name="times">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;from var i : kermeta::standard::Integer init 0&#xA;&#x9;until i.equals(self)&#xA;&#x9;loop&#xA;&#x9;&#x9;body(i)&#xA;&#x9;&#x9;i := ((i) + (1))&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Iteration&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Iteration&#xD;&#xA;&#x9; */"/>
             <details key="EMF_static" value="IntegerUtil.times"/>
           </eAnnotations>
           <eParameters name="body">
@@ -228,342 +239,373 @@
             <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
           </eParameters>
         </eOperations>
-        <eOperations name="compareTo">
-          <eAnnotations source="kermeta">
+        <eOperations name="compareTo" eType="/1/standard/Integer">
+          <eAnnotations source="kermeta" references="/1/standard/Comparable/compareTo">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Integer) then&#xA;&#x9;&#x9;if other.getMetaClass.equals(kermeta::standard::Real) then&#xA;&#x9;&#x9;&#x9;result := self.toReal.compareTo(other)&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;raise kermeta::standard::NotComparableException.new&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.compareTo(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Comparison&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Comparison&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Comparable"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="equals">
+        <eOperations name="equals" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Integer) then&#xA;&#x9;&#x9;if other.getMetaClass.equals(kermeta::standard::Real) then&#xA;&#x9;&#x9;&#x9;result := self.toReal.equals(other)&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.equals(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is Integer or Real&#xA;&#x9; * and has the same numeric value than current object.&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is Integer or Real&#xD;&#xA;&#x9; * and has the same numeric value than current object.&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="plus">
-          <eAnnotations source="kermeta">
+        <eOperations name="plus" eType="/1/standard/Integer">
+          <eAnnotations source="kermeta" references="/1/standard/Summable/plus">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::VoidOperandError.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.plus(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns self + other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns self + other&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Summable"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Integer"/>
         </eOperations>
-        <eOperations name="minus">
+        <eOperations name="minus" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::VoidOperandError.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.minus(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns self - other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns self - other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Integer"/>
         </eOperations>
-        <eOperations name="mult">
+        <eOperations name="mult" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::VoidOperandError.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.times(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns self * other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns self * other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Integer"/>
         </eOperations>
-        <eOperations name="div">
+        <eOperations name="div" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.equals(0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::DivisionByZero.new&#xA;&#xA;&#x9;end&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::VoidOperandError.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.div(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns self / other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns self / other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Integer"/>
         </eOperations>
-        <eOperations name="mod">
+        <eOperations name="mod" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.equals(0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::DivisionByZero.new&#xA;&#xA;&#x9;end&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::VoidOperandError.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.mod(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns self modulo other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns self modulo other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Integer"/>
         </eOperations>
-        <eOperations name="uminus">
+        <eOperations name="uminus" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := ((0) - (self))&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns -self&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns -self&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="toReal">
+        <eOperations name="toReal" eType="/1/standard/Real">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toReal(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Convert self as a Real&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Convert self as a Real&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="isGreater">
-          <eAnnotations source="kermeta">
+        <eOperations name="isGreater" eType="/1/standard/Boolean">
+          <eAnnotations source="kermeta" references="/1/standard/Comparable/isGreater">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Integer) then&#xA;&#x9;&#x9;if other.getMetaClass.equals(kermeta::standard::Real) then&#xA;&#x9;&#x9;&#x9;result := ((self.toReal) > (other))&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isGreater(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return true if self > other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return true if self > other&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Comparable"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="isLower">
-          <eAnnotations source="kermeta">
+        <eOperations name="isLower" eType="/1/standard/Boolean">
+          <eAnnotations source="kermeta" references="/1/standard/Comparable/isLower">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Integer) then&#xA;&#x9;&#x9;if other.getMetaClass.equals(kermeta::standard::Real) then&#xA;&#x9;&#x9;&#x9;result := ((self.toReal) &lt; (other))&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isLower(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return true if self &lt; other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return true if self &lt; other&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Comparable"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="isLowerOrEqual">
-          <eAnnotations source="kermeta">
+        <eOperations name="isLowerOrEqual" eType="/1/standard/Boolean">
+          <eAnnotations source="kermeta" references="/1/standard/Comparable/isLowerOrEqual">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Integer) then&#xA;&#x9;&#x9;if other.getMetaClass.equals(kermeta::standard::Real) then&#xA;&#x9;&#x9;&#x9;result := ((self.toReal) &lt;= (other))&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isLowerOrEqual(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return true if self &lt;= other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return true if self &lt;= other&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Comparable"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="isGreaterOrEqual">
-          <eAnnotations source="kermeta">
+        <eOperations name="isGreaterOrEqual" eType="/1/standard/Boolean">
+          <eAnnotations source="kermeta" references="/1/standard/Comparable/isGreaterOrEqual">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Integer) then&#xA;&#x9;&#x9;if other.getMetaClass.equals(kermeta::standard::Real) then&#xA;&#x9;&#x9;&#x9;result := ((self.toReal) >= (other))&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isGreaterOrEqual(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * return true if self >= other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return true if self >= other&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Comparable"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="toString">
+        <eOperations name="toString" eType="/1/standard/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toString(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Numeric value in string format&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Numeric value in string format&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Real" eSuperTypes="/1/standard/Numeric /1/standard/Summable">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * class Real&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * class Real&#xD;&#xA; */"/>
           <details key="EMF_instanceClassName" value="java.lang.Double"/>
         </eAnnotations>
-        <eOperations name="plus">
-          <eAnnotations source="kermeta">
+        <eOperations name="plus" eType="/1/standard/Real">
+          <eAnnotations source="kermeta" references="/1/standard/Summable/plus">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::VoidOperandError.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.plus(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns self + other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns self + other&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Summable"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Real"/>
         </eOperations>
-        <eOperations name="minus">
+        <eOperations name="minus" eType="/1/standard/Real">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::VoidOperandError.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.minus(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns self - other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns self - other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Real"/>
         </eOperations>
-        <eOperations name="mult">
+        <eOperations name="mult" eType="/1/standard/Real">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::VoidOperandError.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.times(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns self * other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns self * other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Real"/>
         </eOperations>
-        <eOperations name="div">
+        <eOperations name="div" eType="/1/standard/Real">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.equals(0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::DivisionByZero.new&#xA;&#xA;&#x9;end&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::VoidOperandError.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.div(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns self / other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns self / other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/Real"/>
         </eOperations>
-        <eOperations name="toInteger">
+        <eOperations name="toInteger" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toInteger(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Convert self as an Integer&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Convert self as an Integer&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="compareTo">
-          <eAnnotations source="kermeta">
+        <eOperations name="compareTo" eType="/1/standard/Integer">
+          <eAnnotations source="kermeta" references="/1/standard/Comparable/compareTo">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Real) then&#xA;&#x9;&#x9;if other.getMetaClass.equals(kermeta::standard::Integer) then&#xA;&#x9;&#x9;&#x9;result := self.compareTo(other.asType(kermeta::standard::Integer).toReal)&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;raise kermeta::standard::NotComparableException.new&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.compareTo(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Comparison&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Comparison&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Comparable"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="equals">
+        <eOperations name="equals" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Real) then&#xA;&#x9;&#x9;if other.getMetaClass.equals(kermeta::standard::Integer) then&#xA;&#x9;&#x9;&#x9;result := self.equals(other.asType(kermeta::standard::Integer).toReal)&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.equals(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is Integer or Real&#xA;&#x9; * and has the same numeric value than current object.&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is Integer or Real&#xD;&#xA;&#x9; * and has the same numeric value than current object.&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="uminus">
+        <eOperations name="uminus" eType="/1/standard/Real">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := ((0.toReal) - (self))&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns -self&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns -self&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="toString">
+        <eOperations name="toString" eType="/1/standard/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toString(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Returns numeric value in string format&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns numeric value in string format&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Character" eSuperTypes="/1/standard/ValueType /1/standard/Comparable">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The class Character&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * The class Character&#xD;&#xA; */"/>
           <details key="EMF_instanceClassName" value="char"/>
         </eAnnotations>
-        <eOperations name="compareTo">
-          <eAnnotations source="kermeta">
+        <eOperations name="compareTo" eType="/1/standard/Integer">
+          <eAnnotations source="kermeta" references="/1/standard/Comparable/compareTo">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.compareTo(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Comparaison&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Comparaison&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Comparable"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="equals">
+        <eOperations name="equals" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Character) then&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.equals(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is Character&#xA;&#x9; * and has the same letter value than current object.&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is Character&#xD;&#xA;&#x9; * and has the same letter value than current object.&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="toString">
+        <eOperations name="toString" eType="/1/standard/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.toString(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Conversion from Character to String&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Conversion from Character to String&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="String" eSuperTypes="/1/standard/ValueType /1/standard/Comparable /1/standard/Summable">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * The class String&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * The class String&#xD;&#xA; */"/>
           <details key="EMF_instanceClassName" value="java.lang.String"/>
         </eAnnotations>
-        <eOperations name="compareTo">
-          <eAnnotations source="kermeta">
+        <eOperations name="compareTo" eType="/1/standard/Integer">
+          <eAnnotations source="kermeta" references="/1/standard/Comparable/compareTo">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Comparaison&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Comparaison&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Comparable"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="equals">
+        <eOperations name="equals" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::String) then&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.equals(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is String&#xA;&#x9; * and has the same string value than current object.&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is String&#xD;&#xA;&#x9; * and has the same string value than current object.&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eParameters name="other">
             <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
           </eParameters>
         </eOperations>
-        <eOperations name="plus">
-          <eAnnotations source="kermeta">
+        <eOperations name="plus" eType="/1/standard/String">
+          <eAnnotations source="kermeta" references="/1/standard/Summable/plus">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.plus(self, other.toString)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.plus(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns a new string self + other&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns a new string self + other&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Summable"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/String"/>
         </eOperations>
         <eOperations name="append">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Appends other at the end of self&#xA;&#x9; * A more efficient method is kermeta::utils::StringBuffer::append(other)&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Appends other at the end of self&#xD;&#xA;&#x9; * A more efficient method is kermeta::utils::StringBuffer::append(other)&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/String"/>
         </eOperations>
-        <eOperations name="elementAt">
+        <eOperations name="elementAt" eType="/1/standard/Character">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if ((((index) &lt; (0))) or (((index) > (((size) - (1)))))) then&#xA;&#x9;&#x9;raise kermeta::exceptions::StringIndexOutOfBound.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.elementAt(self, index)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns the character at index in the String&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns the character at index in the String&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="index" eType="/1/standard/Integer"/>
         </eOperations>
-        <eOperations name="indexOf">
+        <eOperations name="indexOf" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.indexOf(self, str)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns the index within this string of the first &#xA;&#x9; * occurrence of the specified substring&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns the index within this string of the first &#xD;&#xA;&#x9; * occurrence of the specified substring&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="str" eType="/1/standard/String"/>
         </eOperations>
-        <eOperations name="substring">
+        <eOperations name="substring" eType="/1/standard/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if ((((((((startIndex) >= (0))) and (((startIndex) &lt;= (size))))) and (((subStringSize) &lt;= (size))))) and (((subStringSize) >= (startIndex)))) then&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.substring(self, startIndex, subStringSize)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise kermeta::exceptions::StringIndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns a new string that is a substring of this string&#xA;&#x9; * takes as parameters : the startIndex and the size of the substring&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns a new string that is a substring of this string&#xD;&#xA;&#x9; * takes as parameters : the startIndex and the size of the substring&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="startIndex" eType="/1/standard/Integer"/>
           <eParameters name="subStringSize" eType="/1/standard/Integer"/>
         </eOperations>
-        <eOperations name="size">
+        <eOperations name="size" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.size(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns the number of characters in the current String&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns the number of characters in the current String&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="toString">
+        <eOperations name="toString" eType="/1/standard/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * returns the string itself&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns the string itself&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="replace">
+        <eOperations name="replace" eType="/1/standard/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.replace(self, str1, str2)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Replaces all occurences of str1 in the current string by the string str2&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Replaces all occurences of str1 in the current string by the string str2&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="str1" eType="/1/standard/String"/>
           <eParameters name="str2" eType="/1/standard/String"/>
         </eOperations>
-        <eOperations name="toLowerCase">
+        <eOperations name="toLowerCase" eType="/1/standard/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toLowerCase(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Return the current string in lower case&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Return the current string in lower case&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="toUpperCase">
+        <eOperations name="toUpperCase" eType="/1/standard/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toUpperCase(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Return the current string in upper case&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Return the current string in upper case&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="contains">
+        <eOperations name="contains" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.contains(self, str1)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Return if a string is contained by another string&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Return if a string is contained by another string&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="str1" eType="/1/standard/String"/>
         </eOperations>
         <eOperations name="split">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.split(self, delimiter)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Return of an ordered set of the splitted string&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Return of an ordered set of the splitted string&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
+          <eGenericType>
+            <eTypeArguments eClassifier="/1/standard/String"/>
+            <eClassifier xsi:type="ecore:EClass" href="collections.ecore#/1/standard/OrderedSet"/>
+          </eGenericType>
           <eParameters name="delimiter" eType="/1/standard/String"/>
         </eOperations>
-        <eOperations name="toBoolean">
+        <eOperations name="toBoolean" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toBoolean(self)&#xA;&#x9;if result.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::StringFormatException.new&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Parses the current string and returns true if the string is &quot;true&quot; and false if the string is &quot;false&quot;&#xA;&#x9; * The parsing is not case sensitive and if no boolean value is recognized then a StringFormatException is raised.&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Parses the current string and returns true if the string is &quot;true&quot; and false if the string is &quot;false&quot;&#xD;&#xA;&#x9; * The parsing is not case sensitive and if no boolean value is recognized then a StringFormatException is raised.&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="toInteger">
+        <eOperations name="toInteger" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toInteger(self)&#xA;&#x9;if result.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::StringFormatException.new&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Parses the current string into an integer.&#xA;&#x9; * if no integer value is recognized then a StringFormatException is raised.&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Parses the current string into an integer.&#xD;&#xA;&#x9; * if no integer value is recognized then a StringFormatException is raised.&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="toReal">
+        <eOperations name="toReal" eType="/1/standard/Real">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toReal(self)&#xA;&#x9;if result.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::StringFormatException.new&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;&#x9; * Parses the current string into a real.&#xA;&#x9; * if no real value is recognized then a StringFormatException is raised.&#xA;&#x9; */"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Parses the current string into a real.&#xD;&#xA;&#x9; * if no real value is recognized then a StringFormatException is raised.&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Object">
         <eAnnotations source="kermeta">
           <details key="alias" value="kermeta::standard::Integer"/>
-          <details key="documentation" value="/**&#xA; * Unlimited natural is used for reflection.&#xA; * It is mapped to integer.equals().&#xA; * Any negative number is interpreted as '*'&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * Unlimited natural is used for reflection.&#xD;&#xA; * It is mapped to integer.equals().&#xD;&#xA; * Any negative number is interpreted as '*'&#xD;&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
     </eSubpackages>
@@ -576,8 +618,10 @@
     <references href="collections.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
+    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/2"/>
@@ -589,10 +633,8 @@
     <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/2"/>
@@ -601,6 +643,7 @@
     <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
@@ -614,7 +657,6 @@
     <references href="../persistence/resource.ecore#/2"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
-    <references href="java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/2"/>

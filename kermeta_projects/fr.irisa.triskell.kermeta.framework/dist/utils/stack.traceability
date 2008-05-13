@@ -28,117 +28,117 @@
   <traces sourceReferences="//@references.50" targetReferences="//@references.51" description="//@messages.25"/>
   <traces sourceReferences="//@references.52" targetReferences="//@references.53" description="//@messages.26"/>
   <traces sourceReferences="//@references.54" targetReferences="//@references.55" description="//@messages.27"/>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="10" charBeginAt="307" lineEndAt="10" charEndAt="478"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="10" charBeginAt="316" lineEndAt="10" charEndAt="492"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
-    <refObject href="stack.km#//@packages.0/utils"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="17" charBeginAt="480" lineEndAt="17" charEndAt="505"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="17" charBeginAt="496" lineEndAt="17" charEndAt="521"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
-    <refObject href="stack.km#//@requires.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@requires.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="19" charBeginAt="507" lineEndAt="19" charEndAt="530"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="19" charBeginAt="525" lineEndAt="19" charEndAt="548"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
-    <refObject href="stack.km#//@usings.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@usings.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="25" charBeginAt="673" lineEndAt="25" charEndAt="1079"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="25" charBeginAt="697" lineEndAt="25" charEndAt="1126"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
-    <refObject href="stack.km#//@packages.0/utils/Stack"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="25" charBeginAt="685" lineEndAt="25" charEndAt="686"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="25" charBeginAt="709" lineEndAt="25" charEndAt="710"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
-    <refObject href="stack.km#//@packages.0/utils/Stack/G"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/G"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="30" charBeginAt="759" lineEndAt="30" charEndAt="829"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="30" charBeginAt="788" lineEndAt="30" charEndAt="860"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
-    <refObject href="stack.km#//@packages.0/utils/Stack/push"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/push"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="30" charBeginAt="774" lineEndAt="30" charEndAt="785"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="30" charBeginAt="803" lineEndAt="30" charEndAt="814"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
-    <refObject href="stack.km#//@packages.0/utils/Stack/push/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/push/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="37" charBeginAt="888" lineEndAt="37" charEndAt="942"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="37" charBeginAt="924" lineEndAt="37" charEndAt="980"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
-    <refObject href="stack.km#//@packages.0/utils/Stack/peek"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/peek"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="44" charBeginAt="1011" lineEndAt="44" charEndAt="1077"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="44" charBeginAt="1054" lineEndAt="44" charEndAt="1123"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
-    <refObject href="stack.km#//@packages.0/utils/Stack/pop"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/pop"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="25" charBeginAt="697" lineEndAt="25" charEndAt="708"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="25" charBeginAt="721" lineEndAt="25" charEndAt="732"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
-    <refObject href="stack.km#//@packages.0/utils/Stack/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="30" charBeginAt="789" lineEndAt="30" charEndAt="793"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="30" charBeginAt="818" lineEndAt="30" charEndAt="822"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
-    <refObject href="stack.km#//@packages.0/utils/Stack/push/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/push/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="30" charBeginAt="797" lineEndAt="30" charEndAt="829"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="30" charBeginAt="826" lineEndAt="30" charEndAt="860"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
-    <refObject href="stack.km#//@packages.0/utils/Stack/push/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/push/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="31" charBeginAt="802" lineEndAt="31" charEndAt="806"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="31" charBeginAt="832" lineEndAt="31" charEndAt="836"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
-    <refObject href="stack.km#//@packages.0/utils/Stack/push/@body/@statement.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/push/@body/@statement.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="31" charBeginAt="806" lineEndAt="31" charEndAt="824"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="31" charBeginAt="836" lineEndAt="31" charEndAt="854"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
-    <refObject href="stack.km#//@packages.0/utils/Stack/push/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/push/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="31" charBeginAt="813" lineEndAt="31" charEndAt="814"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="31" charBeginAt="843" lineEndAt="31" charEndAt="844"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
-    <refObject href="stack.km#//@packages.0/utils/Stack/push/@body/@statement.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/push/@body/@statement.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="31" charBeginAt="816" lineEndAt="31" charEndAt="823"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="31" charBeginAt="846" lineEndAt="31" charEndAt="853"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
-    <refObject href="stack.km#//@packages.0/utils/Stack/push/@body/@statement.0/@parameters.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/push/@body/@statement.0/@parameters.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="37" charBeginAt="912" lineEndAt="37" charEndAt="942"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="37" charBeginAt="948" lineEndAt="37" charEndAt="980"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
-    <refObject href="stack.km#//@packages.0/utils/Stack/peek/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/peek/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="38" charBeginAt="917" lineEndAt="38" charEndAt="923"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="38" charBeginAt="954" lineEndAt="38" charEndAt="960"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
-    <refObject href="stack.km#//@packages.0/utils/Stack/peek/@body/@statement.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/peek/@body/@statement.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="38" charBeginAt="927" lineEndAt="38" charEndAt="931"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="38" charBeginAt="964" lineEndAt="38" charEndAt="968"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
-    <refObject href="stack.km#//@packages.0/utils/Stack/peek/@body/@statement.0/@value/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/peek/@body/@statement.0/@value/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="38" charBeginAt="931" lineEndAt="38" charEndAt="937"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="38" charBeginAt="968" lineEndAt="38" charEndAt="974"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
-    <refObject href="stack.km#//@packages.0/utils/Stack/peek/@body/@statement.0/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/peek/@body/@statement.0/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="38" charBeginAt="917" lineEndAt="38" charEndAt="937"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="38" charBeginAt="954" lineEndAt="38" charEndAt="974"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
-    <refObject href="stack.km#//@packages.0/utils/Stack/peek/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/peek/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="44" charBeginAt="1034" lineEndAt="44" charEndAt="1077"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="44" charBeginAt="1077" lineEndAt="44" charEndAt="1123"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
-    <refObject href="stack.km#//@packages.0/utils/Stack/pop/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/pop/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="45" charBeginAt="1039" lineEndAt="45" charEndAt="1045"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="45" charBeginAt="1083" lineEndAt="45" charEndAt="1089"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
-    <refObject href="stack.km#//@packages.0/utils/Stack/pop/@body/@statement.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/pop/@body/@statement.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="45" charBeginAt="1049" lineEndAt="45" charEndAt="1053"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="45" charBeginAt="1093" lineEndAt="45" charEndAt="1097"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
-    <refObject href="stack.km#//@packages.0/utils/Stack/pop/@body/@statement.0/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/pop/@body/@statement.0/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="45" charBeginAt="1039" lineEndAt="45" charEndAt="1053"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="45" charBeginAt="1083" lineEndAt="45" charEndAt="1097"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
-    <refObject href="stack.km#//@packages.0/utils/Stack/pop/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/pop/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="46" charBeginAt="1056" lineEndAt="46" charEndAt="1060"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="46" charBeginAt="1101" lineEndAt="46" charEndAt="1105"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
-    <refObject href="stack.km#//@packages.0/utils/Stack/pop/@body/@statement.1/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/pop/@body/@statement.1/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="46" charBeginAt="1060" lineEndAt="46" charEndAt="1072"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="46" charBeginAt="1105" lineEndAt="46" charEndAt="1117"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
-    <refObject href="stack.km#//@packages.0/utils/Stack/pop/@body/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/pop/@body/@statement.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="46" charBeginAt="1070" lineEndAt="46" charEndAt="1071"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/stack.kmt" lineBeginAt="46" charBeginAt="1115" lineEndAt="46" charEndAt="1116"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
-    <refObject href="stack.km#//@packages.0/utils/Stack/pop/@body/@statement.1/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/stack.km#//@packages.0/utils/Stack/pop/@body/@statement.1/@parameters.0"/>
   </references>
   <messages language="english" type="Mapping" value="Parsing of PackageDecl" traces="//@traces.0"/>
   <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.1"/>

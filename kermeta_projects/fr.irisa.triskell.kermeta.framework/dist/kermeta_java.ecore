@@ -336,7 +336,7 @@
           <eAnnotations source="kermeta">
             <details key="documentation" value="refers to variable declaration &lt;code>var x : X init a&lt;/code>&#xA;&lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png&quot;/>"/>
           </eAnnotations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" lowerBound="1" eType="/1/language/behavior/Expression" containment="true">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" eType="/1/language/behavior/Expression" containment="true">
             <eAnnotations source="kermeta">
               <details key="documentation" value="Initialization expression for the variable&#xA;Default value is &lt;code>void&lt;/code> ????"/>
             </eAnnotations>
@@ -361,7 +361,7 @@
           <eAnnotations source="kermeta">
             <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
           </eAnnotations>
-          <eOperations name="_new">
+          <eOperations name="_new" eType="/1/language/structure/Object">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
             </eAnnotations>
@@ -458,7 +458,7 @@
           <eAnnotations source="kermeta">
             <details key="documentation" value="Type of a model, consisting of a set of included type definitions"/>
           </eAnnotations>
-          <eOperations name="_new">
+          <eOperations name="_new" eType="/1/language/structure/Model">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
             </eAnnotations>
@@ -1038,57 +1038,43 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="Standard.ecore#/0"/>
     <references href="Standard.ecore#/1"/>
-    <references href="Standard.ecore#/2"/>
     <references href="standard/collections.ecore#/0"/>
     <references href="standard/collections.ecore#/1"/>
-    <references href="standard/collections.ecore#/2"/>
     <references href="standard/primitive_types.ecore#/0"/>
     <references href="standard/primitive_types.ecore#/1"/>
-    <references href="standard/primitive_types.ecore#/2"/>
     <references href="language/structure.ecore#/0"/>
     <references href="language/structure.ecore#/1"/>
     <references href="language/structure.ecore#/2"/>
     <references href="language/reflective_collections.ecore#/0"/>
     <references href="language/reflective_collections.ecore#/1"/>
-    <references href="language/reflective_collections.ecore#/2"/>
     <references href="kunit/kunit.ecore#/0"/>
     <references href="kunit/kunit.ecore#/1"/>
-    <references href="kunit/kunit.ecore#/2"/>
     <references href="kunit/assert.ecore#/0"/>
     <references href="kunit/assert.ecore#/1"/>
-    <references href="kunit/assert.ecore#/2"/>
     <references href="utils/utils.ecore#/0"/>
     <references href="utils/utils.ecore#/1"/>
-    <references href="utils/utils.ecore#/2"/>
     <references href="utils/StringBuffer.ecore#/0"/>
     <references href="utils/StringBuffer.ecore#/1"/>
-    <references href="utils/StringBuffer.ecore#/2"/>
     <references href="utils/hashtable.ecore#/0"/>
     <references href="utils/hashtable.ecore#/1"/>
-    <references href="utils/hashtable.ecore#/2"/>
     <references href="utils/stack.ecore#/0"/>
     <references href="utils/stack.ecore#/1"/>
     <references href="utils/stack.ecore#/2"/>
     <references href="io/std_io.ecore#/0"/>
     <references href="io/std_io.ecore#/1"/>
-    <references href="io/std_io.ecore#/2"/>
     <references href="io/file_io.ecore#/0"/>
     <references href="io/file_io.ecore#/1"/>
     <references href="io/file_io.ecore#/2"/>
     <references href="exceptions/exceptions.ecore#/0"/>
     <references href="exceptions/exceptions.ecore#/1"/>
-    <references href="exceptions/exceptions.ecore#/2"/>
     <references href="language/dynamic_expression.ecore#/0"/>
     <references href="language/dynamic_expression.ecore#/1"/>
-    <references href="language/dynamic_expression.ecore#/2"/>
     <references href="persistence/resource.ecore#/0"/>
     <references href="persistence/resource.ecore#/1"/>
     <references href="persistence/resource.ecore#/2"/>
     <references href="standard/java.ecore#/0"/>
     <references href="standard/java.ecore#/1"/>
-    <references href="standard/java.ecore#/2"/>
     <references href="ecore/ecore_compatibility.ecore#/0"/>
     <references href="ecore/ecore_compatibility.ecore#/1"/>
-    <references href="ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

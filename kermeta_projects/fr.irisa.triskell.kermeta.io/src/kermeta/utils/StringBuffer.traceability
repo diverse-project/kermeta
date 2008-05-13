@@ -29,111 +29,111 @@
   <traces sourceReferences="//@references.52" targetReferences="//@references.53" description="//@messages.26"/>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="10" charBeginAt="199" lineEndAt="10" charEndAt="266"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
-    <refObject href="StringBuffer.km#//@packages.0/utils"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="13" charBeginAt="268" lineEndAt="13" charEndAt="293"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
-    <refObject href="StringBuffer.km#//@requires.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@requires.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="15" charBeginAt="295" lineEndAt="15" charEndAt="318"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
-    <refObject href="StringBuffer.km#//@usings.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@usings.1"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="22" charBeginAt="597" lineEndAt="22" charEndAt="1252"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="28" charBeginAt="792" lineEndAt="28" charEndAt="945"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/append"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/append"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="28" charBeginAt="809" lineEndAt="28" charEndAt="821"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/append/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/append/@ownedParameter.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="35" charBeginAt="1066" lineEndAt="35" charEndAt="1250"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="28" charBeginAt="824" lineEndAt="28" charEndAt="836"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/append/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/append/@containedType.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="28" charBeginAt="815" lineEndAt="28" charEndAt="821"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/append/@ownedParameter.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/append/@ownedParameter.0/@containedType.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="35" charBeginAt="1085" lineEndAt="35" charEndAt="1091"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@containedType.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="28" charBeginAt="840" lineEndAt="28" charEndAt="945"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="29" charBeginAt="845" lineEndAt="29" charEndAt="851"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body/@statement.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body/@statement.0/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="29" charBeginAt="853" lineEndAt="29" charEndAt="940"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body/@statement.0/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body/@statement.0/@value"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="29" charBeginAt="930" lineEndAt="29" charEndAt="934"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body/@statement.0/@value/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body/@statement.0/@value/@parameters.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="29" charBeginAt="935" lineEndAt="29" charEndAt="939"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body/@statement.0/@value/@parameters.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body/@statement.0/@value/@parameters.1"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="29" charBeginAt="845" lineEndAt="29" charEndAt="940"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/append/@body/@statement.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="35" charBeginAt="1095" lineEndAt="35" charEndAt="1250"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="36" charBeginAt="1100" lineEndAt="36" charEndAt="1123"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="36" charBeginAt="1117" lineEndAt="36" charEndAt="1123"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@type"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@type"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="36" charBeginAt="1117" lineEndAt="36" charEndAt="1123"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.0/@containedType.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="37" charBeginAt="1126" lineEndAt="37" charEndAt="1137"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.1/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.1/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="37" charBeginAt="1139" lineEndAt="37" charEndAt="1223"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.1/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.1/@value"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="37" charBeginAt="1218" lineEndAt="37" charEndAt="1222"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.1/@value/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.1/@value/@parameters.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="37" charBeginAt="1126" lineEndAt="37" charEndAt="1223"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.1"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="38" charBeginAt="1226" lineEndAt="38" charEndAt="1232"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.2/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.2/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="38" charBeginAt="1234" lineEndAt="38" charEndAt="1245"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.2/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.2/@value"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/utils/StringBuffer.kmt" lineBeginAt="38" charBeginAt="1226" lineEndAt="38" charEndAt="1245"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
-    <refObject href="StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/StringBuffer.km#//@packages.0/utils/StringBuffer/toString/@body/@statement.2"/>
   </references>
   <messages language="english" type="Mapping" value="Parsing of PackageDecl" traces="//@traces.0"/>
   <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.1"/>

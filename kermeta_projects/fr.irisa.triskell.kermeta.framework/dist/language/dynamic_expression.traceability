@@ -176,709 +176,709 @@
   <traces sourceReferences="//@references.346" targetReferences="//@references.347" description="//@messages.173"/>
   <traces sourceReferences="//@references.348" targetReferences="//@references.349" description="//@messages.174"/>
   <traces sourceReferences="//@references.350" targetReferences="//@references.351" description="//@messages.175"/>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="1" charBeginAt="0" lineEndAt="1" charEndAt="304"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="1" charBeginAt="0" lineEndAt="1" charEndAt="310"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="9" charBeginAt="306" lineEndAt="9" charEndAt="331"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="9" charBeginAt="314" lineEndAt="9" charEndAt="339"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
-    <refObject href="dynamic_expression.km#//@requires.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@requires.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="11" charBeginAt="333" lineEndAt="11" charEndAt="356"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="11" charBeginAt="343" lineEndAt="11" charEndAt="366"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
-    <refObject href="dynamic_expression.km#//@usings.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@usings.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="12" charBeginAt="357" lineEndAt="12" charEndAt="377"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="12" charBeginAt="368" lineEndAt="12" charEndAt="388"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
-    <refObject href="dynamic_expression.km#//@usings.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@usings.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="13" charBeginAt="378" lineEndAt="13" charEndAt="412"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="13" charBeginAt="390" lineEndAt="13" charEndAt="424"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
-    <refObject href="dynamic_expression.km#//@usings.3"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@usings.3"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="29" charBeginAt="1077" lineEndAt="29" charEndAt="4179"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="29" charBeginAt="1105" lineEndAt="29" charEndAt="4294"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="34" charBeginAt="1147" lineEndAt="34" charEndAt="1181"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="34" charBeginAt="1180" lineEndAt="34" charEndAt="1214"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/errors"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/errors"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="39" charBeginAt="1213" lineEndAt="39" charEndAt="1275"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="39" charBeginAt="1251" lineEndAt="39" charEndAt="1313"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/expression"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/expression"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="46" charBeginAt="1404" lineEndAt="46" charEndAt="1441"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="46" charBeginAt="1449" lineEndAt="46" charEndAt="1486"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/selfClass"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/selfClass"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="51" charBeginAt="1541" lineEndAt="51" charEndAt="1593"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="51" charBeginAt="1591" lineEndAt="51" charEndAt="1643"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/formalParameters"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/formalParameters"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="57" charBeginAt="1707" lineEndAt="57" charEndAt="1865"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="57" charBeginAt="1763" lineEndAt="57" charEndAt="1924"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="67" charBeginAt="2023" lineEndAt="67" charEndAt="2820"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="67" charBeginAt="2089" lineEndAt="67" charEndAt="2903"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="67" charBeginAt="2039" lineEndAt="67" charEndAt="2058"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="67" charBeginAt="2105" lineEndAt="67" charEndAt="2124"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="2897" lineEndAt="89" charEndAt="3603"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="2985" lineEndAt="89" charEndAt="3703"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="2915" lineEndAt="89" charEndAt="2931"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="3003" lineEndAt="89" charEndAt="3019"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="2933" lineEndAt="89" charEndAt="2973"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="3021" lineEndAt="89" charEndAt="3061"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@ownedParameter.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@ownedParameter.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3781" lineEndAt="108" charEndAt="4177"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3888" lineEndAt="108" charEndAt="4291"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3802" lineEndAt="108" charEndAt="3815"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3909" lineEndAt="108" charEndAt="3922"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3817" lineEndAt="108" charEndAt="3833"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3924" lineEndAt="108" charEndAt="3940"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3835" lineEndAt="108" charEndAt="3875"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3942" lineEndAt="108" charEndAt="3982"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="126" charBeginAt="4365" lineEndAt="126" charEndAt="4452"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="126" charBeginAt="4490" lineEndAt="126" charEndAt="4582"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/KermetaError"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/KermetaError"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="130" charBeginAt="4424" lineEndAt="130" charEndAt="4450"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="130" charBeginAt="4553" lineEndAt="130" charEndAt="4579"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/KermetaError/message"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/KermetaError/message"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="137" charBeginAt="4501" lineEndAt="137" charEndAt="4542"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="137" charBeginAt="4637" lineEndAt="137" charEndAt="4678"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/ParseError"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/ParseError"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="143" charBeginAt="4597" lineEndAt="143" charEndAt="4637"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="143" charBeginAt="4739" lineEndAt="143" charEndAt="4779"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/TypeError"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/TypeError"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="34" charBeginAt="1166" lineEndAt="34" charEndAt="1178"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="34" charBeginAt="1199" lineEndAt="34" charEndAt="1211"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/errors/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/errors/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="39" charBeginAt="1236" lineEndAt="39" charEndAt="1275"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="39" charBeginAt="1274" lineEndAt="39" charEndAt="1313"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/expression/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/expression/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="46" charBeginAt="1426" lineEndAt="46" charEndAt="1441"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="46" charBeginAt="1471" lineEndAt="46" charEndAt="1486"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/selfClass/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/selfClass/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="51" charBeginAt="1570" lineEndAt="51" charEndAt="1593"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="51" charBeginAt="1620" lineEndAt="51" charEndAt="1643"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="51" charBeginAt="1580" lineEndAt="51" charEndAt="1586"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="51" charBeginAt="1630" lineEndAt="51" charEndAt="1636"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0/@typeParamBinding.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="51" charBeginAt="1588" lineEndAt="51" charEndAt="1592"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="51" charBeginAt="1638" lineEndAt="51" charEndAt="1642"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0/@typeParamBinding.1/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0/@typeParamBinding.1/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="67" charBeginAt="2062" lineEndAt="67" charEndAt="2069"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="67" charBeginAt="2128" lineEndAt="67" charEndAt="2135"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="67" charBeginAt="2052" lineEndAt="67" charEndAt="2058"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="67" charBeginAt="2118" lineEndAt="67" charEndAt="2124"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@ownedParameter.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@ownedParameter.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="2948" lineEndAt="89" charEndAt="2973"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="3036" lineEndAt="89" charEndAt="3061"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@ownedParameter.1/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@ownedParameter.1/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="2958" lineEndAt="89" charEndAt="2964"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="3046" lineEndAt="89" charEndAt="3052"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@containedType.0/@containedType.0/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@ownedParameter.1/@containedType.0/@typeParamBinding.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3809" lineEndAt="108" charEndAt="3815"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3916" lineEndAt="108" charEndAt="3922"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3850" lineEndAt="108" charEndAt="3875"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3957" lineEndAt="108" charEndAt="3982"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.2/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.2/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3860" lineEndAt="108" charEndAt="3866"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3967" lineEndAt="108" charEndAt="3973"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="130" charBeginAt="4444" lineEndAt="130" charEndAt="4450"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="130" charBeginAt="4573" lineEndAt="130" charEndAt="4579"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/KermetaError/message/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/KermetaError/message/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="137" charBeginAt="4527" lineEndAt="137" charEndAt="4539"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="137" charBeginAt="4663" lineEndAt="137" charEndAt="4675"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/ParseError/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/ParseError/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="143" charBeginAt="4622" lineEndAt="143" charEndAt="4634"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="143" charBeginAt="4764" lineEndAt="143" charEndAt="4776"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/TypeError/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/TypeError/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="57" charBeginAt="1741" lineEndAt="57" charEndAt="1865"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="57" charBeginAt="1797" lineEndAt="57" charEndAt="1924"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1746" lineEndAt="58" charEndAt="1762"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1803" lineEndAt="58" charEndAt="1819"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1766" lineEndAt="58" charEndAt="1819"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1823" lineEndAt="58" charEndAt="1876"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1766" lineEndAt="58" charEndAt="1819"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1823" lineEndAt="58" charEndAt="1876"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1776" lineEndAt="58" charEndAt="1782"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1833" lineEndAt="58" charEndAt="1839"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0/@typeParamBinding.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1784" lineEndAt="58" charEndAt="1818"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1841" lineEndAt="58" charEndAt="1875"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0/@typeParamBinding.1/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@containedType.0/@typeParamBinding.1/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1819" lineEndAt="58" charEndAt="1823"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1876" lineEndAt="58" charEndAt="1880"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1746" lineEndAt="58" charEndAt="1823"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="58" charBeginAt="1803" lineEndAt="58" charEndAt="1880"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="59" charBeginAt="1826" lineEndAt="59" charEndAt="1835"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="59" charBeginAt="1884" lineEndAt="59" charEndAt="1893"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="59" charBeginAt="1839" lineEndAt="59" charEndAt="1845"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="59" charBeginAt="1897" lineEndAt="59" charEndAt="1903"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="59" charBeginAt="1845" lineEndAt="59" charEndAt="1860"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="59" charBeginAt="1903" lineEndAt="59" charEndAt="1918"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="59" charBeginAt="1826" lineEndAt="59" charEndAt="1860"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="59" charBeginAt="1884" lineEndAt="59" charEndAt="1918"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="67" charBeginAt="2073" lineEndAt="67" charEndAt="2820"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="67" charBeginAt="2139" lineEndAt="67" charEndAt="2903"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="68" charBeginAt="2081" lineEndAt="68" charEndAt="2087"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="68" charBeginAt="2148" lineEndAt="68" charEndAt="2154"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="68" charBeginAt="2087" lineEndAt="68" charEndAt="2093"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="68" charBeginAt="2154" lineEndAt="68" charEndAt="2160"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2099" lineEndAt="69" charEndAt="2373"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2167" lineEndAt="69" charEndAt="2445"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2102" lineEndAt="69" charEndAt="2118"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2170" lineEndAt="69" charEndAt="2186"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2119" lineEndAt="69" charEndAt="2121"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2187" lineEndAt="69" charEndAt="2189"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2122" lineEndAt="69" charEndAt="2126"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2190" lineEndAt="69" charEndAt="2194"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@target/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2127" lineEndAt="69" charEndAt="2129"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2195" lineEndAt="69" charEndAt="2197"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2130" lineEndAt="69" charEndAt="2139"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2198" lineEndAt="69" charEndAt="2207"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@parameters.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@parameters.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2140" lineEndAt="69" charEndAt="2142"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2208" lineEndAt="69" charEndAt="2210"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2143" lineEndAt="69" charEndAt="2147"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="69" charBeginAt="2211" lineEndAt="69" charEndAt="2215"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@parameters.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@condition/@parameters.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2159" lineEndAt="70" charEndAt="2364"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2228" lineEndAt="70" charEndAt="2435"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.63">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2159" lineEndAt="70" charEndAt="2271"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2228" lineEndAt="70" charEndAt="2340"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.64">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2167" lineEndAt="70" charEndAt="2214"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2236" lineEndAt="70" charEndAt="2283"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.65">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@type"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@type"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2167" lineEndAt="70" charEndAt="2214"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2236" lineEndAt="70" charEndAt="2283"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.66">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2220" lineEndAt="70" charEndAt="2267"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2289" lineEndAt="70" charEndAt="2336"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.67">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@initialization/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@initialization/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2220" lineEndAt="70" charEndAt="2267"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2289" lineEndAt="70" charEndAt="2336"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.68">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@initialization/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@initialization/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2267" lineEndAt="70" charEndAt="2271"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="70" charBeginAt="2336" lineEndAt="70" charEndAt="2340"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.69">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@initialization"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.0/@initialization"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="71" charBeginAt="2278" lineEndAt="71" charEndAt="2279"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="71" charBeginAt="2348" lineEndAt="71" charEndAt="2349"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.70">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@target/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="71" charBeginAt="2279" lineEndAt="71" charEndAt="2287"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="71" charBeginAt="2349" lineEndAt="71" charEndAt="2357"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.71">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.72" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="71" charBeginAt="2291" lineEndAt="71" charEndAt="2350"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.72" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="71" charBeginAt="2361" lineEndAt="71" charEndAt="2420"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.72">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.73" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="71" charBeginAt="2278" lineEndAt="71" charEndAt="2350"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.73" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="71" charBeginAt="2348" lineEndAt="71" charEndAt="2420"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.73">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.74" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="72" charBeginAt="2357" lineEndAt="72" charEndAt="2364"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.74" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="72" charBeginAt="2428" lineEndAt="72" charEndAt="2435"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.74">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.75" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="72" charBeginAt="2363" lineEndAt="72" charEndAt="2364"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.75" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="72" charBeginAt="2434" lineEndAt="72" charEndAt="2435"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.75">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.2/@expression"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.2/@expression"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.76" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="74" charBeginAt="2382" lineEndAt="74" charEndAt="2388"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.76" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="74" charBeginAt="2455" lineEndAt="74" charEndAt="2461"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.76">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.77" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="74" charBeginAt="2392" lineEndAt="74" charEndAt="2489"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.77" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="74" charBeginAt="2465" lineEndAt="74" charEndAt="2562"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.77">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.78" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="74" charBeginAt="2472" lineEndAt="74" charEndAt="2476"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.78" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="74" charBeginAt="2545" lineEndAt="74" charEndAt="2549"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.78">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.79" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="74" charBeginAt="2478" lineEndAt="74" charEndAt="2488"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.79" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="74" charBeginAt="2551" lineEndAt="74" charEndAt="2561"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.79">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value/@parameters.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value/@parameters.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.80" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="74" charBeginAt="2382" lineEndAt="74" charEndAt="2489"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.80" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="74" charBeginAt="2455" lineEndAt="74" charEndAt="2562"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.80">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.81" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="76" charBeginAt="2504" lineEndAt="76" charEndAt="2812"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.81" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="76" charBeginAt="2579" lineEndAt="76" charEndAt="2894"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.81">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.82" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="76" charBeginAt="2507" lineEndAt="76" charEndAt="2513"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.82" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="76" charBeginAt="2582" lineEndAt="76" charEndAt="2588"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.82">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@condition/@target/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@condition/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.83" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="76" charBeginAt="2513" lineEndAt="76" charEndAt="2518"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.83" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="76" charBeginAt="2588" lineEndAt="76" charEndAt="2593"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.83">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@condition/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@condition/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.84" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="76" charBeginAt="2519" lineEndAt="76" charEndAt="2521"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.84" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="76" charBeginAt="2594" lineEndAt="76" charEndAt="2596"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.84">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@condition"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@condition"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.85" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="76" charBeginAt="2522" lineEndAt="76" charEndAt="2523"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.85" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="76" charBeginAt="2597" lineEndAt="76" charEndAt="2598"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.85">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@condition/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@condition/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.86" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2535" lineEndAt="77" charEndAt="2803"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.86" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2611" lineEndAt="77" charEndAt="2884"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.86">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.87" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2535" lineEndAt="77" charEndAt="2647"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.87" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2611" lineEndAt="77" charEndAt="2723"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.87">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.88" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2543" lineEndAt="77" charEndAt="2590"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.88" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2619" lineEndAt="77" charEndAt="2666"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.88">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@type"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@type"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.89" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2543" lineEndAt="77" charEndAt="2590"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.89" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2619" lineEndAt="77" charEndAt="2666"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.89">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.90" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2596" lineEndAt="77" charEndAt="2643"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.90" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2672" lineEndAt="77" charEndAt="2719"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.90">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@initialization/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@initialization/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.91" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2596" lineEndAt="77" charEndAt="2643"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.91" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2672" lineEndAt="77" charEndAt="2719"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.91">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@initialization/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@initialization/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.92" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2643" lineEndAt="77" charEndAt="2647"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.92" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="77" charBeginAt="2719" lineEndAt="77" charEndAt="2723"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.92">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@initialization"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@initialization"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.93" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="78" charBeginAt="2654" lineEndAt="78" charEndAt="2655"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.93" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="78" charBeginAt="2731" lineEndAt="78" charEndAt="2732"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.93">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.1/@target/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.1/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.94" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="78" charBeginAt="2655" lineEndAt="78" charEndAt="2663"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.94" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="78" charBeginAt="2732" lineEndAt="78" charEndAt="2740"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.94">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.1/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.1/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.95" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="78" charBeginAt="2667" lineEndAt="78" charEndAt="2710"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.95" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="78" charBeginAt="2744" lineEndAt="78" charEndAt="2787"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.95">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.1/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.1/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.96" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="78" charBeginAt="2654" lineEndAt="78" charEndAt="2710"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.96" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="78" charBeginAt="2731" lineEndAt="78" charEndAt="2787"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.96">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.97" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="79" charBeginAt="2717" lineEndAt="79" charEndAt="2723"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.97" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="79" charBeginAt="2795" lineEndAt="79" charEndAt="2801"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.97">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.98" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="79" charBeginAt="2723" lineEndAt="79" charEndAt="2789"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.98" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="79" charBeginAt="2801" lineEndAt="79" charEndAt="2869"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.98">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.99" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="79" charBeginAt="2728" lineEndAt="79" charEndAt="2789"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.99" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="79" charBeginAt="2806" lineEndAt="79" charEndAt="2869"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.99">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.100" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="79" charBeginAt="2730" lineEndAt="79" charEndAt="2735"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.100" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="79" charBeginAt="2808" lineEndAt="79" charEndAt="2813"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.100">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.101" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2745" lineEndAt="80" charEndAt="2746"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.101" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2824" lineEndAt="80" charEndAt="2825"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.101">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@target/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.102" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2746" lineEndAt="80" charEndAt="2781"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.102" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2825" lineEndAt="80" charEndAt="2860"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.102">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.103" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2754" lineEndAt="80" charEndAt="2781"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.103" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2833" lineEndAt="80" charEndAt="2860"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.103">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.104" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2762" lineEndAt="80" charEndAt="2766"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.104" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2841" lineEndAt="80" charEndAt="2845"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.104">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.105" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2766" lineEndAt="80" charEndAt="2767"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.105" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2845" lineEndAt="80" charEndAt="2846"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.105">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.106" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2767" lineEndAt="80" charEndAt="2772"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.106" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2846" lineEndAt="80" charEndAt="2851"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.106">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.107" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2772" lineEndAt="80" charEndAt="2780"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.107" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="80" charBeginAt="2851" lineEndAt="80" charEndAt="2859"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.107">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.108" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="79" charBeginAt="2728" lineEndAt="79" charEndAt="2789"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.108" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="79" charBeginAt="2806" lineEndAt="79" charEndAt="2869"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.108">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.109" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="82" charBeginAt="2796" lineEndAt="82" charEndAt="2803"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.109" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="82" charBeginAt="2877" lineEndAt="82" charEndAt="2884"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.109">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.3"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.3"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.110" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="82" charBeginAt="2802" lineEndAt="82" charEndAt="2803"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.110" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="82" charBeginAt="2883" lineEndAt="82" charEndAt="2884"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.110">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.3/@expression"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.3/@expression"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.111" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="2987" lineEndAt="89" charEndAt="3603"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.111" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="89" charBeginAt="3075" lineEndAt="89" charEndAt="3703"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.111">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.112" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="90" charBeginAt="2995" lineEndAt="90" charEndAt="3226"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.112" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="90" charBeginAt="3084" lineEndAt="90" charEndAt="3319"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.112">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.113" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="90" charBeginAt="2998" lineEndAt="90" charEndAt="3008"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.113" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="90" charBeginAt="3087" lineEndAt="90" charEndAt="3097"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.113">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@condition/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@condition/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.114" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="90" charBeginAt="3009" lineEndAt="90" charEndAt="3011"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.114" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="90" charBeginAt="3098" lineEndAt="90" charEndAt="3100"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.114">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@condition"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@condition"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.115" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="90" charBeginAt="3012" lineEndAt="90" charEndAt="3016"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.115" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="90" charBeginAt="3101" lineEndAt="90" charEndAt="3105"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.115">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@condition/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@condition/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.116" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3028" lineEndAt="91" charEndAt="3217"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.116" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3118" lineEndAt="91" charEndAt="3309"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.116">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.117" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3028" lineEndAt="91" charEndAt="3140"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.117" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3118" lineEndAt="91" charEndAt="3230"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.117">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.118" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3036" lineEndAt="91" charEndAt="3083"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.118" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3126" lineEndAt="91" charEndAt="3173"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.118">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@type"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@type"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.119" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3036" lineEndAt="91" charEndAt="3083"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.119" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3126" lineEndAt="91" charEndAt="3173"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.119">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.120" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3089" lineEndAt="91" charEndAt="3136"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.120" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3179" lineEndAt="91" charEndAt="3226"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.120">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@initialization/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@initialization/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.121" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3089" lineEndAt="91" charEndAt="3136"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.121" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3179" lineEndAt="91" charEndAt="3226"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.121">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@initialization/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@initialization/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.122" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3136" lineEndAt="91" charEndAt="3140"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.122" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="91" charBeginAt="3226" lineEndAt="91" charEndAt="3230"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.122">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@initialization"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.0/@initialization"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.123" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="92" charBeginAt="3147" lineEndAt="92" charEndAt="3148"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.123" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="92" charBeginAt="3238" lineEndAt="92" charEndAt="3239"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.123">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.1/@target/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.1/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.124" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="92" charBeginAt="3148" lineEndAt="92" charEndAt="3156"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.124" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="92" charBeginAt="3239" lineEndAt="92" charEndAt="3247"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.124">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.1/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.1/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.125" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="92" charBeginAt="3160" lineEndAt="92" charEndAt="3203"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.125" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="92" charBeginAt="3251" lineEndAt="92" charEndAt="3294"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.125">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.1/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.1/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.126" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="92" charBeginAt="3147" lineEndAt="92" charEndAt="3203"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.126" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="92" charBeginAt="3238" lineEndAt="92" charEndAt="3294"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.126">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.127" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="93" charBeginAt="3210" lineEndAt="93" charEndAt="3217"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.127" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="93" charBeginAt="3302" lineEndAt="93" charEndAt="3309"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.127">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.128" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="93" charBeginAt="3216" lineEndAt="93" charEndAt="3217"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.128" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="93" charBeginAt="3308" lineEndAt="93" charEndAt="3309"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.128">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.2/@expression"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.2/@expression"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.129" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="95" charBeginAt="3232" lineEndAt="95" charEndAt="3469"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.129" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="95" charBeginAt="3326" lineEndAt="95" charEndAt="3567"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.129">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.130" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="95" charBeginAt="3235" lineEndAt="95" charEndAt="3241"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.130" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="95" charBeginAt="3329" lineEndAt="95" charEndAt="3335"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.130">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@condition/@target/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@condition/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.131" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="95" charBeginAt="3241" lineEndAt="95" charEndAt="3246"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.131" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="95" charBeginAt="3335" lineEndAt="95" charEndAt="3340"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.131">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@condition/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@condition/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.132" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="95" charBeginAt="3247" lineEndAt="95" charEndAt="3249"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.132" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="95" charBeginAt="3341" lineEndAt="95" charEndAt="3343"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.132">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@condition"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@condition"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.133" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="95" charBeginAt="3250" lineEndAt="95" charEndAt="3251"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.133" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="95" charBeginAt="3344" lineEndAt="95" charEndAt="3345"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.133">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@condition/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@condition/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.134" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3263" lineEndAt="96" charEndAt="3460"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.134" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3358" lineEndAt="96" charEndAt="3557"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.134">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.135" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3263" lineEndAt="96" charEndAt="3375"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.135" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3358" lineEndAt="96" charEndAt="3470"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.135">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.136" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3271" lineEndAt="96" charEndAt="3318"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.136" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3366" lineEndAt="96" charEndAt="3413"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.136">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@type"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@type"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.137" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3271" lineEndAt="96" charEndAt="3318"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.137" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3366" lineEndAt="96" charEndAt="3413"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.137">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.138" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3324" lineEndAt="96" charEndAt="3371"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.138" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3419" lineEndAt="96" charEndAt="3466"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.138">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@initialization/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@initialization/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.139" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3324" lineEndAt="96" charEndAt="3371"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.139" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3419" lineEndAt="96" charEndAt="3466"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.139">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@initialization/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@initialization/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.140" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3371" lineEndAt="96" charEndAt="3375"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.140" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="96" charBeginAt="3466" lineEndAt="96" charEndAt="3470"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.140">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@initialization"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.0/@initialization"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.141" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="97" charBeginAt="3382" lineEndAt="97" charEndAt="3383"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.141" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="97" charBeginAt="3478" lineEndAt="97" charEndAt="3479"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.141">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.1/@target/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.1/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.142" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="97" charBeginAt="3383" lineEndAt="97" charEndAt="3391"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.142" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="97" charBeginAt="3479" lineEndAt="97" charEndAt="3487"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.142">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.1/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.1/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.143" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="97" charBeginAt="3395" lineEndAt="97" charEndAt="3446"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.143" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="97" charBeginAt="3491" lineEndAt="97" charEndAt="3542"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.143">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.1/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.1/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.144" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="97" charBeginAt="3382" lineEndAt="97" charEndAt="3446"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.144" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="97" charBeginAt="3478" lineEndAt="97" charEndAt="3542"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.144">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.145" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="98" charBeginAt="3453" lineEndAt="98" charEndAt="3460"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.145" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="98" charBeginAt="3550" lineEndAt="98" charEndAt="3557"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.145">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.146" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="98" charBeginAt="3459" lineEndAt="98" charEndAt="3460"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.146" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="98" charBeginAt="3556" lineEndAt="98" charEndAt="3557"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.146">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.2/@expression"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.1/@thenBody/@statement.2/@expression"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.147" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3475" lineEndAt="100" charEndAt="3481"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.147" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3574" lineEndAt="100" charEndAt="3580"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.147">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.148" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3485" lineEndAt="100" charEndAt="3595"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.148" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3584" lineEndAt="100" charEndAt="3694"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.148">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.149" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3567" lineEndAt="100" charEndAt="3571"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.149" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3666" lineEndAt="100" charEndAt="3670"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.149">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@value/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@value/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.150" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3573" lineEndAt="100" charEndAt="3580"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.150" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3672" lineEndAt="100" charEndAt="3679"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.150">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@value/@parameters.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@value/@parameters.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.151" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3582" lineEndAt="100" charEndAt="3594"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.151" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3681" lineEndAt="100" charEndAt="3693"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.151">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@value/@parameters.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@value/@parameters.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.152" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3475" lineEndAt="100" charEndAt="3595"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.152" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="100" charBeginAt="3574" lineEndAt="100" charEndAt="3694"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.152">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.153" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3889" lineEndAt="108" charEndAt="4177"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.153" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="108" charBeginAt="3996" lineEndAt="108" charEndAt="4291"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.153">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.154" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="109" charBeginAt="3897" lineEndAt="109" charEndAt="4123"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.154" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="109" charBeginAt="4005" lineEndAt="109" charEndAt="4235"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.154">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.155" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="109" charBeginAt="3904" lineEndAt="109" charEndAt="3909"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.155" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="109" charBeginAt="4012" lineEndAt="109" charEndAt="4017"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.155">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@condition/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@condition/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.156" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="109" charBeginAt="3910" lineEndAt="109" charEndAt="3914"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.156" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="109" charBeginAt="4018" lineEndAt="109" charEndAt="4022"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.156">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@condition/@target/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@condition/@target/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.157" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="109" charBeginAt="3900" lineEndAt="109" charEndAt="3903"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.157" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="109" charBeginAt="4008" lineEndAt="109" charEndAt="4011"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.157">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@condition"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@condition"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.158" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="3927" lineEndAt="110" charEndAt="4114"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.158" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="4036" lineEndAt="110" charEndAt="4225"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.158">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.159" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="3927" lineEndAt="110" charEndAt="4039"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.159" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="4036" lineEndAt="110" charEndAt="4148"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.159">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.160" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="3935" lineEndAt="110" charEndAt="3982"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.160" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="4044" lineEndAt="110" charEndAt="4091"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.160">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@type"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@type"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.161" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="3935" lineEndAt="110" charEndAt="3982"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.161" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="4044" lineEndAt="110" charEndAt="4091"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.161">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.162" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="3988" lineEndAt="110" charEndAt="4035"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.162" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="4097" lineEndAt="110" charEndAt="4144"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.162">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@initialization/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@initialization/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.163" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="3988" lineEndAt="110" charEndAt="4035"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.163" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="4097" lineEndAt="110" charEndAt="4144"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.163">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@initialization/@containedType.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@initialization/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.164" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="4035" lineEndAt="110" charEndAt="4039"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.164" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="110" charBeginAt="4144" lineEndAt="110" charEndAt="4148"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.164">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@initialization"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.0/@initialization"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.165" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="111" charBeginAt="4046" lineEndAt="111" charEndAt="4047"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.165" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="111" charBeginAt="4156" lineEndAt="111" charEndAt="4157"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.165">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.1/@target/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.1/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.166" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="111" charBeginAt="4047" lineEndAt="111" charEndAt="4055"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.166" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="111" charBeginAt="4157" lineEndAt="111" charEndAt="4165"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.166">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.1/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.1/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.167" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="111" charBeginAt="4059" lineEndAt="111" charEndAt="4100"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.167" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="111" charBeginAt="4169" lineEndAt="111" charEndAt="4210"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.167">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.1/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.1/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.168" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="111" charBeginAt="4046" lineEndAt="111" charEndAt="4100"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.168" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="111" charBeginAt="4156" lineEndAt="111" charEndAt="4210"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.168">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.169" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="112" charBeginAt="4107" lineEndAt="112" charEndAt="4114"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.169" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="112" charBeginAt="4218" lineEndAt="112" charEndAt="4225"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.169">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.2"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.170" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="112" charBeginAt="4113" lineEndAt="112" charEndAt="4114"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.170" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="112" charBeginAt="4224" lineEndAt="112" charEndAt="4225"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.170">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.2/@expression"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.0/@thenBody/@statement.2/@expression"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.171" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="114" charBeginAt="4129" lineEndAt="114" charEndAt="4135"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.171" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="114" charBeginAt="4242" lineEndAt="114" charEndAt="4248"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.171">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1/@target"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.172" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="114" charBeginAt="4139" lineEndAt="114" charEndAt="4146"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.172" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="114" charBeginAt="4252" lineEndAt="114" charEndAt="4259"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.172">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1/@value"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.173" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="114" charBeginAt="4147" lineEndAt="114" charEndAt="4154"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.173" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="114" charBeginAt="4260" lineEndAt="114" charEndAt="4267"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.173">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1/@value/@parameters.0"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1/@value/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.174" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="114" charBeginAt="4156" lineEndAt="114" charEndAt="4168"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.174" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="114" charBeginAt="4269" lineEndAt="114" charEndAt="4281"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.174">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1/@value/@parameters.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1/@value/@parameters.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.175" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="114" charBeginAt="4129" lineEndAt="114" charEndAt="4169"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.175" fileURI="platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/language/dynamic_expression.kmt" lineBeginAt="114" charBeginAt="4242" lineEndAt="114" charEndAt="4282"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.175">
-    <refObject href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1"/>
+    <refObject href="file:/C:/eclipse3.3.2/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1"/>
   </references>
   <messages language="english" type="Mapping" value="Parsing of PackageDecl" traces="//@traces.0"/>
   <messages language="english" type="Mapping" value="Parsing of ImportStmt" traces="//@traces.1"/>
