@@ -16,10 +16,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.jdt.launching,
  org.eclipse.jface,
- org.kermeta.generator,
  org.eclipse.emf.ecore.editor,
  fr.irisa.triskell.eclipse.util,
  org.kermeta.simk,
  org.kermeta.io.loader,
- fr.irisa.triskell.kermeta.io
+ fr.irisa.triskell.kermeta.io,
+ org.kermeta.generator
 Eclipse-LazyStart: true

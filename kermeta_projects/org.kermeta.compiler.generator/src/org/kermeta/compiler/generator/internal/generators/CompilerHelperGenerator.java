@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.6 2008-01-10 16:10:32 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.7 2008-05-13 12:49:17 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -37,12 +37,12 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
-import org.kermeta.generator.AbstractGenerator;
-import org.kermeta.generator.jet.DefaultJETEmitter;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.simk.SIMKModel;
 import org.kermeta.simk.SMUsage;
 import org.kermeta.simk.StaticMethod;
+import org.kermeta.generator.AbstractGenerator;
+import org.kermeta.generator.jet.DefaultJETEmitter;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
@@ -278,12 +278,13 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private void generateTestHelperModel(SIMKModel simkConf, IPath projectPath)
 			throws JETException, CoreException {
 		for(StaticMethod sm : simkConf.getStaticMethods()) {
-			if(sm.getUsages().contains(SMUsage.FUNCTION_TYPE) && !sm.getSMContext().getDeepestPackage().getQualifiedName().contains("kermeta")){
+			// temporarily in stand by
+			/*if(sm.getUsages().contains(SMUsage.FUNCTION_TYPE) && !sm.getSMContext().getDeepestPackage().getQualifiedName().contains("kermeta")){
 			applyTemplate(sm, getTemplateURI(TEST_HELPER_JAVA), projectPath
 					.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getDeepestPackage().getQualifiedName().replace(".", "/") + "/helper/"
 							+ CodeGenUtil.capName(sm.getParentMethodFromModel().getName()) + "_" + sm.getId()
 							+ "_Helper.java"), configuration.isForceOverwrite());
-			}
+			}*/
 		}
 	}
 
