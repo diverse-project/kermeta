@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.51 2008-04-28 11:49:48 ftanguy Exp $
+// $Id: primitive_types.kmt,v 1.52 2008-05-14 13:12:57 cfaucher Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -238,7 +238,7 @@ class Integer inherits Numeric, Summable<Integer>
 	 @EMF_static "IntegerUtil.times" 
 	 operation times(body : <Integer->Object>) : Void is do
 	 	from var i : Integer init 0
-	 	until i == self
+	 	until i >= self
 	 	loop
 	 		body(i)
 	 		i := i + 1
@@ -514,7 +514,7 @@ class Real inherits Numeric, Summable<Real>
 /**
  * The class Character
  */
- @EMF_instanceClassName "char"
+@EMF_instanceClassName "char"
 class Character inherits ValueType, Comparable
 {
 	/**
