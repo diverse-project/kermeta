@@ -79,7 +79,8 @@ GPL license.
          id="fr.irisa.triskell.kermeta"
          download-size="2500"
          install-size="4570"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.texteditor"
@@ -155,8 +156,7 @@ GPL license.
          id="fr.irisa.triskell.kermeta.model"
          download-size="0"
          install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.ui"
