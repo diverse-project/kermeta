@@ -1,4 +1,4 @@
-/* $Id: Mutation.kmt,v 1.4 2008-05-06 13:37:37 tej Exp $
+/* $Id: Mutation.kmt,v 1.5 2008-05-15 15:00:14 tej Exp $
  * Creation date: January 9, 2008
  * License:
  * Copyright:
@@ -10,6 +10,7 @@
 package acm;
 
 require kermeta
+require "Helpers.kmt"
 require "http://www.kermeta.org/acm"
 
 using kermeta::standard
@@ -215,14 +216,25 @@ abstract class SPMutator {
 	// tests if the policy is conform to its policy_model
 	operation policy_is_conform(p : Policy) : Boolean is
 	do
+	if p.type == void then
 	result := true
+	end
+	
+	
 	end
 
 	
 	// tests if there are conflicts in the policy
 	operation no_conflicts(p : Policy) : Boolean is
 	do
+	if p.type == void then
+	result := false
+	else
+	
+	
 	result := true
+	
+	end
 	end
 }
 
@@ -461,6 +473,10 @@ class Main
 	end
 	
 	
+	
+	
+
+	
 	// mutate and show mutants and save them in the file
 	operation mutateAndDisplay(mutator: SPMutator , policy : Policy , opName : String) is do
 
@@ -499,13 +515,20 @@ class Main
 		var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/VMSOrBACPerms.xmi")
 		//var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/LibraryRBAC.xmi")
 		
+		var helper : Helper init Helper.new
+		
+		stdio.writeln("Creating......")
+		helper.saveAcmModel(policy.type , "ASMS" , "ASMSinOrBAC.xmi")
+		stdio.writeln("Done")
+		
+		/*
 		stdio.writeln(policy.type.toString)
 			 
 		stdio.writeln("ORIGINAL : ")
 		stdio.writeln("**********\n")
 		stdio.writeln(policy.toString)
 		stdio.writeln("")
-				 	
+		*/	 	
 		// generate all mutants and show them
 	
 
