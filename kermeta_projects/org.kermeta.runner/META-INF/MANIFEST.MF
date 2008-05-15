@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Debug Plug-in
 Bundle-SymbolicName: org.kermeta.runner;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.1.99.qualifier
 Bundle-Activator: org.kermeta.runner.RunnerPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -16,4 +16,5 @@ Eclipse-LazyStart: true
 Export-Package: org.kermeta.runner,
  org.kermeta.runner.launching,
  org.kermeta.runner.model,
- org.kermeta.runner.model.variable
+ org.kermeta.runner.model.variable,
+ org.kermeta.runner.util

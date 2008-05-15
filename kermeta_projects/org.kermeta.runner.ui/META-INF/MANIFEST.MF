@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ui Plug-in
 Bundle-SymbolicName: org.kermeta.runner.ui;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.1.99.qualifier
 Bundle-Activator: org.kermeta.runner.ui.DebugUIPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -19,3 +19,8 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.model.edit,
  fr.irisa.triskell.kermeta.texteditor
 Eclipse-LazyStart: true
+Export-Package: org.kermeta.runner.dialogs,
+ org.kermeta.runner.launching,
+ org.kermeta.runner.ui,
+ org.kermeta.runner.ui.actions,
+ org.kermeta.runner.ui.model
