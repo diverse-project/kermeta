@@ -1,4 +1,4 @@
-/* $Id: 074_testRequireEcoreWithOppositeInDifferentFiles.main.kmt,v 1.1 2008-05-16 10:14:28 dvojtise Exp $
+/* $Id: 074_testRequireEcoreWithOppositeInDifferentFiles.main.kmt,v 1.2 2008-05-16 10:15:51 dvojtise Exp $
  * Creation date: May 14, 2008
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -10,9 +10,9 @@
  *		This is a problem in the merger that crashes if the required ecore  files 
  *		have opposite references spread through 2 files 
  */
-@mainClass "root_package::TestOpposite"
+@mainClass "testRequireEcoreWithOppositeInDifferentFiles::TestOpposite"
 @mainOperation "main"
-package root_package;
+package testRequireEcoreWithOppositeInDifferentFiles;
 
 require kermeta   
 require "074_A.ecore"
