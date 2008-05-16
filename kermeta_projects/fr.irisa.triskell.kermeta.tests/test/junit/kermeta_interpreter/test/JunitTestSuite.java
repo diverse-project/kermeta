@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.19 2008-04-28 11:51:17 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.20 2008-05-16 12:00:18 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -214,6 +214,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","072_testProperty.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","073_AliasOnEnumCrash.main.kmt" );
+
+		testWithFile("test/interpreter/kmt_testcases","074_testRequireEcoreWithOppositeInDifferentFiles.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
