@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="ASCII"?>
+<acm:Policy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:acm="http://www.kermeta.org/acm" name="LMS in RBAC">
+  <elements name="Borrower">
+    <type href="RBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="Student">
+    <type href="RBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="Teacher">
+    <type href="RBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="Personnel">
+    <type href="RBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="Secretary">
+    <type href="RBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="Director">
+    <type href="RBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="Administrator">
+    <type href="RBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="ReserveBook_Book">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="ConsultBorrowerAccount_BorrowerAccount">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="FixBook_Book">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="ManageAccess_PersonnelAccount">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="GiveBackBook_Book">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="BorrowBook_Book">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="BorrowerActivity_Book">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="DeliverBook_Book">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="ModifyAccount_BorrowerAccount">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="CreateAccount_BorrowerAccount">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="default">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="Holidays">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="WorkingDays">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="MaintenanceDay">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <rules name="R1" parameters="//@elements.1 //@elements.7 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R2" parameters="//@elements.4 //@elements.8 //@elements.17">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R3" parameters="//@elements.4 //@elements.9 //@elements.20">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R4" parameters="//@elements.6 //@elements.9 //@elements.20">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R5" parameters="//@elements.6 //@elements.10 //@elements.17">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R6" parameters="//@elements.0 //@elements.11 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R7" parameters="//@elements.2 //@elements.12 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R8" parameters="//@elements.1 //@elements.11 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R9" parameters="//@elements.1 //@elements.13 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R10" parameters="//@elements.0 //@elements.12 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R11" parameters="//@elements.0 //@elements.7 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R12" parameters="//@elements.6 //@elements.14 //@elements.20">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R13" parameters="//@elements.2 //@elements.13 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R14" parameters="//@elements.6 //@elements.15 //@elements.17">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R15" parameters="//@elements.5 //@elements.14 //@elements.20">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R16" parameters="//@elements.5 //@elements.9 //@elements.20">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R17" parameters="//@elements.6 //@elements.16 //@elements.17">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R18" parameters="//@elements.5 //@elements.8 //@elements.17">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R19" parameters="//@elements.2 //@elements.7 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R20" parameters="//@elements.0 //@elements.13 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R21" parameters="//@elements.2 //@elements.11 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R22" parameters="//@elements.1 //@elements.12 //@elements.19">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R23" parameters="//@elements.4 //@elements.14 //@elements.20">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <type href="RBAC.xmi#/"/>
+</acm:Policy>

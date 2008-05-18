@@ -1,4 +1,4 @@
-/* $Id: Mutation.kmt,v 1.5 2008-05-15 15:00:14 tej Exp $
+/* $Id: Mutation.kmt,v 1.6 2008-05-18 08:57:17 tej Exp $
  * Creation date: January 9, 2008
  * License:
  * Copyright:
@@ -314,7 +314,7 @@ class ANR inherits SPMutator {
 		var ruleType : RuleType
 		var colRules :  oset Rule[*] init OrderedSet<Rule>.new
 		var index : Integer
-		
+						
 		from var j : Integer init 0
 		until j == p.type.ruleTypes.size
 		loop
@@ -326,8 +326,9 @@ class ANR inherits SPMutator {
 			from var i : Integer init 0
 			until i == ruleType.parameters.size
 			loop
+			
 			typeName := ruleType.parameters.at(i).name
-		
+									
 			colParams := OrderedSet<Element>.new
 			p.allElements.select{ para | para.type.name == typeName}.each { x |
 		
@@ -335,7 +336,7 @@ class ANR inherits SPMutator {
 			}
 		
 			colAllParams.add(colParams)
-
+			
 			i := i + 1
 			end
 		
@@ -512,28 +513,32 @@ class Main
 	
 	
 	operation main() : Void is do
-		var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/VMSOrBACPerms.xmi")
-		//var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/LibraryRBAC.xmi")
+		// var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/LibraryRBAC.xmi")
+		var policy : Policy init loadSecurityModel("platform:/resource/org.kermeta.security.model/model/LMSinRBAC.xmi")
 		
+		/*
 		var helper : Helper init Helper.new
 		
 		stdio.writeln("Creating......")
-		helper.saveAcmModel(policy.type , "ASMS" , "ASMSinOrBAC.xmi")
+		helper.saveAcmModelInRBAC(policy.type , "LMS in RBAC" , "LMSinRBAC.xmi")
 		stdio.writeln("Done")
+		*/
 		
-		/*
+		
 		stdio.writeln(policy.type.toString)
 			 
 		stdio.writeln("ORIGINAL : ")
 		stdio.writeln("**********\n")
 		stdio.writeln(policy.toString)
 		stdio.writeln("")
-		*/	 	
+			 	
 		// generate all mutants and show them
 	
-
+		// mutateAndDisplay(RER.new , policy , "RER")
+		// mutateAndDisplay(PPR.new , policy , "PPR")
+		// mutateAndDisplay(ANR.new , policy , "ANR")
+	
 		/*
-		mutateAndDisplay(RER.new , policy , "RER")
 		
 		mutateAndDisplay(RTT.new , policy , "RTT")
 		mutateAndDisplay(PPR.new , policy , "PPR")

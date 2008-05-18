@@ -1,4 +1,4 @@
-/* $Id: Helpers.kmt,v 1.1 2008-05-15 14:59:40 tej Exp $
+/* $Id: Helpers.kmt,v 1.2 2008-05-18 08:57:17 tej Exp $
  * Creation date: May 15, 2008
  * License:
  * Copyright:
@@ -23,8 +23,8 @@ using kermeta::io
 class Helper
 {
 
-
-	operation saveAcmModel(policyType : PolicyType, policyName : String , fileName : String) is do
+	//******************** OrBAC ********************************************************************************************************************************
+	operation saveAcmModelInOrBAC(policyType : PolicyType, policyName : String , fileName : String) is do
 		var ouputRepo : EMFRepository init EMFRepository.new
 		var resource : EMFResource 
 		// init
@@ -75,6 +75,7 @@ class Helper
 	element.type := p.type.ruleTypes.at(0).parameters.at(4)
 	end
 	
+
 	
 	element.name := e
 	
@@ -82,8 +83,8 @@ class Helper
 	
 	
 end
-	
-	
+
+
 	operation createOrBACRuleByNum(name:String, status : String, org:Integer,  role : Integer , act : Integer, view : Integer, context : Integer, policy : Policy) : Rule is do
 
 	// rule
@@ -115,89 +116,81 @@ end
 	result := rule	
 	end
 	
+	//******************** RBAC ********************************************************************************************************************************
+	operation saveAcmModelInRBAC(policyType : PolicyType, policyName : String , fileName : String) is do
+		var ouputRepo : EMFRepository init EMFRepository.new
+		var resource : EMFResource 
+		// init
+		resource ?= ouputRepo.createResource("../model/" + fileName, "../model/acm.ecore")
+		
+		// add policy with rules
+		var policy : Policy init Policy.new
+		policy.type := policyType
+		
+		// add rules
+		var rule : Rule
+		
+		policy.name := policyName
+		
+		
+		
+		// addRulesAndEntitiesForVMS_RBAC(policy)
+		// addRulesAndEntitiesForASMS_RBAC(policy)
+		
+		addRulesAndEntitiesForLMS_RBAC(policy)
+		
+		// add and store
+		resource.instances.add(policy)
+		resource.save
 	
-	operation createOrBACRule(name:String, status : String, org:String,  r : String , act : String, v : String, c : String, policyType : PolicyType, policy:Policy) : Rule is do
+	end
+	
+	
+	
+	operation addElementToPolicyRBAC(e : String,typeE : String , p : Policy) is do
+	
+	var element : Element init Element.new
+	
+	if typeE == "role" then
+		element.type := p.type.ruleTypes.at(1).parameters.at(0)
+	end
+	
+	if typeE == "permission" then
+	element.type := p.type.ruleTypes.at(1).parameters.at(1)
+	end
+	
+	if typeE == "constraint" then
+	element.type := p.type.ruleTypes.at(1).parameters.at(2)
+	end
+	
 
-	// entities	
-	var organization : Element init Element.new	
-	var role : Element init Element.new
-	var activity : Element init Element.new
-	var view : Element init Element.new
-	var context : Element init Element.new
+	
+	element.name := e
+	
+	p.elements.add(element)
+	
+	
+end
+
+
+	operation createRBACRuleByNum(name:String, role : Integer , permission : Integer, constraint : Integer, policy : Policy) : Rule is do
 
 	// rule
 	var rule : Rule init Rule.new
 	
 	// init rule type
-	if status == "Permission" then
-	rule.type := policyType.ruleTypes.at(0)
-	else 
-	if status == "Prohibition" then 
-	rule.type := policyType.ruleTypes.at(1)
-	end
+	rule.type := policy.type.ruleTypes.at(1)
 	
-	end
-	
+	// name	
 	rule.name := name
-	
-	// init entities
-	organization.type := rule.type.parameters.at(0)
-	organization.name := org	
-	
-	role.type := rule.type.parameters.at(1)
-	role.name := r
-	
-	activity.type := rule.type.parameters.at(2)
-	activity.name := act
-	
-	view.type := rule.type.parameters.at(3)
-	view.name := v
-	
-	context.type := rule.type.parameters.at(4)
-	context.name := c
-	
-	
-	
-	
-	
-	// add element to policy
-	if not policy.elements.contains(organization) then
-		policy.elements.add(organization)
-	end
-	
-	if not policy.elements.contains(role) then
-	policy.elements.add(role)
-	end
-	
-	if not policy.elements.contains(activity) then
-	policy.elements.add(activity)
-	end
-	
-	if not policy.elements.contains(view) then
-	policy.elements.add(view)
-	end
-	
-	if not policy.elements.contains(context) then
-	policy.elements.add(context)
-	end
 	
 	
 	// add parameters
-	/*
-	rule.parameters.add(organization)
-	rule.parameters.add(role)
-	rule.parameters.add(activity)
-	rule.parameters.add(view)
-	rule.parameters.add(context)
-	*/
-	rule.parameters.add(policy.elements.at(0))
-	rule.parameters.add(policy.elements.at(1))
-	rule.parameters.add(policy.elements.at(2))
-	rule.parameters.add(policy.elements.at(3))
-	rule.parameters.add(policy.elements.at(4))
+	rule.parameters.add(policy.elements.at(role))
+	rule.parameters.add(policy.elements.at(permission))
+	rule.parameters.add(policy.elements.at(constraint))
 	
-	
-	
+	// debug
 	stdio.writeln("rule -> " + rule.toString)
 	
 	result := rule	
@@ -209,7 +202,7 @@ end
 	
 	// ************************************************ Start: This code automatically generated DO NOT MODIFY
 	
-	addElementToPolicy("MeetingOrg","org",policy)
+		addElementToPolicy("MeetingOrg","org",policy)
 		addElementToPolicy("Personnel","role",policy)
 		addElementToPolicy("Administrator","role",policy)
 		addElementToPolicy("User","role",policy)
@@ -568,7 +561,7 @@ end
 	
 	// ************************************************ Start: This code automatically generated DO NOT MODIFY
 	
-			addElementToPolicy("AuctionSale","org",policy)
+		addElementToPolicy("AuctionSale","org",policy)
 		addElementToPolicy("User","role",policy)
 		addElementToPolicy("Buyer","role",policy)
 		addElementToPolicy("JuniorBuyer","role",policy)
@@ -993,6 +986,581 @@ end
 	
 	// ************************************************ END of code automatically generated DO NOT MODIFY	
 		
+	end
+	
+	
+	
+	operation addRulesAndEntitiesForVMS_RBAC(policy : Policy) is do
+	
+	var rule : Rule
+	
+		// ************************************************ Start: This code automatically generated DO NOT MODIFY
+		
+addElementToPolicyRBAC("Personnel","role",policy)
+		addElementToPolicyRBAC("Administrator","role",policy)
+		addElementToPolicyRBAC("User","role",policy)
+		addElementToPolicyRBAC("NonAttendee","role",policy)
+		addElementToPolicyRBAC("Webmaster","role",policy)
+		addElementToPolicyRBAC("Attendee","role",policy)
+		addElementToPolicyRBAC("Owner","role",policy)
+		addElementToPolicyRBAC("Moderator","role",policy)
+		addElementToPolicyRBAC("SetMeetingTitle_Meeting","permission",policy)
+		addElementToPolicyRBAC("Speak_Meeting","permission",policy)
+		addElementToPolicyRBAC("Consult_PersonnelAccount","permission",policy)
+		addElementToPolicyRBAC("Update_UserAccount","permission",policy)
+		addElementToPolicyRBAC("Delete_UserAccount","permission",policy)
+		addElementToPolicyRBAC("AttendeeActivity_Meeting","permission",policy)
+		addElementToPolicyRBAC("Leave_Meeting","permission",policy)
+		addElementToPolicyRBAC("UpdateMeetingInfos_Meeting","permission",policy)
+		addElementToPolicyRBAC("CloseMeeting_Meeting","permission",policy)
+		addElementToPolicyRBAC("OpenMeeting_Meeting","permission",policy)
+		addElementToPolicyRBAC("Consult_UserAccount","permission",policy)
+		addElementToPolicyRBAC("Ask_Meeting","permission",policy)
+		addElementToPolicyRBAC("Update_PersonnelAccount","permission",policy)
+		addElementToPolicyRBAC("SetMeetingAgenda_Meeting","permission",policy)
+		addElementToPolicyRBAC("Delete_PersonnelAccount","permission",policy)
+		addElementToPolicyRBAC("Over_Meeting","permission",policy)
+		addElementToPolicyRBAC("SetMeetingModerator_Meeting","permission",policy)
+		addElementToPolicyRBAC("HandOver_Meeting","permission",policy)
+		addElementToPolicyRBAC("default","constraint",policy)
+		addElementToPolicyRBAC("WorkingDay","constraint",policy)
+		addElementToPolicyRBAC("MaintenanceDay","constraint",policy)
+		//  RolePermission(Owner , SetMeetingTitle_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R1" , 6 , 8 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Attendee , Speak_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R2" , 5 , 9 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Webmaster , Consult_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R3" , 4 , 10 , 26 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Update_UserAccount , MaintenanceDay)
+		rule := createRBACRuleByNum("R4" , 1 , 11 , 28 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Consult_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R5" , 1 , 10 , 26 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Webmaster , Delete_UserAccount , MaintenanceDay)
+		rule := createRBACRuleByNum("R6" , 4 , 12 , 28 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , AttendeeActivity_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R7" , 7 , 13 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Owner , Leave_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R8" , 6 , 14 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Owner , UpdateMeetingInfos_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R9" , 6 , 15 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Attendee , AttendeeActivity_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R10" , 5 , 13 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Consult_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R11" , 0 , 10 , 26 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Owner , CloseMeeting_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R12" , 6 , 16 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Owner , OpenMeeting_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R13" , 6 , 17 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Consult_UserAccount , default)
+		rule := createRBACRuleByNum("R14" , 0 , 18 , 26 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Owner , AttendeeActivity_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R15" , 6 , 13 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Attendee , Ask_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R16" , 5 , 19 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Leave_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R17" , 7 , 14 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Update_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R18" , 1 , 20 , 26 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Delete_UserAccount , MaintenanceDay)
+		rule := createRBACRuleByNum("R19" , 1 , 12 , 28 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , CloseMeeting_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R20" , 7 , 16 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Update_UserAccount , MaintenanceDay)
+		rule := createRBACRuleByNum("R21" , 0 , 11 , 28 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Owner , SetMeetingAgenda_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R22" , 6 , 21 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Speak_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R23" , 7 , 9 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Attendee , Leave_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R24" , 5 , 14 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Delete_UserAccount , MaintenanceDay)
+		rule := createRBACRuleByNum("R25" , 0 , 12 , 28 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Delete_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R26" , 1 , 22 , 26 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , OpenMeeting_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R27" , 7 , 17 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Over_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R28" , 7 , 23 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Ask_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R29" , 7 , 19 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Owner , Speak_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R30" , 6 , 9 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Owner , SetMeetingModerator_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R31" , 6 , 24 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Owner , Ask_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R32" , 6 , 19 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Webmaster , Update_UserAccount , MaintenanceDay)
+		rule := createRBACRuleByNum("R33" , 4 , 11 , 28 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , HandOver_Meeting , WorkingDay)
+		rule := createRBACRuleByNum("R34" , 7 , 25 , 27 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Consult_UserAccount , default)
+		rule := createRBACRuleByNum("R35" , 1 , 18 , 26 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Webmaster , Consult_UserAccount , default)
+		rule := createRBACRuleByNum("R36" , 4 , 18 , 26 , policy)
+		policy.rules.add(rule)
+		
+		
+		// ************************************************ END of code automatically generated DO NOT MODIFY	
+		
+	
+	
+	end
+	
+	operation addRulesAndEntitiesForASMS_RBAC(policy : Policy) is do
+	
+	var rule : Rule
+	
+		// ************************************************ Start: This code automatically generated DO NOT MODIFY
+		
+				addElementToPolicyRBAC("User","role",policy)
+		addElementToPolicyRBAC("Buyer","role",policy)
+		addElementToPolicyRBAC("JuniorBuyer","role",policy)
+		addElementToPolicyRBAC("SeniorBuyer","role",policy)
+		addElementToPolicyRBAC("Seller","role",policy)
+		addElementToPolicyRBAC("Personnel","role",policy)
+		addElementToPolicyRBAC("Administrator","role",policy)
+		addElementToPolicyRBAC("Moderator","role",policy)
+		addElementToPolicyRBAC("Consult_Bid","permission",policy)
+		addElementToPolicyRBAC("ConsultOldBids_Bid","permission",policy)
+		addElementToPolicyRBAC("Consult_Sale","permission",policy)
+		addElementToPolicyRBAC("EvaluateBuyer_UserAccount","permission",policy)
+		addElementToPolicyRBAC("Update_Bid","permission",policy)
+		addElementToPolicyRBAC("CancelSale_Bid","permission",policy)
+		addElementToPolicyRBAC("Update_Sale","permission",policy)
+		addElementToPolicyRBAC("Consult_Comment","permission",policy)
+		addElementToPolicyRBAC("RaiseAuction_Bid","permission",policy)
+		addElementToPolicyRBAC("Consult_PersonnelAccount","permission",policy)
+		addElementToPolicyRBAC("Update_PersonnelAccount","permission",policy)
+		addElementToPolicyRBAC("Update_Comment","permission",policy)
+		addElementToPolicyRBAC("UpdateMyInformations_UserAccount","permission",policy)
+		addElementToPolicyRBAC("EvaluateSeller_UserAccount","permission",policy)
+		addElementToPolicyRBAC("PostComment_Comment","permission",policy)
+		addElementToPolicyRBAC("Consult_UserAccount","permission",policy)
+		addElementToPolicyRBAC("Delete_Sale","permission",policy)
+		addElementToPolicyRBAC("Delete_Comment","permission",policy)
+		addElementToPolicyRBAC("Update_UserAccount","permission",policy)
+		addElementToPolicyRBAC("Delete_UserAccount","permission",policy)
+		addElementToPolicyRBAC("Delete_PersonnelAccount","permission",policy)
+		addElementToPolicyRBAC("Delete_Bid","permission",policy)
+		addElementToPolicyRBAC("CreateSale_Bid","permission",policy)
+		addElementToPolicyRBAC("default","constraint",policy)
+		addElementToPolicyRBAC("SaleOpenedMinor","constraint",policy)
+		addElementToPolicyRBAC("SaleOpenedMajor","constraint",policy)
+		addElementToPolicyRBAC("SaleClosed","constraint",policy)
+		//  RolePermission(Seller , Consult_Bid , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R1" , 4 , 8 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , ConsultOldBids_Bid , default)
+		rule := createRBACRuleByNum("R2" , 7 , 9 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Buyer , Consult_Sale , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R3" , 1 , 10 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , EvaluateBuyer_UserAccount , SaleClosed)
+		rule := createRBACRuleByNum("R4" , 4 , 11 , 34 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Update_Bid , default)
+		rule := createRBACRuleByNum("R5" , 6 , 12 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , CancelSale_Bid , SaleOpenedMajor)
+		rule := createRBACRuleByNum("R6" , 4 , 13 , 33 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Update_Sale , default)
+		rule := createRBACRuleByNum("R7" , 7 , 14 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Consult_Comment , default)
+		rule := createRBACRuleByNum("R8" , 6 , 15 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Update_Bid , default)
+		rule := createRBACRuleByNum("R9" , 5 , 12 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , RaiseAuction_Bid , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R10" , 3 , 16 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Consult_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R11" , 7 , 17 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Consult_Comment , default)
+		rule := createRBACRuleByNum("R12" , 7 , 15 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Update_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R13" , 5 , 18 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Update_Comment , default)
+		rule := createRBACRuleByNum("R14" , 6 , 19 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , UpdateMyInformations_UserAccount , default)
+		rule := createRBACRuleByNum("R15" , 4 , 20 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , EvaluateSeller_UserAccount , SaleClosed)
+		rule := createRBACRuleByNum("R16" , 3 , 21 , 34 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(JuniorBuyer , Consult_Sale , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R17" , 2 , 10 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Consult_Sale , default)
+		rule := createRBACRuleByNum("R18" , 7 , 10 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Consult_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R19" , 6 , 17 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , PostComment_Comment , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R20" , 4 , 22 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , Consult_Sale , SaleOpenedMajor)
+		rule := createRBACRuleByNum("R21" , 3 , 10 , 33 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , Consult_UserAccount , default)
+		rule := createRBACRuleByNum("R22" , 4 , 23 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Update_Sale , default)
+		rule := createRBACRuleByNum("R23" , 5 , 14 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Delete_Sale , default)
+		rule := createRBACRuleByNum("R24" , 7 , 24 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Buyer , PostComment_Comment , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R25" , 1 , 22 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Buyer , Consult_Bid , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R26" , 1 , 8 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(JuniorBuyer , Consult_Comment , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R27" , 2 , 15 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Consult_Sale , default)
+		rule := createRBACRuleByNum("R28" , 6 , 10 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Consult_Sale , default)
+		rule := createRBACRuleByNum("R29" , 5 , 10 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(JuniorBuyer , EvaluateSeller_UserAccount , SaleClosed)
+		rule := createRBACRuleByNum("R30" , 2 , 21 , 34 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Consult_Bid , default)
+		rule := createRBACRuleByNum("R31" , 6 , 8 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , CancelSale_Bid , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R32" , 4 , 13 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(JuniorBuyer , Consult_Bid , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R33" , 2 , 8 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Consult_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R34" , 5 , 17 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , Consult_Bid , SaleOpenedMajor)
+		rule := createRBACRuleByNum("R35" , 4 , 8 , 33 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Consult_Bid , default)
+		rule := createRBACRuleByNum("R36" , 5 , 8 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Buyer , Consult_Comment , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R37" , 1 , 15 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(JuniorBuyer , PostComment_Comment , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R38" , 2 , 22 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Delete_Comment , default)
+		rule := createRBACRuleByNum("R39" , 5 , 25 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Update_Comment , default)
+		rule := createRBACRuleByNum("R40" , 5 , 19 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Update_Sale , default)
+		rule := createRBACRuleByNum("R41" , 6 , 14 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Update_UserAccount , default)
+		rule := createRBACRuleByNum("R42" , 6 , 26 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Consult_Bid , default)
+		rule := createRBACRuleByNum("R43" , 7 , 8 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Delete_Sale , default)
+		rule := createRBACRuleByNum("R44" , 6 , 24 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , PostComment_Comment , SaleOpenedMajor)
+		rule := createRBACRuleByNum("R45" , 3 , 22 , 33 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , Consult_UserAccount , default)
+		rule := createRBACRuleByNum("R46" , 3 , 23 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Delete_UserAccount , default)
+		rule := createRBACRuleByNum("R47" , 5 , 27 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(JuniorBuyer , RaiseAuction_Bid , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R48" , 2 , 16 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , Update_Bid , default)
+		rule := createRBACRuleByNum("R49" , 4 , 12 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , PostComment_Comment , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R50" , 3 , 22 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Delete_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R51" , 6 , 28 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Delete_Comment , default)
+		rule := createRBACRuleByNum("R52" , 6 , 25 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Delete_Bid , default)
+		rule := createRBACRuleByNum("R53" , 5 , 29 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Update_UserAccount , default)
+		rule := createRBACRuleByNum("R54" , 7 , 26 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , Update_Comment , default)
+		rule := createRBACRuleByNum("R55" , 4 , 19 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Buyer , UpdateMyInformations_UserAccount , default)
+		rule := createRBACRuleByNum("R56" , 1 , 20 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Delete_Comment , default)
+		rule := createRBACRuleByNum("R57" , 7 , 25 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Delete_UserAccount , default)
+		rule := createRBACRuleByNum("R58" , 6 , 27 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Buyer , EvaluateSeller_UserAccount , SaleClosed)
+		rule := createRBACRuleByNum("R59" , 1 , 21 , 34 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Delete_UserAccount , default)
+		rule := createRBACRuleByNum("R60" , 7 , 27 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , Consult_Bid , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R61" , 3 , 8 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Consult_Comment , default)
+		rule := createRBACRuleByNum("R62" , 5 , 15 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Update_Comment , default)
+		rule := createRBACRuleByNum("R63" , 7 , 19 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Consult_UserAccount , default)
+		rule := createRBACRuleByNum("R64" , 5 , 23 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(JuniorBuyer , Consult_UserAccount , default)
+		rule := createRBACRuleByNum("R65" , 2 , 23 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , Consult_Sale , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R66" , 3 , 10 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(User , UpdateMyInformations_UserAccount , default)
+		rule := createRBACRuleByNum("R67" , 0 , 20 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Buyer , Consult_UserAccount , default)
+		rule := createRBACRuleByNum("R68" , 1 , 23 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Delete_Bid , default)
+		rule := createRBACRuleByNum("R69" , 6 , 29 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Consult_UserAccount , default)
+		rule := createRBACRuleByNum("R70" , 6 , 23 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , PostComment_Comment , SaleOpenedMajor)
+		rule := createRBACRuleByNum("R71" , 4 , 22 , 33 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , Update_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R72" , 6 , 18 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , ConsultOldBids_Bid , default)
+		rule := createRBACRuleByNum("R73" , 6 , 9 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Buyer , RaiseAuction_Bid , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R74" , 1 , 16 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Delete_Sale , default)
+		rule := createRBACRuleByNum("R75" , 5 , 24 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Delete_Bid , default)
+		rule := createRBACRuleByNum("R76" , 7 , 29 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , CreateSale_Bid , default)
+		rule := createRBACRuleByNum("R77" , 4 , 30 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Update_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R78" , 7 , 18 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , UpdateMyInformations_UserAccount , default)
+		rule := createRBACRuleByNum("R79" , 3 , 20 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Seller , Update_Sale , default)
+		rule := createRBACRuleByNum("R80" , 4 , 14 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , ConsultOldBids_Bid , default)
+		rule := createRBACRuleByNum("R81" , 5 , 9 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , Consult_Bid , SaleOpenedMajor)
+		rule := createRBACRuleByNum("R82" , 3 , 8 , 33 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , RaiseAuction_Bid , SaleOpenedMajor)
+		rule := createRBACRuleByNum("R83" , 3 , 16 , 33 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(JuniorBuyer , UpdateMyInformations_UserAccount , default)
+		rule := createRBACRuleByNum("R84" , 2 , 20 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Personnel , Update_UserAccount , default)
+		rule := createRBACRuleByNum("R85" , 5 , 26 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Consult_UserAccount , default)
+		rule := createRBACRuleByNum("R86" , 7 , 23 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Moderator , Update_Bid , default)
+		rule := createRBACRuleByNum("R87" , 7 , 12 , 31 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , Consult_Comment , SaleOpenedMinor)
+		rule := createRBACRuleByNum("R88" , 3 , 15 , 32 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(SeniorBuyer , Consult_Comment , SaleOpenedMajor)
+		rule := createRBACRuleByNum("R89" , 3 , 15 , 33 , policy)
+		policy.rules.add(rule)
+		
+		// ************************************************ END of code automatically generated DO NOT MODIFY	
+		
+	
+	
+	end
+	
+	operation addRulesAndEntitiesForLMS_RBAC(policy : Policy) is do
+	
+	
+		
+	var rule : Rule
+	
+		// ************************************************ Start: This code automatically generated DO NOT MODIFY
+		
+		addElementToPolicyRBAC("Borrower","role",policy)
+		addElementToPolicyRBAC("Student","role",policy)
+		addElementToPolicyRBAC("Teacher","role",policy)
+		addElementToPolicyRBAC("Personnel","role",policy)
+		addElementToPolicyRBAC("Secretary","role",policy)
+		addElementToPolicyRBAC("Director","role",policy)
+		addElementToPolicyRBAC("Administrator","role",policy)
+		addElementToPolicyRBAC("ReserveBook_Book","permission",policy)
+		addElementToPolicyRBAC("ConsultBorrowerAccount_BorrowerAccount","permission",policy)
+		addElementToPolicyRBAC("FixBook_Book","permission",policy)
+		addElementToPolicyRBAC("ManageAccess_PersonnelAccount","permission",policy)
+		addElementToPolicyRBAC("GiveBackBook_Book","permission",policy)
+		addElementToPolicyRBAC("BorrowBook_Book","permission",policy)
+		addElementToPolicyRBAC("BorrowerActivity_Book","permission",policy)
+		addElementToPolicyRBAC("DeliverBook_Book","permission",policy)
+		addElementToPolicyRBAC("ModifyAccount_BorrowerAccount","permission",policy)
+		addElementToPolicyRBAC("CreateAccount_BorrowerAccount","permission",policy)
+		addElementToPolicyRBAC("default","constraint",policy)
+		addElementToPolicyRBAC("Holidays","constraint",policy)
+		addElementToPolicyRBAC("WorkingDays","constraint",policy)
+		addElementToPolicyRBAC("MaintenanceDay","constraint",policy)
+		//  RolePermission(Student , ReserveBook_Book , WorkingDays)
+		rule := createRBACRuleByNum("R1" , 1 , 7 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Secretary , ConsultBorrowerAccount_BorrowerAccount , default)
+		rule := createRBACRuleByNum("R2" , 4 , 8 , 17 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Secretary , FixBook_Book , MaintenanceDay)
+		rule := createRBACRuleByNum("R3" , 4 , 9 , 20 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , FixBook_Book , MaintenanceDay)
+		rule := createRBACRuleByNum("R4" , 6 , 9 , 20 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , ManageAccess_PersonnelAccount , default)
+		rule := createRBACRuleByNum("R5" , 6 , 10 , 17 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Borrower , GiveBackBook_Book , WorkingDays)
+		rule := createRBACRuleByNum("R6" , 0 , 11 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Teacher , BorrowBook_Book , WorkingDays)
+		rule := createRBACRuleByNum("R7" , 2 , 12 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Student , GiveBackBook_Book , WorkingDays)
+		rule := createRBACRuleByNum("R8" , 1 , 11 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Student , BorrowerActivity_Book , WorkingDays)
+		rule := createRBACRuleByNum("R9" , 1 , 13 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Borrower , BorrowBook_Book , WorkingDays)
+		rule := createRBACRuleByNum("R10" , 0 , 12 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Borrower , ReserveBook_Book , WorkingDays)
+		rule := createRBACRuleByNum("R11" , 0 , 7 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , DeliverBook_Book , MaintenanceDay)
+		rule := createRBACRuleByNum("R12" , 6 , 14 , 20 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Teacher , BorrowerActivity_Book , WorkingDays)
+		rule := createRBACRuleByNum("R13" , 2 , 13 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , ModifyAccount_BorrowerAccount , default)
+		rule := createRBACRuleByNum("R14" , 6 , 15 , 17 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Director , DeliverBook_Book , MaintenanceDay)
+		rule := createRBACRuleByNum("R15" , 5 , 14 , 20 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Director , FixBook_Book , MaintenanceDay)
+		rule := createRBACRuleByNum("R16" , 5 , 9 , 20 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Administrator , CreateAccount_BorrowerAccount , default)
+		rule := createRBACRuleByNum("R17" , 6 , 16 , 17 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Director , ConsultBorrowerAccount_BorrowerAccount , default)
+		rule := createRBACRuleByNum("R18" , 5 , 8 , 17 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Teacher , ReserveBook_Book , WorkingDays)
+		rule := createRBACRuleByNum("R19" , 2 , 7 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Borrower , BorrowerActivity_Book , WorkingDays)
+		rule := createRBACRuleByNum("R20" , 0 , 13 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Teacher , GiveBackBook_Book , WorkingDays)
+		rule := createRBACRuleByNum("R21" , 2 , 11 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Student , BorrowBook_Book , WorkingDays)
+		rule := createRBACRuleByNum("R22" , 1 , 12 , 19 , policy)
+		policy.rules.add(rule)
+		//  RolePermission(Secretary , DeliverBook_Book , MaintenanceDay)
+		rule := createRBACRuleByNum("R23" , 4 , 14 , 20 , policy)
+		policy.rules.add(rule)
+		
+		
+		
+		// ************************************************ END of code automatically generated DO NOT MODIFY	
+		
+	
+	
 	end
 
 	operation main() : Void is do 
