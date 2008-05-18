@@ -3,11 +3,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import acm.AcmFactory;
-import acm.AcmPackage;
+
 import acm.Policy;
 import acm.Rule;
 import acm.impl.AcmPackageImpl;
@@ -81,69 +80,7 @@ public class OrBAC2XACMLExport {
 	OrBAC2XACMLUtils.builtXACMLFile(rules,fileName, "LMS System policy");
 	 
 	}
-	
-	/**
-	 * produces and creates an XACML file for LMS
-	 * 
-	 */ 
-	public static void createLMSPolicy() {
-		
-		String[][] rules = {
-								
-			{"R1","Permission", "Borrower",	"BorrowerActivity",	"Book",	"WorkingDays"},
-			{"R2","Permission", "Student",	"BorrowerActivity",	"Book",	"WorkingDays"},
-			{"R3","Permission", "Teacher",	"BorrowerActivity",	"Book",	"WorkingDays"},
-			{"R4","Permission", "Borrower",	"BorrowBook",	"Book",	"WorkingDays"},
-			{"R5","Permission", "Borrower",	"ReserveBook",	"Book",	"WorkingDays"},
-			{"R6","Permission", "Borrower",	"GiveBackBook",	"Book",	"WorkingDays"},
-			{"R7","Permission", "Student",	"BorrowBook",	"Book",	"WorkingDays"},
-			{"R8","Permission", "Student",	"ReserveBook",	"Book",	"WorkingDays"},
-			{"R9","Permission", "Student",	"GiveBackBook",	"Book",	"WorkingDays"},
-			{"R10","Permission", "Teacher",	"BorrowBook",	"Book",	"WorkingDays"},
-			{"R11","Permission", "Teacher",	"ReserveBook",	"Book",	"WorkingDays"},
-			{"R12","Permission", "Teacher",	"GiveBackBook",	"Book",	"WorkingDays"},
 			
-			{"R13","Prohibition",	"Borrower",	"BorrowerActivity",	"Book",	"Holidays"},
-			{"R14","Prohibition", "Student",	"BorrowerActivity",	"Book",	"Holidays"},
-			{"R15","Prohibition", "Teacher",	"BorrowerActivity",	"Book",	"Holidays"},
-			{"R16","Prohibition", "Borrower",	"BorrowBook",	"Book",	"Holidays"},
-			{"R17","Prohibition", "Borrower",	"ReserveBook",	"Book",	"Holidays"},
-			{"R18","Prohibition", "Borrower",	"GiveBackBook",	"Book",	"Holidays"},
-			{"R19","Prohibition", "Student",	"BorrowBook",	"Book",	"Holidays"},
-			{"R20","Prohibition", "Student",	"ReserveBook",	"Book",	"Holidays"},
-			{"R21","Prohibition", "Student",	"GiveBackBook",	"Book",	"Holidays"},
-			{"R22","Prohibition", "Teacher",	"BorrowBook",	"Book",	"Holidays"},
-			{"R23","Prohibition", "Teacher",	"ReserveBook",	"Book",	"Holidays"},
-			{"R24","Prohibition", "Teacher",	"GiveBackBook",	"Book",	"Holidays"},
-			
-			{"R25","Permission",	"Administrator",	"ManageAccess",	"PersonnelAccount",	"default"},
-			{"R26","Permission",	"Administrator",	"CreateAccount",	"BorrowerAccount",	"default"},
-			{"R27","Permission",	"Administrator",	"ModifyAccount",	"BorrowerAccount",	"default"},
-			{"R28","Permission",	"Administrator",	"ConsultBorrowerAccount",	"BorrowerAccount",	"default"},
-			{"R29","Permission",	"Administrator",	"FixBook",	"Book",	"MaintenanceDay"},
-			{"R30","Permission",	"Administrator",	"DeliverBook",	"Book",	"MaintenanceDay"},
-			{"R31","Prohibition",	"Secretary",	"ManageAccess",	"PersonnelAccount",	"default"},
-			{"R32","Prohibition",	"Secretary",	"CreateAccount",	"BorrowerAccount",	"default"},
-			{"R33","Prohibition",	"Secretary",	"ModifyAccount",	"BorrowerAccount",	"default"},
-			{"R34","Permission",	"Secretary",	"ConsultBorrowerAccount",	"BorrowerAccount",	"default"},
-			{"R35","Permission",	"Secretary",	"FixBook",	"Book",	"MaintenanceDay"},
-			{"R36","Permission",	"Secretary",	"DeliverBook",	"Book",	"MaintenanceDay"},
-			{"R37","Permission",	"Director",	"ConsultBorrowerAccount",	"BorrowerAccount",	"default"},
-			{"R38","Prohibition",	"Director",	"ManageAccess",	"PersonnelAccount",	"default"},
-			{"R39","Prohibition",	"Director",	"CreateAccount",	"BorrowerAccount",	"default"},
-			{"R40","Prohibition",	"Director",	"ModifyAccount",	"BorrowerAccount",	"default"},
-			{"R41","Permission",	"Director",	"FixBook",	"Book",	"MaintenanceDay"},
-			{"R42","Permission",	"Director",	"DeliverBook",	"Book",	"MaintenanceDay"}
-		};
-		
-		
-		
-		// export to the LMS XACML policy file
-		OrBAC2XACMLUtils.builtXACMLFile(rules,"lms.xml", "LMS System Policy");
-		
-	}
-	
-	
     /**
      * Create policies from a hashMap contains a policy by entry
      * @param policies the set of policies to export to XACML files
@@ -161,9 +98,9 @@ public class OrBAC2XACMLExport {
         policies.remove(initialPolicyInfo);
         
 
-        for (Iterator iterator = policies.keySet().iterator(); iterator.hasNext();i++) {
+        for (Iterator<String> iterator = policies.keySet().iterator(); iterator.hasNext();i++) {
 
-        policyDescription = (String) iterator.next();
+        policyDescription = iterator.next();
         rules = policies.get(policyDescription);
 
         // export to the LMS XACML policy file

@@ -15,15 +15,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * User: tej
- * Date: 25 févr. 2008
- * Time: 09:25:19
- */
-@SuppressWarnings("unchecked")
-public class OrBAC2XACMLUtils {
 
-// ---------------------------------------------- Policy builder
+@SuppressWarnings("unchecked")
+public class RBAC2XACMLUtils {
+	
+	// ---------------------------------------------- Policy builder
 
     /**
      * Simple helper routine that creates a TargetMatch instance.
@@ -58,7 +54,7 @@ public class OrBAC2XACMLUtils {
 
 
     /**
-     * Creates the Target used in the Condition. This Target specifies that
+     * Creates the Targetused in the Condition. This Target specifies that
      *
      * @return the target the rule target
      * @throws URISyntaxException if there is a problem with any of the URIs
@@ -66,7 +62,7 @@ public class OrBAC2XACMLUtils {
      * @param activity the given activity
      * @param view the given view
      */
-	private static Target createRuleTarget(String role, String activity, String view) throws URISyntaxException {
+	private static Target createRuleTarget(String role, String permission) throws URISyntaxException {
 
         List subjects = new ArrayList();
         List resources = new ArrayList();
@@ -108,7 +104,7 @@ public class OrBAC2XACMLUtils {
                         resourceDesignatorType,
                         resourceDesignatorId, false);
 
-        StringAttribute resourceValue = new StringAttribute(view);
+        StringAttribute resourceValue = new StringAttribute("VOID");
 
         resource.add(createTargetMatch(TargetMatch.RESOURCE, resourceMatchId,
                 resourceDesignator, resourceValue));
@@ -129,7 +125,7 @@ public class OrBAC2XACMLUtils {
                         actionDesignatorType,
                         actionDesignatorId, false);
 
-        StringAttribute actionValue = new StringAttribute(activity);
+        StringAttribute actionValue = new StringAttribute(permission);
 
         action.add(createTargetMatch(TargetMatch.ACTION, actionMatchId,
                 actionDesignator, actionValue));
@@ -215,18 +211,15 @@ public class OrBAC2XACMLUtils {
      * @param view the view to use
      * @param context the context to use
      */
-    private static Rule createRule(String ruleIdentifier, String status, String role, String activity, String view, String context) throws URISyntaxException {
+    private static Rule createRule(String ruleIdentifier, String role, String permission, String context) throws URISyntaxException {
         // define the identifier for the rule
         URI ruleId = new URI(ruleIdentifier);
 
         // define the effect for the Rule
         int effect = Result.DECISION_PERMIT;
 
-        if (status.equalsIgnoreCase("prohibition"))
-            effect = Result.DECISION_DENY;
-
         // get the Target for the rule
-        Target target = createRuleTarget(role, activity, view);
+        Target target = createRuleTarget(role, permission);
 
         // get the Condition for the rule
         Apply condition = createRuleCondition(context);
@@ -297,7 +290,7 @@ public class OrBAC2XACMLUtils {
      * @return the RequestCtx object
      * @throws URISyntaxException if any URI exception occurs
      */
-    public static RequestCtx createRequest(String role, String activity, String view, String context) throws URISyntaxException {
+    public static RequestCtx createRequest(String role, String permission, String context) throws URISyntaxException {
 
         // ----- subject
         HashSet attributes = new HashSet();
@@ -305,14 +298,15 @@ public class OrBAC2XACMLUtils {
         // setup the id and value for the requesting subject
         URI subjectId =
                 new URI("urn:oasis:names:tc:xacml:1.0:subject:subject-id");
-
-
         attributes.add(new Attribute(subjectId, null, null, new StringAttribute(role)));
+        
         // the context
-        //attributes.add(new Attribute(new URI("current-context"),
-        //        "admin", null,
-        //        new StringAttribute(context)));
+        attributes.add(new Attribute(new URI("current-context"),
+                "admin", null,
+                new StringAttribute(context)));
 
+        
+       
         // bundle the attributes in a Subject with the default category
         HashSet subjects = new HashSet();
         subjects.add(new Subject(attributes));
@@ -327,18 +321,20 @@ public class OrBAC2XACMLUtils {
 
         // create the action
         action.add(new Attribute(actionId, null, null,
-                new StringAttribute(activity)));
+                new StringAttribute(permission)));
 
         //------ resource
-
+        
         HashSet resource = new HashSet();
 
         // the resource being requested
 
         // create the resource using a standard, required identifier for
         // the resource being requested
+        
         resource.add(new Attribute(new URI(EvaluationCtx.RESOURCE_ID),
-                null, null, new StringAttribute(view)));
+                null, null, new StringAttribute("VOID")));
+      
 
         // Environment
 
@@ -356,7 +352,7 @@ public class OrBAC2XACMLUtils {
     /**
      *
      * Produces an XACML file containing OrBAC rules contained in the array
-     * @param rules hte list of rules in ruleName, status, rule, act, view, context
+     * @param rules the list of rules in ruleName, status, rule, act, view, context
      * @param fileName  the name of the file
      */
     public static void builtXACMLFile(String[][] rules, String fileName, String description) {
@@ -370,7 +366,7 @@ public class OrBAC2XACMLUtils {
 
        
         rulesXACML.add(createRule(rules[i][0].toUpperCase(), rules[i][1].toUpperCase(), rules[i][2].toUpperCase(),
-        		rules[i][3].toUpperCase(),rules[i][4].toUpperCase(),rules[i][5].toUpperCase()));
+        		rules[i][3].toUpperCase()));
         }
 
         
@@ -418,29 +414,34 @@ public class OrBAC2XACMLUtils {
         //------ generate the policy file
         String[][] rules = new String[5][6];
 
-        rules[0] = new String[]{"R1", "permission", "student", "borrow", "book", "working-days"};
-        rules[1] = new String[]{"R2", "permission", "teacher", "borrow", "book", "working-days"};
-        rules[2] = new String[]{"R3", "prohibition", "secretary", "borrow", "book", "default"};
-        rules[3] = new String[]{"R4", "permission", "director", "modify", "account", "default"};
-        rules[4] = new String[]{"R5", "permission", "director", "create", "account", "working-days"};
+        rules[0] = new String[]{"R1", "student", "borrow_book", "working-days"};
+        rules[1] = new String[]{"R2", "teacher", "borrow_book", "working-days"};
+        rules[2] = new String[]{"R3", "secretary" , "borrow_book", "default"};
+        rules[3] = new String[]{"R4", "director" , "modify_account", "default"};
+        rules[4] = new String[]{"R5", "director", "create_account", "working-days"};
 
-        builtXACMLFile(rules,"lms.xml", "LMS Policy");
+        builtXACMLFile(rules,"lms_rbac.xml", "LMS Policy in RBAC");
 
-        //------ load the policy file using the configuraition file
+        //------ load the policy file using the configuration file
 
         PDP pdp = createPDP("xacml_configuration.xml");
 
         System.out.println("");
 
         //------ use the request to get the response
-        RequestCtx req = createRequest("STUDENT", "BORROW", "BOOK", "WORKING-DAYS");
-        req.encode(System.out);
         
+        RequestCtx req = createRequest("STUDENT", "BORROW_BOOK", "WORKING-DAYS");
+        req.encode(System.out);
+
         ResponseCtx response = pdp.evaluate(req);
 
         Result res = (Result) response.getResults().iterator().next();
-
+        
+        
         System.out.println("Reponse = " + ((res.getDecision() == Result.DECISION_PERMIT) ? "Permission" : "Prohibition"));
+
+
+
 
     }
 
