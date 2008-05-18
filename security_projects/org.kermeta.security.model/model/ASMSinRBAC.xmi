@@ -93,10 +93,18 @@
   <elements name="CreateSale_Bid">
     <type href="RBAC.xmi#//@elementTypes.1"/>
   </elements>
-  <elements name="default"/>
-  <elements name="SaleOpenedMinor"/>
-  <elements name="SaleOpenedMajor"/>
-  <elements name="SaleClosed"/>
+  <elements name="default">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="SaleOpenedMinor">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="SaleOpenedMajor">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="SaleClosed">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
   <rules name="R1" parameters="//@elements.4 //@elements.8 //@elements.32">
     <type href="RBAC.xmi#//@ruleTypes.1"/>
   </rules>

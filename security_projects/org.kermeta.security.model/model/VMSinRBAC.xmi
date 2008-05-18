@@ -78,9 +78,15 @@
   <elements name="HandOver_Meeting">
     <type href="RBAC.xmi#//@elementTypes.1"/>
   </elements>
-  <elements name="default"/>
-  <elements name="WorkingDay"/>
-  <elements name="MaintenanceDay"/>
+  <elements name="default">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="WorkingDay">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="MaintenanceDay">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
   <rules name="R1" parameters="//@elements.6 //@elements.8 //@elements.27">
     <type href="RBAC.xmi#//@ruleTypes.1"/>
   </rules>
