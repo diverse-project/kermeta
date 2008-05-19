@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.10 2008-04-25 10:04:14 dvojtise Exp $
+/* $Id: Tracer.java,v 1.11 2008-05-19 13:50:46 ftanguy Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -14,10 +14,8 @@
 package fr.irisa.triskell.traceability.helper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -48,7 +46,17 @@ public class Tracer {
 	public boolean tracesActivated = true;
 	
 	protected TraceModel modelTrace = null;
+		
+	/**
+	 * One cache for ModelReference.
+	 */
+	private ModelReferencesCache _modelReferencesCache;
 	
+	/**
+	 * One cache for ModelReference.
+	 */
+	private TextReferencesCache _textReferencesCache;
+		
 	/**
 	 * Constructor
 	 * provides a Resource : allows to save the trace at the end 
@@ -56,12 +64,13 @@ public class Tracer {
 	public Tracer(Resource newTraceResource) {
 		traceResource = newTraceResource;
 
-		// try to retreive the model in this ressource 
+		// try to retreive the model in this ressource 	
 		Iterator<EObject> it = traceResource.getContents().iterator();
 		while (it.hasNext()) {
 			Object o = it.next();
 			if(o instanceof TraceModel) {
 				modelTrace = (TraceModel)o;
+				initializeCache();
 			}
 		}
 	}	
@@ -92,7 +101,17 @@ public class Tracer {
 	public void newModelTrace()
 	{
 		modelTrace = TraceabilityFactory.eINSTANCE.createTraceModel();
-		if(traceResource != null) traceResource.getContents().add(modelTrace);
+		initializeCache();
+		if(traceResource != null) 
+			traceResource.getContents().add(modelTrace);
+	}
+
+	/**
+	 * Creates the caches for the current tracer.
+	 */
+	private void initializeCache() {
+		_modelReferencesCache = new ModelReferencesCache(modelTrace);
+		_textReferencesCache = new TextReferencesCache(modelTrace);
 	}
 	
 	public void addMappingTrace(EObject source, EObject target, String message)
@@ -104,7 +123,7 @@ public class Tracer {
 		}
 		
 		// get or create reference objects for each of the source and target		
-		ModelReference sourceExtRef = getModelReference(source);
+		ModelReference sourceExtRef = getOneModelReference(source);
 		if (sourceExtRef == null)
 		{
 			sourceExtRef = TraceabilityFactory.eINSTANCE.createModelReference();
@@ -133,19 +152,10 @@ public class Tracer {
 		sourceTextRef.setCharEndAt(charEndAt);
 		//traceResource.getContents().add(sourceTextRef);		
 		addTargetTrace(target, message, sourceTextRef);
-		
-		/*
-		 * 
-		 * Using the cache for fast search functionality.
-		 * 
-		 */
-		List<TextReference> references = textReferencesCache.get( sourceTextRef.getCharBeginAt() );
-		if ( references == null ) {
-			references = new ArrayList<TextReference>();
-			textReferencesCache.put(sourceTextRef.getCharBeginAt(), references );
-		}
-		references.add(sourceTextRef);
+
+		//addToCache(sourceTextRef);
 	}
+	
 	
 	/**
 	 * Get the text input trace for the given Object
@@ -190,7 +200,7 @@ public class Tracer {
 	public ArrayList<Reference> getAllSourceTextReferences(EObject target)
 	{
 		ArrayList<Reference> result = new ArrayList<Reference>();
-		ModelReference eref = getModelReference(target);
+		ModelReference eref = getOneModelReference(target);
 		result.addAll(getRecursiveSourceTextReferences(eref, result));
 		return result;
 	}
@@ -202,7 +212,7 @@ public class Tracer {
 	 * */
 	public TextReference getFirstTextReference(EObject target)
 	{
-		ModelReference eref = getModelReference(target);
+		ModelReference eref = getOneModelReference(target);
 		return ModelReferenceHelper.getFirstTextReference(eref);
 	}
 	
@@ -214,7 +224,8 @@ public class Tracer {
 	private void addTargetTrace(EObject target, String message,Reference sourceRef) {
 		
 		// get or create the reference
-		ModelReference targetExtRef = getModelReference(target);
+		ModelReference targetExtRef = getOneModelReference(target);
+		
 		if (targetExtRef == null)
 		{
 			targetExtRef = TraceabilityFactory.eINSTANCE.createModelReference();
@@ -242,29 +253,22 @@ public class Tracer {
 		modelTrace.getReferences().add(targetExtRef);
 		
 	}
-	
-	private Map<Integer, List<TextReference>> textReferencesCache = new HashMap<Integer, List<TextReference>>();
 		
-	public ModelReference getModelReference(EObject referedObject)
-	{
+	public ModelReference getOneModelReference(EObject referedObject) {
 		if (modelTrace ==  null)
-		{
 			return null;
-		}
-		Iterator<Reference> it = modelTrace.getReferences().iterator();
-		while (it.hasNext())
-		{
-			Object o = it.next();
-			if(o instanceof ModelReference)
-			{
-				ModelReference eref = (ModelReference)o;
-
-				if(eref.getRefObject() == referedObject)
-					return eref;
+		// The cache is strongly synchronized, just look at it.
+		ModelReference reference = _modelReferencesCache.getOne(referedObject);
+		/*if ( reference == null ) {
+			for ( Reference r : modelTrace.getReferences() ) {
+				if (r instanceof ModelReference) {
+					ModelReference eref = (ModelReference) r;
+					if(eref.getRefObject() == referedObject)
+						return eref;
+				}
 			}
-		}
-		
-		return null;
+		}*/
+		return reference;
 	}
 	
 	/**
@@ -397,7 +401,7 @@ public class Tracer {
 	 */
 	public TextReference getStrictOffsetShortestTextReference(int offset, int length, String uri) {
 		TextReference result = null;			
-		List<TextReference> references = textReferencesCache.get(offset);
+		List<TextReference> references = _textReferencesCache.get(offset);
 		// look into the strict offset cache
 		if ( references != null ) {
 			for ( TextReference reference : references ) {
