@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.13 2008-04-28 11:51:26 ftanguy Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.14 2008-05-19 14:19:47 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -114,7 +114,7 @@ public class KermetaMarkersHelper {
     private static void createMarker(IFile file, String message, Message m, KermetaUnit unit) throws CoreException {
     	if ( m.getTarget() instanceof Object ) {
 	    	if ( unit.getTracer() != null ) {
-	    		ModelReference mr = unit.getTracer().getModelReference( (Object) m.getTarget() );
+	    		ModelReference mr = unit.getTracer().getOneModelReference( (Object) m.getTarget() );
 	    		TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
 	    		if (tr != null) {
 	    			String filePath = "platform:/resource" + file.getFullPath().toString();
