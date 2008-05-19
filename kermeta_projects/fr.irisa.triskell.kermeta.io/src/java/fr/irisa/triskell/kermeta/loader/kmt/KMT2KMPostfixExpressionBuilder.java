@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.22 2008-04-28 11:50:13 ftanguy Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.23 2008-05-19 14:38:23 cfaucher Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL
@@ -173,7 +173,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		lp.setName(getTextForID(lambdaPostfixParam.getName()));
 		context.addSymbol(new KMSymbolLambdaParameter(lp));
 		current_le.getParameters().add(lp);
-		//TODO: The type of the parameter cannot be set here. Do it in the type chacker !!
+		//TODO: The type of the parameter cannot be set here. Do it in the type checker !!
 		return false;
 	}
 	
