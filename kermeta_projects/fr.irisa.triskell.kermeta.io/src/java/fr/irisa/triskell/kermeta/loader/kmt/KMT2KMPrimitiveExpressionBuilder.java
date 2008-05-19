@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.25 2008-04-28 11:50:13 ftanguy Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.26 2008-05-19 14:38:47 cfaucher Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -31,6 +31,7 @@ import fr.irisa.triskell.kermeta.language.behavior.Raise;
 import fr.irisa.triskell.kermeta.language.behavior.SelfExpression;
 import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.ActualParameter;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Basictype;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FBlock;
@@ -324,6 +325,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		tref.setType(KMT2KMTypeBuilder.process(context, fTypeOrVarLiteral.getLiteral(), builder, monitor));
 		tref.setLower(0);
 		tref.setUpper(1);
+		tref.setName(TypeHelper.getName(tref.getType()));
 		tl.setTyperef(tref);
 		result = tl;
 		return false;

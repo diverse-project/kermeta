@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeReferenceBuilder.java,v 1.9 2008-04-28 11:50:13 ftanguy Exp $
+/* $Id: KMT2KMTypeReferenceBuilder.java,v 1.10 2008-05-19 14:38:47 cfaucher Exp $
  * Created on 6 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -10,6 +10,9 @@ import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.TypeRef;
 
 /**
@@ -23,6 +26,7 @@ public class KMT2KMTypeReferenceBuilder extends KMT2KMPass {
 		if (node == null) return null;
 		KMT2KMTypeReferenceBuilder visitor = new KMT2KMTypeReferenceBuilder(builder, context, monitor);
 		node.accept(visitor);
+		visitor.result.setName(TypeHelper.getName(visitor.result.getType()));
 		return visitor.result;
 	}
 	
