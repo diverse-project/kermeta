@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.3 2008-04-29 14:52:27 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.4 2008-05-19 21:52:28 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,6 +14,7 @@ require kermeta
 using kermeta::standard
 
 aspect class Object {
+
 	/**
 	 * Get the values for the tags having as key: <key : String>
 	 */
@@ -32,6 +33,9 @@ aspect class Object {
 
 aspect class GenericTypeDefinition {
 
+	/**
+	 * Get the instanceClassName of a ClassDefinition
+	 */
 	operation getEMFInstanceClassName() : String is do
 		result := ""
 		var value_list : OrderedSet<String> init self.getTagValues("EMF_instanceClassName")
@@ -43,7 +47,10 @@ aspect class GenericTypeDefinition {
 }
 
 aspect class Operation {
-
+	
+	/**
+	 * Get the EMFStatic reference of an Operation
+	 */
 	operation getEMFStatic() : String is do
 		result := ""
 		var value_list : OrderedSet<String> init self.getTagValues("EMF_static")

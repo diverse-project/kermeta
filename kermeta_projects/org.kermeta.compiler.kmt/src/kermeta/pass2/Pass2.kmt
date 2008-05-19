@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.18 2008-04-29 16:44:54 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.19 2008-05-19 21:52:29 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -50,20 +50,17 @@ package structure {
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
-			//stdio.writeln("Pass2 ClassDefinition : " + self.name)
 			self.setLinks(context) 
 			super(context)
 		end
 	}
 	
 	aspect class Class {
-		method applyPass2(context : KM2EcoreContext) is do			
-			//self.setLinks(context) 
+		method applyPass2(context : KM2EcoreContext) is do
 			super(context)
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
-			//self.setLinks(context) 
 			super(context)
 		end
 	}
@@ -88,17 +85,18 @@ package structure {
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
-			//stdio.writeln("Pass2 ClassDefinition")
 			
 			var doCompile : Boolean init true
 			
+			var cd_container : ClassDefinition init self.container.asType(ClassDefinition)
+			
 			// This test is there, because some methods may be compiled as Static methods via Simk like the method: times on Integer
-			if not self.container.asType(ClassDefinition).superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
-				if self.container.asType(ClassDefinition).getEMFInstanceClassName() != "" then
+			if cd_container.isValueType() then
+				if cd_container.getEMFInstanceClassName() != "" then
 					doCompile := false
 				end
 			end
-			if self.getEMFStatic() != "" then
+			if self.container.asType(ClassDefinition).getEMFInstanceClassName!="" or self.getEMFStatic()!="" then
 				doCompile := false
 				var doSimk : Boolean init true
 			end

@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.16 2008-04-29 14:52:27 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.17 2008-05-19 21:52:29 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -112,17 +112,23 @@ aspect class EnumerationLiteral {
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreEnumLiteral
 	end
-}  
+}
   
 aspect class ClassDefinition {
 	method applyPass1(context : KM2EcoreContext) is do
+	
+		//stdio.writeln("  +--+ " + self.name)
 		
 		// Getting the container
 		var p : Package init self.container().asType(Package)
 		
 		// If this ClassDefinition is a subType of kermeta::standard::ValueType then
 		// an EAttribute value is added to allow the use of the value of a ValueType
-		if not self.superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
+		//stdio.writeln("ClassDefinition applyPass1(): " + self.qualifiedName + " " + self.isValueType().toString())
+		if self.isValueType() then
+		
+			//stdio.writeln(" ---- ClassDefinition applyPass1(): " + self.name)
+
 			var instanceClassName : String init self.getEMFInstanceClassName()
 			
 			if instanceClassName != "" then
@@ -137,13 +143,13 @@ aspect class ClassDefinition {
 				// Compile only the methods that are not taking directly
 				// into account by the target language like times() for an Integer
 				self.ownedOperation.each{ o |
-					var static_tag : Tag init o.ownedTags.detect{ t |
+					//stdio.writeln("operation: " + o.name)
+					/*var static_tag : Tag init o.ownedTags.detect{ t |
 						t.name == "EMF_static"
-					}
-					if not static_tag.isVoid() then
+					}*/
+					if o.getEMFStatic()!="" then
 						stdio.writeln("An EMF_static method has been detected: " + o.name)
 						//TODO Compile with Simk
-						//o.applyPass1(context)
 					end
 				}
 			end
@@ -182,19 +188,17 @@ aspect class Property {
 aspect class Operation {
 	method applyPass1(context : KM2EcoreContext) is do
 	
-		/*
+		
 		// Compile only the method, if that are not taking directly
 		// into account by the target language like times() for an Integer
-		var static_tag : Tag init self.ownedTags.detect{ t |
-			t.name == "EMF_static"
-		}
-		if not static_tag.isVoid() then
+		
+		/*if getEMFStatic()!="" then
 			stdio.writeln("An EMF_static method has been detected: " + self.name)
 			//TODO Compile with Simk
 			//o.applyPass1(context)
 		
 		else*/
-	
+			//stdio.writeln("Operation " + self.name + " " + self.container.asType(ClassDefinition).name)
 			// Creating the associated ecore class
 			var ecoreOperation : EOperation init self.createEcoreModelElement(context)
 			// Setting the container

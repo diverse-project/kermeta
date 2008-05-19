@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.9 2008-04-29 14:52:27 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.10 2008-05-19 21:52:29 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -43,7 +43,7 @@ class KM2EcoreContext
 	attribute simkOutput : String [1..1]
 	
 	/** The modeling units source */
-	reference mus : oset ModelingUnit [1..*]
+	reference mu : oset ModelingUnit [1..1]
 	
 	/** The choosen compiling mode */
 	attribute mode : CompilingMode [1..1]
@@ -83,7 +83,7 @@ class KM2EcoreContext
 		// Loading the km model and its possible trace model.
 		self.inputRepository := EMFRepository.new
 		var modelResource : Resource init self.inputRepository.getResource(modelInput)		
-	    mus.add( modelResource.instances.one.asType(ModelingUnit) )
+	    mu := modelResource.instances.one.asType(ModelingUnit)
 	    
 	    if (not traceInput.isVoid()) and (traceInput != "")  then
 			var traceResource : Resource init self.inputRepository.getResource(traceInput)

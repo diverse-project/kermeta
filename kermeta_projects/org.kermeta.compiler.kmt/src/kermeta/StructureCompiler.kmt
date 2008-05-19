@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.25 2008-04-29 14:52:27 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.26 2008-05-19 21:52:29 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -17,6 +17,7 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 require "pass1/Pass1.kmt"
 require "pass2/Pass2.kmt"
 require "KM2EcoreContext.kmt"
+require "helper/kermeta/KermetaHelper.kmt"
 
 using ecore
 using kermeta::persistence
@@ -24,8 +25,7 @@ using kermeta::language::structure
 using km2ecore
 using kermeta::standard
 
-class Main
-{	
+class Main {	
 	reference context : KM2EcoreContext [1..1]
 
     operation main_inner() : Void is do
@@ -51,43 +51,40 @@ class Main
 		context.initialize( modelInput, traceInput )
 		context.mode := mode
 		
-		context.mus.each{ mu |
+		context.mu.applyPass1(context)
 		
-			mu.applyPass1(context)
-			
-			if context.mode == CompilingMode.onlyEcore then
-				mu.applyPass2(context)
-			end
-			stdio.writeln("KermetaCompiler - Pass 1 is finished")
-			
-			if context.mode == CompilingMode.behaviorKmt then
-				mu.applyPass2BehaviorKmt(context)
-			end
-			
-			if context.mode == CompilingMode.behaviorJava then
-				mu.applyPass2BehaviorJava(context)
-			end
-			
-			stdio.writeln("KermetaCompiler - Pass 2 is finished")
-			
-			// Save the generated ecore
-			context.ecoreOutputs.add(output)
-	   		var ecore_resource : Resource init context.outputRepository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
-			ecore_resource.instances.add(mu.ecoreModelElement)
-			//stdio.writeln("mu.ecoreModelElement: " + mu.ecoreModelElement.toString)
-			
-			mu.entryPoints.each{ e |
-				ecore_resource.instances.add(e)
-			}
-			mu.ecorePackages.each{ p |
-				//stdio.writeln("I have found a package: " + p.toString)
-				ecore_resource.instances.add(p)
-			}
-			
-			stdio.writeln("Save the Ecore Model")
-			ecore_resource.save()
-			stdio.writeln("The Ecore Model has been saved")
+		if context.mode == CompilingMode.onlyEcore then
+			//context.mu.applyPass2(context)
+		end
+		stdio.writeln("KermetaCompiler - Pass 1 is finished")
+		
+		if context.mode == CompilingMode.behaviorKmt then
+			context.mu.applyPass2BehaviorKmt(context)
+		end
+		
+		if context.mode == CompilingMode.behaviorJava then
+			context.mu.applyPass2BehaviorJava(context)
+		end
+		
+		stdio.writeln("KermetaCompiler - Pass 2 is finished")
+		
+		// Save the generated ecore
+		context.ecoreOutputs.add(output)
+   		var ecore_resource : Resource init context.outputRepository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
+		ecore_resource.instances.add(context.mu.ecoreModelElement)
+		//stdio.writeln("context.mu.ecoreModelElement: " + context.mu.ecoreModelElement.toString)
+		
+		context.mu.entryPoints.each{ e |
+			ecore_resource.instances.add(e)
 		}
+		context.mu.ecorePackages.each{ p |
+			//stdio.writeln("I have found a package: " + p.toString)
+			ecore_resource.instances.add(p)
+		}
+		
+		stdio.writeln("Save the Ecore Model")
+		ecore_resource.save()
+		stdio.writeln("The Ecore Model has been saved")
 		
 		// Save the context to reuse it during the EMF Java generation
 		
@@ -95,6 +92,41 @@ class Main
 			
 		stdio.writeln("Finish")
 		
+    end
+    
+    operation main_mode2(modelInput : String, traceInput : String, output : String, mode : CompilingMode) : Void is do
+
+		// Creating and initializing the context
+		context := KM2EcoreContext.new
+		context.initialize( modelInput, traceInput )
+		context.mode := mode
+		
+		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Integer")))
+		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")))
+		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Real")))
+		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Character")))
+		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::String")))
+		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Numeric")))
+		
+				
+    end
+    
+    operation getTypeDefinitionByQualifiedName( qn : String ) : TypeDefinition is do
+    	var td : TypeDefinition init TypeDefinition.new
+		
+		var td_tmp : TypeDefinition init context.mu.getTypeDefinitionByQualifiedName(qn)
+		if not td_tmp.isVoid() then
+			td := td_tmp
+		end
+		
+		result := td
+    end
+    
+    operation typeDefinitionToString( td : TypeDefinition ) : String is do
+    	if (not td.isVoid()) and (td.isInstanceOf(ClassDefinition)) then
+			var cd : ClassDefinition init td.asType(ClassDefinition)
+			result := cd.name + " " + cd.isValueType().toString()
+		end
     end
    	
 }

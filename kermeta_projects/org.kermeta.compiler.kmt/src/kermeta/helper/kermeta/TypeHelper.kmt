@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.10 2008-04-29 16:44:53 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.11 2008-05-19 21:52:28 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -38,38 +38,21 @@ aspect class Type {
 		end
 	end
 	
-	// Check if the type is a subType of ValueType => we have to consider as a PrimitiveType, i.e.: an EAttribute
+	// Check if the type is a subType of ValueType => we have to consider as a EDataType, i.e.: an EAttribute
 	operation isValueType() : Boolean is do
 		result := false
 		if self.isInstanceOf(ParameterizedType) then
 			var pt : ParameterizedType init self.asType(ParameterizedType)
 			
 			if pt.typeDefinition.isInstanceOf(ClassDefinition) then
-				var cd : ClassDefinition init pt.typeDefinition.asType(ClassDefinition)
-				if not cd.superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
+				result := pt.typeDefinition.asType(ClassDefinition).isValueType()
+				/*if not cd.allSuperTypes.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
 					result := true
-				end
+				end*/
 			end
 		end
-		/*if self.isInstanceOf(ParameterizedType) and (not self.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).superType.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid()) then
-			result := true
-		else
-			result := false
-		end*/
-		
-		// old code: Check if the type is in the types map
-		/*if not result and self.isInstanceOf(Class) then
-			var c : Class init self.asType(Class)
-			var qualifiedName : String init c.typeDefinition.qualifiedName()
-			result := context.javaTypeMapping.types_mapping.containsKey(qualifiedName)
-		end*/
 	end
 	
-	
-	
-	
-	
-	/** To move to an aspect on the Class Definition Type */
 	operation getTypeName() : String is do
 		result := void
 		if self.isInstanceOf(Class) then
@@ -92,7 +75,10 @@ aspect class Type {
 
 aspect class Class {
 	operation getClassDefinition() : ClassDefinition is do
-		result := self.typeDefinition.asType(ClassDefinition)
+		result := void
+		if self.typeDefinition.isInstanceOf(ClassDefinition) then
+			result := self.typeDefinition.asType(ClassDefinition)
+		end
 	end
 }
 

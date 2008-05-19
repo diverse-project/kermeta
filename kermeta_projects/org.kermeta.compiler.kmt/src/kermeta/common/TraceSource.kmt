@@ -1,9 +1,9 @@
-/* $Id: TraceSource.kmt,v 1.2 2008-04-21 15:26:24 cfaucher Exp $
+/* $Id: TraceSource.kmt,v 1.3 2008-05-19 21:52:28 cfaucher Exp $
  * Creation date: April 17, 2008
  * License:
  * Copyright:
- * Authors: François Tanguy
- *			Cyril Faucher
+ * Authors: Francois Tanguy <ftanguy@irisa.fr>
+ *			Cyril Faucher <cfaucher@irisa.fr>
  */
 
 package kermeta::language::structure;
@@ -23,10 +23,10 @@ using traceability
  *
  */
 aspect class Object {
-	/**		The kmt file that declares the object.		*/
+	/** The kmt file that declares the object. */
 	attribute fileName : String
 
-	/**		The line number where the object is declared in the source file.	*/
+	/** The line number where the object is declared in the source file. */
 	attribute lineNumber : Integer
 	
 	/** The calculated kmt file */
