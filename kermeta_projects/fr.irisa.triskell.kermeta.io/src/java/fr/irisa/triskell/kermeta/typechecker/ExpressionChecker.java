@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.65 2008-04-30 13:57:40 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.66 2008-05-19 14:47:55 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -505,8 +505,9 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	 */
 	protected Type visitExpressionList(EList<Expression> expressions) {
 		Type result = TypeCheckerContext.VoidType;
-		for ( Expression expression : expressions )
+		for ( Expression expression : expressions ) {
 			result = (Type) this.accept(expression);
+		}
 		return result;
 	}
 	
@@ -521,7 +522,6 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    // Visit contained expressions
 	    this.accept(expression.getTarget());
 	    this.accept(expression.getValue());
-	    
 	    
 	    // The target of the assignenement cannot have any parameter
 	    if (expression.getTarget().getParameters().size() != 0) {
@@ -541,8 +541,11 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        
 	        // Determine the type of the target
 			Type target;
-			if (fc.getTarget() != null) target = getTypeOfExpression(fc.getTarget());
-			else target = context.getSelfType();
+			if (fc.getTarget() != null) {
+				target = getTypeOfExpression(fc.getTarget());
+			} else {
+				target = context.getSelfType();
+			}
 			// Check if it is an operation
 			CallableOperation op = target.getOperationByName(fc.getName(), unit);
 			if (op != null) {
@@ -551,11 +554,9 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			}
 			// Check if it is a property and if this property is derived AND readonly
 			CallableProperty prop = target.getPropertyByName(fc.getName());
-			if (prop!=null && prop.getProperty().isIsReadOnly())
-			{
+			if (prop!=null && prop.getProperty().isIsReadOnly()) {
 				unit.error("TYPE-CHECKER : '"+ fc.getName() + "' property is readonly. You can't assign it.", expression);
 				return TypeCheckerContext.VoidType;
-				
 			}
 			
 			if ( prop == null ) {
@@ -595,8 +596,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        if (provided_type.isSubTypeOf(targetType)) {
 	            unit.warning("TYPE-CHECKER : Unnecessary cast, it should be a regular assignment", expression);
 	            return provided_type;
-	        }
-	        else if (!targetType.isSubTypeOf(provided_type)) {
+	        } else if (!targetType.isSubTypeOf(provided_type)) {
 	        	if ( targetType.getFType() instanceof Class && provided_type.getFType() instanceof Class ) {
 	        		ClassDefinition pCDef = (ClassDefinition) ((Class) provided_type.getFType()).getTypeDefinition();
 	        		ClassDefinition tCDef = (ClassDefinition) ((Class) targetType.getFType()).getTypeDefinition();
@@ -880,35 +880,29 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitLambdaExpression(LambdaExpression expression) {
 	    
-	   
 	    ProductType result_param = StructureFactory.eINSTANCE.createProductType();
 	    
 	    Type[] expected_params = null;
 	    if (expected_type != null) {
 	        expected_params = expected_type.getFunctionTypeLeft().getProductType();
-	   }
+	    }
 	    preVisit();
 		context.pushContext();
 	    // Find type of lambda parameters and add them to the context
-	    for(int i=0;i<expression.getParameters().size(); i++) {
+	    for(int i=0; i<expression.getParameters().size(); i++) {
 	        LambdaParameter param = (LambdaParameter)expression.getParameters().get(i);
 	        if (param.getType() == null) {
 	            
 	            if (expected_params != null && expected_params.length > i) {
-	                
 	                context.addSymbol(new KMSymbolLambdaParameter(param), expected_params[i]);
-	                
 	                result_param.getType().add(((SimpleType)expected_params[i]).type);
-	            }
-	            
-	            else {
+	            } else {
 	                //context.addSymbol(new KMSymbolLambdaParameter(param), TypeCheckerContext.ObjectType);
 	                //result_param.getFType().add(TypeCheckerContext.ObjectType);
 	                unit.error("TYPE-CHECKER : Types of the function does not match required types", expression);
 	            }
 	            
-	        }
-	        else {
+	        } else {
 	            Type t = TypeCheckerContext.getTypeFromMultiplicityElement(param.getType());
 	            ParameterizedTypeChecker.checkType(t.getFType(), unit, context, expression);
 	            context.addSymbol(new KMSymbolLambdaParameter(param), t);
@@ -916,9 +910,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        }
 	    }
 	    
-	    // check expression
-    
-	    Type result_return = (Type)this.accept(expression.getBody());
+	    // Check expression
+	    Type result_return = (Type) this.accept(expression.getBody());
 	    
 	    context.popContext();
 	    
@@ -927,25 +920,29 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    if (result_return instanceof SimpleType) {
 	        
 	        result.setLeft(result_param);
-	        if ( result_param.eContainer() == null )
+	        if ( result_param.eContainer() == null ) {
 	        	result.getContainedType().add( result_param );
-	        result.setRight(((SimpleType)result_return).type);
-	        if ( ((SimpleType)result_return).type.eContainer() == null ) 
-	        	result.getContainedType().add( ((SimpleType)result_return).type );
+	        }
 	        
-	    }
-	    else {
+	        result.setRight(((SimpleType)result_return).type);
+	        if ( ((SimpleType)result_return).type.eContainer() == null ) {
+	        	result.getContainedType().add( ((SimpleType)result_return).type );
+	        }
+	        
+	    } else {
 	        // TODO : Complete this method
 	        // FIXME : Compute the appropriate union type
 	        
 	        result.setLeft(result_param);
-	        if ( result_param.eContainer() == null )
+	        if ( result_param.eContainer() == null ) {
 	        	result.getContainedType().add( result_param );
+	        }
 	        result.getContainedType().add( result_param );
-	        result.setRight((((UnionType)result_return).transformAsSimpleType()).type);
-	        if ( (((UnionType)result_return).transformAsSimpleType()).type.eContainer() == null ) 
-		        result.getContainedType().add( (((UnionType)result_return).transformAsSimpleType()).type );
 	        
+	        result.setRight((((UnionType)result_return).transformAsSimpleType()).type);
+	        if ( (((UnionType)result_return).transformAsSimpleType()).type.eContainer() == null ) {
+		        result.getContainedType().add( (((UnionType)result_return).transformAsSimpleType()).type );
+	        }
 	    }
 	    Type true_result = new SimpleType(result);
 	    setType(expression, true_result);
