@@ -1,0 +1,32 @@
+/* $Id: OperationHelper.kmt,v 1.1 2008-05-20 15:38:21 cfaucher Exp $
+ * Creation date: May 20, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+package kermeta::language::structure;
+
+require kermeta
+
+using kermeta::standard
+
+aspect class Operation
+{
+	operation isFunctionType() : Boolean is do 
+		result := false
+		
+		if not self.getFunctionTypeParameter().isVoid() and self.getFunctionTypeParameter().size>0 then
+			result := true
+		end
+	end
+	
+	operation getFunctionTypeParameter() : Sequence<Parameter> is do
+		result := void
+		var ft_parameters : Sequence<Parameter> init self.ownedParameter.select{ p |
+			p.type.isInstanceOf(FunctionType)
+		}
+		result := ft_parameters
+	end
+}
