@@ -1,8 +1,8 @@
-/* $Id: FractalAdapter.kmt,v 1.1 2008-04-16 13:41:46 bmorin Exp $
+/* $Id: FractalAdapter.kmt,v 1.2 2008-05-20 14:30:48 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
- * Copyright:
- * Authors:
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
  */
 
 package org::kermeta::runtime::adapter;
@@ -11,8 +11,11 @@ require kermeta
 require "platform:/resource/SmartAdapters/program/adapter/PlatformAdapter.kmt"
 
 using kermeta::standard
-using kermeta::persistence
 
+/**
+ * This class is a bridge between Kermeta and Fractal
+ * Note: it does not implement the run operation
+ */
 aspect class PlatformAdapter
 {
 	operation ~init() : Void is
@@ -20,12 +23,16 @@ aspect class PlatformAdapter
 		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.~init(self)
 	end
 		
-	operation generateAndSaveEMFModel(modelUri : String) : Void is
+	operation generateAndSaveModel(modelUri : String) : Void is
 	do
-		//extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.generateAndSaveEMFModel(self, modelUri)
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.saveEMFModel(self, modelUri)
+		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.generateAndSaveEMFModel(self, modelUri)
 	end
-		
+	
+	operation saveModel(modelUri : String) : Void is
+	do
+		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.saveEMFModel(self, modelUri)
+	end	
+	
 	operation loadUpdateModel(modelUri : String) : Void is 
 	do
 		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.loadUpdateModel(self, modelUri)

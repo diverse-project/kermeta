@@ -3,7 +3,8 @@
  * Author: Brice Morin
  * Creation date: 
  * License: 
- * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
  */
 
 /*
@@ -134,83 +135,7 @@ package smartadapters
 				end
 			end
 		}
-		 
-
-		/**
-		 * Sets any property of art::ModelElement
-		 * All the references expect ModelElementToSet may be void
-		 */
-			 
-		class SetruntimeModelElement inherits setAdaptation
-		{
-			reference ModelElementToSet : pattern::art::ModelElement
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := ModelElementToSet != void
-			end
-			
-			method execute(reverse : Boolean): Void 
-			is do
-				var ad : Adapter init getAdapter
-				var tempModelElement : art::ModelElement
-				tempModelElement ?= ad.getRealObject(ModelElementToSet,false)
-				
-				tempModelElement.name ?= ad.setSingleProperty(refname, tempModelElement.name)
-				
-				//Instantiating the reverse adaptation
-				if(reverse) then		
-					var unset : UnsetruntimeModelElement 
-					if self.reverse == void then
-						unset := UnsetruntimeModelElement.new
-						unset.reverse := self
-						self.reverse := unset
-					else
-						unset ?= self.reverse
-					end		
-					unset.ModelElementToUnset := self.ModelElementToSet
-					unset.refname := self.refname
-				end	
-			end			
-		}
-		
-		/**
-		 * Unsets any property of art::ModelElement
-		 * All the references expect ModelElementToUnset may be void 
-		 */		
-		class UnsetruntimeModelElement inherits unsetAdaptation
-		{
-			reference ModelElementToUnset : pattern::art::ModelElement
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := ModelElementToUnset != void
-			end
-			
-			method execute(reverse : Boolean): Void
-			is do
-				var ad : Adapter init getAdapter
-				var tempModelElement : art::ModelElement
-				tempModelElement ?= ad.getRealObject(ModelElementToUnset,false)
-				
-				tempModelElement.name ?= ad.unsetSingleProperty(refname, tempModelElement.name)
-				
-				//Instantiating the reverse adaptation
-				if reverse then
-					var ~set : SetruntimeModelElement 
-					if self.reverse == void then
-						~set := SetruntimeModelElement.new
-						~set.reverse := self
-						self.reverse := ~set
-					else
-						~set ?= self.reverse
-					end
-					~set.ModelElementToSet := self.ModelElementToUnset
-					~set.refname := self.refname
-				end
-			end
-		}
-		 
+		 		 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of art::System
@@ -356,206 +281,6 @@ package smartadapters
 			end
 		}
 		 
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of art::DataType
-		 */
-		
-		/**
-		 * Creates a new art::DataType from scratch
-		 * This new element is handled by refering to newDataType
-		 */
-		class CreateruntimeDataType inherits createAdaptation
-		{
-			attribute newDataType : pattern::art::DataType
-					
-			method check(): Boolean is do
-				result := newDataType != void
-			end
-					
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(newDataType, void, isUnique)					
-			end
-		}
-
-		/**
-		 * Creates a new art::DataType from an existing one
-		 * This cloned element is handled by refering to clonedDataType
-		 */
-		class CloneruntimeDataType inherits cloneAdaptation
-		{
-			reference DataTypeToClone : pattern::art::DataType
-			attribute clonedDataType : pattern::art::DataType
-			
-			method check(): Boolean is do
-				result := DataTypeToClone != void
-			end
-			
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(clonedDataType, DataTypeToClone, isUnique)
-			end					
-		}
-
-		/**
-		 * Sets any property of art::DataType
-		 * All the references expect DataTypeToSet may be void
-		 */
-			 
-		class SetruntimeDataType inherits setAdaptation
-		{
-			reference DataTypeToSet : pattern::art::DataType
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := DataTypeToSet != void
-			end
-			
-			method execute(reverse : Boolean): Void 
-			is do
-				var ad : Adapter init getAdapter
-				var tempDataType : art::DataType
-				tempDataType ?= ad.getRealObject(DataTypeToSet,false)
-				
-				tempDataType.name ?= ad.setSingleProperty(refname, tempDataType.name)
-				
-				//Instantiating the reverse adaptation
-				if(reverse) then		
-					var unset : UnsetruntimeDataType 
-					if self.reverse == void then
-						unset := UnsetruntimeDataType.new
-						unset.reverse := self
-						self.reverse := unset
-					else
-						unset ?= self.reverse
-					end		
-					unset.DataTypeToUnset := self.DataTypeToSet
-					unset.refname := self.refname
-				end	
-			end			
-		}
-		
-		/**
-		 * Unsets any property of art::DataType
-		 * All the references expect DataTypeToUnset may be void 
-		 */		
-		class UnsetruntimeDataType inherits unsetAdaptation
-		{
-			reference DataTypeToUnset : pattern::art::DataType
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := DataTypeToUnset != void
-			end
-			
-			method execute(reverse : Boolean): Void
-			is do
-				var ad : Adapter init getAdapter
-				var tempDataType : art::DataType
-				tempDataType ?= ad.getRealObject(DataTypeToUnset,false)
-				
-				tempDataType.name ?= ad.unsetSingleProperty(refname, tempDataType.name)
-				
-				//Instantiating the reverse adaptation
-				if reverse then
-					var ~set : SetruntimeDataType 
-					if self.reverse == void then
-						~set := SetruntimeDataType.new
-						~set.reverse := self
-						self.reverse := ~set
-					else
-						~set ?= self.reverse
-					end
-					~set.DataTypeToSet := self.DataTypeToUnset
-					~set.refname := self.refname
-				end
-			end
-		}
-		 
-
-		/**
-		 * Sets any property of art::TypedElement
-		 * All the references expect TypedElementToSet may be void
-		 */
-			 
-		class SetruntimeTypedElement inherits setAdaptation
-		{
-			reference TypedElementToSet : pattern::art::TypedElement
-			reference reftype : pattern::art::DataType
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := TypedElementToSet != void
-			end
-			
-			method execute(reverse : Boolean): Void 
-			is do
-				var ad : Adapter init getAdapter
-				var tempTypedElement : art::TypedElement
-				tempTypedElement ?= ad.getRealObject(TypedElementToSet,false)
-				
-				tempTypedElement.type ?= ad.setSingleProperty(reftype, tempTypedElement.type)
-				tempTypedElement.name ?= ad.setSingleProperty(refname, tempTypedElement.name)
-				
-				//Instantiating the reverse adaptation
-				if(reverse) then		
-					var unset : UnsetruntimeTypedElement 
-					if self.reverse == void then
-						unset := UnsetruntimeTypedElement.new
-						unset.reverse := self
-						self.reverse := unset
-					else
-						unset ?= self.reverse
-					end		
-					unset.TypedElementToUnset := self.TypedElementToSet
-					unset.reftype := self.reftype
-					unset.refname := self.refname
-				end	
-			end			
-		}
-		
-		/**
-		 * Unsets any property of art::TypedElement
-		 * All the references expect TypedElementToUnset may be void 
-		 */		
-		class UnsetruntimeTypedElement inherits unsetAdaptation
-		{
-			reference TypedElementToUnset : pattern::art::TypedElement
-			reference reftype : pattern::art::DataType
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := TypedElementToUnset != void
-			end
-			
-			method execute(reverse : Boolean): Void
-			is do
-				var ad : Adapter init getAdapter
-				var tempTypedElement : art::TypedElement
-				tempTypedElement ?= ad.getRealObject(TypedElementToUnset,false)
-				
-				tempTypedElement.type ?= ad.unsetSingleProperty(reftype, tempTypedElement.type)
-				tempTypedElement.name ?= ad.unsetSingleProperty(refname, tempTypedElement.name)
-				
-				//Instantiating the reverse adaptation
-				if reverse then
-					var ~set : SetruntimeTypedElement 
-					if self.reverse == void then
-						~set := SetruntimeTypedElement.new
-						~set.reverse := self
-						self.reverse := ~set
-					else
-						~set ?= self.reverse
-					end
-					~set.TypedElementToSet := self.TypedElementToUnset
-					~set.reftype := self.reftype
-					~set.refname := self.refname
-				end
-			end
-		}
-		 
-		 
-		 
-
 		/**
 		 * Sets any property of art::instance::ComponentInstance
 		 * All the references expect ComponentInstanceToSet may be void
@@ -565,7 +290,7 @@ package smartadapters
 		{
 			reference ComponentInstanceToSet : pattern::art::instance::ComponentInstance
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::instance::InstanceState
+			reference refstate : pattern::art::String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
@@ -625,7 +350,7 @@ package smartadapters
 		{
 			reference ComponentInstanceToUnset : pattern::art::instance::ComponentInstance
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::instance::InstanceState
+			reference refstate : pattern::art::String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
@@ -725,7 +450,7 @@ package smartadapters
 		{
 			reference PrimitiveInstanceToSet : pattern::art::instance::PrimitiveInstance
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::instance::InstanceState
+			reference refstate : pattern::art::String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
@@ -785,7 +510,7 @@ package smartadapters
 		{
 			reference PrimitiveInstanceToUnset : pattern::art::instance::PrimitiveInstance
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::instance::InstanceState
+			reference refstate : pattern::art::String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
@@ -888,7 +613,7 @@ package smartadapters
 			reference refsubComponent : pattern::art::instance::ComponentInstance[0..*]
 			reference refdelegation : pattern::art::instance::DelegationBinding[0..*]
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::instance::InstanceState
+			reference refstate : pattern::art::String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
@@ -956,7 +681,7 @@ package smartadapters
 			reference refsubComponent : pattern::art::instance::ComponentInstance[0..*]
 			reference refdelegation : pattern::art::instance::DelegationBinding[0..*]
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::instance::InstanceState
+			reference refstate : pattern::art::String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
@@ -1014,127 +739,6 @@ package smartadapters
 			end
 		}
 		 
-		 
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of art::instance::ValuedAttribute
-		 */
-		
-		/**
-		 * Creates a new art::instance::ValuedAttribute from scratch
-		 * This new element is handled by refering to newValuedAttribute
-		 */
-		class CreateruntimeinstanceValuedAttribute inherits createAdaptation
-		{
-			attribute newValuedAttribute : pattern::art::instance::ValuedAttribute
-					
-			method check(): Boolean is do
-				result := newValuedAttribute != void
-			end
-					
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(newValuedAttribute, void, isUnique)					
-			end
-		}
-
-		/**
-		 * Creates a new art::instance::ValuedAttribute from an existing one
-		 * This cloned element is handled by refering to clonedValuedAttribute
-		 */
-		class CloneruntimeinstanceValuedAttribute inherits cloneAdaptation
-		{
-			reference ValuedAttributeToClone : pattern::art::instance::ValuedAttribute
-			attribute clonedValuedAttribute : pattern::art::instance::ValuedAttribute
-			
-			method check(): Boolean is do
-				result := ValuedAttributeToClone != void
-			end
-			
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(clonedValuedAttribute, ValuedAttributeToClone, isUnique)
-			end					
-		}
-
-		/**
-		 * Sets any property of art::instance::ValuedAttribute
-		 * All the references expect ValuedAttributeToSet may be void
-		 */
-			 
-		class SetruntimeinstanceValuedAttribute inherits setAdaptation
-		{
-			reference ValuedAttributeToSet : pattern::art::instance::ValuedAttribute
-			reference refattribute : pattern::art::type::Attribute
-			reference refvalue : pattern::art::String
-			
-			method check(): Boolean is do
-				result := ValuedAttributeToSet != void
-			end
-			
-			method execute(reverse : Boolean): Void 
-			is do
-				var ad : Adapter init getAdapter
-				var tempValuedAttribute : art::instance::ValuedAttribute
-				tempValuedAttribute ?= ad.getRealObject(ValuedAttributeToSet,false)
-				
-				tempValuedAttribute.~attribute ?= ad.setSingleProperty(refattribute, tempValuedAttribute.~attribute)
-				tempValuedAttribute.~value ?= ad.setSingleProperty(refvalue, tempValuedAttribute.~value)
-				
-				//Instantiating the reverse adaptation
-				if(reverse) then		
-					var unset : UnsetruntimeinstanceValuedAttribute 
-					if self.reverse == void then
-						unset := UnsetruntimeinstanceValuedAttribute.new
-						unset.reverse := self
-						self.reverse := unset
-					else
-						unset ?= self.reverse
-					end		
-					unset.ValuedAttributeToUnset := self.ValuedAttributeToSet
-					unset.refattribute := self.refattribute
-					unset.refvalue := self.refvalue
-				end	
-			end			
-		}
-		
-		/**
-		 * Unsets any property of art::instance::ValuedAttribute
-		 * All the references expect ValuedAttributeToUnset may be void 
-		 */		
-		class UnsetruntimeinstanceValuedAttribute inherits unsetAdaptation
-		{
-			reference ValuedAttributeToUnset : pattern::art::instance::ValuedAttribute
-			reference refattribute : pattern::art::type::Attribute
-			reference refvalue : pattern::art::String
-			
-			method check(): Boolean is do
-				result := ValuedAttributeToUnset != void
-			end
-			
-			method execute(reverse : Boolean): Void
-			is do
-				var ad : Adapter init getAdapter
-				var tempValuedAttribute : art::instance::ValuedAttribute
-				tempValuedAttribute ?= ad.getRealObject(ValuedAttributeToUnset,false)
-				
-				tempValuedAttribute.~attribute ?= ad.unsetSingleProperty(refattribute, tempValuedAttribute.~attribute)
-				tempValuedAttribute.~value ?= ad.unsetSingleProperty(refvalue, tempValuedAttribute.~value)
-				
-				//Instantiating the reverse adaptation
-				if reverse then
-					var ~set : SetruntimeinstanceValuedAttribute 
-					if self.reverse == void then
-						~set := SetruntimeinstanceValuedAttribute.new
-						~set.reverse := self
-						self.reverse := ~set
-					else
-						~set ?= self.reverse
-					end
-					~set.ValuedAttributeToSet := self.ValuedAttributeToUnset
-					~set.refattribute := self.refattribute
-					~set.refvalue := self.refvalue
-				end
-			end
-		}
 		 
 
 		/**
@@ -1928,257 +1532,6 @@ package smartadapters
 			end
 		}
 		 
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of art::type::Operation
-		 */
-		
-		/**
-		 * Creates a new art::type::Operation from scratch
-		 * This new element is handled by refering to newOperation
-		 */
-		class CreateruntimetypeOperation inherits createAdaptation
-		{
-			attribute newOperation : pattern::art::type::Operation
-					
-			method check(): Boolean is do
-				result := newOperation != void
-			end
-					
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(newOperation, void, isUnique)					
-			end
-		}
-
-		/**
-		 * Creates a new art::type::Operation from an existing one
-		 * This cloned element is handled by refering to clonedOperation
-		 */
-		class CloneruntimetypeOperation inherits cloneAdaptation
-		{
-			reference OperationToClone : pattern::art::type::Operation
-			attribute clonedOperation : pattern::art::type::Operation
-			
-			method check(): Boolean is do
-				result := OperationToClone != void
-			end
-			
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(clonedOperation, OperationToClone, isUnique)
-			end					
-		}
-
-		/**
-		 * Sets any property of art::type::Operation
-		 * All the references expect OperationToSet may be void
-		 */
-			 
-		class SetruntimetypeOperation inherits setAdaptation
-		{
-			reference OperationToSet : pattern::art::type::Operation
-			reference refinput : pattern::art::type::Parameter[0..*]
-			reference refoutput : pattern::art::type::Parameter[0..*]
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := OperationToSet != void
-			end
-			
-			method execute(reverse : Boolean): Void 
-			is do
-				var ad : Adapter init getAdapter
-				var tempOperation : art::type::Operation
-				tempOperation ?= ad.getRealObject(OperationToSet,false)
-				
-				ad.setMultipleProperty(tempOperation.input,refinput)
-				ad.setMultipleProperty(tempOperation.output,refoutput)
-				tempOperation.name ?= ad.setSingleProperty(refname, tempOperation.name)
-				
-				//Instantiating the reverse adaptation
-				if(reverse) then		
-					var unset : UnsetruntimetypeOperation 
-					if self.reverse == void then
-						unset := UnsetruntimetypeOperation.new
-						unset.reverse := self
-						self.reverse := unset
-					else
-						unset ?= self.reverse
-					end		
-					unset.OperationToUnset := self.OperationToSet
-					unset.refinput.clear
-					unset.refinput.addAll(self.refinput)
-					unset.refoutput.clear
-					unset.refoutput.addAll(self.refoutput)
-					unset.refname := self.refname
-				end	
-			end			
-		}
-		
-		/**
-		 * Unsets any property of art::type::Operation
-		 * All the references expect OperationToUnset may be void 
-		 */		
-		class UnsetruntimetypeOperation inherits unsetAdaptation
-		{
-			reference OperationToUnset : pattern::art::type::Operation
-			reference refinput : pattern::art::type::Parameter[0..*]
-			reference refoutput : pattern::art::type::Parameter[0..*]
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := OperationToUnset != void
-			end
-			
-			method execute(reverse : Boolean): Void
-			is do
-				var ad : Adapter init getAdapter
-				var tempOperation : art::type::Operation
-				tempOperation ?= ad.getRealObject(OperationToUnset,false)
-				
-				ad.unsetMultipleProperty(tempOperation.input,refinput)
-				ad.unsetMultipleProperty(tempOperation.output,refoutput)
-				tempOperation.name ?= ad.unsetSingleProperty(refname, tempOperation.name)
-				
-				//Instantiating the reverse adaptation
-				if reverse then
-					var ~set : SetruntimetypeOperation 
-					if self.reverse == void then
-						~set := SetruntimetypeOperation.new
-						~set.reverse := self
-						self.reverse := ~set
-					else
-						~set ?= self.reverse
-					end
-					~set.OperationToSet := self.OperationToUnset
-					~set.refinput.clear
-					~set.refinput.addAll(self.refinput)
-					~set.refoutput.clear
-					~set.refoutput.addAll(self.refoutput)
-					~set.refname := self.refname
-				end
-			end
-		}
-		 
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of art::type::Parameter
-		 */
-		
-		/**
-		 * Creates a new art::type::Parameter from scratch
-		 * This new element is handled by refering to newParameter
-		 */
-		class CreateruntimetypeParameter inherits createAdaptation
-		{
-			attribute newParameter : pattern::art::type::Parameter
-					
-			method check(): Boolean is do
-				result := newParameter != void
-			end
-					
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(newParameter, void, isUnique)					
-			end
-		}
-
-		/**
-		 * Creates a new art::type::Parameter from an existing one
-		 * This cloned element is handled by refering to clonedParameter
-		 */
-		class CloneruntimetypeParameter inherits cloneAdaptation
-		{
-			reference ParameterToClone : pattern::art::type::Parameter
-			attribute clonedParameter : pattern::art::type::Parameter
-			
-			method check(): Boolean is do
-				result := ParameterToClone != void
-			end
-			
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(clonedParameter, ParameterToClone, isUnique)
-			end					
-		}
-
-		/**
-		 * Sets any property of art::type::Parameter
-		 * All the references expect ParameterToSet may be void
-		 */
-			 
-		class SetruntimetypeParameter inherits setAdaptation
-		{
-			reference ParameterToSet : pattern::art::type::Parameter
-			reference reftype : pattern::art::DataType
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := ParameterToSet != void
-			end
-			
-			method execute(reverse : Boolean): Void 
-			is do
-				var ad : Adapter init getAdapter
-				var tempParameter : art::type::Parameter
-				tempParameter ?= ad.getRealObject(ParameterToSet,false)
-				
-				tempParameter.type ?= ad.setSingleProperty(reftype, tempParameter.type)
-				tempParameter.name ?= ad.setSingleProperty(refname, tempParameter.name)
-				
-				//Instantiating the reverse adaptation
-				if(reverse) then		
-					var unset : UnsetruntimetypeParameter 
-					if self.reverse == void then
-						unset := UnsetruntimetypeParameter.new
-						unset.reverse := self
-						self.reverse := unset
-					else
-						unset ?= self.reverse
-					end		
-					unset.ParameterToUnset := self.ParameterToSet
-					unset.reftype := self.reftype
-					unset.refname := self.refname
-				end	
-			end			
-		}
-		
-		/**
-		 * Unsets any property of art::type::Parameter
-		 * All the references expect ParameterToUnset may be void 
-		 */		
-		class UnsetruntimetypeParameter inherits unsetAdaptation
-		{
-			reference ParameterToUnset : pattern::art::type::Parameter
-			reference reftype : pattern::art::DataType
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := ParameterToUnset != void
-			end
-			
-			method execute(reverse : Boolean): Void
-			is do
-				var ad : Adapter init getAdapter
-				var tempParameter : art::type::Parameter
-				tempParameter ?= ad.getRealObject(ParameterToUnset,false)
-				
-				tempParameter.type ?= ad.unsetSingleProperty(reftype, tempParameter.type)
-				tempParameter.name ?= ad.unsetSingleProperty(refname, tempParameter.name)
-				
-				//Instantiating the reverse adaptation
-				if reverse then
-					var ~set : SetruntimetypeParameter 
-					if self.reverse == void then
-						~set := SetruntimetypeParameter.new
-						~set.reverse := self
-						self.reverse := ~set
-					else
-						~set ?= self.reverse
-					end
-					~set.ParameterToSet := self.ParameterToUnset
-					~set.reftype := self.reftype
-					~set.refname := self.refname
-				end
-			end
-		}
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
@@ -2303,128 +1656,6 @@ package smartadapters
 			end
 		}
 		 
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of art::type::ControlService
-		 */
-		
-		/**
-		 * Creates a new art::type::ControlService from scratch
-		 * This new element is handled by refering to newControlService
-		 */
-		class CreateruntimetypeControlService inherits createAdaptation
-		{
-			attribute newControlService : pattern::art::type::ControlService
-					
-			method check(): Boolean is do
-				result := newControlService != void
-			end
-					
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(newControlService, void, isUnique)					
-			end
-		}
-
-		/**
-		 * Creates a new art::type::ControlService from an existing one
-		 * This cloned element is handled by refering to clonedControlService
-		 */
-		class CloneruntimetypeControlService inherits cloneAdaptation
-		{
-			reference ControlServiceToClone : pattern::art::type::ControlService
-			attribute clonedControlService : pattern::art::type::ControlService
-			
-			method check(): Boolean is do
-				result := ControlServiceToClone != void
-			end
-			
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(clonedControlService, ControlServiceToClone, isUnique)
-			end					
-		}
-
-		/**
-		 * Sets any property of art::type::ControlService
-		 * All the references expect ControlServiceToSet may be void
-		 */
-			 
-		class SetruntimetypeControlService inherits setAdaptation
-		{
-			reference ControlServiceToSet : pattern::art::type::ControlService
-			reference refoperation : pattern::art::type::Operation[0..*]
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := ControlServiceToSet != void
-			end
-			
-			method execute(reverse : Boolean): Void 
-			is do
-				var ad : Adapter init getAdapter
-				var tempControlService : art::type::ControlService
-				tempControlService ?= ad.getRealObject(ControlServiceToSet,false)
-				
-				ad.setMultipleProperty(tempControlService.~operation,refoperation)
-				tempControlService.name ?= ad.setSingleProperty(refname, tempControlService.name)
-				
-				//Instantiating the reverse adaptation
-				if(reverse) then		
-					var unset : UnsetruntimetypeControlService 
-					if self.reverse == void then
-						unset := UnsetruntimetypeControlService.new
-						unset.reverse := self
-						self.reverse := unset
-					else
-						unset ?= self.reverse
-					end		
-					unset.ControlServiceToUnset := self.ControlServiceToSet
-					unset.refoperation.clear
-					unset.refoperation.addAll(self.refoperation)
-					unset.refname := self.refname
-				end	
-			end			
-		}
-		
-		/**
-		 * Unsets any property of art::type::ControlService
-		 * All the references expect ControlServiceToUnset may be void 
-		 */		
-		class UnsetruntimetypeControlService inherits unsetAdaptation
-		{
-			reference ControlServiceToUnset : pattern::art::type::ControlService
-			reference refoperation : pattern::art::type::Operation[0..*]
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := ControlServiceToUnset != void
-			end
-			
-			method execute(reverse : Boolean): Void
-			is do
-				var ad : Adapter init getAdapter
-				var tempControlService : art::type::ControlService
-				tempControlService ?= ad.getRealObject(ControlServiceToUnset,false)
-				
-				ad.unsetMultipleProperty(tempControlService.~operation,refoperation)
-				tempControlService.name ?= ad.unsetSingleProperty(refname, tempControlService.name)
-				
-				//Instantiating the reverse adaptation
-				if reverse then
-					var ~set : SetruntimetypeControlService 
-					if self.reverse == void then
-						~set := SetruntimetypeControlService.new
-						~set.reverse := self
-						self.reverse := ~set
-					else
-						~set ?= self.reverse
-					end
-					~set.ControlServiceToSet := self.ControlServiceToUnset
-					~set.refoperation.clear
-					~set.refoperation.addAll(self.refoperation)
-					~set.refname := self.refname
-				end
-			end
-		}
 		 
 		/*
 		 * Adaptations dedicated to the manipulation
@@ -2555,127 +1786,7 @@ package smartadapters
 			end
 		}
 		 
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of art::type::Attribute
-		 */
-		
-		/**
-		 * Creates a new art::type::Attribute from scratch
-		 * This new element is handled by refering to newAttribute
-		 */
-		class CreateruntimetypeAttribute inherits createAdaptation
-		{
-			attribute newAttribute : pattern::art::type::Attribute
-					
-			method check(): Boolean is do
-				result := newAttribute != void
-			end
-					
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(newAttribute, void, isUnique)					
-			end
-		}
-
-		/**
-		 * Creates a new art::type::Attribute from an existing one
-		 * This cloned element is handled by refering to clonedAttribute
-		 */
-		class CloneruntimetypeAttribute inherits cloneAdaptation
-		{
-			reference AttributeToClone : pattern::art::type::Attribute
-			attribute clonedAttribute : pattern::art::type::Attribute
-			
-			method check(): Boolean is do
-				result := AttributeToClone != void
-			end
-			
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(clonedAttribute, AttributeToClone, isUnique)
-			end					
-		}
-
-		/**
-		 * Sets any property of art::type::Attribute
-		 * All the references expect AttributeToSet may be void
-		 */
-			 
-		class SetruntimetypeAttribute inherits setAdaptation
-		{
-			reference AttributeToSet : pattern::art::type::Attribute
-			reference reftype : pattern::art::DataType
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := AttributeToSet != void
-			end
-			
-			method execute(reverse : Boolean): Void 
-			is do
-				var ad : Adapter init getAdapter
-				var tempAttribute : art::type::Attribute
-				tempAttribute ?= ad.getRealObject(AttributeToSet,false)
-				
-				tempAttribute.type ?= ad.setSingleProperty(reftype, tempAttribute.type)
-				tempAttribute.name ?= ad.setSingleProperty(refname, tempAttribute.name)
-				
-				//Instantiating the reverse adaptation
-				if(reverse) then		
-					var unset : UnsetruntimetypeAttribute 
-					if self.reverse == void then
-						unset := UnsetruntimetypeAttribute.new
-						unset.reverse := self
-						self.reverse := unset
-					else
-						unset ?= self.reverse
-					end		
-					unset.AttributeToUnset := self.AttributeToSet
-					unset.reftype := self.reftype
-					unset.refname := self.refname
-				end	
-			end			
-		}
-		
-		/**
-		 * Unsets any property of art::type::Attribute
-		 * All the references expect AttributeToUnset may be void 
-		 */		
-		class UnsetruntimetypeAttribute inherits unsetAdaptation
-		{
-			reference AttributeToUnset : pattern::art::type::Attribute
-			reference reftype : pattern::art::DataType
-			reference refname : pattern::art::String
-			
-			method check(): Boolean is do
-				result := AttributeToUnset != void
-			end
-			
-			method execute(reverse : Boolean): Void
-			is do
-				var ad : Adapter init getAdapter
-				var tempAttribute : art::type::Attribute
-				tempAttribute ?= ad.getRealObject(AttributeToUnset,false)
-				
-				tempAttribute.type ?= ad.unsetSingleProperty(reftype, tempAttribute.type)
-				tempAttribute.name ?= ad.unsetSingleProperty(refname, tempAttribute.name)
-				
-				//Instantiating the reverse adaptation
-				if reverse then
-					var ~set : SetruntimetypeAttribute 
-					if self.reverse == void then
-						~set := SetruntimetypeAttribute.new
-						~set.reverse := self
-						self.reverse := ~set
-					else
-						~set ?= self.reverse
-					end
-					~set.AttributeToSet := self.AttributeToUnset
-					~set.reftype := self.reftype
-					~set.refname := self.refname
-				end
-			end
-		}
-		 
+	 
 		/*
 		 * Adaptations dedicated to the manipulation
 		 * of art::type::PrimitivePort
@@ -2725,7 +1836,7 @@ package smartadapters
 		{
 			reference PrimitivePortToSet : pattern::art::type::PrimitivePort
 			reference refservice : pattern::art::type::Service
-			reference refrole : pattern::art::type::PortRole
+			reference refrole : pattern::art::String
 			reference refname : pattern::art::String
 			
 			method check(): Boolean is do
@@ -2768,7 +1879,7 @@ package smartadapters
 		{
 			reference PrimitivePortToUnset : pattern::art::type::PrimitivePort
 			reference refservice : pattern::art::type::Service
-			reference refrole : pattern::art::type::PortRole
+			reference refrole : pattern::art::String
 			reference refname : pattern::art::String
 			
 			method check(): Boolean is do

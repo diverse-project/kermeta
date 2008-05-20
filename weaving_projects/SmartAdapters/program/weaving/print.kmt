@@ -1,8 +1,8 @@
-/* $Id: print.kmt,v 1.1 2008-02-21 10:11:27 bmorin Exp $
+/* $Id: print.kmt,v 1.2 2008-05-20 14:30:02 bmorin Exp $
  * Creation date: February 21, 2008
  * License:
- * Copyright:
- * Authors:
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
  */
 
 package kermeta::language::structure;
@@ -11,24 +11,69 @@ package kermeta::language::structure;
 require kermeta
 using kermeta::standard
 
+
+
 aspect class Object
 {
 	operation printObject() : String is
 	do
-		var coll : Collection<kermeta::language::structure::Object>
-		var print : String init self.toString + "\n"
-		self.getMetaClass().ownedAttribute.each{p |
-			print := print + "\t"
-			if p.upper == 1 then
-				print := print + p.name + ": " + self.get(p).toString + "\n"
-			else
-				coll ?= self.get(p)
-				coll.each{b | 
-					print := print + b.toString
-				}
-				print := print + "\n"
-			end
+		var print : String init self.toString+"\n"
+		//printing owned attributes
+		self.getMetaClass.ownedAttribute.each{p |
+			print := print + p.printProperty(self)
+		}
+		//printing inherited attributes
+		self.getMetaClass.allSuperClasses.each{s |
+			//print := print + s.name + "\n"
+			s.ownedAttribute.each{p |
+ 					print := print + p.printProperty(self)
+ 			}
 		}
 		result := print
-	end	
+	end
+}
+
+aspect class Class
+{
+	operation allSuperClasses() : Set<Class> is
+	do
+		var allSuperClasses : Set<Class> init Set<Class>.new
+		var superClasses : Set<Class> init Set<Class>.new
+		superClasses.addAll(self.superClass) 
+		var temp : Set<Class> init Set<Class>.new
+		from  not superClasses.isEmpty
+		until superClasses.isEmpty
+		loop
+			allSuperClasses.addAll(superClasses)
+			temp.clear
+			//var temp : Set<Class> init Set<Class>.new
+ 			superClasses.each{s |
+ 				temp.addAll(s.superClass)
+ 			}
+ 			superClasses.clear
+ 			//superClasses := Set<Class>.new
+ 			superClasses.addAll(temp)
+		end
+		result := allSuperClasses
+	end
+}
+
+aspect class Property
+{
+	operation printProperty(o : Object) : String is
+	do
+		var coll : Collection<kermeta::language::structure::Object>
+		var print : String init ""
+		print := print + "\t" + name + ": "
+		if upper == 1 then
+			print := print + o.get(self).toString
+		else
+			coll ?= o.get(self)
+			coll.each{b | 
+				print := print + b.toString + " "
+			}
+		end
+		print := print + "\n"
+		result := print
+	end
 }

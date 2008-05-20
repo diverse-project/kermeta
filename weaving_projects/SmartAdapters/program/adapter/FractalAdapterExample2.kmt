@@ -1,4 +1,4 @@
-/* $Id: FractalAdapterExample1.kmt,v 1.2 2008-05-20 14:30:48 bmorin Exp $
+/* $Id: FractalAdapterExample2.kmt,v 1.1 2008-05-20 14:30:48 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -19,6 +19,6 @@ aspect class PlatformAdapter
 {
 	operation run() : Void is
 	do
-		extern org::kermeta::smartadapters::runtime::fractal::Example1.run(self)
+		extern org::kermeta::smartadapters::runtime::fractal::Example2.run(self)
 	end
 }

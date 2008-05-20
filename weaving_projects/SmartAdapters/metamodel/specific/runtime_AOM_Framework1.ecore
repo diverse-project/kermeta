@@ -149,97 +149,6 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="SetruntimeModelElement" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Sets any property of runtime::ModelElement&#xA;   * All the references expect ModelElementToSet may be void&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ModelElementToSet.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempModelElement : runtime::ModelElement&#xA;&#x9;tempModelElement ?= ad.getRealObject(ModelElementToSet, false)&#xA;&#x9;tempModelElement.name ?= ad.setSingleProperty(refname, tempModelElement.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var unset : org::smartadapters::core::adaptations::UnsetruntimeModelElement&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;unset := org::smartadapters::core::adaptations::UnsetruntimeModelElement.new&#xA;&#x9;&#x9;&#x9;unset.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := unset&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;unset ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;unset.ModelElementToUnset := self.ModelElementToSet&#xA;&#x9;&#x9;unset.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ModelElementToSet"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/ModelElement"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimeModelElement" eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Unsets any property of runtime::ModelElement&#xA;   * All the references expect ModelElementToUnset may be void &#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ModelElementToUnset.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempModelElement : runtime::ModelElement&#xA;&#x9;tempModelElement ?= ad.getRealObject(ModelElementToUnset, false)&#xA;&#x9;tempModelElement.name ?= ad.unsetSingleProperty(refname, tempModelElement.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var ~set : org::smartadapters::core::adaptations::SetruntimeModelElement&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;~set := org::smartadapters::core::adaptations::SetruntimeModelElement.new&#xA;&#x9;&#x9;&#x9;~set.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := ~set&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;~set ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;~set.ModelElementToSet := self.ModelElementToUnset&#xA;&#x9;&#x9;~set.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ModelElementToUnset"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/ModelElement"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CreateruntimeSystem" eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::System from scratch&#xA;   * This new element is handled by refering to newSystem&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := newSystem.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newSystem, void, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="newSystem" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/System"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CloneruntimeSystem" eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::System from an existing one&#xA;   * This cloned element is handled by refering to clonedSystem&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := SystemToClone.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedSystem, SystemToClone, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="SystemToClone" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/System"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedSystem" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/System"
-              containment="true"/>
-        </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="SetruntimeSystem" eSuperTypes="#//smartadapters/core/setAdaptation">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA;   * Sets any property of runtime::System&#xA;   * All the references expect SystemToSet may be void&#xA;   */"/>
@@ -302,149 +211,6 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CreateruntimeDataType" eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::DataType from scratch&#xA;   * This new element is handled by refering to newDataType&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := newDataType.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newDataType, void, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="newDataType" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CloneruntimeDataType" eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::DataType from an existing one&#xA;   * This cloned element is handled by refering to clonedDataType&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := DataTypeToClone.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedDataType, DataTypeToClone, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="DataTypeToClone"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedDataType" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="SetruntimeDataType" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Sets any property of runtime::DataType&#xA;   * All the references expect DataTypeToSet may be void&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := DataTypeToSet.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempDataType : runtime::DataType&#xA;&#x9;tempDataType ?= ad.getRealObject(DataTypeToSet, false)&#xA;&#x9;tempDataType.name ?= ad.setSingleProperty(refname, tempDataType.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var unset : org::smartadapters::core::adaptations::UnsetruntimeDataType&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;unset := org::smartadapters::core::adaptations::UnsetruntimeDataType.new&#xA;&#x9;&#x9;&#x9;unset.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := unset&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;unset ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;unset.DataTypeToUnset := self.DataTypeToSet&#xA;&#x9;&#x9;unset.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="DataTypeToSet" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimeDataType" eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Unsets any property of runtime::DataType&#xA;   * All the references expect DataTypeToUnset may be void &#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := DataTypeToUnset.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempDataType : runtime::DataType&#xA;&#x9;tempDataType ?= ad.getRealObject(DataTypeToUnset, false)&#xA;&#x9;tempDataType.name ?= ad.unsetSingleProperty(refname, tempDataType.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var ~set : org::smartadapters::core::adaptations::SetruntimeDataType&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;~set := org::smartadapters::core::adaptations::SetruntimeDataType.new&#xA;&#x9;&#x9;&#x9;~set.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := ~set&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;~set ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;~set.DataTypeToSet := self.DataTypeToUnset&#xA;&#x9;&#x9;~set.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="DataTypeToUnset"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="SetruntimeTypedElement" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Sets any property of runtime::TypedElement&#xA;   * All the references expect TypedElementToSet may be void&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := TypedElementToSet.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempTypedElement : runtime::TypedElement&#xA;&#x9;tempTypedElement ?= ad.getRealObject(TypedElementToSet, false)&#xA;&#x9;tempTypedElement.type ?= ad.setSingleProperty(reftype, tempTypedElement.type)&#xA;&#x9;tempTypedElement.name ?= ad.setSingleProperty(refname, tempTypedElement.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var unset : org::smartadapters::core::adaptations::UnsetruntimeTypedElement&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;unset := org::smartadapters::core::adaptations::UnsetruntimeTypedElement.new&#xA;&#x9;&#x9;&#x9;unset.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := unset&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;unset ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;unset.TypedElementToUnset := self.TypedElementToSet&#xA;&#x9;&#x9;unset.reftype := self.reftype&#xA;&#x9;&#x9;unset.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="TypedElementToSet"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/TypedElement"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimeTypedElement" eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Unsets any property of runtime::TypedElement&#xA;   * All the references expect TypedElementToUnset may be void &#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := TypedElementToUnset.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempTypedElement : runtime::TypedElement&#xA;&#x9;tempTypedElement ?= ad.getRealObject(TypedElementToUnset, false)&#xA;&#x9;tempTypedElement.type ?= ad.unsetSingleProperty(reftype, tempTypedElement.type)&#xA;&#x9;tempTypedElement.name ?= ad.unsetSingleProperty(refname, tempTypedElement.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var ~set : org::smartadapters::core::adaptations::SetruntimeTypedElement&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;~set := org::smartadapters::core::adaptations::SetruntimeTypedElement.new&#xA;&#x9;&#x9;&#x9;~set.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := ~set&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;~set ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;~set.TypedElementToSet := self.TypedElementToUnset&#xA;&#x9;&#x9;~set.reftype := self.reftype&#xA;&#x9;&#x9;~set.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="TypedElementToUnset"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/TypedElement"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="SetruntimeinstanceComponentInstance"
             eSuperTypes="#//smartadapters/core/setAdaptation">
           <eAnnotations source="kermeta">
@@ -466,7 +232,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentInstanceToSet"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EEnum ../domain/metamodel@runtimePattern.ecore#//art/instance/InstanceState">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -515,7 +281,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentInstanceToUnset"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EEnum ../domain/metamodel@runtimePattern.ecore#//art/instance/InstanceState">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -610,7 +376,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitiveInstanceToSet"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/PrimitiveInstance"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EEnum ../domain/metamodel@runtimePattern.ecore#//art/instance/InstanceState">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -659,7 +425,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitiveInstanceToUnset"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/PrimitiveInstance"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EEnum ../domain/metamodel@runtimePattern.ecore#//art/instance/InstanceState">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -758,7 +524,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="refdelegation" upperBound="-1"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/DelegationBinding"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EEnum ../domain/metamodel@runtimePattern.ecore#//art/instance/InstanceState">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -811,7 +577,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="refdelegation" upperBound="-1"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/DelegationBinding"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EEnum ../domain/metamodel@runtimePattern.ecore#//art/instance/InstanceState">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -834,106 +600,6 @@
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CreateruntimeinstanceValuedAttribute"
-            eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::instance::ValuedAttribute from scratch&#xA;   * This new element is handled by refering to newValuedAttribute&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := newValuedAttribute.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newValuedAttribute, void, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="newValuedAttribute"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CloneruntimeinstanceValuedAttribute"
-            eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::instance::ValuedAttribute from an existing one&#xA;   * This cloned element is handled by refering to clonedValuedAttribute&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ValuedAttributeToClone.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedValuedAttribute, ValuedAttributeToClone, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ValuedAttributeToClone"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedValuedAttribute"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="SetruntimeinstanceValuedAttribute"
-            eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Sets any property of runtime::instance::ValuedAttribute&#xA;   * All the references expect ValuedAttributeToSet may be void&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ValuedAttributeToSet.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempValuedAttribute : runtime::instance::ValuedAttribute&#xA;&#x9;tempValuedAttribute ?= ad.getRealObject(ValuedAttributeToSet, false)&#xA;&#x9;tempValuedAttribute.~attribute ?= ad.setSingleProperty(refattribute, tempValuedAttribute.~attribute)&#xA;&#x9;tempValuedAttribute.~value ?= ad.setSingleProperty(refvalue, tempValuedAttribute.~value)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var unset : org::smartadapters::core::adaptations::UnsetruntimeinstanceValuedAttribute&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;unset := org::smartadapters::core::adaptations::UnsetruntimeinstanceValuedAttribute.new&#xA;&#x9;&#x9;&#x9;unset.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := unset&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;unset ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;unset.ValuedAttributeToUnset := self.ValuedAttributeToSet&#xA;&#x9;&#x9;unset.refattribute := self.refattribute&#xA;&#x9;&#x9;unset.refvalue := self.refvalue&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ValuedAttributeToSet"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refattribute" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Attribute"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refvalue" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimeinstanceValuedAttribute"
-            eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Unsets any property of runtime::instance::ValuedAttribute&#xA;   * All the references expect ValuedAttributeToUnset may be void &#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ValuedAttributeToUnset.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempValuedAttribute : runtime::instance::ValuedAttribute&#xA;&#x9;tempValuedAttribute ?= ad.getRealObject(ValuedAttributeToUnset, false)&#xA;&#x9;tempValuedAttribute.~attribute ?= ad.unsetSingleProperty(refattribute, tempValuedAttribute.~attribute)&#xA;&#x9;tempValuedAttribute.~value ?= ad.unsetSingleProperty(refvalue, tempValuedAttribute.~value)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var ~set : org::smartadapters::core::adaptations::SetruntimeinstanceValuedAttribute&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;~set := org::smartadapters::core::adaptations::SetruntimeinstanceValuedAttribute.new&#xA;&#x9;&#x9;&#x9;~set.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := ~set&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;~set ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;~set.ValuedAttributeToSet := self.ValuedAttributeToUnset&#xA;&#x9;&#x9;~set.refattribute := self.refattribute&#xA;&#x9;&#x9;~set.refvalue := self.refvalue&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ValuedAttributeToUnset"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refattribute" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Attribute"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refvalue" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -1506,200 +1172,6 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CreateruntimetypeOperation" eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::type::Operation from scratch&#xA;   * This new element is handled by refering to newOperation&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := newOperation.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newOperation, void, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="newOperation" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Operation"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CloneruntimetypeOperation" eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::type::Operation from an existing one&#xA;   * This cloned element is handled by refering to clonedOperation&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := OperationToClone.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedOperation, OperationToClone, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="OperationToClone"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Operation"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedOperation"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Operation"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="SetruntimetypeOperation" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Sets any property of runtime::type::Operation&#xA;   * All the references expect OperationToSet may be void&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := OperationToSet.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempOperation : runtime::type::Operation&#xA;&#x9;tempOperation ?= ad.getRealObject(OperationToSet, false)&#xA;&#x9;ad.setMultipleProperty(tempOperation.input, refinput)&#xA;&#x9;ad.setMultipleProperty(tempOperation.output, refoutput)&#xA;&#x9;tempOperation.name ?= ad.setSingleProperty(refname, tempOperation.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var unset : org::smartadapters::core::adaptations::UnsetruntimetypeOperation&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;unset := org::smartadapters::core::adaptations::UnsetruntimetypeOperation.new&#xA;&#x9;&#x9;&#x9;unset.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := unset&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;unset ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;unset.OperationToUnset := self.OperationToSet&#xA;&#x9;&#x9;unset.refinput.clear&#xA;&#x9;&#x9;unset.refinput.addAll(self.refinput)&#xA;&#x9;&#x9;unset.refoutput.clear&#xA;&#x9;&#x9;unset.refoutput.addAll(self.refoutput)&#xA;&#x9;&#x9;unset.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="OperationToSet" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Operation"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refinput" upperBound="-1"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Parameter"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refoutput" upperBound="-1"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Parameter"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimetypeOperation" eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Unsets any property of runtime::type::Operation&#xA;   * All the references expect OperationToUnset may be void &#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := OperationToUnset.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempOperation : runtime::type::Operation&#xA;&#x9;tempOperation ?= ad.getRealObject(OperationToUnset, false)&#xA;&#x9;ad.unsetMultipleProperty(tempOperation.input, refinput)&#xA;&#x9;ad.unsetMultipleProperty(tempOperation.output, refoutput)&#xA;&#x9;tempOperation.name ?= ad.unsetSingleProperty(refname, tempOperation.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var ~set : org::smartadapters::core::adaptations::SetruntimetypeOperation&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;~set := org::smartadapters::core::adaptations::SetruntimetypeOperation.new&#xA;&#x9;&#x9;&#x9;~set.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := ~set&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;~set ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;~set.OperationToSet := self.OperationToUnset&#xA;&#x9;&#x9;~set.refinput.clear&#xA;&#x9;&#x9;~set.refinput.addAll(self.refinput)&#xA;&#x9;&#x9;~set.refoutput.clear&#xA;&#x9;&#x9;~set.refoutput.addAll(self.refoutput)&#xA;&#x9;&#x9;~set.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="OperationToUnset"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Operation"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refinput" upperBound="-1"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Parameter"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refoutput" upperBound="-1"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Parameter"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CreateruntimetypeParameter" eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::type::Parameter from scratch&#xA;   * This new element is handled by refering to newParameter&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := newParameter.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newParameter, void, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="newParameter" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Parameter"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CloneruntimetypeParameter" eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::type::Parameter from an existing one&#xA;   * This cloned element is handled by refering to clonedParameter&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ParameterToClone.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedParameter, ParameterToClone, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ParameterToClone"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Parameter"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedParameter"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Parameter"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="SetruntimetypeParameter" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Sets any property of runtime::type::Parameter&#xA;   * All the references expect ParameterToSet may be void&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ParameterToSet.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempParameter : runtime::type::Parameter&#xA;&#x9;tempParameter ?= ad.getRealObject(ParameterToSet, false)&#xA;&#x9;tempParameter.type ?= ad.setSingleProperty(reftype, tempParameter.type)&#xA;&#x9;tempParameter.name ?= ad.setSingleProperty(refname, tempParameter.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var unset : org::smartadapters::core::adaptations::UnsetruntimetypeParameter&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;unset := org::smartadapters::core::adaptations::UnsetruntimetypeParameter.new&#xA;&#x9;&#x9;&#x9;unset.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := unset&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;unset ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;unset.ParameterToUnset := self.ParameterToSet&#xA;&#x9;&#x9;unset.reftype := self.reftype&#xA;&#x9;&#x9;unset.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ParameterToSet" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Parameter"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimetypeParameter" eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Unsets any property of runtime::type::Parameter&#xA;   * All the references expect ParameterToUnset may be void &#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ParameterToUnset.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempParameter : runtime::type::Parameter&#xA;&#x9;tempParameter ?= ad.getRealObject(ParameterToUnset, false)&#xA;&#x9;tempParameter.type ?= ad.unsetSingleProperty(reftype, tempParameter.type)&#xA;&#x9;tempParameter.name ?= ad.unsetSingleProperty(refname, tempParameter.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var ~set : org::smartadapters::core::adaptations::SetruntimetypeParameter&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;~set := org::smartadapters::core::adaptations::SetruntimetypeParameter.new&#xA;&#x9;&#x9;&#x9;~set.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := ~set&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;~set ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;~set.ParameterToSet := self.ParameterToUnset&#xA;&#x9;&#x9;~set.reftype := self.reftype&#xA;&#x9;&#x9;~set.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ParameterToUnset"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Parameter"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="CreateruntimetypeFunctionalService"
             eSuperTypes="#//smartadapters/core/createAdaptation">
           <eAnnotations source="kermeta">
@@ -1794,108 +1266,6 @@
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="FunctionalServiceToUnset"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/FunctionalService"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refoperation" upperBound="-1"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Operation"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CreateruntimetypeControlService"
-            eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::type::ControlService from scratch&#xA;   * This new element is handled by refering to newControlService&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := newControlService.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newControlService, void, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="newControlService"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ControlService"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CloneruntimetypeControlService"
-            eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::type::ControlService from an existing one&#xA;   * This cloned element is handled by refering to clonedControlService&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ControlServiceToClone.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedControlService, ControlServiceToClone, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ControlServiceToClone"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ControlService"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedControlService"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ControlService"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="SetruntimetypeControlService"
-            eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Sets any property of runtime::type::ControlService&#xA;   * All the references expect ControlServiceToSet may be void&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ControlServiceToSet.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempControlService : runtime::type::ControlService&#xA;&#x9;tempControlService ?= ad.getRealObject(ControlServiceToSet, false)&#xA;&#x9;ad.setMultipleProperty(tempControlService.~operation, refoperation)&#xA;&#x9;tempControlService.name ?= ad.setSingleProperty(refname, tempControlService.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var unset : org::smartadapters::core::adaptations::UnsetruntimetypeControlService&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;unset := org::smartadapters::core::adaptations::UnsetruntimetypeControlService.new&#xA;&#x9;&#x9;&#x9;unset.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := unset&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;unset ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;unset.ControlServiceToUnset := self.ControlServiceToSet&#xA;&#x9;&#x9;unset.refoperation.clear&#xA;&#x9;&#x9;unset.refoperation.addAll(self.refoperation)&#xA;&#x9;&#x9;unset.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ControlServiceToSet"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ControlService"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refoperation" upperBound="-1"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Operation"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimetypeControlService"
-            eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Unsets any property of runtime::type::ControlService&#xA;   * All the references expect ControlServiceToUnset may be void &#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := ControlServiceToUnset.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempControlService : runtime::type::ControlService&#xA;&#x9;tempControlService ?= ad.getRealObject(ControlServiceToUnset, false)&#xA;&#x9;ad.unsetMultipleProperty(tempControlService.~operation, refoperation)&#xA;&#x9;tempControlService.name ?= ad.unsetSingleProperty(refname, tempControlService.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var ~set : org::smartadapters::core::adaptations::SetruntimetypeControlService&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;~set := org::smartadapters::core::adaptations::SetruntimetypeControlService.new&#xA;&#x9;&#x9;&#x9;~set.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := ~set&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;~set ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;~set.ControlServiceToSet := self.ControlServiceToUnset&#xA;&#x9;&#x9;~set.refoperation.clear&#xA;&#x9;&#x9;~set.refoperation.addAll(self.refoperation)&#xA;&#x9;&#x9;~set.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ControlServiceToUnset"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/ControlService"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refoperation" upperBound="-1"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Operation"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
@@ -2007,100 +1377,6 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CreateruntimetypeAttribute" eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::type::Attribute from scratch&#xA;   * This new element is handled by refering to newAttribute&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := newAttribute.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newAttribute, void, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="newAttribute" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Attribute"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CloneruntimetypeAttribute" eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::type::Attribute from an existing one&#xA;   * This cloned element is handled by refering to clonedAttribute&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := AttributeToClone.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedAttribute, AttributeToClone, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="AttributeToClone"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Attribute"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedAttribute"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Attribute"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="SetruntimetypeAttribute" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Sets any property of runtime::type::Attribute&#xA;   * All the references expect AttributeToSet may be void&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := AttributeToSet.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempAttribute : runtime::type::Attribute&#xA;&#x9;tempAttribute ?= ad.getRealObject(AttributeToSet, false)&#xA;&#x9;tempAttribute.type ?= ad.setSingleProperty(reftype, tempAttribute.type)&#xA;&#x9;tempAttribute.name ?= ad.setSingleProperty(refname, tempAttribute.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var unset : org::smartadapters::core::adaptations::UnsetruntimetypeAttribute&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;unset := org::smartadapters::core::adaptations::UnsetruntimetypeAttribute.new&#xA;&#x9;&#x9;&#x9;unset.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := unset&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;unset ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;unset.AttributeToUnset := self.AttributeToSet&#xA;&#x9;&#x9;unset.reftype := self.reftype&#xA;&#x9;&#x9;unset.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="AttributeToSet" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Attribute"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimetypeAttribute" eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Unsets any property of runtime::type::Attribute&#xA;   * All the references expect AttributeToUnset may be void &#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := AttributeToUnset.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempAttribute : runtime::type::Attribute&#xA;&#x9;tempAttribute ?= ad.getRealObject(AttributeToUnset, false)&#xA;&#x9;tempAttribute.type ?= ad.unsetSingleProperty(reftype, tempAttribute.type)&#xA;&#x9;tempAttribute.name ?= ad.unsetSingleProperty(refname, tempAttribute.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var ~set : org::smartadapters::core::adaptations::SetruntimetypeAttribute&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;~set := org::smartadapters::core::adaptations::SetruntimetypeAttribute.new&#xA;&#x9;&#x9;&#x9;~set.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := ~set&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;~set ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;~set.AttributeToSet := self.AttributeToUnset&#xA;&#x9;&#x9;~set.reftype := self.reftype&#xA;&#x9;&#x9;~set.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="AttributeToUnset"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Attribute"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/DataType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-        </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="CreateruntimetypePrimitivePort"
             eSuperTypes="#//smartadapters/core/createAdaptation">
           <eAnnotations source="kermeta">
@@ -2167,16 +1443,12 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitivePortToSet"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refservice" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Service"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refrole" eType="ecore:EEnum ../domain/metamodel@runtimePattern.ecore#//art/type/PortRole">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refrole" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimetypePrimitivePort"
             eSuperTypes="#//smartadapters/core/unsetAdaptation">
@@ -2199,16 +1471,12 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitivePortToUnset"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refservice" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Service"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refrole" eType="ecore:EEnum ../domain/metamodel@runtimePattern.ecore#//art/type/PortRole">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refrole" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String"/>
         </eClassifiers>
       </eSubpackages>
     </eSubpackages>

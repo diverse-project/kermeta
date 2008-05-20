@@ -1,12 +1,9 @@
-/* $Id: converter.kmt,v 1.11 2008-03-04 14:07:59 bmorin Exp $
+/* $Id: converter.kmt,v 1.12 2008-05-20 14:30:02 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
- * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
- * Authors: Brice MORIN
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
  */
-//@mainClass "root_package::Main"
-//@mainOperation "main"
-
 
 package org::smartadapters::utils;
 
@@ -22,9 +19,8 @@ It can be significantly improved...
 class Converter
 {
 	//Mapping MM'->MM
-	attribute convertTable : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
-	reference converted : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>
-	//reference converting : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>	
+	reference convertTable : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
+	reference converted : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>	
 	
 	/**
 	initializes the converter (~constructor)
@@ -33,11 +29,9 @@ class Converter
 	operation initConverter(convert:Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>) is do	
 		convertTable := convert
 		converted := Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>.new
-		//converting := Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>.new
 	end
 	
 	operation deleteConverted(obj:kermeta::language::structure::Object) : Void is do
-		//converting.remove(obj)
 		converted.remove(obj)
 	end	
 
@@ -57,22 +51,14 @@ class Converter
 	post notVoid is result != void
 	post conformance is result.getMetaClass == convertTable.getValue(obj.getMetaClass)
 	is do
-		//stdio.writeln("?>getConvertedObject: "+obj.toString)
 		var newMeta : kermeta::language::structure::Class 
 		newMeta := convertTable.getValue(obj.getMetaClass)
-		if(newMeta!=void) then
+		if(newMeta != void) then
 			var o : kermeta::language::structure::Object init newMeta.new
-			if(converted.getValue(obj)==void) then
-				//if(converting.getValue(obj)==void) then
-					//converting.put(obj,o)
+			if(converted.getValue(obj) == void) then
 					converted.put(obj,o)
 					convert(obj,o)
-				    //converted.put(obj,o)
-				    //converting.remove(obj)
 				    result:=o
-				/*else
-					result := converting.getValue(obj)	
-				end*/
 			else
 				result := converted.getValue(obj) 
 			end
@@ -81,44 +67,72 @@ class Converter
 		end
 	end
 		
+	operation convert2(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object) is
+	do
+		var c : Class init conv.getMetaClass
+	
+		c.ownedAttribute.each{p |
+			//stdio.writeln(p.name)
+			processProperty(obj,conv,p)
+		}
+	
+		var superClasses : Set<Class> init c.superClass
+		from  not superClasses.isEmpty
+		until superClasses.isEmpty
+		loop
+			var temp : Set<Class> init Set<Class>.new
+ 			superClasses.each{s |
+ 					s.ownedAttribute.each{p | 
+ 					//stdio.writeln(p.name)
+ 					processProperty(obj,conv,p)
+ 				}
+ 				temp.addAll(s.superClass)
+ 			}
+ 			superClasses.clear
+ 			superClasses.addAll(temp)
+		end
+	end
+
+	operation processProperty(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object, a : Property) is
+	do
+		if(obj.get(a) != void and not(a.name.equals("tag") or a.name.equals("ownedTag"))) then
+			var ob : Object init obj.get(a)
+			//single property (upper bound==1)
+			if(a.upper == 1 and ob != void) then
+				var temp : Object
+				temp := getConverted(ob)
+				if(temp != void) then
+					var e : EnumerationLiteral
+					e ?= temp
+					if e == void then					
+						conv.~set(a,temp)
+					else
+						stdio.writeln("not converted due to a bug in Kermeta!!!"+conv.toString+"."+a.name+" := "+temp.toString)
+						stdio.writeln("testEnum::TestEnum.testReflect2")
+					end
+				end
+			//collection property -> iteration
+			else
+				var list:Collection<kermeta::language::structure::Object>
+				var convertedList:Collection<kermeta::language::structure::Object>
+				list?=ob
+				if(list!=void and list.size>0) then
+					convertedList ?= conv.get(a)
+					convertedList.clear
+					list.each{o |
+							var tmp:Object init getConverted(o)
+							convertedList.add(tmp)
+					}						
+				end
+			end
+		end	
+	end
+		
 	/**
 	copies obj (MM') into conv (MM) thanks to the convert Hashtable
 	*/	
-	operation convert(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object) : Void is do		
-		//stdio.writeln("converting "+obj.toString+" into "+conv.toString)
-		var classDef:kermeta::language::structure::ClassDefinition
-		classDef?=conv.getMetaClass.typeDefinition
-		
-		conv.getMetaClass.ownedAttribute.each{a |		
-			if(obj.get(a)!=void and not(a.name.equals("tag") or a.name.equals("ownedTag"))) then
-				var  cl : kermeta::language::structure::Class init a.getMetaClass.typeDefinition.getMetaClass
-				var ob : Object init obj.get(a)
-				//stdio.writeln("?>ob: "+ob.toString)
-				//single property (upper bound==1)
-				if(a.upper==1 and ob!=void) then
-					//stdio.writeln("Single property")
-					var temp:Object
-					temp:= getConverted(ob)
-					if(temp!=void) then					
-						conv.~set(a,temp)
-					end
-				//collection property -> iteration
-				else
-					//stdio.writeln("Collection property")
-					var list:Collection<kermeta::language::structure::Object>
-					var convertedList:Collection<kermeta::language::structure::Object>
-					list?=ob
-					if(list!=void and list.size>0) then
-						convertedList ?= conv.get(a)
-						convertedList.clear
-						list.each{o |
-								var tmp:Object init getConverted(o)
-								convertedList.add(tmp)
-						}						
-					end
-				end
-			end
-			}
-		end
-	//end
+	operation convert(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object) : Void is do
+		//stdio.writeln("convert "+obj.toString+" "+conv.toString)		
+		convert2(obj,conv)
+	end
 }
