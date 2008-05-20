@@ -21,34 +21,24 @@
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.size(self)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns the size of this Hashtable&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
         </eOperations>
         <eOperations name="keyIterator">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keysIterator(self)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns an iterator over the Keys of this Hashtable&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
-          <eGenericType>
-            <eTypeArguments eTypeParameter="/1/utils/Hashtable/K"/>
-            <eClassifier xsi:type="ecore:EClass" href="../standard/collections.ecore#/1/standard/Iterator"/>
-          </eGenericType>
         </eOperations>
         <eOperations name="valueIterator">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.valueIterator(self)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns an iterator over the values of this Hashtable&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
-          <eGenericType>
-            <eTypeArguments eTypeParameter="/1/utils/Hashtable/V"/>
-            <eClassifier xsi:type="ecore:EClass" href="../standard/collections.ecore#/1/standard/Iterator"/>
-          </eGenericType>
         </eOperations>
         <eOperations name="getValue">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self, key)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns the value for key 'key' if it exists, otherwise returns Void&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
-          <eGenericType eTypeParameter="/1/utils/Hashtable/V"/>
           <eParameters name="key">
             <eGenericType eTypeParameter="/1/utils/Hashtable/K"/>
           </eParameters>
@@ -85,27 +75,18 @@
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;K>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;K> init keyIterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;result.add(it.next)&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a set containing the hash keys of this Hashtable&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
-          <eGenericType>
-            <eTypeArguments eTypeParameter="/1/utils/Hashtable/K"/>
-            <eClassifier xsi:type="ecore:EClass" href="../standard/collections.ecore#/1/standard/Set"/>
-          </eGenericType>
         </eOperations>
         <eOperations name="values">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Bag&lt;V>.new&#xA;&#x9;keys.each{k | do&#xA;&#x9;&#x9;&#x9;result.add(self.getValue(k))&#xA;&#x9;&#x9;end}&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a collection containing the elements of this Hashtable&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
-          <eGenericType>
-            <eTypeArguments eTypeParameter="/1/utils/Hashtable/V"/>
-            <eClassifier xsi:type="ecore:EClass" href="../standard/collections.ecore#/1/standard/Collection"/>
-          </eGenericType>
         </eOperations>
         <eOperations name="containsKey">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := getValue(key).isNotEqual(void)&#xA;end"/>
             <details key="documentation" value="/**&#x9;&#xD;&#xA;&#x9; * Returns a Boolean stating whether a key is present or not in this Hashtable&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="key">
             <eGenericType eTypeParameter="/1/utils/Hashtable/K"/>
           </eParameters>
@@ -116,14 +97,13 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
     <references href="../kermeta_java.ecore#/2"/>
@@ -137,13 +117,15 @@
     <references href="../kunit/assert.ecore#/2"/>
     <references href="utils.ecore#/0"/>
     <references href="utils.ecore#/1"/>
+    <references href="utils.ecore#/2"/>
     <references href="StringBuffer.ecore#/0"/>
     <references href="StringBuffer.ecore#/1"/>
+    <references href="StringBuffer.ecore#/2"/>
     <references href="stack.ecore#/0"/>
     <references href="stack.ecore#/1"/>
-    <references href="stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
@@ -156,8 +138,8 @@
     <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

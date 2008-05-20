@@ -224,9 +224,7 @@
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Boolean/@ownedTags.0 //@packages.0/standard/Boolean/@ownedTags.1" name="Boolean" superType="//@packages.0/standard/Boolean/@containedType.0">
         <ownedTags value="/**&#xD;&#xA; * The Boolean type&#xD;&#xA; */" object="//@packages.0/standard/Boolean"/>
         <ownedTags name="EMF_instanceClassName" value="boolean" object="//@packages.0/standard/Boolean"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../kermeta_java.km#//@packages.0/language/structure/PrimitiveType"/>
-        </containedType>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/ValueType"/>
         <ownedOperation tag="//@packages.0/standard/Boolean/equals/@ownedTags.0" name="equals" type="//@packages.0/standard/Boolean/equals/@containedType.0" isOrdered="true" upper="1">
           <ownedTags value="/**&#xD;&#xA;&#x9; * Returns true if &lt;code>other&lt;/code> type is Boolean&#xD;&#xA;&#x9; * and has the same boolean value than current object.&#xD;&#xA;&#x9; */" object="//@packages.0/standard/Boolean/equals"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
@@ -560,8 +558,8 @@
                   </value>
                 </statement>
               </body>
-              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/equals/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Integer/equals">
-                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Integer/times/@body/@statement.0/@stopCondition/@containedType.0/@containedType.0" right="//@packages.0/standard/Integer/equals/@containedType.0">
+              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0" name="isGreaterOrEqual" staticOperation="//@packages.0/standard/Integer/isGreaterOrEqual">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Integer/times/@body/@statement.0/@stopCondition/@containedType.0/@containedType.0" right="//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:ProductType">
                     <type href="collections.km#//@packages.0/standard/Collection/empty/@body/@statement.0/@value/@containedType.0/@containedType.0/@containedType.0"/>
                   </containedType>

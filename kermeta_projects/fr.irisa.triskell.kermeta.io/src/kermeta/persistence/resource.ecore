@@ -14,7 +14,7 @@
           <details key="documentation" value="/**&#xD;&#xA; * The main class that handle a loaded/saved model.&#xD;&#xA; * There are a few important things to note for the developer :&#xD;&#xA; * &#xD;&#xA; * - load a Resource : this loads a Collection of instances corresponding to the&#xD;&#xA; *   objects in the loaded model. If the Collection of instances is empty, than &#xD;&#xA; *&#x9; a ResourceLoadException is raised&#xD;&#xA; *&#xD;&#xA; * - save a Resource : this saves the collection of instances in a new file. This can&#xD;&#xA; *   be correctly done if and only if the instances saved are conform to the metamodel&#xD;&#xA; *   linked to this resource (this link does not need to be explicit. It is normally retrieved&#xD;&#xA; *   through the EMF model -- see Java wrapping &quot;Resource.java&quot;).&#xD;&#xA; * &#xD;&#xA; * - add/remove an instance to the Resource : this adds an element in the resource. It cannot&#xD;&#xA; *   be &quot;simply&quot; added because of the following potential errors :&#xD;&#xA; *&#xD;&#xA; *   - The object added is not conform to the metamodel -> Error&#xD;&#xA; *   - The object was already added in the resource -> Not a real error : we do nothing&#xD;&#xA; *   - The object to remove does not exist -> redirect to a collection-specific error&#xD;&#xA; *   - The object to remove is attached to an object in the collection -> &quot;dependency-violation&quot; exception?&#xD;&#xA;&#xD;&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../standard/collections.ecore#/1/standard/Set"/>
-        <eOperations name="instances" eType="/1/persistence/Resource">
+        <eOperations name="instances">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * The entities contained in the model-instance, that are provided when user loads a resource &#xD;&#xA;&#x9; * instances == rootContents&#xD;&#xA;&#x9; * this is a loop on Resource itself in order to get backward compatibility&#xD;&#xA;&#x9; * user should use the resource directly since this is a collection&#xD;&#xA;&#x9; */"/>
@@ -93,20 +93,18 @@
           <details key="documentation" value="/**&#xD;&#xA; * Extension of the Resource class definition that is specific to EMF Repository.&#xD;&#xA; * User is not supposed to directly create it. Otherwise it will not be correctly initialized&#xD;&#xA; * You must To create one &#xD;&#xA; */"/>
         </eAnnotations>
         <eOperations name="saveWithNewURI">
-          <eAnnotations source="kermeta" references="/1/persistence/Resource/saveWithNewURI">
+          <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, new_uri, metaModelURI, &quot;EMF&quot;, self, false)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Resource.saveWithNewURI(String)&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
           <eParameters name="new_uri">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
         </eOperations>
         <eOperations name="save">
-          <eAnnotations source="kermeta" references="/1/persistence/Resource/save">
+          <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if isReadOnly then&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceSaveException init kermeta::exceptions::ResourceSaveException.new&#xA;&#x9;&#x9;e.message := ((((&quot;Cannot save a readonly resource. Probably this resource was indirectly loaded when loading another resource. \n&quot;) + (&quot;If you really intend to save this resource, you can set isReadOnly to false, but you must ensure to do so before any resource save.\n&quot;))) + (&quot;Note : setting isReadOnly to false on the metamodel may lead to unpredictable results&quot;))&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, self.uri, metaModelURI, &quot;EMF&quot;, self, false)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Resource.save()&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="saveAndValidateWithEMF">
@@ -114,21 +112,17 @@
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, self.uri, metaModelURI, &quot;EMF&quot;, self, true)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Checks the Resource using the EMF validation function, and saves it if&#xD;&#xA;&#x9; * validation succeeds&#xD;&#xA;&#x9; * Applies validation to all root objects of the Resource&#xD;&#xA;&#x9; * Returns true if the validation reports no error, raises exceptions otherwise&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
         </eOperations>
         <eOperations name="load">
-          <eAnnotations source="kermeta" references="/1/persistence/Resource/load">
+          <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;self.clear&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(self, uri, metaModelURI, &quot;EMF&quot;)&#xA;&#x9;if self.size.equals(0) then&#xA;&#x9;&#x9;stdio.writeln(&quot;Resource load failed!&quot;)&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceLoadException init kermeta::exceptions::ResourceLoadException.new&#xA;&#x9;&#x9;e.message := &quot;Resource load failed, no object was created in this resource&quot;&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Resource.load()&#xD;&#xA;&#x9; * In case the metamodelURI was not previously set, metamodelURI is filled with&#xD;&#xA;&#x9; * the nsuri of the root package of the metamodel used to load the Resource after&#xD;&#xA;&#x9; * a successful load&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="add">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;repository.resources.~select{r | do&#xA;&#x9;&#x9;&#x9;(r.isNotEqual(self)) and (r.contains(instance))&#xA;&#x9;&#x9;end}.each{r | do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;DVK ! another resource of the same repository was containing this element&quot;)&#xA;&#x9;&#x9;&#x9;r.remove(instance)&#xA;&#x9;&#x9;end}&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, self)&#xA;&#x9;super(instance)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Set&lt;Object>.add(Object)&#xD;&#xA;&#x9; * Add an instance to the Resource &#xD;&#xA;&#x9; * Ensures that the instance is referenced by a one and only one Resource of the same Repository&#xD;&#xA;&#x9; * Ensures that the instance does not appear more than once in the Resource&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::Set"/>
-            <references href="../standard/collections.ecore#/1/standard/Set/add"/>
           </eAnnotations>
           <eParameters name="instance">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
@@ -138,8 +132,6 @@
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if self.contains(instance) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.unSetContainingResource(instance)&#xA;&#x9;&#x9;super(instance)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Set&lt;Object>.remove(Object)&#xD;&#xA;&#x9; * Remove the instance from the Resource&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::Set"/>
-            <references href="../standard/collections.ecore#/1/standard/Set/remove"/>
           </eAnnotations>
           <eParameters name="instance">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
@@ -151,25 +143,21 @@
           <details key="documentation" value="/**&#xD;&#xA; * NOT IMPLEMENTED&#xD;&#xA; */"/>
         </eAnnotations>
         <eOperations name="save">
-          <eAnnotations source="kermeta" references="/1/persistence/Resource/save">
+          <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA; &#x9; * NOT IMPLEMENTED&#xD;&#xA; &#x9; */"/>
-            <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="load">
-          <eAnnotations source="kermeta" references="/1/persistence/Resource/load">
+          <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA; &#x9; * NOT IMPLEMENTED&#xD;&#xA; &#x9; */"/>
-            <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="add">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA; &#x9; * NOT IMPLEMENTED&#xD;&#xA; &#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::Set"/>
-            <references href="../standard/collections.ecore#/1/standard/Set/add"/>
           </eAnnotations>
           <eParameters name="instance">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
@@ -179,8 +167,6 @@
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA; &#x9; * NOT IMPLEMENTED&#xD;&#xA; &#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::Set"/>
-            <references href="../standard/collections.ecore#/1/standard/Set/remove"/>
           </eAnnotations>
           <eParameters name="instance">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
@@ -192,7 +178,7 @@
           <details key="documentation" value="/**&#xD;&#xA; * Abstract resource container, that contains a list of available loaded resources, &#xD;&#xA; * and methods to create or get a resource given an URI.&#xD;&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
-        <eOperations name="createResource" eType="/1/persistence/Resource">
+        <eOperations name="createResource">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Creates a new Resource with given uri, and an optional mm_uri&#xD;&#xA;&#x9; * mm_uri is required when creating a new model from scratch.&#xD;&#xA;&#x9; * Raises a ResourceCreate exception in case the Repository already&#xD;&#xA;&#x9; * contains a Resource with the given uri&#xD;&#xA;&#x9; * If uri does not points to an existing model file (in the case of&#xD;&#xA;&#x9; * a model creation), calls to load() operation will fail as long as&#xD;&#xA;&#x9; * the model has not been saved once&#xD;&#xA;&#x9; */"/>
@@ -204,7 +190,7 @@
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
         </eOperations>
-        <eOperations name="getResource" eType="/1/persistence/Resource">
+        <eOperations name="getResource">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var nUri : kermeta::standard::String&#xA;&#x9;var crt_nUri : kermeta::standard::String&#xA;&#x9;nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.initRepository(self)&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;kermeta::persistence::Resource> init resources.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;var next : kermeta::persistence::Resource init it.next&#xA;&#x9;&#x9;crt_nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(next.uri)&#xA;&#x9;&#x9;if nUri.equals(crt_nUri) then&#xA;&#x9;&#x9;&#x9;result := next&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if result.equals(void) then&#xA;&#x9;&#x9;result := self.createResource(uri, &quot;&quot;)&#xA;&#x9;&#x9;result.load&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns the Resource associated with the given uri if this uri is associated with&#xD;&#xA;&#x9; * an already created Resource of the Repository.&#xD;&#xA;&#x9; * If the Repository contains no Resource associated with the given uri, creates&#xD;&#xA;&#x9; * a new Resource and loads it.&#xD;&#xA;&#x9; * Raises a ResourceCreate exception if the given uri does not point to an existing&#xD;&#xA;&#x9; * model file &#xD;&#xA;&#x9; */"/>
@@ -218,10 +204,6 @@
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::persistence::DanglingDiagnostic>.new&#xA;&#x9;self.resources.each{res | do&#xA;&#x9;&#x9;&#x9;res.contents.each{containedObj | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var classDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;classDef ?= containedObj.getMetaClass.typeDefinition&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if classDef.isVoid.~not then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;classDef.allAttribute.each{prop | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if prop.isDerived.~not then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if ((((prop.upper) > (1))) or (prop.upper.equals(1.uminus))) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var referencedObjs : kermeta::standard::Collection&lt;kermeta::standard::Object>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;referencedObjs ?= containedObj.get(prop)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if referencedObjs.isVoid.~not then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;referencedObjs.each{referencedObj | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if ((self.resources.exists{res2 | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;res2.contents.contains(referencedObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}.~not) and (((((referencedObj.isKindOf(kermeta::standard::String)) or (referencedObj.isKindOf(kermeta::standard::Integer)))) or (referencedObj.isKindOf(kermeta::standard::Boolean))).~not)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var diagnostic : kermeta::persistence::DanglingDiagnostic init kermeta::persistence::DanglingDiagnostic.new&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.danglingElement := referencedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingElement := containedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingProperty ?= prop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(diagnostic)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var referencedObj : kermeta::standard::Object&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;referencedObj := containedObj.get(prop)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if referencedObj.isVoid.~not then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if ((self.resources.exists{res2 | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;res2.contents.contains(referencedObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}.~not) and (((((referencedObj.isKindOf(kermeta::standard::String)) or (referencedObj.isKindOf(kermeta::standard::Integer)))) or (referencedObj.isKindOf(kermeta::standard::Boolean))).~not)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var diagnostic : kermeta::persistence::DanglingDiagnostic init kermeta::persistence::DanglingDiagnostic.new&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.danglingElement := referencedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingElement := containedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingProperty ?= prop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(diagnostic)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;end}&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Search for elements referenced by one element contained by this repository  that are not contained by this repository&#xD;&#xA;&#x9; * ie. element that EMF would claim as &quot;not contained in a resource&quot;&#xD;&#xA;&#x9; * example of use :&#xD;&#xA;&#x9; *  var report : Set&lt;DanglingDiagnostic>&#xD;&#xA;     *&#x9;report := repository.findDanglingModelElements()&#xD;&#xA;     *&#x9;report.each{ diag | stdio.writeln(diag.toString ) }&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
-          <eGenericType>
-            <eTypeArguments eClassifier="/1/persistence/DanglingDiagnostic"/>
-            <eClassifier xsi:type="ecore:EClass" href="../standard/collections.ecore#/1/standard/Set"/>
-          </eGenericType>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="resources" ordered="false" upperBound="-1" eType="/1/persistence/Resource" containment="true" eOpposite="/1/persistence/Resource/repository">
           <eAnnotations source="kermeta">
@@ -238,10 +220,7 @@
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := ((((((((((danglingElement.toString) + (&quot; referenced by &quot;))) + (referencingElement.toString))) + (&quot;.&quot;))) + (referencingProperty.name))) + (&quot; is dangling&quot;))&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * user friendly message build with those informations&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::language::structure::Object"/>
-            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="danglingElement">
           <eAnnotations source="kermeta">
@@ -268,11 +247,10 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Repository that stores and manages resources that come from EMF&#xD;&#xA; */"/>
         </eAnnotations>
-        <eOperations name="createResource" eType="/1/persistence/Resource">
-          <eAnnotations source="kermeta" references="/1/persistence/Repository/createResource">
+        <eOperations name="createResource">
+          <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var nUri : kermeta::standard::String&#xA;&#x9;nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)&#xA;&#x9;if resources.collect{r | do&#xA;&#x9;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)&#xA;&#x9;&#x9;end}.contains(nUri).~not then&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceCreateException init kermeta::exceptions::ResourceCreateException.new&#xA;&#x9;&#x9;e.message := ((((((&quot;Trying to create a resource already existing at &quot;) + (uri))) + (&quot;.\n&quot;))) + (&quot;Remove existing resource from repository first, or use \&quot;getResource\&quot; operation.&quot;))&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Repository.createResource(String, String)&#xD;&#xA;&#x9; * Create a new resource for a model given by its uri, &#xD;&#xA;&#x9; * which meta-model is stored in file given by mm_uri&#xD;&#xA;&#x9; * If file already exists, you'll be able to call the load method to concretly load the model&#xD;&#xA;&#x9; * otherwise, you can only call the save method&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::persistence::Repository"/>
           </eAnnotations>
           <eParameters name="uri">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -300,11 +278,10 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Repository that stores and manages XMI files representing Kermeta models&#xD;&#xA; */"/>
         </eAnnotations>
-        <eOperations name="createResource" eType="/1/persistence/Resource">
-          <eAnnotations source="kermeta" references="/1/persistence/Repository/createResource">
+        <eOperations name="createResource">
+          <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := void&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA; &#x9; * NOT IMPLEMENTED&#xD;&#xA; &#x9; */"/>
-            <details key="superOperation" value="kermeta::persistence::Repository"/>
           </eAnnotations>
           <eParameters name="uri">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -319,15 +296,16 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
+    <references href="../kermeta_java.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
@@ -336,24 +314,26 @@
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
+    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
   </ecore:EAnnotation>

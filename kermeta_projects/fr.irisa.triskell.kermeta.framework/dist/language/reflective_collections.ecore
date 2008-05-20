@@ -19,8 +19,6 @@
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(self, element)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides kermeta::standard::Set&lt;G>.add(G)&#xD;&#xA;&#x9; * Add an element to this collection and update its opposite property if it exists.&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::Set"/>
-            <references href="../standard/collections.ecore#/1/standard/Set/add"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveCollection/G"/>
@@ -30,8 +28,6 @@
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(self, element)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides kermeta::standard::Set&lt;G>.remove(G)&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::Set"/>
-            <references href="../standard/collections.ecore#/1/standard/Set/remove"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveCollection/G"/>
@@ -41,8 +37,6 @@
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear(self)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides kermeta::standard::Collection&lt;G>.clear(G)&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::Collection"/>
-            <references href="../standard/collections.ecore#/1/standard/Collection/clear"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
@@ -54,38 +48,33 @@
         <eSuperTypes href="../standard/collections.ecore#/1/standard/OrderedSet"/>
         <eSuperTypes href="#/1/language/ReflectiveCollection"/>
         <eOperations name="add">
-          <eAnnotations source="kermeta" references="/1/language/ReflectiveCollection/add">
+          <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;super(element)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides kermeta::language::ReflectiveCollection&lt;G>.add(G)&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::language::ReflectiveCollection"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveSequence/G"/>
           </eParameters>
         </eOperations>
         <eOperations name="remove">
-          <eAnnotations source="kermeta" references="/1/language/ReflectiveCollection/remove">
+          <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;super(element)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides kermeta::language::ReflectiveCollection&lt;G>.remove(G)&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::language::ReflectiveCollection"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveSequence/G"/>
           </eParameters>
         </eOperations>
         <eOperations name="clear">
-          <eAnnotations source="kermeta" references="/1/language/ReflectiveCollection/clear">
+          <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;super()&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides kermeta::language::ReflectiveCollection&lt;G>.clear()&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::language::ReflectiveCollection"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="addAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.addAt(self, index, element)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides kermeta::standard::OrderedSet.addAt(Integer)&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::OrderedSet"/>
-            <references href="../standard/collections.ecore#/1/standard/OrderedSet/addAt"/>
           </eAnnotations>
           <eParameters name="index">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
@@ -98,8 +87,6 @@
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(self, index)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides kermeta::standard::OrderedSet.removeAt(Integer)&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
-            <references href="../standard/collections.ecore#/1/standard/OrderedCollection/removeAt"/>
           </eAnnotations>
           <eParameters name="index">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
@@ -109,10 +96,7 @@
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides kermeta::standard::OrderedSet.equals(Object)&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::OrderedSet"/>
-            <references href="../standard/collections.ecore#/1/standard/OrderedSet/equals"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="element">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
           </eParameters>
@@ -123,13 +107,13 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="structure.ecore#/0"/>
     <references href="structure.ecore#/1"/>
-    <references href="structure.ecore#/2"/>
     <references href="../kermeta_java.ecore#/0"/>
     <references href="../kermeta_java.ecore#/1"/>
     <references href="../kermeta_java.ecore#/2"/>
@@ -140,15 +124,17 @@
     <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
+    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
@@ -161,6 +147,7 @@
     <references href="../persistence/resource.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
   </ecore:EAnnotation>
