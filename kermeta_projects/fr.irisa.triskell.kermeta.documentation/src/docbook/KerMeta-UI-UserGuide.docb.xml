@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
-<!-- $Id: KerMeta-UI-UserGuide.docb.xml,v 1.10 2007-07-03 12:50:34 dvojtise Exp $ -->
+<!-- $Id: KerMeta-UI-UserGuide.docb.xml,v 1.11 2008-05-20 08:36:54 dvojtise Exp $ -->
 <book lang="en-GB">
   <bookinfo>
     <title>How the workbench is able to help you in your metamodelling
     tasks</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2007-07-03 12:50:34 $</pubdate>
+    <pubdate>$Date: 2008-05-20 08:36:54 $</pubdate>
 
     <author>
       <firstname>Didier Vojtisek, Francois Tanguy, Cyril Faucher</firstname>
@@ -165,7 +165,7 @@
     <section>
       <title>Auto-completion</title>
 
-      <para>To develop faster and faster, some nice helpfull tools now are
+      <para>To develop faster and faster, some nice helpful tools now are
       usual. One of them is the auto-completion. According to a context, a
       list of item will be proposed. Using the arrows key and the carriage
       return key, you can select quickly and easily the item you want. The
@@ -194,13 +194,13 @@
     <section>
       <title>Outline</title>
 
-      <para>The outline is a strucutral view of your program. Code is not
+      <para>The outline is a structural view of your program. Code is not
       visible in this view, but the structure that is to say packages,
       classes, attributes and methods are visible in a tree hierarchy. Usually
       the outline position is on the top right side of the Eclipse's window.
       You can get advantages of the outline, when your program reaches a big
       size and when it is difficult to get a good visibility on the program's
-      strucutre. Browsing the outline is much more faster than browsing the
+      structure. Browsing the outline is much more faster than browsing the
       file. Moreover, clicking on an item (packages, classes, attributes or
       methods) brings you to that item in the file.</para>
 
@@ -211,7 +211,7 @@
         </listitem>
 
         <listitem>
-          <para>Flatten inheritance : Show package hierachy</para>
+          <para>Flatten inheritance : Show package hierarchy</para>
         </listitem>
 
         <listitem>
@@ -251,7 +251,7 @@
       than simple text. In the figure below, a parsing error is reporting
       because of the semicolon which is not allowed in the language. The nice
       is thing is that in the Eclipse's problems view, just by double clicking
-      on an error opens the errored file and make the cursor focusing on the
+      on an error opens the erroneous file and make the cursor focusing on the
       correct line.</para>
 
       <figure>
@@ -400,7 +400,7 @@
       <para>The operation arguments field allow you to pass some strings as
       parameters of the operation you are launching.</para>
 
-      <para>Optionnaly, in the common Tab of the Kermeta run configuration,
+      <para>Optionally, in the common Tab of the Kermeta run configuration,
       you can:</para>
 
       <itemizedlist>
@@ -436,8 +436,8 @@
 
       <para>The Interpreter provides different facades in order to run a
       Kermeta program. The RunCommandLine class allows to pass the name of:
-      the Kermeta source file, and optionnaly the name of the class and the
-      opertation to run.</para>
+      the Kermeta source file, and optionally the name of the class and the
+      operation to run.</para>
 
       <para>You can create a Java application LaunchConfiguration that will
       run the interpreter with your Kermeta file.</para>
@@ -562,7 +562,7 @@
         <itemizedlist>
           <listitem>
             <para>-M : (takes 1 argument) Indicate a file containing URI_MAP
-            (This is usefull to solve some model loading troubles)</para>
+            (This is useful to solve some model loading troubles)</para>
           </listitem>
         </itemizedlist>
 
@@ -586,7 +586,7 @@
         <para>This uri map file uses the syntax of java properties
         files.</para>
 
-        <para>Exemple of uri.map file which maps some platform:// urls into
+        <para>Example of uri.map file which maps some platform:// urls into
         file:// urls</para>
 
         <programlisting>#
@@ -606,7 +606,7 @@
     <section>
       <title>Global View</title>
 
-      <para>A debugger offers users the possibility to interprete Kermeta's
+      <para>A debugger offers users the possibility to interpret Kermeta's
       programs step by step, or stopping programs at one moment to check the
       the programs' state. Above you can see the global view of the
       editor.</para>
@@ -628,7 +628,7 @@
       <para>During programs execution, you may want to know variables' values.
       For that purpose, you can use the watch view which displays all the
       variables accessible in the current context and their values. Moreover
-      you can browse those vaiables to have a deeper look inside
+      you can browse those variables to have a deeper look inside
       variables.</para>
 
       <figure>
@@ -833,9 +833,9 @@
         <listitem>
           <para>The kmt file can also be exported into
           its model version (ie. Into a XMI file conformant to kermeta
-          metamodel). This is usefull as this process also typecheck
+          metamodel). This is useful as this process also typecheck
           the model and thus allow to save some time when loading other file
-          wich rely on the km version rather than the kmt version.</para>
+          which rely on the km version rather than the kmt version.</para>
         </listitem>
     </itemizedlist>
       <figure>
@@ -897,7 +897,7 @@
 
       <para>This is a special metamodel that stores a
       link between the sources elements and the target element so you can
-      reuse it later. For example, it will help the debugger to retreive the
+      reuse it later. For example, it will help the debugger to retrieve the
       correct line in the text version of the source file even if you are
       running the km version.</para>
 
@@ -1021,17 +1021,17 @@
     the outline.</para>
 
     <para>With its damping animation, it proposes an
-    original way to navigate and analyse your metamodel
+    original way to navigate and analyze your metamodel
     classes.</para>
 
     <para>>The color depends on the distance to the
     selected node.</para>
 
     <para>Back and Forward button allow to navigate
-    the history of seleted nodes.</para>
+    the history of selected nodes.</para>
 
     <para>It provides several lens for smarter
-    vizualisation. For exemple you can zoom, rotate, set the locality (ie. How
+    visualization. For example you can zoom, rotate, set the locality (ie. How
     much nodes you display at once depending on the distance to the selection)
     or use the hyperbolic lens (Ie. Change the edge length depending on the
     distance).</para>
@@ -1053,7 +1053,7 @@
 
     <tip>
       It is in alpha stage, feel free to notify us
-      what you found interresting or not in this view.
+      what you found interesting or not in this view.
     </tip>
   </chapter>
 
@@ -1121,7 +1121,7 @@
               <entry align="left"><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?><para>&lt;CTRL&gt;+&lt;SPACE&gt;</para></entry>
 
               <entry align="left"><?border-right 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?><para>Pertinent
-              code completion. This work for both in sevral places in the
+              code completion. This work in several places in the
               code.</para></entry>
             </row>
 
