@@ -1,0 +1,80 @@
+/* $Id: NewInteger.kmt,v 1.1 2008-05-20 15:45:36 cfaucher Exp $
+ * Creation date: May 14, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "kermeta::standard::Integer"
+@mainOperation "main"
+
+
+package kermeta::standard;
+
+require kermeta
+
+aspect class Integer {
+	//Declaration of the function
+	operation times2(body : <Integer->Object>) : Void is do
+		from var i : Integer init 0
+		until i >= self
+		loop
+			body(i)
+			i := i+1
+		end
+	end
+	
+	//Use of the function
+	operation testTimes2() : Void is do
+		var multiplicator : Integer init 2
+		
+		5.times2{ z | 
+			z := z*multiplicator
+			stdio.writeln("hello: " + z.toString())
+		}
+	end
+	
+	//Function inlined
+	operation times3() : Void is do
+		var multiplicator : Integer init 2
+	
+		from var z : Integer init 0
+		until z >= 5
+		loop
+		
+			//------- inlining -------
+			z := z*multiplicator
+			stdio.writeln("hello: " + z.toString())
+			//------- inlining -------
+			
+			z := z+1
+		end
+	end
+	
+	//Function inlined
+	operation times4() : Void is do
+		var multiplicator : Integer init 2
+		
+		from var i : Integer init 0
+		until i >= 5
+		loop
+		
+			//------- inlining -------
+			//Recup of the variable
+			//Creation of the variable to avoid the modification of the target
+			var z : Integer init i
+			z := z*multiplicator
+			stdio.writeln("hello: " + z.toString())
+			//------- inlining -------
+			
+			i := i+1
+		end
+	end
+	
+	operation main() : Void is do
+		testTimes2()
+		stdio.writeln("")
+		times3()
+		stdio.writeln("")
+		times4()
+	end
+}

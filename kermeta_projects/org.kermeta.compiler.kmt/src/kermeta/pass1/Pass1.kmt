@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.17 2008-05-19 21:52:29 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.18 2008-05-20 15:45:37 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -230,7 +230,6 @@ aspect class Parameter {
 		else
 			// Creating the associated ecore class
 			ecoreParameter := self.createEcoreModelElement(context)
-			
 		end
 		
 		// Setting the container

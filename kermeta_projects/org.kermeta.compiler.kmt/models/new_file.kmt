@@ -1,0 +1,26 @@
+/* $Id: new_file.kmt,v 1.1 2008-05-20 15:45:35 cfaucher Exp $
+ * Creation date: April 29, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+using kermeta::standard
+
+class Main
+{
+	operation eachOwnedElement(func0 : <Object -> Object> , func1 : <Object -> Object>) : Void is do
+		self.ownedTags.each{ o |
+			func0(o)
+			func1(o)
+		}
+	end
+}

@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.26 2008-05-19 21:52:29 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.27 2008-05-20 15:45:37 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -29,13 +29,13 @@ class Main {
 	reference context : KM2EcoreContext [1..1]
 
     operation main_inner() : Void is do
-    	//var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km"
-		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.ecore"
-		//var traceInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.traceability"
+    	var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt02.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt02.ecore"
+		var traceInput : String init ""//platform:/resource/org.kermeta.compiler.kmt/models/Attempt02.traceability"
 		
-		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.km"
-		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.ecore"
-		var traceInput : String init ""//platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.traceability"
+		//var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.km"
+		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.ecore"
+		//var traceInput : String init ""//platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.traceability"
 
 		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
@@ -94,6 +94,12 @@ class Main {
 		
     end
     
+    
+    
+    /*****************************************/
+    /************ METHODS FOR TEST ***********/
+    /*****************************************/
+    
     operation main_mode2(modelInput : String, traceInput : String, output : String, mode : CompilingMode) : Void is do
 
 		// Creating and initializing the context
@@ -102,6 +108,7 @@ class Main {
 		context.mode := mode
 		
 		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Integer")))
+		//stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Integer")))
 		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")))
 		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Real")))
 		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Character")))

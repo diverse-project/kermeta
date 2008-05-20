@@ -1,4 +1,4 @@
-/* $Id: ModelingUnitHelper.kmt,v 1.1 2008-05-19 21:52:28 cfaucher Exp $
+/* $Id: ModelingUnitHelper.kmt,v 1.2 2008-05-20 15:45:37 cfaucher Exp $
  * Creation date: May 19, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,16 +14,27 @@ using kermeta::standard
 
 aspect class ModelingUnit {
 
+	/**
+	 * Get a TypeDefinition contained in the given Modeling Unit by qualifiedName
+	 */
 	operation getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
 		var set_qname : OrderedSet<String> init qname.split("::")
+		
 		var pack : Package init self.packages.detect{ p |
 			p.name == set_qname.at(0)
 		}
-		var pack2 : Package init pack.nestedPackage.detect{ p |
-			p.name == set_qname.at(1)
-		}
-		result := pack2.ownedTypeDefinition.detect{ c |
-			c.name == set_qname.at(2)
+		
+		from var i : Integer init 1
+		until i>=(set_qname.size()-1)
+		loop
+			pack := pack.nestedPackage.detect{ p |
+				p.name == set_qname.at(i)
+			}
+			i := i + 1
+		end
+		
+		result := pack.ownedTypeDefinition.detect{ c |
+			c.name == set_qname.at(set_qname.size()-1)
 		}
 	end
 	

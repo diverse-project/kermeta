@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.kmt,v 1.1 2008-05-19 21:52:28 cfaucher Exp $
+/* $Id: ClassDefinitionHelper.kmt,v 1.2 2008-05-20 15:45:37 cfaucher Exp $
  * Creation date: May 16, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -12,10 +12,14 @@ require kermeta
 using kermeta::standard
 
 aspect class ClassDefinition {
+
+	//Get all the super types for a ClassDefinition
 	operation allSuperTypes() : Set<Type> is do
 	 
 		var allSuperClasses : Set<Type> init Set<Type>.new
-        var superClasses : Set<Type> init self.superType
+        var superClasses : Set<Type> init Set<Type>.new
+        superClasses.addAll(self.superType)
+        
         from  not superClasses.isEmpty
         until superClasses.isEmpty
         loop

@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.18 2008-04-21 15:26:25 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.19 2008-05-20 15:45:37 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -54,6 +54,17 @@ package structure {
 	aspect class Operation {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := void
+			
+/*			var ft_parameters : Set<Parameter> init self.ownedParameter.detect{ p |
+				if p.type.isInstanceOf(FunctionType)
+			}*/
+			/*
+			var ft : FunctionType init p.type.asType(FunctionType)
+			//ft.left
+			//ft.right*/
+			
+			//if ft_parameters.detect{ p | p.name==cv.name} then
+			context.tasks_stack.last()
 			 
 			var javaCode : StringBuffer init StringBuffer.new
 			
@@ -157,6 +168,41 @@ package behavior {
 
 			var tgt : Expression init self.target
 			var fName : String  init self.name
+			
+			/*if not self.containedType.at(0).isVoid() and self.containedType.at(0).isInstanceOf(FunctionType) then
+				var t0 : FunctionType init self.containedType.at(0).asType(FunctionType)
+				if not t0.containedType.at(0).isVoid() and t0.containedType.at(0).isInstanceOf(ProductType) then
+					var t1 : ProductType init t0.containedType.at(0).asType(ProductType)
+					if not t1.isVoid() and t1.containedType.at(0).isInstanceOf(FunctionType) then
+						var t2 : FunctionType init t1.containedType.at(0).asType(FunctionType)
+						
+						if (not t2.isVoid()) and (t2.isInstanceOf(FunctionType)) then
+							self.staticOperation//.createBehaviorJava(context)
+						end
+					end
+				end
+			end*/
+			
+			/*var ft1 : FunctionType init self.containedType.detect{ t | t.isInstanceOf(FunctionType) }.asType(FunctionType)
+			
+			if not ft1.isVoid() then
+				result := result + "FT1 is detected"
+				var pt : ProductType init ft1.containedType.detect{ t | t.isInstanceOf(ProductType) }.asType(ProductType)
+				
+				if not pt.isVoid() then
+					result := result + "PT is detected"
+					var ft2 : FunctionType init pt.containedType.detect{ t | t.isInstanceOf(FunctionType) }.asType(FunctionType)
+					
+					if not ft2.isVoid() then
+						result := result + "FT2 is detected"
+						result := result + "CallFeature_FunctionType"
+					end
+				end
+			end*/
+			
+			context.tasks_stack.add("FunctionType_Compilation")
+			self.staticOperation.createBehaviorJava(context)
+			context.tasks_stack.remove(context.tasks_stack.last())
 			
 			if not tgt.isVoid() then
 				result := result + getPP(tgt, fName, context)
@@ -413,6 +459,12 @@ package behavior {
 	aspect class LambdaParameter {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := "//TODO LambdaParameter" + self.toString
+		end
+	}
+	
+	aspect class FunctionType {
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
+			result := "//TODO FunctionType" + self.toString
 		end
 	}
 	

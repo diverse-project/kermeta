@@ -68,25 +68,25 @@ class InheritedClassWithBehavior inherits ClassWithBehavior, EmptyClass {
 class EmptyClass {
 }
 
-class ParameterizedEmptyClass<A> {
+/*class ParameterizedEmptyClass<A> {
 }
 
 class ParameterizedClass<B> inherits ParameterizedEmptyClass<B> , ParameterizedEmptyClass<String>
 {
 	reference attr1 : ParameterizedClass<String> [0..1]
 	
-	operation test2<B>() : Void is do
+	operation test2() : Void is do
 	end
 	
 	attribute testString : TestString
 	
-	operation eachOwnedElement(func0 : <Object -> Object> , func1 : <Boolean -> Object>) : Void is do
+	operation eachOwnedElement(str : String, func0 : <Object -> Object> , func1 : <Boolean -> Object>) : Void is do
 		self.ownedTags.each{ o |
 			func0(o)
 		}
 		func1(true)
 	end
-}
+}*/
 
 @EMF_instanceClassName "java.lang.String"
 class TestString inherits ValueType {

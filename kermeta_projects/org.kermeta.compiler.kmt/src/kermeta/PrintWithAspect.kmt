@@ -1,4 +1,4 @@
-/* $Id: PrintWithAspect.kmt,v 1.4 2008-03-14 14:21:08 cfaucher Exp $
+/* $Id: PrintWithAspect.kmt,v 1.5 2008-05-20 15:45:36 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -18,18 +18,15 @@ require "printJava.kmt"
 using kermeta::language::structure
 using km2ecore
 
-class Printer inherits Main
-{
+class Printer inherits Main {
 
-    method main_mode(input : String, output : String, mode : CompilingMode) : Void is do		
-		super(input, output, mode)
+    method main_mode(input : String, traceInput : String, output : String, mode : CompilingMode) : Void is do		
+		super(input, traceInput, output, mode)
 		
 		// Print in the console the Java
 		stdio.writeln("\n - Start Java printing -")
-		context.mus.each{ mu |
-			mu.packages.each{ p |
-				p.print(context)
-			}
+		context.mu.packages.each{ p |
+			p.print(context)
 		}
 		stdio.writeln(" - Finish Java printing -")
     end

@@ -1,4 +1,4 @@
-/* $Id: GenericTypeDefinitionHelper.kmt,v 1.3 2008-04-29 14:52:27 cfaucher Exp $
+/* $Id: GenericTypeDefinitionHelper.kmt,v 1.4 2008-05-20 15:45:37 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -88,7 +88,7 @@ class GenericTypeDefinitionHelper {
 	operation getKermetaSpecialType(p : Package) : EClass is do
 		var specialType : EClass
 		
-		var name_KermetaSspecialType : String init "_KermetaSpecialTypesAlias_"
+		var name_KermetaSspecialType : String init "KermetaSpecialTypesAlias"
 		
 		var retrieveSpecialType : EClassifier
 		retrieveSpecialType := p.ecoreModelElement.eClassifiers.detect{ c |

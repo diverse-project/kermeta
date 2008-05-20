@@ -1,0 +1,37 @@
+/* $Id: Attempt02.kmt,v 1.1 2008-05-20 15:45:35 cfaucher Exp $
+ * Creation date: May 20, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+@uri "http://www.kermeta.org//Attempt02"
+package root_package;
+
+require kermeta
+
+class Main {
+
+	attribute attr : A
+	
+	operation main() : Void is do
+		var m : Main init Main.new
+		m.attr.ft{ i | op(i) }
+	end
+	
+	operation op( aa : A ) : B is do
+		result := void
+	end
+}
+
+class A {
+	operation ft( func : <A -> B>) : Void is do
+		var a : A init A.new
+		func(a)
+	end
+}
+
+class B {
+}
