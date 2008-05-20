@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIO.java,v 1.12 2008-04-28 11:50:56 ftanguy Exp $
+/* $Id: SimpleFileIO.java,v 1.13 2008-05-20 07:11:59 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -23,14 +23,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.eclipse.resources.URIHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 
@@ -66,6 +67,13 @@ public class SimpleFileIO {
         	int i = filePath.lastIndexOf("/");
         	java.lang.String folderPath = filePath.substring(0, i);
         	
+        	if ( folderPath.startsWith("platform:/resource") ) {
+        		java.lang.String platformFolderPath = folderPath.replace("platform:/resource", "");
+        		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFolderPath) );
+        		folderPath = folder.getLocation().toString();
+        		filePath = folderPath + filePath.substring(i);
+        	}
+        	       	
         	/*
         	 * Checking for its existency
         	 */
