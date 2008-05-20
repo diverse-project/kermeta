@@ -1,4 +1,4 @@
-
+@uri "comp_generics_test001"
 package comp_generics_test001;
 
 require kermeta

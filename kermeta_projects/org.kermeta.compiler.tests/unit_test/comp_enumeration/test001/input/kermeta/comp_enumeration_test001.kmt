@@ -1,4 +1,4 @@
-
+@uri "http://comp_enumeration_test001"
 package comp_enumeration_test001;
 
 require kermeta

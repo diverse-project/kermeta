@@ -1,6 +1,7 @@
 @mainClass "comp_selfExpression_test001::Main"
 @mainOperation "main"
 
+@uri "http://comp_selfExpression_test001"
 package comp_selfExpression_test001;
 
 require kermeta

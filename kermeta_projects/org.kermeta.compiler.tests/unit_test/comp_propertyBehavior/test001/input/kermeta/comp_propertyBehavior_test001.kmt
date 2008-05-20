@@ -1,4 +1,4 @@
-/* $Id: comp_propertyBehavior_test001.kmt,v 1.1 2008-01-23 09:59:33 cfaucher Exp $
+/* $Id: comp_propertyBehavior_test001.kmt,v 1.2 2008-05-20 08:22:50 ftanguy Exp $
  * Creation date: January 9, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -8,6 +8,7 @@
 @mainClass "comp_propertyBehavior_test001::Main"
 @mainOperation "main"
 
+@uri "http://comp_propertyBehavior_test001"
 package comp_propertyBehavior_test001;
 
 require kermeta

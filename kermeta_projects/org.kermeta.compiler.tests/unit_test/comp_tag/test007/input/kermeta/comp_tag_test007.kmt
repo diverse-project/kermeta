@@ -1,4 +1,4 @@
-
+@uri "http://comp_tag_test007"
 package comp_tag_test007;
 
 require kermeta

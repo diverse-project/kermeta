@@ -1,4 +1,5 @@
 
+@uri "http://comp_opposite_test002"
 package comp_opposite_test002;
 
 require kermeta

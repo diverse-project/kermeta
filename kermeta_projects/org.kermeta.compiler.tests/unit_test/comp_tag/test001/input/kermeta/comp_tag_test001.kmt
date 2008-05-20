@@ -2,6 +2,7 @@
 /**
  * One comment on a root package.
  */
+@uri "http://comp_tag_test001"
 package comp_tag_test001;
 
 require kermeta

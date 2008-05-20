@@ -1,4 +1,5 @@
 
+@uri "http://comp_operationStructure_test003"
 package comp_operationStructure_test003;
 
 require kermeta

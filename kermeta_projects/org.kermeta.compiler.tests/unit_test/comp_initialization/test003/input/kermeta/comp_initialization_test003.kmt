@@ -1,6 +1,7 @@
 @mainClass "comp_initialization_test003::Main"
 @mainOperation "main"
 
+@uri "http://comp_initialization_test003"
 package comp_initialization_test003;
 
 require kermeta

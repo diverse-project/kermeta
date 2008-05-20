@@ -1,5 +1,5 @@
 
-/*$Id: Comp_behaviorTestSuite.java,v 1.3 2008-02-13 10:40:52 cfaucher Exp $
+/*$Id: Comp_behaviorTestSuite.java,v 1.4 2008-05-20 08:22:47 ftanguy Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -45,6 +45,8 @@ import org.junit.runners.Suite;
 		Comp_newUseCase.class
 	, 
 		Comp_propertyBehaviorUseCase.class
+	, 
+		Comp_selfExpressionUseCase.class
 	}
 )
 public class Comp_behaviorTestSuite {

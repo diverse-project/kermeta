@@ -1,4 +1,4 @@
-
+@uri "http://comp_primitiveType_test002"
 package comp_primitiveType_test002;
 
 require kermeta

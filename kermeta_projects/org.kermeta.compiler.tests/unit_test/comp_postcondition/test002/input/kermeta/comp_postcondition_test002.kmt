@@ -1,4 +1,4 @@
-
+@uri "http://comp_postcondition_test002"
 package comp_postcondition_test002;
 
 require kermeta

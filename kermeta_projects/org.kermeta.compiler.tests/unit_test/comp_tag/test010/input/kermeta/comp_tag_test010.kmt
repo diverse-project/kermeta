@@ -1,6 +1,7 @@
 @mainClass "comp_tag_test010::Main"
 @mainOperation "main"
 
+@uri "http://comp_tag_test010"
 package comp_tag_test010;
 
 require kermeta

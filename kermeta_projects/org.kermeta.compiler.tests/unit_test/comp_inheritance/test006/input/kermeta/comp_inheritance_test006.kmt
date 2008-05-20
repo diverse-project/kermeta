@@ -1,4 +1,4 @@
-
+@uri "http://comp_inheritance_test006"
 package comp_inheritance_test006;
 
 require kermeta

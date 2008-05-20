@@ -1,6 +1,7 @@
 @mainClass "comp_conditional_test001::Main"
 @mainOperation "main"
 
+@uri "http://comp_conditional_test001"
 package comp_conditional_test001;
 
 require kermeta

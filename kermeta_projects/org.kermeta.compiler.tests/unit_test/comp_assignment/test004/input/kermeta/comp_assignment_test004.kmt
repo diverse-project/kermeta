@@ -1,7 +1,7 @@
 @mainClass "comp_assignment_test004::Main"
 @mainOperation "main"
 
-@uri "toto"
+@uri "http://comp_assignment_test004"
 package comp_assignment_test004;
 
 require kermeta

@@ -1,4 +1,4 @@
-@uri "tete"
+@uri "http://comp_classDefinition_test001"
 package comp_classDefinition_test001;
 
 require kermeta

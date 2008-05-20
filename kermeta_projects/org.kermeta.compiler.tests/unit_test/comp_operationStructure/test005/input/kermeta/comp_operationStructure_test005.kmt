@@ -1,6 +1,7 @@
 @mainClass "comp_operationStructure_test005::Main"
 @mainOperation "main"
 
+@uri "http://comp_operationStructure_test005"
 package comp_operationStructure_test005;
 
 require kermeta

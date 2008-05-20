@@ -1,4 +1,5 @@
 
+@uri "http://comp_callResult_test002"
 package comp_callResult_test002;
 
 require kermeta

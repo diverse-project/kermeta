@@ -1,6 +1,7 @@
 @mainClass "comp_body_test002::Main"
 @mainOperation "main"
 
+@uri "http://comp_body_test002"
 package comp_body_test002;
 
 require kermeta

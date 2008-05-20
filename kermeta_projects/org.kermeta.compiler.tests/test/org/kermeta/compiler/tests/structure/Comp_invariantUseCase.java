@@ -1,5 +1,5 @@
 
-/*$Id: Comp_invariantUseCase.java,v 1.4 2008-04-04 09:51:35 cfaucher Exp $
+/*$Id: Comp_invariantUseCase.java,v 1.5 2008-05-20 08:22:48 ftanguy Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -9,8 +9,6 @@
 
 package org.kermeta.compiler.tests.structure;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,18 +19,18 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.kermeta.compiler.tests.KCompilerConstants;
 import org.kermeta.compiler.tests.helper.Constants;
-import org.kermeta.io.KermetaUnit;
+import org.kermeta.compiler.tests.helper.DiffHelper;
+import org.kermeta.interpreter.api.InitializationError;
+import org.kermeta.interpreter.api.Interpreter;
+import org.kermeta.interpreter.api.InterpreterMode;
+import org.kermeta.interpreter.api.InterpreterOptions;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
-import fr.irisa.triskell.kermeta.kpm.helpers.RunnerHelper;
-import org.kermeta.loader.LoadingOptions;
-import fr.irisa.triskell.eclipse.console.LocalIOConsole;
-import org.kermeta.compiler.tests.helper.DiffHelper;
+import org.kermeta.simk.impl.SimkPackageImpl;
 
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.tests.comparison.EMFCompareModelHelper;
 
 public class Comp_invariantUseCase {
@@ -54,27 +52,42 @@ public class Comp_invariantUseCase {
 	 * Beginning static code
 	 *  
 	 */
-	static private KermetaUnit executable;
+	static private Interpreter _interpreter;
 	
 	/*
 	 * 
 	 * We only load one time the program when the current class is loading.
 	 * 
 	 */
-    @BeforeClass
-    public static void loadProgram() {
-		Map<Object, Object> options = new HashMap<Object, Object>();
-		options.put( LoadingOptions.ECORE_QuickFixEnabled, true );
-		try {
-			IOPlugin.LOCAL_USE = true;
-			IOPlugin.getDefault();
-			executable = LoaderPlugin.getDefault().load( Constants.TEST_COMP_STRUCTURE_LAUNCHER, options);
-		} catch (URIMalformedException e) {
-			e.printStackTrace();
-		} catch (NotRegisteredURIException e) {
-			e.printStackTrace();
-		}
-    }
+	@BeforeClass
+	static public void setInterpreter() {
+		IOPlugin.LOCAL_USE = true;
+		LoaderPlugin.getDefault();
+		
+		SimkPackageImpl.init();
+
+		if ( _interpreter == null )
+			try {
+				//KermetaUnit kermetaUnit = RunnerHelper.getKermetaUnitToExecute(Constants.TEST_COMP_BEHAVIOR_LAUNCHER);
+				Map<String, Object> options = new HashMap<String, Object>();
+				//options.put( InterpreterOptions.MERGE, false );
+				options.put( InterpreterOptions.CLEAN_AT_END, false);
+				_interpreter = new Interpreter(Constants.TEST_COMP_BEHAVIOR_LAUNCHER, InterpreterMode.RUN, options);
+				_interpreter.setEntryPoint("kermeta::compiler::Main", "main");
+			} catch (NotRegisteredURIException e) {
+			} catch (URIMalformedException e) {
+			}
+	}
+	
+	/**
+	 * 
+	 * Once all the tests have been run, unload the program.
+	 * 
+	 */
+	@AfterClass
+	static public void unsetInterpreter() {
+		LoaderPlugin.getDefault().unload( Constants.TEST_COMP_BEHAVIOR_LAUNCHER );
+	}
     /*
 	 * 
 	 * Ending static code
@@ -139,35 +152,26 @@ public class Comp_invariantUseCase {
 	private void run(String input, String output, String expected_output) {
 		try {
 			/*
-			 * Getting the kermeta unit to execute.
-			 */
-			KermetaUnit unitToExecute = RunnerHelper.getKermetaUnitToExecute( executable, Constants.BIN_PATH);
-			/*
-			 * Creating the interpreter.
-			 */
-			KermetaInterpreter interpreter = new KermetaInterpreter(unitToExecute, null);
-			/*
 			 * Setting the parameters.
 			 */
-			ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(input, interpreter.getMemory().getROFactory()));
-			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(output, interpreter.getMemory().getROFactory()));
-			interpreter.setEntryParameters(params);
+			String[] args = new String[3];
+			args[0] = input;
+			args[1] = "";//trace; path for the generated traceability file.
+			args[2] = output;
+			_interpreter.setParameters(args);
+				
 			/*
 			 * Start the interpreter.
 			 */
-     		interpreter.setKStream( new LocalIOConsole() );
-			interpreter.launch();
+	   		_interpreter.setStreams( new LocalIOConsole() );
+			_interpreter.launch();
+				
 			/*
 			 * Assertion
 			 */
 			Assert.assertTrue( compare(output, expected_output) );
-		} catch (URIMalformedException e) {
-			e.printStackTrace();
-		} catch (NotRegisteredURIException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (InitializationError e) {
+			Assert.assertTrue(e.getErrorsAsString(), false);
 		}
 	}
 	
@@ -177,16 +181,6 @@ public class Comp_invariantUseCase {
 			result = DiffHelper.interpreteDiff( output + "_diff.xmi" );
 		return result;
 	}
-	
-	/**
-	 * 
-	 * Once all the tests have been run, unload the program.
-	 * 
-	 */
-    @AfterClass
-    public static void unloadProgram() {
-		LoaderPlugin.getDefault().unload( executable.getUri() );
-    }
     /*
 	 * 
 	 * Ending static code

@@ -1,4 +1,4 @@
-
+@uri "http://comp_reference_test001"
 package comp_reference_test001;
 
 require kermeta
