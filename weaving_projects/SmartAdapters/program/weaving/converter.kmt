@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.12 2008-05-20 14:30:02 bmorin Exp $
+/* $Id: converter.kmt,v 1.13 2008-05-20 14:37:12 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -76,11 +76,13 @@ class Converter
 			processProperty(obj,conv,p)
 		}
 	
-		var superClasses : Set<Class> init c.superClass
+		var temp : Set<Class> init Set<Class>.new
+		var superClasses : Set<Class> init Set<Class>.new 
+		superClasses.addAll(c.superClass)
 		from  not superClasses.isEmpty
 		until superClasses.isEmpty
 		loop
-			var temp : Set<Class> init Set<Class>.new
+			temp.clear
  			superClasses.each{s |
  					s.ownedAttribute.each{p | 
  					//stdio.writeln(p.name)
