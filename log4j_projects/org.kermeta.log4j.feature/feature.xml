@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.kermeta.log4j.feature"
+      id="org.kermeta.log4j"
       label="Log4j Feature"
       version="1.0.0"
       provider-name="IRISA/INRIA">
