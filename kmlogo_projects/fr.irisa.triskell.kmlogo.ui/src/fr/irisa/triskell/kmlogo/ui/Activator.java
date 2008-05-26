@@ -7,7 +7,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+//import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -18,7 +18,7 @@ public class Activator extends AbstractUIPlugin {
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kmlogo.ui";
 
 	// Log4j logger for this plugin
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMLogoUI");
+//	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMLogoUI");
 
 	
 	// The shared instance
@@ -79,7 +79,7 @@ public class Activator extends AbstractUIPlugin {
 		// eclipse logger
 		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, message, e));
 		// log4j message
-		internalLog.error(message, e);
+//		internalLog.error(message, e);
 	}
 	
 	/**
@@ -93,6 +93,6 @@ public class Activator extends AbstractUIPlugin {
 		// eclipse logger
 		getDefault().getLog().log(new Status(IStatus.WARNING, PLUGIN_ID, IStatus.WARNING, message, e));
 		// log4j message
-		internalLog.warn(message, e);
+//		internalLog.warn(message, e);
 	}
 }

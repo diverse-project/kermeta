@@ -1,4 +1,4 @@
-/* $Id: RunLogoK.java,v 1.9 2008-04-28 11:54:47 ftanguy Exp $
+/* $Id: RunLogoK.java,v 1.10 2008-05-26 14:49:35 vmahe Exp $
  * Project   : kmLogo
  * File      : RunLogoK.java
  * License   : EPL
@@ -29,10 +29,10 @@ import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 
 public class RunLogoK {
-	public static final String LOGO_SIMULATOR_KERMETA_CODE = "platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoSimulator.kmt";
+	public static final String LOGO_SIMULATOR_KERMETA_CODE = "platform:/plugin/fr.irisa.triskell.kmlogo.model/logo/5.Simulator/LogoSimulator.kmt";
 	
 	public static void run(String fileURI, IOConsole console) throws NotRegisteredURIException, IOException, URIMalformedException  {
-		Activator.internalLog.info("run FixModel");
+//		Activator.internalLog.info("run FixModel");
 		
 		//KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit("platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoSimulator.kmt", new NullProgressMonitor());
 		
@@ -65,7 +65,7 @@ public class RunLogoK {
 		if(bundle != null){
 			urlsSet.add(FileLocator.resolve(bundle.getEntry("/")));
 			/*safeAddURLAsString(urlsSet,bundle.getLocation());*/
-			Activator.internalLog.debug("classloader updated with " +FileLocator.resolve(bundle.getEntry("/")));
+//			Activator.internalLog.debug("classloader updated with " +FileLocator.resolve(bundle.getEntry("/")));
 		}		
 		
 		

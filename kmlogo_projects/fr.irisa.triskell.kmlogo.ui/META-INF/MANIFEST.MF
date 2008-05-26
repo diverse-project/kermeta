@@ -5,13 +5,13 @@ Bundle-SymbolicName: fr.irisa.triskell.kmlogo.ui; singleton:=true
 Bundle-Version: 1.1.1
 Bundle-Activator: fr.irisa.triskell.kmlogo.ui.Activator
 Bundle-Vendor: IRISA/INRIA
-Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.ui.console,
  fr.irisa.triskell.kmlogo.model,
  fr.irisa.triskell.kmlogo.model.edit,
+ fr.irisa.triskell.kermeta.io,
  fr.irisa.triskell.kermeta.interpreter
 Eclipse-LazyStart: true
 Export-Package: fr.irisa.triskell.kmlogo.ui,

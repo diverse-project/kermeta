@@ -1,4 +1,4 @@
-/* $Id: CompileNXCLogoK.java,v 1.9 2008-04-28 11:54:47 ftanguy Exp $
+/* $Id: CompileNXCLogoK.java,v 1.10 2008-05-26 14:49:35 vmahe Exp $
  * Project   : KmLogo
  * File      : CompileNXCLogoK.java
  * License   : EPL
@@ -30,7 +30,7 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 
 public class CompileNXCLogoK {
 
-	public static final String LOGO_COMPILER_KERMETA_CODE = "platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoNXCCompiler.kmt";
+	public static final String LOGO_COMPILER_KERMETA_CODE = "platform:/plugin/fr.irisa.triskell.kmlogo.model/logo/6.NXTCompiler/LogoNXCCompiler.kmt";
 	public static void run(String file, String out, IOConsole console) throws NotRegisteredURIException, URIMalformedException, IOException {
 		System.out.println("run FixModel");
 		
@@ -67,7 +67,7 @@ public class CompileNXCLogoK {
 		if(bundle != null){
 			urlsSet.add(FileLocator.resolve(bundle.getEntry("/")));
 			/*safeAddURLAsString(urlsSet,bundle.getLocation());*/
-			Activator.internalLog.debug("classloader updated with " +FileLocator.resolve(bundle.getEntry("/")));
+//			Activator.internalLog.debug("classloader updated with " +FileLocator.resolve(bundle.getEntry("/")));
 		}		
 		
 		
