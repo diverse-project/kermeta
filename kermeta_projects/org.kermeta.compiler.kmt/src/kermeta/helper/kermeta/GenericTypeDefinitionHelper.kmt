@@ -1,4 +1,4 @@
-/* $Id: GenericTypeDefinitionHelper.kmt,v 1.4 2008-05-20 15:45:37 cfaucher Exp $
+/* $Id: GenericTypeDefinitionHelper.kmt,v 1.5 2008-05-26 08:30:48 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -102,7 +102,7 @@ class GenericTypeDefinitionHelper {
 			specialType.name := name_KermetaSspecialType
 			specialType.instanceClassName := "java.lang.Object"
 			p.ecoreModelElement.eClassifiers.add(specialType)
-			specialType.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), "_KermetaSpecialTypesAlias_"))
+			specialType.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), "KermetaSpecialTypesAlias"))
 			result := specialType
 		end
 	end
