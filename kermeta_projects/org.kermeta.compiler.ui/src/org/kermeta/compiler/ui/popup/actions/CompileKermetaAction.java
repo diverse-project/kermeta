@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.3 2008-03-04 10:27:44 cfaucher Exp $
+/* $Id: CompileKermetaAction.java,v 1.4 2008-05-27 13:30:05 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -33,7 +33,7 @@ import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class CompileKermetaAction implements IObjectActionDelegate {
 

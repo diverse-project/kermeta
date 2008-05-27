@@ -1,4 +1,4 @@
-/* $Id: CompilerUtil.java,v 1.5 2008-02-06 15:40:01 cfaucher Exp $
+/* $Id: CompilerUtil.java,v 1.6 2008-05-27 13:29:29 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompilerUtil.java
  * License   : EPL
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.kermeta.model.KermetaModelHelper;
 
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * Provide some useful methods to manage the Kermeta Compiler

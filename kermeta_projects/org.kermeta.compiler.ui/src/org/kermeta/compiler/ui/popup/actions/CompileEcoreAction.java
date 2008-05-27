@@ -1,4 +1,4 @@
-/* $Id: CompileEcoreAction.java,v 1.1 2008-01-31 13:21:17 cfaucher Exp $
+/* $Id: CompileEcoreAction.java,v 1.2 2008-05-27 13:30:05 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileEcoreAction.java
  * License   : EPL
@@ -23,7 +23,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.Compiler;
 
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 
 public class CompileEcoreAction implements IObjectActionDelegate {

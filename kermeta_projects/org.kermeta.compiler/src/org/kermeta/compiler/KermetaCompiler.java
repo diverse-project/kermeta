@@ -1,4 +1,4 @@
-/* $Id: KermetaCompiler.java,v 1.4 2008-04-30 14:24:52 ftanguy Exp $
+/* $Id: KermetaCompiler.java,v 1.5 2008-05-27 13:29:29 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -27,7 +27,7 @@ import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class KermetaCompiler extends AbstractCompilerImpl {
 
