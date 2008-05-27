@@ -1,0 +1,16 @@
+<!-- $Id: jar_unzipper_build.xml,v 1.1 2008-05-27 12:30:07 dvojtise Exp $ -->
+<project name="log4j_jar_unzipper" default="unzip_jar" basedir=".">
+	<description>
+       
+	</description>
+	<property name="dest" location="bin"/>
+	<property name="jarfile" value="lib/thirdparty/log4j.jar"/>	
+  	<target name="unzip_jar" description="unzip log4j.jar in order to use it in eclipse">
+  		<unzip dest="${dest}"
+  			src= "${jarfile}">
+			<patternset>		    
+		        <exclude name="**/MANIFEST.MF"/>
+		    </patternset>
+		</unzip>
+  	</target> 
+</project>
