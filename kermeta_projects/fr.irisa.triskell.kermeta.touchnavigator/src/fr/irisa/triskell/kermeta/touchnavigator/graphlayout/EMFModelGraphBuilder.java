@@ -1,4 +1,4 @@
-/* $Id: EMFModelGraphBuilder.java,v 1.4 2007-07-30 14:33:15 ftanguy Exp $
+/* $Id: EMFModelGraphBuilder.java,v 1.5 2008-05-27 12:57:52 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -29,7 +29,9 @@ import com.touchgraph.graphlayout.TGException;
 import com.touchgraph.graphlayout.TGPanel;
 
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
+
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 public class EMFModelGraphBuilder extends KermetaOptimizedVisitor{

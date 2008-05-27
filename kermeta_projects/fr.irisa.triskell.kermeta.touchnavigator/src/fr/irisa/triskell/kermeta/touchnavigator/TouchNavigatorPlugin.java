@@ -5,7 +5,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * The main plugin class to be used in the desktop.

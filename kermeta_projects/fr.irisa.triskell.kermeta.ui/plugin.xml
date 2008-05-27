@@ -147,6 +147,7 @@
              id="fr.irisa.triskell.kermeta.ui.view.dependentFiles"
              name="Dependent Files"/>
        <view
+             allowMultiple="false"
              category="fr.irisa.triskell.kermeta.view"
              class="fr.irisa.triskell.kermeta.ui.views.KermetadocView"
              icon="images/kermetadoc.gif"

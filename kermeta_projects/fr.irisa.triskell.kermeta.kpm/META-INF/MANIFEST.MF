@@ -29,3 +29,4 @@ Export-Package: fr.irisa.triskell.kermeta.extension,
  fr.irisa.triskell.kermeta.kpm.resources,
  fr.irisa.triskell.kermeta.kpm.util
 Bundle-Activator: fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin
+Import-Package: org.apache.log4j

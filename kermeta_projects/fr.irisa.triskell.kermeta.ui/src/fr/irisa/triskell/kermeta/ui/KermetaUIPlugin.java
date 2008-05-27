@@ -13,7 +13,8 @@ import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.ui.provider.TreeContentProvider;
 import fr.irisa.triskell.kermeta.ui.provider.TreeViewerLabelProvider;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * The activator class controls the plug-in life cycle

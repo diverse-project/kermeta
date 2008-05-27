@@ -1,4 +1,4 @@
-/*$Id: KPMPlugin.java,v 1.11 2008-03-03 15:09:19 dvojtise Exp $
+/*$Id: KPMPlugin.java,v 1.12 2008-05-27 12:59:18 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class KPMPlugin extends AbstractUIPlugin {
 
