@@ -13,6 +13,8 @@
         eType="#//SMContext" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="staticMethods" upperBound="-1"
         eType="#//StaticMethod" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionTypes" upperBound="-1"
+        eType="#//FunctionType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StaticMethod" eSuperTypes="#//SMNamedElement">
     <eOperations name="getParentMethodFromModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation">
@@ -84,11 +86,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SMReturn" eSuperTypes="#//SMTypedElement"/>
   <eClassifiers xsi:type="ecore:EEnum" name="SMUsage">
-    <eLiterals name="FunctionType"/>
-    <eLiterals name="Runner" value="1"/>
-    <eLiterals name="Launcher" value="2"/>
-    <eLiterals name="DerivedProperty" value="3"/>
-    <eLiterals name="PreCondition" value="4"/>
-    <eLiterals name="PostCondition" value="5"/>
+    <eLiterals name="Runner"/>
+    <eLiterals name="Launcher" value="1"/>
+    <eLiterals name="DerivedProperty" value="2"/>
+    <eLiterals name="PreCondition" value="3"/>
+    <eLiterals name="PostCondition" value="4"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionType"/>
 </ecore:EPackage>

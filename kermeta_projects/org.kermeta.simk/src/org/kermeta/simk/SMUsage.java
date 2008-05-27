@@ -1,5 +1,5 @@
 /**
- * $Id: SMUsage.java,v 1.6 2008-01-11 14:33:02 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.7 2008-05-27 15:38:27 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMUsage.java,v 1.6 2008-01-11 14:33:02 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.7 2008-05-27 15:38:27 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -28,16 +28,6 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum SMUsage implements Enumerator {
 	/**
-	 * The '<em><b>Function Type</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FUNCTION_TYPE_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	FUNCTION_TYPE(0, "FunctionType", "FunctionType"),
-
-	/**
 	 * The '<em><b>Runner</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -45,7 +35,7 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	RUNNER(1, "Runner", "Runner"), /**
+	RUNNER(0, "Runner", "Runner"), /**
 	 * The '<em><b>Launcher</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,7 +43,7 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LAUNCHER(2, "Launcher", "Launcher"), /**
+	LAUNCHER(1, "Launcher", "Launcher"), /**
 	 * The '<em><b>Derived Property</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -61,7 +51,7 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DERIVED_PROPERTY(3, "DerivedProperty", "DerivedProperty"), /**
+	DERIVED_PROPERTY(2, "DerivedProperty", "DerivedProperty"), /**
 	 * The '<em><b>Pre Condition</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,7 +59,7 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	PRE_CONDITION(4, "PreCondition", "PreCondition"), /**
+	PRE_CONDITION(3, "PreCondition", "PreCondition"), /**
 	 * The '<em><b>Post Condition</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,22 +67,7 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	POST_CONDITION(5, "PostCondition", "PostCondition");
-
-	/**
-	 * The '<em><b>Function Type</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Function Type</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #FUNCTION_TYPE
-	 * @model name="FunctionType"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int FUNCTION_TYPE_VALUE = 0;
+	POST_CONDITION(4, "PostCondition", "PostCondition");
 
 	/**
 	 * The '<em><b>Runner</b></em>' literal value.
@@ -107,7 +82,7 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RUNNER_VALUE = 1;
+	public static final int RUNNER_VALUE = 0;
 
 	/**
 	 * The '<em><b>Launcher</b></em>' literal value.
@@ -122,7 +97,7 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LAUNCHER_VALUE = 2;
+	public static final int LAUNCHER_VALUE = 1;
 
 	/**
 	 * The '<em><b>Derived Property</b></em>' literal value.
@@ -137,7 +112,7 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DERIVED_PROPERTY_VALUE = 3;
+	public static final int DERIVED_PROPERTY_VALUE = 2;
 
 	/**
 	 * The '<em><b>Pre Condition</b></em>' literal value.
@@ -152,7 +127,7 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PRE_CONDITION_VALUE = 4;
+	public static final int PRE_CONDITION_VALUE = 3;
 
 	/**
 	 * The '<em><b>Post Condition</b></em>' literal value.
@@ -167,7 +142,7 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int POST_CONDITION_VALUE = 5;
+	public static final int POST_CONDITION_VALUE = 4;
 
 	/**
 	 * An array of all the '<em><b>SM Usage</b></em>' enumerators.
@@ -177,7 +152,6 @@ public enum SMUsage implements Enumerator {
 	 */
 	private static final SMUsage[] VALUES_ARRAY =
 		new SMUsage[] {
-			FUNCTION_TYPE,
 			RUNNER,
 			LAUNCHER,
 			DERIVED_PROPERTY,
@@ -233,7 +207,6 @@ public enum SMUsage implements Enumerator {
 	 */
 	public static SMUsage get(int value) {
 		switch (value) {
-			case FUNCTION_TYPE_VALUE: return FUNCTION_TYPE;
 			case RUNNER_VALUE: return RUNNER;
 			case LAUNCHER_VALUE: return LAUNCHER;
 			case DERIVED_PROPERTY_VALUE: return DERIVED_PROPERTY;

@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackageImpl.java,v 1.6 2008-01-11 14:33:02 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.7 2008-05-27 15:38:28 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackageImpl.java,v 1.6 2008-01-11 14:33:02 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.7 2008-05-27 15:38:28 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -608,7 +608,6 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 
 		// Initialize enums and add enum literals
 		initEEnum(smUsageEEnum, SMUsage.class, "SMUsage");
-		addEEnumLiteral(smUsageEEnum, SMUsage.FUNCTION_TYPE);
 		addEEnumLiteral(smUsageEEnum, SMUsage.RUNNER);
 		addEEnumLiteral(smUsageEEnum, SMUsage.LAUNCHER);
 		addEEnumLiteral(smUsageEEnum, SMUsage.DERIVED_PROPERTY);
