@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.kmlogo.feature"
       label="Logo language Kermeta sample"
-      version="1.1.1"
+      version="1.1.1.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">
@@ -30,41 +30,6 @@
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.kermeta.sintaks"/>
    </requires>
-
-   <plugin
-         id="fr.irisa.triskell.kmlogo.model"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.irisa.triskell.kmlogo.model.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.irisa.triskell.kmlogo.model.editor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.irisa.triskell.kmlogo.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.kermeta.kmlogo.texteditor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="org.kermeta.kmlogo.tutorial"
