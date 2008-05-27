@@ -1,6 +1,6 @@
 
 
-/*$Id: ModelPlugin.java,v 1.1 2007-02-06 15:06:27 ftanguy Exp $
+/*$Id: ModelPlugin.java,v 1.2 2008-05-27 12:52:04 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ModelPlugin.java
 * License : EPL
@@ -27,7 +27,7 @@ public class ModelPlugin extends Plugin {
 		super.start(context);
 		try {
 			URL url = getBundle().getEntry("/kermeta_log4j_configuration.xml");		
-			System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
+			System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
 					FileLocator.toFileURL(url).getFile());
 		} catch (Exception e) {
 			System.out.print("Not able to retreive kermeta_log4j_configuration.xml in the kermeta plugin => using default log configuration");

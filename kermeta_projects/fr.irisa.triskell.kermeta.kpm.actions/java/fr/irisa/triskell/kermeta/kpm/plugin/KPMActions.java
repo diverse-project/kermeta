@@ -1,4 +1,4 @@
-/*$Id: KPMActions.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
+/*$Id: KPMActions.java,v 1.2 2008-05-27 12:54:55 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -11,7 +11,7 @@ package fr.irisa.triskell.kermeta.kpm.plugin;
 
 import org.apache.log4j.Logger;
 
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class KPMActions {
 

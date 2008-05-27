@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.70 2008-02-14 07:13:56 uid21732 Exp $
+/* $Id: Runtime2EMF.java,v 1.71 2008-05-27 13:01:51 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -40,7 +40,8 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * This class converts models that were created by the user through the

@@ -1,4 +1,4 @@
-/* $Id: TypeCache.java,v 1.2 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: TypeCache.java,v 1.3 2008-05-27 13:02:11 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TypeCache.java
  * License    : EPL
@@ -19,7 +19,8 @@ import org.apache.log4j.Logger;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.Type;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 
 /**

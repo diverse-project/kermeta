@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.23 2008-05-19 14:19:31 ftanguy Exp $
+/* $Id: Traceback.java,v 1.24 2008-05-27 13:02:11 dvojtise Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -24,7 +24,9 @@ import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
+
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;

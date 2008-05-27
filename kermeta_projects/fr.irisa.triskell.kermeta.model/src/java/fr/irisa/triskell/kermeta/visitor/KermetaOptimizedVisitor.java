@@ -1,4 +1,4 @@
-//$Id: KermetaOptimizedVisitor.java,v 1.15 2008-05-13 11:42:07 cfaucher Exp $
+//$Id: KermetaOptimizedVisitor.java,v 1.16 2008-05-27 12:52:03 dvojtise Exp $
 /*
  * This code has been generated to visit a kermeta model
  * Creation date: Tue May 13 13:33:24 CEST 2008
@@ -12,7 +12,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 import org.apache.log4j.Logger;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
+
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 public class KermetaOptimizedVisitor {

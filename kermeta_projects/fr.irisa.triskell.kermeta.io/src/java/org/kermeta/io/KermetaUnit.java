@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.20 2008-04-28 11:50:16 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.21 2008-05-27 12:59:49 dvojtise Exp $
  */
 package org.kermeta.io;
 
@@ -19,7 +19,9 @@ import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.Using;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
+
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**

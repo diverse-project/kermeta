@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.18 2008-02-21 08:27:07 dvojtise Exp $
+/* $Id: TexteditorPlugin.java,v 1.19 2008-05-27 12:58:33 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TexteditorPlugin.java
  * License : EPL
@@ -24,7 +24,7 @@ import org.kermeta.texteditor.KermetaEditorEventListener;
 import org.kermeta.texteditor.ModelcheckingStrategy;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * The main plugin class to be used in the desktop.

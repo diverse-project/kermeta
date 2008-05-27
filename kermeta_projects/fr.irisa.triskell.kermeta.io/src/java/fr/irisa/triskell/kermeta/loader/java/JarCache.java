@@ -1,4 +1,4 @@
-/*$Id: JarCache.java,v 1.4 2008-04-28 11:50:15 ftanguy Exp $
+/*$Id: JarCache.java,v 1.5 2008-05-27 12:59:49 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaLoaderCache.java
 * License : EPL
@@ -25,7 +25,8 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * This class implements a cache for various request on the java jar

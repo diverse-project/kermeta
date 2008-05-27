@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.11 2008-04-30 13:57:40 ftanguy Exp $
+/* $Id: TypeMatchChecker.java,v 1.12 2008-05-27 12:59:48 dvojtise Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL
@@ -31,7 +31,8 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * Evaluate whether a model type is a match for another, and determine the binding of their types.

@@ -1,4 +1,4 @@
-/* $Id: CreateGenericVisitor.java,v 1.9 2008-01-02 10:28:00 vmahe Exp $
+/* $Id: CreateGenericVisitor.java,v 1.10 2008-05-27 12:52:03 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : EPL
@@ -125,7 +125,7 @@ public class CreateGenericVisitor {
 			classTemplate += "import org.eclipse.emf.ecore.EObject;\n";
 			classTemplate += "import fr.irisa.triskell.kermeta.error.KermetaVisitorError;\n";
 			classTemplate += "import org.apache.log4j.Logger;\n";
-			classTemplate += "import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;\n";
+			classTemplate += "import org.kermeta.log4j.util.LogConfigurationHelper;\n";
 			classTemplate += "\n";
 			classTemplate += "/**\n";
 			classTemplate += " * @author Franck Fleurey\n";

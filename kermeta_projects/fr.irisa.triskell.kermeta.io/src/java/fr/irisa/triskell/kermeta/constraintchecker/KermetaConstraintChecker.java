@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.22 2008-04-30 13:57:06 ftanguy Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.23 2008-05-27 12:59:49 dvojtise Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -31,7 +31,9 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
+
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**

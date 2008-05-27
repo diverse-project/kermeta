@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.37 2008-04-28 11:50:19 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.38 2008-05-27 12:59:49 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -34,7 +34,8 @@ import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class IOPlugin extends Plugin {
 

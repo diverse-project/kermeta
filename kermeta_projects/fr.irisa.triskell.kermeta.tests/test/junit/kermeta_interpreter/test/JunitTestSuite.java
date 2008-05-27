@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.20 2008-05-16 12:00:18 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.21 2008-05-27 12:58:36 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -19,7 +19,8 @@ import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
 import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 
 
@@ -54,10 +55,10 @@ public class JunitTestSuite extends TestSuite {
 
     private void initialize() {
 
-    	System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
+    	System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
     	"../fr.irisa.triskell.kermeta.model/kermeta_log4j_configuration.xml");
     	// reload conf in case iwas loaded befaore with another configuration
-    	fr.irisa.triskell.kermeta.util.LogConfigurationHelper.configureLogger(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName);
+    	org.kermeta.log4j.util.LogConfigurationHelper.configureLogger(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName);
     	
     	if ( ioPlugin == null ) {
 		
@@ -77,7 +78,7 @@ public class JunitTestSuite extends TestSuite {
 		
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
+/*		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","002_testArithm.main.kmt" );
 
@@ -214,7 +215,7 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","072_testProperty.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","073_AliasOnEnumCrash.main.kmt" );
-
+*/
 		testWithFile("test/interpreter/kmt_testcases","074_testRequireEcoreWithOppositeInDifferentFiles.main.kmt" );
 
 /*** END GENERATED TESTS ***/

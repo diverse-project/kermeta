@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.28 2008-04-28 11:50:10 ftanguy Exp $
+/* $Id: TypeCheckerContext.java,v 1.29 2008-05-27 12:59:48 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -43,7 +43,8 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * @author Franck Fleurey

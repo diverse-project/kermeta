@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.15 2008-04-28 11:51:17 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.16 2008-05-27 12:58:37 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -18,7 +18,8 @@ import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
 import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * Interpreter test suite dedicated to model load and save using EMF.
@@ -32,10 +33,10 @@ public class JunitTestSuite extends TestSuite {
     static private IOPlugin ioPlugin;
     
     private void initialize() {
-    	System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
+    	System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
     	"../fr.irisa.triskell.kermeta.model/kermeta_log4j_configuration.xml");
     	// reload conf in case iwas loaded befaore with another configuration
-    	fr.irisa.triskell.kermeta.util.LogConfigurationHelper.configureLogger(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName);
+    	org.kermeta.log4j.util.LogConfigurationHelper.configureLogger(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName);
     	
     	if ( ioPlugin == null ) {
 		

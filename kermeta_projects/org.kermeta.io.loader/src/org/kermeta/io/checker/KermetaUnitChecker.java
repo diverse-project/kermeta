@@ -1,4 +1,4 @@
-/*$Id: KermetaUnitChecker.java,v 1.3 2008-04-28 11:50:48 ftanguy Exp $
+/*$Id: KermetaUnitChecker.java,v 1.4 2008-05-27 12:56:42 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	KermetaUnitChecker.java
 * License : EPL
@@ -29,7 +29,8 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.typechecker.CallableFeaturesCache;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.TypeDefinitionContextCache;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class KermetaUnitChecker {
 

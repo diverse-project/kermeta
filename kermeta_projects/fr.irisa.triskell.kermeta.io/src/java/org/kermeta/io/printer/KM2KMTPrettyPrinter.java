@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.16 2008-04-24 09:48:55 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.17 2008-05-27 12:59:48 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -72,7 +72,9 @@ import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
+
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 

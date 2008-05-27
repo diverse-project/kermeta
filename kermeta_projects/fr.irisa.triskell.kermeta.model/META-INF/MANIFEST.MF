@@ -3,8 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.model; singleton:=true
 Bundle-Version: 1.1.99.qualifier
-Bundle-ClassPath: .,
- lib/thirdparty/log4j.jar
+Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: fr.irisa.triskell.kermeta,
@@ -15,35 +14,21 @@ Export-Package: fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.language.behavior,
  fr.irisa.triskell.kermeta.language.behavior.impl,
  fr.irisa.triskell.kermeta.language.behavior.util,
+ fr.irisa.triskell.kermeta.language.behavior.validation,
  fr.irisa.triskell.kermeta.language.impl,
  fr.irisa.triskell.kermeta.language.structure,
  fr.irisa.triskell.kermeta.language.structure.impl,
  fr.irisa.triskell.kermeta.language.structure.util,
+ fr.irisa.triskell.kermeta.language.structure.validation,
  fr.irisa.triskell.kermeta.language.util,
+ fr.irisa.triskell.kermeta.language.validation,
  fr.irisa.triskell.kermeta.model.plugin,
  fr.irisa.triskell.kermeta.util,
- fr.irisa.triskell.kermeta.visitor,
- org.apache.log4j,
- org.apache.log4j.chainsaw,
- org.apache.log4j.config,
- org.apache.log4j.helpers,
- org.apache.log4j.jdbc,
- org.apache.log4j.jmx,
- org.apache.log4j.lf5,
- org.apache.log4j.lf5.util,
- org.apache.log4j.lf5.viewer,
- org.apache.log4j.lf5.viewer.categoryexplorer,
- org.apache.log4j.lf5.viewer.configure,
- org.apache.log4j.net,
- org.apache.log4j.nt,
- org.apache.log4j.or,
- org.apache.log4j.or.jms,
- org.apache.log4j.or.sax,
- org.apache.log4j.spi,
- org.apache.log4j.varia,
- org.apache.log4j.xml
+ fr.irisa.triskell.kermeta.validation,
+ fr.irisa.triskell.kermeta.visitor
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.ecore.xmi
+ org.eclipse.emf.ecore.xmi,
+ org.kermeta.log4j.util;visibility:=reexport
 Eclipse-LazyStart: true
 Bundle-Activator: fr.irisa.triskell.kermeta.model.plugin.ModelPlugin

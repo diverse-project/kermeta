@@ -1,4 +1,4 @@
-/*$Id: RunnerPlugin.java,v 1.2 2008-04-30 13:58:47 ftanguy Exp $
+/*$Id: RunnerPlugin.java,v 1.3 2008-05-27 12:55:25 dvojtise Exp $
 * Project : org.kermeta.runner
 * File : 	zgzerg.java
 * License : EPL
@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * The activator class controls the plug-in life cycle

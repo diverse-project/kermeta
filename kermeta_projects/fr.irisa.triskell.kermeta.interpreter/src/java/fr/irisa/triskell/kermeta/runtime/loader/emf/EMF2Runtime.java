@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.80 2008-04-28 11:50:56 ftanguy Exp $
+/* $Id: EMF2Runtime.java,v 1.81 2008-05-27 13:04:33 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -50,7 +50,8 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.runtime.rohelper.RepositoryHelper;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * This class is used to transform an EMF model into a RuntimeObject representation,
@@ -177,7 +178,15 @@ public class EMF2Runtime {
 		// For each resource, create the ROs for its hosted EObjects.
 		for (Resource resObj : dependentResources) {
 			
-			TreeIterator<EObject> contentsIt = resObj.getAllContents();
+			/* EcoreUtil.getAllContents(resObj.getResourceSet(), true);
+			//resource.getResourceSet().getAllContents();
+			//resObj.getResourceSet().getAllContents();
+			if(EcoreUtil.UnresolvedProxyCrossReferencer.find(resObj.getResourceSet()).size() > 0)
+			{
+				internalLog.debug(" found unresolved proxy  ! " );
+				
+			}*/
+			TreeIterator<EObject> contentsIt = EcoreUtil.getAllContents(resObj, true); //resObj.getAllContents();
 			while(contentsIt.hasNext()) {
 				
 				// Create RO for current EObject
@@ -186,6 +195,9 @@ public class EMF2Runtime {
 					RuntimeObject rootRO = this.createEmptyRuntimeObjectForEObject(eObj);
 					this.runtime_objects_map.put(eObj, rootRO);
 					this.newlycreated_runtime_objects_map.put(eObj, rootRO );
+					if(eObj.eIsProxy()){
+						internalLog.debug(" this object is still a proxy  ! " + eObj);
+					}
 				}
 				/*else{
 					internalLog.debug("skipped because already loaded" + eObj);
@@ -404,16 +416,24 @@ public class EMF2Runtime {
 		    		"' :\n   " + (e.getMessage()!=null?e.getMessage():e) + "  at '"  + e.getStackTrace()[0] + "'", e);
 			}
 		}
-		catch(java.lang.OutOfMemoryError e){
+		catch(java.lang.OutOfMemoryError e2){
     		//packages.clear();
-    		String msg = e + ": Not enough memory to load your " 
+    		String msg = e2 + ": Not enough memory to load your " 
     				+ " model (processed " + processedElements + " elements ot of " 
     				+ runtime_objects_map.keySet().size() + " from " + resource.getURI().toString() +  " and its dependencies); ";
     		msg += "\nplease consider increasing the memory allocated to your jvm";
     		
-    		internalLog.error(msg,e);
-    		unit.throwKermetaRaisedExceptionOnLoad(msg,e);
+    		internalLog.error(msg,e2);
+    		unit.throwKermetaRaisedExceptionOnLoad(msg,e2);
     	}
+/*		catch(java.lang.Error e3){
+			String msg = e3 + ": Java problem " 
+				+ " model (processed " + processedElements + " elements ot of " 
+				+ runtime_objects_map.keySet().size() + " from " + resource.getURI().toString() +  " and its dependencies); ";
+			
+			internalLog.error(msg,e3);
+			unit.throwKermetaRaisedExceptionOnLoad(msg,e3);
+		}*/
 		
 	}
 	
@@ -707,7 +727,7 @@ public class EMF2Runtime {
 			// If result is still null, send an exception
 			if (result == null)
 			{
-				String errmsg = "EMF loading error : property set failed.\n  Not able to find '"+ propName+"' property on class " + classDef.getName() +
+				String errmsg = "EMF loading error : property set failed.\n  Not able to find '"+ propName+"' property on class " + KermetaModelHelper.ClassDefinition.qualifiedName(classDef) +
 				" ; known properties are : ";
 				for ( Object prop : KermetaModelHelper.ClassDefinition.getAllProperties(classDef)) 
 				{ errmsg += ((Property)prop).getName() + ", "; }

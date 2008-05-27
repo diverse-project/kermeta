@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.54 2008-04-28 11:50:22 ftanguy Exp $
+/* $Id: KM2EcorePass2.java,v 1.55 2008-05-27 12:59:48 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass2.java
  * License    : EPL
@@ -63,7 +63,9 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
+
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**

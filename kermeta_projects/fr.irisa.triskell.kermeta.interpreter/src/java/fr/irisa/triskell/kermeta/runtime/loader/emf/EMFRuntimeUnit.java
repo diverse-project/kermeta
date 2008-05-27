@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.65 2008-04-30 11:40:50 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.66 2008-05-27 13:01:51 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -52,7 +52,8 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 /**
  * FIXME : Check that we work with all qualified names of Classes.
  */
@@ -285,6 +286,10 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		}
 		catch (WrappedException e){
 			emf_msg += "EMF persistence error: could not load the given model "+ (e.exception().getMessage()!=null?(": " + e.exception().getMessage()):"");
+			throwKermetaRaisedExceptionOnLoad(emf_msg + getResourceErrors(resource), e);
+		}
+		catch (Exception e){
+			emf_msg += "EMF Exception: could not load the given model "+ (e.getMessage()!=null?(": " + e.getMessage()):"");
 			throwKermetaRaisedExceptionOnLoad(emf_msg + getResourceErrors(resource), e);
 		}
 		finally

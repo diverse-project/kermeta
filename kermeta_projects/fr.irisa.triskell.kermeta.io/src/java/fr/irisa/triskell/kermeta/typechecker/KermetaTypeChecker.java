@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.34 2008-04-14 09:49:59 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.35 2008-05-27 12:59:48 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -28,7 +28,8 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * @author Franck Fleurey

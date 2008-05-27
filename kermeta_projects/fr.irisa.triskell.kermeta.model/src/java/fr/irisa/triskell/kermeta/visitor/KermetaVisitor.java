@@ -13,7 +13,7 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import org.apache.log4j.Logger;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * @author Franck Fleurey

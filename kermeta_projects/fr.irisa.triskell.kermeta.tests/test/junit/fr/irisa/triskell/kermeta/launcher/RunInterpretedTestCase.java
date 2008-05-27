@@ -1,4 +1,4 @@
-/* $Id: RunInterpretedTestCase.java,v 1.8 2008-04-28 11:51:16 ftanguy Exp $
+/* $Id: RunInterpretedTestCase.java,v 1.9 2008-05-27 12:58:36 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -29,7 +29,8 @@ import org.kermeta.interpreter.api.InterpreterOptions;
 
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * Launcher for Kermeta interpreter. It can be run from the command line or as a

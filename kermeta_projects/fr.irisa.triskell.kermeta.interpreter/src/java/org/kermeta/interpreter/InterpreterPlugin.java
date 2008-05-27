@@ -3,7 +3,7 @@ package org.kermeta.interpreter;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class InterpreterPlugin extends Plugin {
 

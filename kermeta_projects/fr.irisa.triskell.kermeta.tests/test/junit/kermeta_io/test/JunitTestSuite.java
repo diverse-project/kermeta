@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.13 2008-04-28 11:51:16 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.14 2008-05-27 12:58:36 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -50,7 +50,7 @@ public class JunitTestSuite extends TestCase {
 	public JunitTestSuite(String arg0) {
 		super(arg0);
 		initialize();
-		System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
+		System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
 		        "../fr.irisa.triskell.kermeta.texteditor/kermeta_log4j_configuration.xml");
 	}
 	

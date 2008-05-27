@@ -1,4 +1,4 @@
-/* $Id: TestJavaCall.java,v 1.1 2007-09-10 08:35:14 cfaucher Exp $
+/* $Id: TestJavaCall.java,v 1.2 2008-05-27 12:58:35 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
  * License    : EPL
@@ -20,7 +20,8 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * Implementation of the java part for an extern JavaCall from Kermeta.
