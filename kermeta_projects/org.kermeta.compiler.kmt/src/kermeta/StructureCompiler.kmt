@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.27 2008-05-20 15:45:37 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.28 2008-05-27 07:25:37 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -29,13 +29,13 @@ class Main {
 	reference context : KM2EcoreContext [1..1]
 
     operation main_inner() : Void is do
-    	var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt02.km"
-		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt02.ecore"
-		var traceInput : String init ""//platform:/resource/org.kermeta.compiler.kmt/models/Attempt02.traceability"
+    	//var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt02.km"
+		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt02.ecore"
+		//var traceInput : String init ""//platform:/resource/org.kermeta.compiler.kmt/models/Attempt02.traceability"
 		
-		//var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.km"
-		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.ecore"
-		//var traceInput : String init ""//platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.traceability"
+		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.ecore"
+		var traceInput : String init ""//platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_merged.traceability"
 
 		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
@@ -63,7 +63,7 @@ class Main {
 		end
 		
 		if context.mode == CompilingMode.behaviorJava then
-			context.mu.applyPass2BehaviorJava(context)
+			//context.mu.applyPass2BehaviorJava(context)
 		end
 		
 		stdio.writeln("KermetaCompiler - Pass 2 is finished")
@@ -83,12 +83,12 @@ class Main {
 		}
 		
 		stdio.writeln("Save the Ecore Model")
-		ecore_resource.save()
+		//ecore_resource.save()
 		stdio.writeln("The Ecore Model has been saved")
 		
 		// Save the context to reuse it during the EMF Java generation
 		
-		context.save()
+		//context.save()
 			
 		stdio.writeln("Finish")
 		
@@ -97,7 +97,7 @@ class Main {
     
     
     /*****************************************/
-    /************ METHODS FOR TEST ***********/
+    /********** METHODS FOR TESTING **********/
     /*****************************************/
     
     operation main_mode2(modelInput : String, traceInput : String, output : String, mode : CompilingMode) : Void is do

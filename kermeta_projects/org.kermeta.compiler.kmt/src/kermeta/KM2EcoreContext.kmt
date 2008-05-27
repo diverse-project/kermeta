@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.11 2008-05-20 15:45:37 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.12 2008-05-27 07:25:37 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -20,6 +20,7 @@ require "helper/kermeta/KermetaHelper.kmt"
 require "http://www.kermeta.org/Traceability"
 require "http://www.kermeta.org/simk"
 require "pass0/Pass0.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km"
 
 using kermeta::language
 using kermeta::language::structure
@@ -27,6 +28,7 @@ using km2ecore::helper::kermeta
 using traceability
 using kermeta::persistence
 using simk
+using kermeta::utils
 
 class KM2EcoreContext
 {
@@ -48,7 +50,7 @@ class KM2EcoreContext
 	/** The choosen compiling mode */
 	attribute mode : CompilingMode [1..1]
 	
-	attribute tasks_stack : seq String [0..*]
+	//reference tasks_stack : Stack<String> [0..1]
 	
 	/** Unique instance of the JavaKeyWordList */
 	reference javaKeyWordList : JavaKeyWordList [0..1]
@@ -73,6 +75,9 @@ class KM2EcoreContext
 	
 		self.kmInput := modelInput
 		self.traceabilityInput := traceInput
+		
+		//self.tasks_stack := Stack<String>.new
+		//self.tasks_stack.push("Start")
 		
 		// Initializing the java keywords list.
 		javaKeyWordList := JavaKeyWordList.new

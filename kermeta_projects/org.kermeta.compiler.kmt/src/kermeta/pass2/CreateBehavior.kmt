@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.19 2008-05-20 15:45:37 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.20 2008-05-27 07:25:37 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -64,7 +64,7 @@ package structure {
 			//ft.right*/
 			
 			//if ft_parameters.detect{ p | p.name==cv.name} then
-			context.tasks_stack.last()
+			//context.tasks_stack.peek()
 			 
 			var javaCode : StringBuffer init StringBuffer.new
 			
@@ -200,9 +200,9 @@ package behavior {
 				end
 			end*/
 			
-			context.tasks_stack.add("FunctionType_Compilation")
+			//context.tasks_stack.push("FunctionType_Compilation")
 			self.staticOperation.createBehaviorJava(context)
-			context.tasks_stack.remove(context.tasks_stack.last())
+			//context.tasks_stack.pop()
 			
 			if not tgt.isVoid() then
 				result := result + getPP(tgt, fName, context)
