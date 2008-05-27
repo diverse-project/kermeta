@@ -12,7 +12,8 @@ import fr.irisa.triskell.kermeta.KermetaIcons;
 import fr.irisa.triskell.kermeta.FileRegistry;
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 
 /**

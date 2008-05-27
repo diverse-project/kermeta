@@ -1,4 +1,4 @@
-/* $Id: KermetaConstants.java,v 1.3 2007-05-29 16:17:47 dvojtise Exp $
+/* $Id: KermetaConstants.java,v 1.4 2008-05-27 13:21:40 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : RunnerConstants.java
  * License   : EPL
@@ -11,7 +11,7 @@ package fr.irisa.triskell.kermeta;
 
 import org.apache.log4j.Logger;
 
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class KermetaConstants {
 
