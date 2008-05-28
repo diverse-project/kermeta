@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.13 2007-12-03 10:56:37 cfaucher Exp $
+/* $Id: DestFileWizardPage.java,v 1.14 2008-05-28 15:34:57 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -91,12 +91,14 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 
 	protected Group fileExistsGroup;
 	protected Group errorBehaviorGroup;
+	protected Group deployGroup;
 
 	protected Button forbidFileExistRadio;
 
 	protected Button overwriteIfFileExistRadio;
 	
 	protected Button forceWriteEvenIfErrorCheck;
+	protected Button deployCheck;
 
 	// initial value stores
 	protected String initialFileName;
@@ -221,6 +223,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		initialPopulateContainerNameField();
 		createFileExistsBehaviorControls(topLevel);
 		createErrorBehaviorControls(topLevel);
+		createDeployControls(topLevel);
 		createAdvancedControls(topLevel);
 		if (initialFileName != null)
 			resourceGroup.setResource(initialFileName);
@@ -298,6 +301,31 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 			}
 		});
 	}
+	
+	/**
+	 * @param parent
+	 */
+	protected void createDeployControls(Composite parent) {
+		Font font = parent.getFont();
+		// Advanced group
+		deployGroup = new Group(parent, SWT.NONE);
+		GridLayout layout = new GridLayout(2, false);
+		deployGroup.setLayout(layout);
+		deployGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		deployGroup.setFont(font);
+		deployGroup.setText("Deployment:");
+
+		Label label = new Label(deployGroup, SWT.NULL);
+		label.setText("Is executable ");
+		deployCheck = new Button(deployGroup, SWT.CHECK);
+		deployCheck.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				Event trucEvent = new Event();
+				handleEvent(trucEvent);
+			}
+		});
+	}
+	
 	/**
 	 * Creates a file resource given the file handle and contents.
 	 * 

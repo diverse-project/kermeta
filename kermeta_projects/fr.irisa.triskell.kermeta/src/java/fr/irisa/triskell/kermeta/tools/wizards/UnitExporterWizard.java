@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.35 2008-04-28 11:51:26 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.36 2008-05-28 15:34:57 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -15,9 +15,11 @@ package fr.irisa.triskell.kermeta.tools.wizards;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -53,6 +55,7 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.traceability.helper.Tracer;
+import org.kermeta.merger.Merger;
 
 /**
  * Pretty print of kmt files from a KermetaUnit. It may be subclassed in order
@@ -175,20 +178,34 @@ public class UnitExporterWizard extends Wizard {
 	 */
 	public void writeUnit(final KermetaUnit builder, final IFile ifile) throws Exception {
 
-		final String fileURI = "platform:/resource" + ifile.getFullPath().toString();
-    	int index = fileURI.lastIndexOf("/");
-    	final String targetDir = fileURI.substring(0, index);
-		final KmExporter exporter = new KmExporter();
+		if ( outputPage.deployCheck.getSelection() ) {
+			Set<KermetaUnit> l = new HashSet<KermetaUnit>();
+			l.add(builder);
+			l.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(builder) );
 
-
-		IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
-			public void run(IProgressMonitor monitor) throws CoreException {
-				exporter.export(builder, targetDir, fileURI, false);				
-				ifile.refreshLocal(1, null);
-			}
-		};
+			String fileURI = "platform:/resource" + ifile.getFullPath().toString();
+	    	int index = fileURI.lastIndexOf(".");
+	    	fileURI = fileURI.substring(0, index) + ".km";
+			
+			Merger merger = new Merger();
+			merger.process(l, fileURI, true, true);
+		} else {
 		
-		ResourcesPlugin.getWorkspace().run(runnable, null);		
+			final String fileURI = "platform:/resource" + ifile.getFullPath().toString();
+	    	int index = fileURI.lastIndexOf("/");
+	    	final String targetDir = fileURI.substring(0, index);
+			final KmExporter exporter = new KmExporter();
+	
+	
+			IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
+				public void run(IProgressMonitor monitor) throws CoreException {
+					exporter.export(builder, targetDir, fileURI, false);				
+					ifile.refreshLocal(1, null);
+				}
+			};
+			
+			ResourcesPlugin.getWorkspace().run(runnable, null);		
+		}
 	}
 
 	public void writeTrace() throws Exception {
