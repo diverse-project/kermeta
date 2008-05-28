@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.20 2008-04-29 10:06:50 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.21 2008-05-28 16:09:03 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -38,7 +38,7 @@
 	<property name="kermeta.tests.jar" location="..\..\..\fr.irisa.triskell.kermeta.tests\${dot.or.bin}" />
 	<property name="ecoretools.registration.jar" location="..\..\..\org.eclipse.emf.ecoretools.registration\${dot.or.bin}"/>
 
-	<property name="log4j.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\lib\thirdparty\log4j.jar" />
+	<property name="log4j.jar" location="${eclipse.home}/plugins/org.apache.log4j_1.2.13.v200706111418.jar" />
 	<property name="antlr.jar" location="${eclipse.home}/plugins/org.antlr_2.7.6/antlr.jar"/>
 	<!--<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar" />-->
 	<property name="emfatic-core.jar" location="..\..\..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>
@@ -63,6 +63,7 @@
 	<property name="emf.compare.diff.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.diff_0.8.0.v200804040851.jar" />
 	<property name="emf.compare.match.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.match_0.8.0.v200804040851.jar" />
 	<property name="junit4.jar" location="${eclipse.home}/plugins/org.junit4_4.3.1/junit.jar" />
+	<property name="apache.commons.logging.jar" location="${eclipse.home}/plugins/org.apache.commons.logging_1.0.4.v200706111724.jar" />
 			
 	
 	<path id="interpreter.class.path">
@@ -98,6 +99,7 @@
 		<pathelement location="${core.jobs.jar}" />
 		<pathelement location="${log4j.jar}" />
 		<pathelement location="${junit4.jar}" />
+		<pathelement location="${apache.commons.logging.jar}" />
 		<pathelement location="${antlr.jar}" />
 	    <pathelement location="${emfatic-core.jar}"/>
 		<pathelement path="${java.class.path}" />
