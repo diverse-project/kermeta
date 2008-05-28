@@ -1,6 +1,6 @@
 
 
-/*$Id: RequireConstraint.java,v 1.7 2008-04-28 11:50:11 ftanguy Exp $
+/*$Id: RequireConstraint.java,v 1.8 2008-05-28 10:06:10 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	RequireConstraint.java
 * License : EPL
@@ -136,7 +136,7 @@ public class RequireConstraint {
 						if ( internalTypeDefinition != null ) {
 							message += " already exists in ";
 						} else {
-							message += " with the same qualified name are imported from several files : ";
+							message += " with the same qualified name are imported from several files : \n";
 						}
 						String units = "";
 						Set<KermetaUnit> unitsProcessed = new HashSet<KermetaUnit>(); 
@@ -239,7 +239,7 @@ public class RequireConstraint {
 		return null;
 		
 	}
-	
+		
 	/**
 	 * get list of Require from selfUnit that directly or indirectly require the requiredUnit
 	 * @param selfUnit
@@ -248,22 +248,27 @@ public class RequireConstraint {
 	 */
 	private Set<Require> getIndirectRequire(KermetaUnit selfUnit, KermetaUnit requiredUnit){
 		Set<Require> result = new HashSet<Require>();
-		
-		if(getRequire(selfUnit, requiredUnit) != null)
-			result.add(getRequire(selfUnit, requiredUnit));
-		List<KermetaUnit> allImportedUnit = KermetaUnitHelper.getAllImportedKermetaUnits(selfUnit);
-		// this is an indirect require
-		for(KermetaUnit iu : allImportedUnit){
-			if(iu != requiredUnit){
-				
-				if(getRequire(iu, requiredUnit) != null){
+		Set<KermetaUnit> processedUnit = new HashSet<KermetaUnit>();
+		getIndirectRequire(selfUnit, requiredUnit, result, processedUnit);	
+		return result;
+	}
+	
+	private void getIndirectRequire(KermetaUnit selfUnit, KermetaUnit requiredUnit, Set<Require> requires, Set<KermetaUnit> processedUnit) {
+		if ( ! processedUnit.contains(requiredUnit) ) {
+			processedUnit.add(requiredUnit);
+			Require r = getRequire(selfUnit, requiredUnit);
+			if( r != null && ! requires.contains(r) )
+				requires.add( r );
+			
+			List<KermetaUnit> allImportedUnit = KermetaUnitHelper.getAllImportedKermetaUnits(selfUnit);
+			// this is an indirect require
+			for(KermetaUnit iu : allImportedUnit){
+				if(iu != requiredUnit){
 					// search the require that was requiring it
-					result.addAll(getIndirectRequire(selfUnit,iu));
+					getIndirectRequire(selfUnit, iu, requires, processedUnit);
 				}
 			}
 		}
-		
-		return result;
 	}
 	
 }

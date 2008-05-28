@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.38 2008-05-27 12:59:49 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.39 2008-05-28 10:05:59 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -39,11 +39,11 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class IOPlugin extends Plugin {
 
-	public static String FRAMEWORK_KM_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
+	public static String FRAMEWORK_KM_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km";
 
 	final public static String FRAMEWORK_KMT_URI = "platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt";
 	
-	final public static String FRAMEWORK_KM_LOCAL_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
+	final public static String FRAMEWORK_KM_LOCAL_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km";
 	
 	final public static String ECORE_URI = "http://www.eclipse.org/emf/2002/Ecore";
 	
