@@ -1,4 +1,4 @@
-/*$Id: Ket2Kmt.java,v 1.3 2008-02-06 10:14:38 cfaucher Exp $
+/*$Id: Ket2Kmt.java,v 1.4 2008-05-28 15:44:10 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.ket
 * File : 	Ket2Kmt.java
 * License : EPL
@@ -10,28 +10,25 @@
 
 package fr.irisa.triskell.kermeta.ket.kpm.actions;
 
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kpm.IAction;
+import org.kermeta.kpm.NameFilterHelper;
 
 import fr.irisa.triskell.eclipse.resources.PropertyNotFoundException;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.ket.Generator;
 import fr.irisa.triskell.kermeta.kpm.Out;
-import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 
 public class Ket2Kmt implements IAction {
 
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor,
-			Map<String, Object> args, List<Parameter> parameters) {
+	public void execute(Out out, Unit unit, Map<String, Object> args, IProgressMonitor monitor) {
 
 		if ( monitor.isCanceled() )
 			return;
@@ -41,7 +38,7 @@ public class Ket2Kmt implements IAction {
 			/*
 			 * Getting the path (relative to the workspace) of the output file.
 			 */
-			String outputString = NameFilterHelper.getOuputString(unit, out);
+			String outputString = NameFilterHelper.getOutputString(unit, (String) args.get("") );
 			
 			IFile outputFile = ResourceHelper.getIFile( outputString, false );
 			IOPlugin.getDefault().unload(outputFile);
@@ -58,13 +55,13 @@ public class Ket2Kmt implements IAction {
 			/*
 			 * Check if the out has been disabled.
 			 */
-			IFile inputFile = ResourceHelper.getIFile( unit.getValue() );
+			IFile inputFile = ResourceHelper.getIFile( unit.getName() );
 			try {
-				String value = ResourceHelper.getProperty(inputFile, out.getAction().getExtensionPoint() );
+				String value = ResourceHelper.getProperty(inputFile, out.getExtensionPoint() );
 				if ( ! Boolean.parseBoolean(value) )					
 					return;
 			} catch (PropertyNotFoundException e1) {
-				ResourceHelper.setProperty(inputFile, out.getAction().getExtensionPoint(), true);
+				ResourceHelper.setProperty(inputFile, out.getExtensionPoint(), true);
 			}
 			
 			/*

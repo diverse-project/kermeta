@@ -24,9 +24,10 @@
       </objectContribution>
    </extension>
    <extension
-         id="ket2kmt"
          point="fr.irisa.triskell.kermeta.kpm.javaAction">
-      <Action class="fr.irisa.triskell.kermeta.ket.kpm.actions.Ket2Kmt"/>
+      <Action
+            class="fr.irisa.triskell.kermeta.ket.kpm.actions.Ket2Kmt"
+            id="org.kermeta.ket.ket2kmt"/>
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">
