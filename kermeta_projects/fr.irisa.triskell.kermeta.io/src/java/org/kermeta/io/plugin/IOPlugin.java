@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.40 2008-05-28 13:37:13 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.41 2008-05-28 15:44:19 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -47,9 +47,9 @@ public class IOPlugin extends Plugin {
 	
 	final public static String ECORE_URI = "http://www.eclipse.org/emf/2002/Ecore";
 	
-	final private static String FRAMEWORK_ECORE_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.ecore";
+	final private static String FRAMEWORK_ECORE_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore";
 	
-	final private static String FRAMEWORK_ECORE_LOCAL_URI = "platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.ecore";
+	final private static String FRAMEWORK_ECORE_LOCAL_URI = "platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore";
 	
 	public static boolean FRAMEWORK_GENERATION = false;
 	

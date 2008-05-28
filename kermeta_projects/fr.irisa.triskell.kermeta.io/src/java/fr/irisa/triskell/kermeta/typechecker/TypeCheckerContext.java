@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.30 2008-05-28 13:37:12 dvojtise Exp $
+/* $Id: TypeCheckerContext.java,v 1.31 2008-05-28 15:44:19 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -54,6 +54,18 @@ public class TypeCheckerContext {
 
 	final static private Log internalLog = LogConfigurationHelper.getLogger("TypeCheckerContext");
 	
+	static protected List<Operation> specialOperations = new ArrayList<Operation>();
+	
+	static private void initializeSpecialOperations() {
+		specialOperations.add( TypeCheckerContext.getObjectAsTypeOperation() );
+		specialOperations.add( TypeCheckerContext.getClassNewOperation() );
+		specialOperations.add( TypeCheckerContext.getModelTypeNewOperation() );
+		specialOperations.add( TypeCheckerContext.getClassCloneOperation() );
+		specialOperations.add( TypeCheckerContext.getModelFilterOperation() );
+		specialOperations.add( TypeCheckerContext.getModelAddOperation() );
+		specialOperations.add( TypeCheckerContext.getModelRemoveOperation() );	
+	}
+	
 	public static void initializeTypeChecker(KermetaUnit std_lib) {
 	
 	    objectAsType = null;
@@ -103,6 +115,7 @@ public class TypeCheckerContext {
 		    internalLog.info("Type checker initialized.");
 		}
 		
+		initializeSpecialOperations();
 	}
 	
 	protected static Operation getObjectAsTypeOperation() {

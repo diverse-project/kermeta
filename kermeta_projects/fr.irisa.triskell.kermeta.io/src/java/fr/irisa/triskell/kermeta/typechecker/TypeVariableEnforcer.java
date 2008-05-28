@@ -1,4 +1,4 @@
-/* $Id: TypeVariableEnforcer.java,v 1.12 2008-04-28 11:50:10 ftanguy Exp $
+/* $Id: TypeVariableEnforcer.java,v 1.13 2008-05-28 15:44:19 ftanguy Exp $
 * Project : Kermeta io
 * File : GenericTypeSubstitution.java
 * License : EPL
@@ -42,6 +42,8 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	public static fr.irisa.triskell.kermeta.language.structure.Type getBoundType(fr.irisa.triskell.kermeta.language.structure.Type generic, 
 			Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings) {
 		TypeVariableEnforcer visitor = new TypeVariableEnforcer(bindings);
+		if ( generic == null )
+			System.out.println();
 		return (fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(generic);
 	}
 	

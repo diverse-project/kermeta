@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.36 2008-05-28 13:37:12 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.37 2008-05-28 15:44:19 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -62,9 +62,11 @@ public class KermetaTypeChecker {
     public KermetaTypeChecker(KermetaUnit unit) {
         super();
         this.unit = unit;
-        if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object") != null)
-        	TypeCheckerContext.initializeTypeChecker(unit);
-        context = new TypeCheckerContext(unit);
+        if ( ! unit.isTypeChecked() ) {
+        	if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object") != null)
+        		TypeCheckerContext.initializeTypeChecker(unit);
+        	context = new TypeCheckerContext(unit);
+        }
     }
        
     
@@ -137,6 +139,7 @@ public class KermetaTypeChecker {
 		    		}
 		    	}
     		}
+    		CallableFeaturesCache.destroyInstance();
     	}
     }
     
