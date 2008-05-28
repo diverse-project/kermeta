@@ -1,13 +1,10 @@
-/* $Id: KM2EcoreContext.kmt,v 1.12 2008-05-27 07:25:37 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.13 2008-05-28 15:50:22 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Francois Tanguy <ftanguy@irisa.fr>
  *			Cyril Faucher <cfaucher@irisa.fr>
  */
-
-@mainClass "kermeta::km2ecore::KMEcoreContext"
-@mainOperation "main"
 
 package km2ecore;
 
@@ -20,7 +17,6 @@ require "helper/kermeta/KermetaHelper.kmt"
 require "http://www.kermeta.org/Traceability"
 require "http://www.kermeta.org/simk"
 require "pass0/Pass0.kmt"
-require "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km"
 
 using kermeta::language
 using kermeta::language::structure
