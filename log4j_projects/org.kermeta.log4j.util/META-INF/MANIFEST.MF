@@ -13,3 +13,4 @@ Export-Package:
  org.kermeta.log4j.util,
  org.kermeta.log4j.util.plugin
 Bundle-ClassPath: .
+Import-Package: org.apache.log4j
