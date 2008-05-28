@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.7 2008-05-13 12:49:17 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.8 2008-05-28 09:51:29 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -68,9 +68,9 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	/** The GenModel object */
 	private GenModel configuration;
 
-	private KermetaUnit kmUnit;
+	//private KermetaUnit kmUnit;
 	// FIXME CF unused for the moment
-	private EcoreExporter km2ecoreGen;
+	//private EcoreExporter km2ecoreGen;
 	private SIMKModel simkModel;
 
 	/**
@@ -81,11 +81,11 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	 * @param km2ecoreGen
 	 * @param helperModel
 	 */
-	public CompilerHelperGenerator(GenModel conf, KermetaUnit kmUnit,
-			EcoreExporter km2ecoreGen, SIMKModel simkModel) {
+	public CompilerHelperGenerator(GenModel conf, /*KermetaUnit kmUnit,*/
+			/*EcoreExporter km2ecoreGen,*/ SIMKModel simkModel) {
 		this.configuration = conf;
-		this.kmUnit = kmUnit;
-		this.km2ecoreGen = km2ecoreGen;
+		//this.kmUnit = kmUnit;
+		//this.km2ecoreGen = km2ecoreGen;
 		this.simkModel = simkModel;
 	}
 

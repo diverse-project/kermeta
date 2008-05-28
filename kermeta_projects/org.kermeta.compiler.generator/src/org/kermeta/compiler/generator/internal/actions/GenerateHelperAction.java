@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: GenerateHelperAction.java,v 1.5 2008-02-06 15:40:05 cfaucher Exp $
+/*$Id: GenerateHelperAction.java,v 1.6 2008-05-28 09:51:29 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	GenerateHelperAction.java
 * License : EPL
@@ -111,7 +111,8 @@ public class GenerateHelperAction implements IActionDelegate
         // get the selected *.configuration file
         final IFile file = convertSelection2File(selection);
         
-        KermetaUnit kermetaUnit = null;
+        //Check if the kermetaUnitis really required
+        /*KermetaUnit kermetaUnit = null;
         String genModelPath = file.getFullPath().removeFileExtension().addFileExtension("kmt").toString();
 
         try {
@@ -122,15 +123,14 @@ public class GenerateHelperAction implements IActionDelegate
 		} catch (NotRegisteredURIException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
         
-        generate(file, kermetaUnit, null, null);
+        generate(file, /*kermetaUnit,*/ null, null);
 
     }
     
-    public void generate(final IFile file, final KermetaUnit kmUnit, final EcoreExporter km2ecoreGen, final IFile simk_file) {
-    	if (file == null)
-        {
+    public void generate(final IFile file, /*final KermetaUnit kmUnit,*/ final EcoreExporter km2ecoreGen, final IFile simk_file) {
+    	if (file == null) {
             GeneratorPlugin.displayDialog(null, "Invalid selection : Only one file can be selected.", IStatus.ERROR);
             return;
         }
@@ -140,50 +140,37 @@ public class GenerateHelperAction implements IActionDelegate
             public void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException
             {
                 monitor.beginTask("Compiler Helper Generation process", 11);
-                try
-                {
+                try {
                     ConfiguratorObjectManager manager = new ConfiguratorObjectManager();
                     manager.load(file.getFullPath());
                     // retrieve the root model object and check if it has the expected type
-                    if (manager.getRootModelObject() instanceof GenModel)
-                    {
+                    if (manager.getRootModelObject() instanceof GenModel) {
                     	GenModel configuration = (GenModel) manager.getRootModelObject();
 
                         monitor.subTask("GenModel validation");
                         Diagnostician diagnostician = new Diagnostician();
                         Diagnostic diagnostic = diagnostician.validate(configuration);
-                        if (diagnostic.getSeverity() <= Diagnostic.INFO)
-                        {
+                        if (diagnostic.getSeverity() <= Diagnostic.INFO) {
                             monitor.worked(1);
 
-                            CompilerHelperGenerator generator = new CompilerHelperGenerator(configuration, kmUnit, km2ecoreGen, SimkModelHelper.getSIMKModel(simk_file));
+                            CompilerHelperGenerator generator = new CompilerHelperGenerator(configuration, /*kmUnit,*/ /*km2ecoreGen,*/ SimkModelHelper.getSIMKModel(simk_file));
                             generatedProject = generator.generate(monitor);
-                        }
-                        else
-                        {
+                        } else {
                             GeneratorPlugin.log("Validation problem : a problem occured during the genmodel validation.", IStatus.ERROR);
-
                         }
-                    }
-                    else
-                    {
+                    } else {
                         GeneratorPlugin.log("The root model object has not the right type. Generation process has been aborted.", IStatus.ERROR);
                     }
-                }
-                catch (IOException ioe)
-                {
+                } catch (IOException ioe) {
                     IStatus status = new Status(IStatus.ERROR, GeneratorPlugin.getId(), IStatus.OK, "Operation failed.", ioe);
                     throw new CoreException(status);
-                }
-                finally
-                {
+                } finally {
                     monitor.done();
                 }
             }
         };
 
-        try
-        {
+        try {
             Shell shell = GeneratorPlugin.getActiveWorkbenchShell();
             ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
             dialog.run(true, false, op);
@@ -191,17 +178,13 @@ public class GenerateHelperAction implements IActionDelegate
             ConfiguratorObjectManager manager = new ConfiguratorObjectManager();
             manager.load(file.getFullPath());
             // retrieve the root model object and check if it has the expected type
-            if (manager.getRootModelObject() instanceof GenModel)
-            {
+            if (manager.getRootModelObject() instanceof GenModel) {
             	GenModel configuration = (GenModel) manager.getRootModelObject();
-                if (configuration.isUpdateClasspath())
-                {
+                if (configuration.isUpdateClasspath()) {
                     AbstractGenerator.organizeImports(generatedProject);
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             GeneratorPlugin.log(e);
             GeneratorPlugin.displayDialog(null, "An error occurred during the helper generation", IStatus.ERROR);
         }
