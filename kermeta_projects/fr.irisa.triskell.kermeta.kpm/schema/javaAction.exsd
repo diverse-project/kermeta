@@ -13,9 +13,9 @@
    <element name="extension">
       <complexType>
          <sequence>
-            <element ref="Action"/>
+            <element ref="Action" minOccurs="1" maxOccurs="unbounded"/>
          </sequence>
-         <attribute name="point" type="string" use="required">
+         <attribute name="point" type="string">
             <annotation>
                <documentation>
                   
@@ -44,6 +44,13 @@
 
    <element name="Action">
       <complexType>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>

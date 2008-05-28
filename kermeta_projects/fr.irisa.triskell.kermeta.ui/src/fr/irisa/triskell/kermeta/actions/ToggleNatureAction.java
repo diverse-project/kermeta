@@ -1,4 +1,4 @@
-/*$Id: ToggleNatureAction.java,v 1.5 2007-08-02 14:51:09 dvojtise Exp $
+/*$Id: ToggleNatureAction.java,v 1.6 2008-05-28 09:25:42 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -25,8 +25,6 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.resources.KermetaNature;
 
 public class ToggleNatureAction implements IObjectActionDelegate {
@@ -91,12 +89,10 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 
 				if ( ! project.hasNature(KermetaNature.ID) ) {
 					NatureHelper.addNatureToProject(project, KermetaNature.ID);
-			    	KermetaProject kermetaProject = KermetaWorkspace.getInstance().addKermetaProject(project);	
 			    	/*KPMResourceVisitor visitor = new KPMResourceVisitor(kermetaProject);
 			    	project.accept(visitor);
 			    	kermetaProject.save();*/
-			    	kermetaProject.open();
-				} else {
+			    } else {
 					NatureHelper.removeNatureFromProject(project, KermetaNature.ID);
 				}
 

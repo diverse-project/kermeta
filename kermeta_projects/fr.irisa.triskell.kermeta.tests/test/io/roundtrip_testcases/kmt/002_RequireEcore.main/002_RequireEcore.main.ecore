@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|002_MetaModel.ecore|"/>
+    <details key="using" value="src|kermeta|kermeta::persistence|kermeta::standard|"/>
+  </ecore:EAnnotation>
+  <ecore:EAnnotation source="kermeta">
+    <details key="mainClass" value="src::Main"/>
+  </ecore:EAnnotation>
+  <ecore:EAnnotation source="kermeta">
+    <details key="mainOperation" value="main"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="src" nsURI="http://RequireEcore" nsPrefix="src">
+    <eClassifiers xsi:type="ecore:EClass" name="Main">
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="main">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;-----------------------------------------&quot;)&#xA;&#x9;stdio.writeln(&quot;Start&quot;)&#xA;&#x9;stdio.writeln(&quot;-----------------------------------------&quot;)&#xA;&#x9;var statemachine : src::StateMachine&#xA;&#x9;var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new&#xA;&#x9;var resource : kermeta::persistence::Resource init repository.createResource(&quot;./StateMachine.xmi&quot;, &quot;./MetaModel.ecore&quot;)&#xA;&#x9;stdio.writeln(&quot;Before Load&quot;)&#xA;&#x9;resource.load&#xA;&#x9;stdio.writeln(&quot;After Load&quot;)&#xA;&#x9;statemachine ?= resource.instances.one&#xA;&#x9;statemachine.name := &quot;Name1&quot;&#xA;&#x9;statemachine.name := &quot;Re-Name1&quot;&#xA;&#x9;var s0 : src::State init src::State.new&#xA;&#x9;var setTrans : kermeta::standard::Set&lt;src::Transition> init kermeta::standard::Set&lt;src::Transition>.new&#xA;&#x9;var t1 : src::Transition init src::Transition.new&#xA;&#x9;var s1 : src::State init src::State.new&#xA;&#x9;s0.name := &quot;State0&quot;&#xA;&#x9;t1.name := &quot;Transition&quot;&#xA;&#x9;s1.name := &quot;State1&quot;&#xA;&#x9;t1.source := s0&#xA;&#x9;t1.target := s1&#xA;&#x9;setTrans.add(t1)&#xA;&#x9;s0.outgoing.addAll(setTrans)&#xA;&#x9;s1.incoming.addAll(setTrans)&#xA;&#x9;statemachine.top := s0&#xA;&#x9;resource.instances.remove(statemachine)&#xA;&#x9;resource.instances.add(statemachine)&#xA;&#x9;stdio.write(&quot;Look if the resource is correctly managed: &quot;)&#xA;&#x9;resource.instances.each{o | do&#xA;&#x9;&#x9;&#x9;stdio.writeln(o.toString)&#xA;&#x9;&#x9;end}&#xA;&#x9;stdio.writeln(&quot;Before Save&quot;)&#xA;&#x9;resource.save&#xA;&#x9;stdio.writeln(&quot;After Save&quot;)&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="truc" ordered="false">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var truc2 : src::String init &quot;sdqf&quot;&#xA;&#x9;stdio.writeln(machin)&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Void"/>
+        <eParameters name="machin">
+          <eType xsi:type="ecore:EDataType" href="002_MetaModel.ecore#/1/String"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource">
+    <references href="002_MetaModel.ecore#/0"/>
+    <references href="002_MetaModel.ecore#/1"/>
+    <references href="002_MetaModel.ecore#/2"/>
+  </ecore:EAnnotation>
+</xmi:XMI>

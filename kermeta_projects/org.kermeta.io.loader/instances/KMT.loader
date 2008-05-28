@@ -39,9 +39,6 @@
     <steps name="_DELETE_AST_NODES_" propagate="true">
       <action class="org.kermeta.io.loader.kmt.DeleteASTNodes"/>
     </steps>
-    <steps name="reportRequireError" performActionIfError="true">
-      <action class="org.kermeta.io.loader.core.ReportRequireError"/>
-    </steps>
     <action class="org.kermeta.io.loader.core.FinalizeLoading"/>
   </steps>
 </loader:KMTLoader>

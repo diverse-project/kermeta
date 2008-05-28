@@ -1,0 +1,7 @@
+@uri "http://myPackage"
+package myPackage;
+
+require "kermeta"
+class A
+{
+}

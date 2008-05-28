@@ -1,0 +1,16 @@
+@uri "http://TestAlias"
+package testAliasInOperationBody;
+
+require "kermeta"
+alias AliasB : B;
+abstract class A
+{
+	operation accept(paramb : B) : kermeta::standard::~Void is
+		do
+			var varb : B init paramb
+		end
+
+}
+abstract class B
+{
+}

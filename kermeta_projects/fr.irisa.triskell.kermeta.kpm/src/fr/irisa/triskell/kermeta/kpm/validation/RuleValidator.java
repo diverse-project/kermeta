@@ -2,16 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleValidator.java,v 1.1 2007-07-24 13:47:11 ftanguy Exp $
+ * $Id: RuleValidator.java,v 1.2 2008-05-28 09:26:13 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.validation;
 
-import fr.irisa.triskell.kermeta.kpm.Event;
-import fr.irisa.triskell.kermeta.kpm.In;
-import fr.irisa.triskell.kermeta.kpm.Out;
-import fr.irisa.triskell.kermeta.kpm.RuleType;
-
 import org.eclipse.emf.common.util.EList;
+
+import fr.irisa.triskell.kermeta.kpm.Event;
+import fr.irisa.triskell.kermeta.kpm.Expression;
+import fr.irisa.triskell.kermeta.kpm.Out;
 
 /**
  * A sample validator interface for {@link fr.irisa.triskell.kermeta.kpm.Rule}.
@@ -22,9 +21,11 @@ import org.eclipse.emf.common.util.EList;
 public interface RuleValidator {
 	boolean validate();
 
-	boolean validateIn(In value);
 	boolean validateEvent(Event value);
 	boolean validateOuts(EList value);
 	boolean validateName(String value);
-	boolean validateType(RuleType value);
+
+	boolean validatePrecondition(Expression value);
+
+	boolean validatePreconditions(Expression value);
 }

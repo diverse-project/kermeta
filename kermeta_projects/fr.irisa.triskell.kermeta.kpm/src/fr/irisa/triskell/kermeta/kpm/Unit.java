@@ -2,18 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.14 2007-07-24 13:47:12 ftanguy Exp $
+ * $Id: Unit.java,v 1.15 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
 import java.util.Date;
 
-import java.util.Map;
-
-import org.eclipse.core.runtime.IProgressMonitor;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -28,8 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getRules <em>Rules</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified <em>Last Time Modified</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getMasters <em>Masters</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependents <em>Dependents</em>}</li>
  * </ul>
  * </p>
@@ -134,46 +128,20 @@ public interface Unit extends EObject {
 	void setLastTimeModified(Date value);
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(String)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Value()
-	 * @model
-	 * @generated
-	 */
-	String getValue();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
-	 * @generated
-	 */
-	void setValue(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Masters</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dependencies</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Masters</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dependencies</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Dependencies()
+	 * @return the value of the '<em>Masters</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Masters()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Dependency> getDependencies();
+	EList<Dependency> getMasters();
 
 	/**
 	 * Returns the value of the '<em><b>Dependents</b></em>' reference list.
@@ -197,110 +165,38 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void changed();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
-	 * @generated
-	 */
-	void receiveEvent(String event, boolean synchrone, Map<String, Object> args, IProgressMonitor monitor);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
-	 * @generated
-	 */
-	void receiveSynchroneEvent(String event, Map<String, Object> args, IProgressMonitor monitor);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
-	 * @generated
-	 */
-	void receiveAsynchroneEvent(String event, Map<String, Object> args, IProgressMonitor monitor);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	boolean hasRuleNamed(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void beDependentOf(Unit unit, RuleType type);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void beDependentOf(Unit unit, Rule dependency);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void getFree(RuleType type, Unit unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Dependency findDependentUnit(RuleType type, Unit unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Dependency findUnitIDependOn(RuleType type, Unit unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Dependency findUnitIDependOn(String type, Unit unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Dependency findDependentUnit(String type, Unit unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Rule findRule(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
 	boolean equals(Object value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addMaster(Dependency d);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addDependent(Dependency d);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void beDependentOf(Unit master, String type);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void beMasterOf(Unit dependent, String type);
 
 } // Unit

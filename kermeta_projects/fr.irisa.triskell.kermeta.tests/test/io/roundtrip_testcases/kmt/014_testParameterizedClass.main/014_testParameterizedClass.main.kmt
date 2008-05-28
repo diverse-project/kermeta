@@ -1,0 +1,36 @@
+@uri "http://testParameterizedClass"
+package testParameterizedClass;
+
+require "kermeta"
+class A<P1>
+{
+}
+class B
+{
+}
+class C<P1>
+{
+}
+class D<P0, P1>
+{
+}
+class XusesA
+{
+	operation main() : kermeta::standard::~Void is
+		do
+			var a : A<kermeta::standard::String> init A<kermeta::standard::String>.new
+		end
+
+}
+class X
+{
+	operation main() : kermeta::standard::~Void is
+		abstract
+
+}
+class Y inherits X
+{
+	method main() : kermeta::standard::~Void from testParameterizedClass::X is
+		abstract
+
+}

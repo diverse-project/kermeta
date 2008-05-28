@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyValidator.java,v 1.1 2007-07-24 13:47:11 ftanguy Exp $
+ * $Id: DependencyValidator.java,v 1.2 2008-05-28 09:26:13 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.validation;
 
-import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
 /**
@@ -18,7 +17,8 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 public interface DependencyValidator {
 	boolean validate();
 
-	boolean validateType(RuleType value);
 	boolean validateFrom(Unit value);
 	boolean validateTo(Unit value);
+
+	boolean validateType(String value);
 }

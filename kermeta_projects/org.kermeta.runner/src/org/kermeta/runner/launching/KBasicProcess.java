@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.9 2008-04-29 12:00:29 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.10 2008-05-28 09:25:39 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -197,6 +197,12 @@ public class KBasicProcess extends Process {
 			// Starting the interpreter.
 			_interpreter.launch();
 		} catch (InitializationError e) {
+			try {
+				_interpreterErrorStream.write( e.getErrorsAsString().getBytes() );
+				_interpreterErrorStream.flush();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			destroy();
 		}
 		return 0;

@@ -1,6 +1,6 @@
 
 
-/*$Id: ReconcilingStrategy.java,v 1.5 2008-04-28 11:51:22 ftanguy Exp $
+/*$Id: ReconcilingStrategy.java,v 1.6 2008-05-28 09:25:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategy.java
 * License : EPL
@@ -27,7 +27,9 @@ import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.checker.KermetaUnitChecker;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
-import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kpm.EventDispatcher;
+import org.kermeta.kpm.KermetaUnitHost;
+import org.kermeta.kpm.KpmManager;
 import org.kermeta.texteditor.folding.FoldingStrategyHelper;
 
 import antlr.RecognitionException;
@@ -35,9 +37,6 @@ import antlr.TokenStreamException;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 public class ReconcilingStrategy implements IReconcilingStrategy {
@@ -52,9 +51,7 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 		this.editor = editor;
 		IFile file = editor.getFile();
 		if ( file != null ) {
-			KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( file.getProject() );
-			if ( project != null )
-				kpmUnit = project.getKpm().findUnit( file.getFullPath().toString() );
+			kpmUnit = KpmManager.getDefault().getUnit( file.getFullPath().toString() );
 		}
 	}
 	
@@ -99,7 +96,7 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 	}
 
 	private void setJobForKermetaProject() {
-		modelCheckingJob = new Job("Model Checking " + kpmUnit.getValue()) {
+		modelCheckingJob = new Job("Model Checking " + kpmUnit.getName()) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 
@@ -110,7 +107,7 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 					HashMap<String, Object> args = new HashMap<String, Object>();
 					args.put("forceTypechecking", true);
 					args.put("content", getFileContent());
-					kpmUnit.receiveSynchroneEvent("update", args, monitor);					
+					EventDispatcher.sendEvent(kpmUnit, "update", args, monitor);
 					break;
 
 				default:

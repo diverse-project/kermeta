@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingContext.java,v 1.5 2008-04-17 14:11:16 ftanguy Exp $
+/*$Id: LoadingContext.java,v 1.6 2008-05-28 09:25:09 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	LoadingContext.java
 * License : EPL
@@ -21,23 +21,20 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kpm.IAction;
+import org.kermeta.kpm.KermetaUnitHost;
 import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.extension.IAction;
-import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Out;
-import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 
 public class LoadingContext implements IAction {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
+	public void execute(Out out, Unit unit, Map<String, Object> args, IProgressMonitor monitor) {
 
 		try {
 			monitor.subTask("Loading Context");
@@ -65,10 +62,18 @@ public class LoadingContext implements IAction {
 			 * There should be only one.
 			 * 
 			 */
-			KermetaUnit kermetaUnit = null;
 			for ( Unit u : l ) {
-				String uri = "platform:/resource" + u.getValue();
-				kermetaUnit = LoaderPlugin.getDefault().load(uri, args);
+				try {
+					LoaderPlugin.getDefault().load(u.getName(), args);
+					IFile file = ResourceHelper.getIFile( u.getName() );
+					KermetaUnit newValue = IOPlugin.getDefault().getKermetaUnit( u.getName() );
+					KermetaUnitHost.getInstance().updateValue(file, newValue);			
+				} catch (URIMalformedException e) {
+					e.printStackTrace();
+				} catch (NotRegisteredURIException e) {
+					e.printStackTrace();
+				} catch (IdNotFoundException e) {
+				}
 			}
 			
 			/*
@@ -79,41 +84,6 @@ public class LoadingContext implements IAction {
 			 * 
 			 */
 			args.remove("content");
-			
-			List<KermetaUnit> k = KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit);
-			k.add(kermetaUnit);
-			// The load may have created some new kermeta unit, let's put them in the context
-			for ( KermetaUnit currentUnit : k ) {
-				KPM kpm = (KPM) unit.eContainer();
-				Unit u = kpm.findUnit( currentUnit.getUri().replace("platform:/resource", "") );
-				if ( u != null ) {
-					l.add( u );
-					/*
-					 * 
-					 * Marking errors if there are some.
-					 * 
-					 */
-					if (currentUnit.isErroneous() ) {
-						IFile file = ResourceHelper.getIFile( currentUnit.getUri() );
-						KermetaMarkersHelper.createMarkers(file, currentUnit);
-					} else {
-						/*
-						 * 
-						 * Update the interested object about the new kermeta unit.
-						 * 
-						 */
-						try {
-							IFile file = ResourceHelper.getIFile( currentUnit.getUri() );
-							KermetaUnitHost.getInstance().updateValue(file, kermetaUnit);
-						} catch (IdNotFoundException e) {}
-					}
-				}
-			}
-			
-		} catch (URIMalformedException e) {
-			e.printStackTrace();
-		} catch (NotRegisteredURIException e) {
-			e.printStackTrace();
 		} finally {
 			monitor.worked(1);
 		}

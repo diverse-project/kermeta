@@ -1,4 +1,4 @@
-/*$Id: DependenciesDoubleClickListener.java,v 1.3 2007-07-24 13:46:59 ftanguy Exp $
+/*$Id: DependenciesDoubleClickListener.java,v 1.4 2008-05-28 09:25:42 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -29,7 +29,7 @@ public class DependenciesDoubleClickListener implements IDoubleClickListener {
 		TreeSelection treeSelection = (TreeSelection) event.getSelection();
 		TreeItem item = (TreeItem) treeSelection.getFirstElement();
 		Unit unit = (Unit) item.getValue();
-		IFile file = ResourceHelper.getIFile( unit.getValue() );
+		IFile file = ResourceHelper.getIFile( unit.getName() );
 		
 		IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
 		try {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimpleExpressionItemProvider.java,v 1.2 2007-07-24 13:47:43 ftanguy Exp $
+ * $Id: SimpleExpressionItemProvider.java,v 1.3 2008-05-28 09:26:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -68,36 +68,6 @@ public class SimpleExpressionItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(KpmPackage.Literals.SIMPLE_EXPRESSION__SUB_EXPRESSION);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -118,12 +88,6 @@ public class SimpleExpressionItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(SimpleExpression.class)) {
-			case KpmPackage.SIMPLE_EXPRESSION__SUB_EXPRESSION:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -137,16 +101,6 @@ public class SimpleExpressionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.SIMPLE_EXPRESSION__SUB_EXPRESSION,
-				 KpmFactory.eINSTANCE.createORExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.SIMPLE_EXPRESSION__SUB_EXPRESSION,
-				 KpmFactory.eINSTANCE.createANDExpression()));
 	}
 
 	/**

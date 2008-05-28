@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ORExpressionImpl.java,v 1.2 2007-07-24 13:47:10 ftanguy Exp $
+ * $Id: ORExpressionImpl.java,v 1.3 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -46,16 +46,11 @@ public class ORExpressionImpl extends NestedExpressionImpl implements ORExpressi
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean evaluateIn(Unit unit, boolean value) {
-		return value || getExpression().evaluateIn(unit);
+	public boolean evaluateIn(Unit unit) {
+		boolean leftValue = getLeft().evaluateIn(unit);
+		if ( ! leftValue )
+			return getRight().evaluateIn(unit);
+		return leftValue;
 	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean evaluateOut(Unit unit, boolean value) {
-		return value || getExpression().evaluateOut(unit);
-	}
+
 } //ORExpressionImpl

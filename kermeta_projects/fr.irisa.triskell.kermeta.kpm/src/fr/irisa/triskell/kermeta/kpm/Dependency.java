@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Dependency.java,v 1.6 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: Dependency.java,v 1.7 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getType <em>Type</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getFrom <em>From</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getTo <em>To</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,30 +28,30 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Dependency extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(RuleType)
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see #setType(String)
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependency_Type()
 	 * @model required="true"
 	 * @generated
 	 */
-	RuleType getType();
+	String getType();
 
 	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getType <em>Type</em>}' reference.
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getType <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @param value the new value of the '<em>Type</em>' attribute.
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(RuleType value);
+	void setType(String value);
 
 	/**
 	 * Returns the value of the '<em><b>From</b></em>' reference.

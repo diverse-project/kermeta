@@ -1,0 +1,3423 @@
+@uri "http://www.eclipse.org/uml2/1.0.0/UML"
+package uml2;
+
+require "kermeta"
+require "http://www.eclipse.org/emf/2002/Ecore"
+alias Integer : kermeta::standard::Integer;
+alias Boolean : kermeta::standard::Boolean;
+alias String : kermeta::standard::String;
+alias UnlimitedNatural : kermeta::standard::Integer;
+alias Sequence : kermeta::language::structure::Object;
+alias Set : kermeta::language::structure::Object;
+/**Element is an abstract metaclass with no superclass. It is used as the common superclass for all metaclasses in the infrastructure library. Element has a derived composition association to itself to support the general capability for elements to own other elements. */
+abstract class Element inherits ecore::EModelElement
+{
+	/**The Elements owned by this element. This is a derived union.*/
+	property ownedElement : set Element[0..*]#owner
+		getter is do
+			//TODO: implement getter for derived property ownedElement
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property ownedElement
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**The Element that owns this element. This is a derived union.*/
+	property owner : Element#ownedElement
+		getter is do
+			//TODO: implement getter for derived property owner
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property owner
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**The Comments owned by this element. Subsets Element::ownedElement.*/
+	attribute ownedComment : set Comment[0..*]
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+not self.allOwnedElements()->includes(self)
+</code>*/
+	operation not_own_self(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.mustBeOwned() implies owner->notEmpty()
+</code>*/
+	operation has_owner(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+ownedElement->union(ownedElement->collect(e | e.allOwnedElements()))
+</code>*/
+	operation allOwnedElements() : Set is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+true
+</code>*/
+	operation mustBeOwned() : Boolean is
+		abstract
+
+}
+/**A MultiplicityElement is an abstract metaclass which includes optional attributes for defining the bounds of a multiplicity. A MultiplicityElement also includes specifications of whether the values in an instantiation of this element must be unique or ordered. */
+abstract class MultiplicityElement inherits Element
+{
+	/**For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this element are sequentially ordered. Default is false.*/
+	attribute isOrdered : Boolean
+
+	/**For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this element are unique. Default is true.*/
+	attribute isUnique : Boolean
+
+	/**Specifies the lower bound of the multiplicity interval, if it is expressed as an integer.*/
+	property lower : Integer
+		getter is do
+			//TODO: implement getter for derived property lower
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property lower
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Specifies the upper bound of the multiplicity interval, if it is expressed as an unlimited natural.*/
+	property upper : UnlimitedNatural
+		getter is do
+			//TODO: implement getter for derived property upper
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property upper
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**The specification of the upper bound for this multiplicity. Subsets Element::ownedElement.*/
+	attribute upperValue : ValueSpecification
+
+	/**The specification of the lower bound for this multiplicity. Subsets Element::ownedElement.*/
+	attribute lowerValue : ValueSpecification
+
+	/**A query based on the following OCL expression:
+<code>
+if lowerValue->isEmpty() then 1 else lowerValue.integerValue() endif
+</code>*/
+	operation lowerBound() : Integer is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+if upperValue->isEmpty() then 1 else upperValue.unlimitedValue() endif
+</code>*/
+	operation upperBound() : UnlimitedNatural is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+upperBound() > 1
+</code>*/
+	operation isMultivalued() : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+(lowerBound() <= C) and (upperBound() >= C)
+
+</code>*/
+	operation includesCardinality(C : Integer) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+(self.lowerBound() <= M.lowerBound()) and (self.upperBound() >= M.upperBound())
+</code>*/
+	operation includesMultiplicity(M : MultiplicityElement) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+upperBound()->notEmpty() implies upperBound() > 0
+</code>*/
+	operation upper_gt_0(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+lowerBound()->notEmpty() implies lowerBound() >= 0
+</code>*/
+	operation lower_ge_0(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+(upperBound()->notEmpty() and lowerBound()->notEmpty()) implies upperBound() >= lowerBound()
+</code>*/
+	operation upper_ge_lower(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+lower=lowerBound()
+</code>*/
+	operation lower_eq_lowerbound(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+upper = upperBound()
+</code>*/
+	operation upper_eq_upperbound(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+lowerBound()
+</code>*/
+	operation op_lower() : Integer is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+upperBound()
+</code>*/
+	operation op_upper() : UnlimitedNatural is
+		abstract
+
+}
+/**A named element represents elements that may have a name. The name is used for identification of the named element within the namespace in which it is defined. A named element also has a qualified name that allows it to be unambiguously identified within a hierarchy of nested namespaces. NamedElement is an abstract metaclass. */
+abstract class NamedElement inherits TemplateableElement
+{
+	/**The name of the NamedElement.*/
+	attribute name : String
+
+	/**A name which allows the NamedElement to be identified within a hierarchy of nested Namespaces. It is constructed from the names of the containing namespaces starting at the root of the hierarchy and ending with the name of the NamedElement itself. This is a derived attribute.*/
+	property qualifiedName : String
+		getter is do
+			//TODO: implement getter for derived property qualifiedName
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property qualifiedName
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Determines the visibility of the NamedElement within different Namespaces within the overall model. Package Dependencies (“Dependencies” on page 94)*/
+	attribute visibility : VisibilityKind
+
+	reference clientDependency : set Dependency[0..*]#client
+
+	/**The expression used to define the name of this named element.*/
+	attribute nameExpression : StringExpression
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.name->isEmpty() or self.allNamespaces()->select(ns | ns.name->isEmpty())->notEmpty()
+	implies self.qualifiedName->isEmpty()
+</code>*/
+	operation no_name(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+(self.name->notEmpty() and self.allNamespaces()->select(ns | ns.name->isEmpty())->isEmpty()) implies
+self.qualifiedName =
+ self.allNamespaces()->iterate( ns : Namespace; result: String = self.name |
+		ns.name->union(self.separator())->union(result))
+</code>*/
+	operation qualified_name(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+if self.namespace->isEmpty()
+then Sequence{}
+else self.namespace.allNamespaces()->prepend(self.namespace)
+endif
+</code>*/
+	operation allNamespaces() : Sequence is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+if self.oclIsKindOf(n.oclType) or n.oclIsKindOf(self.oclType)
+then ns.getNamesOfMember(self)->intersection(ns.getNamesOfMember(n))->isEmpty()
+else true
+endif
+</code>*/
+	operation isDistinguishableFrom(n : NamedElement, ns : Namespace) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+'::'
+</code>*/
+	operation separator() : String is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+if self.name->notEmpty() and self.allNamespaces()->select(ns | ns.name->isEmpty())->isEmpty()
+then 
+    self.allNamespaces()->iterate( ns : Namespace; result: String = self.name | ns.name->union(self.separator())->union(result))
+else
+    Set{}
+endif
+</code>*/
+	operation op_qualifiedName() : String is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+namespace->isEmpty() implies visibility->isEmpty()
+</code>*/
+	operation visibility_needs_ownership(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+}
+enumeration VisibilityKind
+{
+	public;
+	private;
+	protected;
+	~package;
+}
+/**A namespace is a named element that can own other named elements. Each named element may be owned by at most one namespace. A namespace provides a means for identifying named elements by name. Named elements can be identified by name in a namespace either by being directly owned by the namespace or by being introduced into the namespace by other means e.g. importing or inheriting. Namespace is an abstract metaclass. A namespace can own constraints. The constraint does not necessarily apply to the namespace itself, but may also apply to elements in the namespace. A namespace has the ability to import either individial members or all members of a package, thereby making it possible to refer to those named elements without qualification in the importing namespace. In the case of conflicts, it is necessary to use qualified names or aliases to disambiguate the referenced elements. */
+abstract class Namespace inherits NamedElement
+{
+	/**A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance. This is a derived union.*/
+	property member : set NamedElement[0..*]
+		getter is do
+			//TODO: implement getter for derived property member
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property member
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Specifies a set of Constraints owned by this Namespace. Subsets Namespace::ownedMember.*/
+	attribute ownedRule : set Constraint[0..*]#namespace
+
+	/**References the PackageableElements that are members of this Namespace as a result of either PackageImports or ElementImports. Subsets Namespace::member.*/
+	property importedMember : set PackageableElement[0..*]
+		getter is do
+			//TODO: implement getter for derived property importedMember
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property importedMember
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**References the ElementImports owned by the Namespace. Subsets Element::ownedElement.*/
+	attribute elementImport : set ElementImport[0..*]#importingNamespace
+
+	/**References the PackageImports owned by the Namespace. Subsets Element::ownedElement.*/
+	attribute packageImport : set PackageImport[0..*]#importingNamespace
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+membersAreDistinguishable()
+</code>*/
+	operation members_are_distinguishable(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+if self.ownedMember->includes(element)
+then Set{}->include(element.name)
+else let elementImports: ElementImport = self.elementImport->select(ei | ei.importedElement = element) in
+    if elementImports->notEmpty()
+    then elementImports->collect(el | el.getName())
+    else 
+        self.packageImport->select(pi | pi.importedPackage.visibleMembers()->includes(element))->collect(pi | pi.importedPackage.getNamesOfMember(element))
+    endif
+endif
+</code>*/
+	operation getNamesOfMember(element : NamedElement) : Set is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+self.member->forAll( memb |
+	self.member->excluding(memb)->forAll(other |
+		memb.isDistinguishableFrom(other, self)))
+</code>*/
+	operation membersAreDistinguishable() : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.importedMember->includesAll(self.importedMembers(self.elementImport.importedElement.asSet()->union(self.packageImport.importedPackage->collect(p | p.visibleMembers()))))
+</code>*/
+	operation importedMember_derived(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+self.importedMembers(self.elementImport.importedElement.asSet()->union(self.packageImport.importedPackage->collect(p | p.visibleMembers())))
+</code>*/
+	operation op_importedMember() : Set is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+self.excludeCollisions(imps)->select(imp | self.ownedMember->forAll(mem | mem.imp.isDistinguishableFrom(mem, self)))
+</code>*/
+	operation importMembers(imps : Set) : Set is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+imps->reject(imp1 | imps.exists(imp2 | not imp1.isDistinguishableFrom(imp2, self)))
+</code>*/
+	operation excludeCollisions(imps : Set) : Set is
+		abstract
+
+}
+/**An expression contains a language-specific text string used to describe a value or values, and an optional specification of the language. One predefined language for specifying expressions is OCL. Natural language or programming languages may also be used. */
+class OpaqueExpression inherits ValueSpecification
+{
+	/**The text of the expression.*/
+	attribute body : String
+
+	/**Specifies the language in which the expression is stated. The interpretation of the expression body depends on the language. If language is unspecified, it might be implicit from the expression body or the context.*/
+	attribute language : String
+
+	/**Restricts an opaque expression to return exactly one return result. When the invocation of the opaque expression completes, a single set of values is returned to its owner. This association is derived from the single return result parameter of the associated behavior.*/
+	property ~result : Parameter
+		getter is do
+			//TODO: implement getter for derived property result
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property result
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Specifies the behavior of the opaque expression.*/
+	reference behavior : Behavior
+
+}
+/**ValueSpecification is an abstract metaclass used to identify a value or values in a model. It may reference an instance or it may be an expression denoting an instance or instances when evaluated. */
+abstract class ValueSpecification inherits TypedElement, ParameterableElement
+{
+	/**A query based on the following OCL expression:
+<code>
+false
+</code>*/
+	operation isComputable() : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+Set{}
+</code>*/
+	operation integerValue() : Integer is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+Set{}
+</code>*/
+	operation booleanValue() : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+Set{}
+</code>*/
+	operation stringValue() : String is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+Set{}
+</code>*/
+	operation unlimitedValue() : UnlimitedNatural is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+false
+</code>*/
+	operation isNull() : Boolean is
+		abstract
+
+}
+/**A typed element is an element that has a type that serves as a constraint on the range of values the element can represent. Typed element is an abstract metaclass. */
+abstract class TypedElement inherits NamedElement
+{
+	/**The type of the TypedElement.*/
+	reference type : Type
+
+}
+/**An expression represents a node in an expression tree, which may be non-terminal or terminal. It defines a symbol, and has a possibly empty sequence of operands which are value specifications. */
+class Expression inherits OpaqueExpression
+{
+	/**The symbol associated with the node in the expression tree.*/
+	attribute symbol : String
+
+	/**Specifies a sequence of operands. Subsets Element::ownedElement.*/
+	attribute operand : ValueSpecification[0..*]
+
+}
+/**A comment gives the ability to attach various remarks to elements. A comment carries no semantic force, but may contain information that is useful to a modeler. A comment can be owned by any element. */
+class Comment inherits TemplateableElement
+{
+	/**Specifies a string that is the comment.*/
+	attribute body : String
+
+	/**References the Element(s) being commented.*/
+	reference annotatedElement : set Element[0..*]
+
+	attribute bodyExpression : StringExpression
+
+}
+/**A directed relationship references one or more source elements and one or more target elements. Directed relationship is an abstract metaclass. */
+abstract class DirectedRelationship inherits Relationship
+{
+	/**Specifies the sources of the DirectedRelationship. Subsets Relationship::relatedElement. This is a derived union.*/
+	property source : set Element[1..*]
+		getter is do
+			//TODO: implement getter for derived property source
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property source
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Specifies the targets of the DirectedRelationship. Subsets Relationship::relatedElement. This is a derived union.*/
+	property target : set Element[1..*]
+		getter is do
+			//TODO: implement getter for derived property target
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property target
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+}
+/**A relationship references one or more related elements. Relationship is an abstract metaclass. */
+abstract class Relationship inherits Element
+{
+	/**Specifies the elements related by the Relationship. This is a derived union.*/
+	property relatedElement : set Element[1..*]
+		getter is do
+			//TODO: implement getter for derived property relatedElement
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property relatedElement
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+}
+/**Class is a kind of classifier whose features are attributes and operations. Attributes of a class are represented by instances of Property that are owned by the class. Some of these attributes may represent the navigable ends of binary associations. */
+class Class inherits BehavioredClassifier, EncapsulatedClassifier
+{
+	/**The operations owned by the class. The association is ordered. Subsets Classifier::feature and Namespace::ownedMember.*/
+	attribute ownedOperation : Operation[0..*]#class_
+
+	/**This gives the superclasses of a class. It redefines Classifier::general. This is derived.*/
+	property superClass : set Class[0..*]
+		getter is do
+			//TODO: implement getter for derived property superClass
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property superClass
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property extension : set Extension[0..*]#metaclass
+		getter is do
+			//TODO: implement getter for derived property extension
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property extension
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**References all the Classifiers that are defined (nested) within the Class. Subsets Element:: ownedMember.*/
+	attribute nestedClassifier : Classifier[0..*]
+
+	/**Determines whether an object specified by this class is active or not. If true, then the owning class is referred to as an active class. If false, then such a class is referred to as a passive class.*/
+	attribute isActive : Boolean
+
+	/**Receptions that objects of this class are willing to accept. (Specializes Namespace.owned- Member and Classifier.feature.)*/
+	attribute ownedReception : set Reception[0..*]
+
+}
+/**A type serves as a constraint on the range of values represented by a typed element. Type is an abstract metaclass. */
+abstract class Type inherits PackageableElement
+{
+	/**References the owning package of a package. Subsets NamedElement::namespace.*/
+	property ~package : Package#ownedType
+		getter is do
+			//TODO: implement getter for derived property package
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property package
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**A query based on the following OCL expression:
+<code>
+false
+</code>*/
+	operation conformsTo(other : Type) : Boolean is
+		abstract
+
+}
+/**Property represents a declared state of one or more instances in terms of a named relationship to a value or values. When a property is an attribute of a classifier, the value or values are related to the instance of the classifier by being held in slots of the instance. When a property is an association end, the value or values are related to the instance or instances at the other end(s) of the association (see semantics of Association). Property is indirectly a subclass of Constructs::TypedElement. The range of valid values represented by the property can be controlled by setting the property’s type. Package AssociationClasses (“AssociationClasses” on page 107) A property may have other properties (attributes) that serve as qualifiers. */
+class Property inherits StructuralFeature, ConnectableElement, DeploymentTarget
+{
+	property default : String
+		getter is do
+			//TODO: implement getter for derived property default
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property default
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property isComposite : Boolean
+		getter is do
+			//TODO: implement getter for derived property isComposite
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property isComposite
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information. The default value is false.*/
+	attribute isDerived : Boolean
+
+	reference class_ : Class
+
+	property opposite : Property
+		getter is do
+			//TODO: implement getter for derived property opposite
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property opposite
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Specifies whether the property is derived as the union of all of the properties that are constrained to subset it. The default value is false.*/
+	attribute isDerivedUnion : Boolean
+
+	/**References the owning association of this property. Subsets Property::association, NamedElement::namespace, Feature::featuringClassifier, and RedefinableElement:: redefinitionContext.*/
+	reference owningAssociation : Association#ownedEnd
+
+	reference redefinedProperty : set Property[0..*]
+
+	reference subsettedProperty : set Property[0..*]
+
+	/**The DataType that owns this Property. Subsets NamedElement::namespace, Feature::featuringClassifier, and Property::classifier.*/
+	reference datatype : DataType#ownedAttribute
+
+	/**References the association of which this property is a member, if any.*/
+	reference association : Association#memberEnd
+
+	/**Specifies the kind of aggregation that applies to the Property. The default value is none.*/
+	attribute aggregation : AggregationKind
+
+	/**A ValueSpecification that is evaluated to give a default value for the Property when an object of the owning Classifier is is instantiated. Subsets Element::ownedElement.*/
+	attribute defaultValue : ValueSpecification
+
+	attribute qualifier : Property[0..*]#associationEnd
+
+	reference associationEnd : Property#qualifier
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+opposite = 
+	if owningAssociation->notEmpty() and association.memberEnd->size() = 2 then 
+		let otherEnd = (association.memberEnd - self)->any() in 
+			if otherEnd.owningAssociation->notEmpty then otherEnd else Set{} endif
+	else Set {}
+	endif
+</code>*/
+	operation opposite_is_other_end(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+if owningAssociation->notEmpty() and association.memberEnd->size() = 2 then 
+		let otherEnd = (association.memberEnd - self)->any() in 
+			if otherEnd.owningAssociation->notEmpty then otherEnd else Set{} endif
+	else Set {}
+	endif
+</code>*/
+	operation op_opposite() : Property is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+isComposite implies (upperBound()->isEmpty() or upperBound() <= 1)
+</code>*/
+	operation multiplicity_of_composite(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+subsettedProperty->notEmpty() implies
+	(subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |
+		subsettedProperty->forAll(sp | 
+			sp.subsettingContext()->exists(c | sc.conformsTo(c)))))
+</code>*/
+	operation subsetting_context(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+(subsettedProperty->exists(sp | sp.class->notEmpty())	
+		implies class->notEmpty())
+and
+(redefinedProperty->exists(rp | rp.class->notEmpty())	
+		implies class->notEmpty())
+</code>*/
+	operation navigable_property_redefinition(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+subsettedProperty->forAll(sp |
+	type.conformsTo(sp.type) and
+		((upperBound()->notEmpty() and sp.upperBound()->notEmpty()) implies
+			upperBound()<=sp.upperBound() ))
+</code>*/
+	operation subsetting_rules(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+isReadOnly implies class->notEmpty()
+</code>*/
+	operation navigable_readonly(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+isDerivedUnion implies isDerived
+</code>*/
+	operation derivedUnion_is_derived(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+if association->notEmpty()
+then association.endType-type 
+else if classifier->notEmpty then Set{classifier} else Set{} endif
+endif
+</code>*/
+	operation subsettingContext() : Set is
+		abstract
+
+}
+enumeration AggregationKind
+{
+	none;
+	shared;
+	composite;
+}
+/**An operation is a behavioral feature of a classifier that specifies the name, type, parameters, and constraints for invoking an associated behavior. */
+class Operation inherits BehavioralFeature, TypedElement, MultiplicityElement, ParameterableElement
+{
+	attribute ownedParameter : Parameter[0..*]#~operation
+
+	reference class_ : Class#ownedOperation
+
+	/**Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false). The default value is false.*/
+	attribute isQuery : Boolean
+
+	reference datatype : DataType#ownedOperation
+
+	/**An optional set of Constraints on the state of the system when the Operation is invoked. Subsets Namespace::ownedMember.*/
+	reference precondition : set Constraint[0..*]
+
+	/**An optional set of Constraints specifying the state of the system when the Operation is completed. Subsets Namespace::ownedMember.*/
+	reference postcondition : set Constraint[0..*]
+
+	/**the Operations that are redefined by this Operation. Subsets RedefinableElement. redefinedElement.*/
+	reference redefinedOperation : set Operation[0..*]
+
+	/**optional Constraint on the result values of an invocation of this Operation. Subsets Namespace::ownedMember.*/
+	reference bodyCondition : Constraint
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+if returnResult->size() = 1 then
+  type = returnResult.type
+else
+  type = nil
+endif
+
+</code>*/
+	operation type_of_result(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+if returnResult->size() = 1 then returnResult->any().isOrdered else false endif
+</code>*/
+	operation op_isOrdered() : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+ if returnResult->size() = 1 then returnResult->any().isUnique else true endif
+</code>*/
+	operation op_isUnique() : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+if returnResult->size() = 1 then returnResult->any().type else Set{} endif
+</code>*/
+	operation op_type() : Classifier is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+bodyCondition->notEmpty() implies isQuery
+</code>*/
+	operation only_body_for_query(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+}
+/**A parameter is a specification of an argument used to pass information into or out of an invocation of a behavioral feature. It has a type, and may have a multiplicity and an optional default value. */
+class Parameter inherits ConnectableElement, TypedElement, MultiplicityElement
+{
+	/**References the Operation for which this is a formal parameter. Subsets NamedElement:: namespace.*/
+	reference ~operation : Operation#ownedParameter
+
+	property default : String
+		getter is do
+			//TODO: implement getter for derived property default
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property default
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Indicates whether a parameter is being sent into or out of a behavioral element. The default value is in.*/
+	attribute direction : ParameterDirectionKind
+
+	/**Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter. Subsets Element::ownedElement.*/
+	attribute defaultValue : ValueSpecification
+
+	attribute isException : Boolean
+
+	attribute isStream : Boolean
+
+	attribute effect : ParameterEffectKind
+
+	reference parameterSet : set ParameterSet[0..*]#parameter
+
+}
+enumeration ParameterDirectionKind
+{
+	in;
+	inout;
+	out;
+	return;
+}
+enumeration ParameterEffectKind
+{
+	create;
+	read;
+	update;
+	delete;
+}
+/**A package is a namespace for its members, and may contain other packages. Only packageable elements can be owned members of a package. By virtue of being a namespace, a package can import either individual members of other packages, or all the members of other packages. In addition a package can be merged with other packages. */
+class Package inherits Namespace, PackageableElement
+{
+	/**References the owned members that are Packages. Subsets Package::ownedMember.*/
+	property nestedPackage : set Package[0..*]#nestingPackage
+		getter is do
+			//TODO: implement getter for derived property nestedPackage
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property nestedPackage
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property nestingPackage : Package#nestedPackage
+		getter is do
+			//TODO: implement getter for derived property nestingPackage
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property nestingPackage
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**References the owned members that are Types. Subsets Package::ownedMember.*/
+	property ownedType : set Type[0..*]#~package
+		getter is do
+			//TODO: implement getter for derived property ownedType
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property ownedType
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Specifies the members that are owned by this Package. Redefines Namespace::ownedMember.*/
+	attribute ownedMember : set PackageableElement[0..*]
+
+	attribute packageMerge : set PackageMerge[0..*]#mergingPackage
+
+	reference appliedProfile : set ProfileApplication[0..*]
+
+	attribute packageExtension : set PackageMerge[0..*]
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.ownedElements->forAll(e | e.visibility->notEmpty() implies e.visbility = #public or e.visibility = #private)
+</code>*/
+	operation elements_public_or_private(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+member->select( m | self.makesVisible(m))
+</code>*/
+	operation visibleMembers() : Set is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+el.visibility->isEmpty() or el.visibility = #public
+</code>*/
+	operation makesVisible(el : NamedElement) : Boolean is
+		abstract
+
+}
+/**Enumeration is a kind of data type, whose instances may be any of a number of user-defined enumeration literals. It is possible to extend the set of applicable enumeration literals in other packages or profiles. */
+class Enumeration inherits DataType
+{
+	/**ordered set of literals for this Enumeration. Subsets Element::ownedMember.*/
+	attribute ownedLiteral : EnumerationLiteral[0..*]#~enumeration
+
+}
+/**DataType defines a kind of classifier in which operations are all pure functions (i.e., they can return data values but they cannot change data values, because they have no identity). For example, an “add” operation on a number with another number as an argument yields a third number as a result; the target and argument are unchanged. A DataType may also contain attributes to support the modeling of structured data types. */
+class DataType inherits Classifier
+{
+	/**The Attributes owned by the DataType. Subsets Classifier::attribute and Element:: ownedMember.*/
+	attribute ownedAttribute : Property[0..*]#datatype
+
+	/**The Operations owned by the DataType. Subsets Classifier::feature and Element:: ownedMember.*/
+	attribute ownedOperation : Operation[0..*]#datatype
+
+}
+/**An enumeration literal is a user-defined data value for an enumeration. */
+class EnumerationLiteral inherits InstanceSpecification
+{
+	/**Enumeration that this EnumerationLiteral is a member of. Subsets NamedElement:: namespace.*/
+	reference ~enumeration : Enumeration#ownedLiteral
+
+}
+/**The instances of primitive type used in UML itself include Boolean, Integer, UnlimitedNatural, and String. */
+class PrimitiveType inherits DataType
+{
+}
+/**A classifier is a namespace whose members can include features. Classifier is an abstract metaclass. A classifier is a type and can own generalizations, thereby making it possible to define generalization relationships to other classifiers. A classifier can specify a generalization hierarchy by referencing its general classifiers. A classifier is a redefinable element, meaning that it is possible to redefine nested classifiers. */
+abstract class Classifier inherits Namespace, Type, RedefinableElement
+{
+	property feature : set Feature[0..*]#featuringClassifier
+		getter is do
+			//TODO: implement getter for derived property feature
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property feature
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**If true, the Classifier does not provide a complete declaration and can typically not be instantiated. An abstract classifier is intended to be used by other classifiers e.g. as the target of general metarelationships or generalization relationships. Default value is false.*/
+	attribute isAbstract : Boolean
+
+	property inheritedMember : set NamedElement[0..*]
+		getter is do
+			//TODO: implement getter for derived property inheritedMember
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property inheritedMember
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property general : set Classifier[0..*]
+		getter is do
+			//TODO: implement getter for derived property general
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property general
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	attribute generalization : set Generalization[0..*]#specific
+
+	property ~attribute : set Property[0..*]
+		getter is do
+			//TODO: implement getter for derived property attribute
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property attribute
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	reference redefinedClassifier : set Classifier[0..*]
+
+	attribute substitution : set Substitution[0..*]#substitutingClassifier
+
+	reference powertypeExtent : set GeneralizationSet[0..*]#powertype
+
+	attribute ownedUseCase : set UseCase[0..*]
+
+	reference useCase : set UseCase[0..*]#subject
+
+	/**References a collaboration occurrence which indicates the collaboration that represents this classifier. (Subsets Classifier.occurrence.)*/
+	reference representation : CollaborationOccurrence
+
+	/**References the collaboration occurrences owned by the classifier. (Subsets Element. ownedElement.)*/
+	attribute occurrence : set CollaborationOccurrence[0..*]
+
+	/**A query based on the following OCL expression:
+<code>
+member->select(oclIsKindOf(Feature))
+</code>*/
+	operation allFeatures() : Set is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+not self.allParents()->includes(self)
+</code>*/
+	operation no_cycles_in_generalization(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.parents()->forAll(c | self.maySpecializeType(c))
+</code>*/
+	operation specialize_type(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.inheritedMember->includesAll(self.inherit(self.parents()->collect(p | p.inheritableMembers(self)))
+</code>*/
+	operation inherited_member(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+self.inherit(self.parents()->collect(p | p.inheritableMembers(self))
+</code>*/
+	operation op_inheritedMember() : Set is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+generalization.general
+</code>*/
+	operation parents() : Set is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+self.parents()->union(self.parents()->collect(p | p.allParents())
+</code>*/
+	operation allParents() : Set is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+member->select(m | c.hasVisibilityOf(m))
+</code>*/
+	operation inheritableMembers(c : Classifier) : Set is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+true
+</code>*/
+	operation hasVisibilityOf(n : NamedElement) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+inhs
+</code>*/
+	operation inherit(inhs : Set) : Set is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+self.oclIsKindOf(c.oclType)
+</code>*/
+	operation maySpecializeType(c : Classifier) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+self.parents()
+</code>*/
+	operation op_general() : Set is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+general = self.parents()
+</code>*/
+	operation general_equals_parents(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+(self=other) or (self.allParents()->includes(other))
+</code>*/
+	operation op_conformsTo(other : Classifier) : Boolean is
+		abstract
+
+}
+/**A feature declares a behavioral or structural characteristic of instances of classifiers. Feature is an abstract metaclass. */
+abstract class Feature inherits RedefinableElement
+{
+	/**The Classifiers that have this Feature as a feature. This is a derived union.*/
+	property featuringClassifier : set Classifier[0..*]#feature
+		getter is do
+			//TODO: implement getter for derived property featuringClassifier
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property featuringClassifier
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Specifies whether the feature is applied at the classifier-level (true) or the instance-level (false). Default value is false.*/
+	attribute isStatic : Boolean
+
+}
+/**Constraint contains a ValueSpecification that specifies additional semantics for one or more elements. Certain kinds of constraints (such as an association “xor” constraint) are predefined in UML, others may be user-defined. A user-defined Constraint is described using a specified language, whose syntax and interpretation is a tool responsibility. One predefined language for writing constraints is OCL. In some situations, a programming language such as Java may be appropriate for expressing a constraint. In other situations natural language may be used. Constraint is a condition (a Boolean expression) that restricts the extension of the associated element beyond what is imposed by the other language constructs applied to that element. Constraint contains an optional name, although they are commonly unnamed. */
+class Constraint inherits PackageableElement
+{
+	/**Specifies the Namespace that is the context for evaluating this constraint. This is a derived union.*/
+	property context : Namespace
+		getter is do
+			//TODO: implement getter for derived property context
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property context
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	reference namespace : Namespace#ownedRule
+
+	/**A condition that must be true when evaluated in order for the constraint to be satisfied. Subsets Element::ownedElement.*/
+	attribute specification : ValueSpecification[1..1]
+
+	/**ordered set of Elements referenced by this Constraint.*/
+	reference constrainedElement : Element[0..*]
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+not constrainedElement->includes(self)
+</code>*/
+	operation not_apply_to_self(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+}
+/**A literal boolean contains a Boolean-valued attribute. */
+class LiteralBoolean inherits LiteralSpecification
+{
+	/**The specified Boolean value.*/
+	attribute ~value : Boolean
+
+}
+/**A literal specification is an abstract specialization of ValueSpecification that identifies a literal constant being modeled. */
+abstract class LiteralSpecification inherits ValueSpecification
+{
+}
+/**A literal string contains a String-valued attribute. */
+class LiteralString inherits LiteralSpecification
+{
+	/**The specified String value.*/
+	attribute ~value : String
+
+}
+/**A literal null is used to represent null, i.e., the absence of a value. */
+class LiteralNull inherits LiteralSpecification
+{
+}
+/**A literal integer contains an Integer-valued attribute. */
+class LiteralInteger inherits LiteralSpecification
+{
+	/**The specified Integer value.*/
+	attribute ~value : Integer
+
+}
+/**A literal unlimited natural contains a UnlimitedNatural-valued attribute. */
+class LiteralUnlimitedNatural inherits LiteralSpecification
+{
+	/**The specified UnlimitedNatural value.*/
+	attribute ~value : UnlimitedNatural
+
+}
+/**A behavioral feature specifies that an instance of a classifier will respond to a designated request by invoking a behavior. BehavioralFeature is an abstract metaclass specializing Feature and Namespace. Kinds of behavioral aspects are modeled by subclasses of BehavioralFeature. */
+abstract class BehavioralFeature inherits Namespace, Feature
+{
+	/**Specifies the parameters of the BehavioralFeature. Subsets Namespace::member. This is a derived union and is ordered.*/
+	property parameter : Parameter[0..*]
+		getter is do
+			//TODO: implement getter for derived property parameter
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property parameter
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Specifies the ordered set of formal parameters of this BehavioralFeature. Subsets BehavioralFeature::parameter and Namespace::ownedMember.*/
+	attribute formalParameter : set Parameter[0..*]
+
+	/**Specifies the ordered set of return results of this BehavioralFeature. Subsets Behavioral- Feature::parameter and Namespace::ownedMember.*/
+	attribute returnResult : Parameter[0..*]
+
+	/**References the Types representing exceptions that may be raised during an invocation of this operation.*/
+	reference raisedException : set Type[0..*]
+
+	/**If true, then the behavioral feature does not have an implementation, and one must be supplied by a more specific element. If false, the behavioral feature must have an implementation in the classifier or one must be inherited from a more general element. Communications*/
+	attribute isAbstract : Boolean
+
+	/**A behavioral description that implements the behavioral feature. There may be at most one behavior for a particular pairing of a classifier (as owner of the behavior) and a behavioral feature (as specification of the behavior).*/
+	reference ~method : set Behavior[0..*]#specification
+
+	attribute concurrency : CallConcurrencyKind
+
+}
+enumeration CallConcurrencyKind
+{
+	sequential;
+	guarded;
+	concurrent;
+}
+/**A structural feature is a typed feature of a classifier that specify the structure of instances of the classifier. Structural feature is an abstract metaclass. By specializing multiplicity element, it supports a multiplicity that specifies valid cardinalities for the set of values associated with an instantiation of the structural feature. */
+abstract class StructuralFeature inherits Feature, TypedElement, MultiplicityElement
+{
+	/**States whether the feature’s value may be modified by a client. Default is false.*/
+	attribute isReadOnly : Boolean
+
+}
+/**In the metamodel, InstanceSpecification is a specialization of DeploymentTarget and DeployedArtifact. */
+class InstanceSpecification inherits PackageableElement, DeploymentTarget, DeployedArtifact
+{
+	/**A slot giving the value or values of a structural feature of the instance. An instance specification can have one slot per structural feature of its classifiers, including inherited features. It is not necessary to model a slot for each structural feature, in which case the instance specification is a partial description. Subsets Element::ownedElement.*/
+	attribute slot : set Slot[0..*]#owningInstance
+
+	/**The classifier or classifiers of the represented instance. If multiple classifiers are specified, the instance is classified by all of them.*/
+	reference classifier : set Classifier[0..*]
+
+	/**A specification of how to compute, derive, or construct the instance. Subsets Element:: ownedElement.*/
+	attribute specification : ValueSpecification
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+slot->forAll(s |
+  classifier->exists(c | c.allFeatures()->includes(s.definingFeature))
+</code>*/
+	operation slots_are_defined(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+classifier->forAll(c |
+	(c.allFeatures()->forAll(f | slot->select(s | s.definingFeature = f)->size() <= 1)
+	)
+</code>*/
+	operation no_duplicate_slots(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+}
+/**A slot is owned by an instance specification. It specifies the value or values for its defining feature, which must be a structural feature of a classifier of the instance specification owning the slot. */
+class Slot inherits Element
+{
+	/**The instance specification that owns this slot. Subsets Element::owner.*/
+	reference owningInstance : InstanceSpecification[1..1]#slot
+
+	attribute ~value : ValueSpecification[0..*]
+
+	/**The structural feature that specifies the values that may be held by the slot.*/
+	reference definingFeature : StructuralFeature[1..1]
+
+}
+/**An instance value specifies the value modeled by an instance specification. */
+class InstanceValue inherits ValueSpecification
+{
+	/**The instance that is the specified value.*/
+	reference instance : InstanceSpecification[1..1]
+
+}
+/**A redefinable element is a named element that can be redefined in the context of a generalization. RedefinableElement is an abstract metaclass. */
+abstract class RedefinableElement inherits NamedElement
+{
+	/**the contexts that this element may be redefined from. This is a derived union.*/
+	property redefinitionContext : Classifier[0..*]
+		getter is do
+			//TODO: implement getter for derived property redefinitionContext
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property redefinitionContext
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Indicates whether it is possible to further specialize a RedefinableElement. If the value is true, then it is not possible to further specialize the RedefinableElement. Default value is false.*/
+	attribute isLeaf : Boolean
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.redefinedElement->forAll(e | self.isRedefinitionContextValid(e))
+</code>*/
+	operation redefinition_context_valid(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.redefinedElement->forAll(re | re.isConsistentWith(self))
+</code>*/
+	operation redefinition_consistent(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+false
+</code>*/
+	operation isConsistentWith(redefinee : RedefinableElement) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+self.redefinitionContext->exists(c | redefinable.redefinitionContext->exists(r | c.allParents()->includes(r)))
+</code>*/
+	operation isRedefinitionContextValid(redefinable : RedefinableElement) : Boolean is
+		abstract
+
+}
+/**A generalization relates a specific classifier to a more general classifier, and is owned by the specific classifier. Package PowerTypes (“PowerTypes” on page 109) A generalization can be designated as being a member of a particular generalization set. */
+class Generalization inherits DirectedRelationship
+{
+	/**References the specializing classifier in the Generalization relationship. Subsets DirectedRelationship::source and Element::owner. Package PowerTypes (“PowerTypes” on page 109) • generalizationSet Designates a set in which instances of Generalization is considered members.*/
+	reference specific : Classifier[1..1]#generalization
+
+	/**References the general classifier in the Generalization relationship. Subsets DirectedRelationship::target.*/
+	reference general : Classifier[1..1]
+
+	/**Indicates whether the specific classifier can be used whereever the general classifier can be used. If true, the execution traces of the specific classifier will be a superset of the execution traces of the general classifier.*/
+	attribute isSubstitutable : Boolean
+
+	reference generalizationSet : set GeneralizationSet[0..*]#generalization
+
+}
+/**A packageable element indicates a named element that may be owned directly by a package. */
+abstract class PackageableElement inherits NamedElement, ParameterableElement
+{
+	/**Indicates that packageable elements must always have a visibility, i.e., visibility is not optional. Redefines NamedElement::visibility.*/
+	attribute packageableElement_visibility : VisibilityKind
+
+}
+/**A ParameterableElement can be referenced by a TemplateParameter when defining a formal template parameter for a template. A ParameterableElement can be referenced by a TemplateParameterSubstitution when used as an actual parameter in a binding of a template. ParameterableElement is an abstract metaclass. */
+abstract class ParameterableElement inherits Element
+{
+	reference templateParameter : TemplateParameter#parameteredElement
+
+	reference owningParameter : TemplateParameter#ownedParameteredElement
+
+}
+/**An element import is defined as a directed relationship between an importing namespace and a packageable element. The name of the packageable element or its alias is to be added to the namespace of the importing namespace. It is also possible to control whether the imported element can be further imported. */
+class ElementImport inherits DirectedRelationship
+{
+	/**Specifies the visibility of the imported PackageableElement within the importing Package. The default visibility is the same as that of the imported element. If the imported element does not have a visibility, it is possible to add visibility to the element import.*/
+	attribute visibility : VisibilityKind
+
+	/**Specifies the name that should be added to the namespace of the importing Pack-age in lieu of the name of the imported PackagableElement. The aliased name must not clash with any other member name in the importing Package. By default, no alias is used.*/
+	attribute ~alias : String
+
+	/**Specifies the PackageableElement whose name is to be added to a Namespace. Subsets DirectedRelationship::target.*/
+	reference importedElement : PackageableElement[1..1]
+
+	/**Specifies the Namespace that imports a PackageableElement from another Package. Subsets DirectedRelationship::source and Element::owner.*/
+	reference importingNamespace : Namespace[1..1]#elementImport
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.visibility = #public or self.visibility = #private
+</code>*/
+	operation visibility_public_or_private(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.importedElement.visibility.notEmpty() implies self.importedElement.visibility = #public
+</code>*/
+	operation imported_element_is_public(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+	/**A query based on the following OCL expression:
+<code>
+if self.alias->notEmpty() then 
+    self.alias
+else
+    self.importedElement.name
+endif
+</code>*/
+	operation getName() : String is
+		abstract
+
+}
+/**A package import is defined as a directed relationship that identifies a package whose members are to be imported by a namespace. */
+class PackageImport inherits DirectedRelationship
+{
+	/**Specifies the visibility of the imported PackageableElements within the import-ing Namespace, i.e., whether imported elements will in turn be visible to other packages that use that importingPackage as an importedPackage. If the PackageImport is public, the imported elements will be visible outside the package, while if it is private they will not. By default, the value of visibility is public.*/
+	attribute visibility : VisibilityKind
+
+	/**Specifies the Package whose members are imported into a Namespace. Subsets DirectedRelationship::target.*/
+	reference importedPackage : Package[1..1]
+
+	/**Specifies the Namespace that imports the members from a Package. Subsets DirectedRelationship::source and Element::owner.*/
+	reference importingNamespace : Namespace[1..1]#packageImport
+
+	/**An invariant constraint based on the following OCL expression:
+<code>
+self.visibility = #public or self.visibility = #private
+</code>*/
+	operation public_or_private(diagnostics : ecore::EDiagnosticChain, context : ecore::EMap) : Boolean is
+		abstract
+
+}
+/**An association specifies a semantic relationship that can occur between typed instances. It has at least two ends represented by properties, each of which is connected to the type of the end. More than one end of the association may have the same type. When a property is owned by an association it represents a non-navigable end of the association. In this case the property does not appear in the namespace of any of the associated classifiers. When a property at an end of an association is owned by one of the associated classifiers it represents a navigable end of the association. In this case the property is also an attribute of the associated classifier. Only binary associations may have navigable ends. */
+class Association inherits Classifier, Relationship
+{
+	/**Specifies whether the association is derived from other model elements such as other associations or constraints. The default value is false.*/
+	attribute isDerived : Boolean
+
+	/**The non-navigable ends that are owned by the association itself. This is an ordered association. Subsets Association::memberEnd, Classifier::feature, and Namespace::owned- Member.*/
+	attribute ownedEnd : Property[0..*]#owningAssociation
+
+	/**References the classifiers that are used as types of the ends of the association.*/
+	property endType : set Type[1..*]
+		getter is do
+			//TODO: implement getter for derived property endType
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property endType
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Each end represents participation of instances of the classifier connected to the end in links of the association. This is an ordered association. Subsets Namespace::member.*/
+	reference memberEnd : Property[2..*]#association
+
+}
+/**A package merge is a relationship between two packages, where the contents of the target package (the one pointed at) is merged with the contents of the source package through specialization and redefinition, where applicable. This is a mechanism that should be used when elements of the same name are intended to represent the same concept, regardless of the package in which they are defined. A merging package will take elements of the same kind with the same name from one or more packages and merge them together into a single element using generalization and redefinitions. It should be noted that a package merge can be viewed as a short-hand way of explicitly defining those generalizations and redefinitions. The merged packages are still available, and the elements in those packages can be separately qualified. From an XMI point of view, it is either possible to exchange a model with all PackageMerges retained or a model where all PackageMerges have been transformed away (in which case package imports, generalizations, and redefinitions are used instead). */
+class PackageMerge inherits DirectedRelationship
+{
+	/**References the Package that is being extended with the contents of the target of the PackageMerge. Subsets Element::owner and DirectedRelationship::source.*/
+	reference mergingPackage : Package[1..1]#packageMerge
+
+	/**References the Package that is to be merged with the source of the PackageMerge. Subsets DirectedRelationship;;target.*/
+	reference mergedPackage : Package[1..1]
+
+}
+class Stereotype inherits Class
+{
+}
+class Profile inherits Package
+{
+	property ownedStereotype : set Stereotype[0..*]
+		getter is do
+			//TODO: implement getter for derived property ownedStereotype
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property ownedStereotype
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	reference metaclassReference : set ElementImport[0..*]
+
+	reference metamodelReference : set PackageImport[0..*]
+
+}
+class ProfileApplication inherits PackageImport
+{
+	reference importedProfile : Profile[1..1]
+
+}
+class Extension inherits Association
+{
+	property isRequired : Boolean
+		getter is do
+			//TODO: implement getter for derived property isRequired
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property isRequired
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property metaclass : Class[1..1]#extension
+		getter is do
+			//TODO: implement getter for derived property metaclass
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property metaclass
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+}
+class ExtensionEnd inherits Property
+{
+}
+/**Behavior is a specification of how its context classifier changes state over time. This specification may be either a definition of possible behavior execution or emergent behavior, or a selective illustration of an interesting subset of possible executions. The latter form is typically used for capturing examples, such as a trace of a particular execution. A classifier behavior is always a definition of behavior and not an illustration. It describes the sequence of state changes an instance of a classifier may undergo in the course of its lifetime. Its precise semantics depends on the kind of classifier. For example, the classifier behavior of a collaboration represents emergent behavior of all the parts, whereas the classifier behavior of a class is just the behavior of instances of the class separated from the behaviors of any of its parts. When a behavior is associated as the method of a behavioral feature, it defines the implementation of that feature; i.e., the computation that generates the effects of the behavioral feature. As a classifier, a behavior can be specialized. Instantiating a behavior is referred to as “invocating” the behavior, an instantiated behavior is also called a behavior “execution.” A behavior may be invoked directly or its invocation may be the result of invoking the behavioral feature that specifies this behavior. A behavior can also be instantiated as an object in virtue of it being a class. The specification of a behavior can take a number of forms, as described in the subclasses of Behavior. Behavior is an abstract metaclass factoring out the commonalities of these different specification mechanisms. When a behavior is invoked, its execution receives a set of input values that are used to affect the course of execution and as a result of its execution it produces a set of output values which are returned, as specified by its parameters. The observable effects of a behavior execution may include changes of values of various objects involved in the execution, the creation and destruction of objects, generation of communications between objects, as well as an explicit set of output values. */
+abstract class Behavior inherits Class
+{
+	/**Tells whether the behavior can be invoked while it is still executing from a previous invocation.*/
+	attribute isReentrant : Boolean
+
+	/**The classifier owning the behavior. The features of the context classifier as well as the elements visible to the context classifier are visible to the behavior.*/
+	reference context : BehavioredClassifier#ownedBehavior
+
+	reference redefinedBehavior : set Behavior[0..*]
+
+	/**Designates a behavioral feature that the behavior implements. The behavioral feature must be owned by the classifier that owns the behavior or be inherited by it. The parameters of the behavioral feature and the implementing behavior must match. If a behavior does not have a specification, it is directly associated with a classifier (i.e., it is the behavior of the classifier as a whole).*/
+	reference specification : BehavioralFeature#~method
+
+	/**References a list of parameters to the behavior which describes the order and type of arguments that can be given when the behavior is invoked and of the values which will be returned when the behavior completes its execution. (Specializes Namespace.owned- Member.)*/
+	attribute parameter : Parameter[0..*]
+
+	property formalParameter : Parameter[0..*]
+		getter is do
+			//TODO: implement getter for derived property formalParameter
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property formalParameter
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property returnResult : Parameter[0..*]
+		getter is do
+			//TODO: implement getter for derived property returnResult
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property returnResult
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	reference precondition : set Constraint[0..*]
+
+	reference postcondition : set Constraint[0..*]
+
+	attribute ownedParameterSet : set ParameterSet[0..*]
+
+}
+/**A classifier can have behavior specifications defined in its namespace. One of these may specify the behavior of the classifier itself. */
+abstract class BehavioredClassifier inherits Classifier
+{
+	/**References behavior specifications owned by a classifier. (Specializes Namespace.owned- Member.)*/
+	attribute ownedBehavior : set Behavior[0..*]#context
+
+	/**A behavior specification that specifies the behavior of the classifier itself. (Specializes BehavioredClassifier.ownedBehavior.)*/
+	reference classifierBehavior : Behavior
+
+	/**(Specializes Element.ownedElement and Realization.clientDependency.)*/
+	attribute implementation : set Implementation[0..*]#implementingClassifier
+
+	attribute ownedTrigger : set Trigger[0..*]
+
+	attribute ownedStateMachine : set StateMachine[0..*]#stateMachine_redefinitionContext
+
+}
+/**An activity contains a language-specific text string used to describe a computation, and an optional specification of the language. OCL, natural language, or programming languages may be used to specify an activity. */
+class Activity inherits Behavior
+{
+	/**A textual representation of the computation in the surface language determined by the language attribute.*/
+	attribute body : String
+
+	/**Specifies the language in which the body of the activity is stated. The interpretation of the expression body depends on the language.*/
+	attribute language : String
+
+	attribute edge : set ActivityEdge[0..*]#activity
+
+	attribute group : set ActivityGroup[0..*]#activityGroup_activity
+
+	attribute node : set ActivityNode[0..*]#activity
+
+	reference action : Action[0..*]
+
+	property structuredNode : set StructuredActivityNode[0..*]
+		getter is do
+			//TODO: implement getter for derived property structuredNode
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property structuredNode
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	attribute isSingleExecution : Boolean
+
+	attribute isReadOnly : Boolean
+
+}
+/**A Permission signifies granting of access rights from the supplier model element to a client model element. Or to put it another way, it signifies that the client requires access to some or all of the constituent elements of the supplier. The supplier element gives the client permission to access some or all of its constituents elements. */
+class Permission inherits Dependency
+{
+}
+/**A dependency is a relationship that signifies that a single or a set of model elements requires other model elements for their specification or implementation. This means that the complete semantics of the depending elements is either semantically or structurally dependent on the definition of the supplier element(s). */
+class Dependency inherits PackageableElement, DirectedRelationship
+{
+	/**The element that is affected by the supplier element. In some cases (such as a Trace Abstraction) the direction is unimportant and serves only to distinguish the two elements.*/
+	reference client : set NamedElement[1..*]#clientDependency
+
+	/**Designates the element that is unaffected by a change. In a two-way relationship (such as some Refinement Abstractions) this would be the more general element. In an undirected situation, such as a Trace Abstraction, the choice of client and supplier is not relevant.*/
+	reference supplier : set NamedElement[1..*]
+
+}
+/**A usage is a relationship in which one element requires another element (or set of elements) for its full implementation or operation. In the metamodel, a Usage is a Dependency in which the client requires the presence of the supplier. */
+class Usage inherits Dependency
+{
+}
+/**An abstraction is a relationship that relates two elements or sets of elements that represent the same concept at different levels of abstraction or from different viewpoints. In the metamodel, an Abstraction is a Dependency in which there is a mapping between the supplier and the client. */
+class Abstraction inherits Dependency
+{
+	/**An composition of an Expression that states the abstraction relationship between the supplier and the client. In some cases, such as Derivation, it is usually formal and unidirectional; in other cases, such as Trace, it is usually informal and bidirectional. The mapping expression is optional and may be omitted if the precise relationship between the elements is not specified.*/
+	attribute mapping : OpaqueExpression
+
+}
+/**In the metamodel, a Realization is a subtype of Dependencies::Realization. */
+class Realization inherits Abstraction
+{
+	reference abstraction : Component#realization
+
+	reference realizingClassifier : Classifier[1..1]
+
+}
+/**A substitution is a relationship between two classifiers signifies that the substitutingClassifier complies with the contract specified by the contract classifier. This implies that instances of the substitutingClassifier are runtime substitutable where instances of the contract classifier are expected. */
+class Substitution inherits Realization
+{
+	/**(Specializes Dependency.target.)*/
+	reference contract : Classifier[1..1]
+
+	/**(Specializes Dependency.client.)*/
+	reference substitutingClassifier : Classifier[1..1]#substitution
+
+}
+/**Each Generalization is a binary relationship that relates a specific Classifier to a more general Classifier (i.e., a subclass). */
+class GeneralizationSet inherits PackageableElement
+{
+	/**Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet. For example, Person could have two Generalization relationships each with a different specific Classifier: Male Person and Female Person. This GeneralizationSet would be covering because every instance of Person would be an instance of Male Person or Female Person. In contrast, Person could have a three Generalization relationships involving three specific Classifiers: North AmericanPerson, Asian Person, and European Person. This GeneralizationSet would not be covering because there are instances of Person for which these three specific Classifiers do not apply. The first example, then, could be read: any Person would be specialized as either being a Male Person or a Female Person—and nothing else; the second could be read: any Person would be specialized as being North American Person, Asian Person, European Person, or something else.*/
+	attribute isCovering : Boolean
+
+	/**Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty. For example, Person could have two Generalization relationships, each with the different specific Classifier: Manager or Staff. This would be disjoint because every instance of Person must either be a Manager or Staff. In contrast, Person could have two Generalization relationships involving two specific (and non-covering) Classifiers: Sales Person and Manager. This Generalization- Set would not be disjoint because there are instances of Person which can be a Sales Person and a Manager.*/
+	attribute isDisjoint : Boolean
+
+	reference powertype : Classifier#powertypeExtent
+
+	reference generalization : set Generalization[0..*]#generalizationSet
+
+}
+/**In the metamodel, an AssociationClass is a declaration of a semantic relationship between Classifiers, which has a set of features of its own. AssociationClass is both an Association and a Class. */
+class AssociationClass inherits Class, Association
+{
+}
+/**An information Item is an abstraction of all kinds of information that can be exchanged between objects. It is a kind of classifier intended for representing information at a very abstract way, which is cannot be instanciated. One purpose of Information Items is to be able to define preliminary models, before having taken detailed modeling decisions on types or stuctures. One other purpose of information items and information flows is to abstract complex models by a less precise but more general representation of the information exchanged betwen entities of a system. */
+class InformationItem inherits Classifier
+{
+	/**: Determines the classifiers that will specify the structure and nature of the information. An information item represents all its represented classifiers. Customer Company Employee product wage <<flow>> <<flow>>*/
+	reference represented : set Classifier[0..*]
+
+}
+/**An Information Flow specifies that one or more information items circulate from its sources to its targets. Information flows require some kind of “information channel” for transmitting information items from the source to the destination. An information channel is repersented in various ways depending on the nature of its sources and targets. It may be represented by connectors, links, associations, or even dependencies. For example, if the source and destination are parts in some composite structure such as a collaboration, then the information channel is likely to be represented by a connector between them. Or, if the source and target are objects (which are a kind of InstanceSpecification), they may be represented by a link that joins the two, and so on. */
+class InformationFlow inherits PackageableElement, DirectedRelationship
+{
+	/**: Determines which Relationship will realize the specified flow*/
+	reference realization : set Relationship[0..*]
+
+	/**: Specifies the information items that may circulate on this information flow.*/
+	reference conveyed : set Classifier[1..*]
+
+}
+/**The Model construct is defined as a Package. It contains a (hierarchical) set of elements that together describe the physical system being modeled. A Model may also contain a set of elements that represents the environment of the system, typically Actors, together with their interrelationships, such as Associations and Dependencies */
+class Model inherits Package
+{
+	/**The name of the viewpoint that is expressed by a model (This name may refer to a profile definition).*/
+	attribute viewpoint : String
+
+}
+/**A connector end is an endpoint of a connector, which attaches the connector to a connectable element. Each connector end is part of one connector. */
+class ConnectorEnd inherits MultiplicityElement
+{
+	property definingEnd : Property
+		getter is do
+			//TODO: implement getter for derived property definingEnd
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property definingEnd
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**The connectable element attached at this connector end. When an instance of the containing classifier is created, a link may (depending on the multiplicities) be created to an instance of the classifier that types this connectable element.*/
+	reference role : ConnectableElement#~end
+
+	reference partWithPort : Property
+
+}
+/**A ConnectableElement is an abstract metaclass representing a set of instances that are owned by a containing classifier instance. Connectable elements may be joined by attached connectors and specify configurations of linked instances to be created within an instance of the containing classifier. */
+abstract class ConnectableElement inherits NamedElement, ParameterableElement
+{
+	/**Denotes a connector that attaches to this connectable element.*/
+	reference ~end : set ConnectorEnd[0..*]#role
+
+}
+/**Each connector may be attached to two or more connectable elements, each representing a set of instances. Each connector end */
+class Connector inherits Feature
+{
+	/**An optional association that specifies the link corresponding to this connector.*/
+	reference type : Association
+
+	/**connector may be redefined when its containing classifier is specialized. The redefining connector may have a type that specializes the type of the redefined connector. The types of the connector ends of the redefining connector may specialize the types of the connector ends of the redefined connector. The properties of the connector ends of the redefining connector may be replaced. (Subsets Element.redefinedElement.)*/
+	reference redefinedConnector : set Connector[0..*]
+
+	/**A connector consists of at two connector ends, each of which represents the participation of instances of the classifiers typing the connectable elements attached to this end. The set of connector ends is ordered. (Subsets Element.ownedElement.)*/
+	attribute ~end : ConnectorEnd[2..*]
+
+	attribute kind : ConnectorKind
+
+	reference contract : set Behavior[0..*]
+
+}
+enumeration ConnectorKind
+{
+	assembly;
+	delegation;
+}
+/**A structured classifier is an abstract metaclass that represents any classifier whose behavior can be fully or partly described by the collaboration of owned or referenced instances. */
+abstract class StructuredClassifier inherits Classifier
+{
+	/**References the properties owned by the classifier. (Subsets StructuredClassifier.role, Classifier. attribute,and Namespace.ownedMember)*/
+	attribute ownedAttribute : Property[0..*]
+
+	/**References the properties specifying instances that the classifier owns by composition. This association is derived, selecting those owned properties where isComposite is true.*/
+	property part : set Property[0..*]
+		getter is do
+			//TODO: implement getter for derived property part
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property part
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**References the roles that instances may play in this classifier. (Abstract union; subsets Classifier.feature.)*/
+	property role : set ConnectableElement[0..*]
+		getter is do
+			//TODO: implement getter for derived property role
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property role
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**References the connectors owned by the classifier. (Subsets Classifier.feature and Namespace.ownedMember)*/
+	attribute ownedConnector : set Connector[0..*]
+
+}
+abstract class ActivityEdge inherits RedefinableElement
+{
+	reference activity : Activity#edge
+
+	reference source : ActivityNode[1..1]#outgoing
+
+	reference target : ActivityNode[1..1]#incoming
+
+	property inGroup : set ActivityGroup[0..*]
+		getter is do
+			//TODO: implement getter for derived property inGroup
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property inGroup
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	attribute guard : ValueSpecification[1..1]
+
+	reference redefinedElement : set ActivityEdge[0..*]
+
+	/**Structured activity node containing the edge.*/
+	reference inStructuredNode : StructuredActivityNode#containedEdge
+
+	reference inPartition : set ActivityPartition[0..*]#containedEdge
+
+	attribute weight : ValueSpecification[1..1]
+
+	reference interrupts : InterruptibleActivityRegion#interruptingEdge
+
+}
+/**Activity groups are a generic grouping construct for nodes and edges. Nodes and edges can belong to more than group. They have no inherent semantics and can be used for various purposes. Subclasses of ActivityGroup may add semantics. */
+abstract class ActivityGroup inherits Element
+{
+	property superGroup : ActivityGroup
+		getter is do
+			//TODO: implement getter for derived property superGroup
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property superGroup
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Activity containing the group.*/
+	reference activityGroup_activity : Activity#group
+
+}
+abstract class ActivityNode inherits RedefinableElement
+{
+	reference outgoing : set ActivityEdge[0..*]#source
+
+	reference incoming : set ActivityEdge[0..*]#target
+
+	property inGroup : set ActivityGroup[0..*]
+		getter is do
+			//TODO: implement getter for derived property inGroup
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property inGroup
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	reference activity : Activity#node
+
+	reference redefinedElement : set ActivityNode[0..*]
+
+	/**Structured activity node containing the node.*/
+	reference inStructuredNode : StructuredActivityNode#containedNode
+
+	reference inPartition : set ActivityPartition[0..*]#containedNode
+
+	reference inInterruptibleRegion : set InterruptibleActivityRegion[0..*]#containedNode
+
+}
+class Action inherits ExecutableNode
+{
+	attribute effect : String
+
+	property output : OutputPin[0..*]
+		getter is do
+			//TODO: implement getter for derived property output
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property output
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property input : InputPin[0..*]
+		getter is do
+			//TODO: implement getter for derived property input
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property input
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property context : Classifier
+		getter is do
+			//TODO: implement getter for derived property context
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property context
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Constraint that must be satisfied when execution is started.*/
+	attribute localPrecondition : set Constraint[0..*]
+
+	/**Constraint that must be satisfied when executed is completed.*/
+	attribute localPostcondition : set Constraint[0..*]
+
+}
+abstract class ObjectNode inherits ActivityNode, TypedElement
+{
+	/**= FIFO Tells whether and how the tokens in the object node are ordered for selection to traverse edges outgoing from the object node.*/
+	attribute ordering : ObjectNodeOrderingKind
+
+	attribute upperBound : ValueSpecification[1..1]
+
+	/**The required states of the object available at this point in the activity.*/
+	reference inState : set State[0..*]
+
+	reference selection : Behavior
+
+}
+enumeration ObjectNodeOrderingKind
+{
+	unordered;
+	ordered;
+	LIFO;
+	FIFO;
+}
+/**A control node is an activity node used to coordinate the flows between other nodes. It covers initial node, final node and its children, fork node, join node, decision node, and merge node. */
+abstract class ControlNode inherits ActivityNode
+{
+}
+/**Objects and data cannot pass along a control flow edge. */
+class ControlFlow inherits ActivityEdge
+{
+}
+class ObjectFlow inherits ActivityEdge
+{
+	attribute isMulticast : Boolean
+
+	attribute isMultireceive : Boolean
+
+	/**Changes or replaces data tokens flowing along edge.*/
+	reference transformation : Behavior
+
+	/**Selects tokens from a source object node.*/
+	reference selection : Behavior
+
+}
+/**An activity may have more than one initial node. */
+class InitialNode inherits ControlNode
+{
+}
+/**See descriptions at children of final node. */
+abstract class FinalNode inherits ControlNode
+{
+}
+/**An activity may have more than one activity final node. The first one reached stops all flows in the activity. */
+class ActivityFinalNode inherits FinalNode
+{
+}
+/**A decision node has one incoming edge and multiple outgoing activity edges. */
+class DecisionNode inherits ControlNode
+{
+	/**Provides input to guard specifications on edges outgoing from the decision node.*/
+	reference decisionInput : Behavior
+
+}
+/**A merge node has multiple incoming edges and a single outgoing edge. */
+class MergeNode inherits ControlNode
+{
+}
+abstract class ExecutableNode inherits ActivityNode
+{
+	/**A set of exception handlers that are examined if an uncaught exception propagates to the outer level of the executable node.*/
+	attribute handler : set ExceptionHandler[0..*]#protectedNode
+
+}
+/**An output pin is a pin that holds output values produced by an action. Output pins are object nodes and deliver values to other actions through object flows. See Pin, Action, and ObjectNode for more details. */
+class OutputPin inherits Pin
+{
+}
+/**Pins are connected as inputs and outputs to actions. They provide values to actions and accept result values from them. */
+abstract class Pin inherits ObjectNode, MultiplicityElement
+{
+}
+/**An input pin is a pin that holds input values to be consumed by an action. They are object nodes and receive values from other actions through object flows. See Pin, Action, and ObjectNode for more details. */
+class InputPin inherits Pin
+{
+}
+/**Activity parameters are object nodes at the beginning and end of flows, to accept inputs to an activity and provide outputs from it. (CompleteActivities) Activity parameters inherit support for streaming and exceptions from Parameter. */
+class ActivityParameterNode inherits ObjectNode
+{
+	/**The parameter the object node will be accepting and providing values for.*/
+	reference parameter : Parameter[1..1]
+
+}
+/**A value pin is an input pin that provides a value to an action that does not come from an incoming object flow edge. */
+class ValuePin inherits InputPin
+{
+	/**Value that the pin will provide.*/
+	attribute ~value : ValueSpecification[1..1]
+
+}
+/**An interface is a kind of classifier that represents a declaration of a set of coherent public features and obligations. In a sense, */
+class Interface inherits Classifier
+{
+	/**References the properties owned by the Interface. (Subsets Namespace.ownedMember and Classifier.feature.)*/
+	attribute ownedAttribute : Property[0..*]
+
+	/**References the operations owned by the Interface. (Subsets Namespace.ownedMember and Classifier.feature.)*/
+	attribute ownedOperation : Operation[0..*]
+
+	/**(Subsets Element.redefinedElement.)*/
+	reference redefinedInterface : set Interface[0..*]
+
+	attribute nestedClassifier : Classifier[0..*]
+
+	/**Receptions that objects providing this interface are willing to accept. (Subsets Namespace.ownedMember and Classifier.feature.)*/
+	attribute ownedReception : set Reception[0..*]
+
+	/**References a protocol state machine specifying the legal sequences of the invocation of the behavioral features described in the interface.*/
+	attribute protocol : ProtocolStateMachine
+
+}
+/**An Implementation is a specialized Realization relationship between a Classifier and an Interface. The implementation relationship signifies that the realizing classifier conforms to the contract specified by the interface. */
+class Implementation inherits Realization
+{
+	/**References the Interface specifying the conformance contract. (Specializes Dependency. supplier and Relationship.target)*/
+	reference contract : Interface[1..1]
+
+	/**References the operations owned by the Interface. (Specializes Dependency.client and Relationship.source)*/
+	reference implementingClassifier : BehavioredClassifier[1..1]#implementation
+
+}
+class Artifact inherits Classifier, DeployedArtifact
+{
+	attribute fileName : String
+
+	attribute nestedArtifact : set Artifact[0..*]
+
+	attribute manifestation : set Manifestation[0..*]
+
+	attribute ownedOperation : Operation[0..*]
+
+	attribute ownedAttribute : Property[0..*]
+
+}
+/**In the metamodel, a Manifestation is a subtype of Abstraction. A Manifestation is owned by an Artifact. */
+class Manifestation inherits Abstraction
+{
+	/**The model element that is utilized in the manifestation in an Artifact. This association specializes the supplier association.*/
+	reference utilizedElement : PackageableElement[1..1]
+
+}
+/**An Actor models a type of role played by an entity that interacts with the subject (e.g., by exchanging signals and data), but which is external to the subject (i.e., in the sense that an instance of an actor is not a part of the instance of its corresponding subject). Actors may represent roles played by human users, external hardware, or other subjects. Note that an actor does not necessarily represent a specific physical entity but merely a particular facet (i.e., “role”) of some entity that is relevant to the specification of its associated use cases. Thus, a single physical instance may play the role of several different actors and, conversely, a given actor may be played by multiple different instances. Since an actor is external to the subject, it is typically defined in the same classifier or package that incorporates the subject classifier. */
+class Actor inherits Classifier
+{
+}
+/**This relationship specifies that the behavior of a use case may be extended by the behavior of another (usually supplementary) use case. The extension takes place at one or more specific extension points defined in the extended use case. Note, however, that the extended use case is defined independently of the extending use case and is meaningful independently of the extending use case. On the other hand, the extending use case typically defines behavior that may not necessarily be meaningful by itself. Instead, the extending use case defines a set of modular behavior increments that augment an execution of the extended use case under specific conditions. Note that the same extending use case can extend more than one use case. Furthermore, an extending use case may itself be extended. It is a kind of DirectedRelationship, such that the source is the extending use case and the destination is the extended use case. It is also a kind of NamedElement so that it can have a name in the context of its owning use case. The extend relationship itself is owned by the extending use case. */
+class Extend inherits NamedElement, DirectedRelationship
+{
+	/**References the use case that is being extended. (Specializes DirectedRelationship.target.)*/
+	reference extendedCase : UseCase[1..1]
+
+	reference extension : UseCase[1..1]#extend
+
+	attribute condition : Constraint
+
+	reference extensionLocation : ExtensionPoint[1..*]
+
+}
+/**A UseCase is a kind of behaviored classifier that represents a declaration of an offered behavior. Each use case specifies some behavior, possibly including variants, that the subject can perform in collaboration with one or more actors. Use cases define the offered behavior of the subject without reference to its internal structure. These behaviors, involving interactions between the actor and the subject, may result in changes to the state of the subject and communications with its environment. A use case can include possible variations of its basic behavior, including exceptional behavior and error handling. The subject of a use case could be a physical system or any other element that may have behavior, such as a component, subsystem or class. Each use case specifies a unit of useful functionality that the subject provides to its users, i.e., a specific way of interacting with the subject. This functionality, which is initiated by an actor, must always be completed for the use case to complete. It is deemed complete if, after its execution, the subject will be in a state in which no further inputs or actions are expected and the use case can be initiated again or in an error state. Use cases can be used both for specification of the (external) requirements on a subject and for the specification of the functionality offered by a subject. Moreover, the use cases also state the requirements the specified subject poses on its environment by defining how they should interact with the subject so that it will be able to perform its services. The behavior of a use case can be described by a specification that is some kind of Behavior (through its ownedBehavior relationship), such as interactions, activities, and state machines, or by pre-conditions and post-conditions as well as by natural language text where appropriate. It may also be described indirectly through a Collaboration that uses the use case and its actors as the classifiers that type its parts. Which of these techniques to use depends on the nature of the use case behavior as well as on the intended reader. These descriptions can be combined. */
+class UseCase inherits BehavioredClassifier
+{
+	attribute include : set Include[0..*]#includingCase
+
+	attribute extend : set Extend[0..*]#extension
+
+	attribute extensionPoint : set ExtensionPoint[0..*]#useCase
+
+	reference subject : set Classifier[0..*]#useCase
+
+}
+/**An ExtensionPoint is a feature of a use case that identifies a point where the behavior of a use case can be augmented with elements of another (extending) use case. */
+class ExtensionPoint inherits RedefinableElement
+{
+	reference useCase : UseCase[1..1]#extensionPoint
+
+}
+/**Include is a DirectedRelationship between two use cases, implying that the behavior of the included use case is inserted into the behavior of the including use case. It is also a kind of NamedElement so that it can have a name in the context of its owning use case. The including use case may only depend on the result (value) of the included use case. This value is obtained as a result of the execution of the included use case. Note that the included use case is not optional, and is always required for the including use case to execute correctly. */
+class Include inherits NamedElement, DirectedRelationship
+{
+	/**References the use case which will include the addition and owns the include relationship. (Specializes DirectedRelationship.source.)*/
+	reference includingCase : UseCase[1..1]#include
+
+	/**References the use case that is to be included. (Specializes DirectedRelationship.target.)*/
+	reference addition : UseCase[1..1]
+
+}
+/**A collaboration occurrence represents one particular use of a collaboration to explain the relationships between the properties of a classifier. A collaboration occurrence indicates a set of roles and connectors that cooperate within the classifier according to a given collaboration, indicated by the type of the collaboration occurrence. There may be multiple occurrences of a given collaboration within a classifier, each involving a different set of roles and connectors. A given role or connector may be involved in multiple occurrences of the same or different collaborations. Associated dependencies map features of the collaboration type to features in the classifier. These dependencies indicate which role in the classifier plays which role in the collaboration. */
+class CollaborationOccurrence inherits NamedElement
+{
+	/**The collaboration which is used in this occurrence. The collaboration defines the cooperation between its roles which are mapped to properties of the classifier owning the collaboration occurrence.*/
+	reference type : Collaboration[1..1]
+
+	attribute roleBinding : set Dependency[0..*]
+
+}
+/**A collaboration is represented as a kind of classifier and defines a set of cooperating entities to be played by instances (its roles), as well as a set of connectors that define communication paths between the participating instances. The cooperating entities are the properties of the collaboration. A collaboration specifies a view (or projection) of a set of cooperating classifiers. It describes the required links between instances that play the roles of the collaboration, as well as the features required of the classifiers that specify the participating instances. Several collaborations may describe different projections of the same set of classifiers. */
+class Collaboration inherits BehavioredClassifier, StructuredClassifier
+{
+	reference collaborationRole : set ConnectableElement[0..*]
+
+}
+/**Ports represent interaction points between a classifier and its environment. The interfaces associated with a port specify the nature of the interactions that may occur over a port. The required interfaces of a port characterize the requests which may be made from the classifier to its environment through this port. The provided interfaces of a port characterize requests to the classifier that its environment may make through this port. A port has the ability to specify that any requests arriving at this port are handled by the behavior of the instance of the owning classifier, rather than being forwarded to any contained instances, if any. */
+class Port inherits Property
+{
+	/**Specifies whether requests arriving at this port are sent to the classifier behavior of this classifier (see “BehavioredClassifier (from BasicBehaviors)” on page 387). Such ports are referred to as behavior port. Any invocation of a behavioral feature targeted at a behavior port will be handled by the instance of the owning classifier itself, rather than by any instances that this classifier may contain. The default value is false.*/
+	attribute isBehavior : Boolean
+
+	/**If true indicates that this port is used to provide the published functionality of a classifier; if false, this port is used to implement the classifier but is not part of the essential externally- visible functionality of the classifier and can, therefore, be altered or deleted along with the internal implementation of the classifier and other properties that are considered part of its implementation. The default value for this attribute is true.*/
+	attribute isService : Boolean
+
+	/**References the interfaces specifying the set of operations and receptions which the classifier expects its environment to handle. This association is derived as the set of interfaces required by the type of the port or its supertypes.*/
+	property required : set Interface[0..*]
+		getter is do
+			//TODO: implement getter for derived property required
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property required
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**A port may be redefined when its containing classifier is specialized. The redefining port may have additional interfaces to those that are associated with the redefined port or it may replace an interface by one of its subtypes. (Subsets Element.redefinedElement.)*/
+	reference redefinedPort : set Port[0..*]
+
+	/**References the interfaces specifying the set of operations and receptions which the classifier offers to its environment, and which it will handle either directly or by forwarding it to a part of its internal structure. This association is derived from the interfaces realized by the type of the port or by the type of the port, if the port was typed by an interface.*/
+	property provided : set Interface[0..*]
+		getter is do
+			//TODO: implement getter for derived property provided
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property provided
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**References an optional protocol state machine which describes valid interactions at this interaction point.*/
+	reference protocol : ProtocolStateMachine
+
+}
+/**Extends a classifier with the ability to own ports as specific and type checked interaction points. */
+abstract class EncapsulatedClassifier inherits StructuredClassifier
+{
+	/**References a set of ports that an encapsulated classifier owns. (Subsets Classifier.feature and Namespace.ownedMember.)*/
+	attribute ownedPort : set Port[0..*]
+
+}
+/**A call trigger represents the reception of a request to invoke a specific operation and specifies a call event. A call event is distinct from the call action that caused it. A call event may cause the invocation of a behavior that is the method of the operation referenced by the call request, if that operation is owned or inherited by the classifier that specified the receiver object. */
+class CallTrigger inherits MessageTrigger
+{
+	/**Designates the operation whose invocation raised the call event that is specified by the call trigger.*/
+	reference ~operation : Operation[1..1]
+
+}
+/**A message trigger specifies the an observable event caused by a either a call or a signal. MessageTrigger is an abstract metaclass. */
+abstract class MessageTrigger inherits Trigger
+{
+}
+/**A trigger specifies the an event that may cause the execution of an associated behavior. An event is often ultimately caused by the execution of an action, but need not be. Trigger is an abstract metaclass. */
+abstract class Trigger inherits NamedElement
+{
+	/**Specifies the ports at which a communication that caused an event may have arrived.*/
+	reference port : set Port[0..*]
+
+}
+/**A change trigger specifies an event that occurs when a Boolean-valued expression becomes true as a result of a change in value of one or more attributes or associations. A change event is raised implicitly and is not the result of an explicit action. */
+class ChangeTrigger inherits Trigger
+{
+	/**A Boolean-valued expression that will result in a change event whenever its value changes from false to true.*/
+	attribute changeExpression : ValueSpecification[1..1]
+
+}
+/**A reception is a declaration stating that a classifier is prepared to react to the receipt of a signal. A reception designates a signal and specifies the expected behavioral response. The details of handling a signal are specified by the behavior associated with the reception or the classifier itself. */
+class Reception inherits BehavioralFeature
+{
+	/**The signal that this reception handles.*/
+	reference signal : Signal
+
+}
+/**A signal is a specification of type of send request instances communicated between objects. The receiving object handles the signal instance as specified by its receptions. The data carried by a send request and passed to it by the occurrence of the send invocation event that caused the request is represented as attributes of the signal instance. A signal is defined independently of the classifiers handling the signal. */
+class Signal inherits Classifier
+{
+	attribute ownedAttribute : Property[0..*]
+
+}
+/**A signal event represents the receipt of an asynchronous signal. A signal event may cause a response, such as a state machine transition as specified in the classifier behavior of the classifier that specified the receiver object, if the signal referenced by the send request is mentioned in a reception owned or inherited by the classifier that specified the receiver object. */
+class SignalTrigger inherits MessageTrigger
+{
+	reference signal : Signal[0..*]
+
+}
+/**A time trigger specifies a time event, which models the expiration of a specific deadline. */
+class TimeTrigger inherits Trigger
+{
+	/**Specifies whether it is relative or absolute time.*/
+	attribute isRelative : Boolean
+
+	/**Specifies the corresponding time deadline.*/
+	attribute when : ValueSpecification[1..1]
+
+}
+/**An AnyTrigger for a given state specifies that the transition is triggered for all applicable message triggers except for those specified explicitly on other transitions for this state. */
+class AnyTrigger inherits MessageTrigger
+{
+}
+/**A variable is considered a connectable element. */
+class Variable inherits ConnectableElement, TypedElement, MultiplicityElement
+{
+	reference scope : StructuredActivityNode[1..1]#variable
+
+}
+class StructuredActivityNode inherits Action, Namespace, ActivityGroup
+{
+	attribute variable : set Variable[0..*]#scope
+
+	attribute containedNode : ActivityNode[0..*]#inStructuredNode
+
+	attribute containedEdge : ActivityEdge[0..*]#inStructuredNode
+
+	attribute mustIsolate : Boolean
+
+}
+class ConditionalNode inherits StructuredActivityNode
+{
+	attribute isDeterminate : Boolean
+
+	attribute isAssured : Boolean
+
+	attribute clause : set Clause[1..*]
+
+	/**A list of output pins that constitute the data flow outputs of the conditional.*/
+	attribute ~result : OutputPin[0..*]
+
+}
+class Clause inherits Element
+{
+	reference test : set ActivityNode[0..*]
+
+	reference body : set ActivityNode[0..*]
+
+	reference predecessorClause : set Clause[0..*]#successorClause
+
+	reference successorClause : set Clause[0..*]#predecessorClause
+
+	reference decider : OutputPin[1..1]
+
+	/**A list of output pins within the body fragment whose values are copied to the result pins of the containing conditional node or conditional node after execution of the clause body.*/
+	reference bodyOutput : set OutputPin[0..*]
+
+}
+class LoopNode inherits StructuredActivityNode
+{
+	attribute isTestedFirst : Boolean
+
+	reference bodyPart : set ActivityNode[0..*]
+
+	reference setupPart : set ActivityNode[0..*]
+
+	reference decider : OutputPin[1..1]
+
+	reference test : set ActivityNode[0..*]
+
+	/**A list of output pins that constitute the data flow output of the entire loop.*/
+	attribute ~result : OutputPin[0..*]
+
+	/**A list of output pins owned by the loop that hold the values of the loop variables during an execution of the loop. When the test fails, the values are copied to the result pins of the loop.*/
+	attribute loopVariable : OutputPin[0..*]
+
+	/**A list of output pins within the body fragment the values of which are copied to the loop variable pins after completion of execution of the body, before the next iteration of the loop begins or before the loop exits.*/
+	reference bodyOutput : set OutputPin[0..*]
+
+	/**A list of values that are copied into the loop variable pins before the first iteration of the loop.*/
+	attribute loopVariableInput : InputPin[0..*]
+
+}
+/**The point is that the InteractionConstraint "received" from StructuralArchitecture will consist of a set of such units described by sequence diagrams (or collaboration diagrams).*/
+class Interaction inherits Behavior, InteractionFragment
+{
+	attribute lifeline : set Lifeline[0..*]#interaction
+
+	attribute message : set Message[0..*]#interaction
+
+	attribute fragment : InteractionFragment[0..*]#enclosingInteraction
+
+	/**Specifies the gates that form the message interface between this Interaction and any InteractionOccurrences which reference it.*/
+	attribute formalGate : set Gate[0..*]
+
+}
+/**An InteractionFragment is a general class that holds the common parts of CompositeFragment, AtomicFragment and InteractionExpressionOperand.
+Conceptually it is very much the same as a full sequence diagram, but a fragment is not named and must be referred then through structure.*/
+abstract class InteractionFragment inherits NamedElement
+{
+	reference covered : Lifeline[0..*]#coveredBy
+
+	attribute generalOrdering : set GeneralOrdering[0..*]
+
+	reference enclosingInteraction : Interaction#fragment
+
+	/**operand enclosing this InteractionFragment (they may nest recursively)*/
+	reference enclosingOperand : InteractionOperand#fragment
+
+}
+/**A lifeline represents an individual participant in the Interaction. While Parts and StructuralFeatures may have multiplicity greater than 1, Lifelines represent only one interacting entity. Lifeline is a specialization of NamedElement. If the referenced ConnectableElement is multivalued (i.e. has a multiplicity > 1), then the Lifeline may have an expression (the ‘selector’) that specifies which particular part is represented by this Lifeline. If the selector is omitted this means that an arbitrary representative of the multivalued ConnectableElement is chosen. */
+class Lifeline inherits NamedElement
+{
+	reference coveredBy : set InteractionFragment[0..*]#covered
+
+	/**the ConnectableElement within the classifier that contains the enclosing interaction.*/
+	reference represents : ConnectableElement[1..1]
+
+	/**References the Interaction enclosing this Lifeline.*/
+	reference interaction : Interaction[1..1]#lifeline
+
+	/**If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.*/
+	attribute selector : OpaqueExpression
+
+	reference decomposedAs : PartDecomposition
+
+}
+/**A Message defines a particular communication between Lifelines of an Interaction. A Message is a NamedElement that defines one specific kind of communication in an Interaction. A communication can be e.g. raising a signal, invoking an Operation, creating or destroying an Instance. The Message specifies not only the kind of communication given by the dispatching ExecutionOccurrence, but also the sender and the receiver. A Message associates normally two EventOccurrences - one sending EventOccurrence and one receiving EventOccurrence. */
+class Message inherits NamedElement
+{
+	/**The derived kind of the Message (complete, lost, found or unknown) complete = sendEvent and receiveEvent are present lost = sendEvent present and receiveEvent absent found = sendEvent absent and receiveEvent present unknown = sendEvent and receiveEvent absent (should not appear)*/
+	property messageKind : MessageKind
+		getter is do
+			//TODO: implement getter for derived property messageKind
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property messageKind
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	attribute messageSort : MessageSort
+
+	/**the Receiving of the Message*/
+	reference receiveEvent : MessageEnd#receiveMessage
+
+	/**References the Sending of the Message.*/
+	reference sendEvent : MessageEnd#sendMessage
+
+	/**The Connector on which this Message is sent.*/
+	reference connector : Connector
+
+	/**The enclosing Interaction owning the Message*/
+	reference interaction : Interaction[1..1]#message
+
+	/**The definition of the type or signature of the Message (depending on its kind)*/
+	reference signature : NamedElement
+
+	/**arguments of the Message*/
+	attribute argument : set ValueSpecification[0..*]
+
+}
+enumeration MessageKind
+{
+	complete;
+	lost;
+	found;
+	unknown;
+}
+enumeration MessageSort
+{
+	synchCall;
+	synchSignal;
+	asynchCall;
+	asynchSignal;
+}
+/**A GeneralOrdering represents a binary relation between two Eventoccurrences, to describe that one Eventoccurrence must occur before the other in a valid trace. This mechanism provides the ability to define partial orders of EventOccurrences that may otherwise not have a specified order. A GeneralOrdering is a specialization of NamedElement. A GeneralOrdering may appear anywhere in an Interaction, but only between Eventoccurrences. */
+class GeneralOrdering inherits NamedElement
+{
+	/**The Eventoccurrence referred comes before the Eventoccurrence referred by after*/
+	reference before : EventOccurrence[1..1]#toAfter
+
+	/**The Eventoccurrence referred comes after the Eventoccurrence referred by before*/
+	reference after : EventOccurrence[1..1]#toBefore
+
+}
+/**A MessageEnd is an abstract NamedElement that represents what can occur at the end of a Message. */
+abstract class MessageEnd inherits NamedElement
+{
+	/**the Message that contains the information of a receiveEvent*/
+	reference receiveMessage : Message#receiveEvent
+
+	/**References the Message that contains the information of a sendEvent*/
+	reference sendMessage : Message#sendEvent
+
+}
+/**EventOccurrences represents moments in time to which Actions are associated. An EventOccurrence is the basic semantic unit of Interactions. The sequences of Eventoccurrences are the meanings of Interactions. Messages are sent through either asynchronous signal sending or operation calls. Likewise they are recieved by Receptions or actions of consumption. EventOccurrence is a specialization of InteractionFragment and of MessageEnd. EventOccurrences are ordered along a Lifeline. The namespace of an EventOccurrence is the Interaction in which it is contained. */
+class EventOccurrence inherits InteractionFragment, MessageEnd
+{
+	reference startExec : set ExecutionOccurrence[0..*]#start
+
+	reference finishExec : set ExecutionOccurrence[0..*]#finish
+
+	reference toAfter : set GeneralOrdering[0..*]#before
+
+	reference toBefore : set GeneralOrdering[0..*]#after
+
+}
+/**An ExecutionOccurrence is an instantiation of a unit of behavior within the Lifeline. Since the ExecutionOccurrence will have some duration, it is represented by two Eventoccurrences, the start EventOccurrence and the finish EventOccurrence. An ExecutionOccurrence is an InteractionFragment. */
+class ExecutionOccurrence inherits InteractionFragment
+{
+	/**References the Eventoccurrence that designates the start of the Action*/
+	reference start : EventOccurrence[1..1]#startExec
+
+	/**References the Eventoccurrence that designates the finish of the Action.*/
+	reference finish : EventOccurrence[1..1]#finishExec
+
+	/**References the associated behavior*/
+	reference behavior : Behavior[0..*]
+
+}
+/**A StateInvariant is a runtime constraint on the participants of the interaction. It may be used to specify a variety of different kinds of constraints, such as values of attributes or variables, internal or external states, and so on. A StateInvariant is an InteractionFragment and it is placed on a Lifeline. */
+class StateInvariant inherits InteractionFragment
+{
+	/**A Constraint that should hold at runtime for this StateInvariant*/
+	attribute invariant : Constraint[1..1]
+
+}
+/**A Stop is an EventOccurrence that defines the termination of the instance specified by the Lifeline on which the Stop occurs. */
+class Stop inherits EventOccurrence
+{
+}
+/**A TemplateSignature is owned by a TemplateableElement and has one or more TemplateParameters that define the signature for binding this template. A TemplateSignature may reference a set of nested template signatures to reflect the hierarchical nature of a template. */
+class TemplateSignature inherits Element
+{
+	/**The complete set of formal template parameters for this template signature.*/
+	reference parameter : set TemplateParameter[1..*]
+
+	/**The formal template parameters that are owned by this template signature. Subsets parameter and Element::ownedElement.*/
+	attribute ownedParameter : set TemplateParameter[0..*]#signature
+
+	reference nestedSignature : set TemplateSignature[0..*]#nestingSignature
+
+	reference nestingSignature : TemplateSignature#nestedSignature
+
+	/**element that owns this template signature. Subsets Element::owner.*/
+	reference template : TemplateableElement[1..1]#ownedTemplateSignature
+
+}
+/**TemplateParameter references a ParameterableElement which is exposed as a formal template parameter in the containing template. */
+class TemplateParameter inherits Element
+{
+	reference signature : TemplateSignature[1..1]#ownedParameter
+
+	reference parameteredElement : ParameterableElement[1..1]#templateParameter
+
+	attribute ownedParameteredElement : ParameterableElement#owningParameter
+
+	/**element that is the default for this formal template parameter.*/
+	reference default : ParameterableElement
+
+	attribute ownedDefault : ParameterableElement
+
+}
+/**TemplateableElement may contain a template signature which specifies the formal template parameters. A TemplateableElement that contains a template signature is often referred to as a template. TemplateableElement may contain bindings to templates that describe how the templateable element is constructed by replacing the formal template parameters with actual parameters. A TemplateableElement containing bindings is often referred to as a bound element. */
+abstract class TemplateableElement inherits Element
+{
+	/**optional bindings from this element to templates.*/
+	attribute templateBinding : set TemplateBinding[0..*]#boundElement
+
+	attribute ownedTemplateSignature : TemplateSignature#template
+
+	operation parameterableElements() : Set is
+		abstract
+
+}
+class StringExpression inherits TemplateableElement
+{
+	attribute subExpression : set StringExpression[0..*]#owningExpression
+
+	reference owningExpression : StringExpression#subExpression
+
+}
+/**TemplateBinding is a directed relationship from a bound templateable element to the template signature of the target template. A TemplateBinding owns a set of template parameter substitutions. */
+class TemplateBinding inherits DirectedRelationship
+{
+	/**element that is bound by this binding. Subsets DirectedRelationship::source.*/
+	reference boundElement : TemplateableElement[1..1]#templateBinding
+
+	reference signature : TemplateSignature[1..1]
+
+	/**parameter substitutions owned by this template binding. Subsets Element::ownedElement.*/
+	attribute parameterSubstitution : set TemplateParameterSubstitution[0..*]#templateBinding
+
+}
+/**TemplateParameterSubstitution associates one or more actual parameters with a formal template parameter within the context of a TemplateBinding. */
+class TemplateParameterSubstitution inherits Element
+{
+	/**The formal template parameter that is associated with this substitution.*/
+	reference formal : TemplateParameter[1..1]
+
+	reference templateBinding : TemplateBinding[1..1]#parameterSubstitution
+
+	/**elements that are the actual parameters for this substitution.*/
+	reference actual : set ParameterableElement[1..*]
+
+	/**The actual parameters that are owned by this substitution. Subsets Element:: ownedElement and actual.*/
+	attribute ownedActual : set ParameterableElement[0..*]
+
+}
+/**OperationTemplateParameter is a template parameter where the parametered element is an Operation. */
+class OperationTemplateParameter inherits TemplateParameter
+{
+}
+/**ClassifierTemplateParameter is a template parameter where the parametered element is a Classifier in its capacity of being a kind of ParameterableElement. */
+class ClassifierTemplateParameter inherits TemplateParameter
+{
+	/**the required relationship between an actual parameter and the parameteredElement for this formal parameter. Default is true.*/
+	attribute allowSubstitutable : Boolean
+
+}
+abstract class ParameterableClassifier inherits Classifier
+{
+}
+/**RedefinableTemplateSignature specializes both TemplateSignature and RedefinableElement in order to allow the addition of new formal template parameters in the context of a specializing template Classifier. */
+class RedefinableTemplateSignature inherits RedefinableElement, TemplateSignature
+{
+}
+abstract class TemplateableClassifier inherits Classifier
+{
+}
+/**ConnectableElementTemplateParameter is a template parameter where the parametered element is a ConnectableElement. */
+class ConnectableElementTemplateParameter inherits TemplateParameter
+{
+}
+/**A fork node has one incoming edge and multiple outgoing edges. */
+class ForkNode inherits ControlNode
+{
+}
+class JoinNode inherits ControlNode
+{
+	/**Tells whether tokens having objects with the same identity are combined into one by the join. Default value is true.*/
+	attribute isCombineDuplicate : Boolean
+
+	/**A specification giving the conditions under which the join will emit a token. Default is “and”.*/
+	attribute joinSpec : ValueSpecification[1..1]
+
+}
+/**A flow final destroys all tokens that arrive at it. It has no effect on other flows in the activity. */
+class FlowFinalNode inherits FinalNode
+{
+}
+/**A central buffer node accepts tokens from upstream objects nodes and passes them along to downstream object nodes. They act as a buffer for multiple in flows and out flows from other object nodes. They do not connect directly to actions. */
+class CentralBufferNode inherits ObjectNode
+{
+}
+/**Partitions divide the nodes and edges to constrain and show a view of the contained nodes. Partitions can share contents. They often correspond to organizational units in a business model. They may be used to allocate characteristics or resources among the nodes of an activity. */
+class ActivityPartition inherits NamedElement, ActivityGroup
+{
+	/**Tells whether the partition groups other partitions along a dimension.*/
+	attribute isDimension : Boolean
+
+	/**Tells whether the partition represents an entity to which the partitioning structure does not apply.*/
+	attribute isExternal : Boolean
+
+	reference containedEdge : ActivityEdge[0..*]#inPartition
+
+	reference containedNode : ActivityNode[0..*]#inPartition
+
+	attribute subgroup : set ActivityPartition[0..*]#superPartition
+
+	reference superPartition : ActivityPartition#subgroup
+
+	/**An element constraining behaviors invoked by nodes in the partition.*/
+	reference represents : Element
+
+}
+/**(ExtraStructuredActivities) An expansion node is an object node used to indicate a flow across the boundary of an expansion region. A flow into a region contains a collection that is broken into its individual elements inside the region, which is executed once per element. A flow out of a region combines individual elements into a collection for use outside the region. */
+class ExpansionNode inherits ObjectNode
+{
+	/**expansion region for which the node is an output.*/
+	reference regionAsOutput : ExpansionRegion#outputElement
+
+	/**expansion region for which the node is an input.*/
+	reference regionAsInput : ExpansionRegion#inputElement
+
+}
+/**An expansion region is a strictly nested region of an activity with explicit input and outputs (modeled as ExpansionNodes). Each input is a collection of values. If there are multiple input pins, each of them must hold the same kind of collection, although the types of the elements in the different collections may vary. The expansion region is executed once for each element (or position) in the input collection. If an expansion region has outputs, they must be collections of the same kind and must contain elements of the same type as the corresponding inputs. The number of output collections at runtime can differ from the number of input collections. On each execution of the region, an output value from the region is inserted into an output collection at the same position as the input elements. If the region execution ends with no output, then nothing is added to the output collection. If all the executions provide an output to the collection, then the output collections will have the same number of elements as the input collections. The inputs and outputs to an expansion region are modeled as ExpansionNodes. From “outside” of the region, the values on these nodes appear as collections. From “inside” the region the values appear as elements of the collections. Object flow edges connect pins outside the region to input and output expansion nodes as collections. Object flow edges connect pins inside the region to input and output expansion nodes as individual elements. From the inside of the region, these nodes are visible as individual values. If an expansion node has a name, it is the name of the individual element within the region. Any object flow edges that cross the boundary of the region, without passing through expansion nodes, provide values that are fixed within the different executions of the region. */
+class ExpansionRegion inherits StructuredActivityNode
+{
+	/**The way in which the executions interact: parallel — all interactions are independent iterative — the interactions occur in order of the elements stream — a stream of values flows into a single execution*/
+	attribute mode : ExpansionKind
+
+	/**An object node that accepts a separate element of the output collection during each of the multiple executions of the region. The values are formed into a collection that is available when the execution of the region is complete.*/
+	reference outputElement : set ExpansionNode[0..*]#regionAsOutput
+
+	/**An object node that holds a separate element of the input collection during each of the multiple executions of the region.*/
+	reference inputElement : set ExpansionNode[1..*]#regionAsInput
+
+}
+enumeration ExpansionKind
+{
+	parallel;
+	iterative;
+	stream;
+}
+/**(ExtraStructuredActivities) An exception handler is an element that specifies a body to execute in case the specified exception occurs during the execution of the protected node. */
+class ExceptionHandler inherits Element
+{
+	/**The node protected by the handler. The handler is examined if an exception propagates to the outside of the node.*/
+	reference protectedNode : ExecutableNode[1..1]#handler
+
+	/**A node that is executed if the handler satisfies an uncaught exception.*/
+	reference handlerBody : ExecutableNode[1..1]
+
+	reference exceptionInput : ObjectNode[1..1]
+
+	reference exceptionType : set Classifier[1..*]
+
+}
+/**InteractionOccurrence is a specialization of InteractionFragment. An InteractionOccurrence has a set of actual gates that must match the formal gates of the referenced Interaction. */
+class InteractionOccurrence inherits InteractionFragment
+{
+	/**Refers to the Interaction that defines its meaning*/
+	reference refersTo : Interaction[1..1]
+
+	/**The actual gates of the InteractionOccurrence*/
+	attribute actualGate : set Gate[0..*]
+
+	/**The actual arguments of the Interaction*/
+	attribute argument : set InputPin[0..*]
+
+}
+/**A Gate is a connection point for relating a Message outside an InteractionFragment with a Message inside the InteractionFragment. Gate is a specialization of MessageEnd. Gates are connected through Messages. A Gate is actually a representative of an EventOccurrence that is not in the same scope as the Gate. Gates play different roles: we have formal gates on Interactions, actual gates on InteractionOccurrences, expression gates on CombinedFragments. */
+class Gate inherits MessageEnd
+{
+}
+/**PartDecomposition is a description of the internal interactions of one Lifeline relative to an Interaction. A Lifeline has a class associated as the type of the ConnectableElement that the Lifeline represents. That class may have an internal structure and the PartDecomposition is an Interaction that describes the behavior of that internal structure relative to the Interaction where the decomposition is referenced. A PartDecomposition is a specialization of InteractionOccurrence. It associates with the ConnectableElement that it decomposes. */
+class PartDecomposition inherits InteractionOccurrence
+{
+}
+/**An InteractionOperand is contained in a CombinedFragment. An InteractionOperand represent one operand of the expression given by the enclosing CombinedFragment. An InteractionOperand is an InteractionFragment with an optional guard expression. An InteractionOperand may be guarded by a InteractionConstraint. Only InteractionOperands with a guard that evaluates to true at this point in the interaction will be considered for the production of the traces for the enclosing CombinedFragment. InteractionOperand contains an ordered set of InteractionFragments. */
+class InteractionOperand inherits Namespace, InteractionFragment
+{
+	/**of the operand*/
+	attribute guard : InteractionConstraint
+
+	/**fragments of the operand.*/
+	attribute fragment : set InteractionFragment[0..*]#enclosingOperand
+
+}
+/**An InteractionConstraint is a boolean expression that guards an operand in a CombinedFragment. InteractionConstraint is a specialization of Constraint. Furthermore the InteractionConstraint contains two expressions designating the minimum and maximum number of times a loop CombinedFragment should execute. */
+class InteractionConstraint inherits Constraint
+{
+	/**minimum number of iterations of a loop*/
+	attribute minint : ValueSpecification
+
+	/**maximum number of iterations of a loop*/
+	attribute maxint : ValueSpecification
+
+}
+enumeration InteractionOperator
+{
+	~seq;
+	alt;
+	opt;
+	break;
+	par;
+	strict;
+	~loop;
+	critical;
+	neg;
+	assert;
+	ignore;
+	consider;
+}
+/**A combined fragment defines an expression of interaction fragments. A combined fragment is defined by an interaction operator and corresponding interaction operands. Through the use of CombinedFragments the user will be able to describe a number of traces in a compact and concise manner. CombinedFragment is a specialization of InteractionFragment. */
+class CombinedFragment inherits InteractionFragment
+{
+	/**Specifies the operation which defines the semantics of this combination of InteractionFragments.*/
+	attribute interactionOperator : InteractionOperator
+
+	/**set of operands of the combined fragment.*/
+	attribute operand : set InteractionOperand[1..*]
+
+	/**Specifies the gates that form the interface between this CombinedFragment and its surroundings*/
+	attribute cfragmentGate : set Gate[0..*]
+
+}
+/**A Continuation is a syntactic way to define continuations of different branches of an Alternative CombinedFragment. Continuations is intuitively similar to labels representing intermediate points in a flow of control. */
+class Continuation inherits InteractionFragment
+{
+	/**True: when the Continuation is at the end of the enclosing InteractionFragment and False when it is in the beginning.*/
+	attribute setting : Boolean
+
+}
+class StateMachine inherits Behavior
+{
+	attribute region : set Region[1..*]#stateMachine
+
+	attribute connectionPoint : set Pseudostate[0..*]
+
+	reference extendedStateMachine : StateMachine
+
+	reference stateMachine_redefinitionContext : BehavioredClassifier#ownedStateMachine
+
+}
+class Region inherits Namespace, RedefinableElement
+{
+	attribute subvertex : set Vertex[0..*]#container
+
+	attribute transition : set Transition[0..*]#container
+
+	reference stateMachine : StateMachine#region
+
+	reference state : State#region
+
+	reference extendedRegion : Region
+
+}
+class Pseudostate inherits Vertex
+{
+	attribute kind : PseudostateKind
+
+}
+enumeration PseudostateKind
+{
+	initial;
+	deepHistory;
+	shallowHistory;
+	join;
+	fork;
+	junction;
+	choice;
+	entryPoint;
+	exitPoint;
+	terminate;
+}
+abstract class Vertex inherits NamedElement
+{
+	/**The region that contains this vertex.*/
+	reference container : Region#subvertex
+
+	/**Specifies the transitions departing from this vertex.*/
+	reference outgoing : set Transition[0..*]#source
+
+	/**Specifies the transitions entering this vertex.*/
+	reference incoming : set Transition[0..*]#target
+
+}
+class State inherits Namespace, RedefinableElement, Vertex
+{
+	property isComposite : Boolean
+		getter is do
+			//TODO: implement getter for derived property isComposite
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property isComposite
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property isOrthogonal : Boolean
+		getter is do
+			//TODO: implement getter for derived property isOrthogonal
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property isOrthogonal
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property isSimple : Boolean
+		getter is do
+			//TODO: implement getter for derived property isSimple
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property isSimple
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property isSubmachineState : Boolean
+		getter is do
+			//TODO: implement getter for derived property isSubmachineState
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property isSubmachineState
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	reference submachine : StateMachine
+
+	attribute connection : set ConnectionPointReference[0..*]
+
+	reference redefinedState : State
+
+	reference deferrableTrigger : set Trigger[0..*]
+
+	attribute region : set Region[0..*]#state
+
+	attribute entry : Activity
+
+	attribute exit : Activity
+
+	attribute doActivity : Activity
+
+	attribute stateInvariant : Constraint
+
+}
+/**Connection point references of a submachine state can be used as sources/targets of transitions. They represent entries into or exits out of the submachine state machine referenced by the submachine state. */
+class ConnectionPointReference inherits Vertex
+{
+	/**The entryPoint kind pseudo states corresponding to this connection point.*/
+	reference entry : set Pseudostate[0..*]
+
+	/**The exitPoints kind pseudo states corresponding to this connection point.*/
+	reference exit : set Pseudostate[0..*]
+
+}
+class Transition inherits RedefinableElement
+{
+	/**See definition of TransitionKind.*/
+	attribute kind : TransitionKind
+
+	reference container : Region[1..1]#transition
+
+	/**Designates the originating vertex (state or pseudostate) of the transition.*/
+	reference source : Vertex[1..1]#outgoing
+
+	/**Designates the target vertex that is reached when the transition is taken.*/
+	reference target : Vertex[1..1]#incoming
+
+	reference redefinedTransition : Transition
+
+	/**Specifies the triggers that may fire the transition.*/
+	reference trigger : set Trigger[0..*]
+
+	/**A guard is a constraint that provides a fine-grained control over the firing of the transition. The guard is evaluated when an event is dispatched by the state machine. If the guard is true at that time, the transition may be enabled, otherwise, it is disabled. Guards should be pure expressions without side effects. Guard expressions with side effects are ill formed.*/
+	attribute guard : Constraint
+
+	/**Specifies an optional activity to be performed when the transition fires.*/
+	attribute effect : Activity
+
+}
+enumeration TransitionKind
+{
+	internal;
+	local;
+	external;
+}
+class FinalState inherits State
+{
+}
+/**This action instantiates a classifier. */
+class CreateObjectAction inherits Action
+{
+	/**Classifier to be instantiated.*/
+	reference classifier : Classifier[1..1]
+
+	/**(Specialized from Action:output) Gives the output pin on which the result is put.*/
+	attribute ~result : OutputPin[1..1]
+
+}
+/**This action destroys the object on its input pin at runtime. The object may be a link object, in which case the semantics of DestroyLinkAction also applies. */
+class DestroyObjectAction inherits Action
+{
+	attribute isDestroyLinks : Boolean
+
+	attribute isDestroyOwnedObjects : Boolean
+
+	/**(Specialized from Action:input) The input pin providing the object to be destroyed.*/
+	attribute target : InputPin[1..1]
+
+}
+/**This action returns true if the two input values are the same identity, false if they are not. */
+class TestIdentityAction inherits Action
+{
+	/**. (Specialized from Action:input) Gives the pin on which an object is placed.*/
+	attribute first : InputPin[1..1]
+
+	/**(Specialized from Action:input) Gives the pin on which an object is placed.*/
+	attribute second : InputPin[1..1]
+
+	/**(Specialized from Action:output) Tells whether the two input objects are identical.*/
+	attribute ~result : OutputPin[1..1]
+
+}
+/**Every action is ultimately a part of some activity, which is in turn optionally attached in some way to the specification of a classifier—for example as the body of a method or as part of a state machine. When the activity executes, it does so in the context of some specific host instance of that classifier. This action produces this host instance, if any, on its output pin. The type of the output pin is the classifier to which the activity is associated in the user model. */
+class ReadSelfAction inherits Action
+{
+	/**(Specialized from Action:output) Gives the output pin on which the hosting object is placed.*/
+	attribute ~result : OutputPin[1..1]
+
+}
+/**This abstract action class statically specifies the structural feature being accessed. The object to access is specified dynamically, by referring to an input pin on which the object will be placed at runtime. The type of the value of this pin is the classifier that owns the specified structural feature, and the value’s multiplicity is 1..1. */
+abstract class StructuralFeatureAction inherits Action
+{
+	/**Structural feature to be read.*/
+	reference structuralFeature : StructuralFeature[1..1]
+
+	/**(Specialized from Action:input) Gives the input pin from which the object whose structural feature is to be read or written is obtained.*/
+	attribute object : InputPin[1..1]
+
+}
+/**This action reads the values of a structural feature, in order if the structural feature is ordered. */
+class ReadStructuralFeatureAction inherits StructuralFeatureAction
+{
+	/**(Specialized from Action:output) Gives the output pin on which the result is put.*/
+	attribute ~result : OutputPin[1..1]
+
+}
+/**A write structural feature action operates on a structural feature of an object to modify its values. It has an input pin on which the value that will be added or removed is put. Other aspects of write structural feature actions are inherited from StructuralFeatureAction. */
+abstract class WriteStructuralFeatureAction inherits StructuralFeatureAction
+{
+	/**(Specialized from Action:input) Value to be added or removed from the structural feature.*/
+	attribute ~value : InputPin[1..1]
+
+}
+/**This action removes all values of a structural feature. */
+class ClearStructuralFeatureAction inherits StructuralFeatureAction
+{
+}
+/**The object to access is specified dynamically, by referring to an input pin on which the object will be placed at runtime. The type of the value of this pin is the classifier that owns the specified structural feature, and the value’s multiplicity is 1..1. */
+class RemoveStructuralFeatureValueAction inherits WriteStructuralFeatureAction
+{
+}
+/**Structural Features are potentially multi-valued and ordered, so the action supports specification of insertion points for new values. It also supports the removal of existing values of the structural feature before the new value is added. The object to access is specified dynamically, by referring to an input pin on which the object will be placed at runtime. The type of the value of this pin is the classifier that owns the specified structural feature, and the value’s multiplicity is 1..1. */
+class AddStructuralFeatureValueAction inherits WriteStructuralFeatureAction
+{
+	/**Specifies whether existing values of the structural feature of the object should be removed before adding the new value.*/
+	attribute isReplaceAll : Boolean
+
+	/**(Specialized from Action:input) Gives the position at which to insert a new value or move an existing value in ordered structural features. The type of the pin is UnlimitedNatural, but the value cannot be zero. This pin is omitted for unordered structural features.*/
+	attribute insertAt : InputPin
+
+}
+/**A link action creates, destroys, or reads links, identifying a link by its end objects and qualifier values, if any. */
+abstract class LinkAction inherits Action
+{
+	/**Data identifying one end of a link by the objects on its ends and qualifiers.*/
+	attribute endData : set LinkEndData[2..*]
+
+}
+class LinkEndData inherits Element
+{
+	/**Input pin that provides the specified object for the given end. This pin is omitted if the link-end data specifies an “open” end for reading.*/
+	reference ~value : InputPin
+
+	/**Association end for which this link-end data specifies values.*/
+	reference ~end : Property[1..1]
+
+	/**Attribute representing the qualifier for which the value is to be specified.*/
+	attribute qualifier : QualifierValue[0..*]
+
+}
+/**This action navigates an association towards one end, which is the end that does not have an input pin to take its object (the “open” end). The objects put on the result output pin are the ones participating in the association at the open end, conforming to the specified qualifiers, in order if the end is ordered. The semantics is undefined for reading a link that violates the navigability or visibility of the open end. */
+class ReadLinkAction inherits LinkAction
+{
+	/**(Specialized from Action:output) The pin on which are put the objects participating in the association at the end not specified by the inputs.*/
+	attribute ~result : OutputPin[1..1]
+
+}
+class LinkEndCreationData inherits LinkEndData
+{
+	/**= falseSpecifies whether the existing links emanating from the object on this end should be destroyed before creating a new link.*/
+	attribute isReplaceAll : Boolean
+
+	/**Specifies where the new link should be inserted for ordered association ends, or where an existing link should be moved to. The type of the input is UnlimitedNatural, but the input cannot be zero. This pin is omitted for association ends that are not ordered.*/
+	reference insertAt : InputPin
+
+}
+/**This action can be used to create links and link objects. There is no return value in either case. This is so that no change of the action is required if the association is changed to an association class or vice versa. CreateLinkAction uses a specialization of LinkEndData called LinkEndCreationData, to support ordered associations. The insertion point is specified at runtime by an additional input pin, which is required for ordered association ends and omitted for unordered ends. The insertion point is a positive integer giving the position to insert the link, or infinity, to insert at the end. Reinserting an existing end at a new position moves the end to that position. CreateLinkAction also uses LinkEndCreationData to support the destruction of existing links of the association that connect any of the objects of the new link. When the link is created, this option is available on an end-by-end basis, and causes all links of the association emanating from the specified ends to be destroyed before the new link is created. */
+class CreateLinkAction inherits WriteLinkAction
+{
+}
+/**A write link action takes a complete identification of a link and creates or destroys it. */
+abstract class WriteLinkAction inherits LinkAction
+{
+}
+/**This action destroys a link or a link object. Link objects can also be destroyed with DestroyObjectAction. The link is specified in the same way as link creation, even for link objects. This allows actions to remain unchanged when their associations are transformed from ordinary ones to association classes and vice versa. */
+class DestroyLinkAction inherits WriteLinkAction
+{
+}
+/**This action destroys all links of an association that have a particular object at one end. */
+class ClearAssociationAction inherits Action
+{
+	/**(Specialized from Action:input) Gives the input pin from which is obtained the object whose participation in the association is to be cleared.*/
+	attribute object : InputPin[1..1]
+
+	/**Association to be cleared.*/
+	reference association : Association[1..1]
+
+}
+/**VariableAction is an abstract class for actions that operate on a statically specified variable. */
+abstract class VariableAction inherits Action
+{
+	/**Variable to be read.*/
+	reference variable : Variable[1..1]
+
+}
+/**This action reads the values of a variables, in order if the variable is ordered. */
+class ReadVariableAction inherits VariableAction
+{
+	/**(Specialized from Action:output) Gives the output pin on which the result is put.*/
+	attribute ~result : OutputPin[1..1]
+
+}
+/**A write variable action operates on a variable to modify its values. It has an input pin on which the value that will be added or removed is put. Other aspects of write variable actions are inherited from VariableAction. */
+abstract class WriteVariableAction inherits VariableAction
+{
+	/**(Specialized from Action:input) Value to be added or removed from the variable.*/
+	attribute ~value : InputPin[1..1]
+
+}
+/**This action removes all values of an variable. */
+class ClearVariableAction inherits VariableAction
+{
+}
+/**Variables are potentially multi-valued and ordered, so the action supports specification of insertion points for new values. It also supports the removal of existing values of the variable before the new value is added. */
+class AddVariableValueAction inherits WriteVariableAction
+{
+	/**Specifies whether existing values of the variable should be removed before adding the new value.*/
+	attribute isReplaceAll : Boolean
+
+	/**(Specialized from Action:input) Gives the position at which to insert a new value or move an existing value in ordered variables. The types is UnlimitedINatural, but the value cannot be zero. This pin is omitted for unordered variables.*/
+	attribute insertAt : InputPin
+
+}
+/**One value is removed from the set of possible variable values. */
+class RemoveVariableValueAction inherits WriteVariableAction
+{
+}
+/**ApplyFunctionAction is an action that invokes a primitive predefined function that computes output values based only on the input values and the function. The execution does not have access to object memory or to any objects. The execution of a primitive function has no side effects on any other object. */
+class ApplyFunctionAction inherits Action
+{
+	/**The primitive function to be invoked.*/
+	reference ~function : PrimitiveFunction[1..1]
+
+	/**The pins that provide inputs to the function. (Specializes Action.input.)*/
+	attribute argument : set InputPin[0..*]
+
+	/**The pins on which the results of invoking the function are returned. (Specializes Action.output.)*/
+	attribute ~result : OutputPin[0..*]
+
+}
+/**PrimitiveFunction is not an action. It is the signature of a function that produces output values from input values for use with ApplyFunctionAction. The behavior is described using the body and language attributes. The specification of the detailed behavior is expressed in an external language and is not further specified within UML. */
+class PrimitiveFunction inherits PackageableElement
+{
+	/**A textual representation of the function in the named surface language.*/
+	attribute body : String
+
+	/**Specifies the language in which the body of the primitive function is stated. The interpretation of the body depends on the language. If the language is unspecified, it might be implicit from the body or the context.*/
+	attribute language : String
+
+}
+/**CallAction is an abstract class for actions that invoke behavior and receive return values. */
+abstract class CallAction inherits InvocationAction
+{
+	/**If true, the call is synchronous and the caller waits for completion of the invoked behavior. If false, the call is asynchronous and the caller proceeds immediately and does not expect a return values.*/
+	attribute isSynchronous : Boolean
+
+	/**A list of output pins where the results of performing the invocation are placed.*/
+	attribute ~result : OutputPin[0..*]
+
+}
+abstract class InvocationAction inherits Action
+{
+	/**Specification of an argument value that appears during execution.*/
+	attribute argument : InputPin[0..*]
+
+	reference onPort : Port
+
+}
+/**SendSignalAction is an action that creates a signal instance from its inputs, and transmits it to the target object, where it may cause the firing of a state machine transition or the execution of an activity. The argument values are available to the execution of associated behaviors. The requestor continues execution immediately. Any reply message is ignored and is not transmitted to the requestor. If the input is already a signal instance, use SendObjectAction. */
+class SendSignalAction inherits InvocationAction
+{
+	/**The target object to which the signal is sent.*/
+	attribute target : InputPin[1..1]
+
+	/**The type of signal transmitted to the target object.*/
+	reference signal : Signal[1..1]
+
+}
+/**BroadcastSignalAction is an action that transmits a signal instance to all the potential target objects in the system, which may cause the firing of a state machine transitions or the execution of associated activities of a target object. The argument values are available to the execution of associated behaviors. The requestor continues execution immediately after the signals are sent out. It does not wait for receipt. Any reply messages are ignored and are not transmitted to the requestor. */
+class BroadcastSignalAction inherits InvocationAction
+{
+	/**The specification of signal object transmitted to the target objects.*/
+	reference signal : Signal[1..1]
+
+}
+/**SendObjectAction is an action that transmits an object to the target object, where it may invoke behavior such as the firing of state machine transitions or the execution of an activity. The value of the object is available to the execution of invoked behaviors. The requestor continues execution immediately. Any reply message is ignored and is not transmitted to the requestor. */
+class SendObjectAction inherits InvocationAction
+{
+	attribute target : InputPin[1..1]
+
+	attribute request : InputPin[1..1]
+
+}
+/**CallOperationAction is an action that transmits an operation call request to the target object, where it may cause the invocation of associated behavior. The argument values of the action are available to the execution of the invoked behavior. If the action is marked synchronous, the execution of the call operation action waits until the execution of the invoked behavior completes and a reply transmission is returned to the caller; otherwise execution of the action is complete when the invocation of the operation is established and the execution of the invoked operation proceeds concurrently with the execution of the calling activity. Any values returned as part of the reply transmission are put on the result output pins of the call operation action. */
+class CallOperationAction inherits CallAction
+{
+	/**The operation to be invoked by the action execution*/
+	reference ~operation : Operation[1..1]
+
+	/**The target object to which the request is sent. The classifier of the target object is used to dynamically determine a behavior to invoke. This object constitutes the context of the execution of the operation.*/
+	attribute target : InputPin[1..1]
+
+}
+/**CallBehaviorAction is a call action that invokes a behavior directly rather than invoking a behavioral feature that, in turn, results in the invocation of that behavior. The argument values of the action are available to the execution of the invoked behavior. The execution of the call behavior action waits until the execution of the invoked behavior completes and a result is returned on its output pin. In particular, the invoked behavior may be an activity. */
+class CallBehaviorAction inherits CallAction
+{
+	/**The invoked behavior. It must be capable of accepting and returning control.*/
+	reference behavior : Behavior[1..1]
+
+}
+/**A TimeExpression defines a value specification that represent a time value. */
+class TimeExpression inherits ValueSpecification
+{
+	/**True if the TimeExpression describes the first point in time of the NamedElement referenced by event, in cases where the NamedElement describes something which extends in time. False if the TimeExpression describes the last point in time for the referenced NamedElement.*/
+	attribute firstTime : Boolean
+
+	/**Refers to the specification of the event occurrence that the TimeExpression describes*/
+	reference event : NamedElement
+
+}
+/**A duration defines a value specification that specifies the temporal distance between two time expressions that specify time instants. */
+class Duration inherits ValueSpecification
+{
+	/**If the duration is between times of two NamedElements, there are two Boolean attributes, one for the start of the duration and one for the end of the duration. For each of these it holds that firstTime is true if the time information is associated with the first point in time of the NamedElement referenced by event, and false if it represents the last point in time of the NamedElement. If there is only one NamedElement referenced by event, then this attribute is irrelevant. The default value is true.*/
+	attribute firstTime : Boolean
+
+	/**Refers to the specification(s) that describes the starting TimeExpression and the ending TimeExpression of the Duration. If only one NamedElement is referenced, the duration is from the first point in time of that NamedElement until the last point in time of that NamedElement.*/
+	reference event : set NamedElement[0..2]
+
+}
+/**A TimeObservationAction defines an action that observes the current point in time. */
+class TimeObservationAction inherits WriteStructuralFeatureAction
+{
+	/**Represents the current point in time.*/
+	attribute now : TimeExpression[0..*]
+
+}
+/**A DurationInterval defines the range between two Durations. */
+class DurationInterval inherits Interval
+{
+}
+/**An Interval defines the range between two value specifications. */
+class Interval inherits ValueSpecification
+{
+	/**Refers to the ValueSpecification denoting the minimum value of the range.*/
+	reference min : ValueSpecification[0..*]
+
+	/**Refers to the ValueSpecification denoting the maximum value of the range.*/
+	reference max : ValueSpecification[0..*]
+
+}
+/**A TimeConstraint defines a Constraint that refers to a TimeInterval. */
+class TimeConstraint inherits IntervalConstraint
+{
+}
+/**A IntervalConstraint defines a Constraint that refers to an Interval. */
+class IntervalConstraint inherits Constraint
+{
+}
+/**A TimeInterval defines the range between two TimeExpressions. */
+class TimeInterval inherits Interval
+{
+}
+/**A DurationObservationAction defines an action that observes duration in time. */
+class DurationObservationAction inherits WriteStructuralFeatureAction
+{
+	/**represent the measured Duration*/
+	attribute duration : Duration[0..*]
+
+}
+/**A DurationConstraint defines a Constraint that refers to a DurationInterval. */
+class DurationConstraint inherits IntervalConstraint
+{
+}
+/**A data store keeps all tokens that enter it, copying them when they are chosen to move downstream. Incoming tokens containing a particular object replace any tokens in the object node containing that object. */
+class DataStoreNode inherits CentralBufferNode
+{
+}
+/**An interruptible region contains activity nodes. When a token leaves an interruptible region via edges designated by the region as interrupting edges, all tokens and behaviors in the region are terminated. */
+class InterruptibleActivityRegion inherits ActivityGroup
+{
+	/**.The edges leaving the region that will abort other tokens flowing in the region.*/
+	reference interruptingEdge : set ActivityEdge[0..*]#interrupts
+
+	reference containedNode : ActivityNode[0..*]#inInterruptibleRegion
+
+}
+/**An parameter set acts as a complete set of inputs and outputs to a behavior, exclusive of other parameter sets on the behavior. */
+class ParameterSet inherits NamedElement
+{
+	reference parameter : set Parameter[1..*]#parameterSet
+
+	attribute condition : set Constraint[0..*]
+
+}
+class Component inherits Class
+{
+	/**{default = true} The kind of instantiation that applies to a Component. If false, the component is instantiated as an addressable object. If true, the Component is defined at design-time, but at runtime (or execution-time) an object specified by the Component does not exist, that is, the component is instantiated indirectly, through the instantiation of its realizing classifiers or parts. Several standard stereotypes use this meta attribute, e.g. «specification, «focus», «subsystem ».*/
+	attribute isIndirectlyInstantiated : Boolean
+
+	property required : set Interface[0..*]
+		getter is do
+			//TODO: implement getter for derived property required
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property required
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	property provided : set Interface[0..*]
+		getter is do
+			//TODO: implement getter for derived property provided
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property provided
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	attribute realization : set Realization[0..*]#abstraction
+
+	attribute ownedMember : set PackageableElement[0..*]
+
+}
+class Deployment inherits Dependency
+{
+	reference deployedArtifact : set DeployedArtifact[0..*]
+
+	reference location : DeploymentTarget[1..1]#deployment
+
+	attribute configuration : set DeploymentSpecification[0..*]
+
+}
+/**In the metamodel, DeployedArtifact is an abstract metaclass that is a specialization of NamedElement. A DeployedArtifact is involved in one or more Deployments to a DeploymentTarget. */
+abstract class DeployedArtifact inherits NamedElement
+{
+}
+/**A deployment target is the location for a deployed artifact. In the metamodel, DeploymentTarget is an abstract metaclass that is a specialization of NamedElement. A DeploymentTarget owns a set of Deployments. */
+abstract class DeploymentTarget inherits NamedElement
+{
+	attribute deployment : set Deployment[0..*]#location
+
+	property deployedElement : set PackageableElement[0..*]
+		getter is do
+			//TODO: implement getter for derived property deployedElement
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property deployedElement
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+}
+/**In the metamodel, a Node is a subclass of Class. It is associated with a Deployment of an Artifact. It is also associated with a set of Elements that are deployed on it. This is a derived association in that these PackageableElements are involved in a Manifestation of an Artifact that is deployed on the Node. Nodes may have an internal structure defined in terms of parts and connectors associated with them for advanced modeling applications. */
+class Node inherits Class, DeploymentTarget
+{
+	attribute nestedNode : set Node[0..*]
+
+}
+/**A Device is a physical computational resource with processing capability upon which artifacts may be deployed for execution. Devices may be complex, i.e. they may consist of other devices. */
+class Device inherits Node
+{
+}
+/**In the metamodel, a ExecutionEnvironment is a subclass of Node. It is usually part of a general Node, representing the physical hardware environment on which the ExecutionEnvironment resides. In that environment, the ExecutionEnvironment implements a standard set of services that Components require at execution time (at the modeling level these services are usually implicit). For each component Deployment, aspects of these services may be determined by properties in a DeploymentSpecification for a particular kind of ExecutionEnvironment. */
+class ExecutionEnvironment inherits Node
+{
+}
+/**A communication path is an association between two Nodes, through which Nodes are able to exchange signals and messages. In the metamodel, CommunicationPath is a subclass of Association. */
+class CommunicationPath inherits Association
+{
+}
+class ProtocolConformance inherits DirectedRelationship
+{
+	/**: Specifies the state machine which conforms to the general state machine.*/
+	reference specificMachine : ProtocolStateMachine[1..1]#conformance
+
+	/**: Specifies the protocol state machine to which the specific state machine conforms.*/
+	reference generalMachine : ProtocolStateMachine[1..1]
+
+}
+class ProtocolStateMachine inherits StateMachine
+{
+	/**: Conformance between protocol state machines.*/
+	attribute conformance : set ProtocolConformance[0..*]#specificMachine
+
+}
+/**A protocol transition (transition as specialized in the ProtocolStateMachines package) specifies a legal transition for an operation. Transitions of protocol state machines have the following information: a pre condition (guard), on trigger, and a post condition. Every protocol transition is associated to zero or one operation (referred BehavioralFeature) that belongs to the context classifier of the protocol state machine. The protocol transition specifies that the associated (referred) operation can be called for an instance in the origin state under the initial condition (guard), and that at the end of the transition, the destination state will be reached under the final condition (post). */
+class ProtocolTransition inherits Transition
+{
+	/**Specifies the post condition of the transition which is the condition that should be obtained once the transition is triggered. This post condition is part of the post condition of the operation connected to the transition.*/
+	attribute postCondition : Constraint
+
+	property referred : set Operation[0..*]
+		getter is do
+			//TODO: implement getter for derived property referred
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property referred
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+
+	/**Specifies the precondition of the transition. It specifies the condition that should be verified before triggering the transition. This guard condition added to the source state will be evaluated as part of the precondition of the operation refered by the transition if any.*/
+	reference preCondition : Constraint
+
+}
+/**(CompleteActions) ReadExtentAction is an action that retrieves the current instances of a classifier. */
+class ReadExtentAction inherits Action
+{
+	/**The runtime instances of the classifier.*/
+	attribute ~result : OutputPin[1..1]
+
+	/**The classifier whose instances are to be retrieved.*/
+	reference classifier : Classifier[1..1]
+
+}
+/**ReclassifyObjectAction adds given classifier to an object and removes given classifiers from that object. Multiple classifiers may be added and removed at a time. */
+class ReclassifyObjectAction inherits Action
+{
+	/**Specifies whether existing classifiers should be removed before adding the new classifiers. The default value is false.*/
+	attribute isReplaceAll : Boolean
+
+	/**A set of classifiers to be removed from the classifiers of the object.*/
+	reference oldClassifier : set Classifier[0..*]
+
+	/**A set of classifiers to be added to the classifiers of the object.*/
+	reference newClassifier : set Classifier[0..*]
+
+	/**Holds the object to be reclassified. (Specializes Action.input.)*/
+	attribute object : InputPin[1..1]
+
+}
+/**This action tests the classification of an object against a given class. It can be restricted to testing direct instances. */
+class ReadIsClassifiedObjectAction inherits Action
+{
+	/**Indicates whether the classifier must directly classify the input object. The default value is false.*/
+	attribute isDirect : Boolean
+
+	/**The classifier against which the classification of the input object is tested.*/
+	reference classifier : Classifier[1..1]
+
+	/**After termination of the action, will hold the result of the test. (Specializes Action.output.)*/
+	attribute ~result : OutputPin[1..1]
+
+	/**Holds the object whose classification is to be tested. (Specializes Action.input.)*/
+	attribute object : InputPin[1..1]
+
+}
+/**(CompleteActions) StartOwnedBehaviorAction is an action that starts the owned behavior of the input. */
+class StartOwnedBehaviorAction inherits Action
+{
+	/**Holds the object on which to start the owned behavior. (Specializes Action.input.)*/
+	attribute object : InputPin[1..1]
+
+}
+/**A link cannot be passed as a runtime value to or from an action. Instead, a link is identified by its end objects and qualifier values, as required. This requires more than one piece of data, namely, the end in the user model, the object on the end, and the qualifier values for that end. These pieces are brought together around LinkEndData. Each association end is identified separately with an instance of the LinkEndData class. */
+class QualifierValue inherits Element
+{
+	reference qualifier : Property[1..1]
+
+	/**Input pin from which the specified value for the qualifier is taken.*/
+	reference ~value : InputPin[1..1]
+
+}
+/**This action reads the object on an end of a link object. The association end to retrieve the object from is specified statically, and the link object to read is provided on the input pin at run time. */
+class ReadLinkObjectEndAction inherits Action
+{
+	attribute object : InputPin[1..1]
+
+	/**Link end to be read.*/
+	reference ~end : Property[1..1]
+
+	attribute ~result : OutputPin[1..1]
+
+}
+/**This action reads a qualifier value or values on an end of a link object. The association end to retrieve the qualifier from is specified statically, and the link object to read is provided on the input pin at run time. */
+class ReadLinkObjectEndQualifierAction inherits Action
+{
+	/**(Specialized from Action:input) Gives the input pin from which the link object is obtained.*/
+	attribute object : InputPin[1..1]
+
+	/**Pin where the result value is placed*/
+	attribute ~result : OutputPin[1..1]
+
+	/**The attribute representing the qualifier to be read.*/
+	reference qualifier : Property[1..1]
+
+}
+/**This action is exclusively for creating links of association classes. It returns the created link object. */
+class CreateLinkObjectAction inherits CreateLinkAction
+{
+	attribute ~result : OutputPin[1..1]
+
+}
+class AcceptEventAction inherits Action
+{
+	/**The type of event accepted by the action, as specified by a trigger. If it is a signal trigger, a signal of any subtype of the specified signal type is accepted.*/
+	reference trigger : Trigger[0..*]
+
+	/**Pin holding the event object that has been received. Event objects may be copied in transmission, so identity might not be preserved.*/
+	reference ~result : set OutputPin[0..*]
+
+}
+/**(CompleteActions) AcceptCallAction is an accept event action representing the receipt of a synchronous call request. In addition to the normal operation parameters, the action produces a output token that is needed later to supply the information to the ReplyAction necessary to return control to the caller. This action is for synchronous calls. */
+class AcceptCallAction inherits AcceptEventAction
+{
+	/**Pin where a token is placed containing sufficient information to perform a subsequent reply and return control to the caller. The value in this token is opaque. It can be passed and copied but it cannot be manipulated by the model.*/
+	reference returnInformation : OutputPin[1..1]
+
+}
+/**(CompleteActions) ReplyAction is an action that accepts a set of return values and a token containing return information produced by a previous accept call action. The reply action returns the values to the caller of the previous call, completing execution of the call. */
+class ReplyAction inherits Action
+{
+	/**The operation call trigger being replied to.*/
+	reference replyToCall : CallTrigger[1..1]
+
+	/**A list of pins containing the reply values of the operation. These values are returned to the caller.*/
+	reference replyValue : set InputPin[0..*]
+
+	/**A pin containing the return information token produced by an earlier AcceptCallAction.*/
+	reference returnInformation : InputPin[1..1]
+
+}
+/**(CompleteActions) RaiseExceptionAction is an action that causes an exception to occur. The input value becomes the exception object. */
+class RaiseExceptionAction inherits Action
+{
+	/**An input pin whose value becomes an exception object.*/
+	reference exception : InputPin[1..1]
+
+}
+/**In the metamodel, a DeploymentSpecification is a subtype of Artifact. It defines a set of deployment properties that are specific to a certain Container type. An instance of a DeploymentSpecification with specific values for these properties may be contained in a complex Artifact. */
+class DeploymentSpecification inherits Artifact
+{
+	attribute deploymentLocation : String
+
+	attribute executionLocation : String
+
+}

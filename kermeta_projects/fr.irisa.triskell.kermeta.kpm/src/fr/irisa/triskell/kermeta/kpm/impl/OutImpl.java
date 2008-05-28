@@ -2,42 +2,28 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutImpl.java,v 1.11 2008-02-14 07:13:24 uid21732 Exp $
+ * $Id: OutImpl.java,v 1.12 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 
 import java.util.Collection;
-import java.util.Map;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtension;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.kermeta.interpreter.helper.KermetaLauncher;
 
-import fr.irisa.triskell.kermeta.extension.IAction;
-import fr.irisa.triskell.kermeta.kpm.Action;
-import fr.irisa.triskell.kermeta.kpm.FilterExpression;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
-import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
-import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,26 +32,16 @@ import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#getAction <em>Action</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#getRule <em>Rule</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#isIndependant <em>Independant</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#getExtensionPoint <em>Extension Point</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class OutImpl extends AbstractEntityImpl implements Out {
-	/**
-	 * The cached value of the '{@link #getAction() <em>Action</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAction()
-	 * @generated
-	 * @ordered
-	 */
-	protected Action action;
-
+public class OutImpl extends EObjectImpl implements Out {
 	/**
 	 * The default value of the '{@link #isIndependant() <em>Independant</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -97,6 +73,26 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	protected EList<Parameter> parameters;
 
 	/**
+	 * The default value of the '{@link #getExtensionPoint() <em>Extension Point</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtensionPoint()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EXTENSION_POINT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getExtensionPoint() <em>Extension Point</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtensionPoint()
+	 * @generated
+	 * @ordered
+	 */
+	protected String extensionPoint = EXTENSION_POINT_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -113,44 +109,6 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.OUT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Action getAction() {
-		if (action != null && action.eIsProxy()) {
-			InternalEObject oldAction = (InternalEObject)action;
-			action = (Action)eResolveProxy(oldAction);
-			if (action != oldAction) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.OUT__ACTION, oldAction, action));
-			}
-		}
-		return action;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Action basicGetAction() {
-		return action;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAction(Action newAction) {
-		Action oldAction = action;
-		action = newAction;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.OUT__ACTION, oldAction, action));
 	}
 
 	/**
@@ -230,52 +188,22 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public void process(Unit unit, IProgressMonitor monitor, Map<String, Object> args) {
-		
-		if ( evaluate(unit) && (getAction() != null) ) {
-			
-			IExtension extension = Platform.getExtensionRegistry().getExtension(getAction().getExtensionPoint());
-			
-			if ( extension != null ) {
-			
-				String extensionPointName = extension.getExtensionPointUniqueIdentifier();
-				
-				try {
-				
-					if ( extensionPointName.equals("fr.irisa.triskell.kermeta.kpm.javaAction") ) {
+	public String getExtensionPoint() {
+		return extensionPoint;
+	}
 
-						IConfigurationElement[] elements = extension.getConfigurationElements();
-						IAction action = (IAction) elements[0].createExecutableExtension("class");
-						action.execute(this, unit, monitor, args, getParameters());
-					
-					} else if ( extensionPointName.equals("fr.irisa.triskell.kermeta.kpm.kermetaAction") ) {
-					 
-						IConfigurationElement[] elements = extension.getConfigurationElements();
-						String relativePath = elements[0].getAttribute("File");
-						String filePath = "platform:/plugin/" + extension.getContributor().getName() + "/" + relativePath;
-						String[] arguments = new String[2];
-						arguments[0] = unit.getValue();
-						
-						String outputString = "";
-						if ( getExpression() instanceof FilterExpression )
-							outputString = NameFilterHelper.getOutputString(unit, (FilterExpression) getExpression() );
-						arguments[1] = outputString;
-						
-						KermetaLauncher.execute( filePath, arguments );	
-					}
-					
-				} catch (CoreException exception) {
-					exception.printStackTrace();
-				} catch (Exception e) {
-					String message = "KPM Error when processing the action " + getAction() + " on " + unit.getValue();
-					Status status = new Status(IStatus.ERROR, KPMPlugin.PLUGIN_ID, message, e);
-					KPMPlugin.getDefault().getLog().log(status);
-				}
-			}
-		
-		}
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtensionPoint(String newExtensionPoint) {
+		String oldExtensionPoint = extensionPoint;
+		extensionPoint = newExtensionPoint;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.OUT__EXTENSION_POINT, oldExtensionPoint, extensionPoint));
 	}
 
 	/**
@@ -332,15 +260,14 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KpmPackage.OUT__ACTION:
-				if (resolve) return getAction();
-				return basicGetAction();
 			case KpmPackage.OUT__RULE:
 				return getRule();
 			case KpmPackage.OUT__INDEPENDANT:
 				return isIndependant() ? Boolean.TRUE : Boolean.FALSE;
 			case KpmPackage.OUT__PARAMETERS:
 				return getParameters();
+			case KpmPackage.OUT__EXTENSION_POINT:
+				return getExtensionPoint();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -354,9 +281,6 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KpmPackage.OUT__ACTION:
-				setAction((Action)newValue);
-				return;
 			case KpmPackage.OUT__RULE:
 				setRule((Rule)newValue);
 				return;
@@ -366,6 +290,9 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 			case KpmPackage.OUT__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends Parameter>)newValue);
+				return;
+			case KpmPackage.OUT__EXTENSION_POINT:
+				setExtensionPoint((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -379,9 +306,6 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KpmPackage.OUT__ACTION:
-				setAction((Action)null);
-				return;
 			case KpmPackage.OUT__RULE:
 				setRule((Rule)null);
 				return;
@@ -390,6 +314,9 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 				return;
 			case KpmPackage.OUT__PARAMETERS:
 				getParameters().clear();
+				return;
+			case KpmPackage.OUT__EXTENSION_POINT:
+				setExtensionPoint(EXTENSION_POINT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -403,14 +330,14 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KpmPackage.OUT__ACTION:
-				return action != null;
 			case KpmPackage.OUT__RULE:
 				return getRule() != null;
 			case KpmPackage.OUT__INDEPENDANT:
 				return independant != INDEPENDANT_EDEFAULT;
 			case KpmPackage.OUT__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case KpmPackage.OUT__EXTENSION_POINT:
+				return EXTENSION_POINT_EDEFAULT == null ? extensionPoint != null : !EXTENSION_POINT_EDEFAULT.equals(extensionPoint);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -427,17 +354,10 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (independant: ");
 		result.append(independant);
+		result.append(", extensionPoint: ");
+		result.append(extensionPoint);
 		result.append(')');
 		return result.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean evaluate(Unit unit) {
-		return getExpression().evaluateOut( unit );
 	}
 	
 } //OutImpl

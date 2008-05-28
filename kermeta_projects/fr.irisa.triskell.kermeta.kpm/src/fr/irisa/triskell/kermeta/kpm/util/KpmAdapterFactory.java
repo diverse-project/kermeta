@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmAdapterFactory.java,v 1.8 2007-12-20 09:13:07 ftanguy Exp $
+ * $Id: KpmAdapterFactory.java,v 1.9 2008-05-28 09:26:17 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.util;
 
@@ -13,15 +13,12 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.kpm.ANDExpression;
-import fr.irisa.triskell.kermeta.kpm.AbstractEntity;
-import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.Expression;
 import fr.irisa.triskell.kermeta.kpm.Filter;
 import fr.irisa.triskell.kermeta.kpm.FilterExpression;
-import fr.irisa.triskell.kermeta.kpm.In;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.NameFilter;
@@ -29,8 +26,8 @@ import fr.irisa.triskell.kermeta.kpm.NestedExpression;
 import fr.irisa.triskell.kermeta.kpm.NullExpression;
 import fr.irisa.triskell.kermeta.kpm.ORExpression;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
-import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.TypeFilter;
@@ -97,14 +94,6 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 				return createRuleAdapter();
 			}
 			@Override
-			public Adapter caseIn(In object) {
-				return createInAdapter();
-			}
-			@Override
-			public Adapter caseAction(Action object) {
-				return createActionAdapter();
-			}
-			@Override
 			public Adapter caseOut(Out object) {
 				return createOutAdapter();
 			}
@@ -141,10 +130,6 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 				return createNameFilterAdapter();
 			}
 			@Override
-			public Adapter caseAbstractEntity(AbstractEntity object) {
-				return createAbstractEntityAdapter();
-			}
-			@Override
 			public Adapter caseType(Type object) {
 				return createTypeAdapter();
 			}
@@ -171,10 +156,6 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExistFilter(ExistFilter object) {
 				return createExistFilterAdapter();
-			}
-			@Override
-			public Adapter caseRuleType(RuleType object) {
-				return createRuleTypeAdapter();
 			}
 			@Override
 			public Adapter caseDependency(Dependency object) {
@@ -229,34 +210,6 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParameterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.In <em>In</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.In
-	 * @generated
-	 */
-	public Adapter createInAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Action <em>Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.Action
-	 * @generated
-	 */
-	public Adapter createActionAdapter() {
 		return null;
 	}
 
@@ -387,20 +340,6 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.AbstractEntity <em>Abstract Entity</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.AbstractEntity
-	 * @generated
-	 */
-	public Adapter createAbstractEntityAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -509,20 +448,6 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExistFilterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.RuleType <em>Rule Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.RuleType
-	 * @generated
-	 */
-	public Adapter createRuleTypeAdapter() {
 		return null;
 	}
 

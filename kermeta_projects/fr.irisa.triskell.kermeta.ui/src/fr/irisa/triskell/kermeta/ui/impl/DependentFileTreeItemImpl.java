@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependentFileTreeItemImpl.java,v 1.4 2007-08-08 12:58:23 dvojtise Exp $
+ * $Id: DependentFileTreeItemImpl.java,v 1.5 2008-05-28 09:25:42 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.ui.impl;
 
@@ -56,7 +56,7 @@ public class DependentFileTreeItemImpl extends TreeItemImpl implements Dependent
 		if ( getChildren().size() == 0 ) {
 			
 			Unit unit = (Unit) getValue();
-			Iterator<Dependency> iterator = unit.getDependents().iterator();
+			Iterator<Dependency> iterator = unit.getMasters().iterator();
 			while ( iterator.hasNext() ) {
 				Dependency currentDependency = iterator.next();
 				DependentFileTreeItem item = UiFactory.eINSTANCE.createDependentFileTreeItem();
@@ -64,7 +64,7 @@ public class DependentFileTreeItemImpl extends TreeItemImpl implements Dependent
 				item.setParent(this);
 				getChildren().add( item );
 			}
-			
+				
 		}
 		
 	}
@@ -75,7 +75,7 @@ public class DependentFileTreeItemImpl extends TreeItemImpl implements Dependent
 	 * @generated NOT
 	 */
 	public String toText() {
-		return ((Unit)getValue()).getValue();
+		return ((Unit)getValue()).getName();
 	}
 
 } //DependentFileTreeItemImpl

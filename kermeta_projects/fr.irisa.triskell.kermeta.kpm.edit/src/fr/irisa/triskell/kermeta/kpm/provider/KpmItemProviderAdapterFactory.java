@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmItemProviderAdapterFactory.java,v 1.6 2007-12-20 09:12:55 ftanguy Exp $
+ * $Id: KpmItemProviderAdapterFactory.java,v 1.7 2008-05-28 09:26:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -119,52 +119,6 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		}
 
 		return parameterItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.In} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected InItemProvider inItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.In}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createInAdapter() {
-		if (inItemProvider == null) {
-			inItemProvider = new InItemProvider(this);
-		}
-
-		return inItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Action} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ActionItemProvider actionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Action}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createActionAdapter() {
-		if (actionItemProvider == null) {
-			actionItemProvider = new ActionItemProvider(this);
-		}
-
-		return actionItemProvider;
 	}
 
 	/**
@@ -467,29 +421,6 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.RuleType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RuleTypeItemProvider ruleTypeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.RuleType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRuleTypeAdapter() {
-		if (ruleTypeItemProvider == null) {
-			ruleTypeItemProvider = new RuleTypeItemProvider(this);
-		}
-
-		return ruleTypeItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -589,8 +520,6 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 */
 	public void dispose() {
 		if (ruleItemProvider != null) ruleItemProvider.dispose();
-		if (inItemProvider != null) inItemProvider.dispose();
-		if (actionItemProvider != null) actionItemProvider.dispose();
 		if (outItemProvider != null) outItemProvider.dispose();
 		if (orExpressionItemProvider != null) orExpressionItemProvider.dispose();
 		if (andExpressionItemProvider != null) andExpressionItemProvider.dispose();
@@ -603,7 +532,6 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		if (kpmItemProvider != null) kpmItemProvider.dispose();
 		if (unitItemProvider != null) unitItemProvider.dispose();
 		if (existFilterItemProvider != null) existFilterItemProvider.dispose();
-		if (ruleTypeItemProvider != null) ruleTypeItemProvider.dispose();
 		if (dependencyItemProvider != null) dependencyItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();
 	}

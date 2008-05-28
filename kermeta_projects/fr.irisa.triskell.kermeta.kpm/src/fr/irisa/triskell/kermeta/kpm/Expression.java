@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Expression.java,v 1.2 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: Expression.java,v 1.3 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -19,4 +19,12 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Expression extends EObject {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean evaluateIn(Unit unit);
 } // Expression

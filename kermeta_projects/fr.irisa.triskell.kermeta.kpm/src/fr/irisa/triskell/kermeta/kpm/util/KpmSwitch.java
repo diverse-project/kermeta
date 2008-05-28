@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmSwitch.java,v 1.8 2007-12-20 09:13:07 ftanguy Exp $
+ * $Id: KpmSwitch.java,v 1.9 2008-05-28 09:26:17 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.util;
 
@@ -13,15 +13,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.kpm.ANDExpression;
-import fr.irisa.triskell.kermeta.kpm.AbstractEntity;
-import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.Expression;
 import fr.irisa.triskell.kermeta.kpm.Filter;
 import fr.irisa.triskell.kermeta.kpm.FilterExpression;
-import fr.irisa.triskell.kermeta.kpm.In;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.NameFilter;
@@ -29,8 +26,8 @@ import fr.irisa.triskell.kermeta.kpm.NestedExpression;
 import fr.irisa.triskell.kermeta.kpm.NullExpression;
 import fr.irisa.triskell.kermeta.kpm.ORExpression;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
-import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.TypeFilter;
@@ -116,23 +113,9 @@ public class KpmSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KpmPackage.IN: {
-				In in = (In)theEObject;
-				T result = caseIn(in);
-				if (result == null) result = caseAbstractEntity(in);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case KpmPackage.ACTION: {
-				Action action = (Action)theEObject;
-				T result = caseAction(action);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case KpmPackage.OUT: {
 				Out out = (Out)theEObject;
 				T result = caseOut(out);
-				if (result == null) result = caseAbstractEntity(out);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -193,12 +176,6 @@ public class KpmSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KpmPackage.ABSTRACT_ENTITY: {
-				AbstractEntity abstractEntity = (AbstractEntity)theEObject;
-				T result = caseAbstractEntity(abstractEntity);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case KpmPackage.TYPE: {
 				Type type = (Type)theEObject;
 				T result = caseType(type);
@@ -245,12 +222,6 @@ public class KpmSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KpmPackage.RULE_TYPE: {
-				RuleType ruleType = (RuleType)theEObject;
-				T result = caseRuleType(ruleType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case KpmPackage.DEPENDENCY: {
 				Dependency dependency = (Dependency)theEObject;
 				T result = caseDependency(dependency);
@@ -294,36 +265,6 @@ public class KpmSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameter(Parameter object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>In</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>In</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIn(In object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Action</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAction(Action object) {
 		return null;
 	}
 
@@ -463,21 +404,6 @@ public class KpmSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Entity</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Entity</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAbstractEntity(AbstractEntity object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -594,21 +520,6 @@ public class KpmSwitch<T> {
 	 * @generated
 	 */
 	public T caseExistFilter(ExistFilter object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rule Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rule Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRuleType(RuleType object) {
 		return null;
 	}
 

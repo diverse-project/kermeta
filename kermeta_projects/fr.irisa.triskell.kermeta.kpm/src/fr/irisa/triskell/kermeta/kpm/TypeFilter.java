@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeFilter.java,v 1.2 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: TypeFilter.java,v 1.3 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -15,7 +15,7 @@ package fr.irisa.triskell.kermeta.kpm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.TypeFilter#getType <em>Type</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.TypeFilter#getJavaClassName <em>Java Class Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,29 +25,29 @@ package fr.irisa.triskell.kermeta.kpm;
  */
 public interface TypeFilter extends Filter {
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Java Class Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type</em>' reference isn't clear,
+	 * If the meaning of the '<em>Java Class Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(Type)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getTypeFilter_Type()
+	 * @return the value of the '<em>Java Class Name</em>' attribute.
+	 * @see #setJavaClassName(String)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getTypeFilter_JavaClassName()
 	 * @model required="true"
 	 * @generated
 	 */
-	Type getType();
+	String getJavaClassName();
 
 	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.TypeFilter#getType <em>Type</em>}' reference.
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.TypeFilter#getJavaClassName <em>Java Class Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
-	 * @see #getType()
+	 * @param value the new value of the '<em>Java Class Name</em>' attribute.
+	 * @see #getJavaClassName()
 	 * @generated
 	 */
-	void setType(Type value);
+	void setJavaClassName(String value);
 
 } // TypeFilter

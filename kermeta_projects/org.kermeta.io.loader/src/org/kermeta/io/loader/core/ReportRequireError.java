@@ -1,6 +1,6 @@
 
 
-/*$Id: ReportRequireError.java,v 1.2 2008-02-14 07:12:50 uid21732 Exp $
+/*$Id: ReportRequireError.java,v 1.3 2008-05-28 09:25:14 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	RequireResolver.java
 * License : EPL
@@ -27,15 +27,36 @@ public class ReportRequireError implements ILoadingAction {
 		
 		KermetaUnit kermetaUnit = datas.getKermetaUnit();
 		
-		for ( KermetaUnitRequire require : kermetaUnit.getKermetaUnitRequires() ) {
+		if ( kermetaUnit.isErroneous() ) {
+
+			for ( KermetaUnit importer : kermetaUnit.getImporters() ) {
+				KermetaUnitRequire r = findRequire(kermetaUnit, importer);
+				if ( r != null ) {
+					String message = "File " + kermetaUnit.getUri() + " contains errors.\n\n";
+					message = message + KermetaUnitHelper.getErrorsAsString( kermetaUnit );
+					kermetaUnit.error( message, r.getRequire() );
+				}
+			}
+		}
+		
+		
+/*		for ( KermetaUnitRequire require : kermetaUnit.getKermetaUnitRequires() ) {
 			
 			if ( require.getKermetaUnit().isErroneous() ) {
 				String message = "File " + require.getKermetaUnit().getUri() + " contains errors.\n\n";
 				message = message + KermetaUnitHelper.getErrorsAsString(require.getKermetaUnit() );
 				kermetaUnit.error( message, require.getRequire() );
 			}		
-		}
+		}*/
 				
+	}
+	
+	private KermetaUnitRequire findRequire(KermetaUnit importedUnit, KermetaUnit importerUnit) {
+		for ( KermetaUnitRequire r : importerUnit.getKermetaUnitRequires() ) {
+			if ( r.getKermetaUnit() == importedUnit )
+				return r;
+		}
+		return null;
 	}
 	
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyItemProvider.java,v 1.5 2007-07-24 13:47:43 ftanguy Exp $
+ * $Id: DependencyItemProvider.java,v 1.6 2008-05-28 09:26:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -25,6 +25,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 /**
@@ -62,9 +63,9 @@ public class DependencyItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypePropertyDescriptor(object);
 			addFromPropertyDescriptor(object);
 			addToPropertyDescriptor(object);
+			addTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -86,7 +87,7 @@ public class DependencyItemProvider
 				 true,
 				 false,
 				 true,
-				 null,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -154,7 +155,7 @@ public class DependencyItemProvider
 	 */
 	public String getText(Object object) {
 		Dependency dependency = (Dependency) object;
-		return getString("_UI_Dependency_type") + " from " + dependency.getFrom().getValue() + " to " + dependency.getTo().getValue();
+		return getString("_UI_Dependency_type") + " from " + dependency.getFrom().getName() + " to " + dependency.getTo().getName();
 	}
 
 	/**

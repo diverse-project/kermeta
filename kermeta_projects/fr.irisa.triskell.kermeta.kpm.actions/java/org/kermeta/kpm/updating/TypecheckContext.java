@@ -1,6 +1,6 @@
 
 
-/*$Id: TypecheckContext.java,v 1.4 2008-04-07 14:54:00 ftanguy Exp $
+/*$Id: TypecheckContext.java,v 1.5 2008-05-28 09:25:09 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	TypecheckContext.java
 * License : EPL
@@ -12,30 +12,27 @@
 
 package org.kermeta.kpm.updating;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kpm.IAction;
+import org.kermeta.kpm.KPMPlugin;
+import org.kermeta.kpm.KpmManager;
 
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.extension.IAction;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.kpm.Out;
-import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
-import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
-import fr.irisa.triskell.kermeta.resources.KermetaResourceHelper;
-import fr.irisa.triskell.kermeta.typechecker.CallableFeaturesCache;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class TypecheckContext implements IAction {
 
 	@SuppressWarnings("unchecked")
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
+	public void execute(Out out, Unit unit, Map<String, Object> args, IProgressMonitor monitor) {
 		List<Unit> l = null;
 		try  {
 			monitor.subTask("Typechecking");
@@ -49,62 +46,65 @@ public class TypecheckContext implements IAction {
 			
 			/*
 			 * 
-			 * First pass to check if one unit is erroneous.
+			 * We are going to work on a copy because we update the list at the same time.
 			 * 
 			 */
-			boolean error = false;
-			for ( Unit u : l ) {
-				String uri = "platform:/resource" + u.getValue();
-				KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(uri);
-				if ( kermetaUnit == null || kermetaUnit.isErroneous() ) {
-					error = true;
-					break;
-				}
-			}
+			List<Unit> copy = new ArrayList<Unit>(l);
+			
+			for ( Unit currentUnit : copy ) {
+				/*
+				 * 
+				 * Getting the corresponding kermeta unit.
+				 * 
+				 */
+				KermetaUnit kermetaUnit = IOPlugin.getDefault().getKermetaUnit(currentUnit.getName());
 				
-			/*
-			 * 
-			 * If the load succeeded ie no errors, let's proceed to the type checking.
-			 * 
-			 */
-			if ( ! error ) {
-				for ( Unit u : l ) {
-					String uri = "platform:/resource" + u.getValue();
-					KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(uri);
-					if ( kermetaUnit != null ) {
-						/*
-						 * 
-						 * Typechecking the unit.
-						 * 
-						 */
-						KermetaTypeChecker typechecker = new KermetaTypeChecker(kermetaUnit);
-						typechecker.checkUnit();
-						/*
-						 * 
-						 * Marking errors if there are some.
-						 * 
-						 */
-						if (kermetaUnit.isErroneous() ) {
-							IFile file = ResourceHelper.getIFile(uri);
-							KermetaMarkersHelper.createMarkers(file, kermetaUnit);
-							for ( KermetaUnit importer : kermetaUnit.getImporters() ) {
-								for ( KermetaUnitRequire require : importer.getKermetaUnitRequires() ) {
-									if ( require.getKermetaUnit().equals( kermetaUnit ) ) {
-										importer.error("The file " + kermetaUnit.getUri() + " contains errors.", require.getRequire() );
-										IFile f = ResourceHelper.getIFile( importer.getUri() );
-										KermetaMarkersHelper.createMarkers(f, kermetaUnit);
-									}
-								}
+				/*
+				 * 
+				 * Getting the list of kermeta units.
+				 * 
+				 */
+				List<KermetaUnit> kl = new ArrayList<KermetaUnit>();
+				kl.add(kermetaUnit);
+				kl.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) );
+				
+				/*
+				 * 
+				 * Typecheck and Constraintcheck every kermeta units.
+				 * 
+				 */
+				for ( KermetaUnit kunit : kl ) {
+					/*
+					 * 
+					 * Updating the context.
+					 * 
+					 */
+					if ( ! kunit.isFramework() ) {
+						Unit u = KpmManager.getDefault().getUnit( kunit.getUri() );
+						if ( u != null && ! l.contains(u) )
+							l.add(u);
+					}
+					
+					try {
+						if ( ! kunit.isErroneous() ) {
+							KermetaTypeChecker typechecker = new KermetaTypeChecker(kunit);
+							typechecker.checkUnit();
+							if ( ! kunit.isErroneous() ) {
+								KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(kunit);
+								constraintchecker.checkUnit();
 							}
 						}
-					} else {
-						// The kermeta unit has not been found.
-						// That is strange maybe should warn.
+					} catch(Exception e){
+						if(l == null)
+							KPMPlugin.logErrorMessage("Error getting 'context' in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);
+						else
+							KPMPlugin.logErrorMessage("Error in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);
+						
 					}
 				}
-				CallableFeaturesCache.destroyInstance();
+				
 			}
-		} catch(Exception e){
+		} catch(Exception e) {
 			if(l == null)
 				KPMPlugin.logErrorMessage("Error getting 'context' in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);
 			else

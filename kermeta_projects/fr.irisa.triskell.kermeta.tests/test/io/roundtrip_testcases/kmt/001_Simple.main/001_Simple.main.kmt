@@ -1,0 +1,20 @@
+@uri "http://SimpleMain"
+package src;
+
+require "kermeta"
+class Main
+{
+	operation main() : kermeta::standard::~Void is
+		do
+			stdio.writeln("-----------------------------------------")
+			stdio.writeln("Start")
+			stdio.writeln("-----------------------------------------")
+			stdio.writeln("After Save")
+		end
+
+	operation truc(machin : kermeta::standard::String) : kermeta::standard::~Void is
+		do
+			var truc2 : kermeta::standard::String init "dsdq"
+		end
+
+}

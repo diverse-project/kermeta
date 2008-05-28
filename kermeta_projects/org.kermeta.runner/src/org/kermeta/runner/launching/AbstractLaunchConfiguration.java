@@ -1,4 +1,4 @@
-/*$Id: AbstractLaunchConfiguration.java,v 1.10 2008-04-30 13:58:47 ftanguy Exp $
+/*$Id: AbstractLaunchConfiguration.java,v 1.11 2008-05-28 09:25:39 ftanguy Exp $
 * Project : org.kermeta.runner
 * File : 	AbstractLaunchConfiguration.java
 * License : EPL
@@ -24,7 +24,6 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
-import org.eclipse.jdt.launching.IRuntimeClasspathEntry;
 import org.kermeta.runner.model.KDebugTarget;
 import org.kermeta.runner.model.KProcess;
 

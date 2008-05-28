@@ -30,9 +30,6 @@
     <action class="org.kermeta.io.loader.ecore.ApplyQuickFixPass"/>
   </steps>
   <steps name="_FINALIZE_LOADING_" propagate="true">
-    <steps name="reportRequireError">
-      <action class="org.kermeta.io.loader.core.ReportRequireError"/>
-    </steps>
     <action class="org.kermeta.io.loader.core.FinalizeLoading"/>
   </steps>
 </loader:EcoreLoader>

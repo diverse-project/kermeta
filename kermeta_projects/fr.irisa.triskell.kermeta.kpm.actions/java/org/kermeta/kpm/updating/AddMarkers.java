@@ -1,6 +1,6 @@
 
 
-/*$Id: AddMarkers.java,v 1.3 2008-03-03 15:08:49 dvojtise Exp $
+/*$Id: AddMarkers.java,v 1.4 2008-05-28 09:25:09 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -18,20 +18,21 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kpm.IAction;
+import org.kermeta.kpm.KPMPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
-import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 
 public class AddMarkers implements IAction {
 
 	@SuppressWarnings("unchecked")
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
+	public void execute(Out out, Unit unit, Map<String, Object> args, IProgressMonitor monitor) {
 		
 		List<Unit> l = null;
 		try {
@@ -43,11 +44,22 @@ public class AddMarkers implements IAction {
 			 * 
 			 */
 			l = (List<Unit>) args.get("context");
+			
+			/*
+			 * 
+			 * First, add errors to requires if necessary.
+			 * 
+			 */
 			for ( Unit u : l ) {
-				String uri = "platform:/resource" + u.getValue();
-				KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(uri);
+				KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(u.getName());
+				if ( kermetaUnit != null )
+					addRequireErrors(kermetaUnit);
+			}
+			
+			for ( Unit u : l ) {
+				KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(u.getName());
 				if ( kermetaUnit != null ) {
-					IFile file = ResourceHelper.getIFile(uri);
+					IFile file = ResourceHelper.getIFile(u.getName());
 					KermetaMarkersHelper.clearMarkers(file);
 					KermetaMarkersHelper.createMarkers(file, kermetaUnit);
 				} else {
@@ -67,6 +79,27 @@ public class AddMarkers implements IAction {
 			monitor.worked(1);
 		}
 		
+	}
+	
+	private void addRequireErrors(KermetaUnit kermetaUnit) {
+		if ( kermetaUnit.isErroneous() ) {
+			for ( KermetaUnit importer : kermetaUnit.getImporters() ) {
+				KermetaUnitRequire r = findRequire(kermetaUnit, importer);
+				if ( r != null ) {
+					String message = "File " + kermetaUnit.getUri() + " contains errors.\n\n";
+					message = message + KermetaUnitHelper.getErrorsAsString( kermetaUnit );
+					importer.error( message, r.getRequire() );
+				}
+			}
+		}				
+	}
+	
+	private KermetaUnitRequire findRequire(KermetaUnit importedUnit, KermetaUnit importerUnit) {
+		for ( KermetaUnitRequire r : importerUnit.getKermetaUnitRequires() ) {
+			if ( r.getKermetaUnit() == importedUnit )
+				return r;
+		}
+		return null;
 	}
 
 }

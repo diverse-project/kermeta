@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterItemProvider.java,v 1.1 2007-12-20 09:12:55 ftanguy Exp $
+ * $Id: ParameterItemProvider.java,v 1.2 2008-05-28 09:26:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -66,6 +66,7 @@ public class ParameterItemProvider
 
 			addTypePropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -115,6 +116,28 @@ public class ParameterItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Parameter_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Parameter_name_feature", "_UI_Parameter_type"),
+				 KpmPackage.Literals.PARAMETER__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Parameter.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -133,7 +156,7 @@ public class ParameterItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Parameter)object).getType();
+		String label = ((Parameter)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Parameter_type") :
 			getString("_UI_Parameter_type") + " " + label;
@@ -153,6 +176,7 @@ public class ParameterItemProvider
 		switch (notification.getFeatureID(Parameter.class)) {
 			case KpmPackage.PARAMETER__TYPE:
 			case KpmPackage.PARAMETER__VALUE:
+			case KpmPackage.PARAMETER__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

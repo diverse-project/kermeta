@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutItemProvider.java,v 1.4 2007-12-20 09:12:55 ftanguy Exp $
+ * $Id: OutItemProvider.java,v 1.5 2008-05-28 09:26:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
@@ -35,7 +36,7 @@ import fr.irisa.triskell.kermeta.kpm.Out;
  * @generated
  */
 public class OutItemProvider
-	extends AbstractEntityItemProvider
+	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -63,32 +64,10 @@ public class OutItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addActionPropertyDescriptor(object);
 			addIndependantPropertyDescriptor(object);
+			addExtensionPointPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Action feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addActionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Out_action_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Out_action_feature", "_UI_Out_type"),
-				 KpmPackage.Literals.OUT__ACTION,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -109,6 +88,28 @@ public class OutItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Extension Point feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExtensionPointPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Out_extensionPoint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Out_extensionPoint_feature", "_UI_Out_type"),
+				 KpmPackage.Literals.OUT__EXTENSION_POINT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -162,7 +163,7 @@ public class OutItemProvider
 	 */
 	public String getText(Object object) {
 		Out out = (Out)object;
-		String label = out.getAction() != null ? out.getAction().getExtensionPoint() : null;
+		String label = out.getExtensionPoint() != null ? out.getExtensionPoint() : null;
 		return label == null || label.length() == 0 ?
 				getString("_UI_Out_type") :
 				getString("_UI_Out_type") + " => " + label;
@@ -181,6 +182,7 @@ public class OutItemProvider
 
 		switch (notification.getFeatureID(Out.class)) {
 			case KpmPackage.OUT__INDEPENDANT:
+			case KpmPackage.OUT__EXTENSION_POINT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case KpmPackage.OUT__PARAMETERS:

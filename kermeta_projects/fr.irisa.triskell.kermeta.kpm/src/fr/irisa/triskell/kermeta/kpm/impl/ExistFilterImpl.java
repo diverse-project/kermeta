@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExistFilterImpl.java,v 1.3 2007-07-24 13:47:10 ftanguy Exp $
+ * $Id: ExistFilterImpl.java,v 1.4 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -49,7 +49,7 @@ public class ExistFilterImpl extends FilterImpl implements ExistFilter {
 	 * @generated NOT
 	 */
 	public boolean matches(Unit unit) {
-		IFile file = ResourceHelper.getIFile(unit.getValue());
+		IFile file = ResourceHelper.getIFile(unit.getName());
 		return file.exists();
 	}
 

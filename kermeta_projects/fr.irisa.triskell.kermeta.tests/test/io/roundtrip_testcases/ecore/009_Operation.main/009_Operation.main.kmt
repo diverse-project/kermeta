@@ -1,0 +1,29 @@
+@uri "http://aPackage"
+package aPackage;
+
+require "kermeta"
+class A
+{
+	operation op0() : Void is
+		do
+		end
+
+	operation op1(param1 : B) : Void is
+		abstract
+
+	operation op2(param1 : B, param2 : C) : Void is
+		abstract
+
+	operation op3() : ClassReturn is
+		abstract
+
+}
+class B
+{
+}
+class C
+{
+}
+class ClassReturn
+{
+}

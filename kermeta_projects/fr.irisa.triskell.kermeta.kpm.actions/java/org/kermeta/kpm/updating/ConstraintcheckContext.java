@@ -1,6 +1,6 @@
 
 
-/*$Id: ConstraintcheckContext.java,v 1.2 2008-02-14 07:13:46 uid21732 Exp $
+/*$Id: ConstraintcheckContext.java,v 1.3 2008-05-28 09:25:09 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	TypecheckContext.java
 * License : EPL
@@ -19,18 +19,17 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kpm.IAction;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
-import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
-import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 
 public class ConstraintcheckContext implements IAction {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
+	public void execute(Out out, Unit unit, Map<String, Object> args, IProgressMonitor monitor) {
 
 		try  {
 			monitor.subTask("Constraint Checking");
@@ -50,7 +49,7 @@ public class ConstraintcheckContext implements IAction {
 			 */
 			boolean error = false;
 			for ( Unit u : l ) {
-				String uri = "platform:/resource" + u.getValue();
+				String uri = "platform:/resource" + u.getName();
 				KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(uri);
 				if ( kermetaUnit == null || kermetaUnit.isErroneous() ) {
 					error = true;
@@ -65,7 +64,7 @@ public class ConstraintcheckContext implements IAction {
 			 */
 			if ( ! error ) {
 				for ( Unit u : l ) {
-					String uri = "platform:/resource" + u.getValue();
+					String uri = "platform:/resource" + u.getName();
 					KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(uri);
 					if ( kermetaUnit != null && ! kermetaUnit.isErroneous() ) {
 						/*

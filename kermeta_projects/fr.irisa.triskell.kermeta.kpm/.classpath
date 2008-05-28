@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="fr/irisa/triskell/kermeta/kpm/helpers/EventMonitor.java" kind="src" path="src"/>
+	<classpathentry excluding="fr/irisa/triskell/kermeta/kpm/helpers/EventMonitor.java|fr/irisa/triskell/kermeta/kpm/resources/|fr/irisa/triskell/kermeta/kpm/builder/|fr/irisa/triskell/kermeta/kpm/helpers/KPMHelper.java|fr/irisa/triskell/kermeta/kpm/helpers/InOutHelper.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>

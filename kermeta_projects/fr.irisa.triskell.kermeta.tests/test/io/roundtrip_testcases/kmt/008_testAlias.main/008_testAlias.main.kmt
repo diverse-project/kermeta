@@ -1,0 +1,11 @@
+@uri "http://TestAlias"
+package testAlias;
+
+require "kermeta"
+using kermeta::standard
+alias String : kermeta::language::structure::String;
+class A
+{
+	reference s : String
+
+}

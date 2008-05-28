@@ -1,0 +1,55 @@
+@uri "pathmap:/src platform:/resource/TestKermeta/src/MetaModel.ecore"
+package src;
+
+require "kermeta"
+class ModelElement
+{
+	attribute name : String
+
+}
+alias String : kermeta::standard::String;
+class Event inherits ModelElement
+{
+}
+class Transition inherits ModelElement
+{
+	reference trigger : Event
+
+	reference source : StateVertex#outgoing
+
+	reference target : StateVertex#incoming
+
+}
+class StateMachine inherits ModelElement
+{
+	attribute top : State
+
+}
+class StateVertex inherits ModelElement
+{
+	reference container : CompositeState#subvertex
+
+	reference outgoing : set Transition[0..*]#source
+
+	reference incoming : set Transition[0..*]#target
+
+}
+class State inherits StateVertex
+{
+}
+class PseudoState inherits StateVertex
+{
+	attribute kind : String
+
+}
+class CompositeState inherits State
+{
+	attribute subvertex : set StateVertex[0..*]#container
+
+}
+class SimpleState inherits State
+{
+}
+class FinalState inherits State
+{
+}

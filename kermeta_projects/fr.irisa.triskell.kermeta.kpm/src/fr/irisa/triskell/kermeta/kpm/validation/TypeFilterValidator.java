@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeFilterValidator.java,v 1.1 2007-07-24 13:47:11 ftanguy Exp $
+ * $Id: TypeFilterValidator.java,v 1.2 2008-05-28 09:26:13 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.validation;
 
@@ -16,6 +16,8 @@ import fr.irisa.triskell.kermeta.kpm.Type;
  */
 public interface TypeFilterValidator {
 	boolean validate();
+
+	boolean validateJavaClassName(String value);
 
 	boolean validateType(Type value);
 }

@@ -1,4 +1,4 @@
-/*$Id: DependentFilesViewPart.java,v 1.2 2007-04-13 14:47:56 ftanguy Exp $
+/*$Id: DependentFilesViewPart.java,v 1.3 2008-05-28 09:25:42 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -17,10 +17,9 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.progress.UIJob;
+import org.kermeta.kpm.KpmManager;
 
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.ui.DependentFileTreeItem;
 import fr.irisa.triskell.kermeta.ui.KermetaUIPlugin;
 import fr.irisa.triskell.kermeta.ui.UiFactory;
@@ -72,16 +71,12 @@ public class DependentFilesViewPart extends ViewPart {
 	
 	
 	private Object[] internCreateInput() {
-		
-			KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( resource.getProject() );
-			Unit unit = project.getKpm().findUnit( resource.getFullPath().toString() );
-	
-			Object[] result = new Object[1];
-			DependentFileTreeItem item = UiFactory.eINSTANCE.createDependentFileTreeItem();
-			item.setValue( unit );
-			item.calculateChildren();
-			result[0] = item;	
-			
+		Unit unit = KpmManager.getDefault().getUnit( resource );
+		Object[] result = new Object[1];
+		DependentFileTreeItem item = UiFactory.eINSTANCE.createDependentFileTreeItem();
+		item.setValue( unit );
+		item.calculateChildren();
+		result[0] = item;	
 		return result;
 	}
 	

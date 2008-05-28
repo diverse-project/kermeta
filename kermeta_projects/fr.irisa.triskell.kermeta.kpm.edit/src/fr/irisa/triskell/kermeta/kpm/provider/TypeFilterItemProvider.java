@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeFilterItemProvider.java,v 1.3 2007-07-24 13:47:43 ftanguy Exp $
+ * $Id: TypeFilterItemProvider.java,v 1.4 2008-05-28 09:26:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
 
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 
+import fr.irisa.triskell.kermeta.kpm.TypeFilter;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,6 +25,8 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.kpm.TypeFilter} object.
@@ -60,29 +63,29 @@ public class TypeFilterItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypePropertyDescriptor(object);
+			addJavaClassNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature.
+	 * This adds a property descriptor for the Java Class Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTypePropertyDescriptor(Object object) {
+	protected void addJavaClassNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TypeFilter_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeFilter_type_feature", "_UI_TypeFilter_type"),
-				 KpmPackage.Literals.TYPE_FILTER__TYPE,
+				 getString("_UI_TypeFilter_javaClassName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypeFilter_javaClassName_feature", "_UI_TypeFilter_type"),
+				 KpmPackage.Literals.TYPE_FILTER__JAVA_CLASS_NAME,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -106,7 +109,10 @@ public class TypeFilterItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_TypeFilter_type");
+		String label = ((TypeFilter)object).getJavaClassName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_TypeFilter_type") :
+			getString("_UI_TypeFilter_type") + " " + label;
 	}
 
 	/**
@@ -119,6 +125,12 @@ public class TypeFilterItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(TypeFilter.class)) {
+			case KpmPackage.TYPE_FILTER__JAVA_CLASS_NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

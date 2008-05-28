@@ -2,11 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutValidator.java,v 1.1 2007-07-24 13:47:11 ftanguy Exp $
+ * $Id: OutValidator.java,v 1.2 2008-05-28 09:26:13 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.validation;
 
-import fr.irisa.triskell.kermeta.kpm.Action;
+import org.eclipse.emf.common.util.EList;
+
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 
 /**
@@ -18,7 +20,10 @@ import fr.irisa.triskell.kermeta.kpm.Rule;
 public interface OutValidator {
 	boolean validate();
 
-	boolean validateAction(Action value);
 	boolean validateRule(Rule value);
 	boolean validateIndependant(boolean value);
+
+	boolean validateParameters(EList<Parameter> value);
+
+	boolean validateExtensionPoint(String value);
 }

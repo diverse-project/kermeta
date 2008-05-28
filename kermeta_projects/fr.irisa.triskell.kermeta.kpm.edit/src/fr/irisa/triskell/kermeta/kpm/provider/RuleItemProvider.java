@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleItemProvider.java,v 1.2 2007-07-24 13:47:43 ftanguy Exp $
+ * $Id: RuleItemProvider.java,v 1.3 2008-05-28 09:26:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -69,7 +69,6 @@ public class RuleItemProvider
 
 			addEventPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
-			addTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -119,28 +118,6 @@ public class RuleItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Rule_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Rule_type_feature", "_UI_Rule_type"),
-				 KpmPackage.Literals.RULE__TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -152,8 +129,8 @@ public class RuleItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(KpmPackage.Literals.RULE__IN);
 			childrenFeatures.add(KpmPackage.Literals.RULE__OUTS);
+			childrenFeatures.add(KpmPackage.Literals.RULE__PRECONDITION);
 		}
 		return childrenFeatures;
 	}
@@ -211,8 +188,8 @@ public class RuleItemProvider
 			case KpmPackage.RULE__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case KpmPackage.RULE__IN:
 			case KpmPackage.RULE__OUTS:
+			case KpmPackage.RULE__PRECONDITION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -232,13 +209,28 @@ public class RuleItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.RULE__IN,
-				 KpmFactory.eINSTANCE.createIn()));
+				(KpmPackage.Literals.RULE__OUTS,
+				 KpmFactory.eINSTANCE.createOut()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.RULE__OUTS,
-				 KpmFactory.eINSTANCE.createOut()));
+				(KpmPackage.Literals.RULE__PRECONDITION,
+				 KpmFactory.eINSTANCE.createORExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.RULE__PRECONDITION,
+				 KpmFactory.eINSTANCE.createANDExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.RULE__PRECONDITION,
+				 KpmFactory.eINSTANCE.createFilterExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.RULE__PRECONDITION,
+				 KpmFactory.eINSTANCE.createNullExpression()));
 	}
 
 	/**

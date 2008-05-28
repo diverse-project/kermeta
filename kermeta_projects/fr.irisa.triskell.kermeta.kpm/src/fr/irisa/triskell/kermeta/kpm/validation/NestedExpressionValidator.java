@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NestedExpressionValidator.java,v 1.1 2007-07-24 13:47:11 ftanguy Exp $
+ * $Id: NestedExpressionValidator.java,v 1.2 2008-05-28 09:26:13 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.validation;
 
+import fr.irisa.triskell.kermeta.kpm.Expression;
 import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
 
 /**
@@ -16,6 +17,10 @@ import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
  */
 public interface NestedExpressionValidator {
 	boolean validate();
+
+	boolean validateRight(Expression value);
+
+	boolean validateLeft(Expression value);
 
 	boolean validateExpression(SimpleExpression value);
 }

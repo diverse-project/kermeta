@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactory.java,v 1.6 2007-12-20 09:13:07 ftanguy Exp $
+ * $Id: KpmFactory.java,v 1.7 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -42,24 +42,6 @@ public interface KpmFactory extends EFactory {
 	 * @generated
 	 */
 	Parameter createParameter();
-
-	/**
-	 * Returns a new object of class '<em>In</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>In</em>'.
-	 * @generated
-	 */
-	In createIn();
-
-	/**
-	 * Returns a new object of class '<em>Action</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Action</em>'.
-	 * @generated
-	 */
-	Action createAction();
 
 	/**
 	 * Returns a new object of class '<em>Out</em>'.
@@ -177,15 +159,6 @@ public interface KpmFactory extends EFactory {
 	 * @generated
 	 */
 	ExistFilter createExistFilter();
-
-	/**
-	 * Returns a new object of class '<em>Rule Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rule Type</em>'.
-	 * @generated
-	 */
-	RuleType createRuleType();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|http://www.eclipse.org/emf/2002/Ecore|"/>
+    <details key="using" value="ecore|kermeta::standard|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="ecore" nsURI="file:/home/paco/workspace-cvs/fr.irisa.triskell.kermeta.tests/test/io/roundtrip_testcases/kmt/006_PropertyWithEcoreTypes.main/ecore.ecore#/" nsPrefix="ecore">
+    <eClassifiers xsi:type="ecore:EClass" name="EAttribute">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** This class refers to any EDataType feature*/"/>
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eAttributeType" lowerBound="1" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;if eType.getMetaClass.equals(ecore::EDataType) then&#xA;&#x9;&#x9;eType := value&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new&#xA;&#x9;&#x9;exception.message := &quot;The EClassifer pointed by this EAttribute must be of type EDataType&quot;&#xA;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;if eType.getMetaClass.equals(ecore::EDataType) then&#xA;&#x9;&#x9;result ?= eType&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new&#xA;&#x9;&#x9;exception.message := &quot;The EClassifer pointed by this EAttribute must be of type EDataType&quot;&#xA;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EDataType"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EClass">
+      <eAnnotations source="kermeta">
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="isSuperTypeOf">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := someClass.eAllSuperTypes.detect{t | do&#xA;&#x9;&#x9;&#x9;t.equals(self)&#xA;&#x9;&#x9;end}.isNotEqual(void)&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        <eParameters name="someClass" eType="/1/EClass"/>
+      </eOperations>
+      <eOperations name="getFeatureCount">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := self.eAllStructuralFeatures.size&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eOperations>
+      <eOperations name="getFeatureID">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := 1.uminus&#xA;&#x9;from var i : ecore::EInt init 0&#xA;&#x9;until ((i.equals(eAllStructuralFeatures.size)) or (result.isNotEqual(1.uminus)))&#xA;&#x9;loop&#xA;&#x9;&#x9;if feature.equals(eAllStructuralFeatures.elementAt(i)) then&#xA;&#x9;&#x9;&#x9;result.equals(i)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;i := ((i) + (1))&#xA;&#x9;end&#xA;end"/>
+          <details key="documentation" value="/** Return the position of the feature in the list of AllStructuralFeatures */"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        <eParameters name="feature" eType="/1/EStructuralFeature"/>
+      </eOperations>
+      <eOperations name="getEStructuralFeature2" eType="/1/EStructuralFeature">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := self.eAllStructuralFeatures.detect{e | do&#xA;&#x9;&#x9;&#x9;e.name.equals(featureName)&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="featureName">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eParameters>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eAllAttributes" upperBound="-1" eType="/1/EAttribute" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;ecore::EAttribute>.new&#xA;&#x9;self.eAllSuperTypes.each{t | do&#xA;&#x9;&#x9;&#x9;result.addAll(t.eAttributes)&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eAllReferences" upperBound="-1" eType="/1/EReference" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;ecore::EReference>.new&#xA;&#x9;self.eAllSuperTypes.each{t | do&#xA;&#x9;&#x9;&#x9;result.addAll(t.eReferences)&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eReferences" upperBound="-1" eType="/1/EReference" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;ecore::EReference>.new&#xA;&#x9;self.eStructuralFeatures.each{f | do&#xA;&#x9;&#x9;&#x9;if ecore::EReference.isInstance(f) then&#xA;&#x9;&#x9;&#x9;&#x9;var a : ecore::EReference&#xA;&#x9;&#x9;&#x9;&#x9;a ?= f&#xA;&#x9;&#x9;&#x9;&#x9;result.add(a)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eAttributes" upperBound="-1" eType="/1/EAttribute" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;ecore::EAttribute>.new&#xA;&#x9;self.eStructuralFeatures.each{f | do&#xA;&#x9;&#x9;&#x9;if ecore::EAttribute.isInstance(f) then&#xA;&#x9;&#x9;&#x9;&#x9;var a : ecore::EAttribute&#xA;&#x9;&#x9;&#x9;&#x9;a ?= f&#xA;&#x9;&#x9;&#x9;&#x9;result.add(a)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eAllContainments" upperBound="-1" eType="/1/EReference" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;ecore::EReference>.new&#xA;&#x9;stdio.writeln(((&quot;contaimnet : &quot;) + (self.eAllReferences.one.containment.toString)))&#xA;&#x9;result.addAll(self.eAllReferences.~select{r | do&#xA;&#x9;&#x9;&#x9;r.containment.equals(true)&#xA;&#x9;&#x9;end})&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eAllOperations" upperBound="-1" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;ecore::EOperation>.new&#xA;&#x9;result.addAll(eOperations)&#xA;&#x9;self.eAllSuperTypes.each{t | do&#xA;&#x9;&#x9;&#x9;result.addAll(t.eOperations)&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eAllStructuralFeatures" upperBound="-1" eType="/1/EStructuralFeature" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;ecore::EStructuralFeature>.new&#xA;&#x9;if eStructuralFeatures.isNotEqual(void) then&#xA;&#x9;&#x9;result.addAll(eStructuralFeatures)&#xA;&#xA;&#x9;end&#xA;&#x9;self.eAllSuperTypes.each{t | do&#xA;&#x9;&#x9;&#x9;result.addAll(t.eStructuralFeatures)&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eAllSuperTypes" upperBound="-1" eType="/1/EClass" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;ecore::EClass>.new&#xA;&#x9;result.addAll(self.eSuperTypes)&#xA;&#x9;self.eSuperTypes.each{t | do&#xA;&#x9;&#x9;&#x9;result.addAll(t.eAllSuperTypes)&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eIDAttribute" eType="/1/EAttribute" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EClassifier" abstract="true">
+      <eAnnotations source="kermeta">
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="isInstance">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        <eParameters name="object">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="getClassifierID">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClass" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaClass"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EEnum">
+      <eAnnotations source="kermeta">
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="getEEnumLiteral2">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := eLiterals.detect{e | do&#xA;&#x9;&#x9;&#x9;e.~value.equals(~value)&#xA;&#x9;&#x9;end}&#xA;end"/>
+          <details key="documentation" value="/** returns the enum literal which value is value */"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EEnumLiteral"/>
+        <eParameters name="value">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EFactory">
+      <eAnnotations source="kermeta">
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="create" eType="/1/EObject">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="eClass" eType="/1/EClass"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EModelElement" abstract="true">
+      <eAnnotations source="kermeta">
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="getEAnnotation">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := eAnnotations.detect{a | do&#xA;&#x9;&#x9;&#x9;a.source.equals(source)&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EAnnotation"/>
+        <eParameters name="source">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EObject">
+      <eAnnotations source="kermeta">
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="eClass" eType="/1/EClass">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::ecore::wrapper::EObjectWrapper.eClass(self)&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="eIsProxy">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eOperations>
+      <eOperations name="eResource">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EResource"/>
+      </eOperations>
+      <eOperations name="eContainer" eType="/1/EObject">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result ?= self.container&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="eContainingFeature" eType="/1/EStructuralFeature">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="eContainmentFeature" eType="/1/EReference">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="eContents">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EEList"/>
+      </eOperations>
+      <eOperations name="eAllContents">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ETreeIterator"/>
+      </eOperations>
+      <eOperations name="eCrossReferences">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EEList"/>
+      </eOperations>
+      <eOperations name="op_eGet">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eParameters name="feature" eType="/1/EStructuralFeature"/>
+      </eOperations>
+      <eOperations name="eIsSet">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        <eParameters name="feature" eType="/1/EStructuralFeature"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EPackage">
+      <eAnnotations source="kermeta">
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="getEClassifier" eType="/1/EClassifier">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := eClassifiers.~select{c | do&#xA;&#x9;&#x9;&#x9;c.name.equals(name)&#xA;&#x9;&#x9;end}.one&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="name">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EReference">
+      <eAnnotations source="kermeta">
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="getContainerValue">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var cls : kermeta::language::structure::ClassDefinition&#xA;&#x9;cls ?= self.getMetaClass.typeDefinition&#xA;&#x9;result ?= self.get(cls.ownedAttribute.detect{p | do&#xA;&#x9;&#x9;&#x9;p.name.equals(&quot;container&quot;)&#xA;&#x9;&#x9;end})&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eOperations>
+      <eOperations name="setContainerValue" ordered="false">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var cls : kermeta::language::structure::ClassDefinition&#xA;&#x9;cls ?= self.getMetaClass.typeDefinition&#xA;&#x9;self.~set(cls.ownedAttribute.detect{p | do&#xA;&#x9;&#x9;&#x9;p.name.equals(&quot;container&quot;)&#xA;&#x9;&#x9;end}, booleanValue)&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Void"/>
+        <eParameters name="booleanValue">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eParameters>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eReferenceType" lowerBound="1" eType="/1/EClass" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;if eType.getMetaClass.equals(ecore::EClass) then&#xA;&#x9;&#x9;eType := value&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new&#xA;&#x9;&#x9;exception.message := &quot;The EClassifer pointed by this EReference must be of type EClass&quot;&#xA;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;if eType.getMetaClass.equals(ecore::EClass) then&#xA;&#x9;&#x9;result ?= eType&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new&#xA;&#x9;&#x9;exception.message := &quot;The EClassifer pointed by this EReference must be of type EClass&quot;&#xA;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EStructuralFeature" abstract="true">
+      <eAnnotations source="kermeta">
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="getFeatureID">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eOperations>
+      <eOperations name="getContainerClass">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaClass"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ETypedElement" abstract="true">
+      <eAnnotations source="kermeta">
+        <details key="aspect" value="true"/>
+      </eAnnotations>
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="many" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;if ((((self.upperBound) > (1))) or (self.upperBound.equals(1.uminus))) then&#xA;&#x9;&#x9;result := true&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" volatile="true" transient="true" derived="true">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

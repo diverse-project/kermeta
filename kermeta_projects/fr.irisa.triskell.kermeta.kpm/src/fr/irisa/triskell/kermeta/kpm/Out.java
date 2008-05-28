@@ -2,28 +2,31 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Out.java,v 1.4 2007-12-20 09:13:07 ftanguy Exp $
+ * $Id: Out.java,v 1.5 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
 
-import java.util.Map;
-
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Out</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An out corresponds to "something" to produce when a rule has been activated (ie the In conditions are true).
+ * An out usually have an action to perform to produce the "something" which can be the result of a java action or a kermeta action. An out can be processed synchronously or not depending on the value of the independent field.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#getAction <em>Action</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#getRule <em>Rule</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#isIndependant <em>Independant</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#getExtensionPoint <em>Extension Point</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,33 +34,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Out extends AbstractEntity {
-	/**
-	 * Returns the value of the '<em><b>Action</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Action</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Action</em>' reference.
-	 * @see #setAction(Action)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getOut_Action()
-	 * @model
-	 * @generated
-	 */
-	Action getAction();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Out#getAction <em>Action</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Action</em>' reference.
-	 * @see #getAction()
-	 * @generated
-	 */
-	void setAction(Action value);
-
+public interface Out extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Rule</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.Rule#getOuts <em>Outs</em>}'.
@@ -130,11 +107,29 @@ public interface Out extends AbstractEntity {
 	EList<Parameter> getParameters();
 
 	/**
+	 * Returns the value of the '<em><b>Extension Point</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extension Point</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
+	 * @return the value of the '<em>Extension Point</em>' attribute.
+	 * @see #setExtensionPoint(String)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getOut_ExtensionPoint()
+	 * @model
 	 * @generated
 	 */
-	void process(Unit unit, IProgressMonitor monitor, Map<String, Object> args);
+	String getExtensionPoint();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Out#getExtensionPoint <em>Extension Point</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Extension Point</em>' attribute.
+	 * @see #getExtensionPoint()
+	 * @generated
+	 */
+	void setExtensionPoint(String value);
 
 } // Out

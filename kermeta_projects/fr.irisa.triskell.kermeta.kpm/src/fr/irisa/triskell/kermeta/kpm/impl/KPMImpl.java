@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.12 2007-07-24 13:47:10 ftanguy Exp $
+ * $Id: KPMImpl.java,v 1.13 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import fr.irisa.triskell.kermeta.kpm.Action;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.Filter;
@@ -26,7 +26,6 @@ import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.NameFilter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
-import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
@@ -37,29 +36,17 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getFilters <em>Filters</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getRules <em>Rules</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getUnits <em>Units</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getRuleTypes <em>Rule Types</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class KPMImpl extends EObjectImpl implements KPM {
-	/**
-	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getActions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Action> actions;
-
 	/**
 	 * The cached value of the '{@link #getFilters() <em>Filters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -111,16 +98,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	protected EList<Unit> units;
 
 	/**
-	 * The cached value of the '{@link #getRuleTypes() <em>Rule Types</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRuleTypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RuleType> ruleTypes;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -137,18 +114,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.KPM;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Action> getActions() {
-		if (actions == null) {
-			actions = new EObjectContainmentEList<Action>(Action.class, this, KpmPackage.KPM__ACTIONS);
-		}
-		return actions;
 	}
 
 	/**
@@ -185,62 +150,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 			units = new EObjectContainmentEList<Unit>(Unit.class, this, KpmPackage.KPM__UNITS);
 		}
 		return units;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<RuleType> getRuleTypes() {
-		if (ruleTypes == null) {
-			ruleTypes = new EObjectContainmentEList<RuleType>(RuleType.class, this, KpmPackage.KPM__RULE_TYPES);
-		}
-		return ruleTypes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Action createAction(String extensionPoint) {
-		Action action = KpmFactory.eINSTANCE.createAction();
-		action.setExtensionPoint(extensionPoint);
-		getActions().add(action);
-		return action;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Action findAction(String extensionPoint) {
-		Action action = null;
-		Iterator <Action> iterator = getActions().iterator();
-		while ( (action == null) && iterator.hasNext() ) {
-			Action currentAction = iterator.next();
-			if ( currentAction.getExtensionPoint().equals(extensionPoint) )
-				action = currentAction;
-		}
-		return action;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Event findEvent(String name) {
-		Event event = null;
-		Iterator <Event> iterator = getEvents().iterator();
-		while ( (event == null) && iterator.hasNext() ) {
-			Event currentEvent = iterator.next();
-			if ( currentEvent.getName().equals(name) )
-				event = currentEvent;
-		}
-		return event;
 	}
 
 	/**
@@ -295,21 +204,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public RuleType findRuleType(String name) {
-		Iterator <RuleType> iterator = getRuleTypes().iterator();
-		while ( iterator.hasNext() ) {
-			RuleType currentType = iterator.next();
-			if ( currentType.getName().equals(name) ) 
-				return currentType;
-		}
-		return null;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
 	public Rule findRule(String name) {
 		Iterator <Rule> iterator = getRules().iterator();
 		while ( iterator.hasNext() ) {
@@ -326,18 +220,16 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated NOT
 	 */
 	public void removeUnit(String name) {
-		Unit unitToRemove = null;
-		Iterator <Unit> iterator = getUnits().iterator();
-		while ( iterator.hasNext() && (unitToRemove == null) ) {
-			
-			Unit unit = iterator.next();
-			if ( unit.getValue().equals(name) )
-				unitToRemove = unit;
-				
-		}
-		
-		if ( unitToRemove != null )
+		Unit unitToRemove = getUnit(name);
+		if ( unitToRemove != null ) {
+			// First remove all dependencies of that unit from the kpm model.
+			for ( Dependency d : unitToRemove.getDependents() )
+				d.getFrom().getMasters().remove(d);
+			for ( Dependency d : unitToRemove.getMasters() )
+				d.getTo().getDependents().remove(d);
+			// Finally remove the unit from the kpm model.
 			getUnits().remove( unitToRemove );
+		}
 	}
 
 	/**
@@ -345,14 +237,23 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public RuleType getRuleType(String name) {
-		RuleType type = findRuleType(name);
-		if ( type == null ) {
-			type = KpmFactory.eINSTANCE.createRuleType();
-			type.setName(name);
-			getRuleTypes().add(type);
-		}
-		return type;
+	public Unit getUnit(String name) {
+		for ( Unit u : getUnits() )
+			if ( u.getName().equals(name) )
+				return u;
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOt
+	 */
+	public Rule getRule(String name) {
+		for ( Rule r : getRules() )
+			if ( r.getName().equals(name) )
+				return r;
+		return null;
 	}
 
 	/**
@@ -361,27 +262,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated NOT
 	 */
 	public Event getEvent(String name) {
-		Event event = findEvent(name);
-		if ( event == null ) {
-			event = KpmFactory.eINSTANCE.createEvent();
-			event.setName(name);
-			getEvents().add(event);
-		}
-		return event;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Unit findUnit(String name) {
-		Iterator<Unit> iterator = getUnits().iterator();
-		while ( iterator.hasNext() ) {
-			Unit currentUnit = iterator.next();
-			if ( currentUnit.getValue().equals(name) )
-				return currentUnit;
-		}
+		for ( Event e : getEvents() )
+			if ( e.getName().equals(name) )
+				return e;
 		return null;
 	}
 
@@ -393,8 +276,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KpmPackage.KPM__ACTIONS:
-				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__FILTERS:
 				return ((InternalEList<?>)getFilters()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__TYPES:
@@ -405,8 +286,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__UNITS:
 				return ((InternalEList<?>)getUnits()).basicRemove(otherEnd, msgs);
-			case KpmPackage.KPM__RULE_TYPES:
-				return ((InternalEList<?>)getRuleTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -419,8 +298,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KpmPackage.KPM__ACTIONS:
-				return getActions();
 			case KpmPackage.KPM__FILTERS:
 				return getFilters();
 			case KpmPackage.KPM__TYPES:
@@ -431,8 +308,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				return getEvents();
 			case KpmPackage.KPM__UNITS:
 				return getUnits();
-			case KpmPackage.KPM__RULE_TYPES:
-				return getRuleTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -446,10 +321,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KpmPackage.KPM__ACTIONS:
-				getActions().clear();
-				getActions().addAll((Collection<? extends Action>)newValue);
-				return;
 			case KpmPackage.KPM__FILTERS:
 				getFilters().clear();
 				getFilters().addAll((Collection<? extends Filter>)newValue);
@@ -470,10 +341,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				getUnits().clear();
 				getUnits().addAll((Collection<? extends Unit>)newValue);
 				return;
-			case KpmPackage.KPM__RULE_TYPES:
-				getRuleTypes().clear();
-				getRuleTypes().addAll((Collection<? extends RuleType>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -486,9 +353,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KpmPackage.KPM__ACTIONS:
-				getActions().clear();
-				return;
 			case KpmPackage.KPM__FILTERS:
 				getFilters().clear();
 				return;
@@ -504,9 +368,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 			case KpmPackage.KPM__UNITS:
 				getUnits().clear();
 				return;
-			case KpmPackage.KPM__RULE_TYPES:
-				getRuleTypes().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -519,8 +380,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KpmPackage.KPM__ACTIONS:
-				return actions != null && !actions.isEmpty();
 			case KpmPackage.KPM__FILTERS:
 				return filters != null && !filters.isEmpty();
 			case KpmPackage.KPM__TYPES:
@@ -531,8 +390,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				return events != null && !events.isEmpty();
 			case KpmPackage.KPM__UNITS:
 				return units != null && !units.isEmpty();
-			case KpmPackage.KPM__RULE_TYPES:
-				return ruleTypes != null && !ruleTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

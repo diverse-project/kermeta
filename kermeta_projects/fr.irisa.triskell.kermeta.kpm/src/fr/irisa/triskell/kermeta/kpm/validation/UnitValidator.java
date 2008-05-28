@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitValidator.java,v 1.1 2007-07-24 13:47:11 ftanguy Exp $
+ * $Id: UnitValidator.java,v 1.2 2008-05-28 09:26:13 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.validation;
 
@@ -28,6 +28,8 @@ public interface UnitValidator {
 	boolean validateName(String value);
 	boolean validateLastTimeModified(Date value);
 	boolean validateValue(String value);
+	boolean validateMasters(EList<Dependency> value);
+
 	boolean validateDependencies(EList value);
 	boolean validateDependents(EList value);
 }

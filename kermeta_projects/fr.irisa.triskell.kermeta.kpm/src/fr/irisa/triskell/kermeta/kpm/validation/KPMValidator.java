@@ -2,17 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMValidator.java,v 1.1 2007-07-24 13:47:11 ftanguy Exp $
+ * $Id: KPMValidator.java,v 1.2 2008-05-28 09:26:13 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.validation;
 
-import fr.irisa.triskell.kermeta.kpm.Action;
-import fr.irisa.triskell.kermeta.kpm.Event;
-import fr.irisa.triskell.kermeta.kpm.Filter;
-import fr.irisa.triskell.kermeta.kpm.Rule;
-import fr.irisa.triskell.kermeta.kpm.RuleType;
-import fr.irisa.triskell.kermeta.kpm.Type;
-import fr.irisa.triskell.kermeta.kpm.Unit;
 import org.eclipse.emf.common.util.EList;
 
 /**

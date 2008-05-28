@@ -1,0 +1,26 @@
+@mainClass "MDK::X"
+@mainOperation "e"
+@uri "http://MDK"
+package MDK;
+
+require "kermeta"
+enumeration AccesVariableEnumeration
+{
+	accPublic;
+	accPrivate;
+}
+class Test
+{
+	attribute a : AccesVariableEnumeration
+
+	reference x : X
+
+}
+class X
+{
+	operation e() : kermeta::standard::~Void is
+		do
+			stdio.writeln(AccesVariableEnumeration.accPublic.~enumeration.toString)
+		end
+
+}

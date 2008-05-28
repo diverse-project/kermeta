@@ -1,0 +1,14 @@
+@uri "http://aPackage"
+package aPackage;
+
+require "kermeta"
+class A
+{
+	reference BnotContained : B
+
+	attribute BContained : A
+
+}
+class B
+{
+}

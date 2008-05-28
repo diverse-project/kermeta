@@ -2,27 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FilterExpressionImpl.java,v 1.2 2007-07-24 13:47:10 ftanguy Exp $
+ * $Id: FilterExpressionImpl.java,v 1.3 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.ExistFilter;
-import fr.irisa.triskell.kermeta.kpm.Filter;
-import fr.irisa.triskell.kermeta.kpm.FilterExpression;
-import fr.irisa.triskell.kermeta.kpm.KpmFactory;
-import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-import fr.irisa.triskell.kermeta.kpm.NameFilter;
-import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
-
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import fr.irisa.triskell.kermeta.kpm.Filter;
+import fr.irisa.triskell.kermeta.kpm.FilterExpression;
+import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.Unit;
 
 /**
  * <!-- begin-user-doc -->
@@ -170,36 +162,7 @@ public class FilterExpressionImpl extends SimpleExpressionImpl implements Filter
 	 * @generated NOT
 	 */
 	public boolean evaluateIn(Unit unit) {
-		if ( getSubExpression() != null )
-			return getSubExpression().evaluateIn(unit, getFilter().matches(unit));
 		return getFilter().matches(unit);
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean evaluateOut(Unit unit) {
-		
-		if ( getFilter() instanceof ExistFilter ) {
-			IFile file = ResourceHelper.getIFile(unit.getValue());
-			boolean exist = file.exists();
-			if ( getSubExpression() != null )
-				return getSubExpression().evaluateOut(unit, true);
-			return exist;
-		} else if ( getFilter() instanceof NameFilter ) {
-			Unit pseudoUnit = KpmFactory.eINSTANCE.createUnit();
-			String outputString = NameFilterHelper.getOutputString(unit, this);
-			pseudoUnit.setValue( outputString );
-			if ( getSubExpression() != null )
-				return getSubExpression().evaluateOut(pseudoUnit, true);
-			if ( outputString.equals("") )
-				return false;
-			else
-				return true;
-		}
-		return false;
 	}
 
 } //FilterExpressionImpl

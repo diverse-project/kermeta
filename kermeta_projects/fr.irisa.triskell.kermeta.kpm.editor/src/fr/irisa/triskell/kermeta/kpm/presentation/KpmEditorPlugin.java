@@ -2,14 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmEditorPlugin.java,v 1.2 2007-07-24 13:47:24 ftanguy Exp $
+ * $Id: KpmEditorPlugin.java,v 1.3 2008-05-28 09:26:06 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.presentation;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
 
 /**

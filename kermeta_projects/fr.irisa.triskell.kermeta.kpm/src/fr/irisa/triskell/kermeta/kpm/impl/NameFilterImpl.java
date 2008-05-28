@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NameFilterImpl.java,v 1.5 2007-12-03 15:56:33 ftanguy Exp $
+ * $Id: NameFilterImpl.java,v 1.6 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -176,13 +176,13 @@ public class NameFilterImpl extends FilterImpl implements NameFilter {
 		if ( splits.length == 2 ) {
 			
 			if ( ! splits[0].equals("") ) {
-				String s = unit.getValue().replace(splits[0], "");
-				if ( s.equals(unit.getValue()) )
+				String s = unit.getName().replace(splits[0], "");
+				if ( s.equals(unit.getName()) )
 					return false;
 			}
 				
 			String regularExpression = ".+" + splits[1].replace(".", "\\.");
-			if ( unit.getValue().matches(regularExpression) )
+			if ( unit.getName().matches(regularExpression) )
 				return true;
 			
 			

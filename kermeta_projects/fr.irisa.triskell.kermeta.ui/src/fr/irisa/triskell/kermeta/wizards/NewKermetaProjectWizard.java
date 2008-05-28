@@ -1,6 +1,6 @@
 
 
-/*$Id: NewKermetaProjectWizard.java,v 1.2 2007-05-24 08:48:24 ftanguy Exp $
+/*$Id: NewKermetaProjectWizard.java,v 1.3 2008-05-28 09:25:42 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -23,7 +23,6 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.resources.KermetaNature;
 
 public class NewKermetaProjectWizard extends Wizard implements INewWizard {
@@ -52,7 +51,6 @@ public class NewKermetaProjectWizard extends Wizard implements INewWizard {
 					 project.open(monitor);
 					 NatureHelper.addNatureToProject(project, KermetaNature.ID);
 					 //KermetaNatureHelper.addKermetaNature(project);
-					 KermetaWorkspace.getInstance().addKermetaProject(project);
 				 }
 			};
 			ResourcesPlugin.getWorkspace().run(operation, null);

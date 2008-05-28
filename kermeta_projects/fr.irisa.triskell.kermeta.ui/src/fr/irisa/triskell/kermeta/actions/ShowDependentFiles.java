@@ -1,4 +1,4 @@
-/*$Id: ShowDependentFiles.java,v 1.3 2007-04-23 11:58:54 ftanguy Exp $
+/*$Id: ShowDependentFiles.java,v 1.4 2008-05-28 09:25:42 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -18,14 +18,12 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.ui.views.DependentFilesViewPart;
 
 public class ShowDependentFiles implements IObjectActionDelegate {
 
 
-	private ISelection selection;
+	private IFile _file;
 
 	/*
 	 * (non-Javadoc)
@@ -33,12 +31,8 @@ public class ShowDependentFiles implements IObjectActionDelegate {
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
 	public void run(IAction action) {
-		
-		if ( selection instanceof TreeSelection ) {
-			
-			TreeSelection treeSelection = (TreeSelection) selection;
-			IFile file = (IFile) treeSelection.getFirstElement();
-			DependentFilesViewPart.resource = file;
+		if ( _file != null ) {
+			DependentFilesViewPart.resource = _file;
 			try {
 				//FileDependenciesViewPart view = (FileDependenciesViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView( DependentFilesViewPart.ID );
 				DependentFilesViewPart view = (DependentFilesViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView( DependentFilesViewPart.ID );
@@ -47,9 +41,8 @@ public class ShowDependentFiles implements IObjectActionDelegate {
 			} catch (PartInitException e) {
 				e.printStackTrace();
 			}
-			
+			_file = null;
 		}
-		
 	}
 
 	/*
@@ -59,19 +52,10 @@ public class ShowDependentFiles implements IObjectActionDelegate {
 	 *      org.eclipse.jface.viewers.ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = selection;
 		if ( selection instanceof TreeSelection ) {
-			
 			TreeSelection treeSelection = (TreeSelection) selection;
-			IFile file = (IFile) treeSelection.getFirstElement();
-			KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( file.getProject() );
-			if ( project == null )
-				action.setEnabled(false);
-			else
-				action.setEnabled(true);
-			
-		} else
-			action.setEnabled(false);
+			_file = (IFile) treeSelection.getFirstElement();
+		}
 	}
 
 	/*

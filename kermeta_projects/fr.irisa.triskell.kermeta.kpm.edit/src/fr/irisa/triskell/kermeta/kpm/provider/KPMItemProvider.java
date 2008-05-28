@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMItemProvider.java,v 1.4 2007-07-24 13:47:43 ftanguy Exp $
+ * $Id: KPMItemProvider.java,v 1.5 2008-05-28 09:26:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -81,13 +81,11 @@ public class KPMItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(KpmPackage.Literals.KPM__ACTIONS);
 			childrenFeatures.add(KpmPackage.Literals.KPM__FILTERS);
 			childrenFeatures.add(KpmPackage.Literals.KPM__TYPES);
 			childrenFeatures.add(KpmPackage.Literals.KPM__RULES);
 			childrenFeatures.add(KpmPackage.Literals.KPM__EVENTS);
 			childrenFeatures.add(KpmPackage.Literals.KPM__UNITS);
-			childrenFeatures.add(KpmPackage.Literals.KPM__RULE_TYPES);
 		}
 		return childrenFeatures;
 	}
@@ -139,13 +137,11 @@ public class KPMItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(KPM.class)) {
-			case KpmPackage.KPM__ACTIONS:
 			case KpmPackage.KPM__FILTERS:
 			case KpmPackage.KPM__TYPES:
 			case KpmPackage.KPM__RULES:
 			case KpmPackage.KPM__EVENTS:
 			case KpmPackage.KPM__UNITS:
-			case KpmPackage.KPM__RULE_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -162,11 +158,6 @@ public class KPMItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.KPM__ACTIONS,
-				 KpmFactory.eINSTANCE.createAction()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -202,11 +193,6 @@ public class KPMItemProvider
 			(createChildParameter
 				(KpmPackage.Literals.KPM__UNITS,
 				 KpmFactory.eINSTANCE.createUnit()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.KPM__RULE_TYPES,
-				 KpmFactory.eINSTANCE.createRuleType()));
 	}
 
 	/**

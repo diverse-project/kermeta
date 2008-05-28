@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.18 2008-02-14 07:13:24 uid21732 Exp $
+ $Id: plugin.xml,v 1.19 2008-05-28 09:26:15 ftanguy Exp $
 -->
 
 <plugin>
@@ -28,20 +28,18 @@
   </extension>-->
   <extension
         point="org.eclipse.ui.startup">
-     <startup class="fr.irisa.triskell.kermeta.kpm.plugin.KPMStartup"/>
+     <startup class="org.kermeta.kpm.KPMStartup"/>
   </extension>
   <extension
-        point="org.eclipse.ui.propertyPages">
-     <page
-           class="fr.irisa.triskell.kermeta.kpm.properties.KPMPropertyPage"
-           id="fr.irisa.triskell.kermeta.kpm.page1"
-           name="Kermeta"
-           objectClass="org.eclipse.core.resources.IProject">
-        <filter
-         	name="projectNature"
-         	value="fr.irisa.triskell.kermeta.KermetaNature">
-      	</filter>
-     </page>
+        id="kpmBuilder"
+        point="org.eclipse.core.resources.builders">
+     <builder
+           callOnEmptyDelta="false"
+           hasNature="false">
+        <run
+              class="org.kermeta.kpm.internal.builder.KpmProjectBuilder">
+        </run>
+     </builder>
   </extension>
 
 

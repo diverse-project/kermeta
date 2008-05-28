@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: KPM Actions Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.kpm.actions;singleton:=true
 Bundle-Version: 1.1.99.qualifier
-Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.kpm,
  fr.irisa.triskell.kermeta.io,

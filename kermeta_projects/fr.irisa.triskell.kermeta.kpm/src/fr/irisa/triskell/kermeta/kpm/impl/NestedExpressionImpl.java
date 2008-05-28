@@ -2,23 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NestedExpressionImpl.java,v 1.2 2007-07-24 13:47:10 ftanguy Exp $
+ * $Id: NestedExpressionImpl.java,v 1.3 2008-05-28 09:26:14 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
-import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-import fr.irisa.triskell.kermeta.kpm.NestedExpression;
-import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
-
-import fr.irisa.triskell.kermeta.kpm.Unit;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import fr.irisa.triskell.kermeta.kpm.Expression;
+import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.NestedExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +23,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.NestedExpressionImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.NestedExpressionImpl#getRight <em>Right</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.NestedExpressionImpl#getLeft <em>Left</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,15 +32,23 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public abstract class NestedExpressionImpl extends ExpressionImpl implements NestedExpression {
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getRight()
 	 * @generated
 	 * @ordered
 	 */
-	protected SimpleExpression expression;
-
+	protected Expression right;
+	/**
+	 * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLeft()
+	 * @generated
+	 * @ordered
+	 */
+	protected Expression left;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,8 +73,8 @@ public abstract class NestedExpressionImpl extends ExpressionImpl implements Nes
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SimpleExpression getExpression() {
-		return expression;
+	public Expression getRight() {
+		return right;
 	}
 
 	/**
@@ -77,11 +82,11 @@ public abstract class NestedExpressionImpl extends ExpressionImpl implements Nes
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(SimpleExpression newExpression, NotificationChain msgs) {
-		SimpleExpression oldExpression = expression;
-		expression = newExpression;
+	public NotificationChain basicSetRight(Expression newRight, NotificationChain msgs) {
+		Expression oldRight = right;
+		right = newRight;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KpmPackage.NESTED_EXPRESSION__EXPRESSION, oldExpression, newExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KpmPackage.NESTED_EXPRESSION__RIGHT, oldRight, newRight);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -92,18 +97,18 @@ public abstract class NestedExpressionImpl extends ExpressionImpl implements Nes
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(SimpleExpression newExpression) {
-		if (newExpression != expression) {
+	public void setRight(Expression newRight) {
+		if (newRight != right) {
 			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KpmPackage.NESTED_EXPRESSION__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KpmPackage.NESTED_EXPRESSION__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
+			if (right != null)
+				msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KpmPackage.NESTED_EXPRESSION__RIGHT, null, msgs);
+			if (newRight != null)
+				msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KpmPackage.NESTED_EXPRESSION__RIGHT, null, msgs);
+			msgs = basicSetRight(newRight, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.NESTED_EXPRESSION__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.NESTED_EXPRESSION__RIGHT, newRight, newRight));
 	}
 
 	/**
@@ -111,10 +116,8 @@ public abstract class NestedExpressionImpl extends ExpressionImpl implements Nes
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean evaluateIn(Unit unit, boolean value) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public Expression getLeft() {
+		return left;
 	}
 
 	/**
@@ -122,10 +125,33 @@ public abstract class NestedExpressionImpl extends ExpressionImpl implements Nes
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean evaluateOut(Unit unit, boolean value) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public NotificationChain basicSetLeft(Expression newLeft, NotificationChain msgs) {
+		Expression oldLeft = left;
+		left = newLeft;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KpmPackage.NESTED_EXPRESSION__LEFT, oldLeft, newLeft);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLeft(Expression newLeft) {
+		if (newLeft != left) {
+			NotificationChain msgs = null;
+			if (left != null)
+				msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KpmPackage.NESTED_EXPRESSION__LEFT, null, msgs);
+			if (newLeft != null)
+				msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KpmPackage.NESTED_EXPRESSION__LEFT, null, msgs);
+			msgs = basicSetLeft(newLeft, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.NESTED_EXPRESSION__LEFT, newLeft, newLeft));
 	}
 
 	/**
@@ -136,8 +162,10 @@ public abstract class NestedExpressionImpl extends ExpressionImpl implements Nes
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KpmPackage.NESTED_EXPRESSION__EXPRESSION:
-				return basicSetExpression(null, msgs);
+			case KpmPackage.NESTED_EXPRESSION__RIGHT:
+				return basicSetRight(null, msgs);
+			case KpmPackage.NESTED_EXPRESSION__LEFT:
+				return basicSetLeft(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -150,8 +178,10 @@ public abstract class NestedExpressionImpl extends ExpressionImpl implements Nes
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KpmPackage.NESTED_EXPRESSION__EXPRESSION:
-				return getExpression();
+			case KpmPackage.NESTED_EXPRESSION__RIGHT:
+				return getRight();
+			case KpmPackage.NESTED_EXPRESSION__LEFT:
+				return getLeft();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -164,8 +194,11 @@ public abstract class NestedExpressionImpl extends ExpressionImpl implements Nes
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KpmPackage.NESTED_EXPRESSION__EXPRESSION:
-				setExpression((SimpleExpression)newValue);
+			case KpmPackage.NESTED_EXPRESSION__RIGHT:
+				setRight((Expression)newValue);
+				return;
+			case KpmPackage.NESTED_EXPRESSION__LEFT:
+				setLeft((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -179,8 +212,11 @@ public abstract class NestedExpressionImpl extends ExpressionImpl implements Nes
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KpmPackage.NESTED_EXPRESSION__EXPRESSION:
-				setExpression((SimpleExpression)null);
+			case KpmPackage.NESTED_EXPRESSION__RIGHT:
+				setRight((Expression)null);
+				return;
+			case KpmPackage.NESTED_EXPRESSION__LEFT:
+				setLeft((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -194,8 +230,10 @@ public abstract class NestedExpressionImpl extends ExpressionImpl implements Nes
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KpmPackage.NESTED_EXPRESSION__EXPRESSION:
-				return expression != null;
+			case KpmPackage.NESTED_EXPRESSION__RIGHT:
+				return right != null;
+			case KpmPackage.NESTED_EXPRESSION__LEFT:
+				return left != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.9 2008-04-28 11:51:22 ftanguy Exp $
+/*$Id: KermetaTextEditor.java,v 1.10 2008-05-28 09:25:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -35,13 +35,14 @@ import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.TextEditor;
-import org.eclipse.ui.progress.UIJob;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.kermeta.interest.InterestedObject;
 import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.checker.KermetaUnitChecker;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kpm.EventDispatcher;
+import org.kermeta.kpm.KermetaUnitHost;
+import org.kermeta.kpm.KpmManager;
 import org.kermeta.texteditor.folding.FoldingStrategyHelper;
 
 import antlr.RecognitionException;
@@ -50,11 +51,6 @@ import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
-import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
-import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
 
@@ -98,11 +94,7 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
     	Job job = new Job("Opening File " + getFileName()) {
     		public IStatus run(IProgressMonitor monitor) {
     			try {
-    				initializeProject();
-    				if ( project != null )
-    					initializeInterestWithKPM(monitor);
-    				else
-    	    			initializeInterest();
+   					initializeInterestWithKPM(monitor);
     	    	} catch (KermetaIOFileNotFoundException e) {
 					TexteditorPlugin.logErrorMessage("Error while opening " + getFile().getFullPath().toString() , e);
 				} catch (URIMalformedException e) {
@@ -182,36 +174,12 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
         }
     	return null;
     }
-	
-    /**
-     * 
-     * The Kermeta project associated to the project of the current IFile.
-     * 
-     */
-    private KermetaProject project = null;
-    
-    /**
-     * 
-     * Try to get the Kermeta project if the current IProject has the kermeta nature.
-     * 
-     */
-    private void initializeProject() {
-    	if ( getFile() != null )
-    		project = KermetaWorkspace.getInstance().getKermetaProject( getFile().getProject() );
-    }
-    
+	    
     private Unit unit = null;
     
     private boolean initializeUnit() {
-		boolean result = false;
-    	unit = project.getKpm().findUnit(getFile().getFullPath().toString()); 
-		if ( unit == null ) {
-			unit = KPMHelper.getOrCreateUnit(project.getKpm(), getFile().getFullPath().toString());
-			project.save();
-			result = true;
-		} else if ( unit.getLastTimeModified().equals( new Date(0)) )
-			result = true;
-		return result;
+    	unit = KpmManager.getDefault().getUnit(getFile()); 
+		return true;
     }
     
     /**
@@ -226,35 +194,16 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
     }
     
 	private void initializeInterestWithKPM(IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException, IdNotFoundException, NotRegisteredURIException {
-		boolean mustBeChecked = initializeUnit();	
-		/*
-		 * 
-		 * Adding dependencies if necessary.
-		 * 
-		 */
-		KPMHelper.addOpenDependencyOnKMTFile(project.getKpm(), unit);
-		KPMHelper.addUpdateDependencyOnKMTFile(project.getKpm(), unit);
-		KPMHelper.addCloseDependencyOnKMTFile(project.getKpm(), unit);		
-		project.save();
-		
-		if ( mustBeChecked ) {
-			/*
-			 * 
-			 * Force the typechecking.
-			 * 
-			 */
+		initializeUnit();	
+		KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit( getFile() );
+		if ( kermetaUnit != null )
+			updateValue( kermetaUnit );
+		else {
 			KermetaUnitHost.getInstance().declareInterest(this, getFile());
 			unit.setLastTimeModified( new Date(0) );
-			unit.receiveSynchroneEvent("update", null, monitor);
-		} else
-			initializeInterest();
+			EventDispatcher.sendEvent(unit, "update", null, monitor);
+		}
 	}
-
-	private void initializeInterest() throws KermetaIOFileNotFoundException, URIMalformedException, IdNotFoundException, NotRegisteredURIException {
-		KermetaUnitHost.getInstance().declareInterest(this, getFile());
-		KermetaUnitHost.getInstance().updateValue( getFile(), KermetaUnitChecker.check( getFile() ) );
-	}
-
 	
 	@Override
 	public void dispose() {
@@ -277,15 +226,6 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 				} else
 					kermetaUnit = null;
 			} finally {
-				/*
-				 * 
-				 * If the project has not the kermeta nature, we must update the markers manually.
-				 * 
-				 */
-				if ( project == null ) {
-					KermetaMarkersHelper.clearMarkers(getFile());
-					KermetaMarkersHelper.createMarkers(getFile(), currentKermetaUnit);					
-				}
 			}
 		}
 	}
@@ -310,7 +250,7 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 	@Override
 	public void doSave(final IProgressMonitor progressMonitor) {
 		super.doSave(progressMonitor);
-		if ( project == null ) {
+/*		if ( project == null ) {
 			switch ( TexteditorPlugin.getDefault().getModelCheckingStrategy() ) {
 			case ModelcheckingStrategy.SAVING_TIME :
 				try {
@@ -332,7 +272,7 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 		} else {
 			unit.setLastTimeModified( new Date() );
 		}
-
+*/
 	}	
 	
 }

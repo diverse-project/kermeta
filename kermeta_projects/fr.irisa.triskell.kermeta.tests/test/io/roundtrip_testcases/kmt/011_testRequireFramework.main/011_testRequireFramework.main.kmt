@@ -1,0 +1,8 @@
+@uri "http://TestRequireFramework"
+package testRequireFramework;
+
+require "kermeta"
+using kermeta::language::structure
+class MyClassDefinition inherits kermeta::language::structure::ClassDefinition
+{
+}

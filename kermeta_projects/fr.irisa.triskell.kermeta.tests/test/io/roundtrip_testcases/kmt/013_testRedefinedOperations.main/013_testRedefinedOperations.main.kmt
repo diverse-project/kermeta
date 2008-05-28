@@ -1,0 +1,32 @@
+@uri "http://testRedifinedOperations"
+package testRedefinedOperations;
+
+require "kermeta"
+class A
+{
+	operation f() : kermeta::standard::~Void is
+		do
+		end
+
+}
+class B inherits A
+{
+	method f() : kermeta::standard::~Void from testRedefinedOperations::A is
+		do
+		end
+
+}
+class C inherits B
+{
+	method f() : kermeta::standard::~Void from testRedefinedOperations::B is
+		do
+		end
+
+}
+class D inherits B
+{
+	method f() : kermeta::standard::~Void from testRedefinedOperations::B is
+		do
+		end
+
+}

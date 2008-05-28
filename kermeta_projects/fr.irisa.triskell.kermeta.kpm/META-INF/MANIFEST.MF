@@ -19,14 +19,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.io.loader,
  org.kermeta.merger
 Eclipse-LazyStart: true
-Export-Package: fr.irisa.triskell.kermeta.extension,
- fr.irisa.triskell.kermeta.kpm,
- fr.irisa.triskell.kermeta.kpm.builder,
- fr.irisa.triskell.kermeta.kpm.helpers,
- fr.irisa.triskell.kermeta.kpm.hosting,
- fr.irisa.triskell.kermeta.kpm.impl,
- fr.irisa.triskell.kermeta.kpm.plugin,
- fr.irisa.triskell.kermeta.kpm.resources,
- fr.irisa.triskell.kermeta.kpm.util
-Bundle-Activator: fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin
+Export-Package: fr.irisa.triskell.kermeta.kpm,
+ fr.irisa.triskell.kermeta.kpm.util,
+ fr.irisa.triskell.kermeta.kpm.validation,
+ org.kermeta.kpm
+Bundle-Activator: org.kermeta.kpm.KPMPlugin
 Import-Package: org.apache.log4j

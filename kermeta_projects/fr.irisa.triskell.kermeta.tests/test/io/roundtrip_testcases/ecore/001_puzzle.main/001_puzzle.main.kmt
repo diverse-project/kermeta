@@ -1,0 +1,61 @@
+@uri "http://puzzle"
+package puzzle;
+
+require "kermeta"
+require "http://www.eclipse.org/emf/2002/Ecore"
+abstract class Service
+{
+	attribute name : ecore::EString[1..1]
+
+	operation call() : Void is
+		abstract
+
+}
+class RequiredService inherits Service
+{
+	reference provider : Connector[0..*]#source
+
+	reference customer : Component[1..1]#requiredService
+
+}
+class ProvidedService inherits Service
+{
+	reference customer : Connector[0..*]#target
+
+	reference provider : Component[1..1]#providedService
+
+}
+class Connector
+{
+	reference target : ProvidedService#customer
+
+	reference source : RequiredService#provider
+
+	attribute name : ecore::EString[1..1]
+
+	operation deleguate() : Void is
+		abstract
+
+}
+abstract class Component
+{
+	attribute name : ecore::EString[1..1]
+
+	attribute providedService : ProvidedService[1..*]#provider
+
+	attribute requiredService : RequiredService[0..*]#customer
+
+	reference owner : CompositeComponent#subComponent
+
+	operation execute(service : ecore::EString) : Void is
+		abstract
+
+}
+class PrimtiveComponent inherits Component
+{
+}
+class CompositeComponent inherits Component
+{
+	attribute subComponent : Component[1..*]#owner
+
+}

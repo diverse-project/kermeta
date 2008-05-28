@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NestedExpressionItemProvider.java,v 1.2 2007-07-24 13:47:43 ftanguy Exp $
+ * $Id: NestedExpressionItemProvider.java,v 1.3 2008-05-28 09:26:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -79,7 +79,8 @@ public class NestedExpressionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(KpmPackage.Literals.NESTED_EXPRESSION__EXPRESSION);
+			childrenFeatures.add(KpmPackage.Literals.NESTED_EXPRESSION__RIGHT);
+			childrenFeatures.add(KpmPackage.Literals.NESTED_EXPRESSION__LEFT);
 		}
 		return childrenFeatures;
 	}
@@ -120,7 +121,8 @@ public class NestedExpressionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(NestedExpression.class)) {
-			case KpmPackage.NESTED_EXPRESSION__EXPRESSION:
+			case KpmPackage.NESTED_EXPRESSION__RIGHT:
+			case KpmPackage.NESTED_EXPRESSION__LEFT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -140,13 +142,66 @@ public class NestedExpressionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.NESTED_EXPRESSION__EXPRESSION,
+				(KpmPackage.Literals.NESTED_EXPRESSION__RIGHT,
+				 KpmFactory.eINSTANCE.createORExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.NESTED_EXPRESSION__RIGHT,
+				 KpmFactory.eINSTANCE.createANDExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.NESTED_EXPRESSION__RIGHT,
 				 KpmFactory.eINSTANCE.createFilterExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.NESTED_EXPRESSION__EXPRESSION,
+				(KpmPackage.Literals.NESTED_EXPRESSION__RIGHT,
 				 KpmFactory.eINSTANCE.createNullExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.NESTED_EXPRESSION__LEFT,
+				 KpmFactory.eINSTANCE.createORExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.NESTED_EXPRESSION__LEFT,
+				 KpmFactory.eINSTANCE.createANDExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.NESTED_EXPRESSION__LEFT,
+				 KpmFactory.eINSTANCE.createFilterExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.NESTED_EXPRESSION__LEFT,
+				 KpmFactory.eINSTANCE.createNullExpression()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == KpmPackage.Literals.NESTED_EXPRESSION__RIGHT ||
+			childFeature == KpmPackage.Literals.NESTED_EXPRESSION__LEFT;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

@@ -1,4 +1,4 @@
-/* $Id: KermetaCommentScanner.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
+/* $Id: KermetaCommentScanner.java,v 1.3 2008-05-28 09:25:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KMTCommentScanner.java
 * License : EPL
@@ -29,7 +29,8 @@ public class KermetaCommentScanner extends BufferedRuleBasedScanner {
 		IToken multiLineCommentToken = new Token( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.COMMENT_ATTRIBUTE ) );
 		IRule multiLineCommentRule = new MultiLineRule("/*", "*/", multiLineCommentToken);
 
-		IToken token = new Token ( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.UNDEFINED_ATTRIBUTE ) );
+		//IToken token = new Token ( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.UNDEFINED_ATTRIBUTE ) );
+		IToken token = new Token ( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.COMMENT_ATTRIBUTE ) );
 		setDefaultReturnToken(token);
 		
 		setRules( new IRule[] {singleLineCommentRule, multiLineCommentRule} );

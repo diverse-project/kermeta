@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactoryImpl.java,v 1.9 2007-12-20 09:13:06 ftanguy Exp $
+ * $Id: KpmFactoryImpl.java,v 1.10 2008-05-28 09:26:13 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
-import fr.irisa.triskell.kermeta.kpm.*;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -18,12 +17,10 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import fr.irisa.triskell.kermeta.kpm.ANDExpression;
-import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.FilterExpression;
-import fr.irisa.triskell.kermeta.kpm.In;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
@@ -31,8 +28,8 @@ import fr.irisa.triskell.kermeta.kpm.NameFilter;
 import fr.irisa.triskell.kermeta.kpm.NullExpression;
 import fr.irisa.triskell.kermeta.kpm.ORExpression;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
-import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.TypeFilter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
@@ -82,8 +79,6 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case KpmPackage.RULE: return createRule();
-			case KpmPackage.IN: return createIn();
-			case KpmPackage.ACTION: return createAction();
 			case KpmPackage.OUT: return createOut();
 			case KpmPackage.OR_EXPRESSION: return createORExpression();
 			case KpmPackage.AND_EXPRESSION: return createANDExpression();
@@ -96,7 +91,6 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			case KpmPackage.KPM: return createKPM();
 			case KpmPackage.UNIT: return createUnit();
 			case KpmPackage.EXIST_FILTER: return createExistFilter();
-			case KpmPackage.RULE_TYPE: return createRuleType();
 			case KpmPackage.DEPENDENCY: return createDependency();
 			case KpmPackage.PARAMETER: return createParameter();
 			default:
@@ -156,26 +150,6 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
 		return parameter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public In createIn() {
-		InImpl in = new InImpl();
-		return in;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Action createAction() {
-		ActionImpl action = new ActionImpl();
-		return action;
 	}
 
 	/**
@@ -306,16 +280,6 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	public ExistFilter createExistFilter() {
 		ExistFilterImpl existFilter = new ExistFilterImpl();
 		return existFilter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RuleType createRuleType() {
-		RuleTypeImpl ruleType = new RuleTypeImpl();
-		return ruleType;
 	}
 
 	/**

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="testAlias|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="testAlias" nsURI="http://TestAlias" nsPrefix="testAlias">
+    <eClassifiers xsi:type="ecore:EDataType" name="Alias" instanceClassName="java.lang.Object">
+      <eAnnotations source="kermeta">
+        <details key="alias" value="kermeta::language::structure::Object"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="A">
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="s" eType="/1/Alias">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

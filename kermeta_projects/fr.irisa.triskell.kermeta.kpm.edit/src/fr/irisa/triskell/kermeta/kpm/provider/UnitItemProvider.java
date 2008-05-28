@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitItemProvider.java,v 1.8 2007-12-20 09:12:55 ftanguy Exp $
+ * $Id: UnitItemProvider.java,v 1.9 2008-05-28 09:26:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
 
+import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -67,8 +68,6 @@ public class UnitItemProvider
 			addRulesPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addLastTimeModifiedPropertyDescriptor(object);
-			addValuePropertyDescriptor(object);
-			addDependenciesPropertyDescriptor(object);
 			addDependentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -163,50 +162,6 @@ public class UnitItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Value feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Unit_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Unit_value_feature", "_UI_Unit_type"),
-				 KpmPackage.Literals.UNIT__VALUE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Dependencies feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDependenciesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Unit_dependencies_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Unit_dependencies_feature", "_UI_Unit_type"),
-				 KpmPackage.Literals.UNIT__DEPENDENCIES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Dependents feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -240,7 +195,7 @@ public class UnitItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(KpmPackage.Literals.UNIT__DEPENDENCIES);
+			childrenFeatures.add(KpmPackage.Literals.UNIT__MASTERS);
 		}
 		return childrenFeatures;
 	}
@@ -281,7 +236,7 @@ public class UnitItemProvider
 		text = (name == null || name.length() == 0 ?
 						text :
 						text + " " + name);
-		String value = ((Unit)object).getValue();
+		String value = ((Unit)object).getName();
 		text = (value == null || value.length() == 0 ?
 				text :
 				text + " " + value);
@@ -302,8 +257,10 @@ public class UnitItemProvider
 		switch (notification.getFeatureID(Unit.class)) {
 			case KpmPackage.UNIT__NAME:
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
-			case KpmPackage.UNIT__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case KpmPackage.UNIT__MASTERS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -319,6 +276,11 @@ public class UnitItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.UNIT__MASTERS,
+				 KpmFactory.eINSTANCE.createDependency()));
 	}
 
 	/**

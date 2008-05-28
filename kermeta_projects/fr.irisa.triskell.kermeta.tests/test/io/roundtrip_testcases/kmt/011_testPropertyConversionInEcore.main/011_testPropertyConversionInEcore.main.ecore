@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|011b_testStringConversionInEcore.kmt|"/>
+    <details key="using" value="testPropertyConversion|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="testPropertyConversion" nsURI="http://TestProperty" nsPrefix="testPropertyConversion">
+    <eClassifiers xsi:type="ecore:EClass" name="TestProperty">
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="testStringMain">
+        <eType xsi:type="ecore:EClass" href="011b_testStringConversionInEcore.ecore#/3/Main"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TestPropertyAndOperation">
+      <eSuperTypes href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+      <eOperations name="main" ordered="false">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var b : kermeta::interpreter::DynamicExpression&#xA;&#x9;b := a&#xA;&#x9;var testDependency : testString::Main init testString::Main.new&#xA;end"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Void"/>
+        <eParameters name="a">
+          <eType xsi:type="ecore:EClass" href="platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.ecore#/1/interpreter/DynamicExpression"/>
+        </eParameters>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="testStringMain">
+        <eType xsi:type="ecore:EClass" href="011b_testStringConversionInEcore.ecore#/3/Main"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource">
+    <references href="011b_testStringConversionInEcore.ecore#/0"/>
+    <references href="011b_testStringConversionInEcore.ecore#/1"/>
+    <references href="011b_testStringConversionInEcore.ecore#/2"/>
+    <references href="011b_testStringConversionInEcore.ecore#/3"/>
+  </ecore:EAnnotation>
+</xmi:XMI>
