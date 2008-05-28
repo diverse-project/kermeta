@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.19 2008-04-28 11:49:48 ftanguy Exp $
+/* $Id: CompileFramework.java,v 1.20 2008-05-28 09:20:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.framework
 * File : CompileFramework.java
 * License : EPL
@@ -9,13 +9,17 @@
 */ 
 package fr.irisa.triskell.kermeta.dev.framework;
 
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.merger.Merger;
 
-import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
-import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
-import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 
@@ -25,7 +29,7 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
  */
 public class CompileFramework {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NotRegisteredURIException, URIMalformedException, IOException {
 
     	IOPlugin.LOCAL_USE = true;
     	IOPlugin.FRAMEWORK_GENERATION = true;
@@ -55,16 +59,23 @@ public class CompileFramework {
         	}
         	
         	final String dist_folder = "platform:/plugin/fr.irisa.triskell.kermeta.framework/dist";
-        	
-        	System.out.println("SAVING IN KM...");
-        	KmExporter exporter = new KmExporter();
-        	exporter.export(kermetaUnit, dist_folder, true);
-        	System.out.println("DONE");
 
-        	System.out.println("SAVING IN ECORE...");
+        	System.out.println("Merging and Saving...");
+        	Merger merger = new Merger();
+        	Set<KermetaUnit> l = new HashSet<KermetaUnit>();
+        	l.add(kermetaUnit);
+        	l.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) );
+        	merger.process(l, "platform:/resource/fr.irisa.triskell.kermeta.framework/dist/framework.km", true, false);
+        	System.out.println("Mergin and Saving done");
+        	//System.out.println("SAVING IN KM...");
+//        	KmExporter exporter = new KmExporter();
+//        	exporter.export(kermetaUnit, dist_folder, true);
+  //      	System.out.println("DONE");
+
+    /*    	System.out.println("SAVING IN ECORE...");
         	EcoreExporter exporter2 = new EcoreExporter();
         	exporter2.export(kermetaUnit, dist_folder, ExporterOptions.getDefault());
-        	System.out.println("DONE");
+        	System.out.println("DONE");*/
         }
     }
 }

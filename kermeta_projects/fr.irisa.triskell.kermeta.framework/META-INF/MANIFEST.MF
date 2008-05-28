@@ -32,5 +32,6 @@ Require-Bundle: fr.irisa.triskell.kermeta.interpreter,
  org.antlr,
  org.eclipse.gymnast.runtime.core,
  org.antlr.eclipse.core,
- org.kermeta.io.loader
+ org.kermeta.io.loader,
+ org.kermeta.merger
 Bundle-Vendor: IRISA/INRIA

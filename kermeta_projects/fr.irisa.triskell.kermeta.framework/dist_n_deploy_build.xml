@@ -1,4 +1,4 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.30 2008-04-28 11:49:51 ftanguy Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.31 2008-05-28 09:20:45 ftanguy Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
@@ -17,6 +17,8 @@
 		<pathelement location="../fr.irisa.triskell.kermeta.model/build/class"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.interpreter/build/class"/>
   		<pathelement location="../fr.irisa.triskell.traceability.model/bin"/>
+  		<pathelement location="../org.kermeta.log4j.util/bin"/>
+  		<pathelement location="../org.kermeta.merger/bin"/>
 
 	  	<pathelement location="lib/thirdparty/log4j.jar"/>
 	  	<!-- <pathelement location="lib/thirdparty/antlr.jar"/>
