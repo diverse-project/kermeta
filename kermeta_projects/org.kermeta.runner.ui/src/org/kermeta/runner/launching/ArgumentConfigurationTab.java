@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.4 2008-04-30 13:58:49 ftanguy Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.5 2008-05-28 15:44:47 ftanguy Exp $
  * Project: org.kermeta.runner.ui
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -41,7 +41,6 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
@@ -132,7 +131,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     /** The text widget for the selection of a Kermeta class from a given file */
     private Text classNameText;
     private Text projectLocationText;
-    private Button _constraintExecutionButton;
 
     /** The class qualified name chosen by the user */
     private String selectedClassString = null;
@@ -186,8 +184,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 2;
 		checkconstraintArea.setLayout( layout );
-		// Create the area for the constraint check button
-		createCheckConstraintButtonLayout(checkconstraintArea, null);
 
     }
 
@@ -394,29 +390,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
                 	    handleProjectLocationButtonSelected();
                 	}
                 });
-        return parent;
-    }
-    
-    /***
-     * Create the Field where user enters file to execute
-     * @param parent
-     * @param font
-     * @return
-     */
-    public Composite createCheckConstraintButtonLayout(Composite parent, Font font) {
-        Label inputLabel = new Label(parent, SWT.NONE);
-        inputLabel.setText(KermetaMessages.getString("ArgTab.CHECK_CONSTRAINT_BUTTON")); //$NON-NLS-1$
-       
-        _constraintExecutionButton = new Button(parent, SWT.CHECK);
-        _constraintExecutionButton.addSelectionListener( 
-        		new SelectionListener() {
-        			public void widgetDefaultSelected(SelectionEvent e) {
-        			}
-        			public void widgetSelected(SelectionEvent e) {
-        				updateLaunchConfigurationDialog();
-        			}
-        		}
-        );
         return parent;
     }
     

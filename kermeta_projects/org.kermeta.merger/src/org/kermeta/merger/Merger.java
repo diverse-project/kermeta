@@ -1,6 +1,6 @@
 
 
-/*$Id: Merger.java,v 1.5 2008-04-28 11:51:08 ftanguy Exp $
+/*$Id: Merger.java,v 1.6 2008-05-28 15:44:50 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Merger.java
 * License : EPL
@@ -92,7 +92,7 @@ public class Merger {
 		process(kermetaUnitsToMerge, outputFile, true, executable);
 	}
 	
-	public void process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean trace, boolean executable) throws URIMalformedException, IOException, NotRegisteredURIException {
+	public KermetaUnit process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean trace, boolean executable) throws URIMalformedException, IOException, NotRegisteredURIException {
 		
 		processInMemory(kermetaUnitsToMerge, outputFile, trace);
 		
@@ -111,7 +111,9 @@ public class Merger {
 		 * Creating the resource for the trace model.
 		 * 
 		 */
-		URI traceModelURI = URI.createURI( outputFile + ".traceability");
+    	int index = outputFile.lastIndexOf(".");
+    	String traceFile = outputFile.substring(0, index) + ".traceability";
+		URI traceModelURI = URI.createURI(traceFile);
 		Resource traceResource = resourceSet.createResource(traceModelURI);
 		if ( kermetaUnit.getTracer().getTraceModel() != null ) {
 			traceResource.getContents().add( kermetaUnit.getTracer().getTraceModel() );
@@ -127,6 +129,7 @@ public class Merger {
 		}
 		
 		resource.save(null);
+		return kermetaUnit;
 	}
 	
 	public KermetaUnit processInMemory(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile) throws NotRegisteredURIException, URIMalformedException, IOException {
