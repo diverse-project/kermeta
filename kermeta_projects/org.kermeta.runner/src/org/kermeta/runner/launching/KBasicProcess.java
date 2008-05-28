@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.10 2008-05-28 09:25:39 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.11 2008-05-28 11:31:01 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -98,6 +98,7 @@ public class KBasicProcess extends Process {
 	}
 	
 	public KBasicProcess(String file, boolean isConstraint, int requestPort, int eventPort, String mainClass, String mainOperation, String[] parameters, String defaultPath, List<String> classpath) throws IOException, NotRegisteredURIException, URIMalformedException {
+		_file = file;
 		initializeStreams();
 		BufferedReader inputReader = new BufferedReader( new InputStreamReader( _interpreterInputStream ) );
 		PrintStream os = new PrintStream(_interpreterOutputStream);
