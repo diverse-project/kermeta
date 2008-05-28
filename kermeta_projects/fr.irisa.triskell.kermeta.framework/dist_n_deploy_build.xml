@@ -1,29 +1,27 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.31 2008-05-28 09:20:45 ftanguy Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.32 2008-05-28 09:52:55 cfaucher Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse.home" location="/home/paco/Desktop/eclipse"/>
+	<property name="eclipse.home" location="C:/eclipse3.3.2"/>
 
 	<path id="project.class.path">
 		
 		<pathelement location="build/class"/>
 
-	  	<pathelement location="../fr.irisa.triskell.eclipse.util/bin"/>
+		<pathelement location="../fr.irisa.triskell.eclipse.util/bin"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.io/build/class"/>
 		<pathelement location="../org.kermeta.io.loader/bin"/>
 		<pathelement location="../fr.irisa.triskell.kermeta.model/build/class"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.interpreter/build/class"/>
-  		<pathelement location="../fr.irisa.triskell.traceability.model/bin"/>
+  		<pathelement location="../fr.irisa.triskell.traceability.model/build/class"/>
+  		<pathelement location="../org.eclipse.gymnast.runtime.core/bin"/>
   		<pathelement location="../org.kermeta.log4j.util/bin"/>
   		<pathelement location="../org.kermeta.merger/bin"/>
 
 	  	<pathelement location="lib/thirdparty/log4j.jar"/>
-	  	<!-- <pathelement location="lib/thirdparty/antlr.jar"/>
-	  	<pathelement location="lib/thirdparty/ldt-core.jar"/>
-	  	<pathelement location="lib/thirdparty/emfatic-core.jar"/> -->
   		
 		<fileset dir="${eclipse.home}/plugins">
 		    <include name="**/org.eclipse.emf.common_*.jar"/>
@@ -40,9 +38,9 @@
 			<include name="**/org.eclipse.ui.workbench_*.jar"/>
 			<include name="**/org.eclipse.jface_*.jar"/>
 			<include name="**/org.eclipse.swt.*.jar"/>
-			<include name="**/org.eclipse.gymnast.runtime.core_*.jar"/>
 			<include name="**/org.antlr_*.jar"/>
 			<include name="**/org.antlr_*/antlr.jar"/>
+			<include name="**/org.apache.log4j_*.jar"/>
 		</fileset>		
 	</path>
 
