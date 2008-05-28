@@ -1,4 +1,4 @@
-/*$Id: KPMPlugin.java,v 1.1 2008-05-28 09:26:14 ftanguy Exp $
+/*$Id: KPMPlugin.java,v 1.2 2008-05-28 13:37:28 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -9,7 +9,7 @@
 */
 package org.kermeta.kpm;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -21,7 +21,7 @@ public class KPMPlugin extends AbstractUIPlugin {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.kpm";
 	
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KPM");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("KPM");
 
 	// The shared instance
 	private static KPMPlugin plugin;

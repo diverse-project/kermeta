@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.17 2008-05-27 12:59:48 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.18 2008-05-28 13:37:12 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -16,7 +16,7 @@ package org.kermeta.io.printer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.model.internal.TagHelper;
@@ -113,7 +113,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 *  according to the context inside which it is (i.e typeDefintion or not typeDefinition) */
 	protected boolean typedef = true;
 	
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KM2KMT");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("KM2KMT");
 	
 	private StringBuffer content = new StringBuffer("");
 	private boolean operationPrinting = false;

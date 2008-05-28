@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.29 2008-05-27 12:59:48 dvojtise Exp $
+/* $Id: TypeCheckerContext.java,v 1.30 2008-05-28 13:37:12 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 
@@ -52,7 +52,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class TypeCheckerContext {
 
-	final static private Logger internalLog = LogConfigurationHelper.getLogger("TypeCheckerContext");
+	final static private Log internalLog = LogConfigurationHelper.getLogger("TypeCheckerContext");
 	
 	public static void initializeTypeChecker(KermetaUnit std_lib) {
 	

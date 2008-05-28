@@ -1,4 +1,4 @@
-/* $Id: KermetaCycleConstraintChecker.java,v 1.9 2008-05-27 12:59:49 dvojtise Exp $
+/* $Id: KermetaCycleConstraintChecker.java,v 1.10 2008-05-28 13:37:13 dvojtise Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -14,7 +14,7 @@ package fr.irisa.triskell.kermeta.constraintchecker;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.directedgraph.DirectedGraphClass;
@@ -38,7 +38,7 @@ public class KermetaCycleConstraintChecker {
     Hashtable<Integer, Object> nodeId2Object = new Hashtable<Integer, Object>();
     Hashtable<Object, Integer> fObject2nodeId = new Hashtable<Object, Integer>();
         
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("CycleConstraintChecker");
+    final static public Log internalLog = LogConfigurationHelper.getLogger("CycleConstraintChecker");
    
     /**
      * @param unit

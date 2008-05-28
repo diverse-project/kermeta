@@ -1,4 +1,4 @@
-/* $Id: RunInterpretedTestCase.java,v 1.9 2008-05-27 12:58:36 dvojtise Exp $
+/* $Id: RunInterpretedTestCase.java,v 1.10 2008-05-28 13:38:04 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -22,7 +22,7 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.interpreter.api.InterpreterMode;
 import org.kermeta.interpreter.api.InterpreterOptions;
@@ -39,7 +39,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
 public class RunInterpretedTestCase extends TestCase {
 
     /** Logger to get the error of this launcher */
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
+    final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
 
     protected String mainClassValue;
     protected String mainOperationValue;

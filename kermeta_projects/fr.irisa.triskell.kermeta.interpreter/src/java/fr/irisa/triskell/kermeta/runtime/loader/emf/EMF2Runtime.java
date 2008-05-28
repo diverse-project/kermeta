@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.81 2008-05-27 13:04:33 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.82 2008-05-28 13:36:26 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -17,7 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -65,7 +65,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
 public class EMF2Runtime {
 
     /** Logger to get the error of this launcher */
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.EMF2Runtime");
+    final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.EMF2Runtime");
 
     /**
      * Hashtable that contains the RuntimeObjects that host the Types of the metamodel.

@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.12 2008-05-27 12:59:48 dvojtise Exp $
+/* $Id: TypeMatchChecker.java,v 1.13 2008-05-28 13:37:12 dvojtise Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL
@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -46,7 +46,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class TypeMatchChecker {
 
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("TypeMatchChecker"); 
+	final static public Log internalLog = LogConfigurationHelper.getLogger("TypeMatchChecker"); 
 	private Collection<Binding> candidates;
 	private Collection<Dependency> dependencies;
 	private ModelType required;

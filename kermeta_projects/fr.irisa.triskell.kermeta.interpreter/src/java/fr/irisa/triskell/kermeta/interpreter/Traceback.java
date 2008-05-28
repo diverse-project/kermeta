@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.24 2008-05-27 13:02:11 dvojtise Exp $
+/* $Id: Traceback.java,v 1.25 2008-05-28 13:36:26 dvojtise Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.kermeta.io.KermetaUnit;
@@ -41,7 +41,7 @@ import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
  */
 public class Traceback {
 
-	final static public Logger log = LogConfigurationHelper.getLogger("KMT.INTERPRETER");
+	final static public Log log = LogConfigurationHelper.getLogger("KMT.INTERPRETER");
 	
     ExpressionInterpreter interpreter;
     // The precise object that caused the error (usually, a block, but the developer

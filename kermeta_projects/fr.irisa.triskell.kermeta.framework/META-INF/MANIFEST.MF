@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Framework Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.framework
 Bundle-Version: 1.1.0
-Bundle-ClassPath: lib/thirdparty/log4j.jar
 Export-Package: .
 Require-Bundle: fr.irisa.triskell.kermeta.interpreter,
  fr.irisa.triskell.kermeta.io,

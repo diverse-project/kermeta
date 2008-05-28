@@ -1,4 +1,4 @@
-/* $Id: TypeCache.java,v 1.3 2008-05-27 13:02:11 dvojtise Exp $
+/* $Id: TypeCache.java,v 1.4 2008-05-28 13:36:26 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TypeCache.java
  * License    : EPL
@@ -14,7 +14,7 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.Hashtable;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
@@ -32,7 +32,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
 public class TypeCache {
 
 
-	final static public Logger log = LogConfigurationHelper.getLogger("KMT.cache");
+	final static public Log log = LogConfigurationHelper.getLogger("KMT.cache");
 	protected Hashtable theCache =  new Hashtable();
 	
 	/**

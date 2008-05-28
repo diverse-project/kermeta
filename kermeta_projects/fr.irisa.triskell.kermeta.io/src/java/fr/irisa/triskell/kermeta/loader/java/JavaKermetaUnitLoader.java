@@ -1,6 +1,6 @@
 
 
-/*$Id: JavaKermetaUnitLoader.java,v 1.11 2008-05-27 12:59:49 dvojtise Exp $
+/*$Id: JavaKermetaUnitLoader.java,v 1.12 2008-05-28 13:37:12 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaKermetaUnitLoader.java
 * License : EPL
@@ -17,7 +17,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
@@ -41,7 +41,7 @@ public class JavaKermetaUnitLoader extends AbstractKermetaUnitLoader {
 	//	 The cache structure are there but will be filled only on request due to the memory required to keep it	
 	private JarCache jarCache;
 	
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("JarKermetaUnitLoader");
+    final static public Log internalLog = LogConfigurationHelper.getLogger("JarKermetaUnitLoader");
 
     
     public JavaKermetaUnitLoader(Map<Object, Object> options, IProgressMonitor monitor) {

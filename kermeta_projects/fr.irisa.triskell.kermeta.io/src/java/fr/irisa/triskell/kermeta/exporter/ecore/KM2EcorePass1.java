@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.60 2008-05-27 12:59:48 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.61 2008-05-28 13:37:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass1.java
  * License    : EPL
@@ -17,7 +17,7 @@ package fr.irisa.triskell.kermeta.exporter.ecore;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -69,7 +69,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class KM2EcorePass1 extends KM2Ecore {
 
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass1");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass1");
 	
 	/** The name of the currently visited element */
 	protected String current_name;

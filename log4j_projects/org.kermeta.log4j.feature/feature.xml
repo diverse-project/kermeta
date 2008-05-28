@@ -67,10 +67,9 @@ more  information on the Apache Software Foundation, please see
    </license>
 
    <plugin
-         id="org.apache.log4j"
+         id="org.kermeta.log4j.util"
          download-size="0"
          install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>

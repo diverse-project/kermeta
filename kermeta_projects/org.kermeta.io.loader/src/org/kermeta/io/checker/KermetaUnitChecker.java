@@ -1,4 +1,4 @@
-/*$Id: KermetaUnitChecker.java,v 1.4 2008-05-27 12:56:42 dvojtise Exp $
+/*$Id: KermetaUnitChecker.java,v 1.5 2008-05-28 13:39:06 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	KermetaUnitChecker.java
 * License : EPL
@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -34,7 +34,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class KermetaUnitChecker {
 
-	final static private Logger logger = LogConfigurationHelper.getLogger("LoaderPlugin");
+	final static private Log logger = LogConfigurationHelper.getLogger("LoaderPlugin");
 	
 	/**
 	 * 

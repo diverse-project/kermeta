@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.71 2008-05-27 13:01:51 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.72 2008-05-28 13:36:26 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -49,7 +49,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class Runtime2EMF {
 
-	final static public Logger internalLog = LogConfigurationHelper
+	final static public Log internalLog = LogConfigurationHelper
 			.getLogger("KMT.Runtime2EMF");
 
 	final static public String ECORE_NSURI = "http://www.eclipse.org/emf/2002/Ecore";

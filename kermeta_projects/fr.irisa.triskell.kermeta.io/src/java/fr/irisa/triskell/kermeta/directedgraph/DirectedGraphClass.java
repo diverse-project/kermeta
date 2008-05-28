@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -18,7 +18,7 @@ public class DirectedGraphClass implements DirectedGraphInterface {
 	protected KermetaUnit unit;
 	ArrayList<TypeDefinition> nodes;
 	    
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("CycleConstraintChecker");
+    final static public Log internalLog = LogConfigurationHelper.getLogger("CycleConstraintChecker");
    
     /**
      * @param unit

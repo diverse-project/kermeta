@@ -1,4 +1,4 @@
-/*$Id: JarCache.java,v 1.5 2008-05-27 12:59:49 dvojtise Exp $
+/*$Id: JarCache.java,v 1.6 2008-05-28 13:37:12 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaLoaderCache.java
 * License : EPL
@@ -16,7 +16,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 import org.kermeta.model.internal.TagHelper;
@@ -51,7 +51,7 @@ public class JarCache {
 	// structure used to optimize the retreival of java fields from a kermeta property
 	protected Hashtable<Property,Field> cachedJavaFields =  new Hashtable<Property,Field>();
 	
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("JarCache");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("JarCache");
 	
 	
 	protected KermetaUnit kermetaUnit = null;

@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.23 2008-05-27 12:59:49 dvojtise Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.24 2008-05-28 13:37:13 dvojtise Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -14,7 +14,7 @@ package fr.irisa.triskell.kermeta.constraintchecker;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
@@ -43,7 +43,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
     
         
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("ConstraintChecker");
+    final static public Log internalLog = LogConfigurationHelper.getLogger("ConstraintChecker");
    
     public static final String NAME_ERROR = "An element is unnamed";
 	public static final String CONSTRAINT_ERROR = "The stereotype of a constraint is erroneous";

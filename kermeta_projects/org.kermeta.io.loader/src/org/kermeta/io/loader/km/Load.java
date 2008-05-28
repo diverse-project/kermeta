@@ -1,6 +1,6 @@
 
 
-/*$Id: Load.java,v 1.3 2008-04-28 11:50:48 ftanguy Exp $
+/*$Id: Load.java,v 1.4 2008-05-28 13:39:06 dvojtise Exp $
 * Project : org.kermeta.io.loader
 * File : 	Load.java
 * License : EPL
@@ -35,12 +35,17 @@ public class Load extends KMLoadingAction {
 		Resource r = datas.getKermetaUnit().getModelingUnit().eResource();
 		if ( r !=null ) {
 			URI uri = getTraceURI( r );
-			ResourceSet rs = r.getResourceSet();
-			try {
-				Resource traceResource = rs.getResource(uri, true);
-				Tracer tracer = new Tracer(traceResource);
-				datas.getKermetaUnit().setTracer( tracer );
-			} catch (RuntimeException e) {}
+			if(uri != null){
+				ResourceSet rs = r.getResourceSet();
+				try {
+					Resource traceResource = rs.getResource(uri, true);
+					Tracer tracer = new Tracer(traceResource);
+					datas.getKermetaUnit().setTracer( tracer );
+				} catch (RuntimeException e) {}
+			}
+			else {
+				// No traceURI for this resource			
+			}
 		}
 		
 		

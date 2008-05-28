@@ -1,4 +1,4 @@
-/* $Id: LogConfigurationHelper.java,v 1.1 2008-05-26 14:53:44 dvojtise Exp $
+/* $Id: LogConfigurationHelper.java,v 1.2 2008-05-28 13:33:20 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : LogConfigurationHelper.java
  * License    : EPL
@@ -15,7 +15,9 @@ package org.kermeta.log4j.util;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.impl.LogFactoryImpl;
 
 /**
  * Some usefull methods relative to configuration of log4j
@@ -23,7 +25,7 @@ import org.apache.log4j.Logger;
  */
 public class LogConfigurationHelper {
 
-	static private boolean isConfigured=false; 
+	static private boolean isLog4JConfigured=false; 
 	
 	/**
 	 * <code>DefaultKermetaConfigurationFilePropertyName</code> = "kermeta.log4j.configurationfile.name"
@@ -35,12 +37,12 @@ public class LogConfigurationHelper {
 	 * @param configurationFilePropertyName name of a property that contains the configuration file name
 	 * Configure the log4J system using the value defined by the given property
 	 */
-	static public void configureLogger(String configurationFilePropertyName)
+	static public void configureLog4JLogger(String configurationFilePropertyName)
 	{
 	    String filePath = "";
     	File logConfigurationFile;
 
-		Logger logger=null;
+		org.apache.log4j.Logger logger=null;
     	// try to find the given property.
     	String propertyValue = System.getProperty(configurationFilePropertyName);
     	if (propertyValue != null && propertyValue.length() > 0)
@@ -51,22 +53,22 @@ public class LogConfigurationHelper {
     	        try {
                     filePath = logConfigurationFile.getCanonicalPath();
                 } catch (IOException e) {
-                    Logger.getRootLogger().warn("Unable to retreive CanonicalPath of "+propertyValue);             		
+                	org.apache.log4j.Logger.getRootLogger().warn("Unable to retreive CanonicalPath of "+propertyValue);             		
                 }
     		}
     	}
     	if( filePath =="")
     	{
     		org.apache.log4j.BasicConfigurator.configure();
-    		Logger.getRootLogger().warn("not able to retrieve log4jconfiguration file; check the system property "+ configurationFilePropertyName+ "=\""+propertyValue +"\""); 
-    		Logger.getRootLogger().warn("using default configuration (ie. all messages on the console)");
+    		org.apache.log4j.Logger.getRootLogger().warn("not able to retrieve log4jconfiguration file; check the system property "+ configurationFilePropertyName+ "=\""+propertyValue +"\""); 
+    		org.apache.log4j.Logger.getRootLogger().warn("using default log4j configuration (ie. all messages on the console)");
     	}
     	else
     	{
     		org.apache.log4j.xml.DOMConfigurator.configure(filePath);
-    		Logger.getRootLogger().info("log4j "+ (isConfigured ? "(re)" : "") + "configured with "+filePath);
+    		org.apache.log4j.Logger.getRootLogger().info("log4j "+ (isLog4JConfigured ? "(re)" : "") + "configured with "+filePath);
     	}
-		isConfigured = true;
+    	isLog4JConfigured = true;
 	}
 	/**
 	 * @param configurationFilePropertyName name of a property that contains the configuration file name
@@ -76,16 +78,35 @@ public class LogConfigurationHelper {
 	 * Eventually configures the log system according to the given system property
 	 * !!! if it was already configured and you want to change it, you must call configureLogger explicitly  
 	 */
-	static public Logger getLogger(String configurationFilePropertyName, String loggerName)
+	static public Log getLogger(String configurationFilePropertyName, String loggerName)
 	{	
-	    Logger logger=null;
-		if (!isConfigured) configureLogger(DefaultKermetaConfigurationFilePropertyName);
-		logger=Logger.getLogger(loggerName);
+		String logClassName = null;
+		try {
+            logClassName = System.getProperty(LogFactoryImpl.LOG_PROPERTY);
+        } catch (SecurityException e) {
+            ;
+        }
+	    Log logger=null;
+	    try{
+	    	if (!isLog4JConfigured) configureLog4JLogger(DefaultKermetaConfigurationFilePropertyName);
+	    	// log4j seems ok, configure apache.commons.logging with log4j 
+	    	System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.Log4JLogger");
+	    }catch(java.lang.LinkageError le){
+	    	// conflict in log4j.jar in this platform
+	    	// fall back to original stantard logger or SimpleLog
+	    	if((logClassName != null && logClassName.equals("org.apache.commons.logging.impl.Log4JLogger")) || logClassName == null){
+				System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.SimpleLog");
+				//System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.Jdk14Logger");
+	    	}
+
+	    }
+		logger = LogFactory.getLog(loggerName);
+		/*logger=org.apache.log4j.Logger.getLogger(loggerName);
 		if (logger == null)
 		{
 		    logger = Logger.getRootLogger();
 			logger.warn("unable to retreive logger for " + loggerName + "; using Root logger instead");
-		}
+		}*/
 		return logger; 
 	}
 	
@@ -93,17 +114,17 @@ public class LogConfigurationHelper {
 	 * @param loggerName name of a logger inside the configuration
 	 * @return a logger
 	 * If the logger systeme was not configured it configures it with the one defined by the DefaultKermetaConfigurationFilePropertyName system property
-	 * 
+	 * If possible use a log4j logger, if not, fall back using apache.commons fallback logger
 	 * @see  <code>DefaultKermetaConfigurationFilePropertyName</code>
 	 */
-	static public Logger getLogger(String loggerName)
+	static public Log getLogger(String loggerName)
 	{
 	    return getLogger(DefaultKermetaConfigurationFilePropertyName, loggerName);		
 	}
     /**
      * @return Returns the isConfigured.
      */
-    public static boolean isConfigured() {
-        return isConfigured;
+    public static boolean isLog4JConfigured() {
+        return isLog4JConfigured;
     }
 }

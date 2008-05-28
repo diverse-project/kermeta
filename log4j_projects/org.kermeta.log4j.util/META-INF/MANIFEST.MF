@@ -7,7 +7,8 @@ Bundle-Activator: org.kermeta.log4j.util.plugin.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.apache.log4j;visibility:=reexport
+ org.apache.commons.logging;visibility:=reexport,
+ org.apache.log4j
 Eclipse-LazyStart: true
 Export-Package: 
  org.kermeta.log4j.util,

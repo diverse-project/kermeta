@@ -1,4 +1,4 @@
-/* $Id: TestJavaCall.java,v 1.2 2008-05-27 12:58:35 dvojtise Exp $
+/* $Id: TestJavaCall.java,v 1.3 2008-05-28 13:38:04 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
  * License    : EPL
@@ -14,7 +14,7 @@ package fr.irisa.triskell.kermeta.interpreter.test;
 
 import junit.framework.TestCase;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
@@ -37,7 +37,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class TestJavaCall extends TestCase{
     
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("test.JavaCall");
+    final static public Log internalLog = LogConfigurationHelper.getLogger("test.JavaCall");
 	
     static private int callCounter = 0;
     static private int lastCallCounter = 0;

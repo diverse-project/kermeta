@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.3 2008-05-27 13:02:12 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.4 2008-05-28 13:36:27 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : EPL
@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -77,7 +77,7 @@ public class RunCommandLine {
     protected boolean logExecutionTime = false;
     
 	/** Logger to get the error of this launcher */
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
 
     public RunCommandLine(String[] args) {
 	    super();

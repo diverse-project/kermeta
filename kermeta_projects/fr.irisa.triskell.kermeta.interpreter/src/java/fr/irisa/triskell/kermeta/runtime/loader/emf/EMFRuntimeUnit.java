@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.66 2008-05-27 13:01:51 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.67 2008-05-28 13:36:26 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -18,7 +18,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -105,7 +105,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     protected QualifiedNamePatcher qualifiedNamePatcher;
 
     /** Logger to get the error of this launcher */
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.EMFRuntime");
+    final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.EMFRuntime");
     
     /**
      * NOTE : this constructor should not been called directly by client.

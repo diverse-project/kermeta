@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.35 2008-05-27 12:59:48 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.36 2008-05-28 13:37:12 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -16,7 +16,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -39,7 +39,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class KermetaTypeChecker {
     
-	final static private Logger internalLog = LogConfigurationHelper.getLogger("TypeChecker");	
+	final static private Log internalLog = LogConfigurationHelper.getLogger("TypeChecker");	
 	
     protected KermetaUnit unit;
    

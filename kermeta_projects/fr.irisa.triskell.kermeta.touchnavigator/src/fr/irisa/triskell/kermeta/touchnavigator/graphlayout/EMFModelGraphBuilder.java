@@ -1,4 +1,4 @@
-/* $Id: EMFModelGraphBuilder.java,v 1.5 2008-05-27 12:57:52 dvojtise Exp $
+/* $Id: EMFModelGraphBuilder.java,v 1.6 2008-05-28 13:39:34 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -13,7 +13,7 @@ package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -49,7 +49,7 @@ public class EMFModelGraphBuilder extends KermetaOptimizedVisitor{
     protected ModelGraphMapping modelGraphMapping = new ModelGraphMapping();
         
 	
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("EMFModelGraphBuilder");
+    final static public Log internalLog = LogConfigurationHelper.getLogger("EMFModelGraphBuilder");
 	
 	
 	public EMFModelGraphBuilder(TGPanel newtgPanel, Resource res) {

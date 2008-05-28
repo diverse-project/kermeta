@@ -1,4 +1,4 @@
-/*$Id: RunnerPlugin.java,v 1.3 2008-05-27 12:55:25 dvojtise Exp $
+/*$Id: RunnerPlugin.java,v 1.4 2008-05-28 13:39:19 dvojtise Exp $
 * Project : org.kermeta.runner
 * File : 	zgzerg.java
 * License : EPL
@@ -9,7 +9,7 @@
 */
 package org.kermeta.runner;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -27,7 +27,7 @@ public class RunnerPlugin extends AbstractUIPlugin {
 	private static RunnerPlugin plugin;
 	
 	/** Logger to get the error of this interpreter */
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("kermeta.runner");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("kermeta.runner");
 	
 	/**
 	 * The constructor

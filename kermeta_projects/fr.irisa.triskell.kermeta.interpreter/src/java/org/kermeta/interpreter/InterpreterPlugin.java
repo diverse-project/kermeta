@@ -1,6 +1,6 @@
 package org.kermeta.interpreter;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.Plugin;
 
 import org.kermeta.log4j.util.LogConfigurationHelper;
@@ -8,7 +8,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
 public class InterpreterPlugin extends Plugin {
 
 	/** Logger to get the error of this interpreter */
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("kermeta.interpreter");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("kermeta.interpreter");
 
 	static private InterpreterPlugin _instance;
 	

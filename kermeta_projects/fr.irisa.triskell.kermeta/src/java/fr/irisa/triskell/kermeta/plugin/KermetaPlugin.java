@@ -1,6 +1,6 @@
 package fr.irisa.triskell.kermeta.plugin;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -29,7 +29,7 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	//Icons "registry"
 	protected static KermetaIcons kermetaIcons;
 	// Logger for this plugin
-	protected static Logger pluginLog;
+	protected static Log pluginLog;
 	
 	private IOConsole console = null;
 	
@@ -78,7 +78,7 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	/**	 
 	 * @return Logger : a log4j logger
 	 */
-	public static Logger getLogger()
+	public static Log getLogger()
 	{
 		if(pluginLog == null) pluginLog = LogConfigurationHelper.getLogger("Kermeta");
 		return pluginLog;

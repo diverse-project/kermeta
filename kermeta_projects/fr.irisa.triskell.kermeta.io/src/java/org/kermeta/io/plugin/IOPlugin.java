@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.39 2008-05-28 10:05:59 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.40 2008-05-28 13:37:13 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -14,7 +14,7 @@ package org.kermeta.io.plugin;
 
 import java.io.File;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
@@ -76,7 +76,7 @@ public class IOPlugin extends Plugin {
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.io";
 	
 	// The logger for this plugin
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("IO");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("IO");
 
 	// The shared instance
 	private static IOPlugin plugin;

@@ -1,6 +1,6 @@
 package org.kermeta.merger;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
@@ -20,7 +20,7 @@ public class MergerPlugin extends Plugin {
 	private static MergerPlugin plugin;
 	
 	// Log4j logger for this plugin
-	final static public Logger log4jLogger = LogConfigurationHelper.getLogger("MergerPlugin");	
+	final static public Log log4jLogger = LogConfigurationHelper.getLogger("MergerPlugin");	
 
 	
 	/**

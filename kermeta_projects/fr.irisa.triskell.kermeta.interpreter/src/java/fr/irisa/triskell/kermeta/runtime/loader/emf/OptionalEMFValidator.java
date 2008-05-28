@@ -1,4 +1,4 @@
-/* $Id: OptionalEMFValidator.java,v 1.4 2008-04-28 11:50:56 ftanguy Exp $
+/* $Id: OptionalEMFValidator.java,v 1.5 2008-05-28 13:36:26 dvojtise Exp $
  * Project   : Kermeta 
  * File      : OptionalEMFValidator.java
  * License   : EPL
@@ -9,7 +9,7 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,10 +26,10 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
  */
 public class OptionalEMFValidator {
 	
-	public Logger internalLog;
+	public Log internalLog;
 	protected RuntimeMemory runtimeMemory;
 	
-	public OptionalEMFValidator(Logger logger, RuntimeMemory rMemory){
+	public OptionalEMFValidator(Log logger, RuntimeMemory rMemory){
 		internalLog = logger;
 		runtimeMemory = rMemory;
 	}

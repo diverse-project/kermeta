@@ -4,7 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Hashtable;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -28,7 +28,7 @@ public class KermetaUIPlugin extends AbstractUIPlugin {
 	
 
 	// Log4j logger for this plugin
-	final static public Logger log4jLogger = LogConfigurationHelper.getLogger("KermetaUIPlugin");
+	final static public Log log4jLogger = LogConfigurationHelper.getLogger("KermetaUIPlugin");
 	
 	// The shared instance
 	private static KermetaUIPlugin plugin;

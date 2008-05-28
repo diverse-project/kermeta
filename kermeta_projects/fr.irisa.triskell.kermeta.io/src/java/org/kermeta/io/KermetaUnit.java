@@ -2,13 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.21 2008-05-27 12:59:49 dvojtise Exp $
+ * $Id: KermetaUnit.java,v 1.22 2008-05-28 13:37:13 dvojtise Exp $
  */
 package org.kermeta.io;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -73,7 +73,7 @@ public interface KermetaUnit extends EObject {
 	 * 
 	 * @generated NOT
 	 */
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("Kermeta Unit");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("Kermeta Unit");
 	
 	/**
 	 * Returns the value of the '<em><b>Storer</b></em>' container reference.

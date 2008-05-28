@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
@@ -49,7 +49,7 @@ public class LoaderPlugin extends Plugin {
 	private static LoaderPlugin plugin;
 	
 	// Log4j logger for this plugin
-	final static public Logger log = LogConfigurationHelper.getLogger("LoaderPlugin");
+	final static public Log log = LogConfigurationHelper.getLogger("LoaderPlugin");
 
 	/**		A boolean that tells wether the plugin has been initialized or not.		*/
 	static private boolean INITIALIZED = false;

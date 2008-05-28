@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.9 2008-05-27 12:58:36 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.10 2008-05-28 13:38:04 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -13,7 +13,7 @@ package kermeta_interpreter.constraint_test;
 
 import junit.framework.TestSuite;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
@@ -27,7 +27,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class JunitTestSuite extends TestSuite {
 
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("JunitTestSuite");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("JunitTestSuite");
     RunJunitFactory runfactory = new RunJunitFactory();
     
     static private IOPlugin ioPlugin;
@@ -36,7 +36,7 @@ public class JunitTestSuite extends TestSuite {
     	System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
     	"../fr.irisa.triskell.kermeta.model/kermeta_log4j_configuration.xml");
     	// reload conf in case iwas loaded befaore with another configuration
-    	org.kermeta.log4j.util.LogConfigurationHelper.configureLogger(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName);
+    	org.kermeta.log4j.util.LogConfigurationHelper.configureLog4JLogger(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName);
     	
     	if ( ioPlugin == null ) {
 		

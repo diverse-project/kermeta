@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.16 2008-05-27 12:59:49 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.17 2008-05-28 13:37:13 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -16,7 +16,7 @@ import java.lang.reflect.WildcardType;
 import java.util.Hashtable;
 import java.util.jar.JarEntry;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -35,7 +35,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public abstract class Jar2KMPass {
 	protected KermetaUnit builder;
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("Jar2KM");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("Jar2KM");
 	
 	final static public String JARUNIT_TAG_NAME = "IsProxyForJar";
 	final static public String INITOPERATION_TAG_NAME = "IsInitOperation";

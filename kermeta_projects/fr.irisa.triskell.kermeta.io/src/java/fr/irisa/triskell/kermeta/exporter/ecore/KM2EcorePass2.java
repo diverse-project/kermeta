@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.55 2008-05-27 12:59:48 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.56 2008-05-28 13:37:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass2.java
  * License    : EPL
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -81,7 +81,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
  */
 public class KM2EcorePass2 extends KM2Ecore {
 
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass2");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass2");
 	
 	protected Package currentPackage;
 	
