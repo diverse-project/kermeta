@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProcDeclarationImpl.java,v 1.2 2007-05-31 17:03:56 ffleurey Exp $
+ * $Id: ProcDeclarationImpl.java,v 1.3 2008-05-29 12:09:36 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -74,7 +74,7 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 	 * @generated
 	 * @ordered
 	 */
-	protected EList args = null;
+	protected EList args;
 
 	/**
 	 * The cached value of the '{@link #getBlock() <em>Block</em>}' containment reference.
@@ -84,7 +84,7 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 	 * @generated
 	 * @ordered
 	 */
-	protected Block block = null;
+	protected Block block;
 
 	/**
 	 * The cached value of the '{@link #getProcCall() <em>Proc Call</em>}' reference list.
@@ -94,7 +94,7 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 	 * @generated
 	 * @ordered
 	 */
-	protected EList procCall = null;
+	protected EList procCall;
 
 	/**
 	 * <!-- begin-user-doc -->

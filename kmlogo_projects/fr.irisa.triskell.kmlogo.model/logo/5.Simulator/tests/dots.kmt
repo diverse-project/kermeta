@@ -1,0 +1,21 @@
+/* $Id: dots.kmt,v 1.2 2008-05-29 12:09:36 vmahe Exp $
+ * Creation date: May 4, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "kmLogo::Main"
+@mainOperation "main"
+
+package kmLogo;
+
+require kermeta
+require "../LogoSimulator.kmt"
+
+class Main
+{
+	operation main() : Void is do 
+		var simulator : Interpreter init Interpreter.new
+		simulator.execute("platform:/resource/fr.irisa.triskell.kmlogo.model/logo/1.MetaModel/models/dots.asmlogo")
+	end
+}

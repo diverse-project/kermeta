@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmLogoPackage.java,v 1.1 2007-05-30 13:23:35 ffleurey Exp $
+ * $Id: KmLogoPackage.java,v 1.2 2008-05-29 12:09:42 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo;
 
@@ -39,7 +39,7 @@ public interface KmLogoPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://kmLogo.ecore";
+	String eNS_URI = "http://www.kermeta.org/kmLogo";
 
 	/**
 	 * The package namespace name.

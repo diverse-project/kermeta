@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmLogoFactoryImpl.java,v 1.1 2007-05-30 13:23:35 ffleurey Exp $
+ * $Id: KmLogoFactoryImpl.java,v 1.2 2008-05-29 12:09:47 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.impl;
 
@@ -32,7 +32,7 @@ public class KmLogoFactoryImpl extends EFactoryImpl implements KmLogoFactory {
 	 */
 	public static KmLogoFactory init() {
 		try {
-			KmLogoFactory theKmLogoFactory = (KmLogoFactory)EPackage.Registry.INSTANCE.getEFactory("http://kmLogo.ecore"); 
+			KmLogoFactory theKmLogoFactory = (KmLogoFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kmLogo"); 
 			if (theKmLogoFactory != null) {
 				return theKmLogoFactory;
 			}

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<VM:Turtle xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:VM="http://kmLogo.ecore/VM" xsi:schemaLocation="http://kmLogo.ecore/VM VMLogo.ecore#//VM" position="//@points.0" heading="90" penUp="false">
-  <drawings origin="//@points.0" destination="//@points.1"/>
-  <points/>
-  <points x="100" y="100"/>
-</VM:Turtle>

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterCallItemProvider.java,v 1.1 2007-09-14 08:19:39 ffleurey Exp $
+ * $Id: ParameterCallItemProvider.java,v 1.2 2008-05-29 12:09:21 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.provider;
 
@@ -122,8 +122,8 @@ public class ParameterCallItemProvider
 	}
 
 	/**
-	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-	 * describing all of the children that can be created under this object.
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

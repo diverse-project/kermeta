@@ -1,0 +1,53 @@
+/* $Id: LogoSimulator.kmt,v 1.2 2008-05-29 12:09:38 vmahe Exp $
+ * Creation date: May 30, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package kmLogo;
+
+require kermeta
+require "LogoDynSemantics.kmt"
+require "../4.VirtualMachine/TurtleControler.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using kermeta::io
+using kmLogo::controler
+
+
+class Interpreter 
+{
+	attribute context : Context
+	reference root : ASM::Instruction
+	
+	operation execute(uri : String) is
+	do
+		// create a new context
+		context := Context.new
+		context.reset
+		
+		// load the program
+		root := loadProgram(uri)
+		
+		// create and initialize the GUI
+		var controler : TurtleControler init TurtleControler.new
+		controler.initialize(context.turtle)
+		
+		// run the program
+		root.eval(context)
+
+		// update the GUI
+		controler.modelChanged
+	end
+	
+	operation loadProgram(uri : String) : ASM::Instruction is do
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.getResource(uri)
+        result ?= resource.instances.one  
+	end
+	
+}
+

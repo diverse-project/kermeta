@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProcCallImpl.java,v 1.3 2007-05-31 17:03:56 ffleurey Exp $
+ * $Id: ProcCallImpl.java,v 1.4 2008-05-29 12:09:36 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -50,7 +50,7 @@ public class ProcCallImpl extends ExpressionImpl implements ProcCall {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList actualArgs = null;
+	protected EList actualArgs;
 
 	/**
 	 * The cached value of the '{@link #getDeclaration() <em>Declaration</em>}' reference.
@@ -60,7 +60,7 @@ public class ProcCallImpl extends ExpressionImpl implements ProcCall {
 	 * @generated
 	 * @ordered
 	 */
-	protected ProcDeclaration declaration = null;
+	protected ProcDeclaration declaration;
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMItemProviderAdapterFactory.java,v 1.1 2007-09-14 08:19:39 ffleurey Exp $
+ * $Id: ASMItemProviderAdapterFactory.java,v 1.2 2008-05-29 12:09:21 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.provider;
 
@@ -72,7 +72,7 @@ public class ASMItemProviderAdapterFactory extends ASMAdapterFactory implements 
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);		
+		supportedTypes.add(IItemPropertySource.class);
 	}
 
 	/**

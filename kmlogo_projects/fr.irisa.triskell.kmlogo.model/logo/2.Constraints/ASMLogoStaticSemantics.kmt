@@ -1,0 +1,12 @@
+package kmLogo::ASM;
+require kermeta
+require "http://www.kermeta.org/kmLogo"
+using kermeta::standard
+@aspect "true"
+class ProcDeclaration{
+inv unique_names_for_formal_arguments is
+do
+args.forAll{ a1 | args.forAll{ a2 | a1.name.equals(a2.name).~not.~or(a1.equals(a2))
+}}
+end
+}

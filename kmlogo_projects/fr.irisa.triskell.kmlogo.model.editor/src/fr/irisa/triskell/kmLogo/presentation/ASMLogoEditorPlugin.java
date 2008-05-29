@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMLogoEditorPlugin.java,v 1.1 2007-09-14 08:20:42 ffleurey Exp $
+ * $Id: ASMLogoEditorPlugin.java,v 1.2 2008-05-29 12:09:51 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.presentation;
 
@@ -43,8 +43,8 @@ public final class ASMLogoEditorPlugin extends EMFPlugin {
 	 */
 	public ASMLogoEditorPlugin() {
 		super
-		  (new ResourceLocator [] {
-		   });
+			(new ResourceLocator [] {
+			});
 	}
 
 	/**
@@ -84,7 +84,7 @@ public final class ASMLogoEditorPlugin extends EMFPlugin {
 		 */
 		public Implementation() {
 			super();
-
+	
 			// Remember the static instance.
 			//
 			plugin = this;

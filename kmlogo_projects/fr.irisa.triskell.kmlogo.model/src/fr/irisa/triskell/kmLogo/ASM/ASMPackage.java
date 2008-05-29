@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMPackage.java,v 1.3 2007-05-31 17:03:57 ffleurey Exp $
+ * $Id: ASMPackage.java,v 1.4 2008-05-29 12:09:46 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM;
 
@@ -41,7 +41,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://kmLogo.ecore/ASM";
+	String eNS_URI = "http://www.kermeta.org/kmLogo/ASM";
 
 	/**
 	 * The package namespace name.

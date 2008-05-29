@@ -5,14 +5,14 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2007-09-14 08:19:39 ffleurey Exp $
+ $Id: plugin.xml,v 1.2 2008-05-29 12:09:22 vmahe Exp $
 -->
 
 <plugin>
     
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory 
-       uri = "http://kmLogo.ecore/ASM" 
+       uri = "http://www.kermeta.org/kmLogo/ASM" 
        class = "fr.irisa.triskell.kmLogo.ASM.provider.ASMItemProviderAdapterFactory" 
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider

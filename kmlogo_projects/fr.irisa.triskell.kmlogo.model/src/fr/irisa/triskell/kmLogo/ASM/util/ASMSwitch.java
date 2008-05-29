@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMSwitch.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
+ * $Id: ASMSwitch.java,v 1.3 2008-05-29 12:09:43 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.util;
 
@@ -314,13 +314,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Instruction</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Instruction</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Instruction</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Instruction</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -329,13 +329,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Primitive</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Primitive</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Primitive</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Primitive</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -344,13 +344,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Back</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Back</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Back</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Back</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -359,13 +359,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Forward</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Forward</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Forward</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Forward</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -374,13 +374,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Left</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Left</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Left</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Left</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -389,13 +389,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Right</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Right</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Right</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Right</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -404,13 +404,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Pen Down</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Pen Down</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Pen Down</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Pen Down</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -419,13 +419,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Pen Up</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Pen Up</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Pen Up</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Pen Up</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -434,13 +434,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Clear</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Clear</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Clear</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Clear</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -449,13 +449,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -464,13 +464,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Binary Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Binary Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Binary Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Binary Exp</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -479,13 +479,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Constant</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Constant</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Constant</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Constant</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -494,13 +494,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Proc Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Proc Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Proc Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Proc Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -509,13 +509,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Proc Declaration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Proc Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Proc Declaration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Proc Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -524,13 +524,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Block</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Block</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Block</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Block</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -539,13 +539,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>If</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>If</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>If</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>If</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -554,13 +554,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Control Structure</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Control Structure</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Control Structure</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Control Structure</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -569,13 +569,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Repeat</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Repeat</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Repeat</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Repeat</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -584,13 +584,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>While</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>While</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>While</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>While</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -599,13 +599,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Parameter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Parameter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -614,13 +614,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Parameter Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Parameter Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -629,13 +629,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Plus</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Plus</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Plus</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Plus</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -644,13 +644,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Minus</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Minus</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Minus</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Minus</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -659,13 +659,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Mult</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Mult</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Mult</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Mult</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -674,13 +674,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Div</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Div</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Div</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Div</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -689,13 +689,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Equals</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Equals</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Equals</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Equals</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -704,13 +704,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Greater</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Greater</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Greater</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Greater</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -719,13 +719,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Lower</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Lower</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Lower</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Lower</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -734,13 +734,13 @@ public class ASMSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */

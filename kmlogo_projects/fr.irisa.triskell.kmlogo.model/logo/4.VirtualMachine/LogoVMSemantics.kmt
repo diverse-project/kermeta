@@ -1,0 +1,84 @@
+package kmLogo;
+
+require kermeta
+
+require "VMLogo.ecore"
+require "../3.JavaInterfaces/Math.kmt"
+require "TurtleControler.kmt"
+
+using kermeta::standard
+using kermeta::utils
+
+/**
+ * Implementation of the Logo Virtual Machine
+ */
+package VM {
+
+	aspect class Turtle
+	{
+	
+		attribute math : Math::Math 
+
+		operation reset() is do
+			math := Math::Math.new
+			position := Point.new
+			position.x := 0
+			position.y := 0
+			heading := 0
+			penUp := true
+			drawings.clear
+		end
+				
+		operation setPenUp(b : Boolean) is do
+			penUp := b
+		end
+		
+		operation rotate(angle : Integer)  is do
+			heading := (heading + angle).mod(360)
+		end
+	
+		operation move(dx : Integer, dy : Integer)  is do
+			var newPos : Point init position.getDelta(dx,dy)
+			if penUp then
+				stdio.writeln("Turtle move to "+ newPos.toString)
+			else
+				stdio.writeln("Turtle trace to "+ newPos.toString)
+				var trace : Segment init Segment.new
+				trace.make(position,newPos)
+				drawings.add(trace)
+			end
+			position := newPos
+		end
+			
+		operation forward(steps : Integer)  is do
+		    var radian : Real init math.toRadians(heading.toReal) 
+			move(scale(steps,math.sin(radian)), scale(steps,math.cos(radian)))
+		end
+		/*
+		* scale the "steps" by factor and round the result
+		*/
+		operation scale(steps : Integer, factor : Real) : Integer is do
+			result := ((steps.toReal * factor)).toInteger
+		end
+	}
+	
+	aspect class Point
+	{
+		operation getDelta(dx : Integer, dy : Integer) : Point is do
+			result := Point.new
+			result.x := x + dx
+			result.y := y + dy			
+		end
+		method toString() : String is do
+			result := "[" + x.toString + "," + y.toString + "]"
+		end
+	}
+	
+	aspect class Segment
+	{
+		operation make (orig : Point, dest : Point) is do
+			origin := orig
+			destination := dest
+		end
+	}
+}

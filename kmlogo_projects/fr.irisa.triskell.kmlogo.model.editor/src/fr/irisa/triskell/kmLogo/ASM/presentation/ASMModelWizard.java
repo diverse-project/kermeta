@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMModelWizard.java,v 1.1 2007-09-14 08:20:41 ffleurey Exp $
+ * $Id: ASMModelWizard.java,v 1.2 2008-05-29 12:09:51 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.presentation;
 
@@ -224,7 +224,7 @@ public class ASMModelWizard extends Wizard implements INewWizard {
 
 							// Get the URI of the model file.
 							//
-							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString());
+							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString(), true);
 
 							// Create a resource for this file.
 							//
@@ -385,8 +385,7 @@ public class ASMModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
-			Composite composite = new Composite(parent, SWT.NONE);
-			{
+			Composite composite = new Composite(parent, SWT.NONE); {
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 1;
 				layout.verticalSpacing = 12;

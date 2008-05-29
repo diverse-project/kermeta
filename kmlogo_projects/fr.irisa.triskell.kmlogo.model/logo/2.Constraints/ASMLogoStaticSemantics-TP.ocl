@@ -1,0 +1,11 @@
+package kmLogo::ASM
+
+
+context ProcDeclaration 
+inv unique_names_for_formal_arguments :
+		args->forAll ( a1 | args->forAll ( a2 | a1.name = a2.name implies a1 = a2 ))
+
+-- TODO: Add a constraint to check that each procedure call provide
+--       the appropriate number of arguments
+
+endpackage

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RightImpl.java,v 1.2 2007-05-31 17:03:56 ffleurey Exp $
+ * $Id: RightImpl.java,v 1.3 2008-05-29 12:09:36 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -41,7 +41,7 @@ public class RightImpl extends PrimitiveImpl implements Right {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression angle = null;
+	protected Expression angle;
 
 	/**
 	 * <!-- begin-user-doc -->

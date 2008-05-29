@@ -1,0 +1,14 @@
+
+TO carre :size :size
+	REPEAT 4 [
+		FORWARD :size
+		RIGHT 90
+	]
+END
+
+CLEAR
+
+PENDOWN
+$carre(50, 100)
+PENUP
+

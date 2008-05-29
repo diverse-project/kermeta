@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ControlStructureImpl.java,v 1.2 2007-05-31 17:03:57 ffleurey Exp $
+ * $Id: ControlStructureImpl.java,v 1.3 2008-05-29 12:09:36 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -42,7 +42,7 @@ public class ControlStructureImpl extends InstructionImpl implements ControlStru
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression condition = null;
+	protected Expression condition;
 
 	/**
 	 * <!-- begin-user-doc -->

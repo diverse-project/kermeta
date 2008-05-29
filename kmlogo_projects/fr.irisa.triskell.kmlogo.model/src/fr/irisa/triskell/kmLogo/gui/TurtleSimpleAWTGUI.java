@@ -1,4 +1,4 @@
-/* $Id: TurtleSimpleAWTGUI.java,v 1.6 2007-06-01 09:58:39 ffleurey Exp $
+/* $Id: TurtleSimpleAWTGUI.java,v 1.7 2008-05-29 12:09:43 vmahe Exp $
  * Project    : fr.irisa.triskell.kmLogo
  * File       : TurtleSimpleAWTGUI.java
  * License    : EPL
@@ -56,6 +56,7 @@ public class TurtleSimpleAWTGUI extends JFrame  implements ITurtleGUI {
 	}
 
 	public void drawTurtle(int x, int y, double angle, boolean isPenUp) {
+		angle = angle * Math.PI / 180 - Math.PI/2;
 		int nPoints = 4;
 		int xPoints[] = new int[nPoints];
 		int yPoints[] = new int[nPoints];

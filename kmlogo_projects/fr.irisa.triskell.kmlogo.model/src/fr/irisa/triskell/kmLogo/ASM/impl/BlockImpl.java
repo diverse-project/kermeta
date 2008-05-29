@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BlockImpl.java,v 1.2 2007-05-31 17:03:57 ffleurey Exp $
+ * $Id: BlockImpl.java,v 1.3 2008-05-29 12:09:36 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -46,7 +46,7 @@ public class BlockImpl extends InstructionImpl implements Block {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList instructions = null;
+	protected EList instructions;
 
 	/**
 	 * <!-- begin-user-doc -->

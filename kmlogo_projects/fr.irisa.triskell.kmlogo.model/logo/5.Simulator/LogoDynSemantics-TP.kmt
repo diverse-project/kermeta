@@ -1,0 +1,236 @@
+/* $Id: LogoDynSemantics-TP.kmt,v 1.2 2008-05-29 12:09:38 vmahe Exp $
+ * Creation date: May 30, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package kmLogo;
+
+require kermeta
+require "../1.MetaModel/ASMLogo.ecore"
+require "../4.VirtualMachine/LogoVMSemantics.kmt"
+
+using kermeta::standard
+using kermeta::utils
+
+
+class Bindings inherits Hashtable<String,Integer> {}
+
+class Context  {
+	attribute stack : Stack<Bindings> 
+	reference turtle : VM::Turtle
+	
+	operation reset() is do
+		stack := Stack<Bindings>.new()
+		turtle := VM::Turtle.new()
+		turtle.reset
+	end
+	
+	operation pushFrame (frame : Bindings) is do
+		stack.push(frame)
+	end
+	
+	operation popFrame() : Bindings is do
+		result := stack.pop
+	end
+	
+	operation peekFrame() : Bindings is do
+		result := stack.peek
+	end
+}
+
+
+/**
+ * Implementation of the Abstract Syntactic Model
+ */
+package ASM {
+
+	aspect class Instruction 
+	{
+		operation eval(context : Context) : Integer is do
+			result := 0
+		end
+	}
+	
+	aspect class Constant
+	{
+		method eval(context : Context) : Integer is do 
+			result := integerValue
+		end 
+	}
+	
+	aspect class ParameterCall
+	{
+		method eval(context : Context) : Integer is do 
+		
+			// *******************************************************
+			// * TODO: Implement the call to a parameter
+			// *******************************************************
+			result := 0
+		end 
+	}
+	
+	aspect class Plus
+	{
+		method eval(context : Context) : Integer is do 
+			result := lhs.eval(context) + rhs.eval(context)
+		end
+	}
+	
+	aspect class Minus
+	{
+		method eval(context : Context) : Integer is do 
+			result := lhs.eval(context) - rhs.eval(context)
+		end
+	}
+	
+	aspect class Mult
+	{
+		method eval(context : Context) : Integer is do 
+			result := lhs.eval(context) * rhs.eval(context)
+		end
+	}
+	
+	aspect class Div
+	{
+		method eval(context : Context) : Integer is do 
+			result := lhs.eval(context) / rhs.eval(context)
+		end
+	}
+	
+	aspect class Equals
+	{
+		method eval(context : Context) : Integer is do 
+			result := if lhs.eval(context) == rhs.eval(context) then 1 else 0 end
+		end
+	}
+	
+	aspect class Greater
+	{
+		method eval(context : Context) : Integer is do 
+			result := if lhs.eval(context) > rhs.eval(context) then 1 else 0 end
+		end
+	}
+	
+	aspect class Lower
+	{
+		method eval(context : Context) : Integer is do 
+			result := if lhs.eval(context) < rhs.eval(context) then 1 else 0 end
+		end
+	}
+	
+	aspect class Block
+	{
+		method eval(context : Context) : Integer is do 
+			instructions.each{instruction  | result := instruction.eval(context)}
+		end 
+	}
+	
+	
+	aspect class ProcCall
+	{
+		method eval(context : Context) : Integer is do 
+		
+			// *******************************************************
+			// * TODO: Implement the call of a procedure
+			// *******************************************************
+			
+			result := void
+			
+		end
+	}
+	
+	
+	aspect class If
+	{
+		method eval(context : Context) : Integer is do 
+			if condition.eval(context) != 0 then
+				result := thenPart.eval(context)
+			else
+				result := elsePart.eval(context)
+			end						
+		end 
+	}
+	
+	aspect class While
+	{
+		method eval(context : Context) : Integer is do 
+			var cond : Integer
+			from cond := condition.eval(context)
+			until cond == 0
+			loop
+				result := block.eval(context)
+				cond := condition.eval(context)
+			end			
+		end 
+	}
+	
+	aspect class Repeat
+	{
+		method eval(context : Context) : Integer is do 
+		
+			// *******************************************************
+			// * TODO: Implement the Repeat Loop                        
+			// *******************************************************
+			
+			result := void
+		end 
+	}
+	
+	/*
+	* The semantics of the primitive constructs
+	*/
+	aspect class Back
+	{
+		method eval(context : Context) : Integer is do 
+			context.turtle.forward(-steps.eval(context))
+			result := void
+		end
+	}
+	aspect class Forward
+	{
+		method eval(context : Context) : Integer is do 
+			context.turtle.forward(steps.eval(context))
+			result := void
+		end
+	}
+	aspect class Left
+	{
+		method eval(context : Context) : Integer is do 
+			// *******************************************************
+			// * TODO: Implement the turn left statement
+			// *******************************************************
+			result := void
+		end
+	}
+	aspect class Right
+	{
+		method eval(context : Context) : Integer is do 
+			context.turtle.rotate(angle.eval(context))
+			result := void
+		end
+	}
+	aspect class PenDown
+	{
+		method eval(context : Context) : Integer is do 
+			context.turtle.setPenUp(false)
+			result := void
+		end
+	}
+	aspect class PenUp
+	{
+		method eval(context : Context) : Integer is do 
+			context.turtle.setPenUp(true)
+			result := void
+		end
+	}
+	aspect class Clear
+	{
+		method eval(context : Context) : Integer is do 
+			context.turtle.reset()
+			result := void
+		end
+	}
+	
+}

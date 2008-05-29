@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM" xsi:schemaLocation="http://www.kermeta.org/kmLogo/ASM ../ASMLogo.ecore#//ASM">
+  <instructions xsi:type="ASM:ProcDeclaration" name="k" procCall="//@instructions.2">
+    <args name="scale"/>
+    <block>
+      <instructions xsi:type="ASM:PenDown"/>
+      <instructions xsi:type="ASM:Forward">
+        <steps xsi:type="ASM:Mult">
+          <lhs xsi:type="ASM:Constant" integerValue="30"/>
+          <rhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+        </steps>
+      </instructions>
+      <instructions xsi:type="ASM:PenUp"/>
+      <instructions xsi:type="ASM:Back">
+        <steps xsi:type="ASM:Mult">
+          <lhs xsi:type="ASM:Constant" integerValue="10"/>
+          <rhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+        </steps>
+      </instructions>
+      <instructions xsi:type="ASM:Right">
+        <angle xsi:type="ASM:Constant" integerValue="45"/>
+      </instructions>
+      <instructions xsi:type="ASM:Forward">
+        <steps xsi:type="ASM:Mult">
+          <lhs xsi:type="ASM:Constant" integerValue="14"/>
+          <rhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+        </steps>
+      </instructions>
+      <instructions xsi:type="ASM:PenDown"/>
+      <instructions xsi:type="ASM:Back">
+        <steps xsi:type="ASM:Mult">
+          <lhs xsi:type="ASM:Constant" integerValue="14"/>
+          <rhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+        </steps>
+      </instructions>
+      <instructions xsi:type="ASM:PenUp"/>
+      <instructions xsi:type="ASM:Right">
+        <angle xsi:type="ASM:Constant" integerValue="90"/>
+      </instructions>
+      <instructions xsi:type="ASM:Forward">
+        <steps xsi:type="ASM:Mult">
+          <lhs xsi:type="ASM:Constant" integerValue="14"/>
+          <rhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+        </steps>
+      </instructions>
+      <instructions xsi:type="ASM:PenDown"/>
+      <instructions xsi:type="ASM:Back">
+        <steps xsi:type="ASM:Mult">
+          <lhs xsi:type="ASM:Constant" integerValue="14"/>
+          <rhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+        </steps>
+      </instructions>
+      <instructions xsi:type="ASM:PenUp"/>
+      <instructions xsi:type="ASM:Right">
+        <angle xsi:type="ASM:Constant" integerValue="45"/>
+      </instructions>
+      <instructions xsi:type="ASM:Forward">
+        <steps xsi:type="ASM:Mult">
+          <lhs xsi:type="ASM:Constant" integerValue="20"/>
+          <rhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+        </steps>
+      </instructions>
+      <instructions xsi:type="ASM:Left">
+        <angle xsi:type="ASM:Constant" integerValue="180"/>
+      </instructions>
+    </block>
+  </instructions>
+  <instructions xsi:type="ASM:Clear"/>
+  <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
+    <actualArgs xsi:type="ASM:Constant" integerValue="4"/>
+  </instructions>
+</ASM:Block>

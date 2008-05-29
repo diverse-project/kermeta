@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterCallImpl.java,v 1.2 2007-05-31 17:03:56 ffleurey Exp $
+ * $Id: ParameterCallImpl.java,v 1.3 2008-05-29 12:09:36 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -40,7 +40,7 @@ public class ParameterCallImpl extends ExpressionImpl implements ParameterCall {
 	 * @generated
 	 * @ordered
 	 */
-	protected Parameter parameter = null;
+	protected Parameter parameter;
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMFactoryImpl.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
+ * $Id: ASMFactoryImpl.java,v 1.3 2008-05-29 12:09:36 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -31,7 +31,7 @@ public class ASMFactoryImpl extends EFactoryImpl implements ASMFactory {
 	 */
 	public static ASMFactory init() {
 		try {
-			ASMFactory theASMFactory = (ASMFactory)EPackage.Registry.INSTANCE.getEFactory("http://kmLogo.ecore/ASM"); 
+			ASMFactory theASMFactory = (ASMFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kmLogo/ASM"); 
 			if (theASMFactory != null) {
 				return theASMFactory;
 			}

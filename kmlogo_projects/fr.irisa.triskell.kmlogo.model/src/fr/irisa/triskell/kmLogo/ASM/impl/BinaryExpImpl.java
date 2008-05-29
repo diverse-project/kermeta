@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BinaryExpImpl.java,v 1.3 2007-05-31 17:03:57 ffleurey Exp $
+ * $Id: BinaryExpImpl.java,v 1.4 2008-05-29 12:09:36 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -43,7 +43,7 @@ public abstract class BinaryExpImpl extends ExpressionImpl implements BinaryExp 
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression lhs = null;
+	protected Expression lhs;
 
 	/**
 	 * The cached value of the '{@link #getRhs() <em>Rhs</em>}' containment reference.
@@ -53,7 +53,7 @@ public abstract class BinaryExpImpl extends ExpressionImpl implements BinaryExp 
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression rhs = null;
+	protected Expression rhs;
 
 	/**
 	 * <!-- begin-user-doc -->

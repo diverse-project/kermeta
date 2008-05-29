@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sts:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:sts="http://www.kermeta.org/Sts" start="//@fragments.3">
+  <fragments xsi:type="sts:Template" id="Forward">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Forward"/>
+    <rule xsi:type="sts:Sequence" id="">
+      <subRules xsi:type="sts:Terminal" id="" terminal="FORWARD"/>
+      <subRules xsi:type="sts:RuleRef" id="@Expression" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Back/steps"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="Constant">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Constant"/>
+    <rule xsi:type="sts:PrimitiveValue" id="">
+      <features xsi:type="ecore:EAttribute" href="http://www.kermeta.org/kmLogo#//ASM/Constant/integerValue"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="Clear">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Clear"/>
+    <rule xsi:type="sts:Terminal" terminal="CLEAR"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="UnitBlock">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Block"/>
+    <rule xsi:type="sts:Iteration">
+      <subRule xsi:type="sts:RuleRef" id="Instruction" ref="//@fragments.5"/>
+      <container xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Block/instructions"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="Expression">
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="@Constant" ref="//@fragments.1"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Constant"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.12"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/ParameterCall"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.13"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/ProcCall"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:Template">
+        <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Div"/>
+        <rule xsi:type="sts:Sequence" id="">
+          <subRules xsi:type="sts:Terminal" terminal="/" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:Terminal" terminal="(" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/lhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal="," lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/rhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal=")" lexicalSeparator="true"/>
+        </rule>
+      </subRule>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Div"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:Template">
+        <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Equals"/>
+        <rule xsi:type="sts:Sequence" id="">
+          <subRules xsi:type="sts:Terminal" terminal="=" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:Terminal" terminal="(" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/lhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal="," lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/rhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal=")" lexicalSeparator="true"/>
+        </rule>
+      </subRule>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Equals"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:Template">
+        <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Greater"/>
+        <rule xsi:type="sts:Sequence" id="">
+          <subRules xsi:type="sts:Terminal" terminal=">" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:Terminal" terminal="(" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/lhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal="," lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/rhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal=")" lexicalSeparator="true"/>
+        </rule>
+      </subRule>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Greater"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:Template">
+        <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Lower"/>
+        <rule xsi:type="sts:Sequence" id="">
+          <subRules xsi:type="sts:Terminal" terminal="&lt;" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:Terminal" terminal="(" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/lhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal="," lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/rhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal=")" lexicalSeparator="true"/>
+        </rule>
+      </subRule>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Lower"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:Template">
+        <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Plus"/>
+        <rule xsi:type="sts:Sequence" id="">
+          <subRules xsi:type="sts:Terminal" terminal="+" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:Terminal" terminal="(" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/lhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal="," lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/rhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal=")" lexicalSeparator="true"/>
+        </rule>
+      </subRule>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Plus"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:Template">
+        <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Minus"/>
+        <rule xsi:type="sts:Sequence" id="">
+          <subRules xsi:type="sts:Terminal" terminal="--" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:Terminal" terminal="(" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/lhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal="," lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/rhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal=")" lexicalSeparator="true"/>
+        </rule>
+      </subRule>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Minus"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:Template">
+        <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Mult"/>
+        <rule xsi:type="sts:Sequence" id="">
+          <subRules xsi:type="sts:Terminal" terminal="*" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:Terminal" terminal="(" lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/lhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal="," lexicalSeparator="true"/>
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+            <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/rhs"/>
+          </subRules>
+          <subRules xsi:type="sts:Terminal" terminal=")" lexicalSeparator="true"/>
+        </rule>
+      </subRule>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Mult"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="Instruction">
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="@Forward" ref="//@fragments.0"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Forward"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" id="@Clear" ref="//@fragments.2"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Clear"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.7"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Block"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.8"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Repeat"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.9"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/If"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.10"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/While"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.11"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.13"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/ProcCall"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.17"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Left"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.18"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Right"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.16"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Back"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.14"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/PenUp"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.15"/>
+      <metaclass href="http://www.kermeta.org/kmLogo#//ASM/PenDown"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="BinaryExp">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:RuleRef" id="" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/lhs"/>
+      </subRules>
+      <subRules xsi:type="sts:PrimitiveValue">
+        <features xsi:type="ecore:EAttribute" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/operator"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/BinaryExp/rhs"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Block"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" terminal="[" lexicalSeparator="true"/>
+      <subRules xsi:type="sts:Iteration">
+        <subRule xsi:type="sts:RuleRef" ref="//@fragments.5"/>
+        <container xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Block/instructions"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" terminal="]" lexicalSeparator="true"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Repeat"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="" terminal="REPEAT"/>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ControlStructure/condition"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.7">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Repeat/block"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/If"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" terminal="IFELSE"/>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ControlStructure/condition"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.7">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/If/thenPart"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.7">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/If/elsePart"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/While"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" terminal="WHILE"/>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ControlStructure/condition"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.7">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Repeat/block"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" terminal="TO"/>
+      <subRules xsi:type="sts:PrimitiveValue" id="">
+        <features xsi:type="ecore:EAttribute" href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration/name"/>
+      </subRules>
+      <subRules xsi:type="sts:Iteration">
+        <subRule xsi:type="sts:Template">
+          <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Parameter"/>
+          <rule xsi:type="sts:Sequence">
+            <subRules xsi:type="sts:Terminal" terminal=":" lexicalSeparator="true"/>
+            <subRules xsi:type="sts:PrimitiveValue">
+              <features xsi:type="ecore:EAttribute" href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration/name"/>
+            </subRules>
+          </rule>
+        </subRule>
+        <container xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration/args"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.3">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration/block"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" terminal="END"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/ParameterCall"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="" terminal=":" lexicalSeparator="true"/>
+      <subRules xsi:type="sts:ObjectReference">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ParameterCall/parameter"/>
+        <identifier xsi:type="ecore:EAttribute" href="http://www.kermeta.org/kmLogo#//ASM/Parameter/name"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/ProcCall"/>
+    <rule xsi:type="sts:Sequence" id="">
+      <subRules xsi:type="sts:Terminal" terminal="$" lexicalSeparator="true"/>
+      <subRules xsi:type="sts:ObjectReference">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ProcCall/declaration"/>
+        <identifier xsi:type="ecore:EAttribute" href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration/name"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" terminal="(" lexicalSeparator="true"/>
+      <subRules xsi:type="sts:Iteration" separator="//@fragments.19">
+        <subRule xsi:type="sts:RuleRef" ref="//@fragments.4"/>
+        <container xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ProcCall/actualArgs"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" terminal=")" lexicalSeparator="true"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="Clear">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/PenUp"/>
+    <rule xsi:type="sts:Terminal" terminal="PENUP"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="Clear">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/PenDown"/>
+    <rule xsi:type="sts:Terminal" terminal="PENDOWN"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="Forward">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Back"/>
+    <rule xsi:type="sts:Sequence" id="">
+      <subRules xsi:type="sts:Terminal" id="" terminal="BACK"/>
+      <subRules xsi:type="sts:RuleRef" id="@Expression" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Back/steps"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="Forward">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Left"/>
+    <rule xsi:type="sts:Sequence" id="">
+      <subRules xsi:type="sts:Terminal" id="" terminal="LEFT"/>
+      <subRules xsi:type="sts:RuleRef" id="@Expression" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Back/steps"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="Forward">
+    <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Right"/>
+    <rule xsi:type="sts:Sequence" id="">
+      <subRules xsi:type="sts:Terminal" id="" terminal="RIGHT"/>
+      <subRules xsi:type="sts:RuleRef" id="@Expression" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Back/steps"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Terminal" terminal="," lexicalSeparator="true"/>
+</sts:Root>

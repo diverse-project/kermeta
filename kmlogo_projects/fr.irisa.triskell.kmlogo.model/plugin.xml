@@ -5,23 +5,23 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2007-05-30 13:23:35 ffleurey Exp $
+ $Id: plugin.xml,v 1.2 2008-05-29 12:09:42 vmahe Exp $
 -->
 
 <plugin>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://kmLogo.ecore" 
+       uri = "http://www.kermeta.org/kmLogo" 
        class = "fr.irisa.triskell.kmLogo.KmLogoPackage"
-       genModel = "model/ASMLogo.genmodel" /> 
+       genModel = "logo/1.MetaModel/ASMLogo.genmodel" /> 
   </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://kmLogo.ecore/ASM" 
+       uri = "http://www.kermeta.org/kmLogo/ASM" 
        class = "fr.irisa.triskell.kmLogo.ASM.ASMPackage"
-       genModel = "model/ASMLogo.genmodel" /> 
+       genModel = "logo/1.MetaModel/ASMLogo.genmodel" /> 
   </extension>
 
 </plugin>

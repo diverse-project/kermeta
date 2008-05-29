@@ -1,4 +1,4 @@
-/* $Id: CompileLogoNXC.java,v 1.4 2007-11-30 08:05:36 dvojtise Exp $
+/* $Id: CompileLogoNXC.java,v 1.5 2008-05-29 12:09:30 vmahe Exp $
  * Project   : KmLogo
  * File      : CompileLogoNXC.java
  * License   : EPL
@@ -21,6 +21,7 @@ import fr.irisa.triskell.kmlogo.ui.CompileNXCLogoK;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -49,7 +50,9 @@ public class CompileLogoNXC implements IObjectActionDelegate, Runnable {
 			String out = out_file.getLocation().toOSString();
 
 			CompileNXCLogoK.run(file_uri, out, console);
-			out_file.refreshLocal(0, null);
+			
+			out_file.refreshLocal(IResource.DEPTH_ONE, null);
+			
 			console.println(new OKMessage("Model compiled successfully."));
 			
 		} catch (Exception e) {

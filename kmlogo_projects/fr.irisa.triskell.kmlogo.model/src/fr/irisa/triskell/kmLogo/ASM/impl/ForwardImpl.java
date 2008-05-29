@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ForwardImpl.java,v 1.2 2007-05-31 17:03:57 ffleurey Exp $
+ * $Id: ForwardImpl.java,v 1.3 2008-05-29 12:09:36 vmahe Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -42,7 +42,7 @@ public class ForwardImpl extends PrimitiveImpl implements Forward {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression steps = null;
+	protected Expression steps;
 
 	/**
 	 * <!-- begin-user-doc -->
