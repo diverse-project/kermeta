@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.21 2008-05-28 16:09:03 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.22 2008-05-29 10:12:45 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -34,6 +34,7 @@
 	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\${dot.or.buildclass}" />
 	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\${dot.or.bin}" />
 	<property name="kermeta.merger.jar" location="..\..\..\org.kermeta.merger\${dot.or.bin}" />
+	<property name="kermeta.log4j.util.jar" location="..\..\..\org.kermeta.log4j.util\${dot.or.bin}" />
 	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\${dot.or.bin}" />
 	<property name="kermeta.tests.jar" location="..\..\..\fr.irisa.triskell.kermeta.tests\${dot.or.bin}" />
 	<property name="ecoretools.registration.jar" location="..\..\..\org.eclipse.emf.ecoretools.registration\${dot.or.bin}"/>
@@ -63,8 +64,10 @@
 	<property name="emf.compare.diff.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.diff_0.8.0.v200804040851.jar" />
 	<property name="emf.compare.match.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.match_0.8.0.v200804040851.jar" />
 	<property name="junit4.jar" location="${eclipse.home}/plugins/org.junit4_4.3.1/junit.jar" />
-	<property name="apache.commons.logging.jar" location="${eclipse.home}/plugins/org.apache.commons.logging_1.0.4.v200706111724.jar" />
-			
+	<property name="apache.commons.logging.jar" location="..\..\..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-1.1.1.jar" />
+	<property name="apache.commons.logging.adapters.jar" location="..\..\..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-adapters-1.1.1.jar" />
+	<property name="apache.commons.logging.api.jar" location="..\..\..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-api-1.1.1.jar" />
+					
 	
 	<path id="interpreter.class.path">
 		<pathelement location="${kermeta.model.jar}" />
@@ -74,6 +77,7 @@
 		<pathelement location="${kermeta.merger.jar}" />
 		<pathelement location="${kermeta.interest.jar}" />
 		<pathelement location="${kermeta.model.jar}" />
+		<pathelement location="${kermeta.log4j.util.jar}" />
 		<pathelement location="${kermeta.tests.jar}" />
 		<pathelement location="${triskell.eclipse.util.jar}" />
 		<pathelement location="${traceability.jar}" />
@@ -100,6 +104,8 @@
 		<pathelement location="${log4j.jar}" />
 		<pathelement location="${junit4.jar}" />
 		<pathelement location="${apache.commons.logging.jar}" />
+		<pathelement location="${apache.commons.logging.adapters.jar}" />
+		<pathelement location="${apache.commons.logging.api.jar}" />
 		<pathelement location="${antlr.jar}" />
 	    <pathelement location="${emfatic-core.jar}"/>
 		<pathelement path="${java.class.path}" />
