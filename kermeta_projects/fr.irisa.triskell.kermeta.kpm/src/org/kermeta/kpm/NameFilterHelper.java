@@ -1,4 +1,4 @@
-/*$Id: NameFilterHelper.java,v 1.1 2008-05-28 09:26:14 ftanguy Exp $
+/*$Id: NameFilterHelper.java,v 1.2 2008-05-29 06:46:57 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -20,24 +20,12 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
  *
  */
 public class NameFilterHelper {
-
-	/**
-	 * 
-	 * Process a name filter on the value of a unit in order to get a new value that should correspond to a resource in the workspace.
-	 * 
-	 * @param unit
-	 * @param filter
-	 * @return
-	 */
-	static public String getOutputString(Unit unit, NameFilter filter) {
-		
+	
+	static public String getOutputString(Unit unit, String regex) {
 		int i = 0;
 		int j = 0;
-		
-		String name = unit.getName();
-		String regex = filter.getRegex();
-		
 		String outputString = "";
+		String name = unit.getName();
 		
 		boolean stop = false;
 		
@@ -75,6 +63,19 @@ public class NameFilterHelper {
 		}
 		
 		return outputString;
+	}
+	
+	/**
+	 * 
+	 * Process a name filter on the value of a unit in order to get a new value that should correspond to a resource in the workspace.
+	 * 
+	 * @param unit
+	 * @param filter
+	 * @return
+	 */
+	static public String getOutputString(Unit unit, NameFilter filter) {		
+		String regex = filter.getRegex();
+		return getOutputString(unit, regex);
 	}
 	
 }

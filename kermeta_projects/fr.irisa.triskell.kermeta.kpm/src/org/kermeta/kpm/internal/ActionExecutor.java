@@ -1,6 +1,6 @@
 
 
-/*$Id: ActionExecutor.java,v 1.1 2008-05-28 09:26:16 ftanguy Exp $
+/*$Id: ActionExecutor.java,v 1.2 2008-05-29 06:46:57 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ActionExecutor.java
 * License : EPL
@@ -23,13 +23,14 @@ import org.kermeta.interpreter.helper.KermetaLauncher;
 import org.kermeta.kpm.IAction;
 import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.KpmManager;
+import org.kermeta.kpm.NameFilterHelper;
 
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
 public class ActionExecutor {
 
-	final static public String OUTPUT_FILE = "_OUTPUT_FILE_";
+	final static public String OUTPUT_REGEX_FILE = "_OUTPUT_REGEX_FILE_";
 	
 	static public void execute(Out out, Unit unit, String extensionAction, Map<String, Object> args, IProgressMonitor monitor) {
 		assert( args != null );
@@ -50,8 +51,10 @@ public class ActionExecutor {
 					arguments[0] = unit.getName();
 					
 					String outputString = "";
-					if ( args.containsKey(OUTPUT_FILE) )
-						outputString = (String) args.get(OUTPUT_FILE);
+					if ( args.containsKey(OUTPUT_REGEX_FILE) ) {
+						String regex = (String) args.get(OUTPUT_REGEX_FILE);
+						outputString = NameFilterHelper.getOutputString(unit, regex);
+					}
 					
 					arguments[1] = outputString;
 					

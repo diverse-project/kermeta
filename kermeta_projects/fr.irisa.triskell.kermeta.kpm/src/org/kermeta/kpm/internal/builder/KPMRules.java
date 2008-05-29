@@ -1,6 +1,6 @@
 
 
-/*$Id: KPMRules.java,v 1.1 2008-05-28 09:26:15 ftanguy Exp $
+/*$Id: KPMRules.java,v 1.2 2008-05-29 06:46:57 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KPMRules.java
 * License : EPL
@@ -19,7 +19,7 @@ public class KPMRules {
 	/**
 	 * 
 	 */
-	static final protected String UPDATE_KMT_RULE_ID = "Update KMT Files";
+	static final public String UPDATE_KMT_RULE_ID = "Update KMT Files";
 	
 	/**
 	 * 

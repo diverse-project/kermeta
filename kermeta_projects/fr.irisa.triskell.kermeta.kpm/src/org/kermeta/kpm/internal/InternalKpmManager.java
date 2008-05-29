@@ -1,6 +1,6 @@
 
 
-/*$Id: InternalKpmManager.java,v 1.1 2008-05-28 09:26:16 ftanguy Exp $
+/*$Id: InternalKpmManager.java,v 1.2 2008-05-29 06:46:57 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmManager.java
 * License : EPL
@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.kpm.internal.builder.Initializor;
+import org.kermeta.kpm.internal.builder.KPMRules;
 import org.kermeta.kpm.internal.builder.ProjectVisitor;
 import org.kermeta.kpm.internal.builder.ResourceChangeListener;
 
@@ -80,11 +81,22 @@ public class InternalKpmManager {
 	private void initialize() {
 		try {
 			initializeKpm();
+			initializeRules();
 			initializeExtensionElements();
 			initializeProjects();
 			ResourcesPlugin.getWorkspace().addResourceChangeListener( new ResourceChangeListener() );
 		} catch (CoreException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	private void initializeRules() {
+		for ( Rule r : _kpm.getRules() ) {
+			if ( r.getName().equals( KPMRules.UPDATE_KMT_RULE_ID ) )
+				KPMRules.UPDATE_KMT_RULE = r;
 		}
 	}
 	
