@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: X86 Fragment
+Bundle-SymbolicName: fr.irisa.triskell.kmlogo.ui.linux.x86
+Bundle-Version: 1.0.0
+Bundle-Vendor: INRIA Bretagne Atlantique
+Fragment-Host: fr.irisa.triskell.kmlogo.ui;bundle-version="1.1.1"
+Require-Bundle: org.openembedd.launchexec
