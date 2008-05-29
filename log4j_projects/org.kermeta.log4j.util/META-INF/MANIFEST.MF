@@ -7,11 +7,15 @@ Bundle-Activator: org.kermeta.log4j.util.plugin.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.apache.commons.logging;visibility:=reexport,
  org.apache.log4j
 Eclipse-LazyStart: true
 Export-Package: 
+ org.apache.commons.logging,
+ org.apache.commons.logging.impl,
  org.kermeta.log4j.util,
  org.kermeta.log4j.util.plugin
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ lib/thirdparty/commons-logging-1.1.1/commons-logging-1.1.1.jar,
+ lib/thirdparty/commons-logging-1.1.1/commons-logging-adapters-1.1.1.jar,
+ lib/thirdparty/commons-logging-1.1.1/commons-logging-api-1.1.1.jar
 Import-Package: org.apache.log4j

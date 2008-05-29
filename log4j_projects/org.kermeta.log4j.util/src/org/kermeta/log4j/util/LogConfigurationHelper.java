@@ -1,4 +1,4 @@
-/* $Id: LogConfigurationHelper.java,v 1.2 2008-05-28 13:33:20 dvojtise Exp $
+/* $Id: LogConfigurationHelper.java,v 1.3 2008-05-29 10:00:24 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : LogConfigurationHelper.java
  * License    : EPL
@@ -100,6 +100,7 @@ public class LogConfigurationHelper {
 	    	}
 
 	    }
+	    
 		logger = LogFactory.getLog(loggerName);
 		/*logger=org.apache.log4j.Logger.getLogger(loggerName);
 		if (logger == null)
