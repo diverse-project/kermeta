@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.22 2008-05-28 13:38:04 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.23 2008-05-29 12:43:31 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -78,7 +78,7 @@ public class JunitTestSuite extends TestSuite {
 		
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-/*		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
+		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","002_testArithm.main.kmt" );
 
@@ -215,7 +215,7 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","072_testProperty.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","073_AliasOnEnumCrash.main.kmt" );
-*/
+
 		testWithFile("test/interpreter/kmt_testcases","074_testRequireEcoreWithOppositeInDifferentFiles.main.kmt" );
 
 /*** END GENERATED TESTS ***/
