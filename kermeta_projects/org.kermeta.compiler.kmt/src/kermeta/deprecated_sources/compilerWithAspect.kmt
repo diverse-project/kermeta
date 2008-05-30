@@ -1,4 +1,4 @@
-/* $Id: compilerWithAspect.kmt,v 1.1 2008-02-27 15:41:53 cfaucher Exp $
+/* $Id: compilerWithAspect.kmt,v 1.2 2008-05-30 12:42:22 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -12,7 +12,7 @@ package kermeta::compiler;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "trace_structure.kmt"
+require "TraceStructure.kmt"
 require "compile_structure_pass2.kmt"
 
 using ecore
@@ -43,7 +43,6 @@ class Main
 	operation loadKmModel() : kermeta::language::structure::ModelingUnit is do             
 	   		var repository : EMFRepository init EMFRepository.new             
 	   		var resource : Resource init repository.getResource("platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km")
-	       	resource.load()
 	      	
 	      	// result is a ModelingUnit
 	        result ?= resource.instances.one
@@ -52,7 +51,6 @@ class Main
    	operation loadEcoreModel() : EPackage is do             
 	   		var repository : EMFRepository init EMFRepository.new             
 	   		var resource : Resource init repository.getResource("platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.ecore")
-	       	resource.load()
 	      	
 	      	// result is a EPackage
 	        result ?= resource.instances.detect{ i | i.isInstanceOf(EPackage) }
