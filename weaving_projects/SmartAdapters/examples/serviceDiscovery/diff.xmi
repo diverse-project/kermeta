@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="Cp1252"?>
+<diff:ModelInputSnapshot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diff="http://www.eclipse.org/emf/compare/diff/1.1" xmlns:match="http://www.eclipse.org/emf/compare/match/1.1" date="2008-05-30T14:32:58.200+0200">
+  <diff left="/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art" right="/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art">
+    <ownedElements xsi:type="diff:DiffGroup">
+      <subDiffElements xsi:type="diff:DiffGroup">
+        <subDiffElements xsi:type="diff:DiffGroup">
+          <subDiffElements xsi:type="diff:AddModelElement">
+            <leftParent href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.4"/>
+          </subDiffElements>
+          <subDiffElements xsi:type="diff:AddModelElement">
+            <leftParent href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.3"/>
+          </subDiffElements>
+          <leftParent href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root"/>
+        </subDiffElements>
+        <subDiffElements xsi:type="diff:AddModelElement">
+          <leftParent href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#/"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.6"/>
+        </subDiffElements>
+        <subDiffElements xsi:type="diff:AddModelElement">
+          <leftParent href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#/"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.6"/>
+        </subDiffElements>
+        <subDiffElements xsi:type="diff:AddModelElement">
+          <leftParent href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#/"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.7"/>
+        </subDiffElements>
+        <subDiffElements xsi:type="diff:AddModelElement">
+          <leftParent href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#/"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.5"/>
+        </subDiffElements>
+        <subDiffElements xsi:type="diff:AddModelElement">
+          <leftParent href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#/"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.5"/>
+        </subDiffElements>
+        <leftParent href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#/"/>
+      </subDiffElements>
+    </ownedElements>
+  </diff>
+  <match leftModel="/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art" rightModel="/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art">
+    <matchedElements xsi:type="match:Match2Elements" similarity="0.9592596037577898">
+      <subMatchElements xsi:type="match:Match2Elements" similarity="0.9835897435897435">
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root/@subComponent.0"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.0"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="0.8461538461538461">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="0.8461538461538461">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root/@subComponent.1/@binding.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.5/@binding.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root/@subComponent.1"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.5"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="0.8461538461538461">
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root/@subComponent.2"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.1"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="0.8461538461538461">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="0.8461538461538461">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root/@subComponent.3/@binding.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.2/@binding.0"/>
+          </subMatchElements>
+          <subMatchElements xsi:type="match:Match2Elements" similarity="0.8461538461538461">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root/@subComponent.3/@binding.1"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.2/@binding.1"/>
+          </subMatchElements>
+          <subMatchElements xsi:type="match:Match2Elements" similarity="0.8461538461538461">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root/@subComponent.3/@binding.2"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.2/@binding.2"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root/@subComponent.3"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.2"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root/@delegation.0"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@delegation.0"/>
+        </subMatchElements>
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@root"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@services.0"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.0"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@services.1"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.1"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@services.2"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.2"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@services.3"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.3"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@services.4"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.4"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.0/@port.0/@sub.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.0/@port.0/@sub.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.0/@port.0"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.0/@port.0"/>
+        </subMatchElements>
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.0"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.0"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.1/@port.0/@sub.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1/@port.0/@sub.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.1/@port.0"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1/@port.0"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.1/@port.1/@sub.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1/@port.1/@sub.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.1/@port.1"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1/@port.1"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.1/@port.2/@sub.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1/@port.2/@sub.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.1/@port.2"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1/@port.2"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.1/@port.3/@sub.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1/@port.3/@sub.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.1/@port.3"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1/@port.3"/>
+        </subMatchElements>
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.1"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.2/@port.0/@sub.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.2/@port.0/@sub.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.2/@port.0"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.2/@port.0"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.2/@port.1/@sub.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.2/@port.1/@sub.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.2/@port.1"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.2/@port.1"/>
+        </subMatchElements>
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.2"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.2"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.3/@port.0/@sub.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.3/@port.0/@sub.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.3/@port.0"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.3/@port.0"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.3/@port.1/@sub.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.3/@port.1/@sub.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.3/@port.1"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.3/@port.1"/>
+        </subMatchElements>
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.3"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.3"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+            <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.4/@port.0/@sub.0"/>
+            <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.4/@port.0/@sub.0"/>
+          </subMatchElements>
+          <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.4/@port.0"/>
+          <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.4/@port.0"/>
+        </subMatchElements>
+        <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#//@types.4"/>
+        <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.4"/>
+      </subMatchElements>
+      <leftElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art#/"/>
+      <rightElement href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#/"/>
+    </matchedElements>
+    <unMatchedElements>
+      <element href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.4"/>
+    </unMatchedElements>
+    <unMatchedElements>
+      <element href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.6"/>
+    </unMatchedElements>
+    <unMatchedElements>
+      <element href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.6"/>
+    </unMatchedElements>
+    <unMatchedElements>
+      <element href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.3"/>
+    </unMatchedElements>
+    <unMatchedElements>
+      <element href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.7"/>
+    </unMatchedElements>
+    <unMatchedElements>
+      <element href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.5"/>
+    </unMatchedElements>
+    <unMatchedElements>
+      <element href="platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.5"/>
+    </unMatchedElements>
+  </match>
+</diff:ModelInputSnapshot>

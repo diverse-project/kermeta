@@ -1,0 +1,67 @@
+/* $Id: serviceDiscovery.kmt,v 1.1 2008-05-30 13:31:54 bmorin Exp $
+ * Creation date: March 19, 2008
+ * License:
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
+ */
+@mainClass "test::ServiceDiscoveryMain"
+@mainOperation "main"
+
+
+package test;
+require kermeta
+
+//Loading the SmartAdapter aspect weaver
+require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
+
+//Loading the platform adapter (here, the service discovery example for the Fractal platform)
+//just change this require to adapt another platform and/or another application
+require "platform:/resource/SmartAdapters/program/adapter/ServiceDiscovery.kmt"
+
+using kermeta::standard 
+using weaver
+using org::kermeta::runtime::adapter
+
+
+class ServiceDiscoveryMain
+{
+	operation main() : Void is do 
+		var modelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art"
+		var wovenModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art"
+		var finalModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/newReferenceModel.art"
+		var metamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore"
+			
+		var adapterUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/aspect/UAprotocol.xmi"
+		var adaptMMUri : String init "platform:/resource/SmartAdapters/metamodel/specific/runtime_AOM_Framework1.ecore"
+		var MMPatternUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
+
+		var weaver:Weaver init Weaver.new
+		weaver.initWeaver()
+		weaver.loadMetamodel(metamodelUri)
+		weaver.loadMetamodelPattern(MMPatternUri)
+		weaver.loadAdapter(adapterUri, adaptMMUri)
+		weaver.initDefaultValues()
+		
+		stdio.writeln("K> Running the service discovery application (SA configuration)...")
+		var platformAdapter : PlatformAdapter init PlatformAdapter.new 
+		platformAdapter.~init
+		platformAdapter.run
+		platformAdapter.saveModel(modelUri)
+		weaver.loadModel(modelUri, "http://art")
+		stdio.writeln("")
+		stdio.writeln("")
+					
+		stdio.writeln("K> Weaving the UA aspect with SmartAdapters (to obtain DA = SA + UA)...")
+		weaver.weaving(metamodelUri, MMPatternUri)
+		weaver.saveModel(wovenModelUri, "http://art")
+		stdio.writeln("")
+		stdio.writeln("")
+		
+		stdio.writeln("K> Submit the model transformation to the platform")
+		wovenModelUri := wovenModelUri.replace("platform:/resource","C:/work/dev/Kermeta")
+		platformAdapter.loadUpdateModel(wovenModelUri)
+		platformAdapter.saveModel(finalModelUri)
+		
+		weaver.finalizeWeaver()
+	end
+}
