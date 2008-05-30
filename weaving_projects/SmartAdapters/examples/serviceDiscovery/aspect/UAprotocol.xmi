@@ -158,15 +158,15 @@
     <refservice href="UAinterface.xmi#//@services.2"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
-    <PrimitivePortToSet href="UAgraft.xmi#//@types.0/@port.2/@sub.0"/>
+    <PrimitivePortToSet href="UAgraft.xmi#//@types.1/@port.2/@sub.0"/>
     <refservice href="UAinterface.xmi#//@services.0"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
-    <PrimitivePortToSet href="UAgraft.xmi#//@types.0/@port.3/@sub.0"/>
+    <PrimitivePortToSet href="UAgraft.xmi#//@types.1/@port.3/@sub.0"/>
     <refservice href="UAinterface.xmi#//@services.1"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
-    <PrimitivePortToSet href="UAgraft.xmi#//@types.0/@port.4/@sub.0"/>
+    <PrimitivePortToSet href="UAgraft.xmi#//@types.1/@port.4/@sub.0"/>
     <refservice href="UAinterface.xmi#//@services.2"/>
   </adapt>
 </core:Adapter>
