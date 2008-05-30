@@ -1,4 +1,4 @@
-/* $Id: KMTTemplatePreferencePage.java,v 1.1 2008-05-30 15:52:45 dvojtise Exp $
+/* $Id: KMTTemplatePreferencePage.java,v 1.2 2008-05-30 16:13:20 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KMTTemplatePreferencePage.java
  * License: EPL
@@ -43,7 +43,7 @@ public class KMTTemplatePreferencePage
 	public KMTTemplatePreferencePage() {
 		super(GRID);
 		setPreferenceStore(KermetaUIPlugin.getDefault().getPreferenceStore());
-		setDescription("Template preferences for new KMT files");
+		setDescription("Template preferences for new KMT files. \n   Available variables : ${date}, ${user}");
 	}
 	
 	/**
@@ -56,6 +56,7 @@ public class KMTTemplatePreferencePage
 		HelpfulTextFieldEditor headerFE = new HelpfulTextFieldEditor(PreferenceConstants.P_KMT_HEADER_TEMPLATESTRING, "&Header template:", getFieldEditorParent());		
 		Font font = new Font(this.getShell().getDisplay(), "Courier", 8, SWT.NORMAL);;
 		headerFE.getTextControl(getFieldEditorParent()).setFont(font);
+		headerFE.setToolTipText("This text will be added as a header of the newly created KMT files");
 		addField(headerFE);
 	}
 
