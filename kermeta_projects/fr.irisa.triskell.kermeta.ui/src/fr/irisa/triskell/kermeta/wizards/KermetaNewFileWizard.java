@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.2 2008-03-03 09:57:54 dvojtise Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.3 2008-05-30 15:52:45 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: EPL
@@ -32,6 +32,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorPart;
@@ -45,8 +46,10 @@ import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.dialogs.DialogUtil;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
+import org.kermeta.kmttemplate.preferences.PreferenceConstants;
 
 import fr.irisa.triskell.kermeta.ui.KermetaUIPlugin;
+import fr.irisa.triskell.string.EscapeChars;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -269,15 +272,14 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 	private String createTemplate()
 	{
 		Date d = new Date(System.currentTimeMillis());
+		IPreferenceStore store = KermetaUIPlugin.getDefault().getPreferenceStore();
+		String header = store.getString(PreferenceConstants.P_KMT_HEADER_TEMPLATESTRING);
+		// replace variables in the header
+		header = header.replaceAll(EscapeChars.forRegex("${date}"), DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(d));
+		header = header.replaceAll(EscapeChars.forRegex("${user}"), System.getProperty("user.name"));
 		
 	    String template_string = 
-	    	"/* $Id: " + 
-	    	"$\n"+ 
-	    	" * Creation date: " + DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(d)+ "\n"+
-	    	" * License:\n"+
-	    	" * Copyright:\n"+
-	    	" * Authors:\n"+
-	    	" */\n"+
+	    	header+
 	        "@mainClass \""+packageTextString+"::"+classTextString+"\"\n"+ 
 	        "@mainOperation \""+operationTextString+"\"\n\n\n"+
 	        "package "+packageTextString+";\n\n\n"+

@@ -90,6 +90,12 @@
              class="fr.irisa.triskell.kermeta.ui.preferences.KermetaPreferencePage"
              id="fr.irisa.triskell.kermeta.ui.preferences.KermetaPreferencePage"
              name="Kermeta"/>
+       <page
+             category="fr.irisa.triskell.kermeta.ui.preferences.KermetaPreferencePage"
+             class="org.kermeta.kmttemplate.preferences.KMTTemplatePreferencePage"
+             id="fr.irisa.triskell.kermeta.texteditor.preferences.KMTTemplatePreferencePage"
+             name="Template for new KMT files">
+       </page>
     </extension>
     <extension
           point="org.eclipse.ui.perspectiveExtensions">
@@ -217,6 +223,12 @@
                 toolbarPath="Normal/additions">
           </action>
        </editorContribution>
+    </extension>
+    <extension
+          point="org.eclipse.core.runtime.preferences">
+       <initializer
+             class="org.kermeta.kmttemplate.preferences.PreferenceInitializer">
+       </initializer>
     </extension>
 
 </plugin>
