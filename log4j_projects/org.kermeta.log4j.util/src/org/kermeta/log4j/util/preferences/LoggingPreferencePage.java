@@ -1,4 +1,4 @@
-/* $Id: LoggingPreferencePage.java,v 1.1 2008-05-30 12:58:35 dvojtise Exp $
+/* $Id: LoggingPreferencePage.java,v 1.2 2008-05-30 14:39:12 dvojtise Exp $
  * Project    : .kermeta.log4j
  * File       : LoggingPreferencePage.java
  * License    : EPL
@@ -15,7 +15,6 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.log4j.util.plugin.Activator;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * This class represents a preference page that
@@ -58,8 +57,7 @@ public class LoggingPreferencePage
 							{"Use &Apache.commons.logging default", PreferenceConstants.P_LOGGERCHOICE_APACHEDEFAULT}
 		}, getFieldEditorParent()));
 		addField(new FileFieldEditor(PreferenceConstants.P_LOG4JXMLPATH, 
-				"Log4j configuration xml file:", getFieldEditorParent()));
-
+				"Log4j configuration xml file:", getFieldEditorParent()));		
 	}
 
 	/* (non-Javadoc)
