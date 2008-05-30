@@ -23,7 +23,8 @@ Export-Package: fr.irisa.triskell.eclipse.console,
  fr.irisa.triskell.string,
  org.kermeta.core.helper,
  org.kermeta.ecore.internal.model.helper;x-internal:=true,
- org.kermeta.ecore.model.helper
+ org.kermeta.ecore.model.helper,
+ org.kermeta.jface.preference
 Bundle-Vendor: IRISA/INRIA
 Bundle-ClassPath: .
 Bundle-Activator: fr.irisa.triskell.eclipse.plugin.Activator
