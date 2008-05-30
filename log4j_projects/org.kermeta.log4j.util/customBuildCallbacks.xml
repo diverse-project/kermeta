@@ -57,9 +57,9 @@
 	</target>
 
 	<target name="pre.@dot">
-		<echo>pre.compile.@dot ${target.folder} basedir ${basedir}</echo>
+<!--		<echo>pre.compile.@dot ${target.folder} basedir ${basedir}</echo> -->
 		<!-- <unzip src="${basedir}/lib/thirdparty/log4j.jar" dest="${target.folder}"/>-->
-		<unzip src="${basedir}/lib/thirdparty/log4j.jar" dest="c:/temp"/>
+<!--		<unzip src="${basedir}/lib/thirdparty/log4j.jar" dest="c:/temp"/> -->
 	</target>
 
 	<!-- ===================================================================== -->
@@ -76,9 +76,9 @@
 	</target>
 
 	<target name="post.compile.@dot">
-		<echo>post.compile.@dot ${target.folder}</echo>
+<!--		<echo>post.compile.@dot ${target.folder}</echo> -->
 		<!-- <unzip src="${basedir}/lib/thirdparty/log4j.jar" dest="${target.folder}"/> seems to be buggy in some situation-->
-		<mkdir dir="${basedir}/temp/log4j"/>
+	<!--	<mkdir dir="${basedir}/temp/log4j"/>
 		<unzip src="${basedir}/lib/thirdparty/log4j.jar" dest="${basedir}/temp/log4j">
 			<patternset>		    
 		        <exclude name="**/MANIFEST.MF"/>
@@ -87,7 +87,7 @@
 		<copy todir="${target.folder}">
 			<fileset dir="${basedir}/temp/log4j"/>
 		</copy>
-		<delete dir="${basedir}/temp/log4j"/>
+		<delete dir="${basedir}/temp/log4j"/> -->
 	</target>
 	
 	<!-- ===================================================================== -->

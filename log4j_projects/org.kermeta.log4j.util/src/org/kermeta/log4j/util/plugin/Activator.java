@@ -1,5 +1,14 @@
 package org.kermeta.log4j.util.plugin;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -14,12 +23,27 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 	
+	public static final String LOG4JCONFIGDEFAULTLOCATION_IN_METADATA = "/.metadata/kermeta_log4j_configuration.xml";
+	
 	/**
 	 * The constructor
 	 */
 	public Activator() {
+		
 	}
 
+	/** simple file copy */
+	protected void copyFile(File inputFile, File outputFile) throws IOException{
+		
+	    FileReader in = new FileReader(inputFile);
+	    FileWriter out = new FileWriter(outputFile);
+	    int c;
+
+	    while ((c = in.read()) != -1)
+	      out.write(c);
+	    in.close();
+	    out.close();		  
+	}
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
@@ -27,6 +51,20 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		// make sure to copy the default log4j configuration file into .metadata directory
+		try {
+			URL url = getBundle().getEntry("/kermeta_log4j_configuration.xml");
+			File logConfigurationFile = new File(FileLocator.toFileURL(url).getFile());
+			File metadatalogConfigurationFile = new File(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + LOG4JCONFIGDEFAULTLOCATION_IN_METADATA);
+			if (logConfigurationFile.exists() && ! metadatalogConfigurationFile.exists())
+    		{
+				copyFile(logConfigurationFile, metadatalogConfigurationFile);
+    		}
+			
+		} catch (Exception e) {
+			System.err.print("Not able to copy kermeta_log4j_configuration.xml in .metadata directory "+ e.getMessage() +"\n");
+			// don't worry about that, the log4j will simply use its default configuration
+		}
 	}
 
 	/*

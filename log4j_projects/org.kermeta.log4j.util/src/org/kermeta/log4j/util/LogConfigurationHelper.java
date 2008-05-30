@@ -1,4 +1,4 @@
-/* $Id: LogConfigurationHelper.java,v 1.3 2008-05-29 10:00:24 dvojtise Exp $
+/* $Id: LogConfigurationHelper.java,v 1.4 2008-05-30 12:58:36 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : LogConfigurationHelper.java
  * License    : EPL
@@ -18,10 +18,12 @@ import java.io.IOException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.LogFactoryImpl;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.kermeta.log4j.util.plugin.Activator;
+import org.kermeta.log4j.util.preferences.PreferenceConstants;
 
 /**
- * Some usefull methods relative to configuration of log4j
- * @author dvojtise
+ * Some useful methods relative to configuration of log4j
  */
 public class LogConfigurationHelper {
 
@@ -36,15 +38,24 @@ public class LogConfigurationHelper {
 	/**
 	 * @param configurationFilePropertyName name of a property that contains the configuration file name
 	 * Configure the log4J system using the value defined by the given property
+	 * If this system property is not set then it will use the plugin preferences
 	 */
 	static public void configureLog4JLogger(String configurationFilePropertyName)
 	{
 	    String filePath = "";
     	File logConfigurationFile;
 
-		org.apache.log4j.Logger logger=null;
-    	// try to find the given property.
-    	String propertyValue = System.getProperty(configurationFilePropertyName);
+		String propertyValue =  null;
+    	// try to find the given system property.
+		if(configurationFilePropertyName != null && configurationFilePropertyName.length() > 0){
+			propertyValue = System.getProperty(configurationFilePropertyName);
+		}
+		if (propertyValue == null || propertyValue.length() == 0){
+			// system property not set, use plugin preferences
+			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+			propertyValue = store.getString(PreferenceConstants.P_LOG4JXMLPATH);
+		}
+		
     	if (propertyValue != null && propertyValue.length() > 0)
     	{
     	    logConfigurationFile = new File(propertyValue);  
@@ -74,33 +85,53 @@ public class LogConfigurationHelper {
 	 * @param configurationFilePropertyName name of a property that contains the configuration file name
 	 * @param loggerName name of a logger inside the configuration
 	 * @return a Logger
-	 * Retreives a logger
-	 * Eventually configures the log system according to the given system property
-	 * !!! if it was already configured and you want to change it, you must call configureLogger explicitly  
+	 * Retrieves a logger
+	 * Eventually configures the log4j system according to the given system property
+	 * !!! if it was already configured and you want to change it, you must call configureLogger explicitly
+	 * uses plugin preferences to select which concrete logger must be selected  
 	 */
 	static public Log getLogger(String configurationFilePropertyName, String loggerName)
 	{	
 		String logClassName = null;
 		try {
+			// save current property to make sure to be able to set it back if necessary
             logClassName = System.getProperty(LogFactoryImpl.LOG_PROPERTY);
         } catch (SecurityException e) {
             ;
         }
+        // retrieves plugin preferences
+        IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String preferredLogger = store.getString(PreferenceConstants.P_LOGGERCHOICE); 
 	    Log logger=null;
-	    try{
-	    	if (!isLog4JConfigured) configureLog4JLogger(DefaultKermetaConfigurationFilePropertyName);
-	    	// log4j seems ok, configure apache.commons.logging with log4j 
-	    	System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.Log4JLogger");
-	    }catch(java.lang.LinkageError le){
-	    	// conflict in log4j.jar in this platform
-	    	// fall back to original stantard logger or SimpleLog
-	    	if((logClassName != null && logClassName.equals("org.apache.commons.logging.impl.Log4JLogger")) || logClassName == null){
-				System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.SimpleLog");
-				//System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.Jdk14Logger");
-	    	}
-
-	    }
-	    
+		if (preferredLogger.equals(PreferenceConstants.P_LOGGERCHOICE_LOG4J)){
+		    try{
+		    	if (!isLog4JConfigured) configureLog4JLogger(DefaultKermetaConfigurationFilePropertyName);
+		    	// log4j seems ok, configure apache.commons.logging with log4j 
+		    	System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.Log4JLogger");
+		    }catch(java.lang.LinkageError le){
+		    	// conflict in log4j.jar in this platform
+		    	// fall back to original standard logger or SimpleLog
+		    	if((logClassName != null && logClassName.equals("org.apache.commons.logging.impl.Log4JLogger")) || logClassName == null){
+					System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.SimpleLog");
+					//System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.Jdk14Logger");
+		    	}
+	
+		    }
+		}
+		else if (preferredLogger.equals(PreferenceConstants.P_LOGGERCHOICE_JDK14)){
+			System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.Jdk14Logger");
+		}
+		else if (preferredLogger.equals(PreferenceConstants.P_LOGGERCHOICE_SIMPLE)){
+			System.setProperty(LogFactoryImpl.LOG_PROPERTY, "org.apache.commons.logging.impl.SimpleLog");
+		}
+		else if (preferredLogger.equals(PreferenceConstants.P_LOGGERCHOICE_APACHEDEFAULT)){
+			try{
+				// let's try to configure  log4j
+		    	if (!isLog4JConfigured) configureLog4JLogger(DefaultKermetaConfigurationFilePropertyName);
+		    }catch(Error le){}
+		    catch(Exception e){}
+		}
+		// else  simply use Apache default
 		logger = LogFactory.getLog(loggerName);
 		/*logger=org.apache.log4j.Logger.getLogger(loggerName);
 		if (logger == null)

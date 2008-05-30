@@ -1,13 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Log4j Util Plug-in
-Bundle-SymbolicName: org.kermeta.log4j.util
+Bundle-SymbolicName: org.kermeta.log4j.util;singleton:=true
 Bundle-Version: 1.1.99.qualifier
 Bundle-Activator: org.kermeta.log4j.util.plugin.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.apache.log4j
+ org.apache.log4j,
+ org.eclipse.core.resources
 Eclipse-LazyStart: true
 Export-Package: 
  org.apache.commons.logging,
