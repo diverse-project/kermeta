@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.30 2008-04-15 08:58:30 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.31 2008-05-30 14:38:20 cfaucher Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2008-04-15 08:58:30 $</pubdate>
+    <pubdate>$Date: 2008-05-30 14:38:20 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -4148,6 +4148,13 @@ aspect abstract class A {
 }</programlisting>
         
       </section>
+      <section>
+        <title>Aspect without common base</title>
+
+        <para>A special case of the use of AOP in Kermeta is having a ClassDefinition A defined in 2 separately 
+        modeling units (*.kmt) with the keyword aspect. But the two modeling units does not require another kmt or ecore file containing the base definition of A.
+        Now if there is a new Modeling Unit that requires the two previous one the available definition of A is the composition of the 2 defined aspects.</para>
+       </section>
     </section>
 
     <section id="section_modeltype.link">
