@@ -1,4 +1,4 @@
-/* $Id: UploadRXE.java,v 1.4 2007-11-30 08:05:36 dvojtise Exp $
+/* $Id: UploadRXE.java,v 1.5 2008-05-30 15:11:01 vmahe Exp $
  * Project   : KmLogo
  * File      : UploadRXE.java
  * License   : EPL
@@ -13,26 +13,25 @@ package fr.irisa.triskell.kmlogo.ui.popup.actions;
 
 
 
+import icommand.nxt.FileSystem;
+
+import java.io.File;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
-import fr.irisa.triskell.eclipse.console.messages.KermetaMessage;
 import fr.irisa.triskell.eclipse.console.messages.OKMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
-import fr.irisa.triskell.kmlogo.ui.ExecHelper;
 
 
 public class UploadRXE implements IObjectActionDelegate {
@@ -58,30 +57,14 @@ public class UploadRXE implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-		Shell shell = new Shell();
 
 		IOConsole console = new EclipseConsole("Logo uploadRXE");
-		console.println(new InfoMessage("Uploading File " +  nxcFile.getLocation().toString()));
+		console.println(new InfoMessage("Uploading File " +  nxcFile.getLocation().toOSString()));
     	
     	 try {
-    		
-    		 /*
-    		 String cmd = "/opt/NXT/BlueTooth/NXT -a 00:16:53:03:6A:B1 -W " + nxcFile.getLocation().toString();
-    		 Runtime r = Runtime.getRuntime();
-    		 Process p = r.exec(cmd);
-    		 p.waitFor();
-    		 System.out.println(cmd);
-    		 // /opt/NXT/BlueTooth/NXT -a 00:16:53:03:6A:B1 -W Logo.rxe 
-			*/
+    		 File nxcToUpload = new File(nxcFile.getLocation().toOSString());
     		 
-    		 String[] cmds = new String[4];
-    		 cmds[0] = "/opt/NXT/BlueTooth/NXT";
-    		 cmds[1] = "-a 00:16:53:03:6A:B1";
-    		 cmds[2] = "-W";
-    		 cmds[3] = nxcFile.getLocation().toString();
-    		 
-    		 String result = ExecHelper.exec(cmds).getOutput();
-    		 console.println(new KermetaMessage(result ));
+    		 FileSystem.upload(nxcToUpload);
     		 
     		 console.println(new OKMessage("File Uploaded"));
     		 
@@ -98,7 +81,7 @@ public class UploadRXE implements IObjectActionDelegate {
 	public void selectionChanged(IAction action, ISelection selection) {
 		if (selection instanceof StructuredSelection)
 		{
-			// the se=lection should be a single *.ecore file
+			// the selection should be a single *.ecore file
 			currentSelection = (StructuredSelection)selection;
 			Iterator it = currentSelection.iterator();
 
