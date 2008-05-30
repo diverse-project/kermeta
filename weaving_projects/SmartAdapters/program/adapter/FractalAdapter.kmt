@@ -1,4 +1,4 @@
-/* $Id: FractalAdapter.kmt,v 1.2 2008-05-20 14:30:48 bmorin Exp $
+/* $Id: FractalAdapter.kmt,v 1.3 2008-05-30 08:18:16 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -20,21 +20,25 @@ aspect class PlatformAdapter
 {
 	operation ~init() : Void is
 	do
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.~init(self)
+		//extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.~init(self)
+		extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.~init(self)
 	end
 		
 	operation generateAndSaveModel(modelUri : String) : Void is
 	do
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.generateAndSaveEMFModel(self, modelUri)
+		//extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.generateAndSaveEMFModel(self, modelUri)
+		extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.generateAndSaveEMFModel(self, modelUri)
 	end
 	
 	operation saveModel(modelUri : String) : Void is
 	do
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.saveEMFModel(self, modelUri)
+		//extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.saveEMFModel(self, modelUri)
+		extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.saveEMFModel(self, modelUri)
 	end	
 	
 	operation loadUpdateModel(modelUri : String) : Void is 
 	do
-		extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.loadUpdateModel(self, modelUri)
+		//extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.loadUpdateModel(self, modelUri)
+		extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.loadUpdateModel(self, modelUri)
 	end
 }		

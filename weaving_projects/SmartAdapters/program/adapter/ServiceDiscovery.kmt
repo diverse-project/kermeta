@@ -1,0 +1,24 @@
+/* $Id: ServiceDiscovery.kmt,v 1.1 2008-05-30 08:18:16 bmorin Exp $
+ * Creation date: March 19, 2008
+ * License:
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
+ */
+
+package org::kermeta::runtime::adapter;
+
+require kermeta
+require "platform:/resource/SmartAdapters/program/adapter/FractalAdapter.kmt"
+
+/**
+ * This class aspectizes the FractalAdapter 
+ * and implement the run operation
+ * Note: one application is associated to one aspect in Kermeta
+ */
+aspect class PlatformAdapter
+{
+	operation run() : Void is
+	do
+		extern org::diva::causalLink::smartadapters::fractal::ServiceDiscoveryMain.run(self)
+	end
+}

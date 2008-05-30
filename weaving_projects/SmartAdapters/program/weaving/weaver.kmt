@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.21 2008-05-20 14:30:02 bmorin Exp $
+/* $Id: weaver.kmt,v 1.22 2008-05-30 08:18:01 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -32,12 +32,14 @@ class Weaver
 	
 	attribute matcher : PatternMatchingFlora2
 	attribute handler : EcoreHelpers::EcoreHelper
-	//attribute repository : EMFRepository
+	reference resourceModel : Resource
+	attribute repository : EMFRepository
+	reference modelElements : Set<Object>
 	
 	attribute inputMetamodel : Sequence<ecore::EPackage>
 	attribute inputPatternMetamodel : Sequence<ecore::EPackage>
-	attribute inputModel : Set<Object>
-	attribute inputAdapter : Set<Object>
+	
+	attribute adapter : Adapter
 	
 	operation initWeaver() is
 	do
@@ -48,20 +50,14 @@ class Weaver
 			handler := EcoreHelpers::EcoreHelper.new   	  
 	    	handler.initialize()
 		end
-		/*if repository == void then
-			repository := EMFRepository.new
-		end*/
 		if inputMetamodel == void then
 			inputMetamodel := Sequence<ecore::EPackage>.new 
 		end
 		if inputPatternMetamodel == void then
 			inputPatternMetamodel := Sequence<ecore::EPackage>.new
 		end
-		if inputModel == void then
-			inputModel := Set<Object>.new
-		end
-		if inputAdapter == void then
-			inputAdapter := Set<Object>.new
+		if repository == void then
+			repository := EMFRepository.new
 		end
 	end
 	
@@ -76,35 +72,64 @@ class Weaver
 	operation loadMetamodel(domainMMUri : String) is
 	do
 		inputMetamodel.clear
-		handler.loadEcoreModel(EMFRepository.new, domainMMUri).each{p | inputMetamodel.add(p)}
+		inputMetamodel.addAll(handler.loadEcoreModel(repository,domainMMUri))
+		//handler.loadEcoreModel(EMFRepository.new,domainMMUri).each{p | inputMetamodel.add(p)}
 	end
 	
 	operation loadMetamodelPattern(domainMMPatternUri : String) is
 	do
 		inputPatternMetamodel.clear
-		handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri).each{p | inputPatternMetamodel.add(p)}
+		inputPatternMetamodel.addAll(handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri))
+		//handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri).each{p | inputPatternMetamodel.add(p)}
 	end
 	
 	operation loadModel(baseModelUri : String, domainMMUri : String) is
 	do
-		inputModel := loadModel2(EMFRepository.new/*repository*/, baseModelUri, domainMMUri)
+		resourceModel := repository.createResource(baseModelUri, domainMMUri)
+		resourceModel.load
+		modelElements := resourceModel.instances
 	end
 	
 	operation loadAdapter(adapterUri : String, adaptMMUri : String) is
 	do
-		inputAdapter := loadModel2(EMFRepository.new/*repository*/, adapterUri, adaptMMUri)
+		var resourceAdapter : Resource init EMFRepository.new.createResource(adapterUri, adaptMMUri)
+		resourceAdapter.load
+		adapter ?= resourceAdapter.instances.one
 	end
 
 	operation saveModel(model : String, metamodel : String)is
 	do
-		/*inputModel.clear
-		inputModel.add(root)*/
-		/*var o : Object
-		o := inputModel.one
-		stdio.writeln(o.printObject)
-		inputModel.clear
-		inputModel.add(o)*/
-		saveModel2(inputModel, model, metamodel)		
+/*		stdio.writeln("content")
+		stdio.writeln("-------")
+		resourceModel.contents.each{c | 
+    		stdio.writeln(c.printObject)
+    	}
+    	stdio.writeln("-------")
+    	stdio.writeln("dependent")
+		stdio.writeln("-------")
+    	resourceModel.dependentResources.each{c | 
+    		stdio.writeln("dependent :"+c.printObject)
+    	}
+    	stdio.writeln("-------")
+    	stdio.writeln("instance")
+    	resourceModel.instances.each{c |
+    		stdio.writeln("instance :"+c.printObject)
+    	}
+    	stdio.writeln("-------")
+    	
+    	
+    	stdio.writeln("dangling")
+    	stdio.writeln("-------")
+    	resourceModel.repository.findDanglingModelElements().each{d |
+    		stdio.writeln(d.toString)
+    	}*/
+    	
+    	resourceModel.saveWithNewURI(model)
+    	
+    	/*var rep : EMFRepository init EMFRepository.new
+    	var res : Resource init rep.createResource(model, metamodel)
+    	res.addAll(modelElements)
+    	res.save*/ 
 	end
 
 	operation finalizeWeaver() is
@@ -115,16 +140,6 @@ class Weaver
 	end
 
 	operation weaving(/*adaptMMUri : String, */domainMMUri : String, domainMMPatternUri : String) : Void is do 
-		var rootElement : Object init inputModel.one
-
-		var adapter : Adapter
-		inputAdapter.each{o | 
-							var temp : Adapter
-							temp ?= o
-							if(temp != void) then
-								adapter := temp
-							end
-						}
 		/**
 		 * Derive the adapter, if needed
 		 */
@@ -148,16 +163,16 @@ class Weaver
 			adapter.adapt.each{a | stdio.writeln(a.toString)}
 		end*/
 
-		adapter.checkAllInvariants
+		//adapter.checkAllInvariants
 		
 		if (adapter.adapt.size > 0) then
 			adapter.initClone
 			if (adapter.~aspect.template != void) then
 				/*---Pattern matching---*/
-				stdio.writeln("Searching base model elements matching template...")
+				stdio.writeln("Searching base model elements matching the interface model...")
 		        var iteBindings : Iterator<Hashtable<Object, Object>> 
 		        	init Iterator<Hashtable<Object, Object>>.new
-		        iteBindings := matcher.optimizedMatch(inputMetamodel, inputModel, adapter.~aspect.template, true, false, true)
+		        iteBindings := matcher.optimizedMatch(inputMetamodel, modelElements, adapter.~aspect.template, true, false, true)
 		        stdio.writeln("") 
 		        stdio.writeln("")
 		        stdio.writeln("")                
@@ -178,7 +193,9 @@ class Weaver
 					 //display current binding
 				     stdio.writeln("Binding"+i.toString+":")
 				     stdio.writeln("*******************************************")
-					 binding.keys.each{k | stdio.write("-------\n"+k.printObject+"bound to\n"+binding.getValue(k).printObject)}
+				     if displayInfo then
+					 	binding.keys.each{k | stdio.write("-------\n"+k.printObject+"bound to\n"+binding.getValue(k).printObject)}
+					 end
 					 stdio.writeln("*******************************************")
 					 stdio.writeln("")				 
 					 do
@@ -190,7 +207,7 @@ class Weaver
 					 if doAction then
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("#>weaving the aspect for binding"+i.toString+"...")
-						adapter.apply(binding, rootElement) //aspect weaving: do not require domain concepts
+						adapter.apply(binding/*, rootElement*/) //aspect weaving: do not require domain concepts
 					 	stdio.writeln("#>weaving the aspect for binding"+i.toString+" done!")
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("")
@@ -203,7 +220,7 @@ class Weaver
 					 	if doAction then
 					 		stdio.writeln("----------------------------")
 					 		stdio.writeln("#>unweaving the aspect for binding"+i.toString+"...")
-					 		adapter.unweave(rootElement)
+					 		adapter.unweave/*(rootElement)*/
 					 		stdio.writeln("#>unweaving the aspect for binding"+i.toString+" done!")
 					 		stdio.writeln("----------------------------")
 					 		stdio.writeln("")
@@ -219,7 +236,7 @@ class Weaver
 						 		//executing pattern matching again (the composition might have change the base model)
 						 		if doAction then
 						 			iteBindings := Iterator<Hashtable<Object, Object>>.new
-						 			iteBindings := matcher.optimizedMatch(inputMetamodel, inputModel, adapter.~aspect.template, true, false, true)
+						 			iteBindings := matcher.optimizedMatch(inputMetamodel, modelElements, adapter.~aspect.template, true, false, true)
 						 			i := 0
 						 		end
 							end
@@ -227,8 +244,6 @@ class Weaver
 					 end     
 				end	
 			end
-			/*stdio.writeln(rootElement.printObject)
-			stdio.writeln(inputModel.one.printObject)*/
 		else
 			var e:kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 			e.message:="WeavingException: Adapter contains no adaptation or at least one adaptation is not well typed"
@@ -251,23 +266,5 @@ class Weaver
 			initDefaultValues
 		end
 		stdio.writeln("")
-	end
-
-    operation loadModel2(repository : EMFRepository, modelPath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   
-    	//stdio.writeln("  loading: "+modelPath+" ("+metamodelPath+")")
-   		var resource : Resource init repository.createResource(modelPath, metamodelPath)
-       	resource.load()
-        result := resource.instances
-    end	
-	
-    operation saveModel2(obj : Set<Object>, uri : String, domainMM : String) is do
- 		//stdio.writeln("  saving: "+uri+" ("+domainMM+")")
-    	var repository : EMFRepository init EMFRepository.new
-	    var resource : Resource init repository.createResource(uri , domainMM)
-	    obj.each{o | 
-	    	//stdio.writeln(o.printObject)
-	    	resource.instances.add(o)
-	    }
-	    resource.save
-    end
+	end	
 }

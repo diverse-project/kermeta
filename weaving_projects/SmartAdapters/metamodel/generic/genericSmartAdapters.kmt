@@ -1,8 +1,8 @@
-/* $Id: genericSmartAdapters.kmt,v 1.22 2008-03-27 16:33:50 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.23 2008-05-30 08:19:17 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
- * Copyright:
- * Authors: bmorin
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
  */
 
 package org;
@@ -10,6 +10,7 @@ package org;
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"
 require "platform:/resource/SmartAdapters/program/weaving/converter.kmt"
  
+require "platform:/resource/SmartAdapters/program/weaving/print.kmt"//to be removed
 
 using kermeta::standard
 using kermeta::utils
@@ -116,8 +117,8 @@ package smartadapters
 			 * This operation weaves the the aspect for the binding b
 			 * In other words, it executes all the adaptations of the composition protocol  
 			 */
-			operation apply(b : Hashtable<Object, Object>, model : Object) 
-				pre modelCheckedBefore is do
+			operation apply(b : Hashtable<Object, Object>/*, model : Object*/) 
+				/*pre modelCheckedBefore is do
 					var isChecked : Boolean init true
 					do
 						model.checkAllInvariants
@@ -134,7 +135,7 @@ package smartadapters
 						isChecked := false
 					end
 					isChecked
-				end
+				end*/
 			is do
 				var i : Integer init 1
 				binding := b
@@ -162,8 +163,8 @@ package smartadapters
 			 * This operation unweaves the previously woven aspect, for the current binding
 			 * In other words, it performs a roll back.
 			 */
-			operation unweave(model : Object) 
-				pre modelCheckedBefore is do
+			operation unweave(/*model : Object*/) 
+				/*pre modelCheckedBefore is do
 					var isChecked : Boolean init true
 					do
 						model.checkAllInvariants
@@ -180,7 +181,7 @@ package smartadapters
 						isChecked := false
 					end
 					isChecked
-				end
+				end*/
 			is do
 				var i : Integer init 1
 				adapt.each{a | 
@@ -240,11 +241,14 @@ package smartadapters
 				initAdapter
 				if (~aspect.structure != void) then
 					~aspect.structure.content.each{elt |
-							var newCloned : Object
-							newCloned := converter.getConverted(elt)
+						if not convert.getValue(elt.getMetaClass()).isAbstract then //TODO: faire ce test ailleurs
+							var newCloned : Object init converter.getConverted(elt)
 							if (newCloned != void) then
 								clone.put(elt, newCloned)
 							end
+						else
+							raise Exception.new
+						end
 					}
 				end
 			end
@@ -301,7 +305,6 @@ package smartadapters
 			 * 		- onDemand: cloned on demand
 			 */
 			operation cloneAgain(handler : Object, template : Object, type : uniqueType) : Void is do
-				stdio.writeln(type.toString)
 				var o : Object
 				if template != void then
 					o := getRealObject(template,false)
@@ -433,27 +436,33 @@ package smartadapters
 					col.each{o | res.add(getRealObject(o,false))}
 					result := res
 				else
+					var res : Object
 					var realObj : Object
 					realObj := binding.getValue(obj)
-					if (realObj != void) then
-							result := realObj
+					if (realObj != void) then //base model element
+							res := realObj
 					else
 						realObj := clone.getValue(obj)
 						if (realObj != void) then
 							if cloned.getValue(realObj) != void then
-								result != cloned.getValue(realObj)
+								res != cloned.getValue(realObj)
 							else
-								result := realObj
+								res := realObj
 							end
 						else
 							var pObj : PObject
 							pObj ?= obj
 							if (pObj != void) then
-								result := converter.getConverted(obj)
+								res := converter.getConverted(obj)
 							else
-								result := obj
+								res := obj
 							end
 						end
+					end
+					if res.getMetaClass().isAbstract then//TODO
+						stdio.writeln("DTC !!!")
+					else
+						result := res
 					end
 				end
 			end

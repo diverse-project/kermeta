@@ -27,7 +27,7 @@
     <eSubpackages name="instance" nsURI="http://art/pattern/art/instance" nsPrefix="instance">
       <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//art/ModelElement">
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//art/type/ComponentType"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//art/instance/InstanceState"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//art/String"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="superComponent" eType="#//art/instance/CompositeInstance"
             eOpposite="#//art/instance/CompositeInstance/subComponent"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
@@ -43,10 +43,6 @@
             eType="#//art/instance/ComponentInstance" containment="true" eOpposite="#//art/instance/ComponentInstance/superComponent"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" upperBound="-1"
             eType="#//art/instance/DelegationBinding" containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EEnum" name="InstanceState">
-        <eLiterals name="OFF" literal="OFF"/>
-        <eLiterals name="ON" value="1" literal="ON"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
         <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//art/type/Attribute"/>
@@ -103,11 +99,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//art/TypedElement"/>
       <eClassifiers xsi:type="ecore:EClass" name="PrimitivePort" eSuperTypes="#//art/ModelElement">
         <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//art/type/Service"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//art/type/PortRole"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EEnum" name="PortRole">
-        <eLiterals name="client" literal="client"/>
-        <eLiterals name="server" value="1" literal="server"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//art/String"/>
       </eClassifiers>
     </eSubpackages>
   </eSubpackages>

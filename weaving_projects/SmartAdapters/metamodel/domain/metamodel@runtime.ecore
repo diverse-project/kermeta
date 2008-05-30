@@ -29,7 +29,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//type/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" lowerBound="1"
-          eType="#//instance/InstanceState"/>
+          eType="#//String"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="superComponent" eType="#//instance/CompositeInstance"
           eOpposite="#//instance/CompositeInstance/subComponent"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
@@ -45,10 +45,6 @@
           eType="#//instance/ComponentInstance" containment="true" eOpposite="#//instance/ComponentInstance/superComponent"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" upperBound="-1"
           eType="#//instance/DelegationBinding" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EEnum" name="InstanceState">
-      <eLiterals name="OFF"/>
-      <eLiterals name="ON" value="1"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute">
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
@@ -88,8 +84,8 @@
           eType="#//instance/DelegationBinding" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true" eSuperTypes="#//ModelElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
-          upperBound="-1" eType="#//type/Operation" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operation" upperBound="-1"
+          eType="#//type/Operation" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//ModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="input" upperBound="-1"
@@ -111,11 +107,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"
           eType="#//type/Service"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" lowerBound="1"
-          eType="#//type/PortRole"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EEnum" name="PortRole">
-      <eLiterals name="client"/>
-      <eLiterals name="server" value="1"/>
+          eType="#//String"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

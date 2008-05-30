@@ -1,8 +1,8 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.14 2008-04-03 07:18:02 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.15 2008-05-30 08:19:17 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
- * Copyright:
- * Authors: bmorin
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
  */
 
 package org;

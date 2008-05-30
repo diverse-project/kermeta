@@ -1,4 +1,4 @@
-/* $Id: print.kmt,v 1.2 2008-05-20 14:30:02 bmorin Exp $
+/* $Id: print.kmt,v 1.3 2008-05-30 08:18:01 bmorin Exp $
  * Creation date: February 21, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -9,32 +9,56 @@ package kermeta::language::structure;
 
 
 require kermeta
+using kermeta::utils
 using kermeta::standard
-
-
 
 aspect class Object
 {
 	operation printObject() : String is
 	do
-		var print : String init self.toString+"\n"
-		//printing owned attributes
-		self.getMetaClass.ownedAttribute.each{p |
-			print := print + p.printProperty(self)
-		}
-		//printing inherited attributes
-		self.getMetaClass.allSuperClasses.each{s |
-			//print := print + s.name + "\n"
-			s.ownedAttribute.each{p |
- 					print := print + p.printProperty(self)
- 			}
-		}
-		result := print
+		var print : StringBuffer init StringBuffer.new 
+		print.append(self.toString).append("\n")
+		 
+		var attributes : Set<Property> init Set<Property>.new
+		attributes.addAll(self.getMetaClass.allAttributes)
+		if attributes.size > 0 then
+			print := print.append("- Attributes: \n")
+			attributes.each{p |
+				print := print.append(p.printProperty(self))
+			}
+		end	
+	
+		var references : Set<Property> init Set<Property>.new
+		references.addAll(self.getMetaClass.allReferences)
+		if references.size > 0 then
+			print := print.append("- References: \n")
+			references.each{p |
+				print := print.append(p.printProperty(self))
+			}
+		end 
+		result := print.toString
 	end
 }
 
 aspect class Class
 {
+
+	operation allAttributes() : Set<Property> is
+	do
+		var properties : Set<Property> init Set<Property>.new
+		properties.addAll(self.ownedAttribute.select{p | p.isComposite})
+		self.allSuperClasses.each{s | properties.addAll(s.ownedAttribute.select{p | p.isComposite})}
+		result := properties 
+	end
+	
+	operation allReferences() : Set<Property> is
+	do
+		var properties : Set<Property> init Set<Property>.new
+		properties.addAll(self.ownedAttribute.select{p | not p.isComposite})
+		self.allSuperClasses.each{s | properties.addAll(s.ownedAttribute.select{p | not p.isComposite})}
+		result := properties
+	end
+	
 	operation allSuperClasses() : Set<Class> is
 	do
 		var allSuperClasses : Set<Class> init Set<Class>.new
@@ -46,12 +70,10 @@ aspect class Class
 		loop
 			allSuperClasses.addAll(superClasses)
 			temp.clear
-			//var temp : Set<Class> init Set<Class>.new
  			superClasses.each{s |
  				temp.addAll(s.superClass)
  			}
  			superClasses.clear
- 			//superClasses := Set<Class>.new
  			superClasses.addAll(temp)
 		end
 		result := allSuperClasses
@@ -63,17 +85,25 @@ aspect class Property
 	operation printProperty(o : Object) : String is
 	do
 		var coll : Collection<kermeta::language::structure::Object>
-		var print : String init ""
-		print := print + "\t" + name + ": "
+		var print : StringBuffer init StringBuffer.new
 		if upper == 1 then
-			print := print + o.get(self).toString
+			if o.get(self) != void then
+				print := print.append("\t").append(name).append(": ")
+				print := print.append(o.get(self).toString)
+				print := print.append("\n")
+			end
 		else
 			coll ?= o.get(self)
-			coll.each{b | 
-				print := print + b.toString + " "
-			}
+			if coll != void then
+				if coll.size > 0 then
+					print := print.append("\t").append(name).append(": ")
+					coll.each{b | 
+						print := print.append(b.toString).append(" ")
+					}
+					print := print.append("\n")
+				end
+			end
 		end
-		print := print + "\n"
-		result := print
+		result := print.toString
 	end
 }

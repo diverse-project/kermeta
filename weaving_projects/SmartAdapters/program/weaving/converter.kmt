@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.13 2008-05-20 14:37:12 bmorin Exp $
+/* $Id: converter.kmt,v 1.14 2008-05-30 08:18:01 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -20,7 +20,7 @@ class Converter
 {
 	//Mapping MM'->MM
 	reference convertTable : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
-	reference converted : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>	
+	reference converted : Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>
 	
 	/**
 	initializes the converter (~constructor)
@@ -51,14 +51,13 @@ class Converter
 	post notVoid is result != void
 	post conformance is result.getMetaClass == convertTable.getValue(obj.getMetaClass)
 	is do
-		var newMeta : kermeta::language::structure::Class 
-		newMeta := convertTable.getValue(obj.getMetaClass)
+		var newMeta : kermeta::language::structure::Class init convertTable.getValue(obj.getMetaClass)
 		if(newMeta != void) then
-			var o : kermeta::language::structure::Object init newMeta.new
 			if(converted.getValue(obj) == void) then
-					converted.put(obj,o)
-					convert(obj,o)
-				    result:=o
+				var o : kermeta::language::structure::Object init newMeta.new
+				converted.put(obj,o)
+				convert(obj,o)
+				result := o
 			else
 				result := converted.getValue(obj) 
 			end
@@ -67,15 +66,54 @@ class Converter
 		end
 	end
 		
-	operation convert2(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object) is
+	operation processProperties(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object, properties : Set<Property>) is
 	do
-		var c : Class init conv.getMetaClass
-	
-		c.ownedAttribute.each{p |
-			//stdio.writeln(p.name)
-			processProperty(obj,conv,p)
+		properties.each{a |
+			if(obj.get(a) != void and not(a.name.equals("tag") or a.name.equals("ownedTag"))) then
+				var ob : Object init obj.get(a)
+				//single property (upper bound==1)
+				if(a.upper == 1 and ob != void) then
+					var temp : Object
+					temp := getConverted(ob)
+					if(temp != void) then
+						var e : EnumerationLiteral
+						e ?= temp
+						if e == void then					
+							conv.~set(a,temp)
+						else
+							stdio.writeln("not converted due to a bug in Kermeta!!!"+conv.toString+"."+a.name+" := "+temp.toString)
+							stdio.writeln("testEnum::TestEnum.testReflect2")
+						end
+					end
+				//collection property -> iteration
+				else
+					var list:Collection<kermeta::language::structure::Object>
+					var convertedList:Collection<kermeta::language::structure::Object>
+					list?=ob
+					if(list!=void and list.size>0) then
+						convertedList ?= conv.get(a)
+						convertedList.clear
+						list.each{o |
+								var tmp:Object init getConverted(o)
+								convertedList.add(tmp)
+						}						
+					end
+				end
+			end
 		}
-	
+	end
+		
+	/**
+	copies obj (MM') into conv (MM) thanks to the convert Hashtable
+	*/	
+	operation convert(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object) : Void is do
+		var c : Class init conv.getMetaClass
+		var properties1 : Set<Property> init Set<Property>.new
+		var properties2 : Set<Property> init Set<Property>.new
+		 
+		properties1.addAll(c.ownedAttribute.select{p | p.isComposite})
+		properties2.addAll(c.ownedAttribute.select{p | not p.isComposite})
+		
 		var temp : Set<Class> init Set<Class>.new
 		var superClasses : Set<Class> init Set<Class>.new 
 		superClasses.addAll(c.superClass)
@@ -84,57 +122,15 @@ class Converter
 		loop
 			temp.clear
  			superClasses.each{s |
- 					s.ownedAttribute.each{p | 
- 					//stdio.writeln(p.name)
- 					processProperty(obj,conv,p)
- 				}
+ 				properties1.addAll(s.ownedAttribute.select{p | p.isComposite}) 
+ 				properties2.addAll(s.ownedAttribute.select{p | not p.isComposite})
  				temp.addAll(s.superClass)
  			}
  			superClasses.clear
  			superClasses.addAll(temp)
 		end
-	end
-
-	operation processProperty(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object, a : Property) is
-	do
-		if(obj.get(a) != void and not(a.name.equals("tag") or a.name.equals("ownedTag"))) then
-			var ob : Object init obj.get(a)
-			//single property (upper bound==1)
-			if(a.upper == 1 and ob != void) then
-				var temp : Object
-				temp := getConverted(ob)
-				if(temp != void) then
-					var e : EnumerationLiteral
-					e ?= temp
-					if e == void then					
-						conv.~set(a,temp)
-					else
-						stdio.writeln("not converted due to a bug in Kermeta!!!"+conv.toString+"."+a.name+" := "+temp.toString)
-						stdio.writeln("testEnum::TestEnum.testReflect2")
-					end
-				end
-			//collection property -> iteration
-			else
-				var list:Collection<kermeta::language::structure::Object>
-				var convertedList:Collection<kermeta::language::structure::Object>
-				list?=ob
-				if(list!=void and list.size>0) then
-					convertedList ?= conv.get(a)
-					convertedList.clear
-					list.each{o |
-							var tmp:Object init getConverted(o)
-							convertedList.add(tmp)
-					}						
-				end
-			end
-		end	
-	end
 		
-	/**
-	copies obj (MM') into conv (MM) thanks to the convert Hashtable
-	*/	
-	operation convert(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object) : Void is do
-		//stdio.writeln("convert "+obj.toString+" "+conv.toString)		
-		convert2(obj,conv)
+		processProperties(obj,conv,properties1)
+		processProperties(obj,conv,properties2)
 	end
 }
