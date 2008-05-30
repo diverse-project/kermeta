@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.5 2008-01-09 13:52:24 cfaucher Exp $
+/* $Id: Compiler.java,v 1.6 2008-05-30 12:17:50 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -46,10 +46,22 @@ public class Compiler extends Generator {
 
 	private String genModelPath = null;
 	
-	private KermetaUnit kmUnit = null;
+	/**
+	 * @deprecated
+	 */
+	//private KermetaUnit kmUnit = null;
 	
-	private EcoreExporter km2ecoreGen = null;
+	/**
+	 * @deprecated
+	 */
+	//private EcoreExporter km2ecoreGen = null;
 	
+	/**
+	 * Constructor
+	 * @param abosluteEcorePath
+	 * @param kmUnit
+	 * @param km2ecoreGen
+	 */
 	public Compiler(String abosluteEcorePath, KermetaUnit kmUnit, EcoreExporter km2ecoreGen) {
 		super();
 		arguments[0] = "-ecore2GenModel";
@@ -59,10 +71,14 @@ public class Compiler extends Generator {
 		
 		// Get the IFile corresponding to the generated Ecore file
 		this.ecorefile = ResourceHelper.getIFile("file:/"+arguments[1]);
-		this.kmUnit = kmUnit;
-		this.km2ecoreGen = km2ecoreGen;
+		//this.kmUnit = kmUnit;
+		//this.km2ecoreGen = km2ecoreGen;
 	}
 
+	/**
+	 * Constructor
+	 * @param ecoreFile
+	 */
 	public Compiler(IFile ecoreFile) {
 		super();
 		ecorefile = ecoreFile;
@@ -72,6 +88,11 @@ public class Compiler extends Generator {
 		arguments[3] = "Ckm"; // it seems this assignment is deprecated
 	}
 
+	/**
+	 * Step 1: Generate the genmodel file from the ecore file
+	 * Step 2: Launch the Java Source generation from the genmodel file
+	 * Step 3: Launch the Java Source generation from the simk file
+	 */
 	public void run() throws IOException {
 
 		// Generate the stub of the genmodel
@@ -118,7 +139,7 @@ public class Compiler extends Generator {
 				
 				//System.out.println("Number of GenPackages: " + genModel.getGenPackages().size());
 	
-				// Saving the *.genmodel before the generation of plugins
+				//Step1: Saving the *.genmodel before the generation of plugins
 				genModelResource.save(Collections.EMPTY_MAP);
 			}
 			
@@ -138,9 +159,10 @@ public class Compiler extends Generator {
 			
 			// Delete the old compiled sources
 			ResourceHelper.deleteIProject(compiledPluginId, true);
-			// Generate the plugins
+			//Step 2: Generate the plugins
 			this.run(args);
 			
+			//Step 3: Generate the content of the simk file
 			compileHelpers();
 		
 		} else {
@@ -189,21 +211,8 @@ public class Compiler extends Generator {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Launch the generation of the Java Source from the simk file
 	 */
-	public String getCompiledPluginId() {
-		return compiledPluginId;
-	}
-
-	/**
-	 * 
-	 * @param genModel
-	 */
-	private void setCompiledPluginId(GenModel genModel) {
-		compiledPluginId = "org.kermeta.compiled."+ genModel.getModelName().toLowerCase();
-	}
-	
 	private void compileHelpers() {
 		GenerateHelperAction compileHelperAction = new GenerateHelperAction();
 		
@@ -213,8 +222,25 @@ public class Compiler extends Generator {
 		IFile genModelFile = ResourceHelper.getIFile(genModelPath);
 		IFile simk_file = ResourcesPlugin.getWorkspace().getRoot().getFile(genModelFile.getFullPath().removeFileExtension().addFileExtension(SimkModelHelper.SIMK_EXT));
 		if(genModelFile.exists()) {
-			compileHelperAction.generate(genModelFile, this.kmUnit, this.km2ecoreGen, simk_file);
+			compileHelperAction.generate(genModelFile, /*this.kmUnit,*/ /*this.km2ecoreGen,*/ simk_file);
 		}
+	}	
+	
+	
+	/**
+	 * Get the name of the future plugin 
+	 * @return
+	 */
+	public String getCompiledPluginId() {
+		return compiledPluginId;
+	}
+
+	/**
+	 * Set the name of the future plugin
+	 * @param genModel
+	 */
+	private void setCompiledPluginId(GenModel genModel) {
+		compiledPluginId = "org.kermeta.compiled."+ genModel.getModelName().toLowerCase();
 	}
 
 }
