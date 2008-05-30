@@ -1,4 +1,4 @@
-/* $Id: KermetaCompiler.java,v 1.5 2008-05-27 13:29:29 cfaucher Exp $
+/* $Id: KermetaCompiler.java,v 1.6 2008-05-30 12:18:23 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -13,11 +13,12 @@ package org.kermeta.compiler;
 import java.io.IOException;
 import java.util.LinkedHashSet;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.kermeta.compiler.model.compiler.impl.AbstractCompilerImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.merger.Merger;
 
 import fr.irisa.triskell.eclipse.resources.URIHelper;
@@ -27,14 +28,13 @@ import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class KermetaCompiler extends AbstractCompilerImpl {
 
 	protected IFile kermetafile;
 	private EcoreExporter km2ecoreGen;
 
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
 
 	/**
 	 * Constructor for CompileKermetaAction.

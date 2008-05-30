@@ -1,4 +1,4 @@
-/* $Id: CompilerUtil.java,v 1.6 2008-05-27 13:29:29 cfaucher Exp $
+/* $Id: CompilerUtil.java,v 1.7 2008-05-30 12:18:23 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompilerUtil.java
  * License   : EPL
@@ -12,7 +12,7 @@ package org.kermeta.compiler.util;
 
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
@@ -22,16 +22,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.kermeta.model.KermetaModelHelper;
-
 import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.kermeta.model.KermetaModelHelper;
 
 /**
  * Provide some useful methods to manage the Kermeta Compiler
  */
 public class CompilerUtil {
 	
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
 
 	/**
 	 * 

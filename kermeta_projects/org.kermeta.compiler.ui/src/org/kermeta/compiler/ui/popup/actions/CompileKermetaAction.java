@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.4 2008-05-27 13:30:05 cfaucher Exp $
+/* $Id: CompileKermetaAction.java,v 1.5 2008-05-30 12:19:05 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -12,7 +12,7 @@ package org.kermeta.compiler.ui.popup.actions;
 
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EModelElement;
@@ -29,11 +29,11 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.KermetaCompiler;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class CompileKermetaAction implements IObjectActionDelegate {
 
@@ -41,7 +41,7 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 
 	protected IFile kermetafile;
 
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
+	final static public Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
 
 	/**
 	 * Constructor for CompileKermetaAction.
