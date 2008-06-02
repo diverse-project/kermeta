@@ -1,4 +1,4 @@
-/* $Id: LogConfigurationHelper.java,v 1.4 2008-05-30 12:58:36 dvojtise Exp $
+/* $Id: LogConfigurationHelper.java,v 1.5 2008-06-02 07:34:57 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : LogConfigurationHelper.java
  * License    : EPL
@@ -18,6 +18,7 @@ import java.io.IOException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.LogFactoryImpl;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.kermeta.log4j.util.plugin.Activator;
 import org.kermeta.log4j.util.preferences.PreferenceConstants;
@@ -50,12 +51,14 @@ public class LogConfigurationHelper {
 		if(configurationFilePropertyName != null && configurationFilePropertyName.length() > 0){
 			propertyValue = System.getProperty(configurationFilePropertyName);
 		}
-		if (propertyValue == null || propertyValue.length() == 0){
-			// system property not set, use plugin preferences
-			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-			propertyValue = store.getString(PreferenceConstants.P_LOG4JXMLPATH);
+		if(Platform.isRunning()){
+        	// ignore preference if eclipse platform is not running
+			if (propertyValue == null || propertyValue.length() == 0){
+				// system property not set, use plugin preferences
+				IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+				propertyValue = store.getString(PreferenceConstants.P_LOG4JXMLPATH);
+			}
 		}
-		
     	if (propertyValue != null && propertyValue.length() > 0)
     	{
     	    logConfigurationFile = new File(propertyValue);  
@@ -99,9 +102,14 @@ public class LogConfigurationHelper {
         } catch (SecurityException e) {
             ;
         }
+        // default prefered logger = LOG4J
+        String preferredLogger = PreferenceConstants.P_LOGGERCHOICE_LOG4J;
         // retrieves plugin preferences
-        IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		String preferredLogger = store.getString(PreferenceConstants.P_LOGGERCHOICE); 
+        if(Platform.isRunning()){
+        	// ignore preference if eclipse platform is not running
+	        IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+			preferredLogger = store.getString(PreferenceConstants.P_LOGGERCHOICE);
+        }
 	    Log logger=null;
 		if (preferredLogger.equals(PreferenceConstants.P_LOGGERCHOICE_LOG4J)){
 		    try{
