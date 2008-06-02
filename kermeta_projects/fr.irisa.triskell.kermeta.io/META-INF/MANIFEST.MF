@@ -58,4 +58,3 @@ Export-Package: antlr,
  org.kermeta.loader.kmt.fixer,
  org.kermeta.model
 Bundle-Vendor: IRISA/INRIA
-Import-Package: org.apache.log4j

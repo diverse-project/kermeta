@@ -20,7 +20,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.navigator,
  fr.irisa.triskell.kermeta.texteditor,
  org.kermeta.io.loader,
- org.apache.log4j,
  org.kermeta.log4j.util
 Eclipse-LazyStart: true
 Bundle-Vendor: %providerName
