@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Workbench Plug-in
+Bundle-SymbolicName: org.kermeta.kpm.test.workbench;singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: fr.irisa.triskell.kermeta.kpm,
+ org.openembedd.tests,
+ org.eclipse.core.runtime,
+ fr.irisa.triskell.kermeta.io,
+ org.eclipse.ui.ide,
+ org.eclipse.debug.core,
+ fr.irisa.triskell.kermeta
+Eclipse-LazyStart: true
+Bundle-Activator: org.kermeta.kpm.test.KpmTestPlugin
