@@ -6,6 +6,8 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.RuntimeProcess;
 import org.kermeta.interpreter.InterpreterPlugin;
@@ -188,7 +190,14 @@ abstract public class AbstractKInterpreter {
             error( "\n" + e.toString() );
 		} catch (Throwable e) {
 			e.printStackTrace();
-			error( e.getMessage() );
+			String msg = "Kermeta internal error due to ";
+			if(e.getMessage() != null) msg += e.getMessage();
+			else msg += e.toString();
+			msg += ". Please contact the development team and send them the logs. ";
+			// msg for the logger
+			error( msg );
+			// msg for eclipse ui (ErrorLog view)
+			InterpreterPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, "fr.irisa.triskell.kermeta.interpreter", msg,e));
 		} finally {
 			if ( _fakeProcess != null )
 				try {
