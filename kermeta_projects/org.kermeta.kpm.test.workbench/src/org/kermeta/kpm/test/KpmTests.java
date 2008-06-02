@@ -1,6 +1,6 @@
 
 
-/*$Id: KpmTests.java,v 1.1 2008-06-02 06:48:31 ftanguy Exp $
+/*$Id: KpmTests.java,v 1.2 2008-06-02 09:13:02 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	KpmTests.java
 * License : EPL
@@ -17,11 +17,12 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 	@Suite.SuiteClasses({
-		/*ResourceCreationTest.class,
+		ResourceCreationTest.class,
 		ResourceDeletionTest.class,
 		ResourceMoveTest.class,
-		EventDispatcherTest.class,*/
-		DependencyTest.class
+		EventDispatcherTest.class,
+		DependencyTest.class,
+		TypeFilterTest.class
 	})
 public class KpmTests {
 

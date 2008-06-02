@@ -10,5 +10,12 @@
          </run>
       </application>
    </extension>
+   <extension
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action
+            class="org.kermeta.kpm.test.actions.UpdateLastTimeModifiedAction"
+            id="org.kermeta.kpm.test.workbench.updateLastTimeModified">
+      </Action>
+   </extension>
 
 </plugin>

@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceCreationTest.java,v 1.1 2008-06-02 06:48:31 ftanguy Exp $
+/*$Id: ResourceCreationTest.java,v 1.2 2008-06-02 09:13:02 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	ResourceCreation.java
 * License : EPL
@@ -22,11 +22,13 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,74 +47,63 @@ public class ResourceCreationTest {
 	}
 	
 	@After
-	public void tearDown() {
-		IWorkspaceRunnable r = new IWorkspaceRunnable() {
-			public void run(IProgressMonitor monitor) throws CoreException {
+	public void tearDown() throws InterruptedException {
+		WorkspaceJob job = new WorkspaceJob("") {
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				IProject project = _workspace.getRoot().getProject("oneProject");
 				project.delete(true, monitor);
+				return Status.OK_STATUS;
 			}
 		};
-		try {
-			_workspace.run(r, null);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
+		job.schedule();
+		job.join();
+		Thread.sleep(1000);
 	}
 	
 	@Test
-	public void createProject() {
-		IWorkspaceRunnable r = new IWorkspaceRunnable() {
-			public void run(IProgressMonitor monitor) throws CoreException {
+	public void createProject() throws InterruptedException {
+		WorkspaceJob job = new WorkspaceJob("") {
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				IProject project = _workspace.getRoot().getProject("oneProject");
 				project.create(monitor);
 				project.open(monitor);
+				return Status.OK_STATUS;
 			}
 		};
-		try {
-			_workspace.run(r, null);
-			// Wait for event handling
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		job.schedule();
+		job.join();
+		Thread.sleep(1000);
 		IProject project = _workspace.getRoot().getProject("oneProject");
 		Assert.assertNotNull( KpmManager.getDefault().getUnit(project) );
 	}
 	
 	@Test
-	public void createFolder() {
-		IWorkspaceRunnable r = new IWorkspaceRunnable() {
-			public void run(IProgressMonitor monitor) throws CoreException {
+	public void createFolder() throws InterruptedException {
+		WorkspaceJob job = new WorkspaceJob("") {
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				IProject project = _workspace.getRoot().getProject("oneProject");
 				project.create(monitor);
 				project.open(monitor);
 				IFolder folder = project.getFolder( "oneFolder");
 				folder.create(true, true, monitor);
+				return Status.OK_STATUS;
 			}
 		};
-		try {
-			_workspace.run(r, null);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-		// Wait for event handling
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		job.schedule();
+		job.join();
+		Thread.sleep(1000);
 		IFolder folder = _workspace.getRoot().getFolder( new Path("/oneProject/oneFolder") );
 		Assert.assertNotNull( KpmManager.getDefault().getUnit(folder) );
 	}	
 	
 	@Test
-	public void createFile() {
-		IWorkspaceRunnable r = new IWorkspaceRunnable() {
-			public void run(IProgressMonitor monitor) throws CoreException {
+	public void createFile() throws InterruptedException {
+		WorkspaceJob job = new WorkspaceJob("") {
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				IProject project = _workspace.getRoot().getProject("oneProject");
 				project.create(monitor);
 				project.open(monitor);
@@ -126,19 +117,12 @@ public class ResourceCreationTest {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				return Status.OK_STATUS;
 			}
 		};
-		try {
-			_workspace.run(r, null);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-		// Wait for event handling
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		job.schedule();
+		job.join();
+		Thread.sleep(1000);
 		IFile file = _workspace.getRoot().getFile( new Path("/oneProject/oneFolder/oneFile.kmt") );
 		Unit unit = KpmManager.getDefault().getUnit(file);
 		Assert.assertNotNull( unit );

@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
-<testsuite errors="0" failures="0" ignored="0" name="org.kermeta.kpm.test.KpmTests" tests="2" time="135.963">
+<testsuite errors="0" failures="0" ignored="0" name="org.kermeta.kpm.test.KpmTests" tests="15" time="42.965">
+<testcase classname="org.kermeta.kpm.test.ResourceCreationTest" methodname="createFolder" name="createFolder(org.kermeta.kpm.test.ResourceCreationTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.ResourceCreationTest" methodname="createFile" name="createFile(org.kermeta.kpm.test.ResourceCreationTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.ResourceCreationTest" methodname="createProject" name="createProject(org.kermeta.kpm.test.ResourceCreationTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.ResourceDeletionTest" methodname="removeFile" name="removeFile(org.kermeta.kpm.test.ResourceDeletionTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.ResourceDeletionTest" methodname="removeFolder" name="removeFolder(org.kermeta.kpm.test.ResourceDeletionTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.ResourceDeletionTest" methodname="removeProject" name="removeProject(org.kermeta.kpm.test.ResourceDeletionTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.ResourceMoveTest" methodname="moveFile" name="moveFile(org.kermeta.kpm.test.ResourceMoveTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.ResourceMoveTest" methodname="moveFolder" name="moveFolder(org.kermeta.kpm.test.ResourceMoveTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.EventDispatcherTest" methodname="sendUpdateEventToKmtFile" name="sendUpdateEventToKmtFile(org.kermeta.kpm.test.EventDispatcherTest)" status="haspassed" time="0.0"/>
 <testcase classname="org.kermeta.kpm.test.DependencyTest" methodname="checkDependencies" name="checkDependencies(org.kermeta.kpm.test.DependencyTest)" status="haspassed" time="0.0"/>
 <testcase classname="org.kermeta.kpm.test.DependencyTest" methodname="checkMarkers" name="checkMarkers(org.kermeta.kpm.test.DependencyTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.TypeFilterTest" methodname="checkFileFilterOnFile" name="checkFileFilterOnFile(org.kermeta.kpm.test.TypeFilterTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.TypeFilterTest" methodname="checkFileFilterOnFolder" name="checkFileFilterOnFolder(org.kermeta.kpm.test.TypeFilterTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.TypeFilterTest" methodname="checkFolderFilterOnFile" name="checkFolderFilterOnFile(org.kermeta.kpm.test.TypeFilterTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.TypeFilterTest" methodname="checkFolderFilterOnFolder" name="checkFolderFilterOnFolder(org.kermeta.kpm.test.TypeFilterTest)" status="haspassed" time="0.0"/>
 </testsuite>

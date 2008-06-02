@@ -1,6 +1,6 @@
 
 
-/*$Id: DependencyTest.java,v 1.1 2008-06-02 06:48:31 ftanguy Exp $
+/*$Id: DependencyTest.java,v 1.2 2008-06-02 09:13:02 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	ResourceDeletionTest.java
 * License : EPL
@@ -26,11 +26,13 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.junit.After;
 import org.junit.Before;
@@ -71,30 +73,26 @@ public class DependencyTest {
 	}
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws InterruptedException {
 		_workspace = ResourcesPlugin.getWorkspace();
 		Wizard w = new Wizard();
 		w.performFinish();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Thread.sleep(1000);
 	}
 	
 	@After
-	public void tearDown() {
-		IWorkspaceRunnable r = new IWorkspaceRunnable() {
-			public void run(IProgressMonitor monitor) throws CoreException {
+	public void tearDown() throws InterruptedException {
+		WorkspaceJob job = new WorkspaceJob("") {
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				IProject project = _workspace.getRoot().getProject("fr.irisa.triskell.kermeta.samples.fsm.demoAspect");
 				project.delete(true, monitor);
+				return Status.OK_STATUS;
 			}
 		};
-		try {
-			_workspace.run(r, null);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
+		job.schedule();
+		job.join();
+		Thread.sleep(1000);
 	}
 		
 	@Test
@@ -123,7 +121,7 @@ public class DependencyTest {
 	}
 
 	@Test
-	public void checkMarkers() {
+	public void checkMarkers() throws CoreException, InterruptedException, IOException {
 		// Loading and typechecking fsmLauncher.kmt
 		IFile launcher = _workspace.getRoot().getFile( new Path("/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/launcher/fsmLauncher.kmt") );
 		Unit launcherUnit = KpmManager.getDefault().getUnit(launcher);
@@ -148,33 +146,17 @@ public class DependencyTest {
 			bos.write( "\nclass State {}\n".getBytes() );
 			bis = new ByteArrayInputStream( bos.toByteArray() );
 			constraints.setContents(bis, true, false, null);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		} finally {
-			try {
-				is.close();
-				bos.close();
-				bis.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			is.close();
+			bos.close();
+			bis.close();
 		}
 		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Thread.sleep(1000);
 
 		IFile fsm = _workspace.getRoot().getFile( new Path("/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/kermeta/fsm.kmt") );
 
-		try {
-			Assert.assertTrue( fsm.findMarkers( IMarker.PROBLEM, false, 1).length != 0 );
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
+		Assert.assertTrue( fsm.findMarkers( IMarker.PROBLEM, false, 1).length != 0 );
 		
 	}
 }
