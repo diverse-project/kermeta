@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceChangeListener.java,v 1.1 2008-05-28 09:26:15 ftanguy Exp $
+/*$Id: ResourceChangeListener.java,v 1.2 2008-06-02 06:45:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ResourceChangeListener.java
 * License : EPL
@@ -22,7 +22,15 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.kermeta.kpm.internal.InternalKpmManager;
 
+/**
+ * This class is used to handle project create/deletion only.
+ * Its responsibilities is to add/remove the necessary unit to the kpm model.
+ * 
+ * @author paco
+ *
+ */
 public class ResourceChangeListener implements IResourceChangeListener, IResourceDeltaVisitor {
 
 	public void resourceChanged(IResourceChangeEvent event) {
@@ -37,6 +45,7 @@ public class ResourceChangeListener implements IResourceChangeListener, IResourc
 		boolean goOn = true;
 		switch( delta.getResource().getType() ) {
 		case IResource.PROJECT :
+			// This can be an heavy process, so we do it into a job.
 			final IResourceDelta d = delta;
 			WorkspaceJob job = new WorkspaceJob("Blah") {
 				@Override
@@ -44,6 +53,9 @@ public class ResourceChangeListener implements IResourceChangeListener, IResourc
 					if ( d.getKind() == IResourceDelta.ADDED ) {
 						ProjectVisitor v = new ProjectVisitor();
 						d.getResource().accept(v);						
+					} else if ( d.getKind() == IResourceDelta.REMOVED ) {
+						DeltaVisitor v = new DeltaVisitor(InternalKpmManager.getDefault().getKpm(), monitor);
+						d.accept(v);
 					}
 					return Status.OK_STATUS;
 				}

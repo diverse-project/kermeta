@@ -24,4 +24,3 @@ Export-Package: fr.irisa.triskell.kermeta.kpm,
  fr.irisa.triskell.kermeta.kpm.validation,
  org.kermeta.kpm
 Bundle-Activator: org.kermeta.kpm.KPMPlugin
-Import-Package: org.apache.log4j

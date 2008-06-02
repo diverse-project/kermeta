@@ -1,6 +1,6 @@
 
 
-/*$Id: ProjectVisitor.java,v 1.1 2008-05-28 09:26:15 ftanguy Exp $
+/*$Id: ProjectVisitor.java,v 1.2 2008-06-02 06:45:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ProjectVisitor.java
 * License : EPL
@@ -20,6 +20,15 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 
+/**
+ * Handle the creation of a new project into the workspace.
+ * 
+ * Its responsibility is to add a corresponding unit of the newly project into the kpm model
+ * and to add a kpm builder to it in order to get notified as soon as changes happen.
+ * 
+ * @author paco
+ *
+ */
 public class ProjectVisitor implements IResourceVisitor {
 
 	public boolean visit(IResource resource) throws CoreException {

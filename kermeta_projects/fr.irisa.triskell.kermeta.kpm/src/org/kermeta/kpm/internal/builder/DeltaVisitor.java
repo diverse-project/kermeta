@@ -1,6 +1,6 @@
 
 
-/*$Id: DeltaVisitor.java,v 1.1 2008-05-28 09:26:15 ftanguy Exp $
+/*$Id: DeltaVisitor.java,v 1.2 2008-06-02 06:45:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	DeltaVisitor.java
 * License : EPL
@@ -23,10 +23,17 @@ import org.kermeta.kpm.KpmManager;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
+/**
+ * A visitor for changes event. Depending on the event, it looks for a unit corresponding to the resource that has changed
+ * and send a proper kpm event or add/remove it from the kpm model.
+ * 
+ * @author paco
+ *
+ */
 public class DeltaVisitor extends UnitCreator implements IResourceDeltaVisitor {
 
 	/**
-	 * 
+	 * The monitor used for visiting the delta.
 	 */
 	private IProgressMonitor _monitor;
 	
