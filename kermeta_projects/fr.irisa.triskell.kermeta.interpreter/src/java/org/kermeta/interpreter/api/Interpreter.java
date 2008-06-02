@@ -260,7 +260,10 @@ public class Interpreter {
 	 * @param cl
 	 */
 	public void setContextClassLoader(ClassLoader cl) {
+		// for development mode
 		URL url = InterpreterPlugin.getDefault().getBundle().getEntry("build/class");
+		if(url ==  null) // for deployed mode
+			url = InterpreterPlugin.getDefault().getBundle().getEntry("/");
 		URLClassLoader newCL = URLClassLoader.newInstance( new URL[] {url}, cl);
 		_classLoader = newCL;
 	}
