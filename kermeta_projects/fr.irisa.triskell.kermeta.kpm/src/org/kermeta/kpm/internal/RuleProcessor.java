@@ -1,6 +1,6 @@
 
 
-/*$Id: RuleProcessor.java,v 1.1 2008-05-28 09:26:16 ftanguy Exp $
+/*$Id: RuleProcessor.java,v 1.2 2008-06-02 09:12:14 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	RuleProcessor.java
 * License : EPL
@@ -79,16 +79,18 @@ public class RuleProcessor {
 	 */
 	private void doIt() {
 		try {
-			SubMonitor progress = SubMonitor.convert(_monitor, getTaskName(), getWork() );
+			if ( _rule.getPrecondition().evaluateIn(_unit) ) {
 			
-			for ( Out currentOut : _rule.getOuts() ) {
+				SubMonitor progress = SubMonitor.convert(_monitor, getTaskName(), getWork() );
+			
+				for ( Out currentOut : _rule.getOuts() ) {
 	
-				if ( _monitor.isCanceled() )
-					return;
-							
-				if ( ! currentOut.isIndependant() ) {
-					OutProcessor.process(_unit, currentOut, _arguments, progress.newChild(1));
-				} else {
+					if ( _monitor.isCanceled() )
+						return;
+				
+					if ( ! currentOut.isIndependant() ) {
+						OutProcessor.process(_unit, currentOut, _arguments, progress.newChild(1));
+					} else {
 						/*
 						 * Job subJob = new Job("Processing Independant Out") {
 						 * 
@@ -98,6 +100,7 @@ public class RuleProcessor {
 						 * 
 						 *  }; subJob.schedule();
 						 */
+					}
 				}
 				
 			}
