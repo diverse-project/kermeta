@@ -1,4 +1,4 @@
-/* $Id: KMT2KMExperessionBuilder.java,v 1.14 2008-04-28 11:50:13 ftanguy Exp $
+/* $Id: KMT2KMExperessionBuilder.java,v 1.15 2008-06-02 13:35:43 ftanguy Exp $
  * Created on 5 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -71,7 +71,7 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 			}
 			else {
 				//builder.messages.addMessage(new KMTUnitLoadError("Assignement : Only variables and properties can be assigned", fAssignement));
-				builder.error("Assignement : Only variables and properties can be assigned");
+				builder.error("Assignement : Only variables and properties can be assigned", fAssignement);
 				result = left;
 				return false;
 			}
