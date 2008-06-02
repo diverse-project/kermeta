@@ -1,6 +1,6 @@
 
 
-/*$Id: KpmProjectBuilder.java,v 1.1 2008-05-28 09:26:15 ftanguy Exp $
+/*$Id: KpmProjectBuilder.java,v 1.2 2008-06-02 13:30:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmIncrementalProjectBuilder.java
 * License : EPL
@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.internal.InternalKpmManager;
 
 public class KpmProjectBuilder extends IncrementalProjectBuilder {
@@ -30,6 +31,7 @@ public class KpmProjectBuilder extends IncrementalProjectBuilder {
 
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
+		KPMPlugin.internalLog.debug("Starting Build of Project " + getProject().getFullPath().toString() );
 		if (kind == IncrementalProjectBuilder.FULL_BUILD) {
 			fullBuild(monitor);
 		} else {
@@ -40,6 +42,8 @@ public class KpmProjectBuilder extends IncrementalProjectBuilder {
                incrementalBuild(delta, monitor);
             }
          }
+		InternalKpmManager.getDefault().removeProject( getProject() );
+		KPMPlugin.internalLog.debug("Endind Build of Project " + getProject().getFullPath().toString() );
 		return null;
 	}
 

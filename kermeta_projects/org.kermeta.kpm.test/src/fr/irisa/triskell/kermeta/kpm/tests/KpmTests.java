@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmTests.java,v 1.1 2008-05-28 11:33:28 ftanguy Exp $
+ * $Id: KpmTests.java,v 1.2 2008-06-02 13:29:16 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.tests;
 
@@ -38,8 +38,13 @@ public class KpmTests extends TestSuite {
 //		suite.addTestSuite(OutTest.class);
 		suite.addTestSuite(ORExpressionTest.class);
 		suite.addTestSuite(ANDExpressionTest.class);
-//		suite.addTestSuite(FilterExpressionTest.class);
-		suite.addTestSuite(TypeFilterTest.class);
+		
+		// Abstract class not tested.
+		//suite.addTestSuite(FilterExpressionTest.class);
+		
+		// TypeFilter is tested in the workbench tests.
+		//suite.addTestSuite(TypeFilterTest.class);
+		
 		suite.addTestSuite(NameFilterTest.class);
 		suite.addTestSuite(NullExpressionTest.class);
 		suite.addTestSuite(EventTest.class);

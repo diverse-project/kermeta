@@ -1,6 +1,6 @@
 
 
-/*$Id: EventDispatcherTest.java,v 1.2 2008-06-02 09:13:02 ftanguy Exp $
+/*$Id: EventDispatcherTest.java,v 1.3 2008-06-02 13:29:12 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	ResourceDeletionTest.java
 * License : EPL
@@ -18,10 +18,6 @@ import java.io.InputStream;
 import junit.framework.Assert;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -32,6 +28,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kpm.EventDispatcher;
+import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.KpmManager;
 import org.kermeta.kpm.test.util.KmtContentProvider;
 
@@ -45,45 +42,31 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
  * @author paco
  *
  */
-public class EventDispatcherTest {
+public class EventDispatcherTest extends WorkbenchTest {
 
-	private IWorkspace _workspace;
-	
 	@Before
 	public void setUp() throws InterruptedException {
-		_workspace = ResourcesPlugin.getWorkspace();
-		WorkspaceJob job = new WorkspaceJob("") {
+		_project = _workspace.getRoot().getProject("EventDispatcherTest");
+		KpmTestJob job = new KpmTestJob() {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("EventDispatcherTest");
-				project.create(monitor);
-				project.open(monitor);
+				_project.create(monitor);
+				_project.open(monitor);
 				
-				IFile file1 = project.getFile( new Path("oneFile.kmt") );
+				IFile file1 = _project.getFile( new Path("oneFile.kmt") );
 				InputStream is = new ByteArrayInputStream( KmtContentProvider.exemple1().getBytes() );
 				file1.create(is, true, monitor);
 				
 				return Status.OK_STATUS;
 			}
 		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		job.execute();
 	}
 	
 	@After
 	public void tearDown() throws InterruptedException {
-		WorkspaceJob job = new WorkspaceJob("") {
-			@Override
-			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("EventDispatcherTest");
-				project.delete(true, monitor);
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		KPMPlugin.internalLog.debug("EventDispatcherTest tearDown");
+		removeProject();
 	}
 		
 	@Test

@@ -1,6 +1,6 @@
 
 
-/*$Id: TypeFilterTest.java,v 1.1 2008-06-02 09:13:02 ftanguy Exp $
+/*$Id: TypeFilterTest.java,v 1.2 2008-06-02 13:29:12 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	ResourceDeletionTest.java
 * License : EPL
@@ -53,9 +53,7 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
  * @author paco
  *
  */
-public class TypeFilterTest {
-
-	private IWorkspace _workspace;
+public class TypeFilterTest extends WorkbenchTest {
 
 	static private boolean _rulesAddedForFile = false;
 
@@ -121,14 +119,13 @@ public class TypeFilterTest {
 	
 	@Before
 	public void setUp() throws InterruptedException {
-		_workspace = ResourcesPlugin.getWorkspace();
-		WorkspaceJob job = new WorkspaceJob("") {
+		_project = _workspace.getRoot().getProject("TypeFilterTest");
+		KpmTestJob job = new KpmTestJob() {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("TypeFilterTest");
-				project.create(monitor);
-				project.open(monitor);
-				IFolder folder = project.getFolder( new Path("oneFolder") );
+				_project.create(monitor);
+				_project.open(monitor);
+				IFolder folder = _project.getFolder( new Path("oneFolder") );
 				folder.create(true, true, monitor);
 				IFile file = folder.getFile( new Path("oneFile.kmt") );
 				InputStream is = new ByteArrayInputStream("some input".getBytes());
@@ -136,24 +133,12 @@ public class TypeFilterTest {
 				return Status.OK_STATUS;
 			}
 		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		job.execute();
 	}
 	
 	@After
 	public void tearDown() throws InterruptedException {
-		WorkspaceJob job = new WorkspaceJob("") {
-			@Override
-			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("TypeFilterTest");
-				project.delete(true, monitor);
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		removeProject();
 	}
 		
 	@Test

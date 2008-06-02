@@ -1,6 +1,6 @@
 
 
-/*$Id: DependencyTest.java,v 1.2 2008-06-02 09:13:02 ftanguy Exp $
+/*$Id: DependencyTest.java,v 1.3 2008-06-02 13:29:12 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	ResourceDeletionTest.java
 * License : EPL
@@ -24,10 +24,6 @@ import junit.framework.Assert;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -51,10 +47,8 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
  * @author paco
  *
  */
-public class DependencyTest {
+public class DependencyTest extends WorkbenchTest {
 
-	private IWorkspace _workspace;
-	
 	private class Wizard extends AbstractExampleWizard {
 
 		@Override
@@ -74,7 +68,7 @@ public class DependencyTest {
 	
 	@Before
 	public void setUp() throws InterruptedException {
-		_workspace = ResourcesPlugin.getWorkspace();
+		_project = _workspace.getRoot().getProject("fr.irisa.triskell.kermeta.samples.fsm.demoAspect");
 		Wizard w = new Wizard();
 		w.performFinish();
 		Thread.sleep(1000);
@@ -82,17 +76,7 @@ public class DependencyTest {
 	
 	@After
 	public void tearDown() throws InterruptedException {
-		WorkspaceJob job = new WorkspaceJob("") {
-			@Override
-			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("fr.irisa.triskell.kermeta.samples.fsm.demoAspect");
-				project.delete(true, monitor);
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		removeProject();
 	}
 		
 	@Test
@@ -130,30 +114,42 @@ public class DependencyTest {
 		// Changing the content of FSMConstraints.kmt
 		// The change should be catch by kpm. So an event must be sent and an other typecheck occurs.
 		// We introduce here an error that will mark the files that depends on FSMConstraint as erroneous.
-		IFile constraints = _workspace.getRoot().getFile( new Path("/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/kermeta/constraints/FSMConstraints.kmt") );		
-		InputStream is = null;
-		ByteArrayOutputStream bos = null;
-		ByteArrayInputStream bis = null;
-		try {
-			is = constraints.getContents();
-			bos = new ByteArrayOutputStream();
-			int i = 0;
-			do {
-				i = is.read();
-				if ( i != -1 )
-					bos.write(i);
-			} while ( i != -1 );
-			bos.write( "\nclass State {}\n".getBytes() );
-			bis = new ByteArrayInputStream( bos.toByteArray() );
-			constraints.setContents(bis, true, false, null);
-		} finally {
-			is.close();
-			bos.close();
-			bis.close();
-		}
+		final IFile constraints = _workspace.getRoot().getFile( new Path("/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/kermeta/constraints/FSMConstraints.kmt") );		
 		
-		Thread.sleep(1000);
-
+		KpmTestJob job = new KpmTestJob() {
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
+				InputStream is = null;
+				ByteArrayOutputStream bos = null;
+				ByteArrayInputStream bis = null;
+				try {
+					is = constraints.getContents();
+					bos = new ByteArrayOutputStream();
+					int i = 0;
+					do {
+						i = is.read();
+						if ( i != -1 )
+							bos.write(i);
+					} while ( i != -1 );
+					bos.write( "\nclass State {}\n".getBytes() );
+					bis = new ByteArrayInputStream( bos.toByteArray() );
+					constraints.setContents(bis, true, false, null);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						is.close();
+						bos.close();
+						bis.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.execute();
+		
 		IFile fsm = _workspace.getRoot().getFile( new Path("/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/kermeta/fsm.kmt") );
 
 		Assert.assertTrue( fsm.findMarkers( IMarker.PROBLEM, false, 1).length != 0 );

@@ -1,6 +1,6 @@
 
 
-/*$Id: KpmTests.java,v 1.2 2008-06-02 09:13:02 ftanguy Exp $
+/*$Id: KpmTests.java,v 1.3 2008-06-02 13:29:12 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	KpmTests.java
 * License : EPL
@@ -26,7 +26,7 @@ import org.junit.runners.Suite;
 	})
 public class KpmTests {
 
-
+	
 }
 
 

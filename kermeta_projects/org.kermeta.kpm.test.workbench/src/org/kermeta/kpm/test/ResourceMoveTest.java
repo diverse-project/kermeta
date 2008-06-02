@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceMoveTest.java,v 1.2 2008-06-02 09:13:02 ftanguy Exp $
+/*$Id: ResourceMoveTest.java,v 1.3 2008-06-02 13:29:12 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	ResourceDeletionTest.java
 * License : EPL
@@ -19,10 +19,6 @@ import junit.framework.Assert;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -45,24 +41,21 @@ import org.kermeta.kpm.KpmManager;
  * @author paco
  *
  */
-public class ResourceMoveTest {
+public class ResourceMoveTest extends WorkbenchTest {
 
-	private IWorkspace _workspace;
-	
 	@Before
 	public void setUp() throws InterruptedException {
-		_workspace = ResourcesPlugin.getWorkspace();
-		WorkspaceJob job = new WorkspaceJob("") {
+		_project = _workspace.getRoot().getProject("MovingProjectTest");
+		KpmTestJob job = new KpmTestJob() {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("MovingProjectTest");
-				project.create(monitor);
-				project.open(monitor);
+				_project.create(monitor);
+				_project.open(monitor);
 				
-				IFolder folder1 = project.getFolder( new Path("firstFolder") );
+				IFolder folder1 = _project.getFolder( new Path("firstFolder") );
 				folder1.create(true, true, monitor);
 				
-				IFolder folder2 = project.getFolder( new Path("secondFolder") );
+				IFolder folder2 = _project.getFolder( new Path("secondFolder") );
 				folder2.create(true, true, monitor);
 				
 				IFolder folder3 = folder2.getFolder( new Path("thirdFolder") );
@@ -79,41 +72,25 @@ public class ResourceMoveTest {
 				return Status.OK_STATUS;
 			}
 		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		job.execute();
 	}
 	
 	@After
 	public void tearDown() throws InterruptedException {
-		WorkspaceJob job = new WorkspaceJob("") {
-			@Override
-			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("MovingProjectTest");
-				project.delete(true, monitor);
-				
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		removeProject();
 	}
 	
 	@Test
 	public void moveFile() throws InterruptedException {
-		WorkspaceJob job = new WorkspaceJob("") {
+		KpmTestJob job = new KpmTestJob() {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				IFile file = _workspace.getRoot().getFile( new Path("/MovingProjectTest/firstFolder/oneFile.kmt") );
 				file.move( new Path("/MovingProjectTest/secondFolder/oneFile.kmt"), true, monitor);
-				
 				return Status.OK_STATUS;
 			}
 		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		job.execute();
 		IFile oldFile = _workspace.getRoot().getFile( new Path("/MovingProjectTest/firstFolder/oneFile.kmt") );
 		IFile newFile = _workspace.getRoot().getFile( new Path("/MovingProjectTest/secondFolder/oneFile.kmt") );
 		Assert.assertNull( KpmManager.getDefault().getUnit(oldFile) );
@@ -123,7 +100,7 @@ public class ResourceMoveTest {
 	
 	@Test
 	public void moveFolder() throws InterruptedException {
-		WorkspaceJob job = new WorkspaceJob("") {
+		KpmTestJob job = new KpmTestJob() {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				IFolder folder = _workspace.getRoot().getFolder( new Path("/MovingProjectTest/secondFolder/thirdFolder") );
@@ -131,9 +108,7 @@ public class ResourceMoveTest {
 				return Status.OK_STATUS;
 			}
 		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		job.execute();		
 		IFolder oldFolder = _workspace.getRoot().getFolder( new Path("/MovingProjectTest/secondFolder/thirdFolder") );
 		IFile oldFile = _workspace.getRoot().getFile( new Path("/MovingProjectTest/secondFolder/thirdFolder/secondFile.kmt") );
 		IFolder newFolder = _workspace.getRoot().getFolder( new Path("/MovingProjectTest/firstFolder/thirdFolder") );

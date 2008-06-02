@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
-<testsuite errors="0" failures="0" ignored="0" name="org.kermeta.kpm.test.KpmTests" tests="15" time="42.965">
+<testsuite errors="0" failures="0" ignored="0" name="org.kermeta.kpm.test.KpmTests" tests="15" time="37.526">
 <testcase classname="org.kermeta.kpm.test.ResourceCreationTest" methodname="createFolder" name="createFolder(org.kermeta.kpm.test.ResourceCreationTest)" status="haspassed" time="0.0"/>
 <testcase classname="org.kermeta.kpm.test.ResourceCreationTest" methodname="createFile" name="createFile(org.kermeta.kpm.test.ResourceCreationTest)" status="haspassed" time="0.0"/>
 <testcase classname="org.kermeta.kpm.test.ResourceCreationTest" methodname="createProject" name="createProject(org.kermeta.kpm.test.ResourceCreationTest)" status="haspassed" time="0.0"/>
+<testcase classname="org.kermeta.kpm.test.ResourceDeletionTest" methodname="removeProject" name="removeProject(org.kermeta.kpm.test.ResourceDeletionTest)" status="haspassed" time="0.0"/>
 <testcase classname="org.kermeta.kpm.test.ResourceDeletionTest" methodname="removeFile" name="removeFile(org.kermeta.kpm.test.ResourceDeletionTest)" status="haspassed" time="0.0"/>
 <testcase classname="org.kermeta.kpm.test.ResourceDeletionTest" methodname="removeFolder" name="removeFolder(org.kermeta.kpm.test.ResourceDeletionTest)" status="haspassed" time="0.0"/>
-<testcase classname="org.kermeta.kpm.test.ResourceDeletionTest" methodname="removeProject" name="removeProject(org.kermeta.kpm.test.ResourceDeletionTest)" status="haspassed" time="0.0"/>
 <testcase classname="org.kermeta.kpm.test.ResourceMoveTest" methodname="moveFile" name="moveFile(org.kermeta.kpm.test.ResourceMoveTest)" status="haspassed" time="0.0"/>
 <testcase classname="org.kermeta.kpm.test.ResourceMoveTest" methodname="moveFolder" name="moveFolder(org.kermeta.kpm.test.ResourceMoveTest)" status="haspassed" time="0.0"/>
 <testcase classname="org.kermeta.kpm.test.EventDispatcherTest" methodname="sendUpdateEventToKmtFile" name="sendUpdateEventToKmtFile(org.kermeta.kpm.test.EventDispatcherTest)" status="haspassed" time="0.0"/>

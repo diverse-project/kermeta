@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceCreationTest.java,v 1.2 2008-06-02 09:13:02 ftanguy Exp $
+/*$Id: ResourceCreationTest.java,v 1.3 2008-06-02 13:29:12 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	ResourceCreation.java
 * License : EPL
@@ -20,10 +20,8 @@ import junit.framework.Assert;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -37,77 +35,57 @@ import org.kermeta.kpm.KpmManager;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
 
-public class ResourceCreationTest {
-
-	private IWorkspace _workspace;
+public class ResourceCreationTest extends WorkbenchTest {
 
 	@Before
 	public void setUp() {
-		_workspace = ResourcesPlugin.getWorkspace();
+		_project = _workspace.getRoot().getProject("oneProject");
 	}
 	
 	@After
 	public void tearDown() throws InterruptedException {
-		WorkspaceJob job = new WorkspaceJob("") {
-			@Override
-			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("oneProject");
-				project.delete(true, monitor);
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		removeProject();
 	}
 	
 	@Test
 	public void createProject() throws InterruptedException {
-		WorkspaceJob job = new WorkspaceJob("") {
+		KpmTestJob job = new KpmTestJob() {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("oneProject");
-				project.create(monitor);
-				project.open(monitor);
+				_project.create(monitor);
+				_project.open(monitor);
 				return Status.OK_STATUS;
 			}
 		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
-		IProject project = _workspace.getRoot().getProject("oneProject");
-		Assert.assertNotNull( KpmManager.getDefault().getUnit(project) );
+		job.execute();
+		Assert.assertNotNull( KpmManager.getDefault().getUnit(_project) );
 	}
 	
 	@Test
 	public void createFolder() throws InterruptedException {
-		WorkspaceJob job = new WorkspaceJob("") {
+		KpmTestJob job = new KpmTestJob() {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("oneProject");
-				project.create(monitor);
-				project.open(monitor);
-				IFolder folder = project.getFolder( "oneFolder");
+				_project.create(monitor);
+				_project.open(monitor);
+				IFolder folder = _project.getFolder( "oneFolder");
 				folder.create(true, true, monitor);
 				return Status.OK_STATUS;
 			}
 		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		job.execute();
 		IFolder folder = _workspace.getRoot().getFolder( new Path("/oneProject/oneFolder") );
 		Assert.assertNotNull( KpmManager.getDefault().getUnit(folder) );
 	}	
 	
 	@Test
 	public void createFile() throws InterruptedException {
-		WorkspaceJob job = new WorkspaceJob("") {
+		KpmTestJob job = new KpmTestJob() {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-				IProject project = _workspace.getRoot().getProject("oneProject");
-				project.create(monitor);
-				project.open(monitor);
-				IFolder folder = project.getFolder( "oneFolder");
+				_project.create(monitor);
+				_project.open(monitor);
+				IFolder folder = _project.getFolder( "oneFolder");
 				folder.create(true, true, monitor);
 				InputStream is = new ByteArrayInputStream( "some input".getBytes() );
 				IFile file = folder.getFile( "oneFile.kmt" );
@@ -120,9 +98,7 @@ public class ResourceCreationTest {
 				return Status.OK_STATUS;
 			}
 		};
-		job.schedule();
-		job.join();
-		Thread.sleep(1000);
+		job.execute();
 		IFile file = _workspace.getRoot().getFile( new Path("/oneProject/oneFolder/oneFile.kmt") );
 		Unit unit = KpmManager.getDefault().getUnit(file);
 		Assert.assertNotNull( unit );

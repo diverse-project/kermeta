@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceChangeListener.java,v 1.2 2008-06-02 06:45:22 ftanguy Exp $
+/*$Id: ResourceChangeListener.java,v 1.3 2008-06-02 13:30:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ResourceChangeListener.java
 * License : EPL
@@ -47,7 +47,7 @@ public class ResourceChangeListener implements IResourceChangeListener, IResourc
 		case IResource.PROJECT :
 			// This can be an heavy process, so we do it into a job.
 			final IResourceDelta d = delta;
-			WorkspaceJob job = new WorkspaceJob("Blah") {
+			WorkspaceJob job = new WorkspaceJob("Create or Delete projects") {
 				@Override
 				public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 					if ( d.getKind() == IResourceDelta.ADDED ) {

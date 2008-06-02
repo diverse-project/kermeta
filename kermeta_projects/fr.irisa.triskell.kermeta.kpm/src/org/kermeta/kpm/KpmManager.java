@@ -1,6 +1,6 @@
 
 
-/*$Id: KpmManager.java,v 1.1 2008-05-28 09:26:14 ftanguy Exp $
+/*$Id: KpmManager.java,v 1.2 2008-06-02 13:30:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmManager.java
 * License : EPL
@@ -12,6 +12,7 @@
 
 package org.kermeta.kpm;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.kermeta.kpm.internal.InternalKpmManager;
@@ -79,6 +80,30 @@ public class KpmManager {
 	 */
 	public IConfigurationElement getConfigurationElement(String actionId) {
 		return _manager.getConfigurationElement(actionId);
+	}
+	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
+	public boolean isBeingBuilt(IProject p) {
+		return _manager.isBeingBuilt(p);
+	}
+	
+	/**
+	 * 
+	 * @param p
+	 */
+	public void addProject(IProject p) {
+		_manager.addProject(p);
+	}
+	/**
+	 * 
+	 * @param p
+	 */
+	public void removeProject(IProject p) {
+		_manager.removeProject(p);
 	}
 }
 

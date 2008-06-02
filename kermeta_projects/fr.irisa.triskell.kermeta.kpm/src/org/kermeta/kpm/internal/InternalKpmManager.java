@@ -1,6 +1,6 @@
 
 
-/*$Id: InternalKpmManager.java,v 1.3 2008-06-02 09:12:29 ftanguy Exp $
+/*$Id: InternalKpmManager.java,v 1.4 2008-06-02 13:30:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmManager.java
 * License : EPL
@@ -13,9 +13,12 @@
 package org.kermeta.kpm.internal;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -200,6 +203,41 @@ public class InternalKpmManager {
 		return _extensionElements.get(actionId);
 	}
 	
+	/**
+	 * 
+	 */
+	private List<IProject> _projectsBeingBuilt = new ArrayList<IProject>();
+
+	/**
+	 * 
+	 * @param p
+	 */
+	public void addProject(IProject p) {
+		synchronized( _projectsBeingBuilt ) {
+			_projectsBeingBuilt.add(p);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
+	public boolean isBeingBuilt(IProject p) {
+		synchronized ( _projectsBeingBuilt ) {
+			return _projectsBeingBuilt.contains(p);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param p
+	 */
+	public void removeProject(IProject p) {
+		synchronized ( _projectsBeingBuilt ) {
+			_projectsBeingBuilt.remove(p);
+		}
+	}
 }
 
 
