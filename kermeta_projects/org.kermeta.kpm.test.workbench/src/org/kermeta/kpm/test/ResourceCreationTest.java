@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceCreationTest.java,v 1.3 2008-06-02 13:29:12 ftanguy Exp $
+/*$Id: ResourceCreationTest.java,v 1.4 2008-06-02 14:52:19 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	ResourceCreation.java
 * License : EPL
@@ -20,8 +20,6 @@ import junit.framework.Assert;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -34,7 +32,14 @@ import org.kermeta.kpm.KpmManager;
 
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
-
+/**
+ * oneProject
+ * 		oneFolder
+ * 			oneFile.kmt
+ * 			secondFile
+ * @author paco
+ *
+ */
 public class ResourceCreationTest extends WorkbenchTest {
 
 	@Before
@@ -79,7 +84,7 @@ public class ResourceCreationTest extends WorkbenchTest {
 	}	
 	
 	@Test
-	public void createFile() throws InterruptedException {
+	public void createKMTFile() throws InterruptedException {
 		KpmTestJob job = new KpmTestJob() {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
@@ -106,6 +111,31 @@ public class ResourceCreationTest extends WorkbenchTest {
 			Assert.assertTrue( unit.getRules().size() == 1 );
 	}	
 	
+	@Test
+	public void createFileWithoutExtension() throws InterruptedException {
+		KpmTestJob job = new KpmTestJob() {
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
+				_project.create(monitor);
+				_project.open(monitor);
+				IFolder folder = _project.getFolder( "oneFolder");
+				folder.create(true, true, monitor);
+				InputStream is = new ByteArrayInputStream( "some input".getBytes() );
+				IFile file = folder.getFile( "secondFile" );
+				file.create(is, false, monitor);
+				try {
+					is.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.execute();
+		IFile file = _workspace.getRoot().getFile( new Path("/oneProject/oneFolder/secondFile") );
+		Unit unit = KpmManager.getDefault().getUnit(file);
+		Assert.assertNotNull( unit );
+	}	
 }
 
 

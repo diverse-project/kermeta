@@ -1,6 +1,6 @@
 
 
-/*$Id: UnitCreator.java,v 1.1 2008-05-28 09:26:15 ftanguy Exp $
+/*$Id: UnitCreator.java,v 1.2 2008-06-02 14:52:16 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	UnitCreator.java
 * License : EPL
@@ -86,7 +86,8 @@ public class UnitCreator {
 	protected Unit createUnit(IResource resource) {
 		Unit unit = createUnit( "platform:/resource" + resource.getFullPath().toString(), false );
 		if ( resource instanceof IFile ) {
-			if ( ((IFile) resource).getFileExtension().equals("kmt") )
+			IFile file = (IFile) resource;
+			if ( file.getFileExtension() != null && file.getFileExtension().equals("kmt") )
 				unit.getRules().add( KPMRules.UPDATE_KMT_RULE );
 		}
 		save();
