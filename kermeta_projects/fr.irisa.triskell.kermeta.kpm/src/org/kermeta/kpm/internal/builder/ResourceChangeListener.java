@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceChangeListener.java,v 1.3 2008-06-02 13:30:11 ftanguy Exp $
+/*$Id: ResourceChangeListener.java,v 1.4 2008-06-02 15:11:05 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ResourceChangeListener.java
 * License : EPL
@@ -42,12 +42,12 @@ public class ResourceChangeListener implements IResourceChangeListener, IResourc
 	}
 
 	public boolean visit(IResourceDelta delta) throws CoreException {
-		boolean goOn = true;
+		boolean goOn = true;		
 		switch( delta.getResource().getType() ) {
 		case IResource.PROJECT :
 			// This can be an heavy process, so we do it into a job.
 			final IResourceDelta d = delta;
-			WorkspaceJob job = new WorkspaceJob("Create or Delete projects") {
+			WorkspaceJob job = new WorkspaceJob("KPM inspecting changes of " + delta.getResource().getName()) {
 				@Override
 				public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 					if ( d.getKind() == IResourceDelta.ADDED ) {
