@@ -1,6 +1,6 @@
 
 
-/*$Id: DeltaVisitor.java,v 1.2 2008-06-02 06:45:22 ftanguy Exp $
+/*$Id: DeltaVisitor.java,v 1.3 2008-06-03 07:43:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	DeltaVisitor.java
 * License : EPL
@@ -26,6 +26,8 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 /**
  * A visitor for changes event. Depending on the event, it looks for a unit corresponding to the resource that has changed
  * and send a proper kpm event or add/remove it from the kpm model.
+ * 
+ * The visit is monitored so at any time the process can be cancelled.
  * 
  * @author paco
  *
@@ -67,7 +69,7 @@ public class DeltaVisitor extends UnitCreator implements IResourceDeltaVisitor {
 
 	/**
 	 * Send an update event to the unit corresponding to the given resource.
-	 * @param resource
+	 * @param resource The resource corresponding to a unit to be sent an update event.
 	 */
 	private void handleChange(IResource resource) {
 		Unit unit = KpmManager.getDefault().getUnit(resource);
@@ -77,15 +79,15 @@ public class DeltaVisitor extends UnitCreator implements IResourceDeltaVisitor {
 	
 	/**
 	 * Create the unit corresponding to the given resource and add dependencies to it.
-	 * @param resource
+	 * @param resource The resource corresponding to a unit to be created.
 	 */
 	private void handleAdd(IResource resource) {
-		createUnit(resource);
+		createUnit(resource, true);
 	}
 	
 	/**
 	 * Remove safely a unit corresponding to the resource.
-	 * @param resource
+	 * @param resource The resource corresponding to a unit to be deleted.
 	 */
 	private void handleRemove(IResource resource) {
 		String name = "platform:/resource" + resource.getFullPath().toString();

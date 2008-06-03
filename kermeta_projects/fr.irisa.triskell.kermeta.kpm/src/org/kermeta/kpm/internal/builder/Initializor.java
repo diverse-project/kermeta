@@ -1,6 +1,6 @@
 
 
-/*$Id: Initializor.java,v 1.1 2008-05-28 09:26:15 ftanguy Exp $
+/*$Id: Initializor.java,v 1.2 2008-06-03 07:43:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	Initializor.java
 * License : EPL
@@ -122,15 +122,15 @@ public class Initializor extends UnitCreator implements IResourceVisitor {
 		switch( resource.getType() ) {
 		
 		case IResource.PROJECT :
-			createUnit(resource);
+			createUnit(resource, false);
 			break;
 			
 		case IResource.FOLDER :
-			createUnit(resource);
+			createUnit(resource, false);
 			break;
 			
 		case IResource.FILE :
-			createUnit(resource);
+			createUnit(resource, false);
 			break;
 		
 		}

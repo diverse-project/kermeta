@@ -1,6 +1,6 @@
 
 
-/*$Id: ProjectVisitor.java,v 1.2 2008-06-02 06:45:22 ftanguy Exp $
+/*$Id: ProjectVisitor.java,v 1.3 2008-06-03 07:43:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ProjectVisitor.java
 * License : EPL
@@ -51,7 +51,8 @@ public class ProjectVisitor implements IResourceVisitor {
 	}
 
 	/**
-	 * 
+	 * Add a KPM builder to handle any change in the workspace.
+	 * Anytime there is a change, the build method of the builder is called and actions can be performed.
 	 * @param project
 	 * @throws CoreException
 	 */

@@ -1,6 +1,6 @@
 
 
-/*$Id: UnitCreator.java,v 1.2 2008-06-02 14:52:16 ftanguy Exp $
+/*$Id: UnitCreator.java,v 1.3 2008-06-03 07:43:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	UnitCreator.java
 * License : EPL
@@ -22,15 +22,24 @@ import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
-public class UnitCreator {
+/**
+ * This class is used to perform unit creation and to store them into a KPM model.
+ * Extending this class should be the only way to create units because it provides an api
+ * and a default and safe implementation.
+ * 
+ * @author paco
+ *
+ */
+abstract public class UnitCreator {
 
 	/**
-	 * 
+	 * The KPM model used to store units and to be saved.
 	 */
 	protected KPM _kpm;
 	
 	/**
-	 * 
+	 * The timestamp used to create units.
+	 * It is created one time so that every unit created in a process has the same timestamp.
 	 */
 	private Date _date = new Date();
 	
@@ -43,7 +52,7 @@ public class UnitCreator {
 	}
 
 	/**
-	 * 
+	 * Save KPM model.
 	 */
 	private void save() {
 		try {
@@ -54,10 +63,11 @@ public class UnitCreator {
 	}
 	
 	/**
-	 * 
-	 * @param name
-	 * @param save
-	 * @return
+	 * Create a unit timestamped and add it to the KPM model.
+	 * If a save is required, save the KPM model.
+	 * @param name The name of the unit to be created.
+	 * @param save Flag to indicate if a save is needed.
+	 * @return The created unit.
 	 */
 	private Unit createUnit(String name, boolean save) {
 		Unit unit = KpmFactory.eINSTANCE.createUnit();
@@ -70,27 +80,29 @@ public class UnitCreator {
 	}
 		
 	/**
-	 * 
-	 * @param name
-	 * @return
+	 * Create a unit timestamped and add it to the KPM model.
+	 * A save is performed.
+	 * @param name The name of the unit to be created.
+	 * @return The created unit.
 	 */
 	protected Unit createUnit(String name) {
 		return createUnit(name, true);
 	}
 	
 	/**
-	 * 
-	 * @param resource
-	 * @return
+	 * Create a unit timestamped and add it to the KPM model.
+	 * @param resource The resource to be created as a unit.
+	 * @return The created unit.
 	 */
-	protected Unit createUnit(IResource resource) {
+	protected Unit createUnit(IResource resource, boolean save) {
 		Unit unit = createUnit( "platform:/resource" + resource.getFullPath().toString(), false );
 		if ( resource instanceof IFile ) {
 			IFile file = (IFile) resource;
 			if ( file.getFileExtension() != null && file.getFileExtension().equals("kmt") )
 				unit.getRules().add( KPMRules.UPDATE_KMT_RULE );
 		}
-		save();
+		if ( save )
+			save();
 		return unit;
 	}
 	 

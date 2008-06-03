@@ -1,6 +1,6 @@
 
 
-/*$Id: KpmProjectBuilder.java,v 1.2 2008-06-02 13:30:11 ftanguy Exp $
+/*$Id: KpmProjectBuilder.java,v 1.3 2008-06-03 07:43:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmIncrementalProjectBuilder.java
 * License : EPL
@@ -48,7 +48,7 @@ public class KpmProjectBuilder extends IncrementalProjectBuilder {
 	}
 
 	/**
-	 * 
+	 * When a full build is requested, a visit of the entire project is performed.
 	 * @param monitor
 	 * @throws CoreException 
 	 */
@@ -58,7 +58,7 @@ public class KpmProjectBuilder extends IncrementalProjectBuilder {
 	}
 	
 	/**
-	 * 
+	 * When an incremental build is requested, only the delta is visited.
 	 * @param delta
 	 * @param monitor
 	 * @throws CoreException 

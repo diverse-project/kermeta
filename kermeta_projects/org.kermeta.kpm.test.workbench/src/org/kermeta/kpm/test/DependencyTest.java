@@ -1,6 +1,6 @@
 
 
-/*$Id: DependencyTest.java,v 1.3 2008-06-02 13:29:12 ftanguy Exp $
+/*$Id: DependencyTest.java,v 1.4 2008-06-03 07:44:01 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	ResourceDeletionTest.java
 * License : EPL
@@ -41,9 +41,6 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 
 /**
  * 
- * EventDispatcherTest
- * 		oneFile.kmt
- * 		
  * @author paco
  *
  */
