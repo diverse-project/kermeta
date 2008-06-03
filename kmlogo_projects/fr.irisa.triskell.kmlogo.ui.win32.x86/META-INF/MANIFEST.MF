@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: X86 Fragment
+Bundle-Name: Windows Fragment
 Bundle-SymbolicName: fr.irisa.triskell.kmlogo.ui.win32.x86
 Bundle-Version: 1.0.0
 Bundle-Vendor: INRIA Bretagne Atlantique
 Fragment-Host: fr.irisa.triskell.kmlogo.ui;bundle-version="1.1.1"
+Eclipse-PlatformFilter: (& (osgi.os=win32) (osgi.arch=x86))

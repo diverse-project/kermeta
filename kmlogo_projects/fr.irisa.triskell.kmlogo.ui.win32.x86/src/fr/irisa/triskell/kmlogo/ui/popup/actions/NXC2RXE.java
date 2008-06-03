@@ -39,7 +39,7 @@ public class NXC2RXE implements IObjectActionDelegate
 	/** The file selection */
 	private StructuredSelection	selection;
 	
-	private final String PLUGIN_ID = "fr.irisa.triskell.kmlogo.ui.linux.x86";
+	private final String PLUGIN_ID = "fr.irisa.triskell.kmlogo.ui.win32.x86";
 
 	/**
 	 * Constructor
@@ -74,18 +74,9 @@ public class NXC2RXE implements IObjectActionDelegate
 				// Get the absolute path to the resource
 				String binaryPath = FileLocator.toFileURL(binaryURL).getPath();
 				
-				// Execute the chmod command on the binary
-				// This is a trick to add the execution bit
-				cmd[0] = "chmod";
-				cmd[1] = "a+x";
-				cmd[2] = new File(binaryPath).getAbsolutePath();
-				
-				// Execute the chmod command and print the result in the console
-				ExecCommand command = new ExecCommand(console, cmd);
-				command.execute();
-				
 				// Apply the binary on each selected file
-				cmd[0] = cmd[2];
+				ExecCommand command = new ExecCommand(console, cmd);
+				cmd[0] = new File(binaryPath).getAbsolutePath();
 				for (Iterator<?> it = selection.iterator(); it.hasNext();)
 				{
 					Object obj = (Object) it.next();
