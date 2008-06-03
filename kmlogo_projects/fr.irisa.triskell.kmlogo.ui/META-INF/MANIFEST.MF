@@ -17,12 +17,9 @@ Require-Bundle: org.eclipse.ui,
 Eclipse-LazyStart: true
 Export-Package: fr.irisa.triskell.kmlogo.ui,
  fr.irisa.triskell.kmlogo.ui.popup.actions,
- fr.irisa.triskell.kmlogo.ui.tools.wizards,
- icommand.navigation,
- icommand.nxt,
- icommand.nxt.comm,
- icommand.vision
+ fr.irisa.triskell.kmlogo.ui.tools.wizards
 Bundle-ClassPath: .,
  lib/bluecove.jar,
  lib/icommand.jar,
  lib/RXTXcomm.jar
+Bundle-NativeCode:  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows NT,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 98,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 95,   lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 2000,   lib/rxtxSerial.dll ; processor = x86 ; osname = Windows XP

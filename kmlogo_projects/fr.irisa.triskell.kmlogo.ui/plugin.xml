@@ -26,7 +26,7 @@
          <action
                class="fr.irisa.triskell.kmlogo.ui.popup.actions.CompileLogoNXC"
                id="fr.irisa.triskell.kmlogo.ui.action1"
-               label="Compile to NXC"
+               label="Generate NXC code"
                menubarPath="fr.irisa.triskell.kmlogo.ui.menu1/group1"/>
       </objectContribution>
       <objectContribution

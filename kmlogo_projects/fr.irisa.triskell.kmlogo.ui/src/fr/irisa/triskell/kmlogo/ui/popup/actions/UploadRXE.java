@@ -1,4 +1,4 @@
-/* $Id: UploadRXE.java,v 1.5 2008-05-30 15:11:01 vmahe Exp $
+/* $Id: UploadRXE.java,v 1.6 2008-06-03 14:12:46 vmahe Exp $
  * Project   : KmLogo
  * File      : UploadRXE.java
  * License   : EPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kmlogo.ui.popup.actions;
 
 
 import icommand.nxt.FileSystem;
+import icommand.nxt.comm.NXTCommand;
 
 import java.io.File;
 import java.util.Iterator;
@@ -62,9 +63,12 @@ public class UploadRXE implements IObjectActionDelegate {
 		console.println(new InfoMessage("Uploading File " +  nxcFile.getLocation().toOSString()));
     	
     	 try {
-    		 File nxcToUpload = new File(nxcFile.getLocation().toOSString());
+    		 NXTCommand.open();
     		 
+    		 File nxcToUpload = new File(nxcFile.getLocation().toOSString());
     		 FileSystem.upload(nxcToUpload);
+    		 
+    		 NXTCommand.close();
     		 
     		 console.println(new OKMessage("File Uploaded"));
     		 
