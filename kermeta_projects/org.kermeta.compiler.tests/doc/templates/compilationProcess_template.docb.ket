@@ -20,11 +20,14 @@
 			Currently this implementation is divided in 2 steps: Km 2 Ecore structure (written in Java), Km 2 Ecore behavior (written in Kermeta and Java).
 		</para>
 		<para>
+			The translation between a km structure in Ecore is a surjection, i.e.: each km structural element has at least one element in Ecore.
+		</para>
+		<para>
 			"Km 2 Ecore structure" implements a visitor desing pattern and consists in the translation of each Kermeta concept to Ecore concept.
 			This step is implemented in "fr.irisa.triskell.kermeta.io" plugin, EcoreExporter.
 		</para>
 		<para>
-			"Km 2 Ecore behavior" is written in Kermeta. This implementation is Aspect-Oriented, i.e.: we are using the aspect-oriented techniques in order to define how a concept is compiled.
+			"Km 2 Ecore behavior" is written in Kermeta. This implementation uses the Aspect-Oriented Programming, i.e.: we are using the AOP techniques in order to define how a concept is compiled.
 		</para>
 		<para>
 			Some examples:</para>
