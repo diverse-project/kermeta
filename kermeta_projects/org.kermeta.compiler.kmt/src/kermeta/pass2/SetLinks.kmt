@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.19 2008-05-19 21:52:29 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.20 2008-06-04 14:43:45 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -70,7 +70,13 @@ aspect class Class {
 				else
 					if tpb.type.isInstanceOf(PrimitiveType) then
 						var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
-						typeArgument.eClassifier := cd.ecoreModelElement
+						
+						if not cd.ecoreModelElement.isVoid() then
+							typeArgument.eClassifier := cd.ecoreModelElement
+						else
+							typeArgument.eClassifier := cd.ecoreDataType
+						end
+						
 						self.ecoreModelElement.eTypeArguments.add(typeArgument)
 					end
 				end
@@ -84,15 +90,16 @@ aspect class Operation {
 		
 		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
 		s.setLinks(self, self.ecoreModelElement, context)
-		if ( self.superOperation != void ) then
+		if not self.superOperation.isVoid() then
 			var qualifiedName : String init self.superOperation.owningClass.qualifiedName
 			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.superOperation.name.toString(), qualifiedName)
 			
 			//stdio.writeln("op: " + self.name + " from the ClassDefinition: " + self.container.asType(NamedElement).name + " " + self.ecoreModelElement.toString)
 			
+			//The super operation is not tagged as EMF_Static
 			if self.getEMFStatic()=="" then
 				self.ecoreModelElement.eAnnotations.add(ecoreAnnotation)
-			end
+			end	
 		end
 		
 	end
@@ -103,7 +110,7 @@ aspect class Parameter {
 	
 		// DETERMINE if the parameter should be compiled
 		if self.type.isInstanceOf(FunctionType) then
-		
+			stdio.writeln("setLinks FunctionType: " + self.type.toString() + " self.ecoreModelElement: " + self.ecoreModelElement.toString())
 			var ft : FunctionType init self.type.asType(FunctionType)
 			self.ecoreModelElement.eType := GenericTypeDefinitionHelper.new.getKermetaSpecialType(self.container.container.container.asType(Package))
 			
@@ -133,7 +140,9 @@ aspect class Property {
 	operation setLinks(context : KM2EcoreContext) is do
 		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
 		s.setLinks(self, self.ecoreModelElement, context)
-		if not self.opposite.isVoid() then //if self.opposite != void then self is an EReference
+		
+		//Complete the structural phase
+		if not self.opposite.isVoid() then //if self.opposite.isVoid() then self is an EReference
 			self.ecoreModelElement.asType(EReference).eOpposite := self.opposite.ecoreModelElement.asType(EReference)
 		end
 	end
@@ -142,7 +151,7 @@ aspect class Property {
 
 class LinkSetterForTypedElement {
 	operation setLinks(element : TypedElement, ecoreModelElement : ETypedElement, context : KM2EcoreContext) is do
-		
+		//stdio.writeln(" ++++++++++++----------- " +  element.toString() + " " + element.type.toString() + " " + element.type.getTypeName())
 		if not ecoreModelElement.isVoid() then
 		/*if ( element.isComposite and TypeHelper.new.isPrimitiveType(element.type.asType(Type)) ) then
 			TypeHelper.new.getClassFromPrimitiveType(element.type.asType(Type))
@@ -178,7 +187,13 @@ class LinkSetterForTypedElement {
 						else
 							if tpb.type.isInstanceOf(PrimitiveType) then
 								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
-								typeArgument.eClassifier := cd.ecoreModelElement
+								
+								if not cd.ecoreModelElement.isVoid() then
+									typeArgument.eClassifier := cd.ecoreModelElement
+								else
+									typeArgument.eClassifier := cd.ecoreDataType
+								end
+								
 								ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 							end
 						end
@@ -187,7 +202,13 @@ class LinkSetterForTypedElement {
 			else
 				// Case of the type is an ObjectTypeVariable
 				if element.type.isInstanceOf(PrimitiveType) then
-					ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement
+					var cd : ClassDefinition init element.type.getClassFromPrimitiveType().getClassDefinition()
+					//stdio.writeln("SetLinks - PrimitiveType " + cd.ecoreModelElement.toString() + " " + cd.qualifiedName)
+					if not cd.ecoreModelElement.isVoid() then
+						ecoreModelElement.eType := cd.ecoreModelElement
+					else
+						ecoreModelElement.eType := cd.ecoreDataType
+					end
 				else
 					if element.type.isInstanceOf(Enumeration) then
 						ecoreModelElement.eType := element.type.asType(Enumeration).ecoreModelElement

@@ -43,6 +43,10 @@ class ClassWithBehavior
 
 class InheritedClassWithBehavior inherits ClassWithBehavior, EmptyClass {
 
+	attribute stringBuffer_attr : MyStringBuffer
+	
+	reference stringBuffer_ref : MyStringBuffer
+	
 	operation test() : String is do
 	
 		// Assignment from a StringLiteral
@@ -68,7 +72,7 @@ class InheritedClassWithBehavior inherits ClassWithBehavior, EmptyClass {
 class EmptyClass {
 }
 
-/*class ParameterizedEmptyClass<A> {
+class ParameterizedEmptyClass<A> {
 }
 
 class ParameterizedClass<B> inherits ParameterizedEmptyClass<B> , ParameterizedEmptyClass<String>
@@ -86,8 +90,10 @@ class ParameterizedClass<B> inherits ParameterizedEmptyClass<B> , ParameterizedE
 		}
 		func1(true)
 	end
-}*/
+}
 
 @EMF_instanceClassName "java.lang.String"
 class TestString inherits ValueType {
 }
+
+alias MyStringBuffer : kermeta::utils::StringBuffer;

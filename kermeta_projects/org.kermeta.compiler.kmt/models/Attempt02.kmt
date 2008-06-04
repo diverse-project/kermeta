@@ -1,4 +1,4 @@
-/* $Id: Attempt02.kmt,v 1.1 2008-05-20 15:45:35 cfaucher Exp $
+/* $Id: Attempt02.kmt,v 1.2 2008-06-04 14:45:21 cfaucher Exp $
  * Creation date: May 20, 2008
  * License:
  * Copyright:
@@ -19,6 +19,9 @@ class Main {
 	operation main() : Void is do
 		var m : Main init Main.new
 		m.attr.ft{ i | op(i) }
+		
+		if m.attr.ft2{ i | op(i) }.isVoid() then
+		end
 	end
 	
 	operation op( aa : A ) : B is do
@@ -27,9 +30,18 @@ class Main {
 }
 
 class A {
+
+	//Return Void
 	operation ft( func : <A -> B>) : Void is do
 		var a : A init A.new
 		func(a)
+	end
+	
+	//With a result
+	operation ft2( func : <A -> B>) : A is do
+		var a : A init A.new
+		func(a)
+		result := a
 	end
 }
 

@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.18 2008-05-20 15:45:37 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.19 2008-06-04 14:43:45 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -76,7 +76,7 @@ aspect class PrimitiveType {
 		//context.primitiveType_Type := PrimitiveType_Type.edatatype
 		//var ecoreDataType : EDataType init self.createEcoreModelElement(context).asType(EDataType)		
 		//context.primitiveType_Type := PrimitiveType_Type.eclass
-		var eModelElement : EClass init self.createEcoreModelElement(context)
+		var eModelElement : EDataType init self.createEcoreModelElement(context)
 		// Setting the container
 		var p : Package init self.container().asType(Package)
 		p.ecoreModelElement.eClassifiers.add(eModelElement)

@@ -1,4 +1,4 @@
-/* $Id: EcoreModelElementHelper.kmt,v 1.5 2008-04-21 15:26:25 cfaucher Exp $
+/* $Id: EcoreModelElementHelper.kmt,v 1.6 2008-06-04 14:43:44 cfaucher Exp $
  * Creation date: January 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -16,6 +16,9 @@ using ecore
 
 class EcoreModelElementHelper {
 	
+	/**
+	 * @deprecated
+	 */
 	operation findEClassProxy(cd : ClassDefinition) : EClass is do
 		var pack : Package init Package.new 
 		pack ?= cd.container
@@ -27,6 +30,9 @@ class EcoreModelElementHelper {
 		result := eclassifier.asType(EClass)
 	end
 	
+	/**
+	 * @deprecated
+	 */
 	operation findEOperationProxy(op : Operation) : EOperation is do
 		var cd : ClassDefinition init ClassDefinition.new
 		cd ?= op.container

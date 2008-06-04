@@ -1,9 +1,8 @@
-/* $Id: CreateBehavior.kmt,v 1.21 2008-05-28 15:50:21 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.22 2008-06-04 14:43:45 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Cyril Faucher <cfaucher@irisa.fr>
- *			Francois Tanguy <ftanguy@irisa.fr>
  */
 
 package kermeta::language;
@@ -64,13 +63,13 @@ package structure {
 			//ft.right*/
 			
 			//if ft_parameters.detect{ p | p.name==cv.name} then
-			//context.tasks_stack.peek()
+			//stdio.writeln("context.tasks_stack.peek(): " + context.tasks_stack.peek())
 			 
 			var javaCode : StringBuffer init StringBuffer.new
 			
 			//stdio.writeln("\tCurrent operation: " + self.name + " has for type: " + self.type.toString)
 			
-			// the body of the operation must be filled for being compiled
+			// The body of the operation must be filled for being compiled
 			if ( not self.body.isVoid() ) then
 				var type_label : String init self.type.createBehaviorJava(context)
 				
@@ -90,9 +89,10 @@ package structure {
 			end
 			
 			// Finally add the EAnnotation containing the Java code in the Ecore model
-	        EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, javaCode.toString)
-	        
-	        result := javaCode.toString
+			if context.tasks_stack.peek() != "FunctionType_Compilation" then
+	        	EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, javaCode.toString)
+	        end
+	        result := javaCode.toString()
 		end
 	}
 	
@@ -104,7 +104,7 @@ package structure {
 	
 	aspect class VoidType {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Type is do
-			result := "Void" // the VoidType is "normally" mapped to the Void class
+			result := "null" // the VoidType is "normally" mapped to the Void class
 		end
 	}
 	
@@ -200,9 +200,17 @@ package behavior {
 				end
 			end*/
 			
-			//context.tasks_stack.push("FunctionType_Compilation")
-			//self.staticOperation.createBehaviorJava(context)
-			//context.tasks_stack.pop()
+			//stdio.writeln("self.staticOperation: " + self.staticOperation.toString())
+			
+			if not self.staticOperation.isVoid() then
+				if self.staticOperation.isFunctionType() then
+					context.tasks_stack.push("FunctionType_Compilation")
+					//Stack Over Flow to solve:
+					stdio.writeln("context.tasks_stack.peek(): " + context.tasks_stack.peek() + " - " + self.staticOperation.name)
+					self.staticOperation.createBehaviorJava(context)
+					context.tasks_stack.pop()
+				end
+			end
 			
 			if not tgt.isVoid() then
 				result := result + getPP(tgt, fName, context)
@@ -362,7 +370,9 @@ package behavior {
 	
 	aspect class CallResult {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallVariable is do
-			result := "begin " + self.lineNumber.toString() + " " + self.fileName + "/n" + "result" + "/nend " + self.lineNumber.toString() + " " + self.fileName + "/n"
+			//Test to insert line number
+			//result := "begin " + self.lineNumber.toString() + " " + self.fileName + "\n" + "result" + "\nend " + self.lineNumber.toString() + " " + self.fileName + "\n"
+			result := "\n" + "result "
 		end
 	}
 	
@@ -402,7 +412,7 @@ package behavior {
 	
 	aspect class Assignment {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
-			result := "//TODO Assignment" + self.toString + "\n"
+			result := ""//TODO Assignment" + self.toString + "\n"
 			var left : String init self.target.createBehaviorJava(context)
 			var right : String init self.~value.createBehaviorJava(context)
 		

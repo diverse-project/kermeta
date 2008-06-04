@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.20 2008-05-28 15:50:21 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.21 2008-06-04 14:43:45 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -72,6 +72,7 @@ package structure {
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
+		stdio.writeln("Property - Property " + self.qualifiedName)
 			self.setLinks(context)
 			super(context)
 			self.createBehaviorJava(context)
@@ -123,21 +124,9 @@ package structure {
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
-			//stdio.writeln("Pass2 ClassDefinition")
 			self.setLinks(context)
 			super(context)
 		end
 	}
 	
 }
-/*
-package behavior {
-
-	aspect class Expression {
-		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
-			self.createBehaviorJava(context)
-			super(context)
-		end
-	}
-
-}*/

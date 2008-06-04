@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.11 2008-05-19 21:52:28 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.12 2008-06-04 14:43:43 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -41,8 +41,16 @@ aspect class Type {
 	// Check if the type is a subType of ValueType => we have to consider as a EDataType, i.e.: an EAttribute
 	operation isValueType() : Boolean is do
 		result := false
-		if self.isInstanceOf(ParameterizedType) then
-			var pt : ParameterizedType init self.asType(ParameterizedType)
+		
+		var theType : Type
+		if self.isInstanceOf(PrimitiveType) then
+			theType := getClassFromPrimitiveType().asType(Type)
+		else
+			theType := self
+		end
+		
+		if theType.isInstanceOf(ParameterizedType) then
+			var pt : ParameterizedType init theType.asType(ParameterizedType)
 			
 			if pt.typeDefinition.isInstanceOf(ClassDefinition) then
 				result := pt.typeDefinition.asType(ClassDefinition).isValueType()

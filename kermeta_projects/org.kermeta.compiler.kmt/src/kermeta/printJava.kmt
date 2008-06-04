@@ -1,4 +1,4 @@
-/* $Id: printJava.kmt,v 1.5 2008-04-21 15:26:53 cfaucher Exp $
+/* $Id: printJava.kmt,v 1.6 2008-06-04 14:43:44 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -50,7 +50,7 @@ package structure {
 		method print(context : KM2EcoreContext) : Void from TypeDefinition is do
 			stdio.writeln("class " + self.name + " {")
 			// Set the traceability
-			self.ecoreModelElement := EcoreModelElementHelper.new.findEClassProxy(self)
+			//self.ecoreModelElement := EcoreModelElementHelper.new.findEClassProxy(self)
 			// Compile the owned elements
 			self.eachOwnedElement{ o | o.print(context) }
 			stdio.writeln("}\n---------------------------------------\n")
@@ -96,7 +96,7 @@ package structure {
 			// Finally add the EAnnotation containing the Java code in the Ecore model
 	        
 	        var stringToPrint : String init javaCode.toString
-	        //stringToPrint := stringToPrint.replace("/*CallVariable*/ ","").replace("/*Block3*/ ","").replace(" /*Block1*/ ","").replace(" /*Block1_*/ ","").replace(" /*Block2*/ ","")
+	        //stringToPrint := stringToPrint.replace("/*CallVariable*/ ","").replace("/*Block3*/ ","").replace(" /*Block1*/ ","").replace(" /*Block1_*/ ","").replace(" /*Block2*/ ","").replace("/*VariableDecl with new*/","").replace("/*Block1*/","")
 	        stdio.writeln(stringToPrint)
 		end
 	}
