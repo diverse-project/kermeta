@@ -1,0 +1,43 @@
+HowTo get Bluetooth export working on Windows XP ?
+---------------------------------------------------------------
+
+1 - Install Bluetooth software:
+	in Start menu > Programs > [Accessories >] Bluetooth
+		launch the "Install Bluetooth Drivers" program
+
+2 - Activate Bluetooth on the NXT brick
+	in Bluetooth menu, select On/Off submenu
+	Select "On" and validate
+	in Bluetooth menu, select Visible submenu
+	Select the opened eye and validate
+	
+3 - Search for the Lego brick bluetooth receiver
+	in Start menu > Programs > [Accessories >] Bluetooth
+		launch the "Bluetooth Parameters" program
+	Search for NXT 
+	Add a connection to the NXT 
+	
+4 - Connect Windows to the NXT
+	in Start menu > Programs > [Accessories >] Bluetooth
+		launch the "Bluetooth Parameters" program
+	Double-click on "NXT" item 
+
+5 - Launch the upload for the first time
+	Open Eclipse
+		 launch the logo projects in Workbench
+	on any *.rxe file, right-click and select "Upload file to the NXT brick"
+	
+	Close all Eclipses (because the link will stay in use next time and make it fail)
+	
+	You should get a "icommand.properties" file in "C:\Documents and Settings\<your_login>\" folder
+	
+6 - Parameterize the correct port
+	in Start menu > Run
+		type "devmgmt.msc" and execute
+	in the COM ports, you must see some "BT" ports (COM10, COM11, ... COM40)
+	
+	Edit your  "icommand.properties" file:
+		- edit the created line to "nxtcomm.type=rxtx"
+		- add a line "nxtcomm=COM40" (if you have the "COM40" port in former step)
+	
+	Rexecute the <5> step and you should get the upload running well
