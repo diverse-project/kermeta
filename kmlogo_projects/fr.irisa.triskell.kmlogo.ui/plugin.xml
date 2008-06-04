@@ -51,7 +51,7 @@
          <action
                class="fr.irisa.triskell.kmlogo.ui.popup.actions.CompileLogoNXC"
                id="fr.irisa.triskell.kmlogo.ui.action1"
-               label="Compile to NXC"
+               label="Generate NXC code"
                menubarPath="fr.irisa.triskell.kmlogo.ui.menu1/group1"/>
       </objectContribution>
       <objectContribution
@@ -87,7 +87,7 @@
             </separator>
          </menu>
          <action
-               label="Upload to NXT"
+               label="Upload file to the NXT brick"
                class="fr.irisa.triskell.kmlogo.ui.popup.actions.UploadRXE"
                menubarPath="fr.irisa.triskell.kmlogo.ui.menu3/group3"
                enablesFor="1"
