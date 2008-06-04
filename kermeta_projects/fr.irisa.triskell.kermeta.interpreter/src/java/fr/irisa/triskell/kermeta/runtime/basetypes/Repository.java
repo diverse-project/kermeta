@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.10 2008-04-28 11:50:56 ftanguy Exp $
+/* $Id: Repository.java,v 1.11 2008-06-04 14:00:49 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -106,9 +106,11 @@ public class Repository {
     			defaultPath = unit_uripath;
         		URIConverter c = new URIConverterImpl();
         		u = u.resolve(c.normalize(URI.createURI(defaultPath)));    			
-    		} else {
+    		} else if ( ! defaultPath.startsWith("platform:/") ) {
     			defaultPath = "platform:/resource" + defaultPath;
     			u = URI.createURI( defaultPath + "/" + file);
+    		} else {
+    			u = URI.createURI( defaultPath + "/" + file);	
     		}
     	}
     	

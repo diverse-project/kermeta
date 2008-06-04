@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.11 2008-05-28 11:31:01 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.12 2008-06-04 14:00:52 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -423,15 +423,18 @@ public class KBasicProcess extends Process {
 			urls[i] = url;
 			i++;
 		}
+		
+		_interpreter.addToClasspath(urls);
+		
 		// URLClassLoader cl = new URLClassLoader(urls,
 		// this.getContextClassLoader());
 		// use this object class loader as parent (instead of the default thread
 		// class loader)
 		// because it also contains the plugin classloader rules
-		URLClassLoader cl = new URLClassLoader(urls, this.getClass()
-				.getClassLoader());
+		//URLClassLoader cl = new URLClassLoader(urls, this.getClass()
+		//		.getClassLoader());
 		
-		_interpreter.setContextClassLoader(cl);
+		//_interpreter.setContextClassLoader(cl);
 		/*
 		 * URL res = cl.findResource("waf/Test.class"); try {
 		 * System.err.println(cl.loadClass("waf.Test")); } catch

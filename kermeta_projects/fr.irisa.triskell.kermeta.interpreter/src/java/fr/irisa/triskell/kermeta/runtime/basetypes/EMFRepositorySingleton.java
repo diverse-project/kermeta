@@ -1,4 +1,4 @@
-/*$Id: EMFRepositorySingleton.java,v 1.2 2008-04-28 11:50:56 ftanguy Exp $
+/*$Id: EMFRepositorySingleton.java,v 1.3 2008-06-04 14:00:49 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	RepositorySingleton.java
 * License : EPL
@@ -63,10 +63,11 @@ public class EMFRepositorySingleton {
     			defaultPath = unit_uripath;
         		URIConverter c = new URIConverterImpl();
         		u = u.resolve(c.normalize(URI.createURI(defaultPath)));    			
-    		} else {
+    		} else if ( ! defaultPath.startsWith("platform:/") ) {
     			defaultPath = "platform:/resource" + defaultPath;
     			u = URI.createURI( defaultPath + "/" + file);
-    		}   			
+    		} else
+    			u = URI.createURI( defaultPath + "/" + file );
     	}
     	
     	if ( u.fileExtension() != null ) {
