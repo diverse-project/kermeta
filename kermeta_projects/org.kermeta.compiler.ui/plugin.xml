@@ -80,6 +80,16 @@
             </objectClass>
          </enablement>
       </objectContribution>
+      <objectContribution
+            id="org.kermeta.compiler.ui.generateKm"
+            objectClass="org.eclipse.core.resources.IFolder">
+         <action
+               class="org.kermeta.compiler.ui.popup.actions.GenerateKmAction"
+               id="org.kermeta.compiler.ui.action.generateKm"
+               label="Generate Km for all files"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+         </action>
+      </objectContribution>
       <!--objectContribution
             id="org.kermeta.compiler.compilekmtwithparamcontribution"
             nameFilter="*.kmt"
