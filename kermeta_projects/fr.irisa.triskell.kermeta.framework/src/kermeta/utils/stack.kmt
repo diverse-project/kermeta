@@ -14,7 +14,7 @@
  @uri "http://www.kermeta.org/kermeta/utils"
 package kermeta::utils;
 
-require "../Standard.kmt"
+require kermeta
 
 using kermeta::standard
 

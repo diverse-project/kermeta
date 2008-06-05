@@ -1,4 +1,4 @@
-// $Id: java.kmt,v 1.8 2008-03-03 13:39:57 dvojtise Exp $
+// $Id: java.kmt,v 1.9 2008-06-05 13:02:16 cfaucher Exp $
  
 /**
  * Contains types dedicated to dealing with java objects
@@ -7,7 +7,7 @@
  @uri "http://www.kermeta.org/kermeta/standard"
  package kermeta::standard;
 
-require "primitive_types.kmt"
+require "value_types.kmt"
 
 using kermeta::exceptions
 
