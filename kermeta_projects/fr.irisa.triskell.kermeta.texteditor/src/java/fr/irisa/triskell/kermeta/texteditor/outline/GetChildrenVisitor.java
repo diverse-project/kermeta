@@ -1,4 +1,4 @@
-/* $Id: GetChildrenVisitor.java,v 1.14 2008-04-30 13:05:08 dvojtise Exp $
+/* $Id: GetChildrenVisitor.java,v 1.15 2008-06-05 14:20:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetChildrenVisitor.java
 * License : EPL
@@ -76,7 +76,7 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		ArrayList<ModelElementOutlineItem> propertiesMEOIs = new ArrayList<ModelElementOutlineItem>();
 		ArrayList<ModelElementOutlineItem> operationsMEOIs = new ArrayList<ModelElementOutlineItem>();
 		
-		Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext( arg0 );
+		Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getFullContext( arg0 );
 		
 		Set <String> propertiesName = new HashSet <String> ();
 		Set <String> operationsName = new HashSet <String> ();

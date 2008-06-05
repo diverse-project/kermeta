@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.21 2008-05-19 14:19:06 ftanguy Exp $
+/* $Id: KermetaOutline.java,v 1.22 2008-06-05 14:20:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -118,6 +118,7 @@ public class KermetaOutline extends ContentOutlinePage {
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setLabelProvider(labelProvider);
 		treeViewer.addSelectionChangedListener(this);
+		treeViewer.addDoubleClickListener( new DoubleClickListener() );
 		
 		if ( getKermetaUnit() != null && ! getKermetaUnit().getInternalPackages().isEmpty() )
 			treeViewer.setInput( getKermetaUnit() );
@@ -195,7 +196,7 @@ public class KermetaOutline extends ContentOutlinePage {
             
         TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
         if(tr != null)
-         	textEditor.setHighlightRange(tr.getCharBeginAt()-1,0 ,true);
+         	textEditor.setHighlightRange(tr.getCharBeginAt(),0 ,true);
         
         // Now notify other plugins or views that the outline selection has changed
         if(modelElement != null){
