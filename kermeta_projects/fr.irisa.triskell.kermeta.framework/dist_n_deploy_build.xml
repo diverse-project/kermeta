@@ -1,11 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.32 2008-05-28 09:52:55 cfaucher Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.33 2008-06-05 14:17:03 ftanguy Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse.home" location="C:/eclipse3.3.2"/>
+	<property name="eclipse.home" location="/home/paco/Desktop/eclipse"/>
 
 	<path id="project.class.path">
 		
@@ -16,13 +16,11 @@
 		<pathelement location="../org.kermeta.io.loader/bin"/>
 		<pathelement location="../fr.irisa.triskell.kermeta.model/build/class"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.interpreter/build/class"/>
-  		<pathelement location="../fr.irisa.triskell.traceability.model/build/class"/>
+  		<pathelement location="../fr.irisa.triskell.traceability.model/bin"/>
   		<pathelement location="../org.eclipse.gymnast.runtime.core/bin"/>
   		<pathelement location="../org.kermeta.log4j.util/bin"/>
   		<pathelement location="../org.kermeta.merger/bin"/>
 
-	  	<pathelement location="lib/thirdparty/log4j.jar"/>
-  		
 		<fileset dir="${eclipse.home}/plugins">
 		    <include name="**/org.eclipse.emf.common_*.jar"/>
 			<include name="**/org.eclipse.emf.ecore_*.jar"/>
@@ -41,6 +39,7 @@
 			<include name="**/org.antlr_*.jar"/>
 			<include name="**/org.antlr_*/antlr.jar"/>
 			<include name="**/org.apache.log4j_*.jar"/>
+			<include name="**/org.apache.commons.logging_*.jar"/>
 		</fileset>		
 	</path>
 

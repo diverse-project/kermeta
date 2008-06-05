@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.43 2008-04-28 11:49:48 ftanguy Exp $
+ * $Id: collections.kmt,v 1.44 2008-06-05 14:17:03 ftanguy Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -15,7 +15,7 @@
  @uri "http://www.kermeta.org/kermeta/standard"
 package kermeta::standard;
 
-require "primitive_types.kmt"
+require "value_types.kmt"
 
 using kermeta::exceptions
 
