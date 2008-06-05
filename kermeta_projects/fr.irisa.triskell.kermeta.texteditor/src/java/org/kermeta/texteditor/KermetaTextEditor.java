@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.10 2008-05-28 09:25:06 ftanguy Exp $
+/*$Id: KermetaTextEditor.java,v 1.11 2008-06-05 14:20:04 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -178,7 +178,7 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
     private Unit unit = null;
     
     private boolean initializeUnit() {
-    	unit = KpmManager.getDefault().getUnit(getFile()); 
+   		unit = KpmManager.getDefault().getUnit( getFile() );
 		return true;
     }
     
@@ -194,14 +194,19 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
     }
     
 	private void initializeInterestWithKPM(IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException, IdNotFoundException, NotRegisteredURIException {
-		initializeUnit();	
-		KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit( getFile() );
-		if ( kermetaUnit != null )
-			updateValue( kermetaUnit );
-		else {
-			KermetaUnitHost.getInstance().declareInterest(this, getFile());
-			unit.setLastTimeModified( new Date(0) );
-			EventDispatcher.sendEvent(unit, "update", null, monitor);
+    	// getFile can return null when the editor is on a file coming from a plugin.
+		IFile file = getFile();
+		if ( file != null ) {
+			initializeUnit();	
+			KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit( file );
+			if ( kermetaUnit != null ) {
+				KermetaUnitHost.getInstance().declareInterest(this, file);
+				updateValue( kermetaUnit );
+			} else {
+				KermetaUnitHost.getInstance().declareInterest(this, file);
+				unit.setLastTimeModified( new Date(0) );
+				EventDispatcher.sendEvent(unit, "update", null, monitor);
+			}
 		}
 	}
 	
