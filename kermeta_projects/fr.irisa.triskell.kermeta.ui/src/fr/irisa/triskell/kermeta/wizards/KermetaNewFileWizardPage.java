@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizardPage.java,v 1.1 2007-11-21 13:16:13 ftanguy Exp $
+/* $Id: KermetaNewFileWizardPage.java,v 1.2 2008-06-05 14:52:11 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -55,7 +55,7 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
     private Composite linkedResourceParent;
     private Button advancedButton;
     public static final int GRID_DATA_WIDTH = 150;
-    public static final String defaultPackageString = "root_package";
+    public String defaultPackageString = "root_package";
     public static final String defaultClassString = "Main";
     public static final String defaultOperationString = "main";
     private Text packageText;
@@ -81,8 +81,32 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
 		setTitle("New Kermeta File");
 		setDescription("This wizard creates a new file with *.kmt extension that can be opened by a multi-page editor.");
 		this.selection = selection;
+		setDefaultPackageName();
 	}
 
+	/**
+	 * Sets the package name from the selection.
+	 * The name is the container path without the project name, without the src and/or kermeta folder.
+	 * @param container
+	 */
+	private void setDefaultPackageName() {
+		if ( selection.getFirstElement() instanceof IContainer ) {
+			IContainer container = (IContainer) selection.getFirstElement();
+			String s = container.getFullPath().toString();
+			s = s.replace( container.getProject().getFullPath().toString(), "" );
+			if ( s.startsWith("/") )
+				s = s.replaceFirst("/", "");
+			if ( s.startsWith("src/") )
+				s = s.replaceFirst("src/", "");
+			if ( s.startsWith("kermeta/") )
+				s = s.replaceFirst("kermeta/", "");
+			if ( ! s.equals("kermeta") && ! s.equals("src") && ! s.equals("") ) {
+				s = s.replace("/", "::");
+				defaultPackageString = s;			
+			}
+		}
+	}
+	
 	/**
 	 * Create the layout of the project page
 	 * @see IDialogPage#createControl(Composite)
