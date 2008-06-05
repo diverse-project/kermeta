@@ -190,6 +190,9 @@ public class LoaderPlugin extends Plugin {
 		}
 	}
 	
+	/**		A lock to block several loading attempts at the same time.		*/
+	private Object _lock = new Object();
+	
 	/**
 	 * Load the given uri
 	 * option is typically :
@@ -204,10 +207,13 @@ public class LoaderPlugin extends Plugin {
 	 * @throws NotRegisteredURIException
 	 */
 	public KermetaUnit load(String uri, Map<?, ?> options) throws URIMalformedException, NotRegisteredURIException {
-		if ( options == null )
-			options = new HashMap<Object, Object>();
-		getDefault().loadingContext.load(uri, options);
-		return IOPlugin.getDefault().getKermetaUnit(uri);
+		synchronized (_lock) {
+			log.info("Request loading of " + uri);
+			if ( options == null )
+				options = new HashMap<Object, Object>();
+			getDefault().loadingContext.load(uri, options);
+			return IOPlugin.getDefault().getKermetaUnit(uri);			
+		}
 	}
 	
 	public void unload(String uri) {
