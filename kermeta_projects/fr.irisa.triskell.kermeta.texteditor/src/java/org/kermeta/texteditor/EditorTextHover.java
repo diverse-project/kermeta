@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.4 2008-04-25 10:07:37 dvojtise Exp $
+/* $Id: EditorTextHover.java,v 1.5 2008-06-05 14:21:09 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -30,14 +30,18 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.KermetaModelHelper;
 import org.kermeta.texteditor.KermetaTextEditor;
 
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
@@ -133,6 +137,12 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		}
 		
 		EObject o = modelRef.getRefObject();
+		
+		TextHoverLabelProvider provider = new TextHoverLabelProvider();
+		return (String) provider.accept(o);
+		
+		/*
+		
         if (o instanceof Expression)
         {
             Expression fexp = (Expression)o;
@@ -162,9 +172,20 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
         	Operation p = (Operation) o;
 			String ftags = kdocPrettyPrint( p.getTag() );
 			return NamedElementHelper.getMangledQualifiedName( p )+ "\n" + ftags;	        	
+        } else if ( o instanceof TypeReference ) {
+        	TypeReference tr = (TypeReference) o;
+        	TypeDefinition td = null;
+        	if ( tr.getType() instanceof TypeDefinition )
+        		td = (TypeDefinition) tr.getType();
+        	else if ( tr.getType() instanceof Class )
+        		td = ((Class) tr.getType()).getTypeDefinition();
+        	if ( td != null ) {
+        		String tags = kdocPrettyPrint( td.getOwnedTags() );
+        		return KermetaModelHelper.NamedElement.qualifiedName(td) + "\n" + tags;
+        	}
         } else
     		TexteditorPlugin.internalLog.debug("no recognized object : hover will ignore it");
-		
+		*/
 		
 		
 		/*if (editor.mcunit != null && ((KMTUnit)editor.mcunit).getMctAST() != null) {
@@ -211,7 +232,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		    }
 		}*/
 		
-		return null;
+		//return null;
 	}
 	
 	/**
