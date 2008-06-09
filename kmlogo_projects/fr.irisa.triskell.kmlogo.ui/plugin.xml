@@ -17,7 +17,7 @@
             </separator>
          </menu>
          <action
-               label="Run Logo Interpreter"
+               label="Run Logo Simulator"
                class="fr.irisa.triskell.kmlogo.ui.popup.actions.RunLogo"
                menubarPath="fr.irisa.triskell.kmlogo.ui.menu1/group1"
                enablesFor="1"
@@ -42,7 +42,7 @@
             </separator>
          </menu>
          <action
-               label="Run Logo Interpreter"
+               label="Run Logo Simulator"
                class="fr.irisa.triskell.kmlogo.ui.popup.actions.RunLogo"
                menubarPath="fr.irisa.triskell.kmlogo.ui.menu1/group1"
                enablesFor="1"
