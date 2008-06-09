@@ -1,6 +1,6 @@
 package fr.irisa.triskell.kmlogo.ui;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
