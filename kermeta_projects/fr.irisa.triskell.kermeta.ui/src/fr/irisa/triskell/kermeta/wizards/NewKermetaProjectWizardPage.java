@@ -1,4 +1,4 @@
-/* $Id: NewKermetaProjectWizardPage.java,v 1.3 2008-01-02 10:28:20 vmahe Exp $
+/* $Id: NewKermetaProjectWizardPage.java,v 1.4 2008-06-09 10:02:23 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizardPage.java
  * License: EPL
@@ -12,9 +12,6 @@
 
 package fr.irisa.triskell.kermeta.wizards;
 
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
@@ -44,19 +41,21 @@ public class NewKermetaProjectWizardPage extends WizardNewProjectCreationPage
     protected WizardDialog wizardDialog;
     
     /** true if user uses the default metamodel/model/output folders, false otherwise */
-    public boolean useDefaultFolders = false;
+    public boolean useDefaultFolders = true;
     protected Button useDefaultFoldersButton;
     
-    // Widgets
-    /*protected Text modelLocationText, mmodelLocationText;*/
-    protected Text srcLocationText, binLocationText;
-    // Labels
-    /*protected Label modelLocationLabel, mmodelLocationLabel;*/
-    protected Label srcLocationLabel,binLocationLabel;
+    private Label _srcFolderLabel;
+    private Text _srcFolder;
+    private String _srcFolderValue = "src/kermeta";
 
-    private String SRC_FOLDER = "src";
-
-    private String SRC_LIB = "lib";
+    private Label _modelFolderLabel;
+    private Text _modelFolder;
+    private String _modelFolderValue = "model";
+    
+    private Label _metamodelFolderLabel;
+    private Text _metamodelFolder;
+    private String _metamodelFolderValue = "metamodel";
+    
     
 	/**
 	 * Constructor for KermetaNewWizardPage.
@@ -104,22 +103,18 @@ public class NewKermetaProjectWizardPage extends WizardNewProjectCreationPage
         folderGroup.setFont(font);
         folderGroup.setText("Set default folders");
         
-        final Button useEmptyFoldersButton =
-            new Button(folderGroup, SWT.RADIO | SWT.RIGHT);
+        final Button useEmptyFoldersButton = new Button(folderGroup, SWT.RADIO | SWT.RIGHT);
         
         useEmptyFoldersButton.setText("Create empty folder");
         useEmptyFoldersButton.setSelection(!useDefaultFolders);
         useEmptyFoldersButton.setFont(font);
-
         
         GridData buttonData = new GridData();
         buttonData.horizontalSpan = 3;
         useEmptyFoldersButton.setLayoutData(buttonData);
-        
-        
+              
         // Default folders
-        final Button useDefaultFoldersButton =
-            new Button(folderGroup, SWT.RADIO | SWT.RIGHT);
+        final Button useDefaultFoldersButton = new Button(folderGroup, SWT.RADIO | SWT.RIGHT);
         
         useDefaultFoldersButton.setText("Create separate folders for source (src) and libraries (lib)");
         useDefaultFoldersButton.setSelection(!useEmptyFoldersButton.getSelection());
@@ -128,9 +123,8 @@ public class NewKermetaProjectWizardPage extends WizardNewProjectCreationPage
         buttonData = new GridData();
         buttonData.horizontalSpan = 3;
         useDefaultFoldersButton.setLayoutData(buttonData);
-        
-        
-        createUserSpecifiedFolderLocationGroup(folderGroup, false);
+               
+        createUserSpecifiedFolderLocationGroup(folderGroup, !useEmptyFoldersButton.getSelection());
         
         SelectionListener listener = new SelectionAdapter() {
             public void widgetSelected(SelectionEvent e) {
@@ -154,19 +148,19 @@ public class NewKermetaProjectWizardPage extends WizardNewProjectCreationPage
     {/*
         modelLocationText.setEnabled(b);   modelLocationLabel.setEnabled(b);
         mmodelLocationText.setEnabled(b);  mmodelLocationLabel.setEnabled(b);*/
-        srcLocationLabel.setEnabled(b);
-        srcLocationText.setEnabled(b);;
-        binLocationLabel.setEnabled(b);
-        binLocationText.setEnabled(b);
+        _srcFolder.setEnabled(b);
+        _srcFolderLabel.setEnabled(b);
+        _modelFolder.setEnabled(b);
+        _modelFolderLabel.setEnabled(b);
+        _metamodelFolder.setEnabled(b);
+        _metamodelFolderLabel.setEnabled(b);
     }
 
-    protected void setLocationFoldersForSelection()
-    {
-		if (useDefaultFolders)
-		{
-/*			mmodelLocationText.setText("metamodels"); modelLocationText.setText("models");*/
-			srcLocationText.setText(SRC_FOLDER);
-			binLocationText.setText(SRC_LIB);
+    protected void setLocationFoldersForSelection() {
+		if ( useDefaultFolders ) {
+			_srcFolder.setText( _srcFolderValue );
+			_modelFolder.setText( _modelFolderValue );
+			_metamodelFolder.setText( _metamodelFolderValue );
 		}
     }
 
@@ -176,28 +170,18 @@ public class NewKermetaProjectWizardPage extends WizardNewProjectCreationPage
      * @param b
      */
     private void createUserSpecifiedFolderLocationGroup(Group folderGroup, boolean b) {
-        
 		Font font = folderGroup.getFont();
+		_srcFolderLabel = createLocationLabel(folderGroup, "Kermeta Source Folder", b, font);
+		_srcFolder = createLocationText(folderGroup, b, font, _srcFolderValue);
 
-		// metamodels location label
-/*		mmodelLocationLabel = createLocationLabel(folderGroup, "Metamodel location", b, font);
-		mmodelLocationText = createLocationText(folderGroup, b, font, "metamodels");
-		// models location label
-		modelLocationLabel = createLocationLabel(folderGroup, "Model location", b, font);
-		modelLocationText = createLocationText(folderGroup, b, font, "models");
-*/
-		// source location label
-		srcLocationLabel = createLocationLabel(folderGroup, "Transformation source location", b, font);
-		srcLocationText = createLocationText(folderGroup, b, font, SRC_FOLDER);
+		_modelFolderLabel = createLocationLabel(folderGroup, "Model Folder", b, font);
+		_modelFolder = createLocationText(folderGroup, b, font, _modelFolderValue);
 		
-		// source location label
-		binLocationLabel = createLocationLabel(folderGroup, "Compiled files location", b, font);
-		binLocationText = createLocationText(folderGroup, b, font, SRC_LIB);
-        
+		_metamodelFolderLabel = createLocationLabel(folderGroup, "Metamodel Folder", b, font);
+		_metamodelFolder = createLocationText(folderGroup, b, font, _metamodelFolderValue);
     }
     
-    protected Label createLocationLabel(Group folderGroup, String label, boolean enabled, Font font)
-    {
+    protected Label createLocationLabel(Group folderGroup, String label, boolean enabled, Font font) {
         Label _locationLabel = new Label(folderGroup, SWT.NONE);
 		_locationLabel.setText(label); //$NON-NLS-1$
 		_locationLabel.setEnabled(enabled);
@@ -205,8 +189,7 @@ public class NewKermetaProjectWizardPage extends WizardNewProjectCreationPage
 		return _locationLabel;
     }
 
-    protected Text createLocationText(Group folderGroup, boolean enabled, Font font, String defaultValue)
-    {
+    protected Text createLocationText(Group folderGroup, boolean enabled, Font font, String defaultValue) {
         Text _locationText = new Text(folderGroup, SWT.BORDER);
         GridData data = new GridData(GridData.FILL_HORIZONTAL);
         //data.widthHint = SIZING_TEXT_FIELD_WIDTH;
@@ -218,40 +201,36 @@ public class NewKermetaProjectWizardPage extends WizardNewProjectCreationPage
     }
     
     /**
-     * Invoked when user clicks on "Finish" button.
-     * Create the empty folders
-     *
+     * 
+     * @return
      */
-    protected void createFolders(IProject newProject)
-    {	
-        try
-        {   
-            //createFolder(newProject.getFolder(modelLocationText.getText()));
-            // createFolder(newProject.getFolder(mmodelLocationText.getText()));
-            //output folder
-            IFolder output = newProject.getFolder(binLocationText.getText());
-            createFolder(output);
-            IFolder src = newProject.getFolder(srcLocationText.getText());
-            createFolder(src);
-        }
-        catch (CoreException e)
-        {
-            e.printStackTrace();
-        }
+    public String getSrcFolder() {
+    	return _srcFolder.getText();
     }
     
+    /**
+     * 
+     * @return
+     */
+    public String getModelFolder() {
+    	return _modelFolder.getText();
+    }
     
+    /**
+     * 
+     * @return
+     */
+    public String getMetamodelFolder() {
+    	return _metamodelFolder.getText();
+    }
     
-	/**
-	 * helper method that recusrively create the requested folder
-	 * 
-	 * @param folder
-	 */
-	private void createFolder(IFolder folder) throws CoreException {
-		if (!folder.getParent().exists())
-			createFolder((IFolder) folder.getParent());
-		folder.create(true, true, null);
-	}
+    /**
+     * 
+     * @return
+     */
+    public boolean createFolders() {
+    	return useDefaultFolders;
+    }
 
     /* (non-Javadoc)
      * @see org.eclipse.ui.dialogs.WizardNewProjectCreationPage#setInitialProjectName(java.lang.String)
@@ -259,18 +238,6 @@ public class NewKermetaProjectWizardPage extends WizardNewProjectCreationPage
     public void setInitialProjectName(String name) {
         // TODO Auto-generated method stub
         super.setInitialProjectName(name);
-    }
-    
-    /**
-     * Set the dialog to this page : the container in fact
-     * @param dialog
-     */
-/*    public void setWizardDialog(WizardDialog dialog)    {
-        wizardDialog = dialog;
-    }*/
-    
-    
-    
-    
+    }   
     
 }

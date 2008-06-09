@@ -1,6 +1,6 @@
 
 
-/*$Id: NewKermetaProjectWizard.java,v 1.3 2008-05-28 09:25:42 ftanguy Exp $
+/*$Id: NewKermetaProjectWizard.java,v 1.4 2008-06-09 10:02:23 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -11,12 +11,14 @@
 */
 package fr.irisa.triskell.kermeta.wizards;
 
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
@@ -40,22 +42,22 @@ public class NewKermetaProjectWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		try {
-			final IProjectDescription description = ResourcesPlugin.getWorkspace().newProjectDescription(page.getProjectName());
-			 //description.setLocation( Platform.getLocation() );
-			description.setLocation( null );
-
 			 final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(page.getProjectName());
 			 IWorkspaceRunnable operation = new IWorkspaceRunnable() {
 				 public void run(IProgressMonitor monitor) throws CoreException {
-					 project.create(description, monitor);
+					 project.create(monitor);
 					 project.open(monitor);
 					 NatureHelper.addNatureToProject(project, KermetaNature.ID);
-					 //KermetaNatureHelper.addKermetaNature(project);
+					 if ( page.createFolders() ) {
+						 
+						 createFolder(project, page.getSrcFolder(), monitor);
+						 createFolder(project, page.getModelFolder(), monitor);
+						 createFolder(project, page.getMetamodelFolder(), monitor);
+
+					 }
 				 }
 			};
 			ResourcesPlugin.getWorkspace().run(operation, null);
-			//IResourceHelper.createKermetaProject( page.getProjectName() );
-			//KermetaResourcesHelper.createKermetaProject( page.getProjectName() );
 		} catch (CoreException exception) {
 			exception.printStackTrace();
 			return false;
@@ -66,4 +68,21 @@ public class NewKermetaProjectWizard extends Wizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 	}
 
+	/**
+	 * Creates folder hierarchically from a path relative to a project.
+	 * @param project
+	 * @param path
+	 * @param monitor
+	 * @throws CoreException
+	 */
+	private void createFolder(IProject project, String path, IProgressMonitor monitor) throws CoreException {
+		String[] strings = path.split("/");
+		IContainer currentContainer = project;
+		for ( String s : strings ) {
+			IFolder folder = currentContainer.getFolder( new Path(s) );
+			folder.create(true, true, monitor);
+			currentContainer = folder;
+		}
+	}
+	
 }
