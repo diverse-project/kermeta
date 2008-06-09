@@ -1,136 +1,29 @@
 <?xml version="1.0" encoding="ASCII"?>
 <art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
-  <root name="Service Discovery" type="//@types.6" state="ON">
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Policy" type="//@types.5" state="ON"/>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Cache" type="//@types.2" state="ON">
-      <binding serverInstance="//@root/@subComponent.0" client="//@types.2/@port.1/@sub.0" server="//@types.5/@port.0/@sub.0"/>
+  <root name="Service Discovery" type="//@types.1" state="ON">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Policy" type="//@types.4" state="ON"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Cache" type="//@types.0" state="ON">
+      <binding serverInstance="//@root/@subComponent.0" client="//@types.0/@port.1/@sub.0" server="//@types.4/@port.0/@sub.0"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Network" type="//@types.4" state="ON"/>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Advertiser" type="//@types.0" state="ON">
-      <binding serverInstance="//@root/@subComponent.0" client="//@types.0/@port.1/@sub.0" server="//@types.5/@port.0/@sub.0"/>
-      <binding serverInstance="//@root/@subComponent.1" client="//@types.0/@port.2/@sub.0" server="//@types.2/@port.0/@sub.0"/>
-      <binding serverInstance="//@root/@subComponent.2" client="//@types.0/@port.3/@sub.0" server="//@types.4/@port.0/@sub.0"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Network" type="//@types.3" state="ON"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Advertiser" type="//@types.2" state="ON">
+      <binding serverInstance="//@root/@subComponent.0" client="//@types.2/@port.1/@sub.0" server="//@types.4/@port.0/@sub.0"/>
+      <binding serverInstance="//@root/@subComponent.1" client="//@types.2/@port.2/@sub.0" server="//@types.0/@port.0/@sub.0"/>
+      <binding serverInstance="//@root/@subComponent.2" client="//@types.2/@port.3/@sub.0" server="//@types.3/@port.0/@sub.0"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Reply" type="//@types.3" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.serviceDiscovery.impl.Reply">
-      <binding client="//@types.1/@port.3/@sub.0">
-        <serverInstance xsi:type="instance:PrimitiveInstance" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.3"/>
-        <server href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.3/@port.0/@sub.0"/>
-      </binding>
-      <binding client="//@types.3/@port.3/@sub.0">
-        <serverInstance xsi:type="instance:PrimitiveInstance" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.0"/>
-        <server href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1/@port.0/@sub.0"/>
-      </binding>
-      <binding client="//@types.3/@port.4/@sub.0">
-        <serverInstance xsi:type="instance:PrimitiveInstance" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.1"/>
-        <server href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.2/@port.0/@sub.0"/>
-      </binding>
-      <binding serverInstance="//@root/@subComponent.5" client="//@types.3/@port.1/@sub.0" server="//@types.1/@port.1/@sub.0"/>
-    </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Request" type="//@types.1" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.serviceDiscovery.impl.Request">
-      <binding client="//@types.1/@port.3/@sub.0">
-        <serverInstance xsi:type="instance:PrimitiveInstance" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.3"/>
-        <server href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.3/@port.0/@sub.0"/>
-      </binding>
-      <binding client="//@types.3/@port.3/@sub.0">
-        <serverInstance xsi:type="instance:PrimitiveInstance" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.0"/>
-        <server href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.1/@port.0/@sub.0"/>
-      </binding>
-      <binding client="//@types.3/@port.4/@sub.0">
-        <serverInstance xsi:type="instance:PrimitiveInstance" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@root/@subComponent.1"/>
-        <server href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@types.2/@port.0/@sub.0"/>
-      </binding>
-      <binding serverInstance="//@root/@subComponent.4" client="//@types.1/@port.2/@sub.0" server="//@types.3/@port.0/@sub.0"/>
-    </subComponent>
-    <delegation serverInstance="//@root/@subComponent.3" source="//@types.0/@port.0/@sub.0" exported="//@types.6/@port.0/@sub.0"/>
+    <delegation serverInstance="//@root/@subComponent.3" source="//@types.2/@port.0/@sub.0" exported="//@types.1/@port.0/@sub.0"/>
   </root>
-  <services xsi:type="type:FunctionalService" name="org.diva.example.serviceDiscovery.IPolicy"/>
-  <services xsi:type="type:FunctionalService" name="org.diva.example.serviceDiscovery.INetwork"/>
-  <services xsi:type="type:FunctionalService" name="org.diva.example.serviceDiscovery.IRequest"/>
-  <services xsi:type="type:FunctionalService" name="org.diva.example.serviceDiscovery.ICache"/>
-  <services xsi:type="type:FunctionalService" name="org.diva.example.serviceDiscovery.IAdvertiser"/>
-  <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network.">
-    <port name="advertiser">
-      <sub name="advertiser" service="//@services.4" role="server"/>
-    </port>
-    <port name="policy">
-      <sub name="policy" service="//@services.0" role="client"/>
-    </port>
-    <port name="cache">
-      <sub name="cache" service="//@services.3" role="client"/>
-    </port>
-    <port name="network">
-      <sub name="network" service="//@services.1" role="client"/>
-    </port>
-  </types>
-  <types xsi:type="type:PrimitiveType" name="request.requestReply.reply.policy.cache.network.">
-    <port name="request" isOptional="false">
-      <sub name="request" role="server">
-        <service xsi:type="type:FunctionalService" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.5"/>
-      </sub>
-    </port>
-    <port name="requestReply" isOptional="false">
-      <sub name="requestReply" role="server">
-        <service xsi:type="type:FunctionalService" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.7"/>
-      </sub>
-    </port>
-    <port name="reply" isOptional="false">
-      <sub name="reply" role="client">
-        <service xsi:type="type:FunctionalService" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.0"/>
-      </sub>
-    </port>
-    <port name="policy" isOptional="false">
-      <sub name="policy" role="client">
-        <service xsi:type="type:FunctionalService" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.3"/>
-      </sub>
-    </port>
-    <port name="cache" isOptional="false">
-      <sub name="cache" role="client">
-        <service xsi:type="type:FunctionalService" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.1"/>
-      </sub>
-    </port>
-    <port name="network" isOptional="false">
-      <sub name="network" role="client">
-        <service xsi:type="type:FunctionalService" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.1"/>
-      </sub>
-    </port>
-  </types>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.INetwork"/>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IRequest"/>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IPolicy"/>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.ICache"/>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IAdvertiser"/>
   <types xsi:type="type:PrimitiveType" name="cache.policy.">
     <port name="cache" isOptional="false">
       <sub name="cache" service="//@services.3" role="server"/>
     </port>
     <port name="policy" isOptional="false">
-      <sub name="policy" service="//@services.0" role="client"/>
-    </port>
-  </types>
-  <types xsi:type="type:PrimitiveType" name="reply.requestReply.policy.cache.network.">
-    <port name="reply" isOptional="false">
-      <sub name="reply" role="server">
-        <service xsi:type="type:FunctionalService" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.6"/>
-      </sub>
-    </port>
-    <port name="requestReply" isOptional="false">
-      <sub name="requestReply" role="client">
-        <service xsi:type="type:FunctionalService" href="file:/C:/work/dev/Kermeta/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art#//@services.7"/>
-      </sub>
-    </port>
-    <port name="policy" isOptional="false">
-      <sub name="policy" role="client"/>
-    </port>
-    <port name="cache" isOptional="false">
-      <sub name="cache" role="client"/>
-    </port>
-    <port name="network" isOptional="false">
-      <sub name="network" role="client"/>
-    </port>
-  </types>
-  <types xsi:type="type:PrimitiveType" name="network.">
-    <port name="network" isOptional="false">
-      <sub name="network" service="//@services.1" role="server"/>
-    </port>
-  </types>
-  <types xsi:type="type:PrimitiveType" name="policy.">
-    <port name="policy" isOptional="false">
-      <sub name="policy" service="//@services.0" role="server"/>
+      <sub name="policy" service="//@services.2" role="client"/>
     </port>
   </types>
   <types xsi:type="type:CompositeType" name="advertiser.request.">
@@ -138,7 +31,31 @@
       <sub name="advertiser" service="//@services.4" role="server"/>
     </port>
     <port name="request">
-      <sub name="request" service="//@services.2" role="server"/>
+      <sub name="request" service="//@services.1" role="server"/>
+    </port>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network.">
+    <port name="advertiser">
+      <sub name="advertiser" service="//@services.4" role="server"/>
+    </port>
+    <port name="policy">
+      <sub name="policy" service="//@services.2" role="client"/>
+    </port>
+    <port name="cache">
+      <sub name="cache" service="//@services.3" role="client"/>
+    </port>
+    <port name="network">
+      <sub name="network" service="//@services.0" role="client"/>
+    </port>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="network.">
+    <port name="network" isOptional="false">
+      <sub name="network" service="//@services.0" role="server"/>
+    </port>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="policy.">
+    <port name="policy" isOptional="false">
+      <sub name="policy" service="//@services.2" role="server"/>
     </port>
   </types>
 </art:System>
