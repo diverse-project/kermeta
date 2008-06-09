@@ -1,4 +1,4 @@
-/*$Id: KLaunchShortcut.java,v 1.6 2008-04-30 13:58:49 ftanguy Exp $
+/*$Id: KLaunchShortcut.java,v 1.7 2008-06-09 12:23:23 ftanguy Exp $
 * Project : org.kermeta.runner.ui
 * File : 	KLaunchShortcut.java
 * License : EPL
@@ -16,7 +16,9 @@ import java.util.Map;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
@@ -305,20 +307,22 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 				
 		ILaunchConfiguration config= null;
 		try {
-			String configIdentifier = fileName+"_"+className+"_"+opName;
+			int index = fileName.lastIndexOf("/");
+			String defaultPath = fileName.substring(0, index);
+			String realFileName = fileName.replace(defaultPath + "/", "");
+			String configIdentifier = realFileName + "_" + className + "_" + opName;
+			
 			configIdentifier = configIdentifier.replaceAll(":","__");  // replace the : that are not correctly handled by Eclipse generateUniqueLaunchConfigurationNameFrom
 			ILaunchConfigurationWorkingCopy wc = _configurationType.newInstance(
 			        null, _launchManager.generateUniqueLaunchConfigurationNameFrom(configIdentifier)); 
-			
-			int index = fileName.lastIndexOf("/");
-			String defaultPath = fileName.substring(0, index);
-			
+
 			wc.setAttribute(KConstants.KM_FILENAME, fileName);
 			wc.setAttribute(KConstants.KM_CLASSQNAME, className);
 			wc.setAttribute(KConstants.KM_OPERATIONNAME, opName);
 			wc.setAttribute(KConstants.KM_PROJECTNAME, projectName);
 			wc.setAttribute(KConstants.DEFAULT_PATH, defaultPath);
 			wc.setAttribute( DebugPlugin.ATTR_PROCESS_FACTORY_ID, "org.kermeta.debug.processFactory" );
+			//wc.setContainer( ResourcesPlugin.getWorkspace().getRoot() );
 			
 			config= wc.doSave();
 		} catch (CoreException ce) {
