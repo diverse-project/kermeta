@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceChangeListener.java,v 1.5 2008-06-03 07:43:58 ftanguy Exp $
+/*$Id: ResourceChangeListener.java,v 1.6 2008-06-09 10:03:31 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ResourceChangeListener.java
 * License : EPL
@@ -13,6 +13,7 @@
 package org.kermeta.kpm.internal.builder;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
@@ -34,10 +35,14 @@ import org.kermeta.kpm.internal.InternalKpmManager;
  */
 public class ResourceChangeListener implements IResourceChangeListener, IResourceDeltaVisitor {
 
+	/**		A flag indicating the nature of the change for the project being processed.		*/
+	private int _projectChangeKind;
+	
 	public void resourceChanged(IResourceChangeEvent event) {
 		try {
 			// Visiting the delta.
-			event.getDelta().accept(this);
+			if ( event.getDelta() != null )
+				event.getDelta().accept(this);
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -51,8 +56,9 @@ public class ResourceChangeListener implements IResourceChangeListener, IResourc
 		
 		// Only handling project changes.
 		case IResource.PROJECT :
-			// This can be an heavy process, so we do it into a job.
 			handleProject(delta);
+			IProject project = (IProject) delta.getResource();
+			goOn = project.isOpen();
 			break;
 
 		case IResource.FILE :
@@ -75,6 +81,7 @@ public class ResourceChangeListener implements IResourceChangeListener, IResourc
 	 * @param delta
 	 */
 	private void handleProject(final IResourceDelta delta) {
+		_projectChangeKind = delta.getKind();	
 		WorkspaceJob job = new WorkspaceJob("KPM inspecting changes of " + delta.getResource().getName()) {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
@@ -100,7 +107,8 @@ public class ResourceChangeListener implements IResourceChangeListener, IResourc
 	 * @throws CoreException 
 	 */
 	private void handleFile(final IFile file) throws CoreException {
-		if ( file.getFileExtension().equals("project") ) {
+		// Do not handle the change of the .project file if the project is being removed.
+		if ( file.getFileExtension().equals("project") && _projectChangeKind != IResourceDelta.REMOVED ) {
 			// Do it in a job because it will provoke a change in the workspace.
 			WorkspaceJob job = new WorkspaceJob("Add KPM builder to " + file.getProject().getFullPath().toString()) {
 				@Override
