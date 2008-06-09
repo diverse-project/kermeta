@@ -22,4 +22,4 @@ Bundle-ClassPath: .,
  lib/bluecove.jar,
  lib/icommand.jar,
  lib/RXTXcomm.jar
-Bundle-NativeCode:  lib/librxtxSerial.so ; processor = x86 ; osname = Linux,  lib/librxtxSerial.jnilib ; osname = Mac OS X,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows NT,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 98,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 95,   lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 2000,   lib/rxtxSerial.dll ; processor = x86 ; osname = Windows XP
+Bundle-NativeCode:  lib/libicmdbluez.so ; processor = x86 ; osname = Linux,  lib/librxtxSerial.jnilib ; osname = Mac OS X,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows NT,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 98,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 95,   lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 2000,   lib/rxtxSerial.dll ; processor = x86 ; osname = Windows XP
