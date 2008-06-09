@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.12 2008-06-04 14:00:52 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.13 2008-06-09 14:24:07 ftanguy Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -34,6 +34,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -417,6 +418,34 @@ public class KBasicProcess extends Process {
 			}
 		}
 		
+		// Check if the file to execute is coming from a plugin. If yes get the classpath from the bundle and add it to interpreter classpath.
+		if ( _file.matches("platform:/plugin/.+") ) {
+			String bundleName = _file.replace("platform:/plugin/", "");
+			bundleName = bundleName.replaceFirst("/.+", "");
+			// Plugin Dependencies
+			Object o = Platform.getBundle(bundleName).getHeaders().get("Require-Bundle");
+			if ( o != null ) {
+				String value = (String) o;
+				String[] strings = value.split(",");
+				for ( String s : strings ) {
+					Bundle b = Platform.getBundle(s);
+					if ( b!= null )
+						urlsV.add( b.getEntry("/") );
+				}
+			}
+			// Jar dependencies
+			o = Platform.getBundle(bundleName).getHeaders().get("Bundle-ClassPath");
+			if ( o != null ) {
+				String value = (String) o;
+				String[] strings = value.split(",");
+				for ( String s : strings ) {
+					URL url = Platform.getBundle(bundleName).getEntry(s);
+					if ( url != null )
+						urlsV.add( url );
+				}
+			}
+		}
+			
 		URL[] urls = new URL[urlsV.size()];
 		int i = 0;
 		for (URL url : urlsV) {
@@ -424,17 +453,17 @@ public class KBasicProcess extends Process {
 			i++;
 		}
 		
-		_interpreter.addToClasspath(urls);
+		//_interpreter.addToClasspath(urls);		
 		
 		// URLClassLoader cl = new URLClassLoader(urls,
 		// this.getContextClassLoader());
 		// use this object class loader as parent (instead of the default thread
 		// class loader)
 		// because it also contains the plugin classloader rules
-		//URLClassLoader cl = new URLClassLoader(urls, this.getClass()
-		//		.getClassLoader());
+		URLClassLoader cl = new URLClassLoader(urls, this.getClass()
+				.getClassLoader());
 		
-		//_interpreter.setContextClassLoader(cl);
+		_interpreter.setContextClassLoader(cl);
 		/*
 		 * URL res = cl.findResource("waf/Test.class"); try {
 		 * System.err.println(cl.loadClass("waf.Test")); } catch

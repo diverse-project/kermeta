@@ -7,13 +7,10 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.model.RuntimeProcess;
 import org.kermeta.interpreter.InterpreterPlugin;
 import org.kermeta.interpreter.helper.RunnerHelper;
@@ -21,7 +18,6 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.checker.KermetaUnitChecker;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.loader.LoadingOptions;
-import org.osgi.framework.Bundle;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
@@ -39,8 +35,6 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class Interpreter {
 
-	private String _fileName;
-	
 	/**		The concrete class implementing full functionalities of the interpreter.		*/
 	private AbstractKInterpreter _realInterpreter;
 
@@ -114,7 +108,6 @@ public class Interpreter {
 	 */
 	public Interpreter(IFile file, InterpreterMode mode, Map<String, Object> options) throws NotRegisteredURIException, URIMalformedException {
 		this(mode, options);
-		_fileName = "platform:/resource" + file.getFullPath().toString();
 		calculateKermetaUnit( "platform:/resource" + file.getFullPath().toString() );
 	}
 	
@@ -128,7 +121,6 @@ public class Interpreter {
 	 */
 	public Interpreter(String uri, InterpreterMode mode, Map<String, Object> options) throws NotRegisteredURIException, URIMalformedException {
 		this(mode, options);
-		_fileName = uri;
 		calculateKermetaUnit(uri);
 	}
 	
@@ -267,60 +259,13 @@ public class Interpreter {
 	 * Sets the class loader to load external java classes needed during the execution.
 	 * @param cl
 	 */
-	public void addToClasspath(URL[] classpathEntries) {
-		setDefaultClassLoader();
-		if ( classpathEntries != null ) {
-			URLClassLoader newCL = URLClassLoader.newInstance( classpathEntries, _classLoader);
-			_classLoader = newCL;
-		}
-	}
-	
-	/**
-	 * Set a default class loader for the interpreter. Add a class path entry for the interpreter project.
-	 * If the file to execute is coming from a plugin, add entries coming from its manifest.
-	 */
-	private void setDefaultClassLoader() {
-		ClassLoader cl = _classLoader = Thread.currentThread().getContextClassLoader();
-		List<URL> urls = new ArrayList<URL>();
+	public void setContextClassLoader(ClassLoader cl) {
 		// for development mode
 		URL url = InterpreterPlugin.getDefault().getBundle().getEntry("build/class");
 		if(url ==  null) // for deployed mode
 			url = InterpreterPlugin.getDefault().getBundle().getEntry("/");
-		urls.add(url);
-		
-		// Check if the file to execute is coming from a plugin. If yes get the classpath from the bundle and add it to interpreter classpath.
-		if ( _fileName.matches("platform:/plugin/.+") ) {
-			String bundleName = _fileName.replace("platform:/plugin/", "");
-			bundleName = bundleName.replaceFirst("/.+", "");
-			// Plugin Dependencies
-			Object o = Platform.getBundle(bundleName).getHeaders().get("Require-Bundle");
-			if ( o != null ) {
-				String value = (String) o;
-				String[] strings = value.split(",");
-				for ( String s : strings ) {
-					Bundle b = Platform.getBundle(s);
-					if ( b!= null )
-						urls.add( b.getEntry("/") );
-				}
-			}
-			// Jar dependencies
-			o = Platform.getBundle(bundleName).getHeaders().get("Bundle-ClassPath");
-			if ( o != null ) {
-				String value = (String) o;
-				String[] strings = value.split(",");
-				for ( String s : strings ) {
-					url = Platform.getBundle(bundleName).getEntry(s);
-					if ( url != null )
-						urls.add( url );
-				}
-			}
-		}
-		// Getting an array of URL
-		URL[] urlsArray = new URL[urls.size()];
-		urls.toArray(urlsArray);
-		// Creating a new class loader
-		URLClassLoader newCL = URLClassLoader.newInstance( urlsArray, cl);
-		_classLoader = newCL;		
+		URLClassLoader newCL = URLClassLoader.newInstance( new URL[] {url}, cl);
+		_classLoader = newCL;
 	}
 	
 	private boolean checkValidity() {
@@ -365,8 +310,6 @@ public class Interpreter {
 		_realInterpreter.initialize();
 		if ( _process != null )
 			_realInterpreter.setFakeProcess( _process );
-		if ( _classLoader == null )
-			setDefaultClassLoader();
 	}
 	
 	/**
@@ -381,8 +324,6 @@ public class Interpreter {
 	}
 	
 	public RuntimeObject launch() throws InitializationError {
-		RuntimeObject result = null;
-		InterpreterPlugin.internalLog.debug("Free Memory Available before Interpretation : " + Runtime.getRuntime().freeMemory());
 		try {
 			if ( _kermetaUnit.isErroneous() )
 				throw new InitializationError(_kermetaUnit);			
@@ -393,15 +334,14 @@ public class Interpreter {
 				_realInterpreter.setParameters(_parameters);
 				_realInterpreter.setDefaultPath(_defaultPath);
 				_realInterpreter.setContextClassLoader(_classLoader);
-				result = _realInterpreter.launch();
+				return _realInterpreter.launch();
 			}
 		} catch (KermetaInterpreterError e) {
 			e.printStackTrace( _errorStream);
 		} finally {
 			releaseResources();
 		}
-		InterpreterPlugin.internalLog.debug("Free Memory Available after Interpretation : " + Runtime.getRuntime().freeMemory());
-		return result;
+		return null;
 	}
 	
 	/**
