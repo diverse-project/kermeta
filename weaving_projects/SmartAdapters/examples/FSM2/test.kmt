@@ -1,4 +1,4 @@
-/* $Id: test.kmt,v 1.6 2008-02-20 17:52:12 bmorin Exp $
+/* $Id: test.kmt,v 1.7 2008-06-09 06:45:36 bmorin Exp $
  * Creation date: April 24, 2007
  * License:
  * Copyright:
@@ -13,19 +13,29 @@ package test;
 require kermeta
 require "platform:/resource/SmartAdapters/program/weaving/weaver4FSMs.kmt"
 
-using kermeta::standard
 using weaver
+using kermeta::standard
+
 class FSMTest2
 {
 	operation main() : Void is do 
-		var weaver:Weaver init Weaver.new
+		
 		//Uri complètes ! 
 		var baseModelUri:String init "platform:/resource/SmartAdapters/examples/FSM2/baseFsm.xmi"
-		var adapterUri:String init "platform:/resource/SmartAdapters/examples/FSM2/Adapter.xmi"
+		var adapterUri:String init "platform:/resource/SmartAdapters/examples/FSM2/Adapter3.xmi"
 		var adaptMMUri:String init "platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore"
 		var domainMMUri:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
 		var domainMMPatternUri:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
 		var resultUri:String init "platform:/resource/SmartAdapters/examples/FSM2/result.xmi"
-		weaver.weaving(baseModelUri, adapterUri, adaptMMUri, domainMMUri, domainMMPatternUri, resultUri)
+		
+		var weaver:Weaver init Weaver.new
+		weaver.initWeaver()
+		weaver.loadMetamodel(domainMMUri)
+		weaver.loadMetamodelPattern(domainMMPatternUri)
+		weaver.loadModel(baseModelUri,domainMMUri)
+		weaver.loadAdapter(adapterUri, adaptMMUri)
+		weaver.initDefaultValues()
+		weaver.weaving(domainMMUri, domainMMPatternUri)
+		weaver.saveModel(resultUri,domainMMUri)
 	end
 }

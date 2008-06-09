@@ -14,7 +14,7 @@
 package org;
 require kermeta
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
-require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore"
+require "http://art"
 require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
 
 using kermeta::standard
@@ -69,7 +69,7 @@ package smartadapters
 		class SetruntimeNamedElement inherits setAdaptation
 		{
 			reference NamedElementToSet : pattern::art::NamedElement
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := NamedElementToSet != void
@@ -106,7 +106,7 @@ package smartadapters
 		class UnsetruntimeNamedElement inherits unsetAdaptation
 		{
 			reference NamedElementToUnset : pattern::art::NamedElement
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := NamedElementToUnset != void
@@ -188,7 +188,7 @@ package smartadapters
 			reference refservices : pattern::art::type::Service[0..*]
 			reference reftypes : pattern::art::type::ComponentType[0..*]
 			reference refdataTypes : pattern::art::DataType[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := SystemToSet != void
@@ -240,7 +240,7 @@ package smartadapters
 			reference refservices : pattern::art::type::Service[0..*]
 			reference reftypes : pattern::art::type::ComponentType[0..*]
 			reference refdataTypes : pattern::art::DataType[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := SystemToUnset != void
@@ -290,13 +290,13 @@ package smartadapters
 		{
 			reference ComponentInstanceToSet : pattern::art::instance::ComponentInstance
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::String
+			reference refstate : String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::art::String
-			reference refcontentDesc : pattern::art::String
-			reference refname : pattern::art::String
+			reference refcontrollerDesc : String
+			reference refcontentDesc : String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := ComponentInstanceToSet != void
@@ -350,13 +350,13 @@ package smartadapters
 		{
 			reference ComponentInstanceToUnset : pattern::art::instance::ComponentInstance
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::String
+			reference refstate : String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::art::String
-			reference refcontentDesc : pattern::art::String
-			reference refname : pattern::art::String
+			reference refcontrollerDesc : String
+			reference refcontentDesc : String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := ComponentInstanceToUnset != void
@@ -450,13 +450,13 @@ package smartadapters
 		{
 			reference PrimitiveInstanceToSet : pattern::art::instance::PrimitiveInstance
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::String
+			reference refstate : String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::art::String
-			reference refcontentDesc : pattern::art::String
-			reference refname : pattern::art::String
+			reference refcontrollerDesc : String
+			reference refcontentDesc : String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := PrimitiveInstanceToSet != void
@@ -510,13 +510,13 @@ package smartadapters
 		{
 			reference PrimitiveInstanceToUnset : pattern::art::instance::PrimitiveInstance
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::String
+			reference refstate : String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::art::String
-			reference refcontentDesc : pattern::art::String
-			reference refname : pattern::art::String
+			reference refcontrollerDesc : String
+			reference refcontentDesc : String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := PrimitiveInstanceToUnset != void
@@ -613,13 +613,13 @@ package smartadapters
 			reference refsubComponent : pattern::art::instance::ComponentInstance[0..*]
 			reference refdelegation : pattern::art::instance::DelegationBinding[0..*]
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::String
+			reference refstate : String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::art::String
-			reference refcontentDesc : pattern::art::String
-			reference refname : pattern::art::String
+			reference refcontrollerDesc : String
+			reference refcontentDesc : String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := CompositeInstanceToSet != void
@@ -629,7 +629,7 @@ package smartadapters
 			is do
 				var ad : Adapter init getAdapter
 				var tempCompositeInstance : art::instance::CompositeInstance
-				tempCompositeInstance ?= ad.getRealObject(CompositeInstanceToSet,false)
+				tempCompositeInstance ?= ad.getRealObject(CompositeInstanceToSet, false)
 				
 				ad.setMultipleProperty(tempCompositeInstance.subComponent,refsubComponent)
 				ad.setMultipleProperty(tempCompositeInstance.delegation,refdelegation)
@@ -641,6 +641,17 @@ package smartadapters
 				tempCompositeInstance.controllerDesc ?= ad.setSingleProperty(refcontrollerDesc, tempCompositeInstance.controllerDesc)
 				tempCompositeInstance.contentDesc ?= ad.setSingleProperty(refcontentDesc, tempCompositeInstance.contentDesc)
 				tempCompositeInstance.name ?= ad.setSingleProperty(refname, tempCompositeInstance.name)
+				
+				//Connection with the platform
+				/*if refsubComponent != void then
+					refsubComponent.each{sub |
+						var realSub : art::instance::ComponentInstance
+						realSub ?= ad.getRealObject(sub, false)
+						if realSub != void then
+							extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.addComponent(self, tempCompositeInstance, realSub, realSub.name)
+						end
+					}
+				end*/
 				
 				//Instantiating the reverse adaptation
 				if(reverse) then		
@@ -681,13 +692,13 @@ package smartadapters
 			reference refsubComponent : pattern::art::instance::ComponentInstance[0..*]
 			reference refdelegation : pattern::art::instance::DelegationBinding[0..*]
 			reference reftype : pattern::art::type::ComponentType
-			reference refstate : pattern::art::String
+			reference refstate : String
 			reference refsuperComponent : pattern::art::instance::CompositeInstance
 			reference refattribute : pattern::art::instance::ValuedAttribute[0..*]
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
-			reference refcontrollerDesc : pattern::art::String
-			reference refcontentDesc : pattern::art::String
-			reference refname : pattern::art::String
+			reference refcontrollerDesc : String
+			reference refcontentDesc : String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := CompositeInstanceToUnset != void
@@ -1081,7 +1092,7 @@ package smartadapters
 			reference ComponentTypeToSet : pattern::art::type::ComponentType
 			reference refport : pattern::art::type::Port[0..*]
 			reference refattribute : pattern::art::type::Attribute[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := ComponentTypeToSet != void
@@ -1126,7 +1137,7 @@ package smartadapters
 			reference ComponentTypeToUnset : pattern::art::type::ComponentType
 			reference refport : pattern::art::type::Port[0..*]
 			reference refattribute : pattern::art::type::Attribute[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := ComponentTypeToUnset != void
@@ -1213,7 +1224,7 @@ package smartadapters
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
 			reference refport : pattern::art::type::Port[0..*]
 			reference refattribute : pattern::art::type::Attribute[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := PrimitiveTypeToSet != void
@@ -1262,7 +1273,7 @@ package smartadapters
 			reference refbinding : pattern::art::instance::TransmissionBinding[0..*]
 			reference refport : pattern::art::type::Port[0..*]
 			reference refattribute : pattern::art::type::Attribute[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := PrimitiveTypeToUnset != void
@@ -1353,7 +1364,7 @@ package smartadapters
 			reference refdelegation : pattern::art::instance::DelegationBinding[0..*]
 			reference refport : pattern::art::type::Port[0..*]
 			reference refattribute : pattern::art::type::Attribute[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := CompositeTypeToSet != void
@@ -1406,7 +1417,7 @@ package smartadapters
 			reference refdelegation : pattern::art::instance::DelegationBinding[0..*]
 			reference refport : pattern::art::type::Port[0..*]
 			reference refattribute : pattern::art::type::Attribute[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := CompositeTypeToUnset != void
@@ -1458,7 +1469,7 @@ package smartadapters
 		{
 			reference ServiceToSet : pattern::art::type::Service
 			reference refoperation : pattern::art::type::Operation[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := ServiceToSet != void
@@ -1499,7 +1510,7 @@ package smartadapters
 		{
 			reference ServiceToUnset : pattern::art::type::Service
 			reference refoperation : pattern::art::type::Operation[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := ServiceToUnset != void
@@ -1582,7 +1593,7 @@ package smartadapters
 		{
 			reference FunctionalServiceToSet : pattern::art::type::FunctionalService
 			reference refoperation : pattern::art::type::Operation[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := FunctionalServiceToSet != void
@@ -1623,7 +1634,7 @@ package smartadapters
 		{
 			reference FunctionalServiceToUnset : pattern::art::type::FunctionalService
 			reference refoperation : pattern::art::type::Operation[0..*]
-			reference refname : pattern::art::String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := FunctionalServiceToUnset != void
@@ -1706,8 +1717,8 @@ package smartadapters
 		{
 			reference PortToSet : pattern::art::type::Port
 			reference refsub : pattern::art::type::PrimitivePort[0..*]
-			reference refisOptional : pattern::art::Boolean
-			reference refname : pattern::art::String
+			reference refisOptional : Boolean
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := PortToSet != void
@@ -1750,8 +1761,8 @@ package smartadapters
 		{
 			reference PortToUnset : pattern::art::type::Port
 			reference refsub : pattern::art::type::PrimitivePort[0..*]
-			reference refisOptional : pattern::art::Boolean
-			reference refname : pattern::art::String
+			reference refisOptional : Boolean
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := PortToUnset != void
@@ -1836,8 +1847,8 @@ package smartadapters
 		{
 			reference PrimitivePortToSet : pattern::art::type::PrimitivePort
 			reference refservice : pattern::art::type::Service
-			reference refrole : pattern::art::String
-			reference refname : pattern::art::String
+			reference refrole : String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := PrimitivePortToSet != void
@@ -1879,8 +1890,8 @@ package smartadapters
 		{
 			reference PrimitivePortToUnset : pattern::art::type::PrimitivePort
 			reference refservice : pattern::art::type::Service
-			reference refrole : pattern::art::String
-			reference refname : pattern::art::String
+			reference refrole : String
+			reference refname : String
 			
 			method check(): Boolean is do
 				result := PrimitivePortToUnset != void

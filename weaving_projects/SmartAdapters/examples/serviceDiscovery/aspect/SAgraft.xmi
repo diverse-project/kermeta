@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type" xsi:schemaLocation="http://art/pattern/art ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art http://art/pattern/art/instance ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/instance http://art/pattern/art/type ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Advertiser" type="//@types.0" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Advertiser">
+      <binding client="//@types.0/@port.0/@sub.0"/>
+      <binding client="//@types.0/@port.1/@sub.0"/>
+      <binding client="//@types.0/@port.2/@sub.0"/>
+      <binding/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IAdvertiser"/>
+  <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network.">
+    <port name="policy" isOptional="false">
+      <sub name="policy" role="client"/>
+    </port>
+    <port name="cache" isOptional="false">
+      <sub name="cache" role="client"/>
+    </port>
+    <port name="network" isOptional="false">
+      <sub name="network" role="client"/>
+    </port>
+    <port name="advertiser">
+      <sub name="advertiser" service="//@services.0" role="server"/>
+    </port>
+  </types>
+</art:System>

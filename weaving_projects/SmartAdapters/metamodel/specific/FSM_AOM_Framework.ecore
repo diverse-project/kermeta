@@ -7,9 +7,11 @@
   <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
   <eSubpackages name="smartadapters" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters"
       nsPrefix="smartadapters">
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
     <eSubpackages name="core" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/core"
         nsPrefix="core">
-      <eClassifiers xsi:type="ecore:EClass" name="Adapter" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+      <eClassifiers xsi:type="ecore:EClass" name="Adapter">
         <eOperations name="initConvert">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;stdio.write(&quot;Mapping MM\' to MM...&quot;)&#xA;&#x9;converter := org::smartadapters::utils::Converter.new&#xA;&#x9;convert := kermeta::utils::Hashtable&lt;kermeta::reflection::Class, kermeta::reflection::Class>.new&#xA;&#x9;convert.put(pattern::FSM::State, FSM::State)&#xA;&#x9;convert.put(pattern::FSM::Transition, FSM::Transition)&#xA;&#x9;convert.put(pattern::FSM::Fsm, FSM::Fsm)&#xA;&#x9;converter.initConverter(convert)&#xA;&#x9;stdio.writeln(&quot;OK!&quot;)&#xA;end"/>
@@ -19,13 +21,13 @@
             eType="#//smartadapters/core/Aspect" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="adapt" upperBound="-1"
             eType="#//smartadapters/core/Adaptation" containment="true" eOpposite="#//smartadapters/core/Adaptation/adapter"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//smartadapters/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Aspect" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+      <eClassifiers xsi:type="ecore:EClass" name="Aspect">
         <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//ModelPattern"
             containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="structure" lowerBound="1"
@@ -39,7 +41,7 @@
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Adaptation" abstract="true" eSuperTypes="#//smartadapters/extension/AdapterElement">
-        <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+        <eOperations name="check" eType="#//smartadapters/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
           </eAnnotations>
@@ -76,7 +78,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="unsetAdaptation" abstract="true"
           eSuperTypes="#//smartadapters/core/Adaptation"/>
       <eClassifiers xsi:type="ecore:EClass" name="makeUnique" eSuperTypes="#//smartadapters/core/Adaptation">
-        <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+        <eOperations name="check" eType="#//smartadapters/Boolean">
           <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
             <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Boolean init false&#xA;&#x9;if adapter.aspect.structure.isNotEqual(void) then&#xA;&#x9;&#x9;if adapter.aspect.structure.content.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;res := (element.isNotEqual(void)) and (adapter.aspect.structure.content.contains(element))&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
             <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -99,7 +101,7 @@
       <eSubpackages name="adaptations" nsURI="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore#/org/smartadapters/core/adaptations"
           nsPrefix="adaptations">
         <eClassifiers xsi:type="ecore:EClass" name="CreateState" eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := newState.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -115,7 +117,7 @@
               containment="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="CloneState" eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := StateToClone.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -132,7 +134,7 @@
               containment="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="SetState" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := StateToSet.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -145,14 +147,14 @@
             </eAnnotations>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="StateToSet" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/State"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="UnsetState" eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := StateToUnset.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -165,14 +167,14 @@
             </eAnnotations>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="StateToUnset" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/State"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="CreateTransition" eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := newTransition.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -188,7 +190,7 @@
               containment="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="CloneTransition" eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := TransitionToClone.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -210,7 +212,7 @@
               containment="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="SetTransition" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := TransitionToSet.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -231,7 +233,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="reftarget" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/State"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="UnsetTransition" eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := TransitionToUnset.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -249,7 +251,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="reftarget" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/State"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="CreateFsm" eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := newFsm.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -265,7 +267,7 @@
               containment="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="CloneFsm" eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := FsmToClone.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -282,7 +284,7 @@
               containment="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="SetFsm" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := FsmToSet.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -301,7 +303,7 @@
               eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/Transition"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="UnsetFsm" eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eOperations name="check" eType="#//smartadapters/Boolean">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;result := FsmToUnset.isNotEqual(void)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
@@ -323,13 +325,13 @@
     </eSubpackages>
     <eSubpackages name="extension" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/extension"
         nsPrefix="extension">
-      <eClassifiers xsi:type="ecore:EClass" name="AdapterElement" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eClassifiers xsi:type="ecore:EClass" name="AdapterElement">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//smartadapters/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//smartadapters/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
           </eAnnotations>
@@ -349,8 +351,8 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="and" upperBound="-1"
             eType="#//smartadapters/extension/AdapterElement" containment="true"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
-        <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+      <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true">
+        <eOperations name="check" eType="#//smartadapters/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
           </eAnnotations>
@@ -360,7 +362,7 @@
             eType="#//smartadapters/extension/DerivableAdapter" eOpposite="#//smartadapters/extension/DerivableAdapter/constraints"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="MutualExclusion" eSuperTypes="#//smartadapters/extension/Constraint">
-        <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+        <eOperations name="check" eType="#//smartadapters/Boolean">
           <eAnnotations source="kermeta" references="#//smartadapters/extension/Constraint/check">
             <details key="body" value="do&#xA;&#x9;var c : kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement> init kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement>.new&#xA;&#x9;c.addAll(d.selectedOptions)&#xA;&#x9;d.elements.each{e | c.add(e.selectedVariant)}&#xA;&#x9;result := (c.intersection(entities).size) &lt;= (1)&#xA;end"/>
             <details key="superOperation" value="org::smartadapters::extension::Constraint"/>
@@ -371,7 +373,7 @@
             upperBound="-1" eType="#//smartadapters/extension/AdapterElement"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="#//smartadapters/extension/Constraint">
-        <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+        <eOperations name="check" eType="#//smartadapters/Boolean">
           <eAnnotations source="kermeta" references="#//smartadapters/extension/Constraint/check">
             <details key="body" value="do&#xA;&#x9;var c : kermeta::standard::Collection&lt;org::smartadapters::extension::AdapterElement> init kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement>.new&#xA;&#x9;c.addAll(d.selectedOptions)&#xA;&#x9;d.elements.each{e | c.add(e.selectedVariant)}&#xA;&#x9;result := (not (c.contains(source))) or (c.containsAll(self.dependencies))&#xA;end"/>
             <details key="superOperation" value="org::smartadapters::extension::Constraint"/>
@@ -383,13 +385,13 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" lowerBound="1"
             upperBound="-1" eType="#//smartadapters/extension/AdapterElement"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Derivation" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+      <eClassifiers xsi:type="ecore:EClass" name="Derivation">
         <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
             eType="#//smartadapters/extension/DerivationElement" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="selectedOptions" upperBound="-1"
             eType="#//smartadapters/extension/AdapterElement"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="DerivationElement" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+      <eClassifiers xsi:type="ecore:EClass" name="DerivationElement">
         <eStructuralFeatures xsi:type="ecore:EReference" name="alternative" lowerBound="1"
             eType="#//smartadapters/extension/EntityAlternative"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="selectedVariant" lowerBound="1"
