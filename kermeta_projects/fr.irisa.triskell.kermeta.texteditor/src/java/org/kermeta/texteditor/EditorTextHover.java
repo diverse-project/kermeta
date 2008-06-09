@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.5 2008-06-05 14:21:09 ftanguy Exp $
+/* $Id: EditorTextHover.java,v 1.6 2008-06-09 10:02:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -10,13 +10,9 @@
 
 package org.kermeta.texteditor;
 
-import java.util.Hashtable;
-import java.util.Iterator;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
@@ -30,23 +26,10 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
-import org.kermeta.model.KermetaModelHelper;
-import org.kermeta.texteditor.KermetaTextEditor;
 
-import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
-import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.Object;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.typechecker.SimpleType;
-import fr.irisa.triskell.kermeta.typechecker.Type;
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
@@ -56,7 +39,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
 /**
  * @author Franck Fleurey
  */
-public class EditorTextHover implements ITextHover, ITextHoverExtension, IInformationControlCreator {
+public class EditorTextHover implements ITextHover {//, ITextHoverExtension, IInformationControlCreator {
 
 	private KermetaTextEditor textEditor;
 	
@@ -83,14 +66,14 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		return ((IFileEditorInput) textEditor.getEditorInput()).getFile();
 	}
 	
-    public IInformationControlCreator getHoverControlCreator() {
+   /* public IInformationControlCreator getHoverControlCreator() {
         return this;
     }
     
     public IInformationControl createInformationControl(Shell parent) {
         KermetaInformationControl result = new KermetaInformationControl(parent);
         return result; 
-    }
+    }*/
     
     KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
     
@@ -124,14 +107,11 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		ModelReference modelRef =ModelReferenceHelper.getOneNextReference(textRef);
 		
 		// Notify other plugin of this event
-        
-		for(KermetaEditorEventListener listener :TexteditorPlugin.getDefault().kermetaEditorEventListeners)
-		{
-			try{
-			if(modelRef.getRefObject() instanceof Object)
-				listener.textHoverCalled((Object) modelRef.getRefObject());
-			}
-			catch(Exception e){
+		for ( KermetaEditorEventListener listener :TexteditorPlugin.getDefault().kermetaEditorEventListeners ) {
+			try {
+				if(modelRef.getRefObject() instanceof Object)
+					listener.textHoverCalled((Object) modelRef.getRefObject());
+			} catch ( Exception e ) {
 				TexteditorPlugin.pluginLog.error("Not able to notify one of the kermetaEditorEventListeners", e);
 			}
 		}
@@ -140,148 +120,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		
 		TextHoverLabelProvider provider = new TextHoverLabelProvider();
 		return (String) provider.accept(o);
-		
-		/*
-		
-        if (o instanceof Expression)
-        {
-            Expression fexp = (Expression)o;
-            // Find the tag of the CallFeature definition!
-            if (fexp instanceof CallFeature)
-            {
-
-                return ppDefinitionForCallFeature((CallFeature)fexp);
-            }
-            else if (fexp.getStaticType() != null) {
-                Type t = new SimpleType(fexp.getStaticType());
-                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
-                // return the source code representation or the signature
-                // of the element pointed by the cursor
-                return pp.accept(o) + " : " + t + "\n";
-            }
-        }
-        else if(o instanceof fr.irisa.triskell.kermeta.language.structure.Class){
-        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)o;
-			String ftags = kdocPrettyPrint(aClass.getTypeDefinition().getTag());
-			return NamedElementHelper.getMangledQualifiedName(aClass.getTypeDefinition())+ "\n" + ftags;
-        } else if ( o instanceof Property ) {
-        	Property p = (Property) o;
-			String ftags = kdocPrettyPrint( p.getTag() );
-			return NamedElementHelper.getMangledQualifiedName( p )+ "\n" + ftags;
-        } else if ( o instanceof Operation ) {
-        	Operation p = (Operation) o;
-			String ftags = kdocPrettyPrint( p.getTag() );
-			return NamedElementHelper.getMangledQualifiedName( p )+ "\n" + ftags;	        	
-        } else if ( o instanceof TypeReference ) {
-        	TypeReference tr = (TypeReference) o;
-        	TypeDefinition td = null;
-        	if ( tr.getType() instanceof TypeDefinition )
-        		td = (TypeDefinition) tr.getType();
-        	else if ( tr.getType() instanceof Class )
-        		td = ((Class) tr.getType()).getTypeDefinition();
-        	if ( td != null ) {
-        		String tags = kdocPrettyPrint( td.getOwnedTags() );
-        		return KermetaModelHelper.NamedElement.qualifiedName(td) + "\n" + tags;
-        	}
-        } else
-    		TexteditorPlugin.internalLog.debug("no recognized object : hover will ignore it");
-		*/
-		
-		
-		/*if (editor.mcunit != null && ((KMTUnit)editor.mcunit).getMctAST() != null) {
-		    CompUnit unit = ((KMTUnit)editor.mcunit).getMctAST();
-		    KermetaASTNode astnode = (KermetaASTNode)unit.getNodeAt(, hoverRegion.getLength());
-		    // TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
-		    if (astnode != null) {
-		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
-		        fr.irisa.triskell.kermeta.language.structure.Object fobj = editor.getFObjectForNode(astnode);
-		        String ftags = "";
-
-		        // Notify other plugin of this event
-		        Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
-				while(it.hasNext())
-				{
-					KermetaEditorEventListener listener = (KermetaEditorEventListener)it.next();
-					listener.textHoverCalled(fobj);
-				}
-				
-		        //TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
-		        if (fobj instanceof Expression)
-		        {
-		            Expression fexp = (Expression)fobj;
-		            // Find the tag of the CallFeature definition!
-		            if (fexp instanceof CallFeature)
-		            {
-
-		                return ppDefinitionForCallFeature((CallFeature)fexp);
-		            }
-		            else if (fexp.getStaticType() != null) {
-		                Type t = new SimpleType(fexp.getStaticType());
-		                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
-		                // return the source code representation or the signature
-		                // of the element pointed by the cursor
-		                return pp.accept(fobj) + " : " + t + "\n" + ftags;
-		            }
-		        }
-		        else if(fobj instanceof fr.irisa.triskell.kermeta.language.structure.Class){
-		        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)fobj;
-					ftags = kdocPrettyPrint(aClass.getTypeDefinition().getTag());
-					return NamedElementHelper.getMangledQualifiedName(aClass.getTypeDefinition())+ "\n" + ftags;
-		        }
-		        
-		    }
-		}*/
-		
-		//return null;
 	}
-	
-	/**
-	 * Return a prettyprint of the given ftags.
-	 * @param ftags
-	 * @return
-	 */
-	private String kdocPrettyPrint(EList<Tag> taglist)
-	{
-	    // FIXME : totally ugly patch, until duplicate tags are removed from the 
-	    // KM model itself..(bad "inheritance" handling of tags?)
-	    Iterator<Tag> it = taglist.iterator();
-	    Hashtable<String, String> tagdict = new Hashtable<String, String>();
-	    String pptags = "";
-	    while (it.hasNext())
-	    {	Tag tag = it.next();
-	    	pptags += tagdict.containsKey(tag.getValue())?"":pp.accept(tag);
-	        tagdict.put(tag.getValue(), "");
-	    }
-	    if (pptags.startsWith("/**"))
-	        pptags = pptags.substring(3, pptags.length()-2);
-	    pptags = pptags.replaceAll("(\n)?[ \\t\\x0B\\f\\r]*\\*","$1");
-	    return pptags;
-	}
-
-	public String ppDefinitionForCallFeature(CallFeature feature)
-	{
-	    if (feature.getStaticOperation() != null)
-	    {
-	        //return feature.getFStaticOperation();
-	        return pp.ppSimplifiedFOperationInContext(feature.getStaticOperation()) + 
-        	"\n" +
-        	kdocPrettyPrint(feature.getStaticOperation().getTag());
-	    }
-	    if (feature.getStaticProperty() != null)
-	    {
-	        return pp.ppSimplifiedPropertyInContext(feature.getStaticProperty()) + 
-	        	"\n" +
-	        	kdocPrettyPrint(feature.getStaticProperty().getTag());
-	    }
-	    else // return the CallFeature itself
-	    {
-			TexteditorPlugin.internalLog.debug("the definition : " + feature.getName() + feature);
-	        return pp.accept(feature).toString();
-	    }
-	} 
-	
-
-	
 
 	/**
 	 * @see org.eclipse.jface.text.ITextHover#getHoverRegion(org.eclipse.jface.text.ITextViewer, int)

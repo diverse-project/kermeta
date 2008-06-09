@@ -1,6 +1,6 @@
 
 
-/*$Id: TextHoverLabelProvider.java,v 1.1 2008-06-05 14:21:09 ftanguy Exp $
+/*$Id: TextHoverLabelProvider.java,v 1.2 2008-06-09 10:02:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TextHoverLabelProvider.java
 * License : EPL
@@ -11,8 +11,6 @@
 */
 
 package org.kermeta.texteditor;
-
-import java.util.Hashtable;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -34,18 +32,19 @@ public class TextHoverLabelProvider extends KermetaOptimizedVisitor {
     private KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 	
 	private String prettyprintTags(EList<Tag> tags) {
-	    // FIXME : totally ugly patch, until duplicate tags are removed from the 
-	    // KM model itself..(bad "inheritance" handling of tags?)
-		Hashtable<String, String> tagdict = new Hashtable<String, String>();
-	    String pptags = "";
-	    for ( Tag t : tags ) {
-	    	pptags += tagdict.containsKey( t.getValue()) ? "" : pp.accept(t);
-	        tagdict.put(t.getValue(), "");
-	    }
-	    if (pptags.startsWith("/**"))
-	        pptags = pptags.substring(3, pptags.length()-2);
-	    pptags = pptags.replaceAll("(\n)?[ \\t\\x0B\\f\\r]*\\*","$1");
-	    return pptags;
+		String temp = "";
+		for ( Tag t : tags )
+			temp += t.getValue();
+		temp = temp.replace("/**", "");
+		temp = temp.replace("*/", "");
+		temp = temp.replace("*", "");
+		
+		String result = "";
+		String[] strings = temp.split("\n");
+		for ( String s : strings )
+			result += s.trim() + "\n";
+		
+		return result;		
 	}
 	
 	@Override
