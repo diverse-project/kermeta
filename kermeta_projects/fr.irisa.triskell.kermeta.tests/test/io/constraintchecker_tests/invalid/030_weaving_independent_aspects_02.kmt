@@ -1,0 +1,37 @@
+/* $Id: 030_weaving_independent_aspects_02.kmt,v 1.1 2008-06-10 15:16:24 dvojtise Exp $
+ * Creation date: May 30, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ *		Didier Vojtisek
+ * description: 
+ * this test is similar to 025_weaving_in_kermeta_aspect2.kmt
+ * but instead of generating the conflict in the current file, 
+ * the conflict comes from the fact that resulting merge has a conflict
+ * (aspect files are correct by themselves.)
+ */
+@mainClass "merged::Merge"
+@mainOperation "merge"
+
+package merged;
+
+require kermeta
+
+// these require should fail because aspect_file_1 and aspect file 2
+// define the same attribute b but with different type
+require "030_weaving_independent_aspects_02/aspect_file_1.kmt"
+require "030_weaving_independent_aspects_02/aspect_file_2.kmt"
+
+using root_package
+
+class Merge {
+	operation merge() : Void is do 
+		var aMain : Main init Main.new
+		
+		aMain.a := "Hello World: a"
+		stdio.writeln(aMain.a)
+		
+		aMain.b := "Hello World: b"
+		stdio.writeln(aMain.b)
+	end
+}
