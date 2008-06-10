@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.23 2008-06-10 11:41:25 ftanguy Exp $
+/* $Id: KermetaOutline.java,v 1.24 2008-06-10 12:11:25 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 import org.eclipse.jface.preference.BooleanPropertyAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
@@ -40,6 +41,7 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.kermeta.interest.InterestedObject;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.Message;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.kpm.KermetaUnitHost;
 import org.kermeta.model.KermetaModelHelper;
@@ -48,6 +50,9 @@ import org.kermeta.texteditor.KermetaTextEditor;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
@@ -55,6 +60,7 @@ import fr.irisa.triskell.kermeta.texteditor.icons.ButtonIcons;
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
  * @author Franck Fleurey
@@ -358,24 +364,37 @@ public class KermetaOutline extends ContentOutlinePage implements InterestedObje
 			_warnedElements.clear();
 			// Recalculate the list of problematic objects.
 			List<ErrorMessage> errors = KermetaUnitHelper.getAllErrors(kermetaUnit);
-			for ( ErrorMessage e : errors ) {
-				if ( e.getTarget() instanceof EObject )
-					addErroneousObject( (EObject) e.getTarget() );
-			}	
+			process(errors, _erroneousElements, kermetaUnit);
 			List<WarningMessage> warnings = KermetaUnitHelper.getAllWarnings(kermetaUnit);
-			for ( WarningMessage w : warnings ) {
-				if ( w.getTarget() instanceof EObject )
-					addWarnedObject( (EObject) w.getTarget() );
-			}
+			process(warnings, _warnedElements, kermetaUnit);
 		}
 	}
-	
-	private void addErroneousObject(EObject o) {
-		addObjectToContainer(o, _erroneousElements);
-	}
-	
-	private void addWarnedObject(EObject o) {
-		addObjectToContainer(o, _warnedElements);
+		
+	private void process(List source, Set<Object> container, KermetaUnit kermetaUnit) {
+		for ( Message m : (List<Message>) source ) {
+			if ( m.getTarget() instanceof EObject )
+				addObjectToContainer((EObject) m.getTarget(), container);
+			else if ( m.getTarget() instanceof ASTNode ) {
+				// If this is an AST node, we need to search the model element from the textual traces.
+				ASTNode node = (ASTNode) m.getTarget();
+				Tracer trace = kermetaUnit.getTracer();
+				List<ModelReference> references = trace.getModelReferences( node.getRangeStart(), node.getRangeLength(), kermetaUnit.getUri() );
+				if ( ! references.isEmpty() ) {
+					ModelReference reference = references.get(0);
+					EObject o = reference.getRefObject();
+					boolean ok = true;
+					while ( ok ) {
+						if ( o instanceof Operation )
+							ok = false;
+						else if ( o instanceof Property )
+							ok = false;
+						else
+							o = o.eContainer();
+					}
+					addObjectToContainer(o, container);
+				}
+			}
+		}
 	}
 	
 	private void addObjectToContainer(EObject o, Set<Object> container) {
@@ -392,7 +411,11 @@ public class KermetaOutline extends ContentOutlinePage implements InterestedObje
 				}
 			} else
 				container.add(o);
-			o = o.eContainer();
+			// Stopping the recursion if this is a package. A package item is a first level object in the tree, no need to mark the parent packages.
+			if ( o instanceof Package )
+				o = null;
+			else
+				o = o.eContainer();
 		}
 	}
 	
