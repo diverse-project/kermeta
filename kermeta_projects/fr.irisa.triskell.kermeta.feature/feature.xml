@@ -176,13 +176,6 @@ GPL license.
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.emf.ecoretools.registration"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.gymnast.runtime.core"
          download-size="0"
          install-size="0"
@@ -226,6 +219,27 @@ GPL license.
 
    <plugin
          id="org.kermeta.runner.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.log4j.util"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.ecoretools.registration"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.ecoretools.registration.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
