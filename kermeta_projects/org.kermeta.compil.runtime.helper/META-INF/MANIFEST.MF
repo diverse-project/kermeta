@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kermeta Runtime Helper Plugin
+Bundle-SymbolicName: org.kermeta.compil.runtime.helper
+Bundle-Version: 1.1.99.qualifier
+Bundle-ClassPath: .
+Bundle-Localization: plugin
+Bundle-Vendor: IRISA/INRIA
+Eclipse-LazyStart: true
