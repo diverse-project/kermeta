@@ -1,0 +1,42 @@
+HowTo get Bluetooth export working on Linux ?
+---------------------------------------------------------------
+
+Tested on Fedora Core 
+
+0 - Parametrize the bluetooth demon
+	add the next line in the "options" of the /etc/bluetooth/hci.conf file:
+		pin_helper /etc/bluetooth/pin;
+	
+	add a file named /etc/bluetooth/pin with the 2 next lines:
+		#!/bin/sh
+		echo "PIN:1234"
+		
+1 - launch Bluetooth software:
+	in a console, activate the demon:
+		sudo /etc/init.d/bluetooth start
+		
+2 - Activate Bluetooth on the NXT brick
+	in Bluetooth menu, select On/Off submenu
+	Select "On" and validate
+	in Bluetooth menu, select Visible submenu
+	Select the opened eye and validate
+	
+3 - Search for the Lego brick bluetooth receiver
+	in a console, execute the HCI tool:
+		hcitool scan
+		
+	You must see NXT in the list.
+	Take note of the network address of the NXT 
+	
+4 -  Launch the upload for the first time
+	Open Eclipse
+		 launch the logo projects in Workbench
+	on any *.rxe file, right-click and select "Upload file to the NXT brick"
+	
+	Close all Eclipses (because the link will stay in use next time and make it fail)
+	
+	You should get a "icommand.properties" file in your home directory
+	Verify the address auto-detected is the correct one.
+	
+	A PIN code appears on the NXT: accept it
+		then Linux asks for a password: give it the PIN code you accepted
