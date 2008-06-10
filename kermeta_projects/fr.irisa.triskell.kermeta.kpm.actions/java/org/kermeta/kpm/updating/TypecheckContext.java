@@ -1,6 +1,6 @@
 
 
-/*$Id: TypecheckContext.java,v 1.5 2008-05-28 09:25:09 ftanguy Exp $
+/*$Id: TypecheckContext.java,v 1.6 2008-06-10 11:41:03 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	TypecheckContext.java
 * License : EPL
@@ -16,13 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kpm.IAction;
 import org.kermeta.kpm.KPMPlugin;
+import org.kermeta.kpm.KermetaUnitHost;
 import org.kermeta.kpm.KpmManager;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
@@ -93,7 +97,10 @@ public class TypecheckContext implements IAction {
 								KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(kunit);
 								constraintchecker.checkUnit();
 							}
+							IFile file = ResourceHelper.getIFile( kunit.getUri() );
+							KermetaUnitHost.getInstance().updateValue(file, kunit);			
 						}
+					} catch (IdNotFoundException e) {
 					} catch(Exception e){
 						if(l == null)
 							KPMPlugin.logErrorMessage("Error getting 'context' in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);
