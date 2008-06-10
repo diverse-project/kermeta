@@ -1,4 +1,4 @@
-/* $Id: FractalAdapter.kmt,v 1.4 2008-06-09 07:03:54 bmorin Exp $
+/* $Id: FractalAdapter.kmt,v 1.5 2008-06-10 15:09:42 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -39,12 +39,6 @@ aspect class PlatformAdapter
 	
 	operation loadUpdateModel(modelUri : String) : Void is 
 	do
-		var repository : EMFRepository init EMFRepository.new
-		var resource : Resource init repository.createResource(modelUri, "platform:/plugin/org.kermeta.art.model/model/metamodel@runtime.ecore")
-		resource.load()
-				
-		//repository.createResource(baseModelUri, domainMMUri)
-		//extern org::kermeta::smartadapters::runtime::fractal::SmartAdaptersToFractal.loadUpdateModel(self, modelUri)
-		extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.loadUpdateModel(self, resource.instances.one)
+		extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.loadUpdateModel(self, modelUri)
 	end
 }		

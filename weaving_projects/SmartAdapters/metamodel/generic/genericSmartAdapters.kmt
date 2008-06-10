@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.23 2008-05-30 08:19:17 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.24 2008-06-10 15:09:09 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -9,7 +9,7 @@ package org;
 
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"
 require "platform:/resource/SmartAdapters/program/weaving/converter.kmt"
- 
+
 require "platform:/resource/SmartAdapters/program/weaving/print.kmt"//to be removed
 
 using kermeta::standard
@@ -21,7 +21,6 @@ using org::smartadapters::core
 using org::smartadapters::extension
 using ecore
 using org::smartadapters::utils
-
 
 package smartadapters
 {

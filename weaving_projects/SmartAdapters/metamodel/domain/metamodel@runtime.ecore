@@ -23,9 +23,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AddElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RemoveElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdateElement"/>
   <eSubpackages name="instance" nsURI="http://art/instance" nsPrefix="instance">
     <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" abstract="true"
-        eSuperTypes="#//ModelElement">
+        eSuperTypes="#//ModelElement #//AddElement #//RemoveElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//type/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" lowerBound="1"
@@ -46,12 +49,16 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" upperBound="-1"
           eType="#//instance/DelegationBinding" containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="InstanceState">
+      <eLiterals name="OFF"/>
+      <eLiterals name="ON" value="1"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute">
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
           eType="#//type/Attribute"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true">
+    <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true" eSuperTypes="#//AddElement #//RemoveElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="serverInstance" lowerBound="1"
           eType="#//instance/ComponentInstance"/>
     </eClassifiers>
@@ -67,7 +74,7 @@
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="type" nsURI="http://art/type" nsPrefix="type">
-    <eClassifiers xsi:type="ecore:EClass" name="ComponentType" abstract="true" eSuperTypes="#//ModelElement">
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentType" abstract="true" eSuperTypes="#//ModelElement #//AddElement #//RemoveElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="port" upperBound="-1"
           eType="#//type/Port" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
@@ -83,7 +90,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" upperBound="-1"
           eType="#//instance/DelegationBinding" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true" eSuperTypes="#//ModelElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true" eSuperTypes="#//ModelElement #//AddElement #//RemoveElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="operation" upperBound="-1"
           eType="#//type/Operation" containment="true"/>
     </eClassifiers>
@@ -108,6 +115,10 @@
           eType="#//type/Service"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" lowerBound="1"
           eType="#//String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="PortRole">
+      <eLiterals name="client"/>
+      <eLiterals name="server" value="1"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

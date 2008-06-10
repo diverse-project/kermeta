@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.14 2008-05-30 08:18:01 bmorin Exp $
+/* $Id: converter.kmt,v 1.15 2008-06-10 15:10:34 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -8,9 +8,11 @@
 package org::smartadapters::utils;
 
 require kermeta
+
 using kermeta::language::structure
 using kermeta::standard 
 using kermeta::utils
+
 
 /**
 Converts a model that conforms to MM' into a model that conforms to MM
@@ -26,7 +28,7 @@ class Converter
 	initializes the converter (~constructor)
 	must be called before any other operation
 	*/
-	operation initConverter(convert:Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>) is do	
+	operation initConverter(convert:Hashtable<kermeta::language::structure::Class, kermeta::language::structure::Class>) is do	
 		convertTable := convert
 		converted := Hashtable<kermeta::language::structure::Object,kermeta::language::structure::Object>.new
 	end

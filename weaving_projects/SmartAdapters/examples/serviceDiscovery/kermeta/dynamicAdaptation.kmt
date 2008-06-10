@@ -1,0 +1,55 @@
+/* $Id: dynamicAdaptation.kmt,v 1.1 2008-06-10 15:08:11 bmorin Exp $
+ * Creation date: March 19, 2008
+ * License:
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
+ */
+@mainClass "test::ServiceDiscoveryMain"
+@mainOperation "main"
+
+
+package test;
+require kermeta
+
+//Loading the platform adapter (here, the service discovery example for the Fractal platform)
+//just change this require to adapt another platform and/or another application
+require "platform:/resource/SmartAdapters/program/adapter/ServiceDiscovery.kmt"
+
+using kermeta::standard 
+using org::kermeta::runtime::adapter
+
+class ServiceDiscoveryMain
+{
+	operation main() : Void is do 
+		var model : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/referenceModel_base.art"
+		var SAmodel: String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/SAModel.art"
+		var afterSA : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/referenceModel_SA.art"
+		var DAmodel : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/DAModel.art"
+		var afterDA : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/referenceModel_DA.art"
+		
+		stdio.writeln("K> Running the service discovery application (SA configuration)")
+		var platformAdapter : PlatformAdapter init PlatformAdapter.new 
+		platformAdapter.~init
+		platformAdapter.run
+		
+		stdio.writeln("K> Saving the model corresponding to the current state of the running system (SA)")
+		platformAdapter.saveModel(model)
+		stdio.writeln("")
+		
+		stdio.writeln("K> Submit a new configuration: SA")
+		stdio.writeln("     -Model comparison")
+		stdio.writeln("     -Analyze diff / match")
+		stdio.writeln("     -Instanciate and order atomic reconfiguration commands")
+		stdio.writeln("     -Execute the ordered set of commands")
+		stdio.writeln("")
+		platformAdapter.loadUpdateModel(SAmodel)
+		
+		stdio.writeln("K> Saving the model corresponding to the current state of the running system (SA)")
+		platformAdapter.saveModel(afterSA)
+		
+		stdio.writeln("K> Submit a new configuration: DA")
+		platformAdapter.loadUpdateModel(DAmodel)
+		stdio.writeln("K> Saving the model corresponding to the current state of the running system (DA)")
+		platformAdapter.saveModel(afterDA)
+	end
+}

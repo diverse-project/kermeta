@@ -5,10 +5,8 @@
       <binding client="//@types.0/@port.0/@sub.0"/>
       <binding client="//@types.0/@port.1/@sub.0"/>
       <binding client="//@types.0/@port.2/@sub.0"/>
-      <binding/>
     </subComponent>
   </root>
-  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IAdvertiser"/>
   <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network.">
     <port name="policy" isOptional="false">
       <sub name="policy" role="client"/>
@@ -20,7 +18,7 @@
       <sub name="network" role="client"/>
     </port>
     <port name="advertiser">
-      <sub name="advertiser" service="//@services.0" role="server"/>
+      <sub name="advertiser" role="server"/>
     </port>
   </types>
 </art:System>

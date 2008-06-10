@@ -8,23 +8,28 @@
         <content href="SAinterface.xmi#//@services.0"/>
         <content href="SAinterface.xmi#//@services.1"/>
         <content href="SAinterface.xmi#//@services.2"/>
+        <content href="SAinterface.xmi#//@services.3"/>
+        <content href="SAinterface.xmi#//@services.4"/>
         <content href="SAinterface.xmi#//@types.0"/>
         <content href="SAinterface.xmi#//@types.1"/>
         <content href="SAinterface.xmi#//@types.2"/>
+        <content href="SAinterface.xmi#//@types.3"/>
         <content href="SAinterface.xmi#//@root/@subComponent.0"/>
         <content href="SAinterface.xmi#//@root/@subComponent.1"/>
         <content href="SAinterface.xmi#//@root/@subComponent.2"/>
         <content href="SAinterface.xmi#//@types.0/@port.0"/>
-        <content href="SAinterface.xmi#//@types.0/@port.1"/>
         <content href="SAinterface.xmi#//@types.1/@port.0"/>
         <content href="SAinterface.xmi#//@types.1/@port.1"/>
         <content href="SAinterface.xmi#//@types.2/@port.0"/>
+        <content href="SAinterface.xmi#//@types.3/@port.0"/>
+        <content href="SAinterface.xmi#//@types.3/@port.1"/>
         <content href="SAinterface.xmi#//@root/@subComponent.1/@binding.0"/>
         <content href="SAinterface.xmi#//@types.0/@port.0/@sub.0"/>
-        <content href="SAinterface.xmi#//@types.0/@port.1/@sub.0"/>
         <content href="SAinterface.xmi#//@types.1/@port.0/@sub.0"/>
         <content href="SAinterface.xmi#//@types.1/@port.1/@sub.0"/>
         <content href="SAinterface.xmi#//@types.2/@port.0/@sub.0"/>
+        <content href="SAinterface.xmi#//@types.3/@port.1/@sub.0"/>
+        <content href="SAinterface.xmi#//@types.3/@port.0/@sub.0"/>
         <roles name="systemRole">
           <player href="SAinterface.xmi#/"/>
         </roles>
@@ -39,6 +44,9 @@
         </roles>
         <roles name="cachePortRole">
           <player href="SAinterface.xmi#//@types.1/@port.1/@sub.0"/>
+        </roles>
+        <roles name="advertiserPortRole">
+          <player href="SAinterface.xmi#//@types.3/@port.0/@sub.0"/>
         </roles>
         <roles name="policyComponentRole">
           <player href="SAinterface.xmi#//@root/@subComponent.0"/>
@@ -58,12 +66,14 @@
         <roles name="INetworkRole">
           <player href="SAinterface.xmi#//@services.2"/>
         </roles>
+        <roles name="IAdvertiserRole">
+          <player href="SAinterface.xmi#//@services.3"/>
+        </roles>
       </pattern>
     </template>
     <structure>
       <content href="SAgraft.xmi#/"/>
       <content href="SAgraft.xmi#//@root"/>
-      <content href="SAgraft.xmi#//@services.0"/>
       <content href="SAgraft.xmi#//@types.0"/>
       <content href="SAgraft.xmi#//@root/@subComponent.0"/>
       <content href="SAgraft.xmi#//@types.0/@port.0"/>
@@ -79,12 +89,20 @@
       <content href="SAgraft.xmi#//@types.0/@port.3/@sub.0"/>
     </structure>
   </aspect>
+  <adapt xsi:type="adaptations:CreateruntimeinstanceDelegationBinding">
+    <newDelegationBinding>
+      <serverInstance href="SAgraft.xmi#//@root/@subComponent.0"/>
+      <source href="SAgraft.xmi#//@types.0/@port.3/@sub.0"/>
+    </newDelegationBinding>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceDelegationBinding" DelegationBindingToSet="//@adapt.0/@newDelegationBinding">
+    <refexported href="SAinterface.xmi#//@types.3/@port.0/@sub.0"/>
+  </adapt>
   <adapt xsi:type="adaptations:SetruntimeSystem">
     <SystemToSet href="SAinterface.xmi#/"/>
-    <refservices href="SAgraft.xmi#//@services.0"/>
     <reftypes href="SAgraft.xmi#//@types.0"/>
   </adapt>
-  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">
+  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance" refdelegation="//@adapt.0/@newDelegationBinding">
     <CompositeInstanceToSet href="SAinterface.xmi#//@root"/>
     <refsubComponent href="SAgraft.xmi#//@root/@subComponent.0"/>
   </adapt>
@@ -114,5 +132,9 @@
   <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
     <PrimitivePortToSet href="SAgraft.xmi#//@types.0/@port.2/@sub.0"/>
     <refservice href="SAinterface.xmi#//@services.2"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
+    <PrimitivePortToSet href="SAgraft.xmi#//@types.0/@port.3/@sub.0"/>
+    <refservice href="SAinterface.xmi#//@services.3"/>
   </adapt>
 </core:Adapter>

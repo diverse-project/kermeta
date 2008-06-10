@@ -1,0 +1,73 @@
+/* $Id: weavingRoles.kmt,v 1.1 2008-06-10 15:08:11 bmorin Exp $
+ * Creation date: March 19, 2008
+ * License:
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
+ */
+@mainClass "test::ServiceDiscoveryMain"
+@mainOperation "main"
+
+
+package test;
+require kermeta
+
+//Loading the SmartAdapter aspect weaver
+require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
+
+using kermeta::standard 
+using weaver
+
+class ServiceDiscoveryMain
+{
+	/**
+	 * This operation weaves two aspects (SA and UA) successively.
+	 * After the first weaving, we obtain the SA configuration = base + SA aspect.
+	 * After the second weaving, we obtain the DA configuration = base + SA aspect + UA aspect.
+	 * For more details, see 
+	 		<a href="https://project.sintef.no/eRoom/informatics/DiVA/0_654d1" target="_blank">An Aspect-Oriented and Model-Driven Approach for Managing Dynamic Variability</a>
+	 		Do NOT distribute this paper outside of the DiVA consortium until notification of acceptance.
+	 */
+	operation main() : Void is do 
+		var baseModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/baseModel.art"
+		var SAModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/SAModel.art"
+		var DAModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/DAModel.art"
+		var metamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore"
+		var MMPatternUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
+			
+		var UAadapterUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/aspect/UAprotocol.xmi"
+		var SAadapterUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/aspect/SAprotocol.xmi"
+		var adaptMMUri : String init "platform:/resource/SmartAdapters/metamodel/specific/runtime_AOM_Framework1.ecore"
+		
+
+		stdio.writeln("Initializing the SmartAdapters© weaver")
+		stdio.writeln("")
+		var weaver:Weaver init Weaver.new
+		weaver.initWeaver()
+		//weaver.initDefaultValues()
+		weaver.loadMetamodel(metamodelUri)
+		weaver.loadMetamodelPattern(MMPatternUri)
+		weaver.loadModel(baseModelUri, "http://art")
+		stdio.writeln("")
+		
+		stdio.writeln("Weaving SA aspect in the base model")
+		stdio.writeln("")
+		weaver.loadAdapter(SAadapterUri, adaptMMUri)					
+		weaver.weaving(metamodelUri, MMPatternUri)
+		weaver.saveModel(SAModelUri, "http://art")
+		stdio.writeln("")
+		stdio.writeln("We now obtain the SA configuration")
+
+		stdio.writeln("")
+		stdio.writeln("")
+
+		stdio.writeln("Weaving UA aspect in the woven model")
+		stdio.writeln("")
+		weaver.loadAdapter(UAadapterUri, adaptMMUri)					
+		weaver.weaving(metamodelUri, MMPatternUri)
+		weaver.saveModel(DAModelUri, "http://art")
+		stdio.writeln("")
+		stdio.writeln("We now obtain the DA configuration (= base + SA + UA)")		
+
+		weaver.finalizeWeaver()
+	end
+}

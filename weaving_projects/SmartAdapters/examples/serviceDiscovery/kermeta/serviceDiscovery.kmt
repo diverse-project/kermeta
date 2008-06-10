@@ -1,4 +1,4 @@
-/* $Id: serviceDiscovery.kmt,v 1.2 2008-06-09 06:44:40 bmorin Exp $
+/* $Id: serviceDiscovery.kmt,v 1.3 2008-06-10 15:08:11 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -35,25 +35,25 @@ class ServiceDiscoveryMain
 		var adaptMMUri : String init "platform:/resource/SmartAdapters/metamodel/specific/runtime_AOM_Framework1.ecore"
 		
 
-/*		var weaver:Weaver init Weaver.new
+		var weaver:Weaver init Weaver.new
 		weaver.initWeaver()
 		weaver.loadMetamodel(metamodelUri)
 		weaver.loadMetamodelPattern(MMPatternUri)
 		weaver.loadAdapter(adapterUri, adaptMMUri)
-*/		
+		
 		stdio.writeln("K> Running the service discovery application (SA configuration)...")
 		var platformAdapter : PlatformAdapter init PlatformAdapter.new 
 		platformAdapter.~init
 		platformAdapter.run
 		platformAdapter.saveModel(modelUri)
-/*		weaver.loadModel(modelUri, "http://art")
+		weaver.loadModel(modelUri, "http://art")
 		stdio.writeln("")
 		stdio.writeln("")
 					
 		weaver.weaving(metamodelUri, MMPatternUri)
 		weaver.saveModel(wovenModelUri, "http://art")
 		stdio.writeln("")
-*/		
+		
 		stdio.writeln("K> We now obtain DA = SA (base) + UA (aspect)")
 		stdio.writeln("")
 		
@@ -66,9 +66,8 @@ class ServiceDiscoveryMain
 		stdio.writeln("     -Instanciate and order atomic reconfiguration commands")
 		stdio.writeln("     -Execute the ordered set of commands")
 		stdio.writeln("")
-		//wovenModelUri := wovenModelUri.replace("platform:/resource","C:/work/dev/Kermeta")
 		platformAdapter.loadUpdateModel(wovenModelUri)
 		platformAdapter.saveModel(finalModelUri)
-//		weaver.finalizeWeaver()
+		weaver.finalizeWeaver()
 	end
 }

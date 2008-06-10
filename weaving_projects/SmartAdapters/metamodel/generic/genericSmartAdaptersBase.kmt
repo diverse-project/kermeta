@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.15 2008-05-30 08:19:17 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.16 2008-06-10 15:09:03 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -91,6 +91,8 @@ package smartadapters
 
 		/**
 		 * Create a new element from scratch
+		 * <b>Do not refer to interface model elements when creating a new object</b>
+		 * <b>Use Set adaptations to refer to interface model elements after creation</b>
 		 */		
 		abstract class createAdaptation inherits Adaptation
 		{
