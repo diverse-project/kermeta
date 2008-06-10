@@ -1,6 +1,6 @@
 
 
-/*$Id: PackageItem.java,v 1.8 2008-02-14 07:13:43 uid21732 Exp $
+/*$Id: PackageItem.java,v 1.9 2008-06-10 11:41:25 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	PackageItem.java
 * License : EPL
@@ -130,6 +130,14 @@ public class PackageItem  implements Comparable<PackageItem> {
 		return packageParts;
 	}
 
+	public boolean isErroneous() {
+		return outline.isErroneous( initialPackage );
+	}
+	
+	public boolean isWarned() {
+		return outline.isWarned( initialPackage );
+	}
+	
 }
 
 

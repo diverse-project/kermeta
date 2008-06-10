@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.11 2008-06-05 14:20:04 ftanguy Exp $
+/*$Id: KermetaTextEditor.java,v 1.12 2008-06-10 11:41:25 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -213,24 +213,17 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 	@Override
 	public void dispose() {
 		super.dispose();
+		// We are not interested in that file anymore.
 		KermetaUnitHost.getInstance().undeclareInterest(this, getFile());
 	}
-	
-	//private IDocument oldDocument = null;
 	
 	public void updateValue(Object newValue) {
 		if ( newValue != null ) {
 			KermetaUnit currentKermetaUnit = (KermetaUnit) newValue;
-			try {
-				if ( ! currentKermetaUnit.isErroneous() ) {
-					setKermetaUnit( currentKermetaUnit );
-					if ( outline != null )
-						outline.update();
-				} else if ( kermetaUnit == null ) {
-					setKermetaUnit( currentKermetaUnit );
-				} else
-					kermetaUnit = null;
-			} finally {
+			if ( currentKermetaUnit != null ) {
+				setKermetaUnit( currentKermetaUnit );
+				if ( outline != null )
+					outline.update();
 			}
 		}
 	}
@@ -238,48 +231,8 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 	private void setKermetaUnit(KermetaUnit newKermetaUnit) {
 		WeakReference<KermetaUnit> wr = new WeakReference<KermetaUnit>(newKermetaUnit);
 		kermetaUnit = wr.get();
-/*		if ( kermetaUnit != null ) {
-			kermetaUnit.getAspects().clear();
-			kermetaUnit.getBaseAspects().clear();
-			kermetaUnit.getImportedKermetaUnits().clear();
-			kermetaUnit.getTypeDefinitionCache().getEntries().clear();
-			kermetaUnit.setTypeDefinitionCache(null);
-		}
-				
-		kermetaUnit = (KermetaUnit) EcoreUtil.copy( newKermetaUnit );
-		KermetaUnitHelper.reconstructCache(kermetaUnit);
-		kermetaUnit.getImportedKermetaUnits().addAll( KermetaUnitHelper.getAllImportedKermetaUnits(newKermetaUnit) );*/
-
 	}
-	
-	@Override
-	public void doSave(final IProgressMonitor progressMonitor) {
-		super.doSave(progressMonitor);
-/*		if ( project == null ) {
-			switch ( TexteditorPlugin.getDefault().getModelCheckingStrategy() ) {
-			case ModelcheckingStrategy.SAVING_TIME :
-				try {
-					LoaderPlugin.getDefault().unload( "platform:/resource" + getFile().getFullPath().toString() );
-					KermetaUnit newKermetaUnit = KermetaUnitChecker.check( getFile() );
-					KermetaUnitHost.getInstance().updateValue(getFile(), newKermetaUnit);
-				} catch (NotRegisteredURIException e) {
-					TexteditorPlugin.logErrorMessage("Error while saving " + getFile().getFullPath().toString() , e);
-				} catch (URIMalformedException e) {
-					TexteditorPlugin.logErrorMessage("Error while saving " + getFile().getFullPath().toString() , e);
-				} catch (IdNotFoundException e) {
-					TexteditorPlugin.logErrorMessage("Error while saving " + getFile().getFullPath().toString() , e);
-				}
-				break;
-			default :
-				// Do nothing
-				break;
-			}
-		} else {
-			unit.setLastTimeModified( new Date() );
-		}
-*/
-	}	
-	
+		
 }
 
 

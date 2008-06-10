@@ -27,6 +27,26 @@
          </enabledWhen>
       </page>
    </extension>
+   <extension
+         point="org.eclipse.ui.decorators">
+      <decorator
+            class="fr.irisa.triskell.kermeta.texteditor.outline.OutlineDecorator"
+            id="fr.irisa.triskell.kermeta.texteditor.outline.decorator"
+            label="Kermeta Outline Decorator"
+            lightweight="true"
+            state="true">
+         <enablement>
+            <or>
+               <objectClass
+                     name="fr.irisa.triskell.kermeta.texteditor.outline.OutlineItem">
+               </objectClass>
+               <objectClass
+                     name="fr.irisa.triskell.kermeta.texteditor.outline.PackageItem">
+               </objectClass>
+            </or>
+         </enablement>
+      </decorator>
+   </extension>
 <!--   <extension
    point="org.eclipse.ui.editors">
    <editor

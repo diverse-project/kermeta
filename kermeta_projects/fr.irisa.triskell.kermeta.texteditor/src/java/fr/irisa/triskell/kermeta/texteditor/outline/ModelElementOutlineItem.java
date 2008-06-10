@@ -1,4 +1,4 @@
-/* $Id: ModelElementOutlineItem.java,v 1.7 2008-04-30 12:34:42 dvojtise Exp $
+/* $Id: ModelElementOutlineItem.java,v 1.8 2008-06-10 11:41:25 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineItem.java
 * License : EPL
@@ -294,5 +294,13 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
 	        children = GetChildrenVisitor.getChildren(this, outline);
 	    }
 	    return children;
+	}
+	
+	public boolean isErroneous() {
+		return outline.isErroneous( modelElement );
+	}
+	
+	public boolean isWarned() {
+		return outline.isWarned( modelElement );
 	}
 }

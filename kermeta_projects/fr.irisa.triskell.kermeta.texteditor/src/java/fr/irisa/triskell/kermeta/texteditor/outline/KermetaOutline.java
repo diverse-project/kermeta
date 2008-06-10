@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.22 2008-06-05 14:20:45 ftanguy Exp $
+/* $Id: KermetaOutline.java,v 1.23 2008-06-10 11:41:25 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -13,12 +13,18 @@
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.BooleanPropertyAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
+import org.eclipse.jface.viewers.DecoratingLabelProvider;
+import org.eclipse.jface.viewers.ILabelDecorator;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreePath;
@@ -29,8 +35,13 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
+import org.kermeta.interest.InterestedObject;
+import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.WarningMessage;
+import org.kermeta.kpm.KermetaUnitHost;
 import org.kermeta.model.KermetaModelHelper;
 import org.kermeta.texteditor.KermetaEditorEventListener;
 import org.kermeta.texteditor.KermetaTextEditor;
@@ -38,6 +49,7 @@ import org.kermeta.texteditor.KermetaTextEditor;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.icons.ButtonIcons;
 import fr.irisa.triskell.traceability.ModelReference;
@@ -47,10 +59,9 @@ import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
 /**
  * @author Franck Fleurey
  */
-public class KermetaOutline extends ContentOutlinePage {
+public class KermetaOutline extends ContentOutlinePage implements InterestedObject {
       
 	protected OutlineContentProvider contentProvider;
-	protected OutlineLabelProvider labelProvider;
 
 	private KermetaTextEditor textEditor;
 	
@@ -65,14 +76,21 @@ public class KermetaOutline extends ContentOutlinePage {
 	public static final String INHERITANCEFLATTENING_OUTLINE_PREF_KEY     = PREFIX + "inheritance_flattening";
 	public static final String SHOWIMPORTED_OUTLINE_PREF_KEY     = PREFIX + "show_imported";
 	
+	
+	private Set<Object> _erroneousElements = new HashSet<Object>();
+	
+	private Set<Object> _warnedElements = new HashSet<Object>();
+	
+	
 	/**		A string used to recalculate the selection when updating the outline.		*/
 	private String qualifedNameSelected = null;
 	
 	
 	public KermetaOutline(KermetaTextEditor editor) {
 		textEditor = editor;
+		// The outline is interested in the file because it allows us to keep a list of erroneous and warned items.
+		KermetaUnitHost.getInstance().declareInterest(this, textEditor.getFile());
 		contentProvider = new OutlineContentProvider(this);
-		labelProvider = new OutlineLabelProvider();
 		preferences = new PreferenceStore();
 		initializeDefaultsPreference();		
 	}
@@ -108,6 +126,7 @@ public class KermetaOutline extends ContentOutlinePage {
 	
 	public void dispose()
     {
+		KermetaUnitHost.getInstance().undeclareInterest(this, textEditor.getFile());
         _isDisposed = true;
         super.dispose();
     }
@@ -116,9 +135,15 @@ public class KermetaOutline extends ContentOutlinePage {
 		super.createControl(parent);
 		TreeViewer treeViewer = getTreeViewer();
 		treeViewer.setContentProvider(contentProvider);
-		treeViewer.setLabelProvider(labelProvider);
+		// Specific code for label provider and decorator.
+		ILabelDecorator decorator = PlatformUI.getWorkbench().getDecoratorManager().getLabelDecorator();
+		treeViewer.setLabelProvider( new DecoratingLabelProvider( new OutlineLabelProvider(), decorator ) );
+		
 		treeViewer.addSelectionChangedListener(this);
 		treeViewer.addDoubleClickListener( new DoubleClickListener() );
+		
+		// Update manually to calculate the list of erroneous and warned items.
+		updateValue( getKermetaUnit() );
 		
 		if ( getKermetaUnit() != null && ! getKermetaUnit().getInternalPackages().isEmpty() )
 			treeViewer.setInput( getKermetaUnit() );
@@ -244,40 +269,40 @@ public class KermetaOutline extends ContentOutlinePage {
 	
 	private TreePath getTreePath(List<PackageItem> items) {
 
+		List<java.lang.Object> l = new ArrayList<java.lang.Object>();
 		PackageItem packageItem = getPackageItem(qualifedNameSelected, items);
+		if ( packageItem == null )
+			return null;
+		
 		String left = qualifedNameSelected.replace(packageItem.getName(), "");
 		left = left.replaceFirst("::", "");
 		String[] splits = left.split("::");		
-		List<java.lang.Object> l = new ArrayList<java.lang.Object>();
 		
-		if ( packageItem != null ) {
-			l.add(packageItem);
-			java.lang.Object currentObject = packageItem;
-			for (int i=0; i<splits.length; i++) {
-				String s = splits[i];
-				if ( currentObject instanceof PackageItem ) {
-					for ( ModelElementOutlineItem element : ((PackageItem) currentObject).getTypeDefinitions() )
-						if ( ((TypeDefinition) element.modelElement).getName().equals(s) ) {
-							l.add(element);
-							currentObject = element;
+		l.add(packageItem);
+		java.lang.Object currentObject = packageItem;
+		for (int i=0; i<splits.length; i++) {
+			String s = splits[i];
+			if ( currentObject instanceof PackageItem ) {
+				for ( ModelElementOutlineItem element : ((PackageItem) currentObject).getTypeDefinitions() )
+					if ( ((TypeDefinition) element.modelElement).getName().equals(s) ) {
+						l.add(element);
+						currentObject = element;
+						break;
+					}
+			} else if ( currentObject instanceof ModelElementOutlineItem ) {
+				ModelElementOutlineItem item = (ModelElementOutlineItem) currentObject;
+				if ( item.modelElement instanceof ClassDefinition ) {
+					for ( java.lang.Object child : item.getChildren() ) {
+						ModelElementOutlineItem propOrOp = (ModelElementOutlineItem) child;
+						if ( propOrOp.modelElement.getName().equals(s) ) {
+							l.add(propOrOp);
+							currentObject = propOrOp;
 							break;
 						}
-				} else if ( currentObject instanceof ModelElementOutlineItem ) {
-					ModelElementOutlineItem item = (ModelElementOutlineItem) currentObject;
-					if ( item.modelElement instanceof ClassDefinition ) {
-						for ( java.lang.Object child : item.getChildren() ) {
-							ModelElementOutlineItem propOrOp = (ModelElementOutlineItem) child;
-							if ( propOrOp.modelElement.getName().equals(s) ) {
-								l.add(propOrOp);
-								currentObject = propOrOp;
-								break;
-							}
-						}								
-					}
+					}								
 				}
 			}
 		}
-		
 		return new TreePath(l.toArray());
 	}
 	
@@ -322,5 +347,60 @@ public class KermetaOutline extends ContentOutlinePage {
             super.run();
             update();
         }
+	}
+	
+	public void updateValue(Object value) {
+		if ( value instanceof KermetaUnit ) {
+			// Getting the kermeta unit. Only do the processing if the kermeta unit is typechecked.
+			KermetaUnit kermetaUnit = (KermetaUnit) value;
+			// Clearing the list of problematic objects
+			_erroneousElements.clear();
+			_warnedElements.clear();
+			// Recalculate the list of problematic objects.
+			List<ErrorMessage> errors = KermetaUnitHelper.getAllErrors(kermetaUnit);
+			for ( ErrorMessage e : errors ) {
+				if ( e.getTarget() instanceof EObject )
+					addErroneousObject( (EObject) e.getTarget() );
+			}	
+			List<WarningMessage> warnings = KermetaUnitHelper.getAllWarnings(kermetaUnit);
+			for ( WarningMessage w : warnings ) {
+				if ( w.getTarget() instanceof EObject )
+					addWarnedObject( (EObject) w.getTarget() );
+			}
+		}
+	}
+	
+	private void addErroneousObject(EObject o) {
+		addObjectToContainer(o, _erroneousElements);
+	}
+	
+	private void addWarnedObject(EObject o) {
+		addObjectToContainer(o, _warnedElements);
+	}
+	
+	private void addObjectToContainer(EObject o, Set<Object> container) {
+		while ( o != null ) {
+			if ( o instanceof ClassDefinition ) {
+				ClassDefinition cd = (ClassDefinition) o;
+				String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(cd);
+				Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext( (ClassDefinition) o );
+				for ( TypeDefinition t : context ) {
+					if ( KermetaModelHelper.NamedElement.qualifiedName(t).equals(qualifiedName) ) {
+						container.add( t );
+						addObjectToContainer( t.eContainer(), container );
+					}
+				}
+			} else
+				container.add(o);
+			o = o.eContainer();
+		}
+	}
+	
+	public boolean isErroneous(Object item) {
+		return _erroneousElements.contains(item);
+	}
+	
+	public boolean isWarned(Object item) {
+		return _warnedElements.contains(item);
 	}
 }
