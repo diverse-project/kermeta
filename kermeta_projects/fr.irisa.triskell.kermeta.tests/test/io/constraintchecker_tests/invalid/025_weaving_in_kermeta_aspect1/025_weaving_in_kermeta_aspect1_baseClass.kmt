@@ -18,6 +18,7 @@ class C inherits kermeta::kunit::Assert{
 	pre origPre is true
 	is do
 		a == b
+		result := 0
 	end
 		
 	
