@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.4 2008-05-19 21:52:28 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.5 2008-06-10 08:24:57 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -29,6 +29,26 @@ aspect class Object {
 		}
 		result := value_list
 	end
+	
+	/**
+	 * Get the values for the tags having as key: <key : String>
+	 */
+	operation getUniqueTagValue( key : String ) : String is do
+		result := ""
+		var value_list : OrderedSet<String> init self.getTagValues(key)
+		if (not value_list.isVoid()) and (value_list.size()>=1) then
+			result := value_list.one()
+		end
+	end
+	
+	
+	/**
+	 * Get the deprecated tag
+	 * Specific method for detecting the deprecated model elements
+	 */
+	operation getDeprecated() : String is do
+		result := getUniqueTagValue("deprecated")
+	end
 }
 
 aspect class GenericTypeDefinition {
@@ -37,11 +57,7 @@ aspect class GenericTypeDefinition {
 	 * Get the instanceClassName of a ClassDefinition
 	 */
 	operation getEMFInstanceClassName() : String is do
-		result := ""
-		var value_list : OrderedSet<String> init self.getTagValues("EMF_instanceClassName")
-		if (not value_list.isVoid()) and (value_list.size()>=1) then
-			result := value_list.one()
-		end
+		result := getUniqueTagValue("EMF_instanceClassName")
 	end
 
 }
@@ -52,11 +68,14 @@ aspect class Operation {
 	 * Get the EMFStatic reference of an Operation
 	 */
 	operation getEMFStatic() : String is do
-		result := ""
-		var value_list : OrderedSet<String> init self.getTagValues("EMF_static")
-		if (not value_list.isVoid()) and (value_list.size()>=1) then
-			result := value_list.one()
-		end
+		result := getUniqueTagValue("EMF_static")
+	end
+	
+	/**
+	 * Get the EMFRenameAs reference of an Operation
+	 */
+	operation getEMFRenameAs() : String is do
+		result := getUniqueTagValue("EMF_renameAs")
 	end
 
 }

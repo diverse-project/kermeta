@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.17 2008-06-04 14:43:45 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.18 2008-06-10 08:24:59 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -130,7 +130,7 @@ aspect class PrimitiveType {
 		
 		// by default
 		eModelElement.instanceClassName := "java.lang.Object"
-		if ( self.instanceType.isInstanceOf(Class) ) then
+		if self.instanceType.isInstanceOf(Class) then
 
 			if self.instanceType.isValueType() then
 				var instanceClassName : String init self.instanceType.asType(Class).typeDefinition.getEMFInstanceClassName()
@@ -187,6 +187,10 @@ aspect class ClassDefinition {
 		ecoreClass.interface := false
 		ecoreClass.name := self.name
 		ecoreClass.~abstract := self.isAbstract
+		
+		if not (self.getEMFInstanceClassName() == "") then
+			ecoreClass.instanceClassName := self.getEMFInstanceClassName()
+		end
 		result := ecoreClass
 	end
 }
@@ -204,7 +208,7 @@ aspect class Operation {
 		ecoreOperation.upperBound := self.upper
 		//ecoreOperation.many := 
 		//ecoreOperation.required :=
-		if ( self.isAbstract ) then
+		if self.isAbstract then
 			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.createAbstract()
 			ecoreOperation.eAnnotations.add( ecoreAnnotation )
 		end 
@@ -237,10 +241,10 @@ aspect class Constraint {
 		// TODO : Fill the body using the java pretty printer
 		var body : String init ""
 				
-		if ( self.container.isInstanceOf(ClassDefinition) ) then
+		if self.container.isInstanceOf(ClassDefinition) then
 			result := EAnnotationHelper.new.create("kermeta.inv", self.name, body)		
 		else
-			if ( ConstraintHelper.new.isPre(self) ) then
+			if ConstraintHelper.new.isPre(self) then
 				result := EAnnotationHelper.new.create("kermeta.pre", self.name, body)	
 			else
 				result := EAnnotationHelper.new.create("kermeta.post", self.name, body)
@@ -268,7 +272,7 @@ aspect class Property {
 		
 		EcoreModelElementHelper.new.setEStructuralFeatureProperties(self, ecoreStructuralFeature)
 		
-		if ( self.isDerived ) then
+		if self.isDerived then
 			var annotation : EAnnotation init EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.isReadOnly.name.toString(), self.isReadOnly.toString())
 			ecoreStructuralFeature.eAnnotations.add(annotation)
 		end

@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.kmt,v 1.1 2008-05-20 15:38:21 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.2 2008-06-10 08:24:57 cfaucher Exp $
  * Creation date: May 20, 2008
  * License:
  * Copyright:
@@ -9,11 +9,11 @@
 package kermeta::language::structure;
 
 require kermeta
+require "KermetaHelper.kmt"
 
 using kermeta::standard
 
-aspect class Operation
-{
+aspect class Operation {
 	operation isFunctionType() : Boolean is do 
 		result := false
 		
@@ -28,5 +28,30 @@ aspect class Operation
 			p.type.isInstanceOf(FunctionType)
 		}
 		result := ft_parameters
+	end
+	
+	
+	/**
+	 * Helper method to determine if an operation has to be compiled
+	 */
+	operation mustBeCompiled() : Boolean is do
+		var res : Boolean init true
+		
+		var cd_container : ClassDefinition init self.container.asType(ClassDefinition)
+		
+		// This test is there, because some methods may be compiled as Static methods via Simk like the method: times on Integer
+		if cd_container.isValueType() then
+			if cd_container.getEMFInstanceClassName() != "" then
+				res := false
+			end
+		end
+		if self.container.asType(ClassDefinition).getEMFInstanceClassName!="" or self.getEMFStatic()!="" or self.getEMFRenameAs()!="" then
+			res := false
+			var doSimk : Boolean init true
+		end
+		
+		//stdio.writeln("Operation.applyPass2() - self: " + self.name + " - self.ecoreModelElement: " + self.ecoreModelElement.toString() + " - res: " + res.toString())
+		
+		result := res
 	end
 }
