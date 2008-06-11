@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.20 2008-05-28 13:38:48 dvojtise Exp $
+/* $Id: TexteditorPlugin.java,v 1.21 2008-06-11 14:35:45 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TexteditorPlugin.java
  * License : EPL
@@ -98,7 +98,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	public int getModelCheckingStrategy() {
 		int value = getPreferenceStore().getInt( ModelcheckingStrategy.MODE_KEY );
 		if ( value == 0 ) {
-			value = getPreferenceStore().getDefaultInt( ModelcheckingStrategy.SAVING_TIME_KEY );
+			value = getPreferenceStore().getDefaultInt( ModelcheckingStrategy.INPUT_CHANGED_KEY );
 			getPreferenceStore().setValue( ModelcheckingStrategy.MODE_KEY, value);
 		}
 		return value;
