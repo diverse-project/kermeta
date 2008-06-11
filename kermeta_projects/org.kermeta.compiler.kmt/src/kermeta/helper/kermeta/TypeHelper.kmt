@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.12 2008-06-04 14:43:43 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.13 2008-06-11 15:39:29 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -27,7 +27,7 @@ aspect class Type {
 	operation getClassFromPrimitiveType() : Class is do
 		if self.isInstanceOf(PrimitiveType) then
 			var pt : PrimitiveType init self.asType(PrimitiveType)
-			if ( pt.instanceType.isInstanceOf(Class) ) then
+			if pt.instanceType.isInstanceOf(Class) then
 				result := pt.instanceType.asType(Class)
 			else
 				//deal the case where the alias refers another alias

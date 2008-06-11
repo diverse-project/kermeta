@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.19 2008-06-11 13:46:51 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.20 2008-06-11 15:39:30 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -130,25 +130,22 @@ aspect class PrimitiveType {
 		
 		// by default
 		eModelElement.instanceClassName := "java.lang.Object"
-		if self.instanceType.isInstanceOf(Class) then
+		if self.getClassFromPrimitiveType().isInstanceOf(Class) then
 
-			if self.instanceType.isValueType() then
-				var instanceClassName : String init self.instanceType.asType(Class).typeDefinition.getEMFInstanceClassName()
+			if self.getClassFromPrimitiveType().isValueType() then
+				var instanceClassName : String init self.getClassFromPrimitiveType().asType(Class).typeDefinition.getEMFInstanceClassName()
 				if instanceClassName != "" then
 					eModelElement.instanceClassName := instanceClassName
 				end				
 			end
-
-			var qualifiedName : String init self.instanceType.asType(Class).typeDefinition.qualifiedName
-			eModelElement.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), qualifiedName))
-			eModelElement.instanceClassName := qualifiedName.replace("::", ".")
 			
-			//This alias will be really used
-			if self.getClassFromPrimitiveType().isValueType() then
-				if not (self.getEMFInstanceClassName()=="") then
-					eModelElement.instanceClassName := self.getEMFInstanceClassName()
-				end
+			var qualifiedName : String init self.getClassFromPrimitiveType().asType(Class).typeDefinition.qualifiedName
+			eModelElement.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), qualifiedName))
+			
+			if eModelElement.instanceClassName == "" then
+				eModelElement.instanceClassName := qualifiedName.replace("::", ".")
 			end
+			
 		end
 		
 		result := eModelElement
