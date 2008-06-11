@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.21 2008-06-10 08:24:59 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.22 2008-06-11 13:46:51 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -81,10 +81,16 @@ aspect class Class {
 					if tpb.type.isInstanceOf(PrimitiveType) then
 						var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 						
-						if not cd.ecoreModelElement.isVoid() then
-							typeArgument.eClassifier := cd.ecoreModelElement
+						if cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
+							typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
 						else
-							typeArgument.eClassifier := cd.ecoreDataType
+						
+							if not cd.ecoreModelElement.isVoid() then
+								typeArgument.eClassifier := cd.ecoreModelElement
+							else
+								typeArgument.eClassifier := cd.ecoreDataType
+							end
+						
 						end
 						
 						self.ecoreModelElement.eTypeArguments.add(typeArgument)
@@ -198,10 +204,16 @@ class LinkSetterForTypedElement {
 							if tpb.type.isInstanceOf(PrimitiveType) then
 								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 								
-								if not cd.ecoreModelElement.isVoid() then
-									typeArgument.eClassifier := cd.ecoreModelElement
+								if cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
+									typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
 								else
-									typeArgument.eClassifier := cd.ecoreDataType
+								
+									if not cd.ecoreModelElement.isVoid() then
+										typeArgument.eClassifier := cd.ecoreModelElement
+									else
+										typeArgument.eClassifier := cd.ecoreDataType
+									end
+									
 								end
 								
 								ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
@@ -213,11 +225,18 @@ class LinkSetterForTypedElement {
 				// Case of the type is an ObjectTypeVariable
 				if element.type.isInstanceOf(PrimitiveType) then
 					var cd : ClassDefinition init element.type.getClassFromPrimitiveType().getClassDefinition()
-					//stdio.writeln("SetLinks - PrimitiveType " + cd.ecoreModelElement.toString() + " " + cd.qualifiedName)
-					if not cd.ecoreModelElement.isVoid() then
-						ecoreModelElement.eType := cd.ecoreModelElement
+					
+					if cd.isValueType() and (element.type.getEMFInstanceClassName()!="") then
+						ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement
 					else
-						ecoreModelElement.eType := cd.ecoreDataType
+					
+						//stdio.writeln("SetLinks - PrimitiveType " + cd.ecoreModelElement.toString() + " " + cd.qualifiedName)
+						if not cd.ecoreModelElement.isVoid() then
+							ecoreModelElement.eType := cd.ecoreModelElement
+						else
+							ecoreModelElement.eType := cd.ecoreDataType
+						end
+					
 					end
 				else
 					if element.type.isInstanceOf(Enumeration) then

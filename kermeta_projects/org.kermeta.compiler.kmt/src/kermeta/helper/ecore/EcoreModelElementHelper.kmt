@@ -1,4 +1,4 @@
-/* $Id: EcoreModelElementHelper.kmt,v 1.6 2008-06-04 14:43:44 cfaucher Exp $
+/* $Id: EcoreModelElementHelper.kmt,v 1.7 2008-06-11 13:46:51 cfaucher Exp $
  * Creation date: January 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -10,15 +10,16 @@ package km2ecore::helper::ecore;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "../../common/TraceStructure.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using kermeta::language::structure
 using ecore
+using km2ecore::helper::java
+using km2ecore
 
 class EcoreModelElementHelper {
 	
-	/**
-	 * @deprecated
-	 */
+	@deprecated "unused"
 	operation findEClassProxy(cd : ClassDefinition) : EClass is do
 		var pack : Package init Package.new 
 		pack ?= cd.container
@@ -30,9 +31,7 @@ class EcoreModelElementHelper {
 		result := eclassifier.asType(EClass)
 	end
 	
-	/**
-	 * @deprecated
-	 */
+	@deprecated "unused"
 	operation findEOperationProxy(op : Operation) : EOperation is do
 		var cd : ClassDefinition init ClassDefinition.new
 		cd ?= op.container
@@ -44,8 +43,8 @@ class EcoreModelElementHelper {
 		result := eop.asType(EOperation)
 	end
 	
-	operation setEStructuralFeatureProperties(self_ : Property, ecoreStructuralFeature : EStructuralFeature) : Void is do
-		ecoreStructuralFeature.name := self_.name
+	operation setEStructuralFeatureProperties(self_ : Property, ecoreStructuralFeature : EStructuralFeature, context : KM2EcoreContext) : Void is do
+		ecoreStructuralFeature.name := IdentifierHelper.new.getMangledIdentifier(self_.name, context)
 		ecoreStructuralFeature.ordered := self_.isOrdered
 		ecoreStructuralFeature.unique := self_.isUnique
 		ecoreStructuralFeature.lowerBound := self_.lower

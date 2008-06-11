@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.18 2008-06-10 08:24:59 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.19 2008-06-11 13:46:51 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -22,7 +22,7 @@ using km2ecore
 using km2ecore::helper::ecore
 using km2ecore::helper::kermeta
 using km2ecore::common::exception
-
+using km2ecore::helper::java
 
 /**
  *
@@ -96,7 +96,7 @@ aspect class Package {
 		stdio.writeln(" + Package " + self.name + " in progress")
 		
 		var ecorePackage : EPackage init EPackage.new
-		ecorePackage.name := self.name
+		ecorePackage.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		
 		if not self.uri.isVoid() and self.uri != "" then
 			ecorePackage.nsURI := self.uri
@@ -122,7 +122,7 @@ aspect class PrimitiveType {
 		
 		var eModelElement : EDataType init EDataType.new
 		
-		eModelElement.name := self.name
+		eModelElement.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		//eModelElement.serializable
 		//eModelElement.instanceTypeName
 		//eModelElement.defaultValue
@@ -142,6 +142,13 @@ aspect class PrimitiveType {
 			var qualifiedName : String init self.instanceType.asType(Class).typeDefinition.qualifiedName
 			eModelElement.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), qualifiedName))
 			eModelElement.instanceClassName := qualifiedName.replace("::", ".")
+			
+			//This alias will be really used
+			if self.getClassFromPrimitiveType().isValueType() then
+				if not (self.getEMFInstanceClassName()=="") then
+					eModelElement.instanceClassName := self.getEMFInstanceClassName()
+				end
+			end
 		end
 		
 		result := eModelElement
@@ -154,7 +161,7 @@ aspect class PrimitiveType {
 aspect class Enumeration {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EEnum is do
 		var ecoreEnumeration : EEnum init EEnum.new
-		ecoreEnumeration.name := self.name
+		ecoreEnumeration.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		//ecoreEnumeration.serializable
 		//ecoreEnumeration.instanceClass
 		//ecoreEnumeration.instanceTypeName
@@ -185,7 +192,7 @@ aspect class ClassDefinition {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EClass is do
 		var ecoreClass : EClass init EClass.new
 		ecoreClass.interface := false
-		ecoreClass.name := self.name
+		ecoreClass.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		ecoreClass.~abstract := self.isAbstract
 		
 		if not (self.getEMFInstanceClassName() == "") then
@@ -201,7 +208,7 @@ aspect class ClassDefinition {
 aspect class Operation {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EOperation is do
 		var ecoreOperation : EOperation init EOperation.new
-		ecoreOperation.name := self.name
+		ecoreOperation.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		ecoreOperation.ordered := self.isOrdered
 		ecoreOperation.unique := self.isUnique
 		ecoreOperation.lowerBound := self.lower
@@ -222,7 +229,7 @@ aspect class Operation {
 aspect class Parameter {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EParameter is do
 		var ecoreParameter : EParameter init EParameter.new
-		ecoreParameter.name := self.name
+		ecoreParameter.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		//ecoreParameter.ordered
 		//ecoreParameter.unique
 		//ecoreParameter.lowerBound
@@ -270,7 +277,7 @@ aspect class Property {
 			ecoreStructuralFeature.asType(EReference).containment := self.isComposite
 		end
 		
-		EcoreModelElementHelper.new.setEStructuralFeatureProperties(self, ecoreStructuralFeature)
+		EcoreModelElementHelper.new.setEStructuralFeatureProperties(self, ecoreStructuralFeature, context)
 		
 		if self.isDerived then
 			var annotation : EAnnotation init EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.isReadOnly.name.toString(), self.isReadOnly.toString())
@@ -288,7 +295,7 @@ aspect class Property {
 aspect class ObjectTypeVariable {
 	operation createEcoreModelElement(context : KM2EcoreContext) : ETypeParameter is do
 		var ecoreTypeParameter : ETypeParameter init ETypeParameter.new
-		ecoreTypeParameter.name := self.name
+		ecoreTypeParameter.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		result := ecoreTypeParameter
 	end
 }

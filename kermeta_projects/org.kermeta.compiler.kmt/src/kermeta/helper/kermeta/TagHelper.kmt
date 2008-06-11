@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.5 2008-06-10 08:24:57 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.6 2008-06-11 13:46:51 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -41,6 +41,12 @@ aspect class Object {
 		end
 	end
 	
+	/**
+	 * Get the instanceClassName of a ClassDefinition
+	 */
+	operation getEMFInstanceClassName() : String is do
+		result := getUniqueTagValue("EMF_instanceClassName")
+	end
 	
 	/**
 	 * Get the deprecated tag
@@ -53,12 +59,7 @@ aspect class Object {
 
 aspect class GenericTypeDefinition {
 
-	/**
-	 * Get the instanceClassName of a ClassDefinition
-	 */
-	operation getEMFInstanceClassName() : String is do
-		result := getUniqueTagValue("EMF_instanceClassName")
-	end
+
 
 }
 
