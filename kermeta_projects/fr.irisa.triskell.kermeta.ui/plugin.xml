@@ -105,6 +105,9 @@
           <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams"/>
           <newWizardShortcut id="fr.irisa.triskell.kermeta.presentation.KmModelWizardID"/>
           <newWizardShortcut id="org.eclipse.ui.wizards.new.folder"/>
+          <newWizardShortcut
+                id="org.eclipse.emf.ecore.presentation.EcoreModelWizardID">
+          </newWizardShortcut>
           <newWizardShortcut id="org.eclipse.ui.wizards.new.file"/>
           <actionSet
                 id="org.kermeta.ui.actionSet">
