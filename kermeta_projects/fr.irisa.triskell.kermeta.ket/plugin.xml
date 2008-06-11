@@ -54,5 +54,14 @@
          </selection>
       </wizard>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="fr.irisa.triskell.kermeta.ui.perspective">
+         <newWizardShortcut
+               id="org.kermeta.wizard.newKETFile">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
    
 </plugin>
