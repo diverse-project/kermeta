@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass3.java,v 1.4 2008-04-28 11:51:07 ftanguy Exp $
+/*$Id: Pass3.java,v 1.5 2008-06-11 13:45:09 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass3.java
 * License : EPL
@@ -70,7 +70,8 @@ public class Pass3 extends MergePass {
 		PrimitiveType definition = (PrimitiveType) context.getBaseTypeDefinition(newDefinition);
 		Type type = TypeCloner.clone( definition.getInstanceType(), kermetaUnit );
 		if ( type != null ) {
-			newDefinition.getContainedType().add( type );
+			if ( type.eContainer() == null )
+				newDefinition.getContainedType().add( type );
 			newDefinition.setInstanceType(type);
 		}
 	}
