@@ -1,6 +1,6 @@
 
 
-/*$Id: RequireResolver.java,v 1.2 2008-02-14 07:12:50 uid21732 Exp $
+/*$Id: RequireResolver.java,v 1.3 2008-06-11 15:17:03 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	RequireResolver.java
 * License : EPL
@@ -26,6 +26,7 @@ import org.kermeta.io.loader.action.ILoadingAction;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
+import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Require;
@@ -86,7 +87,8 @@ public class RequireResolver implements ILoadingAction {
 				if ( uri.startsWith("platform:/resource") || uri.startsWith("platform:/plugin") ) {
 					URIConverter converter = new URIConverterImpl();
 					converter.createInputStream( emfURI ).close();
-				}
+				} else if ( ! uri.equals("kermeta") && ! EMFRegistryHelper.isRegistered(uri) )
+					throw new IOException("The file " + uri + " does not exist.");
 				
 				/*
 				 * 
