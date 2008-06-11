@@ -1,0 +1,25 @@
+@uri "http://comp_primitiveType_test003"
+package comp_primitiveType_test004;
+
+require kermeta
+require "../ecore/EDataType.ecore"
+
+using EDataType
+
+class Main {
+	attribute s_fromEcore : MyString
+	
+	attribute s_fromStandard : MyOtherStandardString
+	
+	attribute s_fromStructure : MyOtherStructureString
+	
+	attribute i_fromStandard : MyOtherStandardInteger
+	
+	attribute i_fromStructure : MyOtherStructureInteger
+}
+
+alias MyOtherStandardString : kermeta::standard::String;
+alias MyOtherStructureString : kermeta::language::structure::String;
+
+alias MyOtherStandardInteger : kermeta::standard::Integer;
+alias MyOtherStructureInteger : kermeta::language::structure::Integer;
