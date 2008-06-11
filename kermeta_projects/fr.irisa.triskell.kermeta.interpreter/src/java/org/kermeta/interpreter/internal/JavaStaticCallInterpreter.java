@@ -93,7 +93,7 @@ public class JavaStaticCallInterpreter {
 						additionalInfo += "\t" + urls[index].toExternalForm() + "\n";
 					}
 	        	}
-	        	InterpreterPlugin.internalLog.error("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+	        	InterpreterPlugin.internalLog.error("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaRuntimeError !!!");
 				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
 						"ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName + ". Please verify your java classpath in the kermeta run target. \n"+additionalInfo,
 						interpreter,
@@ -101,6 +101,24 @@ public class JavaStaticCallInterpreter {
 						node,
 						e);
 	        }
+			catch (Exception e) {
+		    	String additionalInfo = "";
+		    	if(cl instanceof URLClassLoader){
+		    		URLClassLoader ucl=(URLClassLoader)cl;
+		    		URL[] urls = ucl.getURLs();
+		    		additionalInfo += "Current URLs in the URLClassLoader : \n";
+					for (int index = 0; index < urls.length; index++) {
+						additionalInfo += "\t" + urls[index].toExternalForm() + "\n";
+					}
+		    	}
+		    	InterpreterPlugin.internalLog.error("Exception invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaRuntimeError !!!");
+				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+						"Exception while invoking "+ jmethodName + " on Class " +jclassName + ". Please verify your java classpath in the kermeta run target. \n"+additionalInfo,
+						interpreter,
+						interpreter.getMemory(),
+						node,
+						e);
+		    }
 	        Method jmethod = null;
 	        try {
 	            jmethod = jclass.getMethod(jmethodName, paramtypes);
