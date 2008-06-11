@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.13 2008-04-08 09:56:26 dvojtise Exp $
+/*$Id: KermetaUnitHelper.java,v 1.14 2008-06-11 14:57:41 dvojtise Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -147,11 +147,11 @@ public class KermetaUnitHelper {
 	
 	static public String getWarningsAsString(KermetaUnit kermetaUnit) {
 		String result = "";
-		
+		String sss = kermetaUnit.getMessages().size() >1 ? "s" : "";
 		for ( Message message : (List <Message>) kermetaUnit.getMessages() ) {
 			
 			if ( message instanceof WarningMessage )
-				result += "Error : " + message.getValue() + "\n";
+				result += "Warning"+sss+" : " + message.getValue() + "\n";
 			
 		}
 		
