@@ -1,12 +1,12 @@
 
 
-/*$Id: AddMarkers.java,v 1.4 2008-05-28 09:25:09 ftanguy Exp $
+/*$Id: AddMarkers.java,v 1.5 2008-06-11 14:58:28 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 6 févr. 08
+* Creation date : 6 feb. 08
 * Authors : paco
 */
 
@@ -83,6 +83,7 @@ public class AddMarkers implements IAction {
 	
 	private void addRequireErrors(KermetaUnit kermetaUnit) {
 		if ( kermetaUnit.isErroneous() ) {
+			// if the unit has error, find all the unit that require it and add an error message on the require that link the units
 			for ( KermetaUnit importer : kermetaUnit.getImporters() ) {
 				KermetaUnitRequire r = findRequire(kermetaUnit, importer);
 				if ( r != null ) {
@@ -91,7 +92,18 @@ public class AddMarkers implements IAction {
 					importer.error( message, r.getRequire() );
 				}
 			}
-		}				
+		}
+		else if ( kermetaUnit.isWarned() ) {
+			// if the unit has warning, find all the unit that require it and add a warning message on the require that link the units
+			for ( KermetaUnit importer : kermetaUnit.getImporters() ) {
+				KermetaUnitRequire r = findRequire(kermetaUnit, importer);
+				if ( r != null ) {
+					String message = "File " + kermetaUnit.getUri() + " contains warnings.\n\n";
+					message = message + KermetaUnitHelper.getWarningsAsString( kermetaUnit );
+					importer.warning( message, r.getRequire() );
+				}
+			}
+		}
 	}
 	
 	private KermetaUnitRequire findRequire(KermetaUnit importedUnit, KermetaUnit importerUnit) {
