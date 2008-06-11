@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Class.java,v 1.5 2008-03-19 16:34:13 cfaucher Exp $
+ * $Id: Class.java,v 1.6 2008-06-11 20:26:33 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -135,13 +135,5 @@ public interface Class extends ParameterizedType {
 	 * @generated
 	 */
 	String getName();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	fr.irisa.triskell.kermeta.language.structure.Object _new();
 
 } // Class

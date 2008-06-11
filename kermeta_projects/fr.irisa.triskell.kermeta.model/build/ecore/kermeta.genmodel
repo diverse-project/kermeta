@@ -124,7 +124,6 @@
           <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/Class/superClass"/>
           <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kermeta_java.ecore#//language/structure/Class/isAbstract"/>
           <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kermeta_java.ecore#//language/structure/Class/name"/>
-          <genOperations ecoreOperation="kermeta_java.ecore#//language/structure/Class/_new"/>
         </genClasses>
         <genClasses ecoreClass="kermeta_java.ecore#//language/structure/Object">
           <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -137,7 +136,6 @@
         <genClasses ecoreClass="kermeta_java.ecore#//language/structure/ModelType">
           <genFeatures notify="false" createChild="false" propertySortChoices="true"
               ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/ModelType/includedTypeDefinition"/>
-          <genOperations ecoreOperation="kermeta_java.ecore#//language/structure/ModelType/_new"/>
         </genClasses>
         <genClasses ecoreClass="kermeta_java.ecore#//language/structure/Operation">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_java.ecore#//language/structure/Operation/isAbstract"/>

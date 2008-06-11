@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelType.java,v 1.7 2008-03-19 16:34:13 cfaucher Exp $
+ * $Id: ModelType.java,v 1.8 2008-06-11 20:26:33 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -54,13 +54,5 @@ public interface ModelType extends Type, TypeDefinition {
 	 * @generated
 	 */
 	EList<TypeDefinition> getIncludedTypeDefinition();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Model _new();
 
 } // ModelType

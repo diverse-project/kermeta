@@ -3,14 +3,10 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm">
   <eSubpackages name="structure">
-    <eClassifiers xsi:type="ecore:EClass" name="Class">
-      <eOperations name="_new" eType="#//structure/Object"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Class"/>
     <eClassifiers xsi:type="ecore:EClass" name="Object"/>
     <eClassifiers xsi:type="ecore:EClass" name="Model"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ModelType">
-      <eOperations name="_new" eType="#//structure/Model"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelType"/>
   </eSubpackages>
   <eSubpackages name="behavior">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassImpl.java,v 1.6 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: ClassImpl.java,v 1.7 2008-06-11 20:26:33 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -182,17 +182,6 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public fr.irisa.triskell.kermeta.language.structure.Object _new() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**

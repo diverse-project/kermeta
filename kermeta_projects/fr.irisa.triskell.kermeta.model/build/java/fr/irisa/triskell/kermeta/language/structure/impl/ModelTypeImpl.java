@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeImpl.java,v 1.10 2008-02-14 07:13:02 uid21732 Exp $
+ * $Id: ModelTypeImpl.java,v 1.11 2008-06-11 20:26:33 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -172,17 +172,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 			includedTypeDefinition = new EObjectResolvingEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION);
 		}
 		return includedTypeDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Model _new() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**
