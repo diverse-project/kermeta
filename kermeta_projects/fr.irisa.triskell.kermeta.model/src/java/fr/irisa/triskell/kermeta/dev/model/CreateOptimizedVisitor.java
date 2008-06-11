@@ -1,4 +1,4 @@
-/* $Id: CreateOptimizedVisitor.java,v 1.10 2008-05-27 12:52:03 dvojtise Exp $
+/* $Id: CreateOptimizedVisitor.java,v 1.11 2008-06-11 08:45:50 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : EPL
@@ -183,14 +183,14 @@ public class CreateOptimizedVisitor {
 			classTemplate += "import java.util.Hashtable;\n";
 			classTemplate += "import java.util.Iterator;\n";
 			classTemplate += "import org.eclipse.emf.ecore.EObject;\n";
-			classTemplate += "import org.apache.log4j.Logger;\n";
+			classTemplate += "import org.apache.commons.logging.Log;\n";
 			classTemplate += "import org.kermeta.log4j.util.LogConfigurationHelper;\n";
 			classTemplate += "import fr.irisa.triskell.kermeta.language.structure.NamedElement;\n";
 			classTemplate += "import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;\n";
 
 			classTemplate += "public class XclassNameX {\n";
 
-			classTemplate += "  final static public Logger internalLog = LogConfigurationHelper\n";
+			classTemplate += "  final static public Log internalLog = LogConfigurationHelper\n";
 			classTemplate += "			.getLogger(\"KMT.model\");\n";
 
 			classTemplate += "  /** The parent of the node currently visited. */\n";

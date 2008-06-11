@@ -1,4 +1,4 @@
-/* $Id: CreateGenericVisitor.java,v 1.10 2008-05-27 12:52:03 dvojtise Exp $
+/* $Id: CreateGenericVisitor.java,v 1.11 2008-06-11 08:45:50 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : EPL
@@ -124,7 +124,7 @@ public class CreateGenericVisitor {
 			classTemplate += "import java.util.Iterator;\n";
 			classTemplate += "import org.eclipse.emf.ecore.EObject;\n";
 			classTemplate += "import fr.irisa.triskell.kermeta.error.KermetaVisitorError;\n";
-			classTemplate += "import org.apache.log4j.Logger;\n";
+			classTemplate += "import org.apache.commons.logging.Log;\n";
 			classTemplate += "import org.kermeta.log4j.util.LogConfigurationHelper;\n";
 			classTemplate += "\n";
 			classTemplate += "/**\n";
@@ -134,7 +134,7 @@ public class CreateGenericVisitor {
 			classTemplate += " */\n";
 			classTemplate += "public class XclassNameX {\n";
 			classTemplate += "\n";
-			classTemplate += "	final static public Logger internalLog = LogConfigurationHelper.getLogger(\"KMT.model\");\n";
+			classTemplate += "	final static public Log internalLog = LogConfigurationHelper.getLogger(\"KMT.model\");\n";
 			classTemplate +="			// This is a generic visit method.\n";
 			classTemplate +="			public Object genericVisitChildren(EObject node) {\n";
 			classTemplate +="				Object result = null;\n";

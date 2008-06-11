@@ -1,6 +1,6 @@
 /*
  * This code has been generated to visit a kermeta model
- * Creation date: Tue May 13 13:33:22 CEST 2008
+ * Creation date: Wed Jun 11 10:44:38 CEST 2008
  * Template Created on feb. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * IRISA / INRIA / University of rennes 1

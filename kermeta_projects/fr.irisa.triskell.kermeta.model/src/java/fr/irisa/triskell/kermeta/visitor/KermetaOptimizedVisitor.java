@@ -1,7 +1,7 @@
-//$Id: KermetaOptimizedVisitor.java,v 1.17 2008-05-28 13:37:43 dvojtise Exp $
+//$Id: KermetaOptimizedVisitor.java,v 1.18 2008-06-11 08:45:50 cfaucher Exp $
 /*
  * This code has been generated to visit a kermeta model
- * Creation date: Tue May 13 13:33:24 CEST 2008
+ * Creation date: Wed Jun 11 10:44:40 CEST 2008
  * Template Created on feb. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * IRISA / INRIA / University of rennes 1
@@ -13,7 +13,6 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 import org.apache.commons.logging.Log;
 import org.kermeta.log4j.util.LogConfigurationHelper;
-
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 public class KermetaOptimizedVisitor {
