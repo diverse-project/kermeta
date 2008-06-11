@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.33 2008-04-28 11:50:12 ftanguy Exp $
+/* $Id: Ecore2KMPass2.java,v 1.34 2008-06-11 12:36:21 dvojtise Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -261,11 +261,11 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 			//if (type == null) type = StdLibKermetaUnitHelper.getKermetaUnit().typeDefinitionLookup(type_name);
 			// FIXME : If type is still null, replacing by the basic Object type of Kermeta. 
 			// Not the best way to process. Idea: annotate Kermeta alias with an extern "instanceClassName"?
-			if (type == null) {
+			/*if (type == null) {
 				kermetaUnit.warning("cannot find instance class " + type_name + " for primitive type " + 
 						EcoreHelper.getQualifiedName((EDataType)node) + " (replaced by Object)", null);
 				//type = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();// get kermeta::language::structure::Object 
-			}
+			}*/
 		}
 		
 		if ( type == null ) {
