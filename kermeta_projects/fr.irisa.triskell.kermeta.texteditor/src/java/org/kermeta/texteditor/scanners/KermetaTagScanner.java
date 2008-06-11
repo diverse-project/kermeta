@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTagScanner.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
+/*$Id: KermetaTagScanner.java,v 1.3 2008-06-11 14:36:46 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTagScanner.java
 * License : EPL
@@ -24,8 +24,8 @@ public class KermetaTagScanner extends RuleBasedScanner {
 	
 	public KermetaTagScanner() {
 	
-		IToken tokenForTagDocumentation = new Token( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.TAG_ATTRIBUTE) );
-		IRule ruleForTag = new MultiLineRule( "/**", "*/", tokenForTagDocumentation );
+		//IToken tokenForTagDocumentation = new Token( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.TAG_ATTRIBUTE) );
+		//IRule ruleForTag = new MultiLineRule( "/**", "*/", tokenForTagDocumentation );
 		
 		IToken tokenForName = new Token ( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.SPECIAL_ATTRIBUTE ) );
 		IRule ruleForName = new WordRule( new TagNameWordDetector(), tokenForName );
@@ -33,7 +33,8 @@ public class KermetaTagScanner extends RuleBasedScanner {
 		IToken token = new Token ( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.TAG_ATTRIBUTE ) );
 		setDefaultReturnToken(token);
 		
-		setRules( new IRule[] {ruleForTag, ruleForName} );
+		//setRules( new IRule[] {ruleForTag, ruleForName} );
+		setRules( new IRule[] {ruleForName} );
 	}
 	
 	private class TagNameWordDetector implements IWordDetector {

@@ -1,4 +1,4 @@
-/* $Id: RequireScanner.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
+/* $Id: RequireScanner.java,v 1.3 2008-06-11 14:36:46 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KMTCommentScanner.java
 * License : EPL
@@ -22,16 +22,17 @@ import org.eclipse.jface.text.rules.Token;
 public class RequireScanner extends BufferedRuleBasedScanner {
 
 	public RequireScanner() {
-		IToken token = new Token ( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.COMMENT_ATTRIBUTE ) );
-		setDefaultReturnToken(token);
 		
-		IToken tokenForRequire1 = new Token( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.COMMENT_ATTRIBUTE) );
+		/*IToken tokenForRequire1 = new Token( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.COMMENT_ATTRIBUTE) );
 		IRule ruleForRequire1 = new EndOfLineRule("require ", tokenForRequire1);
 
 		IToken tokenForRequire2 = new Token( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.COMMENT_ATTRIBUTE) );
 		IRule ruleForRequire2 = new EndOfLineRule("require\t", tokenForRequire2);
         
         setRules( new IRule[] {ruleForRequire1, ruleForRequire2} );
+*/
+		IToken token = new Token ( KMTTextAttributeProvider.getTextAttribute( KMTTextAttributeProvider.COMMENT_ATTRIBUTE ) );
+		setDefaultReturnToken(token);
 	}
 	
 }

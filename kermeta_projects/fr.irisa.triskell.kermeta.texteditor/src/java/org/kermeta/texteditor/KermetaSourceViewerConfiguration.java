@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaSourceViewerConfiguration.java,v 1.4 2008-04-28 11:51:22 ftanguy Exp $
+/*$Id: KermetaSourceViewerConfiguration.java,v 1.5 2008-06-11 14:36:46 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaSourceViewerConfiguration.java
 * License : EPL
@@ -62,7 +62,11 @@ public class KermetaSourceViewerConfiguration extends SourceViewerConfiguration 
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = new PresentationReconciler();
 
-		DefaultDamagerRepairer dr = new DefaultDamagerRepairer( getKermetaTagScanner() );
+		DefaultDamagerRepairer dr = new DefaultDamagerRepairer( getKermetaScanner() );
+		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+		
+		dr = new DefaultDamagerRepairer( getKermetaTagScanner() );
 		reconciler.setDamager(dr, KermetaPartitionScanner.TAG);
 		reconciler.setRepairer(dr, KermetaPartitionScanner.TAG);
 		
@@ -89,11 +93,7 @@ public class KermetaSourceViewerConfiguration extends SourceViewerConfiguration 
 		dr = new DefaultDamagerRepairer( getKermetaScanner() );
 		reconciler.setDamager(dr, KermetaPartitionScanner.CLASS_DECLARATION);
 		reconciler.setRepairer(dr, KermetaPartitionScanner.CLASS_DECLARATION);		
-				
-		dr = new DefaultDamagerRepairer( getKermetaScanner() );
-		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
-		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
-
+			
 		return reconciler;
 	}
 	

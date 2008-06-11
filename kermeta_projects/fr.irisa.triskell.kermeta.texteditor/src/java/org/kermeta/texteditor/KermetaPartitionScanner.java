@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaPartitionScanner.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
+/*$Id: KermetaPartitionScanner.java,v 1.3 2008-06-11 14:36:46 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaDocumentPartioner.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.text.rules.EndOfLineRule;
+import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.eclipse.jface.text.rules.IPredicateRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.MultiLineRule;
@@ -66,7 +67,8 @@ public class KermetaPartitionScanner extends RuleBasedPartitionScanner {
          */
         listOfRules.add( new EndOfLineRule("@", tag) );
         listOfRules.add( new MultiLineRule("/**", "*/", tag) );   
-        listOfRules.add( new EndOfLineRule("//", comment) );
+        //listOfRules.add( new EndOfLineRule("//", comment) );
+        listOfRules.add( new SingleLineCommentRule(comment) );
         listOfRules.add( new MultiLineRule("/*", "*/", comment) );
         
  /*       // Rules for operation and blocks
@@ -84,6 +86,72 @@ public class KermetaPartitionScanner extends RuleBasedPartitionScanner {
         
         IPredicateRule[] rules = listOfRules.toArray( new IPredicateRule[listOfRules.size()] );        
         setPredicateRules(rules);  
+	}
+	
+	private class SingleLineCommentRule implements IPredicateRule {
+
+		public IToken evaluate(ICharacterScanner scanner, boolean resume) {
+			IToken returnedToken = Token.UNDEFINED;
+			boolean found = false;
+			int backtrack = 0;
+			
+			int code = scanner.read();
+			backtrack++;
+			if ( code != -1 ) {
+				char[] chars = Character.toChars( code );
+				String s = new String(chars);
+				if ( s.equals("/") ) {
+					code = scanner.read();
+					backtrack++;
+					chars = Character.toChars( code );
+					s = new String(chars);
+					if ( s.equals("/") ) {
+						// Read until we find an EOL
+						boolean ok = true;
+						boolean quoteFound = false;
+						do {
+							code = scanner.read();
+							backtrack++;
+							chars = Character.toChars( code );
+							for ( int i = 0; i < chars.length; i++ ) {
+								if ( chars[i] == '"' ) {
+									if ( quoteFound )
+										quoteFound = false;
+									else
+										quoteFound = true;
+								} else if ( chars[i] == '\n' ) {
+									ok = false;
+									if ( ! quoteFound ) {
+										returnedToken = _token;
+										found = true;
+									}
+								}
+							}
+						} while ( ok );
+					}
+				}
+			}
+			if ( ! found ) {
+				for ( int i = 0; i < backtrack; i++ )
+					scanner.unread();
+			}
+				
+			return returnedToken;
+		}
+
+		public IToken getSuccessToken() {
+			return _token;
+		}
+
+		private IToken _token;
+		
+		public SingleLineCommentRule(IToken token) {
+			_token = token;
+		}
+		
+		public IToken evaluate(ICharacterScanner scanner) {
+			return evaluate(scanner, true);
+		}
 	}
 	
 }

@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaSourceViewer.java,v 1.1 2007-12-17 14:05:08 ftanguy Exp $
+/*$Id: KermetaSourceViewer.java,v 1.2 2008-06-11 14:36:46 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaSourceViewer.java
 * License : EPL
@@ -12,32 +12,18 @@
 
 package org.kermeta.texteditor;
 
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.ITextInputListener;
-import org.eclipse.jface.text.ITextListener;
-import org.eclipse.jface.text.TextEvent;
-import org.eclipse.jface.text.TextSelection;
-import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IOverviewRuler;
 import org.eclipse.jface.text.source.IVerticalRuler;
-import org.eclipse.jface.text.source.SourceViewer;
-import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.widgets.Composite;
 
 public class KermetaSourceViewer extends ProjectionViewer {
-
-	/*private IDocument oldDocument = null;
-	
-	public IDocument getOldDocument() {
-		return oldDocument;
-	}*/
 	
 	public KermetaSourceViewer(Composite parent, IVerticalRuler ruler, IOverviewRuler overviewRuler, boolean showsAnnotationOverview, int styles) {
 		super(parent, ruler, overviewRuler, showsAnnotationOverview, styles);
 	}
 	
-	@Override
+/*	@Override
 	public void configure(SourceViewerConfiguration configuration) {
 		super.configure(configuration);
 		addTextListener( new ITextListener() {
@@ -55,16 +41,8 @@ public class KermetaSourceViewer extends ProjectionViewer {
 				}
 			}
 		});
-		
-	/*	addTextInputListener( new ITextInputListener() {
-			public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
-				oldDocument = oldInput;
-			}
-			public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
-				
-			}
-		});*/
-	}
+
+	}*/
 }
 
 
