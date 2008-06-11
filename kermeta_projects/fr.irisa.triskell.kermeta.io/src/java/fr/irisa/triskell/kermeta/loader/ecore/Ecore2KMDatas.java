@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMDatas.java,v 1.6 2008-06-11 07:21:24 gperroui Exp $
+/*$Id: Ecore2KMDatas.java,v 1.7 2008-06-11 12:14:14 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMHelper.java
 * License : EPL
@@ -204,7 +204,9 @@ public class Ecore2KMDatas {
 		primitive_types_mapping.put("Object", 				"kermeta::standard::Object");
 		primitive_types_mapping.put("java.lang.Object", 	"kermeta::standard::Object");
 		primitive_types_mapping.put("java.lang.Double", 	"kermeta::standard::Real");
-		primitive_types_mapping.put("java.lang.Float", 	"kermeta::standard::Real");
+		primitive_types_mapping.put("double", 	            "kermeta::standard::Real");
+		primitive_types_mapping.put("java.lang.Float", 	    "kermeta::standard::Real");
+		primitive_types_mapping.put("float", 	            "kermeta::standard::Real");
 		primitive_types_mapping.put("org.eclipse.emf.ecore.util.FeatureMap$Entry", 	"kermeta::ecore::EFeatureMapEntry");		
 	}
 
