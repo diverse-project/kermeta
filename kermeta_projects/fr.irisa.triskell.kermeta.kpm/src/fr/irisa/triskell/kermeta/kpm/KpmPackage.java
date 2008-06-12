@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackage.java,v 1.13 2008-05-28 09:26:14 ftanguy Exp $
+ * $Id: KpmPackage.java,v 1.14 2008-06-12 07:13:49 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -42,7 +42,7 @@ public interface KpmPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://kpm";
+	String eNS_URI = "http://www.kermeta.org/kpm";
 
 	/**
 	 * The package namespace name.

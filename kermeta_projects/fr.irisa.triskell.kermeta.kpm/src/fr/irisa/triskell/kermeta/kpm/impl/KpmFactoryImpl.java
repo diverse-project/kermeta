@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactoryImpl.java,v 1.10 2008-05-28 09:26:13 ftanguy Exp $
+ * $Id: KpmFactoryImpl.java,v 1.11 2008-06-12 07:13:50 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import fr.irisa.triskell.kermeta.kpm.*;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -49,7 +50,7 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 */
 	public static KpmFactory init() {
 		try {
-			KpmFactory theKpmFactory = (KpmFactory)EPackage.Registry.INSTANCE.getEFactory("http://kpm"); 
+			KpmFactory theKpmFactory = (KpmFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kpm"); 
 			if (theKpmFactory != null) {
 				return theKpmFactory;
 			}

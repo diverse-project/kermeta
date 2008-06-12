@@ -5,7 +5,7 @@ org.eclipse.emf.examples.generator.validator plug-in to illustrate how EMF's
 code generator can be extended.
 This can be disabled with -vmargs -Dorg.eclipse.emf.examples.generator.validator=false.
 
-Package kpm <http://kpm>
+Package kpm <http://www.kermeta.org/kpm>
 
   Class Rule
     Reference event : Event<<1..1>>

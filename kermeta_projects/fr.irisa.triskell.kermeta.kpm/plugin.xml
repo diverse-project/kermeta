@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.20 2008-06-02 06:45:22 ftanguy Exp $
+ $Id: plugin.xml,v 1.21 2008-06-12 07:13:50 ftanguy Exp $
 -->
 
 <plugin>
@@ -15,7 +15,7 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://kpm" 
+       uri = "http://www.kermeta.org/kpm" 
        class = "fr.irisa.triskell.kermeta.kpm.KpmPackage"
        genModel = "model/kpm.genmodel" /> 
   </extension>
