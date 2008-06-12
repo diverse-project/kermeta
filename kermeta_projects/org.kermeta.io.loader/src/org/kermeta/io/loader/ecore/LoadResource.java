@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadResource.java,v 1.4 2008-03-05 07:53:28 ftanguy Exp $
+/*$Id: LoadResource.java,v 1.5 2008-06-12 07:12:52 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	LoadResource.java
 * License : EPL
@@ -57,7 +57,8 @@ public class LoadResource extends EcoreLoadingAction {
 				}*/
 				datas.contents.addAll( resource.getContents() );
 			} catch (IOException e) {
-				e.printStackTrace();
+				datas.getKermetaUnit().error("The file " + datas.getKermetaUnit().getUri() + " does not exist." );
+				//e.printStackTrace();
 			}
 		}
 	}
