@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.21 2008-06-11 13:46:51 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.22 2008-06-12 10:18:46 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -15,11 +15,13 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 require "CreateEcoreModelElement.kmt"
 require "../common/TraceStructure.kmt"
 require "../helper/KM2EcoreHelper.kmt"
+require "../common/Exception.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using ecore
 using km2ecore
 using km2ecore::helper::kermeta
+using km2ecore::common::exception
 
 aspect class Object {
 	operation applyPass1(context : KM2EcoreContext) is do
@@ -156,6 +158,8 @@ aspect class ClassDefinition {
 						//TODO Compile with Simk
 					end
 				}
+			else
+				raise UndefinedValueTypeInstanceClassNameException.new()
 			end
 		else
 			// Creating the associated ecore class
@@ -176,6 +180,10 @@ aspect class ClassDefinition {
 					end
 				end
 			}
+		end
+		
+		rescue (e : UndefinedValueTypeInstanceClassNameException) do
+			stdio.errorln("The class definition: " + self.qualifiedName + " is a ValueType, but the tag: @EMF_instanceClassName has not been correctly setted, please check this one in the *.km file that you try to load.")
 		end
 	end
 	

@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.22 2008-06-11 13:46:51 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.23 2008-06-12 10:18:46 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -81,7 +81,7 @@ aspect class Class {
 					if tpb.type.isInstanceOf(PrimitiveType) then
 						var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 						
-						if cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
+						if tpb.type.getEMFEDataTypeInstanceClassName()!="" then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
 							typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
 						else
 						
@@ -204,7 +204,7 @@ class LinkSetterForTypedElement {
 							if tpb.type.isInstanceOf(PrimitiveType) then
 								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 								
-								if cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
+								if tpb.type.getEMFEDataTypeInstanceClassName()!="" then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
 									typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
 								else
 								
@@ -226,7 +226,7 @@ class LinkSetterForTypedElement {
 				if element.type.isInstanceOf(PrimitiveType) then
 					var cd : ClassDefinition init element.type.getClassFromPrimitiveType().getClassDefinition()
 					
-					if cd.isValueType() and (element.type.getEMFInstanceClassName()!="") then
+					if element.type.getEMFEDataTypeInstanceClassName()!="" then //cd.isValueType() and (element.type.getEMFInstanceClassName()!="") then
 						ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement
 					else
 					

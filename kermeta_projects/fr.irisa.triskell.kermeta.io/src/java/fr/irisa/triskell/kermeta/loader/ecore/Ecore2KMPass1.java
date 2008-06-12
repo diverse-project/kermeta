@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.31 2008-06-11 09:39:29 ftanguy Exp $
+/*$Id: Ecore2KMPass1.java,v 1.32 2008-06-12 10:19:04 cfaucher Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -183,7 +183,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	    	if ( datas.getPrimitiveType(node) == null ) {
 	    		currentPrimitiveType = KermetaModelHelper.PrimitiveType.create( node.getName() );
 	    		if ( node.getInstanceClassName() != null ) {
-	    			Tag t = KermetaModelHelper.Tag.create("EMF_instanceClassName", node.getInstanceClassName());
+	    			Tag t = KermetaModelHelper.Tag.create("EMF_EDataType_instanceClassName", node.getInstanceClassName());
 	    			currentPrimitiveType.getOwnedTags().add(t);
 	    		}
 	    		kermetaUnit.addTypeDefinition(currentPrimitiveType, getCurrentPackage());

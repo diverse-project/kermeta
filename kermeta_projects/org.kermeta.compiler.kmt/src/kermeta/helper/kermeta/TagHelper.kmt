@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.6 2008-06-11 13:46:51 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.7 2008-06-12 10:18:46 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -42,10 +42,17 @@ aspect class Object {
 	end
 	
 	/**
-	 * Get the instanceClassName of a ClassDefinition
+	 * Get the instanceClassName
 	 */
 	operation getEMFInstanceClassName() : String is do
 		result := getUniqueTagValue("EMF_instanceClassName")
+	end
+	
+	/**
+	 * Get the EDataType_instanceClassName
+	 */
+	operation getEMFEDataTypeInstanceClassName() : String is do
+		result := getUniqueTagValue("EMF_EDataType_instanceClassName")
 	end
 	
 	/**

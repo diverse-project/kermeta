@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.20 2008-06-11 15:39:30 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.21 2008-06-12 10:18:46 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -101,7 +101,7 @@ aspect class Package {
 		if not self.uri.isVoid() and self.uri != "" then
 			ecorePackage.nsURI := self.uri
 		else
-			raise UndefinedUriEPackageException.new
+			raise UndefinedUriEPackageException.new()
 		end
 		
 		// In order complete the EMF checking, we have to set the nsPrefix to "", void is not enough
@@ -130,14 +130,14 @@ aspect class PrimitiveType {
 		
 		// by default
 		eModelElement.instanceClassName := "java.lang.Object"
-		if self.getClassFromPrimitiveType().isInstanceOf(Class) then
+//		if self.getClassFromPrimitiveType().isInstanceOf(Class) then
 
-			if self.getClassFromPrimitiveType().isValueType() then
-				var instanceClassName : String init self.getClassFromPrimitiveType().asType(Class).typeDefinition.getEMFInstanceClassName()
+			//if self.getClassFromPrimitiveType().isValueType() then
+				var instanceClassName : String init self.getEMFEDataTypeInstanceClassName()
 				if instanceClassName != "" then
 					eModelElement.instanceClassName := instanceClassName
 				end				
-			end
+			//end
 			
 			var qualifiedName : String init self.getClassFromPrimitiveType().asType(Class).typeDefinition.qualifiedName
 			eModelElement.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), qualifiedName))
@@ -146,7 +146,7 @@ aspect class PrimitiveType {
 				eModelElement.instanceClassName := qualifiedName.replace("::", ".")
 			end
 			
-		end
+//		end
 		
 		result := eModelElement
 	end
@@ -192,9 +192,9 @@ aspect class ClassDefinition {
 		ecoreClass.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		ecoreClass.~abstract := self.isAbstract
 		
-		if not (self.getEMFInstanceClassName() == "") then
+		/*if not (self.getEMFInstanceClassName() == "") then
 			ecoreClass.instanceClassName := self.getEMFInstanceClassName()
-		end
+		end*/
 		result := ecoreClass
 	end
 }
@@ -264,7 +264,7 @@ aspect class Property {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EStructuralFeature is do
 		var ecoreStructuralFeature : EStructuralFeature
 		var current_type : Type init self.type.asType(Type)
-		//stdio.writeln("Create Property: " + self.name + " - " + current_type.toString() + " - " + current_type.getTypeName())
+		//stdio.writeln("Create Property: " + self.name) + " - " + current_type.toString() + " - " + current_type.getTypeName())
 		if current_type.isValueType() or current_type.isEnumeration() then
 			//stdio.writeln("Create Property2: " + self.name + " " + self.type.getTypeName())
 			ecoreStructuralFeature := EAttribute.new
