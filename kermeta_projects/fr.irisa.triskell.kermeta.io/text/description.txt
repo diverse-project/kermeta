@@ -5,7 +5,7 @@ org.eclipse.emf.examples.generator.validator plug-in to illustrate how EMF's
 code generator can be extended.
 This can be disabled with -vmargs -Dorg.eclipse.emf.examples.generator.validator=false.
 
-Package io <http://io>
+Package io <http://www.kermeta.org/io>
 
   Class KermetaUnit
     Reference storer : KermetaUnitStorer<<1..1>>

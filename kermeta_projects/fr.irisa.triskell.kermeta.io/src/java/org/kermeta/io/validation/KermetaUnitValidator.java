@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitValidator.java,v 1.10 2008-04-28 11:50:11 ftanguy Exp $
+ * $Id: KermetaUnitValidator.java,v 1.11 2008-06-12 07:18:49 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 
@@ -13,6 +13,8 @@ import org.kermeta.io.IBuildingState;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.KermetaUnitStorer;
+import org.kermeta.io.Message;
+import org.kermeta.io.PackageEntry;
 import org.kermeta.io.TypeDefinitionCache;
 
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
@@ -53,6 +55,8 @@ public interface KermetaUnitValidator {
 	boolean validateKermetaUnitRequires(EList<KermetaUnitRequire> value);
 
 	boolean validateLocked(boolean value);
+
+	boolean validateBaseAspects(Map<TypeDefinition, EList<TypeDefinition>> value);
 
 	boolean validateKermetaUnitRequired(EList<KermetaUnit> value);
 }

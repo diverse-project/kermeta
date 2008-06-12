@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackage.java,v 1.12 2008-04-28 11:50:15 ftanguy Exp $
+ * $Id: IoPackage.java,v 1.13 2008-06-12 07:18:50 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -42,7 +42,7 @@ public interface IoPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://io";
+	String eNS_URI = "http://www.kermeta.org/io";
 
 	/**
 	 * The package namespace name.

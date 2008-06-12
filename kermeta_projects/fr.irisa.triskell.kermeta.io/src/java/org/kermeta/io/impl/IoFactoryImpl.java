@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.13 2008-04-28 11:50:12 ftanguy Exp $
+ * $Id: IoFactoryImpl.java,v 1.14 2008-06-12 07:18:49 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -50,7 +50,7 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 */
 	public static IoFactory init() {
 		try {
-			IoFactory theIoFactory = (IoFactory)EPackage.Registry.INSTANCE.getEFactory("http://io"); 
+			IoFactory theIoFactory = (IoFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/io"); 
 			if (theIoFactory != null) {
 				return theIoFactory;
 			}
