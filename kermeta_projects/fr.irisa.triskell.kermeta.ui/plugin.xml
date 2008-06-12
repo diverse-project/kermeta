@@ -205,8 +205,8 @@
     <extension
           point="org.eclipse.ui.editorActions">
        <editorContribution
-             id="fr.irisa.triskell.kermeta.ui.editorContribution2"
-             targetID="org.eclipse.ui.editors.text.texteditor">
+             id="org.kermeta.ui.text.editor.check"
+             targetID="org.kermeta.ui.editors.kmt.editor">
           <action
                 class="fr.irisa.triskell.kermeta.actions.CheckFileAction"
                 icon="images/refresh.png"
