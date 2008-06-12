@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIO.java,v 1.13 2008-05-20 07:11:59 ftanguy Exp $
+/* $Id: SimpleFileIO.java,v 1.14 2008-06-12 07:17:54 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -41,16 +41,20 @@ public class SimpleFileIO {
     {
 		java.lang.String fname = getOSFileLocation(String.getValue(filename));
 		File file = new File(fname);
-		if (file.exists()) return filename.getFactory().getMemory().trueINSTANCE;
-		else return filename.getFactory().getMemory().falseINSTANCE;
+		if ( file.exists() ) 
+			return filename.getFactory().getMemory().trueINSTANCE;
+		else 
+			return filename.getFactory().getMemory().falseINSTANCE;
     }
 	
 	public static RuntimeObject fileIsDirectory(RuntimeObject filename)
     {
 		java.lang.String fname = getOSFileLocation(String.getValue(filename));
 		File file = new File(fname);
-		if (file.isDirectory()) return filename.getFactory().getMemory().trueINSTANCE;
-		else return filename.getFactory().getMemory().falseINSTANCE;
+		if (file.isDirectory()) 
+			return filename.getFactory().getMemory().trueINSTANCE;
+		else 
+			return filename.getFactory().getMemory().falseINSTANCE;
     }
 	
 	

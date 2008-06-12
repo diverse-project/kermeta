@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.18 2008-04-28 11:50:58 ftanguy Exp $
+/* $Id: RuntimeMemory.java,v 1.19 2008-06-12 07:17:55 ftanguy Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -10,12 +10,11 @@
 package fr.irisa.triskell.kermeta.builder;
 
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import org.kermeta.interpreter.InterpreterPlugin;
 import org.kermeta.io.KermetaUnit;
 
-import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
+import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.launcher.AbstractKInterpreter;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -84,21 +83,16 @@ public class RuntimeMemory {
         memoryLoader.loadKCoreRuntimeObject(obj);
 	}
     
-    public RuntimeObject getRuntimeObjectForFObject(fr.irisa.triskell.kermeta.language.structure.Object object)
-    {
+    public RuntimeObject getRuntimeObjectForFObject(Object object) {
         return memoryLoader.getRuntimeObjectForFObject(object);
     }
     
-    public RuntimeObject getRuntimeObjectByOID(long oid)
-    {
-    	Iterator<RuntimeObject> it = getRuntimeObjects().values().iterator();
-    	RuntimeObject result = null;
-    	while (it.hasNext() && result == null)
-    	{
-    		RuntimeObject next = (RuntimeObject)it.next();
-    		if (next.getOId() == oid) result = next;
+    public RuntimeObject getRuntimeObjectByOID(long oid) {
+    	for ( RuntimeObject next : getRuntimeObjects().values() ) {
+    		if ( next.getOId() == oid ) 
+    			return next;
     	}
-    	return result;
+    	return null;
     }
     
     public int getNumberOfObjectCached() {
@@ -108,18 +102,15 @@ public class RuntimeMemory {
     /** 
      * @return the hashtable of runtime objects available in memory 
      */
-    public Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, RuntimeObject> getRuntimeObjects()
-    {
+    public Hashtable<Object, RuntimeObject> getRuntimeObjects() {
         return memoryLoader.getRuntimeObjects();
     }
     
-    public void clearFObjectFromCache(fr.irisa.triskell.kermeta.language.structure.Object object)
-    {
+    public void clearFObjectFromCache(Object object) {
         memoryLoader.clearFObjectFromCache(object);
     }
     
-    public RuntimeObject getTypeDefinitionAsRuntimeObject(String qname) 
-    {
+    public RuntimeObject getTypeDefinitionAsRuntimeObject(String qname)  {
         return memoryLoader.getTypeDefinitionFromQualifiedName(qname);
     }
     
@@ -131,21 +122,17 @@ public class RuntimeMemory {
      * 
 	 * @param interpreterbuilder The kermeta unit of the interpreter.kmt file
      */
-    protected void createSingletons(KermetaUnit interpreterbuilder)
-    {
+    protected void createSingletons(KermetaUnit interpreterbuilder) {
 	    //initialize TRUE and FALSE
         trueINSTANCE = new RuntimeObjectImpl(roFactory, null);
-        falseINSTANCE =  new RuntimeObjectImpl(roFactory, null);
-        
-        
+        falseINSTANCE =  new RuntimeObjectImpl(roFactory, null);      
+
 		Boolean.createTrue(roFactory, trueINSTANCE);
 		Boolean.createFalse(roFactory, falseINSTANCE);
 	    
 		// Create the void Instance (should be a singleton)
 	    RuntimeObject roVoidType = getTypeDefinitionAsRuntimeObject("kermeta::standard::Void");
 	    voidINSTANCE=roFactory.createObjectFromClassDefinition(roVoidType);
-	    
-	   
 	    
 	    RuntimeObject stdIOmetaClass= getTypeDefinitionAsRuntimeObject("kermeta::io::StdIO");
 	    stdioINSTANCE=roFactory.createObjectFromClassDefinition(stdIOmetaClass);
@@ -162,8 +149,8 @@ public class RuntimeMemory {
      * @return the runtime object factory
      */
     public RuntimeObjectFactory getROFactory() {
-        return this.roFactory;    }
-
+        return this.roFactory;    
+    }
     
     public KermetaUnit getUnit() {
         return unit;

@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.67 2008-05-28 13:36:26 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.68 2008-06-12 07:17:54 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -316,7 +316,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     {	
     	// run in a job
     	LoaderJob myJob = new LoaderJob("Kermeta is loading model " + getUriAsString(), resRO, this);
-		myJob.schedule();
+    	myJob.schedule();
 		// must wait before continuing
 		try {
 			myJob.join();

@@ -1,4 +1,4 @@
-/* $Id: kunit.java,v 1.3 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: kunit.java,v 1.4 2008-06-12 07:17:54 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.framework
  * File       : kunit.java
  * License    : EPL
@@ -27,7 +27,6 @@ public class kunit extends Assert{
 	 * It raises an assertion if the condition is not true
 	 */
 	public static void assertTrue(RuntimeObject messageRO, RuntimeObject condition) {
-	    
 		assertTrue(String.getValue(messageRO), Boolean.getValue(condition) );
 	}
 	

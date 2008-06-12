@@ -1,4 +1,4 @@
-/*$Id: LoaderJob.java,v 1.4 2008-04-30 11:40:50 dvojtise Exp $
+/*$Id: LoaderJob.java,v 1.5 2008-06-12 07:17:54 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	LoaderJob.java
 * License : EPL
@@ -55,5 +55,5 @@ public class LoaderJob extends Job {
 			//return new Status(IStatus.ERROR, "fr.irisa.triskell.kermeta.interpreter", "model not loaded", e);
 		}
 	}
-
+	
 }

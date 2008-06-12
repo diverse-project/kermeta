@@ -1,4 +1,4 @@
-/* $Id: KCoreRuntimeObject.java,v 1.7 2007-10-15 07:13:59 barais Exp $
+/* $Id: KCoreRuntimeObject.java,v 1.8 2008-06-12 07:17:55 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KCoreRuntimeObject.java
 * License : EPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.Hashtable;
 
+import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 
@@ -24,18 +25,18 @@ public class KCoreRuntimeObject extends RuntimeObjectImpl {
 
     private boolean loaded = false;
     
-    private fr.irisa.triskell.kermeta.language.structure.Object kcoreObject;
+    private Object _kcoreObject;
     
     /**
      * @param factory
      * @param metaclass
      */
-    public KCoreRuntimeObject(RuntimeObjectFactory factory, RuntimeObject metaclass, fr.irisa.triskell.kermeta.language.structure.Object kcoreObject) {
+    public KCoreRuntimeObject(RuntimeObjectFactory factory, RuntimeObject metaclass, Object kcoreObject) {
         super(factory, metaclass);
-        this.kcoreObject = kcoreObject;
-        super.setKCoreObject(kcoreObject);
+        _kcoreObject = kcoreObject;
+        setKCoreObject(kcoreObject);
         // in order to serialise model that have dependencies to the framework, set the saved emf object to the one used to load it
-        super.setR2eEmfObject(kcoreObject);
+        setR2eEmfObject(kcoreObject);
     }
     
     private void load() {
@@ -64,8 +65,8 @@ public class KCoreRuntimeObject extends RuntimeObjectImpl {
         if (!loaded) load();
         return super.isFrozen();
     }
-    public fr.irisa.triskell.kermeta.language.structure.Object getKcoreObject() {
-        return kcoreObject;
+    public Object getKcoreObject() {
+        return _kcoreObject;
     }
     public boolean isLoaded() {
         return loaded;

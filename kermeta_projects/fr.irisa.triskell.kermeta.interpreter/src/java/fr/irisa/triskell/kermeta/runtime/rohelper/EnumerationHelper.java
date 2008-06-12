@@ -1,11 +1,9 @@
-/* $Id: EnumerationHelper.java,v 1.3 2007-08-08 13:00:13 dvojtise Exp $ 
+/* $Id: EnumerationHelper.java,v 1.4 2008-06-12 07:17:55 ftanguy Exp $ 
  * helper on the Kermeta base type Enumeration 
  */
 
 package fr.irisa.triskell.kermeta.runtime.rohelper;
 
-
-import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
@@ -21,10 +19,8 @@ public class EnumerationHelper {
 	 */
 	public static RuntimeObject getLiteral(RuntimeObject roEnum, java.lang.String literalName) {
 		RuntimeObject roEnumLitCollection = roEnum.getProperties().get("ownedLiteral");
-		Iterator<RuntimeObject> it = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(roEnumLitCollection).iterator();
 		RuntimeObject roEnumLit=null;
-		while(it.hasNext()){
-			RuntimeObject roLit = it.next();
+		for ( RuntimeObject roLit : fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(roEnumLitCollection) ) {
 			java.lang.String litName = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(roLit.getProperties().get("name"));
 			if(litName.equals(literalName)){
 				roEnumLit = roLit;
