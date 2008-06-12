@@ -35,7 +35,9 @@ Export-Package: fr.irisa.triskell.kermeta.builder,
  fr.irisa.triskell.kermeta.runtime.rohelper,
  fr.irisa.triskell.kermeta.runtime.testing,
  fr.irisa.triskell.utils.argumentsreader,
+ org.kermeta.interpreter,
  org.kermeta.interpreter.api,
+ org.kermeta.interpreter.exceptions,
  org.kermeta.interpreter.helper
 Bundle-Vendor: IRISA/INRIA
 Bundle-Activator: org.kermeta.interpreter.InterpreterPlugin
