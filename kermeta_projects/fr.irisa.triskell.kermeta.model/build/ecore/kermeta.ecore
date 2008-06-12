@@ -15,36 +15,6 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Contains all the classes that define the behavior of Kermeta (i.e the model representation&#xA;of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta &#xA;metamodel, viewed as a model.&#xA;You can also find some information about the behavior package here : &lt;a href=&quot;http://www.kermeta.org/documents/manual/html.single&quot;>KermetaManual&lt;/a>&#xA;&lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_package.png&quot;>&#xA;&lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_visitable_package.png&quot;>"/>
       </eAnnotations>
-      <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="//language/behavior/Expression">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Assignment is the model-element representation of the assignment statement &lt;code>x := y&lt;/code>&#xA;&lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png&quot;/>"/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//language/behavior/CallExpression" containment="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Target of the assignment, as a CallExpression"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//language/behavior/Expression" containment="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Value to be assigned, as a KerMeta expression"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCast" eType="//language/structure/Boolean">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Boolean stating whether current assignment corresponds to a cast operation "/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="//language/structure/Object //language/structure/TypeContainer">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The base class for every entity used to define a behavior in operation body."/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="staticType" eType="//language/structure/Type">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Type of the Expression (set by type checking)"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CallExpression" abstract="true" eSuperTypes="//language/behavior/Expression">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Any callable expression inherits this class, e.g : &#xA;  - variable call&#xA;  - feature call ( &lt;code>a.b&lt;/code> : b is a feature call)&#xA;&#xA;&lt;img alt=&quot;&quot;  height=&quot;90%&quot; width=&quot;90%&quot;  src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png&quot; />"/>
@@ -65,18 +35,13 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="//language/behavior/Expression">
+      <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="//language/structure/TypeContainer //language/structure/Object">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Block is the model-element representation for the &lt;code>do...end&lt;/code> block."/>
+          <details key="documentation" value="The base class for every entity used to define a behavior in operation body."/>
         </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="statement" upperBound="-1" eType="//language/behavior/Expression" containment="true">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="staticType" eType="//language/structure/Type">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="List of statements composing the block"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" upperBound="-1" eType="//language/behavior/Rescue" containment="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="List of rescues defined for the block"/>
+            <details key="documentation" value="Type of the Expression (set by type checking)"/>
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
@@ -134,6 +99,41 @@
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="CallValue refers to the use of the &lt;code>value&lt;/code> reserved keyword. This keyword is&#xA;only used in the body of the &lt;code>setter&lt;/code> part of derived properties."/>
         </eAnnotations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="//language/behavior/Expression">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Assignment is the model-element representation of the assignment statement &lt;code>x := y&lt;/code>&#xA;&lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png&quot;/>"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//language/behavior/CallExpression" containment="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Target of the assignment, as a CallExpression"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//language/behavior/Expression" containment="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Value to be assigned, as a KerMeta expression"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCast" eType="//language/structure/Boolean">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Boolean stating whether current assignment corresponds to a cast operation "/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="//language/behavior/Expression">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Block is the model-element representation for the &lt;code>do...end&lt;/code> block."/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="statement" upperBound="-1" eType="//language/behavior/Expression" containment="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="List of statements composing the block"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" upperBound="-1" eType="//language/behavior/Rescue" containment="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="List of rescues defined for the block"/>
+          </eAnnotations>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Conditional" eSuperTypes="//language/behavior/Expression">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -347,74 +347,6 @@
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="kermeta::standard::String"/>
       <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="kermeta::standard::Boolean"/>
-      <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//language/structure/ParameterizedType">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
-        </eAnnotations>
-        <eOperations name="_new" eType="//language/structure/Object"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="//language/structure/Property" changeable="false" derived="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1" eType="//language/structure/Operation" changeable="false" derived="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Returns the Operations owned by the ClassDefinition of this Class."/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1" eType="//language/structure/Class" changeable="false" derived="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Returns the Classes of which the ClassDefinition of this Class inherits."/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//language/structure/Boolean" changeable="false" defaultValueLiteral="false" derived="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Returns a Boolean stating whether ClassDefinition of this Class is abstract."/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//language/structure/String" changeable="false" derived="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Returns the name of the ClassDefinition of this Class"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Object">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Object definition: all entities of Kermeta metamodel explicitly inherit from Object"/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="tag" upperBound="-1" eType="//language/structure/Tag" eOpposite="//language/structure/Tag/object">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="An Object can be tagged by a Tag. &#xA;They are typically used to put comments/documentation on the object"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTags" upperBound="-1" eType="//language/structure/Tag" containment="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="An object can contains a Tag.  &#xA;Be careful, owning a tag doesn't means that the tag applies to the Object&#xA;To know which Tags apply to the object use the &quot;tag&quot; reference"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="//language/structure/Object">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Is the holder of a set of model elements (Object) that are compatible with the ModelType that has &#xA;instantiated this Model."/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1" eType="//language/structure/Object" changeable="false">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Contents of this model..."/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="//language/structure/Type //language/structure/TypeDefinition">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Type of a model, consisting of a set of included type definitions"/>
-        </eAnnotations>
-        <eOperations name="_new" eType="//language/structure/Model"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="includedTypeDefinition" upperBound="-1" eType="//language/structure/TypeDefinition">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="To be written"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="kermeta::standard::Integer"/>
       <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="//language/structure/MultiplicityElement">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Every one knows what an operation is."/>
@@ -573,6 +505,22 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Object">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Object definition: all entities of Kermeta metamodel explicitly inherit from Object"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tag" upperBound="-1" eType="//language/structure/Tag" eOpposite="//language/structure/Tag/object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="An Object can be tagged by a Tag. &#xA;They are typically used to put comments/documentation on the object"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTags" upperBound="-1" eType="//language/structure/Tag" containment="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="An object can contains a Tag.  &#xA;Be careful, owning a tag doesn't means that the tag applies to the Object&#xA;To know which Tags apply to the object use the &quot;tag&quot; reference"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="kermeta::standard::Integer"/>
       <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" eSuperTypes="//language/structure/TypedElement">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value=" Model elements with a multiplicity [lower..upper] inherit this class"/>
@@ -606,6 +554,36 @@
           <details key="documentation" value="Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit&#xA;this class)"/>
         </eAnnotations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="//language/structure/Boolean"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//language/structure/ParameterizedType">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="//language/structure/Property" changeable="false" derived="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1" eType="//language/structure/Operation" changeable="false" derived="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Returns the Operations owned by the ClassDefinition of this Class."/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1" eType="//language/structure/Class" changeable="false" derived="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Returns the Classes of which the ClassDefinition of this Class inherits."/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//language/structure/Boolean" changeable="false" defaultValueLiteral="false" derived="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Returns a Boolean stating whether ClassDefinition of this Class is abstract."/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//language/structure/String" changeable="false" derived="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Returns the name of the ClassDefinition of this Class"/>
+          </eAnnotations>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="//language/structure/Type //language/structure/TypeDefinition">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -787,6 +765,101 @@
         <eLiterals name="pre" value="1"/>
         <eLiterals name="post" value="2"/>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GenericTypeDefinition" abstract="true" eSuperTypes="//language/structure/TypeDefinition">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Abstracts the definition of generic type definitions (i.e. type definitions that&#xA;can be parameterized), namely, for ClassDefinition and ModelTypeDefinition."/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1" eType="//language/structure/TypeVariable" containment="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Type variables defined for the GenericTypeDefinition"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" abstract="true" eSuperTypes="//language/structure/Type">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Abstraction for Parameterized types, namely, Class and ModelType"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTypeBinding" upperBound="-1" eType="//language/structure/TypeVariableBinding" containment="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="To be written"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" upperBound="-1" eType="//language/structure/TypeVariableBinding" containment="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Bindings between type variables and provided types "/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinition" lowerBound="1" eType="//language/structure/GenericTypeDefinition">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Definition of the Type"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" abstract="true" eSuperTypes="//language/structure/TypeContainer //language/structure/Type //language/structure/NamedElement">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Definition of a type variable for generic types :  &#xA;in class definition &lt;pre>class AClass&lt;X,Y> {}&lt;/pre>, X and Y are type variables."/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="//language/structure/Type">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Reference to the supertype, if any"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable" eSuperTypes="//language/structure/TypeVariable">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
+        </eAnnotations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="//language/structure/Type //language/structure/TypeDefinition">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Type of a model, consisting of a set of included type definitions"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="includedTypeDefinition" upperBound="-1" eType="//language/structure/TypeDefinition">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="To be written"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable" eSuperTypes="//language/structure/TypeVariable">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="virtualType" upperBound="-1" eType="//language/structure/VirtualType" containment="true" eOpposite="//language/structure/VirtualType/modelType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="To be written"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="VirtualType" eSuperTypes="//language/structure/ObjectTypeVariable">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="To be written"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="classDefinition" lowerBound="1" eType="//language/structure/ClassDefinition">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="To be written"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="modelType" lowerBound="1" eType="//language/structure/ModelTypeVariable" eOpposite="//language/structure/ModelTypeVariable/virtualType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="To be written"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" upperBound="-1" eType="//language/structure/TypeVariableBinding" containment="true">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="To be written"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="//language/structure/Object">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Is the holder of a set of model elements (Object) that are compatible with the ModelType that has &#xA;instantiated this Model."/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1" eType="//language/structure/Object" changeable="false">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Contents of this model..."/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit" eSuperTypes="//language/structure/Object">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The modeling unit is the root of any kermeta model. It contains packages, requires and usings.&#xA;It also reference others modeling unit."/>
@@ -847,81 +920,6 @@
           <details key="documentation" value="Filter is the class that represent a filter on a ModelingUnit.&#xA;the qualifiedName represent the beginning of the matched names"/>
         </eAnnotations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="//language/structure/String">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="To be written"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="GenericTypeDefinition" abstract="true" eSuperTypes="//language/structure/TypeDefinition">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Abstracts the definition of generic type definitions (i.e. type definitions that&#xA;can be parameterized), namely, for ClassDefinition and ModelTypeDefinition."/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1" eType="//language/structure/TypeVariable" containment="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Type variables defined for the GenericTypeDefinition"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" abstract="true" eSuperTypes="//language/structure/Type">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Abstraction for Parameterized types, namely, Class and ModelType"/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTypeBinding" upperBound="-1" eType="//language/structure/TypeVariableBinding" containment="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="To be written"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" upperBound="-1" eType="//language/structure/TypeVariableBinding" containment="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Bindings between type variables and provided types "/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinition" lowerBound="1" eType="//language/structure/GenericTypeDefinition">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Definition of the Type"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" abstract="true" eSuperTypes="//language/structure/TypeContainer //language/structure/Type //language/structure/NamedElement">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Definition of a type variable for generic types :  &#xA;in class definition &lt;pre>class AClass&lt;X,Y> {}&lt;/pre>, X and Y are type variables."/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="//language/structure/Type">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Reference to the supertype, if any"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable" eSuperTypes="//language/structure/TypeVariable">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="To be written"/>
-        </eAnnotations>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable" eSuperTypes="//language/structure/TypeVariable">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="To be written"/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="virtualType" upperBound="-1" eType="//language/structure/VirtualType" containment="true" eOpposite="//language/structure/VirtualType/modelType">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="To be written"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="VirtualType" eSuperTypes="//language/structure/ObjectTypeVariable">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="To be written"/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="classDefinition" lowerBound="1" eType="//language/structure/ClassDefinition">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="To be written"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="modelType" lowerBound="1" eType="//language/structure/ModelTypeVariable" eOpposite="//language/structure/ModelTypeVariable/virtualType">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="To be written"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" upperBound="-1" eType="//language/structure/TypeVariableBinding" containment="true">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="To be written"/>
           </eAnnotations>
