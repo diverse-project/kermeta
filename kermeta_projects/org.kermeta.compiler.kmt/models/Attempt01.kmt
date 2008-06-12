@@ -5,9 +5,11 @@
 package comptest2;
 
 require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
 
 //using kermeta::language::structure
 using kermeta::standard
+using ecore
 
 class Main
 {
@@ -100,3 +102,6 @@ class TestString inherits ValueType {
 }
 
 alias MyStringBuffer : kermeta::utils::StringBuffer;
+
+alias MyString : ecore::EString;
+
