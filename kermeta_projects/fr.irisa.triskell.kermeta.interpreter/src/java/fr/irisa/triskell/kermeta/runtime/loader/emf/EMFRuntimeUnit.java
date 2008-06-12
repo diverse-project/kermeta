@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.68 2008-06-12 07:17:54 ftanguy Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.69 2008-06-12 11:56:59 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -316,7 +316,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     {	
     	// run in a job
     	LoaderJob myJob = new LoaderJob("Kermeta is loading model " + getUriAsString(), resRO, this);
-    	myJob.schedule();
+		myJob.schedule();
 		// must wait before continuing
 		try {
 			myJob.join();
@@ -389,10 +389,15 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         	try {
         		this.metaModelResource = this.loadMetaModelAsEcore(this.getMetaModelUri());
         	}
-        	catch (WrappedException e){
+        	catch (WrappedException we){
         		throwKermetaRaisedExceptionOnLoad(
-        		"Error Loading metamodel '" + this.getMetaModelUri() + "' for saving model '" + this.getUriAsString() + "' : " + e.exception().getMessage(), e);
+        		"Error Loading metamodel '" + this.getMetaModelUri() + "' for saving model '" + this.getUriAsString() + "' : " + we.exception().getMessage(), we);
 			}
+        	catch (IllegalArgumentException iae){
+        		// also catch
+        		throwKermetaRaisedExceptionOnLoad(
+                		"Error Loading metamodel '" + this.getMetaModelUri() + "' for saving model '" + this.getUriAsString() + "' : " + iae.getMessage(), iae);
+        	}
         }
         else // if metaModelResource is null 
         {
@@ -869,7 +874,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         	}
         	catch (WrappedException e){
         		throwKermetaRaisedExceptionOnLoad(
-        		"Error loading EMF model '" + this.getUriAsString() + "' : " + e.exception().getMessage(), e);
+        		"Error loading Metamodel resource '" + this.getMetaModelUri() + "' : " + e.exception().toString(), e);
 			}
         }
         else // if metaModelResource is null 
