@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<metamodel:Model xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:metamodel="http://Ordered/Meta.ecore" xsi:schemaLocation="http://Ordered/Meta.ecore ../metamodels/070_save_ordered_association_with_opposite.ecore"/>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Model xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="platform:/resource/thisisnotanexistingfile.ecore" xsi:schemaLocation="platform:/resource/thisisnotanexistingfile.ecore ../metamodels/071_MetamodelWithResInvalidNsURI.ecore"/>

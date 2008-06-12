@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Model xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="foobla_bla" xsi:schemaLocation="foobla_bla ../metamodels/071_MetamodelWithRandomNsURI.ecore"/>

@@ -1,0 +1,115 @@
+/* $Id: 070_save_ordered_association_with_opposite.main.kmt,v 1.1 2008-06-12 16:11:17 dvojtise Exp $ 
+ * Creation : June 10, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ * check that with an association with opposite that is ordered
+ * then the save must be ordered too
+ */
+@mainClass "test::save_ordered_association_with_opposite::Main"
+@mainOperation "main"
+
+
+package test::save_ordered_association_with_opposite;
+
+
+require kermeta
+require "../metamodels/070_save_ordered_association_with_opposite.ecore"
+
+
+using kermeta::persistence
+using kermeta::kunit
+
+
+
+class Main inherits TestCase 
+{
+	operation main() : Void is do
+		stdio.writeln("starting...")
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+    end
+    
+    operation test0() : Void is
+    do	
+    	var model:MetaModel::Model
+    	
+		stdio.writeln("loading...")
+		model?=getModel("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/070_InitialModel.xmi",
+						MetaModel::Model)
+		stdio.writeln("loading is finished")
+		var item: MetaModel::Item init MetaModel::Item.new
+		item.name:="0"
+		model.items.add(item)
+		
+		
+		item:=MetaModel::Item.new
+		item.name:="1"
+		model.items.add(item)
+		
+		item:=MetaModel::Item.new
+		item.name:="2"
+		model.items.add(item)
+		
+		item:=MetaModel::Item.new
+		item.name:="3"
+		model.items.add(item)
+		
+		item:=MetaModel::Item.new
+		item.name:="4"
+		model.items.add(item)
+		
+		item:=MetaModel::Item.new
+		item.name:="5"
+		model.items.add(item)
+		
+		item:=MetaModel::Item.new
+		item.name:="6"
+		model.items.add(item)
+		
+		item:=MetaModel::Item.new
+		item.name:="7"
+		model.items.add(item)
+			
+		saveModel("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/070_orderedmodel.xmi" ,model)
+		stdio.writeln("saving is finished")		
+	end
+		
+	
+	reference model : MetaModel::Model
+	reference repository : EMFRepository  		 	
+   	reference resource : Resource
+   	/** ensures that we will not get the model that we have created in the first pass of the test
+   	*/
+   	operation clearPersistency() is do
+   		repository := void
+		resource := void
+   	end
+	operation getModel(src: kermeta::standard::String, type: kermeta::language::structure::Class): kermeta::standard::Object is do
+		
+		repository :=EMFRepository.new
+		resource :=repository.createResource(src, "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/070_save_ordered_association_with_opposite.ecore")
+//		resource :=repository.getResource(src)
+       	resource.load()           
+       
+       from var it : kermeta::standard::Iterator<kermeta::standard::Object> init resource.instances.iterator
+       until it.isOff
+       loop
+           var next : kermeta::standard::Object init it.next
+           
+           if (type.isInstance(next)) then                 
+           		result := next
+           				
+           end
+       end
+	end
+	operation saveModel(src: kermeta::standard::String, model : kermeta::standard::Object) is do
+		    
+        	
+	 		resource.instances.add(model)
+	 		 	
+	 		resource.saveWithNewURI(src)
+	 end
+}
