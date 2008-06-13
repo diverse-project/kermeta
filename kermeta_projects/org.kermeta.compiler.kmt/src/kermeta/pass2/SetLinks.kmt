@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.23 2008-06-12 10:18:46 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.24 2008-06-13 09:20:33 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -24,34 +24,30 @@ aspect class ClassDefinition {
 
 	attribute a : kermeta::standard::Collection<String>
 	operation setLinks(context : KM2EcoreContext) is do
-	
-		//if self.getEMFInstanceClassName() == "" then
-		
-			self.superType.each{ t |
-				if t.isInstanceOf(Class) then
-				
-					var classDefinition : ClassDefinition init t.asType(Class).getClassDefinition()
-
-					if (not self.ecoreModelElement.isVoid()) then // (classDefinition.getEMFInstanceClassName() == "") and
-						/*if classDefinition.ecoreModelElement == void then
-							stdio.writeln("Class Def is nil" + classDefinition.name)
-						end*/
-						if not classDefinition.ecoreModelElement.isVoid() then
-						
-							var new_eGenericType : EGenericType init EGenericType.new
-							new_eGenericType.eClassifier := classDefinition.ecoreModelElement
-							self.ecoreModelElement.eGenericSuperTypes.add(new_eGenericType)
-							
-							t.asType(Class).ecoreModelElement := new_eGenericType
-							t.asType(Class).setLinks(context)
-						end
-					end
-					
-				end
-			}
 			
-		//end
-		
+		self.superType.each{ t |
+			if t.isInstanceOf(Class) then
+			
+				var classDefinition : ClassDefinition init t.asType(Class).getClassDefinition()
+
+				if (not self.ecoreModelElement.isVoid()) then // (classDefinition.getEMFInstanceClassName() == "") and
+					/*if classDefinition.ecoreModelElement == void then
+						stdio.writeln("Class Def is nil" + classDefinition.name)
+					end*/
+					if not classDefinition.ecoreModelElement.isVoid() then
+					
+						var new_eGenericType : EGenericType init EGenericType.new
+						new_eGenericType.eClassifier := classDefinition.ecoreModelElement
+						self.ecoreModelElement.eGenericSuperTypes.add(new_eGenericType)
+						
+						t.asType(Class).ecoreModelElement := new_eGenericType
+						t.asType(Class).setLinks(context)
+					end
+				end
+				
+			end
+		}
+					
 	end
 }
 
@@ -81,10 +77,11 @@ aspect class Class {
 					if tpb.type.isInstanceOf(PrimitiveType) then
 						var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 						
-						if tpb.type.getEMFEDataTypeInstanceClassName()!="" then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
+						//We use the EDataType from the Ecore file
+						if tpb.type.isEDataType()!="" then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
 							typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
 						else
-						
+							//We use the final type
 							if not cd.ecoreModelElement.isVoid() then
 								typeArgument.eClassifier := cd.ecoreModelElement
 							else
@@ -169,9 +166,7 @@ class LinkSetterForTypedElement {
 	operation setLinks(element : TypedElement, ecoreModelElement : ETypedElement, context : KM2EcoreContext) is do
 		//stdio.writeln(" ++++++++++++----------- " +  element.toString() + " " + element.type.toString() + " " + element.type.getTypeName())
 		if not ecoreModelElement.isVoid() then
-		/*if ( element.isComposite and TypeHelper.new.isPrimitiveType(element.type.asType(Type)) ) then
-			TypeHelper.new.getClassFromPrimitiveType(element.type.asType(Type))
-		else*/
+
 			if element.type.isInstanceOf(Class) then
 				var c : Class init element.type.asType(Class)
 				var classDefinition : ClassDefinition init c.getClassDefinition()
@@ -197,14 +192,13 @@ class LinkSetterForTypedElement {
 					else
 						if tpb.type.isInstanceOf(ObjectTypeVariable) then
 							var otv : ObjectTypeVariable init tpb.type.asType(ObjectTypeVariable)
-							//stdio.writeln("ObjectTypeVariable: " + otv.name.toString() + " - otv.ecoreModelElement: " + otv.ecoreModelElement.name + " - ecoreModelElement: " + ecoreModelElement.name + " ecoreModelElement.eGenericType: " + ecoreModelElement.eGenericType.toString())
 							typeArgument.eTypeParameter := otv.ecoreModelElement
 							ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 						else
 							if tpb.type.isInstanceOf(PrimitiveType) then
 								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 								
-								if tpb.type.getEMFEDataTypeInstanceClassName()!="" then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
+								if tpb.type.isEDataType()!="" then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
 									typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
 								else
 								
@@ -226,11 +220,10 @@ class LinkSetterForTypedElement {
 				if element.type.isInstanceOf(PrimitiveType) then
 					var cd : ClassDefinition init element.type.getClassFromPrimitiveType().getClassDefinition()
 					
-					if element.type.getEMFEDataTypeInstanceClassName()!="" then //cd.isValueType() and (element.type.getEMFInstanceClassName()!="") then
+					if element.type.isEDataType()!="" then //cd.isValueType() and (element.type.getEMFInstanceClassName()!="") then
 						ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement
 					else
 					
-						//stdio.writeln("SetLinks - PrimitiveType " + cd.ecoreModelElement.toString() + " " + cd.qualifiedName)
 						if not cd.ecoreModelElement.isVoid() then
 							ecoreModelElement.eType := cd.ecoreModelElement
 						else

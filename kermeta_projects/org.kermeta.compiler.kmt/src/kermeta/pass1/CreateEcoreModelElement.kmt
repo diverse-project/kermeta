@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.21 2008-06-12 10:18:46 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.22 2008-06-13 09:20:33 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -17,6 +17,7 @@ require "../common/Exception.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using ecore
+using kermeta::standard
 using kermeta::utils
 using km2ecore
 using km2ecore::helper::ecore
@@ -130,23 +131,30 @@ aspect class PrimitiveType {
 		
 		// by default
 		eModelElement.instanceClassName := "java.lang.Object"
-//		if self.getClassFromPrimitiveType().isInstanceOf(Class) then
 
-			//if self.getClassFromPrimitiveType().isValueType() then
-				var instanceClassName : String init self.getEMFEDataTypeInstanceClassName()
-				if instanceClassName != "" then
-					eModelElement.instanceClassName := instanceClassName
-				end				
-			//end
+		var instanceClassName : String init self.getEMFEDataTypeInstanceClassName()
+		if instanceClassName != "" then //is an EDataType from an Ecore model
+			eModelElement.instanceClassName := instanceClassName
+			var etps : OrderedSet<String> init self.getUniqueTagValue("EMF_EDataType_eTypeParameters").split(" , ")
 			
-			var qualifiedName : String init self.getClassFromPrimitiveType().asType(Class).typeDefinition.qualifiedName
-			eModelElement.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), qualifiedName))
-			
-			if eModelElement.instanceClassName == "" then
-				eModelElement.instanceClassName := qualifiedName.replace("::", ".")
+			if etps.size()>0 then
+			etps.each{ etp |
+				if etp!="" then
+					var ecoreTypeParameter : ETypeParameter init ETypeParameter.new
+					ecoreTypeParameter.name := IdentifierHelper.new.getMangledIdentifier(etp, context)
+					eModelElement.eTypeParameters.add(ecoreTypeParameter)
+				end
+			}
 			end
+		end				
 			
-//		end
+		var qualifiedName : String init self.getClassFromPrimitiveType().asType(Class).typeDefinition.qualifiedName
+		eModelElement.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), qualifiedName))
+			
+		if eModelElement.instanceClassName == "" then
+			eModelElement.instanceClassName := qualifiedName.replace("::", ".")
+		end
+		
 		
 		result := eModelElement
 	end
@@ -265,7 +273,7 @@ aspect class Property {
 		var ecoreStructuralFeature : EStructuralFeature
 		var current_type : Type init self.type.asType(Type)
 		//stdio.writeln("Create Property: " + self.name) + " - " + current_type.toString() + " - " + current_type.getTypeName())
-		if current_type.isValueType() or current_type.isEnumeration() then
+		if current_type.isValueType() or current_type.isEnumeration() or current_type.isEDataType() then
 			//stdio.writeln("Create Property2: " + self.name + " " + self.type.getTypeName())
 			ecoreStructuralFeature := EAttribute.new
 			//ecoreStructuralFeature.iD := 
