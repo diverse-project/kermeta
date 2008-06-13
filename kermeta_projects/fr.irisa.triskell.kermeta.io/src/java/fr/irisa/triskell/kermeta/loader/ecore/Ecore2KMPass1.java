@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.33 2008-06-13 09:27:31 cfaucher Exp $
+/*$Id: Ecore2KMPass1.java,v 1.34 2008-06-13 13:38:44 cfaucher Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -11,6 +11,9 @@
 */
 
 package fr.irisa.triskell.kermeta.loader.ecore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -182,10 +185,13 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	    	// - when visited like a type
 	    	if ( datas.getPrimitiveType(node) == null ) {
 	    		currentPrimitiveType = KermetaModelHelper.PrimitiveType.create( node.getName() );
-	    		if ( node.getInstanceClassName() != null ) {
-	    			Tag t = KermetaModelHelper.Tag.create("EMF_EDataType_instanceClassName", node.getInstanceClassName());
-	    			currentPrimitiveType.getOwnedTags().add(t);
-	    		}
+	    		
+	    		if ( !datas.value_types.contains(EcoreHelper.getQualifiedName(node)) ) {
+		    		if ( node.getInstanceClassName() != null ) {
+		    			Tag t = KermetaModelHelper.Tag.create("EMF_EDataType_instanceClassName", node.getInstanceClassName());
+		    			currentPrimitiveType.getOwnedTags().add(t);
+		    		}
+		    	}
 	    		
 	    		if( node.getETypeParameters()!=null && node.getETypeParameters().size()>0 ) {
 	    			String str_etp = "";

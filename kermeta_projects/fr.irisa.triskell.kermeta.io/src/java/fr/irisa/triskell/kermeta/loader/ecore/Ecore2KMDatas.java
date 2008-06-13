@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMDatas.java,v 1.7 2008-06-11 12:14:14 dvojtise Exp $
+/*$Id: Ecore2KMDatas.java,v 1.8 2008-06-13 13:38:44 cfaucher Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMHelper.java
 * License : EPL
@@ -12,7 +12,9 @@
 
 package fr.irisa.triskell.kermeta.loader.ecore;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -191,6 +193,8 @@ public class Ecore2KMDatas {
 	
 	protected Hashtable<String, String> primitive_types_mapping;
 	
+	final public List<String> value_types = new ArrayList<String>();
+	
 	/**
 	 * this map is used to know which java class can be casted as a kermeta class 
 	 */
@@ -208,6 +212,13 @@ public class Ecore2KMDatas {
 		primitive_types_mapping.put("java.lang.Float", 	    "kermeta::standard::Real");
 		primitive_types_mapping.put("float", 	            "kermeta::standard::Real");
 		primitive_types_mapping.put("org.eclipse.emf.ecore.util.FeatureMap$Entry", 	"kermeta::ecore::EFeatureMapEntry");		
+	
+	
+		value_types.add("kermeta::language::structure::String");
+		value_types.add("kermeta::language::structure::Boolean");
+		value_types.add("kermeta::language::structure::Integer");
+		value_types.add("kermeta::language::structure::UnlimitedNatural");
+		value_types.add("kermeta::language::structure::Real");
 	}
 
 }
