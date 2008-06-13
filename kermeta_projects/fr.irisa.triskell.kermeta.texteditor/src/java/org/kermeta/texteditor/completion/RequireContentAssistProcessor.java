@@ -1,6 +1,6 @@
 
 
-/*$Id: RequireContentAssistProcessor.java,v 1.2 2008-02-14 07:13:42 uid21732 Exp $
+/*$Id: RequireContentAssistProcessor.java,v 1.3 2008-06-13 08:39:59 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -59,7 +59,8 @@ public class RequireContentAssistProcessor implements IContentAssistProcessor {
 			}
 				
 			int replacementLength = 0;
-			while ( viewer.getDocument().getChar(offset + replacementLength) != '\n' )
+			while (!(viewer.getDocument().getChar(offset + replacementLength) == '\n' ||
+					viewer.getDocument().getChar(offset + replacementLength) == '\r' ))
 				replacementLength++;
 				
 			replacementLength = index -1 + replacementLength;

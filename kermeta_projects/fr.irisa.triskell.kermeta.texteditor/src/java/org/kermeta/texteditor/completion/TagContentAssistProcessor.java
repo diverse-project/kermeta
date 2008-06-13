@@ -1,6 +1,6 @@
 
 
-/*$Id: TagContentAssistProcessor.java,v 1.1 2007-12-17 14:05:09 ftanguy Exp $
+/*$Id: TagContentAssistProcessor.java,v 1.2 2008-06-13 08:39:59 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -65,7 +65,8 @@ public class TagContentAssistProcessor implements IContentAssistProcessor {
 						replacementOffset--;
 			
 					int replacementLength = offset;
-					while ( viewer.getDocument().getChar(replacementLength) != '\n' )
+					while ( !(viewer.getDocument().getChar(offset + replacementLength) == '\n' ||
+							viewer.getDocument().getChar(offset + replacementLength) == '\r' ) )
 						replacementLength++;
 					replacementLength = replacementLength - replacementOffset;
 					

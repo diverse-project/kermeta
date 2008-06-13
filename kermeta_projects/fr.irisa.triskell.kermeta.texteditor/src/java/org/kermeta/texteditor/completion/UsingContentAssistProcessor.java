@@ -1,6 +1,4 @@
-
-
-/*$Id: UsingContentAssistProcessor.java,v 1.1 2007-12-17 14:05:10 ftanguy Exp $
+/*$Id: UsingContentAssistProcessor.java,v 1.2 2008-06-13 08:39:58 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -33,7 +31,6 @@ import org.kermeta.texteditor.KermetaTextEditor;
 
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
-import fr.irisa.triskell.kermeta.texteditor.icons.red.KermetaIconsRed;
 
 public class UsingContentAssistProcessor implements IContentAssistProcessor {
 	
@@ -54,9 +51,10 @@ public class UsingContentAssistProcessor implements IContentAssistProcessor {
 			}
 				
 			int replacementLength = 0;
-			while ( viewer.getDocument().getChar(offset + replacementLength) != '\n' )
-				replacementLength++;
-				
+			while ( !(viewer.getDocument().getChar(offset + replacementLength) == '\n' ||
+					viewer.getDocument().getChar(offset + replacementLength) == '\r' )){
+				replacementLength++;	
+			} 
 			replacementLength = index -1 + replacementLength;
 							
 			Set<String> packages = getPackagesMatching(startString);
