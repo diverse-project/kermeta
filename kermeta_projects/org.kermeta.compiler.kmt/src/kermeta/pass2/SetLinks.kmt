@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.24 2008-06-13 09:20:33 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.25 2008-06-13 13:40:13 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -78,9 +78,10 @@ aspect class Class {
 						var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 						
 						//We use the EDataType from the Ecore file
-						if tpb.type.isEDataType()!="" then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
+						if tpb.type.isEDataType() then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
 							typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
 						else
+							stdio.writeln(" ++--** " + tpb.type.toString() + " " + cd.name + " " + cd.ecoreModelElement.toString())
 							//We use the final type
 							if not cd.ecoreModelElement.isVoid() then
 								typeArgument.eClassifier := cd.ecoreModelElement
@@ -151,8 +152,7 @@ aspect class Parameter {
 
 aspect class Property {
 	operation setLinks(context : KM2EcoreContext) is do
-		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
-		s.setLinks(self, self.ecoreModelElement, context)
+		LinkSetterForTypedElement.new().setLinks(self, self.ecoreModelElement, context)
 		
 		//Complete the structural phase
 		if not self.opposite.isVoid() then //if self.opposite.isVoid() then self is an EReference
@@ -198,10 +198,10 @@ class LinkSetterForTypedElement {
 							if tpb.type.isInstanceOf(PrimitiveType) then
 								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 								
-								if tpb.type.isEDataType()!="" then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
+								if tpb.type.isEDataType() then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
 									typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
 								else
-								
+									stdio.writeln(" ++--** " + tpb.type.toString() + " " + cd.name + " " + cd.ecoreModelElement.toString())
 									if not cd.ecoreModelElement.isVoid() then
 										typeArgument.eClassifier := cd.ecoreModelElement
 									else
@@ -220,10 +220,10 @@ class LinkSetterForTypedElement {
 				if element.type.isInstanceOf(PrimitiveType) then
 					var cd : ClassDefinition init element.type.getClassFromPrimitiveType().getClassDefinition()
 					
-					if element.type.isEDataType()!="" then //cd.isValueType() and (element.type.getEMFInstanceClassName()!="") then
+					if element.type.isEDataType() then //cd.isValueType() and (element.type.getEMFInstanceClassName()!="") then
 						ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement
 					else
-					
+						stdio.writeln(" ++--** " + element.type.toString() + " " + cd.name + " " + cd.ecoreModelElement.toString())
 						if not cd.ecoreModelElement.isVoid() then
 							ecoreModelElement.eType := cd.ecoreModelElement
 						else

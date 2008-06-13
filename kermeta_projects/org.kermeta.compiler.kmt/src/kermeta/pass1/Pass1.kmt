@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.22 2008-06-12 10:18:46 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.23 2008-06-13 13:40:13 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -159,7 +159,9 @@ aspect class ClassDefinition {
 					end
 				}
 			else
-				raise UndefinedValueTypeInstanceClassNameException.new()
+				if self.isAbstract then
+					raise UndefinedValueTypeInstanceClassNameException.new()
+				end
 			end
 		else
 			// Creating the associated ecore class
