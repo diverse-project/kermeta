@@ -1,4 +1,4 @@
-/* $Id: 070_save_ordered_association_with_opposite.main.kmt,v 1.2 2008-06-13 09:14:30 dvojtise Exp $ 
+/* $Id: 070_save_ordered_association_with_opposite.main.kmt,v 1.3 2008-06-13 15:11:33 dvojtise Exp $ 
  * Creation : June 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -81,7 +81,7 @@ class Main inherits TestCase
 		stdio.writeln("loading...")
 		repository :=EMFRepository.new
 		resource :=repository.createResource(src, "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/070_save_ordered_association_with_opposite.ecore")
-//		resource :=repository.getResource(src)
+		//resource :=repository.getResource(src)
        	resource.load()           
        
        from var it : kermeta::standard::Iterator<kermeta::standard::Object> init resource.instances.iterator
@@ -100,9 +100,12 @@ class Main inherits TestCase
 		    
         	
 			stdio.writeln("saving...")
+			repository :=EMFRepository.new
+			//resource :=repository.createResource(src, "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/070_save_ordered_association_with_opposite.ecore")
+			resource :=repository.createResource(src, "http://Ordered/Meta.ecore")
 	 		resource.instances.add(model)
-	 		 	
-	 		resource.saveWithNewURI(src)
+	 		resource.save 	
+	 		//resource.saveWithNewURI(src)
 			stdio.writeln("saving is finished")
 	 end
 }
