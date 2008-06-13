@@ -1,4 +1,4 @@
-/* $Id: 070_save_ordered_association_with_opposite.main.kmt,v 1.1 2008-06-12 16:11:17 dvojtise Exp $ 
+/* $Id: 070_save_ordered_association_with_opposite.main.kmt,v 1.2 2008-06-13 09:14:30 dvojtise Exp $ 
  * Creation : June 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -17,7 +17,7 @@ package test::save_ordered_association_with_opposite;
 require kermeta
 require "../metamodels/070_save_ordered_association_with_opposite.ecore"
 
-
+using kermeta::standard
 using kermeta::persistence
 using kermeta::kunit
 
@@ -34,47 +34,36 @@ class Main inherits TestCase
     
     operation test0() : Void is
     do	
-    	var model:MetaModel::Model
+    	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/070_InitialModel.xmi"
+    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/070_orderedmodel.xmi"
     	
-		stdio.writeln("loading...")
-		model?=getModel("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/070_InitialModel.xmi",
+    	var model : MetaModel::Model
+    	
+		model?=getModel(ifileName,
 						MetaModel::Model)
-		stdio.writeln("loading is finished")
-		var item: MetaModel::Item init MetaModel::Item.new
-		item.name:="0"
-		model.items.add(item)
+		var item: MetaModel::Item 
 		
-		
-		item:=MetaModel::Item.new
-		item.name:="1"
-		model.items.add(item)
-		
-		item:=MetaModel::Item.new
-		item.name:="2"
-		model.items.add(item)
-		
-		item:=MetaModel::Item.new
-		item.name:="3"
-		model.items.add(item)
-		
-		item:=MetaModel::Item.new
-		item.name:="4"
-		model.items.add(item)
-		
-		item:=MetaModel::Item.new
-		item.name:="5"
-		model.items.add(item)
-		
-		item:=MetaModel::Item.new
-		item.name:="6"
-		model.items.add(item)
-		
-		item:=MetaModel::Item.new
-		item.name:="7"
-		model.items.add(item)
-			
-		saveModel("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/070_orderedmodel.xmi" ,model)
-		stdio.writeln("saving is finished")		
+		// add element in a specific order
+		10.times{i |
+			item := MetaModel::Item.new
+			item.name:= i.toString
+			model.items.add(item)
+		}
+					
+		saveModel(ofileName ,model)	
+		// check that the model is in the correct order
+		// reload the saved file and find the added element
+       	model := void
+       	resource := void
+       	item := void
+       	repository := EMFRepository.new
+       	model?=getModel(ofileName, MetaModel::Model)
+       	model ?= resource.detect{ m | m.isInstanceOf(MetaModel::Model)}
+       	assert(not model.isVoid)
+       	assertTrueWithMsg(model.items.size == 10 , "model doesn't contains the expected 10 elements. It contains " + model.items.size.toString + " elements")
+       	10.times{i |
+			assertTrueWithMsg(model.items.elementAt(i).name.equals(i.toString),"Element at position " + i.toString + " isn't the correct one")
+		}	
 	end
 		
 	
@@ -89,6 +78,7 @@ class Main inherits TestCase
    	end
 	operation getModel(src: kermeta::standard::String, type: kermeta::language::structure::Class): kermeta::standard::Object is do
 		
+		stdio.writeln("loading...")
 		repository :=EMFRepository.new
 		resource :=repository.createResource(src, "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/070_save_ordered_association_with_opposite.ecore")
 //		resource :=repository.getResource(src)
@@ -104,12 +94,15 @@ class Main inherits TestCase
            				
            end
        end
+		stdio.writeln("loading is finished")
 	end
 	operation saveModel(src: kermeta::standard::String, model : kermeta::standard::Object) is do
 		    
         	
+			stdio.writeln("saving...")
 	 		resource.instances.add(model)
 	 		 	
 	 		resource.saveWithNewURI(src)
+			stdio.writeln("saving is finished")
 	 end
 }
