@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.69 2008-06-12 11:56:59 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.70 2008-06-13 09:31:41 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -74,6 +74,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		primitive_types_mapping.put("java.lang.String", 	"kermeta::standard::String");
 		primitive_types_mapping.put("Object", 				"kermeta::standard::Object");
 		primitive_types_mapping.put("java.lang.Object", 	"kermeta::standard::Object");
+		primitive_types_mapping.put("double", 				"kermeta::standard::Real");
+		primitive_types_mapping.put("java.lang.Double", 	"kermeta::standard::Real");
 	}
 	
 	 /**
@@ -316,7 +318,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     {	
     	// run in a job
     	LoaderJob myJob = new LoaderJob("Kermeta is loading model " + getUriAsString(), resRO, this);
-		myJob.schedule();
+    	myJob.schedule();
 		// must wait before continuing
 		try {
 			myJob.join();
@@ -393,7 +395,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         		throwKermetaRaisedExceptionOnLoad(
         		"Error Loading metamodel '" + this.getMetaModelUri() + "' for saving model '" + this.getUriAsString() + "' : " + we.exception().getMessage(), we);
 			}
-        	catch (IllegalArgumentException iae){
+			catch (IllegalArgumentException iae){
         		// also catch
         		throwKermetaRaisedExceptionOnLoad(
                 		"Error Loading metamodel '" + this.getMetaModelUri() + "' for saving model '" + this.getUriAsString() + "' : " + iae.getMessage(), iae);

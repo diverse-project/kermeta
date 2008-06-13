@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.18 2008-06-11 08:22:03 cfaucher Exp $
+/* $Id: Ecore2KM.java,v 1.19 2008-06-13 09:29:17 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -64,6 +64,7 @@ public class Ecore2KM {
     	//primitive_types_mapping.put("java.lang.Integer", "kermeta::language::structure::UnlimitedNatural");
     	
     	primitive_types_mapping.put("java.lang.Double", "kermeta::standard::Real");
+    	primitive_types_mapping.put("double", "kermeta::standard::Real");
     	primitive_types_mapping.put("int", "kermeta::standard::Integer");
     	primitive_types_mapping.put("string", "kermeta::standard::String");
     }

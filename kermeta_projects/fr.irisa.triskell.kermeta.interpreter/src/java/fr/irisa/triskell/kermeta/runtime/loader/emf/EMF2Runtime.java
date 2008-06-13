@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.82 2008-05-28 13:36:26 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.83 2008-06-13 09:31:41 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -469,6 +469,10 @@ public class EMF2Runtime {
     	if (instance_classname.equals("java.lang.Boolean")||instance_classname.equals("boolean")) {
     		if (fvalue == null || ((Boolean)fvalue).booleanValue()) { rovalue = rofactory.getMemory().trueINSTANCE; }
     		else { rovalue = rofactory.getMemory().falseINSTANCE; }
+    	}
+    	//Real
+    	else if (instance_classname.equals("java.lang.Double")||instance_classname.equals("double")) {
+    		rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.Real.create(fvalue!=null?(Double)fvalue:0.0, rofactory);
     	}
     	// Integer
     	else if (instance_classname.equals("java.lang.Integer")||instance_classname.equals("int")) {

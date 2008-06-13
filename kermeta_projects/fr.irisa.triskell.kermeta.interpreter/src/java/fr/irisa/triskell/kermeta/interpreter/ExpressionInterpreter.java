@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.70 2008-04-29 10:01:22 ftanguy Exp $
+/* $Id: ExpressionInterpreter.java,v 1.71 2008-06-13 09:31:41 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -581,6 +581,12 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			}
 			else if(typename.equals("boolean")){
 				result[i] = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(fparam);
+			}
+			else if(typename.equals("double")){
+				result[i] = fr.irisa.triskell.kermeta.runtime.basetypes.Real.getValue(fparam);
+			}
+			else if(typename.equals("java.lang.Double")){
+				result[i] = fr.irisa.triskell.kermeta.runtime.basetypes.Real.getValue(fparam);
 			}
 			else if(javaObject != null){
 				result[i] = javaObject;
