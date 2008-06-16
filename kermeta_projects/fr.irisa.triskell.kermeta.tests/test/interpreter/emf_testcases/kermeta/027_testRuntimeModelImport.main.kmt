@@ -1,4 +1,4 @@
-/* $Id: 027_testRuntimeModelImport.main.kmt,v 1.2 2008-02-14 07:13:29 uid21732 Exp $
+/* $Id: 027_testRuntimeModelImport.main.kmt,v 1.3 2008-06-16 15:18:33 dvojtise Exp $
  *
  */
 @mainClass "RuntimeModelImportTests::Main"
@@ -37,11 +37,11 @@ class Main inherits kermeta::kunit::TestCase
        assert( kmlogopackage.name.compareTo("kmLogo") == 0)
        // find a package named "actions"       
        var actionpackage : Package 
-       actionpackage ?= kmlogopackage.nestedPackage.detect{ p | (p.name.compareTo("actions") == 0) }       
+       actionpackage := kmlogopackage.nestedPackage.detect{ p | (p.name.compareTo("actions") == 0) }       
        assert( actionpackage.name.compareTo("actions") == 0)
        // find a class named "Interpreter"
        var classTypeDef : TypeDefinition 
-	   classTypeDef ?= actionpackage.ownedTypeDefinition.detect{ c | (c.name.compareTo("Interpreter") == 0) }
+	   classTypeDef := actionpackage.ownedTypeDefinition.detect{ c | (c.name.compareTo("Interpreter") == 0) }
        var classClassTypeDef : ClassDefinition 
        classClassTypeDef ?= classTypeDef
        assert (classClassTypeDef.name.compareTo("Interpreter") == 0  )       
@@ -52,7 +52,7 @@ class Main inherits kermeta::kunit::TestCase
        
        // one of its feature must be "accumulator" of type "Integer"
        var accFProp : Property 
-       accFProp ?= classClassTypeDef.ownedAttribute.detect{ k | k.name.compareTo("accumulator") == 0 }
+       accFProp := classClassTypeDef.ownedAttribute.detect{ k | k.name.compareTo("accumulator") == 0 }
        assertTrueWithMsg(not accFProp.isVoid,"didn't find accumulator feature in the loaded file")       
        var propClassType : Class
        propClassType ?= accFProp.type
