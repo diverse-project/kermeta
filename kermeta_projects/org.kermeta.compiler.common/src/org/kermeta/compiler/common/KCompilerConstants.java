@@ -1,4 +1,4 @@
-/*$Id: KCompilerConstants.java,v 1.1 2008-01-31 14:29:49 cfaucher Exp $
+/*$Id: KCompilerConstants.java,v 1.1 2008-06-16 13:04:00 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	KCompilerConstants.java
 * License : EPL
@@ -8,7 +8,7 @@
 * Authors : Cyril Faucher <cfaucher@irisa.fr>
 */
 
-package org.kermeta.compiler.tests;
+package org.kermeta.compiler.common;
 
 public final class KCompilerConstants {
 

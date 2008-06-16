@@ -1,4 +1,4 @@
-/*$Id: AssignTestCasesToUseCasesCommand.java,v 1.5 2008-02-01 13:27:01 cfaucher Exp $
+/*$Id: AssignTestCasesToUseCasesCommand.java,v 1.6 2008-06-16 13:04:05 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	AssignTestCasesToUseCasesCommand.java
 * License : EPL
@@ -22,7 +22,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.kermeta.compiler.tests.KCompilerConstants;
+import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.compiler.trek.ui.exception.RefinesUCWFRException;
 import org.kermeta.compiler.trek.ui.popup.actions.TrekModelHelper;
 import org.kermeta.trek.KTestCase;

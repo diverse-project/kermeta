@@ -1,4 +1,4 @@
-/*$Id: GenerateUseKaseModel.java,v 1.2 2008-02-01 13:27:00 cfaucher Exp $
+/*$Id: GenerateUseKaseModel.java,v 1.3 2008-06-16 13:05:38 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	GenerateUseKaseModel.java
 * License : EPL
@@ -24,7 +24,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.kermeta.compiler.tests.KCompilerConstants;
+import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.compiler.trek.ui.command.AssignTestCasesToUseCasesCommand;
 
 

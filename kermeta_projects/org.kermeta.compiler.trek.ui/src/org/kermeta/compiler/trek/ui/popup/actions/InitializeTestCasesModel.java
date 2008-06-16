@@ -1,4 +1,4 @@
-/*$Id: InitializeTestCasesModel.java,v 1.8 2008-02-01 13:27:00 cfaucher Exp $
+/*$Id: InitializeTestCasesModel.java,v 1.9 2008-06-16 13:05:37 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTestCasesModel.java
 * License : EPL
@@ -24,7 +24,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.kermeta.compiler.tests.KCompilerConstants;
+import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.trek.KTestCase;
 import org.kermeta.trek.KTestCaseType;
 import org.kermeta.trek.TrekFactory;

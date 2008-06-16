@@ -1,4 +1,4 @@
-/*$Id: AddNewTestCaseFolder.java,v 1.2 2008-02-01 13:27:00 cfaucher Exp $
+/*$Id: AddNewTestCaseFolder.java,v 1.3 2008-06-16 13:04:04 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTrekAllLocalTextFiles.java
 * License : EPL
@@ -28,7 +28,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.kermeta.compiler.tests.KCompilerConstants;
+import org.kermeta.compiler.common.KCompilerConstants;
 
 
 public class AddNewTestCaseFolder implements IObjectActionDelegate {

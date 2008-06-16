@@ -1,4 +1,4 @@
-/*$Id: TrekModelHelper.java,v 1.10 2008-02-01 13:27:00 cfaucher Exp $
+/*$Id: TrekModelHelper.java,v 1.11 2008-06-16 13:05:37 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	TrekModelHelper.java
 * License : EPL
@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.compiler.tests.KCompilerConstants;
+import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.compiler.trek.ui.exception.RefinesUCWFRException;
 import org.kermeta.trek.KStatus;
 import org.kermeta.trek.TrekFactory;

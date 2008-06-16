@@ -1,4 +1,4 @@
-/*$Id: InitializeUseCasesModel.java,v 1.9 2008-03-18 16:43:09 cfaucher Exp $
+/*$Id: InitializeUseCasesModel.java,v 1.10 2008-06-16 13:05:37 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeUseCasesModel.java
 * License : EPL
@@ -26,7 +26,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.kermeta.compiler.tests.KCompilerConstants;
 import org.kermeta.trek.KUseCase;
 import org.kermeta.trek.TrekFactory;
 import org.kermeta.trek.UseKaseModel;
