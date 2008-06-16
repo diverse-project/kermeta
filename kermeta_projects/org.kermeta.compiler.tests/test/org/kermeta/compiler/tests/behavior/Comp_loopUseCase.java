@@ -1,5 +1,5 @@
 
-/*$Id: Comp_loopUseCase.java,v 1.6 2008-06-16 13:32:46 cfaucher Exp $
+/*$Id: Comp_loopUseCase.java,v 1.7 2008-06-16 13:34:53 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -17,7 +17,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kermeta.compiler.tests.KCompilerConstants;
+import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.compiler.tests.helper.Constants;
 import org.kermeta.compiler.tests.helper.DiffHelper;
 import org.kermeta.interpreter.api.InitializationError;
