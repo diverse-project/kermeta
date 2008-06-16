@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.34 2008-06-13 13:38:44 cfaucher Exp $
+/*$Id: Ecore2KMPass1.java,v 1.35 2008-06-16 08:34:38 cfaucher Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -188,24 +188,31 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	    		
 	    		if ( !datas.value_types.contains(EcoreHelper.getQualifiedName(node)) ) {
 		    		if ( node.getInstanceClassName() != null ) {
-		    			Tag t = KermetaModelHelper.Tag.create("EMF_EDataType_instanceClassName", node.getInstanceClassName());
-		    			currentPrimitiveType.getOwnedTags().add(t);
+		    			Tag t0 = KermetaModelHelper.Tag.create("EMF_EDataType_instanceClassName", node.getInstanceClassName());
+		    			currentPrimitiveType.getOwnedTags().add(t0);
+		    		}
+		    		
+		    		String str_isSerializable = "false";
+		    		if ( node.isSerializable() ) {
+		    			str_isSerializable = "true";
+		    		}
+		    		Tag t1 = KermetaModelHelper.Tag.create("EMF_EDataType_isSerializable", str_isSerializable);
+		    		currentPrimitiveType.getOwnedTags().add(t1);
+		    		
+		    		if( node.getETypeParameters()!=null && node.getETypeParameters().size()>0 ) {
+		    			String str_etp = "";
+		    			int i=0;
+			    		for( ETypeParameter etp : node.getETypeParameters() ) {
+			    			if( i!=0 ) {
+			    				str_etp += " , ";
+			    			}
+			    			str_etp += etp.getName();
+			    			i++;
+			    		}
+			    		Tag t2 = KermetaModelHelper.Tag.create("EMF_EDataType_eTypeParameters", str_etp);
+		    			currentPrimitiveType.getOwnedTags().add(t2);
 		    		}
 		    	}
-	    		
-	    		if( node.getETypeParameters()!=null && node.getETypeParameters().size()>0 ) {
-	    			String str_etp = "";
-	    			int i=0;
-		    		for( ETypeParameter etp : node.getETypeParameters() ) {
-		    			if( i!=0 ) {
-		    				str_etp += " , ";
-		    			}
-		    			str_etp += etp.getName();
-		    			i++;
-		    		}
-		    		Tag t = KermetaModelHelper.Tag.create("EMF_EDataType_eTypeParameters", str_etp);
-	    			currentPrimitiveType.getOwnedTags().add(t);
-	    		}
 	    		
 	    		kermetaUnit.addTypeDefinition(currentPrimitiveType, getCurrentPackage());
 	    		datas.store(currentPrimitiveType, node);
