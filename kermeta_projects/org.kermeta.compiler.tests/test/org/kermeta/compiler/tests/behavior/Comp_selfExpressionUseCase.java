@@ -1,5 +1,5 @@
 
-/*$Id: Comp_selfExpressionUseCase.java,v 1.3 2008-06-16 13:22:54 cfaucher Exp $
+/*$Id: Comp_selfExpressionUseCase.java,v 1.4 2008-06-16 13:32:46 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1

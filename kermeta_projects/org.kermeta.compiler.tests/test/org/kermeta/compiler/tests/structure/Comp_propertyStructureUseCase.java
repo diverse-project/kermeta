@@ -1,5 +1,5 @@
 
-/*$Id: Comp_propertyStructureUseCase.java,v 1.6 2008-06-16 13:22:56 cfaucher Exp $
+/*$Id: Comp_propertyStructureUseCase.java,v 1.7 2008-06-16 13:32:47 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
