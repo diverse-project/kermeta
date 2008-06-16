@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.9 2008-04-28 11:51:16 ftanguy Exp $
+/* $Id: RunJunitFactory.java,v 1.10 2008-06-16 09:24:31 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -126,11 +126,7 @@ public class RunJunitFactory implements Test {
     		Map<Object, Object> options = new HashMap<Object, Object>();
     		options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
     		unit = LoaderPlugin.getDefault().load( unit_uri, options );
-		} catch (URIMalformedException e) {
-			e.printStackTrace();
-			theTestCase = new FailedTestCase(failedTestName, e);
-            return theTestCase;
-		} catch (NotRegisteredURIException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			theTestCase = new FailedTestCase(failedTestName, e);
             return theTestCase;
