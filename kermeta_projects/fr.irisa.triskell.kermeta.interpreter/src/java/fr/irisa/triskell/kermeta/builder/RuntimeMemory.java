@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.19 2008-06-12 07:17:55 ftanguy Exp $
+/* $Id: RuntimeMemory.java,v 1.20 2008-06-16 08:48:06 dvojtise Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -21,6 +21,8 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 
 /**
  * The runtime memory of a program that is currently executed
@@ -52,6 +54,13 @@ public class RuntimeMemory {
 	public AbstractKInterpreter getInterpreter() {
 		return _interpreter;
 	}
+	
+	/** list of EPackage that have been used to load or save model	
+	 * the key is the NSURI, (used to avoid reloading a resource with the save NSURI)
+	 * this helps to deal with the problem of classcast exception when saving instances created from various version in memory of the same MM
+	 */
+	//public Hashtable<String,EPackage> mmEPackages = new Hashtable<String,EPackage>();
+	public Registry interpreterEPackageRegistry = new EPackageRegistryImpl();
 	
     public RuntimeMemory(KermetaUnit unit, AbstractKInterpreter interpreter) {
         roFactory = new RuntimeObjectFactory(this);

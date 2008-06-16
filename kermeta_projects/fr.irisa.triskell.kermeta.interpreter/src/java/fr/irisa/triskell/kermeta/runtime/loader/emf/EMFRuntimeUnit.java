@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.70 2008-06-13 09:31:41 cfaucher Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.71 2008-06-16 08:48:05 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -161,7 +161,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         internalLog.debug("URI : " + contentMap.getFactory().getMemory().getUnit().getUri() +  "; meta : " + p_metamodel_uri);
     	URI u = createURI(p_metamodel_uri);
         // Load resource
-    	logEMFRegistryContent();
+    	logEMFRegistryExtensionContent();
     	ResourceSet resource_set = new ResourceSetImpl();
     	Resource resource = resource_set.getResource(u, true);
     	try {
@@ -177,7 +177,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     }
 
     /** print the content of the EMF Registry */
-	private static String logEMFRegistryContent() {
+	private static String logEMFRegistryExtensionContent() {
 		String msg = "";
 		try {
 				
@@ -213,8 +213,9 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			// reuse the ResourceSet from the repository
 			ResourceSet resourceset = getOrCreateRepositoryResourceSetForResource(resRO);
 			
+			// deal with EPackage Registry
 			if(!metamodel_uri.equals("")){
-				// add the metamodel in the resourcesetregistry in order to make it load correctly
+				// add the metamodel in the resourceSetRegistry in order to make it load correctly
 				Registry reg = resourceset.getPackageRegistry();
 				
 				Resource res = getMetaModelResource();
@@ -223,13 +224,16 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 				while(resListIt.hasNext()){
 					Resource mmRes = resListIt.next();
 					for ( EObject o : mmRes.getContents() ) {
-						if ( o instanceof EPackage )
-							EMFRegistryHelper.safeRegisterPackages(reg, (EPackage) o);							
+						if ( o instanceof EPackage ){
+							EMFRegistryHelper.safeRegisterPackages(reg, (EPackage) o);
+							// we also need to ensure that the future save will reuse the same resource, this ensure that we won't have ClassCast exception
+							// because the object have been created from 2 different MM resource
+							// so we store this metamodel resource in the interpreter memory
+							EMFRegistryHelper.safeRegisterPackages(getRuntimeMemory().interpreterEPackageRegistry, (EPackage) o);
+						}
 					}
-					//EPackage ePack = (EPackage) mmRes.getContents().get(0);// get first package (usual ecore file have only one package ...)
-							// improved version should check to get all of them from the root
-					//EMFRegistryHelper.safeRegisterPackages(reg,ePack);
 				}
+				
 			}
 			// If EMF Diagnostic is enabled
 	    	if(ENABLE_EMF_DIAGNOSTIC)
@@ -254,7 +258,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    		resource = 	(XMLResource)resourceset.createResource(u);
     		
 	    	if(resource != null){
-    			resource.load(options);
+    			resource.load(options); 
     			if(metamodel_uri.equals("")){
     				// the model was correctly loaded even if the uri was not provided
     				// this mean that the metamodel is a registered package
@@ -270,7 +274,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     		}
     		else
     			throwKermetaRaisedExceptionOnLoad(
-    			"Not able to create a resource for URI: "+ u + "\n  failing on resource = 	(XMLResource)resourceset.createResource(u);  \n" + logEMFRegistryContent(), null);
+    			"Not able to create a resource for URI: "+ u + "\n  failing on resource = 	(XMLResource)resourceset.createResource(u);  \n" + logEMFRegistryExtensionContent(), null);
 
 			// Now, process the conversion of EMF model into Runtime representation so that kermeta can interprete it.
 	    	EMF2Runtime emf2Runtime = getEMF2Runtime(unit, resource);
@@ -318,7 +322,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     {	
     	// run in a job
     	LoaderJob myJob = new LoaderJob("Kermeta is loading model " + getUriAsString(), resRO, this);
-    	myJob.schedule();
+		myJob.schedule();
 		// must wait before continuing
 		try {
 			myJob.join();
@@ -375,29 +379,61 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			internalLog.debug("registering extension: ecore");
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 		}*/
-		logEMFRegistryContent();
+		logEMFRegistryExtensionContent();
 	}
     
 	/**
 	 * Save this RuntimeUnit as an XMIModel (EMFModel)
 	 * TODO : rename this method in saveAsEMFModel to be consistent with KermetaUnit?
 	 * Get the extension specified in file_path and decide to choose it as the extension of XMIResource.
-	 * @param file_path the xmi file. the extension of the file should be .km
+	 * This operation code mainly deals with Resource and Registry problems, the actual work of converting RuntimeObject to EMF object is done in updateEMFModel
+	 * @param file_path the xmi file. 
 	 */
 	public void save(String file_path) {
-		// Get and load the resource of the ECore MetaModel of which the model that we want to save is an instance
+		// Get and load the resource of the ECore MetaModel of which the model that we want to save is an instance			
         if (this.getMetaModelUri() != null && this.getMetaModelUri().length()>0)
         {
+        	// set this.metaModelResource with the correct resource    	
         	try {
-        		this.metaModelResource = this.loadMetaModelAsEcore(this.getMetaModelUri());
+        		Resource mmResource = this.loadMetaModelAsEcore(this.getMetaModelUri());
+        		// try to find this MM in the interpreter Registry : if found, switch to the already loaded one
+        		EObject o = mmResource.getContents().get(0);
+				if ( o instanceof EPackage ){
+					String NsURI = ((EPackage) o).getNsURI();
+					if(NsURI != null && !NsURI.equals(""))
+						if(getRuntimeMemory().interpreterEPackageRegistry.containsKey(NsURI)){
+							// must use the already existing resource for this NsURI
+							this.metaModelResource = ((EPackage)getRuntimeMemory().interpreterEPackageRegistry.get(NsURI)).eResource();
+						}
+				}
+				// else : add this resource content in the interpreter registry
+				if(this.metaModelResource == null){
+        			this.metaModelResource = mmResource;
+        			Iterator<Resource> resListIt = findDependentResources(mmResource).listIterator();
+    				while(resListIt.hasNext()){
+    					Resource mmRes = resListIt.next();
+    					for ( EObject o2 : mmRes.getContents() ) {
+    						if ( o2 instanceof EPackage ){
+    							EMFRegistryHelper.safeRegisterPackages(getRuntimeMemory().interpreterEPackageRegistry, (EPackage) o2);
+    						}
+    					}
+    				}
+				}
         	}
         	catch (WrappedException we){
-        		throwKermetaRaisedExceptionOnLoad(
-        		"Error Loading metamodel '" + this.getMetaModelUri() + "' for saving model '" + this.getUriAsString() + "' : " + we.exception().getMessage(), we);
+        		// maybe we are looking an already registered Resource
+        		if(getRuntimeMemory().interpreterEPackageRegistry.containsKey(this.getMetaModelUri()))
+        			this.metaModelResource = ((EPackage)getRuntimeMemory().interpreterEPackageRegistry.get(this.getMetaModelUri())).eResource();
+        		else
+        			throwKermetaRaisedExceptionOnLoad(
+        				"Error Loading metamodel '" + this.getMetaModelUri() + "' for saving model '" + this.getUriAsString() + "' : " + we.exception().getMessage(), we);
 			}
-			catch (IllegalArgumentException iae){
-        		// also catch
-        		throwKermetaRaisedExceptionOnLoad(
+        	catch (IllegalArgumentException iae){
+        		// maybe we are looking an already registered Resource
+        		if(getRuntimeMemory().interpreterEPackageRegistry.containsKey(this.getMetaModelUri()))
+        			this.metaModelResource = ((EPackage)getRuntimeMemory().interpreterEPackageRegistry.get(this.getMetaModelUri())).eResource();
+        		else
+        			throwKermetaRaisedExceptionOnLoad(
                 		"Error Loading metamodel '" + this.getMetaModelUri() + "' for saving model '" + this.getUriAsString() + "' : " + iae.getMessage(), iae);
         	}
         }
@@ -424,6 +460,10 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	        // Create the resource, and fill it (done in updateEMFModel)
         	// DVK: does this case occurs ???
 	        ResourceSet resource_set = new ResourceSetImpl();
+
+	        // add the interpreter EPackage registry content to this ResourceSet Registry
+	        resource_set.getPackageRegistry().putAll(getRuntimeMemory().interpreterEPackageRegistry);
+	        
 	        Runtime2EMF r2e = new Runtime2EMF(this, resource_set.createResource(u));
 	        r2e.updateEMFModel(saveWithNewURI);
 	        res = r2e.getResource();
@@ -434,6 +474,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         		// current resource
         	res = updateEMFResource(associatedResource,u);
         	RuntimeObject roRepository = (RuntimeObject) associatedResource.getProperties().get("repository");
+        	
 			RuntimeObject roResources = (RuntimeObject) roRepository.getProperties().get("resources");
 			RuntimeObject rouseInterpreterInternalResources = (RuntimeObject) roRepository.getProperties().get("useInterpreterInternalResources");
 			useInterpreterInternalResources = rouseInterpreterInternalResources != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(rouseInterpreterInternalResources) : false;		
@@ -881,7 +922,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         }
         else // if metaModelResource is null 
         {
-            throwKermetaRaisedExceptionOnSave("Metamodel for the instance to save was not found or provided.", null);
+            throwKermetaRaisedExceptionOnSave("Metamodel for the instance to load/save was not found or provided.", null);
         }
 		return metaModelResource;
 	}
