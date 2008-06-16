@@ -1,6 +1,6 @@
 
 
-/*$Id: WorkbenchTest.java,v 1.1 2008-06-02 13:29:12 ftanguy Exp $
+/*$Id: WorkbenchTest.java,v 1.2 2008-06-16 15:54:52 dvojtise Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	WorkbenchTest.java
 * License : EPL
@@ -11,6 +11,8 @@
 */
 
 package org.kermeta.kpm.test;
+
+import junit.framework.Assert;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -58,10 +60,15 @@ public abstract class WorkbenchTest {
 	 */
 	protected void waitForBuild(IProject p) {
 		try {
-			while ( KpmManager.getDefault().isBeingBuilt(p) ) {
+			int nbTries = 0;
+			while ( KpmManager.getDefault().isBeingBuilt(p) && nbTries < 600) {
 				Thread.sleep(100);
 				System.out.println("waiting for " + p.getFullPath().toString() );
+				nbTries ++;
 			}
+			// still being build, this means the time out has expired
+			if(KpmManager.getDefault().isBeingBuilt(p))
+				Assert.fail("Build of " + p.getFullPath().toString() + " took too much time (>" +  nbTries*100 + "ms)");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
