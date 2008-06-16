@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.72 2008-05-28 13:36:26 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.73 2008-06-16 15:08:03 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.BasicEList;
@@ -60,6 +61,11 @@ public class Runtime2EMF {
 	 * 
 	 */
 	protected HashSet<RuntimeObject> runtimeObjectsToUpdate;
+
+	/**
+	 * List of the properties that need to be sorted because the collection is ordered
+	 */
+	List<SortPropertyCommand> propertiesToSort = new ArrayList<SortPropertyCommand>();
 
 	protected EMFRuntimeUnit unit;
 
@@ -134,6 +140,8 @@ public class Runtime2EMF {
 		{ fillRuntimeObjectToUpdateList(ro); }
 		internalLog.info("Saving " + instances.size()+"/"+ runtimeObjectsToUpdate.size()+ " objects from " + resource.getURI().toString() +  " and its dependencies ");
 		
+		propertiesToSort.clear();
+		
 		// Now that we have the complete list of runtime objects, we can update
 		// the properties of each of those runtime objects. The mapping between
 		// RuntimeObject and EObject to update is done through the
@@ -141,11 +149,14 @@ public class Runtime2EMF {
 		internalLog.debug("updateEMFModel phase 2 : get/create the associated EObject, update the properties ");
 		for (RuntimeObject ro : runtimeObjectsToUpdate)
 		{	
-			setEObjectPropertiesFromRuntimeObject(ro); 
+			setEObjectPropertiesFromRuntimeObject( ro); 
 			processedElements++;
 		}
 
-		
+		// sort the properties that are ordered
+		for( SortPropertyCommand spc : propertiesToSort){
+			spc.run();
+		}
 		
 		// Add the root elements to the XMI resource
 		// Note: r2e.emfObject entry is only used for eObject retrieval during the
@@ -314,31 +325,32 @@ public class Runtime2EMF {
 		else fillRuntimeObjectToUpdateList(property);
 	}
 
+
 	/**
 	 * Set the values previously retrieved by findEMFObject... to their owning
 	 * eobjects. rObject should never be a reference to a primitive type.
 	 * @param rObject
 	 */
-	protected void setEObjectPropertiesFromRuntimeObject(RuntimeObject rObject) {
+	protected void setEObjectPropertiesFromRuntimeObject( RuntimeObject rObject) {
 		EObject eObject = createEObjectFromRuntimeObject(rObject);
 		if(eObject != null) 
 			if(eObject.equals(rObject.getKCoreObject()))
 			{
 				//	do not update objects from the framework it self (this is may be due to bug #156 the reflexion seem to not be complete and the save crashes ...
 				internalLog.debug("     Ignoring update of framework EObject : "+eObject.eClass().getName());
-				return;
+				return ;
 			}
-		EStructuralFeature feature = null; 
+		if (eObject == null) // cannot continue
+			unit.throwKermetaRaisedExceptionOnSave(
+					"Could not find an EClass for RuntimeObject : " + rObject
+					+ "\n   properties : "	+ rObject.getProperties() + ";"
+					+ "\n   possible reason : the RuntimeObject has a weird type? Please check '"
+					+ unit.getMetaModelUri() + "'", null);
+		EStructuralFeature feature = null;
 		
 		// Get all the Structural features of requested eObject
 		for (String prop_name : rObject.getProperties().keySet()) {
-			// eObject cannot be null, if rObject refers to a primitive type
-			if (eObject == null)
-				unit.throwKermetaRaisedExceptionOnSave(
-						"Could not find an EClass for RuntimeObject : " + rObject
-						+ "\n   properties : "	+ rObject.getProperties() + ";"
-						+ "\n   possible reason : the RuntimeObject has a weird type? Please check '"
-						+ unit.getMetaModelUri() + "'", null);
+									
 			String eprop_name = prop_name;
 			// Special handling -> convert kermeta-Enumeration in ecore-EEnum
 			RuntimeObject property = (RuntimeObject) rObject.getProperties().get(prop_name);
@@ -352,7 +364,10 @@ public class Runtime2EMF {
 			// that only exists in kermeta metamodel representation
 			if (feature != null && feature.isChangeable())
 			{
-				// Unset the old value of feature
+				// Unset the old value of feature in case it was recycled from a previous load
+				// DVK note: unsetting like this implies that opposite properties are unset and set twice ...
+				//   This may look not efficient, but I'm not sure weither we would have better performance by doing this in a separate pass because this would lead to 
+				//	 special code to deal with collection that accept non-unique value, in addition to the cost of the second pass ...
 				try {
 					eObject.eUnset(feature);
 				}
@@ -363,30 +378,42 @@ public class Runtime2EMF {
 							+ "\n   possible reason : bug in EMF, maybe inverting some inheritance in your metamodel may solve it",
 							uoe);
 				}
-				
 				// If the feature is a collection of Objects
 				if (RuntimeObject.COLLECTION_VALUE.equals(property.getPrimitiveType())&& 
 						property.getJavaNativeObject()!=null)
 				{
+					
 					// For each feature of the collection of features
 					ArrayList<RuntimeObject> colArr = (ArrayList<RuntimeObject>) property.getJavaNativeObject();
-					for(int i = colArr.size()-1; i >= 0 ; i--)
+					//for(int i = colArr.size()-1; i >= 0 ; i--)
+					for(int i = 0; i <= colArr.size()-1 ; i++)
 					{
 						RuntimeObject rcoll = colArr.get(i);
 						Object p_o = getOrCreatePropertyFromRuntimeObject( rcoll, feature);
-						if (p_o != null) { ((EList<Object>) eObject.eGet(feature)).add(0,p_o); }
+						
+						if (p_o != null) {
+							//internalLog.debug("    adding "+ eObject.eClass().getName() + "."  + feature.getName() + " =  "+ rcoll.getProperties().toString());
+							//((EList<Object>) eObject.eGet(feature)).add(0,p_o); 
+							((EList<Object>) eObject.eGet(feature)).add(p_o);
+						}
 					}
 					internalLog.debug("     "+ rObject + "; \n\t" +
 							eObject + "; \n\t" +
 							eObject.eClass().getName() + "."  + feature.getName() + 
-							"; num. of elts in feature : " + ((EList) eObject.eGet(feature)).size());
+							"; num. of elts in feature : " + ((EList) eObject.eGet(feature)).size());					
+					if(feature.isOrdered()){
+						this.propertiesToSort.add(new SortPropertyCommand(colArr, eObject, feature));
+						internalLog.debug("We will need to make sure that collection "+ eObject.eClass().getName() + "."  + feature.getName() + " is correctly ordered");
+					}
 				}
 				else // EObject, EClass, EDataType
 				{
 					Object p_o = getOrCreatePropertyFromRuntimeObject(property, feature);
 					/*if(p_o instanceof EnumerationLiteral)
 						p_o = getOrCreatePropertyFromRuntimeObject(property, feature);*/
-					eObject.eSet(feature, p_o);					
+					//EObject eObject2 = (EObject) p_o;
+					eObject.eSet(feature, p_o);	
+					//internalLog.debug("    setting "+ eObject.eClass().getName() + "."  + feature.getName() + " = " + p_o.toString() + " on  "+ rObject.getProperties().toString());
 					if (p_o == null) {
 						internalLog.warn("    setting null to "+ eObject.eClass().getName() + "."  + feature.getName() + "");}
 				}
