@@ -1,6 +1,6 @@
 
 
-/*$Id: WorkbenchTest.java,v 1.2 2008-06-16 15:54:52 dvojtise Exp $
+/*$Id: WorkbenchTest.java,v 1.3 2008-06-16 15:56:21 dvojtise Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	WorkbenchTest.java
 * License : EPL
@@ -61,7 +61,7 @@ public abstract class WorkbenchTest {
 	protected void waitForBuild(IProject p) {
 		try {
 			int nbTries = 0;
-			while ( KpmManager.getDefault().isBeingBuilt(p) && nbTries < 600) {
+			while ( KpmManager.getDefault().isBeingBuilt(p) && nbTries < 3000) {
 				Thread.sleep(100);
 				System.out.println("waiting for " + p.getFullPath().toString() );
 				nbTries ++;
