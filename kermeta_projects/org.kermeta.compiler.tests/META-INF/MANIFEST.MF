@@ -6,6 +6,8 @@ Bundle-Version: 0.1.99.qualifier
 Eclipse-LazyStart: true
 Bundle-Activator: org.kermeta.compiler.tests.CompilerTestsPlugin
 Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi,
  fr.irisa.triskell.kermeta.tests,
  fr.irisa.triskell.kermeta.interpreter,
  org.kermeta.io.loader,
