@@ -1,5 +1,5 @@
 
-/*$Id: Comp_initializationUseCase.java,v 1.4 2008-05-20 08:22:47 ftanguy Exp $
+/*$Id: Comp_initializationUseCase.java,v 1.5 2008-06-16 13:22:53 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1

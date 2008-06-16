@@ -259,6 +259,8 @@
     <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.3"/>
     <verifiedBy href="comp_primitiveType/comp_primitiveType.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_primitiveType/comp_primitiveType.trek#//@ktestCases.1"/>
+    <verifiedBy href="comp_primitiveType/comp_primitiveType.trek#//@ktestCases.2"/>
+    <verifiedBy href="comp_primitiveType/comp_primitiveType.trek#//@ktestCases.3"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.10"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.11"/>
     <status progress="20" key="Impl_Java"/>

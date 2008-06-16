@@ -1,5 +1,5 @@
 
-/*$Id: Comp_primitiveTypeUseCase.java,v 1.5 2008-05-20 08:22:48 ftanguy Exp $
+/*$Id: Comp_primitiveTypeUseCase.java,v 1.6 2008-06-16 13:22:55 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -174,6 +174,44 @@ public class Comp_primitiveTypeUseCase {
 	
 	@Test public void comp_package_test_comp_primitiveType_test002() {
 		run(input_comp_primitiveType_test002, output_comp_primitiveType_test002, expected_output_comp_primitiveType_test002);
+	}
+
+	private String test_case_comp_primitiveType_test003 = "test003";
+	
+	private String input_comp_primitiveType_test003 = "";
+	
+	private String output_comp_primitiveType_test003 = "";
+	
+	private String expected_output_comp_primitiveType_test003 = "";
+	
+	@Before public void setParams_comp_primitiveType_test003() {
+		String prefix = "comp_primitiveType/test003";
+		input_comp_primitiveType_test003 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_primitiveType_test003 + ".km";
+		output_comp_primitiveType_test003 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_primitiveType_test003 + ".ecore";
+		expected_output_comp_primitiveType_test003 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_primitiveType_test003 + ".ecore";
+	}
+	
+	@Test public void comp_package_test_comp_primitiveType_test003() {
+		run(input_comp_primitiveType_test003, output_comp_primitiveType_test003, expected_output_comp_primitiveType_test003);
+	}
+
+	private String test_case_comp_primitiveType_test004 = "test004";
+	
+	private String input_comp_primitiveType_test004 = "";
+	
+	private String output_comp_primitiveType_test004 = "";
+	
+	private String expected_output_comp_primitiveType_test004 = "";
+	
+	@Before public void setParams_comp_primitiveType_test004() {
+		String prefix = "comp_primitiveType/test004";
+		input_comp_primitiveType_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_primitiveType_test004 + ".km";
+		output_comp_primitiveType_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_primitiveType_test004 + ".ecore";
+		expected_output_comp_primitiveType_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_primitiveType_test004 + ".ecore";
+	}
+	
+	@Test public void comp_package_test_comp_primitiveType_test004() {
+		run(input_comp_primitiveType_test004, output_comp_primitiveType_test004, expected_output_comp_primitiveType_test004);
 	}
 
 	private String test_case_comp_tag_test011 = "test011";
