@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectHelper.java,v 1.9 2008-04-30 13:56:55 ftanguy Exp $
+/* $Id: RuntimeObjectHelper.java,v 1.10 2008-06-17 13:04:54 dvojtise Exp $
  * Project   : Kermeta 
  * File      : RuntimeObjectHelper.java
  * License   : EPL
@@ -60,6 +60,29 @@ public class RuntimeObjectHelper {
 		boolean b = false;
 		KermetaUnit kunit = robject.getFactory().getMemory().getUnit();
 		ClassDefinition coll_cd = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::Collection");
+		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
+				.getMetaclass().getKCoreObject();
+		if (KermetaModelHelper.ClassDefinition.isSuperTypeOf(coll_cd,
+				(ClassDefinition) c.getTypeDefinition()))
+			b = true;
+		return b;
+	}
+	
+	/**
+	 * Returns true if the given RuntimeObject is an OrderedCollection (Collection,
+	 * ReflectiveCollection, ReflectiveSequence), false otherwise. We use this
+	 * method since Collections that are void do not have a
+	 * "CollectionArrayList" entry in their associated data hashtable (see
+	 * RuntimeObject doc), so we can't test with this
+	 * 
+	 * @param robject
+	 *            the object to test
+	 * @return true if robject type is Collection, false otherwise
+	 */
+	public static boolean isanOrderedCollection(RuntimeObject robject) {
+		boolean b = false;
+		KermetaUnit kunit = robject.getFactory().getMemory().getUnit();
+		ClassDefinition coll_cd = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::OrderedCollection");
 		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
 				.getMetaclass().getKCoreObject();
 		if (KermetaModelHelper.ClassDefinition.isSuperTypeOf(coll_cd,
