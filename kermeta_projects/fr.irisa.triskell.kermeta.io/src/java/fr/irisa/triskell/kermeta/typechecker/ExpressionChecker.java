@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.67 2008-05-28 15:44:19 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.68 2008-06-17 06:59:57 bmorin Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -611,16 +611,23 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        		ClassDefinition tCDef = (ClassDefinition) ((Class) targetType.getFType()).getTypeDefinition();
 	        		if ( ! KermetaModelHelper.ClassDefinition.isSuperTypeOf(pCDef, tCDef) ) {
 	        			Operation op = null;
+	        			Property property = null;
 	        			ClassDefinition cd = null;
 	        			EObject current = expression;
 	        			while ( ! (current instanceof Package) && current != null ) {
 	        				if ( current instanceof Operation && op == null )
 	        					op = (Operation) current;
+	        				if ( current instanceof Property && property == null )
+	        					property = (Property) current;
 	        				if ( current instanceof ClassDefinition && cd == null )
 	        					cd = (ClassDefinition) current;
 	        				current = current.eContainer();
 	        			}
-	        			String message = "TYPE-CHECKER : " + KermetaModelHelper.NamedElement.qualifiedName(cd) + "." + op.getName();
+	        			String message = "";
+	        			if ( op != null )
+	        				message = "TYPE-CHECKER : " + KermetaModelHelper.NamedElement.qualifiedName(cd) + "." + op.getName();
+	        			else if ( property != null )
+	        				message = "TYPE-CHECKER : " + KermetaModelHelper.NamedElement.qualifiedName(cd) + "." + property.getName();
 	        			message += " TYPE-CHECKER : Invalid cast, "+provided_type+" is not a supertype of required type : "+targetType+".";
 	        			unit.error(message, expression);
 	        			return targetType;
