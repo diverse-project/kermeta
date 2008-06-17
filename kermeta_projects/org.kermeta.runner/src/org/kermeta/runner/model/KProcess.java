@@ -1,6 +1,6 @@
 
 
-/*$Id: KProcess.java,v 1.3 2008-04-14 06:48:57 ftanguy Exp $
+/*$Id: KProcess.java,v 1.4 2008-06-17 14:35:46 dvojtise Exp $
 * Project : org.kermeta.debugger
 * File : 	KProcess.java
 * License : EPL
@@ -38,16 +38,13 @@ public class KProcess extends RuntimeProcess {
 
 	public Interpreter getInterpreter() {
 		KBasicProcess basicProcess = (KBasicProcess) getSystemProcess();
-		return basicProcess.getInterpreter();			
+		return basicProcess != null ? basicProcess.getInterpreter(): null;			
 	}
 
 	@Override
 	public boolean isTerminated() {
-		try {
-			return getInterpreter().isTerminated();
-		} catch (NullPointerException e) {
-			return false;
-		}
+		Interpreter interpreter = getInterpreter();
+		return interpreter != null ? interpreter.isTerminated() : false;		
 	}
 	
 }
