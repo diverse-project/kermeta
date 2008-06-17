@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.49 2008-03-03 13:39:58 dvojtise Exp $
+ * $Id: resource.kmt,v 1.50 2008-06-17 14:30:27 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -124,6 +124,71 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 		result := res
 	end
 
+	/**
+	 * Search for elements referenced by one element contained by this resource that are not contained by this repository
+	 * ie. element that EMF would claim as "not contained in a resource"
+	 * checks only objects directly referenced by the elment in this resource, ignores inderecly referenced objects
+	 * example of use :
+	 *  var report : Set&lt;DanglingDiagnostic&gt;
+	 *	report := resource.findDanglingModelElements()
+	 *	report.each{ diag | stdio.writeln(diag.toString ) }
+	 */
+	operation findDanglingModelElements() : Set<DanglingDiagnostic> is do
+		result := Set<DanglingDiagnostic>.new
+		self.contents.each{containedObj |
+				// for all references and attribute
+				var classDef : kermeta::language::structure::ClassDefinition
+				classDef ?= containedObj.getMetaClass().typeDefinition
+				if(not classDef.isVoid) then
+     				//stdio.writeln("checking a " + classDef.name)
+					classDef.allAttribute.each{prop |
+						if( not prop.isDerived) then // This is weird to have a derived attribute but I don't want to crash for that
+	     					//stdio.writeln("   trying property " + prop.name)
+							if( prop.upper > 1 or prop.upper == -1) then
+								// this is a collection
+								var referencedObjs : Collection<Object> 
+								referencedObjs ?= containedObj.get(prop)
+								if(not referencedObjs.isVoid) then
+									// check if this referenced objects are part of one of the resource of this repository
+									referencedObjs.each{referencedObj |
+										if(not self.repository.resources.exists{ res2 | res2.contents.contains(referencedObj) } and 
+										   not (referencedObj.isKindOf(String) or
+											    referencedObj.isKindOf(Integer) or
+											 	referencedObj.isKindOf(Boolean))  )
+										then
+											var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
+											diagnostic.danglingElement := referencedObj
+											diagnostic.referencingElement := containedObj
+											diagnostic.referencingProperty := prop
+											result.add(diagnostic)								
+										end	
+									}
+								end
+							else
+								var referencedObj : Object 
+								referencedObj := containedObj.get(prop)
+								if(not referencedObj.isVoid) then
+									// check if this referenced object is part of one of the resource of this repository
+									if(not self.repository.resources.exists{ res2 | res2.contents.contains(referencedObj) } and  
+									   not	(referencedObj.isKindOf(String) or
+										 	 referencedObj.isKindOf(Integer) or
+										     referencedObj.isKindOf(Boolean)) )
+									then
+										var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
+										diagnostic.danglingElement := referencedObj
+										diagnostic.referencingElement := containedObj
+										diagnostic.referencingProperty := prop
+										result.add(diagnostic)								
+									end	
+								end
+							end
+						end
+					}
+				//else
+					// not a classDefinition, should try with primitiveType and Enumetation ?					
+				end
+			}
+		end
 }
 
 
@@ -321,7 +386,7 @@ abstract class Repository
 	 * Search for elements referenced by one element contained by this repository  that are not contained by this repository
 	 * ie. element that EMF would claim as "not contained in a resource"
 	 * example of use :
-	 *  var report : Set<DanglingDiagnostic>
+	 *  var report : Set&lt;DanglingDiagnostic&gt;
      *	report := repository.findDanglingModelElements()
      *	report.each{ diag | stdio.writeln(diag.toString ) }
 	 */
@@ -353,7 +418,7 @@ abstract class Repository
 											var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
 											diagnostic.danglingElement := referencedObj
 											diagnostic.referencingElement := containedObj
-											diagnostic.referencingProperty ?= prop
+											diagnostic.referencingProperty := prop
 											result.add(diagnostic)								
 										end	
 									}
@@ -371,7 +436,7 @@ abstract class Repository
 										var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
 										diagnostic.danglingElement := referencedObj
 										diagnostic.referencingElement := containedObj
-										diagnostic.referencingProperty ?= prop
+										diagnostic.referencingProperty := prop
 										result.add(diagnostic)								
 									end	
 								end
