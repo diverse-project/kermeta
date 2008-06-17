@@ -1,4 +1,4 @@
-/* $Id: 071_DynamicInstanceLoadSaveWithVariousMM_NsURI.main.kmt,v 1.1 2008-06-13 15:12:43 dvojtise Exp $ 
+/* $Id: 071_DynamicInstanceLoadSaveWithVariousMM_NsURI.main.kmt,v 1.2 2008-06-17 15:23:41 dvojtise Exp $ 
  * Creation : June 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -42,7 +42,7 @@ class Main inherits TestCase
      * NsUri in the metamodel correspond to nothing known
      * this should work because the model is created using  "createDynamicInstance"
      */
-/*    operation test001GetResourceSaveWithRandomNsURI() : Void is
+    operation test001GetResourceSaveWithRandomNsURI() : Void is
     do
     	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithRandomNsURI_Model.xmi"
     	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_GetResourceSave_MMWithRandomNsURI_Model.xmi"
@@ -75,7 +75,7 @@ class Main inherits TestCase
        	item := model.items.detect{ i | i.name.equals("0")}
        	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
     end
- */   
+    
     /**
      * Load the model using CreateResource
      * NsUri correspond to nothing known
@@ -83,7 +83,8 @@ class Main inherits TestCase
      */
     operation test002CreateResourceSaveWithRandomNsURI() : Void is
     do
-    	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithRandomNsURI_Model.xmi"
+    	//var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithRandomNsURI_Model.xmi"
+    	var ifileName : String init "../instances/071_MetamodelWithRandomNsURI_Model.xmi"
     	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_CreateResourceSave_MMWithRandomNsURI_Model.xmi"
     	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithRandomNsURI.ecore"
     	var model : MetamodelWithRandomNsURI::Model
@@ -115,13 +116,42 @@ class Main inherits TestCase
        	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
     end
     
-    /*
+    /**
      * Load the model using GetResource
      * NsUri corresponds to a platform:/Resource uri which physically point to the correct ecore file
      */
     operation test003GetResourceSaveWithPlatformResValidNsURI() : Void is
     do    
-    	raise kermeta::exceptions::NotImplementedException.new
+    	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithResValidNsURI_Model.xmi"
+    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_GetResourceSave_MMWithResValidNsURI_Model.xmi"
+    	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithResValidNsURI.ecore"
+    	var model : MetamodelWithResInvalidNsURI::Model
+		var repository : EMFRepository init EMFRepository.new	 	
+   	    var resource : Resource
+    	resource :=repository.getResource(ifileName)
+       	// resource.load() // not needed with getResource
+       	
+       	// get the model
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithResInvalidNsURI::Model)}
+       	
+       	// do some changes
+       	var item : MetamodelWithResInvalidNsURI::Item init MetamodelWithResInvalidNsURI::Item.new
+		item.name := "0"
+		model.items.add(item)
+		
+       	// save
+       	resource.saveWithNewURI(ofileName)
+       	
+       	// reload the saved file and find the added element
+       	model := void
+       	resource := void
+       	item := void
+       	repository := EMFRepository.new
+       	resource := repository.getResource(ofileName)
+       	resource.load()
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithResInvalidNsURI::Model)}
+       	item := model.items.detect{ i | i.name.equals("0")}
+       	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
     end
     
     /**
@@ -131,7 +161,36 @@ class Main inherits TestCase
      */
     operation test004CreateResourceSaveWithPlatformResValidNsURI() : Void is
     do
-    	raise kermeta::exceptions::NotImplementedException.new
+    	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithResValidNsURI_Model.xmi"
+    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_CreateResourceSave_MMWithResValidNsURI_Model.xmi"
+    	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithResValidNsURI.ecore"
+    	var model : MetamodelWithResInvalidNsURI::Model
+		var repository : EMFRepository init EMFRepository.new	 	
+   	    var resource : Resource
+    	resource :=repository.createResource(ifileName, mmfileName)
+       	resource.load()
+       	
+       	// get the model
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithResInvalidNsURI::Model)}
+       	
+       	// do some changes
+       	var item : MetamodelWithResInvalidNsURI::Item init MetamodelWithResInvalidNsURI::Item.new
+		item.name := "0"
+		model.items.add(item)
+		
+       	// save
+       	resource.saveWithNewURI(ofileName)
+       	
+       	// reload the saved file and find the added element
+       	model := void
+       	resource := void
+       	item := void
+       	repository := EMFRepository.new
+       	resource := repository.createResource(ofileName, mmfileName)
+       	resource.load()
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithResInvalidNsURI::Model)}
+       	item := model.items.detect{ i | i.name.equals("0")}
+       	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
     end
     
     /**
@@ -139,7 +198,7 @@ class Main inherits TestCase
      * Load the model using GetResource
      * NsUri corresponds to a platform:/Resource uri which physically  doesn't point to the correct ecore file
      */
- /*   operation test005GetResourceSaveWithPlatformResInvalidNsURI() : Void is
+    operation test005GetResourceSaveWithPlatformResInvalidNsURI() : Void is
     do
     	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithResInvalidNsURI_Model.xmi"
     	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_GetResourceSave_MMWithResInvalidNsURI_Model.xmi"
@@ -172,7 +231,7 @@ class Main inherits TestCase
        	item := model.items.detect{ i | i.name.equals("0")}
        	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
     end
-*/    
+    
     /**
      * Load the model using CreateResource
      * NsUri corresponds to a platform:/Resource uri which physically  doesn't point to the correct ecore file
@@ -217,7 +276,36 @@ class Main inherits TestCase
      */
     operation test007GetResourceSaveWithHttpNsURI() : Void is
     do
-    	raise kermeta::exceptions::NotImplementedException.new
+    	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithHttpNsURI_Model.xmi"
+    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_GetResourceSave_MMWithHttpNsURI_Model.xmi"
+    	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithHttpNsURI.ecore"
+    	var model : MetamodelWithResInvalidNsURI::Model
+		var repository : EMFRepository init EMFRepository.new	 	
+   	    var resource : Resource
+    	resource :=repository.getResource(ifileName)
+       	// resource.load() // not needed with getResource
+       	
+       	// get the model
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithResInvalidNsURI::Model)}
+       	
+       	// do some changes
+       	var item : MetamodelWithResInvalidNsURI::Item init MetamodelWithResInvalidNsURI::Item.new
+		item.name := "0"
+		model.items.add(item)
+		
+       	// save
+       	resource.saveWithNewURI(ofileName)
+       	
+       	// reload the saved file and find the added element
+       	model := void
+       	resource := void
+       	item := void
+       	repository := EMFRepository.new
+       	resource := repository.getResource(ofileName)
+       	resource.load()
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithResInvalidNsURI::Model)}
+       	item := model.items.detect{ i | i.name.equals("0")}
+       	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
     end
     
     /**
@@ -227,7 +315,36 @@ class Main inherits TestCase
      */
     operation test008CreateResourceSaveWitHttpNsURI() : Void is
     do
-    	raise kermeta::exceptions::NotImplementedException.new
+    	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithHttpNsURI_Model.xmi"
+    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_CreateResourceSave_MMWithHttpNsURI_Model.xmi"
+    	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithHttpNsURI.ecore"
+    	var model : MetamodelWithResInvalidNsURI::Model
+		var repository : EMFRepository init EMFRepository.new	 	
+   	    var resource : Resource
+    	resource :=repository.createResource(ifileName, mmfileName)
+       	resource.load()
+       	
+       	// get the model
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithResInvalidNsURI::Model)}
+       	
+       	// do some changes
+       	var item : MetamodelWithResInvalidNsURI::Item init MetamodelWithResInvalidNsURI::Item.new
+		item.name := "0"
+		model.items.add(item)
+		
+       	// save
+       	resource.saveWithNewURI(ofileName)
+       	
+       	// reload the saved file and find the added element
+       	model := void
+       	resource := void
+       	item := void
+       	repository := EMFRepository.new
+       	resource := repository.createResource(ofileName, mmfileName)
+       	resource.load()
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithResInvalidNsURI::Model)}
+       	item := model.items.detect{ i | i.name.equals("0")}
+       	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
     end
 }
 
