@@ -1,4 +1,4 @@
-/* $Id: serviceDiscovery.kmt,v 1.3 2008-06-10 15:08:11 bmorin Exp $
+/* $Id: serviceDiscovery.kmt,v 1.4 2008-06-17 15:33:59 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -21,6 +21,7 @@ require "platform:/resource/SmartAdapters/program/adapter/ServiceDiscovery.kmt"
 using kermeta::standard 
 using weaver
 using org::kermeta::runtime::adapter
+
 
 class ServiceDiscoveryMain
 {
@@ -57,9 +58,6 @@ class ServiceDiscoveryMain
 		stdio.writeln("K> We now obtain DA = SA (base) + UA (aspect)")
 		stdio.writeln("")
 		
-		stdio.writeln("K> Checking / simulating the woven model")
-		stdio.writeln("")
-		
 		stdio.writeln("K> Submit the model transformation to the platform")
 		stdio.writeln("     -Model comparison")
 		stdio.writeln("     -Analyze diff / match")
@@ -68,6 +66,9 @@ class ServiceDiscoveryMain
 		stdio.writeln("")
 		platformAdapter.loadUpdateModel(wovenModelUri)
 		platformAdapter.saveModel(finalModelUri)
+		
+		weaver.resourceModel.instances.one.asType(art::System).root.displayServices
+		
 		weaver.finalizeWeaver()
 	end
 }

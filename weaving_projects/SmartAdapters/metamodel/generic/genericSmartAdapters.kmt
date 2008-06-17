@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.24 2008-06-10 15:09:09 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.25 2008-06-17 15:34:39 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -10,7 +10,7 @@ package org;
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"
 require "platform:/resource/SmartAdapters/program/weaving/converter.kmt"
 
-require "platform:/resource/SmartAdapters/program/weaving/print.kmt"//to be removed
+require "platform:/resource/SmartAdapters/program/weaving/aspectizedFramework.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -19,7 +19,6 @@ using kermeta::exceptions
 using patternframework
 using org::smartadapters::core
 using org::smartadapters::extension
-using ecore
 using org::smartadapters::utils
 
 package smartadapters
@@ -116,25 +115,7 @@ package smartadapters
 			 * This operation weaves the the aspect for the binding b
 			 * In other words, it executes all the adaptations of the composition protocol  
 			 */
-			operation apply(b : Hashtable<Object, Object>/*, model : Object*/) 
-				/*pre modelCheckedBefore is do
-					var isChecked : Boolean init true
-					do
-						model.checkAllInvariants
-					rescue
-						isChecked := false
-					end
-					isChecked
-				end
-				post modelCheckedAfter is do
-					var isChecked : Boolean init true
-					do
-						model.checkAllInvariants
-					rescue
-						isChecked := false
-					end
-					isChecked
-				end*/
+			operation apply(b : Hashtable<Object, Object>) 
 			is do
 				var i : Integer init 1
 				binding := b
@@ -162,25 +143,7 @@ package smartadapters
 			 * This operation unweaves the previously woven aspect, for the current binding
 			 * In other words, it performs a roll back.
 			 */
-			operation unweave(/*model : Object*/) 
-				/*pre modelCheckedBefore is do
-					var isChecked : Boolean init true
-					do
-						model.checkAllInvariants
-					rescue
-						isChecked := false
-					end
-					isChecked
-				end
-				post modelCheckedAfter is do
-					var isChecked : Boolean init true
-					do
-						model.checkAllInvariants
-					rescue
-						isChecked := false
-					end
-					isChecked
-				end*/
+			operation unweave() 
 			is do
 				var i : Integer init 1
 				adapt.each{a | 

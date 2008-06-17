@@ -41,6 +41,8 @@
           eType="#//instance/TransmissionBinding" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" eType="#//String"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentDesc" eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operations" eType="#//type/Operation"
+          derived="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveInstance" eSuperTypes="#//instance/ComponentInstance"/>
     <eClassifiers xsi:type="ecore:EClass" name="CompositeInstance" eSuperTypes="#//instance/ComponentInstance">
@@ -53,7 +55,7 @@
       <eLiterals name="OFF"/>
       <eLiterals name="ON" value="1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute">
+    <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute" eSuperTypes="#//UpdateElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
           eType="#//type/Attribute"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
@@ -63,14 +65,14 @@
           eType="#//instance/ComponentInstance"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TransmissionBinding" eSuperTypes="#//instance/Binding">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="client" eType="#//type/PrimitivePort"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="server" eType="#//type/PrimitivePort"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="client" eType="#//type/Port"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="server" eType="#//type/Port"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DelegationBinding" eSuperTypes="#//instance/Binding">
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-          eType="#//type/PrimitivePort"/>
+          eType="#//type/Port"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="exported" lowerBound="1"
-          eType="#//type/PrimitivePort"/>
+          eType="#//type/Port"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="type" nsURI="http://art/type" nsPrefix="type">
@@ -104,18 +106,14 @@
     <eClassifiers xsi:type="ecore:EClass" name="FunctionalService" eSuperTypes="#//type/Service"/>
     <eClassifiers xsi:type="ecore:EClass" name="ControlService" eSuperTypes="#//type/Service"/>
     <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//ModelElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="sub" lowerBound="1" upperBound="-1"
-          eType="#//type/PrimitivePort" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//Boolean"
           defaultValueLiteral="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//TypedElement"/>
-    <eClassifiers xsi:type="ecore:EClass" name="PrimitivePort" eSuperTypes="#//ModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"
           eType="#//type/Service"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" lowerBound="1"
           eType="#//String"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//TypedElement"/>
     <eClassifiers xsi:type="ecore:EEnum" name="PortRole">
       <eLiterals name="client"/>
       <eLiterals name="server" value="1"/>

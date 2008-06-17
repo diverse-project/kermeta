@@ -1,4 +1,4 @@
-/* $Id: CustomWeaver.kmt,v 1.2 2008-06-10 15:10:34 bmorin Exp $
+/* $Id: CustomWeaver.kmt,v 1.3 2008-06-17 15:35:31 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -87,35 +87,63 @@ class Weaver
 		end
 	end
 
-	operation weaving(domainMMUri : String, domainMMPatternUri : String) : Void is do 
-		adapter.initClone
-	
-		/*---Pattern matching---*/
-		stdio.writeln("Searching base model elements matching the interface model...")
-		stdio.writeln("- The Metamodel and the model are transformed into a Prolog knowledge base")
-		stdio.writeln("- The inferface model (~pointcut) is tranformed into a Prolog query")
-		stdio.writeln("Better performance expected: ")				
-		stdio.writeln("  - Reuse already woven configurations (maintain a repository)")
-		stdio.writeln("  - Kermeta compiler:")
-		stdio.writeln("      - faster generation of the facts and the query")
-		stdio.writeln("      - more direct connection with InterProlog (Java-Prolog interface)")
+	operation weaving(domainMMUri : String, domainMMPatternUri : String) : Void is do
+		var continue : Boolean init true
+		stdio.writeln("Checking all invariants before weaving")
+		do
+			resourceModel.instances.one.checkAllInvariantsIte
+		rescue (e : kermeta::exceptions::ConstraintViolatedInv)
+			stdio.errorln(e.message)
+			do 
+				continue := stdio.read("$>Base model violates invariants. Continue weaving ? (y/n): ").toBoolean
+			rescue (e2 : kermeta::exceptions::Exception)
+				stdio.errorln("Cannot read value. Default value = n")
+				continue := false
+			end
+		end
 		stdio.writeln("")
+	
+		if continue then
+	
+			adapter.initClone
 		
-		var iteBindings : Iterator<Hashtable<Object, Object>> 
-		init Iterator<Hashtable<Object, Object>>.new
-		iteBindings := matcher.optimizedMatch(inputMetamodel, resourceModel.instances, adapter.~aspect.template, true, false, false)
-				       
-		/*---Applying the adapter to the base model---*/       
-		var binding : Hashtable<Object, Object>			
-		adapter.setDisplayInfo(false)
-		stdio.writeln("Weaving the graft model into the base model...")
-		stdio.writeln("  - contextualization of the interface model with the result of the Prolog query")
-		stdio.writeln("  - conversion MM' (interface/graft model) -> MM (base model)")
-		stdio.writeln("  - execution of the sequence of adaptations")
-		if iteBindings.hasNext() then
-			adapter.apply(iteBindings.next) //aspect weaving: do not require domain concepts
-		else
-			stdio.writeln("No join point!")
-		end		
+			/*---Pattern matching---*/
+			stdio.writeln("Searching base model elements matching the interface model...")
+			stdio.writeln("- The Metamodel and the model are transformed into a Prolog knowledge base")
+			stdio.writeln("- The inferface model (~pointcut) is tranformed into a Prolog query")
+			stdio.writeln("Better performance expected: ")				
+			stdio.writeln("  - Reuse already woven configurations (maintain a repository)")
+			stdio.writeln("  - Kermeta compiler:")
+			stdio.writeln("      - faster generation of the facts and the query")
+			stdio.writeln("      - more direct connection with InterProlog (Java-Prolog interface)")
+			stdio.writeln("")
+			
+			var iteBindings : Iterator<Hashtable<Object, Object>> 
+			init Iterator<Hashtable<Object, Object>>.new
+			iteBindings := matcher.optimizedMatch(inputMetamodel, resourceModel.instances, adapter.~aspect.template, true, false, false)
+					       
+			/*---Applying the adapter to the base model---*/       
+			var binding : Hashtable<Object, Object>			
+			adapter.setDisplayInfo(false)
+			stdio.writeln("Weaving the graft model into the base model...")
+			stdio.writeln("  - contextualization of the interface model with the result of the Prolog query")
+			stdio.writeln("  - conversion MM' (interface/graft model) -> MM (base model)")
+			stdio.writeln("  - execution of the sequence of adaptations")
+			if iteBindings.hasNext() then
+				adapter.apply(iteBindings.next) //aspect weaving: do not require domain concepts
+			else
+				stdio.writeln("No join point!")
+			end
+			
+			stdio.writeln("")
+			stdio.writeln("Checking all invariants after weaving")
+			do
+				resourceModel.instances.one.checkAllInvariantsIte
+			rescue (e : kermeta::exceptions::ConstraintViolatedInv)
+				stdio.errorln(e.message)
+				//stdio.errorln(e.stackTrace)
+			end
+			stdio.writeln("")
+		end	
 	end	
 }

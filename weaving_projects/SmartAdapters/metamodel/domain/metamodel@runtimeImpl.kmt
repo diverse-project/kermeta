@@ -1,0 +1,73 @@
+/* 
+ * Creation : June 12, 2008
+ * Licence  : EPL 
+ * Copyright: IRISA / INRIA Rennes
+ * Authors  : Brice Morin, Equipe-Projet INRIA Triskell
+ *            bmorin[at]irisa.fr
+ *
+ */
+
+package art;
+
+
+require kermeta
+require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
+
+using kermeta::standard
+using art::type
+
+package instance{
+
+	aspect class ComponentInstance
+	{
+		operation invoke(op : Operation) is
+			abstract
+	}
+	
+	aspect class PrimitiveInstance
+	{
+		/**
+		 * opName : "org.diva.example.servicediscovery.interfaces.IAdvertiser:advertise"
+		 */
+		method invoke(op : Operation) is
+		do
+			if op != void then
+				stdio.writeln("invoking "+self.name+"->"+op.container.asType(Service).name+"."+op.name)
+			end
+		end
+	}
+	
+	aspect class CompositeInstance
+	{
+		method invoke(op : Operation) is
+		do
+			//Only services from the root component can be invoked
+			if self.container.asType(System) != void then
+				var port : Port init self.type.port.detect{p | p.service.~operation.contains(op)}
+				if port != void then
+					self.delegation.select{d | d.serverInstance.~operation.contains(op)}
+						.each{d |
+							stdio.writeln(op.name+" is delegated to "+d.serverInstance.name) 
+							d.serverInstance.invoke(op)
+						}
+					var param : String init stdio.read("Parameter (String) for the operation: ")
+					stdio.writeln("Calling the execution platform")
+					extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal
+						.invoke(self, self.name+"::"+port.name+"::"+op.name, param)
+				end
+			end
+		end
+		
+		operation displayServices() is
+		do
+			if self.container.asType(System) != void then
+				self.~operation.each{o | 
+						if stdio.read("Invoke "+o.name+" y/n: ").toBoolean then
+							 invoke(o)
+						end
+						}
+			end
+		end
+	}
+
+}

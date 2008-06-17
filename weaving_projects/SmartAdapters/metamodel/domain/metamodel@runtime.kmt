@@ -1,0 +1,116 @@
+/* 
+ * Creation : June 12, 2008
+ * Licence  : EPL 
+ * Copyright: IRISA / INRIA Rennes
+ * Authors  : Brice Morin, Equipe-Projet INRIA Triskell
+ *            bmorin[at]irisa.fr
+ *
+ */
+
+package art;
+
+
+require kermeta
+require "http://art"
+
+using kermeta::standard
+
+package instance{
+
+	aspect class Binding
+	{
+		inv wellFormedBinding is
+		do
+			serverInstance != void
+		end 
+	}
+
+	aspect class TransmissionBinding
+	{
+		inv wellFormedTransmissionBinding is 
+		do
+        	(client != void).andThen{b | server != void}.andThen{b | client.role != server.role}
+        		.andThen{b | client.service == server.service}
+	    end
+	}
+
+	aspect class DelegationBinding
+	{
+		inv wellFormedDelegationBinding is 
+		do
+	        (exported != void).andThen{b | source != void}.andThen{b | exported.role == source.role}
+	        	.andThen{b | exported.service == source.service}
+    	end
+	}
+	
+	aspect class ComponentInstance
+	{
+		inv completeTransmissionBindings is 
+		do
+			self.type.port.select{p | not p.isOptional and p.role == "client"}.forAll{p |
+				self.binding.exists{b | 
+					b.client == p
+				}
+			}
+		end
+				
+		property readonly ~operation : oset Operation [0..*]
+        getter is 
+        do
+			result := OrderedSet<Operation>.new 
+			self.type.port.select{ p | p.role == "server" }.collect{p | p.service}
+			.each{s | result.addAll(s.~operation)}    
+        end
+        
+        property readonly operationAsString : seq String [0..*]
+        getter is
+        do
+        	result := void //self.~operation.collect{o | o.container.asType(Service).name+"_"+o.name}
+        end
+        
+        property readonly dependentComponents : ComponentInstance [0..*]
+        getter is 
+        do
+        	var res : Set<ComponentInstance> init Set<ComponentInstance>.new
+        	var composite : CompositeInstance init self.superComponent
+        	if composite != void then
+        		if self.isInstanceOf(CompositeInstance) then
+        			res.addAll(self.asType(CompositeInstance).subComponent)
+        		end
+        		res.addAll(composite.subComponent.select{c | c.binding.exists{b | b.serverInstance == self}})
+        		composite.subComponent.select{c | c.isInstanceOf(CompositeInstance)}
+        			.select{c | c.asType(CompositeInstance).delegation.exists{d | d.serverInstance == self}}
+        	end
+        end
+	}
+	
+	aspect class CompositeInstance
+	{
+		inv completeDelegationBindings is 
+		do
+			self.type.port.select{p | not p.isOptional}.forAll{p |
+				self.delegation.exists{b |
+					self.subComponent.exists{sub |
+						b.exported == p 
+					}
+				}
+			}
+		end
+	}
+}
+
+package type
+{
+	aspect class Service
+	{
+		inv validService is 
+		do
+			do
+				kermeta::io::FileIO.new.readTextFile("C:/work/dev/diva/src/"+self.name.replace(".", "/")+".java")
+				true
+			rescue (e : kermeta::exceptions::FileNotFoundException)
+				false
+			end
+		end
+	}
+}

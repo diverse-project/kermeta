@@ -1,4 +1,4 @@
-/* $Id: dynamicAdaptation.kmt,v 1.1 2008-06-10 15:08:11 bmorin Exp $
+/* $Id: dynamicAdaptation.kmt,v 1.2 2008-06-17 15:33:59 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -15,8 +15,10 @@ require kermeta
 //just change this require to adapt another platform and/or another application
 require "platform:/resource/SmartAdapters/program/adapter/ServiceDiscovery.kmt"
 
-using kermeta::standard 
+using kermeta::standard
+using kermeta::persistence
 using org::kermeta::runtime::adapter
+
 
 class ServiceDiscoveryMain
 {

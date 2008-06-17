@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.15 2008-06-10 15:10:34 bmorin Exp $
+/* $Id: converter.kmt,v 1.16 2008-06-17 15:35:30 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -71,7 +71,8 @@ class Converter
 	operation processProperties(obj : kermeta::language::structure::Object, conv : kermeta::language::structure::Object, properties : Set<Property>) is
 	do
 		properties.each{a |
-			if(obj.get(a) != void and not(a.name.equals("tag") or a.name.equals("ownedTag"))) then
+			//stdio.errorln(a.name)
+			if obj.get(a) != void  then
 				var ob : Object init obj.get(a)
 				//single property (upper bound==1)
 				if(a.upper == 1 and ob != void) then
@@ -84,20 +85,20 @@ class Converter
 							conv.~set(a,temp)
 						else
 							stdio.writeln("not converted due to a bug in Kermeta!!!"+conv.toString+"."+a.name+" := "+temp.toString)
-							stdio.writeln("testEnum::TestEnum.testReflect2")
+							stdio.writeln("see testEnum::TestEnum.testReflect2")
 						end
 					end
-				//collection property -> iteration
+				//collection property -> iteration over all the elements
 				else
 					var list:Collection<kermeta::language::structure::Object>
 					var convertedList:Collection<kermeta::language::structure::Object>
-					list?=ob
-					if(list!=void and list.size>0) then
+					list ?= ob
+					if((list != void).andThen{b | list.size>0}) then
 						convertedList ?= conv.get(a)
 						convertedList.clear
 						list.each{o |
-								var tmp:Object init getConverted(o)
-								convertedList.add(tmp)
+							var tmp:Object init getConverted(o)
+							convertedList.add(tmp)
 						}						
 					end
 				end
@@ -113,9 +114,12 @@ class Converter
 		var properties1 : Set<Property> init Set<Property>.new
 		var properties2 : Set<Property> init Set<Property>.new
 		 
-		properties1.addAll(c.ownedAttribute.select{p | p.isComposite})
-		properties2.addAll(c.ownedAttribute.select{p | not p.isComposite})
+		//getting all the direct attributes (containment graph)
+		properties1.addAll(c.ownedAttribute.select{p | p.isComposite and not p.isDerived and not (p.name=="tags" or p.name=="ownedTags")})
+		//getting all the other direct references
+		properties2.addAll(c.ownedAttribute.select{p | not p.isComposite and not p.isDerived and not (p.name=="tags" or p.name=="ownedTags")})
 		
+		//getting iteratively all the inherited attributes and references
 		var temp : Set<Class> init Set<Class>.new
 		var superClasses : Set<Class> init Set<Class>.new 
 		superClasses.addAll(c.superClass)
@@ -124,15 +128,17 @@ class Converter
 		loop
 			temp.clear
  			superClasses.each{s |
- 				properties1.addAll(s.ownedAttribute.select{p | p.isComposite}) 
- 				properties2.addAll(s.ownedAttribute.select{p | not p.isComposite})
+ 				properties1.addAll(s.ownedAttribute.select{p | p.isComposite and not p.isDerived and not (p.name=="tags" or p.name=="ownedTags")}) 
+ 				properties2.addAll(s.ownedAttribute.select{p | not p.isComposite and not p.isDerived and not (p.name=="tags" or p.name=="ownedTags")})
  				temp.addAll(s.superClass)
  			}
  			superClasses.clear
  			superClasses.addAll(temp)
 		end
 		
+		//converting the containment graph
 		processProperties(obj,conv,properties1)
+		//converting all the other references
 		processProperties(obj,conv,properties2)
 	end
 }

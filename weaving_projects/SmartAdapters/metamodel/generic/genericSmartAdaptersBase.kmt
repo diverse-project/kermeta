@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.16 2008-06-10 15:09:03 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.17 2008-06-17 15:34:39 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -7,8 +7,7 @@
 
 package org;
 
-require kermeta 
-require "http://www.eclipse.org/emf/2002/Ecore" 
+require kermeta  
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
 
 using kermeta::standard
@@ -16,14 +15,14 @@ using kermeta::utils
 using patternframework
 using org::smartadapters::core
 using org::smartadapters::extension
-using ecore
 
 /**
-* This is the generic version of SmartAdapters
-* see <a href="http://www.kircher-schwanninger.de/workshops/MDD&AOSD/old/ECOOP2007/papers/TowardsGenericAOMFramework.pdf" target="_blank">Towards a Generic AOM Framework</a>
-* see <a href="http://www.springerlink.com/content/6045275650757000/" target="_blank">Introducing Variability into Aspect-Oriented Modeling Approaches</a>
-* see <a href="http://www.sse.uni-due.de/vamos/2008/papers/VAMOS08_06.pdf" target="_blank">Weaving Aspect Configurations for Managing System Variability</a>
-*/
+ * This is the <a href="http://www.kermeta.org" target="_blank">Kermeta</a> implementation of the generic version of <b>SmartAdapters</b>
+ *   see <a href="http://www.kircher-schwanninger.de/workshops/MDD&AOSD/old/ECOOP2007/papers/TowardsGenericAOMFramework.pdf" target="_blank">Towards a Generic AOM Framework</a>
+ *   see <a href="http://www.sse.uni-due.de/vamos/2008/papers/VAMOS08_06.pdf" target="_blank">Weaving Aspect Configurations for Managing System Variability</a>
+ * It generalizes the <b>SmartAdapters</b> approach for class diagrams
+ *   see <a href="http://www.springerlink.com/content/6045275650757000/" target="_blank">Introducing Variability into Aspect-Oriented Modeling Approaches</a>
+ */
 package smartadapters
 {
 	package core

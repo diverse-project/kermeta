@@ -1,4 +1,4 @@
-/* $Id: print.kmt,v 1.4 2008-06-17 15:35:31 bmorin Exp $
+/* $Id: aspectizedFramework.kmt,v 1.1 2008-06-17 15:35:31 bmorin Exp $
  * Creation date: February 21, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -50,7 +50,15 @@ aspect class Object
 				objects.each{o |
 					o.checkInvariants
 					o.getMetaClass.allAttributes.each{a |
-						tempObjects.add(o.get(a))
+						if (a.upper <= -1).orElse{b | a.upper > 1} then
+							var c : Collection<kermeta::language::structure::Object>
+							c ?= o.get(a)
+							if c != void then
+								tempObjects.addAll(c)
+							end
+						else
+							tempObjects.add(o.get(a))
+						end
 					}
 				}
 				objects.clear
