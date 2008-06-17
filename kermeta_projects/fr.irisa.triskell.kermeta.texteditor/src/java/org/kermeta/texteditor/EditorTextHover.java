@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.6 2008-06-09 10:02:00 ftanguy Exp $
+/* $Id: EditorTextHover.java,v 1.7 2008-06-17 14:31:56 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -14,14 +14,10 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.IInformationControl;
-import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextHover;
-import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.io.KermetaUnit;
@@ -104,6 +100,7 @@ public class EditorTextHover implements ITextHover {//, ITextHoverExtension, IIn
 		
 		// find the best Model Reference for the given region
 		TextReference textRef = tracer.getShortestContainingTextReference(hoverRegion.getOffset(), hoverRegion.getLength(), getKermetaUnit().getUri());
+		if(textRef == null) return null; // nothing to be presented in the hover
 		ModelReference modelRef =ModelReferenceHelper.getOneNextReference(textRef);
 		
 		// Notify other plugin of this event
