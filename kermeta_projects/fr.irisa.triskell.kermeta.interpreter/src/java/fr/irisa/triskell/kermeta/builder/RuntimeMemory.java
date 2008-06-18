@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.20 2008-06-16 08:48:06 dvojtise Exp $
+/* $Id: RuntimeMemory.java,v 1.21 2008-06-18 11:18:50 dvojtise Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -116,7 +116,8 @@ public class RuntimeMemory {
     }
     
     public void clearFObjectFromCache(Object object) {
-        memoryLoader.clearFObjectFromCache(object);
+    	if(memoryLoader != null)
+    		memoryLoader.clearFObjectFromCache(object);
     }
     
     public RuntimeObject getTypeDefinitionAsRuntimeObject(String qname)  {
