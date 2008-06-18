@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.71 2008-06-16 08:48:05 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.72 2008-06-18 14:03:48 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -50,6 +50,7 @@ import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Repository;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
 
@@ -203,11 +204,15 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	XMLResource resource=null;
 		monitor.beginTask("Loading " + unit.getUriAsString(), IProgressMonitor.UNKNOWN);
 		try {
+			// the URI may need some normalisation before loading
+			String normalizedURI = Repository.normalizeUri(unit.getUriAsString(), 
+							resRO.getFactory().getMemory().getUnit(), 
+							resRO.getFactory().getMemory().getInterpreter());
 			// Get URI of the unit correpsonding to the model to be loaded
-			URI u = createURI(unit.getUriAsString());
+			URI u = createURI(normalizedURI);
 			
 			// register the extension of this uri into EMF
-			registerEMFextensionToFactoryMap(unit.getUriAsString());
+			registerEMFextensionToFactoryMap(normalizedURI);
 			// Special options for uri.map -> mapping platform:/... uris to os-dependent urls.
 			HashMap<String, Boolean> options = new HashMap<String, Boolean>();
 			// reuse the ResourceSet from the repository
@@ -446,8 +451,12 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         if ( ! file_path.equals( ((Resource) associatedResource.getR2eEmfResource()).getURI().toString()) )
         	saveWithNewURI = true;
         
+        // the URI may need some normalisation before loading
+		String normalizedURI = Repository.normalizeUri(file_path, 
+						getRuntimeMemory().getUnit(), 
+						getRuntimeMemory().getInterpreter());
         // Create an URI for the resource that is going to be saved
-        URI u = createURI(file_path); 
+        URI u = createURI(normalizedURI); 
         InterpreterPlugin.internalLog.info("URI created for model to save : "+u);
         
         // Add the extension of the file to save into the resource registry, so that EMF won't complain

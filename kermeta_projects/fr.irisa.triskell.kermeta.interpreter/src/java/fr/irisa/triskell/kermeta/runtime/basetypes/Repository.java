@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.11 2008-06-04 14:00:49 ftanguy Exp $
+/* $Id: Repository.java,v 1.12 2008-06-18 14:03:48 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -15,10 +15,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.launcher.AbstractKInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 
@@ -84,6 +86,8 @@ public class Repository {
 
     
     /**
+     * Allows to obtain a valid URI from various URI forms
+     * It takes into account relative path and tronsfor them into plaform:/plugin or platform:/resource path
      * @param uriRO
      * @return
      */
@@ -97,27 +101,43 @@ public class Repository {
     	
     	// Normalize uri
     	java.lang.String file = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(uriRO);
-    	java.lang.String unit_uri = uriRO.getFactory().getMemory().getUnit().getUri();
+    	java.lang.String normalizedUri = normalizeUri(file, uriRO.getFactory().getMemory().getUnit(), uriRO.getFactory().getMemory().getInterpreter());    	
+    	
+    	// Assign normalized uri to nuri RO
+    	nuriRO.setPrimitiveType(RuntimeObject.STRING_VALUE);
+    	nuriRO.setJavaNativeObject( normalizedUri);
+    	
+    	return nuriRO;
+    }
+    
+    /**
+     * Return a normalized version of the Uri
+	 * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically
+	 * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) 
+	 * If you wish to know what concrete uri is used by kermeta when loading and saving you can use this function
+	 * to check how a given uri is normalized by kermeta
+     * @param originalUri : uri to normalize
+     * @param referenceUnit : KermetaUnit used as reference for calculating the path
+     * @param interpreter : interpreter tha tmay define a default path
+     * @return
+     */
+    public static java.lang.String normalizeUri(java.lang.String originalUri, KermetaUnit referenceUnit, AbstractKInterpreter interpreter){
+    	java.lang.String unit_uri = referenceUnit.getUri();
     	java.lang.String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1);
-    	URI u = URI.createURI(file);
+    	URI u = URI.createURI(originalUri);
     	if (u.isRelative()) {
-    		java.lang.String defaultPath = uriRO.getFactory().getMemory().getInterpreter().getDefaultPath();
+    		java.lang.String defaultPath = interpreter.getDefaultPath();
     		if ( defaultPath == null ) {
     			defaultPath = unit_uripath;
         		URIConverter c = new URIConverterImpl();
         		u = u.resolve(c.normalize(URI.createURI(defaultPath)));    			
     		} else if ( ! defaultPath.startsWith("platform:/") ) {
     			defaultPath = "platform:/resource" + defaultPath;
-    			u = URI.createURI( defaultPath + "/" + file);
+    			u = URI.createURI( defaultPath + "/" + originalUri);
     		} else {
-    			u = URI.createURI( defaultPath + "/" + file);	
+    			u = URI.createURI( defaultPath + "/" + originalUri);	
     		}
     	}
-    	
-    	// Assign normalized uri to nuri RO
-    	nuriRO.setPrimitiveType(RuntimeObject.STRING_VALUE);
-    	nuriRO.setJavaNativeObject( u.toString());
-    	
-    	return nuriRO;
+    	return u.toString();
     }
 }
