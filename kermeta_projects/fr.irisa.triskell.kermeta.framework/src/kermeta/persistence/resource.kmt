@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.50 2008-06-17 14:30:27 dvojtise Exp $
+ * $Id: resource.kmt,v 1.51 2008-06-18 12:40:38 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -343,7 +343,7 @@ abstract class Repository
 	 * a model creation), calls to load() operation will fail as long as
 	 * the model has not been saved once
 	 */
-	operation createResource(uri : String, mm_uri : String) : Resource is abstract
+	operation createResource(uri : String, mm_uri : String) : Resource is abstract	
 
 	/**
 	 * Returns the Resource associated with the given uri if this uri is associated with
@@ -354,9 +354,6 @@ abstract class Repository
 	 * model file 
 	 */
 	operation getResource(uri : String) : Resource is do
-		var nUri : String
-		var crt_nUri : String
-		nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
 		
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.initRepository(self)
 
@@ -364,9 +361,7 @@ abstract class Repository
 		until it.isOff
 		loop
 			var next : Resource init it.next
-			crt_nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(next.uri)
-			//if (uri.equals(next.uri)) then
-			if(nUri.equals(crt_nUri)) then
+			if (uri.equals(next.uri)) then
 				result := next
 			end
 		end
@@ -482,6 +477,17 @@ class DanglingDiagnostic {
 class EMFRepository inherits Repository
 {
 	/**
+	 * Return a normalized version of the Uri
+	 * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically
+	 * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) 
+	 * If you wish to know what concrete uri is used by kermeta when loading and saving you can use this function
+	 * to check how a given uri is normalized by kermeta
+	 */
+	operation normalizeUri(uri : String) : String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
+	end
+	
+	/**
 	 * Overrides Repository.createResource(String, String)
 	 * Create a new resource for a model given by its uri, 
 	 * which meta-model is stored in file given by mm_uri
@@ -489,10 +495,8 @@ class EMFRepository inherits Repository
 	 * otherwise, you can only call the save method
 	 */
 	method createResource(uri : String, mm_uri : String) : Resource is do
-		var nUri : String
-		nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
-
-		if(not resources.collect{r | extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)}.contains(nUri)) then
+		
+		if(not resources.collect{r | r.uri}.contains(uri)) then
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)
 		else
 			var e : kermeta::exceptions::ResourceCreateException init kermeta::exceptions::ResourceCreateException.new
