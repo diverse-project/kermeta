@@ -119,7 +119,7 @@ package smartadapters
 
 		/**
 		 * Sets any property of <%=qualifiedName%>
-		 * All the references expect <%=c.name%>ToSet may be void
+		 * All the references except <%=c.name%>ToSet may be void
 		 */
 <% if c.eAllStructuralFeatures.size > 0 then%>
 			 
@@ -218,7 +218,7 @@ package smartadapters
 		
 		/**
 		 * Unsets any property of <%=qualifiedName%>
-		 * All the references expect <%=c.name%>ToUnset may be void 
+		 * All the references except <%=c.name%>ToUnset may be void 
 		 */		
 		class Unset<%=qualifiedName.replace("::","")%> inherits unsetAdaptation
 		{

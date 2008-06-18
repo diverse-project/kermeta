@@ -1,4 +1,4 @@
-/* $Id: serviceDiscovery.kmt,v 1.4 2008-06-17 15:33:59 bmorin Exp $
+/* $Id: serviceDiscovery.kmt,v 1.5 2008-06-18 15:59:53 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -19,6 +19,7 @@ require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
 require "platform:/resource/SmartAdapters/program/adapter/ServiceDiscovery.kmt"
 
 using kermeta::standard 
+using kermeta::io
 using weaver
 using org::kermeta::runtime::adapter
 
@@ -26,9 +27,9 @@ using org::kermeta::runtime::adapter
 class ServiceDiscoveryMain
 {
 	operation main() : Void is do 
-		var modelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/referenceModel.art"
-		var wovenModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/wovenModel.art"
-		var finalModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/newReferenceModel.art"
+		var modelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/base/referenceModel.art"
+		var wovenModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/DAModel.art"
+		var finalModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/woven/newReferenceModel.art"
 		var metamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore"
 		var MMPatternUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
 			
@@ -38,22 +39,36 @@ class ServiceDiscoveryMain
 
 		var weaver:Weaver init Weaver.new
 		weaver.initWeaver()
-		weaver.loadMetamodel(metamodelUri)
-		weaver.loadMetamodelPattern(MMPatternUri)
-		weaver.loadAdapter(adapterUri, adaptMMUri)
+		
+/*		var reuseModel : Boolean init true
+		do
+			FileIO.new.readTextFile(wovenModelUri.replace("platform:/resource/","C:/work/dev/Kermeta/"))
+		rescue (e : kermeta::exceptions::FileNotFoundException)
+			reuseModel := false
+		end
+		
+		if not reuseModel then
+*/			weaver.loadMetamodel(metamodelUri)
+			weaver.loadMetamodelPattern(MMPatternUri)
+			weaver.loadAdapter(adapterUri, adaptMMUri)
+//		end
 		
 		stdio.writeln("K> Running the service discovery application (SA configuration)...")
 		var platformAdapter : PlatformAdapter init PlatformAdapter.new 
 		platformAdapter.~init
 		platformAdapter.run
-		platformAdapter.saveModel(modelUri)
-		weaver.loadModel(modelUri, "http://art")
+
+		stdio.writeln("")							
+		//if not reuseModel then
+			platformAdapter.saveModel(modelUri)
+			weaver.loadModel(modelUri, "http://art")
+			weaver.weaving(metamodelUri, MMPatternUri)
+			weaver.saveModel(wovenModelUri, "http://art")
+		/*else
+			weaver.loadModel(wovenModelUri, "http://art")*/
+		//end
 		stdio.writeln("")
-		stdio.writeln("")
-					
-		weaver.weaving(metamodelUri, MMPatternUri)
-		weaver.saveModel(wovenModelUri, "http://art")
-		stdio.writeln("")
+
 		
 		stdio.writeln("K> We now obtain DA = SA (base) + UA (aspect)")
 		stdio.writeln("")
@@ -67,7 +82,13 @@ class ServiceDiscoveryMain
 		platformAdapter.loadUpdateModel(wovenModelUri)
 		platformAdapter.saveModel(finalModelUri)
 		
-		weaver.resourceModel.instances.one.asType(art::System).root.displayServices
+/*		if reuseModel then
+			weaver.loadModel(wovenModelUri, "http://art")
+		end
+*/		
+		var context : art::DisplayContext init art::DisplayContext.new
+		context.~init
+		weaver.resourceModel.instances.one.asType(art::System).root.display(context)
 		
 		weaver.finalizeWeaver()
 	end

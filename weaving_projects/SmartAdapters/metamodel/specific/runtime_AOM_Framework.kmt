@@ -14,7 +14,7 @@
 package org;
 require kermeta
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
-require "http://art"
+require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
 require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
 
 using kermeta::standard
@@ -22,7 +22,6 @@ using kermeta::utils
 using patternframework
 using org::smartadapters::core
 using org::smartadapters::extension
-using ecore
 using org::smartadapters::utils
 
 package smartadapters
@@ -52,10 +51,23 @@ package smartadapters
 				convert.put(pattern::art::type::ControlService,art::type::ControlService)
 				convert.put(pattern::art::type::Port,art::type::Port)
 				convert.put(pattern::art::type::Attribute,art::type::Attribute)
-				convert.put(pattern::art::type::PrimitivePort,art::type::PrimitivePort)
 				converter.initConverter(convert)
 			end
 		}
+	
+	package actions
+	{
+		class InvokeOperation
+		{
+			reference opToInvoke : pattern::art::type::Operation [1..1]
+			reference component : pattern::art::instance::ComponentInstance [1..1]
+			
+			operation invoke() is
+			do
+				extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.invoke(opToInvoke, component)
+			end
+		}
+	}
 		
 	package adaptations
 	{
@@ -749,8 +761,7 @@ package smartadapters
 				end
 			end
 		}
-		 
-		 
+		 		 
 
 		/**
 		 * Sets any property of art::instance::Binding
@@ -875,8 +886,8 @@ package smartadapters
 		class SetruntimeinstanceTransmissionBinding inherits setAdaptation
 		{
 			reference TransmissionBindingToSet : pattern::art::instance::TransmissionBinding
-			reference refclient : pattern::art::type::PrimitivePort
-			reference refserver : pattern::art::type::PrimitivePort
+			reference refclient : pattern::art::type::Port
+			reference refserver : pattern::art::type::Port
 			reference refserverInstance : pattern::art::instance::ComponentInstance
 			
 			method check(): Boolean is do
@@ -918,8 +929,8 @@ package smartadapters
 		class UnsetruntimeinstanceTransmissionBinding inherits unsetAdaptation
 		{
 			reference TransmissionBindingToUnset : pattern::art::instance::TransmissionBinding
-			reference refclient : pattern::art::type::PrimitivePort
-			reference refserver : pattern::art::type::PrimitivePort
+			reference refclient : pattern::art::type::Port
+			reference refserver : pattern::art::type::Port
 			reference refserverInstance : pattern::art::instance::ComponentInstance
 			
 			method check(): Boolean is do
@@ -1002,8 +1013,8 @@ package smartadapters
 		class SetruntimeinstanceDelegationBinding inherits setAdaptation
 		{
 			reference DelegationBindingToSet : pattern::art::instance::DelegationBinding
-			reference refsource : pattern::art::type::PrimitivePort
-			reference refexported : pattern::art::type::PrimitivePort
+			reference refsource : pattern::art::type::Port
+			reference refexported : pattern::art::type::Port
 			reference refserverInstance : pattern::art::instance::ComponentInstance
 			
 			method check(): Boolean is do
@@ -1045,8 +1056,8 @@ package smartadapters
 		class UnsetruntimeinstanceDelegationBinding inherits unsetAdaptation
 		{
 			reference DelegationBindingToUnset : pattern::art::instance::DelegationBinding
-			reference refsource : pattern::art::type::PrimitivePort
-			reference refexported : pattern::art::type::PrimitivePort
+			reference refsource : pattern::art::type::Port
+			reference refexported : pattern::art::type::Port
 			reference refserverInstance : pattern::art::instance::ComponentInstance
 			
 			method check(): Boolean is do
@@ -1716,9 +1727,10 @@ package smartadapters
 		class SetruntimetypePort inherits setAdaptation
 		{
 			reference PortToSet : pattern::art::type::Port
-			reference refsub : pattern::art::type::PrimitivePort[0..*]
 			reference refisOptional : Boolean
 			reference refname : String
+			reference refrole : String
+			reference refservice : pattern::art::type::Service
 			
 			method check(): Boolean is do
 				result := PortToSet != void
@@ -1730,9 +1742,11 @@ package smartadapters
 				var tempPort : art::type::Port
 				tempPort ?= ad.getRealObject(PortToSet,false)
 				
-				ad.setMultipleProperty(tempPort.sub,refsub)
+			
 				tempPort.isOptional ?= ad.setSingleProperty(refisOptional, tempPort.isOptional)
 				tempPort.name ?= ad.setSingleProperty(refname, tempPort.name)
+				tempPort.role ?= ad.setSingleProperty(refrole, tempPort.role)
+				tempPort.service ?= ad.setSingleProperty(refservice, tempPort.service)
 				
 				//Instantiating the reverse adaptation
 				if(reverse) then		
@@ -1745,10 +1759,10 @@ package smartadapters
 						unset ?= self.reverse
 					end		
 					unset.PortToUnset := self.PortToSet
-					unset.refsub.clear
-					unset.refsub.addAll(self.refsub)
 					unset.refisOptional := self.refisOptional
 					unset.refname := self.refname
+					unset.refrole := self.refrole
+					unset.refservice := self.refservice
 				end	
 			end			
 		}
@@ -1760,9 +1774,10 @@ package smartadapters
 		class UnsetruntimetypePort inherits unsetAdaptation
 		{
 			reference PortToUnset : pattern::art::type::Port
-			reference refsub : pattern::art::type::PrimitivePort[0..*]
 			reference refisOptional : Boolean
 			reference refname : String
+			reference refrole : String
+			reference refservice : pattern::art::type::Service
 			
 			method check(): Boolean is do
 				result := PortToUnset != void
@@ -1774,9 +1789,10 @@ package smartadapters
 				var tempPort : art::type::Port
 				tempPort ?= ad.getRealObject(PortToUnset,false)
 				
-				ad.unsetMultipleProperty(tempPort.sub,refsub)
 				tempPort.isOptional ?= ad.unsetSingleProperty(refisOptional, tempPort.isOptional)
 				tempPort.name ?= ad.unsetSingleProperty(refname, tempPort.name)
+				tempPort.role ?= ad.unsetSingleProperty(refrole, tempPort.role)
+				tempPort.service ?= ad.unsetSingleProperty(refservice, tempPort.service)
 				
 				//Instantiating the reverse adaptation
 				if reverse then
@@ -1789,141 +1805,12 @@ package smartadapters
 						~set ?= self.reverse
 					end
 					~set.PortToSet := self.PortToUnset
-					~set.refsub.clear
-					~set.refsub.addAll(self.refsub)
 					~set.refisOptional := self.refisOptional
 					~set.refname := self.refname
-				end
-			end
-		}
-		 
-	 
-		/*
-		 * Adaptations dedicated to the manipulation
-		 * of art::type::PrimitivePort
-		 */
-		
-		/**
-		 * Creates a new art::type::PrimitivePort from scratch
-		 * This new element is handled by refering to newPrimitivePort
-		 */
-		class CreateruntimetypePrimitivePort inherits createAdaptation
-		{
-			attribute newPrimitivePort : pattern::art::type::PrimitivePort
-					
-			method check(): Boolean is do
-				result := newPrimitivePort != void
-			end
-					
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(newPrimitivePort, void, isUnique)					
-			end
-		}
-
-		/**
-		 * Creates a new art::type::PrimitivePort from an existing one
-		 * This cloned element is handled by refering to clonedPrimitivePort
-		 */
-		class CloneruntimetypePrimitivePort inherits cloneAdaptation
-		{
-			reference PrimitivePortToClone : pattern::art::type::PrimitivePort
-			attribute clonedPrimitivePort : pattern::art::type::PrimitivePort
-			
-			method check(): Boolean is do
-				result := PrimitivePortToClone != void
-			end
-			
-			method execute(reverse : Boolean): Void is do
-				adapter.cloneAgain(clonedPrimitivePort, PrimitivePortToClone, isUnique)
-			end					
-		}
-
-		/**
-		 * Sets any property of art::type::PrimitivePort
-		 * All the references expect PrimitivePortToSet may be void
-		 */
-			 
-		class SetruntimetypePrimitivePort inherits setAdaptation
-		{
-			reference PrimitivePortToSet : pattern::art::type::PrimitivePort
-			reference refservice : pattern::art::type::Service
-			reference refrole : String
-			reference refname : String
-			
-			method check(): Boolean is do
-				result := PrimitivePortToSet != void
-			end
-			
-			method execute(reverse : Boolean): Void 
-			is do
-				var ad : Adapter init getAdapter
-				var tempPrimitivePort : art::type::PrimitivePort
-				tempPrimitivePort ?= ad.getRealObject(PrimitivePortToSet,false)
-				
-				tempPrimitivePort.service ?= ad.setSingleProperty(refservice, tempPrimitivePort.service)
-				tempPrimitivePort.role ?= ad.setSingleProperty(refrole, tempPrimitivePort.role)
-				tempPrimitivePort.name ?= ad.setSingleProperty(refname, tempPrimitivePort.name)
-				
-				//Instantiating the reverse adaptation
-				if(reverse) then		
-					var unset : UnsetruntimetypePrimitivePort 
-					if self.reverse == void then
-						unset := UnsetruntimetypePrimitivePort.new
-						unset.reverse := self
-						self.reverse := unset
-					else
-						unset ?= self.reverse
-					end		
-					unset.PrimitivePortToUnset := self.PrimitivePortToSet
-					unset.refservice := self.refservice
-					unset.refrole := self.refrole
-					unset.refname := self.refname
-				end	
-			end			
-		}
-		
-		/**
-		 * Unsets any property of art::type::PrimitivePort
-		 * All the references expect PrimitivePortToUnset may be void 
-		 */		
-		class UnsetruntimetypePrimitivePort inherits unsetAdaptation
-		{
-			reference PrimitivePortToUnset : pattern::art::type::PrimitivePort
-			reference refservice : pattern::art::type::Service
-			reference refrole : String
-			reference refname : String
-			
-			method check(): Boolean is do
-				result := PrimitivePortToUnset != void
-			end
-			
-			method execute(reverse : Boolean): Void
-			is do
-				var ad : Adapter init getAdapter
-				var tempPrimitivePort : art::type::PrimitivePort
-				tempPrimitivePort ?= ad.getRealObject(PrimitivePortToUnset,false)
-				
-				tempPrimitivePort.service ?= ad.unsetSingleProperty(refservice, tempPrimitivePort.service)
-				tempPrimitivePort.role ?= ad.unsetSingleProperty(refrole, tempPrimitivePort.role)
-				tempPrimitivePort.name ?= ad.unsetSingleProperty(refname, tempPrimitivePort.name)
-				
-				//Instantiating the reverse adaptation
-				if reverse then
-					var ~set : SetruntimetypePrimitivePort 
-					if self.reverse == void then
-						~set := SetruntimetypePrimitivePort.new
-						~set.reverse := self
-						self.reverse := ~set
-					else
-						~set ?= self.reverse
-					end
-					~set.PrimitivePortToSet := self.PrimitivePortToUnset
-					~set.refservice := self.refservice
 					~set.refrole := self.refrole
-					~set.refname := self.refname
+					~set.refservice := self.refservice
 				end
 			end
 		}
-		 
 	}
 }}

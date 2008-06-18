@@ -14,17 +14,82 @@ require kermeta
 require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
 
 using kermeta::standard
+using kermeta::utils
 using art::type
 
+class DisplayContext
+{
+	reference stack : Stack<DisplayElement>
+	
+	operation ~init() is
+	do
+		stack := Stack<DisplayElement>.new
+	end
+}
+
+abstract class DisplayElement
+{
+	operation display(context : DisplayContext) is
+		abstract
+	
+	/**
+	 * Should be call before displaying another element
+	 */
+	operation changeDisplay(context : DisplayContext) is
+	do
+		context.stack.push(self)
+	end
+	
+	operation displayPrevious(context : DisplayContext) is
+	do
+		if stdio.read("display previsous ? (y/n)").toBoolean then
+			context.stack.pop.display(context)
+		end
+	end
+}
+
+/**
+ * This aspect proposes to navigate the component model
+ * and invoke services from the underlying platform
+ */
 package instance{
 
-	aspect class ComponentInstance
+	aspect class ComponentInstance inherits DisplayElement
 	{
+		/**
+		 * invoke the op operation on the underlying execution platform (e.g., Fractal)
+		 */
 		operation invoke(op : Operation) is
 			abstract
+			
+		method display(context : DisplayContext) is
+		do	
+			stdio.writeln("Component "+self.name+" is "+self.state)
+			stdio.writeln("- Bindings: "+binding.size.toString)
+			var hash : Hashtable<Integer, ComponentInstance> init Hashtable<Integer, ComponentInstance>.new
+			var i : Integer init 0			
+			binding.each{b | 
+				stdio.writeln("\t bound to "+b.serverInstance.name+" via "+b.client.name)
+				hash.put(i, b.serverInstance)
+				i := i+1
+			}
+
+			//displaying servers
+			stdio.writeln(" # \t| Servers")
+			hash.keys.each{j | 
+			 			var c : ComponentInstance init hash.getValue(j)
+			 			stdio.writeln("["+j.toString+"] \t| "+c.name)
+				 	}
+			var param : String init stdio.read("Display server (q = quit): ")
+			if param != "q" then
+				changeDisplay(context)
+				hash.getValue(param.toInteger).asType(ComponentInstance).display(context)
+			end		
+			displayPrevious(context)
+		end
 	}
 	
-	aspect class PrimitiveInstance
+	aspect class PrimitiveInstance inherits DisplayElement
 	{
 		/**
 		 * opName : "org.diva.example.servicediscovery.interfaces.IAdvertiser:advertise"
@@ -37,8 +102,32 @@ package instance{
 		end
 	}
 	
-	aspect class CompositeInstance
+	aspect class CompositeInstance inherits DisplayElement
 	{
+		method display(context : DisplayContext) from DisplayElement is
+		do
+			stdio.writeln("Component "+self.name+" is "+self.state)
+			//root element
+			if self.container.asType(System) != void then
+				displayServices
+			end
+			
+			//displaying subComponents
+			var hash : Hashtable<Integer, ComponentInstance> init Hashtable<Integer, ComponentInstance>.new
+			var i : Integer init 0
+			self.subComponent.each{c | hash.put(i,c) i := i+1}
+			stdio.writeln(" # \t| Component")
+			hash.keys.each{j | 
+			 			var c : ComponentInstance init hash.getValue(j)
+			 			stdio.writeln("["+j.toString+"] \t| "+c.name)
+				 	}
+			var param : String init stdio.read("Display subComponent (q = quit): ")
+			if param != "q" then
+				changeDisplay(context)
+				hash.getValue(param.toInteger).asType(ComponentInstance).display(context)
+			end
+		end
+	
 		method invoke(op : Operation) is
 		do
 			//Only services from the root component can be invoked
@@ -60,14 +149,30 @@ package instance{
 		
 		operation displayServices() is
 		do
-			if self.container.asType(System) != void then
-				self.~operation.each{o | 
-						if stdio.read("Invoke "+o.name+" y/n: ").toBoolean then
-							 invoke(o)
-						end
+			if self.container.asType(System) != void then		
+				var hash : Hashtable<Integer, Operation> init Hashtable<Integer, Operation>.new
+				var i : Integer init 0
+				self.~operation.each{o | hash.put(i,o) i := i+1}
+				var stop : Boolean init false
+				from  not stop
+		    	until stop
+				loop
+	 				stdio.writeln("Available services for "+self.name)
+					stdio.writeln(" # \t| Operation \t\t| Service")
+				 	hash.keys.each{j | 
+			 			var op : Operation init hash.getValue(j)
+			 			stdio.writeln("["+j.toString+"] \t| "+op.name+" \t\t| "+op.container.asType(Service).name)
+				 	}
+					var param : String init stdio.read("Invoke service(s) (q = Quit): ")
+					stop := (param == "q")
+					if not stop then
+						var params : OrderedSet<String> init param.split(" ")
+						params.each{p |
+							invoke(hash.getValue(p.toInteger))
 						}
+					end
+				end			
 			end
 		end
 	}
-
 }

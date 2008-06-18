@@ -1,4 +1,4 @@
-/* $Id: weavingRoles.kmt,v 1.1 2008-06-10 15:08:11 bmorin Exp $
+/* $Id: weavingRoles.kmt,v 1.2 2008-06-18 15:59:53 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -28,9 +28,9 @@ class ServiceDiscoveryMain
 	 		Do NOT distribute this paper outside of the DiVA consortium until notification of acceptance.
 	 */
 	operation main() : Void is do 
-		var baseModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/baseModel.art"
-		var SAModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/SAModel.art"
-		var DAModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/DAModel.art"
+		var baseModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/base/baseModel.art"
+		var SAModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/SAModel.art"
+		var DAModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/DAModel.art"
 		var metamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore"
 		var MMPatternUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
 			

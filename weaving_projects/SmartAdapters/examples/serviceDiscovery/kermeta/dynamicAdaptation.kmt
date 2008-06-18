@@ -1,4 +1,4 @@
-/* $Id: dynamicAdaptation.kmt,v 1.2 2008-06-17 15:33:59 bmorin Exp $
+/* $Id: dynamicAdaptation.kmt,v 1.3 2008-06-18 15:59:53 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -24,9 +24,9 @@ class ServiceDiscoveryMain
 {
 	operation main() : Void is do 
 		var model : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/referenceModel_base.art"
-		var SAmodel: String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/SAModel.art"
+		var SAmodel: String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/SAModel.art"
 		var afterSA : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/referenceModel_SA.art"
-		var DAmodel : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/DAModel.art"
+		var DAmodel : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/DAModel.art"
 		var afterDA : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/referenceModel_DA.art"
 		
 		stdio.writeln("K> Running the service discovery application (SA configuration)")

@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="ASCII"?>
 <core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="platform:/resource/SmartAdapters/metamodel/specific/runtime_AOM_Framework.ecore#/org/smartadapters/core/adaptations" xmlns:core="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/core" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/specific/runtime_AOM_Framework.ecore#/org/smartadapters/core/adaptations ../../../metamodel/specific/runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/core ../../../metamodel/specific/runtime_AOM_Framework1.ecore#//smartadapters/core">
   <aspect>
-    <template query="">
+    <template>
       <pattern>
         <content href="UAinterface.xmi#/"/>
         <content href="UAinterface.xmi#//@root"/>
         <content href="UAinterface.xmi#//@services.0"/>
         <content href="UAinterface.xmi#//@services.1"/>
         <content href="UAinterface.xmi#//@services.2"/>
+        <content href="UAinterface.xmi#//@services.3"/>
+        <content href="UAinterface.xmi#//@services.4"/>
         <content href="UAinterface.xmi#//@types.0"/>
         <content href="UAinterface.xmi#//@types.1"/>
         <content href="UAinterface.xmi#//@types.2"/>
+        <content href="UAinterface.xmi#//@types.3"/>
         <content href="UAinterface.xmi#//@root/@subComponent.0"/>
         <content href="UAinterface.xmi#//@root/@subComponent.1"/>
         <content href="UAinterface.xmi#//@root/@subComponent.2"/>
         <content href="UAinterface.xmi#//@types.0/@port.0"/>
-        <content href="UAinterface.xmi#//@types.0/@port.1"/>
         <content href="UAinterface.xmi#//@types.1/@port.0"/>
         <content href="UAinterface.xmi#//@types.1/@port.1"/>
         <content href="UAinterface.xmi#//@types.2/@port.0"/>
+        <content href="UAinterface.xmi#//@types.3/@port.0"/>
         <content href="UAinterface.xmi#//@root/@subComponent.1/@binding.0"/>
-        <content href="UAinterface.xmi#//@types.0/@port.0/@sub.0"/>
-        <content href="UAinterface.xmi#//@types.0/@port.1/@sub.0"/>
-        <content href="UAinterface.xmi#//@types.1/@port.0/@sub.0"/>
-        <content href="UAinterface.xmi#//@types.1/@port.1/@sub.0"/>
-        <content href="UAinterface.xmi#//@types.2/@port.0/@sub.0"/>
+        <content href="UAinterface.xmi#//@types.3"/>
         <roles name="systemRole">
           <player href="UAinterface.xmi#/"/>
         </roles>
@@ -32,13 +31,13 @@
           <player href="UAinterface.xmi#//@root"/>
         </roles>
         <roles name="networkPortRole">
-          <player href="UAinterface.xmi#//@types.2/@port.0/@sub.0"/>
+          <player href="UAinterface.xmi#//@types.2/@port.0"/>
         </roles>
         <roles name="policyPortRole">
-          <player href="UAinterface.xmi#//@types.0/@port.0/@sub.0"/>
+          <player href="UAinterface.xmi#//@types.0/@port.0"/>
         </roles>
         <roles name="cachePortRole">
-          <player href="UAinterface.xmi#//@types.1/@port.1/@sub.0"/>
+          <player href="UAinterface.xmi#//@types.1/@port.1"/>
         </roles>
         <roles name="policyComponentRole">
           <player href="UAinterface.xmi#//@root/@subComponent.0"/>
@@ -57,6 +56,12 @@
         </roles>
         <roles name="INetworkRole">
           <player href="UAinterface.xmi#//@services.2"/>
+        </roles>
+        <roles name="IRequestRole">
+          <player href="UAinterface.xmi#//@services.4"/>
+        </roles>
+        <roles name="requestPortRole">
+          <player href="UAinterface.xmi#//@types.3/@port.0"/>
         </roles>
       </pattern>
     </template>
@@ -89,19 +94,17 @@
       <content href="UAgraft.xmi#//@root/@subComponent.1/@binding.1"/>
       <content href="UAgraft.xmi#//@root/@subComponent.1/@binding.2"/>
       <content href="UAgraft.xmi#//@root/@subComponent.1/@binding.3"/>
-      <content href="UAgraft.xmi#//@types.0/@port.0/@sub.0"/>
-      <content href="UAgraft.xmi#//@types.0/@port.1/@sub.0"/>
-      <content href="UAgraft.xmi#//@types.0/@port.2/@sub.0"/>
-      <content href="UAgraft.xmi#//@types.0/@port.3/@sub.0"/>
-      <content href="UAgraft.xmi#//@types.0/@port.4/@sub.0"/>
-      <content href="UAgraft.xmi#//@types.0/@port.5/@sub.0"/>
-      <content href="UAgraft.xmi#//@types.1/@port.0/@sub.0"/>
-      <content href="UAgraft.xmi#//@types.1/@port.1/@sub.0"/>
-      <content href="UAgraft.xmi#//@types.1/@port.2/@sub.0"/>
-      <content href="UAgraft.xmi#//@types.1/@port.3/@sub.0"/>
-      <content href="UAgraft.xmi#//@types.1/@port.4/@sub.0"/>
     </structure>
   </aspect>
+  <adapt xsi:type="adaptations:CreateruntimeinstanceDelegationBinding">
+    <newDelegationBinding>
+      <serverInstance href="UAgraft.xmi#//@root/@subComponent.0"/>
+      <source href="UAgraft.xmi#//@types.0/@port.0"/>
+    </newDelegationBinding>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceDelegationBinding" DelegationBindingToSet="//@adapt.0/@newDelegationBinding">
+    <refexported href="UAinterface.xmi#//@types.3/@port.0"/>
+  </adapt>
   <adapt xsi:type="adaptations:SetruntimeSystem">
     <SystemToSet href="UAinterface.xmi#/"/>
     <refservices href="UAgraft.xmi#//@services.0"/>
@@ -110,63 +113,67 @@
     <reftypes href="UAgraft.xmi#//@types.0"/>
     <reftypes href="UAgraft.xmi#//@types.1"/>
   </adapt>
-  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">
+  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance" refdelegation="//@adapt.0/@newDelegationBinding">
     <CompositeInstanceToSet href="UAinterface.xmi#//@root"/>
     <refsubComponent href="UAgraft.xmi#//@root/@subComponent.0"/>
     <refsubComponent href="UAgraft.xmi#//@root/@subComponent.1"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
     <TransmissionBindingToSet href="UAgraft.xmi#//@root/@subComponent.1/@binding.0"/>
-    <refserver href="UAinterface.xmi#//@types.0/@port.0/@sub.0"/>
+    <refserver href="UAinterface.xmi#//@types.0/@port.0"/>
     <refserverInstance href="UAinterface.xmi#//@root/@subComponent.0"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
     <TransmissionBindingToSet href="UAgraft.xmi#//@root/@subComponent.1/@binding.1"/>
-    <refserver href="UAinterface.xmi#//@types.1/@port.1/@sub.0"/>
+    <refserver href="UAinterface.xmi#//@types.1/@port.1"/>
     <refserverInstance href="UAinterface.xmi#//@root/@subComponent.1"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
     <TransmissionBindingToSet href="UAgraft.xmi#//@root/@subComponent.1/@binding.2"/>
-    <refserver href="UAinterface.xmi#//@types.2/@port.0/@sub.0"/>
+    <refserver href="UAinterface.xmi#//@types.2/@port.0"/>
     <refserverInstance href="UAinterface.xmi#//@root/@subComponent.2"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
     <TransmissionBindingToSet href="UAgraft.xmi#//@root/@subComponent.0/@binding.0"/>
-    <refserver href="UAinterface.xmi#//@types.0/@port.0/@sub.0"/>
+    <refserver href="UAinterface.xmi#//@types.0/@port.0"/>
     <refserverInstance href="UAinterface.xmi#//@root/@subComponent.0"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
     <TransmissionBindingToSet href="UAgraft.xmi#//@root/@subComponent.0/@binding.1"/>
-    <refserver href="UAinterface.xmi#//@types.1/@port.1/@sub.0"/>
+    <refserver href="UAinterface.xmi#//@types.1/@port.1"/>
     <refserverInstance href="UAinterface.xmi#//@root/@subComponent.1"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
     <TransmissionBindingToSet href="UAgraft.xmi#//@root/@subComponent.0/@binding.2"/>
-    <refserver href="UAinterface.xmi#//@types.2/@port.0/@sub.0"/>
+    <refserver href="UAinterface.xmi#//@types.2/@port.0"/>
     <refserverInstance href="UAinterface.xmi#//@root/@subComponent.2"/>
   </adapt>
-  <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
-    <PrimitivePortToSet href="UAgraft.xmi#//@types.0/@port.3/@sub.0"/>
+  <adapt xsi:type="adaptations:SetruntimetypePort">
+    <PortToSet href="UAgraft.xmi#//@types.0/@port.3"/>
     <refservice href="UAinterface.xmi#//@services.0"/>
   </adapt>
-  <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
-    <PrimitivePortToSet href="UAgraft.xmi#//@types.0/@port.4/@sub.0"/>
-    <refservice href="UAinterface.xmi#//@services.1"/>
-  </adapt>
-  <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
-    <PrimitivePortToSet href="UAgraft.xmi#//@types.0/@port.5/@sub.0"/>
-    <refservice href="UAinterface.xmi#//@services.2"/>
-  </adapt>
-  <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
-    <PrimitivePortToSet href="UAgraft.xmi#//@types.1/@port.2/@sub.0"/>
+  <adapt xsi:type="adaptations:SetruntimetypePort">
+    <PortToSet href="UAgraft.xmi#//@types.1/@port.2"/>
     <refservice href="UAinterface.xmi#//@services.0"/>
   </adapt>
-  <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
-    <PrimitivePortToSet href="UAgraft.xmi#//@types.1/@port.3/@sub.0"/>
+  <adapt xsi:type="adaptations:SetruntimetypePort">
+    <PortToSet href="UAgraft.xmi#//@types.0/@port.4"/>
     <refservice href="UAinterface.xmi#//@services.1"/>
   </adapt>
-  <adapt xsi:type="adaptations:SetruntimetypePrimitivePort">
-    <PrimitivePortToSet href="UAgraft.xmi#//@types.1/@port.4/@sub.0"/>
+  <adapt xsi:type="adaptations:SetruntimetypePort">
+    <PortToSet href="UAgraft.xmi#//@types.1/@port.3"/>
+    <refservice href="UAinterface.xmi#//@services.1"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimetypePort">
+    <PortToSet href="UAgraft.xmi#//@types.0/@port.5"/>
     <refservice href="UAinterface.xmi#//@services.2"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimetypePort">
+    <PortToSet href="UAgraft.xmi#//@types.1/@port.4"/>
+    <refservice href="UAinterface.xmi#//@services.2"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimetypePort">
+    <PortToSet href="UAgraft.xmi#//@types.0/@port.0"/>
+    <refservice href="UAinterface.xmi#//@services.4"/>
   </adapt>
 </core:Adapter>
