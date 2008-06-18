@@ -1,4 +1,4 @@
-/* $Id: Integer.java,v 1.11 2007-10-15 07:13:58 barais Exp $ 
+/* $Id: Integer.java,v 1.12 2008-06-18 12:34:17 cfaucher Exp $ 
  * Implementation of Kermeta base type Integer 
  */
 
@@ -21,12 +21,22 @@ public class Integer {
 		Integer.setValue(result, ((java.lang.Integer)self.getJavaNativeObject()).compareTo((java.lang.Integer)param0.getJavaNativeObject()));
 		return result;
 	}
+	
+	/** Java version */
+	public static int compareTo(java.lang.Integer self, java.lang.Integer param0) {
+		return self.compareTo(param0);
+	}
 
 	/** Implementation of method equals called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::equals(element) */
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
 		if(getValue(self)==getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
+	}
+	
+	/** Java version */
+	public static boolean equals(java.lang.Integer self, java.lang.Integer param0) {
+		return self.equals(param0);
 	}
 
 	/** Implementation of method plus called as :
@@ -37,6 +47,11 @@ public class Integer {
 		setValue(result, getValue(self) + getValue(param0));
 		return result;
 	}
+	
+	/** Java version */
+	public static java.lang.Integer plus(java.lang.Integer self, java.lang.Integer param0) {
+		return self + param0;
+	}
 
 	/** Implementation of method minus called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::minus(other)
@@ -45,6 +60,11 @@ public class Integer {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		setValue(result, getValue(self) - getValue(param0));
 		return result;
+	}
+	
+	/** Java version */
+	public static java.lang.Integer minus(java.lang.Integer self, java.lang.Integer param0) {
+		return self - param0;
 	}
 
 	/** Implementation of method times called as :
@@ -55,14 +75,24 @@ public class Integer {
 		setValue(result, getValue(self) * getValue(param0));
 		return result;
 	}
+	
+	/** Java version */
+	public static int times(java.lang.Integer self, java.lang.Integer param0) {
+		return self * param0;
+	}
 
 	/** Implementation of method div called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::div(other)
 	 */
 	public static RuntimeObject div(RuntimeObject self, RuntimeObject param0) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
-		setValue(result, getValue(self) / getValue(param0));
+		setValue(result, java.lang.Float.floatToIntBits(getValue(self) / getValue(param0)));
 		return result;
+	}
+	
+	/** Java version */
+	public static java.lang.Integer div(java.lang.Integer self, java.lang.Integer param0) {
+		return java.lang.Float.floatToIntBits(self / param0);
 	}
 
 	/** Implementation of method mod called as :
@@ -74,12 +104,23 @@ public class Integer {
 		return result;
 	}
 	
+	/** Java version */
+	public static int mod(java.lang.Integer self, java.lang.Integer param0) {
+		return self % param0;
+	}
+	
 	/** Implementation of method mod called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
 	 */
 	public static RuntimeObject isGreater(RuntimeObject self, RuntimeObject param0) {
 		if(getValue(self) > getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
+	}
+	
+	/** Java version */
+	public static boolean isGreater(java.lang.Integer self, java.lang.Integer param0) {
+		if(self > param0) return true;
+		else return false;
 	}
 	
 	/** Implementation of method mod called as :
@@ -90,6 +131,12 @@ public class Integer {
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 	
+	/** Java version */
+	public static boolean isLower(java.lang.Integer self, java.lang.Integer param0) {
+		if(self < param0) return true;
+		else return false;
+	}
+	
 	/** Implementation of method mod called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
 	 */
@@ -98,12 +145,24 @@ public class Integer {
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 	
+	/** Java version */
+	public static boolean isGreaterOrEqual(java.lang.Integer self, java.lang.Integer param0) {
+		if(self >= param0) return true;
+		else return false;
+	}
+	
 	/** Implementation of method mod called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
 	 */
 	public static RuntimeObject isLowerOrEqual(RuntimeObject self, RuntimeObject param0) {
 		if(getValue(self) <= getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
+	}
+	
+	/** Java version */
+	public static boolean isLowerOrEqual(java.lang.Integer self, java.lang.Integer param0) {
+		if(self <= param0) return true;
+		else return false;
 	}
 
 	/** Implementation of method toReal called as :
@@ -115,10 +174,20 @@ public class Integer {
 		return result;
 	}
 	
+	/** Java version */
+	public static java.lang.Double toReal(java.lang.Integer self) {
+		return self.doubleValue();
+	}
+	
 	public static RuntimeObject toString(RuntimeObject self) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		String.setValue(result, "" + getValue(self));
 		return result;
+	}
+	
+	/** Java version */
+	public static java.lang.String toString(java.lang.Integer self) {
+		return self.toString();
 	}
 	
 	public static void setValue(RuntimeObject integer, int value) {
