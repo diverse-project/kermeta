@@ -1,4 +1,4 @@
-/* $Id: 071_DynamicInstanceLoadSaveUsingRelativePath.main.kmt,v 1.1 2008-06-18 08:54:36 dvojtise Exp $ 
+/* $Id: 071_DynamicInstanceLoadSaveUsingRelativePath.main.kmt,v 1.2 2008-06-18 11:12:57 dvojtise Exp $ 
  * Creation : June 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -39,14 +39,15 @@ class Main inherits TestCase
     end
     
     /*
-     * Load the model using GetResource
+     * Load the model using GetResource and a reltive url ex : ./
      * NsUri in the metamodel correspond to nothing known
      * this should work because the model is created using  "createDynamicInstance"
+     * DVK : the semantic of DotRelative path is currently not clear, need some discussion with the developpers
      */
-    operation test001GetRelativeResourceSaveAbsolute() : Void is
+    operation test001GetDotRelativeResourceSaveAbsolute() : Void is
     do
     	var ifileName : String init "../instances/071_MetamodelWithRandomNsURI_Model.xmi"
-    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_GetResourceSave_MMWithRandomNsURI_Model.xmi"
+    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_GetDotRelativeResourceSaveAbsolute_Model.xmi"
     	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithRandomNsURI.ecore"
     	var model : MetamodelWithRandomNsURI::Model
 		var repository : EMFRepository init EMFRepository.new	 	
@@ -81,11 +82,12 @@ class Main inherits TestCase
      * Load the model using CreateResource
      * NsUri correspond to nothing known
      *  (this should work only if the Metamodel is registered)
+     * DVK : the semantic of DotRelative path is currently not clear, need some discussion with the developpers
      */
-    operation test002CreateRelativeResourceSaveAbsolute() : Void is
+    operation test002CreateDotRelativeResourceSaveAbsolute() : Void is
     do
     	var ifileName : String init "../instances/071_MetamodelWithRandomNsURI_Model.xmi"
-    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_CreateResourceSave_MMWithRandomNsURI_Model.xmi"
+    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_CreateDotRelativeResourceSaveAbsolute_Model.xmi"
     	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithRandomNsURI.ecore"
     	var model : MetamodelWithRandomNsURI::Model
 		var repository : EMFRepository init EMFRepository.new	 	
@@ -120,11 +122,12 @@ class Main inherits TestCase
      * Load the model using GetResource
      * NsUri in the metamodel correspond to nothing known
      * this should work because the model is created using  "createDynamicInstance"
+     * DVK : the semantic of DotRelative path is currently not clear, need some discussion with the developpers
      */
-    operation test003GetAbsoluteResourceSaveRelative() : Void is
+    operation test003GetAbsoluteResourceSaveDotRelative() : Void is
     do
     	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithRandomNsURI_Model.xmi"
-    	var ofileName : String init "../output/071_GetResourceSave_MMWithRandomNsURI_Model.xmi"
+    	var ofileName : String init "../output/071_GetAbsoluteResourceSaveDotRelative_Model.xmi"
     	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithRandomNsURI.ecore"
     	var model : MetamodelWithRandomNsURI::Model
 		var repository : EMFRepository init EMFRepository.new	 	
@@ -159,11 +162,12 @@ class Main inherits TestCase
      * Load the model using CreateResource
      * NsUri correspond to nothing known
      *  (this should work only if the Metamodel is registered)
+     * DVK : the semantic of DotRelative path is currently not clear, need some discussion with the developpers 
      */
-    operation test004CreateAbsoluteResourceSaveRelative() : Void is
+    operation test004CreateAbsoluteResourceSaveDotRelative() : Void is
     do
     	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithRandomNsURI_Model.xmi"
-    	var ofileName : String init "../output/071_CreateResourceSave_MMWithRandomNsURI_Model.xmi"
+    	var ofileName : String init "../output/071_CreateAbsoluteResourceSaveDotRelative_Model.xmi"
     	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithRandomNsURI.ecore"
     	var model : MetamodelWithRandomNsURI::Model
 		var repository : EMFRepository init EMFRepository.new	 	
@@ -194,5 +198,83 @@ class Main inherits TestCase
        	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
     end
     
+    /**
+     * Load the model using CreateResource
+     * NsUri correspond to nothing known
+     *  (this should work only if the Metamodel is registered)
+     * DVK : the semantic of RootRelative path is currently not clear, need some discussion with the developpers
+     */
+    operation test005CreateRootRelativeResourceSaveAbsolute() : Void is
+    do
+    	var ifileName : String init "/test/interpreter/emf_testcases/instances/071_MetamodelWithRandomNsURI_Model.xmi"
+    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/071_CreateRootRelativeResourceSaveAbsolute_Model.xmi"
+    	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithRandomNsURI.ecore"
+    	var model : MetamodelWithRandomNsURI::Model
+		var repository : EMFRepository init EMFRepository.new	 	
+   	    var resource : Resource
+    	resource :=repository.createResource(ifileName, mmfileName)
+       	resource.load()
+       	
+       	// get the model
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithRandomNsURI::Model)}
+       	
+       	// do some changes
+       	var item : MetamodelWithRandomNsURI::Item init MetamodelWithRandomNsURI::Item.new
+		item.name := "0"
+		model.items.add(item)
+		
+       	// save
+       	resource.saveWithNewURI(ofileName)
+       	
+       	// reload the saved file and find the added element
+       	model := void
+       	resource := void
+       	item := void
+       	repository := EMFRepository.new
+       	resource := repository.createResource(ofileName, mmfileName)
+       	resource.load()
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithRandomNsURI::Model)}
+       	item := model.items.detect{ i | i.name.equals("0")}
+       	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
+    end
+    /**
+     * Load the model using CreateResource
+     * NsUri correspond to nothing known
+     *  (this should work only if the Metamodel is registered)
+     * DVK : the semantic of RootRelative path is currently not clear, need some discussion with the developpers
+     */
+    operation test00CreateAbsoluteResourceSaveRootRelative() : Void is
+    do
+    	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithRandomNsURI_Model.xmi"
+    	var ofileName : String init "/test/interpreter/emf_testcases/output/071_CreateAbsoluteResourceSaveRootRelative_Model.xmi"
+    	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/071_MetamodelWithRandomNsURI.ecore"
+    	var model : MetamodelWithRandomNsURI::Model
+		var repository : EMFRepository init EMFRepository.new	 	
+   	    var resource : Resource
+    	resource :=repository.createResource(ifileName, mmfileName)
+       	resource.load()
+       	
+       	// get the model
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithRandomNsURI::Model)}
+       	
+       	// do some changes
+       	var item : MetamodelWithRandomNsURI::Item init MetamodelWithRandomNsURI::Item.new
+		item.name := "0"
+		model.items.add(item)
+		
+       	// save
+       	resource.saveWithNewURI(ofileName)
+       	
+       	// reload the saved file and find the added element
+       	model := void
+       	resource := void
+       	item := void
+       	repository := EMFRepository.new
+       	resource := repository.createResource(ofileName, mmfileName)
+       	resource.load()
+       	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithRandomNsURI::Model)}
+       	item := model.items.detect{ i | i.name.equals("0")}
+       	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
+    end
 }
 
