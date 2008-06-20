@@ -1,6 +1,6 @@
 
 
-/*$Id: ProjectVisitor.java,v 1.3 2008-06-03 07:43:58 ftanguy Exp $
+/*$Id: ProjectVisitor.java,v 1.4 2008-06-20 07:22:23 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ProjectVisitor.java
 * License : EPL
@@ -71,7 +71,7 @@ public class ProjectVisitor implements IResourceVisitor {
 		nc[0] = command;
 		desc.setBuildSpec(nc);
 		project.setDescription(desc, null);
-		project.build( IncrementalProjectBuilder.INCREMENTAL_BUILD, null );
+		project.build( IncrementalProjectBuilder.FULL_BUILD, null );
 	}
 	
 }
