@@ -28,6 +28,15 @@ class StringBuffer{
 	operation append(arg0: String): StringBuffer is do
 		result?=extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.append(self,arg0)
 	end
+	
+	/**
+	 * Return the length of the StringBuffer
+	 * @return length of the StringBuffer
+	 */
+	operation length(): Integer is do
+		result?=extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.length(self)
+	end
+	
 	/**
 	 *Convert this StringBuffer to String and return its value
 	 *@return The string value of this StringBuffer

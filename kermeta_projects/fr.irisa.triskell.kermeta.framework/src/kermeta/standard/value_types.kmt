@@ -1,4 +1,4 @@
-// $Id: value_types.kmt,v 1.1 2008-06-05 13:02:16 cfaucher Exp $
+// $Id: value_types.kmt,v 1.2 2008-06-24 14:44:35 cfaucher Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -9,13 +9,13 @@
  *************************************************** */
 
 /**
- * Defines primitive types 
+ * Defines value types 
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/primitive_types_view.png"/>
  */
  @uri "http://www.kermeta.org/kermeta/standard"
  package kermeta::standard; 
 
-require "../Standard.kmt"
+require kermeta
 
 using kermeta::language::structure
 using kermeta::exceptions
