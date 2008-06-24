@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
-public class KmLogoExampleWizard
-	extends AbstractExampleWizard {
+import fr.irisa.triskell.eclipse.wizard.AbstractExampleWizard;
+import fr.irisa.triskell.eclipse.wizard.AbstractExampleWizard.ProjectDescriptor;
+import fr.irisa.triskell.kmlogo.ui.Activator;
+
+
+public class KmLogoExampleWizard extends AbstractExampleWizard {
 	
 	protected Collection getProjectDescriptors() {
 		
@@ -16,5 +21,10 @@ public class KmLogoExampleWizard
 		List projects = new ArrayList(1);
 		projects.add(new ProjectDescriptor("fr.irisa.triskell.kmlogo.ui", "zips/org.kermeta.kmlogo.samples.zip", "org.kermeta.kmlogo.samples"));
 		return projects;
+	}
+
+	@Override
+	protected AbstractUIPlugin getContainerPlugin() {
+		return Activator.getDefault();
 	}
 }
