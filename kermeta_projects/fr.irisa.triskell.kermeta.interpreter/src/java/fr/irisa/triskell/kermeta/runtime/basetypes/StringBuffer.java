@@ -1,4 +1,4 @@
-/* $Id: StringBuffer.java,v 1.5 2007-10-15 07:13:58 barais Exp $
+/* $Id: StringBuffer.java,v 1.6 2008-06-24 14:46:10 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : StringBuffer.java
 * License : EPL
@@ -23,6 +23,13 @@ public class StringBuffer {
 		java.lang.StringBuffer buffer=getValue(self);
 		buffer.append((java.lang.String)arg0.getJavaNativeObject());
 		return self;
+	}
+	
+	public static RuntimeObject length(RuntimeObject self){
+		java.lang.StringBuffer buffer = getValue(self);
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+		Integer.setValue(result, ((java.lang.Integer)buffer.length()));
+		return result;
 	}
 	
 	/**
