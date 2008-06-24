@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.11 2008-05-19 13:50:46 ftanguy Exp $
+/* $Id: Tracer.java,v 1.12 2008-06-24 11:51:08 ftanguy Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -400,21 +400,23 @@ public class Tracer {
 	 * return null if none is found
 	 */
 	public TextReference getStrictOffsetShortestTextReference(int offset, int length, String uri) {
-		TextReference result = null;			
-		List<TextReference> references = _textReferencesCache.get(offset);
-		// look into the strict offset cache
-		if ( references != null ) {
-			for ( TextReference reference : references ) {
-				if ( reference.getFileURI().equals(uri)){ // only on the correct file
-					if ( reference.getCharEndAt() >= offset+length ){
-						// this TextReference can contain the reference we are looking for
-						if ( result == null ) {
-							result = reference;
-						}
-						else {
-							// maybe this other TextReference that start at this offset is smaller that the currently found
-							if ( reference.getCharEndAt() < result.getCharEndAt() )
+		TextReference result = null;
+		if ( _textReferencesCache != null ) {
+			List<TextReference> references = _textReferencesCache.get(offset);
+			// look into the strict offset cache
+			if ( references != null ) {
+				for ( TextReference reference : references ) {
+					if ( reference.getFileURI().equals(uri)){ // only on the correct file
+						if ( reference.getCharEndAt() >= offset+length ){
+							// this TextReference can contain the reference we are looking for
+							if ( result == null ) {
 								result = reference;
+							}
+							else {
+								// maybe this other TextReference that start at this offset is smaller that the currently found
+								if ( reference.getCharEndAt() < result.getCharEndAt() )
+									result = reference;
+							}
 						}
 					}
 				}

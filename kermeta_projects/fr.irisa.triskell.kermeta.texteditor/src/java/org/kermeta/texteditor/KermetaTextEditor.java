@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.13 2008-06-17 15:03:10 dvojtise Exp $
+/*$Id: KermetaTextEditor.java,v 1.14 2008-06-24 11:50:03 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -162,13 +162,12 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 			annotations.add(annotation);
 		}
 		
-		if(annotationModel != null) // annotationModel can be null. see viewer.getProjectionAnnotationModel()
+		if ( annotationModel != null ) {
 			annotationModel.modifyAnnotations(oldAnnotations,newAnnotations,null);
-		else {
+			oldAnnotations = annotations.toArray( new Annotation[annotations.size()] );
+		} else {
 			TexteditorPlugin.logWarningMessage("Cannot update annotation model of " + this.getFileName(), new Exception());
 		}
-		
-		oldAnnotations = annotations.toArray( new Annotation[annotations.size()] );
 	}
 
     public IFile getFile() {
