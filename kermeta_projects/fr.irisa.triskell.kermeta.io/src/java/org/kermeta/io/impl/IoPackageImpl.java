@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.21 2008-04-28 11:50:12 ftanguy Exp $
+ * $Id: IoPackageImpl.java,v 1.22 2008-06-24 11:47:45 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -488,24 +488,6 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKermetaUnitStorer_KermetaUnitsBeingLoaded() {
-		return (EReference)kermetaUnitStorerEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getKermetaUnitStorer_KermetaUnitsBeingUnloaded() {
-		return (EReference)kermetaUnitStorerEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPackageEntry() {
 		return packageEntryEClass;
 	}
@@ -852,8 +834,6 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		kermetaUnitStorerEClass = createEClass(KERMETA_UNIT_STORER);
 		createEReference(kermetaUnitStorerEClass, KERMETA_UNIT_STORER__KERMETA_UNITS);
-		createEReference(kermetaUnitStorerEClass, KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED);
-		createEReference(kermetaUnitStorerEClass, KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED);
 
 		packageEntryEClass = createEClass(PACKAGE_ENTRY);
 		createEAttribute(packageEntryEClass, PACKAGE_ENTRY__QUALIFIED_NAME);
@@ -1094,24 +1074,12 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		initEClass(kermetaUnitStorerEClass, KermetaUnitStorer.class, "KermetaUnitStorer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKermetaUnitStorer_KermetaUnits(), this.getKermetaUnit(), this.getKermetaUnit_Storer(), "kermetaUnits", null, 0, -1, KermetaUnitStorer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKermetaUnitStorer_KermetaUnitsBeingLoaded(), this.getKermetaUnit(), null, "kermetaUnitsBeingLoaded", null, 0, -1, KermetaUnitStorer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKermetaUnitStorer_KermetaUnitsBeingUnloaded(), this.getKermetaUnit(), null, "kermetaUnitsBeingUnloaded", null, 0, -1, KermetaUnitStorer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitStorerEClass, this.getKermetaUnit(), "get", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitStorerEClass, this.getKermetaUnit(), "find", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(kermetaUnitStorerEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "options", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitStorerEClass, null, "unload", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);

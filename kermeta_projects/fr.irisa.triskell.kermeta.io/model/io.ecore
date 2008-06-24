@@ -191,25 +191,11 @@
     <eOperations name="find" eType="#//KermetaUnit">
       <eParameters name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="load">
-      <eParameters name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="options">
-        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-        </eGenericType>
-      </eParameters>
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
     <eOperations name="unload">
       <eParameters name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="kermetaUnits" upperBound="-1"
         eType="#//KermetaUnit" containment="true" eOpposite="#//KermetaUnit/storer"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="kermetaUnitsBeingLoaded"
-        upperBound="-1" eType="#//KermetaUnit"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="kermetaUnitsBeingUnloaded"
-        upperBound="-1" eType="#//KermetaUnit"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"

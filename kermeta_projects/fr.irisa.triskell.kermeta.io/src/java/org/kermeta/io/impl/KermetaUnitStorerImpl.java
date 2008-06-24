@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.26 2008-04-28 11:50:12 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.27 2008-06-24 11:47:45 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -53,8 +53,6 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitStorerImpl#getKermetaUnits <em>Kermeta Units</em>}</li>
- *   <li>{@link org.kermeta.io.impl.KermetaUnitStorerImpl#getKermetaUnitsBeingLoaded <em>Kermeta Units Being Loaded</em>}</li>
- *   <li>{@link org.kermeta.io.impl.KermetaUnitStorerImpl#getKermetaUnitsBeingUnloaded <em>Kermeta Units Being Unloaded</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,26 +68,6 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * @ordered
 	 */
 	protected EList<KermetaUnit> kermetaUnits;
-
-	/**
-	 * The cached value of the '{@link #getKermetaUnitsBeingLoaded() <em>Kermeta Units Being Loaded</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getKermetaUnitsBeingLoaded()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<KermetaUnit> kermetaUnitsBeingLoaded;
-
-	/**
-	 * The cached value of the '{@link #getKermetaUnitsBeingUnloaded() <em>Kermeta Units Being Unloaded</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getKermetaUnitsBeingUnloaded()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<KermetaUnit> kermetaUnitsBeingUnloaded;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,30 +98,6 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			kermetaUnits = new EObjectContainmentWithInverseEList<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS, IoPackage.KERMETA_UNIT__STORER);
 		}
 		return kermetaUnits;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<KermetaUnit> getKermetaUnitsBeingLoaded() {
-		if (kermetaUnitsBeingLoaded == null) {
-			kermetaUnitsBeingLoaded = new EObjectResolvingEList<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED);
-		}
-		return kermetaUnitsBeingLoaded;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<KermetaUnit> getKermetaUnitsBeingUnloaded() {
-		if (kermetaUnitsBeingUnloaded == null) {
-			kermetaUnitsBeingUnloaded = new EObjectResolvingEList<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED);
-		}
-		return kermetaUnitsBeingUnloaded;
 	}
 
 	/**
@@ -267,32 +221,13 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void load(String uri, Map<Object, Object> options, IProgressMonitor monitor) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	synchronized public void unload(String uri) {
 
 		KermetaUnit kermetaUnit = find(uri);
 		if ( kermetaUnit != null ) {
-			
-			while ( getKermetaUnitsBeingLoaded().contains(kermetaUnit) ) {
-				try {
-					wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-						
+				
 			getKermetaUnits().remove( kermetaUnit );
 		
 			for ( TypeDefinition typeDefinition : KermetaUnitHelper.getInternalTypeDefinitions( kermetaUnit ) ) {
@@ -350,11 +285,6 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			kermetaUnit.setModelingUnit(null);
 			kermetaUnit.setStorer(null);
 			kermetaUnit.setTypeDefinitionCache(null);
-			
-			/*synchronized( getKermetaUnitsBeingUnloaded() ) {
-				getKermetaUnitsBeingUnloaded().remove( kermetaUnit );
-				notify();
-			}*/
 		}
 	}
 
@@ -397,10 +327,6 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
 				return getKermetaUnits();
-			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED:
-				return getKermetaUnitsBeingLoaded();
-			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED:
-				return getKermetaUnitsBeingUnloaded();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -418,14 +344,6 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				getKermetaUnits().clear();
 				getKermetaUnits().addAll((Collection<? extends KermetaUnit>)newValue);
 				return;
-			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED:
-				getKermetaUnitsBeingLoaded().clear();
-				getKermetaUnitsBeingLoaded().addAll((Collection<? extends KermetaUnit>)newValue);
-				return;
-			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED:
-				getKermetaUnitsBeingUnloaded().clear();
-				getKermetaUnitsBeingUnloaded().addAll((Collection<? extends KermetaUnit>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -441,12 +359,6 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
 				getKermetaUnits().clear();
 				return;
-			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED:
-				getKermetaUnitsBeingLoaded().clear();
-				return;
-			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED:
-				getKermetaUnitsBeingUnloaded().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -461,10 +373,6 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
 				return kermetaUnits != null && !kermetaUnits.isEmpty();
-			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED:
-				return kermetaUnitsBeingLoaded != null && !kermetaUnitsBeingLoaded.isEmpty();
-			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED:
-				return kermetaUnitsBeingUnloaded != null && !kermetaUnitsBeingUnloaded.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
