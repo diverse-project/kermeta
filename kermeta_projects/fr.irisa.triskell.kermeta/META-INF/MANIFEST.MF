@@ -7,8 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: fr.irisa.triskell.kermeta.plugin.KermetaPlugin
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
-Export-Package: .,
- fr.irisa.triskell.kermeta,
+Export-Package: fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.plugin,
  fr.irisa.triskell.kermeta.popup.actions,
  fr.irisa.triskell.kermeta.resources,
