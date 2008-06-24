@@ -1,4 +1,4 @@
-/* $Id: Integer.java,v 1.12 2008-06-18 12:34:17 cfaucher Exp $ 
+/* $Id: Integer.java,v 1.13 2008-06-24 15:55:40 bmorin Exp $ 
  * Implementation of Kermeta base type Integer 
  */
 
@@ -86,13 +86,13 @@ public class Integer {
 	 */
 	public static RuntimeObject div(RuntimeObject self, RuntimeObject param0) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
-		setValue(result, java.lang.Float.floatToIntBits(getValue(self) / getValue(param0)));
+		setValue(result, getValue(self) / getValue(param0));
 		return result;
 	}
 	
 	/** Java version */
 	public static java.lang.Integer div(java.lang.Integer self, java.lang.Integer param0) {
-		return java.lang.Float.floatToIntBits(self / param0);
+		return self / param0;
 	}
 
 	/** Implementation of method mod called as :
