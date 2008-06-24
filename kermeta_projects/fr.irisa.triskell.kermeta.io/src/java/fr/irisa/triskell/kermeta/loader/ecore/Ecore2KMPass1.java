@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.35 2008-06-16 08:34:38 cfaucher Exp $
+/*$Id: Ecore2KMPass1.java,v 1.36 2008-06-24 14:39:38 cfaucher Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -11,9 +11,6 @@
 */
 
 package fr.irisa.triskell.kermeta.loader.ecore;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -30,6 +27,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.io.KermetaUnit;
@@ -188,16 +186,15 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	    		
 	    		if ( !datas.value_types.contains(EcoreHelper.getQualifiedName(node)) ) {
 		    		if ( node.getInstanceClassName() != null ) {
-		    			Tag t0 = KermetaModelHelper.Tag.create("EMF_EDataType_instanceClassName", node.getInstanceClassName());
+		    			Tag t0 = KermetaModelHelper.Tag.create("ecore.EDataType_instanceClassName", node.getInstanceClassName());
 		    			currentPrimitiveType.getOwnedTags().add(t0);
 		    		}
 		    		
-		    		String str_isSerializable = "false";
 		    		if ( node.isSerializable() ) {
-		    			str_isSerializable = "true";
+		    			Tag t1 = KermetaModelHelper.Tag.create("ecore.EDataType_isSerializable", "true");
+			    		currentPrimitiveType.getOwnedTags().add(t1);
 		    		}
-		    		Tag t1 = KermetaModelHelper.Tag.create("EMF_EDataType_isSerializable", str_isSerializable);
-		    		currentPrimitiveType.getOwnedTags().add(t1);
+		    		
 		    		
 		    		if( node.getETypeParameters()!=null && node.getETypeParameters().size()>0 ) {
 		    			String str_etp = "";
@@ -209,7 +206,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			    			str_etp += etp.getName();
 			    			i++;
 			    		}
-			    		Tag t2 = KermetaModelHelper.Tag.create("EMF_EDataType_eTypeParameters", str_etp);
+			    		Tag t2 = KermetaModelHelper.Tag.create("ecore.EDataType_eTypeParameters", str_etp);
 		    			currentPrimitiveType.getOwnedTags().add(t2);
 		    		}
 		    	}
@@ -356,6 +353,8 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			currentProperty.setIsSetterAbstract(true);
 		}
 		
+		addTransientTag(node, currentProperty);
+		
 		currentProperty.setIsComposite(isc);
 		accept(node.getEAttributeType());
 		return currentProperty;
@@ -403,6 +402,8 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			currentProperty.setOpposite(oprop);
 		}
 		
+		addTransientTag(node, currentProperty);
+		
 		if ( node.isDerived() ) {
 			currentProperty.setIsGetterAbstract(true);
 			currentProperty.setIsSetterAbstract(true);
@@ -445,6 +446,13 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			external = ! KermetaModelHelper.NamedElement.qualifiedName(getCurrentPackage()).equals( EcoreHelper.getQualifiedName( (ENamedElement) o.eContainer()) );
 		}
 		return external;
+	}
+	
+	private void addTransientTag(EStructuralFeature feature, Property prop) {
+		if ( feature.isTransient() ) {
+			Tag t = KermetaModelHelper.Tag.create("ecore.isTransient", "true");
+			prop.getOwnedTags().add(t);
+		}
 	}
 	
 	public Object visit(EEnumLiteral node) {
