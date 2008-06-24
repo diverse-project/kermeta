@@ -1,4 +1,4 @@
-/* $Id: AbstractExampleWizard.java,v 1.1 2008-03-27 16:28:45 dvojtise Exp $
+/* $Id: AbstractExampleWizard.java,v 1.2 2008-06-24 11:34:45 ftanguy Exp $
  * Project    : org.kermeta.kmlogo.tutorial
  * File       : AbstractExampleWizard.java
  * License    : EPL
@@ -14,18 +14,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -33,7 +30,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
@@ -115,30 +111,20 @@ public abstract class AbstractExampleWizard extends Wizard
 	}
 
 	public boolean performFinish() {
-		final Collection projectDescriptors = getProjectDescriptors();
+		final Collection<ProjectDescriptor> projectDescriptors = getProjectDescriptors();
 		
-		try {
-			IWorkspaceRunnable myRunnable = 
-				new IWorkspaceRunnable() {
-					public void run(IProgressMonitor monitor) throws CoreException {
-						monitor.beginTask("Unzipping Projects", projectDescriptors.size());
-						
-						for (Iterator i = projectDescriptors.iterator(); i.hasNext();) {
-							unzipProject((ProjectDescriptor)i.next(), monitor);
-							monitor.worked(1);
-						}
-					}
-			};
-
-
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			workspace.run(myRunnable, null, IWorkspace.AVOID_UPDATE, null);
-			
-		} catch (CoreException e) {
-			getContainerPlugin().getLog().log(new Status(IStatus.ERROR, getContainerPlugin().getBundle().getSymbolicName(),IStatus.ERROR, e.getMessage(),e));
-			
-		}
-
+		WorkspaceJob job = new WorkspaceJob("Unzipping Projects") {
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
+				monitor.beginTask("Unzipping Projects", projectDescriptors.size());
+				for ( ProjectDescriptor desc : projectDescriptors ) {
+					unzipProject(desc, monitor);
+					monitor.worked(1);
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule();
 		return true;
 	}
 	
@@ -151,7 +137,7 @@ public abstract class AbstractExampleWizard extends Wizard
 	 * @return The collection of project descriptors that should be
 	 *  unzipped into the workspace.
 	 */
-	protected abstract Collection getProjectDescriptors();
+	protected abstract Collection<ProjectDescriptor> getProjectDescriptors();
 	
 	private void unzipProject(ProjectDescriptor descriptor, IProgressMonitor monitor) {
 		String bundleName = descriptor.getBundleName();
