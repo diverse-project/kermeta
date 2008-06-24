@@ -1,6 +1,6 @@
 
 
-/*$Id: ReconcilingStrategy.java,v 1.6 2008-05-28 09:25:06 ftanguy Exp $
+/*$Id: ReconcilingStrategy.java,v 1.7 2008-06-24 11:49:34 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategy.java
 * License : EPL
@@ -23,19 +23,12 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
-import org.kermeta.interest.exception.IdNotFoundException;
-import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.checker.KermetaUnitChecker;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.kpm.EventDispatcher;
-import org.kermeta.kpm.KermetaUnitHost;
 import org.kermeta.kpm.KpmManager;
 import org.kermeta.texteditor.folding.FoldingStrategyHelper;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
-import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
@@ -50,9 +43,8 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 	public ReconcilingStrategy(KermetaTextEditor editor) {
 		this.editor = editor;
 		IFile file = editor.getFile();
-		if ( file != null ) {
-			kpmUnit = KpmManager.getDefault().getUnit( file.getFullPath().toString() );
-		}
+		if ( file != null )
+			kpmUnit = KpmManager.getDefault().getUnit( file );
 	}
 	
 	private IDocument document = null;
@@ -65,7 +57,6 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 		} catch (TokenStreamException e) {
 		}
 	
-		
 		/*
 		 * 
 		 * If one job is still executing, let's cancel it and wait for its end.
@@ -82,8 +73,6 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 		
 		if ( kpmUnit != null )
 			setJobForKermetaProject();
-		else
-			setJobForNonKermetaProject();
 		
 		modelCheckingJob.schedule();
 		
@@ -116,38 +105,6 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 				
 				return Status.OK_STATUS;
 			}
-		};
-	}
-	
-	private void setJobForNonKermetaProject() {
-		modelCheckingJob = new Job("Model Checking " + editor.getFile().getFullPath().toString()) {
-			
-			public IStatus run(IProgressMonitor monitor) {
-
-				int value = TexteditorPlugin.getDefault().getModelCheckingStrategy();
-				
-				switch (value) {
-				case ModelcheckingStrategy.INPUT_CHANGED:
-					try {
-						LoaderPlugin.getDefault().unload( "platform:/resource" + editor.getFile().getFullPath().toString() );
-						KermetaUnit kermetaUnit = KermetaUnitChecker.check( editor.getFile(), getFileContent() );
-						KermetaUnitHost.getInstance().updateValue(editor.getFile(), kermetaUnit);
-					} catch (NotRegisteredURIException e) {
-						e.printStackTrace();
-					} catch (URIMalformedException e) {
-						e.printStackTrace();
-					} catch (IdNotFoundException e) {
-						e.printStackTrace();
-					}
-					break;
-					
-				default:
-					break;
-				}
-				
-				return Status.OK_STATUS;
-			}
-			
 		};
 	}
 	
