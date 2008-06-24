@@ -1,4 +1,4 @@
-/* $Id: CustomWeaver.kmt,v 1.3 2008-06-17 15:35:31 bmorin Exp $
+/* $Id: CustomWeaver.kmt,v 1.4 2008-06-24 14:39:11 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -88,7 +88,7 @@ class Weaver
 	end
 
 	operation weaving(domainMMUri : String, domainMMPatternUri : String) : Void is do
-		var continue : Boolean init true
+		/*var continue : Boolean init true
 		stdio.writeln("Checking all invariants before weaving")
 		do
 			resourceModel.instances.one.checkAllInvariantsIte
@@ -103,7 +103,7 @@ class Weaver
 		end
 		stdio.writeln("")
 	
-		if continue then
+		if continue then*/
 	
 			adapter.initClone
 		
@@ -111,12 +111,6 @@ class Weaver
 			stdio.writeln("Searching base model elements matching the interface model...")
 			stdio.writeln("- The Metamodel and the model are transformed into a Prolog knowledge base")
 			stdio.writeln("- The inferface model (~pointcut) is tranformed into a Prolog query")
-			stdio.writeln("Better performance expected: ")				
-			stdio.writeln("  - Reuse already woven configurations (maintain a repository)")
-			stdio.writeln("  - Kermeta compiler:")
-			stdio.writeln("      - faster generation of the facts and the query")
-			stdio.writeln("      - more direct connection with InterProlog (Java-Prolog interface)")
-			stdio.writeln("")
 			
 			var iteBindings : Iterator<Hashtable<Object, Object>> 
 			init Iterator<Hashtable<Object, Object>>.new
@@ -135,15 +129,15 @@ class Weaver
 				stdio.writeln("No join point!")
 			end
 			
-			stdio.writeln("")
+			/*stdio.writeln("")
 			stdio.writeln("Checking all invariants after weaving")
 			do
 				resourceModel.instances.one.checkAllInvariantsIte
 			rescue (e : kermeta::exceptions::ConstraintViolatedInv)
 				stdio.errorln(e.message)
 				//stdio.errorln(e.stackTrace)
-			end
+			end*/
 			stdio.writeln("")
-		end	
+		//end	
 	end	
 }

@@ -1,4 +1,4 @@
-/* $Id: serviceDiscovery.kmt,v 1.5 2008-06-18 15:59:53 bmorin Exp $
+/* $Id: serviceDiscovery.kmt,v 1.6 2008-06-24 14:37:31 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -86,8 +86,9 @@ class ServiceDiscoveryMain
 			weaver.loadModel(wovenModelUri, "http://art")
 		end
 */		
-		var context : art::DisplayContext init art::DisplayContext.new
+		var context : art::display::DisplayContext init art::display::DisplayContext.new
 		context.~init
+		context.setRoot(weaver.resourceModel.instances.one.asType(art::System).root)
 		weaver.resourceModel.instances.one.asType(art::System).root.display(context)
 		
 		weaver.finalizeWeaver()

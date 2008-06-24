@@ -12,40 +12,201 @@ package art;
 
 require kermeta
 require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
+require "platform:/resource/SmartAdapters/program/weaving/aspectizedFramework.kmt"
 
 using kermeta::standard
 using kermeta::utils
+using kermeta::persistence
 using art::type
 
-class DisplayContext
-{
-	reference stack : Stack<DisplayElement>
-	
-	operation ~init() is
-	do
-		stack := Stack<DisplayElement>.new
-	end
-}
-
-abstract class DisplayElement
-{
-	operation display(context : DisplayContext) is
-		abstract
-	
-	/**
-	 * Should be call before displaying another element
-	 */
-	operation changeDisplay(context : DisplayContext) is
-	do
-		context.stack.push(self)
-	end
-	
-	operation displayPrevious(context : DisplayContext) is
-	do
-		if stdio.read("display previsous ? (y/n)").toBoolean then
-			context.stack.pop.display(context)
+package display{
+	class DisplayContext
+	{
+		reference stack : Stack<DisplayElement>
+		reference root : DisplayElement
+		reference table : StringTable
+		
+		operation ~init() is
+		do
+			stack := Stack<DisplayElement>.new
+			table := StringTable.new
+			table.~init(self)
 		end
-	end
+		
+		operation enter(current : DisplayElement) is
+		do
+			stack.push(current) //enter current context
+			current.display(self)
+			if displayPrevious then
+				leave
+			else
+				displayRoot
+			end
+		end
+		
+		operation displayPrevious() : Boolean is
+		do
+			do
+				result := stdio.read("display previous ? (y/n)").toBoolean
+			rescue (e : kermeta::exceptions::Exception)
+				stdio.errorln("Cannot read input")
+				result := self.displayPrevious
+			end
+		end
+		
+		operation leave() is
+		do
+			table.clear
+			do
+				stack.pop //leave current context
+				enter(stack.pop) //enter previous context
+			rescue
+				displayRoot
+			end
+		end
+		
+		operation displayRoot() is
+		do
+			stack.clear
+			enter(root)
+		end
+		
+		operation setRoot(root : DisplayElement) is
+		do
+			self.root := root
+		end
+		
+		operation drawLine() is
+		do
+			stdio.writeln(getLine)
+		end
+		
+		operation drawBoldLine()is
+		do
+			stdio.writeln(getBoldLine)
+		end
+		
+		operation getLine() : String is
+		do
+			result := "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+		end
+		
+		operation getBoldLine() : String is
+		do
+			result := "===================================================================================================================================================================================================="
+		end
+		
+		operation vSpace() is
+		do
+			stdio.writeln("")
+		end
+	}
+	
+	class DisplayElement
+	{
+		operation display(context : DisplayContext) is
+			abstract
+	}
+	
+	class StringTable
+	{
+		reference header : OrderedSet<String>
+		reference table : OrderedSet<OrderedSet<String>>
+		reference currentLine : OrderedSet<String>
+		reference colSize : Integer
+		reference context : DisplayContext
+		reference title : String
+		
+		operation ~init(context : DisplayContext) is
+		do
+			header := OrderedSet<String>.new
+			table := OrderedSet<OrderedSet<String>>.new
+			self.context := context 
+			currentLine := OrderedSet<String>.new
+			colSize := 25		
+		end
+		
+		operation clear() is
+		do
+			title := void
+			header.clear
+			currentLine.clear
+			table.clear
+			colSize := 25
+		end
+		
+		operation add(s : String) is 
+		do
+			currentLine.add(s)
+		end
+		
+		operation newLine() is
+		do
+			table.add(currentLine)
+			currentLine := OrderedSet<String>.new
+		end
+		
+		operation newHeader() is
+		do
+			header.clear
+		end
+		
+		operation displayTable() is
+		do
+			if colSize == void then
+				colSize := 16
+			end
+			displayTitle
+			displayTableHeader
+			displayTableLines
+		end
+		
+		operation displayTitle() is
+		do
+			var print : StringBuffer init StringBuffer.new
+			var line : StringBuffer  init StringBuffer.new
+			var i : Integer init title.size+4
+			i.times{j |
+				line.append("#")
+			}
+			print.append(line.toString)
+			print.append("\n")
+			print.append("# "+title+" #")
+			print.append("\n")
+			print.append(line.toString)
+			context.vSpace
+			stdio.writeln(print.toString)
+		end
+		
+		operation displayTableLines() is
+		do
+			var print : StringBuffer init StringBuffer.new
+			table.each{line | 
+				line.each{s |
+					print.append(s.normalize(colSize))
+					print.append("|")
+				}
+				print.append("\n")
+				print.append(context.getLine.substring(0,(colSize*line.size)+line.size))
+				print.append("\n")
+			}
+			stdio.writeln(print.toString)
+		end
+		
+		operation displayTableHeader() is
+		do
+			var print : StringBuffer init StringBuffer.new
+			print.append(context.getBoldLine.substring(0,(colSize*header.size)+header.size))
+			print.append("\n")
+			header.each{s |
+				print.append(s.normalize(colSize))
+				print.append("|")
+			}
+			print.append("\n")
+			print.append(context.getBoldLine.substring(0,(colSize*header.size)+header.size))
+			stdio.writeln(print.toString)
+		end
+	}
 }
 
 /**
@@ -64,32 +225,50 @@ package instance{
 			
 		method display(context : DisplayContext) is
 		do	
+			context.vSpace
 			stdio.writeln("Component "+self.name+" is "+self.state)
-			stdio.writeln("- Bindings: "+binding.size.toString)
-			var hash : Hashtable<Integer, ComponentInstance> init Hashtable<Integer, ComponentInstance>.new
-			var i : Integer init 0			
+			context.drawBoldLine
+			displayType(context)
+			displayBindinds(context)
+		end
+		
+		operation displayType(context : DisplayContext) is
+		do
+			type.display(context)
+		end
+		
+		operation displayBindinds(context : DisplayContext) is
+		do
+			var hash : Hashtable<Integer, TransmissionBinding> init Hashtable<Integer, TransmissionBinding>.new
+			var i : Integer init binding.size			
 			binding.each{b | 
-				stdio.writeln("\t bound to "+b.serverInstance.name+" via "+b.client.name)
-				hash.put(i, b.serverInstance)
-				i := i+1
+				hash.put(i, b)
+				i := i-1
 			}
 
 			//displaying servers
-			stdio.writeln(" # \t| Servers")
+			context.table.clear
+			context.table.title := "Bindings"
+			context.table.header.add("#")
+			context.table.header.add("bound to")
+			context.table.header.add("via")
+			
 			hash.keys.each{j | 
-			 			var c : ComponentInstance init hash.getValue(j)
-			 			stdio.writeln("["+j.toString+"] \t| "+c.name)
+			 			var b : TransmissionBinding init hash.getValue(j)
+			 			context.table.add("["+j.toString+"]")
+			 			context.table.add(b.serverInstance.name)  
+			 			context.table.add(b.client.name+"["+b.client.lower.toString+","+b.client.upper.toString + "]")
+						context.table.newLine
 				 	}
-			var param : String init stdio.read("Display server (q = quit): ")
-			if param != "q" then
-				changeDisplay(context)
-				hash.getValue(param.toInteger).asType(ComponentInstance).display(context)
-			end		
-			displayPrevious(context)
+			context.table.displayTable
+			var param : String init stdio.read("Display server: ")
+			if param != void and param != "" then
+				context.enter(hash.getValue(param.toInteger).asType(TransmissionBinding).serverInstance)
+			end				
 		end
 	}
 	
-	aspect class PrimitiveInstance inherits DisplayElement
+	aspect class PrimitiveInstance
 	{
 		/**
 		 * opName : "org.diva.example.servicediscovery.interfaces.IAdvertiser:advertise"
@@ -102,29 +281,40 @@ package instance{
 		end
 	}
 	
-	aspect class CompositeInstance inherits DisplayElement
+	aspect class CompositeInstance
 	{
-		method display(context : DisplayContext) from DisplayElement is
+		method display(context : DisplayContext) is
 		do
-			stdio.writeln("Component "+self.name+" is "+self.state)
+			super(context)
+			displaySubComponent(context)
 			//root element
 			if self.container.asType(System) != void then
-				displayServices
-			end
-			
-			//displaying subComponents
+				loadModel(context)
+				displayServices(context)
+			end	
+		end
+		
+		operation displaySubComponent(context : DisplayContext) is
+		do
 			var hash : Hashtable<Integer, ComponentInstance> init Hashtable<Integer, ComponentInstance>.new
-			var i : Integer init 0
-			self.subComponent.each{c | hash.put(i,c) i := i+1}
-			stdio.writeln(" # \t| Component")
+			var i : Integer init subComponent.size
+			self.subComponent.each{c | hash.put(i,c) i := i-1}
+			
+			context.table.clear
+			context.table.title := "Sub components"
+			context.table.header.add("#")
+			context.table.header.add("sub component")
+
 			hash.keys.each{j | 
 			 			var c : ComponentInstance init hash.getValue(j)
-			 			stdio.writeln("["+j.toString+"] \t| "+c.name)
+			 			context.table.add("["+j.toString+"]")
+			 			context.table.add(c.name)
+						context.table.newLine
 				 	}
-			var param : String init stdio.read("Display subComponent (q = quit): ")
-			if param != "q" then
-				changeDisplay(context)
-				hash.getValue(param.toInteger).asType(ComponentInstance).display(context)
+			context.table.displayTable
+			var param : String init stdio.read("Display subComponent: ")
+			if param != void and param != "" then
+				context.enter(hash.getValue(param.toInteger).asType(ComponentInstance))
 			end
 		end
 	
@@ -132,7 +322,7 @@ package instance{
 		do
 			//Only services from the root component can be invoked
 			if self.container.asType(System) != void then
-				var port : Port init self.type.port.detect{p | p.service.~operation.contains(op)}
+				var port : Port init self.type.port.detect{p | p.service.~operation.collect{o | o.name}.contains(op.name)}
 				if port != void then
 					self.delegation.select{d | d.serverInstance.~operation.contains(op)}
 						.each{d |
@@ -147,32 +337,104 @@ package instance{
 			end
 		end
 		
-		operation displayServices() is
+		operation loadModel(context : DisplayContext) is
 		do
-			if self.container.asType(System) != void then		
-				var hash : Hashtable<Integer, Operation> init Hashtable<Integer, Operation>.new
-				var i : Integer init 0
-				self.~operation.each{o | hash.put(i,o) i := i+1}
-				var stop : Boolean init false
-				from  not stop
-		    	until stop
-				loop
-	 				stdio.writeln("Available services for "+self.name)
-					stdio.writeln(" # \t| Operation \t\t| Service")
-				 	hash.keys.each{j | 
-			 			var op : Operation init hash.getValue(j)
-			 			stdio.writeln("["+j.toString+"] \t| "+op.name+" \t\t| "+op.container.asType(Service).name)
-				 	}
-					var param : String init stdio.read("Invoke service(s) (q = Quit): ")
-					stop := (param == "q")
-					if not stop then
-						var params : OrderedSet<String> init param.split(" ")
-						params.each{p |
-							invoke(hash.getValue(p.toInteger))
-						}
+			context.vSpace
+			var model : String init stdio.read("Enter the path (right button->Properties->Path:) of a new model: ")
+			if model != void and model != "" then
+				do
+					var io : kermeta::io::FileIO init kermeta::io::FileIO.new
+					io.readTextFile("C:/work/dev/Kermeta"+model)
+					extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.loadUpdateModel(self, "platform:/resource"+model)
+					extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.saveEMFModel(self, "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/woven/newReferenceModel.art")
+					var rep : EMFRepository init EMFRepository.new
+					rep.ignoreLoadErrors := true
+					var resource : Resource init rep.createResource("platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/woven/newReferenceModel.art", "http://art")
+					do
+						resource.load
+					rescue (e : kermeta::exceptions::ResourceLoadException)
+						loadModel(context)
 					end
+					var context : DisplayContext init DisplayContext.new 
+					context.~init
+					var root : CompositeInstance init resource.instances.one.asType(System).root  
+					context.setRoot(root)
+					context.enter(root)
+				rescue (e : kermeta::exceptions::FileNotFoundException)
+					stdio.errorln("File does not exist")
+					loadModel(context)
 				end			
 			end
+		end
+		
+		operation displayServices(context : DisplayContext) is
+		do
+			context.vSpace
+			var hash : Hashtable<Integer, Operation> init Hashtable<Integer, Operation>.new
+			var i : Integer init ~operation.size
+			self.~operation.each{o | hash.put(i,o) i := i-1}
+			var stop : Boolean init false
+			
+			context.table.clear
+			context.table.title := "Available services"
+			context.table.header.add("#")
+			context.table.header.add("Operation")
+			context.table.header.add("Service")
+			
+			hash.keys.each{j | 
+		 		var op : Operation init hash.getValue(j)
+		 		context.table.add("["+j.toString+"]")
+		 		context.table.add(op.name)
+		 		context.table.add(op.container.asType(Service).name)
+		 		context.table.newLine
+			}
+			
+			from  not stop
+	    	until stop
+			loop 	
+			 	context.table.displayTable
+				var param : String init stdio.read("Invoke service(s): ")
+				stop := (param == "q" or param == "" or param == void)
+				if not stop then
+					var params : OrderedSet<String> init param.split(" ")
+					params.each{p |
+						invoke(hash.getValue(p.toInteger))
+					}
+				end
+			end			
+		end
+	}
+}
+
+package type
+{
+	aspect class ComponentType inherits DisplayElement
+	{
+		method display(context : DisplayContext) is
+		do	
+			context.vSpace
+			stdio.writeln("Component type "+self.name)
+			context.drawBoldLine
+			displayPorts(context)
+		end
+		
+		operation displayPorts(context : DisplayContext) is
+		do
+			context.table.clear
+			context.table.title := "Ports"
+			context.table.header.add("Name")
+			context.table.header.add("Cardinality")
+			context.table.header.add("isOptional")
+			context.table.header.add("client/server")
+
+			self.port.each{p |
+				context.table.add(p.name)
+				context.table.add("["+p.lower.toString+","+p.upper.toString+"]")
+				context.table.add(p.isOptional.toString)
+				context.table.add(p.role) 
+				context.table.newLine
+			}
+			context.table.displayTable
 		end
 	}
 }

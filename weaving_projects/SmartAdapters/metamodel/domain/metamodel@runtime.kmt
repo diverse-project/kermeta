@@ -53,13 +53,14 @@ package instance{
 				}
 			}
 		end
+			
+		operation getOperation() : oset Operation[0..*]
+			is abstract
 				
 		property readonly ~operation : oset Operation [0..*]
         getter is 
         do
-			result := OrderedSet<Operation>.new 
-			self.type.port.select{ p | p.role == "server" }.collect{p | p.service}
-			.each{s | result.addAll(s.~operation)}    
+        	result := getOperation
         end
         
         property readonly operationAsString : seq String [0..*]
@@ -84,6 +85,17 @@ package instance{
         end
 	}
 	
+	aspect class PrimitiveInstance
+	{
+		method getOperation() : oset Operation[0..*] is
+		do
+			result := OrderedSet<Operation>.new 
+			self.type.port.select{ p | p.role == "server" }.collect{p | p.service}
+			.each{s | result.addAll(s.~operation)}    
+		end
+		
+	}
+	
 	aspect class CompositeInstance
 	{
 		inv completeDelegationBindings is 
@@ -95,6 +107,12 @@ package instance{
 					}
 				}
 			}
+		end
+		
+		method getOperation() : oset Operation[0..*] is
+		do
+			result := OrderedSet<Operation>.new
+			self.delegation.collect{d | d.serverInstance}.each{c | result.addAll(c.~operation)}
 		end
 	}
 }

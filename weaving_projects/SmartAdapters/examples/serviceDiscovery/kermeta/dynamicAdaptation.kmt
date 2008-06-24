@@ -1,4 +1,4 @@
-/* $Id: dynamicAdaptation.kmt,v 1.3 2008-06-18 15:59:53 bmorin Exp $
+/* $Id: dynamicAdaptation.kmt,v 1.4 2008-06-24 14:37:31 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -17,7 +17,11 @@ require "platform:/resource/SmartAdapters/program/adapter/ServiceDiscovery.kmt"
 
 using kermeta::standard
 using kermeta::persistence
+
 using org::kermeta::runtime::adapter
+using art
+using art::instance
+using art::display
 
 
 class ServiceDiscoveryMain
@@ -29,7 +33,13 @@ class ServiceDiscoveryMain
 		var DAmodel : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/DAModel.art"
 		var afterDA : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/referenceModel_DA.art"
 		
-		stdio.writeln("K> Running the service discovery application (SA configuration)")
+		var display : DisplayContext init DisplayContext.new
+		display.~init
+		var resource : Resource
+		var root : CompositeInstance 
+			
+		
+		stdio.writeln("K> Running the service discovery application (Base configuration)")
 		var platformAdapter : PlatformAdapter init PlatformAdapter.new 
 		platformAdapter.~init
 		platformAdapter.run
@@ -38,7 +48,13 @@ class ServiceDiscoveryMain
 		platformAdapter.saveModel(model)
 		stdio.writeln("")
 		
-		stdio.writeln("K> Submit a new configuration: SA")
+		resource := EMFRepository.new.createResource(model, "http://art")
+		resource.load
+		root := resource.instances.one.asType(System).root
+		display.setRoot(root)
+		display.enter(root)
+		
+/*		stdio.writeln("K> Submit a new configuration: SA")
 		stdio.writeln("     -Model comparison")
 		stdio.writeln("     -Analyze diff / match")
 		stdio.writeln("     -Instanciate and order atomic reconfiguration commands")
@@ -53,5 +69,5 @@ class ServiceDiscoveryMain
 		platformAdapter.loadUpdateModel(DAmodel)
 		stdio.writeln("K> Saving the model corresponding to the current state of the running system (DA)")
 		platformAdapter.saveModel(afterDA)
-	end
+*/	end
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
+  <root name="Service Discovery" type="//@types.0" state="ON" operation="//@services.5/@operation.0 //@services.2/@operation.0">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Policy" type="//@types.4" state="ON"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Cache" type="//@types.3" state="ON">
+      <attribute value="getSize: 50"/>
+      <binding serverInstance="//@root/@subComponent.0" client="//@types.3/@port.1" server="//@types.4/@port.0"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Network" type="//@types.1" state="ON"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Advertiser" type="//@types.2" state="ON">
+      <binding serverInstance="//@root/@subComponent.0" client="//@types.2/@port.1" server="//@types.4/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.1" client="//@types.2/@port.2" server="//@types.3/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.2" client="//@types.2/@port.3" server="//@types.1/@port.0"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Request" type="//@types.5" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Request">
+      <binding serverInstance="//@root/@subComponent.0" client="//@types.5/@port.3" server="//@types.4/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.1" client="//@types.6/@port.3" server="//@types.3/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.2" client="//@types.6/@port.4" server="//@types.1/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.5" client="//@types.5/@port.2" server="//@types.6/@port.0"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Reply" type="//@types.6" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Reply">
+      <binding serverInstance="//@root/@subComponent.0" client="//@types.5/@port.3" server="//@types.4/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.1" client="//@types.6/@port.3" server="//@types.3/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.2" client="//@types.6/@port.4" server="//@types.1/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.4" client="//@types.6/@port.1" server="//@types.5/@port.1"/>
+    </subComponent>
+    <delegation serverInstance="//@root/@subComponent.3" source="//@types.2/@port.0" exported="//@types.0/@port.0"/>
+    <delegation serverInstance="//@root/@subComponent.4" source="//@types.5/@port.0" exported="//@types.0/@port.1"/>
+  </root>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.ICacheAC">
+    <operation name="getStringSize"/>
+    <operation name="setStringSize">
+      <input name="java.lang.String arg0"/>
+    </operation>
+    <operation name="getAllGetters"/>
+    <operation name="getAllStringSetters"/>
+    <operation name="getSize"/>
+    <operation name="setSize">
+      <input name="int arg0"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.INetwork">
+    <operation name="sendMessage">
+      <input name="java.lang.String arg0"/>
+      <input name="java.lang.String arg1"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IRequest">
+    <operation name="request">
+      <input name="java.lang.String arg0"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IPolicy"/>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.ICache">
+    <operation name="addToCache">
+      <input name="java.lang.String arg0"/>
+    </operation>
+    <operation name="existsInCache">
+      <input name="java.lang.String arg0"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IAdvertiser">
+    <operation name="advertise">
+      <input name="java.lang.String arg0"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IRequest"/>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IReply"/>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IRequestReply"/>
+  <types xsi:type="type:CompositeType" name="advertiser.request.">
+    <port name="advertiser" service="//@services.5" role="server"/>
+    <port name="request" service="//@services.2" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="network.">
+    <port name="network" isOptional="false" service="//@services.1" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network.">
+    <port name="advertiser" isOptional="false" service="//@services.5" role="server"/>
+    <port name="policy" isOptional="false" service="//@services.3" role="client"/>
+    <port name="cache" isOptional="false" service="//@services.4" role="client"/>
+    <port name="network" isOptional="false" service="//@services.1" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="cache.policy.attribute-controller.">
+    <port name="cache" isOptional="false" service="//@services.4" role="server"/>
+    <port name="policy" isOptional="false" service="//@services.3" role="client"/>
+    <port name="attribute-controller" service="//@services.0" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="policy.">
+    <port name="policy" isOptional="false" service="//@services.3" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="request.requestReply.reply.policy.cache.network.">
+    <port name="request" isOptional="false" service="//@services.2" role="server"/>
+    <port name="requestReply" isOptional="false" service="//@services.8" role="server"/>
+    <port name="reply" isOptional="false" service="//@services.7" role="client"/>
+    <port name="policy" isOptional="false" service="//@services.3" role="client"/>
+    <port name="cache" isOptional="false" service="//@services.4" role="client"/>
+    <port name="network" isOptional="false" service="//@services.1" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="reply.requestReply.policy.cache.network.">
+    <port name="reply" isOptional="false" service="//@services.7" role="server"/>
+    <port name="requestReply" isOptional="false" service="//@services.8" role="client"/>
+    <port name="policy" isOptional="false" service="//@services.3" role="client"/>
+    <port name="cache" isOptional="false" service="//@services.4" role="client"/>
+    <port name="network" isOptional="false" service="//@services.1" role="client"/>
+  </types>
+</art:System>
