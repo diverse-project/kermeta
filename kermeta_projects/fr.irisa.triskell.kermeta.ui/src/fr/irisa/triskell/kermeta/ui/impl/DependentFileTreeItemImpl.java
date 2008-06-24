@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependentFileTreeItemImpl.java,v 1.5 2008-05-28 09:25:42 ftanguy Exp $
+ * $Id: DependentFileTreeItemImpl.java,v 1.6 2008-06-24 11:45:37 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.ui.impl;
 
@@ -60,7 +60,7 @@ public class DependentFileTreeItemImpl extends TreeItemImpl implements Dependent
 			while ( iterator.hasNext() ) {
 				Dependency currentDependency = iterator.next();
 				DependentFileTreeItem item = UiFactory.eINSTANCE.createDependentFileTreeItem();
-				item.setValue( currentDependency.getFrom() );
+				item.setValue( currentDependency.getTo() );
 				item.setParent(this);
 				getChildren().add( item );
 			}
