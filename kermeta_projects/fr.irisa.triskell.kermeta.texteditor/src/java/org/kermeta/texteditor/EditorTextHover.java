@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.7 2008-06-17 14:31:56 dvojtise Exp $
+/* $Id: EditorTextHover.java,v 1.8 2008-06-24 11:49:10 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -113,10 +113,12 @@ public class EditorTextHover implements ITextHover {//, ITextHoverExtension, IIn
 			}
 		}
 		
-		EObject o = modelRef.getRefObject();
-		
-		TextHoverLabelProvider provider = new TextHoverLabelProvider();
-		return (String) provider.accept(o);
+		if ( modelRef != null ) {
+			EObject o = modelRef.getRefObject();
+			TextHoverLabelProvider provider = new TextHoverLabelProvider();
+			return (String) provider.accept(o);
+		} else
+			return null;
 	}
 
 	/**

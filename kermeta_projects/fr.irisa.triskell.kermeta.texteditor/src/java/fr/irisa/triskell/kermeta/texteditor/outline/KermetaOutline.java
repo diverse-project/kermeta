@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.24 2008-06-10 12:11:25 ftanguy Exp $
+/* $Id: KermetaOutline.java,v 1.25 2008-06-24 11:48:57 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -388,10 +388,12 @@ public class KermetaOutline extends ContentOutlinePage implements InterestedObje
 							ok = false;
 						else if ( o instanceof Property )
 							ok = false;
-						else
+						else if ( o != null )
 							o = o.eContainer();
+						else
+							ok = false;
+						addObjectToContainer(o, container);
 					}
-					addObjectToContainer(o, container);
 				}
 			}
 		}
