@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.7 2008-06-26 09:06:30 cfaucher Exp $
+/* $Id: Compiler.java,v 1.8 2008-06-26 13:44:08 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -83,7 +83,7 @@ public class Compiler extends Generator {
 		super();
 		ecorefile = ecoreFile;
 		arguments[0] = "-ecore2GenModel";
-		arguments[1] = ecorefile.getFullPath().toString();
+		arguments[1] = ecorefile.getLocation().toString();
 		arguments[2] = "";
 		arguments[3] = "Ckm"; // it seems this assignment is deprecated
 	}
@@ -207,7 +207,9 @@ public class Compiler extends Generator {
 		genModel.setTemplateDirectory("platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates");
 		// Use of Java generics is enabled
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
-		genModel.setCopyrightText("Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org");
+		genModel.setContainmentProxies(true);
+		genModel.setCodeFormatting(true);
+		//genModel.setCopyrightText("Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org");
 	}
 
 	/**
