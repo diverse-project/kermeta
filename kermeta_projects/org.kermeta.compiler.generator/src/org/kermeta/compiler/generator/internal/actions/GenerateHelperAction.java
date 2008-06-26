@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: GenerateHelperAction.java,v 1.6 2008-05-28 09:51:29 cfaucher Exp $
+/*$Id: GenerateHelperAction.java,v 1.7 2008-06-26 13:07:24 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	GenerateHelperAction.java
 * License : EPL
@@ -68,8 +68,7 @@ public class GenerateHelperAction implements IActionDelegate
      * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction,
      *      org.eclipse.jface.viewers.ISelection)
      */
-    public void selectionChanged(IAction action, ISelection sel)
-    {
+    public void selectionChanged(IAction action, ISelection sel) {
         selection = sel;
         action.setEnabled(true);
     }
@@ -80,22 +79,18 @@ public class GenerateHelperAction implements IActionDelegate
      * @param sel the selection
      * @return the selected file
      */
-    private IFile convertSelection2File(ISelection sel)
-    {
+    private IFile convertSelection2File(ISelection sel) {
         // get the selected *.configuration file
-        if (selection instanceof IStructuredSelection)
-        {
+        if (selection instanceof IStructuredSelection) {
             IStructuredSelection ssel = (IStructuredSelection) sel;
             if (!ssel.isEmpty() && ssel.size() == 1)
             {
                 Object selectedObj = ssel.getFirstElement();
-                if (selectedObj instanceof IFile)
-                {
+                if (selectedObj instanceof IFile) {
                     return (IFile) selectedObj;
                 }
                 // Try to adapt
-                if (selectedObj instanceof IAdaptable)
-                {
+                if (selectedObj instanceof IAdaptable) {
                     return (IFile) ((IAdaptable) selectedObj).getAdapter(IFile.class);
                 }
             }
@@ -106,8 +101,7 @@ public class GenerateHelperAction implements IActionDelegate
     /**
      * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
      */
-    public void run(IAction action)
-    {
+    public void run(IAction action) {
         // get the selected *.configuration file
         final IFile file = convertSelection2File(selection);
         
@@ -125,20 +119,18 @@ public class GenerateHelperAction implements IActionDelegate
 			e.printStackTrace();
 		}*/
         
-        generate(file, /*kermetaUnit,*/ null, null);
+        generate(file, /*kermetaUnit,*/ /*null,*/ null);
 
     }
     
-    public void generate(final IFile file, /*final KermetaUnit kmUnit,*/ final EcoreExporter km2ecoreGen, final IFile simk_file) {
+    public void generate(final IFile file, /*final KermetaUnit kmUnit,*/ /*final EcoreExporter km2ecoreGen,*/ final IFile simk_file) {
     	if (file == null) {
             GeneratorPlugin.displayDialog(null, "Invalid selection : Only one file can be selected.", IStatus.ERROR);
             return;
         }
 
-        WorkspaceModifyOperation op = new WorkspaceModifyOperation()
-        {
-            public void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException
-            {
+        WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
+            public void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
                 monitor.beginTask("Compiler Helper Generation process", 11);
                 try {
                     ConfiguratorObjectManager manager = new ConfiguratorObjectManager();
@@ -176,14 +168,14 @@ public class GenerateHelperAction implements IActionDelegate
             dialog.run(true, false, op);
 
             ConfiguratorObjectManager manager = new ConfiguratorObjectManager();
-            manager.load(file.getFullPath());
+            /*manager.load(file.getFullPath());
             // retrieve the root model object and check if it has the expected type
             if (manager.getRootModelObject() instanceof GenModel) {
             	GenModel configuration = (GenModel) manager.getRootModelObject();
                 if (configuration.isUpdateClasspath()) {
                     AbstractGenerator.organizeImports(generatedProject);
                 }
-            }
+            }*/
         } catch (Exception e) {
             GeneratorPlugin.log(e);
             GeneratorPlugin.displayDialog(null, "An error occurred during the helper generation", IStatus.ERROR);
