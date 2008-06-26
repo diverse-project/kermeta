@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.45 2008-06-24 14:44:35 cfaucher Exp $
+ * $Id: collections.kmt,v 1.46 2008-06-26 12:52:48 cfaucher Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -26,7 +26,7 @@ alias Object : kermeta::language::structure::Object;
 /**
  * Collection is the root abstract class for all kermeta collections
  */
- @EMF_needReference "isUnique=false isOrdered=false javaClass=java.lang.ArrayList"
+ @EMF_needReference "isUnique=false isOrdered=false javaClass=org.eclipse.emf.common.util.BasicEList"
 abstract class Collection<G> 
 {
 	/**
@@ -395,7 +395,7 @@ abstract class Collection<G>
  * A Set is a non-ordered collection that contains distinct elements
  * (with regards to the G.equals(Object) operation)
  */
- @EMF_needReference "isUnique=true isOrdered=false javaClass=java.lang.ArrayList"
+ @EMF_needReference "isUnique=true isOrdered=false javaClass=org.eclipse.emf.common.util.BasicEList"
 class Set<G> inherits Collection<G>
 {
 	/**
@@ -630,7 +630,7 @@ class Set<G> inherits Collection<G>
 /**
  * Bag is a concrete non-ordered Collection allowing duplicates
  */
- @EMF_needReference "isUnique=false isOrdered=false javaClass=java.lang.ArrayList"
+ @EMF_needReference "isUnique=false isOrdered=false javaClass=org.eclipse.emf.common.util.BasicEList"
 class Bag<G> inherits Collection<G>
 {
 	/**
@@ -868,7 +868,7 @@ class Bag<G> inherits Collection<G>
 /**
  * An OrderedCollection is the root abstract class for all ordered Collections.
  */
- @EMF_needReference "isUnique=false isOrdered=true javaClass=java.lang.ArrayList"
+ @EMF_needReference "isUnique=false isOrdered=true javaClass=org.eclipse.emf.common.util.BasicEList"
 abstract class OrderedCollection<G> inherits Collection<G> {
 	
 	/**
@@ -1008,7 +1008,7 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 /**
  * An OrderedSet is a Set that contained ordered distinct elements
  */
- @EMF_needReference "isUnique=true isOrdered=true javaClass=java.lang.ArrayList"
+ @EMF_needReference "isUnique=true isOrdered=true javaClass=org.eclipse.emf.common.util.BasicEList"
 class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 {
 	/**
@@ -1141,7 +1141,7 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 /**
  * A Sequence is an OrderedCollection of elements allowing duplicates
  */
- @EMF_needReference "isUnique=false isOrdered=true javaClass=java.util.ArrayList"
+ @EMF_needReference "isUnique=false isOrdered=true javaClass=org.eclipse.emf.common.util.BasicEList"
 class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 {
 	/**
