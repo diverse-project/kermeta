@@ -1,6 +1,6 @@
 
 
-/*$Id: TextHoverLabelProvider.java,v 1.2 2008-06-09 10:02:00 ftanguy Exp $
+/*$Id: TextHoverLabelProvider.java,v 1.3 2008-06-26 12:28:44 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TextHoverLabelProvider.java
 * License : EPL
@@ -92,8 +92,11 @@ public class TextHoverLabelProvider extends KermetaOptimizedVisitor {
 	public Object genericVisitChildren(EObject node) {
 		if ( node instanceof Expression ) {
 			Expression e = (Expression) node;
-			String type = (String) pp.accept( e.getStaticType() );
-			return type;
+			
+			if (e.getStaticType()!=null) {
+				String type = (String) pp.accept( e.getStaticType() );
+				return type;
+			}
 		}
 		return null;
 	}
