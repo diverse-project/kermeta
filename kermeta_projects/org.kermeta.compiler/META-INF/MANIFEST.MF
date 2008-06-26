@@ -30,7 +30,6 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.interpreter,
  org.kermeta.merger,
  org.kermeta.compiler.generator,
- org.kermeta.generator,
  org.kermeta.compiler.generator.emftemplates,
  org.kermeta.io.loader
 Eclipse-LazyStart: true
