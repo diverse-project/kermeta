@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.22 2008-06-10 08:24:59 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.23 2008-06-26 12:49:57 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -22,8 +22,10 @@ require "SetLinks.kmt"
 require "CreateBehavior.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentTraversable.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
 
 using km2ecore
+using ecore
 
 package structure {
 	
@@ -54,8 +56,64 @@ package structure {
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
+		
 			self.setLinks(context) 
 			super(context)
+			
+			if self.getCollectionInfos.size()>0 then
+				stdio.writeln("self.getCollectionInfos.size(): " + self.getCollectionInfos.size().toString())
+				
+				//Create a new EAttribute to store the collection
+				var externalCollection : EAttribute init EAttribute.new
+				externalCollection.name := "externalCollection" + self.name
+				
+				//A Java Class is specified
+				if (not self.getCollectionInfos.getValue("javaClass").isVoid()) and (self.getCollectionInfos.getValue("javaClass")!="") then
+				
+					externalCollection.transient := false
+					
+					var newJavaCollection_EDataType : EDataType init EDataType.new
+					newJavaCollection_EDataType.name := "javaCollection_" + self.name
+					newJavaCollection_EDataType.instanceClassName := self.getCollectionInfos.getValue("javaClass")
+					
+					self.container.asType(Package).ecoreModelElement.eClassifiers.add(newJavaCollection_EDataType)
+					
+					var newJavaCollection_EGenericType : EGenericType init EGenericType.new()
+					newJavaCollection_EGenericType.eClassifier := newJavaCollection_EDataType
+					externalCollection.eGenericType := newJavaCollection_EGenericType
+					
+					if (not self.ecoreModelElement.eTypeParameters.isVoid()) and (self.ecoreModelElement.eTypeParameters.size()>0) then
+					self.ecoreModelElement.eTypeParameters.each{ etp |
+						var newEtp : ETypeParameter init ETypeParameter.new()
+						newEtp.name := etp.name
+						newJavaCollection_EDataType.eTypeParameters.add(newEtp)
+						
+						var eta : EGenericType init EGenericType.new()
+						
+						eta.eTypeParameter := etp
+						externalCollection.eGenericType.eTypeArguments.add(eta)
+					}
+					end
+				
+				else
+				
+					externalCollection.transient := true
+					var retrievedTypeDef : TypeDefinition init context.mu.getTypeDefinitionByQualifiedName("ecore::EEList")
+					if retrievedTypeDef.isInstanceOf(ClassDefinition) then
+						externalCollection.eType := retrievedTypeDef.asType(ClassDefinition).ecoreModelElement
+					else
+						if retrievedTypeDef.isInstanceOf(PrimitiveType) then
+							externalCollection.eType := retrievedTypeDef.asType(PrimitiveType).ecoreModelElement
+						end
+					end
+				
+				end
+				
+				self.ecoreModelElement.asType(EClass).eStructuralFeatures.add(externalCollection)
+				
+				//stdio.writeln("getCollectionInfos " + self.name + " " + self.getCollectionInfos.getValue("isOrdered"))
+			end
+					
 		end
 	}
 	

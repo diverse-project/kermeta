@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.23 2008-06-13 13:40:13 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.24 2008-06-26 12:49:57 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -159,11 +159,12 @@ aspect class ClassDefinition {
 					end
 				}
 			else
-				if self.isAbstract then
+				if not self.isAbstract then
 					raise UndefinedValueTypeInstanceClassNameException.new()
 				end
 			end
 		else
+					
 			// Creating the associated ecore class
 			var ecoreClass : EClass init self.createEcoreModelElement(context)		
 			// Setting the container
@@ -182,6 +183,7 @@ aspect class ClassDefinition {
 					end
 				end
 			}
+							
 		end
 		
 		rescue (e : UndefinedValueTypeInstanceClassNameException) do
@@ -270,7 +272,7 @@ aspect class Constraint {
 		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement(context)
 		// Setting the container
 		var c : Object init self.container
-		var p : Property init ObjectHelper.new.getPropertyValue(c, "ecoreModelElement")
+		var p : Property init c.getPropertyValue("ecoreModelElement")
 		if ( p!= void ) then
 			var ecoreModelElement : EModelElement init c.get(p).asType(EModelElement)
 			ecoreModelElement.eAnnotations.add(ecoreAnnotation)
@@ -308,7 +310,7 @@ aspect class Tag {
 		if ( c.isInstanceOf(ModelingUnit) ) then
 			c.asType(ModelingUnit).entryPoints.add(ecoreAnnotation)
 		else
-			var p : Property init ObjectHelper.new.getPropertyValue(c, "ecoreModelElement")
+			var p : Property init c.getPropertyValue("ecoreModelElement")
 			if ( not p.isVoid() ) then
 				var ecoreModelElement_retrieved : EModelElement init c.get(p).asType(EModelElement)
 				ecoreModelElement_retrieved.eAnnotations.add(ecoreAnnotation)

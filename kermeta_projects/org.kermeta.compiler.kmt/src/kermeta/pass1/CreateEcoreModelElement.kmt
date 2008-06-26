@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.22 2008-06-13 09:20:33 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.23 2008-06-26 12:49:57 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -100,7 +100,7 @@ aspect class Package {
 		ecorePackage.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		
 		if not self.uri.isVoid() and self.uri != "" then
-			ecorePackage.nsURI := self.uri
+			ecorePackage.nsURI := self.uri + "/kermeta_temp_uri"
 		else
 			raise UndefinedUriEPackageException.new()
 		end
@@ -135,17 +135,20 @@ aspect class PrimitiveType {
 		var instanceClassName : String init self.getEMFEDataTypeInstanceClassName()
 		if instanceClassName != "" then //is an EDataType from an Ecore model
 			eModelElement.instanceClassName := instanceClassName
-			var etps : OrderedSet<String> init self.getUniqueTagValue("EMF_EDataType_eTypeParameters").split(" , ")
+			var etps : OrderedSet<String> init self.getUniqueTagValue("ecore.EDataType_eTypeParameters").split(" , ")
 			
 			if etps.size()>0 then
-			etps.each{ etp |
-				if etp!="" then
-					var ecoreTypeParameter : ETypeParameter init ETypeParameter.new
-					ecoreTypeParameter.name := IdentifierHelper.new.getMangledIdentifier(etp, context)
-					eModelElement.eTypeParameters.add(ecoreTypeParameter)
-				end
-			}
+				etps.each{ etp |
+					if etp!="" then
+						var ecoreTypeParameter : ETypeParameter init ETypeParameter.new
+						ecoreTypeParameter.name := IdentifierHelper.new.getMangledIdentifier(etp, context)
+						eModelElement.eTypeParameters.add(ecoreTypeParameter)
+					end
+				}
 			end
+			
+			eModelElement.serializable := self.getEMFEDataTypeIsSerializable
+			
 		end				
 			
 		var qualifiedName : String init self.getClassFromPrimitiveType().asType(Class).typeDefinition.qualifiedName
@@ -200,9 +203,9 @@ aspect class ClassDefinition {
 		ecoreClass.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		ecoreClass.~abstract := self.isAbstract
 		
-		/*if not (self.getEMFInstanceClassName() == "") then
+		if not (self.getEMFInstanceClassName() == "") then
 			ecoreClass.instanceClassName := self.getEMFInstanceClassName()
-		end*/
+		end
 		result := ecoreClass
 	end
 }
@@ -213,7 +216,7 @@ aspect class ClassDefinition {
 aspect class Operation {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EOperation is do
 		var ecoreOperation : EOperation init EOperation.new
-		ecoreOperation.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
+		ecoreOperation.name := IdentifierHelper.new.getMangledIdentifier(self.getFinalName(), context)
 		ecoreOperation.ordered := self.isOrdered
 		ecoreOperation.unique := self.isUnique
 		ecoreOperation.lowerBound := self.lower
@@ -288,6 +291,9 @@ aspect class Property {
 			var annotation : EAnnotation init EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.isReadOnly.name.toString(), self.isReadOnly.toString())
 			ecoreStructuralFeature.eAnnotations.add(annotation)
 		end
+		
+		ecoreStructuralFeature.transient := self.getEMFIsTransient()
+		
 		// management of read only
 		// management of default		
 		result := ecoreStructuralFeature

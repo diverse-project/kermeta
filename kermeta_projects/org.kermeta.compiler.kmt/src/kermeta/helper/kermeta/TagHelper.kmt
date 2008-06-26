@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.7 2008-06-12 10:18:46 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.8 2008-06-26 12:49:56 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -52,7 +52,28 @@ aspect class Object {
 	 * Get the EDataType_instanceClassName
 	 */
 	operation getEMFEDataTypeInstanceClassName() : String is do
-		result := getUniqueTagValue("EMF_EDataType_instanceClassName")
+		result := getUniqueTagValue("ecore.EDataType_instanceClassName")
+	end
+	
+	/**
+	 * Get the EMF_needReference
+	 */
+	operation getEMFNeedReference() : String is do
+		result := getUniqueTagValue("EMF_needReference")
+	end
+	
+	/**
+	 * Get the EDataType_isSerializable
+	 */
+	operation getEMFEDataTypeIsSerializable() : Boolean is do
+		result := interpretBooleanTag("ecore.EDataType_isSerializable")
+	end
+	
+	/**
+	 * Get the isTransient
+	 */
+	operation getEMFIsTransient() : Boolean is do
+		result := interpretBooleanTag("ecore.isTransient")
 	end
 	
 	/**
@@ -62,11 +83,30 @@ aspect class Object {
 	operation getDeprecated() : String is do
 		result := getUniqueTagValue("deprecated")
 	end
+	
+	operation interpretBooleanTag( str_tag : String ) : Boolean is do
+		result := false
+		
+		if getUniqueTagValue(str_tag) != "" then
+			if getUniqueTagValue(str_tag)=="true" then
+				result := true
+			end
+		end
+	end
 }
 
 aspect class GenericTypeDefinition {
 
+}
 
+aspect class MultiplicityElement {
+	
+	/**
+	 * Get the EMFRenameAs reference of an Operation
+	 */
+	operation getEMFRenameAs() : String is do
+		result := getUniqueTagValue("EMF_renameAs")
+	end
 
 }
 
@@ -77,13 +117,6 @@ aspect class Operation {
 	 */
 	operation getEMFStatic() : String is do
 		result := getUniqueTagValue("EMF_static")
-	end
-	
-	/**
-	 * Get the EMFRenameAs reference of an Operation
-	 */
-	operation getEMFRenameAs() : String is do
-		result := getUniqueTagValue("EMF_renameAs")
 	end
 
 }

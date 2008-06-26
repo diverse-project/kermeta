@@ -1,4 +1,4 @@
-/* $Id: EcoreModelElementHelper.kmt,v 1.7 2008-06-11 13:46:51 cfaucher Exp $
+/* $Id: EcoreModelElementHelper.kmt,v 1.8 2008-06-26 12:49:57 cfaucher Exp $
  * Creation date: January 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -44,7 +44,7 @@ class EcoreModelElementHelper {
 	end
 	
 	operation setEStructuralFeatureProperties(self_ : Property, ecoreStructuralFeature : EStructuralFeature, context : KM2EcoreContext) : Void is do
-		ecoreStructuralFeature.name := IdentifierHelper.new.getMangledIdentifier(self_.name, context)
+		ecoreStructuralFeature.name := IdentifierHelper.new.getMangledIdentifier(self_.getFinalName(), context)
 		ecoreStructuralFeature.ordered := self_.isOrdered
 		ecoreStructuralFeature.unique := self_.isUnique
 		ecoreStructuralFeature.lowerBound := self_.lower

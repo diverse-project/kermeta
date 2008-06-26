@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.25 2008-06-13 13:40:13 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.26 2008-06-26 12:49:57 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -19,10 +19,10 @@ using ecore
 using km2ecore
 using km2ecore::helper::kermeta
 using km2ecore::helper::ecore
+using kermeta::standard
 
 aspect class ClassDefinition {
 
-	attribute a : kermeta::standard::Collection<String>
 	operation setLinks(context : KM2EcoreContext) is do
 			
 		self.superType.each{ t |
@@ -79,9 +79,8 @@ aspect class Class {
 						
 						//We use the EDataType from the Ecore file
 						if tpb.type.isEDataType() then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
-							typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
+							typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement							
 						else
-							stdio.writeln(" ++--** " + tpb.type.toString() + " " + cd.name + " " + cd.ecoreModelElement.toString())
 							//We use the final type
 							if not cd.ecoreModelElement.isVoid() then
 								typeArgument.eClassifier := cd.ecoreModelElement
@@ -125,6 +124,12 @@ aspect class Parameter {
 		// DETERMINE if the parameter should be compiled
 		if self.type.isInstanceOf(FunctionType) then
 			stdio.writeln("setLinks FunctionType: " + self.type.toString() + " self.ecoreModelElement: " + self.ecoreModelElement.toString())
+			
+			stdio.writeln(self.container.toString() + " " + self.container.container.toString() + " " + self.container.container.container.toString() + " " + self.container.container.container.asType(Package).toString() + " end")
+			stdio.writeln(GenericTypeDefinitionHelper.new.getKermetaSpecialType(self.container.container.container.asType(Package)).toString())
+			stdio.writeln(self.container.asType(NamedElement).name + " " + self.container.container.asType(NamedElement).name + " " + self.name)
+			stdio.writeln(self.ecoreModelElement.toString())
+			
 			var ft : FunctionType init self.type.asType(FunctionType)
 			self.ecoreModelElement.eType := GenericTypeDefinitionHelper.new.getKermetaSpecialType(self.container.container.container.asType(Package))
 			
@@ -164,7 +169,7 @@ aspect class Property {
 
 class LinkSetterForTypedElement {
 	operation setLinks(element : TypedElement, ecoreModelElement : ETypedElement, context : KM2EcoreContext) is do
-		//stdio.writeln(" ++++++++++++----------- " +  element.toString() + " " + element.type.toString() + " " + element.type.getTypeName())
+
 		if not ecoreModelElement.isVoid() then
 
 			if element.type.isInstanceOf(Class) then
@@ -178,6 +183,7 @@ class LinkSetterForTypedElement {
 					genericType.eClassifier  := classDefinition.ecoreDataType
 				end
 				ecoreModelElement.eGenericType := genericType
+				
 				c.typeParamBinding.each{ tpb |
 					var typeArgument : EGenericType init EGenericType.new
 					
@@ -195,26 +201,27 @@ class LinkSetterForTypedElement {
 							typeArgument.eTypeParameter := otv.ecoreModelElement
 							ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 						else
+						
 							if tpb.type.isInstanceOf(PrimitiveType) then
 								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 								
 								if tpb.type.isEDataType() then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
 									typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
 								else
-									stdio.writeln(" ++--** " + tpb.type.toString() + " " + cd.name + " " + cd.ecoreModelElement.toString())
 									if not cd.ecoreModelElement.isVoid() then
 										typeArgument.eClassifier := cd.ecoreModelElement
 									else
 										typeArgument.eClassifier := cd.ecoreDataType
-									end
-									
+									end									
 								end
 								
 								ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
 							end
+							
 						end
 					end
-				}
+				} //end of the each
+				
 			else
 				// Case of the type is an ObjectTypeVariable
 				if element.type.isInstanceOf(PrimitiveType) then
@@ -223,15 +230,15 @@ class LinkSetterForTypedElement {
 					if element.type.isEDataType() then //cd.isValueType() and (element.type.getEMFInstanceClassName()!="") then
 						ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement
 					else
-						stdio.writeln(" ++--** " + element.type.toString() + " " + cd.name + " " + cd.ecoreModelElement.toString())
 						if not cd.ecoreModelElement.isVoid() then
 							ecoreModelElement.eType := cd.ecoreModelElement
 						else
 							ecoreModelElement.eType := cd.ecoreDataType
-						end
-					
+						end					
 					end
+					
 				else
+				
 					if element.type.isInstanceOf(Enumeration) then
 						ecoreModelElement.eType := element.type.asType(Enumeration).ecoreModelElement
 					else
@@ -241,8 +248,10 @@ class LinkSetterForTypedElement {
 							ecoreModelElement.eGenericType := genericType
 						end
 					end
+					
 				end
 			end
 		end
+		
 	end
 }

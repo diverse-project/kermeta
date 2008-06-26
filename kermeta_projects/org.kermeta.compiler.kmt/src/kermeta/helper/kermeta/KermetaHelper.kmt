@@ -1,4 +1,4 @@
-/* $Id: KermetaHelper.kmt,v 1.7 2008-05-27 07:25:37 cfaucher Exp $
+/* $Id: KermetaHelper.kmt,v 1.8 2008-06-26 12:49:56 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,4 +14,5 @@ require "TagHelper.kmt"
 require "GenericTypeDefinitionHelper.kmt"
 require "ClassDefinitionHelper.kmt"
 require "ModelingUnitHelper.kmt"
+require "MultiplicityElementHelper.kmt"
 require "OperationHelper.kmt"

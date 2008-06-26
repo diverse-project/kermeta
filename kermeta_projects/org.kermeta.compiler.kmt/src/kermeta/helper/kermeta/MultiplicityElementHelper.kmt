@@ -1,0 +1,26 @@
+/* $Id: MultiplicityElementHelper.kmt,v 1.1 2008-06-26 12:49:56 cfaucher Exp $
+ * Creation date: May 16, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language::structure;
+
+require kermeta
+
+require "TagHelper.kmt"
+
+using kermeta::standard
+using kermeta::utils
+
+aspect class MultiplicityElement {
+
+	operation getFinalName() : String is do
+		result := self.name
+		if self.getEMFRenameAs()!="" then
+			result := self.getEMFRenameAs()
+		end
+	end
+	
+}

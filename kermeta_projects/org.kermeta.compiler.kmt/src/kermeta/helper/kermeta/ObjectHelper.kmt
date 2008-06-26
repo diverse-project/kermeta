@@ -1,4 +1,4 @@
-/* $Id: ObjectHelper.kmt,v 1.5 2008-04-21 15:26:24 cfaucher Exp $
+/* $Id: ObjectHelper.kmt,v 1.6 2008-06-26 12:49:56 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -6,16 +6,35 @@
  */
 
 
-package km2ecore::helper::kermeta;
-
+package kermeta::language::structure;
 
 require kermeta
 
-using kermeta::language::structure
+aspect class Object {
 
-class ObjectHelper {
-	operation getPropertyValue(o : Object, propertyName : String) : Property is do
-		var classDefinition : ClassDefinition init o.getMetaClass().typeDefinition.asType(ClassDefinition)
+	operation getPropertyValue(propertyName : String) : Property is do
+		var classDefinition : ClassDefinition init self.getMetaClass().typeDefinition.asType(ClassDefinition)
 		result := (classDefinition.allAttribute.detect{ p | p.asType(Property).name == propertyName }).asType(Property)
 	end
+	
+	operation getContainerAsType(type : Type) : Object is do
+		result := void
+		var obj : Object init self
+
+		from var i : Integer init 0
+        until i==1
+        loop
+            if not obj.container.isInstanceOf(type) then
+            	if not obj.container.isVoid() then
+            		obj := obj.container
+            	else
+            		i := 1
+            	end
+            else
+            	i := 1
+            	result := obj.container
+			end
+        end
+	end
+	
 }

@@ -1,4 +1,4 @@
-/* $Id: EAnnotationHelper.kmt,v 1.10 2008-06-04 14:43:45 cfaucher Exp $
+/* $Id: EAnnotationHelper.kmt,v 1.11 2008-06-26 12:49:57 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -64,7 +64,7 @@ class EAnnotationHelper {
 		result := void
 		if not obj.container.isVoid() then
 			
-			var ecoreMEProp : Property init ObjectHelper.new.getPropertyValue(obj.container, "ecoreModelElement")
+			var ecoreMEProp : Property init obj.container.getPropertyValue("ecoreModelElement")
 						
 			if (not ecoreMEProp.isVoid()) and (not obj.container.get(ecoreMEProp).isVoid()) then
 				result := obj.container.get(ecoreMEProp).asType(EModelElement).eAnnotations.detect{ t |

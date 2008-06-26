@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.kmt,v 1.4 2008-06-04 14:43:43 cfaucher Exp $
+/* $Id: ClassDefinitionHelper.kmt,v 1.5 2008-06-26 12:49:56 cfaucher Exp $
  * Creation date: May 16, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -7,9 +7,12 @@
 
 package kermeta::language::structure;
 
-
 require kermeta
+
+require "TagHelper.kmt"
+
 using kermeta::standard
+using kermeta::utils
 
 aspect class ClassDefinition {
 
@@ -37,7 +40,7 @@ aspect class ClassDefinition {
         result := allSuperClasses
 	end
 	
-	// Check if the ClassDefinition is a subType of ValueType => we have to consider as a EDataType, i.e.: an EAttribute
+	//Check if the ClassDefinition is a subType of ValueType => we have to consider as a EDataType, i.e.: an EAttribute
 	operation isValueType() : Boolean is do
 		result := false
 
@@ -48,6 +51,28 @@ aspect class ClassDefinition {
 		if not res.isVoid() then
 			result := true
 		end
-		//stdio.writeln("  ------------- isValueType " + self.qualifiedName + " " + result.toString())
+
+	end
+	
+	operation getCollectionInfos() : Hashtable<String, String> is do
+		
+		var set_infos : OrderedSet<String> init OrderedSet<String>.new()
+		var map_infos : Hashtable<String, String> init Hashtable<String, String>.new()
+		
+		set_infos := self.getEMFNeedReference().split(" ")
+		
+		set_infos.each{ i |
+			var tmp_set_infos : OrderedSet<String> init i.split("=")
+			if tmp_set_infos.size()>=2 then
+				if not tmp_set_infos.elementAt(0).isVoid() then
+					if (not tmp_set_infos.elementAt(1).isVoid()) and (tmp_set_infos.elementAt(1)!="") then
+						stdio.writeln("tmp_set_infos.elementAt(0) " + tmp_set_infos.elementAt(0) + " " + tmp_set_infos.elementAt(1))
+						map_infos.put(tmp_set_infos.elementAt(0), tmp_set_infos.elementAt(1))
+					end
+				end
+			end
+		}
+		
+		result := map_infos
 	end
 }
