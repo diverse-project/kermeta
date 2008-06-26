@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.6 2008-05-30 12:17:50 cfaucher Exp $
+/* $Id: Compiler.java,v 1.7 2008-06-26 09:06:30 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -240,7 +240,7 @@ public class Compiler extends Generator {
 	 * @param genModel
 	 */
 	private void setCompiledPluginId(GenModel genModel) {
-		compiledPluginId = "org.kermeta.compiled."+ genModel.getModelName().toLowerCase();
+		compiledPluginId = "org.kermeta." + genModel.getModelName().toLowerCase() + ".compiled";
 	}
 
 }
