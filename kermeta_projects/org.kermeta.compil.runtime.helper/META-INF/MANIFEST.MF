@@ -7,3 +7,4 @@ Bundle-ClassPath: .
 Bundle-Localization: plugin
 Bundle-Vendor: IRISA/INRIA
 Eclipse-LazyStart: true
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0"
