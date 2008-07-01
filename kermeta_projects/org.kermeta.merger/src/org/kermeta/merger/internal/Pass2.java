@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass2.java,v 1.6 2008-04-28 11:51:07 ftanguy Exp $
+/*$Id: Pass2.java,v 1.7 2008-07-01 08:44:47 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	Pass2.java
 * License : EPL
@@ -88,6 +88,7 @@ public class Pass2 extends MergePass {
 			newProperty.setIsUnique( p.isIsUnique() );
 			t.getOwnedAttribute().add( newProperty );
 			context.putBaseProperty(newProperty, p);
+			createTags(newProperty, p);
 			// Try to trace
 			context.tryToTrace(newProperty, p);
 		}
