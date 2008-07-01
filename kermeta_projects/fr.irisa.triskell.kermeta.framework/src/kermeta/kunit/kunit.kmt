@@ -1,6 +1,6 @@
-/* $Id: kunit.kmt,v 1.40 2008-04-28 11:49:51 ftanguy Exp $
+/* $Id: kunit.kmt,v 1.41 2008-07-01 08:48:14 cfaucher Exp $
  * Creation date: February 19, 2007
- * License:
+ * License: EPL
  * Copyright:
  * Authors:  Franck Chauvel, Mark Skipper, Harry Lime
  */
@@ -67,6 +67,7 @@ abstract class Fallible inherits AbstractFallible
   /**
    * where failures will be put 
    */
+   @EMF_renameAs "getLogKermeta"
   operation  getLog(): Log  
   	post logDefined is result != void 
   	is abstract
@@ -404,6 +405,7 @@ abstract class Test
 	/**
 	 * Initializes the log where failures and errors will be put
 	 */
+	 @EMF_renameAs "setLogKermeta"
 	operation setLog(log: Log): Void 
 		pre paramNotVoid is log != void
 		post logNotVoid is self.log != void
