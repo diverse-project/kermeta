@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeContext.java,v 1.3 2008-04-28 11:51:07 ftanguy Exp $
+/*$Id: MergeContext.java,v 1.4 2008-07-01 08:44:57 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	MergeContext.java
 * License : EPL
@@ -213,6 +213,7 @@ public class MergeContext extends LoadingContext {
 	public void addTracesFrom(Tracer anOtherTracer) {
 		tracer.getTraceModel().getReferences().addAll( anOtherTracer.getTraceModel().getReferences() );
 		tracer.getTraceModel().getTraces().addAll( anOtherTracer.getTraceModel().getTraces() );
+		//Comment the line below
 		tracer.getTraceModel().getMessages().addAll( anOtherTracer.getTraceModel().getMessages() );
 	}
 	
