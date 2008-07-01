@@ -11,7 +11,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.21 2008-06-24 14:44:35 cfaucher Exp $
+ * $Id: exceptions.kmt,v 1.22 2008-07-01 08:47:29 cfaucher Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -31,8 +31,8 @@ using kermeta::utils
 /**
  * Generic exceptions
  * The main class from which all the exception inherit
+ * FIXME CF: unused for the moment: @EMF_instanceClassName "java.lang.Exception"
  */
- @EMF_instanceClassName "java.lang.Exception"
 class Exception
 {
 
@@ -69,7 +69,7 @@ class CallOnVoidTarget inherits RuntimeError {}
 class TypeCastError inherits RuntimeError {}
 
 /**
- * Use this exception whenyou want to forbid the access to an unimplemented operation 
+ * Use this exception when you want to forbid the access to an unimplemented operation 
  * and invite to implement it
  */
 class NotImplementedException inherits RuntimeError {}
