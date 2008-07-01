@@ -1,0 +1,25 @@
+/* $Id: new_file_1.kmt,v 1.1 2008-07-01 08:55:17 cfaucher Exp $
+ * Creation date: May 30, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+package root_package;
+
+require kermeta
+
+using kermeta::standard
+
+aspect class Main
+{
+	attribute a : String
+	
+	attribute b : String
+	
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}

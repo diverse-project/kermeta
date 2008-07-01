@@ -1,0 +1,30 @@
+
+/* $Id: merge.kmt,v 1.1 2008-07-01 08:55:17 cfaucher Exp $
+ * Creation date: May 30, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "merged::Merge"
+@mainOperation "merge"
+
+package merged;
+
+require kermeta
+
+require "new_file_1.kmt"
+require "new_file_2.kmt"
+
+using root_package
+
+class Merge {
+	operation merge() : Void is do 
+		var aMain : Main init Main.new
+		
+		aMain.a := "Hello World: a"
+		stdio.writeln(aMain.a)
+		
+		aMain.b := "Hello World: b"
+		stdio.writeln(aMain.b)
+	end
+}
