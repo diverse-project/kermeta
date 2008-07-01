@@ -1,0 +1,1408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org"
+    modelDirectory="/org.kermeta.compiled.attempt01/src" creationIcons="false" editDirectory=""
+    editorDirectory="" modelPluginID="org.kermeta.compiled.attempt01" templateDirectory="platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates"
+    dynamicTemplates="true" modelName="Attempt01" testsDirectory="" complianceLevel="5.0"
+    copyrightFields="false">
+  <foreignModel>/org.kermeta.compiler.kmt/models/Attempt01.ecore</foreignModel>
+  <genPackages prefix="Comptest2" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3">
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/TestString"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/MyStringBuffer"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/MyEString"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/MyString"/>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/Main">
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/Main/main"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ClassWithBehavior">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ClassWithBehavior/attr1"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ClassWithBehavior/print"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/InheritedClassWithBehavior">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/InheritedClassWithBehavior/stringBuffer_ref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/InheritedClassWithBehavior/stringBuffer_attr"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/InheritedClassWithBehavior/test"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/InheritedClassWithBehavior/print"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/EmptyClass"/>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedEmptyClass">
+      <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedEmptyClass/A"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedEmptyClass2">
+      <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedEmptyClass2/A"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedClass">
+      <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedClass/B"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedClass/testString"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedClass/attr1"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedClass/test2"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedClass/eachOwnedElement">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedClass/eachOwnedElement/str"/>
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedClass/eachOwnedElement/func0"/>
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/ParameterizedClass/eachOwnedElement/func1"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/TestAlias">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/TestAlias/a1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/TestAlias/a2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/TestAlias/a3"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/3/KermetaSpecialTypesAlias"/>
+  </genPackages>
+  <genPackages prefix="Ecore" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4">
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EBoolean"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EString"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EJavaClass">
+      <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EJavaClass/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EJavaObject"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EInt"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnumerator"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EBigDecimal"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EBigInteger"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EBooleanObject"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EByte"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EByteArray"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EByteObject"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EChar"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ECharacterObject"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EDate"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EDiagnosticChain"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EDouble"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EDoubleObject"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEList">
+      <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEList/E"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFeatureMap"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFeatureMapEntry"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFloat"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFloatObject"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EIntegerObject"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ELong"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ELongObject"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EMap">
+      <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EMap/K"/>
+      <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EMap/V"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EResource"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EResourceSet"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EShort"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EShortObject"/>
+    <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETreeIterator">
+      <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETreeIterator/E"/>
+    </genDataTypes>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EAttribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EAttribute/eAttributeType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EAttribute/iD"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EAnnotation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EAnnotation/references"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EAnnotation/details"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EAnnotation/source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EAnnotation/contents"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EAnnotation/eModelElement"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eStructuralFeatures"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/_abstract"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eOperations"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eAllAttributes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/_interface"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eReferences"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eAllReferences"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eSuperTypes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eAllContainments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eGenericSuperTypes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eAllGenericSuperTypes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eAttributes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eIDAttribute"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eAllStructuralFeatures"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eAllOperations"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/eAllSuperTypes"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/getFeatureID">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/getFeatureID/feature"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/getEStructuralFeature">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/getEStructuralFeature/featureName"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/isSuperTypeOf">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/isSuperTypeOf/someClass"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/getFeatureCount"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/op_getEStructuralFeature">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClass/op_getEStructuralFeature/featureID"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClassifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClassifier/instanceClassName"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClassifier/ePackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClassifier/instanceClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClassifier/defaultValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClassifier/eTypeParameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClassifier/instanceTypeName"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClassifier/isInstance">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClassifier/isInstance/object"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EClassifier/getClassifierID"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EDataType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EDataType/serializable"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnum">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnum/eLiterals"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnum/op_getEEnumLiteral">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnum/op_getEEnumLiteral/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnum/getEEnumLiteral">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnum/getEEnumLiteral/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnum/getEEnumLiteralByLiteral">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnum/getEEnumLiteralByLiteral/literal"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnumLiteral">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnumLiteral/eEnum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnumLiteral/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnumLiteral/instance"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EEnumLiteral/literal"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFactory">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFactory/ePackage"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFactory/createFromString">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFactory/createFromString/eDataType"/>
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFactory/createFromString/literalValue"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFactory/convertToString">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFactory/convertToString/eDataType"/>
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFactory/convertToString/instanceValue"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFactory/create">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EFactory/create/eClass"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EModelElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EModelElement/eAnnotations"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EModelElement/getEAnnotation">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EModelElement/getEAnnotation/source"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ENamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ENamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject">
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eGet">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eGet/feature"/>
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eGet/resolve"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eUnset">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eUnset/feature"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eSet">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eSet/feature"/>
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eSet/newValue"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eContainer"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eCrossReferences"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eResource"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eContainingFeature"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eContainmentFeature"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eContents"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eIsProxy"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eClass"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eAllContents"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/op_eGet">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/op_eGet/feature"/>
+      </genOperations>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eIsSet">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EObject/eIsSet/feature"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EOperation">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EOperation/eContainingClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EOperation/eGenericExceptions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EOperation/eParameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EOperation/eTypeParameters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EOperation/eExceptions"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EPackage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EPackage/nsURI"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EPackage/eSubpackages"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EPackage/eSuperPackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EPackage/nsPrefix"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EPackage/eFactoryInstance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EPackage/eClassifiers"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EPackage/getEClassifier">
+        <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EPackage/getEClassifier/name"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EParameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EParameter/eOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EReference/eReferenceType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EReference/eOpposite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EReference/resolveProxies"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EReference/container"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EReference/eKeys"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EReference/containment"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature/_volatile"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature/eContainingClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature/defaultValueLiteral"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature/_transient"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature/unsettable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature/derived"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature/defaultValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature/changeable"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature/getFeatureID"/>
+      <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStructuralFeature/getContainerClass"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypedElement/many"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypedElement/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypedElement/unique"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypedElement/eType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypedElement/ordered"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypedElement/required"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypedElement/upperBound"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypedElement/eGenericType"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStringToStringMapEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStringToStringMapEntry/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EStringToStringMapEntry/key"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EGenericType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EGenericType/eTypeArguments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EGenericType/eUpperBound"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EGenericType/eClassifier"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EGenericType/eRawType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EGenericType/eTypeParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/EGenericType/eLowerBound"/>
+    </genClasses>
+    <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypeParameter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/4/ETypeParameter/eBounds"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Kermeta" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5">
+    <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/DummyClass"/>
+    <nestedGenPackages prefix="Standard" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard">
+      <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Boolean"/>
+      <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Integer"/>
+      <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Real"/>
+      <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Character"/>
+      <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/String"/>
+      <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/UnlimitedNatural"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Void">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Void/isVoid"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Void/isInstanceOf">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Void/isInstanceOf/type"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Void/toString"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/ValueType"/>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable/isLower">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable/isLower/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable/isGreaterOrEqual">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable/isGreaterOrEqual/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable/compareTo">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable/compareTo/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable/isLowerOrEqual">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable/isLowerOrEqual/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable/isGreater">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Comparable/isGreater/other"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Summable">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Summable/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Summable/plus">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Summable/plus/other"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/NotComparableException"/>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/reject">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/reject/rejector"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/count">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/count/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/remove">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/excludes">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/excludes/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/one"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/containsAll">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/containsAll/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/sum"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/contains">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/contains/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/add">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/add/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/includes">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/includes/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/asSequence"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/excludesAll">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/excludesAll/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/clear"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/isEmpty"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/isUnique">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/isUnique/collector"/>
+          <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/isUnique/T"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/asBag"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/any"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/empty"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/forAllCpl">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/forAllCpl/f"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/existsCpl">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/existsCpl/f"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/isNotEmpty"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/detect">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/detect/detector"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/iterator"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/addAll">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/addAll/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/includesAll">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/includesAll/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/select">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/select/selector"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/size"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/asOrderedSet"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/forAll">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/forAll/func"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/exists">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/exists/func"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/each">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/each/func"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/collect">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/collect/collector"/>
+          <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/collect/T"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Collection/asSet"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/intersection">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/intersection/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/minus">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/minus/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/remove">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/equals">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/sortedBy">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/sortedBy/comparator"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/asSequence"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/add">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/add/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/quickSort">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/quickSort/q"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/quickSort/comparator"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/concatenate">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/concatenate/less"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/concatenate/pivot"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/concatenate/greater"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/symmetricDifference">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/symmetricDifference/s"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/flatten"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/asOrderedSet"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/asBag"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/union">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/union/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/asSet"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/unionWithBag">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Set/unionWithBag/elements"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/intersection">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/intersection/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/equals">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/sortedBy">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/sortedBy/comparator"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/asSequence"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/quickSort">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/quickSort/q"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/quickSort/comparator"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/concatenate">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/concatenate/less"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/concatenate/pivot"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/concatenate/greater"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/excluding">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/excluding/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/intersectionWithSet">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/intersectionWithSet/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/flatten"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/including">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/including/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/asOrderedSet"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/asBag"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/union">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/union/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/removeOne">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/removeOne/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/removeFromOid">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/removeFromOid/elementOid"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Bag/asSet"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/addAt">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/addAt/index"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/addAt/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/removeAt">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/removeAt/index"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/last"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/equals">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/indexOf">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/indexOf/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/elementAt">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/elementAt/index"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedCollection/first"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/append">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/append/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/addAt">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/addAt/index"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/addAt/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/insertAt">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/insertAt/index"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/insertAt/subject"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/equals">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/preppend">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/preppend/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/at">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/at/index"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/add">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/add/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/subSet">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/subSet/min"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/OrderedSet/subSet/max"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/subSequence">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/subSequence/min"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/subSequence/max"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/append">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/append/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/insertAt">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/insertAt/index"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/insertAt/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/equals">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/preppend">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/preppend/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/at">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Sequence/at/index"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Iterator">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Iterator/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Iterator/hasNext"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Iterator/next"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/Iterator/isOff"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/UnknownJavaObject">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/UnknownJavaObject/toString"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/standard/KermetaSpecialTypesAlias"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Utils" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils">
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/StringBuffer">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/StringBuffer/append">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/StringBuffer/append/arg0"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/StringBuffer/length"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/StringBuffer/toString"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/K"/>
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/V"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/clear"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/getValue">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/getValue/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/containsKey">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/containsKey/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/put">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/put/key"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/put/value"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/values"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/remove">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/remove/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/keys"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/keyIterator"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/valueIterator"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Hashtable/size"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Stack">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Stack/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Stack/peek"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Stack/pop"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Stack/push">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/utils/Stack/push/element"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Exceptions" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions">
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/Exception">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/Exception/message"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/Exception/nestedException"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/Exception/stackTrace"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/RuntimeError">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/RuntimeError/expression"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/CallOnVoidTarget"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/TypeCastError"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/NotImplementedException"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/UpperBoundReachedError"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/AbstractClassInstantiationError"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/IncompatibleTypeError"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/DivisionByZero"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/OverflowError"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/VoidOperandError"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/StringIndexOutOfBound"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/StringFormatException"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/IndexOutOfBound"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/EmptyCollection"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/IteratorIsOff"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/IOException"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/FileNotFoundException"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/ConstraintViolatedPre"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/ConstraintViolatedPost"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/ConstraintViolatedInv"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/ResourceLoadException"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/ResourceSaveException"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/ResourceCreateException"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/ResourceUnconformityException"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/exceptions/DynamicExpressionException"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Kunit" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/ErrorKind">
+        <genEnumLiterals ecoreEnumLiteral="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/ErrorKind/setUpError"/>
+        <genEnumLiterals ecoreEnumLiteral="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/ErrorKind/testError"/>
+        <genEnumLiterals ecoreEnumLiteral="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/ErrorKind/tearDownError"/>
+      </genEnums>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/InvalidTestCaseNameException"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/InvalidParameterException"/>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/stopOnFailure"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/rank"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertTrue">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertTrue/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/getLog"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertFalseWithMsg">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertFalseWithMsg/condition"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertFalseWithMsg/message"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/fail">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/fail/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertEqual">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertEqual/expected"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertEqual/actual"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertFalse">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertFalse/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertTrueWithMsg">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertTrueWithMsg/condition"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertTrueWithMsg/message"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/_assert">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/_assert/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/number"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertWithMsg">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertWithMsg/condition"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/assertWithMsg/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Fallible/mustStop"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/failures"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/errors"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/runtests"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/harnessErrors"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addSetUpError">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addSetUpError/test"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addSetUpError/e"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addTestError">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addTestError/test"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addTestError/e"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addFailure">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addFailure/test"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addFailure/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addTearDownError">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addTearDownError/test"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/addTearDownError/e"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Log/newAttempt"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Failure">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Failure/message"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Failure/failure"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Failure/toString"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Failure/initFrom">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Failure/initFrom/fallible"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Failure/initFrom/msg"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Error">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Error/error"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Error/exception"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Error/kind"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Error/makeTearDown"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Error/makeSetUp"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Error/toString"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Error/initFrom">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Error/initFrom/error"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Error/initFrom/e"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Test">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Test/log"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Test/setLog">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Test/setLog/log"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Test/run"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Test/initLog"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestSuite">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestSuite/tests"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestSuite/addAllTestCasesFrom">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestSuite/addAllTestCasesFrom/testCaseClass"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestSuite/run"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestSuite/addAllTestCasesFromAspects">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestSuite/addAllTestCasesFromAspects/testCaseClass"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestSuite/addAllTestCasesFromAspects/anAspect"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase/__testMethodName"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase/raiseIfHasFailures"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase/setUp"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase/getLog"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase/setTestMethodName">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase/setTestMethodName/name"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase/getTestMethodName"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase/toString"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase/run"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestCase/tearDown"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestRunner">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestRunner/log"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestRunner/runTest">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestRunner/runTest/test"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestRunner/printTestResult"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestRunner/run">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/TestRunner/run/testCaseClass"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertTrue">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertTrue/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/distil">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/distil/s"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertFalseWithMsg">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertFalseWithMsg/condition"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertFalseWithMsg/message"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/fail">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/fail/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertEqual">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertEqual/expected"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertEqual/actual"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertFalse">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertFalse/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertTrueWithMsg">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertTrueWithMsg/condition"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertTrueWithMsg/message"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/_assert">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/_assert/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertSimilar">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertSimilar/expected"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertSimilar/actual"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertWithMsg">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertWithMsg/condition"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AbstractFallible/assertWithMsg/msg"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/AssertionFailedError"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertTrue">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertTrue/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertFalseWithMsg">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertFalseWithMsg/condition"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertFalseWithMsg/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/fail">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/fail/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertEqual">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertEqual/expected"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertEqual/actual"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertFalse">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertFalse/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertTrueWithMsg">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertTrueWithMsg/condition"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertTrueWithMsg/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/_assert">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/_assert/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertWithMsg">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertWithMsg/condition"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/kunit/Assert/assertWithMsg/msg"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Ecore" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/ecore">
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/ecore/EFeatureMapEntry">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/ecore/EFeatureMapEntry/value"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/ecore/EFeatureMapEntry/eStructuralFeatureName"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Interpreter" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter">
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/expression"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/errors"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/formalParameters"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/selfClass"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/initializeDefaults"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/execute">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/execute/selfObj"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/execute/actualParams"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/parse">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/parse/expression"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/evalString">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/evalString/body"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/evalString/selfObj"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/DynamicExpression/evalString/actualParams"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/KermetaError">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/KermetaError/message"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/ParseError"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/interpreter/TypeError"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Language" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language">
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/DummyClass"/>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveCollection">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveCollection/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveCollection/clear"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveCollection/remove">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveCollection/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveCollection/add">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveCollection/add/element"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence">
+        <genTypeParameters ecoreTypeParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/G"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/clear"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/addAt">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/addAt/index"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/addAt/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/removeAt">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/removeAt/index"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/remove">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/equals">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/add">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/ReflectiveSequence/add/element"/>
+        </genOperations>
+      </genClasses>
+      <nestedGenPackages prefix="Behavior" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior">
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallExpression">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallExpression/staticTypeVariableBindings"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallExpression/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallExpression/parameters"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Expression">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Expression/staticType"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallVariable">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallVariable/isAtpre"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallFeature">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallFeature/staticOperation"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallFeature/isAtpre"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallFeature/target"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallFeature/staticEnumLiteral"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallFeature/staticProperty"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallSuperOperation"/>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallResult"/>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/CallValue"/>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Assignment">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Assignment/target"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Assignment/value"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Assignment/isCast"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Block">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Block/statement"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Block/rescueBlock"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Conditional">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Conditional/thenBody"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Conditional/condition"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Conditional/elseBody"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Raise">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Raise/expression"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Rescue">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Rescue/body"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Rescue/exceptionName"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Rescue/exceptionType"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/TypeReference"/>
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Literal"/>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/EmptyExpression"/>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/JavaStaticCall">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/JavaStaticCall/jmethod"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/JavaStaticCall/parameters"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/JavaStaticCall/jclass"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/LambdaExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/LambdaExpression/body"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/LambdaExpression/parameters"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/LambdaParameter">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/LambdaParameter/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/LambdaParameter/type"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/IntegerLiteral">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/IntegerLiteral/value"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/StringLiteral">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/StringLiteral/value"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/BooleanLiteral">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/BooleanLiteral/value"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/TypeLiteral">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/TypeLiteral/typeref"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/VoidLiteral"/>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Loop">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Loop/initialization"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Loop/body"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/Loop/stopCondition"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/SelfExpression"/>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/VariableDecl">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/VariableDecl/initialization"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/VariableDecl/type"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/behavior/VariableDecl/identifier"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Structure" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ConstraintType">
+          <genEnumLiterals ecoreEnumLiteral="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ConstraintType/inv"/>
+          <genEnumLiterals ecoreEnumLiteral="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ConstraintType/pre"/>
+          <genEnumLiterals ecoreEnumLiteral="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ConstraintType/post"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ConstraintLanguage">
+          <genEnumLiterals ecoreEnumLiteral="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ConstraintLanguage/kermeta"/>
+          <genEnumLiterals ecoreEnumLiteral="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ConstraintLanguage/ocl"/>
+        </genEnums>
+        <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/String"/>
+        <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Boolean"/>
+        <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Integer"/>
+        <genDataTypes ecoreDataType="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/UnlimitedNatural"/>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Operation">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Operation/typeParameter"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Operation/body"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Operation/ownedParameter"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Operation/post"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Operation/isAbstract"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Operation/raisedException"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Operation/pre"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Operation/superOperation"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Operation/owningClass"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/_default"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/opposite"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/isDerived"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/getterBody"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/isReadOnly"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/setterBody"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/isID"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/isSetterAbstract"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/owningClass"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/isGetterAbstract"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Property/isComposite"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/typeContainer"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/clone">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/clone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/deepClone">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/deepClone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/isSuperTypeOf">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/isSuperTypeOf/object"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/isInstance">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/isInstance/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/isSubTypeOf">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Type/isSubTypeOf/object"/>
+          </genOperations>
+        </genClasses>
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeContainer">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeContainer/containedType"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/EnumerationLiteral">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/EnumerationLiteral/enumeration"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeVariableBinding">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeVariableBinding/type"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeVariableBinding/variable"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/tag"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/ownedTags"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/isSet">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/isSet/property"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/get">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/get/property"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/isKindOf">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/isKindOf/cl"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/getMetaClass"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/equals">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/equals/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/set">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/set/property"/>
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/set/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/isFrozen"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/checkInvariants"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/hashcode"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/isVoid"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/isNotEqual">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/isNotEqual/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/oid"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/container"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/freeze"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/unset">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/unset/property"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/containingResource"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/isInstanceOf">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/isInstanceOf/type"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/asType">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/asType/type"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/checkAllInvariants"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Object/toString"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/MultiplicityElement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/MultiplicityElement/isOrdered"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/MultiplicityElement/upper"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/MultiplicityElement/lower"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/MultiplicityElement/isUnique"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypedElement">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypedElement/type"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeDefinition">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeDefinition/isAspect"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/NamedElement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/NamedElement/name"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/NamedElement/qualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/ownedOperation"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/superClass"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/isAbstract"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/name"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/classDefinition"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/ownedAttribute"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/clone">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/clone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/_new"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/deepClone">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/deepClone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/equals">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/equals/other"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Class/toString"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/DataType"/>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Enumeration">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Enumeration/ownedLiteral"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Enumeration/clone">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Enumeration/clone/objectToClone"/>
+          </genOperations>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Package">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Package/nestingPackage"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Package/nestedPackage"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Package/uri"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Parameter">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Parameter/operation"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/PrimitiveType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/PrimitiveType/instanceType"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Tag">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Tag/name"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Tag/value"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Tag/object"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Constraint">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Constraint/body"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Constraint/preOwner"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Constraint/stereotype"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Constraint/postOwner"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Constraint/language"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Constraint/invOwner"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ClassDefinition">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ClassDefinition/ownedOperation"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ClassDefinition/isAbstract"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ClassDefinition/superType"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ClassDefinition/inv"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ClassDefinition/allOperation"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ClassDefinition/allAttribute"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ClassDefinition/ownedAttribute"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/GenericTypeDefinition">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/GenericTypeDefinition/typeParameter"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ParameterizedType">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ParameterizedType/typeParamBinding"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ParameterizedType/typeDefinition"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ParameterizedType/virtualTypeBinding"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeVariable">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeVariable/supertype"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ObjectTypeVariable"/>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelType/includedTypeDefinition"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelType/_new"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelType/isModelTypeOf">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelType/isModelTypeOf/m"/>
+          </genOperations>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelTypeVariable">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelTypeVariable/virtualType"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/VirtualType">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/VirtualType/modelType"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/VirtualType/typeParamBinding"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/VirtualType/classDefinition"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/contents"/>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/addCompatible">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/addCompatible/objectToAdd"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/remove">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/remove/obj"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/addAllCompatible">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/addAllCompatible/objectsToAdd"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/add">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/add/obj"/>
+          </genOperations>
+          <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/filter">
+            <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Model/filter/typeName"/>
+          </genOperations>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelingUnit">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelingUnit/usings"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelingUnit/includeFilters"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelingUnit/packages"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelingUnit/excludeFilters"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelingUnit/referencedModelingUnits"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ModelingUnit/requires"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Require">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Require/uri"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Using">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Using/qualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Filter">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/Filter/qualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ProductType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/ProductType/type"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/FunctionType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/FunctionType/left"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/FunctionType/right"/>
+        </genClasses>
+        <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/VoidType"/>
+        <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeDefinitionContainer">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/language/structure/TypeDefinitionContainer/ownedTypeDefinition"/>
+        </genClasses>
+      </nestedGenPackages>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Io" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io">
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/FileIO">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/FileIO/writeTextFile">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/FileIO/writeTextFile/filename"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/FileIO/writeTextFile/text"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/FileIO/readTextFile">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/FileIO/readTextFile/filename"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO/writeln">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO/writeln/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO/errorln">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO/errorln/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO/error">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO/error/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO/write">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO/write/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO/read">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/io/StdIO/read/prompt"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Persistence" disposableProviderFactory="true" ecorePackage="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence">
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/dependentResources"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/repository"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/contents"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/metaModelURI"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/isReadOnly"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/uri"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/save"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/saveWithNewURI">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/saveWithNewURI/new_uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/load"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Resource/instances"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFResource">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFResource/save"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFResource/remove">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFResource/remove/instance"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFResource/saveWithNewURI">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFResource/saveWithNewURI/new_uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFResource/saveAndValidateWithEMF"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFResource/load"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFResource/add">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFResource/add/instance"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMResource">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMResource/remove">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMResource/remove/instance"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMResource/save"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMResource/load"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMResource/add">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMResource/add/instance"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Repository">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Repository/resources"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Repository/createResource">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Repository/createResource/uri"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Repository/createResource/mm_uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Repository/findDanglingModelElements"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Repository/getResource">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/Repository/getResource/uri"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/DanglingDiagnostic">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/DanglingDiagnostic/referencingElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/DanglingDiagnostic/danglingElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/DanglingDiagnostic/referencingProperty"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/DanglingDiagnostic/toString"/>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFRepository">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFRepository/useInterpreterInternalResources"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute /org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFRepository/ignoreLoadErrors"/>
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFRepository/createResource">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFRepository/createResource/uri"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/EMFRepository/createResource/mm_uri"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMRepository">
+        <genOperations ecoreOperation="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMRepository/createResource">
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMRepository/createResource/uri"/>
+          <genParameters ecoreParameter="/org.kermeta.compiler.kmt/models/Attempt01.ecore#/5/persistence/KMRepository/createResource/mm_uri"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

@@ -14,23 +14,10 @@
   </ecore:EAnnotation>
   <ecore:EPackage name="root_package" nsURI="platform:/resource/org.kermeta.compiler.kmt/models/new_file.ecore#/"
       nsPrefix="root_package">
-    <eClassifiers xsi:type="ecore:EClass" name="Main" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object">
+    <eClassifiers xsi:type="ecore:EClass" name="Main2" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object">
       <eOperations name="eachOwnedElement">
-        <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;self.ownedTags.each{o | do&#xA;&#x9;&#x9;&#x9;func0(o)&#xA;&#x9;&#x9;&#x9;func1(o)&#xA;&#x9;&#x9;end}&#xA;end"/>
-        </eAnnotations>
-        <eParameters name="func0" eType="#/3/_KermetaSpecialTypesAlias_">
-          <eAnnotations source="kermeta.functionType">
-            <details key="0" value="alias Object : kermeta::language::structure::Object;"/>
-            <details key="1" value="alias Object : kermeta::language::structure::Object;"/>
-          </eAnnotations>
-        </eParameters>
-        <eParameters name="func1" eType="#/3/_KermetaSpecialTypesAlias_">
-          <eAnnotations source="kermeta.functionType">
-            <details key="0" value="alias Object : kermeta::language::structure::Object;"/>
-            <details key="1" value="alias Object : kermeta::language::structure::Object;"/>
-          </eAnnotations>
-        </eParameters>
+        <eParameters name="func0" eType="#/3/_KermetaSpecialTypesAlias_"/>
+        <eParameters name="func1" eType="#/3/_KermetaSpecialTypesAlias_"/>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>

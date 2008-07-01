@@ -1,0 +1,24 @@
+/* $Id: emptyList.kmt,v 1.1 2008-07-01 08:57:28 cfaucher Exp $
+ * Creation date: May 23, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+require kermeta
+
+using kermeta::standard
+
+class Main
+{
+	operation main() : Void is do 
+		var list : OrderedSet<String> init OrderedSet<String>.new
+		list.add(void)
+		stdio.writeln(list.size().toString())
+	end
+}

@@ -1,0 +1,34 @@
+/* $Id: EDataType.main.kmt,v 1.1 2008-07-01 08:57:28 cfaucher Exp $ 
+ * Creation : June 11, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cfaucher
+ */
+
+@uri "http://models"
+package models;
+
+require kermeta
+require "EDataType.ecore"
+
+using EDataType
+
+class Main {
+	attribute s_fromEcore : MyString
+	
+	attribute s_fromStandard : MyOtherStandardString
+	
+	attribute s_fromStructure : MyOtherStructureString
+	
+	attribute i_fromStandard : MyOtherStandardInteger
+	
+	attribute i_fromStructure : MyOtherStructureInteger
+}
+
+alias MyOtherStandardString : kermeta::standard::String;
+alias MyOtherStructureString : kermeta::language::structure::String;
+
+alias MyOtherStandardInteger : kermeta::standard::Integer;
+alias MyOtherStructureInteger : kermeta::language::structure::Integer;
+

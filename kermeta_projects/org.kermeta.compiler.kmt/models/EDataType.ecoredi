@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_MfgH4DebEd2otese6a1G-Q" activeDiagram="_MfzC0DebEd2otese6a1G-Q">
+  <model href="EDataType.ecore#/"/>
+  <diagrams xmi:id="_MfzC0DebEd2otese6a1G-Q" position="0,0" size="100,100" name="EDataType" viewport="0,0">
+    <property xmi:id="_MpfKUDebEd2otese6a1G-Q" key="pageFormatName" value="A4"/>
+    <property xmi:id="_MpfKUTebEd2otese6a1G-Q" key="diagramWidth" value="840"/>
+    <property xmi:id="_MpfKUjebEd2otese6a1G-Q" key="diagramHeight" value="1188"/>
+    <property xmi:id="_MpfKUzebEd2otese6a1G-Q" key="pageMarginName" value="Small Margin"/>
+    <property xmi:id="_MpfKVDebEd2otese6a1G-Q" key="diagramTopMargin" value="20"/>
+    <property xmi:id="_MpfKVTebEd2otese6a1G-Q" key="diagramBottomMargin" value="20"/>
+    <property xmi:id="_MpfKVjebEd2otese6a1G-Q" key="diagramLeftMargin" value="20"/>
+    <property xmi:id="_MpfKVzebEd2otese6a1G-Q" key="diagramRightMargin" value="20"/>
+    <property xmi:id="_MpfKWDebEd2otese6a1G-Q" key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_MfzC0TebEd2otese6a1G-Q" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="EDataType.ecore#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" xmi:id="_NSK68DebEd2otese6a1G-Q" position="92,70" size="174,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_NSK68TebEd2otese6a1G-Q" presentation="default">
+        <element href="EDataType.ecore#//MyString"/>
+      </semanticModel>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

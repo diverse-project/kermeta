@@ -1,0 +1,41 @@
+/* $Id: collectionsTest.kmt,v 1.1 2008-07-01 08:57:28 cfaucher Exp $ 
+ * Creation : June 24, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cfaucher <cfaucher@irisa.fr>
+ */
+@mainClass "models::Main"
+@mainOperation "main"
+
+
+package models;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+
+class Main
+{
+	operation main() : Void is do 
+		var l : Sequence<String> init Sequence<String>.new()
+		l.add("toto")
+		l.add("toto")
+		
+		l.each{ str |
+			stdio.writeln(str)
+		}
+				
+		var s : OrderedSet<String> init OrderedSet<String>.new()
+		s.add("tata")
+		s.add("tata")
+		
+		s.each{ str |
+			stdio.writeln(str)
+		}
+		
+		stdio.writeln("end")
+	end
+}

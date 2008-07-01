@@ -11,8 +11,7 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 using kermeta::standard
 using ecore
 
-class Main
-{
+class Main {
 	operation main() : Void is
 	do
 		var aPrinter : ClassWithBehavior init ClassWithBehavior.new
@@ -24,8 +23,7 @@ class Main
 	end
 }
 
-class ClassWithBehavior
-{
+class ClassWithBehavior {
 	attribute attr1 : String[0..1]
 	
 	operation print() : Void is
@@ -101,7 +99,17 @@ class ParameterizedClass<B> inherits ParameterizedEmptyClass<B> , ParameterizedE
 class TestString inherits ValueType {
 }
 
+class TestAlias {
+	attribute a1 : MyStringBuffer
+	
+	attribute a2 : MyEString
+	
+	attribute a3 : MyString
+}
+
 alias MyStringBuffer : kermeta::utils::StringBuffer;
 
-alias MyString : ecore::EString;
+alias MyEString : ecore::EString;
+
+alias MyString : kermeta::standard::String;
 

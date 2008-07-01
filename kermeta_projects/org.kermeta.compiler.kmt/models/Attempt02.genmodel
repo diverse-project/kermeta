@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.test/src"
+    editDirectory="" editorDirectory="" modelPluginID="org.kermeta.compiler.kmt" modelName="Attempt02"
+    testsDirectory="" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>Attempt02.ecore</foreignModel>
+  <genPackages prefix="Root_package" disposableProviderFactory="true" ecorePackage="Attempt02.ecore#/3">
+    <genDataTypes ecoreDataType="Attempt02.ecore#/3/TotoString"/>
+    <genClasses ecoreClass="Attempt02.ecore#/3/Main">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Attempt02.ecore#/3/Main/attr"/>
+      <genOperations ecoreOperation="Attempt02.ecore#/3/Main/main"/>
+      <genOperations ecoreOperation="Attempt02.ecore#/3/Main/op">
+        <genParameters ecoreParameter="Attempt02.ecore#/3/Main/op/aa"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="Attempt02.ecore#/3/A">
+      <genOperations ecoreOperation="Attempt02.ecore#/3/A/ft">
+        <genParameters ecoreParameter="Attempt02.ecore#/3/A/ft/func"/>
+      </genOperations>
+      <genOperations ecoreOperation="Attempt02.ecore#/3/A/ft2">
+        <genParameters ecoreParameter="Attempt02.ecore#/3/A/ft2/func"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="Attempt02.ecore#/3/B"/>
+  </genPackages>
+</genmodel:GenModel>

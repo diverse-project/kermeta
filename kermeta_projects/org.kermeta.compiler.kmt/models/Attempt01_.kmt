@@ -7,9 +7,11 @@ package comptest2;
 require kermeta
 
 using kermeta::language::structure
+using kermeta::standard
 
 class Main
 {
+	attribute toto : oset String
 	operation main() : Void is
 	do
 		var aPrinter : ClassWithBehavior init ClassWithBehavior.new
@@ -56,7 +58,7 @@ class ParameterizedEmptyClass<A>
 {
 }
 
-class ParameterizedClass<B,String>
+class ParameterizedClass<B, S>
 {
 	attribute attr1 : B [0..1]
 	
