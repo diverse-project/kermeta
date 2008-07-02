@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Export-Package: org.eclipse.emf.ecore,org.eclipse.emf.ecore.impl,org.e
+ clipse.emf.ecore.plugin,org.eclipse.emf.ecore.resource,org.eclipse.em
+ f.ecore.resource.impl,org.eclipse.emf.ecore.util,org.eclipse.emf.ecor
+ e.xml.namespace,org.eclipse.emf.ecore.xml.namespace.impl,org.eclipse.
+ emf.ecore.xml.namespace.util,org.eclipse.emf.ecore.xml.type,org.eclip
+ se.emf.ecore.xml.type.impl,org.eclipse.emf.ecore.xml.type.internal,or
+ g.eclipse.emf.ecore.xml.type.util
+Bundle-ClassPath: .
+Bundle-Localization: plugin
+Bundle-Name: %pluginName
+Created-By: 1.5.0_12-b04 (Sun Microsystems Inc.)
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.3.0,4.0.0)
+ ",org.eclipse.emf.common;visibility:=reexport;bundle-version="[2.3.0,
+ 3.0.0)",org.eclipse.core.resources;resolution:=optional;bundle-versio
+ n="[3.3.0,4.0.0)"
+Ant-Version: Apache Ant 1.7.0
+Bundle-Vendor: %providerName
+Eclipse-LazyStart: true
+Bundle-Version: 2.3.1.v200709252135
+Eclipse-BuddyPolicy: dependent
+Bundle-Activator: org.eclipse.emf.ecore.plugin.EcorePlugin$Implementat
+ ion
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.emf.ecore; singleton:=true
+

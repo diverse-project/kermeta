@@ -1,0 +1,21 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: ResourceSaveException.java,v 1.1 2008-07-02 09:43:48 ftanguy Exp $
+ */
+package kermeta.exceptions;
+
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Resource Save Exception</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ *
+ * @see kermeta.exceptions.ExceptionsPackage#getResourceSaveException()
+ * @model annotation="kermeta documentation='/** Occurs when Resource saving fails for some reasons \052/'"
+ * @generated
+ */
+public interface ResourceSaveException extends kermeta.exceptions.Exception {
+} // ResourceSaveException
