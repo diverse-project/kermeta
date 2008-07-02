@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.23 2008-06-26 12:49:57 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.24 2008-07-02 08:38:20 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -496,12 +496,18 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 		
 			var newEGenericType : EGenericType init EGenericType.new()
-			newEGenericType.eClassifier := self.expression.staticType.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ecoreModelElement
+			newEGenericType.eClassifier := context.mu.getEClassifierByQualifiedName("kermeta::exceptions::KRuntimeException")
+			//newEGenericType.eClassifier := self.expression.staticType.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ecoreModelElement
 			if (not newEGenericType.eClassifier.isVoid()) and (not self.getContainerAsType(Operation).isVoid()) then
-				self.getContainerAsType(Operation).asType(Operation).ecoreModelElement.eGenericExceptions.add(newEGenericType)
+				
+				if (self.getContainerAsType(Operation).asType(Operation).ecoreModelElement.eGenericExceptions.isVoid()) or (self.getContainerAsType(Operation).asType(Operation).ecoreModelElement.eGenericExceptions.size==0) then
+					self.getContainerAsType(Operation).asType(Operation).ecoreModelElement.eGenericExceptions.add(newEGenericType)
+				end
+				
 			end
 			
-			result := "throw " + self.expression.createBehaviorJava(context)
+			result := self.expression.createBehaviorJava(context)
+			result := result + "throw kermeta::exceptions::KRuntimeException\n"
 		end
 	}
 	
@@ -510,7 +516,8 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := "catch"
 			if not self.exceptionName.isVoid() then
-				result := result + "(" + self.exceptionType.createBehaviorJava(context) + " " + self.exceptionName + ")"
+				result := result + "( org.kermeta.compil.runtime.helper.exception.KRuntimeException " + self.exceptionName + ")"
+				//result := result + "(" + self.exceptionType.createBehaviorJava(context) + " " + self.exceptionName + ")"
 			end
 			result := result + " {\n"
 			//pushPrefix();

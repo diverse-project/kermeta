@@ -1042,7 +1042,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns the number of instances of element in the Collection&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Integer result = null;&#xA;{&#xA;&#x9;&#xA;result  = this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; select(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:1502]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size;&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Integer result = null;&#xA;{&#xA;&#x9;&#xA;result  = this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; select(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4296340]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="#/2/standard/Collection/G"/>
@@ -1086,7 +1086,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Sum the element if they are summable (ie implement '+' operator by inheriting of the class Summable)&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9; res = null;&#xA;&#xA;&#x9;kermeta.standard.Summable tmp = null;&#xA;&#xA;&#x9;kermeta.language.structure.Object o = null;&#xA;&#xA;&#x9;o = this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; one;&#xA;&#xA;&#x9;tmp = o;&#xA;&#xA;&#x9;&#xA;result  = void;&#xA;&#xA;&#x9;if( tmp. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isNotEqual) {&#xA;{&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:1626]);&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = res;&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9; res = null;&#xA;&#xA;&#x9;kermeta.standard.Summable tmp = null;&#xA;&#xA;&#x9;kermeta.language.structure.Object o = null;&#xA;&#xA;&#x9;o = this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; one;&#xA;&#xA;&#x9;tmp = o;&#xA;&#xA;&#x9;&#xA;result  = void;&#xA;&#xA;&#x9;if( tmp. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isNotEqual) {&#xA;{&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4296464]);&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = res;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eTypeParameter="#/2/standard/Collection/G"/>
         </eOperations>
@@ -1195,12 +1195,12 @@
             </eAnnotations>
           </eParameters>
         </eOperations>
-        <eOperations name="any" eExceptions="#/2/exceptions/EmptyCollection">
+        <eOperations name="any" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns an element from the Collection&#xD;&#xA;&#x9; * Raises an EmptyCollection exception if the Collection is empty&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) == (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.EmptyCollection. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;&#xA;result  = it. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; next;&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) == (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;kermeta.exceptions.EmptyCollection. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;&#xA;result  = it. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; next;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eTypeParameter="#/2/standard/Collection/G"/>
         </eOperations>
@@ -1279,7 +1279,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Adds all elements from the Collection elements in the current Collection&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;elements. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:2017]);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;elements. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4296855]);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="elements">
             <eGenericType eClassifier="#/2/standard/Collection">
@@ -1535,7 +1535,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Recursive sort of the given (ordered) set using the given comparator.&#xD;&#xA;&#x9; * The comparator must return :&lt;ul>&#xD;&#xA;&#x9; *   &lt;li>+1 if the second &lt;G> element is greater than the first&lt;/li> &#xD;&#xA;&#x9; *   &lt;li>0 if the second &lt;G> element equals the first&lt;/li> &#xD;&#xA;&#x9; *   &lt;li>-1 if the second &lt;G> element is lower than the first&lt;/li> &#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.OrderedSet result = null;&#xA;{&#xA;&#x9;kermeta.standard.OrderedSet less   = kermeta.standard.StandardFactory.eINSTANCE.createOrderedSet();&#xA;&#xA;&#x9;kermeta.standard.OrderedSet pivotList   = kermeta.standard.StandardFactory.eINSTANCE.createOrderedSet();&#xA;&#xA;&#x9;kermeta.standard.OrderedSet greater   = kermeta.standard.StandardFactory.eINSTANCE.createOrderedSet();&#xA;&#xA;&#x9;if( (q. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &lt;= (1) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) {&#xA;{&#xA;&#x9;&#xA;result  = q;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9; pivot   = Factory.eINSTANCE.create();&#xA;&#xA;&#x9;q. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:2571]);&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; concatenate;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.OrderedSet result = null;&#xA;{&#xA;&#x9;kermeta.standard.OrderedSet less   = kermeta.standard.StandardFactory.eINSTANCE.createOrderedSet();&#xA;&#xA;&#x9;kermeta.standard.OrderedSet pivotList   = kermeta.standard.StandardFactory.eINSTANCE.createOrderedSet();&#xA;&#xA;&#x9;kermeta.standard.OrderedSet greater   = kermeta.standard.StandardFactory.eINSTANCE.createOrderedSet();&#xA;&#xA;&#x9;if( (q. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &lt;= (1) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) {&#xA;{&#xA;&#x9;&#xA;result  = q;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9; pivot   = Factory.eINSTANCE.create();&#xA;&#xA;&#x9;q. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4297409]);&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; concatenate;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eClassifier="#/2/standard/OrderedSet">
             <eTypeArguments eTypeParameter="#/2/standard/Set/G"/>
@@ -1599,7 +1599,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a new Set which content includes all non-Collection elements&#xD;&#xA;&#x9; * of the current Set, and, for each Collection element of the current&#xD;&#xA;&#x9; * Set, as many elements as the Collection contains&#xD;&#xA;&#x9; * Duplicates are removed&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Set result = null;&#xA;{&#xA;&#x9;kermeta.standard.Set res   = kermeta.standard.StandardFactory.eINSTANCE.createSet();&#xA;&#xA;&#x9;if( . &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isKindOf) {&#xA;{&#xA;&#x9;kermeta.standard.Collection col = null;&#xA;&#xA;&#x9;kermeta.language.structure.Object o = null;&#xA;&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:2781]);&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = res;&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Set result = null;&#xA;{&#xA;&#x9;kermeta.standard.Set res   = kermeta.standard.StandardFactory.eINSTANCE.createSet();&#xA;&#xA;&#x9;if( . &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isKindOf) {&#xA;{&#xA;&#x9;kermeta.standard.Collection col = null;&#xA;&#xA;&#x9;kermeta.language.structure.Object o = null;&#xA;&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4297619]);&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = res;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eClassifier="#/2/standard/Set">
             <eTypeArguments eClassifier="#/2/language/structure/Object"/>
@@ -1760,7 +1760,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Recursive sort of the given sequence using the given comparator.&#xD;&#xA;&#x9; * The comparator must return :&lt;ul>&#xD;&#xA;&#x9; *   &lt;li>+1 if the second &lt;G> element is greater than the first&lt;/li> &#xD;&#xA;&#x9; *   &lt;li>0 if the second &lt;G> element equals the first&lt;/li> &#xD;&#xA;&#x9; *   &lt;li>-1 if the second &lt;G> element is lower than the first&lt;/li> &#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Sequence result = null;&#xA;{&#xA;&#x9;kermeta.standard.Sequence less   = kermeta.standard.StandardFactory.eINSTANCE.createSequence();&#xA;&#xA;&#x9;kermeta.standard.Sequence pivotList   = kermeta.standard.StandardFactory.eINSTANCE.createSequence();&#xA;&#xA;&#x9;kermeta.standard.Sequence greater   = kermeta.standard.StandardFactory.eINSTANCE.createSequence();&#xA;&#xA;&#x9;if( (q. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &lt;= (1) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) {&#xA;{&#xA;&#x9;&#xA;result  = q;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9; pivot   = Factory.eINSTANCE.create();&#xA;&#xA;&#x9;q. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:3228]);&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; concatenate;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Sequence result = null;&#xA;{&#xA;&#x9;kermeta.standard.Sequence less   = kermeta.standard.StandardFactory.eINSTANCE.createSequence();&#xA;&#xA;&#x9;kermeta.standard.Sequence pivotList   = kermeta.standard.StandardFactory.eINSTANCE.createSequence();&#xA;&#xA;&#x9;kermeta.standard.Sequence greater   = kermeta.standard.StandardFactory.eINSTANCE.createSequence();&#xA;&#xA;&#x9;if( (q. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &lt;= (1) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) {&#xA;{&#xA;&#x9;&#xA;result  = q;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9; pivot   = Factory.eINSTANCE.create();&#xA;&#xA;&#x9;q. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4298066]);&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; concatenate;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eClassifier="#/2/standard/Sequence">
             <eTypeArguments eTypeParameter="#/2/standard/Bag/G"/>
@@ -1838,7 +1838,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a new Bag which content includes all non-Collection elements&#xD;&#xA;&#x9; * of the current Set, and, for each Collection element of the current&#xD;&#xA;&#x9; * Bag, as many elements as the Collection contains&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Bag result = null;&#xA;{&#xA;&#x9;kermeta.standard.Bag res   = kermeta.standard.StandardFactory.eINSTANCE.createBag();&#xA;&#xA;&#x9;if( . &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isKindOf) {&#xA;{&#xA;&#x9;kermeta.standard.Collection col = null;&#xA;&#xA;&#x9;kermeta.language.structure.Object o = null;&#xA;&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:3472]);&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = res;&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Bag result = null;&#xA;{&#xA;&#x9;kermeta.standard.Bag res   = kermeta.standard.StandardFactory.eINSTANCE.createBag();&#xA;&#xA;&#x9;if( . &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isKindOf) {&#xA;{&#xA;&#x9;kermeta.standard.Collection col = null;&#xA;&#xA;&#x9;kermeta.language.structure.Object o = null;&#xA;&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4298310]);&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = res;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eClassifier="#/2/standard/Bag">
             <eTypeArguments eClassifier="#/2/language/structure/Object"/>
@@ -1956,33 +1956,33 @@
           <details key="EMF_needReference" value="isUnique=false isOrdered=true javaClass=org.eclipse.emf.common.util.BasicEList"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
-        <eOperations name="addAt" eExceptions="#/2/exceptions/IndexOutOfBound">
+        <eOperations name="addAt" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Adds element in the OrderedCollection at rank index&#xD;&#xA;&#x9; * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;&#x9; * larger than the size of the OrderedCollection&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if( ((index) &lt; (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLower) || ((index) > ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreater) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; or) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.basetypes.OrderedCollection.addAt(this, index, element)&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if( ((index) &lt; (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLower) || ((index) > ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreater) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; or) {&#xA;{&#xA;&#x9;kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.basetypes.OrderedCollection.addAt(this, index, element)&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="index" eType="#/2/standard/Integer"/>
           <eParameters name="element">
             <eGenericType eTypeParameter="#/2/standard/OrderedCollection/G"/>
           </eParameters>
         </eOperations>
-        <eOperations name="removeAt" eExceptions="#/2/exceptions/IndexOutOfBound">
+        <eOperations name="removeAt" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Removes the element at rank index from the OrderedCollection&#xD;&#xA;&#x9; * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;&#x9; * larger than the size of the OrderedCollection&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if( ((index) &lt; (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLower) || ((index) > (( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) - (1) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; minus) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreater) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; or) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.basetypes.OrderedCollection.removeAt(this, index)&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if( ((index) &lt; (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLower) || ((index) > (( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) - (1) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; minus) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreater) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; or) {&#xA;{&#xA;&#x9;kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.basetypes.OrderedCollection.removeAt(this, index)&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="index" eType="#/2/standard/Integer"/>
         </eOperations>
-        <eOperations name="last" eExceptions="#/2/exceptions/EmptyCollection">
+        <eOperations name="last" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns the last element in the OrderedCollection&#xD;&#xA;&#x9; * Raises an EmptyCollection exception if the OrderedCollection is empty&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) == (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.EmptyCollection. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; elementAt;&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) == (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;kermeta.exceptions.EmptyCollection. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; elementAt;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eTypeParameter="#/2/standard/OrderedCollection/G"/>
         </eOperations>
@@ -1998,33 +1998,33 @@
           </eAnnotations>
           <eParameters name="element" eType="#/2/language/structure/Object"/>
         </eOperations>
-        <eOperations name="indexOf" eType="#/2/standard/Integer" eExceptions="#/2/exceptions/EmptyCollection">
+        <eOperations name="indexOf" eType="#/2/standard/Integer" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/** &#xD;&#xA;&#x9; * Returns the index of the first instance of element in the OrderedCollection&#xD;&#xA;&#x9; * or -1 if the element is not contained by the OrderedCollection&#xD;&#xA;&#x9; * Raises an EmptyCollection exception if the OrderedCollection is empty&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Integer result = null;&#xA;{&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) == (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.EmptyCollection. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;kermeta.standard.Integer i   = kermeta.standard.StandardFactory.eINSTANCE.createInteger();&#xA;&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;java.lang.Boolean found   = java.lang.LangFactory.eINSTANCE.createBoolean();&#xA;&#xA;&#x9;&#xA;&#xA;&#x9;if( found) {&#xA;{&#xA;&#x9;&#xA;result  = i;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;&#xA;result  = 1. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; uminus;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Integer result = null;&#xA;{&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) == (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;kermeta.exceptions.EmptyCollection. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;kermeta.standard.Integer i   = kermeta.standard.StandardFactory.eINSTANCE.createInteger();&#xA;&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;java.lang.Boolean found   = java.lang.LangFactory.eINSTANCE.createBoolean();&#xA;&#xA;&#x9;&#xA;&#xA;&#x9;if( found) {&#xA;{&#xA;&#x9;&#xA;result  = i;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;&#xA;result  = 1. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; uminus;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="element">
             <eGenericType eTypeParameter="#/2/standard/OrderedCollection/G"/>
           </eParameters>
         </eOperations>
-        <eOperations name="elementAt" eExceptions="#/2/exceptions/IndexOutOfBound">
+        <eOperations name="elementAt" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns the element at rank index in the OrderedCollection&#xD;&#xA;&#x9; * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;&#x9; * larger than the size of the OrderedCollection&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ((index) &lt; (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLower) || ((index) > (( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) - (1) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; minus) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreater) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; or) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.basetypes.OrderedCollection.elementAt(this, index);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ((index) &lt; (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLower) || ((index) > (( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) - (1) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; minus) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreater) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; or) {&#xA;{&#xA;&#x9;kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.basetypes.OrderedCollection.elementAt(this, index);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eTypeParameter="#/2/standard/OrderedCollection/G"/>
           <eParameters name="index" eType="#/2/standard/Integer"/>
         </eOperations>
-        <eOperations name="first" eExceptions="#/2/exceptions/EmptyCollection">
+        <eOperations name="first" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/** &#xD;&#xA;&#x9; * Returns the first element in the OrderedCollection&#xD;&#xA;&#x9; * Raises an EmptyCollection exception if the OrderedCollection is empty&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) == (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.EmptyCollection. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; elementAt;&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) == (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;kermeta.exceptions.EmptyCollection. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; elementAt;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eTypeParameter="#/2/standard/OrderedCollection/G"/>
         </eOperations>
@@ -2115,12 +2115,12 @@
           </eAnnotations>
           <eParameters name="element" eType="#/2/language/structure/Object"/>
         </eOperations>
-        <eOperations name="at" eExceptions="#/2/exceptions/IndexOutOfBound">
+        <eOperations name="at" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns element at rank index in the sequence&#xD;&#xA;&#x9; * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;&#x9; * larger than the size of the OrderedSet&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ((index) >= (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreaterOrEqual) &amp;&amp; ((index) &lt;= (this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) {&#xA;{&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;throw kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ((index) >= (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreaterOrEqual) &amp;&amp; ((index) &lt;= (this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) {&#xA;{&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eTypeParameter="#/2/standard/OrderedSet/G"/>
           <eParameters name="index" eType="#/2/standard/Integer"/>
@@ -2139,12 +2139,12 @@
             <eGenericType eTypeParameter="#/2/standard/OrderedSet/G"/>
           </eParameters>
         </eOperations>
-        <eOperations name="subSet" eExceptions="#/2/exceptions/IndexOutOfBound">
+        <eOperations name="subSet" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Builds and returns a new OrderedSet composed of elements of current ordered&#xD;&#xA;&#x9; * set from rank min to rank max (order is respected)&#xD;&#xA;&#x9; * Raises IndexOutOfBound exception if min is negative, max is larger than &#xD;&#xA;&#x9; * the size of the ordered set or min is larger than max&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.OrderedSet result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.OrderedSet. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9;if( (((min) >= (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreaterOrEqual) &amp;&amp; ((max) &lt;= (this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) &amp;&amp; ((min) &lt;= (max) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) {&#xA;{&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;kermeta.standard.Integer i   = kermeta.standard.StandardFactory.eINSTANCE.createInteger();&#xA;&#xA;&#x9;&#xA;&#xA;&#x9;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;throw kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.OrderedSet result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.OrderedSet. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9;if( (((min) >= (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreaterOrEqual) &amp;&amp; ((max) &lt;= (this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) &amp;&amp; ((min) &lt;= (max) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) {&#xA;{&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;kermeta.standard.Integer i   = kermeta.standard.StandardFactory.eINSTANCE.createInteger();&#xA;&#xA;&#x9;&#xA;&#xA;&#x9;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eClassifier="#/2/standard/OrderedSet">
             <eTypeArguments eTypeParameter="#/2/standard/OrderedSet/G"/>
@@ -2172,12 +2172,12 @@
           <details key="EMF_needReference" value="isUnique=false isOrdered=true javaClass=org.eclipse.emf.common.util.BasicEList"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
-        <eOperations name="subSequence" eExceptions="#/2/exceptions/IndexOutOfBound">
+        <eOperations name="subSequence" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Builds and returns a new Sequence composed of elements of current sequence&#xD;&#xA;&#x9; * from rank min to rank max (order is respected)&#xD;&#xA;&#x9; * Raises IndexOutOfBound exception if min is negative, max is larger than &#xD;&#xA;&#x9; * the size of the sequence or min is larger than max&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Sequence result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.Sequence. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9;if( (((min) >= (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreaterOrEqual) &amp;&amp; ((max) &lt;= (this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) &amp;&amp; ((min) &lt;= (max) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) {&#xA;{&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;kermeta.standard.Integer i   = kermeta.standard.StandardFactory.eINSTANCE.createInteger();&#xA;&#xA;&#x9;&#xA;&#xA;&#x9;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;throw kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Sequence result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.Sequence. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9;if( (((min) >= (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreaterOrEqual) &amp;&amp; ((max) &lt;= (this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) &amp;&amp; ((min) &lt;= (max) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) {&#xA;{&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;kermeta.standard.Integer i   = kermeta.standard.StandardFactory.eINSTANCE.createInteger();&#xA;&#xA;&#x9;&#xA;&#xA;&#x9;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eClassifier="#/2/standard/Sequence">
             <eTypeArguments eTypeParameter="#/2/standard/Sequence/G"/>
@@ -2240,12 +2240,12 @@
           </eAnnotations>
           <eParameters name="element" eType="#/2/language/structure/Object"/>
         </eOperations>
-        <eOperations name="at" eExceptions="#/2/exceptions/IndexOutOfBound">
+        <eOperations name="at" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns element at rank index in the sequence&#xD;&#xA;&#x9; * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;&#x9; * larger than the size of the Sequence&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ((index) >= (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreaterOrEqual) &amp;&amp; ((index) &lt;= (this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) {&#xA;{&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;throw kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ((index) >= (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isGreaterOrEqual) &amp;&amp; ((index) &lt;= (this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isLowerOrEqual) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and) {&#xA;{&#xA;&#x9;kermeta.standard.Iterator it   = kermeta.standard.StandardFactory.eINSTANCE.createIterator();&#xA;&#xA;&#x9;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;kermeta.exceptions.IndexOutOfBound. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eTypeParameter="#/2/standard/Sequence/G"/>
           <eParameters name="index" eType="#/2/standard/Integer"/>
@@ -2275,12 +2275,12 @@
             <details key="body" value="&#xA;java.lang.Boolean result = null;&#xA;{&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.basetypes.Iterator.hasNext(this);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="next" eExceptions="#/2/exceptions/IteratorIsOff">
+        <eOperations name="next" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns the next element of the iterator&#xD;&#xA;&#x9; * Raises IteratorIsOff exception in case the iterator is on the last element &#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; hasNext) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.IteratorIsOff. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.basetypes.Iterator.next(this);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA; result = null;&#xA;{&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; hasNext) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;kermeta.exceptions.IteratorIsOff. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.basetypes.Iterator.next(this);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eTypeParameter="#/2/standard/Iterator/G"/>
         </eOperations>
@@ -2605,7 +2605,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a collection containing the elements of this Hashtable&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Collection result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.Bag. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; keys(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:5965]);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Collection result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.Bag. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; keys(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4300803]);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eClassifier="#/2/standard/Collection">
             <eTypeArguments eTypeParameter="#/2/utils/Hashtable/V"/>
@@ -2863,12 +2863,12 @@
             </eAnnotations>
             <eParameters name="element" eType="#/2/language/structure/Object"/>
           </eOperations>
-          <eOperations name="set" eExceptions="#/2/exceptions/IncompatibleTypeError">
+          <eOperations name="set" eExceptions="#/2/exceptions/KRuntimeException">
             <eAnnotations source="kermeta">
               <details key="documentation" value="/**&#xD;&#xA;&#x9; * Sets the &lt;code>element&lt;/code> to the &lt;code>~property&lt;/code> of the object &#xD;&#xA;&#x9; */"/>
             </eAnnotations>
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if( element. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isInstanceOf) {&#xA;{&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.language.Object.set(this, property, element)&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;kermeta.exceptions.IncompatibleTypeError e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createIncompatibleTypeError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw e&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+              <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if( element. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isInstanceOf) {&#xA;{&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.language.Object.set(this, property, element)&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;kermeta.exceptions.IncompatibleTypeError e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createIncompatibleTypeError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;ethrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
             </eAnnotations>
             <eParameters name="property" eType="#/2/language/structure/Property"/>
             <eParameters name="element" eType="#/2/language/structure/Object"/>
@@ -2964,12 +2964,12 @@
               <details key="body" value="&#xA;kermeta.persistence.Resource result = null;&#xA;{&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.language.Object.getContainingResource(this);&#xA;}&#xA;return result;&#xA;"/>
             </eAnnotations>
           </eOperations>
-          <eOperations name="asType" eType="#/2/language/structure/Object" eExceptions="#/2/exceptions/TypeCastError">
+          <eOperations name="asType" eType="#/2/language/structure/Object" eExceptions="#/2/exceptions/KRuntimeException">
             <eAnnotations source="kermeta">
               <details key="documentation" value="/**&#xD;&#xA;&#x9; * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.&#xD;&#xA;&#x9; */"/>
             </eAnnotations>
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="body" value="&#xA;kermeta.language.structure.Object result = null;&#xA;{&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isInstanceOf) {&#xA;{&#xA;&#x9;&#xA;result  = this;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;throw kermeta.exceptions.TypeCastError. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+              <details key="body" value="&#xA;kermeta.language.structure.Object result = null;&#xA;{&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isInstanceOf) {&#xA;{&#xA;&#x9;&#xA;result  = this;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;kermeta.exceptions.TypeCastError. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
             </eAnnotations>
             <eParameters name="type" eType="#/2/language/structure/Class"/>
           </eOperations>
@@ -2978,7 +2978,7 @@
               <details key="documentation" value="/**&#xD;&#xA;&#x9; * Recursively runs checking of invariants defined for the metaclass of the Object&#xD;&#xA;&#x9; * and its supertypes&#xD;&#xA;&#x9; */"/>
             </eAnnotations>
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if( this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isNotEqual) {&#xA;{&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; checkInvariants();&#xA;&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = null;&#xA;&#xA;&#x9;cd = this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getMetaClass(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; typeDefinition;&#xA;&#xA;&#x9;cd. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; allAttribute(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:6392]);&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+              <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if( this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isNotEqual) {&#xA;{&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; checkInvariants();&#xA;&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = null;&#xA;&#xA;&#x9;cd = this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getMetaClass(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; typeDefinition;&#xA;&#xA;&#x9;cd. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; allAttribute(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4301230]);&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="toString" eType="#/2/standard/String">
@@ -3193,7 +3193,7 @@
               <details key="documentation" value="/**&#xD;&#xA; &#x9; * Add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.&#xD;&#xA; &#x9; * Returns the list of Object that have been added (One can check that some element have been ignored or not)&#xD;&#xA; &#x9; */"/>
             </eAnnotations>
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="body" value="&#xA;kermeta.standard.Collection result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.Set. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9;objectsToAdd. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:6864]);&#xA;}&#xA;return result;&#xA;"/>
+              <details key="body" value="&#xA;kermeta.standard.Collection result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.Set. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9;objectsToAdd. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4301702]);&#xA;}&#xA;return result;&#xA;"/>
             </eAnnotations>
             <eGenericType eClassifier="#/2/standard/Collection">
               <eTypeArguments eClassifier="#/2/language/structure/Object"/>
@@ -3218,7 +3218,7 @@
               <details key="documentation" value="/**&#xD;&#xA; &#x9; * Returns a set of all the elements of the model that are instance of the given Type&#xD;&#xA; &#x9; */"/>
             </eAnnotations>
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="body" value="&#xA;kermeta.language.structure.Object result = null;&#xA;{&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; contents(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; select(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:6916]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; asSet;&#xA;}&#xA;return result;&#xA;"/>
+              <details key="body" value="&#xA;kermeta.language.structure.Object result = null;&#xA;{&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; contents(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; select(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4301754]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; asSet;&#xA;}&#xA;return result;&#xA;"/>
             </eAnnotations>
             <eParameters name="typeName" eType="#/2/language/structure/Type"/>
           </eOperations>
@@ -3305,7 +3305,7 @@
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#/2/language/structure/DataType">
-          <eOperations name="clone" eType="#/2/language/structure/Object">
+          <eOperations name="clone" eType="#/2/language/structure/Object" eExceptions="#/2/exceptions/KRuntimeException">
             <eAnnotations source="kermeta">
               <details key="documentation" value="/**&#xD;&#xA;&#x9; * Implements kermeta::language::structure::Type.clone(Object)&#xD;&#xA;&#x9; */"/>
             </eAnnotations>
@@ -3313,7 +3313,7 @@
               <details key="superOperation" value="kermeta::language::structure::Type"/>
             </eAnnotations>
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="body" value="&#xA;kermeta.language.structure.Object result = null;&#xA;{&#xA;&#x9;throw &quot;NOT IMPLEMENTED&quot;&#xA;}&#xA;return result;&#xA;"/>
+              <details key="body" value="&#xA;kermeta.language.structure.Object result = null;&#xA;{&#xA;&#x9;&quot;NOT IMPLEMENTED&quot;throw kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;return result;&#xA;"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="#/2/language/structure/Object"/>
           </eOperations>
@@ -4311,22 +4311,22 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Implementation of simple helpers to read ans write text files&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;/>&#xD;&#xA; */"/>
         </eAnnotations>
-        <eOperations name="writeTextFile" eExceptions="#/2/exceptions/FileNotFoundException">
+        <eOperations name="writeTextFile" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Writes a String in a text file&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if( filename. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.FileNotFoundException. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.writeTextFile(filename, text)&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if( filename. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;kermeta.exceptions.FileNotFoundException. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.writeTextFile(filename, text)&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="filename" eType="#/2/standard/String"/>
           <eParameters name="text" eType="#/2/standard/String"/>
         </eOperations>
-        <eOperations name="readTextFile" eType="#/2/standard/String" eExceptions="#/2/exceptions/FileNotFoundException #/2/exceptions/FileNotFoundException">
+        <eOperations name="readTextFile" eType="#/2/standard/String" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Reads a text file&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;java.lang.String result = null;&#xA;{&#xA;&#x9;if( filename. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.FileNotFoundException. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;java.lang.Boolean exists = null;&#xA;&#xA;&#x9;java.lang.Boolean isdirectory = null;&#xA;&#xA;&#x9;exists = fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.fileExists(filename);&#xA;&#xA;&#x9;isdirectory = fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.fileIsDirectory(filename);&#xA;&#xA;&#x9;if( (! (exists) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) || (isdirectory) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; or) {&#xA;{&#xA;&#x9;throw kermeta.exceptions.FileNotFoundException. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.readTextFile(filename);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;java.lang.String result = null;&#xA;{&#xA;&#x9;if( filename. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;kermeta.exceptions.FileNotFoundException. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;java.lang.Boolean exists = null;&#xA;&#xA;&#x9;java.lang.Boolean isdirectory = null;&#xA;&#xA;&#x9;exists = fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.fileExists(filename);&#xA;&#xA;&#x9;isdirectory = fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.fileIsDirectory(filename);&#xA;&#xA;&#x9;if( (! (exists) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) || (isdirectory) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; or) {&#xA;{&#xA;&#x9;kermeta.exceptions.FileNotFoundException. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.readTextFile(filename);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="filename" eType="#/2/standard/String"/>
         </eOperations>
@@ -4341,12 +4341,12 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * DynamicExpression is a class used to make dynamic calls, i.e dynamic evaluation&#xD;&#xA; * of Kermeta statements represented in a string.&#xD;&#xA; * &#xD;&#xA; * An example :&#xD;&#xA; *   var de : DynamicExpression init DynamicExpression.new&#xD;&#xA; *   de.initializeDefaults&#xD;&#xA; *   de.formalParameters.put(&quot;a&quot;, String)&#xD;&#xA; *   de.parse(&quot;stdio.writeln(a)&quot;) // note: to execute a list of statements, you have to surround them with do..end&#xD;&#xA; *   var params : Hashtable&lt;String, Object> init Hashtable&lt;String, Object>.new&#xD;&#xA; *   params.put(&quot;a&quot;, &quot;hello world!&quot;)&#xD;&#xA; *   de.execute(void, params)&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/dynamic_expression_view.png&quot;/>&#xD;&#xA; */"/>
         </eAnnotations>
-        <eOperations name="execute" eType="#/2/language/structure/Object" eExceptions="#/2/exceptions/DynamicExpressionException #/2/exceptions/DynamicExpressionException">
+        <eOperations name="execute" eType="#/2/language/structure/Object" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;     * Execute the expression in the given context&#xD;&#xA;     */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.language.structure.Object result = null;&#xA;{&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; expression(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;kermeta.exceptions.DynamicExpressionException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createDynamicExpressionException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw e&#xA;}&#xA;}&#xA;&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) != (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isNotEqual) {&#xA;{&#xA;&#x9;kermeta.exceptions.DynamicExpressionException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createDynamicExpressionException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw e&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.language.DynamicExpression.execute(this, selfObj, actualParams);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.language.structure.Object result = null;&#xA;{&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; expression(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;kermeta.exceptions.DynamicExpressionException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createDynamicExpressionException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;ethrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) != (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isNotEqual) {&#xA;{&#xA;&#x9;kermeta.exceptions.DynamicExpressionException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createDynamicExpressionException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;ethrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.language.DynamicExpression.execute(this, selfObj, actualParams);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="selfObj" eType="#/2/language/structure/Object"/>
           <eParameters name="actualParams">
@@ -4364,21 +4364,21 @@
             <details key="body" value="&#xA;kermeta.standard.Void result = null;&#xA;{&#xA;&#x9;getFormalParameters&#xA;&#xA;&#x9;getSelfClass&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="parse" eType="#/2/standard/Boolean" eExceptions="#/2/exceptions/DynamicExpressionException #/2/exceptions/DynamicExpressionException">
+        <eOperations name="parse" eType="#/2/standard/Boolean" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Parse the expression as a string&#xD;&#xA;&#x9; * and updates the expression field and errors&#xD;&#xA;&#x9; * Returns true if the expression was parsed sucessfuly&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;java.lang.Boolean result = null;&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; clear();&#xA;&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; formalParameters(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) || ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; selfClass(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; or) {&#xA;{&#xA;&#x9;kermeta.exceptions.DynamicExpressionException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createDynamicExpressionException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw e&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.language.DynamicExpression.parse(this, expression);&#xA;&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) != (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isNotEqual) {&#xA;{&#xA;&#x9;kermeta.exceptions.DynamicExpressionException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createDynamicExpressionException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:7698]);&#xA;&#xA;&#x9;throw e&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;java.lang.Boolean result = null;&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; clear();&#xA;&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; formalParameters(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) || ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; selfClass(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; or) {&#xA;{&#xA;&#x9;kermeta.exceptions.DynamicExpressionException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createDynamicExpressionException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;ethrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.language.DynamicExpression.parse(this, expression);&#xA;&#xA;&#x9;if( ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) != (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isNotEqual) {&#xA;{&#xA;&#x9;kermeta.exceptions.DynamicExpressionException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createDynamicExpressionException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4302536]);&#xA;&#xA;&#x9;ethrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="expression" eType="#/2/standard/String"/>
         </eOperations>
-        <eOperations name="evalString" eType="#/2/language/structure/Object" eExceptions="#/2/exceptions/DynamicExpressionException">
+        <eOperations name="evalString" eType="#/2/language/structure/Object" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;     * Execute the expression given as a string.&#xD;&#xA;     * the self type and formal parameters are supposed to be set&#xD;&#xA;     * before calling this operation&#xD;&#xA;     */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.language.structure.Object result = null;&#xA;{&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; parse) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;kermeta.exceptions.DynamicExpressionException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createDynamicExpressionException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw e&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; execute;&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.language.structure.Object result = null;&#xA;{&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; parse) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;kermeta.exceptions.DynamicExpressionException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createDynamicExpressionException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;ethrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; execute;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="body" eType="#/2/standard/String"/>
           <eParameters name="selfObj" eType="#/2/language/structure/Object"/>
@@ -4600,7 +4600,7 @@
           <eParameters name="condition" eType="#/2/standard/Boolean"/>
           <eParameters name="msg" eType="#/2/standard/String"/>
         </eOperations>
-        <eOperations name="fail" eExceptions="#/2/kunit/AssertionFailedError">
+        <eOperations name="fail" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/** raise a AssertionViolatedException with the provided message */"/>
           </eAnnotations>
@@ -4608,7 +4608,7 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;kermeta.kunit.AssertionFailedError exception   = kermeta.kunit.KunitFactory.eINSTANCE.createAssertionFailedError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw exception&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;kermeta.kunit.AssertionFailedError exception   = kermeta.kunit.KunitFactory.eINSTANCE.createAssertionFailedError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;exceptionthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="msg" eType="#/2/standard/String"/>
         </eOperations>
@@ -4732,7 +4732,7 @@
           <eParameters name="condition" eType="#/2/standard/Boolean"/>
           <eParameters name="message" eType="#/2/standard/String"/>
         </eOperations>
-        <eOperations name="fail" eExceptions="#/2/kunit/AssertionFailedError">
+        <eOperations name="fail" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;   * Log a failure &#xD;&#xA;   */"/>
           </eAnnotations>
@@ -4740,7 +4740,7 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; mustStop) {&#xA;{&#xA;&#x9;kermeta.kunit.AssertionFailedError exception   = kermeta.kunit.KunitFactory.eINSTANCE.createAssertionFailedError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw exception&#xA;}&#xA;} else {&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addFailure(this, &quot;explicit failure: &quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; mustStop) {&#xA;{&#xA;&#x9;kermeta.kunit.AssertionFailedError exception   = kermeta.kunit.KunitFactory.eINSTANCE.createAssertionFailedError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;exceptionthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addFailure(this, &quot;explicit failure: &quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="msg" eType="#/2/standard/String"/>
         </eOperations>
@@ -4782,7 +4782,7 @@
           <eParameters name="condition" eType="#/2/standard/Boolean"/>
           <eParameters name="message" eType="#/2/standard/String"/>
         </eOperations>
-        <eOperations name="_assert" eExceptions="#/2/kunit/AssertionFailedError">
+        <eOperations name="_assert" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;   * Log a failure if condition is false&#xD;&#xA;   */"/>
           </eAnnotations>
@@ -4790,7 +4790,7 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;kermeta.standard.Integer number   = kermeta.standard.StandardFactory.eINSTANCE.createInteger();&#xA;&#xA;&#x9;if( ! (condition) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;java.lang.String msg   = null;&#xA;&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; mustStop) {&#xA;{&#xA;&#x9;kermeta.kunit.AssertionFailedError exception   = kermeta.kunit.KunitFactory.eINSTANCE.createAssertionFailedError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw exception&#xA;}&#xA;} else {&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addFailure(this, msg);&#xA;}&#xA;}&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;kermeta.standard.Integer number   = kermeta.standard.StandardFactory.eINSTANCE.createInteger();&#xA;&#xA;&#x9;if( ! (condition) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;java.lang.String msg   = null;&#xA;&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; mustStop) {&#xA;{&#xA;&#x9;kermeta.kunit.AssertionFailedError exception   = kermeta.kunit.KunitFactory.eINSTANCE.createAssertionFailedError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;exceptionthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addFailure(this, msg);&#xA;}&#xA;}&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="condition" eType="#/2/standard/Boolean"/>
         </eOperations>
@@ -4802,7 +4802,7 @@
             <details key="body" value="&#xA;kermeta.standard.Integer result = null;&#xA;{&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; rank(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isVoid) {&#xA;{&#xA;&#x9;getRank&#xA;}&#xA;}&#xA;&#xA;&#x9;getRank&#xA;&#xA;&#x9;&#xA;result  =  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; rank;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="assertWithMsg" eExceptions="#/2/kunit/AssertionFailedError">
+        <eOperations name="assertWithMsg" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;   * Log a failure if condition is false&#xD;&#xA;   */"/>
           </eAnnotations>
@@ -4810,7 +4810,7 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;kermeta.standard.Integer number   = kermeta.standard.StandardFactory.eINSTANCE.createInteger();&#xA;&#xA;&#x9;if( ! (condition) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;java.lang.String realMsg   = null;&#xA;&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; mustStop) {&#xA;{&#xA;&#x9;kermeta.kunit.AssertionFailedError exception   = kermeta.kunit.KunitFactory.eINSTANCE.createAssertionFailedError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw exception&#xA;}&#xA;} else {&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addFailure(this, realMsg);&#xA;}&#xA;}&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;kermeta.standard.Integer number   = kermeta.standard.StandardFactory.eINSTANCE.createInteger();&#xA;&#xA;&#x9;if( ! (condition) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;java.lang.String realMsg   = null;&#xA;&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; mustStop) {&#xA;{&#xA;&#x9;kermeta.kunit.AssertionFailedError exception   = kermeta.kunit.KunitFactory.eINSTANCE.createAssertionFailedError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;exceptionthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;} else {&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addFailure(this, realMsg);&#xA;}&#xA;}&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="condition" eType="#/2/standard/Boolean"/>
           <eParameters name="msg" eType="#/2/standard/String"/>
@@ -5062,7 +5062,7 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * A TestSuite is a structured collection of tests, using the&#xD;&#xA; * composite pattern, all tests are runnable and have a log&#xD;&#xA; * In addition a suite can be populated automatically from a&#xD;&#xA; * test case class with one test case object for each test&#xD;&#xA; * method in the class.&#xD;&#xA; *  You can make a suite and populate it manually like this:&#xD;&#xA; *&#xD;&#xA; *  var suite : TestSuite init TestSuite.new.&#xD;&#xA; *  suite.tests.add(t1)&#xD;&#xA; *&#xD;&#xA; *  Alternatively you can populate a suite automatically from&#xD;&#xA; *  a class that inherits TestCase and which has several methods&#xD;&#xA; *  called test:&#xD;&#xA; *&#xD;&#xA; *  var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)&#xD;&#xA; */"/>
         </eAnnotations>
-        <eOperations name="addAllTestCasesFrom" eType="#/2/kunit/TestSuite" eExceptions="#/2/exceptions/Exception">
+        <eOperations name="addAllTestCasesFrom" eType="#/2/kunit/TestSuite" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9;  * Add to this suite, a set of test cases of type c, one for each&#xD;&#xA;&#x9;  * test method in class c. C must be a descendent of TestCase&#xD;&#xA;&#x9;  */"/>
           </eAnnotations>
@@ -5070,7 +5070,7 @@
             <details key="testCaseClassIsATestCase" value=""/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.kunit.TestSuite result = null;&#xA;{&#xA;&#x9;if( ! (testCaseClass. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; superClass(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; exists) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;kermeta.exceptions.Exception e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw e&#xA;}&#xA;}&#xA;&#xA;&#x9;testCaseClass. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; ownedOperation(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; select(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:8805]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:8772]);&#xA;&#xA;&#x9;&#xA;result  = this;&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.kunit.TestSuite result = null;&#xA;{&#xA;&#x9;if( ! (testCaseClass. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; superClass(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; exists) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;kermeta.exceptions.Exception e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;ethrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;testCaseClass. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; ownedOperation(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; select(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4303643]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4303610]);&#xA;&#xA;&#x9;&#xA;result  = this;&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="testCaseClass" eType="#/2/language/structure/Class"/>
         </eOperations>
@@ -5082,7 +5082,7 @@
             <details key="superOperation" value="kermeta::kunit::Test"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Void result = null;&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; tests(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:8846]);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Void result = null;&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; tests(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4303684]);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="addAllTestCasesFromAspects">
@@ -5090,7 +5090,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9;  * to be written #####################################################&#xD;&#xA;&#x9;  */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;anAspect. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; ownedOperation(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; select(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:8904]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:8871]);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;anAspect. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; ownedOperation(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; select(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4303742]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4303709]);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="testCaseClass" eType="#/2/language/structure/Class"/>
           <eParameters name="anAspect" eType="#/2/language/structure/ClassDefinition"/>
@@ -5114,12 +5114,12 @@
             <details key="body" value="&#xA;null result = null;&#xA;{}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="raiseIfHasFailures" eExceptions="#/2/kunit/AssertionFailedError">
+        <eOperations name="raiseIfHasFailures" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * operation used when the TestCase is run from a java test runner, encapsulates the failures results&#xD;&#xA;&#x9; * into an AssertionFailedError so the TestRunner can detect it&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;java.lang.String msg   = null;&#xA;&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; failures(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; empty) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;msg = &quot;Failures: &quot;;&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; failures(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:8959]);&#xA;&#xA;&#x9;kermeta.kunit.AssertionFailedError exception   = kermeta.kunit.KunitFactory.eINSTANCE.createAssertionFailedError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw exception&#xA;}&#xA;}&#xA;&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; empty) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:9003]);&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;java.lang.String msg   = null;&#xA;&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; failures(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; empty) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;msg = &quot;Failures: &quot;;&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; failures(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4303797]);&#xA;&#xA;&#x9;kermeta.kunit.AssertionFailedError exception   = kermeta.kunit.KunitFactory.eINSTANCE.createAssertionFailedError();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;exceptionthrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; empty) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4303841]);&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="getLog" eType="#/2/kunit/Log">
@@ -5169,7 +5169,7 @@
             <details key="superOperation" value="kermeta::kunit::Test"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Void result = null;&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newAttempt();&#xA;&#xA;&#x9;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; setUp();&#xA;&#xA;&#x9;{&#xA;&#x9;kermeta.interpreter.DynamicExpression de   = kermeta.interpreter.InterpreterFactory.eINSTANCE.createDynamicExpression();&#xA;&#xA;&#x9;de. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; initializeDefaults();&#xA;&#xA;&#x9;getSelfClass&#xA;&#xA;&#x9;de. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; parse(&quot;self.&quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;&#xA;&#x9;de. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; execute(this, kermeta.utils.Hashtable. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new);&#xA;&#xA;&#x9;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; tearDown();&#xA;&#xA;&#x9;catch(kermeta.exceptions.Exception e) {&#xA; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addTearDownError&#xA;}&#xA;&#xA;&#x9;catch(kermeta.kunit.AssertionFailedError afe) {&#xA; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addFailure&#xA;&#xA;&#x9;catch(kermeta.exceptions.Exception e1) {&#xA; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addTestError{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; tearDown();&#xA;&#xA;&#x9;catch(kermeta.exceptions.Exception e) {&#xA; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addTearDownError&#xA;}&#xA;}&#xA;&#xA;&#x9;catch(kermeta.exceptions.Exception e) {&#xA; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addSetUpError&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Void result = null;&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; newAttempt();&#xA;&#xA;&#x9;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; setUp();&#xA;&#xA;&#x9;{&#xA;&#x9;kermeta.interpreter.DynamicExpression de   = kermeta.interpreter.InterpreterFactory.eINSTANCE.createDynamicExpression();&#xA;&#xA;&#x9;de. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; initializeDefaults();&#xA;&#xA;&#x9;getSelfClass&#xA;&#xA;&#x9;de. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; parse(&quot;self.&quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;&#xA;&#x9;de. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; execute(this, kermeta.utils.Hashtable. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new);&#xA;&#xA;&#x9;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; tearDown();&#xA;&#xA;&#x9;catch( org.kermeta.compil.runtime.helper.exception.KRuntimeException e) {&#xA; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addTearDownError&#xA;}&#xA;&#xA;&#x9;catch( org.kermeta.compil.runtime.helper.exception.KRuntimeException afe) {&#xA; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addFailure&#xA;&#xA;&#x9;catch( org.kermeta.compil.runtime.helper.exception.KRuntimeException e1) {&#xA; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addTestError{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; tearDown();&#xA;&#xA;&#x9;catch( org.kermeta.compil.runtime.helper.exception.KRuntimeException e) {&#xA; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addTearDownError&#xA;}&#xA;}&#xA;&#xA;&#x9;catch( org.kermeta.compil.runtime.helper.exception.KRuntimeException e) {&#xA; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; getLog(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; addSetUpError&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="tearDown">
@@ -5210,7 +5210,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Prints the log or errors and failures from a test run.&#xD;&#xA;&#x9; * Run some tests first.&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Void result = null;&#xA;{&#xA;&#x9;System.out.println(&quot;&#xA;---------------------------------------------  TEST RESULTS-----------------------------------------------&#xA;&quot;);&#xA;&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; failures(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; empty) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;System.out.println(&quot;&#xA;Failures: &quot;);&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; failures(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:9245]);&#xA;}&#xA;}&#xA;&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; empty) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;System.out.println(&quot;&#xA;Errors: &quot;);&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:9281]);&#xA;}&#xA;}&#xA;&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; harnessErrors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; empty) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;System.out.println(&quot;&#xA;Errors from setUp or tearDown : &quot;);&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; harnessErrors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:9317]);&#xA;}&#xA;}&#xA;&#xA;&#x9;System.out.println(&quot;&#xA; Summary: &quot;);&#xA;&#xA;&#x9;System.out.println(&quot;   Number of launched tests : &quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;&#xA;&#x9;System.out.println(&quot;   Number of failures : &quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;&#xA;&#x9;System.out.println(&quot;   Number of errors : &quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;&#xA;&#x9;System.out.println(&quot;   Number of errors in setUp or tearDown: &quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;&#xA;&#x9;System.out.println(&quot;&#xA;-------------------------------------------------------------------------------------------------------------------------------&#xA;&quot;);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Void result = null;&#xA;{&#xA;&#x9;System.out.println(&quot;&#xA;---------------------------------------------  TEST RESULTS-----------------------------------------------&#xA;&quot;);&#xA;&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; failures(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; empty) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;System.out.println(&quot;&#xA;Failures: &quot;);&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; failures(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4304083]);&#xA;}&#xA;}&#xA;&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; empty) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;System.out.println(&quot;&#xA;Errors: &quot;);&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; errors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4304119]);&#xA;}&#xA;}&#xA;&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; harnessErrors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; empty) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;System.out.println(&quot;&#xA;Errors from setUp or tearDown : &quot;);&#xA;&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; log(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; harnessErrors(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4304155]);&#xA;}&#xA;}&#xA;&#xA;&#x9;System.out.println(&quot;&#xA; Summary: &quot;);&#xA;&#xA;&#x9;System.out.println(&quot;   Number of launched tests : &quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;&#xA;&#x9;System.out.println(&quot;   Number of failures : &quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;&#xA;&#x9;System.out.println(&quot;   Number of errors : &quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;&#xA;&#x9;System.out.println(&quot;   Number of errors in setUp or tearDown: &quot;. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; plus);&#xA;&#xA;&#x9;System.out.println(&quot;&#xA;-------------------------------------------------------------------------------------------------------------------------------&#xA;&quot;);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="run">
@@ -5391,6 +5391,7 @@
           <details key="documentation" value="/**&#xD;&#xA; * to be written #########################################&#xD;&#xA; */"/>
         </eAnnotations>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="KRuntimeException" instanceClassName="org.kermeta.compil.runtime.helper.exception.KRuntimeException"/>
     </eSubpackages>
     <eSubpackages name="persistence" nsURI="http://www.kermeta.org/kermeta/persistence/kermeta_temp_uri"
         nsPrefix="">
@@ -5426,7 +5427,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Search for elements referenced by one element contained by this resource that are not contained by this repository&#xD;&#xA;&#x9; * ie. element that EMF would claim as &quot;not contained in a resource&quot;&#xD;&#xA;&#x9; * checks only objects directly referenced by the elment in this resource, ignores inderecly referenced objects&#xD;&#xA;&#x9; * example of use :&#xD;&#xA;&#x9; *  var report : Set&amp;lt;DanglingDiagnostic&amp;gt;&#xD;&#xA;&#x9; *&#x9;report := resource.findDanglingModelElements()&#xD;&#xA;&#x9; *&#x9;report.each{ diag | stdio.writeln(diag.toString ) }&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Set result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.Set. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; contents(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:9595]);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Set result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.Set. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; contents(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4304433]);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eClassifier="#/2/standard/Set">
             <eTypeArguments eClassifier="#/2/persistence/DanglingDiagnostic"/>
@@ -5510,7 +5511,7 @@
           </eAnnotations>
           <eParameters name="instance" eType="#/2/language/structure/Object"/>
         </eOperations>
-        <eOperations name="save" eExceptions="#/2/exceptions/ResourceSaveException">
+        <eOperations name="save" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Resource.save()&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
@@ -5518,7 +5519,7 @@
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isReadOnly) {&#xA;{&#xA;&#x9;kermeta.exceptions.ResourceSaveException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createResourceSaveException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw e&#xA;}&#xA;}&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.basetypes.Resource.save(this, this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; uri,  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; metaModelURI, &quot;EMF&quot;, this, false)&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;if(  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; isReadOnly) {&#xA;{&#xA;&#x9;kermeta.exceptions.ResourceSaveException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createResourceSaveException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;ethrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.basetypes.Resource.save(this, this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; uri,  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; metaModelURI, &quot;EMF&quot;, this, false)&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="saveWithNewURI">
@@ -5541,7 +5542,7 @@
             <details key="body" value="&#xA;java.lang.Boolean result = null;&#xA;{&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.basetypes.Resource.save(this, this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; uri,  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; metaModelURI, &quot;EMF&quot;, this, true);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="load" eExceptions="#/2/exceptions/ResourceLoadException">
+        <eOperations name="load" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Resource.load()&#xD;&#xA;&#x9; * In case the metamodelURI was not previously set, metamodelURI is filled with&#xD;&#xA;&#x9; * the nsuri of the root package of the metamodel used to load the Resource after&#xD;&#xA;&#x9; * a successful load&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
@@ -5549,7 +5550,7 @@
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; clear();&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.basetypes.Resource.load(this,  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; uri,  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; metaModelURI, &quot;EMF&quot;)&#xA;&#xA;&#x9;if( (this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) == (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;System.out.println(&quot;Resource load failed!&quot;);&#xA;&#xA;&#x9;kermeta.exceptions.ResourceLoadException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createResourceLoadException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw e&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; clear();&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.basetypes.Resource.load(this,  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; uri,  &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; metaModelURI, &quot;EMF&quot;)&#xA;&#xA;&#x9;if( (this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; size) == (0) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; equals) {&#xA;{&#xA;&#x9;System.out.println(&quot;Resource load failed!&quot;);&#xA;&#xA;&#x9;kermeta.exceptions.ResourceLoadException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createResourceLoadException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;ethrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="add">
@@ -5560,7 +5561,7 @@
             <details key="superOperation" value="kermeta::standard::Set"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; repository(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; resources(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; select(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:10001]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:9978]);&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.language.Object.setContainingResource(instance, this)&#xA;&#xA;&#x9;//IP content of the current CallSuperOperation&#xA;super&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;null result = null;&#xA;{&#xA;&#x9; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; repository(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; resources(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; select(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4304839]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4304816]);&#xA;&#xA;&#x9;fr.irisa.triskell.kermeta.runtime.language.Object.setContainingResource(instance, this)&#xA;&#xA;&#x9;//IP content of the current CallSuperOperation&#xA;super&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="instance" eType="#/2/language/structure/Object"/>
         </eOperations>
@@ -5638,7 +5639,7 @@
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Search for elements referenced by one element contained by this repository  that are not contained by this repository&#xD;&#xA;&#x9; * ie. element that EMF would claim as &quot;not contained in a resource&quot;&#xD;&#xA;&#x9; * example of use :&#xD;&#xA;&#x9; *  var report : Set&amp;lt;DanglingDiagnostic&amp;gt;&#xD;&#xA;     *&#x9;report := repository.findDanglingModelElements()&#xD;&#xA;     *&#x9;report.each{ diag | stdio.writeln(diag.toString ) }&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.standard.Set result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.Set. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; resources(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:10074]);&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.standard.Set result = null;&#xA;{&#xA;&#x9;&#xA;result  = kermeta.standard.Set. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; new;&#xA;&#xA;&#x9;this. &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; resources(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; each(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4304912]);&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eGenericType eClassifier="#/2/standard/Set">
             <eTypeArguments eClassifier="#/2/persistence/DanglingDiagnostic"/>
@@ -5697,7 +5698,7 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Repository that stores and manages resources that come from EMF&#xD;&#xA; */"/>
         </eAnnotations>
-        <eOperations name="createResource" eType="#/2/persistence/Resource" eExceptions="#/2/exceptions/ResourceCreateException">
+        <eOperations name="createResource" eType="#/2/persistence/Resource" eExceptions="#/2/exceptions/KRuntimeException">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Repository.createResource(String, String)&#xD;&#xA;&#x9; * Create a new resource for a model given by its uri, &#xD;&#xA;&#x9; * which meta-model is stored in file given by mm_uri&#xD;&#xA;&#x9; * If file already exists, you'll be able to call the load method to concretly load the model&#xD;&#xA;&#x9; * otherwise, you can only call the save method&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
@@ -5705,7 +5706,7 @@
             <details key="superOperation" value="kermeta::persistence::Repository"/>
           </eAnnotations>
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="body" value="&#xA;kermeta.persistence.Resource result = null;&#xA;{&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; resources(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; collect(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:10480]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; contains) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.basetypes.Repository.createResource(this, uri, mm_uri);&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;kermeta.exceptions.ResourceCreateException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createResourceCreateException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;throw e&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
+            <details key="body" value="&#xA;kermeta.persistence.Resource result = null;&#xA;{&#xA;&#x9;if( ! ( &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; resources(). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; collect(//TODO LambdaExpression[kermeta::language::behavior::LambdaExpression:4305318]). &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; contains) &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; not) {&#xA;{&#xA;&#x9;&#xA;result  = fr.irisa.triskell.kermeta.runtime.basetypes.Repository.createResource(this, uri, mm_uri);&#xA;}&#xA;} else {&#xA;{&#xA;&#x9;kermeta.exceptions.ResourceCreateException e   = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createResourceCreateException();&#xA;&#xA;&#x9;getMessage&#xA;&#xA;&#x9;ethrow kermeta::exceptions::KRuntimeException&#xA;&#xA;}&#xA;}&#xA;}&#xA;return result;&#xA;"/>
           </eAnnotations>
           <eParameters name="uri" eType="#/2/standard/String"/>
           <eParameters name="mm_uri" eType="#/2/standard/String"/>

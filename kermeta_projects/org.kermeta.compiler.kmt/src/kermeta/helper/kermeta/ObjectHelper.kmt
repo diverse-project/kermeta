@@ -1,4 +1,4 @@
-/* $Id: ObjectHelper.kmt,v 1.6 2008-06-26 12:49:56 cfaucher Exp $
+/* $Id: ObjectHelper.kmt,v 1.7 2008-07-02 08:38:20 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -17,6 +17,7 @@ aspect class Object {
 		result := (classDefinition.allAttribute.detect{ p | p.asType(Property).name == propertyName }).asType(Property)
 	end
 	
+	//Navigate the containment path until the right type has been found
 	operation getContainerAsType(type : Type) : Object is do
 		result := void
 		var obj : Object init self
