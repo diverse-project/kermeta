@@ -1,0 +1,56 @@
+/* $Id: Component.kmt,v 1.1 2008/06/05 12:00:17 jdeanton Exp $
+ * Creation date: May 28, 2008
+ * License:
+ * Copyright:
+ * Authors:Julien DeAntoni
+ */
+
+
+
+package uml;
+
+
+require kermeta
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::exceptions
+using uml
+
+aspect class Component {
+
+method allOwnedElements() : Element[0..*] is do
+
+var mySet : OrderedSet<Element> init OrderedSet<Element>.new
+
+collaborationUse.each{el|mySet.add(el)}
+elementImport.each{el|mySet.add(el)}
+generalization.each{el|mySet.add(el)}
+interfaceRealization.each{el|mySet.add(el)}
+nestedClassifier.each{el|mySet.add(el)}
+ownedAttribute.each{el | mySet.add(el)}
+ownedBehavior.each{el | mySet.add(el)}
+ownedComment.each{el | mySet.add(el)}
+ownedConnector.each{el | mySet.add(el)}
+ownedOperation.each{el | mySet.add(el)}
+ownedReception.each{el | mySet.add(el)}
+ownedRule.each{el | mySet.add(el)}
+packagedElement.each{el | mySet.add(el) }
+realization.each{el | mySet.add(el) }
+mySet.add(ownedTemplateSignature.asType(Element))
+ownedTrigger.each{el | mySet.add(el)}
+ownedUseCase.each{el | mySet.add(el)}
+packageImport.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+substitution.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+templateBinding.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+
+
+
+
+result:=mySet
+end
+
+}
+
+

@@ -1,0 +1,47 @@
+/* $Id: Package.kmt,v 1.1 2008/06/05 12:00:17 jdeanton Exp $
+ * Creation date: May 28, 2008
+ * License:
+ * Copyright:
+ * Authors:Julien DeAntoni
+ */
+
+
+
+package uml;
+
+
+require kermeta
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::exceptions
+using uml
+
+aspect class Package {
+
+method allOwnedElements() : Element[0..*]	is do
+
+var mySet : OrderedSet<uml::Element> init OrderedSet<uml::Element>.new
+
+clientDependency.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+elementImport.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+ownedComment.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+ownedRule.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+if (not ownedTemplateSignature.isVoid()) then mySet.add(ownedTemplateSignature) end
+packageImport.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+packageMerge.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+profileApplication.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+
+packagedElement.each{el | mySet.add(el) }
+profileApplication.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+packageMerge.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+templateBinding.each{el | if (not el.isVoid()) then mySet.add(el) end } 
+
+		
+		result:=mySet
+	end
+
+
+}
+
