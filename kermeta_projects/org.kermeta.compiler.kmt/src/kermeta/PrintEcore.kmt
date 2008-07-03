@@ -1,0 +1,109 @@
+/* $Id: PrintEcore.kmt,v 1.1 2008-07-03 15:39:26 cfaucher Exp $
+ * Creation date: January 24, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+@usage "launcher"
+@mainClass "ecore::Printer"
+@mainOperation "printEcore"
+
+package ecore;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::language::structure
+using kermeta::persistence
+
+/**
+ * Load and print (structure and the ) an Ecore model
+ */
+class Printer {
+
+    operation printEcore() : Void is do
+    
+    	var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/framework.ecore"
+		var inputRepository : EMFRepository init EMFRepository.new
+		var modelResource : Resource init inputRepository.getResource(input)		
+	    
+	    //var ecore_root_package : EPackage init modelResource.instances.one.asType(EPackage)
+		
+		// Print in the console the Java
+		stdio.writeln(" - Start Ecore printing -\n")
+		modelResource.instances.each{ p |
+			if p.isInstanceOf(EPackage) then
+				p.asType(EPackage).printEcore()
+			end
+		}
+		stdio.writeln("\n - Finish Ecore printing -")
+    end
+    
+}
+
+aspect class EObject {}
+
+aspect class EPackage {
+	operation printEcore() : Void is do
+		stdio.writeln(self.name)
+		
+		self.eClassifiers.each{ e |
+			e.printEcore()
+		}
+		
+		self.eSubpackages.each{ p |
+			p.printEcore()
+		}
+	end
+}
+
+aspect class EClassifier {
+	operation printEcore() : Void is do
+	end
+}
+
+aspect class EClass {
+	method printEcore() : Void is do
+		stdio.writeln("\tEClass: " + self.name)
+		
+		self.eStructuralFeatures.each{ sf |
+			sf.printEcore()
+		}
+		
+		self.eOperations.each{ o |
+			o.printEcore()
+		}
+	end
+}
+
+aspect class EStructuralFeature {
+	operation printEcore() : Void is do
+		stdio.writeln("\t  EStructuralFeature: " + self.name)
+	end
+}
+
+aspect class EOperation {
+	operation printEcore() : Void is do
+		stdio.writeln("\t  EOperation: " + self.name)
+		
+		self.eAnnotations.each{ a |
+			a.printEcore()
+		}
+	end
+}
+
+aspect class EAnnotation {
+	operation printEcore() : Void is do
+	
+		if self.source == "http://www.eclipse.org/emf/2002/GenModel" then
+			self.details.each{ d |
+				if d.key == "body" then
+					stdio.writeln("\t    Java: " + d.~value)
+					stdio.writeln("======================================================================")
+				end
+			}
+				
+		end
+	end
+}
