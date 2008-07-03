@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.kermeta.compiler.runtime.configuration; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Activator: org.kermeta.kruntimeconfiguration.provider.KRuntimeConfigurationEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.kermeta.kruntimeconfiguration,
+ org.kermeta.kruntimeconfiguration.impl,
+ org.kermeta.kruntimeconfiguration.presentation,
+ org.kermeta.kruntimeconfiguration.provider,
+ org.kermeta.kruntimeconfiguration.tests,
+ org.kermeta.kruntimeconfiguration.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.junit;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.emf.edit.ui;visibility:=reexport,
+ org.eclipse.ui.ide;visibility:=reexport
+Eclipse-LazyStart: true

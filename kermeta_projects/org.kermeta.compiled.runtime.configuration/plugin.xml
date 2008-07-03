@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2008-07-03 15:20:45 ftanguy Exp $
+-->
+
+<plugin>
+
+  <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+    <factory 
+       uri = "http://www.kermeta.org/kruntimeconfiguration" 
+       class = "org.kermeta.kruntimeconfiguration.provider.KruntimeconfigurationItemProviderAdapterFactory"
+       supportedTypes = 
+         "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+          org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+          org.eclipse.emf.edit.provider.ITreeItemContentProvider
+          org.eclipse.emf.edit.provider.IItemLabelProvider
+          org.eclipse.emf.edit.provider.IItemPropertySource" />
+  </extension>
+  
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package
+       uri = "http://www.kermeta.org/kruntimeconfiguration"
+       class = "org.kermeta.kruntimeconfiguration.KruntimeconfigurationPackage"
+       genModel = "model/KRuntimeConfiguration.genmodel" /> 
+  </extension>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "org.kermeta.kruntimeconfiguration.presentation.KruntimeconfigurationModelWizardID"
+      name = "%_UI_KruntimeconfigurationModelWizard_label"
+      class = "org.kermeta.kruntimeconfiguration.presentation.KruntimeconfigurationModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/KruntimeconfigurationModelFile.gif">
+      <description>%_UI_KruntimeconfigurationModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "org.kermeta.kruntimeconfiguration.presentation.KruntimeconfigurationEditorID"
+        name = "%_UI_KruntimeconfigurationEditor_label"
+        icon = "icons/full/obj16/KruntimeconfigurationModelFile.gif"
+        extensions = "kruntimeconfiguration"
+        class = "org.kermeta.kruntimeconfiguration.presentation.KruntimeconfigurationEditor" 
+        contributorClass="org.kermeta.kruntimeconfiguration.presentation.KruntimeconfigurationActionBarContributor" >
+    </editor>
+  </extension>    
+</plugin>
