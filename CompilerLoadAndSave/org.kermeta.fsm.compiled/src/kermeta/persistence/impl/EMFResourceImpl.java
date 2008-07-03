@@ -1,9 +1,11 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: EMFResourceImpl.java,v 1.1 2008-07-02 09:13:18 ftanguy Exp $
+ * $Id: EMFResourceImpl.java,v 1.2 2008-07-03 15:22:00 ftanguy Exp $
  */
 package kermeta.persistence.impl;
+
+import java.io.IOException;
 
 import kermeta.language.structure.Object;
 import kermeta.persistence.EMFResource;
@@ -13,7 +15,8 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.kermeta.compil.runtime.helper.basetypes.PersistenceUtil;
+import org.kermeta.compil.runtime.helper.basetypes.Loader;
+import org.kermeta.compil.runtime.helper.basetypes.Saver;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,34 +72,9 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource
 		  setValues( new BasicEList<Object>() );
 	  else
 		  getValues().clear();
-	  EList<EObject> contents = PersistenceUtil.load(getUri(), getMetaModelURI());
-	  for ( EObject o : contents )
-		  getValues().add( (Object) o );
-	/*  setValues( new BasicEList<kermeta.language.structure.Object>() );
-		
-	  ResourceSet resourceSet = new ResourceSetImpl();
-	  // Register the appropriate resource factory to handle all file
-	  // extensions.
-	  resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		
-	  URI uri = URI.createURI(getUri());
-	  org.eclipse.emf.ecore.resource.Resource basicResource = resourceSet.createResource(uri);
 
-	  BasicExtendedMetaData metadata = new BasicExtendedMetaData();
-	  metadata.putPackage( getMetaModelURI(), Mapping.INSTANCE().getEPackageForLoading(getMetaModelURI()));
-		
-	  Map options = new HashMap();
-	  options.put(XMLResource.OPTION_EXTENDED_META_DATA, metadata);
-
-	  try {
-		  basicResource.load(options);
-		  for (java.lang.Object o : basicResource.getContents()) {
-			  getValues().add( (kermeta.language.structure.Object) o );
-		  }
-	  } catch (IOException e) {
-		  e.printStackTrace();
-	  }*/
-  
+	  for ( EObject o : Loader.load(getUri(), getMetaModelURI()) )
+		  getValues().add( (Object) o );  
   }
   
   /**
@@ -108,39 +86,11 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource
 	  EList<EObject> contents = new BasicEList<EObject>();
 	  for ( Object o : getValues() )
 		  contents.add(o);
-	  PersistenceUtil.saveWithNewURI(contents, new_uri, getMetaModelURI());
-	 /* ResourceSet resourceSet = new ResourceSetImpl();
-	  
-		// Register the appropriate resource factory to handle all file
-		// extensions.
-		//
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
-						new XMIResourceFactoryImpl());
-	  
-	  URI uri = URI.createURI(new_uri);
-	  org.eclipse.emf.ecore.resource.Resource basicResource = resourceSet.createResource(uri);
-
-	  org.eclipse.emf.ecore.EPackage realMetamodel = Mapping.INSTANCE().getEPackageForSaving(getMetaModelURI());
-	  
-	  BasicExtendedMetaData metadata = new BasicExtendedMetaData();
-	  metadata.putPackage( getMetaModelURI(), realMetamodel );
-
-	  XMLMap xmlMap = new XMLMapImpl();
-	  XMLInfo info = new XMLInfoImpl();
-	  info.setTargetNamespace( realMetamodel.getNsURI() );
-	  xmlMap.add( getValues().get(0).eClass(), info);
-	  
-	  Map options = new HashMap();
-	  options.put(XMLResource.OPTION_EXTENDED_META_DATA, metadata);
-	  options.put(XMLResource.OPTION_XML_MAP, xmlMap);
-	  
 	  try {
-		  basicResource.getContents().addAll( getValues() );
-		  basicResource.save(options);
-	  } catch (IOException e) {
-		  e.printStackTrace();
-	  }  */
+		Saver.save(contents, new_uri, getMetaModelURI());
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
   }
 
 } //EMFResourceImpl

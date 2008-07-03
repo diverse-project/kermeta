@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadSaveLoadFSM.java,v 1.1 2008-07-02 09:13:35 ftanguy Exp $
+/*$Id: LoadSaveLoadFSM.java,v 1.2 2008-07-03 15:22:00 ftanguy Exp $
 * Project : org.kermeta.framework.compiled.runtime
 * File : 	Test.java
 * License : EPL
@@ -12,16 +12,14 @@
 
 package org.kermeta.framework.compiled.test;
 
-import java.io.IOException;
+import kermeta.persistence.PersistenceFactory;
+import kermeta.persistence.Repository;
+import kermeta.persistence.Resource;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.compil.runtime.helper.basetypes.Loader;
-import org.kermeta.compil.runtime.helper.basetypes.Saver;
+import org.kermeta.compil.runtime.helper.basetypes.PersistenceMapping;
 
 import fr.irisa.triskell.kermeta.samples.fsm.FsmPackage;
 
@@ -31,6 +29,16 @@ public class LoadSaveLoadFSM {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		String path = "/home/paco/kpm-workbench/org.kermeta.fsm.compiled/models/";
+		PersistenceMapping.initialize( path + "fsm.kruntimeconfiguration");
+		
+		Repository repository = PersistenceFactory.eINSTANCE.createEMFRepository();
+		Resource resource = repository.createResource(path + "sample1.fsm", "http://www.kermeta.org/fsm");
+		resource.load();
+		resource.saveWithNewURI(path + "sample2.fsm");
+		System.out.println();
+	/*	
+		
 		// First load
 		System.out.println("Load model conformant to plugin implementation.");
 		ResourceSet resourceset1 = createResourceSet();
@@ -85,7 +93,7 @@ public class LoadSaveLoadFSM {
 			e.printStackTrace();
 		}
 		
-		System.out.println();
+		System.out.println();*/
 
 	}
 

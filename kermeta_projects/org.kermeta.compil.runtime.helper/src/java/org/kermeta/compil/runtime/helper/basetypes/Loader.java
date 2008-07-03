@@ -1,38 +1,31 @@
 package org.kermeta.compil.runtime.helper.basetypes;
 
-import java.lang.reflect.Field;
-import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 public class Loader extends SaverOrLoader {
 	
-	static public EObject load(EObject o, String metamodelURI) {
-		return new Loader().clone(o, metamodelURI);
+	static public List<EObject> load(String modelURI, String metamodelURI) {
+		Loader l = new Loader();
+		List<EObject> instances = new ArrayList<EObject>();
+		ResourceSet rs = new ResourceSetImpl();
+		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource( URI.createURI(modelURI), true );
+		for ( EObject o : resource.getContents() )
+			instances.add( l.clone(o, metamodelURI) );
+		return instances;			
 	}
 	
 	public Loader() {
 		super();
-		initialize();
-	}
-	
-	/**
-	 * A table mapping factories coming from plugins and factories coming from code generated from Kermeta.
-	 */
-	protected Hashtable<String, String> _typeMapping = new Hashtable<String, String>();
-	
-	/**
-	 * Static code initializing the mapping table.
-	 * Because at runtime we are going to get the class implementation, the mapping is from the implementation to the interface.
-	 */
-	private void initialize() {
-		_typeMapping.put("fr.irisa.triskell.kermeta.samples.fsm.impl.FsmFactoryImpl", "fsm.FsmFactory");
-		_typeMapping.put("org.eclipse.emf.ecore.impl.EcoreFactoryImpl", "ecore.EcoreFactory");
 	}
 	
 	private EObject clone(EObject o, String metamodelURI) {
@@ -46,7 +39,6 @@ public class Loader extends SaverOrLoader {
 		return null;
 	}
 
-	
 	private void cloneEObject(EObject sourceObject, EObject targetObject, EFactory factory) {
 		for ( EStructuralFeature sourceFeature : sourceObject.eClass().getEAllStructuralFeatures() ) {
 			Object value = sourceObject.eGet(sourceFeature);
@@ -99,24 +91,7 @@ public class Loader extends SaverOrLoader {
 	
 	@Override
 	protected EFactory getFactory(String metamodelURI) {
-		// Getting the package with the given uri.
-		EPackage p = EPackage.Registry.INSTANCE.getEPackage(metamodelURI);
-		// Getting the factory for that package.
-		EFactory oldFactory = p.getEFactoryInstance();
-		// Get the qualified name in the java sense, must give the implementation class.
-		String qualifiedName = oldFactory.getClass().getCanonicalName();
-		// Look in the mapping table for the factory name to use.
-		String interfaceName = _typeMapping.get(qualifiedName);
-		try {
-			// Load the interface and get the unique instance calling eINSTANCE attribute.
-			// If any exception is raised returns null.
-			Class<?> interfaz = Thread.currentThread().getContextClassLoader().loadClass(interfaceName);
-			Field field = interfaz.getField("eINSTANCE");
-			EFactory newFactory = (EFactory) field.get(interfaz);
-			return newFactory;
-		} catch (Exception e) {
-			return null;
-		}
+		return PersistenceMapping.getEPackageForLoading(metamodelURI).getEFactoryInstance();
 	}
 
 }

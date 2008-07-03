@@ -1,17 +1,30 @@
 package org.kermeta.compil.runtime.helper.basetypes;
 
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 public class Saver extends SaverOrLoader {
 	
-	static public EObject save(EObject o, String metamodelURI) {
-		return new Saver().clone(o, metamodelURI);
+	static public void save(List<EObject> contents, String modelURI, String metamodelURI) throws IOException {
+		Saver s = new Saver();
+		List<EObject> instancesToSave = new ArrayList<EObject>();
+		for ( EObject o : contents )
+			instancesToSave.add( s.clone(o, metamodelURI) );
+		ResourceSet resourceSet = new ResourceSetImpl();
+		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource( URI.createURI(modelURI) );
+		resource.getContents().addAll(instancesToSave);
+		resource.save(null);
 	}
 		
 	private EObject clone(EObject o, String metamodelURI) {
@@ -87,9 +100,7 @@ public class Saver extends SaverOrLoader {
 	
 	@Override
 	protected EFactory getFactory(String metamodelURI) {
-		// Getting the package with the given uri.
-		EPackage p = EPackage.Registry.INSTANCE.getEPackage(metamodelURI);
-		return p.getEFactoryInstance();
+		return PersistenceMapping.getEPackageForSaving(metamodelURI).getEFactoryInstance();
 	}
 
 }
