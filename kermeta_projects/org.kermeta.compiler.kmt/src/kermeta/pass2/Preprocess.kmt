@@ -1,4 +1,4 @@
-/* $Id: Preprocess.kmt,v 1.1 2008-07-02 08:38:20 cfaucher Exp $ 
+/* $Id: Preprocess.kmt,v 1.2 2008-07-03 09:24:53 cfaucher Exp $ 
  * Creation : July 1, 2008
  * Licence  : EPL 
  * Copyright:
@@ -11,17 +11,23 @@ package kermeta::language::structure;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/KermetaHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using ecore
+using km2ecore
 
 aspect class ModelingUnit {
 
-	operation preprocess() : Void is do 
+	/**
+	 * We cannot use an Alias to define this indiretion because the concept of KRuntimeException does not exist
+	 * in framework.ecore, thus we create in this operation a new EDataType that targets the KRuntimeException Java Impl
+	 */
+	operation preprocess( context : KM2EcoreContext ) : Void is do 
 		
 		//Creation of an EDataType for the exception
 		var exception_EDataType : EDataType init EDataType.new
 		exception_EDataType.name := "KRuntimeException"
-		exception_EDataType.instanceClassName := "org.kermeta.compil.runtime.helper.exception.KRuntimeException"
+		exception_EDataType.instanceClassName := context.JAVA_CLASS_EXCEPTION_SWITCHER
 		exception_EDataType.serializable := false
 		
 		stdio.writeln("retrievePackage() " + retrievePackage("kermeta::exceptions").name)

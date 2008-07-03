@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.24 2008-07-02 08:38:20 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.25 2008-07-03 09:24:53 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -506,8 +506,8 @@ package behavior {
 				
 			end
 			
-			result := self.expression.createBehaviorJava(context)
-			result := result + "throw kermeta::exceptions::KRuntimeException\n"
+			result := self.expression.createBehaviorJava(context) + "\n"
+			result := result + "throw new " + context.JAVA_CLASS_EXCEPTION_SWITCHER + "(" + self.expression.createBehaviorJava(context) + ");\n"
 		end
 	}
 	
@@ -516,7 +516,7 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := "catch"
 			if not self.exceptionName.isVoid() then
-				result := result + "( org.kermeta.compil.runtime.helper.exception.KRuntimeException " + self.exceptionName + ")"
+				result := result + "( " + context.JAVA_CLASS_EXCEPTION_SWITCHER + " " + self.exceptionName + ")"
 				//result := result + "(" + self.exceptionType.createBehaviorJava(context) + " " + self.exceptionName + ")"
 			end
 			result := result + " {\n"
