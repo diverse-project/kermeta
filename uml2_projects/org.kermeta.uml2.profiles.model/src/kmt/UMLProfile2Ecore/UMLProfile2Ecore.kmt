@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2Ecore.kmt,v 1.6 2008-03-12 13:24:59 gperroui Exp $
+/* $Id: UMLProfile2Ecore.kmt,v 1.7 2008-07-03 07:16:17 gperroui Exp $
  * Creation date: November 29, 2007
  * License: EPL
  * Copyright:
@@ -46,7 +46,7 @@ class Main
  		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/UML_Standard_Profile.Validation_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/UML_Standard_Profile.Validation_Profile.profile.ecore",true)
  		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/AProfile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/AProfile.ecore",true)
  		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BProfile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BProfile.ecore",true)
- 		main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/MARTE.profile.uml","platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/MARTE.profile.ecore",true)
+ 		main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/SysML.profile.uml","platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/SysML.profile.ecore",true)
  	end
  	
 	operation main(input : String, output : String, isProfiled: Boolean) : Void is do 

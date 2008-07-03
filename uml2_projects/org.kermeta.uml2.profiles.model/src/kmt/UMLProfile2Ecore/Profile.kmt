@@ -1,4 +1,4 @@
-/* $Id: Profile.kmt,v 1.5 2008-03-12 13:24:59 gperroui Exp $
+/* $Id: Profile.kmt,v 1.6 2008-07-03 07:16:17 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -403,9 +403,10 @@ if att != void then
 else
 	if ref != void then
 		trace.traceLog("Dealing with EReference :" + self.name)
+		if self.~class != void then
 		var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.~class.asType(uml::Class).getQualifiedName)
 		ref.eContainingClass := e.asType(ecore::EClass)
-
+		end
 		// reference having base_ in their name refers to the metaclass 
 		//their containing stereotype extends. we need to retrieve it from the trace hashtables 
 		if ref.name.indexOf("base_") != -1 then

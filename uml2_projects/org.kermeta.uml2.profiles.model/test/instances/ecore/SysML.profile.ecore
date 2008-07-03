@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="SysML"
+    nsURI="http://SysML" nsPrefix="SysML">
+  <eSubpackages name="ModelElements" nsURI="http://SysML/ModelElements" nsPrefix="ModelElements">
+    <eClassifiers xsi:type="ecore:EClass" name="Conform">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Dependency" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Dependency"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="View">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoint" eType="#//ModelElements/ViewPoint"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ViewPoint">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="stakeHolders" upperBound="-1"
+          eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="purpose" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="concerns" upperBound="-1"
+          eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="languages" upperBound="-1"
+          eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="methods" upperBound="-1"
+          eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Rationale">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Comment" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Comment"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Problem">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Comment" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Comment"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Blocks" nsURI="http://SysML/Blocks" nsPrefix="Blocks">
+    <eClassifiers xsi:type="ecore:EClass" name="Block">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEncapsulated" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DistributedProperty">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Property"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Dimension">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_InstanceSpecification"
+          ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//InstanceSpecification"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Unit">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_InstanceSpecification"
+          ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//InstanceSpecification"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dimension" eType="#//Blocks/Dimension"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ValueType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#//Blocks/Unit"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dimension" eType="#//Blocks/Dimension"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NestedConnectorEnd">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="propertyPath" lowerBound="2"
+          upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Property"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_ConnectorEnd" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//ConnectorEnd"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ParticipantProperty">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Property"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="end" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Property"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConnectorProperty">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Property"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="connector" lowerBound="1"
+          eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Connector"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingConnector">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Connector" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Connector"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PropertySpecificType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Classifier" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Classifier"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="PortAndFlows" nsURI="http://SysML/PortAndFlows" nsPrefix="PortAndFlows">
+    <eClassifiers xsi:type="ecore:EClass" name="FlowPort">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Port" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Port"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtomic" lowerBound="1"
+          eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isConjugated" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+          eType="#//PortAndFlows/FlowDirection"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FlowProperty">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Property"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+          eType="#//PortAndFlows/FlowDirection"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FlowSpecification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Interface" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Interface"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="FlowDirection">
+      <eLiterals name="in"/>
+      <eLiterals name="out" value="1"/>
+      <eLiterals name="inout" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ItemFlow">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_InformationFlow"
+          ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//InformationFlow"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="itemProperty" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Property"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Constraints" nsURI="http://SysML/Constraints" nsPrefix="Constraints">
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintBlock" eSuperTypes="#//Blocks/Block"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintProperty">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Property"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Activities" nsURI="http://SysML/Activities" nsPrefix="Activities">
+    <eClassifiers xsi:type="ecore:EClass" name="Optionnal">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Parameter" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Parameter"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Rate">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Parameter" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Parameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_ActivityEdge" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//ActivityEdge"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rate" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//InstanceSpecification"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Probability">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_ActivityEdge" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//ActivityEdge"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_ParameterSet" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//ParameterSet"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="probability" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//ValueSpecification"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Continuous" eSuperTypes="#//Activities/Rate"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Discrete" eSuperTypes="#//Activities/Rate"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ControlOperator">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Operation" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Behavior" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Behavior"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NoBuffer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_ObjectNode" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//ObjectNode"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Overwrite">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_ObjectNode" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//ObjectNode"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Allocations" nsURI="http://SysML/Allocations" nsPrefix="Allocations">
+    <eClassifiers xsi:type="ecore:EClass" name="Allocate">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Abstraction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Allocated">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//NamedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedFrom" upperBound="-1"
+          eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//NamedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedTo" upperBound="-1"
+          eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//NamedElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AllocateActivityPartition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_ActivityPartition"
+          ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//ActivityPartition"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Requirements" nsURI="http://SysML/Requirements" nsPrefix="Requirements">
+    <eClassifiers xsi:type="ecore:EClass" name="DeriveReqt"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Verify"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Copy"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Satisfy">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Realization" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Realization"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TestCase">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Behavior" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Behavior"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Operation" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="verifies" upperBound="-1"
+          eType="#//Requirements/Requirement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="VerdictKind">
+      <eLiterals name="pass"/>
+      <eLiterals name="fail" value="1"/>
+      <eLiterals name="inconclusive" value="2"/>
+      <eLiterals name="error" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Requirement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1"
+          eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="derived" upperBound="-1"
+          eType="#//Requirements/Requirement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="derivedFrom" upperBound="-1"
+          eType="#//Requirements/Requirement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="satisfiedBy" upperBound="-1"
+          eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//NamedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refinedBy" upperBound="-1"
+          eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//NamedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="tracedTo" upperBound="-1"
+          eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//NamedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="verifiedBy" upperBound="-1"
+          eType="#//Requirements/TestCase"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="master" lowerBound="1"
+          eType="#//Requirements/Requirement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RequirementRelated">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//NamedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="tracedFrom" upperBound="-1"
+          eType="#//Requirements/Requirement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="satisfies" upperBound="-1"
+          eType="#//Requirements/Requirement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refines" upperBound="-1"
+          eType="#//Requirements/Requirement"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Interactions" nsURI="http://SysML/Interactions" nsPrefix="Interactions"/>
+  <eSubpackages name="StateMachines" nsURI="http://SysML/StateMachines" nsPrefix="StateMachines"/>
+  <eSubpackages name="UseCases" nsURI="http://SysML/UseCases" nsPrefix="UseCases"/>
+</ecore:EPackage>
