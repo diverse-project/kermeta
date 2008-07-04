@@ -1,4 +1,4 @@
-/* $Id: CustomWeaver.kmt,v 1.4 2008-06-24 14:39:11 bmorin Exp $
+/* $Id: CustomWeaver.kmt,v 1.5 2008-07-04 10:04:45 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -33,8 +33,13 @@ class Weaver
 	
 	attribute adapter : Adapter
 	
+	attribute keepModelFacts : Boolean
+	attribute keepQuery : Boolean
+	
 	operation initWeaver() is
 	do
+		keepModelFacts := false
+		keepQuery := false
 		if matcher == void then
 			matcher := PatternMatchingFlora2.new
 		end
@@ -76,8 +81,13 @@ class Weaver
 	end
 
 	operation saveModel(model : String, metamodel : String)is
-	do  	
-    	resourceModel.saveWithNewURI(model) 
+	do  
+		stdio.errorln(model+", "+metamodel)
+		var repository : EMFRepository init EMFRepository.new
+		var newResource : Resource init repository.createResource(model,metamodel)
+		newResource.instances.add(resourceModel.one)
+		newResource.saveWithNewURI(model)
+    	//resourceModel.saveWithNewURI(model) 
 	end
 
 	operation finalizeWeaver() is
@@ -88,23 +98,8 @@ class Weaver
 	end
 
 	operation weaving(domainMMUri : String, domainMMPatternUri : String) : Void is do
-		/*var continue : Boolean init true
-		stdio.writeln("Checking all invariants before weaving")
-		do
-			resourceModel.instances.one.checkAllInvariantsIte
-		rescue (e : kermeta::exceptions::ConstraintViolatedInv)
-			stdio.errorln(e.message)
-			do 
-				continue := stdio.read("$>Base model violates invariants. Continue weaving ? (y/n): ").toBoolean
-			rescue (e2 : kermeta::exceptions::Exception)
-				stdio.errorln("Cannot read value. Default value = n")
-				continue := false
-			end
-		end
-		stdio.writeln("")
-	
-		if continue then*/
-	
+			var time : Integer
+
 			adapter.initClone
 		
 			/*---Pattern matching---*/
@@ -114,30 +109,52 @@ class Weaver
 			
 			var iteBindings : Iterator<Hashtable<Object, Object>> 
 			init Iterator<Hashtable<Object, Object>>.new
-			iteBindings := matcher.optimizedMatch(inputMetamodel, resourceModel.instances, adapter.~aspect.template, true, false, false)
+			/*
+			 * Boolean: 
+			 * 1) does the metamodel remain unchanged ? 
+			 * 2) does the model remain unchanged or the weaving do not make new join points to appear
+			 *     -> TODO: Freddy
+			 * 3) does the query remain unchanged
+			 */
+			extern org::diva::causalLink::smartadapters::fractal::KermetaDate.start(self)
+			iteBindings := matcher.optimizedMatch(inputMetamodel, resourceModel.instances, adapter.~aspect.template, true, keepModelFacts, keepQuery)
+			time ?= extern org::diva::causalLink::smartadapters::fractal::KermetaDate.getTime(self)
+			stdio.errorln("Matching took "+(time.toReal/(1000.toReal)).toString+" s")
 					       
 			/*---Applying the adapter to the base model---*/       
 			var binding : Hashtable<Object, Object>			
-			adapter.setDisplayInfo(false)
+			adapter.setDisplayInfo(true)
 			stdio.writeln("Weaving the graft model into the base model...")
 			stdio.writeln("  - contextualization of the interface model with the result of the Prolog query")
 			stdio.writeln("  - conversion MM' (interface/graft model) -> MM (base model)")
 			stdio.writeln("  - execution of the sequence of adaptations")
-			if iteBindings.hasNext() then
-				adapter.apply(iteBindings.next) //aspect weaving: do not require domain concepts
-			else
-				stdio.writeln("No join point!")
+
+			if not iteBindings.hasNext() then
+				stdio.errorln("No join point!")
+			else		
+				from iteBindings
+				until iteBindings.isOff
+				loop
+					extern org::diva::causalLink::smartadapters::fractal::KermetaDate.start(self)
+					adapter.apply(iteBindings.next) //aspect weaving: do not require domain concepts
+					if iteBindings.hasNext() then
+						adapter.updateClones
+					end
+					time ?= extern org::diva::causalLink::smartadapters::fractal::KermetaDate.getTime(self)
+					stdio.errorln("Weaving took "+(time.toReal/(1000.toReal)).toString+" s")	
+				end
+					
+				stdio.writeln("")
+				stdio.writeln("Checking all invariants after weaving")
+				extern org::diva::causalLink::smartadapters::fractal::KermetaDate.start(self)
+				do	
+					resourceModel.instances.one.checkAllInvariants
+				rescue (e : kermeta::exceptions::ConstraintViolatedInv)
+					stdio.errorln(e.message)
+				end
+				time ?= extern org::diva::causalLink::smartadapters::fractal::KermetaDate.getTime(self)
+				stdio.errorln("Checking invariants took "+(time.toReal/(1000.toReal)).toString+" s")
+				stdio.writeln("")
 			end
-			
-			/*stdio.writeln("")
-			stdio.writeln("Checking all invariants after weaving")
-			do
-				resourceModel.instances.one.checkAllInvariantsIte
-			rescue (e : kermeta::exceptions::ConstraintViolatedInv)
-				stdio.errorln(e.message)
-				//stdio.errorln(e.stackTrace)
-			end*/
-			stdio.writeln("")
-		//end	
 	end	
 }

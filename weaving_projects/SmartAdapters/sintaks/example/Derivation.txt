@@ -1,4 +1,0 @@
- derivation  {  
-  	  options  :  none  
-  	  alternatives  :  A1  #  V1.1  ;  A2  #  "adapt 2.2"  ;  
-  } 

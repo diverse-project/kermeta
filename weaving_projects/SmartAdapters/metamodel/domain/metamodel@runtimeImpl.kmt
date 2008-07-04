@@ -14,6 +14,9 @@ require kermeta
 require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
 require "platform:/resource/SmartAdapters/program/weaving/aspectizedFramework.kmt"
 
+require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
+using weaver
+
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
@@ -26,11 +29,18 @@ package display{
 		reference root : DisplayElement
 		reference table : StringTable
 		
+		reference weaver : Weaver
+		
 		operation ~init() is
 		do
 			stack := Stack<DisplayElement>.new
 			table := StringTable.new
 			table.~init(self)
+			
+			if weaver == void then
+				weaver := Weaver.new
+				weaver.initWeaver
+			end
 		end
 		
 		operation enter(current : DisplayElement) is
@@ -261,10 +271,17 @@ package instance{
 						context.table.newLine
 				 	}
 			context.table.displayTable
+			askForDisplayBinding(hash,context)
+		end
+		
+		operation askForDisplayBinding(hash : Hashtable<Integer, TransmissionBinding>, context : DisplayContext) is
+		do
 			var param : String init stdio.read("Display server: ")
 			if param != void and param != "" then
 				context.enter(hash.getValue(param.toInteger).asType(TransmissionBinding).serverInstance)
-			end				
+			end
+		rescue
+			askForDisplayBinding(hash, context)
 		end
 	}
 	
@@ -289,6 +306,7 @@ package instance{
 			displaySubComponent(context)
 			//root element
 			if self.container.asType(System) != void then
+				weaveAspect(context)
 				loadModel(context)
 				displayServices(context)
 			end	
@@ -312,10 +330,17 @@ package instance{
 						context.table.newLine
 				 	}
 			context.table.displayTable
+			askForDisplaySubComponent(hash, context)
+		end
+		
+		operation askForDisplaySubComponent(hash : Hashtable<Integer, ComponentInstance>, context : DisplayContext) is
+		do
 			var param : String init stdio.read("Display subComponent: ")
 			if param != void and param != "" then
 				context.enter(hash.getValue(param.toInteger).asType(ComponentInstance))
 			end
+		rescue
+			askForDisplaySubComponent(hash, context)
 		end
 	
 		method invoke(op : Operation) is
@@ -337,6 +362,20 @@ package instance{
 			end
 		end
 		
+		operation weaveAspect(context : DisplayContext) is
+		do
+			var aspectURI : String init stdio.read("Enter the path (right button->Properties->Path:) of an aspect: ")
+			if aspectURI != void and aspectURI != "" then
+				context.weaver.loadMetamodel("platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore")
+				context.weaver.loadMetamodelPattern("platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore")
+				context.weaver.loadModel("platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/woven/newReferenceModel.art", "http://art")
+				context.weaver.loadAdapter("platform:/resource"+aspectURI, "platform:/resource/SmartAdapters/metamodel/specific/runtime_AOM_Framework1.ecore")					
+				context.weaver.weaving("platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore", "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore")
+				context.weaver.saveModel("platform:/resource/SmartAdapters/examples/serviceDiscovery/model/temp/woven.art", "http://art")
+				extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.loadUpdateModel(self, "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/temp/woven.art")
+			end
+		end	
+		
 		operation loadModel(context : DisplayContext) is
 		do
 			context.vSpace
@@ -357,7 +396,12 @@ package instance{
 					end
 					var context : DisplayContext init DisplayContext.new 
 					context.~init
-					var root : CompositeInstance init resource.instances.one.asType(System).root  
+					var root : CompositeInstance init resource.instances.one.asType(System).root
+					do 
+						root.checkAllInvariantsIte
+					rescue (e : kermeta::exceptions::ConstraintViolatedInv)
+						stdio.errorln(e.message)
+					end 
 					context.setRoot(root)
 					context.enter(root)
 				rescue (e : kermeta::exceptions::FileNotFoundException)
@@ -373,7 +417,6 @@ package instance{
 			var hash : Hashtable<Integer, Operation> init Hashtable<Integer, Operation>.new
 			var i : Integer init ~operation.size
 			self.~operation.each{o | hash.put(i,o) i := i-1}
-			var stop : Boolean init false
 			
 			context.table.clear
 			context.table.title := "Available services"
@@ -388,11 +431,16 @@ package instance{
 		 		context.table.add(op.container.asType(Service).name)
 		 		context.table.newLine
 			}
-			
+			context.table.displayTable
+			askForInvokeOperation(hash)
+		end
+		
+		operation askForInvokeOperation(hash : Hashtable<Integer, Operation>) is
+		do
+			var stop : Boolean init false
 			from  not stop
 	    	until stop
 			loop 	
-			 	context.table.displayTable
 				var param : String init stdio.read("Invoke service(s): ")
 				stop := (param == "q" or param == "" or param == void)
 				if not stop then
@@ -401,7 +449,9 @@ package instance{
 						invoke(hash.getValue(p.toInteger))
 					}
 				end
-			end			
+			end
+		rescue
+			askForInvokeOperation(hash)
 		end
 	}
 }

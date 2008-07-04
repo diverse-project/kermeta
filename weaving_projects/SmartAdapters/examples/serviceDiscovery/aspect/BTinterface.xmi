@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type" xsi:schemaLocation="http://art/pattern/art ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art http://art/pattern/art/instance ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/instance http://art/pattern/art/type ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/type">
+  <root name="Service Discovery">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Network" type="//@types.0" state=""/>
+  </root>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.INetwork"/>
+  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IRouter"/>
+  <types xsi:type="type:PrimitiveType" name="network.router.">
+    <port name="network" service="//@services.0" role="server"/>
+    <port name="router" isOptional="false" service="//@services.1" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="router.">
+    <port name="router" isOptional="false" service="//@services.1" role="server"/>
+  </types>
+</art:System>

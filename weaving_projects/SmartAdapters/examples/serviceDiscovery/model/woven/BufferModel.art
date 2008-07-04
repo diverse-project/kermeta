@@ -18,25 +18,6 @@
     <subComponent xsi:type="instance:PrimitiveInstance" name="Buffer" type="//@types.6" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Buffer">
       <binding serverInstance="//@root/@subComponent.4" client="//@types.6/@port.0" server="//@types.1/@port.0"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Advertiser" type="//@types.7" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Advertiser">
-      <binding serverInstance="//@root/@subComponent.0" client="//@types.7/@port.0" server="//@types.4/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.1" client="//@types.7/@port.1" server="//@types.5/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.3" client="//@types.7/@port.2" server="//@types.0/@port.0"/>
-    </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Request" type="//@types.8" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Request">
-      <binding serverInstance="//@root/@subComponent.0" client="//@types.8/@port.3" server="//@types.4/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.1" client="//@types.9/@port.3" server="//@types.5/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.3" client="//@types.9/@port.4" server="//@types.0/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.9" client="//@types.8/@port.2" server="//@types.9/@port.0"/>
-    </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Reply" type="//@types.9" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Reply">
-      <binding serverInstance="//@root/@subComponent.0" client="//@types.8/@port.3" server="//@types.4/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.1" client="//@types.9/@port.3" server="//@types.5/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.3" client="//@types.9/@port.4" server="//@types.0/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.8" client="//@types.9/@port.1" server="//@types.8/@port.1"/>
-    </subComponent>
-    <delegation serverInstance="//@root/@subComponent.7" source="//@types.7/@port.3" exported="//@types.2/@port.0"/>
-    <delegation serverInstance="//@root/@subComponent.8" source="//@types.8/@port.0" exported="//@types.2/@port.1"/>
   </root>
   <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IAdvertiser">
     <operation name="advertise">
@@ -79,8 +60,6 @@
       <input name="java.lang.String arg0"/>
     </operation>
   </services>
-  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IReply"/>
-  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IRequestReply"/>
   <types xsi:type="type:PrimitiveType" name="network.router.">
     <port name="network" lower="1" upper="-1" isOptional="false" service="//@services.4" role="server"/>
     <port name="router" lower="1" upper="-1" isOptional="false" service="//@services.6" role="client"/>
@@ -111,26 +90,5 @@
   <types xsi:type="type:PrimitiveType" name="Buffer">
     <port name="router" lower="1" upper="1" role="client"/>
     <port name="router" lower="1" upper="1" service="//@services.6" role=""/>
-  </types>
-  <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network.">
-    <port name="policy" isOptional="false" service="//@services.2" role="client"/>
-    <port name="cache" isOptional="false" service="//@services.1" role="client"/>
-    <port name="network" isOptional="false" service="//@services.4" role=""/>
-    <port name="advertiser" service="//@services.0" role="server"/>
-  </types>
-  <types xsi:type="type:PrimitiveType" name="request.requestReply.reply.policy.cache.network.">
-    <port name="request" isOptional="false" service="//@services.5" role="server"/>
-    <port name="requestReply" isOptional="false" service="//@services.8" role="server"/>
-    <port name="reply" isOptional="false" service="//@services.7" role="client"/>
-    <port name="policy" isOptional="false" service="//@services.2" role="client"/>
-    <port name="cache" isOptional="false" service="//@services.1" role="client"/>
-    <port name="network" isOptional="false" service="//@services.4" role="client"/>
-  </types>
-  <types xsi:type="type:PrimitiveType" name="reply.requestReply.policy.cache.network.">
-    <port name="reply" isOptional="false" service="//@services.7" role="server"/>
-    <port name="requestReply" isOptional="false" service="//@services.8" role="client"/>
-    <port name="policy" isOptional="false" service="//@services.2" role="client"/>
-    <port name="cache" isOptional="false" service="//@services.1" role="client"/>
-    <port name="network" isOptional="false" service="//@services.4" role="client"/>
   </types>
 </art:System>

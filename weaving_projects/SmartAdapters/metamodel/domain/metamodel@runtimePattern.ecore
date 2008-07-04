@@ -27,8 +27,15 @@
     <eClassifiers xsi:type="ecore:EClass" name="AddElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="RemoveElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="UpdateElement"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CardinalityElement" eSuperTypes="#//art/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="#//art/Integer"
+          defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="#//art/Integer"
+          defaultValueLiteral=""/>
+    </eClassifiers>
     <eSubpackages name="instance" nsURI="http://art/pattern/art/instance" nsPrefix="instance">
-      <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//art/ModelElement #//art/AddElement #//art/RemoveElement">
+      <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//art/ModelElement #//art/AddElement #//art/RemoveElement #//art/UpdateElement">
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//art/type/ComponentType"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//art/String"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="superComponent" eType="#//art/instance/CompositeInstance"
@@ -53,6 +60,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Binding" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject #//art/AddElement #//art/RemoveElement">
         <eStructuralFeatures xsi:type="ecore:EReference" name="serverInstance" eType="#//art/instance/ComponentInstance"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="#//art/String"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TransmissionBinding" eSuperTypes="#//art/instance/Binding">
         <eStructuralFeatures xsi:type="ecore:EReference" name="client" eType="#//art/type/Port"/>
@@ -93,7 +101,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//art/TypedElement"/>
       <eClassifiers xsi:type="ecore:EClass" name="FunctionalService" eSuperTypes="#//art/type/Service"/>
       <eClassifiers xsi:type="ecore:EClass" name="ControlService" eSuperTypes="#//art/type/Service"/>
-      <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//art/ModelElement">
+      <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//art/CardinalityElement">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//art/Boolean"
             defaultValueLiteral="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//art/type/Service"/>

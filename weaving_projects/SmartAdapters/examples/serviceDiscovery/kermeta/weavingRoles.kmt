@@ -1,4 +1,4 @@
-/* $Id: weavingRoles.kmt,v 1.2 2008-06-18 15:59:53 bmorin Exp $
+/* $Id: weavingRoles.kmt,v 1.3 2008-07-04 10:03:36 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -27,15 +27,23 @@ class ServiceDiscoveryMain
 	 		<a href="https://project.sintef.no/eRoom/informatics/DiVA/0_654d1" target="_blank">An Aspect-Oriented and Model-Driven Approach for Managing Dynamic Variability</a>
 	 		Do NOT distribute this paper outside of the DiVA consortium until notification of acceptance.
 	 */
-	operation main() : Void is do 
+	operation main() : Void is do
+		var time : Integer
+		extern org::diva::causalLink::smartadapters::fractal::KermetaDate.start(self)
+		
 		var baseModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/base/baseModel.art"
 		var SAModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/SAModel.art"
 		var DAModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/DAModel.art"
+		var BTModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/BTModel.art"
+		var BufferModelUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/BufferModel.art"
+		
 		var metamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore"
 		var MMPatternUri : String init "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
 			
 		var UAadapterUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/aspect/UAprotocol.xmi"
 		var SAadapterUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/aspect/SAprotocol.xmi"
+		var BTadapterUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/aspect/BTprotocol.xmi"
+		var BufferAdapterUri : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/aspect/BufferProtocol.xmi"
 		var adaptMMUri : String init "platform:/resource/SmartAdapters/metamodel/specific/runtime_AOM_Framework1.ecore"
 		
 
@@ -48,26 +56,49 @@ class ServiceDiscoveryMain
 		weaver.loadMetamodelPattern(MMPatternUri)
 		weaver.loadModel(baseModelUri, "http://art")
 		stdio.writeln("")
-		
-		stdio.writeln("Weaving SA aspect in the base model")
+		stdio.writeln("Base model = No role + WiFi")
 		stdio.writeln("")
+		stdio.writeln("")
+
+		stdio.writeln("Weaving BT (Bluetooth) aspect into the base model")
+		stdio.writeln("")
+		weaver.loadAdapter(BTadapterUri, adaptMMUri)					
+		weaver.weaving(metamodelUri, MMPatternUri)
+		weaver.saveModel(BTModelUri, "http://art")
+		stdio.writeln("")
+		stdio.writeln("We now obtain the base model with WiFi + Bluetooth")
+		
+		stdio.writeln("Weaving Buffer aspect into the base model")
+		stdio.writeln("")
+		weaver.loadAdapter(BufferAdapterUri, adaptMMUri)					
+		weaver.weaving(metamodelUri, MMPatternUri)
+		weaver.saveModel(BufferModelUri, "http://art")
+		stdio.writeln("")
+		stdio.writeln("We now obtain the base model with WiFi + Bluetooth + Buffer")	
+		
+		stdio.writeln("Weaving SA into the woven model (WiFi + BT)")
+		stdio.writeln("")
+		weaver.keepModelFacts := true
 		weaver.loadAdapter(SAadapterUri, adaptMMUri)					
 		weaver.weaving(metamodelUri, MMPatternUri)
 		weaver.saveModel(SAModelUri, "http://art")
 		stdio.writeln("")
-		stdio.writeln("We now obtain the SA configuration")
+		stdio.writeln("We now obtain the SA configuration with WiFi + BT")
 
 		stdio.writeln("")
 		stdio.writeln("")
 
-		stdio.writeln("Weaving UA aspect in the woven model")
+		stdio.writeln("Weaving UA aspect into the woven model")
 		stdio.writeln("")
+		//weaver.keepQuery := true
 		weaver.loadAdapter(UAadapterUri, adaptMMUri)					
 		weaver.weaving(metamodelUri, MMPatternUri)
 		weaver.saveModel(DAModelUri, "http://art")
 		stdio.writeln("")
-		stdio.writeln("We now obtain the DA configuration (= base + SA + UA)")		
+		stdio.writeln("We now obtain the DA configuration (SA + UA) with WiFi + BT")
 
 		weaver.finalizeWeaver()
+		time ?= extern org::diva::causalLink::smartadapters::fractal::KermetaDate.getTime(self)
+		stdio.errorln("The whole program took "+(time.toReal/(1000.toReal)).toString+" s")
 	end
 }

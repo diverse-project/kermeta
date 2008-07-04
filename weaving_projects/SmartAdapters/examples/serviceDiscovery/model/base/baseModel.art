@@ -6,24 +6,10 @@
       <attribute value="getSize: 50"/>
       <binding serverInstance="//@root/@subComponent.0" id="policy" client="//@types.5/@port.1" server="//@types.4/@port.0"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="WiFi" type="//@types.1" state="ON"/>
     <subComponent xsi:type="instance:PrimitiveInstance" name="Network" type="//@types.0" state="ON">
-      <binding serverInstance="//@root/@subComponent.5" id="router0" client="//@types.0/@port.1" server="//@types.1/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.6" id="router1" client="//@types.0/@port.1" server="//@types.1/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.3" id="router0" client="//@types.0/@port.1" server="//@types.1/@port.0"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="BT" type="//@types.1" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Bluetooth"/>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Buffer" type="//@types.6" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Buffer">
-      <binding serverInstance="//@root/@subComponent.2" client="//@types.6/@port.0" server="//@types.1/@port.0"/>
-    </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Buffer" type="//@types.6" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Buffer">
-      <binding serverInstance="//@root/@subComponent.4" client="//@types.6/@port.0" server="//@types.1/@port.0"/>
-    </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Advertiser" type="//@types.7" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Advertiser">
-      <binding serverInstance="//@root/@subComponent.0" client="//@types.7/@port.0" server="//@types.4/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.1" client="//@types.7/@port.1" server="//@types.5/@port.0"/>
-      <binding serverInstance="//@root/@subComponent.3" client="//@types.7/@port.2" server="//@types.0/@port.0"/>
-    </subComponent>
-    <delegation serverInstance="//@root/@subComponent.7" source="//@types.7/@port.3" exported="//@types.2/@port.0"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="WiFi" type="//@types.1" state="ON"/>
   </root>
   <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IAdvertiser">
     <operation name="advertise">
@@ -92,15 +78,5 @@
     <port name="cache" lower="1" upper="-1" isOptional="false" service="//@services.1" role="server"/>
     <port name="policy" lower="1" upper="1" isOptional="false" service="//@services.2" role="client"/>
     <port name="attribute-controller" lower="1" upper="1" isOptional="false" service="//@services.3" role="server"/>
-  </types>
-  <types xsi:type="type:PrimitiveType" name="Buffer">
-    <port name="router" lower="1" upper="1" role="client"/>
-    <port name="router" lower="1" upper="1" service="//@services.6" role=""/>
-  </types>
-  <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network.">
-    <port name="policy" isOptional="false" service="//@services.2" role="client"/>
-    <port name="cache" isOptional="false" service="//@services.1" role="client"/>
-    <port name="network" isOptional="false" service="//@services.4" role=""/>
-    <port name="advertiser" service="//@services.0" role="server"/>
   </types>
 </art:System>

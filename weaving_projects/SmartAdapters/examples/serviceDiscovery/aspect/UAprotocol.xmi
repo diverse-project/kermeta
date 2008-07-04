@@ -9,20 +9,17 @@
         <content href="UAinterface.xmi#//@services.1"/>
         <content href="UAinterface.xmi#//@services.2"/>
         <content href="UAinterface.xmi#//@services.3"/>
-        <content href="UAinterface.xmi#//@services.4"/>
         <content href="UAinterface.xmi#//@types.0"/>
         <content href="UAinterface.xmi#//@types.1"/>
         <content href="UAinterface.xmi#//@types.2"/>
-        <content href="UAinterface.xmi#//@types.3"/>
         <content href="UAinterface.xmi#//@root/@subComponent.0"/>
         <content href="UAinterface.xmi#//@root/@subComponent.1"/>
         <content href="UAinterface.xmi#//@root/@subComponent.2"/>
         <content href="UAinterface.xmi#//@types.0/@port.0"/>
         <content href="UAinterface.xmi#//@types.1/@port.0"/>
-        <content href="UAinterface.xmi#//@types.1/@port.1"/>
         <content href="UAinterface.xmi#//@types.2/@port.0"/>
         <content href="UAinterface.xmi#//@types.3/@port.0"/>
-        <content href="UAinterface.xmi#//@root/@subComponent.1/@binding.0"/>
+        <content href="UAinterface.xmi#//@types.3"/>
         <content href="UAinterface.xmi#//@types.3"/>
         <roles name="systemRole">
           <player href="UAinterface.xmi#/"/>
@@ -37,7 +34,7 @@
           <player href="UAinterface.xmi#//@types.0/@port.0"/>
         </roles>
         <roles name="cachePortRole">
-          <player href="UAinterface.xmi#//@types.1/@port.1"/>
+          <player href="UAinterface.xmi#//@types.1/@port.0"/>
         </roles>
         <roles name="policyComponentRole">
           <player href="UAinterface.xmi#//@root/@subComponent.0"/>
@@ -58,7 +55,7 @@
           <player href="UAinterface.xmi#//@services.2"/>
         </roles>
         <roles name="IRequestRole">
-          <player href="UAinterface.xmi#//@services.4"/>
+          <player href="UAinterface.xmi#//@services.3"/>
         </roles>
         <roles name="requestPortRole">
           <player href="UAinterface.xmi#//@types.3/@port.0"/>
@@ -82,7 +79,6 @@
       <content href="UAgraft.xmi#//@types.0/@port.4"/>
       <content href="UAgraft.xmi#//@types.0/@port.5"/>
       <content href="UAgraft.xmi#//@types.1/@port.0"/>
-      <content href="UAgraft.xmi#//@types.1/@port.1"/>
       <content href="UAgraft.xmi#//@types.1/@port.2"/>
       <content href="UAgraft.xmi#//@types.1/@port.3"/>
       <content href="UAgraft.xmi#//@types.1/@port.4"/>
@@ -107,7 +103,6 @@
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeSystem">
     <SystemToSet href="UAinterface.xmi#/"/>
-    <refservices href="UAgraft.xmi#//@services.0"/>
     <refservices href="UAgraft.xmi#//@services.1"/>
     <refservices href="UAgraft.xmi#//@services.2"/>
     <reftypes href="UAgraft.xmi#//@types.0"/>
@@ -125,7 +120,7 @@
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
     <TransmissionBindingToSet href="UAgraft.xmi#//@root/@subComponent.1/@binding.1"/>
-    <refserver href="UAinterface.xmi#//@types.1/@port.1"/>
+    <refserver href="UAinterface.xmi#//@types.1/@port.0"/>
     <refserverInstance href="UAinterface.xmi#//@root/@subComponent.1"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
@@ -140,7 +135,7 @@
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
     <TransmissionBindingToSet href="UAgraft.xmi#//@root/@subComponent.0/@binding.1"/>
-    <refserver href="UAinterface.xmi#//@types.1/@port.1"/>
+    <refserver href="UAinterface.xmi#//@types.1/@port.0"/>
     <refserverInstance href="UAinterface.xmi#//@root/@subComponent.1"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
@@ -174,6 +169,6 @@
   </adapt>
   <adapt xsi:type="adaptations:SetruntimetypePort">
     <PortToSet href="UAgraft.xmi#//@types.0/@port.0"/>
-    <refservice href="UAinterface.xmi#//@services.4"/>
+    <refservice href="UAinterface.xmi#//@services.3"/>
   </adapt>
 </core:Adapter>

@@ -26,9 +26,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="AddElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="RemoveElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="UpdateElement"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CardinalityElement" eSuperTypes="#//ModelElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="#//Integer"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="#//Integer"
+        defaultValueLiteral="1"/>
+  </eClassifiers>
   <eSubpackages name="instance" nsURI="http://art/instance" nsPrefix="instance">
     <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" abstract="true"
-        eSuperTypes="#//ModelElement #//AddElement #//RemoveElement">
+        eSuperTypes="#//ModelElement #//AddElement #//RemoveElement #//UpdateElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//type/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" lowerBound="1"
@@ -63,6 +70,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true" eSuperTypes="#//AddElement #//RemoveElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="serverInstance" lowerBound="1"
           eType="#//instance/ComponentInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="#//String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TransmissionBinding" eSuperTypes="#//instance/Binding">
       <eStructuralFeatures xsi:type="ecore:EReference" name="client" eType="#//type/Port"/>
@@ -105,7 +113,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="FunctionalService" eSuperTypes="#//type/Service"/>
     <eClassifiers xsi:type="ecore:EClass" name="ControlService" eSuperTypes="#//type/Service"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//ModelElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//CardinalityElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//Boolean"
           defaultValueLiteral="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"

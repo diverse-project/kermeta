@@ -1,4 +1,4 @@
-/* $Id: ServiceDiscovery.kmt,v 1.1 2008-05-30 08:18:16 bmorin Exp $
+/* $Id: ServiceDiscovery.kmt,v 1.2 2008-07-04 10:04:20 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -19,6 +19,12 @@ aspect class PlatformAdapter
 {
 	operation run() : Void is
 	do
-		extern org::diva::causalLink::smartadapters::fractal::ServiceDiscoveryMain.run(self)
+//		extern org::diva::causalLink::smartadapters::fractal::ServiceDiscoveryMain.run(self)
+		extern org::diva::causalLink::smartadapters::fractal::ServiceDiscoveryMain.generatedRun(self)
+	end
+	
+	operation adaptSAtoDA() : Void is
+	do
+		extern org::diva::causalLink::smartadapters::fractal::ServiceDiscoveryMain.adaptSAtoDA(self)
 	end
 }

@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.25 2008-06-17 15:34:39 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.26 2008-07-04 10:03:53 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -173,21 +173,31 @@ package smartadapters
 			do
 				if (clone == void) then
 					clone := Hashtable<Object, Object>.new
+				else
+					clone.clear
 				end
 				if (convert == void) then
 					initConvert
 				end
 				if (cloned == void) then
 					cloned := Hashtable<Object, Object>.new
+				else
+					cloned.clear
 				end
 				if (notRemovable == void) then
 					notRemovable := Set<Object>.new
+				else
+					notRemovable.clear
 				end
 				if (removable == void) then
 					removable := Set<Object>.new
+				else
+					removable.clear
 				end
 				if (removed == void) then
 					removed := Set<Object>.new
+				else
+					removed.clear
 				end			
 			end		
 				
@@ -220,12 +230,20 @@ package smartadapters
 			*/
 			operation updateClones() is do
 				if(~aspect.structure != void) then
-					~aspect.structure.content.each{o | 
+					~aspect.persistent.each{o | 
+						stdio.errorln("1  "+o.toString)
+					}
+					~aspect.structure.content.each{o |
+						stdio.errorln("2  "+o.toString)
 						if (not(~aspect.persistent.contains(o))) then
-							converter.deleteConverted(o)
-							var temp : Object init converter.getConverted(o)
-							clone.put(o, temp)
-							removable.add(temp)
+							//if (not(~aspect.persistent.contains(getRealObject(o,false).asType(PObject)))) then
+								stdio.errorln("3  "+o.toString)
+								converter.deleteConverted(o)
+								var temp : Object init converter.getConverted(o)
+								stdio.writeln("cloning "+temp.printObject)
+								clone.put(o, temp)
+								removable.add(temp)
+							//end
 						end
 					}
 				end

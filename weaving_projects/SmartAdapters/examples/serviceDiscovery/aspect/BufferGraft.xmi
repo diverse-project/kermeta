@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type" xsi:schemaLocation="http://art/pattern/art ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art http://art/pattern/art/instance ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/instance http://art/pattern/art/type ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Buffer" type="//@types.0" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Buffer"/>
+  </root>
+  <types xsi:type="type:PrimitiveType" name="Buffer">
+    <port name="router" lower="1" upper="1" role="client"/>
+    <port name="router" lower="1" upper="1" role="server"/>
+  </types>
+</art:System>

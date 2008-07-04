@@ -47,6 +47,13 @@ package instance{
 	{
 		inv completeTransmissionBindings is 
 		do
+			if self.type == void then
+				stdio.writeln(self.name)
+			else
+				if self.type.port == void then
+					stdio.writeln(self.type.name)
+				end
+			end
 			self.type.port.select{p | not p.isOptional and p.role == "client"}.forAll{p |
 				self.binding.exists{b | 
 					b.client == p

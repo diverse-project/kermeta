@@ -1,4 +1,4 @@
-/* $Id: PlatformAdapter.kmt,v 1.2 2008-05-20 14:30:48 bmorin Exp $
+/* $Id: PlatformAdapter.kmt,v 1.3 2008-07-04 10:04:19 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -8,6 +8,7 @@
 package org::kermeta::runtime::adapter;
 
 require kermeta
+require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimeImpl.kmt"
 
 using kermeta::standard
 
@@ -47,5 +48,5 @@ abstract class PlatformAdapter
 	 * load a modified model to adapt the running system
 	 */
 	operation loadUpdateModel(modelUri : String) : Void is 
-		abstract	
+		abstract
 }		

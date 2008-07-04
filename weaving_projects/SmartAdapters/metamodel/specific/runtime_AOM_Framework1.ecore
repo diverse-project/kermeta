@@ -707,8 +707,8 @@
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="TransmissionBindingToSet"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refclient" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refserver" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refclient" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refserver" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Port"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refserverInstance"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
         </eClassifiers>
@@ -732,8 +732,8 @@
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="TransmissionBindingToUnset"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refclient" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refserver" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refclient" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refserver" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Port"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refserverInstance"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
         </eClassifiers>
@@ -803,8 +803,8 @@
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="DelegationBindingToSet"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/DelegationBinding"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refsource" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refexported" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refsource" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refexported" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Port"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refserverInstance"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
         </eClassifiers>
@@ -828,8 +828,8 @@
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="DelegationBindingToUnset"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/DelegationBinding"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refsource" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refexported" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refsource" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refexported" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Port"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refserverInstance"
               eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
         </eClassifiers>
@@ -1327,8 +1327,6 @@
             <eParameters name="reverse" eType="ecore:EDataType ../domain/metamodel@runtime.ecore#//Boolean"/>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="PortToSet" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Port"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refsub" upperBound="-1"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refisOptional" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/Boolean">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
@@ -1339,6 +1337,8 @@
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refservice" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Service"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refrole" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimetypePort" eSuperTypes="#//smartadapters/core/unsetAdaptation">
           <eAnnotations source="kermeta">
@@ -1358,8 +1358,6 @@
             <eParameters name="reverse" eType="ecore:EDataType ../domain/metamodel@runtime.ecore#//Boolean"/>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="PortToUnset" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Port"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refsub" upperBound="-1"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refisOptional" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/Boolean">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
@@ -1370,106 +1368,7 @@
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CreateruntimetypePrimitivePort"
-            eSuperTypes="#//smartadapters/core/createAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::type::PrimitivePort from scratch&#xA;   * This new element is handled by refering to newPrimitivePort&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EDataType ../domain/metamodel@runtime.ecore#//Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := newPrimitivePort.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newPrimitivePort, void, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EDataType ../domain/metamodel@runtime.ecore#//Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="newPrimitivePort"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CloneruntimetypePrimitivePort"
-            eSuperTypes="#//smartadapters/core/cloneAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Creates a new runtime::type::PrimitivePort from an existing one&#xA;   * This cloned element is handled by refering to clonedPrimitivePort&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EDataType ../domain/metamodel@runtime.ecore#//Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := PrimitivePortToClone.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedPrimitivePort, PrimitivePortToClone, isUnique)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EDataType ../domain/metamodel@runtime.ecore#//Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitivePortToClone"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedPrimitivePort"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"
-              containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="SetruntimetypePrimitivePort" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Sets any property of runtime::type::PrimitivePort&#xA;   * All the references expect PrimitivePortToSet may be void&#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EDataType ../domain/metamodel@runtime.ecore#//Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := PrimitivePortToSet.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempPrimitivePort : runtime::type::PrimitivePort&#xA;&#x9;tempPrimitivePort ?= ad.getRealObject(PrimitivePortToSet, false)&#xA;&#x9;tempPrimitivePort.service ?= ad.setSingleProperty(refservice, tempPrimitivePort.service)&#xA;&#x9;tempPrimitivePort.role ?= ad.setSingleProperty(refrole, tempPrimitivePort.role)&#xA;&#x9;tempPrimitivePort.name ?= ad.setSingleProperty(refname, tempPrimitivePort.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var unset : org::smartadapters::core::adaptations::UnsetruntimetypePrimitivePort&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;unset := org::smartadapters::core::adaptations::UnsetruntimetypePrimitivePort.new&#xA;&#x9;&#x9;&#x9;unset.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := unset&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;unset ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;unset.PrimitivePortToUnset := self.PrimitivePortToSet&#xA;&#x9;&#x9;unset.refservice := self.refservice&#xA;&#x9;&#x9;unset.refrole := self.refrole&#xA;&#x9;&#x9;unset.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EDataType ../domain/metamodel@runtime.ecore#//Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitivePortToSet"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refservice" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Service"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refrole" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnsetruntimetypePrimitivePort"
-            eSuperTypes="#//smartadapters/core/unsetAdaptation">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;   * Unsets any property of runtime::type::PrimitivePort&#xA;   * All the references expect PrimitivePortToUnset may be void &#xA;   */"/>
-          </eAnnotations>
-          <eOperations name="check" eType="ecore:EDataType ../domain/metamodel@runtime.ecore#//Boolean">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
-              <details key="body" value="do&#xA;&#x9;result := PrimitivePortToUnset.isNotEqual(void)&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="execute">
-            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var ad : org::smartadapters::core::Adapter init getAdapter&#xA;&#x9;var tempPrimitivePort : runtime::type::PrimitivePort&#xA;&#x9;tempPrimitivePort ?= ad.getRealObject(PrimitivePortToUnset, false)&#xA;&#x9;tempPrimitivePort.service ?= ad.unsetSingleProperty(refservice, tempPrimitivePort.service)&#xA;&#x9;tempPrimitivePort.role ?= ad.unsetSingleProperty(refrole, tempPrimitivePort.role)&#xA;&#x9;tempPrimitivePort.name ?= ad.unsetSingleProperty(refname, tempPrimitivePort.name)&#xA;&#x9;if reverse then&#xA;&#x9;&#x9;var ~set : org::smartadapters::core::adaptations::SetruntimetypePrimitivePort&#xA;&#x9;&#x9;if self.reverse.equals(void) then&#xA;&#x9;&#x9;&#x9;~set := org::smartadapters::core::adaptations::SetruntimetypePrimitivePort.new&#xA;&#x9;&#x9;&#x9;~set.reverse := self&#xA;&#x9;&#x9;&#x9;self.reverse := ~set&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;~set ?= self.reverse&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;~set.PrimitivePortToSet := self.PrimitivePortToUnset&#xA;&#x9;&#x9;~set.refservice := self.refservice&#xA;&#x9;&#x9;~set.refrole := self.refrole&#xA;&#x9;&#x9;~set.refname := self.refname&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
-            </eAnnotations>
-            <eParameters name="reverse" eType="ecore:EDataType ../domain/metamodel@runtime.ecore#//Boolean"/>
-          </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitivePortToUnset"
-              eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/PrimitivePort"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refservice" eType="ecore:EClass ../domain/metamodel@runtimePattern.ecore#//art/type/Service"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refrole" eType="ecore:EDataType ../domain/metamodel@runtimePattern.ecore#//art/String"/>
         </eClassifiers>
       </eSubpackages>
