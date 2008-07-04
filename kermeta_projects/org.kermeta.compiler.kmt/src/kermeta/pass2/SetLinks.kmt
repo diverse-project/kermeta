@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.26 2008-06-26 12:49:57 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.27 2008-07-04 12:17:13 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -69,12 +69,15 @@ aspect class Class {
 								
 				self.ecoreModelElement.eTypeArguments.add(typeArgument)
 			else
+			
 				if tpb.type.isInstanceOf(ObjectTypeVariable) then
 					var otv : ObjectTypeVariable init tpb.type.asType(ObjectTypeVariable)
 					typeArgument.eTypeParameter := otv.ecoreModelElement
 					self.ecoreModelElement.eTypeArguments.add(typeArgument)
 				else
+				
 					if tpb.type.isInstanceOf(PrimitiveType) then
+
 						var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 						
 						//We use the EDataType from the Ecore file
@@ -92,7 +95,9 @@ aspect class Class {
 						
 						self.ecoreModelElement.eTypeArguments.add(typeArgument)
 					end
+					
 				end
+				
 			end
 		}
 	end
@@ -203,6 +208,7 @@ class LinkSetterForTypedElement {
 						else
 						
 							if tpb.type.isInstanceOf(PrimitiveType) then
+							
 								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
 								
 								if tpb.type.isEDataType() then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
@@ -225,10 +231,21 @@ class LinkSetterForTypedElement {
 			else
 				// Case of the type is an ObjectTypeVariable
 				if element.type.isInstanceOf(PrimitiveType) then
+				
 					var cd : ClassDefinition init element.type.getClassFromPrimitiveType().getClassDefinition()
 					
 					if element.type.isEDataType() then //cd.isValueType() and (element.type.getEMFInstanceClassName()!="") then
-						ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement
+						
+						var newEGT : EGenericType init EGenericType.new()
+						newEGT.eClassifier := element.type.asType(PrimitiveType).ecoreModelElement
+						ecoreModelElement.eGenericType := newEGT
+						
+						element.type.asType(PrimitiveType).ecoreModelElement.eTypeParameters.each{ etp |
+							if not ecoreModelElement.eGenericType.isVoid() then
+								newEGT.eTypeArguments.add(EGenericType.new())
+							end
+						}
+						
 					else
 						if not cd.ecoreModelElement.isVoid() then
 							ecoreModelElement.eType := cd.ecoreModelElement

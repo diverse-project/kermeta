@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.25 2008-07-03 09:24:53 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.26 2008-07-04 12:17:12 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -74,7 +74,7 @@ package structure {
 				var type_label : String init self.type.createBehaviorJava(context)
 				
 				// result is initialized only if the "return type" is not Void
-				if ( type_label!="Void" and type_label!="VoidType" ) then
+				if not isVoidType(type_label) then
 					javaCode.append("\n" + type_label + " result = null;\n")
 				end
 
@@ -82,7 +82,7 @@ package structure {
 				javaCode.append(self.body.createBehaviorJava(context))
 				
 				// result is returned only if the "return type" is not Void
-				if ( type_label!="Void" and type_label!="VoidType" ) then
+				if not isVoidType(type_label) then
 					javaCode.append("\nreturn result;\n")
 				end
 				
@@ -93,6 +93,13 @@ package structure {
 	        	EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, javaCode.toString)
 	        end
 	        result := javaCode.toString()
+		end
+		
+		operation isVoidType(type_label : String) : Boolean is do
+			result := true
+			if (type_label!="null") and (type_label!="Void") and (type_label!="VoidType") and (type_label!="kermeta::standard::Void") and (type_label!="kermeta::language::structure::VoidType") then
+				result := false
+			end
 		end
 	}
 	
