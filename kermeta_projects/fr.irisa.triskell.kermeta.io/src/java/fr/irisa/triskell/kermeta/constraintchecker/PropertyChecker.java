@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.20 2008-04-09 14:37:35 dvojtise Exp $
+/* $Id: PropertyChecker.java,v 1.21 2008-07-07 15:52:40 bmorin Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -217,7 +217,7 @@ public class PropertyChecker extends AbstractChecker {
 			result = false;
 			addProblem(ERROR, UPPERNOTZERO_ERROR ,property);
 		}
-		if(property.getUpper() != -1)
+		if(property.getUpper() > 0)//note: in some metamodels, the upper bound equals -2
 			if(property.getUpper()<property.getLower()){
 				result = false;
 				addProblem(ERROR, LOWERGREATERTHANUPPER_ERROR, property);
