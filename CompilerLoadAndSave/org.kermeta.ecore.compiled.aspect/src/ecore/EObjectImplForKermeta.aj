@@ -12,6 +12,15 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 
 public aspect EObjectImplForKermeta {
 
+	/*public pointcut hola():execution(* *.*())&&!call(* *PrintStream.println());
+	
+	static int count=0;
+	
+	after():hola(){
+		count++;
+	//	System.out.println("holaaaaa "+count);
+	}*/
+	
 	declare parents : org.eclipse.emf.ecore.impl.EObjectImpl implements kermeta.language.structure.Object;
 
 	/**

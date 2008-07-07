@@ -42,10 +42,8 @@ Export-Package: kermeta,
  kermeta.util,
  kermeta.utils,
  kermeta.utils.impl,
- kermeta.utils.util
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.common,
- org.eclipse.emf.ecore.xmi,
- org.aspectj.runtime;bundle-version="1.6.1",
- org.eclipse.aspectj;bundle-version="1.5.0"
+ kermeta.utils.util,
+ test
+Require-Bundle: org.aspectj.runtime;bundle-version="1.6.1",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.4.0"
 Bundle-ActivationPolicy: lazy

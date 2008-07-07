@@ -6,22 +6,1790 @@ Export-Package: org.eclipse.emf.ecore,org.eclipse.emf.ecore.impl,org.e
  emf.ecore.xml.namespace.util,org.eclipse.emf.ecore.xml.type,org.eclip
  se.emf.ecore.xml.type.impl,org.eclipse.emf.ecore.xml.type.internal,or
  g.eclipse.emf.ecore.xml.type.util
+Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
-Created-By: 1.5.0_12-b04 (Sun Microsystems Inc.)
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.3.0,4.0.0)
- ",org.eclipse.emf.common;visibility:=reexport;bundle-version="[2.3.0,
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.4.0,4.0.0)
+ ",org.eclipse.emf.common;visibility:=reexport;bundle-version="[2.4.0,
  3.0.0)",org.eclipse.core.resources;resolution:=optional;bundle-versio
- n="[3.3.0,4.0.0)"
-Ant-Version: Apache Ant 1.7.0
+ n="[3.4.0,4.0.0)"
 Bundle-Vendor: %providerName
 Eclipse-LazyStart: true
-Bundle-Version: 2.3.1.v200709252135
+Bundle-Version: 2.4.0.v200806091234
 Eclipse-BuddyPolicy: dependent
 Bundle-Activator: org.eclipse.emf.ecore.plugin.EcorePlugin$Implementat
  ion
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.emf.ecore; singleton:=true
+
+Name: org/eclipse/emf/ecore/resource/URIConverter$Writeable.class
+SHA1-Digest: lBuPkfgHUvoP9JThfzuk65Bagxo=
+
+Name: org/eclipse/emf/ecore/impl/EStoreEObjectImpl$1EStoreEcoreEMap$1.
+ class
+SHA1-Digest: bn5Gyr0eZAta7oSR42uFwfrLnQY=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$6.class
+SHA1-Digest: pdB4mSfYHFNQTDrptNffgXkNV1Y=
+
+Name: org/eclipse/emf/ecore/ENamedElement.class
+SHA1-Digest: At8obe6xT0ZdKT573iV/r0K3HPw=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$4.class
+SHA1-Digest: Yknmaj0tYiP6YNoTm6Q2zTheXno=
+
+Name: org/eclipse/emf/ecore/util/DelegatingFeatureMap$FeatureMapEObjec
+ tImpl$1.class
+SHA1-Digest: dV5BRwbg3ALDqB63g21w8cSMNGw=
+
+Name: org/eclipse/emf/ecore/impl/BasicEObjectImpl.class
+SHA1-Digest: le3QNDRpXRDNGgzstnbInwJmdRI=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObject.class
+SHA1-Digest: zmOdc6CH8TFbNYnb574cOVECo3c=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$UUID.class
+SHA1-Digest: IWmHOKzP0nqLuTVCW3nvcpTwB8M=
+
+Name: org/eclipse/emf/ecore/util/EContentsEList$FeatureIteratorImpl.cl
+ ass
+SHA1-Digest: 144xObRcvilw+q6u87Ejx8fVK54=
+
+Name: org/eclipse/emf/ecore/xml/type/impl/XMLTypeFactoryImpl$SafeSimpl
+ eDateFormat.class
+SHA1-Digest: tVRquNwd458bEG2O59xNmoUawn8=
+
+Name: org/eclipse/emf/ecore/impl/EParameterImpl.class
+SHA1-Digest: 7+ZD+Jz8dII6oHGdvH4z5wUDksU=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingle.class
+SHA1-Digest: UYLw8/zIOD62XDtiVxrdPn1zymw=
+
+Name: org/eclipse/emf/ecore/util/ECrossReferenceAdapter$InverseCrossRe
+ ferencer.class
+SHA1-Digest: GQmxLnGHXhtjyFdiCgwjzp/nLm8=
+
+Name: org/eclipse/emf/ecore/util/EDataTypeEList.class
+SHA1-Digest: a2TKXSWJaFGqgXZaWeCn6k4a8AU=
+
+Name: org/eclipse/emf/ecore/EPackage$Registry.class
+SHA1-Digest: 8nhVx15FtFme3mtuUbruJzaaidU=
+
+Name: org/eclipse/emf/ecore/xml/type/XMLTypeFactory.class
+SHA1-Digest: sh+R0LQRuhX0VH6uzUfg3FXGiKQ=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$ContentsEList.c
+ lass
+SHA1-Digest: XoFjGamK85Ygb1fkNQFQk1wQrkc=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$EObjectIn
+ putStream.class
+SHA1-Digest: u5vD8DyFUVnopNIhMmqhMbKuLKs=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Token$ParenToken.c
+ lass
+SHA1-Digest: o4UVEjVME4eVsdRTk+B55BlmU3I=
+
+Name: org/eclipse/emf/ecore/resource/URIConverter$WriteableOutputStrea
+ m.class
+SHA1-Digest: 94+7oWSGhP/jJCFb8Z0HltvGnMw=
+
+Name: org/eclipse/emf/ecore/impl/ETypeParameterImpl.class
+SHA1-Digest: 0RqhOmz3kvBbg53c0EnEdZnfxLQ=
+
+Name: org/eclipse/emf/ecore/impl/FlatEObjectImpl.class
+SHA1-Digest: w8obCDvXn4DfK4T6LFH2Fx4scbs=
+
+Name: org/eclipse/emf/ecore/xml/type/ProcessingInstruction.class
+SHA1-Digest: 15boCVgQiN73KZifD3fsL0UobQM=
+
+Name: org/eclipse/emf/ecore/util/ECrossReferenceEList$1.class
+SHA1-Digest: s2k2T20ZKud0hGCN9jTZjEysY/o=
+
+Name: org/eclipse/emf/ecore/EEnum.class
+SHA1-Digest: zqoibfrPkYAHOVY+Z8pNwt2iveo=
+
+Name: model/XMLNamespace.genmodel
+SHA1-Digest: mISJ1a+sNEmPzu9jPNBOqXW3d6E=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectResolvingWithInverse.class
+SHA1-Digest: Bj8Nk5J4MIJqeyahQlpLHSgKdiM=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$RegularExpression$
+ Context.class
+SHA1-Digest: u+mS94zCM/Msy8+ebQoIPDSjKns=
+
+Name: org/eclipse/emf/ecore/util/BasicFeatureMap.class
+SHA1-Digest: 0AmvjVeVZUeSWHVFOpdL8lAqlh0=
+
+Name: org/eclipse/emf/ecore/resource/impl/PlatformResourceURIHandlerIm
+ pl$WorkbenchHelper.class
+SHA1-Digest: wLUqeQ+qpM1bOVhE3byFqyQxNfk=
+
+Name: schema/package_registry_implementation.exsd
+SHA1-Digest: wg1ndCMWePH9lJc2L2Zd3hu4Fx4=
+
+Name: model/EcoreXMI.xsd
+SHA1-Digest: pWI2KalDULwPSx/+qV9AvyEZsKk=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeResourceImpl$Handler.
+ class
+SHA1-Digest: /spHtBpJLv/o82HxmQo5slIMlXc=
+
+Name: org/eclipse/emf/ecore/util/EContentsEList$2.class
+SHA1-Digest: lO3cf6QnY7wy9PAVUR7CH3yFS7s=
+
+Name: org/eclipse/emf/ecore/plugin/RegistryReader$EPackageDescriptor.c
+ lass
+SHA1-Digest: e34f7wioPErj4TQokFUDL9BEA18=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$FeatureEList$Basic.cla
+ ss
+SHA1-Digest: YgjHXIArIjo/EmkzAYOavKsJG14=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$1.class
+SHA1-Digest: O8c/2LZCViNPXVssW+SNCUd+w6Y=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeUtil$PatternMatcherIm
+ pl.class
+SHA1-Digest: GKVkmllNe6CpiT6HDXv2O4CH0a0=
+
+Name: org/eclipse/emf/ecore/impl/BasicEObjectImpl$EPropertiesHolderBas
+ eImpl.class
+SHA1-Digest: EwOLHUD3WmMPoPtpOfWHMlSWTFg=
+
+Name: org/eclipse/emf/ecore/impl/EStringToStringMapEntryImpl.class
+SHA1-Digest: yoDfr7c8K3Wfybs8Bj3RlIILNv8=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectContainmentUnsettable.class
+SHA1-Digest: mmmqnWt/Hs18sCi/NWdocAdLnAQ=
+
+Name: org/eclipse/emf/ecore/xml/type/impl/XMLTypePackageImpl$1.class
+SHA1-Digest: htmJJbIwwHW8rK+G5+0cIay7TUw=
+
+Name: org/eclipse/emf/ecore/EValidator$SubstitutionLabelProvider.class
+SHA1-Digest: BQXzKqlcQB13RhZ1b8lC4S/UzYI=
+
+Name: org/eclipse/emf/ecore/plugin/GeneratedPackageRegistryReader.clas
+ s
+SHA1-Digest: vUmzidN9W7nrxHXP6RkgI3F7c/I=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData$EClassifierExte
+ ndedMetaData.class
+SHA1-Digest: //iIwbyklpSafEWHaNc9c8/okRs=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Token$UnionToken.c
+ lass
+SHA1-Digest: 2ogNrR/mRxDPwklhAN9H49d0i2k=
+
+Name: org/eclipse/emf/ecore/util/EcoreEMap$1.class
+SHA1-Digest: mnMCQhMM9WouP23FujOhwt6BF7c=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectWithInverseUnsettable.class
+SHA1-Digest: fJpYBINSOUMj6p0sXemaCeKsrbA=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl.class
+SHA1-Digest: TtlSF39lFKrMptSby+7sg5/g1Us=
+
+Name: org/eclipse/emf/ecore/impl/EStoreEObjectImpl$EStoreImpl$Entry.cl
+ ass
+SHA1-Digest: gL7Fgzi0C8JWC0vS8991/XUhV7c=
+
+Name: org/eclipse/emf/ecore/impl/EFactoryImpl.class
+SHA1-Digest: xXxUTMWNBTmNSfvuz/UmimsmdnI=
+
+Name: org/eclipse/emf/ecore/util/EcoreValidator.class
+SHA1-Digest: Pl4KagErFB6s864EotWl7MuAQYo=
+
+Name: org/eclipse/emf/ecore/resource/ContentHandler$Registry.class
+SHA1-Digest: R156alYI7NJ6iZlJnzSf8IKW9Ew=
+
+Name: schema/generated_package.exsd
+SHA1-Digest: mipbhHZtvW8yxnwcaug9wU33ZyY=
+
+Name: org/eclipse/emf/ecore/util/EcoreEList$Generic.class
+SHA1-Digest: LLU1dYHLBfHZmpglsXcdpWgp5FA=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectContainmentWithInverseResolving.class
+SHA1-Digest: HolmH7xg5Wuz0mKChTUe+H3kkWQ=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectContainmentWithInverse.class
+SHA1-Digest: M0DNLJBu1l1R7Cmh0J86wyoogEI=
+
+Name: org/eclipse/emf/ecore/resource/impl/ExtensibleURIConverterImpl.c
+ lass
+SHA1-Digest: 6fKvRZJZVYjb3RRbMYZuvwihAYs=
+
+Name: org/eclipse/emf/ecore/EValidator$Descriptor.class
+SHA1-Digest: aTPzhrJ/Q+H1k/Z+VKDfh7kvZ1A=
+
+Name: org/eclipse/emf/ecore/xml/type/impl/SimpleAnyTypeImpl.class
+SHA1-Digest: h+E3eZIYZscoM1II7M5G6RjhMig=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceSetImpl$1DiagnosticW
+ rappedException.class
+SHA1-Digest: rAzov8qW549LymjShtKJWjzeb5E=
+
+Name: org/eclipse/emf/ecore/impl/EAttributeImpl.class
+SHA1-Digest: Dai2GKAMQKkR0sp+mWzOu6Zz7bo=
+
+Name: model/XMLType.genmodel
+SHA1-Digest: YOTdaVG2NQ+/rjbm/0qMXUPgOw4=
+
+Name: org/eclipse/emf/ecore/resource/impl/ExtensibleURIConverterImpl$1
+ .class
+SHA1-Digest: fG5qM81NN3UJu8/N69u4GGUt3yw=
+
+Name: org/eclipse/emf/ecore/impl/ETypeParameterImpl$1.class
+SHA1-Digest: A/1kaeKNz+voZzqmScENLZD3kaw=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil.class
+SHA1-Digest: gtgm/lIDVRMIgFzp0vBZIwiqRWY=
+
+Name: org/eclipse/emf/ecore/util/EDataTypeEList$Unsettable.class
+SHA1-Digest: t6LOkJuCQhiewI1wUAyc8E/dKeM=
+
+Name: org/eclipse/emf/ecore/resource/Resource$IOWrappedException.class
+SHA1-Digest: rZe6YbklNX8HAQulL893oEvEEMM=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil.class
+SHA1-Digest: tOySZUNo14dmr1XRgmaVZRFco+U=
+
+Name: org/eclipse/emf/ecore/util/EObjectEList.class
+SHA1-Digest: 0OgHHjR94s+GDBQJKyIlfkq3vQI=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeResourceImpl$FrameFac
+ tory.class
+SHA1-Digest: Jkf0JSmuT8/DYDUSfRKWk5HRWPQ=
+
+Name: org/eclipse/emf/ecore/xml/type/impl/XMLTypeDocumentRootImpl.clas
+ s
+SHA1-Digest: JZHa+zzJeMWYyMct/pP2WjUjEkU=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/XMLDuration.class
+SHA1-Digest: ateb1IHi9Nwf/CSb1tyMymeM6qE=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$EntryImpl.class
+SHA1-Digest: mGHUKaoIP1BEiesoBbvCGv8XSDk=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIHandlerImpl.class
+SHA1-Digest: 5J7rAGyKowjIqubLqtw36+XrihE=
+
+Name: org/eclipse/emf/ecore/plugin/DynamicPackageRegistryReader.class
+SHA1-Digest: PcQzanAt6CPOoKEudZqAilsmfAM=
+
+Name: org/eclipse/emf/ecore/util/EObjectWithInverseResolvingEList$Many
+ Inverse.class
+SHA1-Digest: 59el7y3vxs8fGxhOrS5/WSpN3pA=
+
+Name: plugin.properties
+SHA1-Digest: CxnBdqxGyaOG2AUxeGn++JycuiM=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$6.class
+SHA1-Digest: eYDd2G9T6GyEJZvdm6R4VLDl5Z8=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$BMPattern.class
+SHA1-Digest: n0fjQAaKrywlrtd3QwshYBmC7do=
+
+Name: org/eclipse/emf/ecore/ETypedElement.class
+SHA1-Digest: ftxj7AB2JVCymCw/XQoNzH0+V1U=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/DataValue$XMLChar.class
+SHA1-Digest: jkfNFP5qvblB74oAUW/ipt7AZ+4=
+
+Name: org/eclipse/emf/ecore/impl/ESuperAdapter$Holder.class
+SHA1-Digest: 4qhT9LtMD9GhnpJFDE9vTJ78iFk=
+
+Name: org/eclipse/emf/ecore/xml/type/impl/ProcessingInstructionImpl.cl
+ ass
+SHA1-Digest: z/1gAuVQi4OOXtORIBJdHkpNiWI=
+
+Name: model/XMLType.ecore
+SHA1-Digest: bcmYa6v/LwHKcEmEEdp2IQm5KfU=
+
+Name: org/eclipse/emf/ecore/resource/URIConverter$ReadableInputStream.
+ class
+SHA1-Digest: 8gPXTdSg5lwCnLaw6CItA4lckpc=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/DataValue$TypeValidator.
+ class
+SHA1-Digest: PdaOVm5QLMb0G5h3hviJcYE3Lp0=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Op$UnionOp.class
+SHA1-Digest: TW5fsDl0TkwKVeS7CM+lXQBtz6A=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleDataStatic.class
+SHA1-Digest: xYSXGxb71k0I/rHmjiOvGxM+iM0=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeResourceImpl$StackFra
+ me.class
+SHA1-Digest: T6S2sWCyFJXsKxI52kbQawP1oNk=
+
+Name: org/eclipse/emf/ecore/util/InternalEList$Unsettable.class
+SHA1-Digest: YCL6/MsdwXpJKvHgr7Qi+Zkdduw=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$1MyByteArrayOut
+ putStream.class
+SHA1-Digest: Okh2xn8nXq23yZ37MbX7N8v0h20=
+
+Name: org/eclipse/emf/ecore/util/ECrossReferenceEList$2.class
+SHA1-Digest: lEZD8F8CUFLB3/RuJZ57YXDECc4=
+
+Name: org/eclipse/emf/ecore/util/DelegatingEcoreEList$UnmodifiableELis
+ t.class
+SHA1-Digest: bgkHOobmofbsRovLd1FoxeJmjLc=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$3.class
+SHA1-Digest: uq1xoe/nZd634bVpw6noXCch0jQ=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$UnresolvedProxyCrossReferen
+ cer.class
+SHA1-Digest: KLJJrkve5e16yeXQ+MKKDMsxzoo=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$10.class
+SHA1-Digest: /F5GPUqWtP/Dnelcg8qAnU0Qudk=
+
+Name: org/eclipse/emf/ecore/EStructuralFeature$Setting.class
+SHA1-Digest: suiPhTVnLj+cTTuvKTaUAKc+EZo=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$11.class
+SHA1-Digest: iFsBJ+jTcMMnstL1aWLtG8Zam54=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectContainmentWithInverseUnsettable.class
+SHA1-Digest: VxCq9ptHTnwZA+vIuSBEHwbTvfc=
+
+Name: org/eclipse/emf/ecore/plugin/EcorePlugin$Implementation$1.class
+SHA1-Digest: yGUvy6+DGtGzmO0CPXYPwvswse0=
+
+Name: org/eclipse/emf/ecore/EAnnotation.class
+SHA1-Digest: LrjHfi/qeETMV2fTkgI5V6KLpFk=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$1EAllStructuralFeaturesLis
+ t.class
+SHA1-Digest: kgT71gk4NUs3S6DYuJoIR7DhNMM=
+
+Name: org/eclipse/emf/ecore/impl/DynamicEObjectImpl$BasicEMapEntry.cla
+ ss
+SHA1-Digest: P5nKUGUcckElToJjkDxHSxR7ewA=
+
+Name: org/eclipse/emf/ecore/impl/EReferenceImpl.class
+SHA1-Digest: Uc0gd6AHIke8i5EQP4BqjEGyztg=
+
+Name: org/eclipse/emf/ecore/util/BasicFeatureMap$FeatureEIterator.clas
+ s
+SHA1-Digest: eoAWviCOKSWAtM7DhdazFDyeiC8=
+
+Name: org/eclipse/emf/ecore/util/DelegatingFeatureMap$FeatureMapEObjec
+ tImpl.class
+SHA1-Digest: g9As44lLogk4L842whm6lxnahsk=
+
+Name: org/eclipse/emf/ecore/resource/impl/ContentHandlerImpl$Describer
+ .class
+SHA1-Digest: UJVQqvdmt5H0aYoCmIvg3MDNJVk=
+
+Name: schema/dynamic_package.exsd
+SHA1-Digest: u/bhsxahYFGJGkESzq16VRLLer8=
+
+Name: org/eclipse/emf/ecore/impl/ETypeParameterImpl$2$1.class
+SHA1-Digest: g21LNQDFtfPefuHJ+nFViEudmIw=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$7.class
+SHA1-Digest: QN+Ygi2WDBZuDJKBd+lvepufox0=
+
+Name: org/eclipse/emf/ecore/impl/ETypedElementImpl.class
+SHA1-Digest: YaFulv+fNw6/aNw2SZTAt+WjRpA=
+
+Name: org/eclipse/emf/ecore/util/Diagnostician.class
+SHA1-Digest: 26JgDE5YcODlHsa7p/jlhiZHV3A=
+
+Name: model/XMI.xsd
+SHA1-Digest: BchLSCq2u+FN5IUIxYT5dj1/Uzk=
+
+Name: org/eclipse/emf/ecore/util/DelegatingFeatureMap$ValueListIterato
+ rImpl.class
+SHA1-Digest: KHyCW73KvMQ79VMFMyPMZ97sjwI=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIHandlerImpl$2.class
+SHA1-Digest: 6MLrBLIBWtoYmnxfGtktbiVVNhg=
+
+Name: org/eclipse/emf/ecore/resource/ContentHandler.class
+SHA1-Digest: u3kdAsJdmizssYBUQ3df1TuV8pk=
+
+Name: org/eclipse/emf/ecore/plugin/RegistryReader$EPackageDescriptor$D
+ ynamic.class
+SHA1-Digest: ZwyNYyChoMJWgAxju768/UcLaAI=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Op$ChildOp.class
+SHA1-Digest: YfwHNmYwhUjjwAMHu22wIBHOjoI=
+
+Name: org/eclipse/emf/ecore/resource/Resource.class
+SHA1-Digest: JRKlWFBSAUBCfuPsaKsMWAuBQ7Q=
+
+Name: org/eclipse/emf/ecore/util/EDataTypeUniqueEList$Unsettable.class
+SHA1-Digest: Vzph/5vRV2J759fxs0ZHYW59Mno=
+
+Name: org/eclipse/emf/ecore/EPackage.class
+SHA1-Digest: 09FJ3nrsHNTDaA9b+SZotCWLNRw=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$9.class
+SHA1-Digest: UtuCxG2MGD+xj9b4LQPpiAgXvFs=
+
+Name: org/eclipse/emf/ecore/util/EObjectContainmentEList.class
+SHA1-Digest: wwPwF+Ad/HS6cEIVRpWHjfwS0Y8=
+
+Name: org/eclipse/emf/ecore/resource/Resource$Diagnostic.class
+SHA1-Digest: LYFoBh11NYRA7qjaBVO8VF67xNI=
+
+Name: org/eclipse/emf/ecore/util/DelegatingFeatureMap.class
+SHA1-Digest: lpAvnjpHulJ4AutVyo5ndFyl3g0=
+
+Name: org/eclipse/emf/ecore/util/EObjectResolvingEList.class
+SHA1-Digest: g5+PuxK0nexDK9//fB7Y92TvjqQ=
+
+Name: org/eclipse/emf/ecore/EModelElement.class
+SHA1-Digest: nKelm6uA2Kivw+UB1xn2tkIktSw=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$2.class
+SHA1-Digest: kfVuJZuZBqpDlbIkOk5W0Dmah5I=
+
+Name: org/eclipse/emf/ecore/resource/URIHandler.class
+SHA1-Digest: 1FbkLsvq0iMDJx8e/hPnLj0+WS8=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Op$StringOp.class
+SHA1-Digest: lEac/RxOCffLtgv//2ld1/zOS08=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceSetImpl$ResourcesELi
+ st.class
+SHA1-Digest: fbQCI99pkq5QlwZt9WHErn29mTU=
+
+Name: org/eclipse/emf/ecore/plugin/ExtensionParserRegistryReader.class
+SHA1-Digest: DyoYNn8pYCHbEYisgEjMVsb4OXo=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Op$ModifierOp.clas
+ s
+SHA1-Digest: oVwv+IiNu0uds5iU99TuL9r1e6I=
+
+Name: org/eclipse/emf/ecore/resource/Resource$Factory$Registry.class
+SHA1-Digest: Jk7Shl6aTecZLW/FG5P+OJCorlY=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeValidator.class
+SHA1-Digest: Bu+m54AwVqtSJUrW0VPmnRZVAqE=
+
+Name: org/eclipse/emf/ecore/util/EcoreValidator$1.class
+SHA1-Digest: 1pFufScQYFTWfI6koQLC8vpab9Q=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/DataValue$EncodingMap.cl
+ ass
+SHA1-Digest: 2lgghQjhdabcRl/v+QygFXWOXAU=
+
+Name: org/eclipse/emf/ecore/util/EObjectWithInverseEList$ManyInverse.c
+ lass
+SHA1-Digest: 8ull7TYBj0x2exmAjSt/qCj1aVU=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIConverterImpl$WorkbenchHe
+ lper.class
+SHA1-Digest: KOUj+LFnQJ7fPupjlJq9cCp75nY=
+
+Name: org/eclipse/emf/ecore/util/EcoreEMap$Unsettable$UnsettableDelega
+ teEObjectContainmentEList.class
+SHA1-Digest: NSz4nE/JZ3mKE7nOTDUj2jJ3F4I=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/DataValue$URI.class
+SHA1-Digest: fd/Ip6MLbhvcj7lL+nTAKJmHs70=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$EObjectOu
+ tputStream$EStructuralFeatureData.class
+SHA1-Digest: w4F36S4ozR4HQw8ouv9Unex2YAQ=
+
+Name: org/eclipse/emf/ecore/impl/EFactoryImpl$1.class
+SHA1-Digest: cKpFkx6Sc74cqn/ZFJ+LTFBIfWM=
+
+Name: org/eclipse/emf/ecore/impl/EOperationImpl$2.class
+SHA1-Digest: PFNVLYk1NhjaGqv4uCnegyq+8Vk=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$8.class
+SHA1-Digest: w/SLF+0UiJ2vjQNcIQnM4snXrYM=
+
+Name: org/eclipse/emf/ecore/impl/EPackageRegistryImpl.class
+SHA1-Digest: wF8D9YG951DnkTu00PUPnAdW0E0=
+
+Name: org/eclipse/emf/ecore/util/DelegatingEcoreEList$Unsettable.class
+SHA1-Digest: PGDQTH0van3bLbPN8uFREqpyw3I=
+
+Name: org/eclipse/emf/ecore/util/EcoreEList.class
+SHA1-Digest: czNdljfccDahXeQjqWnkSgOSu98=
+
+Name: org/eclipse/emf/ecore/xml/namespace/SpaceType.class
+SHA1-Digest: 1fuNBbh7u4OclaR5AjQYAZwnu48=
+
+Name: org/eclipse/emf/ecore/util/EObjectWithInverseResolvingEList$Unse
+ ttable$ManyInverse.class
+SHA1-Digest: ck2B1yC+QmxTpa5aMX2S6Dr1MVY=
+
+Name: org/eclipse/emf/ecore/util/DelegatingEcoreEList.class
+SHA1-Digest: /Rfxr9kmxlnkkCnvKiG5kpP+RYI=
+
+Name: org/eclipse/emf/ecore/plugin/ProtocolParserRegistryReader.class
+SHA1-Digest: eUqjZFnB0td2WAgdIH1xqYqFvpQ=
+
+Name: org/eclipse/emf/ecore/util/FeatureMap$Internal.class
+SHA1-Digest: 3X09xJut2nxE8fQwihjrBZwICqU=
+
+Name: org/eclipse/emf/ecore/resource/URIConverter$ReadableInputStream$
+ Buffer.class
+SHA1-Digest: qSanB02DxAwxxw1+cyhCL34wgb4=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$RegexParser$Refere
+ ncePosition.class
+SHA1-Digest: qtBAIvV56mmoFMMxeVTdtN+kooE=
+
+Name: org/eclipse/emf/ecore/impl/DynamicEObjectImpl$DynamicEProperties
+ HolderImpl.class
+SHA1-Digest: I6jkeTZAef2kl+Yu1FhMRNAT6iA=
+
+Name: org/eclipse/emf/ecore/resource/ContentHandler$ByteOrderMark.clas
+ s
+SHA1-Digest: Sfv8UVnxxZXezAn4NKnVem7PKNE=
+
+Name: org/eclipse/emf/ecore/plugin/FactoryOverrideRegistryReader.class
+SHA1-Digest: 2ioLTaOPmW0bczuqkU/QjoIBcKo=
+
+Name: org/eclipse/emf/ecore/util/ECrossReferenceEList.class
+SHA1-Digest: AjM2yySAxG7cU4jL+9+bQcNoBOI=
+
+Name: org/eclipse/emf/ecore/impl/EGenericTypeImpl.class
+SHA1-Digest: 9aj7zr7Q8+t9m1qvJBSIPa+huTA=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$BasicValidator.class
+SHA1-Digest: gDII53EgQMY5442z2SWfYOQzm6I=
+
+Name: org/eclipse/emf/ecore/util/EObjectContainmentWithInverseEList$Re
+ solving.class
+SHA1-Digest: 5Gsu7MlnvPZSb4vh7SCoAzHGL84=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$5.class
+SHA1-Digest: f9CxJpJ9MbIGST5PoWm3PVF0Gbo=
+
+Name: org/eclipse/emf/ecore/util/FeatureMap.class
+SHA1-Digest: 0Wa2o6e+KLIob5JscQ6xkAql6IA=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$5.class
+SHA1-Digest: Ws8LyVdkE8onFwbQo3A46qB7M9M=
+
+Name: schema/extension_parser.exsd
+SHA1-Digest: e5kWrg1t8hUdjQzMtYI6PFMvsfI=
+
+Name: org/eclipse/emf/ecore/impl/EStoreEObjectImpl$BasicEStoreFeatureM
+ ap.class
+SHA1-Digest: PBVWGbgSDZOKFqQujetSb53nlCY=
+
+Name: org/eclipse/emf/ecore/xml/type/SimpleAnyType.class
+SHA1-Digest: pU82TYoJQmQwqnH29E0dQvGcy38=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleDataUnsettableStatic.class
+SHA1-Digest: SQr4dBDpQY8zuLZ05VAe3FR+f8w=
+
+Name: org/eclipse/emf/ecore/util/DelegatingFeatureMap$ResolvingFeature
+ EIterator.class
+SHA1-Digest: NGCj6TOdCLAPqZuJlqQNe9ZCxWY=
+
+Name: org/eclipse/emf/ecore/util/DelegatingNotifyingInternalEListImpl.
+ class
+SHA1-Digest: kwYT6FFmClsjRCrl9CrciRdx9+E=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIConverterImpl.class
+SHA1-Digest: tiGq5Rm/hoVPvGmaHw0o50fKURk=
+
+Name: org/eclipse/emf/ecore/ETypeParameter.class
+SHA1-Digest: dvOFpMkvOwmqU0fB0GQ2ThnxnAA=
+
+Name: org/eclipse/emf/ecore/impl/EOperationImpl.class
+SHA1-Digest: QdLNuHrX3IA8pxBlQGPd5bcWEvU=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$ContentTreeIterator$Resourc
+ esIterator.class
+SHA1-Digest: TKJcXHsKmUHbFeyAMQ9fyNy1e8c=
+
+Name: org/eclipse/emf/ecore/xml/type/AnyType.class
+SHA1-Digest: GKjRBgS//gqsmd4MLPLkrB3BFz4=
+
+Name: org/eclipse/emf/ecore/plugin/RegistryReader$EFactoryDescriptor.c
+ lass
+SHA1-Digest: MM24tlaVH+Z8Xik+YuKd2z53Fzk=
+
+Name: org/eclipse/emf/ecore/EAttribute.class
+SHA1-Digest: c+jqIMT+02VYEx/QKyKtUuJbmMY=
+
+Name: org/eclipse/emf/ecore/resource/URIConverter$WriteableOutputStrea
+ m$Buffer.class
+SHA1-Digest: lKeXYLKe/kPyy2iN7ky6MXGZL00=
+
+Name: org/eclipse/emf/ecore/util/EObjectEList$Unsettable.class
+SHA1-Digest: UuI+RLkhc7CP01atP3367HCtkuA=
+
+Name: schema/protocol_parser.exsd
+SHA1-Digest: A4FYRCLGP3LGzvCCfA2SJjtRbGc=
+
+Name: org/eclipse/emf/ecore/util/EObjectContainmentWithInverseEList$Un
+ settable$Resolving.class
+SHA1-Digest: E5uGxi3CJ12NFVIhU+7ppPh1DDY=
+
+Name: org/eclipse/emf/ecore/resource/impl/ExtensibleURIConverterImpl$U
+ RIMap.class
+SHA1-Digest: VTHh/6iks13PD40TB8nUCjxh+tw=
+
+Name: org/eclipse/emf/ecore/EValidator.class
+SHA1-Digest: 6TraX1u03BQvv2mBmQoTBzp5PL4=
+
+Name: org/eclipse/emf/ecore/resource/impl/EFSURIHandlerImpl.class
+SHA1-Digest: blTOacRyrPrHh7QxSjEu5m+e4Cc=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$8.class
+SHA1-Digest: DkzUipDQZV+5BnPnXoMeUvTRCtA=
+
+Name: org/eclipse/emf/ecore/util/BasicFeatureMap$FeatureMapEObjectImpl
+ .class
+SHA1-Digest: hJK4HyTMdLnkiuh9fYWKcNwG6zA=
+
+Name: org/eclipse/emf/ecore/util/EcoreAdapterFactory.class
+SHA1-Digest: OuJSm1ONQbfAGDrzk8LqsF/7GyU=
+
+Name: org/eclipse/emf/ecore/impl/BasicEObjectImpl$EPropertiesHolder.cl
+ ass
+SHA1-Digest: S35EPVjT0QJZ8QaBd7aZG/+KJUo=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceSetImpl$1.class
+SHA1-Digest: JfPenp98GL/5fhF0s0jGfQ5/T0c=
+
+Name: org/eclipse/emf/ecore/xml/namespace/XMLNamespacePackage.class
+SHA1-Digest: QuBIBKNqR9GRM2SEQkSftPZ9GV0=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$1EStructuralFeatureUniqueE
+ List.class
+SHA1-Digest: a5rXArvgLuRskPc5uq7BnMXXBGU=
+
+Name: org/eclipse/emf/ecore/util/EcoreEList$UnmodifiableEList$FastComp
+ are.class
+SHA1-Digest: WekRIiUoj1Nv8tZJcuraxFPfWR4=
+
+Name: org/eclipse/emf/ecore/resource/impl/PlatformResourceURIHandlerIm
+ pl$WorkbenchHelper$1.class
+SHA1-Digest: 5UfCKjN02obRRNvQzovMrMBeOZw=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleContainer.class
+SHA1-Digest: PGuoJkmqXjV060YZDTMZq8QyZjg=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$6.class
+SHA1-Digest: MLso8p9vjDjjMHuwBotglffC/fQ=
+
+Name: org/eclipse/emf/ecore/impl/EPackageRegistryImpl$Delegator.class
+SHA1-Digest: nsUcjjJ56ngn5QE0kM2WnSdhNgc=
+
+Name: org/eclipse/emf/ecore/plugin/ContentParserRegistryReader.class
+SHA1-Digest: vq6RoAZyucmN1lFc7NZpt/8L/fU=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$2.class
+SHA1-Digest: Sqe4rBuojo/3hTriVfCC8L7h1ec=
+
+Name: org/eclipse/emf/ecore/plugin/RegistryReader.class
+SHA1-Digest: wi+PVemfjjp7l/33u4xtRARvsfA=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$Copier.class
+SHA1-Digest: N9uynFSRCIcYqZNMHfURgf3XmPM=
+
+Name: org/eclipse/emf/ecore/resource/impl/FileURIHandlerImpl.class
+SHA1-Digest: Ns2VrHZ2NQerzJXM1ihCJExoAc8=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$11.class
+SHA1-Digest: D7EIj2oWOspztuet5dzBnM+jxvo=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$3.class
+SHA1-Digest: TBpQJLcTxRmp6wrPVbvSKBcbm1o=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$BasicFeatureEIterator.
+ class
+SHA1-Digest: H+/xqdr00AouhN9Ezdq7VE8dEGw=
+
+Name: org/eclipse/emf/ecore/impl/DynamicEObjectImpl.class
+SHA1-Digest: xNjW7TL0jaaj3JmXYfdpN2yj+9M=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectResolvingWithInverseUnsettable.class
+SHA1-Digest: VMINypw3U9t/Lx4RX8ViekEwZkc=
+
+Name: org/eclipse/emf/ecore/impl/ETypeParameterImpl$2.class
+SHA1-Digest: fku0ow70okD0iNPsi1mZbheSGAo=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$FeatureSubsetSupplier.clas
+ s
+SHA1-Digest: mdpHV5WK2ZPcEk0XlatQ5m/xBCI=
+
+Name: org/eclipse/emf/ecore/util/EcoreEMap$DelegateEObjectContainmentE
+ List.class
+SHA1-Digest: Zay5uzpPtZUHyKlI2/t9T1vDeS0=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$BinaryIO$
+ Version.class
+SHA1-Digest: UOGMJi6n6yPT+s0LuOM0y7FcdC0=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData$EPackageExtende
+ dMetaDataImpl.class
+SHA1-Digest: ZvhaaJ1WQDF6DpmKe1IxFGXZWZs=
+
+Name: org/eclipse/emf/ecore/plugin/RegistryReader$1.class
+SHA1-Digest: VZ+37CEzIZH+k9cO4DaHYU57qH0=
+
+Name: org/eclipse/emf/ecore/impl/EDataTypeImpl.class
+SHA1-Digest: PvXCdDVPRBOLXSkEeU9ZFibYZRI=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData$EDataTypeExtend
+ edMetaDataImpl.class
+SHA1-Digest: 7Zs+6n9MGZ1IULokIRyS93gfmrE=
+
+Name: org/eclipse/emf/ecore/impl/DynamicEStoreEObjectImpl.class
+SHA1-Digest: eLO2ZWIX+l3nk00MmaGRHC4Ntsg=
+
+Name: org/eclipse/emf/ecore/resource/ContentHandler$ByteOrderMark$2.cl
+ ass
+SHA1-Digest: 37CLw/wI7KG7YSWu8kXL1QhkRrw=
+
+Name: org/eclipse/emf/ecore/impl/EAnnotationImpl$1.class
+SHA1-Digest: sPJSBUswxZbDAC919Xjog/zJA1o=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$1.class
+SHA1-Digest: hf183CiXmIgfmgQmslT7Arh8+cw=
+
+Name: model/Ecore.mdl
+SHA1-Digest: +GmYeD7dQeID+KO1gtFHR8+Jm6E=
+
+Name: schema/content_parser.exsd
+SHA1-Digest: HLsp+5fLuxn7ea3w3+atw8RH0xg=
+
+Name: org/eclipse/emf/ecore/impl/EStoreEObjectImpl.class
+SHA1-Digest: ZIHKjrtscjSvrGKuMCXzI+6IKuA=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$4.class
+SHA1-Digest: 8JNe618ujXntgW6Hhjd9FeIuhFQ=
+
+Name: org/eclipse/emf/ecore/impl/EStoreEObjectImpl$BasicEStoreEList.cl
+ ass
+SHA1-Digest: l0iYtrF/Zl8geNYN8uWsZ34gSlU=
+
+Name: org/eclipse/emf/ecore/impl/ETypeParameterImpl$2$1$1.class
+SHA1-Digest: EjN/850B/t8cyeW9wA4Yw2MoGh8=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$2.class
+SHA1-Digest: sabzvysC8LYWRdFqVQ+cyFjcWfg=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleDataUnsettable.class
+SHA1-Digest: q4am/6Vgo6RYNf4bgUeqr3Nwfxo=
+
+Name: model/Ecore.ecore
+SHA1-Digest: zzrHY8T6CSNNFf/BZU4TAjVW57Y=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData$EStructuralFeat
+ ureExtendedMetaDataImpl.class
+SHA1-Digest: WmeS0TrRPzc5s/AV9L3Nq9nQUSE=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Token$CharToken.cl
+ ass
+SHA1-Digest: ilaOJ4qKPH2t9zbeBuHlvDVhx80=
+
+Name: org/eclipse/emf/ecore/xml/namespace/XMLNamespacePackage$Literals
+ .class
+SHA1-Digest: 45rP7EWt1d+u1WGNdQAeX8ijzrU=
+
+Name: org/eclipse/emf/ecore/util/EObjectContainmentEList$Unsettable.cl
+ ass
+SHA1-Digest: 1eJvDhXwyHn11JsQ7WfFKsKjCXo=
+
+Name: org/eclipse/emf/ecore/impl/EStringToStringMapEntryImpl$EStringTo
+ StringMapEntryPropertiesHolderImpl.class
+SHA1-Digest: EGvZlN0tS15KTCDzlpTipVz8hvE=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$1.class
+SHA1-Digest: jVF9QlYIrjFV36MqpqLcuU3t3Ao=
+
+Name: org/eclipse/emf/ecore/util/BasicInternalEList.class
+SHA1-Digest: RP899TgUAZ82gOIAb7W90NeGn8o=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Token$StringToken.
+ class
+SHA1-Digest: IxwZKUN1qgNwLTjja/77ahb1xTU=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Token$FixedStringC
+ ontainer.class
+SHA1-Digest: vtoXef/+MBri5F41EHF+SVRzkL0=
+
+Name: org/eclipse/emf/ecore/util/ECrossReferenceEList$ResolvingFeature
+ IteratorImpl.class
+SHA1-Digest: FWDphiYWSTwJg/hazLmwUtvb/00=
+
+Name: schema/uri_mapping.exsd
+SHA1-Digest: Tc80hLeTl3HG/xA3s5YAyMMC+pI=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$FilteredSettingsIterator.cl
+ ass
+SHA1-Digest: 6r12MIx/OOpRcBcjLEB32ODXV/M=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$5.class
+SHA1-Digest: 3pgo4o90w5KpkrlvgeuCmUlV7uc=
+
+Name: org/eclipse/emf/ecore/impl/EOperationImpl$1.class
+SHA1-Digest: VicgVCXoC+YaZjh3QV3TFTzH0mc=
+
+Name: org/eclipse/emf/ecore/EFactory.class
+SHA1-Digest: bVU65lX0bOR3le3ZuWehRzPnDLI=
+
+Name: org/eclipse/emf/ecore/util/FeatureMap$Internal$Wrapper.class
+SHA1-Digest: u+47YyrHlJOyeqWz6NPkLPKwrhg=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleDataUnsettableDynamic.class
+SHA1-Digest: rLTYyXiT3YRVtc3mSSmzVmDhFy8=
+
+Name: org/eclipse/emf/ecore/impl/EOperationImpl$1$1.class
+SHA1-Digest: bUNeaOxIQ54vDabIpsr+FmiMBGI=
+
+Name: org/eclipse/emf/ecore/resource/impl/ArchiveURIHandlerImpl$Archiv
+ e.class
+SHA1-Digest: rvjSWn8lKGz9eRG+V+pJaLpeePU=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$4.class
+SHA1-Digest: 27YjXbZF9usQDtQXx2q/KU38ORk=
+
+Name: org/eclipse/emf/ecore/util/EObjectValidator$1.class
+SHA1-Digest: YmK1Pdy+HypBvX/jEiSR13paI9g=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeResourceImpl$FrameFac
+ tory$XMLTypeDocumentRootStackFrame.class
+SHA1-Digest: JZczgG5jP3qcjP0QGRDqcUrhcYU=
+
+Name: org/eclipse/emf/ecore/resource/impl/ExtensibleURIConverterImpl$O
+ ptionsMap.class
+SHA1-Digest: 0LybtSN0NOAHjoGov6Ai4Z8N9qo=
+
+Name: org/eclipse/emf/ecore/EStructuralFeature.class
+SHA1-Digest: pMMeo6OEUUAumLtluWIWVPIcT8U=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectContainment.class
+SHA1-Digest: AMBjHEdHqtbzam1H7x157CPBJLU=
+
+Name: org/eclipse/emf/ecore/impl/ENamedElementImpl$2$2.class
+SHA1-Digest: nmO2q7Y1fXBWVkUBYfdZITDqcr4=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$ParseException.cla
+ ss
+SHA1-Digest: cIblWV2yPS8X3N/SNnFlj9f6tjc=
+
+Name: org/eclipse/emf/ecore/util/XMLTypeFeatures.class
+SHA1-Digest: O/srg/mi0vEXTBbSER/zlOGxUrc=
+
+Name: org/eclipse/emf/ecore/impl/EValidatorRegistryImpl.class
+SHA1-Digest: jwLkWGCra1sGhh7TlK3wlejwOPY=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$EqualityHelper.class
+SHA1-Digest: SfO93juTq/4lx2g+bFj7F4aLGzo=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$RangeToken.class
+SHA1-Digest: O4kXZSNZxQvdkyTfKeSwPg4E1MY=
+
+Name: org/eclipse/emf/ecore/plugin/EcorePlugin$1Handler.class
+SHA1-Digest: v1uEfQJQfMBlQwjLC3+eq23zoH4=
+
+Name: org/eclipse/emf/ecore/xml/type/impl/AnyTypeImpl.class
+SHA1-Digest: 1Dy3HJuN54HXjF9LN0c7vlmtsPk=
+
+Name: org/eclipse/emf/ecore/util/EObjectValidator$DynamicEDataTypeVali
+ dator.class
+SHA1-Digest: zxVSokUqI8wAbu6SM+5sXY9e13g=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl.class
+SHA1-Digest: 3k3RRGmsiuv+FW5o24GFtcXF3y4=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/DataValue$ValidationCont
+ ext.class
+SHA1-Digest: IsCUsIxQVocF6sx7xKIsMbh3Qlo=
+
+Name: org/eclipse/emf/ecore/resource/ContentHandler$Validity.class
+SHA1-Digest: 3y+UgYaL9xZVvs9Zx0tjZxUcgL0=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$EObjectOu
+ tputStream$Check.class
+SHA1-Digest: YSL8HO4fmt7kSdCiVbbbJ+VIxtw=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$BinaryIO$
+ FeatureKind.class
+SHA1-Digest: OlZ2dEaC1O8cZ7MzKccivaDy6I4=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$3.class
+SHA1-Digest: QPuwjIy0OINVsjxPdwuggrfI3cQ=
+
+Name: org/eclipse/emf/ecore/xml/type/XMLTypePackage.class
+SHA1-Digest: D39ejJF7NBe5Ev3ZUbTJZPyoC5Q=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectContainmentResolving.class
+SHA1-Digest: EiW8L2IFi/GrNk9+CgDEit+NlGU=
+
+Name: org/eclipse/emf/ecore/resource/URIConverter.class
+SHA1-Digest: OtowcMbOlKNuXDYlF6yOgaxviuo=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Op$RangeOp.class
+SHA1-Digest: 7HXN7n18npn406H/e4BhnHr+98Y=
+
+Name: org/eclipse/emf/ecore/plugin/URIMappingRegistryReader.class
+SHA1-Digest: fS9xRjp58/7Qj1VSE46aOph9Sgk=
+
+Name: org/eclipse/emf/ecore/util/EObjectWithInverseEList.class
+SHA1-Digest: EbG/0yHRHoDvgKgaMFv5XtwHuiE=
+
+Name: org/eclipse/emf/ecore/EObject.class
+SHA1-Digest: wJTZ99rfG/ytXA7IQ2Df4/UTbfU=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$ParserForXMLSchema
+ .class
+SHA1-Digest: jjF9eXl98y2YZ9fN4S9QLFUe6Qo=
+
+Name: org/eclipse/emf/ecore/xml/namespace/XMLNamespaceFactory.class
+SHA1-Digest: rj5OutEjZubEsj42/DFgFvXWipY=
+
+Name: org/eclipse/emf/ecore/plugin/EcorePlugin$Implementation.class
+SHA1-Digest: sIGPtd8Py6lwwlmOwvYzOc5Mo10=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl.class
+SHA1-Digest: vIUqD5MGdOICadVrpKH7GR8Qbng=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$RegexParser.class
+SHA1-Digest: IaPO7NgxK96nbwyOAGXorJHGBLo=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeResourceImpl$DataFram
+ e.class
+SHA1-Digest: cbuyKrHi9G2re4e58dB+SrOeBAY=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/QName.class
+SHA1-Digest: db8qn2AV6AFSV8TKMZgbf+NGl6U=
+
+Name: org/eclipse/emf/ecore/resource/impl/ExtensibleURIConverterImpl$C
+ ontentHandlerList.class
+SHA1-Digest: YXAC+9alvlZ5D2Oxcn2xYqS6Rzw=
+
+Name: org/eclipse/emf/ecore/util/EObjectResolvingEList$Unsettable.clas
+ s
+SHA1-Digest: ySIJ77130puY2s691ehWVpt4SPI=
+
+Name: org/eclipse/emf/ecore/xml/namespace/util/XMLNamespaceValidator.c
+ lass
+SHA1-Digest: HDZS4cpJJbEalonGmFli3Fb5xG8=
+
+Name: org/eclipse/emf/ecore/impl/BasicEObjectImpl$2.class
+SHA1-Digest: lsLrCTkqRoP1I8CEiRGL6QD0/pw=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$FeatureENotificationIm
+ pl.class
+SHA1-Digest: aAKVUFvkHcdVznKUAyFytyjQveA=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$RegularExpression.
+ class
+SHA1-Digest: D3vRSxiVLozOb17pZlA9dUWR6/w=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIHandlerImpl$1.class
+SHA1-Digest: K8qv+qqUMV7khmLGq97sg50IJHE=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData.class
+SHA1-Digest: EhEXOm2yzFuSdfk3qXvFKvLTPDc=
+
+Name: org/eclipse/emf/ecore/impl/ENamedElementImpl$1.class
+SHA1-Digest: 29OKNKD6F1HYLn334HKgdxzPEhk=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$EObjectIn
+ putStream$EStructuralFeatureData.class
+SHA1-Digest: aATbo4+28p3ZT5G2zvkb038iL9s=
+
+Name: org/eclipse/emf/ecore/resource/impl/ExtensibleURIConverterImpl$U
+ RIHandlerList.class
+SHA1-Digest: Xiy9BSWUMAeaLBVpqQcmt6IKUPc=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$FeatureEList.class
+SHA1-Digest: dzMxVXTjXj++POJLh5UiUGgPREk=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Op.class
+SHA1-Digest: SLEmj6ZX4KbMebU6ppCoBjS6Gh4=
+
+Name: org/eclipse/emf/ecore/util/AbstractSequentialInternalEList$1.cla
+ ss
+SHA1-Digest: B6g+nf481lnUBVAHJwWnJrbTnSo=
+
+Name: org/eclipse/emf/ecore/util/EDataTypeUniqueEList.class
+SHA1-Digest: sVQN0Q6MCtdDKvhvEjsuSFWTb3E=
+
+Name: org/eclipse/emf/ecore/resource/ContentHandler$ByteOrderMark$3.cl
+ ass
+SHA1-Digest: Wd4fd7rIy1haxajVCwyF5LuJCc0=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$FeatureFeatureMap.clas
+ s
+SHA1-Digest: uN8OGz/HaM7qlAluS2BpXgT60wg=
+
+Name: org/eclipse/emf/ecore/resource/impl/AESCipherImpl.class
+SHA1-Digest: JH8HHqnh3Whq2YB7DRBNwk8f/y4=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeResourceImpl$FrameFac
+ tory$AnyTypeStackFrame.class
+SHA1-Digest: EsZtp1WydRco2laXdpBHwjY6QCE=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIMappingRegistryImpl$URIMa
+ pImpl.class
+SHA1-Digest: Tp/LGksi8pMCOzSnkeNvQuIe/tU=
+
+Name: org/eclipse/emf/ecore/resource/Resource$Factory.class
+SHA1-Digest: /jgyht1nepCOTL9DXh9YaOsFUjQ=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$BasicValidator$Cache.c
+ lass
+SHA1-Digest: UFjBodrC//w+UB2cgXysIyP/TYc=
+
+Name: org/eclipse/emf/ecore/util/EObjectContainmentWithInverseEList$Un
+ settable.class
+SHA1-Digest: zJijpVWEOmhffFlxE3J0gVJdDOQ=
+
+Name: org/eclipse/emf/ecore/util/BasicFeatureMap$ValueListIteratorImpl
+ .class
+SHA1-Digest: +olZSGY9rduTc35xQFINul+xp4U=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$SimpleContentF
+ eatureMapEntry.class
+SHA1-Digest: +X867itNqPkoidtXEUjfAPj5ctc=
+
+Name: about.html
+SHA1-Digest: 0pxhpoXBU+bv+sZ5zfCxROPVpTI=
+
+Name: org/eclipse/emf/ecore/EStructuralFeature$Internal$SettingDelegat
+ e.class
+SHA1-Digest: xwZrbYVFU8fH1wEEavM+ZwQ0YE0=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/XMLCalendar.class
+SHA1-Digest: HcmSAXeVKEBlbU/hJMolvczfbZc=
+
+Name: org/eclipse/emf/ecore/resource/URIConverter$Readable.class
+SHA1-Digest: W9gtWvKjg8Cmt5AumHZ6dwxsZw8=
+
+Name: org/eclipse/emf/ecore/util/EcoreEList$Dynamic.class
+SHA1-Digest: wNI96EAkS1MElz4Bvmsz6kC5SYs=
+
+Name: org/eclipse/emf/ecore/resource/impl/DESCipherImpl$1.class
+SHA1-Digest: if+559HqRjXAQ4SZVCj6Jh8NV6w=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Token$ModifierToke
+ n.class
+SHA1-Digest: JSmcBFU7AazjHnmR7Hr2dBeTdeI=
+
+Name: org/eclipse/emf/ecore/EStructuralFeature$Internal.class
+SHA1-Digest: 44lUVqa4nxhcCqgM+xSjRKUHzJc=
+
+Name: org/eclipse/emf/ecore/plugin/ContentHandlerRegistryReader.class
+SHA1-Digest: zyUPeFxfb8Gxl4eCzlLUpVm3LPg=
+
+Name: org/eclipse/emf/ecore/impl/EEnumImpl.class
+SHA1-Digest: Og87Sugg45qPSZdMv/CaQA7bx3A=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$Validator.class
+SHA1-Digest: LspesWxCzX9i16YiJHKOQhEydUw=
+
+Name: org/eclipse/emf/ecore/EOperation.class
+SHA1-Digest: k9d++XJg4HCFk35iBJnKYriKxN4=
+
+Name: org/eclipse/emf/ecore/util/InternalEList.class
+SHA1-Digest: s8z0gm54beV30k8WRwUiTQEAVJw=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Op$CharOp.class
+SHA1-Digest: Dh1e/A1e92OYGB0fASLzdlvzWGA=
+
+Name: org/eclipse/emf/ecore/plugin/EcorePlugin.class
+SHA1-Digest: SXHbI1z8r9p1tAyfPc/Mf6ZskBc=
+
+Name: org/eclipse/emf/ecore/xml/namespace/XMLNamespaceDocumentRoot.cla
+ ss
+SHA1-Digest: UmlAwfA7sh+OIfpMk/BPgjxFZtc=
+
+Name: org/eclipse/emf/ecore/util/EcoreEMap.class
+SHA1-Digest: gQ0hduxPLau/I4lyyKCIKPpdMPE=
+
+Name: org/eclipse/emf/ecore/impl/EStoreEObjectImpl$EStoreImpl.class
+SHA1-Digest: SZmGdX0dtpAL3XOsWwI2qsYaXyE=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceFactoryRegistryImpl.
+ class
+SHA1-Digest: zqUkQ1nb+4AF7fhPpoMvyhBtfm4=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleContainerResolving.class
+SHA1-Digest: kij5cbovP9z2u9aU+LCiWn8G1Rg=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleDataDynamic.class
+SHA1-Digest: e3JT0pCK72xHA8Pz7FSUImHUL/M=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx.class
+SHA1-Digest: eyFXQ4R6iDapfZ1T/GxhcoHYncI=
+
+Name: org/eclipse/emf/ecore/util/EContentsEList$ResolvingFeatureIterat
+ orImpl.class
+SHA1-Digest: pRJjRMaWVipAsJNzkUXTyRlbt8Q=
+
+Name: org/eclipse/emf/ecore/util/ECrossReferenceAdapter.class
+SHA1-Digest: k6KJlI4GmS3gcheDWXdMGy6VGII=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeUtil.class
+SHA1-Digest: Vn/QVi8r7gv5lXY+YimbFP6cBgI=
+
+Name: org/eclipse/emf/ecore/impl/ENamedElementImpl$2$1.class
+SHA1-Digest: SAlqkpvkAaC69Rm0AX7jHvyFk64=
+
+Name: org/eclipse/emf/ecore/util/EContentAdapter.class
+SHA1-Digest: Lh1U505ljGfaN8RaPOgasxYwyY0=
+
+Name: org/eclipse/emf/ecore/impl/ESuperAdapter.class
+SHA1-Digest: LYmhEsbEe3ApRCHsivhYNFbVRl4=
+
+Name: org/eclipse/emf/ecore/plugin/RegistryReader$ResourceFactoryDescr
+ iptor.class
+SHA1-Digest: R+qjW+p1pUrRo9W6Mhlf8CXt05M=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$9$1.class
+SHA1-Digest: WX1xj2dpfZrXZKXGD6yRS06pNs8=
+
+Name: org/eclipse/emf/ecore/xml/type/XMLTypePackage$Literals.class
+SHA1-Digest: 9bLntEYboPGU4KIwTqkdAFum4iU=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectResolvingUnsettable.class
+SHA1-Digest: OdQDEwA1bJNTucwPpQvPmtwF4g0=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl.class
+SHA1-Digest: pe/BcazAy5eX+2st4r03g3VyZWU=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectContainmentWithInverseUnsettableResolving.class
+SHA1-Digest: Xpc92K9Bs86ZziU2yWOZi6CeAXM=
+
+Name: org/eclipse/emf/ecore/util/ExtendedMetaData.class
+SHA1-Digest: b6cSGh5XEqH0xFLd99dh56wm9QM=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIConverterImpl$Archive.cla
+ ss
+SHA1-Digest: KQNEYfxQ9zR8/g8VFgyVjoHaYOg=
+
+Name: org/eclipse/emf/ecore/plugin/RegistryReader$PluginClassDescripto
+ r.class
+SHA1-Digest: sedamammArQ9ZnHBE3f6GzR3LC4=
+
+Name: org/eclipse/emf/ecore/impl/BasicEObjectImpl$1.class
+SHA1-Digest: v9V0ecOY3x1+e6/ThbAojPCWfD0=
+
+Name: org/eclipse/emf/ecore/resource/impl/ContentHandlerImpl.class
+SHA1-Digest: +sAxLV8isTlp3M/BEJUEUCKHwLw=
+
+Name: org/eclipse/emf/ecore/util/EcoreValidator$EGenericTypeBuilder.cl
+ ass
+SHA1-Digest: OSMwA4ZNXvVRSHA4LJKUa38N6CI=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/DataValue$HexBin.class
+SHA1-Digest: 7+gE6Dx2d4K6n19kPylLh8HBLDU=
+
+Name: org/eclipse/emf/ecore/InternalEObject$EStore.class
+SHA1-Digest: bJBA/rl1MZ+rEDu0Rfx0F6eEk9A=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateMany.class
+SHA1-Digest: r2BKiOIArgl2iGnpQ8u740q8JfI=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$BinaryIO.
+ class
+SHA1-Digest: LC4Dpo6R9rxR0nhLBEW6daS6zLg=
+
+Name: org/eclipse/emf/ecore/xml/type/XMLTypeDocumentRoot.class
+SHA1-Digest: 6IwdBAAR4cqPLLSW32H/YbdwYQo=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData$EStructuralFeat
+ ureExtendedMetaData.class
+SHA1-Digest: tXOvdc3nrBw9j3xySiabvRMIG2E=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectUnsettable.class
+SHA1-Digest: xe2soCcuZeV4dGOZeOpn9W5vP+A=
+
+Name: org/eclipse/emf/ecore/xml/type/impl/XMLTypePackageImpl.class
+SHA1-Digest: nwv0wmjYtviO93arnFqxh0WgcaY=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIMappingRegistryImpl.class
+SHA1-Digest: 8M2w49Xj54KhfPNIpMiA2s9H4PE=
+
+Name: org/eclipse/emf/ecore/resource/impl/EFSURIHandlerImpl$1.class
+SHA1-Digest: 8RIPGgP5vVYCYO7pcBdgb8ypmik=
+
+Name: org/eclipse/emf/ecore/resource/ContentHandler$ByteOrderMark$1.cl
+ ass
+SHA1-Digest: C+HOqiul9WSqQYXoGP7AGrYM9K0=
+
+Name: org/eclipse/emf/ecore/util/NotifyingInternalEListImpl.class
+SHA1-Digest: 29v/smblqMfmxCUXjfbYCNyLxHw=
+
+Name: org/eclipse/emf/ecore/resource/impl/FileURIHandlerImpl$1.class
+SHA1-Digest: Mv34I5MvSMobIcz87cFHRxt+mMA=
+
+Name: org/eclipse/emf/ecore/impl/EFactoryImpl$SafeSimpleDateFormat.cla
+ ss
+SHA1-Digest: X3Kao2sYYf5OBW0ka9z3pujFOVY=
+
+Name: org/eclipse/emf/ecore/resource/Resource$Factory$Descriptor.class
+SHA1-Digest: OvfLbdSXJ4n4pCrRS6uXdk57rrk=
+
+Name: org/eclipse/emf/ecore/impl/EStoreEObjectImpl$EStoreEPropertiesHo
+ lderImpl.class
+SHA1-Digest: sV1u1RVmQySWJgAjRD2JEEcIQkY=
+
+Name: org/eclipse/emf/ecore/impl/EcorePackageImpl.class
+SHA1-Digest: sXI7s0GwOYc/exM2xmfBU9zarbk=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/DataValue$URI$MalformedU
+ RIException.class
+SHA1-Digest: 7cw+IN3MS/jV9Pmmz1qfT7VEFsQ=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$EObjectOu
+ tputStream.class
+SHA1-Digest: 82vGlVARX/24lAU23AG7mQ7fXrA=
+
+Name: schema/content_handler.exsd
+SHA1-Digest: vHTTpBVPnpj7vW88YIP3eeeVlZ8=
+
+Name: org/eclipse/emf/ecore/impl/EClassifierImpl.class
+SHA1-Digest: J07iY63YszNmxo0WkwCg+7LCpPc=
+
+Name: org/eclipse/emf/ecore/util/FeatureMap$Entry$Internal.class
+SHA1-Digest: TxlrxlbYCKBkE5KLyQioP9aNqws=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$SimpleFeatureM
+ apEntry.class
+SHA1-Digest: r6N1FOIrlktPxyoPtYvNjaN/nZ4=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIMappingRegistryImpl$Mappi
+ ngEntryImpl.class
+SHA1-Digest: cA57eA+k8vQFMfCaRWpdMoxifsI=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/DataValue.class
+SHA1-Digest: zhNYpeE3YDRlii/tFDjxiytQWXs=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$EObjectIn
+ putStream$EPackageData.class
+SHA1-Digest: IvrI3oERX1e36YwUMhFRVWu8DOU=
+
+Name: org/eclipse/emf/ecore/resource/impl/DESCipherImpl.class
+SHA1-Digest: lwc85xu29PHkzoYV3V3gMYfRSgI=
+
+Name: org/eclipse/emf/ecore/impl/ENamedElementImpl$1$2.class
+SHA1-Digest: C3ejlgDHXSYs581sqwBz4MgOzdo=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIConverterImpl$PlatformRes
+ ourceOutputStream.class
+SHA1-Digest: dr+E+zDsLukDWaKpwzQSQHumQ8o=
+
+Name: org/eclipse/emf/ecore/util/FeatureMap$ValueListIterator.class
+SHA1-Digest: R4jDrGalR5LWn4sLeaH+kxzONHg=
+
+Name: org/eclipse/emf/ecore/util/EObjectContainmentEList$Resolving.cla
+ ss
+SHA1-Digest: p9Y9ZKP/0rYnDKQ4Ppcv6W+mwds=
+
+Name: org/eclipse/emf/ecore/impl/ENotificationImpl.class
+SHA1-Digest: 1k23Lne9XtwJ7lpU4XEg9VaLP1Y=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingle$1.class
+SHA1-Digest: FPrr/NLbUYlVthUXUFhC/Hir72U=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$EObjectOu
+ tputStream$EClassData.class
+SHA1-Digest: AuL0In5lFX788X4L3UiYGxGTsZU=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateFeatureMapDelegator.class
+SHA1-Digest: c/NOGn/nmB3aVi5l66ugzT4fSao=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$ContainmentUpd
+ atingFeatureMapEntry.class
+SHA1-Digest: QzDNyOa/9IBb8eK15BUiv1Wy6a4=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$FeatureValue.class
+SHA1-Digest: p5timkiIsSya7BXg0GQIqKF8LVw=
+
+Name: org/eclipse/emf/ecore/xml/type/impl/XMLTypeFactoryImpl.class
+SHA1-Digest: zukJj8tWS/RU5518yENnr9EJGXs=
+
+Name: schema/factory_override.exsd
+SHA1-Digest: 2RN+J7Udbki++kc4hCplV4f9elU=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$10.class
+SHA1-Digest: Dpl1OG63UU6wlC2tFB55ILhZZjg=
+
+Name: org/eclipse/emf/ecore/util/AbstractSequentialInternalEList.class
+SHA1-Digest: FLWQO6SCTRzZ4RwH2LCsQe4MTsk=
+
+Name: org/eclipse/emf/ecore/impl/EPackageRegistryImpl$SecureDelegator.
+ class
+SHA1-Digest: ronMj6h7zt5Swc4tO/ymB60rPc8=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$1EGenericSuperTypeEList.cl
+ ass
+SHA1-Digest: eb9PRwi4ZJInl/diD14N9hxFHWs=
+
+Name: org/eclipse/emf/ecore/EClass.class
+SHA1-Digest: KcxZuUNLFLIv+VhVPXybsPuuC04=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeResourceImpl$FrameFac
+ tory$ProcessingInstructionStackFrame.class
+SHA1-Digest: 4BDM7B8XbdQXtqH1ywvYH3dVkZQ=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/DataValue$XSSimpleType.c
+ lass
+SHA1-Digest: f/QejDHogA+lR2+7YzvHAGKotZc=
+
+Name: org/eclipse/emf/ecore/util/EObjectContainmentEList$Unsettable$Re
+ solving.class
+SHA1-Digest: qaKzXjF5mbni9JrmgchFwGEjZ9c=
+
+Name: org/eclipse/emf/ecore/EValidator$Registry.class
+SHA1-Digest: DBSf8xAiSL5XXebr+yyi7qzdDmc=
+
+Name: org/eclipse/emf/ecore/util/EcoreValidator$2.class
+SHA1-Digest: 1rOrskAawlvuAIPuK51FW4It1dY=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$ContentTreeIterator.class
+SHA1-Digest: VyQuel77HYjzQtkx1vaWpJT8eXY=
+
+Name: org/eclipse/emf/ecore/impl/EStoreEObjectImpl$EStoreEList.class
+SHA1-Digest: /byFwj9ONB/KlJqjc21u20HN7A4=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceFactoryImpl.class
+SHA1-Digest: ytSAVU1wyGS0893BYK2y3RZp2C0=
+
+Name: org/eclipse/emf/ecore/resource/impl/PlatformContentHandlerImpl.c
+ lass
+SHA1-Digest: M8UDI/JXwO3cWHLKg980wU1LtHs=
+
+Name: org/eclipse/emf/ecore/util/ECrossReferenceAdapter$InverseCrossRe
+ ferencer$2.class
+SHA1-Digest: MsODSj1gUAF3Zpk2mdUoA7VKbgo=
+
+Name: org/eclipse/emf/ecore/util/EcoreSwitch.class
+SHA1-Digest: 8gS38xQNPAvlOwMFKZyDV4ZaiiM=
+
+Name: org/eclipse/emf/ecore/resource/impl/URIConverterImpl$URIMap.clas
+ s
+SHA1-Digest: LVzzaqqa0WN24r4LwDCXAE6UMpk=
+
+Name: org/eclipse/emf/ecore/EGenericType.class
+SHA1-Digest: g000hOihfbYBU7N4vPVr4NvIJHw=
+
+Name: org/eclipse/emf/ecore/resource/impl/ArchiveURIHandlerImpl.class
+SHA1-Digest: kH+kkxFFx1/wa87O4P/xJ8zt9rM=
+
+Name: org/eclipse/emf/ecore/util/EObjectWithInverseResolvingEList$Unse
+ ttable.class
+SHA1-Digest: mJDSBhFctwtLgyN/kEJoQCMeAI4=
+
+Name: org/eclipse/emf/ecore/util/BasicFeatureMap$ResolvingFeatureEIter
+ ator.class
+SHA1-Digest: j/0nPNgKMQQIbqP+6Ct/6cbGX0w=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Op$ConditionOp.cla
+ ss
+SHA1-Digest: +FoqWGa50kHEgHm6Zc4r06hZdRs=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeUtil$CharArrayThreadL
+ ocal.class
+SHA1-Digest: jjgEoBdQXGbo8BQjsmWNiOQ1F9Q=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$REUtil.class
+SHA1-Digest: vfqgRIeoG+T2ijBJ2lInCfogqi8=
+
+Name: org/eclipse/emf/ecore/resource/impl/PlatformResourceURIHandlerIm
+ pl$PlatformResourceOutputStream.class
+SHA1-Digest: QnNcQ0QrqD4N6scC+qnNQCEYWyI=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$EGenericTypeConverter.class
+SHA1-Digest: rWuYQtkPjU0Uv7TMH3ocu/9vP2s=
+
+Name: org/eclipse/emf/ecore/util/EcoreValidator$EOperationSignatureVal
+ idator.class
+SHA1-Digest: EUzcl6GIwJjDVblNu+QxK5v8CMo=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectWithInverse.class
+SHA1-Digest: /QvESb7Itw6wkRGcSr7fNQFAoZQ=
+
+Name: org/eclipse/emf/ecore/xml/namespace/impl/XMLNamespacePackageImpl
+ $1.class
+SHA1-Digest: 5HikSg2bu4FNDBkdGIWhm+xpqIY=
+
+Name: org/eclipse/emf/ecore/impl/EStoreEObjectImpl$EStoreFeatureMap.cl
+ ass
+SHA1-Digest: kQd8Avjj4JKTyTB0EmiCfqtFhGc=
+
+Name: org/eclipse/emf/ecore/xml/namespace/impl/XMLNamespaceFactoryImpl
+ .class
+SHA1-Digest: wJ8QeEVBiBuuuFFhsgB8uZzP/uo=
+
+Name: model/Ecore.genmodel
+SHA1-Digest: gXqUOoyV8Rg1jBl/fUprEreJlgI=
+
+Name: org/eclipse/emf/ecore/EDataType.class
+SHA1-Digest: U+YZcMtFuv38ET6rgNEw6jWPA+I=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeResourceImpl$FrameFac
+ tory$SimpleAnyTypeStackFrame.class
+SHA1-Digest: Bt8pPzYL/N7HY5RzJrnYg0ffSak=
+
+Name: org/eclipse/emf/ecore/util/DelegatingFeatureMap$FeatureEIterator
+ .class
+SHA1-Digest: BxgA7Sx535nEVOijOeeXmk2vdSo=
+
+Name: org/eclipse/emf/ecore/impl/BasicEObjectImpl$3.class
+SHA1-Digest: s9yawUrzSMCTioGFG8uJTxijglE=
+
+Name: org/eclipse/emf/ecore/EClassifier.class
+SHA1-Digest: jn88Z09AJebj8YNBDwx/NQzgj70=
+
+Name: org/eclipse/emf/ecore/impl/ESuperAdapter$1.class
+SHA1-Digest: RwMlPZuxLIuKkkaZwVsLNiHknos=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$CrossReferencer.class
+SHA1-Digest: EAA5MEN3ssHfKnY23gb+sSbePvo=
+
+Name: org/eclipse/emf/ecore/impl/BasicEObjectImpl$EPropertiesHolderImp
+ l.class
+SHA1-Digest: guwQ4wXwLAJisKj6bBa70mJ5qOs=
+
+Name: org/eclipse/emf/ecore/EParameter.class
+SHA1-Digest: 2GE1Dw9/GtDDTJtl8UJo27XDtAQ=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleData.class
+SHA1-Digest: LYR0yJI2vIBnrMggrFrrJgYIVlU=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$EObjectOu
+ tputStream$EPackageData.class
+SHA1-Digest: aI9fP1/HOoDh12i6EN99l7OjpWs=
+
+Name: org/eclipse/emf/ecore/resource/impl/ContentHandlerRegistryImpl.c
+ lass
+SHA1-Digest: bcW83Ju1hAVVa14bDliBcd7KdWM=
+
+Name: org/eclipse/emf/ecore/EReference.class
+SHA1-Digest: Z1FbY+PfCqwmfWreqAhxj0XB9fo=
+
+Name: org/eclipse/emf/ecore/impl/EObjectImpl.class
+SHA1-Digest: 3IZTmpa3dOYp+uYJkd/nM3G99Hc=
+
+Name: org/eclipse/emf/ecore/impl/EPackageImpl.class
+SHA1-Digest: OkTLBTF6385E2DCfZB9ccW/4/o0=
+
+Name: org/eclipse/emf/ecore/util/ECrossReferenceEList$FeatureIteratorI
+ mpl.class
+SHA1-Digest: VLIGfF34mqO+RH7Y4F0XLFjNbFg=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/XMLCalendar$SafeSimpleDa
+ teFormat.class
+SHA1-Digest: w1MHgczPHiPNIhJmzXYL/7eplBs=
+
+Name: org/eclipse/emf/ecore/xml/type/util/XMLTypeResourceImpl.class
+SHA1-Digest: E1cqq5gMlVOfqzYdxRU3Ec5NNKA=
+
+Name: model/XMLNamespace.xsd
+SHA1-Digest: NJLdLmN1PcdOVjxe/lvTfkX32tU=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData$EStructuralFeat
+ ureExtendedMetaData$Holder.class
+SHA1-Digest: KaHhlpWOeKkIdZpwd2yo9RjJcI8=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$UsageCrossReferencer.class
+SHA1-Digest: 64nycqiknbjBO7OCffFaZyZpciE=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Match.class
+SHA1-Digest: PzNRSGPbrNxlfQK5lFzpNrcdmPk=
+
+Name: org/eclipse/emf/ecore/xml/type/InvalidDatatypeValueException.cla
+ ss
+SHA1-Digest: qu+wkY6jOKHiDtCbPT7gmlunld8=
+
+Name: org/eclipse/emf/ecore/impl/ENamedElementImpl$2.class
+SHA1-Digest: RtrfKX3VaehRzls1AXSoLyoXB2Y=
+
+Name: org/eclipse/emf/ecore/util/DelegatingEcoreEList$Dynamic.class
+SHA1-Digest: jQFuoc8cJCakyZliA+4l4yZU8y4=
+
+Name: org/eclipse/emf/ecore/impl/EcorePackageImpl$1.class
+SHA1-Digest: 3tXLbuQtyyKdKbeBLa4MO0UHKeE=
+
+Name: org/eclipse/emf/ecore/EcoreFactory.class
+SHA1-Digest: nmlZkIO1MVfTrBNvMaPryGh59xY=
+
+Name: model/XMLType.xsd
+SHA1-Digest: eAW9i6Tovzegc0bLsZANwqJtQho=
+
+Name: org/eclipse/emf/ecore/EStructuralFeature$Internal$DynamicValueHo
+ lder.class
+SHA1-Digest: fPEWd8VPmYVyvr2kZiuLKTnbxfM=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InverseUpdatin
+ gFeatureMapEntry.class
+SHA1-Digest: cwT6oSJLaGRITnGYnBQq1doswZU=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$BasicFeatureMa
+ pEntry.class
+SHA1-Digest: 6lsgiPK1ZK3SBuGuTqiMZoiTf28=
+
+Name: org/eclipse/emf/ecore/resource/impl/PlatformResourceURIHandlerIm
+ pl.class
+SHA1-Digest: tqDuMuaonJrfdvac4NntCdPA+fs=
+
+Name: org/eclipse/emf/ecore/EPackage$Descriptor.class
+SHA1-Digest: 1uSxL/9BXXxvdw4/gcRDqJn+LDs=
+
+Name: org/eclipse/emf/ecore/EEnumLiteral.class
+SHA1-Digest: oB3HuJ2ZcoSSI64EZts8BowY6sE=
+
+Name: org/eclipse/emf/ecore/util/EObjectValidator.class
+SHA1-Digest: +aNP0/vXtQCDMJ281yNhMewCG4s=
+
+Name: plugin.xml
+SHA1-Digest: WwpFkCLw6sOPpInFolFIGGJrsvU=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData$EPackageExtende
+ dMetaData$Holder.class
+SHA1-Digest: rXymz5XdNHd9zh/KGp6kVJuy9TA=
+
+Name: org/eclipse/emf/ecore/util/ECrossReferenceAdapter$InverseCrossRe
+ ferencer$1.class
+SHA1-Digest: nWAew2PA1W0yUiOLK/Ld/s4Qch4=
+
+Name: org/eclipse/emf/ecore/util/EObjectWithInverseEList$Unsettable$Ma
+ nyInverse.class
+SHA1-Digest: uwpMTDD/3RpODp6+4mqklMnkKLA=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$ProperContentIterator.class
+SHA1-Digest: QR8WtfMNHkFOrX6Zi2FyEx+BPNY=
+
+Name: org/eclipse/emf/ecore/EcorePackage$Literals.class
+SHA1-Digest: S1Li45iXlFZfBLxjrsIgJC3rPcQ=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceSetImpl$2.class
+SHA1-Digest: Jx5kka15OEIwCf7/DmoVAuKUlW8=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceSetImpl.class
+SHA1-Digest: +H/zVvA6dI4CrxLxDtGjEFgIUbY=
+
+Name: org/eclipse/emf/ecore/impl/EModelElementImpl.class
+SHA1-Digest: HB2rb4yVLeD2HRjgeQn3Dhud0uo=
+
+Name: org/eclipse/emf/ecore/impl/EPackageRegistryImpl$ParentClassLoade
+ rGetter.class
+SHA1-Digest: pUKl5ELxTfyDd2+lh64NPY8On0g=
+
+Name: org/eclipse/emf/ecore/impl/EPackageImpl$1.class
+SHA1-Digest: gHoZee7gBSMIeLdqCsmID2dHKRs=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$1ReferenceList.class
+SHA1-Digest: pOP9gvuKzFuamnxi5zEs+Bogr8c=
+
+Name: org/eclipse/emf/ecore/resource/URIConverter$Cipher.class
+SHA1-Digest: kiYIBSXhdyjP8T1afAQOx5ilxn8=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Token.class
+SHA1-Digest: 4S457h1Tgctvsu/BfPFTkVDGQHU=
+
+Name: org/eclipse/emf/ecore/InternalEObject.class
+SHA1-Digest: ZVn3icGwPrDr+CRybijZ0v+1dSY=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$ProxyCrossReferencer.class
+SHA1-Digest: ezfmHbZU4o0AKS40js2OwKTuNbc=
+
+Name: org/eclipse/emf/ecore/impl/EPackageRegistryImpl$1.class
+SHA1-Digest: ewRrkNyWF6QbgPwDlo6HMvSOEvQ=
+
+Name: org/eclipse/emf/ecore/impl/EEnumLiteralImpl.class
+SHA1-Digest: pPXMGx0JGCfRtrw6B2LvRcbIR7M=
+
+Name: org/eclipse/emf/ecore/impl/EAnnotationImpl.class
+SHA1-Digest: UbkG6FWtpYburIQ2+U1hKggD1Ms=
+
+Name: org/eclipse/emf/ecore/impl/EStoreEObjectImpl$1EStoreEcoreEMap.cl
+ ass
+SHA1-Digest: 7T9mYuNCa0Oqfiw43EHhhEjY7Es=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Token$ConditionTok
+ en.class
+SHA1-Digest: /OM8oq3OMVyQtTi923Vu5sBWX40=
+
+Name: org/eclipse/emf/ecore/resource/impl/BinaryResourceImpl$EObjectIn
+ putStream$EClassData.class
+SHA1-Digest: apO289L5bIYgw0VjbHcaHIBnQZE=
+
+Name: org/eclipse/emf/ecore/util/EContentsEList.class
+SHA1-Digest: tVzcsJj3gLM1v9PLKQVuFMMyPYU=
+
+Name: org/eclipse/emf/ecore/util/EContentsEList$FeatureIteratorImpl$1.
+ class
+SHA1-Digest: s1o3GGcEyZ3/8XCLf3raUNwUuNs=
+
+Name: org/eclipse/emf/ecore/util/EContentsEList$1.class
+SHA1-Digest: 4YoVl+XFFHQN9HT1FMQYvIvEDc0=
+
+Name: org/eclipse/emf/ecore/resource/impl/CryptoCipherImpl.class
+SHA1-Digest: aLd/C4uBpb32UM5GZ3hnQe8kKLw=
+
+Name: org/eclipse/emf/ecore/impl/ENamedElementImpl$1$1.class
+SHA1-Digest: mLvNp6+XTnxG/rsrrpm6C/rHtvw=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData$EPackageExtende
+ dMetaData.class
+SHA1-Digest: VRKudSNKKJzLDpMXVdRMHphnHnM=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Token$ClosureToken
+ .class
+SHA1-Digest: eO0ySkUuzkz6Z895GS2p9J5gg54=
+
+Name: org/eclipse/emf/ecore/EValidator$PatternMatcher.class
+SHA1-Digest: 0ezdcyLq4WNtV44eU4AC3ke6/pY=
+
+Name: org/eclipse/emf/ecore/util/EContentsEList$FeatureIterator.class
+SHA1-Digest: f5tDyLvvfyUdd8I5L2mwlrewmss=
+
+Name: org/eclipse/emf/ecore/util/EcoreEMap$Unsettable.class
+SHA1-Digest: S8wKN2BzB90vvaL2Ty2xVQ5cSC8=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$9.class
+SHA1-Digest: T5+t3oMtViE02CWnLEbAbtD5oWQ=
+
+Name: org/eclipse/emf/ecore/resource/impl/AESCipherImpl$1.class
+SHA1-Digest: tjNVdaYmKVlo48XzDAU36EoJILU=
+
+Name: org/eclipse/emf/ecore/util/EObjectWithInverseResolvingEList.clas
+ s
+SHA1-Digest: ej896OW70fKMowSphazdTOWumFI=
+
+Name: org/eclipse/emf/ecore/util/EcoreUtil$ExternalCrossReferencer.cla
+ ss
+SHA1-Digest: sopPXvyfKmJJRvJe+hmtUUIhcPs=
+
+Name: org/eclipse/emf/ecore/util/FeatureMapUtil$1.class
+SHA1-Digest: Imbq3VM5AXZOJvawnmYdXsP0rdE=
+
+Name: org/eclipse/emf/ecore/xml/namespace/impl/XMLNamespaceDocumentRoo
+ tImpl.class
+SHA1-Digest: yGbLtTnkxZCNWopVNR5+wMfmY70=
+
+Name: org/eclipse/emf/ecore/impl/EcoreFactoryImpl.class
+SHA1-Digest: XFfCc5wJKg6DKPHLuDb+EMkqL0A=
+
+Name: org/eclipse/emf/ecore/resource/Resource$Internal.class
+SHA1-Digest: c0wEzbFbKugwfDe7f/lHtJhjKBY=
+
+Name: org/eclipse/emf/ecore/util/EObjectWithInverseEList$Unsettable.cl
+ ass
+SHA1-Digest: GUa8YdtJ3z1nSS4uzUWKKcvnV8k=
+
+Name: org/eclipse/emf/ecore/util/FeatureMap$Entry.class
+SHA1-Digest: GlAQAIWnJkXjUYNfC2M7+zQnmWw=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectResolving.class
+SHA1-Digest: 9fz3BfATmSxrVfWwJi2WD6JJNsA=
+
+Name: org/eclipse/emf/ecore/impl/ENamedElementImpl.class
+SHA1-Digest: wAAn1o6cHldH+lZSCjoL9uzB7t8=
+
+Name: org/eclipse/emf/ecore/impl/EClassImpl$7.class
+SHA1-Digest: gV2XFqPxiZ2FkIIkQUE/H8Epmy4=
+
+Name: org/eclipse/emf/ecore/util/EcoreAdapterFactory$1.class
+SHA1-Digest: BI8A/QYMX3cII6TNA2Kdghgnvcg=
+
+Name: org/eclipse/emf/ecore/EcorePackage.class
+SHA1-Digest: BGOKJ7ie346HGQrSwhOw7LzAImU=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData$EClassExtendedM
+ etaDataImpl.class
+SHA1-Digest: TawQAEcsxNA1bJKxxQkYOdtVmIM=
+
+Name: org/eclipse/emf/ecore/util/EContentsEList$FeatureListIterator.cl
+ ass
+SHA1-Digest: 9zZdNcZK9qmPCsH5j0e/PMT/NyA=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/RegEx$Token$ConcatToken.
+ class
+SHA1-Digest: K9J0c+kljeymsATm7+EfncVLUlA=
+
+Name: model/XMLNamespace.ecore
+SHA1-Digest: FQ1MHuEs8HDMBpo9FFq59LQHWHY=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: KyT9FF7C7t86NoBoa2kZT3ZJBfw=
+
+Name: model/Ecore.xsd
+SHA1-Digest: ALYSaQS9ptF97990ggvjswZi9yg=
+
+Name: org/eclipse/emf/ecore/util/EcoreEList$UnmodifiableEList.class
+SHA1-Digest: 5cxQd7F7Q1Q/bCZjQEaZwasLe14=
+
+Name: org/eclipse/emf/ecore/resource/ResourceSet.class
+SHA1-Digest: KNvwR4queWWPjHKiJZOSJKJ0JCY=
+
+Name: org/eclipse/emf/ecore/xml/type/internal/DataValue$Base64.class
+SHA1-Digest: vO95b4aP+ib6wEKkwJUHohFJ0yE=
+
+Name: org/eclipse/emf/ecore/util/EObjectContainmentWithInverseEList.cl
+ ass
+SHA1-Digest: BXVv+rPi3jbD4kE/uQ22LKMgT/Y=
+
+Name: org/eclipse/emf/ecore/resource/impl/ResourceImpl$ModificationTra
+ ckingAdapter.class
+SHA1-Digest: hDJYpq4P2u3rkjkyvQwrZIKvdAs=
+
+Name: model/org.eclipse.emf.Ecore.cat
+SHA1-Digest: qDSfOhX6wk8W1sTQnPNEGHsaLUc=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$InternalSettin
+ gDelegateSingleEObjectContainmentUnsettableResolving.class
+SHA1-Digest: dN/c19NEdzSefUUtU8RKOIh6C/I=
+
+Name: org/eclipse/emf/ecore/xml/namespace/impl/XMLNamespacePackageImpl
+ .class
+SHA1-Digest: lBhjaOl/u+w1xxRBF5ohvlwTdEU=
+
+Name: org/eclipse/emf/ecore/util/DelegatingEcoreEList$Generic.class
+SHA1-Digest: iNjo0gmIBkHw90HkeD6mISavzgk=
+
+Name: org/eclipse/emf/ecore/impl/EStructuralFeatureImpl$SettingMany.cl
+ ass
+SHA1-Digest: WSe/h0lqla8txOabGjXU+D42SPU=
+
+Name: org/eclipse/emf/ecore/util/BasicExtendedMetaData$EClassifierExte
+ ndedMetaData$Holder.class
+SHA1-Digest: BnQl+6dTqso/adVvZzaIP6QKa98=
 

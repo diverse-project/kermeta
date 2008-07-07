@@ -20,13 +20,16 @@ public class Test {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-
+		String folder = "/home/paco/kpm-workbench/org.kermeta.ecore.compiled.aspect/model";
+		try {
+			folder = args[0];
+		} catch (IndexOutOfBoundsException e) {}
 		//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
 		//EPackage.Registry.INSTANCE.put( EcorePackage.eNS_URI, EcorePackage.eINSTANCE );
 		
 		System.out.println("Loading model conformant to plugin implementation from kermeta_java.ecore.");
 		ResourceSet rs1 = createResourceSet();
-		Resource resource1 = rs1.getResource( URI.createURI("/home/paco/kpm-workbench/org.kermeta.test/model/kermeta_java.ecore"), true );
+		Resource resource1 = rs1.getResource( URI.createURI( folder + "/kermeta_java.ecore"), true );
 
 		System.out.println("Checking aspect weaving on kermeta_java.ecore");
 		EObject o = (EObject) resource1.getContents().get(0);
@@ -48,13 +51,13 @@ public class Test {
 		System.out.println("Saving model conformant to plugin implementation in kermeta_java2.ecore.");
 		ResourceSet rs2 = createResourceSet();
 		EObject emfObject = (EObject) resource1.getContents().get(0);
-		Resource resource2 = rs2.createResource( URI.createURI("/home/paco/kpm-workbench/org.kermeta.test/model/kermeta_java2.ecore") );
+		Resource resource2 = rs2.createResource( URI.createURI( folder + "/kermeta_java2.ecore") );
 		resource2.getContents().add( emfObject );
 		resource2.save(null);
 		
 		System.out.println("Loading model conformant to plugin implementation from kermeta_java2.ecore.");
 		ResourceSet rs3 = createResourceSet();
-		Resource resource3 = rs3.getResource( URI.createURI("/home/paco/kpm-workbench/org.kermeta.test/model/kermeta_java2.ecore"), true );
+		Resource resource3 = rs3.getResource( URI.createURI(folder + "/kermeta_java2.ecore"), true );
 
 		System.out.println("---------------------");
 		
