@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" xmlns:implem="http://art/implem" xmlns:type="http://art/type">
   <root name="Service Discovery" type="//@types.0" state="ON">
     <subComponent xsi:type="instance:PrimitiveInstance" name="Policy" type="//@types.5" state="ON"/>
     <subComponent xsi:type="instance:PrimitiveInstance" name="Cache" type="//@types.2" state="ON">
@@ -9,18 +9,22 @@
     <subComponent xsi:type="instance:PrimitiveInstance" name="Network" type="//@types.6" state="ON">
       <binding serverInstance="//@root/@subComponent.3" id="router0" client="//@types.6/@port.1" server="//@types.4/@port.0"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="WiFi" type="//@types.4" state="ON" contentDesc="org.diva.example.servicediscovery.impl.WiFi"/>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Request" type="//@types.7" state="ON" contentDesc="org.diva.example.servicediscovery.impl.Request">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="WiFi" type="//@types.4" state="ON">
+      <implem xsi:type="implem:FractalComponent" contentDesc="org.diva.example.servicediscovery.impl.WiFi"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Request" type="//@types.7" state="ON">
       <binding serverInstance="//@root/@subComponent.0" id="policy" client="//@types.7/@port.3" server="//@types.5/@port.0"/>
       <binding serverInstance="//@root/@subComponent.1" id="cache" client="//@types.7/@port.4" server="//@types.2/@port.0"/>
       <binding serverInstance="//@root/@subComponent.2" id="network" client="//@types.7/@port.5" server="//@types.6/@port.0"/>
       <binding serverInstance="//@root/@subComponent.5" id="reply" client="//@types.7/@port.2" server="//@types.1/@port.0"/>
+      <implem xsi:type="implem:FractalComponent" contentDesc="org.diva.example.servicediscovery.impl.Request"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Reply" type="//@types.1" state="ON" contentDesc="org.diva.example.servicediscovery.impl.Reply">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Reply" type="//@types.1" state="ON">
       <binding serverInstance="//@root/@subComponent.0" id="policy" client="//@types.1/@port.2" server="//@types.5/@port.0"/>
       <binding serverInstance="//@root/@subComponent.1" id="cache" client="//@types.1/@port.3" server="//@types.2/@port.0"/>
       <binding serverInstance="//@root/@subComponent.2" id="network" client="//@types.1/@port.4" server="//@types.6/@port.0"/>
       <binding serverInstance="//@root/@subComponent.4" id="requestReply" client="//@types.1/@port.1" server="//@types.7/@port.1"/>
+      <implem xsi:type="implem:FractalComponent" contentDesc="org.diva.example.servicediscovery.impl.Reply"/>
     </subComponent>
     <delegation serverInstance="//@root/@subComponent.4" id="request" source="//@types.7/@port.0" exported="//@types.0/@port.1"/>
   </root>

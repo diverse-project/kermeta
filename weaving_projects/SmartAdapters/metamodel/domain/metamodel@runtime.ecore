@@ -46,10 +46,10 @@
           eType="#//instance/ValuedAttribute" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1"
           eType="#//instance/TransmissionBinding" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" eType="#//String"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentDesc" eType="#//String"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="operations" eType="#//type/Operation"
           derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/ComponentImplementation"
+          containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveInstance" eSuperTypes="#//instance/ComponentInstance"/>
     <eClassifiers xsi:type="ecore:EClass" name="CompositeInstance" eSuperTypes="#//instance/ComponentInstance">
@@ -125,6 +125,13 @@
     <eClassifiers xsi:type="ecore:EEnum" name="PortRole">
       <eLiterals name="client"/>
       <eLiterals name="server" value="1"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="implem" nsURI="http://art/implem" nsPrefix="implem">
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentImplementation" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FractalComponent" eSuperTypes="#//implem/ComponentImplementation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentDesc" eType="#//String"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

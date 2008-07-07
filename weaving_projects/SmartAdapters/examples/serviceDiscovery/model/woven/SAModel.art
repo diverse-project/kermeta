@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="ASCII"?>
-<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:implem="http://art/implem" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
   <root name="Service Discovery" type="//@types.2" state="ON">
     <subComponent xsi:type="instance:PrimitiveInstance" name="Policy" type="//@types.4" state="ON"/>
     <subComponent xsi:type="instance:PrimitiveInstance" name="Cache" type="//@types.5" state="ON">
       <attribute value="getSize: 50"/>
       <binding serverInstance="//@root/@subComponent.0" id="policy" client="//@types.5/@port.1" server="//@types.4/@port.0"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="WiFi" type="//@types.1" state="ON"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="WiFi" type="//@types.1" state="ON">
+      <implem xsi:type="implem:FractalComponent" controllerDesc="uiop" contentDesc="azerty"/>
+    </subComponent>
     <subComponent xsi:type="instance:PrimitiveInstance" name="Network" type="//@types.0" state="ON">
       <binding serverInstance="//@root/@subComponent.5" id="router0" client="//@types.0/@port.1" server="//@types.1/@port.0"/>
       <binding serverInstance="//@root/@subComponent.6" id="router1" client="//@types.0/@port.1" server="//@types.1/@port.0"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="BT" type="//@types.1" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Bluetooth"/>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Buffer" type="//@types.6" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Buffer">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="BT" type="//@types.1" state="ON">
+      <implem xsi:type="implem:FractalComponent" contentDesc="org.diva.example.servicediscovery.impl.Bluetooth"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Buffer" type="//@types.6" state="ON">
       <binding serverInstance="//@root/@subComponent.2" client="//@types.6/@port.0" server="//@types.1/@port.0"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Buffer" type="//@types.6" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Buffer">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Buffer" type="//@types.6" state="ON">
       <binding serverInstance="//@root/@subComponent.4" client="//@types.6/@port.0" server="//@types.1/@port.0"/>
+      <implem xsi:type="implem:FractalComponent" contentDesc="org.diva.example.servicediscovery.impl.Buffer"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Advertiser" type="//@types.7" state="ON" controllerDesc="NotifyPrimitive" contentDesc="org.diva.example.servicediscovery.impl.Advertiser">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Advertiser" type="//@types.7" state="ON">
       <binding serverInstance="//@root/@subComponent.0" client="//@types.7/@port.0" server="//@types.4/@port.0"/>
       <binding serverInstance="//@root/@subComponent.1" client="//@types.7/@port.1" server="//@types.5/@port.0"/>
       <binding serverInstance="//@root/@subComponent.3" client="//@types.7/@port.2" server="//@types.0/@port.0"/>
+      <implem xsi:type="implem:FractalComponent" contentDesc="org.diva.example.servicediscovery.impl.Advertiser"/>
     </subComponent>
     <delegation serverInstance="//@root/@subComponent.7" source="//@types.7/@port.3" exported="//@types.2/@port.0"/>
   </root>
