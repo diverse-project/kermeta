@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.27 2008-07-04 12:17:13 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.28 2008-07-08 14:47:18 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -175,7 +175,7 @@ aspect class Property {
 class LinkSetterForTypedElement {
 	operation setLinks(element : TypedElement, ecoreModelElement : ETypedElement, context : KM2EcoreContext) is do
 
-		if not ecoreModelElement.isVoid() then
+		if (not ecoreModelElement.isVoid()) and (element.type.getTypeName()!="kermeta::standard::Void") then
 
 			if element.type.isInstanceOf(Class) then
 				var c : Class init element.type.asType(Class)
