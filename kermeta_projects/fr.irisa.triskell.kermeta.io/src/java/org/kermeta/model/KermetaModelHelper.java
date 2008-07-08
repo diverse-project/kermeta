@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaModelHelper.java,v 1.9 2008-04-30 14:11:31 dvojtise Exp $
+/*$Id: KermetaModelHelper.java,v 1.10 2008-07-08 13:29:30 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	KermetaModelHelper.java
 * License : EPL
@@ -163,6 +163,8 @@ public class KermetaModelHelper {
 	static public class TagProxy  extends NamedElementProxy {
 		
 		public String KERMETA_DOCUMENTATION = TagHelper.KERMETA_DOCUMENTATION;
+
+		public String KERMETA_EXECUTABLE = TagHelper.KERMETA_EXECUTABLE;
 		
 		public Tag create(String qualifiedName) {
 			return TagHelper.create(qualifiedName);
