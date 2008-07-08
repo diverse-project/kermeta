@@ -1,6 +1,6 @@
 
 
-/*$Id: VoidLiteralCloner.java,v 1.2 2008-04-28 11:51:07 ftanguy Exp $
+/*$Id: VoidLiteralCloner.java,v 1.3 2008-07-08 13:18:32 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	VoidLiteralCloner.java
 * License : EPL
@@ -14,6 +14,7 @@ package org.kermeta.merger.internal.behavior;
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
+import fr.irisa.triskell.kermeta.language.structure.Object;
 
 public class VoidLiteralCloner {
 

@@ -1,6 +1,6 @@
 
 
-/*$Id: BehaviorClonerWithTraces.java,v 1.2 2008-04-28 11:51:08 ftanguy Exp $
+/*$Id: BehaviorClonerWithTraces.java,v 1.3 2008-07-08 13:18:34 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	BehaviorClonerWithTraces.java
 * License : EPL
@@ -14,6 +14,7 @@ package org.kermeta.merger.internal.behavior;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.merger.internal.util.ExpressionTracer;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
@@ -38,6 +39,8 @@ import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
+import fr.irisa.triskell.kermeta.language.structure.Object;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 
 public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	
@@ -51,6 +54,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitAssignment(Assignment node) {
 		Object result = AssignmentCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -58,6 +62,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitCallFeature(CallFeature node) {
 		Object result = CallFeatureCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -65,6 +70,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitCallVariable(CallVariable node) {
 		Object result = CallVariableCloner.clone(node, this);		
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -72,6 +78,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitCallResult(CallResult node) {
 		Object result = CallResultCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -79,6 +86,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitCallSuperOperation(CallSuperOperation node) {
 		Object result = CallSuperOperationCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -86,6 +94,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitCallValue(CallValue node) {
 		Object result = CallValueCloner.clone(node);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -93,6 +102,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitBlock(Block node) {
 		Object result = BlockCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -100,6 +110,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitRescue(Rescue node) {
 		Object result = RescueCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -107,6 +118,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitConditional(Conditional node) {
 		Object result = ConditionalCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -114,6 +126,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitRaise(Raise node) {
 		Object result = RaiseCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -121,6 +134,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitVoidLiteral(VoidLiteral node) {
 		Object result = VoidLiteralCloner.visitVoidLiteral(node);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -128,6 +142,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitTypeLiteral(TypeLiteral node) {
 		Object result = TypeLiteralCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -135,6 +150,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitIntegerLiteral(IntegerLiteral node) {
 		Object result = IntegerLiteralCloner.clone(node);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -142,6 +158,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitStringLiteral(StringLiteral node) {
 		Object result = StringLiteralCloner.clone(node);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -149,6 +166,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitBooleanLiteral(BooleanLiteral node) {
 		Object result = BooleanLiteralCloner.clone(node);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -156,12 +174,13 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitEmptyExpression(EmptyExpression node) {
 		// TODO Auto-generated method stub
-		return super.visitEmptyExpression(node);
+		return (Object) super.visitEmptyExpression(node);
 	}
 		
 	@Override
 	public Object visitJavaStaticCall(JavaStaticCall node) {
 		Object result = JavaStaticCallCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -169,6 +188,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitLoop(Loop node) {
 		Object result = LoopCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -176,6 +196,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitLambdaExpression(LambdaExpression node) {
 		Object result = LambdaExpressionCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -183,6 +204,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitLambdaParameter(LambdaParameter node) {
 		Object result = LambdaParameterCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -190,6 +212,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitSelfExpression(SelfExpression node) {
 		Object result = SelfExpressionCloner.clone(node);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -197,6 +220,7 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitVariableDecl(VariableDecl node) {
 		Object result = VariableDeclCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
 	}
@@ -204,8 +228,16 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	@Override
 	public Object visitTypeReference(TypeReference node) {
 		Object result = TypeReferenceCloner.clone(node, this);
+		cloneTags(node, result);
 		tracer.tryToTrace(result, node);
 		return result;
+	}
+	
+	private void cloneTags(Object sourceObject, Object targetObject) {
+		for ( Tag sourceTag : sourceObject.getOwnedTags() ) {
+			Tag targetTag = KermetaModelHelper.Tag.create(sourceTag.getName(), sourceTag.getValue());
+			targetObject.getOwnedTags().add(targetTag);
+		}
 	}
 
 }

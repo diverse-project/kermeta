@@ -1,6 +1,6 @@
 
 
-/*$Id: Merger.java,v 1.6 2008-05-28 15:44:50 ftanguy Exp $
+/*$Id: Merger.java,v 1.7 2008-07-08 13:18:34 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Merger.java
 * License : EPL
@@ -32,18 +32,20 @@ import org.kermeta.merger.internal.Pass1;
 import org.kermeta.merger.internal.Pass2;
 import org.kermeta.merger.internal.Pass3;
 import org.kermeta.merger.internal.Pass4;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 public class Merger {
-
+	
 	private KermetaUnit kermetaUnit = null;
 	
 	public String process(Set<KermetaUnit> kermetaUnitsToMerge, boolean trace, boolean executable) throws IOException, URIMalformedException, NotRegisteredURIException {
@@ -139,6 +141,8 @@ public class Merger {
 	public KermetaUnit processInMemory(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean trace) throws NotRegisteredURIException, URIMalformedException, IOException {
 		LoaderPlugin.getDefault().unload(outputFile);
 		kermetaUnit = IOPlugin.getDefault().basicGetKermetaUnit(outputFile);
+		Tag t = KermetaModelHelper.Tag.create(KermetaModelHelper.Tag.KERMETA_EXECUTABLE, "true");
+		kermetaUnit.getModelingUnit().getOwnedTags().add(t);
 		
 		MergeContext context = null;
 		if ( trace ) {

@@ -1,6 +1,6 @@
 
 
-/*$Id: TypeLiteralCloner.java,v 1.2 2008-04-28 11:51:08 ftanguy Exp $
+/*$Id: TypeLiteralCloner.java,v 1.3 2008-07-08 13:18:33 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	TypeLiteralCloner.java
 * License : EPL
@@ -15,6 +15,7 @@ package org.kermeta.merger.internal.behavior;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
+import fr.irisa.triskell.kermeta.language.structure.Object;
 
 public class TypeLiteralCloner {
 

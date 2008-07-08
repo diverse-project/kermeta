@@ -1,6 +1,6 @@
 
 
-/*$Id: CallFeatureCloner.java,v 1.2 2008-04-28 11:51:08 ftanguy Exp $
+/*$Id: CallFeatureCloner.java,v 1.3 2008-07-08 13:18:33 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	CallFeatureCloner.java
 * License : EPL
@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.Object;
 
 public class CallFeatureCloner {
 

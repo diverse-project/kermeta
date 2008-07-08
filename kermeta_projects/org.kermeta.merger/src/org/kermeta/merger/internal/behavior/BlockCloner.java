@@ -1,6 +1,6 @@
 
 
-/*$Id: BlockCloner.java,v 1.2 2008-04-28 11:51:08 ftanguy Exp $
+/*$Id: BlockCloner.java,v 1.3 2008-07-08 13:18:32 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	BlockCloner.java
 * License : EPL
@@ -16,6 +16,7 @@ import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.Rescue;
+import fr.irisa.triskell.kermeta.language.structure.Object;
 
 public class BlockCloner {
 

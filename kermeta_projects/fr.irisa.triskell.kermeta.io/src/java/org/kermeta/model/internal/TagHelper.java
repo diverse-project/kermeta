@@ -1,6 +1,6 @@
 
 
-/*$Id: TagHelper.java,v 1.3 2008-04-28 11:50:14 ftanguy Exp $
+/*$Id: TagHelper.java,v 1.4 2008-07-08 13:18:39 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	TagHelper.java
 * License : EPL
@@ -19,6 +19,8 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 public class TagHelper {
 
 	public final static String KERMETA_DOCUMENTATION = "documentation";
+	
+	public final static String KERMETA_EXECUTABLE= "executable";
 	
 	static public Tag create(String value) {
 		return create(KERMETA_DOCUMENTATION, value);
