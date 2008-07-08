@@ -16,6 +16,14 @@ public class TokenInfo {
 		_column = column;
 	}
 	
+	public TokenInfo(String text, int offset, int type) {
+		_text = text;
+		_offset = offset;
+		_type = type;
+		_lineNumber = -1;
+		_column = -1;
+	}
+	
 	public String getText() {
 		return _text;
 	}

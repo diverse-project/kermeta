@@ -59,7 +59,7 @@ public abstract class ASTNodeImpl implements ASTNode {
 		int ln = _tokenInfo.getLineNumber();
 		if ( ln == -1 ) {
 			ASTNode firstToken = getFirstToken();
-			if ( firstToken != null ) 
+			if ( firstToken != null && firstToken != this ) 
 				ln = firstToken.getLineNumber();
 		}
 		return ln;
