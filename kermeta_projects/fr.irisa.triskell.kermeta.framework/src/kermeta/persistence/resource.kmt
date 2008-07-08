@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.51 2008-06-18 12:40:38 dvojtise Exp $
+ * $Id: resource.kmt,v 1.52 2008-07-08 08:53:18 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -204,6 +204,7 @@ class EMFResource inherits Resource
 	 * Overrides Resource.saveWithNewURI(String)
 	 */
 	method saveWithNewURI(new_uri : String) : Void is do
+		@compiledJavaExtern "Saver.save(getValues(), new_uri, getMetaModelURI());"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self, new_uri, metaModelURI, "EMF", self, false
 		)
@@ -220,6 +221,7 @@ class EMFResource inherits Resource
 				"Note : setting isReadOnly to false on the metamodel may lead to unpredictable results"
 			raise e
 		end
+		@compiledJavaExtern "Saver.save(getValues(), getUri(), getMetaModelURI());"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self, self.uri, metaModelURI, "EMF", self, false
 		)
@@ -245,6 +247,7 @@ class EMFResource inherits Resource
 	 */
 	method load() : Void is do
 		self.clear
+		@compiledJavaExtern "Loader.load(getValues(), getUri(), getMetaModelURI());"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
 		    self, uri, metaModelURI, "EMF"
 		)
@@ -286,40 +289,36 @@ class EMFResource inherits Resource
 }
 
 
-/**
+/*
+	KMResource is not used for the moment. The idea is to be able to load kmt files. So we may need such a resource in a future that would
+	do the parsing and conversion.
+
+
  * NOT IMPLEMENTED
- */
+ *
 class KMResource inherits Resource
 {
-	/**
- 	 * NOT IMPLEMENTED
- 	 */
+
 	method save() : Void is do
 		//TODO: implement operation save
 	end
 	
-	/**
- 	 * NOT IMPLEMENTED
- 	 */
+
 	method load() : Void is do
 		//TODO: implement operation load
 	end
 
-	/**
- 	 * NOT IMPLEMENTED
- 	 */
+
 	method add(instance : Object) : Void is do
 		//TODO: implement operation load
 	end
 
-	/**
- 	 * NOT IMPLEMENTED
- 	 */
+
 	method remove(instance : Object) : Void is do
 		
 	end
 }
-
+*/
 
 /**
  * Abstract resource container, that contains a list of available loaded resources, 
@@ -522,26 +521,18 @@ class EMFRepository inherits Repository
 }
 
 
-/**
+/*
+	KMRepository is not used for the moment. See KMResource.
+
+
  * Repository that stores and manages XMI files representing Kermeta models
- */
+ *
 class KMRepository inherits Repository
 {
-	/**
- 	 * NOT IMPLEMENTED
- 	 */
+
 	method createResource(uri : String, mm_uri : String) : Resource is do
 		//TODO: implement operation createResource
 		result := void
 	end 
 }
-
-
-// MOVED TO PACKAGE kermeta::exceptions
-///* Specialized exceptions */
-//class ResourceLoadException inherits kermeta::exceptions::Exception { }
-//class ResourceSaveException inherits kermeta::exceptions::Exception { }
-//class ResourceCreateException inherits kermeta::exceptions::Exception { }
-///* Raised when user tries to add an object that is not conform to the metamodel */
-//class ResourceUnconformityException inherits kermeta::exceptions::Exception { }
-
+*/
