@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.3 2008-07-08 07:25:32 ftanguy Exp $
+/*$Id: Loader.java,v 1.4 2008-07-08 08:52:37 ftanguy Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Loader.java
 * License : EPL
@@ -36,14 +36,15 @@ public class Loader extends SaverOrLoader {
 	 * @param metamodelURI The uri of the metamodel to use when cloning.
 	 * @return The list of objects cloned.
 	 */
-	static public List<EObject> load(String modelURI, String metamodelURI) {
+	static public void load(List contents, String modelURI, String metamodelURI) {
 		Loader l = new Loader();
 		List<EObject> instances = new ArrayList<EObject>();
 		ResourceSet rs = new ResourceSetImpl();
 		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource( URI.createURI(modelURI), true );
 		for ( EObject o : resource.getContents() )
 			instances.add( l.clone(o, metamodelURI) );
-		return instances;			
+		contents.addAll(instances);
+		//return instances;			
 	}
 	
 	/**

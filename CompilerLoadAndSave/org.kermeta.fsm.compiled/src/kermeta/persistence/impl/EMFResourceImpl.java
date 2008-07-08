@@ -1,20 +1,14 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: EMFResourceImpl.java,v 1.2 2008-07-03 15:22:00 ftanguy Exp $
+ * $Id: EMFResourceImpl.java,v 1.3 2008-07-08 08:52:31 ftanguy Exp $
  */
 package kermeta.persistence.impl;
 
-import java.io.IOException;
-
-import kermeta.language.structure.Object;
 import kermeta.persistence.EMFResource;
 import kermeta.persistence.PersistencePackage;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.kermeta.compil.runtime.helper.basetypes.Loader;
 import org.kermeta.compil.runtime.helper.basetypes.Saver;
 
@@ -68,13 +62,17 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource
    * @generated NOT
    */
   public void load() {
-	  if ( getValues() == null )
-		  setValues( new BasicEList<Object>() );
-	  else
-		  getValues().clear();
+	  clear();
+	  Loader.load(getValues(), getUri(), getMetaModelURI());
+  }
 
-	  for ( EObject o : Loader.load(getUri(), getMetaModelURI()) )
-		  getValues().add( (Object) o );  
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated NOT
+   */
+  public void save() {
+	  Saver.save(getValues(), getUri(), getMetaModelURI());
   }
   
   /**
@@ -83,14 +81,7 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource
    * @generated NOT
    */
   public void saveWithNewURI(String new_uri) {
-	  EList<EObject> contents = new BasicEList<EObject>();
-	  for ( Object o : getValues() )
-		  contents.add(o);
-	  try {
-		Saver.save(contents, new_uri, getMetaModelURI());
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
+	  Saver.save(getValues(), new_uri, getMetaModelURI());
   }
 
 } //EMFResourceImpl

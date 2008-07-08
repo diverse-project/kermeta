@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.3 2008-07-08 07:25:32 ftanguy Exp $
+/*$Id: Saver.java,v 1.4 2008-07-08 08:52:38 ftanguy Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Saver.java
 * License : EPL
@@ -39,15 +39,19 @@ public class Saver extends SaverOrLoader {
 	 * @param metamodelURI The uri of the metamodel to use when cloning objects.
 	 * @throws IOException
 	 */
-	static public void save(List<EObject> contents, String modelURI, String metamodelURI) throws IOException {
-		Saver s = new Saver();
-		List<EObject> instancesToSave = new ArrayList<EObject>();
-		for ( EObject o : contents )
-			instancesToSave.add( s.clone(o, metamodelURI) );
-		ResourceSet resourceSet = new ResourceSetImpl();
-		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource( URI.createURI(modelURI) );
-		resource.getContents().addAll(instancesToSave);
-		resource.save(null);
+	static public void save(List contents, String modelURI, String metamodelURI) {
+		try {
+			Saver s = new Saver();
+			List<EObject> instancesToSave = new ArrayList<EObject>();
+			for ( Object o : contents )
+				if ( o instanceof EObject )
+					instancesToSave.add( s.clone( (EObject) o, metamodelURI) );
+			ResourceSet resourceSet = new ResourceSetImpl();
+			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource( URI.createURI(modelURI) );
+			resource.getContents().addAll(instancesToSave);
+			resource.save(null);
+		} catch (IOException e) {		
+		}
 	}
 		
 	/**
