@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.26 2008-07-04 12:17:12 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.27 2008-07-08 14:49:32 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -148,18 +148,51 @@ package behavior {
 		end
 	}
 	
+	/** Complete */
 	aspect class Block {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			var javaCode : StringBuffer init StringBuffer.new
-			javaCode.append("{")
+			
+			if self.containsRescue() then
+				javaCode.append("try ")
+			end
+			
+			if (not self.container.isInstanceOf(Operation)) or  self.containsRescue() then
+				javaCode.append("{")
+			end
 			
 			self.eachOwnedElement{ stm |
 				javaCode.append("\n\t")
 				javaCode.append(stm.createBehaviorJava(context))
 				javaCode.append("\n")
 			}
-			result := javaCode.append("}").toString()
+			
+			if (not self.container.isInstanceOf(Operation)) or self.containsRescue() then
+				javaCode.append("}")
+			end
+		
+		
+			if self.containsRescue() then
+				
+				javaCode.append(" catch( " + context.JAVA_CLASS_EXCEPTION_SWITCHER + " " + context.VARIABLE_EXCEPTION_SWITCHER + " ) {\n")
+				//result := result + "(" + self.exceptionType.createBehaviorJava(context) + " " + self.exceptionName + ")"
+				
+				self.rescueBlock.each{ e |
+					javaCode.append(e.createBehaviorJava(context))
+				}
+				javaCode.append("\n}")
+			end
+		
+			
+			result := javaCode.toString()
 		end
+		
+		operation containsRescue() : Boolean is do
+			result := false
+			if (not self.rescueBlock.isVoid()) and (self.rescueBlock.size()>0) then
+				result := true
+			end
+		end 
 	}
 	
 	//**** Begin **** Managing of the CallExpression branch ****//
@@ -499,6 +532,7 @@ package behavior {
 	}
 	
 	//**** Begin **** Managing of the exception ****//
+	/** Complete */
 	aspect class Raise {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 		
@@ -521,17 +555,31 @@ package behavior {
 	/** Complete */
 	aspect class Rescue {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
-			result := "catch"
-			if not self.exceptionName.isVoid() then
-				result := result + "( " + context.JAVA_CLASS_EXCEPTION_SWITCHER + " " + self.exceptionName + ")"
-				//result := result + "(" + self.exceptionType.createBehaviorJava(context) + " " + self.exceptionName + ")"
-			end
-			result := result + " {\n"
-			//pushPrefix();
+			//result := "catch"
+			result := ""
+			//if not self.exceptionName.isVoid() then
+				//result := result + "( " + context.JAVA_CLASS_EXCEPTION_SWITCHER + " " + self.exceptionName + "_SWITCHER )"
+				////result := result + "(" + self.exceptionType.createBehaviorJava(context) + " " + self.exceptionName + ")"
+			//end
+			//result := result + " {\n"
 			
-			self.eachOwnedElement{e | 
-				result := result + e.createBehaviorJava(context)
-			}
+			if not self.exceptionType.isVoid() then
+			
+				var str_exceptionType : String init self.exceptionType.createBehaviorJava(context)
+				
+				result := result + "if( " + context.VARIABLE_EXCEPTION_SWITCHER + ".getRealException() instanceof " + str_exceptionType + " ) {\n"
+				
+				result := result + str_exceptionType + " " + self.exceptionName + " = (" + str_exceptionType + ") ex_SWITCHER.getRealException();\n"
+				//pushPrefix();
+				
+				self.eachOwnedElement{e | 
+					result := result + e.createBehaviorJava(context)
+				}
+				
+				//end of the if
+				result := result + "\n}"
+				
+			end
 			//popPrefix();
 		end
 	}
@@ -544,6 +592,7 @@ package behavior {
 		end
 	}
 	
+	/** Complete */
 	aspect class Conditional {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			result := "if( " + self.condition.createBehaviorJava(context) + ") {\n"
@@ -574,12 +623,18 @@ package behavior {
 		end
 	}
 	
+	/** Complete */
 	aspect class JavaStaticCall {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			//stdio.writeln(self.jmethod)
-			result := self.jclass.replace("::", ".") + "." + IdentifierHelper.new.getMangledIdentifier(self.jmethod, context) + "("
-			result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-			result := result + ")"
+			
+			if self.getCompiledJavaExtern()!="" then
+				result := getCompiledJavaExtern()
+			else
+				result := self.jclass.replace("::", ".") + "." + IdentifierHelper.new.getMangledIdentifier(self.jmethod, context) + "("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			end
 		end
 	}
 	
@@ -591,18 +646,21 @@ package behavior {
 		end
 	}
 	
+	/** Complete */
 	aspect class StringLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			result := "\"" + self.~value.replace("\"", "\\\"") + "\""
 		end
 	}
 	
+	/** Complete */
 	aspect class IntegerLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			result := self.~value.toString
 		end
 	}
 	
+	/** Complete */
 	aspect class BooleanLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			result := self.~value.toString
@@ -616,6 +674,7 @@ package behavior {
 		end
 	}
 	
+	/** Complete */
 	aspect class VoidLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			result := "void" // the VoidLiteral is "normally" mapped to the void singleton

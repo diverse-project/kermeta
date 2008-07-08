@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.16 2008-07-04 12:17:12 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.17 2008-07-08 14:49:32 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -68,6 +68,7 @@ class KM2EcoreContext
 	
 	/** CONSTANTS */
 	attribute JAVA_CLASS_EXCEPTION_SWITCHER : String [1..1]
+	attribute VARIABLE_EXCEPTION_SWITCHER : String [1..1]
 	/********/
 	
 
@@ -114,6 +115,8 @@ class KM2EcoreContext
 	 */
 	operation initializeConstants() : Void is do
 		self.JAVA_CLASS_EXCEPTION_SWITCHER := "org.kermeta.compil.runtime.helper.exception.KRuntimeException"
+		self.VARIABLE_EXCEPTION_SWITCHER := "ex_switcher"
+		
 		//self.GENMODEL_ANNOTATION := "http://www.eclipse.org/emf/2002/GenModel"
 		//self. := ""
 		//self. := ""

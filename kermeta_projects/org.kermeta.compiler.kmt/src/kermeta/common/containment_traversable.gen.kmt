@@ -40,9 +40,9 @@ aspect class Block {
 		self.statement.each{ e |
 			func(e)
 		}
-		self.rescueBlock.each{ e |
+		/*self.rescueBlock.each{ e |
 			func(e)
-		}
+		}*/
 
 	end
 }

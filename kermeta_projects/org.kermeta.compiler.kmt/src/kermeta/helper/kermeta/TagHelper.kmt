@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.8 2008-06-26 12:49:56 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.9 2008-07-08 14:49:32 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -60,6 +60,13 @@ aspect class Object {
 	 */
 	operation getEMFNeedReference() : String is do
 		result := getUniqueTagValue("EMF_needReference")
+	end
+	
+	/**
+	 * Get the compiledJavaExtern call for replacing the current one
+	 */
+	operation getCompiledJavaExtern() : String is do
+		result := getUniqueTagValue("compiledJavaExtern")
 	end
 	
 	/**
