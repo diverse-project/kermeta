@@ -1,23 +1,21 @@
 // $ANTLR : "Kermeta.g" -> "KermetaParser.java"$
 
 package fr.irisa.triskell.kermeta.parser.gen.parser;
-import fr.irisa.triskell.kermeta.parser.gen.ast.*;
-import org.eclipse.gymnast.runtime.core.parser.*;
-import org.eclipse.gymnast.runtime.core.ast.*;
+import org.eclipse.gymnast.runtime.core.ast.TokenInfo;
+import org.eclipse.gymnast.runtime.core.parser.ParseContext;
+import org.eclipse.gymnast.runtime.core.parser.ParseError;
+import org.eclipse.gymnast.runtime.core.parser.ParseWarning;
 
-import antlr.TokenBuffer;
-import antlr.TokenStreamException;
-import antlr.TokenStreamIOException;
-import antlr.ANTLRException;
-import antlr.LLkParser;
-import antlr.Token;
-import antlr.TokenStream;
-import antlr.RecognitionException;
 import antlr.NoViableAltException;
-import antlr.MismatchedTokenException;
-import antlr.SemanticException;
 import antlr.ParserSharedInputState;
+import antlr.RecognitionException;
+import antlr.Token;
+import antlr.TokenBuffer;
+import antlr.TokenStream;
+import antlr.TokenStreamException;
+import antlr.TokenWithIndex;
 import antlr.collections.impl.BitSet;
+import fr.irisa.triskell.kermeta.parser.gen.ast.*;
 
 public class KermetaParser extends antlr.LLkParser       implements KermetaParserTokenTypes
  {
@@ -27,8 +25,16 @@ public class KermetaParser extends antlr.LLkParser       implements KermetaParse
     }
 
     private TokenInfo createTokenInfo(Token tok) {
-        if (tok == null) return null;
-        else return new TokenInfo(tok.getText(), tok.getColumn(), tok.getType());
+    	if (tok == null) return null;
+    	else {
+    		if ( tok instanceof TokenWithIndex ) {
+    			TokenWithIndex t = (TokenWithIndex) tok;
+    			int offset = t.getIndex();
+    			return new TokenInfo(t.getText(), t.getLine(), t.getColumn(), offset, t.getType());
+    		} else {
+    			return new TokenInfo(tok.getText(), tok.getLine(), tok.getColumn(), -1, tok.getType());
+    		}
+    	}
     }
 
 

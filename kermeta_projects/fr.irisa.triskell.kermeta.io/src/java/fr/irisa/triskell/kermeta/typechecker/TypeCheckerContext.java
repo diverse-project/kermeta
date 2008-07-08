@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.31 2008-05-28 15:44:19 ftanguy Exp $
+/* $Id: TypeCheckerContext.java,v 1.32 2008-07-08 13:32:24 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -81,7 +81,7 @@ public class TypeCheckerContext {
 	    modelFilter = null;
 	    
 		// TODO : Assign Basic types and classdefinition here
-	    internalLog.info("Initializing type checker with standard lib...");
+	    internalLog.debug("Initializing type checker with standard lib...");
 	    ObjectType = createTypeForClassDefinition("kermeta::language::structure::Object", std_lib);
 	    //RObjectType = createTypeForClassDefinition("kermeta::reflection::Object", std_lib);
 	    ModelType = createTypeForClassDefinition("kermeta::language::structure::Model", std_lib);
@@ -112,7 +112,7 @@ public class TypeCheckerContext {
 		if (ObjectType == null || SetClassDef == null) {
 		    internalLog.error("Error initializing type checker. The standard library may not be loaded corectly.");
 		} else {
-		    internalLog.info("Type checker initialized.");
+		    internalLog.debug("Type checker initialized.");
 		}
 		
 		initializeSpecialOperations();
