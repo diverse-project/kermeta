@@ -11,25 +11,17 @@ class KermetaParser extends Parser;
 
 options {
   k=3;
-defaultErrorHandler=false;
+
 }
 {
     private ParseError createParseError(RecognitionException ex) {
         return KermetaParserDriver.createParseError(ex);
     }
 
-private TokenInfo createTokenInfo(Token tok) {
-	if (tok == null) return null;
-	else {
-		if ( tok instanceof TokenWithIndex ) {
-			TokenWithIndex t = (TokenWithIndex) tok;
-			int offset = t.getIndex();
-			return new TokenInfo(t.getText(), t.getLine(), t.getColumn(), offset, t.getType());
-		} else {
-			return new TokenInfo(tok.getText(), tok.getLine(), tok.getColumn(), -1, tok.getType());
-		}
-	}
-}
+    private TokenInfo createTokenInfo(Token tok) {
+        if (tok == null) return null;
+        else return new TokenInfo(tok.getText(), tok.getColumn(), tok.getType());
+    }
 
 
 	private ParseContext _parseContext;
@@ -782,9 +774,9 @@ valueCall returns [ ValueCall retVal = null ]
 
 fBlock returns [ FBlock retVal = null ]
 :
-{ Annotations annotations = null; FExpressionLst fExpressionLst = null; FRescueLst fRescueLst = null; }
-  do_KW:"do" annotations=annotations fExpressionLst=fExpressionLst fRescueLst=fRescueLst end_KW:"end" 
-{ retVal = new FBlock(createTokenInfo(do_KW), annotations, fExpressionLst, fRescueLst, createTokenInfo(end_KW)); }
+{ FExpressionLst fExpressionLst = null; FRescueLst fRescueLst = null; }
+  do_KW:"do" fExpressionLst=fExpressionLst fRescueLst=fRescueLst end_KW:"end" 
+{ retVal = new FBlock(createTokenInfo(do_KW), fExpressionLst, fRescueLst, createTokenInfo(end_KW)); }
 ;
 
 fLambdaExpression returns [ FLambdaExpression retVal = null ]
@@ -1081,7 +1073,7 @@ WS		:
 				' ' 	{ offsetPlusPlus(); }
 			|	'\t' 	{ offsetPlusPlus(); }
 			|	'\f' 	
-			|	'\r' '\n'	{ newline2(); } 
+			|	'\r' '\n'	{ offsetPlusPlus(); newline2(); } 
 			|	'\r'	{ newline2(); } 	
 			| 	'\n'	{ newline2(); }
 			)+

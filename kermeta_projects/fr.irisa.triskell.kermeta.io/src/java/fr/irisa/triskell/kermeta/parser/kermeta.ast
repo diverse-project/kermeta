@@ -194,7 +194,7 @@ sequence fSuperCall : "super" ;
 sequence resultCall : "result" ;
 sequence valueCall  : "value" ;
 
-sequence fBlock : "do" annotations fExpressionLst fRescueLst "end" ;
+sequence fBlock : "do" fExpressionLst fRescueLst "end" ;
 
 sequence fLambdaExpression : "function" LCURLY params=fLambdaparamlst PIPE expression=fExpressionLst RCURLY ;
 list fLambdaparamlst : p1=fLambdaparam (COMMA pn=fLambdaparam)* ;

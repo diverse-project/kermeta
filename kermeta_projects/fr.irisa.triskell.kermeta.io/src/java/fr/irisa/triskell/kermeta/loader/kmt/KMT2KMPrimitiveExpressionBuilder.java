@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.26 2008-05-19 14:38:47 cfaucher Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.27 2008-07-08 13:16:28 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -155,10 +155,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		((fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall)result).getParameters().add(param);
 		return false;
 	}
-	
-	
-	
-	
+		
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FLoop)
 	 */

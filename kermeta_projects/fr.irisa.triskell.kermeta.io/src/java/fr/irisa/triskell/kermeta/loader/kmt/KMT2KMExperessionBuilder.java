@@ -1,4 +1,4 @@
-/* $Id: KMT2KMExperessionBuilder.java,v 1.15 2008-06-02 13:35:43 ftanguy Exp $
+/* $Id: KMT2KMExperessionBuilder.java,v 1.16 2008-07-08 13:16:28 ftanguy Exp $
  * Created on 5 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -7,12 +7,16 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
+import org.kermeta.model.KermetaModelHelper;
 
+import fr.irisa.triskell.kermeta.ast.helper.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FAssignement;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.SqualifiedID;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Tag;
 
 /**
  * @author Franck Fleurey
@@ -43,6 +47,16 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 	}
 	
 	protected Expression result;
+	
+	@Override
+	public boolean beginVisit(Tag tag) {
+		String qualifiedName = KermetaASTHelper.qualifiedIDAsString(((SqualifiedID)tag.getName()).getQualifiedID());
+		String value = tag.getVal().getText().replace("\"", "");
+		fr.irisa.triskell.kermeta.language.structure.Tag t = KermetaModelHelper.Tag.create(qualifiedName, value);
+		if ( result != null )
+			result.getOwnedTags().add(t);
+		return false;
+	}
 	
 	/**
 	 * 
@@ -79,6 +93,7 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 		else {
 			result = KMT2KMLogicalExperessionBuilder.process(context, fAssignement.getExpression(), builder, monitor);
 		}
+		fAssignement.getAnnotations().accept(this);
 		return false;
 	}
 }
