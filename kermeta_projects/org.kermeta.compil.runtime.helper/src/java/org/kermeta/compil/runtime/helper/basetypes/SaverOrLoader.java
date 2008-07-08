@@ -1,12 +1,22 @@
+
+/*$Id: SaverOrLoader.java,v 1.2 2008-07-08 07:25:32 ftanguy Exp $
+* Project : org.kermeta.framework.compiled.runtime.helper
+* File : 	SaverOrLoader.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 24 juin 08
+* Authors : paco
+*/
 package org.kermeta.compil.runtime.helper.basetypes;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 
+import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 
 abstract public class SaverOrLoader {
 
@@ -26,7 +36,8 @@ abstract public class SaverOrLoader {
 	abstract protected EFactory getFactory(String metamodelURI);
 	
 	/**
-	 * 
+	 * Create an instance which metaclass comes from the target metamodel. The metaclass is retrieved with the source metaclass and the 
+	 * instantiation is done by the factory.
 	 * @param sourceObject
 	 * @param factory
 	 * @return
@@ -40,6 +51,23 @@ abstract public class SaverOrLoader {
 			EObject targetObject = (EObject) method.invoke(factory, new Object[] {});
 			// Make the mapping between the source object and the target one.
 			_instanceMapping.put(sourceObject, targetObject);
+			return targetObject;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * Create an enumerator from the factory given a source enumerator.
+	 * @param sourceObject
+	 * @param factory
+	 * @return
+	 */
+	protected Enumerator createInstance(Enumerator sourceObject, EFactory factory) {
+		String creationMethodName = "create" + sourceObject.getClass().getSimpleName() + "FromString";
+		try {
+			Method method = factory.getClass().getMethod(creationMethodName, new Class[] {EDataType.class, String.class});
+			Enumerator targetObject = (Enumerator) method.invoke(factory, new Object[] {null, sourceObject.getLiteral()});
 			return targetObject;
 		} catch (Exception e) {
 			return null;

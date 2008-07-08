@@ -1,9 +1,20 @@
+
+/*$Id: Loader.java,v 1.3 2008-07-08 07:25:32 ftanguy Exp $
+* Project : org.kermeta.framework.compiled.runtime.helper
+* File : 	Loader.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 24 juin 08
+* Authors : paco
+*/
 package org.kermeta.compil.runtime.helper.basetypes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
@@ -12,8 +23,19 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+/**
+ * 
+ * @author paco
+ *
+ */
 public class Loader extends SaverOrLoader {
 	
+	/**
+	 * Load a model, clone it with the factory corresponding to the metamodel uri and return the list of cloned objects.
+	 * @param modelURI The uri of the model to clone.
+	 * @param metamodelURI The uri of the metamodel to use when cloning.
+	 * @return The list of objects cloned.
+	 */
 	static public List<EObject> load(String modelURI, String metamodelURI) {
 		Loader l = new Loader();
 		List<EObject> instances = new ArrayList<EObject>();
@@ -24,10 +46,12 @@ public class Loader extends SaverOrLoader {
 		return instances;			
 	}
 	
-	public Loader() {
-		super();
-	}
-	
+	/**
+	 * 
+	 * @param o
+	 * @param metamodelURI
+	 * @return
+	 */
 	private EObject clone(EObject o, String metamodelURI) {
 		EFactory factory = getFactory(metamodelURI);
 		if ( factory != null ) {
@@ -39,21 +63,42 @@ public class Loader extends SaverOrLoader {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param sourceObject
+	 * @param targetObject
+	 * @param factory
+	 */
 	private void cloneEObject(EObject sourceObject, EObject targetObject, EFactory factory) {
 		for ( EStructuralFeature sourceFeature : sourceObject.eClass().getEAllStructuralFeatures() ) {
 			Object value = sourceObject.eGet(sourceFeature);
 			EStructuralFeature targetFeature = getEStructuralFeature(targetObject.eClass(), sourceFeature.getName());
+			
+			/*
+			 * 
+			 * Simple EObject handling.
+			 * 
+			 */
 			if ( value instanceof EObject ) {
 				EObject sourceValue = (EObject) value;
 				EObject targetValue = _instanceMapping.get(sourceValue);
+				// Better set the feature before cloning the value to avoid possible recursive calls.
 				boolean clone = false;
 				if ( targetValue == null ) {
 					targetValue = createInstance(sourceValue, factory);
 					clone = true;
 				}
+				// Setting the value.
 				targetObject.eSet(targetFeature, targetValue);
 				if ( clone )
+					// Cloning if necessary.
 					cloneEObject( (EObject) value, targetValue, factory );
+				
+			/*
+			 * 
+			 * EList handling.
+			 * 
+			 */
 			} else if ( value instanceof EList) {
 				EList sourceList = (EList) sourceObject.eGet(sourceFeature);
 				EList targetList = (EList) targetObject.eGet(targetFeature);
@@ -66,11 +111,25 @@ public class Loader extends SaverOrLoader {
 							cloneEObject(sourceListObject, targetListObject, factory);
 						}
 						targetList.add(targetListObject);
+					} else if ( o instanceof Enumerator ) {
+						Object realValue = createInstance( (Enumerator) o, factory);
+						targetList.add(realValue);
+					} else {
+						targetList.add(o);
 					}
 				}
-				//targetObject.eSet(targetFeature, value);
+				
+			/*
+			 * 
+			 * Datatypes handling.
+			 * 
+			 */
 			} else if ( value != null ) {
-				targetObject.eSet(targetFeature, value);
+				Object realValue = value;
+				// Special case for Enumerator. Need to create an instance from the good factory.
+				if ( value instanceof Enumerator )
+					realValue = createInstance( (Enumerator) value, factory);
+				targetObject.eSet(targetFeature, realValue);
 			}
 		}
 	}
