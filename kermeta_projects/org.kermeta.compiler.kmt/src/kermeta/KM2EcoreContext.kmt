@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.18 2008-07-10 11:34:33 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.19 2008-07-10 15:22:26 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -135,7 +135,10 @@ class KM2EcoreContext
 	    simkResource.add(self.simkModel)
 	    // Save the Simk model
 	    simkResource.save()
-		
+	    
+	    /*var traceResource : Resource init self.outputRepository.createResource("platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.kermeta", "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.ecore")
+		traceResource.add(self.mu)
+		traceResource.save()*/
 	end
 }
 

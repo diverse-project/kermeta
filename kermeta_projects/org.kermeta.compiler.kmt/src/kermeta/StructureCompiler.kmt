@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.35 2008-07-03 09:24:53 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.36 2008-07-10 15:22:26 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -47,6 +47,9 @@ class Main {
 		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/EDataType.main_merged.ecore"
 		//var traceInput : String init ""
 		
+		//var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.km"
+		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.ecore"
+		//var traceInput : String init ""
 
 		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
