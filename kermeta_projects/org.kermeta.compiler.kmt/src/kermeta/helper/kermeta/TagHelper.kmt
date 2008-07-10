@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.9 2008-07-08 14:49:32 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.10 2008-07-10 11:34:32 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -56,10 +56,10 @@ aspect class Object {
 	end
 	
 	/**
-	 * Get the EMF_needReference
+	 * Get the EMF_needProperty
 	 */
-	operation getEMFNeedReference() : String is do
-		result := getUniqueTagValue("EMF_needReference")
+	operation getEMFNeedProperty() : OrderedSet<String> is do
+		result := getTagValues("EMF_needProperty")
 	end
 	
 	/**
@@ -127,3 +127,17 @@ aspect class Operation {
 	end
 
 }
+
+/*
+enumeration KermetaTagSource {
+	EMF_static;
+	EMF_renameAs;
+	deprecated;
+	ecore.isTransient;
+	ecore.EDataType_isSerializable;
+	EMF_instanceClassName;
+	ecore.EDataType_instanceClassName;
+	EMF_needProperty;
+	compiledJavaExtern;
+}
+*/

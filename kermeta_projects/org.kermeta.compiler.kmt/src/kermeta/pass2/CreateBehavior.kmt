@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.27 2008-07-08 14:49:32 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.28 2008-07-10 11:34:33 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -143,14 +143,21 @@ package behavior {
 	
 	aspect class Expression {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
-			//self.
-			result := "//TODO content of the current expression\n" + self.toString + "\n\n"
+		
+			if (self.getCompiledJavaExtern()!="") and (context.compiledJavaExtern=="") then
+				context.compiledJavaExtern := getCompiledJavaExtern()
+			end
+			
+			result := ""
 		end
 	}
 	
 	/** Complete */
 	aspect class Block {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+		
+			super(context)
+			
 			var javaCode : StringBuffer init StringBuffer.new
 			
 			if self.containsRescue() then
@@ -198,12 +205,14 @@ package behavior {
 	//**** Begin **** Managing of the CallExpression branch ****//
 	aspect class CallExpression {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			super(context)
 			result := "//TODO content of the current CallExpression\n" + self.toString + "\n\n"
 		end
 	}
 	
 	aspect class CallFeature {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
+			super(context)
 			result := ""//*IP content of the current CallFeature*/"
 
 			var tgt : Expression init self.target
@@ -397,6 +406,7 @@ package behavior {
 	
 	aspect class CallVariable {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
+			super(context)
 			result := "/*CallVariable*/ "//*TODO content of the current CallVariable\n" + self.toString + "*/"
 			//result := result + "\n CallVariable.name = " + self.name
 
@@ -410,6 +420,7 @@ package behavior {
 	
 	aspect class CallResult {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallVariable is do
+			super(context)
 			//Test to insert line number
 			//result := "begin " + self.lineNumber.toString() + " " + self.fileName + "\n" + "result" + "\nend " + self.lineNumber.toString() + " " + self.fileName + "\n"
 			result := "\n" + "result "
@@ -418,12 +429,18 @@ package behavior {
 	
 	aspect class CallValue {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
+		
+			super(context)
+			
 			result := "//TODO content of the current CallValue\n" + self.toString + "\n\n"
 		end
 	}
 	
 	aspect class CallSuperOperation {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
+		
+			super(context)
+			
 			result := "//IP content of the current CallSuperOperation\n"
 			result := result + "super"
 		end
@@ -432,6 +449,9 @@ package behavior {
 	
 	aspect class VariableDecl {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+		
+			super(context)
+			
 			result := ""//*IP VariableDecl" + self.toString + "\n*/"
 			var localType : String init self.type.createBehaviorJava(context)
 			result := result + localType + " " + IdentifierHelper.new.getMangledIdentifier(self.identifier, context)
@@ -446,12 +466,17 @@ package behavior {
 			else
 				result := result + " = null"//CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
 			end
-		result := result + ";"
+			
+			result := result + ";"
+			
 		end
 	}
 	
 	aspect class Assignment {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+		
+			super(context)
+			
 			result := ""//TODO Assignment" + self.toString + "\n"
 			var left : String init self.target.createBehaviorJava(context)
 			var right : String init self.~value.createBehaviorJava(context)
@@ -502,24 +527,28 @@ package behavior {
 	
 	aspect class LambdaExpression {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			super(context)
 			result := "//TODO LambdaExpression" + self.toString
 		end
 	}
 	
 	aspect class LambdaParameter {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
+			super(context)
 			result := "//TODO LambdaParameter" + self.toString
 		end
 	}
 	
 	aspect class FunctionType {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
+			super(context)
 			result := "//TODO FunctionType" + self.toString
 		end
 	}
 	
 	aspect class TypeReference {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
+			super(context)
 			result := "//TODO TypeReference" + self.toString
 			result := CompilerHelperJava.new.ppTypeFromMultiplicityElement(self, context)
 		end
@@ -527,6 +556,7 @@ package behavior {
 	
 	aspect class EmptyExpression {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			super(context)
 			result := "//TODO EmptyExpression" + self.toString
 		end
 	}
@@ -535,6 +565,8 @@ package behavior {
 	/** Complete */
 	aspect class Raise {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			
+			super(context)
 		
 			var newEGenericType : EGenericType init EGenericType.new()
 			newEGenericType.eClassifier := context.mu.getEClassifierByQualifiedName("kermeta::exceptions::KRuntimeException")
@@ -555,6 +587,9 @@ package behavior {
 	/** Complete */
 	aspect class Rescue {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
+		
+			super(context)
+			
 			//result := "catch"
 			result := ""
 			//if not self.exceptionName.isVoid() then
@@ -588,6 +623,7 @@ package behavior {
 	/** Complete */
 	aspect class SelfExpression {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			super(context)
 			result := "this"
 		end
 	}
@@ -595,6 +631,9 @@ package behavior {
 	/** Complete */
 	aspect class Conditional {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			
+			super(context)
+			
 			result := "if( " + self.condition.createBehaviorJava(context) + ") {\n"
 			//pushPrefix(); 
 			// Both type of ThenBody and ElseBody are "Block" (see also KMT2KMPrimitiveExpressionBuilder)
@@ -619,6 +658,7 @@ package behavior {
 	/** TODO */
 	aspect class Loop {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			super(context)
 			result := ""
 		end
 	}
@@ -627,9 +667,12 @@ package behavior {
 	aspect class JavaStaticCall {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			//stdio.writeln(self.jmethod)
+
+			super(context)
 			
-			if self.getCompiledJavaExtern()!="" then
-				result := getCompiledJavaExtern()
+			if context.compiledJavaExtern!="" then
+				result := context.compiledJavaExtern
+				context.compiledJavaExtern := ""
 			else
 				result := self.jclass.replace("::", ".") + "." + IdentifierHelper.new.getMangledIdentifier(self.jmethod, context) + "("
 				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
@@ -642,6 +685,7 @@ package behavior {
 	//**** Begin **** Managing of the literal ****//
 	aspect class Literal {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+			super(context)
 			result := "//TODO Literal" + self.toString
 		end
 	}
@@ -649,6 +693,7 @@ package behavior {
 	/** Complete */
 	aspect class StringLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
+			super(context)
 			result := "\"" + self.~value.replace("\"", "\\\"") + "\""
 		end
 	}
@@ -656,6 +701,7 @@ package behavior {
 	/** Complete */
 	aspect class IntegerLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
+			super(context)
 			result := self.~value.toString
 		end
 	}
@@ -663,12 +709,14 @@ package behavior {
 	/** Complete */
 	aspect class BooleanLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
+			super(context)
 			result := self.~value.toString
 		end
 	}
 	
 	aspect class TypeLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
+			super(context)
 			result := ""//TODO TypeLiteral" + self.toString
 			result := result + self.typeref.createBehaviorJava(context)
 		end
@@ -677,6 +725,7 @@ package behavior {
 	/** Complete */
 	aspect class VoidLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
+			super(context)
 			result := "void" // the VoidLiteral is "normally" mapped to the void singleton
 		end
 	}

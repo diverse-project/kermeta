@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.17 2008-07-08 14:49:32 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.18 2008-07-10 11:34:33 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -71,6 +71,10 @@ class KM2EcoreContext
 	attribute VARIABLE_EXCEPTION_SWITCHER : String [1..1]
 	/********/
 	
+	/**  */
+	attribute compiledJavaExtern : String [1..1]
+	/********/
+	
 
 	operation initialize(modelInput : String, traceInput : String) : Void is do
 	
@@ -81,6 +85,7 @@ class KM2EcoreContext
 		self.tasks_stack.push("Start")
 		
 		self.initializeConstants()
+		self.compiledJavaExtern := ""
 		
 		// Initializing the java keywords list.
 		javaKeyWordList := JavaKeyWordList.new
