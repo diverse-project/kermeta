@@ -11,7 +11,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.22 2008-07-01 08:47:29 cfaucher Exp $
+ * $Id: exceptions.kmt,v 1.23 2008-07-10 12:01:17 cfaucher Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -31,7 +31,6 @@ using kermeta::utils
 /**
  * Generic exceptions
  * The main class from which all the exception inherit
- * FIXME CF: unused for the moment: @EMF_instanceClassName "java.lang.Exception"
  */
 class Exception
 {
