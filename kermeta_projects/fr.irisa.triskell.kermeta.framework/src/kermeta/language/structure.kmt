@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.60 2008-07-10 07:30:19 ftanguy Exp $
+/* $Id: structure.kmt,v 1.61 2008-07-10 09:48:08 ftanguy Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -28,6 +28,8 @@ require "platform:/resource/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_
 
 using kermeta::standard
 
+ @EMF_needProperty "name=oid isUnique=false isOrdered=false classDefinitionQN=kermeta::standard::Integer"
+ @EMF_needProperty "name=container isUnique=false isOrdered=false classDefinitionQN=kermeta::language::structure::Object"
 aspect class Object
 {
 	/**
@@ -43,6 +45,7 @@ aspect class Object
 	 * no container
 	 */
 	operation container() : Object from Object is do
+		@compiledJavaExtern "ObjectUtil.container(this);"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
 	end
 
@@ -133,6 +136,7 @@ aspect class Object
 	 * the name of the given Property (i.e the type of the property instance).
 	 */
 	operation get(~property : Property) : Object from Object is do
+		@compiledJavaExtern "ObjectUtil.get(this, property);"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
 	end
 	
@@ -141,6 +145,7 @@ aspect class Object
 	 */	
 	operation ~set(~property : Property, element : Object) : Void from Object is do
 		if element.isInstanceOf(~property.type) then
+			@compiledJavaExtern "ObjectUtil.set(this, property, element);"
 			extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
 		else
 			var e : kermeta::exceptions::IncompatibleTypeError init kermeta::exceptions::IncompatibleTypeError.new
@@ -153,6 +158,7 @@ aspect class Object
 	 * True if the <code>~property</code> of the object has been set
 	 */	
 	operation isSet(~property : Property) : Boolean from Object is do
+		@compiledJavaExtern "ObjectUtil.isSet(this, property);"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)
 	end
 	
@@ -161,6 +167,7 @@ aspect class Object
 	 * The <code>isSet(~property)</code> method will then return False
 	 */	
 	operation unset(~property : Property) : Void from Object is do
+		@compiledJavaExtern "ObjectUtil.unset(this, property);"
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)
 	end
 	
@@ -168,6 +175,7 @@ aspect class Object
 	 * Returns the unique Oid of the Object
 	 */	
 	operation oid() : Integer is do
+		@compiledJavaExtern "ObjectUtil.getOID(this);"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)
 	end
 	
@@ -203,6 +211,7 @@ aspect class Object
 	operation hashcode() : Integer is do		
 		// usually this method is not called when using hashtable because it directly tries the method hashcode in the RuntimeObject.java
 		// which fall back here only if the method is not redefined
+		@compiledJavaExtern "ObjectUtil.hashcode(this);"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)
 	end
 
