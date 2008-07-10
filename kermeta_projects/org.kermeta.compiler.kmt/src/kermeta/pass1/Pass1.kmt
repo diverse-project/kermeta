@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.24 2008-06-26 12:49:57 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.25 2008-07-10 14:10:04 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -148,16 +148,12 @@ aspect class ClassDefinition {
 			
 				// Compile only the methods that are not taking directly
 				// into account by the target language like times() for an Integer
-				self.ownedOperation.each{ o |
-					//stdio.writeln("operation: " + o.name)
-					/*var static_tag : Tag init o.ownedTags.detect{ t |
-						t.name == "EMF_static"
-					}*/
+				/*self.ownedOperation.each{ o |
 					if o.getEMFStatic()!="" then
 						stdio.writeln("An EMF_static method has been detected: " + o.name)
 						//TODO Compile with Simk
 					end
-				}
+				}*/
 			else
 				if not self.isAbstract then
 					raise UndefinedValueTypeInstanceClassNameException.new()

@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.28 2008-07-08 14:47:18 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.29 2008-07-10 14:10:04 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -115,9 +115,9 @@ aspect class Operation {
 			//stdio.writeln("op: " + self.name + " from the ClassDefinition: " + self.container.asType(NamedElement).name + " " + self.ecoreModelElement.toString)
 			
 			//The super operation is not tagged as EMF_Static
-			if self.getEMFStatic()=="" then
+			//if self.getEMFStatic()=="" then
 				self.ecoreModelElement.eAnnotations.add(ecoreAnnotation)
-			end	
+			//end	
 		end
 		
 	end
