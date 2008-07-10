@@ -1,4 +1,4 @@
-/* $Id: 059_loadSaveKMEnum.main.kmt,v 1.3 2008-04-25 09:48:48 cfaucher Exp $
+/* $Id: 059_loadSaveKMEnum.main.kmt,v 1.4 2008-07-10 15:00:54 dvojtise Exp $
  * Creation date: April 24, 2008
  * License: EPL
  * Copyright: INRIA
@@ -43,21 +43,25 @@ class Main inherits TestCase
 	operation testLoadKMModelWithEnum() is do
 		
 		// Try to load the test km model
+		stdio.writeln("loading from " + modelUriBase+"kmModelWithKMEnum.km")
 		var res1 : Resource init EMFRepository.new.getResource(modelUriBase+"kmModelWithKMEnum.km")
 
 		var mu1 : ModelingUnit
 		// That's the first element ...
 		mu1 ?= res1.instances.one
 		
+		assert(not mu1.isVoid)
+		
+		stdio.writeln("saving in " + outputmodelUriBase+"kmModelWithKMEnum.km")
 		// Try to save the test km model in a new km file in the output folder
-		var res2 : Resource init EMFRepository.new.getResource(outputmodelUriBase+"kmModelWithKMEnum.km")
+		var res2 : Resource init EMFRepository.new.createResource(outputmodelUriBase+"kmModelWithKMEnum.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
 		res2.add(mu1)
 		res2.save()
-		
-		// CF Note: We know the saving fails, the goal of this TestCase is to check if the saving works
+		stdio.writeln("saved in " + outputmodelUriBase+"kmModelWithKMEnum.km")
+		// CF Note:  the goal of this TestCase is to check if the saving works
 		
 		// Try to load the test km model saved in the output folder
-		var res3 : Resource init EMFRepository.new.getResource(outputmodelUriBase+"kmModelWithEnum.km")
+		var res3 : Resource init EMFRepository.new.getResource(outputmodelUriBase+"kmModelWithKMEnum.km")
 		
 		var mu : ModelingUnit
 		// That's the first element ...
