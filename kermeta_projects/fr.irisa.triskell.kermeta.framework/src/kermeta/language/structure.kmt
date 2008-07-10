@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.59 2008-04-28 11:49:51 ftanguy Exp $
+/* $Id: structure.kmt,v 1.60 2008-07-10 07:30:19 ftanguy Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -34,6 +34,7 @@ aspect class Object
 	 * Returns the Class object that is the metaclass of current Object
 	 */
 	operation getMetaClass() : Class from Object is do
+		@compiledJavaExtern "ExecutionContext.getInstance().getMetaClass( this.getClass().getName() );"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass(self)
 	end
 
