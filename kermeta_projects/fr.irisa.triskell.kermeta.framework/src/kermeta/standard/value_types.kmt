@@ -1,4 +1,4 @@
-// $Id: value_types.kmt,v 1.3 2008-07-10 13:23:25 cfaucher Exp $
+// $Id: value_types.kmt,v 1.4 2008-07-10 15:06:23 cfaucher Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -133,7 +133,7 @@ class NotComparableException inherits kermeta::exceptions::Exception {
 /**
  * The Boolean type
  */
- @EMF_instanceClassName "boolean"
+ @EMF_instanceClassName "java.lang.Boolean"
 class Boolean inherits ValueType
 {
 	/**
@@ -229,7 +229,7 @@ abstract class Numeric inherits Comparable, ValueType {
 /**
  * The class Integer
  */
- @EMF_instanceClassName "int"
+ @EMF_instanceClassName "java.lang.Integer"
 class Integer inherits Numeric, Summable<Integer>
 {
 	/**
@@ -513,7 +513,7 @@ class Real inherits Numeric, Summable<Real>
 /**
  * The class Character
  */
-@EMF_instanceClassName "char"
+@EMF_instanceClassName "java.lang.Character"
 class Character inherits ValueType, Comparable
 {
 	/**
