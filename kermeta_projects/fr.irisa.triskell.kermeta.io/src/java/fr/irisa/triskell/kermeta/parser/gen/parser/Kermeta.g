@@ -11,7 +11,7 @@ class KermetaParser extends Parser;
 
 options {
   k=3;
-
+defaultErrorHandler=false;
 }
 {
     private ParseError createParseError(RecognitionException ex) {
@@ -19,10 +19,17 @@ options {
     }
 
     private TokenInfo createTokenInfo(Token tok) {
-        if (tok == null) return null;
-        else return new TokenInfo(tok.getText(), tok.getColumn(), tok.getType());
+    	if (tok == null) return null;
+    	else {
+    		if ( tok instanceof TokenWithIndex ) {
+    			TokenWithIndex t = (TokenWithIndex) tok;
+    			int offset = t.getIndex();
+    			return new TokenInfo(t.getText(), t.getLine(), t.getColumn(), offset, t.getType());
+    		} else {
+    			return new TokenInfo(tok.getText(), tok.getLine(), tok.getColumn(), -1, tok.getType());
+    		}
+    	}
     }
-
 
 	private ParseContext _parseContext;
 	public void setParseContext(ParseContext parseContext) {
