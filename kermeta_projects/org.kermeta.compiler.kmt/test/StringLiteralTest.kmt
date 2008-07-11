@@ -1,0 +1,55 @@
+/* $Id: StringLiteralTest.kmt,v 1.1 2008-07-11 08:26:55 ftanguy Exp $ 
+ * Creation : July 10, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            paco
+ */
+@mainClass "kermeta::compiler::test::StringLiteralTest"
+@mainOperation "main"
+
+
+package kermeta::compiler::test;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
+
+using kermeta::kunit
+using kermeta::language::behavior
+using km2ecore
+using kermeta::standard
+using kermeta::exceptions
+
+class StringLiteralTest inherits TestCase {
+
+	operation main() is do
+		var runner : TestRunner init TestRunner.new
+		runner.run(StringLiteralTest)
+		runner.printTestResult
+	end
+
+	reference context : KM2EcoreContext
+	
+	method setUp() is do
+		context := KM2EcoreContext.new
+		do
+			context.initialize(void, void)
+		rescue (e : Exception)
+		end
+	end
+
+	operation testBasicStringLiteral() is do
+		var sl : StringLiteral init StringLiteral.new
+		sl.~value := "Hello World"
+		stdio.writeln( sl.createBehaviorJava(context) )
+		self.assert(sl.createBehaviorJava(context) == "\"Hello World\"")
+	end
+
+	operation testStringLiteralWithEscapedCharacters() is do
+		var sl : StringLiteral init StringLiteral.new
+		sl.~value := "Hello World \"Bad Boy\""
+		stdio.writeln( sl.createBehaviorJava(context) )
+		self.assert(sl.createBehaviorJava(context) == "\"Hello World \\\"Bad Boy\\\"\"")
+	end	
+}

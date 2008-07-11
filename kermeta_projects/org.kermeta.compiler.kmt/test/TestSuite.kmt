@@ -1,4 +1,4 @@
-/* $Id: TestSuite.kmt,v 1.1 2008-07-11 07:47:54 ftanguy Exp $ 
+/* $Id: TestSuite.kmt,v 1.2 2008-07-11 08:26:55 ftanguy Exp $ 
  * Creation : July 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -16,6 +16,8 @@ require kermeta
 require "VoidLiteralTest.kmt"
 require "VoidTypeTest.kmt"
 require "TypeReferenceTest.kmt"
+require "TypeLiteralTest.kmt"
+require "StringLiteralTest.kmt"
 require "VariableDeclTest.kmt"
 require "ClassTest.kmt"
 
@@ -27,6 +29,8 @@ class Main inherits TestSuite {
 		addAllTestCasesFrom(VoidLiteralTest)
 		addAllTestCasesFrom(VoidTypeTest)
 		addAllTestCasesFrom(TypeReferenceTest)
+		addAllTestCasesFrom(TypeLiteralTest)
+		addAllTestCasesFrom(StringLiteralTest)		
 		addAllTestCasesFrom(VariableDeclTest)
 		addAllTestCasesFrom(ClassTest)
 		var runner : TestRunner init TestRunner.new
