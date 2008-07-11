@@ -1,0 +1,67 @@
+/* $Id: AssignmentTest.kmt,v 1.1 2008-07-11 08:42:34 ftanguy Exp $ 
+ * Creation : July 10, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            paco
+ */
+@mainClass "kermeta::compiler::test::AssignmentTest"
+@mainOperation "main"
+
+
+package kermeta::compiler::test;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
+
+using kermeta::kunit
+using kermeta::language::behavior
+using km2ecore
+using kermeta::standard
+using kermeta::exceptions
+
+class AssignmentTest inherits TestCase {
+
+	operation main() is do
+		var runner : TestRunner init TestRunner.new
+		runner.run(AssignmentTest)
+		runner.printTestResult
+	end
+
+	reference context : KM2EcoreContext
+	
+	method setUp() is do
+		context := KM2EcoreContext.new
+		do
+			context.initialize(void, void)
+		rescue (e : Exception)
+		end
+	end
+
+
+	operation testAssigningStringToResult() is do
+		var as : Assignment init Assignment.new
+		as.isCast := false
+		var cr : CallResult init CallResult.new
+		as.target := cr
+		var sl : StringLiteral init StringLiteral.new
+		sl.~value := "Hello World"
+		as.~value := sl
+		stdio.writeln( as.createBehaviorJava(context) )
+		self.assert(as.createBehaviorJava(context) == "result = \"Hello World\";")
+	end
+	
+	operation testAssigningStringToResultWithCast() is do
+		var as : Assignment init Assignment.new
+		as.isCast := true
+		var cr : CallResult init CallResult.new
+		as.target := cr
+		var sl : StringLiteral init StringLiteral.new
+		sl.~value := "Hello World"
+		as.~value := sl
+		stdio.writeln( as.createBehaviorJava(context) )
+		self.assert(as.createBehaviorJava(context) == "result = (java.lang.String)\"Hello World\";")
+	end
+		
+}
