@@ -1,0 +1,51 @@
+/* $Id: TestUtil.kmt,v 1.1 2008-07-11 10:16:52 ftanguy Exp $ 
+ * Creation : July 11, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            paco
+ */
+@mainClass "test::Main"
+@mainOperation "main"
+
+
+package kermeta::compiler::test;
+
+
+require kermeta
+
+using kermeta::standard
+
+class TestUtil
+{
+	operation trim(input : String) : String is do 
+		result := ""
+		var start : Boolean init true
+		var lastC : Character init "\r".elementAt(0)
+		from var i : Integer init 0
+		until i == input.size
+		loop
+			var c : Character init input.elementAt(i)
+			if ( start and c.toString != " " ) then
+				start := false
+			end
+			if ( not start ) then
+				if ( lastC.toString == " " and c.toString != " " ) then
+					result.append( c.toString )
+				else 
+					if ( lastC.toString != " " ) then
+						if ( i != input.size-1 ) then
+							result.append( c.toString )
+						else 
+							if ( c.toString != " " ) then
+								result.append( c.toString )				
+							end
+						end
+					end
+				end
+			end
+			lastC := c
+			i := i+1
+		end
+	end
+}

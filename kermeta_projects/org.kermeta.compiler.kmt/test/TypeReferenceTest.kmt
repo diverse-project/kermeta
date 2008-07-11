@@ -1,4 +1,4 @@
-/* $Id: TypeReferenceTest.kmt,v 1.1 2008-07-11 07:47:54 ftanguy Exp $ 
+/* $Id: TypeReferenceTest.kmt,v 1.2 2008-07-11 10:16:52 ftanguy Exp $ 
  * Creation : July 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -52,8 +52,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := false
 		tr.lower := 0
 		tr.upper := 1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "java.lang.Integer")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "java.lang.Integer")
 	end
 	
 	operation testBagOfInteger() is do
@@ -64,8 +65,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := false
 		tr.lower := 0
 		tr.upper := -1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Bag<java.lang.Integer>")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.Bag<java.lang.Integer>")
 	end
 	
 	operation testSequenceOfInteger() is do
@@ -76,8 +78,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := false
 		tr.lower := 0
 		tr.upper := -1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Sequence<java.lang.Integer>")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.Sequence<java.lang.Integer>")
 	end
 	
 	operation testSetOfInteger() is do
@@ -100,8 +103,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := true
 		tr.lower := 0
 		tr.upper := -1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.OrderedSet<java.lang.Integer>")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.OrderedSet<java.lang.Integer>")
 	end
 	
 	/*
@@ -117,8 +121,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := false
 		tr.lower := 0
 		tr.upper := 1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "java.lang.String")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "java.lang.String")
 	end
 	
 	operation testBagOfString() is do
@@ -129,8 +134,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := false
 		tr.lower := 0
 		tr.upper := -1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Bag<java.lang.String>")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.Bag<java.lang.String>")
 	end
 	
 	operation testSequenceOfString() is do
@@ -141,8 +147,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := false
 		tr.lower := 0
 		tr.upper := -1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Sequence<java.lang.String>")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.Sequence<java.lang.String>")
 	end
 	
 	operation testSetOfString() is do
@@ -153,8 +160,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := true
 		tr.lower := 0
 		tr.upper := -1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Set<java.lang.String>")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.Set<java.lang.String>")
 	end
 	
 	operation testOrderedSetOfString() is do
@@ -165,8 +173,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := true
 		tr.lower := 0
 		tr.upper := -1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.OrderedSet<java.lang.String>")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.OrderedSet<java.lang.String>")
 	end
 	
 	/*
@@ -182,8 +191,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := false
 		tr.lower := 0
 		tr.upper := 1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.language.structure.ClassDefinition")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.language.structure.ClassDefinition")
 	end
 	
 	operation testBagOfClassDefinition() is do
@@ -194,8 +204,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := false
 		tr.lower := 0
 		tr.upper := -1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Bag<kermeta.language.structure.ClassDefinition>")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.Bag<kermeta.language.structure.ClassDefinition>")
 	end
 	
 	operation testSequenceOfClassDefinition() is do
@@ -206,8 +217,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := false
 		tr.lower := 0
 		tr.upper := -1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Sequence<kermeta.language.structure.ClassDefinition>")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.Sequence<kermeta.language.structure.ClassDefinition>")
 	end
 	
 	operation testSetOfClassDefinition() is do
@@ -230,8 +242,9 @@ class TypeReferenceTest inherits TestCase {
 		tr.isUnique := true
 		tr.lower := 0
 		tr.upper := -1
-		stdio.writeln( tr.createBehaviorJava(context) )
-		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.OrderedSet<kermeta.language.structure.ClassDefinition>")
+		var s : String init tr.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.OrderedSet<kermeta.language.structure.ClassDefinition>")
 	end
 
 }

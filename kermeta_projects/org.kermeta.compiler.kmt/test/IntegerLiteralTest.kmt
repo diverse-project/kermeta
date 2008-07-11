@@ -1,4 +1,4 @@
-/* $Id: IntegerLiteralTest.kmt,v 1.1 2008-07-11 09:13:47 ftanguy Exp $ 
+/* $Id: IntegerLiteralTest.kmt,v 1.2 2008-07-11 10:16:52 ftanguy Exp $ 
  * Creation : July 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -42,21 +42,24 @@ class IntegerLiteralTest inherits TestCase {
 	operation testPositiveNumber() is do
 		var il : IntegerLiteral init IntegerLiteral.new
 		il.~value := 1
-		stdio.writeln( il.createBehaviorJava(context) )
-		self.assert(il.createBehaviorJava(context) == "1")
+		var s : String init il.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "1")
 	end
 
 	operation testNegativeNumber() is do
 		var il : IntegerLiteral init IntegerLiteral.new
 		il.~value := -1
-		stdio.writeln( il.createBehaviorJava(context) )
-		self.assert(il.createBehaviorJava(context) == "-1")
+		var s : String init il.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "-1")
 	end
 	
 	operation testZeroNumber() is do
 		var il : IntegerLiteral init IntegerLiteral.new
 		il.~value := 0
-		stdio.writeln( il.createBehaviorJava(context) )
-		self.assert(il.createBehaviorJava(context) == "0")
+		var s : String init il.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "0")
 	end
 }

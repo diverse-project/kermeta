@@ -1,4 +1,4 @@
-/* $Id: BooleanLiteralTest.kmt,v 1.1 2008-07-11 09:13:47 ftanguy Exp $ 
+/* $Id: BooleanLiteralTest.kmt,v 1.2 2008-07-11 10:16:52 ftanguy Exp $ 
  * Creation : July 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -42,14 +42,16 @@ class BooleanLiteralTest inherits TestCase {
 	operation testTrue() is do
 		var bl : BooleanLiteral init BooleanLiteral.new
 		bl.~value := true
-		stdio.writeln( bl.createBehaviorJava(context) )
-		self.assert(bl.createBehaviorJava(context) == "true")
+		var s : String init bl.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "true")
 	end
 
 	operation testFalse() is do
 		var bl : BooleanLiteral init BooleanLiteral.new
 		bl.~value := false
-		stdio.writeln( bl.createBehaviorJava(context) )
-		self.assert(bl.createBehaviorJava(context) == "false")
+		var s : String init bl.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "false")
 	end
 }

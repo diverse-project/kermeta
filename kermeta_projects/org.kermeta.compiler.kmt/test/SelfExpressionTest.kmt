@@ -1,4 +1,4 @@
-/* $Id: SelfExpressionTest.kmt,v 1.1 2008-07-11 08:29:47 ftanguy Exp $ 
+/* $Id: SelfExpressionTest.kmt,v 1.2 2008-07-11 10:16:52 ftanguy Exp $ 
  * Creation : July 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -42,8 +42,9 @@ class SelfExpressionTest inherits TestCase {
 
 	operation testSelfExpression() is do
 		var se : SelfExpression init SelfExpression.new
-		stdio.writeln( se.createBehaviorJava(context) )
-		self.assert(se.createBehaviorJava(context) == "this")
+		var s : String init se.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "this")
 	end
 		
 }

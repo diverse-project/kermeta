@@ -1,4 +1,4 @@
-/* $Id: VariableDeclTest.kmt,v 1.1 2008-07-11 07:47:54 ftanguy Exp $ 
+/* $Id: VariableDeclTest.kmt,v 1.2 2008-07-11 10:16:52 ftanguy Exp $ 
  * Creation : July 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -46,8 +46,9 @@ class VariableDeclTest inherits TestCase {
 		var tr : TypeReference init TypeReference.new
 		tr.name := "Integer"
 		tr.type := Integer
-		stdio.writeln( r.createBehaviorJava(context) )
-		self.assert(r.createBehaviorJava(context) == "java.lang.Integer i = null;")
+		var s : String init r.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "java.lang.Integer i = null;")
 	end
 	
 	operation testValueTypeString() is do
@@ -57,8 +58,9 @@ class VariableDeclTest inherits TestCase {
 		var tr : TypeReference init TypeReference.new
 		tr.name := "String"
 		tr.type := String
-		stdio.writeln( r.createBehaviorJava(context) )
-		self.assert(r.createBehaviorJava(context) == "java.lang.String s = null;")
+		var s : String init r.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "java.lang.String s = null;")
 	end
 
 }

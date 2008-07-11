@@ -1,4 +1,4 @@
-/* $Id: JavaStaticCallTest.kmt,v 1.1 2008-07-11 09:13:46 ftanguy Exp $ 
+/* $Id: JavaStaticCallTest.kmt,v 1.2 2008-07-11 10:16:52 ftanguy Exp $ 
  * Creation : July 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -49,16 +49,18 @@ class JavaStaticCallTest inherits TestCase {
 		t.name := "compiledJavaExtern"
 		t.~value := "CollectionUtil.clear(this)"
 		jsc.ownedTags.add(t)
-		stdio.writeln( jsc.createBehaviorJava(context) )
-		self.assert(jsc.createBehaviorJava(context) == "CollectionUtil.clear(this)")
+		var s : String init jsc.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "CollectionUtil.clear(this)")
 	end
 	
 	operation testJavaStaticCall() is do
 		var jsc : JavaStaticCall init JavaStaticCall.new
 		jsc.jclass := "org.kermeta.machin.Blah"
 		jsc.jmethod := "doIt"
-		stdio.writeln( jsc.createBehaviorJava(context) )
-		self.assert(jsc.createBehaviorJava(context) == "org.kermeta.machin.Blah.doIt()")
+		var s : String init jsc.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "org.kermeta.machin.Blah.doIt()")
 	end
 	
 	operation testJavaStaticCallWithParameters() is do
@@ -66,8 +68,9 @@ class JavaStaticCallTest inherits TestCase {
 		jsc.jclass := "org.kermeta.machin.Blah"
 		jsc.jmethod := "doIt"
 		jsc.parameters.add( CallResult.new )
-		stdio.writeln( jsc.createBehaviorJava(context) )
-		self.assert(jsc.createBehaviorJava(context) == "org.kermeta.machin.Blah.doIt(result)")
+		var s : String init jsc.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "org.kermeta.machin.Blah.doIt(result)")
 	end
 		
 }

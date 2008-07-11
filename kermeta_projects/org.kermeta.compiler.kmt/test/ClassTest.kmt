@@ -1,4 +1,4 @@
-/* $Id: ClassTest.kmt,v 1.1 2008-07-11 07:47:54 ftanguy Exp $ 
+/* $Id: ClassTest.kmt,v 1.2 2008-07-11 10:16:52 ftanguy Exp $ 
  * Creation : July 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -42,29 +42,31 @@ class ClassTest inherits TestCase {
 	end
 
 	operation testValueTypeInteger() is do
-		stdio.writeln( Integer.createBehaviorJava(context) )
-		self.assert(Integer.createBehaviorJava(context) == "java.lang.Integer")
+		var s : String init Integer.createBehaviorJava(context)
+		self.assert(s == "java.lang.Integer")
 	end
 	
 	operation testValueTypeString() is do
-		stdio.writeln( String.createBehaviorJava(context) )
-		self.assert(String.createBehaviorJava(context) == "java.lang.String")
+		var s : String init String.createBehaviorJava(context)
+		self.assert(s == "java.lang.String")
 	end
 	
 	operation testValueTypeBoolean() is do
-		stdio.writeln( Boolean.createBehaviorJava(context) )
-		self.assert(Boolean.createBehaviorJava(context) == "java.lang.Boolean")
+		var s : String init Boolean.createBehaviorJava(context)
+		self.assert(s == "java.lang.Boolean")
 	end
 	
 	operation testCollectionOfValueType() is do
 		var c : OrderedSet<Integer> init OrderedSet<Integer>.new
-		stdio.writeln( c.getMetaClass.createBehaviorJava(context) )
-		self.assert(c.getMetaClass.createBehaviorJava(context) == "kermeta.standard.OrderedSet<java.lang.Integer>")
+		var s : String init c.getMetaClass.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.OrderedSet<java.lang.Integer>")
 	end	
 
 	operation testCollectionOfNonValueType() is do
 		var c : Sequence<ClassDefinition> init Sequence<ClassDefinition>.new
-		stdio.writeln( c.getMetaClass.createBehaviorJava(context) )
-		self.assert(c.getMetaClass.createBehaviorJava(context) == "kermeta.standard.Sequence<kermeta.language.structure.ClassDefinition>")
+		var s : String init c.getMetaClass.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "kermeta.standard.Sequence<kermeta.language.structure.ClassDefinition>")
 	end
 }

@@ -1,4 +1,4 @@
-/* $Id: BlockTest.kmt,v 1.1 2008-07-11 08:42:34 ftanguy Exp $ 
+/* $Id: BlockTest.kmt,v 1.2 2008-07-11 10:16:52 ftanguy Exp $ 
  * Creation : July 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -14,6 +14,7 @@ package kermeta::compiler::test;
 
 require kermeta
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
+require "TestUtil.kmt"
 
 using kermeta::kunit
 using kermeta::language::behavior
@@ -40,10 +41,30 @@ class BlockTest inherits TestCase {
 	end
 
 
-	operation testBlockWithoutExpressions() is do
+	operation testBlockWithoutExpressionsAndWithoutRescues() is do
 		var b : Block init Block.new
 		stdio.writeln( b.createBehaviorJava(context) )
-		self.assert(b.createBehaviorJava(context) == "try {\n} finally {\n}")
+		self.assert(b.createBehaviorJava(context) == "")
+	end
+
+	operation testBlockWithoutExpressions() is do
+		var r : Rescue init Rescue.new
+		r.exceptionName := "e"
+		var tr : TypeReference init TypeReference.new
+		tr.name := "CallOnVoidTarget"
+		tr.type := kermeta::exceptions::CallOnVoidTarget
+		tr.isOrdered := false
+		tr.isUnique := false
+		tr.lower := 0
+		tr.upper := 1
+		r.exceptionType := tr
+		var b : Block init Block.new
+		b.rescueBlock.add(r)
+		var s : String init TestUtil.new.trim( b.createBehaviorJava(context) )
+		stdio.writeln( s )
+		self.assert(s == "try {\n} } catch( org.kermeta.compil.runtime.helper.exception.KRuntimeException ex_switcher ) {
+if( ex_switcher.getRealException() instanceof kermeta.exceptions.CallOnVoidTarget ) {
+kermeta.exceptions.CallOnVoidTarget e = (kermeta.exceptions.CallOnVoidTarget) ex_SWITCHER.getRealException();}")
 	end
 		
 }

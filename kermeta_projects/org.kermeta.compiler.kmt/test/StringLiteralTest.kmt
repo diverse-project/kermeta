@@ -1,4 +1,4 @@
-/* $Id: StringLiteralTest.kmt,v 1.1 2008-07-11 08:26:55 ftanguy Exp $ 
+/* $Id: StringLiteralTest.kmt,v 1.2 2008-07-11 10:16:52 ftanguy Exp $ 
  * Creation : July 10, 2008
  * Licence  : EPL 
  * Copyright:
@@ -42,14 +42,16 @@ class StringLiteralTest inherits TestCase {
 	operation testBasicStringLiteral() is do
 		var sl : StringLiteral init StringLiteral.new
 		sl.~value := "Hello World"
-		stdio.writeln( sl.createBehaviorJava(context) )
-		self.assert(sl.createBehaviorJava(context) == "\"Hello World\"")
+		var s : String init sl.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "\"Hello World\"")
 	end
 
 	operation testStringLiteralWithEscapedCharacters() is do
 		var sl : StringLiteral init StringLiteral.new
 		sl.~value := "Hello World \"Bad Boy\""
-		stdio.writeln( sl.createBehaviorJava(context) )
-		self.assert(sl.createBehaviorJava(context) == "\"Hello World \\\"Bad Boy\\\"\"")
+		var s : String init sl.createBehaviorJava(context)
+		stdio.writeln( s )
+		self.assert(s == "\"Hello World \\\"Bad Boy\\\"\"")
 	end	
 }

@@ -1,11 +1,11 @@
-/* $Id: RescueTest.kmt,v 1.2 2008-07-11 10:16:52 ftanguy Exp $ 
+/* $Id: RaiseTest.kmt,v 1.1 2008-07-11 10:16:52 ftanguy Exp $ 
  * Creation : July 10, 2008
  * Licence  : EPL 
  * Copyright:
  * Authors  : 
  *            paco
  */
-@mainClass "kermeta::compiler::test::RescueTest"
+@mainClass "kermeta::compiler::test::RaiseTest"
 @mainOperation "main"
 
 
@@ -17,15 +17,16 @@ require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBeh
 
 using kermeta::kunit
 using kermeta::language::behavior
+using kermeta::language::structure
 using km2ecore
 using kermeta::standard
 using kermeta::exceptions
 
-class RescueTest inherits TestCase {
+class RaiseTest inherits TestCase {
 
 	operation main() is do
 		var runner : TestRunner init TestRunner.new
-		runner.run(RescueTest)
+		runner.run(RaiseTest)
 		runner.printTestResult
 	end
 
@@ -33,15 +34,24 @@ class RescueTest inherits TestCase {
 	
 	method setUp() is do
 		context := KM2EcoreContext.new
+		var mu : ModelingUnit
+		mu ?= RaiseTest.getMetaClass().typeDefinition.container.container.container.container
+		
+		stdio.writeln( RaiseTest.getMetaClass().typeDefinition.container.container.container.getMetaClass().typeDefinition.name )
+		
+		if ( mu.isVoid ) then
+			stdio.writeln( "oups")
+		end
 		do
 			context.initialize(void, void)
 		rescue (e : Exception)
 		end
 	end
 
-	operation testRescue() is do
-		var r : Rescue init Rescue.new
-		r.exceptionName := "e"
+
+	operation testRaise() is do
+		var r : Raise init Raise.new
+		
 		var tr : TypeReference init TypeReference.new
 		tr.name := "CallOnVoidTarget"
 		tr.type := kermeta::exceptions::CallOnVoidTarget
@@ -49,10 +59,18 @@ class RescueTest inherits TestCase {
 		tr.isUnique := false
 		tr.lower := 0
 		tr.upper := 1
-		r.exceptionType := tr
+		var tl : TypeLiteral init TypeLiteral.new
+		tl.typeref := tr
+		
+		var cf : CallFeature init CallFeature.new
+		cf.target := tl
+		cf.staticOperation := kermeta::exceptions::CallOnVoidTarget.getMetaClass().ownedOperation.detect{ o | o.name == "new" }
+		
+		r.expression := cf
+		
 		var s : String init r.createBehaviorJava(context)
 		stdio.writeln( s )
-		self.assert(s == "catch (kermeta.exceptions.CallOnVoidTarget e) {\n}")
+		self.assert(s == "try {\n} finally {\n}")
 	end
-
+		
 }
