@@ -1,4 +1,4 @@
-/* $Id: TestSuite.kmt,v 1.4 2008-07-11 08:42:34 ftanguy Exp $ 
+/* $Id: TestSuite.kmt,v 1.5 2008-07-11 09:13:47 ftanguy Exp $ 
  * Creation : July 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -23,6 +23,10 @@ require "VariableDeclTest.kmt"
 require "ClassTest.kmt"
 require "AssignmentTest.kmt"
 require "BlockTest.kmt"
+require "BooleanLiteralTest.kmt"
+require "IntegerLiteralTest.kmt"
+require "RescueTest.kmt"
+require "JavaStaticCallTest.kmt"
 
 using kermeta::kunit
 
@@ -39,6 +43,10 @@ class Main inherits TestSuite {
 		addAllTestCasesFrom(ClassTest)
 		addAllTestCasesFrom(AssignmentTest)
 		addAllTestCasesFrom(BlockTest)
+		addAllTestCasesFrom(BooleanLiteralTest)
+		addAllTestCasesFrom(IntegerLiteralTest)
+		addAllTestCasesFrom(RescueTest)
+		addAllTestCasesFrom(JavaStaticCallTest)
 		var runner : TestRunner init TestRunner.new
 		runner.runTest(self)
 		runner.printTestResult()

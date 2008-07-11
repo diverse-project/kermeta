@@ -1,0 +1,73 @@
+/* $Id: JavaStaticCallTest.kmt,v 1.1 2008-07-11 09:13:46 ftanguy Exp $ 
+ * Creation : July 10, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            paco
+ */
+@mainClass "kermeta::compiler::test::JavaStaticCallTest"
+@mainOperation "main"
+
+
+package kermeta::compiler::test;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
+
+using kermeta::kunit
+using kermeta::language::behavior
+using kermeta::language::structure
+using km2ecore
+using kermeta::standard
+using kermeta::exceptions
+
+class JavaStaticCallTest inherits TestCase {
+
+	operation main() is do
+		var runner : TestRunner init TestRunner.new
+		runner.run(JavaStaticCallTest)
+		runner.printTestResult
+	end
+
+	reference context : KM2EcoreContext
+	
+	method setUp() is do
+		context := KM2EcoreContext.new
+		do
+			context.initialize(void, void)
+		rescue (e : Exception)
+		end
+	end
+
+
+	operation testJavaStaticCallWithTag() is do
+		var jsc : JavaStaticCall init JavaStaticCall.new
+		jsc.jclass := "org.kermeta.machin.Blah"
+		jsc.jmethod := "doIt"
+		var t : Tag init Tag.new
+		t.name := "compiledJavaExtern"
+		t.~value := "CollectionUtil.clear(this)"
+		jsc.ownedTags.add(t)
+		stdio.writeln( jsc.createBehaviorJava(context) )
+		self.assert(jsc.createBehaviorJava(context) == "CollectionUtil.clear(this)")
+	end
+	
+	operation testJavaStaticCall() is do
+		var jsc : JavaStaticCall init JavaStaticCall.new
+		jsc.jclass := "org.kermeta.machin.Blah"
+		jsc.jmethod := "doIt"
+		stdio.writeln( jsc.createBehaviorJava(context) )
+		self.assert(jsc.createBehaviorJava(context) == "org.kermeta.machin.Blah.doIt()")
+	end
+	
+	operation testJavaStaticCallWithParameters() is do
+		var jsc : JavaStaticCall init JavaStaticCall.new
+		jsc.jclass := "org.kermeta.machin.Blah"
+		jsc.jmethod := "doIt"
+		jsc.parameters.add( CallResult.new )
+		stdio.writeln( jsc.createBehaviorJava(context) )
+		self.assert(jsc.createBehaviorJava(context) == "org.kermeta.machin.Blah.doIt(result)")
+	end
+		
+}
