@@ -1,7 +1,10 @@
-/* $Id: TypeHelper.kmt,v 1.16 2008-06-26 12:49:56 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.17 2008-07-11 13:05:19 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ *            Francois Tanguy <ftanguy@irisa.fr>
  */
 
 package kermeta::language::structure;
@@ -54,9 +57,6 @@ aspect class Type {
 			
 			if pt.typeDefinition.isInstanceOf(ClassDefinition) then
 				result := pt.typeDefinition.asType(ClassDefinition).isValueType()
-				/*if not cd.allSuperTypes.detect{ sp | sp.isInstanceOf(ParameterizedType) and sp.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType" }.isVoid() then
-					result := true
-				end*/
 			end
 		end
 	end
@@ -72,6 +72,7 @@ aspect class Type {
 	
 	operation getTypeName() : String is do
 		result := void
+		
 		if self.isInstanceOf(Class) then
 			var cd : ClassDefinition init self.asType(Class).getClassDefinition()
 			result := cd.qualifiedName
