@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.5 2008-04-21 15:26:24 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.6 2008-07-11 13:04:50 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -60,18 +60,23 @@ class CompilerHelperJava {
 		result := ""
 		if elem.upper != 1 then
 			if elem.isOrdered then
-				if not elem.isUnique then
-				result := result + "seq "
+				if elem.isUnique then
+					result := result + "kermeta.standard.OrderedSet"
+				else
+					result := result + "kermeta.standard.Sequence"
 				end
 			else
 				if elem.isUnique then
-					result := result + "set "
+					result := result + "kermeta.standard.Set"
 				else
-					result := result + "bag "
+					result := result + "kermeta.standard.Bag"
 				end
 			end
+			result := result + "<" + elem.type.createBehaviorJava(context) + ">"
+		else
+			result := result + elem.type.createBehaviorJava(context)
 		end
-		result := result + elem.type.createBehaviorJava(context)
+		
 		/*if ( elem.lower != 0 or elem.upper != 1) then
 			result := result + "[" + elem.lower() + ".."
 			result := result + (elem.upper()<0)?"*":""+elem.upper()
