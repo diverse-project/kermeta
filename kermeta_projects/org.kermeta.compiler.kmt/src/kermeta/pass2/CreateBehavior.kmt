@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.30 2008-07-10 15:22:25 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.31 2008-07-11 09:45:50 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -124,14 +124,43 @@ package structure {
 	
 	aspect class ParameterizedType {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Type is do
-		
+			stdio.writeln("ParameterizedType.createBehaviorJava")
 			if self.typeDefinition.getEMFInstanceClassName()!="" then
 				result := self.typeDefinition.getEMFInstanceClassName()
 			else
 				@deprecated "It should be never used, these mappings has been replaced by the Tag @EMF_instanceClassName"		
-				result := context.javaTypeMapping.getTypeMapping(self.typeDefinition.qualifiedName)
+				//result := context.javaTypeMapping.getTypeMapping(self.typeDefinition.qualifiedName)
 			
-				result := result.replace("::",".")
+				//result := result.replace("::",".")
+				
+				result := self.getTypeName().replace("::",".")
+			end
+			
+			//Look the param binding
+			var str_tpb : String init ""
+			var i : Integer init 0
+			self.typeParamBinding.each{ tpb |
+				/*if tpb.type.isInstanceOf(ParameterizedType) then
+					str_tpb := str_tpb + tpb.type.asType(ParameterizedType).typeDefinition.name
+				else
+					if tpb.type.isInstanceOf(PrimitiveType) then
+						str_tpb := str_tpb + tpb.type.asType(ParameterizedType).typeDefinition.name
+					end
+					stdio.writeln("tpb.type.asType(ParameterizedType)" + tpb.type.toString())
+				end*/
+				
+				if i==1 then
+					str_tpb := str_tpb + ", "
+				else
+					i := 1
+				end
+				
+				str_tpb := str_tpb + tpb.type.createBehaviorJava(context)
+				//str_tpb := str_tpb + tpb.type.getTypeName().replace("::",".")
+				
+			}
+			if str_tpb!="" then
+				result := result + "<" + str_tpb + ">"
 			end
 		end
 	}
@@ -155,6 +184,7 @@ package behavior {
 				context.compiledJavaExtern := getCompiledJavaExtern()
 			end
 			
+			//This method must be returned nothing
 			result := ""
 		end
 	}
@@ -464,11 +494,14 @@ package behavior {
 			result := result + localType + " " + IdentifierHelper.new.getMangledIdentifier(self.identifier, context)
 			if not self.initialization.isVoid() then
 				
-				if self.initialization.createBehaviorJava(context).contains(".new()") or self.initialization.createBehaviorJava(context).contains(".new") then
-					result := result + " /*VariableDecl with new*/ " + CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
-				else
-					result := result + " /*VariableDecl without new*/ " + self.initialization.createBehaviorJava(context)
-				end
+				//if self.initialization.createBehaviorJava(context).contains(".new()") or self.initialization.createBehaviorJava(context).contains(".new") then
+					//result := result + " /*VariableDecl with new*/ " + CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
+				//else
+					//result := result + " /*VariableDecl without new*/ " + self.initialization.createBehaviorJava(context)
+				//end
+				
+				//result := result + " = CreateFactory.new(" + localType + ")"
+				result := result + " = " + self.initialization.createBehaviorJava(context)
 		
 			else
 				result := result + " = null"//CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
@@ -557,14 +590,14 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			super(context)
 			result := "//TODO TypeReference" + self.toString
-			result := CompilerHelperJava.new.ppTypeFromMultiplicityElement(self, context)
+			result := CompilerHelperJava.new().ppTypeFromMultiplicityElement(self, context)
 		end
 	}
 	
 	aspect class EmptyExpression {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			super(context)
-			result := "//TODO EmptyExpression" + self.toString
+			result := "//TODO EmptyExpression" + self.toString()
 		end
 	}
 	
