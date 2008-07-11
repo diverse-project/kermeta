@@ -1,4 +1,4 @@
-/*$Id: EMFRepositorySingleton.java,v 1.3 2008-06-04 14:00:49 ftanguy Exp $
+/*$Id: EMFRepositorySingleton.java,v 1.4 2008-07-11 13:27:02 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	RepositorySingleton.java
 * License : EPL
@@ -54,21 +54,9 @@ public class EMFRepositorySingleton {
     	// Creating EMF resource for the resource to be created
     	java.lang.String file = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(uriRO);
     	
-    	java.lang.String unit_uri = selfRO.getFactory().getMemory().getUnit().getUri();
-    	java.lang.String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1);
-    	URI u = URI.createURI(file);
-    	if (u.isRelative()) {
-    		java.lang.String defaultPath = uriRO.getFactory().getMemory().getInterpreter().getDefaultPath();
-    		if ( defaultPath == null ) {
-    			defaultPath = unit_uripath;
-        		URIConverter c = new URIConverterImpl();
-        		u = u.resolve(c.normalize(URI.createURI(defaultPath)));    			
-    		} else if ( ! defaultPath.startsWith("platform:/") ) {
-    			defaultPath = "platform:/resource" + defaultPath;
-    			u = URI.createURI( defaultPath + "/" + file);
-    		} else
-    			u = URI.createURI( defaultPath + "/" + file );
-    	}
+    	java.lang.String normalizedUri = Repository.normalizeUri(file, uriRO.getFactory().getMemory().getUnit(), uriRO.getFactory().getMemory().getInterpreter());    	
+    	
+    	URI u = URI.createURI(normalizedUri);    	
     	
     	if ( u.fileExtension() != null ) {
     		
@@ -91,6 +79,15 @@ public class EMFRepositorySingleton {
     	if(res != null) {
         	// Create the resource RO
         	resRO = createRuntimeObjectFromResource(res, selfRO, mmUriRO);
+        	
+        	// reset the uri to the original value (because it may have been normalized
+        	// Set "uri" property of resource RO (from emf resource uri)
+        	//resRO.getProperties().get("uri");
+        	resRO.getProperties().put(
+        		"uri",
+        		fr.irisa.triskell.kermeta.runtime.basetypes.String.create(file, resRO.getFactory())
+        	);
+        	//resRO.getProperties().get("uri");
         	
         	// Insert created resource RO in the list of "resources" of the repository RO
         	RuntimeObject resListRO = selfRO.getProperties().get("resources"); 

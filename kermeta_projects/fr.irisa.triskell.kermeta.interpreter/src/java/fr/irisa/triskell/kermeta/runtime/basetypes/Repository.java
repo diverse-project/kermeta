@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.12 2008-06-18 14:03:48 dvojtise Exp $
+/* $Id: Repository.java,v 1.13 2008-07-11 13:27:02 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -9,6 +9,9 @@
  */
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -113,7 +116,10 @@ public class Repository {
     /**
      * Return a normalized version of the Uri
 	 * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically
-	 * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) 
+	 * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or ../ or / ) 
+	 * ./ is relative to the launcher unit (or this may be customized when launching the kermeta application)
+	 * / represents the bundle root of the launcher unit (ie. the plugin root in deployed mode or the project root in development mode)
+	 * Note : customizing the 
 	 * If you wish to know what concrete uri is used by kermeta when loading and saving you can use this function
 	 * to check how a given uri is normalized by kermeta
      * @param originalUri : uri to normalize
@@ -127,15 +133,38 @@ public class Repository {
     	URI u = URI.createURI(originalUri);
     	if (u.isRelative()) {
     		java.lang.String defaultPath = interpreter.getDefaultPath();
-    		if ( defaultPath == null ) {
-    			defaultPath = unit_uripath;
-        		URIConverter c = new URIConverterImpl();
-        		u = u.resolve(c.normalize(URI.createURI(defaultPath)));    			
-    		} else if ( ! defaultPath.startsWith("platform:/") ) {
-    			defaultPath = "platform:/resource" + defaultPath;
-    			u = URI.createURI( defaultPath + "/" + originalUri);
-    		} else {
-    			u = URI.createURI( defaultPath + "/" + originalUri);	
+    		if(originalUri.startsWith("/")){
+    			// looking for the root of the bundle/project
+    			if ( defaultPath == null ) {
+	    			defaultPath = unit_uripath;
+	        		URIConverter c = new URIConverterImpl();
+	        		u = u.resolve(c.normalize(URI.createURI(defaultPath)));    			
+	    		} else {
+	    			if ( ! defaultPath.startsWith("platform:/") ) {	    			
+	    				defaultPath = "platform:/resource" + defaultPath;
+	    			}
+	    			Pattern myPattern;
+	    			if(defaultPath.startsWith("platform:/plugin/"))
+	    				myPattern = Pattern.compile("platform:/plugin/[^/]*/");
+	    			else myPattern = Pattern.compile("platform:/resource/[^/]*/");
+	    			Matcher myMatcher = myPattern.matcher(defaultPath);
+	    			while (myMatcher.find()) {
+	    				defaultPath = myMatcher.group();
+	    			}
+	    			u = URI.createURI( defaultPath + originalUri);	
+	    		}
+    		}
+    		else{ // this is an URI of kind ./ or ../
+	    		if ( defaultPath == null ) {
+	    			defaultPath = unit_uripath;
+	        		URIConverter c = new URIConverterImpl();
+	        		u = u.resolve(c.normalize(URI.createURI(defaultPath)));    			
+	    		} else if ( ! defaultPath.startsWith("platform:/") ) {
+	    			defaultPath = "platform:/resource" + defaultPath;
+	    			u = URI.createURI( defaultPath + "/" + originalUri);
+	    		} else {
+	    			u = URI.createURI( defaultPath + "/" + originalUri);	
+	    		}
     		}
     	}
     	return u.toString();

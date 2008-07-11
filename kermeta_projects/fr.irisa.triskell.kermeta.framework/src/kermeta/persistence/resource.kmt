@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.52 2008-07-08 08:53:18 ftanguy Exp $
+ * $Id: resource.kmt,v 1.53 2008-07-11 13:27:16 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -67,8 +67,8 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	 * The entities contained in the model-instance, that are provided when user loads a resource 
 	 * instances == rootContents
 	 * this is a loop on Resource itself in order to get backward compatibility
-	 * user should use the resource directly since this is a collection
 	 */
+	@deprecated "user should use the resource directly since this is a collection"
 	operation instances() : Resource is do
 		result := self
 	end
@@ -86,7 +86,8 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	operation save() : Void is abstract
 	
 	/**
-	 * Save a Resource in a file referenced by the new uri. 
+	 * Save a Resource in a file referenced by the new uri.
+	 * note: this doesn't change the URI of the resource, it is only saved in another place 
 	 */
 	operation saveWithNewURI(new_uri : String) : Void is do end
 	
@@ -189,6 +190,19 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 				end
 			}
 		end
+		
+	/**
+	 * Return a normalized version of the Uri of this resource
+	 * in order to prevent several loading of the same file because they have diffent path that leads to them, kermeta uses normalizedURI
+	 * for some of its functions (eg. repository.getResource )
+	 * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically
+	 * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) 
+	 * If you wish to know what concrete uri is used by kermeta when loading and saving you can use this function
+	 * to check how a given uri is normalized by kermeta
+	 */
+	operation normalizedUri() : String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
+	end
 }
 
 
@@ -255,7 +269,7 @@ class EMFResource inherits Resource
 		if(self.size == 0) then
 			stdio.writeln("Resource load failed!")
 			var e : kermeta::exceptions::ResourceLoadException init kermeta::exceptions::ResourceLoadException.new
-			e.message := "Resource load failed, no object was created in this resource"
+			e.message := "Resource load failed, no object was created in this resource from " + uri
 			raise e
 		end
 	end
@@ -323,6 +337,7 @@ class KMResource inherits Resource
 /**
  * Abstract resource container, that contains a list of available loaded resources, 
  * and methods to create or get a resource given an URI.
+ * A repository cannot contain 2 resources which points to the same file (ie. that have the same normalizedURI)
  */
 abstract class Repository
 {
@@ -349,18 +364,22 @@ abstract class Repository
 	 * an already created Resource of the Repository.
 	 * If the Repository contains no Resource associated with the given uri, creates
 	 * a new Resource and loads it.
+	 * In order to prevent multiple load of the same file by using variant path to the same file, all URI used by this function are normalized
 	 * Raises a ResourceCreate exception if the given uri does not point to an existing
 	 * model file 
+	 * May also raises loading exceptions if this is the first retrieval of the resource
 	 */
 	operation getResource(uri : String) : Resource is do
 		
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.initRepository(self)
 
+		
+		var normalisedUri : String init normalizeUri(uri)
 		from var it : Iterator<Resource> init resources.iterator
 		until it.isOff
 		loop
 			var next : Resource init it.next
-			if (uri.equals(next.uri)) then
+			if (normalisedUri.equals(next.normalizedUri)) then
 				result := next
 			end
 		end
@@ -443,6 +462,18 @@ abstract class Repository
 			}
 		}		
 	end
+	/**
+	 * Return a normalized version of the Uri 
+	 * in order to prevent several loading of the same file because they have different path that leads to them, kermeta uses normalizedURI
+	 * for some of its functions (eg. repository.getResource )
+	 * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically
+	 * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) 
+	 * If you wish to know what concrete uri is used by kermeta when loading and saving you can use this function
+	 * to check how a given uri is normalized by kermeta 
+	 */
+	operation normalizeUri(uri : String) : String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
+	end
 }
 
 /**
@@ -474,17 +505,7 @@ class DanglingDiagnostic {
  * Repository that stores and manages resources that come from EMF
  */
 class EMFRepository inherits Repository
-{
-	/**
-	 * Return a normalized version of the Uri
-	 * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically
-	 * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) 
-	 * If you wish to know what concrete uri is used by kermeta when loading and saving you can use this function
-	 * to check how a given uri is normalized by kermeta
-	 */
-	operation normalizeUri(uri : String) : String is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
-	end
+{	
 	
 	/**
 	 * Overrides Repository.createResource(String, String)
@@ -507,7 +528,7 @@ class EMFRepository inherits Repository
 	
 	/** 
 	 * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself
-	 * this is usefull for example to make a dependency to framework.km
+	 * this is useful for example to make a dependency to framework.km
 	 * by default, not setting this is considered as false.
 	 */
 	attribute useInterpreterInternalResources : Boolean

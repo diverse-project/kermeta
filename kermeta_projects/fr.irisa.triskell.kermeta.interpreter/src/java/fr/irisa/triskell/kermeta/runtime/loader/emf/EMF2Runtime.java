@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.83 2008-06-13 09:31:41 cfaucher Exp $
+/* $Id: EMF2Runtime.java,v 1.84 2008-07-11 13:27:02 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -47,6 +47,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Repository;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.runtime.rohelper.RepositoryHelper;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
@@ -249,9 +250,12 @@ public class EMF2Runtime {
 		// Iterate over inter-dependent resources
 		for (Resource res : dependentResources) {
 			RuntimeObject crtResRO = null;
-			
+			String mainResNormalizedUri = Repository.normalizeUri(
+					fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(mainResRO.getProperties().get("uri")),
+					mainResRO.getFactory().getMemory().getUnit(), 
+					mainResRO.getFactory().getMemory().getInterpreter());
 			// First step: create and/or initialize the RO for the current resources
-			if(! res.getURI().toString().equals(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(mainResRO.getProperties().get("uri")))) {
+			if(! res.getURI().toString().equals(mainResNormalizedUri)) {
 				// this is a dependent resource
 				
 				// is this an already loaded resource ?

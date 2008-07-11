@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.18 2008-06-13 15:16:49 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.19 2008-07-11 13:29:57 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -133,6 +133,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/emf_testcases/kermeta","069_copy_km_model.main.kmt" );
 
 		testWithFile("test/interpreter/emf_testcases/kermeta","070_save_ordered_association_with_opposite.main.kmt" );
+
+		testWithFile("test/interpreter/emf_testcases/kermeta","071_DynamicInstanceLoadSaveUsingRelativePath.main.kmt" );
 
 		testWithFile("test/interpreter/emf_testcases/kermeta","071_DynamicInstanceLoadSaveWithVariousMM_NsURI.main.kmt" );
 
