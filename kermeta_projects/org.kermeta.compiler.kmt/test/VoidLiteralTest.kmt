@@ -1,0 +1,43 @@
+/* $Id: VoidLiteralTest.kmt,v 1.1 2008-07-11 07:47:54 ftanguy Exp $ 
+ * Creation : July 10, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            paco
+ */
+@mainClass "kermeta::compiler::test::VoidLiteralTest"
+@mainOperation "main"
+
+
+package kermeta::compiler::test;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
+
+using kermeta::kunit
+using kermeta::language::behavior
+using km2ecore
+
+class VoidLiteralTest inherits TestCase {
+
+	operation main() is do
+		var runner : TestRunner init TestRunner.new
+		runner.run(VoidLiteralTest)
+		runner.printTestResult
+	end
+
+	reference r : VoidLiteral
+
+	reference context : KM2EcoreContext
+
+	method setUp() is do
+		r := VoidLiteral.new
+		context := KM2EcoreContext.new
+	end
+
+	operation testGeneration() is do
+		self.assert(r.createBehaviorJava(context) == "void")
+	end
+
+}

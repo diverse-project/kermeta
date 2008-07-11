@@ -1,0 +1,37 @@
+/* $Id: TestSuite.kmt,v 1.1 2008-07-11 07:47:54 ftanguy Exp $ 
+ * Creation : July 11, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            paco
+ */
+@mainClass "kermeta::compiler::test::Main"
+@mainOperation "main"
+
+
+package kermeta::compiler::test;
+
+
+require kermeta
+require "VoidLiteralTest.kmt"
+require "VoidTypeTest.kmt"
+require "TypeReferenceTest.kmt"
+require "VariableDeclTest.kmt"
+require "ClassTest.kmt"
+
+using kermeta::kunit
+
+class Main inherits TestSuite {
+
+	operation main() : Void is do
+		addAllTestCasesFrom(VoidLiteralTest)
+		addAllTestCasesFrom(VoidTypeTest)
+		addAllTestCasesFrom(TypeReferenceTest)
+		addAllTestCasesFrom(VariableDeclTest)
+		addAllTestCasesFrom(ClassTest)
+		var runner : TestRunner init TestRunner.new
+		runner.runTest(self)
+		runner.printTestResult()
+	end
+
+}

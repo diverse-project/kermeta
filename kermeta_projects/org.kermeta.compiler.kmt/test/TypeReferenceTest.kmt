@@ -1,0 +1,237 @@
+/* $Id: TypeReferenceTest.kmt,v 1.1 2008-07-11 07:47:54 ftanguy Exp $ 
+ * Creation : July 10, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            paco
+ */
+@mainClass "kermeta::compiler::test::TypeReferenceTest"
+@mainOperation "main"
+
+
+package kermeta::compiler::test;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
+
+using kermeta::kunit
+using kermeta::language::behavior
+using km2ecore
+using kermeta::standard
+using kermeta::exceptions
+
+class TypeReferenceTest inherits TestCase {
+
+	operation main() is do
+		var runner : TestRunner init TestRunner.new
+		runner.run(TypeReferenceTest)
+		runner.printTestResult
+	end
+
+	reference context : KM2EcoreContext
+	
+	method setUp() is do
+		context := KM2EcoreContext.new
+		do
+			context.initialize(void, void)
+		rescue (e : Exception)
+		end
+	end
+
+	/*
+	 *
+	 *	Integer
+	 *
+	 */
+	operation testValueTypeInteger() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "Integer"
+		tr.type := kermeta::standard::Integer
+		tr.isOrdered := false
+		tr.isUnique := false
+		tr.lower := 0
+		tr.upper := 1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "java.lang.Integer")
+	end
+	
+	operation testBagOfInteger() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "Integer"
+		tr.type := kermeta::standard::Integer
+		tr.isOrdered := false
+		tr.isUnique := false
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Bag<java.lang.Integer>")
+	end
+	
+	operation testSequenceOfInteger() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "Integer"
+		tr.type := kermeta::standard::Integer
+		tr.isOrdered := true
+		tr.isUnique := false
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Sequence<java.lang.Integer>")
+	end
+	
+	operation testSetOfInteger() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "Integer"
+		tr.type := kermeta::standard::Integer
+		tr.isOrdered := false
+		tr.isUnique := true
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Set<java.lang.Integer>")
+	end
+	
+	operation testOrderedSetOfInteger() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "Integer"
+		tr.type := kermeta::standard::Integer
+		tr.isOrdered := true
+		tr.isUnique := true
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.OrderedSet<java.lang.Integer>")
+	end
+	
+	/*
+	 *
+	 *	String
+	 *
+	 */
+	operation testValueTypeString() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "String"
+		tr.type := kermeta::standard::String
+		tr.isOrdered := false
+		tr.isUnique := false
+		tr.lower := 0
+		tr.upper := 1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "java.lang.String")
+	end
+	
+	operation testBagOfString() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "String"
+		tr.type := kermeta::standard::String
+		tr.isOrdered := false
+		tr.isUnique := false
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Bag<java.lang.String>")
+	end
+	
+	operation testSequenceOfString() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "String"
+		tr.type := kermeta::standard::String
+		tr.isOrdered := true
+		tr.isUnique := false
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Sequence<java.lang.String>")
+	end
+	
+	operation testSetOfString() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "String"
+		tr.type := kermeta::standard::String
+		tr.isOrdered := false
+		tr.isUnique := true
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Set<java.lang.String>")
+	end
+	
+	operation testOrderedSetOfString() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "String"
+		tr.type := kermeta::standard::String
+		tr.isOrdered := true
+		tr.isUnique := true
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.OrderedSet<java.lang.String>")
+	end
+	
+	/*
+	 *
+	 *	Class Definition
+	 *
+	 */
+	operation testClassDefinition() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "ClassDefinition"
+		tr.type := kermeta::language::structure::ClassDefinition
+		tr.isOrdered := false
+		tr.isUnique := false
+		tr.lower := 0
+		tr.upper := 1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.language.structure.ClassDefinition")
+	end
+	
+	operation testBagOfClassDefinition() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "ClassDefinition"
+		tr.type := kermeta::language::structure::ClassDefinition
+		tr.isOrdered := false
+		tr.isUnique := false
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Bag<kermeta.language.structure.ClassDefinition>")
+	end
+	
+	operation testSequenceOfClassDefinition() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "ClassDefinition"
+		tr.type := kermeta::language::structure::ClassDefinition
+		tr.isOrdered := true
+		tr.isUnique := false
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Sequence<kermeta.language.structure.ClassDefinition>")
+	end
+	
+	operation testSetOfClassDefinition() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "ClassDefinition"
+		tr.type := kermeta::language::structure::ClassDefinition
+		tr.isOrdered := false
+		tr.isUnique := true
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.Set<kermeta.language.structure.ClassDefinition>")
+	end
+	
+	operation testOrderedSetOfClassDefinition() is do
+		var tr : TypeReference init TypeReference.new
+		tr.name := "ClassDefinition"
+		tr.type := kermeta::language::structure::ClassDefinition
+		tr.isOrdered := true
+		tr.isUnique := true
+		tr.lower := 0
+		tr.upper := -1
+		stdio.writeln( tr.createBehaviorJava(context) )
+		self.assert(tr.createBehaviorJava(context) == "kermeta.standard.OrderedSet<kermeta.language.structure.ClassDefinition>")
+	end
+
+}

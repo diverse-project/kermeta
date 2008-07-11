@@ -1,0 +1,70 @@
+/* $Id: ClassTest.kmt,v 1.1 2008-07-11 07:47:54 ftanguy Exp $ 
+ * Creation : July 10, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            paco
+ */
+@mainClass "kermeta::compiler::test::ClassTest"
+@mainOperation "main"
+
+
+package kermeta::compiler::test;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
+
+using kermeta::kunit
+using kermeta::language::structure
+using km2ecore
+using kermeta::standard
+using kermeta::exceptions
+
+class ClassTest inherits TestCase {
+
+	operation main() is do
+		var runner : TestRunner init TestRunner.new
+		runner.run(ClassTest)
+		runner.printTestResult
+	end
+
+	reference r : Class
+
+	reference context : KM2EcoreContext
+	
+	method setUp() is do
+		context := KM2EcoreContext.new
+		do
+			context.initialize(void, void)
+		rescue (e : Exception)
+		end
+	end
+
+	operation testValueTypeInteger() is do
+		stdio.writeln( Integer.createBehaviorJava(context) )
+		self.assert(Integer.createBehaviorJava(context) == "java.lang.Integer")
+	end
+	
+	operation testValueTypeString() is do
+		stdio.writeln( String.createBehaviorJava(context) )
+		self.assert(String.createBehaviorJava(context) == "java.lang.String")
+	end
+	
+	operation testValueTypeBoolean() is do
+		stdio.writeln( Boolean.createBehaviorJava(context) )
+		self.assert(Boolean.createBehaviorJava(context) == "java.lang.Boolean")
+	end
+	
+	operation testCollectionOfValueType() is do
+		var c : OrderedSet<Integer> init OrderedSet<Integer>.new
+		stdio.writeln( c.getMetaClass.createBehaviorJava(context) )
+		self.assert(c.getMetaClass.createBehaviorJava(context) == "kermeta.standard.OrderedSet<java.lang.Integer>")
+	end	
+
+	operation testCollectionOfNonValueType() is do
+		var c : Sequence<ClassDefinition> init Sequence<ClassDefinition>.new
+		stdio.writeln( c.getMetaClass.createBehaviorJava(context) )
+		self.assert(c.getMetaClass.createBehaviorJava(context) == "kermeta.standard.Sequence<kermeta.language.structure.ClassDefinition>")
+	end
+}
