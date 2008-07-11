@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaFastPartitioner.java,v 1.5 2008-06-11 14:36:46 ftanguy Exp $
+/*$Id: KermetaFastPartitioner.java,v 1.6 2008-07-11 12:44:24 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaFastPartioner.java
 * License : EPL
@@ -54,7 +54,7 @@ public class KermetaFastPartitioner extends FastPartitioner {
 	        }
 	        catch (BadLocationException e)
 	        {
-	            e.printStackTrace();
+	        	TexteditorPlugin.internalLog.error(e.getMessage(), e);
 	        }
 	    }
 		TexteditorPlugin.internalLog.debug(buffer);
