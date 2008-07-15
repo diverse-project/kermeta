@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.49 2008-07-10 07:46:15 cfaucher Exp $
+ * $Id: collections.kmt,v 1.50 2008-07-15 09:33:43 cfaucher Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -913,7 +913,7 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 		if index < 0 or index > size-1 then
 			raise IndexOutOfBound.new
 		end
-		@compiledJavaExtern "(G) OrderedCollectionUtil.elementAt(this, index);"
+		@compiledJavaExtern "OrderedCollectionUtil.elementAt(this, index);"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.elementAt(self, index)
 	end
 	

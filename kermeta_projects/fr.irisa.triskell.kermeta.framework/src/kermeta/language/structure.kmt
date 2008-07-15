@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.61 2008-07-10 09:48:08 ftanguy Exp $
+/* $Id: structure.kmt,v 1.62 2008-07-15 09:33:00 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -28,8 +28,8 @@ require "platform:/resource/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_
 
 using kermeta::standard
 
- @EMF_needProperty "name=oid isUnique=false isOrdered=false classDefinitionQN=kermeta::standard::Integer"
- @EMF_needProperty "name=container isUnique=false isOrdered=false classDefinitionQN=kermeta::language::structure::Object"
+ @EMF_needProperty "name=oid classDefinitionQN=kermeta::standard::Integer"
+ @EMF_needProperty "name=container classDefinitionQN=kermeta::language::structure::Object"
 aspect class Object
 {
 	/**
