@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.32 2008-07-16 07:06:29 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.33 2008-07-16 08:14:46 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -323,7 +323,7 @@ package behavior {
 					context.tasks_stack.pop()
 				end
 				
-				if self.staticOperation.container().asType(ClassDefinition).isValueType() then
+				if self.staticOperation.container().asType(ClassDefinition).isValueType() or self.staticOperation.container().asType(ClassDefinition).isCollection() then
 					static_mode := true
 				end
 			end
@@ -331,7 +331,7 @@ package behavior {
 			if not tgt.isVoid() then
 				result := result + tgt.createBehaviorJava(context)
 				if not static_mode then
-					result := result + "."//getPP(tgt, fName, context)
+					result := result + "."
 				end
 			end
 
@@ -339,9 +339,9 @@ package behavior {
 				result := result + "println"
 			else
 				if not static_mode then
-					result := result + self.name//getPP(self, self.name, context)
+					result := result + self.name
 				else
-					result := self.staticOperation.container().asType(ClassDefinition).qualifiedName.replace("::",".") + "." + self.name + "(" + result
+					result := self.staticOperation.container().asType(ClassDefinition).qualifiedName.replace("::",".") + "Util." + self.name + "(" + result
 				end
 			end
 
