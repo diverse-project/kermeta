@@ -4,11 +4,12 @@ Bundle-Name: Kermeta Runtime Helper Plugin
 Bundle-SymbolicName: org.kermeta.compil.runtime.helper
 Bundle-Version: 1.1.99.qualifier
 Bundle-ClassPath: .
-Bundle-Localization: plugin
 Bundle-Vendor: IRISA/INRIA
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.emf,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xmi,
  org.kermeta.compiler.runtime.configuration;visibility:=reexport
-Export-Package: org.kermeta.compil.runtime.helper.basetypes
+Export-Package: org.kermeta.compil.runtime.helper.basetypes,
+ org.kermeta.compil.runtime.helper.exception
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

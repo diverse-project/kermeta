@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.4 2008-07-08 08:52:38 ftanguy Exp $
+/*$Id: Saver.java,v 1.5 2008-07-16 08:51:40 ftanguy Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Saver.java
 * License : EPL
@@ -41,11 +41,11 @@ public class Saver extends SaverOrLoader {
 	 */
 	static public void save(List contents, String modelURI, String metamodelURI) {
 		try {
-			Saver s = new Saver();
+			Saver s = new Saver(metamodelURI);
 			List<EObject> instancesToSave = new ArrayList<EObject>();
 			for ( Object o : contents )
 				if ( o instanceof EObject )
-					instancesToSave.add( s.clone( (EObject) o, metamodelURI) );
+					instancesToSave.add( s.clone( (EObject) o) );
 			ResourceSet resourceSet = new ResourceSetImpl();
 			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource( URI.createURI(modelURI) );
 			resource.getContents().addAll(instancesToSave);
@@ -56,28 +56,30 @@ public class Saver extends SaverOrLoader {
 		
 	/**
 	 * 
+	 * @param metamodelURI
+	 */
+	public Saver(String metamodelURI) {
+		super(metamodelURI);
+	}
+	
+	/**
+	 * 
 	 * @param o The object to clone.
-	 * @param metamodelURI The uri of the metamodel to use when cloning.
 	 * @return The cloned object or null if no factory found.
 	 */
-	private EObject clone(EObject o, String metamodelURI) {
-		EFactory factory = getFactory(metamodelURI);
-		if ( factory != null ) {
-			EObject sourceObject = (EObject) o;
-			EObject targetObject = createInstance(sourceObject, factory);
-			cloneEObject(sourceObject, targetObject, factory);
-			return targetObject;
-		}
-		return null;
+	private EObject clone(EObject o) {
+		EObject sourceObject = (EObject) o;
+		EObject targetObject = createInstance(sourceObject);
+		cloneEObject(sourceObject, targetObject);
+		return targetObject;
 	}
 
 	/**
 	 * 
 	 * @param sourceObject
-	 * @param targetObject
 	 * @param factory
 	 */
-	private void cloneEObject(EObject sourceObject, EObject targetObject, EFactory factory) {
+	private void cloneEObject(EObject sourceObject, EObject targetObject) {
 		for ( EStructuralFeature sourceFeature : sourceObject.eClass().getEAllStructuralFeatures() ) {
 			Object value = sourceObject.eGet(sourceFeature);
 			EStructuralFeature targetFeature = getEStructuralFeature(targetObject.eClass(), sourceFeature.getName());
@@ -96,14 +98,14 @@ public class Saver extends SaverOrLoader {
 					// Better set the feature before cloning the value to avoid possible recursive calls.
 					boolean clone = false;
 					if ( targetValue == null ) {
-						targetValue = createInstance(sourceValue, factory);
+						targetValue = createInstance(sourceValue);
 						clone = true;
 					}
 					// Setting the value.
 					targetObject.eSet(targetFeature, targetValue);
 					if ( clone )
 						// Cloning if necessary.
-						cloneEObject( (EObject) value, targetValue, factory );
+						cloneEObject( (EObject) value, targetValue );
 					
 				/*
 				 * 
@@ -119,13 +121,13 @@ public class Saver extends SaverOrLoader {
 							EObject sourceListObject = (EObject) o;
 							EObject targetListObject = _instanceMapping.get(sourceListObject);
 							if ( targetListObject == null ) {
-								targetListObject = createInstance(sourceListObject, factory);
-								cloneEObject(sourceListObject, targetListObject, factory);
+								targetListObject = createInstance(sourceListObject);
+								cloneEObject(sourceListObject, targetListObject);
 							}
 							targetList.add(targetListObject);
 						// Special case for enumerator.
 						} else if ( o instanceof Enumerator ) {
-							Object realValue = createInstance( (Enumerator) o, factory);
+							Object realValue = createInstance( (Enumerator) o);
 							targetList.add(realValue);	
 						// Default case for String, Integer...
 						} else {
@@ -142,7 +144,7 @@ public class Saver extends SaverOrLoader {
 					Object realValue = value;
 					// Special case for enumerator. Need to create an instance from the good factory.
 					if ( value instanceof Enumerator )
-						realValue = createInstance( (Enumerator) value, factory);
+						realValue = createInstance( (Enumerator) value);
 					// Setting the value.
 					targetObject.eSet(targetFeature, realValue);
 				}

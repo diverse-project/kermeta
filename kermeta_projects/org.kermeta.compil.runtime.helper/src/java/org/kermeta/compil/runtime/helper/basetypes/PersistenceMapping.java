@@ -1,5 +1,7 @@
 package org.kermeta.compil.runtime.helper.basetypes;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
@@ -67,6 +69,26 @@ final public class PersistenceMapping {
 		Resource resource = rs.getResource( URI.createURI(modelURI), true);
 		Configuration configuration = (Configuration) resource.getContents().get(0);
 		initialize(configuration);
+	}
+	
+	/**
+	 * 
+	 * @param file
+	 */
+	static public void initialize(File file) {
+		if ( file.isDirectory() ) {
+			FilenameFilter filter = new FilenameFilter() {
+				public boolean accept(File dir, String name) {
+					if ( name.matches(".+\\.kruntimeconfiguration") )
+						return true;
+					return false;
+				}
+			};
+			File[] files = file.listFiles(filter);
+			for ( File f : files )
+				initialize( f.getAbsolutePath() );
+		} else
+			initialize( file.getAbsolutePath() );
 	}
 	
 	/**
