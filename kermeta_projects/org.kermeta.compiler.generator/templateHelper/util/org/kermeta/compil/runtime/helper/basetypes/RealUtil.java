@@ -9,7 +9,7 @@ public class RealUtil {
 	
 	/** Java version */
 	public static java.lang.Boolean equals(java.lang.Double self, java.lang.Double param0) {
-		return java.lang.Boolean(self.equals(param0));
+		return self.equals(param0);
 	}
 	
 	/** Java version */

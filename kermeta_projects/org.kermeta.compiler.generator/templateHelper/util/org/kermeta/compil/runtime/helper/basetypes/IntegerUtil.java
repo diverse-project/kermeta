@@ -9,7 +9,7 @@ public class IntegerUtil {
 	
 	/** Java version */
 	public static java.lang.Boolean equals(java.lang.Integer self, java.lang.Integer param0) {
-		return java.lang.Boolean(self.equals(param0));
+		return self.equals(param0);
 	}
 	
 	/** Java version */
@@ -39,22 +39,22 @@ public class IntegerUtil {
 	
 	/** Java version */
 	public static java.lang.Boolean isGreater(java.lang.Integer self, java.lang.Integer param0) {
-		return java.lang.Boolean(self > param0);
+		return self > param0;
 	}
 	
 	/** Java version */
 	public static java.lang.Boolean isLower(java.lang.Integer self, java.lang.Integer param0) {
-		return java.lang.Boolean(self < param0);
+		return self < param0;
 	}
 	
 	/** Java version */
 	public static java.lang.Boolean isGreaterOrEqual(java.lang.Integer self, java.lang.Integer param0) {
-		return java.lang.Boolean(self >= param0);
+		return self >= param0;
 	}
 	
 	/** Java version */
 	public static java.lang.Boolean isLowerOrEqual(java.lang.Integer self, java.lang.Integer param0) {
-		return java.lang.Boolean(self <= param0;
+		return self <= param0;
 	}
 	
 	/** Java version */

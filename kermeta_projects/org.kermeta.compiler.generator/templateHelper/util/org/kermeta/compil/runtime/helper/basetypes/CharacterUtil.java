@@ -14,12 +14,12 @@ public class CharacterUtil {
 	
 	/** Java version */
 	public static java.lang.Boolean equals(java.lang.Character self, java.lang.Character param0) {
-		return java.lang.Boolean(self.equals(param0));
+		return self.equals(param0);
 	}
 
 	/** Java version */
 	public static java.lang.Boolean isNotEqual(java.lang.Character self, java.lang.Character param0) {
-		return java.lang.Boolean(!equals(self, param0));
+		return !equals(self, param0);
 	}
 
 }

@@ -11,12 +11,12 @@ public class StringUtil {
 
 	/** Java version */
 	public static java.lang.Boolean equals(java.lang.String self, java.lang.String param0) {
-		return java.lang.Boolean(self.equals(param0));
+		return self.equals(param0);
 	}
 	
 	/** Java version */
 	public static java.lang.Boolean isNotEqual(java.lang.String self, java.lang.String param0) {
-		return java.lang.Boolean(!equals(self, param0));
+		return !equals(self, param0);
 	}
 	
 	/** Java version */
@@ -56,7 +56,7 @@ public class StringUtil {
 	
 	/** Java version */
 	public static java.lang.Boolean contains(java.lang.String self, java.lang.String param0) {
-		return java.lang.Boolean(self.contains(param0));
+		return self.contains(param0);
 	}
 	
 	/** Java version */
