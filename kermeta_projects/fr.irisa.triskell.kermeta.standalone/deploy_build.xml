@@ -1,0 +1,62 @@
+<!-- $Id: deploy_build.xml,v 1.1 2008-07-16 09:18:16 jdeanton Exp $ -->
+<project name="kermeta_standalone" default="all" basedir=".">
+        
+    <description>
+        Deploy the standalone version of kermeta
+    </description>
+
+    <property name="kermeta.plugins" location="../../../deployedKermeta/eclipse/plugins/"/>
+     
+
+        <target name="all"
+		description="Deploy the standalone version of kermeta">
+                <antcall target="copy"/>
+		<antcall target="jardesc_like"/>
+        </target>
+	
+	<target name="copy"
+		description="copy the jar and kermeta models needed by the stand alone version">
+		<unzip src="${kermeta.plugins}/fr.irisa.triskell.kermeta.io_*.jar" dest="./tmp"/>
+		<unzip src="${kermeta.plugins}/fr.irisa.triskell.kermeta_*.jar" dest="./tmp"/>
+		<copy todir="./lib/" flatten="true">
+			<resources>
+				<file file="${kermeta.plugins}fr.irisa.triskell.traceability.*.jar"/>
+				<file file="./tmp/src/kermeta/framework.km"/>
+				<file file="./tmp/lib/ecore.kmt"/>
+			</resources>
+		</copy>
+		<delete dir="./tmp"/>
+	</target>
+	
+        <target name="jardesc_like" 
+                description="create kermeta.jar from model, io and interpreter">
+		<unzip src="${kermeta.plugins}/fr.irisa.triskell.kermeta.io_*.jar" dest="./tmp"/>
+		<unzip src="${kermeta.plugins}/fr.irisa.triskell.kermeta.model_*.jar" dest="./tmp"/>
+		<unzip src="${kermeta.plugins}/fr.irisa.triskell.kermeta.interpreter_*.jar" dest="./tmp"/>
+		
+		<copy todir="./kermeta/fr/irisa/triskell/utils">
+			<fileset dir="./tmp/fr/irisa/triskell/utils"/>
+		</copy>
+		
+		<copy todir="./kermeta/fr/irisa/triskell/kermeta">
+			<fileset dir="./tmp/fr/irisa/triskell/kermeta"/>
+		</copy>
+
+		<copy todir="./kermeta/fr/irisa/triskell/ecore/visitor" flatten="true">
+			<resources>
+				<file file="./tmp/fr/irisa/triskell/kermeta/loader/ecore/EcoreVisitor.class"/>
+			</resources>
+		</copy>
+		
+		<delete file="./kermeta/fr/irisa/triskell/kermeta/loader/ecore/EcoreVisitor.class"/>
+
+		<zip destfile="./dist/kermeta.jar"
+		     basedir="./kermeta"
+		     update="true"
+		/>
+		
+		<delete dir="./tmp"/>
+		<delete dir="./kermeta"/>
+        </target>
+
+</project>
