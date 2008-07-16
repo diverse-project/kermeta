@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.8 2008-05-28 09:51:29 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.9 2008-07-16 13:10:30 ftanguy Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -20,6 +20,15 @@
 
 package org.kermeta.compiler.generator.internal.generators;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URL;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -61,6 +70,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 
 	private static final String JAVA_LAUNCHER_LAUNCH = "templateHelper/JavaLauncher.launchjet";
 
+	private static final String BASETYPES_UTILS = "templateHelper/util";
+	
 	// FIXME CF unused for the moment
 	private static final String KERMETA_LAUNCHER_LAUNCH = "templateHelper/KermetaLauncher.launchjet";
 
@@ -116,6 +127,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		if( this.simkModel!=null ) {
 			generateHelperModel(this.simkModel, pathProject, monitor);
 		}
+		
+		generateBaseTypesUtils();
 		
 		return project;
 	}
@@ -377,6 +390,53 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private String getTemplateURI(String relativePath) {
 		return getTemplateURI(GeneratorPlugin.getDefault().getBundle(),
 				relativePath);
+	}
+	
+	private void generateBaseTypesUtils() {
+		URL url = GeneratorPlugin.getDefault().getBundle().getEntry( "baseTypesUtils.zip" );
+		ZipInputStream zipFileStream;
+		try {
+			zipFileStream = new ZipInputStream(url.openStream());
+			ZipEntry zipEntry = zipFileStream.getNextEntry();
+			
+			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject( configuration.getModelPluginID() );
+		
+			while (zipEntry != null) {
+				File file = new File(project.getLocation().toString(), zipEntry.getName());
+				if ( ! zipEntry.isDirectory() ) {
+					/*
+					 * Copy files (and make sure parent directory exist)
+					 */	
+					File parentFile = file.getParentFile();
+					if ( null != parentFile && ! parentFile.exists() )
+						parentFile.mkdirs();
+
+					OutputStream os = null;
+					try {
+						os = new FileOutputStream(file);
+						byte[] buffer = new byte[102400];
+						while (true) {
+							int len = zipFileStream.read(buffer);
+							if (zipFileStream.available() == 0)
+								break;
+							os.write(buffer, 0, len);
+						}
+					} finally {
+						if (null != os) {
+							os.close();
+						}
+					}
+				}
+				zipFileStream.closeEntry();
+				zipEntry = zipFileStream.getNextEntry();
+			}
+		
+			project.refreshLocal(IFile.DEPTH_INFINITE, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
