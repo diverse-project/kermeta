@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.9 2008-07-16 13:10:30 ftanguy Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.10 2008-07-16 17:19:10 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -28,6 +28,7 @@ import java.net.URL;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -46,15 +47,13 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
-import org.kermeta.io.KermetaUnit;
+import org.kermeta.generator.AbstractGenerator;
+import org.kermeta.generator.jet.DefaultJETEmitter;
 import org.kermeta.simk.SIMKModel;
 import org.kermeta.simk.SMUsage;
 import org.kermeta.simk.StaticMethod;
-import org.kermeta.generator.AbstractGenerator;
-import org.kermeta.generator.jet.DefaultJETEmitter;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 
 /**
  * This class is the Entry point of the generation for Kermeta compiler's helpers
@@ -69,8 +68,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private static final String RUNNER_JAVA = "templateHelper/runner/Runner.javajet";
 
 	private static final String JAVA_LAUNCHER_LAUNCH = "templateHelper/JavaLauncher.launchjet";
-
-	private static final String BASETYPES_UTILS = "templateHelper/util";
+	
+	private static final String CLASS_PATH = "templateHelper/classpath.propertiesjet";
 	
 	// FIXME CF unused for the moment
 	private static final String KERMETA_LAUNCHER_LAUNCH = "templateHelper/KermetaLauncher.launchjet";
@@ -119,16 +118,25 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		IPath pathProject = project.getFullPath();
 		generateStaticPackages(project, pathProject);
 		monitor.worked(1);
-
-		if( this.simkModel!=null ) {
-			generateHelpers(this.simkModel, pathProject, monitor);
-		}
 		
-		if( this.simkModel!=null ) {
-			generateHelperModel(this.simkModel, pathProject, monitor);
-		}
+		try {
+			
+			if( this.simkModel!=null ) {
+				generateHelpers(this.simkModel, pathProject, monitor);
+			}
+			
+			if( this.simkModel!=null ) {
+				generateHelperModel(this.simkModel, pathProject, monitor);
+			}
+			
+			generateBaseTypesUtils();
 		
-		generateBaseTypesUtils();
+			generateClassPath(project, pathProject);
+			
+		} catch (JETException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return project;
 	}
@@ -170,35 +178,35 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		
 		for(GenPackage genpack : configuration.getAllGenPackagesWithClassifiers()) {
 		
-		// Please do not remove this comment, old value of the project name variable:
-		// "kermeta"; project.getName();
-		String projectName = EcoreHelper.getQualifiedName(genpack.getEcorePackage());
-		IPath packagePath = new Path(projectName.replace('.', IPath.SEPARATOR));
-
-		for (int i = 1; i < packagePath.segmentCount() + 1; i++) {
-			IPath pathPackage = pathProject.append(IPath.SEPARATOR
-					+ SOURCE_DIRECTORY
-					+ IPath.SEPARATOR
-					+ packagePath.removeLastSegments(packagePath.segmentCount()
-							- i));
-			IFolder packagefolder = ResourcesPlugin.getWorkspace().getRoot()
-					.getFolder(pathPackage);
-			if (!(packagefolder.exists())) {
-				packagefolder.create(true, false, new NullProgressMonitor());
+			// Please do not remove this comment, old value of the project name variable:
+			// "kermeta"; project.getName();
+			String projectName = EcoreHelper.getQualifiedName(genpack.getEcorePackage()).replace("::", ".");
+			IPath packagePath = new Path(projectName.replace('.', IPath.SEPARATOR));
+	
+			for (int i = 1; i < packagePath.segmentCount() + 1; i++) {
+				IPath pathPackage = pathProject.append(IPath.SEPARATOR
+						+ SOURCE_DIRECTORY
+						+ IPath.SEPARATOR
+						+ packagePath.removeLastSegments(packagePath.segmentCount()
+								- i));
+				IFolder packagefolder = ResourcesPlugin.getWorkspace().getRoot()
+						.getFolder(pathPackage);
+				if (!(packagefolder.exists())) {
+					packagefolder.create(true, false, new NullProgressMonitor());
+				}
 			}
-		}
-
-		String[] packagesUtils = { "helper", "runner" };
-		for (int i = 0; i < packagesUtils.length; i++) {
-			IPath pathPackage = pathProject.append(IPath.SEPARATOR
-					+ SOURCE_DIRECTORY + IPath.SEPARATOR + packagePath
-					+ IPath.SEPARATOR + packagesUtils[i]);
-			IFolder packagefolder = ResourcesPlugin.getWorkspace().getRoot()
-					.getFolder(pathPackage);
-			if (!(packagefolder.exists())) {
-				packagefolder.create(true, false, new NullProgressMonitor());
+	
+			String[] packagesUtils = { "helper", "runner" };
+			for (int i = 0; i < packagesUtils.length; i++) {
+				IPath pathPackage = pathProject.append(IPath.SEPARATOR
+						+ SOURCE_DIRECTORY + IPath.SEPARATOR + packagePath
+						+ IPath.SEPARATOR + packagesUtils[i]);
+				IFolder packagefolder = ResourcesPlugin.getWorkspace().getRoot()
+						.getFolder(pathPackage);
+				if (!(packagefolder.exists())) {
+					packagefolder.create(true, false, new NullProgressMonitor());
+				}
 			}
-		}
 		}
 
 		// create the icons folder
@@ -379,6 +387,16 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			}
 
 		}
+	}
+	
+	private void generateClassPath(IProject project, IPath projectPath)
+			throws JETException, CoreException {
+		applyTemplate(project, getTemplateURI(CLASS_PATH), projectPath
+				.append("/" + ".classpath"),
+				configuration.isForceOverwrite());
+		applyTemplate(project, getTemplateURI(CLASS_PATH), projectPath
+				.append("/" + "toMerge.classpath"),
+				configuration.isForceOverwrite());
 	}
 
 	/**
