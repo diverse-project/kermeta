@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.50 2008-07-15 09:33:43 cfaucher Exp $
+ * $Id: collections.kmt,v 1.51 2008-07-16 17:40:02 cfaucher Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -26,7 +26,7 @@ alias Object : kermeta::language::structure::Object;
 /**
  * Collection is the root abstract class for all kermeta collections
  */
- @EMF_needProperty "name=values isUnique=false isOrdered=false javaClass=org.eclipse.emf.common.util.BasicEList"
+ @EMF_needProperty "name=values isUnique=false isOrdered=false javaClass=java.util.ArrayList"
 abstract class Collection<G> 
 {
 	/**
