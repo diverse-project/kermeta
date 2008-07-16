@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.31 2008-07-11 09:45:50 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.32 2008-07-16 07:06:29 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -124,7 +124,7 @@ package structure {
 	
 	aspect class ParameterizedType {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Type is do
-			stdio.writeln("ParameterizedType.createBehaviorJava")
+
 			if self.typeDefinition.getEMFInstanceClassName()!="" then
 				result := self.typeDefinition.getEMFInstanceClassName()
 			else
@@ -162,14 +162,15 @@ package structure {
 			if str_tpb!="" then
 				result := result + "<" + str_tpb + ">"
 			end
+			result := result + ""
 		end
 	}
 	
-	/*aspect class ObjectTypeVariable {
+	aspect class ObjectTypeVariable {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
-			result := "//TODO\n" + self.toString
+			result := self.name
 		end
-	}*/
+	}
 
 }
 
@@ -187,6 +188,25 @@ package behavior {
 			//This method must be returned nothing
 			result := ""
 		end
+		
+		/**
+		 * Check if the current element is at the end of an Expression
+		 */
+		operation endOfExpressionFixer() : String is do
+			result := ""
+			if self.container.isInstanceOf(Conditional) or self.container.isInstanceOf(Block) or self.container.isInstanceOf(Assignment) or self.container.isInstanceOf(VariableDecl) then
+				if self.container.isInstanceOf(Assignment) then
+					if self.container.asType(Assignment).target == self then
+						result := ""
+					else
+						result := ";"
+					end
+				else
+					result := ";"
+				end
+				
+			end
+		end
 	}
 	
 	/** Complete */
@@ -197,10 +217,13 @@ package behavior {
 			
 			var javaCode : StringBuffer init StringBuffer.new
 			
+			//At the beginning of each block, the need of "try" block is checked
 			if self.containsRescue() then
 				javaCode.append("try ")
 			end
 			
+			//EMF adds automatically the first {, thus we are checking if the container of the current block
+			//is an Operation, else a { is printed
 			if (not self.container.isInstanceOf(Operation)) or  self.containsRescue() then
 				javaCode.append("{")
 			end
@@ -211,6 +234,7 @@ package behavior {
 				javaCode.append("\n")
 			}
 			
+			//end of a block 
 			if (not self.container.isInstanceOf(Operation)) or self.containsRescue() then
 				javaCode.append("}")
 			end
@@ -243,14 +267,14 @@ package behavior {
 	aspect class CallExpression {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			super(context)
-			result := "//TODO content of the current CallExpression\n" + self.toString + "\n\n"
+			result := self.toString
 		end
 	}
 	
 	aspect class CallFeature {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 			super(context)
-			result := ""//*IP content of the current CallFeature*/"
+			result := ""
 
 			var tgt : Expression init self.target
 			var fName : String  init self.name
@@ -288,6 +312,8 @@ package behavior {
 			
 			//stdio.writeln("self.staticOperation: " + self.staticOperation.toString())
 			
+			var static_mode : Boolean init false
+			
 			if not self.staticOperation.isVoid() then
 				if self.staticOperation.isFunctionType() then
 					context.tasks_stack.push("FunctionType_Compilation")
@@ -296,29 +322,42 @@ package behavior {
 					self.staticOperation.createBehaviorJava(context)
 					context.tasks_stack.pop()
 				end
+				
+				if self.staticOperation.container().asType(ClassDefinition).isValueType() then
+					static_mode := true
+				end
 			end
 			
 			if not tgt.isVoid() then
-				result := result + getPP(tgt, fName, context)
+				result := result + tgt.createBehaviorJava(context)
+				if not static_mode then
+					result := result + "."//getPP(tgt, fName, context)
+				end
 			end
 
 			if self.name == "writeln" then
-				result := result + " /*Block1_*/ " + "println"
+				result := result + "println"
 			else
-				//stdio.writeln("self-self-self: " + self.name + " " + self.toString)
-				
-				/*if tgt.createBehaviorJava(context).contains(".new()") or tgt.createBehaviorJava(context).contains(".new") then
-					result := result + CompilerHelperJava.new.ppEmfLikeCreateFactory(self.containedType.createBehaviorJava(context))
-				else*/
-					result := result + " /*Block1*/
-					 " + /*getPP(self, self.name, context) +*/
-					  self.name
-				//end
+				if not static_mode then
+					result := result + self.name//getPP(self, self.name, context)
+				else
+					result := self.staticOperation.container().asType(ClassDefinition).qualifiedName.replace("::",".") + "." + self.name + "(" + result
+				end
 			end
 
-			if self.container.isInstanceOf(Block) then
-				result := result + " /*Block2*/ " + "(" +CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ");"
+			
+			if not self.staticOperation.isVoid() then
+				if not static_mode then
+					result := result + "("
+				else
+					if (not self.parameters.isVoid()) and (self.parameters.size()>0) then
+						result := result + ", "
+					end
+				end
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
 			end
+			
+			result := result + self.endOfExpressionFixer()
 		end
 		
 		/** Definition in progress */
@@ -423,7 +462,7 @@ package behavior {
 					if tgt.isInstanceOf(CallFeature) then
 						ppParam := "(" + CompilerHelperJava.new.ppComaSeparatedNodes(tgt.asType(CallExpression).parameters, context) + ")"
 					end
-					result := result + "/*Block3*/ " + tgt.createBehaviorJava(context) + ppParam + "."
+					result := result + tgt.createBehaviorJava(context) + ppParam + "."
 				
 				end
 				end
@@ -444,23 +483,24 @@ package behavior {
 	aspect class CallVariable {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 			super(context)
-			result := "/*CallVariable*/ "//*TODO content of the current CallVariable\n" + self.toString + "*/"
-			//result := result + "\n CallVariable.name = " + self.name
+			result := ""
 
 			if self.name == "stdio" then
 				result := result + "System.out"
 			else
 				result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context)
 			end
+			
+			result := result + self.endOfExpressionFixer()
 		end
 	}
 	
 	aspect class CallResult {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallVariable is do
 			super(context)
-			//Test to insert line number
+			//Try to insert line number
 			//result := "begin " + self.lineNumber.toString() + " " + self.fileName + "\n" + "result" + "\nend " + self.lineNumber.toString() + " " + self.fileName + "\n"
-			result := "\n" + "result "
+			result := "result"
 		end
 	}
 	
@@ -469,7 +509,7 @@ package behavior {
 		
 			super(context)
 			
-			result := "//TODO content of the current CallValue\n" + self.toString + "\n\n"
+			result := self.toString
 		end
 	}
 	
@@ -504,10 +544,10 @@ package behavior {
 				result := result + " = " + self.initialization.createBehaviorJava(context)
 		
 			else
-				result := result + " = null"//CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
+				result := result + " = null;"//CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
 			end
 			
-			result := result + ";"
+			//result := result + ";"
 			
 		end
 	}
@@ -526,9 +566,9 @@ package behavior {
 				right := "function " + right
 			end
 			
-			var ppCast : String
+			var ppCast : String init ""
 			if self.isCast() then
-				ppCast := "(" + self.staticType.createBehaviorJava(context) + ")"
+				ppCast := "(" + self.staticType.createBehaviorJava(context) + ") "
 			end
 			
 			if self.target.isInstanceOf(CallFeature) then
@@ -539,9 +579,9 @@ package behavior {
 				if self.target.isInstanceOf(CallFeature) then
 					//left = left.substring(0,left.length()-2);
 					
-					left.replace(".", "%")
+					//left.replace(".", "%")
 					
-					var tabLeft : kermeta::standard::OrderedSet<String> init left.split("%")
+					var tabLeft : kermeta::standard::OrderedSet<String> init left.split("\\.")
 					
 					result := ""
 					from var i : Integer init 0
@@ -556,10 +596,12 @@ package behavior {
 						i := i+1
 					end
 				
-					result := result + "(" + right + ");"
+					result := result + "(" + right + ")"
 				else
-					result := left + " = " + right + ";"
+					result := left + " = " + ppCast + right
 				end
+				
+				//result := result + ";"
 			end
 			
 		end
@@ -630,13 +672,7 @@ package behavior {
 		
 			super(context)
 			
-			//result := "catch"
 			result := ""
-			//if not self.exceptionName.isVoid() then
-				//result := result + "( " + context.JAVA_CLASS_EXCEPTION_SWITCHER + " " + self.exceptionName + "_SWITCHER )"
-				////result := result + "(" + self.exceptionType.createBehaviorJava(context) + " " + self.exceptionName + ")"
-			//end
-			//result := result + " {\n"
 			
 			if not self.exceptionType.isVoid() then
 			
@@ -645,7 +681,6 @@ package behavior {
 				result := result + "if( " + context.VARIABLE_EXCEPTION_SWITCHER + ".getRealException() instanceof " + str_exceptionType + " ) {\n"
 				
 				result := result + str_exceptionType + " " + self.exceptionName + " = (" + str_exceptionType + ") ex_SWITCHER.getRealException();\n"
-				//pushPrefix();
 				
 				self.eachOwnedElement{e | 
 					result := result + e.createBehaviorJava(context)
@@ -655,7 +690,7 @@ package behavior {
 				result := result + "\n}"
 				
 			end
-			//popPrefix();
+
 		end
 	}
 	//**** End **** Managing of the exception ****//
@@ -673,8 +708,13 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			
 			super(context)
+			context.inc := context.inc + 1
+			context.cond_stack.push(context.inc.toString())
 			
-			result := "if( " + self.condition.createBehaviorJava(context) + ") \n"
+			result := "java.lang.Boolean eval_" + context.cond_stack.peek() + " = false;\n"
+			result := result + "eval_" + context.cond_stack.peek() + " = " + self.condition.createBehaviorJava(context)
+			
+			result := result + "\nif( eval_" + context.cond_stack.pop() + " ) "
 			//pushPrefix(); 
 			// Both type of ThenBody and ElseBody are "Block" (see also KMT2KMPrimitiveExpressionBuilder)
 			// And block textual syntax is already represented by "then..else..end"
@@ -725,7 +765,7 @@ package behavior {
 	aspect class Literal {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			super(context)
-			result := "//TODO Literal" + self.toString
+			result := ""
 		end
 	}
 	
@@ -734,6 +774,7 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			super(context)
 			result := "\"" + self.~value.replace("\"", "\\\"") + "\""
+			result := result + self.endOfExpressionFixer()
 		end
 	}
 	
@@ -742,6 +783,7 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			super(context)
 			result := self.~value.toString
+			result := result + self.endOfExpressionFixer()
 		end
 	}
 	
@@ -750,14 +792,14 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			super(context)
 			result := self.~value.toString
+			result := result + self.endOfExpressionFixer()
 		end
 	}
 	
 	aspect class TypeLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			super(context)
-			result := ""//TODO TypeLiteral" + self.toString
-			result := result + self.typeref.createBehaviorJava(context)
+			result := self.typeref.createBehaviorJava(context)
 		end
 	}
 	
@@ -765,7 +807,8 @@ package behavior {
 	aspect class VoidLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			super(context)
-			result := "void" // the VoidLiteral is "normally" mapped to the void singleton
+			result := "null" // the VoidLiteral is "normally" mapped to the void singleton
+			result := result + self.endOfExpressionFixer()
 		end
 	}
 	//**** End **** Managing of the literal ****//

@@ -1,4 +1,4 @@
-/* $Id: EAnnotationHelper.kmt,v 1.11 2008-06-26 12:49:57 cfaucher Exp $
+/* $Id: EAnnotationHelper.kmt,v 1.12 2008-07-16 07:06:29 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -83,7 +83,7 @@ class EAnnotationHelper {
 	end
 
 	operation cleanBody( body : String ) : String is do
-		result := body.replace("/*CallVariable*/ ","").replace("/*Block3*/ ","").replace(" /*Block1*/ ","").replace(" /*Block1_*/ ","").replace(" /*Block2*/ ","").replace("/*VariableDecl with new*/","").replace("/*Block1*/","")
+		result := body//.replace("/*CallVariable*/ ","").replace("/*Block3*/ ","").replace(" /*Block1*/ ","").replace(" /*Block1_*/ ","").replace(" /*Block2*/ ","").replace("/*VariableDecl with new*/","").replace("/*Block1*/","")
 	end
 }
 

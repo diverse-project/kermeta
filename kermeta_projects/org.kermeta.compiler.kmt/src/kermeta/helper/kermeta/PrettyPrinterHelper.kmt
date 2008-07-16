@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.6 2008-07-11 13:04:50 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.7 2008-07-16 07:06:28 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -58,6 +58,7 @@ class CompilerHelperJava {
 	 */
 	operation ppTypeFromMultiplicityElement(elem : MultiplicityElement, context : KM2EcoreContext) : String is do
 		result := ""
+		
 		if elem.upper != 1 then
 			if elem.isOrdered then
 				if elem.isUnique then
@@ -77,26 +78,31 @@ class CompilerHelperJava {
 			result := result + elem.type.createBehaviorJava(context)
 		end
 		
-		/*if ( elem.lower != 0 or elem.upper != 1) then
-			result := result + "[" + elem.lower() + ".."
-			result := result + (elem.upper()<0)?"*":""+elem.upper()
-			result := result + "]"
-		end*/
 	end
 	
 	/**
-	 *
+	 * This helper is used for the pretty printing of the parameters in a CallFeature
 	 */
 	operation ppComaSeparatedNodes(expressions : Set<Expression>, context : KM2EcoreContext) : String is do
 		result := ""
-		//expressions.each{ e | stdio.writeln("ppComaSeparatedNodes " + e.toString()) }
+
 		var i : Integer init 0
 		expressions.each{ e |		
-			result := result + e.createBehaviorJava(context)
-			if i<(expressions.size()-1) then
+			
+			if i==1 then
 				result := result + ", "
 			end
-			i := i+1
+			i := 1
+			
+			if e.isInstanceOf(CallExpression) then
+			
+				result := result + e.asType(CallExpression).name//createBehaviorJava(context)
+				//stdio.writeln("ppComaSeparatedNodes: " + e.asType(CallExpression).name)
+			else
+				if e.isInstanceOf(Literal) then
+					result := result + e.asType(Literal).createBehaviorJava(context)
+				end
+			end
 		}
 	end
 }

@@ -1,4 +1,4 @@
-/* $Id: printJava.kmt,v 1.6 2008-06-04 14:43:44 cfaucher Exp $
+/* $Id: printJava.kmt,v 1.7 2008-07-16 07:06:28 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -93,11 +93,8 @@ package structure {
 			// The Java source code is provided by: self.body.print(context)
 			javaCode.append( self.createBehaviorJava(context) )
 			
-			// Finally add the EAnnotation containing the Java code in the Ecore model
-	        
-	        var stringToPrint : String init javaCode.toString
-	        //stringToPrint := stringToPrint.replace("/*CallVariable*/ ","").replace("/*Block3*/ ","").replace(" /*Block1*/ ","").replace(" /*Block1_*/ ","").replace(" /*Block2*/ ","").replace("/*VariableDecl with new*/","").replace("/*Block1*/","")
-	        stdio.writeln(stringToPrint)
+			// Finally print the EAnnotation containing the Java code in the Ecore model
+	        stdio.writeln(javaCode.toString)
 		end
 	}
 
