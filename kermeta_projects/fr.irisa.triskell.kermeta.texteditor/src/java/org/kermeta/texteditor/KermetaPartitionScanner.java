@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaPartitionScanner.java,v 1.3 2008-06-11 14:36:46 ftanguy Exp $
+/*$Id: KermetaPartitionScanner.java,v 1.4 2008-07-17 09:26:06 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaDocumentPartioner.java
 * License : EPL
@@ -103,31 +103,42 @@ public class KermetaPartitionScanner extends RuleBasedPartitionScanner {
 				if ( s.equals("/") ) {
 					code = scanner.read();
 					backtrack++;
-					chars = Character.toChars( code );
-					s = new String(chars);
-					if ( s.equals("/") ) {
-						// Read until we find an EOL
-						boolean ok = true;
-						boolean quoteFound = false;
-						do {
-							code = scanner.read();
-							backtrack++;
-							chars = Character.toChars( code );
-							for ( int i = 0; i < chars.length; i++ ) {
-								if ( chars[i] == '"' ) {
-									if ( quoteFound )
-										quoteFound = false;
-									else
-										quoteFound = true;
-								} else if ( chars[i] == '\n' ) {
-									ok = false;
+					if(code != -1) {
+						chars = Character.toChars( code );
+						s = new String(chars);
+						if ( s.equals("/") ) {
+							// Read until we find an EOL
+							boolean ok = true;
+							boolean quoteFound = false;
+							do {
+								code = scanner.read();
+								backtrack++;
+								if(code != -1) {
+									chars = Character.toChars( code );
+									for ( int i = 0; i < chars.length; i++ ) {
+										if ( chars[i] == '"' ) {
+											if ( quoteFound )
+												quoteFound = false;
+											else
+												quoteFound = true;
+										} else if ( chars[i] == '\n' ) {
+											ok = false;
+											if ( ! quoteFound ) {
+												returnedToken = _token;
+												found = true;
+											}
+										}
+									}
+								}
+								else{
+									ok = false;  // end of file 
 									if ( ! quoteFound ) {
 										returnedToken = _token;
 										found = true;
 									}
 								}
-							}
-						} while ( ok );
+							} while ( ok );
+						}
 					}
 				}
 			}
