@@ -1,0 +1,24 @@
+package r;
+require kermeta
+using kermeta::standard
+class C2 inherits C1, C1bis {
+	// must raise a warning this call is undeterministic because we cannot choose 
+				// between C1.op2 and C1bis.op2 
+				// the message should explain how to solve that : remove one of the inheritances or redefine locally the
+				// method using the from keyword to select the correct operation
+	 	
+}
+
+class C1
+{
+	operation op2() is do
+	end
+
+}
+
+
+class C1bis
+{
+	operation op2() is do
+	end
+}
