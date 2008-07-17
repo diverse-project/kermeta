@@ -1,6 +1,6 @@
 
 
-/*$Id: ClassDefinitionHelper.java,v 1.12 2008-04-30 14:12:06 dvojtise Exp $
+/*$Id: ClassDefinitionHelper.java,v 1.13 2008-07-17 16:10:42 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -210,11 +210,26 @@ public class ClassDefinitionHelper {
 	
 	static private void getContext(List<KermetaUnit> units, ClassDefinition current, TreeMap<Integer, List<TypeDefinition>> map, int deep) {
 		for ( List<TypeDefinition> l : map.values() )
-			if ( l.contains(current) )
-				return;
-//		if ( map.get(deep) != null && map.get(deep).contains(current) )
-	//		return;
-		
+			if ( l.contains(current))
+				return;/* // several definition of the same class will have to stop the recursion*/
+			/*	if(map.get(deep) != null)
+					if (! map.get(deep).contains(current) )
+						// ignore several definition at the same inheritance depth (may be due to aspects)
+						return;
+					else {
+						// several definitions of the same class at various inheritance depth. Stop the recursion but add the classdef to the list
+						map.get(deep).add(current); 
+						return;
+					}
+				else {
+					// several definitions of the same class at various inheritance depth. Stop the recursion but add the classdef to the list
+					List<TypeDefinition> list2 = new ArrayList<TypeDefinition>();
+					map.put(deep, list2);
+				
+					list2.add(current);
+					return;
+				}	
+		*/
 		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(current);
 		if ( units.contains(unit) ) {
 			List<TypeDefinition> l = map.get(deep);
@@ -368,18 +383,21 @@ public class ClassDefinitionHelper {
 	 * @param clazz
 	 * @return true if super class is a super class of clazz, false otherwise.
 	 */
-	public static boolean isSuperTypeOf(ClassDefinition superclass, ClassDefinition clazz) {
-		List<TypeDefinition> context = getContext(clazz);
-		// Because a list allows duplicates, look for multiple superclass element in the list.
-		boolean found = false;
-		for ( TypeDefinition td : context ) {
-			if ( superclass == td ) {
-				if ( found )
-					return true;
-				else
-					found = true;
+	public static boolean isSuperTypeOf(ClassDefinition superclass, ClassDefinition clazz) {		
+		for(Type t : clazz.getSuperType()){
+			// in the supertypes of clazz, search a class whose context contains superclass
+			if(t instanceof Class){
+				Class aSuperclass = (Class) t;
+				if(aSuperclass.getTypeDefinition() instanceof ClassDefinition){
+					
+					List<TypeDefinition> asuperclassContext = getContext((ClassDefinition) aSuperclass.getTypeDefinition());
+					// context contains aSuperclass and all its parents
+					if(asuperclassContext.contains(superclass)) 
+						return true;
+				}
 			}
 		}
+		
 		return false;
 	}
 }
