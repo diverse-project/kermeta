@@ -1,4 +1,4 @@
-/* $Id: AddAnnotations.java,v 1.3 2008-03-05 07:54:52 ftanguy Exp $
+/* $Id: AddAnnotations.java,v 1.4 2008-07-17 12:46:04 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : EPL
@@ -102,7 +102,7 @@ public class AddAnnotations extends KermetaASTNodeVisitor implements ILoadingAct
 				
 				if ( object instanceof Package && tag.getName().equals(KermetaASTHelper.TAGNAME_URI) ) {
 					((Package) object).setUri(tag.getValue());
-				} else if ( KermetaModelHelper.Tag.getTag(object, tag.getName()) == null ){
+				} else {//if ( KermetaModelHelper.Tag.getTag(object, tag.getName()) == null ){
 						object.getOwnedTags().add( tag ); // tag is owned by this object
 						object.getTag().add( tag ); // this object is tagged
 				}
@@ -118,6 +118,8 @@ public class AddAnnotations extends KermetaASTNodeVisitor implements ILoadingAct
 	public boolean beginVisit(KermetaASTNode node) {
 		
 		Object object = kermetaUnit.getModelElementByNode(node);
+		if ( object instanceof ClassDefinition && ((ClassDefinition)object).getName().equals("Iterator"))
+			System.out.println();
 		if ( (object != null) && ! currentTags.isEmpty() ) {
 			processAnnotations(object);
 			currentTags.clear();

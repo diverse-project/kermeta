@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTLoadingStructurePass.java,v 1.4 2008-04-28 11:50:47 ftanguy Exp $
+/*$Id: KMTLoadingStructurePass.java,v 1.5 2008-07-17 12:46:03 ftanguy Exp $
 * Project : org.kermeta.io.loader
 * File : 	KMTLoadingStructurePass.java
 * License : EPL
@@ -72,7 +72,7 @@ public class KMTLoadingStructurePass extends KermetaASTNodeVisitor implements IL
 	private KermetaUnit kermetaUnit;
 	
 	/**		A list used to add tags to the next processed object.	*/
-	private List<fr.irisa.triskell.kermeta.language.structure.Tag> currentTags = new ArrayList<fr.irisa.triskell.kermeta.language.structure.Tag>();
+	//private List<fr.irisa.triskell.kermeta.language.structure.Tag> currentTags = new ArrayList<fr.irisa.triskell.kermeta.language.structure.Tag>();
 	
 	/**		A stack of packages to retrieve easily the package we are working on.	*/
 	private Stack<Package> packages = new Stack<Package>();
@@ -104,7 +104,7 @@ public class KMTLoadingStructurePass extends KermetaASTNodeVisitor implements IL
 	 * 
 	 */
 	
-	@Override
+	/*@Override
 	public boolean beginVisit(Tag tag) {
 		String qualifiedName = "";
 		if ( tag.getName() instanceof AspectModifier )
@@ -125,7 +125,7 @@ public class KMTLoadingStructurePass extends KermetaASTNodeVisitor implements IL
 		currentTags.add( tag );
 		// No needs to go on
 		return false;
-	}
+	}*/
 	
 	
 	
