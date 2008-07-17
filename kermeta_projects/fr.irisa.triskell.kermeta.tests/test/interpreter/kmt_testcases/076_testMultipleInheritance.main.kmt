@@ -1,0 +1,139 @@
+/* $Id: 076_testMultipleInheritance.main.kmt,v 1.1 2008-07-17 09:49:51 dvojtise Exp $ 
+ * Creation : July 17, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "testMultipleInheritance::MainTest"
+@mainOperation "main"
+
+
+package testMultipleInheritance;
+
+
+require kermeta
+using kermeta::kunit
+class MainTest inherits kermeta::kunit::TestCase
+{
+	operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(MainTest)
+		tr.printTestResult
+    end
+    
+    /**
+     *  This test checks that Object is directly inherited only from classes that inherit from nothing
+     */
+    operation testIndirectInheritanceOfObject_A() is do
+    	// some test on superTypes of A_A
+    	assert(A_A.superClass.size == 1)
+    	assert(A_A.superClass.contains(kermeta::language::structure::Object))
+    	// some test on superTypes of A_B
+    	assert(A_B.superClass.size == 1)
+    	assert(A_B.superClass.contains(A_A))
+    	assert(not A_B.superClass.contains(kermeta::language::structure::Object))
+    end
+    /** This test checks that Object is directly inherited only from classes that inherit 
+     *  from nothing even in the case of aspect
+     */
+    operation testAspectizedIndirectInheritanceOfObject_B() is do
+    	// some test on superTypes of B_A
+    	assert(B_A.superClass.size == 1)
+    	assert(B_A.superClass.contains(kermeta::language::structure::Object))
+    	// some test on superTypes of B_B
+    	assert(B_B.superClass.size == 1)
+    	assert(B_B.superClass.contains(B_A))
+    	assert(not B_B.superClass.contains(kermeta::language::structure::Object))
+    end
+    
+    
+    /**
+     *  This test checks that Object is directly inherited only from classes that inherit from nothing
+     */
+    operation testMultipleInheritanceOfAClass_C() is do
+    	// some test on superTypes of C_A
+    	assert(C_A.superClass.size == 1)
+    	assert(C_A.superClass.contains(kermeta::language::structure::Object))
+    	// some test on superTypes of C_B
+    	assert(C_B.superClass.size == 1)
+    	assert(C_B.superClass.contains(C_A))
+    	assert(not C_B.superClass.contains(kermeta::language::structure::Object))
+    	// some test on superTypes of C_C
+    	assert(C_C.superClass.size == 2)
+    	assert(C_C.superClass.contains(C_A))
+    	assert(C_C.superClass.contains(C_B))
+    	assert(not C_B.superClass.contains(kermeta::language::structure::Object))
+    	
+    end
+    /** This test checks that if a class is declared as inheriting from another
+     * it still declares this direct inheritance even if it indirectly inherits it through another class
+     */
+    operation testAspectizedMultipleInheritanceOfAClass_D() is do
+    	// some test on superTypes of D_A
+    	assert(D_A.superClass.size == 1)
+    	assert(D_A.superClass.contains(kermeta::language::structure::Object))
+    	// some test on superTypes of D_B
+    	assert(D_B.superClass.size == 1)
+    	assert(D_B.superClass.contains(D_A))
+    	assert(not D_B.superClass.contains(kermeta::language::structure::Object))
+    	// some test on superTypes of D_C
+    	assert(D_C.superClass.size == 2)
+    	assert(D_C.superClass.contains(D_A))
+    	assert(D_C.superClass.contains(D_B))
+    	assert(not D_B.superClass.contains(kermeta::language::structure::Object))
+    	
+    end
+}
+
+// classes for testIndirectInheritanceOfObject_A  (prefixed with A)
+// -------------------------------------------
+
+class A_A {
+}
+
+class A_B inherits A_A {
+}
+
+
+// classes for testAspectizedIndirectInheritanceOfObject_B  (prefixed with B)
+// -------------------------------------------
+
+class B_A {
+}
+
+class B_B {
+}
+
+aspect class B_B inherits B_A {
+}
+
+
+// classes for testMultipleInheritanceOfAClass_C  (prefixed with C)
+// -------------------------------------------
+
+class C_A {
+}
+
+class C_B inherits C_A {
+}
+
+class C_C inherits C_B, C_A {
+}
+
+
+// classes for testAspectizedMultipleInheritanceOfAClass_D  (prefixed with D)
+// -------------------------------------------
+
+class D_A {
+}
+
+class D_B inherits D_A {
+}
+
+class D_C inherits D_B {
+}
+
+aspect class D_C inherits D_A {
+}
+
