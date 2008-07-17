@@ -1,6 +1,6 @@
 
 
-/*$Id: KpmProjectBuilder.java,v 1.3 2008-06-03 07:43:58 ftanguy Exp $
+/*$Id: KpmProjectBuilder.java,v 1.4 2008-07-17 12:12:50 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmIncrementalProjectBuilder.java
 * License : EPL
@@ -31,19 +31,24 @@ public class KpmProjectBuilder extends IncrementalProjectBuilder {
 
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
-		KPMPlugin.internalLog.debug("Starting Build of Project " + getProject().getFullPath().toString() );
-		if (kind == IncrementalProjectBuilder.FULL_BUILD) {
-			fullBuild(monitor);
-		} else {
-			IResourceDelta delta = getDelta(getProject());
-            if (delta == null) {
-            	fullBuild(monitor);
-            } else {
-               incrementalBuild(delta, monitor);
-            }
-         }
-		InternalKpmManager.getDefault().removeProject( getProject() );
-		KPMPlugin.internalLog.debug("Endind Build of Project " + getProject().getFullPath().toString() );
+		try {
+			KPMPlugin.internalLog.debug("Starting Build of Project " + getProject().getFullPath().toString() );
+			if (kind == IncrementalProjectBuilder.FULL_BUILD) {
+				fullBuild(monitor);
+			} else {
+				IResourceDelta delta = getDelta(getProject());
+	            if (delta == null) {
+	            	fullBuild(monitor);
+	            } else {
+	               incrementalBuild(delta, monitor);
+	            }
+	         }
+			InternalKpmManager.getDefault().removeProject( getProject() );
+			KPMPlugin.internalLog.debug("Endind Build of Project " + getProject().getFullPath().toString() );
+		} catch (CoreException e) {
+			e.printStackTrace();
+			throw e;
+		}
 		return null;
 	}
 
