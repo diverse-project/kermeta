@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.10 2008-07-16 17:19:10 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.11 2008-07-17 12:55:07 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -393,10 +393,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			throws JETException, CoreException {
 		applyTemplate(project, getTemplateURI(CLASS_PATH), projectPath
 				.append("/" + ".classpath"),
-				configuration.isForceOverwrite());
-		applyTemplate(project, getTemplateURI(CLASS_PATH), projectPath
-				.append("/" + "toMerge.classpath"),
-				configuration.isForceOverwrite());
+				true);
 	}
 
 	/**
