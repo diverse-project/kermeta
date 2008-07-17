@@ -1,4 +1,4 @@
-/* $Id: 076_testMultipleInheritance.main.kmt,v 1.1 2008-07-17 09:49:51 dvojtise Exp $ 
+/* $Id: 076_testMultipleInheritance.main.kmt,v 1.2 2008-07-17 13:43:13 uid20049 Exp $ 
  * Creation : July 17, 2008
  * Licence  : EPL 
  * Copyright:
@@ -42,7 +42,8 @@ class MainTest inherits kermeta::kunit::TestCase
     	assert(B_A.superClass.size == 1)
     	assert(B_A.superClass.contains(kermeta::language::structure::Object))
     	// some test on superTypes of B_B
-    	assert(B_B.superClass.size == 1)
+    	B_B.superClass.each{ sc | stdio.writeln(sc.toString()) }
+    	assertTrueWithMsg(B_B.superClass.size == 1, "found " + B_B.superClass.size.toString + " superClass in B_B instead of 1")
     	assert(B_B.superClass.contains(B_A))
     	assert(not B_B.superClass.contains(kermeta::language::structure::Object))
     end
@@ -135,5 +136,8 @@ class D_C inherits D_B {
 }
 
 aspect class D_C inherits D_A {
+}
+
+aspect class D_C inherits D_A, D_B {
 }
 
