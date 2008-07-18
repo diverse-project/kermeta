@@ -1,38 +1,44 @@
-<!-- $Id: deploy_build.xml,v 1.1 2008-07-16 09:18:16 jdeanton Exp $ -->
+<!-- $Id: deploy_build.xml,v 1.2 2008-07-18 09:36:08 dvojtise Exp $ -->
 <project name="kermeta_standalone" default="all" basedir=".">
         
     <description>
         Deploy the standalone version of kermeta
     </description>
 
-    <property name="kermeta.plugins" location="../../../deployedKermeta/eclipse/plugins/"/>
+	<property name="kermeta.plugins" location="../fr.irisa.triskell.kermeta.site/plugins/"/> <!-- version if you have buid the update site for kermeta -->
+    <!-- <property name="kermeta.plugins" location="../../../deployedKermeta/eclipse/plugins/"/> --> <!-- version for daily build -->
      
 
-        <target name="all"
+    <target name="all"
 		description="Deploy the standalone version of kermeta">
-                <antcall target="copy"/>
+        <antcall target="copy"/>
 		<antcall target="jardesc_like"/>
-        </target>
+    </target>
 	
 	<target name="copy"
 		description="copy the jar and kermeta models needed by the stand alone version">
-		<unzip src="${kermeta.plugins}/fr.irisa.triskell.kermeta.io_*.jar" dest="./tmp"/>
-		<unzip src="${kermeta.plugins}/fr.irisa.triskell.kermeta_*.jar" dest="./tmp"/>
+		<unzip dest="./tmp">
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.io_*.jar"/>
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta_*.jar"/>
+		</unzip>
 		<copy todir="./lib/" flatten="true">
-			<resources>
-				<file file="${kermeta.plugins}fr.irisa.triskell.traceability.*.jar"/>
-				<file file="./tmp/src/kermeta/framework.km"/>
-				<file file="./tmp/lib/ecore.kmt"/>
-			</resources>
+			<fileset dir="./tmp/src/kermeta/" includes="framework.km"/>
+			<fileset dir="./tmp/lib" includes="ecore.kmt"/>
+		</copy>
+		<copy todir="./lib/" flatten="true"> <!-- rename to traceability.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.traceability_*.jar"/>
+		    <mapper type="merge" to="traceability.jar"/>
 		</copy>
 		<delete dir="./tmp"/>
 	</target>
 	
-        <target name="jardesc_like" 
+    <target name="jardesc_like" 
                 description="create kermeta.jar from model, io and interpreter">
-		<unzip src="${kermeta.plugins}/fr.irisa.triskell.kermeta.io_*.jar" dest="./tmp"/>
-		<unzip src="${kermeta.plugins}/fr.irisa.triskell.kermeta.model_*.jar" dest="./tmp"/>
-		<unzip src="${kermeta.plugins}/fr.irisa.triskell.kermeta.interpreter_*.jar" dest="./tmp"/>
+    	<unzip dest="./tmp">
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.io_*.jar"/>
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta_*.jar"/>
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.interpreter_*.jar"/>
+		</unzip>
 		
 		<copy todir="./kermeta/fr/irisa/triskell/utils">
 			<fileset dir="./tmp/fr/irisa/triskell/utils"/>
@@ -57,6 +63,6 @@
 		
 		<delete dir="./tmp"/>
 		<delete dir="./kermeta"/>
-        </target>
+    </target>
 
 </project>
