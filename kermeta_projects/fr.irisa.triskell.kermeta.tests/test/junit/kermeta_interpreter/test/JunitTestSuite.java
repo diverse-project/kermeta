@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.24 2008-06-03 13:40:54 cfaucher Exp $
+/* $Id: JunitTestSuite.java,v 1.25 2008-07-18 07:06:36 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -219,6 +219,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","074_testRequireEcoreWithOppositeInDifferentFiles.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","075_PropertyEqualityUsingEnum.main.kmt" );
+
+		testWithFile("test/interpreter/kmt_testcases","076_testMultipleInheritance.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment

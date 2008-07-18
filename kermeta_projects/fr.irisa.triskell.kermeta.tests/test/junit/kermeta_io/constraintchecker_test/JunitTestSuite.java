@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.14 2008-04-09 14:38:23 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.15 2008-07-18 07:06:36 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -197,6 +197,10 @@ public void testinvalid_005_superoperations_parammismatch5_inv() throws Exceptio
 testinvalidFile("test/io/constraintchecker_tests/invalid","005_superoperations_parammismatch5_inv.kmt" );
 }
 
+public void testinvalid_005_undeterministic_several_superoperations_01() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","005_undeterministic_several_superoperations_01.kmt" );
+}
+
 public void testinvalid_006_inheritedproperty1_inv() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","006_inheritedproperty1_inv.kmt" );
 }
@@ -347,6 +351,10 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","029_DerivedProperties
 
 public void testinvalid_029_DerivedProperties_invalid03() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","029_DerivedProperties_invalid03.kmt" );
+}
+
+public void testinvalid_030_weaving_independent_aspects_02() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","030_weaving_independent_aspects_02.kmt" );
 }
 
 /*** END GENERATED TESTS ***/
