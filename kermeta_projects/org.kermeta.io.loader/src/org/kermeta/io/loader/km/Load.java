@@ -1,6 +1,6 @@
 
 
-/*$Id: Load.java,v 1.4 2008-05-28 13:39:06 dvojtise Exp $
+/*$Id: Load.java,v 1.5 2008-07-18 07:15:27 dvojtise Exp $
 * Project : org.kermeta.io.loader
 * File : 	Load.java
 * License : EPL
@@ -25,6 +25,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
 
 public class Load extends KMLoadingAction {
 
+	@SuppressWarnings("unchecked")
 	public void performAction(KMLoadingDatas datas, Map<?, ?> options) {
 
 		// load the model

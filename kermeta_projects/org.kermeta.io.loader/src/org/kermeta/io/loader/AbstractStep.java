@@ -2,14 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractStep.java,v 1.2 2008-02-14 07:12:49 uid21732 Exp $
+ * $Id: AbstractStep.java,v 1.3 2008-07-18 07:11:19 dvojtise Exp $
  */
 package org.kermeta.io.loader;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
-import org.kermeta.io.KermetaUnit;
 
 /**
  * <!-- begin-user-doc -->

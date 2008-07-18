@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreLoaderImpl.java,v 1.4 2008-03-06 07:23:35 ftanguy Exp $
+ * $Id: EcoreLoaderImpl.java,v 1.5 2008-07-18 07:11:19 dvojtise Exp $
  */
 package org.kermeta.io.loader.impl;
 
@@ -14,7 +14,6 @@ import org.kermeta.io.loader.EcoreLoader;
 import org.kermeta.io.loader.LoaderPackage;
 import org.kermeta.io.loader.datas.EcoreLoadingDatas;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
-import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
