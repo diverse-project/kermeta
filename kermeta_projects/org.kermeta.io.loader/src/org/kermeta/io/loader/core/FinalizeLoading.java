@@ -1,24 +1,21 @@
-
-
-/*$Id: FinalizeLoading.java,v 1.4 2008-03-05 07:52:04 ftanguy Exp $
+/*$Id: FinalizeLoading.java,v 1.5 2008-07-18 07:09:34 dvojtise Exp $
 * Project : org.kermeta.io.loader
 * File : 	FinalizeLoading.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 19 déc. 07
-* Authors : paco
+* Creation date : 19 dec. 07
+* Authors : 
+* 			paco
+* 			dvojtise
 */
 
 package org.kermeta.io.loader.core;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.ILoadingDatas;
 import org.kermeta.io.loader.action.ILoadingAction;
 import org.kermeta.model.KermetaModelHelper;
@@ -27,7 +24,6 @@ import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
@@ -46,32 +42,30 @@ public class FinalizeLoading implements ILoadingAction {
 		for ( TypeDefinition td : KermetaUnitHelper.getInternalTypeDefinitions( datas.getKermetaUnit() ) ) {
 			if ( td instanceof ClassDefinition ) {
 				ClassDefinition cdef = (ClassDefinition) td;
-				cleanInheritanceHierarchy(cdef);
+				cleanInheritanceHierarchy(cdef);				
 			}
 		}
 	
 	}
 
+	/**
+	 * Clean inheritance hierarchy, by removing useless inheritance to Object, only topmost classes keep the inheritance to Object
+	 * @param cdef
+	 */
 	private void cleanInheritanceHierarchy(ClassDefinition cdef) {
-		List<Type> supertypesToRemove = new ArrayList<Type>();
-		Map<ClassDefinition, Type> superClassDefinition = new HashMap<ClassDefinition, Type>();
-		for ( Type t : cdef.getSuperType() ) {
-			if ( t instanceof Class )
-				superClassDefinition.put( (ClassDefinition) ((Class) t).getTypeDefinition(), t );
-		}
-		
-		for ( Type t : cdef.getSuperType() ) {
-			if ( t instanceof Class ) {
-				Class clazz = (Class) t;
-				Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext( (ClassDefinition) clazz.getTypeDefinition() );
-				context.remove(clazz.getTypeDefinition());
-				for ( TypeDefinition typeDefinition : context ) {
-					if ( superClassDefinition.containsKey(typeDefinition) )
-						supertypesToRemove.add( superClassDefinition.get(typeDefinition) );
+		if(cdef.getSuperType().size() > 1){ // we have more than 1 supertype
+			List<Type> supertypesToRemove = new ArrayList<Type>();
+			for ( Type t : cdef.getSuperType() ) {
+				if ( t instanceof Class ){ // if one of its super type is Object, then remove it
+					TypeDefinition typeDefinition = ((Class)t).getTypeDefinition();
+					String qualifiedName = KermetaModelHelper.ClassDefinition.qualifiedName(typeDefinition);
+					if ( qualifiedName.equals("kermeta::language::structure::Object")){
+						supertypesToRemove.add( t );
+					}
 				}
 			}
-		}
-		cdef.getSuperType().removeAll( supertypesToRemove );		
+			cdef.getSuperType().removeAll( supertypesToRemove );
+		}		
 	}
 	
 }
