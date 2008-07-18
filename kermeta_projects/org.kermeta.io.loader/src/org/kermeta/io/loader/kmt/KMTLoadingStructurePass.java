@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTLoadingStructurePass.java,v 1.5 2008-07-17 12:46:03 ftanguy Exp $
+/*$Id: KMTLoadingStructurePass.java,v 1.6 2008-07-18 07:14:36 dvojtise Exp $
 * Project : org.kermeta.io.loader
 * File : 	KMTLoadingStructurePass.java
 * License : EPL
@@ -12,8 +12,6 @@
 
 package org.kermeta.io.loader.kmt;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -38,9 +36,7 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.parser.gen.ast.AspectModifier;
 import fr.irisa.triskell.kermeta.parser.gen.ast.ClassDecl;
-import fr.irisa.triskell.kermeta.parser.gen.ast.ContextMultiLineComment;
 import fr.irisa.triskell.kermeta.parser.gen.ast.DataTypeDecl;
 import fr.irisa.triskell.kermeta.parser.gen.ast.EnumDecl;
 import fr.irisa.triskell.kermeta.parser.gen.ast.EnumLiteral;
@@ -57,11 +53,9 @@ import fr.irisa.triskell.kermeta.parser.gen.ast.Postcondition;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Precondition;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Property;
 import fr.irisa.triskell.kermeta.parser.gen.ast.QualifiedID;
-import fr.irisa.triskell.kermeta.parser.gen.ast.SqualifiedID;
 import fr.irisa.triskell.kermeta.parser.gen.ast.StringLiteralContainer;
 import fr.irisa.triskell.kermeta.parser.gen.ast.StringLiteralOrQualifiedID;
 import fr.irisa.triskell.kermeta.parser.gen.ast.SubPackageDecl;
-import fr.irisa.triskell.kermeta.parser.gen.ast.Tag;
 import fr.irisa.triskell.kermeta.parser.gen.ast.TopLevelDecls;
 import fr.irisa.triskell.kermeta.parser.gen.ast.TypeVarDecl;
 import fr.irisa.triskell.kermeta.parser.gen.ast.TypeVarDecllst;
@@ -85,9 +79,6 @@ public class KMTLoadingStructurePass extends KermetaASTNodeVisitor implements IL
 
 	/**		A reference to the enumeration we are working on. Can be null.		*/
 	private Enumeration currentEnumeration = null;
-	
-	/**		A boolean stating if some the file contains require informations.		*/
-	private boolean existRequires = false;
 	
 	public void performAction(ILoadingDatas datas, Map<?, ?> options) {
 		performAction( (KMTLoadingDatas) datas, options );
@@ -154,7 +145,6 @@ public class KMTLoadingStructurePass extends KermetaASTNodeVisitor implements IL
 	
 	@Override
 	public boolean beginVisit(ImportStmt importStmt) {
-		existRequires = true;
 		StringLiteralOrQualifiedID astNode = importStmt.getUri();
 		String uri = null;
 		if ( astNode instanceof QualifiedID )
@@ -186,10 +176,6 @@ public class KMTLoadingStructurePass extends KermetaASTNodeVisitor implements IL
 	
 	@Override
 	public boolean beginVisit(TopLevelDecls decls) {
-		//if ( decls.getChildCount() == 0 && ! existRequires )
-		//	kermetaUnit.error(
-		//	"PASS 1 : Either 'using' declaration is misplaced (should be put after 'require'), " +
-		//	"or there is a 'using' declaration, but no element defined in your file.");
 		return true;
 	}
 	
