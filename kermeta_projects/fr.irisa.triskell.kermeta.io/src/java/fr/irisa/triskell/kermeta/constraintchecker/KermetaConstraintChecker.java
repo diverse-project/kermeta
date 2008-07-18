@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.24 2008-05-28 13:37:13 dvojtise Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.25 2008-07-18 06:52:48 dvojtise Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -16,7 +16,11 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.io.ErrorMessage;
+import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.Message;
+import org.kermeta.io.WarningMessage;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
@@ -62,7 +66,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	protected Constraint current_constraint;
 	protected CallFeature current_callFeature;
 	
-	protected List messages; 
+	protected List<Message> messages; 
 
 	/*public KermetaConstraintChecker()
 	{
@@ -115,7 +119,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		current_class = class_definition;
 		// check for inheritance cycles
 		if ( KermetaModelHelper.ClassDefinition.isSuperTypeOf( current_class, current_class)) {
-			builder.error("Cycle in the inheritance tree - The type hierachy of class '" + current_class.getName()+"' is inconsistant.", builder.getNodeByModelElement(current_class));
+			addProblem("Cycle in the inheritance tree - The type hierachy of class '" + current_class.getName()+"' is inconsistant.", current_class);
 			return false;
 		}
 		
@@ -191,15 +195,16 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	 *   
 	 * Origin: fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass3
 	 *  no overloading in sub-classes
-	 *	super operation shoukd be specified if several are possible (multiple inheritance)
+	 *	super operation should be specified if several are possible (multiple inheritance)
 	 *
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitOperation(fr.irisa.triskell.kermeta.language.structure.Operation)
 	 */
 	public Object visitOperation(Operation operation) {
 		//current_operation = operation;
 		current_operation = operation;
-		Boolean result = new OperationChecker(builder, operation, current_class).check();
-		//return result;
+		OperationChecker opChecker = new OperationChecker(builder, operation, current_class);
+		opChecker.check();
+		// continue the visit
 		return super.visitOperation(operation);
 	}
 		
@@ -250,14 +255,12 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	 */
 	public Object visitPackage(Package node) {
 		current_package = node;
-		Boolean result = true;
 		// A package must have a not empty name
 		if (node.getName()==null || node.getName().length()==0)
 		{
 			addProblem(NAME_ERROR, node);
-			result = false;
+			return false;
 		}
-		//return result;
 		return super.visitPackage(node);
 	}
 
@@ -278,18 +281,26 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	public void addProblem(String msg, fr.irisa.triskell.kermeta.language.structure.Object node)
 	{// have to make a choice
 		if (builder!=null)	builder.error(AbstractChecker.ERROR_TYPE + ": " + msg, node);
-		else messages.add(AbstractChecker.ERROR_TYPE + ": " + msg);
+		else {
+			ErrorMessage error = IoFactory.eINSTANCE.createErrorMessage();
+			error.setValue( AbstractChecker.ERROR_TYPE + ": " + msg );
+			messages.add(error);
+		}
 	}
 	
 	/** A shortcut to add messages on the builder kermeta unit */
 	public void addWarning(String msg, fr.irisa.triskell.kermeta.language.structure.Object node)
 	{// have to make a choice
 		if (builder!=null)	builder.warning(AbstractChecker.ERROR_TYPE + ": " + msg, node);
-		else messages.add(AbstractChecker.ERROR_TYPE + ": " + msg);
+		else {
+			WarningMessage warning = IoFactory.eINSTANCE.createWarningMessage();
+			warning.setValue( AbstractChecker.ERROR_TYPE + ": " + msg );
+			messages.add(warning);
+		}
 	}
 	
 	/** A shortcut to get the registered problems in the kermeta unit */
-	public List getProblems()
+	public List<Message> getProblems()
 	{
 		if (builder == null) return messages;
 		else return builder.getMessages();
