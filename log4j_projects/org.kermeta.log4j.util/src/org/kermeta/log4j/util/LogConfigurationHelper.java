@@ -1,4 +1,4 @@
-/* $Id: LogConfigurationHelper.java,v 1.5 2008-06-02 07:34:57 dvojtise Exp $
+/* $Id: LogConfigurationHelper.java,v 1.6 2008-07-21 08:51:11 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : LogConfigurationHelper.java
  * License    : EPL
@@ -51,13 +51,17 @@ public class LogConfigurationHelper {
 		if(configurationFilePropertyName != null && configurationFilePropertyName.length() > 0){
 			propertyValue = System.getProperty(configurationFilePropertyName);
 		}
-		if(Platform.isRunning()){
-        	// ignore preference if eclipse platform is not running
-			if (propertyValue == null || propertyValue.length() == 0){
-				// system property not set, use plugin preferences
-				IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-				propertyValue = store.getString(PreferenceConstants.P_LOG4JXMLPATH);
+		try{
+			if(Platform.isRunning()){
+	        	// ignore preference if eclipse platform is not running
+				if (propertyValue == null || propertyValue.length() == 0){
+					// system property not set, use plugin preferences
+					IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+					propertyValue = store.getString(PreferenceConstants.P_LOG4JXMLPATH);
+				}
 			}
+		} catch(java.lang.NoClassDefFoundError e){
+			// ignore, we are probably running in standalone mode
 		}
     	if (propertyValue != null && propertyValue.length() > 0)
     	{
@@ -105,11 +109,15 @@ public class LogConfigurationHelper {
         // default prefered logger = LOG4J
         String preferredLogger = PreferenceConstants.P_LOGGERCHOICE_LOG4J;
         // retrieves plugin preferences
-        if(Platform.isRunning()){
-        	// ignore preference if eclipse platform is not running
-	        IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-			preferredLogger = store.getString(PreferenceConstants.P_LOGGERCHOICE);
-        }
+        try{
+        	if(Platform.isRunning()){        
+	        	// ignore preference if eclipse platform is not running
+		        IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+				preferredLogger = store.getString(PreferenceConstants.P_LOGGERCHOICE);
+	        }
+        } catch(java.lang.NoClassDefFoundError e){
+			// ignore, we are probably running in standalone mode
+		}
 	    Log logger=null;
 		if (preferredLogger.equals(PreferenceConstants.P_LOGGERCHOICE_LOG4J)){
 		    try{
@@ -140,7 +148,14 @@ public class LogConfigurationHelper {
 		    catch(Exception e){}
 		}
 		// else  simply use Apache default
-		logger = LogFactory.getLog(loggerName);
+		try{
+			logger = LogFactory.getLog(loggerName);
+		}
+		catch(Exception e){
+			System.err.println("Cannot initialize logger for " + loggerName);
+			e.printStackTrace();
+			
+		}
 		/*logger=org.apache.log4j.Logger.getLogger(loggerName);
 		if (logger == null)
 		{
