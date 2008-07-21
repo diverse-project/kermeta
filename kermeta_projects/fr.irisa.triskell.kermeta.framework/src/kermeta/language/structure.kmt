@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.63 2008-07-21 07:40:32 cfaucher Exp $
+/* $Id: structure.kmt,v 1.64 2008-07-21 11:27:45 ftanguy Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -27,6 +27,7 @@ require "../Standard.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
 
 using kermeta::standard
+using kermeta::exceptions
 
  @EMF_needProperty "name=oid classDefinitionQN=kermeta::standard::Integer"
  @EMF_needProperty "name=container classDefinitionQN=kermeta::language::structure::Object"
@@ -53,6 +54,24 @@ aspect class Object
 	 * Runs checking of invariants defined for the metaclass of the Object
 	 */	
 	operation checkInvariants() : Void from Object is do
+		var cd : ClassDefinition init self.getMetaClass.classDefinition
+		if ( not cd.isVoid ) then
+			cd.allAttribute.each{ p |
+				var v : Object init self.get(p)
+				if ( not v.isVoid and v.isInstanceOf(Collection<Object>) ) then
+					var c : Collection<Object> init v.asType(Collection<Object>)
+					// A collection that does not respect the defined bounds raises an exception.
+					if ( c.size() < p.lower or (p.upper != -1 and c.size() > p.upper) ) then
+						raise ConstraintViolatedInv.new
+					end
+				else 
+					// A required property that is void raises an exception.
+					if ( p.lower == 1 and v.isVoid ) then
+						raise ConstraintViolatedInv.new
+					end
+				end
+			}
+		end
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)
 	end
 	

@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.52 2008-07-21 07:40:31 cfaucher Exp $
+ * $Id: collections.kmt,v 1.53 2008-07-21 11:27:44 ftanguy Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -206,6 +206,7 @@ abstract class Collection<G>
 	 */
 	operation iterator() : Iterator<G> is do
 		result := Iterator<G>.new
+		@compiledJavaExtern "CollectionUtil.iterator(this, i)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator(self, result)
 	end
 	
@@ -1273,6 +1274,7 @@ class Iterator<G>
 	 * Returns true if the iterator has a next element
 	 */
 	operation hasNext() : Boolean is do
+		@compiledJavaExtern "IteratorUtil.hasNext(this)"
 	 	result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext(self)
 	end
 	
@@ -1284,6 +1286,7 @@ class Iterator<G>
 		if not hasNext then
 			raise IteratorIsOff.new
 		end
+		@compiledJavaExtern "(G) IteratorUtil.next(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next(self)
 	end
 }
