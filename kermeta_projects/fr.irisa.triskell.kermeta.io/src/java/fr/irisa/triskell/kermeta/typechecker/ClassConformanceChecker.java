@@ -1,4 +1,4 @@
-/* $Id: ClassConformanceChecker.java,v 1.7 2008-04-28 11:50:11 ftanguy Exp $
+/* $Id: ClassConformanceChecker.java,v 1.8 2008-07-21 11:35:43 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ClassConformanceChecker.java
 * License : EPL
@@ -109,7 +109,9 @@ public class ClassConformanceChecker {
 							String requiredQualifiedName = KermetaModelHelper.NamedElement.qualifiedName( requiredType.getTypeDefinition() );
 							String providedQualifiedName = KermetaModelHelper.NamedElement.qualifiedName( providedType.getTypeDefinition() );
 							
-							result = requiredQualifiedName.equals(providedQualifiedName);
+							// Special case when casting to Collection<Object>
+							if ( ! requiredQualifiedName.equals("kermeta::language::structure::Object") )
+								result = requiredQualifiedName.equals(providedQualifiedName);
 						}
 					}
 				}
