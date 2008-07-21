@@ -1,4 +1,4 @@
-package org.kermeta.compil.runtime.helper.basetypes;
+package org.kermeta.compil.runtime.helper.persistence;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.5 2008-07-16 08:51:39 ftanguy Exp $
+/*$Id: Loader.java,v 1.1 2008-07-21 12:00:24 ftanguy Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Loader.java
 * License : EPL
@@ -8,7 +8,7 @@
 * Creation date : 24 juin 08
 * Authors : paco
 */
-package org.kermeta.compil.runtime.helper.basetypes;
+package org.kermeta.compil.runtime.helper.persistence;
 
 import java.util.ArrayList;
 import java.util.List;
