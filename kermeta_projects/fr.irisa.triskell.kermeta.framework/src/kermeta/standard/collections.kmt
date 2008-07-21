@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.53 2008-07-21 11:27:44 ftanguy Exp $
+ * $Id: collections.kmt,v 1.54 2008-07-21 15:16:15 cfaucher Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -206,7 +206,7 @@ abstract class Collection<G>
 	 */
 	operation iterator() : Iterator<G> is do
 		result := Iterator<G>.new
-		@compiledJavaExtern "CollectionUtil.iterator(this, i)"
+		@compiledJavaExtern "CollectionUtil.iterator(this, result)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator(self, result)
 	end
 	
