@@ -1,0 +1,133 @@
+/* $Id: 076_testInvariants.main.kmt,v 1.1 2008-07-21 11:30:49 ftanguy Exp $ 
+ * Creation : July 17, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            paco
+ */
+@mainClass "testInvariants::Main"
+@mainOperation "main"
+
+
+package testInvariants;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::kunit
+using kermeta::persistence
+using kermeta::exceptions
+using kermeta::language
+using kermeta::language::structure
+
+class Main inherits TestCase {
+	operation main() : Void is do 
+		var runner : TestRunner init TestRunner.new
+		runner.run(Main)
+		runner.printTestResult()
+	end
+	
+	operation testAttributeCardinality11() is do
+		var a1 : A init A.new
+		do
+			a1.checkInvariants
+			self.assertWithMsg(false, "checkInv should have raised an exception.")
+		rescue (e : ConstraintViolatedInv )
+			self.assertWithMsg(true, "")
+		end
+		var a2 : A init A.new
+		a2.s := "literal"
+		do
+			a2.checkInvariants
+			self.assertWithMsg(true, "")
+		rescue (e : ConstraintViolatedInv )
+			self.assertWithMsg(false, "checkInv should not have raised an exception.")
+		end
+	end
+	
+	operation testAttributeCardinality01() is do
+		var b1 : B init B.new
+		do
+			b1.checkInvariants
+			self.assertWithMsg(true, "")
+		rescue (e : ConstraintViolatedInv )
+			self.assertWithMsg(false, "checkInv should not have raised an exception.")
+		end
+		var b2 : B init B.new
+		b2.s := "literal"
+		do
+			b2.checkInvariants
+			self.assertWithMsg(true, "")
+		rescue (e : ConstraintViolatedInv )
+			self.assertWithMsg(false, "checkInv should not have raised an exception.")
+		end
+	end
+	
+	operation testAttributeCardinality03() is do
+		var c1 : C init C.new
+		do
+			c1.checkInvariants
+			self.assertWithMsg(true, "")
+		rescue (e : ConstraintViolatedInv )
+			self.assertWithMsg(false, "checkInv should not have raised an exception.")
+		end
+		var c2 : C init C.new
+		c2.s.add("literal1")
+		c2.s.add("literal2")
+		c2.s.add("literal3")
+		c2.s.add("literal4")
+		do
+			c2.checkInvariants
+			self.assertWithMsg(false, "checkInv should have raised an exception.")
+		rescue (e : ConstraintViolatedInv )
+			self.assertWithMsg(true, "")
+		end
+	end
+	
+	operation testAttributeCardinality1star() is do
+		var d1 : D init D.new
+		do
+			d1.checkInvariants
+			self.assertWithMsg(false, "checkInv should have raised an exception.")
+		rescue (e : ConstraintViolatedInv )
+			self.assertWithMsg(true, "")
+		end
+		var d2 : D init D.new
+		d2.s.add("literal1")
+		d2.s.add("literal2")
+		d2.s.add("literal3")
+		d2.s.add("literal4")
+		do
+			d2.checkInvariants
+			self.assertWithMsg(true, "")
+		rescue (e : ConstraintViolatedInv )
+			self.assertWithMsg(false, "checkInv should have raised an exception.")
+		end
+	end
+
+}
+
+class A {
+
+	attribute s : String[1..1]
+
+}
+
+class B {
+
+	attribute s : String[0..1]
+
+}
+
+class C {
+
+	attribute s : String[0..3]
+
+}
+
+class D {
+
+	attribute s : String[1..*]
+
+}

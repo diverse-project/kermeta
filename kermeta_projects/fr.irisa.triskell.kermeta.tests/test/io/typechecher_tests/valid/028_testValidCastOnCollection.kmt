@@ -1,0 +1,34 @@
+/* $Id: 028_testValidCastOnCollection.kmt,v 1.1 2008-07-21 11:30:49 ftanguy Exp $ 
+ * Creation : July 21, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            paco
+ */
+@mainClass "testCastOnCollection::Main"
+@mainOperation "main"
+
+
+package testCastOnCollection;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::kunit
+
+class Main inherits TestCase {
+
+	operation main() : Void is do 
+		var runner : TestRunner init TestRunner.new
+		runner.run(Main)
+		runner.printTestResult()
+	end
+
+	operation testCastToCollectionOfObject() is do
+		var c1 : String[0..*]
+		var c2 : Object[0..*]
+		c2 ?= c1
+	end
+
+}
