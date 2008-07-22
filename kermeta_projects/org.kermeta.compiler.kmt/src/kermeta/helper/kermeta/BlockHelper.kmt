@@ -1,0 +1,24 @@
+/* $Id: BlockHelper.kmt,v 1.1 2008-07-22 07:36:22 cfaucher Exp $
+ * Creation date: Jul 18, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors:
+ * 			Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language::behavior;
+
+require kermeta
+
+using kermeta::standard
+
+aspect class Block {
+
+	operation containsRescue() : Boolean is do
+		result := false
+		if (not self.rescueBlock.isVoid()) and (self.rescueBlock.size()>0) then
+			result := true
+		end
+	end
+	
+}

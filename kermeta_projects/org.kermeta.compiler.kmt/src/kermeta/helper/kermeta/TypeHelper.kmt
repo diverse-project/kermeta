@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.17 2008-07-11 13:05:19 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.18 2008-07-22 07:36:22 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -75,8 +75,35 @@ aspect class Type {
 		
 		if self.isInstanceOf(Class) then
 			var cd : ClassDefinition init self.asType(Class).getClassDefinition()
-			result := cd.qualifiedName
+			result := cd.name
 			
+		else
+			if self.isInstanceOf(ObjectTypeVariable) then
+				var otv : ObjectTypeVariable init self.asType(ObjectTypeVariable)
+				result := otv.name
+			else
+				if self.isInstanceOf(PrimitiveType) then
+					var cd : ClassDefinition init self.getClassFromPrimitiveType().getClassDefinition()
+					result := cd.name
+				else
+					if self.isInstanceOf(VoidType) then
+						result := "void"
+					end
+				end
+			end
+		end
+		
+		if Operation.new().isVoidType(result) then
+			result := "void"
+		end
+	end
+	
+	operation getTypeQName() : String is do
+		result := void
+		
+		if self.isInstanceOf(Class) then
+			var cd : ClassDefinition init self.asType(Class).getClassDefinition()
+			result := cd.qualifiedName
 		else
 			if self.isInstanceOf(ObjectTypeVariable) then
 				var otv : ObjectTypeVariable init self.asType(ObjectTypeVariable)
@@ -85,8 +112,16 @@ aspect class Type {
 				if self.isInstanceOf(PrimitiveType) then
 					var cd : ClassDefinition init self.getClassFromPrimitiveType().getClassDefinition()
 					result := cd.qualifiedName
+				else
+					if self.isInstanceOf(VoidType) then
+						result := "void"
+					end
 				end
 			end
+		end
+		
+		if Operation.new().isVoidType(result) then
+			result := "void"
 		end
 	end
 }

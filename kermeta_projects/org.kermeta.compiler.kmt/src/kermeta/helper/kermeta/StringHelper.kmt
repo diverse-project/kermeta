@@ -1,4 +1,4 @@
-/* $Id: StringHelper.kmt,v 1.4 2008-07-10 11:34:32 cfaucher Exp $
+/* $Id: StringHelper.kmt,v 1.5 2008-07-22 07:36:22 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -13,11 +13,39 @@ using kermeta::standard
 using kermeta::utils
 
 aspect class String {
-	// Return a new string with the first letter in upper case of the given string
+
+	/**
+	 * Return a new string with the first letter in upper case of the given string
+	 * Should be a Simk static operation
+	 */
 	operation capName() : String is do
 		result := self.substring(0,1).toUpperCase + self.substring(1, self.size())
 	end
 	
+	/**
+	 * Replace the last segment of a string by the new extension
+	 */
+	operation replaceExtension(new_extension : String) : String is do
+	
+		result := ""
+		
+		var set_str : OrderedSet<String> init self.replace(".", "%").split("%")
+		
+		var inc_seg : Integer init 0
+		set_str.each{ seg |
+			if inc_seg<(set_str.size()-1) then
+				result := result + seg + "."
+			end
+			inc_seg := inc_seg + 1
+		}
+		
+		result := result + new_extension
+		
+	end
+	
+	/**
+	 * Should be a Simk static operation
+	 */	 
 	operation getPropertyInfos() : Hashtable<String, String> is do
 		
 		var set_infos : OrderedSet<String> init OrderedSet<String>.new()

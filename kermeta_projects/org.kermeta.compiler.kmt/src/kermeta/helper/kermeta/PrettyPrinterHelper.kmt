@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.8 2008-07-16 08:14:46 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.9 2008-07-22 07:36:22 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -21,6 +21,7 @@ using km2ecore::helper::java
  * Class containing some helpers dedicated to the Kermeta compiler
  */
 class CompilerHelperJava {
+
 	operation ppCRSeparatedNode(expressions : OrderedSet<Expression>, context : KM2EcoreContext) : String is do
 		result := ""
 		expressions.each{e |
@@ -61,24 +62,30 @@ class CompilerHelperJava {
 	operation ppTypeFromMultiplicityElement(elem : MultiplicityElement, context : KM2EcoreContext) : String is do
 		result := ""
 		
-		if elem.upper != 1 then
-			if elem.isOrdered then
-				if elem.isUnique then
-					result := result + "kermeta.standard.OrderedSet"
+		/*if elem.container.isInstanceOf(TypeLiteral) and elem.container.container.isInstanceOf(CallExpression) then
+			result := result + "ClassCallExpression"
+		else*/
+		
+			if elem.upper != 1 then
+				if elem.isOrdered then
+					if elem.isUnique then
+						result := result + "kermeta.standard.OrderedSet"
+					else
+						result := result + "kermeta.standard.Sequence"
+					end
 				else
-					result := result + "kermeta.standard.Sequence"
+					if elem.isUnique then
+						result := result + "kermeta.standard.Set"
+					else
+						result := result + "kermeta.standard.Bag"
+					end
 				end
+				result := result + "<" + elem.type.createBehaviorJava(context) + ">"
 			else
-				if elem.isUnique then
-					result := result + "kermeta.standard.Set"
-				else
-					result := result + "kermeta.standard.Bag"
-				end
+				result := result + elem.type.createBehaviorJava(context)
 			end
-			result := result + "<" + elem.type.createBehaviorJava(context) + ">"
-		else
-			result := result + elem.type.createBehaviorJava(context)
-		end
+		
+		//end
 		
 	end
 	
@@ -90,20 +97,19 @@ class CompilerHelperJava {
 
 		var i : Integer init 0
 		expressions.each{ e |		
-			
 			if i==1 then
 				result := result + ", "
-			end
-			i := 1
-			
-			if e.isInstanceOf(CallExpression) then
-			
-				result := result + IdentifierHelper.new.getMangledIdentifier(e.asType(CallExpression).name, context)
 			else
-				if e.isInstanceOf(Literal) then
-					result := result + e.asType(Literal).createBehaviorJava(context)
-				end
+				i := 1
 			end
+			
+			var tmp : String init e.createBehaviorJava(context)
+			
+			if (not context.current_valueType.isVoid()) and (tmp == "this") then
+				tmp := "self"
+			end
+			
+			result := result + tmp
 		}
 	end
 }

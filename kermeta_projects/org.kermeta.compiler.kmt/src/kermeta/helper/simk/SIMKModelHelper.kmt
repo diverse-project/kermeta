@@ -1,0 +1,43 @@
+/* $Id: SIMKModelHelper.kmt,v 1.1 2008-07-22 07:36:22 cfaucher Exp $
+ * Creation date: Jul 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors:
+ * 			Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package simk;
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+
+using kermeta::language::structure
+using kermeta::standard
+using km2ecore
+
+aspect class SIMKModel {
+
+	operation retrieveOrCreateContext(op : Operation, context : KM2EcoreContext) : SMContext is do
+		result := void
+		//FIXME CF to add the management of package and the usage
+		var sMContext : SMContext init self.sMContexts.detect{ c |
+			c.sMClass.name == (context.current_valueType.name + "Wrapper")
+		}
+		if sMContext.isVoid() then
+			sMContext := SMContext.new()
+			self.sMContexts.add(sMContext)
+			
+			var sMClass : SMClass init SMClass.new()
+			sMContext.sMClass := sMClass
+			sMClass.name := context.current_valueType.name + "Wrapper"
+		end
+		
+		var sm : StaticMethod init sMContext.staticMethods.detect{ o |
+			o.name == op.name
+		}
+		if sm.isVoid() then	
+			result := sMContext
+		end
+	end
+	
+}

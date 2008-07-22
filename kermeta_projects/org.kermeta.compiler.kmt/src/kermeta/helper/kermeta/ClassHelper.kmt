@@ -1,0 +1,47 @@
+/* $Id: ClassHelper.kmt,v 1.1 2008-07-22 07:36:22 cfaucher Exp $
+ * Creation date: Jul 18, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors:
+ * 			Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language::structure;
+
+require kermeta
+
+using kermeta::standard
+
+aspect class Class {
+
+	/** Never used for the moment */
+	operation allAttributes() : Set<Property> is do
+		var properties : Set<Property> init Set<Property>.new
+		properties.addAll(self.ownedAttribute.select{p | p.isComposite})
+		self.allSuperClasses.each{s | properties.addAll(s.ownedAttribute.select{p | p.isComposite})}
+		result := properties
+	end
+	
+	/** Never used for the moment */
+	operation allSuperClasses() : Set<Class> is do
+	
+		var allSuperClasses : Set<Class> init Set<Class>.new
+		var superClasses : Set<Class> init Set<Class>.new
+		superClasses.addAll(self.superClass) 
+		var temp : Set<Class> init Set<Class>.new
+		from  not superClasses.isEmpty
+		until superClasses.isEmpty
+		loop
+			allSuperClasses.addAll(superClasses)
+			temp.clear
+ 			superClasses.each{s |
+ 				temp.addAll(s.superClass)
+ 			}
+ 			superClasses.clear
+ 			superClasses.addAll(temp)
+		end
+		result := allSuperClasses
+		
+	end
+	
+}

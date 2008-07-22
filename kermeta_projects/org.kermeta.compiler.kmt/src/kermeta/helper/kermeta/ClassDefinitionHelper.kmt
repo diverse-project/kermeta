@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.kmt,v 1.8 2008-07-16 08:14:46 cfaucher Exp $
+/* $Id: ClassDefinitionHelper.kmt,v 1.9 2008-07-22 07:36:22 cfaucher Exp $
  * Creation date: May 16, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -42,33 +42,46 @@ aspect class ClassDefinition {
 	
 	//Check if the ClassDefinition is a subType of ValueType => we have to consider as a EDataType, i.e.: an EAttribute
 	operation isValueType() : Boolean is do
-		result := false
-
-		var res : Type init self.allSuperTypes.detect{ st |
-			st.isInstanceOf(ParameterizedType) and st.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::ValueType"
-		}
-		
-		if not res.isVoid() then
-			result := true
-		end
-
+		result := isSubTypeOf("kermeta::standard::ValueType")
 	end
 	
 	operation isCollection() : Boolean is do
 		result := false
 
+		result := isSubTypeOf("kermeta::standard::Collection")
+		
 		if self.qualifiedName == "kermeta::standard::Collection" then
 			result := true
 		end
+	end
+	
+	operation isIterator() : Boolean is do
+		result := false
+
+		result := isSubTypeOf("kermeta::standard::Iterator")
+		
+		if self.qualifiedName == "kermeta::standard::Iterator" then
+			result := true
+		end
+	end
+	
+	operation isSubTypeOf( superType_qualifiedName : String ) : Boolean is do
+		result := false
 		
 		var res : Type init self.allSuperTypes.detect{ st |
-			st.isInstanceOf(ParameterizedType) and st.asType(ParameterizedType).typeDefinition.qualifiedName == "kermeta::standard::Collection"
+			st.isInstanceOf(ParameterizedType) and st.asType(ParameterizedType).typeDefinition.qualifiedName == superType_qualifiedName
 		}
 		
 		if not res.isVoid() then
 			result := true
 		end
-
+	end
+	
+	operation isMappedToJavaRawType() : Boolean is do
+		result := false
+		if self.isCollection() or self.isIterator() then
+			result := true
+		end
 	end
 	
 }

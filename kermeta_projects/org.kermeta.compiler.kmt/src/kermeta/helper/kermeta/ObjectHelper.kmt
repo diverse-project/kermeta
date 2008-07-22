@@ -1,4 +1,4 @@
-/* $Id: ObjectHelper.kmt,v 1.7 2008-07-02 08:38:20 cfaucher Exp $
+/* $Id: ObjectHelper.kmt,v 1.8 2008-07-22 07:36:22 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -9,6 +9,10 @@
 package kermeta::language::structure;
 
 require kermeta
+
+require "ClassHelper.kmt"
+
+using kermeta::standard
 
 aspect class Object {
 
@@ -36,6 +40,15 @@ aspect class Object {
             	result := obj.container
 			end
         end
+	end
+	
+	/** Never used for the moment */
+	operation getAllContainedElementAsType(type : Type) : Set<Object> is do
+		result := Set<Object>.new
+		self.getMetaClass().allAttributes().each{ p |
+			stdio.writeln("self.getMetaClass().get(p): " + self.getMetaClass().get(p).toString())
+			stdio.writeln("self.getMetaClass().getPropertyValue(p.name): " + self.getMetaClass().getPropertyValue(p.name).toString())
+		}
 	end
 	
 }

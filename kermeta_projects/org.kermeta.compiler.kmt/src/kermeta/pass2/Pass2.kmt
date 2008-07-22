@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.25 2008-07-10 14:10:04 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.26 2008-07-22 07:36:23 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -59,7 +59,29 @@ package structure {
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 		
 			self.setLinks(context) 
-			super(context)
+			
+			if self.isValueType() then
+				context.current_valueType := self
+				self.ownedOperation.each{ op |
+					op.applyPass2BehaviorJava(context)
+				}
+				
+			    self.superType.each{ t | 
+			    	if Class.isInstance(t) then
+			    		var c : Class
+			    		c ?= t
+			    		var cDef : ClassDefinition
+				    	cDef ?= c.typeDefinition
+			    		cDef.allOperation.each{ p | 
+							p.applyPass2BehaviorJava(context)
+						}
+			    	end
+				}
+				
+				context.current_valueType := void
+			else
+				super(context)
+			end
 			
 			self.getEMFNeedProperty().each{ emfNeedProperty |
 			
@@ -179,10 +201,16 @@ package structure {
 		end
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
-			if mustBeCompiled() then
+			if mustBeCompiled() and context.current_valueType.isVoid() then
 				self.setLinks(context)
 				super(context)
-				self.createBehaviorJava(context)
+				
+				if not self.isAbstract then
+					self.createBehaviorJava(context)
+				end
+
+			else
+				self.compilingInSimkMode(context)
 			end
 		end
 	}

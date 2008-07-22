@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.24 2008-07-01 08:56:13 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.25 2008-07-22 07:36:22 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -101,6 +101,7 @@ aspect class Package {
 		
 		if not self.uri.isVoid() and self.uri != "" then
 			ecorePackage.nsURI := self.uri + "/kermeta_temp_uri"
+			ecorePackage.eAnnotations.add(EAnnotationHelper.new().createKermetaEAnnotation("ecoreUri", self.uri))
 		else
 			raise UndefinedUriEPackageException.new()
 		end
@@ -227,6 +228,7 @@ aspect class Operation {
 		if self.isAbstract then
 			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.createAbstract()
 			ecoreOperation.eAnnotations.add( ecoreAnnotation )
+			self.container.asType(ClassDefinition).ecoreModelElement.~abstract := true
 		end 
 		result := ecoreOperation 
 	end
@@ -276,9 +278,9 @@ aspect class Property {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EStructuralFeature is do
 		var ecoreStructuralFeature : EStructuralFeature
 		var current_type : Type init self.type.asType(Type)
-		//stdio.writeln("Create Property: " + self.name) + " - " + current_type.toString() + " - " + current_type.getTypeName())
+		//stdio.writeln("Create Property: " + self.name) + " - " + current_type.toString() + " - " + current_type.getTypeQName())
 		if current_type.isValueType() or current_type.isEnumeration() or current_type.isEDataType() then
-			//stdio.writeln("Create Property2: " + self.name + " " + self.type.getTypeName())
+			//stdio.writeln("Create Property2: " + self.name + " " + self.type.getTypeQName())
 			ecoreStructuralFeature := EAttribute.new
 			//ecoreStructuralFeature.iD := 
 		else

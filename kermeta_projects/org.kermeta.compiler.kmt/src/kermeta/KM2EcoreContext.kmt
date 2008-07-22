@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.20 2008-07-16 07:06:28 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.21 2008-07-22 07:36:22 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -79,6 +79,8 @@ class KM2EcoreContext
 	attribute compiledJavaExtern : String [1..1]
 	/********/
 	
+	reference current_valueType : ClassDefinition [0..1]
+	
 
 	operation initialize(modelInput : String, traceInput : String) : Void is do
 	
@@ -93,6 +95,8 @@ class KM2EcoreContext
 		
 		self.initializeConstants()
 		self.compiledJavaExtern := ""
+		
+		self.current_valueType := void
 		
 		// Initializing the java keywords list.
 		javaKeyWordList := JavaKeyWordList.new
@@ -134,11 +138,16 @@ class KM2EcoreContext
 		//self. := ""
 	end
 	
+	operation pushCondStack() : Void is do
+		self.inc := self.inc + 1
+		self.cond_stack.push(self.inc.toString())
+	end
+	
 	operation save() : Void is do
 	
 		// Create a Simk resource
-		self.simkOutput := self.kmInput + ".simk"
-	    var simkResource : Resource init self.outputRepository.createResource(self.simkOutput,"http://www.kermeta.org/simk")
+		self.simkOutput := self.kmInput.replaceExtension("simk")
+	    var simkResource : Resource init self.outputRepository.createResource(self.simkOutput, "http://www.kermeta.org/simk")
 	    simkResource.add(self.simkModel)
 	    // Save the Simk model
 	    simkResource.save()
