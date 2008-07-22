@@ -1,4 +1,4 @@
-/* $Id: KRuntimeException.java,v 1.2 2008-07-22 07:47:45 cfaucher Exp $
+/* $Id: KRuntimeError.java,v 1.1 2008-07-22 12:34:04 cfaucher Exp $
 * Project : org.kermeta.compil.runtime.helper
 * File : KRuntimeException.java
 * License : EPL
@@ -8,11 +8,11 @@
 * Authors : Cyril Faucher <cfaucher@irisa.fr>
 */
 
-package org.kermeta.compil.runtime.helper.exception;
+package org.kermeta.compil.runtime.helper.error;
 
 import org.eclipse.emf.ecore.EObject;
 
-public class KRuntimeException extends Exception {
+public class KRuntimeError extends Error {
 
 	/**
 	 * 
@@ -29,11 +29,11 @@ public class KRuntimeException extends Exception {
 		this.realException = realException;
 	}
 
-	public KRuntimeException (EObject eobj) {
+	public KRuntimeError (EObject eobj) {
 		realException = eobj;
 	}
 	
-	public KRuntimeException (String message) {
+	public KRuntimeError (String message) {
 		
 	}
 }

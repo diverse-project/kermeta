@@ -10,6 +10,6 @@ Require-Bundle: org.eclipse.emf,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xmi,
  org.kermeta.compiler.runtime.configuration;visibility:=reexport
-Export-Package: org.kermeta.compil.runtime.helper.persistence,
- org.kermeta.compil.runtime.helper.exception
+Export-Package: org.kermeta.compil.runtime.helper.error,
+ org.kermeta.compil.runtime.helper.persistence
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
