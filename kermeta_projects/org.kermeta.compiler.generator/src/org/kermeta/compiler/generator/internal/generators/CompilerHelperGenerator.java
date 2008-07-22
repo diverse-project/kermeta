@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.11 2008-07-17 12:55:07 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.12 2008-07-22 07:38:49 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -50,6 +50,8 @@ import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.jet.DefaultJETEmitter;
 import org.kermeta.simk.SIMKModel;
+import org.kermeta.simk.SMClass;
+import org.kermeta.simk.SMContext;
 import org.kermeta.simk.SMUsage;
 import org.kermeta.simk.StaticMethod;
 
@@ -66,6 +68,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private static final String TEST_HELPER_JAVA = "templateHelper/helper/Helper.javajet";
 
 	private static final String RUNNER_JAVA = "templateHelper/runner/Runner.javajet";
+	
+	private static final String WRAPPER_JAVA = "templateHelper/helper/Wrapper.javajet";
 
 	private static final String JAVA_LAUNCHER_LAUNCH = "templateHelper/JavaLauncher.launchjet";
 	
@@ -238,6 +242,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 
 			generateRunner(simkConf, projectPath);
 			generateLauncher(simkConf, projectPath);
+			generateWrapper(simkConf, projectPath);
 
 			monitor.worked(1);
 		} catch (JETException e) {
@@ -386,6 +391,26 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 						configuration.isForceOverwrite());
 			}
 
+		}
+	}
+	
+	/**
+	 * Generate the .launch file corresponding to the mainClass and mainOperation that are defined into the header of a Kermeta file
+	 * 
+	 * @param simkConf
+	 * @param projectPath
+	 * @throws JETException
+	 * @throws CoreException
+	 */
+	private void generateWrapper(SIMKModel simkConf, IPath projectPath)
+			throws JETException, CoreException {
+		
+		for (SMContext _context : simkConf.getSMContexts()) {
+			applyTemplate(
+					_context,
+					getTemplateURI(WRAPPER_JAVA),
+					projectPath.append("/" + SOURCE_DIRECTORY + "/kermeta/standard/helper/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
+					configuration.isForceOverwrite());
 		}
 	}
 	

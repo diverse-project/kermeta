@@ -1,0 +1,30 @@
+<%@jet
+	 package="org.kermeta.compiler.generator.templates"
+	 imports="org.eclipse.emf.codegen.util.* org.eclipse.emf.codegen.ecore.genmodel.* fr.irisa.triskell.eclipse.ecore.* org.kermeta.compiler.generator.helper.model.* org.kermeta.simk.* fr.irisa.triskell.kermeta.language.structure.NamedElement"
+	 class="Wrapper"
+	 version="$Id: Wrapper.javajet,v 1.1 2008-07-22 07:38:49 cfaucher Exp $" %>
+<%SMContext smContext = (SMContext) argument;%>
+
+<%SMClass wrapperClass = smContext.getSMClass();%>
+
+package kermeta.standard.helper;
+
+/**
+ *
+ * @generated
+ */
+public class <%=wrapperClass.getName()%> {
+
+	<% for(StaticMethod helperMethod : smContext.getStaticMethods()) { %>
+	public static <%=helperMethod.getSMReturn().getType()%> <%=helperMethod.getName()%>(
+		<% int i=0;
+			for(SMParameter param : helperMethod.getSMParameters()) {
+				if(i==1) {%>, <%} else {i=1;}%>
+			<%=param.getType()%> <%=param.getName()%>
+		<% } %>
+	) {
+		<%=helperMethod.getBody()%>
+	}
+	<% } %>
+
+}
