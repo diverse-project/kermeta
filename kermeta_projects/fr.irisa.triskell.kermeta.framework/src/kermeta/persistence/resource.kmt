@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.55 2008-07-21 12:00:21 ftanguy Exp $
+ * $Id: resource.kmt,v 1.56 2008-07-22 13:47:59 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -218,7 +218,7 @@ class EMFResource inherits Resource
 	 * Overrides Resource.saveWithNewURI(String)
 	 */
 	method saveWithNewURI(new_uri : String) : Void is do
-		@compiledJavaExtern "org.kermeta.compil.runtime.helper.persistence.Saver.save(getValues(), new_uri, getMetaModelURI());"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.persistence.Saver.save(getValues(), new_uri, getMetaModelURI())"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self, new_uri, metaModelURI, "EMF", self, false
 		)
@@ -235,7 +235,7 @@ class EMFResource inherits Resource
 				"Note : setting isReadOnly to false on the metamodel may lead to unpredictable results"
 			raise e
 		end
-		@compiledJavaExtern "org.kermeta.compil.runtime.helper.persistence.Saver.save(getValues(), getUri(), getMetaModelURI());"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.persistence.Saver.save(getValues(), getUri(), getMetaModelURI())"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self, self.uri, metaModelURI, "EMF", self, false
 		)
@@ -261,7 +261,7 @@ class EMFResource inherits Resource
 	 */
 	method load() : Void is do
 		self.clear
-		@compiledJavaExtern "org.kermeta.compil.runtime.helper.persistence.Loader.load(getValues(), getUri(), getMetaModelURI());"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.persistence.Loader.load(getValues(), getUri(), getMetaModelURI())"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
 		    self, uri, metaModelURI, "EMF"
 		)
