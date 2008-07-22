@@ -1,4 +1,4 @@
-/* $Id: KRuntimeException.java,v 1.1 2008-07-01 08:51:45 cfaucher Exp $
+/* $Id: KRuntimeException.java,v 1.2 2008-07-22 07:47:45 cfaucher Exp $
 * Project : org.kermeta.compil.runtime.helper
 * File : KRuntimeException.java
 * License : EPL
@@ -31,5 +31,9 @@ public class KRuntimeException extends Exception {
 
 	public KRuntimeException (EObject eobj) {
 		realException = eobj;
+	}
+	
+	public KRuntimeException (String message) {
+		
 	}
 }
