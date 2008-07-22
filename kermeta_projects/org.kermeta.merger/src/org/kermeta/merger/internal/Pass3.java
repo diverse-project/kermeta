@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass3.java,v 1.5 2008-06-11 13:45:09 ftanguy Exp $
+/*$Id: Pass3.java,v 1.6 2008-07-22 13:22:04 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass3.java
 * License : EPL
@@ -92,42 +92,31 @@ public class Pass3 extends MergePass {
 	 */
 	private void removeDuplicateInheritance(ClassDefinition newDefinition) {
 		
-		List<Type> list_typeToRemove = new ArrayList<Type>();
-		list_typeToRemove.clear();
+		List<Type> list_typeToKeep = new ArrayList<Type>();
 		
-		int i=0;
-		for(Type type : newDefinition.getSuperType()) {
-			
-			int j=0;
-			for(Type tmp_type : newDefinition.getSuperType()) {
-				
-				// if i==j, that's me
-				if( i!=j && !list_typeToRemove.contains(tmp_type) && TypeHelper.getMangledQualifiedName(type).equals(TypeHelper.getMangledQualifiedName(tmp_type)) ) {
-					
-					if( type!=null && tmp_type!=null && type instanceof Class && tmp_type instanceof Class ) {
-						
+		for ( Type type : newDefinition.getSuperType() ) {
+			for ( Type tmp_type : newDefinition.getSuperType() ) {
+				if ( type != tmp_type ) {
+					if ( TypeHelper.getMangledQualifiedName(type).equals(TypeHelper.getMangledQualifiedName(tmp_type)) ) {
 						if( isClassWithTypeVariableBinding((Class) type) ) {
 							if(TypeEqualityChecker.equals(type, tmp_type)) {
-								list_typeToRemove.add(tmp_type);
+								list_typeToKeep.add(tmp_type);
 							}
-						} else {
-							list_typeToRemove.add(tmp_type);
+						} else if ( ! list_typeToKeep.contains(tmp_type) ) {
+							list_typeToKeep.add(tmp_type);
 						}
-					} else {
-						list_typeToRemove.add(tmp_type);
 					}
+				} else if ( ! list_typeToKeep.contains(tmp_type) ) {
+					list_typeToKeep.add(tmp_type);
 				}
-				j++;
 			}
-			i++;
 		}
-		
-		for(Type typeToRemove : list_typeToRemove) {
-			newDefinition.getSuperType().remove(typeToRemove);
-			newDefinition.getContainedType().remove(typeToRemove);
-			typeToRemove=null;
-		}
-		
+				
+		List<Type> l = newDefinition.getSuperType();
+		newDefinition.getSuperType().removeAll(l);
+		newDefinition.getContainedType().retainAll(l);
+		newDefinition.getSuperType().addAll(list_typeToKeep);
+		newDefinition.getContainedType().addAll(list_typeToKeep);		
 	}
 
 	private void setTypes(ClassDefinition newDefinition) {
