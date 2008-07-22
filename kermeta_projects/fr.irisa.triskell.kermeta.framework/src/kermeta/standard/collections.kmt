@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.54 2008-07-21 15:16:15 cfaucher Exp $
+ * $Id: collections.kmt,v 1.55 2008-07-22 07:40:26 cfaucher Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -69,7 +69,7 @@ abstract class Collection<G>
 	 * Adds an element in the Collection (default implementation)
 	 */
 	operation add(element : G) : Void is do
-		@compiledJavaExtern "CollectionUtil.add(this, element)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.add(this, element)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(self, element)
 	end
 	
@@ -84,7 +84,7 @@ abstract class Collection<G>
 		from elem := self.detect { e | e == element }
         until elem == void
         loop
-        	@compiledJavaExtern "CollectionUtil.remove(this, elem)"
+        	@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.remove(this, elem)"
         	extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
             elem := self.detect { e | e == element }
         end
@@ -94,7 +94,7 @@ abstract class Collection<G>
 	 * Removes all elements from the Collection
 	 */
 	operation clear() : Void is do
-		@compiledJavaExtern "CollectionUtil.clear(this)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.clear(this)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.clear(self)
 	end
 	
@@ -172,7 +172,7 @@ abstract class Collection<G>
 	 * Returns the number of elements in the Collection
 	 */
 	operation size() : Integer is do
-		@compiledJavaExtern "CollectionUtil.size(this)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.size(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.size(self)
 	end
 	
@@ -206,7 +206,7 @@ abstract class Collection<G>
 	 */
 	operation iterator() : Iterator<G> is do
 		result := Iterator<G>.new
-		@compiledJavaExtern "CollectionUtil.iterator(this, result)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.iterator(this, result)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator(self, result)
 	end
 	
@@ -421,7 +421,7 @@ class Set<G> inherits Collection<G>
 	method remove(element : G) : Void is do
 		var elem : G init self.detect { e | e == element }
 		if (elem != void) then
-			@compiledJavaExtern "CollectionUtil.remove(this, elem)"
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.remove(this, elem)"
 			extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
 		end
 	end
@@ -721,7 +721,7 @@ class Bag<G> inherits Collection<G>
 	is do
 		var elem : G init self.detect { e | e.oid == elementOid }
 		if (elem != void) then
-			@compiledJavaExtern "CollectionUtil.remove(this, elem)"
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.remove(this, elem)"
 			extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
 		end
 	end
@@ -732,7 +732,7 @@ class Bag<G> inherits Collection<G>
 	operation removeOne(element : G) : Void is do
 		var elem : G init self.detect { e | e == element }
 		if (elem != void) then
-			@compiledJavaExtern "CollectionUtil.remove(this, elem)"
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.remove(this, elem)"
 			extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
 		end
 	end
@@ -888,7 +888,7 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 		if index < 0 or index > size then
 			raise IndexOutOfBound.new
 		end
-		@compiledJavaExtern "OrderedCollectionUtil.addAt(this, index, element)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil.addAt(this, index, element)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.addAt(self, index, element)
 	end
 	
@@ -901,7 +901,7 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 		if index < 0 or index > size-1 then
 			raise IndexOutOfBound.new
 		end
-		@compiledJavaExtern "OrderedCollectionUtil.removeAt(this, index)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil.removeAt(this, index)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.removeAt(self, index)
 	end
 	
@@ -914,7 +914,7 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 		if index < 0 or index > size-1 then
 			raise IndexOutOfBound.new
 		end
-		@compiledJavaExtern "OrderedCollectionUtil.elementAt(this, index)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil.elementAt(this, index)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.elementAt(self, index)
 	end
 	
@@ -1274,7 +1274,7 @@ class Iterator<G>
 	 * Returns true if the iterator has a next element
 	 */
 	operation hasNext() : Boolean is do
-		@compiledJavaExtern "IteratorUtil.hasNext(this)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.IteratorUtil.hasNext(this)"
 	 	result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext(self)
 	end
 	
@@ -1286,7 +1286,7 @@ class Iterator<G>
 		if not hasNext then
 			raise IteratorIsOff.new
 		end
-		@compiledJavaExtern "(G) IteratorUtil.next(this)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.IteratorUtil.next(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next(self)
 	end
 }
