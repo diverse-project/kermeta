@@ -6,7 +6,7 @@ import kermeta.standard.Collection;
 
 public class OrderedCollectionUtil {
 
-	static public void addAt(Collection c, Object o, int index) {
+	static public void addAt(Collection c, int index, Object o) {
 		try {
 			c.getValues().add(index, o);
 		} catch (NullPointerException e) {
