@@ -2,16 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.27 2008-06-24 11:47:45 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.28 2008-07-22 12:55:42 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
 
 import java.lang.ref.WeakReference;
 import java.util.Collection;
-import java.util.Map;
-import org.eclipse.core.runtime.IProgressMonitor;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -22,7 +19,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xml.type.internal.DataValue.URI.MalformedURIException;
 import org.kermeta.io.IoFactory;
@@ -40,7 +36,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.ecore.EcoreBuildingState;
 import fr.irisa.triskell.kermeta.loader.java.JavaBuildingState;
 import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
-import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -134,7 +129,8 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		if ( 	! kermetaUnitURI.matches("platform:/plugin/.+") 
 			&& 	! kermetaUnitURI.matches("platform://plugin/.+")
 			&& 	! kermetaUnitURI.matches("platform:/resource/.+") 
-			&&	! kermetaUnitURI.matches("http://.+") 
+			&&	! kermetaUnitURI.matches("http://.+")  
+			&&	! kermetaUnitURI.matches("jar:file:.+")
 			&&	! kermetaUnitURI.matches("file:.+") )
 			throw new URIMalformedException( uri );
 
@@ -189,8 +185,8 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				
 			}
 
-			WeakReference reference = new WeakReference( kermetaUnit );
-	        return (KermetaUnit) reference.get();
+			WeakReference<KermetaUnit> reference = new WeakReference<KermetaUnit>( kermetaUnit );
+	        return reference.get();
 
 		} else
 			return kermetaUnit;
@@ -211,8 +207,8 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		
 		for ( KermetaUnit current : getKermetaUnits() ) {
 			if ( current.getUri().equals(realURI) ) {
-				WeakReference reference = new WeakReference( current );
-		        return (KermetaUnit) reference.get();
+				WeakReference<KermetaUnit> reference = new WeakReference<KermetaUnit>( current );
+		        return reference.get();
 			}
 		}
 		return null;
