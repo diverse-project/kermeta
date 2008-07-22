@@ -1,0 +1,13 @@
+# $Id: uri.map,v 1.1 2008-07-22 16:01:02 dvojtise Exp $
+#
+# This is the values that are correct for daily build
+# You probably have to change it to match your configuration
+# but, please do not commit them it into the CVS
+#"platform:/plugin/"		    "file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/"
+#"platform:/resource/"		"file:/C:/eclipse3.3/eclipse/workspace/org.kermeta.standalone.tests/"
+#"kconf:/loader/"			"file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/"
+
+"platform:/plugin/"		    "file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/"
+"platform:/resource/"		"file:/C:/eclipse3.3/eclipse/workspace/org.kermeta.standalone.tests/"
+"kconf:/loader/"			"jar:file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/kermeta_standalone.jar!/instances/"
+

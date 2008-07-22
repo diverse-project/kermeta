@@ -1,0 +1,22 @@
+@mainClass "testHelloWorld::HelloWorld"
+@mainOperation "main"
+
+package testHelloWorld;
+
+require kermeta
+
+using kermeta::standard
+
+// Test simple Stdio
+
+class HelloWorld {
+
+    operation main() : Void is do
+        stdio.writeln("Hello world")
+    end
+    
+    operation main2() : Void is do
+        stdio.writeln("Hello newworld")
+    end
+}
+

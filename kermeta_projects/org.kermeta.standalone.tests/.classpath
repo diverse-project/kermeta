@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/kermeta_standalone.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/eclipse/emf/common.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/eclipse/emf/ecore.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/eclipse/emf/ecore.xmi.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/eclipse/core.runtime.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/eclipse/equinox.common.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/eclipse/osgi.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/antlr.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/commons-logging.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/junit.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/log4j.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/thirdparty/eclipse/debug.core.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
