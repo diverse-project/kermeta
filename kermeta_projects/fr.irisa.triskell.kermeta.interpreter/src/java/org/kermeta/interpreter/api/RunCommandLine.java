@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.4 2008-05-28 13:36:27 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.5 2008-07-22 15:09:48 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : EPL
@@ -14,12 +14,15 @@ package org.kermeta.interpreter.api;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.security.CodeSource;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
 import org.apache.commons.logging.Log;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -32,6 +35,7 @@ import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_M;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_Merged;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_O;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_P;
+import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_PlatformMapping;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_TypeChecked;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_U;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
@@ -93,6 +97,7 @@ public class RunCommandLine {
 				new Option_O (new Vector<String>()),
 				new Option_U (new Vector<String>()),
 				new Option_M (new Vector<String>()),
+				new Option_PlatformMapping (new Vector<String>()),
 				new Option_TypeChecked (new Vector<String>()),
 				new Option_Merged (new Vector<String>())
 			} 
@@ -118,6 +123,18 @@ public class RunCommandLine {
 			    internalLog.debug ("\t" + kermetaStandardURI);
 			}
 		}
+	    else{
+	    	// use current jar framework
+	    	URL jarURL = locateContainerJar();
+	    	internalLog.debug(" option -K NOT seen. Trying jar protocol with " + jarURL.toExternalForm());
+	    	if(jarURL != null && jarURL.toString().endsWith(".jar")){
+		    	kermetaStandardURI = "jar:" + jarURL.toExternalForm() + "!/src/kermeta/framework.km";
+	    	}
+	    	else{
+
+	    		internalLog.debug(" NOT using jar protocol");
+	    	}
+	    }
 	    if (checkOption.Saw ("-O"))
 		{
 	        internalLog.debug ("option -O was seen with arguments: ");
@@ -152,7 +169,43 @@ public class RunCommandLine {
 				URIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
 			    internalLog.debug ("\t" + file.getName());
 			}
+		}	    
+	    if (checkOption.Saw ("-PlatformMapping"))
+		{
+	        internalLog.debug ("option -PlatformMapping was seen with arguments: ");
+			Iterator<?> it = checkOption.getOption("-PlatformMapping").getParameters().iterator();			
+			if (it.hasNext())
+			{
+				String platformMapping = it.next().toString();
+				URIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI(platformMapping));
+				URIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI(platformMapping));
+			    internalLog.debug ("\t" + platformMapping);
+			}
 		}
+	    if(!checkOption.Saw ("-PlatformMapping") && !checkOption.Saw ("-M")){
+	    	internalLog.debug ("no mapping option seen : trying to use default value with jar protocol and current dir");
+	    	// use current jar framework
+	    	URL jarURL = locateContainerJar();
+	    	if(jarURL != null && jarURL.toString().endsWith(".jar")){
+		    	String platformPluginLocation = "jar:" + jarURL.toExternalForm() + "!/";
+				URIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI(platformPluginLocation));
+				internalLog.debug ("\tplatform:/plugin/ -> " + platformPluginLocation);
+				File currentDir = new File (".");			     
+				try {
+					URIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI("file:/" + currentDir.getCanonicalPath()+"/"));
+					internalLog.debug ("\tplatform:/resource/ -> " + "file:/" + currentDir.getCanonicalPath()+"/");
+				} catch (IOException e) {
+					internalLog.error("cannot set map for platform:/resource/", e );
+				}
+		    	String kconfLocation = "jar:" + jarURL.toExternalForm() + "!/instances/";
+				URIConverterImpl.URI_MAP.put(URI.createURI("kconf:/loader/"), URI.createURI(kconfLocation));
+				internalLog.debug ("\tkconf:/loader/ -> " + kconfLocation);
+	    	}
+	    	else{
+
+	    		internalLog.debug(" NOT using jar protocol");
+	    	}
+	    }
 	    if(checkOption.Saw ("-H"))
 	    {
 	    	checkOption.DisplayHelp(System.out);
@@ -268,4 +321,26 @@ public class RunCommandLine {
 		return null;
 	}
 
+	/**
+	 * retrieve the location of the jar, this is useful in standalone mode in order to get default URI for various files in the jar
+	 * @return
+	 */
+	public static URL locateContainerJar(){
+		try {
+			String qualifiedClassName = RunCommandLine.class.getCanonicalName();
+			Class<?> qc = Class.forName( qualifiedClassName );
+		
+		    CodeSource source = qc.getProtectionDomain().getCodeSource();
+		    if ( source != null ){
+		       URL location = source.getLocation();
+		       return location;
+		    }
+		    else {
+		       return null;
+		    }
+	    } catch (ClassNotFoundException e) {
+			return null;
+		}
+	
+    }
 }

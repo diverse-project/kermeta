@@ -10,16 +10,16 @@ import fr.irisa.triskell.utils.argumentsreader.Option;
 
 /**
 */
-public class Option_M extends Option 
+public class Option_PlatformMapping extends Option 
 {
 	/** */
-	public Option_M (Vector<String> args)
+	public Option_PlatformMapping (Vector<String> args)
 	{
-		setName ("-M");
+		setName ("-PlatformMapping");
 		setNbArgs (1);
 		setInclude ("");
-		setExclude ("-PlatformMap");
-		setHelp ("Indicate a file containing URI_MAP (This is usefull to solve some model loading troubles)");
+		setExclude ("-M");
+		setHelp ("Location used to resolve platform:/resource and plaform:/plugin URIs. Both are mapped to the same location. Location must use file:/ protocol and finish with a /");
 		setMultiple (true);
 		setParameters (args);
 	}
