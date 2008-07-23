@@ -1,6 +1,6 @@
 
 
-/*$Id: ConfigurationCreator.java,v 1.1 2008-07-23 12:34:34 ftanguy Exp $
+/*$Id: ConfigurationCreator.java,v 1.2 2008-07-23 13:45:37 ftanguy Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	ConfigurationCreator.java
 * License : EPL
@@ -31,6 +31,8 @@ import org.kermeta.kruntimeconfiguration.Persistence;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
 /**
+ * A class that offers api to create a runtime configuration for persistency mechanism.
+ * This class is used in a static way by calling createConfiguration method.
  * 
  * @author paco
  *
@@ -38,7 +40,7 @@ import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 public class ConfigurationCreator {
 
 	/**
-	 * 
+	 * Create a runtime configuration for persistency mechanism and save the constructed model into model plugin to be generated.
 	 * @param genModel
 	 * @throws IOException
 	 */
@@ -52,10 +54,17 @@ public class ConfigurationCreator {
 	/**		The configuration object created by this process and to be saved in a file.	*/
 	private Configuration _configuration;
 	
+	/**
+	 * @param genModel
+	 */
 	private ConfigurationCreator(GenModel genModel) {
 		_genModel = genModel;
 	}
 	
+	/**
+	 * Main method that creates the configuration and saves it.
+	 * @throws IOException
+	 */
 	private void doIt() throws IOException {
 		_configuration = KruntimeconfigurationFactory.eINSTANCE.createConfiguration();
 		for ( GenPackage p : _genModel.getGenPackages() ) 
@@ -64,8 +73,8 @@ public class ConfigurationCreator {
 	}
 	
 	/**
-	 * 
-	 * @param p
+	 * Create a piece of configuration for the given package and visit the subpackages.
+	 * @param p The package to inspect for constructing persistence mapping.
 	 */
 	private void updateConfiguration(GenPackage p) {
 		boolean isRegistered = EMFRegistryHelper.isRegistered( getURI(p) );
@@ -76,6 +85,7 @@ public class ConfigurationCreator {
 				_configuration.getPersistenceEntries().add( persistence );
 		} else
 			_configuration.getPersistenceEntries().add( createPersistenceForUnregisteredPackage(p) );
+		// Visiting the subpackages.
 		for ( GenPackage subPackage : p.getSubGenPackages() )
 			updateConfiguration(subPackage);
 	}
@@ -86,7 +96,9 @@ public class ConfigurationCreator {
 	 * @return
 	 */
 	private Persistence createPersistenceForRegisteredPackage(GenPackage p) {
+		// Getting the real uri for the given package.
 		String packageURI = getURI(p);
+		// Try to find an extension matching the uri.
 		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.emf.ecore.generated_package");
 		IConfigurationElement element = null;
 		int i = 0;
@@ -96,13 +108,18 @@ public class ConfigurationCreator {
 				element = currentElement;
 			i++;
 		} while ( i < elements.length && element == null );
+		// Only continue if an element has been found.
 		if ( element != null ) {
+			// Sometimes an extension does not have the "genModel" field set up, so it may cause an exception that we get rid of it.
 			try {
+				// Loading the GenModel coming from plugins.
 				String genModelPath = "platform:/plugin/" + element.getContributor().getName() + "/" + element.getAttribute("genModel");
 				ResourceSet rs = new ResourceSetImpl();
 				Resource resource = rs.getResource( URI.createURI(genModelPath), true );
 				GenModel genModelFromPlugin = (GenModel) resource.getContents().get(0);
+				// Get the package with the given uri.
 				GenPackage genPackageFromPlugin = GenModelUtil.getGenPackage(genModelFromPlugin, packageURI);			
+				// And finally create the configuration persistence for that package.
 				Persistence persistence = KruntimeconfigurationFactory.eINSTANCE.createPersistence();
 				Entry fileExtension = KruntimeconfigurationFactory.eINSTANCE.createEntry();
 				fileExtension.setKey( PersistenceMapping._FILE_EXTENSION_ );

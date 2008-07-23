@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.1 2008-07-21 12:00:24 ftanguy Exp $
+/*$Id: Loader.java,v 1.2 2008-07-23 13:42:34 ftanguy Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Loader.java
 * License : EPL
@@ -43,8 +43,7 @@ public class Loader extends SaverOrLoader {
 		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource( URI.createURI(modelURI), true );
 		for ( EObject o : resource.getContents() )
 			instances.add( l.clone(o) );
-		contents.addAll(instances);
-		//return instances;			
+		contents.addAll(instances);	
 	}
 	
 	/**
@@ -62,9 +61,10 @@ public class Loader extends SaverOrLoader {
 	 * @return
 	 */
 	private EObject clone(EObject o) {
-		EObject sourceObject = (EObject) o;
-		EObject targetObject = createInstance(sourceObject);
-		cloneEObject(sourceObject, targetObject);
+		EObject targetObject = createInstance(o);
+		if ( o == targetObject )
+			return o;
+		cloneEObject(o, targetObject);
 		return targetObject;
 	}
 
