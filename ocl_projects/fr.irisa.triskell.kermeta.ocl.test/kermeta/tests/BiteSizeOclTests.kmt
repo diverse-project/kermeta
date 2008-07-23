@@ -72,50 +72,50 @@ class  BiteSizeOclTests  inherits TestCase
         end 
 
   // boolean literal true
-    operation test01(): Void is
+    operation test01_booleanLiteralTrue(): Void is
         do
             assertSimilar( expect("true"), visitOclXmi("01-booleanLiteralTrue") )
         end
 
   // boolean literal false
-    operation test02(): Void is
+    operation test02_booleanLiteralFalse(): Void is
         do
              assertSimilar( expect("false"), visitOclXmi("02-booleanLiteralFalse"))
         end
         
   // logical and
-    operation test03(): Void is
+    operation test03_logicalConjunction(): Void is
         do
              assertSimilar( expect("true.~and(true)"), visitOclXmi("03-logicalConjunction"))
         end
       
 
   // logical or
-    operation test04(): Void is
+    operation test04_logicalDisjunction(): Void is
         do
             assertSimilar( expect("true.~or(true)"), visitOclXmi("04-logicalDisjunction"))
         end
         
   // euqality
-    operation test05(): Void is
+    operation test05_equality(): Void is
         do
             assertSimilar( expect("true.equals(true)"), visitOclXmi("05-equality"))
         end
 
   // unary minus, integer literal
-    operation test06(): Void is
+    operation test06_integerLiteral(): Void is
         do
             assertSimilar( expect( "5.uminus"), visitOclXmi( "06-integerLiteral"))
         end
 
   // addition
-    operation test07(): Void is
+    operation test07_integerAddition(): Void is
         do
             assertSimilar( expect( "3.plus(4)"), visitOclXmi( "07-integerAddition"))
         end
 
   // subtraction
-    operation test08(): Void is
+    operation test08_integerSubtraction(): Void is
         do
             assertSimilar( expect( "3.minus(4)"), visitOclXmi( "08-integerSubtraction"))
         end
