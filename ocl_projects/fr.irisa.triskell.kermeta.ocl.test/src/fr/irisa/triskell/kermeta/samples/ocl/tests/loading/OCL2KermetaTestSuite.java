@@ -1,37 +1,31 @@
-/* $Id: KermetaTestSuite.java,v 1.2 2008-07-23 13:13:01 dvojtise Exp $
- * Project : Kermeta.interpreter
+/* $Id: OCL2KermetaTestSuite.java,v 1.1 2008-07-23 14:17:59 dvojtise Exp $
+ * Project : fr.irisa.triskell.kermeta.ocl.test
  * File : JunitTestSuite.java
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 27 janv. 2005
  * Authors : 
- * 		Franck FLEUREY (ffleurey@irisa.fr)
- * Description :  	
- * 	see class javadoc.	 
+ * 		Franck Fleurey
+ * 		Mark Skipper
+ * 		Didier Vojtisek 
  */
 package fr.irisa.triskell.kermeta.samples.ocl.tests.loading;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.kermeta.io.plugin.IOPlugin;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
 
 
 /**
- * Interpreter test suite.
- * @author Franck Fleurey
+ * OCL 2 kermeta test suite.
  */
-public class KermetaTestSuite extends TestSuite {
+public class OCL2KermetaTestSuite extends TestSuite {
 
 	static final String RUNTIMEPROJECTNAME = "kermeta_mdk.ocl.tests";
-    static RunJunitFactory runfactory = new RunJunitFactory();
     
     static private IOPlugin ioPlugin;
     
@@ -39,7 +33,7 @@ public class KermetaTestSuite extends TestSuite {
     
 	public static Test suite() {
 		initialize();
-	    return new KermetaTestSuite();
+	    return new OCL2KermetaTestSuite();
 		//return new TestSuite(KermetaTestSuite.class);
 	}    
     
@@ -54,22 +48,13 @@ public class KermetaTestSuite extends TestSuite {
 
    }
      
-	public KermetaTestSuite() {
+	public OCL2KermetaTestSuite() {
 		super();
-
-		// ensure projects are created in the workbench
-		/*IProject project =
-			ResourcesPlugin.getWorkspace().getRoot().getProject(RUNTIMEPROJECTNAME);
-		try{
-			project.create( new NullProgressMonitor() );		
-			project.open( new NullProgressMonitor() );
-		} 
-		catch (CoreException e) {
-			e.printStackTrace();
-		}*/
 		
 /*** BEGIN GENERATED TESTS ***/
 		testWithFile("kermeta/tests","BiteSizeOclTests.kmt" );
+		testWithFile("kermeta/tests","SnackSizeOclTests.kmt" );
+		testWithFile("kermeta/tests","StructuralOclTests.kmt" );
 /*** END GENERATED TESTS ***/
 	}
 
@@ -77,9 +62,8 @@ public class KermetaTestSuite extends TestSuite {
 	public void testWithFile(String dir, String file)  {
 		String uri = null;
 		uri = "platform:/plugin/" + "fr.irisa.triskell.kermeta.ocl.test" + "/" + dir + "/" + file;
-		
-		Test tests = runfactory.addTestsForUnit(uri);
-		addTest( tests );
+				
+		addTest( new RunJunitFactory().addTestsForUnit(uri) );
 	}
 	
 }
