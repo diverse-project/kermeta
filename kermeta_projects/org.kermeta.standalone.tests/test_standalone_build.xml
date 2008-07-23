@@ -1,4 +1,4 @@
-<!-- $Id: test_standalone_build.xml,v 1.2 2008-07-23 08:29:19 dvojtise Exp $ -->
+<!-- $Id: test_standalone_build.xml,v 1.3 2008-07-23 12:37:28 dvojtise Exp $ -->
 <project name="run standalone interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -76,7 +76,7 @@
 		description="run standalone tests" depends="check.required-properties, compile_java">
 	    <mkdir dir="${report.dir}"/> 
 	    <mkdir dir="${report.dir}/html"/>
-		<junit printsummary="yes" haltonfailure="no" fork="yes">
+		<junit printsummary="yes" haltonfailure="no" fork="yes" showoutput="false">
 		  	<classpath>
 		  		<pathelement location="${build.bin}"/>
 				<path refid="standalone.class.path"/> 
