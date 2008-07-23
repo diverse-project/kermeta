@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.34 2008-07-22 07:36:23 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.35 2008-07-23 08:22:14 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -46,7 +46,7 @@ package structure {
 				// The current property could have a setter
 				if not self.isReadOnly then
 					// todo compile the setter in an EAnnotation
-				end 
+				end
 				// todo compile the getter in an EAnnotation
 			end
 		end
@@ -230,14 +230,6 @@ package structure {
 			var str_tpb : String init ""
 			var i : Integer init 0
 			self.typeParamBinding.each{ tpb |
-				/*if tpb.type.isInstanceOf(ParameterizedType) then
-					str_tpb := str_tpb + tpb.type.asType(ParameterizedType).typeDefinition.name
-				else
-					if tpb.type.isInstanceOf(PrimitiveType) then
-						str_tpb := str_tpb + tpb.type.asType(ParameterizedType).typeDefinition.name
-					end
-					stdio.writeln("tpb.type.asType(ParameterizedType)" + tpb.type.toString())
-				end*/
 				
 				if i==1 then
 					str_tpb := str_tpb + ", "
@@ -246,7 +238,6 @@ package structure {
 				end
 				
 				str_tpb := str_tpb + tpb.type.createBehaviorJava(context)
-				//str_tpb := str_tpb + tpb.type.getTypeQName().replace("::",".")
 				
 			}
 			if str_tpb!="" then
@@ -319,14 +310,14 @@ package behavior {
 			
 			//EMF adds automatically the first {, thus we are checking if the container of the current block
 			//is an Operation, else a { is printed
-			if not self.container.isInstanceOf(Operation) then
+			if (not self.container.isInstanceOf(Operation)) and (not self.container.isInstanceOf(LambdaExpression)) then
 				javaCode.append("{\n")
 			end
 						
 			//At the beginning of each block, the need of "try" block is checked
-			//if self.containsRescue() then
+			if self.containsRescue() then
 				javaCode.append("try {")
-			//end
+			end
 						
 			self.eachOwnedElement{ stm |
 				javaCode.append("\n\t")
@@ -335,19 +326,21 @@ package behavior {
 			}
 			
 			if self.containsRescue() then
-				javaCode.append("} catch( " + context.JAVA_CLASS_EXCEPTION_SWITCHER + " " + context.VARIABLE_EXCEPTION_SWITCHER + " ) {\n")
+				context.pushKRErrorStack()
+				javaCode.append("} catch( " + context.JAVA_CLASS_EXCEPTION_SWITCHER + " " + context.VARIABLE_EXCEPTION_SWITCHER + "_" + context.kRErrorStack.peek() + " ) {\n")
 				//result := result + "(" + self.exceptionType.createBehaviorJava(context) + " " + self.exceptionName + ")"
 				
 				self.rescueBlock.each{ e |
 					javaCode.append(e.createBehaviorJava(context))
 				}
 				javaCode.append("\n}\n")
+				context.kRErrorStack.pop()
 			else
-				javaCode.append("} catch( Exception e ) {\ne.printStackTrace();\n}\n")
+				//javaCode.append("} catch( Exception e ) {\ne.printStackTrace();\n}\n")
 			end
 
 			//end of a block 
-			if not self.container.isInstanceOf(Operation) then
+			if (not self.container.isInstanceOf(Operation)) and (not self.container.isInstanceOf(LambdaExpression)) then
 				javaCode.append("}")
 			end		
 			result := javaCode.toString()
@@ -431,13 +424,34 @@ package behavior {
 			var static_call : String init ""
 			
 			if self.isCallFeatureAsStaticOperation() then
-				/*if self.staticOperation.isFunctionType() then
+			
+				if self.staticOperation.isFunctionType() then
 					context.tasks_stack.push("FunctionType_Compilation")
 					//Stack Over Flow to solve:
 					stdio.writeln("context.tasks_stack.peek(): " + context.tasks_stack.peek() + " - " + self.staticOperation.name)
-					self.staticOperation.createBehaviorJava(context)
-					context.tasks_stack.pop()
-				end*/
+					
+					//Retrieve the corresponding CallFeature for setting the name of the searched call variable
+					self.staticOperation.ownedParameter.each{ p |
+						if p.type.isInstanceOf(FunctionType) then
+							context.current_param_ft := p.name
+						end
+					}
+					
+					//Lambda expression to inline
+					if self.parameters.one().isInstanceOf(LambdaExpression) then
+						context.ftStack.push(self.parameters.one().asType(LambdaExpression))
+					end
+					
+					var ft_str : String init ""
+					
+					ft_str := ft_str + "result_functionType = null;\n"
+					ft_str := ft_str + self.staticOperation.body.createBehaviorJava(context)
+					
+					result := result + ft_str.replace("this", self.target.createBehaviorJava(context))
+					
+					stdio.writeln(ft_str)
+					
+				end
 				
 				if self.staticOperation.container().asType(ClassDefinition).isValueType() then
 				
@@ -638,13 +652,32 @@ package behavior {
 			super(context)
 			result := ""
 
-			if self.name == "stdio" then
-				result := result + "System.out"
-			else
-				result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context)
-			end
+			if (context.tasks_stack.peek() == "FunctionType_Compilation") and (context.current_param_ft == self.name) then
+				context.tasks_stack.pop()
+				var theLambdaExp : LambdaExpression init context.ftStack.pop()
+						
+				var str_toInclude : String init ""
+				
+				var inc_param : Integer init 0
+				theLambdaExp.parameters.each{ p |
+					str_toInclude := str_toInclude + self.parameters.elementAt(inc_param).staticType.createBehaviorJava(context) + " " + p.name
+					str_toInclude := str_toInclude + " = " + self.parameters.elementAt(inc_param).createBehaviorJava(context) + ";\n"
+					inc_param := inc_param + 1
+				}
+				
+				//Add the compiled version of the body of the current LambdaExpression		
+				result := result + str_toInclude + theLambdaExp.body.createBehaviorJava(context)
 			
-			result := result + self.endOfExpressionFixer()
+			else
+				if self.name == "stdio" then
+					result := result + "System.out"
+				else
+					result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context)
+				end
+				
+				result := result + self.endOfExpressionFixer()
+			
+			end
 		end
 	}
 	
@@ -734,7 +767,7 @@ package behavior {
 						result := result + tabLeft.elementAt(i) + "."
 					end
 					if i == (tabLeft.size()-1) then
-						result := result + "set" + self.target.asType(CallFeature).name.capName() + "(" + ppCast + right + ")"
+						result := result + "set" + self.target.asType(CallFeature).name.capName() + "(" + ppCast + right + ");"
 					end
 					i := i+1
 				end
@@ -742,7 +775,7 @@ package behavior {
 			else
 				result := left + " = " + ppCast + right
 			end
-
+			
 		end
 	}
 	
@@ -788,9 +821,9 @@ package behavior {
 			
 			super(context)
 		
-			var newEGenericType : EGenericType init EGenericType.new()
-			newEGenericType.eClassifier := context.mu.getEClassifierByQualifiedName("kermeta::exceptions::KRuntimeException")
-			//newEGenericType.eClassifier := self.expression.staticType.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ecoreModelElement
+			/*var newEGenericType : EGenericType init EGenericType.new()
+			newEGenericType.eClassifier := context.mu.getEClassifierByQualifiedName("kermeta::exceptions::KRuntimeError")
+
 			if (not newEGenericType.eClassifier.isVoid()) and (not self.getContainerAsType(Operation).isVoid()) then
 				
 				if not self.getContainerAsType(Operation).asType(Operation).ecoreModelElement.isVoid() then
@@ -801,9 +834,8 @@ package behavior {
 					//We are in the case of a Simk method
 				end
 				
-			end
+			end*/
 			
-			//result := self.expression.createBehaviorJava(context) + "\n"
 			result := "\n\tthrow new " + context.JAVA_CLASS_EXCEPTION_SWITCHER + "( " + self.expression.createBehaviorJava(context) + " );\n"
 		end
 	}
@@ -820,9 +852,9 @@ package behavior {
 			
 				var str_exceptionType : String init self.exceptionType.createBehaviorJava(context)
 				
-				result := result + "if( " + context.VARIABLE_EXCEPTION_SWITCHER + ".getRealException() instanceof " + str_exceptionType + " ) {\n"
+				result := result + "if( " + context.VARIABLE_EXCEPTION_SWITCHER + "_" + context.kRErrorStack.peek() + ".getRealException() instanceof " + str_exceptionType + " ) {\n"
 				
-				result := result + str_exceptionType + " " + self.exceptionName + " = (" + str_exceptionType + ") " + context.VARIABLE_EXCEPTION_SWITCHER  + ".getRealException();\n"
+				result := result + str_exceptionType + " " + self.exceptionName + " = (" + str_exceptionType + ") " + context.VARIABLE_EXCEPTION_SWITCHER + "_" + context.kRErrorStack.peek() + ".getRealException();\n"
 				
 				self.eachOwnedElement{e | 
 					result := result + e.createBehaviorJava(context)
@@ -858,10 +890,10 @@ package behavior {
 			
 			context.pushCondStack()
 			
-			result := "java.lang.Boolean eval_" + context.cond_stack.peek() + " = false;"
-			result := result + "\n\teval_" + context.cond_stack.peek() + " = " + self.condition.createBehaviorJava(context)
+			result := "java.lang.Boolean eval_" + context.condStack.peek() + " = false;"
+			result := result + "\n\teval_" + context.condStack.peek() + " = " + self.condition.createBehaviorJava(context)
 			
-			result := result + "\n\n\tif( eval_" + context.cond_stack.pop() + " ) "
+			result := result + "\n\n\tif( eval_" + context.condStack.pop() + " ) "
 			
 			if not self.thenBody.isVoid() then 
 				result := result + self.thenBody.createBehaviorJava(context) + "\n"
@@ -888,10 +920,10 @@ package behavior {
 				result := result + "\n\t" + self.initialization.createBehaviorJava(context)
 			end
 			
-			result := result + "\n\tjava.lang.Boolean eval_" + context.cond_stack.peek() + " = false;"
-			result := result + "\n\twhile( !eval_" + context.cond_stack.peek() + " ) {"
-			result := result + "\n\teval_" + context.cond_stack.peek() + " = " + self.stopCondition.createBehaviorJava(context) + ";"
-			result := result + "\n\tif ( eval_" + context.cond_stack.pop() + " ) {"
+			result := result + "\n\tjava.lang.Boolean eval_" + context.condStack.peek() + " = false;"
+			result := result + "\n\twhile( !eval_" + context.condStack.peek() + " ) {"
+			result := result + "\n\teval_" + context.condStack.peek() + " = " + self.stopCondition.createBehaviorJava(context) + ";"
+			result := result + "\n\tif ( eval_" + context.condStack.pop() + " ) {"
 			result := result + "\n\t} else "
 			result := result + self.body.createBehaviorJava(context)
 			
@@ -937,6 +969,8 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			super(context)
 			result := "\"" + self.~value.replace("\"", "\\\"") + "\""
+			result := result.replace("\n", "\\n")
+			result := result.replace("\t", "\\t")
 			result := result + self.endOfExpressionFixer()
 		end
 	}

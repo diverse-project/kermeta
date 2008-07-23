@@ -1,10 +1,11 @@
-/* $Id: KermetaHelper.kmt,v 1.9 2008-07-22 07:36:22 cfaucher Exp $
+/* $Id: KermetaHelper.kmt,v 1.10 2008-07-23 08:22:12 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Francois Tanguy <ftanguy@irisa.fr>
  */
 
+@uri "http://www.kermeta.org/km2ecore/helper/kermeta"
 package km2ecore::helper::kermeta;
 
 require "TypeHelper.kmt"

@@ -1,12 +1,13 @@
-/* $Id: KeywordList.kmt,v 1.1 2008-04-21 15:26:24 cfaucher Exp $
+/* $Id: KeywordList.kmt,v 1.2 2008-07-23 08:22:13 cfaucher Exp $
  * Creation date: February 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors:	Vincent MAHE <vmahe@irisa.fr>
  *			Cyril Faucher <cfaucher@irisa.fr>
  */
-
-package kermeta::language;
+ 
+@uri "http://www.kermeta.org/km2ecore/common"
+package km2ecore::common;
 
 require kermeta
 

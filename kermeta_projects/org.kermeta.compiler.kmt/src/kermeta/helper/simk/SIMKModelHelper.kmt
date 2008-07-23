@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.1 2008-07-22 07:36:22 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.2 2008-07-23 08:22:13 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -6,6 +6,7 @@
  * 			Cyril Faucher <cfaucher@irisa.fr>
  */
 
+@uri "http://www.kermeta.org/simk"
 package simk;
 
 require kermeta

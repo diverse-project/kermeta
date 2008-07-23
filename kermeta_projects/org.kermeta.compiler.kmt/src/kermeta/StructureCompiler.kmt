@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.36 2008-07-10 15:22:26 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.37 2008-07-23 08:22:14 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -10,6 +10,7 @@
 @mainClass "kermeta::compiler::Main"
 @mainOperation "main_inner"
 
+@uri "http://www.kermeta.org/kermeta/compiler"
 package kermeta::compiler;
 
 require kermeta
@@ -39,9 +40,11 @@ class Main {
 		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.ecore"
 		//var traceInput : String init ""//platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.traceability"
 
+/*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/framework.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/framework.ecore"
 		var traceInput : String init ""
+*/
 		
 		//var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/EDataType.main_merged.km"
 		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/EDataType.main_merged.ecore"
@@ -50,6 +53,18 @@ class Main {
 		//var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.km"
 		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.ecore"
 		//var traceInput : String init ""
+		
+/*
+		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/NewInteger.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/NewInteger.ecore"
+		var traceInput : String init ""
+*/
+
+
+		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.ecore"
+		var traceInput : String init ""
+
 
 		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
@@ -160,6 +175,41 @@ class Main {
 			var cd : ClassDefinition init td.asType(ClassDefinition)
 			result := cd.name + " " + cd.isValueType().toString()
 		end
+    end
+    
+    
+    
+    
+    operation main_mode3(modelInput : String, traceInput : String, output : String, mode : CompilingMode) : Void is do
+
+		// Creating and initializing the context
+		context := KM2EcoreContext.new
+		context.initialize( modelInput, traceInput )
+		
+		context.mode := mode
+		
+		
+		context.mu.getAllPackages().each{ p |
+			
+			stdio.writeln(p.asType(Package).name)
+			
+			p.asType(Package).eachOwnedElement{ cd |
+				if cd.isInstanceOf(ClassDefinition) then
+				cd.asType(ClassDefinition).eachOwnedElement{ op |
+					if op.isInstanceOf(Operation) then
+						stdio.writeln("================= " + op.asType(Operation).name + " =================")
+						op.asType(Operation).createBehaviorJava(context)
+					end
+					}
+				end
+			}
+			
+		}
+		
+		
+		stdio.writeln("KermetaCompiler - Pass 2 is finished")
+		stdio.writeln("Finish")
+		
     end
    	
 }

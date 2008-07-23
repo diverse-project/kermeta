@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.21 2008-07-22 07:36:22 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.22 2008-07-23 08:22:14 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -6,6 +6,7 @@
  *			Cyril Faucher <cfaucher@irisa.fr>
  */
 
+@uri "http://www.kermeta.org/km2ecore"
 package km2ecore;
 
 
@@ -20,6 +21,8 @@ require "pass0/Pass0.kmt"
 
 using kermeta::language
 using kermeta::language::structure
+using kermeta::language::behavior
+using km2ecore::common
 using km2ecore::helper::kermeta
 using traceability
 using kermeta::persistence
@@ -48,9 +51,17 @@ class KM2EcoreContext
 	
 	reference tasks_stack : Stack<String> [0..1]
 	
-	reference cond_stack : Stack<String> [0..1]
+	reference condStack : Stack<String> [0..1]
 	
-	attribute inc : Integer [0..1]
+	reference ftStack : Stack<LambdaExpression> [0..1]
+	
+	reference kRErrorStack : Stack<String> [0..1]
+	
+	attribute inc_condStack : Integer [0..1]
+	
+	attribute inc_kRErrorStack : Integer [0..1]
+	
+	attribute current_param_ft : String [0..1]
 	
 	/** Unique instance of the JavaKeyWordList */
 	reference javaKeyWordList : JavaKeyWordList [0..1]
@@ -90,13 +101,19 @@ class KM2EcoreContext
 		self.tasks_stack := Stack<String>.new
 		self.tasks_stack.push("Start")
 		
-		self.cond_stack := Stack<String>.new
-		self.inc := 0
+		self.condStack := Stack<String>.new
+		self.inc_condStack := 0
+		
+		self.kRErrorStack := Stack<String>.new
+		self.inc_kRErrorStack := 0
 		
 		self.initializeConstants()
 		self.compiledJavaExtern := ""
 		
 		self.current_valueType := void
+		
+		self.ftStack := Stack<LambdaExpression>.new()
+		self.current_param_ft := ""
 		
 		// Initializing the java keywords list.
 		javaKeyWordList := JavaKeyWordList.new
@@ -130,7 +147,7 @@ class KM2EcoreContext
 	 * Initialize the constants
 	 */
 	operation initializeConstants() : Void is do
-		self.JAVA_CLASS_EXCEPTION_SWITCHER := "org.kermeta.compil.runtime.helper.exception.KRuntimeException"
+		self.JAVA_CLASS_EXCEPTION_SWITCHER := "org.kermeta.compil.runtime.helper.error.KRuntimeError"
 		self.VARIABLE_EXCEPTION_SWITCHER := "ex_switcher"
 		
 		//self.GENMODEL_ANNOTATION := "http://www.eclipse.org/emf/2002/GenModel"
@@ -138,10 +155,17 @@ class KM2EcoreContext
 		//self. := ""
 	end
 	
+	
 	operation pushCondStack() : Void is do
-		self.inc := self.inc + 1
-		self.cond_stack.push(self.inc.toString())
+		self.inc_condStack := self.inc_condStack + 1
+		self.condStack.push(self.inc_condStack.toString())
 	end
+	
+	operation pushKRErrorStack() : Void is do
+		self.inc_kRErrorStack := self.inc_kRErrorStack + 1
+		self.kRErrorStack.push(self.inc_kRErrorStack.toString())
+	end
+	
 	
 	operation save() : Void is do
 	

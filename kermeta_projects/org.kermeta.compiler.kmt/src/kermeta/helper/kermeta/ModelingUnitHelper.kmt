@@ -1,4 +1,4 @@
-/* $Id: ModelingUnitHelper.kmt,v 1.4 2008-07-10 15:22:25 cfaucher Exp $
+/* $Id: ModelingUnitHelper.kmt,v 1.5 2008-07-23 08:22:12 cfaucher Exp $
  * Creation date: May 19, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -10,6 +10,7 @@ package kermeta::language::structure;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
+require "PackageHelper.kmt"
 
 using kermeta::standard
 using ecore
@@ -42,6 +43,17 @@ aspect class ModelingUnit {
 			c.name == set_qname.at(set_qname.size()-1)
 		}
 	end
+	
+	
+	operation getAllPackages() : OrderedSet<Package> is do
+		result := OrderedSet<Package>.new()
+				
+		var pack : Package init self.packages.each{ p |
+			result.addAll(p.getAllSubPackages())
+		}
+
+	end
+	
 	
 	operation retrievePackage( qname : String ) : Package is do
 		var set_qname : OrderedSet<String> init qname.split("::")

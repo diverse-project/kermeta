@@ -1,10 +1,11 @@
-/* $Id: JavaHelper.kmt,v 1.2 2008-06-11 13:46:51 cfaucher Exp $
+/* $Id: JavaHelper.kmt,v 1.3 2008-07-23 08:22:14 cfaucher Exp $
  * Creation date: April 08, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Cyril Faucher <cfaucher@irisa.fr>
  */
 
+@uri "http://www.kermeta.org/km2ecore/helper/java"
 package km2ecore::helper::java;
 
 require "IdentifierHelper.kmt"
