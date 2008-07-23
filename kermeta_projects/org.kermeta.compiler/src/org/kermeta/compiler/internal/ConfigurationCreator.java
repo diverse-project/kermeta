@@ -1,6 +1,6 @@
 
 
-/*$Id: ConfigurationCreator.java,v 1.1 2008-07-23 08:49:15 ftanguy Exp $
+/*$Id: ConfigurationCreator.java,v 1.1 2008-07-23 12:34:34 ftanguy Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	ConfigurationCreator.java
 * License : EPL
@@ -10,7 +10,7 @@
 * Authors : paco
 */
 
-package org.kermeta.compiler.ui.internal;
+package org.kermeta.compiler.internal;
 
 import java.io.IOException;
 

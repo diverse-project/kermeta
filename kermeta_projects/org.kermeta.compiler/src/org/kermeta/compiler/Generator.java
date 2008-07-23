@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: Generator.java,v 1.3 2008-07-23 08:49:15 ftanguy Exp $
+ * $Id: Generator.java,v 1.4 2008-07-23 12:34:34 ftanguy Exp $
  */
 package org.kermeta.compiler;
 
@@ -70,7 +70,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.JavaRuntime;
-import org.kermeta.compiler.ui.internal.ConfigurationCreator;
+import org.kermeta.compiler.internal.ConfigurationCreator;
 
 
 /**
