@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.13 2008-07-23 15:13:54 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.14 2008-07-23 15:59:22 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -253,7 +253,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			generateRunner(simkConf, projectPath);
 			generateLauncher(simkConf, projectPath);
 			generateWrapper(simkConf, projectPath);
-			//generateExecutionContext(kmFilePath_forReflection, projectPath);
+			generateExecutionContext(kmFilePath_forReflection, projectPath);
 
 			monitor.worked(1);
 		} catch (JETException e) {
@@ -437,7 +437,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			applyTemplate(
 					kmFilePath_forReflection,
 					getTemplateURI(EXECUTION_CONTEXT_JAVA),
-					projectPath.append("/" + SOURCE_DIRECTORY + "org.kermeta.compil.runtime".replace(".", "/") + "ExecutionContext.java"),
+					projectPath.append("/" + UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/ExecutionContext.java"),
 					configuration.isForceOverwrite());
 	}
 	
