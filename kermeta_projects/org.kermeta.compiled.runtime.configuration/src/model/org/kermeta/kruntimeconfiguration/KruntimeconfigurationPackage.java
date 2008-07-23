@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KruntimeconfigurationPackage.java,v 1.1 2008-07-03 15:20:45 ftanguy Exp $
+ * $Id: KruntimeconfigurationPackage.java,v 1.2 2008-07-23 12:37:36 ftanguy Exp $
  */
 package org.kermeta.kruntimeconfiguration;
 
@@ -70,13 +70,13 @@ public interface KruntimeconfigurationPackage extends EPackage {
 	int CONFIGURATION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Entries</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Persistence Entries</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION__ENTRIES = 0;
+	int CONFIGURATION__PERSISTENCE_ENTRIES = 0;
 
 	/**
 	 * The number of structural features of the '<em>Configuration</em>' class.
@@ -126,6 +126,35 @@ public interface KruntimeconfigurationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.kruntimeconfiguration.impl.PersistenceImpl <em>Persistence</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.kruntimeconfiguration.impl.PersistenceImpl
+	 * @see org.kermeta.kruntimeconfiguration.impl.KruntimeconfigurationPackageImpl#getPersistence()
+	 * @generated
+	 */
+	int PERSISTENCE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Entries</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSISTENCE__ENTRIES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Persistence</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSISTENCE_FEATURE_COUNT = 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.kruntimeconfiguration.Configuration <em>Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -136,15 +165,15 @@ public interface KruntimeconfigurationPackage extends EPackage {
 	EClass getConfiguration();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.kruntimeconfiguration.Configuration#getEntries <em>Entries</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.kruntimeconfiguration.Configuration#getPersistenceEntries <em>Persistence Entries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Entries</em>'.
-	 * @see org.kermeta.kruntimeconfiguration.Configuration#getEntries()
+	 * @return the meta object for the containment reference list '<em>Persistence Entries</em>'.
+	 * @see org.kermeta.kruntimeconfiguration.Configuration#getPersistenceEntries()
 	 * @see #getConfiguration()
 	 * @generated
 	 */
-	EReference getConfiguration_Entries();
+	EReference getConfiguration_PersistenceEntries();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.kruntimeconfiguration.Entry <em>Entry</em>}'.
@@ -179,6 +208,27 @@ public interface KruntimeconfigurationPackage extends EPackage {
 	EAttribute getEntry_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.kruntimeconfiguration.Persistence <em>Persistence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Persistence</em>'.
+	 * @see org.kermeta.kruntimeconfiguration.Persistence
+	 * @generated
+	 */
+	EClass getPersistence();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.kruntimeconfiguration.Persistence#getEntries <em>Entries</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Entries</em>'.
+	 * @see org.kermeta.kruntimeconfiguration.Persistence#getEntries()
+	 * @see #getPersistence()
+	 * @generated
+	 */
+	EReference getPersistence_Entries();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -211,12 +261,12 @@ public interface KruntimeconfigurationPackage extends EPackage {
 		EClass CONFIGURATION = eINSTANCE.getConfiguration();
 
 		/**
-		 * The meta object literal for the '<em><b>Entries</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Persistence Entries</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONFIGURATION__ENTRIES = eINSTANCE.getConfiguration_Entries();
+		EReference CONFIGURATION__PERSISTENCE_ENTRIES = eINSTANCE.getConfiguration_PersistenceEntries();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.kruntimeconfiguration.impl.EntryImpl <em>Entry</em>}' class.
@@ -243,6 +293,24 @@ public interface KruntimeconfigurationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ENTRY__VALUE = eINSTANCE.getEntry_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.kruntimeconfiguration.impl.PersistenceImpl <em>Persistence</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.kruntimeconfiguration.impl.PersistenceImpl
+		 * @see org.kermeta.kruntimeconfiguration.impl.KruntimeconfigurationPackageImpl#getPersistence()
+		 * @generated
+		 */
+		EClass PERSISTENCE = eINSTANCE.getPersistence();
+
+		/**
+		 * The meta object literal for the '<em><b>Entries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PERSISTENCE__ENTRIES = eINSTANCE.getPersistence_Entries();
 
 	}
 

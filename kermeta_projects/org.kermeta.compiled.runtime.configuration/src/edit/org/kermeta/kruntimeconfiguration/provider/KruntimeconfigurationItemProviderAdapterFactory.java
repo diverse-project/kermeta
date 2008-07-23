@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KruntimeconfigurationItemProviderAdapterFactory.java,v 1.1 2008-07-03 15:20:45 ftanguy Exp $
+ * $Id: KruntimeconfigurationItemProviderAdapterFactory.java,v 1.2 2008-07-23 12:37:37 ftanguy Exp $
  */
 package org.kermeta.kruntimeconfiguration.provider;
 
@@ -122,6 +122,29 @@ public class KruntimeconfigurationItemProviderAdapterFactory extends Kruntimecon
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.kruntimeconfiguration.Persistence} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PersistenceItemProvider persistenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.kruntimeconfiguration.Persistence}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPersistenceAdapter() {
+		if (persistenceItemProvider == null) {
+			persistenceItemProvider = new PersistenceItemProvider(this);
+		}
+
+		return persistenceItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -222,6 +245,7 @@ public class KruntimeconfigurationItemProviderAdapterFactory extends Kruntimecon
 	public void dispose() {
 		if (configurationItemProvider != null) configurationItemProvider.dispose();
 		if (entryItemProvider != null) entryItemProvider.dispose();
+		if (persistenceItemProvider != null) persistenceItemProvider.dispose();
 	}
 
 }

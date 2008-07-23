@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KruntimeconfigurationAdapterFactory.java,v 1.1 2008-07-03 15:20:44 ftanguy Exp $
+ * $Id: KruntimeconfigurationAdapterFactory.java,v 1.2 2008-07-23 12:37:35 ftanguy Exp $
  */
 package org.kermeta.kruntimeconfiguration.util;
 
@@ -64,7 +64,7 @@ public class KruntimeconfigurationAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -78,6 +78,10 @@ public class KruntimeconfigurationAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseEntry(Entry object) {
 				return createEntryAdapter();
+			}
+			@Override
+			public Adapter casePersistence(Persistence object) {
+				return createPersistenceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -124,6 +128,20 @@ public class KruntimeconfigurationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.kruntimeconfiguration.Persistence <em>Persistence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.kruntimeconfiguration.Persistence
+	 * @generated
+	 */
+	public Adapter createPersistenceAdapter() {
 		return null;
 	}
 

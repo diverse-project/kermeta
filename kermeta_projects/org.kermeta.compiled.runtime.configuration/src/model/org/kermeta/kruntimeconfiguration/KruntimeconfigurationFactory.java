@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KruntimeconfigurationFactory.java,v 1.1 2008-07-03 15:20:45 ftanguy Exp $
+ * $Id: KruntimeconfigurationFactory.java,v 1.2 2008-07-23 12:37:36 ftanguy Exp $
  */
 package org.kermeta.kruntimeconfiguration;
 
@@ -42,6 +42,15 @@ public interface KruntimeconfigurationFactory extends EFactory {
 	 * @generated
 	 */
 	Entry createEntry();
+
+	/**
+	 * Returns a new object of class '<em>Persistence</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Persistence</em>'.
+	 * @generated
+	 */
+	Persistence createPersistence();
 
 	/**
 	 * Returns the package supported by this factory.

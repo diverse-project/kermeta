@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KruntimeconfigurationFactoryImpl.java,v 1.1 2008-07-03 15:20:45 ftanguy Exp $
+ * $Id: KruntimeconfigurationFactoryImpl.java,v 1.2 2008-07-23 12:37:36 ftanguy Exp $
  */
 package org.kermeta.kruntimeconfiguration.impl;
 
@@ -62,6 +62,7 @@ public class KruntimeconfigurationFactoryImpl extends EFactoryImpl implements Kr
 		switch (eClass.getClassifierID()) {
 			case KruntimeconfigurationPackage.CONFIGURATION: return createConfiguration();
 			case KruntimeconfigurationPackage.ENTRY: return createEntry();
+			case KruntimeconfigurationPackage.PERSISTENCE: return createPersistence();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -85,6 +86,16 @@ public class KruntimeconfigurationFactoryImpl extends EFactoryImpl implements Kr
 	public Entry createEntry() {
 		EntryImpl entry = new EntryImpl();
 		return entry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Persistence createPersistence() {
+		PersistenceImpl persistence = new PersistenceImpl();
+		return persistence;
 	}
 
 	/**

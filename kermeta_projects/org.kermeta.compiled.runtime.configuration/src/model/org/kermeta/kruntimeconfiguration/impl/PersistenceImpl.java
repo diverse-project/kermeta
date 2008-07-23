@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConfigurationImpl.java,v 1.2 2008-07-23 12:37:36 ftanguy Exp $
+ * $Id: PersistenceImpl.java,v 1.1 2008-07-23 12:37:35 ftanguy Exp $
  */
 package org.kermeta.kruntimeconfiguration.impl;
 
@@ -20,40 +20,40 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.kermeta.kruntimeconfiguration.Configuration;
 import org.kermeta.kruntimeconfiguration.Entry;
 import org.kermeta.kruntimeconfiguration.KruntimeconfigurationPackage;
 import org.kermeta.kruntimeconfiguration.Persistence;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Configuration</b></em>'.
+ * An implementation of the model object '<em><b>Persistence</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.kruntimeconfiguration.impl.ConfigurationImpl#getPersistenceEntries <em>Persistence Entries</em>}</li>
+ *   <li>{@link org.kermeta.kruntimeconfiguration.impl.PersistenceImpl#getEntries <em>Entries</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ConfigurationImpl extends EObjectImpl implements Configuration {
+public class PersistenceImpl extends EObjectImpl implements Persistence {
 	/**
-	 * The cached value of the '{@link #getPersistenceEntries() <em>Persistence Entries</em>}' containment reference list.
+	 * The cached value of the '{@link #getEntries() <em>Entries</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPersistenceEntries()
+	 * @see #getEntries()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Persistence> persistenceEntries;
+	protected EList<Entry> entries;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConfigurationImpl() {
+	protected PersistenceImpl() {
 		super();
 	}
 
@@ -64,7 +64,7 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return KruntimeconfigurationPackage.Literals.CONFIGURATION;
+		return KruntimeconfigurationPackage.Literals.PERSISTENCE;
 	}
 
 	/**
@@ -72,11 +72,11 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Persistence> getPersistenceEntries() {
-		if (persistenceEntries == null) {
-			persistenceEntries = new EObjectContainmentEList<Persistence>(Persistence.class, this, KruntimeconfigurationPackage.CONFIGURATION__PERSISTENCE_ENTRIES);
+	public EList<Entry> getEntries() {
+		if (entries == null) {
+			entries = new EObjectContainmentEList<Entry>(Entry.class, this, KruntimeconfigurationPackage.PERSISTENCE__ENTRIES);
 		}
-		return persistenceEntries;
+		return entries;
 	}
 
 	/**
@@ -87,8 +87,8 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KruntimeconfigurationPackage.CONFIGURATION__PERSISTENCE_ENTRIES:
-				return ((InternalEList<?>)getPersistenceEntries()).basicRemove(otherEnd, msgs);
+			case KruntimeconfigurationPackage.PERSISTENCE__ENTRIES:
+				return ((InternalEList<?>)getEntries()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -101,8 +101,8 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KruntimeconfigurationPackage.CONFIGURATION__PERSISTENCE_ENTRIES:
-				return getPersistenceEntries();
+			case KruntimeconfigurationPackage.PERSISTENCE__ENTRIES:
+				return getEntries();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -116,9 +116,9 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KruntimeconfigurationPackage.CONFIGURATION__PERSISTENCE_ENTRIES:
-				getPersistenceEntries().clear();
-				getPersistenceEntries().addAll((Collection<? extends Persistence>)newValue);
+			case KruntimeconfigurationPackage.PERSISTENCE__ENTRIES:
+				getEntries().clear();
+				getEntries().addAll((Collection<? extends Entry>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -132,8 +132,8 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KruntimeconfigurationPackage.CONFIGURATION__PERSISTENCE_ENTRIES:
-				getPersistenceEntries().clear();
+			case KruntimeconfigurationPackage.PERSISTENCE__ENTRIES:
+				getEntries().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -147,10 +147,10 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KruntimeconfigurationPackage.CONFIGURATION__PERSISTENCE_ENTRIES:
-				return persistenceEntries != null && !persistenceEntries.isEmpty();
+			case KruntimeconfigurationPackage.PERSISTENCE__ENTRIES:
+				return entries != null && !entries.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //ConfigurationImpl
+} //PersistenceImpl

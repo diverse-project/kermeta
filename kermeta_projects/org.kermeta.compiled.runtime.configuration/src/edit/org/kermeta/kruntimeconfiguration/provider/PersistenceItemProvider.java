@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConfigurationItemProvider.java,v 1.2 2008-07-23 12:37:37 ftanguy Exp $
+ * $Id: PersistenceItemProvider.java,v 1.1 2008-07-23 12:37:37 ftanguy Exp $
  */
 package org.kermeta.kruntimeconfiguration.provider;
 
@@ -26,23 +26,23 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.kermeta.kruntimeconfiguration.Configuration;
 import org.kermeta.kruntimeconfiguration.KruntimeconfigurationFactory;
 import org.kermeta.kruntimeconfiguration.KruntimeconfigurationPackage;
+import org.kermeta.kruntimeconfiguration.Persistence;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.kruntimeconfiguration.Configuration} object.
+ * This is the item provider adapter for a {@link org.kermeta.kruntimeconfiguration.Persistence} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ConfigurationItemProvider
+public class PersistenceItemProvider
 	extends ItemProviderAdapter
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -50,7 +50,7 @@ public class ConfigurationItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConfigurationItemProvider(AdapterFactory adapterFactory) {
+	public PersistenceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -81,7 +81,7 @@ public class ConfigurationItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(KruntimeconfigurationPackage.Literals.CONFIGURATION__PERSISTENCE_ENTRIES);
+			childrenFeatures.add(KruntimeconfigurationPackage.Literals.PERSISTENCE__ENTRIES);
 		}
 		return childrenFeatures;
 	}
@@ -100,14 +100,14 @@ public class ConfigurationItemProvider
 	}
 
 	/**
-	 * This returns Configuration.gif.
+	 * This returns Persistence.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Configuration"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Persistence"));
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class ConfigurationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Configuration_type");
+		return getString("_UI_Persistence_type");
 	}
 
 	/**
@@ -132,8 +132,8 @@ public class ConfigurationItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Configuration.class)) {
-			case KruntimeconfigurationPackage.CONFIGURATION__PERSISTENCE_ENTRIES:
+		switch (notification.getFeatureID(Persistence.class)) {
+			case KruntimeconfigurationPackage.PERSISTENCE__ENTRIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -153,8 +153,8 @@ public class ConfigurationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KruntimeconfigurationPackage.Literals.CONFIGURATION__PERSISTENCE_ENTRIES,
-				 KruntimeconfigurationFactory.eINSTANCE.createPersistence()));
+				(KruntimeconfigurationPackage.Literals.PERSISTENCE__ENTRIES,
+				 KruntimeconfigurationFactory.eINSTANCE.createEntry()));
 	}
 
 	/**

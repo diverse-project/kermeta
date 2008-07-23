@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KruntimeconfigurationPackageImpl.java,v 1.1 2008-07-03 15:20:45 ftanguy Exp $
+ * $Id: KruntimeconfigurationPackageImpl.java,v 1.2 2008-07-23 12:37:35 ftanguy Exp $
  */
 package org.kermeta.kruntimeconfiguration.impl;
 
@@ -17,6 +17,7 @@ import org.kermeta.kruntimeconfiguration.Configuration;
 import org.kermeta.kruntimeconfiguration.Entry;
 import org.kermeta.kruntimeconfiguration.KruntimeconfigurationFactory;
 import org.kermeta.kruntimeconfiguration.KruntimeconfigurationPackage;
+import org.kermeta.kruntimeconfiguration.Persistence;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,6 +39,13 @@ public class KruntimeconfigurationPackageImpl extends EPackageImpl implements Kr
 	 * @generated
 	 */
 	private EClass entryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass persistenceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -121,7 +129,7 @@ public class KruntimeconfigurationPackageImpl extends EPackageImpl implements Kr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getConfiguration_Entries() {
+	public EReference getConfiguration_PersistenceEntries() {
 		return (EReference)configurationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -157,6 +165,24 @@ public class KruntimeconfigurationPackageImpl extends EPackageImpl implements Kr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPersistence() {
+		return persistenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPersistence_Entries() {
+		return (EReference)persistenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public KruntimeconfigurationFactory getKruntimeconfigurationFactory() {
 		return (KruntimeconfigurationFactory)getEFactoryInstance();
 	}
@@ -181,11 +207,14 @@ public class KruntimeconfigurationPackageImpl extends EPackageImpl implements Kr
 
 		// Create classes and their features
 		configurationEClass = createEClass(CONFIGURATION);
-		createEReference(configurationEClass, CONFIGURATION__ENTRIES);
+		createEReference(configurationEClass, CONFIGURATION__PERSISTENCE_ENTRIES);
 
 		entryEClass = createEClass(ENTRY);
 		createEAttribute(entryEClass, ENTRY__KEY);
 		createEAttribute(entryEClass, ENTRY__VALUE);
+
+		persistenceEClass = createEClass(PERSISTENCE);
+		createEReference(persistenceEClass, PERSISTENCE__ENTRIES);
 	}
 
 	/**
@@ -219,11 +248,14 @@ public class KruntimeconfigurationPackageImpl extends EPackageImpl implements Kr
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(configurationEClass, Configuration.class, "Configuration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConfiguration_Entries(), this.getEntry(), null, "entries", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConfiguration_PersistenceEntries(), this.getPersistence(), null, "persistenceEntries", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entryEClass, Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEntry_Key(), ecorePackage.getEString(), "key", null, 1, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEntry_Value(), ecorePackage.getEString(), "value", null, 1, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(persistenceEClass, Persistence.class, "Persistence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPersistence_Entries(), this.getEntry(), null, "entries", null, 0, -1, Persistence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

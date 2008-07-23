@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KruntimeconfigurationSwitch.java,v 1.1 2008-07-03 15:20:44 ftanguy Exp $
+ * $Id: KruntimeconfigurationSwitch.java,v 1.2 2008-07-23 12:37:35 ftanguy Exp $
  */
 package org.kermeta.kruntimeconfiguration.util;
 
@@ -99,6 +99,12 @@ public class KruntimeconfigurationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case KruntimeconfigurationPackage.PERSISTENCE: {
+				Persistence persistence = (Persistence)theEObject;
+				T result = casePersistence(persistence);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -130,6 +136,21 @@ public class KruntimeconfigurationSwitch<T> {
 	 * @generated
 	 */
 	public T caseEntry(Entry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Persistence</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Persistence</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePersistence(Persistence object) {
 		return null;
 	}
 
