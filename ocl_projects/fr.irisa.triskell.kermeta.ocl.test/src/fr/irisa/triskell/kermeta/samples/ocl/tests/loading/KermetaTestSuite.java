@@ -1,4 +1,4 @@
-/* $Id: KermetaTestSuite.java,v 1.1 2007-12-07 04:17:33 ffleurey Exp $
+/* $Id: KermetaTestSuite.java,v 1.2 2008-07-23 13:13:01 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -16,6 +16,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.kermeta.io.plugin.IOPlugin;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,20 +31,28 @@ import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
 public class KermetaTestSuite extends TestSuite {
 
 	static final String RUNTIMEPROJECTNAME = "kermeta_mdk.ocl.tests";
-    static RunJunitFactory runfactory = new RunJunitFactory("platform:/resource/"+RUNTIMEPROJECTNAME+"/.bin");
+    static RunJunitFactory runfactory = new RunJunitFactory();
+    
+    static private IOPlugin ioPlugin;
     
 //    private static TestSuite _suite;
     
 	public static Test suite() {
+		initialize();
 	    return new KermetaTestSuite();
 		//return new TestSuite(KermetaTestSuite.class);
 	}    
     
- //   private static void initialize() {
+    private static void initialize() {
     	
-//    	_suite = new TestSuite();
+    	if ( ioPlugin == null ) {
+    		
+    		IOPlugin.LOCAL_USE = true;
+    		ioPlugin = IOPlugin.getDefault();
+	
+    	}
 
- //   }
+   }
      
 	public KermetaTestSuite() {
 		super();
