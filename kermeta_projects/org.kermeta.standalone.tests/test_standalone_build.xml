@@ -1,4 +1,4 @@
-<!-- $Id: test_standalone_build.xml,v 1.1 2008-07-22 16:01:00 dvojtise Exp $ -->
+<!-- $Id: test_standalone_build.xml,v 1.2 2008-07-23 08:29:19 dvojtise Exp $ -->
 <project name="run standalone interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -46,10 +46,20 @@
 		
 	<target name="all" depends="compile_java,test" description="Compile and run the tests."/>
 
-	<target name="init">
+	<target name="check.required-properties">
+	  
+	    <condition property="tmp:dist.location" value="true">
+	        <and>
+	            <!-- check that we really point at the dist directory -->
+	            <available file="${dist.location}" type="dir" />
+	            <available file="${kermeta.standalone.jar}" type="file" />
+	        </and>
+	    </condition>
+	    <fail message="### 'dist.location' does not point at correct distribution directory: ${dist.location}"
+	        unless="tmp:dist.location"/>
 	</target>
 	
-	<target name="compile_java">
+	<target name="compile_java" depends="check.required-properties">
 	    <mkdir dir="${build.bin}"/> 
 		<javac srcdir="${src}" 
     	    destdir="${build.bin}"
@@ -63,7 +73,7 @@
 	
 	
 	<target name="test" 
-		description="run standalone tests" depends="init, compile_java">
+		description="run standalone tests" depends="check.required-properties, compile_java">
 	    <mkdir dir="${report.dir}"/> 
 	    <mkdir dir="${report.dir}/html"/>
 		<junit printsummary="yes" haltonfailure="no" fork="yes">
