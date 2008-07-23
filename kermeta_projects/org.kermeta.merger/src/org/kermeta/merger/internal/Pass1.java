@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass1.java,v 1.6 2008-04-28 11:51:07 ftanguy Exp $
+/*$Id: Pass1.java,v 1.7 2008-07-23 07:28:04 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass1.java
 * License : EPL
@@ -99,6 +99,7 @@ public class Pass1 extends MergePass {
 						if ( ! context.getAspects((ClassDefinition) existingTypedefinition).contains(t) ) {
 							context.addAspect((ClassDefinition) existingTypedefinition, (ClassDefinition) t);
 							createConstraints((ClassDefinition) existingTypedefinition, (ClassDefinition) t);
+							createTags(existingTypedefinition, t);
 						}
 					}
 				}
