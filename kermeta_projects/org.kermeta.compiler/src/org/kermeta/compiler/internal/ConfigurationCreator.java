@@ -1,6 +1,6 @@
 
 
-/*$Id: ConfigurationCreator.java,v 1.2 2008-07-23 13:45:37 ftanguy Exp $
+/*$Id: ConfigurationCreator.java,v 1.3 2008-07-23 15:19:32 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	ConfigurationCreator.java
 * License : EPL
@@ -207,7 +207,7 @@ public class ConfigurationCreator {
 	 * @throws IOException
 	 */
 	private void saveConfiguration() throws IOException {
-		String path = "platform:/resource/" + _genModel.getModelPluginID() + "/models/" + "kermeta.kruntimeconfiguration";
+		String path = "platform:/resource/" + _genModel.getModelPluginID() + "/config/" + "kermeta.kruntimeconfiguration";
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.createResource( URI.createURI(path) );
 		resource.getContents().add(_configuration);
