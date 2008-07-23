@@ -14,24 +14,25 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.kruntimeconfiguration.Configuration;
 import org.kermeta.kruntimeconfiguration.Entry;
 import org.kermeta.kruntimeconfiguration.KruntimeconfigurationPackage;
+import org.kermeta.kruntimeconfiguration.Persistence;
 
 
 final public class PersistenceMapping {
 
 	/**		The constant name for managing a base class.		*/
-	private static final String _BASE_CLASS_NAME_ = "baseClassName";
+	public static final String _BASE_CLASS_NAME_ = "baseClassName";
 
 	/**		The constant name for managing a generated class.		*/
-	private static final String _GENERATED_CLASS_NAME_ = "generatedClassName";
+	public static final String _GENERATED_CLASS_NAME_ = "generatedClassName";
 	
 	/**		The constant name for managing an uri.		*/
-	private static final String _URI_ = "uri";
+	public static final String _URI_ = "uri";
 	
 	/**		The constant name for managing the file extension.		*/
-	private static final String _FILE_EXTENSION_ = "fileExtension";
+	public static final String _FILE_EXTENSION_ = "fileExtension";
 	
 	/**		The constant name for managing the factory.		*/
-	private static final String _FACTORY_CLASS_NAME = "factoryClassName";
+	public static final String _FACTORY_CLASS_NAME = "factoryClassName";
 	
 	/**
 	 * Initialize the mapping used during the kermeta's process loading and saving.
@@ -43,17 +44,19 @@ final public class PersistenceMapping {
 		String uri = null;
 		String fileExtension = null;
 		String factoryClassName = null;
-		for ( Entry e : configuration.getEntries() ) {
-			if ( e.getKey().equals(_BASE_CLASS_NAME_) )
-				baseClassName = e.getValue();
-			else if ( e.getKey().equals(_GENERATED_CLASS_NAME_) )
-				generatedClassName = e.getValue();
-			else if ( e.getKey().equals(_URI_) )
-				uri = e.getValue();
-			else if ( e.getKey().equals(_FILE_EXTENSION_) )
-				fileExtension = e.getValue();
-			else if ( e.getKey().equals(_FACTORY_CLASS_NAME) )
-				factoryClassName = e.getValue();
+		for ( Persistence p : configuration.getPersistenceEntries() ) {
+			for ( Entry e : p.getEntries() ) {
+				if ( e.getKey().equals(_BASE_CLASS_NAME_) )
+					baseClassName = e.getValue();
+				else if ( e.getKey().equals(_GENERATED_CLASS_NAME_) )
+					generatedClassName = e.getValue();
+				else if ( e.getKey().equals(_URI_) )
+					uri = e.getValue();
+				else if ( e.getKey().equals(_FILE_EXTENSION_) )
+					fileExtension = e.getValue();
+				else if ( e.getKey().equals(_FACTORY_CLASS_NAME) )
+					factoryClassName = e.getValue();
+			}
 		}
 		process(baseClassName, generatedClassName, uri, fileExtension, factoryClassName);
 	}
