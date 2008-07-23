@@ -1,6 +1,6 @@
 
 
-/*$Id: WorkbenchTest.java,v 1.3 2008-06-16 15:56:21 dvojtise Exp $
+/*$Id: WorkbenchTest.java,v 1.4 2008-07-23 07:30:50 dvojtise Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	WorkbenchTest.java
 * License : EPL
@@ -61,16 +61,17 @@ public abstract class WorkbenchTest {
 	protected void waitForBuild(IProject p) {
 		try {
 			int nbTries = 0;
-			while ( KpmManager.getDefault().isBeingBuilt(p) && nbTries < 3000) {
-				Thread.sleep(100);
-				System.out.println("waiting for " + p.getFullPath().toString() );
+			while ( KpmManager.getDefault().isBeingBuilt(p) && nbTries < 300) {
+				Thread.sleep(1000);
+				KpmTestPlugin.internalLog.info("waiting for " + p.getFullPath().toString() + " since " +  nbTries + "s");
 				nbTries ++;
 			}
 			// still being build, this means the time out has expired
 			if(KpmManager.getDefault().isBeingBuilt(p))
-				Assert.fail("Build of " + p.getFullPath().toString() + " took too much time (>" +  nbTries*100 + "ms)");
+				Assert.fail("Build of " + p.getFullPath().toString() + " took too much time (>" +  nbTries*1000 + "ms)");
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			KpmTestPlugin.internalLog.error("Build of " + p.getFullPath().toString() + " was interrupted by an Exception " + e.getMessage(), e);
+			Assert.fail("Build of " + p.getFullPath().toString() + " was interrupted by an Exception " + e.getMessage());
 		}
 	}
 	
