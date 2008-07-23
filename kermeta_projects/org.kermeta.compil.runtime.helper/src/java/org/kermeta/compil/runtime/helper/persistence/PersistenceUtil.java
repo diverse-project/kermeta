@@ -19,6 +19,14 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLInfoImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLMapImpl;
 
+/**
+ * Not used for the moment. Experimentation result : loading and saving by just changing the package to use.
+ * 
+ * Does not work when generated code has been hacked structurally like ecore...
+ * 
+ * @author paco
+ *
+ */
 public class PersistenceUtil {
 
 	static public EList<EObject> load(String modelURI, String metamodelURI) {

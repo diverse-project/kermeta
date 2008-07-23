@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.1 2008-07-21 12:00:24 ftanguy Exp $
+/*$Id: SaverOrLoader.java,v 1.2 2008-07-23 13:35:24 ftanguy Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -72,6 +72,9 @@ abstract public class SaverOrLoader {
 		// In factory classes, it is always something like create* where * corresponds to the class name to be created.
 		String creationMethodName = "create" + sourceObject.eClass().getName();
 		for ( EFactory factory : _factories ) {
+			// courtcircuit if possible.
+			if ( sourceObject.eClass().getEPackage().getEFactoryInstance() == factory )
+				return sourceObject;
 			try {
 				Method method = factory.getClass().getMethod(creationMethodName, new Class[] {});
 				EObject targetObject = (EObject) method.invoke(factory, new Object[] {});
@@ -85,7 +88,7 @@ abstract public class SaverOrLoader {
 	}
 	
 	/**
-	 * 
+	 * Get all factories used by the given package and its subpackages.
 	 * @param p
 	 * @return
 	 */
@@ -99,7 +102,7 @@ abstract public class SaverOrLoader {
 	}
 	
 	/**
-	 * 
+	 * Getting the list of all packages contained by the given package.
 	 * @param l
 	 * @param p
 	 */

@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.1 2008-07-21 12:00:24 ftanguy Exp $
+/*$Id: Saver.java,v 1.2 2008-07-23 13:35:24 ftanguy Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Saver.java
 * License : EPL
@@ -68,9 +68,10 @@ public class Saver extends SaverOrLoader {
 	 * @return The cloned object or null if no factory found.
 	 */
 	private EObject clone(EObject o) {
-		EObject sourceObject = (EObject) o;
-		EObject targetObject = createInstance(sourceObject);
-		cloneEObject(sourceObject, targetObject);
+		EObject targetObject = createInstance(o);
+		if ( o == targetObject )
+			return o;
+		cloneEObject(o, targetObject);
 		return targetObject;
 	}
 
