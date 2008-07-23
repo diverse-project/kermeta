@@ -32,6 +32,10 @@ import org.eclipse.gymnast.generator.core.generator.GeneratorContext;
 import org.eclipse.gymnast.generator.core.generator.GeneratorUtil;
 import org.eclipse.gymnast.generator.core.generator.GrammarInfo;
 import org.eclipse.gymnast.generator.core.generator.RuleRefCollector;
+import org.eclipse.gymnast.runtime.core.ast.TokenInfo;
+
+import antlr.Token;
+import antlr.TokenWithIndex;
 
 
 /**
@@ -101,11 +105,24 @@ public class AntlrGrammarWriter extends GymnastASTNodeVisitor {
 		writeln("    }");
 		writeln();
 		
-		writeln("    private TokenInfo createTokenInfo(Token tok) {");
+	    writeln("	private TokenInfo createTokenInfo(Token tok) {");
+	    writeln("		if (tok == null) return null;");
+	    writeln("		else {");
+	    writeln("			if ( tok instanceof TokenWithIndex ) {");
+	    writeln("				TokenWithIndex t = (TokenWithIndex) tok;");
+	    writeln("				int offset = t.getIndex();");
+	    writeln("				return new TokenInfo(t.getText(), t.getLine(), t.getColumn(), offset, t.getType());");
+	    writeln("			} else {");
+	    writeln("				return new TokenInfo(tok.getText(), tok.getLine(), tok.getColumn(), -1, tok.getType());");
+	    writeln("			}");
+	    writeln("		}");
+	    writeln("	}");
+	    
+/*		writeln("    private TokenInfo createTokenInfo(Token tok) {");
 		writeln("        if (tok == null) return null;");
 		writeln("        else return new TokenInfo(tok.getText(), tok.getColumn(), tok.getType());");
 		writeln("    }");
-		writeln();
+		writeln();*/
 		
 		writeErrorHandlers();
 		
