@@ -83,6 +83,9 @@ public abstract class AbstractGenerator
     /** The name of the src directory */
     public static final String SOURCE_DIRECTORY = "src";
 
+    /** The name of the util directory */
+    public static final String UTIL_DIRECTORY = "util";
+    
     /** Encoding for properties file */
     protected final static String PROPERTIES_ENCODING = "ISO-8859-1";
 
