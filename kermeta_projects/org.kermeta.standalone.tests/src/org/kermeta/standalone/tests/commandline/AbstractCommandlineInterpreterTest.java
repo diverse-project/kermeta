@@ -1,4 +1,4 @@
-/*$Id: AbstractCommandlineInterpreterTest.java,v 1.3 2008-07-23 11:53:40 dvojtise Exp $
+/*$Id: AbstractCommandlineInterpreterTest.java,v 1.4 2008-07-23 12:35:17 dvojtise Exp $
 * Project : org.kermeta.standalone.tests
 * File : 	AbstractCommandlineInterpreterTest.java
 * License : EPL
@@ -17,6 +17,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.URL;
+
+import org.kermeta.interpreter.api.RunCommandLine;
 
 public class AbstractCommandlineInterpreterTest {
 	public final String STANDALONE_DIST_PATH = "../fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/";
@@ -34,7 +37,14 @@ public class AbstractCommandlineInterpreterTest {
 			STANDALONE_DIST_PATH + "thirdparty/eclipse/emf/ecore.jar" + PATHSEPARATOR +
 			STANDALONE_DIST_PATH + "thirdparty/eclipse/emf/ecore.xmi.jar";
 	
-	public final String FRAMEWORK_PATH = "jar:file:/C:/ec_lipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/kermeta_standalone.jar!/src/kermeta/framework.km";
+	public static String computeFrameworkPath(){
+		URL jarURL = org.kermeta.core.helper.JarHelper.locateContainerJar(RunCommandLine.class);
+		String path = "jar:file:/C:/ec_lipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar/kermeta_standalone.jar!/src/kermeta/framework.km";
+    	if(jarURL != null && jarURL.toString().endsWith(".jar")){
+	    	path =  "jar:" + jarURL.toExternalForm() + "!/src/kermeta/framework.km";
+    	}
+		return path; 
+	}
 
 	/**
 	 * allows to run a command using exec and retrieve the output

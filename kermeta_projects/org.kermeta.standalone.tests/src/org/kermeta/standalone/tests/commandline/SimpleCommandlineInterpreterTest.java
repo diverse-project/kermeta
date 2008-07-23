@@ -1,4 +1,4 @@
-/*$Id: SimpleCommandlineInterpreterTest.java,v 1.1 2008-07-22 16:01:01 dvojtise Exp $
+/*$Id: SimpleCommandlineInterpreterTest.java,v 1.2 2008-07-23 12:35:17 dvojtise Exp $
 * Project : org.kermeta.standalone.tests
 * File : 	CommandlineTest001.java
 * License : EPL
@@ -19,6 +19,7 @@ import java.io.PrintStream;
 import junit.framework.Assert;
 
 import org.junit.Test;
+import org.junit.After;
 import org.kermeta.interpreter.api.RunCommandLine;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
@@ -96,7 +97,7 @@ public class SimpleCommandlineInterpreterTest extends AbstractCommandlineInterpr
 		System.setOut(newOutStream);
 		String[] paramArray = new String[]{
         		"-U", "platform:/resource/tests/simplecommandline/HelloWorld.main.kmt",
-        		"-K", FRAMEWORK_PATH,
+        		"-K", computeFrameworkPath(),
         		"-M", "./conf/no_thirdparty_in_main_jar/uri.map"
         		};
 		RunCommandLine theLauncherRun;				
@@ -134,5 +135,12 @@ public class SimpleCommandlineInterpreterTest extends AbstractCommandlineInterpr
 	    
 		Assert.assertTrue("didn't found \"Hello world\" in output", buffer.toString().contains("Hello world"));
 	    
+	}
+	@After
+	public void resetPluginSharedInstances(){
+		// this step is needed because these plugin have shared instance that may conflict between test, 
+		// ex, a test fail to find the framework, then, all other test wil fail too. 
+		org.kermeta.io.plugin.IOPlugin.resetDefault();
+		org.kermeta.io.loader.plugin.LoaderPlugin.resetDefault();
 	}
 }
