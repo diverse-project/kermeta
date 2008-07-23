@@ -8,7 +8,6 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.kermeta.compiler,
- org.kermeta.compiler.exporter,
  org.kermeta.compiler.model.compiler,
  org.kermeta.compiler.model.compiler.impl,
  org.kermeta.compiler.model.compiler.util,
