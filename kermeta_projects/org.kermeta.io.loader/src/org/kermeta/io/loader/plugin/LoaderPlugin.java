@@ -351,10 +351,10 @@ public class LoaderPlugin extends Plugin {
 	public static void logErrorMessage(String message, Throwable e) {
 		if (message == null)
 			message= "";
-		// eclipse logger
-		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, message, e));
 		// log4j message
 		log.error(message, e);
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, message, e));
 	}
 	
 	/**
