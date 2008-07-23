@@ -1,0 +1,151 @@
+<!-- $Id: test_ocl_build.xml,v 1.1 2008-07-23 14:42:35 dvojtise Exp $ -->
+<project name="run interpreter tests" default="all" basedir=".">
+
+	<description>
+        Run interpreter tests
+    </description>
+
+	<property name="report.dir" location="../../reports" />
+	<property name="eclipse.home" location="c:/eclipse3.3/eclipse" />
+	<property name="dot.or.bin" value="bin"/>
+	<!-- <property name="dot.or.bin" value="@dot"/> -->
+	<property name="dot.or.buildclass" value="build/class"/>
+	<!-- <property name="dot.or.buildclass" value="@dot"/> -->
+		
+
+
+	<property name="build.bin" location="./build/class" />
+	<property name="src" location="./src" />
+
+
+
+	<property name="kermeta.model.jar" location="..\fr.irisa.triskell.kermeta.model\${dot.or.buildclass}" />
+	<property name="kermeta.io.jar" location="..\fr.irisa.triskell.kermeta.io\${dot.or.buildclass}" />
+	<property name="kermeta.io.loader.jar" location="..\org.kermeta.io.loader\${dot.or.bin}" />
+	<property name="kermeta.interest.jar" location="..\org.kermeta.interest\${dot.or.bin}" />
+	<property name="kermeta.interpreter.jar" location="..\fr.irisa.triskell.kermeta.interpreter\${dot.or.buildclass}" />
+	<property name="triskell.eclipse.util.jar" location="..\fr.irisa.triskell.eclipse.util\${dot.or.bin}" />
+	<property name="kermeta.merger.jar" location="..\org.kermeta.merger\${dot.or.bin}" />
+	<property name="kermeta.log4j.util.jar" location="..\org.kermeta.log4j.util\${dot.or.bin}" />
+	<property name="traceability.jar" location="..\fr.irisa.triskell.traceability.model\${dot.or.bin}" />
+	<property name="kermeta.tests.jar" location="..\fr.irisa.triskell.kermeta.tests\${dot.or.bin}" />
+	<property name="ecoretools.registration.jar" location="..\org.eclipse.emf.ecoretools.registration\${dot.or.bin}"/>
+
+	<property name="log4j.jar" location="${eclipse.home}/plugins/org.apache.log4j_1.2.13.v200706111418.jar" />
+	<property name="antlr.jar" location="${eclipse.home}/plugins/org.antlr_2.7.6/antlr.jar"/>
+	<!--<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar" />-->
+	<property name="emfatic-core.jar" location="..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>
+
+	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.3.0.v200706262000.jar" />
+	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.3.0.v200706262000.jar" />
+	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar" />
+	<property name="emf.validation.jar" location="${eclipse.home}/plugins/org.eclipse.emf.validation_1.1.0.v200706071520.jar" />
+	<property name="debug.core.jar" location="${eclipse.home}/plugins/org.eclipse.debug.core_3.3.0.v20070607-1800.jar" />
+	<property name="equinox.common.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.common_3.3.0.v20070426.jar" />
+	<property name="equinox.registry.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.registry_3.3.0.v20070522.jar" />
+	<property name="equinox.preferences.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.preferences_3.2.100.v20070522.jar" />
+	<property name="osgi.jar" location="${eclipse.home}/plugins/org.eclipse.osgi_3.3.0.v20070530.jar" />
+	<property name="core.runtime.jar" location="${eclipse.home}/plugins/org.eclipse.core.runtime_3.3.100.v20070530.jar" />
+	<property name="core.jobs.jar" location="${eclipse.home}/plugins/org.eclipse.core.jobs_3.3.0.v20070423.jar" />
+	<property name="core.resources.jar" location="${eclipse.home}/plugins/org.eclipse.core.resources_3.3.0.v20070604.jar" />
+	<property name="ui.workbench.jar" location="${eclipse.home}/plugins/org.eclipse.ui.workbench_3.3.0.I20070608-1100.jar" />
+	<property name="ui.console.jar" location="${eclipse.home}/plugins/org.eclipse.ui.console_3.2.0.v20070530.jar" />
+	<property name="jface.jar" location="${eclipse.home}/plugins/org.eclipse.jface_3.3.0.I20070606-0010.jar" />
+	<property name="swt.jar" location="${eclipse.home}/plugins/org.eclipse.swt.gtk.linux.x86_3.3.0.v3346.jar" />
+	<property name="emf.compare.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare_0.8.0.v200804040851.jar" />
+	<property name="emf.compare.diff.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.diff_0.8.0.v200804040851.jar" />
+	<property name="emf.compare.match.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.match_0.8.0.v200804040851.jar" />
+	<property name="junit4.jar" location="${eclipse.home}/plugins/org.junit4_4.3.1/junit.jar" />
+	<property name="apache.commons.logging.jar" location="..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-1.1.1.jar" />
+	<property name="apache.commons.logging.adapters.jar" location="..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-adapters-1.1.1.jar" />
+	<property name="apache.commons.logging.api.jar" location="..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-api-1.1.1.jar" />
+					
+	
+	<path id="interpreter.class.path">
+		<pathelement location="${kermeta.model.jar}" />
+		<pathelement location="${kermeta.interpreter.jar}" />
+		<pathelement location="${kermeta.io.jar}" />
+		<pathelement location="${kermeta.io.loader.jar}" />
+		<pathelement location="${kermeta.merger.jar}" />
+		<pathelement location="${kermeta.interest.jar}" />
+		<pathelement location="${kermeta.model.jar}" />
+		<pathelement location="${kermeta.log4j.util.jar}" />
+		<pathelement location="${kermeta.tests.jar}" />
+		<pathelement location="${triskell.eclipse.util.jar}" />
+		<pathelement location="${traceability.jar}" />
+	    <pathelement location="${ecoretools.registration.jar}"/>
+		<pathelement location="${debug.core.jar}" />
+		<pathelement location="${emf.common.jar}" />
+		<pathelement location="${emf.ecore.jar}" />
+		<pathelement location="${emf.ecore.xmi.jar}" />
+		<pathelement location="${emf.validation.jar}" />
+		<pathelement location="${emf.compare.jar}" />
+		<pathelement location="${emf.compare.diff.jar}" />
+		<pathelement location="${emf.compare.match.jar}" />
+		<pathelement location="${equinox.common.jar}" />
+		<pathelement location="${equinox.registry.jar}" />
+		<pathelement location="${equinox.preferences.jar}" />
+		<pathelement location="${osgi.jar}" />
+		<pathelement location="${core.runtime.jar}" />
+		<pathelement location="${core.resources.jar}" />
+		<pathelement location="${ui.workbench.jar}" />
+		<pathelement location="${ui.console.jar}" />
+		<pathelement location="${jface.jar}" />
+		<pathelement location="${swt.jar}" />
+		<pathelement location="${core.jobs.jar}" />
+		<pathelement location="${log4j.jar}" />
+		<pathelement location="${junit4.jar}" />
+		<pathelement location="${apache.commons.logging.jar}" />
+		<pathelement location="${apache.commons.logging.adapters.jar}" />
+		<pathelement location="${apache.commons.logging.api.jar}" />
+		<pathelement location="${antlr.jar}" />
+	    <pathelement location="${emfatic-core.jar}"/>
+		<pathelement path="${java.class.path}" />
+	</path>
+
+	
+	<target name="all" depends="test" description="run the tests and generate JUnit reports." />
+
+
+	<target name="compile_java">
+		<mkdir dir="${build.bin}" />
+		<echo>${eclipse.home}</echo>
+		<echo>${kermeta.interpreter.jar}</echo>
+		<javac srcdir="${src}" destdir="${build.bin}" debug="true">
+			<classpath>
+				<!--<pathelement path="${MTLcompiler.path}/bin"/>-->
+				<path refid="interpreter.class.path" />
+			</classpath>
+		</javac>
+	</target>
+
+	
+	<target name="test" description="run interpreter tests" depends="compile_java">
+		<mkdir dir="${report.dir}" />
+		<mkdir dir="${report.dir}/html" />
+		<junit printsummary="yes" haltonfailure="no" showoutput="yes" fork="yes">
+			<jvmarg value="-Xms40m" />
+			<jvmarg value="-Xmx512m" />
+			<classpath>
+				<pathelement location="${build.bin}"/>
+				<!-- this entry is normally not usefull because duplicate with the instrumented dir, 
+		    	however for some unkown reason, sometimes some classes are not build correctly-->
+				<path refid="interpreter.class.path" />
+			</classpath>
+			
+
+			<formatter type="plain" />
+			<test name="fr.irisa.triskell.kermeta.samples.ocl.tests.loading.OCL2KermetaTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-interpreter-result">
+				<formatter type="xml" />
+			</test>
+			
+		</junit>
+		<echo>Generate intermediate report</echo>
+		<junitreport todir="${report.dir}">
+			<fileset dir="${report.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${report.dir}/html" />
+		</junitreport>
+	</target>
+</project>
