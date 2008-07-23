@@ -1,4 +1,4 @@
-<!-- $Id: deploy_build.xml,v 1.2 2008-07-18 09:36:08 dvojtise Exp $ -->
+<!-- $Id: deploy_build.xml,v 1.3 2008-07-23 06:48:24 dvojtise Exp $ -->
 <project name="kermeta_standalone" default="all" basedir=".">
         
     <description>
@@ -9,60 +9,140 @@
     <!-- <property name="kermeta.plugins" location="../../../deployedKermeta/eclipse/plugins/"/> --> <!-- version for daily build -->
      
 
+	
     <target name="all"
-		description="Deploy the standalone version of kermeta">
-        <antcall target="copy"/>
-		<antcall target="jardesc_like"/>
+		description="Deploy the standalone versions of kermeta">
+        <antcall target="copy_dependencies"/>
+		<antcall target="create_distributions"/>
     </target>
 	
-	<target name="copy"
-		description="copy the jar and kermeta models needed by the stand alone version">
-		<unzip dest="./tmp">
+	<target name="copy_dependencies"
+		description="copy the jar and kermeta models needed by the stand alone version into the lib directory">
+		<!-- gather jars from kermeta projects into lib directory  -->
+
+		<!-- retrieve some files that where "hidden" into the plugins, (framwork, ... ) -->
+	<!--	<unzip dest="./tmp">
 			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.io_*.jar"/>
 			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta_*.jar"/>
+			<fileset dir="${kermeta.plugins}" includes="**/org.kermeta.log4j.util_*.jar"/>
+			<fileset dir="${kermeta.plugins}" includes="**/org.kermeta.io.loader_*.jar"/>
 		</unzip>
 		<copy todir="./lib/" flatten="true">
 			<fileset dir="./tmp/src/kermeta/" includes="framework.km"/>
-			<fileset dir="./tmp/lib" includes="ecore.kmt"/>
+			<fileset dir="./tmp/src/kermeta/" includes="framework.traceability"/>
+			<fileset dir="./tmp/" 			  includes="kermeta_log4j_configuration.xml"/>
+			<fileset dir="./tmp/instances/"   includes="*.loader"/>
+			<fileset dir="./tmp/lib"          includes="ecore.kmt"/>
 		</copy>
+		<delete dir="./tmp"/>
+		-->
+		<!-- retrieve and rename jars from kermeta -->
 		<copy todir="./lib/" flatten="true"> <!-- rename to traceability.jar -->
 			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.traceability_*.jar"/>
 		    <mapper type="merge" to="traceability.jar"/>
 		</copy>
-		<delete dir="./tmp"/>
+		<copy todir="./lib/" flatten="true"> <!-- rename main kermeta plugin to kermeta.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta_*.jar"/>
+		    <mapper type="merge" to="kermeta.jar"/>
+		</copy>
+		<copy todir="./lib/" flatten="true"> <!-- rename io to kermeta.io.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.io_*.jar"/>
+		    <mapper type="merge" to="kermeta.io.jar"/>
+		</copy>
+		<copy todir="./lib/" flatten="true"> <!-- rename io to kermeta.io.loader.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/org.kermeta.io.loader_*.jar"/>
+		    <mapper type="merge" to="kermeta.io.loader.jar"/>
+		</copy>
+
+		<copy todir="./lib/" flatten="true"> <!-- rename io to kermeta.merger.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/org.kermeta.merger_*.jar"/>
+		    <mapper type="merge" to="kermeta.merger.jar"/>
+		</copy>
+		<copy todir="./lib/" flatten="true"> <!-- rename io to kermeta.model.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.model_*.jar"/>
+		    <mapper type="merge" to="kermeta.model.jar"/>
+		</copy>
+
+		<copy todir="./lib/" flatten="true"> <!-- rename io to kermeta.interpreter.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.interpreter_*.jar"/>
+		    <mapper type="merge" to="kermeta.interpreter.jar"/>
+		</copy>
+		<copy todir="./lib/" flatten="true"> <!-- rename io to triskell.eclipse.util.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.eclipse.util_*.jar"/>
+		    <mapper type="merge" to="triskell.eclipse.util.jar"/>
+		</copy>
+		<copy todir="./lib/" flatten="true"> <!-- rename io to kermeta.log4j.util.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/org.kermeta.log4j.util_*.jar"/>
+		    <mapper type="merge" to="kermeta.log4j.util.jar"/>
+		</copy>
+	</target>
+
+	<target name="update_gymnast_runtime_core.jar"
+		description="update the emfatic jar from the plugins">
+		<copy todir="./lib/" flatten="true"> <!-- rename to emfatic-core.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/org.eclipse.gymnast.runtime.core_*.jar"/>
+		    <mapper type="merge" to="gymnast.runtime.core.jar"/>
+		</copy>
 	</target>
 	
-    <target name="jardesc_like" 
-                description="create kermeta.jar from model, io and interpreter">
-    	<unzip dest="./tmp">
-			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.io_*.jar"/>
-			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta_*.jar"/>
-			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.interpreter_*.jar"/>
+    <target name="create_distributions" 
+                description="create the distributions as obtained by the user, put it into dist directory">
+		<antcall target="build_konly_kermeta_standalone.jar"/>
+		<antcall target="build_full_kermeta_standalone.jar"/>
+		<delete dir="./tmp"/>    	
+    </target>
+	<!--<target name="gather_external_files" >
+    	<copy todir="./tmp/external_files" flatten="true">
+			<fileset dir="./lib" includes="framework.km"/>
+			<fileset dir="./lib" includes="framework.traceability"/>
+			<fileset dir="./lib" includes="ecore.kmt"/>
+			<fileset dir="./lib" includes="*.loader"/>
+		</copy>
+    </target>-->
+	<target name="build_konly_kermeta_standalone.jar" 
+	                description="create the kermeta_standalone.jar from the various part of kermeta jars" 
+					> <!--depends="gather_external_files">-->
+	    <!-- currently this task consist into unzipping and rezipping jar, but it may include compiling classes specific to the standalone version -->
+		<mkdir  dir="./dist/no_thirdparty_in_main_jar"/>
+		<unzip dest="./tmp/build_konly_standalone">
+			<fileset dir="./lib" includes="*.jar"/>
 		</unzip>
-		
-		<copy todir="./kermeta/fr/irisa/triskell/utils">
-			<fileset dir="./tmp/fr/irisa/triskell/utils"/>
+		<copy todir="./tmp/build_konly_standalone/META-INF" overwrite="true">
+			<fileset dir="./src/META-INF/no_thirdparty_in_main_jar" includes="**"/>
+		</copy>
+		<zip destfile="./dist/no_thirdparty_in_main_jar/kermeta_standalone.jar"
+		     basedir="./tmp/build_konly_standalone"
+		     
+		/>
+		<!-- <copy todir="./dist/no_thirdparty_in_main_jar" >
+			<fileset dir="./tmp/external_files" includes="**"/>
+		</copy> -->
+    	<mkdir  dir="./dist/no_thirdparty_in_main_jar/thirdparty"/>
+    	<copy todir="./dist/no_thirdparty_in_main_jar/thirdparty">
+			<fileset dir="./lib/thirdparty" includes="**/*"/>
 		</copy>
 		
-		<copy todir="./kermeta/fr/irisa/triskell/kermeta">
-			<fileset dir="./tmp/fr/irisa/triskell/kermeta"/>
+		<delete dir="./tmp/build_konly_standalone"/>
+    </target>
+	<target name="build_full_kermeta_standalone.jar" 
+		            description="create the kermeta_standalone.jar from the various part of kermeta jars including all thirdparty jars" 
+					><!--depends="gather_external_files">-->
+		    <!-- currently this task consist into unzipping and rezipping jar, but it may include compiling classes specific to the standalone version -->
+		<mkdir  dir="./dist/all_in_one_jar"/>
+		<unzip dest="./tmp/build_full">
+			<fileset dir="./lib" includes="**/*.jar"/>
+		</unzip>
+		<copy todir="./tmp/build_full/META-INF" overwrite="true">
+			<fileset dir="./src/META-INF/all_in_one_jar" includes="**"/>
 		</copy>
-
-		<copy todir="./kermeta/fr/irisa/triskell/ecore/visitor" flatten="true">
-			<resources>
-				<file file="./tmp/fr/irisa/triskell/kermeta/loader/ecore/EcoreVisitor.class"/>
-			</resources>
-		</copy>
-		
-		<delete file="./kermeta/fr/irisa/triskell/kermeta/loader/ecore/EcoreVisitor.class"/>
-
-		<zip destfile="./dist/kermeta.jar"
-		     basedir="./kermeta"
+		<zip destfile="./dist/all_in_one_jar/kermeta_standalone_full.jar"
+		     basedir="./tmp/build_full"
 		     update="true"
 		/>
-		
-		<delete dir="./tmp"/>
-		<delete dir="./kermeta"/>
+		<!--
+		<copy todir="./dist/all_in_one_jar" >
+			<fileset dir="./tmp/external_files" includes="**"/>
+		</copy>-->
+		<delete dir="./tmp/build_full"/>
     </target>
-
 </project>
