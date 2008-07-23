@@ -1,5 +1,5 @@
 /**
- * $Id: SMClassImpl.java,v 1.4 2008-01-09 14:12:57 cfaucher Exp $
+ * $Id: SMClassImpl.java,v 1.5 2008-07-23 15:17:22 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,14 +7,16 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMClassImpl.java,v 1.4 2008-01-09 14:12:57 cfaucher Exp $
+ * $Id: SMClassImpl.java,v 1.5 2008-07-23 15:17:22 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.kermeta.simk.SMClass;
 import org.kermeta.simk.SMPackage;
+import org.kermeta.simk.SMUsage;
 import org.kermeta.simk.SimkPackage;
 
 /**
@@ -25,6 +27,7 @@ import org.kermeta.simk.SimkPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.simk.impl.SMClassImpl#getSMPackage <em>SM Package</em>}</li>
+ *   <li>{@link org.kermeta.simk.impl.SMClassImpl#getUsages <em>Usages</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,6 +69,16 @@ public class SMClassImpl extends SMNamedElementImpl implements SMClass {
 	 */
 	public void setSMPackage(SMPackage newSMPackage) {
 		eSet(SimkPackage.Literals.SM_CLASS__SM_PACKAGE, newSMPackage);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SMUsage> getUsages() {
+		return (EList<SMUsage>)eGet(SimkPackage.Literals.SM_CLASS__USAGES, true);
 	}
 
 	/**

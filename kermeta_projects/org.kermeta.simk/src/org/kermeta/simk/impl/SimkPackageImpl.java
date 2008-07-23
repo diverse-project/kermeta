@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackageImpl.java,v 1.7 2008-05-27 15:38:28 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.8 2008-07-23 15:17:23 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackageImpl.java,v 1.7 2008-05-27 15:38:28 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.8 2008-07-23 15:17:23 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.kermeta.simk.FunctionType;
 import org.kermeta.simk.SIMKModel;
 import org.kermeta.simk.SMClass;
 import org.kermeta.simk.SMContext;
@@ -102,6 +103,13 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * @generated
 	 */
 	private EClass smReturnEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass functionTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,6 +211,15 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 */
 	public EReference getSIMKModel_StaticMethods() {
 		return (EReference)simkModelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSIMKModel_FunctionTypes() {
+		return (EReference)simkModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -390,6 +407,15 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSMClass_Usages() {
+		return (EAttribute)smClassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSMNamedElement() {
 		return smNamedElementEClass;
 	}
@@ -444,6 +470,15 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFunctionType() {
+		return functionTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSMUsage() {
 		return smUsageEEnum;
 	}
@@ -479,6 +514,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		simkModelEClass = createEClass(SIMK_MODEL);
 		createEReference(simkModelEClass, SIMK_MODEL__SM_CONTEXTS);
 		createEReference(simkModelEClass, SIMK_MODEL__STATIC_METHODS);
+		createEReference(simkModelEClass, SIMK_MODEL__FUNCTION_TYPES);
 
 		staticMethodEClass = createEClass(STATIC_METHOD);
 		createEReference(staticMethodEClass, STATIC_METHOD__SM_PARAMETERS);
@@ -503,6 +539,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 
 		smClassEClass = createEClass(SM_CLASS);
 		createEReference(smClassEClass, SM_CLASS__SM_PACKAGE);
+		createEAttribute(smClassEClass, SM_CLASS__USAGES);
 
 		smNamedElementEClass = createEClass(SM_NAMED_ELEMENT);
 		createEAttribute(smNamedElementEClass, SM_NAMED_ELEMENT__NAME);
@@ -513,6 +550,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		createEAttribute(smTypedElementEClass, SM_TYPED_ELEMENT__TYPE);
 
 		smReturnEClass = createEClass(SM_RETURN);
+
+		functionTypeEClass = createEClass(FUNCTION_TYPE);
 
 		// Create enums
 		smUsageEEnum = createEEnum(SM_USAGE);
@@ -558,6 +597,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		initEClass(simkModelEClass, SIMKModel.class, "SIMKModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSIMKModel_SMContexts(), this.getSMContext(), null, "sMContexts", null, 0, -1, SIMKModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSIMKModel_StaticMethods(), this.getStaticMethod(), null, "staticMethods", null, 0, -1, SIMKModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSIMKModel_FunctionTypes(), this.getFunctionType(), null, "functionTypes", null, 0, -1, SIMKModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(simkModelEClass, ecorePackage.getEInt(), "getNextId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -593,6 +633,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 
 		initEClass(smClassEClass, SMClass.class, "SMClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSMClass_SMPackage(), this.getSMPackage(), this.getSMPackage_SMClass(), "sMPackage", null, 0, 1, SMClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMClass_Usages(), this.getSMUsage(), "usages", null, 0, -1, SMClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(smClassEClass, ecorePackage.getEString(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -606,6 +647,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 
 		initEClass(smReturnEClass, SMReturn.class, "SMReturn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(functionTypeEClass, FunctionType.class, "FunctionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		// Initialize enums and add enum literals
 		initEEnum(smUsageEEnum, SMUsage.class, "SMUsage");
 		addEEnumLiteral(smUsageEEnum, SMUsage.RUNNER);
@@ -613,6 +656,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		addEEnumLiteral(smUsageEEnum, SMUsage.DERIVED_PROPERTY);
 		addEEnumLiteral(smUsageEEnum, SMUsage.PRE_CONDITION);
 		addEEnumLiteral(smUsageEEnum, SMUsage.POST_CONDITION);
+		addEEnumLiteral(smUsageEEnum, SMUsage.VALUE_TYPE_WRAPPER);
 
 		// Create resource
 		createResource(eNS_URI);

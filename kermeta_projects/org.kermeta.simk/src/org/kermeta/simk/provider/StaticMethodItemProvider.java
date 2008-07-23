@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethodItemProvider.java,v 1.4 2008-01-11 14:28:10 cfaucher Exp $
+ * $Id: StaticMethodItemProvider.java,v 1.5 2008-07-23 15:17:23 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethodItemProvider.java,v 1.4 2008-01-11 14:28:10 cfaucher Exp $
+ * $Id: StaticMethodItemProvider.java,v 1.5 2008-07-23 15:17:23 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -141,7 +141,7 @@ public class StaticMethodItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_StaticMethod_body_feature", "_UI_StaticMethod_type"),
 				 SimkPackage.Literals.STATIC_METHOD__BODY,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
@@ -337,17 +337,6 @@ public class StaticMethodItemProvider
 			(createChildParameter
 				(SimkPackage.Literals.STATIC_METHOD__SM_RETURN,
 				 SimkFactory.eINSTANCE.createSMReturn()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return SimkEditPlugin.INSTANCE;
 	}
 
 }

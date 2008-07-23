@@ -1,5 +1,5 @@
 /**
- * $Id: SMClass.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SMClass.java,v 1.4 2008-07-23 15:17:22 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,9 +7,11 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMClass.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SMClass.java,v 1.4 2008-07-23 15:17:22 cfaucher Exp $
  */
 package org.kermeta.simk;
+
+import org.eclipse.emf.common.util.EList;
 
 
 /**
@@ -21,6 +23,7 @@ package org.kermeta.simk;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.kermeta.simk.SMClass#getSMPackage <em>SM Package</em>}</li>
+ *   <li>{@link org.kermeta.simk.SMClass#getUsages <em>Usages</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,6 +59,24 @@ public interface SMClass extends SMNamedElement {
 	 * @generated
 	 */
 	void setSMPackage(SMPackage value);
+
+	/**
+	 * Returns the value of the '<em><b>Usages</b></em>' attribute list.
+	 * The list contents are of type {@link org.kermeta.simk.SMUsage}.
+	 * The literals are from the enumeration {@link org.kermeta.simk.SMUsage}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Usages</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Usages</em>' attribute list.
+	 * @see org.kermeta.simk.SMUsage
+	 * @see org.kermeta.simk.SimkPackage#getSMClass_Usages()
+	 * @model
+	 * @generated
+	 */
+	EList<SMUsage> getUsages();
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -1,5 +1,5 @@
 /**
- * $Id: SIMKModelItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SIMKModelItemProvider.java,v 1.4 2008-07-23 15:17:23 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SIMKModelItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SIMKModelItemProvider.java,v 1.4 2008-07-23 15:17:23 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -87,6 +87,7 @@ public class SIMKModelItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SimkPackage.Literals.SIMK_MODEL__SM_CONTEXTS);
 			childrenFeatures.add(SimkPackage.Literals.SIMK_MODEL__STATIC_METHODS);
+			childrenFeatures.add(SimkPackage.Literals.SIMK_MODEL__FUNCTION_TYPES);
 		}
 		return childrenFeatures;
 	}
@@ -143,6 +144,7 @@ public class SIMKModelItemProvider
 		switch (notification.getFeatureID(SIMKModel.class)) {
 			case SimkPackage.SIMK_MODEL__SM_CONTEXTS:
 			case SimkPackage.SIMK_MODEL__STATIC_METHODS:
+			case SimkPackage.SIMK_MODEL__FUNCTION_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -169,17 +171,11 @@ public class SIMKModelItemProvider
 			(createChildParameter
 				(SimkPackage.Literals.SIMK_MODEL__STATIC_METHODS,
 				 SimkFactory.eINSTANCE.createStaticMethod()));
-	}
 
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return SimkEditPlugin.INSTANCE;
+		newChildDescriptors.add
+			(createChildParameter
+				(SimkPackage.Literals.SIMK_MODEL__FUNCTION_TYPES,
+				 SimkFactory.eINSTANCE.createFunctionType()));
 	}
 
 }

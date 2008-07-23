@@ -1,5 +1,5 @@
 /**
- * $Id: SimkAdapterFactory.java,v 1.3 2007-12-21 14:17:03 cfaucher Exp $
+ * $Id: SimkAdapterFactory.java,v 1.4 2008-07-23 15:17:25 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkAdapterFactory.java,v 1.3 2007-12-21 14:17:03 cfaucher Exp $
+ * $Id: SimkAdapterFactory.java,v 1.4 2008-07-23 15:17:25 cfaucher Exp $
  */
 package org.kermeta.simk.util;
 
@@ -69,7 +69,7 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -111,6 +111,10 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSMReturn(SMReturn object) {
 				return createSMReturnAdapter();
+			}
+			@Override
+			public Adapter caseFunctionType(FunctionType object) {
+				return createFunctionTypeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -255,6 +259,20 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSMReturnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.simk.FunctionType <em>Function Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.simk.FunctionType
+	 * @generated
+	 */
+	public Adapter createFunctionTypeAdapter() {
 		return null;
 	}
 

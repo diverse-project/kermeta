@@ -76,6 +76,8 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMPackage" eType="#//SMPackage"
         eOpposite="#//SMPackage/sMClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="usages" upperBound="-1"
+        eType="#//SMUsage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SMNamedElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -91,6 +93,7 @@
     <eLiterals name="DerivedProperty" value="2"/>
     <eLiterals name="PreCondition" value="3"/>
     <eLiterals name="PostCondition" value="4"/>
+    <eLiterals name="ValueTypeWrapper" value="5" literal="ValueTypeWrapper"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionType"/>
 </ecore:EPackage>
