@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: GenerateHelperAction.java,v 1.7 2008-06-26 13:07:24 cfaucher Exp $
+/*$Id: GenerateHelperAction.java,v 1.8 2008-07-23 15:13:54 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	GenerateHelperAction.java
 * License : EPL
@@ -105,25 +105,12 @@ public class GenerateHelperAction implements IActionDelegate
         // get the selected *.configuration file
         final IFile file = convertSelection2File(selection);
         
-        //Check if the kermetaUnitis really required
-        /*KermetaUnit kermetaUnit = null;
-        String genModelPath = file.getFullPath().removeFileExtension().addFileExtension("kmt").toString();
-
-        try {
-        	kermetaUnit = LoaderPlugin.getDefault().load("platform:/resource" + genModelPath, null);
-		} catch (URIMalformedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotRegisteredURIException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+        final String kmFilePath = file.getFullPath().removeFileExtension().addFileExtension("km").toString();
         
-        generate(file, /*kermetaUnit,*/ /*null,*/ null);
-
+        generate(file, kmFilePath, null);
     }
     
-    public void generate(final IFile file, /*final KermetaUnit kmUnit,*/ /*final EcoreExporter km2ecoreGen,*/ final IFile simk_file) {
+    public void generate(final IFile file, final String kmFilePath_forReflection, final IFile simk_file) {
     	if (file == null) {
             GeneratorPlugin.displayDialog(null, "Invalid selection : Only one file can be selected.", IStatus.ERROR);
             return;
@@ -145,7 +132,7 @@ public class GenerateHelperAction implements IActionDelegate
                         if (diagnostic.getSeverity() <= Diagnostic.INFO) {
                             monitor.worked(1);
 
-                            CompilerHelperGenerator generator = new CompilerHelperGenerator(configuration, /*kmUnit,*/ /*km2ecoreGen,*/ SimkModelHelper.getSIMKModel(simk_file));
+                            CompilerHelperGenerator generator = new CompilerHelperGenerator(configuration, kmFilePath_forReflection, SimkModelHelper.getSIMKModel(simk_file));
                             generatedProject = generator.generate(monitor);
                         } else {
                             GeneratorPlugin.log("Validation problem : a problem occured during the genmodel validation.", IStatus.ERROR);

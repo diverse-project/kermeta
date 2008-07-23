@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.8 2008-06-26 13:44:08 cfaucher Exp $
+/* $Id: Compiler.java,v 1.9 2008-07-23 15:14:28 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -17,6 +17,7 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -218,13 +219,28 @@ public class Compiler extends Generator {
 	private void compileHelpers() {
 		GenerateHelperAction compileHelperAction = new GenerateHelperAction();
 		
+		String kmFilePath = ecorefile.getFullPath().removeFileExtension().addFileExtension("km").toString();
+		
+		IFile kmFile = ResourceHelper.getIFile(kmFilePath);
+		
+		IPath kmFilePath_forReflection = ResourcesPlugin.getWorkspace().getRoot().getFullPath().append("/" + compiledPluginId + "/config/" + kmFile.getName());
+		
 		genModelPath = genModelPath.replace( ResourcesPlugin.getWorkspace().getRoot().getLocationURI().toString(), "platform:/resource/" );
 		genModelPath = genModelPath.replace( ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "platform:/resource/" );
 		
 		IFile genModelFile = ResourceHelper.getIFile(genModelPath);
 		IFile simk_file = ResourcesPlugin.getWorkspace().getRoot().getFile(genModelFile.getFullPath().removeFileExtension().addFileExtension(SimkModelHelper.SIMK_EXT));
+		
 		if(genModelFile.exists()) {
-			compileHelperAction.generate(genModelFile, /*this.kmUnit,*/ /*this.km2ecoreGen,*/ simk_file);
+			compileHelperAction.generate(genModelFile, kmFilePath_forReflection.toString(), simk_file);
+		
+			//Copying the *.km file for the reflection
+			try {
+				kmFile.copy(kmFilePath_forReflection, true, new NullProgressMonitor());
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		
 		}
 	}	
 	

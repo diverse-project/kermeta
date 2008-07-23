@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.12 2008-07-22 07:38:49 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.13 2008-07-23 15:13:54 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -70,6 +70,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private static final String RUNNER_JAVA = "templateHelper/runner/Runner.javajet";
 	
 	private static final String WRAPPER_JAVA = "templateHelper/helper/Wrapper.javajet";
+	
+	private static final String EXECUTION_CONTEXT_JAVA = "templateHelper/helper/ExecutionContext.javajet";
 
 	private static final String JAVA_LAUNCHER_LAUNCH = "templateHelper/JavaLauncher.launchjet";
 	
@@ -82,24 +84,24 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	/** The GenModel object */
 	private GenModel configuration;
 
-	//private KermetaUnit kmUnit;
-	// FIXME CF unused for the moment
-	//private EcoreExporter km2ecoreGen;
+	private String kmFilePath_forReflection;
+	
 	private SIMKModel simkModel;
+	
+	
 
 	/**
 	 * Constructor
 	 * 
 	 * @param conf the genmodel based on the generated Ecore
-	 * @param kmUnit
-	 * @param km2ecoreGen
+	 * @param kmFilePath_forReflection
 	 * @param helperModel
 	 */
-	public CompilerHelperGenerator(GenModel conf, /*KermetaUnit kmUnit,*/
-			/*EcoreExporter km2ecoreGen,*/ SIMKModel simkModel) {
+	public CompilerHelperGenerator(GenModel conf, String kmFilePath_forReflection, SIMKModel simkModel) {
 		this.configuration = conf;
 		//this.kmUnit = kmUnit;
 		//this.km2ecoreGen = km2ecoreGen;
+		this.kmFilePath_forReflection = kmFilePath_forReflection;
 		this.simkModel = simkModel;
 	}
 
@@ -125,16 +127,16 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		
 		try {
 			
+			generateBaseTypesUtils();
+			
 			if( this.simkModel!=null ) {
-				generateHelpers(this.simkModel, pathProject, monitor);
+				generateHelpers(this.kmFilePath_forReflection, this.simkModel, pathProject, monitor);
 			}
 			
 			if( this.simkModel!=null ) {
 				generateHelperModel(this.simkModel, pathProject, monitor);
 			}
-			
-			generateBaseTypesUtils();
-		
+					
 			generateClassPath(project, pathProject);
 			
 		} catch (JETException e) {
@@ -213,6 +215,14 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			}
 		}
 
+		// create the config folder
+		IPath pathConfig = pathProject.append(IPath.SEPARATOR + "config");
+		IFolder configFolder = ResourcesPlugin.getWorkspace().getRoot()
+		.getFolder(pathConfig);
+		if (!(configFolder.exists())) {
+			configFolder.create(false, false, new NullProgressMonitor());
+		}
+		
 		// create the icons folder
 		IPath pathIcons = pathProject.append(IPath.SEPARATOR + "icons");
 		IFolder iconsFolder = ResourcesPlugin.getWorkspace().getRoot()
@@ -234,7 +244,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	// ---------------------------------------------------------
 	// Generate the classes for the helpers
 	// ---------------------------------------------------------
-	private void generateHelpers(SIMKModel simkConf, IPath projectPath,
+	private void generateHelpers(String kmFilePath_forReflection, SIMKModel simkConf, IPath projectPath,
 			IProgressMonitor monitor) {
 		try {
 
@@ -243,6 +253,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			generateRunner(simkConf, projectPath);
 			generateLauncher(simkConf, projectPath);
 			generateWrapper(simkConf, projectPath);
+			//generateExecutionContext(kmFilePath_forReflection, projectPath);
 
 			monitor.worked(1);
 		} catch (JETException e) {
@@ -395,7 +406,6 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	}
 	
 	/**
-	 * Generate the .launch file corresponding to the mainClass and mainOperation that are defined into the header of a Kermeta file
 	 * 
 	 * @param simkConf
 	 * @param projectPath
@@ -412,6 +422,23 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 					projectPath.append("/" + SOURCE_DIRECTORY + "/kermeta/standard/helper/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
 					configuration.isForceOverwrite());
 		}
+	}
+	
+	/**
+	 * 
+	 * @param kmFilePath
+	 * @param projectPath
+	 * @throws JETException
+	 * @throws CoreException
+	 */
+	private void generateExecutionContext(String kmFilePath_forReflection, IPath projectPath)
+			throws JETException, CoreException {
+		
+			applyTemplate(
+					kmFilePath_forReflection,
+					getTemplateURI(EXECUTION_CONTEXT_JAVA),
+					projectPath.append("/" + SOURCE_DIRECTORY + "org.kermeta.compil.runtime".replace(".", "/") + "ExecutionContext.java"),
+					configuration.isForceOverwrite());
 	}
 	
 	private void generateClassPath(IProject project, IPath projectPath)
