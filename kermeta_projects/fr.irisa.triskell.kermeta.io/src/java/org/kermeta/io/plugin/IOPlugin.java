@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.41 2008-05-28 15:44:19 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.42 2008-07-23 12:32:54 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -211,6 +211,15 @@ public class IOPlugin extends Plugin {
 		if ( plugin == null ) 
 			plugin = new IOPlugin();
 		return plugin;
+	}
+	
+	/**
+	 * reset the current shared instance
+	 * This might be useful to be used in a test suite, in order to 
+	 * make sure one test doesn't affect result of a second test in the same suite
+	 */
+	public static void resetDefault(){
+		plugin = null;
 	}
 	
 	public KermetaUnit findKermetaUnit(IFile file) {

@@ -52,7 +52,7 @@ public class LoaderPlugin extends Plugin {
 	final static public Log log = LogConfigurationHelper.getLogger("LoaderPlugin");
 
 	/**		A boolean that tells wether the plugin has been initialized or not.		*/
-	static private boolean INITIALIZED = false;
+	private boolean INITIALIZED = false;
 	
 	static public void setFrameworkGeneration(boolean value) {
 		IOPlugin.FRAMEWORK_GENERATION = value;
@@ -109,6 +109,14 @@ public class LoaderPlugin extends Plugin {
 			plugin.initialize();
 		} 
 		return plugin;
+	}
+	/**
+	 * reset the current shared instance
+	 * This might be useful to be used in a test suite, in order to 
+	 * make sure one test doesn't affect result of a second test in the same suite
+	 */
+	public static void resetDefault(){
+		plugin = null;
 	}
 
 	private LoadingContext loadingContext;
