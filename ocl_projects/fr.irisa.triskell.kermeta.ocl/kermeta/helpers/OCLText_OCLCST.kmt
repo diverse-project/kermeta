@@ -1,0 +1,29 @@
+/* $Id: OCLText_OCLCST.kmt,v 1.1 2008-07-24 14:43:36 dvojtise Exp $ 
+ * Creation : July 24, 2008
+ * Licence  : EPL 
+ * Copyright: INRIA/IRISA
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+
+package ocl::helpers;
+
+require kermeta
+
+using kermeta::standard 
+
+/**
+ * This class provides some helper functions to deal with OCLText files to OCLCST xmi files 
+ */
+class OCLText_OCLCST_Helper
+{
+	/**
+	 * Produce an oclcst xmi file from a ocl text file
+	 */
+	operation textFile_2_xmiFile(oclInputFileURI : String, xmiFileOutputURI : String) : Void is do
+		@compiledJavaExtern "org.kermeta.interpreter.runtime.basetypes.ocl.helpers.OCLText_OCLCST_Helper.textFile_2_xmiFile(this, oclInputFileURI, xmiFileOutputURI)" 
+		extern org::kermeta::interpreter::runtime::basetypes::ocl::helpers::OCLText_OCLCST_Helper.textFile_2_xmiFile(self, oclInputFileURI, xmiFileOutputURI) 
+	end
+}
