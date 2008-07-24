@@ -1,4 +1,4 @@
-/* $Id: GenerateKMT.java,v 1.10 2008-04-30 14:38:01 ftanguy Exp $
+/* $Id: GenerateKMT.java,v 1.11 2008-07-24 07:49:21 dvojtise Exp $
  * Project: OCL
  * File: GenerateKMT.java
  * License: EPL
@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.ParserException;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
-import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
@@ -93,9 +92,9 @@ public class GenerateKMT {
 	private static void registerPackages(EPackage pack) {
 		System.out.println("registering package: " + pack.getNsURI());
 		Registry.INSTANCE.put(pack.getNsURI(), pack);
-		EList l = pack.getESubpackages();
+		EList<EPackage> l = pack.getESubpackages();
 		if(l != null) {
-			Iterator it = l.iterator();
+			Iterator<EPackage> it = l.iterator();
 			while(it.hasNext()) {
 				registerPackages((EPackage) it.next());
 			}
