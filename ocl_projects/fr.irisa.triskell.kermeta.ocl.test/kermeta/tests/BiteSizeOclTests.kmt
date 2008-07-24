@@ -14,6 +14,7 @@ require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-
 //require "../../../someUnit/src/newUnit.kmt" 
 require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/ocl2kmtVisitor.kmt"  
 require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLHelper.kmt"   
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLText_OCLCST.kmt"
 
 //require "http://sample"
    
@@ -62,11 +63,16 @@ class  BiteSizeOclTests  inherits TestCase
         
     operation visitOclXmi(filename: String): String is
         do
-            var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/ocl/" + filename + ".xmi"
+        	// create the xmi oclcst from the ocl file
+        	var sourceOCLFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/ocl/" + filename + ".ocl"                        
+            var generatedXMIFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/ocl/out/" + filename + ".xmi"
+            ocl::helpers::OCLText_OCLCST_Helper.new.textFile_2_xmiFile(
+				sourceOCLFileName, generatedXMIFileName)
+				
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
             visitor.setEcoreHelper(EcoreHelper.new.loadMetamodel(ecoreFile))
-            parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
+            parsedOCL  := helper.loadOCLModel(repository, generatedXMIFileName)
             helper.getPackageDeclaration(parsedOCL).accept(visitor)
             result := io.s
         end 
