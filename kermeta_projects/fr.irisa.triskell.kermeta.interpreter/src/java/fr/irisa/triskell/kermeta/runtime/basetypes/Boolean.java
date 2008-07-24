@@ -1,4 +1,4 @@
-/* $Id: Boolean.java,v 1.12 2008-06-10 13:46:39 cfaucher Exp $ 
+/* $Id: Boolean.java,v 1.13 2008-07-24 14:19:19 cfaucher Exp $ 
  * Implementation of Kermeta base type Boolean 
  */
 
@@ -19,22 +19,12 @@ public class Boolean {
 		if(getValue(self) == getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
-	
-	/** Java version */
-	public static boolean equals(boolean self, boolean param0) {
-		return self == param0;
-	}
 
 	// Implementation of method isNotEqual called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::isNotEqual(element)
 	public static RuntimeObject isNotEqual(RuntimeObject self, RuntimeObject param0) {
 		if(getValue(self) == getValue(param0)) return self.getFactory().getMemory().falseINSTANCE;
 		else return self.getFactory().getMemory().trueINSTANCE;
-	}
-	
-	/** Java version */
-	public static boolean isNotEqual(boolean self, boolean param0) {
-		return self != param0;
 	}
 
 	// Implementation of method and called as :
@@ -46,11 +36,6 @@ public class Boolean {
 		    return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
-	
-	/** Java version */
-	public static boolean and(boolean self, boolean param0) {
-	    return self && param0;
-	}
 
 	// Implementation of method or called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::or(other)
@@ -61,22 +46,12 @@ public class Boolean {
 		    return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
-	
-	/** Java version */
-	public static boolean or(boolean self, boolean param0) {
-		return self || param0;
-	}
 
 	// Implementation of method not called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::not()
 	public static RuntimeObject not(RuntimeObject self) {
 		if (getValue(self)) return self.getFactory().getMemory().falseINSTANCE;
 		else return self.getFactory().getMemory().trueINSTANCE;
-	}
-	
-	/** Java version */
-	public static boolean not(boolean self) {
-		return !self;
 	}
 
 	public static boolean getValue(RuntimeObject bool) {

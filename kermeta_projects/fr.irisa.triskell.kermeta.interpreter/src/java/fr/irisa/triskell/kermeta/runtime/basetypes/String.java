@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.16 2008-04-28 11:50:56 ftanguy Exp $
+/* $Id: String.java,v 1.17 2008-07-24 14:19:19 cfaucher Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -29,26 +29,13 @@ public class String {
 		Integer.setValue(result, getValue(self).compareTo(getValue(param0)));
 		return result;
 	}
-	/** Java version */
-	public static java.lang.Integer compareTo(java.lang.String self, java.lang.String param0) {
-		return self.compareTo(param0);
-	}
-
+	
 	/** Implementation of method equals called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::equals(element)
 	 */
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
 		if(getValue(self).equals(getValue(param0))) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
-	}
-	/** Java version */
-	public static boolean equals(java.lang.String self, java.lang.String param0) {
-		if(self.equals(param0)) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	/** Implementation of method isNotEqual called as :
@@ -58,10 +45,6 @@ public class String {
 		if(getValue(self).equals(getValue(param0))) return self.getFactory().getMemory().falseINSTANCE;
 		else return self.getFactory().getMemory().trueINSTANCE;
 	}
-	/** Java version */
-	public static boolean isNotEqual(java.lang.String self, java.lang.String param0) {
-		return !equals(self, param0);
-	}
 
 	/** Implementation of method plus called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::plus(other)
@@ -70,10 +53,6 @@ public class String {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		setValue(result, getValue(self) + getValue(param0));
 		return result;
-	}
-	/** Java version */
-	public static java.lang.String plus(java.lang.String self, java.lang.String param0) {
-		return self + param0;
 	}
 
 	/** 
