@@ -8,5 +8,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.interpreter,
  org.junit4,
- fr.irisa.triskell.kermeta.tests
+ fr.irisa.triskell.kermeta.tests,
+ fr.irisa.triskell.kermeta.ocl
 Eclipse-LazyStart: true
