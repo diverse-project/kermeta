@@ -13,7 +13,8 @@ require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/ocl2kmtVisitor.kmt" 
 require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/EcoreHelper.kmt" 
 
-require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLHelper.kmt"   
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLHelper.kmt" 
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLText_OCLCST.kmt"  
 
 
 //require "http://sample"
@@ -70,12 +71,17 @@ class  SnackSizeOclTests  inherits TestCase
     operation visitOclXmi(filename: String): String is
         do
         
-        
+        	// create the xmi oclcst from the ocl file
+        	var sourceOCLFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/model/" + filename + ".ocl"                        
+            var generatedXMIFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/model/out/" + filename + ".xmi"
+            ocl::helpers::OCLText_OCLCST_Helper.new.textFile_2_xmiFile(
+				sourceOCLFileName, generatedXMIFileName)
+			
         	
             var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/model/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
-            visitor.setEcoreHelper(EcoreHelpers::EcoreHelper.new.loadMetamodel(ecoreFile))
+            visitor.setEcoreHelper(EcoreHelpers::EcoreHelper.new.loadMetamodel(generatedXMIFileName))
             parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
             helper.getPackageDeclaration(parsedOCL).accept(visitor)
             result := io.s
