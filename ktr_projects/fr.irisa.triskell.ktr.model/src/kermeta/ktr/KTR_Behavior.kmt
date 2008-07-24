@@ -22,7 +22,7 @@ require "Bindings.kmt"
 require "ContextItems.kmt"
 require "KTRExceptions.kmt"
 require "CoreObject.kmt"
-require "platform:/plugin/fr.irisa.triskell.traceability/model/kmt/Traceability_Behavior.kmt"
+require "platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability_Behavior.kmt"
 
 using kermeta::standard
 using kermeta::language::structure

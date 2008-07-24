@@ -61,7 +61,7 @@ License (&quot;EPL&quot;).
    </requires>
 
    <plugin
-         id="fr.irisa.triskell.traceability"
+         id="fr.irisa.triskell.traceability.model"
          download-size="0"
          install-size="0"
          version="0.0.0"

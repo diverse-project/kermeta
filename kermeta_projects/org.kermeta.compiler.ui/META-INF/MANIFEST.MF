@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.ui,
  org.kermeta.compiler,
  org.kermeta.compiler.generator,
  org.kermeta.simk,
- fr.irisa.triskell.traceability,
+ fr.irisa.triskell.traceability.model,
  org.kermeta.io.loader
 Eclipse-LazyStart: true
 Export-Package: org.kermeta.compiler.ui,

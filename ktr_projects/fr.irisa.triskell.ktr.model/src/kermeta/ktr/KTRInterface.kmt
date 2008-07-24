@@ -15,7 +15,7 @@ package ktr::interface;
 require kermeta
 require "KTR_Behavior.kmt"
 require "KTRExceptions.kmt"
-require "platform:/plugin/fr.irisa.triskell.traceability/model/kmt/Traceability_Behavior.kmt"
+require "platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability_Behavior.kmt"
 
 using kermeta::standard
 using kermeta::persistence
