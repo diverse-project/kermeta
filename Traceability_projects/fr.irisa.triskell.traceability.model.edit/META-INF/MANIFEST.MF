@@ -10,5 +10,5 @@ Bundle-Localization: plugin
 Export-Package: fr.irisa.triskell.traceability.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit;visibility:=reexport,
- fr.irisa.triskell.traceability
+ fr.irisa.triskell.traceability.model
 Eclipse-LazyStart: true

@@ -43,7 +43,7 @@ the terms of the EPL licence.
       <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
       <import plugin="fr.irisa.triskell.kermeta.model"/>
       <import plugin="fr.irisa.triskell.kermeta.model.edit"/>
-      <import plugin="fr.irisa.triskell.traceability"/>
+      <import plugin="fr.irisa.triskell.traceability.model"/>
    </requires>
 
    <plugin

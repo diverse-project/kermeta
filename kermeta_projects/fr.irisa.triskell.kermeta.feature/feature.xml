@@ -74,7 +74,7 @@ GPL license.
       <import plugin="org.eclipse.jdt.launching"/>
       <import plugin="org.eclipse.jdt.core"/>
       <import plugin="org.eclipse.jdt.debug.ui"/>
-      <import plugin="fr.irisa.triskell.traceability"/>
+      <import plugin="fr.irisa.triskell.traceability.model"/>
    </requires>
 
    <plugin
