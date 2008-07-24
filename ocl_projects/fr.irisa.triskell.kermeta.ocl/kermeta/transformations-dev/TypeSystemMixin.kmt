@@ -1,4 +1,4 @@
-/* $Id: TypeSystemMixin.kmt,v 1.5 2008-02-14 07:15:11 uid21732 Exp $
+/* $Id: TypeSystemMixin.kmt,v 1.6 2008-07-24 08:50:56 dvojtise Exp $
  * Creation date: July 25, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -292,13 +292,13 @@ class TypeSystemMixin {
 		//post:
 			if result == void then
 				var e : Exception init Exception.new
-				e.message := "Can't find cass " + contextClassifierFQN.toString + " in the ecore metamodel"
+				e.message := "Can't find class " + contextClassifierFQN.toString + " in the ecore metamodel"
 				raise e
 			end
 			stdio.writeln("Found classifier [" + result.name + "]")
 		end
 		
-	/** When you add a stack frame, dont forget to add "self" **/
+	/** When you add a stack frame, don't forget to add "self" **/
 	operation pushNewStackFrame() is
 		do
 			context.push()
