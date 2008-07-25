@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-<plugin
-   id="fr.irisa.triskell.kermeta.ecore"
-   name="Ecore MDK Plug-in"
-   version="1.1.0"
-   provider-name="IRISA/INRIA"
-   class="fr.irisa.triskell.kermeta.ecore.KermetaEcorePlugin">
+<plugin>
 
-   <runtime>
-      <library name="ecore_kermeta.jar">
-         <export name="*"/>
-      </library>
-   </runtime>
-
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="fr.irisa.triskell.kermeta"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="fr.irisa.triskell.kermeta.io"/>
-      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
-      <import plugin="fr.irisa.triskell.kermeta.kpm"/>
-   </requires>
    <extension
          id="generateVisitor"
          point="fr.irisa.triskell.kermeta.kpm.kermetaAction">
