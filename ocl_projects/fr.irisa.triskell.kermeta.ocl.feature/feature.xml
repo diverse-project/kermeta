@@ -19,7 +19,7 @@
 
    <requires>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="fr.irisa.triskell.traceability"/>
+      <import plugin="fr.irisa.triskell.traceability.model"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ui.forms"/>
@@ -47,7 +47,7 @@
          unpack="false"/>
 
    <plugin
-         id="fr.irisa.triskell.traceability"
+         id="fr.irisa.triskell.traceability.model"
          download-size="0"
          install-size="0"
          version="0.0.0"
