@@ -57,8 +57,8 @@ final public class PersistenceMapping {
 				else if ( e.getKey().equals(_FACTORY_CLASS_NAME) )
 					factoryClassName = e.getValue();
 			}
+			process(baseClassName, generatedClassName, uri, fileExtension, factoryClassName);
 		}
-		process(baseClassName, generatedClassName, uri, fileExtension, factoryClassName);
 	}
 	
 	/**
