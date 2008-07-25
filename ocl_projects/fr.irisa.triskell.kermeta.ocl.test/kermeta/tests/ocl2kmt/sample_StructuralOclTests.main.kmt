@@ -1,0 +1,97 @@
+/* $Id: sample_StructuralOclTests.main.kmt,v 1.1 2008-07-25 12:38:05 dvojtise Exp $
+ * Creation date: March 6, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+ 
+@mainClass "oclTests::StructuralOclTests"
+@mainOperation "main"
+
+package oclTests;
+
+require kermeta
+
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/ocl2kmtVisitor.kmt" 
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLHelper.kmt" 
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLText_OCLCST.kmt"
+     
+using kermeta::kunit
+using kermeta::standard
+using kermeta::persistence
+using ocl2kmt
+
+class  StructuralOclTests  inherits TestCase
+{
+    attribute repository: EMFRepository
+    attribute helper : OCLHelpers::OCLHelper
+    attribute visitor :Ocl2kmtVisitor 
+    attribute parsedOCL : Set<Object> 
+    attribute ecoreFile: String
+	//attribute de : DynamicExpression 
+
+				    
+	method setUp() is
+		do
+			repository := EMFRepository.new        
+            helper := OCLHelpers::OCLHelper.new
+            visitor := Ocl2kmtVisitor.new
+            ecoreFile := "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/metamodel/sample.ecore"
+
+	    	
+			//de := DynamicExpression.new
+			//de.initializeDefaults
+		end
+		
+	 operation visitOclXmi(filename: String): String is
+        do
+             // create the xmi oclcst from the ocl file
+        	var sourceOCLFileName : String init "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/ocl/" + filename + ".ocl"                        
+            var generatedXMIFileName : String init "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/out/" + filename + ".xmi"
+            ocl::helpers::OCLText_OCLCST_Helper.new.textFile_2_xmiFile(
+				sourceOCLFileName, generatedXMIFileName)
+			var io : StringWriter init StringWriter.new
+            visitor.setIo(io)
+            visitor.setEcoreHelper(EcoreHelpers::EcoreHelper.new.loadMetamodel(ecoreFile))
+            parsedOCL  := helper.loadOCLModel(repository, generatedXMIFileName)
+            helper.getPackageDeclaration(parsedOCL).accept(visitor)
+            result := io.s
+              
+	     	 
+            
+            
+
+    
+        end
+		
+		
+	operation test01(): Void is
+	// test class @aspect class { ... inv ... } generation
+		do
+			var kmt : String  init  visitOclXmi("01-booleanLiteralTrue")
+			var expected : String init "package sample; require kermeta require \"sample.ecore\" using kermeta::standard @aspect \"true\" class A{ inv invariant1 is do true end } " 
+			assertEqual(expected, kmt)
+		end
+		
+	operation test02(): Void is
+	// test class @aspect class { operation def } generation
+		do
+			var kmt : String  init  visitOclXmi("definition")
+			assertEqual("package sample @aspect \"true\" class A{ operation test():Boolean is do result := true end} ", kmt)
+		end
+
+	operation test03(): Void is
+	// test pre and post generation
+		do
+			var kmt : String  init  visitOclXmi("preAndPost")
+			assertEqual("package sample @aspect \"true\" class Y{ @overloadable \"true\" operation getB(a : Integer, b:Boolean):B pre pre1 is do a.isGreater(0) end pre pre2 is do true end post post3 is do ~result.equals(self.ab) end is do var e: Exception init NotImplementedException.new e.message := \"OCL pre/post/body: Y.foo\" raise e end } ", kmt)
+		end
+		
+	operation main() : Void is 
+	  do 
+			var testRunner : TestRunner init TestRunner.new
+			var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(StructuralOclTests)
+			testRunner.runTest(suite)
+			testRunner.printTestResult
+  	end
+}

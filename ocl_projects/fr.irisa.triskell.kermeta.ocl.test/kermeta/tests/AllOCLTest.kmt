@@ -1,0 +1,33 @@
+/* $Id: AllOCLTest.kmt,v 1.1 2008-07-25 12:38:05 dvojtise Exp $
+ * Creation date: February 19, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "oclTests::Main"
+@mainOperation "main"
+
+
+package oclTests;
+
+
+require kermeta
+require "ocl2kmt/sample_BiteSizeOclTests.main.kmt" 
+require "ocl2kmt/company_SnackSizeOclTests.main.kmt" 
+require "ocl2kmt/sample_StructuralOclTests.main.kmt"  
+     
+using kermeta::kunit
+
+class Main
+{
+	operation main() : Void is 
+	  do 
+		    var testRunner : TestRunner init TestRunner.new
+		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(BiteSizeOclTests)
+		    suite.addAllTestCasesFrom(StructuralOclTests)
+		    suite.addAllTestCasesFrom(SnackSizeOclTests)
+		    stdio.write(suite.tests.size.toString)
+    		testRunner.runTest(suite)
+            testRunner.printTestResult
+  	  end
+}

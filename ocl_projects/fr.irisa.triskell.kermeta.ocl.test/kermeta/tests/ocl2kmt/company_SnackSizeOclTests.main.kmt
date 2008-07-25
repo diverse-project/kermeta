@@ -1,0 +1,169 @@
+/* $Id: company_SnackSizeOclTests.main.kmt,v 1.1 2008-07-25 12:38:04 dvojtise Exp $
+ * Creation date: February 22, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "oclTests::SnackSizeOclTests"
+@mainOperation "main"
+  
+package oclTests;
+
+require kermeta
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/ocl2kmtVisitor.kmt" 
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/EcoreHelper.kmt" 
+
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLHelper.kmt" 
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLText_OCLCST.kmt"  
+
+
+//require "http://sample"
+   
+using kermeta::kunit
+using kermeta::standard
+using kermeta::persistence
+using ocl2kmt
+
+class  SnackSizeOclTests  inherits TestCase
+{
+
+    attribute repository: EMFRepository
+    attribute helper : OCLHelpers::OCLHelper
+    attribute visitor :Ocl2kmtVisitor 
+    attribute parsedOCL : Set<Object> 
+    attribute ecoreFile: String
+
+
+
+
+    attribute person : String 
+    attribute company : String
+                    
+    method setUp() is
+        do
+            repository := EMFRepository.new        
+            helper := OCLHelpers::OCLHelper.new
+            visitor := Ocl2kmtVisitor.new
+            //visitor.initialize
+            ecoreFile := "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/company/metamodel/company.ecore"
+            
+            person := "Personnel::Person"
+            company := "Business:Company"
+        end
+        
+        
+    operation expectedCode(packageName: String, ecoreFilePath: String, contextName : String, expression: String): String is
+        do
+            result := "package " + packageName + "; "
+            result.append("require kermeta ")
+            result.append("require \"" + ecoreFilePath + "\" ")
+            result.append("using kermeta::standard ")
+            result.append("@aspect \"true\" ")
+            result.append("class " + contextName + "{ ")
+            result.append("inv invariant1 is do " + expression +" end } ")
+        end
+        
+    operation expect(expression : String, context: String):String is
+        do
+            result := expectedCode("company", "company.ecore", context, expression)
+        end
+        
+    operation visitOclXmi(filename: String): String is
+        do
+        
+        	// create the xmi oclcst from the ocl file
+        	var sourceOCLFileName : String init "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/company/ocl/" + filename + ".ocl"                        
+            var generatedXMIFileName : String init "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/company/out/" + filename + ".xmi"
+            ocl::helpers::OCLText_OCLCST_Helper.new.textFile_2_xmiFile(
+				sourceOCLFileName, generatedXMIFileName)
+			
+        	
+            var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/model/" + filename + ".xmi"
+            var io : StringWriter init StringWriter.new
+            visitor.setIo(io)
+            visitor.setEcoreHelper(EcoreHelpers::EcoreHelper.new.loadMetamodel(generatedXMIFileName))
+            parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
+            helper.getPackageDeclaration(parsedOCL).accept(visitor)
+            result := io.s
+        
+            
+        end
+        
+      // boolean Simple test to get started
+        operation test01(): Void is
+            do
+                 var kmt : String init visitOclXmi("c01")
+                 var expected: String init expect("self.employee.forAll{e1, e2 : Personnel::Person | e1.equals(e2).~not.~not.or(e1.forename.equals(e2.forename).~not)}", company)
+                 assertEqual( expected, kmt )
+                	// self.employee->forAll( e1, e2 : Person | e1 <> e2 implies e1.forename <> e2.forename)
+            end 
+        
+      // boolean Simple test to get started
+        operation test02(): Void is
+            do
+                 var kmt : String init visitOclXmi("c02")
+                 var expected: String init expect("self.name.equals(\"smith\")", person)
+                 assertEqual( expected, kmt )
+            end 
+            
+      // boolean Simple test to get started
+        operation test03(): Void is
+            do
+                 var kmt : String init visitOclXmi("c03")
+				 var source : String init "self.owner.isKindOf(Personnel::Person).~not.~or(self.owner.asType(Personnel::Person).forename.equals(\"dupont\").~not)"
+                 var expected: String init expect(source, company)
+                //self.owner.oclIsTypeOf (Personnel::Person) implies self.owner->oclAsType(Personnel::Person).forename <>"smith"                 
+                assertEqual( expected, kmt )
+            end 
+            
+      // boolean Simple test to get started
+        operation test04(): Void is
+            do
+                 var kmt : String init visitOclXmi("c04")
+				 var source : String init  "self.company.first().employee.collect{ variable2 | variable2.forename}"
+                 var expected: String init expect(source, company)
+                assertEqual( expected, kmt )
+            end 
+            
+      operation runOneTest(testRunner: TestRunner, nn:String) is
+          do
+              var oneOff : Boolean init false
+              if testRunner == void then
+                  testRunner : =TestRunner.new
+                  oneOff := true 
+              end
+              stdio.writeln("testing no " + nn)
+            self.setTestMethodName("test" +nn)
+            testRunner.runTest(self)
+            if oneOff then
+                    testRunner.printTestResult
+            end
+          end
+      
+    operation oneAtATime() : Void is 
+          do
+            var testRunner : TestRunner init TestRunner.new
+            from
+                var i : Integer init 1
+            until
+                i > 66
+            loop
+                var s : String init i.toString
+                if i <= 9 then
+                    s := "0" + s
+                end
+                runOneTest(testRunner,s)
+                i := i + 1
+            end
+            testRunner.printTestResult
+          end
+      
+      operation main() : Void is 
+      do
+            var testRunner : TestRunner init TestRunner.new
+		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(SnackSizeOclTests)
+    		testRunner.runTest(suite)
+            testRunner.printTestResult
+      end    
+      
+}

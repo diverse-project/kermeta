@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: OCL2Kermeta Test Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.ocl.test;singleton:=true
 Bundle-Version: 1.1.2.qualifier
-Bundle-Activator: fr.irisa.triskell.kermeta.ocl.test.Activator
+Bundle-Activator: fr.irisa.triskell.kermeta.ocl.test.plugin.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.interpreter,

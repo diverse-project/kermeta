@@ -1,0 +1,730 @@
+/* $Id: sample_BiteSizeOclTests.main.kmt,v 1.1 2008-07-25 12:38:04 dvojtise Exp $
+ * Creation date: February 22, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "oclTests::BiteSizeOclTests"
+@mainOperation "main"
+  
+package oclTests;
+
+require kermeta
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/EcoreHelper.kmt"
+//require "../../../someUnit/src/newUnit.kmt" 
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/ocl2kmtVisitor.kmt"  
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLHelper.kmt"   
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLText_OCLCST.kmt"
+
+//require "http://sample"
+   
+using kermeta::kunit
+using kermeta::standard
+using kermeta::persistence
+using kermeta::exceptions
+
+using EcoreHelpers
+using ocl2kmt
+
+class  BiteSizeOclTests  inherits TestCase
+{
+    attribute repository: EMFRepository
+    attribute helper : OCLHelpers::OCLHelper
+    attribute visitor :Ocl2kmtVisitor 
+    attribute parsedOCL : Set<Object> 
+    attribute ecoreFile: String
+    //attribute de : DynamicExpression 
+                    
+    method setUp() is
+        do
+            repository := EMFRepository.new        
+            helper := OCLHelpers::OCLHelper.new
+            visitor := Ocl2kmtVisitor.new
+            ecoreFile := "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/metamodel/sample.ecore"
+
+        end
+        
+        
+    operation expectedCode(packageName: String, ecoreFilePath: String, contextName : String, expression: String): String is
+        do
+            result := "package " + packageName + "; "
+            result.append("require kermeta ")
+            result.append("require \"" + ecoreFilePath + "\" ")
+            result.append("using kermeta::standard ")
+            result.append("@aspect \"true\" ")
+            result.append("class " + contextName + "{ ")
+            result.append("inv invariant1 is do " + expression +" end } ")
+        end
+        
+    operation expect(expression : String):String is
+        do
+            result := expectedCode("sample", ecoreFile, "A", expression)
+        end
+        
+    operation visitOclXmi(filename: String): String is
+        do
+        	// create the xmi oclcst from the ocl file
+        	var sourceOCLFileName : String init "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/ocl/" + filename + ".ocl"                        
+            var generatedXMIFileName : String init "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/out/" + filename + ".xmi"
+            ocl::helpers::OCLText_OCLCST_Helper.new.textFile_2_xmiFile(
+				sourceOCLFileName, generatedXMIFileName)
+				
+            var io : StringWriter init StringWriter.new
+            visitor.setIo(io)
+            visitor.setEcoreHelper(EcoreHelper.new.loadMetamodel(ecoreFile))
+            parsedOCL  := helper.loadOCLModel(repository, generatedXMIFileName)
+            helper.getPackageDeclaration(parsedOCL).accept(visitor)
+            result := io.s
+        end 
+
+  // boolean literal true
+    operation test01_booleanLiteralTrue(): Void is
+        do
+            assertSimilar( expect("true"), visitOclXmi("01-booleanLiteralTrue") )
+        end
+
+  // boolean literal false
+    operation test02_booleanLiteralFalse(): Void is
+        do
+             assertSimilar( expect("false"), visitOclXmi("02-booleanLiteralFalse"))
+        end
+        
+  // logical and
+    operation test03_logicalConjunction(): Void is
+        do
+             assertSimilar( expect("true.~and(true)"), visitOclXmi("03-logicalConjunction"))
+        end
+      
+
+  // logical or
+    operation test04_logicalDisjunction(): Void is
+        do
+            assertSimilar( expect("true.~or(true)"), visitOclXmi("04-logicalDisjunction"))
+        end
+        
+  // euqality
+    operation test05_equality(): Void is
+        do
+            assertSimilar( expect("true.equals(true)"), visitOclXmi("05-equality"))
+        end
+
+  // unary minus, integer literal
+    operation test06_integerLiteral(): Void is
+        do
+            assertSimilar( expect( "5.uminus"), visitOclXmi( "06-integerLiteral"))
+        end
+
+  // addition
+    operation test07_integerAddition(): Void is
+        do
+            assertSimilar( expect( "3.plus(4)"), visitOclXmi( "07-integerAddition"))
+        end
+
+  // subtraction
+    operation test08_integerSubtraction(): Void is
+        do
+            assertSimilar( expect( "3.minus(4)"), visitOclXmi( "08-integerSubtraction"))
+        end
+
+  // xor
+    operation test09(): Void is
+        // xor
+        do
+            assertSimilar( expect( "true.xor(true)"), visitOclXmi( "09"))
+        end
+
+  // implies
+    operation test10(): Void is
+        do
+            assertSimilar( expect( "true.~not.~or(true) "), visitOclXmi( "10"))
+        end
+        
+  // not
+    operation test11(): Void is
+        do
+            assertSimilar( expect( "true.~not"), visitOclXmi( "11"))
+        end
+
+  // >
+    operation test12(): Void is
+        do
+            assertSimilar( expect( "3.isGreater(4)"), visitOclXmi( "12"))
+        end
+
+  // >=
+    operation test13(): Void is
+        do
+            assertSimilar( expect( "3.isGreaterOrEqual(4)"), visitOclXmi( "13"))
+        end
+
+  // <
+    operation test14(): Void is
+        do
+            assertSimilar( expect( "3.isLower(4)"), visitOclXmi( "14"))
+        end
+ 
+  // <=
+    operation test15(): Void is
+        do
+            assertSimilar( expect( "3.isLowerOrEqual(4)"), visitOclXmi( "15"))
+        end
+        
+  // <>,not equals
+    operation test16(): Void is
+        do
+            assertSimilar( expect( "3.equals(4).~not"), visitOclXmi( "16"))
+        end
+
+
+  // exists
+    operation test17(): Void is
+        do
+            assertSimilar( expect( "b.forAll{ a | true}"), visitOclXmi( "17"))
+        end
+
+  // any
+    operation test18(): Void is
+        do
+            assertSimilar( expect( "b.detect{ o | true}"), visitOclXmi( "18"))
+        end
+
+  // one
+    operation test19(): Void is
+        do
+            assertSimilar( expect( "b.select{ o | true}.size.equals(1)"), visitOclXmi( "19"))
+        end
+
+  // select
+    operation test20(): Void is
+        do
+            assertSimilar( expect( "b.select{ o | true}"), visitOclXmi( "20"))
+        end
+
+  // reject
+    operation test21(): Void is
+        do
+            assertSimilar( expect( "b.reject{ o | true}"), visitOclXmi( "21"))
+        end
+
+  // collect
+    operation test22(): Void is
+        do
+            assertSimilar( expect( "b.collect{ o | true}"), visitOclXmi( "22"))
+        end
+
+  // isUnique
+    operation test23(): Void is
+        do
+            assertSimilar( expect( "b.select{ o | true}.asSet.size.equals(b.size)"), visitOclXmi( "23"))
+        end
+
+  // let expressions
+     operation test24(): Void is
+        do
+            assertSimilar( expect( "do var v : Integer init 1 v end"), visitOclXmi( "24"))
+        end
+ 
+  // null literal
+     operation test25(): Void is
+        do 
+            assertSimilar( expect( "void"), visitOclXmi( "25"))
+        end
+
+  // real literals
+     operation test26(): Void is
+        do
+            assertSimilar( expect( "3.14"), visitOclXmi( "26"))
+        end
+ 
+  // string literals
+     operation test27(): Void is
+        do
+            assertSimilar( expect( "\"foo\".equals(\"bar\")"), visitOclXmi( "27"))
+        end
+
+  // enum literal
+     operation test28(): Void is
+        do
+            assertSimilar( expect( "Foo.bar"), visitOclXmi( "28"))
+        end
+
+  // operation call with arguments
+     operation test29(): Void is
+        do
+            assertSimilar( expect( "self.getB(2, true)"), visitOclXmi( "29"))
+        end
+
+  // collection literal 
+     operation test30(): Void is
+        do
+            var kmt : String  init  visitOclXmi("30") 
+            var expected : String init expect( "do var var1 init Bag.new var1.add(1) var1.add(1) var1 end")
+            assertSimilar( expected, kmt)
+        end
+
+  // last
+     operation test31(): Void is
+        do
+            assertSimilar( expect( "b.last"), visitOclXmi( "31"))
+        end
+
+  // first
+     operation test32(): Void is
+        do
+            assertSimilar( expect( "b.first"), visitOclXmi( "32"))
+        end
+
+  // at
+     operation test33(): Void is
+        do
+            assertSimilar( expect( "b.elementAt(1)"), visitOclXmi( "33"))
+        end
+
+  // indexOf
+     operation test34(): Void is
+        do
+            var kmt : String  init  visitOclXmi("34") 
+            assertSimilar(expect("b.indexOf(b.first)"), kmt)
+            //de.formalParameters.put("s", Sequence<Integer>)
+            //de.selfClass  :=   sample::A.typeDefinition.asType(kermeta::reflection::ClassDefinition)
+            // de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // asSequence
+     operation test35(): Void is
+        do
+            var kmt : String  init  visitOclXmi("35") 
+            assertSimilar( expect("b.asSequence"), kmt)
+            //de.formalParameters.put("s", Set<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // asBag
+     operation test36(): Void is
+        do
+            var kmt : String  init  visitOclXmi("36") 
+            assertSimilar(expect("b.asBag"), kmt)
+            //de.formalParameters.put("s", Sequence<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // asOrderedSet
+     operation test37(): Void is
+        do
+            var kmt : String  init  visitOclXmi("37") 
+            assertSimilar( expect("b.asOrderedSet"), kmt)
+            //de.formalParameters.put("s", Sequence<Integer>)
+            // de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // notEmpty ()
+     operation test38(): Void is
+        do
+            var kmt : String  init  visitOclXmi("38") 
+            assertSimilar( expect("b.empty.~not"), kmt)
+            //de.formalParameters.put("s", Sequence<Integer>)
+            // de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // isEmpty()
+     operation test39(): Void is
+        do
+            var kmt : String  init  visitOclXmi("39") 
+            assertSimilar( expect("b.empty"), kmt)
+        end
+
+  // includesAll
+     operation test40(): Void is
+        do
+            var kmt : String  init  visitOclXmi("40") 
+            assertSimilar(expect("b.includesAll(b)"), kmt)
+            //de.formalParameters.put("s1", Set<Integer>)
+            //de.formalParameters.put("s2", Set<Integer>)
+            // de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // excludesAll
+     operation test41(): Void is
+        do
+            var kmt : String  init  visitOclXmi("41") 
+            assertSimilar( expect("b.excludesAll(b)"), kmt)
+            //de.formalParameters.put("s1", Set<Integer>)
+            //de.formalParameters.put("s2", Set<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // union
+     operation test42(): Void is
+        do
+            var kmt : String  init  visitOclXmi("42") 
+            assertSimilar( expect("b.union(b)"), kmt)
+        end
+
+  // intersection
+     operation test43(): Void is
+        do
+            var kmt : String  init  visitOclXmi("43") 
+            assertSimilar( expect("b.intersection(b)"), kmt)
+        end
+
+  // subtract (-) (not currently defined on sets in Kermeta)
+     operation test44(): Void is
+        do
+            var kmt : String  init  visitOclXmi("44") 
+            assertSimilar( expect("b.minus(b)"), kmt)
+            //de.formalParameters.put("s1", Set<Integer>)
+            //de.formalParameters.put("s2", Set<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+    // includes
+     operation test45(): Void is
+        do
+            var kmt : String  init  visitOclXmi("45") 
+            assertSimilar( expect("b.includes(ab)"), kmt)
+            //de.formalParameters.put("s", Set<Integer>)
+            //de.formalParameters.put("e", Integer)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+    // excludes
+     operation test46(): Void is
+        do
+            var kmt : String  init  visitOclXmi("46") 
+            assertSimilar( expect("b.excludes(ab)"), kmt)
+            //de.formalParameters.put("s", Set<Integer>)
+            //de.formalParameters.put("e", Integer)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+    //self
+     operation test47(): Void is
+        do
+            var kmt : String  init  visitOclXmi("47") 
+            assertSimilar( expect("self"), kmt)
+        end
+
+  // sortedBy
+     operation test48(): Void is
+        do
+            var kmt : String  init  visitOclXmi("48") 
+            assertSimilar( expect("b.sortedBy{ o | o.y}"), kmt)
+            //de.formalParameters.put("s", Sequence<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+
+  // including
+     operation test49(): Void is
+        do
+            var kmt : String  init  visitOclXmi("49") 
+            assertSimilar( expect("b.including(ab)"), kmt)
+            //de.formalParameters.put("s1", Set<Integer>)
+            //de.formalParameters.put("s2", Set<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // excluding
+     operation test50(): Void is
+        do
+            var kmt : String  init  visitOclXmi("50") 
+            assertSimilar( expect("b.excluding(ab)"), kmt)
+            //de.formalParameters.put("s1", Set<Integer>)
+            //de.formalParameters.put("s2", Set<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // subSequence
+     operation test51(): Void is
+        do
+            var kmt : String  init  visitOclXmi("51") 
+            assertSimilar(expect("b.subSequence(1,2)"), kmt)
+            //de.formalParameters.put("s", Set<Integer>)
+            //de.formalParameters.put("lower", Integer)
+            //de.formalParameters.put("upper", Integer)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // prepend
+     operation test52(): Void is
+        do
+            var kmt : String  init  visitOclXmi("52") 
+            assertSimilar( expect("b.prepend(ab)"), kmt)
+            //de.formalParameters.put("s", Set<Integer>)
+            //de.formalParameters.put("o", Integer)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // insertAt
+     operation test53(): Void is
+        do
+            var kmt : String  init  visitOclXmi("53") 
+            assertSimilar( expect("b.insertAt(1,ab)"), kmt)
+            //de.formalParameters.put("s", Set<Boolean>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // append
+     operation test54(): Void is
+        do
+            var kmt : String  init  visitOclXmi("54") 
+            assertSimilar( expect("b.append(ab)"), kmt)
+            //de.formalParameters.put("s", Set<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // count 
+     operation test55(): Void is
+        do
+            var kmt : String  init  visitOclXmi("55") 
+            assertSimilar( expect("b.count(ab)"), kmt)
+            //de.formalParameters.put("s", Set<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // flatten
+     operation test56(): Void is
+        do
+            var kmt : String  init  visitOclXmi("56") 
+            assertSimilar(expect("b.flatten"), kmt)
+            //de.formalParameters.put("s", Set<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // symmetricDifference
+     operation test57(): Void is
+        do
+            var kmt : String  init  visitOclXmi("57") 
+            assertSimilar( expect("b.symmetricDifference(b)"), kmt)
+            // de.formalParameters.put("s1", Set<Integer>)
+            //de.formalParameters.put("s2", Set<Integer>)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // string toInteger
+     operation test58(): Void is
+        do
+            var kmt : String  init  visitOclXmi("58") 
+            assertSimilar( expect("\"10\".toInteger"), kmt)
+            // de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // string toReal
+     operation test59(): Void is
+        do
+            var kmt : String  init  visitOclXmi("59") 
+            assertSimilar( expect("\"3.14\".toReal"), kmt)
+             //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // substring
+     operation test60(): Void is
+        do
+            var kmt : String  init  visitOclXmi("60") 
+            assertSimilar( expect("\"foobar\".substring(4, 8)"), kmt)
+             //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // concatenate
+     operation test61(): Void is
+        do
+            var kmt : String  init  visitOclXmi("61") 
+            assertSimilar( expect("\"foo\".plus(\"bar\")"), kmt)
+            //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // string size
+     operation test62(): Void is
+        do
+            var kmt : String  init  visitOclXmi("62") 
+            assertSimilar( expect("\"foo\".size"), kmt)
+             //de.parse(kmt)
+        rescue (e: DynamicExpressionException)
+            fail(e.message) 
+        end
+
+  // implicit collect (relative to sample.ecore metamodel)
+     operation test63(): Void is
+        do
+            var kmt : String  init  visitOclXmi("63") 
+            assertSimilar(expect( "b.collect{ variable2 | variable2.y }"), kmt)
+        end
+
+  // simple if
+     operation test64(): Void is
+        do
+            var kmt : String  init  visitOclXmi("64") 
+            assertSimilar( expect("if true then true else true end"), kmt)
+        end
+
+
+  // non trivial if
+     operation test65(): Void is
+        do
+            var kmt : String  init  visitOclXmi("65") 
+            assertSimilar( expect("if 1.isGreater(2) then 3 else 4 end"), kmt)
+        end
+
+  // nested if
+     operation test66(): Void is
+        do
+            var kmt : String  init  visitOclXmi("66") 
+            assertSimilar( expect("if if false then false else false end then true else true end"), kmt)
+        end
+        
+    // long implicit collect
+    operation test67():Void is
+        do
+            var kmt : String  init  visitOclXmi("67") 
+            assertSimilar( expect ("b.collect{ variable2 | variable2.c }.collect{ variable3 | variable3.z }"), kmt)
+        end
+        
+    //  no implicit collect
+    operation test68():Void is
+        do
+            var kmt : String  init  visitOclXmi("68") 
+            assertSimilar( expect("w"), kmt)
+        end
+
+	// collect starting from a variable in a block
+	operation test69(): Void is
+		do
+            var kmt : String  init  visitOclXmi("69") 
+            assertSimilar( expect("b.collect{ e | e.c.collect{ variable2 | variable2.z }}"), kmt)
+		end
+
+    // no implicit collect
+    operation test70():Void is
+        do
+            var kmt : String  init  visitOclXmi("70") 
+            assertSimilar( expect("ab.c"), kmt)
+        end
+        
+    //  type context on local variable
+    operation test71():Void is
+        do
+            var kmt : String  init  visitOclXmi("71") 
+            assertSimilar( expect("do var x : B init self.ab x.c end"), kmt)
+        end
+        
+     // is kind of takes type as parameter
+    operation test72():Void is
+        do
+            var kmt : String  init  visitOclXmi("72") 
+            assertSimilar( expect("self.ab.isInstanceOf(B)"), kmt)
+        end
+        
+     // is kind of with qualified type as parameter
+    operation test73():Void is
+        do
+            var kmt : String  init  visitOclXmi("73") 
+            assertSimilar( expect("self.ab.isInstanceOf(sample::B)"), kmt)
+        end
+  
+    operation test74():Void is
+        do
+            var kmt : String  init  visitOclXmi("74") 
+            assertSimilar( expect("self.ab.isInstanceOf(SubB).~not.~or(self.ab.asType(SubB).ac)"), kmt)
+        end
+            
+    operation test75():Void is
+        do
+            var kmt : String  init  visitOclXmi("75") 
+            assertSimilar( expect("self.ab.isInstanceOf(sample::SubB).~not.~or(self.ab.asType(sample::SubB).ac)"), kmt)
+        end
+  
+      operation runOneTest(testRunner: TestRunner, nn:String) is
+          do
+              var oneOff : Boolean init false
+              if testRunner == void then
+                  testRunner : =TestRunner.new
+                  oneOff := true 
+              end
+              stdio.writeln("testing no " + nn)
+              self.setTestMethodName("test" +nn)
+              testRunner.runTest(self)
+              if oneOff then
+                 testRunner.printTestResult
+              end
+          end
+      
+    operation oneAtATime() : Void is 
+      do
+        var testRunner : TestRunner init TestRunner.new
+        from
+            var i : Integer init 1
+        until
+            i > 66
+        loop
+            var s : String init i.toString
+            if i <= 9 then
+                s := "0" + s
+            end
+            runOneTest(testRunner,s)
+            i := i + 1
+        end
+        testRunner.printTestResult
+      end
+      
+      operation oldmain() : Void is 
+      	do
+            runOneTest(void,"67")
+      	end
+      	
+      operation main() : Void is 
+          do
+                var testRunner : TestRunner init TestRunner.new
+    		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(BiteSizeOclTests)
+        		testRunner.runTest(suite)
+                testRunner.printTestResult
+          end    
+      
+}
