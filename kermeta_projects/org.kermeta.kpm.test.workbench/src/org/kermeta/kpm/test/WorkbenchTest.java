@@ -1,6 +1,6 @@
 
 
-/*$Id: WorkbenchTest.java,v 1.5 2008-07-23 08:56:13 ftanguy Exp $
+/*$Id: WorkbenchTest.java,v 1.6 2008-07-25 14:34:54 ftanguy Exp $
 * Project : org.kermeta.kpm.test.workbench
 * File : 	WorkbenchTest.java
 * License : EPL
@@ -84,7 +84,7 @@ public abstract class WorkbenchTest {
 		
 		public void execute() {
 			KpmManager.getDefault().addProject(_project);
-			schedule();
+			schedule(); // launch runInWorkspace()
 			waitForBuild(_project);
 		}
 
