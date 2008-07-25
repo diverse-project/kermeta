@@ -15,9 +15,12 @@ KerMeta TouchGraph plugin is distributed under the terms of the
 GPL license.
    </description>
 
-   <copyright url="http://www.kermeta.org/">
-      KerMeta workbench and most of its plugins are distributed under
-the terms of the EPL licence.
+   <copyright url="http://www.eclipse.org/legal/epl-v10.html">
+      Copyright : IRISA / INRIA / Universite de Rennes 1.
+All rights reserved.
+KerMeta workbench and most of its plugins are made available
+under the terms of the Eclipse Public License v1.0 which accompanies
+this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
 Special note:
 KerMeta TouchGraph plugin is distributed under the terms of the
 GPL license.

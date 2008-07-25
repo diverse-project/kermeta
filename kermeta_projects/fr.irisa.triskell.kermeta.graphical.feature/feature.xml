@@ -9,9 +9,12 @@
       This is the graphical elements (graphical editors, ...) for Kermeta. This is a separate feature in order to have a lightweight version of the workbench since this editor is optionnal.
    </description>
 
-   <copyright url="http://www.kermeta.org/">
-      Kermeta workbench and most of its plugins are distributed under
-the terms of the EPL licence.
+   <copyright url="http://www.eclipse.org/legal/epl-v10.html">
+      Copyright : IRISA / INRIA / Universite de Rennes 1.
+All rights reserved.
+This program and the accompanying materials are made available
+under the terms of the Eclipse Public License v1.0 which accompanies
+this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
    </copyright>
 
    <license url="Kermeta workbench and most of its plugins are distributed under">
@@ -21,6 +24,7 @@ the terms of the EPL licence.
 
    <url>
       <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
+      <discovery label="Kermeta update site" url="http://www.kermeta.org/update"/>
    </url>
 
    <requires>

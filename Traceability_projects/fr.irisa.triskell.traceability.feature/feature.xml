@@ -6,7 +6,7 @@
       provider-name="IRISA/INRIA">
    <install-handler/>
 
-   <description url="[Enter Feature URL here.]">
+   <description url="http://www.kermeta.org/">
       This Eclipse feature contains the plugins for Traceability metamodel.
 It includes:
 - The traceability model;
@@ -14,8 +14,12 @@ It includes:
 - The traceability editor plugin (generated with EMF);
    </description>
 
-   <copyright url="[Enter Copyright URL here.]">
-      Copyright 2005 - INRIA - EPL license
+   <copyright url="http://www.eclipse.org/legal/epl-v10.html">
+      Copyright : IRISA / INRIA / Universite de Rennes 1.
+All rights reserved.
+KerMeta workbench and most of its plugins are made available
+under the terms of the Eclipse Public License v1.0 which accompanies
+this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
    </copyright>
 
    <license url="[Enter License URL here.]">
@@ -45,7 +49,7 @@ License (&quot;EPL&quot;).
 
    <url>
       <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
-      <discovery label="UmlautNG discovery site" url="http://modelware.inria.fr/umlautng_update"/>
+      <discovery label="Kermeta update site" url="http://www.kermeta.org/update"/>
    </url>
 
    <requires>
