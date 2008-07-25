@@ -1,4 +1,4 @@
-<!-- $Id: test_ocl_build.xml,v 1.1 2008-07-23 14:42:35 dvojtise Exp $ -->
+<!-- $Id: test_ocl_build.xml,v 1.2 2008-07-25 09:52:17 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -30,7 +30,8 @@
 	<property name="traceability.jar" location="..\fr.irisa.triskell.traceability.model\${dot.or.bin}" />
 	<property name="kermeta.tests.jar" location="..\fr.irisa.triskell.kermeta.tests\${dot.or.bin}" />
 	<property name="ecoretools.registration.jar" location="..\org.eclipse.emf.ecoretools.registration\${dot.or.bin}"/>
-
+	<property name="kermeta.ocl.jar" location="..\fr.irisa.triskell.kermeta.ocl\${dot.or.bin}" />
+		
 	<property name="log4j.jar" location="${eclipse.home}/plugins/org.apache.log4j_1.2.13.v200706111418.jar" />
 	<property name="antlr.jar" location="${eclipse.home}/plugins/org.antlr_2.7.6/antlr.jar"/>
 	<!--<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar" />-->
@@ -65,6 +66,7 @@
 		<pathelement location="${kermeta.model.jar}" />
 		<pathelement location="${kermeta.interpreter.jar}" />
 		<pathelement location="${kermeta.io.jar}" />
+		<pathelement location="${kermeta.ocl.jar}" />
 		<pathelement location="${kermeta.io.loader.jar}" />
 		<pathelement location="${kermeta.merger.jar}" />
 		<pathelement location="${kermeta.interest.jar}" />
