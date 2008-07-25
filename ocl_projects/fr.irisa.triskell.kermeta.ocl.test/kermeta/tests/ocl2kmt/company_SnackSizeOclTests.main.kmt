@@ -1,4 +1,4 @@
-/* $Id: company_SnackSizeOclTests.main.kmt,v 1.1 2008-07-25 12:38:04 dvojtise Exp $
+/* $Id: company_SnackSizeOclTests.main.kmt,v 1.2 2008-07-25 15:26:26 dvojtise Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -15,6 +15,8 @@ require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-
 
 require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLHelper.kmt" 
 require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLText_OCLCST.kmt"  
+
+//require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore" 
 
 
 //require "http://sample"
@@ -78,11 +80,12 @@ class  SnackSizeOclTests  inherits TestCase
 				sourceOCLFileName, generatedXMIFileName)
 			
         	
-            var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/model/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
-            visitor.setEcoreHelper(EcoreHelpers::EcoreHelper.new.loadMetamodel(generatedXMIFileName))
-            parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
+            stdio.writeln("loading " + generatedXMIFileName)
+            visitor.setEcoreHelper(EcoreHelpers::EcoreHelper.new.loadMetamodel(ecoreFile))
+            stdio.writeln("loading " + generatedXMIFileName)
+            parsedOCL  := helper.loadOCLModel(repository, generatedXMIFileName)
             helper.getPackageDeclaration(parsedOCL).accept(visitor)
             result := io.s
         
