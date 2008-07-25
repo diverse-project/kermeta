@@ -1,6 +1,6 @@
 
 
-/*$Id: InternalKpmManager.java,v 1.4 2008-06-02 13:30:11 ftanguy Exp $
+/*$Id: InternalKpmManager.java,v 1.5 2008-07-25 14:35:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmManager.java
 * License : EPL
@@ -203,6 +203,7 @@ public class InternalKpmManager {
 		return _extensionElements.get(actionId);
 	}
 	
+	// TEST PURPOSE //
 	/**
 	 * 
 	 */
@@ -238,6 +239,7 @@ public class InternalKpmManager {
 			_projectsBeingBuilt.remove(p);
 		}
 	}
+	// TEST PURPOSE //
 }
 
 

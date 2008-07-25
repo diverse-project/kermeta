@@ -1,6 +1,6 @@
 
 
-/*$Id: KpmManager.java,v 1.2 2008-06-02 13:30:11 ftanguy Exp $
+/*$Id: KpmManager.java,v 1.3 2008-07-25 14:35:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmManager.java
 * License : EPL
@@ -19,6 +19,12 @@ import org.kermeta.kpm.internal.InternalKpmManager;
 
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
+/**
+ * A proxy to InternalKpmManager
+ * 
+ * @author paco
+ *
+ */
 public class KpmManager {
 
 	/**
