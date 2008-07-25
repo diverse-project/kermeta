@@ -65,8 +65,9 @@ public class OCLFileParser {
 	 * @param sourceTextURI
 	 * @param outputXmiURI
 	 * @throws ParserException
+	 * @throws IOException 
 	 */
-	public static void parseTextFileToXmiFile(URI sourceTextURI, URI outputXmiURI) throws ParserException {
+	public static void parseTextFileToXmiFile(URI sourceTextURI, URI outputXmiURI) throws ParserException, IOException {
 		String oclSourceText =  getContents(sourceTextURI);
 		parseToXMIFile(oclSourceText, outputXmiURI);
 	}
@@ -75,8 +76,9 @@ public class OCLFileParser {
 	 * Return the contents of the file specified by oclURI as a single large string
 	 * @param oclURI
 	 * @return
+	 * @throws IOException 
 	 */
-	 private static String getContents(URI oclURI){
+	 private static String getContents(URI oclURI) throws IOException{
 		 URIConverter converter = new URIConverterImpl();
 		 StringBuffer contents = new StringBuffer();
 		 BufferedReader input = null;
@@ -87,9 +89,7 @@ public class OCLFileParser {
     	      while (( line = input.readLine()) != null){
     	        contents.append(line);
     	        contents.append(System.getProperty("line.separator"));
-    	      }
-		  } catch (Exception ex) {
-			  ex.printStackTrace();
+    	      }		  
 		  } finally {
 			  try {
 				  if (input!= null) {
@@ -105,7 +105,12 @@ public class OCLFileParser {
 	 public static void main(String[] args){
 		URIConverter.URI_MAP.putAll(URIMapUtil.readMapFile(new File("uri.map")));
 		 URI testfile = URI.createURI("platform:/resource/fr.irisa.triskell.kermeta.ocl/ocl/70.ocl");
-		 System.out.println( getContents(testfile));
+		 try {
+			System.out.println( getContents(testfile));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	 }
 	
 

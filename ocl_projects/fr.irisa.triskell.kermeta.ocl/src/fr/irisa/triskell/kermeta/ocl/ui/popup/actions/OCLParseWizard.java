@@ -1,4 +1,4 @@
-/* $Id: OCLParseWizard.java,v 1.11 2008-01-24 14:15:17 dvojtise Exp $
+/* $Id: OCLParseWizard.java,v 1.12 2008-07-25 14:25:10 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.ocl
 * File : 	OCLParseWizard.java
 * License : EPL
@@ -23,7 +23,8 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
-import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
+import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.ocl.GenerateKMT;
 
@@ -39,14 +40,14 @@ public class OCLParseWizard extends Wizard {
 	public DestFileWizardPage outputPage;
 	public String defaultOutputExtension = "kmt";
 	
-	private IOConsole console;
+	private EclipseConsole console;
 	
 	/** pagenames */
 	public static final String OUTPUTFILE_PAGENAME = "OutputFile";
 	
 	public OCLParseWizard() {
 		super();
-		console = new EclipseConsole("mocl generator");
+		console = new EclipseConsole("OCL 2 KMT");
 		
 		setNeedsProgressMonitor(false);
 	}
@@ -174,6 +175,9 @@ public class OCLParseWizard extends Wizard {
 	
 	@Override
 	public boolean performFinish() {
+		console.println(new InfoMessage("Generating KMT file from : " + inputFile.getName() + 
+				" refering to metamodel " + outputPage.getEcoreFile().getName() + "..."));
+		
 		IFile kmtFile = outputPage.createNewFile();;
 		//this.generatemOCL();
 		//if (this.generatemOCL()){
@@ -190,7 +194,7 @@ public class OCLParseWizard extends Wizard {
 		URI ecoreURI = URI.createURI(ecorePath);
 		URI oclURI = URI.createURI(oclPath);
 		URI kmtURI = URI.createURI(kmtPath);
-		GenerateKMT generator = new GenerateKMT(new EclipseConsole("OCL 2 KMT"));
+		GenerateKMT generator = new GenerateKMT(console);
 		generator.generate(ecoreURI, oclURI, kmtURI);		
 				
 			
@@ -213,7 +217,7 @@ public class OCLParseWizard extends Wizard {
 				try {
 					tmpfile.delete(true, null);
 				} catch (CoreException e1) {
-					// TODO Auto-generated catch block
+					console.println(new ThrowableMessage(e1));
 					e1.printStackTrace();
 				}
 				
@@ -232,7 +236,7 @@ public class OCLParseWizard extends Wizard {
 			try {
 				inputFile.getParent().refreshLocal(1, null);
 			} catch (CoreException e) {
-				// TODO Auto-generated catch block
+				console.println(new ThrowableMessage(e));
 				e.printStackTrace();
 			}
 			//xmiFile.refreshLocal(1, null);
@@ -254,15 +258,12 @@ public class OCLParseWizard extends Wizard {
 		this.workbench = workbench;
 
 		// the selection should be a single *.km file
-		Iterator it = selection.iterator();
+		Iterator<?> it = selection.iterator();
 		IFile file = null;
 		while (it.hasNext()) {
-			try {
-				file = (IFile) it.next();
-
-			} catch (ClassCastException e) {
-				e.printStackTrace();
-			}
+			Object next = it.next();
+			if(next instanceof IFile)
+				file = (IFile) next;
 		}
 
 		this.inputFile = file;

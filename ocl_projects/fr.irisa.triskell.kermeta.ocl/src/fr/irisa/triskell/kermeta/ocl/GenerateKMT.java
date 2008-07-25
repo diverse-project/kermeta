@@ -1,4 +1,4 @@
-/* $Id: GenerateKMT.java,v 1.11 2008-07-24 07:49:21 dvojtise Exp $
+/* $Id: GenerateKMT.java,v 1.12 2008-07-25 14:25:10 dvojtise Exp $
  * Project: OCL
  * File: GenerateKMT.java
  * License: EPL
@@ -10,6 +10,7 @@
  */
 package fr.irisa.triskell.kermeta.ocl;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
@@ -40,7 +41,7 @@ public class GenerateKMT {
 	
 	//private IOConsole defaultConsole = new LocalIOConsole();
 	
-	private EclipseConsole defaultConsole = new EclipseConsole("OCL");
+	private EclipseConsole defaultConsole;
 	
 	public GenerateKMT(){
 		setUpURIMappings();
@@ -62,12 +63,15 @@ public class GenerateKMT {
 	
 	public void generate(URI ecoreURI, URI inputOclFileURI, URI outputKMTFileURI){
 		URI xmiTempFileURI = inputOclFileURI.trimFileExtension().appendFileExtension("xmi");
-		System.out.println("Parsing: \nfrom: " + inputOclFileURI + " \nto  : " + xmiTempFileURI  );
+		getConsole().println("Parsing: \nfrom: " + inputOclFileURI + " \nto  : " + xmiTempFileURI  );
 		try {
 				OCLFileParser.parseTextFileToXmiFile(inputOclFileURI, xmiTempFileURI);
 		} catch (ParserException e) {
-				defaultConsole.println(new ThrowableMessage(e));
+			getConsole().println(new ThrowableMessage(e));
 				return;
+		} catch (IOException e) {
+			getConsole().println(new ThrowableMessage(e));
+			return;
 		}
 		try {
 			runOclCstToKmtPrinter( xmiTempFileURI, ecoreURI,  outputKMTFileURI);
@@ -86,7 +90,7 @@ public class GenerateKMT {
 		registerPackages(EcorePackage.eINSTANCE);
 		EPackage ePack = (EPackage) getResource().getContents().get(0);
 		registerPackages(ePack); 
-		GenerateOCL.run(cstXmiURI.toString(), ecoreURI.toString(),  outputKmtFileURI.toString(), defaultConsole);
+		GenerateOCL.run(cstXmiURI.toString(), ecoreURI.toString(),  outputKmtFileURI.toString(), getConsole());
 	}
 	
 	private static void registerPackages(EPackage pack) {
@@ -107,4 +111,10 @@ public class GenerateKMT {
 		
 	}
 	
+	public EclipseConsole getConsole(){
+		if(this.defaultConsole == null){
+			this.defaultConsole = new EclipseConsole("OCL");
+		}
+		return this.defaultConsole;
+	}
 }
