@@ -1,6 +1,6 @@
 
 
-/*$Id: AddMarkers.java,v 1.5 2008-06-11 14:58:28 dvojtise Exp $
+/*$Id: AddMarkers.java,v 1.6 2008-07-25 09:44:17 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -60,8 +60,13 @@ public class AddMarkers implements IAction {
 				KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(u.getName());
 				if ( kermetaUnit != null ) {
 					IFile file = ResourceHelper.getIFile(u.getName());
-					KermetaMarkersHelper.clearMarkers(file);
-					KermetaMarkersHelper.createMarkers(file, kermetaUnit);
+					if(file != null){
+						KermetaMarkersHelper.clearMarkers(file);
+						KermetaMarkersHelper.createMarkers(file, kermetaUnit);
+					}
+					else{
+						KPMPlugin.logErrorMessage("Cannot mark " + u.getName() + " because not able to get the IFile", null);
+					}
 				} else {
 					// The kermeta unit has not been found.
 					// That is strange maybe should warn.
