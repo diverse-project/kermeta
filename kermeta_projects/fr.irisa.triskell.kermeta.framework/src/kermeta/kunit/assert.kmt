@@ -1,4 +1,4 @@
-/* $Id: assert.kmt,v 1.9 2008-03-03 13:39:58 dvojtise Exp $
+/* $Id: assert.kmt,v 1.10 2008-07-25 15:02:15 dvojtise Exp $
  * Creation date: May 29, 2007
  * License:
  * Copyright:
@@ -70,7 +70,7 @@ abstract class AbstractFallible
 		do	
 			expected := distil(expected)
 			actual := distil(actual)
-			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
+			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual  \t:[" + actual + "]")
 		end
 		
 	/** 
