@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsm="http://www.kermeta.org/fsm" xmi:id="_DT-x4EkSEd23C9Zs4giAbw" initialState="_DT-x4UkSEd23C9Zs4giAbw" finalState="_DT-x40kSEd23C9Zs4giAbw">
-  <ownedState xmi:id="_DT-x4UkSEd23C9Zs4giAbw" name="s1">
-    <outgoingTransition xmi:id="_DT-x4kkSEd23C9Zs4giAbw" target="_DT-x40kSEd23C9Zs4giAbw" input="c" output="v"/>
+<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsm="http://www.kermeta.org/fsm" xmi:id="_vkabsFpDEd2NJomRlU6-2g" initialState="_vkabsVpDEd2NJomRlU6-2g" finalState="_vkabs1pDEd2NJomRlU6-2g">
+  <ownedState xmi:id="_vkabsVpDEd2NJomRlU6-2g" name="s1">
+    <outgoingTransition xmi:id="_vkabslpDEd2NJomRlU6-2g" target="_vkabs1pDEd2NJomRlU6-2g" input="c" output="v"/>
   </ownedState>
-  <ownedState xmi:id="_DT-x40kSEd23C9Zs4giAbw" name="s2" incomingTransition="_DT-x4kkSEd23C9Zs4giAbw _DT-x5EkSEd23C9Zs4giAbw">
-    <outgoingTransition xmi:id="_DT-x5EkSEd23C9Zs4giAbw" target="_DT-x40kSEd23C9Zs4giAbw" input="x" output="y"/>
+  <ownedState xmi:id="_vkabs1pDEd2NJomRlU6-2g" name="s2" incomingTransition="_vkabslpDEd2NJomRlU6-2g _vkabtFpDEd2NJomRlU6-2g">
+    <outgoingTransition xmi:id="_vkabtFpDEd2NJomRlU6-2g" target="_vkabs1pDEd2NJomRlU6-2g" input="x" output="y"/>
   </ownedState>
 </fsm:FSM>

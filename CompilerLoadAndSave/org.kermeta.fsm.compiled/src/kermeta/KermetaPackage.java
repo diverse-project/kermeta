@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: KermetaPackage.java,v 1.1 2008-07-02 09:13:24 ftanguy Exp $
+ * $Id: KermetaPackage.java,v 1.2 2008-07-25 12:40:11 ftanguy Exp $
  */
 package kermeta;
 
@@ -89,6 +89,24 @@ public interface KermetaPackage extends EPackage
   int DUMMY_CLASS__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
 
   /**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DUMMY_CLASS__CONTAINER = StructurePackage.OBJECT__CONTAINER;
+
+		/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DUMMY_CLASS__OID = StructurePackage.OBJECT__OID;
+
+		/**
 	 * The number of structural features of the '<em>Dummy Class</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

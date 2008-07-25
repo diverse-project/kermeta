@@ -51,5 +51,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi,
  fr.irisa.triskell.kermeta.samples.fsm.model,
  org.kermeta.compil.runtime.helper,
- org.kermeta.compiler.runtime.configuration
+ org.kermeta.compiler.runtime.configuration,
+ fr.irisa.triskell.kermeta.model;bundle-version="1.1.99"
 Eclipse-LazyStart: true

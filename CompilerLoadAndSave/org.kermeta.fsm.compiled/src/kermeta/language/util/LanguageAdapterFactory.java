@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: LanguageAdapterFactory.java,v 1.1 2008-07-02 09:13:28 ftanguy Exp $
+ * $Id: LanguageAdapterFactory.java,v 1.2 2008-07-25 12:40:14 ftanguy Exp $
  */
 package kermeta.language.util;
 
@@ -30,251 +30,238 @@ import org.eclipse.emf.ecore.EObject;
 public class LanguageAdapterFactory extends AdapterFactoryImpl
 {
   /**
-   * The cached model package.
-   * <!-- begin-user-doc -->
+	 * The cached model package.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected static LanguagePackage modelPackage;
 
   /**
-   * Creates an instance of the adapter factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public LanguageAdapterFactory()
   {
-    if (modelPackage == null)
-    {
-      modelPackage = LanguagePackage.eINSTANCE;
-    }
-  }
+		if (modelPackage == null) {
+			modelPackage = LanguagePackage.eINSTANCE;
+		}
+	}
 
   /**
-   * Returns whether this factory is applicable for the type of the object.
-   * <!-- begin-user-doc -->
+	 * Returns whether this factory is applicable for the type of the object.
+	 * <!-- begin-user-doc -->
    * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
    * <!-- end-user-doc -->
-   * @return whether this factory is applicable for the type of the object.
-   * @generated
-   */
+	 * @return whether this factory is applicable for the type of the object.
+	 * @generated
+	 */
   @Override
   public boolean isFactoryForType(Object object)
   {
-    if (object == modelPackage)
-    {
-      return true;
-    }
-    if (object instanceof EObject)
-    {
-      return ((EObject)object).eClass().getEPackage() == modelPackage;
-    }
-    return false;
-  }
+		if (object == modelPackage) {
+			return true;
+		}
+		if (object instanceof EObject) {
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
+		}
+		return false;
+	}
 
   /**
-   * The switch the delegates to the <code>createXXX</code> methods.
-   * <!-- begin-user-doc -->
+	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LanguageSwitch<Adapter> modelSwitch =
-    new LanguageSwitch<Adapter>()
-    {
-      @Override
-      public <G> Adapter caseReflectiveCollection(ReflectiveCollection<G> object)
-      {
-        return createReflectiveCollectionAdapter();
-      }
-      @Override
-      public <G> Adapter caseReflectiveSequence(ReflectiveSequence<G> object)
-      {
-        return createReflectiveSequenceAdapter();
-      }
-      @Override
-      public Adapter caseDummyClass(DummyClass object)
-      {
-        return createDummyClassAdapter();
-      }
-      @Override
-      public Adapter caseObject(kermeta.language.structure.Object object)
-      {
-        return createObjectAdapter();
-      }
-      @Override
-      public <G> Adapter caseCollection(Collection<G> object)
-      {
-        return createCollectionAdapter();
-      }
-      @Override
-      public <G> Adapter caseSet(Set<G> object)
-      {
-        return createSetAdapter();
-      }
-      @Override
-      public <G> Adapter caseOrderedCollection(OrderedCollection<G> object)
-      {
-        return createOrderedCollectionAdapter();
-      }
-      @Override
-      public <G> Adapter caseOrderedSet(OrderedSet<G> object)
-      {
-        return createOrderedSetAdapter();
-      }
-      @Override
-      public Adapter defaultCase(EObject object)
-      {
-        return createEObjectAdapter();
-      }
-    };
+    new LanguageSwitch<Adapter>() {
+			@Override
+			public <G> Adapter caseReflectiveCollection(ReflectiveCollection<G> object) {
+				return createReflectiveCollectionAdapter();
+			}
+			@Override
+			public <G> Adapter caseReflectiveSequence(ReflectiveSequence<G> object) {
+				return createReflectiveSequenceAdapter();
+			}
+			@Override
+			public Adapter caseDummyClass(DummyClass object) {
+				return createDummyClassAdapter();
+			}
+			@Override
+			public Adapter caseObject(kermeta.language.structure.Object object) {
+				return createObjectAdapter();
+			}
+			@Override
+			public <G> Adapter caseCollection(Collection<G> object) {
+				return createCollectionAdapter();
+			}
+			@Override
+			public <G> Adapter caseSet(Set<G> object) {
+				return createSetAdapter();
+			}
+			@Override
+			public <G> Adapter caseOrderedCollection(OrderedCollection<G> object) {
+				return createOrderedCollectionAdapter();
+			}
+			@Override
+			public <G> Adapter caseOrderedSet(OrderedSet<G> object) {
+				return createOrderedSetAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
   /**
-   * Creates an adapter for the <code>target</code>.
-   * <!-- begin-user-doc -->
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param target the object to adapt.
-   * @return the adapter for the <code>target</code>.
-   * @generated
-   */
+	 * @param target the object to adapt.
+	 * @return the adapter for the <code>target</code>.
+	 * @generated
+	 */
   @Override
   public Adapter createAdapter(Notifier target)
   {
-    return modelSwitch.doSwitch((EObject)target);
-  }
+		return modelSwitch.doSwitch((EObject)target);
+	}
 
 
   /**
-   * Creates a new adapter for an object of class '{@link kermeta.language.ReflectiveCollection <em>Reflective Collection</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link kermeta.language.ReflectiveCollection <em>Reflective Collection</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see kermeta.language.ReflectiveCollection
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see kermeta.language.ReflectiveCollection
+	 * @generated
+	 */
   public Adapter createReflectiveCollectionAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link kermeta.language.ReflectiveSequence <em>Reflective Sequence</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link kermeta.language.ReflectiveSequence <em>Reflective Sequence</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see kermeta.language.ReflectiveSequence
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see kermeta.language.ReflectiveSequence
+	 * @generated
+	 */
   public Adapter createReflectiveSequenceAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link kermeta.language.DummyClass <em>Dummy Class</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link kermeta.language.DummyClass <em>Dummy Class</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see kermeta.language.DummyClass
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see kermeta.language.DummyClass
+	 * @generated
+	 */
   public Adapter createDummyClassAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link kermeta.language.structure.Object <em>Object</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Object <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see kermeta.language.structure.Object
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.Object
+	 * @generated
+	 */
   public Adapter createObjectAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link kermeta.standard.Collection <em>Collection</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.Collection <em>Collection</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see kermeta.standard.Collection
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see kermeta.standard.Collection
+	 * @generated
+	 */
   public Adapter createCollectionAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link kermeta.standard.Set <em>Set</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.Set <em>Set</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see kermeta.standard.Set
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see kermeta.standard.Set
+	 * @generated
+	 */
   public Adapter createSetAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link kermeta.standard.OrderedCollection <em>Ordered Collection</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.OrderedCollection <em>Ordered Collection</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see kermeta.standard.OrderedCollection
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see kermeta.standard.OrderedCollection
+	 * @generated
+	 */
   public Adapter createOrderedCollectionAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link kermeta.standard.OrderedSet <em>Ordered Set</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.OrderedSet <em>Ordered Set</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see kermeta.standard.OrderedSet
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see kermeta.standard.OrderedSet
+	 * @generated
+	 */
   public Adapter createOrderedSetAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for the default case.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @generated
+	 */
   public Adapter createEObjectAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
 } //LanguageAdapterFactory

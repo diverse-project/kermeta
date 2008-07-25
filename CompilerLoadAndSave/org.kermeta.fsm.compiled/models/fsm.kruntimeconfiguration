@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kruntimeconfiguration:Configuration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kruntimeconfiguration="http://www.kermeta.org/kruntimeconfiguration">
-  <entries key="baseClassName" value="fr.irisa.triskell.kermeta.samples.fsm.FsmPackage"/>
-  <entries key="generatedClassName" value="fsm.FsmPackage"/>
-  <entries key="uri" value="http://www.kermeta.org/fsm"/>
-  <entries key="fileExtension" value="fsm"/>
-  <entries key="factoryClassName" value="fr.irisa.triskell.kermeta.samples.fsm.util.FsmResourceFactoryImpl"/>
-</kruntimeconfiguration:Configuration>

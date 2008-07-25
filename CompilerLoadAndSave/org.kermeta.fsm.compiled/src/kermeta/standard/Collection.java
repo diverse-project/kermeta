@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: Collection.java,v 1.1 2008-07-02 09:13:29 ftanguy Exp $
+ * $Id: Collection.java,v 1.2 2008-07-25 12:40:11 ftanguy Exp $
  */
 package kermeta.standard;
 
@@ -53,7 +53,7 @@ public interface Collection<G> extends kermeta.language.structure.Object
 	 */
 	void setValues(EList<G> value);
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @model rejectorType="kermeta.standard.KermetaSpecialTypesAlias"

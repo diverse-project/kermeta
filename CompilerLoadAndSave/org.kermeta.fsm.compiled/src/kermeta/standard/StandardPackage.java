@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: StandardPackage.java,v 1.1 2008-07-02 09:13:29 ftanguy Exp $
+ * $Id: StandardPackage.java,v 1.2 2008-07-25 12:40:11 ftanguy Exp $
  */
 package kermeta.standard;
 
@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -371,13 +372,31 @@ public interface StandardPackage extends EPackage
   int ITERATOR__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
 
   /**
+	 * The feature id for the '<em><b>Java Iterator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR__JAVA_ITERATOR = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+		/**
+	 * The feature id for the '<em><b>Kermeta Collection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR__KERMETA_COLLECTION = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+
+		/**
 	 * The number of structural features of the '<em>Iterator</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int ITERATOR_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+  int ITERATOR_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 2;
 
   /**
 	 * The meta object id for the '{@link kermeta.standard.impl.VoidImpl <em>Void</em>}' class.
@@ -706,6 +725,17 @@ public interface StandardPackage extends EPackage
 
 
   /**
+	 * The meta object id for the '<em>Java Iterator</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Iterator
+	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaIterator()
+	 * @generated
+	 */
+	int JAVA_ITERATOR = 20;
+
+
+		/**
 	 * Returns the meta object for class '{@link kermeta.standard.Collection <em>Collection</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -787,6 +817,28 @@ public interface StandardPackage extends EPackage
   EClass getIterator();
 
   /**
+	 * Returns the meta object for the attribute '{@link kermeta.standard.Iterator#getJavaIterator <em>Java Iterator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Java Iterator</em>'.
+	 * @see kermeta.standard.Iterator#getJavaIterator()
+	 * @see #getIterator()
+	 * @generated
+	 */
+	EAttribute getIterator_JavaIterator();
+
+		/**
+	 * Returns the meta object for the reference '{@link kermeta.standard.Iterator#getKermetaCollection <em>Kermeta Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Kermeta Collection</em>'.
+	 * @see kermeta.standard.Iterator#getKermetaCollection()
+	 * @see #getIterator()
+	 * @generated
+	 */
+	EReference getIterator_KermetaCollection();
+
+		/**
 	 * Returns the meta object for class '{@link kermeta.standard.Void <em>Void</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -924,6 +976,17 @@ public interface StandardPackage extends EPackage
   EDataType getUnlimitedNatural();
 
   /**
+	 * Returns the meta object for data type '{@link java.util.Iterator <em>Java Iterator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Java Iterator</em>'.
+	 * @see java.util.Iterator
+	 * @model instanceClass="java.util.Iterator" typeParameters="G"
+	 * @generated
+	 */
+	EDataType getJavaIterator();
+
+		/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1025,6 +1088,22 @@ public interface StandardPackage extends EPackage
     EClass ITERATOR = eINSTANCE.getIterator();
 
     /**
+		 * The meta object literal for the '<em><b>Java Iterator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ITERATOR__JAVA_ITERATOR = eINSTANCE.getIterator_JavaIterator();
+
+				/**
+		 * The meta object literal for the '<em><b>Kermeta Collection</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ITERATOR__KERMETA_COLLECTION = eINSTANCE.getIterator_KermetaCollection();
+
+				/**
 		 * The meta object literal for the '{@link kermeta.standard.impl.VoidImpl <em>Void</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1150,6 +1229,16 @@ public interface StandardPackage extends EPackage
 		 * @generated
 		 */
     EDataType UNLIMITED_NATURAL = eINSTANCE.getUnlimitedNatural();
+
+				/**
+		 * The meta object literal for the '<em>Java Iterator</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Iterator
+		 * @see kermeta.standard.impl.StandardPackageImpl#getJavaIterator()
+		 * @generated
+		 */
+		EDataType JAVA_ITERATOR = eINSTANCE.getJavaIterator();
 
   }
 

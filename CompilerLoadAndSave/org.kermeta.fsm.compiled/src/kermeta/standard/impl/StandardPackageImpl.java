@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: StandardPackageImpl.java,v 1.1 2008-07-02 09:13:16 ftanguy Exp $
+ * $Id: StandardPackageImpl.java,v 1.2 2008-07-25 12:40:04 ftanguy Exp $
  */
 package kermeta.standard.impl;
 
@@ -74,6 +74,7 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -227,6 +228,13 @@ public class StandardPackageImpl extends EPackageImpl implements StandardPackage
   private EDataType unlimitedNaturalEDataType = null;
 
   /**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType javaIteratorEDataType = null;
+
+		/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -415,6 +423,24 @@ public class StandardPackageImpl extends EPackageImpl implements StandardPackage
 
   /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIterator_JavaIterator() {
+		return (EAttribute)iteratorEClass.getEStructuralFeatures().get(0);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIterator_KermetaCollection() {
+		return (EReference)iteratorEClass.getEStructuralFeatures().get(1);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -545,6 +571,15 @@ public class StandardPackageImpl extends EPackageImpl implements StandardPackage
 
   /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getJavaIterator() {
+		return javaIteratorEDataType;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -587,6 +622,8 @@ public class StandardPackageImpl extends EPackageImpl implements StandardPackage
 		sequenceEClass = createEClass(SEQUENCE);
 
 		iteratorEClass = createEClass(ITERATOR);
+		createEAttribute(iteratorEClass, ITERATOR__JAVA_ITERATOR);
+		createEReference(iteratorEClass, ITERATOR__KERMETA_COLLECTION);
 
 		voidEClass = createEClass(VOID);
 
@@ -609,6 +646,7 @@ public class StandardPackageImpl extends EPackageImpl implements StandardPackage
 		characterEDataType = createEDataType(CHARACTER);
 		stringEDataType = createEDataType(STRING);
 		unlimitedNaturalEDataType = createEDataType(UNLIMITED_NATURAL);
+		javaIteratorEDataType = createEDataType(JAVA_ITERATOR);
 	}
 
   /**
@@ -648,6 +686,7 @@ public class StandardPackageImpl extends EPackageImpl implements StandardPackage
 		ETypeParameter sequenceEClass_G = addETypeParameter(sequenceEClass, "G");
 		ETypeParameter iteratorEClass_G = addETypeParameter(iteratorEClass, "G");
 		ETypeParameter summableEClass_G = addETypeParameter(summableEClass, "G");
+		addETypeParameter(javaIteratorEDataType, "G");
 
 		// Set bounds for type parameters
 
@@ -1221,6 +1260,14 @@ public class StandardPackageImpl extends EPackageImpl implements StandardPackage
 		initEOperation(op, g1);
 
 		initEClass(iteratorEClass, Iterator.class, "Iterator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(this.getJavaIterator());
+		g2 = createEGenericType(iteratorEClass_G);
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getIterator_JavaIterator(), g1, "javaIterator", null, 0, 1, Iterator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(this.getCollection());
+		g2 = createEGenericType(iteratorEClass_G);
+		g1.getETypeArguments().add(g2);
+		initEReference(getIterator_KermetaCollection(), g1, null, "kermetaCollection", null, 0, 1, Iterator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(iteratorEClass, this.getBoolean(), "hasNext", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1281,6 +1328,7 @@ public class StandardPackageImpl extends EPackageImpl implements StandardPackage
 		initEDataType(characterEDataType, char.class, "Character", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(unlimitedNaturalEDataType, Object.class, "UnlimitedNatural", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(javaIteratorEDataType, java.util.Iterator.class, "JavaIterator", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// kermeta

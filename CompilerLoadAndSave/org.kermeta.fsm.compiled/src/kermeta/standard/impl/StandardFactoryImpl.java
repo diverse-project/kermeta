@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: StandardFactoryImpl.java,v 1.1 2008-07-02 09:13:16 ftanguy Exp $
+ * $Id: StandardFactoryImpl.java,v 1.2 2008-07-25 12:40:04 ftanguy Exp $
  */
 package kermeta.standard.impl;
 
@@ -107,6 +107,8 @@ public class StandardFactoryImpl extends EFactoryImpl implements StandardFactory
 				return createStringFromString(eDataType, initialValue);
 			case StandardPackage.UNLIMITED_NATURAL:
 				return createUnlimitedNaturalFromString(eDataType, initialValue);
+			case StandardPackage.JAVA_ITERATOR:
+				return createJavaIteratorFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -133,6 +135,8 @@ public class StandardFactoryImpl extends EFactoryImpl implements StandardFactory
 				return convertStringToString(eDataType, instanceValue);
 			case StandardPackage.UNLIMITED_NATURAL:
 				return convertUnlimitedNaturalToString(eDataType, instanceValue);
+			case StandardPackage.JAVA_ITERATOR:
+				return convertJavaIteratorToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -358,6 +362,24 @@ public class StandardFactoryImpl extends EFactoryImpl implements StandardFactory
 	}
 
   /**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public java.util.Iterator<?> createJavaIteratorFromString(EDataType eDataType, String initialValue) {
+		return (java.util.Iterator<?>)super.createFromString(initialValue);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertJavaIteratorToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated

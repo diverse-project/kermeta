@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: LanguageFactory.java,v 1.1 2008-07-02 09:13:40 ftanguy Exp $
+ * $Id: LanguageFactory.java,v 1.2 2008-07-25 12:40:13 ftanguy Exp $
  */
 package kermeta.language;
 
@@ -18,38 +18,38 @@ import org.eclipse.emf.ecore.EFactory;
 public interface LanguageFactory extends EFactory
 {
   /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   LanguageFactory eINSTANCE = kermeta.language.impl.LanguageFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Reflective Collection</em>'.
-   * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Reflective Collection</em>'.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reflective Collection</em>'.
-   * @generated
-   */
+	 * @return a new object of class '<em>Reflective Collection</em>'.
+	 * @generated
+	 */
   <G> ReflectiveCollection<G> createReflectiveCollection();
 
   /**
-   * Returns a new object of class '<em>Reflective Sequence</em>'.
-   * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Reflective Sequence</em>'.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reflective Sequence</em>'.
-   * @generated
-   */
+	 * @return a new object of class '<em>Reflective Sequence</em>'.
+	 * @generated
+	 */
   <G> ReflectiveSequence<G> createReflectiveSequence();
 
   /**
-   * Returns the package supported by this factory.
-   * <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the package supported by this factory.
-   * @generated
-   */
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
   LanguagePackage getLanguagePackage();
 
 } //LanguageFactory

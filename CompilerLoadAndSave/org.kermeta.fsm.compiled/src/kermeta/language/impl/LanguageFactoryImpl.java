@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: LanguageFactoryImpl.java,v 1.1 2008-07-02 09:13:19 ftanguy Exp $
+ * $Id: LanguageFactoryImpl.java,v 1.2 2008-07-25 12:40:05 ftanguy Exp $
  */
 package kermeta.language.impl;
 
@@ -24,98 +24,94 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 public class LanguageFactoryImpl extends EFactoryImpl implements LanguageFactory
 {
   /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public static LanguageFactory init()
   {
-    try
-    {
-      LanguageFactory theLanguageFactory = (LanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/language/kermeta_temp_uri"); 
-      if (theLanguageFactory != null)
-      {
-        return theLanguageFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new LanguageFactoryImpl();
-  }
+		try {
+			LanguageFactory theLanguageFactory = (LanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/language/kermeta_temp_uri"); 
+			if (theLanguageFactory != null) {
+				return theLanguageFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new LanguageFactoryImpl();
+	}
 
   /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public LanguageFactoryImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public EObject create(EClass eClass)
   {
-    switch (eClass.getClassifierID())
-    {
-      case LanguagePackage.REFLECTIVE_COLLECTION: return createReflectiveCollection();
-      case LanguagePackage.REFLECTIVE_SEQUENCE: return createReflectiveSequence();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eClass.getClassifierID()) {
+			case LanguagePackage.REFLECTIVE_COLLECTION: return createReflectiveCollection();
+			case LanguagePackage.REFLECTIVE_SEQUENCE: return createReflectiveSequence();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public <G> ReflectiveCollection<G> createReflectiveCollection()
   {
-    ReflectiveCollectionImpl<G> reflectiveCollection = new ReflectiveCollectionImpl<G>();
-    return reflectiveCollection;
-  }
+		ReflectiveCollectionImpl<G> reflectiveCollection = new ReflectiveCollectionImpl<G>();
+		return reflectiveCollection;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public <G> ReflectiveSequence<G> createReflectiveSequence()
   {
-    ReflectiveSequenceImpl<G> reflectiveSequence = new ReflectiveSequenceImpl<G>();
-    return reflectiveSequence;
-  }
+		ReflectiveSequenceImpl<G> reflectiveSequence = new ReflectiveSequenceImpl<G>();
+		return reflectiveSequence;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public LanguagePackage getLanguagePackage()
   {
-    return (LanguagePackage)getEPackage();
-  }
+		return (LanguagePackage)getEPackage();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
+	 * @deprecated
+	 * @generated
+	 */
   @Deprecated
   public static LanguagePackage getPackage()
   {
-    return LanguagePackage.eINSTANCE;
-  }
+		return LanguagePackage.eINSTANCE;
+	}
 
 } //LanguageFactoryImpl

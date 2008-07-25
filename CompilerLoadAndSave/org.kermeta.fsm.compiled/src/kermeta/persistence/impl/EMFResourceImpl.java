@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: EMFResourceImpl.java,v 1.3 2008-07-08 08:52:31 ftanguy Exp $
+ * $Id: EMFResourceImpl.java,v 1.4 2008-07-25 12:40:06 ftanguy Exp $
  */
 package kermeta.persistence.impl;
 
@@ -9,8 +9,8 @@ import kermeta.persistence.EMFResource;
 import kermeta.persistence.PersistencePackage;
 
 import org.eclipse.emf.ecore.EClass;
-import org.kermeta.compil.runtime.helper.basetypes.Loader;
-import org.kermeta.compil.runtime.helper.basetypes.Saver;
+import org.kermeta.compil.runtime.helper.persistence.Loader;
+import org.kermeta.compil.runtime.helper.persistence.Saver;
 
 /**
  * <!-- begin-user-doc -->

@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadSaveLoadFSM.java,v 1.2 2008-07-03 15:22:00 ftanguy Exp $
+/*$Id: LoadSaveLoadFSM.java,v 1.3 2008-07-25 12:40:12 ftanguy Exp $
 * Project : org.kermeta.framework.compiled.runtime
 * File : 	Test.java
 * License : EPL
@@ -19,7 +19,7 @@ import kermeta.persistence.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.compil.runtime.helper.basetypes.PersistenceMapping;
+import org.kermeta.compil.runtime.helper.persistence.PersistenceMapping;
 
 import fr.irisa.triskell.kermeta.samples.fsm.FsmPackage;
 
@@ -29,8 +29,10 @@ public class LoadSaveLoadFSM {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		String path = "/home/paco/kpm-workbench/org.kermeta.fsm.compiled/models/";
-		PersistenceMapping.initialize( path + "fsm.kruntimeconfiguration");
+		//String path2 = "platform:/resource/org.kermeta.fsm.compiled/models/";
+		PersistenceMapping.initialize( path + "kermeta.kruntimeconfiguration");
 		
 		Repository repository = PersistenceFactory.eINSTANCE.createEMFRepository();
 		Resource resource = repository.createResource(path + "sample1.fsm", "http://www.kermeta.org/fsm");

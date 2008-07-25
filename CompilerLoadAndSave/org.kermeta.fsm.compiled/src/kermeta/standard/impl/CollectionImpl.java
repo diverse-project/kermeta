@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: CollectionImpl.java,v 1.1 2008-07-02 09:13:16 ftanguy Exp $
+ * $Id: CollectionImpl.java,v 1.2 2008-07-25 12:40:04 ftanguy Exp $
  */
 package kermeta.standard.impl;
 
@@ -13,13 +13,17 @@ import kermeta.standard.Iterator;
 import kermeta.standard.OrderedSet;
 import kermeta.standard.Sequence;
 import kermeta.standard.Set;
+import kermeta.standard.StandardFactory;
 import kermeta.standard.StandardPackage;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.kermeta.compil.runtime.helper.basetypes.CollectionUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -115,14 +119,11 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements Collection
   /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-  public void remove(G element)
-  {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+  public void remove(G element) {
+	  CollectionUtil.remove(this, element);
+  }
 
   /**
 	 * <!-- begin-user-doc -->
@@ -211,14 +212,11 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements Collection
   /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-  public void add(G element)
-  {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+  public void add(G element) {
+	  CollectionUtil.add(this, element);
+  }
 
   /**
 	 * <!-- begin-user-doc -->
@@ -235,14 +233,11 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements Collection
   /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-  public void clear()
-  {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+  public void clear() {
+	  CollectionUtil.clear( this );
+  }
 
   /**
 	 * <!-- begin-user-doc -->
@@ -355,14 +350,13 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements Collection
   /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-  public Iterator<G> iterator()
-  {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+  public Iterator<G> iterator() {
+	  Iterator<G> i = StandardFactory.eINSTANCE.createIterator();
+	  CollectionUtil.iterator(this, i);
+	  return i;
+  }
 
   /**
 	 * <!-- begin-user-doc -->
@@ -403,14 +397,11 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements Collection
   /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-  public int size()
-  {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+  public int size() {
+	  return CollectionUtil.size(this);
+  }
 
   /**
 	 * <!-- begin-user-doc -->

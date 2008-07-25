@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: OrderedCollectionImpl.java,v 1.1 2008-07-02 09:13:16 ftanguy Exp $
+ * $Id: OrderedCollectionImpl.java,v 1.2 2008-07-25 12:40:04 ftanguy Exp $
  */
 package kermeta.standard.impl;
 
@@ -9,6 +9,7 @@ import kermeta.standard.OrderedCollection;
 import kermeta.standard.StandardPackage;
 
 import org.eclipse.emf.ecore.EClass;
+import org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,25 +46,19 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G> impleme
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
+   * @generated NOT
    */
-  public void removeAt(int index)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
+  public void removeAt(int index) {
+	  OrderedCollectionUtil.removeAt(this, index);
   }
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
+   * @generated NOT
    */
-  public void addAt(int index, G element)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
+  public void addAt(int index, G element) {
+	  OrderedCollectionUtil.addAt(this, element, index);
   }
 
   /**
@@ -93,13 +88,10 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G> impleme
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
+   * @generated NOT
    */
-  public G elementAt(int index)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
+  public G elementAt(int index) {
+	  return (G) OrderedCollectionUtil.elementAt(this, index);
   }
 
   /**
