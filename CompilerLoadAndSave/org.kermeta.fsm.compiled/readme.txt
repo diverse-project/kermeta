@@ -1,0 +1,1 @@
+For testing: the 2 main Java classes are in the source folder "test" - package: org.kermeta.framework.compiled.test
