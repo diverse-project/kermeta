@@ -1,4 +1,4 @@
-/*$Id: KpmTestPlugin.java,v 1.1 2008-06-02 06:48:31 ftanguy Exp $
+/*$Id: KpmTestPlugin.java,v 1.2 2008-07-25 08:49:11 dvojtise Exp $
 * Project : org.kermeta.runner.ui
 * File : 	DebugUIPlugin.java
 * License : EPL
@@ -9,7 +9,9 @@
 */
 package org.kermeta.kpm.test;
 
+import org.apache.commons.logging.Log;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -22,6 +24,9 @@ public class KpmTestPlugin extends AbstractUIPlugin {
 
 	// The shared instance
 	private static KpmTestPlugin plugin;
+	
+	// Log4j logger for this plugin
+	final static public Log internalLog = LogConfigurationHelper.getLogger("KpmTestPlugin");
 	
 	/**
 	 * The constructor
