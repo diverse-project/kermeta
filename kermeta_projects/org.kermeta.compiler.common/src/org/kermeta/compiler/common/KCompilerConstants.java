@@ -1,4 +1,4 @@
-/*$Id: KCompilerConstants.java,v 1.1 2008-06-16 13:04:00 cfaucher Exp $
+/*$Id: KCompilerConstants.java,v 1.2 2008-07-28 09:01:53 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	KCompilerConstants.java
 * License : EPL
@@ -61,6 +61,23 @@ public final class KCompilerConstants {
 	public static final int PROGRESS_OK = 100;
 	
 	public static final int PROGRESS_NOK = 0;
+	
+	
+	//From Persistence Mapping
+	/**		The constant name for managing a base class.		*/
+	public static final String _BASE_CLASS_NAME_ = "baseClassName";
+
+	/**		The constant name for managing a generated class.		*/
+	public static final String _GENERATED_CLASS_NAME_ = "generatedClassName";
+	
+	/**		The constant name for managing an uri.		*/
+	public static final String _URI_ = "uri";
+	
+	/**		The constant name for managing the file extension.		*/
+	public static final String _FILE_EXTENSION_ = "fileExtension";
+	
+	/**		The constant name for managing the factory.		*/
+	public static final String _FACTORY_CLASS_NAME = "factoryClassName";
 }
 
 
