@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.41 2008-07-01 08:48:14 cfaucher Exp $
+/* $Id: kunit.kmt,v 1.42 2008-07-28 09:17:40 cfaucher Exp $
  * Creation date: February 19, 2007
  * License: EPL
  * Copyright:
@@ -277,8 +277,6 @@ class Failure
 	method toString(): String is 
 		do 
 			result := failure.toString + " " + message
-//			.getMetaClass.name + "::"
-//				+ failure.name + ": "+ message
 		end
 }
 
@@ -367,7 +365,7 @@ class Error
 				end
 			end
 			result := result	+ " raised " + exception.getMetaClass.name
-			// .getMetaClass.name + "::"+ test.name 
+			
 			if exception.message != void then
 				result := result + "\n    Caused by: "+ exception.message
 			else
@@ -470,25 +468,8 @@ class TestSuite inherits Test
  				e.message :="Cannot build a suite from class: " + testCaseClass.name
  				raise e
  			end
-			
-			
-/*			testCaseClass.superClass.each { sc | 
-				addAllTestCasesFrom( sc )
-			}*/
-			 
-			
-			/*var classDefinition : ClassDefinition
-			classDefinition ?= testCaseClass.typeDefinition
-			classDefinition.baseAspects.each { anAspect |
-				if ( anAspect.isInstanceOf( ClassDefinition ) ) then
-					var castAspect : ClassDefinition
-					castAspect ?= anAspect
-					addAllTestCasesFromAspects( testCaseClass, castAspect )
-				end
-			}*/
 
 			testCaseClass.ownedOperation.select { o |  
-				// o.name.size>=4 and o.name.substring(0, 4)== "test"
 				if o.name.size>=4 then 
 					o.name.substring(0, 4)== "test"
 				else
@@ -501,12 +482,6 @@ class TestSuite inherits Test
 				self.tests.add(testCase)
 			}
 			
-			/*self.tests.each { test | 
-				var testCase : TestCase
-				testCase ?= test
-				stdio.writeln( testCase.getTestMethodName() ) 
-			}*/
-			
 			result := self
  		end
 	   
@@ -516,7 +491,6 @@ class TestSuite inherits Test
 	   operation addAllTestCasesFromAspects( testCaseClass: Class, anAspect : ClassDefinition ) : Void is do
 	   		
 	   		anAspect.ownedOperation.select { o |  
-				// o.name.size>=4 and o.name.substring(0, 4)== "test"
 				if o.name.size>=4 then 
 					o.name.substring(0, 4)== "test"
 				else
@@ -528,14 +502,6 @@ class TestSuite inherits Test
 				testCase.setTestMethodName( o.name)
 				self.tests.add(testCase)
 			}
-			
-			/*anAspect.baseAspects.each { a |
-				if ( a.isInstanceOf( ClassDefinition ) ) then
-					var castAspect : ClassDefinition
-					castAspect ?= a
-					addAllTestCasesFromAspects( testCaseClass, castAspect )
-				end
-			}*/
 			
 	   end
 }
