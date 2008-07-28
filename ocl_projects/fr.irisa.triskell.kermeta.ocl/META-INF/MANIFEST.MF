@@ -13,3 +13,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide
 Eclipse-LazyStart: true
 Bundle-Vendor: IRISA/INRIA
+Export-Package: fr.irisa.triskell.kermeta.ocl,
+ fr.irisa.triskell.kermeta.ocl.kmtactions,
+ fr.irisa.triskell.kermeta.ocl.ui,
+ fr.irisa.triskell.kermeta.ocl.ui.popup.actions,
+ org.kermeta.compiler.runtime.basetypes.ocl.helpers,
+ org.kermeta.interpreter.runtime.basetypes.ocl.helpers
