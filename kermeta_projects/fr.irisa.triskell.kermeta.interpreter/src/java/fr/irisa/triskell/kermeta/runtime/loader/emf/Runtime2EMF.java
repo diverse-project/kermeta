@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.73 2008-06-16 15:08:03 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.74 2008-07-28 15:07:29 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -37,6 +37,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
@@ -205,7 +207,7 @@ public class Runtime2EMF {
 	 * method simpleUpdateProperty
 	 * 
 	 * Ignore RO that belong to another Resource, as the save call the updateEMFModel on each of the other resources
-	 * they are already updated by themselve
+	 * they are already updated by themselves
 	 */
 	protected void fillRuntimeObjectToUpdateList(RuntimeObject rObject)
 	{ 
@@ -214,15 +216,20 @@ public class Runtime2EMF {
 					|| RuntimeObjectHelper.isanEnumerationLiteral(rObject)
 					|| RuntimeObjectHelper.isanEnumeration(rObject)) )
 		{
-			EObject kcoreObject = (EObject)rObject.getKCoreObject();
+			EObject kcoreObject = (EObject)rObject.getKCoreObject(); 
 			if(kcoreObject != null){
-				// ignore objects from the kermeta program itself but only if it comes from a model				
-				// ie. that where loaded and typechecked => they should not be changed dynamically
-				// this greatly improve the performance of the save ...
-				if (kcoreObject.eResource() != null){
-					internalLog.info("     Ignoring update of Kermeta interpreter internal ClassDefinition EObject : "+((EObject)rObject.getKCoreObject()).eClass().getName());
-					return;
+				String kcoreIdentification = kcoreObject.eClass().getName();
+				if(kcoreObject instanceof NamedElement){
+					kcoreIdentification +=  " named " + ((NamedElement)kcoreObject).getName();
 				}
+				// the model to save contains references to the definition level
+				// a model must not mix levels. The definition should be loaded separately, then the model car refer it.
+				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ResourceMixedLevelsException",
+		    			"You can't save a model that refers to elements from the currently running program definition since they may not exist in a physical km file. " +
+		    			"Please make sure to load and retrieve the element (" + kcoreIdentification +") directly from a resource.",
+		    			this.unit.getRuntimeMemory().getInterpreter().getBasicInterpreter(),
+		    			this.unit.getRuntimeMemory(),
+		    			null);				
 			}
 			EObject emfObject = (EObject)rObject.getEmfObject();
 			if(emfObject != null){
