@@ -1,4 +1,4 @@
-/* $Id: RunInterpretedTestCase.java,v 1.10 2008-05-28 13:38:04 dvojtise Exp $
+/* $Id: RunInterpretedTestCase.java,v 1.11 2008-07-29 15:55:08 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -135,6 +135,8 @@ public class RunInterpretedTestCase extends TestCase {
     public void runTest() throws KermetaRaisedException {
     	try {    		
     		interpreter.setEntryPoint(mainClassValue, mainOperationValue);
+    		if(this.containerTestSuite._defaultpath !=  null) 
+    			interpreter.setDefaultPath(this.containerTestSuite._defaultpath);
     		interpreter.launch();   		
     	} catch(KermetaRaisedException e){
     		// If this is a kermeta assertion that failed, then the Test must fail

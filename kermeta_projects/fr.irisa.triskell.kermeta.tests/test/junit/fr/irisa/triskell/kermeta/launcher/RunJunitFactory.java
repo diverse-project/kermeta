@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.10 2008-06-16 09:24:31 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.11 2008-07-29 15:55:08 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -63,6 +63,8 @@ public class RunJunitFactory implements Test {
 
     private KermetaUnit executable = null;
     
+    public String _defaultpath = null;
+    
     /**
      * enabling this option will optimize the loading, so it will load it only once : one for the identification 
      * of the internal tests (if this test is a testsuite), one when it will run it
@@ -77,6 +79,15 @@ public class RunJunitFactory implements Test {
     public RunJunitFactory() {
         optimizeLoading = false;
     }
+    
+    /**
+     * constructor allowing to set a default path (useful when using relative pathes
+     */
+    public RunJunitFactory(String defaultPath) {
+        optimizeLoading = false;
+        _defaultpath = defaultPath;
+    }
+    
     /**
      * constructor allowing to change some default setting
      */
