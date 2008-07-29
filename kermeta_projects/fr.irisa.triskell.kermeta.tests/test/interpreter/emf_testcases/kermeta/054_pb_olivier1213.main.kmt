@@ -1,4 +1,4 @@
-/* $Id: 054_pb_olivier1213.main.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+/* $Id: 054_pb_olivier1213.main.kmt,v 1.2 2008-07-29 08:45:35 dvojtise Exp $
  * Creation date: November 7, 2006
  * License:
  * Copyright:
@@ -6,7 +6,7 @@
  * This test verify that we can load and save back a km model that has some dependencies to the framework (framework.km)
  */
 @mainClass "pb_olivier::Test"
-@mainOperation "testmain"
+@mainOperation "testMain"
 
 
 package pb_olivier;
@@ -15,17 +15,20 @@ package pb_olivier;
 require kermeta
 using kermeta::persistence
 using kermeta::standard
-class Test
+using kermeta::language::structure
+
+class Test inherits kermeta::kunit::TestCase
 {
 
 	reference firstModel : EMFResource
 
-	operation testmain() : Void is do 
+	operation testMain() : Void is do 
 		loadKM
 	end
 	
     operation loadKM() : Void is do 
-    	var kermetaMeta : String init "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore"
+    	//var kermetaMeta : String init "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore"
+    	var kermetaMeta : String init "http://www.kermeta.org/kermeta/1_2_0//kermeta"
     
 	    var _repository : EMFRepository
 	    _repository:= EMFRepository.new
@@ -33,6 +36,40 @@ class Test
 		stdio.writeln("loading km user model...")
 		firstModel ?= _repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/054_pb_olivier.km", kermetaMeta)
 		firstModel.load
+		
+		
+		stdio.writeln("repository.size : " +_repository.resources.size.toString())
+		
+		var mu : ModelingUnit 
+		mu ?= firstModel.one
+		stdio.writeln(mu.packages.one.ownedTypeDefinition.one.name)
+		var cd : ClassDefinition 
+		var containedTypes : Bag<Type> init Bag<Type>.new
+		cd ?= mu.packages.one.ownedTypeDefinition.one
+		cd.containedType.each{ e | 
+			stdio.writeln("  contained Type : " + e.toString + "(" +  e.oid.toString+ ")")
+			assertTrue(not containedTypes.contains(e))
+		 	containedTypes.add(e)
+		}
+		cd.ownedAttribute.each{ att |
+			stdio.writeln("  att " + att.name)
+			att.containedType.each{ e | 
+				stdio.writeln("    contained Type : " + e.toString + "(" +  e.oid.toString+ ")")
+				assertTrueWithMsg(not containedTypes.contains(e),"A loaded type is contained by 2 containers !!!")
+		 		containedTypes.add(e)
+		 	}
+		}
+		cd.ownedOperation.each{ op |
+			stdio.writeln("  op " + op.name)
+			op.containedType.each{ e | 
+				stdio.writeln("    contained Type : " + e.toString + "(" +  e.oid.toString+ ")")
+				assertTrueWithMsg(not containedTypes.contains(e),"A loaded type is contained by 2 containers !!!")
+		 		containedTypes.add(e)
+		 	}
+		}
+		
+		
+		
 		stdio.writeln("saving km user model...")
 		// save to another location
 		firstModel.uri:= "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/054_pb_olivier_out.km"
