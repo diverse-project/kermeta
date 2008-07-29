@@ -1,4 +1,4 @@
-/* $Id: 071_DynamicInstanceLoadSaveUsingRelativePath.main.kmt,v 1.2 2008-06-18 11:12:57 dvojtise Exp $ 
+/* $Id: 071_DynamicInstanceLoadSaveUsingRelativePath.main.kmt,v 1.3 2008-07-29 14:39:18 dvojtise Exp $ 
  * Creation : June 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -36,6 +36,11 @@ class Main inherits TestCase
     	var tr : TestRunner init TestRunner.new
 		tr.run(Main)
 		tr.printTestResult
+		/*
+		test005CreateRootRelativeResourceSaveAbsolute
+		
+		*/
+		stdio.writeln("end")
     end
     
     /*
@@ -213,6 +218,8 @@ class Main inherits TestCase
 		var repository : EMFRepository init EMFRepository.new	 	
    	    var resource : Resource
     	resource :=repository.createResource(ifileName, mmfileName)
+    	
+    	stdio.writeln(resource.uri)
        	resource.load()
        	
        	// get the model
@@ -235,7 +242,7 @@ class Main inherits TestCase
        	resource.load()
        	model ?= resource.detect{ m | m.isInstanceOf(MetamodelWithRandomNsURI::Model)}
        	item := model.items.detect{ i | i.name.equals("0")}
-       	assertWithMsg(not item.isVoid, "Cannot retreive added element in the saved file")
+       	assertWithMsg(not item.isVoid, "Cannot retrieve added element in the saved file")
     end
     /**
      * Load the model using CreateResource
@@ -243,7 +250,7 @@ class Main inherits TestCase
      *  (this should work only if the Metamodel is registered)
      * DVK : the semantic of RootRelative path is currently not clear, need some discussion with the developpers
      */
-    operation test00CreateAbsoluteResourceSaveRootRelative() : Void is
+    operation test006CreateAbsoluteResourceSaveRootRelative() : Void is
     do
     	var ifileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/071_MetamodelWithRandomNsURI_Model.xmi"
     	var ofileName : String init "/test/interpreter/emf_testcases/output/071_CreateAbsoluteResourceSaveRootRelative_Model.xmi"
