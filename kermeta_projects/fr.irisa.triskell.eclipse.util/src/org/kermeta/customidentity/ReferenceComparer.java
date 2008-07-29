@@ -1,4 +1,4 @@
-/*$Id: ReferenceComparer.java,v 1.1 2008-07-29 12:01:53 dvojtise Exp $
+/*$Id: ReferenceComparer.java,v 1.2 2008-07-29 12:58:04 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	ReferenceComparer.java
 * License : EPL
@@ -11,13 +11,12 @@
 
 package org.kermeta.customidentity;
 
-import org.eclipse.jface.viewers.IElementComparer;
 
 /**
  * Comparer thats use object reference instead of the equals methods 
  *
  */
-public class ReferenceComparer implements IElementComparer {
+public class ReferenceComparer implements IComparer {
 
 	public boolean equals(Object a, Object b) {
 		

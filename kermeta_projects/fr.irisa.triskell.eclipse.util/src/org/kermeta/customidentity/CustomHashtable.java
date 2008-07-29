@@ -1,4 +1,4 @@
-/*$Id: CustomHashtable.java,v 1.1 2008-07-29 12:01:53 dvojtise Exp $
+/*$Id: CustomHashtable.java,v 1.2 2008-07-29 12:58:04 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	CustomHashtable.java
 * License : EPL
@@ -26,6 +26,7 @@ import java.util.Enumeration;
 import java.util.NoSuchElementException;
 
 
+
 /**
  * CustomHashtable associates keys with values. Keys and values cannot be null.
  * The size of the Hashtable is the number of key/value pairs it contains.
@@ -36,41 +37,42 @@ import java.util.NoSuchElementException;
  * <p>
  * CustomHashtable allows a custom comparator and hash code provider.
  */
-/* package */final class CustomHashtable {
+public class CustomHashtable<K, V> {
 
     /**
      * HashMapEntry is an internal class which is used to hold the entries of a Hashtable.
      */
-    private static class HashMapEntry {
-        Object key, value;
+    private static class HashMapEntry<K, V> {
+    	K key;
+    	V value;
 
-        HashMapEntry next;
+        HashMapEntry<K, V> next;
 
-        HashMapEntry(Object theKey, Object theValue) {
+        public HashMapEntry(K theKey, V theValue) {
             key = theKey;
             value = theValue;
         }
+        
+        
     }
 
-    private static final class EmptyEnumerator implements Enumeration {
+    private static final class EmptyEnumerator<T> implements Enumeration<T> {
         public boolean hasMoreElements() {
             return false;
         }
 
-        public Object nextElement() {
+        public T nextElement() {
             throw new NoSuchElementException();
         }
     }
-
-    private class HashEnumerator implements Enumeration {
-        boolean key;
-
+   
+    
+    private class HashKEnumerator implements Enumeration<K> {
         int start;
 
-        HashMapEntry entry;
+        HashMapEntry<K,V> entry;
 
-        HashEnumerator(boolean isKey) {
-            key = isKey;
+        HashKEnumerator() {
             start = firstSlot;
         }
 
@@ -87,9 +89,9 @@ import java.util.NoSuchElementException;
             return false;
         }
 
-        public Object nextElement() {
+        public K nextElement() {
             if (hasMoreElements()) {
-                Object result = key ? entry.key : entry.value;
+                K result = entry.key;
                 entry = entry.next;
                 return result;
             } else {
@@ -97,10 +99,42 @@ import java.util.NoSuchElementException;
 			}
         }
     }
+    private class HashVEnumerator implements Enumeration<V> {
+        int start;
 
+        HashMapEntry<K,V> entry;
+
+        HashVEnumerator() {
+            start = firstSlot;
+        }
+
+        public boolean hasMoreElements() {
+            if (entry != null) {
+				return true;
+			}
+            while (start <= lastSlot) {
+				if (elementData[start++] != null) {
+                    entry = elementData[start - 1];
+                    return true;
+                }
+			}
+            return false;
+        }
+
+        public V nextElement() {
+            if (hasMoreElements()) {
+                V result = entry.value;
+                entry = entry.next;
+                return result;
+            } else {
+				throw new NoSuchElementException();
+			}
+        }
+    }
+    
     transient int elementCount;
 
-    transient HashMapEntry[] elementData;
+    transient HashMapEntry<K, V>[] elementData;
 
     private float loadFactor;
 
@@ -112,8 +146,10 @@ import java.util.NoSuchElementException;
 
     transient private IComparer comparer;
 
-    private static final EmptyEnumerator emptyEnumerator = new EmptyEnumerator();
+    private EmptyEnumerator<K> emptyKEnumerator = new EmptyEnumerator<K>();
+    private EmptyEnumerator<V> emptyVEnumerator = new EmptyEnumerator<V>();
 
+    
     /**
      * The default capacity used when not specified in the constructor.
      */
@@ -162,7 +198,7 @@ import java.util.NoSuchElementException;
     public CustomHashtable(int capacity, IComparer comparer) {
         if (capacity >= 0) {
             elementCount = 0;
-            elementData = new HashMapEntry[capacity == 0 ? 1 : capacity];
+            elementData = newHashMapEntryArray(capacity == 0 ? 1 : capacity);
             firstSlot = elementData.length;
             loadFactor = 0.75f;
             computeMaxSize();
@@ -182,10 +218,10 @@ import java.util.NoSuchElementException;
      *   hash codes for keys, or <code>null</code>  to use the normal 
      *   <code>equals</code> and <code>hashCode</code> methods
      */
-    public CustomHashtable(CustomHashtable table, IComparer comparer) {
+    public CustomHashtable(CustomHashtable<K, V> table, IComparer comparer) {
         this(table.size() * 2, comparer);
         for (int i = table.elementData.length; --i >= 0;) {
-            HashMapEntry entry = table.elementData[i];
+            HashMapEntry<K, V> entry = table.elementData[i];
             while (entry != null) {
                 put(entry.key, entry.value);
                 entry = entry.next;
@@ -228,11 +264,11 @@ import java.util.NoSuchElementException;
      *
      * @return		an Enumeration of the values of this Hashtable
      */
-    public Enumeration elements() {
+    public Enumeration<V> elements() {
         if (elementCount == 0) {
-			return emptyEnumerator;
+			return emptyVEnumerator;
 		}
-        return new HashEnumerator(false);
+        return new HashVEnumerator();
     }
 
     /**
@@ -245,7 +281,7 @@ import java.util.NoSuchElementException;
      */
     public Object get(Object key) {
         int index = (hashCode(key) & 0x7FFFFFFF) % elementData.length;
-        HashMapEntry entry = elementData[index];
+        HashMapEntry<K,V> entry = elementData[index];
         while (entry != null) {
             if (keyEquals(key, entry.key)) {
 				return entry.value;
@@ -255,9 +291,9 @@ import java.util.NoSuchElementException;
         return null;
     }
 
-    private HashMapEntry getEntry(Object key) {
+    private HashMapEntry<K,V> getEntry(Object key) {
         int index = (hashCode(key) & 0x7FFFFFFF) % elementData.length;
-        HashMapEntry entry = elementData[index];
+        HashMapEntry<K,V> entry = elementData[index];
         while (entry != null) {
             if (keyEquals(key, entry.key)) {
 				return entry;
@@ -296,11 +332,11 @@ import java.util.NoSuchElementException;
      *
      * @return		an Enumeration of the keys of this Hashtable
      */
-    public Enumeration keys() {
+    public Enumeration<K> keys() {
         if (elementCount == 0) {
-			return emptyEnumerator;
+			return emptyKEnumerator;
 		}
-        return new HashEnumerator(true);
+        return new HashKEnumerator();
     }
 
     /**
@@ -313,10 +349,10 @@ import java.util.NoSuchElementException;
      * @return		the old value associated with the specified key, null if the key did
      *				not exist
      */
-    public Object put(Object key, Object value) {
+    public Object put(K key, V value) {
         if (key != null && value != null) {
             int index = (hashCode(key) & 0x7FFFFFFF) % elementData.length;
-            HashMapEntry entry = elementData[index];
+            HashMapEntry<K, V> entry = elementData[index];
             while (entry != null && !keyEquals(key, entry.key)) {
 				entry = entry.next;
 			}
@@ -331,7 +367,7 @@ import java.util.NoSuchElementException;
                 if (index > lastSlot) {
 					lastSlot = index;
 				}
-                entry = new HashMapEntry(key, value);
+                entry = new HashMapEntry<K,V>(key, value);
                 entry.next = elementData[index];
                 elementData[index] = entry;
                 return null;
@@ -356,9 +392,9 @@ import java.util.NoSuchElementException;
 		}
         firstSlot = length;
         lastSlot = -1;
-        HashMapEntry[] newData = new HashMapEntry[length];
+        HashMapEntry<K, V>[] newData = newHashMapEntryArray(length);
         for (int i = elementData.length; --i >= 0;) {
-            HashMapEntry entry = elementData[i];
+            HashMapEntry<K, V> entry = elementData[i];
             while (entry != null) {
                 int index = (hashCode(entry.key) & 0x7FFFFFFF) % length;
                 if (index < firstSlot) {
@@ -367,7 +403,7 @@ import java.util.NoSuchElementException;
                 if (index > lastSlot) {
 					lastSlot = index;
 				}
-                HashMapEntry next = entry.next;
+                HashMapEntry<K, V> next = entry.next;
                 entry.next = newData[index];
                 newData[index] = entry;
                 entry = next;
@@ -377,6 +413,13 @@ import java.util.NoSuchElementException;
         computeMaxSize();
     }
 
+    @SuppressWarnings("unchecked")
+    /**
+     * Method used to have a local unchecked warning since I don't know any other way to suppress it 
+     */
+	private HashMapEntry<K, V>[] newHashMapEntryArray(int size){
+    	return (HashMapEntry<K, V>[])new HashMapEntry[size];
+    }
     /**
      * Remove the key/value pair with the specified key from this Hashtable.
      *
@@ -384,10 +427,10 @@ import java.util.NoSuchElementException;
      * @return		the value associated with the specified key, null if the specified key
      *				did not exist
      */
-    public Object remove(Object key) {
-        HashMapEntry last = null;
+    public Object remove(K key) {
+        HashMapEntry<K, V> last = null;
         int index = (hashCode(key) & 0x7FFFFFFF) % elementData.length;
-        HashMapEntry entry = elementData[index];
+        HashMapEntry<K, V> entry = elementData[index];
         while (entry != null && !keyEquals(key, entry.key)) {
             last = entry;
             entry = entry.next;
@@ -426,7 +469,7 @@ import java.util.NoSuchElementException;
         StringBuffer buffer = new StringBuffer();
         buffer.append('{');
         for (int i = elementData.length; --i >= 0;) {
-            HashMapEntry entry = elementData[i];
+            HashMapEntry<K, V> entry = elementData[i];
             while (entry != null) {
                 buffer.append(entry.key);
                 buffer.append('=');
