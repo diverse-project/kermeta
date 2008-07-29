@@ -1,4 +1,4 @@
-/*$Id: CustomHashtable.java,v 1.2 2008-07-29 12:58:04 dvojtise Exp $
+/*$Id: CustomHashtable.java,v 1.3 2008-07-29 13:33:30 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	CustomHashtable.java
 * License : EPL
@@ -279,7 +279,7 @@ public class CustomHashtable<K, V> {
      * @return		the value associated with the specified key, null if the specified key
      *				does not exist
      */
-    public Object get(Object key) {
+    public V get(Object key) {
         int index = (hashCode(key) & 0x7FFFFFFF) % elementData.length;
         HashMapEntry<K,V> entry = elementData[index];
         while (entry != null) {

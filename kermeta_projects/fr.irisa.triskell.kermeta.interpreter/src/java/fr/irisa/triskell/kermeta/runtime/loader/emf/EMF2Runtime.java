@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.84 2008-07-11 13:27:02 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.85 2008-07-29 13:33:33 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -52,6 +52,8 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.runtime.rohelper.RepositoryHelper;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 
+import org.kermeta.customidentity.CustomHashtable;
+import org.kermeta.customidentity.ReferenceComparer;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
@@ -89,12 +91,12 @@ public class EMF2Runtime {
      * The list of runtimeObjects that represent the EMF instances
      * it may contain EObject and RO that were loaded in a previous load
      */
-    protected Hashtable<EObject, RuntimeObject> runtime_objects_map; // { eobject : robject }
+    protected CustomHashtable<EObject, RuntimeObject> runtime_objects_map; // { eobject : robject }
     
     /**
      * The list of new runtimeObjects that represent the EMF instances
      */
-    protected Hashtable<EObject, RuntimeObject> newlycreated_runtime_objects_map; // { eobject : robject }
+    protected CustomHashtable<EObject, RuntimeObject> newlycreated_runtime_objects_map; // { eobject : robject }
     
     /**
      * { qualified name of ecore type : qualified name of kermeta type }
@@ -141,8 +143,8 @@ public class EMF2Runtime {
     public EMF2Runtime(EMFRuntimeUnit newunit, Resource newroot_resource) {
         super();
         type_cache = new Hashtable<String, RuntimeObject>();
-        runtime_objects_map = new Hashtable<EObject, RuntimeObject>();
-        newlycreated_runtime_objects_map = new Hashtable<EObject, RuntimeObject>();
+        runtime_objects_map = new CustomHashtable<EObject, RuntimeObject>(new ReferenceComparer());
+        newlycreated_runtime_objects_map = new CustomHashtable<EObject, RuntimeObject>(new ReferenceComparer());
         special_primitive_types = new Hashtable<String, RuntimeObject>();
         resource = newroot_resource;
         unit = newunit;
@@ -296,7 +298,7 @@ public class EMF2Runtime {
 			// the resourde RO
 			for( EObject rootEObj : res.getContents()){
 					
-				RuntimeObject rootRO = this.runtime_objects_map.get(rootEObj);
+				RuntimeObject rootRO = (RuntimeObject) this.runtime_objects_map.get(rootEObj);
 				fr.irisa.triskell.kermeta.runtime.language.Object.setContainingResource(rootRO, crtResRO);
 				
 				ArrayList<RuntimeObject> resContents = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(crtResRO);
@@ -342,13 +344,13 @@ public class EMF2Runtime {
 
 			if(monitor!= null) monitor.subTask("Looking for pre-existing objects");
 			fillRuntimeObjectsMapWithPreExistingObjects(roRepository); 
-			nbPreExistingObjects = runtime_objects_map.keySet().size();
+			nbPreExistingObjects = runtime_objects_map.size();
 			// Pass 1 : pre-create the runtime objects
 			if(monitor!= null) 	monitor.subTask("Creating new objects");
 			createEmptyRuntimeObjects();
 			
-			internalLog.debug("Loading " + runtime_objects_map.keySet().size() + " objects (new : " +
-					newlycreated_runtime_objects_map.keySet().size()+ ", update only : "+nbPreExistingObjects + " ) from " + resource.getURI().toString() +  " and its dependencies ");
+			internalLog.debug("Loading " + runtime_objects_map.size() + " objects (new : " +
+					newlycreated_runtime_objects_map.size()+ ", update only : "+nbPreExistingObjects + " ) from " + resource.getURI().toString() +  " and its dependencies ");
 			
 			// If the meta-model uri was not provided in the constructor of EMFRuntimeUnit, we try
 			// to find one
@@ -361,11 +363,13 @@ public class EMF2Runtime {
 
 			if(monitor!= null) monitor.subTask("Updating objects links");	
 			// convert the monitor for a finer precision of the monitor on this time consuming task
-			progress = SubMonitor.convert(monitor, "Loading " + fileName, newlycreated_runtime_objects_map.keySet().size() );
+			progress = SubMonitor.convert(monitor, "Loading " + fileName, newlycreated_runtime_objects_map.size() );
 			
 			// Fill in the properties of the new runtime objects that we created
-			for (Object next : newlycreated_runtime_objects_map.keySet()) {
-			    RuntimeObject rObject = (RuntimeObject)newlycreated_runtime_objects_map.get((EObject)next);
+			java.util.Enumeration<EObject> enum1 = newlycreated_runtime_objects_map.keys();
+			while(enum1.hasMoreElements()){
+				Object next = enum1.nextElement();
+			    RuntimeObject rObject = newlycreated_runtime_objects_map.get((EObject)next);
 			    this.populateRuntimeObject(rObject);
 			    processedElements++;
 			    //if(monitor!= null) monitor.worked(1);
@@ -375,11 +379,13 @@ public class EMF2Runtime {
 			}
 
 			// Set the container RO property for populated ROs
-			for (EObject eObject : newlycreated_runtime_objects_map.keySet()) { 	
+			java.util.Enumeration<EObject> enum2 = newlycreated_runtime_objects_map.keys();
+			while(enum2.hasMoreElements()){
+				EObject eObject = enum2.nextElement(); 	
 			    RuntimeObject rObject = newlycreated_runtime_objects_map.get(eObject);
 			    // Set the container if needed 
 			    if (eObject.eContainer() != null) {
-			    	rObject.setContainer(newlycreated_runtime_objects_map.get(eObject.eContainer()));
+			    	rObject.setContainer( newlycreated_runtime_objects_map.get(eObject.eContainer()));
 			    }
 			    else {
 			        rObject.setContainer(null);
@@ -424,7 +430,7 @@ public class EMF2Runtime {
     		//packages.clear();
     		String msg = e2 + ": Not enough memory to load your " 
     				+ " model (processed " + processedElements + " elements ot of " 
-    				+ runtime_objects_map.keySet().size() + " from " + resource.getURI().toString() +  " and its dependencies); ";
+    				+ runtime_objects_map.size() + " from " + resource.getURI().toString() +  " and its dependencies); ";
     		msg += "\nplease consider increasing the memory allocated to your jvm";
     		
     		internalLog.error(msg,e2);
@@ -825,7 +831,7 @@ public class EMF2Runtime {
 	    {
 	        RuntimeObject rovalue = null;
 	        if (fvalue instanceof EObject)
-	            rovalue = this.runtime_objects_map.get(fvalue);
+	            rovalue = (RuntimeObject) this.runtime_objects_map.get(fvalue);
 	        else if (feature_type instanceof EDataType)// it is a Datatype
 	        {
 	            rovalue = createRuntimeObjectForPrimitiveTypeValue(fvalue, (EDataType)feature_type);
@@ -893,7 +899,7 @@ public class EMF2Runtime {
 	        RuntimeObject ro_metaclass;
 	        String kermeta_metaclass_name = "kermeta::ecore::EFeatureMapEntry";
 	        if (this.type_cache.containsKey(kermeta_metaclass_name)) 
-	        	ro_metaclass = (RuntimeObject)this.type_cache.get(kermeta_metaclass_name);
+	        	ro_metaclass = this.type_cache.get(kermeta_metaclass_name);
 	    	else
 	    	{	
 	    		Type ftype = this.getTypeFromName(kermeta_metaclass_name);
@@ -915,7 +921,7 @@ public class EMF2Runtime {
 			//fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturevalueprop, rofeaturevalue);
 
 	        if (entryvalue instanceof EObject)
-	        	fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturevalueprop, this.runtime_objects_map.get(entryvalue));
+	        	fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturevalueprop, (RuntimeObject) this.runtime_objects_map.get(entryvalue));
 	        else if (mapEntry.getEStructuralFeature().getEType() instanceof EDataType)// it is a Datatype
 	        {
 	        	RuntimeObject roentryvalue = createRuntimeObjectForPrimitiveTypeValue(entryvalue, (EDataType)mapEntry.getEStructuralFeature().getEType());
@@ -959,7 +965,7 @@ public class EMF2Runtime {
 	    {
 	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(metaclass_name);
 	    	if (this.type_cache.containsKey(kermeta_metaclass_name)) 
-		        result = (RuntimeObject)this.type_cache.get(kermeta_metaclass_name);
+		        result = this.type_cache.get(kermeta_metaclass_name);
 	    	else
 	    	{	
 	    		Type ftype = this.getTypeFromName(kermeta_metaclass_name);
@@ -978,7 +984,7 @@ public class EMF2Runtime {
 	    }
 	    else if (this.type_cache.containsKey(metaclass_name)) 
 	    {
-	        result = (RuntimeObject)this.type_cache.get(metaclass_name);
+	        result = this.type_cache.get(metaclass_name);
 	    }
 	    else
 	    {   
