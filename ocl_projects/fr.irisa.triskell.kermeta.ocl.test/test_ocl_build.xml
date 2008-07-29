@@ -1,4 +1,4 @@
-<!-- $Id: test_ocl_build.xml,v 1.4 2008-07-29 06:56:59 dvojtise Exp $ -->
+<!-- $Id: test_ocl_build.xml,v 1.5 2008-07-29 14:12:50 dvojtise Exp $ -->
 <project name="run ocl tests" default="all" basedir=".">
 
 	<description>
@@ -61,7 +61,8 @@
 	<property name="apache.commons.logging.jar" location="..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-1.1.1.jar" />
 	<property name="apache.commons.logging.adapters.jar" location="..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-adapters-1.1.1.jar" />
 	<property name="apache.commons.logging.api.jar" location="..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-api-1.1.1.jar" />
-					
+	<property name="lpg.lpgjavaruntime.jar" location="${eclipse.home}/plugins/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v200706111738.jar" />
+						
 	
 	<path id="interpreter.class.path">
 		<pathelement location="${kermeta.model.jar}" />
@@ -86,6 +87,7 @@
 		<pathelement location="${emf.compare.diff.jar}" />
 		<pathelement location="${emf.compare.match.jar}" />
 		<pathelement location="${ocl.jar}" />
+		<pathelement location="${lpg.lpgjavaruntime.jar}" />
 		<pathelement location="${equinox.common.jar}" />
 		<pathelement location="${equinox.registry.jar}" />
 		<pathelement location="${equinox.preferences.jar}" />
