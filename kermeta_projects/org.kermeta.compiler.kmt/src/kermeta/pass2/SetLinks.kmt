@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.30 2008-07-22 07:36:23 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.31 2008-07-29 09:59:54 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -8,7 +8,7 @@
 
 package kermeta::language::structure;
 
- 
+
 require kermeta
 require "../common/TraceStructure.kmt"
 require "http://www.eclipse.org/emf/2002/Ecore"
@@ -44,13 +44,41 @@ aspect class ClassDefinition {
 				
 			end
 		}
-					
+		
+		//DO NOT REMOVE this following code, unused for the moment - Fixing the bound of the TypeParameters
+		/*if not self.ecoreModelElement.isVoid() then
+			
+			var inc : Integer init 0
+			self.typeParameter.each{ otv |
+				var bound : EGenericType init EGenericType.new
+
+				var eclassifier_object : EClassifier
+				
+				if not otv.supertype.isVoid() then
+					eclassifier_object := context.mu.getEClassifierByQualifiedName(otv.supertype.getTypeQName())
+				end
+				
+				if eclassifier_object.isVoid() then
+					eclassifier_object := context.mu.getEClassifierByQualifiedName("kermeta::language::structure::Object")				
+				end
+				
+				bound.eClassifier := eclassifier_object
+				
+				self.ecoreModelElement.eTypeParameters.elementAt(inc).eBounds.add(bound)
+				
+				inc := inc + 1
+			}
+
+		end*/
+
 	end
 }
 
 aspect class Class {
+
 	// Set the links to the EGenericType for the EGenericSuperTypes
 	operation setLinks(context : KM2EcoreContext) is do
+	
 		self.typeParamBinding.each{ tpb |
 				
 			var typeArgument : EGenericType init EGenericType.new
@@ -58,7 +86,7 @@ aspect class Class {
 			if tpb.type.isInstanceOf(Class) then
 				var cd : ClassDefinition init tpb.type.asType(Class).getClassDefinition()
 								
-				if not cd.ecoreModelElement.isVoid() then
+				if cd.ecoreDataType.isVoid() then //not cd.ecoreModelElement.isVoid() then
 					typeArgument.eClassifier := cd.ecoreModelElement
 				else //we assume this Class target a subtype of ValueType => EDataType
 					typeArgument.eClassifier := cd.ecoreDataType
@@ -82,7 +110,7 @@ aspect class Class {
 							typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement							
 						else
 							//We use the final type
-							if not cd.ecoreModelElement.isVoid() then
+							if cd.ecoreDataType.isVoid() then //not cd.ecoreModelElement.isVoid() then
 								typeArgument.eClassifier := cd.ecoreModelElement
 							else
 								typeArgument.eClassifier := cd.ecoreDataType
@@ -150,8 +178,9 @@ aspect class Parameter {
 			
 			//Set the traceability
 			ft.ecoreModelElement := ft_annotation
-			//stdio.writeln("SetLinks - inline")
-			//TODO inline of the FunctionType
+			
+			stdio.writeln("SetLinks - inline - TODO inline of the FunctionType")
+			
 		else		
 			var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
 			s.setLinks(self, self.ecoreModelElement, context)
@@ -175,14 +204,14 @@ aspect class Property {
 class LinkSetterForTypedElement {
 	operation setLinks(element : TypedElement, ecoreModelElement : ETypedElement, context : KM2EcoreContext) is do
 
-		if (not ecoreModelElement.isVoid()) and (element.type.getTypeQName()!="kermeta::standard::Void") then
+		if (not ecoreModelElement.isVoid()) and (not Operation.new().isVoidType(element.type.getTypeQName())) then
 
 			if element.type.isInstanceOf(Class) then
 				var c : Class init element.type.asType(Class)
 				var classDefinition : ClassDefinition init c.getClassDefinition()
 				var genericType : EGenericType init EGenericType.new
 				
-				if not classDefinition.ecoreModelElement.isVoid() then
+				if classDefinition.ecoreDataType.isVoid() then //not classDefinition.ecoreModelElement.isVoid() then
 					genericType.eClassifier  := classDefinition.ecoreModelElement
 				else
 					genericType.eClassifier  := classDefinition.ecoreDataType
@@ -194,7 +223,7 @@ class LinkSetterForTypedElement {
 					
 					if tpb.type.isInstanceOf(Class) then
 						var cd : ClassDefinition init tpb.type.asType(Class).getClassDefinition()
-						if not cd.ecoreModelElement.isVoid() then
+						if cd.ecoreDataType.isVoid() then //not cd.ecoreModelElement.isVoid() then
 							typeArgument.eClassifier := cd.ecoreModelElement
 						else //we assume this Class target a subtype of ValueType => EDataType
 							typeArgument.eClassifier := cd.ecoreDataType
@@ -214,7 +243,7 @@ class LinkSetterForTypedElement {
 								if tpb.type.isEDataType() then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
 									typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
 								else
-									if not cd.ecoreModelElement.isVoid() then
+									if cd.ecoreDataType.isVoid() then //not cd.ecoreModelElement.isVoid() then
 										typeArgument.eClassifier := cd.ecoreModelElement
 									else
 										typeArgument.eClassifier := cd.ecoreDataType
@@ -247,7 +276,7 @@ class LinkSetterForTypedElement {
 						}
 						
 					else
-						if not cd.ecoreModelElement.isVoid() then
+						if cd.ecoreDataType.isVoid() then //not cd.ecoreModelElement.isVoid() then
 							ecoreModelElement.eType := cd.ecoreModelElement
 						else
 							ecoreModelElement.eType := cd.ecoreDataType

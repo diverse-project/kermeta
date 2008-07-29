@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.22 2008-07-23 08:22:14 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.23 2008-07-29 09:59:55 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -52,16 +52,22 @@ class KM2EcoreContext
 	reference tasks_stack : Stack<String> [0..1]
 	
 	reference condStack : Stack<String> [0..1]
-	
-	reference ftStack : Stack<LambdaExpression> [0..1]
-	
-	reference kRErrorStack : Stack<String> [0..1]
-	
 	attribute inc_condStack : Integer [0..1]
 	
+	reference kRErrorStack : Stack<String> [0..1]
 	attribute inc_kRErrorStack : Integer [0..1]
 	
+	reference ftStack : Stack<LambdaExpression> [0..1]
 	attribute current_param_ft : String [0..1]
+	
+	/*** params for FunctionType contextual ***/
+	reference ftSuffix : Stack<String> [0..1]
+	attribute inc_ftSuffix : Integer [0..1]
+	attribute ftSuffixActivation : Boolean [0..1]
+	attribute ftContextualSelf : String [0..1]
+	reference ftProductTypeStack : Stack<ProductType> [0..1]
+	/******/
+	
 	
 	/** Unique instance of the JavaKeyWordList */
 	reference javaKeyWordList : JavaKeyWordList [0..1]
@@ -91,7 +97,8 @@ class KM2EcoreContext
 	/********/
 	
 	reference current_valueType : ClassDefinition [0..1]
-	
+
+	attribute lastStatement_boolean : String [1..1]	
 
 	operation initialize(modelInput : String, traceInput : String) : Void is do
 	
@@ -114,6 +121,16 @@ class KM2EcoreContext
 		
 		self.ftStack := Stack<LambdaExpression>.new()
 		self.current_param_ft := ""
+		
+		self.ftSuffix := Stack<String>.new()
+		self.inc_ftSuffix := 0
+		self.ftSuffixActivation := false
+		self.ftContextualSelf := ""
+		
+		self.ftProductTypeStack := Stack<ProductType>.new()
+		
+		self.lastStatement_boolean := ""
+		
 		
 		// Initializing the java keywords list.
 		javaKeyWordList := JavaKeyWordList.new
@@ -164,6 +181,19 @@ class KM2EcoreContext
 	operation pushKRErrorStack() : Void is do
 		self.inc_kRErrorStack := self.inc_kRErrorStack + 1
 		self.kRErrorStack.push(self.inc_kRErrorStack.toString())
+	end
+	
+	operation pushFtSuffix() : Void is do
+		self.inc_ftSuffix := self.inc_ftSuffix + 1
+		self.ftSuffix.push(self.inc_ftSuffix.toString())
+	end
+	
+	operation getFtSuffix() : String is do
+		if self.ftSuffixActivation then
+			result := "_ft" + self.ftSuffix.peek()
+		else
+			result := ""
+		end
 	end
 	
 	

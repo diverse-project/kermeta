@@ -1,0 +1,48 @@
+/* $Id: ParameterHelper.kmt,v 1.1 2008-07-29 09:59:53 cfaucher Exp $
+ * Creation date: May 20, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+package kermeta::language::structure;
+
+require kermeta
+require "KermetaHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+
+using kermeta::standard
+using km2ecore
+
+aspect class Parameter {
+
+	/**
+	 * Return true if the given operation is a FunctionType
+	 */
+	operation isFunctionType() : Boolean is do
+		result := self.type.isInstanceOf(FunctionType)
+	end
+	
+	operation isBooleanFunctionType(context : KM2EcoreContext) : Boolean is do
+		result := false
+		
+		if self.isFunctionType() then
+			
+			var ft : FunctionType init self.type.asType(FunctionType)
+			
+			if ft.right.isBooleanTypeDef(context) then
+				result := true
+			end
+		end
+	end
+	
+	/*operation getFunctionTypeParameter() : Sequence<Parameter> is do
+		result := void
+		var ft_parameters : Sequence<Parameter> init self.ownedParameter.select{ p |
+			p.type.isInstanceOf(FunctionType)
+		}
+		result := ft_parameters
+	end*/
+	
+}

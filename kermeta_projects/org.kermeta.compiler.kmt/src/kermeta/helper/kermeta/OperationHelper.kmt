@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.kmt,v 1.5 2008-07-22 07:36:22 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.6 2008-07-29 09:59:53 cfaucher Exp $
  * Creation date: May 20, 2008
  * License:
  * Copyright:
@@ -51,4 +51,30 @@ aspect class Operation {
 		end
 		
 	end
+	
+	/**
+	 * Unused for the moment
+	 */
+	operation mustBeDuplicated() : Boolean is do
+		result := false
+		if self.type.isValueType() or hasAValueTypedParameter() then
+			result := true
+		end
+	end
+	
+	/**
+	 * The given operation has at least a parameter having ValueType as type
+	 */
+	operation hasAValueTypedParameter() : Boolean is do
+		result := false
+		
+		var p : Parameter init self.ownedParameter.detect{ p |
+			p.type.isValueType()
+		}
+		
+		if not p.isVoid() then
+		 result := true
+		end
+	end
+
 }

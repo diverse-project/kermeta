@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.25 2008-07-10 14:10:04 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.26 2008-07-29 09:59:54 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -123,37 +123,23 @@ aspect class EnumerationLiteral {
 aspect class ClassDefinition {
 	method applyPass1(context : KM2EcoreContext) is do
 	
-		//stdio.writeln("  +--+ " + self.name)
-		
 		// Getting the container
 		var p : Package init self.container().asType(Package)
 		
 		// If this ClassDefinition is a subType of kermeta::standard::ValueType then
 		// an EAttribute value is added to allow the use of the value of a ValueType
-		//stdio.writeln("ClassDefinition applyPass1(): " + self.qualifiedName + " " + self.isValueType().toString())
 		if self.isValueType() then
 		
-			//stdio.writeln(" ---- ClassDefinition applyPass1(): " + self.name)
-
 			var instanceClassName : String init self.getEMFInstanceClassName()
 			
 			if instanceClassName != "" then
 				var eDataType : EDataType init EDataType.new
-				eDataType.name := self.name
+				eDataType.name := "Java" + self.name
 				eDataType.instanceClassName := instanceClassName
 				// Setting the container
 				p.ecoreModelElement.eClassifiers.add(eDataType)
 				// Setting the ecore proxy
 				self.ecoreDataType := eDataType
-			
-				// Compile only the methods that are not taking directly
-				// into account by the target language like times() for an Integer
-				/*self.ownedOperation.each{ o |
-					if o.getEMFStatic()!="" then
-						stdio.writeln("An EMF_static method has been detected: " + o.name)
-						//TODO Compile with Simk
-					end
-				}*/
 			else
 				if not self.isAbstract then
 					raise UndefinedValueTypeInstanceClassNameException.new()
@@ -173,9 +159,14 @@ aspect class ClassDefinition {
 				if not o.isInstanceOf(Operation) then
 					o.applyPass1(context)
 				else
-					if o.asType(Operation).mustBeCompiled() then
-						//stdio.writeln("opopop: " + o.asType(Operation).name + " " + self.name)
-						o.applyPass1(context)
+					var op : Operation init o.asType(Operation)
+					if (not op.isFunctionType()) then//vt and (o.asType(Operation).mustBeCompiled()) then
+						op.applyPass1(context)
+						
+						/*if op.mustBeDuplicated() then
+							stdio.writeln("duplicated method: " + op.name)
+						end*/
+						
 					end
 				end
 			}

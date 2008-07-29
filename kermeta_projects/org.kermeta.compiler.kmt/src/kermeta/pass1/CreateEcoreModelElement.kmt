@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.25 2008-07-22 07:36:22 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.26 2008-07-29 09:59:54 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -204,9 +204,9 @@ aspect class ClassDefinition {
 		ecoreClass.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		ecoreClass.~abstract := self.isAbstract
 		
-		if not (self.getEMFInstanceClassName() == "") then
+		/*if not (self.getEMFInstanceClassName() == "") then
 			ecoreClass.instanceClassName := self.getEMFInstanceClassName()
-		end
+		end*/
 		result := ecoreClass
 	end
 }

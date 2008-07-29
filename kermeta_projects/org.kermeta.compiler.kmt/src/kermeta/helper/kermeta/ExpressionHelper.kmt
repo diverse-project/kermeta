@@ -1,0 +1,167 @@
+/* $Id: ExpressionHelper.kmt,v 1.1 2008-07-29 09:59:53 cfaucher Exp $
+ * Creation date: Jul 25, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors:
+ * 			Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language::behavior;
+
+require kermeta
+require "KermetaHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+
+using kermeta::language::structure
+using kermeta::standard
+using km2ecore
+using km2ecore::helper::kermeta
+
+aspect class CallFeature {
+
+	/**
+	 * Unused for the moment
+	 */
+	operation getParamBindings() : String is do
+		result := ""
+		var i : Integer init 0
+		self.parameters.each{ param |
+			if param.isInstanceOf(LambdaExpression) then
+				if param.asType(LambdaExpression).staticType.isInstanceOf(ProductType) then
+					param.asType(LambdaExpression).staticType.asType(ProductType).type.each{ t |
+						if i==1 then
+							result := result + ", "
+						else
+							i := 1
+						end
+						result := result + t.getTypeQName()
+					}
+				end
+			end
+		}
+		if result != "" then
+			result := "<" + result + ">"
+		end
+	end
+
+	/**
+	 * Unused and it should be removed
+	 */
+	operation getPP(tgt : Expression, fName : String, context : KM2EcoreContext) : String is do
+		result := ""
+		
+		var isBoolean : Boolean init tgt.staticType.isBooleanTypeDef(context)
+		var isNumeric : Boolean init tgt.staticType.isNumericalTypeDef(context)
+		
+		if(fName == "not" and isBoolean) then
+				result := result + "! ("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ")"
+			
+			else if (fName == "and" and isBoolean) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") && ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if (fName == "or" and isBoolean) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") || ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if (fName == "plus" and isNumeric) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") + ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if(fName == "minus" and isNumeric) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") - ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if(fName == "mult" and isNumeric) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") * ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if(fName == "div" and isNumeric) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") / ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if(fName == "isGreater" and isNumeric) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") > ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if(fName == "isLower" and isNumeric) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") < ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if(fName == "isGreaterOrEqual" and isNumeric) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") >= ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if(fName == "isLowerOrEqual" and isNumeric) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") <= ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if(fName == "equals" and (isBoolean or isNumeric)) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") == ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+			else if(fName == "isNotEqual" and (isBoolean or isNumeric)) then
+				result := result + "("
+				result := result + tgt.createBehaviorJava(context)
+				result := result + ") != ("
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
+				result := result + ")"
+			
+		
+			else
+				var ppParam : String init ""
+				if tgt.isInstanceOf(CallFeature) then
+					ppParam := "(" + CompilerHelperJava.new.ppComaSeparatedNodes(tgt.asType(CallExpression).parameters, context) + ")"
+				end
+				result := result + tgt.createBehaviorJava(context) + ppParam + "."
+			
+			end
+			end
+			end
+			end
+			end
+			end
+			end
+			end
+			end
+			end
+			end
+			end
+			end
+	end
+}

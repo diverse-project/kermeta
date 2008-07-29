@@ -1,4 +1,4 @@
-/* $Id: GenericTypeDefinitionHelper.kmt,v 1.6 2008-06-26 12:49:56 cfaucher Exp $
+/* $Id: GenericTypeDefinitionHelper.kmt,v 1.7 2008-07-29 09:59:53 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -13,7 +13,6 @@ require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/KeywordList.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/ecore/EcoreHelper.kmt"
 
 using kermeta::language::structure
@@ -25,66 +24,9 @@ using km2ecore::helper::ecore
 class GenericTypeDefinitionHelper {
 	
 	/**
-	 * Tests whether the Type t corresponds to a Kermeta numerical type, which can be encoded
-	 * either as the Integer/Real PrimitiveType or the Integer/Real class.
-	 * @param t : Type
-	 * @return true or false
+	 * FIXME CF: this method should be deprecated, because the function type are included in the resulted Ecore
+	 * or we could create only the signature of the method
 	 */
-	operation isNumericalTypeDef(t : Type, context : KM2EcoreContext) : Boolean is do
-		
-		if not t.isVoid() then
-		
-			var tName : String init void
-			if t.isInstanceOf(Class) then
-				tName := t.asType(ParameterizedType).typeDefinition.name
-				if tName.equals("Integer") or tName.equals("Real") then
-					result := true
-				else
-					result := false
-				end
-			else if t.isInstanceOf(PrimitiveType) then
-					tName := t.asType(PrimitiveType).createBehaviorJava(context)
-					if tName.equals("Integer") or tName.equals("Real") then
-						result := true
-					else
-						result := false
-					end
-				else
-					result := false
-				end
-			end
-		
-		else
-			result := false
-		end
-		
-	end
-	
-	/**
-	 * Tests whether the Type t corresponds to the Kermeta Boolean type, which can be encoded
-	 * either as the Boolean PrimitiveType or the Boolean class.
-	 * @param t : Type
-	 * @return true or false
-	 */
-	operation isBooleanTypeDef(t : Type, context : KM2EcoreContext) : Boolean is do
-		
-		if not t.isVoid() then
-		
-			if t.isInstanceOf(Class) then
-				result := t.asType(Class).typeDefinition.name.equals("Boolean")
-			else if t.isInstanceOf(PrimitiveType) then
-					result := t.asType(PrimitiveType).createBehaviorJava(context).equals("Boolean")
-				else
-					result := false
-				end
-			end
-			
-		else
-			result := false
-		end
-		
-	end
-	
 	operation getKermetaSpecialType(p : Package) : EClass is do
 		var specialType : EClass
 		

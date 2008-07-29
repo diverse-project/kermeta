@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.18 2008-07-22 07:36:22 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.19 2008-07-29 09:59:53 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -11,8 +11,10 @@ package kermeta::language::structure;
 
 require kermeta
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/CreateBehavior.kmt"
 
 using kermeta::language::structure
+using kermeta::language::behavior
 using kermeta::standard
 using kermeta::utils
 using km2ecore
@@ -124,13 +126,64 @@ aspect class Type {
 			result := "void"
 		end
 	end
-}
-
-aspect class Class {
-	operation getClassDefinition() : ClassDefinition is do
-		result := void
-		if self.typeDefinition.isInstanceOf(ClassDefinition) then
-			result := self.typeDefinition.asType(ClassDefinition)
+	
+	/**
+	 * Tests whether the Type t corresponds to a Kermeta numerical type, which can be encoded
+	 * either as the Integer/Real PrimitiveType or the Integer/Real class.
+	 * @param t : Type
+	 * @return true or false
+	 */
+	operation isNumericalTypeDef(context : KM2EcoreContext) : Boolean is do
+		result := false
+		
+		if not self.isVoid() then
+		
+			var tName : String init void
+			if self.isInstanceOf(Class) then
+				tName := self.asType(ParameterizedType).typeDefinition.name
+				if tName.equals("Integer") or tName.equals("Real") then
+					result := true
+				end
+			else if self.isInstanceOf(PrimitiveType) then
+					tName := self.asType(PrimitiveType).createBehaviorJava(context)
+					if tName.equals("Integer") or tName.equals("Real") then
+						result := true
+					end
+				end
+			end
+		end
+		
+	end
+	
+	/**
+	 * Tests whether the Type t corresponds to the Kermeta Boolean type, which can be encoded
+	 * either as the Boolean PrimitiveType or the Boolean class.
+	 * @param t : Type
+	 * @return true or false
+	 */
+	operation isBooleanTypeDef(context : KM2EcoreContext) : Boolean is do
+		result := false
+		
+		if not self.isVoid() then
+		
+			if self.isInstanceOf(Class) then
+				result := self.asType(Class).typeDefinition.name.equals("Boolean")
+			else if self.isInstanceOf(PrimitiveType) then
+					if  self.asType(PrimitiveType).createBehaviorJava(context).equals("kermeta::standard::Boolean") or self.asType(PrimitiveType).createBehaviorJava(context).equals("Boolean") then
+						result := true
+					end
+				end
+			end
+		end
+		
+	end
+	
+	operation isMappedToJavaRawType() : Boolean is do
+		result := false
+		if self.isInstanceOf(ParameterizedType) then
+			if self.asType(ParameterizedType).typeDefinition.isInstanceOf(ClassDefinition) then
+				result := self.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).isMappedToJavaRawType()
+			end
 		end
 	end
 }

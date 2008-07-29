@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.35 2008-07-23 08:22:14 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.36 2008-07-29 09:59:55 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -78,14 +78,14 @@ package structure {
 				
 				// result is initialized only if the "return type" is not Void
 				if not isVoidType(type_label) then
-					javaCode.append("\n" + type_label + " result = null;\n")
+					javaCode.append("\n" + type_label + " result" + context.getFtSuffix() + " = null;\n")
 				end
 
 				// The Java source code is provided by: self.body.createBehaviorJava(context)
 				javaCode.append(self.body.createBehaviorJava(context))
 				
 				// result is returned only if the "return type" is not Void
-				if not isVoidType(type_label) then
+				if (not isVoidType(type_label)) and (not context.ftSuffixActivation) then
 					javaCode.append("\nreturn result;\n")
 				end
 				
@@ -94,14 +94,26 @@ package structure {
 			// Finally add the EAnnotation containing the Java code in the Ecore model
 			if context.tasks_stack.peek() != "FunctionType_Compilation" then
 	        	EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, javaCode.toString)
+	        	//stdio.writeln(javaCode.toString)
 	        end
 	        result := javaCode.toString()
 		end
 		
 		operation isVoidType(type_label : String) : Boolean is do
-			result := true
-			if (type_label!="null") and (type_label!="Void") and (type_label!="VoidType") and (type_label!="kermeta::standard::Void") and (type_label!="kermeta::standard::VoidType") and (type_label!="kermeta::language::structure::Void") and (type_label!="kermeta::language::structure::VoidType") then
-				result := false
+			result := false
+			if (type_label == "null")
+				or (type_label == "void")
+				or (type_label == "Void")
+				or (type_label == "VoidType")
+				or (type_label == "kermeta::standard::Void")
+				or (type_label == "kermeta::standard::VoidType")
+				or (type_label == "kermeta::language::structure::Void")
+				or (type_label == "kermeta::language::structure::VoidType")
+				or (type_label == "kermeta.standard.Void")
+				or (type_label == "kermeta.standard.VoidType")
+				or (type_label == "kermeta.language.structure.Void")
+				or (type_label == "kermeta.language.structure.VoidType") then
+				result := true
 			end
 		end
 		
@@ -218,11 +230,6 @@ package structure {
 			if self.typeDefinition.getEMFInstanceClassName()!="" then
 				result := self.typeDefinition.getEMFInstanceClassName()
 			else
-				@deprecated "It should be never used, these mappings has been replaced by the Tag @EMF_instanceClassName"		
-				//result := context.javaTypeMapping.getTypeMapping(self.typeDefinition.qualifiedName)
-			
-				//result := result.replace("::",".")
-				
 				result := self.getTypeQName().replace("::",".")
 			end
 			
@@ -231,14 +238,17 @@ package structure {
 			var i : Integer init 0
 			self.typeParamBinding.each{ tpb |
 				
-				if i==1 then
+				if i >= 1 then
 					str_tpb := str_tpb + ", "
-				else
-					i := 1
 				end
 				
-				str_tpb := str_tpb + tpb.type.createBehaviorJava(context)
+				if not context.ftSuffixActivation then
+					str_tpb := str_tpb + tpb.type.createBehaviorJava(context)
+				else
+					str_tpb := str_tpb + context.ftProductTypeStack.peek().type.elementAt(i).createBehaviorJava(context)
+				end
 				
+				i := i + 1
 			}
 			if str_tpb!="" then
 				result := result + "<" + str_tpb + ">"
@@ -248,6 +258,12 @@ package structure {
 	}
 	
 	aspect class ObjectTypeVariable {
+		method createBehaviorJava(context : KM2EcoreContext) : String is do
+			result := self.name
+		end
+	}
+	
+	aspect class Enumeration {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := self.name
 		end
@@ -264,6 +280,11 @@ package behavior {
 		
 			if (self.getCompiledJavaExtern()!="") and (context.compiledJavaExtern=="") then
 				context.compiledJavaExtern := getCompiledJavaExtern()
+				
+				if not context.current_valueType.isVoid() then
+					context.compiledJavaExtern := context.compiledJavaExtern.replace("this", "self")
+				end
+			
 			end
 			
 			//This method must be returned nothing
@@ -321,6 +342,10 @@ package behavior {
 						
 			self.eachOwnedElement{ stm |
 				javaCode.append("\n\t")
+				if stm == self.statement.elementAt(self.statement.size()-1) then
+					javaCode.append(context.lastStatement_boolean)
+					context.lastStatement_boolean := ""
+				end
 				javaCode.append(stm.createBehaviorJava(context))
 				javaCode.append("\n")
 			}
@@ -359,9 +384,7 @@ package behavior {
 			result := false
 			
 			if self.isInstanceOf(CallFeature) then
-				if self.asType(CallFeature).staticProperty.isVoid() then
-					result := false
-				else
+				if not self.asType(CallFeature).staticProperty.isVoid() then
 					result := true
 				end
 			end
@@ -371,9 +394,17 @@ package behavior {
 			result := false
 			
 			if self.isInstanceOf(CallFeature) then
-				if self.asType(CallFeature).staticOperation.isVoid() then
-					result := false
-				else
+				if not self.asType(CallFeature).staticOperation.isVoid() then
+					result := true
+				end
+			end
+		end
+		
+		operation isCallFeatureAsStaticEnumLiteral() : Boolean is do
+			result := false
+			
+			if self.isInstanceOf(CallFeature) then
+				if not self.asType(CallFeature).staticEnumLiteral.isVoid() then
 					result := true
 				end
 			end
@@ -385,8 +416,13 @@ package behavior {
 			super(context)
 			result := ""
 
+			//By default, the self expression is added to a call feature
+			if self.target.isVoid() then
+				self.target := SelfExpression.new()
+			end
 			var tgt : Expression init self.target
 			var fName : String  init IdentifierHelper.new.getMangledIdentifier(self.name, context)
+			
 			
 			/*if not self.containedType.at(0).isVoid() and self.containedType.at(0).isInstanceOf(FunctionType) then
 				var t0 : FunctionType init self.containedType.at(0).asType(FunctionType)
@@ -427,32 +463,71 @@ package behavior {
 			
 				if self.staticOperation.isFunctionType() then
 					context.tasks_stack.push("FunctionType_Compilation")
-					//Stack Over Flow to solve:
-					stdio.writeln("context.tasks_stack.peek(): " + context.tasks_stack.peek() + " - " + self.staticOperation.name)
 					
 					//Retrieve the corresponding CallFeature for setting the name of the searched call variable
 					self.staticOperation.ownedParameter.each{ p |
 						if p.type.isInstanceOf(FunctionType) then
 							context.current_param_ft := p.name
 						end
-					}
+					}	
 					
 					//Lambda expression to inline
 					if self.parameters.one().isInstanceOf(LambdaExpression) then
-						context.ftStack.push(self.parameters.one().asType(LambdaExpression))
+					
+						var theLambdaExp : LambdaExpression init self.parameters.one().asType(LambdaExpression)
+					
+						context.ftStack.push(theLambdaExp)
+						
+						if theLambdaExp.staticType.isInstanceOf(FunctionType) then
+							if theLambdaExp.staticType.asType(FunctionType).left.isInstanceOf(ProductType) then
+								context.ftProductTypeStack.push(theLambdaExp.staticType.asType(FunctionType).left.asType(ProductType))
+							end
+						end
 					end
+					
+					
 					
 					var ft_str : String init ""
 					
-					ft_str := ft_str + "result_functionType = null;\n"
-					ft_str := ft_str + self.staticOperation.body.createBehaviorJava(context)
+					//Replacing the self
+					context.ftContextualSelf := tgt.createBehaviorJava(context)
 					
-					result := result + ft_str.replace("this", self.target.createBehaviorJava(context))
+					context.pushFtSuffix()
+					context.ftSuffixActivation := true
 					
-					stdio.writeln(ft_str)
+					var callElement : String init ""
+					if self.container.isInstanceOf(VariableDecl) then
+						callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(VariableDecl).identifier, context)
+					else
+						if self.container.isInstanceOf(CallVariable) then
+							callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(CallVariable).name, context)
+						end
+					end
 					
+					if callElement != "" or self.container.isInstanceOf(Assignment) then
+						ft_str := ft_str + "null;\n"
+					end
+					
+					ft_str := ft_str + "//Beginning of the Inlining of the function type: " + self.staticOperation.name + "\n"
+					ft_str := ft_str + self.staticOperation.createBehaviorJava(context)
+					
+					if callElement != "" then
+						ft_str := ft_str + callElement + " = result" + context.getFtSuffix() + ";\n"
+					end
+					
+					ft_str := ft_str + "//Ending of the Inlining of the function type: " + self.staticOperation.name + "\n"
+					
+					context.ftSuffixActivation := false
+					context.ftProductTypeStack.pop()
+					context.ftSuffix.pop()
+					
+					result := result + ft_str
+					
+					//stdio.writeln(result)
+				
 				end
 				
+				///////Added 08-07-28 or self.staticOperation.container().asType(ClassDefinition).isMappedToJavaRawType()
 				if self.staticOperation.container().asType(ClassDefinition).isValueType() then
 				
 					static_call := self.staticOperation.getOptimizedStaticCall(context)
@@ -462,10 +537,10 @@ package behavior {
 					end
 				else
 				
-					if not self.target.isVoid() then
-						if not self.target.staticType.isVoid() then
-							if self.target.staticType.isValueType() then
-								static_call := "org.kermeta.compil.runtime.helper.basetypes." + self.target.staticType.getTypeName() + "Util." + self.name
+					if not tgt.isVoid() then
+						if not tgt.staticType.isVoid() then
+							if tgt.staticType.isValueType() then
+								static_call := "org.kermeta.compil.runtime.helper.basetypes." + tgt.staticType.getTypeName() + "Util." + self.name
 							end
 						end
 					
@@ -478,6 +553,7 @@ package behavior {
 					end
 				
 				end
+			
 			end
 			
 			//added
@@ -498,10 +574,14 @@ package behavior {
 					result := result + "println"
 				else
 					if static_call=="" then
-						if self.isCallFeatureAsStaticProperty() then
-							result := result + "get" + self.name.capName() + "()"
+						if self.isCallFeatureAsStaticEnumLiteral then
+							result := result + "getByName(\"" + self.name + "\")"
 						else
-							result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context)
+							if self.isCallFeatureAsStaticProperty() then
+								result := result + "get" + self.name.capName() + "()"
+							else
+								result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context)
+							end
 						end
 					else
 						result := static_call + "(" + result
@@ -527,124 +607,6 @@ package behavior {
 			result := result + self.endOfExpressionFixer()
 		end
 		
-		/** Definition in progress */
-		operation getPP(tgt : Expression, fName : String, context : KM2EcoreContext) : String is do
-			result := ""
-			
-			var isBoolean : Boolean init GenericTypeDefinitionHelper.new.isBooleanTypeDef(tgt.staticType, context)
-			var isNumeric : Boolean init GenericTypeDefinitionHelper.new.isNumericalTypeDef(tgt.staticType, context)
-			
-			if(fName == "not" and isBoolean) then
-					result := result + "! ("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ")"
-				
-				else if (fName == "and" and isBoolean) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") && ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if (fName == "or" and isBoolean) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") || ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if (fName == "plus" and isNumeric) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") + ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if(fName == "minus" and isNumeric) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") - ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if(fName == "mult" and isNumeric) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") * ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if(fName == "div" and isNumeric) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") / ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if(fName == "isGreater" and isNumeric) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") > ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if(fName == "isLower" and isNumeric) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") < ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if(fName == "isGreaterOrEqual" and isNumeric) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") >= ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if(fName == "isLowerOrEqual" and isNumeric) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") <= ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if(fName == "equals" and (isBoolean or isNumeric)) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") == ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-				else if(fName == "isNotEqual" and (isBoolean or isNumeric)) then
-					result := result + "("
-					result := result + tgt.createBehaviorJava(context)
-					result := result + ") != ("
-					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-					result := result + ")"
-				
-			
-				else
-					var ppParam : String init ""
-					if tgt.isInstanceOf(CallFeature) then
-						ppParam := "(" + CompilerHelperJava.new.ppComaSeparatedNodes(tgt.asType(CallExpression).parameters, context) + ")"
-					end
-					result := result + tgt.createBehaviorJava(context) + ppParam + "."
-				
-				end
-				end
-				end
-				end
-				end
-				end
-				end
-				end
-				end
-				end
-				end
-				end
-				end
-		end
 	}
 	
 	aspect class CallVariable {
@@ -654,25 +616,46 @@ package behavior {
 
 			if (context.tasks_stack.peek() == "FunctionType_Compilation") and (context.current_param_ft == self.name) then
 				context.tasks_stack.pop()
+				
+				context.ftSuffixActivation := false
+				
 				var theLambdaExp : LambdaExpression init context.ftStack.pop()
 						
 				var str_toInclude : String init ""
 				
 				var inc_param : Integer init 0
 				theLambdaExp.parameters.each{ p |
-					str_toInclude := str_toInclude + self.parameters.elementAt(inc_param).staticType.createBehaviorJava(context) + " " + p.name
+					//str_toInclude := str_toInclude + self.parameters.elementAt(inc_param).staticType.createBehaviorJava(context) + " " + p.name
+					
+					str_toInclude := str_toInclude + context.ftProductTypeStack.peek().type.elementAt(inc_param).createBehaviorJava(context)
+					/*if theLambdaExp.staticType.isInstanceOf(FunctionType) then
+						if theLambdaExp.staticType.asType(FunctionType).left.isInstanceOf(ProductType) then
+							str_toInclude := str_toInclude + theLambdaExp.staticType.asType(FunctionType).left.asType(ProductType).type.elementAt(inc_param).createBehaviorJava(context)
+						end
+					end*/
+
+					
+					str_toInclude := str_toInclude + " " + p.name
+					
+					context.ftSuffixActivation := true
 					str_toInclude := str_toInclude + " = " + self.parameters.elementAt(inc_param).createBehaviorJava(context) + ";\n"
+					context.ftSuffixActivation := false
+					
 					inc_param := inc_param + 1
 				}
 				
-				//Add the compiled version of the body of the current LambdaExpression		
+				//Add the compiled version of the body of the current LambdaExpression
+				result := result + "//Beginning of the Inlining of the function type parameter: " + self.name + "\n"
 				result := result + str_toInclude + theLambdaExp.body.createBehaviorJava(context)
-			
+				result := result + "//Ending of the Inlining of the function type parameter: " + self.name + "\n"
+				
+				context.ftSuffixActivation := true
+				
 			else
 				if self.name == "stdio" then
 					result := result + "System.out"
 				else
-					result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context)
+					result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.getFtSuffix()
 				end
 				
 				result := result + self.endOfExpressionFixer()
@@ -686,7 +669,7 @@ package behavior {
 			super(context)
 			//Try to insert line number
 			//result := "begin " + self.lineNumber.toString() + " " + self.fileName + "\n" + "result" + "\nend " + self.lineNumber.toString() + " " + self.fileName + "\n"
-			result := "result"
+			result := "result" + context.getFtSuffix()
 		end
 	}
 	
@@ -704,8 +687,19 @@ package behavior {
 		
 			super(context)
 			
-			result := "//IP content of the current CallSuperOperation\n"
-			result := result + "super"
+			result := "super." + self.getContainerAsType(Operation).asType(Operation).name + "("
+			
+			var i : Integer init 0
+			self.parameters.each{ param |
+				if i==1 then
+					result := result + ", "
+				else
+					i := 1
+				end
+				result := result + param.createBehaviorJava(context)
+			}
+			
+			result := result + ");"
 		end
 	}
 	//**** End **** Managing of the CallExpression branch ****//
@@ -716,21 +710,14 @@ package behavior {
 			super(context)
 			
 			result := ""
+			
 			var localType : String init self.type.createBehaviorJava(context)
-			result := result + localType + " " + IdentifierHelper.new.getMangledIdentifier(self.identifier, context)
+			result := result + localType + " " + IdentifierHelper.new.getMangledIdentifier(self.identifier, context) + context.getFtSuffix()
+			
 			if not self.initialization.isVoid() then
-				
-				//if self.initialization.createBehaviorJava(context).contains(".new()") or self.initialization.createBehaviorJava(context).contains(".new") then
-					//result := result + " /*VariableDecl with new*/ " + CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
-				//else
-					//result := result + " /*VariableDecl without new*/ " + self.initialization.createBehaviorJava(context)
-				//end
-				
-				//result := result + " = CreateFactory.new(" + localType + ")"
 				result := result + " = " + self.initialization.createBehaviorJava(context)
-		
 			else
-				result := result + " = null;"//CompilerHelperJava.new.ppEmfLikeCreateFactory(localType)
+				result := result + " = null;"
 			end
 			
 		end
@@ -782,21 +769,21 @@ package behavior {
 	aspect class LambdaExpression {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			super(context)
-			result := "//TODO LambdaExpression" + self.toString
+			result := ""
 		end
 	}
 	
 	aspect class LambdaParameter {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			super(context)
-			result := "//TODO LambdaParameter" + self.toString
+			result := ""
 		end
 	}
 	
 	aspect class FunctionType {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			super(context)
-			result := "//TODO FunctionType" + self.toString
+			result := ""
 		end
 	}
 	
@@ -807,20 +794,14 @@ package behavior {
 		end
 	}
 	
-	aspect class EmptyExpression {
-		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
-			super(context)
-			result := "//TODO EmptyExpression" + self.toString()
-		end
-	}
-	
-	//**** Begin **** Managing of the exception ****//
+	//**** Begin **** Managing of the exception (wrapper to java.lang.Error) ****//
 	/** Complete */
 	aspect class Raise {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			
 			super(context)
 		
+			//DO NOT REMOVE the following source code, this is used for fixing throws attribute on the EOperations
 			/*var newEGenericType : EGenericType init EGenericType.new()
 			newEGenericType.eClassifier := context.mu.getEClassifierByQualifiedName("kermeta::exceptions::KRuntimeError")
 
@@ -873,11 +854,17 @@ package behavior {
 	aspect class SelfExpression {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			super(context)
-			if context.current_valueType.isVoid() then
-				result := "this"
-			else
+			
+			result := "this"
+			
+			if not context.current_valueType.isVoid() then
 				result := "self"
 			end
+			
+			if context.ftSuffixActivation then
+				result := context.ftContextualSelf
+			end
+
 			result := result + self.endOfExpressionFixer()
 		end
 	}
@@ -891,7 +878,24 @@ package behavior {
 			context.pushCondStack()
 			
 			result := "java.lang.Boolean eval_" + context.condStack.peek() + " = false;"
-			result := result + "\n\teval_" + context.condStack.peek() + " = " + self.condition.createBehaviorJava(context)
+			
+			var str_condition : String init ""
+			
+			if context.getFtSuffix()=="" then
+				str_condition := str_condition + "\n\teval_" + context.condStack.peek() + " = " + self.condition.createBehaviorJava(context)
+			else
+				if self.condition.isInstanceOf(CallVariable) then
+					var ftParam : Parameter init self.getContainerAsType(Operation).asType(Operation).ownedParameter.detect{ p | p.name == self.condition.asType(CallVariable).name }
+					if not ftParam.isVoid() then
+						if ftParam.isBooleanFunctionType(context) then
+							context.lastStatement_boolean := "eval_" + context.condStack.peek() + " = "
+							str_condition := str_condition + "\n" + self.condition.createBehaviorJava(context)
+						end
+					end
+				end				
+			end
+			
+			result := result + str_condition
 			
 			result := result + "\n\n\tif( eval_" + context.condStack.pop() + " ) "
 			

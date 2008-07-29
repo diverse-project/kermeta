@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.37 2008-07-23 08:22:14 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.38 2008-07-29 09:59:55 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -40,11 +40,11 @@ class Main {
 		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.ecore"
 		//var traceInput : String init ""//platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.traceability"
 
-/*
+
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/framework.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/framework.ecore"
 		var traceInput : String init ""
-*/
+
 		
 		//var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/EDataType.main_merged.km"
 		//var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/EDataType.main_merged.ecore"
@@ -60,13 +60,13 @@ class Main {
 		var traceInput : String init ""
 */
 
-
+/*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.ecore"
 		var traceInput : String init ""
+*/
 
-
-		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
+		main_mode3(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
 	
     operation main(modelInput : String, traceInput : String, output : String) : Void is do
@@ -197,8 +197,15 @@ class Main {
 				if cd.isInstanceOf(ClassDefinition) then
 				cd.asType(ClassDefinition).eachOwnedElement{ op |
 					if op.isInstanceOf(Operation) then
+					
+						if op.asType(Operation).name == "addAllTestCasesFrom" then
+					
 						stdio.writeln("================= " + op.asType(Operation).name + " =================")
-						op.asType(Operation).createBehaviorJava(context)
+						var javaSourceCode : String init op.createBehaviorJava(context)
+						stdio.writeln(javaSourceCode)
+						
+						end
+						
 					end
 					}
 				end
@@ -206,8 +213,40 @@ class Main {
 			
 		}
 		
+		stdio.writeln("Finish")
 		
-		stdio.writeln("KermetaCompiler - Pass 2 is finished")
+    end
+   	
+   	operation main_mode4(modelInput : String, traceInput : String, output : String, mode : CompilingMode) : Void is do
+
+		// Creating and initializing the context
+		context := KM2EcoreContext.new
+		context.initialize( modelInput, traceInput )
+		
+		context.mode := mode
+		
+		
+		context.mu.getAllPackages().each{ p |
+			
+			stdio.writeln(p.asType(Package).name)
+			
+			p.asType(Package).eachOwnedElement{ cd |
+				if cd.isInstanceOf(ClassDefinition) then
+				cd.asType(ClassDefinition).eachOwnedElement{ o |
+					if o.isInstanceOf(Operation) then
+						var op : Operation init o.asType(Operation)
+						stdio.writeln("================= " + op.name + " =================")
+						var javaSourceCode : String init op.createBehaviorJava(context)
+						//stdio.writeln(javaSourceCode)
+						
+						op.body.getAllContainedElementAsType()
+					end
+					}
+				end
+			}
+			
+		}
+		
 		stdio.writeln("Finish")
 		
     end
