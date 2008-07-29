@@ -1,4 +1,4 @@
-/*$Id: SortPropertyCommand.java,v 1.1 2008-06-16 15:08:03 dvojtise Exp $
+/*$Id: SortPropertyCommand.java,v 1.2 2008-07-29 13:34:35 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	SortPropertyCommand.java
 * License : EPL
@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**
@@ -37,8 +38,19 @@ public class SortPropertyCommand {
 	 * sort the efeature according to sourceRuntimeObject array
 	 */
 	public void run(){
+		if(sourceRuntimeObjects.size() != ((EList<Object>) eObject.eGet(feature)).size()){
+			String msg = "Cannot ensure order of "+ eObject.eClass().getName() + "."  + feature.getName() + " because of a mismatch in the number of elements in the EMF object and in the RuntimeObject !";
+			Runtime2EMF.internalLog.error(msg);
+			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ResourceSaveException",
+	    			msg,
+	    			sourceRuntimeObjects.get(0).getFactory().getMemory().getInterpreter().getBasicInterpreter(),
+	    			sourceRuntimeObjects.get(0).getFactory().getMemory(),
+	    			null);
+			
+		}
+		
 		for(int i = 0; i <= sourceRuntimeObjects.size()-1 ; i++){
-			RuntimeObject rcoll = sourceRuntimeObjects.get(i);
+			RuntimeObject rcoll = sourceRuntimeObjects.get(i);			
 			if(	((EList<Object>) eObject.eGet(feature)).get(i) != rcoll.getR2eEmfObject()){
 				// they are not at the correct place in the eObject feature
 				// need to move it
@@ -46,5 +58,6 @@ public class SortPropertyCommand {
 				((EList<Object>) eObject.eGet(feature)).move(i, rcoll.getR2eEmfObject());
 			}
 		}
+		
 	}
 }
