@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmEditor.java,v 1.9 2008-02-19 17:07:13 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.10 2008-07-29 09:34:54 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -952,7 +952,7 @@ public class KmEditor
 	 * This is the method used by the framework to install your own controls.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public void createPages() {
@@ -973,6 +973,7 @@ public class KmEditor
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
 							TreeViewer newTreeViewer = new TreeViewer(tree);
+							newTreeViewer.setUseHashlookup(true);
 							return newTreeViewer;
 						}
 						@Override
@@ -1007,6 +1008,7 @@ public class KmEditor
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
 							TreeViewer newTreeViewer = new TreeViewer(tree);
+							newTreeViewer.setUseHashlookup(true);
 							return newTreeViewer;
 						}
 						@Override
