@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.74 2008-07-28 15:07:29 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.75 2008-07-29 13:33:56 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -225,7 +225,7 @@ public class Runtime2EMF {
 				// the model to save contains references to the definition level
 				// a model must not mix levels. The definition should be loaded separately, then the model car refer it.
 				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ResourceMixedLevelsException",
-		    			"You can't save a model that refers to elements from the currently running program definition since they may not exist in a physical km file. " +
+		    			"You can't save a model that refers to elements from the currently running program definition since they may not exist in a physical km file.\n" +
 		    			"Please make sure to load and retrieve the element (" + kcoreIdentification +") directly from a resource.",
 		    			this.unit.getRuntimeMemory().getInterpreter().getBasicInterpreter(),
 		    			this.unit.getRuntimeMemory(),
