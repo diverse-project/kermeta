@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.framework.compiled/src"
+    creationIcons="false" editDirectory="" editorDirectory="" modelPluginID="org.kermeta.framework.compiled"
+    templateDirectory="platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates"
+    dynamicTemplates="true" modelName="Framework" codeFormatting="true" testsDirectory=""
+    containmentProxies="true" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>C:/eclipse3.3.2/runtime-KermetaCompiler/org.kermeta.compiler.kmt/models/framework.ecore</foreignModel>
+  <genPackages prefix="Kermeta" disposableProviderFactory="true" ecorePackage="framework.ecore#/3">
+    <genClasses image="false" ecoreClass="framework.ecore#/3/DummyClass"/>
+    <nestedGenPackages prefix="Exceptions" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/exceptions">
+      <genDataTypes ecoreDataType="framework.ecore#/3/exceptions/KRuntimeError"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/Exception">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/exceptions/Exception/message"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/exceptions/Exception/nestedException"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/exceptions/Exception/stackTrace"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/RuntimeError">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/exceptions/RuntimeError/expression"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/CallOnVoidTarget"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/TypeCastError"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/NotImplementedException"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/UpperBoundReachedError"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/AbstractClassInstantiationError"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/IncompatibleTypeError"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/DivisionByZero"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/OverflowError"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/VoidOperandError"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/StringIndexOutOfBound"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/StringFormatException"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/IndexOutOfBound"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/EmptyCollection"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/IteratorIsOff"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/IOException"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/FileNotFoundException"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/ConstraintViolatedPre"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/ConstraintViolatedPost"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/ConstraintViolatedInv"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/ResourceLoadException"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/ResourceSaveException"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/ResourceCreateException"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/ResourceUnconformityException"/>
+      <genClasses ecoreClass="framework.ecore#/3/exceptions/DynamicExpressionException"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Standard" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/standard">
+      <genDataTypes ecoreDataType="framework.ecore#/3/standard/JavaBoolean"/>
+      <genDataTypes ecoreDataType="framework.ecore#/3/standard/JavaInteger"/>
+      <genDataTypes ecoreDataType="framework.ecore#/3/standard/JavaReal"/>
+      <genDataTypes ecoreDataType="framework.ecore#/3/standard/JavaCharacter"/>
+      <genDataTypes ecoreDataType="framework.ecore#/3/standard/JavaString"/>
+      <genDataTypes ecoreDataType="framework.ecore#/3/standard/UnlimitedNatural"/>
+      <genDataTypes ecoreDataType="framework.ecore#/3/standard/KermetaProperty_Collection_values">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/standard/KermetaProperty_Collection_values/G"/>
+      </genDataTypes>
+      <genDataTypes ecoreDataType="framework.ecore#/3/standard/KermetaProperty_Iterator_javaIterator">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/standard/KermetaProperty_Iterator_javaIterator/G"/>
+      </genDataTypes>
+      <genClasses ecoreClass="framework.ecore#/3/standard/Void">
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Void/isVoid"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Void/isInstanceOf">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Void/isInstanceOf/type"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Void/toString"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/standard/ValueType"/>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/standard/Comparable">
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Comparable/isLower">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Comparable/isLower/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Comparable/isGreaterOrEqual">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Comparable/isGreaterOrEqual/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Comparable/compareTo">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Comparable/compareTo/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Comparable/isLowerOrEqual">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Comparable/isLowerOrEqual/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Comparable/isGreater">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Comparable/isGreater/other"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/standard/Summable">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/standard/Summable/G"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Summable/plus">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Summable/plus/other"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/standard/NotComparableException"/>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/standard/Collection">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/standard/Collection/G"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/standard/Collection/values"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/count">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Collection/count/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/remove">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Collection/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/excludes">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Collection/excludes/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/one"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/containsAll">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Collection/containsAll/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/sum"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/contains">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Collection/contains/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/excludesAll">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Collection/excludesAll/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/asSequence"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/includes">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Collection/includes/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/add">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Collection/add/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/clear"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/isEmpty"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/asBag"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/any"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/empty"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/isNotEmpty"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/iterator"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/addAll">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Collection/addAll/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/includesAll">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Collection/includesAll/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/size"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/asOrderedSet"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Collection/asSet"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/standard/Set">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/standard/Set/G"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/intersection">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/intersection/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/minus">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/minus/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/remove">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/equals">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/asSequence"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/add">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/add/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/symmetricDifference">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/symmetricDifference/s"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/concatenate">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/concatenate/less"/>
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/concatenate/pivot"/>
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/concatenate/greater"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/flatten"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/asOrderedSet"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/asBag"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/union">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/union/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/asSet"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Set/unionWithBag">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Set/unionWithBag/elements"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/standard/Bag">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/standard/Bag/G"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/intersection">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/intersection/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/equals">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/asSequence"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/concatenate">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/concatenate/less"/>
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/concatenate/pivot"/>
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/concatenate/greater"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/excluding">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/excluding/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/intersectionWithSet">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/intersectionWithSet/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/flatten"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/asOrderedSet"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/including">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/including/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/asBag"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/union">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/union/elements"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/removeOne">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/removeOne/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/removeFromOid">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Bag/removeFromOid/elementOid"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Bag/asSet"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/standard/OrderedCollection">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/standard/OrderedCollection/G"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedCollection/removeAt">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedCollection/removeAt/index"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedCollection/addAt">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedCollection/addAt/index"/>
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedCollection/addAt/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedCollection/last"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedCollection/equals">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedCollection/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedCollection/indexOf">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedCollection/indexOf/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedCollection/elementAt">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedCollection/elementAt/index"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedCollection/first"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/standard/OrderedSet">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/standard/OrderedSet/G"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedSet/append">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/append/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedSet/insertAt">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/insertAt/index"/>
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/insertAt/subject"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedSet/addAt">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/addAt/index"/>
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/addAt/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedSet/preppend">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/preppend/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedSet/equals">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedSet/at">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/at/index"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedSet/add">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/add/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/OrderedSet/subSet">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/subSet/min"/>
+          <genParameters ecoreParameter="framework.ecore#/3/standard/OrderedSet/subSet/max"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/standard/Sequence">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/standard/Sequence/G"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Sequence/subSequence">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Sequence/subSequence/min"/>
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Sequence/subSequence/max"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Sequence/append">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Sequence/append/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Sequence/insertAt">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Sequence/insertAt/index"/>
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Sequence/insertAt/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Sequence/equals">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Sequence/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Sequence/preppend">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Sequence/preppend/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Sequence/at">
+          <genParameters ecoreParameter="framework.ecore#/3/standard/Sequence/at/index"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/standard/Iterator">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/standard/Iterator/G"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/standard/Iterator/javaIterator"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/standard/Iterator/kermetaCollection"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Iterator/hasNext"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Iterator/next"/>
+        <genOperations ecoreOperation="framework.ecore#/3/standard/Iterator/isOff"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/standard/UnknownJavaObject">
+        <genOperations ecoreOperation="framework.ecore#/3/standard/UnknownJavaObject/toString"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Utils" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/utils">
+      <genClasses ecoreClass="framework.ecore#/3/utils/Stack">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/utils/Stack/G"/>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Stack/pop"/>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Stack/peek"/>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Stack/push">
+          <genParameters ecoreParameter="framework.ecore#/3/utils/Stack/push/element"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/utils/Hashtable">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/utils/Hashtable/K"/>
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/utils/Hashtable/V"/>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Hashtable/clear"/>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Hashtable/getValue">
+          <genParameters ecoreParameter="framework.ecore#/3/utils/Hashtable/getValue/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Hashtable/containsKey">
+          <genParameters ecoreParameter="framework.ecore#/3/utils/Hashtable/containsKey/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Hashtable/values"/>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Hashtable/put">
+          <genParameters ecoreParameter="framework.ecore#/3/utils/Hashtable/put/key"/>
+          <genParameters ecoreParameter="framework.ecore#/3/utils/Hashtable/put/value"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Hashtable/remove">
+          <genParameters ecoreParameter="framework.ecore#/3/utils/Hashtable/remove/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Hashtable/keys"/>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Hashtable/keyIterator"/>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Hashtable/valueIterator"/>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/Hashtable/size"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/utils/StringBuffer">
+        <genOperations ecoreOperation="framework.ecore#/3/utils/StringBuffer/append">
+          <genParameters ecoreParameter="framework.ecore#/3/utils/StringBuffer/append/arg0"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/StringBuffer/length"/>
+        <genOperations ecoreOperation="framework.ecore#/3/utils/StringBuffer/toString"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Kunit" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/kunit">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="framework.ecore#/3/kunit/ErrorKind">
+        <genEnumLiterals ecoreEnumLiteral="framework.ecore#/3/kunit/ErrorKind/setUpError"/>
+        <genEnumLiterals ecoreEnumLiteral="framework.ecore#/3/kunit/ErrorKind/testError"/>
+        <genEnumLiterals ecoreEnumLiteral="framework.ecore#/3/kunit/ErrorKind/tearDownError"/>
+      </genEnums>
+      <genClasses ecoreClass="framework.ecore#/3/kunit/InvalidTestCaseNameException"/>
+      <genClasses ecoreClass="framework.ecore#/3/kunit/InvalidParameterException"/>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/kunit/Fallible">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/kunit/Fallible/stopOnFailure"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/kunit/Fallible/rank"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/assertTrue">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/assertTrue/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/getLogKermeta"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/assertFalseWithMsg">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/assertFalseWithMsg/condition"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/assertFalseWithMsg/message"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/fail">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/fail/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/assertEqual">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/assertEqual/expected"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/assertEqual/actual"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/assertFalse">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/assertFalse/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/assertTrueWithMsg">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/assertTrueWithMsg/condition"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/assertTrueWithMsg/message"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/_assert">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/_assert/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/number"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/assertWithMsg">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/assertWithMsg/condition"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Fallible/assertWithMsg/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Fallible/mustStop"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/kunit/Log">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/kunit/Log/failures"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/kunit/Log/errors"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/kunit/Log/runtests"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/kunit/Log/harnessErrors"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Log/addSetUpError">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Log/addSetUpError/test"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Log/addSetUpError/e"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Log/addTestError">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Log/addTestError/test"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Log/addTestError/e"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Log/addFailure">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Log/addFailure/test"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Log/addFailure/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Log/addTearDownError">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Log/addTearDownError/test"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Log/addTearDownError/e"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Log/newAttempt"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/kunit/Failure">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/kunit/Failure/message"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/kunit/Failure/failure"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Failure/toString"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Failure/initFrom">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Failure/initFrom/fallible"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Failure/initFrom/msg"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/kunit/Error">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/kunit/Error/error"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/kunit/Error/exception"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/kunit/Error/kind"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Error/makeTearDown"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Error/makeSetUp"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Error/toString"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Error/initFrom">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Error/initFrom/error"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Error/initFrom/e"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/kunit/Test">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/kunit/Test/log"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Test/setLogKermeta">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Test/setLogKermeta/log"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Test/run"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Test/initLog"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/kunit/TestSuite">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/kunit/TestSuite/tests"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestSuite/addAllTestCasesFrom">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/TestSuite/addAllTestCasesFrom/testCaseClass"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestSuite/run"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestSuite/addAllTestCasesFromAspects">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/TestSuite/addAllTestCasesFromAspects/testCaseClass"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/TestSuite/addAllTestCasesFromAspects/anAspect"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/kunit/TestCase">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/kunit/TestCase/__testMethodName"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestCase/setUp"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestCase/raiseIfHasFailures"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestCase/getLog"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestCase/setTestMethodName">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/TestCase/setTestMethodName/name"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestCase/getTestMethodName"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestCase/toString"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestCase/run"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestCase/tearDown"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/kunit/TestRunner">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/kunit/TestRunner/log"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestRunner/runTest">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/TestRunner/runTest/test"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestRunner/printTestResult"/>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/TestRunner/run">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/TestRunner/run/testCaseClass"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/kunit/AbstractFallible">
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/AbstractFallible/assertTrue">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertTrue/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/AbstractFallible/distil">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/distil/s"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/AbstractFallible/assertFalseWithMsg">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertFalseWithMsg/condition"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertFalseWithMsg/message"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/AbstractFallible/fail">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/fail/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/AbstractFallible/assertEqual">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertEqual/expected"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertEqual/actual"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/AbstractFallible/assertFalse">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertFalse/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/AbstractFallible/assertTrueWithMsg">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertTrueWithMsg/condition"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertTrueWithMsg/message"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/AbstractFallible/_assert">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/_assert/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/AbstractFallible/assertSimilar">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertSimilar/expected"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertSimilar/actual"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/AbstractFallible/assertWithMsg">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertWithMsg/condition"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/AbstractFallible/assertWithMsg/msg"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/kunit/AssertionFailedError"/>
+      <genClasses ecoreClass="framework.ecore#/3/kunit/Assert">
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Assert/assertTrue">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/assertTrue/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Assert/assertFalseWithMsg">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/assertFalseWithMsg/condition"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/assertFalseWithMsg/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Assert/fail">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/fail/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Assert/assertEqual">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/assertEqual/expected"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/assertEqual/actual"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Assert/assertFalse">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/assertFalse/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Assert/assertTrueWithMsg">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/assertTrueWithMsg/condition"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/assertTrueWithMsg/msg"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Assert/_assert">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/_assert/condition"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/kunit/Assert/assertWithMsg">
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/assertWithMsg/condition"/>
+          <genParameters ecoreParameter="framework.ecore#/3/kunit/Assert/assertWithMsg/msg"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Ecore" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/ecore">
+      <genClasses ecoreClass="framework.ecore#/3/ecore/EFeatureMapEntry">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/ecore/EFeatureMapEntry/value"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/ecore/EFeatureMapEntry/eStructuralFeatureName"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Language" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/language">
+      <genClasses ecoreClass="framework.ecore#/3/language/ReflectiveCollection">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/language/ReflectiveCollection/G"/>
+        <genOperations ecoreOperation="framework.ecore#/3/language/ReflectiveCollection/clear"/>
+        <genOperations ecoreOperation="framework.ecore#/3/language/ReflectiveCollection/remove">
+          <genParameters ecoreParameter="framework.ecore#/3/language/ReflectiveCollection/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/language/ReflectiveCollection/add">
+          <genParameters ecoreParameter="framework.ecore#/3/language/ReflectiveCollection/add/element"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/language/ReflectiveSequence">
+        <genTypeParameters ecoreTypeParameter="framework.ecore#/3/language/ReflectiveSequence/G"/>
+        <genOperations ecoreOperation="framework.ecore#/3/language/ReflectiveSequence/clear"/>
+        <genOperations ecoreOperation="framework.ecore#/3/language/ReflectiveSequence/addAt">
+          <genParameters ecoreParameter="framework.ecore#/3/language/ReflectiveSequence/addAt/index"/>
+          <genParameters ecoreParameter="framework.ecore#/3/language/ReflectiveSequence/addAt/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/language/ReflectiveSequence/removeAt">
+          <genParameters ecoreParameter="framework.ecore#/3/language/ReflectiveSequence/removeAt/index"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/language/ReflectiveSequence/remove">
+          <genParameters ecoreParameter="framework.ecore#/3/language/ReflectiveSequence/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/language/ReflectiveSequence/equals">
+          <genParameters ecoreParameter="framework.ecore#/3/language/ReflectiveSequence/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/language/ReflectiveSequence/add">
+          <genParameters ecoreParameter="framework.ecore#/3/language/ReflectiveSequence/add/element"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/language/DummyClass"/>
+      <nestedGenPackages prefix="Behavior" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/language/behavior">
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/behavior/CallExpression">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/CallExpression/staticTypeVariableBindings"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/CallExpression/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/CallExpression/parameters"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/behavior/Expression">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Expression/staticType"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/CallVariable">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/CallVariable/isAtpre"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/CallFeature">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/CallFeature/staticOperation"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/CallFeature/isAtpre"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/CallFeature/target"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/CallFeature/staticEnumLiteral"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/CallFeature/staticProperty"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/CallSuperOperation"/>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/CallResult"/>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/CallValue"/>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/Assignment">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Assignment/target"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Assignment/value"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/Assignment/isCast"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/Block">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Block/statement"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Block/rescueBlock"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/Conditional">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Conditional/thenBody"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Conditional/condition"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Conditional/elseBody"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/Raise">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Raise/expression"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/Rescue">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Rescue/body"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/Rescue/exceptionName"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Rescue/exceptionType"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/TypeReference"/>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/behavior/Literal"/>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/EmptyExpression"/>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/JavaStaticCall">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/JavaStaticCall/jmethod"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/JavaStaticCall/jclass"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/JavaStaticCall/parameters"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/LambdaExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/LambdaExpression/body"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/LambdaExpression/parameters"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/LambdaParameter">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/LambdaParameter/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/LambdaParameter/type"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/IntegerLiteral">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/IntegerLiteral/value"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/StringLiteral">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/StringLiteral/value"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/BooleanLiteral">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/BooleanLiteral/value"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/TypeLiteral">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/TypeLiteral/typeref"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/VoidLiteral"/>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/Loop">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Loop/initialization"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Loop/body"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/Loop/stopCondition"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/SelfExpression"/>
+        <genClasses ecoreClass="framework.ecore#/3/language/behavior/VariableDecl">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/VariableDecl/initialization"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/behavior/VariableDecl/type"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/behavior/VariableDecl/identifier"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Structure" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/language/structure">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="framework.ecore#/3/language/structure/ConstraintType">
+          <genEnumLiterals ecoreEnumLiteral="framework.ecore#/3/language/structure/ConstraintType/inv"/>
+          <genEnumLiterals ecoreEnumLiteral="framework.ecore#/3/language/structure/ConstraintType/pre"/>
+          <genEnumLiterals ecoreEnumLiteral="framework.ecore#/3/language/structure/ConstraintType/post"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="framework.ecore#/3/language/structure/ConstraintLanguage">
+          <genEnumLiterals ecoreEnumLiteral="framework.ecore#/3/language/structure/ConstraintLanguage/kermeta"/>
+          <genEnumLiterals ecoreEnumLiteral="framework.ecore#/3/language/structure/ConstraintLanguage/ocl"/>
+        </genEnums>
+        <genDataTypes ecoreDataType="framework.ecore#/3/language/structure/String"/>
+        <genDataTypes ecoreDataType="framework.ecore#/3/language/structure/Boolean"/>
+        <genDataTypes ecoreDataType="framework.ecore#/3/language/structure/Integer"/>
+        <genDataTypes ecoreDataType="framework.ecore#/3/language/structure/UnlimitedNatural"/>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Operation">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Operation/typeParameter"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Operation/body"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Operation/post"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Operation/ownedParameter"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Operation/isAbstract"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Operation/raisedException"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Operation/pre"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Operation/superOperation"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Operation/owningClass"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Property">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Property/_default"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Property/opposite"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Property/isDerived"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Property/getterBody"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Property/isReadOnly"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Property/setterBody"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Property/isSetterAbstract"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Property/isID"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Property/owningClass"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Property/isComposite"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Property/isGetterAbstract"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/structure/Type">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Type/typeContainer"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Type/clone">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Type/clone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Type/isInstance">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Type/isInstance/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Type/isSuperTypeOf">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Type/isSuperTypeOf/object"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Type/deepClone">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Type/deepClone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Type/isSubTypeOf">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Type/isSubTypeOf/object"/>
+          </genOperations>
+        </genClasses>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/structure/TypeContainer">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/TypeContainer/containedType"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/EnumerationLiteral">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/EnumerationLiteral/enumeration"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/TypeVariableBinding">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/TypeVariableBinding/type"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/TypeVariableBinding/variable"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Object">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Object/tag"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Object/ownedTags"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Object/oid.1"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Object/container.1"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/isSet">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Object/isSet/property"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/get">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Object/get/property"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/isKindOf">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Object/isKindOf/cl"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/equals">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Object/equals/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/getMetaClass"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/set">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Object/set/property"/>
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Object/set/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/isFrozen"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/checkInvariants"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/hashcode"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/isVoid"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/isNotEqual">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Object/isNotEqual/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/oid"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/unset">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Object/unset/property"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/container"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/freeze"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/containingResource"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/isInstanceOf">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Object/isInstanceOf/type"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/checkAllInvariants"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/asType">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Object/asType/type"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Object/toString"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/MultiplicityElement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/MultiplicityElement/isOrdered"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/MultiplicityElement/upper"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/MultiplicityElement/lower"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/MultiplicityElement/isUnique"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/structure/TypedElement">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/TypedElement/type"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/TypeDefinition">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/TypeDefinition/isAspect"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/structure/NamedElement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/NamedElement/name"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/NamedElement/qualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Class">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Class/ownedOperation"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Class/superClass"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Class/isAbstract"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Class/name"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Class/classDefinition"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Class/ownedAttribute"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Class/clone">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Class/clone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Class/_new"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Class/deepClone">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Class/deepClone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Class/equals">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Class/equals/other"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Class/toString"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/structure/DataType"/>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Enumeration">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Enumeration/ownedLiteral"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Enumeration/clone">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Enumeration/clone/objectToClone"/>
+          </genOperations>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Package">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Package/nestingPackage"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Package/nestedPackage"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Package/uri"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Parameter">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Parameter/operation"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/PrimitiveType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/PrimitiveType/instanceType"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Tag">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Tag/name"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Tag/value"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Tag/object"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Constraint">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Constraint/body"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Constraint/preOwner"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Constraint/stereotype"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Constraint/postOwner"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Constraint/language"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Constraint/invOwner"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/ClassDefinition">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ClassDefinition/ownedOperation"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/ClassDefinition/isAbstract"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ClassDefinition/superType"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ClassDefinition/inv"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ClassDefinition/allOperation"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ClassDefinition/allAttribute"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ClassDefinition/ownedAttribute"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/structure/GenericTypeDefinition">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/GenericTypeDefinition/typeParameter"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/structure/ParameterizedType">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ParameterizedType/typeParamBinding"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ParameterizedType/typeDefinition"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ParameterizedType/virtualTypeBinding"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/structure/TypeVariable">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/TypeVariable/supertype"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/ObjectTypeVariable"/>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/ModelType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ModelType/includedTypeDefinition"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/ModelType/_new"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/ModelType/isModelTypeOf">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/ModelType/isModelTypeOf/m"/>
+          </genOperations>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/ModelTypeVariable">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ModelTypeVariable/virtualType"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/VirtualType">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/VirtualType/modelType"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/VirtualType/typeParamBinding"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/VirtualType/classDefinition"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Model">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/Model/contents"/>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Model/addCompatible">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Model/addCompatible/objectToAdd"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Model/remove">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Model/remove/obj"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Model/addAllCompatible">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Model/addAllCompatible/objectsToAdd"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Model/add">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Model/add/obj"/>
+          </genOperations>
+          <genOperations ecoreOperation="framework.ecore#/3/language/structure/Model/filter">
+            <genParameters ecoreParameter="framework.ecore#/3/language/structure/Model/filter/typeName"/>
+          </genOperations>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/ModelingUnit">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ModelingUnit/usings"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ModelingUnit/includeFilters"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ModelingUnit/packages"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ModelingUnit/excludeFilters"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ModelingUnit/referencedModelingUnits"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ModelingUnit/requires"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Require">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Require/uri"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Using">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Using/qualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/Filter">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/language/structure/Filter/qualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/ProductType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/ProductType/type"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/FunctionType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/FunctionType/left"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/FunctionType/right"/>
+        </genClasses>
+        <genClasses ecoreClass="framework.ecore#/3/language/structure/VoidType"/>
+        <genClasses image="false" ecoreClass="framework.ecore#/3/language/structure/TypeDefinitionContainer">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/language/structure/TypeDefinitionContainer/ownedTypeDefinition"/>
+        </genClasses>
+      </nestedGenPackages>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Persistence" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/persistence">
+      <genClasses image="false" ecoreClass="framework.ecore#/3/persistence/Resource">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/persistence/Resource/dependentResources"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/persistence/Resource/contents"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference framework.ecore#/3/persistence/Resource/repository"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/persistence/Resource/isReadOnly"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/persistence/Resource/metaModelURI"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/persistence/Resource/uri"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/Resource/save"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/Resource/saveWithNewURI">
+          <genParameters ecoreParameter="framework.ecore#/3/persistence/Resource/saveWithNewURI/new_uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/Resource/findDanglingModelElements"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/Resource/load"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/Resource/instances"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/Resource/normalizedUri"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/persistence/EMFResource">
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/EMFResource/remove">
+          <genParameters ecoreParameter="framework.ecore#/3/persistence/EMFResource/remove/instance"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/EMFResource/save"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/EMFResource/saveWithNewURI">
+          <genParameters ecoreParameter="framework.ecore#/3/persistence/EMFResource/saveWithNewURI/new_uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/EMFResource/saveAndValidateWithEMF"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/EMFResource/load"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/EMFResource/add">
+          <genParameters ecoreParameter="framework.ecore#/3/persistence/EMFResource/add/instance"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/persistence/Repository">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#/3/persistence/Repository/resources"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/Repository/createResource">
+          <genParameters ecoreParameter="framework.ecore#/3/persistence/Repository/createResource/uri"/>
+          <genParameters ecoreParameter="framework.ecore#/3/persistence/Repository/createResource/mm_uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/Repository/normalizeUri">
+          <genParameters ecoreParameter="framework.ecore#/3/persistence/Repository/normalizeUri/uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/Repository/findDanglingModelElements"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/Repository/getResource">
+          <genParameters ecoreParameter="framework.ecore#/3/persistence/Repository/getResource/uri"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/persistence/DanglingDiagnostic">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/persistence/DanglingDiagnostic/referencingElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/persistence/DanglingDiagnostic/danglingElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/persistence/DanglingDiagnostic/referencingProperty"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/DanglingDiagnostic/toString"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/persistence/EMFRepository">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/persistence/EMFRepository/useInterpreterInternalResources"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/persistence/EMFRepository/ignoreLoadErrors"/>
+        <genOperations ecoreOperation="framework.ecore#/3/persistence/EMFRepository/createResource">
+          <genParameters ecoreParameter="framework.ecore#/3/persistence/EMFRepository/createResource/uri"/>
+          <genParameters ecoreParameter="framework.ecore#/3/persistence/EMFRepository/createResource/mm_uri"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Io" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/io">
+      <genClasses ecoreClass="framework.ecore#/3/io/StdIO">
+        <genOperations ecoreOperation="framework.ecore#/3/io/StdIO/writeln">
+          <genParameters ecoreParameter="framework.ecore#/3/io/StdIO/writeln/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/io/StdIO/errorln">
+          <genParameters ecoreParameter="framework.ecore#/3/io/StdIO/errorln/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/io/StdIO/error">
+          <genParameters ecoreParameter="framework.ecore#/3/io/StdIO/error/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/io/StdIO/write">
+          <genParameters ecoreParameter="framework.ecore#/3/io/StdIO/write/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/io/StdIO/read">
+          <genParameters ecoreParameter="framework.ecore#/3/io/StdIO/read/prompt"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/io/FileIO">
+        <genOperations ecoreOperation="framework.ecore#/3/io/FileIO/writeTextFile">
+          <genParameters ecoreParameter="framework.ecore#/3/io/FileIO/writeTextFile/filename"/>
+          <genParameters ecoreParameter="framework.ecore#/3/io/FileIO/writeTextFile/text"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/io/FileIO/readTextFile">
+          <genParameters ecoreParameter="framework.ecore#/3/io/FileIO/readTextFile/filename"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Interpreter" disposableProviderFactory="true" ecorePackage="framework.ecore#/3/interpreter">
+      <genClasses ecoreClass="framework.ecore#/3/interpreter/DynamicExpression">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/interpreter/DynamicExpression/expression"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/interpreter/DynamicExpression/errors"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/interpreter/DynamicExpression/formalParameters"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference framework.ecore#/3/interpreter/DynamicExpression/selfClass"/>
+        <genOperations ecoreOperation="framework.ecore#/3/interpreter/DynamicExpression/execute">
+          <genParameters ecoreParameter="framework.ecore#/3/interpreter/DynamicExpression/execute/selfObj"/>
+          <genParameters ecoreParameter="framework.ecore#/3/interpreter/DynamicExpression/execute/actualParams"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/interpreter/DynamicExpression/initializeDefaults"/>
+        <genOperations ecoreOperation="framework.ecore#/3/interpreter/DynamicExpression/parse">
+          <genParameters ecoreParameter="framework.ecore#/3/interpreter/DynamicExpression/parse/expression"/>
+        </genOperations>
+        <genOperations ecoreOperation="framework.ecore#/3/interpreter/DynamicExpression/evalString">
+          <genParameters ecoreParameter="framework.ecore#/3/interpreter/DynamicExpression/evalString/body"/>
+          <genParameters ecoreParameter="framework.ecore#/3/interpreter/DynamicExpression/evalString/selfObj"/>
+          <genParameters ecoreParameter="framework.ecore#/3/interpreter/DynamicExpression/evalString/actualParams"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="framework.ecore#/3/interpreter/KermetaError">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#/3/interpreter/KermetaError/message"/>
+      </genClasses>
+      <genClasses ecoreClass="framework.ecore#/3/interpreter/ParseError"/>
+      <genClasses ecoreClass="framework.ecore#/3/interpreter/TypeError"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>
