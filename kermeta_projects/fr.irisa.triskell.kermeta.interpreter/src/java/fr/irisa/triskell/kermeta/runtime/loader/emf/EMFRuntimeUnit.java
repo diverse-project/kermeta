@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.72 2008-06-18 14:03:48 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.73 2008-07-29 14:49:49 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -564,7 +564,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		    	org.eclipse.emf.ecore.xmi.DanglingHREFException dhe = (org.eclipse.emf.ecore.xmi.DanglingHREFException)t;
 		    	
 		    }*/
-		    String msg = "Error saving EMF model '" + this.getUriAsString() + "'" +
+		    String msg = "Error saving EMF model '" + this.getUriAsString() + "'" +"(normalized as : " +normalizedURI+")" +
 		    " :\n Error : \n    " + e.getMessage() + ((t!=null)?"\n Cause : \n    "+ t.getMessage():"");
 		    e.printStackTrace();
 		    throwKermetaRaisedExceptionOnSave(msg, e); 
