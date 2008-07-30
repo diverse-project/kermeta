@@ -1,12 +1,12 @@
-/* $Id: structure.kmt,v 1.55.2.2 2008/01/30 12:18:17 ftanguy Exp $
+/* $Id: kermetaStructureVisitor.kmt,v 1.1 2008-07-30 13:28:53 dvojtise Exp $
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 04, 2008
  * Authors :
- *  Franck Fleurey  ffleurey@irisa.fr 
- *  Zoe Drey 		zdrey@irisa.fr
- *  Jean-Philippe Thibault 		jpthibault@irisa.fr
+ *  Franck Fleurey  			<ffleurey@irisa.fr> 
+ *  Zoe Drey 					<zdrey@irisa.fr>
+ *  Jean-Philippe Thibault 		<jpthibault@irisa.fr>
  */
 package kermeta::language::structure;
 
@@ -14,12 +14,10 @@ require kermeta
 
 using kermeta::standard
 
-@aspect "true"
-class Object inherits KMStructureVisitable {
+aspect class Object inherits KMStructureVisitable {
 }
 
-@aspect "true"
-abstract class ParameterizedType inherits KMStructureVisitable
+aspect abstract class ParameterizedType inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -30,8 +28,7 @@ abstract class ParameterizedType inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class ModelType inherits KMStructureVisitable
+aspect class ModelType inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -42,8 +39,7 @@ class ModelType inherits KMStructureVisitable
 		end		
 }
 
-@aspect "true"
-class Class inherits KMStructureVisitable
+aspect class Class inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -54,8 +50,7 @@ class Class inherits KMStructureVisitable
 	end
 }
 
-@aspect "true"
-class MultiplicityElement inherits KMStructureVisitable
+aspect class MultiplicityElement inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -67,8 +62,7 @@ class MultiplicityElement inherits KMStructureVisitable
 }
 
 
-@aspect "true"
-class Constraint inherits KMStructureVisitable
+aspect class Constraint inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -79,8 +73,7 @@ class Constraint inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class Operation inherits KMStructureVisitable
+aspect class Operation inherits KMStructureVisitable
 {
 
 	/**
@@ -92,8 +85,7 @@ class Operation inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class Tag inherits KMStructureVisitable
+aspect class Tag inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -104,8 +96,7 @@ class Tag inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class Property inherits KMStructureVisitable
+aspect class Property inherits KMStructureVisitable
 {
 	
 	/**
@@ -117,8 +108,7 @@ class Property inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class GenericTypeDefinition inherits KMStructureVisitable
+aspect class GenericTypeDefinition inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -129,8 +119,7 @@ class GenericTypeDefinition inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class ClassDefinition inherits KMStructureVisitable
+aspect class ClassDefinition inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -141,8 +130,7 @@ class ClassDefinition inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class TypedElement inherits KMStructureVisitable
+aspect class TypedElement inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -153,8 +141,7 @@ class TypedElement inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class ObjectTypeVariable inherits KMStructureVisitable
+aspect class ObjectTypeVariable inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -165,8 +152,7 @@ class ObjectTypeVariable inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class VirtualType inherits KMStructureVisitable {
+aspect class VirtualType inherits KMStructureVisitable {
 
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -177,8 +163,7 @@ class VirtualType inherits KMStructureVisitable {
 		end
 }
 
-@aspect "true"
-class ModelTypeVariable inherits KMStructureVisitable {
+aspect class ModelTypeVariable inherits KMStructureVisitable {
 
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -189,8 +174,7 @@ class ModelTypeVariable inherits KMStructureVisitable {
 		end
 }
 
-@aspect "true"
-class Model inherits KMStructureVisitable {
+aspect class Model inherits KMStructureVisitable {
 
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -201,8 +185,7 @@ class Model inherits KMStructureVisitable {
 		end
 }
 
-@aspect "true"
-class ProductType inherits KMStructureVisitable
+aspect class ProductType inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -213,8 +196,7 @@ class ProductType inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class FunctionType inherits KMStructureVisitable
+aspect class FunctionType inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -225,8 +207,7 @@ class FunctionType inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class Type inherits KMStructureVisitable
+aspect class Type inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -237,8 +218,7 @@ class Type inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class TypeVariableBinding inherits KMStructureVisitable
+aspect class TypeVariableBinding inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -249,8 +229,7 @@ class TypeVariableBinding inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class PrimitiveType inherits KMStructureVisitable
+aspect class PrimitiveType inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -261,8 +240,7 @@ class PrimitiveType inherits KMStructureVisitable
 	end
 }
 
-@aspect "true"
-class NamedElement inherits KMStructureVisitable
+aspect class NamedElement inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -273,8 +251,7 @@ class NamedElement inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class TypeDefinitionContainer inherits KMStructureVisitable
+aspect class TypeDefinitionContainer inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -285,8 +262,7 @@ class TypeDefinitionContainer inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class Package inherits KMStructureVisitable
+aspect class Package inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -297,8 +273,7 @@ class Package inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class ModelingUnit inherits KMStructureVisitable
+aspect class ModelingUnit inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -309,8 +284,7 @@ class ModelingUnit inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class Filter inherits KMStructureVisitable
+aspect class Filter inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -321,8 +295,7 @@ class Filter inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-abstract class Require inherits KMStructureVisitable
+aspect abstract class Require inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -333,8 +306,7 @@ abstract class Require inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-abstract class Using inherits KMStructureVisitable
+aspect abstract class Using inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -345,8 +317,7 @@ abstract class Using inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class TypeDefinition inherits KMStructureVisitable
+aspect class TypeDefinition inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -357,8 +328,7 @@ class TypeDefinition inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class VoidType inherits KMStructureVisitable
+aspect class VoidType inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -369,8 +339,7 @@ class VoidType inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class DataType inherits KMStructureVisitable
+aspect class DataType inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -381,8 +350,7 @@ class DataType inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class Enumeration inherits KMStructureVisitable
+aspect class Enumeration inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -393,8 +361,7 @@ class Enumeration inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class EnumerationLiteral inherits KMStructureVisitable
+aspect class EnumerationLiteral inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -405,8 +372,7 @@ class EnumerationLiteral inherits KMStructureVisitable
 		end
 }
 
-@aspect "true"
-class Parameter inherits KMStructureVisitable
+aspect class Parameter inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern

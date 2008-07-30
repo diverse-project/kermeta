@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.55.2.2 2008/01/30 12:18:17 ftanguy Exp $
+/* $Id: kermetaBehaviorVisitor.kmt,v 1.1 2008-07-30 13:28:53 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Feb 04, 2008
  * Authors   : 
  *		Franck Fleurey <ffleurey@irisa.fr>
- *		Zo� Drey <zdrey@irisa.fr>
+ *		Zoe Drey <zdrey@irisa.fr>
  * 		Didier Vojtisek <dvojtise@irisa.fr>
  *
  */
@@ -16,8 +16,7 @@ package kermeta::language::behavior;
 
 require kermeta
 
-@aspect "true"
-class CallVariable inherits KMExpressionVisitable
+aspect class CallVariable inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on CallFeature objects
@@ -28,8 +27,7 @@ class CallVariable inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class CallFeature inherits KMExpressionVisitable
+aspect class CallFeature inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on CallFeature objects
@@ -40,8 +38,7 @@ class CallFeature inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class CallSuperOperation inherits KMExpressionVisitable
+aspect class CallSuperOperation inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on CallFeature objects
@@ -52,8 +49,7 @@ class CallSuperOperation inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class CallResult inherits KMExpressionVisitable
+aspect class CallResult inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on CallFeature objects
@@ -64,8 +60,7 @@ class CallResult inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class CallValue inherits KMExpressionVisitable
+aspect class CallValue inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on CallFeature objects
@@ -76,8 +71,7 @@ class CallValue inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class Assignment inherits KMExpressionVisitable
+aspect class Assignment inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on Assignment objects
@@ -88,8 +82,7 @@ class Assignment inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class Block inherits KMExpressionVisitable
+aspect class Block inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on Block objects
@@ -100,8 +93,7 @@ class Block inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class Conditional inherits KMExpressionVisitable
+aspect class Conditional inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on Conditional objects
@@ -112,8 +104,7 @@ class Conditional inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class EmptyExpression inherits KMExpressionVisitable
+aspect class EmptyExpression inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on EmptyExpression objects
@@ -124,8 +115,7 @@ class EmptyExpression inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class IntegerLiteral inherits KMExpressionVisitable
+aspect class IntegerLiteral inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on IntegerLiteral objects
@@ -136,8 +126,7 @@ class IntegerLiteral inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class StringLiteral inherits KMExpressionVisitable
+aspect class StringLiteral inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on StringLiteral objects
@@ -148,8 +137,7 @@ class StringLiteral inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class BooleanLiteral inherits KMExpressionVisitable
+aspect class BooleanLiteral inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on BooleanLiteral objects
@@ -160,8 +148,7 @@ class BooleanLiteral inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class TypeLiteral inherits KMExpressionVisitable
+aspect class TypeLiteral inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on TypeLiteral objects
@@ -172,8 +159,7 @@ class TypeLiteral inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class TypeReference inherits KMExpressionVisitable
+aspect class TypeReference inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on BooleanLiteral objects
@@ -184,8 +170,7 @@ class TypeReference inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class VoidLiteral inherits KMExpressionVisitable
+aspect class VoidLiteral inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on VoidLiteral objects
@@ -196,8 +181,7 @@ class VoidLiteral inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class Loop inherits KMExpressionVisitable
+aspect class Loop inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on Loop objects
@@ -208,8 +192,7 @@ class Loop inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class SelfExpression inherits KMExpressionVisitable
+aspect class SelfExpression inherits KMExpressionVisitable
 {
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
@@ -217,8 +200,7 @@ class SelfExpression inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class VariableDecl inherits KMExpressionVisitable
+aspect class VariableDecl inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on Variable objects
@@ -229,8 +211,7 @@ class VariableDecl inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class Raise inherits KMExpressionVisitable
+aspect class Raise inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on Raise objects
@@ -241,8 +222,7 @@ class Raise inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class Rescue inherits KMExpressionVisitable
+aspect class Rescue inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on Rescue objects
@@ -253,8 +233,7 @@ class Rescue inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class JavaStaticCall inherits KMExpressionVisitable
+aspect class JavaStaticCall inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on JavaStaticCall objects
@@ -265,8 +244,7 @@ class JavaStaticCall inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class LambdaExpression inherits KMExpressionVisitable
+aspect class LambdaExpression inherits KMExpressionVisitable
 {
 	/**
 	 *
@@ -277,8 +255,7 @@ class LambdaExpression inherits KMExpressionVisitable
 		end
 }
 
-@aspect "true"
-class LambdaParameter inherits KMExpressionVisitable
+aspect class LambdaParameter inherits KMExpressionVisitable
 {
 	/**
 	 * Implementation of the visitor design pattern on LambdaParameter objects
