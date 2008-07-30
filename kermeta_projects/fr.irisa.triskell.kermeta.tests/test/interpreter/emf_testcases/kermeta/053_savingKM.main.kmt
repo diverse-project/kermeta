@@ -1,4 +1,4 @@
-/* $Id: 053_savingKM.main.kmt,v 1.4 2008-07-30 14:37:41 dvojtise Exp $
+/* $Id: 053_savingKM.main.kmt,v 1.5 2008-07-30 15:58:53 dvojtise Exp $
  * Creation date: June 14, 2006
  * License:
  * Copyright:
@@ -105,28 +105,32 @@ class Main inherits kermeta::kunit::TestCase
 		
 		booleanTypeDef ?= mainModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")
 		assertTrueWithMsg(not booleanTypeDef.isVoid,"Failed to retrieve Boolean in framework.km")
-		
+		stdio.writeln(booleanTypeDef.qualifiedName())
+        
         sclass.typeDefinition := booleanTypeDef        
         ope.type := sclass
         ope.containedType.add(sclass)
+        ope.upper := 1
         
         ope.name := "Op1"
         var cl : kermeta::language::structure::ClassDefinition init kermeta::language::structure::ClassDefinition.new
         var pack : kermeta::language::structure::Package init kermeta::language::structure::Package.new
+        var mu : kermeta::language::structure::ModelingUnit init kermeta::language::structure::ModelingUnit.new
         pack.name := "P1"
         pack.uri := "http://P1"
         cl.name := "C1"
         cl.ownedOperation.add(ope)
         pack.ownedTypeDefinition.add(cl)
+        mu.packages.add(pack)
         
-        pack.checkAllInvariants
+        mu.checkAllInvariants
         
 		
 		// We are able to save that because we loaded explicitly framework.km
 		var resResource : kermeta::persistence::EMFResource
 			//resResource ?= resRepository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/pb_EnregKM.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
 		resResource ?= repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/pb_EnregKM_testDependencyToFramework.km", "http://www.kermeta.org/kermeta/1_2_0//kermeta")
-		resResource.instances.add(pack)
+		resResource.instances.add(mu)
 		
 
 		stdio.writeln("Saving pb_EnregKM_testDependencyToFramework.km...")		
