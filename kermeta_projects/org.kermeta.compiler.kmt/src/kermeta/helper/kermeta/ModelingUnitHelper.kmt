@@ -1,4 +1,4 @@
-/* $Id: ModelingUnitHelper.kmt,v 1.5 2008-07-23 08:22:12 cfaucher Exp $
+/* $Id: ModelingUnitHelper.kmt,v 1.6 2008-07-30 15:26:31 cfaucher Exp $
  * Creation date: May 19, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -49,6 +49,7 @@ aspect class ModelingUnit {
 		result := OrderedSet<Package>.new()
 				
 		var pack : Package init self.packages.each{ p |
+			result.add(p)
 			result.addAll(p.getAllSubPackages())
 		}
 
