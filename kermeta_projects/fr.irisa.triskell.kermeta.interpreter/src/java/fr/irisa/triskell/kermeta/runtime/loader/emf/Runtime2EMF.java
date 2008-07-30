@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.75 2008-07-29 13:33:56 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.76 2008-07-30 15:16:30 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
+import fr.irisa.triskell.kermeta.KmPackage;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -410,7 +411,7 @@ public class Runtime2EMF {
 							"; num. of elts in feature : " + ((EList) eObject.eGet(feature)).size());					
 					if(feature.isOrdered()){
 						this.propertiesToSort.add(new SortPropertyCommand(colArr, eObject, feature));
-						internalLog.debug("We will need to make sure that collection "+ eObject.eClass().getName() + "."  + feature.getName() + " is correctly ordered");
+					//	internalLog.debug("We will need to make sure that collection "+ eObject.eClass().getName() + "."  + feature.getName() + " is correctly ordered");
 					}
 				}
 				else // EObject, EClass, EDataType
@@ -461,7 +462,7 @@ public class Runtime2EMF {
 				result = createGeneratedClassLiteralFromEnumRuntimeObject(rProperty,
 						feature.getEType());
 			}
-			else if(feature.getEType().eResource().getURI().toString().equals("http://www.kermeta.org/kermeta")){
+			else if(feature.getEType().eResource().getURI().toString().equals(KmPackage.eNS_URI) /* "http://www.kermeta.org/kermeta/1_2_0//kermeta"*/){
 				// this is a special case of writing a km file, so we need to find the enum in the km and not a EEnum
 				result = createEObjectFromRuntimeObjectWithResource(rProperty,
 						feature.getEType().eResource());
@@ -669,7 +670,7 @@ public class Runtime2EMF {
 			result = m.invoke(c, (enum_literal_name));
 		} catch (Exception e) {
 			
-			if(type.eResource().getURI().toString().equals("http://www.kermeta.org/kermeta")){
+			if(type.eResource().getURI().toString().equals(KmPackage.eNS_URI)){ /* "http://www.kermeta.org/kermeta/1_2_0//kermeta"*/
 				internalLog.debug("not able to create the enumeration literal concrete object for instanceClass "+type.getInstanceClassName()+ " for " +
 						enum_literal_name	+
 						", let's try as an EObject", null);
