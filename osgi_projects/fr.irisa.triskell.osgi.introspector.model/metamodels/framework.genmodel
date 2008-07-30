@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/fr.irisa.triskell.osgi.introspector.model/src"
+    modelPluginID="fr.irisa.triskell.osgi.introspector.model" modelName="Framework"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>framework.ecore</foreignModel>
+  <genPackages prefix="Framework" disposableProviderFactory="true" ecorePackage="framework.ecore#/">
+    <genDataTypes ecoreDataType="framework.ecore#//String"/>
+    <genClasses ecoreClass="framework.ecore#//Framework">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#//Framework/bundles"/>
+    </genClasses>
+    <genClasses ecoreClass="framework.ecore#//Bundle">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference framework.ecore#//Bundle/fragments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#//Bundle/location"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#//Bundle/manifest"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Manifest" disposableProviderFactory="true" ecorePackage="manifest.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="manifest.ecore#//MANIFESTVersionEnum">
+      <genEnumLiterals ecoreEnumLiteral="manifest.ecore#//MANIFESTVersionEnum/moreThan1_3"/>
+      <genEnumLiterals ecoreEnumLiteral="manifest.ecore#//MANIFESTVersionEnum/lessThan1_3"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="manifest.ecore#//PolicyEnum">
+      <genEnumLiterals ecoreEnumLiteral="manifest.ecore#//PolicyEnum/LAZY"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="manifest.ecore#//URL"/>
+    <genDataTypes ecoreDataType="manifest.ecore#//String"/>
+    <genDataTypes ecoreDataType="manifest.ecore#//boolean"/>
+    <genDataTypes ecoreDataType="manifest.ecore#//int"/>
+    <genClasses ecoreClass="manifest.ecore#//Service">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//Service/interface"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//Version">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//Version/major"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//Version/minor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//Version/micro"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//Version/qualifier"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//MANIFEST">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleClassPaths"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleNativeCodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleVersion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleRequiredExecutionEnvironments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleActivationPolicy"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleActivator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/requireBundles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/importServices"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/exportServices"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleSymbolicName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleVendor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleCopyright"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleContactAddress"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleDescription"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleCategory"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleUpdateLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/BundleDocURL"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/importPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleLocalization"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/fragmentHost"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/dynamicImportPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/exportPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/unknownEntries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//MANIFEST/NativeCodeOptional"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFEST/bundleManifestVersion"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//MANIFESTEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//MANIFESTEntry/entryName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//MANIFESTEntry/options"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//SimpleMANIFESTEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//SimpleMANIFESTEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//BundleName"/>
+    <genClasses ecoreClass="manifest.ecore#//BundleSymbolicName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleSymbolicName/symbolicName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleSymbolicName/directives"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//BundleDescription"/>
+    <genClasses ecoreClass="manifest.ecore#//BundleLocalization"/>
+    <genClasses ecoreClass="manifest.ecore#//BundleVendor"/>
+    <genClasses ecoreClass="manifest.ecore#//BundleContactAddress"/>
+    <genClasses ecoreClass="manifest.ecore#//BundleCopyright"/>
+    <genClasses ecoreClass="manifest.ecore#//BundleCategory"/>
+    <genClasses image="false" ecoreClass="manifest.ecore#//URLMANIFESTEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//URLMANIFESTEntry/url"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//BundleDocURL"/>
+    <genClasses ecoreClass="manifest.ecore#//BundleUpdateLocation"/>
+    <genClasses ecoreClass="manifest.ecore#//BundleVersion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleVersion/version"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//BundleActivator">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleActivator/activator"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//BundleClassPath">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleClassPath/entries"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//BundleNativeCode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleNativeCode/optional"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleNativeCode/directives"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleNativeCode/file"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//RequireBundle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//RequireBundle/directives"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//RequireBundle/resolved"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//ImportService">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportService/service"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//ImportService/resolve"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//ExportService">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ExportService/service"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//ImportPackage">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportPackage/packages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportPackage/version"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportPackage/specificationVersion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportPackage/directives"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//ImportPackage/resolved"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//ExportPackage">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//ExportPackage/packages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ExportPackage/directives"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//BundleActivationPolicy">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleActivationPolicy/policy"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleActivationPolicy/directives"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//FragmentHost">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//FragmentHost/directives"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//FragmentHost/resolved"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//DynamicImportPackage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//DynamicImportPackage/packages"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//BundleRequiredExecutionEnvironment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleRequiredExecutionEnvironment/profile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleRequiredExecutionEnvironment/configuration"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//SimpleManifestEntryManyValues">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//SimpleManifestEntryManyValues/values"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//BundleManifestVersion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleManifestVersion/manifestVersion"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Jar" disposableProviderFactory="true" ecorePackage="jar.ecore#/">
+    <genClasses image="false" ecoreClass="jar.ecore#//BundleEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jar.ecore#//BundleEntry/fullPath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jar.ecore#//BundleEntry/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="jar.ecore#//SystemEntry"/>
+    <genClasses ecoreClass="jar.ecore#//Package">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference jar.ecore#//Package/classes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference jar.ecore#//Package/subPackages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jar.ecore#//Package/bundleClassPath"/>
+    </genClasses>
+    <genClasses ecoreClass="jar.ecore#//Class"/>
+    <genClasses ecoreClass="jar.ecore#//Folder">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference jar.ecore#//Folder/entries"/>
+    </genClasses>
+    <genClasses ecoreClass="jar.ecore#//File"/>
+  </genPackages>
+  <genPackages prefix="Option" disposableProviderFactory="true" ecorePackage="option.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="option.ecore#//FragmentAttachmentEnum">
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//FragmentAttachmentEnum/ALWAYS"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//FragmentAttachmentEnum/NEVER"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//FragmentAttachmentEnum/RESOLVETIME"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="option.ecore#//ProcessorEnum">
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/P68k"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/ARM"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/Alpha"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/Ignite"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/Mips"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/PArisc"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/PowerPC"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/Sh4"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/Sparc"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/S390"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/S390x"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/V850E"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/x86"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ProcessorEnum/x8664"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="option.ecore#//ResolutionEnum">
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ResolutionEnum/MANDATORY"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ResolutionEnum/OPTIONAL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="option.ecore#//VisibilityEnum">
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//VisibilityEnum/PRIVATE"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//VisibilityEnum/REEXPORT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="option.ecore#//ISOCodeLanguage">
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ISOCodeLanguage/FR"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ISOCodeLanguage/EN"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="option.ecore#//ExtensionEnum">
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ExtensionEnum/FRAMEWORK"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//ExtensionEnum/BOOTCLASSPATH"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="option.ecore#//OsNameEnum">
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/AIX"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/DigitalUnix"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/Embos"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/Epoc32"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/FreeBSD"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/HPUX"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/IRIX"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/Linux"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/MacOS"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/NetBSD"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/Netware"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/OpenBSD"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/OS2"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/QNX"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/Solaris"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/SunOS"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/VxWorks"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/Windows95"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/Windows98"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/WindowsNT"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/WindowsCE"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/Windows2000"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/Windows2003"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/WindowsXP"/>
+      <genEnumLiterals ecoreEnumLiteral="option.ecore#//OsNameEnum/WindowsVista"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="option.ecore#//ParameterEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//ParameterEntry/token"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="option.ecore#//DirectiveEntry"/>
+    <genClasses ecoreClass="option.ecore#//AttributEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//AttributEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//OsName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//OsName/osname"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="option.ecore#//NativeCodeDirective"/>
+    <genClasses ecoreClass="option.ecore#//OsVersion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference option.ecore#//OsVersion/minVersion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference option.ecore#//OsVersion/maxVersion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//OsVersion/minNotInclude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//OsVersion/maxNotInclude"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//ExcludePackages">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//ExcludePackages/packages"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//Processor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//Processor/processor"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//IncludePackages">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//IncludePackages/packages"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//Uses">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//Uses/packages"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//Extension">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//Extension/extension"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//Mandatory">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//Mandatory/attributs"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//Language">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//Language/isoCode"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//Visibility">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//Visibility/visibility"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//Singleton">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//Singleton/singleton"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//Resolution">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//Resolution/resolution"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//FragmentAttachment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//FragmentAttachment/fragmentAttachment"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//SelectionFilter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//SelectionFilter/expression"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="option.ecore#//RequireBundleDirective"/>
+    <genClasses image="false" ecoreClass="option.ecore#//FragmentHostDirective"/>
+    <genClasses image="false" ecoreClass="option.ecore#//SymbolicNameDirective"/>
+    <genClasses image="false" ecoreClass="option.ecore#//ExportPackageDirective"/>
+    <genClasses image="false" ecoreClass="option.ecore#//ImportPackageDirective"/>
+    <genClasses image="false" ecoreClass="option.ecore#//ActivationPolicyDirective"/>
+    <genClasses ecoreClass="option.ecore#//IncludeClasses">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//IncludeClasses/classes"/>
+    </genClasses>
+    <genClasses ecoreClass="option.ecore#//ExcludeClasses">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//ExcludeClasses/classes"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

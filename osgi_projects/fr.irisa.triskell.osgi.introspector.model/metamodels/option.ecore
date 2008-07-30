@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="option"
+    nsURI="http://org.osgi.framework/manifest/option" nsPrefix="org.osgi.framework.manifest.option">
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterEntry" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="token" lowerBound="1" eType="ecore:EDataType manifest.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DirectiveEntry" abstract="true" eSuperTypes="#//ParameterEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributEntry" eSuperTypes="#//ParameterEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType manifest.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OsName" eSuperTypes="#//NativeCodeDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="osname" lowerBound="1"
+        eType="#//OsNameEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NativeCodeDirective" abstract="true"
+      eSuperTypes="#//DirectiveEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OsVersion" eSuperTypes="#//NativeCodeDirective">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="minVersion" lowerBound="1"
+        eType="ecore:EClass manifest.ecore#//Version" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="maxVersion" eType="ecore:EClass manifest.ecore#//Version"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minNotInclude" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//boolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNotInclude" eType="ecore:EDataType manifest.ecore#//boolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FragmentAttachmentEnum">
+    <eLiterals name="ALWAYS" literal="always"/>
+    <eLiterals name="NEVER" value="1" literal="never"/>
+    <eLiterals name="RESOLVETIME" value="2" literal="resolve-time"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ProcessorEnum">
+    <eLiterals name="P68k" literal="68k"/>
+    <eLiterals name="ARM" value="1"/>
+    <eLiterals name="Alpha" value="2"/>
+    <eLiterals name="Ignite" value="3"/>
+    <eLiterals name="Mips" value="4"/>
+    <eLiterals name="PArisc" value="5"/>
+    <eLiterals name="PowerPC" value="6"/>
+    <eLiterals name="Sh4" value="7"/>
+    <eLiterals name="Sparc" value="9"/>
+    <eLiterals name="S390" value="10"/>
+    <eLiterals name="S390x" value="11"/>
+    <eLiterals name="V850E" value="12"/>
+    <eLiterals name="x86" value="13"/>
+    <eLiterals name="x8664" value="14" literal="x86-64"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ResolutionEnum">
+    <eLiterals name="MANDATORY" literal="mandatory"/>
+    <eLiterals name="OPTIONAL" value="1" literal="optional"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VisibilityEnum">
+    <eLiterals name="PRIVATE" literal="private"/>
+    <eLiterals name="REEXPORT" value="1" literal="reexport"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ISOCodeLanguage">
+    <eLiterals name="FR" literal="fr"/>
+    <eLiterals name="EN" value="1" literal="en"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExtensionEnum">
+    <eLiterals name="FRAMEWORK" literal="framework"/>
+    <eLiterals name="BOOTCLASSPATH" value="1" literal="bootclasspath"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OsNameEnum">
+    <eLiterals name="AIX" literal="AIX"/>
+    <eLiterals name="DigitalUnix" value="1"/>
+    <eLiterals name="Embos" value="2"/>
+    <eLiterals name="Epoc32" value="3"/>
+    <eLiterals name="FreeBSD" value="4"/>
+    <eLiterals name="HPUX" value="5"/>
+    <eLiterals name="IRIX" value="6"/>
+    <eLiterals name="Linux" value="7"/>
+    <eLiterals name="MacOS" value="8"/>
+    <eLiterals name="NetBSD" value="9"/>
+    <eLiterals name="Netware" value="10"/>
+    <eLiterals name="OpenBSD" value="11"/>
+    <eLiterals name="OS2" value="12"/>
+    <eLiterals name="QNX" value="13"/>
+    <eLiterals name="Solaris" value="14"/>
+    <eLiterals name="SunOS" value="15"/>
+    <eLiterals name="VxWorks" value="16"/>
+    <eLiterals name="Windows95" value="17"/>
+    <eLiterals name="Windows98" value="18"/>
+    <eLiterals name="WindowsNT" value="19"/>
+    <eLiterals name="WindowsCE" value="20"/>
+    <eLiterals name="Windows2000" value="21"/>
+    <eLiterals name="Windows2003" value="22"/>
+    <eLiterals name="WindowsXP" value="23"/>
+    <eLiterals name="WindowsVista" value="24"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExcludePackages" eSuperTypes="#//ActivationPolicyDirective">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass jar.ecore#//Package"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Processor" eSuperTypes="#//NativeCodeDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="processor" lowerBound="1"
+        eType="#//ProcessorEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IncludePackages" eSuperTypes="#//ActivationPolicyDirective">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass jar.ecore#//Package"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Uses" eSuperTypes="#//ExportPackageDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packages" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Extension" eSuperTypes="#//FragmentHostDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" lowerBound="1"
+        eType="#//ExtensionEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mandatory" eSuperTypes="#//ExportPackageDirective">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributs" upperBound="-1"
+        eType="#//AttributEntry"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Language" eSuperTypes="#//NativeCodeDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isoCode" lowerBound="1"
+        eType="#//ISOCodeLanguage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Visibility" eSuperTypes="#//RequireBundleDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" lowerBound="1"
+        eType="#//VisibilityEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Singleton" eSuperTypes="#//SymbolicNameDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="singleton" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//boolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resolution" eSuperTypes="#//ImportPackageDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolution" lowerBound="1"
+        eType="#//ResolutionEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FragmentAttachment" eSuperTypes="#//SymbolicNameDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fragmentAttachment" lowerBound="1"
+        eType="#//FragmentAttachmentEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelectionFilter" eSuperTypes="#//NativeCodeDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequireBundleDirective" abstract="true"
+      eSuperTypes="#//DirectiveEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FragmentHostDirective" abstract="true"
+      eSuperTypes="#//DirectiveEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SymbolicNameDirective" abstract="true"
+      eSuperTypes="#//DirectiveEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExportPackageDirective" abstract="true"
+      eSuperTypes="#//DirectiveEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportPackageDirective" abstract="true"
+      eSuperTypes="#//RequireBundleDirective"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivationPolicyDirective" abstract="true"
+      eSuperTypes="#//DirectiveEntry #//ExportPackageDirective"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IncludeClasses" eSuperTypes="#//ExportPackageDirective">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass jar.ecore#//Class"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExcludeClasses" eSuperTypes="#//ExportPackageDirective">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass jar.ecore#//Class"/>
+  </eClassifiers>
+</ecore:EPackage>

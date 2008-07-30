@@ -1,0 +1,9 @@
+#Mon Jul 28 10:51:31 CEST 2008
+eclipse.preferences.version=1
+gmf_dashboard/domainGenerationModel=platform\:/resource/fr.irisa.triskell.osgi.introspector.model/metamodels/framework.genmodel
+gmf_dashboard/domainModel=platform\:/resource/fr.irisa.triskell.osgi.introspector.model/metamodels/framework.ecore
+gmf_dashboard/generationModel=platform\:/resource/fr.irisa.triskell.osgi.introspector.model/GMF/framework.gmfgen
+gmf_dashboard/graphicalDefinitionModel=platform\:/resource/fr.irisa.triskell.osgi.introspector.model/GMF/framework.gmfgraph
+gmf_dashboard/mappingModel=platform\:/resource/fr.irisa.triskell.osgi.introspector.model/GMF/framework.gmfmap
+gmf_dashboard/option_rcp=*
+gmf_dashboard/toolingDefinitionModel=platform\:/resource/fr.irisa.triskell.osgi.introspector.model/GMF/framework.gmftool

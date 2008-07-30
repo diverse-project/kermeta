@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="manifest"
+    nsURI="http://org.osgi.framework/manifest" nsPrefix="org.osgi.framework.manifest">
+  <eClassifiers xsi:type="ecore:EDataType" name="URL" instanceClassName="java.net.URL"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="MANIFESTVersionEnum">
+    <eLiterals name="moreThan1_3" value="2" literal="2"/>
+    <eLiterals name="lessThan1_3" value="1" literal="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PolicyEnum">
+    <eLiterals name="LAZY" literal="lazy"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Service">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interface" lowerBound="1"
+        eType="ecore:EClass jar.ecore#//Class"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Version">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="major" lowerBound="1" eType="#//int"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minor" eType="#//int"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="micro" eType="#//int"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifier" eType="#//String"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MANIFEST">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleClassPaths" upperBound="-1"
+        eType="#//BundleClassPath" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleNativeCodes" upperBound="-1"
+        eType="#//BundleNativeCode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleVersion" eType="#//BundleVersion"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleRequiredExecutionEnvironments"
+        upperBound="-1" eType="#//BundleRequiredExecutionEnvironment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleActivationPolicy"
+        eType="#//BundleActivationPolicy" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleActivator" eType="#//BundleActivator"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requireBundles" upperBound="-1"
+        eType="#//RequireBundle" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importServices" upperBound="-1"
+        eType="#//ImportService" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exportServices" upperBound="-1"
+        eType="#//ExportService" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleSymbolicName" lowerBound="1"
+        eType="#//BundleSymbolicName" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleVendor" eType="#//BundleVendor"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleCopyright" eType="#//BundleCopyright"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleContactAddress" eType="#//BundleContactAddress"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleDescription" eType="#//BundleDescription"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleName" eType="#//BundleName"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleCategory" eType="#//BundleCategory"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleUpdateLocation" eType="#//BundleUpdateLocation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="BundleDocURL" eType="#//BundleDocURL"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importPackages" upperBound="-1"
+        eType="#//ImportPackage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleLocalization" eType="#//BundleLocalization"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fragmentHost" eType="#//FragmentHost"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicImportPackages"
+        upperBound="-1" eType="#//DynamicImportPackage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exportPackages" upperBound="-1"
+        eType="#//ExportPackage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unknownEntries" upperBound="-1"
+        eType="#//SimpleManifestEntryManyValues" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="NativeCodeOptional" eType="#//boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleManifestVersion"
+        eType="#//BundleManifestVersion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="entryName" lowerBound="1"
+        eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="options" upperBound="-1"
+        eType="ecore:EClass option.ecore#//AttributEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleMANIFESTEntry" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleName" eSuperTypes="#//SimpleMANIFESTEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleSymbolicName" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolicName" lowerBound="1"
+        eType="ecore:EDataType framework.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="directives" upperBound="2"
+        eType="ecore:EClass option.ecore#//SymbolicNameDirective" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleDescription" eSuperTypes="#//SimpleMANIFESTEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleLocalization" eSuperTypes="#//SimpleMANIFESTEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleVendor" eSuperTypes="#//SimpleMANIFESTEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleContactAddress" eSuperTypes="#//SimpleMANIFESTEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleCopyright" eSuperTypes="#//SimpleMANIFESTEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleCategory" eSuperTypes="#//SimpleManifestEntryManyValues"/>
+  <eClassifiers xsi:type="ecore:EClass" name="URLMANIFESTEntry" abstract="true" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="#//URL"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleDocURL" eSuperTypes="#//URLMANIFESTEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleUpdateLocation" eSuperTypes="#//URLMANIFESTEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleVersion" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="version" lowerBound="1"
+        eType="#//Version" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleActivator" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activator" lowerBound="1"
+        eType="ecore:EClass jar.ecore#//Class"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleClassPath" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass jar.ecore#//SystemEntry"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleNativeCode" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="#//boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="directives" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass option.ecore#//NativeCodeDirective" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="file" lowerBound="1" upperBound="-1"
+        eType="ecore:EClass jar.ecore#//File"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequireBundle" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="directives" upperBound="2"
+        eType="ecore:EClass option.ecore#//RequireBundleDirective" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="#//boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundle" lowerBound="1"
+        eType="ecore:EDataType framework.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportService" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolve" lowerBound="1"
+        eType="#//boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="service" lowerBound="1"
+        eType="ecore:EDataType framework.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExportService" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"
+        eType="#//Service" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportPackage" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="directives" eType="ecore:EClass option.ecore#//ImportPackageDirective"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="#//boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packages" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExportPackage" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass jar.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="directives" upperBound="-1"
+        eType="ecore:EClass option.ecore#//ExportPackageDirective" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleActivationPolicy" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="policy" lowerBound="1"
+        eType="#//PolicyEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="directives" upperBound="-1"
+        eType="ecore:EClass option.ecore#//ActivationPolicyDirective" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FragmentHost" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="directives" eType="ecore:EClass option.ecore#//FragmentHostDirective"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="#//boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundle" lowerBound="1"
+        eType="ecore:EClass framework.ecore#//Bundle"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicImportPackage" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packages" lowerBound="1"
+        upperBound="-1" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleRequiredExecutionEnvironment"
+      eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="profile" lowerBound="1"
+        eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="configuration" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleManifestEntryManyValues" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" lowerBound="1"
+        upperBound="-1" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="boolean" instanceClassName="boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="int" instanceClassName="int"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleManifestVersion" eSuperTypes="#//MANIFESTEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="manifestVersion" lowerBound="1"
+        eType="#//MANIFESTVersionEnum"/>
+  </eClassifiers>
+</ecore:EPackage>

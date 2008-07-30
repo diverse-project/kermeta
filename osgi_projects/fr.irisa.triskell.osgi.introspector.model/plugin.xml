@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2008-07-30 14:08:03 edaubert Exp $
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://osgi.org/"
+            class="frameworkMetaModel.FrameworkMetaModelPackage"
+            genModel="metamodels/framework.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://osgi.org.maniest/"
+            class="manifestMetaModel.ManifestMetaModelPackage"
+            genModel="metamodels/framework.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://osgi.org.physical/"
+            class="jarMetaModel.JarMetaModelPackage"
+            genModel="metamodels/framework.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://osgi.org.jar/"
+            class="parameterMetaModel.ParameterMetaModelPackage"
+            genModel="metamodels/framework.genmodel"/>
+   </extension>
+
+</plugin>

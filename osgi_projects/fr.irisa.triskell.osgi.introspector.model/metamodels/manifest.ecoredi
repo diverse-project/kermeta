@@ -1,0 +1,1024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_hqPaEFiGEd2TgeNbCAW45A" activeDiagram="_hqiVAFiGEd2TgeNbCAW45A">
+  <model href="manifest.ecore#/"/>
+  <diagrams xmi:id="_hqiVAFiGEd2TgeNbCAW45A" position="0,0" size="100,100" name="No name" viewport="0,0">
+    <property xmi:id="_jZUyEFiGEd2TgeNbCAW45A" key="pageFormatName" value="A0"/>
+    <property xmi:id="_jZUyEViGEd2TgeNbCAW45A" key="diagramWidth" value="3364"/>
+    <property xmi:id="_jZUyEliGEd2TgeNbCAW45A" key="diagramHeight" value="4756"/>
+    <property xmi:id="_jZUyE1iGEd2TgeNbCAW45A" key="pageMarginName" value="Small Margin"/>
+    <property xmi:id="_jZUyFFiGEd2TgeNbCAW45A" key="diagramTopMargin" value="20"/>
+    <property xmi:id="_jZUyFViGEd2TgeNbCAW45A" key="diagramBottomMargin" value="20"/>
+    <property xmi:id="_jZUyFliGEd2TgeNbCAW45A" key="diagramLeftMargin" value="20"/>
+    <property xmi:id="_jZUyF1iGEd2TgeNbCAW45A" key="diagramRightMargin" value="20"/>
+    <property xmi:id="_jZUyGFiGEd2TgeNbCAW45A" key="orientation" value="landscape"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_hqiVAViGEd2TgeNbCAW45A" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="manifest.ecore#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" xmi:id="_jgl3sFiGEd2TgeNbCAW45A" position="9,10" size="161,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jgl3sViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//URL"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jhB8kFiGEd2TgeNbCAW45A" position="232,10" size="160,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jhB8kViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFESTVersionEnum"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jhB8kliGEd2TgeNbCAW45A">
+        <property xmi:id="_jhB8k1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jhB8lFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//MANIFESTVersionEnum"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jhU3gFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jhU3gViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//MANIFESTVersionEnum/moreThan1_3"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_jhU3gliGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jhU3g1iGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//MANIFESTVersionEnum/lessThan1_3"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jheogFiGEd2TgeNbCAW45A" position="456,10" size="104,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jheogViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//PolicyEnum"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jheogliGEd2TgeNbCAW45A">
+        <property xmi:id="_jheog1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jheohFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//PolicyEnum"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jheohViGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jheohliGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//PolicyEnum/LAZY"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jheoh1iGEd2TgeNbCAW45A" position="1406,10" size="79,-1">
+      <anchorage xmi:id="_jklm4ViGEd2TgeNbCAW45A" graphEdge="_jlCS0FiGEd2TgeNbCAW45A _jlMD0FiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jheoiFiGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//Service"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jheoiViGEd2TgeNbCAW45A">
+        <property xmi:id="_jheoiliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jheoi1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//Service"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jheojFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jheojViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jheojliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//Service"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjQKIFiGEd2TgeNbCAW45A" position="626,10" size="122,-1">
+      <anchorage xmi:id="_jlMD1ViGEd2TgeNbCAW45A" graphEdge="_jlMD1liGEd2TgeNbCAW45A _jlMD21iGEd2TgeNbCAW45A _jlMD31iGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjQKIViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//Version"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjQKIliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjQKI1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjQKJFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//Version"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjQKKFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjQKKViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//Version/major"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjQKKliGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjQKK1iGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//Version/minor"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjQKLFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjQKLViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//Version/micro"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjQKLliGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjQKL1iGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//Version/qualifier"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjQKJViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjQKJliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjQKJ1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//Version"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjZ7IFiGEd2TgeNbCAW45A" position="2644,402" size="207,-1">
+      <anchorage xmi:id="_jlMD41iGEd2TgeNbCAW45A" graphEdge="_jlVNwFiGEd2TgeNbCAW45A _jlVNxViGEd2TgeNbCAW45A _jlVNyliGEd2TgeNbCAW45A _jlVNz1iGEd2TgeNbCAW45A _jlVN1FiGEd2TgeNbCAW45A _jlVN2ViGEd2TgeNbCAW45A _jle-wFiGEd2TgeNbCAW45A _jle-xViGEd2TgeNbCAW45A _jle-yliGEd2TgeNbCAW45A _jle-z1iGEd2TgeNbCAW45A _jle-01iGEd2TgeNbCAW45A _jloIsFiGEd2TgeNbCAW45A _jloItViGEd2TgeNbCAW45A _jlx5sFiGEd2TgeNbCAW45A _jmE0oFiGEd2TgeNbCAW45A _jmE0pFiGEd2TgeNbCAW45A _jmE0qFiGEd2TgeNbCAW45A _jmE0rFiGEd2TgeNbCAW45A _jmN-kFiGEd2TgeNbCAW45A _jmN-lViGEd2TgeNbCAW45A _jmN-mliGEd2TgeNbCAW45A _jmN-n1iGEd2TgeNbCAW45A _jmN-pFiGEd2TgeNbCAW45A _jmXvkFiGEd2TgeNbCAW45A _jmXvlViGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7IViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7IliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7I1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7JFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//MANIFEST"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjZ7KFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7KViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//MANIFEST/NativeCodeOptional"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7JViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7JliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7J1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//MANIFEST"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjZ7KliGEd2TgeNbCAW45A" position="2365,10" size="141,-1">
+      <anchorage xmi:id="_jm0bgViGEd2TgeNbCAW45A" graphEdge="_jnHWcFiGEd2TgeNbCAW45A _jnHWcliGEd2TgeNbCAW45A _jnHWdViGEd2TgeNbCAW45A _jnHWd1iGEd2TgeNbCAW45A _jnHWeViGEd2TgeNbCAW45A _jnHWe1iGEd2TgeNbCAW45A _jnQgYFiGEd2TgeNbCAW45A _jnQgYliGEd2TgeNbCAW45A _jnQgZFiGEd2TgeNbCAW45A _jnQgZliGEd2TgeNbCAW45A _jnQgaFiGEd2TgeNbCAW45A _jnQgaliGEd2TgeNbCAW45A _jnQgbFiGEd2TgeNbCAW45A _jnQgbliGEd2TgeNbCAW45A _jnaRYFiGEd2TgeNbCAW45A _jnaRYliGEd2TgeNbCAW45A _jnaRZFiGEd2TgeNbCAW45A _jnaRZliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7K1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFESTEntry"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7LFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7LViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7LliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//MANIFESTEntry"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjZ7MliGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7M1iGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//MANIFESTEntry/entryName"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7L1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7MFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7MViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//MANIFESTEntry"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjZ7NFiGEd2TgeNbCAW45A" position="1364,174" size="173,-1">
+      <anchorage xmi:id="_jm0bgFiGEd2TgeNbCAW45A" graphEdge="_jnHWcFiGEd2TgeNbCAW45A _jnaRaFiGEd2TgeNbCAW45A _jnaRaliGEd2TgeNbCAW45A _jnaRbFiGEd2TgeNbCAW45A _jnaRbliGEd2TgeNbCAW45A _jnaRcFiGEd2TgeNbCAW45A _jnjbUFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7NViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//SimpleMANIFESTEntry"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7NliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7N1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7OFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//SimpleMANIFESTEntry"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjZ7PFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7PViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//SimpleMANIFESTEntry/value"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7OViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7OliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7O1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//SimpleMANIFESTEntry"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjZ7PliGEd2TgeNbCAW45A" position="1094,302" size="112,-1">
+      <anchorage xmi:id="_jlMD5FiGEd2TgeNbCAW45A" graphEdge="_jlVNwFiGEd2TgeNbCAW45A _jnaRaFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7P1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleName"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7QFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7QViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7QliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleName"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7Q1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7RFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7RViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleName"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjZ7RliGEd2TgeNbCAW45A" position="1597,174" size="172,-1">
+      <anchorage xmi:id="_jlVNxFiGEd2TgeNbCAW45A" graphEdge="_jlVNxViGEd2TgeNbCAW45A _jnHWcliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7R1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleSymbolicName"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7SFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7SViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7SliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleSymbolicName"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjZ7TliGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7T1iGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//BundleSymbolicName/symbolicName"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7S1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7TFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7TViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleSymbolicName"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjZ7UFiGEd2TgeNbCAW45A" position="1266,302" size="143,-1">
+      <anchorage xmi:id="_jlVNyViGEd2TgeNbCAW45A" graphEdge="_jlVNyliGEd2TgeNbCAW45A _jnaRaliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7UViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleDescription"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7UliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7U1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7VFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleDescription"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7VViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7VliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7V1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleDescription"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjZ7WFiGEd2TgeNbCAW45A" position="1469,302" size="146,-1">
+      <anchorage xmi:id="_jlVNzliGEd2TgeNbCAW45A" graphEdge="_jlVNz1iGEd2TgeNbCAW45A _jnaRbFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7WViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleLocalization"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7WliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7W1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7XFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleLocalization"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7XViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7XliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7X1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleLocalization"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjZ7YFiGEd2TgeNbCAW45A" position="1675,302" size="119,-1">
+      <anchorage xmi:id="_jlVN01iGEd2TgeNbCAW45A" graphEdge="_jlVN1FiGEd2TgeNbCAW45A _jnaRbliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7YViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleVendor"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7YliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7Y1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7ZFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleVendor"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7ZViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7ZliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7Z1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleVendor"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjZ7aFiGEd2TgeNbCAW45A" position="1854,302" size="171,-1">
+      <anchorage xmi:id="_jlVN2FiGEd2TgeNbCAW45A" graphEdge="_jlVN2ViGEd2TgeNbCAW45A _jnaRcFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7aViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleContactAddress"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7aliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7a1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7bFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleContactAddress"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjZ7bViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjZ7bliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjZ7b1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleContactAddress"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjjsIFiGEd2TgeNbCAW45A" position="2085,302" size="132,-1">
+      <anchorage xmi:id="_jlVN3ViGEd2TgeNbCAW45A" graphEdge="_jle-wFiGEd2TgeNbCAW45A _jnjbUFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsIViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleCopyright"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsIliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsI1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsJFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleCopyright"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsJViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsJliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsJ1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleCopyright"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjjsKFiGEd2TgeNbCAW45A" position="3289,302" size="130,-1">
+      <anchorage xmi:id="_jle-xFiGEd2TgeNbCAW45A" graphEdge="_jle-xViGEd2TgeNbCAW45A _jn2WQFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsKViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleCategory"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsKliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsK1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsLFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleCategory"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsLViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsLliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsL1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleCategory"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjjsMFiGEd2TgeNbCAW45A" position="1829,174" size="165,-1">
+      <anchorage xmi:id="_jnHWdFiGEd2TgeNbCAW45A" graphEdge="_jnHWdViGEd2TgeNbCAW45A _jn2WQliGEd2TgeNbCAW45A _jn2WRFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsMViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//URLMANIFESTEntry"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsMliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsM1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsNFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//URLMANIFESTEntry"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjjsOFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsOViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//URLMANIFESTEntry/url"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsNViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsNliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsN1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//URLMANIFESTEntry"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjjsOliGEd2TgeNbCAW45A" position="2298,302" size="127,-1">
+      <anchorage xmi:id="_jle-yViGEd2TgeNbCAW45A" graphEdge="_jle-yliGEd2TgeNbCAW45A _jn2WQliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsO1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleDocURL"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsPFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsPViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsPliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleDocURL"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsP1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsQFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsQViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleDocURL"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjjsQliGEd2TgeNbCAW45A" position="2485,302" size="171,-1">
+      <anchorage xmi:id="_jle-zliGEd2TgeNbCAW45A" graphEdge="_jle-z1iGEd2TgeNbCAW45A _jn2WRFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsQ1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleUpdateLocation"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsRFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsRViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsRliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleUpdateLocation"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsR1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsSFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsSViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleUpdateLocation"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjjsSliGEd2TgeNbCAW45A" position="816,174" size="121,-1">
+      <anchorage xmi:id="_jlMD1FiGEd2TgeNbCAW45A" graphEdge="_jlMD1liGEd2TgeNbCAW45A _jle-01iGEd2TgeNbCAW45A _jnHWd1iGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsS1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleVersion"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsTFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsTViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsTliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleVersion"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsT1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsUFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsUViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleVersion"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjjsUliGEd2TgeNbCAW45A" position="2054,174" size="127,-1">
+      <anchorage xmi:id="_jle-11iGEd2TgeNbCAW45A" graphEdge="_jloIsFiGEd2TgeNbCAW45A _jnHWeViGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsU1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleActivator"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsVFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsVViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsVliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleActivator"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsV1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsWFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsWViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleActivator"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjjsWliGEd2TgeNbCAW45A" position="2241,174" size="136,-1">
+      <anchorage xmi:id="_jloItFiGEd2TgeNbCAW45A" graphEdge="_jloItViGEd2TgeNbCAW45A _jnHWe1iGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsW1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleClassPath"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsXFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsXViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsXliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleClassPath"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjjsX1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjjsYFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjjsYViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleClassPath"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjs2EFiGEd2TgeNbCAW45A" position="2437,174" size="147,-1">
+      <anchorage xmi:id="_jloIuViGEd2TgeNbCAW45A" graphEdge="_jlx5sFiGEd2TgeNbCAW45A _jnQgYFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2EViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleNativeCode"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2EliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2E1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2FFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleNativeCode"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjs2GFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2GViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//BundleNativeCode/optional"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2FViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2FliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2F1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleNativeCode"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjs2GliGEd2TgeNbCAW45A" position="2644,174" size="138,-1">
+      <anchorage xmi:id="_jlx5tFiGEd2TgeNbCAW45A" graphEdge="_jmE0oFiGEd2TgeNbCAW45A _jnQgYliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2G1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//RequireBundle"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2HFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2HViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2HliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//RequireBundle"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjs2IliGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2I1iGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//RequireBundle/resolved"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2H1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2IFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2IViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//RequireBundle"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjs2JFiGEd2TgeNbCAW45A" position="997,174" size="130,-1">
+      <anchorage xmi:id="_jklm4FiGEd2TgeNbCAW45A" graphEdge="_jlCS0FiGEd2TgeNbCAW45A _jmE0pFiGEd2TgeNbCAW45A _jnQgZFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2JViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//ImportService"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2JliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2J1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2KFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//ImportService"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjs2LFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2LViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//ImportService/resolve"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2KViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2KliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2K1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//ImportService"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjs2LliGEd2TgeNbCAW45A" position="1187,174" size="117,-1">
+      <anchorage xmi:id="_jlCS1FiGEd2TgeNbCAW45A" graphEdge="_jlMD0FiGEd2TgeNbCAW45A _jmE0qFiGEd2TgeNbCAW45A _jnQgZliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2L1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//ExportService"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2MFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2MViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2MliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//ExportService"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2M1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2NFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2NViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//ExportService"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjs2NliGEd2TgeNbCAW45A" position="618,174" size="138,-1">
+      <anchorage xmi:id="_jlMD2liGEd2TgeNbCAW45A" graphEdge="_jlMD21iGEd2TgeNbCAW45A _jlMD31iGEd2TgeNbCAW45A _jmE0rFiGEd2TgeNbCAW45A _jnQgaFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2N1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//ImportPackage"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2OFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2OViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2OliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//ImportPackage"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjs2PliGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2P1iGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//ImportPackage/resolved"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2O1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2PFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2PViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//ImportPackage"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjs2QFiGEd2TgeNbCAW45A" position="2842,174" size="126,-1">
+      <anchorage xmi:id="_jmE0sFiGEd2TgeNbCAW45A" graphEdge="_jmN-kFiGEd2TgeNbCAW45A _jnQgaliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2QViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//ExportPackage"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2QliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2Q1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2RFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//ExportPackage"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2RViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2RliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2R1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//ExportPackage"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjs2SFiGEd2TgeNbCAW45A" position="3028,174" size="170,-1">
+      <anchorage xmi:id="_jmN-lFiGEd2TgeNbCAW45A" graphEdge="_jmN-lViGEd2TgeNbCAW45A _jnQgbFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2SViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleActivationPolicy"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2SliGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2S1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2TFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleActivationPolicy"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jjs2UFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2UViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//BundleActivationPolicy/policy"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jjs2TViGEd2TgeNbCAW45A">
+        <property xmi:id="_jjs2TliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2T1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleActivationPolicy"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jjs2UliGEd2TgeNbCAW45A" position="3258,174" size="138,-1">
+      <anchorage xmi:id="_jmN-mViGEd2TgeNbCAW45A" graphEdge="_jmN-mliGEd2TgeNbCAW45A _jnQgbliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jjs2U1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//FragmentHost"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jj2nEFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jj2nEViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nEliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//FragmentHost"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jj2nFliGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nF1iGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//FragmentHost/resolved"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jj2nE1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jj2nFFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nFViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//FragmentHost"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jj2nGFiGEd2TgeNbCAW45A" position="3456,174" size="178,-1">
+      <anchorage xmi:id="_jmN-nliGEd2TgeNbCAW45A" graphEdge="_jmN-n1iGEd2TgeNbCAW45A _jnaRYFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nGViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//DynamicImportPackage"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jj2nGliGEd2TgeNbCAW45A">
+        <property xmi:id="_jj2nG1iGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nHFiGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//DynamicImportPackage"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jj2nIFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nIViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//DynamicImportPackage/packages"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jj2nHViGEd2TgeNbCAW45A">
+        <property xmi:id="_jj2nHliGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nH1iGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//DynamicImportPackage"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jj2nIliGEd2TgeNbCAW45A" position="3694,174" size="263,-1">
+      <anchorage xmi:id="_jmN-o1iGEd2TgeNbCAW45A" graphEdge="_jmN-pFiGEd2TgeNbCAW45A _jnaRYliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nI1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleRequiredExecutionEnvironment"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jj2nJFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jj2nJViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nJliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleRequiredExecutionEnvironment"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jj2nKliGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nK1iGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//BundleRequiredExecutionEnvironment/profile"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_jj2nLFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nLViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//BundleRequiredExecutionEnvironment/configuration"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jj2nJ1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jj2nKFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nKViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleRequiredExecutionEnvironment"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jj2nLliGEd2TgeNbCAW45A" position="4017,174" size="230,-1">
+      <anchorage xmi:id="_jmN-qFiGEd2TgeNbCAW45A" graphEdge="_jmXvkFiGEd2TgeNbCAW45A _jnaRZFiGEd2TgeNbCAW45A _jn2WQFiGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nL1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//SimpleManifestEntryManyValues"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jj2nMFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jj2nMViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nMliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//SimpleManifestEntryManyValues"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jj2nNliGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nN1iGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//SimpleManifestEntryManyValues/values"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jj2nM1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jj2nNFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nNViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//SimpleManifestEntryManyValues"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jj2nOFiGEd2TgeNbCAW45A" position="808,10" size="174,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nOViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//String"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jj2nOliGEd2TgeNbCAW45A" position="1042,10" size="135,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nO1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//boolean"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jj2nPFiGEd2TgeNbCAW45A" position="1237,10" size="109,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nPViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//int"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_jj2nPliGEd2TgeNbCAW45A" position="4307,174" size="254,-1">
+      <anchorage xmi:id="_jmXvlFiGEd2TgeNbCAW45A" graphEdge="_jmXvlViGEd2TgeNbCAW45A _jnaRZliGEd2TgeNbCAW45A"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nP1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleManifestVersion"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_jj2nQFiGEd2TgeNbCAW45A">
+        <property xmi:id="_jj2nQViGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nQliGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleManifestVersion"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_jj_xAFiGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj_xAViGEd2TgeNbCAW45A" presentation="default">
+            <element href="manifest.ecore#//BundleManifestVersion/manifestVersion"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_jj2nQ1iGEd2TgeNbCAW45A">
+        <property xmi:id="_jj2nRFiGEd2TgeNbCAW45A" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jj2nRViGEd2TgeNbCAW45A" presentation="default">
+          <element href="manifest.ecore#//BundleManifestVersion"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlCS0FiGEd2TgeNbCAW45A" anchor="_jklm4FiGEd2TgeNbCAW45A _jklm4ViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlCS0ViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//ImportService/service"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlCS0liGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlCS01iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlMD0FiGEd2TgeNbCAW45A" anchor="_jlCS1FiGEd2TgeNbCAW45A _jklm4ViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlMD0ViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//ExportService/service"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlMD0liGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlMD01iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlMD1liGEd2TgeNbCAW45A" anchor="_jlMD1FiGEd2TgeNbCAW45A _jlMD1ViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlMD11iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//BundleVersion/version"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlMD2FiGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlMD2ViGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlMD21iGEd2TgeNbCAW45A" anchor="_jlMD2liGEd2TgeNbCAW45A _jlMD1ViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlMD3FiGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//ImportPackage/version"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlMD3ViGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlMD3liGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlMD31iGEd2TgeNbCAW45A" anchor="_jlMD2liGEd2TgeNbCAW45A _jlMD1ViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlMD4FiGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//ImportPackage/specificationVersion"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlMD4ViGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlMD4liGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlVNwFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlMD5FiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlVNwViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleName"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVNwliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVNw1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlVNxViGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlVNxFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlVNxliGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleSymbolicName"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVNx1iGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVNyFiGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlVNyliGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlVNyViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlVNy1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleDescription"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVNzFiGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVNzViGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlVNz1iGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlVNzliGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlVN0FiGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleLocalization"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVN0ViGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVN0liGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlVN1FiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlVN01iGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlVN1ViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleVendor"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVN1liGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVN11iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlVN2ViGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlVN2FiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlVN2liGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleContactAddress"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVN21iGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlVN3FiGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jle-wFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlVN3ViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jle-wViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleCopyright"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jle-wliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jle-w1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jle-xViGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jle-xFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jle-xliGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleCategory"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jle-x1iGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jle-yFiGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jle-yliGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jle-yViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jle-y1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/BundleDocURL"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jle-zFiGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jle-zViGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jle-z1iGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jle-zliGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jle-0FiGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleUpdateLocation"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jle-0ViGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jle-0liGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jle-01iGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlMD1FiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jle-1FiGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleVersion"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jle-1ViGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jle-1liGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jloIsFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jle-11iGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jloIsViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleActivator"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jloIsliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jloIs1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jloItViGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jloItFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jloItliGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleClassPaths"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jloIt1iGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jloIuFiGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jlx5sFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jloIuViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jlx5sViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleNativeCodes"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlx5sliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlx5s1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmE0oFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlx5tFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmE0oViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/requireBundles"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmE0oliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmE0o1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmE0pFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jklm4FiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmE0pViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/importServices"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmE0pliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmE0p1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmE0qFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlCS1FiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmE0qViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/exportServices"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmE0qliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmE0q1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmE0rFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jlMD2liGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmE0rViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/importPackages"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmE0rliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmE0r1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmN-kFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jmE0sFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmN-kViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/exportPackages"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmN-kliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmN-k1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmN-lViGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jmN-lFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmN-lliGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleActivationPolicy"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmN-l1iGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmN-mFiGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmN-mliGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jmN-mViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmN-m1iGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/fragmentHost"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmN-nFiGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmN-nViGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmN-n1iGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jmN-nliGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmN-oFiGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/dynamicImportPackages"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmN-oViGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmN-oliGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmN-pFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jmN-o1iGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmN-pViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleRequiredExecutionEnvironments"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmN-pliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmN-p1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmXvkFiGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jmN-qFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmXvkViGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/unknownEntries"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmXvkliGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmXvk1iGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jmXvlViGEd2TgeNbCAW45A" anchor="_jlMD41iGEd2TgeNbCAW45A _jmXvlFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jmXvlliGEd2TgeNbCAW45A" presentation="default">
+        <element href="manifest.ecore#//MANIFEST/bundleManifestVersion"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmXvl1iGEd2TgeNbCAW45A" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_jmXvmFiGEd2TgeNbCAW45A" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnHWcFiGEd2TgeNbCAW45A" anchor="_jm0bgFiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnHWcViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnHWcliGEd2TgeNbCAW45A" anchor="_jlVNxFiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnHWc1iGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnHWdViGEd2TgeNbCAW45A" anchor="_jnHWdFiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnHWdliGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnHWd1iGEd2TgeNbCAW45A" anchor="_jlMD1FiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnHWeFiGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnHWeViGEd2TgeNbCAW45A" anchor="_jle-11iGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnHWeliGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnHWe1iGEd2TgeNbCAW45A" anchor="_jloItFiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnHWfFiGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnQgYFiGEd2TgeNbCAW45A" anchor="_jloIuViGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnQgYViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnQgYliGEd2TgeNbCAW45A" anchor="_jlx5tFiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnQgY1iGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnQgZFiGEd2TgeNbCAW45A" anchor="_jklm4FiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnQgZViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnQgZliGEd2TgeNbCAW45A" anchor="_jlCS1FiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnQgZ1iGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnQgaFiGEd2TgeNbCAW45A" anchor="_jlMD2liGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnQgaViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnQgaliGEd2TgeNbCAW45A" anchor="_jmE0sFiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnQga1iGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnQgbFiGEd2TgeNbCAW45A" anchor="_jmN-lFiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnQgbViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnQgbliGEd2TgeNbCAW45A" anchor="_jmN-mViGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnQgb1iGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnaRYFiGEd2TgeNbCAW45A" anchor="_jmN-nliGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnaRYViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnaRYliGEd2TgeNbCAW45A" anchor="_jmN-o1iGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnaRY1iGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnaRZFiGEd2TgeNbCAW45A" anchor="_jmN-qFiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnaRZViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnaRZliGEd2TgeNbCAW45A" anchor="_jmXvlFiGEd2TgeNbCAW45A _jm0bgViGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnaRZ1iGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnaRaFiGEd2TgeNbCAW45A" anchor="_jlMD5FiGEd2TgeNbCAW45A _jm0bgFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnaRaViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnaRaliGEd2TgeNbCAW45A" anchor="_jlVNyViGEd2TgeNbCAW45A _jm0bgFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnaRa1iGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnaRbFiGEd2TgeNbCAW45A" anchor="_jlVNzliGEd2TgeNbCAW45A _jm0bgFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnaRbViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnaRbliGEd2TgeNbCAW45A" anchor="_jlVN01iGEd2TgeNbCAW45A _jm0bgFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnaRb1iGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnaRcFiGEd2TgeNbCAW45A" anchor="_jlVN2FiGEd2TgeNbCAW45A _jm0bgFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnaRcViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jnjbUFiGEd2TgeNbCAW45A" anchor="_jlVN3ViGEd2TgeNbCAW45A _jm0bgFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jnjbUViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jn2WQFiGEd2TgeNbCAW45A" anchor="_jle-xFiGEd2TgeNbCAW45A _jmN-qFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jn2WQViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jn2WQliGEd2TgeNbCAW45A" anchor="_jle-yViGEd2TgeNbCAW45A _jnHWdFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jn2WQ1iGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_jn2WRFiGEd2TgeNbCAW45A" anchor="_jle-zliGEd2TgeNbCAW45A _jnHWdFiGEd2TgeNbCAW45A">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_jn2WRViGEd2TgeNbCAW45A" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>
