@@ -1,0 +1,13 @@
+/* $Id: AllStructureHelpers.kmt,v 1.1 2008-07-30 13:40:59 dvojtise Exp $
+ * Creation date: July 30, 2008
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ */
+
+package kermeta::language;
+
+
+require "ModelingUnitHelper.kmt"
+require "PackageHelper.kmt"
