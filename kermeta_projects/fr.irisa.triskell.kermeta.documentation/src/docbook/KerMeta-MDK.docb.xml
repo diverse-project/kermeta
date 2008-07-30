@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!-- $Id: KerMeta-MDK.docb.xml,v 1.1 2008-07-30 15:57:47 dvojtise Exp $ -->
+<book lang="en-US">
+  <bookinfo>
+    <title>Kermeta MDK for Kermeta</title>
+
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+
+    <pubdate>$Date: 2008-07-30 15:57:47 $</pubdate>
+
+    <author>
+      <firstname>Didier</firstname>
+
+      <surname>Vojtisek</surname>
+    </author>
+
+    <keywordset>
+      <keyword>Kermeta</keyword>
+
+      <keyword>metamodeling</keyword>
+
+      <keyword>language</keyword>
+    </keywordset>
+
+    <subtitle>MDK manual</subtitle>
+
+    <bibliomisc>Licence EPL</bibliomisc>
+
+    <abstract>
+      <para>This document presents the Model Development Kit (MDK) for Kermeta.</para>
+    </abstract>
+
+    <publisher>
+      <publishername>INRIA</publishername>
+
+      <address><state>France</state>
+<otheraddr><ulink url="http://www.inria.fr">http://www.inria.fr</ulink></otheraddr></address>
+    </publisher>
+  </bookinfo>
+
+  <preface id="preface.link">
+    <title id="preface.title.link">Preface<phrase
+    id="preface"></phrase></title>
+
+    <para>Kermeta is a Domain Specific Language dedicated to metamodel
+    engineering. It fills the gap let by MOF which defines only the structure
+    of meta-models, by adding a way to specify static semantic (similar to
+    OCL) and dynamic semantic (using operational semantic in the operation of
+    the metamodel). Kermeta uses the object-oriented paradigm like Java or
+    Eiffel.</para>
+    
+    <para>A MDK (Model Development Kit) is a set of Kermeta code that goes with a given
+    metamodel. Each of the MDKs provides functionalities dedicated to the metamodel
+    it applies to. (Ex: UML, Ecore, Traceability, yourDomainMetamodel, ...)</para>
+    
+    <para>In this document we will focus on Kermeta MDK. This MDK applies to 
+    Kermeta metamodel itself. Ie. it provides functionalities to manipulate Kermeta programs.</para>
+
+    
+
+    <important>
+      <para>Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
+
+      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+        <emphasis
+        role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+      </ulink>
+
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.2.0 
+    </para></important>
+
+    <tip><para>
+       The most update version of this document is available on line from 
+
+      <ulink type=""
+      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
+
+       . 
+    </para></tip>
+  </preface>
+
+  <chapter id="chapter_introduction.link">
+    <title id="chapter_introduction.title.link">Introduction to the Kermeta MDK</title>
+
+    <para> The Model Development Kit for Kermeta contains various kind of codes 
+    that work with Kermeta models: some helper classes and some transformations.
+	</para>
+	<tip><para>
+	To use them you simply have to add the corresponding require statement to 
+	your kermeta code. Then, the outline and the KermetaDoc views should help you to use its content.
+	</para></tip>
+	
+	<section>
+      	<title>Short description of the available <emphasis>require</emphasis></title>
+		<variablelist>
+      		<title>Kermeta MDK available files</title>
+	  		<para>Currently, the MDK provides the following files :</para>
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta/src/kermeta/visitor/kermetaVisitor.kmt"</filename></emphasis></term>
+        		<listitem>
+          			This file adds a visitor to Kermeta metamodel. It helps you traverse a Kermeta model.
+        		</listitem>
+      		</varlistentry> 
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta/src/kermeta/helpers/AllHelpers.kmt"</filename></emphasis></term>
+        		<listitem>
+          			This file adds various helper operations to the Metaclasses of Kermeta.
+          			<tip>If you are interested in only a subset of those helpers, you can directly require the corresponding files in the <filename>helpers</filename> directory of the plugin.</tip>
+        		</listitem>
+      		</varlistentry>
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta/src/kermeta/helpers/structure/AllStructureHelpers.kmt"</filename></emphasis></term>
+        		<listitem>
+          			Same as <filename>AllHelpers.kmt</filename> except that it provides only helpers on classes of the structure package.
+        		</listitem>
+      		</varlistentry> 
+		</variablelist>
+    </section>
+  </chapter>
+  <chapter id="chapter_cookbook.link">
+    <title id="chapter_cookbook.title.link">Cookbook for Kermeta MDK</title>
+    <para> This chapter presents some of the uses of this MDK.
+	</para>
+	<section>
+      	<title>Saving a  km model with references to ClassDefinitions in framework.km</title>
+      	<para>
+      		When creating a km model, you may need to create references to ClassDefinition that are defined in the framework.km. 
+      		Typically, when you create an Operation, you'll also have to create a Class whose 
+      		reference <literal>typeDefinition</literal> points to the ClassDefinition in the framework. 
+      	</para>
+      	<para>
+      		A first but wrong approach would be to use the reflectivity : 
+      	</para>
+      	<programlisting>
+var anOperation : kermeta::language::structure::Operation init kermeta::language::structure::Operation.new       
+anOperation.name := "Op1"       
+var aClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+// set the return type of the Operation to Boolean
+aClass.typeDefinition := kermeta::standard::Boolean.typeDefinition      // will typecheck, but cannot be saved !!!  
+anOperation.type := aClass
+anOperation.containedType.add(aClass)
+      	</programlisting>
+      	<para> This code will correctly typecheck, but cannot be saved. This is because it mixes model element and program definitions.
+      	Unfortunatly, it is not possible to ensure that those definitions comes from a concrete model file. 
+      	For example, the definition can come from an ecore or a kmt file (which are NOT
+      	km models).       	
+      	</para>
+      	<para>
+      	The solution consists in explicitly loading the km file that contains the ClassDefinition
+      	and then, retrieve the ClassDefinition in it. In our sample we probably want to load <filename>framework.km</filename>
+      	and find the ClassDefinition Boolean in it. 
+      	 
+      	</para>
+      	<para>
+      	The MDK will help us in this task by providing a function <literal>getTypeDefinitionByQualifiedName</literal> to ModelingUnit.
+      	The code will then look like :       	 
+      	</para>
+      	<programlisting>
+...
+// get the helper
+require "platform:/plugin/fr.irisa.triskell.kermeta/src/kermeta/helpers/structure/ModelingUnitHelper.kmt"
+...
+      	
+var repository : EMFRepository init EMFRepository.new
+var resFramework : kermeta::persistence::EMFResource
+		
+resFramework ?= repository.getResource("platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km")
+// find Boolean in the resource
+var booleanTypeDef : kermeta::language::structure::GenericTypeDefinition 
+var mainModelingUnit : kermeta::language::structure::ModelingUnit 
+mainModelingUnit ?= resFramework.detect{ m | m.isInstanceOf(kermeta::language::structure::ModelingUnit)}
+	// use the helper to find Boolean in the ModelingUnit		
+booleanTypeDef ?= mainModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")      	
+      	
+var anOperation : kermeta::language::structure::Operation init kermeta::language::structure::Operation.new       
+anOperation.name := "Op1"       
+var aClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+// set the return type of the Operation to Boolean
+aClass.typeDefinition := booleanTypeDef      // correct, can be saved (using the same repository that was used to load framework.km)  
+anOperation.type := aClass
+anOperation.containedType.add(aClass)
+      	</programlisting>
+      	<para>
+      	Obviously, you can load any km file you want. 
+      	</para>
+      	<note>If you want to point to a definition that is in a kmt (textual) or
+      	in an ecore file, you'll need to convert it into a km file first.
+      	</note>
+    </section>
+  </chapter>
+</book>
