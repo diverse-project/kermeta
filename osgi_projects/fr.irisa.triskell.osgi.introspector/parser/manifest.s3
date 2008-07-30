@@ -1,0 +1,797 @@
+Package fr.irisa.osgi.manifest.parser;
+
+Helpers
+	all 						= [32 .. 127];
+	digit 						= ['0' .. '9'] ;
+	lowercase					= ['a' .. 'z'] ;
+	uppercase					= ['A' .. 'Z'] ;
+	minus 						= '-' ;
+	underscore 					= '_' ;
+	double_quote				= '"' ;
+	path_sep	 				= '/' | '\' ;
+	dot							= '.' ;
+	double_anti_slash			= '\\' ; 
+	protected_string			= '\"';
+	star						= '*';
+	carname 					= '_' | '-';
+	tab							= 9 ;
+    lf 							= 10 ;
+    cr 							= 13 ;
+    blank 						=  tab | ' ' ;
+  	eol 						= blank* (cr lf | cr | lf );
+	quote 						=  '"';
+	alphanum 					= lowercase | uppercase | digit  | carname;
+	protected_alphanum			= alphanum | double_anti_slash |protected_string | ',' | ';'; 
+	eolblank 					= eol blank+;
+	
+	char_not_eol 				= [all - [cr + lf]];
+	char_not_eol_quote 			= [char_not_eol - '"'];
+	char_not_eol_quote_comma 	= [char_not_eol_quote - ','];
+	char_not_eol_quote_comma_semicolon 
+								= [char_not_eol_quote_comma - ';'];
+	char_not_eol_quote_comma_semicolon_equals 
+								= [char_not_eol_quote_comma_semicolon - '='];
+	part_unquoted_string 		= char_not_eol_quote_comma_semicolon_equals;
+	part_simple_string_value	= char_not_eol_quote_comma_semicolon;
+	part_quoted_string			= char_not_eol_quote;
+	all_string_core				= char_not_eol_quote;
+	
+
+States
+	manifest_entry, bundle_activationpolicy_state, bundle_activator_state, all_string_state,
+	simple_entry_state, url, bundle_nativecode_state, version_state, 
+	bundle_requiredexecutionenvironment_state, bundle_symbolicname_state, 
+	export_package_state, fragment_host_state, import_package_state, classpath_entry_state,
+	require_bundle_state, digest_entry_state, import_service_state, export_service_state,
+	directive_processor, directive_osversion, directive_osname, directive_visibility, directive_resolution,
+	directive_extension, directive_fragment_attachment, directive_singleton, manifestversion_state,
+	selection_filter_directive, directive_resolution_requiredexecution_state,
+	directive_resolution_import_state, simple_entry_attribut_state, directive_mandatory,
+	dynamicimport_package_state, directive_exclude_activationpolicy,
+	directive_include_activationpolicy,directive_exclude_activationpolicy1,
+	directive_include_activationpolicy1,
+	
+	bundle_activationpolicy_attribut_state, bundle_activator_attribut_state, url_state,
+	/*simple_entry_state,*/ url_attribut, bundle_nativecode_attribut_state, version_attribut_state, 
+	bundle_requiredexecutionenvironment_attribut_state, bundle_symbolicname_attribut_state, 
+	export_package_attribut_state, fragment_host_attribut_state, import_package_attribut_state, 
+	require_bundle_attribut_state/*, digest_entry_state*/, import_service_attribut_state, export_service_attribut_state,
+	manifestversion_attribut_state, dynamicimport_package_attribut_state,
+	directive_include_export_package, directive_exclude_export_package,
+	directive_mandatory_value, directive_uses, directive_uses1;
+
+Tokens
+
+	{directive_exclude_activationpolicy->directive_exclude_activationpolicy1,
+		directive_include_activationpolicy->directive_exclude_activationpolicy1,
+		directive_exclude_activationpolicy1->bundle_activationpolicy_state,
+		directive_include_activationpolicy1->bundle_activationpolicy_state,
+		directive_mandatory->directive_mandatory_value, 
+		directive_mandatory_value->export_package_state,
+		directive_uses->directive_uses1,
+		directive_uses1->directive_uses}
+		quote 						=  quote;
+	definition					=  '=' | ':=';
+	left_bracket				= '[' | '(';
+	right_bracket				= ']' | ')';
+	dotdot 						= ': ';	
+	double_anti_slash			= double_anti_slash ; 
+	protected_string			= protected_string;
+	path_sep 					= path_sep;              
+	{bundle_activationpolicy_state, bundle_activator_state, all_string_state,
+		simple_entry_state, url, bundle_nativecode_state, version_state, 
+		bundle_requiredexecutionenvironment_state, bundle_symbolicname_state, 
+		export_package_state, fragment_host_state, import_package_state,
+		classpath_entry_state, require_bundle_state, digest_entry_state, 
+		import_service_state, export_service_state, dynamicimport_package_state/*,
+		directive_exclude_activationpolicy->bundle_activationpolicy_state,
+		directive_include_activationpolicy->bundle_activationpolicy_state*/,
+		directive_uses->export_package_state,
+		directive_include_export_package->export_package_state, 
+		directive_exclude_export_package->export_package_state}
+		semicolon					= blank* ';' blank* ;
+	
+	{bundle_activationpolicy_state, bundle_activator_state, all_string_state,
+		simple_entry_state, url, bundle_nativecode_state, version_state, 
+		bundle_requiredexecutionenvironment_state, bundle_symbolicname_state, 
+		export_package_state, fragment_host_state, import_package_state,
+		classpath_entry_state, require_bundle_state, digest_entry_state, 
+		import_service_state, export_service_state, dynamicimport_package_state,
+		directive_exclude_activationpolicy1, directive_include_activationpolicy1,
+		directive_mandatory_value, directive_uses->export_package_state,
+		directive_uses1,
+		directive_include_export_package->export_package_state, 
+		directive_exclude_export_package->export_package_state}
+		comma						= blank* ',' blank*;
+	{directive_include_export_package, directive_exclude_export_package,
+		directive_uses, dynamicimport_package_state, directive_uses1}
+		optional					= star;
+    
+    {bundle_symbolicname_state, 
+    	version_state, 
+		export_package_state, 
+		import_package_state, 
+		export_service_state, 
+		import_service_state,
+		classpath_entry_state,
+		require_bundle_state,
+		bundle_activator_state,
+		fragment_host_state,
+		dynamicimport_package_state,
+		bundle_nativecode_state,
+		directive_exclude_activationpolicy,
+		directive_include_activationpolicy,
+		directive_exclude_activationpolicy1, 
+		directive_include_activationpolicy1,
+		directive_include_export_package,
+		directive_exclude_export_package,
+		directive_uses, directive_uses1}
+    	dot 						= dot;
+	{selection_filter_directive}equals						= '=' ;
+	{selection_filter_directive}greater_equals				= '>=' ;
+	{selection_filter_directive}lesser_equals				= '<=' ;
+	{selection_filter_directive}greater						= '>' ;
+	{selection_filter_directive}less						= '<' ;
+	{selection_filter_directive}not_equals					= '!=' ;
+	{url_state->url}url_http		= 'http://' ;
+	{url_state->url}url_ftp		= 'ftp://' ;
+	{url_state->url}url_file		= 'file:///' | 'file:' ;
+	
+	  	
+	{manifest_entry->bundle_activationpolicy_state}					bundle_activationpolicy		= 'Bundle-ActivationPolicy: ';
+	{manifest_entry->bundle_activator_state}						bundle_activator			= 'Bundle-Activator: ';
+	{manifest_entry->simple_entry_state}							bundle_category				= 'Bundle-Category: ';
+	{manifest_entry->classpath_entry_state}							bundle_classpath			= 'Bundle-ClassPath: ';
+	{manifest_entry->all_string_state}								bundle_contactaddress 		= 'Bundle-ContactAddress: ';
+	{manifest_entry->all_string_state}								bundle_copyright 			= 'Bundle-Copyright: ';
+	{manifest_entry->all_string_state}								bundle_description			= 'Bundle-Description: ';
+	{manifest_entry->url_state}										bundle_docurl				= 'Bundle-DocURL: ' | 'Bundle-DocUrl: ';
+	{manifest_entry->all_string_state}								bundle_localization			= 'Bundle-Localization: ';
+	{manifest_entry->manifestversion_state}							bundle_manifestversion		= 'Bundle-ManifestVersion: ';
+	{manifest_entry->all_string_state}								bundle_name					= 'Bundle-Name: ';
+	{manifest_entry->bundle_nativecode_state}						bundle_nativecode			= 'Bundle-NativeCode: ';
+	{manifest_entry->bundle_requiredexecutionenvironment_state}		bundle_requiredexecutionenvironment = 'Bundle-RequiredExecutionEnvironment: ';
+	{manifest_entry->bundle_symbolicname_state}						bundle_symbolicname			= 'Bundle-SymbolicName: ';
+	{manifest_entry->url_state}										bundle_updatelocation		= 'Bundle-UpdateLocation: ';
+	{manifest_entry->all_string_state}								bundle_vendor				= 'Bundle-Vendor: ';
+	{manifest_entry->version_state}									bundle_version				= 'Bundle-Version: ';
+	{manifest_entry->dynamicimport_package_state}					dynamicimport_package		= 'DynamicImport-Package: ';
+	{manifest_entry->export_package_state}							export_package				= 'Export-Package: ' | 'Provide-Package: ';
+	{manifest_entry->export_service_state}							export_service				= 'Export-Service: ';
+	{manifest_entry->fragment_host_state}							fragment_host				= 'Fragment-Host: ';
+	{manifest_entry->import_package_state}							import_package				= 'Import-Package: ';
+	{manifest_entry->import_service_state}							import_service				= 'Import-Service: ';
+	{manifest_entry->require_bundle_state}							require_bundle				= 'Require-Bundle: ';
+	
+	{manifest_entry->digest_entry_state}							entry_digest 				= alphanum+ '-Digest' ': ' blank* ;
+	{manifest_entry->simple_entry_state}							entry 						= alphanum+ ': ' blank*;
+
+	{bundle_activationpolicy_state}									lazy						= 'lazy' blank*;
+	{bundle_activator_state}										singleton					= 'singleton' blank* ('=' | ':=') blank*;
+	{bundle_activator_state}										fragment_attachment			= 'fragment-attachment blank'* ('=' | ':=') blank*;
+	{bundle_nativecode_state->directive_osname}						osname						= 'osname' blank* ('=' | ':=') blank*;
+	{bundle_nativecode_state->directive_osversion}					osversion					= 'osversion' blank* ('=' | ':=') blank*;
+	{bundle_nativecode_state->directive_processor}					processor					= 'processor' blank* ('=' | ':=') blank*;
+	{bundle_nativecode_state}										language					= 'language' blank* ('=' | ':=') blank*;
+	{bundle_nativecode_state->selection_filter_directive}										selection_filter			= 'selection-filter' blank* ('=' | ':=') blank*;
+	{bundle_requiredexecutionenvironment_state}						visibility					= 'visibility' blank* ('=' | ':=') blank*;
+	{bundle_requiredexecutionenvironment_state->
+		directive_resolution_requiredexecution_state, 
+		import_package_state->directive_resolution_import_state}
+		resolution					= 'resolution' blank* ('=' | ':=') blank*;
+	{export_package_state->directive_uses}							uses						= 'uses' blank* ('=' | ':=') blank*;
+	{bundle_activationpolicy_state->directive_exclude_activationpolicy,
+		export_package_state->directive_exclude_export_package}
+											exclude						= 'exclude' blank* ('=' | ':=') blank*;
+	{bundle_activationpolicy_state->directive_include_activationpolicy,
+		export_package_state->directive_include_export_package}	
+											include						= 'include' blank* ('=' | ':=') blank*;
+	{export_package_state->directive_mandatory}						mandatory 					= 'mandatory' blank* ('=' | ':=') blank*;
+	{fragment_host_state}											extension					= 'extension' blank* ('=' | ':=') blank*;
+	
+	{bundle_activationpolicy_state->bundle_activationpolicy_attribut_state, 
+		bundle_activator_state->bundle_activator_attribut_state, 
+		bundle_nativecode_state->bundle_nativecode_attribut_state, 
+		version_state->version_attribut_state, 
+		bundle_requiredexecutionenvironment_state->bundle_requiredexecutionenvironment_attribut_state, 
+		bundle_symbolicname_state->bundle_symbolicname_attribut_state, 
+		export_package_state->export_package_attribut_state, 
+		fragment_host_state->fragment_host_attribut_state, 
+		import_package_state->import_package_attribut_state, 
+		require_bundle_state->require_bundle_attribut_state/*, digest_entry_state*/, 
+		import_service_state->import_service_attribut_state, 
+		export_service_state->export_service_attribut_state,
+		manifestversion_state->manifestversion_attribut_state,
+		simple_entry_state->simple_entry_attribut_state,
+		dynamicimport_package_state->dynamicimport_package_attribut_state,
+		url->url_attribut}
+		attribute_entry = (part_unquoted_string | digit)+ blank* ('=' | ':=') blank*;
+	
+	{directive_processor->bundle_nativecode_state}	processor68k				= ('68k' | '"' '68k' '"') blank*;
+    {directive_processor->bundle_nativecode_state}	processor_arm				= ('ARM' | '"' 'ARM' '"') blank*;
+    {directive_processor->bundle_nativecode_state}	processor_alpha				= ('Alpha' | '"' 'Alpha' '"') blank*;
+	{directive_processor->bundle_nativecode_state}	processor_ignite			= ('Ignite' | '"' 'Ignite' '"') blank*;
+	{directive_processor->bundle_nativecode_state}	processor_mips				= ('Mips' | '"' 'Mips' '"') blank*;
+	{directive_processor->bundle_nativecode_state}	processor_parisc			= ('PArisc' | '"' 'PArisc' '"') blank*;
+	{directive_processor->bundle_nativecode_state}	processor_powerpc			= ('PowerPC' | '"' 'PowerPC' '"') blank*;
+	{directive_processor->bundle_nativecode_state}	processor_sh4				= ('Sh4' | '"' 'Sh4' '"') blank*;
+	{directive_processor->bundle_nativecode_state}	processor_sparc				= ('Sparc' | '"' 'Sparc' '"') blank*;
+	{directive_processor->bundle_nativecode_state}	processor_s390				= ('S390'  | '"' 'S390'  '"')blank*;
+	{directive_processor->bundle_nativecode_state}	processor_s390x				= ('S390x' | '"' 'S390x' '"') blank*;
+	{directive_processor->bundle_nativecode_state}	processor_v850e				= ('V850E' | '"' 'V850E' '"') blank*;
+	{directive_processor->bundle_nativecode_state}	processor_x86				= ('x86' | '"' 'x86' '"') blank*;
+	{directive_processor->bundle_nativecode_state}	processor_x8664				= ('x86-64' | '"' 'x86-64' '"') blank*;
+	
+	{directive_osname->bundle_nativecode_state}		osname_aix					= (('AIX' | 'aix') | '"' ('AIX' | 'aix') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_digitalunix			= (('DigitalUnix' | 'digitialunix') | '"' ('DigitalUnix' | 'digitialunix') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_embos				= (('Embos' | 'embos') | '"' ('Embos' | 'embos') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_epoc32				= (('Epoc32' | 'epoc32') | '"' ('Epoc32' | 'epoc32') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_freebsd				= (('FreeBSD' | 'freebsd') | '"' ('FreeBSD' | 'freebsd') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_hpux					= (('HPUX' | 'hpux') | '"' ('HPUX' | 'hpux') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_irix					= (('IRIX' | 'irix') | '"' ('IRIX' | 'irix') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_linux				= (('Linux' | 'linux') | '"' ('Linux' | 'linux') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_macos				= (('MacOS' | 'macos') | '"' ('MacOS' | 'macos') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_netbsd				= (('NetBSD' | 'netbsd') | '"' ('NetBSD' | 'netbsd') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_netware				= (('Netware' | 'netware') | '"' ('Netware' | 'netware') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_openbsd				= (('OpenBSD' | 'openbsd') | '"' ('OpenBSD' | 'openbsd') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_os2					= (('OS2' | 'os2') | '"' ('OS2' | 'os2') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_qnx					= (('QNX' | 'qnx') | '"' ('QNX' | 'qnx') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_solaris				= (('Solaris' | 'solaris') | '"' ('Solaris' | 'solaris') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_sunos				= (('SunOS' | 'sunos') | '"' ('SunOS' | 'sunos') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_vxworks				= (('VxWorks' | 'vxworks') | '"' ('VxWorks' | 'vxworks') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_windows95			= (('Windows95'| 'windows95' | 'Windows 95') | '"' ('Windows95'| 'windows95' | 'Windows 95') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_windows98			= (('Windows98' | 'windows98' | 'Windows 98') | '"' ('Windows98' | 'windows98' | 'Windows 98') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_windowsnt			= (('WindowsNT' | 'windowsnt' | 'Windows NT') | '"' ('WindowsNT' | 'windowsnt' | 'Windows NT') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_windowsce			= (('WindowsCE' | 'windowsce' | 'Windows CE') | '"' ('WindowsCE' | 'windowsce' | 'Windows CE') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_windows2000			= (('Windows2000' | 'windows2000' | 'Windows 2000') | '"' ('Windows2000' | 'windows2000' | 'Windows 2000') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_windows2003			= (('Windows2003' | 'windows2003' | 'Windows 2003') | '"' ('Windows2003' | 'windows2003' | 'Windows 2003') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_windowsxp			= (('WindowsXP' | 'windowsxp' | 'Windows XP') | '"' ('WindowsXP' | 'windowsxp' | 'Windows XP') '"') blank*;
+    {directive_osname->bundle_nativecode_state}		osname_windowsvista			= (('WindowsVista' | 'windowsvista' | 'Windows Vista') | '"' ('WindowsVista' | 'windowsvista' | 'Windows Vista') '"')blank*;
+		
+	{directive_visibility}	visibility_private			= ('private' | '"' 'private' '"') blank*;
+	{directive_visibility}	visibility_reexport			= ('reexport' | '"' 'reexport' '"') blank*;
+	
+	{directive_resolution_requiredexecution_state->
+		bundle_requiredexecutionenvironment_state,
+		directive_resolution_import_state->import_package_state}	resolution_mandatory		= ('mandatory' | '"' 'mandatory' '"') blank* ;
+	{directive_resolution_requiredexecution_state->
+		bundle_requiredexecutionenvironment_state,
+		directive_resolution_import_state->import_package_state}	resolution_optional			= ('optional' | '"' 'optional' '"') blank*;
+	
+	{directive_extension}	extension_framework			= ('framework' | '"' 'framework' '"') blank*;
+	{directive_extension}	extension_bootclasspath		= ('bootclasspath' | '"' 'bootclasspath' '"') blank*;
+	
+	{directive_fragment_attachment}	always						= ('always' | '"' 'always' '"') blank*;
+	{directive_fragment_attachment}	never						= ('never' | '"' 'never' '"') blank*;
+	{directive_fragment_attachment}	resolve_time				= ('resolve-time' | '"' 'resolve-time' '"') blank*;
+	
+	{directive_singleton}	true						= ('true' | '"' 'true' '"') blank*;
+	{directive_singleton}	false						= ('false' | '"' 'false' '"') blank*;
+	
+	
+	{manifestversion_state}manifestversion				= '1' | '2';
+	
+	eolblank 					= eolblank;
+	
+	{manifest_entry,
+		version_state->manifest_entry, 
+		manifestversion_state->manifest_entry,
+		bundle_activationpolicy_state->manifest_entry, 
+		bundle_activator_state->manifest_entry, 
+		simple_entry_state->manifest_entry, 
+		url->manifest_entry, 
+		bundle_nativecode_state->manifest_entry, 
+		bundle_requiredexecutionenvironment_state->manifest_entry, 
+		bundle_symbolicname_state->manifest_entry, 
+		export_package_state->manifest_entry, 
+		fragment_host_state->manifest_entry, 
+		import_package_state->manifest_entry,
+		export_service_state->manifest_entry,
+		import_service_state->manifest_entry, 
+		require_bundle_state->manifest_entry, 
+		digest_entry_state->manifest_entry,
+		directive_processor->manifest_entry, 
+		directive_osversion->manifest_entry, 
+		directive_osname->manifest_entry, 
+		directive_visibility->manifest_entry, 
+		directive_resolution->manifest_entry,
+		directive_extension->manifest_entry, 
+		directive_fragment_attachment->manifest_entry, 
+		directive_singleton->manifest_entry,
+		classpath_entry_state->manifest_entry,
+		all_string_state->manifest_entry,
+		dynamicimport_package_state->manifest_entry,
+		directive_exclude_activationpolicy->manifest_entry,
+		directive_include_activationpolicy->manifest_entry,
+		directive_include_export_package->manifest_entry,
+		directive_exclude_export_package->manifest_entry,
+		directive_uses->manifest_entry}
+		eol 						= eol;
+	
+	{bundle_symbolicname_state,
+		export_package_state, 
+		import_package_state, 
+		export_service_state, 
+		import_service_state,
+		require_bundle_state,
+		bundle_activator_state,
+		fragment_host_state,
+		dynamicimport_package_state,
+		directive_exclude_activationpolicy,
+		directive_include_activationpolicy,
+		directive_exclude_activationpolicy1,
+		directive_include_activationpolicy1,
+		directive_include_export_package,
+		directive_exclude_export_package,
+		directive_uses, directive_uses1}
+		identifier = (lowercase | uppercase) (alphanum | '$')*;
+		
+	{bundle_requiredexecutionenvironment_state}
+		identifier_required_profile = (alphanum | '.' )+;
+		
+	{bundle_requiredexecutionenvironment_state}
+		identifier_required_configuration = (alphanum | '.' )+ '/';
+		
+	{digest_entry_state}digest_value = all+;
+	
+	{classpath_entry_state,
+		bundle_nativecode_state,
+		bundle_activationpolicy_attribut_state->bundle_activationpolicy_state, 
+		bundle_activator_attribut_state->bundle_activator_state,
+		url_attribut->url, simple_entry_attribut_state->simple_entry_state,
+		bundle_nativecode_attribut_state->bundle_nativecode_state, 
+		version_attribut_state->version_state, 
+		bundle_requiredexecutionenvironment_attribut_state->bundle_requiredexecutionenvironment_state, 
+		bundle_symbolicname_attribut_state->bundle_symbolicname_state, 
+		export_package_attribut_state->export_package_state, 
+		fragment_host_attribut_state->fragment_host_state, 
+		import_package_attribut_state->import_package_state, 
+		require_bundle_attribut_state->require_bundle_state/*, 
+		digest_entry_state*/, url,
+		import_service_attribut_state->import_service_state, 
+		export_service_attribut_state->export_service_state,
+		manifestversion_attribut_state->manifestversion_state,
+		dynamicimport_package_attribut_state->dynamicimport_package_state,
+		directive_mandatory->export_package_state, 
+		directive_mandatory_value}
+		unquoted_string = (part_unquoted_string | digit)+;
+		
+	{bundle_activationpolicy_attribut_state->bundle_activationpolicy_state, 
+		bundle_activator_attribut_state->bundle_activator_state,
+		simple_entry_attribut_state->simple_entry_state,
+		url_attribut->url, 
+		bundle_nativecode_attribut_state->bundle_nativecode_state, 
+		version_attribut_state->version_state, 
+		bundle_requiredexecutionenvironment_attribut_state->bundle_requiredexecutionenvironment_state, 
+		bundle_symbolicname_attribut_state->bundle_symbolicname_state, 
+		export_package_attribut_state->export_package_state, 
+		fragment_host_attribut_state->fragment_host_state, 
+		import_package_attribut_state->import_package_state, 
+		require_bundle_attribut_state->require_bundle_state/*, 
+		digest_entry_state*/, 
+		import_service_attribut_state->import_service_state, 
+		export_service_attribut_state->export_service_state,
+		manifestversion_attribut_state->manifestversion_state,
+		dynamicimport_package_attribut_state->dynamicimport_package_state}
+		quoted_string = '"'(part_quoted_string | digit | '\"' | '\\')* '"';
+		
+	{simple_entry_state}simple_string_value = part_simple_string_value +;
+	{all_string_state}all_string = all_string_core+;
+		
+	//{version_state, directive_osversion}number = digit +; 
+	//{version_state, directive_osversion}qualifier = (alphanum | '_' | '-')+;
+	
+	{version_state}number = digit +;
+	{version_state}qualifier = alphanum +;
+	
+Ignored Tokens
+	eolblank;
+
+Productions
+
+	manifest =
+		manifestcontent +;
+
+	manifestcontent =
+		manifestentry eol+;
+
+	manifestentry = 
+		{bundle_activationpolicy_entry}bundle_activationpolicy_entry
+		| {bundle_activator_entry}bundle_activator_entry
+		| {bundle_category_entry}bundle_category_entry
+		| {bundle_classpath_entry} bundle_classpath_entry
+		| {bundle_contactaddress_entry}bundle_contactaddress_entry
+		| {bundle_copyright_entry}bundle_copyright_entry
+		| {bundle_description_entry}bundle_description_entry
+		| {bundle_docurl_entry}bundle_docurl_entry
+		| {bundle_localization_entry}bundle_localization_entry
+		| {bundle_manifestversion_entry}bundle_manifestversion_entry
+		| {bundle_nativecode_entry}bundle_nativecode_entry
+		| {bundle_requiredexecutionenvironment_entry}bundle_requiredexecutionenvironment_entry
+		| {bundle_symbolicname_entry}bundle_symbolicname_entry
+		| {bundle_updatelocation_entry}bundle_updatelocation_entry
+		| {bundle_vendor_entry}bundle_vendor_entry
+		| {bundle_version_entry}bundle_version_entry
+		| {dynamicimport_package_entry}dynamicimport_package_entry
+		| {export_package_entry}export_package_entry
+		| {export_service_entry}export_service_entry
+		| {fragment_host_entry}fragment_host_entry
+		| {import_package_entry}import_package_entry
+		| {import_service_entry}import_service_entry
+		| {require_bundle_entry}require_bundle_entry
+		| {bundle_name_entry}bundle_name_entry
+		| {other_entry}other_entry;
+
+	 bundle_name_entry =
+		bundle_name all_string ? parameter *;
+	
+	other_entry =
+		{simple_entry}simple_entry
+		| {digest_entry}digest_entry;
+	digest_entry =
+		entry_digest digest_value ?;
+	simple_entry =
+		entry simple_entry_value ?;
+	simple_entry_value =
+		other_entry_value other_entry_value_next */*other_entry_value_next ?*/;
+	other_entry_value_next =
+		comma other_entry_value;
+	other_entry_value =	
+		simple_string_value other_value* parameter *;
+	other_value =
+		semicolon simple_string_value;
+	
+	bundle_activationpolicy_entry =
+		bundle_activationpolicy bundle_activationpolicy_entry_value ?;
+	bundle_activationpolicy_entry_value =
+		activationpolicy_value activationpolicy_options *;
+	activationpolicy_value =
+		lazy;
+	activationpolicy_options =
+		{directive}semicolon activationpolicy_directive
+		|{attribute}parameter;
+	activationpolicy_directive =
+		{include}include activation_policy_exclude_include_value
+		| {exclude}exclude activation_policy_exclude_include_value;
+	activation_policy_exclude_include_value =
+		{exclude_include_many_packages}[left]:quote package_name activation_policy_exclude_include_identifier * [right]:quote 
+		| {exclude_include_one_package}package_name;
+	activation_policy_exclude_include_identifier =
+		comma package_name;
+
+	
+	bundle_activator_entry =
+		bundle_activator bundle_activator_entry_value ?;
+	bundle_activator_entry_value =
+		unique_name parameter *;
+		
+	bundle_category_entry =
+		bundle_category bundle_category_entry_value ? parameter * ;
+	bundle_category_entry_value =
+		string_entry_value category_value *;
+	category_value =
+		comma string_entry_value ;
+	
+	bundle_classpath_entry =
+		bundle_classpath bundle_classpath_entry_value ?;
+	bundle_classpath_entry_value =
+		classpath_entry classpath_value *;
+	classpath_value =
+		comma classpath_entry;
+	classpath_entry =
+		target classpath_entry_value * parameter *;
+	classpath_entry_value =
+		semicolon target;
+		
+	bundle_contactaddress_entry =
+		bundle_contactaddress all_string ? parameter *;
+	
+	bundle_copyright_entry =
+		bundle_copyright all_string ? parameter *;
+	
+	bundle_description_entry =
+		bundle_description all_string ? parameter *;
+		
+	bundle_docurl_entry =
+		bundle_docurl url_value ? parameter *;
+		
+	bundle_localization_entry =
+		bundle_localization all_string ? parameter *;
+		
+	bundle_manifestversion_entry =
+		bundle_manifestversion manifestversion ? parameter *;
+		
+		
+
+	bundle_nativecode_entry =
+		bundle_nativecode bundle_nativecode_entry_value ?;
+	bundle_nativecode_entry_value =
+		nativecode_entry nativecode_value * nativecode_optional ?;
+	nativecode_optional =
+		comma optional;
+	nativecode_value =
+		comma nativecode_entry;
+	nativecode_entry =
+		target nativecode_entry_value * nativecode_parameter +;
+	nativecode_entry_value =
+		semicolon target;
+	nativecode_parameter =
+		{nativecode_directive}semicolon nativecode_directive 
+		| {nativecode_attribute}parameter;
+	nativecode_directive =
+		{osname_directive}osname_directive 
+		| {osversion_directive}osversion_directive 
+		| {processor_directive}processor_directive 
+		| {language_directive}language_directive 
+		| {selection_filter_directive}selection_filter_directive;
+	osname_directive =
+		osname osname_value;
+	osversion_directive =
+		osversion  version_range;
+	processor_directive =
+		processor  processor_value;
+	language_directive =
+		language  language_value;
+	selection_filter_directive =
+		selection_filter  selection_filter_value;
+		
+	bundle_requiredexecutionenvironment_entry =
+		bundle_requiredexecutionenvironment bundle_requiredexecutionenvironment_entry_value ?;
+	bundle_requiredexecutionenvironment_entry_value =
+		requiredexecutionenvironment requiredexecutionenvironment_value *;
+	requiredexecutionenvironment_value =
+		comma requiredexecutionenvironment;
+	requiredexecutionenvironment =
+		identifier_required_configuration ? identifier_required_profile;
+	/*profile_version =
+		identifier_required_profile;
+	configuration_version =
+		identifier_required_configuration;*/
+	
+	bundle_symbolicname_entry = 
+		bundle_symbolicname unique_name symbolicname_option *;
+	symbolicname_option 	= 
+		{symbolicname_directive}semicolon symbolicname_directive 
+		| {symbolicname_attribute}parameter;
+	symbolicname_directive 	= 
+		{singleton}singleton  boolean 
+		| {fragment_attachment}fragment_attachment fragment_attachment_value;
+		
+	bundle_updatelocation_entry =
+		bundle_updatelocation url_value ? parameter *;
+	
+	bundle_vendor_entry =
+		bundle_vendor all_string ? parameter *;
+
+	bundle_version_entry =
+		bundle_version major_version_entry ? parameter *;
+	version_range =
+		{version_interval}version_interval 
+		| {version_atleast}version_atleast;
+	version_interval =
+		left_bracket [min_version]:major_version_entry comma [max_version]:major_version_entry right_bracket;
+	version_atleast =
+		major_version_entry;
+	major_version_entry = 
+		{quoted_version}[left]:quote major_version [right]:quote
+		| {unquoted_version}major_version;
+	major_version =
+		/*unquoted_string*/number minor_version ?;
+	minor_version =
+		dot /*unquoted_string*/number micro_version ?;
+	micro_version = 
+		dot /*unquoted_string*/number qualifier_version ?;
+	qualifier_version =
+		 {qualifier}dot qualifier
+		 | {number}dot number;
+	
+	dynamicimport_package_entry =
+		dynamicimport_package dynamicimport_package_entry_value ?;
+	dynamicimport_package_entry_value =
+		dynamic_description dynamicimport_package_value *;
+	dynamic_description =
+		package_name_wildcard dynamicimport_package_names * parameter *;
+	dynamicimport_package_names =
+		semicolon package_name_wildcard;
+	dynamicimport_package_value =
+		comma dynamic_description;
+
+	export_package_entry =
+		export_package export_package_entry_value1 ?;
+	export_package_entry_value1 =
+		export_package_entry_value export_package_value *;
+	export_package_value =
+		comma export_package_entry_value;
+	export_package_entry_value =
+		package_name package_names * export_package_parameter *;
+	package_names =
+		semicolon package_name;
+	export_package_parameter =
+		{export_package_directive}semicolon export_package_directive 
+		| {export_package_attribute}parameter;
+	export_package_directive =
+		{uses}uses export_package_use_exclude_include_value
+		| {include}include export_package_use_exclude_include_value
+		| {exclude}exclude export_package_use_exclude_include_value
+		| {mandatory}mandatory mandatory_value;
+		
+	export_package_use_exclude_include_value =
+		{use_exclude_include_many_elements}[left]:quote unique_name_wildcard export_package_use_exclude_include_identifier * [right]:quote 
+		| {use_exclude_include_one_element}unique_name_wildcard;
+	export_package_use_exclude_include_identifier =
+		comma unique_name_wildcard;
+		
+	mandatory_value =
+		{mandatory_many_attributes}[left]:quote unquoted_string mandatory_string * [right]:quote 
+		| {mandatory_one_attribute}unquoted_string;
+	mandatory_string =
+		comma unquoted_string;
+	
+	fragment_host_entry =
+		fragment_host fragment_host_entry_value ?;
+	fragment_host_entry_value =
+		unique_name fragment_host_parameter *;
+	fragment_host_parameter =
+		{fragment_host_directive}semicolon fragment_host_directive 
+		| {fragment_host_attribute}parameter;
+	fragment_host_directive =
+		extension  extension_value;
+	
+	import_package_entry =
+		import_package import_package_entry_value1 ?;
+	import_package_entry_value1 =
+		import_package_entry_value import_package_value *;
+	import_package_value =
+		comma import_package_entry_value;
+	import_package_entry_value =
+		package_name package_names * import_package_parameter *;
+	import_package_parameter =
+		{import_package_directive}semicolon import_package_directive 
+		| {import_package_attribute}parameter;
+	import_package_directive =
+		resolution  resolution_value;
+	
+	import_service_entry =
+		import_service import_service_entry_value ?;
+	import_service_entry_value =
+		unique_name parameter * service_value *;
+	service_value =
+		comma unique_name parameter *;
+
+	export_service_entry =
+		export_service export_service_entry_value ?;
+	export_service_entry_value =
+		unique_name parameter * service_value *;
+		
+		
+	require_bundle_entry =
+		require_bundle require_bundle_entry_value ?;
+	require_bundle_entry_value =
+		require_bundle_symbolicname require_bundle_value *;
+	require_bundle_symbolicname =
+		unique_name require_bundle_options *;
+	require_bundle_value =
+		comma require_bundle_symbolicname;
+
+	
+	require_bundle_options =
+		{require_bundle_directive}semicolon require_bundle_directive 
+		| {require_bundle_attribute}parameter;
+	require_bundle_directive =
+		{visibility_directive}visibility visibility_value 
+		| {resolution_directive}resolution  resolution_value;
+	
+	
+
+	fragment_attachment_value 	= 
+		{always}always 
+		| {never}never 
+		| {resolve_time}resolve_time;
+	processor_value = 
+		{processor68k}processor68k 
+		| {processor_arm}processor_arm 
+		| {processor_alpha}processor_alpha 
+		| {processor_ignite}processor_ignite
+		| {processor_mips}processor_mips
+		| {processor_parisc}processor_parisc
+		| {processor_powerpc}processor_powerpc
+		| {processor_sh4}processor_sh4
+		| {processor_sparc}processor_sparc
+		| {processor_s390}processor_s390
+		| {processor_s390x}processor_s390x
+		| {processor_v850e}processor_v850e
+		| {processor_x86}processor_x86
+		| {processor_x8664}processor_x8664;
+	osname_value = 
+		{osname_aix}osname_aix
+		| {osname_digitalunix}osname_digitalunix
+		| {osname_embos}osname_embos
+		| {osname_epoc32}osname_epoc32
+		| {osname_freebsd}osname_freebsd
+		| {osname_hpux}osname_hpux
+		| {osname_irix}osname_irix
+		| {osname_linux}osname_linux
+		| {osname_macos}osname_macos
+		| {osname_netbsd}osname_netbsd
+		| {osname_netware}osname_netware
+		| {osname_openbsd}osname_openbsd
+		| {osname_os2}osname_os2
+		| {osname_qnx}osname_qnx
+		| {osname_solaris}osname_solaris
+		| {osname_sunos}osname_sunos
+		| {osname_vxworks}osname_vxworks
+		| {osname_windows95}osname_windows95
+		| {osname_windows98}osname_windows98
+		| {osname_windowsnt}osname_windowsnt
+		| {osname_windowsce}osname_windowsce
+		| {osname_windows2000}osname_windows2000
+		| {osname_windows2003}osname_windows2003
+		| {osname_windowsxp}osname_windowsxp
+		| {osname_windowsvista}osname_windowsvista;
+	language_value = 
+		identifier;
+	boolean_comparator = 
+		{equals}equals
+		| {greater_equals}greater_equals
+		| {lesser_equals}lesser_equals
+		| {greater}greater
+		| {less}less
+		| {not_equals}not_equals;
+	selection_filter_value = 
+		[first]:string_entry_value boolean_comparator [next]:string_entry_value;
+	visibility_value = 
+		{visibility_private}visibility_private 
+		| {visibility_reexport}visibility_reexport;
+	resolution_value = 
+		{resolution_mandatory}resolution_mandatory 
+		| {resolution_optional}resolution_optional;
+	extension_value = 
+		{extension_framework}extension_framework 
+		| {extension_bootclasspath}extension_bootclasspath;
+	
+	boolean = 
+		{true}true 
+		| {false}false;
+	
+	path 						= {path_unquoted}path_unquoted | {path_quoted}path_quoted ;
+ 	path_unquoted 				=   {path_sep_only} path_sep | {path_septelement} [first]:dot? [second]:dot? path_sep ? path_element path_suffix * ;
+	path_element 				= unquoted_string;
+	path_suffix 				=  path_sep path_element;
+	 
+	
+	path_quoted = [leftquote]:quote path_unquoted [rightquote]:quote;    
+
+	unquoted_url				= {http}url_http path_unquoted | {file}url_file path_unquoted | {ftp}url_ftp path_unquoted ;
+	quoted_url					= [leftquote]:quote unquoted_url [rightquote]:quote ;
+	
+	unique_name_wildcard =
+		unique_name_wildcard_commons unique_name_wildcard_suffix *;
+	unique_name_wildcard_suffix = 
+		{identifier}dot identifier
+		| {optional}dot optional;
+	unique_name_wildcard_commons = 
+		{identifier}identifier 
+		| {optional}optional;
+	
+	package_name_wildcard 		= unique_name_wildcard;
+	target 						= {path}path | {dot}dot;
+	url_value					= {unquoted}unquoted_url | {quoted}quoted_url;
+	
+
+	parameter =
+		semicolon attribute;
+	attribute = 
+		attribute_entry string_entry_value;
+
+	string_entry_value =
+		{unquoted_string}unquoted_string
+		| {quoted_string}quoted_string;
+	package_name = 
+		{good_package_name}unique_name 
+		| {must_not_appears}dot;
+	unique_name = 
+		identifier unique_name_suffix *;
+	unique_name_suffix =
+		dot identifier ;
+		
+		
