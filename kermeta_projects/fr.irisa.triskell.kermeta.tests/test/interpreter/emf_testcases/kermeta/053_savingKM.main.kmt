@@ -1,4 +1,4 @@
-/* $Id: 053_savingKM.main.kmt,v 1.3 2007-11-13 16:39:23 dvojtise Exp $
+/* $Id: 053_savingKM.main.kmt,v 1.4 2008-07-30 14:37:41 dvojtise Exp $
  * Creation date: June 14, 2006
  * License:
  * Copyright:
@@ -10,7 +10,7 @@
  * 
  */
 @mainClass "savingKM::Main"
-@mainOperation "testmain"
+@mainOperation "main"
 
 
 package savingKM;
@@ -18,13 +18,24 @@ package savingKM;
 
 require kermeta
 
+require "platform:/plugin/fr.irisa.triskell.kermeta/src/kermeta/helpers/structure/ModelingUnitHelper.kmt"
+
 using kermeta::interpreter
 using kermeta::standard
 using kermeta::persistence
+using kermeta::kunit
 
 class Main inherits kermeta::kunit::TestCase
 {
-    operation testmain() : Void is do 
+    operation main() : Void is do 
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+		
+		stdio.writeln("end")
+    end
+    
+    operation testMixedLevels() : Void is do
         // prog expressing the KM saving bug
         var ope : kermeta::language::structure::Operation init kermeta::language::structure::Operation.new
         var sclass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
@@ -48,17 +59,80 @@ class Main inherits kermeta::kunit::TestCase
         pack.checkAllInvariants
         
 		var resRepository : EMFRepository init EMFRepository.new
+		// DVK must have the framework in the resource ?)
+		//resRepository.getResource("platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km")
 		
-		stdio.writeln("Creating pb_EnregKM.km...")
+		// We should not be able to save that because we mix model and definitions
+		var hasExceptionBeenRaised : Boolean
+		hasExceptionBeenRaised := false
+		do
+			var resResource : kermeta::persistence::EMFResource
+			//resResource ?= resRepository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/pb_EnregKM.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+			resResource ?= resRepository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/pb_EnregKM_testMixedLevels.km", "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+			resResource.instances.add(pack)
+		
+
+			stdio.writeln("Saving pb_EnregKM_testMixedLevels.km...")		
+			resResource.saveAndValidateWithEMF()
+		rescue (myException : kermeta::exceptions::ResourceMixedLevelsException)
+			stdio.writeln("ResourceMixedLevelsException correctly rescued, test OK")
+			hasExceptionBeenRaised := true
+        end
+        assertTrueWithMsg(hasExceptionBeenRaised,"ResourceMixedLevelsException was not correctly raised")
+        
+        stdio.writeln("done")
+    end
+    
+    /**
+     * Similar test as above but retreive Boolean froma loaded file
+     */
+    operation testDependencyToFramework() : Void is do
+        // prog expressing the KM saving bug
+        var ope : kermeta::language::structure::Operation init kermeta::language::structure::Operation.new
+        var sclass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+        var sclass2 : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+        
+        
+        // make a link to framework.km : reuse typedefinition of Boolean
+        var repository : EMFRepository init EMFRepository.new
+        var resFramework : kermeta::persistence::EMFResource
+		
+        resFramework ?= repository.getResource("platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km")
+		// find Boolean in the resource
+		var booleanTypeDef : kermeta::language::structure::GenericTypeDefinition 
+		var mainModelingUnit : kermeta::language::structure::ModelingUnit 
+		mainModelingUnit ?= resFramework.detect{ m | m.isInstanceOf(kermeta::language::structure::ModelingUnit)}
+		
+		booleanTypeDef ?= mainModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")
+		assertTrueWithMsg(not booleanTypeDef.isVoid,"Failed to retrieve Boolean in framework.km")
+		
+        sclass.typeDefinition := booleanTypeDef        
+        ope.type := sclass
+        ope.containedType.add(sclass)
+        
+        ope.name := "Op1"
+        var cl : kermeta::language::structure::ClassDefinition init kermeta::language::structure::ClassDefinition.new
+        var pack : kermeta::language::structure::Package init kermeta::language::structure::Package.new
+        pack.name := "P1"
+        pack.uri := "http://P1"
+        cl.name := "C1"
+        cl.ownedOperation.add(ope)
+        pack.ownedTypeDefinition.add(cl)
+        
+        pack.checkAllInvariants
+        
+		
+		// We are able to save that because we loaded explicitly framework.km
 		var resResource : kermeta::persistence::EMFResource
-		resResource ?= resRepository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/pb_EnregKM.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+			//resResource ?= resRepository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/pb_EnregKM.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+		resResource ?= repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/pb_EnregKM_testDependencyToFramework.km", "http://www.kermeta.org/kermeta/1_2_0//kermeta")
 		resResource.instances.add(pack)
 		
 
-		stdio.writeln("Saving pb_EnregKM.km...")		
+		stdio.writeln("Saving pb_EnregKM_testDependencyToFramework.km...")		
 		resResource.saveAndValidateWithEMF()
-        
-        // no assertion needed, if there were an error we would have got an exception
+		
+        // This code should work
         stdio.writeln("done")
     end
 }
