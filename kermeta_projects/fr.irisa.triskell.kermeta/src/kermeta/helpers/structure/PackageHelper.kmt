@@ -1,0 +1,26 @@
+/* $Id: PackageHelper.kmt,v 1.1 2008-07-30 13:30:06 dvojtise Exp $
+ * Creation date: May 19, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: 
+ *		Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+
+package kermeta::language::structure;
+
+require kermeta
+
+using kermeta::standard
+
+aspect class Package {
+	
+	operation getAllSubPackages() : OrderedSet<Package> is do
+		result := OrderedSet<Package>.new()
+				
+		var pack : Package init self.nestedPackage.each{ p |
+			result.add(p)
+			result.addAll(p.getAllSubPackages())
+		}
+	end
+}
