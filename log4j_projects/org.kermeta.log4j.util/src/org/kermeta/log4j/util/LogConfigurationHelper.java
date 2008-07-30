@@ -1,4 +1,4 @@
-/* $Id: LogConfigurationHelper.java,v 1.6 2008-07-21 08:51:11 dvojtise Exp $
+/* $Id: LogConfigurationHelper.java,v 1.7 2008-07-30 09:58:07 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : LogConfigurationHelper.java
  * License    : EPL
@@ -104,7 +104,7 @@ public class LogConfigurationHelper {
 			// save current property to make sure to be able to set it back if necessary
             logClassName = System.getProperty(LogFactoryImpl.LOG_PROPERTY);
         } catch (SecurityException e) {
-            ;
+        	logClassName = "org.apache.commons.logging.impl.SimpleLog";
         }
         // default prefered logger = LOG4J
         String preferredLogger = PreferenceConstants.P_LOGGERCHOICE_LOG4J;
@@ -156,12 +156,14 @@ public class LogConfigurationHelper {
 			e.printStackTrace();
 			
 		}
-		/*logger=org.apache.log4j.Logger.getLogger(loggerName);
-		if (logger == null)
-		{
-		    logger = Logger.getRootLogger();
-			logger.warn("unable to retreive logger for " + loggerName + "; using Root logger instead");
-		}*/
+		
+		// set back the logger to the original property is case some other tool need their own logger
+		try {
+			// save current property to make sure to be able to set it back if necessary
+			System.setProperty(LogFactoryImpl.LOG_PROPERTY, logClassName);
+        } catch (Exception e) {
+        	//e.printStackTrace();
+        }
 		return logger; 
 	}
 	
