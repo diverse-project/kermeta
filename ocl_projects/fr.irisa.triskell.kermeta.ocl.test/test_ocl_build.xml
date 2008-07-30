@@ -1,4 +1,4 @@
-<!-- $Id: test_ocl_build.xml,v 1.5 2008-07-29 14:12:50 dvojtise Exp $ -->
+<!-- $Id: test_ocl_build.xml,v 1.6 2008-07-30 20:40:40 dvojtise Exp $ -->
 <project name="run ocl tests" default="all" basedir=".">
 
 	<description>
@@ -141,7 +141,7 @@
 			
 
 			<formatter type="plain" />
-			<test name="fr.irisa.triskell.kermeta.ocl.tests.ocl2kmt.OCL2KermetaTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-interpreter-result">
+			<test name="fr.irisa.triskell.kermeta.ocl.tests.ocl2kmt.OCL2KermetaTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-ocl-result">
 				<formatter type="xml" />
 			</test>
 			
