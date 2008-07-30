@@ -48,22 +48,34 @@ public class OSGiIntrospectorUtil {
 				".mf");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				new FileInputStream(manifestFileTmp)));
-		String line = "";
-		String tmp = reader.readLine();
-		while (tmp != null) {
-			if (line.equals("")) {
-				line = tmp;
+		StringBuffer line = null;
+		String read = reader.readLine();
+		StringBuffer tmp;
+		while (read != null) {
+			tmp = new StringBuffer(read);
+			if (line == null) {
+				line = new StringBuffer(tmp);
 			} else {
-				line += "\n" + tmp;
+				if (tmp.length() > 0 && tmp.charAt(0) == ' ') {
+					while (line.charAt(line.length() - 1) == ' ' || line.charAt(line.length() - 1) == '\t') {
+						line.deleteCharAt(line.length() - 1);
+					}
+					while (tmp.charAt(0) == ' ' || tmp.charAt(0) == '\t') {
+						tmp.deleteCharAt(0);
+					}
+					line.append(tmp);
+				} else {
+					line.append("\n" + tmp);
+				}
 			}
-			tmp = reader.readLine();
+			read = reader.readLine();
 		}
 		reader.close();
-		line = line.replace("\n ", "");
-		line += "\n";
+		//line = line.replace("\n ", "");
+		line.append("\n");
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
 				new FileOutputStream(manifestFile)));
-		writer.write(line);
+		writer.write(line.toString());
 		writer.flush();
 		writer.close();
 

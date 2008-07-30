@@ -91,7 +91,7 @@ public class OSGiIntrospectorStatic {
 			boolean validGeneration = true;
 			String[] bundlePaths = f.list();
 			for (String path : bundlePaths) {
-				if (f.getAbsolutePath().equals("C:\\Program Files\\eclipse 3.3.2\\plugins\\org.eclipse.pde.build_3.3.2.v20071019")) {
+				if ((f.getAbsolutePath() + File.separator + path).equals("C:\\Program Files\\eclipse 3.3.2\\plugins\\org.eclipse.pde.ui.templates_3.3.0.v20070608-1300.jar")) {
 					System.out.println();
 				}
 				validGeneration = validGeneration
@@ -705,6 +705,7 @@ public class OSGiIntrospectorStatic {
 						+ "The activator reference "
 						+ activators.get(value)
 						+ " is not valid." + "\n");
+				bundles.get(value).getManifest().setBundleActivator(null);
 			}
 		}
 	}

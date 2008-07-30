@@ -584,7 +584,10 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 			parameter.apply(this);
 		}
 
-		this.manifest.addBundleClassPath(entry);
+		if (entry.getEntries().size() > 0) {
+			this.manifest.addBundleClassPath(entry);
+		}
+		
 	}
 
 	public void caseAClasspathEntryValue(AClasspathEntryValue node) {
@@ -2129,6 +2132,7 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 	}
 
 	public void caseStart(Start node) {
+		this.validTranslation = true;
 		this.log.put(this.bundle, "");
 		node.getPManifest().apply(this);
 		node.getEOF().apply(this);
@@ -3089,11 +3093,13 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 							this.log.put(this.bundle, this.log.get(this.bundle)
 									+ "IOException with "
 									+ systemEntry.getFullPath() + "\n");
+							
 						}
 					} else {
 						this.log.put(this.bundle, this.log.get(this.bundle)
 								+ systemEntry.getFullPath()
 								+ " is a file but is not a JAR file." + "\n");
+						
 					}
 				} else {
 					this.log
@@ -3103,6 +3109,7 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 											+ this.firstValue
 											+ " must be a JAR file or a folder. (must never appears)"
 											+ "\n");
+					
 				}
 			} else {
 				this.log.put(this.bundle, this.log.get(this.bundle)
