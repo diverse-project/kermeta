@@ -1,11 +1,11 @@
-<!-- $Id: statcvs_build.xml,v 1.2 2008-07-31 16:17:27 dvojtise Exp $ -->
+<!-- $Id: statcvs_build.xml,v 1.3 2008-07-31 16:38:34 dvojtise Exp $ -->
 <project name="Build StatCVS" default="all" basedir=".">
 	<description>
        
 	</description>
 	
 	<property name="statcvs.jar" location="/udd/triskell/bin/multiplatform/statcvs-0.4.0/statcvs.jar"/>
-	<property name="notes.txt" location="/tmp/kermeta_build/src/fr.irisa.triskell.kermeta.site/scripts/html/report-notes.txt"/>
+	<property name="notes.txt" location="/tmp/kermeta_build/src/plugin/fr.irisa.triskell.kermeta.site/scripts/html/report-notes.txt"/>
 	<property name="cvs.log" location="/tmp/kermeta_build/statcvs/logfile.log"/>
 	<property name="output.dir" location="statcvs"/>
         
@@ -29,7 +29,7 @@
         	path="." 
         	title="StatCVS"
             outputDir="${output.dir}" 
-            notes="html/report-notes.txt" 
+            notes="${notes.txt}" 
             viewcvs="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/" 
             exclude="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.genmodel;**/*.ecoredi;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**"
             tags=".*"/>
