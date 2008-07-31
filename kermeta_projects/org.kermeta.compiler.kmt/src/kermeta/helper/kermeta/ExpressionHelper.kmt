@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.1 2008-07-29 09:59:53 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.2 2008-07-31 08:15:03 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -10,14 +10,142 @@ package kermeta::language::behavior;
 
 require kermeta
 require "KermetaHelper.kmt"
+require "../java/JavaHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using kermeta::language::structure
 using kermeta::standard
 using km2ecore
 using km2ecore::helper::kermeta
+using km2ecore::helper::java
+
+aspect class Expression {
+
+	method mustBeAssigned() : Boolean is do
+		result := false
+		
+		if self.isInstanceOf(CallVariable)
+			or self.isInstanceOf(Literal)
+			or self.isInstanceOf(SelfExpression)
+			or self.isInstanceOf(CallResult)
+			or self.isInstanceOf(VoidType) then
+			result := true
+		end
+		
+	end
+	
+}
 
 aspect class CallFeature {
+
+	/*operation retrieveTopCallFeatureFunctionType() : CallFeature is do
+		
+		var return : Boolean init false
+		
+		var test : CallFeature init self
+		
+		from return
+        until return
+        loop
+        	return := true
+        	if test.target.isInstanceOf(CallFeature) then
+        		
+            	test := test.target.asType(CallFeature)
+            	
+            	if test.callsFunctionType() then
+            		result := test
+            		return := false
+            	end
+            	
+            end
+        end
+        
+	end*/
+
+	operation createStringFromFunctionType(context : KM2EcoreContext) : String is do
+		
+		var tgt : Expression init self.target
+		
+		context.tasks_stack.push("FunctionType_Compilation")
+		
+		//Retrieve the corresponding CallFeature for setting the name of the searched call variable
+		self.staticOperation.ownedParameter.each{ p |
+			if p.type.isInstanceOf(FunctionType) then
+				context.current_param_ft := p.name
+			end
+		}	
+		
+		//Lambda expression to inline
+		var ftRightType : Type init Type.new()
+		if self.parameters.one().isInstanceOf(LambdaExpression) then
+		
+			var theLambdaExp : LambdaExpression init self.parameters.one().asType(LambdaExpression)
+		
+			context.ftStack.push(theLambdaExp)
+			
+			if theLambdaExp.staticType.isInstanceOf(FunctionType) then
+				if theLambdaExp.staticType.asType(FunctionType).left.isInstanceOf(ProductType) then
+					context.ftProductTypeStack.push(theLambdaExp.staticType.asType(FunctionType).left.asType(ProductType))
+				end
+				ftRightType := theLambdaExp.staticType.asType(FunctionType).right
+			end
+		end
+		
+		
+		
+		var ft_str : String init ""
+		
+		context.pushFtSuffix()
+		
+		//Replacing the self
+		if tgt.callsFunctionType() then
+			//context.ftSuffixActivation := true
+			context.ftContextualSelf := context.SELF_EXPRESSION_TO_REPLACE// + context.getFtSuffix()
+			//context.ftSuffixActivation := false
+		else
+		//if context.ftContextualSelf=="" then
+			context.ftContextualSelf := tgt.createBehaviorJava(context)
+		end
+		
+		context.ftSuffixActivation := true
+		
+		var callElement : String init ""
+		if self.container.isInstanceOf(VariableDecl) then
+			callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(VariableDecl).identifier, context)
+		else
+			if self.container.isInstanceOf(CallVariable) then
+				callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(CallVariable).name, context)
+			end
+		end
+		
+		if callElement != "" or self.container.isInstanceOf(Assignment) then
+			ft_str := ft_str + "null;\n"
+		end
+		
+		ft_str := ft_str + "//Beginning of the Inlining of the function type: " + self.staticOperation.name + "\n"
+		ft_str := ft_str + self.staticOperation.createBehaviorJava(context)
+		
+		if callElement != "" then
+			ft_str := ft_str + "\n//callElement\n"
+			ft_str := ft_str + callElement + " = result" + context.getFtSuffix() + ";\n"
+		end
+		
+		if callElement == "" and (not Operation.new().isVoidType(self.staticType.getTypeName())) then
+			//ft_str := ft_str + self.staticType.createBehaviorJava(context) + " res_res = result" + context.getFtSuffix() + ";\n"
+			//context.ftContextualSelf := "result" + context.getFtSuffix()
+			
+			context.resultOfLastFt := "result" + context.getFtSuffix()
+		end
+		
+		ft_str := ft_str + "//Ending of the Inlining of the function type: " + self.staticOperation.name + "\n"
+		
+		context.ftSuffixActivation := false
+		context.ftProductTypeStack.pop()
+		context.ftSuffix.pop()
+		
+		result := ft_str
+	end
+
 
 	/**
 	 * Unused for the moment

@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.23 2008-07-29 09:59:55 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.24 2008-07-31 08:15:03 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -57,6 +57,9 @@ class KM2EcoreContext
 	reference kRErrorStack : Stack<String> [0..1]
 	attribute inc_kRErrorStack : Integer [0..1]
 	
+	reference resultLastStatementStack : Stack<String> [0..1]
+	attribute inc_resultLastStatementStack : Integer [0..1]
+	
 	reference ftStack : Stack<LambdaExpression> [0..1]
 	attribute current_param_ft : String [0..1]
 	
@@ -90,6 +93,9 @@ class KM2EcoreContext
 	/** CONSTANTS */
 	attribute JAVA_CLASS_EXCEPTION_SWITCHER : String [1..1]
 	attribute VARIABLE_EXCEPTION_SWITCHER : String [1..1]
+	attribute NOT_EVALUATED_MESSAGE : String [1..1]
+	attribute leftAssign : String [1..1]
+	attribute SELF_EXPRESSION_TO_REPLACE : String [1..1]
 	/********/
 	
 	/**  */
@@ -98,7 +104,9 @@ class KM2EcoreContext
 	
 	reference current_valueType : ClassDefinition [0..1]
 
-	attribute lastStatement_boolean : String [1..1]	
+	attribute lastStatementStack : Stack<String> [1..1]	
+	
+	attribute resultOfLastFt : String [0..1]
 
 	operation initialize(modelInput : String, traceInput : String) : Void is do
 	
@@ -129,7 +137,10 @@ class KM2EcoreContext
 		
 		self.ftProductTypeStack := Stack<ProductType>.new()
 		
-		self.lastStatement_boolean := ""
+		self.lastStatementStack := Stack<String>.new()
+		
+		self.resultLastStatementStack := Stack<String>.new
+		self.inc_resultLastStatementStack := 0
 		
 		
 		// Initializing the java keywords list.
@@ -166,6 +177,9 @@ class KM2EcoreContext
 	operation initializeConstants() : Void is do
 		self.JAVA_CLASS_EXCEPTION_SWITCHER := "org.kermeta.compil.runtime.helper.error.KRuntimeError"
 		self.VARIABLE_EXCEPTION_SWITCHER := "ex_switcher"
+		self.NOT_EVALUATED_MESSAGE := "//FIXME This statement cannot be evaluated without an assignment: "
+		self.leftAssign := "LEFT_ASSIGN_TO_REPLACE"
+		self.SELF_EXPRESSION_TO_REPLACE := "SELF_EXPRESSION_TO_REPLACE"
 		
 		//self.GENMODEL_ANNOTATION := "http://www.eclipse.org/emf/2002/GenModel"
 		//self. := ""
@@ -186,6 +200,42 @@ class KM2EcoreContext
 	operation pushFtSuffix() : Void is do
 		self.inc_ftSuffix := self.inc_ftSuffix + 1
 		self.ftSuffix.push(self.inc_ftSuffix.toString())
+	end
+	
+	operation pushResultLastStatementStack() : Void is do
+		self.inc_resultLastStatementStack := self.inc_resultLastStatementStack + 1
+		self.resultLastStatementStack.push("idResultLastStatement_" + self.inc_resultLastStatementStack.toString() + " = ")
+	end
+	
+	operation popResultLastStatementStack() : Void is do
+		if self.resultLastStatementStack.size()>0 then
+			self.inc_resultLastStatementStack := self.inc_resultLastStatementStack
+			self.resultLastStatementStack.pop()
+		end
+	end
+	
+	/**
+	 * Get the identifier
+	 */
+	operation getIfConditionId() : String is do
+		result := "idIfCond_" + self.condStack.peek()
+	end
+	
+	/**
+	 * Get the identifier
+	 */
+	operation getLoopConditionId() : String is do
+		result := "idLoopCond_" + self.condStack.peek()
+	end
+	
+	/**
+	 * Get the identifier
+	 */
+	operation getResultLastStatementId() : String is do
+		result := ""
+		if self.resultLastStatementStack.size()>0 then
+			result := self.resultLastStatementStack.peek()
+		end
 	end
 	
 	operation getFtSuffix() : String is do

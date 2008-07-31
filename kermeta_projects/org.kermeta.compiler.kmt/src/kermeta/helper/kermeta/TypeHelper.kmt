@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.19 2008-07-29 09:59:53 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.20 2008-07-31 08:15:03 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -169,7 +169,10 @@ aspect class Type {
 			if self.isInstanceOf(Class) then
 				result := self.asType(Class).typeDefinition.name.equals("Boolean")
 			else if self.isInstanceOf(PrimitiveType) then
-					if  self.asType(PrimitiveType).createBehaviorJava(context).equals("kermeta::standard::Boolean") or self.asType(PrimitiveType).createBehaviorJava(context).equals("Boolean") then
+					if  self.asType(PrimitiveType).createBehaviorJava(context).equals("kermeta::standard::Boolean")
+						or self.asType(PrimitiveType).createBehaviorJava(context).equals("kermeta::language::structure::Boolean")
+						or self.asType(PrimitiveType).createBehaviorJava(context).equals("java.lang.Boolean")
+						or self.asType(PrimitiveType).createBehaviorJava(context).equals("Boolean") then
 						result := true
 					end
 				end

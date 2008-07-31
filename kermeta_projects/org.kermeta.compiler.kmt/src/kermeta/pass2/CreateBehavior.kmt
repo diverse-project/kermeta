@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.36 2008-07-29 09:59:55 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.37 2008-07-31 08:15:03 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -268,6 +268,13 @@ package structure {
 			result := self.name
 		end
 	}
+	
+	aspect class FunctionType {
+		method createBehaviorJava(context : KM2EcoreContext) : String from Type is do
+			super(context)
+			result := ""
+		end
+	}
 
 }
 
@@ -339,15 +346,67 @@ package behavior {
 			if self.containsRescue() then
 				javaCode.append("try {")
 			end
-						
+			
+			var nbrStm : Integer init self.statement.size()
+			var i_stm : Integer init 0
 			self.eachOwnedElement{ stm |
+				
 				javaCode.append("\n\t")
-				if stm == self.statement.elementAt(self.statement.size()-1) then
-					javaCode.append(context.lastStatement_boolean)
-					context.lastStatement_boolean := ""
+				
+				/*if not stm.mustBeAssigned() then
+					context.pushResultLastStatementStack()
+					javaCode.append(stm.asType(Expression).staticType.createBehaviorJava(context) + " " + context.getResultLastStatementId() + " = null;\n")
+				end*/
+				
+				//if the given statement is the last one
+				if i_stm == (nbrStm-1) then
+					
+					//FIXME The 3 following lines of code should be deprecated
+					if context.lastStatementStack.size()>0 then
+						javaCode.append(context.lastStatementStack.pop())
+					end
+					
+					if stm.mustBeAssigned() then
+						if self.container.isInstanceOf(Operation) then
+							javaCode.append(context.NOT_EVALUATED_MESSAGE)
+						else
+							if Operation.new().isVoidType(stm.asType(Expression).staticType.getTypeName()) then
+								javaCode.append(context.NOT_EVALUATED_MESSAGE)
+							else
+								if self.container.container.isInstanceOf(Block) and (context.resultLastStatementStack.size()==0) then
+									javaCode.append(context.NOT_EVALUATED_MESSAGE)
+								else
+									
+									javaCode.append(context.getResultLastStatementId())
+									
+								end
+							end
+						end
+					else
+						if stm.isInstanceOf(CallFeature) and (context.resultLastStatementStack.size()>0) then
+							javaCode.append(context.getResultLastStatementId())
+						end
+					end
+				else
+					if stm.mustBeAssigned() then
+						javaCode.append(context.NOT_EVALUATED_MESSAGE)
+					end
 				end
+				
 				javaCode.append(stm.createBehaviorJava(context))
+				
+				/*if stm.isInstanceOf(Assignment) then //not stm.mustBeAssigned() then
+					var str_right : String init context.getResultLastStatementId()
+					
+					context.popResultLastStatementStack()
+					
+					javaCode.append(context.getResultLastStatementId() + " = " + str_right + ";\n")
+				end*/
+				
 				javaCode.append("\n")
+				
+				i_stm := i_stm + 1
+				
 			}
 			
 			if self.containsRescue() then
@@ -424,37 +483,6 @@ package behavior {
 			var fName : String  init IdentifierHelper.new.getMangledIdentifier(self.name, context)
 			
 			
-			/*if not self.containedType.at(0).isVoid() and self.containedType.at(0).isInstanceOf(FunctionType) then
-				var t0 : FunctionType init self.containedType.at(0).asType(FunctionType)
-				if not t0.containedType.at(0).isVoid() and t0.containedType.at(0).isInstanceOf(ProductType) then
-					var t1 : ProductType init t0.containedType.at(0).asType(ProductType)
-					if not t1.isVoid() and t1.containedType.at(0).isInstanceOf(FunctionType) then
-						var t2 : FunctionType init t1.containedType.at(0).asType(FunctionType)
-						
-						if (not t2.isVoid()) and (t2.isInstanceOf(FunctionType)) then
-							self.staticOperation//.createBehaviorJava(context)
-						end
-					end
-				end
-			end*/
-			
-			/*var ft1 : FunctionType init self.containedType.detect{ t | t.isInstanceOf(FunctionType) }.asType(FunctionType)
-			
-			if not ft1.isVoid() then
-				result := result + "FT1 is detected"
-				var pt : ProductType init ft1.containedType.detect{ t | t.isInstanceOf(ProductType) }.asType(ProductType)
-				
-				if not pt.isVoid() then
-					result := result + "PT is detected"
-					var ft2 : FunctionType init pt.containedType.detect{ t | t.isInstanceOf(FunctionType) }.asType(FunctionType)
-					
-					if not ft2.isVoid() then
-						result := result + "FT2 is detected"
-						result := result + "CallFeature_FunctionType"
-					end
-				end
-			end*/
-			
 			//stdio.writeln("self.staticOperation: " + self.staticOperation.toString())
 			
 			var static_call : String init ""
@@ -462,68 +490,10 @@ package behavior {
 			if self.isCallFeatureAsStaticOperation() then
 			
 				if self.staticOperation.isFunctionType() then
-					context.tasks_stack.push("FunctionType_Compilation")
 					
-					//Retrieve the corresponding CallFeature for setting the name of the searched call variable
-					self.staticOperation.ownedParameter.each{ p |
-						if p.type.isInstanceOf(FunctionType) then
-							context.current_param_ft := p.name
-						end
-					}	
+					var ft_str : String init self.createStringFromFunctionType(context)
 					
-					//Lambda expression to inline
-					if self.parameters.one().isInstanceOf(LambdaExpression) then
-					
-						var theLambdaExp : LambdaExpression init self.parameters.one().asType(LambdaExpression)
-					
-						context.ftStack.push(theLambdaExp)
-						
-						if theLambdaExp.staticType.isInstanceOf(FunctionType) then
-							if theLambdaExp.staticType.asType(FunctionType).left.isInstanceOf(ProductType) then
-								context.ftProductTypeStack.push(theLambdaExp.staticType.asType(FunctionType).left.asType(ProductType))
-							end
-						end
-					end
-					
-					
-					
-					var ft_str : String init ""
-					
-					//Replacing the self
-					context.ftContextualSelf := tgt.createBehaviorJava(context)
-					
-					context.pushFtSuffix()
-					context.ftSuffixActivation := true
-					
-					var callElement : String init ""
-					if self.container.isInstanceOf(VariableDecl) then
-						callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(VariableDecl).identifier, context)
-					else
-						if self.container.isInstanceOf(CallVariable) then
-							callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(CallVariable).name, context)
-						end
-					end
-					
-					if callElement != "" or self.container.isInstanceOf(Assignment) then
-						ft_str := ft_str + "null;\n"
-					end
-					
-					ft_str := ft_str + "//Beginning of the Inlining of the function type: " + self.staticOperation.name + "\n"
-					ft_str := ft_str + self.staticOperation.createBehaviorJava(context)
-					
-					if callElement != "" then
-						ft_str := ft_str + callElement + " = result" + context.getFtSuffix() + ";\n"
-					end
-					
-					ft_str := ft_str + "//Ending of the Inlining of the function type: " + self.staticOperation.name + "\n"
-					
-					context.ftSuffixActivation := false
-					context.ftProductTypeStack.pop()
-					context.ftSuffix.pop()
-					
-					result := result + ft_str
-					
-					//stdio.writeln(result)
+					result := ft_str + result
 				
 				end
 				
@@ -556,17 +526,29 @@ package behavior {
 			
 			end
 			
-			//added
-			if self.name == "new" then
-				//added
-				result := result + "(" + tgt.createBehaviorJava(context) + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil._new(\"" + tgt.createBehaviorJava(context) + "\")"
-			//added
+			
+			if self.name == "new" and (not tgt.isInstanceOf(CallVariable)) then
+				result := result + "((" + tgt.createBehaviorJava(context) + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"" + tgt.createBehaviorJava(context) + "\"))"
 			else
 				
 				if not tgt.isVoid() then
-					result := result + tgt.createBehaviorJava(context)
-					if static_call=="" then
-						result := result + "."
+					
+					if not tgt.callsFunctionType() then
+						result := result + tgt.createBehaviorJava(context)
+						if static_call=="" then
+							result := result + "."
+						end
+					else
+						/*if tgt.callsFunctionType() and (not self.callsFunctionType) then
+							var topCallF : CallFeature init self.retrieveTopCallFeatureFunctionType()
+							stdio.writeln("topCallF: " + topCallF.name)
+							
+							result := result + topCallF.createBehaviorJava(context)
+							
+						else
+							result := result + self.container.createBehaviorJava(context)
+						end*/
+						result := tgt.createBehaviorJava(context) + result.replace(context.SELF_EXPRESSION_TO_REPLACE, context.resultOfLastFt)
 					end
 				end
 				
@@ -578,7 +560,32 @@ package behavior {
 							result := result + "getByName(\"" + self.name + "\")"
 						else
 							if self.isCallFeatureAsStaticProperty() then
-								result := result + "get" + self.name.capName() + "()"
+							
+								var cf_prop_suffix : String
+								
+								if self.staticProperty.upper != 1 then
+									var type_binding : String init self.staticType.asType(Class).typeParamBinding.one.type.createBehaviorJava(context)
+									
+									if (not self.staticProperty.isUnique) and (not self.staticProperty.isOrdered) then
+										result := "CollectionUtil.<" + type_binding + ">convertAsBag(" + result
+									end
+									
+									if (self.staticProperty.isUnique) and (not self.staticProperty.isOrdered) then
+										result := "CollectionUtil.<" + type_binding + ">convertAsSet(" + result
+									end
+									
+									if (self.staticProperty.isUnique) and (self.staticProperty.isOrdered) then
+										result := "CollectionUtil.<" + type_binding + ">convertAsOrderedSet(" + result
+									end
+									
+									if (not self.staticProperty.isUnique) and (self.staticProperty.isOrdered) then
+										result := "CollectionUtil.<" + type_binding + ">convertAsSequence(" + result
+									end
+									
+									cf_prop_suffix := ")"
+								end
+								
+								result := result + "get" + self.name.capName() + "()" + cf_prop_suffix
 							else
 								result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context)
 							end
@@ -601,7 +608,6 @@ package behavior {
 					result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
 				end
 			
-			//added
 			end
 			
 			result := result + self.endOfExpressionFixer()
@@ -623,11 +629,21 @@ package behavior {
 						
 				var str_toInclude : String init ""
 				
+				if theLambdaExp.staticType.isInstanceOf(FunctionType) then
+					var lambdaExp_returnType : String init theLambdaExp.staticType.asType(FunctionType).right.createBehaviorJava(context)
+					if not Operation.new().isVoidType(lambdaExp_returnType) then
+						//context.pushResultLastStatementStack()
+						//str_toInclude := str_toInclude + lambdaExp_returnType + " " + context.getResultLastStatementId() + "null;\n"
+					end
+				end
+				
 				var inc_param : Integer init 0
 				theLambdaExp.parameters.each{ p |
 					//str_toInclude := str_toInclude + self.parameters.elementAt(inc_param).staticType.createBehaviorJava(context) + " " + p.name
 					
+					//Declare and initialize the function type parameters
 					str_toInclude := str_toInclude + context.ftProductTypeStack.peek().type.elementAt(inc_param).createBehaviorJava(context)
+					
 					/*if theLambdaExp.staticType.isInstanceOf(FunctionType) then
 						if theLambdaExp.staticType.asType(FunctionType).left.isInstanceOf(ProductType) then
 							str_toInclude := str_toInclude + theLambdaExp.staticType.asType(FunctionType).left.asType(ProductType).type.elementAt(inc_param).createBehaviorJava(context)
@@ -648,6 +664,13 @@ package behavior {
 				result := result + "//Beginning of the Inlining of the function type parameter: " + self.name + "\n"
 				result := result + str_toInclude + theLambdaExp.body.createBehaviorJava(context)
 				result := result + "//Ending of the Inlining of the function type parameter: " + self.name + "\n"
+				
+				if theLambdaExp.staticType.isInstanceOf(FunctionType) then
+					var lambdaExp_returnType : String init theLambdaExp.staticType.asType(FunctionType).right.createBehaviorJava(context)
+					if not Operation.new().isVoidType(lambdaExp_returnType) then
+						//context.popResultLastStatementStack()
+					end
+				end
 				
 				context.ftSuffixActivation := true
 				
@@ -712,10 +735,18 @@ package behavior {
 			result := ""
 			
 			var localType : String init self.type.createBehaviorJava(context)
-			result := result + localType + " " + IdentifierHelper.new.getMangledIdentifier(self.identifier, context) + context.getFtSuffix()
+			var var_id : String init IdentifierHelper.new.getMangledIdentifier(self.identifier, context) + context.getFtSuffix()
+			
+			result := result + localType + " " + var_id
 			
 			if not self.initialization.isVoid() then
-				result := result + " = " + self.initialization.createBehaviorJava(context)
+				if self.initialization.isInstanceOf(Conditional) then
+					context.resultLastStatementStack.push(var_id + " = ")
+					result := result + " = null;\n" + self.initialization.createBehaviorJava(context)
+					context.resultLastStatementStack.pop()
+				else
+					result := result + " = " + self.initialization.createBehaviorJava(context)
+				end
 			else
 				result := result + " = null;"
 			end
@@ -729,7 +760,16 @@ package behavior {
 			super(context)
 			
 			result := ""
+			
 			var left : String init self.target.createBehaviorJava(context)
+			
+			var ppCast : String init ""
+			if self.isCast() then
+				ppCast := "(" + self.staticType.createBehaviorJava(context) + ") "
+			end
+			
+			context.resultLastStatementStack.push(left + " = " + ppCast)
+			
 			var right : String init self.~value.createBehaviorJava(context)
 		
 			// Patch that adds the 'function' keyword in case the assigned value is a function
@@ -737,10 +777,7 @@ package behavior {
 				right := "function " + right
 			end
 			
-			var ppCast : String init ""
-			if self.isCast() then
-				ppCast := "(" + self.staticType.createBehaviorJava(context) + ") "
-			end
+			
 			
 			if self.target.isCallFeatureAsStaticProperty() then
 					
@@ -760,9 +797,16 @@ package behavior {
 				end
 
 			else
-				result := left + " = " + ppCast + right
+				//stdio.writeln("ttttttttt")
+				//result := right.replace(context.leftAssign, left + " = " + ppCast)
+				
+				if self.~value.isInstanceOf(Conditional) then
+					result := right
+				else
+					result := left + " = " + ppCast + right
+				end
 			end
-			
+			context.resultLastStatementStack.pop()
 		end
 	}
 	
@@ -774,13 +818,6 @@ package behavior {
 	}
 	
 	aspect class LambdaParameter {
-		method createBehaviorJava(context : KM2EcoreContext) : String is do
-			super(context)
-			result := ""
-		end
-	}
-	
-	aspect class FunctionType {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			super(context)
 			result := ""
@@ -877,19 +914,29 @@ package behavior {
 			
 			context.pushCondStack()
 			
-			result := "java.lang.Boolean eval_" + context.condStack.peek() + " = false;"
+			result := "java.lang.Boolean " + context.getIfConditionId() + " = false;"
 			
 			var str_condition : String init ""
 			
 			if context.getFtSuffix()=="" then
-				str_condition := str_condition + "\n\teval_" + context.condStack.peek() + " = " + self.condition.createBehaviorJava(context)
+				str_condition := str_condition + "\n\t" + context.getIfConditionId() + " = " + self.condition.createBehaviorJava(context)
 			else
 				if self.condition.isInstanceOf(CallVariable) then
+		
 					var ftParam : Parameter init self.getContainerAsType(Operation).asType(Operation).ownedParameter.detect{ p | p.name == self.condition.asType(CallVariable).name }
 					if not ftParam.isVoid() then
+					
 						if ftParam.isBooleanFunctionType(context) then
-							context.lastStatement_boolean := "eval_" + context.condStack.peek() + " = "
+							//context.lastStatementStack.push(context.getIfConditionId() + " = ")
+							
+							context.resultLastStatementStack.push(context.getIfConditionId() + " = ")
+							
 							str_condition := str_condition + "\n" + self.condition.createBehaviorJava(context)
+							
+							//var resultOfFt : String init context.resultLastStatementStack.pop().replace(" = ", "") + ";"
+							
+							/*str_condition := str_condition + */context.resultLastStatementStack.pop()/* + resultOfFt*/
+							
 						end
 					end
 				end				
@@ -897,15 +944,36 @@ package behavior {
 			
 			result := result + str_condition
 			
-			result := result + "\n\n\tif( eval_" + context.condStack.pop() + " ) "
+			/*if not Operation.new().isVoidType(self.staticType.getTypeName()) then
+				context.pushResultLastStatementStack()
+				result := result + "\n" + self.staticType.createBehaviorJava(context) + " " + context.getResultLastStatementId() + " = null;" 
+			end*/
+			
+			result := result + "\n\n\tif( " + context.getIfConditionId() + " ) "
 			
 			if not self.thenBody.isVoid() then 
+				
+				/*if not Operation.new().isVoidType(self.staticType.getTypeName()) then
+					context.lastStatementStack.push(context.getResultLastStatementId() + " = ")
+				end*/
+				
 				result := result + self.thenBody.createBehaviorJava(context) + "\n"
 			end
 			if not self.elseBody.isVoid() then
 				result := result + " else "
+				
+				/*if not Operation.new().isVoidType(self.staticType.getTypeName()) then
+					context.lastStatementStack.push(context.getResultLastStatementId() + " = ")
+				end*/
+				
 				result := result + self.elseBody.createBehaviorJava(context) + "\n"
 			end
+			
+			/*if not Operation.new().isVoidType(self.staticType.getTypeName()) then
+				context.resultLastStatementStack().pop()
+			end*/
+			
+			context.condStack.pop()
 			
 		end
 	}
@@ -924,10 +992,11 @@ package behavior {
 				result := result + "\n\t" + self.initialization.createBehaviorJava(context)
 			end
 			
-			result := result + "\n\tjava.lang.Boolean eval_" + context.condStack.peek() + " = false;"
-			result := result + "\n\twhile( !eval_" + context.condStack.peek() + " ) {"
-			result := result + "\n\teval_" + context.condStack.peek() + " = " + self.stopCondition.createBehaviorJava(context) + ";"
-			result := result + "\n\tif ( eval_" + context.condStack.pop() + " ) {"
+			result := result + "\n\tjava.lang.Boolean " + context.getLoopConditionId() + " = false;"
+			result := result + "\n\twhile( !" + context.getLoopConditionId() + " ) {"
+			result := result + "\n\t" + context.getLoopConditionId() + " = " + self.stopCondition.createBehaviorJava(context) + ";"
+			result := result + "\n\tif ( " + context.getLoopConditionId() + " ) {"
+			context.condStack.pop()
 			result := result + "\n\t} else "
 			result := result + self.body.createBehaviorJava(context)
 			

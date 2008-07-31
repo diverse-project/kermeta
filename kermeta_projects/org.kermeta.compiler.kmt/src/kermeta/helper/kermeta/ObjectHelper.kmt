@@ -1,4 +1,4 @@
-/* $Id: ObjectHelper.kmt,v 1.9 2008-07-29 09:59:53 cfaucher Exp $
+/* $Id: ObjectHelper.kmt,v 1.10 2008-07-31 08:15:03 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -10,8 +10,9 @@ package kermeta::language::structure;
 
 require kermeta
 
-require "ClassHelper.kmt"
+require "KermetaHelper.kmt"
 
+using kermeta::language::behavior
 using kermeta::standard
 
 aspect class Object {
@@ -40,6 +41,27 @@ aspect class Object {
             	result := obj.container
 			end
         end
+	end
+	
+	operation callsFunctionType() : Boolean is do
+		result := false
+		
+		if self.isInstanceOf(CallFeature) then
+			if self.asType(CallFeature).isCallFeatureAsStaticOperation() then
+				if self.asType(CallFeature).staticOperation.isFunctionType() then
+					result := true
+				end
+			end
+		end
+	end
+	
+	operation mustBeAssigned() : Boolean is do
+		result := false
+		/*
+		if self.isInstanceOf(Expression) then
+			result := self.asType(Expression).mustBeAssigned()
+		end*/
+		
 	end
 	
 	/** Never used for the moment */

@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.9 2008-07-22 07:36:22 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.10 2008-07-31 08:15:03 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -107,6 +107,10 @@ class CompilerHelperJava {
 			
 			if (not context.current_valueType.isVoid()) and (tmp == "this") then
 				tmp := "self"
+			end
+			
+			if (e.staticType.getTypeQName == "kermeta::language::structure::Class") or (e.staticType.getTypeQName == "kermeta::language::structure::Type") then
+				tmp := "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"" + tmp + "\")"
 			end
 			
 			result := result + tmp
