@@ -20,6 +20,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.merger
 Eclipse-LazyStart: true
 Export-Package: fr.irisa.triskell.kermeta.kpm,
+ fr.irisa.triskell.kermeta.kpm.impl,
  fr.irisa.triskell.kermeta.kpm.util,
- org.kermeta.kpm
+ fr.irisa.triskell.kermeta.kpm.validation,
+ org.kermeta.kpm,
+ org.kermeta.kpm.internal,
+ org.kermeta.kpm.internal.builder
 Bundle-Activator: org.kermeta.kpm.KPMPlugin
