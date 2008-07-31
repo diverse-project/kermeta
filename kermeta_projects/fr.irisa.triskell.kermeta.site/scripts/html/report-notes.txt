@@ -1,0 +1,1 @@
+<p> These are development statistics for the <a href="http://www.kermeta.org/">Kermeta</a> project, created by StatCVS</p> 
