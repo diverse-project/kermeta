@@ -12,11 +12,15 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 public class ObjectUtil {
 
-	static public Object container(Object o) {
+	static public kermeta.language.structure.Object container(kermeta.language.structure.Object o) {
 		return o.getContainer();
 	}
 	
-	static public Object get(Object o, Property p) {
+	static public java.lang.Boolean isInstanceOf(kermeta.language.structure.Object o, String type) {
+		return type.contains(o.getClass().getName());
+	}
+	
+	static public kermeta.language.structure.Object get(kermeta.language.structure.Object o, Property p) {
 		EStructuralFeature feature = o.eClass().getEStructuralFeature( p.getName() );
 		if ( feature.isMany() ) {
 			EList value = (EList) o.eGet(feature);
@@ -38,30 +42,42 @@ public class ObjectUtil {
 			return c;
 
 		}
-		return (Object) o.eGet(feature);
+		return (kermeta.language.structure.Object) o.eGet(feature);
 	}
 	
-	static public void set(Object o, Property p, Object element) {
+	static public void set(kermeta.language.structure.Object o, Property p, kermeta.language.structure.Object element) {
 		EStructuralFeature feature = o.eClass().getEStructuralFeature( p.getName() );
 		o.eSet(feature, element);
 	}
 	
-	static public boolean isSet(Object o, Property p) {
+	static public java.lang.Boolean isSet(kermeta.language.structure.Object o, Property p) {
 		EStructuralFeature feature = o.eClass().getEStructuralFeature( p.getName() );
 		return o.eIsSet(feature);
 	}
 	
-	static public void unset(Object o, Property p) {
+	static public void unset(kermeta.language.structure.Object o, Property p) {
 		EStructuralFeature feature = o.eClass().getEStructuralFeature( p.getName() );
 		o.eUnset(feature);
 	}
 	
-	static public int getOID(Object o) {
-		return o.getOid();
+	static public java.lang.Integer getOID(kermeta.language.structure.Object o) {
+		return o.oid();
 	}
 	
-	static public int hashcode(Object o) {
+	static public java.lang.Integer hashcode(kermeta.language.structure.Object o) {
 		// return the java one.
 		return o.hashCode();
+	}
+	
+	static public kermeta.language.structure.Object convertFromJavaString(java.lang.String o) {
+		return null;
+	}
+	
+	static public kermeta.language.structure.Object convertFromJavaInteger(java.lang.Integer o) {
+		return null;
+	}
+	
+	static public kermeta.language.structure.Object convertFromJavaBoolean(java.lang.Boolean o) {
+		return null;
 	}
 }

@@ -41,6 +41,11 @@ public class RealUtil {
 	public static java.lang.String toString(java.lang.Double self) {
 		return self.toString();
 	}
+	
+	/** Java version */
+	public static java.lang.Boolean isNotEqual(java.lang.Double self, java.lang.Double param0) {
+		return !self.equals(param0);
+	}
 
 }
 /* END OF FILE */

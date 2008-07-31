@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class ClassUtil {
 
-	static public Object _new( String class_QN ) {
+	static public Object newObject( String class_QN ) {
 		
 		String[] seq_class_QN = class_QN.replace(".", "%").split("%");
 		

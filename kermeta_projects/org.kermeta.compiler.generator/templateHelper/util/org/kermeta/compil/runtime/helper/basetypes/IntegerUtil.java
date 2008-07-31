@@ -66,6 +66,11 @@ public class IntegerUtil {
 	public static java.lang.String toString(java.lang.Integer self) {
 		return self.toString();
 	}
+	
+	/** Java version */
+	public static java.lang.Boolean isNotEqual(java.lang.Integer self, java.lang.Integer param0) {
+		return !self.equals(param0);
+	}
 
 }
 /* END OF FILE */
