@@ -1,14 +1,14 @@
-/* $Id: 024_testResultPass.main.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $
+/* $Id: 024_testResultPass.main.kmt,v 1.2 2008-07-31 16:11:45 dvojtise Exp $
  * Creation date: January 23, 2007
  * License:
  * Copyright:
  * Authors:
  */
-@mainClass "root_package::Main"
+@mainClass "resultPass::Main"
 @mainOperation "main"
 
 
-package root_package;
+package resultPass;
 
 
 require kermeta

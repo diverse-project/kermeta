@@ -1,8 +1,9 @@
-@mainClass "root_package::Main"
+// $Id: 029_testUsedRequire_PreFailed_catched.main.kmt,v 1.2 2008-07-31 16:11:45 dvojtise Exp $
+@mainClass "usedRequire::PreFailed_catched"
 @mainOperation "main"
 
 
-package root_package;
+package usedRequire;
 
 
 require kermeta
@@ -11,12 +12,12 @@ using kermeta::standard
 using kermeta::exceptions
 using kermeta::kunit
 
-class Main inherits TestCase
+class PreFailed_catched inherits TestCase
 {	
 
 	operation main() : Void is do
     	var tr : TestRunner init TestRunner.new
-		tr.run(Main)
+		tr.run(PreFailed_catched)
 		tr.printTestResult 
     end	
 

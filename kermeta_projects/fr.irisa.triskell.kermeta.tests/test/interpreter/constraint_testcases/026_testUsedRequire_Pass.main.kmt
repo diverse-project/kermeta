@@ -1,8 +1,9 @@
-@mainClass "root_package::Main"
+// $Id: 026_testUsedRequire_Pass.main.kmt,v 1.2 2008-07-31 16:11:48 dvojtise Exp $
+@mainClass "usedRequire::Pass"
 @mainOperation "main"
 
 
-package root_package;
+package usedRequire;
 
 
 require kermeta
@@ -11,12 +12,12 @@ using kermeta::standard
 using kermeta::kunit
 using kermeta::exceptions
 
-class Main inherits TestCase
+class Pass inherits TestCase
 {	
 
 	operation main() : Void is do
     	var tr : TestRunner init TestRunner.new
-		tr.run(Main)
+		tr.run(Pass)
 		tr.printTestResult 
     end		
 

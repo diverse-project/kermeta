@@ -1,14 +1,14 @@
-/* $Id: 034_atpre_feature_complex_test.main.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $
+/* $Id: 034_atpre_feature_complex_test.main.kmt,v 1.2 2008-07-31 16:11:44 dvojtise Exp $
  * Creation date: June 22, 2007
  * License:
  * Copyright:
  * Authors:
  */
-@mainClass "root_package::Main"
+@mainClass "atpre_feature_complex_test::Main"
 @mainOperation "main"
 
 
-package root_package;
+package atpre_feature_complex_test;
 
 
 require kermeta

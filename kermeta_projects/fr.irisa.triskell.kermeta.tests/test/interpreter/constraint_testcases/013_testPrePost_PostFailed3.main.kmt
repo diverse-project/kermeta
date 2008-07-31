@@ -1,8 +1,9 @@
-@mainClass "root_package::Main"
+// $Id: 013_testPrePost_PostFailed3.main.kmt,v 1.3 2008-07-31 16:11:44 dvojtise Exp $
+@mainClass "prepost_PostFailed3::Main"
 @mainOperation "main"
 
 
-package root_package;
+package prepost_PostFailed3;
 
 require kermeta
 

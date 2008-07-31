@@ -1,8 +1,8 @@
-@mainClass "root_package::Main"
+@mainClass "inv_fail_inherited2_catched::Main"
 @mainOperation "main"
 
 
-package root_package;
+package inv_fail_inherited2_catched;
 
 require kermeta
 

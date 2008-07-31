@@ -1,9 +1,7 @@
-//@mainClass "root_package::MainToBeRequired"
-//@mainOperation "mainToBeRequired"
+// $Id: toBeRequired.kmt,v 1.2 2008-07-31 16:11:44 dvojtise Exp $
 
 
-
-package root_package;
+package usedRequire;
 require kermeta
 using kermeta::standard
 

@@ -1,14 +1,14 @@
-/* $Id: 006_testParamPostFailed.main.kmt,v 1.2 2007-09-14 13:40:30 ftanguy Exp $
+/* $Id: 006_testParamPostFailed.main.kmt,v 1.3 2008-07-31 16:11:45 dvojtise Exp $
  * Creation date: January 23, 2007
  * License:
  * Copyright:
  * Authors:
  */
-@mainClass "root_package::Main"
+@mainClass "paramPostFailed::Main"
 @mainOperation "main"
 
 
-package root_package;
+package paramPostFailed;
 
 
 require kermeta

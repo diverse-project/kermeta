@@ -1,8 +1,8 @@
-@mainClass "root_package::Main"
+@mainClass "inv_redefinition_is_in_fact_union_fail_partly_catched::Main"
 @mainOperation "main"
 
 
-package root_package;
+package inv_redefinition_is_in_fact_union_fail_partly_catched;
 
 require kermeta
 
