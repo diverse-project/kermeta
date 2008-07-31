@@ -1,4 +1,4 @@
-<%@ jet package="org.eclipse.emf.codegen.ecore.templates.model" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.*" class="ManifestMF" version="$Id: manifest.mfjet,v 1.4 2008-07-23 13:03:59 cfaucher Exp $" %>
+<%@ jet package="org.eclipse.emf.codegen.ecore.templates.model" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.*" class="ManifestMF" version="$Id: manifest.mfjet,v 1.5 2008-07-31 07:07:59 cfaucher Exp $" %>
 <%
 /**
  * <copyright>
@@ -40,8 +40,10 @@ Export-Package: <%=pack%><%while(packagesIterator.hasNext()) { pack = packagesIt
 Require-Bundle: <%=pluginID%><%if (!pluginID.startsWith("org.eclipse.core.runtime")){%>;visibility:=reexport<%} while(requiredPluginIterator.hasNext()) { pluginID = requiredPluginIterator.next();%>,
  <%=pluginID%><%if (!pluginID.startsWith("org.eclipse.core.runtime")){%>;visibility:=reexport<%}}%>
 <%}%>,
- org.kermeta.compil.runtime.helper;visibility:=reexport,
- org.eclipse.emf.codegen;visibility:=reexport
+ org.kermeta.compiler.runtime.configuration;visibility:=reexport,
+ org.kermeta.compiler.common;visibility:=reexport,
+ org.eclipse.emf.codegen;visibility:=reexport,
+ fr.irisa.triskell.eclipse.util;visibility:=reexport
 <%if (genModel.getRuntimeVersion() == GenRuntimeVersion.EMF22 || genModel.getRuntimeVersion() == GenRuntimeVersion.EMF23) {%>
 Eclipse-LazyStart: true
 <%}%>
