@@ -1,4 +1,4 @@
-<!-- $Id: statcvs_build.xml,v 1.1 2008-07-31 14:56:37 dvojtise Exp $ -->
+<!-- $Id: statcvs_build.xml,v 1.2 2008-07-31 16:17:27 dvojtise Exp $ -->
 <project name="Build StatCVS" default="all" basedir=".">
 	<description>
        
@@ -6,7 +6,7 @@
 	
 	<property name="statcvs.jar" location="/udd/triskell/bin/multiplatform/statcvs-0.4.0/statcvs.jar"/>
 	<property name="notes.txt" location="/tmp/kermeta_build/src/fr.irisa.triskell.kermeta.site/scripts/html/report-notes.txt"/>
-	<property name="cvs.log" location="logfile.log"/>
+	<property name="cvs.log" location="/tmp/kermeta_build/statcvs/logfile.log"/>
 	<property name="output.dir" location="statcvs"/>
         
 	
