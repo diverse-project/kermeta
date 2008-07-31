@@ -1,4 +1,4 @@
-/* $Id: 053_savingKM_2.main.kmt,v 1.4 2008-07-30 16:08:12 dvojtise Exp $
+/* $Id: 053_savingKM_2.main.kmt,v 1.5 2008-07-31 07:10:33 dvojtise Exp $
  * Creation date: June 14, 2006
  * License:
  * Copyright:
@@ -98,14 +98,15 @@ class Main inherits kermeta::kunit::TestCase
         var repository : EMFRepository init EMFRepository.new
         var resFramework : kermeta::persistence::EMFResource
 		
-        resFramework ?= repository.getResource("../instances/053_input_definition.km")
+        resFramework ?= repository.getResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/053_input_definition.km")
 		// find Boolean in the resource
 		var booleanTypeDef : kermeta::language::structure::GenericTypeDefinition 
 		var mainModelingUnit : kermeta::language::structure::ModelingUnit 
 		mainModelingUnit ?= resFramework.detect{ m | m.isInstanceOf(kermeta::language::structure::ModelingUnit)}
+		assertTrueWithMsg(not mainModelingUnit.isVoid,"Failed to retrieve ModelingUnit in 053_input_definition.km")
 		
-		booleanTypeDef ?= mainModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")
-		assertTrueWithMsg(not booleanTypeDef.isVoid,"Failed to retrieve Boolean in framework.km")
+		booleanTypeDef ?= mainModelingUnit.getTypeDefinitionByQualifiedName("input_definition::InputDef")
+		assertTrueWithMsg(not booleanTypeDef.isVoid,"Failed to retrieve input_definition::InputDef in 053_input_definition.km")
 		stdio.writeln(booleanTypeDef.qualifiedName())
         
         sclass.typeDefinition := booleanTypeDef        
