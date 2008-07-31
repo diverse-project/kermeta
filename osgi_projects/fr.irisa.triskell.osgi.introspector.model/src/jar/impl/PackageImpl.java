@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: PackageImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
  */
 package jar.impl;
 
@@ -377,7 +377,45 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 	}
 
 	public void addPackage(Package _package) {
-		boolean exist = false;
+		
+		if (_package.getFullPath().contains(this.getFullPath())) {
+			String[] packagesClazz = _package.getFullPath().split("\\.");
+			String[] packages = this.getFullPath().split("\\.");
+			int nextPackage;
+			if (packages[packages.length - 1] == "") {
+				nextPackage = packages.length - 1;
+			} else {
+				nextPackage = packages.length;
+			}
+			if (nextPackage == packagesClazz.length - 1) {
+				getSubPackages().add(_package);
+			} else {
+				String _packageName = packagesClazz[nextPackage];
+				boolean exist = false;
+				Iterator<Package> packagesIterator = getSubPackages()
+						.iterator();
+				while (!exist && packagesIterator.hasNext()) {
+					Package p = packagesIterator.next();
+					if (p.getFullPath().equals(
+							getFullPath() + "." + _packageName)) {
+						p.addPackage(_package);
+						exist = true;
+					}
+				}
+				if (!exist) {
+					Package p = JarFactory.eINSTANCE.createPackage();
+					p.setFullPath(this.getFullPath() + "." + _packageName);
+					p.setName(_packageName);
+					p.setBundleClassPath(isBundleClassPath());
+					getSubPackages().add(p);
+					p.addPackage(_package);
+				}
+			}
+		}
+		
+		
+		// TODO peut-être à améliorer
+		/*boolean exist = false;
 		for (Package _packagetmp : getSubPackages()) {
 			if (_packagetmp.getName().equals(_package)) {
 				exist = true;
@@ -386,7 +424,7 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 		}
 		if (!exist) {
 			getSubPackages().add(_package);
-		}
+		}*/
 
 	}
 

@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionFactoryImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: OptionFactoryImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
  */
 package option.impl;
 
-import option.*;
 import option.AttributEntry;
 import option.ExcludeClasses;
 import option.ExcludePackages;

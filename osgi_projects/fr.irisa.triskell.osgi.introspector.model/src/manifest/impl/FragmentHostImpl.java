@@ -2,24 +2,22 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FragmentHostImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: FragmentHostImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
  */
 package manifest.impl;
 
-import framework.Bundle;
-import java.util.Collection;
 import manifest.FragmentHost;
 import manifest.ManifestPackage;
 import option.FragmentHostDirective;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.osgi.framework.Constants;
+
+import framework.Bundle;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Fragment Host</b></em>'.

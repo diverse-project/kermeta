@@ -2,8 +2,8 @@
 
 package fr.irisa.osgi.manifest.parser.parser;
 
+import fr.irisa.osgi.manifest.parser.analysis.AnalysisAdapter;
 import fr.irisa.osgi.manifest.parser.node.*;
-import fr.irisa.osgi.manifest.parser.analysis.*;
 
 class TokenIndex extends AnalysisAdapter {
 	int index;

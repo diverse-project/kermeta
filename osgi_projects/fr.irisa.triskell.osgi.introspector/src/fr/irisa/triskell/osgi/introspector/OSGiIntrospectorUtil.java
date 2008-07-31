@@ -3,6 +3,8 @@ package fr.irisa.triskell.osgi.introspector;
 import jar.File;
 import jar.Folder;
 import jar.JarFactory;
+import jar.Package;
+import jar.SystemEntry;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,18 +16,26 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipFile;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.osgi.framework.BundleContext;
 
 import framework.Bundle;
+import framework.Framework;
+import framework.FrameworkFactory;
 
 public class OSGiIntrospectorUtil {
 
@@ -42,7 +52,7 @@ public class OSGiIntrospectorUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	static java.io.File removeEOLBlank(java.io.File manifestFileTmp)
+	public static java.io.File removeEOLBlank(java.io.File manifestFileTmp)
 			throws IOException {
 		java.io.File manifestFile = java.io.File.createTempFile("manifest",
 				".mf");
@@ -93,7 +103,7 @@ public class OSGiIntrospectorUtil {
 	 * @param file
 	 * @throws IOException
 	 */
-	static void addEntriesFromJar(Bundle bundle, File file) throws IOException {
+	public static void addEntriesFromJar(Bundle bundle, File file) throws IOException {
 		java.io.File ioFile = new java.io.File(bundle.getLocation()/*
 																	 * +
 																	 * java.io.File.separator +
@@ -141,14 +151,14 @@ public class OSGiIntrospectorUtil {
 	 * @param bundle
 	 * @param isBundleCLassPath
 	 */
-	static void listAllEntriesIntoJarFile(JarFile jar, Bundle bundle) {
+	public static void listAllEntriesIntoJarFile(JarFile jar, Bundle bundle) {
 		JarFactory jarFactory = JarFactory.eINSTANCE;
 		Enumeration<JarEntry> jarEntries = jar.entries();
 		Folder rootFolder = bundle.getFolder();
 		while (jarEntries.hasMoreElements()) {
 			JarEntry jarEntry = jarEntries.nextElement();
 			// If the entry define the MANIFEST file, I do nothing
-			if (!jarEntry.getName().equals("META-INF/MANIFEST.MF")) {
+			// TODO peut-être gérer quand même le manifest
 				if (jarEntry.getName().endsWith("/")) {
 					Folder entry = jarFactory.createFolder();
 					entry.setFullPath(jarEntry.getName());
@@ -162,11 +172,10 @@ public class OSGiIntrospectorUtil {
 					entry.setName(folders[folders.length - 1]);
 					rootFolder.addEntry(entry);
 				}
-			}
 		}
 	}
 
-	static String getFileLocation(org.osgi.framework.Bundle b) {
+	/*public static String getFileLocation(org.osgi.framework.Bundle b) {
 		String location = b.getLocation();
 		context.getProperty("");
 		int index = location.indexOf("file:");
@@ -186,7 +195,7 @@ public class OSGiIntrospectorUtil {
 		} catch (MalformedURLException e) {
 			return null;
 		}
-	}
+	}*/
 
 	public static void log(Level level, String message) {
 		if (logger == null) {
@@ -210,5 +219,57 @@ public class OSGiIntrospectorUtil {
 
 	public static void setLogger(Logger logger) {
 		OSGiIntrospectorUtil.logger = logger;
+	}
+	
+	/**
+	 * This function is used to generate the XMI file which represent an OSGi
+	 * framework.
+	 * 
+	 * @param XMIFilePathToSave
+	 *            the path of the XMI file which will create
+	 * @return true if the generation is ok, false else
+	 */
+	public static boolean saveModel(String XMIFilePathToSave, Framework framework) {
+		java.io.File XMIFile = new java.io.File(XMIFilePathToSave);
+
+		// Create a resource set.
+		ResourceSet resourceSet = new ResourceSetImpl();
+
+		// Register the default resource factory -- only needed for stand-alone!
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
+						new XMIResourceFactoryImpl());
+
+		// Get the URI of the model file.
+		URI fileURI = URI.createFileURI(XMIFile.getAbsolutePath());
+
+		// Create a resource for this file.
+		Resource resource = resourceSet.createResource(fileURI);
+
+		// Add the book and writer objects to the contents.
+		resource.getContents().add(framework);
+		// resource.getContents().add(writer);
+
+		// Save the contents of the resource to the file system.
+		try {
+			resource.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			e.printStackTrace();
+			// TODO utilisation du log
+			return false;
+		}
+		OSGiIntrospectorUtil.log(Level.INFO, "Introspection saved into "
+				+ XMIFilePathToSave);
+		return true;
+	}
+
+	public static void displayLog(Map<Bundle, String> log) {
+		// TODO log
+		for (Bundle bundle : log.keySet()) {
+			if (!log.get(bundle).equals("")) {
+				System.err.println(bundle.getLocation());
+				System.err.println(log.get(bundle));
+			}
+		}
 	}
 }

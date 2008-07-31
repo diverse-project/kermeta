@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkAdapterFactory.java,v 1.1 2008-07-30 14:08:04 edaubert Exp $
+ * $Id: FrameworkAdapterFactory.java,v 1.2 2008-07-31 12:23:17 edaubert Exp $
  */
 package framework.util;
 
-import framework.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;

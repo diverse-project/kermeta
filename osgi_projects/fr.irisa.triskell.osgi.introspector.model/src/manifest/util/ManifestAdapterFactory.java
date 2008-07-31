@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestAdapterFactory.java,v 1.1 2008-07-30 14:08:03 edaubert Exp $
+ * $Id: ManifestAdapterFactory.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
  */
 package manifest.util;
 
-import manifest.*;
 import manifest.BundleActivationPolicy;
 import manifest.BundleActivator;
 import manifest.BundleCategory;

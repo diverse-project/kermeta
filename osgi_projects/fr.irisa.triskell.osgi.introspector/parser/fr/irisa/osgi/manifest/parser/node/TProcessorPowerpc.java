@@ -2,7 +2,7 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.*;
+import fr.irisa.osgi.manifest.parser.analysis.Analysis;
 
 @SuppressWarnings("nls")
 public final class TProcessorPowerpc extends Token {

@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionAdapterFactory.java,v 1.1 2008-07-30 14:08:05 edaubert Exp $
+ * $Id: OptionAdapterFactory.java,v 1.2 2008-07-31 12:23:17 edaubert Exp $
  */
 package option.util;
 
-import option.*;
 import option.ActivationPolicyDirective;
 import option.AttributEntry;
 import option.DirectiveEntry;

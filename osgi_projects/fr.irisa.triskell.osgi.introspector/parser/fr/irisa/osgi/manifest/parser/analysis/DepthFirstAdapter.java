@@ -2,7 +2,9 @@
 
 package fr.irisa.osgi.manifest.parser.analysis;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.irisa.osgi.manifest.parser.node.*;
 
 public class DepthFirstAdapter extends AnalysisAdapter {

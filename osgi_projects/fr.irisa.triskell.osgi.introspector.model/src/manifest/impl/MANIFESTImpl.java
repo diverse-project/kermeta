@@ -2,13 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MANIFESTImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: MANIFESTImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
  */
 package manifest.impl;
 
 import jar.File;
-import jar.SystemEntry;
 import jar.Package;
+import jar.SystemEntry;
 
 import java.util.Collection;
 import java.util.Iterator;

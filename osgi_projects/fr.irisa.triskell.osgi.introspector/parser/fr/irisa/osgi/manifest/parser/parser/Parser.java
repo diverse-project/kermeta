@@ -2,14 +2,19 @@
 
 package fr.irisa.osgi.manifest.parser.parser;
 
-import fr.irisa.osgi.manifest.parser.lexer.*;
-import fr.irisa.osgi.manifest.parser.node.*;
-import fr.irisa.osgi.manifest.parser.analysis.*;
-import java.util.*;
-
-import java.io.DataInputStream;
 import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+
+import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.AnalysisAdapter;
+import fr.irisa.osgi.manifest.parser.lexer.Lexer;
+import fr.irisa.osgi.manifest.parser.lexer.LexerException;
+import fr.irisa.osgi.manifest.parser.node.*;
 
 @SuppressWarnings("nls")
 public class Parser {

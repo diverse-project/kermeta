@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestFactoryImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: ManifestFactoryImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
  */
 package manifest.impl;
 
 import java.net.URL;
 
-import manifest.*;
 import manifest.BundleActivationPolicy;
 import manifest.BundleActivator;
 import manifest.BundleCategory;

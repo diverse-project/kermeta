@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkSwitch.java,v 1.1 2008-07-30 14:08:04 edaubert Exp $
+ * $Id: FrameworkSwitch.java,v 1.2 2008-07-31 12:23:17 edaubert Exp $
  */
 package framework.util;
 
-import framework.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;

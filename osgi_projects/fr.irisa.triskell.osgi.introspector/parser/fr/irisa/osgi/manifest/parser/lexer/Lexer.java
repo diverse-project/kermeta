@@ -2,7 +2,11 @@
 
 package fr.irisa.osgi.manifest.parser.lexer;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.PushbackReader;
+
 import fr.irisa.osgi.manifest.parser.node.*;
 
 @SuppressWarnings("nls")

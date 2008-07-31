@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FragmentHost.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: FragmentHost.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
  */
 package manifest;
 
-import framework.Bundle;
 import option.FragmentHostDirective;
-import org.eclipse.emf.common.util.EList;
+import framework.Bundle;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Fragment Host</b></em>'.

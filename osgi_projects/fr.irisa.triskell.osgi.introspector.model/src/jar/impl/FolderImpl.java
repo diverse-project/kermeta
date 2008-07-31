@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FolderImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: FolderImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
  */
 package jar.impl;
 
@@ -153,9 +153,55 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 	}
 
 	public void addEntry(SystemEntry entry) {
-
-		Folder currentFolder = this;
+		if (entry.getFullPath().contains(this.getFullPath())) {
+			String[] packagesClazz = entry.getFullPath().split("/");
+			String[] packages = this.getFullPath().split("/");
+			int nextPackage;
+			if (packages[packages.length - 1] == "") {
+				nextPackage = packages.length - 1;
+			} else {
+				nextPackage = packages.length;
+			}
+			if (nextPackage == packagesClazz.length - 1) {
+				boolean exist = false;
+				for (SystemEntry entryTmp : getEntries()) {
+					if (entryTmp.getFullPath().equals(entry.getFullPath())) {
+						exist = true;
+						break;
+					}
+				}
+				if (!exist) {
+					getEntries().add(entry);
+				}
+			} else {
+				String _packageName = packagesClazz[nextPackage];
+				boolean exist = false;
+				Iterator<SystemEntry> packagesIterator = getEntries().iterator();
+				while (!exist && packagesIterator.hasNext()) {
+					SystemEntry p = packagesIterator.next();
+					if (p instanceof Folder && p.getFullPath().equals(
+							getFullPath() + _packageName + "/")) {
+						((Folder)p).addEntry(entry);
+						exist = true;
+					}
+				}
+				if (!exist) {
+					Folder p = JarFactory.eINSTANCE.createFolder();
+					p.setFullPath(this.getFullPath() + _packageName + "/");
+					p.setName(_packageName);
+					getEntries().add(p);
+					p.addEntry(entry);
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		/*Folder currentFolder = this;
 		String[] folders = entry.getFullPath().split("/");
+		
 		for (int i = 0; i < folders.length; i++) {
 			boolean exist = false;
 			Iterator<SystemEntry> folderIterator = currentFolder.getEntries()
@@ -198,13 +244,14 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 					currentFolder = (Folder) systemEntry;
 				}
 			}
-		}
+		}*/
 	}
 
 	public SystemEntry getEntry(String fullPath) {
 		if (fullPath.startsWith("./")) {
-			// TODO
-		} else if (fullPath.contains(this.getFullPath())) {
+			fullPath = fullPath.replaceFirst("./", "");
+		} 
+		if (fullPath.contains(this.getFullPath())) {
 			String[] packagesElement = fullPath.split("/");
 			String[] foldersNames = this.getFullPath().split("/");
 			int nextFolder;

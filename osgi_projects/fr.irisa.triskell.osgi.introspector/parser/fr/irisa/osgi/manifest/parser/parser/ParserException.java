@@ -2,7 +2,7 @@
 
 package fr.irisa.osgi.manifest.parser.parser;
 
-import fr.irisa.osgi.manifest.parser.node.*;
+import fr.irisa.osgi.manifest.parser.node.Token;
 
 @SuppressWarnings("serial")
 public class ParserException extends Exception {

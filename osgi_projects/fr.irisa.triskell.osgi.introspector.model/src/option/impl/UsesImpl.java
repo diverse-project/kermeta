@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UsesImpl.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: UsesImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
  */
 package option.impl;
 
@@ -14,7 +14,6 @@ import option.Uses;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.osgi.framework.Constants;
 
 /**

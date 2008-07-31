@@ -1,4 +1,4 @@
-package fr.irisa.triskell.osgi.introspector;
+package fr.irisa.triskell.osgi.introspector.generator;
 
 import jar.Class;
 import jar.File;
@@ -76,6 +76,7 @@ import option.Visibility;
 import option.VisibilityEnum;
 import fr.irisa.osgi.manifest.parser.analysis.Analysis;
 import fr.irisa.osgi.manifest.parser.node.*;
+import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
 import framework.Bundle;
 
 public class Translation /* extends DepthFirstAdapter */implements Analysis {
@@ -135,14 +136,14 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 	private boolean maxNotInclude;
 	private MANIFESTEntry entry;
 
-	public Translation() {
+	public Translation(Map<Bundle, String> log) {
 		// frameworkFactory = FrameworkFactory.eINSTANCE;
 		manifestFactory = ManifestFactory.eINSTANCE;
 		parameterFactory = OptionFactory.eINSTANCE;
 		jarFactory = JarFactory.eINSTANCE;
 
 		this.validTranslation = true;
-		this.log = new Hashtable<Bundle, String>();
+		this.log = log;
 
 		this.fragmentHostReferences = new Hashtable<Bundle, String>();
 		this.requiredBundleReferences = new Hashtable<RequireBundle, List<String>>();
@@ -570,7 +571,6 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 	}
 
 	public void caseAClasspathEntry(AClasspathEntry node) {
-		System.err.println(this.bundle.getLocation());
 		BundleClassPath entry = manifestFactory.createBundleClassPath();
 
 		this.entry = entry;
@@ -2103,32 +2103,6 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 				}
 			}
 		}
-		/*
-		 * for (SystemEntry entry : this.bundle.getFolder().getEntries()) { if
-		 * (entry instanceof Folder) { Package _package =
-		 * this.convertToJavaElement((Folder)entry); if (_package != null) {
-		 * this.bundle.getPackage().addPackage(_package); } } else if
-		 * (entry.getName().endsWith(".class")) { Class clazz =
-		 * jarFactory.createClass(); clazz.setName(entry.getName().substring(0,
-		 * entry.getName().indexOf(".class")));
-		 * clazz.setName(entry.getFullPath().replace(".class", ""));
-		 * this.bundle.getPackage().addClass(clazz); } }
-		 * 
-		 * this.findActivator(); this.resolveExportService();
-		 * 
-		 * this.resolveExportPackage(); this.resolvedExportPackageUses();
-		 * this.resolvedExportPackageExclude();
-		 * this.resolvedExportPackageInclude();
-		 * 
-		 * this.resolvedActivationPolicyExclude();
-		 * this.resolvedActivationPolicyInclude();
-		 */
-
-		/*
-		 * if (!logBundle.equals("")) { log += "********************" + "\n";
-		 * log += this.bundle.getLocation() + "\n"; log += this.logBundle +
-		 * "\n"; }
-		 */
 	}
 
 	public void caseStart(Start node) {
@@ -2139,600 +2113,600 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 	}
 
 	public void caseTAlways(TAlways node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleActivationpolicy(TBundleActivationpolicy node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleActivator(TBundleActivator node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleCategory(TBundleCategory node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleClasspath(TBundleClasspath node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleContactaddress(TBundleContactaddress node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleCopyright(TBundleCopyright node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleDescription(TBundleDescription node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleDocurl(TBundleDocurl node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleLocalization(TBundleLocalization node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleManifestversion(TBundleManifestversion node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleName(TBundleName node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleNativecode(TBundleNativecode node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleRequiredexecutionenvironment(
 			TBundleRequiredexecutionenvironment node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleSymbolicname(TBundleSymbolicname node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleUpdatelocation(TBundleUpdatelocation node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleVendor(TBundleVendor node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTBundleVersion(TBundleVersion node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTComma(TComma node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTDefinition(TDefinition node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTDot(TDot node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTDotdot(TDotdot node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 	}
 
 	public void caseTDoubleAntiSlash(TDoubleAntiSlash node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTDynamicimportPackage(TDynamicimportPackage node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTEntry(TEntry node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTEntryDigest(TEntryDigest node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTEol(TEol node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTEolblank(TEolblank node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTEquals(TEquals node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTExclude(TExclude node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTExportPackage(TExportPackage node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTExportService(TExportService node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTExtension(TExtension node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTExtensionBootclasspath(TExtensionBootclasspath node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTExtensionFramework(TExtensionFramework node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTFalse(TFalse node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTFragmentAttachment(TFragmentAttachment node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 	}
 
 	public void caseTFragmentHost(TFragmentHost node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTGreater(TGreater node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 	}
 
 	public void caseTGreaterEquals(TGreaterEquals node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTIdentifier(TIdentifier node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTIdentifierRequiredConfiguration(
 			TIdentifierRequiredConfiguration node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTIdentifierRequiredProfile(TIdentifierRequiredProfile node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTImportPackage(TImportPackage node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 	}
 
 	public void caseTImportService(TImportService node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTInclude(TInclude node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTLanguage(TLanguage node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTLazy(TLazy node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTLeftBracket(TLeftBracket node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTLess(TLess node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTLesserEquals(TLesserEquals node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTMandatory(TMandatory node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTManifestversion(TManifestversion node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTNever(TNever node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTNotEquals(TNotEquals node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOptional(TOptional node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsname(TOsname node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameAix(TOsnameAix node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameDigitalunix(TOsnameDigitalunix node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameEmbos(TOsnameEmbos node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameEpoc32(TOsnameEpoc32 node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameFreebsd(TOsnameFreebsd node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameHpux(TOsnameHpux node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameIrix(TOsnameIrix node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameLinux(TOsnameLinux node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameMacos(TOsnameMacos node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameNetbsd(TOsnameNetbsd node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameNetware(TOsnameNetware node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameOpenbsd(TOsnameOpenbsd node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameOs2(TOsnameOs2 node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameQnx(TOsnameQnx node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameSolaris(TOsnameSolaris node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameSunos(TOsnameSunos node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameVxworks(TOsnameVxworks node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameWindows2000(TOsnameWindows2000 node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameWindows2003(TOsnameWindows2003 node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameWindows95(TOsnameWindows95 node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameWindows98(TOsnameWindows98 node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameWindowsce(TOsnameWindowsce node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameWindowsnt(TOsnameWindowsnt node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameWindowsvista(TOsnameWindowsvista node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsnameWindowsxp(TOsnameWindowsxp node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTOsversion(TOsversion node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTPathSep(TPathSep node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessor(TProcessor node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessor68k(TProcessor68k node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorAlpha(TProcessorAlpha node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorArm(TProcessorArm node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorIgnite(TProcessorIgnite node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorMips(TProcessorMips node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorParisc(TProcessorParisc node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorPowerpc(TProcessorPowerpc node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorS390(TProcessorS390 node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorS390x(TProcessorS390x node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorSh4(TProcessorSh4 node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorSparc(TProcessorSparc node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorV850e(TProcessorV850e node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorX86(TProcessorX86 node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProcessorX8664(TProcessorX8664 node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTProtectedString(TProtectedString node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTQuote(TQuote node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTQuotedString(TQuotedString node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTRequireBundle(TRequireBundle node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTResolution(TResolution node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTResolutionMandatory(TResolutionMandatory node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTResolutionOptional(TResolutionOptional node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTResolveTime(TResolveTime node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTRightBracket(TRightBracket node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTSelectionFilter(TSelectionFilter node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTSemicolon(TSemicolon node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTSingleton(TSingleton node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTTrue(TTrue node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTUnquotedString(TUnquotedString node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTUrlFile(TUrlFile node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTUrlFtp(TUrlFtp node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTUrlHttp(TUrlHttp node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTUses(TUses node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTVisibility(TVisibility node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTVisibilityPrivate(TVisibilityPrivate node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTVisibilityReexport(TVisibilityReexport node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
@@ -2817,21 +2791,21 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 	}
 
 	public void caseTDigestValue(TDigestValue node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTNumber(TNumber node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTQualifier(TQualifier node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 	}
 
 	public void caseTAttributeEntry(TAttributeEntry node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
@@ -2848,12 +2822,12 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 	}
 
 	public void caseTAllString(TAllString node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
 	public void caseTSimpleStringValue(TSimpleStringValue node) {
-		this.mustNotOccured(node);
+		// do nothing and never call
 
 	}
 
@@ -3050,8 +3024,6 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 			list.add(value);
 			this.unresolvedActivationPolicyIncludeValue.put(
 					(IncludePackages) directive, list);
-		} else {
-			System.err.println("pas normal");
 		}
 	}
 
@@ -3059,11 +3031,6 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 		for (PParameter parameter : parameters) {
 			parameter.apply(this);
 		}
-	}
-
-	private void mustNotOccured(Node node) {
-		System.err.println("You don't use this function with "
-				+ node.getClass().getName() + ".");
 	}
 
 	private void setTargetToClassPath(PTarget target) {

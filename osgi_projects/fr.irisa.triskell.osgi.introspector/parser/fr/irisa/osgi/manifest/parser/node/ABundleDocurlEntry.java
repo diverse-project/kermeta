@@ -2,8 +2,11 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.*;
-import fr.irisa.osgi.manifest.parser.analysis.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+
+import fr.irisa.osgi.manifest.parser.analysis.Analysis;
 
 @SuppressWarnings("nls")
 public final class ABundleDocurlEntry extends PBundleDocurlEntry {

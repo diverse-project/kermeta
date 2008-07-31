@@ -2,7 +2,8 @@
 
 package fr.irisa.osgi.manifest.parser.analysis;
 
-import java.util.*;
+import java.util.Hashtable;
+
 import fr.irisa.osgi.manifest.parser.node.*;
 
 public class AnalysisAdapter implements Analysis {
