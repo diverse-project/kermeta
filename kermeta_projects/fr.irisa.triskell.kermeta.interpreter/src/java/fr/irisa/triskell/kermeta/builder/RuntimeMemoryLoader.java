@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.33 2008-06-12 07:17:55 ftanguy Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.34 2008-07-31 15:08:27 dvojtise Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -207,16 +207,35 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 				    }
 				    else if (value instanceof org.eclipse.emf.common.util.AbstractEnumerator){
 				    	
-				    	// we should retreive the enumeration in the memory
+				    	// we should retrieve the enumeration in the memory
 				    		// get the property type, this should be an enumeration 				    		
 				    		// get the property type
 				    		EClassifier eEnum = att.getEType();
 				    		String qnameEnum = getEQualifiedName(eEnum);
 				    		RuntimeObject roEnum = memory.getTypeDefinitionAsRuntimeObject(qnameEnum);
-				    	// then retreive the value in this enumeration and affect it to the property
+				    	// then retrieve the value in this enumeration and affect it to the property
 			    	    	// get the correct value (enumeration literal) from the enumeration
 				    		RuntimeObject roEnumLit=null;
 				    		roEnumLit = fr.irisa.triskell.kermeta.runtime.rohelper.EnumerationHelper.getLiteral(roEnum, ((org.eclipse.emf.common.util.AbstractEnumerator)value).getLiteral());
+				    		
+				    	// set this value to the property
+				    		// DVK : I'm not sure we can directly assign this, is it a kind of singleton in memory ?
+				    		run_obj.getProperties().put(property_name, roEnumLit);
+				    	//throw new Error("Kermeta loader error : mapping of enumeration " + value.getClass() + " not implemented");
+				    	
+				    }
+				    else if (value instanceof org.eclipse.emf.common.util.Enumerator){
+				    	
+				    	// we should retrieve the enumeration in the memory
+				    		// get the property type, this should be an enumeration 				    		
+				    		// get the property type
+				    		EClassifier eEnum = att.getEType();
+				    		String qnameEnum = getEQualifiedName(eEnum);
+				    		RuntimeObject roEnum = memory.getTypeDefinitionAsRuntimeObject(qnameEnum);
+				    	// then retrieve the value in this enumeration and affect it to the property
+			    	    	// get the correct value (enumeration literal) from the enumeration
+				    		RuntimeObject roEnumLit=null;
+				    		roEnumLit = fr.irisa.triskell.kermeta.runtime.rohelper.EnumerationHelper.getLiteral(roEnum, ((org.eclipse.emf.common.util.Enumerator)value).getLiteral());
 				    		
 				    	// set this value to the property
 				    		// DVK : I'm not sure we can directly assign this, is it a kind of singleton in memory ?
