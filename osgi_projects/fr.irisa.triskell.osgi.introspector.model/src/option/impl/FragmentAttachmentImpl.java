@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FragmentAttachmentImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: FragmentAttachmentImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package option.impl;
 
@@ -21,18 +21,17 @@ import org.osgi.framework.Constants;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link option.impl.FragmentAttachmentImpl#getFragmentAttachment <em>Fragment Attachment</em>}</li>
+ *   <li>{@link option.impl.FragmentAttachmentImpl#getFragmentAttachment <em>Fragment Attachment</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class FragmentAttachmentImpl extends SymbolicNameDirectiveImpl implements
 		FragmentAttachment {
 	/**
-	 * The default value of the '{@link #getFragmentAttachment() <em>Fragment Attachment</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getFragmentAttachment() <em>Fragment Attachment</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getFragmentAttachment()
 	 * @generated
 	 * @ordered
@@ -40,9 +39,8 @@ public class FragmentAttachmentImpl extends SymbolicNameDirectiveImpl implements
 	protected static final FragmentAttachmentEnum FRAGMENT_ATTACHMENT_EDEFAULT = FragmentAttachmentEnum.ALWAYS;
 
 	/**
-	 * The cached value of the '{@link #getFragmentAttachment() <em>Fragment Attachment</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getFragmentAttachment() <em>Fragment Attachment</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getFragmentAttachment()
 	 * @generated
 	 * @ordered
@@ -59,7 +57,6 @@ public class FragmentAttachmentImpl extends SymbolicNameDirectiveImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -69,7 +66,6 @@ public class FragmentAttachmentImpl extends SymbolicNameDirectiveImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public FragmentAttachmentEnum getFragmentAttachment() {
@@ -78,87 +74,77 @@ public class FragmentAttachmentImpl extends SymbolicNameDirectiveImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setFragmentAttachment(
 			FragmentAttachmentEnum newFragmentAttachment) {
 		FragmentAttachmentEnum oldFragmentAttachment = fragmentAttachment;
-		fragmentAttachment = newFragmentAttachment == null ? FRAGMENT_ATTACHMENT_EDEFAULT
-				: newFragmentAttachment;
+		fragmentAttachment = newFragmentAttachment == null ? FRAGMENT_ATTACHMENT_EDEFAULT : newFragmentAttachment;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					OptionPackage.FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT,
-					oldFragmentAttachment, fragmentAttachment));
+			eNotify(new ENotificationImpl(this, Notification.SET, OptionPackage.FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT, oldFragmentAttachment, fragmentAttachment));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case OptionPackage.FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT:
-			return getFragmentAttachment();
+			case OptionPackage.FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT:
+				return getFragmentAttachment();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case OptionPackage.FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT:
-			setFragmentAttachment((FragmentAttachmentEnum) newValue);
-			return;
+			case OptionPackage.FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT:
+				setFragmentAttachment((FragmentAttachmentEnum)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case OptionPackage.FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT:
-			setFragmentAttachment(FRAGMENT_ATTACHMENT_EDEFAULT);
-			return;
+			case OptionPackage.FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT:
+				setFragmentAttachment(FRAGMENT_ATTACHMENT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case OptionPackage.FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT:
-			return fragmentAttachment != FRAGMENT_ATTACHMENT_EDEFAULT;
+			case OptionPackage.FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT:
+				return fragmentAttachment != FRAGMENT_ATTACHMENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (fragmentAttachment: ");

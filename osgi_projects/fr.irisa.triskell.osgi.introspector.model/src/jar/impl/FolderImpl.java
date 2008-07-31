@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FolderImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
+ * $Id: FolderImpl.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
  */
 package jar.impl;
 
@@ -27,17 +27,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link jar.impl.FolderImpl#getEntries <em>Entries</em>}</li>
+ *   <li>{@link jar.impl.FolderImpl#getEntries <em>Entries</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class FolderImpl extends SystemEntryImpl implements Folder {
 	/**
-	 * The cached value of the '{@link #getEntries() <em>Entries</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getEntries() <em>Entries</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getEntries()
 	 * @generated
 	 * @ordered
@@ -46,7 +45,6 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected FolderImpl() {
@@ -55,7 +53,6 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -65,89 +62,81 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<SystemEntry> getEntries() {
 		if (entries == null) {
-			entries = new EObjectContainmentEList<SystemEntry>(
-					SystemEntry.class, this, JarPackage.FOLDER__ENTRIES);
+			entries = new EObjectContainmentEList<SystemEntry>(SystemEntry.class, this, JarPackage.FOLDER__ENTRIES);
 		}
 		return entries;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case JarPackage.FOLDER__ENTRIES:
-			return ((InternalEList<?>) getEntries())
-					.basicRemove(otherEnd, msgs);
+			case JarPackage.FOLDER__ENTRIES:
+				return ((InternalEList<?>)getEntries()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case JarPackage.FOLDER__ENTRIES:
-			return getEntries();
+			case JarPackage.FOLDER__ENTRIES:
+				return getEntries();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case JarPackage.FOLDER__ENTRIES:
-			getEntries().clear();
-			getEntries().addAll((Collection<? extends SystemEntry>) newValue);
-			return;
+			case JarPackage.FOLDER__ENTRIES:
+				getEntries().clear();
+				getEntries().addAll((Collection<? extends SystemEntry>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case JarPackage.FOLDER__ENTRIES:
-			getEntries().clear();
-			return;
+			case JarPackage.FOLDER__ENTRIES:
+				getEntries().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case JarPackage.FOLDER__ENTRIES:
-			return entries != null && !entries.isEmpty();
+			case JarPackage.FOLDER__ENTRIES:
+				return entries != null && !entries.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

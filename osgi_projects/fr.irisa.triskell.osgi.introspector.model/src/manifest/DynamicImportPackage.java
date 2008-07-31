@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DynamicImportPackage.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: DynamicImportPackage.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package manifest;
 
@@ -11,14 +11,14 @@ import org.eclipse.emf.common.util.EList;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Dynamic Import Package</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link manifest.DynamicImportPackage#getPackages <em>Packages</em>}</li>
+ *   <li>{@link manifest.DynamicImportPackage#getPackages <em>Packages</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see manifest.ManifestPackage#getDynamicImportPackage()
  * @model
  * @generated

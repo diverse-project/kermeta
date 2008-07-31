@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResolutionImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: ResolutionImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package option.impl;
 
@@ -21,18 +21,17 @@ import org.osgi.framework.Constants;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link option.impl.ResolutionImpl#getResolution <em>Resolution</em>}</li>
+ *   <li>{@link option.impl.ResolutionImpl#getResolution <em>Resolution</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ResolutionImpl extends ImportPackageDirectiveImpl implements
 		Resolution {
 	/**
-	 * The default value of the '{@link #getResolution() <em>Resolution</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getResolution() <em>Resolution</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getResolution()
 	 * @generated
 	 * @ordered
@@ -40,9 +39,8 @@ public class ResolutionImpl extends ImportPackageDirectiveImpl implements
 	protected static final ResolutionEnum RESOLUTION_EDEFAULT = ResolutionEnum.MANDATORY;
 
 	/**
-	 * The cached value of the '{@link #getResolution() <em>Resolution</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getResolution() <em>Resolution</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getResolution()
 	 * @generated
 	 * @ordered
@@ -59,7 +57,6 @@ public class ResolutionImpl extends ImportPackageDirectiveImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -69,7 +66,6 @@ public class ResolutionImpl extends ImportPackageDirectiveImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ResolutionEnum getResolution() {
@@ -78,86 +74,76 @@ public class ResolutionImpl extends ImportPackageDirectiveImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setResolution(ResolutionEnum newResolution) {
 		ResolutionEnum oldResolution = resolution;
-		resolution = newResolution == null ? RESOLUTION_EDEFAULT
-				: newResolution;
+		resolution = newResolution == null ? RESOLUTION_EDEFAULT : newResolution;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					OptionPackage.RESOLUTION__RESOLUTION, oldResolution,
-					resolution));
+			eNotify(new ENotificationImpl(this, Notification.SET, OptionPackage.RESOLUTION__RESOLUTION, oldResolution, resolution));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case OptionPackage.RESOLUTION__RESOLUTION:
-			return getResolution();
+			case OptionPackage.RESOLUTION__RESOLUTION:
+				return getResolution();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case OptionPackage.RESOLUTION__RESOLUTION:
-			setResolution((ResolutionEnum) newValue);
-			return;
+			case OptionPackage.RESOLUTION__RESOLUTION:
+				setResolution((ResolutionEnum)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case OptionPackage.RESOLUTION__RESOLUTION:
-			setResolution(RESOLUTION_EDEFAULT);
-			return;
+			case OptionPackage.RESOLUTION__RESOLUTION:
+				setResolution(RESOLUTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case OptionPackage.RESOLUTION__RESOLUTION:
-			return resolution != RESOLUTION_EDEFAULT;
+			case OptionPackage.RESOLUTION__RESOLUTION:
+				return resolution != RESOLUTION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (resolution: ");

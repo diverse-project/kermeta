@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimpleMANIFESTEntryImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: SimpleMANIFESTEntryImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package manifest.impl;
 
@@ -19,18 +19,17 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link manifest.impl.SimpleMANIFESTEntryImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link manifest.impl.SimpleMANIFESTEntryImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class SimpleMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 		SimpleMANIFESTEntry {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -40,7 +39,6 @@ public class SimpleMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -49,7 +47,6 @@ public class SimpleMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected SimpleMANIFESTEntryImpl() {
@@ -58,7 +55,6 @@ public class SimpleMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -68,7 +64,6 @@ public class SimpleMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getValue() {
@@ -77,86 +72,76 @@ public class SimpleMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setValue(String newValue) {
 		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ManifestPackage.SIMPLE_MANIFEST_ENTRY__VALUE, oldValue,
-					value));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.SIMPLE_MANIFEST_ENTRY__VALUE, oldValue, value));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ManifestPackage.SIMPLE_MANIFEST_ENTRY__VALUE:
-			return getValue();
+			case ManifestPackage.SIMPLE_MANIFEST_ENTRY__VALUE:
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ManifestPackage.SIMPLE_MANIFEST_ENTRY__VALUE:
-			setValue((String) newValue);
-			return;
+			case ManifestPackage.SIMPLE_MANIFEST_ENTRY__VALUE:
+				setValue((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.SIMPLE_MANIFEST_ENTRY__VALUE:
-			setValue(VALUE_EDEFAULT);
-			return;
+			case ManifestPackage.SIMPLE_MANIFEST_ENTRY__VALUE:
+				setValue(VALUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.SIMPLE_MANIFEST_ENTRY__VALUE:
-			return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT
-					.equals(value);
+			case ManifestPackage.SIMPLE_MANIFEST_ENTRY__VALUE:
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (value: ");

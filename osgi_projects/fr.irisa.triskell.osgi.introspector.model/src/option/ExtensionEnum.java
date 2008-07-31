@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExtensionEnum.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: ExtensionEnum.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
@@ -15,16 +15,15 @@ import org.eclipse.emf.common.util.Enumerator;
 /**
  * <!-- begin-user-doc --> A representation of the literals of the enumeration '<em><b>Extension Enum</b></em>',
  * and utility methods for working with them. <!-- end-user-doc -->
- * 
  * @see option.OptionPackage#getExtensionEnum()
  * @model
  * @generated
  */
 public enum ExtensionEnum implements Enumerator {
 	/**
-	 * The '<em><b>FRAMEWORK</b></em>' literal object. <!-- begin-user-doc
+	 * The '<em><b>FRAMEWORK</b></em>' literal object.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #FRAMEWORK_VALUE
 	 * @generated
 	 * @ordered
@@ -42,14 +41,14 @@ public enum ExtensionEnum implements Enumerator {
 	BOOTCLASSPATH(1, "BOOTCLASSPATH", "bootclasspath");
 
 	/**
-	 * The '<em><b>FRAMEWORK</b></em>' literal value. <!-- begin-user-doc
+	 * The '<em><b>FRAMEWORK</b></em>' literal value.
+	 * <!-- begin-user-doc
 	 * -->
 	 * <p>
 	 * If the meaning of '<em><b>FRAMEWORK</b></em>' literal object isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #FRAMEWORK
 	 * @model literal="framework"
 	 * @generated
@@ -76,25 +75,23 @@ public enum ExtensionEnum implements Enumerator {
 	/**
 	 * An array of all the '<em><b>Extension Enum</b></em>' enumerators.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static final ExtensionEnum[] VALUES_ARRAY = new ExtensionEnum[] {
-			FRAMEWORK, BOOTCLASSPATH, };
+			FRAMEWORK,
+			BOOTCLASSPATH,
+		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Extension Enum</b></em>'
-	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * A public read-only list of all the '<em><b>Extension Enum</b></em>' enumerators.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<ExtensionEnum> VALUES = Collections
-			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<ExtensionEnum> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Extension Enum</b></em>' literal with the
-	 * specified literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Extension Enum</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ExtensionEnum get(String literal) {
@@ -108,9 +105,8 @@ public enum ExtensionEnum implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Extension Enum</b></em>' literal with the
-	 * specified name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Extension Enum</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ExtensionEnum getByName(String name) {
@@ -124,46 +120,40 @@ public enum ExtensionEnum implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Extension Enum</b></em>' literal with the
-	 * specified integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Extension Enum</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ExtensionEnum get(int value) {
 		switch (value) {
-		case FRAMEWORK_VALUE:
-			return FRAMEWORK;
-		case BOOTCLASSPATH_VALUE:
-			return BOOTCLASSPATH;
+			case FRAMEWORK_VALUE: return FRAMEWORK;
+			case BOOTCLASSPATH_VALUE: return BOOTCLASSPATH;
 		}
 		return null;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private ExtensionEnum(int value, String name, String literal) {
@@ -174,35 +164,31 @@ public enum ExtensionEnum implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string
-	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkFactoryImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
+ * $Id: FrameworkFactoryImpl.java,v 1.3 2008-07-31 13:43:54 edaubert Exp $
  */
 package framework.impl;
 
+import framework.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -21,34 +22,33 @@ import framework.FrameworkPackage;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class FrameworkFactoryImpl extends EFactoryImpl implements
 		FrameworkFactory {
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static FrameworkFactory init() {
 		try {
-			FrameworkFactory theFrameworkFactory = (FrameworkFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://org.osgi.framework/");
+			FrameworkFactory theFrameworkFactory = (FrameworkFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.osgi.framework/"); 
 			if (theFrameworkFactory != null) {
 				return theFrameworkFactory;
 			}
-		} catch (Exception exception) {
+		}
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new FrameworkFactoryImpl();
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public FrameworkFactoryImpl() {
@@ -57,57 +57,48 @@ public class FrameworkFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case FrameworkPackage.FRAMEWORK:
-			return createFramework();
-		case FrameworkPackage.BUNDLE:
-			return createBundle();
-		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			case FrameworkPackage.FRAMEWORK: return createFramework();
+			case FrameworkPackage.BUNDLE: return createBundle();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-		case FrameworkPackage.STRING:
-			return createStringFromString(eDataType, initialValue);
-		default:
-			throw new IllegalArgumentException("The datatype '"
-					+ eDataType.getName() + "' is not a valid classifier");
+			case FrameworkPackage.STRING:
+				return createStringFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-		case FrameworkPackage.STRING:
-			return convertStringToString(eDataType, instanceValue);
-		default:
-			throw new IllegalArgumentException("The datatype '"
-					+ eDataType.getName() + "' is not a valid classifier");
+			case FrameworkPackage.STRING:
+				return convertStringToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Framework createFramework() {
@@ -117,7 +108,6 @@ public class FrameworkFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Bundle createBundle() {
@@ -127,17 +117,15 @@ public class FrameworkFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String createStringFromString(EDataType eDataType,
 			String initialValue) {
-		return (String) super.createFromString(eDataType, initialValue);
+		return (String)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertStringToString(EDataType eDataType,
@@ -147,16 +135,14 @@ public class FrameworkFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public FrameworkPackage getFrameworkPackage() {
-		return (FrameworkPackage) getEPackage();
+		return (FrameworkPackage)getEPackage();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @deprecated
 	 * @generated
 	 */

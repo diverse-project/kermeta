@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Version.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: Version.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package manifest;
 
@@ -11,17 +11,17 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Version</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link manifest.Version#getMajor <em>Major</em>}</li>
- * <li>{@link manifest.Version#getMinor <em>Minor</em>}</li>
- * <li>{@link manifest.Version#getMicro <em>Micro</em>}</li>
- * <li>{@link manifest.Version#getQualifier <em>Qualifier</em>}</li>
+ *   <li>{@link manifest.Version#getMajor <em>Major</em>}</li>
+ *   <li>{@link manifest.Version#getMinor <em>Minor</em>}</li>
+ *   <li>{@link manifest.Version#getMicro <em>Micro</em>}</li>
+ *   <li>{@link manifest.Version#getQualifier <em>Qualifier</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see manifest.ManifestPackage#getVersion()
  * @model
  * @generated
@@ -45,11 +45,9 @@ public interface Version extends EObject {
 	int getMajor();
 
 	/**
-	 * Sets the value of the '{@link manifest.Version#getMajor <em>Major</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Major</em>' attribute.
+	 * Sets the value of the '{@link manifest.Version#getMajor <em>Major</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Major</em>' attribute.
 	 * @see #getMajor()
 	 * @generated
 	 */
@@ -73,11 +71,9 @@ public interface Version extends EObject {
 	int getMinor();
 
 	/**
-	 * Sets the value of the '{@link manifest.Version#getMinor <em>Minor</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Minor</em>' attribute.
+	 * Sets the value of the '{@link manifest.Version#getMinor <em>Minor</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Minor</em>' attribute.
 	 * @see #getMinor()
 	 * @generated
 	 */
@@ -101,25 +97,23 @@ public interface Version extends EObject {
 	int getMicro();
 
 	/**
-	 * Sets the value of the '{@link manifest.Version#getMicro <em>Micro</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Micro</em>' attribute.
+	 * Sets the value of the '{@link manifest.Version#getMicro <em>Micro</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Micro</em>' attribute.
 	 * @see #getMicro()
 	 * @generated
 	 */
 	void setMicro(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Qualifier</b></em>' attribute. The
-	 * default value is <code>""</code>. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Qualifier</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Qualifier</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Qualifier</em>' attribute.
 	 * @see #setQualifier(String)
 	 * @see manifest.ManifestPackage#getVersion_Qualifier()
@@ -129,11 +123,9 @@ public interface Version extends EObject {
 	String getQualifier();
 
 	/**
-	 * Sets the value of the '{@link manifest.Version#getQualifier <em>Qualifier</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Qualifier</em>' attribute.
+	 * Sets the value of the '{@link manifest.Version#getQualifier <em>Qualifier</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Qualifier</em>' attribute.
 	 * @see #getQualifier()
 	 * @generated
 	 */

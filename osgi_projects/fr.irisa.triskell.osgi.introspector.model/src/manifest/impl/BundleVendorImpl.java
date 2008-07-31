@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleVendorImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: BundleVendorImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package manifest.impl;
 
@@ -17,7 +17,7 @@ import org.osgi.framework.Constants;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public class BundleVendorImpl extends SimpleMANIFESTEntryImpl implements
@@ -32,7 +32,6 @@ public class BundleVendorImpl extends SimpleMANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

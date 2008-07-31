@@ -2,21 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleActivator.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: BundleActivator.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package manifest;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Bundle Activator</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link manifest.BundleActivator#getActivator <em>Activator</em>}</li>
+ *   <li>{@link manifest.BundleActivator#getActivator <em>Activator</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see manifest.ManifestPackage#getBundleActivator()
  * @model
  * @generated
@@ -40,11 +40,9 @@ public interface BundleActivator extends MANIFESTEntry {
 	jar.Class getActivator();
 
 	/**
-	 * Sets the value of the '{@link manifest.BundleActivator#getActivator <em>Activator</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Activator</em>' reference.
+	 * Sets the value of the '{@link manifest.BundleActivator#getActivator <em>Activator</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Activator</em>' reference.
 	 * @see #getActivator()
 	 * @generated
 	 */

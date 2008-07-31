@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActivationPolicyDirectiveImpl.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: ActivationPolicyDirectiveImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package option.impl;
 
@@ -16,14 +16,13 @@ import org.eclipse.emf.ecore.EClass;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class ActivationPolicyDirectiveImpl extends DirectiveEntryImpl
 		implements ActivationPolicyDirective {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ActivationPolicyDirectiveImpl() {
@@ -32,7 +31,6 @@ public abstract class ActivationPolicyDirectiveImpl extends DirectiveEntryImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

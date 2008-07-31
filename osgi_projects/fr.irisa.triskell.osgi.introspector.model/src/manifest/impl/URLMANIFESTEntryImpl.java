@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: URLMANIFESTEntryImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: URLMANIFESTEntryImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package manifest.impl;
 
@@ -21,10 +21,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link manifest.impl.URLMANIFESTEntryImpl#getUrl <em>Url</em>}</li>
+ *   <li>{@link manifest.impl.URLMANIFESTEntryImpl#getUrl <em>Url</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class URLMANIFESTEntryImpl extends MANIFESTEntryImpl implements
@@ -32,7 +32,6 @@ public abstract class URLMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 	/**
 	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getUrl()
 	 * @generated
 	 * @ordered
@@ -42,7 +41,6 @@ public abstract class URLMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 	/**
 	 * The cached value of the '{@link #getUrl() <em>Url</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getUrl()
 	 * @generated
 	 * @ordered
@@ -51,7 +49,6 @@ public abstract class URLMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected URLMANIFESTEntryImpl() {
@@ -60,7 +57,6 @@ public abstract class URLMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -70,7 +66,6 @@ public abstract class URLMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public URL getUrl() {
@@ -79,85 +74,76 @@ public abstract class URLMANIFESTEntryImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setUrl(URL newUrl) {
 		URL oldUrl = url;
 		url = newUrl;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ManifestPackage.URLMANIFEST_ENTRY__URL, oldUrl, url));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.URLMANIFEST_ENTRY__URL, oldUrl, url));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ManifestPackage.URLMANIFEST_ENTRY__URL:
-			return getUrl();
+			case ManifestPackage.URLMANIFEST_ENTRY__URL:
+				return getUrl();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ManifestPackage.URLMANIFEST_ENTRY__URL:
-			setUrl((URL) newValue);
-			return;
+			case ManifestPackage.URLMANIFEST_ENTRY__URL:
+				setUrl((URL)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.URLMANIFEST_ENTRY__URL:
-			setUrl(URL_EDEFAULT);
-			return;
+			case ManifestPackage.URLMANIFEST_ENTRY__URL:
+				setUrl(URL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.URLMANIFEST_ENTRY__URL:
-			return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT
-					.equals(url);
+			case ManifestPackage.URLMANIFEST_ENTRY__URL:
+				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (url: ");

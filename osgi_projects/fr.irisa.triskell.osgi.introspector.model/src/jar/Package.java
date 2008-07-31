@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Package.java,v 1.1 2008-07-30 14:08:03 edaubert Exp $
+ * $Id: Package.java,v 1.2 2008-07-31 13:43:54 edaubert Exp $
  */
 package jar;
 
@@ -13,16 +13,16 @@ import org.eclipse.emf.common.util.EList;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Package</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link jar.Package#getClasses <em>Classes</em>}</li>
- * <li>{@link jar.Package#getSubPackages <em>Sub Packages</em>}</li>
- * <li>{@link jar.Package#isBundleClassPath <em>Bundle Class Path</em>}</li>
+ *   <li>{@link jar.Package#getClasses <em>Classes</em>}</li>
+ *   <li>{@link jar.Package#getSubPackages <em>Sub Packages</em>}</li>
+ *   <li>{@link jar.Package#isBundleClassPath <em>Bundle Class Path</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see jar.JarPackage#getPackage()
  * @model
  * @generated
@@ -65,14 +65,13 @@ public interface Package extends BundleEntry {
 	EList<Package> getSubPackages();
 
 	/**
-	 * Returns the value of the '<em><b>Bundle Class Path</b></em>'
-	 * attribute. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Bundle Class Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Bundle Class Path</em>' attribute isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Bundle Class Path</em>' attribute.
 	 * @see #setBundleClassPath(boolean)
 	 * @see jar.JarPackage#getPackage_BundleClassPath()
@@ -82,12 +81,9 @@ public interface Package extends BundleEntry {
 	boolean isBundleClassPath();
 
 	/**
-	 * Sets the value of the '{@link jar.Package#isBundleClassPath <em>Bundle Class Path</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Bundle Class Path</em>'
-	 *            attribute.
+	 * Sets the value of the '{@link jar.Package#isBundleClassPath <em>Bundle Class Path</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bundle Class Path</em>' attribute.
 	 * @see #isBundleClassPath()
 	 * @generated
 	 */

@@ -2,21 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Processor.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: Processor.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Processor</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link option.Processor#getProcessor <em>Processor</em>}</li>
+ *   <li>{@link option.Processor#getProcessor <em>Processor</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see option.OptionPackage#getProcessor()
  * @model
  * @generated
@@ -42,11 +42,9 @@ public interface Processor extends NativeCodeDirective {
 	ProcessorEnum getProcessor();
 
 	/**
-	 * Sets the value of the '{@link option.Processor#getProcessor <em>Processor</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Processor</em>' attribute.
+	 * Sets the value of the '{@link option.Processor#getProcessor <em>Processor</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Processor</em>' attribute.
 	 * @see option.ProcessorEnum
 	 * @see #getProcessor()
 	 * @generated

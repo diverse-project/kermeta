@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Framework.java,v 1.1 2008-07-30 14:08:00 edaubert Exp $
+ * $Id: Framework.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package framework;
 
@@ -12,31 +12,29 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Framework</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link framework.Framework#getBundles <em>Bundles</em>}</li>
+ *   <li>{@link framework.Framework#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see framework.FrameworkPackage#getFramework()
  * @model
  * @generated
  */
 public interface Framework extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Bundles</b></em>' containment
-	 * reference list. The list contents are of type {@link framework.Bundle}.
+	 * Returns the value of the '<em><b>Bundles</b></em>' containment reference list.
+	 * The list contents are of type {@link framework.Bundle}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Bundles</em>' containment reference list
 	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Bundles</em>' containment reference
-	 *         list.
+	 * @return the value of the '<em>Bundles</em>' containment reference list.
 	 * @see framework.FrameworkPackage#getFramework_Bundles()
 	 * @model containment="true"
 	 * @generated

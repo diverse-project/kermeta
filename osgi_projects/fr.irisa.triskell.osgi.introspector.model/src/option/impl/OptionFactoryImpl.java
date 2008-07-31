@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionFactoryImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
+ * $Id: OptionFactoryImpl.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
  */
 package option.impl;
 
+import option.*;
 import option.AttributEntry;
 import option.ExcludeClasses;
 import option.ExcludePackages;
@@ -43,33 +44,32 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static OptionFactory init() {
 		try {
-			OptionFactory theOptionFactory = (OptionFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://org.osgi.framework/manifest/option");
+			OptionFactory theOptionFactory = (OptionFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.osgi.framework/manifest/option"); 
 			if (theOptionFactory != null) {
 				return theOptionFactory;
 			}
-		} catch (Exception exception) {
+		}
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new OptionFactoryImpl();
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OptionFactoryImpl() {
@@ -78,113 +78,87 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case OptionPackage.ATTRIBUT_ENTRY:
-			return createAttributEntry();
-		case OptionPackage.OS_NAME:
-			return createOsName();
-		case OptionPackage.OS_VERSION:
-			return createOsVersion();
-		case OptionPackage.EXCLUDE_PACKAGES:
-			return createExcludePackages();
-		case OptionPackage.PROCESSOR:
-			return createProcessor();
-		case OptionPackage.INCLUDE_PACKAGES:
-			return createIncludePackages();
-		case OptionPackage.USES:
-			return createUses();
-		case OptionPackage.EXTENSION:
-			return createExtension();
-		case OptionPackage.MANDATORY:
-			return createMandatory();
-		case OptionPackage.LANGUAGE:
-			return createLanguage();
-		case OptionPackage.VISIBILITY:
-			return createVisibility();
-		case OptionPackage.SINGLETON:
-			return createSingleton();
-		case OptionPackage.RESOLUTION:
-			return createResolution();
-		case OptionPackage.FRAGMENT_ATTACHMENT:
-			return createFragmentAttachment();
-		case OptionPackage.SELECTION_FILTER:
-			return createSelectionFilter();
-		case OptionPackage.INCLUDE_CLASSES:
-			return createIncludeClasses();
-		case OptionPackage.EXCLUDE_CLASSES:
-			return createExcludeClasses();
-		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			case OptionPackage.ATTRIBUT_ENTRY: return createAttributEntry();
+			case OptionPackage.OS_NAME: return createOsName();
+			case OptionPackage.OS_VERSION: return createOsVersion();
+			case OptionPackage.EXCLUDE_PACKAGES: return createExcludePackages();
+			case OptionPackage.PROCESSOR: return createProcessor();
+			case OptionPackage.INCLUDE_PACKAGES: return createIncludePackages();
+			case OptionPackage.USES: return createUses();
+			case OptionPackage.EXTENSION: return createExtension();
+			case OptionPackage.MANDATORY: return createMandatory();
+			case OptionPackage.LANGUAGE: return createLanguage();
+			case OptionPackage.VISIBILITY: return createVisibility();
+			case OptionPackage.SINGLETON: return createSingleton();
+			case OptionPackage.RESOLUTION: return createResolution();
+			case OptionPackage.FRAGMENT_ATTACHMENT: return createFragmentAttachment();
+			case OptionPackage.SELECTION_FILTER: return createSelectionFilter();
+			case OptionPackage.INCLUDE_CLASSES: return createIncludeClasses();
+			case OptionPackage.EXCLUDE_CLASSES: return createExcludeClasses();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-		case OptionPackage.FRAGMENT_ATTACHMENT_ENUM:
-			return createFragmentAttachmentEnumFromString(eDataType,
-					initialValue);
-		case OptionPackage.PROCESSOR_ENUM:
-			return createProcessorEnumFromString(eDataType, initialValue);
-		case OptionPackage.RESOLUTION_ENUM:
-			return createResolutionEnumFromString(eDataType, initialValue);
-		case OptionPackage.VISIBILITY_ENUM:
-			return createVisibilityEnumFromString(eDataType, initialValue);
-		case OptionPackage.ISO_CODE_LANGUAGE:
-			return createISOCodeLanguageFromString(eDataType, initialValue);
-		case OptionPackage.EXTENSION_ENUM:
-			return createExtensionEnumFromString(eDataType, initialValue);
-		case OptionPackage.OS_NAME_ENUM:
-			return createOsNameEnumFromString(eDataType, initialValue);
-		default:
-			throw new IllegalArgumentException("The datatype '"
-					+ eDataType.getName() + "' is not a valid classifier");
+			case OptionPackage.FRAGMENT_ATTACHMENT_ENUM:
+				return createFragmentAttachmentEnumFromString(eDataType, initialValue);
+			case OptionPackage.PROCESSOR_ENUM:
+				return createProcessorEnumFromString(eDataType, initialValue);
+			case OptionPackage.RESOLUTION_ENUM:
+				return createResolutionEnumFromString(eDataType, initialValue);
+			case OptionPackage.VISIBILITY_ENUM:
+				return createVisibilityEnumFromString(eDataType, initialValue);
+			case OptionPackage.ISO_CODE_LANGUAGE:
+				return createISOCodeLanguageFromString(eDataType, initialValue);
+			case OptionPackage.EXTENSION_ENUM:
+				return createExtensionEnumFromString(eDataType, initialValue);
+			case OptionPackage.OS_NAME_ENUM:
+				return createOsNameEnumFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-		case OptionPackage.FRAGMENT_ATTACHMENT_ENUM:
-			return convertFragmentAttachmentEnumToString(eDataType,
-					instanceValue);
-		case OptionPackage.PROCESSOR_ENUM:
-			return convertProcessorEnumToString(eDataType, instanceValue);
-		case OptionPackage.RESOLUTION_ENUM:
-			return convertResolutionEnumToString(eDataType, instanceValue);
-		case OptionPackage.VISIBILITY_ENUM:
-			return convertVisibilityEnumToString(eDataType, instanceValue);
-		case OptionPackage.ISO_CODE_LANGUAGE:
-			return convertISOCodeLanguageToString(eDataType, instanceValue);
-		case OptionPackage.EXTENSION_ENUM:
-			return convertExtensionEnumToString(eDataType, instanceValue);
-		case OptionPackage.OS_NAME_ENUM:
-			return convertOsNameEnumToString(eDataType, instanceValue);
-		default:
-			throw new IllegalArgumentException("The datatype '"
-					+ eDataType.getName() + "' is not a valid classifier");
+			case OptionPackage.FRAGMENT_ATTACHMENT_ENUM:
+				return convertFragmentAttachmentEnumToString(eDataType, instanceValue);
+			case OptionPackage.PROCESSOR_ENUM:
+				return convertProcessorEnumToString(eDataType, instanceValue);
+			case OptionPackage.RESOLUTION_ENUM:
+				return convertResolutionEnumToString(eDataType, instanceValue);
+			case OptionPackage.VISIBILITY_ENUM:
+				return convertVisibilityEnumToString(eDataType, instanceValue);
+			case OptionPackage.ISO_CODE_LANGUAGE:
+				return convertISOCodeLanguageToString(eDataType, instanceValue);
+			case OptionPackage.EXTENSION_ENUM:
+				return convertExtensionEnumToString(eDataType, instanceValue);
+			case OptionPackage.OS_NAME_ENUM:
+				return convertOsNameEnumToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public AttributEntry createAttributEntry() {
@@ -194,7 +168,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OsName createOsName() {
@@ -204,7 +177,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OsVersion createOsVersion() {
@@ -214,7 +186,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ExcludePackages createExcludePackages() {
@@ -224,7 +195,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Processor createProcessor() {
@@ -234,7 +204,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public IncludePackages createIncludePackages() {
@@ -244,7 +213,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Uses createUses() {
@@ -254,7 +222,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Extension createExtension() {
@@ -264,7 +231,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Mandatory createMandatory() {
@@ -274,7 +240,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Language createLanguage() {
@@ -284,7 +249,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Visibility createVisibility() {
@@ -294,7 +258,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Singleton createSingleton() {
@@ -304,7 +267,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Resolution createResolution() {
@@ -314,7 +276,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public FragmentAttachment createFragmentAttachment() {
@@ -324,7 +285,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public SelectionFilter createSelectionFilter() {
@@ -334,7 +294,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public IncludeClasses createIncludeClasses() {
@@ -344,7 +303,6 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ExcludeClasses createExcludeClasses() {
@@ -354,23 +312,17 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public FragmentAttachmentEnum createFragmentAttachmentEnumFromString(
 			EDataType eDataType, String initialValue) {
-		FragmentAttachmentEnum result = FragmentAttachmentEnum
-				.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue
-					+ "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		FragmentAttachmentEnum result = FragmentAttachmentEnum.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertFragmentAttachmentEnumToString(EDataType eDataType,
@@ -380,22 +332,17 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ProcessorEnum createProcessorEnumFromString(EDataType eDataType,
 			String initialValue) {
 		ProcessorEnum result = ProcessorEnum.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue
-					+ "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertProcessorEnumToString(EDataType eDataType,
@@ -405,22 +352,17 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ResolutionEnum createResolutionEnumFromString(EDataType eDataType,
 			String initialValue) {
 		ResolutionEnum result = ResolutionEnum.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue
-					+ "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertResolutionEnumToString(EDataType eDataType,
@@ -430,22 +372,17 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public VisibilityEnum createVisibilityEnumFromString(EDataType eDataType,
 			String initialValue) {
 		VisibilityEnum result = VisibilityEnum.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue
-					+ "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertVisibilityEnumToString(EDataType eDataType,
@@ -455,22 +392,17 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ISOCodeLanguage createISOCodeLanguageFromString(EDataType eDataType,
 			String initialValue) {
 		ISOCodeLanguage result = ISOCodeLanguage.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue
-					+ "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertISOCodeLanguageToString(EDataType eDataType,
@@ -480,22 +412,17 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ExtensionEnum createExtensionEnumFromString(EDataType eDataType,
 			String initialValue) {
 		ExtensionEnum result = ExtensionEnum.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue
-					+ "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertExtensionEnumToString(EDataType eDataType,
@@ -505,22 +432,17 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OsNameEnum createOsNameEnumFromString(EDataType eDataType,
 			String initialValue) {
 		OsNameEnum result = OsNameEnum.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue
-					+ "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertOsNameEnumToString(EDataType eDataType,
@@ -530,16 +452,14 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OptionPackage getOptionPackage() {
-		return (OptionPackage) getEPackage();
+		return (OptionPackage)getEPackage();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @deprecated
 	 * @generated
 	 */

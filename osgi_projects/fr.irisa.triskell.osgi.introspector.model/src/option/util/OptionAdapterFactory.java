@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionAdapterFactory.java,v 1.2 2008-07-31 12:23:17 edaubert Exp $
+ * $Id: OptionAdapterFactory.java,v 1.3 2008-07-31 13:43:54 edaubert Exp $
  */
 package option.util;
 
+import option.*;
 import option.ActivationPolicyDirective;
 import option.AttributEntry;
 import option.DirectiveEntry;
@@ -43,22 +44,21 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It
  * provides an adapter <code>createXXX</code> method for each class of the
  * model. <!-- end-user-doc -->
- * 
  * @see option.OptionPackage
  * @generated
  */
 public class OptionAdapterFactory extends AdapterFactoryImpl {
 	/**
-	 * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached model package.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected static OptionPackage modelPackage;
 
 	/**
-	 * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OptionAdapterFactory() {
@@ -72,7 +72,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This implementation returns <code>true</code>
 	 * if the object is either the model's package or is an instance object of
 	 * the model. <!-- end-user-doc -->
-	 * 
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
@@ -82,7 +81,7 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 			return true;
 		}
 		if (object instanceof EObject) {
-			return ((EObject) object).eClass().getEPackage() == modelPackage;
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
@@ -94,155 +93,127 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected OptionSwitch<Adapter> modelSwitch = new OptionSwitch<Adapter>() {
-		@Override
-		public Adapter caseParameterEntry(ParameterEntry object) {
-			return createParameterEntryAdapter();
-		}
-
-		@Override
-		public Adapter caseDirectiveEntry(DirectiveEntry object) {
-			return createDirectiveEntryAdapter();
-		}
-
-		@Override
-		public Adapter caseAttributEntry(AttributEntry object) {
-			return createAttributEntryAdapter();
-		}
-
-		@Override
-		public Adapter caseOsName(OsName object) {
-			return createOsNameAdapter();
-		}
-
-		@Override
-		public Adapter caseNativeCodeDirective(NativeCodeDirective object) {
-			return createNativeCodeDirectiveAdapter();
-		}
-
-		@Override
-		public Adapter caseOsVersion(OsVersion object) {
-			return createOsVersionAdapter();
-		}
-
-		@Override
-		public Adapter caseExcludePackages(ExcludePackages object) {
-			return createExcludePackagesAdapter();
-		}
-
-		@Override
-		public Adapter caseProcessor(Processor object) {
-			return createProcessorAdapter();
-		}
-
-		@Override
-		public Adapter caseIncludePackages(IncludePackages object) {
-			return createIncludePackagesAdapter();
-		}
-
-		@Override
-		public Adapter caseUses(Uses object) {
-			return createUsesAdapter();
-		}
-
-		@Override
-		public Adapter caseExtension(Extension object) {
-			return createExtensionAdapter();
-		}
-
-		@Override
-		public Adapter caseMandatory(Mandatory object) {
-			return createMandatoryAdapter();
-		}
-
-		@Override
-		public Adapter caseLanguage(Language object) {
-			return createLanguageAdapter();
-		}
-
-		@Override
-		public Adapter caseVisibility(Visibility object) {
-			return createVisibilityAdapter();
-		}
-
-		@Override
-		public Adapter caseSingleton(Singleton object) {
-			return createSingletonAdapter();
-		}
-
-		@Override
-		public Adapter caseResolution(Resolution object) {
-			return createResolutionAdapter();
-		}
-
-		@Override
-		public Adapter caseFragmentAttachment(FragmentAttachment object) {
-			return createFragmentAttachmentAdapter();
-		}
-
-		@Override
-		public Adapter caseSelectionFilter(SelectionFilter object) {
-			return createSelectionFilterAdapter();
-		}
-
-		@Override
-		public Adapter caseRequireBundleDirective(RequireBundleDirective object) {
-			return createRequireBundleDirectiveAdapter();
-		}
-
-		@Override
-		public Adapter caseFragmentHostDirective(FragmentHostDirective object) {
-			return createFragmentHostDirectiveAdapter();
-		}
-
-		@Override
-		public Adapter caseSymbolicNameDirective(SymbolicNameDirective object) {
-			return createSymbolicNameDirectiveAdapter();
-		}
-
-		@Override
-		public Adapter caseExportPackageDirective(ExportPackageDirective object) {
-			return createExportPackageDirectiveAdapter();
-		}
-
-		@Override
-		public Adapter caseImportPackageDirective(ImportPackageDirective object) {
-			return createImportPackageDirectiveAdapter();
-		}
-
-		@Override
-		public Adapter caseActivationPolicyDirective(
-				ActivationPolicyDirective object) {
-			return createActivationPolicyDirectiveAdapter();
-		}
-
-		@Override
-		public Adapter caseIncludeClasses(IncludeClasses object) {
-			return createIncludeClassesAdapter();
-		}
-
-		@Override
-		public Adapter caseExcludeClasses(ExcludeClasses object) {
-			return createExcludeClassesAdapter();
-		}
-
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter caseParameterEntry(ParameterEntry object) {
+				return createParameterEntryAdapter();
+			}
+			@Override
+			public Adapter caseDirectiveEntry(DirectiveEntry object) {
+				return createDirectiveEntryAdapter();
+			}
+			@Override
+			public Adapter caseAttributEntry(AttributEntry object) {
+				return createAttributEntryAdapter();
+			}
+			@Override
+			public Adapter caseOsName(OsName object) {
+				return createOsNameAdapter();
+			}
+			@Override
+			public Adapter caseNativeCodeDirective(NativeCodeDirective object) {
+				return createNativeCodeDirectiveAdapter();
+			}
+			@Override
+			public Adapter caseOsVersion(OsVersion object) {
+				return createOsVersionAdapter();
+			}
+			@Override
+			public Adapter caseExcludePackages(ExcludePackages object) {
+				return createExcludePackagesAdapter();
+			}
+			@Override
+			public Adapter caseProcessor(Processor object) {
+				return createProcessorAdapter();
+			}
+			@Override
+			public Adapter caseIncludePackages(IncludePackages object) {
+				return createIncludePackagesAdapter();
+			}
+			@Override
+			public Adapter caseUses(Uses object) {
+				return createUsesAdapter();
+			}
+			@Override
+			public Adapter caseExtension(Extension object) {
+				return createExtensionAdapter();
+			}
+			@Override
+			public Adapter caseMandatory(Mandatory object) {
+				return createMandatoryAdapter();
+			}
+			@Override
+			public Adapter caseLanguage(Language object) {
+				return createLanguageAdapter();
+			}
+			@Override
+			public Adapter caseVisibility(Visibility object) {
+				return createVisibilityAdapter();
+			}
+			@Override
+			public Adapter caseSingleton(Singleton object) {
+				return createSingletonAdapter();
+			}
+			@Override
+			public Adapter caseResolution(Resolution object) {
+				return createResolutionAdapter();
+			}
+			@Override
+			public Adapter caseFragmentAttachment(FragmentAttachment object) {
+				return createFragmentAttachmentAdapter();
+			}
+			@Override
+			public Adapter caseSelectionFilter(SelectionFilter object) {
+				return createSelectionFilterAdapter();
+			}
+			@Override
+			public Adapter caseRequireBundleDirective(RequireBundleDirective object) {
+				return createRequireBundleDirectiveAdapter();
+			}
+			@Override
+			public Adapter caseFragmentHostDirective(FragmentHostDirective object) {
+				return createFragmentHostDirectiveAdapter();
+			}
+			@Override
+			public Adapter caseSymbolicNameDirective(SymbolicNameDirective object) {
+				return createSymbolicNameDirectiveAdapter();
+			}
+			@Override
+			public Adapter caseExportPackageDirective(ExportPackageDirective object) {
+				return createExportPackageDirectiveAdapter();
+			}
+			@Override
+			public Adapter caseImportPackageDirective(ImportPackageDirective object) {
+				return createImportPackageDirectiveAdapter();
+			}
+			@Override
+			public Adapter caseActivationPolicyDirective(ActivationPolicyDirective object) {
+				return createActivationPolicyDirectiveAdapter();
+			}
+			@Override
+			public Adapter caseIncludeClasses(IncludeClasses object) {
+				return createIncludeClassesAdapter();
+			}
+			@Override
+			public Adapter caseExcludeClasses(ExcludeClasses object) {
+				return createExcludeClassesAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
-	 * Creates an adapter for the <code>target</code>. <!-- begin-user-doc
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
-	 * @param target
-	 *            the object to adapt.
+	 * @param target the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject) target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 	/**
@@ -250,7 +221,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.ParameterEntry
 	 * @generated
@@ -264,7 +234,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.DirectiveEntry
 	 * @generated
@@ -278,7 +247,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.AttributEntry
 	 * @generated
@@ -292,7 +260,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.OsName
 	 * @generated
@@ -306,7 +273,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.NativeCodeDirective
 	 * @generated
@@ -320,7 +286,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.OsVersion
 	 * @generated
@@ -334,7 +299,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.ExcludePackages
 	 * @generated
@@ -348,7 +312,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.Processor
 	 * @generated
@@ -362,7 +325,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.IncludePackages
 	 * @generated
@@ -376,7 +338,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.Uses
 	 * @generated
@@ -390,7 +351,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.Extension
 	 * @generated
@@ -404,7 +364,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.Mandatory
 	 * @generated
@@ -418,7 +377,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.Language
 	 * @generated
@@ -432,7 +390,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.Visibility
 	 * @generated
@@ -446,7 +403,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.Singleton
 	 * @generated
@@ -460,7 +416,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.Resolution
 	 * @generated
@@ -474,7 +429,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.FragmentAttachment
 	 * @generated
@@ -488,7 +442,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.SelectionFilter
 	 * @generated
@@ -502,7 +455,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.RequireBundleDirective
 	 * @generated
@@ -516,7 +468,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.FragmentHostDirective
 	 * @generated
@@ -530,7 +481,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.SymbolicNameDirective
 	 * @generated
@@ -544,7 +494,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.ExportPackageDirective
 	 * @generated
@@ -558,7 +507,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.ImportPackageDirective
 	 * @generated
@@ -572,7 +520,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.ActivationPolicyDirective
 	 * @generated
@@ -586,7 +533,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.IncludeClasses
 	 * @generated
@@ -600,7 +546,6 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see option.ExcludeClasses
 	 * @generated
@@ -610,9 +555,9 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for the default case. <!-- begin-user-doc --> This
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @generated
 	 */

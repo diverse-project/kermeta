@@ -2,21 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Visibility.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: Visibility.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Visibility</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link option.Visibility#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link option.Visibility#getVisibility <em>Visibility</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see option.OptionPackage#getVisibility()
  * @model
  * @generated
@@ -42,11 +42,9 @@ public interface Visibility extends RequireBundleDirective {
 	VisibilityEnum getVisibility();
 
 	/**
-	 * Sets the value of the '{@link option.Visibility#getVisibility <em>Visibility</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Visibility</em>' attribute.
+	 * Sets the value of the '{@link option.Visibility#getVisibility <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Visibility</em>' attribute.
 	 * @see option.VisibilityEnum
 	 * @see #getVisibility()
 	 * @generated

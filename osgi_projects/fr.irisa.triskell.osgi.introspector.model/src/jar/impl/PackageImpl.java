@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.3 2008-07-31 12:41:35 edaubert Exp $
+ * $Id: PackageImpl.java,v 1.4 2008-07-31 13:43:53 edaubert Exp $
  */
 package jar.impl;
 
@@ -32,19 +32,18 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link jar.impl.PackageImpl#getClasses <em>Classes</em>}</li>
- * <li>{@link jar.impl.PackageImpl#getSubPackages <em>Sub Packages</em>}</li>
- * <li>{@link jar.impl.PackageImpl#isBundleClassPath <em>Bundle Class Path</em>}</li>
+ *   <li>{@link jar.impl.PackageImpl#getClasses <em>Classes</em>}</li>
+ *   <li>{@link jar.impl.PackageImpl#getSubPackages <em>Sub Packages</em>}</li>
+ *   <li>{@link jar.impl.PackageImpl#isBundleClassPath <em>Bundle Class Path</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class PackageImpl extends BundleEntryImpl implements jar.Package {
 	/**
-	 * The cached value of the '{@link #getClasses() <em>Classes</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getClasses() <em>Classes</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getClasses()
 	 * @generated
 	 * @ordered
@@ -52,9 +51,8 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 	protected EList<jar.Class> classes;
 
 	/**
-	 * The cached value of the '{@link #getSubPackages() <em>Sub Packages</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getSubPackages() <em>Sub Packages</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSubPackages()
 	 * @generated
 	 * @ordered
@@ -62,9 +60,8 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 	protected EList<jar.Package> subPackages;
 
 	/**
-	 * The default value of the '{@link #isBundleClassPath() <em>Bundle Class Path</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #isBundleClassPath() <em>Bundle Class Path</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isBundleClassPath()
 	 * @generated
 	 * @ordered
@@ -72,9 +69,8 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 	protected static final boolean BUNDLE_CLASS_PATH_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isBundleClassPath() <em>Bundle Class Path</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #isBundleClassPath() <em>Bundle Class Path</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isBundleClassPath()
 	 * @generated
 	 * @ordered
@@ -83,7 +79,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected PackageImpl() {
@@ -92,7 +87,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -102,33 +96,28 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<jar.Class> getClasses() {
 		if (classes == null) {
-			classes = new EObjectContainmentEList<jar.Class>(jar.Class.class,
-					this, JarPackage.PACKAGE__CLASSES);
+			classes = new EObjectContainmentEList<jar.Class>(jar.Class.class, this, JarPackage.PACKAGE__CLASSES);
 		}
 		return classes;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<jar.Package> getSubPackages() {
 		if (subPackages == null) {
-			subPackages = new EObjectContainmentEList<jar.Package>(
-					jar.Package.class, this, JarPackage.PACKAGE__SUB_PACKAGES);
+			subPackages = new EObjectContainmentEList<jar.Package>(jar.Package.class, this, JarPackage.PACKAGE__SUB_PACKAGES);
 		}
 		return subPackages;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public boolean isBundleClassPath() {
@@ -137,128 +126,115 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setBundleClassPath(boolean newBundleClassPath) {
 		boolean oldBundleClassPath = bundleClassPath;
 		bundleClassPath = newBundleClassPath;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					JarPackage.PACKAGE__BUNDLE_CLASS_PATH, oldBundleClassPath,
-					bundleClassPath));
+			eNotify(new ENotificationImpl(this, Notification.SET, JarPackage.PACKAGE__BUNDLE_CLASS_PATH, oldBundleClassPath, bundleClassPath));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case JarPackage.PACKAGE__CLASSES:
-			return ((InternalEList<?>) getClasses())
-					.basicRemove(otherEnd, msgs);
-		case JarPackage.PACKAGE__SUB_PACKAGES:
-			return ((InternalEList<?>) getSubPackages()).basicRemove(otherEnd,
-					msgs);
+			case JarPackage.PACKAGE__CLASSES:
+				return ((InternalEList<?>)getClasses()).basicRemove(otherEnd, msgs);
+			case JarPackage.PACKAGE__SUB_PACKAGES:
+				return ((InternalEList<?>)getSubPackages()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case JarPackage.PACKAGE__CLASSES:
-			return getClasses();
-		case JarPackage.PACKAGE__SUB_PACKAGES:
-			return getSubPackages();
-		case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
-			return isBundleClassPath() ? Boolean.TRUE : Boolean.FALSE;
+			case JarPackage.PACKAGE__CLASSES:
+				return getClasses();
+			case JarPackage.PACKAGE__SUB_PACKAGES:
+				return getSubPackages();
+			case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
+				return isBundleClassPath() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case JarPackage.PACKAGE__CLASSES:
-			getClasses().clear();
-			getClasses().addAll((Collection<? extends jar.Class>) newValue);
-			return;
-		case JarPackage.PACKAGE__SUB_PACKAGES:
-			getSubPackages().clear();
-			getSubPackages().addAll(
-					(Collection<? extends jar.Package>) newValue);
-			return;
-		case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
-			setBundleClassPath(((Boolean) newValue).booleanValue());
-			return;
+			case JarPackage.PACKAGE__CLASSES:
+				getClasses().clear();
+				getClasses().addAll((Collection<? extends jar.Class>)newValue);
+				return;
+			case JarPackage.PACKAGE__SUB_PACKAGES:
+				getSubPackages().clear();
+				getSubPackages().addAll((Collection<? extends jar.Package>)newValue);
+				return;
+			case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
+				setBundleClassPath(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case JarPackage.PACKAGE__CLASSES:
-			getClasses().clear();
-			return;
-		case JarPackage.PACKAGE__SUB_PACKAGES:
-			getSubPackages().clear();
-			return;
-		case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
-			setBundleClassPath(BUNDLE_CLASS_PATH_EDEFAULT);
-			return;
+			case JarPackage.PACKAGE__CLASSES:
+				getClasses().clear();
+				return;
+			case JarPackage.PACKAGE__SUB_PACKAGES:
+				getSubPackages().clear();
+				return;
+			case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
+				setBundleClassPath(BUNDLE_CLASS_PATH_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case JarPackage.PACKAGE__CLASSES:
-			return classes != null && !classes.isEmpty();
-		case JarPackage.PACKAGE__SUB_PACKAGES:
-			return subPackages != null && !subPackages.isEmpty();
-		case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
-			return bundleClassPath != BUNDLE_CLASS_PATH_EDEFAULT;
+			case JarPackage.PACKAGE__CLASSES:
+				return classes != null && !classes.isEmpty();
+			case JarPackage.PACKAGE__SUB_PACKAGES:
+				return subPackages != null && !subPackages.isEmpty();
+			case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
+				return bundleClassPath != BUNDLE_CLASS_PATH_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (bundleClassPath: ");

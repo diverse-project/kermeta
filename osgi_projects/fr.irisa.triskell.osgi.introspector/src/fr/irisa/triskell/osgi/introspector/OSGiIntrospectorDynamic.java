@@ -25,14 +25,8 @@ import framework.Framework;
 import framework.FrameworkFactory;
 
 public class OSGiIntrospectorDynamic {
-	// TODO utilisation de Logger
 
 	private BundleContext context;
-
-
-	// private String line;
-
-	
 	private Parser parser;
 	private Map<Bundle, String> log;
 	private Framework framework;
@@ -52,21 +46,20 @@ public class OSGiIntrospectorDynamic {
 		for (org.osgi.framework.Bundle bundle : this.context.getBundles()) {
 			// do not include this bundle in the processing
 			if (!bundle.getSymbolicName().contains(context.getBundle().getSymbolicName())) {
-					validGeneration = validGeneration
-							&& this.generateBundle(bundle);
+					validGeneration = this.generateBundle(bundle) && validGeneration;
 			}
 		}
 		// TODO vérification du log ainsi que dans Static
-		if (validGeneration) {
-			this.introspectionWithoutError = validGeneration && this.resolve();
+		//if (validGeneration) {
+			this.introspectionWithoutError = this.resolve() && validGeneration;
 			OSGiIntrospectorUtil.saveModel(XMIFilePath, this.framework);
 
-		} else {
+		/*} else {
 			OSGiIntrospectorUtil
 					.log(Level.SEVERE,
 							"The introspection failed because a bundle is unvalid with several error(s)");
 			OSGiIntrospectorUtil.displayLog(this.log);
-		}
+		}*/
 
 	}
 	
@@ -174,8 +167,8 @@ public class OSGiIntrospectorDynamic {
 		resolver.resolveExportPackage(this.parser.getUnresolvedExportPackageValue(), this.parser.getUnresolvedExportPackageBundle());
 		resolver.resolveExportPackageExclude(this.parser.getUnresolvedExportPackageExcludeValue(), this.parser.getUnresolvedExportPackageExcludeExportPackage());
 		resolver.resolveExportPackageInclude(this.parser.getUnresolvedExportPackageIncludeValue(), this.parser.getUnresolvedExportPackageIncludeExportPackage());
-		//resolver.resolveActivationPolicyExclude(this.parser.getUnresolvedActivationPolicyExcludeValue(), this.parser.getUnresolvedActivationPolicyExcludeBundle());
-		//resolver.resolveActivationPolicyInclude(this.parser.getUnresolvedActivationPolicyIncludeValue(), this.parser.getUnresolvedActivationPolicyIncludeBundle());
+		resolver.resolveActivationPolicyExclude(this.parser.getUnresolvedActivationPolicyExcludeValue(), this.parser.getUnresolvedActivationPolicyExcludeBundle());
+		resolver.resolveActivationPolicyInclude(this.parser.getUnresolvedActivationPolicyIncludeValue(), this.parser.getUnresolvedActivationPolicyIncludeBundle());
 		resolver.resolveActivator(this.parser.getUnresolvedActivatorBundle(), this.parser.getUnresolvedActivatorValue());
 		resolver.resolveExportService(this.parser.getUnresolvedExportServiceBundle(), this.parser.getUnresolvedExportServiceValue());
 

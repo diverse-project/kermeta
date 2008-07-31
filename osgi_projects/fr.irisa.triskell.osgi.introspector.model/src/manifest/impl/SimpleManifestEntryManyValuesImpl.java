@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimpleManifestEntryManyValuesImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: SimpleManifestEntryManyValuesImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package manifest.impl;
 
@@ -21,18 +21,17 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link manifest.impl.SimpleManifestEntryManyValuesImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link manifest.impl.SimpleManifestEntryManyValuesImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class SimpleManifestEntryManyValuesImpl extends MANIFESTEntryImpl
 		implements SimpleManifestEntryManyValues {
 	/**
-	 * The cached value of the '{@link #getValues() <em>Values</em>}'
-	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getValues()
 	 * @generated
 	 * @ordered
@@ -41,7 +40,6 @@ public class SimpleManifestEntryManyValuesImpl extends MANIFESTEntryImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected SimpleManifestEntryManyValuesImpl() {
@@ -50,7 +48,6 @@ public class SimpleManifestEntryManyValuesImpl extends MANIFESTEntryImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -60,86 +57,78 @@ public class SimpleManifestEntryManyValuesImpl extends MANIFESTEntryImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<String> getValues() {
 		if (values == null) {
-			values = new EDataTypeUniqueEList<String>(String.class, this,
-					ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES__VALUES);
+			values = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES__VALUES);
 		}
 		return values;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES__VALUES:
-			return getValues();
+			case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES__VALUES:
+				return getValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES__VALUES:
-			getValues().clear();
-			getValues().addAll((Collection<? extends String>) newValue);
-			return;
+			case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES__VALUES:
+				getValues().clear();
+				getValues().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES__VALUES:
-			getValues().clear();
-			return;
+			case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES__VALUES:
+				getValues().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES__VALUES:
-			return values != null && !values.isEmpty();
+			case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES__VALUES:
+				return values != null && !values.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (values: ");

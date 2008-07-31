@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FragmentAttachmentEnum.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: FragmentAttachmentEnum.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
@@ -15,16 +15,15 @@ import org.eclipse.emf.common.util.Enumerator;
 /**
  * <!-- begin-user-doc --> A representation of the literals of the enumeration '<em><b>Fragment Attachment Enum</b></em>',
  * and utility methods for working with them. <!-- end-user-doc -->
- * 
  * @see option.OptionPackage#getFragmentAttachmentEnum()
  * @model
  * @generated
  */
 public enum FragmentAttachmentEnum implements Enumerator {
 	/**
-	 * The '<em><b>ALWAYS</b></em>' literal object. <!-- begin-user-doc -->
+	 * The '<em><b>ALWAYS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #ALWAYS_VALUE
 	 * @generated
 	 * @ordered
@@ -32,9 +31,9 @@ public enum FragmentAttachmentEnum implements Enumerator {
 	ALWAYS(0, "ALWAYS", "always"),
 
 	/**
-	 * The '<em><b>NEVER</b></em>' literal object. <!-- begin-user-doc -->
+	 * The '<em><b>NEVER</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #NEVER_VALUE
 	 * @generated
 	 * @ordered
@@ -52,13 +51,13 @@ public enum FragmentAttachmentEnum implements Enumerator {
 	RESOLVETIME(2, "RESOLVETIME", "resolve-time");
 
 	/**
-	 * The '<em><b>ALWAYS</b></em>' literal value. <!-- begin-user-doc -->
+	 * The '<em><b>ALWAYS</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>ALWAYS</b></em>' literal object isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #ALWAYS
 	 * @model literal="always"
 	 * @generated
@@ -67,13 +66,13 @@ public enum FragmentAttachmentEnum implements Enumerator {
 	public static final int ALWAYS_VALUE = 0;
 
 	/**
-	 * The '<em><b>NEVER</b></em>' literal value. <!-- begin-user-doc -->
+	 * The '<em><b>NEVER</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>NEVER</b></em>' literal object isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #NEVER
 	 * @model literal="never"
 	 * @generated
@@ -82,14 +81,14 @@ public enum FragmentAttachmentEnum implements Enumerator {
 	public static final int NEVER_VALUE = 1;
 
 	/**
-	 * The '<em><b>RESOLVETIME</b></em>' literal value. <!-- begin-user-doc
+	 * The '<em><b>RESOLVETIME</b></em>' literal value.
+	 * <!-- begin-user-doc
 	 * -->
 	 * <p>
 	 * If the meaning of '<em><b>RESOLVETIME</b></em>' literal object isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #RESOLVETIME
 	 * @model literal="resolve-time"
 	 * @generated
@@ -98,22 +97,22 @@ public enum FragmentAttachmentEnum implements Enumerator {
 	public static final int RESOLVETIME_VALUE = 2;
 
 	/**
-	 * An array of all the '<em><b>Fragment Attachment Enum</b></em>'
-	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * An array of all the '<em><b>Fragment Attachment Enum</b></em>' enumerators.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private static final FragmentAttachmentEnum[] VALUES_ARRAY = new FragmentAttachmentEnum[] {
-			ALWAYS, NEVER, RESOLVETIME, };
+			ALWAYS,
+			NEVER,
+			RESOLVETIME,
+		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Fragment Attachment Enum</b></em>'
-	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * A public read-only list of all the '<em><b>Fragment Attachment Enum</b></em>' enumerators.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<FragmentAttachmentEnum> VALUES = Collections
-			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<FragmentAttachmentEnum> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Fragment Attachment Enum</b></em>' literal with
@@ -133,9 +132,8 @@ public enum FragmentAttachmentEnum implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Fragment Attachment Enum</b></em>' literal with
-	 * the specified name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Fragment Attachment Enum</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static FragmentAttachmentEnum getByName(String name) {
@@ -157,41 +155,35 @@ public enum FragmentAttachmentEnum implements Enumerator {
 	 */
 	public static FragmentAttachmentEnum get(int value) {
 		switch (value) {
-		case ALWAYS_VALUE:
-			return ALWAYS;
-		case NEVER_VALUE:
-			return NEVER;
-		case RESOLVETIME_VALUE:
-			return RESOLVETIME;
+			case ALWAYS_VALUE: return ALWAYS;
+			case NEVER_VALUE: return NEVER;
+			case RESOLVETIME_VALUE: return RESOLVETIME;
 		}
 		return null;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private FragmentAttachmentEnum(int value, String name, String literal) {
@@ -202,35 +194,31 @@ public enum FragmentAttachmentEnum implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string
-	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

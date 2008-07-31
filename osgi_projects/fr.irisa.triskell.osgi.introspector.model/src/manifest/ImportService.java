@@ -2,22 +2,23 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportService.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: ImportService.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package manifest;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Import Service</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link manifest.ImportService#isResolve <em>Resolve</em>}</li>
- * <li>{@link manifest.ImportService#getService <em>Service</em>}</li>
+ *   <li>{@link manifest.ImportService#isResolve <em>Resolve</em>}</li>
+ *   <li>{@link manifest.ImportService#getService <em>Service</em>}</li>
+ *   <li>{@link manifest.ImportService#getServiceElement <em>Service Element</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see manifest.ManifestPackage#getImportService()
  * @model
  * @generated
@@ -41,15 +42,39 @@ public interface ImportService extends MANIFESTEntry {
 	String getService();
 
 	/**
-	 * Sets the value of the '{@link manifest.ImportService#getService <em>Service</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Service</em>' attribute.
+	 * Sets the value of the '{@link manifest.ImportService#getService <em>Service</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Service</em>' attribute.
 	 * @see #getService()
 	 * @generated
 	 */
 	void setService(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Service Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Service Element</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Service Element</em>' reference.
+	 * @see #setServiceElement(Service)
+	 * @see manifest.ManifestPackage#getImportService_ServiceElement()
+	 * @model
+	 * @generated
+	 */
+	Service getServiceElement();
+
+	/**
+	 * Sets the value of the '{@link manifest.ImportService#getServiceElement <em>Service Element</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Service Element</em>' reference.
+	 * @see #getServiceElement()
+	 * @generated
+	 */
+	void setServiceElement(Service value);
 
 	/**
 	 * Returns the value of the '<em><b>Resolve</b></em>' attribute. <!--
@@ -69,11 +94,9 @@ public interface ImportService extends MANIFESTEntry {
 	boolean isResolve();
 
 	/**
-	 * Sets the value of the '{@link manifest.ImportService#isResolve <em>Resolve</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Resolve</em>' attribute.
+	 * Sets the value of the '{@link manifest.ImportService#isResolve <em>Resolve</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resolve</em>' attribute.
 	 * @see #isResolve()
 	 * @generated
 	 */

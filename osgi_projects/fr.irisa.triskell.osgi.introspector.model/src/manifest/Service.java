@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Service.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: Service.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package manifest;
 
@@ -11,14 +11,14 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Service</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link manifest.Service#getInterface <em>Interface</em>}</li>
+ *   <li>{@link manifest.Service#getInterface <em>Interface</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see manifest.ManifestPackage#getService()
  * @model
  * @generated
@@ -42,11 +42,9 @@ public interface Service extends EObject {
 	jar.Class getInterface();
 
 	/**
-	 * Sets the value of the '{@link manifest.Service#getInterface <em>Interface</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Interface</em>' reference.
+	 * Sets the value of the '{@link manifest.Service#getInterface <em>Interface</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Interface</em>' reference.
 	 * @see #getInterface()
 	 * @generated
 	 */

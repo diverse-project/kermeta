@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleClassPathImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: BundleClassPathImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package manifest.impl;
 
@@ -24,18 +24,17 @@ import org.osgi.framework.Constants;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link manifest.impl.BundleClassPathImpl#getEntries <em>Entries</em>}</li>
+ *   <li>{@link manifest.impl.BundleClassPathImpl#getEntries <em>Entries</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class BundleClassPathImpl extends MANIFESTEntryImpl implements
 		BundleClassPath {
 	/**
-	 * The cached value of the '{@link #getEntries() <em>Entries</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getEntries() <em>Entries</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getEntries()
 	 * @generated
 	 * @ordered
@@ -52,7 +51,6 @@ public class BundleClassPathImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -62,73 +60,67 @@ public class BundleClassPathImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<SystemEntry> getEntries() {
 		if (entries == null) {
-			entries = new EObjectResolvingEList<SystemEntry>(SystemEntry.class,
-					this, ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES);
+			entries = new EObjectResolvingEList<SystemEntry>(SystemEntry.class, this, ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES);
 		}
 		return entries;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
-			return getEntries();
+			case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
+				return getEntries();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
-			getEntries().clear();
-			getEntries().addAll((Collection<? extends SystemEntry>) newValue);
-			return;
+			case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
+				getEntries().clear();
+				getEntries().addAll((Collection<? extends SystemEntry>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
-			getEntries().clear();
-			return;
+			case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
+				getEntries().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
-			return entries != null && !entries.isEmpty();
+			case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
+				return entries != null && !entries.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

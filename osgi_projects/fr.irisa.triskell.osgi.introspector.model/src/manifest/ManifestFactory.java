@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestFactory.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: ManifestFactory.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package manifest;
 
@@ -11,32 +11,31 @@ import org.eclipse.emf.ecore.EFactory;
 /**
  * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
  * create method for each non-abstract class of the model. <!-- end-user-doc -->
- * 
  * @see manifest.ManifestPackage
  * @generated
  */
 public interface ManifestFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	ManifestFactory eINSTANCE = manifest.impl.ManifestFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Service</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Service</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Service</em>'.
 	 * @generated
 	 */
 	Service createService();
 
 	/**
-	 * Returns a new object of class '<em>Version</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Version</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Version</em>'.
 	 * @generated
 	 */
@@ -243,7 +242,6 @@ public interface ManifestFactory extends EFactory {
 	/**
 	 * Returns a new object of class '<em>Bundle Activation Policy</em>'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Bundle Activation Policy</em>'.
 	 * @generated
 	 */
@@ -270,7 +268,6 @@ public interface ManifestFactory extends EFactory {
 	/**
 	 * Returns a new object of class '<em>Bundle Required Execution Environment</em>'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Bundle Required Execution Environment</em>'.
 	 * @generated
 	 */
@@ -279,7 +276,6 @@ public interface ManifestFactory extends EFactory {
 	/**
 	 * Returns a new object of class '<em>Simple Manifest Entry Many Values</em>'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Simple Manifest Entry Many Values</em>'.
 	 * @generated
 	 */
@@ -288,16 +284,15 @@ public interface ManifestFactory extends EFactory {
 	/**
 	 * Returns a new object of class '<em>Bundle Manifest Version</em>'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Bundle Manifest Version</em>'.
 	 * @generated
 	 */
 	BundleManifestVersion createBundleManifestVersion();
 
 	/**
-	 * Returns the package supported by this factory. <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the package supported by this factory.
 	 * @generated
 	 */

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Bundle.java,v 1.1 2008-07-30 14:08:00 edaubert Exp $
+ * $Id: Bundle.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package framework;
 
@@ -15,19 +15,19 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Bundle</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link framework.Bundle#getFragments <em>Fragments</em>}</li>
- * <li>{@link framework.Bundle#getLocation <em>Location</em>}</li>
- * <li>{@link framework.Bundle#getManifest <em>Manifest</em>}</li>
- * <li>{@link framework.Bundle#getSymbolicName <em>Symbolic Name</em>}</li>
- * <li>{@link framework.Bundle#getFolder <em>Folder</em>}</li>
- * <li>{@link framework.Bundle#getPackage <em>Package</em>}</li>
+ *   <li>{@link framework.Bundle#getFragments <em>Fragments</em>}</li>
+ *   <li>{@link framework.Bundle#getLocation <em>Location</em>}</li>
+ *   <li>{@link framework.Bundle#getManifest <em>Manifest</em>}</li>
+ *   <li>{@link framework.Bundle#getSymbolicName <em>Symbolic Name</em>}</li>
+ *   <li>{@link framework.Bundle#getFolder <em>Folder</em>}</li>
+ *   <li>{@link framework.Bundle#getPackage <em>Package</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see framework.FrameworkPackage#getBundle()
  * @model
  * @generated
@@ -51,14 +51,14 @@ public interface Bundle extends EObject {
 	EList<Bundle> getFragments();
 
 	/**
-	 * Returns the value of the '<em><b>Location</b></em>' attribute. The
-	 * default value is <code>""</code>. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Location</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Location</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Location</em>' attribute.
 	 * @see #setLocation(String)
 	 * @see framework.FrameworkPackage#getBundle_Location()
@@ -68,25 +68,22 @@ public interface Bundle extends EObject {
 	String getLocation();
 
 	/**
-	 * Sets the value of the '{@link framework.Bundle#getLocation <em>Location</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Location</em>' attribute.
+	 * Sets the value of the '{@link framework.Bundle#getLocation <em>Location</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Location</em>' attribute.
 	 * @see #getLocation()
 	 * @generated
 	 */
 	void setLocation(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Manifest</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Manifest</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Manifest</em>' containment reference isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Manifest</em>' containment reference.
 	 * @see #setManifest(MANIFEST)
 	 * @see framework.FrameworkPackage#getBundle_Manifest()
@@ -96,12 +93,9 @@ public interface Bundle extends EObject {
 	MANIFEST getManifest();
 
 	/**
-	 * Sets the value of the '{@link framework.Bundle#getManifest <em>Manifest</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Manifest</em>' containment
-	 *            reference.
+	 * Sets the value of the '{@link framework.Bundle#getManifest <em>Manifest</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Manifest</em>' containment reference.
 	 * @see #getManifest()
 	 * @generated
 	 */
@@ -115,7 +109,6 @@ public interface Bundle extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Symbolic Name</em>' attribute.
 	 * @see #setSymbolicName(String)
 	 * @see framework.FrameworkPackage#getBundle_SymbolicName()
@@ -125,25 +118,22 @@ public interface Bundle extends EObject {
 	String getSymbolicName();
 
 	/**
-	 * Sets the value of the '{@link framework.Bundle#getSymbolicName <em>Symbolic Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Symbolic Name</em>' attribute.
+	 * Sets the value of the '{@link framework.Bundle#getSymbolicName <em>Symbolic Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Symbolic Name</em>' attribute.
 	 * @see #getSymbolicName()
 	 * @generated
 	 */
 	void setSymbolicName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Folder</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Folder</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Folder</em>' containment reference isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Folder</em>' containment reference.
 	 * @see #setFolder(Folder)
 	 * @see framework.FrameworkPackage#getBundle_Folder()
@@ -153,26 +143,22 @@ public interface Bundle extends EObject {
 	Folder getFolder();
 
 	/**
-	 * Sets the value of the '{@link framework.Bundle#getFolder <em>Folder</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Folder</em>' containment
-	 *            reference.
+	 * Sets the value of the '{@link framework.Bundle#getFolder <em>Folder</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Folder</em>' containment reference.
 	 * @see #getFolder()
 	 * @generated
 	 */
 	void setFolder(Folder value);
 
 	/**
-	 * Returns the value of the '<em><b>Package</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Package</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Package</em>' containment reference isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Package</em>' containment reference.
 	 * @see #setPackage(jar.Package)
 	 * @see framework.FrameworkPackage#getBundle_Package()
@@ -182,12 +168,9 @@ public interface Bundle extends EObject {
 	jar.Package getPackage();
 
 	/**
-	 * Sets the value of the '{@link framework.Bundle#getPackage <em>Package</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Package</em>' containment
-	 *            reference.
+	 * Sets the value of the '{@link framework.Bundle#getPackage <em>Package</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Package</em>' containment reference.
 	 * @see #getPackage()
 	 * @generated
 	 */

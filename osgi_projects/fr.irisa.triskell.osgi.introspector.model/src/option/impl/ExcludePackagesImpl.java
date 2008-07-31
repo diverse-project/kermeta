@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExcludePackagesImpl.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: ExcludePackagesImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package option.impl;
+
+import jar.Package;
 
 import java.util.Collection;
 
@@ -22,18 +24,17 @@ import org.osgi.framework.Constants;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link option.impl.ExcludePackagesImpl#getPackages <em>Packages</em>}</li>
+ *   <li>{@link option.impl.ExcludePackagesImpl#getPackages <em>Packages</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ExcludePackagesImpl extends ActivationPolicyDirectiveImpl
 		implements ExcludePackages {
 	/**
-	 * The cached value of the '{@link #getPackages() <em>Packages</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getPackages()
 	 * @generated
 	 * @ordered
@@ -50,7 +51,6 @@ public class ExcludePackagesImpl extends ActivationPolicyDirectiveImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -60,76 +60,74 @@ public class ExcludePackagesImpl extends ActivationPolicyDirectiveImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<jar.Package> getPackages() {
 		if (packages == null) {
-			packages = new EObjectResolvingEList<jar.Package>(
-					jar.Package.class, this,
-					OptionPackage.EXCLUDE_PACKAGES__PACKAGES);
+			packages = new EObjectResolvingEList<jar.Package>(jar.Package.class, this, OptionPackage.EXCLUDE_PACKAGES__PACKAGES);
 		}
 		return packages;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case OptionPackage.EXCLUDE_PACKAGES__PACKAGES:
-			return getPackages();
+			case OptionPackage.EXCLUDE_PACKAGES__PACKAGES:
+				return getPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case OptionPackage.EXCLUDE_PACKAGES__PACKAGES:
-			getPackages().clear();
-			getPackages().addAll((Collection<? extends jar.Package>) newValue);
-			return;
+			case OptionPackage.EXCLUDE_PACKAGES__PACKAGES:
+				getPackages().clear();
+				getPackages().addAll((Collection<? extends jar.Package>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case OptionPackage.EXCLUDE_PACKAGES__PACKAGES:
-			getPackages().clear();
-			return;
+			case OptionPackage.EXCLUDE_PACKAGES__PACKAGES:
+				getPackages().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case OptionPackage.EXCLUDE_PACKAGES__PACKAGES:
-			return packages != null && !packages.isEmpty();
+			case OptionPackage.EXCLUDE_PACKAGES__PACKAGES:
+				return packages != null && !packages.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	public void addExcludePackage(Package _package) {
+		getPackages().add(_package);
+		
 	}
 
 } // ExcludePackagesImpl

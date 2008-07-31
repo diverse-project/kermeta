@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VersionImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: VersionImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package manifest.impl;
 
@@ -21,20 +21,19 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link manifest.impl.VersionImpl#getMajor <em>Major</em>}</li>
- * <li>{@link manifest.impl.VersionImpl#getMinor <em>Minor</em>}</li>
- * <li>{@link manifest.impl.VersionImpl#getMicro <em>Micro</em>}</li>
- * <li>{@link manifest.impl.VersionImpl#getQualifier <em>Qualifier</em>}</li>
+ *   <li>{@link manifest.impl.VersionImpl#getMajor <em>Major</em>}</li>
+ *   <li>{@link manifest.impl.VersionImpl#getMinor <em>Minor</em>}</li>
+ *   <li>{@link manifest.impl.VersionImpl#getMicro <em>Micro</em>}</li>
+ *   <li>{@link manifest.impl.VersionImpl#getQualifier <em>Qualifier</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class VersionImpl extends EObjectImpl implements Version {
 	/**
-	 * The default value of the '{@link #getMajor() <em>Major</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getMajor() <em>Major</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getMajor()
 	 * @generated
 	 * @ordered
@@ -44,7 +43,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	/**
 	 * The cached value of the '{@link #getMajor() <em>Major</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getMajor()
 	 * @generated
 	 * @ordered
@@ -52,9 +50,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected int major = MAJOR_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getMinor() <em>Minor</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getMinor() <em>Minor</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getMinor()
 	 * @generated
 	 * @ordered
@@ -64,7 +61,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	/**
 	 * The cached value of the '{@link #getMinor() <em>Minor</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getMinor()
 	 * @generated
 	 * @ordered
@@ -72,9 +68,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected int minor = MINOR_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getMicro() <em>Micro</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getMicro() <em>Micro</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getMicro()
 	 * @generated
 	 * @ordered
@@ -84,7 +79,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	/**
 	 * The cached value of the '{@link #getMicro() <em>Micro</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getMicro()
 	 * @generated
 	 * @ordered
@@ -92,9 +86,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected int micro = MICRO_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getQualifier() <em>Qualifier</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getQualifier() <em>Qualifier</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getQualifier()
 	 * @generated
 	 * @ordered
@@ -102,9 +95,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected static final String QUALIFIER_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getQualifier() <em>Qualifier</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getQualifier() <em>Qualifier</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getQualifier()
 	 * @generated
 	 * @ordered
@@ -124,7 +116,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -134,7 +125,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getMajor() {
@@ -143,20 +133,17 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setMajor(int newMajor) {
 		int oldMajor = major;
 		major = newMajor;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ManifestPackage.VERSION__MAJOR, oldMajor, major));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.VERSION__MAJOR, oldMajor, major));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getMinor() {
@@ -165,20 +152,17 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setMinor(int newMinor) {
 		int oldMinor = minor;
 		minor = newMinor;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ManifestPackage.VERSION__MINOR, oldMinor, minor));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.VERSION__MINOR, oldMinor, minor));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getMicro() {
@@ -187,20 +171,17 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setMicro(int newMicro) {
 		int oldMicro = micro;
 		micro = newMicro;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ManifestPackage.VERSION__MICRO, oldMicro, micro));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.VERSION__MICRO, oldMicro, micro));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getQualifier() {
@@ -209,115 +190,106 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setQualifier(String newQualifier) {
 		String oldQualifier = qualifier;
 		qualifier = newQualifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ManifestPackage.VERSION__QUALIFIER, oldQualifier, qualifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.VERSION__QUALIFIER, oldQualifier, qualifier));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ManifestPackage.VERSION__MAJOR:
-			return new Integer(getMajor());
-		case ManifestPackage.VERSION__MINOR:
-			return new Integer(getMinor());
-		case ManifestPackage.VERSION__MICRO:
-			return new Integer(getMicro());
-		case ManifestPackage.VERSION__QUALIFIER:
-			return getQualifier();
+			case ManifestPackage.VERSION__MAJOR:
+				return new Integer(getMajor());
+			case ManifestPackage.VERSION__MINOR:
+				return new Integer(getMinor());
+			case ManifestPackage.VERSION__MICRO:
+				return new Integer(getMicro());
+			case ManifestPackage.VERSION__QUALIFIER:
+				return getQualifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ManifestPackage.VERSION__MAJOR:
-			setMajor(((Integer) newValue).intValue());
-			return;
-		case ManifestPackage.VERSION__MINOR:
-			setMinor(((Integer) newValue).intValue());
-			return;
-		case ManifestPackage.VERSION__MICRO:
-			setMicro(((Integer) newValue).intValue());
-			return;
-		case ManifestPackage.VERSION__QUALIFIER:
-			setQualifier((String) newValue);
-			return;
+			case ManifestPackage.VERSION__MAJOR:
+				setMajor(((Integer)newValue).intValue());
+				return;
+			case ManifestPackage.VERSION__MINOR:
+				setMinor(((Integer)newValue).intValue());
+				return;
+			case ManifestPackage.VERSION__MICRO:
+				setMicro(((Integer)newValue).intValue());
+				return;
+			case ManifestPackage.VERSION__QUALIFIER:
+				setQualifier((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.VERSION__MAJOR:
-			setMajor(MAJOR_EDEFAULT);
-			return;
-		case ManifestPackage.VERSION__MINOR:
-			setMinor(MINOR_EDEFAULT);
-			return;
-		case ManifestPackage.VERSION__MICRO:
-			setMicro(MICRO_EDEFAULT);
-			return;
-		case ManifestPackage.VERSION__QUALIFIER:
-			setQualifier(QUALIFIER_EDEFAULT);
-			return;
+			case ManifestPackage.VERSION__MAJOR:
+				setMajor(MAJOR_EDEFAULT);
+				return;
+			case ManifestPackage.VERSION__MINOR:
+				setMinor(MINOR_EDEFAULT);
+				return;
+			case ManifestPackage.VERSION__MICRO:
+				setMicro(MICRO_EDEFAULT);
+				return;
+			case ManifestPackage.VERSION__QUALIFIER:
+				setQualifier(QUALIFIER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.VERSION__MAJOR:
-			return major != MAJOR_EDEFAULT;
-		case ManifestPackage.VERSION__MINOR:
-			return minor != MINOR_EDEFAULT;
-		case ManifestPackage.VERSION__MICRO:
-			return micro != MICRO_EDEFAULT;
-		case ManifestPackage.VERSION__QUALIFIER:
-			return QUALIFIER_EDEFAULT == null ? qualifier != null
-					: !QUALIFIER_EDEFAULT.equals(qualifier);
+			case ManifestPackage.VERSION__MAJOR:
+				return major != MAJOR_EDEFAULT;
+			case ManifestPackage.VERSION__MINOR:
+				return minor != MINOR_EDEFAULT;
+			case ManifestPackage.VERSION__MICRO:
+				return micro != MICRO_EDEFAULT;
+			case ManifestPackage.VERSION__QUALIFIER:
+				return QUALIFIER_EDEFAULT == null ? qualifier != null : !QUALIFIER_EDEFAULT.equals(qualifier);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (major: ");

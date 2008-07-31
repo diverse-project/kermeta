@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Uses.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: Uses.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
@@ -11,14 +11,15 @@ import org.eclipse.emf.common.util.EList;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Uses</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link option.Uses#getPackages <em>Packages</em>}</li>
+ *   <li>{@link option.Uses#getPackages <em>Packages</em>}</li>
+ *   <li>{@link option.Uses#getPackagesList <em>Packages List</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see option.OptionPackage#getUses()
  * @model
  * @generated
@@ -40,6 +41,22 @@ public interface Uses extends ExportPackageDirective {
 	 * @generated
 	 */
 	EList<String> getPackages();
+
+	/**
+	 * Returns the value of the '<em><b>Packages List</b></em>' reference list.
+	 * The list contents are of type {@link jar.Package}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Packages List</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Packages List</em>' reference list.
+	 * @see option.OptionPackage#getUses_PackagesList()
+	 * @model
+	 * @generated
+	 */
+	EList<jar.Package> getPackagesList();
 
 	void addPackage(String _package);
 

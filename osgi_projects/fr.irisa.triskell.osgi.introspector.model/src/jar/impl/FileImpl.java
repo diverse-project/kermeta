@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: FileImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package jar.impl;
 
@@ -16,13 +16,12 @@ import org.eclipse.emf.ecore.EClass;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public class FileImpl extends SystemEntryImpl implements File {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected FileImpl() {
@@ -31,7 +30,6 @@ public class FileImpl extends SystemEntryImpl implements File {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

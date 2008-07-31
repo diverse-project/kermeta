@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestFactoryImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
+ * $Id: ManifestFactoryImpl.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
  */
 package manifest.impl;
 
 import java.net.URL;
 
+import manifest.*;
 import manifest.BundleActivationPolicy;
 import manifest.BundleActivator;
 import manifest.BundleCategory;
@@ -53,34 +54,33 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class ManifestFactoryImpl extends EFactoryImpl implements
 		ManifestFactory {
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static ManifestFactory init() {
 		try {
-			ManifestFactory theManifestFactory = (ManifestFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://org.osgi.framework/manifest");
+			ManifestFactory theManifestFactory = (ManifestFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.osgi.framework/manifest"); 
 			if (theManifestFactory != null) {
 				return theManifestFactory;
 			}
-		} catch (Exception exception) {
+		}
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new ManifestFactoryImpl();
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ManifestFactoryImpl() {
@@ -89,133 +89,96 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case ManifestPackage.SERVICE:
-			return createService();
-		case ManifestPackage.VERSION:
-			return createVersion();
-		case ManifestPackage.MANIFEST:
-			return createMANIFEST();
-		case ManifestPackage.MANIFEST_ENTRY:
-			return createMANIFESTEntry();
-		case ManifestPackage.SIMPLE_MANIFEST_ENTRY:
-			return createSimpleMANIFESTEntry();
-		case ManifestPackage.BUNDLE_NAME:
-			return createBundleName();
-		case ManifestPackage.BUNDLE_SYMBOLIC_NAME:
-			return createBundleSymbolicName();
-		case ManifestPackage.BUNDLE_DESCRIPTION:
-			return createBundleDescription();
-		case ManifestPackage.BUNDLE_LOCALIZATION:
-			return createBundleLocalization();
-		case ManifestPackage.BUNDLE_VENDOR:
-			return createBundleVendor();
-		case ManifestPackage.BUNDLE_CONTACT_ADDRESS:
-			return createBundleContactAddress();
-		case ManifestPackage.BUNDLE_COPYRIGHT:
-			return createBundleCopyright();
-		case ManifestPackage.BUNDLE_CATEGORY:
-			return createBundleCategory();
-		case ManifestPackage.BUNDLE_DOC_URL:
-			return createBundleDocURL();
-		case ManifestPackage.BUNDLE_UPDATE_LOCATION:
-			return createBundleUpdateLocation();
-		case ManifestPackage.BUNDLE_VERSION:
-			return createBundleVersion();
-		case ManifestPackage.BUNDLE_ACTIVATOR:
-			return createBundleActivator();
-		case ManifestPackage.BUNDLE_CLASS_PATH:
-			return createBundleClassPath();
-		case ManifestPackage.BUNDLE_NATIVE_CODE:
-			return createBundleNativeCode();
-		case ManifestPackage.REQUIRE_BUNDLE:
-			return createRequireBundle();
-		case ManifestPackage.IMPORT_SERVICE:
-			return createImportService();
-		case ManifestPackage.EXPORT_SERVICE:
-			return createExportService();
-		case ManifestPackage.IMPORT_PACKAGE:
-			return createImportPackage();
-		case ManifestPackage.EXPORT_PACKAGE:
-			return createExportPackage();
-		case ManifestPackage.BUNDLE_ACTIVATION_POLICY:
-			return createBundleActivationPolicy();
-		case ManifestPackage.FRAGMENT_HOST:
-			return createFragmentHost();
-		case ManifestPackage.DYNAMIC_IMPORT_PACKAGE:
-			return createDynamicImportPackage();
-		case ManifestPackage.BUNDLE_REQUIRED_EXECUTION_ENVIRONMENT:
-			return createBundleRequiredExecutionEnvironment();
-		case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES:
-			return createSimpleManifestEntryManyValues();
-		case ManifestPackage.BUNDLE_MANIFEST_VERSION:
-			return createBundleManifestVersion();
-		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			case ManifestPackage.SERVICE: return createService();
+			case ManifestPackage.VERSION: return createVersion();
+			case ManifestPackage.MANIFEST: return createMANIFEST();
+			case ManifestPackage.MANIFEST_ENTRY: return createMANIFESTEntry();
+			case ManifestPackage.SIMPLE_MANIFEST_ENTRY: return createSimpleMANIFESTEntry();
+			case ManifestPackage.BUNDLE_NAME: return createBundleName();
+			case ManifestPackage.BUNDLE_SYMBOLIC_NAME: return createBundleSymbolicName();
+			case ManifestPackage.BUNDLE_DESCRIPTION: return createBundleDescription();
+			case ManifestPackage.BUNDLE_LOCALIZATION: return createBundleLocalization();
+			case ManifestPackage.BUNDLE_VENDOR: return createBundleVendor();
+			case ManifestPackage.BUNDLE_CONTACT_ADDRESS: return createBundleContactAddress();
+			case ManifestPackage.BUNDLE_COPYRIGHT: return createBundleCopyright();
+			case ManifestPackage.BUNDLE_CATEGORY: return createBundleCategory();
+			case ManifestPackage.BUNDLE_DOC_URL: return createBundleDocURL();
+			case ManifestPackage.BUNDLE_UPDATE_LOCATION: return createBundleUpdateLocation();
+			case ManifestPackage.BUNDLE_VERSION: return createBundleVersion();
+			case ManifestPackage.BUNDLE_ACTIVATOR: return createBundleActivator();
+			case ManifestPackage.BUNDLE_CLASS_PATH: return createBundleClassPath();
+			case ManifestPackage.BUNDLE_NATIVE_CODE: return createBundleNativeCode();
+			case ManifestPackage.REQUIRE_BUNDLE: return createRequireBundle();
+			case ManifestPackage.IMPORT_SERVICE: return createImportService();
+			case ManifestPackage.EXPORT_SERVICE: return createExportService();
+			case ManifestPackage.IMPORT_PACKAGE: return createImportPackage();
+			case ManifestPackage.EXPORT_PACKAGE: return createExportPackage();
+			case ManifestPackage.BUNDLE_ACTIVATION_POLICY: return createBundleActivationPolicy();
+			case ManifestPackage.FRAGMENT_HOST: return createFragmentHost();
+			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE: return createDynamicImportPackage();
+			case ManifestPackage.BUNDLE_REQUIRED_EXECUTION_ENVIRONMENT: return createBundleRequiredExecutionEnvironment();
+			case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES: return createSimpleManifestEntryManyValues();
+			case ManifestPackage.BUNDLE_MANIFEST_VERSION: return createBundleManifestVersion();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-		case ManifestPackage.MANIFEST_VERSION_ENUM:
-			return createMANIFESTVersionEnumFromString(eDataType, initialValue);
-		case ManifestPackage.POLICY_ENUM:
-			return createPolicyEnumFromString(eDataType, initialValue);
-		case ManifestPackage.URL:
-			return createURLFromString(eDataType, initialValue);
-		case ManifestPackage.STRING:
-			return createStringFromString(eDataType, initialValue);
-		case ManifestPackage.BOOLEAN:
-			return createbooleanFromString(eDataType, initialValue);
-		case ManifestPackage.INT:
-			return createintFromString(eDataType, initialValue);
-		default:
-			throw new IllegalArgumentException("The datatype '"
-					+ eDataType.getName() + "' is not a valid classifier");
+			case ManifestPackage.MANIFEST_VERSION_ENUM:
+				return createMANIFESTVersionEnumFromString(eDataType, initialValue);
+			case ManifestPackage.POLICY_ENUM:
+				return createPolicyEnumFromString(eDataType, initialValue);
+			case ManifestPackage.URL:
+				return createURLFromString(eDataType, initialValue);
+			case ManifestPackage.STRING:
+				return createStringFromString(eDataType, initialValue);
+			case ManifestPackage.BOOLEAN:
+				return createbooleanFromString(eDataType, initialValue);
+			case ManifestPackage.INT:
+				return createintFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-		case ManifestPackage.MANIFEST_VERSION_ENUM:
-			return convertMANIFESTVersionEnumToString(eDataType, instanceValue);
-		case ManifestPackage.POLICY_ENUM:
-			return convertPolicyEnumToString(eDataType, instanceValue);
-		case ManifestPackage.URL:
-			return convertURLToString(eDataType, instanceValue);
-		case ManifestPackage.STRING:
-			return convertStringToString(eDataType, instanceValue);
-		case ManifestPackage.BOOLEAN:
-			return convertbooleanToString(eDataType, instanceValue);
-		case ManifestPackage.INT:
-			return convertintToString(eDataType, instanceValue);
-		default:
-			throw new IllegalArgumentException("The datatype '"
-					+ eDataType.getName() + "' is not a valid classifier");
+			case ManifestPackage.MANIFEST_VERSION_ENUM:
+				return convertMANIFESTVersionEnumToString(eDataType, instanceValue);
+			case ManifestPackage.POLICY_ENUM:
+				return convertPolicyEnumToString(eDataType, instanceValue);
+			case ManifestPackage.URL:
+				return convertURLToString(eDataType, instanceValue);
+			case ManifestPackage.STRING:
+				return convertStringToString(eDataType, instanceValue);
+			case ManifestPackage.BOOLEAN:
+				return convertbooleanToString(eDataType, instanceValue);
+			case ManifestPackage.INT:
+				return convertintToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Service createService() {
@@ -225,7 +188,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Version createVersion() {
@@ -235,7 +197,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public MANIFEST createMANIFEST() {
@@ -245,7 +206,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public MANIFESTEntry createMANIFESTEntry() {
@@ -255,7 +215,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public SimpleMANIFESTEntry createSimpleMANIFESTEntry() {
@@ -265,7 +224,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleName createBundleName() {
@@ -275,7 +233,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleSymbolicName createBundleSymbolicName() {
@@ -285,7 +242,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleDescription createBundleDescription() {
@@ -295,7 +251,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleLocalization createBundleLocalization() {
@@ -305,7 +260,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleVendor createBundleVendor() {
@@ -315,7 +269,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleContactAddress createBundleContactAddress() {
@@ -325,7 +278,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleCopyright createBundleCopyright() {
@@ -335,7 +287,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleCategory createBundleCategory() {
@@ -345,7 +296,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleDocURL createBundleDocURL() {
@@ -355,7 +305,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleUpdateLocation createBundleUpdateLocation() {
@@ -365,7 +314,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleVersion createBundleVersion() {
@@ -375,7 +323,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleActivator createBundleActivator() {
@@ -385,7 +332,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleClassPath createBundleClassPath() {
@@ -395,7 +341,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleNativeCode createBundleNativeCode() {
@@ -405,7 +350,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public RequireBundle createRequireBundle() {
@@ -415,7 +359,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ImportService createImportService() {
@@ -425,7 +368,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ExportService createExportService() {
@@ -435,7 +377,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ImportPackage createImportPackage() {
@@ -445,7 +386,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ExportPackage createExportPackage() {
@@ -455,7 +395,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleActivationPolicy createBundleActivationPolicy() {
@@ -465,7 +404,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public FragmentHost createFragmentHost() {
@@ -475,7 +413,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public DynamicImportPackage createDynamicImportPackage() {
@@ -485,7 +422,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleRequiredExecutionEnvironment createBundleRequiredExecutionEnvironment() {
@@ -495,7 +431,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public SimpleManifestEntryManyValues createSimpleManifestEntryManyValues() {
@@ -505,7 +440,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BundleManifestVersion createBundleManifestVersion() {
@@ -515,22 +449,17 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public MANIFESTVersionEnum createMANIFESTVersionEnumFromString(
 			EDataType eDataType, String initialValue) {
 		MANIFESTVersionEnum result = MANIFESTVersionEnum.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue
-					+ "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertMANIFESTVersionEnumToString(EDataType eDataType,
@@ -540,22 +469,17 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public PolicyEnum createPolicyEnumFromString(EDataType eDataType,
 			String initialValue) {
 		PolicyEnum result = PolicyEnum.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue
-					+ "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertPolicyEnumToString(EDataType eDataType,
@@ -565,16 +489,14 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public URL createURLFromString(EDataType eDataType, String initialValue) {
-		return (URL) super.createFromString(eDataType, initialValue);
+		return (URL)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertURLToString(EDataType eDataType, Object instanceValue) {
@@ -583,17 +505,15 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String createStringFromString(EDataType eDataType,
 			String initialValue) {
-		return (String) super.createFromString(eDataType, initialValue);
+		return (String)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertStringToString(EDataType eDataType,
@@ -603,17 +523,15 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Boolean createbooleanFromString(EDataType eDataType,
 			String initialValue) {
-		return (Boolean) super.createFromString(eDataType, initialValue);
+		return (Boolean)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertbooleanToString(EDataType eDataType,
@@ -623,16 +541,14 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Integer createintFromString(EDataType eDataType, String initialValue) {
-		return (Integer) super.createFromString(eDataType, initialValue);
+		return (Integer)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertintToString(EDataType eDataType, Object instanceValue) {
@@ -641,16 +557,14 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ManifestPackage getManifestPackage() {
-		return (ManifestPackage) getEPackage();
+		return (ManifestPackage)getEPackage();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @deprecated
 	 * @generated
 	 */

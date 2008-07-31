@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OsVersion.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: OsVersion.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
@@ -11,33 +11,31 @@ import manifest.Version;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Os Version</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link option.OsVersion#getMinVersion <em>Min Version</em>}</li>
- * <li>{@link option.OsVersion#getMaxVersion <em>Max Version</em>}</li>
- * <li>{@link option.OsVersion#isMinNotInclude <em>Min Not Include</em>}</li>
- * <li>{@link option.OsVersion#isMaxNotInclude <em>Max Not Include</em>}</li>
+ *   <li>{@link option.OsVersion#getMinVersion <em>Min Version</em>}</li>
+ *   <li>{@link option.OsVersion#getMaxVersion <em>Max Version</em>}</li>
+ *   <li>{@link option.OsVersion#isMinNotInclude <em>Min Not Include</em>}</li>
+ *   <li>{@link option.OsVersion#isMaxNotInclude <em>Max Not Include</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see option.OptionPackage#getOsVersion()
  * @model
  * @generated
  */
 public interface OsVersion extends NativeCodeDirective {
 	/**
-	 * Returns the value of the '<em><b>Min Version</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Min Version</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Min Version</em>' containment reference
 	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Min Version</em>' containment
-	 *         reference.
+	 * @return the value of the '<em>Min Version</em>' containment reference.
 	 * @see #setMinVersion(Version)
 	 * @see option.OptionPackage#getOsVersion_MinVersion()
 	 * @model containment="true" required="true"
@@ -46,28 +44,23 @@ public interface OsVersion extends NativeCodeDirective {
 	Version getMinVersion();
 
 	/**
-	 * Sets the value of the '{@link option.OsVersion#getMinVersion <em>Min Version</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Min Version</em>' containment
-	 *            reference.
+	 * Sets the value of the '{@link option.OsVersion#getMinVersion <em>Min Version</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Min Version</em>' containment reference.
 	 * @see #getMinVersion()
 	 * @generated
 	 */
 	void setMinVersion(Version value);
 
 	/**
-	 * Returns the value of the '<em><b>Max Version</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Max Version</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Max Version</em>' containment reference
 	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Max Version</em>' containment
-	 *         reference.
+	 * @return the value of the '<em>Max Version</em>' containment reference.
 	 * @see #setMaxVersion(Version)
 	 * @see option.OptionPackage#getOsVersion_MaxVersion()
 	 * @model containment="true"
@@ -76,12 +69,9 @@ public interface OsVersion extends NativeCodeDirective {
 	Version getMaxVersion();
 
 	/**
-	 * Sets the value of the '{@link option.OsVersion#getMaxVersion <em>Max Version</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Max Version</em>' containment
-	 *            reference.
+	 * Sets the value of the '{@link option.OsVersion#getMaxVersion <em>Max Version</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Max Version</em>' containment reference.
 	 * @see #getMaxVersion()
 	 * @generated
 	 */
@@ -106,25 +96,22 @@ public interface OsVersion extends NativeCodeDirective {
 	boolean isMinNotInclude();
 
 	/**
-	 * Sets the value of the '{@link option.OsVersion#isMinNotInclude <em>Min Not Include</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Min Not Include</em>' attribute.
+	 * Sets the value of the '{@link option.OsVersion#isMinNotInclude <em>Min Not Include</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Min Not Include</em>' attribute.
 	 * @see #isMinNotInclude()
 	 * @generated
 	 */
 	void setMinNotInclude(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Max Not Include</b></em>'
-	 * attribute. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Max Not Include</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Max Not Include</em>' attribute isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Max Not Include</em>' attribute.
 	 * @see #setMaxNotInclude(boolean)
 	 * @see option.OptionPackage#getOsVersion_MaxNotInclude()
@@ -134,11 +121,9 @@ public interface OsVersion extends NativeCodeDirective {
 	boolean isMaxNotInclude();
 
 	/**
-	 * Sets the value of the '{@link option.OsVersion#isMaxNotInclude <em>Max Not Include</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Max Not Include</em>' attribute.
+	 * Sets the value of the '{@link option.OsVersion#isMaxNotInclude <em>Max Not Include</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Max Not Include</em>' attribute.
 	 * @see #isMaxNotInclude()
 	 * @generated
 	 */

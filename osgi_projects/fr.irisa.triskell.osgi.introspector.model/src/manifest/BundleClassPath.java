@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleClassPath.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: BundleClassPath.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package manifest;
 
@@ -13,14 +13,14 @@ import org.eclipse.emf.common.util.EList;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Bundle Class Path</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link manifest.BundleClassPath#getEntries <em>Entries</em>}</li>
+ *   <li>{@link manifest.BundleClassPath#getEntries <em>Entries</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see manifest.ManifestPackage#getBundleClassPath()
  * @model
  * @generated

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleUpdateLocationImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: BundleUpdateLocationImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package manifest.impl;
 
@@ -17,7 +17,7 @@ import org.osgi.framework.Constants;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public class BundleUpdateLocationImpl extends URLMANIFESTEntryImpl implements
@@ -32,7 +32,6 @@ public class BundleUpdateLocationImpl extends URLMANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

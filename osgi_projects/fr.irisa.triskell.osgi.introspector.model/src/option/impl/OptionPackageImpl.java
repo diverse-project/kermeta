@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionPackageImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: OptionPackageImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package option.impl;
 
@@ -59,237 +59,203 @@ import framework.impl.FrameworkPackageImpl;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass parameterEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass directiveEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass attributEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass osNameEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass nativeCodeDirectiveEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass osVersionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass excludePackagesEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass processorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass includePackagesEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass usesEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass extensionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass mandatoryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass languageEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass visibilityEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass singletonEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass resolutionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass fragmentAttachmentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass selectionFilterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass requireBundleDirectiveEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass fragmentHostDirectiveEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass symbolicNameDirectiveEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass exportPackageDirectiveEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass importPackageDirectiveEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass activationPolicyDirectiveEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass includeClassesEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass excludeClassesEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum fragmentAttachmentEnumEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum processorEnumEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum resolutionEnumEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum visibilityEnumEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum isoCodeLanguageEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum extensionEnumEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum osNameEnumEEnum = null;
@@ -315,58 +281,43 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model,
-	 * and for any others upon which it depends. Simple dependencies are
-	 * satisfied by calling this method on all dependent packages before doing
-	 * anything else. This method drives initialization for interdependent
-	 * packages directly, in parallel with this package, itself.
-	 * <p>
-	 * Of this package and its interdependencies, all packages which have not
-	 * yet been registered by their URI values are first created and registered.
-	 * The packages are then initialized in two steps: meta-model objects for
-	 * all of the packages are created before any are initialized, since one
-	 * package's meta-model objects may refer to those of another.
-	 * <p>
-	 * Invocation of this method will not affect any packages that have already
-	 * been initialized. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Creates, registers, and initializes the <b>Package</b> for this
+	 * model, and for any others upon which it depends.  Simple
+	 * dependencies are satisfied by calling this method on all
+	 * dependent packages before doing anything else.  This method drives
+	 * initialization for interdependent packages directly, in parallel
+	 * with this package, itself.
+	 * <p>Of this package and its interdependencies, all packages which
+	 * have not yet been registered by their URI values are first created
+	 * and registered.  The packages are then initialized in two steps:
+	 * meta-model objects for all of the packages are created before any
+	 * are initialized, since one package's meta-model objects may refer to
+	 * those of another.
+	 * <p>Invocation of this method will not affect any packages that have
+	 * already been initialized.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
 	public static OptionPackage init() {
-		if (isInited)
-			return (OptionPackage) EPackage.Registry.INSTANCE
-					.getEPackage(OptionPackage.eNS_URI);
+		if (isInited) return (OptionPackage)EPackage.Registry.INSTANCE.getEPackage(OptionPackage.eNS_URI);
 
 		// Obtain or create and register package
-		OptionPackageImpl theOptionPackage = (OptionPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI) instanceof OptionPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI)
-				: new OptionPackageImpl());
+		OptionPackageImpl theOptionPackage = (OptionPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof OptionPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new OptionPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		FrameworkPackageImpl theFrameworkPackage = (FrameworkPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(FrameworkPackage.eNS_URI) instanceof FrameworkPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(FrameworkPackage.eNS_URI)
-				: FrameworkPackage.eINSTANCE);
-		ManifestPackageImpl theManifestPackage = (ManifestPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ManifestPackage.eNS_URI) instanceof ManifestPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ManifestPackage.eNS_URI)
-				: ManifestPackage.eINSTANCE);
-		JarPackageImpl theJarPackage = (JarPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JarPackage.eNS_URI) instanceof JarPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JarPackage.eNS_URI)
-				: JarPackage.eINSTANCE);
+		FrameworkPackageImpl theFrameworkPackage = (FrameworkPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FrameworkPackage.eNS_URI) instanceof FrameworkPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FrameworkPackage.eNS_URI) : FrameworkPackage.eINSTANCE);
+		ManifestPackageImpl theManifestPackage = (ManifestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ManifestPackage.eNS_URI) instanceof ManifestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ManifestPackage.eNS_URI) : ManifestPackage.eINSTANCE);
+		JarPackageImpl theJarPackage = (JarPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(JarPackage.eNS_URI) instanceof JarPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(JarPackage.eNS_URI) : JarPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theOptionPackage.createPackageContents();
@@ -388,7 +339,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getParameterEntry() {
@@ -397,17 +347,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getParameterEntry_Token() {
-		return (EAttribute) parameterEntryEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute)parameterEntryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getDirectiveEntry() {
@@ -416,7 +363,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getAttributEntry() {
@@ -425,16 +371,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getAttributEntry_Value() {
-		return (EAttribute) attributEntryEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)attributEntryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getOsName() {
@@ -443,16 +387,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getOsName_Osname() {
-		return (EAttribute) osNameEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)osNameEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getNativeCodeDirective() {
@@ -461,7 +403,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getOsVersion() {
@@ -470,43 +411,38 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getOsVersion_MinVersion() {
-		return (EReference) osVersionEClass.getEStructuralFeatures().get(0);
+		return (EReference)osVersionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getOsVersion_MaxVersion() {
-		return (EReference) osVersionEClass.getEStructuralFeatures().get(1);
+		return (EReference)osVersionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getOsVersion_MinNotInclude() {
-		return (EAttribute) osVersionEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)osVersionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getOsVersion_MaxNotInclude() {
-		return (EAttribute) osVersionEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)osVersionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getExcludePackages() {
@@ -515,17 +451,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getExcludePackages_Packages() {
-		return (EReference) excludePackagesEClass.getEStructuralFeatures().get(
-				0);
+		return (EReference)excludePackagesEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getProcessor() {
@@ -534,16 +467,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getProcessor_Processor() {
-		return (EAttribute) processorEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)processorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getIncludePackages() {
@@ -552,17 +483,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getIncludePackages_Packages() {
-		return (EReference) includePackagesEClass.getEStructuralFeatures().get(
-				0);
+		return (EReference)includePackagesEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getUses() {
@@ -571,16 +499,23 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getUses_Packages() {
-		return (EAttribute) usesEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)usesEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUses_PackagesList() {
+		return (EReference)usesEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getExtension() {
@@ -589,16 +524,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getExtension_Extension() {
-		return (EAttribute) extensionEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)extensionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getMandatory() {
@@ -607,16 +540,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getMandatory_Attributs() {
-		return (EReference) mandatoryEClass.getEStructuralFeatures().get(0);
+		return (EReference)mandatoryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getLanguage() {
@@ -625,16 +556,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getLanguage_IsoCode() {
-		return (EAttribute) languageEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)languageEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getVisibility() {
@@ -643,16 +572,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getVisibility_Visibility() {
-		return (EAttribute) visibilityEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)visibilityEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getSingleton() {
@@ -661,16 +588,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getSingleton_Singleton() {
-		return (EAttribute) singletonEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)singletonEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getResolution() {
@@ -679,16 +604,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getResolution_Resolution() {
-		return (EAttribute) resolutionEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)resolutionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getFragmentAttachment() {
@@ -697,17 +620,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getFragmentAttachment_FragmentAttachment() {
-		return (EAttribute) fragmentAttachmentEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute)fragmentAttachmentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getSelectionFilter() {
@@ -716,17 +636,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getSelectionFilter_Expression() {
-		return (EAttribute) selectionFilterEClass.getEStructuralFeatures().get(
-				0);
+		return (EAttribute)selectionFilterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getRequireBundleDirective() {
@@ -735,7 +652,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getFragmentHostDirective() {
@@ -744,7 +660,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getSymbolicNameDirective() {
@@ -753,7 +668,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getExportPackageDirective() {
@@ -762,7 +676,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getImportPackageDirective() {
@@ -771,7 +684,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getActivationPolicyDirective() {
@@ -780,7 +692,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getIncludeClasses() {
@@ -789,17 +700,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getIncludeClasses_Classes() {
-		return (EReference) includeClassesEClass.getEStructuralFeatures()
-				.get(0);
+		return (EReference)includeClassesEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getExcludeClasses() {
@@ -808,17 +716,14 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getExcludeClasses_Classes() {
-		return (EReference) excludeClassesEClass.getEStructuralFeatures()
-				.get(0);
+		return (EReference)excludeClassesEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EEnum getFragmentAttachmentEnum() {
@@ -827,7 +732,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EEnum getProcessorEnum() {
@@ -836,7 +740,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EEnum getResolutionEnum() {
@@ -845,7 +748,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EEnum getVisibilityEnum() {
@@ -854,7 +756,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EEnum getISOCodeLanguage() {
@@ -863,7 +764,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EEnum getExtensionEnum() {
@@ -872,7 +772,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EEnum getOsNameEnum() {
@@ -881,30 +780,27 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OptionFactory getOptionFactory() {
-		return (OptionFactory) getEFactoryInstance();
+		return (OptionFactory)getEFactoryInstance();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated)
-			return;
+		if (isCreated) return;
 		isCreated = true;
 
 		// Create classes and their features
@@ -938,6 +834,7 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 		usesEClass = createEClass(USES);
 		createEAttribute(usesEClass, USES__PACKAGES);
+		createEReference(usesEClass, USES__PACKAGES_LIST);
 
 		extensionEClass = createEClass(EXTENSION);
 		createEAttribute(extensionEClass, EXTENSION__EXTENSION);
@@ -958,8 +855,7 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 		createEAttribute(resolutionEClass, RESOLUTION__RESOLUTION);
 
 		fragmentAttachmentEClass = createEClass(FRAGMENT_ATTACHMENT);
-		createEAttribute(fragmentAttachmentEClass,
-				FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT);
+		createEAttribute(fragmentAttachmentEClass, FRAGMENT_ATTACHMENT__FRAGMENT_ATTACHMENT);
 
 		selectionFilterEClass = createEClass(SELECTION_FILTER);
 		createEAttribute(selectionFilterEClass, SELECTION_FILTER__EXPRESSION);
@@ -994,7 +890,6 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isInitialized = false;
@@ -1007,8 +902,7 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized)
-			return;
+		if (isInitialized) return;
 		isInitialized = true;
 
 		// Initialize package
@@ -1017,12 +911,9 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		ManifestPackage theManifestPackage = (ManifestPackage) EPackage.Registry.INSTANCE
-				.getEPackage(ManifestPackage.eNS_URI);
-		JarPackage theJarPackage = (JarPackage) EPackage.Registry.INSTANCE
-				.getEPackage(JarPackage.eNS_URI);
-		FrameworkPackage theFrameworkPackage = (FrameworkPackage) EPackage.Registry.INSTANCE
-				.getEPackage(FrameworkPackage.eNS_URI);
+		ManifestPackage theManifestPackage = (ManifestPackage)EPackage.Registry.INSTANCE.getEPackage(ManifestPackage.eNS_URI);
+		JarPackage theJarPackage = (JarPackage)EPackage.Registry.INSTANCE.getEPackage(JarPackage.eNS_URI);
+		FrameworkPackage theFrameworkPackage = (FrameworkPackage)EPackage.Registry.INSTANCE.getEPackage(FrameworkPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1032,14 +923,11 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 		directiveEntryEClass.getESuperTypes().add(this.getParameterEntry());
 		attributEntryEClass.getESuperTypes().add(this.getParameterEntry());
 		osNameEClass.getESuperTypes().add(this.getNativeCodeDirective());
-		nativeCodeDirectiveEClass.getESuperTypes()
-				.add(this.getDirectiveEntry());
+		nativeCodeDirectiveEClass.getESuperTypes().add(this.getDirectiveEntry());
 		osVersionEClass.getESuperTypes().add(this.getNativeCodeDirective());
-		excludePackagesEClass.getESuperTypes().add(
-				this.getActivationPolicyDirective());
+		excludePackagesEClass.getESuperTypes().add(this.getActivationPolicyDirective());
 		processorEClass.getESuperTypes().add(this.getNativeCodeDirective());
-		includePackagesEClass.getESuperTypes().add(
-				this.getActivationPolicyDirective());
+		includePackagesEClass.getESuperTypes().add(this.getActivationPolicyDirective());
 		usesEClass.getESuperTypes().add(this.getExportPackageDirective());
 		extensionEClass.getESuperTypes().add(this.getFragmentHostDirective());
 		mandatoryEClass.getESuperTypes().add(this.getExportPackageDirective());
@@ -1047,224 +935,98 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 		visibilityEClass.getESuperTypes().add(this.getRequireBundleDirective());
 		singletonEClass.getESuperTypes().add(this.getSymbolicNameDirective());
 		resolutionEClass.getESuperTypes().add(this.getImportPackageDirective());
-		fragmentAttachmentEClass.getESuperTypes().add(
-				this.getSymbolicNameDirective());
-		selectionFilterEClass.getESuperTypes().add(
-				this.getNativeCodeDirective());
-		requireBundleDirectiveEClass.getESuperTypes().add(
-				this.getDirectiveEntry());
-		fragmentHostDirectiveEClass.getESuperTypes().add(
-				this.getDirectiveEntry());
-		symbolicNameDirectiveEClass.getESuperTypes().add(
-				this.getDirectiveEntry());
-		exportPackageDirectiveEClass.getESuperTypes().add(
-				this.getDirectiveEntry());
-		importPackageDirectiveEClass.getESuperTypes().add(
-				this.getRequireBundleDirective());
-		activationPolicyDirectiveEClass.getESuperTypes().add(
-				this.getDirectiveEntry());
-		activationPolicyDirectiveEClass.getESuperTypes().add(
-				this.getExportPackageDirective());
-		includeClassesEClass.getESuperTypes().add(
-				this.getExportPackageDirective());
-		excludeClassesEClass.getESuperTypes().add(
-				this.getExportPackageDirective());
+		fragmentAttachmentEClass.getESuperTypes().add(this.getSymbolicNameDirective());
+		selectionFilterEClass.getESuperTypes().add(this.getNativeCodeDirective());
+		requireBundleDirectiveEClass.getESuperTypes().add(this.getDirectiveEntry());
+		fragmentHostDirectiveEClass.getESuperTypes().add(this.getDirectiveEntry());
+		symbolicNameDirectiveEClass.getESuperTypes().add(this.getDirectiveEntry());
+		exportPackageDirectiveEClass.getESuperTypes().add(this.getDirectiveEntry());
+		importPackageDirectiveEClass.getESuperTypes().add(this.getRequireBundleDirective());
+		activationPolicyDirectiveEClass.getESuperTypes().add(this.getDirectiveEntry());
+		activationPolicyDirectiveEClass.getESuperTypes().add(this.getExportPackageDirective());
+		includeClassesEClass.getESuperTypes().add(this.getExportPackageDirective());
+		excludeClassesEClass.getESuperTypes().add(this.getExportPackageDirective());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(parameterEntryEClass, ParameterEntry.class,
-				"ParameterEntry", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getParameterEntry_Token(), theManifestPackage
-				.getString(), "token", null, 1, 1, ParameterEntry.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(parameterEntryEClass, ParameterEntry.class, "ParameterEntry", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getParameterEntry_Token(), theManifestPackage.getString(), "token", null, 1, 1, ParameterEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(directiveEntryEClass, DirectiveEntry.class,
-				"DirectiveEntry", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(directiveEntryEClass, DirectiveEntry.class, "DirectiveEntry", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(attributEntryEClass, AttributEntry.class, "AttributEntry",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAttributEntry_Value(),
-				theManifestPackage.getString(), "value", null, 1, 1,
-				AttributEntry.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(attributEntryEClass, AttributEntry.class, "AttributEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAttributEntry_Value(), theManifestPackage.getString(), "value", null, 1, 1, AttributEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(osNameEClass, OsName.class, "OsName", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOsName_Osname(), this.getOsNameEnum(), "osname",
-				null, 1, 1, OsName.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(osNameEClass, OsName.class, "OsName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOsName_Osname(), this.getOsNameEnum(), "osname", null, 1, 1, OsName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(nativeCodeDirectiveEClass, NativeCodeDirective.class,
-				"NativeCodeDirective", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(nativeCodeDirectiveEClass, NativeCodeDirective.class, "NativeCodeDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(osVersionEClass, OsVersion.class, "OsVersion", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOsVersion_MinVersion(), theManifestPackage
-				.getVersion(), null, "minVersion", null, 1, 1, OsVersion.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getOsVersion_MaxVersion(), theManifestPackage
-				.getVersion(), null, "maxVersion", null, 0, 1, OsVersion.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getOsVersion_MinNotInclude(), theManifestPackage
-				.getboolean(), "minNotInclude", "true", 1, 1, OsVersion.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOsVersion_MaxNotInclude(), theManifestPackage
-				.getboolean(), "maxNotInclude", null, 0, 1, OsVersion.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(osVersionEClass, OsVersion.class, "OsVersion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOsVersion_MinVersion(), theManifestPackage.getVersion(), null, "minVersion", null, 1, 1, OsVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOsVersion_MaxVersion(), theManifestPackage.getVersion(), null, "maxVersion", null, 0, 1, OsVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOsVersion_MinNotInclude(), theManifestPackage.getboolean(), "minNotInclude", "true", 1, 1, OsVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOsVersion_MaxNotInclude(), theManifestPackage.getboolean(), "maxNotInclude", null, 0, 1, OsVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(excludePackagesEClass, ExcludePackages.class,
-				"ExcludePackages", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExcludePackages_Packages(), theJarPackage
-				.getPackage(), null, "packages", null, 1, -1,
-				ExcludePackages.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(excludePackagesEClass, ExcludePackages.class, "ExcludePackages", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExcludePackages_Packages(), theJarPackage.getPackage(), null, "packages", null, 1, -1, ExcludePackages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(processorEClass, Processor.class, "Processor", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getProcessor_Processor(), this.getProcessorEnum(),
-				"processor", null, 1, 1, Processor.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(processorEClass, Processor.class, "Processor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getProcessor_Processor(), this.getProcessorEnum(), "processor", null, 1, 1, Processor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(includePackagesEClass, IncludePackages.class,
-				"IncludePackages", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIncludePackages_Packages(), theJarPackage
-				.getPackage(), null, "packages", null, 1, -1,
-				IncludePackages.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(includePackagesEClass, IncludePackages.class, "IncludePackages", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIncludePackages_Packages(), theJarPackage.getPackage(), null, "packages", null, 1, -1, IncludePackages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(usesEClass, Uses.class, "Uses", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUses_Packages(), theFrameworkPackage.getString(),
-				"packages", null, 1, -1, Uses.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(usesEClass, Uses.class, "Uses", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUses_Packages(), theFrameworkPackage.getString(), "packages", null, 1, -1, Uses.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUses_PackagesList(), theJarPackage.getPackage(), null, "packagesList", null, 0, -1, Uses.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(extensionEClass, Extension.class, "Extension", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getExtension_Extension(), this.getExtensionEnum(),
-				"extension", null, 1, 1, Extension.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(extensionEClass, Extension.class, "Extension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getExtension_Extension(), this.getExtensionEnum(), "extension", null, 1, 1, Extension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(mandatoryEClass, Mandatory.class, "Mandatory", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMandatory_Attributs(), this.getAttributEntry(), null,
-				"attributs", null, 0, -1, Mandatory.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(mandatoryEClass, Mandatory.class, "Mandatory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMandatory_Attributs(), this.getAttributEntry(), null, "attributs", null, 0, -1, Mandatory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(languageEClass, Language.class, "Language", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLanguage_IsoCode(), this.getISOCodeLanguage(),
-				"isoCode", null, 1, 1, Language.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(languageEClass, Language.class, "Language", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLanguage_IsoCode(), this.getISOCodeLanguage(), "isoCode", null, 1, 1, Language.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(visibilityEClass, Visibility.class, "Visibility",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getVisibility_Visibility(), this.getVisibilityEnum(),
-				"visibility", null, 1, 1, Visibility.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(visibilityEClass, Visibility.class, "Visibility", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVisibility_Visibility(), this.getVisibilityEnum(), "visibility", null, 1, 1, Visibility.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(singletonEClass, Singleton.class, "Singleton", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSingleton_Singleton(), theManifestPackage
-				.getboolean(), "singleton", null, 1, 1, Singleton.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(singletonEClass, Singleton.class, "Singleton", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSingleton_Singleton(), theManifestPackage.getboolean(), "singleton", null, 1, 1, Singleton.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(resolutionEClass, Resolution.class, "Resolution",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getResolution_Resolution(), this.getResolutionEnum(),
-				"resolution", null, 1, 1, Resolution.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(resolutionEClass, Resolution.class, "Resolution", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getResolution_Resolution(), this.getResolutionEnum(), "resolution", null, 1, 1, Resolution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(fragmentAttachmentEClass, FragmentAttachment.class,
-				"FragmentAttachment", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFragmentAttachment_FragmentAttachment(), this
-				.getFragmentAttachmentEnum(), "fragmentAttachment", null, 1, 1,
-				FragmentAttachment.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(fragmentAttachmentEClass, FragmentAttachment.class, "FragmentAttachment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFragmentAttachment_FragmentAttachment(), this.getFragmentAttachmentEnum(), "fragmentAttachment", null, 1, 1, FragmentAttachment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(selectionFilterEClass, SelectionFilter.class,
-				"SelectionFilter", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSelectionFilter_Expression(), theManifestPackage
-				.getString(), "expression", null, 1, 1, SelectionFilter.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(selectionFilterEClass, SelectionFilter.class, "SelectionFilter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSelectionFilter_Expression(), theManifestPackage.getString(), "expression", null, 1, 1, SelectionFilter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(requireBundleDirectiveEClass, RequireBundleDirective.class,
-				"RequireBundleDirective", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(requireBundleDirectiveEClass, RequireBundleDirective.class, "RequireBundleDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(fragmentHostDirectiveEClass, FragmentHostDirective.class,
-				"FragmentHostDirective", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(fragmentHostDirectiveEClass, FragmentHostDirective.class, "FragmentHostDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(symbolicNameDirectiveEClass, SymbolicNameDirective.class,
-				"SymbolicNameDirective", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(symbolicNameDirectiveEClass, SymbolicNameDirective.class, "SymbolicNameDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(exportPackageDirectiveEClass, ExportPackageDirective.class,
-				"ExportPackageDirective", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(exportPackageDirectiveEClass, ExportPackageDirective.class, "ExportPackageDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(importPackageDirectiveEClass, ImportPackageDirective.class,
-				"ImportPackageDirective", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(importPackageDirectiveEClass, ImportPackageDirective.class, "ImportPackageDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(activationPolicyDirectiveEClass,
-				ActivationPolicyDirective.class, "ActivationPolicyDirective",
-				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(activationPolicyDirectiveEClass, ActivationPolicyDirective.class, "ActivationPolicyDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(includeClassesEClass, IncludeClasses.class,
-				"IncludeClasses", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIncludeClasses_Classes(), theJarPackage.getClass_(),
-				null, "classes", null, 1, -1, IncludeClasses.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(includeClassesEClass, IncludeClasses.class, "IncludeClasses", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIncludeClasses_Classes(), theJarPackage.getClass_(), null, "classes", null, 1, -1, IncludeClasses.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(excludeClassesEClass, ExcludeClasses.class,
-				"ExcludeClasses", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExcludeClasses_Classes(), theJarPackage.getClass_(),
-				null, "classes", null, 1, -1, ExcludeClasses.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(excludeClassesEClass, ExcludeClasses.class, "ExcludeClasses", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExcludeClasses_Classes(), theJarPackage.getClass_(), null, "classes", null, 1, -1, ExcludeClasses.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(fragmentAttachmentEnumEEnum, FragmentAttachmentEnum.class,
-				"FragmentAttachmentEnum");
-		addEEnumLiteral(fragmentAttachmentEnumEEnum,
-				FragmentAttachmentEnum.ALWAYS);
-		addEEnumLiteral(fragmentAttachmentEnumEEnum,
-				FragmentAttachmentEnum.NEVER);
-		addEEnumLiteral(fragmentAttachmentEnumEEnum,
-				FragmentAttachmentEnum.RESOLVETIME);
+		initEEnum(fragmentAttachmentEnumEEnum, FragmentAttachmentEnum.class, "FragmentAttachmentEnum");
+		addEEnumLiteral(fragmentAttachmentEnumEEnum, FragmentAttachmentEnum.ALWAYS);
+		addEEnumLiteral(fragmentAttachmentEnumEEnum, FragmentAttachmentEnum.NEVER);
+		addEEnumLiteral(fragmentAttachmentEnumEEnum, FragmentAttachmentEnum.RESOLVETIME);
 
 		initEEnum(processorEnumEEnum, ProcessorEnum.class, "ProcessorEnum");
 		addEEnumLiteral(processorEnumEEnum, ProcessorEnum.P6_8K);
@@ -1290,8 +1052,7 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 		addEEnumLiteral(visibilityEnumEEnum, VisibilityEnum.PRIVATE);
 		addEEnumLiteral(visibilityEnumEEnum, VisibilityEnum.REEXPORT);
 
-		initEEnum(isoCodeLanguageEEnum, ISOCodeLanguage.class,
-				"ISOCodeLanguage");
+		initEEnum(isoCodeLanguageEEnum, ISOCodeLanguage.class, "ISOCodeLanguage");
 		addEEnumLiteral(isoCodeLanguageEEnum, ISOCodeLanguage.FR);
 		addEEnumLiteral(isoCodeLanguageEEnum, ISOCodeLanguage.EN);
 

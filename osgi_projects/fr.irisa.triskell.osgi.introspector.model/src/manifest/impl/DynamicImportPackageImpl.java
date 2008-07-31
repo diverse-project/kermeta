@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DynamicImportPackageImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: DynamicImportPackageImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package manifest.impl;
 
@@ -22,18 +22,17 @@ import org.osgi.framework.Constants;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link manifest.impl.DynamicImportPackageImpl#getPackages <em>Packages</em>}</li>
+ *   <li>{@link manifest.impl.DynamicImportPackageImpl#getPackages <em>Packages</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 		DynamicImportPackage {
 	/**
-	 * The cached value of the '{@link #getPackages() <em>Packages</em>}'
-	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getPackages()
 	 * @generated
 	 * @ordered
@@ -50,7 +49,6 @@ public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -60,86 +58,78 @@ public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<String> getPackages() {
 		if (packages == null) {
-			packages = new EDataTypeUniqueEList<String>(String.class, this,
-					ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES);
+			packages = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES);
 		}
 		return packages;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
-			return getPackages();
+			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
+				return getPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
-			getPackages().clear();
-			getPackages().addAll((Collection<? extends String>) newValue);
-			return;
+			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
+				getPackages().clear();
+				getPackages().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
-			getPackages().clear();
-			return;
+			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
+				getPackages().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
-			return packages != null && !packages.isEmpty();
+			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
+				return packages != null && !packages.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (packages: ");

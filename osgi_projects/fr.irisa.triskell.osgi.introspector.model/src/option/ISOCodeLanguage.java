@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ISOCodeLanguage.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: ISOCodeLanguage.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
@@ -15,16 +15,15 @@ import org.eclipse.emf.common.util.Enumerator;
 /**
  * <!-- begin-user-doc --> A representation of the literals of the enumeration '<em><b>ISO Code Language</b></em>',
  * and utility methods for working with them. <!-- end-user-doc -->
- * 
  * @see option.OptionPackage#getISOCodeLanguage()
  * @model
  * @generated
  */
 public enum ISOCodeLanguage implements Enumerator {
 	/**
-	 * The '<em><b>FR</b></em>' literal object. <!-- begin-user-doc -->
+	 * The '<em><b>FR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #FR_VALUE
 	 * @generated
 	 * @ordered
@@ -32,9 +31,9 @@ public enum ISOCodeLanguage implements Enumerator {
 	FR(0, "FR", "fr"),
 
 	/**
-	 * The '<em><b>EN</b></em>' literal object. <!-- begin-user-doc -->
+	 * The '<em><b>EN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #EN_VALUE
 	 * @generated
 	 * @ordered
@@ -42,13 +41,13 @@ public enum ISOCodeLanguage implements Enumerator {
 	EN(1, "EN", "en");
 
 	/**
-	 * The '<em><b>FR</b></em>' literal value. <!-- begin-user-doc -->
+	 * The '<em><b>FR</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>FR</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #FR
 	 * @model literal="fr"
 	 * @generated
@@ -57,13 +56,13 @@ public enum ISOCodeLanguage implements Enumerator {
 	public static final int FR_VALUE = 0;
 
 	/**
-	 * The '<em><b>EN</b></em>' literal value. <!-- begin-user-doc -->
+	 * The '<em><b>EN</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>EN</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #EN
 	 * @model literal="en"
 	 * @generated
@@ -74,25 +73,23 @@ public enum ISOCodeLanguage implements Enumerator {
 	/**
 	 * An array of all the '<em><b>ISO Code Language</b></em>' enumerators.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static final ISOCodeLanguage[] VALUES_ARRAY = new ISOCodeLanguage[] {
-			FR, EN, };
+			FR,
+			EN,
+		};
 
 	/**
-	 * A public read-only list of all the '<em><b>ISO Code Language</b></em>'
-	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * A public read-only list of all the '<em><b>ISO Code Language</b></em>' enumerators.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<ISOCodeLanguage> VALUES = Collections
-			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<ISOCodeLanguage> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>ISO Code Language</b></em>' literal with the
-	 * specified literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>ISO Code Language</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ISOCodeLanguage get(String literal) {
@@ -106,9 +103,8 @@ public enum ISOCodeLanguage implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>ISO Code Language</b></em>' literal with the
-	 * specified name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>ISO Code Language</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ISOCodeLanguage getByName(String name) {
@@ -122,46 +118,40 @@ public enum ISOCodeLanguage implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>ISO Code Language</b></em>' literal with the
-	 * specified integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>ISO Code Language</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ISOCodeLanguage get(int value) {
 		switch (value) {
-		case FR_VALUE:
-			return FR;
-		case EN_VALUE:
-			return EN;
+			case FR_VALUE: return FR;
+			case EN_VALUE: return EN;
 		}
 		return null;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private ISOCodeLanguage(int value, String name, String literal) {
@@ -172,35 +162,31 @@ public enum ISOCodeLanguage implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string
-	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

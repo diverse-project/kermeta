@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestAdapterFactory.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
+ * $Id: ManifestAdapterFactory.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
  */
 package manifest.util;
 
+import manifest.*;
 import manifest.BundleActivationPolicy;
 import manifest.BundleActivator;
 import manifest.BundleCategory;
@@ -48,22 +49,21 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It
  * provides an adapter <code>createXXX</code> method for each class of the
  * model. <!-- end-user-doc -->
- * 
  * @see manifest.ManifestPackage
  * @generated
  */
 public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	/**
-	 * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached model package.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected static ManifestPackage modelPackage;
 
 	/**
-	 * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ManifestAdapterFactory() {
@@ -77,7 +77,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This implementation returns <code>true</code>
 	 * if the object is either the model's package or is an instance object of
 	 * the model. <!-- end-user-doc -->
-	 * 
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
@@ -87,7 +86,7 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 			return true;
 		}
 		if (object instanceof EObject) {
-			return ((EObject) object).eClass().getEPackage() == modelPackage;
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
@@ -99,181 +98,147 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected ManifestSwitch<Adapter> modelSwitch = new ManifestSwitch<Adapter>() {
-		@Override
-		public Adapter caseService(Service object) {
-			return createServiceAdapter();
-		}
-
-		@Override
-		public Adapter caseVersion(Version object) {
-			return createVersionAdapter();
-		}
-
-		@Override
-		public Adapter caseMANIFEST(MANIFEST object) {
-			return createMANIFESTAdapter();
-		}
-
-		@Override
-		public Adapter caseMANIFESTEntry(MANIFESTEntry object) {
-			return createMANIFESTEntryAdapter();
-		}
-
-		@Override
-		public Adapter caseSimpleMANIFESTEntry(SimpleMANIFESTEntry object) {
-			return createSimpleMANIFESTEntryAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleName(BundleName object) {
-			return createBundleNameAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleSymbolicName(BundleSymbolicName object) {
-			return createBundleSymbolicNameAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleDescription(BundleDescription object) {
-			return createBundleDescriptionAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleLocalization(BundleLocalization object) {
-			return createBundleLocalizationAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleVendor(BundleVendor object) {
-			return createBundleVendorAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleContactAddress(BundleContactAddress object) {
-			return createBundleContactAddressAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleCopyright(BundleCopyright object) {
-			return createBundleCopyrightAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleCategory(BundleCategory object) {
-			return createBundleCategoryAdapter();
-		}
-
-		@Override
-		public Adapter caseURLMANIFESTEntry(URLMANIFESTEntry object) {
-			return createURLMANIFESTEntryAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleDocURL(BundleDocURL object) {
-			return createBundleDocURLAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleUpdateLocation(BundleUpdateLocation object) {
-			return createBundleUpdateLocationAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleVersion(BundleVersion object) {
-			return createBundleVersionAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleActivator(BundleActivator object) {
-			return createBundleActivatorAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleClassPath(BundleClassPath object) {
-			return createBundleClassPathAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleNativeCode(BundleNativeCode object) {
-			return createBundleNativeCodeAdapter();
-		}
-
-		@Override
-		public Adapter caseRequireBundle(RequireBundle object) {
-			return createRequireBundleAdapter();
-		}
-
-		@Override
-		public Adapter caseImportService(ImportService object) {
-			return createImportServiceAdapter();
-		}
-
-		@Override
-		public Adapter caseExportService(ExportService object) {
-			return createExportServiceAdapter();
-		}
-
-		@Override
-		public Adapter caseImportPackage(ImportPackage object) {
-			return createImportPackageAdapter();
-		}
-
-		@Override
-		public Adapter caseExportPackage(ExportPackage object) {
-			return createExportPackageAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleActivationPolicy(BundleActivationPolicy object) {
-			return createBundleActivationPolicyAdapter();
-		}
-
-		@Override
-		public Adapter caseFragmentHost(FragmentHost object) {
-			return createFragmentHostAdapter();
-		}
-
-		@Override
-		public Adapter caseDynamicImportPackage(DynamicImportPackage object) {
-			return createDynamicImportPackageAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleRequiredExecutionEnvironment(
-				BundleRequiredExecutionEnvironment object) {
-			return createBundleRequiredExecutionEnvironmentAdapter();
-		}
-
-		@Override
-		public Adapter caseSimpleManifestEntryManyValues(
-				SimpleManifestEntryManyValues object) {
-			return createSimpleManifestEntryManyValuesAdapter();
-		}
-
-		@Override
-		public Adapter caseBundleManifestVersion(BundleManifestVersion object) {
-			return createBundleManifestVersionAdapter();
-		}
-
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter caseService(Service object) {
+				return createServiceAdapter();
+			}
+			@Override
+			public Adapter caseVersion(Version object) {
+				return createVersionAdapter();
+			}
+			@Override
+			public Adapter caseMANIFEST(MANIFEST object) {
+				return createMANIFESTAdapter();
+			}
+			@Override
+			public Adapter caseMANIFESTEntry(MANIFESTEntry object) {
+				return createMANIFESTEntryAdapter();
+			}
+			@Override
+			public Adapter caseSimpleMANIFESTEntry(SimpleMANIFESTEntry object) {
+				return createSimpleMANIFESTEntryAdapter();
+			}
+			@Override
+			public Adapter caseBundleName(BundleName object) {
+				return createBundleNameAdapter();
+			}
+			@Override
+			public Adapter caseBundleSymbolicName(BundleSymbolicName object) {
+				return createBundleSymbolicNameAdapter();
+			}
+			@Override
+			public Adapter caseBundleDescription(BundleDescription object) {
+				return createBundleDescriptionAdapter();
+			}
+			@Override
+			public Adapter caseBundleLocalization(BundleLocalization object) {
+				return createBundleLocalizationAdapter();
+			}
+			@Override
+			public Adapter caseBundleVendor(BundleVendor object) {
+				return createBundleVendorAdapter();
+			}
+			@Override
+			public Adapter caseBundleContactAddress(BundleContactAddress object) {
+				return createBundleContactAddressAdapter();
+			}
+			@Override
+			public Adapter caseBundleCopyright(BundleCopyright object) {
+				return createBundleCopyrightAdapter();
+			}
+			@Override
+			public Adapter caseBundleCategory(BundleCategory object) {
+				return createBundleCategoryAdapter();
+			}
+			@Override
+			public Adapter caseURLMANIFESTEntry(URLMANIFESTEntry object) {
+				return createURLMANIFESTEntryAdapter();
+			}
+			@Override
+			public Adapter caseBundleDocURL(BundleDocURL object) {
+				return createBundleDocURLAdapter();
+			}
+			@Override
+			public Adapter caseBundleUpdateLocation(BundleUpdateLocation object) {
+				return createBundleUpdateLocationAdapter();
+			}
+			@Override
+			public Adapter caseBundleVersion(BundleVersion object) {
+				return createBundleVersionAdapter();
+			}
+			@Override
+			public Adapter caseBundleActivator(BundleActivator object) {
+				return createBundleActivatorAdapter();
+			}
+			@Override
+			public Adapter caseBundleClassPath(BundleClassPath object) {
+				return createBundleClassPathAdapter();
+			}
+			@Override
+			public Adapter caseBundleNativeCode(BundleNativeCode object) {
+				return createBundleNativeCodeAdapter();
+			}
+			@Override
+			public Adapter caseRequireBundle(RequireBundle object) {
+				return createRequireBundleAdapter();
+			}
+			@Override
+			public Adapter caseImportService(ImportService object) {
+				return createImportServiceAdapter();
+			}
+			@Override
+			public Adapter caseExportService(ExportService object) {
+				return createExportServiceAdapter();
+			}
+			@Override
+			public Adapter caseImportPackage(ImportPackage object) {
+				return createImportPackageAdapter();
+			}
+			@Override
+			public Adapter caseExportPackage(ExportPackage object) {
+				return createExportPackageAdapter();
+			}
+			@Override
+			public Adapter caseBundleActivationPolicy(BundleActivationPolicy object) {
+				return createBundleActivationPolicyAdapter();
+			}
+			@Override
+			public Adapter caseFragmentHost(FragmentHost object) {
+				return createFragmentHostAdapter();
+			}
+			@Override
+			public Adapter caseDynamicImportPackage(DynamicImportPackage object) {
+				return createDynamicImportPackageAdapter();
+			}
+			@Override
+			public Adapter caseBundleRequiredExecutionEnvironment(BundleRequiredExecutionEnvironment object) {
+				return createBundleRequiredExecutionEnvironmentAdapter();
+			}
+			@Override
+			public Adapter caseSimpleManifestEntryManyValues(SimpleManifestEntryManyValues object) {
+				return createSimpleManifestEntryManyValuesAdapter();
+			}
+			@Override
+			public Adapter caseBundleManifestVersion(BundleManifestVersion object) {
+				return createBundleManifestVersionAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
-	 * Creates an adapter for the <code>target</code>. <!-- begin-user-doc
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
-	 * @param target
-	 *            the object to adapt.
+	 * @param target the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject) target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 	/**
@@ -281,7 +246,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.Service
 	 * @generated
@@ -295,7 +259,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.Version
 	 * @generated
@@ -309,7 +272,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.MANIFEST
 	 * @generated
@@ -323,7 +285,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.MANIFESTEntry
 	 * @generated
@@ -337,7 +298,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.SimpleMANIFESTEntry
 	 * @generated
@@ -351,7 +311,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleName
 	 * @generated
@@ -365,7 +324,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleSymbolicName
 	 * @generated
@@ -379,7 +337,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleDescription
 	 * @generated
@@ -393,7 +350,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleLocalization
 	 * @generated
@@ -407,7 +363,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleVendor
 	 * @generated
@@ -421,7 +376,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleContactAddress
 	 * @generated
@@ -435,7 +389,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleCopyright
 	 * @generated
@@ -449,7 +402,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleCategory
 	 * @generated
@@ -463,7 +415,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.URLMANIFESTEntry
 	 * @generated
@@ -477,7 +428,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleDocURL
 	 * @generated
@@ -491,7 +441,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleUpdateLocation
 	 * @generated
@@ -505,7 +454,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleVersion
 	 * @generated
@@ -519,7 +467,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleActivator
 	 * @generated
@@ -533,7 +480,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleClassPath
 	 * @generated
@@ -547,7 +493,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleNativeCode
 	 * @generated
@@ -561,7 +506,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.RequireBundle
 	 * @generated
@@ -575,7 +519,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.ImportService
 	 * @generated
@@ -589,7 +532,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.ExportService
 	 * @generated
@@ -603,7 +545,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.ImportPackage
 	 * @generated
@@ -617,7 +558,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.ExportPackage
 	 * @generated
@@ -631,7 +571,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleActivationPolicy
 	 * @generated
@@ -645,7 +584,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.FragmentHost
 	 * @generated
@@ -659,7 +597,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.DynamicImportPackage
 	 * @generated
@@ -673,7 +610,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleRequiredExecutionEnvironment
 	 * @generated
@@ -687,7 +623,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.SimpleManifestEntryManyValues
 	 * @generated
@@ -701,7 +636,6 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see manifest.BundleManifestVersion
 	 * @generated
@@ -711,9 +645,9 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for the default case. <!-- begin-user-doc --> This
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @generated
 	 */

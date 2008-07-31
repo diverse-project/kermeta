@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Mandatory.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: Mandatory.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
@@ -11,14 +11,14 @@ import org.eclipse.emf.common.util.EList;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Mandatory</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link option.Mandatory#getAttributs <em>Attributs</em>}</li>
+ *   <li>{@link option.Mandatory#getAttributs <em>Attributs</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see option.OptionPackage#getMandatory()
  * @model
  * @generated

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionFactory.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: OptionFactory.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
@@ -11,15 +11,14 @@ import org.eclipse.emf.ecore.EFactory;
 /**
  * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
  * create method for each non-abstract class of the model. <!-- end-user-doc -->
- * 
  * @see option.OptionPackage
  * @generated
  */
 public interface OptionFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	OptionFactory eINSTANCE = option.impl.OptionFactoryImpl.init();
@@ -34,9 +33,9 @@ public interface OptionFactory extends EFactory {
 	AttributEntry createAttributEntry();
 
 	/**
-	 * Returns a new object of class '<em>Os Name</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Os Name</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Os Name</em>'.
 	 * @generated
 	 */
@@ -79,9 +78,9 @@ public interface OptionFactory extends EFactory {
 	IncludePackages createIncludePackages();
 
 	/**
-	 * Returns a new object of class '<em>Uses</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Uses</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Uses</em>'.
 	 * @generated
 	 */
@@ -178,9 +177,9 @@ public interface OptionFactory extends EFactory {
 	ExcludeClasses createExcludeClasses();
 
 	/**
-	 * Returns the package supported by this factory. <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the package supported by this factory.
 	 * @generated
 	 */

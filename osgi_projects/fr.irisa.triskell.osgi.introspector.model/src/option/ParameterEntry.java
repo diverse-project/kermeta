@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterEntry.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: ParameterEntry.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
@@ -11,14 +11,14 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Parameter Entry</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link option.ParameterEntry#getToken <em>Token</em>}</li>
+ *   <li>{@link option.ParameterEntry#getToken <em>Token</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see option.OptionPackage#getParameterEntry()
  * @model abstract="true"
  * @generated
@@ -42,11 +42,9 @@ public interface ParameterEntry extends EObject {
 	String getToken();
 
 	/**
-	 * Sets the value of the '{@link option.ParameterEntry#getToken <em>Token</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Token</em>' attribute.
+	 * Sets the value of the '{@link option.ParameterEntry#getToken <em>Token</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Token</em>' attribute.
 	 * @see #getToken()
 	 * @generated
 	 */

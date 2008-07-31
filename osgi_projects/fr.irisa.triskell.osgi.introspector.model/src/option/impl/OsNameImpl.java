@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OsNameImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: OsNameImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package option.impl;
 
@@ -21,17 +21,16 @@ import org.osgi.framework.Constants;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link option.impl.OsNameImpl#getOsname <em>Osname</em>}</li>
+ *   <li>{@link option.impl.OsNameImpl#getOsname <em>Osname</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class OsNameImpl extends NativeCodeDirectiveImpl implements OsName {
 	/**
-	 * The default value of the '{@link #getOsname() <em>Osname</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getOsname() <em>Osname</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOsname()
 	 * @generated
 	 * @ordered
@@ -39,9 +38,8 @@ public class OsNameImpl extends NativeCodeDirectiveImpl implements OsName {
 	protected static final OsNameEnum OSNAME_EDEFAULT = OsNameEnum.AIX;
 
 	/**
-	 * The cached value of the '{@link #getOsname() <em>Osname</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getOsname() <em>Osname</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOsname()
 	 * @generated
 	 * @ordered
@@ -58,7 +56,6 @@ public class OsNameImpl extends NativeCodeDirectiveImpl implements OsName {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -68,7 +65,6 @@ public class OsNameImpl extends NativeCodeDirectiveImpl implements OsName {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OsNameEnum getOsname() {
@@ -77,84 +73,76 @@ public class OsNameImpl extends NativeCodeDirectiveImpl implements OsName {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setOsname(OsNameEnum newOsname) {
 		OsNameEnum oldOsname = osname;
 		osname = newOsname == null ? OSNAME_EDEFAULT : newOsname;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					OptionPackage.OS_NAME__OSNAME, oldOsname, osname));
+			eNotify(new ENotificationImpl(this, Notification.SET, OptionPackage.OS_NAME__OSNAME, oldOsname, osname));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case OptionPackage.OS_NAME__OSNAME:
-			return getOsname();
+			case OptionPackage.OS_NAME__OSNAME:
+				return getOsname();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case OptionPackage.OS_NAME__OSNAME:
-			setOsname((OsNameEnum) newValue);
-			return;
+			case OptionPackage.OS_NAME__OSNAME:
+				setOsname((OsNameEnum)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case OptionPackage.OS_NAME__OSNAME:
-			setOsname(OSNAME_EDEFAULT);
-			return;
+			case OptionPackage.OS_NAME__OSNAME:
+				setOsname(OSNAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case OptionPackage.OS_NAME__OSNAME:
-			return osname != OSNAME_EDEFAULT;
+			case OptionPackage.OS_NAME__OSNAME:
+				return osname != OSNAME_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (osname: ");

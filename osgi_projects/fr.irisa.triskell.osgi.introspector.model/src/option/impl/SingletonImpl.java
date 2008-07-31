@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SingletonImpl.java,v 1.1 2008-07-30 14:08:02 edaubert Exp $
+ * $Id: SingletonImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
  */
 package option.impl;
 
@@ -20,18 +20,17 @@ import org.osgi.framework.Constants;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link option.impl.SingletonImpl#isSingleton <em>Singleton</em>}</li>
+ *   <li>{@link option.impl.SingletonImpl#isSingleton <em>Singleton</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class SingletonImpl extends SymbolicNameDirectiveImpl implements
 		Singleton {
 	/**
-	 * The default value of the '{@link #isSingleton() <em>Singleton</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #isSingleton() <em>Singleton</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isSingleton()
 	 * @generated
 	 * @ordered
@@ -39,9 +38,8 @@ public class SingletonImpl extends SymbolicNameDirectiveImpl implements
 	protected static final boolean SINGLETON_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isSingleton() <em>Singleton</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #isSingleton() <em>Singleton</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isSingleton()
 	 * @generated
 	 * @ordered
@@ -58,7 +56,6 @@ public class SingletonImpl extends SymbolicNameDirectiveImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -68,7 +65,6 @@ public class SingletonImpl extends SymbolicNameDirectiveImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public boolean isSingleton() {
@@ -77,84 +73,76 @@ public class SingletonImpl extends SymbolicNameDirectiveImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setSingleton(boolean newSingleton) {
 		boolean oldSingleton = singleton;
 		singleton = newSingleton;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					OptionPackage.SINGLETON__SINGLETON, oldSingleton, singleton));
+			eNotify(new ENotificationImpl(this, Notification.SET, OptionPackage.SINGLETON__SINGLETON, oldSingleton, singleton));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case OptionPackage.SINGLETON__SINGLETON:
-			return isSingleton() ? Boolean.TRUE : Boolean.FALSE;
+			case OptionPackage.SINGLETON__SINGLETON:
+				return isSingleton() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case OptionPackage.SINGLETON__SINGLETON:
-			setSingleton(((Boolean) newValue).booleanValue());
-			return;
+			case OptionPackage.SINGLETON__SINGLETON:
+				setSingleton(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case OptionPackage.SINGLETON__SINGLETON:
-			setSingleton(SINGLETON_EDEFAULT);
-			return;
+			case OptionPackage.SINGLETON__SINGLETON:
+				setSingleton(SINGLETON_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case OptionPackage.SINGLETON__SINGLETON:
-			return singleton != SINGLETON_EDEFAULT;
+			case OptionPackage.SINGLETON__SINGLETON:
+				return singleton != SINGLETON_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (singleton: ");

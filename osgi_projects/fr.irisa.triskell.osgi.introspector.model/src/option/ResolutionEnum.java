@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResolutionEnum.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: ResolutionEnum.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
@@ -15,16 +15,15 @@ import org.eclipse.emf.common.util.Enumerator;
 /**
  * <!-- begin-user-doc --> A representation of the literals of the enumeration '<em><b>Resolution Enum</b></em>',
  * and utility methods for working with them. <!-- end-user-doc -->
- * 
  * @see option.OptionPackage#getResolutionEnum()
  * @model
  * @generated
  */
 public enum ResolutionEnum implements Enumerator {
 	/**
-	 * The '<em><b>MANDATORY</b></em>' literal object. <!-- begin-user-doc
+	 * The '<em><b>MANDATORY</b></em>' literal object.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #MANDATORY_VALUE
 	 * @generated
 	 * @ordered
@@ -32,9 +31,9 @@ public enum ResolutionEnum implements Enumerator {
 	MANDATORY(0, "MANDATORY", "mandatory"),
 
 	/**
-	 * The '<em><b>OPTIONAL</b></em>' literal object. <!-- begin-user-doc
+	 * The '<em><b>OPTIONAL</b></em>' literal object.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #OPTIONAL_VALUE
 	 * @generated
 	 * @ordered
@@ -42,14 +41,14 @@ public enum ResolutionEnum implements Enumerator {
 	OPTIONAL(1, "OPTIONAL", "optional");
 
 	/**
-	 * The '<em><b>MANDATORY</b></em>' literal value. <!-- begin-user-doc
+	 * The '<em><b>MANDATORY</b></em>' literal value.
+	 * <!-- begin-user-doc
 	 * -->
 	 * <p>
 	 * If the meaning of '<em><b>MANDATORY</b></em>' literal object isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #MANDATORY
 	 * @model literal="mandatory"
 	 * @generated
@@ -58,14 +57,14 @@ public enum ResolutionEnum implements Enumerator {
 	public static final int MANDATORY_VALUE = 0;
 
 	/**
-	 * The '<em><b>OPTIONAL</b></em>' literal value. <!-- begin-user-doc
+	 * The '<em><b>OPTIONAL</b></em>' literal value.
+	 * <!-- begin-user-doc
 	 * -->
 	 * <p>
 	 * If the meaning of '<em><b>OPTIONAL</b></em>' literal object isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #OPTIONAL
 	 * @model literal="optional"
 	 * @generated
@@ -76,25 +75,23 @@ public enum ResolutionEnum implements Enumerator {
 	/**
 	 * An array of all the '<em><b>Resolution Enum</b></em>' enumerators.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static final ResolutionEnum[] VALUES_ARRAY = new ResolutionEnum[] {
-			MANDATORY, OPTIONAL, };
+			MANDATORY,
+			OPTIONAL,
+		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Resolution Enum</b></em>'
-	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * A public read-only list of all the '<em><b>Resolution Enum</b></em>' enumerators.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<ResolutionEnum> VALUES = Collections
-			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<ResolutionEnum> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Resolution Enum</b></em>' literal with the
-	 * specified literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Resolution Enum</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ResolutionEnum get(String literal) {
@@ -108,9 +105,8 @@ public enum ResolutionEnum implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Resolution Enum</b></em>' literal with the
-	 * specified name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Resolution Enum</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ResolutionEnum getByName(String name) {
@@ -124,46 +120,40 @@ public enum ResolutionEnum implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Resolution Enum</b></em>' literal with the
-	 * specified integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Resolution Enum</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ResolutionEnum get(int value) {
 		switch (value) {
-		case MANDATORY_VALUE:
-			return MANDATORY;
-		case OPTIONAL_VALUE:
-			return OPTIONAL;
+			case MANDATORY_VALUE: return MANDATORY;
+			case OPTIONAL_VALUE: return OPTIONAL;
 		}
 		return null;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private ResolutionEnum(int value, String name, String literal) {
@@ -174,35 +164,31 @@ public enum ResolutionEnum implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string
-	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

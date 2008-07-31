@@ -18,7 +18,9 @@ import manifest.Service;
 import manifest.Version;
 import option.AttributEntry;
 import option.ExcludeClasses;
+import option.ExcludePackages;
 import option.IncludeClasses;
+import option.IncludePackages;
 import option.Uses;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
 import framework.Bundle;
@@ -340,5 +342,112 @@ public class ResolverStatic implements Resolver {
 						+ services.get(service) + " is not valid." + "\n");
 			}
 		}
+	}
+
+	public void resolveActivationPolicyExclude(
+			Map<ExcludePackages, List<String>> excludes,
+			Map<ExcludePackages, Bundle> bundles) {
+		List<ExcludePackages> excludePackageMaybeUnvalid = new ArrayList<ExcludePackages>();
+		for (ExcludePackages excludePackage : excludes.keySet()) {
+			List<String> exportPackageReference = excludes
+					.get(excludePackage);
+			List<String> exportPackageReferenceTmp = new ArrayList<String>();
+			Bundle bundle = bundles
+					.get(excludePackage);
+
+			// First research into local class path
+			for (String reference : exportPackageReference) {
+				Package _package = bundle.getPackage().getPackage(reference);
+				if (_package != null) {
+					excludePackage.addExcludePackage(_package);
+				} else {
+					exportPackageReferenceTmp.add(reference);
+				}
+			}
+			if (exportPackageReferenceTmp.size() > 0) {
+				exportPackageReference = new ArrayList<String>();
+				// Second research into Fragment class path
+				for (String reference : exportPackageReferenceTmp) {
+					boolean find = false;
+					for (Bundle fragment : bundle.getFragments()) {
+						Package _package = fragment.getPackage().getPackage(
+								reference);
+						if (_package != null) {
+							excludePackage.addExcludePackage(_package);
+							find = true;
+							break;
+						}
+					}
+					if (!find) {
+						this.log.put(bundle, this.log.get(bundle) + reference
+								+ " is not a valid package." + "\n"
+								+ "Maybe the folder "
+								+ reference.replace(".", "/")
+								+ " don't contain class file." + "\n");
+						excludePackageMaybeUnvalid.add(excludePackage);
+					}
+				}
+			}
+		}
+		for (ExcludePackages excludePackage : excludePackageMaybeUnvalid) {
+			if (excludePackage.getPackages().size() == 0) {
+				bundles.get(excludePackage).getManifest().getBundleActivationPolicy().removeDirective(
+								excludePackage);
+			}
+		}
+		
+	}
+
+	public void resolveActivationPolicyInclude(
+			Map<IncludePackages, List<String>> includes,
+			Map<IncludePackages, Bundle> bundles) {
+		List<IncludePackages> includePackageMaybeUnvalid = new ArrayList<IncludePackages>();
+		for (IncludePackages includePackage : includes.keySet()) {
+			List<String> exportPackageReference = includes
+					.get(includePackage);
+			List<String> exportPackageReferenceTmp = new ArrayList<String>();
+			Bundle bundle = bundles
+					.get(includePackage);
+
+			// First research into local class path
+			for (String reference : exportPackageReference) {
+				Package _package = bundle.getPackage().getPackage(reference);
+				if (_package != null) {
+					includePackage.addIncludePackage(_package);
+				} else {
+					exportPackageReferenceTmp.add(reference);
+				}
+			}
+			if (exportPackageReferenceTmp.size() > 0) {
+				exportPackageReference = new ArrayList<String>();
+				// Second research into Fragment class path
+				for (String reference : exportPackageReferenceTmp) {
+					boolean find = false;
+					for (Bundle fragment : bundle.getFragments()) {
+						Package _package = fragment.getPackage().getPackage(
+								reference);
+						if (_package != null) {
+							includePackage.addIncludePackage(_package);
+							find = true;
+							break;
+						}
+					}
+					if (!find) {
+						this.log.put(bundle, this.log.get(bundle) + reference
+								+ " is not a valid package." + "\n"
+								+ "Maybe the folder "
+								+ reference.replace(".", "/")
+								+ " don't contain class file." + "\n");
+						includePackageMaybeUnvalid.add(includePackage);
+					}
+				}
+			}
+		}
+		for (IncludePackages includePackage : includePackageMaybeUnvalid) {
+			if (includePackage.getPackages().size() == 0) {
+				bundles.get(includePackage).getManifest().getBundleActivationPolicy().removeDirective(
+						includePackage);
+			}
+		}	
 	}
 }

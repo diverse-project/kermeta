@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleEntry.java,v 1.1 2008-07-30 14:08:03 edaubert Exp $
+ * $Id: BundleEntry.java,v 1.2 2008-07-31 13:43:54 edaubert Exp $
  */
 package jar;
 
@@ -11,15 +11,15 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Bundle Entry</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link jar.BundleEntry#getFullPath <em>Full Path</em>}</li>
- * <li>{@link jar.BundleEntry#getName <em>Name</em>}</li>
+ *   <li>{@link jar.BundleEntry#getFullPath <em>Full Path</em>}</li>
+ *   <li>{@link jar.BundleEntry#getName <em>Name</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see jar.JarPackage#getBundleEntry()
  * @model abstract="true"
  * @generated
@@ -43,11 +43,9 @@ public interface BundleEntry extends EObject {
 	String getFullPath();
 
 	/**
-	 * Sets the value of the '{@link jar.BundleEntry#getFullPath <em>Full Path</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Full Path</em>' attribute.
+	 * Sets the value of the '{@link jar.BundleEntry#getFullPath <em>Full Path</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Full Path</em>' attribute.
 	 * @see #getFullPath()
 	 * @generated
 	 */
@@ -71,11 +69,9 @@ public interface BundleEntry extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link jar.BundleEntry#getName <em>Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Name</em>' attribute.
+	 * Sets the value of the '{@link jar.BundleEntry#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */

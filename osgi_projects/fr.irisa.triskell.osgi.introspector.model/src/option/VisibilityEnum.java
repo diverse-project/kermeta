@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VisibilityEnum.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: VisibilityEnum.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
@@ -15,16 +15,15 @@ import org.eclipse.emf.common.util.Enumerator;
 /**
  * <!-- begin-user-doc --> A representation of the literals of the enumeration '<em><b>Visibility Enum</b></em>',
  * and utility methods for working with them. <!-- end-user-doc -->
- * 
  * @see option.OptionPackage#getVisibilityEnum()
  * @model
  * @generated
  */
 public enum VisibilityEnum implements Enumerator {
 	/**
-	 * The '<em><b>PRIVATE</b></em>' literal object. <!-- begin-user-doc
+	 * The '<em><b>PRIVATE</b></em>' literal object.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #PRIVATE_VALUE
 	 * @generated
 	 * @ordered
@@ -32,9 +31,9 @@ public enum VisibilityEnum implements Enumerator {
 	PRIVATE(0, "PRIVATE", "private"),
 
 	/**
-	 * The '<em><b>REEXPORT</b></em>' literal object. <!-- begin-user-doc
+	 * The '<em><b>REEXPORT</b></em>' literal object.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #REEXPORT_VALUE
 	 * @generated
 	 * @ordered
@@ -42,13 +41,13 @@ public enum VisibilityEnum implements Enumerator {
 	REEXPORT(1, "REEXPORT", "reexport");
 
 	/**
-	 * The '<em><b>PRIVATE</b></em>' literal value. <!-- begin-user-doc -->
+	 * The '<em><b>PRIVATE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>PRIVATE</b></em>' literal object isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #PRIVATE
 	 * @model literal="private"
 	 * @generated
@@ -57,14 +56,14 @@ public enum VisibilityEnum implements Enumerator {
 	public static final int PRIVATE_VALUE = 0;
 
 	/**
-	 * The '<em><b>REEXPORT</b></em>' literal value. <!-- begin-user-doc
+	 * The '<em><b>REEXPORT</b></em>' literal value.
+	 * <!-- begin-user-doc
 	 * -->
 	 * <p>
 	 * If the meaning of '<em><b>REEXPORT</b></em>' literal object isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #REEXPORT
 	 * @model literal="reexport"
 	 * @generated
@@ -75,25 +74,23 @@ public enum VisibilityEnum implements Enumerator {
 	/**
 	 * An array of all the '<em><b>Visibility Enum</b></em>' enumerators.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static final VisibilityEnum[] VALUES_ARRAY = new VisibilityEnum[] {
-			PRIVATE, REEXPORT, };
+			PRIVATE,
+			REEXPORT,
+		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Visibility Enum</b></em>'
-	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * A public read-only list of all the '<em><b>Visibility Enum</b></em>' enumerators.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<VisibilityEnum> VALUES = Collections
-			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<VisibilityEnum> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Visibility Enum</b></em>' literal with the
-	 * specified literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Visibility Enum</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static VisibilityEnum get(String literal) {
@@ -107,9 +104,8 @@ public enum VisibilityEnum implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Visibility Enum</b></em>' literal with the
-	 * specified name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Visibility Enum</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static VisibilityEnum getByName(String name) {
@@ -123,46 +119,40 @@ public enum VisibilityEnum implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Visibility Enum</b></em>' literal with the
-	 * specified integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Visibility Enum</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static VisibilityEnum get(int value) {
 		switch (value) {
-		case PRIVATE_VALUE:
-			return PRIVATE;
-		case REEXPORT_VALUE:
-			return REEXPORT;
+			case PRIVATE_VALUE: return PRIVATE;
+			case REEXPORT_VALUE: return REEXPORT;
 		}
 		return null;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private VisibilityEnum(int value, String name, String literal) {
@@ -173,35 +163,31 @@ public enum VisibilityEnum implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string
-	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

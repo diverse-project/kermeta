@@ -9,7 +9,9 @@ import manifest.ImportPackage;
 import manifest.ImportService;
 import manifest.Service;
 import option.ExcludeClasses;
+import option.ExcludePackages;
 import option.IncludeClasses;
+import option.IncludePackages;
 import option.Uses;
 import framework.Bundle;
 
@@ -32,6 +34,10 @@ public interface Resolver {
 	public void resolveActivator(Map<BundleActivator, Bundle> bundles, Map<BundleActivator, String> activators);
 
 	public void resolveExportService(Map<Service, Bundle> bundles, Map<Service, String> services);
+	
+	public void resolveActivationPolicyExclude(Map<ExcludePackages, List<String>> excludes, Map<ExcludePackages, Bundle> bundles);
+	
+	public void resolveActivationPolicyInclude(Map<IncludePackages, List<String>> includes, Map<IncludePackages, Bundle> bundles);
 	
 	public Map<Bundle, String> getLog();
 	

@@ -128,12 +128,14 @@
         eType="#//boolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundle" lowerBound="1"
         eType="ecore:EDataType framework.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleElement" eType="ecore:EClass framework.ecore#//Bundle"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImportService" eSuperTypes="#//MANIFESTEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolve" lowerBound="1"
         eType="#//boolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="service" lowerBound="1"
         eType="ecore:EDataType framework.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceElement" eType="#//Service"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExportService" eSuperTypes="#//MANIFESTEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"
@@ -146,6 +148,8 @@
         eType="#//boolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="packages" lowerBound="1"
         upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packagesList" upperBound="-1"
+        eType="ecore:EClass jar.ecore#//Package"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExportPackage" eSuperTypes="#//MANIFESTEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="packages" lowerBound="1"

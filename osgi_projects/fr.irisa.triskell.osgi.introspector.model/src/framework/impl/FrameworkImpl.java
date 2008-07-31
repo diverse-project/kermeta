@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkImpl.java,v 1.1 2008-07-30 14:08:05 edaubert Exp $
+ * $Id: FrameworkImpl.java,v 1.2 2008-07-31 13:43:54 edaubert Exp $
  */
 package framework.impl;
 
@@ -30,17 +30,16 @@ import framework.FrameworkPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link framework.impl.FrameworkImpl#getBundles <em>Bundles</em>}</li>
+ *   <li>{@link framework.impl.FrameworkImpl#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class FrameworkImpl extends EObjectImpl implements Framework {
 	/**
-	 * The cached value of the '{@link #getBundles() <em>Bundles</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getBundles() <em>Bundles</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getBundles()
 	 * @generated
 	 * @ordered
@@ -49,7 +48,6 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected FrameworkImpl() {
@@ -58,7 +56,6 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -68,89 +65,81 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<Bundle> getBundles() {
 		if (bundles == null) {
-			bundles = new EObjectContainmentEList<Bundle>(Bundle.class, this,
-					FrameworkPackage.FRAMEWORK__BUNDLES);
+			bundles = new EObjectContainmentEList<Bundle>(Bundle.class, this, FrameworkPackage.FRAMEWORK__BUNDLES);
 		}
 		return bundles;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case FrameworkPackage.FRAMEWORK__BUNDLES:
-			return ((InternalEList<?>) getBundles())
-					.basicRemove(otherEnd, msgs);
+			case FrameworkPackage.FRAMEWORK__BUNDLES:
+				return ((InternalEList<?>)getBundles()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case FrameworkPackage.FRAMEWORK__BUNDLES:
-			return getBundles();
+			case FrameworkPackage.FRAMEWORK__BUNDLES:
+				return getBundles();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case FrameworkPackage.FRAMEWORK__BUNDLES:
-			getBundles().clear();
-			getBundles().addAll((Collection<? extends Bundle>) newValue);
-			return;
+			case FrameworkPackage.FRAMEWORK__BUNDLES:
+				getBundles().clear();
+				getBundles().addAll((Collection<? extends Bundle>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case FrameworkPackage.FRAMEWORK__BUNDLES:
-			getBundles().clear();
-			return;
+			case FrameworkPackage.FRAMEWORK__BUNDLES:
+				getBundles().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case FrameworkPackage.FRAMEWORK__BUNDLES:
-			return bundles != null && !bundles.isEmpty();
+			case FrameworkPackage.FRAMEWORK__BUNDLES:
+				return bundles != null && !bundles.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

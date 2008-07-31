@@ -2,21 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Extension.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: Extension.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Extension</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link option.Extension#getExtension <em>Extension</em>}</li>
+ *   <li>{@link option.Extension#getExtension <em>Extension</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see option.OptionPackage#getExtension()
  * @model
  * @generated
@@ -42,11 +42,9 @@ public interface Extension extends FragmentHostDirective {
 	ExtensionEnum getExtension();
 
 	/**
-	 * Sets the value of the '{@link option.Extension#getExtension <em>Extension</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Extension</em>' attribute.
+	 * Sets the value of the '{@link option.Extension#getExtension <em>Extension</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Extension</em>' attribute.
 	 * @see option.ExtensionEnum
 	 * @see #getExtension()
 	 * @generated

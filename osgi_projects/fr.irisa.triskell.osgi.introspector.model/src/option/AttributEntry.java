@@ -2,21 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AttributEntry.java,v 1.1 2008-07-30 14:08:01 edaubert Exp $
+ * $Id: AttributEntry.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
  */
 package option;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Attribut Entry</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link option.AttributEntry#getValue <em>Value</em>}</li>
+ *   <li>{@link option.AttributEntry#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see option.OptionPackage#getAttributEntry()
  * @model
  * @generated
@@ -40,11 +40,9 @@ public interface AttributEntry extends ParameterEntry {
 	String getValue();
 
 	/**
-	 * Sets the value of the '{@link option.AttributEntry#getValue <em>Value</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Value</em>' attribute.
+	 * Sets the value of the '{@link option.AttributEntry#getValue <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' attribute.
 	 * @see #getValue()
 	 * @generated
 	 */
