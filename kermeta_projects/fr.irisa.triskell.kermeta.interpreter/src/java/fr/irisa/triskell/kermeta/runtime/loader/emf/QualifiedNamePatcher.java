@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.17 2008-04-25 10:01:19 dvojtise Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.18 2008-07-31 08:35:46 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -227,10 +227,10 @@ public class QualifiedNamePatcher {
 		        
 	        } catch (IOException e) {
 	            // TODO Auto-generated catch block
-	            e.printStackTrace();
+	        	EMFRuntimeUnit.internalLog.warn(e);
 	            canLoadMetaModelResource = false;
 	            EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that some packages are really toplevel..." );
-	            EMFRuntimeUnit.internalLog.warn("Cannot retreive the metamodel. "+ mm_uri + " If you have trouble loading your model, maybe you should use repository.createResource(\"yourmodel.xmi\", \"yourmetamodel.ecore\") instead of repository.getResource(\"yourmodel.xmi\")");
+	            EMFRuntimeUnit.internalLog.warn("Cannot retrieve the metamodel. "+ mm_uri + " If you have trouble loading your model, maybe you should use repository.createResource(\"yourmodel.xmi\", \"yourmetamodel.ecore\") instead of repository.getResource(\"yourmodel.xmi\")");
     			
 	        }
 	    	

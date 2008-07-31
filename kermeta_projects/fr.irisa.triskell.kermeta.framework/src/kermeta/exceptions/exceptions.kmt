@@ -11,7 +11,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.24 2008-07-29 06:59:38 dvojtise Exp $
+ * $Id: exceptions.kmt,v 1.25 2008-07-31 08:37:37 dvojtise Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -176,6 +176,10 @@ class ResourceCreateException inherits Exception { }
 /** Raised when user tries to add an object that is not conform to the metamodel */
 class ResourceUnconformityException inherits Exception { }
 
+/** Raised when a resource cannot be loaded or saved because the URI used for 
+ * the  metamodel is not registered
+ */
+class UnregisteredMetamodelException inherits Exception { }
 
 /* ****************************************************************************
  * 6-Dynamic expressions related errors 

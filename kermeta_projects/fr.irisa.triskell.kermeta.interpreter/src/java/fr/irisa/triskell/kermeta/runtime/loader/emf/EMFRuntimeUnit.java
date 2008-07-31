@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.73 2008-07-29 14:49:49 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.74 2008-07-31 08:35:46 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -828,12 +828,16 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    String result = obj.getName();
 	    // if the metamodel is not registered the obtained name for the package is null ... we can fix that using the provided metamodel
 	    if(result == null && obj instanceof EPackage){
-	    	// use the ns uri to retreive the package name
+	    	// use the ns uri to retrieve the package name
 	    	if(this.qualifiedNamePatcher == null) qualifiedNamePatcher = new QualifiedNamePatcher(this);
 	    	result = qualifiedNamePatcher.getPackageQualifiedNameFromMetamodel(obj);
 	    	if(result == null) {
 	    		// still not able to retrieve the package qualified name from the nsURI
-	    		this.throwKermetaRaisedExceptionOnLoad("not able to retrieve the package qualified name from the nsURI of EPackage " + ((EPackage)obj).getNsURI(), null);
+	    		throw KermetaRaisedException.createKermetaException("kermeta::exceptions::UnregisteredMetamodelException",
+	    				"not able to retrieve the package qualified name from the nsURI of EPackage " + ((EPackage)obj).getNsURI(),
+	        			getRuntimeMemory().getInterpreter().getBasicInterpreter(),
+	        			getRuntimeMemory(),
+	        			null);
 	    	}
 	    }
 	    EObject cont = obj.eContainer();
