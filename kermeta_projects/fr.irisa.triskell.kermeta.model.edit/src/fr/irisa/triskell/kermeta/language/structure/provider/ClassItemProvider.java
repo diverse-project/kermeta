@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassItemProvider.java,v 1.18 2008-02-14 07:13:52 uid21732 Exp $
+ * $Id: ClassItemProvider.java,v 1.19 2008-07-31 15:09:15 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -204,7 +204,7 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		// We get the label of the class definition that is refered by the given
+		// We get the label of the class definition that is referred by the given
 		// class
 		// a '->' is added to show the "reference" semantic
 		String label = "";
