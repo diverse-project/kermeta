@@ -6,6 +6,7 @@ import java.io.PushbackReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import manifest.BundleActivator;
 import manifest.ExportPackage;
@@ -24,6 +25,7 @@ import fr.irisa.osgi.manifest.parser.lexer.Lexer;
 import fr.irisa.osgi.manifest.parser.lexer.LexerException;
 import fr.irisa.osgi.manifest.parser.node.Start;
 import fr.irisa.osgi.manifest.parser.parser.ParserException;
+import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
 import framework.Bundle;
 
 public class Parser {
@@ -63,29 +65,20 @@ public class Parser {
 		bundle.setManifest(manifest);
 
 		return this.translation.isValidTranslation();
-		
-			// TODO log
 		} catch (ParserException e) {
-			System.err.println(bundle.getLocation());
-			e.printStackTrace();
-			System.err
-					.println("There is an unknown error when we try to parser the MANIFEST file on the bundle "
-							+ bundle.getLocation() + ".");
+			// must not appear
+			OSGiIntrospectorUtil.log(Level.SEVERE, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
+					+ bundle.getLocation() + ".");
 			return false;
 		} catch (LexerException e) {
-			System.err.println(bundle.getLocation());
-			e.printStackTrace();
-			System.err
-					.println("There is an unknown error when we try to parser the MANIFEST file on the bundle "
-							+ bundle.getLocation() + ".");
-			// e.printStackTrace();
+			// must not appear
+			OSGiIntrospectorUtil.log(Level.SEVERE, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
+					+ bundle.getLocation() + ".");
 			return false;
 		} catch (IOException e) {
-			System.err.println(bundle.getLocation());
-			e.printStackTrace();
-			System.err
-					.println("There is an unknown error when we try to parser the MANIFEST file on the bundle "
-							+ bundle.getLocation() + ".");
+			// must not appear
+			OSGiIntrospectorUtil.log(Level.SEVERE, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
+					+ bundle.getLocation() + ".");
 			return false;
 		}
 	}

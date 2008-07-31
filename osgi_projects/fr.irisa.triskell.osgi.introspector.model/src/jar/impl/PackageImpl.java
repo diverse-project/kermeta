@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.2 2008-07-31 12:23:18 edaubert Exp $
+ * $Id: PackageImpl.java,v 1.3 2008-07-31 12:41:35 edaubert Exp $
  */
 package jar.impl;
 
@@ -412,19 +412,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 				}
 			}
 		}
-		
-		
-		// TODO peut-être à améliorer
-		/*boolean exist = false;
-		for (Package _packagetmp : getSubPackages()) {
-			if (_packagetmp.getName().equals(_package)) {
-				exist = true;
-				break;
-			}
-		}
-		if (!exist) {
-			getSubPackages().add(_package);
-		}*/
 
 	}
 

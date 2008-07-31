@@ -80,8 +80,7 @@ public class OSGiIntrospectorStatic {
 			try {
 				return this.generateWithJar(f);
 			} catch (IOException e) {
-				// TODO log
-				e.printStackTrace();
+				OSGiIntrospectorUtil.log(Level.SEVERE, e.getMessage());
 				return false;
 			}
 		}
@@ -155,8 +154,7 @@ public class OSGiIntrospectorStatic {
 				}
 				return valid;
 			} catch (IOException e) {
-				// TODO log
-				e.printStackTrace();
+				OSGiIntrospectorUtil.log(Level.SEVERE, e.getMessage());
 				return false;
 			}
 		}

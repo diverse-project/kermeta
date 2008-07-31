@@ -52,13 +52,8 @@ public class OSGiIntrospectorDynamic {
 		for (org.osgi.framework.Bundle bundle : this.context.getBundles()) {
 			// do not include this bundle in the processing
 			if (!bundle.getSymbolicName().contains(context.getBundle().getSymbolicName())) {
-				try {
 					validGeneration = validGeneration
 							&& this.generateBundle(bundle);
-				} catch (IOException e) {
-					// TODO log
-					e.printStackTrace();
-				}
 			}
 		}
 		// TODO vérification du log ainsi que dans Static
@@ -76,8 +71,7 @@ public class OSGiIntrospectorDynamic {
 	}
 	
 
-	private boolean generateBundle(org.osgi.framework.Bundle bundle)
-			throws IOException {
+	private boolean generateBundle(org.osgi.framework.Bundle bundle) {
 		Bundle bundleRepresentation = this.getSystemBundleRepresentation(bundle);
 		bundleRepresentation.setLocation(bundle.getLocation());
 		bundleRepresentation.setSymbolicName(bundle.getSymbolicName());
@@ -91,6 +85,7 @@ public class OSGiIntrospectorDynamic {
 			String value = dictionary.get(key);
 			manifestStringRepresentation += key + ": " + value + "\n";
 		}
+		try {
 		java.io.File manifestFile;
 		manifestFile = java.io.File.createTempFile("manifest", ".mf");
 		manifestFile.deleteOnExit();
@@ -107,6 +102,10 @@ public class OSGiIntrospectorDynamic {
 		}
 		
 		return valid;
+		} catch (IOException e) {
+			OSGiIntrospectorUtil.log(Level.SEVERE, e.getMessage());
+			return false;
+		}
 	}
 	
 	public Bundle getSystemBundleRepresentation(

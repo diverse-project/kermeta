@@ -3,8 +3,6 @@ package fr.irisa.triskell.osgi.introspector;
 import jar.File;
 import jar.Folder;
 import jar.JarFactory;
-import jar.Package;
-import jar.SystemEntry;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,8 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
@@ -35,7 +31,6 @@ import org.osgi.framework.BundleContext;
 
 import framework.Bundle;
 import framework.Framework;
-import framework.FrameworkFactory;
 
 public class OSGiIntrospectorUtil {
 
@@ -104,11 +99,7 @@ public class OSGiIntrospectorUtil {
 	 * @throws IOException
 	 */
 	public static void addEntriesFromJar(Bundle bundle, File file) throws IOException {
-		java.io.File ioFile = new java.io.File(bundle.getLocation()/*
-																	 * +
-																	 * java.io.File.separator +
-																	 * file.getFullPath()
-																	 */);
+		java.io.File ioFile = new java.io.File(bundle.getLocation());
 		java.io.File bundleFile = null;
 		if (ioFile.isDirectory()) {
 			bundleFile = new java.io.File(ioFile.getAbsoluteFile()
@@ -157,8 +148,6 @@ public class OSGiIntrospectorUtil {
 		Folder rootFolder = bundle.getFolder();
 		while (jarEntries.hasMoreElements()) {
 			JarEntry jarEntry = jarEntries.nextElement();
-			// If the entry define the MANIFEST file, I do nothing
-			// TODO peut-être gérer quand même le manifest
 				if (jarEntry.getName().endsWith("/")) {
 					Folder entry = jarFactory.createFolder();
 					entry.setFullPath(jarEntry.getName());
@@ -174,28 +163,6 @@ public class OSGiIntrospectorUtil {
 				}
 		}
 	}
-
-	/*public static String getFileLocation(org.osgi.framework.Bundle b) {
-		String location = b.getLocation();
-		context.getProperty("");
-		int index = location.indexOf("file:");
-		// TODO vérifier si c'est possible que ce soit "http:" ou "ftp:"
-		if (index < 0) {
-			return null;
-		} else {
-			location = location.substring(index);
-		}
-		try {
-			URL u = new URL(location);
-			java.io.File f = new java.io.File(u.getFile());
-			return f.getAbsolutePath();
-			// URL u = new URL(location);
-			// java.io.File f = new java.io.File(location);
-			// return f.getAbsolutePath();
-		} catch (MalformedURLException e) {
-			return null;
-		}
-	}*/
 
 	public static void log(Level level, String message) {
 		if (logger == null) {
@@ -254,8 +221,8 @@ public class OSGiIntrospectorUtil {
 		try {
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
-			e.printStackTrace();
-			// TODO utilisation du log
+			OSGiIntrospectorUtil.log(Level.SEVERE, "error during the save of the model");
+			OSGiIntrospectorUtil.log(Level.SEVERE, e.getMessage());
 			return false;
 		}
 		OSGiIntrospectorUtil.log(Level.INFO, "Introspection saved into "
@@ -264,11 +231,10 @@ public class OSGiIntrospectorUtil {
 	}
 
 	public static void displayLog(Map<Bundle, String> log) {
-		// TODO log
 		for (Bundle bundle : log.keySet()) {
 			if (!log.get(bundle).equals("")) {
-				System.err.println(bundle.getLocation());
-				System.err.println(log.get(bundle));
+				OSGiIntrospectorUtil.log(Level.INFO, bundle.getLocation());
+				OSGiIntrospectorUtil.log(Level.INFO, log.get(bundle));
 			}
 		}
 	}

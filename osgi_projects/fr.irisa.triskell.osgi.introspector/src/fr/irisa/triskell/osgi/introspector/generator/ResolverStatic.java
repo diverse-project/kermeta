@@ -6,6 +6,7 @@ import jar.Package;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import manifest.BadVersionValue;
 import manifest.BundleActivator;
@@ -19,6 +20,7 @@ import option.AttributEntry;
 import option.ExcludeClasses;
 import option.IncludeClasses;
 import option.Uses;
+import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
 import framework.Bundle;
 
 public class ResolverStatic implements Resolver {
@@ -248,7 +250,8 @@ public class ResolverStatic implements Resolver {
 						excludeClass.addExclude(clazz);
 					}
 				} else {
-					// TODO log
+					OSGiIntrospectorUtil.log(Level.WARNING, "Many classes into exclude directives of Export-Package were not found");
+					// TODO être plus précis ?
 				}
 			}
 		}
@@ -269,7 +272,8 @@ public class ResolverStatic implements Resolver {
 						includeClass.addInclude(clazz);
 					}
 				} else {
-					// TODO log
+					OSGiIntrospectorUtil.log(Level.WARNING, "Many classes into include directives of Export-Package were not found");
+					// TODO être plus précis ?
 				}
 			}
 		}
