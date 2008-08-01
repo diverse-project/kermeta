@@ -1,1 +1,18 @@
-<p> These are development statistics for the <a href="http://www.kermeta.org/">Kermeta</a> project, created by StatCVS</p> 
+<p> These are development statistics for the <a href="http://www.kermeta.org/">Kermeta</a> project, created by StatCVS.</p> 
+<p>It takes into account the files in kermeta_projects. (ignoring traceability, log4j and other MDKs projects which may also be used by Kermeta)<br/> 
+In order to be as relevant as possible, some files are ignored :
+<span style="font-family: verdana; font-size: xx-small; font-style: italic;"> **/*.xmi ;
+ **/*.km <b>;</b>
+ **/*.ecore <b>;</b>
+ **/*.uml <b>;</b>
+ **/*.traceability <b>;</b>
+ **/*.smap <b>;</b>
+ **/*.genmodel <b>;</b> 
+ **/*.ecoredi <b>;</b>
+ **/*.umldi <b>;</b> 
+ **/fr.irisa.triskell.kermeta.parser.gen.*/* <b>;</b> 
+ **/build/java/** <b>;</b>
+ **/migrationv032_v040/ast/** <b>;</b>
+ kermeta_projects/org.kermeta.framework.compiled/**
+ </span>
+</p>

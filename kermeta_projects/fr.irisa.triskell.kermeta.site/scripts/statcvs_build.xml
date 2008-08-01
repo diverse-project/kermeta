@@ -1,4 +1,4 @@
-<!-- $Id: statcvs_build.xml,v 1.4 2008-08-01 06:47:24 dvojtise Exp $ -->
+<!-- $Id: statcvs_build.xml,v 1.5 2008-08-01 07:21:58 dvojtise Exp $ -->
 <project name="Build StatCVS" default="all" basedir=".">
 	<description>
        
@@ -27,7 +27,7 @@
                 classpath="${statcvs.jar}"/> 
         <statcvs log="${cvs.log}" 
         	path="." 
-        	title="StatCVS"
+        	title="Kermeta"
             outputDir="${output.dir}" 
             notes="${notes.txt}" 
             viewcvs="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/" 
