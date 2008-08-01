@@ -2,114 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class APackageNames extends PPackageNames {
-	private TSemicolon _semicolon_;
-	private PPackageName _packageName_;
+public final class APackageNames extends PPackageNames
+{
+    private TSemicolon _semicolon_;
+    private PPackageName _packageName_;
 
-	public APackageNames() {
-		// Constructor
-	}
+    public APackageNames()
+    {
+        // Constructor
+    }
 
-	public APackageNames(@SuppressWarnings("hiding")
-	TSemicolon _semicolon_, @SuppressWarnings("hiding")
-	PPackageName _packageName_) {
-		// Constructor
-		setSemicolon(_semicolon_);
+    public APackageNames(
+        @SuppressWarnings("hiding") TSemicolon _semicolon_,
+        @SuppressWarnings("hiding") PPackageName _packageName_)
+    {
+        // Constructor
+        setSemicolon(_semicolon_);
 
-		setPackageName(_packageName_);
+        setPackageName(_packageName_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new APackageNames(cloneNode(this._semicolon_),
-				cloneNode(this._packageName_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new APackageNames(
+            cloneNode(this._semicolon_),
+            cloneNode(this._packageName_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAPackageNames(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAPackageNames(this);
+    }
 
-	public TSemicolon getSemicolon() {
-		return this._semicolon_;
-	}
+    public TSemicolon getSemicolon()
+    {
+        return this._semicolon_;
+    }
 
-	public void setSemicolon(TSemicolon node) {
-		if (this._semicolon_ != null) {
-			this._semicolon_.parent(null);
-		}
+    public void setSemicolon(TSemicolon node)
+    {
+        if(this._semicolon_ != null)
+        {
+            this._semicolon_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._semicolon_ = node;
-	}
+        this._semicolon_ = node;
+    }
 
-	public PPackageName getPackageName() {
-		return this._packageName_;
-	}
+    public PPackageName getPackageName()
+    {
+        return this._packageName_;
+    }
 
-	public void setPackageName(PPackageName node) {
-		if (this._packageName_ != null) {
-			this._packageName_.parent(null);
-		}
+    public void setPackageName(PPackageName node)
+    {
+        if(this._packageName_ != null)
+        {
+            this._packageName_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._packageName_ = node;
-	}
+        this._packageName_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._semicolon_) + toString(this._packageName_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._semicolon_)
+            + toString(this._packageName_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._semicolon_ == child) {
-			this._semicolon_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._semicolon_ == child)
+        {
+            this._semicolon_ = null;
+            return;
+        }
 
-		if (this._packageName_ == child) {
-			this._packageName_ = null;
-			return;
-		}
+        if(this._packageName_ == child)
+        {
+            this._packageName_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._semicolon_ == oldChild) {
-			setSemicolon((TSemicolon) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._semicolon_ == oldChild)
+        {
+            setSemicolon((TSemicolon) newChild);
+            return;
+        }
 
-		if (this._packageName_ == oldChild) {
-			setPackageName((PPackageName) newChild);
-			return;
-		}
+        if(this._packageName_ == oldChild)
+        {
+            setPackageName((PPackageName) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

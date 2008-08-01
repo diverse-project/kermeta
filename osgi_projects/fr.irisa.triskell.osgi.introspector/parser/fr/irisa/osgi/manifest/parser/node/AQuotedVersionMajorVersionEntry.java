@@ -2,149 +2,179 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AQuotedVersionMajorVersionEntry extends PMajorVersionEntry {
-	private TQuote _left_;
-	private PMajorVersion _majorVersion_;
-	private TQuote _right_;
+public final class AQuotedVersionMajorVersionEntry extends PMajorVersionEntry
+{
+    private TQuote _left_;
+    private PMajorVersion _majorVersion_;
+    private TQuote _right_;
 
-	public AQuotedVersionMajorVersionEntry() {
-		// Constructor
-	}
+    public AQuotedVersionMajorVersionEntry()
+    {
+        // Constructor
+    }
 
-	public AQuotedVersionMajorVersionEntry(@SuppressWarnings("hiding")
-	TQuote _left_, @SuppressWarnings("hiding")
-	PMajorVersion _majorVersion_, @SuppressWarnings("hiding")
-	TQuote _right_) {
-		// Constructor
-		setLeft(_left_);
+    public AQuotedVersionMajorVersionEntry(
+        @SuppressWarnings("hiding") TQuote _left_,
+        @SuppressWarnings("hiding") PMajorVersion _majorVersion_,
+        @SuppressWarnings("hiding") TQuote _right_)
+    {
+        // Constructor
+        setLeft(_left_);
 
-		setMajorVersion(_majorVersion_);
+        setMajorVersion(_majorVersion_);
 
-		setRight(_right_);
+        setRight(_right_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AQuotedVersionMajorVersionEntry(cloneNode(this._left_),
-				cloneNode(this._majorVersion_), cloneNode(this._right_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AQuotedVersionMajorVersionEntry(
+            cloneNode(this._left_),
+            cloneNode(this._majorVersion_),
+            cloneNode(this._right_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAQuotedVersionMajorVersionEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAQuotedVersionMajorVersionEntry(this);
+    }
 
-	public TQuote getLeft() {
-		return this._left_;
-	}
+    public TQuote getLeft()
+    {
+        return this._left_;
+    }
 
-	public void setLeft(TQuote node) {
-		if (this._left_ != null) {
-			this._left_.parent(null);
-		}
+    public void setLeft(TQuote node)
+    {
+        if(this._left_ != null)
+        {
+            this._left_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._left_ = node;
-	}
+        this._left_ = node;
+    }
 
-	public PMajorVersion getMajorVersion() {
-		return this._majorVersion_;
-	}
+    public PMajorVersion getMajorVersion()
+    {
+        return this._majorVersion_;
+    }
 
-	public void setMajorVersion(PMajorVersion node) {
-		if (this._majorVersion_ != null) {
-			this._majorVersion_.parent(null);
-		}
+    public void setMajorVersion(PMajorVersion node)
+    {
+        if(this._majorVersion_ != null)
+        {
+            this._majorVersion_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._majorVersion_ = node;
-	}
+        this._majorVersion_ = node;
+    }
 
-	public TQuote getRight() {
-		return this._right_;
-	}
+    public TQuote getRight()
+    {
+        return this._right_;
+    }
 
-	public void setRight(TQuote node) {
-		if (this._right_ != null) {
-			this._right_.parent(null);
-		}
+    public void setRight(TQuote node)
+    {
+        if(this._right_ != null)
+        {
+            this._right_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._right_ = node;
-	}
+        this._right_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._left_) + toString(this._majorVersion_)
-				+ toString(this._right_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._left_)
+            + toString(this._majorVersion_)
+            + toString(this._right_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._left_ == child) {
-			this._left_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._left_ == child)
+        {
+            this._left_ = null;
+            return;
+        }
 
-		if (this._majorVersion_ == child) {
-			this._majorVersion_ = null;
-			return;
-		}
+        if(this._majorVersion_ == child)
+        {
+            this._majorVersion_ = null;
+            return;
+        }
 
-		if (this._right_ == child) {
-			this._right_ = null;
-			return;
-		}
+        if(this._right_ == child)
+        {
+            this._right_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._left_ == oldChild) {
-			setLeft((TQuote) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._left_ == oldChild)
+        {
+            setLeft((TQuote) newChild);
+            return;
+        }
 
-		if (this._majorVersion_ == oldChild) {
-			setMajorVersion((PMajorVersion) newChild);
-			return;
-		}
+        if(this._majorVersion_ == oldChild)
+        {
+            setMajorVersion((PMajorVersion) newChild);
+            return;
+        }
 
-		if (this._right_ == oldChild) {
-			setRight((TQuote) newChild);
-			return;
-		}
+        if(this._right_ == oldChild)
+        {
+            setRight((TQuote) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

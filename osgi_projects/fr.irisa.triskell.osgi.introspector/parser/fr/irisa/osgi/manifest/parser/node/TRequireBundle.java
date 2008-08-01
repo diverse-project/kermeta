@@ -2,32 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TRequireBundle extends Token {
-	public TRequireBundle() {
-		super.setText("Require-Bundle: ");
-	}
+public final class TRequireBundle extends Token
+{
+    public TRequireBundle(String text)
+    {
+        setText(text);
+    }
 
-	public TRequireBundle(int line, int pos) {
-		super.setText("Require-Bundle: ");
-		setLine(line);
-		setPos(pos);
-	}
+    public TRequireBundle(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TRequireBundle(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TRequireBundle(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTRequireBundle(this);
-	}
-
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TRequireBundle text.");
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTRequireBundle(this);
+    }
 }

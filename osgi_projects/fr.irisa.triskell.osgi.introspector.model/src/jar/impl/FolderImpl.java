@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FolderImpl.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: FolderImpl.java,v 1.4 2008-08-01 09:44:38 edaubert Exp $
  */
 package jar.impl;
 
@@ -152,25 +152,29 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 				nextPackage = packages.length;
 			}
 			if (nextPackage == packagesClazz.length - 1) {
-				boolean exist = false;
+				SystemEntry p = null;
 				for (SystemEntry entryTmp : getEntries()) {
 					if (entryTmp.getFullPath().equals(entry.getFullPath())) {
-						exist = true;
+						p = entryTmp;
 						break;
 					}
 				}
-				if (!exist) {
+				if (p == null) {
 					getEntries().add(entry);
+				} else if (entry instanceof Folder) {
+					for (SystemEntry entryTmp : ((Folder)entry).getEntries()) {
+						((Folder)p).addEntry(entryTmp);
+					}
 				}
 			} else {
 				String _packageName = packagesClazz[nextPackage];
 				boolean exist = false;
 				Iterator<SystemEntry> packagesIterator = getEntries().iterator();
 				while (!exist && packagesIterator.hasNext()) {
-					SystemEntry p = packagesIterator.next();
-					if (p instanceof Folder && p.getFullPath().equals(
+					SystemEntry tmp = packagesIterator.next();
+					if (tmp instanceof Folder && tmp.getFullPath().equals(
 							getFullPath() + _packageName + "/")) {
-						((Folder)p).addEntry(entry);
+						((Folder)tmp).addEntry(entry);
 						exist = true;
 					}
 				}
@@ -178,7 +182,9 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 					Folder p = JarFactory.eINSTANCE.createFolder();
 					p.setFullPath(this.getFullPath() + _packageName + "/");
 					p.setName(_packageName);
+					p.setBundleClassPath(entry.isBundleClassPath());
 					getEntries().add(p);
+					this.setBundleClassPath(entry.isBundleClassPath());
 					p.addEntry(entry);
 				}
 			}

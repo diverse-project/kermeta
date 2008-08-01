@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TOsnameWindows2003 extends Token {
-	public TOsnameWindows2003(String text) {
-		setText(text);
-	}
+public final class TOsnameWindows2003 extends Token
+{
+    public TOsnameWindows2003(String text)
+    {
+        setText(text);
+    }
 
-	public TOsnameWindows2003(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TOsnameWindows2003(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TOsnameWindows2003(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TOsnameWindows2003(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTOsnameWindows2003(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTOsnameWindows2003(this);
+    }
 }

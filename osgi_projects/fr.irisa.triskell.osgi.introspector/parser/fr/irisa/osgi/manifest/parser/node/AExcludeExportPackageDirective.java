@@ -2,117 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AExcludeExportPackageDirective extends
-		PExportPackageDirective {
-	private TExclude _exclude_;
-	private PExportPackageUseExcludeIncludeValue _exportPackageUseExcludeIncludeValue_;
+public final class AExcludeExportPackageDirective extends PExportPackageDirective
+{
+    private TExclude _exclude_;
+    private PExportPackageUseExcludeIncludeValue _exportPackageUseExcludeIncludeValue_;
 
-	public AExcludeExportPackageDirective() {
-		// Constructor
-	}
+    public AExcludeExportPackageDirective()
+    {
+        // Constructor
+    }
 
-	public AExcludeExportPackageDirective(@SuppressWarnings("hiding")
-	TExclude _exclude_, @SuppressWarnings("hiding")
-	PExportPackageUseExcludeIncludeValue _exportPackageUseExcludeIncludeValue_) {
-		// Constructor
-		setExclude(_exclude_);
+    public AExcludeExportPackageDirective(
+        @SuppressWarnings("hiding") TExclude _exclude_,
+        @SuppressWarnings("hiding") PExportPackageUseExcludeIncludeValue _exportPackageUseExcludeIncludeValue_)
+    {
+        // Constructor
+        setExclude(_exclude_);
 
-		setExportPackageUseExcludeIncludeValue(_exportPackageUseExcludeIncludeValue_);
+        setExportPackageUseExcludeIncludeValue(_exportPackageUseExcludeIncludeValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AExcludeExportPackageDirective(cloneNode(this._exclude_),
-				cloneNode(this._exportPackageUseExcludeIncludeValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AExcludeExportPackageDirective(
+            cloneNode(this._exclude_),
+            cloneNode(this._exportPackageUseExcludeIncludeValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAExcludeExportPackageDirective(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAExcludeExportPackageDirective(this);
+    }
 
-	public TExclude getExclude() {
-		return this._exclude_;
-	}
+    public TExclude getExclude()
+    {
+        return this._exclude_;
+    }
 
-	public void setExclude(TExclude node) {
-		if (this._exclude_ != null) {
-			this._exclude_.parent(null);
-		}
+    public void setExclude(TExclude node)
+    {
+        if(this._exclude_ != null)
+        {
+            this._exclude_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._exclude_ = node;
-	}
+        this._exclude_ = node;
+    }
 
-	public PExportPackageUseExcludeIncludeValue getExportPackageUseExcludeIncludeValue() {
-		return this._exportPackageUseExcludeIncludeValue_;
-	}
+    public PExportPackageUseExcludeIncludeValue getExportPackageUseExcludeIncludeValue()
+    {
+        return this._exportPackageUseExcludeIncludeValue_;
+    }
 
-	public void setExportPackageUseExcludeIncludeValue(
-			PExportPackageUseExcludeIncludeValue node) {
-		if (this._exportPackageUseExcludeIncludeValue_ != null) {
-			this._exportPackageUseExcludeIncludeValue_.parent(null);
-		}
+    public void setExportPackageUseExcludeIncludeValue(PExportPackageUseExcludeIncludeValue node)
+    {
+        if(this._exportPackageUseExcludeIncludeValue_ != null)
+        {
+            this._exportPackageUseExcludeIncludeValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._exportPackageUseExcludeIncludeValue_ = node;
-	}
+        this._exportPackageUseExcludeIncludeValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._exclude_)
-				+ toString(this._exportPackageUseExcludeIncludeValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._exclude_)
+            + toString(this._exportPackageUseExcludeIncludeValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._exclude_ == child) {
-			this._exclude_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._exclude_ == child)
+        {
+            this._exclude_ = null;
+            return;
+        }
 
-		if (this._exportPackageUseExcludeIncludeValue_ == child) {
-			this._exportPackageUseExcludeIncludeValue_ = null;
-			return;
-		}
+        if(this._exportPackageUseExcludeIncludeValue_ == child)
+        {
+            this._exportPackageUseExcludeIncludeValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._exclude_ == oldChild) {
-			setExclude((TExclude) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._exclude_ == oldChild)
+        {
+            setExclude((TExclude) newChild);
+            return;
+        }
 
-		if (this._exportPackageUseExcludeIncludeValue_ == oldChild) {
-			setExportPackageUseExcludeIncludeValue((PExportPackageUseExcludeIncludeValue) newChild);
-			return;
-		}
+        if(this._exportPackageUseExcludeIncludeValue_ == oldChild)
+        {
+            setExportPackageUseExcludeIncludeValue((PExportPackageUseExcludeIncludeValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

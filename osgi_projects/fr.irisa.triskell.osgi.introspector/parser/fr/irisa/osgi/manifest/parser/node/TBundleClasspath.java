@@ -2,32 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TBundleClasspath extends Token {
-	public TBundleClasspath() {
-		super.setText("Bundle-ClassPath: ");
-	}
+public final class TBundleClasspath extends Token
+{
+    public TBundleClasspath(String text)
+    {
+        setText(text);
+    }
 
-	public TBundleClasspath(int line, int pos) {
-		super.setText("Bundle-ClassPath: ");
-		setLine(line);
-		setPos(pos);
-	}
+    public TBundleClasspath(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TBundleClasspath(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TBundleClasspath(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTBundleClasspath(this);
-	}
-
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TBundleClasspath text.");
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTBundleClasspath(this);
+    }
 }

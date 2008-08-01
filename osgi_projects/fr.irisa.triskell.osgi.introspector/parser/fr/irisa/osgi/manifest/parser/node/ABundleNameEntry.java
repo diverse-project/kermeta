@@ -2,159 +2,186 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import java.util.*;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleNameEntry extends PBundleNameEntry {
-	private TBundleName _bundleName_;
-	private TAllString _allString_;
-	private final LinkedList<PParameter> _parameter_ = new LinkedList<PParameter>();
+public final class ABundleNameEntry extends PBundleNameEntry
+{
+    private TBundleName _bundleName_;
+    private TAllString _allString_;
+    private final LinkedList<PParameter> _parameter_ = new LinkedList<PParameter>();
 
-	public ABundleNameEntry() {
-		// Constructor
-	}
+    public ABundleNameEntry()
+    {
+        // Constructor
+    }
 
-	public ABundleNameEntry(@SuppressWarnings("hiding")
-	TBundleName _bundleName_, @SuppressWarnings("hiding")
-	TAllString _allString_, @SuppressWarnings("hiding")
-	List<PParameter> _parameter_) {
-		// Constructor
-		setBundleName(_bundleName_);
+    public ABundleNameEntry(
+        @SuppressWarnings("hiding") TBundleName _bundleName_,
+        @SuppressWarnings("hiding") TAllString _allString_,
+        @SuppressWarnings("hiding") List<PParameter> _parameter_)
+    {
+        // Constructor
+        setBundleName(_bundleName_);
 
-		setAllString(_allString_);
+        setAllString(_allString_);
 
-		setParameter(_parameter_);
+        setParameter(_parameter_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleNameEntry(cloneNode(this._bundleName_),
-				cloneNode(this._allString_), cloneList(this._parameter_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleNameEntry(
+            cloneNode(this._bundleName_),
+            cloneNode(this._allString_),
+            cloneList(this._parameter_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleNameEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleNameEntry(this);
+    }
 
-	public TBundleName getBundleName() {
-		return this._bundleName_;
-	}
+    public TBundleName getBundleName()
+    {
+        return this._bundleName_;
+    }
 
-	public void setBundleName(TBundleName node) {
-		if (this._bundleName_ != null) {
-			this._bundleName_.parent(null);
-		}
+    public void setBundleName(TBundleName node)
+    {
+        if(this._bundleName_ != null)
+        {
+            this._bundleName_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleName_ = node;
-	}
+        this._bundleName_ = node;
+    }
 
-	public TAllString getAllString() {
-		return this._allString_;
-	}
+    public TAllString getAllString()
+    {
+        return this._allString_;
+    }
 
-	public void setAllString(TAllString node) {
-		if (this._allString_ != null) {
-			this._allString_.parent(null);
-		}
+    public void setAllString(TAllString node)
+    {
+        if(this._allString_ != null)
+        {
+            this._allString_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._allString_ = node;
-	}
+        this._allString_ = node;
+    }
 
-	public LinkedList<PParameter> getParameter() {
-		return this._parameter_;
-	}
+    public LinkedList<PParameter> getParameter()
+    {
+        return this._parameter_;
+    }
 
-	public void setParameter(List<PParameter> list) {
-		this._parameter_.clear();
-		this._parameter_.addAll(list);
-		for (PParameter e : list) {
-			if (e.parent() != null) {
-				e.parent().removeChild(e);
-			}
+    public void setParameter(List<PParameter> list)
+    {
+        this._parameter_.clear();
+        this._parameter_.addAll(list);
+        for(PParameter e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
 
-			e.parent(this);
-		}
-	}
+            e.parent(this);
+        }
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleName_) + toString(this._allString_)
-				+ toString(this._parameter_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleName_)
+            + toString(this._allString_)
+            + toString(this._parameter_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleName_ == child) {
-			this._bundleName_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleName_ == child)
+        {
+            this._bundleName_ = null;
+            return;
+        }
 
-		if (this._allString_ == child) {
-			this._allString_ = null;
-			return;
-		}
+        if(this._allString_ == child)
+        {
+            this._allString_ = null;
+            return;
+        }
 
-		if (this._parameter_.remove(child)) {
-			return;
-		}
+        if(this._parameter_.remove(child))
+        {
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleName_ == oldChild) {
-			setBundleName((TBundleName) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleName_ == oldChild)
+        {
+            setBundleName((TBundleName) newChild);
+            return;
+        }
 
-		if (this._allString_ == oldChild) {
-			setAllString((TAllString) newChild);
-			return;
-		}
+        if(this._allString_ == oldChild)
+        {
+            setAllString((TAllString) newChild);
+            return;
+        }
 
-		for (ListIterator<PParameter> i = this._parameter_.listIterator(); i
-				.hasNext();) {
-			if (i.next() == oldChild) {
-				if (newChild != null) {
-					i.set((PParameter) newChild);
-					newChild.parent(this);
-					oldChild.parent(null);
-					return;
-				}
+        for(ListIterator<PParameter> i = this._parameter_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PParameter) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-				i.remove();
-				oldChild.parent(null);
-				return;
-			}
-		}
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,115 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ARequireBundleEntry extends PRequireBundleEntry {
-	private TRequireBundle _requireBundle_;
-	private PRequireBundleEntryValue _requireBundleEntryValue_;
+public final class ARequireBundleEntry extends PRequireBundleEntry
+{
+    private TRequireBundle _requireBundle_;
+    private PRequireBundleEntryValue _requireBundleEntryValue_;
 
-	public ARequireBundleEntry() {
-		// Constructor
-	}
+    public ARequireBundleEntry()
+    {
+        // Constructor
+    }
 
-	public ARequireBundleEntry(@SuppressWarnings("hiding")
-	TRequireBundle _requireBundle_, @SuppressWarnings("hiding")
-	PRequireBundleEntryValue _requireBundleEntryValue_) {
-		// Constructor
-		setRequireBundle(_requireBundle_);
+    public ARequireBundleEntry(
+        @SuppressWarnings("hiding") TRequireBundle _requireBundle_,
+        @SuppressWarnings("hiding") PRequireBundleEntryValue _requireBundleEntryValue_)
+    {
+        // Constructor
+        setRequireBundle(_requireBundle_);
 
-		setRequireBundleEntryValue(_requireBundleEntryValue_);
+        setRequireBundleEntryValue(_requireBundleEntryValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ARequireBundleEntry(cloneNode(this._requireBundle_),
-				cloneNode(this._requireBundleEntryValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ARequireBundleEntry(
+            cloneNode(this._requireBundle_),
+            cloneNode(this._requireBundleEntryValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseARequireBundleEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseARequireBundleEntry(this);
+    }
 
-	public TRequireBundle getRequireBundle() {
-		return this._requireBundle_;
-	}
+    public TRequireBundle getRequireBundle()
+    {
+        return this._requireBundle_;
+    }
 
-	public void setRequireBundle(TRequireBundle node) {
-		if (this._requireBundle_ != null) {
-			this._requireBundle_.parent(null);
-		}
+    public void setRequireBundle(TRequireBundle node)
+    {
+        if(this._requireBundle_ != null)
+        {
+            this._requireBundle_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._requireBundle_ = node;
-	}
+        this._requireBundle_ = node;
+    }
 
-	public PRequireBundleEntryValue getRequireBundleEntryValue() {
-		return this._requireBundleEntryValue_;
-	}
+    public PRequireBundleEntryValue getRequireBundleEntryValue()
+    {
+        return this._requireBundleEntryValue_;
+    }
 
-	public void setRequireBundleEntryValue(PRequireBundleEntryValue node) {
-		if (this._requireBundleEntryValue_ != null) {
-			this._requireBundleEntryValue_.parent(null);
-		}
+    public void setRequireBundleEntryValue(PRequireBundleEntryValue node)
+    {
+        if(this._requireBundleEntryValue_ != null)
+        {
+            this._requireBundleEntryValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._requireBundleEntryValue_ = node;
-	}
+        this._requireBundleEntryValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._requireBundle_)
-				+ toString(this._requireBundleEntryValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._requireBundle_)
+            + toString(this._requireBundleEntryValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._requireBundle_ == child) {
-			this._requireBundle_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._requireBundle_ == child)
+        {
+            this._requireBundle_ = null;
+            return;
+        }
 
-		if (this._requireBundleEntryValue_ == child) {
-			this._requireBundleEntryValue_ = null;
-			return;
-		}
+        if(this._requireBundleEntryValue_ == child)
+        {
+            this._requireBundleEntryValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._requireBundle_ == oldChild) {
-			setRequireBundle((TRequireBundle) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._requireBundle_ == oldChild)
+        {
+            setRequireBundle((TRequireBundle) newChild);
+            return;
+        }
 
-		if (this._requireBundleEntryValue_ == oldChild) {
-			setRequireBundleEntryValue((PRequireBundleEntryValue) newChild);
-			return;
-		}
+        if(this._requireBundleEntryValue_ == oldChild)
+        {
+            setRequireBundleEntryValue((PRequireBundleEntryValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

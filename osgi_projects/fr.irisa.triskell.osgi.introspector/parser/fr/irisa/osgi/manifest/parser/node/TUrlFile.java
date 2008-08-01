@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TUrlFile extends Token {
-	public TUrlFile(String text) {
-		setText(text);
-	}
+public final class TUrlFile extends Token
+{
+    public TUrlFile(String text)
+    {
+        setText(text);
+    }
 
-	public TUrlFile(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TUrlFile(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TUrlFile(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TUrlFile(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTUrlFile(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTUrlFile(this);
+    }
 }

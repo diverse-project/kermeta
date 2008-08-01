@@ -2,32 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TBundleCategory extends Token {
-	public TBundleCategory() {
-		super.setText("Bundle-Category: ");
-	}
+public final class TBundleCategory extends Token
+{
+    public TBundleCategory(String text)
+    {
+        setText(text);
+    }
 
-	public TBundleCategory(int line, int pos) {
-		super.setText("Bundle-Category: ");
-		setLine(line);
-		setPos(pos);
-	}
+    public TBundleCategory(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TBundleCategory(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TBundleCategory(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTBundleCategory(this);
-	}
-
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TBundleCategory text.");
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTBundleCategory(this);
+    }
 }

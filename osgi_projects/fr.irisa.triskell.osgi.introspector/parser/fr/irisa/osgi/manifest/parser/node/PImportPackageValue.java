@@ -2,6 +2,7 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-public abstract class PImportPackageValue extends Node {
-	// Empty body
+public abstract class PImportPackageValue extends Node
+{
+    // Empty body
 }

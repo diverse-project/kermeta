@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameNetbsdOsnameValue extends POsnameValue {
-	private TOsnameNetbsd _osnameNetbsd_;
+public final class AOsnameNetbsdOsnameValue extends POsnameValue
+{
+    private TOsnameNetbsd _osnameNetbsd_;
 
-	public AOsnameNetbsdOsnameValue() {
-		// Constructor
-	}
+    public AOsnameNetbsdOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameNetbsdOsnameValue(@SuppressWarnings("hiding")
-	TOsnameNetbsd _osnameNetbsd_) {
-		// Constructor
-		setOsnameNetbsd(_osnameNetbsd_);
+    public AOsnameNetbsdOsnameValue(
+        @SuppressWarnings("hiding") TOsnameNetbsd _osnameNetbsd_)
+    {
+        // Constructor
+        setOsnameNetbsd(_osnameNetbsd_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameNetbsdOsnameValue(cloneNode(this._osnameNetbsd_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameNetbsdOsnameValue(
+            cloneNode(this._osnameNetbsd_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameNetbsdOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameNetbsdOsnameValue(this);
+    }
 
-	public TOsnameNetbsd getOsnameNetbsd() {
-		return this._osnameNetbsd_;
-	}
+    public TOsnameNetbsd getOsnameNetbsd()
+    {
+        return this._osnameNetbsd_;
+    }
 
-	public void setOsnameNetbsd(TOsnameNetbsd node) {
-		if (this._osnameNetbsd_ != null) {
-			this._osnameNetbsd_.parent(null);
-		}
+    public void setOsnameNetbsd(TOsnameNetbsd node)
+    {
+        if(this._osnameNetbsd_ != null)
+        {
+            this._osnameNetbsd_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameNetbsd_ = node;
-	}
+        this._osnameNetbsd_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameNetbsd_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameNetbsd_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameNetbsd_ == child) {
-			this._osnameNetbsd_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameNetbsd_ == child)
+        {
+            this._osnameNetbsd_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameNetbsd_ == oldChild) {
-			setOsnameNetbsd((TOsnameNetbsd) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameNetbsd_ == oldChild)
+        {
+            setOsnameNetbsd((TOsnameNetbsd) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

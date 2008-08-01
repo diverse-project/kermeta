@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JarPackage.java,v 1.2 2008-07-31 13:43:54 edaubert Exp $
+ * $Id: JarPackage.java,v 1.3 2008-08-01 09:44:37 edaubert Exp $
  */
 package jar;
 
@@ -118,12 +118,21 @@ public interface JarPackage extends EPackage {
 	int SYSTEM_ENTRY__NAME = BUNDLE_ENTRY__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Bundle Class Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYSTEM_ENTRY__BUNDLE_CLASS_PATH = BUNDLE_ENTRY_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>System Entry</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_ENTRY_FEATURE_COUNT = BUNDLE_ENTRY_FEATURE_COUNT + 0;
+	int SYSTEM_ENTRY_FEATURE_COUNT = BUNDLE_ENTRY_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link jar.impl.PackageImpl <em>Package</em>}' class.
@@ -169,20 +178,12 @@ public interface JarPackage extends EPackage {
 	int PACKAGE__SUB_PACKAGES = BUNDLE_ENTRY_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Bundle Class Path</b></em>' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__BUNDLE_CLASS_PATH = BUNDLE_ENTRY_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Package</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_FEATURE_COUNT = BUNDLE_ENTRY_FEATURE_COUNT + 3;
+	int PACKAGE_FEATURE_COUNT = BUNDLE_ENTRY_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link jar.impl.ClassImpl <em>Class</em>}' class.
@@ -248,6 +249,15 @@ public interface JarPackage extends EPackage {
 	int FOLDER__NAME = SYSTEM_ENTRY__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Bundle Class Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOLDER__BUNDLE_CLASS_PATH = SYSTEM_ENTRY__BUNDLE_CLASS_PATH;
+
+	/**
 	 * The feature id for the '<em><b>Entries</b></em>' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -289,6 +299,15 @@ public interface JarPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE__NAME = SYSTEM_ENTRY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Bundle Class Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__BUNDLE_CLASS_PATH = SYSTEM_ENTRY__BUNDLE_CLASS_PATH;
 
 	/**
 	 * The number of structural features of the '<em>File</em>' class. <!--
@@ -338,6 +357,17 @@ public interface JarPackage extends EPackage {
 	EClass getSystemEntry();
 
 	/**
+	 * Returns the meta object for the attribute '{@link jar.SystemEntry#isBundleClassPath <em>Bundle Class Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bundle Class Path</em>'.
+	 * @see jar.SystemEntry#isBundleClassPath()
+	 * @see #getSystemEntry()
+	 * @generated
+	 */
+	EAttribute getSystemEntry_BundleClassPath();
+
+	/**
 	 * Returns the meta object for class '{@link jar.Package <em>Package</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Package</em>'.
@@ -365,16 +395,6 @@ public interface JarPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPackage_SubPackages();
-
-	/**
-	 * Returns the meta object for the attribute '{@link jar.Package#isBundleClassPath <em>Bundle Class Path</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Bundle Class Path</em>'.
-	 * @see jar.Package#isBundleClassPath()
-	 * @see #getPackage()
-	 * @generated
-	 */
-	EAttribute getPackage_BundleClassPath();
 
 	/**
 	 * Returns the meta object for class '{@link jar.Class <em>Class</em>}'.
@@ -468,6 +488,14 @@ public interface JarPackage extends EPackage {
 		EClass SYSTEM_ENTRY = eINSTANCE.getSystemEntry();
 
 		/**
+		 * The meta object literal for the '<em><b>Bundle Class Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SYSTEM_ENTRY__BUNDLE_CLASS_PATH = eINSTANCE.getSystemEntry_BundleClassPath();
+
+		/**
 		 * The meta object literal for the '{@link jar.impl.PackageImpl <em>Package</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see jar.impl.PackageImpl
@@ -491,13 +519,6 @@ public interface JarPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PACKAGE__SUB_PACKAGES = eINSTANCE.getPackage_SubPackages();
-
-		/**
-		 * The meta object literal for the '<em><b>Bundle Class Path</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PACKAGE__BUNDLE_CLASS_PATH = eINSTANCE.getPackage_BundleClassPath();
 
 		/**
 		 * The meta object literal for the '{@link jar.impl.ClassImpl <em>Class</em>}' class.

@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameEmbosOsnameValue extends POsnameValue {
-	private TOsnameEmbos _osnameEmbos_;
+public final class AOsnameEmbosOsnameValue extends POsnameValue
+{
+    private TOsnameEmbos _osnameEmbos_;
 
-	public AOsnameEmbosOsnameValue() {
-		// Constructor
-	}
+    public AOsnameEmbosOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameEmbosOsnameValue(@SuppressWarnings("hiding")
-	TOsnameEmbos _osnameEmbos_) {
-		// Constructor
-		setOsnameEmbos(_osnameEmbos_);
+    public AOsnameEmbosOsnameValue(
+        @SuppressWarnings("hiding") TOsnameEmbos _osnameEmbos_)
+    {
+        // Constructor
+        setOsnameEmbos(_osnameEmbos_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameEmbosOsnameValue(cloneNode(this._osnameEmbos_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameEmbosOsnameValue(
+            cloneNode(this._osnameEmbos_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameEmbosOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameEmbosOsnameValue(this);
+    }
 
-	public TOsnameEmbos getOsnameEmbos() {
-		return this._osnameEmbos_;
-	}
+    public TOsnameEmbos getOsnameEmbos()
+    {
+        return this._osnameEmbos_;
+    }
 
-	public void setOsnameEmbos(TOsnameEmbos node) {
-		if (this._osnameEmbos_ != null) {
-			this._osnameEmbos_.parent(null);
-		}
+    public void setOsnameEmbos(TOsnameEmbos node)
+    {
+        if(this._osnameEmbos_ != null)
+        {
+            this._osnameEmbos_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameEmbos_ = node;
-	}
+        this._osnameEmbos_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameEmbos_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameEmbos_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameEmbos_ == child) {
-			this._osnameEmbos_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameEmbos_ == child)
+        {
+            this._osnameEmbos_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameEmbos_ == oldChild) {
-			setOsnameEmbos((TOsnameEmbos) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameEmbos_ == oldChild)
+        {
+            setOsnameEmbos((TOsnameEmbos) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

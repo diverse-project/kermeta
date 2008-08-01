@@ -2,32 +2,37 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TLesserEquals extends Token {
-	public TLesserEquals() {
-		super.setText("<=");
-	}
+public final class TLesserEquals extends Token
+{
+    public TLesserEquals()
+    {
+        super.setText("<=");
+    }
 
-	public TLesserEquals(int line, int pos) {
-		super.setText("<=");
-		setLine(line);
-		setPos(pos);
-	}
+    public TLesserEquals(int line, int pos)
+    {
+        super.setText("<=");
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TLesserEquals(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TLesserEquals(getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTLesserEquals(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTLesserEquals(this);
+    }
 
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TLesserEquals text.");
-	}
+    @Override
+    public void setText(@SuppressWarnings("unused") String text)
+    {
+        throw new RuntimeException("Cannot change TLesserEquals text.");
+    }
 }

@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameHpuxOsnameValue extends POsnameValue {
-	private TOsnameHpux _osnameHpux_;
+public final class AOsnameHpuxOsnameValue extends POsnameValue
+{
+    private TOsnameHpux _osnameHpux_;
 
-	public AOsnameHpuxOsnameValue() {
-		// Constructor
-	}
+    public AOsnameHpuxOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameHpuxOsnameValue(@SuppressWarnings("hiding")
-	TOsnameHpux _osnameHpux_) {
-		// Constructor
-		setOsnameHpux(_osnameHpux_);
+    public AOsnameHpuxOsnameValue(
+        @SuppressWarnings("hiding") TOsnameHpux _osnameHpux_)
+    {
+        // Constructor
+        setOsnameHpux(_osnameHpux_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameHpuxOsnameValue(cloneNode(this._osnameHpux_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameHpuxOsnameValue(
+            cloneNode(this._osnameHpux_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameHpuxOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameHpuxOsnameValue(this);
+    }
 
-	public TOsnameHpux getOsnameHpux() {
-		return this._osnameHpux_;
-	}
+    public TOsnameHpux getOsnameHpux()
+    {
+        return this._osnameHpux_;
+    }
 
-	public void setOsnameHpux(TOsnameHpux node) {
-		if (this._osnameHpux_ != null) {
-			this._osnameHpux_.parent(null);
-		}
+    public void setOsnameHpux(TOsnameHpux node)
+    {
+        if(this._osnameHpux_ != null)
+        {
+            this._osnameHpux_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameHpux_ = node;
-	}
+        this._osnameHpux_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameHpux_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameHpux_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameHpux_ == child) {
-			this._osnameHpux_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameHpux_ == child)
+        {
+            this._osnameHpux_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameHpux_ == oldChild) {
-			setOsnameHpux((TOsnameHpux) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameHpux_ == oldChild)
+        {
+            setOsnameHpux((TOsnameHpux) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ARequireBundleEntryManifestentry extends PManifestentry {
-	private PRequireBundleEntry _requireBundleEntry_;
+public final class ARequireBundleEntryManifestentry extends PManifestentry
+{
+    private PRequireBundleEntry _requireBundleEntry_;
 
-	public ARequireBundleEntryManifestentry() {
-		// Constructor
-	}
+    public ARequireBundleEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public ARequireBundleEntryManifestentry(@SuppressWarnings("hiding")
-	PRequireBundleEntry _requireBundleEntry_) {
-		// Constructor
-		setRequireBundleEntry(_requireBundleEntry_);
+    public ARequireBundleEntryManifestentry(
+        @SuppressWarnings("hiding") PRequireBundleEntry _requireBundleEntry_)
+    {
+        // Constructor
+        setRequireBundleEntry(_requireBundleEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ARequireBundleEntryManifestentry(
-				cloneNode(this._requireBundleEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ARequireBundleEntryManifestentry(
+            cloneNode(this._requireBundleEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseARequireBundleEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseARequireBundleEntryManifestentry(this);
+    }
 
-	public PRequireBundleEntry getRequireBundleEntry() {
-		return this._requireBundleEntry_;
-	}
+    public PRequireBundleEntry getRequireBundleEntry()
+    {
+        return this._requireBundleEntry_;
+    }
 
-	public void setRequireBundleEntry(PRequireBundleEntry node) {
-		if (this._requireBundleEntry_ != null) {
-			this._requireBundleEntry_.parent(null);
-		}
+    public void setRequireBundleEntry(PRequireBundleEntry node)
+    {
+        if(this._requireBundleEntry_ != null)
+        {
+            this._requireBundleEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._requireBundleEntry_ = node;
-	}
+        this._requireBundleEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._requireBundleEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._requireBundleEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._requireBundleEntry_ == child) {
-			this._requireBundleEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._requireBundleEntry_ == child)
+        {
+            this._requireBundleEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._requireBundleEntry_ == oldChild) {
-			setRequireBundleEntry((PRequireBundleEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._requireBundleEntry_ == oldChild)
+        {
+            setRequireBundleEntry((PRequireBundleEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

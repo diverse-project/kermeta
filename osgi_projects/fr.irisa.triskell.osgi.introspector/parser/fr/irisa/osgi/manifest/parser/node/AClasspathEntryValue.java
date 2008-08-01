@@ -2,114 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AClasspathEntryValue extends PClasspathEntryValue {
-	private TSemicolon _semicolon_;
-	private PTarget _target_;
+public final class AClasspathEntryValue extends PClasspathEntryValue
+{
+    private TSemicolon _semicolon_;
+    private PTarget _target_;
 
-	public AClasspathEntryValue() {
-		// Constructor
-	}
+    public AClasspathEntryValue()
+    {
+        // Constructor
+    }
 
-	public AClasspathEntryValue(@SuppressWarnings("hiding")
-	TSemicolon _semicolon_, @SuppressWarnings("hiding")
-	PTarget _target_) {
-		// Constructor
-		setSemicolon(_semicolon_);
+    public AClasspathEntryValue(
+        @SuppressWarnings("hiding") TSemicolon _semicolon_,
+        @SuppressWarnings("hiding") PTarget _target_)
+    {
+        // Constructor
+        setSemicolon(_semicolon_);
 
-		setTarget(_target_);
+        setTarget(_target_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AClasspathEntryValue(cloneNode(this._semicolon_),
-				cloneNode(this._target_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AClasspathEntryValue(
+            cloneNode(this._semicolon_),
+            cloneNode(this._target_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAClasspathEntryValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAClasspathEntryValue(this);
+    }
 
-	public TSemicolon getSemicolon() {
-		return this._semicolon_;
-	}
+    public TSemicolon getSemicolon()
+    {
+        return this._semicolon_;
+    }
 
-	public void setSemicolon(TSemicolon node) {
-		if (this._semicolon_ != null) {
-			this._semicolon_.parent(null);
-		}
+    public void setSemicolon(TSemicolon node)
+    {
+        if(this._semicolon_ != null)
+        {
+            this._semicolon_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._semicolon_ = node;
-	}
+        this._semicolon_ = node;
+    }
 
-	public PTarget getTarget() {
-		return this._target_;
-	}
+    public PTarget getTarget()
+    {
+        return this._target_;
+    }
 
-	public void setTarget(PTarget node) {
-		if (this._target_ != null) {
-			this._target_.parent(null);
-		}
+    public void setTarget(PTarget node)
+    {
+        if(this._target_ != null)
+        {
+            this._target_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._target_ = node;
-	}
+        this._target_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._semicolon_) + toString(this._target_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._semicolon_)
+            + toString(this._target_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._semicolon_ == child) {
-			this._semicolon_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._semicolon_ == child)
+        {
+            this._semicolon_ = null;
+            return;
+        }
 
-		if (this._target_ == child) {
-			this._target_ = null;
-			return;
-		}
+        if(this._target_ == child)
+        {
+            this._target_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._semicolon_ == oldChild) {
-			setSemicolon((TSemicolon) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._semicolon_ == oldChild)
+        {
+            setSemicolon((TSemicolon) newChild);
+            return;
+        }
 
-		if (this._target_ == oldChild) {
-			setTarget((PTarget) newChild);
-			return;
-		}
+        if(this._target_ == oldChild)
+        {
+            setTarget((PTarget) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

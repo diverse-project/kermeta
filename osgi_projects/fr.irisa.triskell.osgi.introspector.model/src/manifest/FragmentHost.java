@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FragmentHost.java,v 1.3 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: FragmentHost.java,v 1.4 2008-08-01 09:44:38 edaubert Exp $
  */
 package manifest;
 
@@ -17,7 +17,6 @@ import framework.Bundle;
  * The following features are supported:
  * <ul>
  *   <li>{@link manifest.FragmentHost#getDirectives <em>Directives</em>}</li>
- *   <li>{@link manifest.FragmentHost#isResolved <em>Resolved</em>}</li>
  *   <li>{@link manifest.FragmentHost#getBundle <em>Bundle</em>}</li>
  * </ul>
  * </p>
@@ -51,32 +50,6 @@ public interface FragmentHost extends MANIFESTEntry {
 	 * @generated
 	 */
 	void setDirectives(FragmentHostDirective value);
-
-	/**
-	 * Returns the value of the '<em><b>Resolved</b></em>' attribute. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Resolved</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Resolved</em>' attribute.
-	 * @see #setResolved(boolean)
-	 * @see manifest.ManifestPackage#getFragmentHost_Resolved()
-	 * @model dataType="manifest.boolean" required="true"
-	 * @generated
-	 */
-	boolean isResolved();
-
-	/**
-	 * Sets the value of the '{@link manifest.FragmentHost#isResolved <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Resolved</em>' attribute.
-	 * @see #isResolved()
-	 * @generated
-	 */
-	void setResolved(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Bundle</b></em>' reference. <!--

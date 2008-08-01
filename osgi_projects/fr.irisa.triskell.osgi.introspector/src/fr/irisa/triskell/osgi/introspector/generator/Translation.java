@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -79,19 +80,29 @@ import fr.irisa.osgi.manifest.parser.node.*;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
 import framework.Bundle;
 
-public class Translation /* extends DepthFirstAdapter */implements Analysis {
+public class Translation implements Analysis {
 
 	private Map<Bundle, String> log;
-	// private String logBundle;
 	private boolean validTranslation;
 
 	private MANIFEST manifest;
 	private Bundle bundle;
 
+	private List<Service> servicesAvailable;
+	
 	private Map<Bundle, String> fragmentHostReferences;
-	private Map<RequireBundle, List<String>> requiredBundleReferences;
-	private Map<ImportPackage, List<String>> importPackageReferences;
-	private Map<ImportService, String> importServiceReferences;
+
+	private Map<BundleClassPath, Bundle> unresolvedBundleClassPathBundle;
+	private Map<BundleClassPath, List<String>> unresolvedBundleClassPathValue;
+	
+	private Map<RequireBundle, Bundle> unresolvedRequireBundleBundle;
+	private Map<RequireBundle, String> unresolvedRequireBundleValue;
+	
+	private Map<ImportPackage, Bundle> unresolvedImportPackageBundle;
+	private Map<ImportPackage, List<String>> unresolvedImportPackageValue;
+	
+	private Map<ImportService, Bundle> unresolvedImportServiceBundle;
+	private Map<ImportService, String> unresolvedImportServiceValue;
 
 	private Map<BundleActivator, Bundle> unresolvedActivatorBundle;
 	private Map<BundleActivator, String> unresolvedActivatorValue;
@@ -117,9 +128,6 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 	private Map<IncludePackages, Bundle> unresolvedActivationPolicyIncludeBundle;
 	private Map<IncludePackages, List<String>> unresolvedActivationPolicyIncludeValue;
 
-	// private Map<Bundle, List<String>> unresolvedBundleClassPath;
-
-	// private FrameworkFactory frameworkFactory;
 	private ManifestFactory manifestFactory;
 	private OptionFactory parameterFactory;
 	private JarFactory jarFactory;
@@ -137,7 +145,6 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 	private MANIFESTEntry entry;
 
 	public Translation(Map<Bundle, String> log) {
-		// frameworkFactory = FrameworkFactory.eINSTANCE;
 		manifestFactory = ManifestFactory.eINSTANCE;
 		parameterFactory = OptionFactory.eINSTANCE;
 		jarFactory = JarFactory.eINSTANCE;
@@ -145,10 +152,21 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 		this.validTranslation = true;
 		this.log = log;
 
+		this.servicesAvailable = new ArrayList<Service>();
+		
 		this.fragmentHostReferences = new Hashtable<Bundle, String>();
-		this.requiredBundleReferences = new Hashtable<RequireBundle, List<String>>();
-		this.importPackageReferences = new Hashtable<ImportPackage, List<String>>();
-		this.importServiceReferences = new Hashtable<ImportService, String>();
+		
+		this.unresolvedBundleClassPathBundle = new HashMap<BundleClassPath, Bundle>();
+		this.unresolvedBundleClassPathValue = new HashMap<BundleClassPath, List<String>>();
+		
+		this.unresolvedRequireBundleBundle = new HashMap<RequireBundle, Bundle>();
+		this.unresolvedRequireBundleValue = new HashMap<RequireBundle, String>();
+		
+		this.unresolvedImportPackageBundle = new HashMap<ImportPackage, Bundle>();
+		this.unresolvedImportPackageValue = new HashMap<ImportPackage, List<String>>();
+		
+		this.unresolvedImportServiceBundle = new HashMap<ImportService, Bundle>();
+		this.unresolvedImportServiceValue = new HashMap<ImportService, String>();
 
 		this.unresolvedActivatorBundle = new Hashtable<BundleActivator, Bundle>();
 		this.unresolvedActivatorValue = new Hashtable<BundleActivator, String>();
@@ -811,6 +829,7 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 		this.unresolvedExportServiceBundle.put(service, this.bundle);
 		this.unresolvedExportServiceValue
 				.put(service, (String) this.firstValue);
+		this.servicesAvailable.add(service);
 
 		entry.setService((Service) service);
 
@@ -1018,7 +1037,8 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 			exports.add((String) this.firstValue);
 		}
 
-		this.importPackageReferences.put(entry, exports);
+		this.unresolvedImportPackageBundle.put(entry, this.bundle);
+		this.unresolvedImportPackageValue.put(entry, exports);
 
 		this.entry = entry;
 		for (PImportPackageParameter parameter : node
@@ -1061,7 +1081,8 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 		this.firstValue = "";
 		node.getUniqueName().apply(this);
 		ImportService entry = manifestFactory.createImportService();
-		this.importServiceReferences.put(entry, (String) this.firstValue);
+		this.unresolvedImportServiceBundle.put(entry, this.bundle);
+		this.unresolvedImportServiceValue.put(entry, (String) this.firstValue);
 		this.manifest.addImportService(entry);
 
 		this._import = true;
@@ -1698,9 +1719,6 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 	}
 
 	public void caseARequireBundleEntryValue(ARequireBundleEntryValue node) {
-		RequireBundle entry = manifestFactory.createRequireBundle();
-
-		this.entry = entry;
 		node.getRequireBundleSymbolicname().apply(this);
 
 		for (PRequireBundleValue value : node.getRequireBundleValue()) {
@@ -1710,14 +1728,21 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 	}
 
 	public void caseARequireBundleSymbolicname(ARequireBundleSymbolicname node) {
+		RequireBundle entry = ManifestFactory.eINSTANCE.createRequireBundle();
+		
 		this.firstValue = "";
-		node.getUniqueName();
-		List<String> list = this.requiredBundleReferences.get(this.entry);
-		if (list == null) {
-			list = new ArrayList<String>();
+		node.getUniqueName().apply(this);
+
+		this.unresolvedRequireBundleBundle.put(entry, this.bundle);
+		this.unresolvedRequireBundleValue.put(entry, (String) this.firstValue);
+		
+		this.entry = entry;
+		for (PRequireBundleOptions option : node.getRequireBundleOptions()) {
+			option.apply(this);
 		}
-		list.add((String) this.firstValue);
-		this.requiredBundleReferences.put((RequireBundle) this.entry, list);
+		
+		this.manifest.addRequireBundle(entry);
+		
 
 	}
 
@@ -1805,7 +1830,8 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 		node.getUniqueName().apply(this);
 		if (this._import) {
 			ImportService entry = manifestFactory.createImportService();
-			this.importServiceReferences.put(entry, (String) this.firstValue);
+			this.unresolvedImportServiceBundle.put(entry, this.bundle);
+			this.unresolvedImportServiceValue.put(entry, (String) this.firstValue);
 			this.manifest.addImportService(entry);
 
 			this.entry = entry;
@@ -1820,6 +1846,7 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 			this.unresolvedExportServiceBundle.put(service, this.bundle);
 			this.unresolvedExportServiceValue.put(service,
 					(String) this.firstValue);
+			this.servicesAvailable.add(service);
 
 			entry.setService(service);
 
@@ -1995,7 +2022,7 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 						_package = jarFactory.createPackage();
 						_package.setName(folder.getName());
 						_package.setFullPath(folder.getFullPath().replace("/",
-								"."));
+								".").substring(0, folder.getFullPath().length() - 1));
 					}
 					_package.addPackage(tmp);
 				}
@@ -2005,7 +2032,7 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 						_package = jarFactory.createPackage();
 						_package.setName(folder.getName());
 						_package.setFullPath(folder.getFullPath().replace("/",
-								"."));
+								".").substring(0, folder.getFullPath().length() - 1));
 					}
 					Class clazz = jarFactory.createClass();
 					clazz.setName(entry.getName().substring(0,
@@ -2053,6 +2080,21 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 			BundleClassPath entry = manifestFactory.createBundleClassPath();
 			entry.addEntry(this.bundle.getFolder());
 			this.manifest.addBundleClassPath(entry);
+		} else {
+			for (SystemEntry entry : this.bundle.getFolder().getEntries()) {
+				if (entry.isBundleClassPath()) {
+					if (entry instanceof Folder) {
+						Package _package = this.convertToJavaElement((Folder)entry);
+						if (_package != null) {
+							this.bundle.getPackage().addPackage(_package);
+						}
+					} else {
+						Class clazz = JarFactory.eINSTANCE.createClass();
+						clazz.setFullPath(entry.getFullPath().replace("/", "."));
+						clazz.setName(entry.getName().substring(0, entry.getName().length() - (".class").length()));
+					}
+				}
+			}
 		}
 		if (this.manifest.getFragmentHost() != null) {
 			if (this.manifest.getBundleActivator() != null) {
@@ -2747,33 +2789,6 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 		this.fragmentHostReferences = fragmentHostReferences;
 	}
 
-	public Map<RequireBundle, List<String>> getRequiredBundleReferences() {
-		return requiredBundleReferences;
-	}
-
-	public void setRequiredBundleReferences(
-			Map<RequireBundle, List<String>> requiredBundleReferences) {
-		this.requiredBundleReferences = requiredBundleReferences;
-	}
-
-	public Map<ImportPackage, List<String>> getImportPackageReferences() {
-		return importPackageReferences;
-	}
-
-	public void setImportPackageReferences(
-			Map<ImportPackage, List<String>> importPackageReferences) {
-		this.importPackageReferences = importPackageReferences;
-	}
-
-	public Map<ImportService, String> getImportServiceReferences() {
-		return importServiceReferences;
-	}
-
-	public void setImportServiceReferences(
-			Map<ImportService, String> importServiceReferences) {
-		this.importServiceReferences = importServiceReferences;
-	}
-
 	public MANIFEST getManifest() {
 		return manifest;
 	}
@@ -3041,7 +3056,6 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 					(String) this.firstValue);
 			if (systemEntry != null) {
 				if (systemEntry instanceof Folder) {
-					// I think, it's not used
 					Package _package = this
 							.convertToJavaElement((Folder) entry);
 					if (_package != null) {
@@ -3074,22 +3088,21 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 									this.bundle,
 									this.log.get(this.bundle)
 											+ this.firstValue
-											+ " must be a JAR file or a folder. (must never appears)"
-											+ "\n");
+											+ " must be a JAR file or a folder." + "\n");
 					
 				}
 			} else {
+				List<String> list = this.unresolvedBundleClassPathValue.get((BundleClassPath) this.entry);
+				if (list == null) {
+					this.unresolvedBundleClassPathBundle.put((BundleClassPath) this.entry, this.bundle);
+					list = new ArrayList<String>();
+				}
+				list.add((String)this.firstValue);
+				this.unresolvedBundleClassPathValue.put((BundleClassPath) this.entry, list);		
+				
 				this.log.put(this.bundle, this.log.get(this.bundle)
 						+ this.firstValue
 						+ " is not contained into this bundle." + "\n");
-				/*
-				 * logBundle += "Maybe it's into a fragment." + "\n"; List<String>
-				 * list = this.unresolvedBundleClassPath.get(this.entry); if
-				 * (list == null) { list = new ArrayList<String>(); }
-				 * list.add((String)this.firstValue);
-				 * this.unresolvedBundleClassPath.put((BundleClassPath)this.entry,
-				 * list);
-				 */
 			}
 		} else if (this.firstValue == ".") {
 			for (SystemEntry entry : this.bundle.getFolder().getEntries()) {
@@ -3197,6 +3210,34 @@ public class Translation /* extends DepthFirstAdapter */implements Analysis {
 
 	public Map<Bundle, String> getLog() {
 		return log;
+	}
+
+	public Map<RequireBundle, Bundle> getUnresolvedRequireBundleBundle() {
+		return unresolvedRequireBundleBundle;
+	}
+
+	public Map<RequireBundle, String> getUnresolvedRequireBundleValue() {
+		return unresolvedRequireBundleValue;
+	}
+
+	public Map<ImportPackage, Bundle> getUnresolvedImportPackageBundle() {
+		return unresolvedImportPackageBundle;
+	}
+
+	public Map<ImportPackage, List<String>> getUnresolvedImportPackageValue() {
+		return unresolvedImportPackageValue;
+	}
+
+	public Map<ImportService, Bundle> getUnresolvedImportServiceBundle() {
+		return unresolvedImportServiceBundle;
+	}
+
+	public Map<ImportService, String> getUnresolvedImportServiceValue() {
+		return unresolvedImportServiceValue;
+	}
+
+	public List<Service> getServicesAvailable() {
+		return servicesAvailable;
 	}
 
 }

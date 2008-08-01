@@ -2,81 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AResolveTimeFragmentAttachmentValue extends
-		PFragmentAttachmentValue {
-	private TResolveTime _resolveTime_;
+public final class AResolveTimeFragmentAttachmentValue extends PFragmentAttachmentValue
+{
+    private TResolveTime _resolveTime_;
 
-	public AResolveTimeFragmentAttachmentValue() {
-		// Constructor
-	}
+    public AResolveTimeFragmentAttachmentValue()
+    {
+        // Constructor
+    }
 
-	public AResolveTimeFragmentAttachmentValue(@SuppressWarnings("hiding")
-	TResolveTime _resolveTime_) {
-		// Constructor
-		setResolveTime(_resolveTime_);
+    public AResolveTimeFragmentAttachmentValue(
+        @SuppressWarnings("hiding") TResolveTime _resolveTime_)
+    {
+        // Constructor
+        setResolveTime(_resolveTime_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AResolveTimeFragmentAttachmentValue(
-				cloneNode(this._resolveTime_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AResolveTimeFragmentAttachmentValue(
+            cloneNode(this._resolveTime_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAResolveTimeFragmentAttachmentValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAResolveTimeFragmentAttachmentValue(this);
+    }
 
-	public TResolveTime getResolveTime() {
-		return this._resolveTime_;
-	}
+    public TResolveTime getResolveTime()
+    {
+        return this._resolveTime_;
+    }
 
-	public void setResolveTime(TResolveTime node) {
-		if (this._resolveTime_ != null) {
-			this._resolveTime_.parent(null);
-		}
+    public void setResolveTime(TResolveTime node)
+    {
+        if(this._resolveTime_ != null)
+        {
+            this._resolveTime_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._resolveTime_ = node;
-	}
+        this._resolveTime_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._resolveTime_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._resolveTime_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._resolveTime_ == child) {
-			this._resolveTime_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._resolveTime_ == child)
+        {
+            this._resolveTime_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._resolveTime_ == oldChild) {
-			setResolveTime((TResolveTime) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._resolveTime_ == oldChild)
+        {
+            setResolveTime((TResolveTime) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

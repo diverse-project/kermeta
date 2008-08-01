@@ -2,115 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AExportPackageValue extends PExportPackageValue {
-	private TComma _comma_;
-	private PExportPackageEntryValue _exportPackageEntryValue_;
+public final class AExportPackageValue extends PExportPackageValue
+{
+    private TComma _comma_;
+    private PExportPackageEntryValue _exportPackageEntryValue_;
 
-	public AExportPackageValue() {
-		// Constructor
-	}
+    public AExportPackageValue()
+    {
+        // Constructor
+    }
 
-	public AExportPackageValue(@SuppressWarnings("hiding")
-	TComma _comma_, @SuppressWarnings("hiding")
-	PExportPackageEntryValue _exportPackageEntryValue_) {
-		// Constructor
-		setComma(_comma_);
+    public AExportPackageValue(
+        @SuppressWarnings("hiding") TComma _comma_,
+        @SuppressWarnings("hiding") PExportPackageEntryValue _exportPackageEntryValue_)
+    {
+        // Constructor
+        setComma(_comma_);
 
-		setExportPackageEntryValue(_exportPackageEntryValue_);
+        setExportPackageEntryValue(_exportPackageEntryValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AExportPackageValue(cloneNode(this._comma_),
-				cloneNode(this._exportPackageEntryValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AExportPackageValue(
+            cloneNode(this._comma_),
+            cloneNode(this._exportPackageEntryValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAExportPackageValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAExportPackageValue(this);
+    }
 
-	public TComma getComma() {
-		return this._comma_;
-	}
+    public TComma getComma()
+    {
+        return this._comma_;
+    }
 
-	public void setComma(TComma node) {
-		if (this._comma_ != null) {
-			this._comma_.parent(null);
-		}
+    public void setComma(TComma node)
+    {
+        if(this._comma_ != null)
+        {
+            this._comma_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._comma_ = node;
-	}
+        this._comma_ = node;
+    }
 
-	public PExportPackageEntryValue getExportPackageEntryValue() {
-		return this._exportPackageEntryValue_;
-	}
+    public PExportPackageEntryValue getExportPackageEntryValue()
+    {
+        return this._exportPackageEntryValue_;
+    }
 
-	public void setExportPackageEntryValue(PExportPackageEntryValue node) {
-		if (this._exportPackageEntryValue_ != null) {
-			this._exportPackageEntryValue_.parent(null);
-		}
+    public void setExportPackageEntryValue(PExportPackageEntryValue node)
+    {
+        if(this._exportPackageEntryValue_ != null)
+        {
+            this._exportPackageEntryValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._exportPackageEntryValue_ = node;
-	}
+        this._exportPackageEntryValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._comma_)
-				+ toString(this._exportPackageEntryValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._comma_)
+            + toString(this._exportPackageEntryValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._comma_ == child) {
-			this._comma_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._comma_ == child)
+        {
+            this._comma_ = null;
+            return;
+        }
 
-		if (this._exportPackageEntryValue_ == child) {
-			this._exportPackageEntryValue_ = null;
-			return;
-		}
+        if(this._exportPackageEntryValue_ == child)
+        {
+            this._exportPackageEntryValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._comma_ == oldChild) {
-			setComma((TComma) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._comma_ == oldChild)
+        {
+            setComma((TComma) newChild);
+            return;
+        }
 
-		if (this._exportPackageEntryValue_ == oldChild) {
-			setExportPackageEntryValue((PExportPackageEntryValue) newChild);
-			return;
-		}
+        if(this._exportPackageEntryValue_ == oldChild)
+        {
+            setExportPackageEntryValue((PExportPackageEntryValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

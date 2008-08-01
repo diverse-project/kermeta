@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AEqualsBooleanComparator extends PBooleanComparator {
-	private TEquals _equals_;
+public final class AEqualsBooleanComparator extends PBooleanComparator
+{
+    private TEquals _equals_;
 
-	public AEqualsBooleanComparator() {
-		// Constructor
-	}
+    public AEqualsBooleanComparator()
+    {
+        // Constructor
+    }
 
-	public AEqualsBooleanComparator(@SuppressWarnings("hiding")
-	TEquals _equals_) {
-		// Constructor
-		setEquals(_equals_);
+    public AEqualsBooleanComparator(
+        @SuppressWarnings("hiding") TEquals _equals_)
+    {
+        // Constructor
+        setEquals(_equals_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AEqualsBooleanComparator(cloneNode(this._equals_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AEqualsBooleanComparator(
+            cloneNode(this._equals_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAEqualsBooleanComparator(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAEqualsBooleanComparator(this);
+    }
 
-	public TEquals getEquals() {
-		return this._equals_;
-	}
+    public TEquals getEquals()
+    {
+        return this._equals_;
+    }
 
-	public void setEquals(TEquals node) {
-		if (this._equals_ != null) {
-			this._equals_.parent(null);
-		}
+    public void setEquals(TEquals node)
+    {
+        if(this._equals_ != null)
+        {
+            this._equals_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._equals_ = node;
-	}
+        this._equals_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._equals_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._equals_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._equals_ == child) {
-			this._equals_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._equals_ == child)
+        {
+            this._equals_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._equals_ == oldChild) {
-			setEquals((TEquals) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._equals_ == oldChild)
+        {
+            setEquals((TEquals) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

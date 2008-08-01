@@ -2,114 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AUniqueNameSuffix extends PUniqueNameSuffix {
-	private TDot _dot_;
-	private TIdentifier _identifier_;
+public final class AUniqueNameSuffix extends PUniqueNameSuffix
+{
+    private TDot _dot_;
+    private TIdentifier _identifier_;
 
-	public AUniqueNameSuffix() {
-		// Constructor
-	}
+    public AUniqueNameSuffix()
+    {
+        // Constructor
+    }
 
-	public AUniqueNameSuffix(@SuppressWarnings("hiding")
-	TDot _dot_, @SuppressWarnings("hiding")
-	TIdentifier _identifier_) {
-		// Constructor
-		setDot(_dot_);
+    public AUniqueNameSuffix(
+        @SuppressWarnings("hiding") TDot _dot_,
+        @SuppressWarnings("hiding") TIdentifier _identifier_)
+    {
+        // Constructor
+        setDot(_dot_);
 
-		setIdentifier(_identifier_);
+        setIdentifier(_identifier_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AUniqueNameSuffix(cloneNode(this._dot_),
-				cloneNode(this._identifier_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AUniqueNameSuffix(
+            cloneNode(this._dot_),
+            cloneNode(this._identifier_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAUniqueNameSuffix(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAUniqueNameSuffix(this);
+    }
 
-	public TDot getDot() {
-		return this._dot_;
-	}
+    public TDot getDot()
+    {
+        return this._dot_;
+    }
 
-	public void setDot(TDot node) {
-		if (this._dot_ != null) {
-			this._dot_.parent(null);
-		}
+    public void setDot(TDot node)
+    {
+        if(this._dot_ != null)
+        {
+            this._dot_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._dot_ = node;
-	}
+        this._dot_ = node;
+    }
 
-	public TIdentifier getIdentifier() {
-		return this._identifier_;
-	}
+    public TIdentifier getIdentifier()
+    {
+        return this._identifier_;
+    }
 
-	public void setIdentifier(TIdentifier node) {
-		if (this._identifier_ != null) {
-			this._identifier_.parent(null);
-		}
+    public void setIdentifier(TIdentifier node)
+    {
+        if(this._identifier_ != null)
+        {
+            this._identifier_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._identifier_ = node;
-	}
+        this._identifier_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._dot_) + toString(this._identifier_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._dot_)
+            + toString(this._identifier_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._dot_ == child) {
-			this._dot_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._dot_ == child)
+        {
+            this._dot_ = null;
+            return;
+        }
 
-		if (this._identifier_ == child) {
-			this._identifier_ = null;
-			return;
-		}
+        if(this._identifier_ == child)
+        {
+            this._identifier_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._dot_ == oldChild) {
-			setDot((TDot) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._dot_ == oldChild)
+        {
+            setDot((TDot) newChild);
+            return;
+        }
 
-		if (this._identifier_ == oldChild) {
-			setIdentifier((TIdentifier) newChild);
-			return;
-		}
+        if(this._identifier_ == oldChild)
+        {
+            setIdentifier((TIdentifier) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

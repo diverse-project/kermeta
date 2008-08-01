@@ -2,115 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleNativecodeEntry extends PBundleNativecodeEntry {
-	private TBundleNativecode _bundleNativecode_;
-	private PBundleNativecodeEntryValue _bundleNativecodeEntryValue_;
+public final class ABundleNativecodeEntry extends PBundleNativecodeEntry
+{
+    private TBundleNativecode _bundleNativecode_;
+    private PBundleNativecodeEntryValue _bundleNativecodeEntryValue_;
 
-	public ABundleNativecodeEntry() {
-		// Constructor
-	}
+    public ABundleNativecodeEntry()
+    {
+        // Constructor
+    }
 
-	public ABundleNativecodeEntry(@SuppressWarnings("hiding")
-	TBundleNativecode _bundleNativecode_, @SuppressWarnings("hiding")
-	PBundleNativecodeEntryValue _bundleNativecodeEntryValue_) {
-		// Constructor
-		setBundleNativecode(_bundleNativecode_);
+    public ABundleNativecodeEntry(
+        @SuppressWarnings("hiding") TBundleNativecode _bundleNativecode_,
+        @SuppressWarnings("hiding") PBundleNativecodeEntryValue _bundleNativecodeEntryValue_)
+    {
+        // Constructor
+        setBundleNativecode(_bundleNativecode_);
 
-		setBundleNativecodeEntryValue(_bundleNativecodeEntryValue_);
+        setBundleNativecodeEntryValue(_bundleNativecodeEntryValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleNativecodeEntry(cloneNode(this._bundleNativecode_),
-				cloneNode(this._bundleNativecodeEntryValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleNativecodeEntry(
+            cloneNode(this._bundleNativecode_),
+            cloneNode(this._bundleNativecodeEntryValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleNativecodeEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleNativecodeEntry(this);
+    }
 
-	public TBundleNativecode getBundleNativecode() {
-		return this._bundleNativecode_;
-	}
+    public TBundleNativecode getBundleNativecode()
+    {
+        return this._bundleNativecode_;
+    }
 
-	public void setBundleNativecode(TBundleNativecode node) {
-		if (this._bundleNativecode_ != null) {
-			this._bundleNativecode_.parent(null);
-		}
+    public void setBundleNativecode(TBundleNativecode node)
+    {
+        if(this._bundleNativecode_ != null)
+        {
+            this._bundleNativecode_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleNativecode_ = node;
-	}
+        this._bundleNativecode_ = node;
+    }
 
-	public PBundleNativecodeEntryValue getBundleNativecodeEntryValue() {
-		return this._bundleNativecodeEntryValue_;
-	}
+    public PBundleNativecodeEntryValue getBundleNativecodeEntryValue()
+    {
+        return this._bundleNativecodeEntryValue_;
+    }
 
-	public void setBundleNativecodeEntryValue(PBundleNativecodeEntryValue node) {
-		if (this._bundleNativecodeEntryValue_ != null) {
-			this._bundleNativecodeEntryValue_.parent(null);
-		}
+    public void setBundleNativecodeEntryValue(PBundleNativecodeEntryValue node)
+    {
+        if(this._bundleNativecodeEntryValue_ != null)
+        {
+            this._bundleNativecodeEntryValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleNativecodeEntryValue_ = node;
-	}
+        this._bundleNativecodeEntryValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleNativecode_)
-				+ toString(this._bundleNativecodeEntryValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleNativecode_)
+            + toString(this._bundleNativecodeEntryValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleNativecode_ == child) {
-			this._bundleNativecode_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleNativecode_ == child)
+        {
+            this._bundleNativecode_ = null;
+            return;
+        }
 
-		if (this._bundleNativecodeEntryValue_ == child) {
-			this._bundleNativecodeEntryValue_ = null;
-			return;
-		}
+        if(this._bundleNativecodeEntryValue_ == child)
+        {
+            this._bundleNativecodeEntryValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleNativecode_ == oldChild) {
-			setBundleNativecode((TBundleNativecode) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleNativecode_ == oldChild)
+        {
+            setBundleNativecode((TBundleNativecode) newChild);
+            return;
+        }
 
-		if (this._bundleNativecodeEntryValue_ == oldChild) {
-			setBundleNativecodeEntryValue((PBundleNativecodeEntryValue) newChild);
-			return;
-		}
+        if(this._bundleNativecodeEntryValue_ == oldChild)
+        {
+            setBundleNativecodeEntryValue((PBundleNativecodeEntryValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

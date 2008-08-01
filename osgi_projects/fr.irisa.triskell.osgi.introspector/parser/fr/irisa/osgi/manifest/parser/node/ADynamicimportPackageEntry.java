@@ -2,118 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ADynamicimportPackageEntry extends
-		PDynamicimportPackageEntry {
-	private TDynamicimportPackage _dynamicimportPackage_;
-	private PDynamicimportPackageEntryValue _dynamicimportPackageEntryValue_;
+public final class ADynamicimportPackageEntry extends PDynamicimportPackageEntry
+{
+    private TDynamicimportPackage _dynamicimportPackage_;
+    private PDynamicimportPackageEntryValue _dynamicimportPackageEntryValue_;
 
-	public ADynamicimportPackageEntry() {
-		// Constructor
-	}
+    public ADynamicimportPackageEntry()
+    {
+        // Constructor
+    }
 
-	public ADynamicimportPackageEntry(@SuppressWarnings("hiding")
-	TDynamicimportPackage _dynamicimportPackage_, @SuppressWarnings("hiding")
-	PDynamicimportPackageEntryValue _dynamicimportPackageEntryValue_) {
-		// Constructor
-		setDynamicimportPackage(_dynamicimportPackage_);
+    public ADynamicimportPackageEntry(
+        @SuppressWarnings("hiding") TDynamicimportPackage _dynamicimportPackage_,
+        @SuppressWarnings("hiding") PDynamicimportPackageEntryValue _dynamicimportPackageEntryValue_)
+    {
+        // Constructor
+        setDynamicimportPackage(_dynamicimportPackage_);
 
-		setDynamicimportPackageEntryValue(_dynamicimportPackageEntryValue_);
+        setDynamicimportPackageEntryValue(_dynamicimportPackageEntryValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ADynamicimportPackageEntry(
-				cloneNode(this._dynamicimportPackage_),
-				cloneNode(this._dynamicimportPackageEntryValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ADynamicimportPackageEntry(
+            cloneNode(this._dynamicimportPackage_),
+            cloneNode(this._dynamicimportPackageEntryValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseADynamicimportPackageEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseADynamicimportPackageEntry(this);
+    }
 
-	public TDynamicimportPackage getDynamicimportPackage() {
-		return this._dynamicimportPackage_;
-	}
+    public TDynamicimportPackage getDynamicimportPackage()
+    {
+        return this._dynamicimportPackage_;
+    }
 
-	public void setDynamicimportPackage(TDynamicimportPackage node) {
-		if (this._dynamicimportPackage_ != null) {
-			this._dynamicimportPackage_.parent(null);
-		}
+    public void setDynamicimportPackage(TDynamicimportPackage node)
+    {
+        if(this._dynamicimportPackage_ != null)
+        {
+            this._dynamicimportPackage_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._dynamicimportPackage_ = node;
-	}
+        this._dynamicimportPackage_ = node;
+    }
 
-	public PDynamicimportPackageEntryValue getDynamicimportPackageEntryValue() {
-		return this._dynamicimportPackageEntryValue_;
-	}
+    public PDynamicimportPackageEntryValue getDynamicimportPackageEntryValue()
+    {
+        return this._dynamicimportPackageEntryValue_;
+    }
 
-	public void setDynamicimportPackageEntryValue(
-			PDynamicimportPackageEntryValue node) {
-		if (this._dynamicimportPackageEntryValue_ != null) {
-			this._dynamicimportPackageEntryValue_.parent(null);
-		}
+    public void setDynamicimportPackageEntryValue(PDynamicimportPackageEntryValue node)
+    {
+        if(this._dynamicimportPackageEntryValue_ != null)
+        {
+            this._dynamicimportPackageEntryValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._dynamicimportPackageEntryValue_ = node;
-	}
+        this._dynamicimportPackageEntryValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._dynamicimportPackage_)
-				+ toString(this._dynamicimportPackageEntryValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._dynamicimportPackage_)
+            + toString(this._dynamicimportPackageEntryValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._dynamicimportPackage_ == child) {
-			this._dynamicimportPackage_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._dynamicimportPackage_ == child)
+        {
+            this._dynamicimportPackage_ = null;
+            return;
+        }
 
-		if (this._dynamicimportPackageEntryValue_ == child) {
-			this._dynamicimportPackageEntryValue_ = null;
-			return;
-		}
+        if(this._dynamicimportPackageEntryValue_ == child)
+        {
+            this._dynamicimportPackageEntryValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._dynamicimportPackage_ == oldChild) {
-			setDynamicimportPackage((TDynamicimportPackage) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._dynamicimportPackage_ == oldChild)
+        {
+            setDynamicimportPackage((TDynamicimportPackage) newChild);
+            return;
+        }
 
-		if (this._dynamicimportPackageEntryValue_ == oldChild) {
-			setDynamicimportPackageEntryValue((PDynamicimportPackageEntryValue) newChild);
-			return;
-		}
+        if(this._dynamicimportPackageEntryValue_ == oldChild)
+        {
+            setDynamicimportPackageEntryValue((PDynamicimportPackageEntryValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

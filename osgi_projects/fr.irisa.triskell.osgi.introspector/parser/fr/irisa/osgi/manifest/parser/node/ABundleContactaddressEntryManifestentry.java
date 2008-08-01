@@ -2,81 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleContactaddressEntryManifestentry extends
-		PManifestentry {
-	private PBundleContactaddressEntry _bundleContactaddressEntry_;
+public final class ABundleContactaddressEntryManifestentry extends PManifestentry
+{
+    private PBundleContactaddressEntry _bundleContactaddressEntry_;
 
-	public ABundleContactaddressEntryManifestentry() {
-		// Constructor
-	}
+    public ABundleContactaddressEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public ABundleContactaddressEntryManifestentry(@SuppressWarnings("hiding")
-	PBundleContactaddressEntry _bundleContactaddressEntry_) {
-		// Constructor
-		setBundleContactaddressEntry(_bundleContactaddressEntry_);
+    public ABundleContactaddressEntryManifestentry(
+        @SuppressWarnings("hiding") PBundleContactaddressEntry _bundleContactaddressEntry_)
+    {
+        // Constructor
+        setBundleContactaddressEntry(_bundleContactaddressEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleContactaddressEntryManifestentry(
-				cloneNode(this._bundleContactaddressEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleContactaddressEntryManifestentry(
+            cloneNode(this._bundleContactaddressEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleContactaddressEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleContactaddressEntryManifestentry(this);
+    }
 
-	public PBundleContactaddressEntry getBundleContactaddressEntry() {
-		return this._bundleContactaddressEntry_;
-	}
+    public PBundleContactaddressEntry getBundleContactaddressEntry()
+    {
+        return this._bundleContactaddressEntry_;
+    }
 
-	public void setBundleContactaddressEntry(PBundleContactaddressEntry node) {
-		if (this._bundleContactaddressEntry_ != null) {
-			this._bundleContactaddressEntry_.parent(null);
-		}
+    public void setBundleContactaddressEntry(PBundleContactaddressEntry node)
+    {
+        if(this._bundleContactaddressEntry_ != null)
+        {
+            this._bundleContactaddressEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleContactaddressEntry_ = node;
-	}
+        this._bundleContactaddressEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleContactaddressEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleContactaddressEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleContactaddressEntry_ == child) {
-			this._bundleContactaddressEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleContactaddressEntry_ == child)
+        {
+            this._bundleContactaddressEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleContactaddressEntry_ == oldChild) {
-			setBundleContactaddressEntry((PBundleContactaddressEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleContactaddressEntry_ == oldChild)
+        {
+            setBundleContactaddressEntry((PBundleContactaddressEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

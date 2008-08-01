@@ -151,15 +151,31 @@ public class Parser {
 		return this.translation.getFragmentHostReferences();
 	}
 
-	public Map<RequireBundle, List<String>> getRequiredBundleReferences() {
-		return this.translation.getRequiredBundleReferences();
+	public Map<RequireBundle, Bundle> getUnresolvedRequireBundleBundle() {
+		return this.translation.getUnresolvedRequireBundleBundle();
 	}
 
-	public Map<ImportPackage, List<String>> getImportPackageReferences() {
-		return this.translation.getImportPackageReferences();
+	public Map<RequireBundle, String> getUnresolvedRequireBundleValue() {
+		return this.translation.getUnresolvedRequireBundleValue();
 	}
 
-	public Map<ImportService, String> getImportServiceReferences() {
-		return this.translation.getImportServiceReferences();
+	public Map<ImportPackage, Bundle> getUnresolvedImportPackageBundle() {
+		return this.translation.getUnresolvedImportPackageBundle();
+	}
+
+	public Map<ImportPackage, List<String>> getUnresolvedImportPackageValue() {
+		return this.translation.getUnresolvedImportPackageValue();
+	}
+
+	public Map<ImportService, Bundle> getUnresolvedImportServiceBundle() {
+		return this.translation.getUnresolvedImportServiceBundle();
+	}
+
+	public Map<ImportService, String> getUnresolvedImportServiceValue() {
+		return this.translation.getUnresolvedImportServiceValue();
+	}
+	
+	public List<Service> getServicesAvailable() {
+		return this.translation.getServicesAvailable();
 	}
 }

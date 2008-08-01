@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AActivationpolicyValue extends PActivationpolicyValue {
-	private TLazy _lazy_;
+public final class AActivationpolicyValue extends PActivationpolicyValue
+{
+    private TLazy _lazy_;
 
-	public AActivationpolicyValue() {
-		// Constructor
-	}
+    public AActivationpolicyValue()
+    {
+        // Constructor
+    }
 
-	public AActivationpolicyValue(@SuppressWarnings("hiding")
-	TLazy _lazy_) {
-		// Constructor
-		setLazy(_lazy_);
+    public AActivationpolicyValue(
+        @SuppressWarnings("hiding") TLazy _lazy_)
+    {
+        // Constructor
+        setLazy(_lazy_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AActivationpolicyValue(cloneNode(this._lazy_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AActivationpolicyValue(
+            cloneNode(this._lazy_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAActivationpolicyValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAActivationpolicyValue(this);
+    }
 
-	public TLazy getLazy() {
-		return this._lazy_;
-	}
+    public TLazy getLazy()
+    {
+        return this._lazy_;
+    }
 
-	public void setLazy(TLazy node) {
-		if (this._lazy_ != null) {
-			this._lazy_.parent(null);
-		}
+    public void setLazy(TLazy node)
+    {
+        if(this._lazy_ != null)
+        {
+            this._lazy_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._lazy_ = node;
-	}
+        this._lazy_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._lazy_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._lazy_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._lazy_ == child) {
-			this._lazy_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._lazy_ == child)
+        {
+            this._lazy_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._lazy_ == oldChild) {
-			setLazy((TLazy) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._lazy_ == oldChild)
+        {
+            setLazy((TLazy) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

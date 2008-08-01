@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameWindowsxpOsnameValue extends POsnameValue {
-	private TOsnameWindowsxp _osnameWindowsxp_;
+public final class AOsnameWindowsxpOsnameValue extends POsnameValue
+{
+    private TOsnameWindowsxp _osnameWindowsxp_;
 
-	public AOsnameWindowsxpOsnameValue() {
-		// Constructor
-	}
+    public AOsnameWindowsxpOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameWindowsxpOsnameValue(@SuppressWarnings("hiding")
-	TOsnameWindowsxp _osnameWindowsxp_) {
-		// Constructor
-		setOsnameWindowsxp(_osnameWindowsxp_);
+    public AOsnameWindowsxpOsnameValue(
+        @SuppressWarnings("hiding") TOsnameWindowsxp _osnameWindowsxp_)
+    {
+        // Constructor
+        setOsnameWindowsxp(_osnameWindowsxp_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameWindowsxpOsnameValue(
-				cloneNode(this._osnameWindowsxp_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameWindowsxpOsnameValue(
+            cloneNode(this._osnameWindowsxp_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameWindowsxpOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameWindowsxpOsnameValue(this);
+    }
 
-	public TOsnameWindowsxp getOsnameWindowsxp() {
-		return this._osnameWindowsxp_;
-	}
+    public TOsnameWindowsxp getOsnameWindowsxp()
+    {
+        return this._osnameWindowsxp_;
+    }
 
-	public void setOsnameWindowsxp(TOsnameWindowsxp node) {
-		if (this._osnameWindowsxp_ != null) {
-			this._osnameWindowsxp_.parent(null);
-		}
+    public void setOsnameWindowsxp(TOsnameWindowsxp node)
+    {
+        if(this._osnameWindowsxp_ != null)
+        {
+            this._osnameWindowsxp_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameWindowsxp_ = node;
-	}
+        this._osnameWindowsxp_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameWindowsxp_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameWindowsxp_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameWindowsxp_ == child) {
-			this._osnameWindowsxp_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameWindowsxp_ == child)
+        {
+            this._osnameWindowsxp_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameWindowsxp_ == oldChild) {
-			setOsnameWindowsxp((TOsnameWindowsxp) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameWindowsxp_ == oldChild)
+        {
+            setOsnameWindowsxp((TOsnameWindowsxp) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

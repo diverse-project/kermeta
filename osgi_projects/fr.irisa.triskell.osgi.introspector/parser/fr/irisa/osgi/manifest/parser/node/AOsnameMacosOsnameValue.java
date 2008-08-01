@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameMacosOsnameValue extends POsnameValue {
-	private TOsnameMacos _osnameMacos_;
+public final class AOsnameMacosOsnameValue extends POsnameValue
+{
+    private TOsnameMacos _osnameMacos_;
 
-	public AOsnameMacosOsnameValue() {
-		// Constructor
-	}
+    public AOsnameMacosOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameMacosOsnameValue(@SuppressWarnings("hiding")
-	TOsnameMacos _osnameMacos_) {
-		// Constructor
-		setOsnameMacos(_osnameMacos_);
+    public AOsnameMacosOsnameValue(
+        @SuppressWarnings("hiding") TOsnameMacos _osnameMacos_)
+    {
+        // Constructor
+        setOsnameMacos(_osnameMacos_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameMacosOsnameValue(cloneNode(this._osnameMacos_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameMacosOsnameValue(
+            cloneNode(this._osnameMacos_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameMacosOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameMacosOsnameValue(this);
+    }
 
-	public TOsnameMacos getOsnameMacos() {
-		return this._osnameMacos_;
-	}
+    public TOsnameMacos getOsnameMacos()
+    {
+        return this._osnameMacos_;
+    }
 
-	public void setOsnameMacos(TOsnameMacos node) {
-		if (this._osnameMacos_ != null) {
-			this._osnameMacos_.parent(null);
-		}
+    public void setOsnameMacos(TOsnameMacos node)
+    {
+        if(this._osnameMacos_ != null)
+        {
+            this._osnameMacos_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameMacos_ = node;
-	}
+        this._osnameMacos_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameMacos_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameMacos_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameMacos_ == child) {
-			this._osnameMacos_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameMacos_ == child)
+        {
+            this._osnameMacos_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameMacos_ == oldChild) {
-			setOsnameMacos((TOsnameMacos) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameMacos_ == oldChild)
+        {
+            setOsnameMacos((TOsnameMacos) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

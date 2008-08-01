@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AUnquotedUrlValue extends PUrlValue {
-	private PUnquotedUrl _unquotedUrl_;
+public final class AUnquotedUrlValue extends PUrlValue
+{
+    private PUnquotedUrl _unquotedUrl_;
 
-	public AUnquotedUrlValue() {
-		// Constructor
-	}
+    public AUnquotedUrlValue()
+    {
+        // Constructor
+    }
 
-	public AUnquotedUrlValue(@SuppressWarnings("hiding")
-	PUnquotedUrl _unquotedUrl_) {
-		// Constructor
-		setUnquotedUrl(_unquotedUrl_);
+    public AUnquotedUrlValue(
+        @SuppressWarnings("hiding") PUnquotedUrl _unquotedUrl_)
+    {
+        // Constructor
+        setUnquotedUrl(_unquotedUrl_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AUnquotedUrlValue(cloneNode(this._unquotedUrl_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AUnquotedUrlValue(
+            cloneNode(this._unquotedUrl_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAUnquotedUrlValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAUnquotedUrlValue(this);
+    }
 
-	public PUnquotedUrl getUnquotedUrl() {
-		return this._unquotedUrl_;
-	}
+    public PUnquotedUrl getUnquotedUrl()
+    {
+        return this._unquotedUrl_;
+    }
 
-	public void setUnquotedUrl(PUnquotedUrl node) {
-		if (this._unquotedUrl_ != null) {
-			this._unquotedUrl_.parent(null);
-		}
+    public void setUnquotedUrl(PUnquotedUrl node)
+    {
+        if(this._unquotedUrl_ != null)
+        {
+            this._unquotedUrl_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._unquotedUrl_ = node;
-	}
+        this._unquotedUrl_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._unquotedUrl_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._unquotedUrl_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._unquotedUrl_ == child) {
-			this._unquotedUrl_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._unquotedUrl_ == child)
+        {
+            this._unquotedUrl_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._unquotedUrl_ == oldChild) {
-			setUnquotedUrl((PUnquotedUrl) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._unquotedUrl_ == oldChild)
+        {
+            setUnquotedUrl((PUnquotedUrl) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

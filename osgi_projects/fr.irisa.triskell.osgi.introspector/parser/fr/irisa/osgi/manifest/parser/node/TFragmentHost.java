@@ -2,32 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TFragmentHost extends Token {
-	public TFragmentHost() {
-		super.setText("Fragment-Host: ");
-	}
+public final class TFragmentHost extends Token
+{
+    public TFragmentHost(String text)
+    {
+        setText(text);
+    }
 
-	public TFragmentHost(int line, int pos) {
-		super.setText("Fragment-Host: ");
-		setLine(line);
-		setPos(pos);
-	}
+    public TFragmentHost(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TFragmentHost(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TFragmentHost(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTFragmentHost(this);
-	}
-
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TFragmentHost text.");
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTFragmentHost(this);
+    }
 }

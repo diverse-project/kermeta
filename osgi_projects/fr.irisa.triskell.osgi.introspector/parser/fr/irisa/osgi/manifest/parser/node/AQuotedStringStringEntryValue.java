@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AQuotedStringStringEntryValue extends PStringEntryValue {
-	private TQuotedString _quotedString_;
+public final class AQuotedStringStringEntryValue extends PStringEntryValue
+{
+    private TQuotedString _quotedString_;
 
-	public AQuotedStringStringEntryValue() {
-		// Constructor
-	}
+    public AQuotedStringStringEntryValue()
+    {
+        // Constructor
+    }
 
-	public AQuotedStringStringEntryValue(@SuppressWarnings("hiding")
-	TQuotedString _quotedString_) {
-		// Constructor
-		setQuotedString(_quotedString_);
+    public AQuotedStringStringEntryValue(
+        @SuppressWarnings("hiding") TQuotedString _quotedString_)
+    {
+        // Constructor
+        setQuotedString(_quotedString_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AQuotedStringStringEntryValue(cloneNode(this._quotedString_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AQuotedStringStringEntryValue(
+            cloneNode(this._quotedString_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAQuotedStringStringEntryValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAQuotedStringStringEntryValue(this);
+    }
 
-	public TQuotedString getQuotedString() {
-		return this._quotedString_;
-	}
+    public TQuotedString getQuotedString()
+    {
+        return this._quotedString_;
+    }
 
-	public void setQuotedString(TQuotedString node) {
-		if (this._quotedString_ != null) {
-			this._quotedString_.parent(null);
-		}
+    public void setQuotedString(TQuotedString node)
+    {
+        if(this._quotedString_ != null)
+        {
+            this._quotedString_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._quotedString_ = node;
-	}
+        this._quotedString_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._quotedString_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._quotedString_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._quotedString_ == child) {
-			this._quotedString_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._quotedString_ == child)
+        {
+            this._quotedString_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._quotedString_ == oldChild) {
-			setQuotedString((TQuotedString) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._quotedString_ == oldChild)
+        {
+            setQuotedString((TQuotedString) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

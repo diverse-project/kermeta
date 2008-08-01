@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleNativecodeEntryManifestentry extends PManifestentry {
-	private PBundleNativecodeEntry _bundleNativecodeEntry_;
+public final class ABundleNativecodeEntryManifestentry extends PManifestentry
+{
+    private PBundleNativecodeEntry _bundleNativecodeEntry_;
 
-	public ABundleNativecodeEntryManifestentry() {
-		// Constructor
-	}
+    public ABundleNativecodeEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public ABundleNativecodeEntryManifestentry(@SuppressWarnings("hiding")
-	PBundleNativecodeEntry _bundleNativecodeEntry_) {
-		// Constructor
-		setBundleNativecodeEntry(_bundleNativecodeEntry_);
+    public ABundleNativecodeEntryManifestentry(
+        @SuppressWarnings("hiding") PBundleNativecodeEntry _bundleNativecodeEntry_)
+    {
+        // Constructor
+        setBundleNativecodeEntry(_bundleNativecodeEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleNativecodeEntryManifestentry(
-				cloneNode(this._bundleNativecodeEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleNativecodeEntryManifestentry(
+            cloneNode(this._bundleNativecodeEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleNativecodeEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleNativecodeEntryManifestentry(this);
+    }
 
-	public PBundleNativecodeEntry getBundleNativecodeEntry() {
-		return this._bundleNativecodeEntry_;
-	}
+    public PBundleNativecodeEntry getBundleNativecodeEntry()
+    {
+        return this._bundleNativecodeEntry_;
+    }
 
-	public void setBundleNativecodeEntry(PBundleNativecodeEntry node) {
-		if (this._bundleNativecodeEntry_ != null) {
-			this._bundleNativecodeEntry_.parent(null);
-		}
+    public void setBundleNativecodeEntry(PBundleNativecodeEntry node)
+    {
+        if(this._bundleNativecodeEntry_ != null)
+        {
+            this._bundleNativecodeEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleNativecodeEntry_ = node;
-	}
+        this._bundleNativecodeEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleNativecodeEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleNativecodeEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleNativecodeEntry_ == child) {
-			this._bundleNativecodeEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleNativecodeEntry_ == child)
+        {
+            this._bundleNativecodeEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleNativecodeEntry_ == oldChild) {
-			setBundleNativecodeEntry((PBundleNativecodeEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleNativecodeEntry_ == oldChild)
+        {
+            setBundleNativecodeEntry((PBundleNativecodeEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

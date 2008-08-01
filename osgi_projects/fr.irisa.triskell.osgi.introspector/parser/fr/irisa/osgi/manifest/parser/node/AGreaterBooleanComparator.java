@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AGreaterBooleanComparator extends PBooleanComparator {
-	private TGreater _greater_;
+public final class AGreaterBooleanComparator extends PBooleanComparator
+{
+    private TGreater _greater_;
 
-	public AGreaterBooleanComparator() {
-		// Constructor
-	}
+    public AGreaterBooleanComparator()
+    {
+        // Constructor
+    }
 
-	public AGreaterBooleanComparator(@SuppressWarnings("hiding")
-	TGreater _greater_) {
-		// Constructor
-		setGreater(_greater_);
+    public AGreaterBooleanComparator(
+        @SuppressWarnings("hiding") TGreater _greater_)
+    {
+        // Constructor
+        setGreater(_greater_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AGreaterBooleanComparator(cloneNode(this._greater_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AGreaterBooleanComparator(
+            cloneNode(this._greater_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAGreaterBooleanComparator(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAGreaterBooleanComparator(this);
+    }
 
-	public TGreater getGreater() {
-		return this._greater_;
-	}
+    public TGreater getGreater()
+    {
+        return this._greater_;
+    }
 
-	public void setGreater(TGreater node) {
-		if (this._greater_ != null) {
-			this._greater_.parent(null);
-		}
+    public void setGreater(TGreater node)
+    {
+        if(this._greater_ != null)
+        {
+            this._greater_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._greater_ = node;
-	}
+        this._greater_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._greater_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._greater_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._greater_ == child) {
-			this._greater_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._greater_ == child)
+        {
+            this._greater_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._greater_ == oldChild) {
-			setGreater((TGreater) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._greater_ == oldChild)
+        {
+            setGreater((TGreater) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

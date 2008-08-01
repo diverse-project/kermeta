@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class APathSepOnlyPathUnquoted extends PPathUnquoted {
-	private TPathSep _pathSep_;
+public final class APathSepOnlyPathUnquoted extends PPathUnquoted
+{
+    private TPathSep _pathSep_;
 
-	public APathSepOnlyPathUnquoted() {
-		// Constructor
-	}
+    public APathSepOnlyPathUnquoted()
+    {
+        // Constructor
+    }
 
-	public APathSepOnlyPathUnquoted(@SuppressWarnings("hiding")
-	TPathSep _pathSep_) {
-		// Constructor
-		setPathSep(_pathSep_);
+    public APathSepOnlyPathUnquoted(
+        @SuppressWarnings("hiding") TPathSep _pathSep_)
+    {
+        // Constructor
+        setPathSep(_pathSep_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new APathSepOnlyPathUnquoted(cloneNode(this._pathSep_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new APathSepOnlyPathUnquoted(
+            cloneNode(this._pathSep_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAPathSepOnlyPathUnquoted(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAPathSepOnlyPathUnquoted(this);
+    }
 
-	public TPathSep getPathSep() {
-		return this._pathSep_;
-	}
+    public TPathSep getPathSep()
+    {
+        return this._pathSep_;
+    }
 
-	public void setPathSep(TPathSep node) {
-		if (this._pathSep_ != null) {
-			this._pathSep_.parent(null);
-		}
+    public void setPathSep(TPathSep node)
+    {
+        if(this._pathSep_ != null)
+        {
+            this._pathSep_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._pathSep_ = node;
-	}
+        this._pathSep_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._pathSep_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._pathSep_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._pathSep_ == child) {
-			this._pathSep_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._pathSep_ == child)
+        {
+            this._pathSep_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._pathSep_ == oldChild) {
-			setPathSep((TPathSep) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._pathSep_ == oldChild)
+        {
+            setPathSep((TPathSep) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

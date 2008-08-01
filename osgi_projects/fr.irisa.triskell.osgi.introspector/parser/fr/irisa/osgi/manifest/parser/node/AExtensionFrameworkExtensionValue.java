@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AExtensionFrameworkExtensionValue extends PExtensionValue {
-	private TExtensionFramework _extensionFramework_;
+public final class AExtensionFrameworkExtensionValue extends PExtensionValue
+{
+    private TExtensionFramework _extensionFramework_;
 
-	public AExtensionFrameworkExtensionValue() {
-		// Constructor
-	}
+    public AExtensionFrameworkExtensionValue()
+    {
+        // Constructor
+    }
 
-	public AExtensionFrameworkExtensionValue(@SuppressWarnings("hiding")
-	TExtensionFramework _extensionFramework_) {
-		// Constructor
-		setExtensionFramework(_extensionFramework_);
+    public AExtensionFrameworkExtensionValue(
+        @SuppressWarnings("hiding") TExtensionFramework _extensionFramework_)
+    {
+        // Constructor
+        setExtensionFramework(_extensionFramework_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AExtensionFrameworkExtensionValue(
-				cloneNode(this._extensionFramework_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AExtensionFrameworkExtensionValue(
+            cloneNode(this._extensionFramework_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAExtensionFrameworkExtensionValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAExtensionFrameworkExtensionValue(this);
+    }
 
-	public TExtensionFramework getExtensionFramework() {
-		return this._extensionFramework_;
-	}
+    public TExtensionFramework getExtensionFramework()
+    {
+        return this._extensionFramework_;
+    }
 
-	public void setExtensionFramework(TExtensionFramework node) {
-		if (this._extensionFramework_ != null) {
-			this._extensionFramework_.parent(null);
-		}
+    public void setExtensionFramework(TExtensionFramework node)
+    {
+        if(this._extensionFramework_ != null)
+        {
+            this._extensionFramework_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._extensionFramework_ = node;
-	}
+        this._extensionFramework_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._extensionFramework_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._extensionFramework_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._extensionFramework_ == child) {
-			this._extensionFramework_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._extensionFramework_ == child)
+        {
+            this._extensionFramework_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._extensionFramework_ == oldChild) {
-			setExtensionFramework((TExtensionFramework) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._extensionFramework_ == oldChild)
+        {
+            setExtensionFramework((TExtensionFramework) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

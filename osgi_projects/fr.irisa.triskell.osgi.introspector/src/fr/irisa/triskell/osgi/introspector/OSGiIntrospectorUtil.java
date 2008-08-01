@@ -125,7 +125,7 @@ public class OSGiIntrospectorUtil {
 			bundleFile.deleteOnExit();
 		}
 		JarFile jar = new JarFile(bundleFile);
-		listAllEntriesIntoJarFile(jar, bundle);
+		listAllEntriesIntoJarFile(jar, bundle, true);
 		jar.close();
 	}
 
@@ -142,7 +142,7 @@ public class OSGiIntrospectorUtil {
 	 * @param bundle
 	 * @param isBundleCLassPath
 	 */
-	public static void listAllEntriesIntoJarFile(JarFile jar, Bundle bundle) {
+	public static void listAllEntriesIntoJarFile(JarFile jar, Bundle bundle, boolean bundleClassPath) {
 		JarFactory jarFactory = JarFactory.eINSTANCE;
 		Enumeration<JarEntry> jarEntries = jar.entries();
 		Folder rootFolder = bundle.getFolder();
@@ -150,12 +150,14 @@ public class OSGiIntrospectorUtil {
 			JarEntry jarEntry = jarEntries.nextElement();
 				if (jarEntry.getName().endsWith("/")) {
 					Folder entry = jarFactory.createFolder();
+					entry.setBundleClassPath(bundleClassPath);
 					entry.setFullPath(jarEntry.getName());
 					String[] folders = jarEntry.getName().split("/");
 					entry.setName(folders[folders.length - 1]);
 					rootFolder.addEntry(entry);
 				} else {
 					File entry = jarFactory.createFile();
+					entry.setBundleClassPath(bundleClassPath);
 					entry.setFullPath(jarEntry.getName());
 					String[] folders = jarEntry.getName().split("/");
 					entry.setName(folders[folders.length - 1]);
@@ -169,7 +171,6 @@ public class OSGiIntrospectorUtil {
 			logger = Logger.getLogger(context.getBundle().getSymbolicName());
 		}
 		logger.log(level, message);
-		// TODO sauvegarde du log dans un fichier
 	}
 
 	public static BundleContext getContext() {
@@ -233,8 +234,15 @@ public class OSGiIntrospectorUtil {
 	public static void displayLog(Map<Bundle, String> log) {
 		for (Bundle bundle : log.keySet()) {
 			if (!log.get(bundle).equals("")) {
-				OSGiIntrospectorUtil.log(Level.INFO, bundle.getLocation());
-				OSGiIntrospectorUtil.log(Level.INFO, log.get(bundle));
+				OSGiIntrospectorUtil.log(Level.INFO, bundle.getLocation() + "\n" + log.get(bundle));
+			}
+		}
+	}
+	public void saveLog(Map<Bundle, String> log) {
+		// TODO
+		for (Bundle bundle : log.keySet()) {
+			if (!log.get(bundle).equals("")) {
+				OSGiIntrospectorUtil.log(Level.INFO, bundle.getLocation() + "\n" + log.get(bundle));
 			}
 		}
 	}

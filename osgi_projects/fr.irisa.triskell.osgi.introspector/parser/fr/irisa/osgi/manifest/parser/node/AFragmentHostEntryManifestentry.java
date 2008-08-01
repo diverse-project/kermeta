@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AFragmentHostEntryManifestentry extends PManifestentry {
-	private PFragmentHostEntry _fragmentHostEntry_;
+public final class AFragmentHostEntryManifestentry extends PManifestentry
+{
+    private PFragmentHostEntry _fragmentHostEntry_;
 
-	public AFragmentHostEntryManifestentry() {
-		// Constructor
-	}
+    public AFragmentHostEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public AFragmentHostEntryManifestentry(@SuppressWarnings("hiding")
-	PFragmentHostEntry _fragmentHostEntry_) {
-		// Constructor
-		setFragmentHostEntry(_fragmentHostEntry_);
+    public AFragmentHostEntryManifestentry(
+        @SuppressWarnings("hiding") PFragmentHostEntry _fragmentHostEntry_)
+    {
+        // Constructor
+        setFragmentHostEntry(_fragmentHostEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AFragmentHostEntryManifestentry(
-				cloneNode(this._fragmentHostEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AFragmentHostEntryManifestentry(
+            cloneNode(this._fragmentHostEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAFragmentHostEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAFragmentHostEntryManifestentry(this);
+    }
 
-	public PFragmentHostEntry getFragmentHostEntry() {
-		return this._fragmentHostEntry_;
-	}
+    public PFragmentHostEntry getFragmentHostEntry()
+    {
+        return this._fragmentHostEntry_;
+    }
 
-	public void setFragmentHostEntry(PFragmentHostEntry node) {
-		if (this._fragmentHostEntry_ != null) {
-			this._fragmentHostEntry_.parent(null);
-		}
+    public void setFragmentHostEntry(PFragmentHostEntry node)
+    {
+        if(this._fragmentHostEntry_ != null)
+        {
+            this._fragmentHostEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._fragmentHostEntry_ = node;
-	}
+        this._fragmentHostEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._fragmentHostEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._fragmentHostEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._fragmentHostEntry_ == child) {
-			this._fragmentHostEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._fragmentHostEntry_ == child)
+        {
+            this._fragmentHostEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._fragmentHostEntry_ == oldChild) {
-			setFragmentHostEntry((PFragmentHostEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._fragmentHostEntry_ == oldChild)
+        {
+            setFragmentHostEntry((PFragmentHostEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

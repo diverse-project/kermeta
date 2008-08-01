@@ -2,32 +2,37 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TGreaterEquals extends Token {
-	public TGreaterEquals() {
-		super.setText(">=");
-	}
+public final class TGreaterEquals extends Token
+{
+    public TGreaterEquals()
+    {
+        super.setText(">=");
+    }
 
-	public TGreaterEquals(int line, int pos) {
-		super.setText(">=");
-		setLine(line);
-		setPos(pos);
-	}
+    public TGreaterEquals(int line, int pos)
+    {
+        super.setText(">=");
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TGreaterEquals(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TGreaterEquals(getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTGreaterEquals(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTGreaterEquals(this);
+    }
 
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TGreaterEquals text.");
-	}
+    @Override
+    public void setText(@SuppressWarnings("unused") String text)
+    {
+        throw new RuntimeException("Cannot change TGreaterEquals text.");
+    }
 }

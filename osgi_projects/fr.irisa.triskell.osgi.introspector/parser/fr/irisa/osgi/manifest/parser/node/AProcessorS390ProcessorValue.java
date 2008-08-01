@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProcessorS390ProcessorValue extends PProcessorValue {
-	private TProcessorS390 _processorS390_;
+public final class AProcessorS390ProcessorValue extends PProcessorValue
+{
+    private TProcessorS390 _processorS390_;
 
-	public AProcessorS390ProcessorValue() {
-		// Constructor
-	}
+    public AProcessorS390ProcessorValue()
+    {
+        // Constructor
+    }
 
-	public AProcessorS390ProcessorValue(@SuppressWarnings("hiding")
-	TProcessorS390 _processorS390_) {
-		// Constructor
-		setProcessorS390(_processorS390_);
+    public AProcessorS390ProcessorValue(
+        @SuppressWarnings("hiding") TProcessorS390 _processorS390_)
+    {
+        // Constructor
+        setProcessorS390(_processorS390_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AProcessorS390ProcessorValue(cloneNode(this._processorS390_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AProcessorS390ProcessorValue(
+            cloneNode(this._processorS390_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAProcessorS390ProcessorValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAProcessorS390ProcessorValue(this);
+    }
 
-	public TProcessorS390 getProcessorS390() {
-		return this._processorS390_;
-	}
+    public TProcessorS390 getProcessorS390()
+    {
+        return this._processorS390_;
+    }
 
-	public void setProcessorS390(TProcessorS390 node) {
-		if (this._processorS390_ != null) {
-			this._processorS390_.parent(null);
-		}
+    public void setProcessorS390(TProcessorS390 node)
+    {
+        if(this._processorS390_ != null)
+        {
+            this._processorS390_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._processorS390_ = node;
-	}
+        this._processorS390_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._processorS390_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._processorS390_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._processorS390_ == child) {
-			this._processorS390_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._processorS390_ == child)
+        {
+            this._processorS390_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._processorS390_ == oldChild) {
-			setProcessorS390((TProcessorS390) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._processorS390_ == oldChild)
+        {
+            setProcessorS390((TProcessorS390) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

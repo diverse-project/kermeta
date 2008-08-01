@@ -4,822 +4,377 @@ package fr.irisa.osgi.manifest.parser.analysis;
 
 import fr.irisa.osgi.manifest.parser.node.*;
 
-public interface Analysis extends Switch {
-	Object getIn(Node node);
-
-	void setIn(Node node, Object o);
-
-	Object getOut(Node node);
-
-	void setOut(Node node, Object o);
-
-	void caseStart(Start node);
-
-	void caseAManifest(AManifest node);
-
-	void caseAManifestcontent(AManifestcontent node);
-
-	void caseABundleActivationpolicyEntryManifestentry(
-			ABundleActivationpolicyEntryManifestentry node);
-
-	void caseABundleActivatorEntryManifestentry(
-			ABundleActivatorEntryManifestentry node);
-
-	void caseABundleCategoryEntryManifestentry(
-			ABundleCategoryEntryManifestentry node);
-
-	void caseABundleClasspathEntryManifestentry(
-			ABundleClasspathEntryManifestentry node);
-
-	void caseABundleContactaddressEntryManifestentry(
-			ABundleContactaddressEntryManifestentry node);
-
-	void caseABundleCopyrightEntryManifestentry(
-			ABundleCopyrightEntryManifestentry node);
-
-	void caseABundleDescriptionEntryManifestentry(
-			ABundleDescriptionEntryManifestentry node);
-
-	void caseABundleDocurlEntryManifestentry(
-			ABundleDocurlEntryManifestentry node);
-
-	void caseABundleLocalizationEntryManifestentry(
-			ABundleLocalizationEntryManifestentry node);
-
-	void caseABundleManifestversionEntryManifestentry(
-			ABundleManifestversionEntryManifestentry node);
-
-	void caseABundleNativecodeEntryManifestentry(
-			ABundleNativecodeEntryManifestentry node);
-
-	void caseABundleRequiredexecutionenvironmentEntryManifestentry(
-			ABundleRequiredexecutionenvironmentEntryManifestentry node);
-
-	void caseABundleSymbolicnameEntryManifestentry(
-			ABundleSymbolicnameEntryManifestentry node);
-
-	void caseABundleUpdatelocationEntryManifestentry(
-			ABundleUpdatelocationEntryManifestentry node);
-
-	void caseABundleVendorEntryManifestentry(
-			ABundleVendorEntryManifestentry node);
-
-	void caseABundleVersionEntryManifestentry(
-			ABundleVersionEntryManifestentry node);
-
-	void caseADynamicimportPackageEntryManifestentry(
-			ADynamicimportPackageEntryManifestentry node);
-
-	void caseAExportPackageEntryManifestentry(
-			AExportPackageEntryManifestentry node);
-
-	void caseAExportServiceEntryManifestentry(
-			AExportServiceEntryManifestentry node);
-
-	void caseAFragmentHostEntryManifestentry(
-			AFragmentHostEntryManifestentry node);
-
-	void caseAImportPackageEntryManifestentry(
-			AImportPackageEntryManifestentry node);
-
-	void caseAImportServiceEntryManifestentry(
-			AImportServiceEntryManifestentry node);
-
-	void caseARequireBundleEntryManifestentry(
-			ARequireBundleEntryManifestentry node);
-
-	void caseABundleNameEntryManifestentry(ABundleNameEntryManifestentry node);
-
-	void caseAOtherEntryManifestentry(AOtherEntryManifestentry node);
-
-	void caseABundleNameEntry(ABundleNameEntry node);
-
-	void caseASimpleEntryOtherEntry(ASimpleEntryOtherEntry node);
-
-	void caseADigestEntryOtherEntry(ADigestEntryOtherEntry node);
-
-	void caseADigestEntry(ADigestEntry node);
-
-	void caseASimpleEntry(ASimpleEntry node);
-
-	void caseASimpleEntryValue(ASimpleEntryValue node);
-
-	void caseAOtherEntryValueNext(AOtherEntryValueNext node);
-
-	void caseAOtherEntryValue(AOtherEntryValue node);
-
-	void caseAOtherValue(AOtherValue node);
-
-	void caseABundleActivationpolicyEntry(ABundleActivationpolicyEntry node);
-
-	void caseABundleActivationpolicyEntryValue(
-			ABundleActivationpolicyEntryValue node);
-
-	void caseAActivationpolicyValue(AActivationpolicyValue node);
-
-	void caseADirectiveActivationpolicyOptions(
-			ADirectiveActivationpolicyOptions node);
-
-	void caseAAttributeActivationpolicyOptions(
-			AAttributeActivationpolicyOptions node);
-
-	void caseAIncludeActivationpolicyDirective(
-			AIncludeActivationpolicyDirective node);
-
-	void caseAExcludeActivationpolicyDirective(
-			AExcludeActivationpolicyDirective node);
-
-	void caseAExcludeIncludeManyPackagesActivationPolicyExcludeIncludeValue(
-			AExcludeIncludeManyPackagesActivationPolicyExcludeIncludeValue node);
-
-	void caseAExcludeIncludeOnePackageActivationPolicyExcludeIncludeValue(
-			AExcludeIncludeOnePackageActivationPolicyExcludeIncludeValue node);
-
-	void caseAActivationPolicyExcludeIncludeIdentifier(
-			AActivationPolicyExcludeIncludeIdentifier node);
-
-	void caseABundleActivatorEntry(ABundleActivatorEntry node);
-
-	void caseABundleActivatorEntryValue(ABundleActivatorEntryValue node);
-
-	void caseABundleCategoryEntry(ABundleCategoryEntry node);
-
-	void caseABundleCategoryEntryValue(ABundleCategoryEntryValue node);
-
-	void caseACategoryValue(ACategoryValue node);
-
-	void caseABundleClasspathEntry(ABundleClasspathEntry node);
-
-	void caseABundleClasspathEntryValue(ABundleClasspathEntryValue node);
-
-	void caseAClasspathValue(AClasspathValue node);
-
-	void caseAClasspathEntry(AClasspathEntry node);
-
-	void caseAClasspathEntryValue(AClasspathEntryValue node);
-
-	void caseABundleContactaddressEntry(ABundleContactaddressEntry node);
-
-	void caseABundleCopyrightEntry(ABundleCopyrightEntry node);
-
-	void caseABundleDescriptionEntry(ABundleDescriptionEntry node);
-
-	void caseABundleDocurlEntry(ABundleDocurlEntry node);
-
-	void caseABundleLocalizationEntry(ABundleLocalizationEntry node);
-
-	void caseABundleManifestversionEntry(ABundleManifestversionEntry node);
-
-	void caseABundleNativecodeEntry(ABundleNativecodeEntry node);
-
-	void caseABundleNativecodeEntryValue(ABundleNativecodeEntryValue node);
-
-	void caseANativecodeOptional(ANativecodeOptional node);
-
-	void caseANativecodeValue(ANativecodeValue node);
-
-	void caseANativecodeEntry(ANativecodeEntry node);
-
-	void caseANativecodeEntryValue(ANativecodeEntryValue node);
-
-	void caseANativecodeDirectiveNativecodeParameter(
-			ANativecodeDirectiveNativecodeParameter node);
-
-	void caseANativecodeAttributeNativecodeParameter(
-			ANativecodeAttributeNativecodeParameter node);
-
-	void caseAOsnameDirectiveNativecodeDirective(
-			AOsnameDirectiveNativecodeDirective node);
-
-	void caseAOsversionDirectiveNativecodeDirective(
-			AOsversionDirectiveNativecodeDirective node);
-
-	void caseAProcessorDirectiveNativecodeDirective(
-			AProcessorDirectiveNativecodeDirective node);
-
-	void caseALanguageDirectiveNativecodeDirective(
-			ALanguageDirectiveNativecodeDirective node);
-
-	void caseASelectionFilterDirectiveNativecodeDirective(
-			ASelectionFilterDirectiveNativecodeDirective node);
-
-	void caseAOsnameDirective(AOsnameDirective node);
-
-	void caseAOsversionDirective(AOsversionDirective node);
-
-	void caseAProcessorDirective(AProcessorDirective node);
-
-	void caseALanguageDirective(ALanguageDirective node);
-
-	void caseASelectionFilterDirective(ASelectionFilterDirective node);
-
-	void caseABundleRequiredexecutionenvironmentEntry(
-			ABundleRequiredexecutionenvironmentEntry node);
-
-	void caseABundleRequiredexecutionenvironmentEntryValue(
-			ABundleRequiredexecutionenvironmentEntryValue node);
-
-	void caseARequiredexecutionenvironmentValue(
-			ARequiredexecutionenvironmentValue node);
-
-	void caseARequiredexecutionenvironment(ARequiredexecutionenvironment node);
-
-	void caseABundleSymbolicnameEntry(ABundleSymbolicnameEntry node);
-
-	void caseASymbolicnameDirectiveSymbolicnameOption(
-			ASymbolicnameDirectiveSymbolicnameOption node);
-
-	void caseASymbolicnameAttributeSymbolicnameOption(
-			ASymbolicnameAttributeSymbolicnameOption node);
-
-	void caseASingletonSymbolicnameDirective(
-			ASingletonSymbolicnameDirective node);
-
-	void caseAFragmentAttachmentSymbolicnameDirective(
-			AFragmentAttachmentSymbolicnameDirective node);
-
-	void caseABundleUpdatelocationEntry(ABundleUpdatelocationEntry node);
-
-	void caseABundleVendorEntry(ABundleVendorEntry node);
-
-	void caseABundleVersionEntry(ABundleVersionEntry node);
-
-	void caseAVersionIntervalVersionRange(AVersionIntervalVersionRange node);
-
-	void caseAVersionAtleastVersionRange(AVersionAtleastVersionRange node);
-
-	void caseAVersionInterval(AVersionInterval node);
-
-	void caseAVersionAtleast(AVersionAtleast node);
-
-	void caseAQuotedVersionMajorVersionEntry(
-			AQuotedVersionMajorVersionEntry node);
-
-	void caseAUnquotedVersionMajorVersionEntry(
-			AUnquotedVersionMajorVersionEntry node);
-
-	void caseAMajorVersion(AMajorVersion node);
-
-	void caseAMinorVersion(AMinorVersion node);
-
-	void caseAMicroVersion(AMicroVersion node);
-
-	void caseAQualifierQualifierVersion(AQualifierQualifierVersion node);
-
-	void caseANumberQualifierVersion(ANumberQualifierVersion node);
-
-	void caseADynamicimportPackageEntry(ADynamicimportPackageEntry node);
-
-	void caseADynamicimportPackageEntryValue(
-			ADynamicimportPackageEntryValue node);
-
-	void caseADynamicDescription(ADynamicDescription node);
-
-	void caseADynamicimportPackageNames(ADynamicimportPackageNames node);
-
-	void caseADynamicimportPackageValue(ADynamicimportPackageValue node);
-
-	void caseAExportPackageEntry(AExportPackageEntry node);
-
-	void caseAExportPackageEntryValue1(AExportPackageEntryValue1 node);
-
-	void caseAExportPackageValue(AExportPackageValue node);
-
-	void caseAExportPackageEntryValue(AExportPackageEntryValue node);
-
-	void caseAPackageNames(APackageNames node);
-
-	void caseAExportPackageDirectiveExportPackageParameter(
-			AExportPackageDirectiveExportPackageParameter node);
-
-	void caseAExportPackageAttributeExportPackageParameter(
-			AExportPackageAttributeExportPackageParameter node);
-
-	void caseAUsesExportPackageDirective(AUsesExportPackageDirective node);
-
-	void caseAIncludeExportPackageDirective(AIncludeExportPackageDirective node);
-
-	void caseAExcludeExportPackageDirective(AExcludeExportPackageDirective node);
-
-	void caseAMandatoryExportPackageDirective(
-			AMandatoryExportPackageDirective node);
-
-	void caseAUseExcludeIncludeManyElementsExportPackageUseExcludeIncludeValue(
-			AUseExcludeIncludeManyElementsExportPackageUseExcludeIncludeValue node);
-
-	void caseAUseExcludeIncludeOneElementExportPackageUseExcludeIncludeValue(
-			AUseExcludeIncludeOneElementExportPackageUseExcludeIncludeValue node);
-
-	void caseAExportPackageUseExcludeIncludeIdentifier(
-			AExportPackageUseExcludeIncludeIdentifier node);
-
-	void caseAMandatoryManyAttributesMandatoryValue(
-			AMandatoryManyAttributesMandatoryValue node);
-
-	void caseAMandatoryOneAttributeMandatoryValue(
-			AMandatoryOneAttributeMandatoryValue node);
-
-	void caseAMandatoryString(AMandatoryString node);
-
-	void caseAFragmentHostEntry(AFragmentHostEntry node);
-
-	void caseAFragmentHostEntryValue(AFragmentHostEntryValue node);
-
-	void caseAFragmentHostDirectiveFragmentHostParameter(
-			AFragmentHostDirectiveFragmentHostParameter node);
-
-	void caseAFragmentHostAttributeFragmentHostParameter(
-			AFragmentHostAttributeFragmentHostParameter node);
-
-	void caseAFragmentHostDirective(AFragmentHostDirective node);
-
-	void caseAImportPackageEntry(AImportPackageEntry node);
-
-	void caseAImportPackageEntryValue1(AImportPackageEntryValue1 node);
-
-	void caseAImportPackageValue(AImportPackageValue node);
-
-	void caseAImportPackageEntryValue(AImportPackageEntryValue node);
-
-	void caseAImportPackageDirectiveImportPackageParameter(
-			AImportPackageDirectiveImportPackageParameter node);
-
-	void caseAImportPackageAttributeImportPackageParameter(
-			AImportPackageAttributeImportPackageParameter node);
-
-	void caseAImportPackageDirective(AImportPackageDirective node);
-
-	void caseAImportServiceEntry(AImportServiceEntry node);
-
-	void caseAImportServiceEntryValue(AImportServiceEntryValue node);
-
-	void caseAServiceValue(AServiceValue node);
-
-	void caseAExportServiceEntry(AExportServiceEntry node);
-
-	void caseAExportServiceEntryValue(AExportServiceEntryValue node);
-
-	void caseARequireBundleEntry(ARequireBundleEntry node);
-
-	void caseARequireBundleEntryValue(ARequireBundleEntryValue node);
-
-	void caseARequireBundleSymbolicname(ARequireBundleSymbolicname node);
-
-	void caseARequireBundleValue(ARequireBundleValue node);
-
-	void caseARequireBundleDirectiveRequireBundleOptions(
-			ARequireBundleDirectiveRequireBundleOptions node);
-
-	void caseARequireBundleAttributeRequireBundleOptions(
-			ARequireBundleAttributeRequireBundleOptions node);
-
-	void caseAVisibilityDirectiveRequireBundleDirective(
-			AVisibilityDirectiveRequireBundleDirective node);
-
-	void caseAResolutionDirectiveRequireBundleDirective(
-			AResolutionDirectiveRequireBundleDirective node);
-
-	void caseAAlwaysFragmentAttachmentValue(AAlwaysFragmentAttachmentValue node);
-
-	void caseANeverFragmentAttachmentValue(ANeverFragmentAttachmentValue node);
-
-	void caseAResolveTimeFragmentAttachmentValue(
-			AResolveTimeFragmentAttachmentValue node);
-
-	void caseAProcessor68kProcessorValue(AProcessor68kProcessorValue node);
-
-	void caseAProcessorArmProcessorValue(AProcessorArmProcessorValue node);
-
-	void caseAProcessorAlphaProcessorValue(AProcessorAlphaProcessorValue node);
-
-	void caseAProcessorIgniteProcessorValue(AProcessorIgniteProcessorValue node);
-
-	void caseAProcessorMipsProcessorValue(AProcessorMipsProcessorValue node);
-
-	void caseAProcessorPariscProcessorValue(AProcessorPariscProcessorValue node);
-
-	void caseAProcessorPowerpcProcessorValue(
-			AProcessorPowerpcProcessorValue node);
-
-	void caseAProcessorSh4ProcessorValue(AProcessorSh4ProcessorValue node);
-
-	void caseAProcessorSparcProcessorValue(AProcessorSparcProcessorValue node);
-
-	void caseAProcessorS390ProcessorValue(AProcessorS390ProcessorValue node);
-
-	void caseAProcessorS390xProcessorValue(AProcessorS390xProcessorValue node);
-
-	void caseAProcessorV850eProcessorValue(AProcessorV850eProcessorValue node);
-
-	void caseAProcessorX86ProcessorValue(AProcessorX86ProcessorValue node);
-
-	void caseAProcessorX8664ProcessorValue(AProcessorX8664ProcessorValue node);
-
-	void caseAOsnameAixOsnameValue(AOsnameAixOsnameValue node);
-
-	void caseAOsnameDigitalunixOsnameValue(AOsnameDigitalunixOsnameValue node);
-
-	void caseAOsnameEmbosOsnameValue(AOsnameEmbosOsnameValue node);
-
-	void caseAOsnameEpoc32OsnameValue(AOsnameEpoc32OsnameValue node);
-
-	void caseAOsnameFreebsdOsnameValue(AOsnameFreebsdOsnameValue node);
-
-	void caseAOsnameHpuxOsnameValue(AOsnameHpuxOsnameValue node);
-
-	void caseAOsnameIrixOsnameValue(AOsnameIrixOsnameValue node);
-
-	void caseAOsnameLinuxOsnameValue(AOsnameLinuxOsnameValue node);
-
-	void caseAOsnameMacosOsnameValue(AOsnameMacosOsnameValue node);
-
-	void caseAOsnameNetbsdOsnameValue(AOsnameNetbsdOsnameValue node);
-
-	void caseAOsnameNetwareOsnameValue(AOsnameNetwareOsnameValue node);
-
-	void caseAOsnameOpenbsdOsnameValue(AOsnameOpenbsdOsnameValue node);
-
-	void caseAOsnameOs2OsnameValue(AOsnameOs2OsnameValue node);
-
-	void caseAOsnameQnxOsnameValue(AOsnameQnxOsnameValue node);
-
-	void caseAOsnameSolarisOsnameValue(AOsnameSolarisOsnameValue node);
-
-	void caseAOsnameSunosOsnameValue(AOsnameSunosOsnameValue node);
-
-	void caseAOsnameVxworksOsnameValue(AOsnameVxworksOsnameValue node);
-
-	void caseAOsnameWindows95OsnameValue(AOsnameWindows95OsnameValue node);
-
-	void caseAOsnameWindows98OsnameValue(AOsnameWindows98OsnameValue node);
-
-	void caseAOsnameWindowsntOsnameValue(AOsnameWindowsntOsnameValue node);
-
-	void caseAOsnameWindowsceOsnameValue(AOsnameWindowsceOsnameValue node);
-
-	void caseAOsnameWindows2000OsnameValue(AOsnameWindows2000OsnameValue node);
-
-	void caseAOsnameWindows2003OsnameValue(AOsnameWindows2003OsnameValue node);
-
-	void caseAOsnameWindowsxpOsnameValue(AOsnameWindowsxpOsnameValue node);
-
-	void caseAOsnameWindowsvistaOsnameValue(AOsnameWindowsvistaOsnameValue node);
-
-	void caseALanguageValue(ALanguageValue node);
-
-	void caseAEqualsBooleanComparator(AEqualsBooleanComparator node);
-
-	void caseAGreaterEqualsBooleanComparator(
-			AGreaterEqualsBooleanComparator node);
-
-	void caseALesserEqualsBooleanComparator(ALesserEqualsBooleanComparator node);
-
-	void caseAGreaterBooleanComparator(AGreaterBooleanComparator node);
-
-	void caseALessBooleanComparator(ALessBooleanComparator node);
-
-	void caseANotEqualsBooleanComparator(ANotEqualsBooleanComparator node);
-
-	void caseASelectionFilterValue(ASelectionFilterValue node);
-
-	void caseAVisibilityPrivateVisibilityValue(
-			AVisibilityPrivateVisibilityValue node);
-
-	void caseAVisibilityReexportVisibilityValue(
-			AVisibilityReexportVisibilityValue node);
-
-	void caseAResolutionMandatoryResolutionValue(
-			AResolutionMandatoryResolutionValue node);
-
-	void caseAResolutionOptionalResolutionValue(
-			AResolutionOptionalResolutionValue node);
-
-	void caseAExtensionFrameworkExtensionValue(
-			AExtensionFrameworkExtensionValue node);
-
-	void caseAExtensionBootclasspathExtensionValue(
-			AExtensionBootclasspathExtensionValue node);
-
-	void caseATrueBoolean(ATrueBoolean node);
-
-	void caseAFalseBoolean(AFalseBoolean node);
-
-	void caseAPathUnquotedPath(APathUnquotedPath node);
-
-	void caseAPathQuotedPath(APathQuotedPath node);
-
-	void caseAPathSepOnlyPathUnquoted(APathSepOnlyPathUnquoted node);
-
-	void caseAPathSeptelementPathUnquoted(APathSeptelementPathUnquoted node);
-
-	void caseAPathElement(APathElement node);
-
-	void caseAPathSuffix(APathSuffix node);
-
-	void caseAPathQuoted(APathQuoted node);
-
-	void caseAHttpUnquotedUrl(AHttpUnquotedUrl node);
-
-	void caseAFileUnquotedUrl(AFileUnquotedUrl node);
-
-	void caseAFtpUnquotedUrl(AFtpUnquotedUrl node);
-
-	void caseAQuotedUrl(AQuotedUrl node);
-
-	void caseAUniqueNameWildcard(AUniqueNameWildcard node);
-
-	void caseAIdentifierUniqueNameWildcardSuffix(
-			AIdentifierUniqueNameWildcardSuffix node);
-
-	void caseAOptionalUniqueNameWildcardSuffix(
-			AOptionalUniqueNameWildcardSuffix node);
-
-	void caseAIdentifierUniqueNameWildcardCommons(
-			AIdentifierUniqueNameWildcardCommons node);
-
-	void caseAOptionalUniqueNameWildcardCommons(
-			AOptionalUniqueNameWildcardCommons node);
-
-	void caseAPackageNameWildcard(APackageNameWildcard node);
-
-	void caseAPathTarget(APathTarget node);
-
-	void caseADotTarget(ADotTarget node);
-
-	void caseAUnquotedUrlValue(AUnquotedUrlValue node);
-
-	void caseAQuotedUrlValue(AQuotedUrlValue node);
-
-	void caseAParameter(AParameter node);
-
-	void caseAAttribute(AAttribute node);
-
-	void caseAUnquotedStringStringEntryValue(
-			AUnquotedStringStringEntryValue node);
-
-	void caseAQuotedStringStringEntryValue(AQuotedStringStringEntryValue node);
-
-	void caseAGoodPackageNamePackageName(AGoodPackageNamePackageName node);
-
-	void caseAMustNotAppearsPackageName(AMustNotAppearsPackageName node);
-
-	void caseAUniqueName(AUniqueName node);
-
-	void caseAUniqueNameSuffix(AUniqueNameSuffix node);
-
-	void caseTQuote(TQuote node);
-
-	void caseTDefinition(TDefinition node);
-
-	void caseTLeftBracket(TLeftBracket node);
-
-	void caseTRightBracket(TRightBracket node);
-
-	void caseTDotdot(TDotdot node);
-
-	void caseTDoubleAntiSlash(TDoubleAntiSlash node);
-
-	void caseTProtectedString(TProtectedString node);
-
-	void caseTPathSep(TPathSep node);
-
-	void caseTSemicolon(TSemicolon node);
-
-	void caseTComma(TComma node);
-
-	void caseTOptional(TOptional node);
-
-	void caseTDot(TDot node);
-
-	void caseTEquals(TEquals node);
-
-	void caseTGreaterEquals(TGreaterEquals node);
-
-	void caseTLesserEquals(TLesserEquals node);
-
-	void caseTGreater(TGreater node);
-
-	void caseTLess(TLess node);
-
-	void caseTNotEquals(TNotEquals node);
-
-	void caseTUrlHttp(TUrlHttp node);
-
-	void caseTUrlFtp(TUrlFtp node);
-
-	void caseTUrlFile(TUrlFile node);
-
-	void caseTBundleActivationpolicy(TBundleActivationpolicy node);
-
-	void caseTBundleActivator(TBundleActivator node);
-
-	void caseTBundleCategory(TBundleCategory node);
-
-	void caseTBundleClasspath(TBundleClasspath node);
-
-	void caseTBundleContactaddress(TBundleContactaddress node);
-
-	void caseTBundleCopyright(TBundleCopyright node);
-
-	void caseTBundleDescription(TBundleDescription node);
-
-	void caseTBundleDocurl(TBundleDocurl node);
-
-	void caseTBundleLocalization(TBundleLocalization node);
-
-	void caseTBundleManifestversion(TBundleManifestversion node);
-
-	void caseTBundleName(TBundleName node);
-
-	void caseTBundleNativecode(TBundleNativecode node);
-
-	void caseTBundleRequiredexecutionenvironment(
-			TBundleRequiredexecutionenvironment node);
-
-	void caseTBundleSymbolicname(TBundleSymbolicname node);
-
-	void caseTBundleUpdatelocation(TBundleUpdatelocation node);
-
-	void caseTBundleVendor(TBundleVendor node);
-
-	void caseTBundleVersion(TBundleVersion node);
-
-	void caseTDynamicimportPackage(TDynamicimportPackage node);
-
-	void caseTExportPackage(TExportPackage node);
-
-	void caseTExportService(TExportService node);
-
-	void caseTFragmentHost(TFragmentHost node);
-
-	void caseTImportPackage(TImportPackage node);
-
-	void caseTImportService(TImportService node);
-
-	void caseTRequireBundle(TRequireBundle node);
-
-	void caseTEntryDigest(TEntryDigest node);
-
-	void caseTEntry(TEntry node);
-
-	void caseTLazy(TLazy node);
-
-	void caseTSingleton(TSingleton node);
-
-	void caseTFragmentAttachment(TFragmentAttachment node);
-
-	void caseTOsname(TOsname node);
-
-	void caseTOsversion(TOsversion node);
-
-	void caseTProcessor(TProcessor node);
-
-	void caseTLanguage(TLanguage node);
-
-	void caseTSelectionFilter(TSelectionFilter node);
-
-	void caseTVisibility(TVisibility node);
-
-	void caseTResolution(TResolution node);
-
-	void caseTUses(TUses node);
-
-	void caseTExclude(TExclude node);
-
-	void caseTInclude(TInclude node);
-
-	void caseTMandatory(TMandatory node);
-
-	void caseTExtension(TExtension node);
-
-	void caseTAttributeEntry(TAttributeEntry node);
-
-	void caseTProcessor68k(TProcessor68k node);
-
-	void caseTProcessorArm(TProcessorArm node);
-
-	void caseTProcessorAlpha(TProcessorAlpha node);
-
-	void caseTProcessorIgnite(TProcessorIgnite node);
-
-	void caseTProcessorMips(TProcessorMips node);
-
-	void caseTProcessorParisc(TProcessorParisc node);
-
-	void caseTProcessorPowerpc(TProcessorPowerpc node);
-
-	void caseTProcessorSh4(TProcessorSh4 node);
-
-	void caseTProcessorSparc(TProcessorSparc node);
-
-	void caseTProcessorS390(TProcessorS390 node);
-
-	void caseTProcessorS390x(TProcessorS390x node);
-
-	void caseTProcessorV850e(TProcessorV850e node);
-
-	void caseTProcessorX86(TProcessorX86 node);
-
-	void caseTProcessorX8664(TProcessorX8664 node);
-
-	void caseTOsnameAix(TOsnameAix node);
-
-	void caseTOsnameDigitalunix(TOsnameDigitalunix node);
-
-	void caseTOsnameEmbos(TOsnameEmbos node);
-
-	void caseTOsnameEpoc32(TOsnameEpoc32 node);
-
-	void caseTOsnameFreebsd(TOsnameFreebsd node);
-
-	void caseTOsnameHpux(TOsnameHpux node);
-
-	void caseTOsnameIrix(TOsnameIrix node);
-
-	void caseTOsnameLinux(TOsnameLinux node);
-
-	void caseTOsnameMacos(TOsnameMacos node);
-
-	void caseTOsnameNetbsd(TOsnameNetbsd node);
-
-	void caseTOsnameNetware(TOsnameNetware node);
-
-	void caseTOsnameOpenbsd(TOsnameOpenbsd node);
-
-	void caseTOsnameOs2(TOsnameOs2 node);
-
-	void caseTOsnameQnx(TOsnameQnx node);
-
-	void caseTOsnameSolaris(TOsnameSolaris node);
-
-	void caseTOsnameSunos(TOsnameSunos node);
-
-	void caseTOsnameVxworks(TOsnameVxworks node);
-
-	void caseTOsnameWindows95(TOsnameWindows95 node);
-
-	void caseTOsnameWindows98(TOsnameWindows98 node);
-
-	void caseTOsnameWindowsnt(TOsnameWindowsnt node);
-
-	void caseTOsnameWindowsce(TOsnameWindowsce node);
-
-	void caseTOsnameWindows2000(TOsnameWindows2000 node);
-
-	void caseTOsnameWindows2003(TOsnameWindows2003 node);
-
-	void caseTOsnameWindowsxp(TOsnameWindowsxp node);
-
-	void caseTOsnameWindowsvista(TOsnameWindowsvista node);
-
-	void caseTVisibilityPrivate(TVisibilityPrivate node);
-
-	void caseTVisibilityReexport(TVisibilityReexport node);
-
-	void caseTResolutionMandatory(TResolutionMandatory node);
-
-	void caseTResolutionOptional(TResolutionOptional node);
-
-	void caseTExtensionFramework(TExtensionFramework node);
-
-	void caseTExtensionBootclasspath(TExtensionBootclasspath node);
-
-	void caseTAlways(TAlways node);
-
-	void caseTNever(TNever node);
-
-	void caseTResolveTime(TResolveTime node);
-
-	void caseTTrue(TTrue node);
-
-	void caseTFalse(TFalse node);
-
-	void caseTManifestversion(TManifestversion node);
-
-	void caseTEolblank(TEolblank node);
-
-	void caseTEol(TEol node);
-
-	void caseTIdentifier(TIdentifier node);
-
-	void caseTIdentifierRequiredProfile(TIdentifierRequiredProfile node);
-
-	void caseTIdentifierRequiredConfiguration(
-			TIdentifierRequiredConfiguration node);
-
-	void caseTDigestValue(TDigestValue node);
-
-	void caseTUnquotedString(TUnquotedString node);
-
-	void caseTQuotedString(TQuotedString node);
-
-	void caseTSimpleStringValue(TSimpleStringValue node);
-
-	void caseTAllString(TAllString node);
-
-	void caseTNumber(TNumber node);
-
-	void caseTQualifier(TQualifier node);
-
-	void caseEOF(EOF node);
+public interface Analysis extends Switch
+{
+    Object getIn(Node node);
+    void setIn(Node node, Object o);
+    Object getOut(Node node);
+    void setOut(Node node, Object o);
+
+    void caseStart(Start node);
+    void caseAManifest(AManifest node);
+    void caseAManifestcontent(AManifestcontent node);
+    void caseABundleActivationpolicyEntryManifestentry(ABundleActivationpolicyEntryManifestentry node);
+    void caseABundleActivatorEntryManifestentry(ABundleActivatorEntryManifestentry node);
+    void caseABundleCategoryEntryManifestentry(ABundleCategoryEntryManifestentry node);
+    void caseABundleClasspathEntryManifestentry(ABundleClasspathEntryManifestentry node);
+    void caseABundleContactaddressEntryManifestentry(ABundleContactaddressEntryManifestentry node);
+    void caseABundleCopyrightEntryManifestentry(ABundleCopyrightEntryManifestentry node);
+    void caseABundleDescriptionEntryManifestentry(ABundleDescriptionEntryManifestentry node);
+    void caseABundleDocurlEntryManifestentry(ABundleDocurlEntryManifestentry node);
+    void caseABundleLocalizationEntryManifestentry(ABundleLocalizationEntryManifestentry node);
+    void caseABundleManifestversionEntryManifestentry(ABundleManifestversionEntryManifestentry node);
+    void caseABundleNativecodeEntryManifestentry(ABundleNativecodeEntryManifestentry node);
+    void caseABundleRequiredexecutionenvironmentEntryManifestentry(ABundleRequiredexecutionenvironmentEntryManifestentry node);
+    void caseABundleSymbolicnameEntryManifestentry(ABundleSymbolicnameEntryManifestentry node);
+    void caseABundleUpdatelocationEntryManifestentry(ABundleUpdatelocationEntryManifestentry node);
+    void caseABundleVendorEntryManifestentry(ABundleVendorEntryManifestentry node);
+    void caseABundleVersionEntryManifestentry(ABundleVersionEntryManifestentry node);
+    void caseADynamicimportPackageEntryManifestentry(ADynamicimportPackageEntryManifestentry node);
+    void caseAExportPackageEntryManifestentry(AExportPackageEntryManifestentry node);
+    void caseAExportServiceEntryManifestentry(AExportServiceEntryManifestentry node);
+    void caseAFragmentHostEntryManifestentry(AFragmentHostEntryManifestentry node);
+    void caseAImportPackageEntryManifestentry(AImportPackageEntryManifestentry node);
+    void caseAImportServiceEntryManifestentry(AImportServiceEntryManifestentry node);
+    void caseARequireBundleEntryManifestentry(ARequireBundleEntryManifestentry node);
+    void caseABundleNameEntryManifestentry(ABundleNameEntryManifestentry node);
+    void caseAOtherEntryManifestentry(AOtherEntryManifestentry node);
+    void caseABundleNameEntry(ABundleNameEntry node);
+    void caseASimpleEntryOtherEntry(ASimpleEntryOtherEntry node);
+    void caseADigestEntryOtherEntry(ADigestEntryOtherEntry node);
+    void caseADigestEntry(ADigestEntry node);
+    void caseASimpleEntry(ASimpleEntry node);
+    void caseASimpleEntryValue(ASimpleEntryValue node);
+    void caseAOtherEntryValueNext(AOtherEntryValueNext node);
+    void caseAOtherEntryValue(AOtherEntryValue node);
+    void caseAOtherValue(AOtherValue node);
+    void caseABundleActivationpolicyEntry(ABundleActivationpolicyEntry node);
+    void caseABundleActivationpolicyEntryValue(ABundleActivationpolicyEntryValue node);
+    void caseAActivationpolicyValue(AActivationpolicyValue node);
+    void caseADirectiveActivationpolicyOptions(ADirectiveActivationpolicyOptions node);
+    void caseAAttributeActivationpolicyOptions(AAttributeActivationpolicyOptions node);
+    void caseAIncludeActivationpolicyDirective(AIncludeActivationpolicyDirective node);
+    void caseAExcludeActivationpolicyDirective(AExcludeActivationpolicyDirective node);
+    void caseAExcludeIncludeManyPackagesActivationPolicyExcludeIncludeValue(AExcludeIncludeManyPackagesActivationPolicyExcludeIncludeValue node);
+    void caseAExcludeIncludeOnePackageActivationPolicyExcludeIncludeValue(AExcludeIncludeOnePackageActivationPolicyExcludeIncludeValue node);
+    void caseAActivationPolicyExcludeIncludeIdentifier(AActivationPolicyExcludeIncludeIdentifier node);
+    void caseABundleActivatorEntry(ABundleActivatorEntry node);
+    void caseABundleActivatorEntryValue(ABundleActivatorEntryValue node);
+    void caseABundleCategoryEntry(ABundleCategoryEntry node);
+    void caseABundleCategoryEntryValue(ABundleCategoryEntryValue node);
+    void caseACategoryValue(ACategoryValue node);
+    void caseABundleClasspathEntry(ABundleClasspathEntry node);
+    void caseABundleClasspathEntryValue(ABundleClasspathEntryValue node);
+    void caseAClasspathValue(AClasspathValue node);
+    void caseAClasspathEntry(AClasspathEntry node);
+    void caseAClasspathEntryValue(AClasspathEntryValue node);
+    void caseABundleContactaddressEntry(ABundleContactaddressEntry node);
+    void caseABundleCopyrightEntry(ABundleCopyrightEntry node);
+    void caseABundleDescriptionEntry(ABundleDescriptionEntry node);
+    void caseABundleDocurlEntry(ABundleDocurlEntry node);
+    void caseABundleLocalizationEntry(ABundleLocalizationEntry node);
+    void caseABundleManifestversionEntry(ABundleManifestversionEntry node);
+    void caseABundleNativecodeEntry(ABundleNativecodeEntry node);
+    void caseABundleNativecodeEntryValue(ABundleNativecodeEntryValue node);
+    void caseANativecodeOptional(ANativecodeOptional node);
+    void caseANativecodeValue(ANativecodeValue node);
+    void caseANativecodeEntry(ANativecodeEntry node);
+    void caseANativecodeEntryValue(ANativecodeEntryValue node);
+    void caseANativecodeDirectiveNativecodeParameter(ANativecodeDirectiveNativecodeParameter node);
+    void caseANativecodeAttributeNativecodeParameter(ANativecodeAttributeNativecodeParameter node);
+    void caseAOsnameDirectiveNativecodeDirective(AOsnameDirectiveNativecodeDirective node);
+    void caseAOsversionDirectiveNativecodeDirective(AOsversionDirectiveNativecodeDirective node);
+    void caseAProcessorDirectiveNativecodeDirective(AProcessorDirectiveNativecodeDirective node);
+    void caseALanguageDirectiveNativecodeDirective(ALanguageDirectiveNativecodeDirective node);
+    void caseASelectionFilterDirectiveNativecodeDirective(ASelectionFilterDirectiveNativecodeDirective node);
+    void caseAOsnameDirective(AOsnameDirective node);
+    void caseAOsversionDirective(AOsversionDirective node);
+    void caseAProcessorDirective(AProcessorDirective node);
+    void caseALanguageDirective(ALanguageDirective node);
+    void caseASelectionFilterDirective(ASelectionFilterDirective node);
+    void caseABundleRequiredexecutionenvironmentEntry(ABundleRequiredexecutionenvironmentEntry node);
+    void caseABundleRequiredexecutionenvironmentEntryValue(ABundleRequiredexecutionenvironmentEntryValue node);
+    void caseARequiredexecutionenvironmentValue(ARequiredexecutionenvironmentValue node);
+    void caseARequiredexecutionenvironment(ARequiredexecutionenvironment node);
+    void caseABundleSymbolicnameEntry(ABundleSymbolicnameEntry node);
+    void caseASymbolicnameDirectiveSymbolicnameOption(ASymbolicnameDirectiveSymbolicnameOption node);
+    void caseASymbolicnameAttributeSymbolicnameOption(ASymbolicnameAttributeSymbolicnameOption node);
+    void caseASingletonSymbolicnameDirective(ASingletonSymbolicnameDirective node);
+    void caseAFragmentAttachmentSymbolicnameDirective(AFragmentAttachmentSymbolicnameDirective node);
+    void caseABundleUpdatelocationEntry(ABundleUpdatelocationEntry node);
+    void caseABundleVendorEntry(ABundleVendorEntry node);
+    void caseABundleVersionEntry(ABundleVersionEntry node);
+    void caseAVersionIntervalVersionRange(AVersionIntervalVersionRange node);
+    void caseAVersionAtleastVersionRange(AVersionAtleastVersionRange node);
+    void caseAVersionInterval(AVersionInterval node);
+    void caseAVersionAtleast(AVersionAtleast node);
+    void caseAQuotedVersionMajorVersionEntry(AQuotedVersionMajorVersionEntry node);
+    void caseAUnquotedVersionMajorVersionEntry(AUnquotedVersionMajorVersionEntry node);
+    void caseAMajorVersion(AMajorVersion node);
+    void caseAMinorVersion(AMinorVersion node);
+    void caseAMicroVersion(AMicroVersion node);
+    void caseAQualifierQualifierVersion(AQualifierQualifierVersion node);
+    void caseANumberQualifierVersion(ANumberQualifierVersion node);
+    void caseADynamicimportPackageEntry(ADynamicimportPackageEntry node);
+    void caseADynamicimportPackageEntryValue(ADynamicimportPackageEntryValue node);
+    void caseADynamicDescription(ADynamicDescription node);
+    void caseADynamicimportPackageNames(ADynamicimportPackageNames node);
+    void caseADynamicimportPackageValue(ADynamicimportPackageValue node);
+    void caseAExportPackageEntry(AExportPackageEntry node);
+    void caseAExportPackageEntryValue1(AExportPackageEntryValue1 node);
+    void caseAExportPackageValue(AExportPackageValue node);
+    void caseAExportPackageEntryValue(AExportPackageEntryValue node);
+    void caseAPackageNames(APackageNames node);
+    void caseAExportPackageDirectiveExportPackageParameter(AExportPackageDirectiveExportPackageParameter node);
+    void caseAExportPackageAttributeExportPackageParameter(AExportPackageAttributeExportPackageParameter node);
+    void caseAUsesExportPackageDirective(AUsesExportPackageDirective node);
+    void caseAIncludeExportPackageDirective(AIncludeExportPackageDirective node);
+    void caseAExcludeExportPackageDirective(AExcludeExportPackageDirective node);
+    void caseAMandatoryExportPackageDirective(AMandatoryExportPackageDirective node);
+    void caseAUseExcludeIncludeManyElementsExportPackageUseExcludeIncludeValue(AUseExcludeIncludeManyElementsExportPackageUseExcludeIncludeValue node);
+    void caseAUseExcludeIncludeOneElementExportPackageUseExcludeIncludeValue(AUseExcludeIncludeOneElementExportPackageUseExcludeIncludeValue node);
+    void caseAExportPackageUseExcludeIncludeIdentifier(AExportPackageUseExcludeIncludeIdentifier node);
+    void caseAMandatoryManyAttributesMandatoryValue(AMandatoryManyAttributesMandatoryValue node);
+    void caseAMandatoryOneAttributeMandatoryValue(AMandatoryOneAttributeMandatoryValue node);
+    void caseAMandatoryString(AMandatoryString node);
+    void caseAFragmentHostEntry(AFragmentHostEntry node);
+    void caseAFragmentHostEntryValue(AFragmentHostEntryValue node);
+    void caseAFragmentHostDirectiveFragmentHostParameter(AFragmentHostDirectiveFragmentHostParameter node);
+    void caseAFragmentHostAttributeFragmentHostParameter(AFragmentHostAttributeFragmentHostParameter node);
+    void caseAFragmentHostDirective(AFragmentHostDirective node);
+    void caseAImportPackageEntry(AImportPackageEntry node);
+    void caseAImportPackageEntryValue1(AImportPackageEntryValue1 node);
+    void caseAImportPackageValue(AImportPackageValue node);
+    void caseAImportPackageEntryValue(AImportPackageEntryValue node);
+    void caseAImportPackageDirectiveImportPackageParameter(AImportPackageDirectiveImportPackageParameter node);
+    void caseAImportPackageAttributeImportPackageParameter(AImportPackageAttributeImportPackageParameter node);
+    void caseAImportPackageDirective(AImportPackageDirective node);
+    void caseAImportServiceEntry(AImportServiceEntry node);
+    void caseAImportServiceEntryValue(AImportServiceEntryValue node);
+    void caseAServiceValue(AServiceValue node);
+    void caseAExportServiceEntry(AExportServiceEntry node);
+    void caseAExportServiceEntryValue(AExportServiceEntryValue node);
+    void caseARequireBundleEntry(ARequireBundleEntry node);
+    void caseARequireBundleEntryValue(ARequireBundleEntryValue node);
+    void caseARequireBundleSymbolicname(ARequireBundleSymbolicname node);
+    void caseARequireBundleValue(ARequireBundleValue node);
+    void caseARequireBundleDirectiveRequireBundleOptions(ARequireBundleDirectiveRequireBundleOptions node);
+    void caseARequireBundleAttributeRequireBundleOptions(ARequireBundleAttributeRequireBundleOptions node);
+    void caseAVisibilityDirectiveRequireBundleDirective(AVisibilityDirectiveRequireBundleDirective node);
+    void caseAResolutionDirectiveRequireBundleDirective(AResolutionDirectiveRequireBundleDirective node);
+    void caseAAlwaysFragmentAttachmentValue(AAlwaysFragmentAttachmentValue node);
+    void caseANeverFragmentAttachmentValue(ANeverFragmentAttachmentValue node);
+    void caseAResolveTimeFragmentAttachmentValue(AResolveTimeFragmentAttachmentValue node);
+    void caseAProcessor68kProcessorValue(AProcessor68kProcessorValue node);
+    void caseAProcessorArmProcessorValue(AProcessorArmProcessorValue node);
+    void caseAProcessorAlphaProcessorValue(AProcessorAlphaProcessorValue node);
+    void caseAProcessorIgniteProcessorValue(AProcessorIgniteProcessorValue node);
+    void caseAProcessorMipsProcessorValue(AProcessorMipsProcessorValue node);
+    void caseAProcessorPariscProcessorValue(AProcessorPariscProcessorValue node);
+    void caseAProcessorPowerpcProcessorValue(AProcessorPowerpcProcessorValue node);
+    void caseAProcessorSh4ProcessorValue(AProcessorSh4ProcessorValue node);
+    void caseAProcessorSparcProcessorValue(AProcessorSparcProcessorValue node);
+    void caseAProcessorS390ProcessorValue(AProcessorS390ProcessorValue node);
+    void caseAProcessorS390xProcessorValue(AProcessorS390xProcessorValue node);
+    void caseAProcessorV850eProcessorValue(AProcessorV850eProcessorValue node);
+    void caseAProcessorX86ProcessorValue(AProcessorX86ProcessorValue node);
+    void caseAProcessorX8664ProcessorValue(AProcessorX8664ProcessorValue node);
+    void caseAOsnameAixOsnameValue(AOsnameAixOsnameValue node);
+    void caseAOsnameDigitalunixOsnameValue(AOsnameDigitalunixOsnameValue node);
+    void caseAOsnameEmbosOsnameValue(AOsnameEmbosOsnameValue node);
+    void caseAOsnameEpoc32OsnameValue(AOsnameEpoc32OsnameValue node);
+    void caseAOsnameFreebsdOsnameValue(AOsnameFreebsdOsnameValue node);
+    void caseAOsnameHpuxOsnameValue(AOsnameHpuxOsnameValue node);
+    void caseAOsnameIrixOsnameValue(AOsnameIrixOsnameValue node);
+    void caseAOsnameLinuxOsnameValue(AOsnameLinuxOsnameValue node);
+    void caseAOsnameMacosOsnameValue(AOsnameMacosOsnameValue node);
+    void caseAOsnameNetbsdOsnameValue(AOsnameNetbsdOsnameValue node);
+    void caseAOsnameNetwareOsnameValue(AOsnameNetwareOsnameValue node);
+    void caseAOsnameOpenbsdOsnameValue(AOsnameOpenbsdOsnameValue node);
+    void caseAOsnameOs2OsnameValue(AOsnameOs2OsnameValue node);
+    void caseAOsnameQnxOsnameValue(AOsnameQnxOsnameValue node);
+    void caseAOsnameSolarisOsnameValue(AOsnameSolarisOsnameValue node);
+    void caseAOsnameSunosOsnameValue(AOsnameSunosOsnameValue node);
+    void caseAOsnameVxworksOsnameValue(AOsnameVxworksOsnameValue node);
+    void caseAOsnameWindows95OsnameValue(AOsnameWindows95OsnameValue node);
+    void caseAOsnameWindows98OsnameValue(AOsnameWindows98OsnameValue node);
+    void caseAOsnameWindowsntOsnameValue(AOsnameWindowsntOsnameValue node);
+    void caseAOsnameWindowsceOsnameValue(AOsnameWindowsceOsnameValue node);
+    void caseAOsnameWindows2000OsnameValue(AOsnameWindows2000OsnameValue node);
+    void caseAOsnameWindows2003OsnameValue(AOsnameWindows2003OsnameValue node);
+    void caseAOsnameWindowsxpOsnameValue(AOsnameWindowsxpOsnameValue node);
+    void caseAOsnameWindowsvistaOsnameValue(AOsnameWindowsvistaOsnameValue node);
+    void caseALanguageValue(ALanguageValue node);
+    void caseAEqualsBooleanComparator(AEqualsBooleanComparator node);
+    void caseAGreaterEqualsBooleanComparator(AGreaterEqualsBooleanComparator node);
+    void caseALesserEqualsBooleanComparator(ALesserEqualsBooleanComparator node);
+    void caseAGreaterBooleanComparator(AGreaterBooleanComparator node);
+    void caseALessBooleanComparator(ALessBooleanComparator node);
+    void caseANotEqualsBooleanComparator(ANotEqualsBooleanComparator node);
+    void caseASelectionFilterValue(ASelectionFilterValue node);
+    void caseAVisibilityPrivateVisibilityValue(AVisibilityPrivateVisibilityValue node);
+    void caseAVisibilityReexportVisibilityValue(AVisibilityReexportVisibilityValue node);
+    void caseAResolutionMandatoryResolutionValue(AResolutionMandatoryResolutionValue node);
+    void caseAResolutionOptionalResolutionValue(AResolutionOptionalResolutionValue node);
+    void caseAExtensionFrameworkExtensionValue(AExtensionFrameworkExtensionValue node);
+    void caseAExtensionBootclasspathExtensionValue(AExtensionBootclasspathExtensionValue node);
+    void caseATrueBoolean(ATrueBoolean node);
+    void caseAFalseBoolean(AFalseBoolean node);
+    void caseAPathUnquotedPath(APathUnquotedPath node);
+    void caseAPathQuotedPath(APathQuotedPath node);
+    void caseAPathSepOnlyPathUnquoted(APathSepOnlyPathUnquoted node);
+    void caseAPathSeptelementPathUnquoted(APathSeptelementPathUnquoted node);
+    void caseAPathElement(APathElement node);
+    void caseAPathSuffix(APathSuffix node);
+    void caseAPathQuoted(APathQuoted node);
+    void caseAHttpUnquotedUrl(AHttpUnquotedUrl node);
+    void caseAFileUnquotedUrl(AFileUnquotedUrl node);
+    void caseAFtpUnquotedUrl(AFtpUnquotedUrl node);
+    void caseAQuotedUrl(AQuotedUrl node);
+    void caseAUniqueNameWildcard(AUniqueNameWildcard node);
+    void caseAIdentifierUniqueNameWildcardSuffix(AIdentifierUniqueNameWildcardSuffix node);
+    void caseAOptionalUniqueNameWildcardSuffix(AOptionalUniqueNameWildcardSuffix node);
+    void caseAIdentifierUniqueNameWildcardCommons(AIdentifierUniqueNameWildcardCommons node);
+    void caseAOptionalUniqueNameWildcardCommons(AOptionalUniqueNameWildcardCommons node);
+    void caseAPackageNameWildcard(APackageNameWildcard node);
+    void caseAPathTarget(APathTarget node);
+    void caseADotTarget(ADotTarget node);
+    void caseAUnquotedUrlValue(AUnquotedUrlValue node);
+    void caseAQuotedUrlValue(AQuotedUrlValue node);
+    void caseAParameter(AParameter node);
+    void caseAAttribute(AAttribute node);
+    void caseAUnquotedStringStringEntryValue(AUnquotedStringStringEntryValue node);
+    void caseAQuotedStringStringEntryValue(AQuotedStringStringEntryValue node);
+    void caseAGoodPackageNamePackageName(AGoodPackageNamePackageName node);
+    void caseAMustNotAppearsPackageName(AMustNotAppearsPackageName node);
+    void caseAUniqueName(AUniqueName node);
+    void caseAUniqueNameSuffix(AUniqueNameSuffix node);
+
+    void caseTQuote(TQuote node);
+    void caseTDefinition(TDefinition node);
+    void caseTLeftBracket(TLeftBracket node);
+    void caseTRightBracket(TRightBracket node);
+    void caseTDotdot(TDotdot node);
+    void caseTDoubleAntiSlash(TDoubleAntiSlash node);
+    void caseTProtectedString(TProtectedString node);
+    void caseTPathSep(TPathSep node);
+    void caseTSemicolon(TSemicolon node);
+    void caseTComma(TComma node);
+    void caseTOptional(TOptional node);
+    void caseTDot(TDot node);
+    void caseTEquals(TEquals node);
+    void caseTGreaterEquals(TGreaterEquals node);
+    void caseTLesserEquals(TLesserEquals node);
+    void caseTGreater(TGreater node);
+    void caseTLess(TLess node);
+    void caseTNotEquals(TNotEquals node);
+    void caseTUrlHttp(TUrlHttp node);
+    void caseTUrlFtp(TUrlFtp node);
+    void caseTUrlFile(TUrlFile node);
+    void caseTBundleActivationpolicy(TBundleActivationpolicy node);
+    void caseTBundleActivator(TBundleActivator node);
+    void caseTBundleCategory(TBundleCategory node);
+    void caseTBundleClasspath(TBundleClasspath node);
+    void caseTBundleContactaddress(TBundleContactaddress node);
+    void caseTBundleCopyright(TBundleCopyright node);
+    void caseTBundleDescription(TBundleDescription node);
+    void caseTBundleDocurl(TBundleDocurl node);
+    void caseTBundleLocalization(TBundleLocalization node);
+    void caseTBundleManifestversion(TBundleManifestversion node);
+    void caseTBundleName(TBundleName node);
+    void caseTBundleNativecode(TBundleNativecode node);
+    void caseTBundleRequiredexecutionenvironment(TBundleRequiredexecutionenvironment node);
+    void caseTBundleSymbolicname(TBundleSymbolicname node);
+    void caseTBundleUpdatelocation(TBundleUpdatelocation node);
+    void caseTBundleVendor(TBundleVendor node);
+    void caseTBundleVersion(TBundleVersion node);
+    void caseTDynamicimportPackage(TDynamicimportPackage node);
+    void caseTExportPackage(TExportPackage node);
+    void caseTExportService(TExportService node);
+    void caseTFragmentHost(TFragmentHost node);
+    void caseTImportPackage(TImportPackage node);
+    void caseTImportService(TImportService node);
+    void caseTRequireBundle(TRequireBundle node);
+    void caseTEntryDigest(TEntryDigest node);
+    void caseTEntry(TEntry node);
+    void caseTLazy(TLazy node);
+    void caseTSingleton(TSingleton node);
+    void caseTFragmentAttachment(TFragmentAttachment node);
+    void caseTOsname(TOsname node);
+    void caseTOsversion(TOsversion node);
+    void caseTProcessor(TProcessor node);
+    void caseTLanguage(TLanguage node);
+    void caseTSelectionFilter(TSelectionFilter node);
+    void caseTVisibility(TVisibility node);
+    void caseTResolution(TResolution node);
+    void caseTUses(TUses node);
+    void caseTExclude(TExclude node);
+    void caseTInclude(TInclude node);
+    void caseTMandatory(TMandatory node);
+    void caseTExtension(TExtension node);
+    void caseTAttributeEntry(TAttributeEntry node);
+    void caseTProcessor68k(TProcessor68k node);
+    void caseTProcessorArm(TProcessorArm node);
+    void caseTProcessorAlpha(TProcessorAlpha node);
+    void caseTProcessorIgnite(TProcessorIgnite node);
+    void caseTProcessorMips(TProcessorMips node);
+    void caseTProcessorParisc(TProcessorParisc node);
+    void caseTProcessorPowerpc(TProcessorPowerpc node);
+    void caseTProcessorSh4(TProcessorSh4 node);
+    void caseTProcessorSparc(TProcessorSparc node);
+    void caseTProcessorS390(TProcessorS390 node);
+    void caseTProcessorS390x(TProcessorS390x node);
+    void caseTProcessorV850e(TProcessorV850e node);
+    void caseTProcessorX86(TProcessorX86 node);
+    void caseTProcessorX8664(TProcessorX8664 node);
+    void caseTOsnameAix(TOsnameAix node);
+    void caseTOsnameDigitalunix(TOsnameDigitalunix node);
+    void caseTOsnameEmbos(TOsnameEmbos node);
+    void caseTOsnameEpoc32(TOsnameEpoc32 node);
+    void caseTOsnameFreebsd(TOsnameFreebsd node);
+    void caseTOsnameHpux(TOsnameHpux node);
+    void caseTOsnameIrix(TOsnameIrix node);
+    void caseTOsnameLinux(TOsnameLinux node);
+    void caseTOsnameMacos(TOsnameMacos node);
+    void caseTOsnameNetbsd(TOsnameNetbsd node);
+    void caseTOsnameNetware(TOsnameNetware node);
+    void caseTOsnameOpenbsd(TOsnameOpenbsd node);
+    void caseTOsnameOs2(TOsnameOs2 node);
+    void caseTOsnameQnx(TOsnameQnx node);
+    void caseTOsnameSolaris(TOsnameSolaris node);
+    void caseTOsnameSunos(TOsnameSunos node);
+    void caseTOsnameVxworks(TOsnameVxworks node);
+    void caseTOsnameWindows95(TOsnameWindows95 node);
+    void caseTOsnameWindows98(TOsnameWindows98 node);
+    void caseTOsnameWindowsnt(TOsnameWindowsnt node);
+    void caseTOsnameWindowsce(TOsnameWindowsce node);
+    void caseTOsnameWindows2000(TOsnameWindows2000 node);
+    void caseTOsnameWindows2003(TOsnameWindows2003 node);
+    void caseTOsnameWindowsxp(TOsnameWindowsxp node);
+    void caseTOsnameWindowsvista(TOsnameWindowsvista node);
+    void caseTVisibilityPrivate(TVisibilityPrivate node);
+    void caseTVisibilityReexport(TVisibilityReexport node);
+    void caseTResolutionMandatory(TResolutionMandatory node);
+    void caseTResolutionOptional(TResolutionOptional node);
+    void caseTExtensionFramework(TExtensionFramework node);
+    void caseTExtensionBootclasspath(TExtensionBootclasspath node);
+    void caseTAlways(TAlways node);
+    void caseTNever(TNever node);
+    void caseTResolveTime(TResolveTime node);
+    void caseTTrue(TTrue node);
+    void caseTFalse(TFalse node);
+    void caseTManifestversion(TManifestversion node);
+    void caseTEolblank(TEolblank node);
+    void caseTEol(TEol node);
+    void caseTIdentifier(TIdentifier node);
+    void caseTIdentifierRequiredProfile(TIdentifierRequiredProfile node);
+    void caseTIdentifierRequiredConfiguration(TIdentifierRequiredConfiguration node);
+    void caseTDigestValue(TDigestValue node);
+    void caseTUnquotedString(TUnquotedString node);
+    void caseTQuotedString(TQuotedString node);
+    void caseTSimpleStringValue(TSimpleStringValue node);
+    void caseTAllString(TAllString node);
+    void caseTNumber(TNumber node);
+    void caseTQualifier(TQualifier node);
+    void caseEOF(EOF node);
 }

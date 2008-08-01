@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Package.java,v 1.2 2008-07-31 13:43:54 edaubert Exp $
+ * $Id: Package.java,v 1.3 2008-08-01 09:44:37 edaubert Exp $
  */
 package jar;
 
@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link jar.Package#getClasses <em>Classes</em>}</li>
  *   <li>{@link jar.Package#getSubPackages <em>Sub Packages</em>}</li>
- *   <li>{@link jar.Package#isBundleClassPath <em>Bundle Class Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,31 +62,6 @@ public interface Package extends BundleEntry {
 	 * @generated
 	 */
 	EList<Package> getSubPackages();
-
-	/**
-	 * Returns the value of the '<em><b>Bundle Class Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Bundle Class Path</em>' attribute isn't
-	 * clear, there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Bundle Class Path</em>' attribute.
-	 * @see #setBundleClassPath(boolean)
-	 * @see jar.JarPackage#getPackage_BundleClassPath()
-	 * @model dataType="manifest.boolean" required="true"
-	 * @generated
-	 */
-	boolean isBundleClassPath();
-
-	/**
-	 * Sets the value of the '{@link jar.Package#isBundleClassPath <em>Bundle Class Path</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Bundle Class Path</em>' attribute.
-	 * @see #isBundleClassPath()
-	 * @generated
-	 */
-	void setBundleClassPath(boolean value);
 
 	void addClass(Class clazz);
 

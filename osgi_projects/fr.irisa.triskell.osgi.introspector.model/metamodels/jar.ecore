@@ -8,14 +8,15 @@
         eType="ecore:EDataType manifest.ecore#//String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType manifest.ecore#//String"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SystemEntry" abstract="true" eSuperTypes="#//BundleEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SystemEntry" abstract="true" eSuperTypes="#//BundleEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleClassPath" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//boolean"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//BundleEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
         eType="#//Class" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subPackages" upperBound="-1"
         eType="#//Package" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleClassPath" lowerBound="1"
-        eType="ecore:EDataType manifest.ecore#//boolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//BundleEntry"/>
   <eClassifiers xsi:type="ecore:EClass" name="Folder" eSuperTypes="#//SystemEntry">

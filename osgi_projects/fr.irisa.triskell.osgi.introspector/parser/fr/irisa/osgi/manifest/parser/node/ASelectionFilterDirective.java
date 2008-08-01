@@ -2,115 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASelectionFilterDirective extends PSelectionFilterDirective {
-	private TSelectionFilter _selectionFilter_;
-	private PSelectionFilterValue _selectionFilterValue_;
+public final class ASelectionFilterDirective extends PSelectionFilterDirective
+{
+    private TSelectionFilter _selectionFilter_;
+    private PSelectionFilterValue _selectionFilterValue_;
 
-	public ASelectionFilterDirective() {
-		// Constructor
-	}
+    public ASelectionFilterDirective()
+    {
+        // Constructor
+    }
 
-	public ASelectionFilterDirective(@SuppressWarnings("hiding")
-	TSelectionFilter _selectionFilter_, @SuppressWarnings("hiding")
-	PSelectionFilterValue _selectionFilterValue_) {
-		// Constructor
-		setSelectionFilter(_selectionFilter_);
+    public ASelectionFilterDirective(
+        @SuppressWarnings("hiding") TSelectionFilter _selectionFilter_,
+        @SuppressWarnings("hiding") PSelectionFilterValue _selectionFilterValue_)
+    {
+        // Constructor
+        setSelectionFilter(_selectionFilter_);
 
-		setSelectionFilterValue(_selectionFilterValue_);
+        setSelectionFilterValue(_selectionFilterValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ASelectionFilterDirective(cloneNode(this._selectionFilter_),
-				cloneNode(this._selectionFilterValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ASelectionFilterDirective(
+            cloneNode(this._selectionFilter_),
+            cloneNode(this._selectionFilterValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseASelectionFilterDirective(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseASelectionFilterDirective(this);
+    }
 
-	public TSelectionFilter getSelectionFilter() {
-		return this._selectionFilter_;
-	}
+    public TSelectionFilter getSelectionFilter()
+    {
+        return this._selectionFilter_;
+    }
 
-	public void setSelectionFilter(TSelectionFilter node) {
-		if (this._selectionFilter_ != null) {
-			this._selectionFilter_.parent(null);
-		}
+    public void setSelectionFilter(TSelectionFilter node)
+    {
+        if(this._selectionFilter_ != null)
+        {
+            this._selectionFilter_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._selectionFilter_ = node;
-	}
+        this._selectionFilter_ = node;
+    }
 
-	public PSelectionFilterValue getSelectionFilterValue() {
-		return this._selectionFilterValue_;
-	}
+    public PSelectionFilterValue getSelectionFilterValue()
+    {
+        return this._selectionFilterValue_;
+    }
 
-	public void setSelectionFilterValue(PSelectionFilterValue node) {
-		if (this._selectionFilterValue_ != null) {
-			this._selectionFilterValue_.parent(null);
-		}
+    public void setSelectionFilterValue(PSelectionFilterValue node)
+    {
+        if(this._selectionFilterValue_ != null)
+        {
+            this._selectionFilterValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._selectionFilterValue_ = node;
-	}
+        this._selectionFilterValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._selectionFilter_)
-				+ toString(this._selectionFilterValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._selectionFilter_)
+            + toString(this._selectionFilterValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._selectionFilter_ == child) {
-			this._selectionFilter_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._selectionFilter_ == child)
+        {
+            this._selectionFilter_ = null;
+            return;
+        }
 
-		if (this._selectionFilterValue_ == child) {
-			this._selectionFilterValue_ = null;
-			return;
-		}
+        if(this._selectionFilterValue_ == child)
+        {
+            this._selectionFilterValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._selectionFilter_ == oldChild) {
-			setSelectionFilter((TSelectionFilter) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._selectionFilter_ == oldChild)
+        {
+            setSelectionFilter((TSelectionFilter) newChild);
+            return;
+        }
 
-		if (this._selectionFilterValue_ == oldChild) {
-			setSelectionFilterValue((PSelectionFilterValue) newChild);
-			return;
-		}
+        if(this._selectionFilterValue_ == oldChild)
+        {
+            setSelectionFilterValue((PSelectionFilterValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

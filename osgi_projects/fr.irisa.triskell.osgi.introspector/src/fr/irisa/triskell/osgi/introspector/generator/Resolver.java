@@ -7,6 +7,7 @@ import manifest.BundleActivator;
 import manifest.ExportPackage;
 import manifest.ImportPackage;
 import manifest.ImportService;
+import manifest.RequireBundle;
 import manifest.Service;
 import option.ExcludeClasses;
 import option.ExcludePackages;
@@ -14,6 +15,7 @@ import option.IncludeClasses;
 import option.IncludePackages;
 import option.Uses;
 import framework.Bundle;
+import framework.Framework;
 
 public interface Resolver {
 
@@ -27,9 +29,9 @@ public interface Resolver {
 
 	public void resolveExportPackageUses(Map<Uses, List<String>> uses, Map<Uses, Bundle> bundles);
 
-	public void resolveImportPackage(Map<ImportPackage, List<String>> importPackages);
+	public void resolveImportPackage(Map<ImportPackage, List<String>> importPackages, Map<ImportPackage, Bundle> bundles);
 
-	public void resolveImportService(Map<ImportService, String> importServices);
+	public void resolveImportService(Map<ImportService, String> importServices, Map<ImportService, Bundle> bundles, List<Service> servicesAvailable);
 
 	public void resolveActivator(Map<BundleActivator, Bundle> bundles, Map<BundleActivator, String> activators);
 
@@ -38,6 +40,8 @@ public interface Resolver {
 	public void resolveActivationPolicyExclude(Map<ExcludePackages, List<String>> excludes, Map<ExcludePackages, Bundle> bundles);
 	
 	public void resolveActivationPolicyInclude(Map<IncludePackages, List<String>> includes, Map<IncludePackages, Bundle> bundles);
+	
+	public void resolveRequireBundle(Framework framework, Map<RequireBundle, String> requireBundles, Map<RequireBundle, Bundle> bundles);
 	
 	public Map<Bundle, String> getLog();
 	

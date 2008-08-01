@@ -2,162 +2,186 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import java.util.*;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleCategoryEntry extends PBundleCategoryEntry {
-	private TBundleCategory _bundleCategory_;
-	private PBundleCategoryEntryValue _bundleCategoryEntryValue_;
-	private final LinkedList<PParameter> _parameter_ = new LinkedList<PParameter>();
+public final class ABundleCategoryEntry extends PBundleCategoryEntry
+{
+    private TBundleCategory _bundleCategory_;
+    private PBundleCategoryEntryValue _bundleCategoryEntryValue_;
+    private final LinkedList<PParameter> _parameter_ = new LinkedList<PParameter>();
 
-	public ABundleCategoryEntry() {
-		// Constructor
-	}
+    public ABundleCategoryEntry()
+    {
+        // Constructor
+    }
 
-	public ABundleCategoryEntry(@SuppressWarnings("hiding")
-	TBundleCategory _bundleCategory_, @SuppressWarnings("hiding")
-	PBundleCategoryEntryValue _bundleCategoryEntryValue_,
-			@SuppressWarnings("hiding")
-			List<PParameter> _parameter_) {
-		// Constructor
-		setBundleCategory(_bundleCategory_);
+    public ABundleCategoryEntry(
+        @SuppressWarnings("hiding") TBundleCategory _bundleCategory_,
+        @SuppressWarnings("hiding") PBundleCategoryEntryValue _bundleCategoryEntryValue_,
+        @SuppressWarnings("hiding") List<PParameter> _parameter_)
+    {
+        // Constructor
+        setBundleCategory(_bundleCategory_);
 
-		setBundleCategoryEntryValue(_bundleCategoryEntryValue_);
+        setBundleCategoryEntryValue(_bundleCategoryEntryValue_);
 
-		setParameter(_parameter_);
+        setParameter(_parameter_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleCategoryEntry(cloneNode(this._bundleCategory_),
-				cloneNode(this._bundleCategoryEntryValue_),
-				cloneList(this._parameter_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleCategoryEntry(
+            cloneNode(this._bundleCategory_),
+            cloneNode(this._bundleCategoryEntryValue_),
+            cloneList(this._parameter_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleCategoryEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleCategoryEntry(this);
+    }
 
-	public TBundleCategory getBundleCategory() {
-		return this._bundleCategory_;
-	}
+    public TBundleCategory getBundleCategory()
+    {
+        return this._bundleCategory_;
+    }
 
-	public void setBundleCategory(TBundleCategory node) {
-		if (this._bundleCategory_ != null) {
-			this._bundleCategory_.parent(null);
-		}
+    public void setBundleCategory(TBundleCategory node)
+    {
+        if(this._bundleCategory_ != null)
+        {
+            this._bundleCategory_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleCategory_ = node;
-	}
+        this._bundleCategory_ = node;
+    }
 
-	public PBundleCategoryEntryValue getBundleCategoryEntryValue() {
-		return this._bundleCategoryEntryValue_;
-	}
+    public PBundleCategoryEntryValue getBundleCategoryEntryValue()
+    {
+        return this._bundleCategoryEntryValue_;
+    }
 
-	public void setBundleCategoryEntryValue(PBundleCategoryEntryValue node) {
-		if (this._bundleCategoryEntryValue_ != null) {
-			this._bundleCategoryEntryValue_.parent(null);
-		}
+    public void setBundleCategoryEntryValue(PBundleCategoryEntryValue node)
+    {
+        if(this._bundleCategoryEntryValue_ != null)
+        {
+            this._bundleCategoryEntryValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleCategoryEntryValue_ = node;
-	}
+        this._bundleCategoryEntryValue_ = node;
+    }
 
-	public LinkedList<PParameter> getParameter() {
-		return this._parameter_;
-	}
+    public LinkedList<PParameter> getParameter()
+    {
+        return this._parameter_;
+    }
 
-	public void setParameter(List<PParameter> list) {
-		this._parameter_.clear();
-		this._parameter_.addAll(list);
-		for (PParameter e : list) {
-			if (e.parent() != null) {
-				e.parent().removeChild(e);
-			}
+    public void setParameter(List<PParameter> list)
+    {
+        this._parameter_.clear();
+        this._parameter_.addAll(list);
+        for(PParameter e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
 
-			e.parent(this);
-		}
-	}
+            e.parent(this);
+        }
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleCategory_)
-				+ toString(this._bundleCategoryEntryValue_)
-				+ toString(this._parameter_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleCategory_)
+            + toString(this._bundleCategoryEntryValue_)
+            + toString(this._parameter_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleCategory_ == child) {
-			this._bundleCategory_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleCategory_ == child)
+        {
+            this._bundleCategory_ = null;
+            return;
+        }
 
-		if (this._bundleCategoryEntryValue_ == child) {
-			this._bundleCategoryEntryValue_ = null;
-			return;
-		}
+        if(this._bundleCategoryEntryValue_ == child)
+        {
+            this._bundleCategoryEntryValue_ = null;
+            return;
+        }
 
-		if (this._parameter_.remove(child)) {
-			return;
-		}
+        if(this._parameter_.remove(child))
+        {
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleCategory_ == oldChild) {
-			setBundleCategory((TBundleCategory) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleCategory_ == oldChild)
+        {
+            setBundleCategory((TBundleCategory) newChild);
+            return;
+        }
 
-		if (this._bundleCategoryEntryValue_ == oldChild) {
-			setBundleCategoryEntryValue((PBundleCategoryEntryValue) newChild);
-			return;
-		}
+        if(this._bundleCategoryEntryValue_ == oldChild)
+        {
+            setBundleCategoryEntryValue((PBundleCategoryEntryValue) newChild);
+            return;
+        }
 
-		for (ListIterator<PParameter> i = this._parameter_.listIterator(); i
-				.hasNext();) {
-			if (i.next() == oldChild) {
-				if (newChild != null) {
-					i.set((PParameter) newChild);
-					newChild.parent(this);
-					oldChild.parent(null);
-					return;
-				}
+        for(ListIterator<PParameter> i = this._parameter_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PParameter) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-				i.remove();
-				oldChild.parent(null);
-				return;
-			}
-		}
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

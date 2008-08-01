@@ -2,32 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TBundleContactaddress extends Token {
-	public TBundleContactaddress() {
-		super.setText("Bundle-ContactAddress: ");
-	}
+public final class TBundleContactaddress extends Token
+{
+    public TBundleContactaddress(String text)
+    {
+        setText(text);
+    }
 
-	public TBundleContactaddress(int line, int pos) {
-		super.setText("Bundle-ContactAddress: ");
-		setLine(line);
-		setPos(pos);
-	}
+    public TBundleContactaddress(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TBundleContactaddress(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TBundleContactaddress(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTBundleContactaddress(this);
-	}
-
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TBundleContactaddress text.");
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTBundleContactaddress(this);
+    }
 }

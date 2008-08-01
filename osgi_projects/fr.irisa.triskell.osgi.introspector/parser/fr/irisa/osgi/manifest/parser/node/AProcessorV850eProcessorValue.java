@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProcessorV850eProcessorValue extends PProcessorValue {
-	private TProcessorV850e _processorV850e_;
+public final class AProcessorV850eProcessorValue extends PProcessorValue
+{
+    private TProcessorV850e _processorV850e_;
 
-	public AProcessorV850eProcessorValue() {
-		// Constructor
-	}
+    public AProcessorV850eProcessorValue()
+    {
+        // Constructor
+    }
 
-	public AProcessorV850eProcessorValue(@SuppressWarnings("hiding")
-	TProcessorV850e _processorV850e_) {
-		// Constructor
-		setProcessorV850e(_processorV850e_);
+    public AProcessorV850eProcessorValue(
+        @SuppressWarnings("hiding") TProcessorV850e _processorV850e_)
+    {
+        // Constructor
+        setProcessorV850e(_processorV850e_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AProcessorV850eProcessorValue(
-				cloneNode(this._processorV850e_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AProcessorV850eProcessorValue(
+            cloneNode(this._processorV850e_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAProcessorV850eProcessorValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAProcessorV850eProcessorValue(this);
+    }
 
-	public TProcessorV850e getProcessorV850e() {
-		return this._processorV850e_;
-	}
+    public TProcessorV850e getProcessorV850e()
+    {
+        return this._processorV850e_;
+    }
 
-	public void setProcessorV850e(TProcessorV850e node) {
-		if (this._processorV850e_ != null) {
-			this._processorV850e_.parent(null);
-		}
+    public void setProcessorV850e(TProcessorV850e node)
+    {
+        if(this._processorV850e_ != null)
+        {
+            this._processorV850e_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._processorV850e_ = node;
-	}
+        this._processorV850e_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._processorV850e_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._processorV850e_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._processorV850e_ == child) {
-			this._processorV850e_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._processorV850e_ == child)
+        {
+            this._processorV850e_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._processorV850e_ == oldChild) {
-			setProcessorV850e((TProcessorV850e) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._processorV850e_ == oldChild)
+        {
+            setProcessorV850e((TProcessorV850e) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

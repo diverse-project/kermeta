@@ -2,163 +2,186 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import java.util.*;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleNativecodeEntryValue extends
-		PBundleNativecodeEntryValue {
-	private PNativecodeEntry _nativecodeEntry_;
-	private final LinkedList<PNativecodeValue> _nativecodeValue_ = new LinkedList<PNativecodeValue>();
-	private PNativecodeOptional _nativecodeOptional_;
+public final class ABundleNativecodeEntryValue extends PBundleNativecodeEntryValue
+{
+    private PNativecodeEntry _nativecodeEntry_;
+    private final LinkedList<PNativecodeValue> _nativecodeValue_ = new LinkedList<PNativecodeValue>();
+    private PNativecodeOptional _nativecodeOptional_;
 
-	public ABundleNativecodeEntryValue() {
-		// Constructor
-	}
+    public ABundleNativecodeEntryValue()
+    {
+        // Constructor
+    }
 
-	public ABundleNativecodeEntryValue(@SuppressWarnings("hiding")
-	PNativecodeEntry _nativecodeEntry_, @SuppressWarnings("hiding")
-	List<PNativecodeValue> _nativecodeValue_, @SuppressWarnings("hiding")
-	PNativecodeOptional _nativecodeOptional_) {
-		// Constructor
-		setNativecodeEntry(_nativecodeEntry_);
+    public ABundleNativecodeEntryValue(
+        @SuppressWarnings("hiding") PNativecodeEntry _nativecodeEntry_,
+        @SuppressWarnings("hiding") List<PNativecodeValue> _nativecodeValue_,
+        @SuppressWarnings("hiding") PNativecodeOptional _nativecodeOptional_)
+    {
+        // Constructor
+        setNativecodeEntry(_nativecodeEntry_);
 
-		setNativecodeValue(_nativecodeValue_);
+        setNativecodeValue(_nativecodeValue_);
 
-		setNativecodeOptional(_nativecodeOptional_);
+        setNativecodeOptional(_nativecodeOptional_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleNativecodeEntryValue(
-				cloneNode(this._nativecodeEntry_),
-				cloneList(this._nativecodeValue_),
-				cloneNode(this._nativecodeOptional_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleNativecodeEntryValue(
+            cloneNode(this._nativecodeEntry_),
+            cloneList(this._nativecodeValue_),
+            cloneNode(this._nativecodeOptional_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleNativecodeEntryValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleNativecodeEntryValue(this);
+    }
 
-	public PNativecodeEntry getNativecodeEntry() {
-		return this._nativecodeEntry_;
-	}
+    public PNativecodeEntry getNativecodeEntry()
+    {
+        return this._nativecodeEntry_;
+    }
 
-	public void setNativecodeEntry(PNativecodeEntry node) {
-		if (this._nativecodeEntry_ != null) {
-			this._nativecodeEntry_.parent(null);
-		}
+    public void setNativecodeEntry(PNativecodeEntry node)
+    {
+        if(this._nativecodeEntry_ != null)
+        {
+            this._nativecodeEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._nativecodeEntry_ = node;
-	}
+        this._nativecodeEntry_ = node;
+    }
 
-	public LinkedList<PNativecodeValue> getNativecodeValue() {
-		return this._nativecodeValue_;
-	}
+    public LinkedList<PNativecodeValue> getNativecodeValue()
+    {
+        return this._nativecodeValue_;
+    }
 
-	public void setNativecodeValue(List<PNativecodeValue> list) {
-		this._nativecodeValue_.clear();
-		this._nativecodeValue_.addAll(list);
-		for (PNativecodeValue e : list) {
-			if (e.parent() != null) {
-				e.parent().removeChild(e);
-			}
+    public void setNativecodeValue(List<PNativecodeValue> list)
+    {
+        this._nativecodeValue_.clear();
+        this._nativecodeValue_.addAll(list);
+        for(PNativecodeValue e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
 
-			e.parent(this);
-		}
-	}
+            e.parent(this);
+        }
+    }
 
-	public PNativecodeOptional getNativecodeOptional() {
-		return this._nativecodeOptional_;
-	}
+    public PNativecodeOptional getNativecodeOptional()
+    {
+        return this._nativecodeOptional_;
+    }
 
-	public void setNativecodeOptional(PNativecodeOptional node) {
-		if (this._nativecodeOptional_ != null) {
-			this._nativecodeOptional_.parent(null);
-		}
+    public void setNativecodeOptional(PNativecodeOptional node)
+    {
+        if(this._nativecodeOptional_ != null)
+        {
+            this._nativecodeOptional_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._nativecodeOptional_ = node;
-	}
+        this._nativecodeOptional_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._nativecodeEntry_)
-				+ toString(this._nativecodeValue_)
-				+ toString(this._nativecodeOptional_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._nativecodeEntry_)
+            + toString(this._nativecodeValue_)
+            + toString(this._nativecodeOptional_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._nativecodeEntry_ == child) {
-			this._nativecodeEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._nativecodeEntry_ == child)
+        {
+            this._nativecodeEntry_ = null;
+            return;
+        }
 
-		if (this._nativecodeValue_.remove(child)) {
-			return;
-		}
+        if(this._nativecodeValue_.remove(child))
+        {
+            return;
+        }
 
-		if (this._nativecodeOptional_ == child) {
-			this._nativecodeOptional_ = null;
-			return;
-		}
+        if(this._nativecodeOptional_ == child)
+        {
+            this._nativecodeOptional_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._nativecodeEntry_ == oldChild) {
-			setNativecodeEntry((PNativecodeEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._nativecodeEntry_ == oldChild)
+        {
+            setNativecodeEntry((PNativecodeEntry) newChild);
+            return;
+        }
 
-		for (ListIterator<PNativecodeValue> i = this._nativecodeValue_
-				.listIterator(); i.hasNext();) {
-			if (i.next() == oldChild) {
-				if (newChild != null) {
-					i.set((PNativecodeValue) newChild);
-					newChild.parent(this);
-					oldChild.parent(null);
-					return;
-				}
+        for(ListIterator<PNativecodeValue> i = this._nativecodeValue_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PNativecodeValue) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-				i.remove();
-				oldChild.parent(null);
-				return;
-			}
-		}
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
 
-		if (this._nativecodeOptional_ == oldChild) {
-			setNativecodeOptional((PNativecodeOptional) newChild);
-			return;
-		}
+        if(this._nativecodeOptional_ == oldChild)
+        {
+            setNativecodeOptional((PNativecodeOptional) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

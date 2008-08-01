@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TIdentifierRequiredProfile extends Token {
-	public TIdentifierRequiredProfile(String text) {
-		setText(text);
-	}
+public final class TIdentifierRequiredProfile extends Token
+{
+    public TIdentifierRequiredProfile(String text)
+    {
+        setText(text);
+    }
 
-	public TIdentifierRequiredProfile(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TIdentifierRequiredProfile(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TIdentifierRequiredProfile(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TIdentifierRequiredProfile(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTIdentifierRequiredProfile(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTIdentifierRequiredProfile(this);
+    }
 }

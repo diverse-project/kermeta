@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class APathQuotedPath extends PPath {
-	private PPathQuoted _pathQuoted_;
+public final class APathQuotedPath extends PPath
+{
+    private PPathQuoted _pathQuoted_;
 
-	public APathQuotedPath() {
-		// Constructor
-	}
+    public APathQuotedPath()
+    {
+        // Constructor
+    }
 
-	public APathQuotedPath(@SuppressWarnings("hiding")
-	PPathQuoted _pathQuoted_) {
-		// Constructor
-		setPathQuoted(_pathQuoted_);
+    public APathQuotedPath(
+        @SuppressWarnings("hiding") PPathQuoted _pathQuoted_)
+    {
+        // Constructor
+        setPathQuoted(_pathQuoted_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new APathQuotedPath(cloneNode(this._pathQuoted_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new APathQuotedPath(
+            cloneNode(this._pathQuoted_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAPathQuotedPath(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAPathQuotedPath(this);
+    }
 
-	public PPathQuoted getPathQuoted() {
-		return this._pathQuoted_;
-	}
+    public PPathQuoted getPathQuoted()
+    {
+        return this._pathQuoted_;
+    }
 
-	public void setPathQuoted(PPathQuoted node) {
-		if (this._pathQuoted_ != null) {
-			this._pathQuoted_.parent(null);
-		}
+    public void setPathQuoted(PPathQuoted node)
+    {
+        if(this._pathQuoted_ != null)
+        {
+            this._pathQuoted_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._pathQuoted_ = node;
-	}
+        this._pathQuoted_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._pathQuoted_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._pathQuoted_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._pathQuoted_ == child) {
-			this._pathQuoted_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._pathQuoted_ == child)
+        {
+            this._pathQuoted_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._pathQuoted_ == oldChild) {
-			setPathQuoted((PPathQuoted) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._pathQuoted_ == oldChild)
+        {
+            setPathQuoted((PPathQuoted) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

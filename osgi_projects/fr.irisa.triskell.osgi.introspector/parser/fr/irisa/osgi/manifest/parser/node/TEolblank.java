@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TEolblank extends Token {
-	public TEolblank(String text) {
-		setText(text);
-	}
+public final class TEolblank extends Token
+{
+    public TEolblank(String text)
+    {
+        setText(text);
+    }
 
-	public TEolblank(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TEolblank(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TEolblank(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TEolblank(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTEolblank(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTEolblank(this);
+    }
 }

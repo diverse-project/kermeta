@@ -2,81 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsversionDirectiveNativecodeDirective extends
-		PNativecodeDirective {
-	private POsversionDirective _osversionDirective_;
+public final class AOsversionDirectiveNativecodeDirective extends PNativecodeDirective
+{
+    private POsversionDirective _osversionDirective_;
 
-	public AOsversionDirectiveNativecodeDirective() {
-		// Constructor
-	}
+    public AOsversionDirectiveNativecodeDirective()
+    {
+        // Constructor
+    }
 
-	public AOsversionDirectiveNativecodeDirective(@SuppressWarnings("hiding")
-	POsversionDirective _osversionDirective_) {
-		// Constructor
-		setOsversionDirective(_osversionDirective_);
+    public AOsversionDirectiveNativecodeDirective(
+        @SuppressWarnings("hiding") POsversionDirective _osversionDirective_)
+    {
+        // Constructor
+        setOsversionDirective(_osversionDirective_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsversionDirectiveNativecodeDirective(
-				cloneNode(this._osversionDirective_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsversionDirectiveNativecodeDirective(
+            cloneNode(this._osversionDirective_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsversionDirectiveNativecodeDirective(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsversionDirectiveNativecodeDirective(this);
+    }
 
-	public POsversionDirective getOsversionDirective() {
-		return this._osversionDirective_;
-	}
+    public POsversionDirective getOsversionDirective()
+    {
+        return this._osversionDirective_;
+    }
 
-	public void setOsversionDirective(POsversionDirective node) {
-		if (this._osversionDirective_ != null) {
-			this._osversionDirective_.parent(null);
-		}
+    public void setOsversionDirective(POsversionDirective node)
+    {
+        if(this._osversionDirective_ != null)
+        {
+            this._osversionDirective_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osversionDirective_ = node;
-	}
+        this._osversionDirective_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osversionDirective_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osversionDirective_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osversionDirective_ == child) {
-			this._osversionDirective_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osversionDirective_ == child)
+        {
+            this._osversionDirective_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osversionDirective_ == oldChild) {
-			setOsversionDirective((POsversionDirective) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osversionDirective_ == oldChild)
+        {
+            setOsversionDirective((POsversionDirective) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

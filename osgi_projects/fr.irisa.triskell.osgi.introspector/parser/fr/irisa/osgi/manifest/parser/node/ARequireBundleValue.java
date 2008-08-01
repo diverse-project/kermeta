@@ -2,115 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ARequireBundleValue extends PRequireBundleValue {
-	private TComma _comma_;
-	private PRequireBundleSymbolicname _requireBundleSymbolicname_;
+public final class ARequireBundleValue extends PRequireBundleValue
+{
+    private TComma _comma_;
+    private PRequireBundleSymbolicname _requireBundleSymbolicname_;
 
-	public ARequireBundleValue() {
-		// Constructor
-	}
+    public ARequireBundleValue()
+    {
+        // Constructor
+    }
 
-	public ARequireBundleValue(@SuppressWarnings("hiding")
-	TComma _comma_, @SuppressWarnings("hiding")
-	PRequireBundleSymbolicname _requireBundleSymbolicname_) {
-		// Constructor
-		setComma(_comma_);
+    public ARequireBundleValue(
+        @SuppressWarnings("hiding") TComma _comma_,
+        @SuppressWarnings("hiding") PRequireBundleSymbolicname _requireBundleSymbolicname_)
+    {
+        // Constructor
+        setComma(_comma_);
 
-		setRequireBundleSymbolicname(_requireBundleSymbolicname_);
+        setRequireBundleSymbolicname(_requireBundleSymbolicname_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ARequireBundleValue(cloneNode(this._comma_),
-				cloneNode(this._requireBundleSymbolicname_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ARequireBundleValue(
+            cloneNode(this._comma_),
+            cloneNode(this._requireBundleSymbolicname_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseARequireBundleValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseARequireBundleValue(this);
+    }
 
-	public TComma getComma() {
-		return this._comma_;
-	}
+    public TComma getComma()
+    {
+        return this._comma_;
+    }
 
-	public void setComma(TComma node) {
-		if (this._comma_ != null) {
-			this._comma_.parent(null);
-		}
+    public void setComma(TComma node)
+    {
+        if(this._comma_ != null)
+        {
+            this._comma_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._comma_ = node;
-	}
+        this._comma_ = node;
+    }
 
-	public PRequireBundleSymbolicname getRequireBundleSymbolicname() {
-		return this._requireBundleSymbolicname_;
-	}
+    public PRequireBundleSymbolicname getRequireBundleSymbolicname()
+    {
+        return this._requireBundleSymbolicname_;
+    }
 
-	public void setRequireBundleSymbolicname(PRequireBundleSymbolicname node) {
-		if (this._requireBundleSymbolicname_ != null) {
-			this._requireBundleSymbolicname_.parent(null);
-		}
+    public void setRequireBundleSymbolicname(PRequireBundleSymbolicname node)
+    {
+        if(this._requireBundleSymbolicname_ != null)
+        {
+            this._requireBundleSymbolicname_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._requireBundleSymbolicname_ = node;
-	}
+        this._requireBundleSymbolicname_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._comma_)
-				+ toString(this._requireBundleSymbolicname_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._comma_)
+            + toString(this._requireBundleSymbolicname_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._comma_ == child) {
-			this._comma_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._comma_ == child)
+        {
+            this._comma_ = null;
+            return;
+        }
 
-		if (this._requireBundleSymbolicname_ == child) {
-			this._requireBundleSymbolicname_ = null;
-			return;
-		}
+        if(this._requireBundleSymbolicname_ == child)
+        {
+            this._requireBundleSymbolicname_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._comma_ == oldChild) {
-			setComma((TComma) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._comma_ == oldChild)
+        {
+            setComma((TComma) newChild);
+            return;
+        }
 
-		if (this._requireBundleSymbolicname_ == oldChild) {
-			setRequireBundleSymbolicname((PRequireBundleSymbolicname) newChild);
-			return;
-		}
+        if(this._requireBundleSymbolicname_ == oldChild)
+        {
+            setRequireBundleSymbolicname((PRequireBundleSymbolicname) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

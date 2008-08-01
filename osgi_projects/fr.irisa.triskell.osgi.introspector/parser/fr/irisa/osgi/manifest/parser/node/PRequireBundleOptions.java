@@ -2,6 +2,7 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-public abstract class PRequireBundleOptions extends Node {
-	// Empty body
+public abstract class PRequireBundleOptions extends Node
+{
+    // Empty body
 }

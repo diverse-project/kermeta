@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TQualifier extends Token {
-	public TQualifier(String text) {
-		setText(text);
-	}
+public final class TQualifier extends Token
+{
+    public TQualifier(String text)
+    {
+        setText(text);
+    }
 
-	public TQualifier(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TQualifier(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TQualifier(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TQualifier(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTQualifier(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTQualifier(this);
+    }
 }

@@ -2,114 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ANativecodeOptional extends PNativecodeOptional {
-	private TComma _comma_;
-	private TOptional _optional_;
+public final class ANativecodeOptional extends PNativecodeOptional
+{
+    private TComma _comma_;
+    private TOptional _optional_;
 
-	public ANativecodeOptional() {
-		// Constructor
-	}
+    public ANativecodeOptional()
+    {
+        // Constructor
+    }
 
-	public ANativecodeOptional(@SuppressWarnings("hiding")
-	TComma _comma_, @SuppressWarnings("hiding")
-	TOptional _optional_) {
-		// Constructor
-		setComma(_comma_);
+    public ANativecodeOptional(
+        @SuppressWarnings("hiding") TComma _comma_,
+        @SuppressWarnings("hiding") TOptional _optional_)
+    {
+        // Constructor
+        setComma(_comma_);
 
-		setOptional(_optional_);
+        setOptional(_optional_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ANativecodeOptional(cloneNode(this._comma_),
-				cloneNode(this._optional_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ANativecodeOptional(
+            cloneNode(this._comma_),
+            cloneNode(this._optional_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseANativecodeOptional(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseANativecodeOptional(this);
+    }
 
-	public TComma getComma() {
-		return this._comma_;
-	}
+    public TComma getComma()
+    {
+        return this._comma_;
+    }
 
-	public void setComma(TComma node) {
-		if (this._comma_ != null) {
-			this._comma_.parent(null);
-		}
+    public void setComma(TComma node)
+    {
+        if(this._comma_ != null)
+        {
+            this._comma_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._comma_ = node;
-	}
+        this._comma_ = node;
+    }
 
-	public TOptional getOptional() {
-		return this._optional_;
-	}
+    public TOptional getOptional()
+    {
+        return this._optional_;
+    }
 
-	public void setOptional(TOptional node) {
-		if (this._optional_ != null) {
-			this._optional_.parent(null);
-		}
+    public void setOptional(TOptional node)
+    {
+        if(this._optional_ != null)
+        {
+            this._optional_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._optional_ = node;
-	}
+        this._optional_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._comma_) + toString(this._optional_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._comma_)
+            + toString(this._optional_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._comma_ == child) {
-			this._comma_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._comma_ == child)
+        {
+            this._comma_ = null;
+            return;
+        }
 
-		if (this._optional_ == child) {
-			this._optional_ = null;
-			return;
-		}
+        if(this._optional_ == child)
+        {
+            this._optional_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._comma_ == oldChild) {
-			setComma((TComma) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._comma_ == oldChild)
+        {
+            setComma((TComma) newChild);
+            return;
+        }
 
-		if (this._optional_ == oldChild) {
-			setOptional((TOptional) newChild);
-			return;
-		}
+        if(this._optional_ == oldChild)
+        {
+            setOptional((TOptional) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

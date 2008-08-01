@@ -2,115 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AImportPackageEntry extends PImportPackageEntry {
-	private TImportPackage _importPackage_;
-	private PImportPackageEntryValue1 _importPackageEntryValue1_;
+public final class AImportPackageEntry extends PImportPackageEntry
+{
+    private TImportPackage _importPackage_;
+    private PImportPackageEntryValue1 _importPackageEntryValue1_;
 
-	public AImportPackageEntry() {
-		// Constructor
-	}
+    public AImportPackageEntry()
+    {
+        // Constructor
+    }
 
-	public AImportPackageEntry(@SuppressWarnings("hiding")
-	TImportPackage _importPackage_, @SuppressWarnings("hiding")
-	PImportPackageEntryValue1 _importPackageEntryValue1_) {
-		// Constructor
-		setImportPackage(_importPackage_);
+    public AImportPackageEntry(
+        @SuppressWarnings("hiding") TImportPackage _importPackage_,
+        @SuppressWarnings("hiding") PImportPackageEntryValue1 _importPackageEntryValue1_)
+    {
+        // Constructor
+        setImportPackage(_importPackage_);
 
-		setImportPackageEntryValue1(_importPackageEntryValue1_);
+        setImportPackageEntryValue1(_importPackageEntryValue1_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AImportPackageEntry(cloneNode(this._importPackage_),
-				cloneNode(this._importPackageEntryValue1_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AImportPackageEntry(
+            cloneNode(this._importPackage_),
+            cloneNode(this._importPackageEntryValue1_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAImportPackageEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAImportPackageEntry(this);
+    }
 
-	public TImportPackage getImportPackage() {
-		return this._importPackage_;
-	}
+    public TImportPackage getImportPackage()
+    {
+        return this._importPackage_;
+    }
 
-	public void setImportPackage(TImportPackage node) {
-		if (this._importPackage_ != null) {
-			this._importPackage_.parent(null);
-		}
+    public void setImportPackage(TImportPackage node)
+    {
+        if(this._importPackage_ != null)
+        {
+            this._importPackage_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._importPackage_ = node;
-	}
+        this._importPackage_ = node;
+    }
 
-	public PImportPackageEntryValue1 getImportPackageEntryValue1() {
-		return this._importPackageEntryValue1_;
-	}
+    public PImportPackageEntryValue1 getImportPackageEntryValue1()
+    {
+        return this._importPackageEntryValue1_;
+    }
 
-	public void setImportPackageEntryValue1(PImportPackageEntryValue1 node) {
-		if (this._importPackageEntryValue1_ != null) {
-			this._importPackageEntryValue1_.parent(null);
-		}
+    public void setImportPackageEntryValue1(PImportPackageEntryValue1 node)
+    {
+        if(this._importPackageEntryValue1_ != null)
+        {
+            this._importPackageEntryValue1_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._importPackageEntryValue1_ = node;
-	}
+        this._importPackageEntryValue1_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._importPackage_)
-				+ toString(this._importPackageEntryValue1_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._importPackage_)
+            + toString(this._importPackageEntryValue1_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._importPackage_ == child) {
-			this._importPackage_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._importPackage_ == child)
+        {
+            this._importPackage_ = null;
+            return;
+        }
 
-		if (this._importPackageEntryValue1_ == child) {
-			this._importPackageEntryValue1_ = null;
-			return;
-		}
+        if(this._importPackageEntryValue1_ == child)
+        {
+            this._importPackageEntryValue1_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._importPackage_ == oldChild) {
-			setImportPackage((TImportPackage) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._importPackage_ == oldChild)
+        {
+            setImportPackage((TImportPackage) newChild);
+            return;
+        }
 
-		if (this._importPackageEntryValue1_ == oldChild) {
-			setImportPackageEntryValue1((PImportPackageEntryValue1) newChild);
-			return;
-		}
+        if(this._importPackageEntryValue1_ == oldChild)
+        {
+            setImportPackageEntryValue1((PImportPackageEntryValue1) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

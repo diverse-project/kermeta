@@ -2,6 +2,7 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-public abstract class PFragmentHostEntry extends Node {
-	// Empty body
+public abstract class PFragmentHostEntry extends Node
+{
+    // Empty body
 }

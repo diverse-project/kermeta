@@ -2,161 +2,186 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import java.util.*;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleVersionEntry extends PBundleVersionEntry {
-	private TBundleVersion _bundleVersion_;
-	private PMajorVersionEntry _majorVersionEntry_;
-	private final LinkedList<PParameter> _parameter_ = new LinkedList<PParameter>();
+public final class ABundleVersionEntry extends PBundleVersionEntry
+{
+    private TBundleVersion _bundleVersion_;
+    private PMajorVersionEntry _majorVersionEntry_;
+    private final LinkedList<PParameter> _parameter_ = new LinkedList<PParameter>();
 
-	public ABundleVersionEntry() {
-		// Constructor
-	}
+    public ABundleVersionEntry()
+    {
+        // Constructor
+    }
 
-	public ABundleVersionEntry(@SuppressWarnings("hiding")
-	TBundleVersion _bundleVersion_, @SuppressWarnings("hiding")
-	PMajorVersionEntry _majorVersionEntry_, @SuppressWarnings("hiding")
-	List<PParameter> _parameter_) {
-		// Constructor
-		setBundleVersion(_bundleVersion_);
+    public ABundleVersionEntry(
+        @SuppressWarnings("hiding") TBundleVersion _bundleVersion_,
+        @SuppressWarnings("hiding") PMajorVersionEntry _majorVersionEntry_,
+        @SuppressWarnings("hiding") List<PParameter> _parameter_)
+    {
+        // Constructor
+        setBundleVersion(_bundleVersion_);
 
-		setMajorVersionEntry(_majorVersionEntry_);
+        setMajorVersionEntry(_majorVersionEntry_);
 
-		setParameter(_parameter_);
+        setParameter(_parameter_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleVersionEntry(cloneNode(this._bundleVersion_),
-				cloneNode(this._majorVersionEntry_),
-				cloneList(this._parameter_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleVersionEntry(
+            cloneNode(this._bundleVersion_),
+            cloneNode(this._majorVersionEntry_),
+            cloneList(this._parameter_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleVersionEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleVersionEntry(this);
+    }
 
-	public TBundleVersion getBundleVersion() {
-		return this._bundleVersion_;
-	}
+    public TBundleVersion getBundleVersion()
+    {
+        return this._bundleVersion_;
+    }
 
-	public void setBundleVersion(TBundleVersion node) {
-		if (this._bundleVersion_ != null) {
-			this._bundleVersion_.parent(null);
-		}
+    public void setBundleVersion(TBundleVersion node)
+    {
+        if(this._bundleVersion_ != null)
+        {
+            this._bundleVersion_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleVersion_ = node;
-	}
+        this._bundleVersion_ = node;
+    }
 
-	public PMajorVersionEntry getMajorVersionEntry() {
-		return this._majorVersionEntry_;
-	}
+    public PMajorVersionEntry getMajorVersionEntry()
+    {
+        return this._majorVersionEntry_;
+    }
 
-	public void setMajorVersionEntry(PMajorVersionEntry node) {
-		if (this._majorVersionEntry_ != null) {
-			this._majorVersionEntry_.parent(null);
-		}
+    public void setMajorVersionEntry(PMajorVersionEntry node)
+    {
+        if(this._majorVersionEntry_ != null)
+        {
+            this._majorVersionEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._majorVersionEntry_ = node;
-	}
+        this._majorVersionEntry_ = node;
+    }
 
-	public LinkedList<PParameter> getParameter() {
-		return this._parameter_;
-	}
+    public LinkedList<PParameter> getParameter()
+    {
+        return this._parameter_;
+    }
 
-	public void setParameter(List<PParameter> list) {
-		this._parameter_.clear();
-		this._parameter_.addAll(list);
-		for (PParameter e : list) {
-			if (e.parent() != null) {
-				e.parent().removeChild(e);
-			}
+    public void setParameter(List<PParameter> list)
+    {
+        this._parameter_.clear();
+        this._parameter_.addAll(list);
+        for(PParameter e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
 
-			e.parent(this);
-		}
-	}
+            e.parent(this);
+        }
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleVersion_)
-				+ toString(this._majorVersionEntry_)
-				+ toString(this._parameter_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleVersion_)
+            + toString(this._majorVersionEntry_)
+            + toString(this._parameter_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleVersion_ == child) {
-			this._bundleVersion_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleVersion_ == child)
+        {
+            this._bundleVersion_ = null;
+            return;
+        }
 
-		if (this._majorVersionEntry_ == child) {
-			this._majorVersionEntry_ = null;
-			return;
-		}
+        if(this._majorVersionEntry_ == child)
+        {
+            this._majorVersionEntry_ = null;
+            return;
+        }
 
-		if (this._parameter_.remove(child)) {
-			return;
-		}
+        if(this._parameter_.remove(child))
+        {
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleVersion_ == oldChild) {
-			setBundleVersion((TBundleVersion) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleVersion_ == oldChild)
+        {
+            setBundleVersion((TBundleVersion) newChild);
+            return;
+        }
 
-		if (this._majorVersionEntry_ == oldChild) {
-			setMajorVersionEntry((PMajorVersionEntry) newChild);
-			return;
-		}
+        if(this._majorVersionEntry_ == oldChild)
+        {
+            setMajorVersionEntry((PMajorVersionEntry) newChild);
+            return;
+        }
 
-		for (ListIterator<PParameter> i = this._parameter_.listIterator(); i
-				.hasNext();) {
-			if (i.next() == oldChild) {
-				if (newChild != null) {
-					i.set((PParameter) newChild);
-					newChild.parent(this);
-					oldChild.parent(null);
-					return;
-				}
+        for(ListIterator<PParameter> i = this._parameter_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PParameter) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-				i.remove();
-				oldChild.parent(null);
-				return;
-			}
-		}
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

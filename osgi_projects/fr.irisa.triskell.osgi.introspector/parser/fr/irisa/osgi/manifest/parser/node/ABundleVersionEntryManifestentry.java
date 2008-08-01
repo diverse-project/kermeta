@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleVersionEntryManifestentry extends PManifestentry {
-	private PBundleVersionEntry _bundleVersionEntry_;
+public final class ABundleVersionEntryManifestentry extends PManifestentry
+{
+    private PBundleVersionEntry _bundleVersionEntry_;
 
-	public ABundleVersionEntryManifestentry() {
-		// Constructor
-	}
+    public ABundleVersionEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public ABundleVersionEntryManifestentry(@SuppressWarnings("hiding")
-	PBundleVersionEntry _bundleVersionEntry_) {
-		// Constructor
-		setBundleVersionEntry(_bundleVersionEntry_);
+    public ABundleVersionEntryManifestentry(
+        @SuppressWarnings("hiding") PBundleVersionEntry _bundleVersionEntry_)
+    {
+        // Constructor
+        setBundleVersionEntry(_bundleVersionEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleVersionEntryManifestentry(
-				cloneNode(this._bundleVersionEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleVersionEntryManifestentry(
+            cloneNode(this._bundleVersionEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleVersionEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleVersionEntryManifestentry(this);
+    }
 
-	public PBundleVersionEntry getBundleVersionEntry() {
-		return this._bundleVersionEntry_;
-	}
+    public PBundleVersionEntry getBundleVersionEntry()
+    {
+        return this._bundleVersionEntry_;
+    }
 
-	public void setBundleVersionEntry(PBundleVersionEntry node) {
-		if (this._bundleVersionEntry_ != null) {
-			this._bundleVersionEntry_.parent(null);
-		}
+    public void setBundleVersionEntry(PBundleVersionEntry node)
+    {
+        if(this._bundleVersionEntry_ != null)
+        {
+            this._bundleVersionEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleVersionEntry_ = node;
-	}
+        this._bundleVersionEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleVersionEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleVersionEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleVersionEntry_ == child) {
-			this._bundleVersionEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleVersionEntry_ == child)
+        {
+            this._bundleVersionEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleVersionEntry_ == oldChild) {
-			setBundleVersionEntry((PBundleVersionEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleVersionEntry_ == oldChild)
+        {
+            setBundleVersionEntry((PBundleVersionEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,81 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleManifestversionEntryManifestentry extends
-		PManifestentry {
-	private PBundleManifestversionEntry _bundleManifestversionEntry_;
+public final class ABundleManifestversionEntryManifestentry extends PManifestentry
+{
+    private PBundleManifestversionEntry _bundleManifestversionEntry_;
 
-	public ABundleManifestversionEntryManifestentry() {
-		// Constructor
-	}
+    public ABundleManifestversionEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public ABundleManifestversionEntryManifestentry(@SuppressWarnings("hiding")
-	PBundleManifestversionEntry _bundleManifestversionEntry_) {
-		// Constructor
-		setBundleManifestversionEntry(_bundleManifestversionEntry_);
+    public ABundleManifestversionEntryManifestentry(
+        @SuppressWarnings("hiding") PBundleManifestversionEntry _bundleManifestversionEntry_)
+    {
+        // Constructor
+        setBundleManifestversionEntry(_bundleManifestversionEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleManifestversionEntryManifestentry(
-				cloneNode(this._bundleManifestversionEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleManifestversionEntryManifestentry(
+            cloneNode(this._bundleManifestversionEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleManifestversionEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleManifestversionEntryManifestentry(this);
+    }
 
-	public PBundleManifestversionEntry getBundleManifestversionEntry() {
-		return this._bundleManifestversionEntry_;
-	}
+    public PBundleManifestversionEntry getBundleManifestversionEntry()
+    {
+        return this._bundleManifestversionEntry_;
+    }
 
-	public void setBundleManifestversionEntry(PBundleManifestversionEntry node) {
-		if (this._bundleManifestversionEntry_ != null) {
-			this._bundleManifestversionEntry_.parent(null);
-		}
+    public void setBundleManifestversionEntry(PBundleManifestversionEntry node)
+    {
+        if(this._bundleManifestversionEntry_ != null)
+        {
+            this._bundleManifestversionEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleManifestversionEntry_ = node;
-	}
+        this._bundleManifestversionEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleManifestversionEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleManifestversionEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleManifestversionEntry_ == child) {
-			this._bundleManifestversionEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleManifestversionEntry_ == child)
+        {
+            this._bundleManifestversionEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleManifestversionEntry_ == oldChild) {
-			setBundleManifestversionEntry((PBundleManifestversionEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleManifestversionEntry_ == oldChild)
+        {
+            setBundleManifestversionEntry((PBundleManifestversionEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

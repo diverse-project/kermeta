@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.4 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: PackageImpl.java,v 1.5 2008-08-01 09:44:38 edaubert Exp $
  */
 package jar.impl;
 
@@ -17,12 +17,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -34,7 +32,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link jar.impl.PackageImpl#getClasses <em>Classes</em>}</li>
  *   <li>{@link jar.impl.PackageImpl#getSubPackages <em>Sub Packages</em>}</li>
- *   <li>{@link jar.impl.PackageImpl#isBundleClassPath <em>Bundle Class Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -58,24 +55,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 	 * @ordered
 	 */
 	protected EList<jar.Package> subPackages;
-
-	/**
-	 * The default value of the '{@link #isBundleClassPath() <em>Bundle Class Path</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #isBundleClassPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean BUNDLE_CLASS_PATH_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isBundleClassPath() <em>Bundle Class Path</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #isBundleClassPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean bundleClassPath = BUNDLE_CLASS_PATH_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -120,25 +99,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isBundleClassPath() {
-		return bundleClassPath;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBundleClassPath(boolean newBundleClassPath) {
-		boolean oldBundleClassPath = bundleClassPath;
-		bundleClassPath = newBundleClassPath;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JarPackage.PACKAGE__BUNDLE_CLASS_PATH, oldBundleClassPath, bundleClassPath));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
@@ -162,8 +122,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 				return getClasses();
 			case JarPackage.PACKAGE__SUB_PACKAGES:
 				return getSubPackages();
-			case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
-				return isBundleClassPath() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -184,9 +142,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 				getSubPackages().clear();
 				getSubPackages().addAll((Collection<? extends jar.Package>)newValue);
 				return;
-			case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
-				setBundleClassPath(((Boolean)newValue).booleanValue());
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -204,9 +159,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 			case JarPackage.PACKAGE__SUB_PACKAGES:
 				getSubPackages().clear();
 				return;
-			case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
-				setBundleClassPath(BUNDLE_CLASS_PATH_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -222,25 +174,8 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 				return classes != null && !classes.isEmpty();
 			case JarPackage.PACKAGE__SUB_PACKAGES:
 				return subPackages != null && !subPackages.isEmpty();
-			case JarPackage.PACKAGE__BUNDLE_CLASS_PATH:
-				return bundleClassPath != BUNDLE_CLASS_PATH_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (bundleClassPath: ");
-		result.append(bundleClassPath);
-		result.append(')');
-		return result.toString();
 	}
 
 	public void addClass(Class clazz) {
@@ -254,7 +189,16 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 				nextPackage = packages.length;
 			}
 			if (nextPackage == packagesClazz.length - 1) {
-				getClasses().add(clazz);
+				boolean exist = false;
+				for (Class tmp : getClasses()) {
+					if (tmp.getFullPath().equals(clazz.getFullPath())) {
+						exist = true;
+						break;
+					}
+				}
+				if (!exist) {
+					getClasses().add(clazz);	
+				}
 			} else {
 				String _packageName = packagesClazz[nextPackage];
 				boolean exist = false;
@@ -272,7 +216,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					Package p = JarFactory.eINSTANCE.createPackage();
 					p.setFullPath(this.getFullPath() + "." + _packageName);
 					p.setName(_packageName);
-					p.setBundleClassPath(isBundleClassPath());
 					getSubPackages().add(p);
 					p.addClass(clazz);
 				}
@@ -304,8 +247,13 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 						.iterator();
 				while (packagesIterator.hasNext()) {
 					Package p = packagesIterator.next();
+					if (getFullPath().equals("")) {
+						if (p.getFullPath().equals(_packageName)) {
+							return p.getClass(fullPath);
+						}
+					}
 					if (p.getFullPath().equals(
-							getFullPath() + _packageName + ".")) {
+							getFullPath() + "." + _packageName)) {
 						return p.getClass(fullPath);
 					}
 				}
@@ -364,7 +312,35 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 				nextPackage = packages.length;
 			}
 			if (nextPackage == packagesClazz.length - 1) {
-				getSubPackages().add(_package);
+				Package p = null;
+				for (Package tmp : getSubPackages()) {
+					if (tmp.getFullPath().equals(_package.getFullPath())) {
+						p = tmp;
+						break;
+					}
+				}
+				if (p == null) {
+					getSubPackages().add(_package);
+				} else {
+					// To prevent ConcurrentModificationException, we nedd to use integer and not iterator
+					// because package are detach from there parent and next attach into another parent.
+					// so _package.getSubPackages() is modified.
+					int i = 0;
+					int size = _package.getSubPackages().size();
+					while (i < size) {
+						Package tmp = _package.getSubPackages().get(i);
+						p.addPackage(tmp);
+						size -= 1;
+					}
+					
+					i = 0;
+					size = _package.getClasses().size();
+					while (i < size) {
+						Class tmp = _package.getClasses().get(i);
+						p.addClass(tmp);
+						size -= 1;
+					}
+				}
 			} else {
 				String _packageName = packagesClazz[nextPackage];
 				boolean exist = false;
@@ -382,7 +358,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					Package p = JarFactory.eINSTANCE.createPackage();
 					p.setFullPath(this.getFullPath() + "." + _packageName);
 					p.setName(_packageName);
-					p.setBundleClassPath(isBundleClassPath());
 					getSubPackages().add(p);
 					p.addPackage(_package);
 				}

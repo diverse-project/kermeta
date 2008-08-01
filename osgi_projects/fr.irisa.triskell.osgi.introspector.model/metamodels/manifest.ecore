@@ -131,7 +131,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="bundleElement" eType="ecore:EClass framework.ecore#//Bundle"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImportService" eSuperTypes="#//MANIFESTEntry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolve" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
         eType="#//boolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="service" lowerBound="1"
         eType="ecore:EDataType framework.ecore#//String"/>
@@ -166,8 +166,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="FragmentHost" eSuperTypes="#//MANIFESTEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="directives" eType="ecore:EClass option.ecore#//FragmentHostDirective"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
-        eType="#//boolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bundle" lowerBound="1"
         eType="ecore:EClass framework.ecore#//Bundle"/>
   </eClassifiers>

@@ -2,119 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ARequiredexecutionenvironment extends
-		PRequiredexecutionenvironment {
-	private TIdentifierRequiredConfiguration _identifierRequiredConfiguration_;
-	private TIdentifierRequiredProfile _identifierRequiredProfile_;
+public final class ARequiredexecutionenvironment extends PRequiredexecutionenvironment
+{
+    private TIdentifierRequiredConfiguration _identifierRequiredConfiguration_;
+    private TIdentifierRequiredProfile _identifierRequiredProfile_;
 
-	public ARequiredexecutionenvironment() {
-		// Constructor
-	}
+    public ARequiredexecutionenvironment()
+    {
+        // Constructor
+    }
 
-	public ARequiredexecutionenvironment(@SuppressWarnings("hiding")
-	TIdentifierRequiredConfiguration _identifierRequiredConfiguration_,
-			@SuppressWarnings("hiding")
-			TIdentifierRequiredProfile _identifierRequiredProfile_) {
-		// Constructor
-		setIdentifierRequiredConfiguration(_identifierRequiredConfiguration_);
+    public ARequiredexecutionenvironment(
+        @SuppressWarnings("hiding") TIdentifierRequiredConfiguration _identifierRequiredConfiguration_,
+        @SuppressWarnings("hiding") TIdentifierRequiredProfile _identifierRequiredProfile_)
+    {
+        // Constructor
+        setIdentifierRequiredConfiguration(_identifierRequiredConfiguration_);
 
-		setIdentifierRequiredProfile(_identifierRequiredProfile_);
+        setIdentifierRequiredProfile(_identifierRequiredProfile_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ARequiredexecutionenvironment(
-				cloneNode(this._identifierRequiredConfiguration_),
-				cloneNode(this._identifierRequiredProfile_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ARequiredexecutionenvironment(
+            cloneNode(this._identifierRequiredConfiguration_),
+            cloneNode(this._identifierRequiredProfile_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseARequiredexecutionenvironment(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseARequiredexecutionenvironment(this);
+    }
 
-	public TIdentifierRequiredConfiguration getIdentifierRequiredConfiguration() {
-		return this._identifierRequiredConfiguration_;
-	}
+    public TIdentifierRequiredConfiguration getIdentifierRequiredConfiguration()
+    {
+        return this._identifierRequiredConfiguration_;
+    }
 
-	public void setIdentifierRequiredConfiguration(
-			TIdentifierRequiredConfiguration node) {
-		if (this._identifierRequiredConfiguration_ != null) {
-			this._identifierRequiredConfiguration_.parent(null);
-		}
+    public void setIdentifierRequiredConfiguration(TIdentifierRequiredConfiguration node)
+    {
+        if(this._identifierRequiredConfiguration_ != null)
+        {
+            this._identifierRequiredConfiguration_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._identifierRequiredConfiguration_ = node;
-	}
+        this._identifierRequiredConfiguration_ = node;
+    }
 
-	public TIdentifierRequiredProfile getIdentifierRequiredProfile() {
-		return this._identifierRequiredProfile_;
-	}
+    public TIdentifierRequiredProfile getIdentifierRequiredProfile()
+    {
+        return this._identifierRequiredProfile_;
+    }
 
-	public void setIdentifierRequiredProfile(TIdentifierRequiredProfile node) {
-		if (this._identifierRequiredProfile_ != null) {
-			this._identifierRequiredProfile_.parent(null);
-		}
+    public void setIdentifierRequiredProfile(TIdentifierRequiredProfile node)
+    {
+        if(this._identifierRequiredProfile_ != null)
+        {
+            this._identifierRequiredProfile_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._identifierRequiredProfile_ = node;
-	}
+        this._identifierRequiredProfile_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._identifierRequiredConfiguration_)
-				+ toString(this._identifierRequiredProfile_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._identifierRequiredConfiguration_)
+            + toString(this._identifierRequiredProfile_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._identifierRequiredConfiguration_ == child) {
-			this._identifierRequiredConfiguration_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._identifierRequiredConfiguration_ == child)
+        {
+            this._identifierRequiredConfiguration_ = null;
+            return;
+        }
 
-		if (this._identifierRequiredProfile_ == child) {
-			this._identifierRequiredProfile_ = null;
-			return;
-		}
+        if(this._identifierRequiredProfile_ == child)
+        {
+            this._identifierRequiredProfile_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._identifierRequiredConfiguration_ == oldChild) {
-			setIdentifierRequiredConfiguration((TIdentifierRequiredConfiguration) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._identifierRequiredConfiguration_ == oldChild)
+        {
+            setIdentifierRequiredConfiguration((TIdentifierRequiredConfiguration) newChild);
+            return;
+        }
 
-		if (this._identifierRequiredProfile_ == oldChild) {
-			setIdentifierRequiredProfile((TIdentifierRequiredProfile) newChild);
-			return;
-		}
+        if(this._identifierRequiredProfile_ == oldChild)
+        {
+            setIdentifierRequiredProfile((TIdentifierRequiredProfile) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

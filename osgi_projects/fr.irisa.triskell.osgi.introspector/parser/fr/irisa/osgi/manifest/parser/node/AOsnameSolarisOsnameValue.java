@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameSolarisOsnameValue extends POsnameValue {
-	private TOsnameSolaris _osnameSolaris_;
+public final class AOsnameSolarisOsnameValue extends POsnameValue
+{
+    private TOsnameSolaris _osnameSolaris_;
 
-	public AOsnameSolarisOsnameValue() {
-		// Constructor
-	}
+    public AOsnameSolarisOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameSolarisOsnameValue(@SuppressWarnings("hiding")
-	TOsnameSolaris _osnameSolaris_) {
-		// Constructor
-		setOsnameSolaris(_osnameSolaris_);
+    public AOsnameSolarisOsnameValue(
+        @SuppressWarnings("hiding") TOsnameSolaris _osnameSolaris_)
+    {
+        // Constructor
+        setOsnameSolaris(_osnameSolaris_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameSolarisOsnameValue(cloneNode(this._osnameSolaris_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameSolarisOsnameValue(
+            cloneNode(this._osnameSolaris_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameSolarisOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameSolarisOsnameValue(this);
+    }
 
-	public TOsnameSolaris getOsnameSolaris() {
-		return this._osnameSolaris_;
-	}
+    public TOsnameSolaris getOsnameSolaris()
+    {
+        return this._osnameSolaris_;
+    }
 
-	public void setOsnameSolaris(TOsnameSolaris node) {
-		if (this._osnameSolaris_ != null) {
-			this._osnameSolaris_.parent(null);
-		}
+    public void setOsnameSolaris(TOsnameSolaris node)
+    {
+        if(this._osnameSolaris_ != null)
+        {
+            this._osnameSolaris_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameSolaris_ = node;
-	}
+        this._osnameSolaris_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameSolaris_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameSolaris_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameSolaris_ == child) {
-			this._osnameSolaris_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameSolaris_ == child)
+        {
+            this._osnameSolaris_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameSolaris_ == oldChild) {
-			setOsnameSolaris((TOsnameSolaris) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameSolaris_ == oldChild)
+        {
+            setOsnameSolaris((TOsnameSolaris) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TTrue extends Token {
-	public TTrue(String text) {
-		setText(text);
-	}
+public final class TTrue extends Token
+{
+    public TTrue(String text)
+    {
+        setText(text);
+    }
 
-	public TTrue(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TTrue(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TTrue(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TTrue(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTTrue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTTrue(this);
+    }
 }

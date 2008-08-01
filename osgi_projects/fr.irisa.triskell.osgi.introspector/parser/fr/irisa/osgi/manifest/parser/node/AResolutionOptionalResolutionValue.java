@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AResolutionOptionalResolutionValue extends PResolutionValue {
-	private TResolutionOptional _resolutionOptional_;
+public final class AResolutionOptionalResolutionValue extends PResolutionValue
+{
+    private TResolutionOptional _resolutionOptional_;
 
-	public AResolutionOptionalResolutionValue() {
-		// Constructor
-	}
+    public AResolutionOptionalResolutionValue()
+    {
+        // Constructor
+    }
 
-	public AResolutionOptionalResolutionValue(@SuppressWarnings("hiding")
-	TResolutionOptional _resolutionOptional_) {
-		// Constructor
-		setResolutionOptional(_resolutionOptional_);
+    public AResolutionOptionalResolutionValue(
+        @SuppressWarnings("hiding") TResolutionOptional _resolutionOptional_)
+    {
+        // Constructor
+        setResolutionOptional(_resolutionOptional_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AResolutionOptionalResolutionValue(
-				cloneNode(this._resolutionOptional_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AResolutionOptionalResolutionValue(
+            cloneNode(this._resolutionOptional_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAResolutionOptionalResolutionValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAResolutionOptionalResolutionValue(this);
+    }
 
-	public TResolutionOptional getResolutionOptional() {
-		return this._resolutionOptional_;
-	}
+    public TResolutionOptional getResolutionOptional()
+    {
+        return this._resolutionOptional_;
+    }
 
-	public void setResolutionOptional(TResolutionOptional node) {
-		if (this._resolutionOptional_ != null) {
-			this._resolutionOptional_.parent(null);
-		}
+    public void setResolutionOptional(TResolutionOptional node)
+    {
+        if(this._resolutionOptional_ != null)
+        {
+            this._resolutionOptional_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._resolutionOptional_ = node;
-	}
+        this._resolutionOptional_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._resolutionOptional_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._resolutionOptional_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._resolutionOptional_ == child) {
-			this._resolutionOptional_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._resolutionOptional_ == child)
+        {
+            this._resolutionOptional_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._resolutionOptional_ == oldChild) {
-			setResolutionOptional((TResolutionOptional) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._resolutionOptional_ == oldChild)
+        {
+            setResolutionOptional((TResolutionOptional) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProcessorSparcProcessorValue extends PProcessorValue {
-	private TProcessorSparc _processorSparc_;
+public final class AProcessorSparcProcessorValue extends PProcessorValue
+{
+    private TProcessorSparc _processorSparc_;
 
-	public AProcessorSparcProcessorValue() {
-		// Constructor
-	}
+    public AProcessorSparcProcessorValue()
+    {
+        // Constructor
+    }
 
-	public AProcessorSparcProcessorValue(@SuppressWarnings("hiding")
-	TProcessorSparc _processorSparc_) {
-		// Constructor
-		setProcessorSparc(_processorSparc_);
+    public AProcessorSparcProcessorValue(
+        @SuppressWarnings("hiding") TProcessorSparc _processorSparc_)
+    {
+        // Constructor
+        setProcessorSparc(_processorSparc_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AProcessorSparcProcessorValue(
-				cloneNode(this._processorSparc_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AProcessorSparcProcessorValue(
+            cloneNode(this._processorSparc_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAProcessorSparcProcessorValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAProcessorSparcProcessorValue(this);
+    }
 
-	public TProcessorSparc getProcessorSparc() {
-		return this._processorSparc_;
-	}
+    public TProcessorSparc getProcessorSparc()
+    {
+        return this._processorSparc_;
+    }
 
-	public void setProcessorSparc(TProcessorSparc node) {
-		if (this._processorSparc_ != null) {
-			this._processorSparc_.parent(null);
-		}
+    public void setProcessorSparc(TProcessorSparc node)
+    {
+        if(this._processorSparc_ != null)
+        {
+            this._processorSparc_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._processorSparc_ = node;
-	}
+        this._processorSparc_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._processorSparc_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._processorSparc_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._processorSparc_ == child) {
-			this._processorSparc_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._processorSparc_ == child)
+        {
+            this._processorSparc_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._processorSparc_ == oldChild) {
-			setProcessorSparc((TProcessorSparc) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._processorSparc_ == oldChild)
+        {
+            setProcessorSparc((TProcessorSparc) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

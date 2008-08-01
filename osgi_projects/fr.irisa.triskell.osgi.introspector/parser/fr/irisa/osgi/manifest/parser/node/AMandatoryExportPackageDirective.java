@@ -2,116 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AMandatoryExportPackageDirective extends
-		PExportPackageDirective {
-	private TMandatory _mandatory_;
-	private PMandatoryValue _mandatoryValue_;
+public final class AMandatoryExportPackageDirective extends PExportPackageDirective
+{
+    private TMandatory _mandatory_;
+    private PMandatoryValue _mandatoryValue_;
 
-	public AMandatoryExportPackageDirective() {
-		// Constructor
-	}
+    public AMandatoryExportPackageDirective()
+    {
+        // Constructor
+    }
 
-	public AMandatoryExportPackageDirective(@SuppressWarnings("hiding")
-	TMandatory _mandatory_, @SuppressWarnings("hiding")
-	PMandatoryValue _mandatoryValue_) {
-		// Constructor
-		setMandatory(_mandatory_);
+    public AMandatoryExportPackageDirective(
+        @SuppressWarnings("hiding") TMandatory _mandatory_,
+        @SuppressWarnings("hiding") PMandatoryValue _mandatoryValue_)
+    {
+        // Constructor
+        setMandatory(_mandatory_);
 
-		setMandatoryValue(_mandatoryValue_);
+        setMandatoryValue(_mandatoryValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AMandatoryExportPackageDirective(
-				cloneNode(this._mandatory_), cloneNode(this._mandatoryValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AMandatoryExportPackageDirective(
+            cloneNode(this._mandatory_),
+            cloneNode(this._mandatoryValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAMandatoryExportPackageDirective(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAMandatoryExportPackageDirective(this);
+    }
 
-	public TMandatory getMandatory() {
-		return this._mandatory_;
-	}
+    public TMandatory getMandatory()
+    {
+        return this._mandatory_;
+    }
 
-	public void setMandatory(TMandatory node) {
-		if (this._mandatory_ != null) {
-			this._mandatory_.parent(null);
-		}
+    public void setMandatory(TMandatory node)
+    {
+        if(this._mandatory_ != null)
+        {
+            this._mandatory_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._mandatory_ = node;
-	}
+        this._mandatory_ = node;
+    }
 
-	public PMandatoryValue getMandatoryValue() {
-		return this._mandatoryValue_;
-	}
+    public PMandatoryValue getMandatoryValue()
+    {
+        return this._mandatoryValue_;
+    }
 
-	public void setMandatoryValue(PMandatoryValue node) {
-		if (this._mandatoryValue_ != null) {
-			this._mandatoryValue_.parent(null);
-		}
+    public void setMandatoryValue(PMandatoryValue node)
+    {
+        if(this._mandatoryValue_ != null)
+        {
+            this._mandatoryValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._mandatoryValue_ = node;
-	}
+        this._mandatoryValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._mandatory_)
-				+ toString(this._mandatoryValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._mandatory_)
+            + toString(this._mandatoryValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._mandatory_ == child) {
-			this._mandatory_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._mandatory_ == child)
+        {
+            this._mandatory_ = null;
+            return;
+        }
 
-		if (this._mandatoryValue_ == child) {
-			this._mandatoryValue_ = null;
-			return;
-		}
+        if(this._mandatoryValue_ == child)
+        {
+            this._mandatoryValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._mandatory_ == oldChild) {
-			setMandatory((TMandatory) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._mandatory_ == oldChild)
+        {
+            setMandatory((TMandatory) newChild);
+            return;
+        }
 
-		if (this._mandatoryValue_ == oldChild) {
-			setMandatoryValue((PMandatoryValue) newChild);
-			return;
-		}
+        if(this._mandatoryValue_ == oldChild)
+        {
+            setMandatoryValue((PMandatoryValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

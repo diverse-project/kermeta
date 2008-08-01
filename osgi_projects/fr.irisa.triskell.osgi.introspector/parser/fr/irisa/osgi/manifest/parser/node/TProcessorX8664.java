@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TProcessorX8664 extends Token {
-	public TProcessorX8664(String text) {
-		setText(text);
-	}
+public final class TProcessorX8664 extends Token
+{
+    public TProcessorX8664(String text)
+    {
+        setText(text);
+    }
 
-	public TProcessorX8664(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TProcessorX8664(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TProcessorX8664(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TProcessorX8664(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTProcessorX8664(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTProcessorX8664(this);
+    }
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestPackage.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: ManifestPackage.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
  */
 package manifest;
 
@@ -1244,13 +1244,13 @@ public interface ManifestPackage extends EPackage {
 	int IMPORT_SERVICE__OPTIONS = MANIFEST_ENTRY__OPTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Resolve</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_SERVICE__RESOLVE = MANIFEST_ENTRY_FEATURE_COUNT + 0;
+	int IMPORT_SERVICE__RESOLVED = MANIFEST_ENTRY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Service</b></em>' attribute. <!--
@@ -1524,22 +1524,13 @@ public interface ManifestPackage extends EPackage {
 	int FRAGMENT_HOST__DIRECTIVES = MANIFEST_ENTRY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int FRAGMENT_HOST__RESOLVED = MANIFEST_ENTRY_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Bundle</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int FRAGMENT_HOST__BUNDLE = MANIFEST_ENTRY_FEATURE_COUNT + 2;
+	int FRAGMENT_HOST__BUNDLE = MANIFEST_ENTRY_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Fragment Host</em>' class.
@@ -1547,7 +1538,7 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FRAGMENT_HOST_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 3;
+	int FRAGMENT_HOST_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link manifest.impl.DynamicImportPackageImpl <em>Dynamic Import Package</em>}' class.
@@ -2410,6 +2401,17 @@ public interface ManifestPackage extends EPackage {
 	EClass getImportService();
 
 	/**
+	 * Returns the meta object for the attribute '{@link manifest.ImportService#isResolved <em>Resolved</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resolved</em>'.
+	 * @see manifest.ImportService#isResolved()
+	 * @see #getImportService()
+	 * @generated
+	 */
+	EAttribute getImportService_Resolved();
+
+	/**
 	 * Returns the meta object for the attribute '{@link manifest.ImportService#getService <em>Service</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Service</em>'.
@@ -2429,16 +2431,6 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getImportService_ServiceElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link manifest.ImportService#isResolve <em>Resolve</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Resolve</em>'.
-	 * @see manifest.ImportService#isResolve()
-	 * @see #getImportService()
-	 * @generated
-	 */
-	EAttribute getImportService_Resolve();
 
 	/**
 	 * Returns the meta object for class '{@link manifest.ExportService <em>Export Service</em>}'.
@@ -2585,16 +2577,6 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFragmentHost_Directives();
-
-	/**
-	 * Returns the meta object for the attribute '{@link manifest.FragmentHost#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Resolved</em>'.
-	 * @see manifest.FragmentHost#isResolved()
-	 * @see #getFragmentHost()
-	 * @generated
-	 */
-	EAttribute getFragmentHost_Resolved();
 
 	/**
 	 * Returns the meta object for the reference '{@link manifest.FragmentHost#getBundle <em>Bundle</em>}'.
@@ -3331,6 +3313,14 @@ public interface ManifestPackage extends EPackage {
 		EClass IMPORT_SERVICE = eINSTANCE.getImportService();
 
 		/**
+		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPORT_SERVICE__RESOLVED = eINSTANCE.getImportService_Resolved();
+
+		/**
 		 * The meta object literal for the '<em><b>Service</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
@@ -3344,13 +3334,6 @@ public interface ManifestPackage extends EPackage {
 		 * @generated
 		 */
 		EReference IMPORT_SERVICE__SERVICE_ELEMENT = eINSTANCE.getImportService_ServiceElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Resolve</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPORT_SERVICE__RESOLVE = eINSTANCE.getImportService_Resolve();
 
 		/**
 		 * The meta object literal for the '{@link manifest.impl.ExportServiceImpl <em>Export Service</em>}' class.
@@ -3472,13 +3455,6 @@ public interface ManifestPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FRAGMENT_HOST__DIRECTIVES = eINSTANCE.getFragmentHost_Directives();
-
-		/**
-		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FRAGMENT_HOST__RESOLVED = eINSTANCE.getFragmentHost_Resolved();
 
 		/**
 		 * The meta object literal for the '<em><b>Bundle</b></em>' reference feature.

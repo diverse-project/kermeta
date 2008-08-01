@@ -2,114 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ADigestEntry extends PDigestEntry {
-	private TEntryDigest _entryDigest_;
-	private TDigestValue _digestValue_;
+public final class ADigestEntry extends PDigestEntry
+{
+    private TEntryDigest _entryDigest_;
+    private TDigestValue _digestValue_;
 
-	public ADigestEntry() {
-		// Constructor
-	}
+    public ADigestEntry()
+    {
+        // Constructor
+    }
 
-	public ADigestEntry(@SuppressWarnings("hiding")
-	TEntryDigest _entryDigest_, @SuppressWarnings("hiding")
-	TDigestValue _digestValue_) {
-		// Constructor
-		setEntryDigest(_entryDigest_);
+    public ADigestEntry(
+        @SuppressWarnings("hiding") TEntryDigest _entryDigest_,
+        @SuppressWarnings("hiding") TDigestValue _digestValue_)
+    {
+        // Constructor
+        setEntryDigest(_entryDigest_);
 
-		setDigestValue(_digestValue_);
+        setDigestValue(_digestValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ADigestEntry(cloneNode(this._entryDigest_),
-				cloneNode(this._digestValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ADigestEntry(
+            cloneNode(this._entryDigest_),
+            cloneNode(this._digestValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseADigestEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseADigestEntry(this);
+    }
 
-	public TEntryDigest getEntryDigest() {
-		return this._entryDigest_;
-	}
+    public TEntryDigest getEntryDigest()
+    {
+        return this._entryDigest_;
+    }
 
-	public void setEntryDigest(TEntryDigest node) {
-		if (this._entryDigest_ != null) {
-			this._entryDigest_.parent(null);
-		}
+    public void setEntryDigest(TEntryDigest node)
+    {
+        if(this._entryDigest_ != null)
+        {
+            this._entryDigest_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._entryDigest_ = node;
-	}
+        this._entryDigest_ = node;
+    }
 
-	public TDigestValue getDigestValue() {
-		return this._digestValue_;
-	}
+    public TDigestValue getDigestValue()
+    {
+        return this._digestValue_;
+    }
 
-	public void setDigestValue(TDigestValue node) {
-		if (this._digestValue_ != null) {
-			this._digestValue_.parent(null);
-		}
+    public void setDigestValue(TDigestValue node)
+    {
+        if(this._digestValue_ != null)
+        {
+            this._digestValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._digestValue_ = node;
-	}
+        this._digestValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._entryDigest_) + toString(this._digestValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._entryDigest_)
+            + toString(this._digestValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._entryDigest_ == child) {
-			this._entryDigest_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._entryDigest_ == child)
+        {
+            this._entryDigest_ = null;
+            return;
+        }
 
-		if (this._digestValue_ == child) {
-			this._digestValue_ = null;
-			return;
-		}
+        if(this._digestValue_ == child)
+        {
+            this._digestValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._entryDigest_ == oldChild) {
-			setEntryDigest((TEntryDigest) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._entryDigest_ == oldChild)
+        {
+            setEntryDigest((TEntryDigest) newChild);
+            return;
+        }
 
-		if (this._digestValue_ == oldChild) {
-			setDigestValue((TDigestValue) newChild);
-			return;
-		}
+        if(this._digestValue_ == oldChild)
+        {
+            setDigestValue((TDigestValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

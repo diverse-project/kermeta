@@ -2,117 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ARequiredexecutionenvironmentValue extends
-		PRequiredexecutionenvironmentValue {
-	private TComma _comma_;
-	private PRequiredexecutionenvironment _requiredexecutionenvironment_;
+public final class ARequiredexecutionenvironmentValue extends PRequiredexecutionenvironmentValue
+{
+    private TComma _comma_;
+    private PRequiredexecutionenvironment _requiredexecutionenvironment_;
 
-	public ARequiredexecutionenvironmentValue() {
-		// Constructor
-	}
+    public ARequiredexecutionenvironmentValue()
+    {
+        // Constructor
+    }
 
-	public ARequiredexecutionenvironmentValue(@SuppressWarnings("hiding")
-	TComma _comma_, @SuppressWarnings("hiding")
-	PRequiredexecutionenvironment _requiredexecutionenvironment_) {
-		// Constructor
-		setComma(_comma_);
+    public ARequiredexecutionenvironmentValue(
+        @SuppressWarnings("hiding") TComma _comma_,
+        @SuppressWarnings("hiding") PRequiredexecutionenvironment _requiredexecutionenvironment_)
+    {
+        // Constructor
+        setComma(_comma_);
 
-		setRequiredexecutionenvironment(_requiredexecutionenvironment_);
+        setRequiredexecutionenvironment(_requiredexecutionenvironment_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ARequiredexecutionenvironmentValue(cloneNode(this._comma_),
-				cloneNode(this._requiredexecutionenvironment_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ARequiredexecutionenvironmentValue(
+            cloneNode(this._comma_),
+            cloneNode(this._requiredexecutionenvironment_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseARequiredexecutionenvironmentValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseARequiredexecutionenvironmentValue(this);
+    }
 
-	public TComma getComma() {
-		return this._comma_;
-	}
+    public TComma getComma()
+    {
+        return this._comma_;
+    }
 
-	public void setComma(TComma node) {
-		if (this._comma_ != null) {
-			this._comma_.parent(null);
-		}
+    public void setComma(TComma node)
+    {
+        if(this._comma_ != null)
+        {
+            this._comma_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._comma_ = node;
-	}
+        this._comma_ = node;
+    }
 
-	public PRequiredexecutionenvironment getRequiredexecutionenvironment() {
-		return this._requiredexecutionenvironment_;
-	}
+    public PRequiredexecutionenvironment getRequiredexecutionenvironment()
+    {
+        return this._requiredexecutionenvironment_;
+    }
 
-	public void setRequiredexecutionenvironment(
-			PRequiredexecutionenvironment node) {
-		if (this._requiredexecutionenvironment_ != null) {
-			this._requiredexecutionenvironment_.parent(null);
-		}
+    public void setRequiredexecutionenvironment(PRequiredexecutionenvironment node)
+    {
+        if(this._requiredexecutionenvironment_ != null)
+        {
+            this._requiredexecutionenvironment_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._requiredexecutionenvironment_ = node;
-	}
+        this._requiredexecutionenvironment_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._comma_)
-				+ toString(this._requiredexecutionenvironment_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._comma_)
+            + toString(this._requiredexecutionenvironment_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._comma_ == child) {
-			this._comma_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._comma_ == child)
+        {
+            this._comma_ = null;
+            return;
+        }
 
-		if (this._requiredexecutionenvironment_ == child) {
-			this._requiredexecutionenvironment_ = null;
-			return;
-		}
+        if(this._requiredexecutionenvironment_ == child)
+        {
+            this._requiredexecutionenvironment_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._comma_ == oldChild) {
-			setComma((TComma) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._comma_ == oldChild)
+        {
+            setComma((TComma) newChild);
+            return;
+        }
 
-		if (this._requiredexecutionenvironment_ == oldChild) {
-			setRequiredexecutionenvironment((PRequiredexecutionenvironment) newChild);
-			return;
-		}
+        if(this._requiredexecutionenvironment_ == oldChild)
+        {
+            setRequiredexecutionenvironment((PRequiredexecutionenvironment) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

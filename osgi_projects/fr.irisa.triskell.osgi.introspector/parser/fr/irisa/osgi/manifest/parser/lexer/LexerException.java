@@ -3,8 +3,10 @@
 package fr.irisa.osgi.manifest.parser.lexer;
 
 @SuppressWarnings("serial")
-public class LexerException extends Exception {
-	public LexerException(String message) {
-		super(message);
-	}
+public class LexerException extends Exception
+{
+    public LexerException(String message)
+    {
+        super(message);
+    }
 }

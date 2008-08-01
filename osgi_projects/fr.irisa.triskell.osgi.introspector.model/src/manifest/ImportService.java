@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportService.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: ImportService.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
  */
 package manifest;
 
@@ -13,7 +13,7 @@ package manifest;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link manifest.ImportService#isResolve <em>Resolve</em>}</li>
+ *   <li>{@link manifest.ImportService#isResolved <em>Resolved</em>}</li>
  *   <li>{@link manifest.ImportService#getService <em>Service</em>}</li>
  *   <li>{@link manifest.ImportService#getServiceElement <em>Service Element</em>}</li>
  * </ul>
@@ -24,6 +24,32 @@ package manifest;
  * @generated
  */
 public interface ImportService extends MANIFESTEntry {
+	/**
+	 * Returns the value of the '<em><b>Resolved</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resolved</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resolved</em>' attribute.
+	 * @see #setResolved(boolean)
+	 * @see manifest.ManifestPackage#getImportService_Resolved()
+	 * @model dataType="manifest.boolean" required="true"
+	 * @generated
+	 */
+	boolean isResolved();
+
+	/**
+	 * Sets the value of the '{@link manifest.ImportService#isResolved <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resolved</em>' attribute.
+	 * @see #isResolved()
+	 * @generated
+	 */
+	void setResolved(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Service</b></em>' attribute. <!--
 	 * begin-user-doc -->
@@ -75,31 +101,5 @@ public interface ImportService extends MANIFESTEntry {
 	 * @generated
 	 */
 	void setServiceElement(Service value);
-
-	/**
-	 * Returns the value of the '<em><b>Resolve</b></em>' attribute. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Resolve</em>' attribute isn't clear, there
-	 * really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Resolve</em>' attribute.
-	 * @see #setResolve(boolean)
-	 * @see manifest.ManifestPackage#getImportService_Resolve()
-	 * @model dataType="manifest.boolean" required="true"
-	 * @generated
-	 */
-	boolean isResolve();
-
-	/**
-	 * Sets the value of the '{@link manifest.ImportService#isResolve <em>Resolve</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Resolve</em>' attribute.
-	 * @see #isResolve()
-	 * @generated
-	 */
-	void setResolve(boolean value);
 
 } // ImportService

@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameQnxOsnameValue extends POsnameValue {
-	private TOsnameQnx _osnameQnx_;
+public final class AOsnameQnxOsnameValue extends POsnameValue
+{
+    private TOsnameQnx _osnameQnx_;
 
-	public AOsnameQnxOsnameValue() {
-		// Constructor
-	}
+    public AOsnameQnxOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameQnxOsnameValue(@SuppressWarnings("hiding")
-	TOsnameQnx _osnameQnx_) {
-		// Constructor
-		setOsnameQnx(_osnameQnx_);
+    public AOsnameQnxOsnameValue(
+        @SuppressWarnings("hiding") TOsnameQnx _osnameQnx_)
+    {
+        // Constructor
+        setOsnameQnx(_osnameQnx_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameQnxOsnameValue(cloneNode(this._osnameQnx_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameQnxOsnameValue(
+            cloneNode(this._osnameQnx_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameQnxOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameQnxOsnameValue(this);
+    }
 
-	public TOsnameQnx getOsnameQnx() {
-		return this._osnameQnx_;
-	}
+    public TOsnameQnx getOsnameQnx()
+    {
+        return this._osnameQnx_;
+    }
 
-	public void setOsnameQnx(TOsnameQnx node) {
-		if (this._osnameQnx_ != null) {
-			this._osnameQnx_.parent(null);
-		}
+    public void setOsnameQnx(TOsnameQnx node)
+    {
+        if(this._osnameQnx_ != null)
+        {
+            this._osnameQnx_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameQnx_ = node;
-	}
+        this._osnameQnx_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameQnx_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameQnx_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameQnx_ == child) {
-			this._osnameQnx_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameQnx_ == child)
+        {
+            this._osnameQnx_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameQnx_ == oldChild) {
-			setOsnameQnx((TOsnameQnx) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameQnx_ == oldChild)
+        {
+            setOsnameQnx((TOsnameQnx) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

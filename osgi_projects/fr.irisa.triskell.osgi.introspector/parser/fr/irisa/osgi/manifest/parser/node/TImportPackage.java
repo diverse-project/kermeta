@@ -2,32 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TImportPackage extends Token {
-	public TImportPackage() {
-		super.setText("Import-Package: ");
-	}
+public final class TImportPackage extends Token
+{
+    public TImportPackage(String text)
+    {
+        setText(text);
+    }
 
-	public TImportPackage(int line, int pos) {
-		super.setText("Import-Package: ");
-		setLine(line);
-		setPos(pos);
-	}
+    public TImportPackage(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TImportPackage(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TImportPackage(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTImportPackage(this);
-	}
-
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TImportPackage text.");
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTImportPackage(this);
+    }
 }

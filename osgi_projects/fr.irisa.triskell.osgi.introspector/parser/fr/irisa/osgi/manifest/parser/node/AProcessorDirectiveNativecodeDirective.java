@@ -2,81 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProcessorDirectiveNativecodeDirective extends
-		PNativecodeDirective {
-	private PProcessorDirective _processorDirective_;
+public final class AProcessorDirectiveNativecodeDirective extends PNativecodeDirective
+{
+    private PProcessorDirective _processorDirective_;
 
-	public AProcessorDirectiveNativecodeDirective() {
-		// Constructor
-	}
+    public AProcessorDirectiveNativecodeDirective()
+    {
+        // Constructor
+    }
 
-	public AProcessorDirectiveNativecodeDirective(@SuppressWarnings("hiding")
-	PProcessorDirective _processorDirective_) {
-		// Constructor
-		setProcessorDirective(_processorDirective_);
+    public AProcessorDirectiveNativecodeDirective(
+        @SuppressWarnings("hiding") PProcessorDirective _processorDirective_)
+    {
+        // Constructor
+        setProcessorDirective(_processorDirective_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AProcessorDirectiveNativecodeDirective(
-				cloneNode(this._processorDirective_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AProcessorDirectiveNativecodeDirective(
+            cloneNode(this._processorDirective_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAProcessorDirectiveNativecodeDirective(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAProcessorDirectiveNativecodeDirective(this);
+    }
 
-	public PProcessorDirective getProcessorDirective() {
-		return this._processorDirective_;
-	}
+    public PProcessorDirective getProcessorDirective()
+    {
+        return this._processorDirective_;
+    }
 
-	public void setProcessorDirective(PProcessorDirective node) {
-		if (this._processorDirective_ != null) {
-			this._processorDirective_.parent(null);
-		}
+    public void setProcessorDirective(PProcessorDirective node)
+    {
+        if(this._processorDirective_ != null)
+        {
+            this._processorDirective_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._processorDirective_ = node;
-	}
+        this._processorDirective_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._processorDirective_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._processorDirective_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._processorDirective_ == child) {
-			this._processorDirective_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._processorDirective_ == child)
+        {
+            this._processorDirective_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._processorDirective_ == oldChild) {
-			setProcessorDirective((PProcessorDirective) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._processorDirective_ == oldChild)
+        {
+            setProcessorDirective((PProcessorDirective) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

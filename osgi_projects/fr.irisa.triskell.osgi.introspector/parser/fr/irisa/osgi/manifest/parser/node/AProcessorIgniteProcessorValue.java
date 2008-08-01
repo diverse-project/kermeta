@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProcessorIgniteProcessorValue extends PProcessorValue {
-	private TProcessorIgnite _processorIgnite_;
+public final class AProcessorIgniteProcessorValue extends PProcessorValue
+{
+    private TProcessorIgnite _processorIgnite_;
 
-	public AProcessorIgniteProcessorValue() {
-		// Constructor
-	}
+    public AProcessorIgniteProcessorValue()
+    {
+        // Constructor
+    }
 
-	public AProcessorIgniteProcessorValue(@SuppressWarnings("hiding")
-	TProcessorIgnite _processorIgnite_) {
-		// Constructor
-		setProcessorIgnite(_processorIgnite_);
+    public AProcessorIgniteProcessorValue(
+        @SuppressWarnings("hiding") TProcessorIgnite _processorIgnite_)
+    {
+        // Constructor
+        setProcessorIgnite(_processorIgnite_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AProcessorIgniteProcessorValue(
-				cloneNode(this._processorIgnite_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AProcessorIgniteProcessorValue(
+            cloneNode(this._processorIgnite_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAProcessorIgniteProcessorValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAProcessorIgniteProcessorValue(this);
+    }
 
-	public TProcessorIgnite getProcessorIgnite() {
-		return this._processorIgnite_;
-	}
+    public TProcessorIgnite getProcessorIgnite()
+    {
+        return this._processorIgnite_;
+    }
 
-	public void setProcessorIgnite(TProcessorIgnite node) {
-		if (this._processorIgnite_ != null) {
-			this._processorIgnite_.parent(null);
-		}
+    public void setProcessorIgnite(TProcessorIgnite node)
+    {
+        if(this._processorIgnite_ != null)
+        {
+            this._processorIgnite_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._processorIgnite_ = node;
-	}
+        this._processorIgnite_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._processorIgnite_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._processorIgnite_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._processorIgnite_ == child) {
-			this._processorIgnite_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._processorIgnite_ == child)
+        {
+            this._processorIgnite_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._processorIgnite_ == oldChild) {
-			setProcessorIgnite((TProcessorIgnite) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._processorIgnite_ == oldChild)
+        {
+            setProcessorIgnite((TProcessorIgnite) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

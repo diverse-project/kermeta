@@ -2,115 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleActivatorEntry extends PBundleActivatorEntry {
-	private TBundleActivator _bundleActivator_;
-	private PBundleActivatorEntryValue _bundleActivatorEntryValue_;
+public final class ABundleActivatorEntry extends PBundleActivatorEntry
+{
+    private TBundleActivator _bundleActivator_;
+    private PBundleActivatorEntryValue _bundleActivatorEntryValue_;
 
-	public ABundleActivatorEntry() {
-		// Constructor
-	}
+    public ABundleActivatorEntry()
+    {
+        // Constructor
+    }
 
-	public ABundleActivatorEntry(@SuppressWarnings("hiding")
-	TBundleActivator _bundleActivator_, @SuppressWarnings("hiding")
-	PBundleActivatorEntryValue _bundleActivatorEntryValue_) {
-		// Constructor
-		setBundleActivator(_bundleActivator_);
+    public ABundleActivatorEntry(
+        @SuppressWarnings("hiding") TBundleActivator _bundleActivator_,
+        @SuppressWarnings("hiding") PBundleActivatorEntryValue _bundleActivatorEntryValue_)
+    {
+        // Constructor
+        setBundleActivator(_bundleActivator_);
 
-		setBundleActivatorEntryValue(_bundleActivatorEntryValue_);
+        setBundleActivatorEntryValue(_bundleActivatorEntryValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleActivatorEntry(cloneNode(this._bundleActivator_),
-				cloneNode(this._bundleActivatorEntryValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleActivatorEntry(
+            cloneNode(this._bundleActivator_),
+            cloneNode(this._bundleActivatorEntryValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleActivatorEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleActivatorEntry(this);
+    }
 
-	public TBundleActivator getBundleActivator() {
-		return this._bundleActivator_;
-	}
+    public TBundleActivator getBundleActivator()
+    {
+        return this._bundleActivator_;
+    }
 
-	public void setBundleActivator(TBundleActivator node) {
-		if (this._bundleActivator_ != null) {
-			this._bundleActivator_.parent(null);
-		}
+    public void setBundleActivator(TBundleActivator node)
+    {
+        if(this._bundleActivator_ != null)
+        {
+            this._bundleActivator_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleActivator_ = node;
-	}
+        this._bundleActivator_ = node;
+    }
 
-	public PBundleActivatorEntryValue getBundleActivatorEntryValue() {
-		return this._bundleActivatorEntryValue_;
-	}
+    public PBundleActivatorEntryValue getBundleActivatorEntryValue()
+    {
+        return this._bundleActivatorEntryValue_;
+    }
 
-	public void setBundleActivatorEntryValue(PBundleActivatorEntryValue node) {
-		if (this._bundleActivatorEntryValue_ != null) {
-			this._bundleActivatorEntryValue_.parent(null);
-		}
+    public void setBundleActivatorEntryValue(PBundleActivatorEntryValue node)
+    {
+        if(this._bundleActivatorEntryValue_ != null)
+        {
+            this._bundleActivatorEntryValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleActivatorEntryValue_ = node;
-	}
+        this._bundleActivatorEntryValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleActivator_)
-				+ toString(this._bundleActivatorEntryValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleActivator_)
+            + toString(this._bundleActivatorEntryValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleActivator_ == child) {
-			this._bundleActivator_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleActivator_ == child)
+        {
+            this._bundleActivator_ = null;
+            return;
+        }
 
-		if (this._bundleActivatorEntryValue_ == child) {
-			this._bundleActivatorEntryValue_ = null;
-			return;
-		}
+        if(this._bundleActivatorEntryValue_ == child)
+        {
+            this._bundleActivatorEntryValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleActivator_ == oldChild) {
-			setBundleActivator((TBundleActivator) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleActivator_ == oldChild)
+        {
+            setBundleActivator((TBundleActivator) newChild);
+            return;
+        }
 
-		if (this._bundleActivatorEntryValue_ == oldChild) {
-			setBundleActivatorEntryValue((PBundleActivatorEntryValue) newChild);
-			return;
-		}
+        if(this._bundleActivatorEntryValue_ == oldChild)
+        {
+            setBundleActivatorEntryValue((PBundleActivatorEntryValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

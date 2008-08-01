@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TOsnameDigitalunix extends Token {
-	public TOsnameDigitalunix(String text) {
-		setText(text);
-	}
+public final class TOsnameDigitalunix extends Token
+{
+    public TOsnameDigitalunix(String text)
+    {
+        setText(text);
+    }
 
-	public TOsnameDigitalunix(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TOsnameDigitalunix(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TOsnameDigitalunix(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TOsnameDigitalunix(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTOsnameDigitalunix(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTOsnameDigitalunix(this);
+    }
 }

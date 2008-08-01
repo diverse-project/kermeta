@@ -2,114 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ALanguageDirective extends PLanguageDirective {
-	private TLanguage _language_;
-	private PLanguageValue _languageValue_;
+public final class ALanguageDirective extends PLanguageDirective
+{
+    private TLanguage _language_;
+    private PLanguageValue _languageValue_;
 
-	public ALanguageDirective() {
-		// Constructor
-	}
+    public ALanguageDirective()
+    {
+        // Constructor
+    }
 
-	public ALanguageDirective(@SuppressWarnings("hiding")
-	TLanguage _language_, @SuppressWarnings("hiding")
-	PLanguageValue _languageValue_) {
-		// Constructor
-		setLanguage(_language_);
+    public ALanguageDirective(
+        @SuppressWarnings("hiding") TLanguage _language_,
+        @SuppressWarnings("hiding") PLanguageValue _languageValue_)
+    {
+        // Constructor
+        setLanguage(_language_);
 
-		setLanguageValue(_languageValue_);
+        setLanguageValue(_languageValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ALanguageDirective(cloneNode(this._language_),
-				cloneNode(this._languageValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ALanguageDirective(
+            cloneNode(this._language_),
+            cloneNode(this._languageValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseALanguageDirective(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseALanguageDirective(this);
+    }
 
-	public TLanguage getLanguage() {
-		return this._language_;
-	}
+    public TLanguage getLanguage()
+    {
+        return this._language_;
+    }
 
-	public void setLanguage(TLanguage node) {
-		if (this._language_ != null) {
-			this._language_.parent(null);
-		}
+    public void setLanguage(TLanguage node)
+    {
+        if(this._language_ != null)
+        {
+            this._language_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._language_ = node;
-	}
+        this._language_ = node;
+    }
 
-	public PLanguageValue getLanguageValue() {
-		return this._languageValue_;
-	}
+    public PLanguageValue getLanguageValue()
+    {
+        return this._languageValue_;
+    }
 
-	public void setLanguageValue(PLanguageValue node) {
-		if (this._languageValue_ != null) {
-			this._languageValue_.parent(null);
-		}
+    public void setLanguageValue(PLanguageValue node)
+    {
+        if(this._languageValue_ != null)
+        {
+            this._languageValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._languageValue_ = node;
-	}
+        this._languageValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._language_) + toString(this._languageValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._language_)
+            + toString(this._languageValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._language_ == child) {
-			this._language_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._language_ == child)
+        {
+            this._language_ = null;
+            return;
+        }
 
-		if (this._languageValue_ == child) {
-			this._languageValue_ = null;
-			return;
-		}
+        if(this._languageValue_ == child)
+        {
+            this._languageValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._language_ == oldChild) {
-			setLanguage((TLanguage) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._language_ == oldChild)
+        {
+            setLanguage((TLanguage) newChild);
+            return;
+        }
 
-		if (this._languageValue_ == oldChild) {
-			setLanguageValue((PLanguageValue) newChild);
-			return;
-		}
+        if(this._languageValue_ == oldChild)
+        {
+            setLanguageValue((PLanguageValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

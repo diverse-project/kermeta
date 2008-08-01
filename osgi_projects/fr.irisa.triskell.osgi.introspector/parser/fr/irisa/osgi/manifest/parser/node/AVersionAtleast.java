@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVersionAtleast extends PVersionAtleast {
-	private PMajorVersionEntry _majorVersionEntry_;
+public final class AVersionAtleast extends PVersionAtleast
+{
+    private PMajorVersionEntry _majorVersionEntry_;
 
-	public AVersionAtleast() {
-		// Constructor
-	}
+    public AVersionAtleast()
+    {
+        // Constructor
+    }
 
-	public AVersionAtleast(@SuppressWarnings("hiding")
-	PMajorVersionEntry _majorVersionEntry_) {
-		// Constructor
-		setMajorVersionEntry(_majorVersionEntry_);
+    public AVersionAtleast(
+        @SuppressWarnings("hiding") PMajorVersionEntry _majorVersionEntry_)
+    {
+        // Constructor
+        setMajorVersionEntry(_majorVersionEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AVersionAtleast(cloneNode(this._majorVersionEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AVersionAtleast(
+            cloneNode(this._majorVersionEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAVersionAtleast(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAVersionAtleast(this);
+    }
 
-	public PMajorVersionEntry getMajorVersionEntry() {
-		return this._majorVersionEntry_;
-	}
+    public PMajorVersionEntry getMajorVersionEntry()
+    {
+        return this._majorVersionEntry_;
+    }
 
-	public void setMajorVersionEntry(PMajorVersionEntry node) {
-		if (this._majorVersionEntry_ != null) {
-			this._majorVersionEntry_.parent(null);
-		}
+    public void setMajorVersionEntry(PMajorVersionEntry node)
+    {
+        if(this._majorVersionEntry_ != null)
+        {
+            this._majorVersionEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._majorVersionEntry_ = node;
-	}
+        this._majorVersionEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._majorVersionEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._majorVersionEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._majorVersionEntry_ == child) {
-			this._majorVersionEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._majorVersionEntry_ == child)
+        {
+            this._majorVersionEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._majorVersionEntry_ == oldChild) {
-			setMajorVersionEntry((PMajorVersionEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._majorVersionEntry_ == oldChild)
+        {
+            setMajorVersionEntry((PMajorVersionEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

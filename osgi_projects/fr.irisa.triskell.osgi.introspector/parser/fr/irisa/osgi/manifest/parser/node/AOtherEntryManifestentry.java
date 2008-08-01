@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOtherEntryManifestentry extends PManifestentry {
-	private POtherEntry _otherEntry_;
+public final class AOtherEntryManifestentry extends PManifestentry
+{
+    private POtherEntry _otherEntry_;
 
-	public AOtherEntryManifestentry() {
-		// Constructor
-	}
+    public AOtherEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public AOtherEntryManifestentry(@SuppressWarnings("hiding")
-	POtherEntry _otherEntry_) {
-		// Constructor
-		setOtherEntry(_otherEntry_);
+    public AOtherEntryManifestentry(
+        @SuppressWarnings("hiding") POtherEntry _otherEntry_)
+    {
+        // Constructor
+        setOtherEntry(_otherEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOtherEntryManifestentry(cloneNode(this._otherEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOtherEntryManifestentry(
+            cloneNode(this._otherEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOtherEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOtherEntryManifestentry(this);
+    }
 
-	public POtherEntry getOtherEntry() {
-		return this._otherEntry_;
-	}
+    public POtherEntry getOtherEntry()
+    {
+        return this._otherEntry_;
+    }
 
-	public void setOtherEntry(POtherEntry node) {
-		if (this._otherEntry_ != null) {
-			this._otherEntry_.parent(null);
-		}
+    public void setOtherEntry(POtherEntry node)
+    {
+        if(this._otherEntry_ != null)
+        {
+            this._otherEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._otherEntry_ = node;
-	}
+        this._otherEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._otherEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._otherEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._otherEntry_ == child) {
-			this._otherEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._otherEntry_ == child)
+        {
+            this._otherEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._otherEntry_ == oldChild) {
-			setOtherEntry((POtherEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._otherEntry_ == oldChild)
+        {
+            setOtherEntry((POtherEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

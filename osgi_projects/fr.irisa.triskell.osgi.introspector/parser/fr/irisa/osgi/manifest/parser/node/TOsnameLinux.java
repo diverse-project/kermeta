@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TOsnameLinux extends Token {
-	public TOsnameLinux(String text) {
-		setText(text);
-	}
+public final class TOsnameLinux extends Token
+{
+    public TOsnameLinux(String text)
+    {
+        setText(text);
+    }
 
-	public TOsnameLinux(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TOsnameLinux(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TOsnameLinux(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TOsnameLinux(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTOsnameLinux(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTOsnameLinux(this);
+    }
 }

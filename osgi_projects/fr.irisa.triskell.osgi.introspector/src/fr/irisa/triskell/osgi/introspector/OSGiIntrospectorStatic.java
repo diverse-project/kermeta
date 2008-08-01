@@ -47,6 +47,7 @@ public class OSGiIntrospectorStatic {
 			}
 				this.introspectionWithoutError = this.resolve() && validGeneration;
 				OSGiIntrospectorUtil.saveModel(XMIFilePath, this.framework);
+				OSGiIntrospectorUtil.displayLog(log);
 		} else {
 			OSGiIntrospectorUtil.log(Level.SEVERE,
 					"GenerateFramework take two parameters which are String."
@@ -173,7 +174,7 @@ public class OSGiIntrospectorStatic {
 			defaultPackage.setFullPath("");
 			bundle.setPackage(defaultPackage);
 
-			OSGiIntrospectorUtil.listAllEntriesIntoJarFile(jar, bundle);
+			OSGiIntrospectorUtil.listAllEntriesIntoJarFile(jar, bundle, false);
 
 			// This test is used because the Manifest function
 			// write(OutputStream) can return a valid value except if
@@ -204,6 +205,7 @@ public class OSGiIntrospectorStatic {
 	public boolean resolve() {
 		Resolver resolver = new ResolverStatic();
 		resolver.setLog(this.log);
+		resolver.resolveRequireBundle(this.framework, this.parser.getUnresolvedRequireBundleValue(), this.parser.getUnresolvedRequireBundleBundle());
 		resolver.resolveFragmentHost(this.framework, this.parser.getFragmentHostReferences());
 		resolver.resolveExportPackage(this.parser.getUnresolvedExportPackageValue(), this.parser.getUnresolvedExportPackageBundle());
 		resolver.resolveExportPackageExclude(this.parser.getUnresolvedExportPackageExcludeValue(), this.parser.getUnresolvedExportPackageExcludeExportPackage());
@@ -212,10 +214,9 @@ public class OSGiIntrospectorStatic {
 		resolver.resolveActivationPolicyInclude(this.parser.getUnresolvedActivationPolicyIncludeValue(), this.parser.getUnresolvedActivationPolicyIncludeBundle());
 		resolver.resolveActivator(this.parser.getUnresolvedActivatorBundle(), this.parser.getUnresolvedActivatorValue());
 		resolver.resolveExportService(this.parser.getUnresolvedExportServiceBundle(), this.parser.getUnresolvedExportServiceValue());
-
 		resolver.resolveExportPackageUses(this.parser.getUnresolvedExportPackageUsesValue(),this.parser.getUnresolvedExportPackageUsesBundle());
-		resolver.resolveImportPackage(this.parser.getImportPackageReferences());
-		resolver.resolveImportService(this.parser.getImportServiceReferences());
+		resolver.resolveImportPackage(this.parser.getUnresolvedImportPackageValue(), this.parser.getUnresolvedImportPackageBundle());
+		resolver.resolveImportService(this.parser.getUnresolvedImportServiceValue(), this.parser.getUnresolvedImportServiceBundle(), this.parser.getServicesAvailable());
 		// TODO return
 		return true;
 	}

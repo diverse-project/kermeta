@@ -2,89 +2,100 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import java.util.*;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AManifest extends PManifest {
-	private final LinkedList<PManifestcontent> _manifestcontent_ = new LinkedList<PManifestcontent>();
+public final class AManifest extends PManifest
+{
+    private final LinkedList<PManifestcontent> _manifestcontent_ = new LinkedList<PManifestcontent>();
 
-	public AManifest() {
-		// Constructor
-	}
+    public AManifest()
+    {
+        // Constructor
+    }
 
-	public AManifest(@SuppressWarnings("hiding")
-	List<PManifestcontent> _manifestcontent_) {
-		// Constructor
-		setManifestcontent(_manifestcontent_);
+    public AManifest(
+        @SuppressWarnings("hiding") List<PManifestcontent> _manifestcontent_)
+    {
+        // Constructor
+        setManifestcontent(_manifestcontent_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AManifest(cloneList(this._manifestcontent_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AManifest(
+            cloneList(this._manifestcontent_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAManifest(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAManifest(this);
+    }
 
-	public LinkedList<PManifestcontent> getManifestcontent() {
-		return this._manifestcontent_;
-	}
+    public LinkedList<PManifestcontent> getManifestcontent()
+    {
+        return this._manifestcontent_;
+    }
 
-	public void setManifestcontent(List<PManifestcontent> list) {
-		this._manifestcontent_.clear();
-		this._manifestcontent_.addAll(list);
-		for (PManifestcontent e : list) {
-			if (e.parent() != null) {
-				e.parent().removeChild(e);
-			}
+    public void setManifestcontent(List<PManifestcontent> list)
+    {
+        this._manifestcontent_.clear();
+        this._manifestcontent_.addAll(list);
+        for(PManifestcontent e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
 
-			e.parent(this);
-		}
-	}
+            e.parent(this);
+        }
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._manifestcontent_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._manifestcontent_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._manifestcontent_.remove(child)) {
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._manifestcontent_.remove(child))
+        {
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		for (ListIterator<PManifestcontent> i = this._manifestcontent_
-				.listIterator(); i.hasNext();) {
-			if (i.next() == oldChild) {
-				if (newChild != null) {
-					i.set((PManifestcontent) newChild);
-					newChild.parent(this);
-					oldChild.parent(null);
-					return;
-				}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        for(ListIterator<PManifestcontent> i = this._manifestcontent_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PManifestcontent) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-				i.remove();
-				oldChild.parent(null);
-				return;
-			}
-		}
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

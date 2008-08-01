@@ -2,81 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameDirectiveNativecodeDirective extends
-		PNativecodeDirective {
-	private POsnameDirective _osnameDirective_;
+public final class AOsnameDirectiveNativecodeDirective extends PNativecodeDirective
+{
+    private POsnameDirective _osnameDirective_;
 
-	public AOsnameDirectiveNativecodeDirective() {
-		// Constructor
-	}
+    public AOsnameDirectiveNativecodeDirective()
+    {
+        // Constructor
+    }
 
-	public AOsnameDirectiveNativecodeDirective(@SuppressWarnings("hiding")
-	POsnameDirective _osnameDirective_) {
-		// Constructor
-		setOsnameDirective(_osnameDirective_);
+    public AOsnameDirectiveNativecodeDirective(
+        @SuppressWarnings("hiding") POsnameDirective _osnameDirective_)
+    {
+        // Constructor
+        setOsnameDirective(_osnameDirective_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameDirectiveNativecodeDirective(
-				cloneNode(this._osnameDirective_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameDirectiveNativecodeDirective(
+            cloneNode(this._osnameDirective_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameDirectiveNativecodeDirective(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameDirectiveNativecodeDirective(this);
+    }
 
-	public POsnameDirective getOsnameDirective() {
-		return this._osnameDirective_;
-	}
+    public POsnameDirective getOsnameDirective()
+    {
+        return this._osnameDirective_;
+    }
 
-	public void setOsnameDirective(POsnameDirective node) {
-		if (this._osnameDirective_ != null) {
-			this._osnameDirective_.parent(null);
-		}
+    public void setOsnameDirective(POsnameDirective node)
+    {
+        if(this._osnameDirective_ != null)
+        {
+            this._osnameDirective_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameDirective_ = node;
-	}
+        this._osnameDirective_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameDirective_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameDirective_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameDirective_ == child) {
-			this._osnameDirective_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameDirective_ == child)
+        {
+            this._osnameDirective_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameDirective_ == oldChild) {
-			setOsnameDirective((POsnameDirective) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameDirective_ == oldChild)
+        {
+            setOsnameDirective((POsnameDirective) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

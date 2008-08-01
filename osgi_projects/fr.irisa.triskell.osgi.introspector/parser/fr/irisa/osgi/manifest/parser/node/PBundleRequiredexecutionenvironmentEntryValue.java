@@ -2,7 +2,7 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-public abstract class PBundleRequiredexecutionenvironmentEntryValue extends
-		Node {
-	// Empty body
+public abstract class PBundleRequiredexecutionenvironmentEntryValue extends Node
+{
+    // Empty body
 }

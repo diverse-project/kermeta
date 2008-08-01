@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameFreebsdOsnameValue extends POsnameValue {
-	private TOsnameFreebsd _osnameFreebsd_;
+public final class AOsnameFreebsdOsnameValue extends POsnameValue
+{
+    private TOsnameFreebsd _osnameFreebsd_;
 
-	public AOsnameFreebsdOsnameValue() {
-		// Constructor
-	}
+    public AOsnameFreebsdOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameFreebsdOsnameValue(@SuppressWarnings("hiding")
-	TOsnameFreebsd _osnameFreebsd_) {
-		// Constructor
-		setOsnameFreebsd(_osnameFreebsd_);
+    public AOsnameFreebsdOsnameValue(
+        @SuppressWarnings("hiding") TOsnameFreebsd _osnameFreebsd_)
+    {
+        // Constructor
+        setOsnameFreebsd(_osnameFreebsd_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameFreebsdOsnameValue(cloneNode(this._osnameFreebsd_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameFreebsdOsnameValue(
+            cloneNode(this._osnameFreebsd_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameFreebsdOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameFreebsdOsnameValue(this);
+    }
 
-	public TOsnameFreebsd getOsnameFreebsd() {
-		return this._osnameFreebsd_;
-	}
+    public TOsnameFreebsd getOsnameFreebsd()
+    {
+        return this._osnameFreebsd_;
+    }
 
-	public void setOsnameFreebsd(TOsnameFreebsd node) {
-		if (this._osnameFreebsd_ != null) {
-			this._osnameFreebsd_.parent(null);
-		}
+    public void setOsnameFreebsd(TOsnameFreebsd node)
+    {
+        if(this._osnameFreebsd_ != null)
+        {
+            this._osnameFreebsd_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameFreebsd_ = node;
-	}
+        this._osnameFreebsd_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameFreebsd_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameFreebsd_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameFreebsd_ == child) {
-			this._osnameFreebsd_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameFreebsd_ == child)
+        {
+            this._osnameFreebsd_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameFreebsd_ == oldChild) {
-			setOsnameFreebsd((TOsnameFreebsd) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameFreebsd_ == oldChild)
+        {
+            setOsnameFreebsd((TOsnameFreebsd) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

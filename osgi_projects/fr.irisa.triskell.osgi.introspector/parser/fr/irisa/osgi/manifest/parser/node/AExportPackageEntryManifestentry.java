@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AExportPackageEntryManifestentry extends PManifestentry {
-	private PExportPackageEntry _exportPackageEntry_;
+public final class AExportPackageEntryManifestentry extends PManifestentry
+{
+    private PExportPackageEntry _exportPackageEntry_;
 
-	public AExportPackageEntryManifestentry() {
-		// Constructor
-	}
+    public AExportPackageEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public AExportPackageEntryManifestentry(@SuppressWarnings("hiding")
-	PExportPackageEntry _exportPackageEntry_) {
-		// Constructor
-		setExportPackageEntry(_exportPackageEntry_);
+    public AExportPackageEntryManifestentry(
+        @SuppressWarnings("hiding") PExportPackageEntry _exportPackageEntry_)
+    {
+        // Constructor
+        setExportPackageEntry(_exportPackageEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AExportPackageEntryManifestentry(
-				cloneNode(this._exportPackageEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AExportPackageEntryManifestentry(
+            cloneNode(this._exportPackageEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAExportPackageEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAExportPackageEntryManifestentry(this);
+    }
 
-	public PExportPackageEntry getExportPackageEntry() {
-		return this._exportPackageEntry_;
-	}
+    public PExportPackageEntry getExportPackageEntry()
+    {
+        return this._exportPackageEntry_;
+    }
 
-	public void setExportPackageEntry(PExportPackageEntry node) {
-		if (this._exportPackageEntry_ != null) {
-			this._exportPackageEntry_.parent(null);
-		}
+    public void setExportPackageEntry(PExportPackageEntry node)
+    {
+        if(this._exportPackageEntry_ != null)
+        {
+            this._exportPackageEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._exportPackageEntry_ = node;
-	}
+        this._exportPackageEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._exportPackageEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._exportPackageEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._exportPackageEntry_ == child) {
-			this._exportPackageEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._exportPackageEntry_ == child)
+        {
+            this._exportPackageEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._exportPackageEntry_ == oldChild) {
-			setExportPackageEntry((PExportPackageEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._exportPackageEntry_ == oldChild)
+        {
+            setExportPackageEntry((PExportPackageEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

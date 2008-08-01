@@ -2,32 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TBundleName extends Token {
-	public TBundleName() {
-		super.setText("Bundle-Name: ");
-	}
+public final class TBundleName extends Token
+{
+    public TBundleName(String text)
+    {
+        setText(text);
+    }
 
-	public TBundleName(int line, int pos) {
-		super.setText("Bundle-Name: ");
-		setLine(line);
-		setPos(pos);
-	}
+    public TBundleName(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TBundleName(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TBundleName(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTBundleName(this);
-	}
-
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TBundleName text.");
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTBundleName(this);
+    }
 }

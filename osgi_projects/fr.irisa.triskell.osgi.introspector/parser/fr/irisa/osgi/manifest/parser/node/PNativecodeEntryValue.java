@@ -2,6 +2,7 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-public abstract class PNativecodeEntryValue extends Node {
-	// Empty body
+public abstract class PNativecodeEntryValue extends Node
+{
+    // Empty body
 }

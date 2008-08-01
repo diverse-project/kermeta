@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionPackage.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: OptionPackage.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
  */
 package option;
 
@@ -453,13 +453,22 @@ public interface OptionPackage extends EPackage {
 	int USES__PACKAGES_LIST = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USES__RESOLVED = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Uses</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int USES_FEATURE_COUNT = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 2;
+	int USES_FEATURE_COUNT = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link option.impl.FragmentHostDirectiveImpl <em>Fragment Host Directive</em>}' class.
@@ -1186,6 +1195,17 @@ public interface OptionPackage extends EPackage {
 	EReference getUses_PackagesList();
 
 	/**
+	 * Returns the meta object for the attribute '{@link option.Uses#isResolved <em>Resolved</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resolved</em>'.
+	 * @see option.Uses#isResolved()
+	 * @see #getUses()
+	 * @generated
+	 */
+	EAttribute getUses_Resolved();
+
+	/**
 	 * Returns the meta object for class '{@link option.Extension <em>Extension</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Extension</em>'.
@@ -1690,6 +1710,14 @@ public interface OptionPackage extends EPackage {
 		 * @generated
 		 */
 		EReference USES__PACKAGES_LIST = eINSTANCE.getUses_PackagesList();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute USES__RESOLVED = eINSTANCE.getUses_Resolved();
 
 		/**
 		 * The meta object literal for the '{@link option.impl.ExtensionImpl <em>Extension</em>}' class.

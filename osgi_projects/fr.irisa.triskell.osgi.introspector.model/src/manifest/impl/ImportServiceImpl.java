@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportServiceImpl.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: ImportServiceImpl.java,v 1.4 2008-08-01 09:44:38 edaubert Exp $
  */
 package manifest.impl;
 
@@ -22,7 +22,7 @@ import org.osgi.framework.Constants;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link manifest.impl.ImportServiceImpl#isResolve <em>Resolve</em>}</li>
+ *   <li>{@link manifest.impl.ImportServiceImpl#isResolved <em>Resolved</em>}</li>
  *   <li>{@link manifest.impl.ImportServiceImpl#getService <em>Service</em>}</li>
  *   <li>{@link manifest.impl.ImportServiceImpl#getServiceElement <em>Service Element</em>}</li>
  * </ul>
@@ -33,22 +33,24 @@ import org.osgi.framework.Constants;
 public class ImportServiceImpl extends MANIFESTEntryImpl implements
 		ImportService {
 	/**
-	 * The default value of the '{@link #isResolve() <em>Resolve</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #isResolve()
+	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResolved()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean RESOLVE_EDEFAULT = false;
+	protected static final boolean RESOLVED_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isResolve() <em>Resolve</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #isResolve()
+	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResolved()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean resolve = RESOLVE_EDEFAULT;
+	protected boolean resolved = RESOLVED_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getService() <em>Service</em>}' attribute.
@@ -93,6 +95,27 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	@Override
 	protected EClass eStaticClass() {
 		return ManifestPackage.Literals.IMPORT_SERVICE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isResolved() {
+		return resolved;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResolved(boolean newResolved) {
+		boolean oldResolved = resolved;
+		resolved = newResolved;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.IMPORT_SERVICE__RESOLVED, oldResolved, resolved));
 	}
 
 	/**
@@ -156,30 +179,11 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isResolve() {
-		return resolve;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setResolve(boolean newResolve) {
-		boolean oldResolve = resolve;
-		resolve = newResolve;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.IMPORT_SERVICE__RESOLVE, oldResolve, resolve));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ManifestPackage.IMPORT_SERVICE__RESOLVE:
-				return isResolve() ? Boolean.TRUE : Boolean.FALSE;
+			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
+				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
 			case ManifestPackage.IMPORT_SERVICE__SERVICE:
 				return getService();
 			case ManifestPackage.IMPORT_SERVICE__SERVICE_ELEMENT:
@@ -196,8 +200,8 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ManifestPackage.IMPORT_SERVICE__RESOLVE:
-				setResolve(((Boolean)newValue).booleanValue());
+			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
+				setResolved(((Boolean)newValue).booleanValue());
 				return;
 			case ManifestPackage.IMPORT_SERVICE__SERVICE:
 				setService((String)newValue);
@@ -216,8 +220,8 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ManifestPackage.IMPORT_SERVICE__RESOLVE:
-				setResolve(RESOLVE_EDEFAULT);
+			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
+				setResolved(RESOLVED_EDEFAULT);
 				return;
 			case ManifestPackage.IMPORT_SERVICE__SERVICE:
 				setService(SERVICE_EDEFAULT);
@@ -236,8 +240,8 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ManifestPackage.IMPORT_SERVICE__RESOLVE:
-				return resolve != RESOLVE_EDEFAULT;
+			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
+				return resolved != RESOLVED_EDEFAULT;
 			case ManifestPackage.IMPORT_SERVICE__SERVICE:
 				return SERVICE_EDEFAULT == null ? service != null : !SERVICE_EDEFAULT.equals(service);
 			case ManifestPackage.IMPORT_SERVICE__SERVICE_ELEMENT:
@@ -255,8 +259,8 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (resolve: ");
-		result.append(resolve);
+		result.append(" (resolved: ");
+		result.append(resolved);
 		result.append(", service: ");
 		result.append(service);
 		result.append(')');

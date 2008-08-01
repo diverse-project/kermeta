@@ -2,19 +2,21 @@
 
 package fr.irisa.osgi.manifest.parser.parser;
 
-import fr.irisa.osgi.manifest.parser.node.Token;
+import fr.irisa.osgi.manifest.parser.node.*;
 
 @SuppressWarnings("serial")
-public class ParserException extends Exception {
-	Token token;
+public class ParserException extends Exception
+{
+    Token token;
 
-	public ParserException(@SuppressWarnings("hiding")
-	Token token, String message) {
-		super(message);
-		this.token = token;
-	}
+    public ParserException(@SuppressWarnings("hiding") Token token, String  message)
+    {
+        super(message);
+        this.token = token;
+    }
 
-	public Token getToken() {
-		return this.token;
-	}
+    public Token getToken()
+    {
+        return this.token;
+    }
 }

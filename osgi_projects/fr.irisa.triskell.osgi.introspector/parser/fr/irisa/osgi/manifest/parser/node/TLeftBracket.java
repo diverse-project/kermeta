@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TLeftBracket extends Token {
-	public TLeftBracket(String text) {
-		setText(text);
-	}
+public final class TLeftBracket extends Token
+{
+    public TLeftBracket(String text)
+    {
+        setText(text);
+    }
 
-	public TLeftBracket(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TLeftBracket(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TLeftBracket(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TLeftBracket(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTLeftBracket(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTLeftBracket(this);
+    }
 }

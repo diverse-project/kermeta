@@ -2,117 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ANativecodeDirectiveNativecodeParameter extends
-		PNativecodeParameter {
-	private TSemicolon _semicolon_;
-	private PNativecodeDirective _nativecodeDirective_;
+public final class ANativecodeDirectiveNativecodeParameter extends PNativecodeParameter
+{
+    private TSemicolon _semicolon_;
+    private PNativecodeDirective _nativecodeDirective_;
 
-	public ANativecodeDirectiveNativecodeParameter() {
-		// Constructor
-	}
+    public ANativecodeDirectiveNativecodeParameter()
+    {
+        // Constructor
+    }
 
-	public ANativecodeDirectiveNativecodeParameter(@SuppressWarnings("hiding")
-	TSemicolon _semicolon_, @SuppressWarnings("hiding")
-	PNativecodeDirective _nativecodeDirective_) {
-		// Constructor
-		setSemicolon(_semicolon_);
+    public ANativecodeDirectiveNativecodeParameter(
+        @SuppressWarnings("hiding") TSemicolon _semicolon_,
+        @SuppressWarnings("hiding") PNativecodeDirective _nativecodeDirective_)
+    {
+        // Constructor
+        setSemicolon(_semicolon_);
 
-		setNativecodeDirective(_nativecodeDirective_);
+        setNativecodeDirective(_nativecodeDirective_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ANativecodeDirectiveNativecodeParameter(
-				cloneNode(this._semicolon_),
-				cloneNode(this._nativecodeDirective_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ANativecodeDirectiveNativecodeParameter(
+            cloneNode(this._semicolon_),
+            cloneNode(this._nativecodeDirective_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseANativecodeDirectiveNativecodeParameter(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseANativecodeDirectiveNativecodeParameter(this);
+    }
 
-	public TSemicolon getSemicolon() {
-		return this._semicolon_;
-	}
+    public TSemicolon getSemicolon()
+    {
+        return this._semicolon_;
+    }
 
-	public void setSemicolon(TSemicolon node) {
-		if (this._semicolon_ != null) {
-			this._semicolon_.parent(null);
-		}
+    public void setSemicolon(TSemicolon node)
+    {
+        if(this._semicolon_ != null)
+        {
+            this._semicolon_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._semicolon_ = node;
-	}
+        this._semicolon_ = node;
+    }
 
-	public PNativecodeDirective getNativecodeDirective() {
-		return this._nativecodeDirective_;
-	}
+    public PNativecodeDirective getNativecodeDirective()
+    {
+        return this._nativecodeDirective_;
+    }
 
-	public void setNativecodeDirective(PNativecodeDirective node) {
-		if (this._nativecodeDirective_ != null) {
-			this._nativecodeDirective_.parent(null);
-		}
+    public void setNativecodeDirective(PNativecodeDirective node)
+    {
+        if(this._nativecodeDirective_ != null)
+        {
+            this._nativecodeDirective_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._nativecodeDirective_ = node;
-	}
+        this._nativecodeDirective_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._semicolon_)
-				+ toString(this._nativecodeDirective_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._semicolon_)
+            + toString(this._nativecodeDirective_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._semicolon_ == child) {
-			this._semicolon_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._semicolon_ == child)
+        {
+            this._semicolon_ = null;
+            return;
+        }
 
-		if (this._nativecodeDirective_ == child) {
-			this._nativecodeDirective_ = null;
-			return;
-		}
+        if(this._nativecodeDirective_ == child)
+        {
+            this._nativecodeDirective_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._semicolon_ == oldChild) {
-			setSemicolon((TSemicolon) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._semicolon_ == oldChild)
+        {
+            setSemicolon((TSemicolon) newChild);
+            return;
+        }
 
-		if (this._nativecodeDirective_ == oldChild) {
-			setNativecodeDirective((PNativecodeDirective) newChild);
-			return;
-		}
+        if(this._nativecodeDirective_ == oldChild)
+        {
+            setNativecodeDirective((PNativecodeDirective) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVersionAtleastVersionRange extends PVersionRange {
-	private PVersionAtleast _versionAtleast_;
+public final class AVersionAtleastVersionRange extends PVersionRange
+{
+    private PVersionAtleast _versionAtleast_;
 
-	public AVersionAtleastVersionRange() {
-		// Constructor
-	}
+    public AVersionAtleastVersionRange()
+    {
+        // Constructor
+    }
 
-	public AVersionAtleastVersionRange(@SuppressWarnings("hiding")
-	PVersionAtleast _versionAtleast_) {
-		// Constructor
-		setVersionAtleast(_versionAtleast_);
+    public AVersionAtleastVersionRange(
+        @SuppressWarnings("hiding") PVersionAtleast _versionAtleast_)
+    {
+        // Constructor
+        setVersionAtleast(_versionAtleast_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AVersionAtleastVersionRange(cloneNode(this._versionAtleast_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AVersionAtleastVersionRange(
+            cloneNode(this._versionAtleast_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAVersionAtleastVersionRange(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAVersionAtleastVersionRange(this);
+    }
 
-	public PVersionAtleast getVersionAtleast() {
-		return this._versionAtleast_;
-	}
+    public PVersionAtleast getVersionAtleast()
+    {
+        return this._versionAtleast_;
+    }
 
-	public void setVersionAtleast(PVersionAtleast node) {
-		if (this._versionAtleast_ != null) {
-			this._versionAtleast_.parent(null);
-		}
+    public void setVersionAtleast(PVersionAtleast node)
+    {
+        if(this._versionAtleast_ != null)
+        {
+            this._versionAtleast_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._versionAtleast_ = node;
-	}
+        this._versionAtleast_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._versionAtleast_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._versionAtleast_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._versionAtleast_ == child) {
-			this._versionAtleast_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._versionAtleast_ == child)
+        {
+            this._versionAtleast_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._versionAtleast_ == oldChild) {
-			setVersionAtleast((PVersionAtleast) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._versionAtleast_ == oldChild)
+        {
+            setVersionAtleast((PVersionAtleast) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

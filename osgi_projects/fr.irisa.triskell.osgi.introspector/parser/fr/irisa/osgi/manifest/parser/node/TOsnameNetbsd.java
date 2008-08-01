@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TOsnameNetbsd extends Token {
-	public TOsnameNetbsd(String text) {
-		setText(text);
-	}
+public final class TOsnameNetbsd extends Token
+{
+    public TOsnameNetbsd(String text)
+    {
+        setText(text);
+    }
 
-	public TOsnameNetbsd(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TOsnameNetbsd(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TOsnameNetbsd(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TOsnameNetbsd(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTOsnameNetbsd(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTOsnameNetbsd(this);
+    }
 }

@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AImportServiceEntryManifestentry extends PManifestentry {
-	private PImportServiceEntry _importServiceEntry_;
+public final class AImportServiceEntryManifestentry extends PManifestentry
+{
+    private PImportServiceEntry _importServiceEntry_;
 
-	public AImportServiceEntryManifestentry() {
-		// Constructor
-	}
+    public AImportServiceEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public AImportServiceEntryManifestentry(@SuppressWarnings("hiding")
-	PImportServiceEntry _importServiceEntry_) {
-		// Constructor
-		setImportServiceEntry(_importServiceEntry_);
+    public AImportServiceEntryManifestentry(
+        @SuppressWarnings("hiding") PImportServiceEntry _importServiceEntry_)
+    {
+        // Constructor
+        setImportServiceEntry(_importServiceEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AImportServiceEntryManifestentry(
-				cloneNode(this._importServiceEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AImportServiceEntryManifestentry(
+            cloneNode(this._importServiceEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAImportServiceEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAImportServiceEntryManifestentry(this);
+    }
 
-	public PImportServiceEntry getImportServiceEntry() {
-		return this._importServiceEntry_;
-	}
+    public PImportServiceEntry getImportServiceEntry()
+    {
+        return this._importServiceEntry_;
+    }
 
-	public void setImportServiceEntry(PImportServiceEntry node) {
-		if (this._importServiceEntry_ != null) {
-			this._importServiceEntry_.parent(null);
-		}
+    public void setImportServiceEntry(PImportServiceEntry node)
+    {
+        if(this._importServiceEntry_ != null)
+        {
+            this._importServiceEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._importServiceEntry_ = node;
-	}
+        this._importServiceEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._importServiceEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._importServiceEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._importServiceEntry_ == child) {
-			this._importServiceEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._importServiceEntry_ == child)
+        {
+            this._importServiceEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._importServiceEntry_ == oldChild) {
-			setImportServiceEntry((PImportServiceEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._importServiceEntry_ == oldChild)
+        {
+            setImportServiceEntry((PImportServiceEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

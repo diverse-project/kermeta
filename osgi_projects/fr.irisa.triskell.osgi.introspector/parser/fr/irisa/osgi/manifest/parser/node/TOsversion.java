@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TOsversion extends Token {
-	public TOsversion(String text) {
-		setText(text);
-	}
+public final class TOsversion extends Token
+{
+    public TOsversion(String text)
+    {
+        setText(text);
+    }
 
-	public TOsversion(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TOsversion(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TOsversion(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TOsversion(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTOsversion(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTOsversion(this);
+    }
 }

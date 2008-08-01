@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProcessorAlphaProcessorValue extends PProcessorValue {
-	private TProcessorAlpha _processorAlpha_;
+public final class AProcessorAlphaProcessorValue extends PProcessorValue
+{
+    private TProcessorAlpha _processorAlpha_;
 
-	public AProcessorAlphaProcessorValue() {
-		// Constructor
-	}
+    public AProcessorAlphaProcessorValue()
+    {
+        // Constructor
+    }
 
-	public AProcessorAlphaProcessorValue(@SuppressWarnings("hiding")
-	TProcessorAlpha _processorAlpha_) {
-		// Constructor
-		setProcessorAlpha(_processorAlpha_);
+    public AProcessorAlphaProcessorValue(
+        @SuppressWarnings("hiding") TProcessorAlpha _processorAlpha_)
+    {
+        // Constructor
+        setProcessorAlpha(_processorAlpha_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AProcessorAlphaProcessorValue(
-				cloneNode(this._processorAlpha_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AProcessorAlphaProcessorValue(
+            cloneNode(this._processorAlpha_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAProcessorAlphaProcessorValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAProcessorAlphaProcessorValue(this);
+    }
 
-	public TProcessorAlpha getProcessorAlpha() {
-		return this._processorAlpha_;
-	}
+    public TProcessorAlpha getProcessorAlpha()
+    {
+        return this._processorAlpha_;
+    }
 
-	public void setProcessorAlpha(TProcessorAlpha node) {
-		if (this._processorAlpha_ != null) {
-			this._processorAlpha_.parent(null);
-		}
+    public void setProcessorAlpha(TProcessorAlpha node)
+    {
+        if(this._processorAlpha_ != null)
+        {
+            this._processorAlpha_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._processorAlpha_ = node;
-	}
+        this._processorAlpha_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._processorAlpha_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._processorAlpha_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._processorAlpha_ == child) {
-			this._processorAlpha_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._processorAlpha_ == child)
+        {
+            this._processorAlpha_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._processorAlpha_ == oldChild) {
-			setProcessorAlpha((TProcessorAlpha) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._processorAlpha_ == oldChild)
+        {
+            setProcessorAlpha((TProcessorAlpha) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

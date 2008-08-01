@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TResolutionMandatory extends Token {
-	public TResolutionMandatory(String text) {
-		setText(text);
-	}
+public final class TResolutionMandatory extends Token
+{
+    public TResolutionMandatory(String text)
+    {
+        setText(text);
+    }
 
-	public TResolutionMandatory(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TResolutionMandatory(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TResolutionMandatory(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TResolutionMandatory(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTResolutionMandatory(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTResolutionMandatory(this);
+    }
 }

@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AGoodPackageNamePackageName extends PPackageName {
-	private PUniqueName _uniqueName_;
+public final class AGoodPackageNamePackageName extends PPackageName
+{
+    private PUniqueName _uniqueName_;
 
-	public AGoodPackageNamePackageName() {
-		// Constructor
-	}
+    public AGoodPackageNamePackageName()
+    {
+        // Constructor
+    }
 
-	public AGoodPackageNamePackageName(@SuppressWarnings("hiding")
-	PUniqueName _uniqueName_) {
-		// Constructor
-		setUniqueName(_uniqueName_);
+    public AGoodPackageNamePackageName(
+        @SuppressWarnings("hiding") PUniqueName _uniqueName_)
+    {
+        // Constructor
+        setUniqueName(_uniqueName_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AGoodPackageNamePackageName(cloneNode(this._uniqueName_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AGoodPackageNamePackageName(
+            cloneNode(this._uniqueName_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAGoodPackageNamePackageName(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAGoodPackageNamePackageName(this);
+    }
 
-	public PUniqueName getUniqueName() {
-		return this._uniqueName_;
-	}
+    public PUniqueName getUniqueName()
+    {
+        return this._uniqueName_;
+    }
 
-	public void setUniqueName(PUniqueName node) {
-		if (this._uniqueName_ != null) {
-			this._uniqueName_.parent(null);
-		}
+    public void setUniqueName(PUniqueName node)
+    {
+        if(this._uniqueName_ != null)
+        {
+            this._uniqueName_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._uniqueName_ = node;
-	}
+        this._uniqueName_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._uniqueName_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._uniqueName_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._uniqueName_ == child) {
-			this._uniqueName_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._uniqueName_ == child)
+        {
+            this._uniqueName_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._uniqueName_ == oldChild) {
-			setUniqueName((PUniqueName) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._uniqueName_ == oldChild)
+        {
+            setUniqueName((PUniqueName) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

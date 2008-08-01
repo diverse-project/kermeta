@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASimpleEntryOtherEntry extends POtherEntry {
-	private PSimpleEntry _simpleEntry_;
+public final class ASimpleEntryOtherEntry extends POtherEntry
+{
+    private PSimpleEntry _simpleEntry_;
 
-	public ASimpleEntryOtherEntry() {
-		// Constructor
-	}
+    public ASimpleEntryOtherEntry()
+    {
+        // Constructor
+    }
 
-	public ASimpleEntryOtherEntry(@SuppressWarnings("hiding")
-	PSimpleEntry _simpleEntry_) {
-		// Constructor
-		setSimpleEntry(_simpleEntry_);
+    public ASimpleEntryOtherEntry(
+        @SuppressWarnings("hiding") PSimpleEntry _simpleEntry_)
+    {
+        // Constructor
+        setSimpleEntry(_simpleEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ASimpleEntryOtherEntry(cloneNode(this._simpleEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ASimpleEntryOtherEntry(
+            cloneNode(this._simpleEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseASimpleEntryOtherEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseASimpleEntryOtherEntry(this);
+    }
 
-	public PSimpleEntry getSimpleEntry() {
-		return this._simpleEntry_;
-	}
+    public PSimpleEntry getSimpleEntry()
+    {
+        return this._simpleEntry_;
+    }
 
-	public void setSimpleEntry(PSimpleEntry node) {
-		if (this._simpleEntry_ != null) {
-			this._simpleEntry_.parent(null);
-		}
+    public void setSimpleEntry(PSimpleEntry node)
+    {
+        if(this._simpleEntry_ != null)
+        {
+            this._simpleEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._simpleEntry_ = node;
-	}
+        this._simpleEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._simpleEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._simpleEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._simpleEntry_ == child) {
-			this._simpleEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._simpleEntry_ == child)
+        {
+            this._simpleEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._simpleEntry_ == oldChild) {
-			setSimpleEntry((PSimpleEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._simpleEntry_ == oldChild)
+        {
+            setSimpleEntry((PSimpleEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

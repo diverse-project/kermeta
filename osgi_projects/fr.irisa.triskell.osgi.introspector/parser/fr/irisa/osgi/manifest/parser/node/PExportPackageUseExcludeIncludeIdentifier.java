@@ -2,6 +2,7 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-public abstract class PExportPackageUseExcludeIncludeIdentifier extends Node {
-	// Empty body
+public abstract class PExportPackageUseExcludeIncludeIdentifier extends Node
+{
+    // Empty body
 }

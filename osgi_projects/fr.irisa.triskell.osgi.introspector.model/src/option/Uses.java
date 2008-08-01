@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Uses.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: Uses.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
  */
 package option;
 
@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link option.Uses#getPackages <em>Packages</em>}</li>
  *   <li>{@link option.Uses#getPackagesList <em>Packages List</em>}</li>
+ *   <li>{@link option.Uses#isResolved <em>Resolved</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,6 +58,32 @@ public interface Uses extends ExportPackageDirective {
 	 * @generated
 	 */
 	EList<jar.Package> getPackagesList();
+
+	/**
+	 * Returns the value of the '<em><b>Resolved</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resolved</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resolved</em>' attribute.
+	 * @see #setResolved(boolean)
+	 * @see option.OptionPackage#getUses_Resolved()
+	 * @model dataType="manifest.boolean" required="true"
+	 * @generated
+	 */
+	boolean isResolved();
+
+	/**
+	 * Sets the value of the '{@link option.Uses#isResolved <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resolved</em>' attribute.
+	 * @see #isResolved()
+	 * @generated
+	 */
+	void setResolved(boolean value);
 
 	void addPackage(String _package);
 

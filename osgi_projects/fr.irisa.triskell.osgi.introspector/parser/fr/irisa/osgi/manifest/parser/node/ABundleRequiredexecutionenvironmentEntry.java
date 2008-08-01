@@ -2,121 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleRequiredexecutionenvironmentEntry extends
-		PBundleRequiredexecutionenvironmentEntry {
-	private TBundleRequiredexecutionenvironment _bundleRequiredexecutionenvironment_;
-	private PBundleRequiredexecutionenvironmentEntryValue _bundleRequiredexecutionenvironmentEntryValue_;
+public final class ABundleRequiredexecutionenvironmentEntry extends PBundleRequiredexecutionenvironmentEntry
+{
+    private TBundleRequiredexecutionenvironment _bundleRequiredexecutionenvironment_;
+    private PBundleRequiredexecutionenvironmentEntryValue _bundleRequiredexecutionenvironmentEntryValue_;
 
-	public ABundleRequiredexecutionenvironmentEntry() {
-		// Constructor
-	}
+    public ABundleRequiredexecutionenvironmentEntry()
+    {
+        // Constructor
+    }
 
-	public ABundleRequiredexecutionenvironmentEntry(
-			@SuppressWarnings("hiding")
-			TBundleRequiredexecutionenvironment _bundleRequiredexecutionenvironment_,
-			@SuppressWarnings("hiding")
-			PBundleRequiredexecutionenvironmentEntryValue _bundleRequiredexecutionenvironmentEntryValue_) {
-		// Constructor
-		setBundleRequiredexecutionenvironment(_bundleRequiredexecutionenvironment_);
+    public ABundleRequiredexecutionenvironmentEntry(
+        @SuppressWarnings("hiding") TBundleRequiredexecutionenvironment _bundleRequiredexecutionenvironment_,
+        @SuppressWarnings("hiding") PBundleRequiredexecutionenvironmentEntryValue _bundleRequiredexecutionenvironmentEntryValue_)
+    {
+        // Constructor
+        setBundleRequiredexecutionenvironment(_bundleRequiredexecutionenvironment_);
 
-		setBundleRequiredexecutionenvironmentEntryValue(_bundleRequiredexecutionenvironmentEntryValue_);
+        setBundleRequiredexecutionenvironmentEntryValue(_bundleRequiredexecutionenvironmentEntryValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleRequiredexecutionenvironmentEntry(
-				cloneNode(this._bundleRequiredexecutionenvironment_),
-				cloneNode(this._bundleRequiredexecutionenvironmentEntryValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleRequiredexecutionenvironmentEntry(
+            cloneNode(this._bundleRequiredexecutionenvironment_),
+            cloneNode(this._bundleRequiredexecutionenvironmentEntryValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleRequiredexecutionenvironmentEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleRequiredexecutionenvironmentEntry(this);
+    }
 
-	public TBundleRequiredexecutionenvironment getBundleRequiredexecutionenvironment() {
-		return this._bundleRequiredexecutionenvironment_;
-	}
+    public TBundleRequiredexecutionenvironment getBundleRequiredexecutionenvironment()
+    {
+        return this._bundleRequiredexecutionenvironment_;
+    }
 
-	public void setBundleRequiredexecutionenvironment(
-			TBundleRequiredexecutionenvironment node) {
-		if (this._bundleRequiredexecutionenvironment_ != null) {
-			this._bundleRequiredexecutionenvironment_.parent(null);
-		}
+    public void setBundleRequiredexecutionenvironment(TBundleRequiredexecutionenvironment node)
+    {
+        if(this._bundleRequiredexecutionenvironment_ != null)
+        {
+            this._bundleRequiredexecutionenvironment_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleRequiredexecutionenvironment_ = node;
-	}
+        this._bundleRequiredexecutionenvironment_ = node;
+    }
 
-	public PBundleRequiredexecutionenvironmentEntryValue getBundleRequiredexecutionenvironmentEntryValue() {
-		return this._bundleRequiredexecutionenvironmentEntryValue_;
-	}
+    public PBundleRequiredexecutionenvironmentEntryValue getBundleRequiredexecutionenvironmentEntryValue()
+    {
+        return this._bundleRequiredexecutionenvironmentEntryValue_;
+    }
 
-	public void setBundleRequiredexecutionenvironmentEntryValue(
-			PBundleRequiredexecutionenvironmentEntryValue node) {
-		if (this._bundleRequiredexecutionenvironmentEntryValue_ != null) {
-			this._bundleRequiredexecutionenvironmentEntryValue_.parent(null);
-		}
+    public void setBundleRequiredexecutionenvironmentEntryValue(PBundleRequiredexecutionenvironmentEntryValue node)
+    {
+        if(this._bundleRequiredexecutionenvironmentEntryValue_ != null)
+        {
+            this._bundleRequiredexecutionenvironmentEntryValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleRequiredexecutionenvironmentEntryValue_ = node;
-	}
+        this._bundleRequiredexecutionenvironmentEntryValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleRequiredexecutionenvironment_)
-				+ toString(this._bundleRequiredexecutionenvironmentEntryValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleRequiredexecutionenvironment_)
+            + toString(this._bundleRequiredexecutionenvironmentEntryValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleRequiredexecutionenvironment_ == child) {
-			this._bundleRequiredexecutionenvironment_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleRequiredexecutionenvironment_ == child)
+        {
+            this._bundleRequiredexecutionenvironment_ = null;
+            return;
+        }
 
-		if (this._bundleRequiredexecutionenvironmentEntryValue_ == child) {
-			this._bundleRequiredexecutionenvironmentEntryValue_ = null;
-			return;
-		}
+        if(this._bundleRequiredexecutionenvironmentEntryValue_ == child)
+        {
+            this._bundleRequiredexecutionenvironmentEntryValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleRequiredexecutionenvironment_ == oldChild) {
-			setBundleRequiredexecutionenvironment((TBundleRequiredexecutionenvironment) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleRequiredexecutionenvironment_ == oldChild)
+        {
+            setBundleRequiredexecutionenvironment((TBundleRequiredexecutionenvironment) newChild);
+            return;
+        }
 
-		if (this._bundleRequiredexecutionenvironmentEntryValue_ == oldChild) {
-			setBundleRequiredexecutionenvironmentEntryValue((PBundleRequiredexecutionenvironmentEntryValue) newChild);
-			return;
-		}
+        if(this._bundleRequiredexecutionenvironmentEntryValue_ == oldChild)
+        {
+            setBundleRequiredexecutionenvironmentEntryValue((PBundleRequiredexecutionenvironmentEntryValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

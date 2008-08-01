@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UsesImpl.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: UsesImpl.java,v 1.4 2008-08-01 09:44:38 edaubert Exp $
  */
 package option.impl;
 
@@ -11,8 +11,10 @@ import java.util.Collection;
 import option.OptionPackage;
 import option.Uses;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.osgi.framework.Constants;
@@ -25,6 +27,7 @@ import org.osgi.framework.Constants;
  * <ul>
  *   <li>{@link option.impl.UsesImpl#getPackages <em>Packages</em>}</li>
  *   <li>{@link option.impl.UsesImpl#getPackagesList <em>Packages List</em>}</li>
+ *   <li>{@link option.impl.UsesImpl#isResolved <em>Resolved</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,6 +52,26 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 	 * @ordered
 	 */
 	protected EList<jar.Package> packagesList;
+
+	/**
+	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean RESOLVED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean resolved = RESOLVED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -91,6 +114,27 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isResolved() {
+		return resolved;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResolved(boolean newResolved) {
+		boolean oldResolved = resolved;
+		resolved = newResolved;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OptionPackage.USES__RESOLVED, oldResolved, resolved));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -101,6 +145,8 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 				return getPackages();
 			case OptionPackage.USES__PACKAGES_LIST:
 				return getPackagesList();
+			case OptionPackage.USES__RESOLVED:
+				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -121,6 +167,9 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 				getPackagesList().clear();
 				getPackagesList().addAll((Collection<? extends jar.Package>)newValue);
 				return;
+			case OptionPackage.USES__RESOLVED:
+				setResolved(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -138,6 +187,9 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 			case OptionPackage.USES__PACKAGES_LIST:
 				getPackagesList().clear();
 				return;
+			case OptionPackage.USES__RESOLVED:
+				setResolved(RESOLVED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -153,6 +205,8 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 				return packages != null && !packages.isEmpty();
 			case OptionPackage.USES__PACKAGES_LIST:
 				return packagesList != null && !packagesList.isEmpty();
+			case OptionPackage.USES__RESOLVED:
+				return resolved != RESOLVED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -168,6 +222,8 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (packages: ");
 		result.append(packages);
+		result.append(", resolved: ");
+		result.append(resolved);
 		result.append(')');
 		return result.toString();
 	}

@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TUnquotedString extends Token {
-	public TUnquotedString(String text) {
-		setText(text);
-	}
+public final class TUnquotedString extends Token
+{
+    public TUnquotedString(String text)
+    {
+        setText(text);
+    }
 
-	public TUnquotedString(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TUnquotedString(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TUnquotedString(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TUnquotedString(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTUnquotedString(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTUnquotedString(this);
+    }
 }

@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleNameEntryManifestentry extends PManifestentry {
-	private PBundleNameEntry _bundleNameEntry_;
+public final class ABundleNameEntryManifestentry extends PManifestentry
+{
+    private PBundleNameEntry _bundleNameEntry_;
 
-	public ABundleNameEntryManifestentry() {
-		// Constructor
-	}
+    public ABundleNameEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public ABundleNameEntryManifestentry(@SuppressWarnings("hiding")
-	PBundleNameEntry _bundleNameEntry_) {
-		// Constructor
-		setBundleNameEntry(_bundleNameEntry_);
+    public ABundleNameEntryManifestentry(
+        @SuppressWarnings("hiding") PBundleNameEntry _bundleNameEntry_)
+    {
+        // Constructor
+        setBundleNameEntry(_bundleNameEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleNameEntryManifestentry(
-				cloneNode(this._bundleNameEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleNameEntryManifestentry(
+            cloneNode(this._bundleNameEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleNameEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleNameEntryManifestentry(this);
+    }
 
-	public PBundleNameEntry getBundleNameEntry() {
-		return this._bundleNameEntry_;
-	}
+    public PBundleNameEntry getBundleNameEntry()
+    {
+        return this._bundleNameEntry_;
+    }
 
-	public void setBundleNameEntry(PBundleNameEntry node) {
-		if (this._bundleNameEntry_ != null) {
-			this._bundleNameEntry_.parent(null);
-		}
+    public void setBundleNameEntry(PBundleNameEntry node)
+    {
+        if(this._bundleNameEntry_ != null)
+        {
+            this._bundleNameEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleNameEntry_ = node;
-	}
+        this._bundleNameEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleNameEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleNameEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleNameEntry_ == child) {
-			this._bundleNameEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleNameEntry_ == child)
+        {
+            this._bundleNameEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleNameEntry_ == oldChild) {
-			setBundleNameEntry((PBundleNameEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleNameEntry_ == oldChild)
+        {
+            setBundleNameEntry((PBundleNameEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TExportPackage extends Token {
-	public TExportPackage(String text) {
-		setText(text);
-	}
+public final class TExportPackage extends Token
+{
+    public TExportPackage(String text)
+    {
+        setText(text);
+    }
 
-	public TExportPackage(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TExportPackage(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TExportPackage(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TExportPackage(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTExportPackage(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTExportPackage(this);
+    }
 }

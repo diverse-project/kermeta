@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TProcessorPowerpc extends Token {
-	public TProcessorPowerpc(String text) {
-		setText(text);
-	}
+public final class TProcessorPowerpc extends Token
+{
+    public TProcessorPowerpc(String text)
+    {
+        setText(text);
+    }
 
-	public TProcessorPowerpc(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TProcessorPowerpc(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TProcessorPowerpc(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TProcessorPowerpc(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTProcessorPowerpc(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTProcessorPowerpc(this);
+    }
 }

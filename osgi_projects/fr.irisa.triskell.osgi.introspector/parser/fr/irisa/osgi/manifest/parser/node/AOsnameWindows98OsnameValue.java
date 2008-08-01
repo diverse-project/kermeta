@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameWindows98OsnameValue extends POsnameValue {
-	private TOsnameWindows98 _osnameWindows98_;
+public final class AOsnameWindows98OsnameValue extends POsnameValue
+{
+    private TOsnameWindows98 _osnameWindows98_;
 
-	public AOsnameWindows98OsnameValue() {
-		// Constructor
-	}
+    public AOsnameWindows98OsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameWindows98OsnameValue(@SuppressWarnings("hiding")
-	TOsnameWindows98 _osnameWindows98_) {
-		// Constructor
-		setOsnameWindows98(_osnameWindows98_);
+    public AOsnameWindows98OsnameValue(
+        @SuppressWarnings("hiding") TOsnameWindows98 _osnameWindows98_)
+    {
+        // Constructor
+        setOsnameWindows98(_osnameWindows98_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameWindows98OsnameValue(
-				cloneNode(this._osnameWindows98_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameWindows98OsnameValue(
+            cloneNode(this._osnameWindows98_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameWindows98OsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameWindows98OsnameValue(this);
+    }
 
-	public TOsnameWindows98 getOsnameWindows98() {
-		return this._osnameWindows98_;
-	}
+    public TOsnameWindows98 getOsnameWindows98()
+    {
+        return this._osnameWindows98_;
+    }
 
-	public void setOsnameWindows98(TOsnameWindows98 node) {
-		if (this._osnameWindows98_ != null) {
-			this._osnameWindows98_.parent(null);
-		}
+    public void setOsnameWindows98(TOsnameWindows98 node)
+    {
+        if(this._osnameWindows98_ != null)
+        {
+            this._osnameWindows98_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameWindows98_ = node;
-	}
+        this._osnameWindows98_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameWindows98_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameWindows98_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameWindows98_ == child) {
-			this._osnameWindows98_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameWindows98_ == child)
+        {
+            this._osnameWindows98_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameWindows98_ == oldChild) {
-			setOsnameWindows98((TOsnameWindows98) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameWindows98_ == oldChild)
+        {
+            setOsnameWindows98((TOsnameWindows98) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

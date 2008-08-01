@@ -2,118 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ARequireBundleDirectiveRequireBundleOptions extends
-		PRequireBundleOptions {
-	private TSemicolon _semicolon_;
-	private PRequireBundleDirective _requireBundleDirective_;
+public final class ARequireBundleDirectiveRequireBundleOptions extends PRequireBundleOptions
+{
+    private TSemicolon _semicolon_;
+    private PRequireBundleDirective _requireBundleDirective_;
 
-	public ARequireBundleDirectiveRequireBundleOptions() {
-		// Constructor
-	}
+    public ARequireBundleDirectiveRequireBundleOptions()
+    {
+        // Constructor
+    }
 
-	public ARequireBundleDirectiveRequireBundleOptions(
-			@SuppressWarnings("hiding")
-			TSemicolon _semicolon_, @SuppressWarnings("hiding")
-			PRequireBundleDirective _requireBundleDirective_) {
-		// Constructor
-		setSemicolon(_semicolon_);
+    public ARequireBundleDirectiveRequireBundleOptions(
+        @SuppressWarnings("hiding") TSemicolon _semicolon_,
+        @SuppressWarnings("hiding") PRequireBundleDirective _requireBundleDirective_)
+    {
+        // Constructor
+        setSemicolon(_semicolon_);
 
-		setRequireBundleDirective(_requireBundleDirective_);
+        setRequireBundleDirective(_requireBundleDirective_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ARequireBundleDirectiveRequireBundleOptions(
-				cloneNode(this._semicolon_),
-				cloneNode(this._requireBundleDirective_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ARequireBundleDirectiveRequireBundleOptions(
+            cloneNode(this._semicolon_),
+            cloneNode(this._requireBundleDirective_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseARequireBundleDirectiveRequireBundleOptions(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseARequireBundleDirectiveRequireBundleOptions(this);
+    }
 
-	public TSemicolon getSemicolon() {
-		return this._semicolon_;
-	}
+    public TSemicolon getSemicolon()
+    {
+        return this._semicolon_;
+    }
 
-	public void setSemicolon(TSemicolon node) {
-		if (this._semicolon_ != null) {
-			this._semicolon_.parent(null);
-		}
+    public void setSemicolon(TSemicolon node)
+    {
+        if(this._semicolon_ != null)
+        {
+            this._semicolon_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._semicolon_ = node;
-	}
+        this._semicolon_ = node;
+    }
 
-	public PRequireBundleDirective getRequireBundleDirective() {
-		return this._requireBundleDirective_;
-	}
+    public PRequireBundleDirective getRequireBundleDirective()
+    {
+        return this._requireBundleDirective_;
+    }
 
-	public void setRequireBundleDirective(PRequireBundleDirective node) {
-		if (this._requireBundleDirective_ != null) {
-			this._requireBundleDirective_.parent(null);
-		}
+    public void setRequireBundleDirective(PRequireBundleDirective node)
+    {
+        if(this._requireBundleDirective_ != null)
+        {
+            this._requireBundleDirective_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._requireBundleDirective_ = node;
-	}
+        this._requireBundleDirective_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._semicolon_)
-				+ toString(this._requireBundleDirective_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._semicolon_)
+            + toString(this._requireBundleDirective_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._semicolon_ == child) {
-			this._semicolon_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._semicolon_ == child)
+        {
+            this._semicolon_ = null;
+            return;
+        }
 
-		if (this._requireBundleDirective_ == child) {
-			this._requireBundleDirective_ = null;
-			return;
-		}
+        if(this._requireBundleDirective_ == child)
+        {
+            this._requireBundleDirective_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._semicolon_ == oldChild) {
-			setSemicolon((TSemicolon) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._semicolon_ == oldChild)
+        {
+            setSemicolon((TSemicolon) newChild);
+            return;
+        }
 
-		if (this._requireBundleDirective_ == oldChild) {
-			setRequireBundleDirective((PRequireBundleDirective) newChild);
-			return;
-		}
+        if(this._requireBundleDirective_ == oldChild)
+        {
+            setRequireBundleDirective((PRequireBundleDirective) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleLocalizationEntryManifestentry extends PManifestentry {
-	private PBundleLocalizationEntry _bundleLocalizationEntry_;
+public final class ABundleLocalizationEntryManifestentry extends PManifestentry
+{
+    private PBundleLocalizationEntry _bundleLocalizationEntry_;
 
-	public ABundleLocalizationEntryManifestentry() {
-		// Constructor
-	}
+    public ABundleLocalizationEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public ABundleLocalizationEntryManifestentry(@SuppressWarnings("hiding")
-	PBundleLocalizationEntry _bundleLocalizationEntry_) {
-		// Constructor
-		setBundleLocalizationEntry(_bundleLocalizationEntry_);
+    public ABundleLocalizationEntryManifestentry(
+        @SuppressWarnings("hiding") PBundleLocalizationEntry _bundleLocalizationEntry_)
+    {
+        // Constructor
+        setBundleLocalizationEntry(_bundleLocalizationEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleLocalizationEntryManifestentry(
-				cloneNode(this._bundleLocalizationEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleLocalizationEntryManifestentry(
+            cloneNode(this._bundleLocalizationEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleLocalizationEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleLocalizationEntryManifestentry(this);
+    }
 
-	public PBundleLocalizationEntry getBundleLocalizationEntry() {
-		return this._bundleLocalizationEntry_;
-	}
+    public PBundleLocalizationEntry getBundleLocalizationEntry()
+    {
+        return this._bundleLocalizationEntry_;
+    }
 
-	public void setBundleLocalizationEntry(PBundleLocalizationEntry node) {
-		if (this._bundleLocalizationEntry_ != null) {
-			this._bundleLocalizationEntry_.parent(null);
-		}
+    public void setBundleLocalizationEntry(PBundleLocalizationEntry node)
+    {
+        if(this._bundleLocalizationEntry_ != null)
+        {
+            this._bundleLocalizationEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleLocalizationEntry_ = node;
-	}
+        this._bundleLocalizationEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleLocalizationEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleLocalizationEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleLocalizationEntry_ == child) {
-			this._bundleLocalizationEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleLocalizationEntry_ == child)
+        {
+            this._bundleLocalizationEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleLocalizationEntry_ == oldChild) {
-			setBundleLocalizationEntry((PBundleLocalizationEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleLocalizationEntry_ == oldChild)
+        {
+            setBundleLocalizationEntry((PBundleLocalizationEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

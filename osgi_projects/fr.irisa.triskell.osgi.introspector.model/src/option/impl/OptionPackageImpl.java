@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionPackageImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: OptionPackageImpl.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
  */
 package option.impl;
 
@@ -515,6 +515,15 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUses_Resolved() {
+		return (EAttribute)usesEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -835,6 +844,7 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 		usesEClass = createEClass(USES);
 		createEAttribute(usesEClass, USES__PACKAGES);
 		createEReference(usesEClass, USES__PACKAGES_LIST);
+		createEAttribute(usesEClass, USES__RESOLVED);
 
 		extensionEClass = createEClass(EXTENSION);
 		createEAttribute(extensionEClass, EXTENSION__EXTENSION);
@@ -979,6 +989,7 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 		initEClass(usesEClass, Uses.class, "Uses", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUses_Packages(), theFrameworkPackage.getString(), "packages", null, 1, -1, Uses.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUses_PackagesList(), theJarPackage.getPackage(), null, "packagesList", null, 0, -1, Uses.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUses_Resolved(), theManifestPackage.getboolean(), "resolved", null, 1, 1, Uses.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(extensionEClass, Extension.class, "Extension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExtension_Extension(), this.getExtensionEnum(), "extension", null, 1, 1, Extension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

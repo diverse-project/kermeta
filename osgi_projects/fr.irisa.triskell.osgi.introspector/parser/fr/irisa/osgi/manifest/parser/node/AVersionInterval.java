@@ -2,219 +2,265 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVersionInterval extends PVersionInterval {
-	private TLeftBracket _leftBracket_;
-	private PMajorVersionEntry _minVersion_;
-	private TComma _comma_;
-	private PMajorVersionEntry _maxVersion_;
-	private TRightBracket _rightBracket_;
+public final class AVersionInterval extends PVersionInterval
+{
+    private TLeftBracket _leftBracket_;
+    private PMajorVersionEntry _minVersion_;
+    private TComma _comma_;
+    private PMajorVersionEntry _maxVersion_;
+    private TRightBracket _rightBracket_;
 
-	public AVersionInterval() {
-		// Constructor
-	}
+    public AVersionInterval()
+    {
+        // Constructor
+    }
 
-	public AVersionInterval(@SuppressWarnings("hiding")
-	TLeftBracket _leftBracket_, @SuppressWarnings("hiding")
-	PMajorVersionEntry _minVersion_, @SuppressWarnings("hiding")
-	TComma _comma_, @SuppressWarnings("hiding")
-	PMajorVersionEntry _maxVersion_, @SuppressWarnings("hiding")
-	TRightBracket _rightBracket_) {
-		// Constructor
-		setLeftBracket(_leftBracket_);
+    public AVersionInterval(
+        @SuppressWarnings("hiding") TLeftBracket _leftBracket_,
+        @SuppressWarnings("hiding") PMajorVersionEntry _minVersion_,
+        @SuppressWarnings("hiding") TComma _comma_,
+        @SuppressWarnings("hiding") PMajorVersionEntry _maxVersion_,
+        @SuppressWarnings("hiding") TRightBracket _rightBracket_)
+    {
+        // Constructor
+        setLeftBracket(_leftBracket_);
 
-		setMinVersion(_minVersion_);
+        setMinVersion(_minVersion_);
 
-		setComma(_comma_);
+        setComma(_comma_);
 
-		setMaxVersion(_maxVersion_);
+        setMaxVersion(_maxVersion_);
 
-		setRightBracket(_rightBracket_);
+        setRightBracket(_rightBracket_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AVersionInterval(cloneNode(this._leftBracket_),
-				cloneNode(this._minVersion_), cloneNode(this._comma_),
-				cloneNode(this._maxVersion_), cloneNode(this._rightBracket_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AVersionInterval(
+            cloneNode(this._leftBracket_),
+            cloneNode(this._minVersion_),
+            cloneNode(this._comma_),
+            cloneNode(this._maxVersion_),
+            cloneNode(this._rightBracket_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAVersionInterval(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAVersionInterval(this);
+    }
 
-	public TLeftBracket getLeftBracket() {
-		return this._leftBracket_;
-	}
+    public TLeftBracket getLeftBracket()
+    {
+        return this._leftBracket_;
+    }
 
-	public void setLeftBracket(TLeftBracket node) {
-		if (this._leftBracket_ != null) {
-			this._leftBracket_.parent(null);
-		}
+    public void setLeftBracket(TLeftBracket node)
+    {
+        if(this._leftBracket_ != null)
+        {
+            this._leftBracket_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._leftBracket_ = node;
-	}
+        this._leftBracket_ = node;
+    }
 
-	public PMajorVersionEntry getMinVersion() {
-		return this._minVersion_;
-	}
+    public PMajorVersionEntry getMinVersion()
+    {
+        return this._minVersion_;
+    }
 
-	public void setMinVersion(PMajorVersionEntry node) {
-		if (this._minVersion_ != null) {
-			this._minVersion_.parent(null);
-		}
+    public void setMinVersion(PMajorVersionEntry node)
+    {
+        if(this._minVersion_ != null)
+        {
+            this._minVersion_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._minVersion_ = node;
-	}
+        this._minVersion_ = node;
+    }
 
-	public TComma getComma() {
-		return this._comma_;
-	}
+    public TComma getComma()
+    {
+        return this._comma_;
+    }
 
-	public void setComma(TComma node) {
-		if (this._comma_ != null) {
-			this._comma_.parent(null);
-		}
+    public void setComma(TComma node)
+    {
+        if(this._comma_ != null)
+        {
+            this._comma_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._comma_ = node;
-	}
+        this._comma_ = node;
+    }
 
-	public PMajorVersionEntry getMaxVersion() {
-		return this._maxVersion_;
-	}
+    public PMajorVersionEntry getMaxVersion()
+    {
+        return this._maxVersion_;
+    }
 
-	public void setMaxVersion(PMajorVersionEntry node) {
-		if (this._maxVersion_ != null) {
-			this._maxVersion_.parent(null);
-		}
+    public void setMaxVersion(PMajorVersionEntry node)
+    {
+        if(this._maxVersion_ != null)
+        {
+            this._maxVersion_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._maxVersion_ = node;
-	}
+        this._maxVersion_ = node;
+    }
 
-	public TRightBracket getRightBracket() {
-		return this._rightBracket_;
-	}
+    public TRightBracket getRightBracket()
+    {
+        return this._rightBracket_;
+    }
 
-	public void setRightBracket(TRightBracket node) {
-		if (this._rightBracket_ != null) {
-			this._rightBracket_.parent(null);
-		}
+    public void setRightBracket(TRightBracket node)
+    {
+        if(this._rightBracket_ != null)
+        {
+            this._rightBracket_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._rightBracket_ = node;
-	}
+        this._rightBracket_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._leftBracket_) + toString(this._minVersion_)
-				+ toString(this._comma_) + toString(this._maxVersion_)
-				+ toString(this._rightBracket_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._leftBracket_)
+            + toString(this._minVersion_)
+            + toString(this._comma_)
+            + toString(this._maxVersion_)
+            + toString(this._rightBracket_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._leftBracket_ == child) {
-			this._leftBracket_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._leftBracket_ == child)
+        {
+            this._leftBracket_ = null;
+            return;
+        }
 
-		if (this._minVersion_ == child) {
-			this._minVersion_ = null;
-			return;
-		}
+        if(this._minVersion_ == child)
+        {
+            this._minVersion_ = null;
+            return;
+        }
 
-		if (this._comma_ == child) {
-			this._comma_ = null;
-			return;
-		}
+        if(this._comma_ == child)
+        {
+            this._comma_ = null;
+            return;
+        }
 
-		if (this._maxVersion_ == child) {
-			this._maxVersion_ = null;
-			return;
-		}
+        if(this._maxVersion_ == child)
+        {
+            this._maxVersion_ = null;
+            return;
+        }
 
-		if (this._rightBracket_ == child) {
-			this._rightBracket_ = null;
-			return;
-		}
+        if(this._rightBracket_ == child)
+        {
+            this._rightBracket_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._leftBracket_ == oldChild) {
-			setLeftBracket((TLeftBracket) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._leftBracket_ == oldChild)
+        {
+            setLeftBracket((TLeftBracket) newChild);
+            return;
+        }
 
-		if (this._minVersion_ == oldChild) {
-			setMinVersion((PMajorVersionEntry) newChild);
-			return;
-		}
+        if(this._minVersion_ == oldChild)
+        {
+            setMinVersion((PMajorVersionEntry) newChild);
+            return;
+        }
 
-		if (this._comma_ == oldChild) {
-			setComma((TComma) newChild);
-			return;
-		}
+        if(this._comma_ == oldChild)
+        {
+            setComma((TComma) newChild);
+            return;
+        }
 
-		if (this._maxVersion_ == oldChild) {
-			setMaxVersion((PMajorVersionEntry) newChild);
-			return;
-		}
+        if(this._maxVersion_ == oldChild)
+        {
+            setMaxVersion((PMajorVersionEntry) newChild);
+            return;
+        }
 
-		if (this._rightBracket_ == oldChild) {
-			setRightBracket((TRightBracket) newChild);
-			return;
-		}
+        if(this._rightBracket_ == oldChild)
+        {
+            setRightBracket((TRightBracket) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

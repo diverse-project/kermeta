@@ -2,32 +2,37 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TNotEquals extends Token {
-	public TNotEquals() {
-		super.setText("!=");
-	}
+public final class TNotEquals extends Token
+{
+    public TNotEquals()
+    {
+        super.setText("!=");
+    }
 
-	public TNotEquals(int line, int pos) {
-		super.setText("!=");
-		setLine(line);
-		setPos(pos);
-	}
+    public TNotEquals(int line, int pos)
+    {
+        super.setText("!=");
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TNotEquals(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TNotEquals(getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTNotEquals(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTNotEquals(this);
+    }
 
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TNotEquals text.");
-	}
+    @Override
+    public void setText(@SuppressWarnings("unused") String text)
+    {
+        throw new RuntimeException("Cannot change TNotEquals text.");
+    }
 }

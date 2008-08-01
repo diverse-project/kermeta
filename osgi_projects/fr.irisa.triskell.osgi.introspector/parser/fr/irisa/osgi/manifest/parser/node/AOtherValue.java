@@ -2,115 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOtherValue extends POtherValue {
-	private TSemicolon _semicolon_;
-	private TSimpleStringValue _simpleStringValue_;
+public final class AOtherValue extends POtherValue
+{
+    private TSemicolon _semicolon_;
+    private TSimpleStringValue _simpleStringValue_;
 
-	public AOtherValue() {
-		// Constructor
-	}
+    public AOtherValue()
+    {
+        // Constructor
+    }
 
-	public AOtherValue(@SuppressWarnings("hiding")
-	TSemicolon _semicolon_, @SuppressWarnings("hiding")
-	TSimpleStringValue _simpleStringValue_) {
-		// Constructor
-		setSemicolon(_semicolon_);
+    public AOtherValue(
+        @SuppressWarnings("hiding") TSemicolon _semicolon_,
+        @SuppressWarnings("hiding") TSimpleStringValue _simpleStringValue_)
+    {
+        // Constructor
+        setSemicolon(_semicolon_);
 
-		setSimpleStringValue(_simpleStringValue_);
+        setSimpleStringValue(_simpleStringValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOtherValue(cloneNode(this._semicolon_),
-				cloneNode(this._simpleStringValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOtherValue(
+            cloneNode(this._semicolon_),
+            cloneNode(this._simpleStringValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOtherValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOtherValue(this);
+    }
 
-	public TSemicolon getSemicolon() {
-		return this._semicolon_;
-	}
+    public TSemicolon getSemicolon()
+    {
+        return this._semicolon_;
+    }
 
-	public void setSemicolon(TSemicolon node) {
-		if (this._semicolon_ != null) {
-			this._semicolon_.parent(null);
-		}
+    public void setSemicolon(TSemicolon node)
+    {
+        if(this._semicolon_ != null)
+        {
+            this._semicolon_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._semicolon_ = node;
-	}
+        this._semicolon_ = node;
+    }
 
-	public TSimpleStringValue getSimpleStringValue() {
-		return this._simpleStringValue_;
-	}
+    public TSimpleStringValue getSimpleStringValue()
+    {
+        return this._simpleStringValue_;
+    }
 
-	public void setSimpleStringValue(TSimpleStringValue node) {
-		if (this._simpleStringValue_ != null) {
-			this._simpleStringValue_.parent(null);
-		}
+    public void setSimpleStringValue(TSimpleStringValue node)
+    {
+        if(this._simpleStringValue_ != null)
+        {
+            this._simpleStringValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._simpleStringValue_ = node;
-	}
+        this._simpleStringValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._semicolon_)
-				+ toString(this._simpleStringValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._semicolon_)
+            + toString(this._simpleStringValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._semicolon_ == child) {
-			this._semicolon_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._semicolon_ == child)
+        {
+            this._semicolon_ = null;
+            return;
+        }
 
-		if (this._simpleStringValue_ == child) {
-			this._simpleStringValue_ = null;
-			return;
-		}
+        if(this._simpleStringValue_ == child)
+        {
+            this._simpleStringValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._semicolon_ == oldChild) {
-			setSemicolon((TSemicolon) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._semicolon_ == oldChild)
+        {
+            setSemicolon((TSemicolon) newChild);
+            return;
+        }
 
-		if (this._simpleStringValue_ == oldChild) {
-			setSimpleStringValue((TSimpleStringValue) newChild);
-			return;
-		}
+        if(this._simpleStringValue_ == oldChild)
+        {
+            setSimpleStringValue((TSimpleStringValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

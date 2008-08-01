@@ -138,30 +138,30 @@ Tokens
 	{url_state->url}url_file		= 'file:///' | 'file:' ;
 	
 	  	
-	{manifest_entry->bundle_activationpolicy_state}					bundle_activationpolicy		= 'Bundle-ActivationPolicy: ';
-	{manifest_entry->bundle_activator_state}						bundle_activator			= 'Bundle-Activator: ';
-	{manifest_entry->simple_entry_state}							bundle_category				= 'Bundle-Category: ';
-	{manifest_entry->classpath_entry_state}							bundle_classpath			= 'Bundle-ClassPath: ';
-	{manifest_entry->all_string_state}								bundle_contactaddress 		= 'Bundle-ContactAddress: ';
-	{manifest_entry->all_string_state}								bundle_copyright 			= 'Bundle-Copyright: ';
-	{manifest_entry->all_string_state}								bundle_description			= 'Bundle-Description: ';
-	{manifest_entry->url_state}										bundle_docurl				= 'Bundle-DocURL: ' | 'Bundle-DocUrl: ';
-	{manifest_entry->all_string_state}								bundle_localization			= 'Bundle-Localization: ';
-	{manifest_entry->manifestversion_state}							bundle_manifestversion		= 'Bundle-ManifestVersion: ';
-	{manifest_entry->all_string_state}								bundle_name					= 'Bundle-Name: ';
-	{manifest_entry->bundle_nativecode_state}						bundle_nativecode			= 'Bundle-NativeCode: ';
-	{manifest_entry->bundle_requiredexecutionenvironment_state}		bundle_requiredexecutionenvironment = 'Bundle-RequiredExecutionEnvironment: ';
-	{manifest_entry->bundle_symbolicname_state}						bundle_symbolicname			= 'Bundle-SymbolicName: ';
-	{manifest_entry->url_state}										bundle_updatelocation		= 'Bundle-UpdateLocation: ';
-	{manifest_entry->all_string_state}								bundle_vendor				= 'Bundle-Vendor: ';
-	{manifest_entry->version_state}									bundle_version				= 'Bundle-Version: ';
-	{manifest_entry->dynamicimport_package_state}					dynamicimport_package		= 'DynamicImport-Package: ';
-	{manifest_entry->export_package_state}							export_package				= 'Export-Package: ' | 'Provide-Package: ';
-	{manifest_entry->export_service_state}							export_service				= 'Export-Service: ';
-	{manifest_entry->fragment_host_state}							fragment_host				= 'Fragment-Host: ';
-	{manifest_entry->import_package_state}							import_package				= 'Import-Package: ';
-	{manifest_entry->import_service_state}							import_service				= 'Import-Service: ';
-	{manifest_entry->require_bundle_state}							require_bundle				= 'Require-Bundle: ';
+	{manifest_entry->bundle_activationpolicy_state}					bundle_activationpolicy		= 'Bundle-ActivationPolicy: ' blank*;
+	{manifest_entry->bundle_activator_state}						bundle_activator			= 'Bundle-Activator: ' blank*;
+	{manifest_entry->simple_entry_state}							bundle_category				= 'Bundle-Category: ' blank*;
+	{manifest_entry->classpath_entry_state}							bundle_classpath			= 'Bundle-ClassPath: ' blank*;
+	{manifest_entry->all_string_state}								bundle_contactaddress 		= 'Bundle-ContactAddress: ' blank*;
+	{manifest_entry->all_string_state}								bundle_copyright 			= 'Bundle-Copyright: ' blank*;
+	{manifest_entry->all_string_state}								bundle_description			= 'Bundle-Description: ' blank*;
+	{manifest_entry->url_state}										bundle_docurl				= 'Bundle-DocURL: ' | 'Bundle-DocUrl: ' blank*;
+	{manifest_entry->all_string_state}								bundle_localization			= 'Bundle-Localization: ' blank*;
+	{manifest_entry->manifestversion_state}							bundle_manifestversion		= 'Bundle-ManifestVersion: ' blank*;
+	{manifest_entry->all_string_state}								bundle_name					= 'Bundle-Name: ' blank*;
+	{manifest_entry->bundle_nativecode_state}						bundle_nativecode			= 'Bundle-NativeCode: ' blank*;
+	{manifest_entry->bundle_requiredexecutionenvironment_state}		bundle_requiredexecutionenvironment = 'Bundle-RequiredExecutionEnvironment: ' blank*;
+	{manifest_entry->bundle_symbolicname_state}						bundle_symbolicname			= 'Bundle-SymbolicName: ' blank*;
+	{manifest_entry->url_state}										bundle_updatelocation		= 'Bundle-UpdateLocation: ' blank*;
+	{manifest_entry->all_string_state}								bundle_vendor				= 'Bundle-Vendor: ' blank*;
+	{manifest_entry->version_state}									bundle_version				= 'Bundle-Version: ' blank*;
+	{manifest_entry->dynamicimport_package_state}					dynamicimport_package		= 'DynamicImport-Package: ' blank*;
+	{manifest_entry->export_package_state}							export_package				= 'Export-Package: ' | 'Provide-Package: ' blank*;
+	{manifest_entry->export_service_state}							export_service				= 'Export-Service: ' blank*;
+	{manifest_entry->fragment_host_state}							fragment_host				= 'Fragment-Host: ' blank*;
+	{manifest_entry->import_package_state}							import_package				= 'Import-Package: ' blank*;
+	{manifest_entry->import_service_state}							import_service				= 'Import-Service: ' blank*;
+	{manifest_entry->require_bundle_state}							require_bundle				= 'Require-Bundle: '  blank*;
 	
 	{manifest_entry->digest_entry_state}							entry_digest 				= alphanum+ '-Digest' ': ' blank* ;
 	{manifest_entry->simple_entry_state}							entry 						= alphanum+ ': ' blank*;
@@ -173,21 +173,23 @@ Tokens
 	{bundle_nativecode_state->directive_osversion}					osversion					= 'osversion' blank* ('=' | ':=') blank*;
 	{bundle_nativecode_state->directive_processor}					processor					= 'processor' blank* ('=' | ':=') blank*;
 	{bundle_nativecode_state}										language					= 'language' blank* ('=' | ':=') blank*;
-	{bundle_nativecode_state->selection_filter_directive}										selection_filter			= 'selection-filter' blank* ('=' | ':=') blank*;
+	{bundle_nativecode_state->selection_filter_directive}			selection_filter			= 'selection-filter' blank* ('=' | ':=') blank*;
 	{bundle_requiredexecutionenvironment_state}						visibility					= 'visibility' blank* ('=' | ':=') blank*;
 	{bundle_requiredexecutionenvironment_state->
 		directive_resolution_requiredexecution_state, 
 		import_package_state->directive_resolution_import_state}
-		resolution					= 'resolution' blank* ('=' | ':=') blank*;
-	{export_package_state->directive_uses}							uses						= 'uses' blank* ('=' | ':=') blank*;
+											resolution					= 'resolution' blank* ('=' | ':=') blank*;
+	{export_package_state->directive_uses}
+											uses						= 'uses' blank* ('=' | ':=') blank*;
 	{bundle_activationpolicy_state->directive_exclude_activationpolicy,
 		export_package_state->directive_exclude_export_package}
 											exclude						= 'exclude' blank* ('=' | ':=') blank*;
 	{bundle_activationpolicy_state->directive_include_activationpolicy,
 		export_package_state->directive_include_export_package}	
 											include						= 'include' blank* ('=' | ':=') blank*;
-	{export_package_state->directive_mandatory}						mandatory 					= 'mandatory' blank* ('=' | ':=') blank*;
-	{fragment_host_state}											extension					= 'extension' blank* ('=' | ':=') blank*;
+	{export_package_state->directive_mandatory}
+											mandatory 					= 'mandatory' blank* ('=' | ':=') blank*;
+	{fragment_host_state}					extension					= 'extension' blank* ('=' | ':=') blank*;
 	
 	{bundle_activationpolicy_state->bundle_activationpolicy_attribut_state, 
 		bundle_activator_state->bundle_activator_attribut_state, 
@@ -253,17 +255,19 @@ Tokens
 	
 	{directive_resolution_requiredexecution_state->
 		bundle_requiredexecutionenvironment_state,
-		directive_resolution_import_state->import_package_state}	resolution_mandatory		= ('mandatory' | '"' 'mandatory' '"') blank* ;
+		directive_resolution_import_state->import_package_state}	
+							resolution_mandatory		= ('mandatory' | '"' 'mandatory' '"') blank* ;
 	{directive_resolution_requiredexecution_state->
 		bundle_requiredexecutionenvironment_state,
-		directive_resolution_import_state->import_package_state}	resolution_optional			= ('optional' | '"' 'optional' '"') blank*;
+		directive_resolution_import_state->import_package_state}	
+							resolution_optional			= ('optional' | '"' 'optional' '"') blank*;
 	
 	{directive_extension}	extension_framework			= ('framework' | '"' 'framework' '"') blank*;
 	{directive_extension}	extension_bootclasspath		= ('bootclasspath' | '"' 'bootclasspath' '"') blank*;
 	
-	{directive_fragment_attachment}	always						= ('always' | '"' 'always' '"') blank*;
-	{directive_fragment_attachment}	never						= ('never' | '"' 'never' '"') blank*;
-	{directive_fragment_attachment}	resolve_time				= ('resolve-time' | '"' 'resolve-time' '"') blank*;
+	{directive_fragment_attachment}	always				= ('always' | '"' 'always' '"') blank*;
+	{directive_fragment_attachment}	never				= ('never' | '"' 'never' '"') blank*;
+	{directive_fragment_attachment}	resolve_time		= ('resolve-time' | '"' 'resolve-time' '"') blank*;
 	
 	{directive_singleton}	true						= ('true' | '"' 'true' '"') blank*;
 	{directive_singleton}	false						= ('false' | '"' 'false' '"') blank*;
@@ -377,9 +381,6 @@ Tokens
 		
 	{simple_entry_state}simple_string_value = part_simple_string_value +;
 	{all_string_state}all_string = all_string_core+;
-		
-	//{version_state, directive_osversion}number = digit +; 
-	//{version_state, directive_osversion}qualifier = (alphanum | '_' | '-')+;
 	
 	{version_state}number = digit +;
 	{version_state}qualifier = alphanum +;

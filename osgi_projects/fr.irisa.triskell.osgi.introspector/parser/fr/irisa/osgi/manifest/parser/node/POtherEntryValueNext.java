@@ -2,6 +2,7 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-public abstract class POtherEntryValueNext extends Node {
-	// Empty body
+public abstract class POtherEntryValueNext extends Node
+{
+    // Empty body
 }

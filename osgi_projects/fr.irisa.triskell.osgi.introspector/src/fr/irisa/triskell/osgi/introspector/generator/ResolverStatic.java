@@ -14,6 +14,7 @@ import manifest.ExportPackage;
 import manifest.ImportPackage;
 import manifest.ImportService;
 import manifest.ManifestFactory;
+import manifest.RequireBundle;
 import manifest.Service;
 import manifest.Version;
 import option.AttributEntry;
@@ -24,6 +25,7 @@ import option.IncludePackages;
 import option.Uses;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
 import framework.Bundle;
+import framework.Framework;
 
 public class ResolverStatic implements Resolver {
 
@@ -223,7 +225,7 @@ public class ResolverStatic implements Resolver {
 								+ " is not a valid package." + "\n"
 								+ "Maybe the folder "
 								+ reference.replace(".", "/")
-								+ " don't contain class file." + "\n");
+								+ " doesn't contain class file." + "\n");
 						exportPackageMaybeUnvalid.add(exportPackage);
 					}
 				}
@@ -449,5 +451,39 @@ public class ResolverStatic implements Resolver {
 						includePackage);
 			}
 		}	
+	}
+
+	public void resolveImportPackage(
+			Map<ImportPackage, List<String>> importPackages,
+			Map<ImportPackage, Bundle> bundles) {
+		for (ImportPackage value : importPackages.keySet()) {
+			for (String _package : importPackages.get(value)) {
+				value.addPackage(_package);
+				value.setResolved(false);
+			}
+
+		}
+		
+	}
+
+	public void resolveImportService(Map<ImportService, String> importServices,
+			Map<ImportService, Bundle> bundles, List<Service> servicesAvailable) {
+		for (ImportService value : importServices.keySet()) {
+			value.setService(importServices.get(value));
+			value.setResolved(false);
+
+		}
+		
+	}
+
+	public void resolveRequireBundle(Framework framework, 
+			Map<RequireBundle, String> requireBundles,
+			Map<RequireBundle, Bundle> bundles) {
+		for (RequireBundle value : requireBundles.keySet()) {
+				value.setBundle(requireBundles.get(value));
+				value.setResolved(false);
+
+		}
+		
 	}
 }

@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameWindows2000OsnameValue extends POsnameValue {
-	private TOsnameWindows2000 _osnameWindows2000_;
+public final class AOsnameWindows2000OsnameValue extends POsnameValue
+{
+    private TOsnameWindows2000 _osnameWindows2000_;
 
-	public AOsnameWindows2000OsnameValue() {
-		// Constructor
-	}
+    public AOsnameWindows2000OsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameWindows2000OsnameValue(@SuppressWarnings("hiding")
-	TOsnameWindows2000 _osnameWindows2000_) {
-		// Constructor
-		setOsnameWindows2000(_osnameWindows2000_);
+    public AOsnameWindows2000OsnameValue(
+        @SuppressWarnings("hiding") TOsnameWindows2000 _osnameWindows2000_)
+    {
+        // Constructor
+        setOsnameWindows2000(_osnameWindows2000_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameWindows2000OsnameValue(
-				cloneNode(this._osnameWindows2000_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameWindows2000OsnameValue(
+            cloneNode(this._osnameWindows2000_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameWindows2000OsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameWindows2000OsnameValue(this);
+    }
 
-	public TOsnameWindows2000 getOsnameWindows2000() {
-		return this._osnameWindows2000_;
-	}
+    public TOsnameWindows2000 getOsnameWindows2000()
+    {
+        return this._osnameWindows2000_;
+    }
 
-	public void setOsnameWindows2000(TOsnameWindows2000 node) {
-		if (this._osnameWindows2000_ != null) {
-			this._osnameWindows2000_.parent(null);
-		}
+    public void setOsnameWindows2000(TOsnameWindows2000 node)
+    {
+        if(this._osnameWindows2000_ != null)
+        {
+            this._osnameWindows2000_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameWindows2000_ = node;
-	}
+        this._osnameWindows2000_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameWindows2000_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameWindows2000_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameWindows2000_ == child) {
-			this._osnameWindows2000_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameWindows2000_ == child)
+        {
+            this._osnameWindows2000_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameWindows2000_ == oldChild) {
-			setOsnameWindows2000((TOsnameWindows2000) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameWindows2000_ == oldChild)
+        {
+            setOsnameWindows2000((TOsnameWindows2000) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

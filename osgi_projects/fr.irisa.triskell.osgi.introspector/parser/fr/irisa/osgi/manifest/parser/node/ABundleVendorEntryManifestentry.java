@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleVendorEntryManifestentry extends PManifestentry {
-	private PBundleVendorEntry _bundleVendorEntry_;
+public final class ABundleVendorEntryManifestentry extends PManifestentry
+{
+    private PBundleVendorEntry _bundleVendorEntry_;
 
-	public ABundleVendorEntryManifestentry() {
-		// Constructor
-	}
+    public ABundleVendorEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public ABundleVendorEntryManifestentry(@SuppressWarnings("hiding")
-	PBundleVendorEntry _bundleVendorEntry_) {
-		// Constructor
-		setBundleVendorEntry(_bundleVendorEntry_);
+    public ABundleVendorEntryManifestentry(
+        @SuppressWarnings("hiding") PBundleVendorEntry _bundleVendorEntry_)
+    {
+        // Constructor
+        setBundleVendorEntry(_bundleVendorEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleVendorEntryManifestentry(
-				cloneNode(this._bundleVendorEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleVendorEntryManifestentry(
+            cloneNode(this._bundleVendorEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleVendorEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleVendorEntryManifestentry(this);
+    }
 
-	public PBundleVendorEntry getBundleVendorEntry() {
-		return this._bundleVendorEntry_;
-	}
+    public PBundleVendorEntry getBundleVendorEntry()
+    {
+        return this._bundleVendorEntry_;
+    }
 
-	public void setBundleVendorEntry(PBundleVendorEntry node) {
-		if (this._bundleVendorEntry_ != null) {
-			this._bundleVendorEntry_.parent(null);
-		}
+    public void setBundleVendorEntry(PBundleVendorEntry node)
+    {
+        if(this._bundleVendorEntry_ != null)
+        {
+            this._bundleVendorEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleVendorEntry_ = node;
-	}
+        this._bundleVendorEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleVendorEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleVendorEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleVendorEntry_ == child) {
-			this._bundleVendorEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleVendorEntry_ == child)
+        {
+            this._bundleVendorEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleVendorEntry_ == oldChild) {
-			setBundleVendorEntry((PBundleVendorEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleVendorEntry_ == oldChild)
+        {
+            setBundleVendorEntry((PBundleVendorEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

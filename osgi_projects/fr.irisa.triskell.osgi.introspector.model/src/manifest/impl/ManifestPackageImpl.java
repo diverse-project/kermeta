@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestPackageImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: ManifestPackageImpl.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
  */
 package manifest.impl;
 
@@ -916,6 +916,15 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImportService_Resolved() {
+		return (EAttribute)importServiceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -930,14 +939,6 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 */
 	public EReference getImportService_ServiceElement() {
 		return (EReference)importServiceEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getImportService_Resolve() {
-		return (EAttribute)importServiceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1065,16 +1066,8 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFragmentHost_Resolved() {
-		return (EAttribute)fragmentHostEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getFragmentHost_Bundle() {
-		return (EReference)fragmentHostEClass.getEStructuralFeatures().get(2);
+		return (EReference)fragmentHostEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1313,7 +1306,7 @@ public class ManifestPackageImpl extends EPackageImpl implements
 		createEReference(requireBundleEClass, REQUIRE_BUNDLE__BUNDLE_ELEMENT);
 
 		importServiceEClass = createEClass(IMPORT_SERVICE);
-		createEAttribute(importServiceEClass, IMPORT_SERVICE__RESOLVE);
+		createEAttribute(importServiceEClass, IMPORT_SERVICE__RESOLVED);
 		createEAttribute(importServiceEClass, IMPORT_SERVICE__SERVICE);
 		createEReference(importServiceEClass, IMPORT_SERVICE__SERVICE_ELEMENT);
 
@@ -1336,7 +1329,6 @@ public class ManifestPackageImpl extends EPackageImpl implements
 
 		fragmentHostEClass = createEClass(FRAGMENT_HOST);
 		createEReference(fragmentHostEClass, FRAGMENT_HOST__DIRECTIVES);
-		createEAttribute(fragmentHostEClass, FRAGMENT_HOST__RESOLVED);
 		createEReference(fragmentHostEClass, FRAGMENT_HOST__BUNDLE);
 
 		dynamicImportPackageEClass = createEClass(DYNAMIC_IMPORT_PACKAGE);
@@ -1514,7 +1506,7 @@ public class ManifestPackageImpl extends EPackageImpl implements
 		initEReference(getRequireBundle_BundleElement(), theFrameworkPackage.getBundle(), null, "bundleElement", null, 0, 1, RequireBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(importServiceEClass, ImportService.class, "ImportService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImportService_Resolve(), this.getboolean(), "resolve", null, 1, 1, ImportService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImportService_Resolved(), this.getboolean(), "resolved", null, 1, 1, ImportService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImportService_Service(), theFrameworkPackage.getString(), "service", null, 1, 1, ImportService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getImportService_ServiceElement(), this.getService(), null, "serviceElement", null, 0, 1, ImportService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1537,7 +1529,6 @@ public class ManifestPackageImpl extends EPackageImpl implements
 
 		initEClass(fragmentHostEClass, FragmentHost.class, "FragmentHost", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFragmentHost_Directives(), theOptionPackage.getFragmentHostDirective(), null, "directives", null, 0, 1, FragmentHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFragmentHost_Resolved(), this.getboolean(), "resolved", null, 1, 1, FragmentHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFragmentHost_Bundle(), theFrameworkPackage.getBundle(), null, "bundle", null, 1, 1, FragmentHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dynamicImportPackageEClass, DynamicImportPackage.class, "DynamicImportPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

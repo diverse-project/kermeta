@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleSymbolicnameEntryManifestentry extends PManifestentry {
-	private PBundleSymbolicnameEntry _bundleSymbolicnameEntry_;
+public final class ABundleSymbolicnameEntryManifestentry extends PManifestentry
+{
+    private PBundleSymbolicnameEntry _bundleSymbolicnameEntry_;
 
-	public ABundleSymbolicnameEntryManifestentry() {
-		// Constructor
-	}
+    public ABundleSymbolicnameEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public ABundleSymbolicnameEntryManifestentry(@SuppressWarnings("hiding")
-	PBundleSymbolicnameEntry _bundleSymbolicnameEntry_) {
-		// Constructor
-		setBundleSymbolicnameEntry(_bundleSymbolicnameEntry_);
+    public ABundleSymbolicnameEntryManifestentry(
+        @SuppressWarnings("hiding") PBundleSymbolicnameEntry _bundleSymbolicnameEntry_)
+    {
+        // Constructor
+        setBundleSymbolicnameEntry(_bundleSymbolicnameEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleSymbolicnameEntryManifestentry(
-				cloneNode(this._bundleSymbolicnameEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleSymbolicnameEntryManifestentry(
+            cloneNode(this._bundleSymbolicnameEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleSymbolicnameEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleSymbolicnameEntryManifestentry(this);
+    }
 
-	public PBundleSymbolicnameEntry getBundleSymbolicnameEntry() {
-		return this._bundleSymbolicnameEntry_;
-	}
+    public PBundleSymbolicnameEntry getBundleSymbolicnameEntry()
+    {
+        return this._bundleSymbolicnameEntry_;
+    }
 
-	public void setBundleSymbolicnameEntry(PBundleSymbolicnameEntry node) {
-		if (this._bundleSymbolicnameEntry_ != null) {
-			this._bundleSymbolicnameEntry_.parent(null);
-		}
+    public void setBundleSymbolicnameEntry(PBundleSymbolicnameEntry node)
+    {
+        if(this._bundleSymbolicnameEntry_ != null)
+        {
+            this._bundleSymbolicnameEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleSymbolicnameEntry_ = node;
-	}
+        this._bundleSymbolicnameEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleSymbolicnameEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleSymbolicnameEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleSymbolicnameEntry_ == child) {
-			this._bundleSymbolicnameEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleSymbolicnameEntry_ == child)
+        {
+            this._bundleSymbolicnameEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleSymbolicnameEntry_ == oldChild) {
-			setBundleSymbolicnameEntry((PBundleSymbolicnameEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleSymbolicnameEntry_ == oldChild)
+        {
+            setBundleSymbolicnameEntry((PBundleSymbolicnameEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameWindowsvistaOsnameValue extends POsnameValue {
-	private TOsnameWindowsvista _osnameWindowsvista_;
+public final class AOsnameWindowsvistaOsnameValue extends POsnameValue
+{
+    private TOsnameWindowsvista _osnameWindowsvista_;
 
-	public AOsnameWindowsvistaOsnameValue() {
-		// Constructor
-	}
+    public AOsnameWindowsvistaOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameWindowsvistaOsnameValue(@SuppressWarnings("hiding")
-	TOsnameWindowsvista _osnameWindowsvista_) {
-		// Constructor
-		setOsnameWindowsvista(_osnameWindowsvista_);
+    public AOsnameWindowsvistaOsnameValue(
+        @SuppressWarnings("hiding") TOsnameWindowsvista _osnameWindowsvista_)
+    {
+        // Constructor
+        setOsnameWindowsvista(_osnameWindowsvista_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameWindowsvistaOsnameValue(
-				cloneNode(this._osnameWindowsvista_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameWindowsvistaOsnameValue(
+            cloneNode(this._osnameWindowsvista_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameWindowsvistaOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameWindowsvistaOsnameValue(this);
+    }
 
-	public TOsnameWindowsvista getOsnameWindowsvista() {
-		return this._osnameWindowsvista_;
-	}
+    public TOsnameWindowsvista getOsnameWindowsvista()
+    {
+        return this._osnameWindowsvista_;
+    }
 
-	public void setOsnameWindowsvista(TOsnameWindowsvista node) {
-		if (this._osnameWindowsvista_ != null) {
-			this._osnameWindowsvista_.parent(null);
-		}
+    public void setOsnameWindowsvista(TOsnameWindowsvista node)
+    {
+        if(this._osnameWindowsvista_ != null)
+        {
+            this._osnameWindowsvista_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameWindowsvista_ = node;
-	}
+        this._osnameWindowsvista_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameWindowsvista_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameWindowsvista_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameWindowsvista_ == child) {
-			this._osnameWindowsvista_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameWindowsvista_ == child)
+        {
+            this._osnameWindowsvista_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameWindowsvista_ == oldChild) {
-			setOsnameWindowsvista((TOsnameWindowsvista) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameWindowsvista_ == oldChild)
+        {
+            setOsnameWindowsvista((TOsnameWindowsvista) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

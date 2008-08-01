@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FragmentHostImpl.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: FragmentHostImpl.java,v 1.4 2008-08-01 09:44:38 edaubert Exp $
  */
 package manifest.impl;
 
@@ -26,7 +26,6 @@ import framework.Bundle;
  * The following features are implemented:
  * <ul>
  *   <li>{@link manifest.impl.FragmentHostImpl#getDirectives <em>Directives</em>}</li>
- *   <li>{@link manifest.impl.FragmentHostImpl#isResolved <em>Resolved</em>}</li>
  *   <li>{@link manifest.impl.FragmentHostImpl#getBundle <em>Bundle</em>}</li>
  * </ul>
  * </p>
@@ -42,24 +41,6 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 	 * @ordered
 	 */
 	protected FragmentHostDirective directives;
-
-	/**
-	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #isResolved()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean RESOLVED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #isResolved()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean resolved = RESOLVED_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getBundle() <em>Bundle</em>}' reference.
@@ -132,25 +113,6 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isResolved() {
-		return resolved;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setResolved(boolean newResolved) {
-		boolean oldResolved = resolved;
-		resolved = newResolved;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.FRAGMENT_HOST__RESOLVED, oldResolved, resolved));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Bundle getBundle() {
 		if (bundle != null && bundle.eIsProxy()) {
 			InternalEObject oldBundle = (InternalEObject)bundle;
@@ -205,8 +167,6 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 		switch (featureID) {
 			case ManifestPackage.FRAGMENT_HOST__DIRECTIVES:
 				return getDirectives();
-			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
-				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				if (resolve) return getBundle();
 				return basicGetBundle();
@@ -225,9 +185,6 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 			case ManifestPackage.FRAGMENT_HOST__DIRECTIVES:
 				setDirectives((FragmentHostDirective)newValue);
 				return;
-			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
-				setResolved(((Boolean)newValue).booleanValue());
-				return;
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				setBundle((Bundle)newValue);
 				return;
@@ -245,9 +202,6 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 			case ManifestPackage.FRAGMENT_HOST__DIRECTIVES:
 				setDirectives((FragmentHostDirective)null);
 				return;
-			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
-				setResolved(RESOLVED_EDEFAULT);
-				return;
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				setBundle((Bundle)null);
 				return;
@@ -264,27 +218,10 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 		switch (featureID) {
 			case ManifestPackage.FRAGMENT_HOST__DIRECTIVES:
 				return directives != null;
-			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
-				return resolved != RESOLVED_EDEFAULT;
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				return bundle != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (resolved: ");
-		result.append(resolved);
-		result.append(')');
-		return result.toString();
 	}
 
 } // FragmentHostImpl

@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameDigitalunixOsnameValue extends POsnameValue {
-	private TOsnameDigitalunix _osnameDigitalunix_;
+public final class AOsnameDigitalunixOsnameValue extends POsnameValue
+{
+    private TOsnameDigitalunix _osnameDigitalunix_;
 
-	public AOsnameDigitalunixOsnameValue() {
-		// Constructor
-	}
+    public AOsnameDigitalunixOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameDigitalunixOsnameValue(@SuppressWarnings("hiding")
-	TOsnameDigitalunix _osnameDigitalunix_) {
-		// Constructor
-		setOsnameDigitalunix(_osnameDigitalunix_);
+    public AOsnameDigitalunixOsnameValue(
+        @SuppressWarnings("hiding") TOsnameDigitalunix _osnameDigitalunix_)
+    {
+        // Constructor
+        setOsnameDigitalunix(_osnameDigitalunix_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameDigitalunixOsnameValue(
-				cloneNode(this._osnameDigitalunix_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameDigitalunixOsnameValue(
+            cloneNode(this._osnameDigitalunix_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameDigitalunixOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameDigitalunixOsnameValue(this);
+    }
 
-	public TOsnameDigitalunix getOsnameDigitalunix() {
-		return this._osnameDigitalunix_;
-	}
+    public TOsnameDigitalunix getOsnameDigitalunix()
+    {
+        return this._osnameDigitalunix_;
+    }
 
-	public void setOsnameDigitalunix(TOsnameDigitalunix node) {
-		if (this._osnameDigitalunix_ != null) {
-			this._osnameDigitalunix_.parent(null);
-		}
+    public void setOsnameDigitalunix(TOsnameDigitalunix node)
+    {
+        if(this._osnameDigitalunix_ != null)
+        {
+            this._osnameDigitalunix_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameDigitalunix_ = node;
-	}
+        this._osnameDigitalunix_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameDigitalunix_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameDigitalunix_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameDigitalunix_ == child) {
-			this._osnameDigitalunix_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameDigitalunix_ == child)
+        {
+            this._osnameDigitalunix_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameDigitalunix_ == oldChild) {
-			setOsnameDigitalunix((TOsnameDigitalunix) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameDigitalunix_ == oldChild)
+        {
+            setOsnameDigitalunix((TOsnameDigitalunix) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

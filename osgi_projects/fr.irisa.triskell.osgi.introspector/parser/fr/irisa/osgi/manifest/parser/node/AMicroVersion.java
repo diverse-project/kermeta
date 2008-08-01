@@ -2,149 +2,179 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AMicroVersion extends PMicroVersion {
-	private TDot _dot_;
-	private TNumber _number_;
-	private PQualifierVersion _qualifierVersion_;
+public final class AMicroVersion extends PMicroVersion
+{
+    private TDot _dot_;
+    private TNumber _number_;
+    private PQualifierVersion _qualifierVersion_;
 
-	public AMicroVersion() {
-		// Constructor
-	}
+    public AMicroVersion()
+    {
+        // Constructor
+    }
 
-	public AMicroVersion(@SuppressWarnings("hiding")
-	TDot _dot_, @SuppressWarnings("hiding")
-	TNumber _number_, @SuppressWarnings("hiding")
-	PQualifierVersion _qualifierVersion_) {
-		// Constructor
-		setDot(_dot_);
+    public AMicroVersion(
+        @SuppressWarnings("hiding") TDot _dot_,
+        @SuppressWarnings("hiding") TNumber _number_,
+        @SuppressWarnings("hiding") PQualifierVersion _qualifierVersion_)
+    {
+        // Constructor
+        setDot(_dot_);
 
-		setNumber(_number_);
+        setNumber(_number_);
 
-		setQualifierVersion(_qualifierVersion_);
+        setQualifierVersion(_qualifierVersion_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AMicroVersion(cloneNode(this._dot_),
-				cloneNode(this._number_), cloneNode(this._qualifierVersion_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AMicroVersion(
+            cloneNode(this._dot_),
+            cloneNode(this._number_),
+            cloneNode(this._qualifierVersion_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAMicroVersion(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAMicroVersion(this);
+    }
 
-	public TDot getDot() {
-		return this._dot_;
-	}
+    public TDot getDot()
+    {
+        return this._dot_;
+    }
 
-	public void setDot(TDot node) {
-		if (this._dot_ != null) {
-			this._dot_.parent(null);
-		}
+    public void setDot(TDot node)
+    {
+        if(this._dot_ != null)
+        {
+            this._dot_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._dot_ = node;
-	}
+        this._dot_ = node;
+    }
 
-	public TNumber getNumber() {
-		return this._number_;
-	}
+    public TNumber getNumber()
+    {
+        return this._number_;
+    }
 
-	public void setNumber(TNumber node) {
-		if (this._number_ != null) {
-			this._number_.parent(null);
-		}
+    public void setNumber(TNumber node)
+    {
+        if(this._number_ != null)
+        {
+            this._number_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._number_ = node;
-	}
+        this._number_ = node;
+    }
 
-	public PQualifierVersion getQualifierVersion() {
-		return this._qualifierVersion_;
-	}
+    public PQualifierVersion getQualifierVersion()
+    {
+        return this._qualifierVersion_;
+    }
 
-	public void setQualifierVersion(PQualifierVersion node) {
-		if (this._qualifierVersion_ != null) {
-			this._qualifierVersion_.parent(null);
-		}
+    public void setQualifierVersion(PQualifierVersion node)
+    {
+        if(this._qualifierVersion_ != null)
+        {
+            this._qualifierVersion_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._qualifierVersion_ = node;
-	}
+        this._qualifierVersion_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._dot_) + toString(this._number_)
-				+ toString(this._qualifierVersion_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._dot_)
+            + toString(this._number_)
+            + toString(this._qualifierVersion_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._dot_ == child) {
-			this._dot_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._dot_ == child)
+        {
+            this._dot_ = null;
+            return;
+        }
 
-		if (this._number_ == child) {
-			this._number_ = null;
-			return;
-		}
+        if(this._number_ == child)
+        {
+            this._number_ = null;
+            return;
+        }
 
-		if (this._qualifierVersion_ == child) {
-			this._qualifierVersion_ = null;
-			return;
-		}
+        if(this._qualifierVersion_ == child)
+        {
+            this._qualifierVersion_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._dot_ == oldChild) {
-			setDot((TDot) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._dot_ == oldChild)
+        {
+            setDot((TDot) newChild);
+            return;
+        }
 
-		if (this._number_ == oldChild) {
-			setNumber((TNumber) newChild);
-			return;
-		}
+        if(this._number_ == oldChild)
+        {
+            setNumber((TNumber) newChild);
+            return;
+        }
 
-		if (this._qualifierVersion_ == oldChild) {
-			setQualifierVersion((PQualifierVersion) newChild);
-			return;
-		}
+        if(this._qualifierVersion_ == oldChild)
+        {
+            setQualifierVersion((PQualifierVersion) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,195 +2,229 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import java.util.*;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AMandatoryManyAttributesMandatoryValue extends
-		PMandatoryValue {
-	private TQuote _left_;
-	private TUnquotedString _unquotedString_;
-	private final LinkedList<PMandatoryString> _mandatoryString_ = new LinkedList<PMandatoryString>();
-	private TQuote _right_;
+public final class AMandatoryManyAttributesMandatoryValue extends PMandatoryValue
+{
+    private TQuote _left_;
+    private TUnquotedString _unquotedString_;
+    private final LinkedList<PMandatoryString> _mandatoryString_ = new LinkedList<PMandatoryString>();
+    private TQuote _right_;
 
-	public AMandatoryManyAttributesMandatoryValue() {
-		// Constructor
-	}
+    public AMandatoryManyAttributesMandatoryValue()
+    {
+        // Constructor
+    }
 
-	public AMandatoryManyAttributesMandatoryValue(@SuppressWarnings("hiding")
-	TQuote _left_, @SuppressWarnings("hiding")
-	TUnquotedString _unquotedString_, @SuppressWarnings("hiding")
-	List<PMandatoryString> _mandatoryString_, @SuppressWarnings("hiding")
-	TQuote _right_) {
-		// Constructor
-		setLeft(_left_);
+    public AMandatoryManyAttributesMandatoryValue(
+        @SuppressWarnings("hiding") TQuote _left_,
+        @SuppressWarnings("hiding") TUnquotedString _unquotedString_,
+        @SuppressWarnings("hiding") List<PMandatoryString> _mandatoryString_,
+        @SuppressWarnings("hiding") TQuote _right_)
+    {
+        // Constructor
+        setLeft(_left_);
 
-		setUnquotedString(_unquotedString_);
+        setUnquotedString(_unquotedString_);
 
-		setMandatoryString(_mandatoryString_);
+        setMandatoryString(_mandatoryString_);
 
-		setRight(_right_);
+        setRight(_right_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AMandatoryManyAttributesMandatoryValue(
-				cloneNode(this._left_), cloneNode(this._unquotedString_),
-				cloneList(this._mandatoryString_), cloneNode(this._right_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AMandatoryManyAttributesMandatoryValue(
+            cloneNode(this._left_),
+            cloneNode(this._unquotedString_),
+            cloneList(this._mandatoryString_),
+            cloneNode(this._right_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAMandatoryManyAttributesMandatoryValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAMandatoryManyAttributesMandatoryValue(this);
+    }
 
-	public TQuote getLeft() {
-		return this._left_;
-	}
+    public TQuote getLeft()
+    {
+        return this._left_;
+    }
 
-	public void setLeft(TQuote node) {
-		if (this._left_ != null) {
-			this._left_.parent(null);
-		}
+    public void setLeft(TQuote node)
+    {
+        if(this._left_ != null)
+        {
+            this._left_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._left_ = node;
-	}
+        this._left_ = node;
+    }
 
-	public TUnquotedString getUnquotedString() {
-		return this._unquotedString_;
-	}
+    public TUnquotedString getUnquotedString()
+    {
+        return this._unquotedString_;
+    }
 
-	public void setUnquotedString(TUnquotedString node) {
-		if (this._unquotedString_ != null) {
-			this._unquotedString_.parent(null);
-		}
+    public void setUnquotedString(TUnquotedString node)
+    {
+        if(this._unquotedString_ != null)
+        {
+            this._unquotedString_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._unquotedString_ = node;
-	}
+        this._unquotedString_ = node;
+    }
 
-	public LinkedList<PMandatoryString> getMandatoryString() {
-		return this._mandatoryString_;
-	}
+    public LinkedList<PMandatoryString> getMandatoryString()
+    {
+        return this._mandatoryString_;
+    }
 
-	public void setMandatoryString(List<PMandatoryString> list) {
-		this._mandatoryString_.clear();
-		this._mandatoryString_.addAll(list);
-		for (PMandatoryString e : list) {
-			if (e.parent() != null) {
-				e.parent().removeChild(e);
-			}
+    public void setMandatoryString(List<PMandatoryString> list)
+    {
+        this._mandatoryString_.clear();
+        this._mandatoryString_.addAll(list);
+        for(PMandatoryString e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
 
-			e.parent(this);
-		}
-	}
+            e.parent(this);
+        }
+    }
 
-	public TQuote getRight() {
-		return this._right_;
-	}
+    public TQuote getRight()
+    {
+        return this._right_;
+    }
 
-	public void setRight(TQuote node) {
-		if (this._right_ != null) {
-			this._right_.parent(null);
-		}
+    public void setRight(TQuote node)
+    {
+        if(this._right_ != null)
+        {
+            this._right_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._right_ = node;
-	}
+        this._right_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._left_) + toString(this._unquotedString_)
-				+ toString(this._mandatoryString_) + toString(this._right_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._left_)
+            + toString(this._unquotedString_)
+            + toString(this._mandatoryString_)
+            + toString(this._right_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._left_ == child) {
-			this._left_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._left_ == child)
+        {
+            this._left_ = null;
+            return;
+        }
 
-		if (this._unquotedString_ == child) {
-			this._unquotedString_ = null;
-			return;
-		}
+        if(this._unquotedString_ == child)
+        {
+            this._unquotedString_ = null;
+            return;
+        }
 
-		if (this._mandatoryString_.remove(child)) {
-			return;
-		}
+        if(this._mandatoryString_.remove(child))
+        {
+            return;
+        }
 
-		if (this._right_ == child) {
-			this._right_ = null;
-			return;
-		}
+        if(this._right_ == child)
+        {
+            this._right_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._left_ == oldChild) {
-			setLeft((TQuote) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._left_ == oldChild)
+        {
+            setLeft((TQuote) newChild);
+            return;
+        }
 
-		if (this._unquotedString_ == oldChild) {
-			setUnquotedString((TUnquotedString) newChild);
-			return;
-		}
+        if(this._unquotedString_ == oldChild)
+        {
+            setUnquotedString((TUnquotedString) newChild);
+            return;
+        }
 
-		for (ListIterator<PMandatoryString> i = this._mandatoryString_
-				.listIterator(); i.hasNext();) {
-			if (i.next() == oldChild) {
-				if (newChild != null) {
-					i.set((PMandatoryString) newChild);
-					newChild.parent(this);
-					oldChild.parent(null);
-					return;
-				}
+        for(ListIterator<PMandatoryString> i = this._mandatoryString_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PMandatoryString) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-				i.remove();
-				oldChild.parent(null);
-				return;
-			}
-		}
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
 
-		if (this._right_ == oldChild) {
-			setRight((TQuote) newChild);
-			return;
-		}
+        if(this._right_ == oldChild)
+        {
+            setRight((TQuote) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ALesserEqualsBooleanComparator extends PBooleanComparator {
-	private TLesserEquals _lesserEquals_;
+public final class ALesserEqualsBooleanComparator extends PBooleanComparator
+{
+    private TLesserEquals _lesserEquals_;
 
-	public ALesserEqualsBooleanComparator() {
-		// Constructor
-	}
+    public ALesserEqualsBooleanComparator()
+    {
+        // Constructor
+    }
 
-	public ALesserEqualsBooleanComparator(@SuppressWarnings("hiding")
-	TLesserEquals _lesserEquals_) {
-		// Constructor
-		setLesserEquals(_lesserEquals_);
+    public ALesserEqualsBooleanComparator(
+        @SuppressWarnings("hiding") TLesserEquals _lesserEquals_)
+    {
+        // Constructor
+        setLesserEquals(_lesserEquals_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ALesserEqualsBooleanComparator(
-				cloneNode(this._lesserEquals_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ALesserEqualsBooleanComparator(
+            cloneNode(this._lesserEquals_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseALesserEqualsBooleanComparator(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseALesserEqualsBooleanComparator(this);
+    }
 
-	public TLesserEquals getLesserEquals() {
-		return this._lesserEquals_;
-	}
+    public TLesserEquals getLesserEquals()
+    {
+        return this._lesserEquals_;
+    }
 
-	public void setLesserEquals(TLesserEquals node) {
-		if (this._lesserEquals_ != null) {
-			this._lesserEquals_.parent(null);
-		}
+    public void setLesserEquals(TLesserEquals node)
+    {
+        if(this._lesserEquals_ != null)
+        {
+            this._lesserEquals_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._lesserEquals_ = node;
-	}
+        this._lesserEquals_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._lesserEquals_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._lesserEquals_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._lesserEquals_ == child) {
-			this._lesserEquals_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._lesserEquals_ == child)
+        {
+            this._lesserEquals_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._lesserEquals_ == oldChild) {
-			setLesserEquals((TLesserEquals) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._lesserEquals_ == oldChild)
+        {
+            setLesserEquals((TLesserEquals) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

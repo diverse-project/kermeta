@@ -2,6 +2,7 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-public interface Switchable {
-	void apply(Switch sw);
+public interface Switchable
+{
+    void apply(Switch sw);
 }

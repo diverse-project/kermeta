@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AOsnameWindowsceOsnameValue extends POsnameValue {
-	private TOsnameWindowsce _osnameWindowsce_;
+public final class AOsnameWindowsceOsnameValue extends POsnameValue
+{
+    private TOsnameWindowsce _osnameWindowsce_;
 
-	public AOsnameWindowsceOsnameValue() {
-		// Constructor
-	}
+    public AOsnameWindowsceOsnameValue()
+    {
+        // Constructor
+    }
 
-	public AOsnameWindowsceOsnameValue(@SuppressWarnings("hiding")
-	TOsnameWindowsce _osnameWindowsce_) {
-		// Constructor
-		setOsnameWindowsce(_osnameWindowsce_);
+    public AOsnameWindowsceOsnameValue(
+        @SuppressWarnings("hiding") TOsnameWindowsce _osnameWindowsce_)
+    {
+        // Constructor
+        setOsnameWindowsce(_osnameWindowsce_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AOsnameWindowsceOsnameValue(
-				cloneNode(this._osnameWindowsce_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AOsnameWindowsceOsnameValue(
+            cloneNode(this._osnameWindowsce_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAOsnameWindowsceOsnameValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAOsnameWindowsceOsnameValue(this);
+    }
 
-	public TOsnameWindowsce getOsnameWindowsce() {
-		return this._osnameWindowsce_;
-	}
+    public TOsnameWindowsce getOsnameWindowsce()
+    {
+        return this._osnameWindowsce_;
+    }
 
-	public void setOsnameWindowsce(TOsnameWindowsce node) {
-		if (this._osnameWindowsce_ != null) {
-			this._osnameWindowsce_.parent(null);
-		}
+    public void setOsnameWindowsce(TOsnameWindowsce node)
+    {
+        if(this._osnameWindowsce_ != null)
+        {
+            this._osnameWindowsce_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._osnameWindowsce_ = node;
-	}
+        this._osnameWindowsce_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._osnameWindowsce_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._osnameWindowsce_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._osnameWindowsce_ == child) {
-			this._osnameWindowsce_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._osnameWindowsce_ == child)
+        {
+            this._osnameWindowsce_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._osnameWindowsce_ == oldChild) {
-			setOsnameWindowsce((TOsnameWindowsce) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._osnameWindowsce_ == oldChild)
+        {
+            setOsnameWindowsce((TOsnameWindowsce) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

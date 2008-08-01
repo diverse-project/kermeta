@@ -2,79 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProcessorMipsProcessorValue extends PProcessorValue {
-	private TProcessorMips _processorMips_;
+public final class AProcessorMipsProcessorValue extends PProcessorValue
+{
+    private TProcessorMips _processorMips_;
 
-	public AProcessorMipsProcessorValue() {
-		// Constructor
-	}
+    public AProcessorMipsProcessorValue()
+    {
+        // Constructor
+    }
 
-	public AProcessorMipsProcessorValue(@SuppressWarnings("hiding")
-	TProcessorMips _processorMips_) {
-		// Constructor
-		setProcessorMips(_processorMips_);
+    public AProcessorMipsProcessorValue(
+        @SuppressWarnings("hiding") TProcessorMips _processorMips_)
+    {
+        // Constructor
+        setProcessorMips(_processorMips_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AProcessorMipsProcessorValue(cloneNode(this._processorMips_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AProcessorMipsProcessorValue(
+            cloneNode(this._processorMips_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAProcessorMipsProcessorValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAProcessorMipsProcessorValue(this);
+    }
 
-	public TProcessorMips getProcessorMips() {
-		return this._processorMips_;
-	}
+    public TProcessorMips getProcessorMips()
+    {
+        return this._processorMips_;
+    }
 
-	public void setProcessorMips(TProcessorMips node) {
-		if (this._processorMips_ != null) {
-			this._processorMips_.parent(null);
-		}
+    public void setProcessorMips(TProcessorMips node)
+    {
+        if(this._processorMips_ != null)
+        {
+            this._processorMips_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._processorMips_ = node;
-	}
+        this._processorMips_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._processorMips_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._processorMips_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._processorMips_ == child) {
-			this._processorMips_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._processorMips_ == child)
+        {
+            this._processorMips_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._processorMips_ == oldChild) {
-			setProcessorMips((TProcessorMips) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._processorMips_ == oldChild)
+        {
+            setProcessorMips((TProcessorMips) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

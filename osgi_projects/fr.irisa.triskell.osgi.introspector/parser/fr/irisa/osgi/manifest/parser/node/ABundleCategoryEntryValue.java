@@ -2,126 +2,143 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import java.util.*;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleCategoryEntryValue extends PBundleCategoryEntryValue {
-	private PStringEntryValue _stringEntryValue_;
-	private final LinkedList<PCategoryValue> _categoryValue_ = new LinkedList<PCategoryValue>();
+public final class ABundleCategoryEntryValue extends PBundleCategoryEntryValue
+{
+    private PStringEntryValue _stringEntryValue_;
+    private final LinkedList<PCategoryValue> _categoryValue_ = new LinkedList<PCategoryValue>();
 
-	public ABundleCategoryEntryValue() {
-		// Constructor
-	}
+    public ABundleCategoryEntryValue()
+    {
+        // Constructor
+    }
 
-	public ABundleCategoryEntryValue(@SuppressWarnings("hiding")
-	PStringEntryValue _stringEntryValue_, @SuppressWarnings("hiding")
-	List<PCategoryValue> _categoryValue_) {
-		// Constructor
-		setStringEntryValue(_stringEntryValue_);
+    public ABundleCategoryEntryValue(
+        @SuppressWarnings("hiding") PStringEntryValue _stringEntryValue_,
+        @SuppressWarnings("hiding") List<PCategoryValue> _categoryValue_)
+    {
+        // Constructor
+        setStringEntryValue(_stringEntryValue_);
 
-		setCategoryValue(_categoryValue_);
+        setCategoryValue(_categoryValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleCategoryEntryValue(
-				cloneNode(this._stringEntryValue_),
-				cloneList(this._categoryValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleCategoryEntryValue(
+            cloneNode(this._stringEntryValue_),
+            cloneList(this._categoryValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleCategoryEntryValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleCategoryEntryValue(this);
+    }
 
-	public PStringEntryValue getStringEntryValue() {
-		return this._stringEntryValue_;
-	}
+    public PStringEntryValue getStringEntryValue()
+    {
+        return this._stringEntryValue_;
+    }
 
-	public void setStringEntryValue(PStringEntryValue node) {
-		if (this._stringEntryValue_ != null) {
-			this._stringEntryValue_.parent(null);
-		}
+    public void setStringEntryValue(PStringEntryValue node)
+    {
+        if(this._stringEntryValue_ != null)
+        {
+            this._stringEntryValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._stringEntryValue_ = node;
-	}
+        this._stringEntryValue_ = node;
+    }
 
-	public LinkedList<PCategoryValue> getCategoryValue() {
-		return this._categoryValue_;
-	}
+    public LinkedList<PCategoryValue> getCategoryValue()
+    {
+        return this._categoryValue_;
+    }
 
-	public void setCategoryValue(List<PCategoryValue> list) {
-		this._categoryValue_.clear();
-		this._categoryValue_.addAll(list);
-		for (PCategoryValue e : list) {
-			if (e.parent() != null) {
-				e.parent().removeChild(e);
-			}
+    public void setCategoryValue(List<PCategoryValue> list)
+    {
+        this._categoryValue_.clear();
+        this._categoryValue_.addAll(list);
+        for(PCategoryValue e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
 
-			e.parent(this);
-		}
-	}
+            e.parent(this);
+        }
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._stringEntryValue_)
-				+ toString(this._categoryValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._stringEntryValue_)
+            + toString(this._categoryValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._stringEntryValue_ == child) {
-			this._stringEntryValue_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._stringEntryValue_ == child)
+        {
+            this._stringEntryValue_ = null;
+            return;
+        }
 
-		if (this._categoryValue_.remove(child)) {
-			return;
-		}
+        if(this._categoryValue_.remove(child))
+        {
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._stringEntryValue_ == oldChild) {
-			setStringEntryValue((PStringEntryValue) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._stringEntryValue_ == oldChild)
+        {
+            setStringEntryValue((PStringEntryValue) newChild);
+            return;
+        }
 
-		for (ListIterator<PCategoryValue> i = this._categoryValue_
-				.listIterator(); i.hasNext();) {
-			if (i.next() == oldChild) {
-				if (newChild != null) {
-					i.set((PCategoryValue) newChild);
-					newChild.parent(this);
-					oldChild.parent(null);
-					return;
-				}
+        for(ListIterator<PCategoryValue> i = this._categoryValue_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PCategoryValue) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-				i.remove();
-				oldChild.parent(null);
-				return;
-			}
-		}
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

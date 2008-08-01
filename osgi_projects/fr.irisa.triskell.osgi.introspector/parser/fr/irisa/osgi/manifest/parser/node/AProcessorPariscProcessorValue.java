@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProcessorPariscProcessorValue extends PProcessorValue {
-	private TProcessorParisc _processorParisc_;
+public final class AProcessorPariscProcessorValue extends PProcessorValue
+{
+    private TProcessorParisc _processorParisc_;
 
-	public AProcessorPariscProcessorValue() {
-		// Constructor
-	}
+    public AProcessorPariscProcessorValue()
+    {
+        // Constructor
+    }
 
-	public AProcessorPariscProcessorValue(@SuppressWarnings("hiding")
-	TProcessorParisc _processorParisc_) {
-		// Constructor
-		setProcessorParisc(_processorParisc_);
+    public AProcessorPariscProcessorValue(
+        @SuppressWarnings("hiding") TProcessorParisc _processorParisc_)
+    {
+        // Constructor
+        setProcessorParisc(_processorParisc_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AProcessorPariscProcessorValue(
-				cloneNode(this._processorParisc_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AProcessorPariscProcessorValue(
+            cloneNode(this._processorParisc_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAProcessorPariscProcessorValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAProcessorPariscProcessorValue(this);
+    }
 
-	public TProcessorParisc getProcessorParisc() {
-		return this._processorParisc_;
-	}
+    public TProcessorParisc getProcessorParisc()
+    {
+        return this._processorParisc_;
+    }
 
-	public void setProcessorParisc(TProcessorParisc node) {
-		if (this._processorParisc_ != null) {
-			this._processorParisc_.parent(null);
-		}
+    public void setProcessorParisc(TProcessorParisc node)
+    {
+        if(this._processorParisc_ != null)
+        {
+            this._processorParisc_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._processorParisc_ = node;
-	}
+        this._processorParisc_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._processorParisc_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._processorParisc_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._processorParisc_ == child) {
-			this._processorParisc_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._processorParisc_ == child)
+        {
+            this._processorParisc_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._processorParisc_ == oldChild) {
-			setProcessorParisc((TProcessorParisc) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._processorParisc_ == oldChild)
+        {
+            setProcessorParisc((TProcessorParisc) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

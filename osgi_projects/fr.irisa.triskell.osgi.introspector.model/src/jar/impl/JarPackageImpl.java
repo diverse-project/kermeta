@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JarPackageImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: JarPackageImpl.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
  */
 package jar.impl;
 
@@ -178,6 +178,15 @@ public class JarPackageImpl extends EPackageImpl implements JarPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSystemEntry_BundleClassPath() {
+		return (EAttribute)systemEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -199,14 +208,6 @@ public class JarPackageImpl extends EPackageImpl implements JarPackage {
 	 */
 	public EReference getPackage_SubPackages() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPackage_BundleClassPath() {
-		return (EAttribute)packageEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -272,11 +273,11 @@ public class JarPackageImpl extends EPackageImpl implements JarPackage {
 		createEAttribute(bundleEntryEClass, BUNDLE_ENTRY__NAME);
 
 		systemEntryEClass = createEClass(SYSTEM_ENTRY);
+		createEAttribute(systemEntryEClass, SYSTEM_ENTRY__BUNDLE_CLASS_PATH);
 
 		packageEClass = createEClass(PACKAGE);
 		createEReference(packageEClass, PACKAGE__CLASSES);
 		createEReference(packageEClass, PACKAGE__SUB_PACKAGES);
-		createEAttribute(packageEClass, PACKAGE__BUNDLE_CLASS_PATH);
 
 		classEClass = createEClass(CLASS);
 
@@ -328,11 +329,11 @@ public class JarPackageImpl extends EPackageImpl implements JarPackage {
 		initEAttribute(getBundleEntry_Name(), theManifestPackage.getString(), "name", null, 1, 1, BundleEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(systemEntryEClass, SystemEntry.class, "SystemEntry", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSystemEntry_BundleClassPath(), theManifestPackage.getboolean(), "bundleClassPath", null, 1, 1, SystemEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(packageEClass, jar.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPackage_Classes(), this.getClass_(), null, "classes", null, 0, -1, jar.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackage_SubPackages(), this.getPackage(), null, "subPackages", null, 0, -1, jar.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPackage_BundleClassPath(), theManifestPackage.getboolean(), "bundleClassPath", null, 1, 1, jar.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classEClass, jar.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

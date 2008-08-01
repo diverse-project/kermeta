@@ -2,26 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TInclude extends Token {
-	public TInclude(String text) {
-		setText(text);
-	}
+public final class TInclude extends Token
+{
+    public TInclude(String text)
+    {
+        setText(text);
+    }
 
-	public TInclude(String text, int line, int pos) {
-		setText(text);
-		setLine(line);
-		setPos(pos);
-	}
+    public TInclude(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TInclude(getText(), getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TInclude(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTInclude(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTInclude(this);
+    }
 }

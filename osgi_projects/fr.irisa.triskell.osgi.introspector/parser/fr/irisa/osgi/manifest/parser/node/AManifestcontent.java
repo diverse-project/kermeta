@@ -2,123 +2,143 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import java.util.*;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AManifestcontent extends PManifestcontent {
-	private PManifestentry _manifestentry_;
-	private final LinkedList<TEol> _eol_ = new LinkedList<TEol>();
+public final class AManifestcontent extends PManifestcontent
+{
+    private PManifestentry _manifestentry_;
+    private final LinkedList<TEol> _eol_ = new LinkedList<TEol>();
 
-	public AManifestcontent() {
-		// Constructor
-	}
+    public AManifestcontent()
+    {
+        // Constructor
+    }
 
-	public AManifestcontent(@SuppressWarnings("hiding")
-	PManifestentry _manifestentry_, @SuppressWarnings("hiding")
-	List<TEol> _eol_) {
-		// Constructor
-		setManifestentry(_manifestentry_);
+    public AManifestcontent(
+        @SuppressWarnings("hiding") PManifestentry _manifestentry_,
+        @SuppressWarnings("hiding") List<TEol> _eol_)
+    {
+        // Constructor
+        setManifestentry(_manifestentry_);
 
-		setEol(_eol_);
+        setEol(_eol_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AManifestcontent(cloneNode(this._manifestentry_),
-				cloneList(this._eol_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AManifestcontent(
+            cloneNode(this._manifestentry_),
+            cloneList(this._eol_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAManifestcontent(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAManifestcontent(this);
+    }
 
-	public PManifestentry getManifestentry() {
-		return this._manifestentry_;
-	}
+    public PManifestentry getManifestentry()
+    {
+        return this._manifestentry_;
+    }
 
-	public void setManifestentry(PManifestentry node) {
-		if (this._manifestentry_ != null) {
-			this._manifestentry_.parent(null);
-		}
+    public void setManifestentry(PManifestentry node)
+    {
+        if(this._manifestentry_ != null)
+        {
+            this._manifestentry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._manifestentry_ = node;
-	}
+        this._manifestentry_ = node;
+    }
 
-	public LinkedList<TEol> getEol() {
-		return this._eol_;
-	}
+    public LinkedList<TEol> getEol()
+    {
+        return this._eol_;
+    }
 
-	public void setEol(List<TEol> list) {
-		this._eol_.clear();
-		this._eol_.addAll(list);
-		for (TEol e : list) {
-			if (e.parent() != null) {
-				e.parent().removeChild(e);
-			}
+    public void setEol(List<TEol> list)
+    {
+        this._eol_.clear();
+        this._eol_.addAll(list);
+        for(TEol e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
 
-			e.parent(this);
-		}
-	}
+            e.parent(this);
+        }
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._manifestentry_) + toString(this._eol_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._manifestentry_)
+            + toString(this._eol_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._manifestentry_ == child) {
-			this._manifestentry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._manifestentry_ == child)
+        {
+            this._manifestentry_ = null;
+            return;
+        }
 
-		if (this._eol_.remove(child)) {
-			return;
-		}
+        if(this._eol_.remove(child))
+        {
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._manifestentry_ == oldChild) {
-			setManifestentry((PManifestentry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._manifestentry_ == oldChild)
+        {
+            setManifestentry((PManifestentry) newChild);
+            return;
+        }
 
-		for (ListIterator<TEol> i = this._eol_.listIterator(); i.hasNext();) {
-			if (i.next() == oldChild) {
-				if (newChild != null) {
-					i.set((TEol) newChild);
-					newChild.parent(this);
-					oldChild.parent(null);
-					return;
-				}
+        for(ListIterator<TEol> i = this._eol_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((TEol) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-				i.remove();
-				oldChild.parent(null);
-				return;
-			}
-		}
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

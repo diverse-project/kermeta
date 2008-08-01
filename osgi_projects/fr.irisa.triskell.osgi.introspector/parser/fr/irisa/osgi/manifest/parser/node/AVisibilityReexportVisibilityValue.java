@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVisibilityReexportVisibilityValue extends PVisibilityValue {
-	private TVisibilityReexport _visibilityReexport_;
+public final class AVisibilityReexportVisibilityValue extends PVisibilityValue
+{
+    private TVisibilityReexport _visibilityReexport_;
 
-	public AVisibilityReexportVisibilityValue() {
-		// Constructor
-	}
+    public AVisibilityReexportVisibilityValue()
+    {
+        // Constructor
+    }
 
-	public AVisibilityReexportVisibilityValue(@SuppressWarnings("hiding")
-	TVisibilityReexport _visibilityReexport_) {
-		// Constructor
-		setVisibilityReexport(_visibilityReexport_);
+    public AVisibilityReexportVisibilityValue(
+        @SuppressWarnings("hiding") TVisibilityReexport _visibilityReexport_)
+    {
+        // Constructor
+        setVisibilityReexport(_visibilityReexport_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AVisibilityReexportVisibilityValue(
-				cloneNode(this._visibilityReexport_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AVisibilityReexportVisibilityValue(
+            cloneNode(this._visibilityReexport_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAVisibilityReexportVisibilityValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAVisibilityReexportVisibilityValue(this);
+    }
 
-	public TVisibilityReexport getVisibilityReexport() {
-		return this._visibilityReexport_;
-	}
+    public TVisibilityReexport getVisibilityReexport()
+    {
+        return this._visibilityReexport_;
+    }
 
-	public void setVisibilityReexport(TVisibilityReexport node) {
-		if (this._visibilityReexport_ != null) {
-			this._visibilityReexport_.parent(null);
-		}
+    public void setVisibilityReexport(TVisibilityReexport node)
+    {
+        if(this._visibilityReexport_ != null)
+        {
+            this._visibilityReexport_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._visibilityReexport_ = node;
-	}
+        this._visibilityReexport_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._visibilityReexport_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._visibilityReexport_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._visibilityReexport_ == child) {
-			this._visibilityReexport_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._visibilityReexport_ == child)
+        {
+            this._visibilityReexport_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._visibilityReexport_ == oldChild) {
-			setVisibilityReexport((TVisibilityReexport) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._visibilityReexport_ == oldChild)
+        {
+            setVisibilityReexport((TVisibilityReexport) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

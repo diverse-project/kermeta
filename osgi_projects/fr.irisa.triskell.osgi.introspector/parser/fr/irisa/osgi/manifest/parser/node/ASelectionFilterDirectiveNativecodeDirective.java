@@ -2,82 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASelectionFilterDirectiveNativecodeDirective extends
-		PNativecodeDirective {
-	private PSelectionFilterDirective _selectionFilterDirective_;
+public final class ASelectionFilterDirectiveNativecodeDirective extends PNativecodeDirective
+{
+    private PSelectionFilterDirective _selectionFilterDirective_;
 
-	public ASelectionFilterDirectiveNativecodeDirective() {
-		// Constructor
-	}
+    public ASelectionFilterDirectiveNativecodeDirective()
+    {
+        // Constructor
+    }
 
-	public ASelectionFilterDirectiveNativecodeDirective(
-			@SuppressWarnings("hiding")
-			PSelectionFilterDirective _selectionFilterDirective_) {
-		// Constructor
-		setSelectionFilterDirective(_selectionFilterDirective_);
+    public ASelectionFilterDirectiveNativecodeDirective(
+        @SuppressWarnings("hiding") PSelectionFilterDirective _selectionFilterDirective_)
+    {
+        // Constructor
+        setSelectionFilterDirective(_selectionFilterDirective_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ASelectionFilterDirectiveNativecodeDirective(
-				cloneNode(this._selectionFilterDirective_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ASelectionFilterDirectiveNativecodeDirective(
+            cloneNode(this._selectionFilterDirective_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseASelectionFilterDirectiveNativecodeDirective(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseASelectionFilterDirectiveNativecodeDirective(this);
+    }
 
-	public PSelectionFilterDirective getSelectionFilterDirective() {
-		return this._selectionFilterDirective_;
-	}
+    public PSelectionFilterDirective getSelectionFilterDirective()
+    {
+        return this._selectionFilterDirective_;
+    }
 
-	public void setSelectionFilterDirective(PSelectionFilterDirective node) {
-		if (this._selectionFilterDirective_ != null) {
-			this._selectionFilterDirective_.parent(null);
-		}
+    public void setSelectionFilterDirective(PSelectionFilterDirective node)
+    {
+        if(this._selectionFilterDirective_ != null)
+        {
+            this._selectionFilterDirective_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._selectionFilterDirective_ = node;
-	}
+        this._selectionFilterDirective_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._selectionFilterDirective_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._selectionFilterDirective_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._selectionFilterDirective_ == child) {
-			this._selectionFilterDirective_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._selectionFilterDirective_ == child)
+        {
+            this._selectionFilterDirective_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._selectionFilterDirective_ == oldChild) {
-			setSelectionFilterDirective((PSelectionFilterDirective) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._selectionFilterDirective_ == oldChild)
+        {
+            setSelectionFilterDirective((PSelectionFilterDirective) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

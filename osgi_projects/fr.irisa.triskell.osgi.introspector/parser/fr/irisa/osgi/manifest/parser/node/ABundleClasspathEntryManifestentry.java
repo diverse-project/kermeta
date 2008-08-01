@@ -2,80 +2,93 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABundleClasspathEntryManifestentry extends PManifestentry {
-	private PBundleClasspathEntry _bundleClasspathEntry_;
+public final class ABundleClasspathEntryManifestentry extends PManifestentry
+{
+    private PBundleClasspathEntry _bundleClasspathEntry_;
 
-	public ABundleClasspathEntryManifestentry() {
-		// Constructor
-	}
+    public ABundleClasspathEntryManifestentry()
+    {
+        // Constructor
+    }
 
-	public ABundleClasspathEntryManifestentry(@SuppressWarnings("hiding")
-	PBundleClasspathEntry _bundleClasspathEntry_) {
-		// Constructor
-		setBundleClasspathEntry(_bundleClasspathEntry_);
+    public ABundleClasspathEntryManifestentry(
+        @SuppressWarnings("hiding") PBundleClasspathEntry _bundleClasspathEntry_)
+    {
+        // Constructor
+        setBundleClasspathEntry(_bundleClasspathEntry_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new ABundleClasspathEntryManifestentry(
-				cloneNode(this._bundleClasspathEntry_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new ABundleClasspathEntryManifestentry(
+            cloneNode(this._bundleClasspathEntry_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseABundleClasspathEntryManifestentry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseABundleClasspathEntryManifestentry(this);
+    }
 
-	public PBundleClasspathEntry getBundleClasspathEntry() {
-		return this._bundleClasspathEntry_;
-	}
+    public PBundleClasspathEntry getBundleClasspathEntry()
+    {
+        return this._bundleClasspathEntry_;
+    }
 
-	public void setBundleClasspathEntry(PBundleClasspathEntry node) {
-		if (this._bundleClasspathEntry_ != null) {
-			this._bundleClasspathEntry_.parent(null);
-		}
+    public void setBundleClasspathEntry(PBundleClasspathEntry node)
+    {
+        if(this._bundleClasspathEntry_ != null)
+        {
+            this._bundleClasspathEntry_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._bundleClasspathEntry_ = node;
-	}
+        this._bundleClasspathEntry_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._bundleClasspathEntry_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._bundleClasspathEntry_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._bundleClasspathEntry_ == child) {
-			this._bundleClasspathEntry_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._bundleClasspathEntry_ == child)
+        {
+            this._bundleClasspathEntry_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._bundleClasspathEntry_ == oldChild) {
-			setBundleClasspathEntry((PBundleClasspathEntry) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._bundleClasspathEntry_ == oldChild)
+        {
+            setBundleClasspathEntry((PBundleClasspathEntry) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

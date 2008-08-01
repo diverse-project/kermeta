@@ -2,32 +2,31 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TBundleLocalization extends Token {
-	public TBundleLocalization() {
-		super.setText("Bundle-Localization: ");
-	}
+public final class TBundleLocalization extends Token
+{
+    public TBundleLocalization(String text)
+    {
+        setText(text);
+    }
 
-	public TBundleLocalization(int line, int pos) {
-		super.setText("Bundle-Localization: ");
-		setLine(line);
-		setPos(pos);
-	}
+    public TBundleLocalization(String text, int line, int pos)
+    {
+        setText(text);
+        setLine(line);
+        setPos(pos);
+    }
 
-	@Override
-	public Object clone() {
-		return new TBundleLocalization(getLine(), getPos());
-	}
+    @Override
+    public Object clone()
+    {
+      return new TBundleLocalization(getText(), getLine(), getPos());
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseTBundleLocalization(this);
-	}
-
-	@Override
-	public void setText(@SuppressWarnings("unused")
-	String text) {
-		throw new RuntimeException("Cannot change TBundleLocalization text.");
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseTBundleLocalization(this);
+    }
 }

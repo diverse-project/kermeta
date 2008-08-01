@@ -2,115 +2,136 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AExportServiceEntry extends PExportServiceEntry {
-	private TExportService _exportService_;
-	private PExportServiceEntryValue _exportServiceEntryValue_;
+public final class AExportServiceEntry extends PExportServiceEntry
+{
+    private TExportService _exportService_;
+    private PExportServiceEntryValue _exportServiceEntryValue_;
 
-	public AExportServiceEntry() {
-		// Constructor
-	}
+    public AExportServiceEntry()
+    {
+        // Constructor
+    }
 
-	public AExportServiceEntry(@SuppressWarnings("hiding")
-	TExportService _exportService_, @SuppressWarnings("hiding")
-	PExportServiceEntryValue _exportServiceEntryValue_) {
-		// Constructor
-		setExportService(_exportService_);
+    public AExportServiceEntry(
+        @SuppressWarnings("hiding") TExportService _exportService_,
+        @SuppressWarnings("hiding") PExportServiceEntryValue _exportServiceEntryValue_)
+    {
+        // Constructor
+        setExportService(_exportService_);
 
-		setExportServiceEntryValue(_exportServiceEntryValue_);
+        setExportServiceEntryValue(_exportServiceEntryValue_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AExportServiceEntry(cloneNode(this._exportService_),
-				cloneNode(this._exportServiceEntryValue_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AExportServiceEntry(
+            cloneNode(this._exportService_),
+            cloneNode(this._exportServiceEntryValue_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAExportServiceEntry(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAExportServiceEntry(this);
+    }
 
-	public TExportService getExportService() {
-		return this._exportService_;
-	}
+    public TExportService getExportService()
+    {
+        return this._exportService_;
+    }
 
-	public void setExportService(TExportService node) {
-		if (this._exportService_ != null) {
-			this._exportService_.parent(null);
-		}
+    public void setExportService(TExportService node)
+    {
+        if(this._exportService_ != null)
+        {
+            this._exportService_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._exportService_ = node;
-	}
+        this._exportService_ = node;
+    }
 
-	public PExportServiceEntryValue getExportServiceEntryValue() {
-		return this._exportServiceEntryValue_;
-	}
+    public PExportServiceEntryValue getExportServiceEntryValue()
+    {
+        return this._exportServiceEntryValue_;
+    }
 
-	public void setExportServiceEntryValue(PExportServiceEntryValue node) {
-		if (this._exportServiceEntryValue_ != null) {
-			this._exportServiceEntryValue_.parent(null);
-		}
+    public void setExportServiceEntryValue(PExportServiceEntryValue node)
+    {
+        if(this._exportServiceEntryValue_ != null)
+        {
+            this._exportServiceEntryValue_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._exportServiceEntryValue_ = node;
-	}
+        this._exportServiceEntryValue_ = node;
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._exportService_)
-				+ toString(this._exportServiceEntryValue_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._exportService_)
+            + toString(this._exportServiceEntryValue_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._exportService_ == child) {
-			this._exportService_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._exportService_ == child)
+        {
+            this._exportService_ = null;
+            return;
+        }
 
-		if (this._exportServiceEntryValue_ == child) {
-			this._exportServiceEntryValue_ = null;
-			return;
-		}
+        if(this._exportServiceEntryValue_ == child)
+        {
+            this._exportServiceEntryValue_ = null;
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._exportService_ == oldChild) {
-			setExportService((TExportService) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._exportService_ == oldChild)
+        {
+            setExportService((TExportService) newChild);
+            return;
+        }
 
-		if (this._exportServiceEntryValue_ == oldChild) {
-			setExportServiceEntryValue((PExportServiceEntryValue) newChild);
-			return;
-		}
+        if(this._exportServiceEntryValue_ == oldChild)
+        {
+            setExportServiceEntryValue((PExportServiceEntryValue) newChild);
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }

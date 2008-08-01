@@ -106,6 +106,8 @@
         upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packagesList" upperBound="-1"
         eType="ecore:EClass jar.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//boolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Extension" eSuperTypes="#//FragmentHostDirective">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" lowerBound="1"

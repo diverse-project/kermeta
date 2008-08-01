@@ -2,167 +2,192 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
+import java.util.*;
+import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AImportPackageEntryValue extends PImportPackageEntryValue {
-	private PPackageName _packageName_;
-	private final LinkedList<PPackageNames> _packageNames_ = new LinkedList<PPackageNames>();
-	private final LinkedList<PImportPackageParameter> _importPackageParameter_ = new LinkedList<PImportPackageParameter>();
+public final class AImportPackageEntryValue extends PImportPackageEntryValue
+{
+    private PPackageName _packageName_;
+    private final LinkedList<PPackageNames> _packageNames_ = new LinkedList<PPackageNames>();
+    private final LinkedList<PImportPackageParameter> _importPackageParameter_ = new LinkedList<PImportPackageParameter>();
 
-	public AImportPackageEntryValue() {
-		// Constructor
-	}
+    public AImportPackageEntryValue()
+    {
+        // Constructor
+    }
 
-	public AImportPackageEntryValue(@SuppressWarnings("hiding")
-	PPackageName _packageName_, @SuppressWarnings("hiding")
-	List<PPackageNames> _packageNames_, @SuppressWarnings("hiding")
-	List<PImportPackageParameter> _importPackageParameter_) {
-		// Constructor
-		setPackageName(_packageName_);
+    public AImportPackageEntryValue(
+        @SuppressWarnings("hiding") PPackageName _packageName_,
+        @SuppressWarnings("hiding") List<PPackageNames> _packageNames_,
+        @SuppressWarnings("hiding") List<PImportPackageParameter> _importPackageParameter_)
+    {
+        // Constructor
+        setPackageName(_packageName_);
 
-		setPackageNames(_packageNames_);
+        setPackageNames(_packageNames_);
 
-		setImportPackageParameter(_importPackageParameter_);
+        setImportPackageParameter(_importPackageParameter_);
 
-	}
+    }
 
-	@Override
-	public Object clone() {
-		return new AImportPackageEntryValue(cloneNode(this._packageName_),
-				cloneList(this._packageNames_),
-				cloneList(this._importPackageParameter_));
-	}
+    @Override
+    public Object clone()
+    {
+        return new AImportPackageEntryValue(
+            cloneNode(this._packageName_),
+            cloneList(this._packageNames_),
+            cloneList(this._importPackageParameter_));
+    }
 
-	public void apply(Switch sw) {
-		((Analysis) sw).caseAImportPackageEntryValue(this);
-	}
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseAImportPackageEntryValue(this);
+    }
 
-	public PPackageName getPackageName() {
-		return this._packageName_;
-	}
+    public PPackageName getPackageName()
+    {
+        return this._packageName_;
+    }
 
-	public void setPackageName(PPackageName node) {
-		if (this._packageName_ != null) {
-			this._packageName_.parent(null);
-		}
+    public void setPackageName(PPackageName node)
+    {
+        if(this._packageName_ != null)
+        {
+            this._packageName_.parent(null);
+        }
 
-		if (node != null) {
-			if (node.parent() != null) {
-				node.parent().removeChild(node);
-			}
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
 
-			node.parent(this);
-		}
+            node.parent(this);
+        }
 
-		this._packageName_ = node;
-	}
+        this._packageName_ = node;
+    }
 
-	public LinkedList<PPackageNames> getPackageNames() {
-		return this._packageNames_;
-	}
+    public LinkedList<PPackageNames> getPackageNames()
+    {
+        return this._packageNames_;
+    }
 
-	public void setPackageNames(List<PPackageNames> list) {
-		this._packageNames_.clear();
-		this._packageNames_.addAll(list);
-		for (PPackageNames e : list) {
-			if (e.parent() != null) {
-				e.parent().removeChild(e);
-			}
+    public void setPackageNames(List<PPackageNames> list)
+    {
+        this._packageNames_.clear();
+        this._packageNames_.addAll(list);
+        for(PPackageNames e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
 
-			e.parent(this);
-		}
-	}
+            e.parent(this);
+        }
+    }
 
-	public LinkedList<PImportPackageParameter> getImportPackageParameter() {
-		return this._importPackageParameter_;
-	}
+    public LinkedList<PImportPackageParameter> getImportPackageParameter()
+    {
+        return this._importPackageParameter_;
+    }
 
-	public void setImportPackageParameter(List<PImportPackageParameter> list) {
-		this._importPackageParameter_.clear();
-		this._importPackageParameter_.addAll(list);
-		for (PImportPackageParameter e : list) {
-			if (e.parent() != null) {
-				e.parent().removeChild(e);
-			}
+    public void setImportPackageParameter(List<PImportPackageParameter> list)
+    {
+        this._importPackageParameter_.clear();
+        this._importPackageParameter_.addAll(list);
+        for(PImportPackageParameter e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
 
-			e.parent(this);
-		}
-	}
+            e.parent(this);
+        }
+    }
 
-	@Override
-	public String toString() {
-		return "" + toString(this._packageName_)
-				+ toString(this._packageNames_)
-				+ toString(this._importPackageParameter_);
-	}
+    @Override
+    public String toString()
+    {
+        return ""
+            + toString(this._packageName_)
+            + toString(this._packageNames_)
+            + toString(this._importPackageParameter_);
+    }
 
-	@Override
-	void removeChild(@SuppressWarnings("unused")
-	Node child) {
-		// Remove child
-		if (this._packageName_ == child) {
-			this._packageName_ = null;
-			return;
-		}
+    @Override
+    void removeChild(@SuppressWarnings("unused") Node child)
+    {
+        // Remove child
+        if(this._packageName_ == child)
+        {
+            this._packageName_ = null;
+            return;
+        }
 
-		if (this._packageNames_.remove(child)) {
-			return;
-		}
+        if(this._packageNames_.remove(child))
+        {
+            return;
+        }
 
-		if (this._importPackageParameter_.remove(child)) {
-			return;
-		}
+        if(this._importPackageParameter_.remove(child))
+        {
+            return;
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 
-	@Override
-	void replaceChild(@SuppressWarnings("unused")
-	Node oldChild, @SuppressWarnings("unused")
-	Node newChild) {
-		// Replace child
-		if (this._packageName_ == oldChild) {
-			setPackageName((PPackageName) newChild);
-			return;
-		}
+    @Override
+    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
+    {
+        // Replace child
+        if(this._packageName_ == oldChild)
+        {
+            setPackageName((PPackageName) newChild);
+            return;
+        }
 
-		for (ListIterator<PPackageNames> i = this._packageNames_.listIterator(); i
-				.hasNext();) {
-			if (i.next() == oldChild) {
-				if (newChild != null) {
-					i.set((PPackageNames) newChild);
-					newChild.parent(this);
-					oldChild.parent(null);
-					return;
-				}
+        for(ListIterator<PPackageNames> i = this._packageNames_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PPackageNames) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-				i.remove();
-				oldChild.parent(null);
-				return;
-			}
-		}
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
 
-		for (ListIterator<PImportPackageParameter> i = this._importPackageParameter_
-				.listIterator(); i.hasNext();) {
-			if (i.next() == oldChild) {
-				if (newChild != null) {
-					i.set((PImportPackageParameter) newChild);
-					newChild.parent(this);
-					oldChild.parent(null);
-					return;
-				}
+        for(ListIterator<PImportPackageParameter> i = this._importPackageParameter_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PImportPackageParameter) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-				i.remove();
-				oldChild.parent(null);
-				return;
-			}
-		}
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
 
-		throw new RuntimeException("Not a child.");
-	}
+        throw new RuntimeException("Not a child.");
+    }
 }
