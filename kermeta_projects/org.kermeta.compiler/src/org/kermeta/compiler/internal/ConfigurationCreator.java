@@ -1,6 +1,6 @@
 
 
-/*$Id: ConfigurationCreator.java,v 1.3 2008-07-23 15:19:32 cfaucher Exp $
+/*$Id: ConfigurationCreator.java,v 1.4 2008-08-01 18:32:27 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	ConfigurationCreator.java
 * License : EPL
@@ -22,11 +22,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.kermeta.compil.runtime.helper.persistence.PersistenceMapping;
 import org.kermeta.kruntimeconfiguration.Configuration;
 import org.kermeta.kruntimeconfiguration.Entry;
 import org.kermeta.kruntimeconfiguration.KruntimeconfigurationFactory;
 import org.kermeta.kruntimeconfiguration.Persistence;
+
+import org.kermeta.compiler.common.KCompilerConstants;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
@@ -122,23 +123,23 @@ public class ConfigurationCreator {
 				// And finally create the configuration persistence for that package.
 				Persistence persistence = KruntimeconfigurationFactory.eINSTANCE.createPersistence();
 				Entry fileExtension = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-				fileExtension.setKey( PersistenceMapping._FILE_EXTENSION_ );
+				fileExtension.setKey( KCompilerConstants._FILE_EXTENSION_ );
 				fileExtension.setValue( genPackageFromPlugin.getFileExtension() );
 				
 				Entry uri = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-				uri.setKey( PersistenceMapping._URI_);
+				uri.setKey( KCompilerConstants._URI_);
 				uri.setValue( packageURI );
 				
 				Entry baseClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-				baseClassName.setKey( PersistenceMapping._BASE_CLASS_NAME_);
+				baseClassName.setKey( KCompilerConstants._BASE_CLASS_NAME_);
 				baseClassName.setValue( genPackageFromPlugin.getClassPackageName() + "." + genPackageFromPlugin.getPackageClassName() );
 				
 				Entry factoryClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-				factoryClassName.setKey( PersistenceMapping._FACTORY_CLASS_NAME);
+				factoryClassName.setKey( KCompilerConstants._FACTORY_CLASS_NAME);
 				factoryClassName.setValue( genPackageFromPlugin.getInterfacePackageName() + "." + genPackageFromPlugin.getFactoryInterfaceName() );
 				
 				Entry generatedClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-				generatedClassName.setKey( PersistenceMapping._GENERATED_CLASS_NAME_);
+				generatedClassName.setKey( KCompilerConstants._GENERATED_CLASS_NAME_);
 				generatedClassName.setValue( p.getClassPackageName() + "." + p.getPackageClassName() );
 				
 				persistence.getEntries().add( fileExtension );
@@ -175,23 +176,23 @@ public class ConfigurationCreator {
 	private Persistence createPersistenceForUnregisteredPackage(GenPackage p) {
 		Persistence persistence = KruntimeconfigurationFactory.eINSTANCE.createPersistence();
 		Entry fileExtension = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-		fileExtension.setKey( PersistenceMapping._FILE_EXTENSION_ );
+		fileExtension.setKey( KCompilerConstants._FILE_EXTENSION_ );
 		fileExtension.setValue( p.getFileExtension() );
 		
 		Entry uri = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-		uri.setKey( PersistenceMapping._URI_);
+		uri.setKey( KCompilerConstants._URI_);
 		uri.setValue( getURI(p) );
 		
 		Entry baseClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-		baseClassName.setKey( PersistenceMapping._BASE_CLASS_NAME_);
+		baseClassName.setKey( KCompilerConstants._BASE_CLASS_NAME_);
 		baseClassName.setValue( p.getClassPackageName() + "." + p.getPackageClassName() );
 		
 		Entry factoryClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-		factoryClassName.setKey( PersistenceMapping._FACTORY_CLASS_NAME);
+		factoryClassName.setKey( KCompilerConstants._FACTORY_CLASS_NAME);
 		factoryClassName.setValue( p.getInterfacePackageName() + "." + p.getFactoryInterfaceName() );
 		
 		Entry generatedClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-		generatedClassName.setKey( PersistenceMapping._GENERATED_CLASS_NAME_);
+		generatedClassName.setKey( KCompilerConstants._GENERATED_CLASS_NAME_);
 		generatedClassName.setValue( p.getClassPackageName() + "." + p.getPackageClassName() );
 		
 		persistence.getEntries().add( fileExtension );
