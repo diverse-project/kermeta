@@ -1,4 +1,4 @@
-<!-- $Id: statcvs_build.xml,v 1.9 2008-08-01 10:23:02 dvojtise Exp $ -->
+<!-- $Id: statcvs_build.xml,v 1.10 2008-08-01 10:24:29 dvojtise Exp $ -->
 <project name="Build StatCVS" default="all" basedir=".">
 	<description>
        
@@ -32,7 +32,7 @@
             notes="${notes.txt}" 
             viewcvs="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/" 
             exclude="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.genmodel;**/*.ecoredi;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**"
-            tags="(V|KERMETA_V|v).*"/>
+            tags="(V|v|KERMETA_V|Kermeta_v).*"/>
     </target>
     <target name="patch_gforge_cvsweb_links">
         <replace dir="${output.dir}" >
