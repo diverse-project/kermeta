@@ -1,6 +1,9 @@
 
 package org.kermeta.compil.runtime.helper.basetypes;
 
+import kermeta.persistence.Resource;
+import kermeta.persistence.impl.EMFRepositoryImpl;
+
 /**
  * This class is intended to "wrap" the repository management from kermeta.
  */
@@ -24,5 +27,12 @@ public class RepositoryUtil {
     public static java.lang.String normalizeUri(java.lang.String uri) {    	
     	return null;
     }
+
+
+	public static Resource createResource(EMFRepositoryImpl repositoryImpl,
+			String uri, String mm_uri) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

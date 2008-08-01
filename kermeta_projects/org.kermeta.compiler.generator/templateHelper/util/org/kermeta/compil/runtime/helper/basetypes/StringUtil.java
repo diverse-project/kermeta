@@ -1,5 +1,6 @@
 package org.kermeta.compil.runtime.helper.basetypes;
 
+import kermeta.language.structure.Class;
 import kermeta.standard.StandardFactory;
 
 public class StringUtil {
@@ -110,6 +111,11 @@ public class StringUtil {
 			result = null;
 		}
 		return result;
+	}
+
+	public static Class getMetaClass(String self) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

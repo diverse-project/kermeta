@@ -1,5 +1,7 @@
 package org.kermeta.compil.runtime.helper.basetypes;
 
+import kermeta.language.structure.Class;
+
 public class BooleanUtil {
 	
 	/** Java version */
@@ -25,6 +27,15 @@ public class BooleanUtil {
 	/** Java version */
 	public static java.lang.Boolean not(java.lang.Boolean self) {
 		return !self;
+	}
+	public static Boolean isVoid(Boolean result) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Class getMetaClass(Boolean self) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

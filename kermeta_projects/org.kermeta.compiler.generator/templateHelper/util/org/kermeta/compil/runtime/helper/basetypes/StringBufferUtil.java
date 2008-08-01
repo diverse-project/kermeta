@@ -10,11 +10,11 @@ package org.kermeta.compil.runtime.helper.basetypes;
 public class StringBufferUtil {
 
 	
-	public static StringBuffer append(StringBuffer self, java.lang.String arg0){
-		return self.append(arg0);
+	public static kermeta.utils.StringBuffer append(kermeta.utils.StringBuffer self, java.lang.String arg0){
+		return null;
 	}
 	
-	public static java.lang.Integer length(StringBuffer self){
+	public static java.lang.Integer length(kermeta.utils.StringBuffer self){
 		return self.length();
 	}	
 	
@@ -23,15 +23,17 @@ public class StringBufferUtil {
 	 * @param self
 	 * @return the String value of the current StringBuffer
 	 */
-	public static java.lang.String toString(StringBuffer self){
+	public static java.lang.String toString(kermeta.utils.StringBuffer self){
 		return self.toString();
 	}
 	
 	/** Implementation of method equals called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer::equals(element)
 	 */
-	public static java.lang.Boolean equals(StringBuffer self, StringBuffer param0) {
+	public static java.lang.Boolean equals(kermeta.utils.StringBuffer self, kermeta.utils.StringBuffer param0) {
 		return self.toString().equals(param0.toString());
 	}
+	
+	
 
 }

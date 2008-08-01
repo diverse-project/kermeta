@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIO.java,v 1.1 2008-07-31 07:05:28 cfaucher Exp $
+/* $Id: SimpleFileIOUtil.java,v 1.1 2008-08-01 18:29:17 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 
 
-public class SimpleFileIO {
+public class SimpleFileIOUtil {
 	
 	public static java.lang.Boolean fileExists(java.lang.String filename)
     {

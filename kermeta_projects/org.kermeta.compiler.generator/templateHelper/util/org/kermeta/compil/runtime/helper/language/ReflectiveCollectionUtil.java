@@ -1,6 +1,8 @@
 
 package org.kermeta.compil.runtime.helper.language;
 
+import org.eclipse.emf.common.util.EList;
+
 import kermeta.language.ReflectiveCollection;
 
 
@@ -15,18 +17,33 @@ public class ReflectiveCollectionUtil {
 	/** Implementation of method add called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(element)
 	*/
-	public static <G> void add(ReflectiveCollection<G> self, G element) {
+	public static <G> void add(java.lang.Object self, G element) {
+		if( self instanceof ReflectiveCollection ) {
+			//TODO
+		} else if ( self instanceof EList ) {
+			//TODO
+		}
 	}
 
 	/** Implementation of method remove called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(element)
 	 */
-	public static <G> void remove(ReflectiveCollection<G> self, G element) {
+	public static <G> void remove(java.lang.Object self, G element) {
+		if( self instanceof ReflectiveCollection ) {
+			//TODO
+		} else if ( self instanceof EList ) {
+			//TODO
+		}
 	}
 
 	/** Implementation of method clear called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear() */
-	public static void clear(ReflectiveCollection self) {
+	public static void clear(java.lang.Object self) {
+		if( self instanceof ReflectiveCollection ) {
+			//TODO
+		} else if ( self instanceof EList ) {
+			//TODO
+		}
 	}
 
 }

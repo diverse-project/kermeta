@@ -74,5 +74,19 @@ public class ClassUtil {
 		
 		return (kermeta.language.structure.Object) newObject;
 	}
+	
+	public static Object cloneObject(kermeta.language.structure.Class class_, Object objectToClone) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	public static Object deepCloneObject(kermeta.language.structure.Class class_, Object objectToClone) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static Boolean equals(kermeta.language.structure.Class class_, Object other) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

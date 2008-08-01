@@ -1,5 +1,7 @@
 package org.kermeta.compil.runtime.helper.basetypes;
 
+import kermeta.language.structure.Class;
+
 public class RealUtil {
 
 	/** Java version */
@@ -46,6 +48,22 @@ public class RealUtil {
 	public static java.lang.Boolean isNotEqual(java.lang.Double self, java.lang.Double param0) {
 		return !self.equals(param0);
 	}
+	
+	public static Boolean isVoid(Double other) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static Integer hashcode(Double self) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Class getMetaClass(Double self) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }
 /* END OF FILE */

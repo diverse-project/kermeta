@@ -1,6 +1,10 @@
 
 package org.kermeta.compil.runtime.helper.language;
 
+import kermeta.language.structure.Class;
+import kermeta.language.structure.Object;
+import kermeta.language.structure.Type;
+
 
 /**
  * Implementation of the extern of the class Type in Kermeta framework
@@ -19,4 +23,25 @@ public class TypeUtil {
 	public static java.lang.Boolean hasSubType(kermeta.language.structure.Type self, kermeta.language.structure.Object object) {
 		return null;
 	}
+
+	public static Boolean isInstance(Class metaClass, String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static Boolean isInstance(Class metaClass, kermeta.language.structure.Object element) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Boolean isInstance(Class metaClass, java.lang.Object element) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Boolean isSuperTypeOf(Type object, Class metaClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
