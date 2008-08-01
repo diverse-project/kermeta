@@ -32,6 +32,7 @@ class Hashtable<K, V>
 	 * Returns the size of this Hashtable
 	 */
 	operation size() : Integer is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.MapUtil.size(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.size(self)
 	end
 
@@ -39,6 +40,7 @@ class Hashtable<K, V>
 	 * Returns an iterator over the Keys of this Hashtable
 	 */
 	operation keyIterator() : Iterator<K> is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.MapUtil.keysIterator(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keysIterator(self)
 	end
 	
@@ -46,6 +48,7 @@ class Hashtable<K, V>
 	 * Returns an iterator over the values of this Hashtable
 	 */
 	operation valueIterator() : Iterator<V> is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.MapUtil.valueIterator(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.valueIterator(self)
 	end
 	
@@ -53,27 +56,31 @@ class Hashtable<K, V>
 	 * Returns the value for key 'key' if it exists, otherwise returns Void
 	 */
 	operation getValue(key : K) : V is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self,key)
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.MapUtil.get(this, key)"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self, key)
 	end
 	
 	/**
 	 * Adds a entry into the Hashtable
 	 */
 	operation put(key : K, ~value : V) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.put(self,key, ~value)
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.MapUtil.put(this, key, value)"
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.put(self, key, ~value)
 	end
 	
 	/**
 	 * Removes the entry with key equals to 'key'
 	 */
 	operation remove(key : K) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.remove(self,key)
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.MapUtil.remove(this, key)"
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.remove(self, key)
 	end
 	
 	/**
 	 * Removes all elements from the Hashtable
 	 */
 	operation clear() : Void is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.MapUtil.clear(this)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.clear(self)
 	end
 	

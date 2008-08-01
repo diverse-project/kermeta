@@ -31,6 +31,7 @@ class FileIO
 	 */ 
 	operation writeTextFile(filename : String, text : String) : Void is do
 		if filename == void then raise FileNotFoundException.new end
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.writeTextFile(filename, text)"
 		extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)
 	end
 	
@@ -41,9 +42,15 @@ class FileIO
 		if filename == void then raise FileNotFoundException.new end
 		var exists : Boolean
 		var isdirectory : Boolean
+		
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.fileExists(filename)"
 		exists ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileExists(filename)
+		
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.fileIsDirectory(filename)"
 		isdirectory ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileIsDirectory(filename)
 		if not exists or isdirectory then raise FileNotFoundException.new end
+		
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.readTextFile(filename)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.readTextFile(filename)
 	end
 

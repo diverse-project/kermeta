@@ -71,6 +71,7 @@ class DynamicExpression
     		e.message := "parse precondition - formalParameters or selfType is void"
     		raise e
     	end
+    	@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.DynamicExpressionUtil.parse(this, expression)"
         result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)
         
     	if errors.size != 0 then
@@ -97,6 +98,7 @@ class DynamicExpression
     		e.message := "execute precondition - expression contains errors"
     		raise e
     	end
+    	@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.DynamicExpressionUtil.execute(this, selfObj, actualParams)"
     	result := extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.execute(self, selfObj, actualParams)
     end
     

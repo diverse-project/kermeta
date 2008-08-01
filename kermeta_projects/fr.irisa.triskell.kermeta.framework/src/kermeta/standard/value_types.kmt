@@ -1,4 +1,4 @@
-// $Id: value_types.kmt,v 1.4 2008-07-10 15:06:23 cfaucher Exp $
+// $Id: value_types.kmt,v 1.5 2008-08-01 18:42:46 cfaucher Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -222,6 +222,7 @@ class Boolean inherits ValueType
  * The abstract class Numeric is the root class for all
  * numeric types
  */
+ @EMF_instanceClassName "java.lang.Number"
 abstract class Numeric inherits Comparable, ValueType { 
 }
 

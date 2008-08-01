@@ -11,7 +11,7 @@ require "structure.kmt"
 using kermeta::standard
 
 /* *************************************************
- * $Id: reflective_collections.kmt,v 1.15 2008-03-03 13:39:57 dvojtise Exp $
+ * $Id: reflective_collections.kmt,v 1.16 2008-08-01 18:42:46 cfaucher Exp $
  * Franck FLEUREY - 17/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -30,6 +30,7 @@ class ReflectiveCollection<G> inherits Set<G>
 	 * Add an element to this collection and update its opposite property if it exists.
 	 */
 	method add(element : G) : Void is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ReflectiveCollectionUtil.add(this, element)"
 		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(self, element)
 	end
 	
@@ -37,6 +38,7 @@ class ReflectiveCollection<G> inherits Set<G>
 	 * Overrides kermeta::standard::Set<G>.remove(G)
 	 */
 	method remove(element : G) : Void is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ReflectiveCollectionUtil.remove(this, element)"
 		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(self, element)
 	end
 	
@@ -44,6 +46,7 @@ class ReflectiveCollection<G> inherits Set<G>
 	 * Overrides kermeta::standard::Collection<G>.clear(G)
 	 */
 	method clear() : Void is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ReflectiveCollectionUtil.clear(this)"
 		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear(self)
 	end
 }
@@ -79,6 +82,7 @@ class ReflectiveSequence<G> inherits OrderedSet<G>, ReflectiveCollection<G> {
 	 * Overrides kermeta::standard::OrderedSet.addAt(Integer)
 	 */	
 	method addAt(index : Integer, element : G) : Void is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ReflectiveSequenceUtil.addAt(this, index, element)"
 		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.addAt(self, index, element)
 	end
 	
@@ -86,6 +90,7 @@ class ReflectiveSequence<G> inherits OrderedSet<G>, ReflectiveCollection<G> {
 	 * Overrides kermeta::standard::OrderedSet.removeAt(Integer)
 	 */
 	method removeAt(index : Integer) : Void is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ReflectiveSequenceUtil.removeAt(this, index)"
 		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(self, index)
 	end
 

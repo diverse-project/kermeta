@@ -26,7 +26,8 @@ class StringBuffer{
 	 * @return A reference to this object
 	 */
 	operation append(arg0: String): StringBuffer is do
-		result?=extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.append(self,arg0)
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil.append(this, arg0)"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.append(self, arg0)
 	end
 	
 	/**
@@ -34,7 +35,8 @@ class StringBuffer{
 	 * @return length of the StringBuffer
 	 */
 	operation length(): Integer is do
-		result?=extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.length(self)
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil.length(this)"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.length(self)
 	end
 	
 	/**
@@ -43,7 +45,8 @@ class StringBuffer{
 	 */
 	method toString(): String is do
 		var stringValue: String
-		stringValue?=extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.toString(self)
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil.toString(this)"
+		stringValue ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.toString(self)
 		result:=stringValue
 	end
 }

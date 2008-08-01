@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.64 2008-07-21 11:27:45 ftanguy Exp $
+/* $Id: structure.kmt,v 1.65 2008-08-01 18:42:46 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -37,7 +37,8 @@ aspect class Object
 	 * Returns the Class object that is the metaclass of current Object
 	 */
 	operation getMetaClass() : Class from Object is do
-		@compiledJavaExtern "ExecutionContext.getInstance().getMetaClass( this.getClass().getName() )"
+		//@compiledJavaExtern "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass( this.getClass().getName() )"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass( this )"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass(self)
 	end
 
@@ -46,7 +47,7 @@ aspect class Object
 	 * no container
 	 */
 	operation container() : Object from Object is do
-		@compiledJavaExtern "ObjectUtil.container(this)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.container(this)"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
 	end
 
@@ -72,6 +73,7 @@ aspect class Object
 				end
 			}
 		end
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(this)"
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)
 	end
 	
@@ -115,6 +117,7 @@ aspect class Object
 	 * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it
 	 */	
 	operation equals(element : Object) : Boolean from Object is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(this, element)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)
 	end
 	
@@ -155,7 +158,7 @@ aspect class Object
 	 * the name of the given Property (i.e the type of the property instance).
 	 */
 	operation get(~property : Property) : Object from Object is do
-		@compiledJavaExtern "ObjectUtil.get(this, property)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, property)"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
 	end
 	
@@ -164,7 +167,7 @@ aspect class Object
 	 */	
 	operation ~set(~property : Property, element : Object) : Void from Object is do
 		if element.isInstanceOf(~property.type) then
-			@compiledJavaExtern "ObjectUtil.set(this, property, element)"
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.set(this, property, element)"
 			extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
 		else
 			var e : kermeta::exceptions::IncompatibleTypeError init kermeta::exceptions::IncompatibleTypeError.new
@@ -177,7 +180,7 @@ aspect class Object
 	 * True if the <code>~property</code> of the object has been set
 	 */	
 	operation isSet(~property : Property) : Boolean from Object is do
-		@compiledJavaExtern "ObjectUtil.isSet(this, property)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.isSet(this, property)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)
 	end
 	
@@ -186,7 +189,7 @@ aspect class Object
 	 * The <code>isSet(~property)</code> method will then return False
 	 */	
 	operation unset(~property : Property) : Void from Object is do
-		@compiledJavaExtern "ObjectUtil.unset(this, property)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(this, property)"
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)
 	end
 	
@@ -194,7 +197,7 @@ aspect class Object
 	 * Returns the unique Oid of the Object
 	 */	
 	operation oid() : Integer is do
-		@compiledJavaExtern "ObjectUtil.getOID(this)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.getOID(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)
 	end
 	
@@ -212,6 +215,7 @@ aspect class Object
 	 * frozen state
 	 */
 	operation isFrozen() : Boolean is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.isFrozen(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isFrozen(self)
 	end
 
@@ -230,7 +234,7 @@ aspect class Object
 	operation hashcode() : Integer is do		
 		// usually this method is not called when using hashtable because it directly tries the method hashcode in the RuntimeObject.java
 		// which fall back here only if the method is not redefined
-		@compiledJavaExtern "ObjectUtil.hashcode(this)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.hashcode(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)
 	end
 
@@ -238,6 +242,7 @@ aspect class Object
 	 * Freeze the Object
 	 */
 	operation freeze() : Void is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(this)"
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze(self)
 	end
 
@@ -255,6 +260,7 @@ aspect class Object
 	 * This means: is this object an instance of this type, or is it an instance of its subtype 
 	 */
 	operation isInstanceOf(type : Type) : Boolean is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this, type.getClass().getName())"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)
 	end
 	
@@ -263,6 +269,7 @@ aspect class Object
 	 * or void if the object belongs to no Resource
 	 */
 	operation containingResource() : kermeta::persistence::Resource is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.getContainingResource(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getContainingResource(self)
 	end
 }
@@ -275,6 +282,7 @@ aspect class ModelType
 	 */
 	operation new() : Model is
 		do
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ModelTypeUtil.newObject(this)"
 			result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.newObject(self)
 		end
 
@@ -283,6 +291,7 @@ aspect class ModelType
 	 */
 	operation isModelTypeOf(m : Model) : Boolean is
 		do
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ModelTypeUtil.isModelTypeOf(this, m)"
 			result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.isModelTypeOf(self, m)
 		end
 		
@@ -345,20 +354,24 @@ aspect class Class
 	 */
 	operation new() : Object from Class is 
 	do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(this.getClass().getName())"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)
 	end
 
 	method clone(objectToClone : Object) : Object is
 	do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ClassUtil.cloneObject(this, objectToClone)"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.cloneObject(self, objectToClone)
 	end
 
 	method deepClone(objectToClone : Object) : Object is
 	do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ClassUtil.deepCloneObject(this, objectToClone)"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.deepCloneObject(self, objectToClone)
 	end
 
 	method equals(other : Object) : Boolean from kermeta::language::structure::Object is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ClassUtil.equals(this, other)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)
 	end
 	
@@ -438,6 +451,7 @@ aspect class Model {
 			
 			// Cute hack. The java code for add is hard if contents hasn't already been accessed. So...
 			contents
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ModelUtil.add(this, obj)"
 			extern fr::irisa::triskell::kermeta::runtime::language::Model.add(self, obj)
 		end
 
@@ -447,6 +461,7 @@ aspect class Model {
 	operation remove(obj : Object) : Void is
 		do
 			// This is not really a hack.
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ReflectiveCollectionUtil.remove(contents, obj)"
 			extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(contents, obj)
 		end
 
@@ -478,6 +493,7 @@ aspect class Model {
 	operation addCompatible(objectToAdd : Object) : Object is do
 		// Cute hack. The java code for addCompatible is hard if contents hasn't already been accessed. So...
 		contents
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ModelUtil.addCompatible(this, objectToAdd)"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Model.addCompatible(self, objectToAdd)
 	end
 }
@@ -510,6 +526,7 @@ aspect class Type
  	 * to extend it.
  	 */	
 	operation isSuperTypeOf(object : Type) : Boolean is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.TypeUtil.hasSubType(this, object)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Type.hasSubType(self, object)
 	end
 	

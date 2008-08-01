@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.42 2008-07-28 09:17:40 cfaucher Exp $
+/* $Id: kunit.kmt,v 1.43 2008-08-01 18:42:47 cfaucher Exp $
  * Creation date: February 19, 2007
  * License: EPL
  * Copyright:
@@ -229,7 +229,7 @@ class Log
 		end
 
 	/**
-	 * Adds errors which occur durint the SetUp phase
+	 * Adds errors which occur during the SetUp phase
 	 */
 	operation addSetUpError(test : Fallible, e : kermeta::exceptions::Exception) : Void is 
 		do
@@ -237,7 +237,7 @@ class Log
 		end
 
 	/**
-	 * Adds errors which occur durint the TearDown phase
+	 * Adds errors which occur during the TearDown phase
 	 */
 	operation addTearDownError(test : Fallible, e : kermeta::exceptions::Exception) : Void is 
 		do

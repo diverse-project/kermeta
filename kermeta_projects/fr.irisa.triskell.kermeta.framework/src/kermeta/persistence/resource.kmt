@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.56 2008-07-22 13:47:59 cfaucher Exp $
+ * $Id: resource.kmt,v 1.57 2008-08-01 18:42:46 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -103,6 +103,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	 */
 	//TODO: should raises an exception if the Resource is not already loaded
 	property readonly dependentResources : set Resource[0..*] getter is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.ResourceUtil.getDependentResources(this, uri, metaModelURI, \\\"EMF\\\")"
 		result ?=
 			extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.getDependentResources(
 				self, uri, metaModelURI, "EMF"
@@ -201,6 +202,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	 * to check how a given uri is normalized by kermeta
 	 */
 	operation normalizedUri() : String is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil.normalizeUri(uri)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
 	end
 }
@@ -248,6 +250,8 @@ class EMFResource inherits Resource
 	 * Returns true if the validation reports no error, raises exceptions otherwise
 	 */
 	operation saveAndValidateWithEMF() : Boolean is do
+		//FIXME CF 08-07-31 Why the extern has twice self as parameter ?
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.ResourceUtil.save(this, this.uri, metaModelURI, \\\"EMF\\\", this, true)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self, self.uri, metaModelURI, "EMF", self, true
 		)
@@ -286,6 +290,7 @@ class EMFResource inherits Resource
 			stdio.writeln("DVK ! another resource of the same repository was containing this element")
 			r.remove(instance)
 		}
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.setContainingResource(instance, this)"
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, self)
 		super(instance)
 	end
@@ -296,6 +301,7 @@ class EMFResource inherits Resource
 	 */
 	method remove(instance : Object) : Void is do
 		if self.contains(instance) then
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.unSetContainingResource(instance)"
 			extern fr::irisa::triskell::kermeta::runtime::language::Object.unSetContainingResource(instance)
 			super(instance)
 		end
@@ -371,8 +377,8 @@ abstract class Repository
 	 */
 	operation getResource(uri : String) : Resource is do
 		
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil.initRepository(this)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.initRepository(self)
-
 		
 		var normalisedUri : String init normalizeUri(uri)
 		from var it : Iterator<Resource> init resources.iterator
@@ -472,6 +478,7 @@ abstract class Repository
 	 * to check how a given uri is normalized by kermeta 
 	 */
 	operation normalizeUri(uri : String) : String is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil.normalizeUri(uri)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
 	end
 }
@@ -517,6 +524,7 @@ class EMFRepository inherits Repository
 	method createResource(uri : String, mm_uri : String) : Resource is do
 		
 		if(not resources.collect{r | r.uri}.contains(uri)) then
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil.createResource(this, uri, mm_uri)"
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)
 		else
 			var e : kermeta::exceptions::ResourceCreateException init kermeta::exceptions::ResourceCreateException.new

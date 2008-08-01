@@ -29,6 +29,7 @@ class StdIO
 	 */ 
 	operation write(object : String) : Void is do
 		if object == void then object := "<void>" end
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.StdIOUtil.write(object)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.write(object)
 	end
 	
@@ -37,6 +38,7 @@ class StdIO
 	 */ 
 	operation errorln(object : String) : Void is do
 		if object == void then object := "<void>" end
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.StdIOUtil.errorln(object)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.errorln(object)
 	end
 	
@@ -45,6 +47,7 @@ class StdIO
 	 */ 
 	operation error(object : String) : Void is do
 		if object == void then object := "<void>" end
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.StdIOUtil.error(object)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.error(object)
 	end
 	
@@ -53,6 +56,7 @@ class StdIO
 	 */ 
 	operation writeln(object : String) : Void is do
 		if object == void then object := "<void>" end
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.StdIOUtil.writeln(object)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.writeln(object)
 	end
 	
@@ -61,6 +65,7 @@ class StdIO
 	 */ 
 	operation read(prompt : String) : String is do
 		if prompt == void then prompt := "" end
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.StdIOUtil.read(prompt)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.read(prompt)
 	end
 	
