@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.2 2008-07-31 08:15:03 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.3 2008-08-01 18:46:36 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -32,8 +32,43 @@ aspect class Expression {
 			result := true
 		end
 		
+		
+		if self.isInstanceOf(CallVariable) then
+			if self.asType(CallVariable).isFunctionTypeVariable() then
+				result := false
+			end
+		end
+		
+		
 	end
 	
+}
+
+
+aspect class CallVariable {
+
+	operation isFunctionTypeVariable() : Boolean is do
+		result := false
+		var ftParam : Parameter init retrieveCorrespondingParameter()
+		if not ftParam.isVoid() then
+			if ftParam.isFunctionType() then
+				result := true
+			end
+		end
+	end
+	
+	operation getFunctionTypeParameter() : Parameter is do
+		var ftParam : Parameter init retrieveCorrespondingParameter()
+		if not ftParam.isVoid() then
+			if ftParam.isFunctionType() then
+				result := ftParam
+			end
+		end
+	end
+	
+	operation retrieveCorrespondingParameter() : Parameter is do
+		result := self.getContainerAsType(Operation).asType(Operation).ownedParameter.detect{ p | p.name == self.name }
+	end
 }
 
 aspect class CallFeature {
@@ -85,6 +120,17 @@ aspect class CallFeature {
 			
 			if theLambdaExp.staticType.isInstanceOf(FunctionType) then
 				if theLambdaExp.staticType.asType(FunctionType).left.isInstanceOf(ProductType) then
+				
+					/*var type_ : Type init theLambdaExp.container.asType(CallFeature).containedType.detect{ ft | ft.isInstanceOf(FunctionType) }
+					
+					var ft_ : FunctionType init type_.asType(FunctionType)
+					
+					if not ft_.isVoid() then
+						if ft_.left.isInstanceOf(ProductType) then
+							context.ftProductTypeStack.push(ft_.left.asType(ProductType))
+						end
+					end*/
+				
 					context.ftProductTypeStack.push(theLambdaExp.staticType.asType(FunctionType).left.asType(ProductType))
 				end
 				ftRightType := theLambdaExp.staticType.asType(FunctionType).right

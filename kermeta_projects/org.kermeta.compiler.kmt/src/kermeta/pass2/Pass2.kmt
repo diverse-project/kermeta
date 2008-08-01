@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.27 2008-07-29 09:59:54 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.28 2008-08-01 18:46:37 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -24,9 +24,11 @@ require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/Containm
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/KermetaHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/ecore/EcoreHelper.kmt"
 
 using km2ecore
 using ecore
+using km2ecore::helper::ecore
 
 package structure {
 	
@@ -209,6 +211,11 @@ package structure {
 					
 					if not self.isAbstract then
 						self.createBehaviorJava(context)
+					else
+						//self.container.asType(ClassDefinition).ecoreModelElement.~abstract := true
+						if not Operation.new().isVoidType(self.type.getTypeQName()) then
+							EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, self.type.createBehaviorJava(context) + " result = null;\nreturn result;")
+						end
 					end
 				
 				else
