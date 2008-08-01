@@ -1,4 +1,4 @@
-<!-- $Id: statcvs_build.xml,v 1.6 2008-08-01 07:28:45 dvojtise Exp $ -->
+<!-- $Id: statcvs_build.xml,v 1.7 2008-08-01 07:37:41 dvojtise Exp $ -->
 <project name="Build StatCVS" default="all" basedir=".">
 	<description>
        
@@ -38,7 +38,7 @@
         <replace dir="${output.dir}" >
             <include name="**/*.html"/>
             <replacetoken><![CDATA[" class="webrepository"]]></replacetoken>
-            <replacevalue><![CDATA[&amp;cvsroot=kermeta" class="webrepository"]]></replacevalue>
+            <replacevalue><![CDATA[&amp;f=h&amp;cvsroot=kermeta" class="webrepository"]]></replacevalue>
         </replace>
     	<replace dir="${output.dir}" >
             <include name="**/*.html"/>
