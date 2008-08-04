@@ -46,8 +46,8 @@ public class OSGiIntrospectorStatic {
 								+ File.separator + path) && validGeneration;
 			}
 				this.introspectionWithoutError = this.resolve() && validGeneration;
-				OSGiIntrospectorUtil.saveModel(XMIFilePath, this.framework);
 				OSGiIntrospectorUtil.displayLog(log);
+				OSGiIntrospectorUtil.saveModel(XMIFilePath, this.framework);
 		} else {
 			OSGiIntrospectorUtil.log(Level.SEVERE,
 					"GenerateFramework take two parameters which are String."
@@ -131,11 +131,10 @@ public class OSGiIntrospectorStatic {
 			bundle.setPackage(defaultPackage);
 
 			this.generateSystemEntries(directory, rootFolder);
-			java.io.File manifestFile;
 			try {
-				manifestFile = OSGiIntrospectorUtil
+				String manifestContent = OSGiIntrospectorUtil
 						.removeEOLBlank(manifestFileTmp);
-				boolean valid = this.parser.parse(manifestFile, bundle);
+				boolean valid = this.parser.parse(manifestContent, bundle);
 				if (valid) {
 					framework.addBundle(bundle);
 				}
@@ -188,12 +187,11 @@ public class OSGiIntrospectorStatic {
 			java.io.File manifestFileTmp = java.io.File.createTempFile(
 					"manifesttmp", ".mf");
 			manifest.write(new FileOutputStream(manifestFileTmp));
-			java.io.File manifestFile = OSGiIntrospectorUtil
+			String manifestContent = OSGiIntrospectorUtil
 					.removeEOLBlank(manifestFileTmp);
-			manifestFile.deleteOnExit();
 			manifestFileTmp.delete();
 
-				boolean valid = this.parser.parse(manifestFile, bundle);
+				boolean valid = this.parser.parse(manifestContent, bundle);
 				if (valid) {
 					framework.addBundle(bundle);
 				}

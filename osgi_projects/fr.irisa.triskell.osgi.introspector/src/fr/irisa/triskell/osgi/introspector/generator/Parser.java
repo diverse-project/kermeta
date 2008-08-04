@@ -1,9 +1,8 @@
 package fr.irisa.triskell.osgi.introspector.generator;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PushbackReader;
-import java.util.HashMap;
+import java.io.StringReader;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -49,13 +48,13 @@ public class Parser {
 	 * @throws LexerException
 	 * @throws IOException
 	 */
-	public boolean parse(java.io.File manifestFile,
+	public boolean parse(String manifestContent,
 			Bundle bundle) {
 	try {
 		MANIFEST manifest = ManifestFactory.eINSTANCE.createMANIFEST();
 		fr.irisa.osgi.manifest.parser.parser.Parser p = new fr.irisa.osgi.manifest.parser.parser.Parser(
 				new Lexer(
-						new PushbackReader(new FileReader(manifestFile), 1000)));
+						new PushbackReader(new StringReader(manifestContent), 1000)));
 		Start tree = p.parse();
 		this.translation.setManifest(manifest);
 		this.translation.setBundle(bundle);

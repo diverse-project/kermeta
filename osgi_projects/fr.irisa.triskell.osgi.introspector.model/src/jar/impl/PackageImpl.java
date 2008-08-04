@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.6 2008-08-04 09:30:44 edaubert Exp $
+ * $Id: PackageImpl.java,v 1.7 2008-08-04 13:46:15 edaubert Exp $
  */
 package jar.impl;
 
@@ -340,10 +340,10 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					while (i < size) {
 						Class tmp = _package.getClasses().get(i);
 						p.addClass(tmp);
-						if (size == _package.getSubPackages().size()) {
+						if (size == _package.getClasses().size()) {
 							i++;
 						}
-						size = _package.getSubPackages().size();
+						size = _package.getClasses().size();
 					}
 				}
 			} else {

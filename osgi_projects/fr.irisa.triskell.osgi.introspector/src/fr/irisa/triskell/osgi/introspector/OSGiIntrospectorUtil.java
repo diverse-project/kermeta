@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,10 +48,8 @@ public class OSGiIntrospectorUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	public static java.io.File removeEOLBlank(java.io.File manifestFileTmp)
+	public static String removeEOLBlank(java.io.File manifestFileTmp)
 			throws IOException {
-		java.io.File manifestFile = java.io.File.createTempFile("manifest",
-				".mf");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				new FileInputStream(manifestFileTmp)));
 		StringBuffer line = null;
@@ -62,7 +61,8 @@ public class OSGiIntrospectorUtil {
 				line = new StringBuffer(tmp);
 			} else {
 				if (tmp.length() > 0 && tmp.charAt(0) == ' ') {
-					while (line.charAt(line.length() - 1) == ' ' || line.charAt(line.length() - 1) == '\t') {
+					while (line.charAt(line.length() - 1) == ' '
+							|| line.charAt(line.length() - 1) == '\t') {
 						line.deleteCharAt(line.length() - 1);
 					}
 					while (tmp.charAt(0) == ' ' || tmp.charAt(0) == '\t') {
@@ -76,17 +76,12 @@ public class OSGiIntrospectorUtil {
 			read = reader.readLine();
 		}
 		reader.close();
-		//line = line.replace("\n ", "");
+		// line = line.replace("\n ", "");
 		line.append("\n");
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(manifestFile)));
-		writer.write(line.toString());
-		writer.flush();
-		writer.close();
 
-		//System.err.println(line);
+		// System.err.println(line);
 
-		return manifestFile;
+		return line.toString();
 
 	}
 
@@ -98,7 +93,8 @@ public class OSGiIntrospectorUtil {
 	 * @param file
 	 * @throws IOException
 	 */
-	public static void addEntriesFromJar(Bundle bundle, File file) throws IOException {
+	public static void addEntriesFromJar(Bundle bundle, File file)
+			throws IOException {
 		java.io.File ioFile = new java.io.File(bundle.getLocation());
 		java.io.File bundleFile = null;
 		if (ioFile.isDirectory()) {
@@ -142,27 +138,28 @@ public class OSGiIntrospectorUtil {
 	 * @param bundle
 	 * @param isBundleCLassPath
 	 */
-	public static void listAllEntriesIntoJarFile(JarFile jar, Bundle bundle, boolean bundleClassPath) {
+	public static void listAllEntriesIntoJarFile(JarFile jar, Bundle bundle,
+			boolean bundleClassPath) {
 		JarFactory jarFactory = JarFactory.eINSTANCE;
 		Enumeration<JarEntry> jarEntries = jar.entries();
 		Folder rootFolder = bundle.getFolder();
 		while (jarEntries.hasMoreElements()) {
 			JarEntry jarEntry = jarEntries.nextElement();
-				if (jarEntry.getName().endsWith("/")) {
-					Folder entry = jarFactory.createFolder();
-					entry.setBundleClassPath(bundleClassPath);
-					entry.setFullPath(jarEntry.getName());
-					String[] folders = jarEntry.getName().split("/");
-					entry.setName(folders[folders.length - 1]);
-					rootFolder.addEntry(entry);
-				} else {
-					File entry = jarFactory.createFile();
-					entry.setBundleClassPath(bundleClassPath);
-					entry.setFullPath(jarEntry.getName());
-					String[] folders = jarEntry.getName().split("/");
-					entry.setName(folders[folders.length - 1]);
-					rootFolder.addEntry(entry);
-				}
+			if (jarEntry.getName().endsWith("/")) {
+				Folder entry = jarFactory.createFolder();
+				entry.setBundleClassPath(bundleClassPath);
+				entry.setFullPath(jarEntry.getName());
+				String[] folders = jarEntry.getName().split("/");
+				entry.setName(folders[folders.length - 1]);
+				rootFolder.addEntry(entry);
+			} else {
+				File entry = jarFactory.createFile();
+				entry.setBundleClassPath(bundleClassPath);
+				entry.setFullPath(jarEntry.getName());
+				String[] folders = jarEntry.getName().split("/");
+				entry.setName(folders[folders.length - 1]);
+				rootFolder.addEntry(entry);
+			}
 		}
 	}
 
@@ -188,7 +185,7 @@ public class OSGiIntrospectorUtil {
 	public static void setLogger(Logger logger) {
 		OSGiIntrospectorUtil.logger = logger;
 	}
-	
+
 	/**
 	 * This function is used to generate the XMI file which represent an OSGi
 	 * framework.
@@ -197,7 +194,8 @@ public class OSGiIntrospectorUtil {
 	 *            the path of the XMI file which will create
 	 * @return true if the generation is ok, false else
 	 */
-	public static boolean saveModel(String XMIFilePathToSave, Framework framework) {
+	public static boolean saveModel(String XMIFilePathToSave,
+			Framework framework) {
 		java.io.File XMIFile = new java.io.File(XMIFilePathToSave);
 
 		// Create a resource set.
@@ -222,7 +220,8 @@ public class OSGiIntrospectorUtil {
 		try {
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
-			OSGiIntrospectorUtil.log(Level.SEVERE, "error during the save of the model");
+			OSGiIntrospectorUtil.log(Level.SEVERE,
+					"error during the save of the model");
 			OSGiIntrospectorUtil.log(Level.SEVERE, e.getMessage());
 			return false;
 		}
@@ -234,15 +233,18 @@ public class OSGiIntrospectorUtil {
 	public static void displayLog(Map<Bundle, String> log) {
 		for (Bundle bundle : log.keySet()) {
 			if (!log.get(bundle).equals("")) {
-				OSGiIntrospectorUtil.log(Level.INFO, bundle.getLocation() + "\n" + log.get(bundle));
+				OSGiIntrospectorUtil.log(Level.INFO, bundle.getLocation()
+						+ "\n" + log.get(bundle));
 			}
 		}
 	}
+
 	public void saveLog(Map<Bundle, String> log) {
 		// TODO
 		for (Bundle bundle : log.keySet()) {
 			if (!log.get(bundle).equals("")) {
-				OSGiIntrospectorUtil.log(Level.INFO, bundle.getLocation() + "\n" + log.get(bundle));
+				OSGiIntrospectorUtil.log(Level.INFO, bundle.getLocation()
+						+ "\n" + log.get(bundle));
 			}
 		}
 	}

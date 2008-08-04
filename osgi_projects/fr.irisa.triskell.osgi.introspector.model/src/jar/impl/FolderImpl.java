@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FolderImpl.java,v 1.5 2008-08-04 09:30:44 edaubert Exp $
+ * $Id: FolderImpl.java,v 1.6 2008-08-04 13:46:15 edaubert Exp $
  */
 package jar.impl;
 
@@ -190,57 +190,6 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		/*Folder currentFolder = this;
-		String[] folders = entry.getFullPath().split("/");
-		
-		for (int i = 0; i < folders.length; i++) {
-			boolean exist = false;
-			Iterator<SystemEntry> folderIterator = currentFolder.getEntries()
-					.iterator();
-			SystemEntry systemEntry = JarFactory.eINSTANCE.createFolder();
-			while (folderIterator.hasNext() && !exist) {
-				systemEntry = folderIterator.next();
-				if (systemEntry.getName().equals(folders[i])) {
-					exist = true;
-				}
-			}
-			if (!exist) {
-				SystemEntry e;
-				if (i < folders.length - 1) {
-					e = JarFactory.eINSTANCE.createFolder();
-					e.setName(folders[i]);
-					e.setFullPath(currentFolder.getFullPath() + e.getName()
-							+ "/");
-					currentFolder.getEntries().add(e);
-					currentFolder = (Folder) e;
-				} else {
-					if (entry.getFullPath().endsWith("/")) {
-						e = JarFactory.eINSTANCE.createFolder();
-						e.setName(folders[i]);
-						e.setFullPath(currentFolder.getFullPath() + e.getName()
-								+ "/");
-						currentFolder.getEntries().add(e);
-						currentFolder = (Folder) e;
-					} else {
-						e = JarFactory.eINSTANCE.createFile();
-						e.setName(folders[i]);
-						e
-								.setFullPath(currentFolder.getFullPath()
-										+ e.getName());
-						currentFolder.getEntries().add(e);
-					}
-				}
-			} else {
-				if (systemEntry instanceof Folder) {
-					currentFolder = (Folder) systemEntry;
-				}
-			}
-		}*/
 	}
 
 	public SystemEntry getEntry(String fullPath) {

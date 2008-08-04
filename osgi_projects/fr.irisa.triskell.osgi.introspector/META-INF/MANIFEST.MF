@@ -1,6 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Introspector Plug-in
+Bundle-Name: OSGi Introspector Plug-in
+Bundle-Vendor: Triskell - IRISA
 Bundle-SymbolicName: fr.irisa.triskell.osgi.introspector
 Bundle-Version: 1.0.0
 Bundle-Activator: fr.irisa.triskell.osgi.introspector.activator.Activator
@@ -12,7 +13,7 @@ Import-Package: framework,
  manifest.util,
  option,
  option.util,
- org.osgi.framework;version="1.3.0"
+ org.osgi.framework
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .
 Export-Service: fr.irisa.triskell.osgi.introspector.OSGiIntrospectorDynamic,

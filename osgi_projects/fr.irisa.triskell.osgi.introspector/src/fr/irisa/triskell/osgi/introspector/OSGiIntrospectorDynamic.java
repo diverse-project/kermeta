@@ -6,9 +6,12 @@ import jar.Package;
 import jar.SystemEntry;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -52,6 +55,7 @@ public class OSGiIntrospectorDynamic {
 		// TODO vérification du log ainsi que dans Static
 		//if (validGeneration) {
 			this.introspectionWithoutError = this.resolve() && validGeneration;
+			OSGiIntrospectorUtil.displayLog(log);
 			OSGiIntrospectorUtil.saveModel(XMIFilePath, this.framework);
 
 		/*} else {
@@ -66,7 +70,8 @@ public class OSGiIntrospectorDynamic {
 
 	private boolean generateBundle(org.osgi.framework.Bundle bundle) {
 		Bundle bundleRepresentation = this.getSystemBundleRepresentation(bundle);
-		bundleRepresentation.setLocation(bundle.getLocation());
+		//bundleRepresentation.setLocation(bundle.getLocation());
+		bundleRepresentation.setLocation(this.getBundleLocation(bundle));
 		bundleRepresentation.setSymbolicName(bundle.getSymbolicName());
 
 		String manifestStringRepresentation = "";
@@ -78,8 +83,8 @@ public class OSGiIntrospectorDynamic {
 			String value = dictionary.get(key);
 			manifestStringRepresentation += key + ": " + value + "\n";
 		}
-		try {
-		java.io.File manifestFile;
+		//try {
+		/*java.io.File manifestFile;
 		manifestFile = java.io.File.createTempFile("manifest", ".mf");
 		manifestFile.deleteOnExit();
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
@@ -87,21 +92,21 @@ public class OSGiIntrospectorDynamic {
 		writer.write(manifestStringRepresentation);
 		writer.flush();
 		writer.close();
-
-		boolean valid = this.parser.parse(manifestFile, bundleRepresentation);
+		 */
+		boolean valid = this.parser.parse(manifestStringRepresentation, bundleRepresentation);
 		
 		if (valid) {
 			this.framework.addBundle(bundleRepresentation);
 		}
 		
 		return valid;
-		} catch (IOException e) {
+		/*} catch (IOException e) {
 			OSGiIntrospectorUtil.log(Level.SEVERE, e.getMessage());
 			return false;
-		}
+		}*/
 	}
 	
-	public Bundle getSystemBundleRepresentation(
+	private Bundle getSystemBundleRepresentation(
 			org.osgi.framework.Bundle systemBundle) {
 		Bundle systemBundleRepresentation = FrameworkFactory.eINSTANCE
 				.createBundle();
@@ -125,7 +130,7 @@ public class OSGiIntrospectorDynamic {
 	 * @param folder
 	 */
 	private Folder generateSystemEntries(
-			org.osgi.framework.Bundle systemBundle, String path) {
+			org.osgi.framework.Bundle bundle, String path) {
 		Folder folder = JarFactory.eINSTANCE.createFolder();
 		if (path.equals("/")) {
 			folder.setFullPath("");
@@ -135,17 +140,13 @@ public class OSGiIntrospectorDynamic {
 			String[] tmp = path.split("/");
 			folder.setName(tmp[tmp.length - 1]);
 		}
-		Enumeration<String> bundlePaths = systemBundle.getEntryPaths(path);
+		Enumeration<String> bundlePaths = bundle.getEntryPaths(path);
 		if (bundlePaths != null) {
 			while (bundlePaths.hasMoreElements()) {
 				String pathTmp = bundlePaths.nextElement();
 				SystemEntry f;
 				if (pathTmp.endsWith("/")) {
-					//f = JarFactory.eINSTANCE.createFolder();
-					//f.setFullPath(pathTmp);
-					//int i = folder.getFullPath().length();
-					//f.setName(pathTmp.substring(i, pathTmp.length() - 1));
-					f = generateSystemEntries(systemBundle, pathTmp);
+					f = generateSystemEntries(bundle, pathTmp);
 					folder.addEntry(f);
 				} else {
 					f = JarFactory.eINSTANCE.createFile();
@@ -159,6 +160,43 @@ public class OSGiIntrospectorDynamic {
 		return folder;
 	}
 	
+	private String getBundleLocation(org.osgi.framework.Bundle bundle) {
+	        StringBuilder sb = new StringBuilder(bundle.getLocation());
+	        if (sb.charAt(sb.length() - 1) == '/') {
+	            sb.setLength(sb.length() - 1);
+	        }
+
+	        int idx = sb.indexOf("file:");
+	        if (idx < 0) {
+	            return null;
+	        }
+	        
+	        try {
+	            URL url = new URL (sb.toString());
+	            File file = new File(url.getFile());
+	            if (file.exists()) {
+	            	System.out.println(file.getAbsolutePath());
+	                return file.getAbsolutePath();
+	            }
+	        } catch (MalformedURLException mue) {
+	            // in Equinox the URL is not wellformed, which is taken care of by the code below
+	        }
+	        
+	        if (idx >= 0) {
+	            sb.delete(0, idx + 5);
+	            sb.insert(0, System.getProperty("osgi.install.area"));
+	            try {
+	                URL u = new URL(sb.toString());
+	                File f = new File(u.getFile());
+	                System.out.println(f.getAbsolutePath());
+	                return f.getAbsolutePath();
+	            } catch (MalformedURLException e) {
+	                return null;
+	            }
+	        }
+	        return null;
+	    
+	}
 
 	public boolean resolve() {
 		Resolver resolver = new ResolverDynamic();

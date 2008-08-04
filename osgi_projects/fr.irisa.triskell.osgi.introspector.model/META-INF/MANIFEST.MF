@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: OSGi Introspector Metamodel
 Bundle-SymbolicName: fr.irisa.triskell.osgi.introspector.model;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .,
@@ -8,8 +8,7 @@ Bundle-ClassPath: .,
  lib/org.eclipse.emf.ecore_2.4.0.v200806091234.jar,
  lib/org.eclipse.emf.ecore.edit_2.4.0.v200806091234.jar,
  lib/org.eclipse.emf.ecore.xmi_2.4.0.v200806091234.jar
-Bundle-Vendor: %providerName
-Bundle-Localization: plugin
+Bundle-Vendor: Triskell - IRISA
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: framework,
@@ -24,4 +23,4 @@ Export-Package: framework,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.resource.impl,
  org.eclipse.emf.ecore.xmi.impl
-Import-Package: org.osgi.framework;version="1.4.0"
+Import-Package: org.osgi.framework
