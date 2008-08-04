@@ -16,11 +16,12 @@
             <separator name="additions"/>
          </menu>
          <action
-               label="Convert to Kermeta..."
                class="fr.irisa.triskell.kermeta.ocl.ui.popup.actions.OCLParse"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta"
                enablesFor="1"
-               id="fr.irisa.triskell.ocl.menu.action">
+               icon="icons/ocl_2_kermeta.png"
+               id="fr.irisa.triskell.ocl.menu.action"
+               label="Convert to Kermeta..."
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta">
          </action>
       </objectContribution>
       <objectContribution
@@ -33,11 +34,12 @@
             <separator name="additions"/>
          </menu>
                <action
-               class="fr.irisa.triskell.kermeta.ocl.ui.popup.actions.GenerateKMTFilesFromOCLFilesAction"
-               enablesFor="1"
-               id="fr.irisa.triskell.kermeta.ocl.action1"
-               label="Generate KMT Files from OCL Files"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta">
+                     class="fr.irisa.triskell.kermeta.ocl.ui.popup.actions.GenerateKMTFilesFromOCLFilesAction"
+                     enablesFor="1"
+                     icon="icons/ocl_2_kermeta.png"
+                     id="fr.irisa.triskell.kermeta.ocl.action1"
+                     label="Generate KMT Files from OCL Files"
+                     menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta">
          </action>
       </objectContribution>
       
