@@ -2,11 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkImpl.java,v 1.2 2008-07-31 13:43:54 edaubert Exp $
+ * $Id: FrameworkImpl.java,v 1.3 2008-08-04 16:17:25 edaubert Exp $
  */
 package framework.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import manifest.BundleSymbolicName;
 import option.Singleton;
@@ -177,6 +179,19 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 			}
 		}
 		return true;
+	}
+
+	public List<Bundle> findBundle(String symbolicName) {
+		List<Bundle> bundles = new ArrayList<Bundle>();
+		for (Bundle bundle : this.getBundles()) {
+			if (symbolicName.equals(bundle.getSymbolicName())) {
+				bundles.add(bundle);
+			}
+		}
+		if (bundles.size() == 0) {
+			return null;
+		}
+		return bundles;
 	}
 
 } // FrameworkImpl

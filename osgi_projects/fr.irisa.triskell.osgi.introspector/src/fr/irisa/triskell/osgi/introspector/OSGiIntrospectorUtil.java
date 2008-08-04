@@ -238,14 +238,6 @@ public class OSGiIntrospectorUtil {
 			}
 		}
 	}
-
-	public void saveLog(Map<Bundle, String> log) {
-		// TODO
-		for (Bundle bundle : log.keySet()) {
-			if (!log.get(bundle).equals("")) {
-				OSGiIntrospectorUtil.log(Level.INFO, bundle.getLocation()
-						+ "\n" + log.get(bundle));
-			}
-		}
-	}
+	
+	// TODO sauvegarde le log dans un fichier (ou plusieurs)
 }

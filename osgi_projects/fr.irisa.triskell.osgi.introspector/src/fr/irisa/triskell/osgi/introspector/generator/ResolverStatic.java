@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
+import org.osgi.framework.Constants;
+
 import manifest.BadVersionValue;
 import manifest.BundleActivator;
 import manifest.ExportPackage;
@@ -44,19 +46,11 @@ public class ResolverStatic implements Resolver {
 	 * This function is used to resolve all Fragment-Host entry into the
 	 * framework.
 	 */
-	public void resolveFragmentHost(framework.Framework framework, Map<Bundle, String> fragmentHosts ) {
+	public void resolveFragmentHost(Framework framework, Map<Bundle, String> fragmentHosts ) {
 		Map<Bundle, String> fragmentHostsTmp = new HashMap<Bundle, String>();
 		for (Bundle fragment : fragmentHosts.keySet()) {
-			boolean find = false;
-			List<Bundle> hostBundles = new ArrayList<Bundle>();
-			for (Bundle bundle : framework.getBundles()) {
-				if (fragmentHosts.get(fragment).equals(
-						bundle.getSymbolicName())) {
-					hostBundles.add(bundle);
-					find = true;
-				}
-			}
-			if (!find) {
+			List<Bundle> hostBundles = framework.findBundle(fragmentHosts.get(fragment));
+			if (hostBundles == null) {
 				fragmentHostsTmp.put(fragment, fragmentHosts.get(fragment));
 			} else {
 				boolean versionDefined = false;
@@ -67,8 +61,8 @@ public class ResolverStatic implements Resolver {
 				List<AttributEntry> attributs = fragment.getManifest()
 						.getFragmentHost().getOptions();
 				for (AttributEntry attribut : attributs) {
-					// TODO attention bundle-version, specification-version ...
-					if (attribut.getToken().equals("bundle-version")) {
+					// TODO attention bundle-version (OSGi R4), specification-version (OSGi R3) ...
+					if (attribut.getToken().equals(Constants.BUNDLE_VERSION_ATTRIBUTE)) {
 						versionDefined = true;
 						String value = attribut.getValue();
 						if (value.startsWith("(")) {
@@ -265,48 +259,6 @@ public class ResolverStatic implements Resolver {
 		}
 	}
 
-	public void resolveExportPackageUses(Map<Uses, List<String>> uses, Map<Uses, Bundle> bundles) {
-		for (Uses value : uses.keySet()) {
-			for (String _package : uses.get(value)) {
-				value.addPackage(_package);
-			}
-
-		}
-	}
-
-	public void resolveImportPackage(Map<ImportPackage, List<String>> importPackages) {
-		for (ImportPackage value : importPackages.keySet()) {
-			for (String _package : importPackages.get(value)) {
-				value.addPackage(_package);
-			}
-
-		}
-	}
-
-	public void resolveImportService(Map<ImportService, String> importServices) {
-		for (ImportService value : importServices.keySet()) {
-			value.setService(importServices.get(value));
-
-		}
-	}
-
-	public void resolveActivator(Map<BundleActivator, Bundle> bundles, Map<BundleActivator, String> activators) {
-		for (BundleActivator value : activators.keySet()) {
-			Class element = bundles.get(value).getPackage().getClass(
-					activators.get(value));
-			if (element != null) {
-				value.setActivator(element);
-			} else {
-				this.log.put(bundles.get(value), this.log.get(bundles
-						.get(value))
-						+ "The activator reference "
-						+ activators.get(value)
-						+ " is not valid." + "\n");
-				bundles.get(value).getManifest().setBundleActivator(null);
-			}
-		}
-	}
-
 	public void resolveExportService(Map<Service, Bundle> bundles, Map<Service, String> services) {
 		List<Service> tmp = new ArrayList<Service>();
 		for (Service service : services.keySet()) {
@@ -329,6 +281,23 @@ public class ResolverStatic implements Resolver {
 		}
 	}
 
+	public void resolveActivator(Map<BundleActivator, Bundle> bundles, Map<BundleActivator, String> activators) {
+		for (BundleActivator value : activators.keySet()) {
+			Class element = bundles.get(value).getPackage().getClass(
+					activators.get(value));
+			if (element != null) {
+				value.setActivator(element);
+			} else {
+				this.log.put(bundles.get(value), this.log.get(bundles
+						.get(value))
+						+ "The activator reference "
+						+ activators.get(value)
+						+ " is not valid." + "\n");
+				bundles.get(value).getManifest().setBundleActivator(null);
+			}
+		}
+	}
+
 	public void resolveActivationPolicyExclude(
 			Map<ExcludePackages, List<String>> excludes,
 			Map<ExcludePackages, Bundle> bundles) {
@@ -339,7 +308,7 @@ public class ResolverStatic implements Resolver {
 			List<String> exportPackageReferenceTmp = new ArrayList<String>();
 			Bundle bundle = bundles
 					.get(excludePackage);
-
+	
 			// First research into local class path
 			for (String reference : exportPackageReference) {
 				Package _package = bundle.getPackage().getPackage(reference);
@@ -393,7 +362,7 @@ public class ResolverStatic implements Resolver {
 			List<String> exportPackageReferenceTmp = new ArrayList<String>();
 			Bundle bundle = bundles
 					.get(includePackage);
-
+	
 			// First research into local class path
 			for (String reference : exportPackageReference) {
 				Package _package = bundle.getPackage().getPackage(reference);
@@ -436,6 +405,26 @@ public class ResolverStatic implements Resolver {
 		}	
 	}
 
+	public void resolveRequireBundle(Framework framework, 
+			Map<RequireBundle, String> requireBundles,
+			Map<RequireBundle, Bundle> bundles) {
+		for (RequireBundle value : requireBundles.keySet()) {
+				value.setBundle(requireBundles.get(value));
+				value.setResolved(false);
+	
+		}
+		
+	}
+
+	public void resolveExportPackageUses(Map<Uses, List<String>> uses, Map<Uses, Bundle> bundles) {
+		for (Uses value : uses.keySet()) {
+			for (String _package : uses.get(value)) {
+				value.addPackage(_package);
+			}
+
+		}
+	}
+
 	public void resolveImportPackage(
 			Map<ImportPackage, List<String>> importPackages,
 			Map<ImportPackage, Bundle> bundles) {
@@ -454,17 +443,6 @@ public class ResolverStatic implements Resolver {
 		for (ImportService value : importServices.keySet()) {
 			value.setService(importServices.get(value));
 			value.setResolved(false);
-
-		}
-		
-	}
-
-	public void resolveRequireBundle(Framework framework, 
-			Map<RequireBundle, String> requireBundles,
-			Map<RequireBundle, Bundle> bundles) {
-		for (RequireBundle value : requireBundles.keySet()) {
-				value.setBundle(requireBundles.get(value));
-				value.setResolved(false);
 
 		}
 		

@@ -21,7 +21,7 @@ public interface Resolver {
 
 	public void resolveFragmentHost(framework.Framework framework, Map<Bundle, String> fragmentHosts);
 	
-	public void resolveExportPackage(Map<ExportPackage, List<String>> exportPackages, Map<ExportPackage, Bundle> Bundles);
+	public void resolveExportPackage(Map<ExportPackage, List<String>> exportPackages, Map<ExportPackage, Bundle> bundles);
 
 	public void resolveExportPackageExclude(Map<ExcludeClasses, List<String>> excludes, Map<ExcludeClasses, ExportPackage> exportPackages);
 

@@ -199,7 +199,7 @@ public class OSGiIntrospectorDynamic {
 	}
 
 	public boolean resolve() {
-		Resolver resolver = new ResolverDynamic();
+		Resolver resolver = new ResolverDynamic(this.context);
 		resolver.setLog(this.log);
 		resolver.resolveRequireBundle(this.framework, this.parser.getUnresolvedRequireBundleValue(), this.parser.getUnresolvedRequireBundleBundle());
 		resolver.resolveFragmentHost(this.framework, this.parser.getFragmentHostReferences());

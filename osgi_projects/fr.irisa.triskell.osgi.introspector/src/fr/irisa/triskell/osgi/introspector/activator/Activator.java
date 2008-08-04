@@ -23,17 +23,14 @@ public class Activator implements BundleActivator {
 		OSGiIntrospectorUtil.setContext(context);
 		this.introspectorDynamic = new OSGiIntrospectorDynamic(context);
 		context.registerService(this.introspectorDynamic.getClass().getName(),
-				this.introspectorDynamic, null // propriétés du service enregistré, a
-										// completer peut-etre.
-				);
+				this.introspectorDynamic, null );
 		OSGiIntrospectorUtil.log(Level.INFO, "Dynamic Introspector service register");
 		
+		// TODO ne mettre que le dynamique et pas le static ??
 		OSGiIntrospectorUtil.setContext(context);
 		this.introspectorStatic = new OSGiIntrospectorStatic();
 		context.registerService(this.introspectorStatic.getClass().getName(),
-				this.introspectorStatic, null // propriétés du service enregistré, a
-										// completer peut-etre.
-				);
+				this.introspectorStatic, null);
 		OSGiIntrospectorUtil.log(Level.INFO, "Static Introspector service register");
 	}
 
