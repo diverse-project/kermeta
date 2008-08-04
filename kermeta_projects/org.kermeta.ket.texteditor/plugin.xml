@@ -7,7 +7,7 @@
       <editor
             name="Ket Editor"
             extensions="ket"
-            icon="icons/ket.png"
+            icon="icons/kermeta_template.png"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             class="org.kermeta.ket.texteditor.XMLEditor"
             id="org.kermeta.ket.texteditor.KetEditor">

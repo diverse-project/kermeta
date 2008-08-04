@@ -15,11 +15,12 @@
             <separator name="additions"/>
          </menu>
          <action
-               label="Translate Kermeta Template"
                class="fr.irisa.triskell.kermeta.ket.Generator"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta"
                enablesFor="+"
-               id="fr.irisa.triskell.kermeta.ket.menu.action">
+               icon="icons/kermeta_template.png"
+               id="fr.irisa.triskell.kermeta.ket.menu.action"
+               label="Translate Kermeta Template"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta">
          </action>
       </objectContribution>
    </extension>
@@ -35,7 +36,7 @@
             category="fr.irisa.triskell.kermeta.KermetaWizard"
             class="fr.irisa.triskell.kermeta.ket.wizard.NewKETFileWizard"
             finalPerspective="kermetaPerspective"
-            icon="icons/ket.png"
+            icon="icons/new_kermeta_template.png"
             id="org.kermeta.wizard.newKETFile"
             name="New KET File"
             preferredPerspectives="kermetaPerspective"
