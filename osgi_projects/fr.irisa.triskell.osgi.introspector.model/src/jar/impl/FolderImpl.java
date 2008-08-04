@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FolderImpl.java,v 1.4 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: FolderImpl.java,v 1.5 2008-08-04 09:30:44 edaubert Exp $
  */
 package jar.impl;
 
@@ -165,6 +165,7 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 					for (SystemEntry entryTmp : ((Folder)entry).getEntries()) {
 						((Folder)p).addEntry(entryTmp);
 					}
+					p.setBundleClassPath(entry.isBundleClassPath());
 				}
 			} else {
 				String _packageName = packagesClazz[nextPackage];

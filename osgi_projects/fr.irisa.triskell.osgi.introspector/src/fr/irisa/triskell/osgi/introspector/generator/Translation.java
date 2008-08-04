@@ -201,9 +201,9 @@ public class Translation implements Analysis {
 			token = token.substring(0, token.length() - 1);
 		}
 		attribute.setToken(token);
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getStringEntryValue().apply(this);
-		attribute.setValue((String) this.firstValue);
+		attribute.setValue(((StringBuffer) this.firstValue).toString());
 		this.entry.addOption(attribute);
 
 	}
@@ -213,7 +213,7 @@ public class Translation implements Analysis {
 		node.getPackageName().apply(this);
 		this.registerUnresolvedActivationPolicyDirective(
 				(ActivationPolicyDirective) this.secondValue,
-				(String) this.firstValue);
+				((StringBuffer) this.firstValue).toString());
 
 	}
 
@@ -246,7 +246,6 @@ public class Translation implements Analysis {
 			ABundleActivationpolicyEntryValue node) {
 		BundleActivationPolicy entry = manifestFactory
 				.createBundleActivationPolicy();
-		this.firstValue = null;
 		node.getActivationpolicyValue().apply(this);
 		entry.setPolicy((PolicyEnum) this.firstValue);
 		this.entry = entry;
@@ -273,10 +272,10 @@ public class Translation implements Analysis {
 
 	public void caseABundleActivatorEntryValue(ABundleActivatorEntryValue node) {
 		BundleActivator entry = manifestFactory.createBundleActivator();
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
 		this.unresolvedActivatorBundle.put(entry, this.bundle);
-		this.unresolvedActivatorValue.put(entry, (String) this.firstValue);
+		this.unresolvedActivatorValue.put(entry, ((StringBuffer) this.firstValue).toString());
 		this.manifest.setBundleActivator(entry);
 
 	}
@@ -296,9 +295,9 @@ public class Translation implements Analysis {
 
 	public void caseABundleCategoryEntryValue(ABundleCategoryEntryValue node) {
 		BundleCategory entry = manifestFactory.createBundleCategory();
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getStringEntryValue().apply(this);
-		entry.addValue((String) this.firstValue);
+		entry.addValue(((StringBuffer) this.firstValue).toString());
 
 	}
 
@@ -380,7 +379,7 @@ public class Translation implements Analysis {
 	public void caseABundleDocurlEntry(ABundleDocurlEntry node) {
 		BundleDocURL entry = manifestFactory.createBundleDocURL();
 
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUrlValue().apply(this);
 
 		entry.setUrl((URL) this.firstValue);
@@ -509,10 +508,10 @@ public class Translation implements Analysis {
 	public void caseABundleSymbolicnameEntry(ABundleSymbolicnameEntry node) {
 		BundleSymbolicName entry = manifestFactory.createBundleSymbolicName();
 
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
-		entry.setSymbolicName((String) this.firstValue);
-		this.bundle.setSymbolicName((String) this.firstValue);
+		entry.setSymbolicName(((StringBuffer) this.firstValue).toString());
+		this.bundle.setSymbolicName(((StringBuffer) this.firstValue).toString());
 		this.entry = entry;
 		for (PSymbolicnameOption option : node.getSymbolicnameOption()) {
 			option.apply(this);
@@ -531,7 +530,7 @@ public class Translation implements Analysis {
 		BundleUpdateLocation entry = manifestFactory
 				.createBundleUpdateLocation();
 
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUrlValue().apply(this);
 		entry.setUrl((URL) this.firstValue);
 		this.entry = entry;
@@ -582,9 +581,9 @@ public class Translation implements Analysis {
 	}
 
 	public void caseACategoryValue(ACategoryValue node) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getStringEntryValue().apply(this);
-		((BundleCategory) this.entry).addValue((String) this.firstValue);
+		((BundleCategory) this.entry).addValue(((StringBuffer) this.firstValue).toString());
 
 	}
 
@@ -634,7 +633,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseADotTarget(ADotTarget node) {
-		this.firstValue = ".";
+		this.firstValue = new StringBuffer(".");
 
 	}
 
@@ -642,9 +641,9 @@ public class Translation implements Analysis {
 		DynamicImportPackage entry = manifestFactory
 				.createDynamicImportPackage();
 
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getPackageNameWildcard().apply(this);
-		entry.addPackage((String) this.firstValue);
+		entry.addPackage(((StringBuffer) this.firstValue).toString());
 
 		this.entry = entry;
 		for (PDynamicimportPackageNames value : node
@@ -682,10 +681,10 @@ public class Translation implements Analysis {
 	}
 
 	public void caseADynamicimportPackageNames(ADynamicimportPackageNames node) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getPackageNameWildcard().apply(this);
 		((DynamicImportPackage) this.entry)
-				.addPackage((String) this.firstValue);
+				.addPackage(((StringBuffer) this.firstValue).toString());
 
 	}
 
@@ -695,7 +694,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAEqualsBooleanComparator(AEqualsBooleanComparator node) {
-		this.firstValue = (String) this.firstValue + node.getEquals();
+		((StringBuffer)this.firstValue).append(node.getEquals());
 
 	}
 
@@ -717,11 +716,11 @@ public class Translation implements Analysis {
 
 	public void caseAExcludeIncludeManyPackagesActivationPolicyExcludeIncludeValue(
 			AExcludeIncludeManyPackagesActivationPolicyExcludeIncludeValue node) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getPackageName().apply(this);
 		this.registerUnresolvedActivationPolicyDirective(
 				(ActivationPolicyDirective) this.secondValue,
-				(String) this.firstValue);
+				((StringBuffer) this.firstValue).toString());
 
 		for (PActivationPolicyExcludeIncludeIdentifier identifier : node
 				.getActivationPolicyExcludeIncludeIdentifier()) {
@@ -734,11 +733,11 @@ public class Translation implements Analysis {
 
 	public void caseAExcludeIncludeOnePackageActivationPolicyExcludeIncludeValue(
 			AExcludeIncludeOnePackageActivationPolicyExcludeIncludeValue node) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getPackageName().apply(this);
 		this.registerUnresolvedActivationPolicyDirective(
 				(ActivationPolicyDirective) this.secondValue,
-				(String) this.firstValue);
+				((StringBuffer) this.firstValue).toString());
 		((BundleActivationPolicy) this.entry)
 				.addDirective((ActivationPolicyDirective) this.secondValue);
 
@@ -769,17 +768,17 @@ public class Translation implements Analysis {
 
 	public void caseAExportPackageEntryValue(AExportPackageEntryValue node) {
 		ExportPackage entry = manifestFactory.createExportPackage();
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getPackageName().apply(this);
 
 		List<String> exports = new ArrayList<String>();
 
-		exports.add((String) this.firstValue);
+		exports.add(((StringBuffer) this.firstValue).toString());
 
 		for (PPackageNames name : node.getPackageNames()) {
-			this.firstValue = "";
+			this.firstValue = new StringBuffer("");
 			name.apply(this);
-			exports.add((String) this.firstValue);
+			exports.add(((StringBuffer) this.firstValue).toString());
 		}
 
 		this.unresolvedExportPackageBundle.put(entry, this.bundle);
@@ -822,13 +821,13 @@ public class Translation implements Analysis {
 
 	public void caseAExportServiceEntryValue(AExportServiceEntryValue node) {
 		ExportService entry = manifestFactory.createExportService();
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
 		Service service = manifestFactory.createService();
 
 		this.unresolvedExportServiceBundle.put(service, this.bundle);
 		this.unresolvedExportServiceValue
-				.put(service, (String) this.firstValue);
+				.put(service, ((StringBuffer) this.firstValue).toString());
 		this.servicesAvailable.add(service);
 
 		entry.setService((Service) service);
@@ -864,11 +863,10 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAFileUnquotedUrl(AFileUnquotedUrl node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getUrlFile().getText();
+		((StringBuffer)this.firstValue).append(node.getUrlFile().getText());
 		node.getPathUnquoted().apply(this);
 		try {
-			URL url = new URL((String) this.firstValue);
+			URL url = new URL(((StringBuffer) this.firstValue).toString());
 			this.firstValue = url;
 		} catch (MalformedURLException e) {
 			this.log
@@ -883,7 +881,6 @@ public class Translation implements Analysis {
 
 	public void caseAFragmentAttachmentSymbolicnameDirective(
 			AFragmentAttachmentSymbolicnameDirective node) {
-		this.firstValue = null;
 		node.getFragmentAttachmentValue().apply(this);
 		FragmentAttachment directive = parameterFactory
 				.createFragmentAttachment();
@@ -901,7 +898,6 @@ public class Translation implements Analysis {
 
 	public void caseAFragmentHostDirective(AFragmentHostDirective node) {
 		Extension directive = parameterFactory.createExtension();
-		this.firstValue = null;
 		node.getExtensionValue().apply(this);
 		directive.setExtension((ExtensionEnum) this.firstValue);
 		((FragmentHost) this.entry).setDirectives(directive);
@@ -929,9 +925,9 @@ public class Translation implements Analysis {
 
 	public void caseAFragmentHostEntryValue(AFragmentHostEntryValue node) {
 		FragmentHost entry = manifestFactory.createFragmentHost();
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
-		this.fragmentHostReferences.put(this.bundle, (String) this.firstValue);
+		this.fragmentHostReferences.put(this.bundle, ((StringBuffer) this.firstValue).toString());
 
 		this.entry = entry;
 		for (PFragmentHostParameter parameter : node.getFragmentHostParameter()) {
@@ -942,10 +938,10 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAFtpUnquotedUrl(AFtpUnquotedUrl node) {
-		this.firstValue = (String) this.firstValue + node.getUrlFtp().getText();
+		((StringBuffer)this.firstValue).append(node.getUrlFtp().getText());
 		node.getPathUnquoted().apply(this);
 		try {
-			URL url = new URL((String) this.firstValue);
+			URL url = new URL(((StringBuffer) this.firstValue).toString());
 			this.firstValue = url;
 		} catch (MalformedURLException e) {
 			this.log
@@ -959,23 +955,21 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAGreaterBooleanComparator(AGreaterBooleanComparator node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getGreater().getText();
+		((StringBuffer)this.firstValue).append(node.getGreater().getText());
 
 	}
 
 	public void caseAGreaterEqualsBooleanComparator(
 			AGreaterEqualsBooleanComparator node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getGreaterEquals().getText();
+		((StringBuffer)this.firstValue).append(node.getGreaterEquals().getText());
 
 	}
 
 	public void caseAHttpUnquotedUrl(AHttpUnquotedUrl node) {
-		this.firstValue = node.getUrlHttp().getText();
+		this.firstValue = new StringBuffer(node.getUrlHttp().getText());
 		node.getPathUnquoted().apply(this);
 		try {
-			URL url = new URL((String) this.firstValue);
+			URL url = new URL(((StringBuffer) this.firstValue).toString());
 			this.firstValue = url;
 		} catch (MalformedURLException e) {
 			this.log
@@ -996,7 +990,6 @@ public class Translation implements Analysis {
 
 	public void caseAImportPackageDirective(AImportPackageDirective node) {
 		Resolution directive = parameterFactory.createResolution();
-		this.firstValue = null;
 		node.getResolutionValue().apply(this);
 		directive.setResolution((ResolutionEnum) this.firstValue);
 
@@ -1024,17 +1017,17 @@ public class Translation implements Analysis {
 	public void caseAImportPackageEntryValue(AImportPackageEntryValue node) {
 		ImportPackage entry = manifestFactory.createImportPackage();
 
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getPackageName().apply(this);
 
 		List<String> exports = new ArrayList<String>();
 
-		exports.add((String) this.firstValue);
+		exports.add(((StringBuffer) this.firstValue).toString());
 
 		for (PPackageNames name : node.getPackageNames()) {
-			this.firstValue = "";
+			this.firstValue = new StringBuffer("");
 			name.apply(this);
-			exports.add((String) this.firstValue);
+			exports.add(((StringBuffer) this.firstValue).toString());
 		}
 
 		this.unresolvedImportPackageBundle.put(entry, this.bundle);
@@ -1078,11 +1071,11 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAImportServiceEntryValue(AImportServiceEntryValue node) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
 		ImportService entry = manifestFactory.createImportService();
 		this.unresolvedImportServiceBundle.put(entry, this.bundle);
-		this.unresolvedImportServiceValue.put(entry, (String) this.firstValue);
+		this.unresolvedImportServiceValue.put(entry, ((StringBuffer) this.firstValue).toString());
 		this.manifest.addImportService(entry);
 
 		this._import = true;
@@ -1111,17 +1104,15 @@ public class Translation implements Analysis {
 	public void caseALanguageDirective(ALanguageDirective node) {
 		Language directive = parameterFactory.createLanguage();
 
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getLanguageValue().apply(this);
-		if (this.firstValue instanceof String) {
 			for (ISOCodeLanguage language : ISOCodeLanguage.VALUES) {
-				if (language.getLiteral().equals((String) this.firstValue)) {
+				if (language.getLiteral().equals(((StringBuffer) this.firstValue).toString())) {
 					directive.setIsoCode(language);
 					((BundleNativeCode) this.entry).addDirective(directive);
 					break;
 				}
 			}
-		}
 	}
 
 	public void caseALanguageDirectiveNativecodeDirective(
@@ -1131,20 +1122,18 @@ public class Translation implements Analysis {
 	}
 
 	public void caseALanguageValue(ALanguageValue node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getIdentifier().getText();
+		((StringBuffer)this.firstValue).append(node.getIdentifier().getText());
 
 	}
 
 	public void caseALessBooleanComparator(ALessBooleanComparator node) {
-		this.firstValue = (String) this.firstValue + node.getLess().getText();
+		((StringBuffer)this.firstValue).append(node.getLess().getText());
 
 	}
 
 	public void caseALesserEqualsBooleanComparator(
 			ALesserEqualsBooleanComparator node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getLesserEquals().getText();
+		((StringBuffer)this.firstValue).append(node.getLesserEquals().getText());
 
 	}
 
@@ -1182,14 +1171,12 @@ public class Translation implements Analysis {
 			AMandatoryManyAttributesMandatoryValue node) {
 		List<String> attributToken = new ArrayList<String>();
 		node.getUnquotedString().getText();
-		attributToken.add((String) this.firstValue);
+		attributToken.add(((StringBuffer) this.firstValue).toString());
 
 		for (PMandatoryString mandatoryString : node.getMandatoryString()) {
-			this.firstValue = "";
+			this.firstValue = new StringBuffer("");
 			mandatoryString.apply(this);
-			if (this.firstValue instanceof String) {
-				attributToken.add((String) this.firstValue);
-			}
+			attributToken.add(((StringBuffer) this.firstValue).toString());
 		}
 
 		List<AttributEntry> attributs = new ArrayList<AttributEntry>();
@@ -1219,7 +1206,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAMandatoryString(AMandatoryString node) {
-		this.firstValue = node.getUnquotedString().getText();
+		this.firstValue = new StringBuffer(node.getUnquotedString().getText());
 
 	}
 
@@ -1308,8 +1295,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseANotEqualsBooleanComparator(ANotEqualsBooleanComparator node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getNotEquals().getText();
+		((StringBuffer)this.firstValue).append(node.getNotEquals().getText());
 
 	}
 
@@ -1325,7 +1311,6 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAOsnameDirective(AOsnameDirective node) {
-		this.firstValue = null;
 		node.getOsnameValue().apply(this);
 		OsName directive = parameterFactory.createOsName();
 		directive.setOsname((OsNameEnum) this.firstValue);
@@ -1458,7 +1443,6 @@ public class Translation implements Analysis {
 
 	public void caseAOsversionDirective(AOsversionDirective node) {
 		OsVersion directive = parameterFactory.createOsVersion();
-		this.firstValue = null;
 		node.getVersionRange().apply(this);
 		directive.setMinVersion((Version) this.firstValue);
 		directive.setMinNotInclude(this.minNotInclude);
@@ -1482,14 +1466,13 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAOtherEntryValue(AOtherEntryValue node) {
-		this.firstValue = "";
 		((SimpleManifestEntryManyValues) this.entry).addValue(node
 				.getSimpleStringValue().getText());
 		for (POtherValue otherValue : node.getOtherValue()) {
-			this.firstValue = "";
+			this.firstValue = new StringBuffer("");
 			otherValue.apply(this);
 			((SimpleManifestEntryManyValues) this.entry)
-					.addValue((String) this.firstValue);
+					.addValue(((StringBuffer) this.firstValue).toString());
 		}
 
 		for (PParameter parameter : node.getParameter()) {
@@ -1504,7 +1487,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAOtherValue(AOtherValue node) {
-		this.firstValue = (String) node.getSimpleStringValue().getText();
+		this.firstValue = new StringBuffer(node.getSimpleStringValue().getText());
 
 	}
 
@@ -1519,15 +1502,14 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAPathElement(APathElement node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getUnquotedString().getText();
+		((StringBuffer)this.firstValue).append(node.getUnquotedString().getText());
 
 	}
 
 	public void caseAPathQuoted(APathQuoted node) {
-		this.firstValue = (String) this.firstValue + "\"";
+		((StringBuffer)this.firstValue).append("\"");
 		node.getPathUnquoted().apply(this);
-		this.firstValue = (String) this.firstValue + "\"";
+		((StringBuffer)this.firstValue).append("\"");
 	}
 
 	public void caseAPathQuotedPath(APathQuotedPath node) {
@@ -1536,23 +1518,20 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAPathSepOnlyPathUnquoted(APathSepOnlyPathUnquoted node) {
-		this.firstValue = (String) this.firstValue + node.getPathSep();
+		((StringBuffer)this.firstValue).append(node.getPathSep());
 
 	}
 
 	public void caseAPathSeptelementPathUnquoted(
 			APathSeptelementPathUnquoted node) {
 		if (node.getFirst() != null) {
-			this.firstValue = (String) this.firstValue
-					+ node.getFirst().getText();
+			((StringBuffer)this.firstValue).append(node.getFirst().getText());
 		}
 		if (node.getSecond() != null) {
-			this.firstValue = (String) this.firstValue
-					+ node.getSecond().getText();
+			((StringBuffer)this.firstValue).append(node.getSecond().getText());
 		}
 		if (node.getPathSep() != null) {
-			this.firstValue = (String) this.firstValue
-					+ node.getPathSep().getText();
+			((StringBuffer)this.firstValue).append(node.getPathSep().getText());
 		}
 
 		node.getPathElement().apply(this);
@@ -1561,12 +1540,17 @@ public class Translation implements Analysis {
 			suffix.apply(this);
 		}
 
-		this.firstValue = ((String) this.firstValue).replace(" ", "");
+		//this.firstValue = ((String) this.firstValue).replace(" ", "");
+		for (int i = 0; i <((StringBuffer)this.firstValue).length(); i++) {
+			if (((StringBuffer)this.firstValue).charAt(i) == ' ') {
+				((StringBuffer)this.firstValue).deleteCharAt(i);
+			}
+		}
 
 	}
 
 	public void caseAPathSuffix(APathSuffix node) {
-		this.firstValue = (String) this.firstValue + node.getPathSep();
+		((StringBuffer)this.firstValue).append(node.getPathSep());
 		node.getPathElement().apply(this);
 
 	}
@@ -1599,7 +1583,6 @@ public class Translation implements Analysis {
 
 	public void caseAProcessorDirective(AProcessorDirective node) {
 		Processor directive = parameterFactory.createProcessor();
-		this.firstValue = null;
 		node.getProcessorValue().apply(this);
 		directive.setProcessor((ProcessorEnum) this.firstValue);
 		((BundleNativeCode) this.entry).addDirective(directive);
@@ -1678,14 +1661,14 @@ public class Translation implements Analysis {
 
 	public void caseAQuotedStringStringEntryValue(
 			AQuotedStringStringEntryValue node) {
-		this.firstValue = node.getQuotedString().getText();
+		this.firstValue = new StringBuffer(node.getQuotedString().getText());
 
 	}
 
 	public void caseAQuotedUrl(AQuotedUrl node) {
-		this.firstValue = "\"";
+		this.firstValue = new StringBuffer("\"");
 		node.getUnquotedUrl().apply(this);
-		this.firstValue = (String) this.firstValue + "\"";
+		((StringBuffer)this.firstValue).append("\"");
 
 	}
 
@@ -1730,11 +1713,11 @@ public class Translation implements Analysis {
 	public void caseARequireBundleSymbolicname(ARequireBundleSymbolicname node) {
 		RequireBundle entry = ManifestFactory.eINSTANCE.createRequireBundle();
 		
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
 
 		this.unresolvedRequireBundleBundle.put(entry, this.bundle);
-		this.unresolvedRequireBundleValue.put(entry, (String) this.firstValue);
+		this.unresolvedRequireBundleValue.put(entry, ((StringBuffer) this.firstValue).toString());
 		
 		this.entry = entry;
 		for (PRequireBundleOptions option : node.getRequireBundleOptions()) {
@@ -1776,7 +1759,6 @@ public class Translation implements Analysis {
 	public void caseAResolutionDirectiveRequireBundleDirective(
 			AResolutionDirectiveRequireBundleDirective node) {
 		if (this.entry instanceof RequireBundle) {
-			this.firstValue = null;
 			node.getResolutionValue().apply(this);
 			Resolution directive = parameterFactory.createResolution();
 			directive.setResolution((ResolutionEnum) this.firstValue);
@@ -1805,9 +1787,9 @@ public class Translation implements Analysis {
 
 	public void caseASelectionFilterDirective(ASelectionFilterDirective node) {
 		SelectionFilter directive = parameterFactory.createSelectionFilter();
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getSelectionFilterValue().apply(this);
-		directive.setExpression((String) this.firstValue);
+		directive.setExpression(((StringBuffer) this.firstValue).toString());
 		((BundleNativeCode) this.entry).addDirective(directive);
 
 	}
@@ -1826,12 +1808,12 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAServiceValue(AServiceValue node) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
 		if (this._import) {
 			ImportService entry = manifestFactory.createImportService();
 			this.unresolvedImportServiceBundle.put(entry, this.bundle);
-			this.unresolvedImportServiceValue.put(entry, (String) this.firstValue);
+			this.unresolvedImportServiceValue.put(entry, ((StringBuffer) this.firstValue).toString());
 			this.manifest.addImportService(entry);
 
 			this.entry = entry;
@@ -1845,7 +1827,7 @@ public class Translation implements Analysis {
 
 			this.unresolvedExportServiceBundle.put(service, this.bundle);
 			this.unresolvedExportServiceValue.put(service,
-					(String) this.firstValue);
+					((StringBuffer) this.firstValue).toString());
 			this.servicesAvailable.add(service);
 
 			entry.setService(service);
@@ -1888,7 +1870,6 @@ public class Translation implements Analysis {
 	public void caseASingletonSymbolicnameDirective(
 			ASingletonSymbolicnameDirective node) {
 		Singleton directive = parameterFactory.createSingleton();
-		this.firstValue = null;
 		node.getBoolean().apply(this);
 		directive.setSingleton((Boolean) this.firstValue);
 		((BundleSymbolicName) this.entry).addDirective(directive);
@@ -1913,23 +1894,21 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAUniqueName(AUniqueName node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getIdentifier().getText();
+		((StringBuffer)this.firstValue).append(node.getIdentifier().getText());
 		for (PUniqueNameSuffix suffix : node.getUniqueNameSuffix()) {
 			suffix.apply(this);
 		}
 	}
 
 	public void caseAUniqueNameSuffix(AUniqueNameSuffix node) {
-		this.firstValue = (String) this.firstValue + node.getDot().getText()
-				+ node.getIdentifier().getText();
+		((StringBuffer)this.firstValue).append(node.getDot().getText()
+				+ node.getIdentifier().getText());
 
 	}
 
 	public void caseAUnquotedStringStringEntryValue(
 			AUnquotedStringStringEntryValue node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getUnquotedString().getText();
+		((StringBuffer)this.firstValue).append(node.getUnquotedString().getText());
 
 	}
 
@@ -1992,7 +1971,6 @@ public class Translation implements Analysis {
 	public void caseAVisibilityDirectiveRequireBundleDirective(
 			AVisibilityDirectiveRequireBundleDirective node) {
 		Visibility directive = parameterFactory.createVisibility();
-		this.firstValue = null;
 		node.getVisibilityValue().apply(this);
 
 		directive.setVisibility((VisibilityEnum) this.firstValue);
@@ -2043,7 +2021,6 @@ public class Translation implements Analysis {
 				}
 			}
 		}
-
 		return _package;
 	}
 
@@ -2847,10 +2824,8 @@ public class Translation implements Analysis {
 	}
 
 	public void caseANumberQualifierVersion(ANumberQualifierVersion node) {
-		if (this.firstValue instanceof Version) {
 			((Version) this.firstValue)
 					.setQualifier(node.getNumber().getText());
-		}
 
 	}
 
@@ -2883,15 +2858,15 @@ public class Translation implements Analysis {
 
 	public void caseAIdentifierUniqueNameWildcardSuffix(
 			AIdentifierUniqueNameWildcardSuffix node) {
-		this.firstValue = (String) this.firstValue + node.getDot().getText()
-				+ node.getIdentifier().getText();
+		((StringBuffer)this.firstValue).append(node.getDot().getText()
+				+ node.getIdentifier().getText());
 
 	}
 
 	public void caseAOptionalUniqueNameWildcardSuffix(
 			AOptionalUniqueNameWildcardSuffix node) {
-		this.firstValue = (String) this.firstValue + node.getDot().getText()
-				+ node.getOptional().getText();
+		((StringBuffer)this.firstValue).append(node.getDot().getText()
+				+ node.getOptional().getText());
 
 	}
 
@@ -2907,15 +2882,13 @@ public class Translation implements Analysis {
 
 	public void caseAIdentifierUniqueNameWildcardCommons(
 			AIdentifierUniqueNameWildcardCommons node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getIdentifier().getText();
+		((StringBuffer)this.firstValue).append(node.getIdentifier().getText());
 
 	}
 
 	public void caseAOptionalUniqueNameWildcardCommons(
 			AOptionalUniqueNameWildcardCommons node) {
-		this.firstValue = (String) this.firstValue
-				+ node.getOptional().getText();
+		((StringBuffer)this.firstValue).append(node.getOptional().getText());
 
 	}
 
@@ -2925,21 +2898,21 @@ public class Translation implements Analysis {
 
 	public void caseAExportPackageUseExcludeIncludeIdentifier(
 			AExportPackageUseExcludeIncludeIdentifier node) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUniqueNameWildcard().apply(this);
 		this.registerUnresolvedExportPackageDirective(
 				(ExportPackageDirective) this.secondValue,
-				(String) this.firstValue);
+				((StringBuffer) this.firstValue).toString());
 
 	}
 
 	public void caseAUseExcludeIncludeManyElementsExportPackageUseExcludeIncludeValue(
 			AUseExcludeIncludeManyElementsExportPackageUseExcludeIncludeValue node) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUniqueNameWildcard().apply(this);
 		this.registerUnresolvedExportPackageDirective(
 				(ExportPackageDirective) this.secondValue,
-				(String) this.firstValue);
+				((StringBuffer) this.firstValue).toString());
 
 		for (PExportPackageUseExcludeIncludeIdentifier identifier : node
 				.getExportPackageUseExcludeIncludeIdentifier()) {
@@ -2952,11 +2925,11 @@ public class Translation implements Analysis {
 
 	public void caseAUseExcludeIncludeOneElementExportPackageUseExcludeIncludeValue(
 			AUseExcludeIncludeOneElementExportPackageUseExcludeIncludeValue node) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		node.getUniqueNameWildcard().apply(this);
 		this.registerUnresolvedExportPackageDirective(
 				(ExportPackageDirective) this.secondValue,
-				(String) this.firstValue);
+				((StringBuffer) this.firstValue).toString());
 		((ExportPackage) this.entry)
 				.addDirective((ExportPackageDirective) this.secondValue);
 
@@ -3049,11 +3022,11 @@ public class Translation implements Analysis {
 	}
 
 	private void setTargetToClassPath(PTarget target) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		target.apply(this);
-		if (this.firstValue != ".") {
+		if (!((StringBuffer) this.firstValue).toString().equals(".")) {
 			SystemEntry systemEntry = this.bundle.getFolder().getEntry(
-					(String) this.firstValue);
+					((StringBuffer) this.firstValue).toString());
 			if (systemEntry != null) {
 				if (systemEntry instanceof Folder) {
 					Package _package = this
@@ -3097,14 +3070,14 @@ public class Translation implements Analysis {
 					this.unresolvedBundleClassPathBundle.put((BundleClassPath) this.entry, this.bundle);
 					list = new ArrayList<String>();
 				}
-				list.add((String)this.firstValue);
+				list.add(((StringBuffer) this.firstValue).toString());
 				this.unresolvedBundleClassPathValue.put((BundleClassPath) this.entry, list);		
 				
 				this.log.put(this.bundle, this.log.get(this.bundle)
 						+ this.firstValue
 						+ " is not contained into this bundle." + "\n");
 			}
-		} else if (this.firstValue == ".") {
+		} else if (((StringBuffer) this.firstValue).toString().equals(".")) {
 			for (SystemEntry entry : this.bundle.getFolder().getEntries()) {
 				if (entry instanceof Folder) {
 					Package _package = this
@@ -3131,10 +3104,10 @@ public class Translation implements Analysis {
 	}
 
 	private void setTargetToNativeCode(PTarget target) {
-		this.firstValue = "";
+		this.firstValue = new StringBuffer("");
 		target.apply(this);
 		SystemEntry systemEntry = this.bundle.getFolder().getEntry(
-				(String) this.firstValue);
+				((StringBuffer) this.firstValue).toString());
 		if (systemEntry != null && systemEntry instanceof File) {
 			((BundleNativeCode) this.entry).addFile((File) systemEntry);
 		} else {

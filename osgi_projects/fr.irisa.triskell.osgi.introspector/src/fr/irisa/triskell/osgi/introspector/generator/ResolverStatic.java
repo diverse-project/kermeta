@@ -4,6 +4,7 @@ import jar.Class;
 import jar.Package;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -44,16 +45,13 @@ public class ResolverStatic implements Resolver {
 	 * framework.
 	 */
 	public void resolveFragmentHost(framework.Framework framework, Map<Bundle, String> fragmentHosts ) {
-		/*Map<Bundle, String> fragmentHosts = this.translation
-				.getFragmentHostReferences();*/
-		Map<Bundle, String> fragmentHostsTmp = fragmentHosts;
+		Map<Bundle, String> fragmentHostsTmp = new HashMap<Bundle, String>();
 		for (Bundle fragment : fragmentHosts.keySet()) {
 			boolean find = false;
 			List<Bundle> hostBundles = new ArrayList<Bundle>();
 			for (Bundle bundle : framework.getBundles()) {
 				if (fragmentHosts.get(fragment).equals(
-						bundle.getManifest().getBundleSymbolicName()
-								.getSymbolicName())) {
+						bundle.getSymbolicName())) {
 					hostBundles.add(bundle);
 					find = true;
 				}
@@ -81,7 +79,7 @@ public class ResolverStatic implements Resolver {
 						}
 						value = value.replace("(", "").replace("[", "")
 								.replace(")", "").replace("]", "").replace(
-										"\"", "");
+										"\"", "").replace(" ", "");
 						String[] versionsValue = value.split(",");
 						if (versionsValue.length == 2) {
 							try {
@@ -138,30 +136,14 @@ public class ResolverStatic implements Resolver {
 							if (bundleVersionMax == null
 									|| versionHost.greaterThan(bundleVersionMax
 											.getManifest().getBundleVersion()
-											.getVersion(), true/*
-																 * unused
-																 * because it's
-																 * impossible to
-																 * have two
-																 * bundle with
-																 * the same
-																 * symbolic name
-																 * and the same
-																 * version
-																 */)) {
+											.getVersion(), true)) {
 								bundleVersionMax = host;
 							}
 						}
 					} else if (bundleVersionMax == null
 							|| versionHost.greaterThan(bundleVersionMax
 									.getManifest().getBundleVersion()
-									.getVersion(), true/*
-														 * unused because it's
-														 * impossible to have
-														 * two bundle with the
-														 * same symbolic name
-														 * and the same version
-														 */)) {
+									.getVersion(), true)) {
 						bundleVersionMax = host;
 					}
 				}
@@ -225,7 +207,7 @@ public class ResolverStatic implements Resolver {
 								+ " is not a valid package." + "\n"
 								+ "Maybe the folder "
 								+ reference.replace(".", "/")
-								+ " doesn't contain class file." + "\n");
+								+ " doesn't contain class file or doesn't exist." + "\n");
 						exportPackageMaybeUnvalid.add(exportPackage);
 					}
 				}
@@ -333,6 +315,7 @@ public class ResolverStatic implements Resolver {
 					serviceReference);
 			if (element != null) {
 				service.setInterface(element);
+			} else {
 				tmp.add(service);
 			}
 		}
@@ -385,7 +368,7 @@ public class ResolverStatic implements Resolver {
 								+ " is not a valid package." + "\n"
 								+ "Maybe the folder "
 								+ reference.replace(".", "/")
-								+ " don't contain class file." + "\n");
+								+ " don't contain class file or doesn't exist." + "\n");
 						excludePackageMaybeUnvalid.add(excludePackage);
 					}
 				}
@@ -439,7 +422,7 @@ public class ResolverStatic implements Resolver {
 								+ " is not a valid package." + "\n"
 								+ "Maybe the folder "
 								+ reference.replace(".", "/")
-								+ " don't contain class file." + "\n");
+								+ " don't contain class file or doesn't exist." + "\n");
 						includePackageMaybeUnvalid.add(includePackage);
 					}
 				}

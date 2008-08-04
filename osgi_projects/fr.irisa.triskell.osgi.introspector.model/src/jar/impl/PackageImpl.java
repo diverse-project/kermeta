@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.5 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: PackageImpl.java,v 1.6 2008-08-04 09:30:44 edaubert Exp $
  */
 package jar.impl;
 
@@ -301,7 +301,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 	}
 
 	public void addPackage(Package _package) {
-		
 		if (_package.getFullPath().contains(this.getFullPath())) {
 			String[] packagesClazz = _package.getFullPath().split("\\.");
 			String[] packages = this.getFullPath().split("\\.");
@@ -322,7 +321,7 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 				if (p == null) {
 					getSubPackages().add(_package);
 				} else {
-					// To prevent ConcurrentModificationException, we nedd to use integer and not iterator
+					// To prevent ConcurrentModificationException, we need to use integer and not iterator
 					// because package are detach from there parent and next attach into another parent.
 					// so _package.getSubPackages() is modified.
 					int i = 0;
@@ -330,7 +329,10 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					while (i < size) {
 						Package tmp = _package.getSubPackages().get(i);
 						p.addPackage(tmp);
-						size -= 1;
+						if (size == _package.getSubPackages().size()) {
+							i++;
+						}
+						size = _package.getSubPackages().size();
 					}
 					
 					i = 0;
@@ -338,7 +340,10 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					while (i < size) {
 						Class tmp = _package.getClasses().get(i);
 						p.addClass(tmp);
-						size -= 1;
+						if (size == _package.getSubPackages().size()) {
+							i++;
+						}
+						size = _package.getSubPackages().size();
 					}
 				}
 			} else {
@@ -378,7 +383,7 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 			}
 			if (nextPackage == packagesClazz.length - 1) {
 				for (Package tmp : getSubPackages()) {
-					if (tmp.getFullPath().equals(fullPath + ".")) {
+					if (tmp.getFullPath().equals(fullPath)) {
 						return tmp;
 					}
 				}
@@ -388,9 +393,15 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 						.iterator();
 				while (packagesIterator.hasNext()) {
 					Package p = packagesIterator.next();
-					if (p.getFullPath().equals(
-							getFullPath() + _packageName + ".")) {
-						return p.getPackage(fullPath);
+					if (getFullPath().equals("")) {
+						if (p.getFullPath().equals(_packageName)) {
+							return p.getPackage(fullPath);
+						}
+					} else {
+						if (p.getFullPath().equals(
+								getFullPath() + "." + _packageName)) {
+							return p.getPackage(fullPath);
+						}
 					}
 				}
 			}
