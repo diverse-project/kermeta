@@ -1178,14 +1178,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseABundleCategoryEntry(ABundleCategoryEntry node)
     {
         inABundleCategoryEntry(node);
-        {
-            List<PParameter> copy = new ArrayList<PParameter>(node.getParameter());
-            Collections.reverse(copy);
-            for(PParameter e : copy)
-            {
-                e.apply(this);
-            }
-        }
         if(node.getBundleCategoryEntryValue() != null)
         {
             node.getBundleCategoryEntryValue().apply(this);
@@ -1219,9 +1211,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
                 e.apply(this);
             }
         }
-        if(node.getStringEntryValue() != null)
         {
-            node.getStringEntryValue().apply(this);
+            List<PParameter> copy = new ArrayList<PParameter>(node.getParameter());
+            Collections.reverse(copy);
+            for(PParameter e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        if(node.getSimpleStringValue() != null)
+        {
+            node.getSimpleStringValue().apply(this);
         }
         outABundleCategoryEntryValue(node);
     }
@@ -1240,9 +1240,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseACategoryValue(ACategoryValue node)
     {
         inACategoryValue(node);
-        if(node.getStringEntryValue() != null)
         {
-            node.getStringEntryValue().apply(this);
+            List<PParameter> copy = new ArrayList<PParameter>(node.getParameter());
+            Collections.reverse(copy);
+            for(PParameter e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        if(node.getSimpleStringValue() != null)
+        {
+            node.getSimpleStringValue().apply(this);
         }
         if(node.getComma() != null)
         {

@@ -1177,13 +1177,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getBundleCategoryEntryValue().apply(this);
         }
-        {
-            List<PParameter> copy = new ArrayList<PParameter>(node.getParameter());
-            for(PParameter e : copy)
-            {
-                e.apply(this);
-            }
-        }
         outABundleCategoryEntry(node);
     }
 
@@ -1201,9 +1194,16 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseABundleCategoryEntryValue(ABundleCategoryEntryValue node)
     {
         inABundleCategoryEntryValue(node);
-        if(node.getStringEntryValue() != null)
+        if(node.getSimpleStringValue() != null)
         {
-            node.getStringEntryValue().apply(this);
+            node.getSimpleStringValue().apply(this);
+        }
+        {
+            List<PParameter> copy = new ArrayList<PParameter>(node.getParameter());
+            for(PParameter e : copy)
+            {
+                e.apply(this);
+            }
         }
         {
             List<PCategoryValue> copy = new ArrayList<PCategoryValue>(node.getCategoryValue());
@@ -1233,9 +1233,16 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getComma().apply(this);
         }
-        if(node.getStringEntryValue() != null)
+        if(node.getSimpleStringValue() != null)
         {
-            node.getStringEntryValue().apply(this);
+            node.getSimpleStringValue().apply(this);
+        }
+        {
+            List<PParameter> copy = new ArrayList<PParameter>(node.getParameter());
+            for(PParameter e : copy)
+            {
+                e.apply(this);
+            }
         }
         outACategoryValue(node);
     }

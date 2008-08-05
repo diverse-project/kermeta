@@ -35,6 +35,33 @@ Helpers
 	part_simple_string_value	= char_not_eol_quote_comma_semicolon;
 	part_quoted_string			= char_not_eol_quote;
 	all_string_core				= char_not_eol_quote;
+	/* Definie this beacause OSGi implementation maybe use ignore case to find Manifest entry headers.*/
+	a = 'a' | 'A';
+	z = 'z' | 'Z';
+	e = 'e' | 'E';
+	r = 'r' | 'R';
+	t = 't' | 'T';
+	y = 'y' | 'Y';
+	u = 'u' | 'U';
+	i = 'i' | 'I';
+	o = 'o' | 'O';
+	p = 'p' | 'P';
+	q = 'q' | 'Q';
+	s = 's' | 'S';
+	d = 'd' | 'D';
+	f = 'f' | 'F';
+	g = 'g' | 'G';
+	h = 'h' | 'H';
+	j = 'j' | 'J';
+	k = 'k' | 'K';
+	l = 'l' | 'L';
+	m = 'm' | 'M';
+	w = 'w' | 'W';
+	x = 'x' | 'X';
+	c = 'c' | 'C';
+	v = 'v' | 'V';
+	b = 'b' | 'B';
+	n = 'n' | 'N';
 	
 
 States
@@ -133,35 +160,35 @@ Tokens
 	{selection_filter_directive}greater						= '>' ;
 	{selection_filter_directive}less						= '<' ;
 	{selection_filter_directive}not_equals					= '!=' ;
-	{url_state->url}url_http		= 'http://' ;
+	{url_state->url}url_http		= 'http://' | 'https://' ;
 	{url_state->url}url_ftp		= 'ftp://' ;
 	{url_state->url}url_file		= 'file:///' | 'file:' ;
-	
-	  	
-	{manifest_entry->bundle_activationpolicy_state}					bundle_activationpolicy		= 'Bundle-ActivationPolicy: ' blank*;
-	{manifest_entry->bundle_activator_state}						bundle_activator			= 'Bundle-Activator: ' blank*;
-	{manifest_entry->simple_entry_state}							bundle_category				= 'Bundle-Category: ' blank*;
-	{manifest_entry->classpath_entry_state}							bundle_classpath			= 'Bundle-ClassPath: ' blank*;
-	{manifest_entry->all_string_state}								bundle_contactaddress 		= 'Bundle-ContactAddress: ' blank*;
-	{manifest_entry->all_string_state}								bundle_copyright 			= 'Bundle-Copyright: ' blank*;
-	{manifest_entry->all_string_state}								bundle_description			= 'Bundle-Description: ' blank*;
-	{manifest_entry->url_state}										bundle_docurl				= 'Bundle-DocURL: ' | 'Bundle-DocUrl: ' blank*;
-	{manifest_entry->all_string_state}								bundle_localization			= 'Bundle-Localization: ' blank*;
-	{manifest_entry->manifestversion_state}							bundle_manifestversion		= 'Bundle-ManifestVersion: ' blank*;
-	{manifest_entry->all_string_state}								bundle_name					= 'Bundle-Name: ' blank*;
-	{manifest_entry->bundle_nativecode_state}						bundle_nativecode			= 'Bundle-NativeCode: ' blank*;
-	{manifest_entry->bundle_requiredexecutionenvironment_state}		bundle_requiredexecutionenvironment = 'Bundle-RequiredExecutionEnvironment: ' blank*;
-	{manifest_entry->bundle_symbolicname_state}						bundle_symbolicname			= 'Bundle-SymbolicName: ' blank*;
-	{manifest_entry->url_state}										bundle_updatelocation		= 'Bundle-UpdateLocation: ' blank*;
-	{manifest_entry->all_string_state}								bundle_vendor				= 'Bundle-Vendor: ' blank*;
-	{manifest_entry->version_state}									bundle_version				= 'Bundle-Version: ' blank*;
-	{manifest_entry->dynamicimport_package_state}					dynamicimport_package		= 'DynamicImport-Package: ' blank*;
-	{manifest_entry->export_package_state}							export_package				= 'Export-Package: ' | 'Provide-Package: ' blank*;
-	{manifest_entry->export_service_state}							export_service				= 'Export-Service: ' blank*;
-	{manifest_entry->fragment_host_state}							fragment_host				= 'Fragment-Host: ' blank*;
-	{manifest_entry->import_package_state}							import_package				= 'Import-Package: ' blank*;
-	{manifest_entry->import_service_state}							import_service				= 'Import-Service: ' blank*;
-	{manifest_entry->require_bundle_state}							require_bundle				= 'Require-Bundle: '  blank*;
+		
+	/* this headers is define to valid with ignoring case like it's doing with knopflerfish (for example).*/
+	{manifest_entry->bundle_activationpolicy_state}					bundle_activationpolicy		= b u n d l e '-' a c t i v a t i o n p o l i c y ': ' blank*;//'Bundle-ActivationPolicy: ' blank*;
+	{manifest_entry->bundle_activator_state}						bundle_activator			= b u n d l e '-' a c t i v a t o r ': ' blank*;//'Bundle-Activator: ' blank*;
+	{manifest_entry->simple_entry_state}							bundle_category				= b u n d l e '-' c a t e g o r y ': ' blank*;//'Bundle-Category: ' blank*;
+	{manifest_entry->classpath_entry_state}							bundle_classpath			= b u n d l e '-' c l a s s p a t h ': ' blank*;//'Bundle-ClassPath: ' blank*;
+	{manifest_entry->all_string_state}								bundle_contactaddress 		= b u n d l e '-' c o n t a c t a d d r  e s s ': ' blank*;//'Bundle-ContactAddress: ' blank*;
+	{manifest_entry->all_string_state}								bundle_copyright 			= b u n d l e '-' c o p y r i g h t ': ' blank*;//'Bundle-Copyright: ' blank*;
+	{manifest_entry->all_string_state}								bundle_description			= b u n d l e '-' d e s c r i p t i o n ': ' blank*;//'Bundle-Description: ' blank*;
+	{manifest_entry->url_state}										bundle_docurl				= b u n d l e '-' d o c u r l ': ' blank*;//'Bundle-DocURL: ' blank*;
+	{manifest_entry->all_string_state}								bundle_localization			= b u n d l e '-' l o c a l i z a t i o n ': ' blank*;//'Bundle-Localization: ' blank*;
+	{manifest_entry->manifestversion_state}							bundle_manifestversion		= b u n d l e '-' m a n i f e s t v e r s i o n ': ' blank*;//'Bundle-ManifestVersion: ' blank*;
+	{manifest_entry->all_string_state}								bundle_name					= b u n d l e '-' n a m e ': ' blank*;//'Bundle-Name: ' blank*;
+	{manifest_entry->bundle_nativecode_state}						bundle_nativecode			= b u n d l e '-' n a t i  v e c o d e ': ' blank*;//'Bundle-NativeCode: ' blank*;
+	{manifest_entry->bundle_requiredexecutionenvironment_state}		bundle_requiredexecutionenvironment = b u n d l e '-' r e q u i r e d e x e c u t i o n e n v i r o n m e n t ': ' blank*;//'Bundle-RequiredExecutionEnvironment: ' blank* | 'Bundle-Requiredexecutionenvironment: ' blank*;
+	{manifest_entry->bundle_symbolicname_state}						bundle_symbolicname			= b u n d l e '-' s y m b o l i c n a m e ': ' blank*;//'Bundle-SymbolicName: ' blank* | 'Bundle-Symbolicname: ' blank*;
+	{manifest_entry->url_state}										bundle_updatelocation		= b u n d l e '-' u p d a t e l o c a t i o n ': ' blank*;//'Bundle-UpdateLocation: ' blank* | 'Bundle-Updatelocation: ' blank*;
+	{manifest_entry->all_string_state}								bundle_vendor				= b u n d l e '-' v e n d o r ': ' blank*;//'Bundle-Vendor: ' blank*;
+	{manifest_entry->version_state}									bundle_version				= b u n d l e '-' v e r s i o n ': ' blank*;//'Bundle-Version: ' blank*;
+	{manifest_entry->dynamicimport_package_state}					dynamicimport_package		= d y n a m i c i m p o r t '-' p a c k a g e ': ' blank*;//'DynamicImport-Package: ' blank* | 'Dynamicimport-Package: ' blank*;
+	{manifest_entry->export_package_state}							export_package				= e x p o r t '-' p a c k a g e ': ' blank* | /*to manage previous OSGi specification*/p r o v i d e '-' p a c k a g e ': ' blank*;//'Export-Package: ' | 'Provide-Package: ' blank*;
+	{manifest_entry->export_service_state}							export_service				= e x p o r t '-' s e r v i c e ': ' blank*;//'Export-Service: ' blank*;
+	{manifest_entry->fragment_host_state}							fragment_host				= f r a g m e n t '-' h o s t ': ' blank*;//'Fragment-Host: ' blank*;
+	{manifest_entry->import_package_state}							import_package				= i m p o r t '-' p a c k a g e ': ' blank*;//'Import-Package: ' blank*;
+	{manifest_entry->import_service_state}							import_service				= i m p o r t '-' s e r v i c e ': ' blank*;//'Import-Service: ' blank*;
+	{manifest_entry->require_bundle_state}							require_bundle				= r e q u i r e '-' b u n d l e ': ' blank*;//'Require-Bundle: '  blank*;
 	
 	{manifest_entry->digest_entry_state}							entry_digest 				= alphanum+ '-Digest' ': ' blank* ;
 	{manifest_entry->simple_entry_state}							entry 						= alphanum+ ': ' blank*;
@@ -467,11 +494,11 @@ Productions
 		unique_name parameter *;
 		
 	bundle_category_entry =
-		bundle_category bundle_category_entry_value ? parameter * ;
+		bundle_category bundle_category_entry_value ?;
 	bundle_category_entry_value =
-		string_entry_value category_value *;
+		simple_string_value  parameter * category_value *;
 	category_value =
-		comma string_entry_value ;
+		comma simple_string_value parameter *;
 	
 	bundle_classpath_entry =
 		bundle_classpath bundle_classpath_entry_value ?;

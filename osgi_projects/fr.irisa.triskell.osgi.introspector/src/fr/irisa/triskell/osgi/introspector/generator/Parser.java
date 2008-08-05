@@ -30,11 +30,11 @@ import framework.Bundle;
 public class Parser {
 
 	private Translation translation;
-	private Map<Bundle, String> log;
+	//private Map<Bundle, String> log;
 
 	public Parser(Map<Bundle, String> log) {
 		this.translation = new Translation(log);
-		this.log = log;
+		//this.log = log;
 	}
 
 	/**
@@ -66,18 +66,24 @@ public class Parser {
 		return this.translation.isValidTranslation();
 		} catch (ParserException e) {
 			// must not appear
+			// TODO enlever sysout
+			System.out.println(manifestContent);
+			System.out.println(e.getToken());
 			OSGiIntrospectorUtil.log(Level.SEVERE, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
 					+ bundle.getLocation() + ".");
+			e.printStackTrace();
 			return false;
 		} catch (LexerException e) {
 			// must not appear
 			OSGiIntrospectorUtil.log(Level.SEVERE, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
 					+ bundle.getLocation() + ".");
+			e.printStackTrace();
 			return false;
 		} catch (IOException e) {
 			// must not appear
 			OSGiIntrospectorUtil.log(Level.SEVERE, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
 					+ bundle.getLocation() + ".");
+			e.printStackTrace();
 			return false;
 		}
 	}

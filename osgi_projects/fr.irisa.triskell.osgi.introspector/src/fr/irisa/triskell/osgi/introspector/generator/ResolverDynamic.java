@@ -1,22 +1,14 @@
 package fr.irisa.triskell.osgi.introspector.generator;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.Constants;
-
-import manifest.BadVersionValue;
 import manifest.BundleActivator;
 import manifest.ExportPackage;
 import manifest.ImportPackage;
 import manifest.ImportService;
-import manifest.ManifestFactory;
 import manifest.RequireBundle;
 import manifest.Service;
-import manifest.Version;
-import option.AttributEntry;
 import option.ExcludeClasses;
 import option.ExcludePackages;
 import option.IncludeClasses;
@@ -26,12 +18,6 @@ import framework.Bundle;
 import framework.Framework;
 
 public class ResolverDynamic extends ResolverStatic implements Resolver {
-
-	private BundleContext context;
-	
-	public ResolverDynamic(BundleContext context) {
-		this.context = context;
-	}
 	
 	public Map<Bundle, String> getLog() {
 		return super.getLog();
@@ -45,7 +31,6 @@ public class ResolverDynamic extends ResolverStatic implements Resolver {
 	public void resolveFragmentHost(Framework framework,
 			Map<Bundle, String> fragmentHosts) {
 		super.resolveFragmentHost(framework, fragmentHosts);
-		
 	}
 
 	public void resolveExportPackage(
@@ -66,12 +51,6 @@ public class ResolverDynamic extends ResolverStatic implements Resolver {
 			Map<IncludeClasses, List<String>> includes,
 			Map<IncludeClasses, ExportPackage> exportPackages) {
 		super.resolveExportPackageInclude(includes, exportPackages);
-		
-	}
-
-	public void resolveExportService(Map<Service, Bundle> bundles,
-			Map<Service, String> services) {
-		super.resolveExportService(bundles, services);
 		
 	}
 
@@ -101,12 +80,18 @@ public class ResolverDynamic extends ResolverStatic implements Resolver {
 		
 	}
 
-	public void resolveExportPackageUses(Map<Uses, List<String>> uses, Map<Uses, Bundle> bundles) {
-		super.resolveExportPackageUses(uses, bundles);
-	}
-
 	public void resolveImportPackage(Map<ImportPackage, List<String>> importPackages, Map<ImportPackage, Bundle> bundles) {
 		super.resolveImportPackage(importPackages, bundles);
+	}
+
+	public void resolveExportService(Map<Service, Bundle> bundles,
+			Map<Service, String> services) {
+		super.resolveExportService(bundles, services);
+		
+	}
+
+	public void resolveExportPackageUses(Map<Uses, List<String>> uses, Map<Uses, Bundle> bundles) {
+		super.resolveExportPackageUses(uses, bundles);
 	}
 
 	public void resolveImportService(Map<ImportService, String> importServices,

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ServiceImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: ServiceImpl.java,v 1.3 2008-08-05 16:10:56 edaubert Exp $
  */
 package manifest.impl;
 
@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link manifest.impl.ServiceImpl#getInterface <em>Interface</em>}</li>
+ *   <li>{@link manifest.impl.ServiceImpl#getInterfaceName <em>Interface Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,6 +37,25 @@ public class ServiceImpl extends EObjectImpl implements Service {
 	 * @ordered
 	 */
 	protected jar.Class interface_;
+
+	/**
+	 * The default value of the '{@link #getInterfaceName() <em>Interface Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInterfaceName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String INTERFACE_NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getInterfaceName() <em>Interface Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInterfaceName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String interfaceName = INTERFACE_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -90,6 +110,27 @@ public class ServiceImpl extends EObjectImpl implements Service {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getInterfaceName() {
+		return interfaceName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInterfaceName(String newInterfaceName) {
+		String oldInterfaceName = interfaceName;
+		interfaceName = newInterfaceName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.SERVICE__INTERFACE_NAME, oldInterfaceName, interfaceName));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -99,6 +140,8 @@ public class ServiceImpl extends EObjectImpl implements Service {
 			case ManifestPackage.SERVICE__INTERFACE:
 				if (resolve) return getInterface();
 				return basicGetInterface();
+			case ManifestPackage.SERVICE__INTERFACE_NAME:
+				return getInterfaceName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,6 +155,9 @@ public class ServiceImpl extends EObjectImpl implements Service {
 		switch (featureID) {
 			case ManifestPackage.SERVICE__INTERFACE:
 				setInterface((jar.Class)newValue);
+				return;
+			case ManifestPackage.SERVICE__INTERFACE_NAME:
+				setInterfaceName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,6 +173,9 @@ public class ServiceImpl extends EObjectImpl implements Service {
 			case ManifestPackage.SERVICE__INTERFACE:
 				setInterface((jar.Class)null);
 				return;
+			case ManifestPackage.SERVICE__INTERFACE_NAME:
+				setInterfaceName(INTERFACE_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -140,8 +189,26 @@ public class ServiceImpl extends EObjectImpl implements Service {
 		switch (featureID) {
 			case ManifestPackage.SERVICE__INTERFACE:
 				return interface_ != null;
+			case ManifestPackage.SERVICE__INTERFACE_NAME:
+				return INTERFACE_NAME_EDEFAULT == null ? interfaceName != null : !INTERFACE_NAME_EDEFAULT.equals(interfaceName);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (interfaceName: ");
+		result.append(interfaceName);
+		result.append(')');
+		return result.toString();
 	}
 
 } // ServiceImpl

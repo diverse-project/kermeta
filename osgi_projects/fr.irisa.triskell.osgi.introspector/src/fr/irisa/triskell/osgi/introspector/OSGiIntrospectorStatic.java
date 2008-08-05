@@ -22,6 +22,7 @@ import framework.Bundle;
 import framework.Framework;
 import framework.FrameworkFactory;
 
+// TODO gestion du log
 public class OSGiIntrospectorStatic {
 	private Framework framework;
 	private Map<Bundle, String> log;

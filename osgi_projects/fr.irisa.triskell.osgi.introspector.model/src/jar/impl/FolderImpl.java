@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FolderImpl.java,v 1.6 2008-08-04 13:46:15 edaubert Exp $
+ * $Id: FolderImpl.java,v 1.7 2008-08-05 16:10:57 edaubert Exp $
  */
 package jar.impl;
 
@@ -146,7 +146,7 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 			String[] packagesClazz = entry.getFullPath().split("/");
 			String[] packages = this.getFullPath().split("/");
 			int nextPackage;
-			if (packages[packages.length - 1] == "") {
+			if (packages[packages.length - 1].equals("")) {
 				nextPackage = packages.length - 1;
 			} else {
 				nextPackage = packages.length;
@@ -200,7 +200,7 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 			String[] packagesElement = fullPath.split("/");
 			String[] foldersNames = this.getFullPath().split("/");
 			int nextFolder;
-			if (foldersNames[foldersNames.length - 1] == "") {
+			if (foldersNames[foldersNames.length - 1].equals("")) {
 				nextFolder = foldersNames.length - 1;
 			} else {
 				nextFolder = foldersNames.length;

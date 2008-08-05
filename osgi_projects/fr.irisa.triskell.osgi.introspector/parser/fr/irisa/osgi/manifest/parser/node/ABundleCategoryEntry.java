@@ -2,7 +2,6 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
-import java.util.*;
 import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
@@ -10,7 +9,6 @@ public final class ABundleCategoryEntry extends PBundleCategoryEntry
 {
     private TBundleCategory _bundleCategory_;
     private PBundleCategoryEntryValue _bundleCategoryEntryValue_;
-    private final LinkedList<PParameter> _parameter_ = new LinkedList<PParameter>();
 
     public ABundleCategoryEntry()
     {
@@ -19,15 +17,12 @@ public final class ABundleCategoryEntry extends PBundleCategoryEntry
 
     public ABundleCategoryEntry(
         @SuppressWarnings("hiding") TBundleCategory _bundleCategory_,
-        @SuppressWarnings("hiding") PBundleCategoryEntryValue _bundleCategoryEntryValue_,
-        @SuppressWarnings("hiding") List<PParameter> _parameter_)
+        @SuppressWarnings("hiding") PBundleCategoryEntryValue _bundleCategoryEntryValue_)
     {
         // Constructor
         setBundleCategory(_bundleCategory_);
 
         setBundleCategoryEntryValue(_bundleCategoryEntryValue_);
-
-        setParameter(_parameter_);
 
     }
 
@@ -36,8 +31,7 @@ public final class ABundleCategoryEntry extends PBundleCategoryEntry
     {
         return new ABundleCategoryEntry(
             cloneNode(this._bundleCategory_),
-            cloneNode(this._bundleCategoryEntryValue_),
-            cloneList(this._parameter_));
+            cloneNode(this._bundleCategoryEntryValue_));
     }
 
     public void apply(Switch sw)
@@ -95,33 +89,12 @@ public final class ABundleCategoryEntry extends PBundleCategoryEntry
         this._bundleCategoryEntryValue_ = node;
     }
 
-    public LinkedList<PParameter> getParameter()
-    {
-        return this._parameter_;
-    }
-
-    public void setParameter(List<PParameter> list)
-    {
-        this._parameter_.clear();
-        this._parameter_.addAll(list);
-        for(PParameter e : list)
-        {
-            if(e.parent() != null)
-            {
-                e.parent().removeChild(e);
-            }
-
-            e.parent(this);
-        }
-    }
-
     @Override
     public String toString()
     {
         return ""
             + toString(this._bundleCategory_)
-            + toString(this._bundleCategoryEntryValue_)
-            + toString(this._parameter_);
+            + toString(this._bundleCategoryEntryValue_);
     }
 
     @Override
@@ -137,11 +110,6 @@ public final class ABundleCategoryEntry extends PBundleCategoryEntry
         if(this._bundleCategoryEntryValue_ == child)
         {
             this._bundleCategoryEntryValue_ = null;
-            return;
-        }
-
-        if(this._parameter_.remove(child))
-        {
             return;
         }
 
@@ -162,24 +130,6 @@ public final class ABundleCategoryEntry extends PBundleCategoryEntry
         {
             setBundleCategoryEntryValue((PBundleCategoryEntryValue) newChild);
             return;
-        }
-
-        for(ListIterator<PParameter> i = this._parameter_.listIterator(); i.hasNext();)
-        {
-            if(i.next() == oldChild)
-            {
-                if(newChild != null)
-                {
-                    i.set((PParameter) newChild);
-                    newChild.parent(this);
-                    oldChild.parent(null);
-                    return;
-                }
-
-                i.remove();
-                oldChild.parent(null);
-                return;
-            }
         }
 
         throw new RuntimeException("Not a child.");

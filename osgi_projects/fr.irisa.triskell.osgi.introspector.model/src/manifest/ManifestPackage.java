@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestPackage.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: ManifestPackage.java,v 1.4 2008-08-05 16:10:55 edaubert Exp $
  */
 package manifest;
 
@@ -76,12 +76,21 @@ public interface ManifestPackage extends EPackage {
 	int SERVICE__INTERFACE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Interface Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__INTERFACE_NAME = 1;
+
+	/**
 	 * The number of structural features of the '<em>Service</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_FEATURE_COUNT = 1;
+	int SERVICE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link manifest.impl.VersionImpl <em>Version</em>}' class.
@@ -1751,6 +1760,17 @@ public interface ManifestPackage extends EPackage {
 	EReference getService_Interface();
 
 	/**
+	 * Returns the meta object for the attribute '{@link manifest.Service#getInterfaceName <em>Interface Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Interface Name</em>'.
+	 * @see manifest.Service#getInterfaceName()
+	 * @see #getService()
+	 * @generated
+	 */
+	EAttribute getService_InterfaceName();
+
+	/**
 	 * Returns the meta object for class '{@link manifest.Version <em>Version</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Version</em>'.
@@ -2769,6 +2789,14 @@ public interface ManifestPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SERVICE__INTERFACE = eINSTANCE.getService_Interface();
+
+		/**
+		 * The meta object literal for the '<em><b>Interface Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE__INTERFACE_NAME = eINSTANCE.getService_InterfaceName();
 
 		/**
 		 * The meta object literal for the '{@link manifest.impl.VersionImpl <em>Version</em>}' class.

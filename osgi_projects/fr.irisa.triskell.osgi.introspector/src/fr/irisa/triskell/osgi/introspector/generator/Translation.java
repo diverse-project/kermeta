@@ -16,6 +16,8 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import org.osgi.framework.Constants;
+
 import manifest.BundleActivationPolicy;
 import manifest.BundleActivator;
 import manifest.BundleCategory;
@@ -295,10 +297,19 @@ public class Translation implements Analysis {
 
 	public void caseABundleCategoryEntryValue(ABundleCategoryEntryValue node) {
 		BundleCategory entry = manifestFactory.createBundleCategory();
-		this.firstValue = new StringBuffer("");
-		node.getStringEntryValue().apply(this);
-		entry.addValue(((StringBuffer) this.firstValue).toString());
-
+		entry.addValue(node.getSimpleStringValue().getText());
+		
+		this.entry = entry;
+		for (PParameter parameter : node.getParameter()) {
+			parameter.apply(this);
+		}
+		
+		for (PCategoryValue categoryValue : node.getCategoryValue()) {
+			categoryValue.apply(this);
+		}
+		
+		this.manifest.setBundleCategory(entry);
+		
 	}
 
 	public void caseABundleClasspathEntry(ABundleClasspathEntry node) {
@@ -581,9 +592,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseACategoryValue(ACategoryValue node) {
-		this.firstValue = new StringBuffer("");
-		node.getStringEntryValue().apply(this);
-		((BundleCategory) this.entry).addValue(((StringBuffer) this.firstValue).toString());
+		((BundleCategory) this.entry).addValue(node.getSimpleStringValue().getText());
 
 	}
 
@@ -1147,6 +1156,7 @@ public class Translation implements Analysis {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void caseAMandatoryExportPackageDirective(
 			AMandatoryExportPackageDirective node) {
 		Mandatory directive = parameterFactory.createMandatory();
@@ -3045,23 +3055,23 @@ public class Translation implements Analysis {
 									.addEntry((File) systemEntry);
 						} catch (IOException e) {
 							this.log.put(this.bundle, this.log.get(this.bundle)
+									+ "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
 									+ "IOException with "
 									+ systemEntry.getFullPath() + "\n");
 							
 						}
 					} else {
 						this.log.put(this.bundle, this.log.get(this.bundle)
+								+ "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
 								+ systemEntry.getFullPath()
 								+ " is a file but is not a JAR file." + "\n");
 						
 					}
 				} else {
-					this.log
-							.put(
-									this.bundle,
-									this.log.get(this.bundle)
-											+ this.firstValue
-											+ " must be a JAR file or a folder." + "\n");
+					this.log.put(this.bundle, this.log.get(this.bundle)
+								+ "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
+								+ this.firstValue
+								+ " must be a JAR file or a folder." + "\n");
 					
 				}
 			} else {
@@ -3074,6 +3084,7 @@ public class Translation implements Analysis {
 				this.unresolvedBundleClassPathValue.put((BundleClassPath) this.entry, list);		
 				
 				this.log.put(this.bundle, this.log.get(this.bundle)
+						+ "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
 						+ this.firstValue
 						+ " is not contained into this bundle." + "\n");
 			}
@@ -3098,6 +3109,7 @@ public class Translation implements Analysis {
 			((BundleClassPath) this.entry).addEntry(this.bundle.getFolder());
 		} else {
 			this.log.put(this.bundle, this.log.get(this.bundle)
+					+ "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
 					+ this.firstValue + " is unresolved. (must not appears)"
 					+ "\n");
 		}

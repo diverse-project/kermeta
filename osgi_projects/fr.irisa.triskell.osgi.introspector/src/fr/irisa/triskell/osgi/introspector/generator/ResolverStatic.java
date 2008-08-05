@@ -259,28 +259,6 @@ public class ResolverStatic implements Resolver {
 		}
 	}
 
-	public void resolveExportService(Map<Service, Bundle> bundles, Map<Service, String> services) {
-		List<Service> tmp = new ArrayList<Service>();
-		for (Service service : services.keySet()) {
-			String serviceReference = services.get(service);
-			Class element = bundles.get(service).getPackage().getClass(
-					serviceReference);
-			if (element != null) {
-				service.setInterface(element);
-			} else {
-				tmp.add(service);
-			}
-		}
-		if (tmp.size() > 0) {
-			for (Service service : tmp) {
-				this.log.put(bundles.get(service), this.log.get(bundles
-						.get(service))
-						+ "The export service reference "
-						+ services.get(service) + " is not valid." + "\n");
-			}
-		}
-	}
-
 	public void resolveActivator(Map<BundleActivator, Bundle> bundles, Map<BundleActivator, String> activators) {
 		for (BundleActivator value : activators.keySet()) {
 			Class element = bundles.get(value).getPackage().getClass(
@@ -416,15 +394,6 @@ public class ResolverStatic implements Resolver {
 		
 	}
 
-	public void resolveExportPackageUses(Map<Uses, List<String>> uses, Map<Uses, Bundle> bundles) {
-		for (Uses value : uses.keySet()) {
-			for (String _package : uses.get(value)) {
-				value.addPackage(_package);
-			}
-
-		}
-	}
-
 	public void resolveImportPackage(
 			Map<ImportPackage, List<String>> importPackages,
 			Map<ImportPackage, Bundle> bundles) {
@@ -433,9 +402,49 @@ public class ResolverStatic implements Resolver {
 				value.addPackage(_package);
 				value.setResolved(false);
 			}
-
+	
 		}
 		
+	}
+
+	public void resolveExportService(Map<Service, Bundle> bundles, Map<Service, String> services) {
+		List<Service> tmp = new ArrayList<Service>();
+		for (Service service : services.keySet()) {
+			String serviceReference = services.get(service);
+			Class element = bundles.get(service).getPackage().getClass(
+					serviceReference);
+			if (element != null) {
+				service.setInterface(element);
+			} else {
+				tmp.add(service);
+			}
+			service.setInterfaceName(serviceReference);
+		}
+		if (tmp.size() > 0) {
+			Map<Service, Bundle> bundlesTmp = bundles;
+			bundles = new HashMap<Service, Bundle>();
+			
+			Map<Service, String> servicesTmp = services;
+			services = new HashMap<Service, String>();
+			for (Service service : tmp) {
+				Bundle b = bundlesTmp.get(service);
+				String s = servicesTmp.get(service);
+				this.log.put(b, this.log.get(b)
+						+ "The export service reference "
+						+ s + " is not resolved." + "\n");
+				bundles.put(service, b);
+				services.put(service, s);
+			}
+		}
+	}
+
+	public void resolveExportPackageUses(Map<Uses, List<String>> uses, Map<Uses, Bundle> bundles) {
+		for (Uses value : uses.keySet()) {
+			for (String _package : uses.get(value)) {
+				value.addPackage(_package);
+			}
+
+		}
 	}
 
 	public void resolveImportService(Map<ImportService, String> importServices,

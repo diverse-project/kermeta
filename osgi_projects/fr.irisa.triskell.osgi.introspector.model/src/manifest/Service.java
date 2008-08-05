@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Service.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: Service.java,v 1.3 2008-08-05 16:10:55 edaubert Exp $
  */
 package manifest;
 
@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link manifest.Service#getInterface <em>Interface</em>}</li>
+ *   <li>{@link manifest.Service#getInterfaceName <em>Interface Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,5 +50,31 @@ public interface Service extends EObject {
 	 * @generated
 	 */
 	void setInterface(jar.Class value);
+
+	/**
+	 * Returns the value of the '<em><b>Interface Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Interface Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Interface Name</em>' attribute.
+	 * @see #setInterfaceName(String)
+	 * @see manifest.ManifestPackage#getService_InterfaceName()
+	 * @model dataType="framework.String" required="true"
+	 * @generated
+	 */
+	String getInterfaceName();
+
+	/**
+	 * Sets the value of the '{@link manifest.Service#getInterfaceName <em>Interface Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Interface Name</em>' attribute.
+	 * @see #getInterfaceName()
+	 * @generated
+	 */
+	void setInterfaceName(String value);
 
 } // Service

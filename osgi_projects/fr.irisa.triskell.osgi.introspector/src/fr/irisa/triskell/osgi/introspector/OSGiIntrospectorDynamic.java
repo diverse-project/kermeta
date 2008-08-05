@@ -5,11 +5,7 @@ import jar.JarFactory;
 import jar.Package;
 import jar.SystemEntry;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Dictionary;
@@ -27,6 +23,7 @@ import framework.Bundle;
 import framework.Framework;
 import framework.FrameworkFactory;
 
+// TODO gestion du log
 public class OSGiIntrospectorDynamic {
 
 	private BundleContext context;
@@ -53,25 +50,31 @@ public class OSGiIntrospectorDynamic {
 			}
 		}
 		// TODO vérification du log ainsi que dans Static
-		//if (validGeneration) {
 			this.introspectionWithoutError = this.resolve() && validGeneration;
 			OSGiIntrospectorUtil.displayLog(log);
 			OSGiIntrospectorUtil.saveModel(XMIFilePath, this.framework);
 
-		/*} else {
-			OSGiIntrospectorUtil
-					.log(Level.SEVERE,
-							"The introspection failed because a bundle is unvalid with several error(s)");
-			OSGiIntrospectorUtil.displayLog(this.log);
-		}*/
-
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	private boolean generateBundle(org.osgi.framework.Bundle bundle) {
+		
+		//System.out.println(bundle.getClass().getName());
+		/*if (bundle.getClass().getName().equals(BundleHost.class.getName())) {
+			System.out.println("un BundleHost");
+		} else if (bundle.getClass().getName().equals(SystemBundle.class.getName())) {
+			System.out.println("un SystemBundle");
+			
+		} else if (bundle.getClass().getName().equals(BundleFragment.class.getName())) {
+			System.out.println("un BundleFragment");
+		}*/
+		
 		Bundle bundleRepresentation = this.getSystemBundleRepresentation(bundle);
-		//bundleRepresentation.setLocation(bundle.getLocation());
 		bundleRepresentation.setLocation(this.getBundleLocation(bundle));
+		if (bundleRepresentation.getLocation().equals("")) {
+			bundleRepresentation.setLocation(bundle.getLocation());
+		}
 		bundleRepresentation.setSymbolicName(bundle.getSymbolicName());
 
 		String manifestStringRepresentation = "";
@@ -83,27 +86,12 @@ public class OSGiIntrospectorDynamic {
 			String value = dictionary.get(key);
 			manifestStringRepresentation += key + ": " + value + "\n";
 		}
-		//try {
-		/*java.io.File manifestFile;
-		manifestFile = java.io.File.createTempFile("manifest", ".mf");
-		manifestFile.deleteOnExit();
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(manifestFile)));
-		writer.write(manifestStringRepresentation);
-		writer.flush();
-		writer.close();
-		 */
 		boolean valid = this.parser.parse(manifestStringRepresentation, bundleRepresentation);
 		
 		if (valid) {
 			this.framework.addBundle(bundleRepresentation);
 		}
-		
 		return valid;
-		/*} catch (IOException e) {
-			OSGiIntrospectorUtil.log(Level.SEVERE, e.getMessage());
-			return false;
-		}*/
 	}
 	
 	private Bundle getSystemBundleRepresentation(
@@ -129,24 +117,26 @@ public class OSGiIntrospectorDynamic {
 	 * @param directory
 	 * @param folder
 	 */
+	@SuppressWarnings("unchecked")
 	private Folder generateSystemEntries(
 			org.osgi.framework.Bundle bundle, String path) {
 		Folder folder = JarFactory.eINSTANCE.createFolder();
-		if (path.equals("/")) {
+		path = path.substring(1);
+		/*if (path.equals("/")) {
 			folder.setFullPath("");
 			folder.setName("");
-		} else {
+		} else {*/
 			folder.setFullPath(path);
 			String[] tmp = path.split("/");
 			folder.setName(tmp[tmp.length - 1]);
-		}
+		//}
 		Enumeration<String> bundlePaths = bundle.getEntryPaths(path);
 		if (bundlePaths != null) {
 			while (bundlePaths.hasMoreElements()) {
 				String pathTmp = bundlePaths.nextElement();
 				SystemEntry f;
 				if (pathTmp.endsWith("/")) {
-					f = generateSystemEntries(bundle, pathTmp);
+					f = generateSystemEntries(bundle, "/" + pathTmp);
 					folder.addEntry(f);
 				} else {
 					f = JarFactory.eINSTANCE.createFile();
@@ -175,7 +165,6 @@ public class OSGiIntrospectorDynamic {
 	            URL url = new URL (sb.toString());
 	            File file = new File(url.getFile());
 	            if (file.exists()) {
-	            	System.out.println(file.getAbsolutePath());
 	                return file.getAbsolutePath();
 	            }
 	        } catch (MalformedURLException mue) {
@@ -188,7 +177,6 @@ public class OSGiIntrospectorDynamic {
 	            try {
 	                URL u = new URL(sb.toString());
 	                File f = new File(u.getFile());
-	                System.out.println(f.getAbsolutePath());
 	                return f.getAbsolutePath();
 	            } catch (MalformedURLException e) {
 	                return null;
@@ -199,7 +187,7 @@ public class OSGiIntrospectorDynamic {
 	}
 
 	public boolean resolve() {
-		Resolver resolver = new ResolverDynamic(this.context);
+		Resolver resolver = new ResolverDynamic();
 		resolver.setLog(this.log);
 		resolver.resolveRequireBundle(this.framework, this.parser.getUnresolvedRequireBundleValue(), this.parser.getUnresolvedRequireBundleBundle());
 		resolver.resolveFragmentHost(this.framework, this.parser.getFragmentHostReferences());
@@ -209,9 +197,9 @@ public class OSGiIntrospectorDynamic {
 		resolver.resolveActivationPolicyExclude(this.parser.getUnresolvedActivationPolicyExcludeValue(), this.parser.getUnresolvedActivationPolicyExcludeBundle());
 		resolver.resolveActivationPolicyInclude(this.parser.getUnresolvedActivationPolicyIncludeValue(), this.parser.getUnresolvedActivationPolicyIncludeBundle());
 		resolver.resolveActivator(this.parser.getUnresolvedActivatorBundle(), this.parser.getUnresolvedActivatorValue());
+		resolver.resolveImportPackage(this.parser.getUnresolvedImportPackageValue(), this.parser.getUnresolvedImportPackageBundle());
 		resolver.resolveExportService(this.parser.getUnresolvedExportServiceBundle(), this.parser.getUnresolvedExportServiceValue());
 		resolver.resolveExportPackageUses(this.parser.getUnresolvedExportPackageUsesValue(),this.parser.getUnresolvedExportPackageUsesBundle());
-		resolver.resolveImportPackage(this.parser.getUnresolvedImportPackageValue(), this.parser.getUnresolvedImportPackageBundle());
 		resolver.resolveImportService(this.parser.getUnresolvedImportServiceValue(), this.parser.getUnresolvedImportServiceBundle(), this.parser.getServicesAvailable());
 		// TODO return
 		return true;

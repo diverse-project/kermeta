@@ -2,13 +2,15 @@
 
 package fr.irisa.osgi.manifest.parser.node;
 
+import java.util.*;
 import fr.irisa.osgi.manifest.parser.analysis.*;
 
 @SuppressWarnings("nls")
 public final class ACategoryValue extends PCategoryValue
 {
     private TComma _comma_;
-    private PStringEntryValue _stringEntryValue_;
+    private TSimpleStringValue _simpleStringValue_;
+    private final LinkedList<PParameter> _parameter_ = new LinkedList<PParameter>();
 
     public ACategoryValue()
     {
@@ -17,12 +19,15 @@ public final class ACategoryValue extends PCategoryValue
 
     public ACategoryValue(
         @SuppressWarnings("hiding") TComma _comma_,
-        @SuppressWarnings("hiding") PStringEntryValue _stringEntryValue_)
+        @SuppressWarnings("hiding") TSimpleStringValue _simpleStringValue_,
+        @SuppressWarnings("hiding") List<PParameter> _parameter_)
     {
         // Constructor
         setComma(_comma_);
 
-        setStringEntryValue(_stringEntryValue_);
+        setSimpleStringValue(_simpleStringValue_);
+
+        setParameter(_parameter_);
 
     }
 
@@ -31,7 +36,8 @@ public final class ACategoryValue extends PCategoryValue
     {
         return new ACategoryValue(
             cloneNode(this._comma_),
-            cloneNode(this._stringEntryValue_));
+            cloneNode(this._simpleStringValue_),
+            cloneList(this._parameter_));
     }
 
     public void apply(Switch sw)
@@ -64,16 +70,16 @@ public final class ACategoryValue extends PCategoryValue
         this._comma_ = node;
     }
 
-    public PStringEntryValue getStringEntryValue()
+    public TSimpleStringValue getSimpleStringValue()
     {
-        return this._stringEntryValue_;
+        return this._simpleStringValue_;
     }
 
-    public void setStringEntryValue(PStringEntryValue node)
+    public void setSimpleStringValue(TSimpleStringValue node)
     {
-        if(this._stringEntryValue_ != null)
+        if(this._simpleStringValue_ != null)
         {
-            this._stringEntryValue_.parent(null);
+            this._simpleStringValue_.parent(null);
         }
 
         if(node != null)
@@ -86,7 +92,27 @@ public final class ACategoryValue extends PCategoryValue
             node.parent(this);
         }
 
-        this._stringEntryValue_ = node;
+        this._simpleStringValue_ = node;
+    }
+
+    public LinkedList<PParameter> getParameter()
+    {
+        return this._parameter_;
+    }
+
+    public void setParameter(List<PParameter> list)
+    {
+        this._parameter_.clear();
+        this._parameter_.addAll(list);
+        for(PParameter e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
+
+            e.parent(this);
+        }
     }
 
     @Override
@@ -94,7 +120,8 @@ public final class ACategoryValue extends PCategoryValue
     {
         return ""
             + toString(this._comma_)
-            + toString(this._stringEntryValue_);
+            + toString(this._simpleStringValue_)
+            + toString(this._parameter_);
     }
 
     @Override
@@ -107,9 +134,14 @@ public final class ACategoryValue extends PCategoryValue
             return;
         }
 
-        if(this._stringEntryValue_ == child)
+        if(this._simpleStringValue_ == child)
         {
-            this._stringEntryValue_ = null;
+            this._simpleStringValue_ = null;
+            return;
+        }
+
+        if(this._parameter_.remove(child))
+        {
             return;
         }
 
@@ -126,10 +158,28 @@ public final class ACategoryValue extends PCategoryValue
             return;
         }
 
-        if(this._stringEntryValue_ == oldChild)
+        if(this._simpleStringValue_ == oldChild)
         {
-            setStringEntryValue((PStringEntryValue) newChild);
+            setSimpleStringValue((TSimpleStringValue) newChild);
             return;
+        }
+
+        for(ListIterator<PParameter> i = this._parameter_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PParameter) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         throw new RuntimeException("Not a child.");

@@ -8,7 +8,8 @@ import fr.irisa.osgi.manifest.parser.analysis.*;
 @SuppressWarnings("nls")
 public final class ABundleCategoryEntryValue extends PBundleCategoryEntryValue
 {
-    private PStringEntryValue _stringEntryValue_;
+    private TSimpleStringValue _simpleStringValue_;
+    private final LinkedList<PParameter> _parameter_ = new LinkedList<PParameter>();
     private final LinkedList<PCategoryValue> _categoryValue_ = new LinkedList<PCategoryValue>();
 
     public ABundleCategoryEntryValue()
@@ -17,11 +18,14 @@ public final class ABundleCategoryEntryValue extends PBundleCategoryEntryValue
     }
 
     public ABundleCategoryEntryValue(
-        @SuppressWarnings("hiding") PStringEntryValue _stringEntryValue_,
+        @SuppressWarnings("hiding") TSimpleStringValue _simpleStringValue_,
+        @SuppressWarnings("hiding") List<PParameter> _parameter_,
         @SuppressWarnings("hiding") List<PCategoryValue> _categoryValue_)
     {
         // Constructor
-        setStringEntryValue(_stringEntryValue_);
+        setSimpleStringValue(_simpleStringValue_);
+
+        setParameter(_parameter_);
 
         setCategoryValue(_categoryValue_);
 
@@ -31,7 +35,8 @@ public final class ABundleCategoryEntryValue extends PBundleCategoryEntryValue
     public Object clone()
     {
         return new ABundleCategoryEntryValue(
-            cloneNode(this._stringEntryValue_),
+            cloneNode(this._simpleStringValue_),
+            cloneList(this._parameter_),
             cloneList(this._categoryValue_));
     }
 
@@ -40,16 +45,16 @@ public final class ABundleCategoryEntryValue extends PBundleCategoryEntryValue
         ((Analysis) sw).caseABundleCategoryEntryValue(this);
     }
 
-    public PStringEntryValue getStringEntryValue()
+    public TSimpleStringValue getSimpleStringValue()
     {
-        return this._stringEntryValue_;
+        return this._simpleStringValue_;
     }
 
-    public void setStringEntryValue(PStringEntryValue node)
+    public void setSimpleStringValue(TSimpleStringValue node)
     {
-        if(this._stringEntryValue_ != null)
+        if(this._simpleStringValue_ != null)
         {
-            this._stringEntryValue_.parent(null);
+            this._simpleStringValue_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +67,27 @@ public final class ABundleCategoryEntryValue extends PBundleCategoryEntryValue
             node.parent(this);
         }
 
-        this._stringEntryValue_ = node;
+        this._simpleStringValue_ = node;
+    }
+
+    public LinkedList<PParameter> getParameter()
+    {
+        return this._parameter_;
+    }
+
+    public void setParameter(List<PParameter> list)
+    {
+        this._parameter_.clear();
+        this._parameter_.addAll(list);
+        for(PParameter e : list)
+        {
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
+
+            e.parent(this);
+        }
     }
 
     public LinkedList<PCategoryValue> getCategoryValue()
@@ -89,7 +114,8 @@ public final class ABundleCategoryEntryValue extends PBundleCategoryEntryValue
     public String toString()
     {
         return ""
-            + toString(this._stringEntryValue_)
+            + toString(this._simpleStringValue_)
+            + toString(this._parameter_)
             + toString(this._categoryValue_);
     }
 
@@ -97,9 +123,14 @@ public final class ABundleCategoryEntryValue extends PBundleCategoryEntryValue
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._stringEntryValue_ == child)
+        if(this._simpleStringValue_ == child)
         {
-            this._stringEntryValue_ = null;
+            this._simpleStringValue_ = null;
+            return;
+        }
+
+        if(this._parameter_.remove(child))
+        {
             return;
         }
 
@@ -115,10 +146,28 @@ public final class ABundleCategoryEntryValue extends PBundleCategoryEntryValue
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._stringEntryValue_ == oldChild)
+        if(this._simpleStringValue_ == oldChild)
         {
-            setStringEntryValue((PStringEntryValue) newChild);
+            setSimpleStringValue((TSimpleStringValue) newChild);
             return;
+        }
+
+        for(ListIterator<PParameter> i = this._parameter_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PParameter) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         for(ListIterator<PCategoryValue> i = this._categoryValue_.listIterator(); i.hasNext();)

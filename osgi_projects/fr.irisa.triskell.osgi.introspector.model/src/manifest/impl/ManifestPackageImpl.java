@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestPackageImpl.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: ManifestPackageImpl.java,v 1.4 2008-08-05 16:10:56 edaubert Exp $
  */
 package manifest.impl;
 
@@ -376,6 +376,15 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 */
 	public EReference getService_Interface() {
 		return (EReference)serviceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getService_InterfaceName() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1218,6 +1227,7 @@ public class ManifestPackageImpl extends EPackageImpl implements
 		// Create classes and their features
 		serviceEClass = createEClass(SERVICE);
 		createEReference(serviceEClass, SERVICE__INTERFACE);
+		createEAttribute(serviceEClass, SERVICE__INTERFACE_NAME);
 
 		versionEClass = createEClass(VERSION);
 		createEAttribute(versionEClass, VERSION__MAJOR);
@@ -1379,8 +1389,8 @@ public class ManifestPackageImpl extends EPackageImpl implements
 
 		// Obtain other dependent packages
 		JarPackage theJarPackage = (JarPackage)EPackage.Registry.INSTANCE.getEPackage(JarPackage.eNS_URI);
-		OptionPackage theOptionPackage = (OptionPackage)EPackage.Registry.INSTANCE.getEPackage(OptionPackage.eNS_URI);
 		FrameworkPackage theFrameworkPackage = (FrameworkPackage)EPackage.Registry.INSTANCE.getEPackage(FrameworkPackage.eNS_URI);
+		OptionPackage theOptionPackage = (OptionPackage)EPackage.Registry.INSTANCE.getEPackage(OptionPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1417,7 +1427,8 @@ public class ManifestPackageImpl extends EPackageImpl implements
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getService_Interface(), theJarPackage.getClass_(), null, "interface", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getService_Interface(), theJarPackage.getClass_(), null, "interface", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getService_InterfaceName(), theFrameworkPackage.getString(), "interfaceName", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(versionEClass, Version.class, "Version", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVersion_Major(), this.getint(), "major", null, 1, 1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

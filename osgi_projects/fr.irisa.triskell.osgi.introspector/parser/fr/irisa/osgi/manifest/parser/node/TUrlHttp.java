@@ -7,14 +7,14 @@ import fr.irisa.osgi.manifest.parser.analysis.*;
 @SuppressWarnings("nls")
 public final class TUrlHttp extends Token
 {
-    public TUrlHttp()
+    public TUrlHttp(String text)
     {
-        super.setText("http://");
+        setText(text);
     }
 
-    public TUrlHttp(int line, int pos)
+    public TUrlHttp(String text, int line, int pos)
     {
-        super.setText("http://");
+        setText(text);
         setLine(line);
         setPos(pos);
     }
@@ -22,17 +22,11 @@ public final class TUrlHttp extends Token
     @Override
     public Object clone()
     {
-      return new TUrlHttp(getLine(), getPos());
+      return new TUrlHttp(getText(), getLine(), getPos());
     }
 
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseTUrlHttp(this);
-    }
-
-    @Override
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TUrlHttp text.");
     }
 }
