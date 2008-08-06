@@ -1,6 +1,6 @@
 
 
-/*$Id: KpmProjectBuilder.java,v 1.4 2008-07-17 12:12:50 ftanguy Exp $
+/*$Id: KpmProjectBuilder.java,v 1.5 2008-08-06 14:11:25 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmIncrementalProjectBuilder.java
 * License : EPL
@@ -34,19 +34,22 @@ public class KpmProjectBuilder extends IncrementalProjectBuilder {
 		try {
 			KPMPlugin.internalLog.debug("Starting Build of Project " + getProject().getFullPath().toString() );
 			if (kind == IncrementalProjectBuilder.FULL_BUILD) {
-				fullBuild(monitor);
+				KPMPlugin.internalLog.debug(" incremental project builder ask to do a full build on project " + getProject().getFullPath().toString() );
+            	fullBuild(monitor);
 			} else {
 				IResourceDelta delta = getDelta(getProject());
 	            if (delta == null) {
+	            	KPMPlugin.internalLog.debug("will do a full build on project " + getProject().getFullPath().toString() );
 	            	fullBuild(monitor);
 	            } else {
-	               incrementalBuild(delta, monitor);
+	            	KPMPlugin.internalLog.debug("will do an incremental build on project " + getProject().getFullPath().toString() );
+	            	incrementalBuild(delta, monitor);
 	            }
 	         }
 			InternalKpmManager.getDefault().removeProject( getProject() );
 			KPMPlugin.internalLog.debug("Endind Build of Project " + getProject().getFullPath().toString() );
 		} catch (CoreException e) {
-			e.printStackTrace();
+			KPMPlugin.internalLog.error(e.getMessage(),e);
 			throw e;
 		}
 		return null;
