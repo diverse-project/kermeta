@@ -20,6 +20,7 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.kermeta.io.plugin.IOPlugin
 Export-Package: antlr,
+ antlr.actions,
  antlr.actions.cpp,
  antlr.actions.csharp,
  antlr.actions.java,
@@ -57,3 +58,4 @@ Export-Package: antlr,
  org.kermeta.loader.kmt.fixer,
  org.kermeta.model
 Bundle-Vendor: IRISA/INRIA
+Eclipse-LazyStart: true
