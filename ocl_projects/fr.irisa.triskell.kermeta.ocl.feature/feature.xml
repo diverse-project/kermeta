@@ -19,17 +19,11 @@
 
    <requires>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="fr.irisa.triskell.traceability.model"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.ui.forms"/>
       <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.ui.console"/>
-      <import plugin="org.eclipse.ocl"/>
-      <import plugin="org.eclipse.emf.ocl"/>
-      <import plugin="fr.irisa.triskell.eclipse.util"/>
-      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
-      <import plugin="fr.irisa.triskell.kermeta"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import feature="fr.irisa.triskell.kermeta"/>
    </requires>
 
    <plugin
@@ -48,6 +42,13 @@
 
    <plugin
          id="fr.irisa.triskell.traceability.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.eclipse.ocl.parser"
          download-size="0"
          install-size="0"
          version="0.0.0"

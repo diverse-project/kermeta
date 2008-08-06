@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta.ecore"
       label="Kermeta MDK for Ecore"
-      version="1.1.0"
+      version="1.1.0.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/">
@@ -151,14 +151,8 @@ Inc. in the United States, other countries, or both.
    </url>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import feature="fr.irisa.triskell.kermeta" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="fr.irisa.triskell.kermeta.io"/>
-      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
-      <import feature="fr.irisa.triskell.kermeta" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="fr.irisa.triskell.kermeta.kpm"/>
-      <import plugin="org.kermeta.ecore.documentation"/>
+      <import feature="fr.irisa.triskell.kermeta"/>
+      <import feature="org.eclipse.emf.ecore"/>
    </requires>
 
    <plugin
