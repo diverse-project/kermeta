@@ -49,19 +49,17 @@ License (&quot;EPL&quot;).
 
    <url>
       <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
-      <discovery label="Kermeta update site" url="http://www.kermeta.org/update"/>
    </url>
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf"/>
-      <import plugin="org.eclipse.emf.common"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.cheatsheets"/>
+      <import feature="org.eclipse.emf.sdk" version="2.3.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
