@@ -67,7 +67,7 @@
             </separator>
          </menu>
          <action
-               label="Compile to NXT Binary"
+               label="Compile to NXT Binary (*.rxe)"
                class="fr.irisa.triskell.kmlogo.ui.popup.actions.NXC2RXE"
                menubarPath="fr.irisa.triskell.kmlogo.ui.menu2/group2"
                enablesFor="1"
@@ -87,11 +87,12 @@
             </separator>
          </menu>
          <action
-               label="Upload file to the NXT brick"
                class="fr.irisa.triskell.kmlogo.ui.popup.actions.UploadRXE"
-               menubarPath="fr.irisa.triskell.kmlogo.ui.menu3/group3"
                enablesFor="1"
-               id="fr.irisa.triskell.kmlogo.ui.newAction3">
+               icon="icons/bluetooth.png"
+               id="fr.irisa.triskell.kmlogo.ui.newAction3"
+               label="Upload file to the NXT brick"
+               menubarPath="fr.irisa.triskell.kmlogo.ui.menu3/group3">
          </action>
       </objectContribution>
    </extension>
