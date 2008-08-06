@@ -9,7 +9,6 @@ Require-Bundle: fr.irisa.triskell.kermeta.io,
  org.eclipse.core.runtime,
  org.eclipse.ui.ide,
  org.eclipse.jdt.ui,
- org.antlr,
  org.eclipse.gymnast.runtime.core,
  org.kermeta.io.loader,
  fr.irisa.triskell.traceability.model
