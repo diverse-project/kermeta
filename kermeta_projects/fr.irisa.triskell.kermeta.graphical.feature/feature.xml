@@ -24,30 +24,15 @@ the terms of the EPL licence.
 
    <url>
       <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
-      <discovery label="Kermeta update site" url="http://www.kermeta.org/update"/>
+      <discovery label="Topcased update site for Eclipse 3.3" url="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.3/"/>
+      <discovery label="Topcased update site for Eclipse 3.4" url="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.4/"/>
    </url>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.topcased.modeler"/>
-      <import plugin="org.eclipse.ui.editors"/>
-      <import plugin="fr.irisa.triskell.kermeta.model.editor"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="fr.irisa.triskell.kermeta.io"/>
-      <import plugin="fr.irisa.triskell.kermeta.ui"/>
-      <import plugin="fr.irisa.triskell.eclipse.util"/>
-      <import plugin="fr.irisa.triskell.kermeta"/>
-      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
-      <import plugin="fr.irisa.triskell.kermeta.model"/>
-      <import plugin="fr.irisa.triskell.kermeta.model.edit"/>
-      <import plugin="fr.irisa.triskell.traceability.model"/>
+      <import feature="fr.irisa.triskell.kermeta" version="1.1.0" match="greaterOrEqual"/>
+      <import feature="fr.irisa.triskell.traceability" version="1.1.0" match="greaterOrEqual"/>
+      <import feature="org.topcased.toolkit" version="1.0.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf.sdk" version="2.3.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
