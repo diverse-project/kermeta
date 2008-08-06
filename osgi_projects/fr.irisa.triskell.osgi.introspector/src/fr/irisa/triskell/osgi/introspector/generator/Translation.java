@@ -81,7 +81,14 @@ import fr.irisa.osgi.manifest.parser.analysis.Analysis;
 import fr.irisa.osgi.manifest.parser.node.*;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
 import framework.Bundle;
-
+/**
+ * 
+ * @author Erwan Daubert - erwan.daubert@gmail.com
+ * @version 1.0
+ * 
+ * This class describe a Visitor define into the Design Pattern Visitor.
+ * It used to visit the manifest and generate a representation.
+ */
 public class Translation implements Analysis {
 
 	private Map<Bundle, String> log;
@@ -522,13 +529,14 @@ public class Translation implements Analysis {
 		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
 		entry.setSymbolicName(((StringBuffer) this.firstValue).toString());
-		this.bundle.setSymbolicName(((StringBuffer) this.firstValue).toString());
 		this.entry = entry;
 		for (PSymbolicnameOption option : node.getSymbolicnameOption()) {
 			option.apply(this);
 		}
 
 		this.manifest.setBundleSymbolicName(entry);
+
+		this.bundle.setSymbolicName(this.manifest.getBundleSymbolicName().getSymbolicName());
 	}
 
 	public void caseABundleSymbolicnameEntryManifestentry(
@@ -2132,6 +2140,7 @@ public class Translation implements Analysis {
 				}
 			}
 		}
+
 	}
 
 	public void caseStart(Start node) {

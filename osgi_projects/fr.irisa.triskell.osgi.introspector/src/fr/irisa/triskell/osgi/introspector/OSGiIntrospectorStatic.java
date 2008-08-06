@@ -23,6 +23,15 @@ import framework.Framework;
 import framework.FrameworkFactory;
 
 // TODO gestion du log
+/**
+ * @author Erwan Daubert - erwan.daubert@gmail.com
+ * @version 1.0
+ * 
+ * This class is used to generate an OSGi model with the location of a framework.<br />
+ * This generation is only static :<br />
+ * There are not relation between {@link Bundle} except for Fragment Bundle.
+ * 
+ */
 public class OSGiIntrospectorStatic {
 	private Framework framework;
 	private Map<Bundle, String> log;
@@ -57,6 +66,12 @@ public class OSGiIntrospectorStatic {
 		}
 	}
 
+	/**
+	 * This function is used to create the {@link Bundle} representation of an OSGi Bundle
+	 * This Bundle is located with bundlePath and can be a directory or a Jar File.
+	 * @param bundlePath the location path of the bundle
+	 * @return true if the representation was done correctly, false else.
+	 */
 	private boolean generateBundle(String bundlePath) {
 		java.io.File f = new java.io.File(bundlePath);
 		if (!f.exists()) {
@@ -201,20 +216,32 @@ public class OSGiIntrospectorStatic {
 		return true;
 	}
 
+	/**
+	 * This function is used to resolve all unresolved references like :<br/ >
+	 * 		Require-Bundle<br/ >
+	 * 		Fragment-Host<br/ >
+	 * 		Export-Package<br/ >
+	 * 		Export-Service<br/ >
+	 * 		Import-Package<br/ >
+	 * 		Import-Service<br/ >
+	 * This function resolve many references statically.
+	 * That's why many Export-Package, Export-Service, Import-Package, Import-Service are not resolve precisely.
+	 * @return true if the resolution is OK, false else.
+	 */
 	public boolean resolve() {
 		Resolver resolver = new ResolverStatic();
 		resolver.setLog(this.log);
-		resolver.resolveRequireBundle(this.framework, this.parser.getUnresolvedRequireBundleValue(), this.parser.getUnresolvedRequireBundleBundle());
+		resolver.resolveRequireBundle(this.parser.getUnresolvedRequireBundleValue(), this.parser.getUnresolvedRequireBundleBundle(), this.framework);
 		resolver.resolveFragmentHost(this.framework, this.parser.getFragmentHostReferences());
 		resolver.resolveExportPackage(this.parser.getUnresolvedExportPackageValue(), this.parser.getUnresolvedExportPackageBundle());
 		resolver.resolveExportPackageExclude(this.parser.getUnresolvedExportPackageExcludeValue(), this.parser.getUnresolvedExportPackageExcludeExportPackage());
 		resolver.resolveExportPackageInclude(this.parser.getUnresolvedExportPackageIncludeValue(), this.parser.getUnresolvedExportPackageIncludeExportPackage());
 		resolver.resolveActivationPolicyExclude(this.parser.getUnresolvedActivationPolicyExcludeValue(), this.parser.getUnresolvedActivationPolicyExcludeBundle());
 		resolver.resolveActivationPolicyInclude(this.parser.getUnresolvedActivationPolicyIncludeValue(), this.parser.getUnresolvedActivationPolicyIncludeBundle());
-		resolver.resolveActivator(this.parser.getUnresolvedActivatorBundle(), this.parser.getUnresolvedActivatorValue());
-		resolver.resolveExportService(this.parser.getUnresolvedExportServiceBundle(), this.parser.getUnresolvedExportServiceValue());
+		resolver.resolveActivator(this.parser.getUnresolvedActivatorValue(), this.parser.getUnresolvedActivatorBundle());
+		resolver.resolveExportService(this.parser.getUnresolvedExportServiceValue(), this.parser.getUnresolvedExportServiceBundle());
 		resolver.resolveExportPackageUses(this.parser.getUnresolvedExportPackageUsesValue(),this.parser.getUnresolvedExportPackageUsesBundle());
-		resolver.resolveImportPackage(this.parser.getUnresolvedImportPackageValue(), this.parser.getUnresolvedImportPackageBundle());
+		resolver.resolveImportPackage(this.parser.getUnresolvedImportPackageValue(), this.parser.getUnresolvedImportPackageBundle(), this.framework);
 		resolver.resolveImportService(this.parser.getUnresolvedImportServiceValue(), this.parser.getUnresolvedImportServiceBundle(), this.parser.getServicesAvailable());
 		// TODO return
 		return true;

@@ -27,6 +27,14 @@ import fr.irisa.osgi.manifest.parser.parser.ParserException;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
 import framework.Bundle;
 
+/**
+ * 
+ * @author Erwan Daubert - erwan.daubert@gmail.com
+ * @version 1.0
+ * @see Translation
+ * This class is used to parse the Manifest of an OSGi Bundle.
+ *
+ */
 public class Parser {
 
 	private Translation translation;
@@ -66,9 +74,6 @@ public class Parser {
 		return this.translation.isValidTranslation();
 		} catch (ParserException e) {
 			// must not appear
-			// TODO enlever sysout
-			System.out.println(manifestContent);
-			System.out.println(e.getToken());
 			OSGiIntrospectorUtil.log(Level.SEVERE, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
 					+ bundle.getLocation() + ".");
 			e.printStackTrace();

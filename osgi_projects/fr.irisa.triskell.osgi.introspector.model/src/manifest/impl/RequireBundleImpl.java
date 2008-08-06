@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RequireBundleImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: RequireBundleImpl.java,v 1.3 2008-08-06 13:37:23 edaubert Exp $
  */
 package manifest.impl;
 
@@ -327,6 +327,7 @@ public class RequireBundleImpl extends MANIFESTEntryImpl implements
 
 		}
 		if (exist) {
+			// TODO enlever sysout
 			System.out
 					.println("a directive with the same token already exist :"
 							+ directive.getToken());

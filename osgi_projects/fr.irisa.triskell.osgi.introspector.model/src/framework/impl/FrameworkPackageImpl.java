@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkPackageImpl.java,v 1.2 2008-07-31 13:43:54 edaubert Exp $
+ * $Id: FrameworkPackageImpl.java,v 1.3 2008-08-06 13:37:22 edaubert Exp $
  */
 package framework.impl;
 
@@ -176,7 +176,8 @@ public class FrameworkPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getBundle_SymbolicName() {

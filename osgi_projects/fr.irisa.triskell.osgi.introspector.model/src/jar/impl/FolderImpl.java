@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FolderImpl.java,v 1.7 2008-08-05 16:10:57 edaubert Exp $
+ * $Id: FolderImpl.java,v 1.8 2008-08-06 13:37:24 edaubert Exp $
  */
 package jar.impl;
 
@@ -213,15 +213,13 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 				}
 			} else {
 				String folderName = packagesElement[nextFolder];
-				Iterator<SystemEntry> entriesIterator = getEntries().iterator();
-				while (entriesIterator.hasNext()) {
-					SystemEntry entry = entriesIterator.next();
+				for (SystemEntry entry : getEntries()) {
 					if (entry instanceof Folder
 							&& entry.getName().equals(folderName)) {
 						return ((Folder) entry).getEntry(fullPath);
-					} else if (entry.getName().equals(folderName)) {
+					}/* else if (entry.getName().equals(folderName)) {
 						return entry;
-					}
+					}*/
 				}
 			}
 		}

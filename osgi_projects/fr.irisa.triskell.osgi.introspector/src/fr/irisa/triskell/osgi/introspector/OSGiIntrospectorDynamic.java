@@ -1,5 +1,6 @@
 package fr.irisa.triskell.osgi.introspector;
 
+import jar.Class;
 import jar.Folder;
 import jar.JarFactory;
 import jar.Package;
@@ -14,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
+import manifest.MANIFEST;
+
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.osgi.introspector.generator.Parser;
@@ -24,6 +27,15 @@ import framework.Framework;
 import framework.FrameworkFactory;
 
 // TODO gestion du log
+/**
+ * @author Erwan Daubert - erwan.daubert@gmail.com
+ * @version 1.0
+ * 
+ * This class is used to generate an OSGi model of the framework which is launched.<br />
+ * This generation is dynamic :<br />
+ * All references to {@link Bundle}, {@link Package}, {@link Class} are resolved.
+ * 
+ */
 public class OSGiIntrospectorDynamic {
 
 	private BundleContext context;
@@ -37,6 +49,10 @@ public class OSGiIntrospectorDynamic {
 		this.context = context;
 	}
 
+	/**
+	 * This function is used to launch the introspection of the OSGi application where this bundle is launched
+	 * @param XMIFilePath a File path where we want save the result of the introspection.
+	 */
 	public void introspect(String XMIFilePath) {
 		this.framework = FrameworkFactory.eINSTANCE.createFramework();
 		this.log = new HashMap<Bundle, String>();
@@ -56,37 +72,33 @@ public class OSGiIntrospectorDynamic {
 
 	}
 	
-
+	/**
+	 * This function is used to create the {@link Bundle} representation of an OSGi {@link org.osgi.framework.Bundle} with his {@link MANIFEST}, his {@link Folder} and his {@link Package}
+	 * @param bundle an OSGi {@link org.osgi.framework.Bundle} that you want represent as {@link Bundle}
+	 * @return true if the representation is OK, false else.
+	 */
 	@SuppressWarnings("unchecked")
-	private boolean generateBundle(org.osgi.framework.Bundle bundle) {
+	private boolean generateBundle(org.osgi.framework.Bundle bundle) {		
 		
-		//System.out.println(bundle.getClass().getName());
-		/*if (bundle.getClass().getName().equals(BundleHost.class.getName())) {
-			System.out.println("un BundleHost");
-		} else if (bundle.getClass().getName().equals(SystemBundle.class.getName())) {
-			System.out.println("un SystemBundle");
-			
-		} else if (bundle.getClass().getName().equals(BundleFragment.class.getName())) {
-			System.out.println("un BundleFragment");
-		}*/
-		
-		Bundle bundleRepresentation = this.getSystemBundleRepresentation(bundle);
+		Bundle bundleRepresentation = this.getBundleRepresentation(bundle);
 		bundleRepresentation.setLocation(this.getBundleLocation(bundle));
-		if (bundleRepresentation.getLocation().equals("")) {
+		if (bundleRepresentation.getLocation() == null) {
 			bundleRepresentation.setLocation(bundle.getLocation());
 		}
-		bundleRepresentation.setSymbolicName(bundle.getSymbolicName());
 
-		String manifestStringRepresentation = "";
+		StringBuffer manifestStringRepresentation = new StringBuffer("");
 		Dictionary<String, String> dictionary = bundle.getHeaders();
 		Enumeration<String> manifestEntries = dictionary.keys();
 
 		while (manifestEntries.hasMoreElements()) {
 			String key = manifestEntries.nextElement();
 			String value = dictionary.get(key);
-			manifestStringRepresentation += key + ": " + value + "\n";
+			manifestStringRepresentation.append(key);
+			manifestStringRepresentation.append(": ");
+			manifestStringRepresentation.append(value);
+			manifestStringRepresentation.append("\n");
 		}
-		boolean valid = this.parser.parse(manifestStringRepresentation, bundleRepresentation);
+		boolean valid = this.parser.parse(manifestStringRepresentation.toString(), bundleRepresentation);
 		
 		if (valid) {
 			this.framework.addBundle(bundleRepresentation);
@@ -94,12 +106,17 @@ public class OSGiIntrospectorDynamic {
 		return valid;
 	}
 	
-	private Bundle getSystemBundleRepresentation(
-			org.osgi.framework.Bundle systemBundle) {
+	/**
+	 * This function create the {@link Bundle} representation of an OSGi {@link org.osgi.framework.Bundle}
+	 * @param bundle is an OSGi {@link org.osgi.framework.Bundle}
+	 * @return a {@link Bundle} which represents the OSGi {@link org.osgi.framework.Bundle}
+	 */
+	private Bundle getBundleRepresentation(
+			org.osgi.framework.Bundle bundle) {
 		Bundle systemBundleRepresentation = FrameworkFactory.eINSTANCE
 				.createBundle();
 
-		Folder rootFolder = generateSystemEntries(systemBundle, "/");
+		Folder rootFolder = generateSystemEntries(bundle, "/");
 		systemBundleRepresentation.setFolder(rootFolder);
 
 		Package rootPackage = JarFactory.eINSTANCE.createPackage();
@@ -112,28 +129,23 @@ public class OSGiIntrospectorDynamic {
 
 	/**
 	 * This function is used to generate all entry representation of a bundle
-	 * This function is only used when the bundle is not a JAR file but a folder
 	 * 
-	 * @param directory
-	 * @param folder
+	 * @param bundle the OSGi {@link org.osgi.framework.Bundle} which contains all information about the bundle
+	 * @param path a String which represents a path into the bundle. This path must begin with "/"
+	 * @return A folder which is the system representation of the bundle. This folder contains all {@link jar.File} and all {@link Folder} which represents an entry into the bundle.
 	 */
 	@SuppressWarnings("unchecked")
 	private Folder generateSystemEntries(
 			org.osgi.framework.Bundle bundle, String path) {
 		Folder folder = JarFactory.eINSTANCE.createFolder();
-		path = path.substring(1);
-		/*if (path.equals("/")) {
-			folder.setFullPath("");
-			folder.setName("");
-		} else {*/
-			folder.setFullPath(path);
-			String[] tmp = path.split("/");
-			folder.setName(tmp[tmp.length - 1]);
-		//}
-		Enumeration<String> bundlePaths = bundle.getEntryPaths(path);
+		path = path.substring(1).replace("\\", "/");
+		folder.setFullPath(path);
+		String[] tmp = path.split("/");
+		folder.setName(tmp[tmp.length - 1]);
+		Enumeration<String> bundlePaths = bundle.getEntryPaths("/" + path);
 		if (bundlePaths != null) {
 			while (bundlePaths.hasMoreElements()) {
-				String pathTmp = bundlePaths.nextElement();
+				String pathTmp = bundlePaths.nextElement().replace("\\", "/");
 				SystemEntry f;
 				if (pathTmp.endsWith("/")) {
 					f = generateSystemEntries(bundle, "/" + pathTmp);
@@ -150,6 +162,12 @@ public class OSGiIntrospectorDynamic {
 		return folder;
 	}
 	
+	/**
+	 * This function is used to locate the bundle on the filesystem.
+	 * @param bundle the {@link org.osgi.framework.Bundle} object
+	 * <b>When the bundle is the SystemBundle, this function return null</b>
+	 * @return a {@link String} which represents the absolute path to the bundle location or null if the location is unvalid.
+	 */
 	private String getBundleLocation(org.osgi.framework.Bundle bundle) {
 	        StringBuilder sb = new StringBuilder(bundle.getLocation());
 	        if (sb.charAt(sb.length() - 1) == '/') {
@@ -186,19 +204,30 @@ public class OSGiIntrospectorDynamic {
 	    
 	}
 
+	/**
+	 * This function is used to resolve all unresolved references like :<br/ >
+	 * 		Require-Bundle<br/ >
+	 * 		Fragment-Host<br/ >
+	 * 		Export-Package<br/ >
+	 * 		Export-Service<br/ >
+	 * 		Import-Package<br/ >
+	 * 		Import-Service<br/ >
+	 * This function resolve many references dynamically.
+	 * @return true if the resolution is OK, false else.
+	 */
 	public boolean resolve() {
-		Resolver resolver = new ResolverDynamic();
+		Resolver resolver = new ResolverDynamic(context);
 		resolver.setLog(this.log);
-		resolver.resolveRequireBundle(this.framework, this.parser.getUnresolvedRequireBundleValue(), this.parser.getUnresolvedRequireBundleBundle());
+		resolver.resolveRequireBundle(this.parser.getUnresolvedRequireBundleValue(), this.parser.getUnresolvedRequireBundleBundle(), this.framework);
 		resolver.resolveFragmentHost(this.framework, this.parser.getFragmentHostReferences());
 		resolver.resolveExportPackage(this.parser.getUnresolvedExportPackageValue(), this.parser.getUnresolvedExportPackageBundle());
 		resolver.resolveExportPackageExclude(this.parser.getUnresolvedExportPackageExcludeValue(), this.parser.getUnresolvedExportPackageExcludeExportPackage());
 		resolver.resolveExportPackageInclude(this.parser.getUnresolvedExportPackageIncludeValue(), this.parser.getUnresolvedExportPackageIncludeExportPackage());
 		resolver.resolveActivationPolicyExclude(this.parser.getUnresolvedActivationPolicyExcludeValue(), this.parser.getUnresolvedActivationPolicyExcludeBundle());
 		resolver.resolveActivationPolicyInclude(this.parser.getUnresolvedActivationPolicyIncludeValue(), this.parser.getUnresolvedActivationPolicyIncludeBundle());
-		resolver.resolveActivator(this.parser.getUnresolvedActivatorBundle(), this.parser.getUnresolvedActivatorValue());
-		resolver.resolveImportPackage(this.parser.getUnresolvedImportPackageValue(), this.parser.getUnresolvedImportPackageBundle());
-		resolver.resolveExportService(this.parser.getUnresolvedExportServiceBundle(), this.parser.getUnresolvedExportServiceValue());
+		resolver.resolveActivator(this.parser.getUnresolvedActivatorValue(), this.parser.getUnresolvedActivatorBundle());
+		resolver.resolveImportPackage(this.parser.getUnresolvedImportPackageValue(), this.parser.getUnresolvedImportPackageBundle(), this.framework);
+		resolver.resolveExportService(this.parser.getUnresolvedExportServiceValue(), this.parser.getUnresolvedExportServiceBundle());
 		resolver.resolveExportPackageUses(this.parser.getUnresolvedExportPackageUsesValue(),this.parser.getUnresolvedExportPackageUsesBundle());
 		resolver.resolveImportService(this.parser.getUnresolvedImportServiceValue(), this.parser.getUnresolvedImportServiceBundle(), this.parser.getServicesAvailable());
 		// TODO return

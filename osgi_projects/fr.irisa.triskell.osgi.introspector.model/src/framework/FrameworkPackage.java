@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkPackage.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: FrameworkPackage.java,v 1.3 2008-08-06 13:37:22 edaubert Exp $
  */
 package framework;
 
@@ -117,7 +117,8 @@ public interface FrameworkPackage extends EPackage {
 
 	/**
 	 * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -217,7 +218,8 @@ public interface FrameworkPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '{@link framework.Bundle#getSymbolicName <em>Symbolic Name</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Symbolic Name</em>'.
 	 * @see framework.Bundle#getSymbolicName()
 	 * @see #getBundle()
@@ -327,7 +329,8 @@ public interface FrameworkPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '<em><b>Symbolic Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute BUNDLE__SYMBOLIC_NAME = eINSTANCE.getBundle_SymbolicName();

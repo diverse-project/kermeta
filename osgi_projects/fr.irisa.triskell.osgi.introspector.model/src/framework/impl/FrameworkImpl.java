@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkImpl.java,v 1.3 2008-08-04 16:17:25 edaubert Exp $
+ * $Id: FrameworkImpl.java,v 1.4 2008-08-06 13:37:22 edaubert Exp $
  */
 package framework.impl;
 
@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 import manifest.BundleSymbolicName;
+import manifest.Version;
 import option.Singleton;
 import option.SymbolicNameDirective;
 
@@ -181,10 +182,10 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 		return true;
 	}
 
-	public List<Bundle> findBundle(String symbolicName) {
+	public List<Bundle> findBundles(String symbolicName) {
 		List<Bundle> bundles = new ArrayList<Bundle>();
 		for (Bundle bundle : this.getBundles()) {
-			if (symbolicName.equals(bundle.getSymbolicName())) {
+			if (symbolicName.equals(bundle.getManifest().getBundleSymbolicName().getSymbolicName())) {
 				bundles.add(bundle);
 			}
 		}
@@ -192,6 +193,17 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 			return null;
 		}
 		return bundles;
+	}
+	
+	public Bundle findBundle(String symbolicName, Version version) {
+		for (Bundle bundle : this.getBundles()) {
+			if (symbolicName.equals(bundle.getSymbolicName())) {
+				if (version.equals(bundle.getManifest().getBundleVersion().getVersion())) {
+				return bundle;
+				}
+			}
+		}
+		return null;
 	}
 
 } // FrameworkImpl

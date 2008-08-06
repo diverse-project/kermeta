@@ -8,7 +8,13 @@ import org.osgi.framework.BundleContext;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorDynamic;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorStatic;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
-
+/**
+ * 
+ * @author Erwan Daubert - erwan.daubert@gmail.com
+ * @version 1.0
+ * @see BundleActivator
+ * This class is the {@link BundleActivator} of the OSGi Introspector bundle.
+ */
 public class Activator implements BundleActivator {
 
 	private OSGiIntrospectorDynamic introspectorDynamic;
@@ -26,7 +32,6 @@ public class Activator implements BundleActivator {
 				this.introspectorDynamic, null );
 		OSGiIntrospectorUtil.log(Level.INFO, "Dynamic Introspector service register");
 		
-		// TODO ne mettre que le dynamique et pas le static ??
 		OSGiIntrospectorUtil.setContext(context);
 		this.introspectorStatic = new OSGiIntrospectorStatic();
 		context.registerService(this.introspectorStatic.getClass().getName(),

@@ -2,11 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Framework.java,v 1.3 2008-08-04 16:17:25 edaubert Exp $
+ * $Id: Framework.java,v 1.4 2008-08-06 13:37:22 edaubert Exp $
  */
 package framework;
 
 import java.util.List;
+
+import manifest.Version;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -50,6 +52,8 @@ public interface Framework extends EObject {
 	 * @param symbolicName the Bundle-SymbolicName which define a bundle
 	 * @return null if there is no bundle define with the symbolicName, a list which contains bundles else
 	 */
-	List<Bundle> findBundle(String symbolicName);
+	List<Bundle> findBundles(String symbolicName);
+	
+	Bundle findBundle(String symbolicName, Version version);
 
 } // Framework

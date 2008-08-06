@@ -29,7 +29,13 @@ import option.Uses;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
 import framework.Bundle;
 import framework.Framework;
-
+/**
+ * 
+ * @author Erwan Daubert - erwan.daubert@gmail.com
+ * @version 1.0
+ * 
+ * This class is used to resolve all references without using OSGi dynamicity. 
+ */
 public class ResolverStatic implements Resolver {
 
 	private Map<Bundle, String> log;
@@ -49,7 +55,7 @@ public class ResolverStatic implements Resolver {
 	public void resolveFragmentHost(Framework framework, Map<Bundle, String> fragmentHosts ) {
 		Map<Bundle, String> fragmentHostsTmp = new HashMap<Bundle, String>();
 		for (Bundle fragment : fragmentHosts.keySet()) {
-			List<Bundle> hostBundles = framework.findBundle(fragmentHosts.get(fragment));
+			List<Bundle> hostBundles = framework.findBundles(fragmentHosts.get(fragment));
 			if (hostBundles == null) {
 				fragmentHostsTmp.put(fragment, fragmentHosts.get(fragment));
 			} else {
@@ -259,7 +265,7 @@ public class ResolverStatic implements Resolver {
 		}
 	}
 
-	public void resolveActivator(Map<BundleActivator, Bundle> bundles, Map<BundleActivator, String> activators) {
+	public void resolveActivator(Map<BundleActivator, String> activators, Map<BundleActivator, Bundle> bundles) {
 		for (BundleActivator value : activators.keySet()) {
 			Class element = bundles.get(value).getPackage().getClass(
 					activators.get(value));
@@ -383,9 +389,8 @@ public class ResolverStatic implements Resolver {
 		}	
 	}
 
-	public void resolveRequireBundle(Framework framework, 
-			Map<RequireBundle, String> requireBundles,
-			Map<RequireBundle, Bundle> bundles) {
+	public void resolveRequireBundle(Map<RequireBundle, String> requireBundles,
+			Map<RequireBundle, Bundle> bundles, Framework framework) {
 		for (RequireBundle value : requireBundles.keySet()) {
 				value.setBundle(requireBundles.get(value));
 				value.setResolved(false);
@@ -396,7 +401,7 @@ public class ResolverStatic implements Resolver {
 
 	public void resolveImportPackage(
 			Map<ImportPackage, List<String>> importPackages,
-			Map<ImportPackage, Bundle> bundles) {
+			Map<ImportPackage, Bundle> bundles, Framework framework) {
 		for (ImportPackage value : importPackages.keySet()) {
 			for (String _package : importPackages.get(value)) {
 				value.addPackage(_package);
@@ -407,7 +412,7 @@ public class ResolverStatic implements Resolver {
 		
 	}
 
-	public void resolveExportService(Map<Service, Bundle> bundles, Map<Service, String> services) {
+	public void resolveExportService(Map<Service, String> services, Map<Service, Bundle> bundles) {
 		List<Service> tmp = new ArrayList<Service>();
 		for (Service service : services.keySet()) {
 			String serviceReference = services.get(service);

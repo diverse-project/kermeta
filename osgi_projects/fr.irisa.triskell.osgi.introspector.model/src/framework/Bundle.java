@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Bundle.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: Bundle.java,v 1.3 2008-08-06 13:37:22 edaubert Exp $
  */
 package framework;
 
@@ -119,7 +119,8 @@ public interface Bundle extends EObject {
 
 	/**
 	 * Sets the value of the '{@link framework.Bundle#getSymbolicName <em>Symbolic Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Symbolic Name</em>' attribute.
 	 * @see #getSymbolicName()
 	 * @generated

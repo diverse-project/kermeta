@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VersionImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: VersionImpl.java,v 1.3 2008-08-06 13:37:23 edaubert Exp $
  */
 package manifest.impl;
 
@@ -284,7 +284,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

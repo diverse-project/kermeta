@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportPackageImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: ImportPackageImpl.java,v 1.3 2008-08-06 13:37:23 edaubert Exp $
  */
 package manifest.impl;
+
+import jar.Package;
 
 import java.util.Collection;
 
@@ -308,6 +310,20 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 			getPackages().add(value);
 		}
 
+	}
+
+	public void addPackageReference(Package _package) {
+		boolean exist = false;
+		for (Package p : getPackagesList()) {
+			if (p.getFullPath().equals(_package.getFullPath())) {
+				exist = true;
+				break;
+			}
+		}
+		if (!exist) {
+			getPackagesList().add(_package);
+		}
+		
 	}
 
 } // ImportPackageImpl

@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.management.GarbageCollectorMXBean;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
@@ -29,7 +30,14 @@ import org.osgi.framework.BundleContext;
 
 import framework.Bundle;
 import framework.Framework;
-
+/**
+ * 
+ * @author Erwan Daubert - erwan.daubert@gmail.com
+ * @version 1.0
+ * 
+ * This class contains function which are used into {@link OSGiIntrospectorDynamic} and {@link OSGiIntrospectorStatic}
+ *
+ */
 public class OSGiIntrospectorUtil {
 
 	// TODO singleton
@@ -41,9 +49,9 @@ public class OSGiIntrospectorUtil {
 	 * This function is used to remove all "<CR> <LF> <SPACE>" into a MANIFEST
 	 * entry.
 	 * 
-	 * @param manifestFileTmp
-	 * @return
-	 * @throws IOException
+	 * @param manifestFileTmp the file which represents the manifest
+	 * @return a String which contains the content of the Manifest without "<CR> <LF> <SPACE>"
+	 * @throws IOException when the manifestFileTmp is not valid or when there are errors during reading
 	 */
 	public static String removeEOLBlank(java.io.File manifestFileTmp)
 			throws IOException {
@@ -86,9 +94,9 @@ public class OSGiIntrospectorUtil {
 	 * This function is used to add into the classPath all package define into a
 	 * JAR
 	 * 
-	 * @param bundle
-	 * @param file
-	 * @throws IOException
+	 * @param bundle the {@link Bundle} object where we want add entries
+	 * @param file the Jar file where there entries to add
+	 * @throws IOException when the file is not valid or when there are errors during reading
 	 */
 	public static void addEntriesFromJar(Bundle bundle, File file)
 			throws IOException {
@@ -125,15 +133,11 @@ public class OSGiIntrospectorUtil {
 	/**
 	 * This function is used to generate the entry representation of all entries
 	 * into a JAR file.
+	 *
 	 * 
-	 * @param jar
-	 * @param getAll
-	 *            when it's true, we generate all entry representation like
-	 *            folders, files, packages and classes, but if it's false, we
-	 *            generate only packages and classes.
-	 * @param rootFolder
-	 * @param bundle
-	 * @param isBundleCLassPath
+	 * @param jar the {@link JarFile} which represent the Jar file
+	 * @param bundle the bundle where we want add entries
+	 * @param bundleClassPath boolean to define if this function is call for classPath element(true) or just for initialize the bundle(false)
 	 */
 	public static void listAllEntriesIntoJarFile(JarFile jar, Bundle bundle,
 			boolean bundleClassPath) {
@@ -160,6 +164,12 @@ public class OSGiIntrospectorUtil {
 		}
 	}
 
+	/**
+	 * This function is used to log an event.
+	 * It's used to log events with the same logger
+	 * @param level the {@link Level} of log 
+	 * @param message the message to logged
+	 */
 	public static void log(Level level, String message) {
 		if (logger == null) {
 			logger = Logger.getLogger(context.getBundle().getSymbolicName());
@@ -187,9 +197,9 @@ public class OSGiIntrospectorUtil {
 	 * This function is used to generate the XMI file which represent an OSGi
 	 * framework.
 	 * 
-	 * @param XMIFilePathToSave
-	 *            the path of the XMI file which will create
-	 * @return true if the generation is ok, false else
+	 * @param XMIFilePathToSave the path of the XMI file which will create
+	 * @param framework the framework which define the model to save
+	 * @return true if the save is OK, false else
 	 */
 	public static boolean saveModel(String XMIFilePathToSave,
 			Framework framework) {

@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportPackage.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: ImportPackage.java,v 1.3 2008-08-06 13:37:23 edaubert Exp $
  */
 package manifest;
 
+import jar.Package;
 import option.ImportPackageDirective;
 
 import org.eclipse.emf.common.util.EList;
@@ -114,5 +115,7 @@ public interface ImportPackage extends MANIFESTEntry {
 	void setResolved(boolean value);
 
 	void addPackage(String value);
+	
+	void addPackageReference(Package _package);
 
 } // ImportPackage
