@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestHostImpl.java,v 1.1 2008-02-04 10:40:24 ftanguy Exp $
+ * $Id: InterestHostImpl.java,v 1.2 2008-08-06 14:16:18 dvojtise Exp $
  */
 package org.kermeta.model.interest.impl;
 
@@ -161,8 +161,9 @@ public class InterestHostImpl extends EObjectImpl implements InterestHost {
 	 */
 	public Concern getConcern(String id) {
 		for ( Concern c : getConcerns() )
-			if ( c.getId().equals(id) )
-				return c;
+			if(c != null) // robustness code, sometimes we have invalid data (probably due to concurrentmodification somewhere else): do not fail here
+				if ( c.getId().equals(id) )
+					return c;
 		return null;
 	}
 
