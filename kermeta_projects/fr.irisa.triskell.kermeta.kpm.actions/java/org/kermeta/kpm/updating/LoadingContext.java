@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingContext.java,v 1.6 2008-05-28 09:25:09 ftanguy Exp $
+/*$Id: LoadingContext.java,v 1.7 2008-08-06 14:13:41 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	LoadingContext.java
 * License : EPL
@@ -31,6 +31,7 @@ import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.plugin.KPMActions;
 
 public class LoadingContext implements IAction {
 
@@ -67,12 +68,14 @@ public class LoadingContext implements IAction {
 					LoaderPlugin.getDefault().load(u.getName(), args);
 					IFile file = ResourceHelper.getIFile( u.getName() );
 					KermetaUnit newValue = IOPlugin.getDefault().getKermetaUnit( u.getName() );
-					KermetaUnitHost.getInstance().updateValue(file, newValue);			
+					KermetaUnitHost.getInstance().updateValue(file, newValue);	
+
 				} catch (URIMalformedException e) {
-					e.printStackTrace();
+					KPMActions.log.warn("Exception while loading " + u.getName(),e);
 				} catch (NotRegisteredURIException e) {
-					e.printStackTrace();
+					KPMActions.log.warn("Exception while loading " + u.getName(),e);
 				} catch (IdNotFoundException e) {
+					KPMActions.log.warn("Exception while loading " + u.getName(),e);
 				}
 			}
 			
