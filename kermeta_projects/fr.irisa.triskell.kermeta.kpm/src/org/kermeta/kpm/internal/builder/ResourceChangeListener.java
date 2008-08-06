@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceChangeListener.java,v 1.6 2008-06-09 10:03:31 ftanguy Exp $
+/*$Id: ResourceChangeListener.java,v 1.7 2008-08-06 14:12:44 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ResourceChangeListener.java
 * License : EPL
@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.internal.InternalKpmManager;
 
 /**
@@ -86,9 +87,15 @@ public class ResourceChangeListener implements IResourceChangeListener, IResourc
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				if ( delta.getKind() == IResourceDelta.ADDED ) {
-					// Project addition, let's add a builder to it.
-					ProjectVisitor v = new ProjectVisitor();
-					delta.getResource().accept(v);						
+					if(delta.getResource().isAccessible()){
+						// Project addition, let's add a builder to it.
+						ProjectVisitor v = new ProjectVisitor();
+						delta.getResource().accept(v);
+					}
+					else{
+						KPMPlugin.internalLog.debug("ResourceChangeListener ignoring addition of closed project " + delta.getResource().getName());
+						// DVK note, this is because it may be created, but creation will create a closed project, it may be opened later ...
+					}
 				} else if ( delta.getKind() == IResourceDelta.REMOVED ) {
 					// Project deletion, let's remove any units coming from that project.
 					DeltaVisitor v = new DeltaVisitor(InternalKpmManager.getDefault().getKpm(), monitor);
