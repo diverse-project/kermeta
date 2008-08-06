@@ -1,4 +1,4 @@
-/* $Id: LogConfigurationHelper.java,v 1.7 2008-07-30 09:58:07 dvojtise Exp $
+/* $Id: LogConfigurationHelper.java,v 1.8 2008-08-06 13:29:34 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : LogConfigurationHelper.java
  * License    : EPL
@@ -103,6 +103,12 @@ public class LogConfigurationHelper {
 		try {
 			// save current property to make sure to be able to set it back if necessary
             logClassName = System.getProperty(LogFactoryImpl.LOG_PROPERTY);
+            //System.out.println("Default  " +LogFactoryImpl.LOG_PROPERTY + " = " +logClassName);
+            // make sure to initialize the factory at least one logger with the original logger
+            try{
+    			LogFactory.getFactory();
+    		}
+    		catch(Exception e){}
         } catch (SecurityException e) {
         	logClassName = "org.apache.commons.logging.impl.SimpleLog";
         }
@@ -160,6 +166,8 @@ public class LogConfigurationHelper {
 		// set back the logger to the original property is case some other tool need their own logger
 		try {
 			// save current property to make sure to be able to set it back if necessary
+			if(logClassName == null) // are we are able to unset a property, if the original value was not set, use SimpleLog as default
+				logClassName = "org.apache.commons.logging.impl.SimpleLog";
 			System.setProperty(LogFactoryImpl.LOG_PROPERTY, logClassName);
         } catch (Exception e) {
         	//e.printStackTrace();
