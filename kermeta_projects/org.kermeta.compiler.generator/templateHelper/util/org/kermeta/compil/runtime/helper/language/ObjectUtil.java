@@ -346,7 +346,7 @@ public class ObjectUtil {
 		
 	}
 	
-	public static Boolean isKindOf(Class metaClass, Class metaClass2) {
+	public static Boolean isKindOf(Object referencedObj, Class metaClass2) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -63,6 +63,36 @@ public class RealUtil {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public static Boolean equals(Double real, Integer other) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Integer compareTo(Double real, Integer other) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Boolean isLower(Double real, Integer other) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Boolean isGreater(Double real, Integer other) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Boolean isGreaterOrEqual(Double real, Integer other) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Boolean isLowerOrEqual(Double real, Integer other) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

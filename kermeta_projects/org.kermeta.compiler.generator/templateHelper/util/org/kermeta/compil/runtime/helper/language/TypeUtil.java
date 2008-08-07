@@ -24,22 +24,32 @@ public class TypeUtil {
 		return null;
 	}
 
-	public static Boolean isInstance(Class metaClass, String string) {
+	public static Boolean isInstance(kermeta.language.structure.Class metaClass, java.lang.String string) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	public static Boolean isInstance(Class metaClass, kermeta.language.structure.Object element) {
+	public static Boolean isInstance(kermeta.language.structure.Class metaClass, kermeta.language.structure.Object element) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static Boolean isInstance(Class metaClass, java.lang.Object element) {
+	public static Boolean isInstance(kermeta.language.structure.Class metaClass, java.lang.Object element) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static Boolean isInstance(kermeta.language.structure.Type typeName, kermeta.language.structure.Object o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static Boolean isInstance(kermeta.language.structure.Type typeName, java.lang.Object o) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static Boolean isSuperTypeOf(Type object, Class metaClass) {
+	public static Boolean isSuperTypeOf(kermeta.language.structure.Type object, kermeta.language.structure.Class metaClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
