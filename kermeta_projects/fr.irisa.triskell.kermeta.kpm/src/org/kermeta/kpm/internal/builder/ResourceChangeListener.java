@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceChangeListener.java,v 1.7 2008-08-06 14:12:44 dvojtise Exp $
+/*$Id: ResourceChangeListener.java,v 1.8 2008-08-07 09:40:15 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ResourceChangeListener.java
 * License : EPL
@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -104,6 +105,8 @@ public class ResourceChangeListener implements IResourceChangeListener, IResourc
 				return Status.OK_STATUS;
 			}
 		};
+		// reserves exclusive write access to the resource we are updating by associating a scheduling rule with the job
+		job.setRule(ResourcesPlugin.getWorkspace().getRoot()); 
 		job.schedule();
 	}
 	

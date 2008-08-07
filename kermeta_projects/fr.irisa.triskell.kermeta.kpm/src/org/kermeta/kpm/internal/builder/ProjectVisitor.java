@@ -1,6 +1,6 @@
 
 
-/*$Id: ProjectVisitor.java,v 1.4 2008-06-20 07:22:23 ftanguy Exp $
+/*$Id: ProjectVisitor.java,v 1.5 2008-08-07 09:40:15 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ProjectVisitor.java
 * License : EPL
@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
+import org.kermeta.kpm.KPMPlugin;
 
 /**
  * Handle the creation of a new project into the workspace.
@@ -71,6 +72,7 @@ public class ProjectVisitor implements IResourceVisitor {
 		nc[0] = command;
 		desc.setBuildSpec(nc);
 		project.setDescription(desc, null);
+		KPMPlugin.internalLog.debug("Added KMPBuilder to the buildCommand of project " + project.getName());
 		project.build( IncrementalProjectBuilder.FULL_BUILD, null );
 	}
 	
