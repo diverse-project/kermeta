@@ -1,6 +1,6 @@
 
 
-/*$Id: CheckFileAction.java,v 1.4 2008-05-28 09:25:42 ftanguy Exp $
+/*$Id: CheckFileAction.java,v 1.5 2008-08-07 11:47:14 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.ui
 * File : 	CheckFileAction.java
 * License : EPL
@@ -58,11 +58,16 @@ public class CheckFileAction implements IEditorActionDelegate {
 			public void run(IProgressMonitor monitor) throws CoreException {		
 				if ( file != null ) {
 					Unit unit = KpmManager.getDefault().getUnit( file );
-					unit.setLastTimeModified( new Date(0) );
-					Map<String, Object> options = new HashMap<String, Object>();
-					if ( document != null )
-						options.put("content", document.get());
-					EventDispatcher.sendEvent(unit, "update", options, monitor);
+					if(unit == null){						
+						KermetaUIPlugin.logErrorMessage("Cannot retrieve a unit for " +file.getName() + " in KPM manager", new Exception("OutofdateKPM"));
+					}
+					else{
+						unit.setLastTimeModified( new Date(0) );
+						Map<String, Object> options = new HashMap<String, Object>();
+						if ( document != null )
+							options.put("content", document.get());
+						EventDispatcher.sendEvent(unit, "update", options, monitor);
+					}
 				}
 			}
 		};
