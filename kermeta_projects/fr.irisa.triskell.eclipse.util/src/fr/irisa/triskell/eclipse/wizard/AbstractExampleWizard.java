@@ -1,4 +1,4 @@
-/* $Id: AbstractExampleWizard.java,v 1.2 2008-06-24 11:34:45 ftanguy Exp $
+/* $Id: AbstractExampleWizard.java,v 1.3 2008-08-07 09:39:21 dvojtise Exp $
  * Project    : org.kermeta.kmlogo.tutorial
  * File       : AbstractExampleWizard.java
  * License    : EPL
@@ -117,13 +117,16 @@ public abstract class AbstractExampleWizard extends Wizard
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				monitor.beginTask("Unzipping Projects", projectDescriptors.size());
+				//System.out.println("Unzipping projects...");
 				for ( ProjectDescriptor desc : projectDescriptors ) {
 					unzipProject(desc, monitor);
 					monitor.worked(1);
 				}
+				//System.out.println("Projects unzipped");
 				return Status.OK_STATUS;
 			}
 		};
+		job.setRule(ResourcesPlugin.getWorkspace().getRoot());
 		job.schedule();
 		return true;
 	}
@@ -201,6 +204,9 @@ public abstract class AbstractExampleWizard extends Wizard
 				zipEntry = zipFileStream.getNextEntry();
 			}
 			
+			project.open(monitor);
+			// in order to make sure the project natures are correctly identified close and reopen the project
+			project.close(monitor);
 			project.open(monitor);
 			project.refreshLocal(IFile.DEPTH_INFINITE, monitor);
 		} catch (IOException e) {
