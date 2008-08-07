@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 imports="org.eclipse.emf.codegen.util.* org.eclipse.emf.codegen.ecore.genmodel.* fr.irisa.triskell.eclipse.ecore.* org.kermeta.compiler.generator.helper.model.* org.kermeta.simk.* fr.irisa.triskell.kermeta.language.structure.NamedElement"
 	 class="Wrapper"
-	 version="$Id: Wrapper.javajet,v 1.2 2008-07-31 07:05:27 cfaucher Exp $" %>
+	 version="$Id: Wrapper.javajet,v 1.3 2008-08-07 13:37:19 cfaucher Exp $" %>
 <%SMContext smContext = (SMContext) argument;%>
 
 <%SMClass wrapperClass = smContext.getSMClass();%>
@@ -33,6 +33,17 @@ public class <%=wrapperClass.getName()%> {
 		<% } %>
 	) {
 		<%=helperMethod.getBody()%>
+	}
+	<% } %>
+	
+	
+	<% if( wrapperClass.getName().equals("RealWrapper") ) { %>
+	public static Boolean equals(Double real, Integer other) {
+		return org.kermeta.compil.runtime.helper.basetypes.RealUtil.equals(real, other);
+	}
+
+	public static Integer compareTo(Double real, Integer other) {
+		return org.kermeta.compil.runtime.helper.basetypes.RealUtil.compareTo(real, other);
 	}
 	<% } %>
 
