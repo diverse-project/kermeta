@@ -1,4 +1,4 @@
-// $Id: value_types.kmt,v 1.5 2008-08-01 18:42:46 cfaucher Exp $
+// $Id: value_types.kmt,v 1.6 2008-08-07 13:41:08 cfaucher Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -449,7 +449,7 @@ class Real inherits Numeric, Summable<Real>
 	 * returns self / other
 	 */
 	operation div(other : Real) : Real is do
-		if other == 0 then raise DivisionByZero.new end
+		if other == 0.toReal then raise DivisionByZero.new end
 		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.div(self, other)
         end

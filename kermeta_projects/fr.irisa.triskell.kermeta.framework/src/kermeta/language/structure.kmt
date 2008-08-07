@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.65 2008-08-01 18:42:46 cfaucher Exp $
+/* $Id: structure.kmt,v 1.66 2008-08-07 13:41:08 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -46,6 +46,7 @@ aspect class Object
 	 * Returns the Object that contains current Object, void if the Object has
 	 * no container
 	 */
+	 @WrapperValueTypeReturnType "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
 	operation container() : Object from Object is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.container(this)"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
@@ -157,6 +158,7 @@ aspect class Object
 	 * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to 
 	 * the name of the given Property (i.e the type of the property instance).
 	 */
+	 @WrapperValueTypeReturnType "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
 	operation get(~property : Property) : Object from Object is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, property)"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
@@ -249,6 +251,8 @@ aspect class Object
 	/**
 	 * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.
 	 */
+	 @WrapperValueTypeReturnType "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
+	 @WrapperValueTypeSelfExpression "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
 	operation asType(type : Class) : Object is do
 		if isInstanceOf(type) then result := self
 		else raise kermeta::exceptions::TypeCastError.new
@@ -436,7 +440,7 @@ aspect class Model {
  	/**
  	 * Returns a set of all the elements of the model that are instance of the given Type
  	 */
-	operation filter(typeName : Type) : set Object[0..*] is
+	operation filter(typeName : Type) : Set<Object> is
 		do
 			result := contents.select { o | typeName.isInstance(o) }.asSet
 		end
