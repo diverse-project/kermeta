@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.10 2008-07-31 08:15:03 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.11 2008-08-07 14:59:01 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -31,28 +31,21 @@ class CompilerHelperJava {
 	
 	/**
 	 * Give the pp string corresponding to the CreateFactory in EMF-like of a type
-	 * @param localType
-	 * @return String
+	 * @deprecated
 	 */
 	operation ppEmfLikeCreateFactory(localType : String) : String is do
 		result := ""
 		
-		if localType == "String" or localType == "java.lang.String" then
-			result := " = null"
-			
-		else
-			
-			var localType2 : String init localType.replace(".", "%")
+		var localType2 : String init localType.replace(".", "%")
 
-			var name_set : OrderedSet<String> init localType2.split("%")
+		var name_set : OrderedSet<String> init localType2.split("%")
 			
-			var allPackages_label : String init localType.substring(0, localType.size()-name_set.elementAt(name_set.size()-1).size())
+		var allPackages_label : String init localType.substring(0, localType.size()-name_set.elementAt(name_set.size()-1).size())
 			
-			if name_set.size()>=2 then
-				result := " = " + allPackages_label + name_set.elementAt(name_set.size-2).capName() +"Factory.eINSTANCE.create" + name_set.elementAt(name_set.size()-1) + "()"
-			else
-				result := " = " + "Factory.eINSTANCE.create" + localType2 + "()"
-			end
+		if name_set.size()>=2 then
+			result := " = " + allPackages_label + name_set.elementAt(name_set.size-2).capName() +"Factory.eINSTANCE.create" + name_set.elementAt(name_set.size()-1) + "()"
+		else
+			result := " = " + "Factory.eINSTANCE.create" + localType2 + "()"
 		end
 	end
 	

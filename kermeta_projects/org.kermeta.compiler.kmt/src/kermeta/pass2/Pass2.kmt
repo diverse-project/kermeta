@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.28 2008-08-01 18:46:37 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.29 2008-08-07 14:59:02 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -63,7 +63,7 @@ package structure {
 			self.setLinks(context)
 			//super(context) 
 			
-			if self.isValueType() then
+			if self.isValueType() and (self.name != "Numeric") then
 				context.current_valueType := self
 				self.ownedOperation.each{ op |
 					op.applyPass2BehaviorJava(context)
@@ -209,17 +209,18 @@ package structure {
 					self.setLinks(context)
 					super(context)
 					
-					if not self.isAbstract then
+					//DO NOT REMOVE the following commented source code
+					//if not self.isAbstract then
 						self.createBehaviorJava(context)
-					else
+					//else
 						//self.container.asType(ClassDefinition).ecoreModelElement.~abstract := true
-						if not Operation.new().isVoidType(self.type.getTypeQName()) then
+						/*if not Operation.new().isVoidType(self.type.getTypeQName()) then
 							EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, self.type.createBehaviorJava(context) + " result = null;\nreturn result;")
-						end
-					end
+						end*/
+					//end
 				
 				else
-				 	self.compilingInSimkMode(context)
+					self.compilingInSimkMode(context)
 				end
 			end
 		end

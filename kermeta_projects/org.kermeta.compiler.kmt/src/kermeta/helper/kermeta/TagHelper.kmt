@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.11 2008-07-10 14:10:04 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.12 2008-08-07 14:59:02 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -67,6 +67,20 @@ aspect class Object {
 	 */
 	operation getCompiledJavaExtern() : String is do
 		result := getUniqueTagValue("compiledJavaExtern")
+	end
+	
+	/**
+	 * Get the Wrapprings of ValueType's ReturnType for tackle the  eplacing the current one
+	 */
+	operation getWrapperValueTypeReturnType() : String is do
+		result := getUniqueTagValue("WrapperValueTypeReturnType")
+	end
+	
+	/**
+	 * Get the Wrapprings of ValueType's SelfExpression for tackle the  eplacing the current one
+	 */
+	operation getWrapperValueTypeSelfExpression() : String is do
+		result := getUniqueTagValue("WrapperValueTypeSelfExpression")
 	end
 	
 	/**

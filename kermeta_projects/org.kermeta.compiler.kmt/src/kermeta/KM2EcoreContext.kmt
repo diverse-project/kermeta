@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.25 2008-08-01 18:46:37 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.26 2008-08-07 14:59:02 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -70,6 +70,8 @@ class KM2EcoreContext
 	attribute ftSuffixActivation : Boolean [0..1]
 	attribute ftContextualSelf : String [0..1]
 	reference ftProductTypeStack : Stack<ProductType> [0..1]
+	reference ftMapTypeStack : Stack<Hashtable<Type, Type>> [0..1]
+	attribute ftReturnType : String [0..1]
 	/******/
 	
 	
@@ -95,7 +97,7 @@ class KM2EcoreContext
 	attribute JAVA_CLASS_EXCEPTION_SWITCHER : String [1..1]
 	attribute VARIABLE_EXCEPTION_SWITCHER : String [1..1]
 	attribute NOT_EVALUATED_MESSAGE : String [1..1]
-	attribute leftAssign : String [1..1]
+	//attribute leftAssign : String [1..1]
 	attribute SELF_EXPRESSION_TO_REPLACE : String [1..1]
 	attribute RETURN_EXPRESSION_TO_REPLACE : String [1..1]
 	/********/
@@ -136,8 +138,11 @@ class KM2EcoreContext
 		self.inc_ftSuffix := 0
 		self.ftSuffixActivation := false
 		self.ftContextualSelf := ""
+		self.ftReturnType := ""
 		
 		self.ftProductTypeStack := Stack<ProductType>.new()
+		
+		self.ftMapTypeStack := Stack<Hashtable<Type, Type>>.new()
 		
 		self.lastStatementStack := Stack<String>.new()
 		
@@ -180,7 +185,7 @@ class KM2EcoreContext
 		self.JAVA_CLASS_EXCEPTION_SWITCHER := "org.kermeta.compil.runtime.helper.error.KRuntimeError"
 		self.VARIABLE_EXCEPTION_SWITCHER := "ex_switcher"
 		self.NOT_EVALUATED_MESSAGE := "//FIXME This statement cannot be evaluated without an assignment: "
-		self.leftAssign := "LEFT_ASSIGN_TO_REPLACE"
+		//self.leftAssign := "LEFT_ASSIGN_TO_REPLACE"
 		self.SELF_EXPRESSION_TO_REPLACE := "SELF_EXPRESSION_TO_REPLACE"
 		self.RETURN_EXPRESSION_TO_REPLACE := "RETURN_EXPRESSION_TO_REPLACE"
 		

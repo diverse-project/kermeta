@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.3 2008-08-01 18:46:36 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.4 2008-08-07 14:59:01 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -15,6 +15,7 @@ require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext
 
 using kermeta::language::structure
 using kermeta::standard
+using kermeta::utils
 using km2ecore
 using km2ecore::helper::kermeta
 using km2ecore::helper::java
@@ -108,7 +109,15 @@ aspect class CallFeature {
 			if p.type.isInstanceOf(FunctionType) then
 				context.current_param_ft := p.name
 			end
-		}	
+		}
+		
+		var map_type : Hashtable<Type, Type> init Hashtable<Type, Type>.new()
+		var inc_tp : Integer init 0
+		self.staticTypeVariableBindings.each{ type_ |
+			map_type.put(self.staticOperation.typeParameter.elementAt(inc_tp), type_)
+			inc_tp := inc_tp + 1			
+		}
+		context.ftMapTypeStack.push(map_type)
 		
 		//Lambda expression to inline
 		var ftRightType : Type init Type.new()
@@ -133,6 +142,7 @@ aspect class CallFeature {
 				
 					context.ftProductTypeStack.push(theLambdaExp.staticType.asType(FunctionType).left.asType(ProductType))
 				end
+				
 				ftRightType := theLambdaExp.staticType.asType(FunctionType).right
 			end
 		end
@@ -169,6 +179,34 @@ aspect class CallFeature {
 		end
 		
 		ft_str := ft_str + "//Beginning of the Inlining of the function type: " + self.staticOperation.name + "\n"
+		
+		///////////////
+		context.ftSuffixActivation := false
+		var type_ftReturnType : String init self.staticType.createBehaviorJava(context)
+		//stdio.writeln("+++ type_ftReturnType +++ " + type_ftReturnType)
+		context.ftSuffixActivation := true
+		
+		/* NOT USED IF DESACTIVATION
+		if type_ftReturnType.split("<").size()>1 then
+			type_ftReturnType := type_ftReturnType.split("<").one()
+		end
+		
+		var tp_ftReturnType : String init ""
+		var i_t_ : Integer init 0
+		self.staticTypeVariableBindings.each{ t |
+			if i_t_==1 then
+				tp_ftReturnType := tp_ftReturnType + ", "
+			else
+				i_t_ := 1
+			end
+			tp_ftReturnType := tp_ftReturnType + t.createBehaviorJava(context)
+		}
+		if tp_ftReturnType!="" then
+			tp_ftReturnType := "<" + tp_ftReturnType + ">"
+		end*/
+		context.ftReturnType := type_ftReturnType/* + tp_ftReturnType*/
+		///////////////
+		
 		ft_str := ft_str + self.staticOperation.createBehaviorJava(context)
 		
 		if callElement != "" then
@@ -186,6 +224,7 @@ aspect class CallFeature {
 		ft_str := ft_str + "//Ending of the Inlining of the function type: " + self.staticOperation.name + "\n"
 		
 		context.ftSuffixActivation := false
+		context.ftMapTypeStack.pop()
 		context.ftProductTypeStack.pop()
 		context.ftSuffix.pop()
 		

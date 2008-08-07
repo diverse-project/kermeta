@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.38 2008-08-01 18:46:37 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.39 2008-08-07 14:59:02 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -74,8 +74,15 @@ package structure {
 			//stdio.writeln("\tCurrent operation: " + self.name + " has for type: " + self.type.toString)
 			
 			// The body of the operation must be filled for being compiled
-			if ( not self.body.isVoid() ) then
-				var type_label : String init self.type.createBehaviorJava(context)
+			if not self.body.isVoid() then
+			
+				var type_label : String init ""
+				if context.ftSuffixActivation then
+					type_label := context.ftReturnType
+					context.ftReturnType := ""
+				else
+					type_label := self.type.createBehaviorJava(context)
+				end
 				
 				// result is initialized only if the "return type" is not Void
 				if not isVoidType(type_label) then
@@ -89,7 +96,10 @@ package structure {
 				if (not isVoidType(type_label)) and (not context.ftSuffixActivation) then
 					javaCode.append("\nreturn result;\n")
 				end
-				
+			else
+				if not Operation.new().isVoidType(self.type.getTypeQName()) then
+					javaCode.append(self.type.createBehaviorJava(context) + " result = null;\nreturn result;")
+				end
 			end
 			
 			// Finally add the EAnnotation containing the Java code in the Ecore model
@@ -140,7 +150,7 @@ package structure {
 		
 		
 		/**
-		 * Compiling in Simk mode the methods from ValueType
+		 * Compiling in Simk mode all the methods (inherited methods included) from ValueType
 		 */
 		operation compilingInSimkMode(context : KM2EcoreContext) : Void is do
 			
@@ -158,46 +168,64 @@ package structure {
 				//By default, a self parameter has been added
 				var self_param : SMParameter init SMParameter.new()
 				self_param.name := "self"
-				self_param.type := context.current_valueType.getEMFInstanceClassName()
+				
+				if self.getWrapperValueTypeSelfExpression()!="" then
+					var map_infos : Hashtable<String, String> init self.getWrapperValueTypeSelfExpression().getPropertyInfos()
+					var map_value : String init map_infos.getValue(context.current_valueType.getEMFInstanceClassName())
+					
+					if not map_value.isVoid() then
+						self_param.type := map_value
+					end
+				end
+				
+				if self_param.type.isVoid() then
+					self_param.type := context.current_valueType.getEMFInstanceClassName()
+				end
+				
 				staticMethod.sMParameters.add(self_param)
 				
+				//Management of the Parameters
 				self.ownedParameter.each{ p |
 					var param : SMParameter init SMParameter.new()
 					param.name := p.name
 					
-					//stdio.writeln("p.type.getTypeQName(): " + self.name + " - " + p.type.getTypeQName() + " == " + self.container.asType(ClassDefinition).qualifiedName)
-					
 					if not p.type.isInstanceOf(FunctionType) then
 						if (p.type.getTypeQName() == self.container.asType(ClassDefinition).qualifiedName) or (p.type.getTypeQName() == "kermeta::language::structure::Object") then
-							param.type := context.current_valueType.getEMFInstanceClassName()//.qualifiedName().replace("::", ".")
+							param.type := context.current_valueType.getEMFInstanceClassName()
 						else
-							param.type := p.type.createBehaviorJava(context)//.getTypeQName().replace("::", ".")
+							param.type := p.type.createBehaviorJava(context)
 							if Operation.new().isVoidType(param.type) then
 								param.type := "void"
 							end
 						end
 					else
-						stdio.writeln("//TODO inline the function type into the SIMK body")
+						//This case should never happend
 					end
 					
 					staticMethod.sMParameters.add(param)
 				}
 				
+				//Management of the ReturnType
 				var sMReturn : SMReturn init SMReturn.new()
 				staticMethod.sMReturn := sMReturn
 				
-				//if self.type.isVoid() then
-				//	sMReturn.type := "void"
-				//else
-					if self.type.getTypeQName() == self.container.asType(ClassDefinition).qualifiedName then
-						sMReturn.type := context.current_valueType.getEMFInstanceClassName()//.qualifiedName().replace("::", ".")
-					else
-						sMReturn.type := self.type.createBehaviorJava(context)//.getTypeQName().replace("::", ".")
-						if Operation.new().isVoidType(sMReturn.type) then
-							sMReturn.type := "void"
-						end
+				//if self.type.getTypeQName() == self.container.asType(ClassDefinition).qualifiedName then
+				if self.getWrapperValueTypeReturnType()!="" then
+					var map_infos : Hashtable<String, String> init self.getWrapperValueTypeReturnType().getPropertyInfos()
+					
+					var map_value : String init map_infos.getValue(context.current_valueType.getEMFInstanceClassName())
+					
+					if not map_value.isVoid() then
+						sMReturn.type := map_value
 					end
-				//end
+				end
+				
+				if sMReturn.type.isVoid() then
+					sMReturn.type := self.type.createBehaviorJava(context)
+					if Operation.new().isVoidType(sMReturn.type) then
+						sMReturn.type := "void"
+					end
+				end
 				
 				staticMethod.body := self.createBehaviorJava(context)
 			
@@ -246,7 +274,15 @@ package structure {
 				if not context.ftSuffixActivation then
 					str_tpb := str_tpb + tpb.type.createBehaviorJava(context)
 				else
-					str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
+
+					var type_from_map : Type init context.ftMapTypeStack.peek().getValue(tpb.type)
+					if not type_from_map.isVoid() then
+						context.ftSuffixActivation := false
+						str_tpb := str_tpb + type_from_map.createBehaviorJava(context)
+						context.ftSuffixActivation := true
+					else
+						str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
+					end
 				end
 				
 				i := i + 1
@@ -259,9 +295,38 @@ package structure {
 	}
 	
 	aspect class ObjectTypeVariable {
+
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
+
 			result := self.name
+			
+			if context.ftSuffixActivation then
+			
+				var type_from_map : Type init context.ftMapTypeStack.peek().getValue(self)
+				if not type_from_map.isVoid() then
+				stdio.writeln("++++++++++======== " + self.toString)
+					context.ftSuffixActivation := false
+					result := type_from_map.createBehaviorJava(context)
+					context.ftSuffixActivation := true
+				else
+			
+					var i : Integer init -1
+					var obj : Object init self.container.asType(ClassDefinition).typeParameter.detect{ otv |
+						if otv.isInstanceOf(ObjectTypeVariable) then
+							i:=i+1
+							self == otv
+						end
+					}
+					if (not obj.isVoid()) and (i>=0) then
+						//Prevent cycle
+						if context.ftProductTypeStack.peek().getTypeByIndex(i)!=self then
+							result := context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
+						end
+					end
+				end
+			end
 		end
+
 	}
 	
 	aspect class Enumeration {
@@ -278,7 +343,10 @@ package structure {
 	}
 	
 	aspect class ProductType {
+	
 		operation getTypeByIndex(index : Integer) : Type is do
+		
+			//stdio.writeln("ProductType " + self.toString + " " + index.toString)
 			result := void
 			if self.type.elementAt(index).isInstanceOf(FunctionType) then
 				result := self.type.elementAt(index).asType(FunctionType).right
@@ -286,6 +354,7 @@ package structure {
 				result := self.type.elementAt(index)
 			end
 		end
+		
 	}
 
 }
@@ -590,7 +659,7 @@ package behavior {
 							//eg: self.select{...}.size() =>compilation of the FT + result_ft1.size();
 							if self.container.isInstanceOf(CallExpression) and (not self.container.callsFunctionType()) then
 								//result := result + "self.container: " + self.container.toString + " - " + tgt.toString + " - "
-								result := result + /*context.RETURN_EXPRESSION_TO_REPLACE +*/ context.resultOfLastFt
+								result := result + context.RETURN_EXPRESSION_TO_REPLACE + context.resultOfLastFt
 							end
 						end
 					else
@@ -654,7 +723,11 @@ package behavior {
 								end
 							end
 						else
-							result := static_call + "(" + result
+							/*if result.contains(context.RETURN_EXPRESSION_TO_REPLACE) then
+								result := result.replace(context.RETURN_EXPRESSION_TO_REPLACE, static_call + "(")
+							else*/
+								result := static_call + "(" + result
+							//end
 							if ppCast then
 								result :=  "(" + result
 							end
@@ -713,6 +786,7 @@ package behavior {
 					//str_toInclude := str_toInclude + self.parameters.elementAt(inc_param).staticType.createBehaviorJava(context) + " " + p.name
 					
 					//Declare and initialize the function type parameters
+					//stdio.writeln("uuiigg " + self.toString + " " + p.name)
 					var type_param_ : String init context.ftProductTypeStack.peek().getTypeByIndex(inc_param).createBehaviorJava(context)
 					
 					str_toInclude := str_toInclude + type_param_ + " " + p.name
@@ -775,7 +849,12 @@ package behavior {
 		
 			super(context)
 			
-			result := "super." + self.getContainerAsType(Operation).asType(Operation).name + "("
+			var owningOperation : Operation init self.getContainerAsType(Operation).asType(Operation)
+			
+			var fromOperation : String init owningOperation .superOperation.container.asType(ClassDefinition).qualifiedName.replace("::", ".")
+			//FIXME: Perhaps, we should fix the type parameters of the class definition
+			
+			result := "((" + fromOperation + ") this)." + owningOperation.name + "("
 			
 			var i : Integer init 0
 			self.parameters.each{ param |
@@ -799,7 +878,7 @@ package behavior {
 			
 			result := ""
 			
-			var localType : String init self.type.createBehaviorJava(context)
+			var localType : String init self.staticType.createBehaviorJava(context)
 			var var_id : String init IdentifierHelper.new.getMangledIdentifier(self.identifier, context) + context.getFtSuffix()
 			
 			result := result + localType + " " + var_id
@@ -869,7 +948,12 @@ package behavior {
 				if self.~value.isInstanceOf(Conditional) then
 					result := right
 				else
-					result := left + " = " + ppCast + right
+					if right.contains(context.RETURN_EXPRESSION_TO_REPLACE) then
+						stdio.writeln("Yep")
+						result := right.replace(context.RETURN_EXPRESSION_TO_REPLACE, left + " = " + ppCast)
+					else
+						result := left + " = " + ppCast + right
+					end
 				end
 			end
 			context.resultLastStatementStack.pop()
@@ -893,7 +977,7 @@ package behavior {
 	aspect class TypeReference {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			super(context)
-			result := CompilerHelperJava.new().ppTypeFromMultiplicityElement(self, context)
+			result := self.type.createBehaviorJava(context)//CompilerHelperJava.new().ppTypeFromMultiplicityElement(self, context)
 		end
 	}
 	
