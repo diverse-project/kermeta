@@ -9,8 +9,8 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.interpreter,
  net.sourceforge.lpg.lpgjavaruntime,
- org.eclipse.ocl,
- org.eclipse.ui.ide
+ org.eclipse.ui.ide,
+ org.kermeta.eclipse.ocl.parser
 Eclipse-LazyStart: true
 Bundle-Vendor: IRISA/INRIA
 Export-Package: fr.irisa.triskell.kermeta.ocl,
