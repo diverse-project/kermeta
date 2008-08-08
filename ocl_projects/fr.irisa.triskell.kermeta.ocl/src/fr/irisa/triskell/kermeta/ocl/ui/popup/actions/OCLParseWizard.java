@@ -1,4 +1,4 @@
-/* $Id: OCLParseWizard.java,v 1.12 2008-07-25 14:25:10 dvojtise Exp $
+/* $Id: OCLParseWizard.java,v 1.13 2008-08-08 08:17:54 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.ocl
 * File : 	OCLParseWizard.java
 * License : EPL
@@ -194,10 +194,15 @@ public class OCLParseWizard extends Wizard {
 		URI ecoreURI = URI.createURI(ecorePath);
 		URI oclURI = URI.createURI(oclPath);
 		URI kmtURI = URI.createURI(kmtPath);
-		GenerateKMT generator = new GenerateKMT(console);
-		generator.generate(ecoreURI, oclURI, kmtURI);		
-				
-			
+		try{
+			GenerateKMT generator = new GenerateKMT(console);
+			generator.generate(ecoreURI, oclURI, kmtURI);		
+		}
+		catch(Throwable e){
+			console.println(new ThrowableMessage(e));
+			e.printStackTrace();
+			return true;
+		}
 			
 			
 			
@@ -234,6 +239,7 @@ public class OCLParseWizard extends Wizard {
 				}
 				*/
 			try {
+				kmtFile.refreshLocal(1, null);
 				inputFile.getParent().refreshLocal(1, null);
 			} catch (CoreException e) {
 				console.println(new ThrowableMessage(e));
