@@ -24,7 +24,7 @@
             hasPages="false"
             icon="icons/newkermetafile.png"
             id="org.kermeta.kmlogo.tutorial.wizard"
-            name="Km Logo tutorial"
+            name="Km Logo tutorial (plugins for the main workbench)"
             preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
    </extension>
    <extension
