@@ -3,7 +3,10 @@
 	<target name="build_all_zips" depends="build_fr_irisa_triskell_kmlogo_model, 
 		build_fr_irisa_triskell_kmlogo_model_edit,  
 		build_fr_irisa_triskell_kmlogo_model_editor, 
-		build_fr_irisa_triskell_kmlogo_ui, 
+		build_fr_irisa_triskell_kmlogo_ui,  
+		build_fr_irisa_triskell_kmlogo_ui_win32_x86, 
+		build_fr_irisa_triskell_kmlogo_ui_macosx, 
+		build_fr_irisa_triskell_kmlogo_ui_linux_x86,
 		build_org_kermeta_kmlogo_texteditor">
 	</target>
 	<target name="build_fr_irisa_triskell_kmlogo_model" >
@@ -70,4 +73,40 @@
 			<delete dir="mytemp"/>
 	</target>
 
+	<target name="build_fr_irisa_triskell_kmlogo_ui_linux_x86" >
+				<tstamp>
+					<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+				</tstamp>
+				<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+				<mkdir dir="mytemp"/>
+				<copy todir="mytemp" failonerror="true" overwrite="true">
+					<fileset dir="../fr.irisa.triskell.kmlogo.ui.linux.x86" includes="**" excludes="*mytemp"/>
+				</copy>
+				<zip destfile="zips/fr.irisa.triskell.kmlogo.ui.linux.x86.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+				<delete dir="mytemp"/>
+		</target>
+	<target name="build_fr_irisa_triskell_kmlogo_ui_macosx" >
+					<tstamp>
+						<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+					</tstamp>
+					<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+					<mkdir dir="mytemp"/>
+					<copy todir="mytemp" failonerror="true" overwrite="true">
+						<fileset dir="../fr.irisa.triskell.kmlogo.ui.macosx" includes="**" excludes="*mytemp"/>
+					</copy>
+					<zip destfile="zips/fr.irisa.triskell.kmlogo.ui.macosx.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+					<delete dir="mytemp"/>
+			</target>
+	<target name="build_fr_irisa_triskell_kmlogo_ui_win32_x86" >
+					<tstamp>
+						<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+					</tstamp>
+					<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+					<mkdir dir="mytemp"/>
+					<copy todir="mytemp" failonerror="true" overwrite="true">
+						<fileset dir="../fr.irisa.triskell.kmlogo.ui.win32.x86" includes="**" excludes="*mytemp"/>
+					</copy>
+					<zip destfile="zips/fr.irisa.triskell.kmlogo.ui.win32.x86.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+					<delete dir="mytemp"/>
+			</target>
 </project>
