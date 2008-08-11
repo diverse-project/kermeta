@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.jar.Manifest;
 
 import manifest.BundleActivator;
+import manifest.BundleClassPath;
+import manifest.BundleNativeCode;
 import manifest.BundleSymbolicName;
 import manifest.ExportPackage;
 import manifest.ExportService;
@@ -37,6 +39,16 @@ public interface Resolver {
 	 * @param fragmentHosts a {@link Map}<{@link Bundle}, {@link String}>. The {@link String} is the {@link BundleSymbolicName#getSymbolicName()} value of a {@link Bundle}. 
 	 */
 	public void resolveFragmentHost(framework.Framework framework, Map<Bundle, String> fragmentHosts);
+	
+	/**
+	 * This function is used to resolve the Bundle-ClassPath entry which have not already resolved.
+	 * It look for into Fragment Bundle to find the Bundle-ClassPath entry element.
+	 * @param bundleClassPaths
+	 * @param bundles
+	 */
+	public void resolveBundleClassPath(Map<BundleClassPath, List<String>> bundleClassPaths, Map<BundleClassPath, Bundle> bundles);
+	
+	public void resolveBundleNativeCode(Map<BundleNativeCode, List<String>> bundleNativeCodes, Map<BundleNativeCode, Bundle> bundles);
 	
 	/**
 	 * This function is used to resolve the {@link ExportPackage} entry into {@link MANIFEST}
@@ -128,17 +140,5 @@ public interface Resolver {
 	 * @param framework
 	 */
 	public void resolveRequireBundle(Map<RequireBundle, String> requireBundles, Map<RequireBundle, Bundle> bundles, Framework framework);
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public Map<Bundle, String> getLog();
-	
-	/**
-	 * 
-	 * @param log
-	 */
-	public void setLog(Map<Bundle, String> log);
 }
 

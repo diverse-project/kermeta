@@ -5,9 +5,12 @@ import java.io.PushbackReader;
 import java.io.StringReader;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
+
+import org.apache.log4j.Level;
 
 import manifest.BundleActivator;
+import manifest.BundleClassPath;
+import manifest.BundleNativeCode;
 import manifest.ExportPackage;
 import manifest.ImportPackage;
 import manifest.ImportService;
@@ -24,7 +27,7 @@ import fr.irisa.osgi.manifest.parser.lexer.Lexer;
 import fr.irisa.osgi.manifest.parser.lexer.LexerException;
 import fr.irisa.osgi.manifest.parser.node.Start;
 import fr.irisa.osgi.manifest.parser.parser.ParserException;
-import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
+import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 import framework.Bundle;
 
 /**
@@ -38,11 +41,9 @@ import framework.Bundle;
 public class Parser {
 
 	private Translation translation;
-	//private Map<Bundle, String> log;
 
-	public Parser(Map<Bundle, String> log) {
-		this.translation = new Translation(log);
-		//this.log = log;
+	public Parser() {
+		this.translation = new Translation();
 	}
 
 	/**
@@ -58,6 +59,7 @@ public class Parser {
 	 */
 	public boolean parse(String manifestContent,
 			Bundle bundle) {
+		Object o = null;
 	try {
 		MANIFEST manifest = ManifestFactory.eINSTANCE.createMANIFEST();
 		fr.irisa.osgi.manifest.parser.parser.Parser p = new fr.irisa.osgi.manifest.parser.parser.Parser(
@@ -74,20 +76,20 @@ public class Parser {
 		return this.translation.isValidTranslation();
 		} catch (ParserException e) {
 			// must not appear
-			OSGiIntrospectorUtil.log(Level.SEVERE, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
-					+ bundle.getLocation() + ".");
+			OSGiIntrospectorUtil.log(Level.ERROR, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
+					+ bundle.getLocation() + ".", bundle);
 			e.printStackTrace();
 			return false;
 		} catch (LexerException e) {
 			// must not appear
-			OSGiIntrospectorUtil.log(Level.SEVERE, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
-					+ bundle.getLocation() + ".");
+			OSGiIntrospectorUtil.log(Level.ERROR, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
+					+ bundle.getLocation() + ".", bundle);
 			e.printStackTrace();
 			return false;
 		} catch (IOException e) {
 			// must not appear
-			OSGiIntrospectorUtil.log(Level.SEVERE, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
-					+ bundle.getLocation() + ".");
+			OSGiIntrospectorUtil.log(Level.ERROR, "There is an unknown error when we try to parser the MANIFEST file on the bundle "
+					+ bundle.getLocation() + ".", bundle);
 			e.printStackTrace();
 			return false;
 		}
@@ -188,4 +190,22 @@ public class Parser {
 	public List<Service> getServicesAvailable() {
 		return this.translation.getServicesAvailable();
 	}
+
+	public Map<BundleClassPath, Bundle> getUnresolvedBundleClassPathBundle() {
+		return translation.getUnresolvedBundleClassPathBundle();
+	}
+
+	public Map<BundleClassPath, List<String>> getUnresolvedBundleClassPathValue() {
+		return translation.getUnresolvedBundleClassPathValue();
+	}
+
+	public Map<BundleNativeCode, Bundle> getUnresolvedBundleNativeCodeBundle() {
+		return translation.getUnresolvedBundleNativeCodeBundle();
+	}
+
+	public Map<BundleNativeCode, List<String>> getUnresolvedBundleNativeCodeValue() {
+		return translation.getUnresolvedBundleNativeCodeValue();
+	}
+	
+	
 }

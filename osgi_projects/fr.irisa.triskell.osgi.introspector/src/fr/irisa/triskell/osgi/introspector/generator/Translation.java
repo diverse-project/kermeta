@@ -16,8 +16,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import org.osgi.framework.Constants;
-
 import manifest.BundleActivationPolicy;
 import manifest.BundleActivator;
 import manifest.BundleCategory;
@@ -77,9 +75,13 @@ import option.Singleton;
 import option.Uses;
 import option.Visibility;
 import option.VisibilityEnum;
+
+import org.apache.log4j.Level;
+import org.osgi.framework.Constants;
+
 import fr.irisa.osgi.manifest.parser.analysis.Analysis;
 import fr.irisa.osgi.manifest.parser.node.*;
-import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
+import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 import framework.Bundle;
 /**
  * 
@@ -91,7 +93,6 @@ import framework.Bundle;
  */
 public class Translation implements Analysis {
 
-	private Map<Bundle, String> log;
 	private boolean validTranslation;
 
 	private MANIFEST manifest;
@@ -101,6 +102,9 @@ public class Translation implements Analysis {
 	
 	private Map<Bundle, String> fragmentHostReferences;
 
+	private Map<BundleNativeCode, Bundle> unresolvedBundleNativeCodeBundle;
+	private Map<BundleNativeCode, List<String>> unresolvedBundleNativeCodeValue;
+	
 	private Map<BundleClassPath, Bundle> unresolvedBundleClassPathBundle;
 	private Map<BundleClassPath, List<String>> unresolvedBundleClassPathValue;
 	
@@ -153,17 +157,19 @@ public class Translation implements Analysis {
 	private boolean maxNotInclude;
 	private MANIFESTEntry entry;
 
-	public Translation(Map<Bundle, String> log) {
+	public Translation() {
 		manifestFactory = ManifestFactory.eINSTANCE;
 		parameterFactory = OptionFactory.eINSTANCE;
 		jarFactory = JarFactory.eINSTANCE;
 
 		this.validTranslation = true;
-		this.log = log;
 
 		this.servicesAvailable = new ArrayList<Service>();
 		
 		this.fragmentHostReferences = new Hashtable<Bundle, String>();
+
+		this.unresolvedBundleNativeCodeBundle = new HashMap<BundleNativeCode, Bundle>();
+		this.unresolvedBundleNativeCodeValue = new HashMap<BundleNativeCode, List<String>>();
 		
 		this.unresolvedBundleClassPathBundle = new HashMap<BundleClassPath, Bundle>();
 		this.unresolvedBundleClassPathValue = new HashMap<BundleClassPath, List<String>>();
@@ -536,7 +542,6 @@ public class Translation implements Analysis {
 
 		this.manifest.setBundleSymbolicName(entry);
 
-		this.bundle.setSymbolicName(this.manifest.getBundleSymbolicName().getSymbolicName());
 	}
 
 	public void caseABundleSymbolicnameEntryManifestentry(
@@ -617,10 +622,7 @@ public class Translation implements Analysis {
 		for (PParameter parameter : node.getParameter()) {
 			parameter.apply(this);
 		}
-
-		if (entry.getEntries().size() > 0) {
-			this.manifest.addBundleClassPath(entry);
-		}
+		this.manifest.addBundleClassPath(entry);
 		
 	}
 
@@ -660,7 +662,7 @@ public class Translation implements Analysis {
 
 		this.firstValue = new StringBuffer("");
 		node.getPackageNameWildcard().apply(this);
-		entry.addPackage(((StringBuffer) this.firstValue).toString());
+		entry.addPackageReference(((StringBuffer) this.firstValue).toString());
 
 		this.entry = entry;
 		for (PDynamicimportPackageNames value : node
@@ -701,7 +703,7 @@ public class Translation implements Analysis {
 		this.firstValue = new StringBuffer("");
 		node.getPackageNameWildcard().apply(this);
 		((DynamicImportPackage) this.entry)
-				.addPackage(((StringBuffer) this.firstValue).toString());
+				.addPackageReference(((StringBuffer) this.firstValue).toString());
 
 	}
 
@@ -886,12 +888,8 @@ public class Translation implements Analysis {
 			URL url = new URL(((StringBuffer) this.firstValue).toString());
 			this.firstValue = url;
 		} catch (MalformedURLException e) {
-			this.log
-					.put(
-							this.bundle,
-							this.log.get(this.bundle)
-									+ "MalformedURLException :  an URL value into the MANIFEST is malformed : "
-									+ this.firstValue + "." + "\n");
+			OSGiIntrospectorUtil.log(Level.WARN, "MalformedURLException :  an URL value into the MANIFEST is malformed : "
+									+ this.firstValue + ".", bundle);
 		}
 
 	}
@@ -961,12 +959,8 @@ public class Translation implements Analysis {
 			URL url = new URL(((StringBuffer) this.firstValue).toString());
 			this.firstValue = url;
 		} catch (MalformedURLException e) {
-			this.log
-					.put(
-							this.bundle,
-							this.log.get(this.bundle)
-									+ "MalformedURLException :  an URL value into the MANIFEST is malformed : "
-									+ this.firstValue + "." + "\n");
+			OSGiIntrospectorUtil.log(Level.WARN, "MalformedURLException :  an URL value into the MANIFEST is malformed : "
+					+ this.firstValue + ".", bundle);
 		}
 
 	}
@@ -989,12 +983,8 @@ public class Translation implements Analysis {
 			URL url = new URL(((StringBuffer) this.firstValue).toString());
 			this.firstValue = url;
 		} catch (MalformedURLException e) {
-			this.log
-					.put(
-							this.bundle,
-							this.log.get(this.bundle)
-									+ "MalformedURLException :  an URL value into the MANIFEST is malformed : "
-									+ this.firstValue + "." + "\n");
+			OSGiIntrospectorUtil.log(Level.WARN, "MalformedURLException :  an URL value into the MANIFEST is malformed : "
+					+ this.firstValue + ".", bundle);
 		}
 
 	}
@@ -1178,9 +1168,8 @@ public class Translation implements Analysis {
 			}
 			((ExportPackage) this.entry).addDirective(directive);
 		} else {
-			this.log.put(this.bundle, this.log.get(this.bundle)
-					+ "this mandatory value " + this.firstValue
-					+ " is not valid." + "\n");
+			OSGiIntrospectorUtil.log(Level.WARN, "this mandatory value " + this.firstValue
+					+ " is not valid.", bundle);
 		}
 
 	}
@@ -1525,9 +1514,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAPathQuoted(APathQuoted node) {
-		((StringBuffer)this.firstValue).append("\"");
 		node.getPathUnquoted().apply(this);
-		((StringBuffer)this.firstValue).append("\"");
 	}
 
 	public void caseAPathQuotedPath(APathQuotedPath node) {
@@ -1679,14 +1666,12 @@ public class Translation implements Analysis {
 
 	public void caseAQuotedStringStringEntryValue(
 			AQuotedStringStringEntryValue node) {
-		this.firstValue = new StringBuffer(node.getQuotedString().getText());
+		this.firstValue = new StringBuffer(node.getQuotedString().getText().replace("\"", ""));
 
 	}
 
 	public void caseAQuotedUrl(AQuotedUrl node) {
-		this.firstValue = new StringBuffer("\"");
 		node.getUnquotedUrl().apply(this);
-		((StringBuffer)this.firstValue).append("\"");
 
 	}
 
@@ -2008,59 +1993,28 @@ public class Translation implements Analysis {
 
 	}
 
-	private Package convertToJavaElement(Folder folder) {
-		Package _package = null;
-		for (SystemEntry entry : folder.getEntries()) {
-			if (entry instanceof Folder) {
-				Package tmp = this.convertToJavaElement((Folder) entry);
-				if (tmp != null) {
-					if (_package == null) {
-						_package = jarFactory.createPackage();
-						_package.setName(folder.getName());
-						_package.setFullPath(folder.getFullPath().replace("/",
-								".").substring(0, folder.getFullPath().length() - 1));
-					}
-					_package.addPackage(tmp);
-				}
-			} else {
-				if (entry.getFullPath().endsWith(".class")) {
-					if (_package == null) {
-						_package = jarFactory.createPackage();
-						_package.setName(folder.getName());
-						_package.setFullPath(folder.getFullPath().replace("/",
-								".").substring(0, folder.getFullPath().length() - 1));
-					}
-					Class clazz = jarFactory.createClass();
-					clazz.setName(entry.getName().substring(0,
-							entry.getName().indexOf(".class")));
-					clazz.setFullPath(entry.getFullPath().replace(".class", "")
-							.replace("/", "."));
-					_package.addClass(clazz);
-				}
-			}
-		}
-		return _package;
-	}
-
 	public void caseEOF(EOF node) {
 		if (this.manifest.getBundleSymbolicName() == null) {
-			this.log
-					.put(
-							this.bundle,
-							this.log.get(this.bundle)
-									+ "The manifest for this bundle is unvalid."
+			OSGiIntrospectorUtil.log(Level.ERROR, "The manifest for this bundle is unvalid."
 									+ "\n"
-									+ "Maybe it respects the old bundle definition with plugin.xml file."
+									+ "Maybe it respects the Eclipse Bundle definition with plugin.xml file."
 									+ "\n"
-									+ "With the Introspector, you need to use MANIFEST.MF file to describe our bundle."
-									+ "\n");
+									+ "With the Introspector, you need to use MANIFEST.MF file to describe our bundle.", bundle);
 			this.validTranslation = false;
+		}
+		if (this.manifest.getBundleVersion() == null || this.manifest.getBundleVersion().getVersion() == null) {
+			Version version = ManifestFactory.eINSTANCE.createVersion();
+			version.setMajor(0);
+			version.setMinor(0);
+			version.setMicro(0);
+			BundleVersion bundleVersion = ManifestFactory.eINSTANCE.createBundleVersion();
+			bundleVersion.setVersion(version);
 		}
 		if (this.manifest.getBundleClassPaths().size() == 0) {
 			for (SystemEntry entry : this.bundle.getFolder().getEntries()) {
 				if (entry instanceof Folder) {
-					Package _package = this
-							.convertToJavaElement((Folder) entry);
+					Package _package = OSGiIntrospectorUtil
+							.convertToJavaElement((Folder) entry, false);
 					if (_package != null) {
 						this.bundle.getPackage().addPackage(_package);
 					}
@@ -2074,12 +2028,14 @@ public class Translation implements Analysis {
 			}
 			BundleClassPath entry = manifestFactory.createBundleClassPath();
 			entry.addEntry(this.bundle.getFolder());
+			entry.addEntryReference(".");
+			entry.setResolved(true);
 			this.manifest.addBundleClassPath(entry);
 		} else {
 			for (SystemEntry entry : this.bundle.getFolder().getEntries()) {
 				if (entry.isBundleClassPath()) {
 					if (entry instanceof Folder) {
-						Package _package = this.convertToJavaElement((Folder)entry);
+						Package _package = OSGiIntrospectorUtil.convertToJavaElement((Folder)entry, true);
 						if (_package != null) {
 							this.bundle.getPackage().addPackage(_package);
 						}
@@ -2093,50 +2049,25 @@ public class Translation implements Analysis {
 		}
 		if (this.manifest.getFragmentHost() != null) {
 			if (this.manifest.getBundleActivator() != null) {
+				OSGiIntrospectorUtil.log(Level.ERROR, "When there is a Fragment-Host entry, there should not have a Bundle-Activator entry.", bundle);
 				this.validTranslation = false;
-				this.log
-						.put(
-								this.bundle,
-								this.log.get(this.bundle)
-										+ "When there is a Fragment-Host entry, there should not have a Bundle-Activator entry"
-										+ "\n");
 			}
 			if (this.manifest.getFragmentHost().getDirectives() != null) {
 				if (this.manifest.getImportPackages().size() > 0) {
+					OSGiIntrospectorUtil.log(Level.ERROR, "When the extension directive is set to the Fragment-Host entry, there should not have Import-Package entry.", bundle);
 					this.validTranslation = false;
-					this.log
-							.put(
-									this.bundle,
-									this.log.get(this.bundle)
-											+ "When the extension directive is set to the Fragment-Host entry, there should not have Import-Package entry"
-											+ "\n");
 				}
 				if (this.manifest.getRequireBundles().size() > 0) {
+					OSGiIntrospectorUtil.log(Level.ERROR, "When the extension directive is set to the Fragment-Host entry, there should not have Require-Bundle entry.", bundle); 
 					this.validTranslation = false;
-					this.log
-							.put(
-									this.bundle,
-									this.log.get(this.bundle)
-											+ "When the extension directive is set to the Fragment-Host entry, there should not have Require-Bundle entry"
-											+ "\n");
 				}
 				if (this.manifest.getBundleNativeCodes().size() > 0) {
+					OSGiIntrospectorUtil.log(Level.ERROR, "When the extension directive is set to the Fragment-Host entry, there should not have Bundle-NativeCode entry.", bundle);
 					this.validTranslation = false;
-					this.log
-							.put(
-									this.bundle,
-									this.log.get(this.bundle)
-											+ "When the extension directive is set to the Fragment-Host entry, there should not have Bundle-NativeCode entry"
-											+ "\n");
 				}
 				if (this.manifest.getDynamicImportPackages().size() > 0) {
+					OSGiIntrospectorUtil.log(Level.ERROR, "When the extension directive is set to the Fragment-Host entry, there should not have DynamicImport-Package entry.", bundle);
 					this.validTranslation = false;
-					this.log
-							.put(
-									this.bundle,
-									this.log.get(this.bundle)
-											+ "When the extension directive is set to the Fragment-Host entry, there should not have DynamicImport-Package entry"
-											+ "\n");
 				}
 			}
 		}
@@ -2145,7 +2076,6 @@ public class Translation implements Analysis {
 
 	public void caseStart(Start node) {
 		this.validTranslation = true;
-		this.log.put(this.bundle, "");
 		node.getPManifest().apply(this);
 		node.getEOF().apply(this);
 	}
@@ -2859,15 +2789,9 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAMustNotAppearsPackageName(AMustNotAppearsPackageName node) {
-		this.log
-				.put(
-						this.bundle,
-						this.log.get(this.bundle)
-								+ "It's better to not use \".\" as package name because it defines the default package."
-								+ "\n"
-								+ "In Java programming, it's recommended to not use the default package."
-								+ "\n");
-
+		OSGiIntrospectorUtil.log(Level.WARN, "It's better to not use \".\" as package name because it defines the default package."
+				+ "\n"
+				+ "In Java programming, it's recommended to not use the default package.", bundle);
 	}
 
 	public void caseAPackageNameWildcard(APackageNameWildcard node) {
@@ -3048,41 +2972,45 @@ public class Translation implements Analysis {
 					((StringBuffer) this.firstValue).toString());
 			if (systemEntry != null) {
 				if (systemEntry instanceof Folder) {
-					Package _package = this
-							.convertToJavaElement((Folder) entry);
+					Package _package = OSGiIntrospectorUtil
+							.convertToJavaElement((Folder) systemEntry, false);
 					if (_package != null) {
 						this.bundle.getPackage().addPackage(_package);
+					} else {
+						// TODO c'est seulement un dossier contenant des ressources
 					}
 					((BundleClassPath) this.entry)
 							.addEntry((Folder) systemEntry);
+					((BundleClassPath) this.entry).setResolved(true);
 				} else if (systemEntry instanceof File) {
 					if (systemEntry.getName().endsWith(".jar")) {
 						try {
 							OSGiIntrospectorUtil.addEntriesFromJar(this.bundle,
-									(File) systemEntry);
+									(File) systemEntry, this.bundle);
 							((BundleClassPath) this.entry)
 									.addEntry((File) systemEntry);
+							((BundleClassPath) this.entry).setResolved(true);
 						} catch (IOException e) {
-							this.log.put(this.bundle, this.log.get(this.bundle)
-									+ "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
+							OSGiIntrospectorUtil.log(Level.WARN, "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
 									+ "IOException with "
-									+ systemEntry.getFullPath() + "\n");
+									+ systemEntry.getFullPath() + ".", bundle);
+							((BundleClassPath) this.entry).setResolved(false);
 							
 						}
 					} else {
-						this.log.put(this.bundle, this.log.get(this.bundle)
-								+ "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
+						OSGiIntrospectorUtil.log(Level.WARN, "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
 								+ systemEntry.getFullPath()
-								+ " is a file but is not a JAR file." + "\n");
+								+ " is a file but is not a JAR file.", bundle);
+						((BundleClassPath) this.entry).setResolved(false);
 						
 					}
 				} else {
-					this.log.put(this.bundle, this.log.get(this.bundle)
-								+ "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
-								+ this.firstValue
-								+ " must be a JAR file or a folder." + "\n");
-					
+					OSGiIntrospectorUtil.log(Level.WARN, "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
+							+ this.firstValue
+							+ " must be a JAR file or a folder.", bundle);
+					((BundleClassPath) this.entry).setResolved(false);
 				}
+				((BundleClassPath) this.entry).addEntryReference(((StringBuffer) this.firstValue).toString());
 			} else {
 				List<String> list = this.unresolvedBundleClassPathValue.get((BundleClassPath) this.entry);
 				if (list == null) {
@@ -3090,18 +3018,13 @@ public class Translation implements Analysis {
 					list = new ArrayList<String>();
 				}
 				list.add(((StringBuffer) this.firstValue).toString());
-				this.unresolvedBundleClassPathValue.put((BundleClassPath) this.entry, list);		
-				
-				this.log.put(this.bundle, this.log.get(this.bundle)
-						+ "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
-						+ this.firstValue
-						+ " is not contained into this bundle." + "\n");
+				this.unresolvedBundleClassPathValue.put((BundleClassPath) this.entry, list);
 			}
 		} else if (((StringBuffer) this.firstValue).toString().equals(".")) {
 			for (SystemEntry entry : this.bundle.getFolder().getEntries()) {
 				if (entry instanceof Folder) {
-					Package _package = this
-							.convertToJavaElement((Folder) entry);
+					Package _package = OSGiIntrospectorUtil
+							.convertToJavaElement((Folder) entry, false);
 					if (_package != null) {
 						this.bundle.getPackage().addPackage(_package);
 					}
@@ -3116,11 +3039,13 @@ public class Translation implements Analysis {
 				}
 			}
 			((BundleClassPath) this.entry).addEntry(this.bundle.getFolder());
+			((BundleClassPath) this.entry).addEntryReference(((StringBuffer) this.firstValue).toString());
+			((BundleClassPath) this.entry).setResolved(true);
 		} else {
-			this.log.put(this.bundle, this.log.get(this.bundle)
-					+ "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
-					+ this.firstValue + " is unresolved. (must not appears)"
-					+ "\n");
+			OSGiIntrospectorUtil.log(Level.WARN, "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
+					+ this.firstValue + " is unresolved. (must not appears).", bundle);
+			((BundleClassPath) this.entry).addEntryReference(((StringBuffer) this.firstValue).toString());
+			((BundleClassPath) this.entry).setResolved(false);
 		}
 	}
 
@@ -3131,10 +3056,19 @@ public class Translation implements Analysis {
 				((StringBuffer) this.firstValue).toString());
 		if (systemEntry != null && systemEntry instanceof File) {
 			((BundleNativeCode) this.entry).addFile((File) systemEntry);
+			((BundleNativeCode) this.entry).setResolved(((BundleNativeCode) this.entry).isResolved() && true);
+		} else if (systemEntry == null) {
+			List<String> list = this.unresolvedBundleNativeCodeValue.get(this.bundle);
+			if (list == null) {
+				list = new ArrayList<String>();
+				this.unresolvedBundleNativeCodeBundle.put(((BundleNativeCode) this.entry), this.bundle);
+			}
+			list.add(((StringBuffer) this.firstValue).toString());
+			this.unresolvedBundleNativeCodeValue.put(((BundleNativeCode) this.entry), list);
 		} else {
-			this.log.put(this.bundle, this.log.get(this.bundle)
-					+ "the bundle native code value must be a file." + "\n"
-					+ systemEntry + " is not a file." + "\n");
+			OSGiIntrospectorUtil.log(Level.WARN, "The " + Constants.BUNDLE_NATIVECODE + " value must be a file." + "\n"
+					+ systemEntry + " is not a file.", bundle);
+			
 		}
 	}
 
@@ -3202,10 +3136,6 @@ public class Translation implements Analysis {
 		return unresolvedActivationPolicyIncludeValue;
 	}
 
-	public Map<Bundle, String> getLog() {
-		return log;
-	}
-
 	public Map<RequireBundle, Bundle> getUnresolvedRequireBundleBundle() {
 		return unresolvedRequireBundleBundle;
 	}
@@ -3232,6 +3162,22 @@ public class Translation implements Analysis {
 
 	public List<Service> getServicesAvailable() {
 		return servicesAvailable;
+	}
+
+	public Map<BundleClassPath, Bundle> getUnresolvedBundleClassPathBundle() {
+		return unresolvedBundleClassPathBundle;
+	}
+
+	public Map<BundleClassPath, List<String>> getUnresolvedBundleClassPathValue() {
+		return unresolvedBundleClassPathValue;
+	}
+
+	public Map<BundleNativeCode, Bundle> getUnresolvedBundleNativeCodeBundle() {
+		return unresolvedBundleNativeCodeBundle;
+	}
+
+	public Map<BundleNativeCode, List<String>> getUnresolvedBundleNativeCodeValue() {
+		return unresolvedBundleNativeCodeValue;
 	}
 
 }

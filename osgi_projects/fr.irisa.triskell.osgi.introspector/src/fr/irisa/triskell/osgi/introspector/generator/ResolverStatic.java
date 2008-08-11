@@ -7,26 +7,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
-import org.osgi.framework.Constants;
-
-import manifest.BadVersionValue;
 import manifest.BundleActivator;
+import manifest.BundleClassPath;
+import manifest.BundleNativeCode;
 import manifest.ExportPackage;
 import manifest.ImportPackage;
 import manifest.ImportService;
-import manifest.ManifestFactory;
 import manifest.RequireBundle;
 import manifest.Service;
-import manifest.Version;
-import option.AttributEntry;
 import option.ExcludeClasses;
 import option.ExcludePackages;
 import option.IncludeClasses;
 import option.IncludePackages;
 import option.Uses;
-import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
+
+import org.apache.log4j.Level;
+
+import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 import framework.Bundle;
 import framework.Framework;
 /**
@@ -38,14 +36,14 @@ import framework.Framework;
  */
 public class ResolverStatic implements Resolver {
 
-	private Map<Bundle, String> log;
-
-	public Map<Bundle, String> getLog() {
-		return log;
-	}
-
-	public void setLog(Map<Bundle, String> log) {
-		this.log = log;
+	public void resolveRequireBundle(Map<RequireBundle, String> requireBundles,
+			Map<RequireBundle, Bundle> bundles, Framework framework) {
+		for (RequireBundle value : requireBundles.keySet()) {
+				value.setBundleReference(requireBundles.get(value));
+				value.setResolved(false);
+	
+		}
+		
 	}
 
 	/**
@@ -53,67 +51,16 @@ public class ResolverStatic implements Resolver {
 	 * framework.
 	 */
 	public void resolveFragmentHost(Framework framework, Map<Bundle, String> fragmentHosts ) {
-		Map<Bundle, String> fragmentHostsTmp = new HashMap<Bundle, String>();
+		/*Map<Bundle, String> fragmentHostsTmp = new HashMap<Bundle, String>();
 		for (Bundle fragment : fragmentHosts.keySet()) {
 			List<Bundle> hostBundles = framework.findBundles(fragmentHosts.get(fragment));
 			if (hostBundles == null) {
 				fragmentHostsTmp.put(fragment, fragmentHosts.get(fragment));
 			} else {
-				boolean versionDefined = false;
-				boolean minNotInclude = false;
-				boolean maxNotInclude = true;
-				Version minVersion = null;
-				Version maxVersion = null;
-				List<AttributEntry> attributs = fragment.getManifest()
-						.getFragmentHost().getOptions();
-				for (AttributEntry attribut : attributs) {
-					// TODO attention bundle-version (OSGi R4), specification-version (OSGi R3) ...
-					if (attribut.getToken().equals(Constants.BUNDLE_VERSION_ATTRIBUTE)) {
-						versionDefined = true;
-						String value = attribut.getValue();
-						if (value.startsWith("(")) {
-							minNotInclude = true;
-						}
-						if (value.endsWith("]")) {
-							maxNotInclude = false;
-						}
-						value = value.replace("(", "").replace("[", "")
-								.replace(")", "").replace("]", "").replace(
-										"\"", "").replace(" ", "");
-						String[] versionsValue = value.split(",");
-						if (versionsValue.length == 2) {
-							try {
-								maxVersion = ManifestFactory.eINSTANCE
-										.createVersion();
-								maxVersion.setVersionValue(versionsValue[1]);
-							} catch (BadVersionValue e) {
-								maxVersion = null;
-								this.log
-										.put(
-												fragment,
-												this.log.get(fragment)
-														+ "An attribut for Fragment-Host entry is unvalid."
-														+ "\n"
-														+ attribut.getValue()
-														+ " is unvalid" + "\n");
-							}
-						}
-						try {
-							minVersion = ManifestFactory.eINSTANCE
-									.createVersion();
-							minVersion.setVersionValue(versionsValue[0]);
-						} catch (BadVersionValue e) {
-							minVersion = null;
-							this.log
-									.put(
-											fragment,
-											this.log.get(fragment)
-													+ "An attribut for Fragment-Host entry is unvalid."
-													+ "\n"
-													+ attribut.getValue()
-													+ " is unvalid" + "\n");
-						}
-
+				String versionRange = null;
+				for (AttributEntry option : fragment.getManifest().getFragmentHost().getOptions()) {
+					if (option.getToken().equals(Constants.BUNDLE_VERSION_ATTRIBUTE)) {
+						versionRange = option.getValue();
 						break;
 					}
 				}
@@ -129,22 +76,13 @@ public class ResolverStatic implements Resolver {
 						versionHost = host.getManifest().getBundleVersion()
 								.getVersion();
 					}
-					if (versionDefined) {
-						if (versionHost.greaterThan(minVersion, minNotInclude)
-								&& versionHost.lesserThan(maxVersion,
-										maxNotInclude)) {
+					if (versionHost.containsInto(versionRange)) {
 							if (bundleVersionMax == null
 									|| versionHost.greaterThan(bundleVersionMax
 											.getManifest().getBundleVersion()
 											.getVersion(), true)) {
 								bundleVersionMax = host;
 							}
-						}
-					} else if (bundleVersionMax == null
-							|| versionHost.greaterThan(bundleVersionMax
-									.getManifest().getBundleVersion()
-									.getVersion(), true)) {
-						bundleVersionMax = host;
 					}
 				}
 				if (bundleVersionMax != null) {
@@ -164,14 +102,41 @@ public class ResolverStatic implements Resolver {
 				log += "\t" + fragmentHostsTmp.get(bundle) + "\n";
 				this.log.put(bundle, log);
 			}
+		}*/
+		for (Bundle fragment : fragmentHosts.keySet()) {
+			fragment.getManifest().getFragmentHost().setBundleReference(fragmentHosts.get(fragment));
+			fragment.getManifest().getFragmentHost().setResolved(false);
 		}
+	}
+
+	public void resolveBundleClassPath(
+			Map<BundleClassPath, List<String>> bundleClassPaths,
+			Map<BundleClassPath, Bundle> bundles) {
+		for (BundleClassPath bundleClassPath : bundleClassPaths.keySet()) {
+			for (String reference : bundleClassPaths.get(bundleClassPath)) {
+				bundleClassPath.addEntryReference(reference);	
+				bundleClassPath.setResolved(false);
+			}
+		}
+	}
+
+	public void resolveBundleNativeCode(
+			Map<BundleNativeCode, List<String>> bundleNativeCodes,
+			Map<BundleNativeCode, Bundle> bundles) {
+			for (BundleNativeCode bundleNativeCode : bundleNativeCodes.keySet()) {
+				for (String fileReference : bundleNativeCodes.get(bundleNativeCode)) {
+					bundleNativeCode.setResolved(bundleNativeCode.isResolved() && false);
+					bundleNativeCode.addFileReference(fileReference);
+				}
+			}
+		
 	}
 
 	/**
 	 * This function is used to resolve all Export-Package entry.
 	 */
 	public void resolveExportPackage(Map<ExportPackage, List<String>> exportPackages, Map<ExportPackage, Bundle> bundles) {
-		List<ExportPackage> exportPackageMaybeUnvalid = new ArrayList<ExportPackage>();
+		//List<ExportPackage> exportPackageMaybeUnvalid = new ArrayList<ExportPackage>();
 		for (ExportPackage exportPackage : exportPackages.keySet()) {
 			List<String> exportPackageReference = exportPackages
 					.get(exportPackage);
@@ -187,57 +152,39 @@ public class ResolverStatic implements Resolver {
 				} else {
 					exportPackageReferenceTmp.add(reference);
 				}
+				exportPackage.addExportPackageReference(reference);
 			}
 			if (exportPackageReferenceTmp.size() > 0) {
 				exportPackageReference = new ArrayList<String>();
 				// Second research into Fragment class path
+				// But in Static way, the Fragments are not resolved
 				for (String reference : exportPackageReferenceTmp) {
-					boolean find = false;
-					for (Bundle fragment : bundle.getFragments()) {
-						Package _package = fragment.getPackage().getPackage(
-								reference);
-						if (_package != null) {
-							exportPackage.addExportPackage(_package);
-							find = true;
-							break;
-						}
-					}
-					if (!find) {
-						this.log.put(bundle, this.log.get(bundle) + reference
-								+ " is not a valid package." + "\n"
-								+ "Maybe the folder "
-								+ reference.replace(".", "/")
-								+ " doesn't contain class file or doesn't exist." + "\n");
-						exportPackageMaybeUnvalid.add(exportPackage);
-					}
+					exportPackage.addExportPackageReference(reference);
+					exportPackage.setResolved(exportPackage.isResolved() && false);
 				}
-			}
-		}
-		for (ExportPackage exportPackage : exportPackageMaybeUnvalid) {
-			if (exportPackage.getPackages().size() == 0) {
-				bundles.get(
-						exportPackage).getManifest().removeExportPackage(
-						exportPackage);
 			}
 		}
 	}
 
 	public void resolveExportPackageExclude(Map<ExcludeClasses, List<String>> excludes, Map<ExcludeClasses, ExportPackage> exportPackages) {
 		for (ExcludeClasses excludeClass : excludes.keySet()) {
-			ExportPackage entry = exportPackages.get(
-							excludeClass);
-			for (String value : excludes.get(excludeClass)) {
-				List<Class> classes = new ArrayList<Class>();
-				for (Package _package : entry.getPackages()) {
-					classes.addAll(_package.getClassWithRegex(value));
-				}
-				if (classes.size() > 0) {
-					for (Class clazz : classes) {
-						excludeClass.addExclude(clazz);
+			// The Export-Package must be resolved
+			if (exportPackages.get(excludeClass).isResolved()) {
+				ExportPackage entry = exportPackages.get(
+								excludeClass);
+				for (String value : excludes.get(excludeClass)) {
+					List<Class> classes = new ArrayList<Class>();
+					for (Package _package : entry.getPackages()) {
+						classes.addAll(_package.getClassWithRegex(value));
 					}
-				} else {
-					OSGiIntrospectorUtil.log(Level.WARNING, "Many classes into exclude directives of Export-Package were not found");
-					// TODO être plus précis ?
+					if (classes.size() > 0) {
+						for (Class clazz : classes) {
+							excludeClass.addExclude(clazz);
+						}
+					} else {
+						// FIXME il faut le bundle contenant le Export-Package
+						OSGiIntrospectorUtil.log(Level.WARN, value + " into include directives of Export-Package were not found", null);
+						}
 				}
 			}
 		}
@@ -246,20 +193,23 @@ public class ResolverStatic implements Resolver {
 
 	public void resolveExportPackageInclude(Map<IncludeClasses, List<String>> includes, Map<IncludeClasses, ExportPackage> exportPackages) {
 		for (IncludeClasses includeClass : includes.keySet()) {
-			ExportPackage entry = exportPackages.get(
-							includeClass);
-			for (String value : includes.get(includeClass)) {
-				List<Class> classes = new ArrayList<Class>();
-				for (Package _package : entry.getPackages()) {
-					classes.addAll(_package.getClassWithRegex(value));
-				}
-				if (classes.size() > 0) {
-					for (Class clazz : classes) {
-						includeClass.addInclude(clazz);
+			// The Export-Package must be resolved
+			if (exportPackages.get(includeClass).isResolved()) {
+				ExportPackage entry = exportPackages.get(
+								includeClass);
+				for (String value : includes.get(includeClass)) {
+					List<Class> classes = new ArrayList<Class>();
+					for (Package _package : entry.getPackages()) {
+						classes.addAll(_package.getClassWithRegex(value));
 					}
-				} else {
-					OSGiIntrospectorUtil.log(Level.WARNING, "Many classes into include directives of Export-Package were not found");
-					// TODO être plus précis ?
+					if (classes.size() > 0) {
+						for (Class clazz : classes) {
+							includeClass.addInclude(clazz);
+						}
+					} else {
+						// FIXME il faut le bundle contenant le Export-Package
+						OSGiIntrospectorUtil.log(Level.WARN, value + " into include directives of Export-Package were not found", null);
+					}
 				}
 			}
 		}
@@ -272,11 +222,9 @@ public class ResolverStatic implements Resolver {
 			if (element != null) {
 				value.setActivator(element);
 			} else {
-				this.log.put(bundles.get(value), this.log.get(bundles
-						.get(value))
-						+ "The activator reference "
+				OSGiIntrospectorUtil.log(Level.WARN, "The activator reference "
 						+ activators.get(value)
-						+ " is not valid." + "\n");
+						+ " is not valid.", bundles.get(value));
 				bundles.get(value).getManifest().setBundleActivator(null);
 			}
 		}
@@ -285,7 +233,6 @@ public class ResolverStatic implements Resolver {
 	public void resolveActivationPolicyExclude(
 			Map<ExcludePackages, List<String>> excludes,
 			Map<ExcludePackages, Bundle> bundles) {
-		List<ExcludePackages> excludePackageMaybeUnvalid = new ArrayList<ExcludePackages>();
 		for (ExcludePackages excludePackage : excludes.keySet()) {
 			List<String> exportPackageReference = excludes
 					.get(excludePackage);
@@ -305,32 +252,10 @@ public class ResolverStatic implements Resolver {
 			if (exportPackageReferenceTmp.size() > 0) {
 				exportPackageReference = new ArrayList<String>();
 				// Second research into Fragment class path
+				// But fragments are not resolved
 				for (String reference : exportPackageReferenceTmp) {
-					boolean find = false;
-					for (Bundle fragment : bundle.getFragments()) {
-						Package _package = fragment.getPackage().getPackage(
-								reference);
-						if (_package != null) {
-							excludePackage.addExcludePackage(_package);
-							find = true;
-							break;
-						}
-					}
-					if (!find) {
-						this.log.put(bundle, this.log.get(bundle) + reference
-								+ " is not a valid package." + "\n"
-								+ "Maybe the folder "
-								+ reference.replace(".", "/")
-								+ " don't contain class file or doesn't exist." + "\n");
-						excludePackageMaybeUnvalid.add(excludePackage);
-					}
+					excludePackage.addExcludePackageReference(reference);
 				}
-			}
-		}
-		for (ExcludePackages excludePackage : excludePackageMaybeUnvalid) {
-			if (excludePackage.getPackages().size() == 0) {
-				bundles.get(excludePackage).getManifest().getBundleActivationPolicy().removeDirective(
-								excludePackage);
 			}
 		}
 		
@@ -339,7 +264,6 @@ public class ResolverStatic implements Resolver {
 	public void resolveActivationPolicyInclude(
 			Map<IncludePackages, List<String>> includes,
 			Map<IncludePackages, Bundle> bundles) {
-		List<IncludePackages> includePackageMaybeUnvalid = new ArrayList<IncludePackages>();
 		for (IncludePackages includePackage : includes.keySet()) {
 			List<String> exportPackageReference = includes
 					.get(includePackage);
@@ -359,44 +283,12 @@ public class ResolverStatic implements Resolver {
 			if (exportPackageReferenceTmp.size() > 0) {
 				exportPackageReference = new ArrayList<String>();
 				// Second research into Fragment class path
+				// but fragments are not resolved
 				for (String reference : exportPackageReferenceTmp) {
-					boolean find = false;
-					for (Bundle fragment : bundle.getFragments()) {
-						Package _package = fragment.getPackage().getPackage(
-								reference);
-						if (_package != null) {
-							includePackage.addIncludePackage(_package);
-							find = true;
-							break;
-						}
-					}
-					if (!find) {
-						this.log.put(bundle, this.log.get(bundle) + reference
-								+ " is not a valid package." + "\n"
-								+ "Maybe the folder "
-								+ reference.replace(".", "/")
-								+ " don't contain class file or doesn't exist." + "\n");
-						includePackageMaybeUnvalid.add(includePackage);
-					}
+					includePackage.addIncludePackageReference(reference);
 				}
 			}
 		}
-		for (IncludePackages includePackage : includePackageMaybeUnvalid) {
-			if (includePackage.getPackages().size() == 0) {
-				bundles.get(includePackage).getManifest().getBundleActivationPolicy().removeDirective(
-						includePackage);
-			}
-		}	
-	}
-
-	public void resolveRequireBundle(Map<RequireBundle, String> requireBundles,
-			Map<RequireBundle, Bundle> bundles, Framework framework) {
-		for (RequireBundle value : requireBundles.keySet()) {
-				value.setBundle(requireBundles.get(value));
-				value.setResolved(false);
-	
-		}
-		
 	}
 
 	public void resolveImportPackage(
@@ -404,7 +296,7 @@ public class ResolverStatic implements Resolver {
 			Map<ImportPackage, Bundle> bundles, Framework framework) {
 		for (ImportPackage value : importPackages.keySet()) {
 			for (String _package : importPackages.get(value)) {
-				value.addPackage(_package);
+				value.addPackageReference(_package);
 				value.setResolved(false);
 			}
 	
@@ -420,10 +312,11 @@ public class ResolverStatic implements Resolver {
 					serviceReference);
 			if (element != null) {
 				service.setInterface(element);
+				service.setResolved(true);
 			} else {
 				tmp.add(service);
 			}
-			service.setInterfaceName(serviceReference);
+			service.setInterfaceReference(serviceReference);
 		}
 		if (tmp.size() > 0) {
 			Map<Service, Bundle> bundlesTmp = bundles;
@@ -434,11 +327,11 @@ public class ResolverStatic implements Resolver {
 			for (Service service : tmp) {
 				Bundle b = bundlesTmp.get(service);
 				String s = servicesTmp.get(service);
-				this.log.put(b, this.log.get(b)
-						+ "The export service reference "
-						+ s + " is not resolved." + "\n");
+				OSGiIntrospectorUtil.log(Level.WARN, "The export service reference "
+						+ s + " is not resolved.", b);
 				bundles.put(service, b);
 				services.put(service, s);
+				service.setResolved(false);
 			}
 		}
 	}
@@ -448,17 +341,20 @@ public class ResolverStatic implements Resolver {
 			for (String _package : uses.get(value)) {
 				value.addPackage(_package);
 			}
-
 		}
 	}
 
 	public void resolveImportService(Map<ImportService, String> importServices,
 			Map<ImportService, Bundle> bundles, List<Service> servicesAvailable) {
-		for (ImportService value : importServices.keySet()) {
-			value.setService(importServices.get(value));
-			value.setResolved(false);
-
+		for (ImportService importedService : importServices.keySet()) {
+			for (Service service : servicesAvailable) {
+				importedService.setResolved(false);
+				if (service.getInterfaceReference().equals(importServices.get(importedService))) {
+					importedService.setService(service);
+					importedService.setResolved(true);
+				}
+				importedService.setServiceReference(service.getInterfaceReference());
+			}
 		}
-		
 	}
 }

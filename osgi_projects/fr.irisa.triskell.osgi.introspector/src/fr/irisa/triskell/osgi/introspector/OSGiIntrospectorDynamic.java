@@ -11,9 +11,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Dictionary;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
 
 import manifest.MANIFEST;
 
@@ -22,6 +19,7 @@ import org.osgi.framework.BundleContext;
 import fr.irisa.triskell.osgi.introspector.generator.Parser;
 import fr.irisa.triskell.osgi.introspector.generator.Resolver;
 import fr.irisa.triskell.osgi.introspector.generator.ResolverDynamic;
+import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 import framework.Bundle;
 import framework.Framework;
 import framework.FrameworkFactory;
@@ -40,7 +38,6 @@ public class OSGiIntrospectorDynamic {
 
 	private BundleContext context;
 	private Parser parser;
-	private Map<Bundle, String> log;
 	private Framework framework;
 
 	private boolean introspectionWithoutError;
@@ -54,10 +51,10 @@ public class OSGiIntrospectorDynamic {
 	 * @param XMIFilePath a File path where we want save the result of the introspection.
 	 */
 	public void introspect(String XMIFilePath) {
+		OSGiIntrospectorUtil.setLoggerProperties(XMIFilePath.substring(0, XMIFilePath.lastIndexOf(File.separator)));
+		//OSGiIntrospectorUtil.setLogListener(XMIFilePath.substring(0, XMIFilePath.lastIndexOf(File.separator)));
 		this.framework = FrameworkFactory.eINSTANCE.createFramework();
-		this.log = new HashMap<Bundle, String>();
-		this.parser = new Parser(log);
-		OSGiIntrospectorUtil.log(Level.INFO, "Introspection launched");
+		this.parser = new Parser();
 		boolean validGeneration = true;
 		for (org.osgi.framework.Bundle bundle : this.context.getBundles()) {
 			// do not include this bundle in the processing
@@ -67,9 +64,9 @@ public class OSGiIntrospectorDynamic {
 		}
 		// TODO vérification du log ainsi que dans Static
 			this.introspectionWithoutError = this.resolve() && validGeneration;
-			OSGiIntrospectorUtil.displayLog(log);
 			OSGiIntrospectorUtil.saveModel(XMIFilePath, this.framework);
 
+			OSGiIntrospectorUtil.shutdownLoggers();
 	}
 	
 	/**
@@ -217,9 +214,10 @@ public class OSGiIntrospectorDynamic {
 	 */
 	public boolean resolve() {
 		Resolver resolver = new ResolverDynamic(context);
-		resolver.setLog(this.log);
 		resolver.resolveRequireBundle(this.parser.getUnresolvedRequireBundleValue(), this.parser.getUnresolvedRequireBundleBundle(), this.framework);
 		resolver.resolveFragmentHost(this.framework, this.parser.getFragmentHostReferences());
+		resolver.resolveBundleClassPath(this.parser.getUnresolvedBundleClassPathValue(), this.parser.getUnresolvedBundleClassPathBundle());
+		resolver.resolveBundleNativeCode(this.parser.getUnresolvedBundleNativeCodeValue(), this.parser.getUnresolvedBundleNativeCodeBundle());
 		resolver.resolveExportPackage(this.parser.getUnresolvedExportPackageValue(), this.parser.getUnresolvedExportPackageBundle());
 		resolver.resolveExportPackageExclude(this.parser.getUnresolvedExportPackageExcludeValue(), this.parser.getUnresolvedExportPackageExcludeExportPackage());
 		resolver.resolveExportPackageInclude(this.parser.getUnresolvedExportPackageIncludeValue(), this.parser.getUnresolvedExportPackageIncludeExportPackage());

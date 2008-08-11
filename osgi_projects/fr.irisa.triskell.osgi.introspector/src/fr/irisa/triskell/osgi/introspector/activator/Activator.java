@@ -1,13 +1,12 @@
 package fr.irisa.triskell.osgi.introspector.activator;
 
-import java.util.logging.Level;
-
+import org.apache.log4j.Level;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorDynamic;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorStatic;
-import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorUtil;
+import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 /**
  * 
  * @author Erwan Daubert - erwan.daubert@gmail.com
@@ -30,13 +29,13 @@ public class Activator implements BundleActivator {
 		this.introspectorDynamic = new OSGiIntrospectorDynamic(context);
 		context.registerService(this.introspectorDynamic.getClass().getName(),
 				this.introspectorDynamic, null );
-		OSGiIntrospectorUtil.log(Level.INFO, "Dynamic Introspector service register");
+		OSGiIntrospectorUtil.log(Level.INFO, "Dynamic Introspector service register", null);
 		
 		OSGiIntrospectorUtil.setContext(context);
 		this.introspectorStatic = new OSGiIntrospectorStatic();
 		context.registerService(this.introspectorStatic.getClass().getName(),
 				this.introspectorStatic, null);
-		OSGiIntrospectorUtil.log(Level.INFO, "Static Introspector service register");
+		OSGiIntrospectorUtil.log(Level.INFO, "Static Introspector service register", null);
 	}
 
 	/*
@@ -45,6 +44,6 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		OSGiIntrospectorUtil.log(Level.INFO, "Introspector service unregister");
+		OSGiIntrospectorUtil.log(Level.INFO, "Introspector service unregister", null);
 	}
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportPackageImpl.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: ImportPackageImpl.java,v 1.5 2008-08-11 15:50:21 edaubert Exp $
  */
 package manifest.impl;
 
@@ -306,7 +306,7 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 	}
 
 	public void addPackageReference(String value) {
-		if (!getPackages().contains(value)) {
+		if (!getPackagesReference().contains(value)) {
 			getPackagesReference().add(value);
 		}
 

@@ -8,16 +8,16 @@ import jar.SystemEntry;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.logging.Level;
+
+import org.apache.log4j.Level;
 
 import fr.irisa.triskell.osgi.introspector.generator.Parser;
 import fr.irisa.triskell.osgi.introspector.generator.Resolver;
 import fr.irisa.triskell.osgi.introspector.generator.ResolverStatic;
+import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 import framework.Bundle;
 import framework.Framework;
 import framework.FrameworkFactory;
@@ -34,7 +34,6 @@ import framework.FrameworkFactory;
  */
 public class OSGiIntrospectorStatic {
 	private Framework framework;
-	private Map<Bundle, String> log;
 	private Parser parser;
 
 	private boolean introspectionWithoutError;
@@ -44,9 +43,10 @@ public class OSGiIntrospectorStatic {
 	 * It checks only the static information.
 	 */
 	public void generateFramework(String DirectoryFilePath, String XMIFilePath) {
+		// TODO gestion du log en static ????
+		OSGiIntrospectorUtil.setLoggerProperties(XMIFilePath.substring(0, XMIFilePath.lastIndexOf(File.separator)));
 		this.framework = FrameworkFactory.eINSTANCE.createFramework();
-		this.log = new HashMap<Bundle, String>();
-		this.parser = new Parser(log);
+		this.parser = new Parser();
 		File f = new File(DirectoryFilePath);
 		if (f.isDirectory()) {
 			boolean validGeneration = true;
@@ -56,14 +56,15 @@ public class OSGiIntrospectorStatic {
 								+ File.separator + path) && validGeneration;
 			}
 				this.introspectionWithoutError = this.resolve() && validGeneration;
-				OSGiIntrospectorUtil.displayLog(log);
 				OSGiIntrospectorUtil.saveModel(XMIFilePath, this.framework);
 		} else {
-			OSGiIntrospectorUtil.log(Level.SEVERE,
+			OSGiIntrospectorUtil.log(Level.ERROR,
 					"GenerateFramework take two parameters which are String."
 							+ "\n" + "The first define a directory." + "\n"
-							+ "The second define a file." + "\n");
+							+ "The second define a file." + "\n", null);
 		}
+
+		OSGiIntrospectorUtil.shutdownLoggers();
 	}
 
 	/**
@@ -83,7 +84,7 @@ public class OSGiIntrospectorStatic {
 			try {
 				return this.generateWithJar(f);
 			} catch (IOException e) {
-				OSGiIntrospectorUtil.log(Level.SEVERE, e.getMessage());
+				OSGiIntrospectorUtil.log(Level.ERROR, e.getMessage(), null);
 				return false;
 			}
 		}
@@ -156,7 +157,7 @@ public class OSGiIntrospectorStatic {
 				}
 				return valid;
 			} catch (IOException e) {
-				OSGiIntrospectorUtil.log(Level.SEVERE, e.getMessage());
+				OSGiIntrospectorUtil.log(Level.ERROR, e.getMessage(), null);
 				return false;
 			}
 		}
@@ -230,9 +231,10 @@ public class OSGiIntrospectorStatic {
 	 */
 	public boolean resolve() {
 		Resolver resolver = new ResolverStatic();
-		resolver.setLog(this.log);
 		resolver.resolveRequireBundle(this.parser.getUnresolvedRequireBundleValue(), this.parser.getUnresolvedRequireBundleBundle(), this.framework);
 		resolver.resolveFragmentHost(this.framework, this.parser.getFragmentHostReferences());
+		resolver.resolveBundleClassPath(this.parser.getUnresolvedBundleClassPathValue(), this.parser.getUnresolvedBundleClassPathBundle());
+		resolver.resolveBundleNativeCode(this.parser.getUnresolvedBundleNativeCodeValue(), this.parser.getUnresolvedBundleNativeCodeBundle());
 		resolver.resolveExportPackage(this.parser.getUnresolvedExportPackageValue(), this.parser.getUnresolvedExportPackageBundle());
 		resolver.resolveExportPackageExclude(this.parser.getUnresolvedExportPackageExcludeValue(), this.parser.getUnresolvedExportPackageExcludeExportPackage());
 		resolver.resolveExportPackageInclude(this.parser.getUnresolvedExportPackageIncludeValue(), this.parser.getUnresolvedExportPackageIncludeExportPackage());
