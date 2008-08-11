@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleNativeCodeImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: BundleNativeCodeImpl.java,v 1.3 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest.impl;
 
@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -34,6 +35,8 @@ import org.osgi.framework.Constants;
  *   <li>{@link manifest.impl.BundleNativeCodeImpl#isOptional <em>Optional</em>}</li>
  *   <li>{@link manifest.impl.BundleNativeCodeImpl#getDirectives <em>Directives</em>}</li>
  *   <li>{@link manifest.impl.BundleNativeCodeImpl#getFile <em>File</em>}</li>
+ *   <li>{@link manifest.impl.BundleNativeCodeImpl#isResolved <em>Resolved</em>}</li>
+ *   <li>{@link manifest.impl.BundleNativeCodeImpl#getFileReferences <em>File References</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +81,36 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 	protected EList<File> file;
 
 	/**
+	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean RESOLVED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean resolved = RESOLVED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getFileReferences() <em>File References</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFileReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> fileReferences;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
 	protected BundleNativeCodeImpl() {
@@ -114,6 +147,39 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 			file = new EObjectResolvingEList<File>(File.class, this, ManifestPackage.BUNDLE_NATIVE_CODE__FILE);
 		}
 		return file;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isResolved() {
+		return resolved;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResolved(boolean newResolved) {
+		boolean oldResolved = resolved;
+		resolved = newResolved;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.BUNDLE_NATIVE_CODE__RESOLVED, oldResolved, resolved));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getFileReferences() {
+		if (fileReferences == null) {
+			fileReferences = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.BUNDLE_NATIVE_CODE__FILE_REFERENCES);
+		}
+		return fileReferences;
 	}
 
 	/**
@@ -162,6 +228,10 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 				return getDirectives();
 			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE:
 				return getFile();
+			case ManifestPackage.BUNDLE_NATIVE_CODE__RESOLVED:
+				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
+			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE_REFERENCES:
+				return getFileReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -185,6 +255,13 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 				getFile().clear();
 				getFile().addAll((Collection<? extends File>)newValue);
 				return;
+			case ManifestPackage.BUNDLE_NATIVE_CODE__RESOLVED:
+				setResolved(((Boolean)newValue).booleanValue());
+				return;
+			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE_REFERENCES:
+				getFileReferences().clear();
+				getFileReferences().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -205,6 +282,12 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE:
 				getFile().clear();
 				return;
+			case ManifestPackage.BUNDLE_NATIVE_CODE__RESOLVED:
+				setResolved(RESOLVED_EDEFAULT);
+				return;
+			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE_REFERENCES:
+				getFileReferences().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -222,6 +305,10 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 				return directives != null && !directives.isEmpty();
 			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE:
 				return file != null && !file.isEmpty();
+			case ManifestPackage.BUNDLE_NATIVE_CODE__RESOLVED:
+				return resolved != RESOLVED_EDEFAULT;
+			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE_REFERENCES:
+				return fileReferences != null && !fileReferences.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -237,6 +324,10 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (optional: ");
 		result.append(optional);
+		result.append(", resolved: ");
+		result.append(resolved);
+		result.append(", fileReferences: ");
+		result.append(fileReferences);
 		result.append(')');
 		return result.toString();
 	}
@@ -248,5 +339,10 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 	public void addFile(File file) {
 		getFile().add(file);
 
+	}
+
+	public void addFileReference(String fileReference) {
+		getFileReferences().add(fileReference);
+		
 	}
 } // BundleNativeCodeImpl

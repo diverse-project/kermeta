@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MANIFESTImpl.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: MANIFESTImpl.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest.impl;
 
@@ -1680,7 +1680,7 @@ public class MANIFESTImpl extends EObjectImpl implements MANIFEST {
 				.iterator(); unknownEntriesIterator.hasNext();) {
 			DynamicImportPackage entry = unknownEntriesIterator.next();
 			returnString += "\t" + entry.getEntryName() + ": \n";
-			for (String e : entry.getPackages()) {
+			for (String e : entry.getPackagesReference()) {
 				returnString += "\t" + e + "\n";
 			}
 		}

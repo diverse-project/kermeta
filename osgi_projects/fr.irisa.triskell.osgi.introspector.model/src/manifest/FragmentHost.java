@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FragmentHost.java,v 1.4 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: FragmentHost.java,v 1.5 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest;
 
@@ -18,6 +18,8 @@ import framework.Bundle;
  * <ul>
  *   <li>{@link manifest.FragmentHost#getDirectives <em>Directives</em>}</li>
  *   <li>{@link manifest.FragmentHost#getBundle <em>Bundle</em>}</li>
+ *   <li>{@link manifest.FragmentHost#getBundleReference <em>Bundle Reference</em>}</li>
+ *   <li>{@link manifest.FragmentHost#isResolved <em>Resolved</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,5 +78,58 @@ public interface FragmentHost extends MANIFESTEntry {
 	 * @generated
 	 */
 	void setBundle(Bundle value);
+
+	/**
+	 * Returns the value of the '<em><b>Bundle Reference</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bundle Reference</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bundle Reference</em>' attribute.
+	 * @see #setBundleReference(String)
+	 * @see manifest.ManifestPackage#getFragmentHost_BundleReference()
+	 * @model dataType="framework.String" required="true"
+	 * @generated
+	 */
+	String getBundleReference();
+
+	/**
+	 * Sets the value of the '{@link manifest.FragmentHost#getBundleReference <em>Bundle Reference</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bundle Reference</em>' attribute.
+	 * @see #getBundleReference()
+	 * @generated
+	 */
+	void setBundleReference(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Resolved</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resolved</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resolved</em>' attribute.
+	 * @see #setResolved(boolean)
+	 * @see manifest.ManifestPackage#getFragmentHost_Resolved()
+	 * @model default="false" dataType="manifest.boolean" required="true"
+	 * @generated
+	 */
+	boolean isResolved();
+
+	/**
+	 * Sets the value of the '{@link manifest.FragmentHost#isResolved <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resolved</em>' attribute.
+	 * @see #isResolved()
+	 * @generated
+	 */
+	void setResolved(boolean value);
 
 } // FragmentHost

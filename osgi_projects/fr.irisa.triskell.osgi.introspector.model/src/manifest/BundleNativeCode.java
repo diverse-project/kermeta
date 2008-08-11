@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleNativeCode.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: BundleNativeCode.java,v 1.3 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest;
 
@@ -21,6 +21,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link manifest.BundleNativeCode#isOptional <em>Optional</em>}</li>
  *   <li>{@link manifest.BundleNativeCode#getDirectives <em>Directives</em>}</li>
  *   <li>{@link manifest.BundleNativeCode#getFile <em>File</em>}</li>
+ *   <li>{@link manifest.BundleNativeCode#isResolved <em>Resolved</em>}</li>
+ *   <li>{@link manifest.BundleNativeCode#getFileReferences <em>File References</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,10 +58,52 @@ public interface BundleNativeCode extends MANIFESTEntry {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>File</em>' reference list.
 	 * @see manifest.ManifestPackage#getBundleNativeCode_File()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	EList<File> getFile();
+
+	/**
+	 * Returns the value of the '<em><b>Resolved</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resolved</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resolved</em>' attribute.
+	 * @see #setResolved(boolean)
+	 * @see manifest.ManifestPackage#getBundleNativeCode_Resolved()
+	 * @model dataType="manifest.boolean" required="true"
+	 * @generated
+	 */
+	boolean isResolved();
+
+	/**
+	 * Sets the value of the '{@link manifest.BundleNativeCode#isResolved <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resolved</em>' attribute.
+	 * @see #isResolved()
+	 * @generated
+	 */
+	void setResolved(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>File References</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>File References</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>File References</em>' attribute list.
+	 * @see manifest.ManifestPackage#getBundleNativeCode_FileReferences()
+	 * @model dataType="framework.String" required="true"
+	 * @generated
+	 */
+	EList<String> getFileReferences();
 
 	/**
 	 * Returns the value of the '<em><b>Optional</b></em>' attribute. <!--
@@ -90,5 +134,7 @@ public interface BundleNativeCode extends MANIFESTEntry {
 	void addDirective(NativeCodeDirective directive);
 
 	void addFile(File file);
+	
+	void addFileReference(String fileReference);
 
 } // BundleNativeCode

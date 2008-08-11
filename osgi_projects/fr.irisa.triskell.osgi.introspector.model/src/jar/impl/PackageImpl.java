@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.8 2008-08-05 16:10:57 edaubert Exp $
+ * $Id: PackageImpl.java,v 1.9 2008-08-11 14:19:27 edaubert Exp $
  */
 package jar.impl;
 
@@ -178,7 +178,10 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 		return super.eIsSet(featureID);
 	}
 
-	public void addClass(Class clazz) {
+	public boolean addClass(Class clazz) {
+		if (clazz.getFullPath() == null || clazz.getName() == null) {
+			return false;
+		}
 		if (clazz.getFullPath().contains(this.getFullPath())) {
 			String[] packagesClazz = clazz.getFullPath().split("\\.");
 			String[] packages = this.getFullPath().split("\\.");
@@ -197,7 +200,7 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					}
 				}
 				if (!exist) {
-					getClasses().add(clazz);	
+					return getClasses().add(clazz);	
 				}
 			} else {
 				String _packageName = packagesClazz[nextPackage];
@@ -208,8 +211,8 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					Package p = packagesIterator.next();
 					if (p.getFullPath().equals(
 							getFullPath() + "." + _packageName)) {
-						p.addClass(clazz);
-						exist = true;
+						return p.addClass(clazz);
+						//exist = true;
 					}
 				}
 				if (!exist) {
@@ -217,10 +220,11 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					p.setFullPath(this.getFullPath() + "." + _packageName);
 					p.setName(_packageName);
 					getSubPackages().add(p);
-					p.addClass(clazz);
+					return p.addClass(clazz);
 				}
 			}
 		}
+		return false;
 	}
 
 	public Class getClass(String fullPath) {
@@ -262,7 +266,7 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 		return null;
 	}
 
-	public BundleEntry getSubElement(String fullPath) {
+	/*public BundleEntry getSubElement(String fullPath) {
 
 		if (fullPath.contains(this.getFullPath())) {
 			String[] packagesElement = fullPath.split("\\.");
@@ -298,9 +302,12 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 		}
 
 		return null;
-	}
+	}*/
 
-	public void addPackage(Package _package) {
+	public boolean addPackage(Package _package) {
+		if (_package.getFullPath() == null || _package.getName() == null) {
+			return false;
+		}
 		if (_package.getFullPath().contains(this.getFullPath())) {
 			String[] packagesClazz = _package.getFullPath().split("\\.");
 			String[] packages = this.getFullPath().split("\\.");
@@ -319,16 +326,17 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					}
 				}
 				if (p == null) {
-					getSubPackages().add(_package);
+					return getSubPackages().add(_package);
 				} else {
 					// To prevent ConcurrentModificationException, we need to use integer and not iterator
 					// because package are detach from there parent and next attach into another parent.
 					// so _package.getSubPackages() is modified.
 					int i = 0;
 					int size = _package.getSubPackages().size();
+					boolean allAdded = true;
 					while (i < size) {
 						Package tmp = _package.getSubPackages().get(i);
-						p.addPackage(tmp);
+						allAdded = allAdded & p.addPackage(tmp);
 						if (size == _package.getSubPackages().size()) {
 							i++;
 						}
@@ -339,36 +347,30 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					size = _package.getClasses().size();
 					while (i < size) {
 						Class tmp = _package.getClasses().get(i);
-						p.addClass(tmp);
+						allAdded = allAdded & p.addClass(tmp);
 						if (size == _package.getClasses().size()) {
 							i++;
 						}
 						size = _package.getClasses().size();
 					}
+					return allAdded;
 				}
 			} else {
 				String _packageName = packagesClazz[nextPackage];
-				boolean exist = false;
-				Iterator<Package> packagesIterator = getSubPackages()
-						.iterator();
-				while (!exist && packagesIterator.hasNext()) {
-					Package p = packagesIterator.next();
+				for (Package p : getSubPackages()) {
 					if (p.getFullPath().equals(
 							getFullPath() + "." + _packageName)) {
-						p.addPackage(_package);
-						exist = true;
+						return p.addPackage(_package);
 					}
 				}
-				if (!exist) {
 					Package p = JarFactory.eINSTANCE.createPackage();
 					p.setFullPath(this.getFullPath() + "." + _packageName);
 					p.setName(_packageName);
 					getSubPackages().add(p);
-					p.addPackage(_package);
-				}
+					return p.addPackage(_package);
 			}
 		}
-
+		return false;
 	}
 
 	public Package getPackage(String fullPath) {
@@ -417,6 +419,8 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 				classes.add(clazz);
 			}
 		} else {
+			// FIXME à refaire car je ne pense pas que c'est correct car cela recherche juste dans le package et non pas dans les sous package
+			// à voir si il faut aller voir dans les sous packages
 			for (Iterator<Class> classesIterator = getClasses().iterator(); classesIterator
 					.hasNext();) {
 				Class tmp = classesIterator.next();

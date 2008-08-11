@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FolderImpl.java,v 1.8 2008-08-06 13:37:24 edaubert Exp $
+ * $Id: FolderImpl.java,v 1.9 2008-08-11 14:19:27 edaubert Exp $
  */
 package jar.impl;
 
@@ -12,12 +12,13 @@ import jar.JarPackage;
 import jar.SystemEntry;
 
 import java.util.Collection;
-import java.util.Iterator;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -141,7 +142,7 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 		return super.eIsSet(featureID);
 	}
 
-	public void addEntry(SystemEntry entry) {
+	public boolean addEntry(SystemEntry entry) {
 		if (entry.getFullPath().contains(this.getFullPath())) {
 			String[] packagesClazz = entry.getFullPath().split("/");
 			String[] packages = this.getFullPath().split("/");
@@ -160,36 +161,34 @@ public class FolderImpl extends SystemEntryImpl implements Folder {
 					}
 				}
 				if (p == null) {
-					getEntries().add(entry);
+					return getEntries().add(entry);
 				} else if (entry instanceof Folder) {
+					boolean allAdded = true;
 					for (SystemEntry entryTmp : ((Folder)entry).getEntries()) {
-						((Folder)p).addEntry(entryTmp);
+						allAdded = allAdded & ((Folder)p).addEntry(entryTmp);
 					}
 					p.setBundleClassPath(entry.isBundleClassPath());
+					return allAdded;
 				}
 			} else {
 				String _packageName = packagesClazz[nextPackage];
-				boolean exist = false;
-				Iterator<SystemEntry> packagesIterator = getEntries().iterator();
-				while (!exist && packagesIterator.hasNext()) {
-					SystemEntry tmp = packagesIterator.next();
+				for (SystemEntry tmp : getEntries()) {
 					if (tmp instanceof Folder && tmp.getFullPath().equals(
 							getFullPath() + _packageName + "/")) {
-						((Folder)tmp).addEntry(entry);
-						exist = true;
+						return ((Folder)tmp).addEntry(entry);
+						//exist = true;
 					}
 				}
-				if (!exist) {
 					Folder p = JarFactory.eINSTANCE.createFolder();
 					p.setFullPath(this.getFullPath() + _packageName + "/");
 					p.setName(_packageName);
 					p.setBundleClassPath(entry.isBundleClassPath());
 					getEntries().add(p);
 					this.setBundleClassPath(entry.isBundleClassPath());
-					p.addEntry(entry);
-				}
+					return p.addEntry(entry);
 			}
 		}
+		return false;
 	}
 
 	public SystemEntry getEntry(String fullPath) {

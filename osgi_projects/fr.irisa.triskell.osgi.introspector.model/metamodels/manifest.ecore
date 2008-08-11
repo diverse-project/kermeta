@@ -13,8 +13,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Service">
     <eStructuralFeatures xsi:type="ecore:EReference" name="interface" eType="ecore:EClass jar.ecore#//Class"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaceName" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaceReference" lowerBound="1"
         eType="ecore:EDataType framework.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="#//boolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Version">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="major" lowerBound="1" eType="#//int"/>
@@ -112,31 +114,38 @@
         eType="ecore:EClass jar.ecore#//Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BundleClassPath" eSuperTypes="#//MANIFESTEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass jar.ecore#//SystemEntry"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="ecore:EClass jar.ecore#//SystemEntry"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="#//boolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="references" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BundleNativeCode" eSuperTypes="#//MANIFESTEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="#//boolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="directives" lowerBound="1"
         upperBound="-1" eType="ecore:EClass option.ecore#//NativeCodeDirective" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="file" lowerBound="1" upperBound="-1"
-        eType="ecore:EClass jar.ecore#//File"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="file" upperBound="-1" eType="ecore:EClass jar.ecore#//File"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="#//boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileReferences" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RequireBundle" eSuperTypes="#//MANIFESTEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="directives" upperBound="2"
         eType="ecore:EClass option.ecore#//RequireBundleDirective" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
         eType="#//boolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundle" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleReference" lowerBound="1"
         eType="ecore:EDataType framework.ecore#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bundleElement" eType="ecore:EClass framework.ecore#//Bundle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundle" eType="ecore:EClass framework.ecore#//Bundle"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImportService" eSuperTypes="#//MANIFESTEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
         eType="#//boolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="service" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceReference" lowerBound="1"
         eType="ecore:EDataType framework.ecore#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceElement" eType="#//Service"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//Service"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExportService" eSuperTypes="#//MANIFESTEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"
@@ -147,16 +156,20 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
         eType="#//boolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packages" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packagesReference" lowerBound="1"
         upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="packagesList" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
         eType="ecore:EClass jar.ecore#//Package"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExportPackage" eSuperTypes="#//MANIFESTEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass jar.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
+        eType="ecore:EClass jar.ecore#//Package"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="directives" upperBound="-1"
         eType="ecore:EClass option.ecore#//ExportPackageDirective" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="#//boolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packageReference" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BundleActivationPolicy" eSuperTypes="#//MANIFESTEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="policy" lowerBound="1"
@@ -167,11 +180,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="FragmentHost" eSuperTypes="#//MANIFESTEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="directives" eType="ecore:EClass option.ecore#//FragmentHostDirective"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bundle" lowerBound="1"
-        eType="ecore:EClass framework.ecore#//Bundle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundle" eType="ecore:EClass framework.ecore#//Bundle"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleReference" lowerBound="1"
+        eType="ecore:EDataType framework.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="#//boolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicImportPackage" eSuperTypes="#//MANIFESTEntry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packages" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packagesReference" lowerBound="1"
         upperBound="-1" eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BundleRequiredExecutionEnvironment"

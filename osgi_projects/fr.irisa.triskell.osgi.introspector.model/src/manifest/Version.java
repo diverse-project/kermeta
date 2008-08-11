@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Version.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: Version.java,v 1.3 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest;
 
@@ -140,5 +140,7 @@ public interface Version extends EObject {
 	boolean lesserThan(Version version, boolean equals);
 
 	boolean equals(Version version);
+	
+	boolean containsInto(String versionRange);
 
 } // Version

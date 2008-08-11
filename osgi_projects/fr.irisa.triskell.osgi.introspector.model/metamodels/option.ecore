@@ -90,16 +90,24 @@
     <eLiterals name="WindowsVista" value="24"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExcludePackages" eSuperTypes="#//ActivationPolicyDirective">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass jar.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
+        eType="ecore:EClass jar.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packagesReference" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//boolean" defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Processor" eSuperTypes="#//NativeCodeDirective">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="processor" lowerBound="1"
         eType="#//ProcessorEnum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IncludePackages" eSuperTypes="#//ActivationPolicyDirective">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass jar.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
+        eType="ecore:EClass jar.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packagesReference" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//boolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Uses" eSuperTypes="#//ExportPackageDirective">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="packages" lowerBound="1"

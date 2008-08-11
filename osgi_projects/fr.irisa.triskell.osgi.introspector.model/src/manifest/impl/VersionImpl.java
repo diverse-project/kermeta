@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VersionImpl.java,v 1.3 2008-08-06 13:37:23 edaubert Exp $
+ * $Id: VersionImpl.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest.impl;
 
 import manifest.BadVersionValue;
+import manifest.ManifestFactory;
 import manifest.ManifestPackage;
 import manifest.Version;
 
@@ -420,10 +421,53 @@ public class VersionImpl extends EObjectImpl implements Version {
 	}
 
 	public boolean equals(Version version) {
-		return this.getMajor() == version.getMajor()
+		if (version != null) {
+			return this.getMajor() == version.getMajor()
 				&& this.getMinor() == version.getMinor()
 				&& this.getMicro() == version.getMicro()
 				&& this.getQualifier().equals(version.getQualifier());
+		}
+		return true;
+	}
+	
+	public boolean containsInto(String versionRange) {
+		if (versionRange != null) {
+			boolean minNotInclude = false;
+			boolean maxNotInclude = true;
+			Version minVersion = null;
+			Version maxVersion = null;
+			if (versionRange.startsWith("(")) {
+				minNotInclude = true;
+			}
+			if (versionRange.endsWith("]")) {
+				maxNotInclude = false;
+			}
+			versionRange = versionRange.replace("(", "").replace("[", "")
+					.replace(")", "").replace("]", "").replace(
+							"\"", "").replace(" ", "");
+			String[] versionsValue = versionRange.split(",");
+			if (versionsValue.length == 2) {
+				try {
+					maxVersion = ManifestFactory.eINSTANCE
+							.createVersion();
+					maxVersion.setVersionValue(versionsValue[1]);
+				} catch (BadVersionValue e) {
+					maxVersion = null;
+					// TODO log erreur dans un attribut
+				}
+			}
+			try {
+				minVersion = ManifestFactory.eINSTANCE
+						.createVersion();
+				minVersion.setVersionValue(versionsValue[0]);
+			} catch (BadVersionValue e) {
+				minVersion = null;
+				// TODO log erreur dans un attribut
+			}
+			
+			return this.greaterThan(minVersion, minNotInclude) && this.lesserThan(maxVersion, maxNotInclude);
+		}
+		return true;
 	}
 
 } // VersionImpl

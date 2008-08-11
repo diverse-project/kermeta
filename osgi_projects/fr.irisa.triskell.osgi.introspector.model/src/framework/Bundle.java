@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Bundle.java,v 1.3 2008-08-06 13:37:22 edaubert Exp $
+ * $Id: Bundle.java,v 1.4 2008-08-11 14:19:27 edaubert Exp $
  */
 package framework;
 
@@ -22,9 +22,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link framework.Bundle#getFragments <em>Fragments</em>}</li>
  *   <li>{@link framework.Bundle#getLocation <em>Location</em>}</li>
  *   <li>{@link framework.Bundle#getManifest <em>Manifest</em>}</li>
- *   <li>{@link framework.Bundle#getSymbolicName <em>Symbolic Name</em>}</li>
  *   <li>{@link framework.Bundle#getFolder <em>Folder</em>}</li>
  *   <li>{@link framework.Bundle#getPackage <em>Package</em>}</li>
+ *   <li>{@link framework.Bundle#getFragmentsReference <em>Fragments Reference</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,32 +102,6 @@ public interface Bundle extends EObject {
 	void setManifest(MANIFEST value);
 
 	/**
-	 * Returns the value of the '<em><b>Symbolic Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Symbolic Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Symbolic Name</em>' attribute.
-	 * @see #setSymbolicName(String)
-	 * @see framework.FrameworkPackage#getBundle_SymbolicName()
-	 * @model dataType="framework.String" required="true"
-	 * @generated
-	 */
-	String getSymbolicName();
-
-	/**
-	 * Sets the value of the '{@link framework.Bundle#getSymbolicName <em>Symbolic Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Symbolic Name</em>' attribute.
-	 * @see #getSymbolicName()
-	 * @generated
-	 */
-	void setSymbolicName(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Folder</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -177,6 +151,22 @@ public interface Bundle extends EObject {
 	 */
 	void setPackage(jar.Package value);
 
-	void addFragment(Bundle bundle);
+	/**
+	 * Returns the value of the '<em><b>Fragments Reference</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Fragments Reference</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Fragments Reference</em>' attribute list.
+	 * @see framework.FrameworkPackage#getBundle_FragmentsReference()
+	 * @model dataType="framework.String"
+	 * @generated
+	 */
+	EList<String> getFragmentsReference();
+
+	boolean addFragment(Bundle bundle);
 
 } // Bundle

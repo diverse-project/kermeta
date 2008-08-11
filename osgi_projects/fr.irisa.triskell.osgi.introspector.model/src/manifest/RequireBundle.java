@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RequireBundle.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: RequireBundle.java,v 1.3 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest;
 
@@ -20,8 +20,8 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link manifest.RequireBundle#getDirectives <em>Directives</em>}</li>
  *   <li>{@link manifest.RequireBundle#isResolved <em>Resolved</em>}</li>
+ *   <li>{@link manifest.RequireBundle#getBundleReference <em>Bundle Reference</em>}</li>
  *   <li>{@link manifest.RequireBundle#getBundle <em>Bundle</em>}</li>
- *   <li>{@link manifest.RequireBundle#getBundleElement <em>Bundle Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,6 +73,32 @@ public interface RequireBundle extends MANIFESTEntry {
 	void setResolved(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Bundle Reference</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bundle Reference</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bundle Reference</em>' attribute.
+	 * @see #setBundleReference(String)
+	 * @see manifest.ManifestPackage#getRequireBundle_BundleReference()
+	 * @model dataType="framework.String" required="true"
+	 * @generated
+	 */
+	String getBundleReference();
+
+	/**
+	 * Sets the value of the '{@link manifest.RequireBundle#getBundleReference <em>Bundle Reference</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bundle Reference</em>' attribute.
+	 * @see #getBundleReference()
+	 * @generated
+	 */
+	void setBundleReference(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Bundle</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -87,42 +113,17 @@ public interface RequireBundle extends MANIFESTEntry {
 	 * @model dataType="framework.String" required="true"
 	 * @generated
 	 */
-	String getBundle();
+	Bundle getBundle();
 
 	/**
-	 * Sets the value of the '{@link manifest.RequireBundle#getBundle <em>Bundle</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Bundle</em>' attribute.
+	 * Sets the value of the '{@link manifest.RequireBundle#getBundle <em>Bundle</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bundle</em>' reference.
 	 * @see #getBundle()
 	 * @generated
 	 */
-	void setBundle(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Bundle Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Bundle Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Bundle Element</em>' reference.
-	 * @see #setBundleElement(Bundle)
-	 * @see manifest.ManifestPackage#getRequireBundle_BundleElement()
-	 * @model
-	 * @generated
-	 */
-	Bundle getBundleElement();
-
-	/**
-	 * Sets the value of the '{@link manifest.RequireBundle#getBundleElement <em>Bundle Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Bundle Element</em>' reference.
-	 * @see #getBundleElement()
-	 * @generated
-	 */
-	void setBundleElement(Bundle value);
+	void setBundle(Bundle value);
 
 	void addDirective(RequireBundleDirective directive);
 

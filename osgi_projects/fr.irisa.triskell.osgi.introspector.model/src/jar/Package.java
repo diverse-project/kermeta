@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Package.java,v 1.3 2008-08-01 09:44:37 edaubert Exp $
+ * $Id: Package.java,v 1.4 2008-08-11 14:19:27 edaubert Exp $
  */
 package jar;
 
@@ -63,9 +63,9 @@ public interface Package extends BundleEntry {
 	 */
 	EList<Package> getSubPackages();
 
-	void addClass(Class clazz);
+	boolean addClass(Class clazz);
 
-	void addPackage(Package _package);
+	boolean addPackage(Package _package);
 
 	Class getClass(String fullPath);
 
@@ -73,6 +73,6 @@ public interface Package extends BundleEntry {
 
 	List<Class> getClassWithRegex(String regex);
 
-	BundleEntry getSubElement(String fullPath);
+	//BundleEntry getSubElement(String fullPath);
 
 } // Package

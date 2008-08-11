@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkImpl.java,v 1.4 2008-08-06 13:37:22 edaubert Exp $
+ * $Id: FrameworkImpl.java,v 1.5 2008-08-11 14:19:27 edaubert Exp $
  */
 package framework.impl;
 
@@ -157,16 +157,19 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 						if (this.bundleIsSingleton(bundle.getManifest()
 								.getBundleSymbolicName().getSymbolicName())) {
 							return getBundles().add(bundle);
-						} else {
-							return false;
 						}
-					} else {
-						return getBundles().add(bundle);
 					}
 				}
 			}
+			// Attention gérer l'unicité du couple BundleVersion, BundleSymbolicName
+			// TODO Modifier FrameworkTest#testAddBundle en conséquence
+			Version version = bundle.getManifest().getBundleVersion().getVersion();
+			Bundle tmp = this.findBundle(symbolicName.getSymbolicName(), version);
+			if (tmp == null) {
+				return getBundles().add(bundle);
+			}
 		}
-		return getBundles().add(bundle);
+		return false;
 	}
 
 	private boolean bundleIsSingleton(String symbolicName) {
@@ -197,7 +200,7 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 	
 	public Bundle findBundle(String symbolicName, Version version) {
 		for (Bundle bundle : this.getBundles()) {
-			if (symbolicName.equals(bundle.getSymbolicName())) {
+			if (symbolicName.equals(bundle.getManifest().getBundleSymbolicName().getSymbolicName())) {
 				if (version.equals(bundle.getManifest().getBundleVersion().getVersion())) {
 				return bundle;
 				}

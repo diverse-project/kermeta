@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExportPackageImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: ExportPackageImpl.java,v 1.3 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest.impl;
 
@@ -14,10 +14,13 @@ import manifest.ExportPackage;
 import manifest.ManifestPackage;
 import option.ExportPackageDirective;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -31,6 +34,8 @@ import org.osgi.framework.Constants;
  * <ul>
  *   <li>{@link manifest.impl.ExportPackageImpl#getPackages <em>Packages</em>}</li>
  *   <li>{@link manifest.impl.ExportPackageImpl#getDirectives <em>Directives</em>}</li>
+ *   <li>{@link manifest.impl.ExportPackageImpl#isResolved <em>Resolved</em>}</li>
+ *   <li>{@link manifest.impl.ExportPackageImpl#getPackageReference <em>Package Reference</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,6 +60,36 @@ public class ExportPackageImpl extends MANIFESTEntryImpl implements
 	 * @ordered
 	 */
 	protected EList<ExportPackageDirective> directives;
+
+	/**
+	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean RESOLVED_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean resolved = RESOLVED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getPackageReference() <em>Package Reference</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPackageReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> packageReference;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -96,6 +131,39 @@ public class ExportPackageImpl extends MANIFESTEntryImpl implements
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isResolved() {
+		return resolved;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResolved(boolean newResolved) {
+		boolean oldResolved = resolved;
+		resolved = newResolved;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.EXPORT_PACKAGE__RESOLVED, oldResolved, resolved));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getPackageReference() {
+		if (packageReference == null) {
+			packageReference = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.EXPORT_PACKAGE__PACKAGE_REFERENCE);
+		}
+		return packageReference;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -120,6 +188,10 @@ public class ExportPackageImpl extends MANIFESTEntryImpl implements
 				return getPackages();
 			case ManifestPackage.EXPORT_PACKAGE__DIRECTIVES:
 				return getDirectives();
+			case ManifestPackage.EXPORT_PACKAGE__RESOLVED:
+				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
+			case ManifestPackage.EXPORT_PACKAGE__PACKAGE_REFERENCE:
+				return getPackageReference();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -140,6 +212,13 @@ public class ExportPackageImpl extends MANIFESTEntryImpl implements
 				getDirectives().clear();
 				getDirectives().addAll((Collection<? extends ExportPackageDirective>)newValue);
 				return;
+			case ManifestPackage.EXPORT_PACKAGE__RESOLVED:
+				setResolved(((Boolean)newValue).booleanValue());
+				return;
+			case ManifestPackage.EXPORT_PACKAGE__PACKAGE_REFERENCE:
+				getPackageReference().clear();
+				getPackageReference().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -157,6 +236,12 @@ public class ExportPackageImpl extends MANIFESTEntryImpl implements
 			case ManifestPackage.EXPORT_PACKAGE__DIRECTIVES:
 				getDirectives().clear();
 				return;
+			case ManifestPackage.EXPORT_PACKAGE__RESOLVED:
+				setResolved(RESOLVED_EDEFAULT);
+				return;
+			case ManifestPackage.EXPORT_PACKAGE__PACKAGE_REFERENCE:
+				getPackageReference().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -172,15 +257,42 @@ public class ExportPackageImpl extends MANIFESTEntryImpl implements
 				return packages != null && !packages.isEmpty();
 			case ManifestPackage.EXPORT_PACKAGE__DIRECTIVES:
 				return directives != null && !directives.isEmpty();
+			case ManifestPackage.EXPORT_PACKAGE__RESOLVED:
+				return resolved != RESOLVED_EDEFAULT;
+			case ManifestPackage.EXPORT_PACKAGE__PACKAGE_REFERENCE:
+				return packageReference != null && !packageReference.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (resolved: ");
+		result.append(resolved);
+		result.append(", packageReference: ");
+		result.append(packageReference);
+		result.append(')');
+		return result.toString();
 	}
 
 	public void addExportPackage(Package _package) {
 		if (!getPackages().contains(_package)) {
 			getPackages().add(_package);
 		}
-
+	}
+	
+	public void addExportPackageReference(String reference) {
+		if (!getPackageReference().contains(reference)) {
+			getPackageReference().add(reference);
+		}
 	}
 
 	public void addDirective(ExportPackageDirective directive) {

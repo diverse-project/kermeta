@@ -2,13 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: ClassImpl.java,v 1.3 2008-08-11 14:19:27 edaubert Exp $
  */
 package jar.impl;
 
 import jar.JarPackage;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Class</b></em>'.

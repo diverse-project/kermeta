@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkPackage.java,v 1.3 2008-08-06 13:37:22 edaubert Exp $
+ * $Id: FrameworkPackage.java,v 1.4 2008-08-11 14:19:27 edaubert Exp $
  */
 package framework;
 
@@ -116,21 +116,12 @@ public interface FrameworkPackage extends EPackage {
 	int BUNDLE__MANIFEST = 2;
 
 	/**
-	 * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE__SYMBOLIC_NAME = 3;
-
-	/**
 	 * The feature id for the '<em><b>Folder</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__FOLDER = 4;
+	int BUNDLE__FOLDER = 3;
 
 	/**
 	 * The feature id for the '<em><b>Package</b></em>' containment reference.
@@ -138,7 +129,16 @@ public interface FrameworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__PACKAGE = 5;
+	int BUNDLE__PACKAGE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Fragments Reference</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__FRAGMENTS_REFERENCE = 5;
 
 	/**
 	 * The number of structural features of the '<em>Bundle</em>' class.
@@ -217,17 +217,6 @@ public interface FrameworkPackage extends EPackage {
 	EReference getBundle_Manifest();
 
 	/**
-	 * Returns the meta object for the attribute '{@link framework.Bundle#getSymbolicName <em>Symbolic Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Symbolic Name</em>'.
-	 * @see framework.Bundle#getSymbolicName()
-	 * @see #getBundle()
-	 * @generated
-	 */
-	EAttribute getBundle_SymbolicName();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link framework.Bundle#getFolder <em>Folder</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Folder</em>'.
@@ -246,6 +235,17 @@ public interface FrameworkPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBundle_Package();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link framework.Bundle#getFragmentsReference <em>Fragments Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Fragments Reference</em>'.
+	 * @see framework.Bundle#getFragmentsReference()
+	 * @see #getBundle()
+	 * @generated
+	 */
+	EAttribute getBundle_FragmentsReference();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
@@ -328,14 +328,6 @@ public interface FrameworkPackage extends EPackage {
 		EReference BUNDLE__MANIFEST = eINSTANCE.getBundle_Manifest();
 
 		/**
-		 * The meta object literal for the '<em><b>Symbolic Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BUNDLE__SYMBOLIC_NAME = eINSTANCE.getBundle_SymbolicName();
-
-		/**
 		 * The meta object literal for the '<em><b>Folder</b></em>' containment reference feature.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
@@ -350,6 +342,14 @@ public interface FrameworkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BUNDLE__PACKAGE = eINSTANCE.getBundle_Package();
+
+		/**
+		 * The meta object literal for the '<em><b>Fragments Reference</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUNDLE__FRAGMENTS_REFERENCE = eINSTANCE.getBundle_FragmentsReference();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type. <!--

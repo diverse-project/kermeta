@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimpleManifestEntryManyValuesImpl.java,v 1.3 2008-08-06 13:37:23 edaubert Exp $
+ * $Id: SimpleManifestEntryManyValuesImpl.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest.impl;
 
@@ -148,14 +148,7 @@ public class SimpleManifestEntryManyValuesImpl extends MANIFESTEntryImpl
 			}
 			if (!exist) {
 				getValues().add(value);
-			} else {
-				// TODO enlever sysout
-				System.out.println(value + " already exist.");
-				System.out.println("It's not necessary to add again.");
 			}
-		} else {
-			System.out
-					.println("the String is empty, it's not necessary to add.");
 		}
 
 	}

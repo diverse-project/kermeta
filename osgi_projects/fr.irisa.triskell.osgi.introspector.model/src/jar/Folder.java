@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Folder.java,v 1.2 2008-07-31 13:43:54 edaubert Exp $
+ * $Id: Folder.java,v 1.3 2008-08-11 14:19:27 edaubert Exp $
  */
 package jar;
 
@@ -40,7 +40,7 @@ public interface Folder extends SystemEntry {
 	 */
 	EList<SystemEntry> getEntries();
 
-	void addEntry(SystemEntry entry);
+	boolean addEntry(SystemEntry entry);
 
 	SystemEntry getEntry(String fullPath);
 

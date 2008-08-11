@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/0.11" xmi:id="_lBuTQFiGEd2TgeNbCAW45A" activeDiagram="_lBuTQViGEd2TgeNbCAW45A">
   <model href="framework.ecore#/"/>
-  <diagrams xmi:id="_lBuTQViGEd2TgeNbCAW45A" position="0,0" size="100,100" name="No name" viewport="1378,228">
+  <diagrams xmi:id="_lBuTQViGEd2TgeNbCAW45A" position="0,0" size="100,100" name="No name" viewport="2493,570">
     <property xmi:id="_lCw1EFiGEd2TgeNbCAW45A" key="pageFormatName" value="A0"/>
     <property xmi:id="_lCw1EViGEd2TgeNbCAW45A" key="diagramWidth" value="3364"/>
     <property xmi:id="_lCw1EliGEd2TgeNbCAW45A" key="diagramHeight" value="4756"/>
@@ -48,9 +48,9 @@
             <element href="framework.ecore#//Bundle/location"/>
           </semanticModel>
         </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_lEi90liGEd2TgeNbCAW45A" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_lEi901iGEd2TgeNbCAW45A" presentation="default">
-            <element href="framework.ecore#//Bundle/symbolicName"/>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.ecore#//Bundle/fragmentsReference"/>
           </semanticModel>
         </contained>
       </contained>
@@ -138,7 +138,12 @@
           </semanticModel>
           <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
             <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-              <element href="manifest.ecore#//Service/interfaceName"/>
+              <element href="manifest.ecore#//Service/interfaceReference"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="manifest.ecore#//Service/resolved"/>
             </semanticModel>
           </contained>
         </contained>
@@ -510,6 +515,16 @@
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_aXxANFiIEd23beYUpT8UAg" presentation="default">
             <element href="manifest.ecore#//BundleClassPath"/>
           </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="manifest.ecore#//BundleClassPath/resolved"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="manifest.ecore#//BundleClassPath/references"/>
+            </semanticModel>
+          </contained>
         </contained>
         <contained xsi:type="di:GraphNode" xmi:id="_aXxANViIEd23beYUpT8UAg">
           <property xmi:id="_aXxANliIEd23beYUpT8UAg" key="eStructuralFeatureID" value="11"/>
@@ -531,6 +546,16 @@
           <contained xsi:type="di:GraphNode" xmi:id="_aXxAQFiIEd23beYUpT8UAg" position="0,0" size="-1,-1">
             <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_aXxAQViIEd23beYUpT8UAg" presentation="default">
               <element href="manifest.ecore#//BundleNativeCode/optional"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="manifest.ecore#//BundleNativeCode/resolved"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="manifest.ecore#//BundleNativeCode/fileReferences"/>
             </semanticModel>
           </contained>
         </contained>
@@ -558,7 +583,7 @@
           </contained>
           <contained xsi:type="di:GraphNode" xmi:id="_-K7sAliJEd23beYUpT8UAg" position="0,0" size="-1,-1">
             <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_-K7sA1iJEd23beYUpT8UAg" presentation="default">
-              <element href="manifest.ecore#//RequireBundle/bundle"/>
+              <element href="manifest.ecore#//RequireBundle/bundleReference"/>
             </semanticModel>
           </contained>
         </contained>
@@ -586,7 +611,7 @@
           </contained>
           <contained xsi:type="di:GraphNode" xmi:id="_qKgqoliJEd23beYUpT8UAg" position="0,0" size="-1,-1">
             <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_qKgqo1iJEd23beYUpT8UAg" presentation="default">
-              <element href="manifest.ecore#//ImportService/service"/>
+              <element href="manifest.ecore#//ImportService/serviceReference"/>
             </semanticModel>
           </contained>
         </contained>
@@ -632,7 +657,7 @@
           </contained>
           <contained xsi:type="di:GraphNode" xmi:id="_ZdM_0liJEd23beYUpT8UAg" position="0,0" size="-1,-1">
             <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ZdM_01iJEd23beYUpT8UAg" presentation="default">
-              <element href="manifest.ecore#//ImportPackage/packages"/>
+              <element href="manifest.ecore#//ImportPackage/packagesReference"/>
             </semanticModel>
           </contained>
         </contained>
@@ -653,6 +678,16 @@
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_aX6KKliIEd23beYUpT8UAg" presentation="default">
             <element href="manifest.ecore#//ExportPackage"/>
           </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="manifest.ecore#//ExportPackage/resolved"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="manifest.ecore#//ExportPackage/packageReference"/>
+            </semanticModel>
+          </contained>
         </contained>
         <contained xsi:type="di:GraphNode" xmi:id="_aX6KK1iIEd23beYUpT8UAg">
           <property xmi:id="_aX6KLFiIEd23beYUpT8UAg" key="eStructuralFeatureID" value="11"/>
@@ -694,6 +729,16 @@
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_aX6KPFiIEd23beYUpT8UAg" presentation="default">
             <element href="manifest.ecore#//FragmentHost"/>
           </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="manifest.ecore#//FragmentHost/bundleReference"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="manifest.ecore#//FragmentHost/resolved"/>
+            </semanticModel>
+          </contained>
         </contained>
         <contained xsi:type="di:GraphNode" xmi:id="_aX6KPViIEd23beYUpT8UAg">
           <property xmi:id="_aX6KPliIEd23beYUpT8UAg" key="eStructuralFeatureID" value="11"/>
@@ -714,7 +759,7 @@
           </semanticModel>
           <contained xsi:type="di:GraphNode" xmi:id="_aYD7AFiIEd23beYUpT8UAg" position="0,0" size="-1,-1">
             <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_aYD7AViIEd23beYUpT8UAg" presentation="default">
-              <element href="manifest.ecore#//DynamicImportPackage/packages"/>
+              <element href="manifest.ecore#//DynamicImportPackage/packagesReference"/>
             </semanticModel>
           </contained>
         </contained>
@@ -1086,7 +1131,7 @@
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="_aYNsAFiIEd23beYUpT8UAg _aYNsAViIEd23beYUpT8UAg">
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="manifest.ecore#//ImportService/serviceElement"/>
+          <element href="manifest.ecore#//ImportService/service"/>
         </semanticModel>
         <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
         <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
@@ -1313,7 +1358,7 @@
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_fc6U8liIEd23beYUpT8UAg" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_fc6U81iIEd23beYUpT8UAg" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_jEOZ4FiIEd23beYUpT8UAg" position="81,1073" size="3110,1192">
+    <contained xsi:type="di:GraphNode" xmi:id="_jEOZ4FiIEd23beYUpT8UAg" position="43,1073" size="3110,1192">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jEOZ4ViIEd23beYUpT8UAg" presentation="default">
         <element href="option.ecore#/"/>
       </semanticModel>
@@ -1787,6 +1832,16 @@
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jErF1FiIEd23beYUpT8UAg" presentation="default">
             <element href="option.ecore#//ExcludePackages"/>
           </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="option.ecore#//ExcludePackages/packagesReference"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="option.ecore#//ExcludePackages/resolved"/>
+            </semanticModel>
+          </contained>
         </contained>
         <contained xsi:type="di:GraphNode" xmi:id="_jErF1ViIEd23beYUpT8UAg">
           <property xmi:id="_jErF1liIEd23beYUpT8UAg" key="eStructuralFeatureID" value="11"/>
@@ -1828,6 +1883,16 @@
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jErF5liIEd23beYUpT8UAg" presentation="default">
             <element href="option.ecore#//IncludePackages"/>
           </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="option.ecore#//IncludePackages/packagesReference"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="option.ecore#//IncludePackages/resolved"/>
+            </semanticModel>
+          </contained>
         </contained>
         <contained xsi:type="di:GraphNode" xmi:id="_jErF51iIEd23beYUpT8UAg">
           <property xmi:id="_jErF6FiIEd23beYUpT8UAg" key="eStructuralFeatureID" value="11"/>
@@ -2377,14 +2442,14 @@
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="_aYNsEViIEd23beYUpT8UAg _fcdpLliIEd23beYUpT8UAg">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="manifest.ecore#//ImportPackage/packagesList"/>
+        <element href="manifest.ecore#//ImportPackage/packages"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="_aYpw91iIEd23beYUpT8UAg _lEi911iGEd2TgeNbCAW45A">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="manifest.ecore#//RequireBundle/bundleElement"/>
+        <element href="manifest.ecore#//RequireBundle/bundle"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>

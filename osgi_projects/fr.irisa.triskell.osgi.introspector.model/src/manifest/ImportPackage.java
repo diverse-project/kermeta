@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportPackage.java,v 1.3 2008-08-06 13:37:23 edaubert Exp $
+ * $Id: ImportPackage.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest;
 
@@ -20,8 +20,8 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link manifest.ImportPackage#getDirectives <em>Directives</em>}</li>
  *   <li>{@link manifest.ImportPackage#isResolved <em>Resolved</em>}</li>
+ *   <li>{@link manifest.ImportPackage#getPackagesReference <em>Packages Reference</em>}</li>
  *   <li>{@link manifest.ImportPackage#getPackages <em>Packages</em>}</li>
- *   <li>{@link manifest.ImportPackage#getPackagesList <em>Packages List</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,23 +45,7 @@ public interface ImportPackage extends MANIFESTEntry {
 	 * @model dataType="framework.String" required="true"
 	 * @generated
 	 */
-	EList<String> getPackages();
-
-	/**
-	 * Returns the value of the '<em><b>Packages List</b></em>' reference list.
-	 * The list contents are of type {@link jar.Package}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Packages List</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Packages List</em>' reference list.
-	 * @see manifest.ManifestPackage#getImportPackage_PackagesList()
-	 * @model
-	 * @generated
-	 */
-	EList<jar.Package> getPackagesList();
+	EList<jar.Package> getPackages();
 
 	/**
 	 * Returns the value of the '<em><b>Directives</b></em>' containment reference.
@@ -114,8 +98,24 @@ public interface ImportPackage extends MANIFESTEntry {
 	 */
 	void setResolved(boolean value);
 
-	void addPackage(String value);
+	/**
+	 * Returns the value of the '<em><b>Packages Reference</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Packages Reference</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Packages Reference</em>' attribute list.
+	 * @see manifest.ManifestPackage#getImportPackage_PackagesReference()
+	 * @model dataType="framework.String" required="true"
+	 * @generated
+	 */
+	EList<String> getPackagesReference();
+
+	void addPackageReference(String value);
 	
-	void addPackageReference(Package _package);
+	void addPackage(Package _package);
 
 } // ImportPackage

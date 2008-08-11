@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionPackageImpl.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: OptionPackageImpl.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
  */
 package option.impl;
 
@@ -458,6 +458,24 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getExcludePackages_PackagesReference() {
+		return (EAttribute)excludePackagesEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getExcludePackages_Resolved() {
+		return (EAttribute)excludePackagesEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -487,6 +505,24 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 	 */
 	public EReference getIncludePackages_Packages() {
 		return (EReference)includePackagesEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIncludePackages_PackagesReference() {
+		return (EAttribute)includePackagesEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIncludePackages_Resolved() {
+		return (EAttribute)includePackagesEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -834,12 +870,16 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 
 		excludePackagesEClass = createEClass(EXCLUDE_PACKAGES);
 		createEReference(excludePackagesEClass, EXCLUDE_PACKAGES__PACKAGES);
+		createEAttribute(excludePackagesEClass, EXCLUDE_PACKAGES__PACKAGES_REFERENCE);
+		createEAttribute(excludePackagesEClass, EXCLUDE_PACKAGES__RESOLVED);
 
 		processorEClass = createEClass(PROCESSOR);
 		createEAttribute(processorEClass, PROCESSOR__PROCESSOR);
 
 		includePackagesEClass = createEClass(INCLUDE_PACKAGES);
 		createEReference(includePackagesEClass, INCLUDE_PACKAGES__PACKAGES);
+		createEAttribute(includePackagesEClass, INCLUDE_PACKAGES__PACKAGES_REFERENCE);
+		createEAttribute(includePackagesEClass, INCLUDE_PACKAGES__RESOLVED);
 
 		usesEClass = createEClass(USES);
 		createEAttribute(usesEClass, USES__PACKAGES);
@@ -978,13 +1018,17 @@ public class OptionPackageImpl extends EPackageImpl implements OptionPackage {
 		initEAttribute(getOsVersion_MaxNotInclude(), theManifestPackage.getboolean(), "maxNotInclude", null, 0, 1, OsVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(excludePackagesEClass, ExcludePackages.class, "ExcludePackages", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExcludePackages_Packages(), theJarPackage.getPackage(), null, "packages", null, 1, -1, ExcludePackages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExcludePackages_Packages(), theJarPackage.getPackage(), null, "packages", null, 0, -1, ExcludePackages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExcludePackages_PackagesReference(), theFrameworkPackage.getString(), "packagesReference", null, 1, -1, ExcludePackages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExcludePackages_Resolved(), theManifestPackage.getboolean(), "resolved", "true", 1, 1, ExcludePackages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(processorEClass, Processor.class, "Processor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProcessor_Processor(), this.getProcessorEnum(), "processor", null, 1, 1, Processor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(includePackagesEClass, IncludePackages.class, "IncludePackages", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIncludePackages_Packages(), theJarPackage.getPackage(), null, "packages", null, 1, -1, IncludePackages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIncludePackages_Packages(), theJarPackage.getPackage(), null, "packages", null, 0, -1, IncludePackages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIncludePackages_PackagesReference(), theFrameworkPackage.getString(), "packagesReference", null, 1, -1, IncludePackages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIncludePackages_Resolved(), theManifestPackage.getboolean(), "resolved", null, 1, 1, IncludePackages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(usesEClass, Uses.class, "Uses", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUses_Packages(), theFrameworkPackage.getString(), "packages", null, 1, -1, Uses.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

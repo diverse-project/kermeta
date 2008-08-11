@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportPackageImpl.java,v 1.3 2008-08-06 13:37:23 edaubert Exp $
+ * $Id: ImportPackageImpl.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest.impl;
 
@@ -32,8 +32,8 @@ import org.osgi.framework.Constants;
  * <ul>
  *   <li>{@link manifest.impl.ImportPackageImpl#getDirectives <em>Directives</em>}</li>
  *   <li>{@link manifest.impl.ImportPackageImpl#isResolved <em>Resolved</em>}</li>
+ *   <li>{@link manifest.impl.ImportPackageImpl#getPackagesReference <em>Packages Reference</em>}</li>
  *   <li>{@link manifest.impl.ImportPackageImpl#getPackages <em>Packages</em>}</li>
- *   <li>{@link manifest.impl.ImportPackageImpl#getPackagesList <em>Packages List</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,23 +69,23 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 	protected boolean resolved = RESOLVED_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' attribute list.
+	 * The cached value of the '{@link #getPackagesReference() <em>Packages Reference</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPackagesReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> packagesReference;
+
+	/**
+	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getPackages()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> packages;
-
-	/**
-	 * The cached value of the '{@link #getPackagesList() <em>Packages List</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPackagesList()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<jar.Package> packagesList;
+	protected EList<jar.Package> packages;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -108,23 +108,11 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getPackages() {
+	public EList<jar.Package> getPackages() {
 		if (packages == null) {
-			packages = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.IMPORT_PACKAGE__PACKAGES);
+			packages = new EObjectResolvingEList<jar.Package>(jar.Package.class, this, ManifestPackage.IMPORT_PACKAGE__PACKAGES);
 		}
 		return packages;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<jar.Package> getPackagesList() {
-		if (packagesList == null) {
-			packagesList = new EObjectResolvingEList<jar.Package>(jar.Package.class, this, ManifestPackage.IMPORT_PACKAGE__PACKAGES_LIST);
-		}
-		return packagesList;
 	}
 
 	/**
@@ -188,6 +176,18 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getPackagesReference() {
+		if (packagesReference == null) {
+			packagesReference = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.IMPORT_PACKAGE__PACKAGES_REFERENCE);
+		}
+		return packagesReference;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -212,10 +212,10 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 				return getDirectives();
 			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
 				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
+			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_REFERENCE:
+				return getPackagesReference();
 			case ManifestPackage.IMPORT_PACKAGE__PACKAGES:
 				return getPackages();
-			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_LIST:
-				return getPackagesList();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -234,13 +234,13 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
 				setResolved(((Boolean)newValue).booleanValue());
 				return;
+			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_REFERENCE:
+				getPackagesReference().clear();
+				getPackagesReference().addAll((Collection<? extends String>)newValue);
+				return;
 			case ManifestPackage.IMPORT_PACKAGE__PACKAGES:
 				getPackages().clear();
-				getPackages().addAll((Collection<? extends String>)newValue);
-				return;
-			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_LIST:
-				getPackagesList().clear();
-				getPackagesList().addAll((Collection<? extends jar.Package>)newValue);
+				getPackages().addAll((Collection<? extends jar.Package>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -259,11 +259,11 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
 				setResolved(RESOLVED_EDEFAULT);
 				return;
+			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_REFERENCE:
+				getPackagesReference().clear();
+				return;
 			case ManifestPackage.IMPORT_PACKAGE__PACKAGES:
 				getPackages().clear();
-				return;
-			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_LIST:
-				getPackagesList().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -280,10 +280,10 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 				return directives != null;
 			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
 				return resolved != RESOLVED_EDEFAULT;
+			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_REFERENCE:
+				return packagesReference != null && !packagesReference.isEmpty();
 			case ManifestPackage.IMPORT_PACKAGE__PACKAGES:
 				return packages != null && !packages.isEmpty();
-			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_LIST:
-				return packagesList != null && !packagesList.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -299,29 +299,29 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (resolved: ");
 		result.append(resolved);
-		result.append(", packages: ");
-		result.append(packages);
+		result.append(", packagesReference: ");
+		result.append(packagesReference);
 		result.append(')');
 		return result.toString();
 	}
 
-	public void addPackage(String value) {
+	public void addPackageReference(String value) {
 		if (!getPackages().contains(value)) {
-			getPackages().add(value);
+			getPackagesReference().add(value);
 		}
 
 	}
 
-	public void addPackageReference(Package _package) {
+	public void addPackage(Package _package) {
 		boolean exist = false;
-		for (Package p : getPackagesList()) {
+		for (Package p : getPackages()) {
 			if (p.getFullPath().equals(_package.getFullPath())) {
 				exist = true;
 				break;
 			}
 		}
 		if (!exist) {
-			getPackagesList().add(_package);
+			getPackages().add(_package);
 		}
 		
 	}

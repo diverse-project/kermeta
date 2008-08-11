@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FragmentHostImpl.java,v 1.4 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: FragmentHostImpl.java,v 1.5 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest.impl;
 
@@ -27,6 +27,8 @@ import framework.Bundle;
  * <ul>
  *   <li>{@link manifest.impl.FragmentHostImpl#getDirectives <em>Directives</em>}</li>
  *   <li>{@link manifest.impl.FragmentHostImpl#getBundle <em>Bundle</em>}</li>
+ *   <li>{@link manifest.impl.FragmentHostImpl#getBundleReference <em>Bundle Reference</em>}</li>
+ *   <li>{@link manifest.impl.FragmentHostImpl#isResolved <em>Resolved</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,6 +52,46 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 	 * @ordered
 	 */
 	protected Bundle bundle;
+
+	/**
+	 * The default value of the '{@link #getBundleReference() <em>Bundle Reference</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBundleReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String BUNDLE_REFERENCE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getBundleReference() <em>Bundle Reference</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBundleReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected String bundleReference = BUNDLE_REFERENCE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean RESOLVED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResolved()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean resolved = RESOLVED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -145,6 +187,48 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getBundleReference() {
+		return bundleReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBundleReference(String newBundleReference) {
+		String oldBundleReference = bundleReference;
+		bundleReference = newBundleReference;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.FRAGMENT_HOST__BUNDLE_REFERENCE, oldBundleReference, bundleReference));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isResolved() {
+		return resolved;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResolved(boolean newResolved) {
+		boolean oldResolved = resolved;
+		resolved = newResolved;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.FRAGMENT_HOST__RESOLVED, oldResolved, resolved));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -170,6 +254,10 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				if (resolve) return getBundle();
 				return basicGetBundle();
+			case ManifestPackage.FRAGMENT_HOST__BUNDLE_REFERENCE:
+				return getBundleReference();
+			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
+				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -188,6 +276,12 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				setBundle((Bundle)newValue);
 				return;
+			case ManifestPackage.FRAGMENT_HOST__BUNDLE_REFERENCE:
+				setBundleReference((String)newValue);
+				return;
+			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
+				setResolved(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -205,6 +299,12 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				setBundle((Bundle)null);
 				return;
+			case ManifestPackage.FRAGMENT_HOST__BUNDLE_REFERENCE:
+				setBundleReference(BUNDLE_REFERENCE_EDEFAULT);
+				return;
+			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
+				setResolved(RESOLVED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -220,8 +320,30 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 				return directives != null;
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				return bundle != null;
+			case ManifestPackage.FRAGMENT_HOST__BUNDLE_REFERENCE:
+				return BUNDLE_REFERENCE_EDEFAULT == null ? bundleReference != null : !BUNDLE_REFERENCE_EDEFAULT.equals(bundleReference);
+			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
+				return resolved != RESOLVED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (bundleReference: ");
+		result.append(bundleReference);
+		result.append(", resolved: ");
+		result.append(resolved);
+		result.append(')');
+		return result.toString();
 	}
 
 } // FragmentHostImpl

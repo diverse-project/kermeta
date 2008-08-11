@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleImpl.java,v 1.3 2008-08-06 13:37:22 edaubert Exp $
+ * $Id: BundleImpl.java,v 1.4 2008-08-11 14:19:27 edaubert Exp $
  */
 package framework.impl;
 
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import framework.Bundle;
@@ -33,9 +34,9 @@ import framework.FrameworkPackage;
  *   <li>{@link framework.impl.BundleImpl#getFragments <em>Fragments</em>}</li>
  *   <li>{@link framework.impl.BundleImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link framework.impl.BundleImpl#getManifest <em>Manifest</em>}</li>
- *   <li>{@link framework.impl.BundleImpl#getSymbolicName <em>Symbolic Name</em>}</li>
  *   <li>{@link framework.impl.BundleImpl#getFolder <em>Folder</em>}</li>
  *   <li>{@link framework.impl.BundleImpl#getPackage <em>Package</em>}</li>
+ *   <li>{@link framework.impl.BundleImpl#getFragmentsReference <em>Fragments Reference</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,26 +80,6 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	protected MANIFEST manifest;
 
 	/**
-	 * The default value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSymbolicName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SYMBOLIC_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSymbolicName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String symbolicName = SYMBOLIC_NAME_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getFolder() <em>Folder</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getFolder()
@@ -115,6 +96,16 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	 * @ordered
 	 */
 	protected jar.Package package_;
+
+	/**
+	 * The cached value of the '{@link #getFragmentsReference() <em>Fragments Reference</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFragmentsReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> fragmentsReference;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -205,27 +196,6 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSymbolicName() {
-		return symbolicName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSymbolicName(String newSymbolicName) {
-		String oldSymbolicName = symbolicName;
-		symbolicName = newSymbolicName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FrameworkPackage.BUNDLE__SYMBOLIC_NAME, oldSymbolicName, symbolicName));
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -308,6 +278,18 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getFragmentsReference() {
+		if (fragmentsReference == null) {
+			fragmentsReference = new EDataTypeUniqueEList<String>(String.class, this, FrameworkPackage.BUNDLE__FRAGMENTS_REFERENCE);
+		}
+		return fragmentsReference;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -338,12 +320,12 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 				return getLocation();
 			case FrameworkPackage.BUNDLE__MANIFEST:
 				return getManifest();
-			case FrameworkPackage.BUNDLE__SYMBOLIC_NAME:
-				return getSymbolicName();
 			case FrameworkPackage.BUNDLE__FOLDER:
 				return getFolder();
 			case FrameworkPackage.BUNDLE__PACKAGE:
 				return getPackage();
+			case FrameworkPackage.BUNDLE__FRAGMENTS_REFERENCE:
+				return getFragmentsReference();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -366,14 +348,15 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 			case FrameworkPackage.BUNDLE__MANIFEST:
 				setManifest((MANIFEST)newValue);
 				return;
-			case FrameworkPackage.BUNDLE__SYMBOLIC_NAME:
-				setSymbolicName((String)newValue);
-				return;
 			case FrameworkPackage.BUNDLE__FOLDER:
 				setFolder((Folder)newValue);
 				return;
 			case FrameworkPackage.BUNDLE__PACKAGE:
 				setPackage((jar.Package)newValue);
+				return;
+			case FrameworkPackage.BUNDLE__FRAGMENTS_REFERENCE:
+				getFragmentsReference().clear();
+				getFragmentsReference().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -395,14 +378,14 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 			case FrameworkPackage.BUNDLE__MANIFEST:
 				setManifest((MANIFEST)null);
 				return;
-			case FrameworkPackage.BUNDLE__SYMBOLIC_NAME:
-				setSymbolicName(SYMBOLIC_NAME_EDEFAULT);
-				return;
 			case FrameworkPackage.BUNDLE__FOLDER:
 				setFolder((Folder)null);
 				return;
 			case FrameworkPackage.BUNDLE__PACKAGE:
 				setPackage((jar.Package)null);
+				return;
+			case FrameworkPackage.BUNDLE__FRAGMENTS_REFERENCE:
+				getFragmentsReference().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -421,12 +404,12 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 				return LOCATION_EDEFAULT == null ? location != null : !LOCATION_EDEFAULT.equals(location);
 			case FrameworkPackage.BUNDLE__MANIFEST:
 				return manifest != null;
-			case FrameworkPackage.BUNDLE__SYMBOLIC_NAME:
-				return SYMBOLIC_NAME_EDEFAULT == null ? symbolicName != null : !SYMBOLIC_NAME_EDEFAULT.equals(symbolicName);
 			case FrameworkPackage.BUNDLE__FOLDER:
 				return folder != null;
 			case FrameworkPackage.BUNDLE__PACKAGE:
 				return package_ != null;
+			case FrameworkPackage.BUNDLE__FRAGMENTS_REFERENCE:
+				return fragmentsReference != null && !fragmentsReference.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -442,17 +425,17 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (location: ");
 		result.append(location);
-		result.append(", symbolicName: ");
-		result.append(symbolicName);
+		result.append(", fragmentsReference: ");
+		result.append(fragmentsReference);
 		result.append(')');
 		return result.toString();
 	}
 
-	public void addFragment(Bundle bundle) {
+	public boolean addFragment(Bundle bundle) {
 		if (!getFragments().contains(bundle)) {
-			getFragments().add(bundle);
+			return getFragments().add(bundle);
 		}
-
+		return false;
 	}
 
 } // BundleImpl

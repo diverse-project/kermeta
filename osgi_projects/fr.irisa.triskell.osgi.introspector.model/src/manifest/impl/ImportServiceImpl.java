@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportServiceImpl.java,v 1.4 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: ImportServiceImpl.java,v 1.5 2008-08-11 14:19:26 edaubert Exp $
  */
 package manifest.impl;
 
@@ -23,8 +23,8 @@ import org.osgi.framework.Constants;
  * The following features are implemented:
  * <ul>
  *   <li>{@link manifest.impl.ImportServiceImpl#isResolved <em>Resolved</em>}</li>
+ *   <li>{@link manifest.impl.ImportServiceImpl#getServiceReference <em>Service Reference</em>}</li>
  *   <li>{@link manifest.impl.ImportServiceImpl#getService <em>Service</em>}</li>
- *   <li>{@link manifest.impl.ImportServiceImpl#getServiceElement <em>Service Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,32 +53,33 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	protected boolean resolved = RESOLVED_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getService() <em>Service</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getService()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SERVICE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getService() <em>Service</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getService()
-	 * @generated
-	 * @ordered
-	 */
-	protected String service = SERVICE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getServiceElement() <em>Service Element</em>}' reference.
+	 * The default value of the '{@link #getServiceReference() <em>Service Reference</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getServiceElement()
+	 * @see #getServiceReference()
 	 * @generated
 	 * @ordered
 	 */
-	protected Service serviceElement;
+	protected static final String SERVICE_REFERENCE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getServiceReference() <em>Service Reference</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getServiceReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected String serviceReference = SERVICE_REFERENCE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getService() <em>Service</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getService()
+	 * @generated
+	 * @ordered
+	 */
+	protected Service service;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -119,60 +120,61 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getServiceReference() {
+		return serviceReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setServiceReference(String newServiceReference) {
+		String oldServiceReference = serviceReference;
+		serviceReference = newServiceReference;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.IMPORT_SERVICE__SERVICE_REFERENCE, oldServiceReference, serviceReference));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getService() {
+	public Service getService() {
+		if (service != null && service.eIsProxy()) {
+			InternalEObject oldService = (InternalEObject)service;
+			service = (Service)eResolveProxy(oldService);
+			if (service != oldService) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ManifestPackage.IMPORT_SERVICE__SERVICE, oldService, service));
+			}
+		}
 		return service;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setService(String newService) {
-		String oldService = service;
+	public Service basicGetService() {
+		return service;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setService(Service newService) {
+		Service oldService = service;
 		service = newService;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.IMPORT_SERVICE__SERVICE, oldService, service));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Service getServiceElement() {
-		if (serviceElement != null && serviceElement.eIsProxy()) {
-			InternalEObject oldServiceElement = (InternalEObject)serviceElement;
-			serviceElement = (Service)eResolveProxy(oldServiceElement);
-			if (serviceElement != oldServiceElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ManifestPackage.IMPORT_SERVICE__SERVICE_ELEMENT, oldServiceElement, serviceElement));
-			}
-		}
-		return serviceElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Service basicGetServiceElement() {
-		return serviceElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setServiceElement(Service newServiceElement) {
-		Service oldServiceElement = serviceElement;
-		serviceElement = newServiceElement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.IMPORT_SERVICE__SERVICE_ELEMENT, oldServiceElement, serviceElement));
 	}
 
 	/**
@@ -184,11 +186,11 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 		switch (featureID) {
 			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
 				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
+			case ManifestPackage.IMPORT_SERVICE__SERVICE_REFERENCE:
+				return getServiceReference();
 			case ManifestPackage.IMPORT_SERVICE__SERVICE:
-				return getService();
-			case ManifestPackage.IMPORT_SERVICE__SERVICE_ELEMENT:
-				if (resolve) return getServiceElement();
-				return basicGetServiceElement();
+				if (resolve) return getService();
+				return basicGetService();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -203,11 +205,11 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
 				setResolved(((Boolean)newValue).booleanValue());
 				return;
-			case ManifestPackage.IMPORT_SERVICE__SERVICE:
-				setService((String)newValue);
+			case ManifestPackage.IMPORT_SERVICE__SERVICE_REFERENCE:
+				setServiceReference((String)newValue);
 				return;
-			case ManifestPackage.IMPORT_SERVICE__SERVICE_ELEMENT:
-				setServiceElement((Service)newValue);
+			case ManifestPackage.IMPORT_SERVICE__SERVICE:
+				setService((Service)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -223,11 +225,11 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
 				setResolved(RESOLVED_EDEFAULT);
 				return;
-			case ManifestPackage.IMPORT_SERVICE__SERVICE:
-				setService(SERVICE_EDEFAULT);
+			case ManifestPackage.IMPORT_SERVICE__SERVICE_REFERENCE:
+				setServiceReference(SERVICE_REFERENCE_EDEFAULT);
 				return;
-			case ManifestPackage.IMPORT_SERVICE__SERVICE_ELEMENT:
-				setServiceElement((Service)null);
+			case ManifestPackage.IMPORT_SERVICE__SERVICE:
+				setService((Service)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -242,10 +244,10 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 		switch (featureID) {
 			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
 				return resolved != RESOLVED_EDEFAULT;
+			case ManifestPackage.IMPORT_SERVICE__SERVICE_REFERENCE:
+				return SERVICE_REFERENCE_EDEFAULT == null ? serviceReference != null : !SERVICE_REFERENCE_EDEFAULT.equals(serviceReference);
 			case ManifestPackage.IMPORT_SERVICE__SERVICE:
-				return SERVICE_EDEFAULT == null ? service != null : !SERVICE_EDEFAULT.equals(service);
-			case ManifestPackage.IMPORT_SERVICE__SERVICE_ELEMENT:
-				return serviceElement != null;
+				return service != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -261,8 +263,8 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (resolved: ");
 		result.append(resolved);
-		result.append(", service: ");
-		result.append(service);
+		result.append(", serviceReference: ");
+		result.append(serviceReference);
 		result.append(')');
 		return result.toString();
 	}

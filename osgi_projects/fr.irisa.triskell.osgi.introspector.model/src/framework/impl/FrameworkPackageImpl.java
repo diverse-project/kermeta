@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkPackageImpl.java,v 1.3 2008-08-06 13:37:22 edaubert Exp $
+ * $Id: FrameworkPackageImpl.java,v 1.4 2008-08-11 14:19:27 edaubert Exp $
  */
 package framework.impl;
 
@@ -176,20 +176,11 @@ public class FrameworkPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBundle_SymbolicName() {
-		return (EAttribute)bundleEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getBundle_Folder() {
-		return (EReference)bundleEClass.getEStructuralFeatures().get(4);
+		return (EReference)bundleEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -197,7 +188,16 @@ public class FrameworkPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EReference getBundle_Package() {
-		return (EReference)bundleEClass.getEStructuralFeatures().get(5);
+		return (EReference)bundleEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBundle_FragmentsReference() {
+		return (EAttribute)bundleEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -241,9 +241,9 @@ public class FrameworkPackageImpl extends EPackageImpl implements
 		createEReference(bundleEClass, BUNDLE__FRAGMENTS);
 		createEAttribute(bundleEClass, BUNDLE__LOCATION);
 		createEReference(bundleEClass, BUNDLE__MANIFEST);
-		createEAttribute(bundleEClass, BUNDLE__SYMBOLIC_NAME);
 		createEReference(bundleEClass, BUNDLE__FOLDER);
 		createEReference(bundleEClass, BUNDLE__PACKAGE);
+		createEAttribute(bundleEClass, BUNDLE__FRAGMENTS_REFERENCE);
 
 		// Create data types
 		stringEDataType = createEDataType(STRING);
@@ -289,9 +289,9 @@ public class FrameworkPackageImpl extends EPackageImpl implements
 		initEReference(getBundle_Fragments(), this.getBundle(), null, "fragments", null, 0, -1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBundle_Location(), this.getString(), "location", "", 1, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBundle_Manifest(), theManifestPackage.getMANIFEST(), null, "manifest", null, 1, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBundle_SymbolicName(), this.getString(), "symbolicName", null, 1, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBundle_Folder(), theJarPackage.getFolder(), null, "folder", null, 1, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBundle_Package(), theJarPackage.getPackage(), null, "package", null, 1, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBundle_FragmentsReference(), this.getString(), "fragmentsReference", null, 0, -1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
