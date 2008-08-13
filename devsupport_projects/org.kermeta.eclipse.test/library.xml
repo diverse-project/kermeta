@@ -41,7 +41,7 @@
 		<property name="extraVMargs" value=""/>
 		<property name="plugin-path" value="" />
 		<property name="timeout" value="7200000" />
-		<property name="test-output" value="${eclipse-home}/${classname}.xml" />
+		<property name="test-output" value="${eclipse-home}/TEST-${classname}.xml" />
 		<property name="junit-report-output" value="${eclipse-home}/results" />
 		<mkdir dir="${junit-report-output}"/>
 	</target>
@@ -68,7 +68,7 @@
 		<echo message="Running ${classname}. Result file: ${junit-report-output}/${classname}.xml."/>
 		<echo message="test-output = ${test-output}"/>
 		<java fork="true" dir="${plugin-path}" timeout="${timeout}" jvm="${jvm}" logError="true"
-			classname="org.eclipse.core.launcher.Main" output="${junit-report-output}/${classname}.txt">
+			classname="org.eclipse.core.launcher.Main" output="${junit-report-output}/TEST-${classname}.txt">
 	        <classpath>
 	    		<fileset dir="${eclipse-home}/plugins">
 	            	<include name="org.eclipse.equinox.launcher_*.jar"/>
