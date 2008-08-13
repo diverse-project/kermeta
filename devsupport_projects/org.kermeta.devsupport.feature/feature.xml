@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.kermeta.devsupport.feature"
+      label="Dev support for Kermeta bundle Feature"
+      version="0.1.0"
+      provider-name="IRISA/INRIA"
+      image="kermeta_logo_32.gif">
+
+   <description url="http://www.example.com/description">
+      This feature gather various plugins used to help developping kermeta platform
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      Provided by INRIA/IRISA
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      Distributed under the terms of the Eclipse Public License
+   </license>
+
+   <plugin
+         id="org.kermeta.eclipse.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.openembedd.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.eclipse.ant.optional.junit4"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"/>
+
+</feature>
