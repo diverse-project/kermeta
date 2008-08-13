@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.jface.text,
  org.eclipse.ui.cheatsheets,
- org.eclipse.ui.ide
+ org.eclipse.ui.ide,
+ org.eclipse.ui.editors
 Export-Package: fr.irisa.triskell.eclipse.console,
  fr.irisa.triskell.eclipse.console.messages,
  fr.irisa.triskell.eclipse.ecore,
