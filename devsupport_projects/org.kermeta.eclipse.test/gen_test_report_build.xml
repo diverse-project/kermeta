@@ -1,0 +1,36 @@
+<!-- $Id: gen_test_report_build.xml,v 1.1 2008-08-13 13:26:06 dvojtise Exp $ -->
+<project name="run interpreter tests" default="genreport" basedir=".">
+	
+	<description>
+        Run interpreter tests
+    </description>
+	
+    <property name="report.dir" location="./reports"/>
+	<property name="eclipse.home" location="c:/eclipse3.1.1/eclipse"/>
+
+	
+
+	<target name="genreport" >
+		<junitreport todir="${report.dir}">
+		  <fileset dir="${report.dir}">
+		    <include name="TEST-*.xml"/>
+		  </fileset>
+		  <!--<report format="frames" todir="${report.dir}/html" styledir="./report_stylesheet"/>-->
+		  <report format="frames" todir="${report.dir}/html"  styledir="/udd/triskell/bin/multiplatform/apache-ant-1.7.0/etc"/>
+		</junitreport>
+		<!-- generate the Build date -->
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+		<copy file="${report.dir}/html/overview-summary.html" 
+					tofile="${report.dir}/html/overview-summary_tmp.html"
+					filtering="true"
+					overwrite="true"/>
+
+		<copy file="${report.dir}/html/overview-summary_tmp.html" 
+					tofile="${report.dir}/html/overview-summary.html"
+					filtering="true"
+					overwrite="true"/>
+	</target>
+</project>
