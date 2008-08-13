@@ -133,15 +133,15 @@
 	<target name="collect-results">
 		<dirname property="output-dir" file="${test-output}"/>
 		<basename property="output-file-name" file="${test-output}"/>
-		<junitreport todir="${junit-report-output}" tofile="${classname}.xml">
+		<junitreport todir="${junit-report-output}" tofile="TEST-${classname}.xml">
 			<fileset dir="${output-dir}">
 				<include name="${output-file-name}"/>
 			</fileset>
 		</junitreport>
 
-		<style style="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/JUNIT.XSL"
+		<xslt style="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/JUNIT.XSL"
 			basedir="${junit-report-output}"
-			includes="${classname}.result.xml"
+			includes="TEST-${classname}.result.xml"
 			destdir="${junit-report-output}" />
 
 		<!--save .log content and *.log content from configuration directory-->
