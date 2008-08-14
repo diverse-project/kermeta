@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.76 2008-07-30 15:16:30 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.77 2008-08-14 09:21:24 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -64,7 +64,14 @@ public class Runtime2EMF {
 	 * 
 	 */
 	protected HashSet<RuntimeObject> runtimeObjectsToUpdate;
+	
+	/**
+	 * Traceability for the object that will be updated, if filled, the text indicates from which object, the 
+	 * action of updating comes from
+	 */
+	protected Hashtable<RuntimeObject,String> runtimeObjectsToUpdateTrace = new Hashtable<RuntimeObject,String>();
 
+	
 	/**
 	 * List of the properties that need to be sorted because the collection is ordered
 	 */
@@ -307,7 +314,7 @@ public class Runtime2EMF {
 			{
 				// Get the RuntimeObject value of property given by prop_name
 				RuntimeObject property = (RuntimeObject) rObject.getProperties().get(prop_name);
-				fillRuntimeObjectToUpdateListWithProperty(property);
+				fillRuntimeObjectToUpdateListWithProperty(property, rObject.toString() + "."+ prop_name);
 			}
 		}
 	}
@@ -316,21 +323,25 @@ public class Runtime2EMF {
 	 * Get or create eobject for properties recursively. Method for the 1st pass
 	 * of conversion from RuntimeObjects to EObjects.
 	 * 
-	 * @param eObject
-	 * @param prop_name
 	 * @param property
+	 * @param originTrace a string message to help identify which object asked to update this property values
 	 */
-	protected void fillRuntimeObjectToUpdateListWithProperty(RuntimeObject property) {
+	protected void fillRuntimeObjectToUpdateListWithProperty(RuntimeObject property, String originTrace) {
 		// If property is an EList ([m..n] where n>1)
 		if (RuntimeObject.COLLECTION_VALUE.equals( property.getPrimitiveType())
 				&& property.getJavaNativeObject() != null)
 		{   // For each feature of the collection of features
 			//for (RuntimeObject next : ((ArrayList<RuntimeObject>) property.getData().get("CollectionArrayList")))
-			for (RuntimeObject next : Collection.getArrayList(property))
+			for (RuntimeObject next : Collection.getArrayList(property)){
+				runtimeObjectsToUpdateTrace.put(next, originTrace);
 				fillRuntimeObjectToUpdateList( next);
+			}
 		}
 		// If property is not an EList
-		else fillRuntimeObjectToUpdateList(property);
+		else {
+			runtimeObjectsToUpdateTrace.put(property, originTrace);
+			fillRuntimeObjectToUpdateList(property);
+		}
 	}
 
 
@@ -352,6 +363,7 @@ public class Runtime2EMF {
 			unit.throwKermetaRaisedExceptionOnSave(
 					"Could not find an EClass for RuntimeObject : " + rObject
 					+ "\n   properties : "	+ rObject.getProperties() + ";"
+					+ "\n   origin : "	+ runtimeObjectsToUpdateTrace.get(rObject) + ";"
 					+ "\n   possible reason : the RuntimeObject has a weird type? Please check '"
 					+ unit.getMetaModelUri() + "'", null);
 		EStructuralFeature feature = null;
