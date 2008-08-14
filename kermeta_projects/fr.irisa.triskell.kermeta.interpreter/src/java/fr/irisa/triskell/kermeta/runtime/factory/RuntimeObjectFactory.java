@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.34 2008-04-28 11:50:58 ftanguy Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.35 2008-08-14 09:15:45 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -36,6 +36,7 @@ import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
@@ -265,6 +266,14 @@ public class RuntimeObjectFactory {
 	public RuntimeObject createRuntimeObjectFromClass(RuntimeObject meta_class) {
 	    createRuntimeObjectFromClass_count++;
 		RuntimeObject result = new RuntimeObjectImpl(this, meta_class);
+		
+		
+		// make sure to correctly initialize the collection data structure
+		if(RuntimeObjectHelper.isaCollection(result)){
+			fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(result);
+		}
+		
+		
 		if(meta_class.getKCoreObject() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 			fr.irisa.triskell.kermeta.language.structure.Class the_class = (fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getKCoreObject();
 			/*SimpleType t = new SimpleType(the_class); 
