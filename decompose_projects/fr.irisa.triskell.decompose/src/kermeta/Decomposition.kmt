@@ -1,0 +1,246 @@
+/* $Id: Decomposition.kmt,v 1.1 2008-08-16 16:25:39 fmunoz Exp $ 
+ * Creation : August 11, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            freddy
+ */
+
+
+package decomposition;
+
+//require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Mergeable.kmt"
+require "http://www.kermeta.org/decomposer"
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+
+using kermeta::language::structure
+using kermeta::language
+using kermeta::standard
+using kermeta::utils 
+using kermeta::persistence
+using kompose
+using decomposition
+
+@aspect "true"
+class Decomposer {
+
+	
+	attribute currentLeft:Mergeable
+	attribute currentRight:Mergeable
+	attribute objectIndex:String[0..*]
+	attribute mapper:Hashtable<String,TriContainer> 
+	reference newMapper:Hashtable<String,Mergeable>
+	reference resource:kermeta::persistence::EMFResource 
+	
+	
+	
+	attribute upperProperty:Hashtable<Mergeable,Property>
+	
+	operation initialize(initial:Mergeable) is do
+		self.original:=initial
+		self.upperProperty:=Hashtable<Mergeable,Property>.new
+		self.mapper:=Hashtable<String,TriContainer>.new
+		self.newMapper:=Hashtable<String,Mergeable>.new
+	end
+	
+	operation start():Void is do
+		self.toProcess.add(self.original)
+		self.indexate(self.original)
+		self.decompose(void,original,void,void)
+		
+	end
+	
+	operation setResource(resource:kermeta::persistence::EMFResource ): Void is do
+		self.resource:=resource
+	end
+	
+	operation resouceContains(element:Object):Boolean is do
+		result:=false
+		if element.containingResource()==self.resource then
+			result:=true
+		end
+	end
+	
+	operation indexate(element:Object):Void is do
+		if self.resouceContains(element) then
+			if not self.objectIndex.contains(element.toString) then
+				self.objectIndex.add(element.toString)
+				var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+				properties.each{ p |
+					if p.upper != 1 then
+						var objects : Collection<Object> objects?=element.~get(p)
+						objects.each{obj|self.indexate(obj)}
+					else
+						self.indexate(element.~get(p))
+					end
+				}
+			end
+		end
+	
+	end
+	operation getPropertyByContainement(container:Mergeable,contained:Mergeable):Property is do
+		var properties : Collection<Property> init container.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+		result:=void
+		properties.each{p|
+			if p.upper == 1 then
+				if contained == container.~get(p) then
+					result:=p
+				end
+			else
+				var objects : Collection<Object> objects?=container.~get(p)
+				objects.each{obj|
+					if obj == contained then
+						result:=p
+					end
+				}
+			end
+		}
+	end
+	
+	
+	
+	operation decompose(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*],direction:Boolean):Void is do
+		self.clone(parent,element,iproperty)
+	end
+	
+	operation clone(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*]):Void is do
+		if not self.processed.contains(element)  then
+			if element.getMetaClass().toString == "EClass" then
+				var cl:ecore::EClass cl?=element
+				parent.each{p|
+					stdio.writeln("classname: "+cl.name+"->"+element.toString+" in: "+p.toString)
+				}
+			end
+			var left:Mergeable left?=element.getMetaClass().new
+			var right:Mergeable right?=element.getMetaClass().new
+			
+			self.newMapper.put(left.toString,left)
+			self.newMapper.put(right.toString,right)
+			
+			var doAll:Boolean init true
+			var trtmp:TriContainer init TriContainer.new
+			
+			trtmp.element:=element.toString
+			trtmp.left:=left.toString
+			trtmp.right:=right.toString
+			trtmp.appliedOperation:=OperationType.CLONE
+			
+			self.mapper.put(element.toString,trtmp)
+			self.processed.add(element)
+		
+			var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+		
+			properties.each{ p |
+				if not Mergeable.isSuperTypeOf(p.type) then
+					if p.upper != 1 then
+						var objects : Collection<Object> objects?=element.~get(p)
+						var objectsL : Collection<Object> objects?=left.~get(p)
+						var objectsR : Collection<Object> objects?=right.~get(p)
+						objects.each{obj|
+							objectsL.add(obj)
+							objectsR.add(obj)
+						}
+					else
+						left.~set(p,element.~get(p))
+						right.~set(p,element.~get(p))
+					end
+				else
+					if p.upper != 1 then
+						var objects : Collection<Object> objects?=element.~get(p)
+							objects.each{obj|
+								var mergeable:Mergeable mergeable?=obj			
+								var ctnr:Mergeable[0..*]
+								var ctnr2:Mergeable ctnr2?=mergeable.container()
+								var prpts:Property[0..*]
+								ctnr:=OrderedSet<Mergeable>.new
+								prpts:=OrderedSet<Property>.new
+								if element!= ctnr2 then
+									ctnr.add(element)
+									ctnr.add(ctnr2)
+									prpts.add(p)
+									var prpt:Property prpt:=self.getPropertyByContainement(ctnr2,mergeable)
+									prpts.add(prpt)
+								else
+									ctnr.add(element)
+									prpts.add(p)
+								end
+//								stdio.writeln("recursing on : "+mergeable.toString+" contained in "+ctnr.toString)
+								self.decompose(ctnr,mergeable,prpts,void)
+							}
+					else //p.upper == 1
+						var mergeable:Mergeable mergeable?=element.~get(p)
+						if mergeable != void then
+							if self.dependants.contains(p.type.toString) then
+//								stdio.writeln("found dependable 2: "+p.type.toString)
+							else	
+								if self.objectIndex.contains(mergeable.toString) then
+									var ctnr:Mergeable[0..*]
+									var ctnr2:Mergeable ctnr2?=mergeable.container()
+									var prpts:Property[0..*]
+									ctnr:=OrderedSet<Mergeable>.new
+									prpts:=OrderedSet<Property>.new
+									if element!= ctnr2 then
+										ctnr.add(element)
+										ctnr.add(ctnr2)
+										prpts.add(p)
+										prpts.add(self.getPropertyByContainement(ctnr2,mergeable))
+									else
+										ctnr.add(element)
+										prpts.add(p)
+									end
+									
+									self.decompose(ctnr,mergeable,prpts,void)
+								else
+									left.~set(p,element.~get(p))
+									right.~set(p,element.~get(p))
+								end
+							end
+						end
+					end
+				end 
+			}
+			if parent==void then
+				self.left:=left
+				self.right:=right
+			else
+				iproperty.select{p|p!=void}.each{p|
+					if p.upper == 1 then
+						stdio.writeln("setting single : "+left.toString+" in "+self.newMapper.getValue(self.mapper.getValue(parent.one.toString).left).toString+" original "+element.toString+ "on p: "+p.name)
+						self.newMapper.getValue(self.mapper.getValue(parent.one.toString).left).~set(p,left)
+						self.newMapper.getValue(self.mapper.getValue(parent.one.toString).right).~set(p,right)
+					else
+						stdio.writeln("setting multiple : "+left.toString+" in "+self.newMapper.getValue(self.mapper.getValue(parent.one.toString).left).toString+" original "+element.toString+ "on p: "+p.name)
+						var objectsL : Collection<Object> objectsL?=self.newMapper.getValue(self.mapper.getValue(parent.one.toString).left).~get(p)
+						var objectsR : Collection<Object> objectsR?=self.newMapper.getValue(self.mapper.getValue(parent.one.toString).right).~get(p)
+						objectsL.add(left)
+						objectsR.add(right)
+					end
+					parent.remove(parent.one)
+				}
+			end
+//			self.toProcess.remove(element)
+		end
+	end
+
+	//direction true=right left=false
+	operation oneside(element:Mergeable,direction:Boolean):Void is do
+	end
+	
+	operation rename(element:Named): Rule is do
+		result:=void
+	end
+	
+	operation renameBefore(element:Named): Rule is do
+		result:=void
+	end
+}
+
+
+class TriContainer{
+	attribute element:String
+	attribute left:String
+	attribute right:String
+	attribute appliedOperation:OperationType
+	attribute side:Boolean
+}
