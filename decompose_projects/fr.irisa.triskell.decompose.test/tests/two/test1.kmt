@@ -1,4 +1,4 @@
-/* $Id: test0.kmt,v 1.3 2008-08-16 17:30:04 fmunoz Exp $ 
+/* $Id: test1.kmt,v 1.1 2008-08-16 17:30:03 fmunoz Exp $ 
  * Creation : August 14, 2008
  * Licence  : EPL 
  * Copyright:
@@ -26,9 +26,9 @@ using kermeta::persistence
 class Main
 {
 	operation main() : Void is do 
-		var toLoad:String toLoad:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/initialA.ecore"
-		var toSaveLeft:String toSaveLeft:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/left.ecore"
-		var toSaveRight:String toSaveRight:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/right.ecore"
+		var toLoad:String toLoad:="platform:/resource/fr.irisa.triskell.decompose.test/tests/two/BankBLP.ecore"
+		var toSaveLeft:String toSaveLeft:="platform:/resource/fr.irisa.triskell.decompose.test/tests/two/left.ecore"
+		var toSaveRight:String toSaveRight:="platform:/resource/fr.irisa.triskell.decompose.test/tests/two/right.ecore"
 		var decomposer:EcoreDecomposer init EcoreDecomposer.new
 		
 		var oriModel:Mergeable oriModel?=decomposer.loadModel(toLoad)
