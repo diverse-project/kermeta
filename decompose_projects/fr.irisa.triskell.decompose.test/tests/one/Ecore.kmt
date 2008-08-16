@@ -1,0 +1,44 @@
+
+package ecore;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Decomposition.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using decomposition
+
+ 
+class EcoreDecomposer inherits Decomposer
+{
+	operation loadModel(path : String) : kompose::Mergeable is do
+		stdio.writeln("Load Ecore Model from: "+path)
+    	var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new             
+       	resource ?= repository.getResource(path)
+        resource.load
+        self.resource:=resource
+       result ?= resource.instances.one
+   end
+   
+   operation saveModel(model : kompose::Mergeable, uri : String) is do
+   		stdio.writeln("Saving Ecore Model on: "+uri)
+   		var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new
+   		resource ?= repository.createResource(uri, "http://www.eclipse.org/emf/2002/Ecore")
+        resource.instances.add(model)
+        resource.save
+   end
+}
+
+@aspect "true"
+class EModelElement inherits kompose::Mergeable {}
+
+@aspect "true"
+class EGenericType inherits kompose::Mergeable {}
+

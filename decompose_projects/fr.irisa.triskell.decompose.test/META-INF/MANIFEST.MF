@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: fr.irisa.triskell.decompose.test
+Bundle-Version: 1.0.0
+Require-Bundle: fr.irisa.triskell.decompose;bundle-version="1.0.0"
