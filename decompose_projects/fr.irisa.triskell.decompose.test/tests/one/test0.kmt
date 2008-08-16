@@ -1,4 +1,4 @@
-/* $Id: test0.kmt,v 1.1 2008-08-16 16:26:28 fmunoz Exp $ 
+/* $Id: test0.kmt,v 1.2 2008-08-16 17:18:50 fmunoz Exp $ 
  * Creation : August 14, 2008
  * Licence  : EPL 
  * Copyright:
@@ -42,7 +42,10 @@ class Main
 		
 		//set the model of origin
 		decomposer.initialize(oriModel)
-		decomposer.dependants.add("EStructuralFeature")
+		//decomposer.dependants.add("EStructuralFeature")
+		decomposer.dependants.add("EReference")
+		decomposer.dependants.add("EAttribute")
+		
 		//start the random decomposition
 		decomposer.start()
 		//save the decomposition result
