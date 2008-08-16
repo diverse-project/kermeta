@@ -1,0 +1,56 @@
+/* $Id: test2.kmt,v 1.1 2008-08-16 17:57:47 fmunoz Exp $ 
+ * Creation : August 14, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            freddy
+ */
+@mainClass "tests::two::Main"
+@mainOperation "main"
+
+
+package tests::two;
+
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/Ecore.kmt"
+
+
+using kermeta::standard
+using kompose
+using ecore
+using decomposition
+using kermeta::utils
+using kermeta::persistence
+
+class Main
+{
+	operation main() : Void is do 
+		var toLoad:String toLoad:="platform:/resource/fr.irisa.triskell.decompose.test/tests/two/BankBLP.ecore"
+		var toSaveLeft:String toSaveLeft:="platform:/resource/fr.irisa.triskell.decompose.test/tests/two/left.ecore"
+		var toSaveRight:String toSaveRight:="platform:/resource/fr.irisa.triskell.decompose.test/tests/two/right.ecore"
+		var decomposer:EcoreDecomposer init EcoreDecomposer.new
+		
+		var oriModel:Mergeable oriModel?=decomposer.loadModel(toLoad)
+		
+		// load the dependences table
+		
+		
+		// EReference -> EClass
+		// EAttribute -> EDataType
+		
+		
+		//set the model of origin
+		decomposer.initialize(oriModel)
+		//decomposer.dependants.add("EStructuralFeature")
+		decomposer.dependants.add("EReference")
+		decomposer.dependants.add("EAttribute")
+		
+		//start the random decomposition
+		decomposer.start()
+		//save the decomposition result
+		
+		decomposer.saveModel(decomposer.left,toSaveLeft)
+		decomposer.saveModel(decomposer.right,toSaveRight)
+	end
+}

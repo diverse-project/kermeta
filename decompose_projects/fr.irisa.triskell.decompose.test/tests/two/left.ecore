@@ -8,81 +8,83 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BankSubject">
     <eOperations name="CheckAccess">
-      <eParameters name="t" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-      <eParameters name="op" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="t" eType="#//Account"/>
+      <eParameters name="op" eType="#//Operation"/>
     </eOperations>
     <eOperations name="withdraw"/>
     <eOperations name="transfer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/subject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="#//BankUser"
+        eOpposite="#//BankUser/subject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean"/>
   <eClassifiers xsi:type="ecore:EClass" name="BankUser">
-    <eOperations name="CreateSubject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
-      <eParameters name="sl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eOperations name="CreateSubject" eType="#//BankSubject">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
     </eOperations>
-    <eOperations name="DeleteSubject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
-      <eParameters name="sb" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eOperations name="DeleteSubject" eType="#//Boolean">
+      <eParameters name="sb" eType="#//BankSubject"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subject" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        eType="#//BankSubject" eOpposite="#//BankSubject/user"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/user"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SecurityLevel">
-    <eOperations name="GetAllDominatiees" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-    <eOperations name="AddDominatee" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
-      <eParameters name="sl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eOperations name="GetAllDominatiees" upperBound="-1" eType="#//SecurityLevel"/>
+    <eOperations name="AddDominatee" eType="#//Boolean">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
     </eOperations>
-    <eOperations name="AddDominator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
-      <eParameters name="sl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eOperations name="AddDominator" eType="#//Boolean">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dominator" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dominatee" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/dominator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dominator" upperBound="-1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/dominatee"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subject" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        eType="#//BankSubject" eOpposite="#//BankSubject/securityLevel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="#//BankUser"
+        eOpposite="#//BankUser/securityLevel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+        eType="#//Account" eOpposite="#//Account/securityLevel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Money"/>
   <eClassifiers xsi:type="ecore:EClass" name="Account">
     <eOperations name="deposit">
-      <eParameters name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="amount" eType="#//Money"/>
     </eOperations>
     <eOperations name="withdraw">
-      <eParameters name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="amount" eType="#//Money"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operationType" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationType" upperBound="-1"
+        eType="#//Operation" eOpposite="#//Operation/Target"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//OperationTypeEnum"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Target" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        eType="#//Account" eOpposite="#//Account/operationType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Controller">
     <eOperations name="transfer">
-      <eParameters name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-      <eParameters name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-      <eParameters name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="from" eType="#//Account"/>
+      <eParameters name="to" eType="#//Account"/>
+      <eParameters name="amount" eType="#//Money"/>
     </eOperations>
     <eOperations name="deposit">
-      <eParameters name="account" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-      <eParameters name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="account" eType="#//Account"/>
+      <eParameters name="amount" eType="#//Money"/>
     </eOperations>
     <eOperations name="withdraw">
-      <eParameters name="account" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-      <eParameters name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="account" eType="#//Account"/>
+      <eParameters name="amount" eType="#//Money"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="#//BankUser"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="account" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        eType="#//Account"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OperationEnum">
     <eLiterals name="WITHDRAW" value="2" literal="WITHDRAW"/>
