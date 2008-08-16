@@ -1,4 +1,4 @@
-/* $Id: Decomposition.kmt,v 1.2 2008-08-16 17:16:50 fmunoz Exp $ 
+/* $Id: Decomposition.kmt,v 1.3 2008-08-16 17:58:43 fmunoz Exp $ 
  * Creation : August 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -194,13 +194,20 @@ class Decomposer {
 										ctnr.add(element)
 										prpts.add(p)
 									end
-									self.decompose(ctnr,mergeable,prpts,void)
+									if not self.processed.contains(mergeable) then
+										self.decompose(ctnr,mergeable,prpts,void)
+									else
+										var objectsL : Collection<Object> objectsL?=left.~get(p)
+										var objectsR : Collection<Object> objectsR?=right.~get(p)
+										if not objectsL.contains(self.newMapper.getValue((self.mapper.getValue(mergeable.toString).left))) then
+											objectsL.add(self.newMapper.getValue((self.mapper.getValue(mergeable.toString).left)))
+											objectsR.add(self.newMapper.getValue((self.mapper.getValue(mergeable.toString).right)))
+										end
+									end
 								}
 						else //p.upper == 1
 							var mergeable:Mergeable mergeable?=element.~get(p)
 							if mergeable != void then
-								if self.dependants.contains(p.type.toString) then
-								else	
 									if self.objectIndex.contains(mergeable.toString) then
 										var ctnr:Mergeable[0..*]
 										var ctnr2:Mergeable ctnr2?=mergeable.container()
@@ -211,18 +218,24 @@ class Decomposer {
 											ctnr.add(element)
 											ctnr.add(ctnr2)
 											prpts.add(p)
+
 											prpts.add(self.getPropertyByContainement(ctnr2,mergeable))
+											
 										else
 											ctnr.add(element)
 											prpts.add(p)
 										end
+										if not self.processed.contains(mergeable) then
+											self.decompose(ctnr,mergeable,prpts,void)
+										else
+											left.~set(p,self.newMapper.getValue((self.mapper.getValue(mergeable.toString).left)))
+											right.~set(p,self.newMapper.getValue((self.mapper.getValue(mergeable.toString).right)))
+										end
 										
-										self.decompose(ctnr,mergeable,prpts,void)
 									else
 										left.~set(p,element.~get(p))
 										right.~set(p,element.~get(p))
 									end
-								end
 							end
 						end
 					end 
