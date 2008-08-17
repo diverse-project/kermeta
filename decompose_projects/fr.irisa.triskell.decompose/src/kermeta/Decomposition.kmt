@@ -1,4 +1,4 @@
-/* $Id: Decomposition.kmt,v 1.4 2008-08-17 19:38:58 fmunoz Exp $ 
+/* $Id: Decomposition.kmt,v 1.5 2008-08-17 20:37:11 fmunoz Exp $ 
  * Creation : August 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -98,14 +98,35 @@ class Decomposer {
 		}
 	end
 	
-	operation decompose(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*],direction:Boolean):Void is do
-		if self.numeral/2 == 0 then
-			self.clone(parent,element,iproperty)
-		else
-			direction:=true
-			self.side(parent,element,iproperty,direction)
-		end
-			self.numeral:=self.numeral+1
+	operation decompose(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*],direction:Boolean):Void is do	
+			stdio.writeln("processing element: "+element.toString)
+			
+			if element.getMetaClass().toString == "EClass" then
+					direction:=false
+					if self.numeral == 1 then
+						self.side(parent,element,iproperty,direction)
+					else
+						if self.numeral == 2 then
+							self.clone(parent,element,iproperty)
+						else
+							if self.numeral == 3 then
+								self.side(parent,element,iproperty,direction)
+							else
+								if self.numeral == 0 then
+									self.clone(parent,element,iproperty)
+								else
+									self.side(parent,element,iproperty,direction)
+								end
+							end
+						end
+					end
+					//self.clone(parent,element,iproperty)
+					//direction:=true
+					//self.side(parent,element,iproperty,direction)
+					self.numeral:=self.numeral+1
+			else
+				self.clone(parent,element,iproperty)
+			end
 	end
 	
 	operation clone(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*]):Void is do
@@ -114,7 +135,7 @@ class Decomposer {
 			if element.getMetaClass().toString == "EClass" then
 				var cl:ecore::EClass cl?=element
 				parent.each{p|
-					stdio.writeln("classname: "+cl.name+"->"+element.toString+" in: "+p.toString)
+					stdio.writeln("cloning classname: "+cl.name+"->"+element.toString+" in: "+p.toString)
 				}
 			end
 			if self.dependants.contains(element.getMetaClass.classDefinition.name) then
@@ -127,6 +148,7 @@ class Decomposer {
 			
 			var doAll:Boolean init true
 			var direction:Boolean init false
+			var sdirection:Boolean init false
 			
 			var trtmp:TriContainer init TriContainer.new
 			
@@ -141,32 +163,46 @@ class Decomposer {
 			self.processed.add(element)
 		
 			var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
-			properties.each{ p |
-				if Mergeable.isSuperTypeOf(p.type) then
-					if p.upper == 1 then
-						var mergeable:Mergeable mergeable?=element.~get(p)
-						if self.objectIndex.contains(mergeable.toString) then
-							if self.processed.contains(mergeable) then
-								if self.mapper.getValue(mergeable.toString).appliedOperation==OperationType.ONESIDE then
-									doAll:=false
-								end
-							end
-						end
-					else //p.upper > 1
-						var objects : Collection<Object> objects?=element.~get(p)
-						objects.each{obj|
-							var mergeable:Mergeable mergeable?=obj
+			if isDependable then
+				properties.each{ p |
+					if Mergeable.isSuperTypeOf(p.type) then
+						if p.upper == 1 then
+							var mergeable:Mergeable mergeable?=element.~get(p)
 							if self.objectIndex.contains(mergeable.toString) then
 								if self.processed.contains(mergeable) then
 									if self.mapper.getValue(mergeable.toString).appliedOperation==OperationType.ONESIDE then
+										stdio.writeln("element: "+element.toString+" must be sided because of: "+mergeable.toString)
+										self.newMapper.remove(left.toString)
+										self.newMapper.remove(right.toString)
+										self.mapper.remove(element.toString)
+										self.processed.remove(element)
+										sdirection:=self.mapper.getValue(mergeable.toString).side
 										doAll:=false
 									end
 								end
 							end
-						}
+						else //p.upper > 1
+							var objects : Collection<Object> objects?=element.~get(p)
+							objects.each{obj|
+								var mergeable:Mergeable mergeable?=obj
+								if self.objectIndex.contains(mergeable.toString) then
+									if self.processed.contains(mergeable) then
+										if self.mapper.getValue(mergeable.toString).appliedOperation==OperationType.ONESIDE then
+											stdio.writeln("element: "+element.toString+" must be sided because of: "+mergeable.toString)
+											self.newMapper.remove(left.toString)
+											self.newMapper.remove(right.toString)
+											self.mapper.remove(element.toString)
+											self.processed.remove(element)
+											sdirection:=self.mapper.getValue(mergeable.toString).side
+											doAll:=false
+										end
+									end
+								end
+							}
+						end
 					end
-				end
-			}
+				}
+			end
 			if doAll then
 				properties.each{ p |
 					if not Mergeable.isSuperTypeOf(p.type) then
@@ -267,21 +303,22 @@ class Decomposer {
 						parent.remove(parent.one)
 					}
 				end
+			else
+				stdio.writeln(doAll.toString+ " siding element: "+element.toString)
+				self.side(parent,element,iproperty,sdirection)
 			end
-		else
-			self.side(parent,element,iproperty,self.mapper.getValue(element.toString).side)
 		end
 	end
 
 	//direction true=right left=false
 	operation side(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*],direction:Boolean):Void is do
 		if not self.processed.contains(element)  then
-
+			stdio.writeln("siding element: "+element.toString)
 			var newElement:Mergeable newElement?=element.getMetaClass().new
 			if element.getMetaClass().toString == "EClass" then
 				var cl:ecore::EClass cl?=element
 				parent.each{p|
-					stdio.writeln("classname: "+cl.name+"->"+element.toString+" in: "+p.toString+" nL: "+newElement.toString)
+					stdio.writeln("siding classname: "+cl.name+"->"+element.toString+" in: "+p.toString+" nL: "+newElement.toString)
 				}
 			end
 //			stdio.writeln("siding element: "+element.toString+" into "+newElement.toString)
@@ -294,6 +331,7 @@ class Decomposer {
 			else
 				trtmp.left:=newElement.toString
 			end
+			trtmp.side:=direction
 			trtmp.appliedOperation:=OperationType.ONESIDE
 			self.newMapper.put(newElement.toString,newElement)
 			self.mapper.put(element.toString,trtmp)
