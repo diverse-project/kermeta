@@ -1,4 +1,4 @@
-/* $Id: test1.kmt,v 1.1 2008-08-16 17:57:49 fmunoz Exp $ 
+/* $Id: test1.kmt,v 1.2 2008-08-17 19:38:52 fmunoz Exp $ 
  * Creation : August 14, 2008
  * Licence  : EPL 
  * Copyright:
@@ -49,8 +49,11 @@ class Main
 		//start the random decomposition
 		decomposer.start()
 		//save the decomposition result
-		
-		decomposer.saveModel(decomposer.left,toSaveLeft)
-		decomposer.saveModel(decomposer.right,toSaveRight)
+		if decomposer.left !=void then
+			decomposer.saveModel(decomposer.left,toSaveLeft)
+		end
+		if decomposer.right !=void then
+			decomposer.saveModel(decomposer.right,toSaveRight)
+		end
 	end
 }

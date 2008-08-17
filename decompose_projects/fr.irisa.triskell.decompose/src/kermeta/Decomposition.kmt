@@ -1,4 +1,4 @@
-/* $Id: Decomposition.kmt,v 1.3 2008-08-16 17:58:43 fmunoz Exp $ 
+/* $Id: Decomposition.kmt,v 1.4 2008-08-17 19:38:58 fmunoz Exp $ 
  * Creation : August 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -33,18 +33,20 @@ class Decomposer {
 	reference newMapper:Hashtable<String,Mergeable>
 	reference resource:kermeta::persistence::EMFResource 
 	attribute upperProperty:Hashtable<Mergeable,Property>
+	attribute numeral:Integer
 	
 	operation initialize(initial:Mergeable) is do
 		self.original:=initial
 		self.upperProperty:=Hashtable<Mergeable,Property>.new
 		self.mapper:=Hashtable<String,TriContainer>.new
 		self.newMapper:=Hashtable<String,Mergeable>.new
+		self.numeral:=0
 	end
 	
 	operation start():Void is do
 		self.toProcess.add(self.original)
 		self.indexate(self.original)
-		self.decompose(void,original,void,void)
+		self.decompose(void,original,void,true)
 		
 	end
 	
@@ -97,7 +99,13 @@ class Decomposer {
 	end
 	
 	operation decompose(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*],direction:Boolean):Void is do
-		self.clone(parent,element,iproperty)
+		if self.numeral/2 == 0 then
+			self.clone(parent,element,iproperty)
+		else
+			direction:=true
+			self.side(parent,element,iproperty,direction)
+		end
+			self.numeral:=self.numeral+1
 	end
 	
 	operation clone(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*]):Void is do
@@ -261,13 +269,146 @@ class Decomposer {
 				end
 			end
 		else
-			self.oneside(parent,element,iproperty,self.mapper.getValue(element.toString).side)
+			self.side(parent,element,iproperty,self.mapper.getValue(element.toString).side)
 		end
 	end
 
 	//direction true=right left=false
-	operation oneside(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*],direction:Boolean):Void is do
-		
+	operation side(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*],direction:Boolean):Void is do
+		if not self.processed.contains(element)  then
+
+			var newElement:Mergeable newElement?=element.getMetaClass().new
+			if element.getMetaClass().toString == "EClass" then
+				var cl:ecore::EClass cl?=element
+				parent.each{p|
+					stdio.writeln("classname: "+cl.name+"->"+element.toString+" in: "+p.toString+" nL: "+newElement.toString)
+				}
+			end
+//			stdio.writeln("siding element: "+element.toString+" into "+newElement.toString)
+			
+			var trtmp:TriContainer init TriContainer.new
+			
+			trtmp.element:=element.toString
+			if direction then
+				trtmp.right:=newElement.toString
+			else
+				trtmp.left:=newElement.toString
+			end
+			trtmp.appliedOperation:=OperationType.ONESIDE
+			self.newMapper.put(newElement.toString,newElement)
+			self.mapper.put(element.toString,trtmp)
+			self.processed.add(element)
+			
+			
+			var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+			properties.each{ p |
+				if not Mergeable.isSuperTypeOf(p.type) then
+						if p.upper != 1 then
+							var objects : Collection<Object> objects?=element.~get(p)
+							var objectsN : Collection<Object> objectsN?=newElement.~get(p)
+							objects.each{obj|
+								objectsN.add(obj)
+							}
+						else
+							newElement.~set(p,element.~get(p))
+						end
+				else
+					if p.upper != 1 then
+						var objects : Collection<Object> objects?=element.~get(p)
+						objects.each{obj|
+							var mergeable:Mergeable mergeable?=obj			
+							var ctnr:Mergeable[0..*]
+							var ctnr2:Mergeable ctnr2?=mergeable.container()
+							var prpts:Property[0..*]
+							ctnr:=OrderedSet<Mergeable>.new
+							prpts:=OrderedSet<Property>.new
+							if element!= ctnr2 then
+								ctnr.add(element)
+								ctnr.add(ctnr2)
+								prpts.add(p)
+								var prpt:Property prpt:=self.getPropertyByContainement(ctnr2,mergeable)
+								prpts.add(prpt)
+							else
+								ctnr.add(element)
+								prpts.add(p)
+							end
+							if not self.processed.contains(mergeable) then
+								self.decompose(ctnr,mergeable,prpts,direction)
+							else
+								var objectsN : Collection<Object> objectsN?=newElement.~get(p)
+								var mr:Mergeable 
+								if direction then
+									mr:=self.newMapper.getValue((self.mapper.getValue(mergeable.toString).right))
+								else
+									mr:=self.newMapper.getValue((self.mapper.getValue(mergeable.toString).left))
+								end
+								if not objectsN.contains(mr) then
+									objectsN.add(mr)
+								end
+							end
+						}
+					else
+						var mergeable:Mergeable mergeable?=element.~get(p)
+						if mergeable != void then
+							if self.objectIndex.contains(mergeable.toString) then
+								var ctnr:Mergeable[0..*]
+								var ctnr2:Mergeable ctnr2?=mergeable.container()
+								var prpts:Property[0..*]
+								ctnr:=OrderedSet<Mergeable>.new
+								prpts:=OrderedSet<Property>.new
+								if element!= ctnr2 then
+									ctnr.add(element)
+									ctnr.add(ctnr2)
+									prpts.add(p)
+									prpts.add(self.getPropertyByContainement(ctnr2,mergeable))		
+								else
+									ctnr.add(element)
+									prpts.add(p)
+								end
+								if not self.processed.contains(mergeable) then
+									self.decompose(ctnr,mergeable,prpts,direction)
+								else
+									var mr:Mergeable 
+									if direction then
+										mr:=self.newMapper.getValue((self.mapper.getValue(mergeable.toString).right))
+									else
+										mr:=self.newMapper.getValue((self.mapper.getValue(mergeable.toString).left))
+									end
+									newElement.~set(p,mr)
+								end	
+							else
+								newElement.~set(p,element.~get(p))
+							end
+						end
+					end	
+				end
+			}	
+			if parent==void then
+				if direction then
+					self.right:=newElement
+				else
+					self.left:=newElement
+				end
+			else
+				iproperty.select{p|p!=void}.each{p|
+					var mr:Mergeable 
+					if direction then
+						mr:=self.newMapper.getValue((self.mapper.getValue(parent.one.toString).right))
+					else
+						mr:=self.newMapper.getValue((self.mapper.getValue(parent.one.toString).left))
+					end
+					if p.upper == 1 then
+						stdio.writeln("setting single : "+newElement.toString+" in "+mr.toString+" original "+element.toString+ "on p: "+p.name)
+						mr.~set(p,newElement)
+					else
+						stdio.writeln("setting multiple : "+newElement.toString+" in "+mr.toString+" original "+element.toString+ "on p: "+p.name)
+						var objectsN : Collection<Object> objectsN?=mr.~get(p)
+						objectsN.add(newElement)
+					end
+					parent.remove(parent.one)
+				}
+			end
+		end
 	end
 	
 	operation rename(element:Named): Rule is do
