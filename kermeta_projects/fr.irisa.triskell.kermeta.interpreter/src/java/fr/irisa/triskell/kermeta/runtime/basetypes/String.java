@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.17 2008-07-24 14:19:19 cfaucher Exp $
+/* $Id: String.java,v 1.18 2008-08-17 20:15:55 cfaucher Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -114,8 +114,8 @@ public class String {
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::contains(str1)
 	 */
 	public static RuntimeObject contains(RuntimeObject self, RuntimeObject param0) {
-		if(getValue(self).contains(getValue(param0))) return self.getFactory().getMemory().falseINSTANCE;
-		else return self.getFactory().getMemory().trueINSTANCE;
+		if(getValue(self).contains(getValue(param0))) return self.getFactory().getMemory().trueINSTANCE;
+		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 	
 	/** Implementation of method replace called as :
