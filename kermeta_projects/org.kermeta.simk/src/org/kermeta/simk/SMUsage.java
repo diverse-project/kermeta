@@ -1,5 +1,5 @@
 /**
- * $Id: SMUsage.java,v 1.8 2008-07-23 15:17:22 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.9 2008-08-18 09:20:20 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMUsage.java,v 1.8 2008-07-23 15:17:22 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.9 2008-08-18 09:20:20 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -68,14 +68,14 @@ public enum SMUsage implements Enumerator {
 	 * @ordered
 	 */
 	POST_CONDITION(4, "PostCondition", "PostCondition"), /**
-	 * The '<em><b>Value Type Wrapper</b></em>' literal object.
+	 * The '<em><b>Wrapper</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #VALUE_TYPE_WRAPPER_VALUE
+	 * @see #WRAPPER_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	VALUE_TYPE_WRAPPER(5, "ValueTypeWrapper", "ValueTypeWrapper");
+	WRAPPER(5, "Wrapper", "Wrapper");
 
 	/**
 	 * The '<em><b>Runner</b></em>' literal value.
@@ -153,19 +153,19 @@ public enum SMUsage implements Enumerator {
 	public static final int POST_CONDITION_VALUE = 4;
 
 	/**
-	 * The '<em><b>Value Type Wrapper</b></em>' literal value.
+	 * The '<em><b>Wrapper</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Value Type Wrapper</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Wrapper</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #VALUE_TYPE_WRAPPER
-	 * @model name="ValueTypeWrapper"
+	 * @see #WRAPPER
+	 * @model name="Wrapper"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int VALUE_TYPE_WRAPPER_VALUE = 5;
+	public static final int WRAPPER_VALUE = 5;
 
 	/**
 	 * An array of all the '<em><b>SM Usage</b></em>' enumerators.
@@ -180,7 +180,7 @@ public enum SMUsage implements Enumerator {
 			DERIVED_PROPERTY,
 			PRE_CONDITION,
 			POST_CONDITION,
-			VALUE_TYPE_WRAPPER,
+			WRAPPER,
 		};
 
 	/**
@@ -236,7 +236,7 @@ public enum SMUsage implements Enumerator {
 			case DERIVED_PROPERTY_VALUE: return DERIVED_PROPERTY;
 			case PRE_CONDITION_VALUE: return PRE_CONDITION;
 			case POST_CONDITION_VALUE: return POST_CONDITION;
-			case VALUE_TYPE_WRAPPER_VALUE: return VALUE_TYPE_WRAPPER;
+			case WRAPPER_VALUE: return WRAPPER;
 		}
 		return null;
 	}

@@ -1,5 +1,5 @@
 /**
- * $Id: SimkFactoryImpl.java,v 1.4 2008-07-23 15:17:23 cfaucher Exp $
+ * $Id: SimkFactoryImpl.java,v 1.5 2008-08-18 09:20:20 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkFactoryImpl.java,v 1.4 2008-07-23 15:17:23 cfaucher Exp $
+ * $Id: SimkFactoryImpl.java,v 1.5 2008-08-18 09:20:20 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -73,7 +73,6 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 			case SimkPackage.SM_CLASS: return createSMClass();
 			case SimkPackage.SM_PARAMETER: return createSMParameter();
 			case SimkPackage.SM_RETURN: return createSMReturn();
-			case SimkPackage.FUNCTION_TYPE: return createFunctionType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -177,16 +176,6 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	public SMReturn createSMReturn() {
 		SMReturnImpl smReturn = new SMReturnImpl();
 		return smReturn;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FunctionType createFunctionType() {
-		FunctionTypeImpl functionType = new FunctionTypeImpl();
-		return functionType;
 	}
 
 	/**

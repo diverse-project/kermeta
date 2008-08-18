@@ -1,5 +1,5 @@
 /**
- * $Id: SimkSwitch.java,v 1.4 2008-07-23 15:17:25 cfaucher Exp $
+ * $Id: SimkSwitch.java,v 1.5 2008-08-18 09:20:24 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkSwitch.java,v 1.4 2008-07-23 15:17:25 cfaucher Exp $
+ * $Id: SimkSwitch.java,v 1.5 2008-08-18 09:20:24 cfaucher Exp $
  */
 package org.kermeta.simk.util;
 
@@ -153,12 +153,6 @@ public class SimkSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SimkPackage.FUNCTION_TYPE: {
-				FunctionType functionType = (FunctionType)theEObject;
-				T result = caseFunctionType(functionType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -295,21 +289,6 @@ public class SimkSwitch<T> {
 	 * @generated
 	 */
 	public T caseSMReturn(SMReturn object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFunctionType(FunctionType object) {
 		return null;
 	}
 

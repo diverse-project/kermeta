@@ -1,5 +1,5 @@
 /**
- * $Id: SimkItemProviderAdapterFactory.java,v 1.4 2008-07-23 15:17:23 cfaucher Exp $
+ * $Id: SimkItemProviderAdapterFactory.java,v 1.5 2008-08-18 09:20:21 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkItemProviderAdapterFactory.java,v 1.4 2008-07-23 15:17:23 cfaucher Exp $
+ * $Id: SimkItemProviderAdapterFactory.java,v 1.5 2008-08-18 09:20:21 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -242,29 +242,6 @@ public class SimkItemProviderAdapterFactory extends SimkAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.simk.FunctionType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FunctionTypeItemProvider functionTypeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.simk.FunctionType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFunctionTypeAdapter() {
-		if (functionTypeItemProvider == null) {
-			functionTypeItemProvider = new FunctionTypeItemProvider(this);
-		}
-
-		return functionTypeItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -370,7 +347,6 @@ public class SimkItemProviderAdapterFactory extends SimkAdapterFactory implement
 		if (smClassItemProvider != null) smClassItemProvider.dispose();
 		if (smParameterItemProvider != null) smParameterItemProvider.dispose();
 		if (smReturnItemProvider != null) smReturnItemProvider.dispose();
-		if (functionTypeItemProvider != null) functionTypeItemProvider.dispose();
 	}
 
 }

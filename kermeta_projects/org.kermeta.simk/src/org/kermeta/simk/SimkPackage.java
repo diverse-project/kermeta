@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackage.java,v 1.5 2008-07-23 15:17:22 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.6 2008-08-18 09:20:20 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackage.java,v 1.5 2008-07-23 15:17:22 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.6 2008-08-18 09:20:20 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -131,22 +131,13 @@ public interface SimkPackage extends EPackage {
 	int SIMK_MODEL__STATIC_METHODS = SM_NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Function Types</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMK_MODEL__FUNCTION_TYPES = SM_NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>SIMK Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMK_MODEL_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int SIMK_MODEL_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.simk.impl.StaticMethodImpl <em>Static Method</em>}' class.
@@ -498,25 +489,6 @@ public interface SimkPackage extends EPackage {
 	int SM_RETURN_FEATURE_COUNT = SM_TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.simk.impl.FunctionTypeImpl <em>Function Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.simk.impl.FunctionTypeImpl
-	 * @see org.kermeta.simk.impl.SimkPackageImpl#getFunctionType()
-	 * @generated
-	 */
-	int FUNCTION_TYPE = 9;
-
-	/**
-	 * The number of structural features of the '<em>Function Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.kermeta.simk.SMUsage <em>SM Usage</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -524,7 +496,7 @@ public interface SimkPackage extends EPackage {
 	 * @see org.kermeta.simk.impl.SimkPackageImpl#getSMUsage()
 	 * @generated
 	 */
-	int SM_USAGE = 10;
+	int SM_USAGE = 9;
 
 
 	/**
@@ -558,17 +530,6 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSIMKModel_StaticMethods();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.simk.SIMKModel#getFunctionTypes <em>Function Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Function Types</em>'.
-	 * @see org.kermeta.simk.SIMKModel#getFunctionTypes()
-	 * @see #getSIMKModel()
-	 * @generated
-	 */
-	EReference getSIMKModel_FunctionTypes();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.simk.StaticMethod <em>Static Method</em>}'.
@@ -860,16 +821,6 @@ public interface SimkPackage extends EPackage {
 	EClass getSMReturn();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.simk.FunctionType <em>Function Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function Type</em>'.
-	 * @see org.kermeta.simk.FunctionType
-	 * @generated
-	 */
-	EClass getFunctionType();
-
-	/**
 	 * Returns the meta object for enum '{@link org.kermeta.simk.SMUsage <em>SM Usage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -926,14 +877,6 @@ public interface SimkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SIMK_MODEL__STATIC_METHODS = eINSTANCE.getSIMKModel_StaticMethods();
-
-		/**
-		 * The meta object literal for the '<em><b>Function Types</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMK_MODEL__FUNCTION_TYPES = eINSTANCE.getSIMKModel_FunctionTypes();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.simk.impl.StaticMethodImpl <em>Static Method</em>}' class.
@@ -1166,16 +1109,6 @@ public interface SimkPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SM_RETURN = eINSTANCE.getSMReturn();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.simk.impl.FunctionTypeImpl <em>Function Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.simk.impl.FunctionTypeImpl
-		 * @see org.kermeta.simk.impl.SimkPackageImpl#getFunctionType()
-		 * @generated
-		 */
-		EClass FUNCTION_TYPE = eINSTANCE.getFunctionType();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.simk.SMUsage <em>SM Usage</em>}' enum.
