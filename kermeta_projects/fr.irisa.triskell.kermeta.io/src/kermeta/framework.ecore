@@ -454,16 +454,16 @@
               <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a Boolean stating whether the Object is currently in a&#xD;&#xA;&#x9; * frozen state&#xD;&#xA;&#x9; */"/>
             </eAnnotations>
           </eOperations>
-          <eOperations name="hashcode" eType="/2/language/structure/Integer">
-            <eAnnotations source="kermeta">
-              <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;&#x9; * code used in hashtable in order to identify an object in the hashtable keys&#xD;&#xA;&#x9; * This system is similar to the hashcode used in java. Please refer to java documentation&#xD;&#xA;&#x9; * for more information about hashcode&#xD;&#xA;&#x9; */"/>
-            </eAnnotations>
-          </eOperations>
           <eOperations name="checkInvariants">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;var cd : kermeta::language::structure::ClassDefinition init self.getMetaClass.classDefinition&#xA;&#x9;if cd.isVoid.~not then&#xA;&#x9;&#x9;cd.allAttribute.each{p | do&#xA;&#x9;&#x9;&#x9;&#x9;var v : kermeta::language::structure::Object init self.get(p)&#xA;&#x9;&#x9;&#x9;&#x9;if v.isVoid.~not.~and(v.isInstanceOf(kermeta::standard::Collection&lt;kermeta::language::structure::Object>)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var c : kermeta::standard::Collection&lt;kermeta::language::structure::Object> init v.asType(kermeta::standard::Collection&lt;kermeta::language::structure::Object>)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if c.size.isLower(p.lower).~or(p.upper.isNotEqual(1.uminus).~and(c.size.isGreater(p.upper))) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;raise kermeta::exceptions::ConstraintViolatedInv.new&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if p.lower.equals(1).~and(v.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;raise kermeta::exceptions::ConstraintViolatedInv.new&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;&#x9; * Runs checking of invariants defined for the metaclass of the Object&#xD;&#xA;&#x9; */"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="hashcode" eType="/2/language/structure/Integer">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;&#x9; * code used in hashtable in order to identify an object in the hashtable keys&#xD;&#xA;&#x9; * This system is similar to the hashcode used in java. Please refer to java documentation&#xD;&#xA;&#x9; * for more information about hashcode&#xD;&#xA;&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="isVoid" eType="/2/language/structure/Boolean">
@@ -486,6 +486,12 @@
               <details key="WrapperValueTypeReturnType" value="java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"/>
             </eAnnotations>
           </eOperations>
+          <eOperations name="oid" eType="/2/language/structure/Integer">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns the unique Oid of the Object&#xD;&#xA;&#x9; */"/>
+            </eAnnotations>
+          </eOperations>
           <eOperations name="unset">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)&#xA;end"/>
@@ -497,12 +503,6 @@
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze(self)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;&#x9; * Freeze the Object&#xD;&#xA;&#x9; */"/>
-            </eAnnotations>
-          </eOperations>
-          <eOperations name="oid" eType="/2/language/structure/Integer">
-            <eAnnotations source="kermeta">
-              <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns the unique Oid of the Object&#xD;&#xA;&#x9; */"/>
             </eAnnotations>
           </eOperations>
           <eOperations name="containingResource" eType="/2/persistence/Resource">
@@ -518,6 +518,12 @@
             </eAnnotations>
             <eParameters name="type" eType="/2/language/structure/Type"/>
           </eOperations>
+          <eOperations name="checkAllInvariants">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;if self.isNotEqual(void) then&#xA;&#x9;&#x9;self.checkInvariants&#xA;&#x9;&#x9;var cd : kermeta::language::structure::ClassDefinition&#xA;&#x9;&#x9;cd ?= self.getMetaClass.typeDefinition&#xA;&#x9;&#x9;cd.allAttribute.each{subObj | do&#xA;&#x9;&#x9;&#x9;&#x9;if subObj.isComposite then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveSequence&quot;).~or(self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveCollection&quot;)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var subObjInstances : kermeta::standard::Collection&lt;kermeta::language::structure::Object>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances ?= self.get(subObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances.each{aSubObjInstances | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aSubObjInstances.checkAllInvariants&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.get(subObj).checkAllInvariants&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;&#x9; * Recursively runs checking of invariants defined for the metaclass of the Object&#xD;&#xA;&#x9; * and its supertypes&#xD;&#xA;&#x9; */"/>
+            </eAnnotations>
+          </eOperations>
           <eOperations name="asType" eType="/2/language/structure/Object">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;if isInstanceOf(type) then&#xA;&#x9;&#x9;result := self&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise kermeta::exceptions::TypeCastError.new&#xA;&#xA;&#x9;end&#xA;end"/>
@@ -526,12 +532,6 @@
               <details key="WrapperValueTypeSelfExpression" value="java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"/>
             </eAnnotations>
             <eParameters name="type" eType="/2/language/structure/Class"/>
-          </eOperations>
-          <eOperations name="checkAllInvariants">
-            <eAnnotations source="kermeta">
-              <details key="body" value="do&#xA;&#x9;if self.isNotEqual(void) then&#xA;&#x9;&#x9;self.checkInvariants&#xA;&#x9;&#x9;var cd : kermeta::language::structure::ClassDefinition&#xA;&#x9;&#x9;cd ?= self.getMetaClass.typeDefinition&#xA;&#x9;&#x9;cd.allAttribute.each{subObj | do&#xA;&#x9;&#x9;&#x9;&#x9;if subObj.isComposite then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveSequence&quot;).~or(self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveCollection&quot;)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var subObjInstances : kermeta::standard::Collection&lt;kermeta::language::structure::Object>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances ?= self.get(subObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances.each{aSubObjInstances | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aSubObjInstances.checkAllInvariants&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.get(subObj).checkAllInvariants&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;&#x9; * Recursively runs checking of invariants defined for the metaclass of the Object&#xD;&#xA;&#x9; * and its supertypes&#xD;&#xA;&#x9; */"/>
-            </eAnnotations>
           </eOperations>
           <eOperations name="toString" eType="/2/language/structure/String">
             <eAnnotations source="kermeta">
@@ -584,18 +584,18 @@
             </eAnnotations>
             <eParameters name="objectToClone" eType="/2/language/structure/Object"/>
           </eOperations>
-          <eOperations name="new" eType="/2/language/structure/Object">
-            <eAnnotations source="kermeta">
-              <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;&#x9; * Instantiates a new occurence for this Class&#xD;&#xA;&#x9; */"/>
-            </eAnnotations>
-          </eOperations>
           <eOperations name="deepClone" eType="/2/language/structure/Object">
             <eAnnotations source="kermeta" references="/2/language/structure/Type/deepClone">
               <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Class.deepCloneObject(self, objectToClone)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::Type"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/2/language/structure/Object"/>
+          </eOperations>
+          <eOperations name="new" eType="/2/language/structure/Object">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;&#x9; * Instantiates a new occurence for this Class&#xD;&#xA;&#x9; */"/>
+            </eAnnotations>
           </eOperations>
           <eOperations name="equals" eType="/2/language/structure/Boolean">
             <eAnnotations source="kermeta" references="/2/language/structure/Object/equals">
@@ -635,14 +635,10 @@
               <details key="body" value="do&#xA;&#x9;var cDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;var supertypes : kermeta::standard::OrderedSet&lt;kermeta::language::structure::Class> init kermeta::standard::OrderedSet&lt;kermeta::language::structure::Class>.new&#xA;&#x9;cDef.superType.each{elem | do&#xA;&#x9;&#x9;&#x9;if kermeta::language::structure::Class.isInstance(elem) then&#xA;&#x9;&#x9;&#x9;&#x9;var c : kermeta::language::structure::Class&#xA;&#x9;&#x9;&#x9;&#x9;c ?= elem&#xA;&#x9;&#x9;&#x9;&#x9;supertypes.add(c)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;&#x9;result := supertypes&#xA;end"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/2/language/structure/Boolean" volatile="true" transient="true" derived="true">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/2/language/structure/Boolean" changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
-              <details key="documentation" value="Returns a Boolean stating whether ClassDefinition of this Class is abstract."/>
-              <details key="isReadOnly" value="false"/>
-            </eAnnotations>
-            <eAnnotations source="kermetaderivedProp.setter">
-              <details key="body" value="do&#xA;   //TODO: implement setterfor derived property isAbstract&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+              <details key="isReadOnly" value="true"/>
             </eAnnotations>
             <eAnnotations source="kermetaderivedProp.getter">
               <details key="body" value="do&#xA;&#x9;var cDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;result := cDef.isAbstract&#xA;end"/>
@@ -798,12 +794,12 @@
             </eAnnotations>
             <eParameters name="objectToClone" eType="/2/language/structure/Object"/>
           </eOperations>
-          <eOperations name="isInstance" eType="/2/language/structure/Boolean">
+          <eOperations name="deepClone" eType="/2/language/structure/Object">
             <eAnnotations source="kermeta">
-              <details key="body" value="do&#xA;&#x9;result := element.isInstanceOf(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xD;&#xA;&#x9; * Implements Type.isInstance(Object)&#xD;&#xA;&#x9; */"/>
+              <details key="isAbstract" value="true"/>
+              <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a copy of passed Object built by recursively copying values of&#xD;&#xA;&#x9; * all properties, no matter the property kind&#xD;&#xA;&#x9; */"/>
             </eAnnotations>
-            <eParameters name="element" eType="/2/language/structure/Object"/>
+            <eParameters name="objectToClone" eType="/2/language/structure/Object"/>
           </eOperations>
           <eOperations name="isSuperTypeOf" eType="/2/language/structure/Boolean">
             <eAnnotations source="kermeta">
@@ -812,12 +808,12 @@
             </eAnnotations>
             <eParameters name="object" eType="/2/language/structure/Type"/>
           </eOperations>
-          <eOperations name="deepClone" eType="/2/language/structure/Object">
+          <eOperations name="isInstance" eType="/2/language/structure/Boolean">
             <eAnnotations source="kermeta">
-              <details key="isAbstract" value="true"/>
-              <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a copy of passed Object built by recursively copying values of&#xD;&#xA;&#x9; * all properties, no matter the property kind&#xD;&#xA;&#x9; */"/>
+              <details key="body" value="do&#xA;&#x9;result := element.isInstanceOf(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;&#x9; * Implements Type.isInstance(Object)&#xD;&#xA;&#x9; */"/>
             </eAnnotations>
-            <eParameters name="objectToClone" eType="/2/language/structure/Object"/>
+            <eParameters name="element" eType="/2/language/structure/Object"/>
           </eOperations>
           <eOperations name="isSubTypeOf" eType="/2/language/structure/Boolean">
             <eAnnotations source="kermeta">
@@ -1847,6 +1843,13 @@
           </eAnnotations>
           <eParameters name="other" eType="/2/standard/Boolean"/>
         </eOperations>
+        <eOperations name="implies" eType="/2/standard/Boolean">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := self.~and(other).~not.~and(self).~not&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return self implies other&#xD;&#xA;&#x9; * meaning : not( (not (self and other)) and self)&#xD;&#xA;&#x9; */"/>
+          </eAnnotations>
+          <eParameters name="other" eType="/2/standard/Boolean"/>
+        </eOperations>
         <eOperations name="nand" eType="/2/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self.~and(other).~not&#xA;end"/>
@@ -1865,13 +1868,6 @@
               <details key="1" value="kermeta::standard::Boolean"/>
             </eAnnotations>
           </eParameters>
-        </eOperations>
-        <eOperations name="implies" eType="/2/standard/Boolean">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := self.~and(other).~not.~and(self).~not&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * return self implies other&#xD;&#xA;&#x9; * meaning : not( (not (self and other)) and self)&#xD;&#xA;&#x9; */"/>
-          </eAnnotations>
-          <eParameters name="other" eType="/2/standard/Boolean"/>
         </eOperations>
         <eOperations name="toString" eType="/2/standard/String">
           <eAnnotations source="kermeta" references="/2/language/structure/Object/toString">
@@ -1956,18 +1952,18 @@
           </eAnnotations>
           <eParameters name="other" eType="/2/standard/Integer"/>
         </eOperations>
+        <eOperations name="toReal" eType="/2/standard/Real">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toReal(self)&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Convert self as a Real&#xD;&#xA;&#x9; */"/>
+          </eAnnotations>
+        </eOperations>
         <eOperations name="div" eType="/2/standard/Integer">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.equals(0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::DivisionByZero.new&#xA;&#xA;&#x9;end&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::VoidOperandError.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.div(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns self / other&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
           <eParameters name="other" eType="/2/standard/Integer"/>
-        </eOperations>
-        <eOperations name="toReal" eType="/2/standard/Real">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toReal(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Convert self as a Real&#xD;&#xA;&#x9; */"/>
-          </eAnnotations>
         </eOperations>
         <eOperations name="compareTo" eType="/2/standard/Integer">
           <eAnnotations source="kermeta" references="/2/standard/Comparable/compareTo">
@@ -2054,16 +2050,16 @@
           </eAnnotations>
           <eParameters name="other" eType="/2/standard/Real"/>
         </eOperations>
-        <eOperations name="toInteger" eType="/2/standard/Integer">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toInteger(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Convert self as an Integer&#xD;&#xA;&#x9; */"/>
-          </eAnnotations>
-        </eOperations>
         <eOperations name="uminus" eType="/2/standard/Real">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := 0.toReal.minus(self)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns -self&#xD;&#xA;&#x9; */"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="toInteger" eType="/2/standard/Integer">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toInteger(self)&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Convert self as an Integer&#xD;&#xA;&#x9; */"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="equals" eType="/2/standard/Boolean">
@@ -2081,6 +2077,13 @@
           </eAnnotations>
           <eParameters name="other" eType="/2/standard/Real"/>
         </eOperations>
+        <eOperations name="toString" eType="/2/standard/String">
+          <eAnnotations source="kermeta" references="/2/language/structure/Object/toString">
+            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toString(self)&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns numeric value in string format&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+          </eAnnotations>
+        </eOperations>
         <eOperations name="compareTo" eType="/2/standard/Integer">
           <eAnnotations source="kermeta" references="/2/standard/Comparable/compareTo">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Real) then&#xA;&#x9;&#x9;if other.getMetaClass.equals(kermeta::standard::Integer) then&#xA;&#x9;&#x9;&#x9;result := self.compareTo(other.asType(kermeta::standard::Integer).toReal)&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;raise kermeta::standard::NotComparableException.new&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.compareTo(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
@@ -2088,13 +2091,6 @@
             <details key="superOperation" value="kermeta::standard::Comparable"/>
           </eAnnotations>
           <eParameters name="other" eType="/2/standard/Object"/>
-        </eOperations>
-        <eOperations name="toString" eType="/2/standard/String">
-          <eAnnotations source="kermeta" references="/2/language/structure/Object/toString">
-            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toString(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns numeric value in string format&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::language::structure::Object"/>
-          </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Character" eSuperTypes="/2/standard/ValueType /2/standard/Comparable">
@@ -2110,6 +2106,13 @@
           </eAnnotations>
           <eParameters name="other" eType="/2/standard/Object"/>
         </eOperations>
+        <eOperations name="toString" eType="/2/standard/String">
+          <eAnnotations source="kermeta" references="/2/language/structure/Object/toString">
+            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.toString(self)&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Conversion from Character to String&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+          </eAnnotations>
+        </eOperations>
         <eOperations name="compareTo" eType="/2/standard/Integer">
           <eAnnotations source="kermeta" references="/2/standard/Comparable/compareTo">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.compareTo(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
@@ -2117,13 +2120,6 @@
             <details key="superOperation" value="kermeta::standard::Comparable"/>
           </eAnnotations>
           <eParameters name="other" eType="/2/standard/Object"/>
-        </eOperations>
-        <eOperations name="toString" eType="/2/standard/String">
-          <eAnnotations source="kermeta" references="/2/language/structure/Object/toString">
-            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.toString(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Conversion from Character to String&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::language::structure::Object"/>
-          </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="String" eSuperTypes="/2/standard/ValueType /2/standard/Comparable /2/standard/Summable">
@@ -2235,13 +2231,6 @@
           <eParameters name="startIndex" eType="/2/standard/Integer"/>
           <eParameters name="subStringSize" eType="/2/standard/Integer"/>
         </eOperations>
-        <eOperations name="toString" eType="/2/standard/String">
-          <eAnnotations source="kermeta" references="/2/language/structure/Object/toString">
-            <details key="body" value="do&#xA;&#x9;result := self&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns the string itself&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::language::structure::Object"/>
-          </eAnnotations>
-        </eOperations>
         <eOperations name="split">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.split(self, delimiter)&#xA;end"/>
@@ -2251,6 +2240,13 @@
             <eTypeArguments eClassifier="/2/standard/String"/>
           </eGenericType>
           <eParameters name="delimiter" eType="/2/standard/String"/>
+        </eOperations>
+        <eOperations name="toString" eType="/2/standard/String">
+          <eAnnotations source="kermeta" references="/2/language/structure/Object/toString">
+            <details key="body" value="do&#xA;&#x9;result := self&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * returns the string itself&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+          </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Object">
@@ -2349,6 +2345,24 @@
             <eGenericType eTypeParameter="/2/standard/Collection/G"/>
           </eParameters>
         </eOperations>
+        <eOperations name="asSequence">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a new Sequence built from the Collection&#xD;&#xA;&#x9; */"/>
+          </eAnnotations>
+          <eGenericType eClassifier="/2/standard/Sequence">
+            <eTypeArguments eTypeParameter="/2/standard/Collection/G"/>
+          </eGenericType>
+        </eOperations>
+        <eOperations name="add">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(self, element)&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Adds an element in the Collection (default implementation)&#xD;&#xA;&#x9; */"/>
+          </eAnnotations>
+          <eParameters name="element">
+            <eGenericType eTypeParameter="/2/standard/Collection/G"/>
+          </eParameters>
+        </eOperations>
         <eOperations name="includes" eType="/2/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self.contains(element)&#xA;end"/>
@@ -2367,24 +2381,6 @@
             <eGenericType eClassifier="/2/standard/Collection">
               <eTypeArguments eTypeParameter="/2/standard/Collection/G"/>
             </eGenericType>
-          </eParameters>
-        </eOperations>
-        <eOperations name="asSequence">
-          <eAnnotations source="kermeta">
-            <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a new Sequence built from the Collection&#xD;&#xA;&#x9; */"/>
-          </eAnnotations>
-          <eGenericType eClassifier="/2/standard/Sequence">
-            <eTypeArguments eTypeParameter="/2/standard/Collection/G"/>
-          </eGenericType>
-        </eOperations>
-        <eOperations name="add">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(self, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Adds an element in the Collection (default implementation)&#xD;&#xA;&#x9; */"/>
-          </eAnnotations>
-          <eParameters name="element">
-            <eGenericType eTypeParameter="/2/standard/Collection/G"/>
           </eParameters>
         </eOperations>
         <eOperations name="clear">
@@ -2576,15 +2572,6 @@
             </eAnnotations>
           </eParameters>
         </eOperations>
-        <eOperations name="asSet">
-          <eAnnotations source="kermeta">
-            <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a new Set built from the Collection&#xD;&#xA;&#x9; */"/>
-          </eAnnotations>
-          <eGenericType eClassifier="/2/standard/Set">
-            <eTypeArguments eTypeParameter="/2/standard/Collection/G"/>
-          </eGenericType>
-        </eOperations>
         <eOperations name="collect">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;T>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;result.add(collector(it.next))&#xA;&#x9;end&#xA;end"/>
@@ -2600,6 +2587,15 @@
               <details key="1" value="T"/>
             </eAnnotations>
           </eParameters>
+        </eOperations>
+        <eOperations name="asSet">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a new Set built from the Collection&#xD;&#xA;&#x9; */"/>
+          </eAnnotations>
+          <eGenericType eClassifier="/2/standard/Set">
+            <eTypeArguments eTypeParameter="/2/standard/Collection/G"/>
+          </eGenericType>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Set" eSuperTypes="/2/standard/Collection">
@@ -2673,6 +2669,20 @@
             <eGenericType eTypeParameter="/2/standard/Set/G"/>
           </eParameters>
         </eOperations>
+        <eOperations name="symmetricDifference">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Set&lt;G> init s.minus(self)&#xA;&#x9;result := self.minus(s)&#xA;&#x9;result.addAll(res)&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a new Set which contents corresponds to the symmetric&#xD;&#xA;&#x9; * difference between current Set and Set s, ie all elements of&#xD;&#xA;&#x9; * each Set that do not appear in the other one&#xD;&#xA;&#x9; */"/>
+          </eAnnotations>
+          <eGenericType eClassifier="/2/standard/Set">
+            <eTypeArguments eTypeParameter="/2/standard/Set/G"/>
+          </eGenericType>
+          <eParameters name="s">
+            <eGenericType eClassifier="/2/standard/Set">
+              <eTypeArguments eTypeParameter="/2/standard/Set/G"/>
+            </eGenericType>
+          </eParameters>
+        </eOperations>
         <eOperations name="concatenate">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;result.addAll(less)&#xA;&#x9;result.addAll(pivot)&#xA;&#x9;result.addAll(greater)&#xA;end"/>
@@ -2693,20 +2703,6 @@
           </eParameters>
           <eParameters name="greater">
             <eGenericType eClassifier="/2/standard/OrderedSet">
-              <eTypeArguments eTypeParameter="/2/standard/Set/G"/>
-            </eGenericType>
-          </eParameters>
-        </eOperations>
-        <eOperations name="symmetricDifference">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Set&lt;G> init s.minus(self)&#xA;&#x9;result := self.minus(s)&#xA;&#x9;result.addAll(res)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a new Set which contents corresponds to the symmetric&#xD;&#xA;&#x9; * difference between current Set and Set s, ie all elements of&#xD;&#xA;&#x9; * each Set that do not appear in the other one&#xD;&#xA;&#x9; */"/>
-          </eAnnotations>
-          <eGenericType eClassifier="/2/standard/Set">
-            <eTypeArguments eTypeParameter="/2/standard/Set/G"/>
-          </eGenericType>
-          <eParameters name="s">
-            <eGenericType eClassifier="/2/standard/Set">
               <eTypeArguments eTypeParameter="/2/standard/Set/G"/>
             </eGenericType>
           </eParameters>
@@ -2754,16 +2750,6 @@
             </eGenericType>
           </eParameters>
         </eOperations>
-        <eOperations name="asSet">
-          <eAnnotations source="kermeta" references="/2/standard/Collection/asSet">
-            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Set&lt;G> init kermeta::standard::Set&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Collection&lt;G>.asSet()&#xD;&#xA;&#x9; * Returns a new Set composed of all elements of current Set&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::Collection"/>
-          </eAnnotations>
-          <eGenericType eClassifier="/2/standard/Set">
-            <eTypeArguments eTypeParameter="/2/standard/Set/G"/>
-          </eGenericType>
-        </eOperations>
         <eOperations name="unionWithBag">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Bag&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.addAll(elements)&#xA;end"/>
@@ -2777,6 +2763,16 @@
               <eTypeArguments eTypeParameter="/2/standard/Set/G"/>
             </eGenericType>
           </eParameters>
+        </eOperations>
+        <eOperations name="asSet">
+          <eAnnotations source="kermeta" references="/2/standard/Collection/asSet">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Set&lt;G> init kermeta::standard::Set&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides Collection&lt;G>.asSet()&#xD;&#xA;&#x9; * Returns a new Set composed of all elements of current Set&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eGenericType eClassifier="/2/standard/Set">
+            <eTypeArguments eTypeParameter="/2/standard/Set/G"/>
+          </eGenericType>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Bag" eSuperTypes="/2/standard/Collection">
@@ -2852,6 +2848,15 @@
             <eGenericType eTypeParameter="/2/standard/Bag/G"/>
           </eParameters>
         </eOperations>
+        <eOperations name="flatten">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Bag&lt;kermeta::standard::Object> init kermeta::standard::Bag&lt;kermeta::standard::Object>.new&#xA;&#x9;if G.isKindOf(kermeta::standard::Collection&lt;kermeta::standard::Object>) then&#xA;&#x9;&#x9;var col : kermeta::standard::Collection&lt;kermeta::standard::Object>&#xA;&#x9;&#x9;var o : kermeta::standard::Object&#xA;&#x9;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;col ?= e&#xA;&#x9;&#x9;&#x9;&#x9;res.addAll(col)&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a new Bag which content includes all non-Collection elements&#xD;&#xA;&#x9; * of the current Set, and, for each Collection element of the current&#xD;&#xA;&#x9; * Bag, as many elements as the Collection contains&#xD;&#xA;&#x9; */"/>
+          </eAnnotations>
+          <eGenericType eClassifier="/2/standard/Bag">
+            <eTypeArguments eClassifier="/2/standard/Object"/>
+          </eGenericType>
+        </eOperations>
         <eOperations name="intersectionWithSet">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if self.contains(elem) then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
@@ -2865,15 +2870,6 @@
               <eTypeArguments eTypeParameter="/2/standard/Bag/G"/>
             </eGenericType>
           </eParameters>
-        </eOperations>
-        <eOperations name="flatten">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Bag&lt;kermeta::standard::Object> init kermeta::standard::Bag&lt;kermeta::standard::Object>.new&#xA;&#x9;if G.isKindOf(kermeta::standard::Collection&lt;kermeta::standard::Object>) then&#xA;&#x9;&#x9;var col : kermeta::standard::Collection&lt;kermeta::standard::Object>&#xA;&#x9;&#x9;var o : kermeta::standard::Object&#xA;&#x9;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;col ?= e&#xA;&#x9;&#x9;&#x9;&#x9;res.addAll(col)&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Returns a new Bag which content includes all non-Collection elements&#xD;&#xA;&#x9; * of the current Set, and, for each Collection element of the current&#xD;&#xA;&#x9; * Bag, as many elements as the Collection contains&#xD;&#xA;&#x9; */"/>
-          </eAnnotations>
-          <eGenericType eClassifier="/2/standard/Bag">
-            <eTypeArguments eClassifier="/2/standard/Object"/>
-          </eGenericType>
         </eOperations>
         <eOperations name="including">
           <eAnnotations source="kermeta">
@@ -3030,6 +3026,17 @@
             <eGenericType eTypeParameter="/2/standard/OrderedSet/G"/>
           </eParameters>
         </eOperations>
+        <eOperations name="addAt">
+          <eAnnotations source="kermeta" references="/2/standard/OrderedCollection/addAt">
+            <details key="body" value="do&#xA;&#x9;if self.contains(element).~not then&#xA;&#x9;&#x9;super(index, element)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides OrderedCollection&lt;G>.addAt(Integer, G)&#xD;&#xA;&#x9; * Adds element in the OrderedSet at rank index if the ordered set does&#xD;&#xA;&#x9; * not already contain the element, does nothing otherwise&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
+          </eAnnotations>
+          <eParameters name="index" eType="/2/standard/Integer"/>
+          <eParameters name="element">
+            <eGenericType eTypeParameter="/2/standard/OrderedSet/G"/>
+          </eParameters>
+        </eOperations>
         <eOperations name="insertAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.addAt(index, subject)&#xA;end"/>
@@ -3043,16 +3050,13 @@
             <eGenericType eTypeParameter="/2/standard/OrderedSet/G"/>
           </eParameters>
         </eOperations>
-        <eOperations name="addAt">
-          <eAnnotations source="kermeta" references="/2/standard/OrderedCollection/addAt">
-            <details key="body" value="do&#xA;&#x9;if self.contains(element).~not then&#xA;&#x9;&#x9;super(index, element)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides OrderedCollection&lt;G>.addAt(Integer, G)&#xD;&#xA;&#x9; * Adds element in the OrderedSet at rank index if the ordered set does&#xD;&#xA;&#x9; * not already contain the element, does nothing otherwise&#xD;&#xA;&#x9; */"/>
+        <eOperations name="equals" eType="/2/standard/Boolean">
+          <eAnnotations source="kermeta" references="/2/standard/OrderedCollection/equals">
+            <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * See OrderedCollection&lt;G>.equals(Object) &#xD;&#xA;&#x9; */"/>
             <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
           </eAnnotations>
-          <eParameters name="index" eType="/2/standard/Integer"/>
-          <eParameters name="element">
-            <eGenericType eTypeParameter="/2/standard/OrderedSet/G"/>
-          </eParameters>
+          <eParameters name="element" eType="/2/standard/Object"/>
         </eOperations>
         <eOperations name="preppend">
           <eAnnotations source="kermeta">
@@ -3065,14 +3069,6 @@
           <eParameters name="element">
             <eGenericType eTypeParameter="/2/standard/OrderedSet/G"/>
           </eParameters>
-        </eOperations>
-        <eOperations name="equals" eType="/2/standard/Boolean">
-          <eAnnotations source="kermeta" references="/2/standard/OrderedCollection/equals">
-            <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * See OrderedCollection&lt;G>.equals(Object) &#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
-          </eAnnotations>
-          <eParameters name="element" eType="/2/standard/Object"/>
         </eOperations>
         <eOperations name="at">
           <eAnnotations source="kermeta">
@@ -3145,14 +3141,6 @@
             <eGenericType eTypeParameter="/2/standard/Sequence/G"/>
           </eParameters>
         </eOperations>
-        <eOperations name="equals" eType="/2/standard/Boolean">
-          <eAnnotations source="kermeta" references="/2/standard/OrderedCollection/equals">
-            <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides OrderedCollection&lt;G>.equals(Object)&#xD;&#xA;&#x9; * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;&#x9; * current Sequence&#x9;&#xD;&#xA;&#x9; */"/>
-            <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
-          </eAnnotations>
-          <eParameters name="element" eType="/2/standard/Object"/>
-        </eOperations>
         <eOperations name="preppend">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;result.add(element)&#xA;&#x9;result.addAll(self)&#xA;end"/>
@@ -3164,6 +3152,14 @@
           <eParameters name="element">
             <eGenericType eTypeParameter="/2/standard/Sequence/G"/>
           </eParameters>
+        </eOperations>
+        <eOperations name="equals" eType="/2/standard/Boolean">
+          <eAnnotations source="kermeta" references="/2/standard/OrderedCollection/equals">
+            <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;&#x9; * Overrides OrderedCollection&lt;G>.equals(Object)&#xD;&#xA;&#x9; * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;&#x9; * current Sequence&#x9;&#xD;&#xA;&#x9; */"/>
+            <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
+          </eAnnotations>
+          <eParameters name="element" eType="/2/standard/Object"/>
         </eOperations>
         <eOperations name="at">
           <eAnnotations source="kermeta">

@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.58 2008-08-07 13:41:08 cfaucher Exp $
+ * $Id: resource.kmt,v 1.59 2008-08-18 07:33:21 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -103,7 +103,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	 */
 	//TODO: should raises an exception if the Resource is not already loaded
 	property readonly dependentResources : set Resource[0..*] getter is do
-		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.ResourceUtil.getDependentResources(this, uri, metaModelURI, \\\\\"EMF\\\\\")"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.ResourceUtil.getDependentResources(this, uri, metaModelURI, \"EMF\")"
 		result ?=
 			extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.getDependentResources(
 				self, uri, metaModelURI, "EMF"
@@ -251,7 +251,7 @@ class EMFResource inherits Resource
 	 */
 	operation saveAndValidateWithEMF() : Boolean is do
 		//FIXME CF 08-07-31 Why the extern has twice self as parameter ?
-		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.ResourceUtil.save(this, this.uri, metaModelURI, \\\\\"EMF\\\\\", this, true)"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.ResourceUtil.save(this, this.uri, metaModelURI, \"EMF\", this, true)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self, self.uri, metaModelURI, "EMF", self, true
 		)

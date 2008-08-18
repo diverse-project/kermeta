@@ -1,4 +1,4 @@
-/* $Id: KMT2KMExperessionBuilder.java,v 1.16 2008-07-08 13:16:28 ftanguy Exp $
+/* $Id: KMT2KMExperessionBuilder.java,v 1.17 2008-08-18 07:33:37 cfaucher Exp $
  * Created on 5 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -51,7 +51,17 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 	@Override
 	public boolean beginVisit(Tag tag) {
 		String qualifiedName = KermetaASTHelper.qualifiedIDAsString(((SqualifiedID)tag.getName()).getQualifiedID());
-		String value = tag.getVal().getText().replace("\"", "");
+		
+		String value = "";
+		
+		//The tag contains a protected String as "EMF"
+		if( tag.getVal().getText().contains("\\\"") ) {
+			value = tag.getVal().getText().replace("\\\"", "\"");
+			value = value.substring(1, value.length()-1);
+		} else {
+			value = tag.getVal().getText().replace("\"", "");
+		}
+		
 		fr.irisa.triskell.kermeta.language.structure.Tag t = KermetaModelHelper.Tag.create(qualifiedName, value);
 		if ( result != null )
 			result.getOwnedTags().add(t);
