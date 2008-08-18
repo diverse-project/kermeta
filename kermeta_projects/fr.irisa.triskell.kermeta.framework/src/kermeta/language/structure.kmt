@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.66 2008-08-07 13:41:08 cfaucher Exp $
+/* $Id: structure.kmt,v 1.67 2008-08-18 13:24:37 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -29,7 +29,7 @@ require "platform:/resource/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_
 using kermeta::standard
 using kermeta::exceptions
 
- @EMF_needProperty "name=oid classDefinitionQN=kermeta::standard::Integer"
+ @EMF_needProperty "name=oid javaClass=java.lang.Integer"
  @EMF_needProperty "name=container classDefinitionQN=kermeta::language::structure::Object"
 aspect class Object
 {
