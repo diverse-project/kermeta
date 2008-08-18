@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.4 2008-08-07 14:59:01 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.5 2008-08-18 07:37:00 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -21,7 +21,9 @@ using km2ecore::helper::kermeta
 using km2ecore::helper::java
 
 aspect class Expression {
-
+	
+	attribute beforeLambdaExpressionResult : String [0..1]
+	
 	method mustBeAssigned() : Boolean is do
 		result := false
 		
@@ -34,13 +36,49 @@ aspect class Expression {
 		end
 		
 		
-		if self.isInstanceOf(CallVariable) then
-			if self.asType(CallVariable).isFunctionTypeVariable() then
-				result := false
-			end
+		if self.isFunctionTypeVariable() then
+			result := false
 		end
 		
 		
+	end
+	
+	operation isFunctionTypeVariable() : Boolean is do
+		result := false
+		
+		if self.isInstanceOf(CallVariable) then
+			if self.asType(CallVariable).isFunctionTypeVariable() then
+				result := true
+			end
+		end
+	end
+	
+	/**
+	 * Check if the current element is at the end of an Expression, if so a ";" is added
+	 */
+	operation endOfExpressionFixer() : String is do
+		result := ""
+		
+		if not self.callsFunctionType() then
+		
+		if self.container.isInstanceOf(Conditional) or self.container.isInstanceOf(Loop) or self.container.isInstanceOf(Block) or self.container.isInstanceOf(Rescue) or self.container.isInstanceOf(Assignment) or self.container.isInstanceOf(VariableDecl) then
+			if self.container.isInstanceOf(Assignment) then
+				if self.container.asType(Assignment).target == self then
+					result := ""
+				else
+					if self.container.asType(Assignment).target.isCallFeatureAsStaticProperty() then
+						result := ""
+					else
+						result := ";"
+					end
+				end
+			else
+				result := ";"
+			end
+			
+		end
+		
+		end
 	end
 	
 }
@@ -48,7 +86,7 @@ aspect class Expression {
 
 aspect class CallVariable {
 
-	operation isFunctionTypeVariable() : Boolean is do
+	method isFunctionTypeVariable() : Boolean is do
 		result := false
 		var ftParam : Parameter init retrieveCorrespondingParameter()
 		if not ftParam.isVoid() then
@@ -129,17 +167,6 @@ aspect class CallFeature {
 			
 			if theLambdaExp.staticType.isInstanceOf(FunctionType) then
 				if theLambdaExp.staticType.asType(FunctionType).left.isInstanceOf(ProductType) then
-				
-					/*var type_ : Type init theLambdaExp.container.asType(CallFeature).containedType.detect{ ft | ft.isInstanceOf(FunctionType) }
-					
-					var ft_ : FunctionType init type_.asType(FunctionType)
-					
-					if not ft_.isVoid() then
-						if ft_.left.isInstanceOf(ProductType) then
-							context.ftProductTypeStack.push(ft_.left.asType(ProductType))
-						end
-					end*/
-				
 					context.ftProductTypeStack.push(theLambdaExp.staticType.asType(FunctionType).left.asType(ProductType))
 				end
 				
@@ -174,38 +201,17 @@ aspect class CallFeature {
 			end
 		end
 		
-		if callElement != "" or self.container.isInstanceOf(Assignment) then
+		if (callElement != "") or self.container.isInstanceOf(Assignment) then
 			ft_str := ft_str + "null;\n"
 		end
 		
-		ft_str := ft_str + "//Beginning of the Inlining of the function type: " + self.staticOperation.name + "\n"
+		ft_str := ft_str + context.SEPARATOR_STATEMENT_FT + "//Beginning of the Inlining of the function type: " + self.staticOperation.name + "\n"
 		
-		///////////////
 		context.ftSuffixActivation := false
 		var type_ftReturnType : String init self.staticType.createBehaviorJava(context)
-		//stdio.writeln("+++ type_ftReturnType +++ " + type_ftReturnType)
 		context.ftSuffixActivation := true
 		
-		/* NOT USED IF DESACTIVATION
-		if type_ftReturnType.split("<").size()>1 then
-			type_ftReturnType := type_ftReturnType.split("<").one()
-		end
-		
-		var tp_ftReturnType : String init ""
-		var i_t_ : Integer init 0
-		self.staticTypeVariableBindings.each{ t |
-			if i_t_==1 then
-				tp_ftReturnType := tp_ftReturnType + ", "
-			else
-				i_t_ := 1
-			end
-			tp_ftReturnType := tp_ftReturnType + t.createBehaviorJava(context)
-		}
-		if tp_ftReturnType!="" then
-			tp_ftReturnType := "<" + tp_ftReturnType + ">"
-		end*/
-		context.ftReturnType := type_ftReturnType/* + tp_ftReturnType*/
-		///////////////
+		context.ftReturnType := type_ftReturnType
 		
 		ft_str := ft_str + self.staticOperation.createBehaviorJava(context)
 		
@@ -214,15 +220,16 @@ aspect class CallFeature {
 			ft_str := ft_str + callElement + " = result" + context.getFtSuffix() + ";\n"
 		end
 		
-		if callElement == "" and (not Operation.new().isVoidType(self.staticType.getTypeName())) then
+		if (callElement == "") and (not Operation.new().isVoidType(self.staticType.getTypeName())) then
 			//ft_str := ft_str + self.staticType.createBehaviorJava(context) + " res_res = result" + context.getFtSuffix() + ";\n"
 			//context.ftContextualSelf := "result" + context.getFtSuffix()
 			
 			context.resultOfLastFt := "result" + context.getFtSuffix()
 		end
 		
-		ft_str := ft_str + "//Ending of the Inlining of the function type: " + self.staticOperation.name + "\n"
+		ft_str := ft_str + "//End of the Inlining of the function type: " + self.staticOperation.name + "\n"
 		
+		//Pop all the stacks related to the function type compilation
 		context.ftSuffixActivation := false
 		context.ftMapTypeStack.pop()
 		context.ftProductTypeStack.pop()
@@ -257,124 +264,4 @@ aspect class CallFeature {
 		end
 	end
 
-	/**
-	 * Unused and it should be removed
-	 */
-	operation getPP(tgt : Expression, fName : String, context : KM2EcoreContext) : String is do
-		result := ""
-		
-		var isBoolean : Boolean init tgt.staticType.isBooleanTypeDef(context)
-		var isNumeric : Boolean init tgt.staticType.isNumericalTypeDef(context)
-		
-		if(fName == "not" and isBoolean) then
-				result := result + "! ("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ")"
-			
-			else if (fName == "and" and isBoolean) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") && ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if (fName == "or" and isBoolean) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") || ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if (fName == "plus" and isNumeric) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") + ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if(fName == "minus" and isNumeric) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") - ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if(fName == "mult" and isNumeric) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") * ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if(fName == "div" and isNumeric) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") / ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if(fName == "isGreater" and isNumeric) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") > ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if(fName == "isLower" and isNumeric) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") < ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if(fName == "isGreaterOrEqual" and isNumeric) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") >= ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if(fName == "isLowerOrEqual" and isNumeric) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") <= ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if(fName == "equals" and (isBoolean or isNumeric)) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") == ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-			else if(fName == "isNotEqual" and (isBoolean or isNumeric)) then
-				result := result + "("
-				result := result + tgt.createBehaviorJava(context)
-				result := result + ") != ("
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context)
-				result := result + ")"
-			
-		
-			else
-				var ppParam : String init ""
-				if tgt.isInstanceOf(CallFeature) then
-					ppParam := "(" + CompilerHelperJava.new.ppComaSeparatedNodes(tgt.asType(CallExpression).parameters, context) + ")"
-				end
-				result := result + tgt.createBehaviorJava(context) + ppParam + "."
-			
-			end
-			end
-			end
-			end
-			end
-			end
-			end
-			end
-			end
-			end
-			end
-			end
-			end
-	end
 }

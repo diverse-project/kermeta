@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.11 2008-08-07 14:59:01 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.12 2008-08-18 07:37:00 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -9,6 +9,7 @@ package km2ecore::helper::kermeta;
 
 require kermeta
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/KermetaHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/java/JavaHelper.kmt"
 
 using kermeta::language::structure
@@ -89,24 +90,52 @@ class CompilerHelperJava {
 		result := ""
 
 		var i : Integer init 0
-		expressions.each{ e |		
+		expressions.each{ e |
 			if i==1 then
 				result := result + ", "
 			else
 				i := 1
 			end
 			
-			var tmp : String init e.createBehaviorJava(context)
+			var str_param : String init ""
 			
-			if (not context.current_valueType.isVoid()) and (tmp == "this") then
-				tmp := "self"
+			if not e.isFunctionTypeVariable() then
+				
+				str_param := e.createBehaviorJava(context)
+				
+				if (not context.current_valueType.isVoid()) and (str_param == "this") then
+					str_param := "self"
+				end
+				
+				if (e.staticType.getTypeQName == "kermeta::language::structure::Class") or (e.staticType.getTypeQName == "kermeta::language::structure::Type") then
+					str_param := "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"" + str_param + "\")"
+				end
+			
+			else
+			
+				var type_label : String init ""
+				var theLambdaExp : LambdaExpression init context.ftStack.peek()
+				if e.container.isInstanceOf(CallFeature) and theLambdaExp.staticType.isInstanceOf(FunctionType) then
+					var lambdaExp_returnType : String init theLambdaExp.staticType.asType(FunctionType).right.createBehaviorJava(context)
+					if not Operation.new().isVoidType(lambdaExp_returnType) then
+						type_label := lambdaExp_returnType
+					end
+				end
+				if type_label!="" then					
+					context.resultLastStatementStack.push("result_lambda = " + "%%type%%" + type_label)
+
+					e.container.asType(Expression).beforeLambdaExpressionResult := e.container.asType(Expression).beforeLambdaExpressionResult + "\n" + type_label + " result_lambda = null;\n"
+						+ e.createBehaviorJava(context)
+					str_param := "result_lambda"
+				
+					context.resultLastStatementStack.pop()
+				else
+					str_param := e.createBehaviorJava(context)
+				end
+				
 			end
 			
-			if (e.staticType.getTypeQName == "kermeta::language::structure::Class") or (e.staticType.getTypeQName == "kermeta::language::structure::Type") then
-				tmp := "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"" + tmp + "\")"
-			end
-			
-			result := result + tmp
+			result := result + str_param
 		}
 	end
 }

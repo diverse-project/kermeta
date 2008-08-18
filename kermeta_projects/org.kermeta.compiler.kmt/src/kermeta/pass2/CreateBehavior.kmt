@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.39 2008-08-07 14:59:02 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.40 2008-08-18 07:37:00 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -378,34 +378,7 @@ package behavior {
 			//This method must be returned nothing
 			result := ""
 		end
-		
-		/**
-		 * Check if the current element is at the end of an Expression
-		 */
-		operation endOfExpressionFixer() : String is do
-			result := ""
-			
-			if not self.callsFunctionType() then
-			
-			if self.container.isInstanceOf(Conditional) or self.container.isInstanceOf(Loop) or self.container.isInstanceOf(Block) or self.container.isInstanceOf(Rescue) or self.container.isInstanceOf(Assignment) or self.container.isInstanceOf(VariableDecl) then
-				if self.container.isInstanceOf(Assignment) then
-					if self.container.asType(Assignment).target == self then
-						result := ""
-					else
-						if self.container.asType(Assignment).target.isCallFeatureAsStaticProperty() then
-							result := ""
-						else
-							result := ";"
-						end
-					end
-				else
-					result := ";"
-				end
-				
-			end
-			
-			end
-		end
+
 	}
 	
 	/** Complete */
@@ -437,12 +410,28 @@ package behavior {
 			var i_stm : Integer init 0
 			self.eachOwnedElement{ stm |
 				
+				var str_statement : String init stm.createBehaviorJava(context)
+				
+				if str_statement.split(context.SEPARATOR_STATEMENT_FT).size() == 2 then
+					var s1 : String init str_statement.split(context.SEPARATOR_STATEMENT_FT).one()
+					var s2 : String init str_statement.split(context.SEPARATOR_STATEMENT_FT).last()
+					
+					if s2.contains(context.PREVIOUS_STATEMENT_FT) then
+						str_statement := s2.replace(context.PREVIOUS_STATEMENT_FT, s1)
+					end
+
+				end
+				
+				str_statement := str_statement.replace(context.SEPARATOR_STATEMENT_FT, "")
+				
+				javaCode.append(context.beforeLambdaExpressionResult)
+				//javaCode.append(context.beforeFunctionTypeResult)
+				context.beforeLambdaExpressionResult := ""
+				//context.beforeFunctionTypeResult := ""
+				
 				javaCode.append("\n\t")
 				
-				/*if not stm.mustBeAssigned() then
-					context.pushResultLastStatementStack()
-					javaCode.append(stm.asType(Expression).staticType.createBehaviorJava(context) + " " + context.getResultLastStatementId() + " = null;\n")
-				end*/
+				
 				
 				//if the given statement is the last one
 				if i_stm == (nbrStm-1) then
@@ -483,15 +472,7 @@ package behavior {
 					end
 				end
 				
-				javaCode.append(stm.createBehaviorJava(context))
-				
-				/*if stm.isInstanceOf(Assignment) then //not stm.mustBeAssigned() then
-					var str_right : String init context.getResultLastStatementId()
-					
-					context.popResultLastStatementStack()
-					
-					javaCode.append(context.getResultLastStatementId() + " = " + str_right + ";\n")
-				end*/
+				javaCode.append(str_statement)
 				
 				javaCode.append("\n")
 				
@@ -659,7 +640,7 @@ package behavior {
 							//eg: self.select{...}.size() =>compilation of the FT + result_ft1.size();
 							if self.container.isInstanceOf(CallExpression) and (not self.container.callsFunctionType()) then
 								//result := result + "self.container: " + self.container.toString + " - " + tgt.toString + " - "
-								result := result + context.RETURN_EXPRESSION_TO_REPLACE + context.resultOfLastFt
+								result := result + context.PREVIOUS_STATEMENT_FT + context.RETURN_EXPRESSION_TO_REPLACE + context.resultOfLastFt
 							end
 						end
 					else
@@ -723,11 +704,17 @@ package behavior {
 								end
 							end
 						else
-							/*if result.contains(context.RETURN_EXPRESSION_TO_REPLACE) then
+							//added 08-08-10
+							if result.contains(context.RETURN_EXPRESSION_TO_REPLACE) then
+								//added 08-08-10
 								result := result.replace(context.RETURN_EXPRESSION_TO_REPLACE, static_call + "(")
-							else*/
+//context.beforeFunctionTypeResult := result.replace(context.RETURN_EXPRESSION_TO_REPLACE, static_call + "(")
+//result := ""
+							//added 08-08-10
+							else
 								result := static_call + "(" + result
-							//end
+							//added 08-08-10
+							end
 							if ppCast then
 								result :=  "(" + result
 							end
@@ -744,7 +731,11 @@ package behavior {
 								result := result + ", "
 							end
 						end
+						
+						self.beforeLambdaExpressionResult := ""
 						result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
+						context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
+						self.beforeLambdaExpressionResult := ""
 						
 						if ppCast then
 							result := result + ")"
@@ -800,16 +791,32 @@ package behavior {
 				}
 				
 				//Add the compiled version of the body of the current LambdaExpression
-				result := result + "//Beginning of the Inlining of the function type parameter: " + self.name + "\n"
-				result := result + str_toInclude + theLambdaExp.body.createBehaviorJava(context)
-				result := result + "//Ending of the Inlining of the function type parameter: " + self.name + "\n"
 				
-				if theLambdaExp.staticType.isInstanceOf(FunctionType) then
+				//added 08-08-09
+				/*var type_label : String init ""
+				if self.container.isInstanceOf(CallFeature) and theLambdaExp.staticType.isInstanceOf(FunctionType) then
 					var lambdaExp_returnType : String init theLambdaExp.staticType.asType(FunctionType).right.createBehaviorJava(context)
 					if not Operation.new().isVoidType(lambdaExp_returnType) then
-						//context.popResultLastStatementStack()
+						type_label := lambdaExp_returnType
 					end
 				end
+				if type_label!="" then
+					result := result + "\n" + type_label + " result_lambda = null;"
+					context.resultLastStatementStack.push("result_lambda = " + "%%type%%" + type_label)
+				end*/
+				
+				result := result + "//Beginning of the Inlining of the lambda expression: " + self.name + "\n"
+				result := result + str_toInclude + theLambdaExp.body.createBehaviorJava(context)
+				
+				//added 08-08-09
+				/*if type_label!="" then
+					result := result + context.getResultLastStatementId()
+					context.resultLastStatementStack.pop()
+				end*/
+				
+				result := result + "//End of the Inlining of the lambda expression: " + self.name + "\n"
+				
+				
 				
 				context.ftSuffixActivation := true
 				
@@ -844,6 +851,7 @@ package behavior {
 		end
 	}
 	
+	/** Complete */
 	aspect class CallSuperOperation {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 		
@@ -851,22 +859,20 @@ package behavior {
 			
 			var owningOperation : Operation init self.getContainerAsType(Operation).asType(Operation)
 			
-			var fromOperation : String init owningOperation .superOperation.container.asType(ClassDefinition).qualifiedName.replace("::", ".")
+			var fromOperation : String init owningOperation.superOperation.container.asType(ClassDefinition).qualifiedName.replace("::", ".")
 			//FIXME: Perhaps, we should fix the type parameters of the class definition
 			
-			result := "((" + fromOperation + ") this)." + owningOperation.name + "("
+			result := "//Call of the super operation\n"
+			result := result + "((" + fromOperation + ") this)." + owningOperation.name + "("
 			
-			var i : Integer init 0
-			self.parameters.each{ param |
-				if i==1 then
-					result := result + ", "
-				else
-					i := 1
-				end
-				result := result + param.createBehaviorJava(context)
-			}
+			self.beforeLambdaExpressionResult := ""
 			
-			result := result + ");"
+			result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
+			
+			context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
+			self.beforeLambdaExpressionResult := ""
+			
+			result := result + self.endOfExpressionFixer()
 		end
 	}
 	//**** End **** Managing of the CallExpression branch ****//
@@ -949,7 +955,6 @@ package behavior {
 					result := right
 				else
 					if right.contains(context.RETURN_EXPRESSION_TO_REPLACE) then
-						stdio.writeln("Yep")
 						result := right.replace(context.RETURN_EXPRESSION_TO_REPLACE, left + " = " + ppCast)
 					else
 						result := left + " = " + ppCast + right
@@ -1171,7 +1176,12 @@ package behavior {
 				else
 					result := self.jclass.replace("::", ".") + "." + IdentifierHelper.new.getMangledIdentifier(self.jmethod, context)
 				end
+				
+				self.beforeLambdaExpressionResult := ""
 				result := result + "(" + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
+				context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
+				self.beforeLambdaExpressionResult := ""
+			
 			end
 			
 			result := result + self.endOfExpressionFixer()

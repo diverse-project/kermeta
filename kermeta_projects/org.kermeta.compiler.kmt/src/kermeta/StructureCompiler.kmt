@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.41 2008-08-07 14:59:02 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.42 2008-08-18 07:37:00 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -198,11 +198,11 @@ class Main {
 		
 		context.mode := mode
 		
-		stdio.writeln(modelInput + "\n")
+		stdio.writeln("Input model: " + modelInput + "\n")
 		
 		context.mu.getAllPackages().each{ p |
 			
-			stdio.writeln(p.asType(Package).name)
+			//stdio.writeln(p.asType(Package).name)
 			
 			p.asType(Package).eachOwnedElement{ cd |
 				if cd.isInstanceOf(ClassDefinition) then
@@ -220,9 +220,11 @@ class Main {
 							or op.asType(Operation).name == "flatten"
 							op.asType(Operation).name == "addAllTestCasesFrom"
 							or op.asType(Operation).name == "count"
-							or*/ op.asType(Operation).name == "createResource" then
+							or op.asType(Operation).name == "addAt"
+							or op.asType(Operation).name == "createResource"
+							or*/ op.asType(Operation).name == "saveAndValidateWithEMF" then
 					
-							stdio.writeln("================= " + cd.asType(ClassDefinition).name + " - " + op.asType(Operation).name + " =================")
+							stdio.writeln("================= " + op.asType(Operation).qualifiedName + " =================")
 							var javaSourceCode : String init op.createBehaviorJava(context)
 							stdio.writeln(javaSourceCode)
 						
@@ -235,7 +237,7 @@ class Main {
 			
 		}
 				
-		stdio.writeln("\nFinish")
+		stdio.writeln("\nFinish, warning: this exec mode has not filtered the FunctionTypes.")
 		
     end
    	
