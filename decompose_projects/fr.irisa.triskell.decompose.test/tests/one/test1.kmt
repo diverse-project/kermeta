@@ -1,4 +1,4 @@
-/* $Id: test1.kmt,v 1.2 2008-08-17 19:38:52 fmunoz Exp $ 
+/* $Id: test1.kmt,v 1.3 2008-08-18 11:32:03 fmunoz Exp $ 
  * Creation : August 14, 2008
  * Licence  : EPL 
  * Copyright:
@@ -27,8 +27,9 @@ class Main
 {
 	operation main() : Void is do 
 		var toLoad:String toLoad:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/initialA.ecore"
-		var toSaveLeft:String toSaveLeft:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/left.ecore"
-		var toSaveRight:String toSaveRight:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/right.ecore"
+		var toSaveLeft:String toSaveLeft:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/left"
+		var toSaveRight:String toSaveRight:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/right"
+		var extentionToSave:String extentionToSave:=".ecore"
 		var decomposer:EcoreDecomposer init EcoreDecomposer.new
 		
 		var oriModel:Mergeable oriModel?=decomposer.loadModel(toLoad)
@@ -49,11 +50,19 @@ class Main
 		//start the random decomposition
 		decomposer.start()
 		//save the decomposition result
+		var numeral:Integer init 0
 		if decomposer.left !=void then
-			decomposer.saveModel(decomposer.left,toSaveLeft)
+			decomposer.left.each{l|
+				decomposer.saveModel(l,toSaveLeft+numeral.toString+extentionToSave)
+				numeral:=numeral+1
+			}
 		end
+		numeral:=0
 		if decomposer.right !=void then
-			decomposer.saveModel(decomposer.right,toSaveRight)
+			decomposer.right.each{r|
+				decomposer.saveModel(r,toSaveRight+numeral.toString+extentionToSave)
+				numeral:=numeral+1
+			}
 		end
 	end
 }

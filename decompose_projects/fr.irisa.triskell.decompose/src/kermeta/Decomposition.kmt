@@ -1,4 +1,4 @@
-/* $Id: Decomposition.kmt,v 1.5 2008-08-17 20:37:11 fmunoz Exp $ 
+/* $Id: Decomposition.kmt,v 1.6 2008-08-18 11:32:14 fmunoz Exp $ 
  * Creation : August 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -101,6 +101,18 @@ class Decomposer {
 	operation decompose(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*],direction:Boolean):Void is do	
 			stdio.writeln("processing element: "+element.toString)
 			
+			if self.numeral == 0 then
+				self.clone(parent,element,iproperty)
+			else
+				if self.numeral.mod(2) == 0 then
+					self.clone(parent,element,iproperty)
+				else
+					direction:=false
+					self.side(parent,element,iproperty,direction)
+				end
+			end
+			self.numeral:=self.numeral+1
+			/*
 			if element.getMetaClass().toString == "EClass" then
 					direction:=false
 					if self.numeral == 1 then
@@ -120,13 +132,10 @@ class Decomposer {
 							end
 						end
 					end
-					//self.clone(parent,element,iproperty)
-					//direction:=true
-					//self.side(parent,element,iproperty,direction)
 					self.numeral:=self.numeral+1
 			else
 				self.clone(parent,element,iproperty)
-			end
+			end*/
 	end
 	
 	operation clone(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*]):Void is do
@@ -285,8 +294,8 @@ class Decomposer {
 					end 
 				}
 				if parent==void then
-					self.left:=left
-					self.right:=right
+					self.left.add(left)
+					self.right.add(right)
 				else
 					iproperty.select{p|p!=void}.each{p|
 						if p.upper == 1 then
@@ -423,9 +432,9 @@ class Decomposer {
 			}	
 			if parent==void then
 				if direction then
-					self.right:=newElement
+					self.right.add(newElement)
 				else
-					self.left:=newElement
+					self.left.add(newElement)
 				end
 			else
 				iproperty.select{p|p!=void}.each{p|
