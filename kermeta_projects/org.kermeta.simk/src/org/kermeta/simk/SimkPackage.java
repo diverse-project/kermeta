@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackage.java,v 1.6 2008-08-18 09:20:20 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.7 2008-08-18 13:06:15 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackage.java,v 1.6 2008-08-18 09:20:20 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.7 2008-08-18 13:06:15 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -204,7 +204,7 @@ public interface SimkPackage extends EPackage {
 	int STATIC_METHOD__BODY = SM_NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Usages</b></em>' attribute list.
+	 * The feature id for the '<em><b>Usages</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -378,7 +378,7 @@ public interface SimkPackage extends EPackage {
 	int SM_CLASS__SM_PACKAGE = SM_NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Usages</b></em>' attribute list.
+	 * The feature id for the '<em><b>Usages</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -597,10 +597,10 @@ public interface SimkPackage extends EPackage {
 	EAttribute getStaticMethod_Body();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.kermeta.simk.StaticMethod#getUsages <em>Usages</em>}'.
+	 * Returns the meta object for the attribute '{@link org.kermeta.simk.StaticMethod#getUsages <em>Usages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Usages</em>'.
+	 * @return the meta object for the attribute '<em>Usages</em>'.
 	 * @see org.kermeta.simk.StaticMethod#getUsages()
 	 * @see #getStaticMethod()
 	 * @generated
@@ -748,10 +748,10 @@ public interface SimkPackage extends EPackage {
 	EReference getSMClass_SMPackage();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.kermeta.simk.SMClass#getUsages <em>Usages</em>}'.
+	 * Returns the meta object for the attribute '{@link org.kermeta.simk.SMClass#getUsages <em>Usages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Usages</em>'.
+	 * @return the meta object for the attribute '<em>Usages</em>'.
 	 * @see org.kermeta.simk.SMClass#getUsages()
 	 * @see #getSMClass()
 	 * @generated
@@ -929,7 +929,7 @@ public interface SimkPackage extends EPackage {
 		EAttribute STATIC_METHOD__BODY = eINSTANCE.getStaticMethod_Body();
 
 		/**
-		 * The meta object literal for the '<em><b>Usages</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Usages</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1047,7 +1047,7 @@ public interface SimkPackage extends EPackage {
 		EReference SM_CLASS__SM_PACKAGE = eINSTANCE.getSMClass_SMPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Usages</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Usages</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

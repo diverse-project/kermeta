@@ -28,8 +28,7 @@
         eOpposite="#//SMContext/staticMethods"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="usages" upperBound="-1"
-        eType="#//SMUsage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="usages" eType="#//SMUsage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentMethod" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentReference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentAttribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
@@ -74,8 +73,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMPackage" eType="#//SMPackage"
         eOpposite="#//SMPackage/sMClass"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="usages" upperBound="-1"
-        eType="#//SMUsage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="usages" eType="#//SMUsage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SMNamedElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

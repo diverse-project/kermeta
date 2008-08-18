@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethod.java,v 1.4 2008-01-11 14:28:08 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.5 2008-08-18 13:06:15 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethod.java,v 1.4 2008-01-11 14:28:08 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.5 2008-08-18 13:06:15 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -165,8 +165,7 @@ public interface StaticMethod extends SMNamedElement {
 	void setBody(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Usages</b></em>' attribute list.
-	 * The list contents are of type {@link org.kermeta.simk.SMUsage}.
+	 * Returns the value of the '<em><b>Usages</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.kermeta.simk.SMUsage}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -174,13 +173,25 @@ public interface StaticMethod extends SMNamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Usages</em>' attribute list.
+	 * @return the value of the '<em>Usages</em>' attribute.
 	 * @see org.kermeta.simk.SMUsage
+	 * @see #setUsages(SMUsage)
 	 * @see org.kermeta.simk.SimkPackage#getStaticMethod_Usages()
 	 * @model
 	 * @generated
 	 */
-	EList<SMUsage> getUsages();
+	SMUsage getUsages();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.simk.StaticMethod#getUsages <em>Usages</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Usages</em>' attribute.
+	 * @see org.kermeta.simk.SMUsage
+	 * @see #getUsages()
+	 * @generated
+	 */
+	void setUsages(SMUsage value);
 
 	/**
 	 * Returns the value of the '<em><b>Parent Method</b></em>' reference.
