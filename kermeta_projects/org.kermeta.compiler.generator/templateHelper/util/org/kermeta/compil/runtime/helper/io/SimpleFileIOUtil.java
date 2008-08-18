@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIOUtil.java,v 1.1 2008-08-01 18:29:17 cfaucher Exp $
+/* $Id: SimpleFileIOUtil.java,v 1.2 2008-08-18 08:49:06 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -29,33 +29,29 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 
 
 public class SimpleFileIOUtil {
 	
-	public static java.lang.Boolean fileExists(java.lang.String filename)
-    {
+	public static java.lang.Boolean fileExists(java.lang.String filename) {
 		java.lang.String fname = getOSFileLocation(filename);
 		File file = new File(fname);
 		return file.exists();
     }
 	
-	public static java.lang.Boolean fileIsDirectory(java.lang.String filename)
-    {
+	public static java.lang.Boolean fileIsDirectory(java.lang.String filename) {
 		java.lang.String fname = getOSFileLocation(filename);
 		File file = new File(fname);
 		return file.isDirectory();
     }
 	
 	
-	public static void writeTextFile(java.lang.String filename, java.lang.String text)
-    {
+	public static void writeTextFile(java.lang.String filename, java.lang.String text) {
 		
-        try
-        {
+        try {
         	/*
         	 * Getting the directory        	 
         	 */
@@ -101,8 +97,7 @@ public class SimpleFileIOUtil {
         }
     }
 
-    public static java.lang.String readTextFile(java.lang.String filename)
-    {
+    public static java.lang.String readTextFile(java.lang.String filename) {
         BufferedReader br = null;
         StringBuilder builder = new StringBuilder();
         java.lang.String ligne;
@@ -132,33 +127,26 @@ public class SimpleFileIOUtil {
     	// FIXME CF Here we did the assumption that the path is absolute (towards the Eclipse workspace) !
     	// We should here recalculate the path of the file if filePath is a relative path !
     	java.lang.String filePath = cleanIfNecessaryPath(fileEclipsePath);
-
-    	//IPath wkspace_path = ResourcesPlugin.getWorkspace().getRoot().getLocation();
-    	//filePath = wkspace_path.toString() + filePath;
-    	
-    	//convert windows delimiter into /
-    	filePath = filePath.replaceAll("\\\\", "/");
     	
     	return filePath;
     }
     
     /**
-     * Ugly patch
+     * Patch from the plugin fr.irisa.triskell.eclipse.util
      * 
      * @param resourcePath
      * @return
      */
-	static private java.lang.String cleanIfNecessaryPath(java.lang.String resourcePath) {
+	 private static java.lang.String cleanIfNecessaryPath(java.lang.String resourcePath) {
 		// deal with windows \\ delimiter
 		java.lang.String unifiedSepratorResourcePath = resourcePath.replaceAll("\\\\", "/");
 		
 		java.lang.String cleanPath = unifiedSepratorResourcePath;
 		if ( unifiedSepratorResourcePath.matches("platform:/resource.*") ) {
 			URI uri = URI.createURI(unifiedSepratorResourcePath);
-			URIConverter converter = new URIConverterImpl();
+			URIConverter converter = new ExtensibleURIConverterImpl();
 			uri = converter.normalize(uri);
 			cleanPath = uri.toString();
-			//cleanPath = ResourceHelper.root.getLocation().toString() + URIHelper.getPathFromPlatformURI(resourcePath);
 		}
 		return cleanPath;
 	}
