@@ -8,32 +8,32 @@ import kermeta.standard.StandardFactory;
 
 import org.eclipse.emf.common.util.EList;
 
-public class CollectionUtil {
+public class CollectionUtil<G> {
 
-	static public void add(Collection c, Object o) {
+	static public <G> void add(Collection<G> c, Object o) {
 		try {
-			c.getValues().add(o);
+			c.getValues().add((G) o);
 		} catch (NullPointerException e) {
-			c.setValues( new ArrayList() );
+			c.setValues( new ArrayList<G>() );
 		}
 	}
 	
-	static public void remove(Collection c, Object o) {
+	static public <G> void remove(Collection<G> c, Object o) {
 		try {
 			c.getValues().remove(o);
 		} catch (NullPointerException e) {
 		}
 	}
 	
-	static public void clear(Collection c) {
+	static public <G> void clear(Collection<G> c) {
 		try {
 			c.getValues().clear();
 		} catch (NullPointerException e) {
-			c.setValues( new ArrayList() );
+			c.setValues( new ArrayList<G>() );
 		}
 	}
 	
-	static public int size(Collection c) {
+	static public <G> int size(Collection<G> c) {
 		try {
 			return c.getValues().size();
 		} catch (NullPointerException e) {
@@ -41,7 +41,7 @@ public class CollectionUtil {
 		}
 	}
 	
-	static public void iterator(Collection c, Iterator i) {
+	static public <G> void iterator(Collection<G> c, Iterator<G> i) {
 		i.setKermetaCollection( c );
 	}
 	
@@ -57,19 +57,19 @@ public class CollectionUtil {
 		return newBag;
 	}
 	
-	public static <G> kermeta.standard.Set<G> convertAsSet(EList l) {
+	public static <G> kermeta.standard.Set<G> convertAsSet(EList<G> l) {
 		kermeta.standard.Set<G> newSet = StandardFactory.eINSTANCE.createSet();
 		newSet.getValues().addAll(l);
 		return newSet;
 	}
 	
-	public static <G> kermeta.standard.OrderedSet<G> convertAsOrderedSet(EList l) {
+	public static <G> kermeta.standard.OrderedSet<G> convertAsOrderedSet(EList<G> l) {
 		kermeta.standard.OrderedSet<G> newOrderedSet = StandardFactory.eINSTANCE.createOrderedSet();
 		newOrderedSet.getValues().addAll(l);
 		return newOrderedSet;
 	}
 	
-	public static <G> kermeta.standard.Sequence<G> convertAsSequence(EList l) {
+	public static <G> kermeta.standard.Sequence<G> convertAsSequence(EList<G> l) {
 		kermeta.standard.Sequence<G> newSequence = StandardFactory.eINSTANCE.createSequence();
 		newSequence.getValues().addAll(l);
 		return newSequence;
