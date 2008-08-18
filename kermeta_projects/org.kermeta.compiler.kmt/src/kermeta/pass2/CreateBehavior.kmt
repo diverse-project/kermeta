@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.40 2008-08-18 07:37:00 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.41 2008-08-18 12:58:35 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -154,7 +154,7 @@ package structure {
 		 */
 		operation compilingInSimkMode(context : KM2EcoreContext) : Void is do
 			
-			var sMContext : SMContext init context.simkModel.retrieveOrCreateContext(self, context)
+			var sMContext : SMContext init context.simkModel.retrieveOrCreateContextForWrapper(self, context)
 			
 			if not sMContext.isVoid() then
 			
@@ -164,6 +164,7 @@ package structure {
 				sMContext.staticMethods.add(staticMethod)
 				
 				staticMethod.name := self.name
+				staticMethod.setWrapperUsage()
 				
 				//By default, a self parameter has been added
 				var self_param : SMParameter init SMParameter.new()

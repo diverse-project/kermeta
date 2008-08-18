@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.2 2008-07-23 08:22:13 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.3 2008-08-18 12:58:35 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -18,19 +18,33 @@ using km2ecore
 
 aspect class SIMKModel {
 
-	operation retrieveOrCreateContext(op : Operation, context : KM2EcoreContext) : SMContext is do
+	operation retrieveOrCreateContext(class_qname : String, context : KM2EcoreContext) : SMContext is do
 		result := void
+		
 		//FIXME CF to add the management of package and the usage
 		var sMContext : SMContext init self.sMContexts.detect{ c |
-			c.sMClass.name == (context.current_valueType.name + "Wrapper")
+			c.sMClass.name == class_qname
 		}
 		if sMContext.isVoid() then
 			sMContext := SMContext.new()
 			self.sMContexts.add(sMContext)
-			
+		end
+		
+		result := sMContext
+		
+	end
+
+	operation retrieveOrCreateContextForWrapper(op : Operation, context : KM2EcoreContext) : SMContext is do
+		result := void
+		
+		//FIXME CF to add the management of package and the usage
+		var sMContext : SMContext init retrieveOrCreateContext(context.current_valueType.name + "Wrapper", context)
+		
+		if sMContext.sMClass.isVoid() then
 			var sMClass : SMClass init SMClass.new()
 			sMContext.sMClass := sMClass
 			sMClass.name := context.current_valueType.name + "Wrapper"
+			sMClass.setWrapperUsage()
 		end
 		
 		var sm : StaticMethod init sMContext.staticMethods.detect{ o |
@@ -41,4 +55,16 @@ aspect class SIMKModel {
 		end
 	end
 	
+}
+
+aspect class SMClass {
+	operation setWrapperUsage() : Void is do
+		self.usages.add(SMUsage.Wrapper)
+	end
+}
+
+aspect class StaticMethod {
+	operation setWrapperUsage() : Void is do
+		self.usages.add(SMUsage.Wrapper)
+	end
 }
