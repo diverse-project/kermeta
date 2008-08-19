@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.3 2008-08-18 12:58:35 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.4 2008-08-19 12:57:15 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -59,12 +59,12 @@ aspect class SIMKModel {
 
 aspect class SMClass {
 	operation setWrapperUsage() : Void is do
-		self.usages.add(SMUsage.Wrapper)
+		self.usages := SMUsage.Wrapper//.add(SMUsage.Wrapper)
 	end
 }
 
 aspect class StaticMethod {
 	operation setWrapperUsage() : Void is do
-		self.usages.add(SMUsage.Wrapper)
+		self.usages := SMUsage.Wrapper//.add(SMUsage.Wrapper)
 	end
 }
