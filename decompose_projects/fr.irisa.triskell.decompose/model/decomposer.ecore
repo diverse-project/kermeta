@@ -14,10 +14,6 @@
         eType="ecore:EClass ../../org.kermeta.kompose.model/model/kompose.ecore#//Mergeable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="original" lowerBound="1"
         eType="ecore:EClass ../../org.kermeta.kompose.model/model/kompose.ecore#//Mergeable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="processed" upperBound="-1"
-        eType="ecore:EClass ../../org.kermeta.kompose.model/model/kompose.ecore#//Mergeable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="toProcess" upperBound="-1"
-        eType="ecore:EClass ../../org.kermeta.kompose.model/model/kompose.ecore#//Mergeable"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dependants" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

@@ -1,4 +1,4 @@
-/* $Id: Decomposition.kmt,v 1.6 2008-08-18 11:32:14 fmunoz Exp $ 
+/* $Id: Decomposition.kmt,v 1.7 2008-08-19 10:52:47 fmunoz Exp $ 
  * Creation : August 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -26,28 +26,159 @@ using decomposition
 class Decomposer {
 
 	
-	attribute currentLeft:Mergeable
-	attribute currentRight:Mergeable
 	attribute objectIndex:String[0..*]
-	attribute mapper:Hashtable<String,TriContainer> 
-	reference newMapper:Hashtable<String,Mergeable>
+	
+	
 	reference resource:kermeta::persistence::EMFResource 
-	attribute upperProperty:Hashtable<Mergeable,Property>
 	attribute numeral:Integer
+	
+	attribute decompositionPlans:DecompositionPlan[0..*]
+	reference currentPlan:DecompositionPlan
 	
 	operation initialize(initial:Mergeable) is do
 		self.original:=initial
-		self.upperProperty:=Hashtable<Mergeable,Property>.new
-		self.mapper:=Hashtable<String,TriContainer>.new
-		self.newMapper:=Hashtable<String,Mergeable>.new
 		self.numeral:=0
 	end
 	
 	operation start():Void is do
-		self.toProcess.add(self.original)
 		self.indexate(self.original)
-		self.decompose(void,original,void,true)
+		self.createPlans()
+		self.decompositionPlans.each{plan|
+			self.currentPlan:=plan
+			self.decompose(void,original,void,true)
+		}
+	end
+	
+	
+	operation createPlans():Void is do
+		var plan:DecompositionPlan plan:=DecompositionPlan.new
+		plan.initialize()
+		self.decompositionPlans.add(plan)
+		calculateRecursivePlan(plan,self.original,void,OperationType.CLONE,void,"")
+	end
+	
+	
+	operation clonePlan(plan:DecompositionPlan): DecompositionPlan is do
+		var newPlan:DecompositionPlan newPlan:=DecompositionPlan.new
+		newPlan.initialize()
+		plan.atomicPlans.values.each{aplan|
+			var atomNew:AtomicPlanPart atomNew:=AtomicPlanPart.new
+			atomNew.element:=aplan.element
+			atomNew.operationType:=aplan.operationType
+			atomNew.side:=aplan.side
+			newPlan.atomicPlans.put(atomNew.element,atomNew)
+		}
+		result:=newPlan
+	end
+	
+	operation calculateRecursivePlan(plan:DecompositionPlan,element:Mergeable,previousOp:OperationType,currentOp:OperationType,direction:Boolean,str:String):Void is do
+		//stdio.writeln(str+"recursing on plan "+plan.toString+" for :"+element.toString+" to "+currentOp.name)
+			if element.getMetaClass().toString == "EClass" then
+				var cl:ecore::EClass cl?=element
+				stdio.writeln(str+"classname: "+cl.name+"->"+element.toString+ " " +previousOp.name+" -> "+currentOp.name+" "+direction.toString)
+			else 
+			 	if element.getMetaClass().toString == "EPackage" then
+			 		var cl:ecore::EPackage cl?=element
+			 		stdio.writeln("package: "+cl.name+"->"+element.toString+" "+currentOp.name)
+			 	end
+			end
+		var atomic:AtomicPlanPart atomic:=AtomicPlanPart.new
+		atomic.element:=element.toString
+		var ppts : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+		var properties:Collection<Property> properties:=ppts.select{ p | Mergeable.isSuperTypeOf(p.type) }
 		
+		
+		if currentOp == OperationType.ONESIDE then
+			//all the suboperation can be only side
+			// can only side to the direction if previous operation was side
+			// continue with the current plan
+			atomic.operationType:=OperationType.ONESIDE
+			atomic.side:=direction
+			plan.atomicPlans.put(element.toString,atomic)
+			if not self.dependants.contains(element.getMetaClass().toString) then
+				properties.each{ p |
+					if p.upper != 1 then
+						var objects : Collection<Object> objects?=element.~get(p)
+						objects.each{obj|
+							var mergeable:Mergeable mergeable?=obj
+							if not plan.atomicPlans.containsKey(mergeable.toString) and mergeable!=void and self.objectIndex.contains(mergeable.toString) then
+								self.calculateRecursivePlan(plan,mergeable,OperationType.ONESIDE,OperationType.ONESIDE,direction,str+" ")
+								
+							end
+						}
+					else
+						var mergeable:Mergeable mergeable?=element.~get(p)
+						if not plan.atomicPlans.containsKey(mergeable.toString) and mergeable!=void and self.objectIndex.contains(mergeable.toString)  then
+							self.calculateRecursivePlan(plan,mergeable,OperationType.ONESIDE,OperationType.ONESIDE,direction,str+" ")
+							
+						end					
+					end
+				}
+			end
+		end
+		
+		if currentOp == OperationType.CLONE then
+		
+			atomic.operationType:=OperationType.CLONE
+			plan.atomicPlans.put(element.toString,atomic)
+			
+			var newPlanL:DecompositionPlan newPlanL:=self.clonePlan(plan)
+			var newPlanR:DecompositionPlan newPlanR:=self.clonePlan(plan)
+			
+			if not self.dependants.contains(element.getMetaClass().toString) then
+				if properties.size >0 then
+					
+					var passed:Boolean init false
+				
+					//the suboperations can be clone or side (at both sides)
+					properties.each{ p |
+						if p.upper != 1 then
+							var objects : Collection<Object> objects?=element.~get(p)
+							objects.each{obj|
+								var mergeable:Mergeable mergeable?=obj
+								if mergeable!=void and self.objectIndex.contains(mergeable.toString) then
+									if not plan.atomicPlans.containsKey(mergeable.toString) then
+										self.calculateRecursivePlan(plan,mergeable,OperationType.CLONE,OperationType.CLONE,void,str+" ")
+										passed:=true
+									end
+									if not newPlanL.atomicPlans.containsKey(mergeable.toString) then
+										self.calculateRecursivePlan(newPlanL,mergeable,OperationType.CLONE,OperationType.ONESIDE,true,str+" ")
+										passed:=true
+									end
+									if not newPlanR.atomicPlans.containsKey(mergeable.toString) then
+										self.calculateRecursivePlan(newPlanR,mergeable,OperationType.CLONE,OperationType.ONESIDE,false,str+" ")
+										passed:=true
+									end
+								end
+							}
+						else
+							var mergeable:Mergeable mergeable?=element.~get(p)
+							if mergeable!=void and self.objectIndex.contains(mergeable.toString) then
+								if not plan.atomicPlans.containsKey(mergeable.toString) then
+									self.calculateRecursivePlan(plan,mergeable,OperationType.CLONE,OperationType.CLONE,void,str+" ")
+									passed:=true
+								end	
+								
+								if not newPlanL.atomicPlans.containsKey(mergeable.toString) then
+									self.calculateRecursivePlan(newPlanL,mergeable,OperationType.CLONE,OperationType.ONESIDE,true,str+" ")
+									passed:=true
+								end
+								
+								if not newPlanR.atomicPlans.containsKey(mergeable.toString) then
+									self.calculateRecursivePlan(newPlanR,mergeable,OperationType.CLONE,OperationType.ONESIDE,false,str+" ")
+									passed:=true
+								end					
+							end
+						end
+					}
+					//side right -> create a new plan
+					if passed then 
+						self.decompositionPlans.add(newPlanL)	
+						self.decompositionPlans.add(newPlanR)
+					end
+				end
+			end
+		end
 	end
 	
 	operation setResource(resource:kermeta::persistence::EMFResource ): Void is do
@@ -66,7 +197,7 @@ class Decomposer {
 			if not self.objectIndex.contains(element.toString) then
 				self.objectIndex.add(element.toString)
 				var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
-				properties.each{ p |
+				properties.each{ p|
 					if p.upper != 1 then
 						var objects : Collection<Object> objects?=element.~get(p)
 						objects.each{obj|self.indexate(obj)}
@@ -99,47 +230,44 @@ class Decomposer {
 	end
 	
 	operation decompose(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*],direction:Boolean):Void is do	
-			stdio.writeln("processing element: "+element.toString)
-			
-			if self.numeral == 0 then
-				self.clone(parent,element,iproperty)
-			else
-				if self.numeral.mod(2) == 0 then
-					self.clone(parent,element,iproperty)
-				else
-					direction:=false
-					self.side(parent,element,iproperty,direction)
-				end
+		
+		self.currentPlan.print()
+		
+		/*stdio.writeln("processing element: "+element.toString)
+		if element.getMetaClass().toString == "EClass" then
+				var cl:ecore::EClass cl?=element
+				stdio.writeln("cloning classname: "+cl.name+"->"+element.toString)
+				
 			end
-			self.numeral:=self.numeral+1
-			/*
-			if element.getMetaClass().toString == "EClass" then
-					direction:=false
-					if self.numeral == 1 then
-						self.side(parent,element,iproperty,direction)
-					else
-						if self.numeral == 2 then
-							self.clone(parent,element,iproperty)
-						else
-							if self.numeral == 3 then
-								self.side(parent,element,iproperty,direction)
-							else
-								if self.numeral == 0 then
-									self.clone(parent,element,iproperty)
-								else
-									self.side(parent,element,iproperty,direction)
-								end
-							end
-						end
-					end
-					self.numeral:=self.numeral+1
-			else
+			
+		if self.currentPlan.atomicPlans.getValue(element.toString).operationType==OperationType.ONESIDE then
+			self.side(parent,element,iproperty,self.currentPlan.atomicPlans.getValue(element.toString).side)
+		else
+			self.clone(parent,element,iproperty)
+		end
+		/*
+		if self.numeral == 0 then
+			self.clone(parent,element,iproperty)
+		else
+			if self.numeral.mod(2) == 0 then
 				self.clone(parent,element,iproperty)
-			end*/
+			else
+				direction:=false
+				self.side(parent,element,iproperty,direction)
+			end
+		end
+		self.numeral:=self.numeral+1
+		
+		
+		self.decompositionPlans.each{plan|
+			self.currentPlan:=plan
+			
+		}
+		*/
 	end
 	
 	operation clone(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*]):Void is do
-		if not self.processed.contains(element)  then
+		if not self.currentPlan.processed.contains(element)  then
 			var isDependable: Boolean init false
 			if element.getMetaClass().toString == "EClass" then
 				var cl:ecore::EClass cl?=element
@@ -166,10 +294,10 @@ class Decomposer {
 			trtmp.right:=right.toString
 			trtmp.appliedOperation:=OperationType.CLONE
 			
-			self.newMapper.put(left.toString,left)
-			self.newMapper.put(right.toString,right)
-			self.mapper.put(element.toString,trtmp)
-			self.processed.add(element)
+			self.currentPlan.newMapper.put(left.toString,left)
+			self.currentPlan.newMapper.put(right.toString,right)
+			self.currentPlan.mapper.put(element.toString,trtmp)
+			self.currentPlan.processed.add(element)
 		
 			var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
 			if isDependable then
@@ -178,14 +306,14 @@ class Decomposer {
 						if p.upper == 1 then
 							var mergeable:Mergeable mergeable?=element.~get(p)
 							if self.objectIndex.contains(mergeable.toString) then
-								if self.processed.contains(mergeable) then
-									if self.mapper.getValue(mergeable.toString).appliedOperation==OperationType.ONESIDE then
+								if self.currentPlan.processed.contains(mergeable) then
+									if self.currentPlan.mapper.getValue(mergeable.toString).appliedOperation==OperationType.ONESIDE then
 										stdio.writeln("element: "+element.toString+" must be sided because of: "+mergeable.toString)
-										self.newMapper.remove(left.toString)
-										self.newMapper.remove(right.toString)
-										self.mapper.remove(element.toString)
-										self.processed.remove(element)
-										sdirection:=self.mapper.getValue(mergeable.toString).side
+										self.currentPlan.newMapper.remove(left.toString)
+										self.currentPlan.newMapper.remove(right.toString)
+										self.currentPlan.mapper.remove(element.toString)
+										self.currentPlan.processed.remove(element)
+										sdirection:=self.currentPlan.mapper.getValue(mergeable.toString).side
 										doAll:=false
 									end
 								end
@@ -195,14 +323,14 @@ class Decomposer {
 							objects.each{obj|
 								var mergeable:Mergeable mergeable?=obj
 								if self.objectIndex.contains(mergeable.toString) then
-									if self.processed.contains(mergeable) then
-										if self.mapper.getValue(mergeable.toString).appliedOperation==OperationType.ONESIDE then
+									if self.currentPlan.processed.contains(mergeable) then
+										if self.currentPlan.mapper.getValue(mergeable.toString).appliedOperation==OperationType.ONESIDE then
 											stdio.writeln("element: "+element.toString+" must be sided because of: "+mergeable.toString)
-											self.newMapper.remove(left.toString)
-											self.newMapper.remove(right.toString)
-											self.mapper.remove(element.toString)
-											self.processed.remove(element)
-											sdirection:=self.mapper.getValue(mergeable.toString).side
+											self.currentPlan.newMapper.remove(left.toString)
+											self.currentPlan.newMapper.remove(right.toString)
+											self.currentPlan.mapper.remove(element.toString)
+											self.currentPlan.processed.remove(element)
+											sdirection:=self.currentPlan.mapper.getValue(mergeable.toString).side
 											doAll:=false
 										end
 									end
@@ -247,14 +375,14 @@ class Decomposer {
 										ctnr.add(element)
 										prpts.add(p)
 									end
-									if not self.processed.contains(mergeable) then
+									if not self.currentPlan.processed.contains(mergeable) then
 										self.decompose(ctnr,mergeable,prpts,void)
 									else
 										var objectsL : Collection<Object> objectsL?=left.~get(p)
 										var objectsR : Collection<Object> objectsR?=right.~get(p)
-										if not objectsL.contains(self.newMapper.getValue((self.mapper.getValue(mergeable.toString).left))) then
-											objectsL.add(self.newMapper.getValue((self.mapper.getValue(mergeable.toString).left)))
-											objectsR.add(self.newMapper.getValue((self.mapper.getValue(mergeable.toString).right)))
+										if not objectsL.contains(self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(mergeable.toString).left))) then
+											objectsL.add(self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(mergeable.toString).left)))
+											objectsR.add(self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(mergeable.toString).right)))
 										end
 									end
 								}
@@ -278,11 +406,11 @@ class Decomposer {
 											ctnr.add(element)
 											prpts.add(p)
 										end
-										if not self.processed.contains(mergeable) then
+										if not self.currentPlan.processed.contains(mergeable) then
 											self.decompose(ctnr,mergeable,prpts,void)
 										else
-											left.~set(p,self.newMapper.getValue((self.mapper.getValue(mergeable.toString).left)))
-											right.~set(p,self.newMapper.getValue((self.mapper.getValue(mergeable.toString).right)))
+											left.~set(p,self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(mergeable.toString).left)))
+											right.~set(p,self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(mergeable.toString).right)))
 										end
 										
 									else
@@ -299,13 +427,13 @@ class Decomposer {
 				else
 					iproperty.select{p|p!=void}.each{p|
 						if p.upper == 1 then
-							stdio.writeln("setting single : "+left.toString+" in "+self.newMapper.getValue(self.mapper.getValue(parent.one.toString).left).toString+" original "+element.toString+ "on p: "+p.name)
-							self.newMapper.getValue(self.mapper.getValue(parent.one.toString).left).~set(p,left)
-							self.newMapper.getValue(self.mapper.getValue(parent.one.toString).right).~set(p,right)
+							stdio.writeln("setting single : "+left.toString+" in "+self.currentPlan.newMapper.getValue(self.currentPlan.mapper.getValue(parent.one.toString).left).toString+" original "+element.toString+ "on p: "+p.name)
+							self.currentPlan.newMapper.getValue(self.currentPlan.mapper.getValue(parent.one.toString).left).~set(p,left)
+							self.currentPlan.newMapper.getValue(self.currentPlan.mapper.getValue(parent.one.toString).right).~set(p,right)
 						else
-							stdio.writeln("setting multiple : "+left.toString+" in "+self.newMapper.getValue(self.mapper.getValue(parent.one.toString).left).toString+" original "+element.toString+ "on p: "+p.name)
-							var objectsL : Collection<Object> objectsL?=self.newMapper.getValue(self.mapper.getValue(parent.one.toString).left).~get(p)
-							var objectsR : Collection<Object> objectsR?=self.newMapper.getValue(self.mapper.getValue(parent.one.toString).right).~get(p)
+							stdio.writeln("setting multiple : "+left.toString+" in "+self.currentPlan.newMapper.getValue(self.currentPlan.mapper.getValue(parent.one.toString).left).toString+" original "+element.toString+ "on p: "+p.name)
+							var objectsL : Collection<Object> objectsL?=self.currentPlan.newMapper.getValue(self.currentPlan.mapper.getValue(parent.one.toString).left).~get(p)
+							var objectsR : Collection<Object> objectsR?=self.currentPlan.newMapper.getValue(self.currentPlan.mapper.getValue(parent.one.toString).right).~get(p)
 							objectsL.add(left)
 							objectsR.add(right)
 						end
@@ -321,7 +449,7 @@ class Decomposer {
 
 	//direction true=right left=false
 	operation side(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*],direction:Boolean):Void is do
-		if not self.processed.contains(element)  then
+		if not self.currentPlan.processed.contains(element)  then
 			stdio.writeln("siding element: "+element.toString)
 			var newElement:Mergeable newElement?=element.getMetaClass().new
 			if element.getMetaClass().toString == "EClass" then
@@ -342,9 +470,9 @@ class Decomposer {
 			end
 			trtmp.side:=direction
 			trtmp.appliedOperation:=OperationType.ONESIDE
-			self.newMapper.put(newElement.toString,newElement)
-			self.mapper.put(element.toString,trtmp)
-			self.processed.add(element)
+			self.currentPlan.newMapper.put(newElement.toString,newElement)
+			self.currentPlan.mapper.put(element.toString,trtmp)
+			self.currentPlan.processed.add(element)
 			
 			
 			var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
@@ -379,15 +507,15 @@ class Decomposer {
 								ctnr.add(element)
 								prpts.add(p)
 							end
-							if not self.processed.contains(mergeable) then
+							if not self.currentPlan.processed.contains(mergeable) then
 								self.decompose(ctnr,mergeable,prpts,direction)
 							else
 								var objectsN : Collection<Object> objectsN?=newElement.~get(p)
 								var mr:Mergeable 
 								if direction then
-									mr:=self.newMapper.getValue((self.mapper.getValue(mergeable.toString).right))
+									mr:=self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(mergeable.toString).right))
 								else
-									mr:=self.newMapper.getValue((self.mapper.getValue(mergeable.toString).left))
+									mr:=self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(mergeable.toString).left))
 								end
 								if not objectsN.contains(mr) then
 									objectsN.add(mr)
@@ -412,14 +540,14 @@ class Decomposer {
 									ctnr.add(element)
 									prpts.add(p)
 								end
-								if not self.processed.contains(mergeable) then
+								if not self.currentPlan.processed.contains(mergeable) then
 									self.decompose(ctnr,mergeable,prpts,direction)
 								else
 									var mr:Mergeable 
 									if direction then
-										mr:=self.newMapper.getValue((self.mapper.getValue(mergeable.toString).right))
+										mr:=self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(mergeable.toString).right))
 									else
-										mr:=self.newMapper.getValue((self.mapper.getValue(mergeable.toString).left))
+										mr:=self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(mergeable.toString).left))
 									end
 									newElement.~set(p,mr)
 								end	
@@ -440,9 +568,9 @@ class Decomposer {
 				iproperty.select{p|p!=void}.each{p|
 					var mr:Mergeable 
 					if direction then
-						mr:=self.newMapper.getValue((self.mapper.getValue(parent.one.toString).right))
+						mr:=self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(parent.one.toString).right))
 					else
-						mr:=self.newMapper.getValue((self.mapper.getValue(parent.one.toString).left))
+						mr:=self.currentPlan.newMapper.getValue((self.currentPlan.mapper.getValue(parent.one.toString).left))
 					end
 					if p.upper == 1 then
 						stdio.writeln("setting single : "+newElement.toString+" in "+mr.toString+" original "+element.toString+ "on p: "+p.name)
@@ -474,4 +602,31 @@ class TriContainer{
 	attribute right:String
 	attribute appliedOperation:OperationType
 	attribute side:Boolean
+}
+
+class DecompositionPlan{
+	attribute atomicPlans:Hashtable<String,AtomicPlanPart>
+	attribute mapper:Hashtable<String,TriContainer> 
+	reference newMapper:Hashtable<String,Mergeable>
+	reference processed:Mergeable[0..*]
+	
+	operation initialize(): Void is do
+		self.atomicPlans:=Hashtable<String,AtomicPlanPart>.new
+		self.mapper:=Hashtable<String,TriContainer>.new
+		self.newMapper:=Hashtable<String,Mergeable>.new
+	end
+	
+	operation print(): Void is do
+		stdio.writeln("plan : ")
+		self.atomicPlans.values().each{plan|
+			stdio.writeln("  element: "+plan.element+" -> "+plan.operationType.name+" : "+plan.side.toString)
+		}
+	end
+}
+class AtomicPlanPart{
+	attribute element:String
+	attribute operationType:OperationType
+	attribute side:Boolean
+	attribute dependantOn:String
+	attribute inElement:String
 }
