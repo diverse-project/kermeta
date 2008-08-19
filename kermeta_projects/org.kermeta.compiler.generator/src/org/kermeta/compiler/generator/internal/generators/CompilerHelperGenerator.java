@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.14 2008-07-23 15:59:22 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.15 2008-08-19 12:34:43 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -28,7 +28,6 @@ import java.net.URL;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -50,7 +49,6 @@ import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.jet.DefaultJETEmitter;
 import org.kermeta.simk.SIMKModel;
-import org.kermeta.simk.SMClass;
 import org.kermeta.simk.SMContext;
 import org.kermeta.simk.SMUsage;
 import org.kermeta.simk.StaticMethod;
@@ -343,7 +341,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 				//	EClass eClass = (EClass) eClassifier;
 
 					for (StaticMethod sm : simkConf.getStaticMethods()) {
-						if (sm.getUsages().contains(SMUsage.RUNNER)) {
+						if ( sm.getUsages() == SMUsage.RUNNER /*.contains(SMUsage.RUNNER)*/ ) {
 							applyTemplate(
 									sm,
 									getTemplateURI(RUNNER_JAVA),
@@ -389,7 +387,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			applyTemplate(args, getTemplateURI(JAVA_LAUNCHER_LAUNCH), projectPath.append("/" + tab_mainClass[0] + ".launch"), conf.isForceOverwrite());
 		}*/
 		for (StaticMethod sm : simkConf.getStaticMethods()) {
-			if (sm.getUsages().contains(SMUsage.LAUNCHER)) {
+			if ( sm.getUsages() == SMUsage.LAUNCHER /*.contains(SMUsage.LAUNCHER)*/ ) {
 				
 				String mainClass = sm.getSMContext().getSMClass().getQualifiedName();
 				String mainOperation = sm.getParentMethod().getName();
@@ -416,11 +414,13 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			throws JETException, CoreException {
 		
 		for (SMContext _context : simkConf.getSMContexts()) {
+			if ( _context.getSMClass().getUsages() == SMUsage.WRAPPER /*.contains(SMUsage.WRAPPER)*/ ) {
 			applyTemplate(
 					_context,
 					getTemplateURI(WRAPPER_JAVA),
 					projectPath.append("/" + SOURCE_DIRECTORY + "/kermeta/standard/helper/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
 					configuration.isForceOverwrite());
+			}
 		}
 	}
 	
