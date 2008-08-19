@@ -1,7 +1,7 @@
-Package fr.irisa.osgi.manifest.parser;
+Package fr.irisa.triskell.osgi.introspector.manifest;
 
 Helpers
-	all 						= [32 .. 127];
+	all 						= [32 .. 255];
 	digit 						= ['0' .. '9'] ;
 	lowercase					= ['a' .. 'z'] ;
 	uppercase					= ['A' .. 'Z'] ;
@@ -355,7 +355,7 @@ Tokens
 		directive_include_export_package,
 		directive_exclude_export_package,
 		directive_uses, directive_uses1}
-		identifier = (lowercase | uppercase) (alphanum | '$')*;
+		identifier = (lowercase | uppercase) ((alphanum | '$')*);
 		
 	{bundle_requiredexecutionenvironment_state}
 		identifier_required_profile = (alphanum | '.' )+;

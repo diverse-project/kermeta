@@ -1,13 +1,5 @@
 package fr.irisa.triskell.osgi.introspector.generator;
 
-import jar.Class;
-import jar.File;
-import jar.Folder;
-import jar.JarFactory;
-import jar.Package;
-import jar.SystemEntry;
-
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,6 +25,7 @@ import manifest.BundleSymbolicName;
 import manifest.BundleUpdateLocation;
 import manifest.BundleVendor;
 import manifest.BundleVersion;
+import manifest.ClassPath;
 import manifest.DynamicImportPackage;
 import manifest.ExportPackage;
 import manifest.ExportService;
@@ -43,6 +36,7 @@ import manifest.MANIFEST;
 import manifest.MANIFESTEntry;
 import manifest.MANIFESTVersionEnum;
 import manifest.ManifestFactory;
+import manifest.NativeCode;
 import manifest.PolicyEnum;
 import manifest.RequireBundle;
 import manifest.Service;
@@ -77,73 +71,59 @@ import option.Visibility;
 import option.VisibilityEnum;
 
 import org.apache.log4j.Level;
-import org.osgi.framework.Constants;
 
-import fr.irisa.osgi.manifest.parser.analysis.Analysis;
-import fr.irisa.osgi.manifest.parser.node.*;
+import fr.irisa.triskell.osgi.introspector.manifest.analysis.Analysis;
+import fr.irisa.triskell.osgi.introspector.manifest.node.*;
 import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 import framework.Bundle;
+
 /**
  * 
  * @author Erwan Daubert - erwan.daubert@gmail.com
  * @version 1.0
  * 
- * This class describe a Visitor define into the Design Pattern Visitor.
- * It used to visit the manifest and generate a representation.
+ * This class describe a Visitor define into the Design Pattern Visitor. It used
+ * to visit the manifest and generate a representation.
  */
 public class Translation implements Analysis {
 
 	private boolean validTranslation;
 
+	private OSGiIntrospectorUtil util;
+
 	private MANIFEST manifest;
 	private Bundle bundle;
 
 	private List<Service> servicesAvailable;
-	
+
 	private Map<Bundle, String> fragmentHostReferences;
 
-	private Map<BundleNativeCode, Bundle> unresolvedBundleNativeCodeBundle;
-	private Map<BundleNativeCode, List<String>> unresolvedBundleNativeCodeValue;
-	
-	private Map<BundleClassPath, Bundle> unresolvedBundleClassPathBundle;
-	private Map<BundleClassPath, List<String>> unresolvedBundleClassPathValue;
-	
-	private Map<RequireBundle, Bundle> unresolvedRequireBundleBundle;
-	private Map<RequireBundle, String> unresolvedRequireBundleValue;
-	
-	private Map<ImportPackage, Bundle> unresolvedImportPackageBundle;
-	private Map<ImportPackage, List<String>> unresolvedImportPackageValue;
-	
-	private Map<ImportService, Bundle> unresolvedImportServiceBundle;
-	private Map<ImportService, String> unresolvedImportServiceValue;
+	private Map<NativeCode, Bundle> unresolvedBundleNativeCode;
 
-	private Map<BundleActivator, Bundle> unresolvedActivatorBundle;
-	private Map<BundleActivator, String> unresolvedActivatorValue;
+	private Map<ClassPath, Bundle> unresolvedBundleClassPath;
 
-	private Map<Service, Bundle> unresolvedExportServiceBundle;
-	private Map<Service, String> unresolvedExportServiceValue;
+	private Map<RequireBundle, Bundle> unresolvedRequireBundle;
 
-	private Map<ExportPackage, Bundle> unresolvedExportPackageBundle;
-	private Map<ExportPackage, List<String>> unresolvedExportPackageValue;
+	private Map<ImportPackage, Bundle> unresolvedImportPackage;
+
+	private Map<ImportService, Bundle> unresolvedImportService;
+
+	private Map<BundleActivator, Bundle> unresolvedActivator;
+
+	private Map<Service, Bundle> unresolvedExportService;
+
+	private Map<manifest.Package, Bundle> unresolvedExportPackage;
 
 	private Map<Uses, Bundle> unresolvedExportPackageUsesBundle;
 	private Map<Uses, List<String>> unresolvedExportPackageUsesValue;
 
-	private Map<ExcludeClasses, ExportPackage> unresolvedExportPackageExcludeExportPackage;
-	private Map<ExcludeClasses, List<String>> unresolvedExportPackageExcludeValue;
+	private Map<option.Class, ExportPackage> unresolvedExportPackageExclude;
 
-	private Map<IncludeClasses, ExportPackage> unresolvedExportPackageIncludeExportPackage;
-	private Map<IncludeClasses, List<String>> unresolvedExportPackageIncludeValue;
+	private Map<option.Class, ExportPackage> unresolvedExportPackageInclude;
 
-	private Map<ExcludePackages, Bundle> unresolvedActivationPolicyExcludeBundle;
-	private Map<ExcludePackages, List<String>> unresolvedActivationPolicyExcludeValue;
+	private Map<option.Package, Bundle> unresolvedActivationPolicyExclude;
 
-	private Map<IncludePackages, Bundle> unresolvedActivationPolicyIncludeBundle;
-	private Map<IncludePackages, List<String>> unresolvedActivationPolicyIncludeValue;
-
-	private ManifestFactory manifestFactory;
-	private OptionFactory parameterFactory;
-	private JarFactory jarFactory;
+	private Map<option.Package, Bundle> unresolvedActivationPolicyInclude;
 
 	private int excludeIncludeOrUse;
 	private final int exclude = -1;
@@ -157,60 +137,48 @@ public class Translation implements Analysis {
 	private boolean maxNotInclude;
 	private MANIFESTEntry entry;
 
-	public Translation() {
-		manifestFactory = ManifestFactory.eINSTANCE;
-		parameterFactory = OptionFactory.eINSTANCE;
-		jarFactory = JarFactory.eINSTANCE;
+	public Translation(OSGiIntrospectorUtil util) {
+		this.util = util;
 
 		this.validTranslation = true;
 
 		this.servicesAvailable = new ArrayList<Service>();
-		
+
 		this.fragmentHostReferences = new Hashtable<Bundle, String>();
 
-		this.unresolvedBundleNativeCodeBundle = new HashMap<BundleNativeCode, Bundle>();
-		this.unresolvedBundleNativeCodeValue = new HashMap<BundleNativeCode, List<String>>();
-		
-		this.unresolvedBundleClassPathBundle = new HashMap<BundleClassPath, Bundle>();
-		this.unresolvedBundleClassPathValue = new HashMap<BundleClassPath, List<String>>();
-		
-		this.unresolvedRequireBundleBundle = new HashMap<RequireBundle, Bundle>();
-		this.unresolvedRequireBundleValue = new HashMap<RequireBundle, String>();
-		
-		this.unresolvedImportPackageBundle = new HashMap<ImportPackage, Bundle>();
-		this.unresolvedImportPackageValue = new HashMap<ImportPackage, List<String>>();
-		
-		this.unresolvedImportServiceBundle = new HashMap<ImportService, Bundle>();
-		this.unresolvedImportServiceValue = new HashMap<ImportService, String>();
+		this.fragmentHostReferences = new Hashtable<Bundle, String>();
 
-		this.unresolvedActivatorBundle = new Hashtable<BundleActivator, Bundle>();
-		this.unresolvedActivatorValue = new Hashtable<BundleActivator, String>();
+		this.unresolvedBundleNativeCode = new HashMap<NativeCode, Bundle>();
 
-		this.unresolvedExportServiceBundle = new Hashtable<Service, Bundle>();
-		this.unresolvedExportServiceValue = new Hashtable<Service, String>();
+		this.unresolvedBundleClassPath = new HashMap<ClassPath, Bundle>();
 
-		this.unresolvedExportPackageBundle = new Hashtable<ExportPackage, Bundle>();
-		this.unresolvedExportPackageValue = new Hashtable<ExportPackage, List<String>>();
+		this.unresolvedRequireBundle = new HashMap<RequireBundle, Bundle>();
+
+		this.unresolvedImportPackage = new HashMap<ImportPackage, Bundle>();
+
+		this.unresolvedImportService = new HashMap<ImportService, Bundle>();
+
+		this.unresolvedActivator = new Hashtable<BundleActivator, Bundle>();
+
+		this.unresolvedExportService = new Hashtable<Service, Bundle>();
+
+		this.unresolvedExportPackage = new Hashtable<manifest.Package, Bundle>();
 
 		this.unresolvedExportPackageUsesBundle = new Hashtable<Uses, Bundle>();
 		this.unresolvedExportPackageUsesValue = new Hashtable<Uses, List<String>>();
 
-		this.unresolvedExportPackageExcludeExportPackage = new Hashtable<ExcludeClasses, ExportPackage>();
-		this.unresolvedExportPackageExcludeValue = new Hashtable<ExcludeClasses, List<String>>();
+		this.unresolvedExportPackageExclude = new Hashtable<option.Class, ExportPackage>();
 
-		this.unresolvedExportPackageIncludeExportPackage = new Hashtable<IncludeClasses, ExportPackage>();
-		this.unresolvedExportPackageIncludeValue = new Hashtable<IncludeClasses, List<String>>();
+		this.unresolvedExportPackageInclude = new Hashtable<option.Class, ExportPackage>();
 
-		this.unresolvedActivationPolicyExcludeBundle = new Hashtable<ExcludePackages, Bundle>();
-		this.unresolvedActivationPolicyExcludeValue = new Hashtable<ExcludePackages, List<String>>();
+		this.unresolvedActivationPolicyExclude = new Hashtable<option.Package, Bundle>();
 
-		this.unresolvedActivationPolicyIncludeBundle = new Hashtable<IncludePackages, Bundle>();
-		this.unresolvedActivationPolicyIncludeValue = new Hashtable<IncludePackages, List<String>>();
+		this.unresolvedActivationPolicyInclude = new Hashtable<option.Package, Bundle>();
 
 	}
 
 	public void caseAAttribute(AAttribute node) {
-		AttributEntry attribute = parameterFactory.createAttributEntry();
+		AttributEntry attribute = OptionFactory.eINSTANCE.createAttributEntry();
 		String token = node.getAttributeEntry().getText().split("=")[0];
 		if (token.endsWith(":")) {
 			token = token.substring(0, token.length() - 1);
@@ -259,7 +227,7 @@ public class Translation implements Analysis {
 
 	public void caseABundleActivationpolicyEntryValue(
 			ABundleActivationpolicyEntryValue node) {
-		BundleActivationPolicy entry = manifestFactory
+		BundleActivationPolicy entry = ManifestFactory.eINSTANCE
 				.createBundleActivationPolicy();
 		node.getActivationpolicyValue().apply(this);
 		entry.setPolicy((PolicyEnum) this.firstValue);
@@ -286,11 +254,13 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleActivatorEntryValue(ABundleActivatorEntryValue node) {
-		BundleActivator entry = manifestFactory.createBundleActivator();
+		BundleActivator entry = ManifestFactory.eINSTANCE
+				.createBundleActivator();
 		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
-		this.unresolvedActivatorBundle.put(entry, this.bundle);
-		this.unresolvedActivatorValue.put(entry, ((StringBuffer) this.firstValue).toString());
+		entry.setReference(((StringBuffer) this.firstValue).toString());
+		entry.setResolved(false);
+		this.unresolvedActivator.put(entry, this.bundle);
 		this.manifest.setBundleActivator(entry);
 
 	}
@@ -309,20 +279,20 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleCategoryEntryValue(ABundleCategoryEntryValue node) {
-		BundleCategory entry = manifestFactory.createBundleCategory();
+		BundleCategory entry = ManifestFactory.eINSTANCE.createBundleCategory();
 		entry.addValue(node.getSimpleStringValue().getText());
-		
+
 		this.entry = entry;
 		for (PParameter parameter : node.getParameter()) {
 			parameter.apply(this);
 		}
-		
+
 		for (PCategoryValue categoryValue : node.getCategoryValue()) {
 			categoryValue.apply(this);
 		}
-		
+
 		this.manifest.setBundleCategory(entry);
-		
+
 	}
 
 	public void caseABundleClasspathEntry(ABundleClasspathEntry node) {
@@ -347,7 +317,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleContactaddressEntry(ABundleContactaddressEntry node) {
-		BundleContactAddress entry = manifestFactory
+		BundleContactAddress entry = ManifestFactory.eINSTANCE
 				.createBundleContactAddress();
 		entry.setValue(node.getAllString().getText());
 
@@ -365,7 +335,8 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleCopyrightEntry(ABundleCopyrightEntry node) {
-		BundleCopyright entry = manifestFactory.createBundleCopyright();
+		BundleCopyright entry = ManifestFactory.eINSTANCE
+				.createBundleCopyright();
 		entry.setValue(node.getAllString().getText());
 
 		this.entry = entry;
@@ -382,7 +353,8 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleDescriptionEntry(ABundleDescriptionEntry node) {
-		BundleDescription entry = manifestFactory.createBundleDescription();
+		BundleDescription entry = ManifestFactory.eINSTANCE
+				.createBundleDescription();
 		entry.setValue(node.getAllString().getText());
 
 		this.entry = entry;
@@ -401,7 +373,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleDocurlEntry(ABundleDocurlEntry node) {
-		BundleDocURL entry = manifestFactory.createBundleDocURL();
+		BundleDocURL entry = ManifestFactory.eINSTANCE.createBundleDocURL();
 
 		this.firstValue = new StringBuffer("");
 		node.getUrlValue().apply(this);
@@ -422,7 +394,8 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleLocalizationEntry(ABundleLocalizationEntry node) {
-		BundleLocalization entry = manifestFactory.createBundleLocalization();
+		BundleLocalization entry = ManifestFactory.eINSTANCE
+				.createBundleLocalization();
 		entry.setValue(node.getAllString().getText());
 
 		this.entry = entry;
@@ -439,7 +412,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleManifestversionEntry(ABundleManifestversionEntry node) {
-		BundleManifestVersion entry = manifestFactory
+		BundleManifestVersion entry = ManifestFactory.eINSTANCE
 				.createBundleManifestVersion();
 		String version = node.getManifestversion().getText();
 		for (MANIFESTVersionEnum manifestVersion : MANIFESTVersionEnum.VALUES) {
@@ -463,7 +436,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleNameEntry(ABundleNameEntry node) {
-		BundleName entry = manifestFactory.createBundleName();
+		BundleName entry = ManifestFactory.eINSTANCE.createBundleName();
 		entry.setValue(node.getAllString().getText());
 
 		this.entry = entry;
@@ -530,7 +503,8 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleSymbolicnameEntry(ABundleSymbolicnameEntry node) {
-		BundleSymbolicName entry = manifestFactory.createBundleSymbolicName();
+		BundleSymbolicName entry = ManifestFactory.eINSTANCE
+				.createBundleSymbolicName();
 
 		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
@@ -551,7 +525,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleUpdatelocationEntry(ABundleUpdatelocationEntry node) {
-		BundleUpdateLocation entry = manifestFactory
+		BundleUpdateLocation entry = ManifestFactory.eINSTANCE
 				.createBundleUpdateLocation();
 
 		this.firstValue = new StringBuffer("");
@@ -570,7 +544,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleVendorEntry(ABundleVendorEntry node) {
-		BundleVendor entry = manifestFactory.createBundleVendor();
+		BundleVendor entry = ManifestFactory.eINSTANCE.createBundleVendor();
 		entry.setValue(node.getAllString().getText());
 
 		this.entry = entry;
@@ -587,8 +561,8 @@ public class Translation implements Analysis {
 	}
 
 	public void caseABundleVersionEntry(ABundleVersionEntry node) {
-		BundleVersion entry = manifestFactory.createBundleVersion();
-		this.firstValue = manifestFactory.createVersion();
+		BundleVersion entry = ManifestFactory.eINSTANCE.createBundleVersion();
+		this.firstValue = ManifestFactory.eINSTANCE.createVersion();
 		node.getMajorVersionEntry().apply(this);
 
 		entry.setVersion((Version) this.firstValue);
@@ -605,12 +579,14 @@ public class Translation implements Analysis {
 	}
 
 	public void caseACategoryValue(ACategoryValue node) {
-		((BundleCategory) this.entry).addValue(node.getSimpleStringValue().getText());
+		((BundleCategory) this.entry).addValue(node.getSimpleStringValue()
+				.getText());
 
 	}
 
 	public void caseAClasspathEntry(AClasspathEntry node) {
-		BundleClassPath entry = manifestFactory.createBundleClassPath();
+		BundleClassPath entry = ManifestFactory.eINSTANCE
+				.createBundleClassPath();
 
 		this.entry = entry;
 		this.setTargetToClassPath(node.getTarget());
@@ -623,7 +599,7 @@ public class Translation implements Analysis {
 			parameter.apply(this);
 		}
 		this.manifest.addBundleClassPath(entry);
-		
+
 	}
 
 	public void caseAClasspathEntryValue(AClasspathEntryValue node) {
@@ -637,7 +613,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseADigestEntry(ADigestEntry node) {
-		SimpleManifestEntryManyValues entry = manifestFactory
+		SimpleManifestEntryManyValues entry = ManifestFactory.eINSTANCE
 				.createSimpleManifestEntryManyValues();
 		entry.setEntryName(node.getEntryDigest().getText().replace(":", "")
 				.replace(" ", ""));
@@ -657,7 +633,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseADynamicDescription(ADynamicDescription node) {
-		DynamicImportPackage entry = manifestFactory
+		DynamicImportPackage entry = ManifestFactory.eINSTANCE
 				.createDynamicImportPackage();
 
 		this.firstValue = new StringBuffer("");
@@ -703,7 +679,8 @@ public class Translation implements Analysis {
 		this.firstValue = new StringBuffer("");
 		node.getPackageNameWildcard().apply(this);
 		((DynamicImportPackage) this.entry)
-				.addPackageReference(((StringBuffer) this.firstValue).toString());
+				.addPackageReference(((StringBuffer) this.firstValue)
+						.toString());
 
 	}
 
@@ -713,14 +690,14 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAEqualsBooleanComparator(AEqualsBooleanComparator node) {
-		((StringBuffer)this.firstValue).append(node.getEquals());
+		((StringBuffer) this.firstValue).append(node.getEquals());
 
 	}
 
 	public void caseAExcludeActivationpolicyDirective(
 			AExcludeActivationpolicyDirective node) {
 		this.excludeIncludeOrUse = this.exclude;
-		this.secondValue = parameterFactory.createExcludePackages();
+		this.secondValue = OptionFactory.eINSTANCE.createExcludePackages();
 		node.getActivationPolicyExcludeIncludeValue().apply(this);
 
 	}
@@ -728,7 +705,7 @@ public class Translation implements Analysis {
 	public void caseAExcludeExportPackageDirective(
 			AExcludeExportPackageDirective node) {
 		this.excludeIncludeOrUse = this.exclude;
-		this.secondValue = parameterFactory.createExcludeClasses();
+		this.secondValue = OptionFactory.eINSTANCE.createExcludeClasses();
 		node.getExportPackageUseExcludeIncludeValue().apply(this);
 
 	}
@@ -775,7 +752,9 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAExportPackageEntry(AExportPackageEntry node) {
-		node.getExportPackageEntryValue1().apply(this);
+		if (node.getExportPackageEntryValue1() != null) {
+			node.getExportPackageEntryValue1().apply(this);
+		}
 
 	}
 
@@ -786,22 +765,24 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAExportPackageEntryValue(AExportPackageEntryValue node) {
-		ExportPackage entry = manifestFactory.createExportPackage();
+		ExportPackage entry = ManifestFactory.eINSTANCE.createExportPackage();
 		this.firstValue = new StringBuffer("");
 		node.getPackageName().apply(this);
-
-		List<String> exports = new ArrayList<String>();
-
-		exports.add(((StringBuffer) this.firstValue).toString());
+		manifest.Package _package = ManifestFactory.eINSTANCE.createPackage();
+		_package.setReference(((StringBuffer) this.firstValue).toString());
+		_package.setResolved(false);
+		entry.addPackage(_package);
+		this.unresolvedExportPackage.put(_package, this.bundle);
 
 		for (PPackageNames name : node.getPackageNames()) {
 			this.firstValue = new StringBuffer("");
 			name.apply(this);
-			exports.add(((StringBuffer) this.firstValue).toString());
+			_package = ManifestFactory.eINSTANCE.createPackage();
+			_package.setReference(((StringBuffer) this.firstValue).toString());
+			_package.setResolved(false);
+			entry.addPackage(_package);
+			this.unresolvedExportPackage.put(_package, this.bundle);
 		}
-
-		this.unresolvedExportPackageBundle.put(entry, this.bundle);
-		this.unresolvedExportPackageValue.put(entry, exports);
 
 		this.entry = entry;
 		for (PExportPackageParameter parameter : node
@@ -839,14 +820,14 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAExportServiceEntryValue(AExportServiceEntryValue node) {
-		ExportService entry = manifestFactory.createExportService();
+		ExportService entry = ManifestFactory.eINSTANCE.createExportService();
 		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
-		Service service = manifestFactory.createService();
+		Service service = ManifestFactory.eINSTANCE.createService();
 
-		this.unresolvedExportServiceBundle.put(service, this.bundle);
-		this.unresolvedExportServiceValue
-				.put(service, ((StringBuffer) this.firstValue).toString());
+		service.setReference(((StringBuffer) this.firstValue).toString());
+		service.setResolved(false);
+		this.unresolvedExportService.put(service, this.bundle);
 		this.servicesAvailable.add(service);
 
 		entry.setService((Service) service);
@@ -882,14 +863,15 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAFileUnquotedUrl(AFileUnquotedUrl node) {
-		((StringBuffer)this.firstValue).append(node.getUrlFile().getText());
+		((StringBuffer) this.firstValue).append(node.getUrlFile().getText());
 		node.getPathUnquoted().apply(this);
 		try {
 			URL url = new URL(((StringBuffer) this.firstValue).toString());
 			this.firstValue = url;
 		} catch (MalformedURLException e) {
-			OSGiIntrospectorUtil.log(Level.WARN, "MalformedURLException :  an URL value into the MANIFEST is malformed : "
-									+ this.firstValue + ".", bundle);
+			util.log(Level.WARN,
+					"MalformedURLException :  an URL value into the MANIFEST is malformed : "
+							+ this.firstValue + ".", bundle);
 		}
 
 	}
@@ -897,7 +879,7 @@ public class Translation implements Analysis {
 	public void caseAFragmentAttachmentSymbolicnameDirective(
 			AFragmentAttachmentSymbolicnameDirective node) {
 		node.getFragmentAttachmentValue().apply(this);
-		FragmentAttachment directive = parameterFactory
+		FragmentAttachment directive = OptionFactory.eINSTANCE
 				.createFragmentAttachment();
 		directive
 				.setFragmentAttachment((FragmentAttachmentEnum) this.firstValue);
@@ -912,7 +894,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAFragmentHostDirective(AFragmentHostDirective node) {
-		Extension directive = parameterFactory.createExtension();
+		Extension directive = OptionFactory.eINSTANCE.createExtension();
 		node.getExtensionValue().apply(this);
 		directive.setExtension((ExtensionEnum) this.firstValue);
 		((FragmentHost) this.entry).setDirectives(directive);
@@ -939,10 +921,11 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAFragmentHostEntryValue(AFragmentHostEntryValue node) {
-		FragmentHost entry = manifestFactory.createFragmentHost();
+		FragmentHost entry = ManifestFactory.eINSTANCE.createFragmentHost();
 		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
-		this.fragmentHostReferences.put(this.bundle, ((StringBuffer) this.firstValue).toString());
+		this.fragmentHostReferences.put(this.bundle,
+				((StringBuffer) this.firstValue).toString());
 
 		this.entry = entry;
 		for (PFragmentHostParameter parameter : node.getFragmentHostParameter()) {
@@ -953,26 +936,28 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAFtpUnquotedUrl(AFtpUnquotedUrl node) {
-		((StringBuffer)this.firstValue).append(node.getUrlFtp().getText());
+		((StringBuffer) this.firstValue).append(node.getUrlFtp().getText());
 		node.getPathUnquoted().apply(this);
 		try {
 			URL url = new URL(((StringBuffer) this.firstValue).toString());
 			this.firstValue = url;
 		} catch (MalformedURLException e) {
-			OSGiIntrospectorUtil.log(Level.WARN, "MalformedURLException :  an URL value into the MANIFEST is malformed : "
-					+ this.firstValue + ".", bundle);
+			util.log(Level.WARN,
+					"MalformedURLException :  an URL value into the MANIFEST is malformed : "
+							+ this.firstValue + ".", bundle);
 		}
 
 	}
 
 	public void caseAGreaterBooleanComparator(AGreaterBooleanComparator node) {
-		((StringBuffer)this.firstValue).append(node.getGreater().getText());
+		((StringBuffer) this.firstValue).append(node.getGreater().getText());
 
 	}
 
 	public void caseAGreaterEqualsBooleanComparator(
 			AGreaterEqualsBooleanComparator node) {
-		((StringBuffer)this.firstValue).append(node.getGreaterEquals().getText());
+		((StringBuffer) this.firstValue).append(node.getGreaterEquals()
+				.getText());
 
 	}
 
@@ -983,8 +968,9 @@ public class Translation implements Analysis {
 			URL url = new URL(((StringBuffer) this.firstValue).toString());
 			this.firstValue = url;
 		} catch (MalformedURLException e) {
-			OSGiIntrospectorUtil.log(Level.WARN, "MalformedURLException :  an URL value into the MANIFEST is malformed : "
-					+ this.firstValue + ".", bundle);
+			util.log(Level.WARN,
+					"MalformedURLException :  an URL value into the MANIFEST is malformed : "
+							+ this.firstValue + ".", bundle);
 		}
 
 	}
@@ -996,7 +982,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAImportPackageDirective(AImportPackageDirective node) {
-		Resolution directive = parameterFactory.createResolution();
+		Resolution directive = OptionFactory.eINSTANCE.createResolution();
 		node.getResolutionValue().apply(this);
 		directive.setResolution((ResolutionEnum) this.firstValue);
 
@@ -1022,23 +1008,20 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAImportPackageEntryValue(AImportPackageEntryValue node) {
-		ImportPackage entry = manifestFactory.createImportPackage();
+		ImportPackage entry = ManifestFactory.eINSTANCE.createImportPackage();
 
 		this.firstValue = new StringBuffer("");
 		node.getPackageName().apply(this);
-
-		List<String> exports = new ArrayList<String>();
-
-		exports.add(((StringBuffer) this.firstValue).toString());
+		entry.addPackagesReference(((StringBuffer) this.firstValue).toString());
 
 		for (PPackageNames name : node.getPackageNames()) {
 			this.firstValue = new StringBuffer("");
 			name.apply(this);
-			exports.add(((StringBuffer) this.firstValue).toString());
+			entry.addPackagesReference(((StringBuffer) this.firstValue)
+					.toString());
 		}
 
-		this.unresolvedImportPackageBundle.put(entry, this.bundle);
-		this.unresolvedImportPackageValue.put(entry, exports);
+		this.unresolvedImportPackage.put(entry, this.bundle);
 
 		this.entry = entry;
 		for (PImportPackageParameter parameter : node
@@ -1080,9 +1063,9 @@ public class Translation implements Analysis {
 	public void caseAImportServiceEntryValue(AImportServiceEntryValue node) {
 		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
-		ImportService entry = manifestFactory.createImportService();
-		this.unresolvedImportServiceBundle.put(entry, this.bundle);
-		this.unresolvedImportServiceValue.put(entry, ((StringBuffer) this.firstValue).toString());
+		ImportService entry = ManifestFactory.eINSTANCE.createImportService();
+		entry.setServiceReference(((StringBuffer) this.firstValue).toString());
+		this.unresolvedImportService.put(entry, this.bundle);
 		this.manifest.addImportService(entry);
 
 		this._import = true;
@@ -1095,7 +1078,7 @@ public class Translation implements Analysis {
 	public void caseAIncludeActivationpolicyDirective(
 			AIncludeActivationpolicyDirective node) {
 		this.excludeIncludeOrUse = this.include;
-		this.secondValue = parameterFactory.createIncludePackages();
+		this.secondValue = OptionFactory.eINSTANCE.createIncludePackages();
 		node.getActivationPolicyExcludeIncludeValue().apply(this);
 
 	}
@@ -1103,23 +1086,24 @@ public class Translation implements Analysis {
 	public void caseAIncludeExportPackageDirective(
 			AIncludeExportPackageDirective node) {
 		this.excludeIncludeOrUse = this.include;
-		this.secondValue = parameterFactory.createIncludeClasses();
+		this.secondValue = OptionFactory.eINSTANCE.createIncludeClasses();
 		node.getExportPackageUseExcludeIncludeValue().apply(this);
 
 	}
 
 	public void caseALanguageDirective(ALanguageDirective node) {
-		Language directive = parameterFactory.createLanguage();
+		Language directive = OptionFactory.eINSTANCE.createLanguage();
 
 		this.firstValue = new StringBuffer("");
 		node.getLanguageValue().apply(this);
-			for (ISOCodeLanguage language : ISOCodeLanguage.VALUES) {
-				if (language.getLiteral().equals(((StringBuffer) this.firstValue).toString())) {
-					directive.setIsoCode(language);
-					((BundleNativeCode) this.entry).addDirective(directive);
-					break;
-				}
+		for (ISOCodeLanguage language : ISOCodeLanguage.VALUES) {
+			if (language.getLiteral().equals(
+					((StringBuffer) this.firstValue).toString())) {
+				directive.setIsoCode(language);
+				((BundleNativeCode) this.entry).addDirective(directive);
+				break;
 			}
+		}
 	}
 
 	public void caseALanguageDirectiveNativecodeDirective(
@@ -1129,18 +1113,19 @@ public class Translation implements Analysis {
 	}
 
 	public void caseALanguageValue(ALanguageValue node) {
-		((StringBuffer)this.firstValue).append(node.getIdentifier().getText());
+		((StringBuffer) this.firstValue).append(node.getIdentifier().getText());
 
 	}
 
 	public void caseALessBooleanComparator(ALessBooleanComparator node) {
-		((StringBuffer)this.firstValue).append(node.getLess().getText());
+		((StringBuffer) this.firstValue).append(node.getLess().getText());
 
 	}
 
 	public void caseALesserEqualsBooleanComparator(
 			ALesserEqualsBooleanComparator node) {
-		((StringBuffer)this.firstValue).append(node.getLesserEquals().getText());
+		((StringBuffer) this.firstValue).append(node.getLesserEquals()
+				.getText());
 
 	}
 
@@ -1157,7 +1142,7 @@ public class Translation implements Analysis {
 	@SuppressWarnings("unchecked")
 	public void caseAMandatoryExportPackageDirective(
 			AMandatoryExportPackageDirective node) {
-		Mandatory directive = parameterFactory.createMandatory();
+		Mandatory directive = OptionFactory.eINSTANCE.createMandatory();
 		node.getMandatoryValue().apply(this);
 		if (this.firstValue instanceof AttributEntry) {
 			directive.addAttribut((AttributEntry) this.firstValue);
@@ -1168,7 +1153,7 @@ public class Translation implements Analysis {
 			}
 			((ExportPackage) this.entry).addDirective(directive);
 		} else {
-			OSGiIntrospectorUtil.log(Level.WARN, "this mandatory value " + this.firstValue
+			util.log(Level.WARN, "this mandatory value " + this.firstValue
 					+ " is not valid.", bundle);
 		}
 
@@ -1262,7 +1247,8 @@ public class Translation implements Analysis {
 	}
 
 	public void caseANativecodeEntry(ANativecodeEntry node) {
-		BundleNativeCode entry = manifestFactory.createBundleNativeCode();
+		BundleNativeCode entry = ManifestFactory.eINSTANCE
+				.createBundleNativeCode();
 
 		this.entry = entry;
 		this.setTargetToNativeCode(node.getTarget());
@@ -1302,7 +1288,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseANotEqualsBooleanComparator(ANotEqualsBooleanComparator node) {
-		((StringBuffer)this.firstValue).append(node.getNotEquals().getText());
+		((StringBuffer) this.firstValue).append(node.getNotEquals().getText());
 
 	}
 
@@ -1319,7 +1305,7 @@ public class Translation implements Analysis {
 
 	public void caseAOsnameDirective(AOsnameDirective node) {
 		node.getOsnameValue().apply(this);
-		OsName directive = parameterFactory.createOsName();
+		OsName directive = OptionFactory.eINSTANCE.createOsName();
 		directive.setOsname((OsNameEnum) this.firstValue);
 		((BundleNativeCode) this.entry).addDirective(directive);
 	}
@@ -1449,7 +1435,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAOsversionDirective(AOsversionDirective node) {
-		OsVersion directive = parameterFactory.createOsVersion();
+		OsVersion directive = OptionFactory.eINSTANCE.createOsVersion();
 		node.getVersionRange().apply(this);
 		directive.setMinVersion((Version) this.firstValue);
 		directive.setMinNotInclude(this.minNotInclude);
@@ -1494,7 +1480,8 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAOtherValue(AOtherValue node) {
-		this.firstValue = new StringBuffer(node.getSimpleStringValue().getText());
+		this.firstValue = new StringBuffer(node.getSimpleStringValue()
+				.getText());
 
 	}
 
@@ -1509,7 +1496,8 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAPathElement(APathElement node) {
-		((StringBuffer)this.firstValue).append(node.getUnquotedString().getText());
+		((StringBuffer) this.firstValue).append(node.getUnquotedString()
+				.getText());
 
 	}
 
@@ -1523,20 +1511,21 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAPathSepOnlyPathUnquoted(APathSepOnlyPathUnquoted node) {
-		((StringBuffer)this.firstValue).append(node.getPathSep());
+		((StringBuffer) this.firstValue).append(node.getPathSep());
 
 	}
 
 	public void caseAPathSeptelementPathUnquoted(
 			APathSeptelementPathUnquoted node) {
 		if (node.getFirst() != null) {
-			((StringBuffer)this.firstValue).append(node.getFirst().getText());
+			((StringBuffer) this.firstValue).append(node.getFirst().getText());
 		}
 		if (node.getSecond() != null) {
-			((StringBuffer)this.firstValue).append(node.getSecond().getText());
+			((StringBuffer) this.firstValue).append(node.getSecond().getText());
 		}
 		if (node.getPathSep() != null) {
-			((StringBuffer)this.firstValue).append(node.getPathSep().getText());
+			((StringBuffer) this.firstValue)
+					.append(node.getPathSep().getText());
 		}
 
 		node.getPathElement().apply(this);
@@ -1545,17 +1534,17 @@ public class Translation implements Analysis {
 			suffix.apply(this);
 		}
 
-		//this.firstValue = ((String) this.firstValue).replace(" ", "");
-		for (int i = 0; i <((StringBuffer)this.firstValue).length(); i++) {
-			if (((StringBuffer)this.firstValue).charAt(i) == ' ') {
-				((StringBuffer)this.firstValue).deleteCharAt(i);
+		// this.firstValue = ((String) this.firstValue).replace(" ", "");
+		for (int i = 0; i < ((StringBuffer) this.firstValue).length(); i++) {
+			if (((StringBuffer) this.firstValue).charAt(i) == ' ') {
+				((StringBuffer) this.firstValue).deleteCharAt(i);
 			}
 		}
 
 	}
 
 	public void caseAPathSuffix(APathSuffix node) {
-		((StringBuffer)this.firstValue).append(node.getPathSep());
+		((StringBuffer) this.firstValue).append(node.getPathSep());
 		node.getPathElement().apply(this);
 
 	}
@@ -1587,7 +1576,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAProcessorDirective(AProcessorDirective node) {
-		Processor directive = parameterFactory.createProcessor();
+		Processor directive = OptionFactory.eINSTANCE.createProcessor();
 		node.getProcessorValue().apply(this);
 		directive.setProcessor((ProcessorEnum) this.firstValue);
 		((BundleNativeCode) this.entry).addDirective(directive);
@@ -1666,7 +1655,8 @@ public class Translation implements Analysis {
 
 	public void caseAQuotedStringStringEntryValue(
 			AQuotedStringStringEntryValue node) {
-		this.firstValue = new StringBuffer(node.getQuotedString().getText().replace("\"", ""));
+		this.firstValue = new StringBuffer(node.getQuotedString().getText()
+				.replace("\"", ""));
 
 	}
 
@@ -1715,20 +1705,19 @@ public class Translation implements Analysis {
 
 	public void caseARequireBundleSymbolicname(ARequireBundleSymbolicname node) {
 		RequireBundle entry = ManifestFactory.eINSTANCE.createRequireBundle();
-		
+
 		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
+		entry.setReference(((StringBuffer) this.firstValue).toString());
+		entry.setResolved(false);
+		this.unresolvedRequireBundle.put(entry, this.bundle);
 
-		this.unresolvedRequireBundleBundle.put(entry, this.bundle);
-		this.unresolvedRequireBundleValue.put(entry, ((StringBuffer) this.firstValue).toString());
-		
 		this.entry = entry;
 		for (PRequireBundleOptions option : node.getRequireBundleOptions()) {
 			option.apply(this);
 		}
-		
+
 		this.manifest.addRequireBundle(entry);
-		
 
 	}
 
@@ -1739,7 +1728,7 @@ public class Translation implements Analysis {
 
 	public void caseARequiredexecutionenvironment(
 			ARequiredexecutionenvironment node) {
-		BundleRequiredExecutionEnvironment entry = manifestFactory
+		BundleRequiredExecutionEnvironment entry = ManifestFactory.eINSTANCE
 				.createBundleRequiredExecutionEnvironment();
 		if (node.getIdentifierRequiredConfiguration() != null) {
 			String configuration = node.getIdentifierRequiredConfiguration()
@@ -1763,7 +1752,7 @@ public class Translation implements Analysis {
 			AResolutionDirectiveRequireBundleDirective node) {
 		if (this.entry instanceof RequireBundle) {
 			node.getResolutionValue().apply(this);
-			Resolution directive = parameterFactory.createResolution();
+			Resolution directive = OptionFactory.eINSTANCE.createResolution();
 			directive.setResolution((ResolutionEnum) this.firstValue);
 			((RequireBundle) this.entry).addDirective(directive);
 		}
@@ -1789,7 +1778,8 @@ public class Translation implements Analysis {
 	}
 
 	public void caseASelectionFilterDirective(ASelectionFilterDirective node) {
-		SelectionFilter directive = parameterFactory.createSelectionFilter();
+		SelectionFilter directive = OptionFactory.eINSTANCE
+				.createSelectionFilter();
 		this.firstValue = new StringBuffer("");
 		node.getSelectionFilterValue().apply(this);
 		directive.setExpression(((StringBuffer) this.firstValue).toString());
@@ -1814,9 +1804,11 @@ public class Translation implements Analysis {
 		this.firstValue = new StringBuffer("");
 		node.getUniqueName().apply(this);
 		if (this._import) {
-			ImportService entry = manifestFactory.createImportService();
-			this.unresolvedImportServiceBundle.put(entry, this.bundle);
-			this.unresolvedImportServiceValue.put(entry, ((StringBuffer) this.firstValue).toString());
+			ImportService entry = ManifestFactory.eINSTANCE
+					.createImportService();
+			entry.setServiceReference(((StringBuffer) this.firstValue)
+					.toString());
+			this.unresolvedImportService.put(entry, this.bundle);
 			this.manifest.addImportService(entry);
 
 			this.entry = entry;
@@ -1825,12 +1817,12 @@ public class Translation implements Analysis {
 			}
 
 		} else if (!this._import) {
-			ExportService entry = manifestFactory.createExportService();
-			Service service = manifestFactory.createService();
+			ExportService entry = ManifestFactory.eINSTANCE
+					.createExportService();
+			Service service = ManifestFactory.eINSTANCE.createService();
 
-			this.unresolvedExportServiceBundle.put(service, this.bundle);
-			this.unresolvedExportServiceValue.put(service,
-					((StringBuffer) this.firstValue).toString());
+			service.setReference(((StringBuffer) this.firstValue).toString());
+			this.unresolvedExportService.put(service, this.bundle);
 			this.servicesAvailable.add(service);
 
 			entry.setService(service);
@@ -1845,7 +1837,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseASimpleEntry(ASimpleEntry node) {
-		SimpleManifestEntryManyValues entry = manifestFactory
+		SimpleManifestEntryManyValues entry = ManifestFactory.eINSTANCE
 				.createSimpleManifestEntryManyValues();
 		entry.setEntryName(node.getEntry().getText().split(":")[0]);
 		this.entry = entry;
@@ -1872,7 +1864,7 @@ public class Translation implements Analysis {
 
 	public void caseASingletonSymbolicnameDirective(
 			ASingletonSymbolicnameDirective node) {
-		Singleton directive = parameterFactory.createSingleton();
+		Singleton directive = OptionFactory.eINSTANCE.createSingleton();
 		node.getBoolean().apply(this);
 		directive.setSingleton((Boolean) this.firstValue);
 		((BundleSymbolicName) this.entry).addDirective(directive);
@@ -1897,21 +1889,22 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAUniqueName(AUniqueName node) {
-		((StringBuffer)this.firstValue).append(node.getIdentifier().getText());
+		((StringBuffer) this.firstValue).append(node.getIdentifier().getText());
 		for (PUniqueNameSuffix suffix : node.getUniqueNameSuffix()) {
 			suffix.apply(this);
 		}
 	}
 
 	public void caseAUniqueNameSuffix(AUniqueNameSuffix node) {
-		((StringBuffer)this.firstValue).append(node.getDot().getText()
+		((StringBuffer) this.firstValue).append(node.getDot().getText()
 				+ node.getIdentifier().getText());
 
 	}
 
 	public void caseAUnquotedStringStringEntryValue(
 			AUnquotedStringStringEntryValue node) {
-		((StringBuffer)this.firstValue).append(node.getUnquotedString().getText());
+		((StringBuffer) this.firstValue).append(node.getUnquotedString()
+				.getText());
 
 	}
 
@@ -1922,7 +1915,7 @@ public class Translation implements Analysis {
 
 	public void caseAUsesExportPackageDirective(AUsesExportPackageDirective node) {
 		this.excludeIncludeOrUse = this.use;
-		this.secondValue = parameterFactory.createUses();
+		this.secondValue = OptionFactory.eINSTANCE.createUses();
 		node.getExportPackageUseExcludeIncludeValue().apply(this);
 
 	}
@@ -1931,7 +1924,7 @@ public class Translation implements Analysis {
 		this.minNotInclude = false;
 		this.maxNotInclude = true;
 
-		this.firstValue = manifestFactory.createVersion();
+		this.firstValue = ManifestFactory.eINSTANCE.createVersion();
 		node.getMajorVersionEntry().apply(this);
 
 	}
@@ -1955,12 +1948,12 @@ public class Translation implements Analysis {
 			this.maxNotInclude = false;
 		}
 
-		this.firstValue = manifestFactory.createVersion();
+		this.firstValue = ManifestFactory.eINSTANCE.createVersion();
 		node.getMaxVersion().apply(this);
 
 		this.secondValue = this.firstValue;
 
-		this.firstValue = manifestFactory.createVersion();
+		this.firstValue = ManifestFactory.eINSTANCE.createVersion();
 		node.getMinVersion().apply(this);
 
 	}
@@ -1973,7 +1966,7 @@ public class Translation implements Analysis {
 
 	public void caseAVisibilityDirectiveRequireBundleDirective(
 			AVisibilityDirectiveRequireBundleDirective node) {
-		Visibility directive = parameterFactory.createVisibility();
+		Visibility directive = OptionFactory.eINSTANCE.createVisibility();
 		node.getVisibilityValue().apply(this);
 
 		directive.setVisibility((VisibilityEnum) this.firstValue);
@@ -1995,78 +1988,102 @@ public class Translation implements Analysis {
 
 	public void caseEOF(EOF node) {
 		if (this.manifest.getBundleSymbolicName() == null) {
-			OSGiIntrospectorUtil.log(Level.ERROR, "The manifest for this bundle is unvalid."
+			util
+					.log(
+							Level.ERROR,
+							"The manifest for this bundle is unvalid."
 									+ "\n"
 									+ "Maybe it respects the Eclipse Bundle definition with plugin.xml file."
 									+ "\n"
-									+ "With the Introspector, you need to use MANIFEST.MF file to describe our bundle.", bundle);
+									+ "With the Introspector, you need to use MANIFEST.MF file to describe our bundle.",
+							bundle);
 			this.validTranslation = false;
 		}
-		if (this.manifest.getBundleVersion() == null || this.manifest.getBundleVersion().getVersion() == null) {
+		if (this.manifest.getBundleVersion() == null
+				|| this.manifest.getBundleVersion().getVersion() == null) {
 			Version version = ManifestFactory.eINSTANCE.createVersion();
 			version.setMajor(0);
 			version.setMinor(0);
 			version.setMicro(0);
-			BundleVersion bundleVersion = ManifestFactory.eINSTANCE.createBundleVersion();
+			BundleVersion bundleVersion = ManifestFactory.eINSTANCE
+					.createBundleVersion();
 			bundleVersion.setVersion(version);
 		}
 		if (this.manifest.getBundleClassPaths().size() == 0) {
-			for (SystemEntry entry : this.bundle.getFolder().getEntries()) {
-				if (entry instanceof Folder) {
-					Package _package = OSGiIntrospectorUtil
-							.convertToJavaElement((Folder) entry, false);
-					if (_package != null) {
-						this.bundle.getPackage().addPackage(_package);
-					}
-				} else if (entry.getName().endsWith(".class")) {
-					Class clazz = jarFactory.createClass();
-					clazz.setName(entry.getName().substring(0,
-							entry.getName().indexOf(".class")));
-					clazz.setName(entry.getFullPath().replace(".class", ""));
-					this.bundle.getPackage().addClass(clazz);
-				}
-			}
-			BundleClassPath entry = manifestFactory.createBundleClassPath();
-			entry.addEntry(this.bundle.getFolder());
-			entry.addEntryReference(".");
-			entry.setResolved(true);
+			/*
+			 * for (SystemEntry entry : this.bundle.getFolder().getEntries()) {
+			 * if (entry instanceof Folder) { Package _package =
+			 * OSGiIntrospectorUtil .convertToJavaElement((Folder) entry,
+			 * false); if (_package != null) {
+			 * this.bundle.getPackage().addPackage(_package); } } else if
+			 * (entry.getName().endsWith(".class")) { Class clazz =
+			 * jarFactory.createClass();
+			 * clazz.setName(entry.getName().substring(0,
+			 * entry.getName().indexOf(".class")));
+			 * clazz.setName(entry.getFullPath().replace(".class", ""));
+			 * this.bundle.getPackage().addClass(clazz); } }
+			 */
+			BundleClassPath entry = ManifestFactory.eINSTANCE
+					.createBundleClassPath();
+			ClassPath classPath = ManifestFactory.eINSTANCE.createClassPath();
+			classPath.setReference(".");
+			classPath.setEntry(this.bundle.getFolder());
+			classPath.setResolved(false);
+			this.unresolvedBundleClassPath.put(classPath, this.bundle);
+			entry.addClassPath(classPath);
 			this.manifest.addBundleClassPath(entry);
-		} else {
-			for (SystemEntry entry : this.bundle.getFolder().getEntries()) {
-				if (entry.isBundleClassPath()) {
-					if (entry instanceof Folder) {
-						Package _package = OSGiIntrospectorUtil.convertToJavaElement((Folder)entry, true);
-						if (_package != null) {
-							this.bundle.getPackage().addPackage(_package);
-						}
-					} else {
-						Class clazz = JarFactory.eINSTANCE.createClass();
-						clazz.setFullPath(entry.getFullPath().replace("/", "."));
-						clazz.setName(entry.getName().substring(0, entry.getName().length() - (".class").length()));
-					}
-				}
-			}
-		}
+		}/*
+			 * else { for (SystemEntry entry :
+			 * this.bundle.getFolder().getEntries()) { if
+			 * (entry.isBundleClassPath()) { if (entry instanceof Folder) {
+			 * Package _package = OSGiIntrospectorUtil
+			 * .convertToJavaElement((Folder) entry, true); if (_package !=
+			 * null) { this.bundle.getPackage().addPackage(_package); } } else {
+			 * Class clazz = JarFactory.eINSTANCE.createClass(); clazz
+			 * .setFullPath(entry.getFullPath().replace("/", ".")); clazz
+			 * .setName(entry.getName().substring( 0, entry.getName().length() -
+			 * (".class").length())); } } } }
+			 */
 		if (this.manifest.getFragmentHost() != null) {
 			if (this.manifest.getBundleActivator() != null) {
-				OSGiIntrospectorUtil.log(Level.ERROR, "When there is a Fragment-Host entry, there should not have a Bundle-Activator entry.", bundle);
+				util
+						.log(
+								Level.ERROR,
+								"When there is a Fragment-Host entry, there should not have a Bundle-Activator entry.",
+								bundle);
 				this.validTranslation = false;
 			}
 			if (this.manifest.getFragmentHost().getDirectives() != null) {
 				if (this.manifest.getImportPackages().size() > 0) {
-					OSGiIntrospectorUtil.log(Level.ERROR, "When the extension directive is set to the Fragment-Host entry, there should not have Import-Package entry.", bundle);
+					util
+							.log(
+									Level.ERROR,
+									"When the extension directive is set to the Fragment-Host entry, there should not have Import-Package entry.",
+									bundle);
 					this.validTranslation = false;
 				}
 				if (this.manifest.getRequireBundles().size() > 0) {
-					OSGiIntrospectorUtil.log(Level.ERROR, "When the extension directive is set to the Fragment-Host entry, there should not have Require-Bundle entry.", bundle); 
+					util
+							.log(
+									Level.ERROR,
+									"When the extension directive is set to the Fragment-Host entry, there should not have Require-Bundle entry.",
+									bundle);
 					this.validTranslation = false;
 				}
 				if (this.manifest.getBundleNativeCodes().size() > 0) {
-					OSGiIntrospectorUtil.log(Level.ERROR, "When the extension directive is set to the Fragment-Host entry, there should not have Bundle-NativeCode entry.", bundle);
+					util
+							.log(
+									Level.ERROR,
+									"When the extension directive is set to the Fragment-Host entry, there should not have Bundle-NativeCode entry.",
+									bundle);
 					this.validTranslation = false;
 				}
 				if (this.manifest.getDynamicImportPackages().size() > 0) {
-					OSGiIntrospectorUtil.log(Level.ERROR, "When the extension directive is set to the Fragment-Host entry, there should not have DynamicImport-Package entry.", bundle);
+					util
+							.log(
+									Level.ERROR,
+									"When the extension directive is set to the Fragment-Host entry, there should not have DynamicImport-Package entry.",
+									bundle);
 					this.validTranslation = false;
 				}
 			}
@@ -2773,8 +2790,7 @@ public class Translation implements Analysis {
 	}
 
 	public void caseANumberQualifierVersion(ANumberQualifierVersion node) {
-			((Version) this.firstValue)
-					.setQualifier(node.getNumber().getText());
+		((Version) this.firstValue).setQualifier(node.getNumber().getText());
 
 	}
 
@@ -2789,9 +2805,14 @@ public class Translation implements Analysis {
 	}
 
 	public void caseAMustNotAppearsPackageName(AMustNotAppearsPackageName node) {
-		OSGiIntrospectorUtil.log(Level.WARN, "It's better to not use \".\" as package name because it defines the default package."
-				+ "\n"
-				+ "In Java programming, it's recommended to not use the default package.", bundle);
+		util
+				.log(
+						Level.WARN,
+						"It's better to not use \".\" as package name because it defines the default package."
+								+ "\n"
+								+ "In Java programming, it's recommended to not use the default package.",
+						bundle);
+		((StringBuffer) this.firstValue).append(".");
 	}
 
 	public void caseAPackageNameWildcard(APackageNameWildcard node) {
@@ -2801,14 +2822,14 @@ public class Translation implements Analysis {
 
 	public void caseAIdentifierUniqueNameWildcardSuffix(
 			AIdentifierUniqueNameWildcardSuffix node) {
-		((StringBuffer)this.firstValue).append(node.getDot().getText()
+		((StringBuffer) this.firstValue).append(node.getDot().getText()
 				+ node.getIdentifier().getText());
 
 	}
 
 	public void caseAOptionalUniqueNameWildcardSuffix(
 			AOptionalUniqueNameWildcardSuffix node) {
-		((StringBuffer)this.firstValue).append(node.getDot().getText()
+		((StringBuffer) this.firstValue).append(node.getDot().getText()
 				+ node.getOptional().getText());
 
 	}
@@ -2825,13 +2846,13 @@ public class Translation implements Analysis {
 
 	public void caseAIdentifierUniqueNameWildcardCommons(
 			AIdentifierUniqueNameWildcardCommons node) {
-		((StringBuffer)this.firstValue).append(node.getIdentifier().getText());
+		((StringBuffer) this.firstValue).append(node.getIdentifier().getText());
 
 	}
 
 	public void caseAOptionalUniqueNameWildcardCommons(
 			AOptionalUniqueNameWildcardCommons node) {
-		((StringBuffer)this.firstValue).append(node.getOptional().getText());
+		((StringBuffer) this.firstValue).append(node.getOptional().getText());
 
 	}
 
@@ -2881,37 +2902,26 @@ public class Translation implements Analysis {
 	private void registerUnresolvedExportPackageDirective(
 			ExportPackageDirective directive, String value) {
 
+		option.Class _class = OptionFactory.eINSTANCE.createClass();
+		_class.setReference(value);
+		_class.setResolved(false);
 		if (this.excludeIncludeOrUse == this.exclude) {
 			if (directive == null) {
-				directive = parameterFactory.createExcludeClasses();
+				directive = OptionFactory.eINSTANCE.createExcludeClasses();
 			}
-			List<String> list = this.unresolvedExportPackageExcludeValue
-					.get(directive);
-			if (list == null) {
-				this.unresolvedExportPackageExcludeExportPackage.put(
-						(ExcludeClasses) directive, (ExportPackage) this.entry);
-				list = new ArrayList<String>();
-			}
-			list.add(value);
-			this.unresolvedExportPackageExcludeValue.put(
-					(ExcludeClasses) directive, list);
+			((ExcludeClasses) directive).addExclude(_class);
+			this.unresolvedExportPackageExclude.put(_class,
+					(ExportPackage) this.entry);
 		} else if (this.excludeIncludeOrUse == this.include) {
 			if (directive == null) {
-				directive = parameterFactory.createIncludeClasses();
+				directive = OptionFactory.eINSTANCE.createIncludeClasses();
 			}
-			List<String> list = this.unresolvedExportPackageIncludeValue
-					.get(directive);
-			if (list == null) {
-				this.unresolvedExportPackageIncludeExportPackage.put(
-						(IncludeClasses) directive, (ExportPackage) this.entry);
-				list = new ArrayList<String>();
-			}
-			list.add(value);
-			this.unresolvedExportPackageIncludeValue.put(
-					(IncludeClasses) directive, list);
+			((IncludeClasses) directive).addInclude(_class);
+			this.unresolvedExportPackageInclude.put(_class,
+					(ExportPackage) this.entry);
 		} else if (this.excludeIncludeOrUse == this.use) {
 			if (directive == null) {
-				directive = parameterFactory.createUses();
+				directive = OptionFactory.eINSTANCE.createUses();
 			}
 			List<String> list = this.unresolvedExportPackageUsesValue
 					.get(directive);
@@ -2927,34 +2937,21 @@ public class Translation implements Analysis {
 
 	private void registerUnresolvedActivationPolicyDirective(
 			ActivationPolicyDirective directive, String value) {
+		option.Package _package = OptionFactory.eINSTANCE.createPackage();
+		_package.setReference(value);
+		_package.setResolved(false);
 		if (this.excludeIncludeOrUse == this.exclude) {
 			if (directive == null) {
-				directive = parameterFactory.createExcludePackages();
+				directive = OptionFactory.eINSTANCE.createExcludePackages();
 			}
-			List<String> list = this.unresolvedActivationPolicyExcludeValue
-					.get(directive);
-			if (list == null) {
-				this.unresolvedActivationPolicyExcludeBundle.put(
-						(ExcludePackages) directive, this.bundle);
-				list = new ArrayList<String>();
-			}
-			list.add(value);
-			this.unresolvedActivationPolicyExcludeValue.put(
-					(ExcludePackages) directive, list);
+			((ExcludePackages) directive).addExcludePackage(_package);
+			this.unresolvedActivationPolicyExclude.put(_package, this.bundle);
 		} else if (this.excludeIncludeOrUse == this.include) {
 			if (directive == null) {
-				directive = parameterFactory.createIncludePackages();
+				directive = OptionFactory.eINSTANCE.createIncludePackages();
 			}
-			List<String> list = this.unresolvedActivationPolicyIncludeValue
-					.get(directive);
-			if (list == null) {
-				this.unresolvedActivationPolicyIncludeBundle.put(
-						(IncludePackages) directive, this.bundle);
-				list = new ArrayList<String>();
-			}
-			list.add(value);
-			this.unresolvedActivationPolicyIncludeValue.put(
-					(IncludePackages) directive, list);
+			((IncludePackages) directive).addIncludePackage(_package);
+			this.unresolvedActivationPolicyInclude.put(_package, this.bundle);
 		}
 	}
 
@@ -2967,133 +2964,88 @@ public class Translation implements Analysis {
 	private void setTargetToClassPath(PTarget target) {
 		this.firstValue = new StringBuffer("");
 		target.apply(this);
-		if (!((StringBuffer) this.firstValue).toString().equals(".")) {
-			SystemEntry systemEntry = this.bundle.getFolder().getEntry(
-					((StringBuffer) this.firstValue).toString());
-			if (systemEntry != null) {
-				if (systemEntry instanceof Folder) {
-					Package _package = OSGiIntrospectorUtil
-							.convertToJavaElement((Folder) systemEntry, false);
-					if (_package != null) {
-						this.bundle.getPackage().addPackage(_package);
-					} else {
-						// TODO c'est seulement un dossier contenant des ressources
-					}
-					((BundleClassPath) this.entry)
-							.addEntry((Folder) systemEntry);
-					((BundleClassPath) this.entry).setResolved(true);
-				} else if (systemEntry instanceof File) {
-					if (systemEntry.getName().endsWith(".jar")) {
-						try {
-							OSGiIntrospectorUtil.addEntriesFromJar(this.bundle,
-									(File) systemEntry, this.bundle);
-							((BundleClassPath) this.entry)
-									.addEntry((File) systemEntry);
-							((BundleClassPath) this.entry).setResolved(true);
-						} catch (IOException e) {
-							OSGiIntrospectorUtil.log(Level.WARN, "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
-									+ "IOException with "
-									+ systemEntry.getFullPath() + ".", bundle);
-							((BundleClassPath) this.entry).setResolved(false);
-							
-						}
-					} else {
-						OSGiIntrospectorUtil.log(Level.WARN, "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
-								+ systemEntry.getFullPath()
-								+ " is a file but is not a JAR file.", bundle);
-						((BundleClassPath) this.entry).setResolved(false);
-						
-					}
-				} else {
-					OSGiIntrospectorUtil.log(Level.WARN, "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
-							+ this.firstValue
-							+ " must be a JAR file or a folder.", bundle);
-					((BundleClassPath) this.entry).setResolved(false);
-				}
-				((BundleClassPath) this.entry).addEntryReference(((StringBuffer) this.firstValue).toString());
-			} else {
-				List<String> list = this.unresolvedBundleClassPathValue.get((BundleClassPath) this.entry);
-				if (list == null) {
-					this.unresolvedBundleClassPathBundle.put((BundleClassPath) this.entry, this.bundle);
-					list = new ArrayList<String>();
-				}
-				list.add(((StringBuffer) this.firstValue).toString());
-				this.unresolvedBundleClassPathValue.put((BundleClassPath) this.entry, list);
-			}
-		} else if (((StringBuffer) this.firstValue).toString().equals(".")) {
-			for (SystemEntry entry : this.bundle.getFolder().getEntries()) {
-				if (entry instanceof Folder) {
-					Package _package = OSGiIntrospectorUtil
-							.convertToJavaElement((Folder) entry, false);
-					if (_package != null) {
-						this.bundle.getPackage().addPackage(_package);
-					}
-				} else if (entry.getName().endsWith(".class")) {
-					Class clazz = jarFactory.createClass();
-					clazz.setName(entry.getName().substring(0,
-							entry.getName().indexOf(".class")));
-					clazz
-							.setFullPath(entry.getFullPath().replace(".class",
-									""));
-					this.bundle.getPackage().addClass(clazz);
-				}
-			}
-			((BundleClassPath) this.entry).addEntry(this.bundle.getFolder());
-			((BundleClassPath) this.entry).addEntryReference(((StringBuffer) this.firstValue).toString());
-			((BundleClassPath) this.entry).setResolved(true);
-		} else {
-			OSGiIntrospectorUtil.log(Level.WARN, "Unvalid " + Constants.BUNDLE_CLASSPATH + " entry :" + "\n"
-					+ this.firstValue + " is unresolved. (must not appears).", bundle);
-			((BundleClassPath) this.entry).addEntryReference(((StringBuffer) this.firstValue).toString());
-			((BundleClassPath) this.entry).setResolved(false);
-		}
+		ClassPath classPath = ManifestFactory.eINSTANCE.createClassPath();
+		classPath.setReference(((StringBuffer) this.firstValue).toString());
+		((BundleClassPath) this.entry).addClassPath(classPath);
+		classPath.setResolved(false);
+		this.unresolvedBundleClassPath.put(classPath, this.bundle);
+		/*
+		 * if (!((StringBuffer) this.firstValue).toString().equals(".")) {
+		 * SystemEntry systemEntry = this.bundle.getFolder().getEntry(
+		 * ((StringBuffer) this.firstValue).toString()); if (systemEntry !=
+		 * null) { if (systemEntry instanceof Folder) { Package _package =
+		 * OSGiIntrospectorUtil .convertToJavaElement((Folder) systemEntry,
+		 * false); if (_package != null) {
+		 * this.bundle.getPackage().addPackage(_package); } else { // TODO c'est
+		 * seulement un dossier contenant des // ressources }
+		 * classPath.setEntry((Folder) systemEntry);
+		 * classPath.setResolved(true); } else if (systemEntry instanceof File) {
+		 * if (systemEntry.getName().endsWith(".jar")) { try {
+		 * OSGiIntrospectorUtil.addEntriesFromJar(this.bundle, (File)
+		 * systemEntry, this.bundle); classPath.setEntry((File) systemEntry);
+		 * classPath.setResolved(true); } catch (IOException e) {
+		 * util.log(Level.WARN, "Unvalid " + Constants.BUNDLE_CLASSPATH + "
+		 * entry :" + "\n" + "IOException with " + systemEntry.getFullPath() +
+		 * ".", bundle); classPath.setResolved(false);
+		 *  } } else { util.log(Level.WARN, "Unvalid " +
+		 * Constants.BUNDLE_CLASSPATH + " entry :" + "\n" +
+		 * systemEntry.getFullPath() + " is a file but is not a JAR file.",
+		 * bundle); classPath.setResolved(false);
+		 *  } } else { util.log(Level.WARN, "Unvalid " +
+		 * Constants.BUNDLE_CLASSPATH + " entry :" + "\n" + this.firstValue + "
+		 * must be a JAR file or a folder.", bundle);
+		 * classPath.setResolved(false); } } else {
+		 * this.unresolvedBundleClassPath.put(classPath, this.bundle); } } else
+		 * if (((StringBuffer) this.firstValue).toString().equals(".")) { for
+		 * (SystemEntry entry : this.bundle.getFolder().getEntries()) { if
+		 * (entry instanceof Folder) { Package _package = OSGiIntrospectorUtil
+		 * .convertToJavaElement((Folder) entry, false); if (_package != null) {
+		 * this.bundle.getPackage().addPackage(_package); } } else if
+		 * (entry.getName().endsWith(".class")) { Class clazz =
+		 * jarFactory.createClass(); clazz.setName(entry.getName().substring(0,
+		 * entry.getName().indexOf(".class"))); clazz
+		 * .setFullPath(entry.getFullPath().replace(".class", ""));
+		 * this.bundle.getPackage().addClass(clazz); } }
+		 * classPath.setEntry(this.bundle.getFolder());
+		 * classPath.setResolved(true); } else { util.log(Level.WARN, "Unvalid " +
+		 * Constants.BUNDLE_CLASSPATH + " entry :" + "\n" + this.firstValue + "
+		 * is unresolved. (must not appears).", bundle);
+		 * classPath.setResolved(false);
+		 * this.unresolvedBundleClassPath.put(classPath, this.bundle); }
+		 */
 	}
 
 	private void setTargetToNativeCode(PTarget target) {
 		this.firstValue = new StringBuffer("");
 		target.apply(this);
-		SystemEntry systemEntry = this.bundle.getFolder().getEntry(
-				((StringBuffer) this.firstValue).toString());
-		if (systemEntry != null && systemEntry instanceof File) {
-			((BundleNativeCode) this.entry).addFile((File) systemEntry);
-			((BundleNativeCode) this.entry).setResolved(((BundleNativeCode) this.entry).isResolved() && true);
-		} else if (systemEntry == null) {
-			List<String> list = this.unresolvedBundleNativeCodeValue.get(this.bundle);
-			if (list == null) {
-				list = new ArrayList<String>();
-				this.unresolvedBundleNativeCodeBundle.put(((BundleNativeCode) this.entry), this.bundle);
-			}
-			list.add(((StringBuffer) this.firstValue).toString());
-			this.unresolvedBundleNativeCodeValue.put(((BundleNativeCode) this.entry), list);
-		} else {
-			OSGiIntrospectorUtil.log(Level.WARN, "The " + Constants.BUNDLE_NATIVECODE + " value must be a file." + "\n"
-					+ systemEntry + " is not a file.", bundle);
-			
-		}
+		NativeCode nativeCode = ManifestFactory.eINSTANCE.createNativeCode();
+		nativeCode.setReference(((StringBuffer) this.firstValue).toString());
+		((BundleNativeCode) this.entry).addNativeCode(nativeCode);
+		nativeCode.setResolved(false);
+		this.unresolvedBundleNativeCode.put(nativeCode, this.bundle);
+		/*
+		 * SystemEntry systemEntry = this.bundle.getFolder().getEntry(
+		 * ((StringBuffer) this.firstValue).toString()); if (systemEntry != null &&
+		 * systemEntry instanceof File) { nativeCode.setFile((File)
+		 * systemEntry); nativeCode.setResolved(true); } else if (systemEntry ==
+		 * null) { this.unresolvedBundleNativeCode.put(nativeCode, this.bundle); }
+		 * else { util.log(Level.WARN, "The " + Constants.BUNDLE_NATIVECODE + "
+		 * value must be a file." + "\n" + systemEntry + " is not a file.",
+		 * bundle);
+		 *  }
+		 */
 	}
 
-	public Map<BundleActivator, Bundle> getUnresolvedActivatorBundle() {
-		return unresolvedActivatorBundle;
+	public Map<BundleActivator, Bundle> getUnresolvedActivator() {
+		return unresolvedActivator;
 	}
 
-	public Map<BundleActivator, String> getUnresolvedActivatorValue() {
-		return unresolvedActivatorValue;
+	public Map<Service, Bundle> getUnresolvedExportService() {
+		return unresolvedExportService;
 	}
 
-	public Map<Service, Bundle> getUnresolvedExportServiceBundle() {
-		return unresolvedExportServiceBundle;
-	}
-
-	public Map<Service, String> getUnresolvedExportServiceValue() {
-		return unresolvedExportServiceValue;
-	}
-
-	public Map<ExportPackage, Bundle> getUnresolvedExportPackageBundle() {
-		return unresolvedExportPackageBundle;
-	}
-
-	public Map<ExportPackage, List<String>> getUnresolvedExportPackageValue() {
-		return unresolvedExportPackageValue;
+	public Map<manifest.Package, Bundle> getUnresolvedExportPackage() {
+		return unresolvedExportPackage;
 	}
 
 	public Map<Uses, Bundle> getUnresolvedExportPackageUsesBundle() {
@@ -3104,80 +3056,44 @@ public class Translation implements Analysis {
 		return unresolvedExportPackageUsesValue;
 	}
 
-	public Map<ExcludeClasses, ExportPackage> getUnresolvedExportPackageExcludeExportPackage() {
-		return unresolvedExportPackageExcludeExportPackage;
+	public Map<option.Class, ExportPackage> getUnresolvedExportPackageExclude() {
+		return unresolvedExportPackageExclude;
 	}
 
-	public Map<ExcludeClasses, List<String>> getUnresolvedExportPackageExcludeValue() {
-		return unresolvedExportPackageExcludeValue;
+	public Map<option.Class, ExportPackage> getUnresolvedExportPackageInclude() {
+		return unresolvedExportPackageInclude;
 	}
 
-	public Map<IncludeClasses, ExportPackage> getUnresolvedExportPackageIncludeExportPackage() {
-		return unresolvedExportPackageIncludeExportPackage;
+	public Map<option.Package, Bundle> getUnresolvedActivationPolicyExclude() {
+		return unresolvedActivationPolicyExclude;
 	}
 
-	public Map<IncludeClasses, List<String>> getUnresolvedExportPackageIncludeValue() {
-		return unresolvedExportPackageIncludeValue;
+	public Map<option.Package, Bundle> getUnresolvedActivationPolicyInclude() {
+		return unresolvedActivationPolicyInclude;
 	}
 
-	public Map<ExcludePackages, Bundle> getUnresolvedActivationPolicyExcludeBundle() {
-		return unresolvedActivationPolicyExcludeBundle;
+	public Map<RequireBundle, Bundle> getUnresolvedRequireBundle() {
+		return unresolvedRequireBundle;
 	}
 
-	public Map<ExcludePackages, List<String>> getUnresolvedActivationPolicyExcludeValue() {
-		return unresolvedActivationPolicyExcludeValue;
+	public Map<ImportPackage, Bundle> getUnresolvedImportPackage() {
+		return unresolvedImportPackage;
 	}
 
-	public Map<IncludePackages, Bundle> getUnresolvedActivationPolicyIncludeBundle() {
-		return unresolvedActivationPolicyIncludeBundle;
-	}
-
-	public Map<IncludePackages, List<String>> getUnresolvedActivationPolicyIncludeValue() {
-		return unresolvedActivationPolicyIncludeValue;
-	}
-
-	public Map<RequireBundle, Bundle> getUnresolvedRequireBundleBundle() {
-		return unresolvedRequireBundleBundle;
-	}
-
-	public Map<RequireBundle, String> getUnresolvedRequireBundleValue() {
-		return unresolvedRequireBundleValue;
-	}
-
-	public Map<ImportPackage, Bundle> getUnresolvedImportPackageBundle() {
-		return unresolvedImportPackageBundle;
-	}
-
-	public Map<ImportPackage, List<String>> getUnresolvedImportPackageValue() {
-		return unresolvedImportPackageValue;
-	}
-
-	public Map<ImportService, Bundle> getUnresolvedImportServiceBundle() {
-		return unresolvedImportServiceBundle;
-	}
-
-	public Map<ImportService, String> getUnresolvedImportServiceValue() {
-		return unresolvedImportServiceValue;
+	public Map<ImportService, Bundle> getUnresolvedImportService() {
+		return unresolvedImportService;
 	}
 
 	public List<Service> getServicesAvailable() {
 		return servicesAvailable;
 	}
 
-	public Map<BundleClassPath, Bundle> getUnresolvedBundleClassPathBundle() {
-		return unresolvedBundleClassPathBundle;
+	public Map<ClassPath, Bundle> getUnresolvedBundleClassPath() {
+		return unresolvedBundleClassPath;
 	}
 
-	public Map<BundleClassPath, List<String>> getUnresolvedBundleClassPathValue() {
-		return unresolvedBundleClassPathValue;
-	}
-
-	public Map<BundleNativeCode, Bundle> getUnresolvedBundleNativeCodeBundle() {
-		return unresolvedBundleNativeCodeBundle;
-	}
-
-	public Map<BundleNativeCode, List<String>> getUnresolvedBundleNativeCodeValue() {
-		return unresolvedBundleNativeCodeValue;
+	public Map<NativeCode, Bundle> getUnresolvedBundleNativeCode() {
+		return unresolvedBundleNativeCode;
 	}
 
 }

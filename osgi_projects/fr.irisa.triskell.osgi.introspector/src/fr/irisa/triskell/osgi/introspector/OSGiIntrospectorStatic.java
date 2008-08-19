@@ -5,9 +5,12 @@ import jar.JarFactory;
 import jar.Package;
 import jar.SystemEntry;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
@@ -22,69 +25,78 @@ import framework.Bundle;
 import framework.Framework;
 import framework.FrameworkFactory;
 
-// TODO gestion du log
 /**
  * @author Erwan Daubert - erwan.daubert@gmail.com
  * @version 1.0
  * 
- * This class is used to generate an OSGi model with the location of a framework.<br />
+ * This class is used to generate an OSGi model with the location of a
+ * framework.<br />
  * This generation is only static :<br />
  * There are not relation between {@link Bundle} except for Fragment Bundle.
  * 
  */
 public class OSGiIntrospectorStatic {
+	private OSGiIntrospectorUtil util;
 	private Framework framework;
 	private Parser parser;
 
-	private boolean introspectionWithoutError;
+	public OSGiIntrospectorStatic(OSGiIntrospectorUtil util) {
+		this.util = util;
+	}
 
 	/**
 	 * This function is used to generate a complete framework with a location.
 	 * It checks only the static information.
 	 */
-	public void generateFramework(String DirectoryFilePath, String XMIFilePath) {
+	public void generateFramework(String DirectoryFilePath, String XMIFilePath,
+			boolean systemRepresentation) {
 		// TODO gestion du log en static ????
-		OSGiIntrospectorUtil.setLoggerProperties(XMIFilePath.substring(0, XMIFilePath.lastIndexOf(File.separator)));
+		util.setLoggerProperties(XMIFilePath.substring(0, XMIFilePath
+				.lastIndexOf(File.separator)));
 		this.framework = FrameworkFactory.eINSTANCE.createFramework();
-		this.parser = new Parser();
+		this.parser = new Parser(util);
 		File f = new File(DirectoryFilePath);
 		if (f.isDirectory()) {
-			boolean validGeneration = true;
 			String[] bundlePaths = f.list();
 			for (String path : bundlePaths) {
-				validGeneration = this.generateBundle(f.getAbsolutePath()
-								+ File.separator + path) && validGeneration;
+				this.generateBundle(
+						f.getAbsolutePath() + File.separator + path,
+						systemRepresentation);
 			}
-				this.introspectionWithoutError = this.resolve() && validGeneration;
-				OSGiIntrospectorUtil.saveModel(XMIFilePath, this.framework);
+			this.resolve(systemRepresentation);
+			util.saveModel(XMIFilePath, this.framework);
 		} else {
-			OSGiIntrospectorUtil.log(Level.ERROR,
+			util.log(Level.ERROR,
 					"GenerateFramework take two parameters which are String."
 							+ "\n" + "The first define a directory." + "\n"
 							+ "The second define a file." + "\n", null);
 		}
 
-		OSGiIntrospectorUtil.shutdownLoggers();
+		util.shutdownLoggers();
 	}
 
 	/**
-	 * This function is used to create the {@link Bundle} representation of an OSGi Bundle
-	 * This Bundle is located with bundlePath and can be a directory or a Jar File.
-	 * @param bundlePath the location path of the bundle
+	 * This function is used to create the {@link Bundle} representation of an
+	 * OSGi Bundle This Bundle is located with bundlePath and can be a directory
+	 * or a Jar File.
+	 * 
+	 * @param bundlePath
+	 *            the location path of the bundle
 	 * @return true if the representation was done correctly, false else.
 	 */
-	private boolean generateBundle(String bundlePath) {
+	private boolean generateBundle(String bundlePath,
+			boolean systemRepresentation) {
 		java.io.File f = new java.io.File(bundlePath);
 		if (!f.exists()) {
 			return false;
 		}
 		if (f.isDirectory()) {
-			return this.generateWithDirectory(f);
+			return this.generateWithDirectory(f, systemRepresentation);
 		} else {
 			try {
-				return this.generateWithJar(f);
+				return this.generateWithJar(f, systemRepresentation);
 			} catch (IOException e) {
-				OSGiIntrospectorUtil.log(Level.ERROR, e.getMessage(), null);
+				util.log(Level.ERROR, e.getMessage(), null);
 				return false;
 			}
 		}
@@ -119,6 +131,55 @@ public class OSGiIntrospectorStatic {
 	}
 
 	/**
+	 * This function is used to remove all "<CR> <LF> <SPACE>" into a MANIFEST
+	 * entry.
+	 * 
+	 * @param manifestFileTmp
+	 *            the file which represents the manifest
+	 * @return a String which contains the content of the Manifest without "<CR>
+	 *         <LF> <SPACE>"
+	 * @throws IOException
+	 *             when the manifestFileTmp is not valid or when there are
+	 *             errors during reading
+	 */
+	private String removeEOLBlank(java.io.File manifestFileTmp)
+			throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				new FileInputStream(manifestFileTmp)));
+		StringBuffer line = null;
+		String read = reader.readLine();
+		StringBuffer tmp;
+		while (read != null) {
+			tmp = new StringBuffer(read);
+			if (line == null) {
+				line = new StringBuffer(tmp);
+			} else {
+				if (tmp.length() > 0 && tmp.charAt(0) == ' ') {
+					while (line.charAt(line.length() - 1) == ' '
+							|| line.charAt(line.length() - 1) == '\t') {
+						line.deleteCharAt(line.length() - 1);
+					}
+					while (tmp.charAt(0) == ' ' || tmp.charAt(0) == '\t') {
+						tmp.deleteCharAt(0);
+					}
+					line.append(tmp);
+				} else {
+					line.append("\n" + tmp);
+				}
+			}
+			read = reader.readLine();
+		}
+		reader.close();
+		// line = line.replace("\n ", "");
+		line.append("\n");
+
+		// System.err.println(line);
+
+		return line.toString();
+
+	}
+
+	/**
 	 * This function is used to create a Bundle representation with a directory
 	 * which contains all resources
 	 * 
@@ -126,7 +187,8 @@ public class OSGiIntrospectorStatic {
 	 *            the directory which contains the resources of the bundle.
 	 * @return true if the generation is OK, false else
 	 */
-	private boolean generateWithDirectory(java.io.File directory) {
+	private boolean generateWithDirectory(java.io.File directory,
+			boolean systemRepresentation) {
 		java.io.File manifestFileTmp = new java.io.File(directory
 				.getAbsolutePath()
 				+ java.io.File.separator
@@ -137,27 +199,29 @@ public class OSGiIntrospectorStatic {
 			Bundle bundle = FrameworkFactory.eINSTANCE.createBundle();
 			bundle.setLocation(directory.getAbsolutePath());
 
-			Folder rootFolder = JarFactory.eINSTANCE.createFolder();
-			rootFolder.setName("");
-			rootFolder.setFullPath("");
-			bundle.setFolder(rootFolder);
+			if (systemRepresentation) {
+				Folder rootFolder = JarFactory.eINSTANCE.createFolder();
+				rootFolder.setName("");
+				rootFolder.setFullPath("");
+				bundle.setFolder(rootFolder);
 
-			Package defaultPackage = JarFactory.eINSTANCE.createPackage();
-			defaultPackage.setName("");
-			defaultPackage.setFullPath("");
-			bundle.setPackage(defaultPackage);
+				Package defaultPackage = JarFactory.eINSTANCE.createPackage();
+				defaultPackage.setName("");
+				defaultPackage.setFullPath("");
+				bundle.setPackage(defaultPackage);
 
-			this.generateSystemEntries(directory, rootFolder);
+				this.generateSystemEntries(directory, rootFolder);
+			}
 			try {
-				String manifestContent = OSGiIntrospectorUtil
-						.removeEOLBlank(manifestFileTmp);
+				String manifestContent = this.removeEOLBlank(manifestFileTmp);
+				// TODO gestion de systemRepresentation
 				boolean valid = this.parser.parse(manifestContent, bundle);
 				if (valid) {
 					framework.addBundle(bundle);
 				}
 				return valid;
 			} catch (IOException e) {
-				OSGiIntrospectorUtil.log(Level.ERROR, e.getMessage(), null);
+				util.log(Level.ERROR, e.getMessage(), null);
 				return false;
 			}
 		}
@@ -172,7 +236,8 @@ public class OSGiIntrospectorStatic {
 	 * @return true if the generation is valid, false else
 	 * @throws IOException
 	 */
-	private boolean generateWithJar(java.io.File jarFile) throws IOException {
+	private boolean generateWithJar(java.io.File jarFile,
+			boolean systemRepresentation) throws IOException {
 		JarFile jar = new JarFile(jarFile);
 		Manifest manifest = jar.getManifest();
 		if (manifest != null) {
@@ -180,17 +245,19 @@ public class OSGiIntrospectorStatic {
 			Bundle bundle = FrameworkFactory.eINSTANCE.createBundle();
 			bundle.setLocation(jarFile.getAbsolutePath());
 
-			Folder rootFolder = JarFactory.eINSTANCE.createFolder();
-			rootFolder.setName("");
-			rootFolder.setFullPath("");
-			bundle.setFolder(rootFolder);
+			if (systemRepresentation) {
+				Folder rootFolder = JarFactory.eINSTANCE.createFolder();
+				rootFolder.setName("");
+				rootFolder.setFullPath("");
+				bundle.setFolder(rootFolder);
 
-			Package defaultPackage = JarFactory.eINSTANCE.createPackage();
-			defaultPackage.setName("");
-			defaultPackage.setFullPath("");
-			bundle.setPackage(defaultPackage);
+				Package defaultPackage = JarFactory.eINSTANCE.createPackage();
+				defaultPackage.setName("");
+				defaultPackage.setFullPath("");
+				bundle.setPackage(defaultPackage);
 
-			OSGiIntrospectorUtil.listAllEntriesIntoJarFile(jar, bundle, false);
+				util.listAllEntriesIntoJarFile(jar, bundle, false);
+			}
 
 			// This test is used because the Manifest function
 			// write(OutputStream) can return a valid value except if
@@ -204,47 +271,56 @@ public class OSGiIntrospectorStatic {
 			java.io.File manifestFileTmp = java.io.File.createTempFile(
 					"manifesttmp", ".mf");
 			manifest.write(new FileOutputStream(manifestFileTmp));
-			String manifestContent = OSGiIntrospectorUtil
-					.removeEOLBlank(manifestFileTmp);
+			String manifestContent = this.removeEOLBlank(manifestFileTmp);
 			manifestFileTmp.delete();
-
-				boolean valid = this.parser.parse(manifestContent, bundle);
-				if (valid) {
-					framework.addBundle(bundle);
-				}
-				return valid;
+			// TODO gestion de systemRepresentation
+			boolean valid = this.parser.parse(manifestContent, bundle);
+			if (valid) {
+				framework.addBundle(bundle);
+			}
+			return valid;
 		}
 		return true;
 	}
 
 	/**
 	 * This function is used to resolve all unresolved references like :<br/ >
-	 * 		Require-Bundle<br/ >
-	 * 		Fragment-Host<br/ >
-	 * 		Export-Package<br/ >
-	 * 		Export-Service<br/ >
-	 * 		Import-Package<br/ >
-	 * 		Import-Service<br/ >
-	 * This function resolve many references statically.
-	 * That's why many Export-Package, Export-Service, Import-Package, Import-Service are not resolve precisely.
+	 * Require-Bundle<br/ > Fragment-Host<br/ > Export-Package<br/ >
+	 * Export-Service<br/ > Import-Package<br/ > Import-Service<br/ > This
+	 * function resolve many references statically. That's why many
+	 * Export-Package, Export-Service, Import-Package, Import-Service are not
+	 * resolve precisely.
+	 * 
 	 * @return true if the resolution is OK, false else.
 	 */
-	public boolean resolve() {
-		Resolver resolver = new ResolverStatic();
-		resolver.resolveRequireBundle(this.parser.getUnresolvedRequireBundleValue(), this.parser.getUnresolvedRequireBundleBundle(), this.framework);
-		resolver.resolveFragmentHost(this.framework, this.parser.getFragmentHostReferences());
-		resolver.resolveBundleClassPath(this.parser.getUnresolvedBundleClassPathValue(), this.parser.getUnresolvedBundleClassPathBundle());
-		resolver.resolveBundleNativeCode(this.parser.getUnresolvedBundleNativeCodeValue(), this.parser.getUnresolvedBundleNativeCodeBundle());
-		resolver.resolveExportPackage(this.parser.getUnresolvedExportPackageValue(), this.parser.getUnresolvedExportPackageBundle());
-		resolver.resolveExportPackageExclude(this.parser.getUnresolvedExportPackageExcludeValue(), this.parser.getUnresolvedExportPackageExcludeExportPackage());
-		resolver.resolveExportPackageInclude(this.parser.getUnresolvedExportPackageIncludeValue(), this.parser.getUnresolvedExportPackageIncludeExportPackage());
-		resolver.resolveActivationPolicyExclude(this.parser.getUnresolvedActivationPolicyExcludeValue(), this.parser.getUnresolvedActivationPolicyExcludeBundle());
-		resolver.resolveActivationPolicyInclude(this.parser.getUnresolvedActivationPolicyIncludeValue(), this.parser.getUnresolvedActivationPolicyIncludeBundle());
-		resolver.resolveActivator(this.parser.getUnresolvedActivatorValue(), this.parser.getUnresolvedActivatorBundle());
-		resolver.resolveExportService(this.parser.getUnresolvedExportServiceValue(), this.parser.getUnresolvedExportServiceBundle());
-		resolver.resolveExportPackageUses(this.parser.getUnresolvedExportPackageUsesValue(),this.parser.getUnresolvedExportPackageUsesBundle());
-		resolver.resolveImportPackage(this.parser.getUnresolvedImportPackageValue(), this.parser.getUnresolvedImportPackageBundle(), this.framework);
-		resolver.resolveImportService(this.parser.getUnresolvedImportServiceValue(), this.parser.getUnresolvedImportServiceBundle(), this.parser.getServicesAvailable());
+	public boolean resolve(boolean systemRepresentation) {
+		Resolver resolver = new ResolverStatic(util, systemRepresentation);
+		resolver.resolveRequireBundle(this.parser.getUnresolvedRequireBundle(),
+				this.framework);
+		resolver.resolveFragmentHost(this.framework, this.parser
+				.getFragmentHostReferences());
+		resolver.resolveBundleClassPath(this.parser
+				.getUnresolvedBundleClassPath());
+		resolver.resolveBundleNativeCode(this.parser
+				.getUnresolvedBundleNativeCode());
+		resolver.resolveExportPackage(this.parser.getUnresolvedExportPackage());
+		resolver.resolveExportPackageExclude(this.parser
+				.getUnresolvedExportPackageExclude());
+		resolver.resolveExportPackageInclude(this.parser
+				.getUnresolvedExportPackageInclude());
+		resolver.resolveActivationPolicyExclude(this.parser
+				.getUnresolvedActivationPolicyExclude());
+		resolver.resolveActivationPolicyInclude(this.parser
+				.getUnresolvedActivationPolicyInclude());
+		resolver.resolveActivator(this.parser.getUnresolvedActivator());
+		resolver.resolveExportService(this.parser.getUnresolvedExportService());
+		resolver.resolveExportPackageUses(this.parser
+				.getUnresolvedExportPackageUsesValue(), this.parser
+				.getUnresolvedExportPackageUsesBundle());
+		resolver.resolveImportPackage(this.parser.getUnresolvedImportPackage(),
+				this.framework);
+		resolver.resolveImportService(this.parser.getUnresolvedImportService(),
+				this.parser.getServicesAvailable());
 		// TODO return
 		return true;
 	}

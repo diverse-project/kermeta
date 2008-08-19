@@ -13,10 +13,12 @@ Import-Package: framework,
  manifest.util,
  option,
  option.util,
- org.osgi.framework
+ org.osgi.framework,
+ org.osgi.service.packageadmin;version="1.2.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ lib/log4j-1.2.15.jar
 Export-Service: fr.irisa.triskell.osgi.introspector.OSGiIntrospectorDynamic,
- fr.irisa.triskell.osgi.introspector.OSGiIntrospectorStatic 
+ fr.irisa.triskell.osgi.introspector.OSGiIntrospectorStatic
 Export-Package: fr.irisa.triskell.osgi.introspector
 Require-Bundle: fr.irisa.triskell.osgi.introspector.model
