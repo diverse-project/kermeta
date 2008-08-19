@@ -1,4 +1,4 @@
-/* $Id: Decomposition.kmt,v 1.8 2008-08-19 15:22:26 fmunoz Exp $ 
+/* $Id: Decomposition.kmt,v 1.9 2008-08-19 16:39:02 fmunoz Exp $ 
  * Creation : August 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -257,7 +257,7 @@ class Decomposer {
 		
 		self.currentPlan.print()
 		
-		/*stdio.writeln("processing element: "+element.toString)
+		stdio.writeln("processing element: "+element.toString)
 		if element.getMetaClass().toString == "EClass" then
 				var cl:ecore::EClass cl?=element
 				stdio.writeln("cloning classname: "+cl.name+"->"+element.toString)
@@ -267,7 +267,7 @@ class Decomposer {
 			self.side(parent,element,iproperty,self.currentPlan.atomicPlans.getValue(element.toString).side)
 		else
 			self.clone(parent,element,iproperty)
-		end*/
+		end
 	end
 	
 	operation clone(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*]):Void is do

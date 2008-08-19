@@ -1,0 +1,19 @@
+package decomposition;
+require kermeta
+require "kermeta"
+using kermeta::standard
+using kermeta::utils
+using kermeta::standard
+class KomposeScriptBridge{
+operation generate(numeral:Integer,location:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("@mainClass \"decomposeTest")
+_res.append(numeral.toString)
+_res.append("::Main\"\n@mainOperation \"main\"\n\n\npackage decomposeTest")
+_res.append(numeral.toString)
+_res.append(";\nrequire kermeta\nrequire \"platform:/resource/org.kermeta.kompose.specialization.ecore.uno/kermeta/Ecore.kmt\"\n\nusing ecore\n\n\nclass Main\n{\n\toperation main() : Void is do \n\t\tvar ecoreMain:ecore::Main init ecore::Main.new\n\t\tecoreMain.main(\"")
+_res.append(location)
+_res.append("\")\n\tend\n}")
+result := _res.toString
+end
+}

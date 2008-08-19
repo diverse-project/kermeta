@@ -1,0 +1,10 @@
+<%@ket
+package="decomposition"
+require="kermeta"
+using="kermeta::standard"
+class="KomposeEcoreFileBridge"
+parameters="left:String,right:String,mresult:String"
+%>
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="<%=left%>" aspectModelURI="<%=right%>" composedModelURI="<%=mresult%>">
+</kompose:Composer>

@@ -1,0 +1,19 @@
+package decomposition;
+require kermeta
+require "kermeta"
+using kermeta::standard
+using kermeta::utils
+using kermeta::standard
+class KomposeEcoreFileBridge{
+operation generate(left:String,right:String,mresult:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("<?xml version=\"1.0\" encoding=\"ASCII\"?>\n<kompose:Composer xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:kompose=\"http://www.kermeta.org/kompose\" primaryModelURI=\"")
+_res.append(left)
+_res.append("\" aspectModelURI=\"")
+_res.append(right)
+_res.append("\" composedModelURI=\"")
+_res.append(mresult)
+_res.append("\">\n</kompose:Composer>")
+result := _res.toString
+end
+}
