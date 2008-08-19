@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadKM.java,v 1.1 2008-07-25 12:40:12 ftanguy Exp $
+/*$Id: LoadKM.java,v 1.2 2008-08-19 11:48:39 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime
 * File : 	Test.java
 * License : EPL
@@ -12,8 +12,6 @@
 
 package org.kermeta.framework.compiled.test;
 
-import java.io.File;
-
 import kermeta.language.structure.ClassDefinition;
 import kermeta.language.structure.Object;
 import kermeta.language.structure.Property;
@@ -21,6 +19,8 @@ import kermeta.persistence.PersistenceFactory;
 import kermeta.persistence.Repository;
 import kermeta.persistence.Resource;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.compil.runtime.helper.persistence.PersistenceMapping;
 
 public class LoadKM {
@@ -29,8 +29,12 @@ public class LoadKM {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String path = "/home/paco/kpm-workbench/org.kermeta.fsm.compiled/models/";
-		PersistenceMapping.initialize( new File(path) );
+		//String path = "/home/paco/kpm-workbench/org.kermeta.fsm.compiled/models/";
+		
+		ExtensibleURIConverterImpl.URI_MAP.put( URI.createURI("platform:/resource/"), URI.createURI("file:/C:/eclipse3.3.2/runtime-KermetaCompiler/"));
+		
+		String path = "platform:/resource/org.kermeta.fsm.compiled/models/";
+		PersistenceMapping.initialize( path + "kermeta.kruntimeconfiguration" );
 
 		Repository repository = PersistenceFactory.eINSTANCE.createEMFRepository();
 		Resource resource = repository.createResource(path + "sample1.fsm", "http://www.kermeta.org/fsm");

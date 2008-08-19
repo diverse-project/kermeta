@@ -16,7 +16,7 @@ import kermeta.persistence.Resource;
 
 public class ExecutionContext {
 
-	private String _modelKMURI = "/home/paco/kpm-workbench/org.kermeta.fsm.compiled/models/fsm.km";
+	private String _modelKMURI = "file:/C:/eclipse3.3.2/runtime-KermetaCompiler/org.kermeta.fsm.compiled/models/fsm.km";
 	
 	private List<Object> _modelKM;
 	
