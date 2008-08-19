@@ -2,36 +2,35 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportServiceImpl.java,v 1.6 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: ClassPathImpl.java,v 1.1 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
 
-import manifest.ImportService;
+import jar.SystemEntry;
+import manifest.ClassPath;
 import manifest.ManifestPackage;
-import manifest.Service;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.osgi.framework.Constants;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Import Service</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Class Path</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link manifest.impl.ImportServiceImpl#isResolved <em>Resolved</em>}</li>
- *   <li>{@link manifest.impl.ImportServiceImpl#getServiceReference <em>Service Reference</em>}</li>
- *   <li>{@link manifest.impl.ImportServiceImpl#getService <em>Service</em>}</li>
+ *   <li>{@link manifest.impl.ClassPathImpl#isResolved <em>Resolved</em>}</li>
+ *   <li>{@link manifest.impl.ClassPathImpl#getReference <em>Reference</em>}</li>
+ *   <li>{@link manifest.impl.ClassPathImpl#getEntry <em>Entry</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ImportServiceImpl extends MANIFESTEntryImpl implements
-		ImportService {
+public class ClassPathImpl extends EObjectImpl implements ClassPath {
 	/**
 	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -51,38 +50,38 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	protected boolean resolved = RESOLVED_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getServiceReference() <em>Service Reference</em>}' attribute.
+	 * The default value of the '{@link #getReference() <em>Reference</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getServiceReference()
+	 * @see #getReference()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SERVICE_REFERENCE_EDEFAULT = null;
+	protected static final String REFERENCE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getServiceReference() <em>Service Reference</em>}' attribute.
+	 * The cached value of the '{@link #getReference() <em>Reference</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getServiceReference()
+	 * @see #getReference()
 	 * @generated
 	 * @ordered
 	 */
-	protected String serviceReference = SERVICE_REFERENCE_EDEFAULT;
+	protected String reference = REFERENCE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getService() <em>Service</em>}' reference.
+	 * The cached value of the '{@link #getEntry() <em>Entry</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getService()
+	 * @see #getEntry()
 	 * @generated
 	 * @ordered
 	 */
-	protected Service service;
+	protected SystemEntry entry;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
 	 */
-	protected ImportServiceImpl() {
+	protected ClassPathImpl() {
 		super();
-		this.setEntryName(Constants.IMPORT_SERVICE);
 	}
 
 	/**
@@ -91,7 +90,7 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ManifestPackage.Literals.IMPORT_SERVICE;
+		return ManifestPackage.Literals.CLASS_PATH;
 	}
 
 	/**
@@ -110,61 +109,61 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 		boolean oldResolved = resolved;
 		resolved = newResolved;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.IMPORT_SERVICE__RESOLVED, oldResolved, resolved));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.CLASS_PATH__RESOLVED, oldResolved, resolved));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getServiceReference() {
-		return serviceReference;
+	public String getReference() {
+		return reference;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setServiceReference(String newServiceReference) {
-		String oldServiceReference = serviceReference;
-		serviceReference = newServiceReference;
+	public void setReference(String newReference) {
+		String oldReference = reference;
+		reference = newReference;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.IMPORT_SERVICE__SERVICE_REFERENCE, oldServiceReference, serviceReference));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.CLASS_PATH__REFERENCE, oldReference, reference));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Service getService() {
-		if (service != null && service.eIsProxy()) {
-			InternalEObject oldService = (InternalEObject)service;
-			service = (Service)eResolveProxy(oldService);
-			if (service != oldService) {
+	public SystemEntry getEntry() {
+		if (entry != null && entry.eIsProxy()) {
+			InternalEObject oldEntry = (InternalEObject)entry;
+			entry = (SystemEntry)eResolveProxy(oldEntry);
+			if (entry != oldEntry) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ManifestPackage.IMPORT_SERVICE__SERVICE, oldService, service));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ManifestPackage.CLASS_PATH__ENTRY, oldEntry, entry));
 			}
 		}
-		return service;
+		return entry;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Service basicGetService() {
-		return service;
+	public SystemEntry basicGetEntry() {
+		return entry;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setService(Service newService) {
-		Service oldService = service;
-		service = newService;
+	public void setEntry(SystemEntry newEntry) {
+		SystemEntry oldEntry = entry;
+		entry = newEntry;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.IMPORT_SERVICE__SERVICE, oldService, service));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.CLASS_PATH__ENTRY, oldEntry, entry));
 	}
 
 	/**
@@ -174,13 +173,13 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
+			case ManifestPackage.CLASS_PATH__RESOLVED:
 				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
-			case ManifestPackage.IMPORT_SERVICE__SERVICE_REFERENCE:
-				return getServiceReference();
-			case ManifestPackage.IMPORT_SERVICE__SERVICE:
-				if (resolve) return getService();
-				return basicGetService();
+			case ManifestPackage.CLASS_PATH__REFERENCE:
+				return getReference();
+			case ManifestPackage.CLASS_PATH__ENTRY:
+				if (resolve) return getEntry();
+				return basicGetEntry();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -192,14 +191,14 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
+			case ManifestPackage.CLASS_PATH__RESOLVED:
 				setResolved(((Boolean)newValue).booleanValue());
 				return;
-			case ManifestPackage.IMPORT_SERVICE__SERVICE_REFERENCE:
-				setServiceReference((String)newValue);
+			case ManifestPackage.CLASS_PATH__REFERENCE:
+				setReference((String)newValue);
 				return;
-			case ManifestPackage.IMPORT_SERVICE__SERVICE:
-				setService((Service)newValue);
+			case ManifestPackage.CLASS_PATH__ENTRY:
+				setEntry((SystemEntry)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -212,14 +211,14 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
+			case ManifestPackage.CLASS_PATH__RESOLVED:
 				setResolved(RESOLVED_EDEFAULT);
 				return;
-			case ManifestPackage.IMPORT_SERVICE__SERVICE_REFERENCE:
-				setServiceReference(SERVICE_REFERENCE_EDEFAULT);
+			case ManifestPackage.CLASS_PATH__REFERENCE:
+				setReference(REFERENCE_EDEFAULT);
 				return;
-			case ManifestPackage.IMPORT_SERVICE__SERVICE:
-				setService((Service)null);
+			case ManifestPackage.CLASS_PATH__ENTRY:
+				setEntry((SystemEntry)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -232,12 +231,12 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ManifestPackage.IMPORT_SERVICE__RESOLVED:
+			case ManifestPackage.CLASS_PATH__RESOLVED:
 				return resolved != RESOLVED_EDEFAULT;
-			case ManifestPackage.IMPORT_SERVICE__SERVICE_REFERENCE:
-				return SERVICE_REFERENCE_EDEFAULT == null ? serviceReference != null : !SERVICE_REFERENCE_EDEFAULT.equals(serviceReference);
-			case ManifestPackage.IMPORT_SERVICE__SERVICE:
-				return service != null;
+			case ManifestPackage.CLASS_PATH__REFERENCE:
+				return REFERENCE_EDEFAULT == null ? reference != null : !REFERENCE_EDEFAULT.equals(reference);
+			case ManifestPackage.CLASS_PATH__ENTRY:
+				return entry != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -253,10 +252,10 @@ public class ImportServiceImpl extends MANIFESTEntryImpl implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (resolved: ");
 		result.append(resolved);
-		result.append(", serviceReference: ");
-		result.append(serviceReference);
+		result.append(", reference: ");
+		result.append(reference);
 		result.append(')');
 		return result.toString();
 	}
 
-} // ImportServiceImpl
+} // ClassPathImpl

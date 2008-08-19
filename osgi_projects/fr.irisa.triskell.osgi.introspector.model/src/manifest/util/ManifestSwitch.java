@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestSwitch.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: ManifestSwitch.java,v 1.4 2008-08-19 07:04:44 edaubert Exp $
  */
 package manifest.util;
 
 import java.util.List;
 
-import manifest.*;
 import manifest.BundleActivationPolicy;
 import manifest.BundleActivator;
 import manifest.BundleCategory;
@@ -26,6 +25,7 @@ import manifest.BundleSymbolicName;
 import manifest.BundleUpdateLocation;
 import manifest.BundleVendor;
 import manifest.BundleVersion;
+import manifest.ClassPath;
 import manifest.DynamicImportPackage;
 import manifest.ExportPackage;
 import manifest.ExportService;
@@ -35,6 +35,7 @@ import manifest.ImportService;
 import manifest.MANIFEST;
 import manifest.MANIFESTEntry;
 import manifest.ManifestPackage;
+import manifest.NativeCode;
 import manifest.RequireBundle;
 import manifest.Service;
 import manifest.SimpleMANIFESTEntry;
@@ -334,6 +335,24 @@ public class ManifestSwitch<T> {
 				BundleManifestVersion bundleManifestVersion = (BundleManifestVersion)theEObject;
 				T result = caseBundleManifestVersion(bundleManifestVersion);
 				if (result == null) result = caseMANIFESTEntry(bundleManifestVersion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ManifestPackage.CLASS_PATH: {
+				ClassPath classPath = (ClassPath)theEObject;
+				T result = caseClassPath(classPath);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ManifestPackage.NATIVE_CODE: {
+				NativeCode nativeCode = (NativeCode)theEObject;
+				T result = caseNativeCode(nativeCode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ManifestPackage.PACKAGE: {
+				manifest.Package package_ = (manifest.Package)theEObject;
+				T result = casePackage(package_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -743,6 +762,45 @@ public class ManifestSwitch<T> {
 	 * @generated
 	 */
 	public T caseBundleManifestVersion(BundleManifestVersion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Path</em>'.
+	 * <!-- begin-user-doc --> This implementation returns null; returning a
+	 * non-null result will terminate the switch. <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Path</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassPath(ClassPath object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Native Code</em>'.
+	 * <!-- begin-user-doc --> This implementation returns null; returning a
+	 * non-null result will terminate the switch. <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Native Code</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNativeCode(NativeCode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
+	 * <!-- begin-user-doc --> This implementation returns null; returning a
+	 * non-null result will terminate the switch. <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackage(manifest.Package object) {
 		return null;
 	}
 

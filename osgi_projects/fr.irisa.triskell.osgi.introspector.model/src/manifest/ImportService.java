@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportService.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: ImportService.java,v 1.5 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest;
 
@@ -25,13 +25,14 @@ package manifest;
  */
 public interface ImportService extends MANIFESTEntry {
 	/**
-	 * Returns the value of the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Resolved</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Resolved</em>' attribute.
 	 * @see #setResolved(boolean)
 	 * @see manifest.ManifestPackage#getImportService_Resolved()
@@ -42,8 +43,7 @@ public interface ImportService extends MANIFESTEntry {
 
 	/**
 	 * Sets the value of the '{@link manifest.ImportService#isResolved <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Resolved</em>' attribute.
 	 * @see #isResolved()
 	 * @generated
@@ -54,8 +54,8 @@ public interface ImportService extends MANIFESTEntry {
 	 * Returns the value of the '<em><b>Service Reference</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Service Reference</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Service Reference</em>' attribute isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Service Reference</em>' attribute.
@@ -68,8 +68,7 @@ public interface ImportService extends MANIFESTEntry {
 
 	/**
 	 * Sets the value of the '{@link manifest.ImportService#getServiceReference <em>Service Reference</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Service Reference</em>' attribute.
 	 * @see #getServiceReference()
 	 * @generated
@@ -95,8 +94,7 @@ public interface ImportService extends MANIFESTEntry {
 
 	/**
 	 * Sets the value of the '{@link manifest.ImportService#getService <em>Service</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Service</em>' reference.
 	 * @see #getService()
 	 * @generated

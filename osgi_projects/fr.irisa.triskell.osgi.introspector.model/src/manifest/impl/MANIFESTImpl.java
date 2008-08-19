@@ -2,16 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MANIFESTImpl.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: MANIFESTImpl.java,v 1.5 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
 
-import jar.File;
-import jar.Package;
-import jar.SystemEntry;
-
 import java.util.Collection;
-import java.util.Iterator;
 
 import manifest.BundleActivationPolicy;
 import manifest.BundleActivator;
@@ -40,11 +35,6 @@ import manifest.MANIFEST;
 import manifest.ManifestPackage;
 import manifest.RequireBundle;
 import manifest.SimpleManifestEntryManyValues;
-import option.AttributEntry;
-import option.ExportPackageDirective;
-import option.FragmentAttachment;
-import option.Singleton;
-import option.SymbolicNameDirective;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -1483,219 +1473,17 @@ public class MANIFESTImpl extends EObjectImpl implements MANIFEST {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
 	 */
 	@Override
 	public String toString() {
-		// A améliorer
-		String returnString = "";
-		if (getBundleManifestVersion() != null) {
-			returnString += "Bundle-ManifestVersion"
-					+ ": "
-					+ getBundleManifestVersion().getManifestVersion()
-							.getLiteral() + "\n";
-		}
-		if (getBundleName() != null) {
-			returnString += getBundleName().getEntryName() + ": "
-					+ getBundleName().getValue() + "\n";
-			for (Iterator<AttributEntry> optionsIterator = getBundleSymbolicName()
-					.getOptions().iterator(); optionsIterator.hasNext();) {
-				AttributEntry entry = optionsIterator.next();
-				returnString += "\t" + entry.getToken() + " = "
-						+ entry.getValue() + "\n";
-			}
-		}
-		if (getBundleSymbolicName() != null) {
-			returnString += getBundleSymbolicName().getEntryName() + ": "
-					+ getBundleSymbolicName().getSymbolicName() + "\n";
-			for (Iterator<SymbolicNameDirective> directivesIterator = getBundleSymbolicName()
-					.getDirectives().iterator(); directivesIterator.hasNext();) {
-				SymbolicNameDirective directive = directivesIterator.next();
-				if (directive instanceof Singleton) {
-					returnString += "\t" + directive.getToken() + " = "
-							+ ((Singleton) directive).isSingleton() + "\n";
-				} else if (directive instanceof FragmentAttachment) {
-					returnString += "\t"
-							+ directive.getToken()
-							+ " = "
-							+ ((FragmentAttachment) directive)
-									.getFragmentAttachment().getLiteral()
-							+ "\n";
-				}
-			}
-			for (Iterator<AttributEntry> optionsIterator = getBundleSymbolicName()
-					.getOptions().iterator(); optionsIterator.hasNext();) {
-				AttributEntry entry = optionsIterator.next();
-				returnString += "\t" + entry.getToken() + " = "
-						+ entry.getValue() + "\n";
-			}
-		}
-		if (getBundleVersion() != null) {
-			returnString += getBundleVersion().getEntryName() + ": ";
-			returnString += getBundleVersion().getVersion().getMajor();
-			returnString += "." + getBundleVersion().getVersion().getMinor();
-			returnString += "." + getBundleVersion().getVersion().getMicro();
-			if (getBundleVersion().getVersion().getQualifier() != null
-					&& !getBundleVersion().getVersion().getQualifier().equals(
-							"")) {
-				returnString += "."
-						+ getBundleVersion().getVersion().getQualifier();
-			}
-			returnString += "\n";
-		}
-		for (Iterator<BundleRequiredExecutionEnvironment> requiredExecutionIterator = getBundleRequiredExecutionEnvironments()
-				.iterator(); requiredExecutionIterator.hasNext();) {
-			BundleRequiredExecutionEnvironment requiredExecution = requiredExecutionIterator
-					.next();
-			returnString += requiredExecution.getEntryName() + ": ";
-			if (requiredExecution.getConfiguration() != null) {
-				returnString += requiredExecution.getConfiguration() + "/";
-			}
-			returnString += requiredExecution.getProfile() + "\n";
-			for (Iterator<AttributEntry> optionsIterator = requiredExecution
-					.getOptions().iterator(); optionsIterator.hasNext();) {
-				AttributEntry entry = optionsIterator.next();
-				returnString += "\t" + entry.getToken() + " = "
-						+ entry.getValue() + "\n";
-			}
-		}
-		if (getBundleActivator() != null) {
-			returnString += getBundleActivator().getEntryName() + ": "
-					+ getBundleActivator().getActivator().getFullPath() + "\n";
-			for (Iterator<AttributEntry> optionsIterator = getBundleActivator()
-					.getOptions().iterator(); optionsIterator.hasNext();) {
-				AttributEntry entry = optionsIterator.next();
-				returnString += "\t" + entry.getToken() + " = "
-						+ entry.getValue() + "\n";
-			}
-		}
-		for (Iterator<BundleClassPath> classpathIterator = getBundleClassPaths()
-				.iterator(); classpathIterator.hasNext();) {
-			BundleClassPath classPath = classpathIterator.next();
-			returnString += classPath.getEntryName() + ": \n";
-			for (Iterator<SystemEntry> entriesIterator = classPath.getEntries()
-					.iterator(); entriesIterator.hasNext();) {
-				SystemEntry entry = entriesIterator.next();
-				returnString += "\t" + entry.getFullPath() + "\n";
-			}
-			for (Iterator<AttributEntry> optionsIterator = classPath
-					.getOptions().iterator(); optionsIterator.hasNext();) {
-				AttributEntry entry = optionsIterator.next();
-				returnString += "\t" + entry.getToken() + " = "
-						+ entry.getValue() + "\n";
-			}
-		}
-		for (Iterator<BundleNativeCode> nativeCodeIterator = getBundleNativeCodes()
-				.iterator(); nativeCodeIterator.hasNext();) {
-			BundleNativeCode nativeCode = nativeCodeIterator.next();
-			returnString += nativeCode.getEntryName() + ": \n";
-			for (Iterator<File> entriesIterator = nativeCode.getFile()
-					.iterator(); entriesIterator.hasNext();) {
-				File file = entriesIterator.next();
-				returnString += "\t" + file.getFullPath() + "\n";
-			}
-			for (Iterator<AttributEntry> optionsIterator = nativeCode
-					.getOptions().iterator(); optionsIterator.hasNext();) {
-				AttributEntry entry = optionsIterator.next();
-				returnString += "\t" + entry.getToken() + " = "
-						+ entry.getValue() + "\n";
-			}
-		}
-		if (getBundleDocURL() != null) {
-			returnString += getBundleDocURL().getEntryName() + ": "
-					+ getBundleDocURL().getUrl().toString() + "\n";
-		}
+		if (eIsProxy()) return super.toString();
 
-		if (getBundleDescription() != null) {
-			returnString += getBundleDescription().getEntryName() + ": "
-					+ getBundleDescription().getValue() + "\n";
-		}
-		if (getBundleVendor() != null) {
-			returnString += getBundleVendor().getEntryName() + ": "
-					+ getBundleVendor().getValue() + "\n";
-			for (Iterator<AttributEntry> optionsIterator = getBundleSymbolicName()
-					.getOptions().iterator(); optionsIterator.hasNext();) {
-				AttributEntry entry = optionsIterator.next();
-				returnString += "\t" + entry.getToken() + " = "
-						+ entry.getValue() + "\n";
-			}
-		}
-		if (getBundleCopyright() != null) {
-			returnString += getBundleCopyright().getEntryName() + ": "
-					+ getBundleCopyright().getValue() + "\n";
-		}
-		if (getBundleLocalization() != null) {
-			returnString += getBundleLocalization().getEntryName() + ": "
-					+ getBundleLocalization().getValue() + "\n";
-			for (Iterator<AttributEntry> optionsIterator = getBundleSymbolicName()
-					.getOptions().iterator(); optionsIterator.hasNext();) {
-				AttributEntry entry = optionsIterator.next();
-				returnString += "\t" + entry.getToken() + " = "
-						+ entry.getValue() + "\n";
-			}
-		}
-		if (getBundleActivationPolicy() != null) {
-			returnString += getBundleActivationPolicy().getEntryName() + ": "
-					+ getBundleActivationPolicy().getPolicy().getLiteral()
-					+ "\n";
-			for (Iterator<AttributEntry> optionsIterator = getBundleSymbolicName()
-					.getOptions().iterator(); optionsIterator.hasNext();) {
-				AttributEntry entry = optionsIterator.next();
-				returnString += "\t" + entry.getToken() + " = "
-						+ entry.getValue() + "\n";
-			}
-		}
-		returnString += "Export-Service: \n";
-		for (Iterator<ExportService> unknownEntriesIterator = getExportServices()
-				.iterator(); unknownEntriesIterator.hasNext();) {
-			ExportService entry = unknownEntriesIterator.next();
-			returnString += "\t"
-					+ entry.getService().getInterface().getFullPath() + "\n";
-			for (Iterator<AttributEntry> optionsIterator = entry.getOptions()
-					.iterator(); optionsIterator.hasNext();) {
-				AttributEntry attribute = optionsIterator.next();
-				returnString += "\t\t" + attribute.getToken() + " = "
-						+ attribute.getValue() + "\n";
-			}
-		}
-		returnString += "Export-Package: \n";
-		for (Iterator<ExportPackage> unknownEntriesIterator = getExportPackages()
-				.iterator(); unknownEntriesIterator.hasNext();) {
-			ExportPackage entry = unknownEntriesIterator.next();
-			for (Package p : entry.getPackages()) {
-				returnString += "\t" + p.getFullPath() + "\n";
-			}
-			for (Iterator<AttributEntry> optionsIterator = entry.getOptions()
-					.iterator(); optionsIterator.hasNext();) {
-				AttributEntry attribute = optionsIterator.next();
-				returnString += "\t\t" + attribute.getToken() + " = "
-						+ attribute.getValue() + "\n";
-			}
-			for (Iterator<ExportPackageDirective> optionsIterator = entry
-					.getDirectives().iterator(); optionsIterator.hasNext();) {
-				ExportPackageDirective directive = optionsIterator.next();
-				returnString += "\t\t" + directive.toString() + "\n";
-			}
-		}
-		for (Iterator<DynamicImportPackage> unknownEntriesIterator = getDynamicImportPackages()
-				.iterator(); unknownEntriesIterator.hasNext();) {
-			DynamicImportPackage entry = unknownEntriesIterator.next();
-			returnString += "\t" + entry.getEntryName() + ": \n";
-			for (String e : entry.getPackagesReference()) {
-				returnString += "\t" + e + "\n";
-			}
-		}
-		returnString += "unknown entries :\n";
-		for (Iterator<SimpleManifestEntryManyValues> unknownEntriesIterator = getUnknownEntries()
-				.iterator(); unknownEntriesIterator.hasNext();) {
-			SimpleManifestEntryManyValues entry = unknownEntriesIterator.next();
-			returnString += "\t" + entry.getEntryName() + ": ";
-			for (String value : entry.getValues()) {
-				returnString += "\t\t" + value;
-			}
-			returnString += "\n";
-		}
-
-		return returnString;
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (NativeCodeOptional: ");
+		result.append(nativeCodeOptional);
+		result.append(')');
+		return result.toString();
 	}
 
 	public void addUnknownEntry(SimpleManifestEntryManyValues entry) {

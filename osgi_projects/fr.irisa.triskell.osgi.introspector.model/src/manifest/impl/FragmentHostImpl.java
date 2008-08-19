@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FragmentHostImpl.java,v 1.5 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: FragmentHostImpl.java,v 1.6 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
 
@@ -27,7 +27,7 @@ import framework.Bundle;
  * <ul>
  *   <li>{@link manifest.impl.FragmentHostImpl#getDirectives <em>Directives</em>}</li>
  *   <li>{@link manifest.impl.FragmentHostImpl#getBundle <em>Bundle</em>}</li>
- *   <li>{@link manifest.impl.FragmentHostImpl#getBundleReference <em>Bundle Reference</em>}</li>
+ *   <li>{@link manifest.impl.FragmentHostImpl#getReference <em>Reference</em>}</li>
  *   <li>{@link manifest.impl.FragmentHostImpl#isResolved <em>Resolved</em>}</li>
  * </ul>
  * </p>
@@ -54,29 +54,26 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 	protected Bundle bundle;
 
 	/**
-	 * The default value of the '{@link #getBundleReference() <em>Bundle Reference</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBundleReference()
+	 * The default value of the '{@link #getReference() <em>Reference</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getReference()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String BUNDLE_REFERENCE_EDEFAULT = null;
+	protected static final String REFERENCE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getBundleReference() <em>Bundle Reference</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBundleReference()
+	 * The cached value of the '{@link #getReference() <em>Reference</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getReference()
 	 * @generated
 	 * @ordered
 	 */
-	protected String bundleReference = BUNDLE_REFERENCE_EDEFAULT;
+	protected String reference = REFERENCE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isResolved()
 	 * @generated
 	 * @ordered
@@ -85,8 +82,7 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 
 	/**
 	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isResolved()
 	 * @generated
 	 * @ordered
@@ -187,29 +183,26 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getBundleReference() {
-		return bundleReference;
+	public String getReference() {
+		return reference;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBundleReference(String newBundleReference) {
-		String oldBundleReference = bundleReference;
-		bundleReference = newBundleReference;
+	public void setReference(String newReference) {
+		String oldReference = reference;
+		reference = newReference;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.FRAGMENT_HOST__BUNDLE_REFERENCE, oldBundleReference, bundleReference));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.FRAGMENT_HOST__REFERENCE, oldReference, reference));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isResolved() {
@@ -217,8 +210,7 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setResolved(boolean newResolved) {
@@ -254,8 +246,8 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				if (resolve) return getBundle();
 				return basicGetBundle();
-			case ManifestPackage.FRAGMENT_HOST__BUNDLE_REFERENCE:
-				return getBundleReference();
+			case ManifestPackage.FRAGMENT_HOST__REFERENCE:
+				return getReference();
 			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
 				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
 		}
@@ -276,8 +268,8 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				setBundle((Bundle)newValue);
 				return;
-			case ManifestPackage.FRAGMENT_HOST__BUNDLE_REFERENCE:
-				setBundleReference((String)newValue);
+			case ManifestPackage.FRAGMENT_HOST__REFERENCE:
+				setReference((String)newValue);
 				return;
 			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
 				setResolved(((Boolean)newValue).booleanValue());
@@ -299,8 +291,8 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				setBundle((Bundle)null);
 				return;
-			case ManifestPackage.FRAGMENT_HOST__BUNDLE_REFERENCE:
-				setBundleReference(BUNDLE_REFERENCE_EDEFAULT);
+			case ManifestPackage.FRAGMENT_HOST__REFERENCE:
+				setReference(REFERENCE_EDEFAULT);
 				return;
 			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
 				setResolved(RESOLVED_EDEFAULT);
@@ -320,8 +312,8 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 				return directives != null;
 			case ManifestPackage.FRAGMENT_HOST__BUNDLE:
 				return bundle != null;
-			case ManifestPackage.FRAGMENT_HOST__BUNDLE_REFERENCE:
-				return BUNDLE_REFERENCE_EDEFAULT == null ? bundleReference != null : !BUNDLE_REFERENCE_EDEFAULT.equals(bundleReference);
+			case ManifestPackage.FRAGMENT_HOST__REFERENCE:
+				return REFERENCE_EDEFAULT == null ? reference != null : !REFERENCE_EDEFAULT.equals(reference);
 			case ManifestPackage.FRAGMENT_HOST__RESOLVED:
 				return resolved != RESOLVED_EDEFAULT;
 		}
@@ -329,8 +321,7 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -338,8 +329,8 @@ public class FragmentHostImpl extends MANIFESTEntryImpl implements FragmentHost 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (bundleReference: ");
-		result.append(bundleReference);
+		result.append(" (reference: ");
+		result.append(reference);
 		result.append(", resolved: ");
 		result.append(resolved);
 		result.append(')');

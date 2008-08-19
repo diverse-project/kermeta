@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DynamicImportPackageImpl.java,v 1.3 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: DynamicImportPackageImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
 
@@ -22,7 +22,7 @@ import org.osgi.framework.Constants;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link manifest.impl.DynamicImportPackageImpl#getPackagesReference <em>Packages Reference</em>}</li>
+ *   <li>{@link manifest.impl.DynamicImportPackageImpl#getPackages <em>Packages</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,14 +31,14 @@ import org.osgi.framework.Constants;
 public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 		DynamicImportPackage {
 	/**
-	 * The cached value of the '{@link #getPackagesReference() <em>Packages Reference</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPackagesReference()
+	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getPackages()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> packagesReference;
+	protected EList<String> packages;
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
@@ -57,15 +57,14 @@ public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getPackagesReference() {
-		if (packagesReference == null) {
-			packagesReference = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES_REFERENCE);
+	public EList<String> getPackages() {
+		if (packages == null) {
+			packages = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES);
 		}
-		return packagesReference;
+		return packages;
 	}
 
 	/**
@@ -75,8 +74,8 @@ public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES_REFERENCE:
-				return getPackagesReference();
+			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
+				return getPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -89,9 +88,9 @@ public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES_REFERENCE:
-				getPackagesReference().clear();
-				getPackagesReference().addAll((Collection<? extends String>)newValue);
+			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
+				getPackages().clear();
+				getPackages().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -104,8 +103,8 @@ public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES_REFERENCE:
-				getPackagesReference().clear();
+			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
+				getPackages().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -118,8 +117,8 @@ public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES_REFERENCE:
-				return packagesReference != null && !packagesReference.isEmpty();
+			case ManifestPackage.DYNAMIC_IMPORT_PACKAGE__PACKAGES:
+				return packages != null && !packages.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -133,15 +132,15 @@ public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (packagesReference: ");
-		result.append(packagesReference);
+		result.append(" (packages: ");
+		result.append(packages);
 		result.append(')');
 		return result.toString();
 	}
 
 	public void addPackageReference(String packageName) {
-		if (!getPackagesReference().contains(packageName)) {
-			getPackagesReference().add(packageName);
+		if (!getPackages().contains(packageName)) {
+			getPackages().add(packageName);
 		}
 	}
 

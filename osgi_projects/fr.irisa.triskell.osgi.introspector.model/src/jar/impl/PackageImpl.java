@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.9 2008-08-11 14:19:27 edaubert Exp $
+ * $Id: PackageImpl.java,v 1.10 2008-08-19 07:04:46 edaubert Exp $
  */
 package jar.impl;
 
-import jar.BundleEntry;
 import jar.Class;
 import jar.JarFactory;
 import jar.JarPackage;
@@ -200,28 +199,28 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 					}
 				}
 				if (!exist) {
-					return getClasses().add(clazz);	
+					return getClasses().add(clazz);
 				}
 			} else {
 				String _packageName = packagesClazz[nextPackage];
-				boolean exist = false;
 				Iterator<Package> packagesIterator = getSubPackages()
 						.iterator();
-				while (!exist && packagesIterator.hasNext()) {
+				while (packagesIterator.hasNext()) {
 					Package p = packagesIterator.next();
-					if (p.getFullPath().equals(
-							getFullPath() + "." + _packageName)) {
+					if ((getFullPath().equals("") && p.getFullPath().equals(_packageName)) || (p.getFullPath().equals(
+							getFullPath() + "." + _packageName))) {
 						return p.addClass(clazz);
-						//exist = true;
 					}
 				}
-				if (!exist) {
-					Package p = JarFactory.eINSTANCE.createPackage();
+				Package p = JarFactory.eINSTANCE.createPackage();
+				if (getFullPath().equals("")) {
+					p.setFullPath(_packageName);
+				} else {
 					p.setFullPath(this.getFullPath() + "." + _packageName);
-					p.setName(_packageName);
-					getSubPackages().add(p);
-					return p.addClass(clazz);
 				}
+				p.setName(_packageName);
+				getSubPackages().add(p);
+				return p.addClass(clazz);
 			}
 		}
 		return false;
@@ -266,43 +265,27 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 		return null;
 	}
 
-	/*public BundleEntry getSubElement(String fullPath) {
-
-		if (fullPath.contains(this.getFullPath())) {
-			String[] packagesElement = fullPath.split("\\.");
-			String[] packages = this.getFullPath().split("\\.");
-			int nextPackage = packages.length;
-			if (nextPackage == packagesElement.length - 1) {
-				for (Iterator<Class> classesIterator = getClasses().iterator(); classesIterator
-						.hasNext();) {
-					Class tmp = classesIterator.next();
-					if (tmp.getFullPath().equals(fullPath)) {
-						return tmp;
-					}
-				}
-				for (Iterator<Package> packagesIterator = getSubPackages()
-						.iterator(); packagesIterator.hasNext();) {
-					Package tmp = packagesIterator.next();
-					if (tmp.getFullPath().equals(fullPath)) {
-						return tmp;
-					}
-				}
-			} else {
-				String _packageName = packagesElement[nextPackage];
-				Iterator<Package> packagesIterator = getSubPackages()
-						.iterator();
-				while (packagesIterator.hasNext()) {
-					Package p = packagesIterator.next();
-					if (p.getFullPath().equals(
-							getFullPath() + "." + _packageName)) {
-						return p.getSubElement(fullPath);
-					}
-				}
-			}
-		}
-
-		return null;
-	}*/
+	/*
+	 * public BundleEntry getSubElement(String fullPath) {
+	 * 
+	 * if (fullPath.contains(this.getFullPath())) { String[] packagesElement =
+	 * fullPath.split("\\."); String[] packages =
+	 * this.getFullPath().split("\\."); int nextPackage = packages.length; if
+	 * (nextPackage == packagesElement.length - 1) { for (Iterator<Class>
+	 * classesIterator = getClasses().iterator(); classesIterator .hasNext();) {
+	 * Class tmp = classesIterator.next(); if
+	 * (tmp.getFullPath().equals(fullPath)) { return tmp; } } for (Iterator<Package>
+	 * packagesIterator = getSubPackages() .iterator();
+	 * packagesIterator.hasNext();) { Package tmp = packagesIterator.next(); if
+	 * (tmp.getFullPath().equals(fullPath)) { return tmp; } } } else { String
+	 * _packageName = packagesElement[nextPackage]; Iterator<Package>
+	 * packagesIterator = getSubPackages() .iterator(); while
+	 * (packagesIterator.hasNext()) { Package p = packagesIterator.next(); if
+	 * (p.getFullPath().equals( getFullPath() + "." + _packageName)) { return
+	 * p.getSubElement(fullPath); } } } }
+	 * 
+	 * return null; }
+	 */
 
 	public boolean addPackage(Package _package) {
 		if (_package.getFullPath() == null || _package.getName() == null) {
@@ -328,8 +311,10 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 				if (p == null) {
 					return getSubPackages().add(_package);
 				} else {
-					// To prevent ConcurrentModificationException, we need to use integer and not iterator
-					// because package are detach from there parent and next attach into another parent.
+					// To prevent ConcurrentModificationException, we need to
+					// use integer and not iterator
+					// because package are detach from there parent and next
+					// attach into another parent.
 					// so _package.getSubPackages() is modified.
 					int i = 0;
 					int size = _package.getSubPackages().size();
@@ -342,7 +327,7 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 						}
 						size = _package.getSubPackages().size();
 					}
-					
+
 					i = 0;
 					size = _package.getClasses().size();
 					while (i < size) {
@@ -358,22 +343,31 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 			} else {
 				String _packageName = packagesClazz[nextPackage];
 				for (Package p : getSubPackages()) {
-					if (p.getFullPath().equals(
-							getFullPath() + "." + _packageName)) {
+					if ((getFullPath().equals("") && p.getFullPath().equals(
+							_packageName))
+							|| (p.getFullPath().equals(getFullPath() + "."
+									+ _packageName))) {
 						return p.addPackage(_package);
 					}
 				}
-					Package p = JarFactory.eINSTANCE.createPackage();
+				Package p = JarFactory.eINSTANCE.createPackage();
+				if (getFullPath().equals("")) {
+					p.setFullPath(_packageName);
+				} else {
 					p.setFullPath(this.getFullPath() + "." + _packageName);
-					p.setName(_packageName);
-					getSubPackages().add(p);
-					return p.addPackage(_package);
+				}
+				p.setName(_packageName);
+				getSubPackages().add(p);
+				return p.addPackage(_package);
 			}
 		}
 		return false;
 	}
 
 	public Package getPackage(String fullPath) {
+		if (fullPath.equals(".")) {
+			return this;
+		}
 		if (fullPath.contains(this.getFullPath())) {
 			String[] packagesClazz = fullPath.split("\\.");
 			String[] packages = this.getFullPath().split("\\.");
@@ -411,21 +405,50 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 		return null;
 	}
 
-	public List<Class> getClassWithRegex(String regex) {
+	public List<Class> getClassWithRegex(String regex, boolean recursive) {
 		List<Class> classes = new ArrayList<Class>();
 		if (!regex.contains("*")) {
-			Class clazz = this.getClass(getFullPath() + regex);
-			if (clazz != null) {
-				classes.add(clazz);
+			if (recursive) {
+				Class clazz = this.getClass(regex);
+				if (clazz != null) {
+					classes.add(clazz);
+				}
+			} else {
+				Class clazz = this.getClass(getFullPath() + regex);
+				if (clazz != null) {
+					classes.add(clazz);
+				}
 			}
+			return classes;
 		} else {
-			// FIXME à refaire car je ne pense pas que c'est correct car cela recherche juste dans le package et non pas dans les sous package
-			// à voir si il faut aller voir dans les sous packages
-			for (Iterator<Class> classesIterator = getClasses().iterator(); classesIterator
-					.hasNext();) {
-				Class tmp = classesIterator.next();
-				if (tmp.getName().matches(regex)) {
-					classes.add(tmp);
+			return this.getClassOnlyWithRegex(regex, recursive);
+		}
+	}
+	
+	private List<Class> getClassOnlyWithRegex(String regex, boolean recursive) {
+		List<Class> classes = new ArrayList<Class>();
+		if (recursive) {
+		// TODO When recursive is true
+		// It's not used for the moment.
+		} else {
+			String[] tmpString = regex.split("\\*"); 
+			for (Class clazz : getClasses()) {
+				boolean valid = true;
+				for (int i = 0; i < tmpString.length; i++) {
+					if (i == 0) {
+						if ((regex.startsWith("*") && !clazz.getName().contains(tmpString[i]))	|| (!clazz.getName().startsWith(tmpString[i]))) {
+							valid = false;
+							break;
+						}
+					} else if (clazz.getName().indexOf(tmpString[i - 1] + tmpString[i - 1].length()) < clazz.getName().length() 
+							&&  clazz.getName().indexOf(tmpString[i - 1] + tmpString[i - 1].length()) > -1
+							&& !clazz.getName().substring(clazz.getName().indexOf(tmpString[i - 1] + tmpString[i - 1].length())).contains(tmpString[i])) {
+						valid = false;
+						break;
+					}
+				}
+				if (valid) {
+					classes.add(clazz);
 				}
 			}
 		}

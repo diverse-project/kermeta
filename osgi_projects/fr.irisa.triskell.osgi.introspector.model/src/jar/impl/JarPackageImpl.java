@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JarPackageImpl.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: JarPackageImpl.java,v 1.4 2008-08-19 07:04:46 edaubert Exp $
  */
 package jar.impl;
 
@@ -178,8 +178,7 @@ public class JarPackageImpl extends EPackageImpl implements JarPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getSystemEntry_BundleClassPath() {
@@ -325,8 +324,8 @@ public class JarPackageImpl extends EPackageImpl implements JarPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(bundleEntryEClass, BundleEntry.class, "BundleEntry", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBundleEntry_FullPath(), theManifestPackage.getString(), "fullPath", null, 1, 1, BundleEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBundleEntry_Name(), theManifestPackage.getString(), "name", null, 1, 1, BundleEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBundleEntry_FullPath(), theManifestPackage.getString(), "fullPath", null, 0, 1, BundleEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBundleEntry_Name(), theManifestPackage.getString(), "name", null, 0, 1, BundleEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(systemEntryEClass, SystemEntry.class, "SystemEntry", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSystemEntry_BundleClassPath(), theManifestPackage.getboolean(), "bundleClassPath", null, 1, 1, SystemEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

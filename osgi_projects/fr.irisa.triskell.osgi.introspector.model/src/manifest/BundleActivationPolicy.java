@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleActivationPolicy.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: BundleActivationPolicy.java,v 1.3 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest;
 
@@ -73,7 +73,7 @@ public interface BundleActivationPolicy extends MANIFESTEntry {
 	EList<ActivationPolicyDirective> getDirectives();
 
 	void addDirective(ActivationPolicyDirective directive);
-	
+
 	void removeDirective(ActivationPolicyDirective directive);
 
 } // BundleActivationPolicy

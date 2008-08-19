@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkImpl.java,v 1.5 2008-08-11 14:19:27 edaubert Exp $
+ * $Id: FrameworkImpl.java,v 1.6 2008-08-19 07:04:46 edaubert Exp $
  */
 package framework.impl;
 
@@ -161,10 +161,13 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 					}
 				}
 			}
-			// Attention gérer l'unicité du couple BundleVersion, BundleSymbolicName
+			// Attention gérer l'unicité du couple BundleVersion,
+			// BundleSymbolicName
 			// TODO Modifier FrameworkTest#testAddBundle en conséquence
-			Version version = bundle.getManifest().getBundleVersion().getVersion();
-			Bundle tmp = this.findBundle(symbolicName.getSymbolicName(), version);
+			Version version = bundle.getManifest().getBundleVersion()
+					.getVersion();
+			Bundle tmp = this.findBundle(symbolicName.getSymbolicName(),
+					version);
 			if (tmp == null) {
 				return getBundles().add(bundle);
 			}
@@ -188,7 +191,8 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 	public List<Bundle> findBundles(String symbolicName) {
 		List<Bundle> bundles = new ArrayList<Bundle>();
 		for (Bundle bundle : this.getBundles()) {
-			if (symbolicName.equals(bundle.getManifest().getBundleSymbolicName().getSymbolicName())) {
+			if (symbolicName.equals(bundle.getManifest()
+					.getBundleSymbolicName().getSymbolicName())) {
 				bundles.add(bundle);
 			}
 		}
@@ -197,13 +201,24 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 		}
 		return bundles;
 	}
-	
+
 	public Bundle findBundle(String symbolicName, Version version) {
 		for (Bundle bundle : this.getBundles()) {
-			if (symbolicName.equals(bundle.getManifest().getBundleSymbolicName().getSymbolicName())) {
-				if (version.equals(bundle.getManifest().getBundleVersion().getVersion())) {
-				return bundle;
+			if (symbolicName.equals(bundle.getManifest()
+					.getBundleSymbolicName().getSymbolicName())) {
+				if (version.equals(bundle.getManifest().getBundleVersion()
+						.getVersion())) {
+					return bundle;
 				}
+			}
+		}
+		return null;
+	}
+
+	public Bundle getBundle(long id) {
+		for (Bundle bundle : getBundles()) {
+			if (bundle.getId() == id) {
+				return bundle;
 			}
 		}
 		return null;

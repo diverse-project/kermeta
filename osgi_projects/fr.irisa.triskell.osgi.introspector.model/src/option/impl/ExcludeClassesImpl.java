@@ -2,20 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExcludeClassesImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: ExcludeClassesImpl.java,v 1.3 2008-08-19 07:04:45 edaubert Exp $
  */
 package option.impl;
-
-import jar.Class;
 
 import java.util.Collection;
 
 import option.ExcludeClasses;
 import option.OptionPackage;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.osgi.framework.Constants;
 
 /**
@@ -33,13 +34,13 @@ import org.osgi.framework.Constants;
 public class ExcludeClassesImpl extends ExportPackageDirectiveImpl implements
 		ExcludeClasses {
 	/**
-	 * The cached value of the '{@link #getClasses() <em>Classes</em>}' reference list.
+	 * The cached value of the '{@link #getClasses() <em>Classes</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getClasses()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<jar.Class> classes;
+	protected EList<option.Class> classes;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -62,11 +63,25 @@ public class ExcludeClassesImpl extends ExportPackageDirectiveImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<jar.Class> getClasses() {
+	public EList<option.Class> getClasses() {
 		if (classes == null) {
-			classes = new EObjectResolvingEList<jar.Class>(jar.Class.class, this, OptionPackage.EXCLUDE_CLASSES__CLASSES);
+			classes = new EObjectContainmentEList<option.Class>(option.Class.class, this, OptionPackage.EXCLUDE_CLASSES__CLASSES);
 		}
 		return classes;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case OptionPackage.EXCLUDE_CLASSES__CLASSES:
+				return ((InternalEList<?>)getClasses()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -92,7 +107,7 @@ public class ExcludeClassesImpl extends ExportPackageDirectiveImpl implements
 		switch (featureID) {
 			case OptionPackage.EXCLUDE_CLASSES__CLASSES:
 				getClasses().clear();
-				getClasses().addAll((Collection<? extends jar.Class>)newValue);
+				getClasses().addAll((Collection<? extends option.Class>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +140,15 @@ public class ExcludeClassesImpl extends ExportPackageDirectiveImpl implements
 		return super.eIsSet(featureID);
 	}
 
-	public void addExclude(Class exclude) {
-		if (!getClasses().contains(exclude)) {
+	public void addExclude(option.Class exclude) {
+		boolean exist = false;
+		for (option.Class tmp : getClasses()) {
+			if (tmp.getReference().equals(exclude.getReference())) {
+				exist = true;
+				break;
+			}
+		}
+		if (!exist) {
 			getClasses().add(exclude);
 		}
 

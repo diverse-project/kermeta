@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JarPackage.java,v 1.3 2008-08-01 09:44:37 edaubert Exp $
+ * $Id: JarPackage.java,v 1.4 2008-08-19 07:04:43 edaubert Exp $
  */
 package jar;
 
@@ -119,8 +119,7 @@ public interface JarPackage extends EPackage {
 
 	/**
 	 * The feature id for the '<em><b>Bundle Class Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -250,8 +249,7 @@ public interface JarPackage extends EPackage {
 
 	/**
 	 * The feature id for the '<em><b>Bundle Class Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -302,8 +300,7 @@ public interface JarPackage extends EPackage {
 
 	/**
 	 * The feature id for the '<em><b>Bundle Class Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -358,8 +355,7 @@ public interface JarPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '{@link jar.SystemEntry#isBundleClassPath <em>Bundle Class Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Bundle Class Path</em>'.
 	 * @see jar.SystemEntry#isBundleClassPath()
 	 * @see #getSystemEntry()
@@ -489,8 +485,7 @@ public interface JarPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '<em><b>Bundle Class Path</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute SYSTEM_ENTRY__BUNDLE_CLASS_PATH = eINSTANCE.getSystemEntry_BundleClassPath();

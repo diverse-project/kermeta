@@ -2,23 +2,22 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleClassPathImpl.java,v 1.3 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: BundleClassPathImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
-
-import jar.SystemEntry;
 
 import java.util.Collection;
 
 import manifest.BundleClassPath;
+import manifest.ClassPath;
 import manifest.ManifestPackage;
 
-import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.osgi.framework.Constants;
 
 /**
@@ -27,9 +26,7 @@ import org.osgi.framework.Constants;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link manifest.impl.BundleClassPathImpl#getEntries <em>Entries</em>}</li>
- *   <li>{@link manifest.impl.BundleClassPathImpl#isResolved <em>Resolved</em>}</li>
- *   <li>{@link manifest.impl.BundleClassPathImpl#getReferences <em>References</em>}</li>
+ *   <li>{@link manifest.impl.BundleClassPathImpl#getClassPaths <em>Class Paths</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,41 +35,13 @@ import org.osgi.framework.Constants;
 public class BundleClassPathImpl extends MANIFESTEntryImpl implements
 		BundleClassPath {
 	/**
-	 * The cached value of the '{@link #getEntries() <em>Entries</em>}' reference list.
+	 * The cached value of the '{@link #getClassPaths() <em>Class Paths</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getEntries()
+	 * @see #getClassPaths()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<SystemEntry> entries;
-
-	/**
-	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isResolved()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean RESOLVED_EDEFAULT = false;
-	/**
-	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isResolved()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean resolved = RESOLVED_EDEFAULT;
-	/**
-	 * The cached value of the '{@link #getReferences() <em>References</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferences()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> references;
+	protected EList<ClassPath> classPaths;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -95,44 +64,25 @@ public class BundleClassPathImpl extends MANIFESTEntryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<SystemEntry> getEntries() {
-		if (entries == null) {
-			entries = new EObjectResolvingEList<SystemEntry>(SystemEntry.class, this, ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES);
+	public EList<ClassPath> getClassPaths() {
+		if (classPaths == null) {
+			classPaths = new EObjectContainmentEList<ClassPath>(ClassPath.class, this, ManifestPackage.BUNDLE_CLASS_PATH__CLASS_PATHS);
 		}
-		return entries;
+		return classPaths;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isResolved() {
-		return resolved;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setResolved(boolean newResolved) {
-		boolean oldResolved = resolved;
-		resolved = newResolved;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.BUNDLE_CLASS_PATH__RESOLVED, oldResolved, resolved));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<String> getReferences() {
-		if (references == null) {
-			references = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.BUNDLE_CLASS_PATH__REFERENCES);
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ManifestPackage.BUNDLE_CLASS_PATH__CLASS_PATHS:
+				return ((InternalEList<?>)getClassPaths()).basicRemove(otherEnd, msgs);
 		}
-		return references;
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -142,12 +92,8 @@ public class BundleClassPathImpl extends MANIFESTEntryImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
-				return getEntries();
-			case ManifestPackage.BUNDLE_CLASS_PATH__RESOLVED:
-				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
-			case ManifestPackage.BUNDLE_CLASS_PATH__REFERENCES:
-				return getReferences();
+			case ManifestPackage.BUNDLE_CLASS_PATH__CLASS_PATHS:
+				return getClassPaths();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -160,16 +106,9 @@ public class BundleClassPathImpl extends MANIFESTEntryImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
-				getEntries().clear();
-				getEntries().addAll((Collection<? extends SystemEntry>)newValue);
-				return;
-			case ManifestPackage.BUNDLE_CLASS_PATH__RESOLVED:
-				setResolved(((Boolean)newValue).booleanValue());
-				return;
-			case ManifestPackage.BUNDLE_CLASS_PATH__REFERENCES:
-				getReferences().clear();
-				getReferences().addAll((Collection<? extends String>)newValue);
+			case ManifestPackage.BUNDLE_CLASS_PATH__CLASS_PATHS:
+				getClassPaths().clear();
+				getClassPaths().addAll((Collection<? extends ClassPath>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -182,14 +121,8 @@ public class BundleClassPathImpl extends MANIFESTEntryImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
-				getEntries().clear();
-				return;
-			case ManifestPackage.BUNDLE_CLASS_PATH__RESOLVED:
-				setResolved(RESOLVED_EDEFAULT);
-				return;
-			case ManifestPackage.BUNDLE_CLASS_PATH__REFERENCES:
-				getReferences().clear();
+			case ManifestPackage.BUNDLE_CLASS_PATH__CLASS_PATHS:
+				getClassPaths().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -202,40 +135,19 @@ public class BundleClassPathImpl extends MANIFESTEntryImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ManifestPackage.BUNDLE_CLASS_PATH__ENTRIES:
-				return entries != null && !entries.isEmpty();
-			case ManifestPackage.BUNDLE_CLASS_PATH__RESOLVED:
-				return resolved != RESOLVED_EDEFAULT;
-			case ManifestPackage.BUNDLE_CLASS_PATH__REFERENCES:
-				return references != null && !references.isEmpty();
+			case ManifestPackage.BUNDLE_CLASS_PATH__CLASS_PATHS:
+				return classPaths != null && !classPaths.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	public void addClassPath(ClassPath classPath) {
+		getClassPaths().add(classPath);
+	}
+
+	/*
+	 * public void addEntryReference(String reference) {
+	 * getReferences().add(reference); }
 	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (resolved: ");
-		result.append(resolved);
-		result.append(", references: ");
-		result.append(references);
-		result.append(')');
-		return result.toString();
-	}
-
-	public void addEntry(SystemEntry entry) {
-		getEntries().add(entry);
-	}
-	
-	public void addEntryReference(String reference) {
-		getReferences().add(reference);
-	}
 
 } // BundleClassPathImpl

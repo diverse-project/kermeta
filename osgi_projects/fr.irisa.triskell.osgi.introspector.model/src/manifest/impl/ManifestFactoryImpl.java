@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestFactoryImpl.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: ManifestFactoryImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
 
 import java.net.URL;
 
-import manifest.*;
 import manifest.BundleActivationPolicy;
 import manifest.BundleActivator;
 import manifest.BundleCategory;
@@ -26,6 +25,7 @@ import manifest.BundleSymbolicName;
 import manifest.BundleUpdateLocation;
 import manifest.BundleVendor;
 import manifest.BundleVersion;
+import manifest.ClassPath;
 import manifest.DynamicImportPackage;
 import manifest.ExportPackage;
 import manifest.ExportService;
@@ -37,6 +37,7 @@ import manifest.MANIFESTEntry;
 import manifest.MANIFESTVersionEnum;
 import manifest.ManifestFactory;
 import manifest.ManifestPackage;
+import manifest.NativeCode;
 import manifest.PolicyEnum;
 import manifest.RequireBundle;
 import manifest.Service;
@@ -124,6 +125,9 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 			case ManifestPackage.BUNDLE_REQUIRED_EXECUTION_ENVIRONMENT: return createBundleRequiredExecutionEnvironment();
 			case ManifestPackage.SIMPLE_MANIFEST_ENTRY_MANY_VALUES: return createSimpleManifestEntryManyValues();
 			case ManifestPackage.BUNDLE_MANIFEST_VERSION: return createBundleManifestVersion();
+			case ManifestPackage.CLASS_PATH: return createClassPath();
+			case ManifestPackage.NATIVE_CODE: return createNativeCode();
+			case ManifestPackage.PACKAGE: return createPackage();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -445,6 +449,33 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 	public BundleManifestVersion createBundleManifestVersion() {
 		BundleManifestVersionImpl bundleManifestVersion = new BundleManifestVersionImpl();
 		return bundleManifestVersion;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassPath createClassPath() {
+		ClassPathImpl classPath = new ClassPathImpl();
+		return classPath;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NativeCode createNativeCode() {
+		NativeCodeImpl nativeCode = new NativeCodeImpl();
+		return nativeCode;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public manifest.Package createPackage() {
+		PackageImpl package_ = new PackageImpl();
+		return package_;
 	}
 
 	/**

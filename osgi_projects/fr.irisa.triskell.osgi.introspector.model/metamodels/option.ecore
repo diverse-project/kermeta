@@ -90,30 +90,20 @@
     <eLiterals name="WindowsVista" value="24"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExcludePackages" eSuperTypes="#//ActivationPolicyDirective">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
-        eType="ecore:EClass jar.ecore#//Package"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packagesReference" lowerBound="1"
-        upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
-        eType="ecore:EDataType manifest.ecore#//boolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" lowerBound="1"
+        upperBound="-1" eType="#//Package" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Processor" eSuperTypes="#//NativeCodeDirective">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="processor" lowerBound="1"
         eType="#//ProcessorEnum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IncludePackages" eSuperTypes="#//ActivationPolicyDirective">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
-        eType="ecore:EClass jar.ecore#//Package"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packagesReference" lowerBound="1"
-        upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
-        eType="ecore:EDataType manifest.ecore#//boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" lowerBound="1"
+        upperBound="-1" eType="#//Package" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Uses" eSuperTypes="#//ExportPackageDirective">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="packages" lowerBound="1"
         upperBound="-1" eType="ecore:EDataType framework.ecore#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="packagesList" upperBound="-1"
-        eType="ecore:EClass jar.ecore#//Package"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
         eType="ecore:EDataType manifest.ecore#//boolean"/>
   </eClassifiers>
@@ -160,13 +150,28 @@
   <eClassifiers xsi:type="ecore:EClass" name="ImportPackageDirective" abstract="true"
       eSuperTypes="#//RequireBundleDirective"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActivationPolicyDirective" abstract="true"
-      eSuperTypes="#//DirectiveEntry #//ExportPackageDirective"/>
+      eSuperTypes="#//DirectiveEntry"/>
   <eClassifiers xsi:type="ecore:EClass" name="IncludeClasses" eSuperTypes="#//ExportPackageDirective">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classes" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass jar.ecore#//Class"/>
+        upperBound="-1" eType="#//Class" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExcludeClasses" eSuperTypes="#//ExportPackageDirective">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classes" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass jar.ecore#//Class"/>
+        upperBound="-1" eType="#//Class" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Class">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+        eType="ecore:EClass jar.ecore#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//boolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Package">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="ecore:EClass jar.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//boolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" lowerBound="1"
+        eType="ecore:EDataType manifest.ecore#//String"/>
   </eClassifiers>
 </ecore:EPackage>

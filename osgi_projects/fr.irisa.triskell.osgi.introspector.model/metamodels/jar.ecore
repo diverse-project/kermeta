@@ -4,9 +4,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="jar"
     nsURI="http://org.osgi.framework/jar" nsPrefix="org.osgi.framework.jar">
   <eClassifiers xsi:type="ecore:EClass" name="BundleEntry" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullPath" lowerBound="1"
-        eType="ecore:EDataType manifest.ecore#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType manifest.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullPath" eType="ecore:EDataType manifest.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType manifest.ecore#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SystemEntry" abstract="true" eSuperTypes="#//BundleEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleClassPath" lowerBound="1"

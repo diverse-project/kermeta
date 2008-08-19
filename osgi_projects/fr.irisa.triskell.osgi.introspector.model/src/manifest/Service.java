@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Service.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: Service.java,v 1.5 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest;
 
@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link manifest.Service#getInterface <em>Interface</em>}</li>
- *   <li>{@link manifest.Service#getInterfaceReference <em>Interface Reference</em>}</li>
+ *   <li>{@link manifest.Service#getReference <em>Reference</em>}</li>
  *   <li>{@link manifest.Service#isResolved <em>Resolved</em>}</li>
+ *   <li>{@link manifest.Service#getInterface <em>Interface</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,6 +26,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Service extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reference</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Reference</em>' attribute.
+	 * @see #setReference(String)
+	 * @see manifest.ManifestPackage#getService_Reference()
+	 * @model dataType="framework.String" required="true"
+	 * @generated
+	 */
+	String getReference();
+
+	/**
+	 * Sets the value of the '{@link manifest.Service#getReference <em>Reference</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Reference</em>' attribute.
+	 * @see #getReference()
+	 * @generated
+	 */
+	void setReference(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Interface</b></em>' reference. <!--
 	 * begin-user-doc -->
@@ -53,39 +79,14 @@ public interface Service extends EObject {
 	void setInterface(jar.Class value);
 
 	/**
-	 * Returns the value of the '<em><b>Interface Reference</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Interface Reference</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Interface Reference</em>' attribute.
-	 * @see #setInterfaceReference(String)
-	 * @see manifest.ManifestPackage#getService_InterfaceReference()
-	 * @model dataType="framework.String" required="true"
-	 * @generated
-	 */
-	String getInterfaceReference();
-
-	/**
-	 * Sets the value of the '{@link manifest.Service#getInterfaceReference <em>Interface Reference</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Interface Reference</em>' attribute.
-	 * @see #getInterfaceReference()
-	 * @generated
-	 */
-	void setInterfaceReference(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Resolved</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Resolved</em>' attribute.
 	 * @see #setResolved(boolean)
 	 * @see manifest.ManifestPackage#getService_Resolved()
@@ -96,8 +97,7 @@ public interface Service extends EObject {
 
 	/**
 	 * Sets the value of the '{@link manifest.Service#isResolved <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Resolved</em>' attribute.
 	 * @see #isResolved()
 	 * @generated

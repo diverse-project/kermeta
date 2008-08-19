@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionFactoryImpl.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: OptionFactoryImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
  */
 package option.impl;
 
-import option.*;
 import option.AttributEntry;
 import option.ExcludeClasses;
 import option.ExcludePackages;
@@ -100,6 +99,8 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 			case OptionPackage.SELECTION_FILTER: return createSelectionFilter();
 			case OptionPackage.INCLUDE_CLASSES: return createIncludeClasses();
 			case OptionPackage.EXCLUDE_CLASSES: return createExcludeClasses();
+			case OptionPackage.CLASS: return createClass();
+			case OptionPackage.PACKAGE: return createPackage();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -308,6 +309,24 @@ public class OptionFactoryImpl extends EFactoryImpl implements OptionFactory {
 	public ExcludeClasses createExcludeClasses() {
 		ExcludeClassesImpl excludeClasses = new ExcludeClassesImpl();
 		return excludeClasses;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public option.Class createClass() {
+		ClassImpl class_ = new ClassImpl();
+		return class_;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public option.Package createPackage() {
+		PackageImpl package_ = new PackageImpl();
+		return package_;
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DynamicImportPackage.java,v 1.3 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: DynamicImportPackage.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest;
 
@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link manifest.DynamicImportPackage#getPackagesReference <em>Packages Reference</em>}</li>
+ *   <li>{@link manifest.DynamicImportPackage#getPackages <em>Packages</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,20 +25,21 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface DynamicImportPackage extends MANIFESTEntry {
 	/**
-	 * Returns the value of the '<em><b>Packages Reference</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Packages</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Packages Reference</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Packages</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Packages Reference</em>' attribute list.
-	 * @see manifest.ManifestPackage#getDynamicImportPackage_PackagesReference()
+	 * 
+	 * @return the value of the '<em>Packages</em>' attribute list.
+	 * @see manifest.ManifestPackage#getDynamicImportPackage_Packages()
 	 * @model dataType="manifest.String" required="true"
 	 * @generated
 	 */
-	EList<String> getPackagesReference();
+	EList<String> getPackages();
 
 	void addPackageReference(String packageName);
 

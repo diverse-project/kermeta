@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionPackage.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: OptionPackage.java,v 1.5 2008-08-19 07:04:44 edaubert Exp $
  */
 package option;
 
@@ -307,7 +307,7 @@ public interface OptionPackage extends EPackage {
 	int EXCLUDE_PACKAGES__TOKEN = ACTIVATION_POLICY_DIRECTIVE__TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Packages</b></em>' reference list.
+	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
@@ -315,30 +315,12 @@ public interface OptionPackage extends EPackage {
 	int EXCLUDE_PACKAGES__PACKAGES = ACTIVATION_POLICY_DIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Packages Reference</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXCLUDE_PACKAGES__PACKAGES_REFERENCE = ACTIVATION_POLICY_DIRECTIVE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXCLUDE_PACKAGES__RESOLVED = ACTIVATION_POLICY_DIRECTIVE_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Exclude Packages</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXCLUDE_PACKAGES_FEATURE_COUNT = ACTIVATION_POLICY_DIRECTIVE_FEATURE_COUNT + 3;
+	int EXCLUDE_PACKAGES_FEATURE_COUNT = ACTIVATION_POLICY_DIRECTIVE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link option.impl.ProcessorImpl <em>Processor</em>}' class.
@@ -394,7 +376,7 @@ public interface OptionPackage extends EPackage {
 	int INCLUDE_PACKAGES__TOKEN = ACTIVATION_POLICY_DIRECTIVE__TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Packages</b></em>' reference list.
+	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
@@ -402,30 +384,12 @@ public interface OptionPackage extends EPackage {
 	int INCLUDE_PACKAGES__PACKAGES = ACTIVATION_POLICY_DIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Packages Reference</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCLUDE_PACKAGES__PACKAGES_REFERENCE = ACTIVATION_POLICY_DIRECTIVE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCLUDE_PACKAGES__RESOLVED = ACTIVATION_POLICY_DIRECTIVE_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Include Packages</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INCLUDE_PACKAGES_FEATURE_COUNT = ACTIVATION_POLICY_DIRECTIVE_FEATURE_COUNT + 3;
+	int INCLUDE_PACKAGES_FEATURE_COUNT = ACTIVATION_POLICY_DIRECTIVE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link option.impl.ExportPackageDirectiveImpl <em>Export Package Directive</em>}' class.
@@ -480,22 +444,13 @@ public interface OptionPackage extends EPackage {
 	int USES__PACKAGES = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Packages List</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int USES__PACKAGES_LIST = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USES__RESOLVED = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 2;
+	int USES__RESOLVED = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Uses</em>' class. <!--
@@ -504,7 +459,7 @@ public interface OptionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USES_FEATURE_COUNT = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 3;
+	int USES_FEATURE_COUNT = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link option.impl.FragmentHostDirectiveImpl <em>Fragment Host Directive</em>}' class.
@@ -907,7 +862,7 @@ public interface OptionPackage extends EPackage {
 	int INCLUDE_CLASSES__TOKEN = EXPORT_PACKAGE_DIRECTIVE__TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Classes</b></em>' reference list.
+	 * The feature id for the '<em><b>Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
@@ -941,7 +896,7 @@ public interface OptionPackage extends EPackage {
 	int EXCLUDE_CLASSES__TOKEN = EXPORT_PACKAGE_DIRECTIVE__TOKEN;
 
 	/**
-	 * The feature id for the '<em><b>Classes</b></em>' reference list.
+	 * The feature id for the '<em><b>Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
@@ -957,13 +912,101 @@ public interface OptionPackage extends EPackage {
 	int EXCLUDE_CLASSES_FEATURE_COUNT = EXPORT_PACKAGE_DIRECTIVE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link option.impl.ClassImpl <em>Class</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see option.impl.ClassImpl
+	 * @see option.impl.OptionPackageImpl#getClass_()
+	 * @generated
+	 */
+	int CLASS = 26;
+
+	/**
+	 * The feature id for the '<em><b>Classes</b></em>' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__CLASSES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__RESOLVED = 1;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__REFERENCE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Class</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link option.impl.PackageImpl <em>Package</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see option.impl.PackageImpl
+	 * @see option.impl.OptionPackageImpl#getPackage()
+	 * @generated
+	 */
+	int PACKAGE = 27;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__PACKAGE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__RESOLVED = 1;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__REFERENCE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE_FEATURE_COUNT = 3;
+
+	/**
 	 * The meta object id for the '{@link option.FragmentAttachmentEnum <em>Fragment Attachment Enum</em>}' enum.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see option.FragmentAttachmentEnum
 	 * @see option.impl.OptionPackageImpl#getFragmentAttachmentEnum()
 	 * @generated
 	 */
-	int FRAGMENT_ATTACHMENT_ENUM = 26;
+	int FRAGMENT_ATTACHMENT_ENUM = 28;
 
 	/**
 	 * The meta object id for the '{@link option.ProcessorEnum <em>Processor Enum</em>}' enum.
@@ -972,7 +1015,7 @@ public interface OptionPackage extends EPackage {
 	 * @see option.impl.OptionPackageImpl#getProcessorEnum()
 	 * @generated
 	 */
-	int PROCESSOR_ENUM = 27;
+	int PROCESSOR_ENUM = 29;
 
 	/**
 	 * The meta object id for the '{@link option.ResolutionEnum <em>Resolution Enum</em>}' enum.
@@ -981,7 +1024,7 @@ public interface OptionPackage extends EPackage {
 	 * @see option.impl.OptionPackageImpl#getResolutionEnum()
 	 * @generated
 	 */
-	int RESOLUTION_ENUM = 28;
+	int RESOLUTION_ENUM = 30;
 
 	/**
 	 * The meta object id for the '{@link option.VisibilityEnum <em>Visibility Enum</em>}' enum.
@@ -990,7 +1033,7 @@ public interface OptionPackage extends EPackage {
 	 * @see option.impl.OptionPackageImpl#getVisibilityEnum()
 	 * @generated
 	 */
-	int VISIBILITY_ENUM = 29;
+	int VISIBILITY_ENUM = 31;
 
 	/**
 	 * The meta object id for the '{@link option.ISOCodeLanguage <em>ISO Code Language</em>}' enum.
@@ -999,7 +1042,7 @@ public interface OptionPackage extends EPackage {
 	 * @see option.impl.OptionPackageImpl#getISOCodeLanguage()
 	 * @generated
 	 */
-	int ISO_CODE_LANGUAGE = 30;
+	int ISO_CODE_LANGUAGE = 32;
 
 	/**
 	 * The meta object id for the '{@link option.ExtensionEnum <em>Extension Enum</em>}' enum.
@@ -1008,7 +1051,7 @@ public interface OptionPackage extends EPackage {
 	 * @see option.impl.OptionPackageImpl#getExtensionEnum()
 	 * @generated
 	 */
-	int EXTENSION_ENUM = 31;
+	int EXTENSION_ENUM = 33;
 
 	/**
 	 * The meta object id for the '{@link option.OsNameEnum <em>Os Name Enum</em>}' enum.
@@ -1017,7 +1060,7 @@ public interface OptionPackage extends EPackage {
 	 * @see option.impl.OptionPackageImpl#getOsNameEnum()
 	 * @generated
 	 */
-	int OS_NAME_ENUM = 32;
+	int OS_NAME_ENUM = 34;
 
 	/**
 	 * Returns the meta object for class '{@link option.ParameterEntry <em>Parameter Entry</em>}'.
@@ -1153,36 +1196,14 @@ public interface OptionPackage extends EPackage {
 	EClass getExcludePackages();
 
 	/**
-	 * Returns the meta object for the reference list '{@link option.ExcludePackages#getPackages <em>Packages</em>}'.
+	 * Returns the meta object for the containment reference list '{@link option.ExcludePackages#getPackages <em>Packages</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Packages</em>'.
+	 * @return the meta object for the containment reference list '<em>Packages</em>'.
 	 * @see option.ExcludePackages#getPackages()
 	 * @see #getExcludePackages()
 	 * @generated
 	 */
 	EReference getExcludePackages_Packages();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link option.ExcludePackages#getPackagesReference <em>Packages Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Packages Reference</em>'.
-	 * @see option.ExcludePackages#getPackagesReference()
-	 * @see #getExcludePackages()
-	 * @generated
-	 */
-	EAttribute getExcludePackages_PackagesReference();
-
-	/**
-	 * Returns the meta object for the attribute '{@link option.ExcludePackages#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Resolved</em>'.
-	 * @see option.ExcludePackages#isResolved()
-	 * @see #getExcludePackages()
-	 * @generated
-	 */
-	EAttribute getExcludePackages_Resolved();
 
 	/**
 	 * Returns the meta object for class '{@link option.Processor <em>Processor</em>}'.
@@ -1213,36 +1234,14 @@ public interface OptionPackage extends EPackage {
 	EClass getIncludePackages();
 
 	/**
-	 * Returns the meta object for the reference list '{@link option.IncludePackages#getPackages <em>Packages</em>}'.
+	 * Returns the meta object for the containment reference list '{@link option.IncludePackages#getPackages <em>Packages</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Packages</em>'.
+	 * @return the meta object for the containment reference list '<em>Packages</em>'.
 	 * @see option.IncludePackages#getPackages()
 	 * @see #getIncludePackages()
 	 * @generated
 	 */
 	EReference getIncludePackages_Packages();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link option.IncludePackages#getPackagesReference <em>Packages Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Packages Reference</em>'.
-	 * @see option.IncludePackages#getPackagesReference()
-	 * @see #getIncludePackages()
-	 * @generated
-	 */
-	EAttribute getIncludePackages_PackagesReference();
-
-	/**
-	 * Returns the meta object for the attribute '{@link option.IncludePackages#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Resolved</em>'.
-	 * @see option.IncludePackages#isResolved()
-	 * @see #getIncludePackages()
-	 * @generated
-	 */
-	EAttribute getIncludePackages_Resolved();
 
 	/**
 	 * Returns the meta object for class '{@link option.Uses <em>Uses</em>}'.
@@ -1264,20 +1263,8 @@ public interface OptionPackage extends EPackage {
 	EAttribute getUses_Packages();
 
 	/**
-	 * Returns the meta object for the reference list '{@link option.Uses#getPackagesList <em>Packages List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Packages List</em>'.
-	 * @see option.Uses#getPackagesList()
-	 * @see #getUses()
-	 * @generated
-	 */
-	EReference getUses_PackagesList();
-
-	/**
 	 * Returns the meta object for the attribute '{@link option.Uses#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Resolved</em>'.
 	 * @see option.Uses#isResolved()
 	 * @see #getUses()
@@ -1501,9 +1488,9 @@ public interface OptionPackage extends EPackage {
 	EClass getIncludeClasses();
 
 	/**
-	 * Returns the meta object for the reference list '{@link option.IncludeClasses#getClasses <em>Classes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link option.IncludeClasses#getClasses <em>Classes</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Classes</em>'.
+	 * @return the meta object for the containment reference list '<em>Classes</em>'.
 	 * @see option.IncludeClasses#getClasses()
 	 * @see #getIncludeClasses()
 	 * @generated
@@ -1520,14 +1507,92 @@ public interface OptionPackage extends EPackage {
 	EClass getExcludeClasses();
 
 	/**
-	 * Returns the meta object for the reference list '{@link option.ExcludeClasses#getClasses <em>Classes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link option.ExcludeClasses#getClasses <em>Classes</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Classes</em>'.
+	 * @return the meta object for the containment reference list '<em>Classes</em>'.
 	 * @see option.ExcludeClasses#getClasses()
 	 * @see #getExcludeClasses()
 	 * @generated
 	 */
 	EReference getExcludeClasses_Classes();
+
+	/**
+	 * Returns the meta object for class '{@link option.Class <em>Class</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Class</em>'.
+	 * @see option.Class
+	 * @generated
+	 */
+	EClass getClass_();
+
+	/**
+	 * Returns the meta object for the reference list '{@link option.Class#getClasses <em>Classes</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Classes</em>'.
+	 * @see option.Class#getClasses()
+	 * @see #getClass_()
+	 * @generated
+	 */
+	EReference getClass_Classes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link option.Class#isResolved <em>Resolved</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resolved</em>'.
+	 * @see option.Class#isResolved()
+	 * @see #getClass_()
+	 * @generated
+	 */
+	EAttribute getClass_Resolved();
+
+	/**
+	 * Returns the meta object for the attribute '{@link option.Class#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference</em>'.
+	 * @see option.Class#getReference()
+	 * @see #getClass_()
+	 * @generated
+	 */
+	EAttribute getClass_Reference();
+
+	/**
+	 * Returns the meta object for class '{@link option.Package <em>Package</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Package</em>'.
+	 * @see option.Package
+	 * @generated
+	 */
+	EClass getPackage();
+
+	/**
+	 * Returns the meta object for the reference '{@link option.Package#getPackage <em>Package</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Package</em>'.
+	 * @see option.Package#getPackage()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EReference getPackage_Package();
+
+	/**
+	 * Returns the meta object for the attribute '{@link option.Package#isResolved <em>Resolved</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resolved</em>'.
+	 * @see option.Package#isResolved()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EAttribute getPackage_Resolved();
+
+	/**
+	 * Returns the meta object for the attribute '{@link option.Package#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference</em>'.
+	 * @see option.Package#getReference()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EAttribute getPackage_Reference();
 
 	/**
 	 * Returns the meta object for enum '{@link option.FragmentAttachmentEnum <em>Fragment Attachment Enum</em>}'.
@@ -1729,27 +1794,12 @@ public interface OptionPackage extends EPackage {
 		EClass EXCLUDE_PACKAGES = eINSTANCE.getExcludePackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Packages</b></em>' reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Packages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * @generated
 		 */
 		EReference EXCLUDE_PACKAGES__PACKAGES = eINSTANCE.getExcludePackages_Packages();
-
-		/**
-		 * The meta object literal for the '<em><b>Packages Reference</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXCLUDE_PACKAGES__PACKAGES_REFERENCE = eINSTANCE.getExcludePackages_PackagesReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXCLUDE_PACKAGES__RESOLVED = eINSTANCE.getExcludePackages_Resolved();
 
 		/**
 		 * The meta object literal for the '{@link option.impl.ProcessorImpl <em>Processor</em>}' class.
@@ -1777,27 +1827,12 @@ public interface OptionPackage extends EPackage {
 		EClass INCLUDE_PACKAGES = eINSTANCE.getIncludePackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Packages</b></em>' reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Packages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * @generated
 		 */
 		EReference INCLUDE_PACKAGES__PACKAGES = eINSTANCE.getIncludePackages_Packages();
-
-		/**
-		 * The meta object literal for the '<em><b>Packages Reference</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INCLUDE_PACKAGES__PACKAGES_REFERENCE = eINSTANCE.getIncludePackages_PackagesReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INCLUDE_PACKAGES__RESOLVED = eINSTANCE.getIncludePackages_Resolved();
 
 		/**
 		 * The meta object literal for the '{@link option.impl.UsesImpl <em>Uses</em>}' class.
@@ -1816,17 +1851,8 @@ public interface OptionPackage extends EPackage {
 		EAttribute USES__PACKAGES = eINSTANCE.getUses_Packages();
 
 		/**
-		 * The meta object literal for the '<em><b>Packages List</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference USES__PACKAGES_LIST = eINSTANCE.getUses_PackagesList();
-
-		/**
 		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute USES__RESOLVED = eINSTANCE.getUses_Resolved();
@@ -2023,8 +2049,9 @@ public interface OptionPackage extends EPackage {
 		EClass INCLUDE_CLASSES = eINSTANCE.getIncludeClasses();
 
 		/**
-		 * The meta object literal for the '<em><b>Classes</b></em>' reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Classes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * @generated
 		 */
 		EReference INCLUDE_CLASSES__CLASSES = eINSTANCE.getIncludeClasses_Classes();
@@ -2039,11 +2066,72 @@ public interface OptionPackage extends EPackage {
 		EClass EXCLUDE_CLASSES = eINSTANCE.getExcludeClasses();
 
 		/**
+		 * The meta object literal for the '<em><b>Classes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * @generated
+		 */
+		EReference EXCLUDE_CLASSES__CLASSES = eINSTANCE.getExcludeClasses_Classes();
+
+		/**
+		 * The meta object literal for the '{@link option.impl.ClassImpl <em>Class</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @see option.impl.ClassImpl
+		 * @see option.impl.OptionPackageImpl#getClass_()
+		 * @generated
+		 */
+		EClass CLASS = eINSTANCE.getClass_();
+
+		/**
 		 * The meta object literal for the '<em><b>Classes</b></em>' reference list feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXCLUDE_CLASSES__CLASSES = eINSTANCE.getExcludeClasses_Classes();
+		EReference CLASS__CLASSES = eINSTANCE.getClass_Classes();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS__RESOLVED = eINSTANCE.getClass_Resolved();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS__REFERENCE = eINSTANCE.getClass_Reference();
+
+		/**
+		 * The meta object literal for the '{@link option.impl.PackageImpl <em>Package</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @see option.impl.PackageImpl
+		 * @see option.impl.OptionPackageImpl#getPackage()
+		 * @generated
+		 */
+		EClass PACKAGE = eINSTANCE.getPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Package</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE__PACKAGE = eINSTANCE.getPackage_Package();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PACKAGE__RESOLVED = eINSTANCE.getPackage_Resolved();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PACKAGE__REFERENCE = eINSTANCE.getPackage_Reference();
 
 		/**
 		 * The meta object literal for the '{@link option.FragmentAttachmentEnum <em>Fragment Attachment Enum</em>}' enum.

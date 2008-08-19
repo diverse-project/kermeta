@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkFactoryImpl.java,v 1.3 2008-07-31 13:43:54 edaubert Exp $
+ * $Id: FrameworkFactoryImpl.java,v 1.4 2008-08-19 07:04:46 edaubert Exp $
  */
 package framework.impl;
 
@@ -78,6 +78,8 @@ public class FrameworkFactoryImpl extends EFactoryImpl implements
 		switch (eDataType.getClassifierID()) {
 			case FrameworkPackage.STRING:
 				return createStringFromString(eDataType, initialValue);
+			case FrameworkPackage.LONG:
+				return createlongFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -92,6 +94,8 @@ public class FrameworkFactoryImpl extends EFactoryImpl implements
 		switch (eDataType.getClassifierID()) {
 			case FrameworkPackage.STRING:
 				return convertStringToString(eDataType, instanceValue);
+			case FrameworkPackage.LONG:
+				return convertlongToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -130,6 +134,22 @@ public class FrameworkFactoryImpl extends EFactoryImpl implements
 	 */
 	public String convertStringToString(EDataType eDataType,
 			Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long createlongFromString(EDataType eDataType, String initialValue) {
+		return (Long)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertlongToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

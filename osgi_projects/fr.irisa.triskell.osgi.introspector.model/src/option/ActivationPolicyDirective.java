@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActivationPolicyDirective.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: ActivationPolicyDirective.java,v 1.3 2008-08-19 07:04:44 edaubert Exp $
  */
 package option;
 
@@ -15,6 +15,5 @@ package option;
  * @model abstract="true"
  * @generated
  */
-public interface ActivationPolicyDirective extends DirectiveEntry,
-		ExportPackageDirective {
+public interface ActivationPolicyDirective extends DirectiveEntry {
 } // ActivationPolicyDirective

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleActivationPolicyImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: BundleActivationPolicyImpl.java,v 1.3 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
 
@@ -214,7 +214,7 @@ public class BundleActivationPolicyImpl extends MANIFESTEntryImpl implements
 
 	public void removeDirective(ActivationPolicyDirective directive) {
 		getDirectives().remove(directive);
-		
+
 	}
 
 } // BundleActivationPolicyImpl

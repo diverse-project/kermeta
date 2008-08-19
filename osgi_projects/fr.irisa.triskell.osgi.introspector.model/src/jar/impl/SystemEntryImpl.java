@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SystemEntryImpl.java,v 1.3 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: SystemEntryImpl.java,v 1.4 2008-08-19 07:04:46 edaubert Exp $
  */
 package jar.impl;
 
@@ -29,8 +29,7 @@ public abstract class SystemEntryImpl extends BundleEntryImpl implements
 		SystemEntry {
 	/**
 	 * The default value of the '{@link #isBundleClassPath() <em>Bundle Class Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isBundleClassPath()
 	 * @generated
 	 * @ordered
@@ -38,8 +37,7 @@ public abstract class SystemEntryImpl extends BundleEntryImpl implements
 	protected static final boolean BUNDLE_CLASS_PATH_EDEFAULT = false;
 	/**
 	 * The cached value of the '{@link #isBundleClassPath() <em>Bundle Class Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isBundleClassPath()
 	 * @generated
 	 * @ordered
@@ -64,8 +62,7 @@ public abstract class SystemEntryImpl extends BundleEntryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isBundleClassPath() {
@@ -73,8 +70,7 @@ public abstract class SystemEntryImpl extends BundleEntryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setBundleClassPath(boolean newBundleClassPath) {
@@ -85,8 +81,7 @@ public abstract class SystemEntryImpl extends BundleEntryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -99,8 +94,7 @@ public abstract class SystemEntryImpl extends BundleEntryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -114,8 +108,7 @@ public abstract class SystemEntryImpl extends BundleEntryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -129,8 +122,7 @@ public abstract class SystemEntryImpl extends BundleEntryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -143,8 +135,7 @@ public abstract class SystemEntryImpl extends BundleEntryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

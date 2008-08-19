@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestPackage.java,v 1.5 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: ManifestPackage.java,v 1.6 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest;
 
@@ -67,31 +67,31 @@ public interface ManifestPackage extends EPackage {
 	int SERVICE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__REFERENCE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__RESOLVED = 1;
+
+	/**
 	 * The feature id for the '<em><b>Interface</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE__INTERFACE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Interface Reference</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__INTERFACE_REFERENCE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__RESOLVED = 2;
+	int SERVICE__INTERFACE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Service</em>' class.
@@ -1048,13 +1048,31 @@ public interface ManifestPackage extends EPackage {
 	int BUNDLE_ACTIVATOR__OPTIONS = MANIFEST_ENTRY__OPTIONS;
 
 	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE_ACTIVATOR__REFERENCE = MANIFEST_ENTRY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE_ACTIVATOR__RESOLVED = MANIFEST_ENTRY_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Activator</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE_ACTIVATOR__ACTIVATOR = MANIFEST_ENTRY_FEATURE_COUNT + 0;
+	int BUNDLE_ACTIVATOR__ACTIVATOR = MANIFEST_ENTRY_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Bundle Activator</em>' class.
@@ -1062,7 +1080,7 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE_ACTIVATOR_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 1;
+	int BUNDLE_ACTIVATOR_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link manifest.impl.BundleClassPathImpl <em>Bundle Class Path</em>}' class.
@@ -1091,30 +1109,12 @@ public interface ManifestPackage extends EPackage {
 	int BUNDLE_CLASS_PATH__OPTIONS = MANIFEST_ENTRY__OPTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Entries</b></em>' reference list.
+	 * The feature id for the '<em><b>Class Paths</b></em>' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE_CLASS_PATH__ENTRIES = MANIFEST_ENTRY_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE_CLASS_PATH__RESOLVED = MANIFEST_ENTRY_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>References</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE_CLASS_PATH__REFERENCES = MANIFEST_ENTRY_FEATURE_COUNT + 2;
+	int BUNDLE_CLASS_PATH__CLASS_PATHS = MANIFEST_ENTRY_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Bundle Class Path</em>' class.
@@ -1122,7 +1122,7 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE_CLASS_PATH_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 3;
+	int BUNDLE_CLASS_PATH_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link manifest.impl.BundleNativeCodeImpl <em>Bundle Native Code</em>}' class.
@@ -1168,31 +1168,12 @@ public interface ManifestPackage extends EPackage {
 	int BUNDLE_NATIVE_CODE__DIRECTIVES = MANIFEST_ENTRY_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Native Codes</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE_NATIVE_CODE__FILE = MANIFEST_ENTRY_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE_NATIVE_CODE__RESOLVED = MANIFEST_ENTRY_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>File References</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE_NATIVE_CODE__FILE_REFERENCES = MANIFEST_ENTRY_FEATURE_COUNT + 4;
+	int BUNDLE_NATIVE_CODE__NATIVE_CODES = MANIFEST_ENTRY_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Bundle Native Code</em>' class.
@@ -1200,7 +1181,7 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE_NATIVE_CODE_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 5;
+	int BUNDLE_NATIVE_CODE_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link manifest.impl.RequireBundleImpl <em>Require Bundle</em>}' class.
@@ -1246,13 +1227,13 @@ public interface ManifestPackage extends EPackage {
 	int REQUIRE_BUNDLE__RESOLVED = MANIFEST_ENTRY_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Bundle Reference</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRE_BUNDLE__BUNDLE_REFERENCE = MANIFEST_ENTRY_FEATURE_COUNT + 2;
+	int REQUIRE_BUNDLE__REFERENCE = MANIFEST_ENTRY_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Bundle</b></em>' attribute. <!--
@@ -1298,9 +1279,9 @@ public interface ManifestPackage extends EPackage {
 	int IMPORT_SERVICE__OPTIONS = MANIFEST_ENTRY__OPTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -1308,8 +1289,7 @@ public interface ManifestPackage extends EPackage {
 
 	/**
 	 * The feature id for the '<em><b>Service Reference</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1409,22 +1389,13 @@ public interface ManifestPackage extends EPackage {
 	int IMPORT_PACKAGE__DIRECTIVES = MANIFEST_ENTRY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * The feature id for the '<em><b>Bundle</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_PACKAGE__RESOLVED = MANIFEST_ENTRY_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Packages Reference</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT_PACKAGE__PACKAGES_REFERENCE = MANIFEST_ENTRY_FEATURE_COUNT + 2;
+	int IMPORT_PACKAGE__BUNDLE = MANIFEST_ENTRY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Packages</b></em>' reference list.
@@ -1432,7 +1403,24 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_PACKAGE__PACKAGES = MANIFEST_ENTRY_FEATURE_COUNT + 3;
+	int IMPORT_PACKAGE__PACKAGES = MANIFEST_ENTRY_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Package References</b></em>' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_PACKAGE__PACKAGE_REFERENCES = MANIFEST_ENTRY_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_PACKAGE__RESOLVED = MANIFEST_ENTRY_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Import Package</em>' class.
@@ -1440,7 +1428,7 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_PACKAGE_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 4;
+	int IMPORT_PACKAGE_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link manifest.impl.ExportPackageImpl <em>Export Package</em>}' class.
@@ -1469,38 +1457,20 @@ public interface ManifestPackage extends EPackage {
 	int EXPORT_PACKAGE__OPTIONS = MANIFEST_ENTRY__OPTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Packages</b></em>' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPORT_PACKAGE__PACKAGES = MANIFEST_ENTRY_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Directives</b></em>' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPORT_PACKAGE__DIRECTIVES = MANIFEST_ENTRY_FEATURE_COUNT + 1;
+	int EXPORT_PACKAGE__DIRECTIVES = MANIFEST_ENTRY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPORT_PACKAGE__RESOLVED = MANIFEST_ENTRY_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Package Reference</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPORT_PACKAGE__PACKAGE_REFERENCE = MANIFEST_ENTRY_FEATURE_COUNT + 3;
+	int EXPORT_PACKAGE__PACKAGES = MANIFEST_ENTRY_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Export Package</em>' class.
@@ -1508,7 +1478,7 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPORT_PACKAGE_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 4;
+	int EXPORT_PACKAGE_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link manifest.impl.BundleActivationPolicyImpl <em>Bundle Activation Policy</em>}' class.
@@ -1605,18 +1575,18 @@ public interface ManifestPackage extends EPackage {
 	int FRAGMENT_HOST__BUNDLE = MANIFEST_ENTRY_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Bundle Reference</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int FRAGMENT_HOST__BUNDLE_REFERENCE = MANIFEST_ENTRY_FEATURE_COUNT + 2;
+	int FRAGMENT_HOST__REFERENCE = MANIFEST_ENTRY_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -1657,13 +1627,12 @@ public interface ManifestPackage extends EPackage {
 	int DYNAMIC_IMPORT_PACKAGE__OPTIONS = MANIFEST_ENTRY__OPTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Packages Reference</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Packages</b></em>' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_IMPORT_PACKAGE__PACKAGES_REFERENCE = MANIFEST_ENTRY_FEATURE_COUNT + 0;
+	int DYNAMIC_IMPORT_PACKAGE__PACKAGES = MANIFEST_ENTRY_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Dynamic Import Package</em>' class.
@@ -1767,13 +1736,145 @@ public interface ManifestPackage extends EPackage {
 	int BUNDLE_MANIFEST_VERSION_FEATURE_COUNT = MANIFEST_ENTRY_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link manifest.impl.ClassPathImpl <em>Class Path</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see manifest.impl.ClassPathImpl
+	 * @see manifest.impl.ManifestPackageImpl#getClassPath()
+	 * @generated
+	 */
+	int CLASS_PATH = 31;
+
+	/**
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PATH__RESOLVED = 0;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PATH__REFERENCE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Entry</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PATH__ENTRY = 2;
+
+	/**
+	 * The number of structural features of the '<em>Class Path</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PATH_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link manifest.impl.NativeCodeImpl <em>Native Code</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see manifest.impl.NativeCodeImpl
+	 * @see manifest.impl.ManifestPackageImpl#getNativeCode()
+	 * @generated
+	 */
+	int NATIVE_CODE = 32;
+
+	/**
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int NATIVE_CODE__RESOLVED = 0;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int NATIVE_CODE__REFERENCE = 1;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int NATIVE_CODE__FILE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Native Code</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NATIVE_CODE_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link manifest.impl.PackageImpl <em>Package</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see manifest.impl.PackageImpl
+	 * @see manifest.impl.ManifestPackageImpl#getPackage()
+	 * @generated
+	 */
+	int PACKAGE = 33;
+
+	/**
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__RESOLVED = 0;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__REFERENCE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__PACKAGE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE_FEATURE_COUNT = 3;
+
+	/**
 	 * The meta object id for the '{@link manifest.MANIFESTVersionEnum <em>MANIFEST Version Enum</em>}' enum.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see manifest.MANIFESTVersionEnum
 	 * @see manifest.impl.ManifestPackageImpl#getMANIFESTVersionEnum()
 	 * @generated
 	 */
-	int MANIFEST_VERSION_ENUM = 31;
+	int MANIFEST_VERSION_ENUM = 34;
 
 	/**
 	 * The meta object id for the '{@link manifest.PolicyEnum <em>Policy Enum</em>}' enum.
@@ -1782,7 +1883,7 @@ public interface ManifestPackage extends EPackage {
 	 * @see manifest.impl.ManifestPackageImpl#getPolicyEnum()
 	 * @generated
 	 */
-	int POLICY_ENUM = 32;
+	int POLICY_ENUM = 35;
 
 	/**
 	 * The meta object id for the '<em>URL</em>' data type. <!--
@@ -1792,7 +1893,7 @@ public interface ManifestPackage extends EPackage {
 	 * @see manifest.impl.ManifestPackageImpl#getURL()
 	 * @generated
 	 */
-	int URL = 33;
+	int URL = 36;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type. <!--
@@ -1802,7 +1903,7 @@ public interface ManifestPackage extends EPackage {
 	 * @see manifest.impl.ManifestPackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 34;
+	int STRING = 37;
 
 	/**
 	 * The meta object id for the '<em>boolean</em>' data type. <!--
@@ -1811,7 +1912,7 @@ public interface ManifestPackage extends EPackage {
 	 * @see manifest.impl.ManifestPackageImpl#getboolean()
 	 * @generated
 	 */
-	int BOOLEAN = 35;
+	int BOOLEAN = 38;
 
 	/**
 	 * The meta object id for the '<em>int</em>' data type. <!--
@@ -1820,7 +1921,7 @@ public interface ManifestPackage extends EPackage {
 	 * @see manifest.impl.ManifestPackageImpl#getint()
 	 * @generated
 	 */
-	int INT = 36;
+	int INT = 39;
 
 	/**
 	 * Returns the meta object for class '{@link manifest.Service <em>Service</em>}'.
@@ -1830,6 +1931,16 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getService();
+
+	/**
+	 * Returns the meta object for the attribute '{@link manifest.Service#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference</em>'.
+	 * @see manifest.Service#getReference()
+	 * @see #getService()
+	 * @generated
+	 */
+	EAttribute getService_Reference();
 
 	/**
 	 * Returns the meta object for the reference '{@link manifest.Service#getInterface <em>Interface</em>}'.
@@ -1842,20 +1953,8 @@ public interface ManifestPackage extends EPackage {
 	EReference getService_Interface();
 
 	/**
-	 * Returns the meta object for the attribute '{@link manifest.Service#getInterfaceReference <em>Interface Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Interface Reference</em>'.
-	 * @see manifest.Service#getInterfaceReference()
-	 * @see #getService()
-	 * @generated
-	 */
-	EAttribute getService_InterfaceReference();
-
-	/**
 	 * Returns the meta object for the attribute '{@link manifest.Service#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Resolved</em>'.
 	 * @see manifest.Service#isResolved()
 	 * @see #getService()
@@ -2387,6 +2486,26 @@ public interface ManifestPackage extends EPackage {
 	EClass getBundleActivator();
 
 	/**
+	 * Returns the meta object for the attribute '{@link manifest.BundleActivator#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference</em>'.
+	 * @see manifest.BundleActivator#getReference()
+	 * @see #getBundleActivator()
+	 * @generated
+	 */
+	EAttribute getBundleActivator_Reference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link manifest.BundleActivator#isResolved <em>Resolved</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resolved</em>'.
+	 * @see manifest.BundleActivator#isResolved()
+	 * @see #getBundleActivator()
+	 * @generated
+	 */
+	EAttribute getBundleActivator_Resolved();
+
+	/**
 	 * Returns the meta object for the reference '{@link manifest.BundleActivator#getActivator <em>Activator</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Activator</em>'.
@@ -2406,36 +2525,14 @@ public interface ManifestPackage extends EPackage {
 	EClass getBundleClassPath();
 
 	/**
-	 * Returns the meta object for the reference list '{@link manifest.BundleClassPath#getEntries <em>Entries</em>}'.
+	 * Returns the meta object for the containment reference list '{@link manifest.BundleClassPath#getClassPaths <em>Class Paths</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Entries</em>'.
-	 * @see manifest.BundleClassPath#getEntries()
+	 * @return the meta object for the containment reference list '<em>Class Paths</em>'.
+	 * @see manifest.BundleClassPath#getClassPaths()
 	 * @see #getBundleClassPath()
 	 * @generated
 	 */
-	EReference getBundleClassPath_Entries();
-
-	/**
-	 * Returns the meta object for the attribute '{@link manifest.BundleClassPath#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Resolved</em>'.
-	 * @see manifest.BundleClassPath#isResolved()
-	 * @see #getBundleClassPath()
-	 * @generated
-	 */
-	EAttribute getBundleClassPath_Resolved();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link manifest.BundleClassPath#getReferences <em>References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>References</em>'.
-	 * @see manifest.BundleClassPath#getReferences()
-	 * @see #getBundleClassPath()
-	 * @generated
-	 */
-	EAttribute getBundleClassPath_References();
+	EReference getBundleClassPath_ClassPaths();
 
 	/**
 	 * Returns the meta object for class '{@link manifest.BundleNativeCode <em>Bundle Native Code</em>}'.
@@ -2467,36 +2564,14 @@ public interface ManifestPackage extends EPackage {
 	EReference getBundleNativeCode_Directives();
 
 	/**
-	 * Returns the meta object for the reference list '{@link manifest.BundleNativeCode#getFile <em>File</em>}'.
+	 * Returns the meta object for the containment reference list '{@link manifest.BundleNativeCode#getNativeCodes <em>Native Codes</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>File</em>'.
-	 * @see manifest.BundleNativeCode#getFile()
+	 * @return the meta object for the containment reference list '<em>Native Codes</em>'.
+	 * @see manifest.BundleNativeCode#getNativeCodes()
 	 * @see #getBundleNativeCode()
 	 * @generated
 	 */
-	EReference getBundleNativeCode_File();
-
-	/**
-	 * Returns the meta object for the attribute '{@link manifest.BundleNativeCode#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Resolved</em>'.
-	 * @see manifest.BundleNativeCode#isResolved()
-	 * @see #getBundleNativeCode()
-	 * @generated
-	 */
-	EAttribute getBundleNativeCode_Resolved();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link manifest.BundleNativeCode#getFileReferences <em>File References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>File References</em>'.
-	 * @see manifest.BundleNativeCode#getFileReferences()
-	 * @see #getBundleNativeCode()
-	 * @generated
-	 */
-	EAttribute getBundleNativeCode_FileReferences();
+	EReference getBundleNativeCode_NativeCodes();
 
 	/**
 	 * Returns the meta object for class '{@link manifest.RequireBundle <em>Require Bundle</em>}'.
@@ -2528,15 +2603,14 @@ public interface ManifestPackage extends EPackage {
 	EAttribute getRequireBundle_Resolved();
 
 	/**
-	 * Returns the meta object for the attribute '{@link manifest.RequireBundle#getBundleReference <em>Bundle Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Bundle Reference</em>'.
-	 * @see manifest.RequireBundle#getBundleReference()
+	 * Returns the meta object for the attribute '{@link manifest.RequireBundle#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference</em>'.
+	 * @see manifest.RequireBundle#getReference()
 	 * @see #getRequireBundle()
 	 * @generated
 	 */
-	EAttribute getRequireBundle_BundleReference();
+	EAttribute getRequireBundle_Reference();
 
 	/**
 	 * Returns the meta object for the reference '{@link manifest.RequireBundle#getBundle <em>Bundle</em>}'.
@@ -2559,8 +2633,7 @@ public interface ManifestPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '{@link manifest.ImportService#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Resolved</em>'.
 	 * @see manifest.ImportService#isResolved()
 	 * @see #getImportService()
@@ -2570,8 +2643,7 @@ public interface ManifestPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '{@link manifest.ImportService#getServiceReference <em>Service Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Service Reference</em>'.
 	 * @see manifest.ImportService#getServiceReference()
 	 * @see #getImportService()
@@ -2628,6 +2700,16 @@ public interface ManifestPackage extends EPackage {
 	EReference getImportPackage_Packages();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link manifest.ImportPackage#getPackageReferences <em>Package References</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Package References</em>'.
+	 * @see manifest.ImportPackage#getPackageReferences()
+	 * @see #getImportPackage()
+	 * @generated
+	 */
+	EAttribute getImportPackage_PackageReferences();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link manifest.ImportPackage#getDirectives <em>Directives</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Directives</em>'.
@@ -2636,6 +2718,16 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getImportPackage_Directives();
+
+	/**
+	 * Returns the meta object for the reference '{@link manifest.ImportPackage#getBundle <em>Bundle</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Bundle</em>'.
+	 * @see manifest.ImportPackage#getBundle()
+	 * @see #getImportPackage()
+	 * @generated
+	 */
+	EReference getImportPackage_Bundle();
 
 	/**
 	 * Returns the meta object for the attribute '{@link manifest.ImportPackage#isResolved <em>Resolved</em>}'.
@@ -2648,17 +2740,6 @@ public interface ManifestPackage extends EPackage {
 	EAttribute getImportPackage_Resolved();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link manifest.ImportPackage#getPackagesReference <em>Packages Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Packages Reference</em>'.
-	 * @see manifest.ImportPackage#getPackagesReference()
-	 * @see #getImportPackage()
-	 * @generated
-	 */
-	EAttribute getImportPackage_PackagesReference();
-
-	/**
 	 * Returns the meta object for class '{@link manifest.ExportPackage <em>Export Package</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Export Package</em>'.
@@ -2668,9 +2749,9 @@ public interface ManifestPackage extends EPackage {
 	EClass getExportPackage();
 
 	/**
-	 * Returns the meta object for the reference list '{@link manifest.ExportPackage#getPackages <em>Packages</em>}'.
+	 * Returns the meta object for the containment reference list '{@link manifest.ExportPackage#getPackages <em>Packages</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Packages</em>'.
+	 * @return the meta object for the containment reference list '<em>Packages</em>'.
 	 * @see manifest.ExportPackage#getPackages()
 	 * @see #getExportPackage()
 	 * @generated
@@ -2686,28 +2767,6 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExportPackage_Directives();
-
-	/**
-	 * Returns the meta object for the attribute '{@link manifest.ExportPackage#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Resolved</em>'.
-	 * @see manifest.ExportPackage#isResolved()
-	 * @see #getExportPackage()
-	 * @generated
-	 */
-	EAttribute getExportPackage_Resolved();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link manifest.ExportPackage#getPackageReference <em>Package Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Package Reference</em>'.
-	 * @see manifest.ExportPackage#getPackageReference()
-	 * @see #getExportPackage()
-	 * @generated
-	 */
-	EAttribute getExportPackage_PackageReference();
 
 	/**
 	 * Returns the meta object for class '{@link manifest.BundleActivationPolicy <em>Bundle Activation Policy</em>}'.
@@ -2768,20 +2827,18 @@ public interface ManifestPackage extends EPackage {
 	EReference getFragmentHost_Bundle();
 
 	/**
-	 * Returns the meta object for the attribute '{@link manifest.FragmentHost#getBundleReference <em>Bundle Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Bundle Reference</em>'.
-	 * @see manifest.FragmentHost#getBundleReference()
+	 * Returns the meta object for the attribute '{@link manifest.FragmentHost#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference</em>'.
+	 * @see manifest.FragmentHost#getReference()
 	 * @see #getFragmentHost()
 	 * @generated
 	 */
-	EAttribute getFragmentHost_BundleReference();
+	EAttribute getFragmentHost_Reference();
 
 	/**
 	 * Returns the meta object for the attribute '{@link manifest.FragmentHost#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Resolved</em>'.
 	 * @see manifest.FragmentHost#isResolved()
 	 * @see #getFragmentHost()
@@ -2799,15 +2856,14 @@ public interface ManifestPackage extends EPackage {
 	EClass getDynamicImportPackage();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link manifest.DynamicImportPackage#getPackagesReference <em>Packages Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Packages Reference</em>'.
-	 * @see manifest.DynamicImportPackage#getPackagesReference()
+	 * Returns the meta object for the attribute list '{@link manifest.DynamicImportPackage#getPackages <em>Packages</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Packages</em>'.
+	 * @see manifest.DynamicImportPackage#getPackages()
 	 * @see #getDynamicImportPackage()
 	 * @generated
 	 */
-	EAttribute getDynamicImportPackage_PackagesReference();
+	EAttribute getDynamicImportPackage_Packages();
 
 	/**
 	 * Returns the meta object for class '{@link manifest.BundleRequiredExecutionEnvironment <em>Bundle Required Execution Environment</em>}'.
@@ -2875,6 +2931,123 @@ public interface ManifestPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBundleManifestVersion_ManifestVersion();
+
+	/**
+	 * Returns the meta object for class '{@link manifest.ClassPath <em>Class Path</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Class Path</em>'.
+	 * @see manifest.ClassPath
+	 * @generated
+	 */
+	EClass getClassPath();
+
+	/**
+	 * Returns the meta object for the attribute '{@link manifest.ClassPath#isResolved <em>Resolved</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resolved</em>'.
+	 * @see manifest.ClassPath#isResolved()
+	 * @see #getClassPath()
+	 * @generated
+	 */
+	EAttribute getClassPath_Resolved();
+
+	/**
+	 * Returns the meta object for the attribute '{@link manifest.ClassPath#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference</em>'.
+	 * @see manifest.ClassPath#getReference()
+	 * @see #getClassPath()
+	 * @generated
+	 */
+	EAttribute getClassPath_Reference();
+
+	/**
+	 * Returns the meta object for the reference '{@link manifest.ClassPath#getEntry <em>Entry</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Entry</em>'.
+	 * @see manifest.ClassPath#getEntry()
+	 * @see #getClassPath()
+	 * @generated
+	 */
+	EReference getClassPath_Entry();
+
+	/**
+	 * Returns the meta object for class '{@link manifest.NativeCode <em>Native Code</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Native Code</em>'.
+	 * @see manifest.NativeCode
+	 * @generated
+	 */
+	EClass getNativeCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link manifest.NativeCode#isResolved <em>Resolved</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resolved</em>'.
+	 * @see manifest.NativeCode#isResolved()
+	 * @see #getNativeCode()
+	 * @generated
+	 */
+	EAttribute getNativeCode_Resolved();
+
+	/**
+	 * Returns the meta object for the attribute '{@link manifest.NativeCode#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference</em>'.
+	 * @see manifest.NativeCode#getReference()
+	 * @see #getNativeCode()
+	 * @generated
+	 */
+	EAttribute getNativeCode_Reference();
+
+	/**
+	 * Returns the meta object for the reference '{@link manifest.NativeCode#getFile <em>File</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>File</em>'.
+	 * @see manifest.NativeCode#getFile()
+	 * @see #getNativeCode()
+	 * @generated
+	 */
+	EReference getNativeCode_File();
+
+	/**
+	 * Returns the meta object for class '{@link manifest.Package <em>Package</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Package</em>'.
+	 * @see manifest.Package
+	 * @generated
+	 */
+	EClass getPackage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link manifest.Package#isResolved <em>Resolved</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resolved</em>'.
+	 * @see manifest.Package#isResolved()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EAttribute getPackage_Resolved();
+
+	/**
+	 * Returns the meta object for the attribute '{@link manifest.Package#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference</em>'.
+	 * @see manifest.Package#getReference()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EAttribute getPackage_Reference();
+
+	/**
+	 * Returns the meta object for the reference '{@link manifest.Package#getPackage <em>Package</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Package</em>'.
+	 * @see manifest.Package#getPackage()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EReference getPackage_Package();
 
 	/**
 	 * Returns the meta object for enum '{@link manifest.MANIFESTVersionEnum <em>MANIFEST Version Enum</em>}'.
@@ -2966,6 +3139,13 @@ public interface ManifestPackage extends EPackage {
 		EClass SERVICE = eINSTANCE.getService();
 
 		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE__REFERENCE = eINSTANCE.getService_Reference();
+
+		/**
 		 * The meta object literal for the '<em><b>Interface</b></em>' reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
@@ -2973,17 +3153,8 @@ public interface ManifestPackage extends EPackage {
 		EReference SERVICE__INTERFACE = eINSTANCE.getService_Interface();
 
 		/**
-		 * The meta object literal for the '<em><b>Interface Reference</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE__INTERFACE_REFERENCE = eINSTANCE.getService_InterfaceReference();
-
-		/**
 		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute SERVICE__RESOLVED = eINSTANCE.getService_Resolved();
@@ -3429,6 +3600,20 @@ public interface ManifestPackage extends EPackage {
 		EClass BUNDLE_ACTIVATOR = eINSTANCE.getBundleActivator();
 
 		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUNDLE_ACTIVATOR__REFERENCE = eINSTANCE.getBundleActivator_Reference();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUNDLE_ACTIVATOR__RESOLVED = eINSTANCE.getBundleActivator_Resolved();
+
+		/**
 		 * The meta object literal for the '<em><b>Activator</b></em>' reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
@@ -3445,27 +3630,12 @@ public interface ManifestPackage extends EPackage {
 		EClass BUNDLE_CLASS_PATH = eINSTANCE.getBundleClassPath();
 
 		/**
-		 * The meta object literal for the '<em><b>Entries</b></em>' reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Class Paths</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * @generated
 		 */
-		EReference BUNDLE_CLASS_PATH__ENTRIES = eINSTANCE.getBundleClassPath_Entries();
-
-		/**
-		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BUNDLE_CLASS_PATH__RESOLVED = eINSTANCE.getBundleClassPath_Resolved();
-
-		/**
-		 * The meta object literal for the '<em><b>References</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BUNDLE_CLASS_PATH__REFERENCES = eINSTANCE.getBundleClassPath_References();
+		EReference BUNDLE_CLASS_PATH__CLASS_PATHS = eINSTANCE.getBundleClassPath_ClassPaths();
 
 		/**
 		 * The meta object literal for the '{@link manifest.impl.BundleNativeCodeImpl <em>Bundle Native Code</em>}' class.
@@ -3492,27 +3662,12 @@ public interface ManifestPackage extends EPackage {
 		EReference BUNDLE_NATIVE_CODE__DIRECTIVES = eINSTANCE.getBundleNativeCode_Directives();
 
 		/**
-		 * The meta object literal for the '<em><b>File</b></em>' reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Native Codes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * @generated
 		 */
-		EReference BUNDLE_NATIVE_CODE__FILE = eINSTANCE.getBundleNativeCode_File();
-
-		/**
-		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BUNDLE_NATIVE_CODE__RESOLVED = eINSTANCE.getBundleNativeCode_Resolved();
-
-		/**
-		 * The meta object literal for the '<em><b>File References</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BUNDLE_NATIVE_CODE__FILE_REFERENCES = eINSTANCE.getBundleNativeCode_FileReferences();
+		EReference BUNDLE_NATIVE_CODE__NATIVE_CODES = eINSTANCE.getBundleNativeCode_NativeCodes();
 
 		/**
 		 * The meta object literal for the '{@link manifest.impl.RequireBundleImpl <em>Require Bundle</em>}' class.
@@ -3539,12 +3694,11 @@ public interface ManifestPackage extends EPackage {
 		EAttribute REQUIRE_BUNDLE__RESOLVED = eINSTANCE.getRequireBundle_Resolved();
 
 		/**
-		 * The meta object literal for the '<em><b>Bundle Reference</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute REQUIRE_BUNDLE__BUNDLE_REFERENCE = eINSTANCE.getRequireBundle_BundleReference();
+		EAttribute REQUIRE_BUNDLE__REFERENCE = eINSTANCE.getRequireBundle_Reference();
 
 		/**
 		 * The meta object literal for the '<em><b>Bundle</b></em>' reference feature.
@@ -3564,16 +3718,14 @@ public interface ManifestPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute IMPORT_SERVICE__RESOLVED = eINSTANCE.getImportService_Resolved();
 
 		/**
 		 * The meta object literal for the '<em><b>Service Reference</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute IMPORT_SERVICE__SERVICE_REFERENCE = eINSTANCE.getImportService_ServiceReference();
@@ -3619,6 +3771,13 @@ public interface ManifestPackage extends EPackage {
 		EReference IMPORT_PACKAGE__PACKAGES = eINSTANCE.getImportPackage_Packages();
 
 		/**
+		 * The meta object literal for the '<em><b>Package References</b></em>' attribute list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPORT_PACKAGE__PACKAGE_REFERENCES = eINSTANCE.getImportPackage_PackageReferences();
+
+		/**
 		 * The meta object literal for the '<em><b>Directives</b></em>' containment reference feature.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
@@ -3627,19 +3786,18 @@ public interface ManifestPackage extends EPackage {
 		EReference IMPORT_PACKAGE__DIRECTIVES = eINSTANCE.getImportPackage_Directives();
 
 		/**
+		 * The meta object literal for the '<em><b>Bundle</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMPORT_PACKAGE__BUNDLE = eINSTANCE.getImportPackage_Bundle();
+
+		/**
 		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute IMPORT_PACKAGE__RESOLVED = eINSTANCE.getImportPackage_Resolved();
-
-		/**
-		 * The meta object literal for the '<em><b>Packages Reference</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPORT_PACKAGE__PACKAGES_REFERENCE = eINSTANCE.getImportPackage_PackagesReference();
 
 		/**
 		 * The meta object literal for the '{@link manifest.impl.ExportPackageImpl <em>Export Package</em>}' class.
@@ -3651,8 +3809,9 @@ public interface ManifestPackage extends EPackage {
 		EClass EXPORT_PACKAGE = eINSTANCE.getExportPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Packages</b></em>' reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Packages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * @generated
 		 */
 		EReference EXPORT_PACKAGE__PACKAGES = eINSTANCE.getExportPackage_Packages();
@@ -3664,22 +3823,6 @@ public interface ManifestPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPORT_PACKAGE__DIRECTIVES = eINSTANCE.getExportPackage_Directives();
-
-		/**
-		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXPORT_PACKAGE__RESOLVED = eINSTANCE.getExportPackage_Resolved();
-
-		/**
-		 * The meta object literal for the '<em><b>Package Reference</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXPORT_PACKAGE__PACKAGE_REFERENCE = eINSTANCE.getExportPackage_PackageReference();
 
 		/**
 		 * The meta object literal for the '{@link manifest.impl.BundleActivationPolicyImpl <em>Bundle Activation Policy</em>}' class.
@@ -3730,17 +3873,15 @@ public interface ManifestPackage extends EPackage {
 		EReference FRAGMENT_HOST__BUNDLE = eINSTANCE.getFragmentHost_Bundle();
 
 		/**
-		 * The meta object literal for the '<em><b>Bundle Reference</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FRAGMENT_HOST__BUNDLE_REFERENCE = eINSTANCE.getFragmentHost_BundleReference();
+		EAttribute FRAGMENT_HOST__REFERENCE = eINSTANCE.getFragmentHost_Reference();
 
 		/**
 		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute FRAGMENT_HOST__RESOLVED = eINSTANCE.getFragmentHost_Resolved();
@@ -3755,12 +3896,11 @@ public interface ManifestPackage extends EPackage {
 		EClass DYNAMIC_IMPORT_PACKAGE = eINSTANCE.getDynamicImportPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Packages Reference</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Packages</b></em>' attribute list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DYNAMIC_IMPORT_PACKAGE__PACKAGES_REFERENCE = eINSTANCE.getDynamicImportPackage_PackagesReference();
+		EAttribute DYNAMIC_IMPORT_PACKAGE__PACKAGES = eINSTANCE.getDynamicImportPackage_Packages();
 
 		/**
 		 * The meta object literal for the '{@link manifest.impl.BundleRequiredExecutionEnvironmentImpl <em>Bundle Required Execution Environment</em>}' class.
@@ -3816,6 +3956,96 @@ public interface ManifestPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BUNDLE_MANIFEST_VERSION__MANIFEST_VERSION = eINSTANCE.getBundleManifestVersion_ManifestVersion();
+
+		/**
+		 * The meta object literal for the '{@link manifest.impl.ClassPathImpl <em>Class Path</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @see manifest.impl.ClassPathImpl
+		 * @see manifest.impl.ManifestPackageImpl#getClassPath()
+		 * @generated
+		 */
+		EClass CLASS_PATH = eINSTANCE.getClassPath();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS_PATH__RESOLVED = eINSTANCE.getClassPath_Resolved();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS_PATH__REFERENCE = eINSTANCE.getClassPath_Reference();
+
+		/**
+		 * The meta object literal for the '<em><b>Entry</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_PATH__ENTRY = eINSTANCE.getClassPath_Entry();
+
+		/**
+		 * The meta object literal for the '{@link manifest.impl.NativeCodeImpl <em>Native Code</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @see manifest.impl.NativeCodeImpl
+		 * @see manifest.impl.ManifestPackageImpl#getNativeCode()
+		 * @generated
+		 */
+		EClass NATIVE_CODE = eINSTANCE.getNativeCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NATIVE_CODE__RESOLVED = eINSTANCE.getNativeCode_Resolved();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NATIVE_CODE__REFERENCE = eINSTANCE.getNativeCode_Reference();
+
+		/**
+		 * The meta object literal for the '<em><b>File</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NATIVE_CODE__FILE = eINSTANCE.getNativeCode_File();
+
+		/**
+		 * The meta object literal for the '{@link manifest.impl.PackageImpl <em>Package</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @see manifest.impl.PackageImpl
+		 * @see manifest.impl.ManifestPackageImpl#getPackage()
+		 * @generated
+		 */
+		EClass PACKAGE = eINSTANCE.getPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PACKAGE__RESOLVED = eINSTANCE.getPackage_Resolved();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PACKAGE__REFERENCE = eINSTANCE.getPackage_Reference();
+
+		/**
+		 * The meta object literal for the '<em><b>Package</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE__PACKAGE = eINSTANCE.getPackage_Package();
 
 		/**
 		 * The meta object literal for the '{@link manifest.MANIFESTVersionEnum <em>MANIFEST Version Enum</em>}' enum.

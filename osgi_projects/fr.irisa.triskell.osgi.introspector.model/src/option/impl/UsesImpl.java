@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UsesImpl.java,v 1.4 2008-08-01 09:44:38 edaubert Exp $
+ * $Id: UsesImpl.java,v 1.5 2008-08-19 07:04:45 edaubert Exp $
  */
 package option.impl;
 
@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.osgi.framework.Constants;
 
 /**
@@ -26,7 +25,6 @@ import org.osgi.framework.Constants;
  * The following features are implemented:
  * <ul>
  *   <li>{@link option.impl.UsesImpl#getPackages <em>Packages</em>}</li>
- *   <li>{@link option.impl.UsesImpl#getPackagesList <em>Packages List</em>}</li>
  *   <li>{@link option.impl.UsesImpl#isResolved <em>Resolved</em>}</li>
  * </ul>
  * </p>
@@ -44,19 +42,8 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 	protected EList<String> packages;
 
 	/**
-	 * The cached value of the '{@link #getPackagesList() <em>Packages List</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPackagesList()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<jar.Package> packagesList;
-
-	/**
 	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isResolved()
 	 * @generated
 	 * @ordered
@@ -65,8 +52,7 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 
 	/**
 	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isResolved()
 	 * @generated
 	 * @ordered
@@ -102,20 +88,7 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<jar.Package> getPackagesList() {
-		if (packagesList == null) {
-			packagesList = new EObjectResolvingEList<jar.Package>(jar.Package.class, this, OptionPackage.USES__PACKAGES_LIST);
-		}
-		return packagesList;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isResolved() {
@@ -123,8 +96,7 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setResolved(boolean newResolved) {
@@ -143,8 +115,6 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 		switch (featureID) {
 			case OptionPackage.USES__PACKAGES:
 				return getPackages();
-			case OptionPackage.USES__PACKAGES_LIST:
-				return getPackagesList();
 			case OptionPackage.USES__RESOLVED:
 				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
 		}
@@ -163,10 +133,6 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 				getPackages().clear();
 				getPackages().addAll((Collection<? extends String>)newValue);
 				return;
-			case OptionPackage.USES__PACKAGES_LIST:
-				getPackagesList().clear();
-				getPackagesList().addAll((Collection<? extends jar.Package>)newValue);
-				return;
 			case OptionPackage.USES__RESOLVED:
 				setResolved(((Boolean)newValue).booleanValue());
 				return;
@@ -184,9 +150,6 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 			case OptionPackage.USES__PACKAGES:
 				getPackages().clear();
 				return;
-			case OptionPackage.USES__PACKAGES_LIST:
-				getPackagesList().clear();
-				return;
 			case OptionPackage.USES__RESOLVED:
 				setResolved(RESOLVED_EDEFAULT);
 				return;
@@ -203,8 +166,6 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 		switch (featureID) {
 			case OptionPackage.USES__PACKAGES:
 				return packages != null && !packages.isEmpty();
-			case OptionPackage.USES__PACKAGES_LIST:
-				return packagesList != null && !packagesList.isEmpty();
 			case OptionPackage.USES__RESOLVED:
 				return resolved != RESOLVED_EDEFAULT;
 		}

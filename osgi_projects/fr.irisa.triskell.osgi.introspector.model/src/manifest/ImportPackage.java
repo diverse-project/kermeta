@@ -2,14 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportPackage.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: ImportPackage.java,v 1.5 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest;
 
-import jar.Package;
 import option.ImportPackageDirective;
 
 import org.eclipse.emf.common.util.EList;
+
+import framework.Bundle;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Import Package</b></em>'.
@@ -19,9 +20,10 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link manifest.ImportPackage#getDirectives <em>Directives</em>}</li>
- *   <li>{@link manifest.ImportPackage#isResolved <em>Resolved</em>}</li>
- *   <li>{@link manifest.ImportPackage#getPackagesReference <em>Packages Reference</em>}</li>
+ *   <li>{@link manifest.ImportPackage#getBundle <em>Bundle</em>}</li>
  *   <li>{@link manifest.ImportPackage#getPackages <em>Packages</em>}</li>
+ *   <li>{@link manifest.ImportPackage#getPackageReferences <em>Package References</em>}</li>
+ *   <li>{@link manifest.ImportPackage#isResolved <em>Resolved</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,7 +47,23 @@ public interface ImportPackage extends MANIFESTEntry {
 	 * @model dataType="framework.String" required="true"
 	 * @generated
 	 */
-	EList<jar.Package> getPackages();
+	EList<manifest.Package> getPackages();
+
+	/**
+	 * Returns the value of the '<em><b>Package References</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Package References</em>' attribute list
+	 * isn't clear, there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Package References</em>' attribute list.
+	 * @see manifest.ManifestPackage#getImportPackage_PackageReferences()
+	 * @model dataType="manifest.String" required="true"
+	 * @generated
+	 */
+	EList<String> getPackageReferences();
 
 	/**
 	 * Returns the value of the '<em><b>Directives</b></em>' containment reference.
@@ -73,6 +91,32 @@ public interface ImportPackage extends MANIFESTEntry {
 	void setDirectives(ImportPackageDirective value);
 
 	/**
+	 * Returns the value of the '<em><b>Bundle</b></em>' reference. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bundle</em>' reference isn't clear, there
+	 * really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Bundle</em>' reference.
+	 * @see #setBundle(Bundle)
+	 * @see manifest.ManifestPackage#getImportPackage_Bundle()
+	 * @model
+	 * @generated
+	 */
+	Bundle getBundle();
+
+	/**
+	 * Sets the value of the '{@link manifest.ImportPackage#getBundle <em>Bundle</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bundle</em>' reference.
+	 * @see #getBundle()
+	 * @generated
+	 */
+	void setBundle(Bundle value);
+
+	/**
 	 * Returns the value of the '<em><b>Resolved</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -98,24 +142,10 @@ public interface ImportPackage extends MANIFESTEntry {
 	 */
 	void setResolved(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Packages Reference</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Packages Reference</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Packages Reference</em>' attribute list.
-	 * @see manifest.ManifestPackage#getImportPackage_PackagesReference()
-	 * @model dataType="framework.String" required="true"
-	 * @generated
-	 */
-	EList<String> getPackagesReference();
+	// void addPackageReference(String value);
 
-	void addPackageReference(String value);
-	
-	void addPackage(Package _package);
+	void addPackage(manifest.Package _package);
+
+	void addPackagesReference(String reference);
 
 } // ImportPackage

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FragmentHost.java,v 1.5 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: FragmentHost.java,v 1.6 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest;
 
@@ -18,7 +18,7 @@ import framework.Bundle;
  * <ul>
  *   <li>{@link manifest.FragmentHost#getDirectives <em>Directives</em>}</li>
  *   <li>{@link manifest.FragmentHost#getBundle <em>Bundle</em>}</li>
- *   <li>{@link manifest.FragmentHost#getBundleReference <em>Bundle Reference</em>}</li>
+ *   <li>{@link manifest.FragmentHost#getReference <em>Reference</em>}</li>
  *   <li>{@link manifest.FragmentHost#isResolved <em>Resolved</em>}</li>
  * </ul>
  * </p>
@@ -80,30 +80,30 @@ public interface FragmentHost extends MANIFESTEntry {
 	void setBundle(Bundle value);
 
 	/**
-	 * Returns the value of the '<em><b>Bundle Reference</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Reference</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Bundle Reference</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Reference</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Bundle Reference</em>' attribute.
-	 * @see #setBundleReference(String)
-	 * @see manifest.ManifestPackage#getFragmentHost_BundleReference()
+	 * 
+	 * @return the value of the '<em>Reference</em>' attribute.
+	 * @see #setReference(String)
+	 * @see manifest.ManifestPackage#getFragmentHost_Reference()
 	 * @model dataType="framework.String" required="true"
 	 * @generated
 	 */
-	String getBundleReference();
+	String getReference();
 
 	/**
-	 * Sets the value of the '{@link manifest.FragmentHost#getBundleReference <em>Bundle Reference</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Bundle Reference</em>' attribute.
-	 * @see #getBundleReference()
+	 * Sets the value of the '{@link manifest.FragmentHost#getReference <em>Reference</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Reference</em>' attribute.
+	 * @see #getReference()
 	 * @generated
 	 */
-	void setBundleReference(String value);
+	void setReference(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Resolved</b></em>' attribute.
@@ -124,8 +124,7 @@ public interface FragmentHost extends MANIFESTEntry {
 
 	/**
 	 * Sets the value of the '{@link manifest.FragmentHost#isResolved <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Resolved</em>' attribute.
 	 * @see #isResolved()
 	 * @generated

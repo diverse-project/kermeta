@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestAdapterFactory.java,v 1.3 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: ManifestAdapterFactory.java,v 1.4 2008-08-19 07:04:44 edaubert Exp $
  */
 package manifest.util;
 
-import manifest.*;
 import manifest.BundleActivationPolicy;
 import manifest.BundleActivator;
 import manifest.BundleCategory;
@@ -24,6 +23,7 @@ import manifest.BundleSymbolicName;
 import manifest.BundleUpdateLocation;
 import manifest.BundleVendor;
 import manifest.BundleVersion;
+import manifest.ClassPath;
 import manifest.DynamicImportPackage;
 import manifest.ExportPackage;
 import manifest.ExportService;
@@ -33,6 +33,7 @@ import manifest.ImportService;
 import manifest.MANIFEST;
 import manifest.MANIFESTEntry;
 import manifest.ManifestPackage;
+import manifest.NativeCode;
 import manifest.RequireBundle;
 import manifest.Service;
 import manifest.SimpleMANIFESTEntry;
@@ -221,6 +222,18 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBundleManifestVersion(BundleManifestVersion object) {
 				return createBundleManifestVersionAdapter();
+			}
+			@Override
+			public Adapter caseClassPath(ClassPath object) {
+				return createClassPathAdapter();
+			}
+			@Override
+			public Adapter caseNativeCode(NativeCode object) {
+				return createNativeCodeAdapter();
+			}
+			@Override
+			public Adapter casePackage(manifest.Package object) {
+				return createPackageAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -641,6 +654,45 @@ public class ManifestAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBundleManifestVersionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link manifest.ClassPath <em>Class Path</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null so that
+	 * we can easily ignore cases; it's useful to ignore a case when inheritance
+	 * will catch all the cases anyway. <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see manifest.ClassPath
+	 * @generated
+	 */
+	public Adapter createClassPathAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link manifest.NativeCode <em>Native Code</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null so that
+	 * we can easily ignore cases; it's useful to ignore a case when inheritance
+	 * will catch all the cases anyway. <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see manifest.NativeCode
+	 * @generated
+	 */
+	public Adapter createNativeCodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link manifest.Package <em>Package</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null so that
+	 * we can easily ignore cases; it's useful to ignore a case when inheritance
+	 * will catch all the cases anyway. <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see manifest.Package
+	 * @generated
+	 */
+	public Adapter createPackageAdapter() {
 		return null;
 	}
 

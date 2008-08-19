@@ -2,11 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IncludeClasses.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: IncludeClasses.java,v 1.3 2008-08-19 07:04:44 edaubert Exp $
  */
 package option;
-
-import jar.Class;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -27,21 +25,23 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface IncludeClasses extends ExportPackageDirective {
 	/**
-	 * Returns the value of the '<em><b>Classes</b></em>' reference list.
-	 * The list contents are of type {@link jar.Class}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Classes</b></em>' containment
+	 * reference list. The list contents are of type {@link option.Class}. <!--
+	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Classes</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Classes</em>' reference list.
+	 * 
+	 * @return the value of the '<em>Classes</em>' containment reference
+	 *         list.
 	 * @see option.OptionPackage#getIncludeClasses_Classes()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<jar.Class> getClasses();
+	EList<option.Class> getClasses();
 
-	void addInclude(Class include);
+	void addInclude(option.Class include);
 
 } // IncludeClasses

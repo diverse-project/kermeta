@@ -2,11 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportPackageImpl.java,v 1.5 2008-08-11 15:50:21 edaubert Exp $
+ * $Id: ImportPackageImpl.java,v 1.6 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
-
-import jar.Package;
 
 import java.util.Collection;
 
@@ -24,6 +22,8 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.osgi.framework.Constants;
 
+import framework.Bundle;
+
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Import Package</b></em>'.
  * <!-- end-user-doc -->
@@ -31,9 +31,10 @@ import org.osgi.framework.Constants;
  * The following features are implemented:
  * <ul>
  *   <li>{@link manifest.impl.ImportPackageImpl#getDirectives <em>Directives</em>}</li>
- *   <li>{@link manifest.impl.ImportPackageImpl#isResolved <em>Resolved</em>}</li>
- *   <li>{@link manifest.impl.ImportPackageImpl#getPackagesReference <em>Packages Reference</em>}</li>
+ *   <li>{@link manifest.impl.ImportPackageImpl#getBundle <em>Bundle</em>}</li>
  *   <li>{@link manifest.impl.ImportPackageImpl#getPackages <em>Packages</em>}</li>
+ *   <li>{@link manifest.impl.ImportPackageImpl#getPackageReferences <em>Package References</em>}</li>
+ *   <li>{@link manifest.impl.ImportPackageImpl#isResolved <em>Resolved</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,6 +50,33 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 	 * @ordered
 	 */
 	protected ImportPackageDirective directives;
+
+	/**
+	 * The cached value of the '{@link #getBundle() <em>Bundle</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getBundle()
+	 * @generated
+	 * @ordered
+	 */
+	protected Bundle bundle;
+
+	/**
+	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getPackages()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<manifest.Package> packages;
+
+	/**
+	 * The cached value of the '{@link #getPackageReferences() <em>Package References</em>}' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getPackageReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> packageReferences;
 
 	/**
 	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
@@ -67,25 +95,6 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 	 * @ordered
 	 */
 	protected boolean resolved = RESOLVED_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getPackagesReference() <em>Packages Reference</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPackagesReference()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> packagesReference;
-
-	/**
-	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getPackages()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<jar.Package> packages;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -108,11 +117,22 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<jar.Package> getPackages() {
+	public EList<manifest.Package> getPackages() {
 		if (packages == null) {
-			packages = new EObjectResolvingEList<jar.Package>(jar.Package.class, this, ManifestPackage.IMPORT_PACKAGE__PACKAGES);
+			packages = new EObjectResolvingEList<manifest.Package>(manifest.Package.class, this, ManifestPackage.IMPORT_PACKAGE__PACKAGES);
 		}
 		return packages;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getPackageReferences() {
+		if (packageReferences == null) {
+			packageReferences = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.IMPORT_PACKAGE__PACKAGE_REFERENCES);
+		}
+		return packageReferences;
 	}
 
 	/**
@@ -160,6 +180,41 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Bundle getBundle() {
+		if (bundle != null && bundle.eIsProxy()) {
+			InternalEObject oldBundle = (InternalEObject)bundle;
+			bundle = (Bundle)eResolveProxy(oldBundle);
+			if (bundle != oldBundle) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ManifestPackage.IMPORT_PACKAGE__BUNDLE, oldBundle, bundle));
+			}
+		}
+		return bundle;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Bundle basicGetBundle() {
+		return bundle;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBundle(Bundle newBundle) {
+		Bundle oldBundle = bundle;
+		bundle = newBundle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.IMPORT_PACKAGE__BUNDLE, oldBundle, bundle));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isResolved() {
 		return resolved;
 	}
@@ -173,18 +228,6 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 		resolved = newResolved;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.IMPORT_PACKAGE__RESOLVED, oldResolved, resolved));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<String> getPackagesReference() {
-		if (packagesReference == null) {
-			packagesReference = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.IMPORT_PACKAGE__PACKAGES_REFERENCE);
-		}
-		return packagesReference;
 	}
 
 	/**
@@ -210,12 +253,15 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 		switch (featureID) {
 			case ManifestPackage.IMPORT_PACKAGE__DIRECTIVES:
 				return getDirectives();
-			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
-				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
-			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_REFERENCE:
-				return getPackagesReference();
+			case ManifestPackage.IMPORT_PACKAGE__BUNDLE:
+				if (resolve) return getBundle();
+				return basicGetBundle();
 			case ManifestPackage.IMPORT_PACKAGE__PACKAGES:
 				return getPackages();
+			case ManifestPackage.IMPORT_PACKAGE__PACKAGE_REFERENCES:
+				return getPackageReferences();
+			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
+				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -231,16 +277,19 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 			case ManifestPackage.IMPORT_PACKAGE__DIRECTIVES:
 				setDirectives((ImportPackageDirective)newValue);
 				return;
-			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
-				setResolved(((Boolean)newValue).booleanValue());
-				return;
-			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_REFERENCE:
-				getPackagesReference().clear();
-				getPackagesReference().addAll((Collection<? extends String>)newValue);
+			case ManifestPackage.IMPORT_PACKAGE__BUNDLE:
+				setBundle((Bundle)newValue);
 				return;
 			case ManifestPackage.IMPORT_PACKAGE__PACKAGES:
 				getPackages().clear();
-				getPackages().addAll((Collection<? extends jar.Package>)newValue);
+				getPackages().addAll((Collection<? extends manifest.Package>)newValue);
+				return;
+			case ManifestPackage.IMPORT_PACKAGE__PACKAGE_REFERENCES:
+				getPackageReferences().clear();
+				getPackageReferences().addAll((Collection<? extends String>)newValue);
+				return;
+			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
+				setResolved(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -256,14 +305,17 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 			case ManifestPackage.IMPORT_PACKAGE__DIRECTIVES:
 				setDirectives((ImportPackageDirective)null);
 				return;
-			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
-				setResolved(RESOLVED_EDEFAULT);
-				return;
-			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_REFERENCE:
-				getPackagesReference().clear();
+			case ManifestPackage.IMPORT_PACKAGE__BUNDLE:
+				setBundle((Bundle)null);
 				return;
 			case ManifestPackage.IMPORT_PACKAGE__PACKAGES:
 				getPackages().clear();
+				return;
+			case ManifestPackage.IMPORT_PACKAGE__PACKAGE_REFERENCES:
+				getPackageReferences().clear();
+				return;
+			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
+				setResolved(RESOLVED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -278,12 +330,14 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 		switch (featureID) {
 			case ManifestPackage.IMPORT_PACKAGE__DIRECTIVES:
 				return directives != null;
-			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
-				return resolved != RESOLVED_EDEFAULT;
-			case ManifestPackage.IMPORT_PACKAGE__PACKAGES_REFERENCE:
-				return packagesReference != null && !packagesReference.isEmpty();
+			case ManifestPackage.IMPORT_PACKAGE__BUNDLE:
+				return bundle != null;
 			case ManifestPackage.IMPORT_PACKAGE__PACKAGES:
 				return packages != null && !packages.isEmpty();
+			case ManifestPackage.IMPORT_PACKAGE__PACKAGE_REFERENCES:
+				return packageReferences != null && !packageReferences.isEmpty();
+			case ManifestPackage.IMPORT_PACKAGE__RESOLVED:
+				return resolved != RESOLVED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -297,25 +351,25 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (resolved: ");
+		result.append(" (packageReferences: ");
+		result.append(packageReferences);
+		result.append(", resolved: ");
 		result.append(resolved);
-		result.append(", packagesReference: ");
-		result.append(packagesReference);
 		result.append(')');
 		return result.toString();
 	}
 
-	public void addPackageReference(String value) {
-		if (!getPackagesReference().contains(value)) {
-			getPackagesReference().add(value);
-		}
+	/*
+	 * public void addPackageReference(String value) { if
+	 * (!getPackagesReference().contains(value)) {
+	 * getPackagesReference().add(value); }
+	 *  }
+	 */
 
-	}
-
-	public void addPackage(Package _package) {
+	public void addPackage(manifest.Package _package) {
 		boolean exist = false;
-		for (Package p : getPackages()) {
-			if (p.getFullPath().equals(_package.getFullPath())) {
+		for (manifest.Package p : getPackages()) {
+			if (p.getReference().equals(_package.getReference())) {
 				exist = true;
 				break;
 			}
@@ -323,7 +377,14 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 		if (!exist) {
 			getPackages().add(_package);
 		}
-		
+
+	}
+
+	public void addPackagesReference(String reference) {
+		if (!getPackageReferences().contains(reference)) {
+			getPackageReferences().add(reference);
+		}
+
 	}
 
 } // ImportPackageImpl

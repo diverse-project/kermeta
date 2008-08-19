@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Bundle.java,v 1.4 2008-08-11 14:19:27 edaubert Exp $
+ * $Id: Bundle.java,v 1.5 2008-08-19 07:04:41 edaubert Exp $
  */
 package framework;
 
@@ -22,9 +22,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link framework.Bundle#getFragments <em>Fragments</em>}</li>
  *   <li>{@link framework.Bundle#getLocation <em>Location</em>}</li>
  *   <li>{@link framework.Bundle#getManifest <em>Manifest</em>}</li>
+ *   <li>{@link framework.Bundle#getFragmentsReference <em>Fragments Reference</em>}</li>
+ *   <li>{@link framework.Bundle#getId <em>Id</em>}</li>
  *   <li>{@link framework.Bundle#getFolder <em>Folder</em>}</li>
  *   <li>{@link framework.Bundle#getPackage <em>Package</em>}</li>
- *   <li>{@link framework.Bundle#getFragmentsReference <em>Fragments Reference</em>}</li>
  * </ul>
  * </p>
  *
@@ -112,7 +113,7 @@ public interface Bundle extends EObject {
 	 * @return the value of the '<em>Folder</em>' containment reference.
 	 * @see #setFolder(Folder)
 	 * @see framework.FrameworkPackage#getBundle_Folder()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	Folder getFolder();
@@ -137,7 +138,7 @@ public interface Bundle extends EObject {
 	 * @return the value of the '<em>Package</em>' containment reference.
 	 * @see #setPackage(jar.Package)
 	 * @see framework.FrameworkPackage#getBundle_Package()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	jar.Package getPackage();
@@ -156,8 +157,8 @@ public interface Bundle extends EObject {
 	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Fragments Reference</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Fragments Reference</em>' attribute list
+	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Fragments Reference</em>' attribute list.
@@ -167,6 +168,34 @@ public interface Bundle extends EObject {
 	 */
 	EList<String> getFragmentsReference();
 
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id</em>' attribute isn't clear, there
+	 * really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(long)
+	 * @see framework.FrameworkPackage#getBundle_Id()
+	 * @model dataType="framework.long" required="true"
+	 * @generated
+	 */
+	long getId();
+
+	/**
+	 * Sets the value of the '{@link framework.Bundle#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
+	void setId(long value);
+
 	boolean addFragment(Bundle bundle);
+
+	boolean addFragmentReference(String bundleReference);
 
 } // Bundle

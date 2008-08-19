@@ -14,12 +14,14 @@
         eType="#//String" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="manifest" lowerBound="1"
         eType="ecore:EClass manifest.ecore#//MANIFEST" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="folder" lowerBound="1"
-        eType="ecore:EClass jar.ecore#//Folder" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="package" lowerBound="1"
-        eType="ecore:EClass jar.ecore#//Package" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fragmentsReference" upperBound="-1"
         eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="#//long"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="folder" eType="ecore:EClass jar.ecore#//Folder"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="ecore:EClass jar.ecore#//Package"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="long" instanceClassName="long"/>
 </ecore:EPackage>

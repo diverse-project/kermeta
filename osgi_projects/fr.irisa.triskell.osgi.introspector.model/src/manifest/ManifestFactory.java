@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestFactory.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: ManifestFactory.java,v 1.3 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest;
 
@@ -288,6 +288,33 @@ public interface ManifestFactory extends EFactory {
 	 * @generated
 	 */
 	BundleManifestVersion createBundleManifestVersion();
+
+	/**
+	 * Returns a new object of class '<em>Class Path</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Class Path</em>'.
+	 * @generated
+	 */
+	ClassPath createClassPath();
+
+	/**
+	 * Returns a new object of class '<em>Native Code</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Native Code</em>'.
+	 * @generated
+	 */
+	NativeCode createNativeCode();
+
+	/**
+	 * Returns a new object of class '<em>Package</em>'.
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * @return a new object of class '<em>Package</em>'.
+	 * @generated
+	 */
+	manifest.Package createPackage();
 
 	/**
 	 * Returns the package supported by this factory.

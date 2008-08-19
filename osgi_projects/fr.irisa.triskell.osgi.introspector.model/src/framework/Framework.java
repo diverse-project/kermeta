@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Framework.java,v 1.4 2008-08-06 13:37:22 edaubert Exp $
+ * $Id: Framework.java,v 1.5 2008-08-19 07:04:41 edaubert Exp $
  */
 package framework;
 
@@ -46,14 +46,20 @@ public interface Framework extends EObject {
 	EList<Bundle> getBundles();
 
 	boolean addBundle(Bundle bundle);
-	
+
 	/**
-	 * This function is used to get all bundles which is defined by the symbolicName
-	 * @param symbolicName the Bundle-SymbolicName which define a bundle
-	 * @return null if there is no bundle define with the symbolicName, a list which contains bundles else
+	 * This function is used to get all bundles which is defined by the
+	 * symbolicName
+	 * 
+	 * @param symbolicName
+	 *            the Bundle-SymbolicName which define a bundle
+	 * @return null if there is no bundle define with the symbolicName, a list
+	 *         which contains bundles else
 	 */
 	List<Bundle> findBundles(String symbolicName);
-	
+
 	Bundle findBundle(String symbolicName, Version version);
+
+	Bundle getBundle(long id);
 
 } // Framework

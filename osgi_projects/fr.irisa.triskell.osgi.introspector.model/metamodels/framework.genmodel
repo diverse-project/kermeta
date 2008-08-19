@@ -7,6 +7,7 @@
   <foreignModel>framework.ecore</foreignModel>
   <genPackages prefix="Framework" disposableProviderFactory="true" ecorePackage="framework.ecore#/">
     <genDataTypes ecoreDataType="framework.ecore#//String"/>
+    <genDataTypes ecoreDataType="framework.ecore#//long"/>
     <genClasses ecoreClass="framework.ecore#//Framework">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#//Framework/bundles"/>
     </genClasses>
@@ -14,6 +15,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference framework.ecore#//Bundle/fragments"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#//Bundle/location"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#//Bundle/manifest"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#//Bundle/fragmentsReference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute framework.ecore#//Bundle/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#//Bundle/folder"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference framework.ecore#//Bundle/package"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Manifest" disposableProviderFactory="true" ecorePackage="manifest.ecore#/">
@@ -29,6 +34,8 @@
     <genDataTypes ecoreDataType="manifest.ecore#//boolean"/>
     <genDataTypes ecoreDataType="manifest.ecore#//int"/>
     <genClasses ecoreClass="manifest.ecore#//Service">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//Service/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//Service/resolved"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//Service/interface"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//Version">
@@ -92,37 +99,42 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleVersion/version"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//BundleActivator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleActivator/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleActivator/resolved"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleActivator/activator"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//BundleClassPath">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleClassPath/entries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleClassPath/classPaths"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//BundleNativeCode">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleNativeCode/optional"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleNativeCode/directives"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleNativeCode/file"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//BundleNativeCode/nativeCodes"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//RequireBundle">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//RequireBundle/directives"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//RequireBundle/resolved"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//RequireBundle/reference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//RequireBundle/bundle"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//ImportService">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//ImportService/resolved"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//ImportService/serviceReference"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportService/service"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//ImportService/resolve"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//ExportService">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ExportService/service"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//ImportPackage">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportPackage/packages"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportPackage/version"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportPackage/specificationVersion"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportPackage/directives"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportPackage/bundle"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//ImportPackage/packages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//ImportPackage/packageReferences"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//ImportPackage/resolved"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//ExportPackage">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//ExportPackage/packages"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ExportPackage/directives"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//ExportPackage/packages"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//BundleActivationPolicy">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleActivationPolicy/policy"/>
@@ -130,6 +142,8 @@
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//FragmentHost">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference manifest.ecore#//FragmentHost/directives"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//FragmentHost/bundle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//FragmentHost/reference"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//FragmentHost/resolved"/>
     </genClasses>
     <genClasses ecoreClass="manifest.ecore#//DynamicImportPackage">
@@ -145,17 +159,33 @@
     <genClasses ecoreClass="manifest.ecore#//BundleManifestVersion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//BundleManifestVersion/manifestVersion"/>
     </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//ClassPath">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//ClassPath/resolved"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//ClassPath/reference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//ClassPath/entry"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//NativeCode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//NativeCode/resolved"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//NativeCode/reference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//NativeCode/file"/>
+    </genClasses>
+    <genClasses ecoreClass="manifest.ecore#//Package">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//Package/resolved"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute manifest.ecore#//Package/reference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference manifest.ecore#//Package/package"/>
+    </genClasses>
   </genPackages>
   <genPackages prefix="Jar" disposableProviderFactory="true" ecorePackage="jar.ecore#/">
     <genClasses image="false" ecoreClass="jar.ecore#//BundleEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jar.ecore#//BundleEntry/fullPath"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jar.ecore#//BundleEntry/name"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="jar.ecore#//SystemEntry"/>
+    <genClasses image="false" ecoreClass="jar.ecore#//SystemEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jar.ecore#//SystemEntry/bundleClassPath"/>
+    </genClasses>
     <genClasses ecoreClass="jar.ecore#//Package">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference jar.ecore#//Package/classes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference jar.ecore#//Package/subPackages"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jar.ecore#//Package/bundleClassPath"/>
     </genClasses>
     <genClasses ecoreClass="jar.ecore#//Class"/>
     <genClasses ecoreClass="jar.ecore#//Folder">
@@ -246,16 +276,19 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//OsVersion/maxNotInclude"/>
     </genClasses>
     <genClasses ecoreClass="option.ecore#//ExcludePackages">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//ExcludePackages/packages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//ExcludePackages/packagesReference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//ExcludePackages/resolved"/>
     </genClasses>
     <genClasses ecoreClass="option.ecore#//Processor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//Processor/processor"/>
     </genClasses>
     <genClasses ecoreClass="option.ecore#//IncludePackages">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//IncludePackages/packages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//IncludePackages/packagesReference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//IncludePackages/resolved"/>
     </genClasses>
     <genClasses ecoreClass="option.ecore#//Uses">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//Uses/packages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//Uses/packages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//Uses/resolved"/>
     </genClasses>
     <genClasses ecoreClass="option.ecore#//Extension">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//Extension/extension"/>
@@ -288,10 +321,10 @@
     <genClasses image="false" ecoreClass="option.ecore#//ImportPackageDirective"/>
     <genClasses image="false" ecoreClass="option.ecore#//ActivationPolicyDirective"/>
     <genClasses ecoreClass="option.ecore#//IncludeClasses">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//IncludeClasses/classes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//IncludeClasses/classes"/>
     </genClasses>
     <genClasses ecoreClass="option.ecore#//ExcludeClasses">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference option.ecore#//ExcludeClasses/classes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute option.ecore#//ExcludeClasses/classes"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

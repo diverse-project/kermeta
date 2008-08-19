@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Package.java,v 1.4 2008-08-11 14:19:27 edaubert Exp $
+ * $Id: Package.java,v 1.5 2008-08-19 07:04:43 edaubert Exp $
  */
 package jar;
 
@@ -71,8 +71,8 @@ public interface Package extends BundleEntry {
 
 	Package getPackage(String fullPath);
 
-	List<Class> getClassWithRegex(String regex);
+	List<Class> getClassWithRegex(String regex, boolean recursive);
 
-	//BundleEntry getSubElement(String fullPath);
+	// BundleEntry getSubElement(String fullPath);
 
 } // Package

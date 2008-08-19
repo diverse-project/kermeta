@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionAdapterFactory.java,v 1.3 2008-07-31 13:43:54 edaubert Exp $
+ * $Id: OptionAdapterFactory.java,v 1.4 2008-08-19 07:04:46 edaubert Exp $
  */
 package option.util;
 
-import option.*;
 import option.ActivationPolicyDirective;
 import option.AttributEntry;
 import option.DirectiveEntry;
@@ -196,6 +195,14 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExcludeClasses(ExcludeClasses object) {
 				return createExcludeClassesAdapter();
+			}
+			@Override
+			public Adapter caseClass(option.Class object) {
+				return createClassAdapter();
+			}
+			@Override
+			public Adapter casePackage(option.Package object) {
+				return createPackageAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -551,6 +558,32 @@ public class OptionAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExcludeClassesAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link option.Class <em>Class</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null so that
+	 * we can easily ignore cases; it's useful to ignore a case when inheritance
+	 * will catch all the cases anyway. <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see option.Class
+	 * @generated
+	 */
+	public Adapter createClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link option.Package <em>Package</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null so that
+	 * we can easily ignore cases; it's useful to ignore a case when inheritance
+	 * will catch all the cases anyway. <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see option.Package
+	 * @generated
+	 */
+	public Adapter createPackageAdapter() {
 		return null;
 	}
 

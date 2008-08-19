@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionSwitch.java,v 1.3 2008-07-31 13:43:54 edaubert Exp $
+ * $Id: OptionSwitch.java,v 1.4 2008-08-19 07:04:46 edaubert Exp $
  */
 package option.util;
 
 import java.util.List;
 
-import option.*;
 import option.ActivationPolicyDirective;
 import option.AttributEntry;
 import option.DirectiveEntry;
@@ -161,7 +160,6 @@ public class OptionSwitch<T> {
 				T result = caseExcludePackages(excludePackages);
 				if (result == null) result = caseActivationPolicyDirective(excludePackages);
 				if (result == null) result = caseDirectiveEntry(excludePackages);
-				if (result == null) result = caseExportPackageDirective(excludePackages);
 				if (result == null) result = caseParameterEntry(excludePackages);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -180,7 +178,6 @@ public class OptionSwitch<T> {
 				T result = caseIncludePackages(includePackages);
 				if (result == null) result = caseActivationPolicyDirective(includePackages);
 				if (result == null) result = caseDirectiveEntry(includePackages);
-				if (result == null) result = caseExportPackageDirective(includePackages);
 				if (result == null) result = caseParameterEntry(includePackages);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -312,7 +309,6 @@ public class OptionSwitch<T> {
 				ActivationPolicyDirective activationPolicyDirective = (ActivationPolicyDirective)theEObject;
 				T result = caseActivationPolicyDirective(activationPolicyDirective);
 				if (result == null) result = caseDirectiveEntry(activationPolicyDirective);
-				if (result == null) result = caseExportPackageDirective(activationPolicyDirective);
 				if (result == null) result = caseParameterEntry(activationPolicyDirective);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -332,6 +328,18 @@ public class OptionSwitch<T> {
 				if (result == null) result = caseExportPackageDirective(excludeClasses);
 				if (result == null) result = caseDirectiveEntry(excludeClasses);
 				if (result == null) result = caseParameterEntry(excludeClasses);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OptionPackage.CLASS: {
+				option.Class class_ = (option.Class)theEObject;
+				T result = caseClass(class_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OptionPackage.PACKAGE: {
+				option.Package package_ = (option.Package)theEObject;
+				T result = casePackage(package_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -674,6 +682,32 @@ public class OptionSwitch<T> {
 	 * @generated
 	 */
 	public T caseExcludeClasses(ExcludeClasses object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class</em>'.
+	 * <!-- begin-user-doc --> This implementation returns null; returning a
+	 * non-null result will terminate the switch. <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClass(option.Class object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
+	 * <!-- begin-user-doc --> This implementation returns null; returning a
+	 * non-null result will terminate the switch. <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackage(option.Package object) {
 		return null;
 	}
 

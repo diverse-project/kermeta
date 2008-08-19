@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VersionImpl.java,v 1.4 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: VersionImpl.java,v 1.5 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
 
@@ -285,8 +285,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -423,13 +422,13 @@ public class VersionImpl extends EObjectImpl implements Version {
 	public boolean equals(Version version) {
 		if (version != null) {
 			return this.getMajor() == version.getMajor()
-				&& this.getMinor() == version.getMinor()
-				&& this.getMicro() == version.getMicro()
-				&& this.getQualifier().equals(version.getQualifier());
+					&& this.getMinor() == version.getMinor()
+					&& this.getMicro() == version.getMicro()
+					&& this.getQualifier().equals(version.getQualifier());
 		}
 		return true;
 	}
-	
+
 	public boolean containsInto(String versionRange) {
 		if (versionRange != null) {
 			boolean minNotInclude = false;
@@ -443,13 +442,12 @@ public class VersionImpl extends EObjectImpl implements Version {
 				maxNotInclude = false;
 			}
 			versionRange = versionRange.replace("(", "").replace("[", "")
-					.replace(")", "").replace("]", "").replace(
-							"\"", "").replace(" ", "");
+					.replace(")", "").replace("]", "").replace("\"", "")
+					.replace(" ", "");
 			String[] versionsValue = versionRange.split(",");
 			if (versionsValue.length == 2) {
 				try {
-					maxVersion = ManifestFactory.eINSTANCE
-							.createVersion();
+					maxVersion = ManifestFactory.eINSTANCE.createVersion();
 					maxVersion.setVersionValue(versionsValue[1]);
 				} catch (BadVersionValue e) {
 					maxVersion = null;
@@ -457,15 +455,15 @@ public class VersionImpl extends EObjectImpl implements Version {
 				}
 			}
 			try {
-				minVersion = ManifestFactory.eINSTANCE
-						.createVersion();
+				minVersion = ManifestFactory.eINSTANCE.createVersion();
 				minVersion.setVersionValue(versionsValue[0]);
 			} catch (BadVersionValue e) {
 				minVersion = null;
 				// TODO log erreur dans un attribut
 			}
-			
-			return this.greaterThan(minVersion, minNotInclude) && this.lesserThan(maxVersion, maxNotInclude);
+
+			return this.greaterThan(minVersion, minNotInclude)
+					&& this.lesserThan(maxVersion, maxNotInclude);
 		}
 		return true;
 	}

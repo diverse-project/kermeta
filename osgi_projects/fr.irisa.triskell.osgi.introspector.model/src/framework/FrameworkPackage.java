@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkPackage.java,v 1.4 2008-08-11 14:19:27 edaubert Exp $
+ * $Id: FrameworkPackage.java,v 1.5 2008-08-19 07:04:41 edaubert Exp $
  */
 package framework;
 
@@ -116,12 +116,29 @@ public interface FrameworkPackage extends EPackage {
 	int BUNDLE__MANIFEST = 2;
 
 	/**
+	 * The feature id for the '<em><b>Fragments Reference</b></em>' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__FRAGMENTS_REFERENCE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__ID = 4;
+
+	/**
 	 * The feature id for the '<em><b>Folder</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__FOLDER = 3;
+	int BUNDLE__FOLDER = 5;
 
 	/**
 	 * The feature id for the '<em><b>Package</b></em>' containment reference.
@@ -129,16 +146,7 @@ public interface FrameworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__PACKAGE = 4;
-
-	/**
-	 * The feature id for the '<em><b>Fragments Reference</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE__FRAGMENTS_REFERENCE = 5;
+	int BUNDLE__PACKAGE = 6;
 
 	/**
 	 * The number of structural features of the '<em>Bundle</em>' class.
@@ -146,7 +154,7 @@ public interface FrameworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE_FEATURE_COUNT = 6;
+	int BUNDLE_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type. <!--
@@ -157,6 +165,15 @@ public interface FrameworkPackage extends EPackage {
 	 * @generated
 	 */
 	int STRING = 2;
+
+	/**
+	 * The meta object id for the '<em>long</em>' data type. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see framework.impl.FrameworkPackageImpl#getlong()
+	 * @generated
+	 */
+	int LONG = 3;
 
 	/**
 	 * Returns the meta object for class '{@link framework.Framework <em>Framework</em>}'.
@@ -238,14 +255,23 @@ public interface FrameworkPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute list '{@link framework.Bundle#getFragmentsReference <em>Fragments Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Fragments Reference</em>'.
 	 * @see framework.Bundle#getFragmentsReference()
 	 * @see #getBundle()
 	 * @generated
 	 */
 	EAttribute getBundle_FragmentsReference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link framework.Bundle#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see framework.Bundle#getId()
+	 * @see #getBundle()
+	 * @generated
+	 */
+	EAttribute getBundle_Id();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
@@ -256,6 +282,16 @@ public interface FrameworkPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getString();
+
+	/**
+	 * Returns the meta object for data type '<em>long</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for data type '<em>long</em>'.
+	 * @model instanceClass="long"
+	 * @generated
+	 */
+	EDataType getlong();
 
 	/**
 	 * Returns the factory that creates the instances of the model. <!--
@@ -345,11 +381,17 @@ public interface FrameworkPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '<em><b>Fragments Reference</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute BUNDLE__FRAGMENTS_REFERENCE = eINSTANCE.getBundle_FragmentsReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUNDLE__ID = eINSTANCE.getBundle_Id();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type. <!--
@@ -360,6 +402,15 @@ public interface FrameworkPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType STRING = eINSTANCE.getString();
+
+		/**
+		 * The meta object literal for the '<em>long</em>' data type. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see framework.impl.FrameworkPackageImpl#getlong()
+		 * @generated
+		 */
+		EDataType LONG = eINSTANCE.getlong();
 
 	}
 

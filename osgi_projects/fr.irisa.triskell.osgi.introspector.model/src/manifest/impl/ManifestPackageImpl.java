@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestPackageImpl.java,v 1.5 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: ManifestPackageImpl.java,v 1.6 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
 
@@ -25,6 +25,7 @@ import manifest.BundleSymbolicName;
 import manifest.BundleUpdateLocation;
 import manifest.BundleVendor;
 import manifest.BundleVersion;
+import manifest.ClassPath;
 import manifest.DynamicImportPackage;
 import manifest.ExportPackage;
 import manifest.ExportService;
@@ -35,6 +36,7 @@ import manifest.MANIFESTEntry;
 import manifest.MANIFESTVersionEnum;
 import manifest.ManifestFactory;
 import manifest.ManifestPackage;
+import manifest.NativeCode;
 import manifest.PolicyEnum;
 import manifest.RequireBundle;
 import manifest.Service;
@@ -253,6 +255,24 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass classPathEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nativeCodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass packageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum manifestVersionEnumEEnum = null;
 
 	/**
@@ -374,26 +394,24 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getService_Interface() {
-		return (EReference)serviceEClass.getEStructuralFeatures().get(0);
+	public EAttribute getService_Reference() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getService_InterfaceReference() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(1);
+	public EReference getService_Interface() {
+		return (EReference)serviceEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getService_Resolved() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -832,8 +850,24 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBundleActivator_Reference() {
+		return (EAttribute)bundleActivatorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBundleActivator_Resolved() {
+		return (EAttribute)bundleActivatorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getBundleActivator_Activator() {
-		return (EReference)bundleActivatorEClass.getEStructuralFeatures().get(0);
+		return (EReference)bundleActivatorEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -848,26 +882,8 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBundleClassPath_Entries() {
+	public EReference getBundleClassPath_ClassPaths() {
 		return (EReference)bundleClassPathEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBundleClassPath_Resolved() {
-		return (EAttribute)bundleClassPathEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBundleClassPath_References() {
-		return (EAttribute)bundleClassPathEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -898,26 +914,8 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBundleNativeCode_File() {
+	public EReference getBundleNativeCode_NativeCodes() {
 		return (EReference)bundleNativeCodeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBundleNativeCode_Resolved() {
-		return (EAttribute)bundleNativeCodeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBundleNativeCode_FileReferences() {
-		return (EAttribute)bundleNativeCodeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -945,11 +943,10 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRequireBundle_BundleReference() {
+	public EAttribute getRequireBundle_Reference() {
 		return (EAttribute)requireBundleEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -970,8 +967,7 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getImportService_Resolved() {
@@ -979,8 +975,7 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getImportService_ServiceReference() {
@@ -1024,7 +1019,15 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EReference getImportPackage_Packages() {
-		return (EReference)importPackageEClass.getEStructuralFeatures().get(3);
+		return (EReference)importPackageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImportPackage_PackageReferences() {
+		return (EAttribute)importPackageEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1039,17 +1042,16 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImportPackage_Resolved() {
-		return (EAttribute)importPackageEClass.getEStructuralFeatures().get(1);
+	public EReference getImportPackage_Bundle() {
+		return (EReference)importPackageEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImportPackage_PackagesReference() {
-		return (EAttribute)importPackageEClass.getEStructuralFeatures().get(2);
+	public EAttribute getImportPackage_Resolved() {
+		return (EAttribute)importPackageEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1065,7 +1067,7 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EReference getExportPackage_Packages() {
-		return (EReference)exportPackageEClass.getEStructuralFeatures().get(0);
+		return (EReference)exportPackageEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1073,25 +1075,7 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EReference getExportPackage_Directives() {
-		return (EReference)exportPackageEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getExportPackage_Resolved() {
-		return (EAttribute)exportPackageEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getExportPackage_PackageReference() {
-		return (EAttribute)exportPackageEClass.getEStructuralFeatures().get(3);
+		return (EReference)exportPackageEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1143,17 +1127,15 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFragmentHost_BundleReference() {
+	public EAttribute getFragmentHost_Reference() {
 		return (EAttribute)fragmentHostEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getFragmentHost_Resolved() {
@@ -1169,11 +1151,10 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDynamicImportPackage_PackagesReference() {
+	public EAttribute getDynamicImportPackage_Packages() {
 		return (EAttribute)dynamicImportPackageEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1231,6 +1212,102 @@ public class ManifestPackageImpl extends EPackageImpl implements
 	 */
 	public EAttribute getBundleManifestVersion_ManifestVersion() {
 		return (EAttribute)bundleManifestVersionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getClassPath() {
+		return classPathEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getClassPath_Resolved() {
+		return (EAttribute)classPathEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getClassPath_Reference() {
+		return (EAttribute)classPathEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassPath_Entry() {
+		return (EReference)classPathEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNativeCode() {
+		return nativeCodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNativeCode_Resolved() {
+		return (EAttribute)nativeCodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNativeCode_Reference() {
+		return (EAttribute)nativeCodeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNativeCode_File() {
+		return (EReference)nativeCodeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPackage() {
+		return packageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPackage_Resolved() {
+		return (EAttribute)packageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPackage_Reference() {
+		return (EAttribute)packageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPackage_Package() {
+		return (EReference)packageEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1308,9 +1385,9 @@ public class ManifestPackageImpl extends EPackageImpl implements
 
 		// Create classes and their features
 		serviceEClass = createEClass(SERVICE);
-		createEReference(serviceEClass, SERVICE__INTERFACE);
-		createEAttribute(serviceEClass, SERVICE__INTERFACE_REFERENCE);
+		createEAttribute(serviceEClass, SERVICE__REFERENCE);
 		createEAttribute(serviceEClass, SERVICE__RESOLVED);
+		createEReference(serviceEClass, SERVICE__INTERFACE);
 
 		versionEClass = createEClass(VERSION);
 		createEAttribute(versionEClass, VERSION__MAJOR);
@@ -1382,24 +1459,22 @@ public class ManifestPackageImpl extends EPackageImpl implements
 		createEReference(bundleVersionEClass, BUNDLE_VERSION__VERSION);
 
 		bundleActivatorEClass = createEClass(BUNDLE_ACTIVATOR);
+		createEAttribute(bundleActivatorEClass, BUNDLE_ACTIVATOR__REFERENCE);
+		createEAttribute(bundleActivatorEClass, BUNDLE_ACTIVATOR__RESOLVED);
 		createEReference(bundleActivatorEClass, BUNDLE_ACTIVATOR__ACTIVATOR);
 
 		bundleClassPathEClass = createEClass(BUNDLE_CLASS_PATH);
-		createEReference(bundleClassPathEClass, BUNDLE_CLASS_PATH__ENTRIES);
-		createEAttribute(bundleClassPathEClass, BUNDLE_CLASS_PATH__RESOLVED);
-		createEAttribute(bundleClassPathEClass, BUNDLE_CLASS_PATH__REFERENCES);
+		createEReference(bundleClassPathEClass, BUNDLE_CLASS_PATH__CLASS_PATHS);
 
 		bundleNativeCodeEClass = createEClass(BUNDLE_NATIVE_CODE);
 		createEAttribute(bundleNativeCodeEClass, BUNDLE_NATIVE_CODE__OPTIONAL);
 		createEReference(bundleNativeCodeEClass, BUNDLE_NATIVE_CODE__DIRECTIVES);
-		createEReference(bundleNativeCodeEClass, BUNDLE_NATIVE_CODE__FILE);
-		createEAttribute(bundleNativeCodeEClass, BUNDLE_NATIVE_CODE__RESOLVED);
-		createEAttribute(bundleNativeCodeEClass, BUNDLE_NATIVE_CODE__FILE_REFERENCES);
+		createEReference(bundleNativeCodeEClass, BUNDLE_NATIVE_CODE__NATIVE_CODES);
 
 		requireBundleEClass = createEClass(REQUIRE_BUNDLE);
 		createEReference(requireBundleEClass, REQUIRE_BUNDLE__DIRECTIVES);
 		createEAttribute(requireBundleEClass, REQUIRE_BUNDLE__RESOLVED);
-		createEAttribute(requireBundleEClass, REQUIRE_BUNDLE__BUNDLE_REFERENCE);
+		createEAttribute(requireBundleEClass, REQUIRE_BUNDLE__REFERENCE);
 		createEReference(requireBundleEClass, REQUIRE_BUNDLE__BUNDLE);
 
 		importServiceEClass = createEClass(IMPORT_SERVICE);
@@ -1412,15 +1487,14 @@ public class ManifestPackageImpl extends EPackageImpl implements
 
 		importPackageEClass = createEClass(IMPORT_PACKAGE);
 		createEReference(importPackageEClass, IMPORT_PACKAGE__DIRECTIVES);
-		createEAttribute(importPackageEClass, IMPORT_PACKAGE__RESOLVED);
-		createEAttribute(importPackageEClass, IMPORT_PACKAGE__PACKAGES_REFERENCE);
+		createEReference(importPackageEClass, IMPORT_PACKAGE__BUNDLE);
 		createEReference(importPackageEClass, IMPORT_PACKAGE__PACKAGES);
+		createEAttribute(importPackageEClass, IMPORT_PACKAGE__PACKAGE_REFERENCES);
+		createEAttribute(importPackageEClass, IMPORT_PACKAGE__RESOLVED);
 
 		exportPackageEClass = createEClass(EXPORT_PACKAGE);
-		createEReference(exportPackageEClass, EXPORT_PACKAGE__PACKAGES);
 		createEReference(exportPackageEClass, EXPORT_PACKAGE__DIRECTIVES);
-		createEAttribute(exportPackageEClass, EXPORT_PACKAGE__RESOLVED);
-		createEAttribute(exportPackageEClass, EXPORT_PACKAGE__PACKAGE_REFERENCE);
+		createEReference(exportPackageEClass, EXPORT_PACKAGE__PACKAGES);
 
 		bundleActivationPolicyEClass = createEClass(BUNDLE_ACTIVATION_POLICY);
 		createEAttribute(bundleActivationPolicyEClass, BUNDLE_ACTIVATION_POLICY__POLICY);
@@ -1429,11 +1503,11 @@ public class ManifestPackageImpl extends EPackageImpl implements
 		fragmentHostEClass = createEClass(FRAGMENT_HOST);
 		createEReference(fragmentHostEClass, FRAGMENT_HOST__DIRECTIVES);
 		createEReference(fragmentHostEClass, FRAGMENT_HOST__BUNDLE);
-		createEAttribute(fragmentHostEClass, FRAGMENT_HOST__BUNDLE_REFERENCE);
+		createEAttribute(fragmentHostEClass, FRAGMENT_HOST__REFERENCE);
 		createEAttribute(fragmentHostEClass, FRAGMENT_HOST__RESOLVED);
 
 		dynamicImportPackageEClass = createEClass(DYNAMIC_IMPORT_PACKAGE);
-		createEAttribute(dynamicImportPackageEClass, DYNAMIC_IMPORT_PACKAGE__PACKAGES_REFERENCE);
+		createEAttribute(dynamicImportPackageEClass, DYNAMIC_IMPORT_PACKAGE__PACKAGES);
 
 		bundleRequiredExecutionEnvironmentEClass = createEClass(BUNDLE_REQUIRED_EXECUTION_ENVIRONMENT);
 		createEAttribute(bundleRequiredExecutionEnvironmentEClass, BUNDLE_REQUIRED_EXECUTION_ENVIRONMENT__PROFILE);
@@ -1444,6 +1518,21 @@ public class ManifestPackageImpl extends EPackageImpl implements
 
 		bundleManifestVersionEClass = createEClass(BUNDLE_MANIFEST_VERSION);
 		createEAttribute(bundleManifestVersionEClass, BUNDLE_MANIFEST_VERSION__MANIFEST_VERSION);
+
+		classPathEClass = createEClass(CLASS_PATH);
+		createEAttribute(classPathEClass, CLASS_PATH__RESOLVED);
+		createEAttribute(classPathEClass, CLASS_PATH__REFERENCE);
+		createEReference(classPathEClass, CLASS_PATH__ENTRY);
+
+		nativeCodeEClass = createEClass(NATIVE_CODE);
+		createEAttribute(nativeCodeEClass, NATIVE_CODE__RESOLVED);
+		createEAttribute(nativeCodeEClass, NATIVE_CODE__REFERENCE);
+		createEReference(nativeCodeEClass, NATIVE_CODE__FILE);
+
+		packageEClass = createEClass(PACKAGE);
+		createEAttribute(packageEClass, PACKAGE__RESOLVED);
+		createEAttribute(packageEClass, PACKAGE__REFERENCE);
+		createEReference(packageEClass, PACKAGE__PACKAGE);
 
 		// Create enums
 		manifestVersionEnumEEnum = createEEnum(MANIFEST_VERSION_ENUM);
@@ -1479,8 +1568,8 @@ public class ManifestPackageImpl extends EPackageImpl implements
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		JarPackage theJarPackage = (JarPackage)EPackage.Registry.INSTANCE.getEPackage(JarPackage.eNS_URI);
 		FrameworkPackage theFrameworkPackage = (FrameworkPackage)EPackage.Registry.INSTANCE.getEPackage(FrameworkPackage.eNS_URI);
+		JarPackage theJarPackage = (JarPackage)EPackage.Registry.INSTANCE.getEPackage(JarPackage.eNS_URI);
 		OptionPackage theOptionPackage = (OptionPackage)EPackage.Registry.INSTANCE.getEPackage(OptionPackage.eNS_URI);
 
 		// Create type parameters
@@ -1518,9 +1607,9 @@ public class ManifestPackageImpl extends EPackageImpl implements
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getService_Interface(), theJarPackage.getClass_(), null, "interface", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getService_InterfaceReference(), theFrameworkPackage.getString(), "interfaceReference", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getService_Reference(), theFrameworkPackage.getString(), "reference", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getService_Resolved(), this.getboolean(), "resolved", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getService_Interface(), theJarPackage.getClass_(), null, "interface", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(versionEClass, Version.class, "Version", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVersion_Major(), this.getint(), "major", null, 1, 1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1592,24 +1681,22 @@ public class ManifestPackageImpl extends EPackageImpl implements
 		initEReference(getBundleVersion_Version(), this.getVersion(), null, "version", null, 1, 1, BundleVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bundleActivatorEClass, BundleActivator.class, "BundleActivator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBundleActivator_Activator(), theJarPackage.getClass_(), null, "activator", null, 1, 1, BundleActivator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBundleActivator_Reference(), theFrameworkPackage.getString(), "reference", null, 1, 1, BundleActivator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBundleActivator_Resolved(), this.getboolean(), "resolved", null, 1, 1, BundleActivator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBundleActivator_Activator(), theJarPackage.getClass_(), null, "activator", null, 0, 1, BundleActivator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bundleClassPathEClass, BundleClassPath.class, "BundleClassPath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBundleClassPath_Entries(), theJarPackage.getSystemEntry(), null, "entries", null, 0, -1, BundleClassPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBundleClassPath_Resolved(), this.getboolean(), "resolved", "false", 1, 1, BundleClassPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBundleClassPath_References(), theFrameworkPackage.getString(), "references", null, 1, -1, BundleClassPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBundleClassPath_ClassPaths(), this.getClassPath(), null, "classPaths", null, 1, -1, BundleClassPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bundleNativeCodeEClass, BundleNativeCode.class, "BundleNativeCode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBundleNativeCode_Optional(), this.getboolean(), "optional", null, 0, 1, BundleNativeCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBundleNativeCode_Directives(), theOptionPackage.getNativeCodeDirective(), null, "directives", null, 1, -1, BundleNativeCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBundleNativeCode_File(), theJarPackage.getFile(), null, "file", null, 0, -1, BundleNativeCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBundleNativeCode_Resolved(), this.getboolean(), "resolved", null, 1, 1, BundleNativeCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBundleNativeCode_FileReferences(), theFrameworkPackage.getString(), "fileReferences", null, 1, -1, BundleNativeCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBundleNativeCode_NativeCodes(), this.getNativeCode(), null, "nativeCodes", null, 1, -1, BundleNativeCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(requireBundleEClass, RequireBundle.class, "RequireBundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRequireBundle_Directives(), theOptionPackage.getRequireBundleDirective(), null, "directives", null, 0, 2, RequireBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRequireBundle_Resolved(), this.getboolean(), "resolved", null, 1, 1, RequireBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRequireBundle_BundleReference(), theFrameworkPackage.getString(), "bundleReference", null, 1, 1, RequireBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRequireBundle_Reference(), theFrameworkPackage.getString(), "reference", null, 1, 1, RequireBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRequireBundle_Bundle(), theFrameworkPackage.getBundle(), null, "bundle", null, 0, 1, RequireBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(importServiceEClass, ImportService.class, "ImportService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1622,15 +1709,14 @@ public class ManifestPackageImpl extends EPackageImpl implements
 
 		initEClass(importPackageEClass, ImportPackage.class, "ImportPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImportPackage_Directives(), theOptionPackage.getImportPackageDirective(), null, "directives", null, 0, 1, ImportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImportPackage_Resolved(), this.getboolean(), "resolved", null, 1, 1, ImportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImportPackage_PackagesReference(), theFrameworkPackage.getString(), "packagesReference", null, 1, -1, ImportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImportPackage_Packages(), theJarPackage.getPackage(), null, "packages", null, 0, -1, ImportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImportPackage_Bundle(), theFrameworkPackage.getBundle(), null, "bundle", null, 0, 1, ImportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImportPackage_Packages(), this.getPackage(), null, "packages", null, 0, -1, ImportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImportPackage_PackageReferences(), this.getString(), "packageReferences", null, 1, -1, ImportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImportPackage_Resolved(), this.getboolean(), "resolved", null, 0, 1, ImportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(exportPackageEClass, ExportPackage.class, "ExportPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExportPackage_Packages(), theJarPackage.getPackage(), null, "packages", null, 0, -1, ExportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExportPackage_Directives(), theOptionPackage.getExportPackageDirective(), null, "directives", null, 0, -1, ExportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getExportPackage_Resolved(), this.getboolean(), "resolved", "true", 1, 1, ExportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getExportPackage_PackageReference(), theFrameworkPackage.getString(), "packageReference", null, 1, -1, ExportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExportPackage_Packages(), this.getPackage(), null, "packages", null, 1, -1, ExportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bundleActivationPolicyEClass, BundleActivationPolicy.class, "BundleActivationPolicy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBundleActivationPolicy_Policy(), this.getPolicyEnum(), "policy", null, 1, 1, BundleActivationPolicy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1639,11 +1725,11 @@ public class ManifestPackageImpl extends EPackageImpl implements
 		initEClass(fragmentHostEClass, FragmentHost.class, "FragmentHost", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFragmentHost_Directives(), theOptionPackage.getFragmentHostDirective(), null, "directives", null, 0, 1, FragmentHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFragmentHost_Bundle(), theFrameworkPackage.getBundle(), null, "bundle", null, 0, 1, FragmentHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFragmentHost_BundleReference(), theFrameworkPackage.getString(), "bundleReference", null, 1, 1, FragmentHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFragmentHost_Reference(), theFrameworkPackage.getString(), "reference", null, 1, 1, FragmentHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFragmentHost_Resolved(), this.getboolean(), "resolved", "false", 1, 1, FragmentHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dynamicImportPackageEClass, DynamicImportPackage.class, "DynamicImportPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDynamicImportPackage_PackagesReference(), this.getString(), "packagesReference", null, 1, -1, DynamicImportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDynamicImportPackage_Packages(), this.getString(), "packages", null, 1, -1, DynamicImportPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bundleRequiredExecutionEnvironmentEClass, BundleRequiredExecutionEnvironment.class, "BundleRequiredExecutionEnvironment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBundleRequiredExecutionEnvironment_Profile(), this.getString(), "profile", null, 1, 1, BundleRequiredExecutionEnvironment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1654,6 +1740,21 @@ public class ManifestPackageImpl extends EPackageImpl implements
 
 		initEClass(bundleManifestVersionEClass, BundleManifestVersion.class, "BundleManifestVersion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBundleManifestVersion_ManifestVersion(), this.getMANIFESTVersionEnum(), "manifestVersion", null, 1, 1, BundleManifestVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(classPathEClass, ClassPath.class, "ClassPath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getClassPath_Resolved(), this.getboolean(), "resolved", null, 0, 1, ClassPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClassPath_Reference(), this.getString(), "reference", null, 0, 1, ClassPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassPath_Entry(), theJarPackage.getSystemEntry(), null, "entry", null, 0, 1, ClassPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(nativeCodeEClass, NativeCode.class, "NativeCode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNativeCode_Resolved(), this.getboolean(), "resolved", null, 0, 1, NativeCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNativeCode_Reference(), this.getString(), "reference", null, 0, 1, NativeCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNativeCode_File(), theJarPackage.getSystemEntry(), null, "file", null, 0, 1, NativeCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(packageEClass, manifest.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPackage_Resolved(), this.getboolean(), "resolved", null, 0, 1, manifest.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPackage_Reference(), this.getString(), "reference", null, 0, 1, manifest.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackage_Package(), theJarPackage.getPackage(), null, "package", null, 0, 1, manifest.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(manifestVersionEnumEEnum, MANIFESTVersionEnum.class, "MANIFESTVersionEnum");

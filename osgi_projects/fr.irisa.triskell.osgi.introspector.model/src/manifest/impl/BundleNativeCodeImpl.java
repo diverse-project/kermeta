@@ -2,16 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleNativeCodeImpl.java,v 1.3 2008-08-11 14:19:26 edaubert Exp $
+ * $Id: BundleNativeCodeImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
  */
 package manifest.impl;
-
-import jar.File;
 
 import java.util.Collection;
 
 import manifest.BundleNativeCode;
 import manifest.ManifestPackage;
+import manifest.NativeCode;
 import option.NativeCodeDirective;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -20,9 +19,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.osgi.framework.Constants;
 
@@ -34,9 +31,7 @@ import org.osgi.framework.Constants;
  * <ul>
  *   <li>{@link manifest.impl.BundleNativeCodeImpl#isOptional <em>Optional</em>}</li>
  *   <li>{@link manifest.impl.BundleNativeCodeImpl#getDirectives <em>Directives</em>}</li>
- *   <li>{@link manifest.impl.BundleNativeCodeImpl#getFile <em>File</em>}</li>
- *   <li>{@link manifest.impl.BundleNativeCodeImpl#isResolved <em>Resolved</em>}</li>
- *   <li>{@link manifest.impl.BundleNativeCodeImpl#getFileReferences <em>File References</em>}</li>
+ *   <li>{@link manifest.impl.BundleNativeCodeImpl#getNativeCodes <em>Native Codes</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,43 +67,13 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 	protected EList<NativeCodeDirective> directives;
 
 	/**
-	 * The cached value of the '{@link #getFile() <em>File</em>}' reference list.
+	 * The cached value of the '{@link #getNativeCodes() <em>Native Codes</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getFile()
+	 * @see #getNativeCodes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<File> file;
-
-	/**
-	 * The default value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isResolved()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean RESOLVED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isResolved()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean resolved = RESOLVED_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getFileReferences() <em>File References</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFileReferences()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> fileReferences;
+	protected EList<NativeCode> nativeCodes;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -142,44 +107,11 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<File> getFile() {
-		if (file == null) {
-			file = new EObjectResolvingEList<File>(File.class, this, ManifestPackage.BUNDLE_NATIVE_CODE__FILE);
+	public EList<NativeCode> getNativeCodes() {
+		if (nativeCodes == null) {
+			nativeCodes = new EObjectContainmentEList<NativeCode>(NativeCode.class, this, ManifestPackage.BUNDLE_NATIVE_CODE__NATIVE_CODES);
 		}
-		return file;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isResolved() {
-		return resolved;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setResolved(boolean newResolved) {
-		boolean oldResolved = resolved;
-		resolved = newResolved;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.BUNDLE_NATIVE_CODE__RESOLVED, oldResolved, resolved));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<String> getFileReferences() {
-		if (fileReferences == null) {
-			fileReferences = new EDataTypeUniqueEList<String>(String.class, this, ManifestPackage.BUNDLE_NATIVE_CODE__FILE_REFERENCES);
-		}
-		return fileReferences;
+		return nativeCodes;
 	}
 
 	/**
@@ -211,6 +143,8 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 		switch (featureID) {
 			case ManifestPackage.BUNDLE_NATIVE_CODE__DIRECTIVES:
 				return ((InternalEList<?>)getDirectives()).basicRemove(otherEnd, msgs);
+			case ManifestPackage.BUNDLE_NATIVE_CODE__NATIVE_CODES:
+				return ((InternalEList<?>)getNativeCodes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -226,12 +160,8 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 				return isOptional() ? Boolean.TRUE : Boolean.FALSE;
 			case ManifestPackage.BUNDLE_NATIVE_CODE__DIRECTIVES:
 				return getDirectives();
-			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE:
-				return getFile();
-			case ManifestPackage.BUNDLE_NATIVE_CODE__RESOLVED:
-				return isResolved() ? Boolean.TRUE : Boolean.FALSE;
-			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE_REFERENCES:
-				return getFileReferences();
+			case ManifestPackage.BUNDLE_NATIVE_CODE__NATIVE_CODES:
+				return getNativeCodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -251,16 +181,9 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 				getDirectives().clear();
 				getDirectives().addAll((Collection<? extends NativeCodeDirective>)newValue);
 				return;
-			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE:
-				getFile().clear();
-				getFile().addAll((Collection<? extends File>)newValue);
-				return;
-			case ManifestPackage.BUNDLE_NATIVE_CODE__RESOLVED:
-				setResolved(((Boolean)newValue).booleanValue());
-				return;
-			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE_REFERENCES:
-				getFileReferences().clear();
-				getFileReferences().addAll((Collection<? extends String>)newValue);
+			case ManifestPackage.BUNDLE_NATIVE_CODE__NATIVE_CODES:
+				getNativeCodes().clear();
+				getNativeCodes().addAll((Collection<? extends NativeCode>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -279,14 +202,8 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 			case ManifestPackage.BUNDLE_NATIVE_CODE__DIRECTIVES:
 				getDirectives().clear();
 				return;
-			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE:
-				getFile().clear();
-				return;
-			case ManifestPackage.BUNDLE_NATIVE_CODE__RESOLVED:
-				setResolved(RESOLVED_EDEFAULT);
-				return;
-			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE_REFERENCES:
-				getFileReferences().clear();
+			case ManifestPackage.BUNDLE_NATIVE_CODE__NATIVE_CODES:
+				getNativeCodes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -303,12 +220,8 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 				return optional != OPTIONAL_EDEFAULT;
 			case ManifestPackage.BUNDLE_NATIVE_CODE__DIRECTIVES:
 				return directives != null && !directives.isEmpty();
-			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE:
-				return file != null && !file.isEmpty();
-			case ManifestPackage.BUNDLE_NATIVE_CODE__RESOLVED:
-				return resolved != RESOLVED_EDEFAULT;
-			case ManifestPackage.BUNDLE_NATIVE_CODE__FILE_REFERENCES:
-				return fileReferences != null && !fileReferences.isEmpty();
+			case ManifestPackage.BUNDLE_NATIVE_CODE__NATIVE_CODES:
+				return nativeCodes != null && !nativeCodes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -324,10 +237,6 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (optional: ");
 		result.append(optional);
-		result.append(", resolved: ");
-		result.append(resolved);
-		result.append(", fileReferences: ");
-		result.append(fileReferences);
 		result.append(')');
 		return result.toString();
 	}
@@ -336,13 +245,14 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 		getDirectives().add(directive);
 	}
 
-	public void addFile(File file) {
-		getFile().add(file);
+	public void addNativeCode(NativeCode nativeCode) {
+		getNativeCodes().add(nativeCode);
 
 	}
 
-	public void addFileReference(String fileReference) {
-		getFileReferences().add(fileReference);
-		
-	}
+	/*
+	 * public void addFileReference(String fileReference) {
+	 * getFileReferences().add(fileReference);
+	 *  }
+	 */
 } // BundleNativeCodeImpl

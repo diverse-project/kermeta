@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionFactory.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: OptionFactory.java,v 1.3 2008-08-19 07:04:44 edaubert Exp $
  */
 package option;
 
@@ -175,6 +175,24 @@ public interface OptionFactory extends EFactory {
 	 * @generated
 	 */
 	ExcludeClasses createExcludeClasses();
+
+	/**
+	 * Returns a new object of class '<em>Class</em>'.
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * @return a new object of class '<em>Class</em>'.
+	 * @generated
+	 */
+	option.Class createClass();
+
+	/**
+	 * Returns a new object of class '<em>Package</em>'.
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * @return a new object of class '<em>Package</em>'.
+	 * @generated
+	 */
+	option.Package createPackage();
 
 	/**
 	 * Returns the package supported by this factory.
