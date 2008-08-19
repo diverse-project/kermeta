@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PersistenceItemProvider.java,v 1.1 2008-07-23 12:37:37 ftanguy Exp $
+ * $Id: PersistenceItemProvider.java,v 1.2 2008-08-19 12:27:50 cfaucher Exp $
  */
 package org.kermeta.kruntimeconfiguration.provider;
 
@@ -26,6 +26,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.kermeta.kruntimeconfiguration.Entry;
 import org.kermeta.kruntimeconfiguration.KruntimeconfigurationFactory;
 import org.kermeta.kruntimeconfiguration.KruntimeconfigurationPackage;
 import org.kermeta.kruntimeconfiguration.Persistence;
@@ -114,10 +115,15 @@ public class PersistenceItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
+		for(Entry entry : ((Persistence) object).getEntries()) {
+			if(entry.getKey().equals("fileExtension")) {
+				return getString("_UI_Persistence_type") + " for " + entry.getValue();
+			}
+		}
 		return getString("_UI_Persistence_type");
 	}
 
