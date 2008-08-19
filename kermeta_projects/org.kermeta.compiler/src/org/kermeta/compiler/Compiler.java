@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.9 2008-07-23 15:14:28 cfaucher Exp $
+/* $Id: Compiler.java,v 1.10 2008-08-19 12:35:25 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.kermeta.compiler.generator.helper.model.SimkModelHelper;
+import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.compiler.generator.internal.actions.GenerateHelperAction;
 import org.kermeta.compiler.util.CompilerUtil;
 import org.kermeta.io.KermetaUnit;
@@ -229,7 +229,7 @@ public class Compiler extends Generator {
 		genModelPath = genModelPath.replace( ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "platform:/resource/" );
 		
 		IFile genModelFile = ResourceHelper.getIFile(genModelPath);
-		IFile simk_file = ResourcesPlugin.getWorkspace().getRoot().getFile(genModelFile.getFullPath().removeFileExtension().addFileExtension(SimkModelHelper.SIMK_EXT));
+		IFile simk_file = ResourcesPlugin.getWorkspace().getRoot().getFile(genModelFile.getFullPath().removeFileExtension().addFileExtension(KCompilerConstants.SIMK_EXT));
 		
 		if(genModelFile.exists()) {
 			compileHelperAction.generate(genModelFile, kmFilePath_forReflection.toString(), simk_file);

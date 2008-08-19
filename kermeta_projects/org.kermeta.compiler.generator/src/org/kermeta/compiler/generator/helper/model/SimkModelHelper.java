@@ -1,4 +1,4 @@
-/*$Id: SimkModelHelper.java,v 1.2 2008-01-10 16:10:32 cfaucher Exp $
+/*$Id: SimkModelHelper.java,v 1.3 2008-08-19 12:35:22 cfaucher Exp $
 * Project : org.kermeta.compiler
 * File : 	HelperModel.java
 * License : EPL
@@ -10,64 +10,31 @@
 
 package org.kermeta.compiler.generator.helper.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.simk.SIMKModel;
-import org.kermeta.simk.SimkFactory;
 
 
 public class SimkModelHelper {
-
-	public static final String SIMK_EXT = "simk";
-	
-	public List<SimkMethodHelper> helperMethods = null;
-	
-	public SimkModelHelper() {
-		helperMethods = new ArrayList<SimkMethodHelper>();
-	}
-	
-	/*public int getNextId() {
-		return helperMethods.size()+1;
-	}*/
 	
 	/**
 	 * 
 	 * @param file
 	 * @return
 	 */
-	public static SIMKModel createSIMKModel(IFile file)
-    {
-		// Create a Trek structure
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(SIMK_EXT,new XMIResourceFactoryImpl());
-		ResourceSet resource_set = new ResourceSetImpl();
-		URI u = URI.createURI(file.getFullPath().toString());
-    	u = new URIConverterImpl().normalize(u);
-		Resource resource = resource_set.createResource(u);
-		resource.getContents().add(SimkFactory.eINSTANCE.createSIMKModel());
-		return (SIMKModel) resource.getContents().get(0);
-    }
-	
-	/**
-	 * 
-	 * @param file
-	 * @return
-	 */
-	public static SIMKModel getSIMKModel(IFile file)
-    {
+	public static SIMKModel getSIMKModel(IFile file) {
 		if(file.exists()) {
 			// Get a Trek structure
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(SIMK_EXT,new XMIResourceFactoryImpl());
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(KCompilerConstants.SIMK_EXT,new XMIResourceFactoryImpl());
 			ResourceSet resource_set = new ResourceSetImpl();
 			URI u = URI.createURI(file.getFullPath().toString());
-	    	u = new URIConverterImpl().normalize(u);
+	    	u = new ExtensibleURIConverterImpl().normalize(u);
 			Resource resource = resource_set.getResource(u, true);
 			return (SIMKModel) resource.getContents().get(0);
 		}
