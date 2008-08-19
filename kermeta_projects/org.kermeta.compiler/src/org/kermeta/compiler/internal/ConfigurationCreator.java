@@ -1,13 +1,14 @@
 
 
-/*$Id: ConfigurationCreator.java,v 1.4 2008-08-01 18:32:27 cfaucher Exp $
+/*$Id: ConfigurationCreator.java,v 1.5 2008-08-19 12:49:36 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	ConfigurationCreator.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 21 juil. 2008
-* Authors : paco
+* Authors : Francois Tanguy <ftanguy@irisa.fr>
+* 			Cyril Faucher <cfaucher@irisa.fr>
 */
 
 package org.kermeta.compiler.internal;
@@ -15,19 +16,22 @@ package org.kermeta.compiler.internal;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.RegistryFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.kruntimeconfiguration.Configuration;
 import org.kermeta.kruntimeconfiguration.Entry;
 import org.kermeta.kruntimeconfiguration.KruntimeconfigurationFactory;
 import org.kermeta.kruntimeconfiguration.Persistence;
-
-import org.kermeta.compiler.common.KCompilerConstants;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
@@ -134,20 +138,32 @@ public class ConfigurationCreator {
 				baseClassName.setKey( KCompilerConstants._BASE_CLASS_NAME_);
 				baseClassName.setValue( genPackageFromPlugin.getClassPackageName() + "." + genPackageFromPlugin.getPackageClassName() );
 				
-				Entry factoryClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-				factoryClassName.setKey( KCompilerConstants._FACTORY_CLASS_NAME);
-				factoryClassName.setValue( genPackageFromPlugin.getInterfacePackageName() + "." + genPackageFromPlugin.getFactoryInterfaceName() );
-				
 				Entry generatedClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
 				generatedClassName.setKey( KCompilerConstants._GENERATED_CLASS_NAME_);
 				generatedClassName.setValue( p.getClassPackageName() + "." + p.getPackageClassName() );
 				
+				String factoryCName = getFactoryFromPluginExtension(fileExtension.getValue());
+				if( factoryCName != null ) {
+					Entry factoryClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
+					factoryClassName.setKey( KCompilerConstants._FACTORY_CLASS_NAME);
+					factoryClassName.setValue( factoryCName );
+					persistence.getEntries().add( factoryClassName );
+				//Not required
+				/*} else {
+				 	Entry factoryClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
+					factoryClassName.setKey( KCompilerConstants._FACTORY_CLASS_NAME);
+					factoryClassName.setValue( "org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl" );
+					persistence.getEntries().add( factoryClassName );*/
+				}
+								
 				persistence.getEntries().add( fileExtension );
 				persistence.getEntries().add( uri );
 				persistence.getEntries().add( baseClassName );
 				persistence.getEntries().add( generatedClassName );
-				persistence.getEntries().add( factoryClassName );
+				
+				
 				return persistence;
+				
 			} catch (Exception e) {
 				// The genModel does not exist. Forget it.
 			}
@@ -174,6 +190,7 @@ public class ConfigurationCreator {
 	 * @return
 	 */
 	private Persistence createPersistenceForUnregisteredPackage(GenPackage p) {
+		
 		Persistence persistence = KruntimeconfigurationFactory.eINSTANCE.createPersistence();
 		Entry fileExtension = KruntimeconfigurationFactory.eINSTANCE.createEntry();
 		fileExtension.setKey( KCompilerConstants._FILE_EXTENSION_ );
@@ -187,19 +204,22 @@ public class ConfigurationCreator {
 		baseClassName.setKey( KCompilerConstants._BASE_CLASS_NAME_);
 		baseClassName.setValue( p.getClassPackageName() + "." + p.getPackageClassName() );
 		
-		Entry factoryClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
-		factoryClassName.setKey( KCompilerConstants._FACTORY_CLASS_NAME);
-		factoryClassName.setValue( p.getInterfacePackageName() + "." + p.getFactoryInterfaceName() );
-		
 		Entry generatedClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
 		generatedClassName.setKey( KCompilerConstants._GENERATED_CLASS_NAME_);
 		generatedClassName.setValue( p.getClassPackageName() + "." + p.getPackageClassName() );
+		
+		//Not required
+		/*Entry factoryClassName = KruntimeconfigurationFactory.eINSTANCE.createEntry();
+		factoryClassName.setKey( KCompilerConstants._FACTORY_CLASS_NAME);
+		factoryClassName.setValue( "org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl" );*/
 		
 		persistence.getEntries().add( fileExtension );
 		persistence.getEntries().add( uri );
 		persistence.getEntries().add( baseClassName );
 		persistence.getEntries().add( generatedClassName );
-		persistence.getEntries().add( factoryClassName );
+		//Not required
+		//persistence.getEntries().add( factoryClassName );
+		
 		return persistence;
 	}
 	
@@ -215,6 +235,27 @@ public class ConfigurationCreator {
 		resource.save(null);
 	}
 	
+	private String getFactoryFromPluginExtension(String fileExtension) {
+		
+		IExtensionRegistry registry = RegistryFactory.getRegistry();
+		
+		IExtensionPoint extensionPoint = registry.getExtensionPoint("org.eclipse.emf.ecore.extension_parser");
+		IExtension[] extensions = extensionPoint.getExtensions();
+		
+		// An extension can have one or more registration (one registration corresponds to one ConfigurationElement)
+		for ( int i = 0; i < extensions.length; i++ ) {
+			IConfigurationElement[] elements = extensions[i].getConfigurationElements();
+			
+			for ( int j = 0; j < elements.length; j++ ) {
+				if( elements[j].getAttribute("type").equals(fileExtension) ) {
+					return elements[j].getAttribute("class");
+				}
+			}
+
+		}
+		
+		return null;
+	}
 }
 
 
