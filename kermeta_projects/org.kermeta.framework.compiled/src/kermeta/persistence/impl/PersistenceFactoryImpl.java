@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: PersistenceFactoryImpl.java,v 1.1 2008-06-24 14:23:34 cfaucher Exp $
+ * $Id: PersistenceFactoryImpl.java,v 1.2 2008-08-19 13:23:01 cfaucher Exp $
  */
 package kermeta.persistence.impl;
 
@@ -21,137 +22,105 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class PersistenceFactoryImpl extends EFactoryImpl implements PersistenceFactory
-{
-  /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static PersistenceFactory init()
-  {
-    try
-    {
-      PersistenceFactory thePersistenceFactory = (PersistenceFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/persistence"); 
-      if (thePersistenceFactory != null)
-      {
-        return thePersistenceFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new PersistenceFactoryImpl();
-  }
+public class PersistenceFactoryImpl extends EFactoryImpl implements
+		PersistenceFactory {
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static PersistenceFactory init() {
+		try {
+			PersistenceFactory thePersistenceFactory = (PersistenceFactory) EPackage.Registry.INSTANCE
+					.getEFactory("http://www.kermeta.org/kermeta/persistence/kermeta_temp_uri");
+			if (thePersistenceFactory != null) {
+				return thePersistenceFactory;
+			}
+		} catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new PersistenceFactoryImpl();
+	}
 
-  /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PersistenceFactoryImpl()
-  {
-    super();
-  }
+	/**
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PersistenceFactoryImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EObject create(EClass eClass)
-  {
-    switch (eClass.getClassifierID())
-    {
-      case PersistencePackage.EMF_RESOURCE: return createEMFResource();
-      case PersistencePackage.KM_RESOURCE: return createKMResource();
-      case PersistencePackage.DANGLING_DIAGNOSTIC: return createDanglingDiagnostic();
-      case PersistencePackage.EMF_REPOSITORY: return createEMFRepository();
-      case PersistencePackage.KM_REPOSITORY: return createKMRepository();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+		case PersistencePackage.EMF_RESOURCE:
+			return createEMFResource();
+		case PersistencePackage.DANGLING_DIAGNOSTIC:
+			return createDanglingDiagnostic();
+		case PersistencePackage.EMF_REPOSITORY:
+			return createEMFRepository();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EMFResource createEMFResource()
-  {
-    EMFResourceImpl emfResource = new EMFResourceImpl();
-    return emfResource;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMFResource createEMFResource() {
+		EMFResourceImpl emfResource = new EMFResourceImpl();
+		return emfResource;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public KMResource createKMResource()
-  {
-    KMResourceImpl kmResource = new KMResourceImpl();
-    return kmResource;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DanglingDiagnostic createDanglingDiagnostic() {
+		DanglingDiagnosticImpl danglingDiagnostic = new DanglingDiagnosticImpl();
+		return danglingDiagnostic;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DanglingDiagnostic createDanglingDiagnostic()
-  {
-    DanglingDiagnosticImpl danglingDiagnostic = new DanglingDiagnosticImpl();
-    return danglingDiagnostic;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMFRepository createEMFRepository() {
+		EMFRepositoryImpl emfRepository = new EMFRepositoryImpl();
+		return emfRepository;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EMFRepository createEMFRepository()
-  {
-    EMFRepositoryImpl emfRepository = new EMFRepositoryImpl();
-    return emfRepository;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PersistencePackage getPersistencePackage() {
+		return (PersistencePackage) getEPackage();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public KMRepository createKMRepository()
-  {
-    KMRepositoryImpl kmRepository = new KMRepositoryImpl();
-    return kmRepository;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PersistencePackage getPersistencePackage()
-  {
-    return (PersistencePackage)getEPackage();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
-  @Deprecated
-  public static PersistencePackage getPackage()
-  {
-    return PersistencePackage.eINSTANCE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static PersistencePackage getPackage() {
+		return PersistencePackage.eINSTANCE;
+	}
 
 } //PersistenceFactoryImpl

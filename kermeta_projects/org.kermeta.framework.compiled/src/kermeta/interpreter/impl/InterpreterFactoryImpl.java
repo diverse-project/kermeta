@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: InterpreterFactoryImpl.java,v 1.1 2008-06-24 14:23:32 cfaucher Exp $
+ * $Id: InterpreterFactoryImpl.java,v 1.2 2008-08-19 13:23:00 cfaucher Exp $
  */
 package kermeta.interpreter.impl;
 
@@ -21,113 +22,105 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class InterpreterFactoryImpl extends EFactoryImpl implements InterpreterFactory
-{
-  /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static InterpreterFactory init()
-  {
-    try
-    {
-      InterpreterFactory theInterpreterFactory = (InterpreterFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/interpreter"); 
-      if (theInterpreterFactory != null)
-      {
-        return theInterpreterFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new InterpreterFactoryImpl();
-  }
+public class InterpreterFactoryImpl extends EFactoryImpl implements
+		InterpreterFactory {
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static InterpreterFactory init() {
+		try {
+			InterpreterFactory theInterpreterFactory = (InterpreterFactory) EPackage.Registry.INSTANCE
+					.getEFactory("http://www.kermeta.org/kermeta/interpreter/kermeta_temp_uri");
+			if (theInterpreterFactory != null) {
+				return theInterpreterFactory;
+			}
+		} catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new InterpreterFactoryImpl();
+	}
 
-  /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterpreterFactoryImpl()
-  {
-    super();
-  }
+	/**
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InterpreterFactoryImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EObject create(EClass eClass)
-  {
-    switch (eClass.getClassifierID())
-    {
-      case InterpreterPackage.DYNAMIC_EXPRESSION: return createDynamicExpression();
-      case InterpreterPackage.PARSE_ERROR: return createParseError();
-      case InterpreterPackage.TYPE_ERROR: return createTypeError();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+		case InterpreterPackage.DYNAMIC_EXPRESSION:
+			return createDynamicExpression();
+		case InterpreterPackage.PARSE_ERROR:
+			return createParseError();
+		case InterpreterPackage.TYPE_ERROR:
+			return createTypeError();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DynamicExpression createDynamicExpression()
-  {
-    DynamicExpressionImpl dynamicExpression = new DynamicExpressionImpl();
-    return dynamicExpression;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DynamicExpression createDynamicExpression() {
+		DynamicExpressionImpl dynamicExpression = new DynamicExpressionImpl();
+		return dynamicExpression;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ParseError createParseError()
-  {
-    ParseErrorImpl parseError = new ParseErrorImpl();
-    return parseError;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParseError createParseError() {
+		ParseErrorImpl parseError = new ParseErrorImpl();
+		return parseError;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeError createTypeError()
-  {
-    TypeErrorImpl typeError = new TypeErrorImpl();
-    return typeError;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeError createTypeError() {
+		TypeErrorImpl typeError = new TypeErrorImpl();
+		return typeError;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterpreterPackage getInterpreterPackage()
-  {
-    return (InterpreterPackage)getEPackage();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InterpreterPackage getInterpreterPackage() {
+		return (InterpreterPackage) getEPackage();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
-  @Deprecated
-  public static InterpreterPackage getPackage()
-  {
-    return InterpreterPackage.eINSTANCE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static InterpreterPackage getPackage() {
+		return InterpreterPackage.eINSTANCE;
+	}
 
 } //InterpreterFactoryImpl

@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: EFeatureMapEntry.java,v 1.1 2008-06-24 14:23:39 cfaucher Exp $
+ * $Id: EFeatureMapEntry.java,v 1.2 2008-08-19 13:23:04 cfaucher Exp $
  */
 package kermeta.ecore;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -23,58 +23,57 @@ package kermeta.ecore;
  * @model annotation="kermeta documentation='/**\r\n * Kermeta representation of EMF EFeatureMapEntry\r\n * it contains the name of the required feature and the actual value\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png\"/>\r\n \052/'"
  * @generated
  */
-public interface EFeatureMapEntry extends kermeta.language.structure.Object
-{
-  /**
-   * Returns the value of the '<em><b>Value</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(kermeta.language.structure.Object)
-   * @see kermeta.ecore.EcorePackage#getEFeatureMapEntry_Value()
-   * @model containment="true"
-   * @generated
-   */
-  kermeta.language.structure.Object getValue();
+public interface EFeatureMapEntry extends kermeta.language.structure.Object {
+	/**
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Value</em>' containment reference.
+	 * @see #setValue(kermeta.language.structure.Object)
+	 * @see kermeta.ecore.EcorePackage#getEFeatureMapEntry_Value()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	kermeta.language.structure.Object getValue();
 
-  /**
-   * Sets the value of the '{@link kermeta.ecore.EFeatureMapEntry#getValue <em>Value</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' containment reference.
-   * @see #getValue()
-   * @generated
-   */
-  void setValue(kermeta.language.structure.Object value);
+	/**
+	 * Sets the value of the '{@link kermeta.ecore.EFeatureMapEntry#getValue <em>Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' containment reference.
+	 * @see #getValue()
+	 * @generated
+	 */
+	void setValue(kermeta.language.structure.Object value);
 
-  /**
-   * Returns the value of the '<em><b>EStructural Feature Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>EStructural Feature Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>EStructural Feature Name</em>' attribute.
-   * @see #setEStructuralFeatureName(String)
-   * @see kermeta.ecore.EcorePackage#getEFeatureMapEntry_EStructuralFeatureName()
-   * @model dataType="kermeta.standard.String"
-   * @generated
-   */
-  String getEStructuralFeatureName();
+	/**
+	 * Returns the value of the '<em><b>EStructural Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>EStructural Feature Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EStructural Feature Name</em>' attribute.
+	 * @see #setEStructuralFeatureName(String)
+	 * @see kermeta.ecore.EcorePackage#getEFeatureMapEntry_EStructuralFeatureName()
+	 * @model dataType="kermeta.standard.JavaString"
+	 * @generated
+	 */
+	String getEStructuralFeatureName();
 
-  /**
-   * Sets the value of the '{@link kermeta.ecore.EFeatureMapEntry#getEStructuralFeatureName <em>EStructural Feature Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>EStructural Feature Name</em>' attribute.
-   * @see #getEStructuralFeatureName()
-   * @generated
-   */
-  void setEStructuralFeatureName(String value);
+	/**
+	 * Sets the value of the '{@link kermeta.ecore.EFeatureMapEntry#getEStructuralFeatureName <em>EStructural Feature Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>EStructural Feature Name</em>' attribute.
+	 * @see #getEStructuralFeatureName()
+	 * @generated
+	 */
+	void setEStructuralFeatureName(String value);
 
 } // EFeatureMapEntry

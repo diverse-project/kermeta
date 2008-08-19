@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: GenericTypeDefinition.java,v 1.1 2008-06-24 14:23:26 cfaucher Exp $
+ * $Id: GenericTypeDefinition.java,v 1.2 2008-08-19 13:22:57 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -24,23 +25,22 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="kermeta documentation='Abstracts the definition of generic type definitions (i.e. type definitions that\ncan be parameterized), namely, for ClassDefinition and ModelTypeDefinition.'"
  * @generated
  */
-public interface GenericTypeDefinition extends TypeDefinition
-{
-  /**
-   * Returns the value of the '<em><b>Type Parameter</b></em>' containment reference list.
-   * The list contents are of type {@link kermeta.language.structure.TypeVariable}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type Parameter</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type Parameter</em>' containment reference list.
-   * @see kermeta.language.structure.StructurePackage#getGenericTypeDefinition_TypeParameter()
-   * @model containment="true"
-   *        annotation="kermeta documentation='Type variables defined for the GenericTypeDefinition'"
-   * @generated
-   */
-  EList<TypeVariable> getTypeParameter();
+public interface GenericTypeDefinition extends TypeDefinition {
+	/**
+	 * Returns the value of the '<em><b>Type Parameter</b></em>' containment reference list.
+	 * The list contents are of type {@link kermeta.language.structure.TypeVariable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Parameter</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Parameter</em>' containment reference list.
+	 * @see kermeta.language.structure.StructurePackage#getGenericTypeDefinition_TypeParameter()
+	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta documentation='Type variables defined for the GenericTypeDefinition'"
+	 * @generated
+	 */
+	EList<TypeVariable> getTypeParameter();
 
 } // GenericTypeDefinition

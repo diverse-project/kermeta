@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: KermetaFactoryImpl.java,v 1.1 2008-06-24 14:23:38 cfaucher Exp $
+ * $Id: KermetaFactoryImpl.java,v 1.2 2008-08-19 13:23:04 cfaucher Exp $
  */
 package kermeta.impl;
 
@@ -21,77 +22,68 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory
-{
-  /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static KermetaFactory init()
-  {
-    try
-    {
-      KermetaFactory theKermetaFactory = (KermetaFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta"); 
-      if (theKermetaFactory != null)
-      {
-        return theKermetaFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new KermetaFactoryImpl();
-  }
+public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static KermetaFactory init() {
+		try {
+			KermetaFactory theKermetaFactory = (KermetaFactory) EPackage.Registry.INSTANCE
+					.getEFactory("http://www.kermeta.org/kermeta/1_2_0//kermeta/kermeta_temp_uri");
+			if (theKermetaFactory != null) {
+				return theKermetaFactory;
+			}
+		} catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new KermetaFactoryImpl();
+	}
 
-  /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public KermetaFactoryImpl()
-  {
-    super();
-  }
+	/**
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KermetaFactoryImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EObject create(EClass eClass)
-  {
-    switch (eClass.getClassifierID())
-    {
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public KermetaPackage getKermetaPackage()
-  {
-    return (KermetaPackage)getEPackage();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KermetaPackage getKermetaPackage() {
+		return (KermetaPackage) getEPackage();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
-  @Deprecated
-  public static KermetaPackage getPackage()
-  {
-    return KermetaPackage.eINSTANCE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static KermetaPackage getPackage() {
+		return KermetaPackage.eINSTANCE;
+	}
 
 } //KermetaFactoryImpl

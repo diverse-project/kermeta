@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: Stack.java,v 1.1 2008-06-24 14:23:17 cfaucher Exp $
+ * $Id: Stack.java,v 1.2 2008-08-19 13:22:55 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -17,30 +18,32 @@ import kermeta.standard.Sequence;
  * @model annotation="kermeta documentation='/**\r\n * An implementation of stack\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png\"/>\r\n \052/'"
  * @generated
  */
-public interface Stack<G> extends Sequence<G>
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model annotation="kermeta documentation='/**\r\n\t * Gets the element at the top of the stack\r\n\t \052/'"
-   * @generated
-   */
-  G peek();
+public interface Stack<G> extends Sequence<G> {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta documentation='/**\r\n\t * Get and remove the element at the top of the stack\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tresult = this.peek();\n\n\tthis.removeAt(0);\n\nreturn result;\n'"
+	 * @generated
+	 */
+	G pop();
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model annotation="kermeta documentation='/**\r\n\t * Get and remove the element at the top of the stack\r\n\t \052/'"
-   * @generated
-   */
-  G pop();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta documentation='/**\r\n\t * Gets the element at the top of the stack\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tresult = this.first();\n\nreturn result;\n'"
+	 * @generated
+	 */
+	G peek();
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model annotation="kermeta documentation='/**\r\n\t * Pushes an element into the stack\r\n\t \052/'"
-   * @generated
-   */
-  void push(G element);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta documentation='/**\r\n\t * Pushes an element into the stack\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tthis.addAt(0, element);\n'"
+	 * @generated
+	 */
+	void push(G element);
 
 } // Stack

@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: DummyClass.java,v 1.1 2008-06-24 14:23:14 cfaucher Exp $
+ * $Id: DummyClass.java,v 1.2 2008-08-19 13:22:53 cfaucher Exp $
  */
 package kermeta.language;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +17,5 @@ package kermeta.language;
  *        annotation="kermeta documentation='This class is used to workaround an EMF bug, it doesn\'t really belong to Kermeta metamodel'"
  * @generated
  */
-public interface DummyClass extends kermeta.language.structure.Object
-{
+public interface DummyClass extends kermeta.language.structure.Object {
 } // DummyClass

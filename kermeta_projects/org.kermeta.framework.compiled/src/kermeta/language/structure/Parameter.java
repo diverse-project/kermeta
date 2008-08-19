@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: Parameter.java,v 1.1 2008-06-24 14:23:27 cfaucher Exp $
+ * $Id: Parameter.java,v 1.2 2008-08-19 13:22:58 cfaucher Exp $
  */
 package kermeta.language.structure;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -22,36 +22,35 @@ package kermeta.language.structure;
  * @model annotation="kermeta documentation='Definition for operation parameter'"
  * @generated
  */
-public interface Parameter extends MultiplicityElement
-{
-  /**
-   * Returns the value of the '<em><b>Operation</b></em>' container reference.
-   * It is bidirectional and its opposite is '{@link kermeta.language.structure.Operation#getOwnedParameter <em>Owned Parameter</em>}'.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operation</em>' container reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Operation</em>' container reference.
-   * @see #setOperation(Operation)
-   * @see kermeta.language.structure.StructurePackage#getParameter_Operation()
-   * @see kermeta.language.structure.Operation#getOwnedParameter
-   * @model opposite="ownedParameter"
-   *        annotation="kermeta ecore.isTransient='true'"
-   *        annotation="kermeta documentation='Owning operation'"
-   * @generated
-   */
-  Operation getOperation();
+public interface Parameter extends MultiplicityElement {
+	/**
+	 * Returns the value of the '<em><b>Operation</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link kermeta.language.structure.Operation#getOwnedParameter <em>Owned Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Operation</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Operation</em>' container reference.
+	 * @see #setOperation(Operation)
+	 * @see kermeta.language.structure.StructurePackage#getParameter_Operation()
+	 * @see kermeta.language.structure.Operation#getOwnedParameter
+	 * @model opposite="ownedParameter"
+	 *        annotation="kermeta ecore.isTransient='true'"
+	 *        annotation="kermeta documentation='Owning operation'"
+	 * @generated
+	 */
+	Operation getOperation();
 
-  /**
-   * Sets the value of the '{@link kermeta.language.structure.Parameter#getOperation <em>Operation</em>}' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Operation</em>' container reference.
-   * @see #getOperation()
-   * @generated
-   */
-  void setOperation(Operation value);
+	/**
+	 * Sets the value of the '{@link kermeta.language.structure.Parameter#getOperation <em>Operation</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Operation</em>' container reference.
+	 * @see #getOperation()
+	 * @generated
+	 */
+	void setOperation(Operation value);
 
 } // Parameter

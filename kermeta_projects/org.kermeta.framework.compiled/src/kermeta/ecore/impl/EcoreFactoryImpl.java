@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: EcoreFactoryImpl.java,v 1.1 2008-06-24 14:23:44 cfaucher Exp $
+ * $Id: EcoreFactoryImpl.java,v 1.2 2008-08-19 13:23:12 cfaucher Exp $
  */
 package kermeta.ecore.impl;
 
@@ -21,89 +22,80 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory
-{
-  /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static EcoreFactory init()
-  {
-    try
-    {
-      EcoreFactory theEcoreFactory = (EcoreFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/ecore"); 
-      if (theEcoreFactory != null)
-      {
-        return theEcoreFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new EcoreFactoryImpl();
-  }
+public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static EcoreFactory init() {
+		try {
+			EcoreFactory theEcoreFactory = (EcoreFactory) EPackage.Registry.INSTANCE
+					.getEFactory("http://www.kermeta.org/kermeta/ecore/kermeta_temp_uri");
+			if (theEcoreFactory != null) {
+				return theEcoreFactory;
+			}
+		} catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new EcoreFactoryImpl();
+	}
 
-  /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EcoreFactoryImpl()
-  {
-    super();
-  }
+	/**
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EcoreFactoryImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EObject create(EClass eClass)
-  {
-    switch (eClass.getClassifierID())
-    {
-      case EcorePackage.EFEATURE_MAP_ENTRY: return createEFeatureMapEntry();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+		case EcorePackage.EFEATURE_MAP_ENTRY:
+			return createEFeatureMapEntry();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EFeatureMapEntry createEFeatureMapEntry()
-  {
-    EFeatureMapEntryImpl eFeatureMapEntry = new EFeatureMapEntryImpl();
-    return eFeatureMapEntry;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EFeatureMapEntry createEFeatureMapEntry() {
+		EFeatureMapEntryImpl eFeatureMapEntry = new EFeatureMapEntryImpl();
+		return eFeatureMapEntry;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EcorePackage getEcorePackage()
-  {
-    return (EcorePackage)getEPackage();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EcorePackage getEcorePackage() {
+		return (EcorePackage) getEPackage();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
-  @Deprecated
-  public static EcorePackage getPackage()
-  {
-    return EcorePackage.eINSTANCE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static EcorePackage getPackage() {
+		return EcorePackage.eINSTANCE;
+	}
 
 } //EcoreFactoryImpl

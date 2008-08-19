@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: NotComparableExceptionImpl.java,v 1.1 2008-06-24 14:23:36 cfaucher Exp $
+ * $Id: NotComparableExceptionImpl.java,v 1.2 2008-08-19 13:23:03 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -21,27 +22,25 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class NotComparableExceptionImpl extends ExceptionImpl implements NotComparableException
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected NotComparableExceptionImpl()
-  {
-    super();
-  }
+public class NotComparableExceptionImpl extends ExceptionImpl implements
+		NotComparableException {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NotComparableExceptionImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return StandardPackage.Literals.NOT_COMPARABLE_EXCEPTION;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return StandardPackage.Literals.NOT_COMPARABLE_EXCEPTION;
+	}
 
 } //NotComparableExceptionImpl

@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: AbstractFallibleImpl.java,v 1.1 2008-06-24 14:23:35 cfaucher Exp $
+ * $Id: AbstractFallibleImpl.java,v 1.2 2008-08-19 13:23:02 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -21,147 +22,186 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class AbstractFallibleImpl extends ObjectImpl implements AbstractFallible
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected AbstractFallibleImpl()
-  {
-    super();
-  }
+public abstract class AbstractFallibleImpl extends ObjectImpl implements
+		AbstractFallible {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AbstractFallibleImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return KunitPackage.Literals.ABSTRACT_FALLIBLE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return KunitPackage.Literals.ABSTRACT_FALLIBLE;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void assertTrue(boolean condition)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void assertTrue(Boolean condition) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String distil(String s)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void assertFalseWithMsg(boolean condition, String message)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String distil(String s) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void fail(String msg)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+		java.lang.String result = null;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void assertEqual(String expected, String actual)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+		result = "";
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void assertFalse(boolean condition)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+		java.lang.Boolean white = false;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void assertTrueWithMsg(boolean condition, String message)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+		java.lang.Integer i = 0;
+		java.lang.Boolean idLoopCond_9 = false;
+		while (!idLoopCond_9) {
+			idLoopCond_9 = kermeta.standard.helper.IntegerWrapper.equals(i,
+					kermeta.standard.helper.StringWrapper.size(s));
+			;
+			if (idLoopCond_9) {
+			} else {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void _assert(boolean condition)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+				java.lang.String c = kermeta.standard.helper.CharacterWrapper
+						.toString(kermeta.standard.helper.StringWrapper
+								.elementAt(s, i));
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void assertSimilar(String expected, String actual)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+				java.lang.Boolean idIfCond_10 = false;
+				idIfCond_10 = kermeta.standard.helper.IntegerWrapper
+						.isGreaterOrEqual(kermeta.standard.helper.StringWrapper
+								.indexOf(" \n\t", c), 0);
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void assertWithMsg(boolean condition, String msg)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+				if (idIfCond_10) {
+
+					java.lang.Boolean idIfCond_11 = false;
+					idIfCond_11 = kermeta.standard.helper.BooleanWrapper
+							.not(white);
+
+					if (idIfCond_11) {
+
+						white = true;
+
+						result = kermeta.standard.helper.StringWrapper.plus(
+								result, " ");
+					}
+
+				} else {
+
+					result = kermeta.standard.helper.StringWrapper.plus(result,
+							c);
+
+					java.lang.Boolean idIfCond_12 = false;
+					idIfCond_12 = white;
+
+					if (idIfCond_12) {
+
+						white = false;
+					}
+
+				}
+
+				i = kermeta.standard.helper.IntegerWrapper.plus(i, 1);
+			}
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void assertFalseWithMsg(Boolean condition, String message) {
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void fail(String msg) {
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void assertEqual(String expected, String actual) {
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void assertFalse(Boolean condition) {
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void assertTrueWithMsg(Boolean condition, String message) {
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void _assert(Boolean condition) {
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void assertSimilar(String expected, String actual) {
+
+		expected = this.distil(expected);
+
+		actual = this.distil(actual);
+
+		this.assertWithMsg(kermeta.standard.helper.StringWrapper.equals(
+				expected, actual), kermeta.standard.helper.StringWrapper.plus(
+				kermeta.standard.helper.StringWrapper.plus(
+						kermeta.standard.helper.StringWrapper.plus(
+								kermeta.standard.helper.StringWrapper.plus(
+										"\nexpected\t:[", expected),
+								"] != \nactual  \t:["), actual), "]"));
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void assertWithMsg(Boolean condition, String msg) {
+
+	}
 
 } //AbstractFallibleImpl

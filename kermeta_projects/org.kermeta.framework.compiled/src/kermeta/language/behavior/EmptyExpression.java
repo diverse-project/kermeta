@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: EmptyExpression.java,v 1.1 2008-06-24 14:23:30 cfaucher Exp $
+ * $Id: EmptyExpression.java,v 1.2 2008-08-19 13:22:59 cfaucher Exp $
  */
 package kermeta.language.behavior;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,5 @@ package kermeta.language.behavior;
  * @model annotation="kermeta documentation='As suggested by its name, this class represents an expression that do nothing. Like a \"nop\"'"
  * @generated
  */
-public interface EmptyExpression extends Expression
-{
+public interface EmptyExpression extends Expression {
 } // EmptyExpression

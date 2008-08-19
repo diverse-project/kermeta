@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: DynamicExpressionException.java,v 1.1 2008-06-24 14:23:17 cfaucher Exp $
+ * $Id: DynamicExpressionException.java,v 1.2 2008-08-19 13:22:55 cfaucher Exp $
  */
 package kermeta.exceptions;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,6 @@ package kermeta.exceptions;
  * @model annotation="kermeta documentation='/**\r\n * to be written #########################################\r\n \052/'"
  * @generated
  */
-public interface DynamicExpressionException extends kermeta.exceptions.Exception
-{
+public interface DynamicExpressionException extends
+		kermeta.exceptions.Exception {
 } // DynamicExpressionException

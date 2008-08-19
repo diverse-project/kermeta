@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: IOException.java,v 1.1 2008-06-24 14:23:18 cfaucher Exp $
+ * $Id: IOException.java,v 1.2 2008-08-19 13:22:55 cfaucher Exp $
  */
 package kermeta.exceptions;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,5 @@ package kermeta.exceptions;
  * @model annotation="kermeta documentation='/** an interaction with the underlying system failed \052/'"
  * @generated
  */
-public interface IOException extends kermeta.exceptions.Exception
-{
+public interface IOException extends kermeta.exceptions.Exception {
 } // IOException

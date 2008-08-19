@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: InvalidTestCaseNameException.java,v 1.1 2008-06-24 14:23:16 cfaucher Exp $
+ * $Id: InvalidTestCaseNameException.java,v 1.2 2008-08-19 13:22:55 cfaucher Exp $
  */
 package kermeta.kunit;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,6 @@ package kermeta.kunit;
  * @model annotation="kermeta documentation='/**\r\n * This exception is rose if there is a problem on the name of the test method\r\n \052/'"
  * @generated
  */
-public interface InvalidTestCaseNameException extends kermeta.exceptions.Exception
-{
+public interface InvalidTestCaseNameException extends
+		kermeta.exceptions.Exception {
 } // InvalidTestCaseNameException

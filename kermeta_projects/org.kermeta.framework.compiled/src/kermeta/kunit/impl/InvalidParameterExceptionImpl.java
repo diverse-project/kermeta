@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: InvalidParameterExceptionImpl.java,v 1.1 2008-06-24 14:23:35 cfaucher Exp $
+ * $Id: InvalidParameterExceptionImpl.java,v 1.2 2008-08-19 13:23:02 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -21,27 +22,25 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class InvalidParameterExceptionImpl extends ExceptionImpl implements InvalidParameterException
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected InvalidParameterExceptionImpl()
-  {
-    super();
-  }
+public class InvalidParameterExceptionImpl extends ExceptionImpl implements
+		InvalidParameterException {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InvalidParameterExceptionImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return KunitPackage.Literals.INVALID_PARAMETER_EXCEPTION;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return KunitPackage.Literals.INVALID_PARAMETER_EXCEPTION;
+	}
 
 } //InvalidParameterExceptionImpl

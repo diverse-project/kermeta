@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: LiteralImpl.java,v 1.1 2008-06-24 14:23:30 cfaucher Exp $
+ * $Id: LiteralImpl.java,v 1.2 2008-08-19 13:22:59 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -19,27 +20,24 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class LiteralImpl extends ExpressionImpl implements Literal
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected LiteralImpl()
-  {
-    super();
-  }
+public abstract class LiteralImpl extends ExpressionImpl implements Literal {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LiteralImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return BehaviorPackage.Literals.LITERAL;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.LITERAL;
+	}
 
 } //LiteralImpl

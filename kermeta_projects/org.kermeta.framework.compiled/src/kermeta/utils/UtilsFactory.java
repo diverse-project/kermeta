@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: UtilsFactory.java,v 1.1 2008-06-24 14:23:17 cfaucher Exp $
+ * $Id: UtilsFactory.java,v 1.2 2008-08-19 13:22:55 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -15,50 +16,49 @@ import org.eclipse.emf.ecore.EFactory;
  * @see kermeta.utils.UtilsPackage
  * @generated
  */
-public interface UtilsFactory extends EFactory
-{
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  UtilsFactory eINSTANCE = kermeta.utils.impl.UtilsFactoryImpl.init();
+public interface UtilsFactory extends EFactory {
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	UtilsFactory eINSTANCE = kermeta.utils.impl.UtilsFactoryImpl.init();
 
-  /**
-   * Returns a new object of class '<em>String Buffer</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>String Buffer</em>'.
-   * @generated
-   */
-  kermeta.utils.StringBuffer createStringBuffer();
+	/**
+	 * Returns a new object of class '<em>Stack</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stack</em>'.
+	 * @generated
+	 */
+	<G> Stack<G> createStack();
 
-  /**
-   * Returns a new object of class '<em>Hashtable</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Hashtable</em>'.
-   * @generated
-   */
-  <K, V> Hashtable<K, V> createHashtable();
+	/**
+	 * Returns a new object of class '<em>String Buffer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String Buffer</em>'.
+	 * @generated
+	 */
+	kermeta.utils.StringBuffer createStringBuffer();
 
-  /**
-   * Returns a new object of class '<em>Stack</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Stack</em>'.
-   * @generated
-   */
-  <G> Stack<G> createStack();
+	/**
+	 * Returns a new object of class '<em>Hashtable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Hashtable</em>'.
+	 * @generated
+	 */
+	<K, V> Hashtable<K, V> createHashtable();
 
-  /**
-   * Returns the package supported by this factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the package supported by this factory.
-   * @generated
-   */
-  UtilsPackage getUtilsPackage();
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
+	UtilsPackage getUtilsPackage();
 
 } //UtilsFactory

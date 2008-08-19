@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: Assignment.java,v 1.1 2008-06-24 14:23:29 cfaucher Exp $
+ * $Id: Assignment.java,v 1.2 2008-08-19 13:22:59 cfaucher Exp $
  */
 package kermeta.language.behavior;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +16,7 @@ package kermeta.language.behavior;
  * <ul>
  *   <li>{@link kermeta.language.behavior.Assignment#getValue <em>Value</em>}</li>
  *   <li>{@link kermeta.language.behavior.Assignment#getTarget <em>Target</em>}</li>
- *   <li>{@link kermeta.language.behavior.Assignment#isIsCast <em>Is Cast</em>}</li>
+ *   <li>{@link kermeta.language.behavior.Assignment#getIsCast <em>Is Cast</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,87 +24,86 @@ package kermeta.language.behavior;
  * @model annotation="kermeta documentation='Assignment is the model-element representation of the assignment statement <code>x := y</code>\n<img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png\"/>'"
  * @generated
  */
-public interface Assignment extends Expression
-{
-  /**
-   * Returns the value of the '<em><b>Value</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(Expression)
-   * @see kermeta.language.behavior.BehaviorPackage#getAssignment_Value()
-   * @model containment="true" required="true"
-   *        annotation="kermeta documentation='Value to be assigned, as a KerMeta expression'"
-   * @generated
-   */
-  Expression getValue();
+public interface Assignment extends Expression {
+	/**
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Value</em>' containment reference.
+	 * @see #setValue(Expression)
+	 * @see kermeta.language.behavior.BehaviorPackage#getAssignment_Value()
+	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta documentation='Value to be assigned, as a KerMeta expression'"
+	 * @generated
+	 */
+	Expression getValue();
 
-  /**
-   * Sets the value of the '{@link kermeta.language.behavior.Assignment#getValue <em>Value</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' containment reference.
-   * @see #getValue()
-   * @generated
-   */
-  void setValue(Expression value);
+	/**
+	 * Sets the value of the '{@link kermeta.language.behavior.Assignment#getValue <em>Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' containment reference.
+	 * @see #getValue()
+	 * @generated
+	 */
+	void setValue(Expression value);
 
-  /**
-   * Returns the value of the '<em><b>Target</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Target</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Target</em>' containment reference.
-   * @see #setTarget(CallExpression)
-   * @see kermeta.language.behavior.BehaviorPackage#getAssignment_Target()
-   * @model containment="true" required="true"
-   *        annotation="kermeta documentation='Target of the assignment, as a CallExpression'"
-   * @generated
-   */
-  CallExpression getTarget();
+	/**
+	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Target</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Target</em>' containment reference.
+	 * @see #setTarget(CallExpression)
+	 * @see kermeta.language.behavior.BehaviorPackage#getAssignment_Target()
+	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta documentation='Target of the assignment, as a CallExpression'"
+	 * @generated
+	 */
+	CallExpression getTarget();
 
-  /**
-   * Sets the value of the '{@link kermeta.language.behavior.Assignment#getTarget <em>Target</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Target</em>' containment reference.
-   * @see #getTarget()
-   * @generated
-   */
-  void setTarget(CallExpression value);
+	/**
+	 * Sets the value of the '{@link kermeta.language.behavior.Assignment#getTarget <em>Target</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target</em>' containment reference.
+	 * @see #getTarget()
+	 * @generated
+	 */
+	void setTarget(CallExpression value);
 
-  /**
-   * Returns the value of the '<em><b>Is Cast</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Is Cast</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Is Cast</em>' attribute.
-   * @see #setIsCast(boolean)
-   * @see kermeta.language.behavior.BehaviorPackage#getAssignment_IsCast()
-   * @model dataType="kermeta.standard.Boolean"
-   *        annotation="kermeta documentation='Boolean stating whether current assignment corresponds to a cast operation '"
-   * @generated
-   */
-  boolean isIsCast();
+	/**
+	 * Returns the value of the '<em><b>Is Cast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Cast</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Cast</em>' attribute.
+	 * @see #setIsCast(Boolean)
+	 * @see kermeta.language.behavior.BehaviorPackage#getAssignment_IsCast()
+	 * @model dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta documentation='Boolean stating whether current assignment corresponds to a cast operation '"
+	 * @generated
+	 */
+	Boolean getIsCast();
 
-  /**
-   * Sets the value of the '{@link kermeta.language.behavior.Assignment#isIsCast <em>Is Cast</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Is Cast</em>' attribute.
-   * @see #isIsCast()
-   * @generated
-   */
-  void setIsCast(boolean value);
+	/**
+	 * Sets the value of the '{@link kermeta.language.behavior.Assignment#getIsCast <em>Is Cast</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Cast</em>' attribute.
+	 * @see #getIsCast()
+	 * @generated
+	 */
+	void setIsCast(Boolean value);
 
 } // Assignment

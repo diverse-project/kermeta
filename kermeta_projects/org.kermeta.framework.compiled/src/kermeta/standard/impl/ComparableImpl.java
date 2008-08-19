@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: ComparableImpl.java,v 1.1 2008-06-24 14:23:36 cfaucher Exp $
+ * $Id: ComparableImpl.java,v 1.2 2008-08-19 13:23:03 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -20,87 +21,99 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class ComparableImpl extends ObjectImpl implements kermeta.standard.Comparable
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ComparableImpl()
-  {
-    super();
-  }
+public abstract class ComparableImpl extends ObjectImpl implements
+		kermeta.standard.Comparable {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ComparableImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return StandardPackage.Literals.COMPARABLE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return StandardPackage.Literals.COMPARABLE;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isLower(kermeta.language.structure.Object other)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isLower(kermeta.language.structure.Object other) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isGreaterOrEqual(kermeta.language.structure.Object other)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+		java.lang.Boolean result = null;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public int compareTo(kermeta.language.structure.Object other)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+		result = kermeta.standard.helper.IntegerWrapper.isLower(this
+				.compareTo(other), 0);
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isLowerOrEqual(kermeta.language.structure.Object other)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+		return result;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isGreater(kermeta.language.structure.Object other)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isGreaterOrEqual(kermeta.language.structure.Object other) {
+
+		java.lang.Boolean result = null;
+
+		result = kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(this
+				.compareTo(other), 0);
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer compareTo(kermeta.language.structure.Object other) {
+		java.lang.Integer result = null;
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isLowerOrEqual(kermeta.language.structure.Object other) {
+
+		java.lang.Boolean result = null;
+
+		result = kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(this
+				.compareTo(other), 0);
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isGreater(kermeta.language.structure.Object other) {
+
+		java.lang.Boolean result = null;
+
+		result = kermeta.standard.helper.IntegerWrapper.isGreater(this
+				.compareTo(other), 0);
+
+		return result;
+
+	}
 
 } //ComparableImpl

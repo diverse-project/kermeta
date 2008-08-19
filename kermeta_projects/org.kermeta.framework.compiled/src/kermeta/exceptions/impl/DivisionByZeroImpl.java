@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: DivisionByZeroImpl.java,v 1.1 2008-06-24 14:23:32 cfaucher Exp $
+ * $Id: DivisionByZeroImpl.java,v 1.2 2008-08-19 13:23:00 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 
@@ -19,27 +20,24 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class DivisionByZeroImpl extends ExceptionImpl implements DivisionByZero
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected DivisionByZeroImpl()
-  {
-    super();
-  }
+public class DivisionByZeroImpl extends ExceptionImpl implements DivisionByZero {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DivisionByZeroImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return ExceptionsPackage.Literals.DIVISION_BY_ZERO;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ExceptionsPackage.Literals.DIVISION_BY_ZERO;
+	}
 
 } //DivisionByZeroImpl

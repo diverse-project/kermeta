@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: TypeReference.java,v 1.1 2008-06-24 14:23:30 cfaucher Exp $
+ * $Id: TypeReference.java,v 1.2 2008-08-19 13:22:59 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -17,6 +18,5 @@ import kermeta.language.structure.MultiplicityElement;
  * @model annotation="kermeta documentation='TypeReference refers to the type used in a variable declaration'"
  * @generated
  */
-public interface TypeReference extends MultiplicityElement
-{
+public interface TypeReference extends MultiplicityElement {
 } // TypeReference

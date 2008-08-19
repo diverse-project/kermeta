@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: ModelType.java,v 1.1 2008-06-24 14:23:26 cfaucher Exp $
+ * $Id: ModelType.java,v 1.2 2008-08-19 13:22:57 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -23,39 +24,40 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="kermeta documentation='Type of a model, consisting of a set of included type definitions'"
  * @generated
  */
-public interface ModelType extends Type, TypeDefinition
-{
-  /**
-   * Returns the value of the '<em><b>Included Type Definition</b></em>' reference list.
-   * The list contents are of type {@link kermeta.language.structure.TypeDefinition}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Included Type Definition</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Included Type Definition</em>' reference list.
-   * @see kermeta.language.structure.StructurePackage#getModelType_IncludedTypeDefinition()
-   * @model annotation="kermeta documentation='To be written'"
-   * @generated
-   */
-  EList<TypeDefinition> getIncludedTypeDefinition();
+public interface ModelType extends Type, TypeDefinition {
+	/**
+	 * Returns the value of the '<em><b>Included Type Definition</b></em>' reference list.
+	 * The list contents are of type {@link kermeta.language.structure.TypeDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Included Type Definition</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Included Type Definition</em>' reference list.
+	 * @see kermeta.language.structure.StructurePackage#getModelType_IncludedTypeDefinition()
+	 * @model annotation="kermeta documentation='To be written'"
+	 * @generated
+	 */
+	EList<TypeDefinition> getIncludedTypeDefinition();
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model annotation="kermeta documentation='/**\r\n\t * To be written ##########################################\r\n\t \052/'"
-   * @generated
-   */
-  Model _new();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta documentation='/**\r\n\t * To be written ##########################################\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Model result = null;\n\n\tresult = (kermeta.language.structure.Model) org.kermeta.compil.runtime.helper.language.ModelTypeUtil.newObject(this);\n\nreturn result;\n'"
+	 * @generated
+	 */
+	Model _new();
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model dataType="kermeta.standard.Boolean"
-   *        annotation="kermeta documentation='/**\r\n\t * To be written ##########################################\r\n\t \052/'"
-   * @generated
-   */
-  boolean isModelTypeOf(Model m);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta documentation='/**\r\n\t * To be written ##########################################\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ModelTypeUtil.isModelTypeOf(this, m);\n\nreturn result;\n'"
+	 * @generated
+	 */
+	Boolean isModelTypeOf(Model m);
 
 } // ModelType

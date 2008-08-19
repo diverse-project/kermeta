@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: StandardFactory.java,v 1.1 2008-06-24 14:23:37 cfaucher Exp $
+ * $Id: StandardFactory.java,v 1.2 2008-08-19 13:23:03 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -15,104 +16,95 @@ import org.eclipse.emf.ecore.EFactory;
  * @see kermeta.standard.StandardPackage
  * @generated
  */
-public interface StandardFactory extends EFactory
-{
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  StandardFactory eINSTANCE = kermeta.standard.impl.StandardFactoryImpl.init();
+public interface StandardFactory extends EFactory {
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	StandardFactory eINSTANCE = kermeta.standard.impl.StandardFactoryImpl
+			.init();
 
-  /**
-   * Returns a new object of class '<em>Void</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Void</em>'.
-   * @generated
-   */
-  kermeta.standard.Void createVoid();
+	/**
+	 * Returns a new object of class '<em>Unknown Java Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unknown Java Object</em>'.
+	 * @generated
+	 */
+	UnknownJavaObject createUnknownJavaObject();
 
-  /**
-   * Returns a new object of class '<em>Not Comparable Exception</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Not Comparable Exception</em>'.
-   * @generated
-   */
-  NotComparableException createNotComparableException();
+	/**
+	 * Returns a new object of class '<em>Void</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Void</em>'.
+	 * @generated
+	 */
+	kermeta.standard.Void createVoid();
 
-  /**
-   * Returns a new object of class '<em>Set</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Set</em>'.
-   * @generated
-   */
-  <G> Set<G> createSet();
+	/**
+	 * Returns a new object of class '<em>Not Comparable Exception</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Not Comparable Exception</em>'.
+	 * @generated
+	 */
+	NotComparableException createNotComparableException();
 
-  /**
-   * Returns a new object of class '<em>Bag</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Bag</em>'.
-   * @generated
-   */
-  <G> Bag<G> createBag();
+	/**
+	 * Returns a new object of class '<em>Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Set</em>'.
+	 * @generated
+	 */
+	<G> Set<G> createSet();
 
-  /**
-   * Returns a new object of class '<em>Ordered Set</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Ordered Set</em>'.
-   * @generated
-   */
-  <G> OrderedSet<G> createOrderedSet();
+	/**
+	 * Returns a new object of class '<em>Bag</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Bag</em>'.
+	 * @generated
+	 */
+	<G> Bag<G> createBag();
 
-  /**
-   * Returns a new object of class '<em>Sequence</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Sequence</em>'.
-   * @generated
-   */
-  <G> Sequence<G> createSequence();
+	/**
+	 * Returns a new object of class '<em>Ordered Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ordered Set</em>'.
+	 * @generated
+	 */
+	<G> OrderedSet<G> createOrderedSet();
 
-  /**
-   * Returns a new object of class '<em>Iterator</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Iterator</em>'.
-   * @generated
-   */
-  <G> Iterator<G> createIterator();
+	/**
+	 * Returns a new object of class '<em>Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sequence</em>'.
+	 * @generated
+	 */
+	<G> Sequence<G> createSequence();
 
-  /**
-   * Returns a new object of class '<em>Unknown Java Object</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Unknown Java Object</em>'.
-   * @generated
-   */
-  UnknownJavaObject createUnknownJavaObject();
+	/**
+	 * Returns a new object of class '<em>Iterator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterator</em>'.
+	 * @generated
+	 */
+	<G> Iterator<G> createIterator();
 
-  /**
-   * Returns a new object of class '<em>Kermeta Special Types Alias</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Kermeta Special Types Alias</em>'.
-   * @generated
-   */
-  Object createKermetaSpecialTypesAlias();
-
-  /**
-   * Returns the package supported by this factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the package supported by this factory.
-   * @generated
-   */
-  StandardPackage getStandardPackage();
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
+	StandardPackage getStandardPackage();
 
 } //StandardFactory

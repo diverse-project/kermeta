@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: SummableImpl.java,v 1.1 2008-06-24 14:23:36 cfaucher Exp $
+ * $Id: SummableImpl.java,v 1.2 2008-08-19 13:23:03 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -21,39 +22,34 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class SummableImpl<G> extends ObjectImpl implements Summable<G>
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected SummableImpl()
-  {
-    super();
-  }
+public abstract class SummableImpl<G> extends ObjectImpl implements Summable<G> {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SummableImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return StandardPackage.Literals.SUMMABLE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return StandardPackage.Literals.SUMMABLE;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public G plus(G other)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public G plus(G other) {
+		G result = null;
+		return result;
+	}
 
 } //SummableImpl

@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: Raise.java,v 1.1 2008-06-24 14:23:30 cfaucher Exp $
+ * $Id: Raise.java,v 1.2 2008-08-19 13:22:59 cfaucher Exp $
  */
 package kermeta.language.behavior;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -22,33 +22,32 @@ package kermeta.language.behavior;
  * @model annotation="kermeta documentation='Refers to raise exception block'"
  * @generated
  */
-public interface Raise extends Expression
-{
-  /**
-   * Returns the value of the '<em><b>Expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Expression</em>' containment reference.
-   * @see #setExpression(Expression)
-   * @see kermeta.language.behavior.BehaviorPackage#getRaise_Expression()
-   * @model containment="true" required="true"
-   *        annotation="kermeta documentation='To be written #######################'"
-   * @generated
-   */
-  Expression getExpression();
+public interface Raise extends Expression {
+	/**
+	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Expression</em>' containment reference.
+	 * @see #setExpression(Expression)
+	 * @see kermeta.language.behavior.BehaviorPackage#getRaise_Expression()
+	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta documentation='To be written #######################'"
+	 * @generated
+	 */
+	Expression getExpression();
 
-  /**
-   * Sets the value of the '{@link kermeta.language.behavior.Raise#getExpression <em>Expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Expression</em>' containment reference.
-   * @see #getExpression()
-   * @generated
-   */
-  void setExpression(Expression value);
+	/**
+	 * Sets the value of the '{@link kermeta.language.behavior.Raise#getExpression <em>Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Expression</em>' containment reference.
+	 * @see #getExpression()
+	 * @generated
+	 */
+	void setExpression(Expression value);
 
 } // Raise

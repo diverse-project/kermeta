@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: KermetaFactory.java,v 1.1 2008-06-24 14:23:40 cfaucher Exp $
+ * $Id: KermetaFactory.java,v 1.2 2008-08-19 13:23:06 cfaucher Exp $
  */
 package kermeta;
 
@@ -15,23 +16,22 @@ import org.eclipse.emf.ecore.EFactory;
  * @see kermeta.KermetaPackage
  * @generated
  */
-public interface KermetaFactory extends EFactory
-{
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  KermetaFactory eINSTANCE = kermeta.impl.KermetaFactoryImpl.init();
+public interface KermetaFactory extends EFactory {
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	KermetaFactory eINSTANCE = kermeta.impl.KermetaFactoryImpl.init();
 
-  /**
-   * Returns the package supported by this factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the package supported by this factory.
-   * @generated
-   */
-  KermetaPackage getKermetaPackage();
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
+	KermetaPackage getKermetaPackage();
 
 } //KermetaFactory

@@ -7,10 +7,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: ecore,
- ecore.impl,
- ecore.util,
- kermeta,
+Export-Package: kermeta,
  kermeta.ecore,
  kermeta.ecore.impl,
  kermeta.ecore.util,
@@ -47,5 +44,10 @@ Export-Package: ecore,
  kermeta.utils.impl,
  kermeta.utils.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
-Eclipse-LazyStart: true
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.kermeta.compiler.runtime.configuration;visibility:=reexport,
+ org.kermeta.compiler.common;visibility:=reexport,
+ org.eclipse.emf.codegen;visibility:=reexport,
+ fr.irisa.triskell.eclipse.util;visibility:=reexport,
+ fr.irisa.triskell.kermeta.model;visibility:=reexport
+Bundle-ActivationPolicy: lazy

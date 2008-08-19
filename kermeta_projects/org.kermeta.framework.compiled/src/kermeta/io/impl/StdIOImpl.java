@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: StdIOImpl.java,v 1.1 2008-06-24 14:23:39 cfaucher Exp $
+ * $Id: StdIOImpl.java,v 1.2 2008-08-19 13:23:05 cfaucher Exp $
  */
 package kermeta.io.impl;
 
@@ -21,87 +22,124 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class StdIOImpl extends ObjectImpl implements StdIO
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected StdIOImpl()
-  {
-    super();
-  }
+public class StdIOImpl extends ObjectImpl implements StdIO {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StdIOImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return IoPackage.Literals.STD_IO;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return IoPackage.Literals.STD_IO;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void writeln(String object)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void writeln(String object) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void errorln(String object)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+		java.lang.Boolean idIfCond_1 = false;
+		idIfCond_1 = kermeta.standard.helper.StringWrapper.equals(object, null);
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void error(String object)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+		if (idIfCond_1) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void write(String object)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+			object = "<void>";
+		}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String read(String prompt)
-  {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.writeln(object);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void errorln(String object) {
+
+		java.lang.Boolean idIfCond_2 = false;
+		idIfCond_2 = kermeta.standard.helper.StringWrapper.equals(object, null);
+
+		if (idIfCond_2) {
+
+			object = "<void>";
+		}
+
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.errorln(object);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void error(String object) {
+
+		java.lang.Boolean idIfCond_3 = false;
+		idIfCond_3 = kermeta.standard.helper.StringWrapper.equals(object, null);
+
+		if (idIfCond_3) {
+
+			object = "<void>";
+		}
+
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.error(object);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void write(String object) {
+
+		java.lang.Boolean idIfCond_4 = false;
+		idIfCond_4 = kermeta.standard.helper.StringWrapper.equals(object, null);
+
+		if (idIfCond_4) {
+
+			object = "<void>";
+		}
+
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.write(object);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String read(String prompt) {
+
+		java.lang.String result = null;
+
+		java.lang.Boolean idIfCond_5 = false;
+		idIfCond_5 = kermeta.standard.helper.StringWrapper.equals(prompt, null);
+
+		if (idIfCond_5) {
+
+			prompt = "";
+		}
+
+		result = (java.lang.String) org.kermeta.compil.runtime.helper.io.StdIOUtil
+				.read(prompt);
+
+		return result;
+
+	}
 
 } //StdIOImpl

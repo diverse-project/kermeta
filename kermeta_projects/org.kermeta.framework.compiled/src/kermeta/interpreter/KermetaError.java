@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: KermetaError.java,v 1.1 2008-06-24 14:23:42 cfaucher Exp $
+ * $Id: KermetaError.java,v 1.2 2008-08-19 13:23:08 cfaucher Exp $
  */
 package kermeta.interpreter;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -23,33 +23,32 @@ package kermeta.interpreter;
  *        annotation="kermeta documentation='/**\r\n * Kermeta language error in a code written in Kermeta\r\n \052/'"
  * @generated
  */
-public interface KermetaError extends kermeta.language.structure.Object
-{
-  /**
-   * Returns the value of the '<em><b>Message</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Message</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Message</em>' attribute.
-   * @see #setMessage(String)
-   * @see kermeta.interpreter.InterpreterPackage#getKermetaError_Message()
-   * @model dataType="kermeta.standard.String"
-   *        annotation="kermeta documentation='/**\r\n\t * Error message\r\n\t \052/'"
-   * @generated
-   */
-  String getMessage();
+public interface KermetaError extends kermeta.language.structure.Object {
+	/**
+	 * Returns the value of the '<em><b>Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Message</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Message</em>' attribute.
+	 * @see #setMessage(String)
+	 * @see kermeta.interpreter.InterpreterPackage#getKermetaError_Message()
+	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta documentation='/**\r\n\t * Error message\r\n\t \052/'"
+	 * @generated
+	 */
+	String getMessage();
 
-  /**
-   * Sets the value of the '{@link kermeta.interpreter.KermetaError#getMessage <em>Message</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Message</em>' attribute.
-   * @see #getMessage()
-   * @generated
-   */
-  void setMessage(String value);
+	/**
+	 * Sets the value of the '{@link kermeta.interpreter.KermetaError#getMessage <em>Message</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Message</em>' attribute.
+	 * @see #getMessage()
+	 * @generated
+	 */
+	void setMessage(String value);
 
 } // KermetaError

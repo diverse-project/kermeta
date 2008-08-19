@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: CallValueImpl.java,v 1.1 2008-06-24 14:23:31 cfaucher Exp $
+ * $Id: CallValueImpl.java,v 1.2 2008-08-19 13:22:59 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -19,27 +20,24 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class CallValueImpl extends CallExpressionImpl implements CallValue
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected CallValueImpl()
-  {
-    super();
-  }
+public class CallValueImpl extends CallExpressionImpl implements CallValue {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CallValueImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return BehaviorPackage.Literals.CALL_VALUE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.CALL_VALUE;
+	}
 
 } //CallValueImpl

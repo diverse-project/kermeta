@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: IndexOutOfBound.java,v 1.1 2008-06-24 14:23:18 cfaucher Exp $
+ * $Id: IndexOutOfBound.java,v 1.2 2008-08-19 13:22:55 cfaucher Exp $
  */
 package kermeta.exceptions;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,5 @@ package kermeta.exceptions;
  * @model annotation="kermeta documentation='/** Occurs when trying to access out of bounds elements \052/'"
  * @generated
  */
-public interface IndexOutOfBound extends kermeta.exceptions.Exception
-{
+public interface IndexOutOfBound extends kermeta.exceptions.Exception {
 } // IndexOutOfBound

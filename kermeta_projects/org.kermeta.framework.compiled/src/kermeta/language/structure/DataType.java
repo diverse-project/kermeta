@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: DataType.java,v 1.1 2008-06-24 14:23:27 cfaucher Exp $
+ * $Id: DataType.java,v 1.2 2008-08-19 13:22:58 cfaucher Exp $
  */
 package kermeta.language.structure;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +17,5 @@ package kermeta.language.structure;
  *        annotation="kermeta documentation='Special type definition for Enumeration, PrimitiveType'"
  * @generated
  */
-public interface DataType extends Type, TypeDefinition
-{
+public interface DataType extends Type, TypeDefinition {
 } // DataType

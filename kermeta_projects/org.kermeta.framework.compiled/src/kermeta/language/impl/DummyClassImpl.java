@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: DummyClassImpl.java,v 1.1 2008-06-24 14:23:44 cfaucher Exp $
+ * $Id: DummyClassImpl.java,v 1.2 2008-08-19 13:23:10 cfaucher Exp $
  */
 package kermeta.language.impl;
 
@@ -21,27 +22,24 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class DummyClassImpl extends ObjectImpl implements DummyClass
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected DummyClassImpl()
-  {
-    super();
-  }
+public abstract class DummyClassImpl extends ObjectImpl implements DummyClass {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DummyClassImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return LanguagePackage.Literals.DUMMY_CLASS;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return LanguagePackage.Literals.DUMMY_CLASS;
+	}
 
 } //DummyClassImpl

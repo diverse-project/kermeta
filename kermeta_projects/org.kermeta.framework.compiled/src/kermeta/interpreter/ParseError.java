@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: ParseError.java,v 1.1 2008-06-24 14:23:42 cfaucher Exp $
+ * $Id: ParseError.java,v 1.2 2008-08-19 13:23:08 cfaucher Exp $
  */
 package kermeta.interpreter;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,5 @@ package kermeta.interpreter;
  * @model annotation="kermeta documentation='/**\r\n * Kermeta error for parsing problems\r\n \052/'"
  * @generated
  */
-public interface ParseError extends KermetaError
-{
+public interface ParseError extends KermetaError {
 } // ParseError

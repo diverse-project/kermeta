@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: NotComparableException.java,v 1.1 2008-06-24 14:23:36 cfaucher Exp $
+ * $Id: NotComparableException.java,v 1.2 2008-08-19 13:23:03 cfaucher Exp $
  */
 package kermeta.standard;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,5 @@ package kermeta.standard;
  * @model annotation="kermeta documentation='/**\r\n * raised when two objects are not comparable\r\n \052/'"
  * @generated
  */
-public interface NotComparableException extends kermeta.exceptions.Exception
-{
+public interface NotComparableException extends kermeta.exceptions.Exception {
 } // NotComparableException

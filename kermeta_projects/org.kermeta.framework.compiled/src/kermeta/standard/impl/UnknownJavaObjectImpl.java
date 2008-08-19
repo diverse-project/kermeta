@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: UnknownJavaObjectImpl.java,v 1.1 2008-06-24 14:23:36 cfaucher Exp $
+ * $Id: UnknownJavaObjectImpl.java,v 1.2 2008-08-19 13:23:03 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -21,27 +22,40 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class UnknownJavaObjectImpl extends ObjectImpl implements UnknownJavaObject
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected UnknownJavaObjectImpl()
-  {
-    super();
-  }
+public class UnknownJavaObjectImpl extends ObjectImpl implements
+		UnknownJavaObject {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnknownJavaObjectImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return StandardPackage.Literals.UNKNOWN_JAVA_OBJECT;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return StandardPackage.Literals.UNKNOWN_JAVA_OBJECT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String toString() {
+
+		java.lang.String result = null;
+
+		result = "toString of  UnknownJavaObject not implemented yet";
+
+		return result;
+
+	}
 
 } //UnknownJavaObjectImpl

@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: IncompatibleTypeErrorImpl.java,v 1.1 2008-06-24 14:23:33 cfaucher Exp $
+ * $Id: IncompatibleTypeErrorImpl.java,v 1.2 2008-08-19 13:23:01 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 
@@ -19,27 +20,25 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class IncompatibleTypeErrorImpl extends RuntimeErrorImpl implements IncompatibleTypeError
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected IncompatibleTypeErrorImpl()
-  {
-    super();
-  }
+public class IncompatibleTypeErrorImpl extends RuntimeErrorImpl implements
+		IncompatibleTypeError {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IncompatibleTypeErrorImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return ExceptionsPackage.Literals.INCOMPATIBLE_TYPE_ERROR;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ExceptionsPackage.Literals.INCOMPATIBLE_TYPE_ERROR;
+	}
 
 } //IncompatibleTypeErrorImpl

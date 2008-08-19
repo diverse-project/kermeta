@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.1 2008-06-24 14:23:39 cfaucher Exp $
+ * $Id: IoFactoryImpl.java,v 1.2 2008-08-19 13:23:05 cfaucher Exp $
  */
 package kermeta.io.impl;
 
@@ -21,101 +22,92 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class IoFactoryImpl extends EFactoryImpl implements IoFactory
-{
-  /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static IoFactory init()
-  {
-    try
-    {
-      IoFactory theIoFactory = (IoFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/io"); 
-      if (theIoFactory != null)
-      {
-        return theIoFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new IoFactoryImpl();
-  }
+public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static IoFactory init() {
+		try {
+			IoFactory theIoFactory = (IoFactory) EPackage.Registry.INSTANCE
+					.getEFactory("http://www.kermeta.org/kermeta/io/kermeta_temp_uri");
+			if (theIoFactory != null) {
+				return theIoFactory;
+			}
+		} catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new IoFactoryImpl();
+	}
 
-  /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public IoFactoryImpl()
-  {
-    super();
-  }
+	/**
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IoFactoryImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EObject create(EClass eClass)
-  {
-    switch (eClass.getClassifierID())
-    {
-      case IoPackage.FILE_IO: return createFileIO();
-      case IoPackage.STD_IO: return createStdIO();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+		case IoPackage.STD_IO:
+			return createStdIO();
+		case IoPackage.FILE_IO:
+			return createFileIO();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FileIO createFileIO()
-  {
-    FileIOImpl fileIO = new FileIOImpl();
-    return fileIO;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StdIO createStdIO() {
+		StdIOImpl stdIO = new StdIOImpl();
+		return stdIO;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StdIO createStdIO()
-  {
-    StdIOImpl stdIO = new StdIOImpl();
-    return stdIO;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FileIO createFileIO() {
+		FileIOImpl fileIO = new FileIOImpl();
+		return fileIO;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public IoPackage getIoPackage()
-  {
-    return (IoPackage)getEPackage();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IoPackage getIoPackage() {
+		return (IoPackage) getEPackage();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
-  @Deprecated
-  public static IoPackage getPackage()
-  {
-    return IoPackage.eINSTANCE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static IoPackage getPackage() {
+		return IoPackage.eINSTANCE;
+	}
 
 } //IoFactoryImpl

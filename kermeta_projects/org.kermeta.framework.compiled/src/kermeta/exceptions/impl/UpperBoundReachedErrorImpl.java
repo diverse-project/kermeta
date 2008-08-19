@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: UpperBoundReachedErrorImpl.java,v 1.1 2008-06-24 14:23:32 cfaucher Exp $
+ * $Id: UpperBoundReachedErrorImpl.java,v 1.2 2008-08-19 13:23:00 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 
@@ -19,27 +20,25 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class UpperBoundReachedErrorImpl extends RuntimeErrorImpl implements UpperBoundReachedError
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected UpperBoundReachedErrorImpl()
-  {
-    super();
-  }
+public class UpperBoundReachedErrorImpl extends RuntimeErrorImpl implements
+		UpperBoundReachedError {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UpperBoundReachedErrorImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return ExceptionsPackage.Literals.UPPER_BOUND_REACHED_ERROR;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ExceptionsPackage.Literals.UPPER_BOUND_REACHED_ERROR;
+	}
 
 } //UpperBoundReachedErrorImpl

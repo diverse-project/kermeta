@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: ObjectTypeVariable.java,v 1.1 2008-06-24 14:23:26 cfaucher Exp $
+ * $Id: ObjectTypeVariable.java,v 1.2 2008-08-19 13:22:57 cfaucher Exp $
  */
 package kermeta.language.structure;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,5 @@ package kermeta.language.structure;
  * @model annotation="kermeta documentation='To be written'"
  * @generated
  */
-public interface ObjectTypeVariable extends TypeVariable
-{
+public interface ObjectTypeVariable extends TypeVariable {
 } // ObjectTypeVariable

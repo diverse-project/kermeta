@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: ResourceUnconformityException.java,v 1.1 2008-06-24 14:23:17 cfaucher Exp $
+ * $Id: ResourceUnconformityException.java,v 1.2 2008-08-19 13:22:55 cfaucher Exp $
  */
 package kermeta.exceptions;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,6 @@ package kermeta.exceptions;
  * @model annotation="kermeta documentation='/** Raised when user tries to add an object that is not conform to the metamodel \052/'"
  * @generated
  */
-public interface ResourceUnconformityException extends kermeta.exceptions.Exception
-{
+public interface ResourceUnconformityException extends
+		kermeta.exceptions.Exception {
 } // ResourceUnconformityException

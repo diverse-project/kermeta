@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: FunctionType.java,v 1.1 2008-06-24 14:23:27 cfaucher Exp $
+ * $Id: FunctionType.java,v 1.2 2008-08-19 13:22:58 cfaucher Exp $
  */
 package kermeta.language.structure;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -24,58 +24,57 @@ package kermeta.language.structure;
  *        annotation="kermeta.inv resultType=''"
  * @generated
  */
-public interface FunctionType extends TypeContainer, Type
-{
-  /**
-   * Returns the value of the '<em><b>Left</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Left</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Left</em>' reference.
-   * @see #setLeft(Type)
-   * @see kermeta.language.structure.StructurePackage#getFunctionType_Left()
-   * @model annotation="kermeta documentation='Parameters of the function (a ProductType for multiple parameters)'"
-   * @generated
-   */
-  Type getLeft();
+public interface FunctionType extends TypeContainer, Type {
+	/**
+	 * Returns the value of the '<em><b>Left</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Left</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Left</em>' reference.
+	 * @see #setLeft(Type)
+	 * @see kermeta.language.structure.StructurePackage#getFunctionType_Left()
+	 * @model annotation="kermeta documentation='Parameters of the function (a ProductType for multiple parameters)'"
+	 * @generated
+	 */
+	Type getLeft();
 
-  /**
-   * Sets the value of the '{@link kermeta.language.structure.FunctionType#getLeft <em>Left</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Left</em>' reference.
-   * @see #getLeft()
-   * @generated
-   */
-  void setLeft(Type value);
+	/**
+	 * Sets the value of the '{@link kermeta.language.structure.FunctionType#getLeft <em>Left</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Left</em>' reference.
+	 * @see #getLeft()
+	 * @generated
+	 */
+	void setLeft(Type value);
 
-  /**
-   * Returns the value of the '<em><b>Right</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Right</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Right</em>' reference.
-   * @see #setRight(Type)
-   * @see kermeta.language.structure.StructurePackage#getFunctionType_Right()
-   * @model annotation="kermeta documentation='Result type of the function'"
-   * @generated
-   */
-  Type getRight();
+	/**
+	 * Returns the value of the '<em><b>Right</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Right</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Right</em>' reference.
+	 * @see #setRight(Type)
+	 * @see kermeta.language.structure.StructurePackage#getFunctionType_Right()
+	 * @model annotation="kermeta documentation='Result type of the function'"
+	 * @generated
+	 */
+	Type getRight();
 
-  /**
-   * Sets the value of the '{@link kermeta.language.structure.FunctionType#getRight <em>Right</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Right</em>' reference.
-   * @see #getRight()
-   * @generated
-   */
-  void setRight(Type value);
+	/**
+	 * Sets the value of the '{@link kermeta.language.structure.FunctionType#getRight <em>Right</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Right</em>' reference.
+	 * @see #getRight()
+	 * @generated
+	 */
+	void setRight(Type value);
 
 } // FunctionType

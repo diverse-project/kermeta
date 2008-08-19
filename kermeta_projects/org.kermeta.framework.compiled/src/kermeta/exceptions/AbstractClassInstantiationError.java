@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: AbstractClassInstantiationError.java,v 1.1 2008-06-24 14:23:19 cfaucher Exp $
+ * $Id: AbstractClassInstantiationError.java,v 1.2 2008-08-19 13:22:55 cfaucher Exp $
  */
 package kermeta.exceptions;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,5 @@ package kermeta.exceptions;
  * @model annotation="kermeta documentation='/**\r\n * Creation on an abstract class. Usually this is detected by the type-checker. The only\r\n * case where this happens is when instantiating a type variable, whose bound type turns\r\n * out to be abstract.\r\n \052/'"
  * @generated
  */
-public interface AbstractClassInstantiationError extends RuntimeError
-{
+public interface AbstractClassInstantiationError extends RuntimeError {
 } // AbstractClassInstantiationError

@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: PersistenceFactory.java,v 1.1 2008-06-24 14:23:39 cfaucher Exp $
+ * $Id: PersistenceFactory.java,v 1.2 2008-08-19 13:23:05 cfaucher Exp $
  */
 package kermeta.persistence;
 
@@ -15,68 +16,50 @@ import org.eclipse.emf.ecore.EFactory;
  * @see kermeta.persistence.PersistencePackage
  * @generated
  */
-public interface PersistenceFactory extends EFactory
-{
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  PersistenceFactory eINSTANCE = kermeta.persistence.impl.PersistenceFactoryImpl.init();
+public interface PersistenceFactory extends EFactory {
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	PersistenceFactory eINSTANCE = kermeta.persistence.impl.PersistenceFactoryImpl
+			.init();
 
-  /**
-   * Returns a new object of class '<em>EMF Resource</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EMF Resource</em>'.
-   * @generated
-   */
-  EMFResource createEMFResource();
+	/**
+	 * Returns a new object of class '<em>EMF Resource</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>EMF Resource</em>'.
+	 * @generated
+	 */
+	EMFResource createEMFResource();
 
-  /**
-   * Returns a new object of class '<em>KM Resource</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>KM Resource</em>'.
-   * @generated
-   */
-  KMResource createKMResource();
+	/**
+	 * Returns a new object of class '<em>Dangling Diagnostic</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dangling Diagnostic</em>'.
+	 * @generated
+	 */
+	DanglingDiagnostic createDanglingDiagnostic();
 
-  /**
-   * Returns a new object of class '<em>Dangling Diagnostic</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Dangling Diagnostic</em>'.
-   * @generated
-   */
-  DanglingDiagnostic createDanglingDiagnostic();
+	/**
+	 * Returns a new object of class '<em>EMF Repository</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>EMF Repository</em>'.
+	 * @generated
+	 */
+	EMFRepository createEMFRepository();
 
-  /**
-   * Returns a new object of class '<em>EMF Repository</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EMF Repository</em>'.
-   * @generated
-   */
-  EMFRepository createEMFRepository();
-
-  /**
-   * Returns a new object of class '<em>KM Repository</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>KM Repository</em>'.
-   * @generated
-   */
-  KMRepository createKMRepository();
-
-  /**
-   * Returns the package supported by this factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the package supported by this factory.
-   * @generated
-   */
-  PersistencePackage getPersistencePackage();
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
+	PersistencePackage getPersistencePackage();
 
 } //PersistenceFactory

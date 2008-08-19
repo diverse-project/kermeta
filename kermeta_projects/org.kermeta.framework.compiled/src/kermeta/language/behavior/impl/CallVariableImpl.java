@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: CallVariableImpl.java,v 1.1 2008-06-24 14:23:31 cfaucher Exp $
+ * $Id: CallVariableImpl.java,v 1.2 2008-08-19 13:22:59 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -21,159 +22,150 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.behavior.impl.CallVariableImpl#isIsAtpre <em>Is Atpre</em>}</li>
+ *   <li>{@link kermeta.language.behavior.impl.CallVariableImpl#getIsAtpre <em>Is Atpre</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CallVariableImpl extends CallExpressionImpl implements CallVariable
-{
-  /**
-   * The default value of the '{@link #isIsAtpre() <em>Is Atpre</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isIsAtpre()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean IS_ATPRE_EDEFAULT = false;
+public class CallVariableImpl extends CallExpressionImpl implements
+		CallVariable {
+	/**
+	 * The default value of the '{@link #getIsAtpre() <em>Is Atpre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAtpre()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_ATPRE_EDEFAULT = null;
 
-  /**
-   * The cached value of the '{@link #isIsAtpre() <em>Is Atpre</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isIsAtpre()
-   * @generated
-   * @ordered
-   */
-  protected boolean isAtpre = IS_ATPRE_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getIsAtpre() <em>Is Atpre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAtpre()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isAtpre = IS_ATPRE_EDEFAULT;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected CallVariableImpl()
-  {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CallVariableImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return BehaviorPackage.Literals.CALL_VARIABLE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.CALL_VARIABLE;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isIsAtpre()
-  {
-    return isAtpre;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIsAtpre() {
+		return isAtpre;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setIsAtpre(boolean newIsAtpre)
-  {
-    boolean oldIsAtpre = isAtpre;
-    isAtpre = newIsAtpre;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_VARIABLE__IS_ATPRE, oldIsAtpre, isAtpre));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsAtpre(Boolean newIsAtpre) {
+		Boolean oldIsAtpre = isAtpre;
+		isAtpre = newIsAtpre;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					BehaviorPackage.CALL_VARIABLE__IS_ATPRE, oldIsAtpre,
+					isAtpre));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
-        return isIsAtpre() ? Boolean.TRUE : Boolean.FALSE;
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
+			return getIsAtpre();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
-        setIsAtpre(((Boolean)newValue).booleanValue());
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
+			setIsAtpre((Boolean) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
-        setIsAtpre(IS_ATPRE_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
+			setIsAtpre(IS_ATPRE_EDEFAULT);
+			return;
+		}
+		super.eUnset(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
-        return isAtpre != IS_ATPRE_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
+			return IS_ATPRE_EDEFAULT == null ? isAtpre != null
+					: !IS_ATPRE_EDEFAULT.equals(isAtpre);
+		}
+		return super.eIsSet(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (isAtpre: ");
-    result.append(isAtpre);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (isAtpre: ");
+		result.append(isAtpre);
+		result.append(')');
+		return result.toString();
+	}
 
 } //CallVariableImpl

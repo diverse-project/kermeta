@@ -1,10 +1,10 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: FileNotFoundException.java,v 1.1 2008-06-24 14:23:18 cfaucher Exp $
+ * $Id: FileNotFoundException.java,v 1.2 2008-08-19 13:22:55 cfaucher Exp $
  */
 package kermeta.exceptions;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +16,5 @@ package kermeta.exceptions;
  * @model annotation="kermeta documentation='/** the file has not be found on the underlying system \052/'"
  * @generated
  */
-public interface FileNotFoundException extends IOException
-{
+public interface FileNotFoundException extends IOException {
 } // FileNotFoundException

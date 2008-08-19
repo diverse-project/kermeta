@@ -1,7 +1,8 @@
 /**
- * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
+ * <copyright>
+ * </copyright>
  *
- * $Id: UtilsFactoryImpl.java,v 1.1 2008-06-24 14:23:28 cfaucher Exp $
+ * $Id: UtilsFactoryImpl.java,v 1.2 2008-08-19 13:22:58 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -24,113 +25,104 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class UtilsFactoryImpl extends EFactoryImpl implements UtilsFactory
-{
-  /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static UtilsFactory init()
-  {
-    try
-    {
-      UtilsFactory theUtilsFactory = (UtilsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/utils"); 
-      if (theUtilsFactory != null)
-      {
-        return theUtilsFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new UtilsFactoryImpl();
-  }
+public class UtilsFactoryImpl extends EFactoryImpl implements UtilsFactory {
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static UtilsFactory init() {
+		try {
+			UtilsFactory theUtilsFactory = (UtilsFactory) EPackage.Registry.INSTANCE
+					.getEFactory("http://www.kermeta.org/kermeta/utils/kermeta_temp_uri");
+			if (theUtilsFactory != null) {
+				return theUtilsFactory;
+			}
+		} catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new UtilsFactoryImpl();
+	}
 
-  /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public UtilsFactoryImpl()
-  {
-    super();
-  }
+	/**
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UtilsFactoryImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EObject create(EClass eClass)
-  {
-    switch (eClass.getClassifierID())
-    {
-      case UtilsPackage.STRING_BUFFER: return createStringBuffer();
-      case UtilsPackage.HASHTABLE: return createHashtable();
-      case UtilsPackage.STACK: return createStack();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+		case UtilsPackage.STACK:
+			return createStack();
+		case UtilsPackage.STRING_BUFFER:
+			return createStringBuffer();
+		case UtilsPackage.HASHTABLE:
+			return createHashtable();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public kermeta.utils.StringBuffer createStringBuffer()
-  {
-    StringBufferImpl stringBuffer = new StringBufferImpl();
-    return stringBuffer;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public <G> Stack<G> createStack() {
+		StackImpl<G> stack = new StackImpl<G>();
+		return stack;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public <K, V> Hashtable<K, V> createHashtable()
-  {
-    HashtableImpl<K, V> hashtable = new HashtableImpl<K, V>();
-    return hashtable;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public kermeta.utils.StringBuffer createStringBuffer() {
+		StringBufferImpl stringBuffer = new StringBufferImpl();
+		return stringBuffer;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public <G> Stack<G> createStack()
-  {
-    StackImpl<G> stack = new StackImpl<G>();
-    return stack;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public <K, V> Hashtable<K, V> createHashtable() {
+		HashtableImpl<K, V> hashtable = new HashtableImpl<K, V>();
+		return hashtable;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public UtilsPackage getUtilsPackage()
-  {
-    return (UtilsPackage)getEPackage();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UtilsPackage getUtilsPackage() {
+		return (UtilsPackage) getEPackage();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
-  @Deprecated
-  public static UtilsPackage getPackage()
-  {
-    return UtilsPackage.eINSTANCE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static UtilsPackage getPackage() {
+		return UtilsPackage.eINSTANCE;
+	}
 
 } //UtilsFactoryImpl
