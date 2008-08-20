@@ -60,8 +60,7 @@ public class RealUtil {
 	}
 
 	public static Class getMetaClass(Double self) {
-		// TODO Auto-generated method stub
-		return null;
+		return org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("java.lang.Double");
 	}
 
 	public static Boolean equals(Double real, Integer other) {

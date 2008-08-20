@@ -80,8 +80,7 @@ public class IntegerUtil {
 	}
 
 	public static Class getMetaClass(Integer self) {
-		// TODO Auto-generated method stub
-		return null;
+		return org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("java.lang.Integer");
 	}
 
 }

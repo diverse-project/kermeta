@@ -114,8 +114,7 @@ public class StringUtil {
 	}
 
 	public static Class getMetaClass(String self) {
-		// TODO Auto-generated method stub
-		return null;
+		return org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("java.lang.String");
 	}
 	
 }

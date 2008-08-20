@@ -29,13 +29,11 @@ public class BooleanUtil {
 		return !self;
 	}
 	public static Boolean isVoid(Boolean result) {
-		// TODO Auto-generated method stub
-		return null;
+		return result == null;
 	}
 
 	public static Class getMetaClass(Boolean self) {
-		// TODO Auto-generated method stub
-		return null;
+		return org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("java.lang.Boolean");
 	}
 	
 }
