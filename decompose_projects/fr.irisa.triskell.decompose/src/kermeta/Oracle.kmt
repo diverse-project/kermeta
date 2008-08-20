@@ -1,0 +1,15 @@
+/* $Id: Oracle.kmt,v 1.1 2008-08-20 11:06:01 fmunoz Exp $ 
+ * Creation : August 19, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            freddy
+ */
+package decomposition;
+
+
+require kermeta
+class Oracle
+{
+	
+}

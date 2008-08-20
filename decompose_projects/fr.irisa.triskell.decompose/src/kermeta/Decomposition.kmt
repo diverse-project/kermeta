@@ -1,4 +1,4 @@
-/* $Id: Decomposition.kmt,v 1.9 2008-08-19 16:39:02 fmunoz Exp $ 
+/* $Id: Decomposition.kmt,v 1.10 2008-08-20 11:06:01 fmunoz Exp $ 
  * Creation : August 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -147,10 +147,10 @@ class Decomposer {
 	end
 	
 	operation initializePlans(plan:DecompositionPlan,element:Mergeable,superElement:Mergeable,currentOp:OperationType,direction:Boolean):Void is do
-		if element.getMetaClass().toString == "EClass" then
+		/*if element.getMetaClass().toString == "EClass" then
 			var cl:ecore::EClass cl?=element
 			stdio.writeln("classname: "+cl.name+"->"+element.toString)
-		end
+		end*/
 		var atomic:AtomicPlanPart atomic:=AtomicPlanPart.new
 		atomic.element:=element.toString
 		atomic.operationType:=OperationType.CLONE
@@ -258,11 +258,11 @@ class Decomposer {
 		self.currentPlan.print()
 		
 		stdio.writeln("processing element: "+element.toString)
-		if element.getMetaClass().toString == "EClass" then
+		/*if element.getMetaClass().toString == "EClass" then
 				var cl:ecore::EClass cl?=element
 				stdio.writeln("cloning classname: "+cl.name+"->"+element.toString)
 			end
-					
+			*/		
 		if self.currentPlan.atomicPlans.getValue(element.toString).operationType==OperationType.ONESIDE then
 			self.side(parent,element,iproperty,self.currentPlan.atomicPlans.getValue(element.toString).side)
 		else
@@ -273,12 +273,12 @@ class Decomposer {
 	operation clone(parent:Mergeable[0..*],element:Mergeable,iproperty:Property[0..*]):Void is do
 		if not self.currentPlan.processed.contains(element)  then
 			var isDependable: Boolean init false
-			if element.getMetaClass().toString == "EClass" then
+			/*if element.getMetaClass().toString == "EClass" then
 				var cl:ecore::EClass cl?=element
 				parent.each{p|
 					stdio.writeln("cloning classname: "+cl.name+"->"+element.toString+" in: "+p.toString)
 				}
-			end
+			end*/
 			if self.dependants.contains(element.getMetaClass.classDefinition.name) then
 				stdio.writeln("dependable: "+element.getMetaClass.classDefinition.toString)
 				isDependable:=true
@@ -487,12 +487,12 @@ class Decomposer {
 		if not self.currentPlan.processed.contains(element)  then
 			stdio.writeln("siding element: "+element.toString)
 			var newElement:Mergeable newElement?=element.getMetaClass().new
-			if element.getMetaClass().toString == "EClass" then
+			/*if element.getMetaClass().toString == "EClass" then
 				var cl:ecore::EClass cl?=element
 				parent.each{p|
 					stdio.writeln("siding classname: "+cl.name+"->"+element.toString+" in: "+p.toString+" nL: "+newElement.toString)
 				}
-			end
+			end*/
 //			stdio.writeln("siding element: "+element.toString+" into "+newElement.toString)
 			
 			var trtmp:TriContainer init TriContainer.new

@@ -1,0 +1,62 @@
+package decomposition;
+require kermeta
+require "kermeta"
+using kermeta::standard
+using kermeta::utils
+using kermeta::standard
+class KomposeScriptAll{
+operation generate(scripts:Collection<String>,numeralTop:Integer):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("@mainClass \"decompose::Test::all::Main\"\n@mainOperation \"main\"\n\npackage decompose::Test::all;\nrequire kermeta\n")
+scripts.each{script|
+_res.append("require \"")
+_res.append(script)
+_res.append("\"\n")
+}
+_res.append("\n\n")
+
+from var i : Integer init 0
+until i == numeralTop
+loop
+
+_res.append("using decompose::Test::n")
+_res.append(i.toString)
+_res.append("\n")
+ 
+i := i + 1
+end
+
+_res.append("\n\nclass Main\n{\n\toperation main() : Void is do \n")
+
+		from var i : Integer init 0
+		until i == numeralTop
+		loop
+		
+_res.append("\t\tvar main")
+_res.append(i.toString)
+_res.append(":decompose::Test::n")
+_res.append(i.toString)
+_res.append("::Main init decompose::Test::n")
+_res.append(i.toString)
+_res.append("::Main.new\n")
+ 
+		i := i + 1
+		end
+		
+_res.append("")
+
+		from var i : Integer init 0
+		until i == numeralTop
+		loop
+		
+_res.append("\t\tmain")
+_res.append(i.toString)
+_res.append(".main()\n")
+ 
+		i := i + 1
+		end
+		
+_res.append("\tend\n}")
+result := _res.toString
+end
+}

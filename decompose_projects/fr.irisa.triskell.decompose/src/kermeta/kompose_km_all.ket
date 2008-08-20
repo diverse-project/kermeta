@@ -1,0 +1,54 @@
+<%@ket
+package="decomposition"
+require="kermeta"
+using="kermeta::standard"
+class="KomposeScriptAll"
+parameters="scripts:Collection<String>,numeralTop:Integer"
+%>
+@mainClass "decompose::Test::all::Main"
+@mainOperation "main"
+
+package decompose::Test::all;
+require kermeta
+<%scripts.each{script|%>
+require "<%=script%>"
+<%}%>
+
+
+<%
+from var i : Integer init 0
+until i == numeralTop
+loop
+%>
+using decompose::Test::n<%=i.toString%>
+<% 
+i := i + 1
+end
+%>
+
+
+class Main
+{
+	operation main() : Void is do 
+		<%
+		from var i : Integer init 0
+		until i == numeralTop
+		loop
+		%>
+		var main<%=i.toString%>:decompose::Test::n<%=i.toString%>::Main init decompose::Test::n<%=i.toString%>::Main.new
+		<% 
+		i := i + 1
+		end
+		%>
+				<%
+		from var i : Integer init 0
+		until i == numeralTop
+		loop
+		%>
+		main<%=i.toString%>.main()
+		<% 
+		i := i + 1
+		end
+		%>
+	end
+}

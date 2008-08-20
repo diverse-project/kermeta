@@ -5,11 +5,11 @@ using="kermeta::standard"
 class="KomposeScriptBridge"
 parameters="numeral:Integer,location:String"
 %>
-@mainClass "decomposeTest<%=numeral.toString%>::Main"
+@mainClass "decompose::Test::n<%=numeral.toString%>::Main"
 @mainOperation "main"
 
 
-package decomposeTest<%=numeral.toString%>;
+package decompose::Test::n<%=numeral.toString%>;
 require kermeta
 require "platform:/resource/org.kermeta.kompose.specialization.ecore.uno/kermeta/Ecore.kmt"
 
