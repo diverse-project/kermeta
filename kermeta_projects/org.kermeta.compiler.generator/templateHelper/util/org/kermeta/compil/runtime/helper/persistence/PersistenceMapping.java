@@ -63,6 +63,7 @@ final public class PersistenceMapping {
 	/**
 	 * 
 	 * @param file
+	 * @deprecated
 	 */
 	static public void initialize(File file) {
 		if ( file.isDirectory() ) {
