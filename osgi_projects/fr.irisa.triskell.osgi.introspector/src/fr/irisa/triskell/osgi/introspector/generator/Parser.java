@@ -72,31 +72,39 @@ public class Parser {
 
 			return this.translation.isValidTranslation();
 		} catch (ParserException e) {
-			// must not appear
-			util
-					.log(
-							Level.ERROR,
-							"There is an unknown error when we try to parser the MANIFEST file on the bundle "
-									+ bundle.getLocation() + ".", bundle);
-			e.printStackTrace();
+			StringBuffer message = new StringBuffer(manifestContent.split("\n")[e.getToken().getLine()]);
+			message.append("\n");
+			for (int i = 0; i < e.getToken().getPos(); i++) {
+				message.append(" ");
+			}
+			for (int i = 0; i < e.getToken().getText().length(); i++) {
+				message.append("^");
+			}
+			util.log(Level.ERROR,
+							"There is a error when we try to parse the MANIFEST file on the bundle "
+									+ bundle.getLocation() + ".\n" + message, bundle);
 			return false;
 		} catch (LexerException e) {
-			// must not appear
-			util
-					.log(
-							Level.ERROR,
+			int line = Integer.parseInt(e.getMessage().substring(1, 1));
+			int pos = Integer.parseInt(e.getMessage().substring(3, 3));
+			String text = e.getMessage().substring(e.getMessage().indexOf("unknown token:"));
+			StringBuffer message = new StringBuffer(manifestContent.split("\n")[line]);
+			message.append("\n");
+			for (int i = 0; i < pos; i++) {
+				message.append(" ");
+			}
+			for (int i = 0; i < text.length(); i++) {
+				message.append("^");
+			}
+			util.log(Level.ERROR,
 							"There is an unknown error when we try to parser the MANIFEST file on the bundle "
 									+ bundle.getLocation() + ".", bundle);
-			e.printStackTrace();
 			return false;
 		} catch (IOException e) {
 			// must not appear
-			util
-					.log(
-							Level.ERROR,
-							"There is an unknown error when we try to parser the MANIFEST file on the bundle "
-									+ bundle.getLocation() + ".", bundle);
-			e.printStackTrace();
+			util.log(Level.ERROR,
+							"There is an IOException error when we try to parse the MANIFEST file on the bundle "
+									+ bundle.getLocation() + ".\n" + e.getMessage(), bundle);
 			return false;
 		}
 	}
