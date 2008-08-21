@@ -11,27 +11,27 @@ public class RealUtil {
 	
 	/** Java version */
 	public static java.lang.Boolean equals(java.lang.Double self, java.lang.Double param0) {
-		return self.equals(param0);
+		return self.doubleValue() == param0.doubleValue();
 	}
 	
 	/** Java version */
 	public static java.lang.Double plus(java.lang.Double self, java.lang.Double param0) {
-		return self + param0;
+		return self.doubleValue() + param0.doubleValue();
 	}
 
 	/** Java version */
 	public static java.lang.Double minus(java.lang.Double self, java.lang.Double param0) {
-		return self - param0;
+		return self.doubleValue() - param0.doubleValue();
 	}
 
 	/** Java version */
 	public static java.lang.Double times(java.lang.Double self, java.lang.Double param0) {
-		return self * param0;
+		return self.doubleValue() * param0.doubleValue();
 	}
 
 	/** Java version */
 	public static java.lang.Double div(java.lang.Double self, java.lang.Double param0) {
-		return self / param0;
+		return self.doubleValue() / param0.doubleValue();
 	}
 
 	/** Java version */
@@ -46,51 +46,43 @@ public class RealUtil {
 	
 	/** Java version */
 	public static java.lang.Boolean isNotEqual(java.lang.Double self, java.lang.Double param0) {
-		return !self.equals(param0);
+		return self.doubleValue() != param0.doubleValue();
 	}
 	
-	public static Boolean isVoid(Double other) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean isVoid(Double self) {
+		return self == null;
 	}
 	
 	public static Integer hashcode(Double self) {
-		// TODO Auto-generated method stub
-		return null;
+		return self.hashCode();
 	}
 
 	public static Class getMetaClass(Double self) {
 		return org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("java.lang.Double");
 	}
 
-	public static Boolean equals(Double real, Integer other) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean equals(Double self, Integer other) {
+		return toInteger(self) == other;
 	}
 
-	public static Integer compareTo(Double real, Integer other) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Integer compareTo(Double self, Integer other) {
+		return toInteger(self).compareTo(other);
 	}
 
-	public static Boolean isLower(Double real, Integer other) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean isLower(Double self, Integer other) {
+		return toInteger(self) < other;
 	}
 
-	public static Boolean isGreater(Double real, Integer other) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean isGreater(Double self, Integer other) {
+		return toInteger(self) > other;
 	}
 
-	public static Boolean isGreaterOrEqual(Double real, Integer other) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean isGreaterOrEqual(Double self, Integer other) {
+		return toInteger(self) >= other;
 	}
 
-	public static Boolean isLowerOrEqual(Double real, Integer other) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean isLowerOrEqual(Double self, Integer other) {
+		return toInteger(self) <= other;
 	}
 	
 

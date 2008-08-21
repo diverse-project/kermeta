@@ -1,8 +1,8 @@
 package org.kermeta.compil.runtime.helper.basetypes;
 
-import java.util.ArrayList;
-
 import kermeta.standard.Collection;
+
+import org.eclipse.emf.common.util.BasicEList;
 
 public class OrderedCollectionUtil {
 
@@ -10,7 +10,7 @@ public class OrderedCollectionUtil {
 		try {
 			c.getValues().add(index, (G) o);
 		} catch (NullPointerException e) {
-			c.setValues( new ArrayList<G>() );
+			c.setValues( new BasicEList<G>() );
 		}
 	}
 	

@@ -1,8 +1,9 @@
 
 package org.kermeta.compil.runtime.helper.basetypes;
 
+import kermeta.persistence.EMFRepository;
+import kermeta.persistence.PersistenceFactory;
 import kermeta.persistence.Resource;
-import kermeta.persistence.impl.EMFRepositoryImpl;
 
 /**
  * This class is intended to "wrap" the repository management from kermeta.
@@ -29,10 +30,13 @@ public class RepositoryUtil {
     }
 
 
-	public static Resource createResource(EMFRepositoryImpl repositoryImpl,
+	public static Resource createResource(EMFRepository self,
 			String uri, String mm_uri) {
-		// TODO Auto-generated method stub
-		return null;
+		Resource resource = PersistenceFactory.eINSTANCE.createEMFResource();
+		resource.setUri(uri);
+		resource.setMetaModelURI(mm_uri);
+		self.getResources().add( resource );
+		return resource;
 	}
     
 }
