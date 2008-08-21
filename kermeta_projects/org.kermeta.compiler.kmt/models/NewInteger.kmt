@@ -1,4 +1,4 @@
-/* $Id: NewInteger.kmt,v 1.2 2008-07-01 08:57:29 cfaucher Exp $
+/* $Id: NewInteger.kmt,v 1.3 2008-08-21 15:58:27 cfaucher Exp $
  * Creation date: May 14, 2008
  * License:
  * Copyright:
@@ -31,7 +31,7 @@ aspect class Integer {
 		
 		5.times2{ z | 
 			z := z*multiplicator
-			stdio.writeln("hello: " + z.toString())
+			stdio.writeln("hello: " + z.toString() + self.toString())
 		}
 	end
 	
@@ -73,7 +73,7 @@ aspect class Integer {
 	end
 	
 	operation main() : Void is do
-		testTimes2()
+		var toto : Integer init 3*testTimes2()
 		stdio.writeln("")
 		times3()
 		stdio.writeln("")
